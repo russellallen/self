@@ -24,14 +24,14 @@ GLUE_LD_FLAGS = -G
 VPATH        += $(SRC_PATH:%=%:)
 CPP           = /usr/bin/cpp
 
-XLIBLIBDIRS = -L/usr/openwin/lib
+XLIBLIBDIRS = -L/usr/lib
 CLIBS = -lstdc++ -lnsl -lc
 # no -lsocket
 
 
 # link termcap and ucb statically to avoid having to mess with LD_LIBRARY_PATH
 #OS_GLUE_LIBS = /usr/ucblib/libtermcap.a /usr/ucblib/libucb.a -lm
-OS_GLUE_LIBS =   /usr/local/lib/libtermcap.a -lm
+OS_GLUE_LIBS =   /usr/lib/libncurses.a -lm
 
 # precomp headers for  Linux
 # _precompiled.hh is in generated/incls, _precomiped.gch is in debug, optimized, etc.
@@ -58,7 +58,7 @@ CONFIGDEFS = \
 INCLUDE_PRECOMP = -include _precompiled.hh
 GNUFLAGS +=  -fno-exceptions -ffriend-injection -Winvalid-pch -fno-stack-protector
 
-INCLUDES += -I/usr/openwin/include -I/usr/lib/c++/4.1
+INCLUDES += -I/usr/include -I/usr/include/X11 -I/usr/lib/c++/4.1
 
 COMPILE.gnu.precomp  = ${GCC}   ${GNUFLAGS} ${CPPFLAGS} ${CFLAGS}
 #  ${GNUFLAGS} ${CPPFLAGS} -funit-at-a-time -maccumulate-outgoing-args -fpch-preprocess
