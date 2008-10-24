@@ -1,0 +1,14 @@
+-- Sun-$Revision: 9.1 $
+
+abstract type indexed[T] isa sequence[T], table[integer,T];
+
+method !(a@:indexed[`T], i:integer):T { abstract }
+method set_!(a@:indexed[`T], i:integer, v:T):void { abstract; }
+
+method do(a@:indexed[`T], c:&(T):void):void {
+    do_associations(a, &(i:integer,v:T){ eval(c, v); });
+}
+
+method do_associations(a@:indexed[`T], c:&(integer,T):void):void {
+    do(a.length, &(i:integer){ eval(c, i, a!i); });
+}

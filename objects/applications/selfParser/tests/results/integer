@@ -1,0 +1,3053 @@
+
+expressionSeries 'Sun-$Revision: 30.6 $' '
+Copyright 1992-2004 Sun Microsystems, Inc. and Stanford University.
+See the LICENSE file for license information.
+' '-- Module body'
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'globals'
+        'modules'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+          slot
+            unarySlotName integer =
+            keywordSend: define:ToBe:
+              unarySend: bootstrap
+                <implicitSelf>
+              binarySend: ->
+                binarySend: ->
+                  binarySend: ->
+                    binarySend: ->
+                      unarySend: stub
+                        unarySend: bootstrap
+                          <implicitSelf>
+                      'globals'
+                    'modules'
+                  'integer'
+                object ( )
+              keywordSend: addSlotsTo:From:
+                unarySend: bootstrap
+                  <implicitSelf>
+                object (
+                  expressionSeries
+                    keywordSend: remove:From:
+                      unarySend: bootstrap
+                        <implicitSelf>
+                      'comment'
+                      keywordSend: remove:From:
+                        unarySend: bootstrap
+                          <implicitSelf>
+                        'directory'
+                        keywordSend: remove:From:
+                          unarySend: bootstrap
+                            <implicitSelf>
+                          'fileInTimeString'
+                          keywordSend: remove:From:
+                            unarySend: bootstrap
+                              <implicitSelf>
+                            'postFileIn'
+                            keywordSend: remove:From:
+                              unarySend: bootstrap
+                                <implicitSelf>
+                              'revision'
+                              keywordSend: remove:From:
+                                unarySend: bootstrap
+                                  <implicitSelf>
+                                'subpartNames'
+                                unarySend: copy
+                                  unarySend: init
+                                    unarySend: modules
+                                      unarySend: globals
+                                        <implicitSelf> )
+                keywordSend: setObjectAnnotationOf:From:
+                  unarySend: bootstrap
+                    <implicitSelf>
+                  binarySend: ->
+                    binarySend: ->
+                      binarySend: ->
+                        binarySend: ->
+                          unarySend: stub
+                            unarySend: bootstrap
+                              <implicitSelf>
+                          'globals'
+                        'modules'
+                      'integer'
+                    object ( )
+                  object (
+                    slotList |
+                      slot
+                        objectAnnotationSlotName {} = 'ModuleInfo: Creator: globals modules integer.
+
+CopyDowns:
+globals modules init. copy 
+SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision subpartNames.
+
+\x7fIsComplete: ' . | ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'globals'
+          'modules'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName myComment <- ' \'\'' . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'globals'
+          'modules'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName directory <- 'core' . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'globals'
+          'modules'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: InitializeToExpression: (_CurrentTimeString)\x7fVisibility: public'
+          slot
+            unarySlotName fileInTimeString <-
+            unarySend: _CurrentTimeString
+              <implicitSelf> . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'globals'
+          'modules'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName revision <- 'Sun-$Revision: 30.6 $' . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'globals'
+          'modules'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName subpartNames <- '' . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        unarySend: stub
+          unarySend: bootstrap
+            <implicitSelf>
+        'traits'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: system\x7fCategory: numbers\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName integer =
+            keywordSend: setObjectAnnotationOf:From:
+              unarySend: bootstrap
+                <implicitSelf>
+              binarySend: ->
+                binarySend: ->
+                  binarySend: ->
+                    unarySend: stub
+                      unarySend: bootstrap
+                        <implicitSelf>
+                    'traits'
+                  'integer'
+                object ( )
+              object (
+                slotList |
+                  slot
+                    objectAnnotationSlotName {} = 'ModuleInfo: Creator: traits integer.
+' . | ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: arithmetic\x7fComment: divide & round up.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            binarySlotNameWithFormal /+ a =
+            method (
+              slotList | |
+              expressionSeries
+                binarySend: /
+                  object (
+                    expressionSeries
+                      binarySend: +
+                        <implicitSelf>
+                        unarySend: pred
+                          unarySend: a
+                            <implicitSelf> )
+                  unarySend: a
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: arithmetic\x7fComment: divide & round down.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            binarySlotNameWithFormal /- a =
+            method (
+              slotList | |
+              expressionSeries
+                unarySend: asInteger
+                  unarySend: floor
+                    object (
+                      expressionSeries
+                        binarySend: /=
+                          <implicitSelf>
+                          unarySend: a
+                            <implicitSelf> ) ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: arithmetic\x7fComment: divide exactly.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            binarySlotNameWithFormal /= a =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: ifTrue:False:
+                  binarySend: =
+                    object (
+                      expressionSeries
+                        binarySend: %
+                          <implicitSelf>
+                          unarySend: a
+                            <implicitSelf> )
+                    0
+                  block [
+                    expressionSeries
+                      binarySend: /
+                        <implicitSelf>
+                        unarySend: a
+                          <implicitSelf> ]
+                  block [
+                    expressionSeries
+                      binarySend: /=
+                        unarySend: asFloat
+                          <implicitSelf>
+                        unarySend: asFloat
+                          unarySend: a
+                            <implicitSelf> ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: arithmetic\x7fComment: divide & round. This tends to round up.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            binarySlotNameWithFormal /~ a =
+            method (
+              slotList | |
+              expressionSeries
+                binarySend: /
+                  object (
+                    expressionSeries
+                      binarySend: +
+                        <implicitSelf>
+                        unarySend: half
+                          unarySend: a
+                            <implicitSelf> )
+                  unarySend: a
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: coercions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            keywordSlotNameWithFormals absDigitListBase: base Do: blk =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName rem <- 0 . } |
+              expressionSeries
+                pop
+                  keywordSend: rem:
+                    <implicitSelf>
+                    self . ( "(*) see comment above" ) 
+                pop
+                  keywordSend: whileTrue:
+                    block [
+                      expressionSeries
+                        binarySend: !=
+                          0
+                          unarySend: rem
+                            <implicitSelf> ]
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName q <- 0 . |
+                      expressionSeries
+                        pop
+                          keywordSend: q:
+                            <implicitSelf>
+                            binarySend: /
+                              unarySend: rem
+                                <implicitSelf>
+                              unarySend: base
+                                <implicitSelf> .
+                        pop
+                          keywordSend: value:
+                            unarySend: blk
+                              <implicitSelf>
+                            binarySend: -
+                              unarySend: rem
+                                <implicitSelf>
+                              object (
+                                expressionSeries
+                                  binarySend: *
+                                    unarySend: q
+                                      <implicitSelf>
+                                    unarySend: base
+                                      <implicitSelf> ) . ( "Faster than 'rem % base'." ) 
+                        pop
+                          keywordSend: rem:
+                            <implicitSelf>
+                            unarySend: q
+                              <implicitSelf> . ] . self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: coercions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName as =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: asIfFail:
+                  <implicitSelf>
+                  block [
+                    expressionSeries
+                      keywordSend: error:
+                        <implicitSelf>
+                        'not a valid object ID' ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: coercions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName asCharacter =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: asCharacterIfFail:
+                  <implicitSelf>
+                  block [
+                    expressionSeries
+                      keywordSend: error:
+                        <implicitSelf>
+                        'not a legal character' ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: coercions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals asCharacterIfFail: block =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: characterFor:IfFail:
+                  ''
+                  self
+                  unarySend: block
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: coercions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName asDigitList =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: asDigitList:
+                  <implicitSelf>
+                  10 ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: coercions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals asDigitList: base =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName digits . } |
+              expressionSeries
+                pop
+                  keywordSend: digits:
+                    <implicitSelf>
+                    unarySend: copyRemoveAll
+                      unarySend: list
+                        <implicitSelf> .
+                pop
+                  keywordSend: digitListBase:Do:
+                    <implicitSelf>
+                    unarySend: base
+                      <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :d |
+                      expressionSeries
+                        keywordSend: addFirst:
+                          unarySend: digits
+                            <implicitSelf>
+                          unarySend: d
+                            <implicitSelf> ] .
+                unarySend: digits
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: coercions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals asIfFail: block =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: _AsObjectIfFail:
+                  <implicitSelf>
+                  unarySend: block
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: coercions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName asInteger =
+            method (
+              slotList | |
+              expressionSeries self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: coercions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName asVector =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName r . } |
+              expressionSeries
+                pop
+                  keywordSend: r:
+                    <implicitSelf>
+                    keywordSend: copySize:
+                      unarySend: vector
+                        <implicitSelf>
+                      self .
+                pop
+                  keywordSend: do:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :i |
+                      expressionSeries
+                        keywordSend: at:Put:
+                          unarySend: r
+                            <implicitSelf>
+                          unarySend: i
+                            <implicitSelf>
+                          unarySend: i
+                            <implicitSelf> ] .
+                unarySend: r
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName binaryPrintString =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: printStringBase:
+                  <implicitSelf>
+                  2 ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: coercions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName ceil =
+            method (
+              slotList | |
+              expressionSeries self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName decimalPrintString =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: printStringBase:
+                  <implicitSelf>
+                  10 ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: coercions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals digitListBase: base Do: blk =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: ||
+                      object( "Iterate 'blk' over the digits in the receiver when expressed in
+             base 'base'. The least significant digit is produced first." )  (
+                        expressionSeries
+                          binarySend: >
+                            2
+                            unarySend: base
+                              <implicitSelf> )
+                      block [
+                        expressionSeries
+                          binarySend: !=
+                            unarySend: base
+                              <implicitSelf>
+                            unarySend: asInteger
+                              unarySend: base
+                                <implicitSelf> ]
+                    block [
+                      expressionSeries
+                        return ^
+                          pop
+                            keywordSend: error:
+                              <implicitSelf>
+                              'base must be an integer > 2' . ] .
+                keywordSend: absDigitListBase:Do:
+                  unarySend: absoluteValue
+                    <implicitSelf>
+                  unarySend: base
+                    <implicitSelf>
+                  unarySend: blk
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteration\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals do: block =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: to:By:Do:
+                    0
+                    unarySend: pred
+                      <implicitSelf>
+                    1
+                    unarySend: block
+                      <implicitSelf> . self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteration\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals downTo: end By: step Do: block =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: to:By:Do:
+                  <implicitSelf>
+                  unarySend: end
+                    <implicitSelf>
+                  unarySend: negate
+                    unarySend: step
+                      <implicitSelf>
+                  unarySend: block
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteration\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals downTo: end Do: block =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: to:By:Do:
+                  <implicitSelf>
+                  unarySend: end
+                    <implicitSelf>
+                  -1
+                  unarySend: block
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName even =
+            method (
+              slotList | |
+              expressionSeries
+                return ^
+                  binarySend: =
+                    object (
+                      expressionSeries
+                        binarySend: %
+                          <implicitSelf>
+                          2 )
+                    0 ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName factorial =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: ifTrue:False:
+                  binarySend: <=
+                    <implicitSelf>
+                    1
+                  1
+                  block [
+                    expressionSeries
+                      binarySend: *
+                        <implicitSelf>
+                        unarySend: factorial
+                          unarySend: predecessor
+                            <implicitSelf> ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName factors =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName i <- 1 . }
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName n <- 47 . }
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName r . } |
+              expressionSeries
+                pop
+                  keywordSend: ifFalse:
+                    binarySend: >=
+                      <implicitSelf>
+                      1
+                    block [
+                      expressionSeries
+                        keywordSend: error:
+                          <implicitSelf>
+                          'factors not defined for non-pos int' ] .
+                pop
+                  keywordSend: n:
+                    <implicitSelf>
+                    self .
+                pop
+                  keywordSend: r:
+                    <implicitSelf>
+                    unarySend: copyRemoveAll
+                      unarySend: list
+                        <implicitSelf> .
+                pop
+                  keywordSend: whileTrue:
+                    block [
+                      expressionSeries
+                        unarySend: even
+                          unarySend: n
+                            <implicitSelf> ]
+                    block [
+                      expressionSeries
+                        pop
+                          keywordSend: add:
+                            unarySend: r
+                              <implicitSelf>
+                            2 .
+                        pop
+                          keywordSend: n:
+                            <implicitSelf>
+                            binarySend: /
+                              unarySend: n
+                                <implicitSelf>
+                              2 . ] .
+                pop
+                  keywordSend: i:
+                    <implicitSelf>
+                    3 .
+                pop
+                  keywordSend: whileTrue:
+                    block [
+                      expressionSeries
+                        binarySend: >
+                          unarySend: n
+                            <implicitSelf>
+                          1 ]
+                    block [
+                      expressionSeries
+                        pop
+                          keywordSend: ifTrue:False:
+                            binarySend: =
+                              object (
+                                expressionSeries
+                                  binarySend: %
+                                    unarySend: n
+                                      <implicitSelf>
+                                    unarySend: i
+                                      <implicitSelf> )
+                              0
+                            block [
+                              expressionSeries
+                                pop
+                                  keywordSend: add:
+                                    unarySend: r
+                                      <implicitSelf>
+                                    unarySend: i
+                                      <implicitSelf> .
+                                pop
+                                  keywordSend: n:
+                                    <implicitSelf>
+                                    binarySend: /
+                                      unarySend: n
+                                        <implicitSelf>
+                                      unarySend: i
+                                        <implicitSelf> . ]
+                            block [
+                              expressionSeries
+                                keywordSend: i:
+                                  <implicitSelf>
+                                  binarySend: +
+                                    unarySend: i
+                                      <implicitSelf>
+                                    2 ] . ] .
+                return ^
+                  unarySend: r
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName fibonacci =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: ifTrue:False:
+                  binarySend: <=
+                    <implicitSelf>
+                    1
+                  block [
+                    expressionSeries self ]
+                  block [
+                    expressionSeries
+                      binarySend: +
+                        unarySend: fibonacci
+                          unarySend: predecessor
+                            <implicitSelf>
+                        unarySend: fibonacci
+                          object (
+                            expressionSeries
+                              binarySend: -
+                                <implicitSelf>
+                                2 ) ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: coercions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName floor =
+            method (
+              slotList | |
+              expressionSeries self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals gcd: a =
+            method (
+              slotList | |
+              expressionSeries
+                return( "Find greatest common divisor using Euclid's algorithm." )  ^
+                  keywordSend: gcdPositive:
+                    binarySend: *
+                      <implicitSelf>
+                      unarySend: sign
+                        <implicitSelf>
+                    binarySend: *
+                      unarySend: a
+                        <implicitSelf>
+                      unarySend: sign
+                        unarySend: a
+                          <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals gcdExtended: a =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName aSign <- 1 . }
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName g <- 47 . }
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName selfSign <- 1 . }
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName tmp . }
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName x <- 47 . }
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName y <- 47 . } |
+              expressionSeries
+                pop
+                  keywordSend: selfSign:
+                    <implicitSelf>
+                    unarySend: sign
+                      <implicitSelf> .
+                pop
+                  keywordSend: aSign:
+                    <implicitSelf>
+                    unarySend: sign
+                      unarySend: a
+                        <implicitSelf> .
+                pop
+                  keywordSend: tmp:
+                    <implicitSelf>
+                    keywordSend: gcdExtendedPositive:
+                      unarySend: absoluteValue
+                        <implicitSelf>
+                      unarySend: absoluteValue
+                        unarySend: a
+                          <implicitSelf> .
+                pop
+                  keywordSend: g:
+                    <implicitSelf>
+                    unarySend: x
+                      unarySend: tmp
+                        <implicitSelf> .
+                pop
+                  keywordSend: x:
+                    <implicitSelf>
+                    binarySend: *
+                      unarySend: x
+                        unarySend: y
+                          unarySend: tmp
+                            <implicitSelf>
+                      unarySend: selfSign
+                        <implicitSelf> .
+                pop
+                  keywordSend: y:
+                    <implicitSelf>
+                    binarySend: *
+                      unarySend: y
+                        unarySend: y
+                          unarySend: tmp
+                            <implicitSelf>
+                      unarySend: aSign
+                        <implicitSelf> .
+                return ^
+                  binarySend: @
+                    unarySend: g
+                      <implicitSelf>
+                    object (
+                      expressionSeries
+                        binarySend: @
+                          unarySend: x
+                            <implicitSelf>
+                          unarySend: y
+                            <implicitSelf> ) ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            keywordSlotNameWithFormals gcdExtendedPositive: a =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: ifTrue:False:
+                  binarySend: =
+                    unarySend: a
+                      <implicitSelf>
+                    0
+                  block [
+                    expressionSeries
+                      return ^ ( "self" ) 
+                        pop
+                          binarySend: @
+                            <implicitSelf>
+                            object (
+                              expressionSeries
+                                binarySend: @
+                                  1
+                                  0 ) . ]
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName g <- 47 .
+                      slot
+                        unarySlotName x <- 47 .
+                      slot
+                        unarySlotName y <- 47 .
+                      slot
+                        unarySlotName tmp . |
+                    expressionSeries
+                      pop
+                        keywordSend: tmp:
+                          <implicitSelf>
+                          keywordSend: gcdExtended:
+                            unarySend: a
+                              <implicitSelf>
+                            binarySend: %
+                              <implicitSelf>
+                              unarySend: a
+                                <implicitSelf> .
+                      pop
+                        keywordSend: g:
+                          <implicitSelf>
+                          unarySend: x
+                            unarySend: tmp
+                              <implicitSelf> .
+                      pop
+                        keywordSend: x:
+                          <implicitSelf>
+                          unarySend: y
+                            unarySend: y
+                              unarySend: tmp
+                                <implicitSelf> .
+                      pop
+                        keywordSend: y:
+                          <implicitSelf>
+                          binarySend: -
+                            unarySend: x
+                              unarySend: y
+                                unarySend: tmp
+                                  <implicitSelf>
+                            object (
+                              expressionSeries
+                                binarySend: *
+                                  object (
+                                    expressionSeries
+                                      binarySend: /
+                                        <implicitSelf>
+                                        unarySend: a
+                                          <implicitSelf> )
+                                  unarySend: x
+                                    <implicitSelf> ) .
+                      return ^
+                        pop
+                          binarySend: @
+                            unarySend: g
+                              <implicitSelf>
+                            object (
+                              expressionSeries
+                                binarySend: @
+                                  unarySend: x
+                                    <implicitSelf>
+                                  unarySend: y
+                                    <implicitSelf> ) . ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            keywordSlotNameWithFormals gcdPositive: a =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: ifTrue:False:
+                  binarySend: =
+                    unarySend: a
+                      <implicitSelf>
+                    0
+                  block [
+                    expressionSeries
+                      return ^
+                        pop self . ]
+                  block [
+                    expressionSeries
+                      return ^
+                        keywordSend: gcdPositive:
+                          unarySend: a
+                            <implicitSelf>
+                          binarySend: %
+                            <implicitSelf>
+                            unarySend: a
+                              <implicitSelf> ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName hexPrintString =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: printStringBase:
+                  <implicitSelf>
+                  16 ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals inverseMod: n =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName g <- 47 . }
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName tmp . }
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName x <- 47 . }
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName y <- 47 . } |
+              expressionSeries
+                pop
+                  keywordSend: tmp:
+                    <implicitSelf>
+                    keywordSend: gcdExtended:
+                      <implicitSelf>
+                      unarySend: n
+                        <implicitSelf> .
+                pop
+                  keywordSend: g:
+                    <implicitSelf>
+                    unarySend: x
+                      unarySend: tmp
+                        <implicitSelf> .
+                pop
+                  keywordSend: x:
+                    <implicitSelf>
+                    unarySend: x
+                      unarySend: y
+                        unarySend: tmp
+                          <implicitSelf> .
+                pop
+                  keywordSend: y:
+                    <implicitSelf>
+                    unarySend: y
+                      unarySend: y
+                        unarySend: tmp
+                          <implicitSelf> . ( "Now gcd = g = x*self + y*n." ) 
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: >
+                      unarySend: g
+                        <implicitSelf>
+                      1
+                    block [
+                      expressionSeries
+                        pop
+                          keywordSend: error:
+                            <implicitSelf>
+                            binarySend: ,
+                              binarySend: ,
+                                unarySend: printString
+                                  <implicitSelf>
+                                ' does not have an inverse modulo '
+                              unarySend: printString
+                                unarySend: n
+                                  <implicitSelf> . ] .
+                return ^
+                  binarySend: %
+                    unarySend: x
+                      <implicitSelf>
+                    unarySend: n
+                      <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName isPrime =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    object( "Deterministic test for primality. This test is slow for
+             very big integers, but faster than the probabilistic test for
+             moderate sized integers." )  (
+                      expressionSeries
+                        binarySend: <=
+                          <implicitSelf>
+                          1 )
+                    block [
+                      expressionSeries
+                        return ^
+                          pop
+                            unarySend: false
+                              <implicitSelf> . ] . ( "First all the special cases." ) 
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: =
+                      <implicitSelf>
+                      2
+                    block [
+                      expressionSeries
+                        return ^
+                          pop
+                            unarySend: true
+                              <implicitSelf> . ] .
+                pop
+                  keywordSend: ifTrue:
+                    unarySend: even
+                      <implicitSelf>
+                    block [
+                      expressionSeries
+                        return ^
+                          pop
+                            unarySend: false
+                              <implicitSelf> . ] .
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: =
+                      <implicitSelf>
+                      3
+                    block [
+                      expressionSeries
+                        return ^
+                          pop
+                            unarySend: true
+                              <implicitSelf> . ] .
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: =
+                      object (
+                        expressionSeries
+                          binarySend: %
+                            <implicitSelf>
+                            3 )
+                      0
+                    block [
+                      expressionSeries
+                        return ^
+                          pop
+                            unarySend: false
+                              <implicitSelf> . ] .
+                pop
+                  keywordSend: to:By:Do:
+                   ( "Look for divisors; to save time avoid multiples of 2 and 3." )  5
+                    unarySend: squareRoot
+                      <implicitSelf>
+                    6
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :i |
+                      expressionSeries
+                        pop
+                          keywordSend: ifTrue:
+                            binarySend: =
+                              object (
+                                expressionSeries
+                                  binarySend: %
+                                    <implicitSelf>
+                                    unarySend: i
+                                      <implicitSelf> )
+                              0
+                            block [
+                              expressionSeries
+                                return ^
+                                  unarySend: false
+                                    <implicitSelf> ] .
+                        pop
+                          keywordSend: ifTrue:
+                            binarySend: =
+                              object (
+                                expressionSeries
+                                  binarySend: %
+                                    <implicitSelf>
+                                    object (
+                                      expressionSeries
+                                        binarySend: +
+                                          unarySend: i
+                                            <implicitSelf>
+                                          2 ) )
+                              0
+                            block [
+                              expressionSeries
+                                return ^
+                                  unarySend: false
+                                    <implicitSelf> ] . ] .
+                return ^
+                  unarySend: true
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91. Probabilistic (fast) test for primality. reps is the number
+                 of iterations done. The probability of incorrectly returning 
+                 true (when the receiver is not a prime), is smaller than 
+                 1/4^reps. This assumes an ideal random number generator.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals isPrime: reps =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: isPrime:Random:
+                  <implicitSelf>
+                  unarySend: reps
+                    <implicitSelf>
+                  unarySend: copy
+                    unarySend: random
+                      <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals isPrime: reps Random: rand =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName m <- 47 . }
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName q <- 47 . } |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: <=
+                      <implicitSelf>
+                      10000
+                    block [
+                      expressionSeries
+                        return ^
+                          pop
+                            unarySend: isPrime
+                              <implicitSelf> . ] . ( "Use deterministic method." ) 
+                pop
+                  keywordSend: ifTrue:
+                    unarySend: even
+                      <implicitSelf>
+                    block [
+                      expressionSeries
+                        return ^
+                          pop
+                            unarySend: false
+                              <implicitSelf> . ] .
+                pop
+                  keywordSend: to:By:Do:
+                   ( "Faster to filter out non-primes if we first try finding
+             small divisors." )  3
+                    object (
+                      expressionSeries
+                        keywordSend: min:
+                          binarySend: *
+                            3
+                            unarySend: reps
+                              <implicitSelf>
+                          unarySend: squareRoot
+                            <implicitSelf> )
+                    2
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :i |
+                      expressionSeries
+                        pop
+                          keywordSend: ifTrue:
+                            binarySend: =
+                              object (
+                                expressionSeries
+                                  binarySend: %
+                                    <implicitSelf>
+                                    unarySend: i
+                                      <implicitSelf> )
+                              0
+                            block [
+                              expressionSeries
+                                return ^
+                                  unarySend: false
+                                    <implicitSelf> ] . ] .
+                pop
+                  keywordSend: q:
+                    <implicitSelf>
+                    0 . ( "Get rid of all even factors in self - 1." ) 
+                pop
+                  keywordSend: m:
+                    <implicitSelf>
+                    unarySend: pred
+                      <implicitSelf> .
+                pop
+                  keywordSend: whileTrue:
+                    block [
+                      expressionSeries
+                        unarySend: even
+                          unarySend: m
+                            <implicitSelf> ]
+                    block [
+                      expressionSeries
+                        pop
+                          keywordSend: m:
+                            <implicitSelf>
+                            binarySend: /
+                              unarySend: m
+                                <implicitSelf>
+                              2 .
+                        pop
+                          keywordSend: q:
+                            <implicitSelf>
+                            binarySend: +
+                              unarySend: q
+                                <implicitSelf>
+                              1 . ] .
+                pop
+                  keywordSend: do:
+                    unarySend: reps
+                      <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName b <- 47 .
+                        slot
+                          unarySlotName c <- 47 . |
+                      expressionSeries
+                        pop
+                          keywordSend: b:
+                            <implicitSelf>
+                            binarySend: +
+                              object (
+                                expressionSeries
+                                  keywordSend: integer:
+                                    unarySend: rand
+                                      <implicitSelf>
+                                    unarySend: pred
+                                      <implicitSelf> )
+                              1 .
+                        pop
+                          keywordSend: ifTrue:
+                            binarySend: >
+                              object (
+                                expressionSeries
+                                  keywordSend: gcd:
+                                    <implicitSelf>
+                                    unarySend: b
+                                      <implicitSelf> )
+                              1
+                            block [
+                              expressionSeries
+                                return ^
+                                  pop
+                                    unarySend: false
+                                      <implicitSelf> . ] .
+                        pop
+                          keywordSend: c:
+                            <implicitSelf>
+                            keywordSend: power:Mod:
+                              unarySend: b
+                                <implicitSelf>
+                              unarySend: m
+                                <implicitSelf>
+                              self .
+                        pop
+                          keywordSend: ifTrue:
+                            binarySend: !=
+                              unarySend: c
+                                <implicitSelf>
+                              1
+                            block [
+                              expressionSeries
+                                pop
+                                  keywordSend: ifFalse:
+                                    unarySend: loopExitValue
+                                      block [
+                                        slotList |
+                                          slot
+                                            unarySlotName :exit |
+                                        expressionSeries
+                                          pop
+                                            keywordSend: do:
+                                              unarySend: q
+                                                <implicitSelf>
+                                              block [
+                                                expressionSeries
+                                                  pop
+                                                    keywordSend: ifTrue:
+                                                      binarySend: =
+                                                        unarySend: c
+                                                          <implicitSelf>
+                                                        unarySend: pred
+                                                          <implicitSelf>
+                                                      block [
+                                                        expressionSeries
+                                                          pop
+                                                            keywordSend: value:
+                                                              unarySend: exit
+                                                                <implicitSelf>
+                                                              unarySend: true
+                                                                <implicitSelf> . ] .
+                                                  pop
+                                                    keywordSend: c:
+                                                      <implicitSelf>
+                                                      binarySend: %
+                                                        object (
+                                                          expressionSeries
+                                                            binarySend: *
+                                                              unarySend: c
+                                                                <implicitSelf>
+                                                              unarySend: c
+                                                                <implicitSelf> )
+                                                        self . ] .
+                                          pop
+                                            keywordSend: value:
+                                              unarySend: exit
+                                                <implicitSelf>
+                                              unarySend: false
+                                                <implicitSelf> . ]
+                                    block [
+                                      expressionSeries
+                                        return ^
+                                          pop
+                                            unarySend: false
+                                              <implicitSelf> . ] . ] . ] .
+                return ^
+                  unarySend: true
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName nextPrime =
+            method (
+              slotList | |
+              expressionSeries
+                return( "Return next prime number strictly bigger than receiver, 
+             using deterministic primality test." )  ^
+                  keywordSend: nextPrimeTestingWith:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :i |
+                      expressionSeries
+                        unarySend: isPrime
+                          unarySend: i
+                            <implicitSelf> ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals nextPrime: n =
+            method (
+              slotList | |
+              expressionSeries
+                return( "As nextPrime, but using probabilistic primality test with
+             n iterations." )  ^
+                  keywordSend: nextPrimeTestingWith:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :i |
+                      expressionSeries
+                        keywordSend: isPrime:
+                          unarySend: i
+                            <implicitSelf>
+                          unarySend: n
+                            <implicitSelf> ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals nextPrime: n Random: rand =
+            method (
+              slotList | |
+              expressionSeries
+                return( "As nextPrime: n; caller supplies random number gen. rand." )  ^
+                  keywordSend: nextPrimeTestingWith:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :i |
+                      expressionSeries
+                        keywordSend: isPrime:Random:
+                          unarySend: i
+                            <implicitSelf>
+                          unarySend: n
+                            <implicitSelf>
+                          unarySend: rand
+                            <implicitSelf> ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            keywordSlotNameWithFormals nextPrimeTestingWith: primetest =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName n <- 0 . } |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: <=
+                      <implicitSelf>
+                      1
+                    block [
+                      expressionSeries
+                        return ^
+                          pop 2 . ] .
+                pop
+                  keywordSend: n:
+                    <implicitSelf>
+                    binarySend: +
+                      unarySend: succ
+                        <implicitSelf>
+                      unarySend: asInteger
+                        unarySend: odd
+                          <implicitSelf> . ( " n = next odd integer." ) 
+                pop
+                  keywordSend: whileFalse:
+                    block [
+                      expressionSeries
+                        keywordSend: value:
+                          unarySend: primetest
+                            <implicitSelf>
+                          unarySend: n
+                            <implicitSelf> ]
+                    block [
+                      expressionSeries
+                        pop
+                          keywordSend: n:
+                            <implicitSelf>
+                            binarySend: +
+                              unarySend: n
+                                <implicitSelf>
+                              2 . ] .
+                return ^
+                  unarySend: n
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName octalPrintString =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: printStringBase:
+                  <implicitSelf>
+                  8 ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName odd =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  unarySend: not
+                    unarySend: even
+                      <implicitSelf> . ( "Not not even but even not!" )  ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName parent parent =
+            binarySend: ->
+              binarySend: ->
+                binarySend: ->
+                  unarySend: stub
+                    unarySend: bootstrap
+                      <implicitSelf>
+                  'traits'
+                'number'
+              object ( ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals power: exp Mod: m =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: ifFalse:
+                    binarySend: >=
+                      unarySend: exp
+                        <implicitSelf>
+                      0
+                    block [
+                      expressionSeries
+                        keywordSend: error:
+                          <implicitSelf>
+                          'Negative exp in power:Mod:' ] .
+                pop
+                  keywordSend: ifFalse:
+                    binarySend: >=
+                      unarySend: m
+                        <implicitSelf>
+                      1
+                    block [
+                      expressionSeries
+                        keywordSend: error:
+                          <implicitSelf>
+                          'Negative modulus in power:mod:' ] .
+                return ^
+                  keywordSend: reversePower:Mod:
+                    unarySend: exp
+                      <implicitSelf>
+                    self
+                    unarySend: m
+                      <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName printString =
+            method (
+              slotList | |
+              expressionSeries
+                unarySend: decimalPrintString
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals printStringBase: base =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName chars . }
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName i <- 0 . }
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName r . } |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    object( "return the string representation of the integer in a given base" )  (
+                      expressionSeries
+                        binarySend: >
+                          unarySend: base
+                            <implicitSelf>
+                          16 )
+                    block [
+                      expressionSeries
+                        keywordSend: error:
+                          <implicitSelf>
+                          'base for printing must <= 16' ] .
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: =
+                      0
+                      self
+                    block [
+                      expressionSeries
+                        return ^ '0' ] .
+                pop
+                  keywordSend: chars:
+                    <implicitSelf>
+                    unarySend: copyRemoveAll
+                      unarySend: list
+                        <implicitSelf> .
+                pop
+                  keywordSend: digitListBase:Do:
+                    <implicitSelf>
+                    unarySend: base
+                      <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :d |
+                      expressionSeries
+                        pop
+                          keywordSend: addFirst:
+                            unarySend: chars
+                              <implicitSelf>
+                            object (
+                              expressionSeries
+                                keywordSend: at:
+                                  '0123456789abcdef'
+                                  unarySend: d
+                                    <implicitSelf> ) . ] .
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: >
+                      0
+                      self
+                    block [
+                      expressionSeries
+                        keywordSend: addFirst:
+                          unarySend: chars
+                            <implicitSelf>
+                          '-' ] .
+                pop
+                  keywordSend: r:
+                    <implicitSelf>
+                    object (
+                      expressionSeries
+                        keywordSend: copySize:
+                          unarySend: mutableString
+                            <implicitSelf>
+                          unarySend: size
+                            unarySend: chars
+                              <implicitSelf> ) .
+                pop
+                  keywordSend: do:
+                    unarySend: chars
+                      <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :ch |
+                      expressionSeries
+                        pop
+                          keywordSend: at:Put:
+                            unarySend: r
+                              <implicitSelf>
+                            unarySend: i
+                              <implicitSelf>
+                            unarySend: ch
+                              <implicitSelf> .
+                        keywordSend: i:
+                          <implicitSelf>
+                          binarySend: +
+                            unarySend: i
+                              <implicitSelf>
+                            1 ] .
+                unarySend: r
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals printStringBase: b PadWith: padChar ToSize: len =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName s . } |
+              expressionSeries
+                pop
+                  keywordSend: s:
+                    <implicitSelf>
+                    keywordSend: printStringBase:
+                      <implicitSelf>
+                      unarySend: b
+                        <implicitSelf> .
+                pop
+                  keywordSend: upTo:Do:
+                    unarySend: size
+                      unarySend: s
+                        <implicitSelf>
+                    unarySend: len
+                      <implicitSelf>
+                    block [
+                      expressionSeries
+                        keywordSend: s:
+                          <implicitSelf>
+                          binarySend: ,
+                            unarySend: padChar
+                              <implicitSelf>
+                            unarySend: s
+                              <implicitSelf> ] .
+                unarySend: s
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals printStringPadWith0ToSize: len =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: printStringPadWith:ToSize:
+                  <implicitSelf>
+                  '0'
+                  unarySend: len
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals printStringPadWith: padChar ToSize: len =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: printStringBase:PadWith:ToSize:
+                  <implicitSelf>
+                  10
+                  unarySend: padChar
+                    <implicitSelf>
+                  unarySend: len
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals printStringPrecision: p =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName s . } |
+              expressionSeries
+                pop
+                  keywordSend: s:
+                    <implicitSelf>
+                    unarySend: printString
+                      <implicitSelf> .
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: >
+                      unarySend: p
+                        <implicitSelf>
+                      0
+                    block [
+                      expressionSeries
+                        pop
+                          keywordSend: s:
+                            <implicitSelf>
+                            binarySend: ,
+                              binarySend: ,
+                                unarySend: s
+                                  <implicitSelf>
+                                '.'
+                              object (
+                                expressionSeries
+                                  keywordSend: copySize:FillingWith:
+                                    unarySend: mutableString
+                                      <implicitSelf>
+                                    unarySend: p
+                                      <implicitSelf>
+                                    unarySend: first
+                                      '0' ) . ] .
+                unarySend: s
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteration\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals reverseDo: block =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: to:By:Do:
+                    unarySend: pred
+                      <implicitSelf>
+                    0
+                    -1
+                    unarySend: block
+                      <implicitSelf> . self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            keywordSlotNameWithFormals reversePower: base =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName factor . } |
+              expressionSeries
+                pop
+                  keywordSend: compare:IfLess:Equal:Greater:
+                    <implicitSelf>
+                    0
+                    block [
+                      expressionSeries
+                        keywordSend: factor:
+                          <implicitSelf>
+                          unarySend: inverse
+                            unarySend: base
+                              <implicitSelf> ]
+                    block [
+                      expressionSeries
+                        return ^ 1 ]
+                    block [
+                      expressionSeries
+                        keywordSend: factor:
+                          <implicitSelf>
+                          unarySend: base
+                            <implicitSelf> ] .
+                return ^
+                  keywordSend: reversePowerNonNegative:
+                    unarySend: absoluteValue
+                      <implicitSelf>
+                    unarySend: factor
+                      <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: Number theory functions, primes, divisors etc. Ole Agesen, 10/91.\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            keywordSlotNameWithFormals reversePower: a Mod: m =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: =
+                      <implicitSelf>
+                      0
+                    block [
+                      expressionSeries
+                        return ^ 1 ] .
+                pop
+                  keywordSend: ifTrue:
+                    unarySend: odd
+                      <implicitSelf>
+                    block [
+                      expressionSeries
+                        return ^
+                          binarySend: %
+                            object (
+                              expressionSeries
+                                binarySend: *
+                                  object (
+                                    expressionSeries
+                                      keywordSend: reversePower:Mod:
+                                        unarySend: pred
+                                          <implicitSelf>
+                                        unarySend: a
+                                          <implicitSelf>
+                                        unarySend: m
+                                          <implicitSelf> )
+                                  unarySend: a
+                                    <implicitSelf> )
+                            unarySend: m
+                              <implicitSelf> ] .
+                return ^
+                  binarySend: %
+                    unarySend: square
+                      object (
+                        expressionSeries
+                          keywordSend: reversePower:Mod:
+                            unarySend: half
+                              <implicitSelf>
+                            unarySend: a
+                              <implicitSelf>
+                            unarySend: m
+                              <implicitSelf> )
+                    unarySend: m
+                      <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            keywordSlotNameWithFormals reversePowerNonNegative: base =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: =
+                      <implicitSelf>
+                      0
+                    block [
+                      expressionSeries
+                        return ^ 1 ] .
+                pop
+                  keywordSend: ifTrue:
+                    unarySend: odd
+                      <implicitSelf>
+                    block [
+                      expressionSeries
+                        return ^
+                          binarySend: *
+                            object (
+                              expressionSeries
+                                keywordSend: reversePowerNonNegative:
+                                  unarySend: pred
+                                    <implicitSelf>
+                                  unarySend: base
+                                    <implicitSelf> )
+                            unarySend: base
+                              <implicitSelf> ] .
+                return ^
+                  unarySend: square
+                    object (
+                      expressionSeries
+                        keywordSend: reversePowerNonNegative:
+                          unarySend: half
+                            <implicitSelf>
+                          unarySend: base
+                            <implicitSelf> ) ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: coercions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName round =
+            method (
+              slotList | |
+              expressionSeries self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: functions\x7fCategory: numberTheory\x7fComment: used by square root routine\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName squareRootPrecision = 1 . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteration\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals to: end BinarySearchBySignOf: directionBlock IfAbsent: ab =
+            method (
+              slotList |
+                slot
+                  unarySlotName b <- 0 .
+                slot
+                  unarySlotName t <- 10 . |
+              expressionSeries
+                pop
+                  keywordSend: b:
+                    <implicitSelf>
+                    self .
+                pop
+                  keywordSend: t:
+                    <implicitSelf>
+                    unarySend: end
+                      <implicitSelf> .
+                pop
+                  keywordSend: whileTrue:
+                    block [
+                      expressionSeries
+                        binarySend: <=
+                          unarySend: b
+                            <implicitSelf>
+                          unarySend: t
+                            <implicitSelf> ]
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName m <- 5 . |
+                      expressionSeries
+                        pop
+                          keywordSend: m:
+                            <implicitSelf>
+                            binarySend: /
+                              object (
+                                expressionSeries
+                                  binarySend: +
+                                    unarySend: b
+                                      <implicitSelf>
+                                    unarySend: t
+                                      <implicitSelf> )
+                              2 .
+                        pop
+                          keywordSend: compare:IfLess:Equal:Greater:
+                            0
+                            object (
+                              expressionSeries
+                                keywordSend: value:
+                                  unarySend: directionBlock
+                                    <implicitSelf>
+                                  unarySend: m
+                                    <implicitSelf> )
+                            block [
+                              expressionSeries
+                                keywordSend: b:
+                                  <implicitSelf>
+                                  unarySend: succ
+                                    unarySend: m
+                                      <implicitSelf> ]
+                            block [
+                              expressionSeries
+                                return ^
+                                  unarySend: m
+                                    <implicitSelf> ]
+                            block [
+                              expressionSeries
+                                keywordSend: t:
+                                  <implicitSelf>
+                                  unarySend: pred
+                                    unarySend: m
+                                      <implicitSelf> ] . ] .
+                keywordSend: value:With:
+                  unarySend: ab
+                    <implicitSelf>
+                  unarySend: b
+                    <implicitSelf>
+                  unarySend: t
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteration\x7fComment: iterate from receiver to end by step intervals, passing in
+	 the value to the block and executing the block each time\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals to: end By: step Do: block =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: <
+                      0
+                      unarySend: step
+                        <implicitSelf>
+                    block [
+                      expressionSeries
+                        return ^
+                          keywordSend: to:ByPositive:Do:
+                            <implicitSelf>
+                            unarySend: end
+                              <implicitSelf>
+                            unarySend: step
+                              <implicitSelf>
+                            unarySend: block
+                              <implicitSelf> ] .
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: >
+                      0
+                      unarySend: step
+                        <implicitSelf>
+                    block [
+                      expressionSeries
+                        return ^
+                          keywordSend: to:ByNegative:Do:
+                            <implicitSelf>
+                            unarySend: end
+                              <implicitSelf>
+                            unarySend: step
+                              <implicitSelf>
+                            unarySend: block
+                              <implicitSelf> ] .
+                keywordSend: error:
+                  <implicitSelf>
+                  'step is zero in to:By:Do: loop' ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteration\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals to: end ByNegative: step Do: block =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName i . } |
+              expressionSeries
+                pop
+                  keywordSend: i:
+                    <implicitSelf>
+                    self .
+                pop
+                  keywordSend: whileTrue:
+                    block [
+                      expressionSeries
+                        binarySend: >=
+                          unarySend: i
+                            <implicitSelf>
+                          unarySend: end
+                            <implicitSelf> ]
+                    block [
+                      expressionSeries
+                        pop
+                          keywordSend: value:With:
+                            unarySend: block
+                              <implicitSelf>
+                            unarySend: i
+                              <implicitSelf>
+                            unarySend: i
+                              <implicitSelf> .
+                        pop
+                          keywordSend: i:
+                            <implicitSelf>
+                            binarySend: +
+                              unarySend: i
+                                <implicitSelf>
+                              unarySend: step
+                                <implicitSelf> . ] .
+                unarySend: nil
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteration\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals to: end ByPositive: step Do: block =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: integer InitialContents: FollowSlot'
+                  slot
+                    unarySlotName i . } |
+              expressionSeries
+                pop
+                  keywordSend: i:
+                    <implicitSelf>
+                    self .
+                pop
+                  keywordSend: whileTrue:
+                    block [
+                      expressionSeries
+                        binarySend: <=
+                          unarySend: i
+                            <implicitSelf>
+                          unarySend: end
+                            <implicitSelf> ]
+                    block [
+                      expressionSeries
+                        pop
+                          keywordSend: value:With:
+                            unarySend: block
+                              <implicitSelf>
+                            unarySend: i
+                              <implicitSelf>
+                            unarySend: i
+                              <implicitSelf> .
+                        pop
+                          keywordSend: i:
+                            <implicitSelf>
+                            binarySend: +
+                              unarySend: i
+                                <implicitSelf>
+                              unarySend: step
+                                <implicitSelf> . ] .
+                unarySend: nil
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteration\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals to: end Do: block =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: to:By:Do:
+                  <implicitSelf>
+                  unarySend: end
+                    <implicitSelf>
+                  1
+                  unarySend: block
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: coercions\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName truncate =
+            method (
+              slotList | |
+              expressionSeries self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteration\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals upTo: end By: step Do: block =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: to:By:Do:
+                  <implicitSelf>
+                  unarySend: predecessor
+                    unarySend: end
+                      <implicitSelf>
+                  unarySend: step
+                    <implicitSelf>
+                  unarySend: block
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'integer'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteration\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals upTo: end Do: block =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: to:Do:
+                  <implicitSelf>
+                  unarySend: predecessor
+                    unarySend: end
+                      <implicitSelf>
+                  unarySend: block
+                    <implicitSelf> ) . } | ) '-- Side effects'
+  unarySend: postFileIn
+    unarySend: integer
+      unarySend: modules
+        unarySend: globals
+          <implicitSelf>

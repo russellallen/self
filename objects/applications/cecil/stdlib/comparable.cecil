@@ -1,0 +1,10 @@
+-- Sun-$Revision: 9.1 $
+
+abstract type comparable;
+
+method =(x1@:comparable, x2@:comparable):boolean { abstract }
+method !=(x1@:comparable, x2@:comparable):boolean { not(x1 = x2) }
+method <(x1@:comparable, x2@:comparable):boolean { abstract }
+method <=(x1@:comparable, x2@:comparable):boolean { x1 < x2 | { x1 = x2 } }
+method >=(x1@:comparable, x2@:comparable):boolean { not(x1 < x2) }
+method >(x1@:comparable, x2@:comparable):boolean { not(x1 <= x2) }

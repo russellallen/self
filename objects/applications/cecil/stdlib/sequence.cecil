@@ -1,0 +1,5 @@
+-- Sun-$Revision: 9.1 $
+
+-- methods for collections with an ordered sequence of elements
+
+abstract type sequence[T] isa collection[T];

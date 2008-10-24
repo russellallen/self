@@ -1,0 +1,130 @@
+-- "Sun-$Revision: 9.1 $"
+-- load("private.tst.cecil");
+-- private_tests();
+
+method private_tests() {
+       print_line("*** private.tst.cecil ***");           
+       if( private_test1a() != "tail" , {  print("***test1a fail***"); });
+       if( private_test1b() != "tail" , { print("***test1b fail***"); });
+       if( private_test1f() != "contents" , { print("***test1f fail***"); });
+       print_line("manual: private_test1c(); private_test1d(); private_test1e(); private_test1g();");
+       print_line("manual: private_test2(); private_test4d(); private_test5b();");
+       if( private_test4b() != "head" , { print("***test4b fail***"); });
+       if( private_test6a() != 0 , { print("***test6a fail***"); });
+       if( private_test6b() != 1 , { print("***test6b fail***"); });
+       if( private_test6c() != 2 , { print("***test6c fail***"); });
+       print_line("done");
+}
+
+concrete object private_zero;
+method private_length(n@:private_zero) { 0 }
+private field private_head(c@:private_zero) { abstract }
+private field private_tail(c@:private_zero) { abstract }
+public get private put field private_contents(c@:private_zero) { abstract }
+
+concrete object private_one isa private_zero;
+method private_length(c@:private_one) { 1 }
+private field private_head(c@:private_one) := "head";
+private field private_tail(c@:private_one) := "tail";
+public get private put field private_contents(c@:private_one) := "contents";
+
+concrete object private_two isa private_one;
+method private_length(o@:private_two) { 2 }
+
+method private_test1(c@:private_zero) { 
+	c.private_tail
+}
+
+method private_test1a() { private_test1(private_two) }
+-- private_test1a();
+-- "tail"
+
+method private_test1b() { private_test1(private_one) }
+-- private_test1b();
+-- "tail"
+
+method private_test1c() { private_test1(private_zero) }
+-- private_test1c();
+-- error: invoking abstract method
+
+method private_test1d() { 
+	private_one.private_head
+}
+-- private_test1d();
+-- error
+
+method private_test1e() { 
+	private_one.private_head := "error_head";
+}
+-- private_test1e();
+-- error
+
+method private_test1f() { 
+	private_one.private_contents
+}
+-- private_test1f();
+-- "contents"
+
+method private_test1g() { 
+	private_one.private_contents := "error_contents";
+}
+-- private_test1g();
+-- error
+
+
+method private_test2() {
+	var x = object isa private_one;
+	x.private_head
+}
+-- private_test2();
+-- error
+
+-- these get errors when being read in
+private method private_test3(c) { c }
+private method private_test3b() { 5 }
+
+
+method private_test4(c@:private_one) {
+	eval( { c.private_head } )
+}
+method private_test4b() { private_test4(private_one) }
+-- private_test4b();
+-- "head"
+
+method private_test4c(c@:private_one) {
+	eval( { var c := private_two; c.private_head } )
+}
+method private_test4d() { private_test4c(private_one) }
+-- private_test4d();
+-- error
+
+
+method private_test5(c@:private_one) {
+	c.private_head := private_two;
+	print ( c.private_head.private_head );
+	"head"  -- to make the caller happy
+}
+method private_test5b() { private_test5(private_one) }
+-- private_test5b();
+-- error
+
+
+-- Overriding a public method with a private one, and vice versa
+
+private method private_test6(c@:private_zero) { 0 }
+public  method private_test6(c@:private_one) { 1 }
+private method private_test6(c@:private_two) { 2 }
+
+method private_test6z(c@:private_zero) { private_test6(c) }
+
+method private_test6a() { private_zero.private_test6z }
+-- private_test6a();
+-- 0
+
+method private_test6b() { private_one.private_test6z }
+-- private_test6b();
+-- 1
+
+method private_test6c() { private_two.private_test6z }
+-- private_test6c();
+-- 2

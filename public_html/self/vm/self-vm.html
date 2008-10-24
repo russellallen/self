@@ -1,0 +1,45 @@
+<TITLE>The Self Virtual Machine</TITLE>
+
+<H1>The Self Virtual Machine</H1>
+
+<H2>The Self Group</H2>
+
+<CITE>How the Self VM works inside, really.</CITE> <P>
+The purpose of this document is to explain how the Self VM is structured. It should be read as a prelude to doing work on the VM. Actually, many parts of the VM are not heavily related, so you may get by just reading some sections. Also, by its very nature, this document will probably be inaccurate, incomplete, and out-of-date. But hopefully it will still be worth reading. There are other things you should read first, though. You need to have some familiarity with Self. Also, read the various published papers on the Self implementation (in particular,
+<a href="./../papers/implementation.html"> [CUL89]</a>,
+ which will you give you a good overview of the structure of the VM,
+<a href="./../papers/pics.html">[HCU91]</a> (pics),
+<a href="./../papers/type-feedback.html">[Höl94]</a> (sic),
+<a href="./../papers/dynamic-deoptimization.html">[HCU92]</a> (deoptimizing),
+<a href="./../papers/customization.html">[CU89]</a>,
+<a href="./../papers/iterative-type-analysis.html">[CU90]</a>,
+<a href="./../papers/practical.html">[CU91]</a>,
+<a href="./../papers/craig-thesis.html">[Cha92]</a> new compiler, .... <P>
+
+
+<H2>Table of Contents</H2>
+
+<ul>
+<li><a href="file:self-vm-structure.html">Structure of the VM</a>.
+<li><a href="file:self-vm-style.html">Style</a>.
+<li><a href="file:self-vm-types.html">Types and Hierachies</a>.
+<li><a href="file:self-vm-memory.html">The Memory System</a>.
+    <UL>
+    <li><a href="file:self-vm-scavenger.html">The Scavenger</a>.
+    <li><a href="file:self-vm-collector.html">The Garbage Collector</a>.
+    </UL>
+<li><a href="file:self-vm-zone.html">The Zone System</a>.
+    <UL>
+    <li>Compiled Methods</a>.
+    <li>Polymorphic Inline Caches</a>.
+    <li>Debugging Information</a>.
+    <li>Dependency Information</a>.
+    </UL>
+<li>Self Compilers</a>.
+     <UL>
+     <li><a href="file:self-vm-nic.html">NIC: Non Inlining Compiler</a>.
+     <li><a href="file:self-vm-sic.html">SIC: Simple Inlining Compiler</a>.
+     <li><a href="file:self-vm-new.html">NEW: Craig's Compiler</a>.
+     </UL>
+</ul>
+

@@ -1,0 +1,101 @@
+Known Bugs
+
+
+1. Snapshot won't start (fatal error)
+
+   Occasionally, the optimized code saved in a snapshot is corrupt,
+   and prevents the snapshot from being reloaded.
+
+     obj.$$ Snapshot
+
+     Internal error: signal 11 code 1 addr 0x118 pc 0x139c48.
+
+     Self process 5649 has crashed.  Do you want to:
+	1) Quit Self (optionally attempting to write a snapshot)
+	2) Try to print the Self stack
+	3) Try to return to the Self prompt
+	4) Force a core dump
+     Your choice: 
+
+   If this happens, use the -F option to the VM to discard the
+   optimized code at startup time.
+
+     obj.$$ Snapshot -F
+   
+             Welcome to the Self system!
+     ...
+
+   If after using this option the system appears to work, it is
+   advisable to run the _Verify primitive immediately after startup.
+   This runs checks on the heap and VM data structures for
+   consistency.  If it reports any errors, do not continue to use the
+   snapshot.  Sometimes it issues warnings; any that include the
+   string "replCandidates" can be ignored.
+
+   The `safe' output looks like this:
+
+      "Self 0" _Verify
+      verifying newgen: eden from to oldgen: old0 z p r S v O m N M i  done
+      shell
+      "Self 1"
+
+
+2. Entire categories suddenly vanish from an outliner
+
+   There is a compiler bug which cause one of the outliner methods to
+   fail when the degree of inlining gets beyond a certain point.  To
+   workaround this, you can discard the generated code using the
+   primitive _Flush.
+
+
+3. Debugger bugs
+
+   Editing code in a process that failed due being out of stack causes a
+   fatal error when the debugger attempts to cut the stack back.
+
+   Using the return: command in the console debugs causes a fatal error.
+
+
+4. Profiler
+
+   The profiler has a number of associated VM bugs, which may cause the
+   VM to crash after its use.  Hence, make sure you have saved code
+   before using the profiler.
+
+
+5. Parser behaves strangely with large integers
+
+   The parser does not reject integers which are too large to be
+   smallInts, instead it generates an incorrect number.
+
+
+6. Dying X server takes Self with it
+
+   If your X server exits while a Self window is open, the Self VM is
+   also dies.
+
+
+7. Console ceases to accept input
+
+   Sometime, for no apparent reason, the message
+	   Error: EINVAL while trying to read file "<stdin>".
+	   Receiver is: traits unixFile stdin.
+   will appear in the console, after which the prompt will no longer
+   accept input.  You can break out by typing ^C, quitting the scheduler,
+   and restarting.
+
+
+10. No fonts visible in Smalltalk browser list panes.
+
+    Edit the slot named `defaultFontName' in `listMenuItem parent' to
+    be a method:
+	defaultFontName = (scalableFont helvetica)
+    or, equivalently, evaluate this expression at the Self prompt, or
+    in a shell: 
+	(reflect: listMenuItem parent) addSlots:
+	  (reflect: (| defaultFontName = (scalableFont helvetica) |) )
+
+11. Attempting to build a world from the Self source files using `all2.self'
+    fails.  It tries to load the file misc/crypto.self.  Due to export 
+    restrictions, we cannot release this file.  There is no workaround 
+    available at present.

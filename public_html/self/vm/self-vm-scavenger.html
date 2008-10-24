@@ -1,0 +1,26 @@
+<TITLE>The Self Virtual Machine</TITLE>
+
+<H1>The Scavenger</H1>
+
+The scavenger is implemented at the top level by the routine universe::scavenge(oop). Its parameter, if non-NULL, represents a recently-allocated object which must not be reclaimed, despite not being referenced anywhere (i.e., it is about to be returned as the result of an allocation). <P>
+
+
+The basic operation of the scavenger is this: <P>
+<OL>
+<LI> All VM-known objects, together with the parameter to the routine (if non-NULL), are scavenged. That is, if the objects exist in Eden or From space they are copied to To or Old space (depending on their age, and whether there is enough room in To space).
+<LI> All objects promoted to Old space ("tenured") in the last step are scanned for references to objects in Eden or From space (oldGeneration::scavenge_promotions), and these objects are scavenged. All objects copied to To space in the last step are scanned for references to objects in Eden or From space, and these objects are scavenged (newGeneration::scavenge_contents).
+<LI> If any objects were scavenged in step 2, go to step 2. Otherwise, discard all objects remaining in Eden and From space (by clearing them, i.e., setting their top and bottom pointers).
+</OL>
+
+Need a picture here! <P>
+
+When tenuring, the scavenger copies each object into the first_space of the old generation. If a tenured object does not fit in this space, it and the remaining tenured objects are placed in a second space in the old generation, referenced by old_gen->scavenge_space. This is known as a "split" scavenge. After a split scavenge, the first space, now deemed full, is moved to the end of the list of spaces in the old generation.  <P>
+
+This is the scenario: Eden is nearly full. An allocation is requested of an object which is just too large to fit in From space (because there are some objects there from the previous scavenge), but which fits in To space, nearly filling it. This triggers the scavenger (it is triggered whenever an allocation cannot be satsified in Eden). All of the objects in Eden and From space are live, but none fit in To space, so must be tenured. This is an unlikely scenario, but must be accomodated by the algorithm  <P>
+
+Before the scavenger begins operation, it must know that sufficient room exists in old space for tenured objects. In the worst case, all objects in the new generation are tenured. A reserve is maintained in the old generation for this purpose; it is made big enough to contain all of the new generation spaces. <P>
+
+Because it does not know how big the objects to be tenured are, the check ensures that somewhere in one of the old spaces (Memory->old_gen->scavenge_space) there is enough contiguous free space for all objects in the new generation. When scavenging, if an object to be tenured fits in the first space in the old generation (first_space) it is placed there, otherwise it is placed in scavenge_space. If any objects were tenured in scavenge_space (as indicated by old_gen->split_scavenge), first_space is pushed to the back of the list of old spaces. <P>
+
+Scavenging takes place by each object in the areas to be scavenged being sent the message scavenge. This ends up in either of the two functions byteVectorOopClass::scavenge or oopsOopClass::scavenge. These determine which space is to hold the surviving object (Memory->survivor_space), copy the object to that space, set up a forwarding pointer and increment the object's age if it not being tenured. <P>
+

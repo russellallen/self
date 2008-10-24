@@ -1,0 +1,21 @@
+#!/bin/csh -f
+#
+# Sun-$Revision: 30.8 $
+#
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+# This script creates an initial working tree for people working on Self
+# implementation, ready to type "make update" to fill it in.
+# The current directory becomes the root of the tree.
+
+if (! $?MAKE) set MAKE = gmake
+
+cd $SELF_WORKING_DIR
+set arch=`get_arch`
+set path =($SELF_BASELINE_DIR/bin/shell $SELF_BASELINE_DIR/bin/$arch $path)
+mkdir templates
+(cd templates; UpdateFiles sources.make)
+UpdateFiles Makefile
+$MAKE create

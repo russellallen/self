@@ -1,0 +1,64 @@
+Instructions for the impatient
+
+You should really read the document entitled `Read This First'
+(readThisFirst.ps.Z) but if you want to get started right away, this
+file contains the basics.
+
+
+How to start and stop SELF
+
+Make sure that the SELF Virtual Machine (the program named Self) is in
+your command search path. You should be running OpenWindows or X, and
+$DISPLAY should refer to a suitable X display (see the requirements
+above).
+
+To start SELF, type "Snapshot" at the UNIX prompt:
+
+--------------------
+% Snapshot
+
+	Welcome to the Self system!
+
+Copyright 1992, 1993, 1994, 1995 Sun Microsystems, Inc. and 
+Stanford University.
+See the LICENSE file for license information.
+
+Type _Credits for full credits.
+
+VM version: 4.0.5
+
+Server started.
+"Self 1" 
+--------------------
+
+If all is well, the system will start the programming environment and
+display the on-line tutorial.
+
+To exit the system, you can use the `quit' item from the middle-button
+background menu from within the programming environment.
+
+If you have any problems when using the system, refer to the help file
+in the documentation (help.txt).
+
+
+System requirements
+
+To run SELF you will need a SPARC-based Sun computer or clone running
+SunOS 4.1.X or Solaris 2.3 or 2.4. To use the programming environment
+you will need to run X Windows version 11 or OpenWindows on an 8-bit
+or deeper color display. The X server need not reside on the same host
+as SELF.
+
+To run the distributed system (including on-line tutorial, Web browser
+and Smalltalk emulator) well, the SELF system requires a host machine
+with 48 Mb of RAM or more. Further, the system places high demands on
+the CPU. We do not recommend its use on anything slower than a
+SparcStation-10. In particular, user interaction on a SparcStation-1
+or 2 is unlikely to be acceptable; a SparcStation-5, 10 or 20 is fine.
+
+The user interface makes substantial demands of the X server. A
+graphics accelerator (such as a GX card) improves the responsiveness
+of the user interface significantly, and therefore we recommend that
+you use one if possible.
+
+

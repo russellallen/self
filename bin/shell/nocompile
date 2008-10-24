@@ -1,0 +1,57 @@
+#!/bin/csh -f
+
+# Sun-$Revision: 30.6 $
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+# allows a user to lock out compiles started by other people for a while
+# 12/16/91 -Urs
+
+set duration = 15
+set filename = "/tmp/compile_veto"
+
+if ($#argv > 1) then
+   echo "usage: $0 [duration]"
+   echo "where duration = duration of veto in minutes (default: 15)"
+   exit 1
+endif
+
+if ($#argv != 0) then
+   if ($1 > 300) then
+      echo "Hey, that's a pretty long time...assuming five hours instead."
+      set duration = 300
+   else
+      set duration = $1
+   endif
+endif
+
+set day  = `date +%j | bc`  	# use bc to strip leading zeroes
+set hour = `date +%H`
+set min  = `date +%M`
+
+set end_min  = `echo "                ($min + $duration) % 60      " | bc`
+set end_hour = `echo "       ($hour + ($min + $duration) / 60) % 24" | bc`
+set end_day  = `echo "$day + ($hour + ($min + $duration) / 60) / 24" | bc`
+
+if ($end_day >= 365) then
+#  we don't handle leap years / year changes well
+   echo "You shouldn\'t work today, " `whoami`
+   exit 1
+endif
+
+if ($end_min < 10) then
+    set pad = '0'
+else 
+    set pad = ''
+endif
+
+echo -n "Setting veto until ${end_hour}:${pad}${end_min} "
+if ($end_day == $day) then
+    echo "today."
+else
+    echo "tomorrow."
+endif
+
+rm -rf $filename
+echo "`whoami` $end_day $end_hour $end_min" > $filename

@@ -1,0 +1,6 @@
+// Sun-$Revision: 30.2 $
+
+arch = sparc
+os   = unix
+os_version = solaris
+compiler = gcc

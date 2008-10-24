@@ -1,0 +1,67 @@
+-- Sun-$Revision: 9.1 $
+
+(--
+    This program solves the Towers of Hanoi program.
+    It's intended to be a simple benchmark of Cecil performance.
+--)
+
+template type towers;
+init_only field stacks(@:towers):array[stack[disk]];
+field moves_done(@:towers):integer := 0;
+
+template type disk;
+init_only field id(@:disk):integer;
+
+method solve_towers(size:integer):void {
+    "Starting towers with ".print;
+    size.print;
+    " disks...".print;
+(--
+    "".print_line;
+--)
+    var t:towers := object isa towers;	-- bogus!!
+    var time:integer := time({
+	t := create_towers(size);
+	move_stack(t, 0, 1, size);
+    });
+    "done.  ".print;
+    t.moves_done.print;
+    " moves; ".print;
+    time.print;
+    " ms.".print_line;
+}
+
+method create_towers(size:integer):towers {
+    var stack0:stack[disk] := object isa stack[disk];
+    var stack1:stack[disk] := object isa stack[disk];
+    var stack2:stack[disk] := object isa stack[disk];
+    do(size, &(i:integer){
+	push(stack0, object isa disk { id := size - i });
+    });
+    object isa towers { stacks := [stack0, stack1, stack2] } }
+
+method move_stack(t@:towers, from:integer, to:integer, count:integer):void {
+    if(count = 0, { ^ });
+    var other:integer := 3 - from - to;
+    move_stack(t, from, other, count - 1);
+    move_disk(t, from, to);
+    move_stack(t, other, to, count - 1);
+};
+
+method move_disk(t@:towers, from:integer, to:integer):void {
+    var d:disk := pop(t.stacks!from);
+    if((t.stacks!to).not_empty & { (t.stacks!to).top.id < d.id },
+       { error("pushing a disk onto a smaller disk"); });
+(--
+    "  moving disk ".print;
+    d.id.print;
+    " from ".print;
+    from.print;
+    " to ".print;
+    to.print_line;
+--)
+    push(t.stacks!to, d);
+    t.moves_done := t.moves_done + 1;
+}
+
+method towers_test():void { solve_towers(10); }

@@ -1,0 +1,11 @@
+
+expressionSeries
+  object (
+    slotList |
+      slot
+        binarySlotNameWithoutFormal @ =
+        method (
+          slotList |
+            slot
+              unarySlotName :x |
+          expressionSeries self ) | )

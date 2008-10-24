@@ -1,0 +1,294 @@
+-- "Sun-$Revision: 9.1 $"
+-- Type Checking Tests
+
+-- check field initializations, uses static method lookup
+type color1;
+field hue (@color1) : integer;
+method TestField () {
+  var c : color1 := object isa color1 {
+    hue := 'c'
+-- # Type Error: type mismatch in field initialization for hue
+--   char !<= integer
+  };
+}
+
+(--
+-- 4 fatal errors: need to be type specs (plus type mismatches for them)
+object noType1;
+object noType2;
+object noType3;
+object noType4;
+method Test1 (a:noType1) : noType2 { var b : noType3 := 5; };
+method Test2 () {
+  var block := { var b : noType4 := 6; };
+}
+--)
+
+-- subtyping closures
+type a1; type a11 isa a1;
+type b1; type b11 isa b1;
+method TestClosuresTypes () {
+--  Of the four below, only bl3 should not give a type mismatch error
+    var bl1 : &(a1):b1 := &(i:a11) : b11 { object isa b11 }; -- Not,OK
+    var bl2 : &(a1):b11 := &(i:a11) : b1 { object isa b1 }; -- Not,Not
+    var bl3 : &(a11):b1 := &(i:a1) : b11 { object isa b11 }; -- OK, OK
+    var bl4 : &(a11):b11 := &(i:a1) : b1 { object isa b1 }; -- OK, Not
+-- # Type Error: type mismatch in declaration initializer for bl1
+--   &(a11):b11 !<= &(a1):b1
+-- # Type Error: type mismatch in declaration initializer for bl2
+--   &(a11):b1 !<= &(a1):b11
+-- bl3 should *not* give an error
+-- # Type Error: type mismatch in declaration initializer for bl4
+--   &(a1):b1 !<= &(a11):b11
+}
+
+method TestClosures () {
+  var block1 := &(i:integer):char { 7 }; -- type mismatch :char and 7
+-- # Type Error: type mismatch in return from method eval
+--   integer !<= char
+  var block2 := &(i:integer):char { 'a' }; -- OK
+  var block3 : &(integer):char := &(i:integer):char { 7 }; -- mismatch
+-- # Type Error: type mismatch in return from method eval
+--   integer !<= char
+  var block4 : &(integer):char := &(i:integer):char { 'b' }; -- OK
+}
+
+type schar isa char;
+type sinteger isa integer;
+concrete object Aschar isa schar;
+concrete object Asinteger isa sinteger;
+type tchar isa schar;
+
+method TestClosures2 () {
+  var ch : char := 'z';
+  var is : sinteger := Asinteger;
+  var block1 : &(integer):char := &(i:integer):char { 'a' };
+  var block2 : &(sinteger):char := &(i:integer):schar { Aschar };
+  var as : tchar := object isa tchar;
+
+  ch := eval (block1, as); -- this should fail because as is not
+	-- an integer, won't find appropriate eval signature
+-- # Type Error: Message eval(&(integer):char,tchar) not understood
+
+  ch := eval (block2, is);  -- this should work, should find a signature
+}
+
+-- Some hairy closure type specs...
+
+type atyp1; type atyp2; type atyp3;
+type btyp1; type btyp2; type btyp3;
+type ctyp1; type ctyp2; type ctyp3;
+type dtyp1; type dtyp2; type dtyp3;
+
+method TestClosures3 () {
+   var bl1 : &(atyp2) := &(p1:atyp2) { 7 };
+   var bl2 : &(btyp2,btyp3):btyp1 := &(p1:btyp2, p2:btyp3):btyp1 {
+	object isa btyp1 };
+   var bl3 : &(ctyp3,&(ctyp1,ctyp2):ctyp2):ctyp3
+	:= &(p1:ctyp3,
+	     p2:&(ctyp1,ctyp2):ctyp2):ctyp3 { object isa ctyp3 };
+   var bl4 : &(dtyp3) : &(dtyp1,&(dtyp3,ctyp2):atyp2):dtyp3
+	:= &(p1:dtyp3):&(dtyp1,&(dtyp3,ctyp2):atyp2):dtyp3 {
+	   &(p1:dtyp1,p2:&(dtyp3,ctyp2):atyp2):dtyp3 { object isa dtyp3 }
+	};
+}
+
+-- check match of more specific signature if dynamics also match
+
+method hi (adyn) { 7 }
+method hi (@integer:integer) : char { 7 }
+
+method TestDyn() {
+  var ch : integer := hi (7); -- should be an error, 2nd sig should match
+-- # Type Error: type mismatch in return from method hi
+--   integer !<= char
+
+}
+
+
+(--
+method Test() {
+
+--  var block : &(integer):char := &(i:integer):char { 'a' }; -- Error:
+	-- only closures with no args allowed here.
+--  var block : &():char := &():char { 'a' }; -- Error: wrong return type
+--  var block : &() := &() { 'a' }; -- OK - dynamic
+
+  var block : &():boolean := &():boolean { true }; -- OK - correct
+
+  var maybe02 : boolean := if (true, block, block);
+  var maybe03 : boolean := if (false, block, block);
+  var maybe04 : boolean := if (true, block);
+  var maybe05 : boolean := if (false, block);
+  var maybe06 : boolean := true | block;
+  var maybe07 : boolean := false | block;
+  var maybe09a: boolean := block | block;
+  var maybe10 : boolean := true & block;
+  var maybe11 : boolean := false & block;
+  var maybe13a: boolean := block & block;
+  var maybe14 : boolean := not (block);
+  var maybe15 : boolean := not (true);
+  var maybe16 : boolean := not (false);
+
+-- Following 4 always error, because rhs must be a block
+--  var maybe08 : boolean := block | true;
+--  var maybe09 : boolean := block | false;
+--  var maybe12 : boolean := block & true;
+--  var maybe13 : boolean := block & false;
+
+}
+
+--)
+
+-- type check field initializations
+type color;
+field saturation (@color) : integer;
+field lightness  (@color) : integer;
+field hue        (@color) : integer;
+
+type cPoint1;
+field x (@cPoint1) : integer;
+field y (@cPoint1) : integer;
+field c (@cPoint1) : color;
+
+method newcPoint1 (x@integer, y@integer) : cPoint1 {
+  var pc : color := object isa color {
+    saturation := 'a',
+    lightness := 'b',
+    hue := 'c'
+  };
+
+  var p : cPoint1 := object isa cPoint1 {
+    x := 'd',
+    y := 'e',
+    c := pc
+  };
+  p
+-- # Type Error: type mismatch in field initialization for saturation
+--   char !<= integer
+-- # Type Error: type mismatch in field initialization for lightness
+--   char !<= integer
+-- # Type Error: type mismatch in field initialization for hue
+--   char !<= integer
+-- # Type Error: type mismatch in field initialization for x
+--   char !<= integer
+-- # Type Error: type mismatch in field initialization for y
+--   char !<= integer
+}
+
+-- type check resends
+
+type point;
+type point2;
+method AChild (p@point:point) : integer { 7 }
+method AChild (p@point2:point2) : integer { 7 }
+
+type cPoint isa point, point2;
+
+method AChild (cp@cPoint) {
+  resend(cp@int, cp@point); -- Error: too many args (must match formals)
+-- # Type Error: incorrect number of arguments to resend of AChild
+
+  resend(ab); -- Error: must use formal args (names must match)
+-- # Type Error: variable ab not defined
+-- # Type Error: argument to resend must be same as constrained formal cp
+
+  resend (cp@integer); -- Error: no dir. resend through non-ancestor object
+-- # Type Error: cannot direct resend through cecil_object_decl_node: integer
+--   which is not an ancestor of <object: cPoint>
+
+  resend(cp); -- Error: message ambiguous
+-- # Type Error: resend of AChild is ambiguous; matches include:
+
+  resend(cp@point2); -- OK
+  resend(cp@point);  -- OK
+  var ch : char := resend(cp@point2); -- Error: type mismatch with result
+-- # Type Error: type mismatch in declaration initializer for ch
+--   integer !<= char
+
+}
+
+method BChild (cp2@cPoint) {
+  resend(cp2); -- Error: message not understood
+-- # Type Error: resend of BChild not understood
+}
+
+method A2Child (cp@cPoint, uncons:integer) {
+  resend(cp, uncons@float); -- Error: no dir. resend via unconstrained formal
+-- # Type Error: cannot direct resend through unconstrained formal uncons
+}
+
+type tester1;
+type tester2;
+type testerChild inherits tester1 subtypes tester2;
+
+method A3Child (t@tester1:tester1) {  }
+method A3Child (t@testerChild:testerChild) {
+  resend (t@tester1); -- Error...
+-- # Type Error: Resend argument type mismatch: testerChild !<= tester1
+}
+
+method test3():integer {
+  if (true, { ^ "abc" }, { ^ 'a' });
+-- # Type Error: type mismatch in non-local return from method test1
+--   string !<= integer
+-- # Type Error: type mismatch in non-local return from method test1
+--   char !<= integer
+  7
+}
+
+-- uninitialized fields:
+
+abstract type point3;
+field x (@:point3) : float := 0.0;
+field y (@:point3) : float;
+field z (@:point3) : float;
+
+method test_fields1() {
+  var p : point3 := object isa point3;
+-- # Type Error: Uninitialized field: y
+--   at /projects/self/williams/applications/cecil_interp/tc.cecil:248
+-- # Type Error: Uninitialized field: z
+--   at /projects/self/williams/applications/cecil_interp/tc.cecil:248
+}
+concrete object origin isa point3 { y := 0.0 };
+field label(@origin) : string;
+-- # Type Error: Uninitialized field: label
+--   in object: cecil_object_decl_node: origin
+--   at /projects/self/williams/applications/cecil_interp/tc.cecil:254
+-- # Type Error: Uninitialized field: z
+--   in object: cecil_object_decl_node: origin
+--   at /projects/self/williams/applications/cecil_interp/tc.cecil:254
+
+abstract type color3;
+field saturation (@:color3) : float := 0.0;
+field lightness  (@:color3) : float;
+field hue        (@:color3) : float;
+
+abstract type color3Point3 isa point3, color3;
+
+method test_fields2() {
+  var cp : color3Point3 := object isa color3Point3 { y := 0.0, hue := 3.0 };
+-- # Type Error: Uninitialized field: z
+--   in object: cecil_object_expr_node
+--   at /projects/self/williams/applications/cecil_interp/tc.cecil:271
+-- # Type Error: Uninitialized field: lightness
+--   in object: cecil_object_expr_node
+--   at /projects/self/williams/applications/cecil_interp/tc.cecil:271
+}
+
+concrete object color3Origin isa color3Point3 {
+	y := 0.0,
+	hue := 0.5,
+	lightness := 0.5 };
+field label(@color3Origin) : string;
+
+-- # Type Error: Uninitialized field: label
+--   in object: cecil_object_decl_node: color3Origin
+--   at /projects/self/williams/applications/cecil_interp/tc.cecil:280
+-- # Type Error: Uninitialized field: z
+--   in object: cecil_object_decl_node: color3Origin
+--   at /projects/self/williams/applications/cecil_interp/tc.cecil:280
+
+
+

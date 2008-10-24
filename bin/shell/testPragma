@@ -1,0 +1,25 @@
+#!/bin/csh -f
+#Sun-$Revision: 30.6 $
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+# to check which .h files do not contain #pragma interface  -Urs
+
+set dot_h = /tmp/dot_h.$$
+set intf  = /tmp/intf.$$
+set diffs = /tmp/comm.$$
+
+/bin/ls *.h > $dot_h
+grep -l 'pragma interface' *.h *.hh | sort > $intf
+
+# ignore the primitiveMaker .h files that aren't really .h files
+comm -3 $dot_h $intf | egrep -v '^(entries.hh|functions.hh|asmDefs.hh|asmErrorCodes.hh|macros.hh|sun3.asmDefs.hh|sun4.asmDefs.hh)' > $diffs
+
+diff $diffs /dev/null >& /dev/null
+if ($status != 0) then
+    echo "Warning: the following .h files have no '#pragma interface':"
+    cat $diffs
+endif
+
+rm -f $dot_h $intf $diffs

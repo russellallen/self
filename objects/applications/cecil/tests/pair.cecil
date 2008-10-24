@@ -1,0 +1,19 @@
+-- Sun-$Revision: 9.1 $
+
+object pair;
+
+field x(@pair);
+field y(@pair);
+
+-- pair creation
+
+method new_pair(x, y) { object isa pair { x := x, y := y } }
+
+-- arithmetic on pairs
+
+method +(p1@pair,p2@pair) { new_pair(p1.x + p2.x, p1.y + p2.y) }
+method -(p1@pair,p2@pair) { new_pair(p1.x - p2.x, p1.y - p2.y) }
+
+method print_string(p@pair) {
+    ((("(" || p.x.print_string) || ", ") || p.y.print_string) || ")"
+}

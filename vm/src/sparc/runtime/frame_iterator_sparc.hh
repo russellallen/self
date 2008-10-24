@@ -1,0 +1,17 @@
+/* Sun-$Revision: 30.7 $ */
+
+/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+   See the LICENSE file for license information. */
+
+// This file is INCLUDED into the middle of the frame class.
+
+
+# pragma interface
+
+ private:
+
+  # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
+    void do_local_registers();
+    fint do_stack_locations();
+    void do_above_saved_registers(fint);
+  # endif

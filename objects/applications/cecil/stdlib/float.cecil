@@ -1,0 +1,120 @@
+-- Sun-$Revision: 9.1 $
+
+-- methods for floats
+
+float isa number;
+
+(--
+prim init_only field value(@:float):float := 0.0;
+--)
+
+-- arithmetic
+
+prim method = (l@:float, r@:float):boolean { "
+    context lookup_top_context_object: 
+	(l floatValueInContext: context) =
+	(r floatValueInContext: context) ifTrue: 'true' False: 'false'
+" "
+    *_result = (l->asFloatObj()->value == r->asFloatObj()->value ?
+		GLOBAL(base,_true) : GLOBAL(base,_false));
+" }
+
+prim method < (l@:float, r@:float):boolean { "
+    context lookup_top_context_object: 
+	(l floatValueInContext: context) <
+	(r floatValueInContext: context) ifTrue: 'true' False: 'false'
+" "
+    *_result = (l->asFloatObj()->value < r->asFloatObj()->value ?
+		GLOBAL(base,_true) : GLOBAL(base,_false));
+" }
+
+prim method <= (l@:float, r@:float):boolean { "
+    context lookup_top_context_object: 
+	(l floatValueInContext: context) <=
+	(r floatValueInContext: context) ifTrue: 'true' False: 'false'
+" "
+    *_result = (l->asFloatObj()->value <= r->asFloatObj()->value ?
+		GLOBAL(base,_true) : GLOBAL(base,_false));
+" }
+
+prim method > (l@:float, r@:float):boolean { "
+    context lookup_top_context_object: 
+	(l floatValueInContext: context) >
+	(r floatValueInContext: context) ifTrue: 'true' False: 'false'
+" "
+    *_result = (l->asFloatObj()->value > r->asFloatObj()->value ?
+		GLOBAL(base,_true) : GLOBAL(base,_false));
+" }
+
+prim method >= (l@:float, r@:float):boolean { "
+    context lookup_top_context_object: 
+	(l floatValueInContext: context) >=
+	(r floatValueInContext: context) ifTrue: 'true' False: 'false'
+" "
+    *_result = (l->asFloatObj()->value >= r->asFloatObj()->value ?
+		GLOBAL(base,_true) : GLOBAL(base,_false));
+" }
+
+prim method != (l@:float, r@:float):boolean { "
+    context lookup_top_context_object: 
+	(l floatValueInContext: context) !=
+	(r floatValueInContext: context) ifTrue: 'true' False: 'false'
+" "
+    *_result = (l->asFloatObj()->value != r->asFloatObj()->value ?
+		GLOBAL(base,_true) : GLOBAL(base,_false));
+" }
+
+prim method + (l@:float, r@:float):float { "
+    cecil_float_literal
+	copyValue: (l floatValueInContext: context) +
+		   (r floatValueInContext: context) 
+	InContext: context
+" "
+    *_result = asTaggedPointer(new CecilFloatObject(l->asFloatObj()->value +
+						    r->asFloatObj()->value));
+" }
+
+prim method - (l@:float, r@:float):float { "
+    cecil_float_literal
+	copyValue: (l floatValueInContext: context) -
+		   (r floatValueInContext: context) 
+	InContext: context
+" "
+    *_result = asTaggedPointer(new CecilFloatObject(l->asFloatObj()->value -
+						    r->asFloatObj()->value));
+" }
+
+prim method * (l@:float, r@:float):float { "
+    cecil_float_literal
+	copyValue: (l floatValueInContext: context) *
+		   (r floatValueInContext: context) 
+	InContext: context 
+" "
+    *_result = asTaggedPointer(new CecilFloatObject(l->asFloatObj()->value *
+						    r->asFloatObj()->value));
+" }
+
+prim method / (l@:float, r@:float):float { "
+    cecil_float_literal
+	copyValue: (l floatValueInContext: context) /
+		   (r floatValueInContext: context) 
+	InContext: context 
+" "
+    *_result = asTaggedPointer(new CecilFloatObject(l->asFloatObj()->value /
+						    r->asFloatObj()->value));
+" }
+
+
+method asFloat(f@:float) { f }
+
+-- printing behavior
+
+prim method print_string(f@:float):string { " 
+    cecil_string_literal 
+	copyValue: (f floatValueInContext: context) printString
+	InContext: context 
+" "
+    char buffer[20];
+    sprintf(buffer, \"%f\", f->asFloatObj()->value);
+    *_result = makeStringObj(buffer);
+" }

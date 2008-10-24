@@ -1,0 +1,58 @@
+-- "Sun-$Revision: 9.1 $"
+
+method tree_tests() {
+       print_line("*** tree.tst.cecil ***");
+       tree_test();
+       print_line("done");
+}
+
+
+method tree_test() {
+	var t := tree_test_add();
+	do(t, &(x){ x.print });
+}
+
+-- tree_test();
+-- prints out 2345678
+
+method silent_tree_test() {
+	var t := tree_test_add();
+	do(t, &(x){});
+}
+
+method tree_test_add() {
+	var t := add(empty_sorted_collection[integer](), 5);
+	t := add(t, 3);
+	t := add(t, 6);
+	t := add(t, 8);
+	t := add(t, 2);
+	t := add(t, 4);
+	t := add(t, 7);
+	t }
+
+method tree_test1() {
+	var t := add(empty_sorted_collection[integer](), 5);
+	do(t, &(x){ x.print });
+}
+
+-- tree_test1();
+-- prints 5
+
+method tree_test2() {
+        var t := add(empty_sorted_collection[integer](), 5);
+	t := add(t, 3);
+        do(t, &(x){ x.print });
+}
+
+-- tree_test2();
+-- prints 35
+
+method tree_test3() {
+        var t := add(empty_sorted_collection[integer](), 5);
+	t := add(t, 3);
+	includes(t, 3)
+}
+
+-- tree_test3()
+-- true
+

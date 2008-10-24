@@ -1,0 +1,306 @@
+-- "Sun-$Revision: 9.1 $"
+-- load("field.tst.cecil");
+
+method field_tests() {
+	print_line("*** field.tst.cecil ***");
+	-- *** Testing simple fields ***
+        if(field_test10() != field_nil, { print("***field_test10 fail***"); });
+	print_line("manual: field_test11(); field_test12();");
+        if(field_test13() != field_cons, { print("***field_test13 fail***"); });
+
+	-- *** Testing inherited fields ***
+        if(field_test14() != field_cons, { print("***field_test14 fail***"); });
+	print_line("manual: field_test15(); field_test16();");
+        if(field_test17() != 0, { print("***field_test17 fail***"); });
+        if(field_test18() != 0, { print("***field_test18 fail***");});
+        if(field_test19() != field_cell, { print("***field_test19 fail***"); });
+	
+	-- *** Testing shared fields ***
+        if(field_test20() != "ok", { print("***field_test20 fail***"); });
+        if(field_test21() != 1, { print("***field_test21 fail***"); });
+        if(field_test22() != 123, { print("***field_test22 fail***"); });
+	print_line("manual: field_test22b(); field_test22c();");
+
+	-- *** field_test for diamond shaped inheritance **
+	if(field_test23() != "field_cns2", { print("***field_test23 fail***"); });
+	if(field_test24() != field_cell, { print("***field_test24 fail***"); });
+	if(field_test25() != "field_cns2", { print("***field_test25 fail***"); });
+	field_test26a();
+	field_test26b();
+	print_line("manual: field_test26(); field_test26c(); field_test26d();");
+
+	-- *** read_only and init_only fields ***
+	if(field_test27() != "field_cons2 read only", { print("***field_test27 fail***"); });
+	if(field_test29() != "field_cons2 init only", { print("***field_test29 fail***"); });
+	if(field_test31() != 1, { print("***field_test31 fail***"); });
+	print_line("manual: field_test28(); field_test30();");
+	print_line("manual: field_test32(); field_test32b();");
+
+	-- *** abstract fields ***
+	print_line("manual: field_test33(); field_test34();");
+
+	print_line("done");
+}
+
+concrete object field_nil;
+
+concrete object field_cons;
+field head(c@field_cons);
+field initHead(c@field_cons) := 0;
+field tail(c@field_cons);
+
+concrete object field_cons2 inherits field_cons;
+field tst(c@field_cons2) := field_nil;
+
+method field_test10() {
+    field_cons.head := field_nil;
+    tst(field_cons2)
+}
+-- field_test10()
+-- field_nil
+
+method field_test11() {
+    field_cons2.tail
+}
+-- field_cons2.tail;
+-- accessing uninitialized field
+
+method field_test12() {
+    field_cons.tail
+}
+-- field_cons.tail;
+-- accessing uninitialized field
+
+method field_test13() {
+    set_tail(field_cons, field_cons);
+    field_cons.tail
+}
+-- field_test13()
+--  field_cons
+
+-- *** Testing inherited fields ***
+
+concrete object field_cons2nil inherits field_cons, field_nil;
+concrete object field_cell;
+concrete object field_cons3 inherits field_cons2nil, field_cell;
+
+method field_test14() {
+    set_head(field_cons2nil, field_cons);
+    head(field_cons2nil)
+}
+-- field_test14()
+--  field_cons
+
+method field_test15() {
+    head(field_nil)
+}
+-- field_test15()
+-- msg not understood
+
+method field_test16() {
+    head(field_cons3)
+}
+-- field_test16()
+-- accessing uninitialized field, since there isn't any value defined for field_cons
+
+method field_test17() {
+    initHead(field_cons3)
+}
+-- field_test17()
+-- 0
+
+method field_test18() {
+    field_cons.initHead := field_nil;
+    initHead(field_cons2nil)
+}
+-- field_test18()
+-- 0
+
+method field_test19() {
+    field_cons3.tail := field_cell;
+    tail(field_cons3)
+}
+-- field_test19()
+--  field_cell
+
+-- *** shared fields ***
+
+shared field status(c@field_cons) := "ok";
+
+abstract object field_bar;
+shared field barshare(b@field_bar) := "bstate";
+field barlocal(b@field_bar) := 0;
+concrete object field_bar2 inherits field_bar;
+concrete object field_bar3 inherits field_bar;
+
+shared field field_shared_uninitialized(@field_bar);
+-- error: should initialize shared field
+
+method field_test20() {
+    status(field_cons)
+}
+-- field_test20()
+-- "ok"
+
+method field_test21() {
+    set_status(field_cons2, 1);
+    status(field_cons)
+}
+-- field_test21()
+-- 1
+
+method field_test22() {
+    set_barshare(field_bar3, 123);
+    barshare(field_bar2)
+}
+-- field_test22()
+-- 123
+
+method field_test22b() {
+    object isa field_bar2 { barshare := "error" }
+}
+-- field_test22b();
+-- error: can't initialize shared field
+
+method field_test22c() {
+    field_bar2.field_shared_uninitialized
+}
+-- field_test22c()
+-- error: accessing uninitialized field
+
+
+-- *** test for diamond shaped inheritance **
+
+concrete object field_cns;
+field head(c@field_cns);
+field head2(c@field_cns);
+
+concrete object field_cns2 inherits field_cns;
+field head(c@field_cns2) := "field_cns2";
+field head2(c@field_cns2) := "field_cns2";
+
+concrete object field_cns3 inherits field_cns;
+field head2(c@field_cns3) := "field_cns3";
+
+concrete object field_cns4 inherits field_cns2, field_cns3;
+
+method field_test23() {
+    field_cns2.head
+}
+-- field_test23()
+-- "field_cns2"
+
+method field_test24() {
+    field_cns2.head := field_cell;
+    field_cns2.head
+}
+-- field_test24()
+-- field_cell
+
+method field_test25() {
+    field_cns4.head
+}
+-- field_test25()
+-- "field_cns2"
+
+method field_test26() {
+    field_cns4.head2
+}
+-- field_test26()
+-- ambiguous field names
+
+
+method field_test26a() {
+    object isa field_cns4
+}
+-- type error: missing field initializations
+
+
+method field_test26b() {
+    object isa field_cns4 { head@field_cns   := "head@field_cns",
+			    head@field_cns2  := "head@field_cns2",
+			    head2@field_cns  := "head2@field_cns",
+			    head2@field_cns2 := "head2@field_cns2",
+			    head2@field_cns3 := "head2@field_cns3" }
+}
+-- OK: objects isa field_cns4 { ... }
+
+method field_test26c() {
+    object isa field_cns4 { head := "head", head2 := "head2" }
+}
+-- error: ambiguous field initializations
+
+method field_test26d() {
+    object isa field_cns4 { baz := "head" }
+}
+-- error: unknown field initialization
+
+
+-- *** read_only and init_only fields ***
+
+read_only field readOnly(c@field_cons2) := "field_cons2 read only";
+init_only field initOnly(c@field_cons2) := "field_cons2 init only";
+
+read_only field readOnlyUninit(c@field_cons2);
+-- error: read_only field must be initialized at declaration
+
+method field_test27() {
+    field_cons2.readOnly
+}
+-- field_test27()
+-- "field_cons2 read only"
+
+method field_test28() {
+   field_cons2.readOnly := "something else";
+}
+-- field_test28()
+-- error: msg not understood
+
+method field_test29() {
+    field_cons2.initOnly
+}
+-- field_test29()
+-- "field_cons2 init only"
+
+method field_test30() {
+    field_cons2.initOnly := "something else";
+}
+-- field_test30()
+-- error: msg not understood
+
+method field_test31() {
+	var local := object inherits field_cons2 { initOnly := 1 };
+	local.initOnly }
+-- field_test31();
+-- 1
+
+method field_test32() {
+        var local := object inherits field_cons2 { readOnly := 1 };
+	local.readOnly }
+-- field_test32();
+-- error: cannot assign a read-only field
+
+method field_test32b() {
+    field_cons2.readOnlyUninit
+}
+-- field_test32b();
+-- error: accessing uninitialized field
+
+-- *** abstract fields ***
+
+abstract object field_virtualCons;
+field head(v@field_virtualCons) { abstract }
+
+concrete object field_tstCons inherits field_virtualCons;
+
+method field_test33() {	 
+    head(field_virtualCons)
+}
+-- field_test33()
+-- error: invoking abstract method
+
+method field_test34() {
+    field_tstCons.head
+}
+-- field_test34()
+-- error: invoking abstract method

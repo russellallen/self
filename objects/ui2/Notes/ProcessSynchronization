@@ -1,0 +1,58 @@
+Date: Sun, 12 Jun 94 13:24:20 PDT
+To: self
+From: jmaloney
+Subject: UI2 Usage Note: Process Syncronization
+
+UI2 has a single process that does roughly the following:
+
+Do forever:
+    1. process activities (such as animations).
+    2. process input events.
+    3. update damaged portions of the display.
+    4. clear the damage list.
+    5. sleep until either an input event arrives or
+       it is time process activities again.
+
+The first two steps, processing activities and processing
+input events, may cause morphs to react by changing their
+appearance in some way. Any morph whose appearance changes
+submits "damage reports" to the world indicating the
+portions of the display that are (or might be) effected
+by the change. Then, the incremental update step of the
+loop figures out how to fix the damaged portions of the
+display to reflect the new state. Note that, in the
+absence of other processes, there is only a single
+thread of control and everything happens synchronously.
+In this case there is no need for any sort of process
+synchronization.
+
+Sometimes, however, it is desirable to fork a process
+to complete some time-consuming operation in the background
+(such as filing out a module). Now the situation is trickier.
+If the forked process does anything that causes the
+appearance of a morph to change, including adding or
+removing morphs, then there is a race condtion between
+that process and the ui2 process. The critical shared
+data structure is the damage list, which is used to
+keep track of display damage. If the forked process
+happens to cause a morph to change between steps 3 and 4
+of the ui2 loop, the damage report may be lost and the
+display may not get updated. Worse, if a process switch
+happens at just the wrong momement, the damage list
+data structure itself could be corrupted.
+
+The solution, of course, is to use a semaphore to guard
+the critical section. Your code can synchronize with the
+ui2 process simply by wrapping changes to morphs in a
+block such as:
+
+  myMorph world safelyDo: [ myMorph color: (paint named: 'green' ]
+
+The safelyDo: method simply acquires the semaphore,
+evaluates the block, and releases the semaphore. Simple, eh?
+
+More people will soon be doing things in ui2, so I wanted to
+make you all aware of potential problems with forked processes
+and how to solve them.
+
+	-- John

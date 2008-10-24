@@ -1,0 +1,573 @@
+% Sun-$Revision: 30.2 $
+
+\title{Notes on how to Use the Self Development System}
+\author{Miles Ohlrich, Jeffrey Dean, Christine Ahrens, and Craig Chambers\\ 
+Department of Computer Science and Engineering \\
+University of Washington}
+\newcommand{\Ditem}[1]{\item{\bf{#1:}}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\bq}{\begin{quote}}
+\newcommand{\eq}{\end{quote}}
+\documentstyle[11pt]{article}
+%\renewcommand{\baselinestretch}{1.5}
+\pagestyle{empty}
+%\setlength{\topmargin}{1 in}
+
+\begin{document}
+\bibliographystyle{plain}
+\maketitle
+
+\section{Working trees, baselines, and all that}
+
+There exists a directory tree called the baseline that holds all the
+standard source code for the Self implementation and the Self code.
+Each baseline directory containing text files also contains an RCS
+subdirectory which holds RCS files for all the text files.
+
+Each person who wants to be making modifications to this code gets
+his/her own copy of the whole directory tree; this personal copy of
+the tree is called a working tree.  To make modifications to the
+system, the person modifies his/her own working tree to their heart's
+content.  There exist scripts that support checking in all local
+changes to the baseline (called a publish) and merging all
+improvements published by other users into a person's working tree
+(called an update).  These scripts internally perform RCS commands,
+ensuring that there's a log of all changes that have been made.
+
+One invariant: the baseline should always be a correct working system,
+suitable for demos.  Never publish changes that would violate this
+invariant.
+
+At UW, the baseline is in {\tt /projects/self/self-baseline}; working
+trees are typically placed in {\tt \$(HOME)/self}.
+
+\section{Your {\tt .cshrc} File}
+
+Before running Self or recompiling Self, you need to move the
+following into your {\tt .cshrc} (the directories used are appropriate for
+UW):
+
+\begin{tt}
+\begin{small}
+\begin{verbatim}
+
+  setenv SELF_WORKING_DIR  ~/self	   # the place for the working tree
+  setenv SELF_BASELINE_DIR /projects/self/self-baseline # the baseline
+
+  setenv SELF_LD_PATH $SELF_BASELINE_DIR/lib
+  if ($?LD_LIBRARY_PATH) then
+     setenv LD_LIBRARY_PATH	 ${LD_LIBRARY_PATH}:${SELF_LD_PATH  }
+  else
+     setenv LD_LIBRARY_PATH	 $SELF_LD_PATH
+  endif
+  unsetenv SELF_LD_PATH
+
+  set path=($SELF_WORKING_DIR/bin/{$arch,shell} \
+	    $SELF_BASELINE_DIR/bin/{$arch,shell} \
+	    $path \
+	    {$SELF_WORKING_DIR,$SELF_BASELINE_DIR}/self \
+	    {$SELF_WORKING_DIR,$SELF_BASELINE_DIR}/optimized/sun4 )
+
+\end{verbatim}
+\end{small}
+\end{tt}
+
+This code may also be found in {\tt \${SELF\_BASELINE\_DIR}/self.cshrc}
+at UW, which can simply be {\tt source}'d as part of reading your {\tt
+.cshrc}.
+
+\section{{\tt make} options}
+
+Each directory has a {\tt Makefile} which supports a variety of
+operations.  When invoked in {\tt \$(HOME)/self}, recursively traverses all
+subdirectories, too.
+
+\begin{description}
+
+\Ditem{{\tt make update}}
+Updates files from the baseline.  For all files that have been
+changed in the baseline since the last update, this operation will
+create a new file that contains the merge of local changes and other
+published changes.  If any changes overlap, then a merge conflict
+arises; these need to be resolved by hand.  To assist in understanding
+what happened during an update, the original pre-update file is always
+available in a file named {\tt *.OLD}.
+
+Update will also create new files added to the baseline, and remove
+old files removed from the baseline.  If changes have been made to the
+local file and it was deleted as part of the update, the local file is
+still around, renamed to {\tt *.OLD}.
+
+Update merges the baseline with the changes that you have already
+made.  Thus, if you make changes and want to get rid of them, delete
+the files before doing a {\tt make update}.
+
+You should do {\tt make browse} once you've updated.  It will show
+you the difference between new and old versions of your working tree
+source (i.e., the changes to your code that resulted from {\tt make
+update}).
+
+To avoid browsing changes from earlier updates, it's a good
+idea to remove all the {\tt *.OLD} files before an update.
+
+See the section on updating for more information.
+
+\Ditem{{\tt make publish}}
+Publishes changed files to the baseline.  Publish only works if no
+other publishes have happened since the last time you did an update,
+so as a general rule, do a {\tt make update} just prior to a {\tt make
+publish}, to ensure that no one else has done a publish recently.
+Since {\tt make publish} gives new revision numbers to all published
+files, a {\tt make touch} after the publish will avoid unnecessary
+recompilation after a publish.
+
+For new files, {\tt make publish} will ask whether the files should be
+checked in.  Text files containing {\tt \$Revision\$} lines should be,
+while binary executables should not.
+
+Make publish might also ask if you want to remove an old baseline
+file.  This is expected if you have removed a file locally and want it
+to be removed in the baseline, too.  If not, then something is amiss
+and further checking is called for (just say no to the question and
+then investigate).  Removing a baseline file doesn't remove the RCS
+log; that stays around forever.
+
+See the section on publishing for more details.
+
+\Ditem{{\tt make browse}}
+Reports all changes made as a result of a {\tt make update}.
+
+\Ditem{{\tt make compare}}
+Reports differences between files in the working tree and the baseline.
+
+\Ditem{{\tt make lists}}
+After adding and/or removing a file from the list of C++/asm source
+files (the list of files that get compiled and linked to form Self),
+possibly through an update, you need to run {\tt make lists} in any of
+the {\tt sun[34]/\{debug,optimized,profiled\}} directories you want to
+recompile.  This rebuilds all the symbolic links to the scattered
+source files and automatically runs {\tt make includeDB} at the end.
+
+\Ditem{{\tt make includeDB}}
+If you add or remove a {\tt \#include} dependency by editing the {\tt
+includeDB} file in {\tt \$(HOME)/self}, you need to run {\tt make
+includeDB} to get these updates included in future recompilations.  DO
+NOT modify the {\tt includeDB} file in the compiling directories; they
+are automatically generated from the master file in {\tt
+\$(HOME)/self}.  The {\tt includeDB} file contains an entry for every
+{\tt \#include} dependency from one file to another.  No source files
+directly include any dependencies, except for {\tt .c} and {\tt .s}
+files which must include the single line
+\bq
+{\tt \#include "file.[cs].incl"}
+\eq
+{\tt make includeDB} generates a {\tt file.[cs].incl} file and a {\tt
+file.[cs].dep} file for each source file; the latter are read in to
+the {\tt Makefile} to reflect inter-file dependencies for {\tt make}.
+
+\Ditem{{\tt make touch}}
+This command does a {\tt touch} on all {\tt .o} and other
+compilation-related output files in the directory.  Useful after a
+{\tt make publish}.
+
+\Ditem{{\tt make backup}}
+Calls the {\tt Backup} script for all source files.  Pretty old.
+
+\Ditem{{\tt make files}}
+Makes all the {\tt .o} files but doesn't do the link step.  Useful for
+a bunch of {\tt make}s run in parallel.  A {\tt make Self} command
+should be run on one machine to do the actual linking.
+
+Parallel makes are automatically managed by the makefiles so that only
+one machine compiles any particular file. This is implemented by
+creating a lock file for each file as the compile begins, and avoiding
+compiling already-locked files (see the {\tt lock\_run} program and
+the {\tt Makefile} for details).
+
+A naked {\tt make} (not {\tt make Self}) removes all old lock files
+first, so a naked {\tt make} shouldn't be done if there's already an
+existing {\tt make files} running in that directory.
+
+\Ditem{{\tt make clean}}
+This removes all automatically-generated files from a directory.
+
+\Ditem{{\tt make convertToUWRevs} and {\tt make convertToSunRevs}}
+Things that Craig runs to transfer files between Sun/Stanford and UW.
+
+\Ditem{{\tt make selfWorkingTree}}
+\Ditem{{\tt make vmWorkingTree}}
+\Ditem{{\tt make cecilWorkingTree}}
+Builds a fresh new working tree directory structure for a new person.
+Run {\tt make update} afterwards to fill it in with files.  The first
+command builds something for people who just want to write and run
+Self programs.  The second builds the full working tree for people who
+want to modify the Self virtual machine implementation.  The third
+command is useful for people who want to run or modify the Cecil
+interpreter, written in Self.
+
+\Ditem{{\tt make tags}}
+Makes a tags file from the sources.
+
+\Ditem{{\tt make ftp}}
+Used to ftp a new release of the system to the appropriate place.
+
+\end{description}
+
+
+\section{How to add or delete a file}
+Put the file in a source directory.  New files should NOT be created
+in the compilation directories {\tt
+\$(HOME)/self/sun[34]/\{debug,optimized,profiled\}}, which is where
+all the soft links are made.  At the beginning of the file, put a line
+that looks like:
+\bq
+	{\tt /* \$Revision\$ */}
+\eq
+This line will be filled in with a revision number when you publish the file.
+
+You must also include {\tt \#pragma} lines.  The {\tt \#pragma}s are
+entered by hand and are commands to GNU gcc to avoid duplicating
+symbols and other stuff in every {\tt .c} file that {\tt \#include}s a
+{\tt .h} file.  Each {\tt .h} file (almost) should have a {\tt
+\#pragma interface} line (all except those read by the assembler,
+which doesn't like {\tt \#pragma}s), and exactly one {\tt .c} file
+should have a {\tt \#pragma implementation} for each header file.  A
+{\tt \#pragma} line looks like the following:
+\bq
+	{\tt\# pragma implementation "file.h"} (in {\tt file.c} file)
+
+	{\tt \# pragma interface}  (in {\tt file.h} file)
+\eq
+
+Add the new file to the list of files in the {\tt Makefile} in that
+source directory.  Then add the headers that it will use into {\tt
+\$(HOME)/self/includeDB}.  Now do {\tt make lists} (this runs {\tt
+make includeDB} automatically at the end).  Whenever you make changes
+to the file, do a {\tt make}.  Whenever you add or remove an include
+dependency, do {\tt make includeDB}, then {\tt make}.
+
+If you delete a file, remove its lines from the original {\tt includeDB}
+(in {\tt \$(HOME)/self}) and run {\tt make lists} and {\tt make}.
+
+\section{{\tt MachineName} files}
+Located typically in {\tt \$(HOME)/bin} are the following files: 
+\begin{itemize}
+ \item {\tt compileMachineNames}
+
+ \item {\tt linkMachineName}
+
+ \item {\tt nicedCompiledMachineNames}
+
+ \item {\tt nicedLinkMachineName}
+\end{itemize}
+These files contain the names of the machines used in a parallel make.
+
+\section{Useful Programs}
+\begin{description}
+\Ditem{{\tt mf}}
+{\tt mf} does a parallel make on a group of machines.  The machines to
+use are derived by running the various {\tt MachineName} scripts
+described above.  In order to stop a parallel make, use {\tt mzap}
+below.
+
+\Ditem{{\tt mzap} and {\tt zap}}
+Typing {\tt zap make} kills a {\tt make} on the current machine.  {\tt
+mzap} does an {\tt rsh} to all machines and runs {\tt zap make} on each
+machine.  {\tt mzap} is used to stop a parallel make started by {\tt
+mf}.
+
+\end{description}
+
+
+\section{Compiling Self tricks}
+\begin{enumerate}
+
+\item
+Just changing {\tt debug.h} to add new user changeable variables.
+It's only necessary to recompile {\tt debug.o}, {\tt prim.o}, and {\tt
+oop.o}.  Touch the appropriate files to prevent a massive
+recompilation.
+
+\end{enumerate}
+
+\section{Updating Notes}
+There are a few source files that are generated automatically by the
+Self primitive maker program.  These files include {\tt *.primMaker.h}
+and {\tt *.wrappers.self} files.  (They all have a comment at the top
+saying they're machine generated.)  These files do not have revision
+numbers automatically-generated for them.  This means that if they're
+changed (by running the primitive maker on a new set of templates),
+then {\tt make update} won't be able to figure out what to do.  It
+reports a message like "bad revision numbers" and then asks if you
+want to update anyway.
+
+If you haven't changed the file, then it's pretty likely that the
+change is due to someone else changing the baseline version, and you
+want to get their changes, so you normally answer {\tt y} to this
+question.
+
+If for some reason you have changed the file (because you added,
+changed, and/or removed some glue primitives to the system), then
+you'll get this message too, but you won't want to throw away all your
+local changes, so you say {\tt n} to the question.  Since someone else
+might have changed the file too, in this case you need to manually run
+diff on the two files to see if there are any other changes you need
+to incorporate in your local version of the file.  Or you can just
+re-run the primitive maker to regenerate your file after answering
+{\tt y} to the question.
+
+If in doubt, answer {\tt y}, and then do a {\tt make browse} or a {\tt
+diff} to see what happened, and manually get the files correct.
+
+\section{Publishing Notes}
+When publishing a set of revisions you should generally follow the
+following steps:
+\begin{enumerate}
+\item Do a {\tt make update} in your {\tt ~/self} directory, to ensure
+that you have the latest set of revisions.
+
+\item Compile all 3 versions of the compiler for the Sun-4.  These are
+found in {\tt ~/self/sun4/\{debug,optimized,profiled\}}.
+
+\item Test your revisions sufficiently to ensure they are working
+correctly.  At a minimum, this involves running {\tt tests runSuite}
+from the Self prompt in the debug and optimized versions.  It's
+important to run the debug version of the tests because the {\tt
+assert}ions in that version will detect many problems that might not
+arise using the optimized version.  If the changes were substantial,
+you should run the test suite in all three versions of the compiler.
+The optimized version should be run too because this is the version
+that is used for demos and by people who just want to use Self rather
+than modify it.
+
+\item If you have other tests that you feel are appropriate, run
+these to ensure that they give the expected results.  If you feel
+these are generally useful, consider adding them to the test suite.
+
+\item Do a {\tt make compare} in {\tt ~/self} to ensure that the
+changes you made are sensible and that you aren't publishing code in
+an unclean state (commented out debugging code, unused variables,
+etc).  Make sure that it is clear what your changes do, either
+directly from the code or from comments.
+
+\item Once you are confident that your revisions work correctly, type 
+{\tt make publish} in {\tt ~/self}.  This will check in all the
+modified files to the baseline version of the system.
+
+\item Send mail to the other implementors at your site notifying them
+of the new version so that they can update.
+\end{enumerate}
+
+\section{Snapshots}
+This stuff is all described in much more detail in the Self manual.
+
+\begin{enumerate}
+
+\item You create a snapshot with the command {\tt 'all' run} followed
+by {\tt 'ws'}.
+
+\item
+Load a snapshot in a couple of ways:
+
+\begin{enumerate}
+
+\item Use {\tt Snapshot} instead of {\tt Self} to start up the system.
+
+\item Use {\tt rs} from the Self prompt.  Short for {\tt 'Snapshot'
+\_ReadSnapshot} (sort of).
+
+\end{enumerate}
+
+\end{enumerate}
+
+\section{Tests and Benchmarks}
+\begin{enumerate}
+\item
+To test the system, start {\tt Self}, read in the world ({\tt 'all'
+run}), create a snapshot ({\tt ws}), and evaluate {\tt tests
+runSuite}.  This will run tons of Self code and do a pretty good test
+of the system.  It takes a while, though.  If you're running Self on
+the Sun workstation at your desk (i.e., not remotely on another
+machine), then you can test the UI by evaluating {\tt ui test}.
+
+\item
+
+Run benchmarks with the {\tt benchmarks measurePerformance} command.
+This will run the basic benchmarks suite.  There are also other
+benchmark suites in the benchmarks library:
+
+\bq
+{\tt coreSuite} - Just the Stanford integer benchmarks (nice and small)
+
+{\tt largeSuite} - Suite of large program which take a long time to compile
+
+{\tt measuringSuite} - all benchmarks
+\eq
+
+An example of running one of these suites is:
+\begin{small}
+\bq
+     {\tt benchmarks measurePerformanceOf: benchmarks measuringSuite}
+\eq
+\end{small}
+
+When running any of the suites with the large programs which take a
+while to compile, it is best to set {\tt \_MaxCompilePause: 300000}
+(or some large number) and {\tt \_MaxCompilerResourceUsage: 15 * 1024
+* 1024}.  This will prevent compilations from running out of time
+and/or space and taking forever to execute because bad code is
+generated.
+
+If you're running benchmarks and then want to re-run them, you must do
+a {\tt \_Flush} if you want the compilation times to be accurate, or if you
+have changed some parameters which affect the compiler.  This will
+force the compiler to recompile everything.
+
+\item
+
+If you want to use the inlining compiler (slower to compile but
+generated code is faster), you have to set {\tt \_FirstCompiler:
+'new'}.  If you want the non-inlining compiler (the nic), the new
+compiler after so many executions of any given method), you should say
+{\tt \_FirstCompiler: 'nic'}.  I generally leave the compiler set to
+{\tt 'nic'} and modified my {\tt benchmarks.self} file to turn on the
+new compiler just before it runs a benchmark and turn it back off
+again when it finishes.  Otherwise, things slow down pretty badly.
+Additionally, if you set {\tt
+\_FirstCompiler: 'nic'} but do not set {\tt \_Recompiler: 'none'},
+then the system will automatically recompile methods with the new
+compiler after they have been called 10,000 times (settable by a debug
+parameter; see the manual or {\tt debug.h}).  If you do not want any
+recompilations of this sort, set {\tt \_Recompiler: 'none'}.  But why
+wouldn't you?
+\end{enumerate}
+
+\section{Profiling}
+
+To make a profile of your system (using the profiled version of Self):
+\bq
+\begin{tt}
+\begin{verbatim}
+VM# _VMProfiling: true
+VM# [ ... ] value
+VM# _VMProfiling: false
+VM# _Quit
+
+;; this creates gmon.out, a gprof data file
+
+;; now put profile data in a nice form
+lutefisk% profile [output file name, defaults to Profile]
+\end{verbatim}
+\end{tt}
+\eq
+
+\section{Self Subdirectory Contents}
+\begin{description}
+\Ditem{{\tt memory}}
+\bq
+	Object representations
+
+	g.c. (various types:  generational scavenging and mark and sweep)
+
+		and heap spaces
+\eq
+\Ditem{{\tt fast\_compiler}}
+\bq
+    	The nic compiler implementation
+
+	unoptimized compiler
+
+	works on SPARC and Sun-3
+\eq
+\Ditem{{\tt new\_compiler}}
+\bq
+	new optimizing compiler
+
+	runs only on SPARC
+\eq
+\Ditem{{\tt asm}}
+\bq
+	back end assembler
+\eq
+\Ditem{{\tt zone}}
+\bq
+	``nmethods'' = native code methods, compiled, as in [Deutch-Schiffman]
+
+	``nmln'' = nmethod link, implementation of dependency links
+		(doubly linked list)
+
+	``codeTable'' = optimizes method lookup if method not found in lookup
+		hash table
+\eq
+\Ditem{{\tt parser}}
+\bq
+	recursive descent parser, handwritten for Self
+
+	constructs objects from text and stores them in the heap
+\eq
+\Ditem{{\tt lookup}}
+\bq
+	definitions for method lookup
+
+	inline caching
+\eq
+\Ditem{{\tt runtime}}
+\bq
+	runtime support (asm glue, which ties compiled code and C++ together)
+
+	stack frames
+
+	multiple processes
+\eq
+\Ditem{{\tt prims}}
+\bq
+	system primitives
+\eq
+\Ditem{{\tt altered}}
+\bq
+	system .h files changed by Self group
+\eq
+\Ditem{{\tt self}}
+\bq
+	Self code
+\eq
+\Ditem{{\tt sun[34]}}
+\bq
+	{\tt debug}
+
+	{\tt optimized}
+
+	{\tt profiled} - optimized and profiled
+\eq
+\Ditem{{\tt mac}}
+\bq
+	mac OS port - dead
+\eq
+\Ditem{{\tt doc}}
+\bq
+	various short documents
+\eq
+\Ditem{{\tt bin}}
+\bq
+        {\tt shell} - supporting shell scripts
+
+	{\tt src} - C/C++ source code for other support programs
+
+	{\tt sun[34]} - binaries generated from src
+\eq
+\Ditem{{\tt applications}}
+\bq
+	A place for Self applications that aren't part of the kernel
+release, such as the Cecil interpreter.
+\eq
+\end{description}
+
+\section{Other Ideas}
+\begin{itemize}
+\item gdb
+\item style sheet
+\item running and adding test suites
+\end{itemize}
+
+\end{document}

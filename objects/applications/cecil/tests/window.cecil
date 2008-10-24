@@ -1,0 +1,74 @@
+-- Sun-$Revision: 9.1 $
+
+-- This file is an illustration of predicate objects in Cecil.
+-- In particular, it illustrates associating fields with predicate objects.
+
+
+object window;
+field iconified(@window) := true;
+
+field position(@window) { abstract }
+field size(@window) { abstract }
+
+method move(w@window, delta) { 
+    clear(w); w.position := w.position + delta; display(w); }
+
+method display(w@window) {
+    ((("displaying window at position " || w.position.print_string) ||
+       " of size ") || w.size.print_string).print_line;
+}
+
+method clear(w@window) {
+    ((("clearing window at position " || w.position.print_string) ||
+       " of size ") || w.size.print_string).print_line;
+}
+
+
+pred open_window isa window when not(window.iconified);
+
+field position(@open_window);
+field size(@open_window);
+field window_text(@open_window);
+
+method iconify(w@open_window) { clear(w); w.iconified := true; display(w); }
+
+
+pred iconified_window isa window when window.iconified;
+
+field position(@iconified_window);
+field size(@iconified_window);
+field icon_bitmap(@iconified_window);
+
+method open(w@iconified_window) { clear(w); w.iconified := false; display(w); }
+
+
+method new_window(open_position, open_size, window_text, 
+       		  iconified_position, iconified_size, icon_bitmap) {
+    var w := object isa window {
+	position@open_window := open_position, 
+	size@open_window := open_size, 
+	window_text := window_text,
+	position@iconified_window := iconified_position, 
+	size@iconified_window := iconified_size, 
+	icon_bitmap := icon_bitmap,
+	iconified := false };
+    w.display;
+    w }
+
+method window_test_prelude() {
+    "The following tests exercise predicate objects".print_line;
+}
+
+method window_test() {
+    var w := new_window(new_pair(0,0), new_pair(80,20), "window text",
+    			new_pair(-10,-10), new_pair(10,10), "10010110");
+    window_test_prelude();
+    "Starting window test NOW...".print_line;
+    w.iconify;
+    move(w,new_pair(-20,-40));
+    w.open;
+    move(w,new_pair(30,10));
+    "Done with window test.".print_line;
+    w }
+
+

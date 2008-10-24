@@ -1,0 +1,211 @@
+(* Smalltalk grammar file for Mango *)
+
+(* Copyright 1995-2006 Sun Microsystems, Inc. *)
+(* See the LICENSE file for license information. *)
+
+(* $Revision: 30.6 $ *)
+
+Name:     'smalltalk'
+Behavior: 'applications/smalltalk/smalltalk_behavior.self'
+
+Syntax: LALR(1)
+Transformations: 'elimEpsilons', 'elimSingletons';
+
+<method>		::=	<messagePattern> <primitiveOpt> <temporariesOpt> <statementsOpt> ;
+
+
+<messagePattern> 	::|	<unaryPattern> <binaryPattern> <keywordPattern> ;
+
+<unaryPattern>		::=	<unarySelector> ;
+
+<binaryPattern>		::=	<binarySelector> <argument> ;
+
+<keywordPattern>	::+	<keywordAndArg> ;
+
+<keywordAndArg>		::=	<keyword> <argument> ;
+
+
+<primitiveOpt>		::?	<primitive> ;
+
+<primitive>		::=	'<' 'primitive:' {string} '>' ;
+
+
+<temporariesOpt>	::?	<temporaries> ;
+
+<temporaries>		::=	'|' <temporaryList> '|' ;
+
+<temporaryList>		::*	<temporary> ;
+
+
+<statementsOpt>		::?	<statements> ;
+
+<statements>		::|	<returnStatement> <statementList> ;
+
+<statementList>		::=	<expression> <thenStatementsOpt> ;
+
+<thenStatementsOpt>	::?	<thenStatements> ;
+
+<thenStatements>	::=	'.' <statementsOpt> ;
+
+<returnStatement>	::=	'^' <expression> <periodOpt> ;
+
+<periodOpt>		::?	'.' ;
+
+
+<expression>		::|	<assignment> <messageExpr> ;
+
+<messageExpr>		::=	<keywordExpression> <cascades> ;
+
+<cascades>		::*	<cascade> ;
+
+<cascade>		::=	';' <message> ;
+
+<receiver>		::|	<super> <primaryAsRcvr> ;
+<super>			::=	'super' ;
+<primaryAsRcvr>		::=	<primary> ; (* for mango *)
+
+<message>		::|	<unaryMessage> <binaryMessage> <keywordMessage> ;
+
+<unaryMessage>		::=	<unarySelector> ;
+
+<unaryMessages>		::*	<unarySelector> ;
+
+<unaryExpression>	::=	<receiver> <unaryMessages> ;
+
+<binaryMessages>	::*	<binaryMessage> ;
+
+<binaryMessage>		::=	<binarySelector> <unaryExpression> ;
+
+<binaryExpression>	::=	<unaryExpression> <binaryMessages> ;
+
+<keywordMessage>	::+	<keywordPart> ;
+<keywordMessageOpt>	::*	<keywordPart> ;
+<keywordPart>		::=	<keyword> <binaryExpression> ;
+
+<keywordExpression>	::=	<binaryExpression> <keywordMessageOpt> ;
+
+
+<assignment>		::=	<variable> <assignmentOp> <expression> ;
+
+<assignmentOp>		::|	':=' '_' ;  (* underscore for GNU Smalltalk and old stuff *)
+
+<primary>		::|	<variable> <pseudoVariable> <literal> <block> <parenExpr> ;
+
+<parenExpr>		::=	'(' <expression> ')' ;
+
+
+<block>			::=	'[' <blockDeclsAndOrStatements> ']' ;
+
+(* need to cope with [:a] and [:a|...] *)
+<blockDeclsAndOrStatements> ::|	<blockArgList> <blockDeclsAndStatements> ;
+
+<blockArgList>		::+	<blockArg> ;
+
+<blockArg>		::=	':' {identifier} ;
+
+<blockDeclsAndStatements> ::=	<blockArgsAndTemps> <statementsOpt> ;
+
+<blockArgsAndTemps>	::|	<separateBlockArgsAndTemps> <joinedBlockArgsAndTemps> ;
+
+<separateBlockArgsAndTemps> ::= <blockArgsOpt> <temporariesOpt> ;
+
+<joinedBlockArgsAndTemps> ::=	<blockArgList> '||' <temporaryList> '|' ;
+
+<blockArgsOpt>		::?	<blockArgsBar> ;
+
+<blockArgsBar>		::=	<blockArgList> '|' ;
+
+
+<pseudoVariable>	::|	'self' 'thisContext' ;
+
+<literal>		::|	<number> <namedLiteral> <symbol> {character} {string} <literalArray> ;
+
+<literalArray>          ::|     <array> <byteArray> ;
+
+<number>		::|	{float} <integer> ;
+
+<namedLiteral>		::|	'nil' 'true' 'false' ;
+
+
+<symbol>		::=	'#' <symbolText> ;
+
+<symbolText>		::|	<identifierSymbol> <binarySelectorSymbol> <keywordSelectorSymbol> <stringSymbol> ;
+(* for mango *)
+<identifierSymbol>	::|	{identifier} <pseudoVariable> <super> <namedLiteral> ;
+<binarySelectorSymbol>	::=	<binarySelector> ;
+<keywordSelectorSymbol> ::=	<keywordSelector> ;
+<stringSymbol>		::=	{string} ;
+
+
+<array>			::=	'#' <arrayBody> ;
+
+<arrayBody>		::=	'(' <arrayItems> ')' ;
+
+<arrayItems>		::*	<arrayItem> ;
+
+<arrayItem>		::|	<literalArrayItem> <identifier2> <binarySelector> <keywordSelector> <arrayBody> <byteArrayBody> <pseudoVariable2> ;
+<identifier2>		::=	{identifier} ;
+<pseudoVariable2>	::=     <pseudoVariable> ;
+<literalArrayItem>	::=	<literal> ; (* for mango *)
+
+<byteArray>		::=	'#' <byteArrayBody> ;
+
+<byteArrayBody>		::=	'[' <posIntegerList> ']' ;
+
+<posIntegerList>	::*	{posInteger}  (* (0,255) *) ;
+
+
+<variable>		::=	{identifier} ;
+
+<argument>		::=	{identifier} ;
+
+<temporary>		::=	{identifier} ;
+
+<unarySelector>		::=	{identifier} ;
+
+<keywordSelector>	::|	{keyword} {multiKeywordSelector} ;
+
+<integer>		::|	{negInteger} {posInteger} ;
+
+<keyword>		::|	{keyword} 'primitive:' ;
+
+<binarySelector>	::|	{binarySelector} '|' '||' '<' '>' '-' ;
+
+
+
+(******************************* Lex part ************************************)
+
+Lex:  LALR(1)
+Transformations: 'elimEpsilons', 
+                 'elimSingletons',
+                 'useCharClasses' ;
+
+  {identifier}         	-> {letter} ({letter} | {digit})* 			;
+  {keyword}		-> {identifier}':' 					;
+  {multiKeywordSelector}-> {keyword} {keyword}+					;
+  {binarySelector}	->   {binaryChar} 
+		           | ( ({binaryChar} | [<>\-]) ({binaryChar} | [<>|])) 
+		           | ( '|' ({binaryChar} | [<>] )) 		;
+  {character}		-> '$'({nonQuoteChar} | ['"])			;
+  {string}		-> '\'' ({nonQuoteChar} | '\'\'' | '"')* '\''		;
+  {comment}		=  '"' ({nonQuoteChar} | '\'' )* '"'			;
+  {realWhitespace}     	=  [ \t\f\r\n]+ 						;		
+  {whitespace}		-> ({comment} | {realWhitespace})+			;
+  {digits}		= {digit}+ 						;
+  {bigDigits}		= {bigDigit}+ 						;
+  {float}		-> '-'? {digits}
+  			   ( 'r' '-'? {bigDigits} '.' {bigDigits} ([eEdD] '-'? {digits})?
+			   | '.' {digits} ([eEdD] '-'? {digits})? )		;
+  {posInteger}		-> {digits} ( 'r' '-'? {bigDigits} )?			;
+  {negInteger}		-> '-' {posInteger}					;
+
+(* character classes *)
+
+  {letter}      =  [a-zA-Z] ;
+  {digit}       =  [0-9] ;
+  {bigDigit}    =  [0-9a-fA-F] ;
+  {binaryChar}	=  [+/\\*~=@%&?!,]			 		;
+  {nonQuoteChar}=  {digit} | {letter} | {binaryChar} | [<>| \t\r\n[\]{}()_^;$#:.\-`] ;
+
+
+

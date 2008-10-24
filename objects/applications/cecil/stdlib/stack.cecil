@@ -1,0 +1,16 @@
+-- Sun-$Revision: 9.1 $
+
+-- methods for stacks
+
+type stack[T] isa collection[T];
+private field elems(@:stack[`T]):list[T] := nil;
+method length(s@:stack[`T]):integer { s.elems.length }
+method is_empty(s@:stack[`T]):boolean { s.elems.is_empty }
+method do(s@:stack[`T], closure:&(T):void):void { do(s.elems, closure); }
+method push(s@:stack[`T], x:T):void { s.elems := cons(x, s.elems); }
+method pop(s@:stack[`T]):T {
+    var x:T := s.elems.head;
+    s.elems := s.elems.tail;
+    x }
+method top(s@:stack[`T]):T { s.elems.head }
+method collection_name(@:stack[`T]):string { "stack" }

@@ -1,0 +1,73 @@
+#!/bin/sh
+
+# Copyright 1995 Sun Microsystems, Inc.
+# See the LICENSE file for license information.
+
+# script to edit globals, traits, mixins path names for files
+# that use old organisation (objects for categories).
+
+# usage:  edglobals source.self >newsource.self
+
+sed \
+-e 's/globals system systemInvokedActions/globals/g' \
+-e 's/globals system foreign/globals/g' \
+-e 's/globals system annotations/globals/g' \
+-e 's/globals system characters/globals/g' \
+-e 's/globals collections sorted treeNodes/globals/g' \
+-e 's/globals collections sorted trees/globals/g' \
+-e 's/globals collections vectors/globals/g' \
+-e 's/globals collections ordered/globals/g' \
+-e 's/globals collections sorted/globals/g' \
+-e 's/globals collections unordered/globals/g' \
+-e 's/globals applications/globals/g' \
+-e 's/globals system/globals/g' \
+-e 's/globals windowing/globals/g' \
+-e 's/globals collections/globals/g' \
+-e 's/globals graphics/globals/g' \
+-e 's/globals io/globals/g' \
+-e 's/globals ui2/globals/g' \
+-e 's/globals animation/globals/g' \
+-e 's/globals userInterface/globals/g' \
+-e 's/globals bench/globals/g' \
+-e 's/traits collections vectors/traits/g' \
+-e 's/traits collections ordered/traits/g' \
+-e 's/traits collections sorted/traits/g' \
+-e 's/traits collections unordered/traits/g' \
+-e 's/traits applications/traits/g' \
+-e 's/traits collections/traits/g' \
+-e 's/traits system annotations/traits/g' \
+-e 's/traits system foreign/traits/g' \
+-e 's/traits system  roots/traits/g' \
+-e 's/traits system/traits/g' \
+-e 's/traits windowing/traits/g' \
+-e 's/traits animation/traits/g' \
+-e 's/traits graphics/traits/g' \
+-e 's/traits io/traits/g' \
+-e 's/traits userInterface/traits/g' \
+-e 's/traits ui2/traits/g' \
+-e 's/mixins applications/mixins/g' \
+-e 's/mixins system/mixins/g' \
+-e 's/mixins standard/mixins/g' \
+-e "s/ -> 'animation'//g" \
+-e "s/ -> 'annotations'//g" \
+-e "s/ -> 'applications'//g" \
+-e "s/ -> 'bench'//g" \
+-e "s/ -> 'characters'//g" \
+-e "s/ -> 'collections'//g" \
+-e "s/ -> 'foreign'//g" \
+-e "s/ -> 'graphics'//g" \
+-e "s/ -> 'io'//g" \
+-e "s/ -> 'ordered'//g" \
+-e "s/ -> 'roots'//g" \
+-e "s/ -> 'sorted'//g" \
+-e "s/ -> 'standard'//g" \
+-e "s/ -> 'system'//g" \
+-e "s/ -> 'systemInvokedActions'//g" \
+-e "s/ -> 'treeNodes'//g" \
+-e "s/ -> 'trees'//g" \
+-e "s/ -> 'ui2'//g" \
+-e "s/ -> 'unordered'//g" \
+-e "s/ -> 'userInterface'//g" \
+-e "s/ -> 'vectors'//g" \
+-e "s/ -> 'windowing'//g" \
+$*

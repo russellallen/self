@@ -1,0 +1,107 @@
+#! /bin/csh -f
+
+# Sun-$Revision: 30.8 $
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+# compares files in the current directory to the files in the baseline
+# directory
+
+set nonomatch
+
+set basedir = $SELF_BASELINE_DIR
+set rootdir = $SELF_WORKING_DIR
+
+set arch=`get_arch`
+
+# must set path so doesn't use linked from this dir
+set path=($basedir/bin/{$arch,shell} $path)
+
+set copyfn = cp
+
+unalias pushd popd
+
+set binaries = ()
+
+while ($#argv > 0)
+    switch ("$1")
+	case "-d":
+	    # set root directory name
+	    shift
+	    if ($#argv == 0) goto usage
+	    set rootdir = $1
+	    breaksw
+        case "-b":
+	    # binary
+	    shift
+	    if ($#argv == 0) goto usage
+            set binaries = ($binaries $1)
+	    breaksw
+	case "-h":
+	    # print out usage information
+	    goto usage
+	case "-":
+	    # assume all remaining arguments are files to be updated
+	    shift
+	    break
+	case "-?":
+	    # ignore all other switches
+	    echo "warning: switch $1 ignored"
+	    breaksw
+	default:
+	    # assume all remaining arguments are files to update
+	    break
+    endsw
+    shift
+end
+
+if (! -d $rootdir) then
+    echo "$rootdir is not a directory; aborting"
+    exit -1
+endif
+set subdir = `cwdRootedIn $rootdir`
+if ( $status != 0) then
+  exit 1
+endif
+
+set dir = $basedir/$subdir
+
+set files = ($*)
+
+if ($?print) then
+  echo "bin:   " $binaries
+  echo "files: " $files
+endif
+
+# Compute existing files in ($files $binaries)
+set present_files = ()
+foreach workfile ($files $binaries)
+    if (! -e $workfile) then
+	echo "warning: $workfile does not exist; ignoring"
+	continue
+    endif
+    set basefile = $dir/$workfile
+    if (! -e $basefile) then
+	echo "warning: $basefile does not exist; ignoring"
+	continue
+    endif
+    set present_files = ($present_files $workfile)
+end
+
+if ( ! $?COMPAREPROG ) set COMPAREPROG=diff
+
+foreach workfile ($present_files)
+    set basefile = $dir/$workfile
+    PublishCompare $basefile $workfile
+    if ($status != 0) then
+      echo $basefile VS $workfile
+      $COMPAREPROG $basefile $workfile
+      echo ''
+    endif
+end
+exit
+
+usage:
+    echo "usage: Compare [-d rootdir] {-b bin} [-] [file...]"
+    echo "   or: Compare -h"

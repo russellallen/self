@@ -1,0 +1,121 @@
+-- "Sun-$Revision: 9.1 $"
+-- load("loop.tst.cecil");
+
+method loop_tests() {
+       print_line("*** loop.tst.cecil ***");              
+       if( loop_test1() != 1 , {  print("***test1 fail***"); });
+       if( loop_test2() != "abc" , { print("***test2 fail***"); });
+       if( loop_test4() != 0 , { print("***test4 fail***"); });
+       if( loop_test5() != 100 , { print("***test5 fail***"); });
+       if( loop_test6() != 0 , { print("***test6 fail***"); });
+       if( loop_test12() != 400 , { print("***test12 fail***"); });
+       if( loop_test13() != "done", { print("***test13 fail***"); });
+       if( loop_test_nested_loop() != "ok", { print("***test_nested_loop fail***"); });
+       print_line("done");
+}
+
+method loop_test1() {
+(--
+	var a := object inherits array { length := 4, initial_value := 0 };
+--)
+        var a := new_array[integer](4,0);
+	var blk := &(i) { a ! i := i; };
+	do(3, blk);
+	a ! 1
+}
+
+-- loop_test1();
+-- 1
+
+method loop_test2() {
+(--
+	var a := object inherits array { length := 4, initial_value := 0 };
+--)
+	var a := new_array[integer](4,0);
+	eval ({ a ! 2 := "abc"; });
+	a ! 2
+}
+
+-- loop_test2();
+-- "abc"
+
+method loop_test4() {
+(--
+	var a := object inherits array { length := 4, initial_value := 100 };
+--)
+	var a := new_array[integer](4,100);
+	var blk := &(i) { a ! i := i; ^a ! i };
+	do(3, blk);
+}
+
+-- loop_test4();
+-- 0 
+
+method loop_test5() {
+(--
+	var a := object inherits array { length := 4, initial_value := 100 };
+--)
+	var a := new_array[integer](4,100);
+	var blk := &(i) { a ! i := i; };
+	do(1, blk);
+	a ! 2
+}
+
+-- loop_test5();
+-- 100 
+
+method loop_test6() {
+(--
+	var a := object inherits array { length := 4, initial_value := 100 };
+--)
+	var a := new_array[integer](4,100);
+	var blk := &(i) { a ! i := i; };
+	do(1, blk);
+	a ! 0
+}
+
+-- loop_test6();
+-- 0    
+
+method loop_test12() {
+(--
+	var a := object inherits array { length := 4, initial_value := 100 };
+--)
+	var a := new_array[integer](4,100);
+	var i := 0;
+	var blk := &(elem){ i := i + elem; };
+	do(a, blk);
+	i
+}
+
+-- loop_test12();
+-- 400
+
+method loop_test13() {
+(--
+	var a := object inherits array { length := 4, initial_value := 100 };
+--)
+	var a := new_array[integer](4,100);
+	var blk := &(i) { a ! i := i; print(a ! i); };
+	do(4, blk);
+	"done"
+}
+
+-- loop_test13();
+-- 0, 1, 2, 3 printed out and returns "done"
+
+method loop_test_nested_loop() {
+    do(3, &(k){
+    	"starting ".print;
+	k.basic_print_string.print_line;
+	do(4, &(l){
+	    "\t".print;
+	    k.basic_print_string.print;
+	    "; ".print;
+	    l.basic_print_string.print_line;
+	});
+    	"ending ".print;
+	k.basic_print_string.print_line;
+    });
+    "ok"
+}

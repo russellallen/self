@@ -1,0 +1,118 @@
+#! /bin/csh -f
+
+# Sun-$Revision: 30.6 $
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+# run a sed script (defaulting to ~/bin/sedscript) over files in the current
+# directory (or a list of directories within working self tree),
+# printing differences
+
+onintr cleanup
+
+set perform
+set sedscript = ~/bin/sedscript
+set homedir = $SELF_WORKING_DIR
+
+while ($#argv > 0)
+  switch ("$1")
+    case "-n":
+      # like make -n, just print out what would be done, but don't do it
+      unset perform
+      breaksw
+    case "-a":
+      # set directory list to base source directories
+      set dirs = (`source_dirs`)
+      breaksw
+    case "-d":
+      # add to directory list
+      shift
+      if ($#argv == 0) goto usage
+      if ($?dirs) then
+	set dirs = ($dirs $1)
+      else
+	set dirs = $1
+      endif
+      breaksw
+    case "-s":
+      # define sedscript name
+      shift
+      if ($#argv == 0) goto usage
+      set sedscript = $1
+      breaksw
+    case "-q":
+      # don't print out differences
+      set quiet
+      breaksw
+    case "-h":
+      # print out usage information
+      goto usage
+    case "-?":
+      # ignore unknown switches
+      echo "warning: switch $1 ignored"
+      breaksw
+    default:
+      # provide an initial file name to begin with
+      set start = $1
+      breaksw
+  endsw
+  shift
+end
+
+if (! $?dirs) then
+  set dirs = .
+endif
+
+foreach d ($dirs)
+  if ("$d" != ".") then
+    echo $d...
+    pushd $homedir/$d > /dev/null
+  endif
+  foreach f (*.{c,h,s,self} Makefile*)
+    if ($?start) then
+      if ($start == $f) then
+	unset start
+      else
+	continue
+      endif
+    endif
+    echo $f
+    if ($?perform) then
+      mv $f $f.OLD
+      sed -f ~/bin/sedscript $f.OLD > $f
+      if ({ cmp -s $f.OLD $f }) then
+	mv $f.OLD $f
+      else if (! $?quiet) then
+	diff $f.OLD $f
+      endif
+    else
+      sed -f ~/bin/sedscript $f > $f.TMP
+      if (! $?quiet) diff $f $f.TMP
+      rm $f.TMP
+    endif
+  end
+  if ("$d" != ".") then
+    echo ""
+    popd > /dev/null
+  endif
+end
+exit
+
+cleanup:
+if ($?f) then
+  if (-e $f.OLD) then
+    echo ""
+    echo Restoring $f
+    mv $f.OLD $f
+  endif
+  if (-e $f.TMP) then
+    rm $f.TMP
+  endif
+endif
+exit
+
+usage:
+echo "usage:  Script [-n] [-q] [-a] [-s sedscriptname] {-d directory} [file]"
+echo "   or:  Script -h"
+exit -1

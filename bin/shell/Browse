@@ -1,0 +1,13 @@
+#! /bin/csh -f
+# Sun-$Revision: 30.6 $
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+foreach f (*)
+    if (! -e $f.OLD) continue
+    echo "*** $f ***" '( < OLD; > NEW)'
+    diff $f.OLD $f | more
+    echo -n "End of $f (hit <cr> to continue) ... "
+    set answer = $<
+end

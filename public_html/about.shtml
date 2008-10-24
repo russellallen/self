@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>About Self</TITLE>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</HEAD>
+<BODY>
+
+<div class="main_body">
+
+<h1>About Self</h1>
+
+<h2>The story</h2>
+
+<p>In 1995 the <A HREF="group.shtml">Self Group</A> at <A HREF="http://research.sun.com">Sun Microsystems Laboratories, Inc.</A>, and <A HREF="http://www.stanford.edu">Stanford University</A> made available Release 4.0 of the experimental object-oriented programming language Self. Although Self is no longer an official project at Sun Microsystems Laboratories, we have seen many of Self's innovations adopted. The Morphic GUI framework has been incorporated into <a href="http://squeak.org">Squeak</a>, and the virtual machine ideas provided the initial inspiration for the <a href="http://java.sun.com/javase/technologies/hotspot/">Java&#153; HotSpot&#153;</a> performance engine. However, the language and programming environment have yet to be mined for ideas.</p>
+
+<h2>The language</h2>
+
+<p>Designed for expressive power and malleability, Self combines a pure, prototype-based object model with uniform access to state and behavior. Unlike other languages, Self allows objects to inherit state and to change their patterns of inheritance dynamically.</p>
+
+<p>Here are some sources for more information about the Self language:
+  <ul>
+    <li><a href="papers/self-power.shtml">Self: The Power of Simplicity</a> explains the ideas behind Self and gives a brief language overview.</li>
+    <li><a href="papers/programming-as-experience.shtml">Programming as an Experience: The Inspiration for Self</a> gives an overview and retrospective of the Self project.</li>
+    <li><a href="manuals/Self-4.1-Pgmers-Ref.pdf">The Self Programmer's Reference Manual</a> (PDF file) contains detailed reference manuals for the language and the current implementation.</li>
+  </ul>
+</p>
+
+<h2>The virtual machine</h2>
+
+<p>Self implementations have used novel optimization techniques to achieve execution speeds up to half that of optimized C (2-4 times faster than commercial Smalltalk systems), even though the pure nature of the language makes it difficult to compile efficiently.</p>
+
+<p>Among the techniques are:
+  <ul>
+    <li><a href="papers/customization.shtml">customization</a></li>
+    <li><a href="papers/iterative-type-analysis.shtml">type analysis and splitting</a></li>
+    <li><a href="papers/type-feedback.shtml">type feedback</a></li>
+    <li><a href="papers/third-generation.shtml">dynamic recompilation</a></li>
+    <li><a href="papers/pics.shtml">polymorphic inline caches</a></li>
+  </ul>
+</p>
+
+<p>See the <a href="papers/papers.shtml">bibliography</a> for more papers on Self and its optimization techniques.</p>
+
+<h2>The environment</h2>
+
+<P>Self 4.0 starts up with an interactive, animated tutorial (a small piece of which is shown below).</p>
+
+<p><img src="images/outliner.gif"></p>
+
+<p>Self allows novices to start by running applications, smoothly progress to building user interfaces by directly manipulating buttons, frames and the like, progress further to altering scripts, and finally to ascend to the heights of complete collaborative application development, all without ever stumbling over high cognitive hurdles.</p>
+
+<p>Its user interface framework features automatic continuous layout, support for ubiquitous animation, direct-manipulation-based construction, the ability to dissect any widget you can see, and large, shared, two-dimensional spaces.</p>
+
+<p>Its programming environment is based on an outliner metaphor, and features rapid turnaround of programming changes. It includes a plethora of tools for searching the system. Its debugger supports in-place editing. A structure editor supports some static type checking and helps visualize complex expressions. Finally, the programming environment features the new transporter, which eases the task of saving programs as source files.</p>
+
+<hr/>
+
+<!--#include virtual="trademarks.shtml" -->
+
+</div>
+
+<!--#include virtual="template.shtml" -->
+
+</BODY></HTML>

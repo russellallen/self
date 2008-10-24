@@ -1,0 +1,40 @@
+Sun-$Revision: 30.2 $
+
+[ The Self 3.0 release includes VM source code, tools comprising
+  the Self VM development system, as well as the Self executable
+  and Self source files.
+
+  The VM source code is undocumented.
+
+  The Self VM development system is documented only in notes in the
+  file vmUseDoc.txt.  These notes were written by users of the Self
+  development system at the University of Washington.  Although it 
+  was written with that environment in mind, it is largely applicable 
+  to users of the 3.0 release who wish to program the virtual machine.
+
+  To fully use the system as described below, the files in the
+  "baseline" need to be under RCS revision control.  This you will
+  have to do yourself.  Alternatively, you can just ignore the
+  baseline/working-tree distinction and just use the files in
+  their installed directories.
+
+  "Quick Start":
+
+    If you decide not to keep a baseline system under RCS and instead
+    just use the files in the installed directories, this is how you
+    can compile the system for the first time:
+
+    1. Add the environment variables to your .cshrc file as described
+       below in "Your .cshrc File".
+
+    2. Go to self/{sun4,svr4}/debug.
+
+    3. Do "touch Dependencies" to create a file called Dependencies.
+
+    4. Do "make lists" to create symbolic links to the source files.
+
+    5. Do "make" to compile a Self executable (non-optimized code
+       that will include debugging symbols).
+
+  Good luck!
+  The Self Group ]

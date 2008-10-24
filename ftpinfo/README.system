@@ -1,0 +1,116 @@
+# Sun-$Revision: 30.2 $
+
+# Copyright 1993 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information.
+
+# README file for Self release 3.0
+
+The Self system can be installed from either tape or ftp. Installation
+consists of three steps: getting the archive files, performing the
+installation, and setting up the working environment for an
+individual user. 
+
+Getting the Archive Files
+=========================
+
+The easiest way to get the Self system is to use anonymous ftp to
+retrieve the files from self.stanford.edu. Archive files for the
+supported platform, Sun SPARC-based machines running SunOS 4.1.x or
+Solaris 2.3, reside in the directories /pub/Self-3.0/sun4 and
+/pub/Self-3.0/svr4.  They are also available on mushroom.cs.man.ac.uk,
+in /pub/self/3.0/sun4 and /pub/self/3.0/svr4.
+
+If you do not have access to the internet, a tape can be obtained by
+sending email to self-request@stanford.edu. There may be a small fee
+to cover handling and media costs. 
+
+Create a temporary directory to hold the archive files and retrieve
+README, Install, and Self.tar.gz into this directory. Do not
+decompress or untar any files yourself; Install expects to do this for you.
+
+IMPORTANT: Files ending in ".gz" should be transferred using the binary
+mode of ftp (use the "binary" and "ascii" commands to switch ftp modes).
+Also, if you have difficulty with ftp, check that you have write
+permission on your local directory (i.e., the destination of the ftp
+"get" operation); the error that ftp reports when it can't create a
+local file is misleading.
+
+The other three files in the sun4 and svr4 directories are optional.
+If you are a first-time Self user we suggest that simplify the installation
+process by not retrieving the optional files.
+
+  Optional.SelfSource.tar.gz contains the Self world is source form.
+  This file is optional because the sources can be reconstructed in ten
+  minutes from the snapshot, within Self (see the documentation on 
+  the "transporter").
+  You should not bother with this file unless you want to read our Self 
+  code without running Self.
+
+  Optional.Glue.tar.gz contains the header files necessary to write
+  the "glue code" that allows Self programs to call C and C++ functions.
+  In order to use this facility, you'll also need the Gnu C++ compiler
+  version 2.5.5 and libg++ version 2.4, which is available for free via
+  anonymous ftp from prep.ai.mit.edu. (This compiler may already be
+  installed on your machine; check with your local system administrator.)
+  You should not bother with this file unless you will be extending Self
+  with new primitive operations.
+
+  Optional.VM.tar.gz includes the C++ source and header files for the
+  Self Virtual Machine itself. Included in this archive is the document 
+  vmUseDoc which explains the structure of the source files and how to
+  build the virtual machine. vmUseDoc.txt is the text version and vmUseDoc.ps
+  is the Postscript version.  
+  You should not bother with this file unless you are a wizard who
+  will be modifying the virtual machine (a job for ultra-gurus!).
+  You do not need this file if you are merely extending the virtual machine
+  with new primitive operations.
+
+Installation
+=================
+
+Once you have obtained the archive files you must execute the shell
+script Install to perform the installation.
+Install uses gzip to uncompress the archive files and is available
+for anonymous ftp from "prep.ai.mit.edu". Install prompts you
+for the directory where the Self site installation should reside and
+then unpacks the archive files. Prior to running Install, you should
+be sure there is sufficient disk space. The disk space requirements
+for the unpacked archive files are:
+
+  Self.tar.gz			8.5 Mb
+  Optional.SelfSource.tar.gz	0.5 Mb
+  Optional.Glue.tar.gz		0.4 Mb
+  Optional.VM.tar.gz		4.6 Mb
+
+Type the following to execute the Install script:
+
+  % sh Install
+
+The archive files can be deleted when the installation is
+complete.
+
+Running CheckInstall
+====================
+
+Before using Self, you should check to see if your machine has
+sufficient real and virtual memory to run Self, using the script
+CheckInstall.  Note that to use the graphical user interface you will
+need a color display.  Consult the documentation (SelfUserMan.ps) or
+your system's documentation if you need to add virtual memory.
+
+If CheckInstall OK's your system, you are ready to try Self.
+
+Starting the system
+===================
+
+From within X windows or OpenWindows, run the command Snapshot.  This
+will start the Self Virtual Machine, load the snapshot, and start the
+graphical user interface on the default display.  You will be given
+the option of running through a short Self tutorial, which, if you are
+new to Self, we encourage you try.
+
+For more information of where to go from here, consult the
+documentation. 
+
+(updated December 15, 1993)
+

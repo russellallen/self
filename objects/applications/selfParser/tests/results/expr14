@@ -1,0 +1,16 @@
+
+expressionSeries
+  keywordSend: a:B:C:
+    <implicitSelf>
+    binarySend: +
+      23
+      42
+    binarySend: +
+      binarySend: +
+        unarySend: a
+          <implicitSelf>
+        unarySend: b
+          <implicitSelf>
+      unarySend: c
+        <implicitSelf>
+    2

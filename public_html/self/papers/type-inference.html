@@ -1,0 +1,44 @@
+<html>
+<head>
+<TITLE>Self paper: "Type inference of Self"</title>
+</head>
+
+<body>
+<H1>Type Inference of Self: Analysis of Objects with Dynamic and Multiple Inheritance</H1>
+<hr>
+
+Ole Agesen,
+Jens Palsberg,
+and
+Michael I. Schwartzbach
+<hr>
+
+<b>Abstract:</b>
+We have designed and implemented a type inference algorithm 
+for the full Self language.
+The algorithm can guarantee the safety and disambiguity of message sends,
+and provide useful information for browsers and optimizing compilers.
+<p>
+Self features objects with dynamic inheritance.
+This construct has until now been considered incompatible with type inference
+because it allows the inheritance graph to change dynamically.
+Our algorithm handles this by deriving and solving type constraints that
+simultaneously define supersets of both the possible values of expressions
+and of the possible inheritance graphs.
+The apparent circularity is resolved by computing a global fixed-point,
+in polynomial time.
+<p>
+The algorithm has been implemented and can successfully handle the 
+Self benchmark programs, which exist in the "standard Self
+world" of more than 40,000 lines of code.
+<hr>
+
+<i>
+ECOOP '93 Conference Proceedings, Kaiserslautern, Germany, July, 1993.
+</i>
+<p>
+To get the PostScript file, click
+<a href="ftp://self.stanford.edu/pub/papers/ecoop93a.ps.Z">here</a>.
+<hr>
+
+<a href="papers.html">Back to bibliography</a>

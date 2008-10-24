@@ -1,0 +1,15 @@
+#! /bin/csh -f
+
+# Sun-$Revision: 30.6 $
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+# This script removes any dangling links in the current directory
+
+foreach f (*)
+    if ({ dangling $f }) then
+	echo "Removing dangling link $f"
+	rm -f $f
+    endif
+end

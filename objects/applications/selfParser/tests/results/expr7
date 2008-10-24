@@ -1,0 +1,5 @@
+
+expressionSeries
+  keywordSend: a.b:
+    <implicitSelf>
+    34

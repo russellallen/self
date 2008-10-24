@@ -1,0 +1,15 @@
+Instructions for making the demo snapshot:
+
+- In ui2/tutorial-4.0/greetingBanner.self, update the version number.
+- Create a snapshot from all2.self. Open a desktop.
+- Make the window the right size.
+- 'ui2/tutorial-4.0/tutorialLoader.self' runScript. (Get it and then do a "Show Morph.")
+- 'applications/smalltalk/smalltalk.self' runScript.
+- Load in most of it; you don't need to bother with the label maker or carpet zapper unless you want to create new stuff in the demo.
+- Get rid of the tutorial loader, shell, trash can, etc.
+- Go up from the mouse screen, use the tutorialLoader2 to load in the rest of the stuff (though as of January 2008 the web browser doesn't work anyway, so don't bother loading in the webButton or webBrowserBlurb, and get rid of the arrow pointing to where the web browser would be). Get rid of the tutorialLoader2.
+- 'ui2/tutorial-4.0/finishingTouches.self' runScript.
+- For the object model tutorial, hit the "Next step" button to bring up the first page.
+- For the DirectConstruction2 screen, get a Properties morph for the green guy in the top left and for the blue guy in the bottom right. Also point a core sampler at the bottom-right green guy.
+- Hit the Home button on the radar morph. Click on the "Use these buttons" label to bring it to the top.
+- If the snapshot is for X, make sure that the initial display is ':0', rather than 'Zoltar:0.0' (or whatever your own personal machine's display would be).

@@ -1,0 +1,98 @@
+-- "Sun-$Revision: 9.1 $"
+-- load("new.tst.cecil");
+
+method new_tests() {
+       print_line("*** new.tst.cecil ***");               
+       if( new_test1(new_three) != 3 , {  print("***test1 fail***"); });
+       if( new_test1(new_two) != 2 , { print("***test1 fail***"); });
+       if( new_test1(new_cons) != 1 , { print("***test1 fail***"); });
+       if( new_test2() != 2 , { print("***test2 fail***"); });
+       if( new_test3() != 1 , { print("***test3 fail***"); });
+       if( new_test4() != "head" , { print("***test4 fail***"); });
+       if( new_test5() != "tail" , { print("***test5 fail***"); });
+(--
+       if( new_test6() != 0 , { print("***test6 fail***"); });
+       if( new_test7() != "abc" , { print("***test7 fail***"); });
+--)
+       print_line("done");
+}
+
+concrete object new_nil;
+method length(n@new_nil) { 0 }
+
+concrete object new_cons;
+field head(c@new_cons) := "head";
+field tail(c@new_cons) := "tail";
+method length(c@new_cons) { 1 }
+
+concrete object new_two inherits new_cons;
+method length(o@new_two) { 2 }
+
+concrete object new_three inherits new_cons;
+method length(t@new_three) { 3 }
+
+method new_test1(c@new_cons) { 
+	var local := object inherits new_cons { head := new_two, tail := c };
+	length(local.tail)
+}
+
+-- new_test1(new_three);
+-- 3
+-- new_test1(new_two);
+-- 2
+-- new_test1(new_cons);
+-- 1
+
+method new_test2() { 
+	var local := object inherits new_cons { head := new_two, tail := new_three };
+	length(local.head)
+}
+
+-- new_test2();
+-- 2
+
+method new_test3() {
+	var local := object inherits new_cons { head := new_two, tail := new_three };
+	length(local)
+}
+
+-- new_test3();
+-- 1
+
+method new_test4() {
+	var local := object inherits new_cons { head := new_two, tail := new_three };
+	local.head.head
+}
+
+-- new_test4();
+-- "head"
+
+method new_test5() {  -- no initialized value for fields provided
+	var local := object inherits new_cons;
+	local.tail
+}
+
+-- new_test5();
+-- "tail"
+
+
+(-- test things that don't work in the compiler
+
+method new_test6() {
+	var local := object inherits array { length := 3, initial_value := 0 };
+	local ! 1 
+}
+
+-- new_test6();
+-- 0
+
+method new_test7() {
+	var local := object inherits array { length := 3, initial_value := 0 };
+	set_!(local, 1, "abc");
+	local ! 1 
+}
+
+-- new_test7();
+-- "abc"
+
+--)

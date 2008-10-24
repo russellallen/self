@@ -1,0 +1,12 @@
+
+expressionSeries
+  object (
+    slotList |
+      slot
+        unarySlotName a =
+        unarySend: snort
+          object (
+            expressionSeries
+              binarySend: +
+                2
+                3 ) | )

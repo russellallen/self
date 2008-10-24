@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>Self paper: "Constraint-Based Type Inference and 
+Parametric Polymorphism"</TITLE>
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+</HEAD>
+<BODY>
+
+<div class="main_body">
+
+
+<H1>Constraint-Based Type Inference and Parametric Polymorphism</H1>
+<hr>
+
+Ole Agesen
+<hr>
+
+<b>Abstract:</b>
+Constraint-based analysis is a technique for inferring implementation
+types.  Traditionally it has been described using mathematical
+formalisms. We explain it in a different and more intuitive way as a
+flow problem. The intuition is facilitated by a direct correspondence
+between run-time and analysis-time concepts.
+<p>
+Precise analysis of polymorphism is hard; several algorithms have been
+developed to cope with it. Focusing on parametric polymorphism and
+using the flow perspective, we analyze and compare these algorithms,
+for the first time directly characterizing when they succeed and fail.
+<p>
+Our study of the algorithms lead us to two conclusions. First,
+designing an algorithm that is either efficient or precise is easy, but
+designing an algorithm that is efficient and precise is hard. Second,
+to achieve efficiency and precision simultaneously, the analysis effort
+must be actively guided towards the areas of the program with the
+highest pay-off. We define a general class of algorithms that do this:
+the adaptive algorithms. The two most powerful of the five algorithms
+we study fall in this class.
+<hr>
+
+<i>
+First International Static Analysis Symposium, SAS'94, Namur, Belgium, 
+September 1994.
+</i>
+<p>
+To get the PostScript file, click
+<a href="sas94.ps.Z">here</a>.
+<hr>
+
+<a href="./papers.shtml">Back to bibliography</a>
+
+
+</div>
+
+<!--#include virtual="template.shtml" -->
+
+
+</BODY></HTML>
+

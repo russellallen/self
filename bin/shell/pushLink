@@ -1,0 +1,62 @@
+#! /bin/csh -f
+
+# Sun-$Revision: 30.6 $
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+# utility for our frame doc'ing
+# copies a file to a new version number and updates the link from the
+#   generic named file
+
+# docdir should not contain numbers in its name
+set docdir = versions
+
+if ($#argv != 1) then
+  echo usage: `basename $0` filename
+  exit -1
+else
+  set dir = `dirname $1`
+  cd $dir
+  set base = `basename $1`
+# get rid of extension if it is .doc
+  set doc = ${base:r}
+  if ($doc.doc != $base) set doc = $base
+
+  set latest = `ls -1 $docdir/$doc* | sed -e "s/[^0-9]//g" | sort -n | tail -1`
+  set new        = `(echo -n $latest; echo +1) | bc`
+  set latestfile = $docdir/$doc.$latest.doc
+  set newfile    = $docdir/$doc.$new.doc
+  set linkfile   = $doc.doc
+
+# echo $latestfile
+# echo $newfile
+# echo $linkfile
+
+  if (-f $linkfile.lck) then
+    echo $dir/$linkfile is locked - doing nothing
+    exit -1
+  endif
+  if ( `ls -l $linkfile | fgrep "$latestfile" | wc -l` != 1 ) then
+    echo $dir/$linkfile does not point to latest version of doc - doing nothing
+    exit -1
+  endif
+  if (-f $latestfile) then
+    if (-f $newfile) then
+      echo $dir/$newfile exists - doing nothing
+      exit -1
+    else
+      if ( { test -h $linkfile } ) then
+        cp $latestfile $newfile
+        rm $linkfile
+        ln -s $newfile $linkfile
+        echo $dir/$linkfile linked to new version: $dir/$newfile
+      else
+        echo $dir/$linkfile is not a soft link - doing nothing
+        exit -1
+    endif
+  else
+    echo $dir/$latestfile no such file - doing nothing
+    exit -1
+  endif
+endif

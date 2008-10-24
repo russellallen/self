@@ -1,0 +1,3 @@
+'/Users/adam/self/objects/all2.self' _RunScript.
+desktop open.
+shell saveAs: 'BareBones.snap'.

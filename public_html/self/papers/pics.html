@@ -1,0 +1,52 @@
+<html>
+<head>
+<TITLE>Self paper: "Optimizing DTOOLs with PICs"</title>
+</head>
+
+<body>
+<H1>Optimizing Dynamically-Typed Object-Oriented Programming Languages
+with Polymorphic Inline Caches</H1>
+<hr>
+
+Urs Hoelzle,
+<a href="http://www.cs.washington.edu/people/faculty/chambers.html">
+Craig Chambers</a>,
+and
+David Ungar
+<hr>
+
+<b>Abstract:</b>
+Polymorphic inline caches (PICs) provide a new way to reduce the
+overhead of polymorphic message sends by extending inline caches to
+include more than one cached lookup result per call site. For a set of
+typical object-oriented SELF programs, PICs achieve a median speedup
+of 11%.
+<P>
+As an important side effect, PICs collect type information by
+recording all of the receiver types actually used at a given call
+site. The compiler can exploit this type infor\-mation to generate
+better code when recompiling a method. An experimental version of such
+a system achieves a median speedup of 27% for our set of SELF
+programs, reducing the number of non-inlined message sends by a factor
+of two.
+<P>
+Implementations of dynamically-typed object-oriented languages have
+been limited by the paucity of type information available to the
+compiler. The abundance of the type information provided by PICs
+suggests a new compilation approach for these languages, adaptive
+compilation. Such compilers may succeed in generating very efficient
+code for the time-critical parts of a program without incurring
+distracting compilation pauses.
+<hr>
+
+<i>
+ECOOP '91 Conference Proceedings, Geneva, Switzerland, July, 1991.
+<p>
+Published as Springer Verlag LNCS 512, 1991.
+</i>
+<p>
+To get the PostScript file, click
+<a href="ftp://self.stanford.edu/pub/papers/ecoop91.ps.Z">here</a>.
+<hr>
+
+<a href="papers.html">Back to bibliography</a>

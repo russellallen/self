@@ -1,0 +1,36 @@
+-- Sun-$Revision: 9.1 $
+
+abstract type boolean;
+method if(@:boolean, tc:&():`T, fc:&():`T):T { abstract }
+method if(t@:boolean, tc:&():void):void { if(t, tc, {}); }
+
+method |(@:boolean, @:boolean):boolean { abstract }
+method |(@:boolean, r@closure:&():boolean):boolean { abstract }
+method |(l@closure:&():boolean, r@:boolean):boolean { eval(l) | r }
+method |(l@closure:&():boolean, r@closure:&():boolean):boolean { eval(l) | r }
+
+method &(@:boolean, @:boolean):boolean { abstract }
+method &(@:boolean, r@closure:&():boolean):boolean { abstract }
+method &(l@closure:&():boolean, r@:boolean):boolean { eval(l) & r }
+method &(l@closure:&():boolean, r@closure:&():boolean):boolean { eval(l) & r }
+
+method not(@:boolean):boolean { abstract }
+method not(b@closure:&():boolean):boolean { not(eval(b)) }
+
+
+true isa boolean;
+method if(@:true, tc:&():`T, fc:&():`T):T { eval(tc) }
+method |(@:true, @:boolean):boolean { true }
+method |(@:true, @closure:&():boolean):boolean { true }
+method &(@:true, r@:boolean):boolean { r }
+method &(@:true, r@closure:&():boolean):boolean { eval(r) }
+method not(@:true):boolean { false }
+
+
+false isa boolean;
+method if(@:false, tc:&():`T, fc:&():`T):T { eval(fc) }
+method |(@:false, r@:boolean):boolean { r }
+method |(@:false, r@closure:&():boolean):boolean { eval(r) }
+method &(@:false, @:boolean):boolean { false }
+method &(@:false, @closure:&():boolean):boolean { false }
+method not(@:false):boolean { true }

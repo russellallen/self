@@ -1,0 +1,15 @@
+
+expressionSeries
+  object (
+    slotList |
+      slot
+        keywordSlotNameWithoutFormals a: B: =
+        method (
+          slotList |
+            annotatedSlotGroup { 'arg1'
+              slot
+                unarySlotName :a
+              annotatedSlotGroup { 'more'
+                slot
+                  unarySlotName :b } } |
+          expressionSeries self ) | )

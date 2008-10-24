@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Sun-$Revision: 30.7 $
+
+# Copyright 1993-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+set arch=`get_arch`
+files="$arch/debug/Self $arch/profiled/Self $arch/optimized/Self"
+libs="self/termcap_glue.so self/xlib_glue.so self/stat_glue.so"
+
+checksum() {
+  file=$SELF_WORKING_DIR/$2
+  echo -n $file ": "
+  if test -x $file; then
+    echo "$1?D"| adb $file | tail -1 | awk '{ print $2 }'
+  else
+    echo '<not found>'
+  fi
+}
+
+echo "Displays checksums for the Self systems and all glue libraries."
+
+for f in $libs; do
+  checksum glue_library_checksum $f
+done
+
+for f in $files; do
+  checksum glue_checksum $f
+done
+
+echo "NB: Make sure all checksums are the same before publishing."
+

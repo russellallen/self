@@ -1,0 +1,80 @@
+-- "Sun-$Revision: 9.1 $"
+-- load("prim.tst.cecil");
+
+method prim_tests() {
+       print_line("*** prim.tst.cecil ***");               
+
+(--
+
+       if( not(prim_test1()) , {  print("***test1 fail***"); });
+       if( prim_test2() != 5 , {  print("***test2 fail***"); });
+       if( prim_test3() != 5 , {  print("***test3 fail***"); });
+
+       if( not(prim_test11()) , {  print("***test11 fail***"); });
+       if( prim_test12() != 7 , {  print("***test12 fail***"); });
+       if( prim_test13() != 10, {  print("***test13 fail***"); });
+
+       if( prim_test21() , {  print("***test21 fail***"); });
+       if( prim_test22() != 3 , {  print("***test22 fail***"); });
+       if( prim_test23() != 4 , {  print("***test23 fail***"); });
+
+       if( prim_test41() != 4 , {  print("***test41 fail***"); });
+       if( prim_test42() != 3 , {  print("***test42 fail***"); });
+
+       if( prim_test51() != 0 , {  print("***test51 fail***"); });
+
+       if( prim_test61() != 3 , {  print("***test61 fail***"); });
+       if( prim_test62() != 'a',{  print("***test62 fail***"); });
+
+--)
+
+       print_line("done");
+}
+
+
+(-- this file tests things that don't work in the compiler
+
+object prim_three isa integer { value := 3 };	-- should be usable as a 3
+
+method prim_test1() { prim_three = 3 }	-- true
+method prim_test2() { prim_three + 2 }	-- 5
+method prim_test3() { 2 + prim_three }	-- 5
+
+
+object prim_four isa integer { value@integer := 4 }; -- should be usable as a 4
+field value(@prim_four) := 10;	-- should be ignored for integer operations
+
+method prim_test11() { prim_four = 4 }	         -- true
+method prim_test12() { prim_four + prim_three }  -- 7
+method prim_test13() { prim_four.value }	 -- 10
+
+
+-- should act like 0 (since setting the value@prim_not_four field)
+object prim_not_four isa integer { value := 4 };
+field value(@prim_not_four) := 10; -- should be ignored for integer operations
+
+method prim_test21() { prim_not_four = 4 }	    -- false
+method prim_test22() { prim_not_four + prim_three } -- 3
+method prim_test23() { prim_not_four.value }	    -- 4
+
+
+-- should be a four-long array of prim_threes
+object prim_four_long_array isa array {
+	length := prim_four, initial_value := prim_three };
+
+method prim_test41() { prim_four_long_array.length }	-- 4
+method prim_test42() { prim_four_long_array!2 }		-- prim_three
+
+
+object prim_test_array isa prim_four_long_array;	-- should be zero-length
+
+method prim_test51() { prim_test_array.length }	-- 0
+
+
+object prim_string_of_as isa string {
+	length := prim_three, initial_value := 'a' };
+
+method prim_test61() { prim_string_of_as.length }	-- 3
+method prim_test62() { prim_string_of_as!1 }	-- 'a'
+
+--)

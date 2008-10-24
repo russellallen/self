@@ -1,0 +1,34 @@
+-- Sun-$Revision: 9.1 $
+
+-- comparing behavior
+
+prim method =(l:any, r:any):boolean { "
+   context lookup_top_context_object: l = r ifTrue: 'true' False: 'false'
+" "
+    *_result = (l == r ||
+	        l->tag() == MemTag && r->tag() == MemTag &&
+	        l->asBaseObj()->equal(r->asBaseObj())
+	        ? GLOBAL(base,_true) : GLOBAL(base,_false));
+" }
+method !=(l:any, r:any):boolean { not(l = r) }
+
+-- printing behavior
+
+prim method basic_print_string(x:any):string { " 
+    cecil_string_literal copyValue: x cecilPrintString InContext: context 
+" "
+    if (x->tag()) {
+      *_result = x->asBaseObj()->basicPrintString();
+    } else {
+      char s[16];
+      sprintf(s, \"%d\", unBoxInteger(x));
+      *_result = makeStringObj(s);
+    }
+" }
+
+method print_string(x:any):string { basic_print_string(x) }
+
+method print(x:any):void { x.print_string.print; }
+method print_line(x:any):void { x.print; "\n".print; }
+
+method error(s:string):no_return { s.print_line; exit(); }

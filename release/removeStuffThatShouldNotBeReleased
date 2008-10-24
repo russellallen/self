@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# There are some things in CVS that shouldn't be released to
+# the public.
+
+
+rm    objects/smallUI3D.self
+rm -r objects/snow\ white
+rm -r objects/ui3D
+rm -r objects/ui2/SnowWhite/
+rm -r objects/ui2/RandysHand/
+mv objects/applications/smalltalk temp_applications_smalltalk
+mv objects/applications/mango     temp_applications_mango
+rm -r objects/applications
+mkdir objects/applications
+mv temp_applications_smalltalk objects/applications/smalltalk
+mv temp_applications_mango     objects/applications/mango
+
+
+rm    bin/mac_osx/unixDebugServer
+
+
+rm -r vm/src/cocoa
+

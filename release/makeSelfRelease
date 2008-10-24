@@ -1,0 +1,95 @@
+#!/bin/bash
+
+# Before running this script:
+# 
+# 1. Make sure the Self executable in the vm/svr4/optimized directory in CVS is the right one.
+# 2. Make sure the Self executable in your local ~/self/objects directory is the right one. (HACK!)
+# 3. Make sure the manuals directory in CVS contains the latest release notes PDF.
+# 4. Run the following 3 commands manually (just because the export takes a long time - you
+#    may want to do it just once and then make a local backup copy so that you don't need
+#    to re-export if you need to run this script again). -- Adam, June 2006
+# 
+#    mkdir Working_on_VM
+#    cd    Working_on_VM
+#    cvs export -Dnow objects vm bin doc templates manuals tutorial
+#
+# Then run this script from inside the Working_on_VM directory.
+# 
+# I'm sure this process could be streamlined. But we don't do it very often.
+# -- Adam, June 2006
+
+echo "Removing stuff that should not be released..."
+. ../release/removeStuffThatShouldNotBeReleased
+
+echo "Rearranging directories..."
+mv objects put_contents_in_objects_dir
+
+mkdir                         put_contents_in_Self_dir
+mv    vm bin doc templates    put_contents_in_Self_dir
+cd                            put_contents_in_Self_dir
+
+export SELF_WORKING_DIR=`pwd`
+
+ln -s ../put_contents_in_objects_dir objects
+
+# Right now the CVS repository doesn't let us put files
+# directly in the self/ directory, so we copy the LICENSE
+# file in and move the Makefile in.
+cp ../put_contents_in_objects_dir/LICENSE .
+mv vm/Makefile_to_put_in_Self_dir Makefile
+
+
+cd ../..
+
+
+echo "Creating the 'using Self' release directory..."
+mkdir Using_Self_MAC_OSX
+mkdir Using_Self_MAC_OSX/Self
+mkdir Using_Self_MAC_OSX/Self/objects
+
+mv    Working_on_VM/put_contents_in_objects_dir/help.text Using_Self_MAC_OSX/Self/objects/
+mv    Working_on_VM/put_contents_in_objects_dir/LICENSE   Using_Self_MAC_OSX/Self/objects/
+
+mv    Working_on_VM/manuals                         Using_Self_MAC_OSX/Self/
+mv    Working_on_VM/tutorial                        Using_Self_MAC_OSX/Self/
+
+
+# Up to this point, all the stuff we've done for the Mac release
+# should also be in the SPARC release.
+cp -r Using_Self_MAC_OSX Using_Self_SOLARIS_SPARC
+
+
+# Move a few cute little files into the right places to help
+# people know what to do when they first open up the release.
+cp "release/drag Self to wherever you want it" Using_Self_MAC_OSX/
+cp "release/look in the Objects folder"        Using_Self_MAC_OSX/Self/
+cp "release/How To Run Self.text"              Using_Self_MAC_OSX/Self/objects/
+cp "release/HowToRunSelf.txt"                  Using_Self_SOLARIS_SPARC/Self/objects/
+
+
+echo "Moving the VMs into the right place..."
+mv    Working_on_VM/put_contents_in_Self_dir/vm/svr4/optimized/Self Using_Self_SOLARIS_SPARC/Self/objects
+echo "Warning! This depends on the Self.app in ~/self/objects being the right one. Put the right one into CVS instead? --Adam, June 2006"
+cp -r ~/self/objects/Self.app Using_Self_MAC_OSX/Self/objects/
+
+echo "Getting rid of unnecessary VMs..."
+rm -r Working_on_VM/put_contents_in_Self_dir/vm/mac_osx/Self.app
+rm    Working_on_VM/put_contents_in_Self_dir/vm/svr4/profiled/Self
+rm    Working_on_VM/put_contents_in_Self_dir/vm/svr4/debug/Self
+
+
+echo "Building the droplet..."
+osacompile -o Using_Self_MAC_OSX/Self/objects/SelfDroplet.app Working_on_VM/put_contents_in_Self_dir/vm/mac_osx/SelfDroplet.applescript
+
+
+echo "Making BareBones.snap and putting it in both the SPARC and Mac 'using Self' directories..."
+cat release/makeBareBonesSnapshot | Using_Self_MAC_OSX/Self/objects/Self.app/Contents/MacOS/Self
+cp BareBones.snap Using_Self_MAC_OSX/Self/objects/
+mv BareBones.snap Using_Self_SOLARIS_SPARC/Self/objects/
+
+# Remove that symlink to the objects folder. Though, really,
+# we should just be keeping the actual directory right there.
+rm Working_on_VM/put_contents_in_Self_dir/objects
+
+
+echo "You still need to recreate Demo.snap and update the website."

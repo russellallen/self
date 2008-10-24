@@ -1,0 +1,75 @@
+-- Sun-$Revision: 9.1 $
+
+include "predefined.cecil";
+
+object mybase;
+field gee(@mybase);
+
+object myleft isa mybase;
+field foo(@myleft) := 24;
+
+print ("hi there\n");
+
+object myright isa mybase;
+field foo(@myright) := "hi there";
+
+object myint isa myleft,myright;
+field bar(@myint) := 'a';
+
+print("hi two.\n");
+
+method test(x:integer) {
+  var z := object isa myint { foo@myright := 15+22, bar := x+12 };
+  var q := [1,2,3,4+x];
+
+  q := 5 + 7;
+  q := q - 2;
+  q := q + x;
+
+
+  print("-->");
+  print("<--\n");
+  print("-->");
+  print(new_mutable_string(4));
+  print("<--\n");
+  print(new_mutable_string(20, '%'));
+  print("\n");
+
+  var g := 0;
+
+  loop_exit(&(exit){ print("In loop\n");  g := g + 1;  if(g >= 5, exit); });
+
+  var b := true;
+
+  if(b, { print("b is true\n"); });
+  if(not(b), { print("b is not true!\n"); });
+
+  if(b & b, { print("b & b is true\n"); });
+  if(b | false, { print("b | false is true\n"); });
+  if(b | { false }, { print("b | { false } is true\n"); });
+  if(b & { false }, { print("b & false is true\n"); });
+  if(not(b) | { false }, { print("not(b) | { false } is true\n"); });
+
+  print_line("bar is " || z.bar.print_string);
+
+  if(z.bar > 0,
+    { if(z.bar < 12,
+      { print("bar between 0 and 12\n"); ^ 1000 },
+      { print("bar greater than 12\n"); }) },
+    { print("bar not greater than 0\n"); });
+  print("We shouldn't see this if bar between 0 and 12\n");
+  q
+}
+
+test(10);
+test(5);
+
+include "checkAll.cecil";
+checkAll();
+
+include "pair.cecil";      
+include "window.cecil";
+"Starting window test".print_line;
+window_test();
+
+print("Tests completed\n");

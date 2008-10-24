@@ -1,0 +1,4 @@
+*.snap
+*.backup
+testAsm*
+a.out

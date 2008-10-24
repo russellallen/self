@@ -1,0 +1,6 @@
+To start up a particular snapshot, type:
+
+./Self -s [name of snapshot file]
+
+
+Alternatively, if you make a snapshot executable ("chmod +x Snapshot"), you can simply invoke the snapshot file to start Self.

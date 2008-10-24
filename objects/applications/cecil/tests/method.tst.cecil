@@ -1,0 +1,247 @@
+-- "Sun-$Revision: 9.1 $"
+
+method method_tests() {
+       print_line("*** method.tst.cecil ***");
+       if( method_test1() != 123 , {  print("***test1 fail***"); });
+       if( method_test2() != 3 , { print("***test2 fail***"); });
+       if( method_test3(method_cons) != method_cons , { print("***test3 fail***"); });
+       if( method_test4(method_cons) != method_cons , { print("***test4 fail***"); });
+       if( method_test5() != 3 , { print("***test5 fail***"); });
+       if( method_test6() != method_cons , { print("***test6 fail***"); });
+       if( method_test7(1) != 1 , { print("***test7 fail***"); });
+(--
+       if( method_test8(1) != "abc" , { print("***test8 fail***"); });
+       if( method_test9(1) != 123, { print("***test9 fail***"); });
+       if( method_test10() != 2 , { print("***test10 fail***"); });
+       if( method_test11() != 5 , { print("***test11 fail***"); });
+--)
+       if( method_test12() != 14 , { print("***test12 fail***"); });
+       if( method_test13() != "done" , { print("***test13 fail***"); });
+       if( method_test14() != 1 , { print("***test14 fail***"); });
+       if( method_test15() != true , { print("***test15 fail***"); });
+(--
+       if( method_test21() != 2, { print("***test21 fail***"); });
+       if( method_test22() != 100, { print("***test22 fail***"); });
+       if( method_test23() != "in blk", { print("***test23 fail***"); });
+       if( method_test24() != "in blk", { print("***test24 fail***"); });
+       if( method_test26() != "done", { print("***test26 fail***"); });
+       if( method_test28() != "done", { print("***test28 fail***"); });
+       if( method_test40() != 1, { print("***test40 fail***"); });
+--)
+       print_line("\nmanual: method_test16(); method_test27(); method_test29(); ");
+       print_line("done");
+}
+
+method method_test1() { 123 }
+-- method_test1();
+-- 123
+
+method method_test2() { var x := 3; x }
+-- method_test2();
+-- 3
+
+object method_cons;
+
+method method_test3(x) { x }
+-- method_test3(method_cons);
+-- method_cons
+
+method method_test4(c@method_cons) { ^ c }
+-- method_test4(method_cons);
+-- method_cons
+
+method method_test5() { var x := 3; method_test4(method_cons); x }
+-- method_test5();
+-- 3
+
+method method_test6() { var x := 3; eval({ ^ method_test4(method_cons) }); x }
+-- method_test6();
+-- method_cons
+
+method method_test7(c) { var x := 3; eval({ var x := c; ^ x }); x }
+-- method_test7(1);
+--  1
+
+(-- these test things that don't work in the compiler
+
+method method_test8(c) { 
+	method method_test1() { var c := "abc"; c }
+	eval({ var x := method_test1(); ^ x }); c }
+-- method_test8(1);
+--  "abc"
+
+method method_test9(c) { 
+	method method_test1() { var c := "abc"; c }
+	eval({ var x := method_test1(); eval({ ^ 123 }); ^ x }); c }
+-- method_test9(1);
+--  123 
+
+method method_test10() { var myInt = object inherits integer; myInt + 2 }
+-- method_test10();
+-- 2
+
+method method_test11() {
+    var myInt = object inherits integer { value := 3 }; myInt + 2 }
+-- method_test11();
+-- 5
+
+--)
+
+
+method method_test12() { 
+	var x := 2 * ( 3 + 4 ); x }
+-- method_test12();
+-- 14
+
+method method_test13() {
+	var i := 0;
+	var blk = { i := i + 1; print(i); if( i = 3, {^ "done"}) };
+	loop(blk)
+}
+-- method_test13();
+-- prints 1, 2, 3 then "done"
+
+method method_test14() { var i := 0; i := i + 1; i }
+-- method_test14();
+-- 1 
+
+method method_test15() { var i = 0; if( i = 0, { print("ok"); ^ true }); 
+		print("oh no"); false
+}
+-- method_test15();
+-- prints "ok" returns  true
+
+
+(-- these test nested methods, which the compiler can't handle
+
+method method_test16() {
+	object parent;
+	object child inherits parent;
+	object closure;
+	object blk inherits closure;
+	method eval(a@blk, b@parent) { print("blk & parent") }
+	method eval(a@closure, b@child) { print("closure & child") }
+	eval(blk, child);
+}
+-- method_test16();
+-- ambiguous
+
+(--
+method dummy(i@integer, i) { i + 1 }
+-- error: redeclaring i
+--)
+
+method method_test20(i@integer) { i }
+method method_test21() {
+	method method_test20(plus1@integer) { plus1+1 }
+	method_test20(1)
+}
+-- method_test21();
+-- 2
+
+method method_test22() {
+	method method_test20(hundred@integer) { 100 }
+	method_test20(1)
+}
+-- method_test22();
+-- 100
+
+method method_test23() {
+	var blk = { method method_test20(blk@integer) { "in blk" }
+		    var i:= 1;
+		    method_test20(i) };
+	eval(blk)
+}
+-- method_test23();
+-- "in blk"
+		
+method method_test24() {
+	method method_test() {
+		var blk = { method method_test20(blk@integer) { "in blk" }
+		    var i:= 1;
+		    method_test20(i) };
+		eval(blk)
+	}
+	method_test()
+}
+-- "in blk"
+
+method method_test26() {
+	object obj;
+	object childObj inherits obj;
+	method m(l@obj, r@obj) { print("bottom") }
+	method m(l@obj, r) { print("left_constrained") }
+	method m(l, r@obj) { print("right_constrained") }
+	method m(l,r) { print("top") }
+	m(1, 2);
+	m(obj, 2);
+	m(3, obj);
+	m(obj, obj);
+	m(obj, childObj);
+	m(childObj, 123);
+	"done"
+}
+-- top, left, right, bottom, bottom, left printed and returns "done"
+
+method method_test27() {
+	object parent;
+	object errChild isa parent inherits parent;
+	errChild
+}
+-- method_test27();
+-- warning: duplicate ancestors
+
+method method_test28() {
+	object parent;
+	object anotherParent;
+	method m1(@parent) { print("in parent method"); }
+	method m2(@anotherParent) { print("in Another parent method"); }
+	object child isa parent;
+	m1(child);
+	child inherits anotherParent;
+	m2(child);
+	"done"
+}
+-- method_test28();
+-- prints "in parent method" then prints "in Another parent method" 
+-- and returns "done"
+
+(--  this causes the type checker to abort, with a nested extension decl error
+method method_test29() {
+	object parent;
+	object anotherParent;
+	method m1(@parent) { print("in parent method"); }
+	method m2(@anotherParent) { print("in Another parent method"); }
+	object child isa parent;
+	method nested() {
+		m1(child);
+		-- object extension declaration in nested level
+		child inherits anotherParent;
+		m2(child);
+        }
+	nested();
+	m2(child);
+}
+-- method_test29();
+-- prints "in parent method" then prints "in Another parent method"
+-- then m2 message not understood
+--)
+
+-- testing whether the ';' can be parsed after a method decl
+method method_test30() {}; method method_test31() {};
+method method_test32() {};
+method method_test33() {
+       method method_test34() {};
+       method method_test35() {}
+       method method_test36() {};
+       var i := 3;
+       method method_test37() {};
+};
+
+-- check for formals without name
+method method_test40() {
+	method m(,@method_cons,,,:integer,) { 1 }
+        m(true, method_cons, false, 3.0, 3, "string")
+}
+
+--)

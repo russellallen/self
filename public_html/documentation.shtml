@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>Self 4.0 Documentation</TITLE>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</HEAD>
+<BODY>
+
+<div class="main_body">
+
+<H1>Documentation</H1>
+
+<p>Self comes with several manuals:</p>
+
+<p>
+  <ul>
+    <li><a href="manuals/Self-4.3-Release-Notes.pdf">Self 4.3 Release Notes</a>.</li>
+    <li><a href="manuals/tutorial.ps.gz">Prototype-Based Application Construction Using Self 4.0</a> - a complete tutorial introduction to Self 4.0.
+      <ul>
+        <li><a href="manuals/tutorial-slides.ps.gz">Transparencies</a> for the same tutorial.</li>
+        <li><a href="contrib/pieChart.self">Code</a> for the pie chart example in the tutorial.</li>
+        <li>Steve Dekorte has generously made an HTML version of this tutorial. You can <a href="Tutorial/index.html">browse the tutorial</a>, or <a href="manuals/Tutorial.tar.gz">get the HTML source</a>.</li>
+      </ul>
+    </li>
+    <li><a href="manuals/Self-4.1-Pgm-Env.pdf">How to Program Self 4.0</a> - a guide to the programming environment.</li>
+    <li><a href="manuals/Self-4.1-UI-Framework.pdf">Morphic: The Self User Interface Framework</a> - how to build user interfaces with Self 4.0.</li>
+    <li><a href="manuals/Self-4.1-Pgmers-Ref.pdf">The Self Programmer's Reference Manual</a> - the language description and overview of many important objects, with lots of gory detail.</li>
+    <!-- This one seems to be missing. -- Adam, Dec. 2007    <li><a href="manuals/ast.ps.Z">Abstract Syntax, Structure Editing, and Type Browsing for Self</a> - how to use the abstract syntax features.</li> -->
+    <li><a href="manuals/smalltalk.ps.gz">Self 4.0 Smalltalk Emulator</a> - an overview of the Smalltalk subsystem.</li>
+  </ul>
+</p>
+
+<p>In addition, see the <a href="papers/papers.shtml">Self bibliography</a> for a listing of Self papers with on-line abstracts.</p>
+
+</div>
+
+<!--#include virtual="template.shtml" -->
+
+</BODY></HTML>

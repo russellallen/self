@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>Self paper: "Elgin Lee's engineer's thesis"</TITLE>
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+</HEAD>
+<BODY>
+
+<div class="main_body">
+
+
+<H1>Object Storage and Inheritance for Self</h1>
+<hr>
+
+Elgin Lee
+<hr>
+
+[Early memory system and multiple inheritance in Self.]
+<hr>
+
+<i>
+Engineer's thesis, Electrical Engineering Department, Stanford
+University, 1988.
+</i>
+<hr>
+
+<a href="./papers.shtml">Back to bibliography</a>
+
+
+</div>
+
+<!--#include virtual="template.shtml" -->
+
+
+</BODY></HTML>
+

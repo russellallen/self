@@ -1,0 +1,6 @@
+// Sun-$Revision: 30.1 $
+
+arch = i386
+os   = unix
+os_version = linux
+compiler = gcc

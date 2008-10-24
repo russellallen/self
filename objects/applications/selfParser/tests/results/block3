@@ -1,0 +1,8 @@
+
+expressionSeries
+  block [
+    slotList |
+      slot
+        unarySlotName a .
+      slot
+        unarySlotName b | ]

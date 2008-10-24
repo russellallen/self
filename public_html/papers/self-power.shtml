@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>Self paper: "Self: The power of simplicity"</TITLE>
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+</HEAD>
+<BODY>
+
+<div class="main_body">
+
+
+<H1>Self: The Power of Simplicity</H1>
+<hr>
+
+David Ungar
+and 
+Randall B. Smith
+<hr>
+
+<b>Abstract:</b>
+Self is an object-oriented language for exploratory programming based
+on a small number of simple and concrete ideas: prototypes, slots, and
+behavior. Prototypes combine inheritance and instantiation to provide
+a framework that is simpler and more flexible than most
+object-oriented languages. Slots unite variables and procedures into a
+single construct. This permits the inheritance hierarchy to take over
+the function of lexical scoping in conventional languages. Finally,
+because Self does not distinguish state from behavior, it narrows the
+gaps between ordinary objects, procedures, and closures. Self's
+simplicity and expressiveness offer new insights into object-oriented
+computation.
+<hr>
+
+<i>
+OOPSLA '87 Conference Proceedings, pp. 227-241, Orlando, FL, October,
+1987.
+<p>
+Published as SIGPLAN Notices 22(12), December, 1987.
+Also published in Lisp and Symbolic Computation 4(3), Kluwer Academic
+Publishers, June, 1991.
+</i>
+<p>
+To get the PostScript file, click
+<a href="selfPower.ps.Z">here</a>.
+<hr>
+
+<a href="./papers.shtml">Back to bibliography</a>
+
+
+</div>
+
+<!--#include virtual="template.shtml" -->
+
+
+</BODY></HTML>
+

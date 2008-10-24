@@ -1,0 +1,18 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML><HEAD>
+<TITLE>Self Home Page</TITLE>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</HEAD>
+<BODY>
+
+<div class="main_body">
+         
+<p>The <A HREF="group.shtml">Self Group</A>, located at <A HREF="http://research.sun.com">Sun Microsystems Laboratories</A>, was dedicated to making the world safe for objects.</p>
+
+<p>For now, you can <a href="http://research.sun.com/self">download Self</a> from its old home at Sun Labs.</p>
+
+</div>
+
+<!--#include virtual="template.shtml" -->
+         
+</BODY></HTML>

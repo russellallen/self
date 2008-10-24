@@ -1,0 +1,8 @@
+
+expressionSeries
+  object (
+    slotList |
+      slot
+        binarySlotNameWithFormal @ d =
+        method (
+          expressionSeries self ) | )

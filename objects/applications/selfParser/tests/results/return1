@@ -1,0 +1,11 @@
+
+expressionSeries
+  object (
+    slotList |
+      slot
+        unarySlotName a =
+        method (
+          expressionSeries
+            return ^
+              unarySend: foo
+                <implicitSelf> ) | )

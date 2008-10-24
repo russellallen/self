@@ -1,0 +1,152 @@
+-- Sun-$Revision: 9.1 $
+
+integer isa number;
+
+(--
+prim init_only field value(@:integer):integer := 0;
+--)
+
+
+-- arithmetic
+
+prim method = (l@:integer, r@:integer):boolean { "
+    context lookup_top_context_object: 
+	(l integerValueInContext: context) =
+	(r integerValueInContext: context) ifTrue: 'true' False: 'false'
+" "
+    *_result = ((int)l == (int)r ? GLOBAL(base,_true) : GLOBAL(base,_false));
+"
+ }
+
+prim method < (l@:integer, r@:integer):boolean { "
+    context lookup_top_context_object: 
+	(l integerValueInContext: context) <
+	(r integerValueInContext: context) ifTrue: 'true' False: 'false'
+" "
+    *_result = ((int)l < (int)r ? GLOBAL(base,_true) : GLOBAL(base,_false));
+" }
+
+prim method <= (l@:integer, r@:integer):boolean { "
+    context lookup_top_context_object: 
+	(l integerValueInContext: context) <=
+	(r integerValueInContext: context) ifTrue: 'true' False: 'false'
+" "
+    *_result = ((int)l <= (int)r ? GLOBAL(base,_true) : GLOBAL(base,_false));
+" }
+
+prim method > (l@:integer, r@:integer):boolean { "
+    context lookup_top_context_object: 
+	(l integerValueInContext: context) >
+	(r integerValueInContext: context) ifTrue: 'true' False: 'false'
+" "
+    *_result = ((int)l > (int)r ? GLOBAL(base,_true) : GLOBAL(base,_false));
+" }
+
+prim method >= (l@:integer, r@:integer):boolean { "
+    context lookup_top_context_object: 
+	(l integerValueInContext: context) >=
+	(r integerValueInContext: context) ifTrue: 'true' False: 'false'
+" "
+    *_result = ((int)l >= (int)r ? GLOBAL(base,_true) : GLOBAL(base,_false));
+" }
+
+prim method != (l@:integer, r@:integer):boolean { "
+    context lookup_top_context_object: 
+	(l integerValueInContext: context) !=
+	(r integerValueInContext: context) ifTrue: 'true' False: 'false'
+" "
+    *_result = ((int)l != (int)r ? GLOBAL(base,_true) : GLOBAL(base,_false));
+" }
+
+prim method + (l@:integer, r@:integer):integer { "
+    cecil_integer_literal
+	copyValue: (l integerValueInContext: context) +
+		   (r integerValueInContext: context) 
+	InContext: context
+" "
+    *_result = (OOP) ((int) l + (int) r);
+" }
+
+prim method - (l@:integer, r@:integer):integer { "
+    cecil_integer_literal
+	copyValue: (l integerValueInContext: context) -
+		   (r integerValueInContext: context) 
+	InContext: context
+" "
+    *_result = (OOP) ((int) l - (int) r);
+" }
+
+prim method * (l@:integer, r@:integer):integer { "
+    cecil_integer_literal
+	copyValue: (l integerValueInContext: context) *
+		   (r integerValueInContext: context) 
+	InContext: context 
+" "
+    // avoids an unnecessary unboxing and reboxing
+    *_result = (OOP) ((int) l * unBoxInteger(r));
+    assert(asTaggedInteger(unBoxInteger(l) * unBoxInteger(r)) == *_result,
+	   \"should be the same\");
+" }
+
+prim method / (l@:integer, r@:integer):integer { "
+    cecil_integer_literal
+	copyValue: (l integerValueInContext: context) /
+		   (r integerValueInContext: context) 
+	InContext: context 
+" "
+    // avoids two unnecessary unboxings
+    *_result = asTaggedInteger((int) l / (int) r);
+    assert(asTaggedInteger(unBoxInteger(l) / unBoxInteger(r)) == *_result,
+	   \"should be the same\");
+" }
+
+prim method % (l@:integer, r@:integer):integer { "
+    cecil_integer_literal
+	copyValue: (l integerValueInContext: context) %
+		   (r integerValueInContext: context) 
+	InContext: context 
+" "
+    // avoids two unnecessary unboxings and a reboxing
+    *_result = (OOP) ((int) l % (int) r);
+    assert(asTaggedInteger(unBoxInteger(l) % unBoxInteger(r)) == *_result,
+	   \"should be the same\");
+" }
+
+prim method asFloat(l@:integer):float { "
+    cecil_float_literal
+	copyValue: (l integerValueInContext: context) asFloat
+	InContext: context 
+" "
+    *_result = asTaggedPointer(new CecilFloatObject((float) unBoxInteger(l)));
+" }
+
+-- iterating behavior
+
+method do(count@:integer, c:&(integer):void):void {
+    var i:integer := 0;
+    loop({
+	if(i >= count, {^});
+	eval(c, i);
+	i := i + 1;
+    });
+}
+
+method do_digits_increasing(i@:integer, c:&(integer,integer):void):void {
+    var x:integer := i;
+    var position:integer := 0;
+    do_until({
+	eval(c, x % 10, position);
+	x := x / 10;
+	position := position + 1;
+    }, {x = 0});
+}
+
+-- printing behavior
+
+method print_string(i@:integer):string {
+    var str:string := "";
+    do_digits_increasing(abs(i), &(d:integer,:integer){
+	str := as_string(from_ascii('0'.ascii_code + d)) || str;
+    });
+    if(i < 0, {"-"}, {""}) || str 
+}

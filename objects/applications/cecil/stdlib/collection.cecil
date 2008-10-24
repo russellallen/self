@@ -1,0 +1,30 @@
+-- Sun-$Revision: 9.1 $
+
+-- methods for collections
+
+abstract type collection[T];
+
+method length(@:collection[`T]):integer { abstract }
+method is_empty(c@:collection[`T]):boolean { length(c) = 0 }
+method not_empty(c@:collection[`T]):boolean { not(is_empty(c)) }
+
+-- iterating behavior
+
+method do(@:collection[`T], closure:&(T):void):void { abstract; }
+
+-- printing behavior
+
+method print_string(c@:collection[`T]):string {
+    var first:boolean := true;
+    var str:string := c.open_brace;
+    do(c, &(e:T){
+    	str := str || elem_print_string(c, e, first);
+	first := false;
+    });
+    str || c.close_brace }
+
+method open_brace(c@:collection[`T]):string { c.collection_name || "{" }
+method close_brace(@:collection[`T]):string { "}" }
+method collection_name(@:collection[`T]):string { abstract }
+method elem_print_string(@:collection[`T], elem:T, first:boolean):string {
+    if(first, { elem.print_string }, { ", " || elem.print_string }) }

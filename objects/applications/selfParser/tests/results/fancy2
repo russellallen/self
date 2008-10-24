@@ -1,0 +1,8 @@
+
+expressionSeries
+  binarySend: +
+    <implicitSelf>
+    keywordSend: display:
+      <implicitSelf>
+      unarySend: b
+        <implicitSelf>

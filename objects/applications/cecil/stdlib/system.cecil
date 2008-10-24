@@ -1,0 +1,113 @@
+-- Sun-$Revision: 9.1 $
+
+-- quitting
+prim method exit():no_return { "
+    context interp exitBlock value
+" "
+    // this probably should be rewritten with a longjmp back to cecil_main.
+    // should exit() take an argument (the result error code?  error object?)
+    printf(\"\\n\\nQuitting prematurely!\\n\");
+    exit(-1);
+" }
+
+
+-- throw away all but std. prelude definitions
+prim method reset():void { "
+    context interp reset.  cecil_void
+" "
+    // a no-op
+    *_result = GLOBAL(base,_void);
+" }
+
+
+-- timing Cecil programs
+prim include "<sys/time.h>";
+prim include "<sys/resource.h>";
+prim method cpu_time():integer { "
+    cecil_integer_literal copyValue: times cpu InContext: context
+" "
+    // This routine will report elapsed user cpu time in milliseconds, which is
+    // more accuracy than most machines support.
+
+    struct rusage resources;
+    if (getrusage(RUSAGE_SELF, &resources) == -1) {
+      // should fail and report error number
+      fatal(\"getrusage error\");
+    }
+    int milliseconds =
+      resources.ru_utime.tv_sec * 1000 + 
+      resources.ru_utime.tv_usec / 1000;
+    *_result = asTaggedInteger(milliseconds);
+" }
+
+method time(closure:&():void):integer {
+    var start:integer := cpu_time();
+    eval(closure);
+    var end:integer := cpu_time();
+    end - start }
+
+
+-- for invoking some Self expressions from within the Cecil interpreter
+prim method self(expr@:string):void { "
+    (expr stringValueInContext: context) eval.  cecil_void
+" "
+    fatal(\"sorry, not implemented\");
+" }
+
+
+-- controlling implementation characteristics of the interpreter
+prim method no_caching():void { "
+    context interp optimizingCecilMethodLookup: false.  cecil_void
+" "
+    // a no-op
+    *_result = GLOBAL(base,_void);
+" }
+prim method no_closure_opts():void { "
+    context interp optimizingCecilClosure: false.  cecil_void
+" "
+    // a no-op
+    *_result = GLOBAL(base,_void);
+" }
+
+prim method quiet():void { "
+    context interp beQuiet: true.  cecil_void
+" "
+    // a no-op
+    *_result = GLOBAL(base,_void);
+" }
+prim method noisy():void { "
+    context interp beQuiet: false. cecil_void
+" "
+    // a no-op
+    *_result = GLOBAL(base,_void);
+" }
+
+prim method haltOnCecilErrors():void { " 
+    context interp haltOnCecilErrors: true. cecil_void
+" "
+    // a no-op
+    *_result = GLOBAL(base,_void);
+" }
+
+
+-- for debugging the Cecil interpreter with the Self UI
+prim method start_self_ui():void { "
+    ui startWith: context interp.  cecil_void
+" "
+    fatal(\"sorry, not implemented\");
+" }
+prim method self_ui_add(obj:any):void { "
+    ui add: obj.  cecil_void
+" "
+    fatal(\"sorry, not implemented\");
+" }
+prim method self_ui_add_result():void { "
+    context interp addResultsToUI: true.  cecil_void
+" "
+    fatal(\"sorry, not implemented\");
+" }
+prim method self_ui_no_add_result():void { "
+    context interp addResultsToUI: false.  cecil_void
+" "
+    fatal(\"sorry, not implemented\");
+" }

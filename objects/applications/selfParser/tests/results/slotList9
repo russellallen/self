@@ -1,0 +1,1 @@
+method cannot declare argument names if they are also in the slot name `(|:x| self)' at: [11@1, 21@1]

@@ -1,0 +1,9 @@
+-- Sun-$Revision: 9.1 $
+
+-- methods for key/value mappings
+
+abstract type table[Key,Value] isa collection[Value];
+
+method do_associations(t@:table[`Key,`Value], c:&(Key,Value):void):void {
+    abstract;
+}

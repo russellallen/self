@@ -1,0 +1,18 @@
+#!/bin/sh
+# Sun-$Revision: 30.6 $ 
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+MAKE=${MAKE:-make}
+
+# mzap kills all your make processes on machines described in $files
+files="compileMachineNames nicedCompileMachineNames \
+       linkMachineName nicedLinkMachineName" 
+
+for file in $files; do
+  for machine in `$file`; do
+    rsh $machine "zap $MAKE" &
+  done
+done
+

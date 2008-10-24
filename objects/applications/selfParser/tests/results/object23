@@ -1,0 +1,10 @@
+
+expressionSeries
+  object (
+    slotList |
+      slot
+        unarySlotName a =
+        block [
+          expressionSeries
+            unarySend: sdf
+              <implicitSelf> ] | )

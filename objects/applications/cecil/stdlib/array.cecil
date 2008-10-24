@@ -1,0 +1,97 @@
+-- Sun-$Revision: 9.1 $
+
+array[`T] isa indexed[T];
+
+-- when type-checking of parameterized types is fully implemented,
+-- the cecil_undefined object won't be legal, and neither will operations
+-- like initial_value and new_array(size) that use it
+concrete object cecil_undefined;
+
+-- primitive element behavior
+
+(--
+prim init_only field length(a@:array[`T]):integer := 0;
+prim init_only field initial_value(a@:array[`T]) := cecil_undefined;
+--)
+prim method length(a@:array[`T]):integer { "
+    a arrayLengthObjectInContext: context
+" "
+    *_result = asTaggedInteger(a->asArrayObj()->numElements);
+" }
+
+-- array creation behavior
+
+method new_array[T](size@:integer):array[T] {
+    new_array[T](size, cecil_undefined) }
+
+prim method new_array[T](size@:integer, filler:T):array[T] { "
+    cecil_object makeArrayOfSize: (size integerValueInContext: context)
+    			  Filler: filler
+			    Type: (context lookup_type: 'T')
+		       InContext: context
+" "
+    int intSize = unBoxInteger(size);
+    *_result = asTaggedPointer(newCecilArrayObject(intSize, filler));
+" }
+
+method new_array(size@:integer):array[dynamic] { 
+    new_array[dynamic](size) }
+method new_array(size@:integer, filler:dynamic):array[dynamic] { 
+    new_array[dynamic](size, filler) }
+
+-- indexing behavior
+
+prim method !(a@:array[`T], index@:integer):T { "
+    ((index integerValueInContext: context) < 0) ||
+    [(index integerValueInContext: context) >=
+	(a arrayLengthInContext: context)]
+    ifTrue: [
+    	cecilErr: 'the array index ',
+		  (index integerValueInContext: context) printString,
+		  ' is out of bounds'.
+    ] False: [
+	a arrayElem: (index integerValueInContext: context) 
+	  InContext: context
+    ] 
+" "
+    int i = unBoxInteger(index);
+    CecilArrayObject* array = a->asArrayObj();
+    if (i < 0 || i >= array->numElements) {
+      fatal(\"array access out of bounds\");
+    }
+    *_result = array->getElement(i);
+" }
+
+prim method set_!(a@:array[`T], index@:integer, v:T):void { "
+    ((index integerValueInContext: context) < 0) ||
+    [(index integerValueInContext: context) >=
+	(a arrayLengthInContext: context)]
+    ifTrue: [
+    	cecilErr: 'the array index ',
+		  (index integerValueInContext: context) printString,
+		  ' is out of bounds'.
+    ] False: [
+	a arrayElem: (index integerValueInContext: context) Put: v 
+	  InContext: context.
+    ]
+" "
+    int i = unBoxInteger(index);
+    CecilArrayObject* array = a->asArrayObj();
+    if (i < 0 || i >= array->numElements) {
+      fatal(\"array access out of bounds\");
+    }
+    array->setElement(i, v);
+    *_result = GLOBAL(base,_void);
+" }
+
+-- concatenating behavior
+
+method ||(a@:array[`T], b@:array[`T]):array[T] {
+    var new:array[T] := new_array[T](a.length + b.length);
+    do_associations(a, &(i:integer,e:T){ new!i := e; });
+    do_associations(b, &(i:integer,e:T){ new!(i+a.length) := e; });
+    new }
+
+-- printing behavior
+
+method collection_name(@:array[`T]):string { "array" }

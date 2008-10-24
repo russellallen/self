@@ -1,0 +1,16 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>Self 4.0 Documentation</TITLE>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<meta http-equiv="REFRESH" content="0;url=http://research.sun.com/self">
+</HEAD>
+<BODY>
+
+<div class="main_body">
+  <p>For now, you can <a href="http://research.sun.com/self">download Self</a> from its old home at Sun Labs.</p>
+</div>
+
+<!--#include virtual="template.shtml" -->
+
+</BODY></HTML>

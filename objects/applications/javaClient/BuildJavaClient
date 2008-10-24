@@ -1,0 +1,4 @@
+#!/bin/csh
+# This builds the Java client
+# $Revision: 30.1 $
+make -f makefile.java

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Build makeDeps so that we can run "make lists"
+xcodebuild -project Working_on_VM/put_contents_in_Self_dir/bin/xcode\ projects/makeDeps/makeDeps.xcodeproj -configuration "Development"
+mv $SELF_WORKING_DIR/bin/mac_osx/makeDeps Working_on_VM/put_contents_in_Self_dir/bin/mac_osx/
+
+# Build the Mac VM and put it in the right place.
+cd Working_on_VM/put_contents_in_Self_dir/vm/mac_osx/generated
+make lists
+cd ../../../../..
+
+echo "Building the VM doesn't quite work yet."
+exit -1
+
+xcodebuild -project Working_on_VM/put_contents_in_Self_dir/vm/mac_osx/vm_project/vm_project.xcodeproj -configuration "Optimized Self"
+
+# Remove some stuff generated during the build process.
+rm -r Working_on_VM/put_contents_in_Self_dir/vm/mac_osx/generated

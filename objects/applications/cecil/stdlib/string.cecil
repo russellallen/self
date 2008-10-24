@@ -1,0 +1,117 @@
+-- Sun-$Revision: 9.1 $
+
+string isa indexed[char];
+
+(--
+prim init_only field length(@:string):integer := 0;
+prim init_only field initial_value(@:string):char := ' ';
+--)
+prim method length(s@:string):integer { "
+    s stringLengthObjectInContext: context
+" "
+    *_result = asTaggedInteger(s->asStringObj()->numBytes);
+" }
+
+
+method new_string(size@:integer):string { new_string(size, ' ') }
+
+prim method new_string(size@:integer, filler@:char):string { "
+    cecil_object makeStringOfType: 'string' 
+	Size: (size integerValueInContext: context) Filler: filler 
+    	InContext: context
+" "
+    int intSize = unBoxInteger(size);
+    *_result = asTaggedPointer(newCecilImmutableStringObject(intSize,
+						   filler->asCharObj()->ch));
+" }
+
+prim method !(s@:string, index@:integer):char { "
+    ((index integerValueInContext: context) < 0) ||
+    [(index integerValueInContext: context) >=
+	(s stringLengthInContext: context)]
+    ifTrue: [
+    	cecilErr: 'the string index ',
+		  (index integerValueInContext: context) printString,
+		  ' is out of bounds'.
+    ] False: [
+	s stringElem: (index integerValueInContext: context)
+	   InContext: context
+    ]
+" "
+    int i = unBoxInteger(index);
+    CecilStringObject* string = s->asStringObj();
+    if (i < 0 || i >= string->numBytes) {
+      fatal(\"string access out of bounds\");
+    }
+    *_result = asTaggedPointer(new CecilCharObject(string->getElement(i)));
+" }
+
+
+mutable_string isa string;
+
+method new_mutable_string(size@:integer):mutable_string {
+    new_mutable_string(size, ' ') }
+
+prim method new_mutable_string(size@:integer, filler@:char):mutable_string { "
+    cecil_object makeStringOfType: 'mutable_string'
+	Size: (size integerValueInContext: context) Filler: filler 
+    	InContext: context
+" "
+    int intSize = unBoxInteger(size);
+    *_result = asTaggedPointer(newCecilMutableStringObject(intSize,
+						   filler->asCharObj()->ch));
+" }
+
+prim method set_!(s@:mutable_string, index@:integer, c@:char):void { "
+    ((index integerValueInContext: context) < 0) || 
+    [(index integerValueInContext: context) >=
+	(s stringLengthInContext: context)] 
+    ifTrue: [
+    	cecilErr: 'the string index ',
+		  (index integerValueInContext: context) printString,
+		  ' is out of bounds'.
+    ] False: [
+	s stringElem: (index integerValueInContext: context) Put: c
+	   InContext: context.
+    ]
+" "
+    int i = unBoxInteger(index);
+    CecilStringObject* string = s->asStringObj();
+    if (i < 0 || i >= string->numBytes) {
+      fatal(\"string access out of bounds\");
+    }
+    string->setElement(i, c->asCharObj()->ch);
+    *_result = GLOBAL(base,_void);
+" }
+
+-- character conversion behavior
+
+method as_string(c@:char):string { new_string(1, c) }
+
+-- concatenating behavior
+
+method ||(a@:string, b@:string):mutable_string {
+    var new:mutable_string := new_mutable_string(a.length + b.length);
+    do_associations(a, &(i:integer,e:char){ new!i := e; });
+    do_associations(b, &(i:integer,e:char){ new!(i+a.length) := e; });
+    new }
+
+-- printing behavior
+
+prim method print(s@:string):void { "
+    (s stringValueInContext: context) print.  cecil_void
+" "
+    CecilStringObject* str = s->asStringObj();
+    fwrite(str->bytes(), 1, str->numBytes, stdout);
+    fflush(stdout);
+    *_result = GLOBAL(base,_void);
+" }
+
+method  open_brace(@:string):string { "\"" }
+method close_brace(@:string):string { "\"" }
+
+method collection_name(@:string):string { "string" }
+
+method elem_print_string(@:string, char:char, :boolean):string {
+    as_string(char) }
+

@@ -1,0 +1,28 @@
+-- Sun-$Revision: 9.1 $
+
+include "array.tst.cecil";
+include "boolean.tst.cecil";
+include "closure.tst.cecil";
+include "field.tst.cecil";
+include "loop.tst.cecil";
+include "method.tst.cecil";
+include "new.tst.cecil";
+include "prim.tst.cecil";
+include "private.tst.cecil";
+include "resend.tst.cecil";
+include "tree.tst.cecil";
+
+method checkAll() {
+	quiet();
+	array_tests();
+	boolean_tests();
+	closure_tests();
+	field_tests();
+	loop_tests();
+	method_tests();
+	new_tests();
+	prim_tests();
+	private_tests();
+	resend_tests();
+	tree_tests();
+}

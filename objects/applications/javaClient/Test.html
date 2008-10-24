@@ -1,0 +1,88 @@
+<!-- A more involved page from a test run we did -->
+<!-- $Revision: 30.1 $ -->
+<HTML>
+<HEAD>
+<TITLE> Kansas on the Web - test world </TITLE>
+</HEAD>
+<BODY>
+<h1>Is this Kansas?</h1>
+Thanks for taking the time to help us out.  Below you will find three
+applets.  The largest one is the browser window.  It has navigation
+controls all around it, and you will find it in the login state.  
+You need to type in your name and hit the "Reconnect" button to join
+the world.  From there you can use the navigation buttons to move
+around.  The two red/green indicators can tell you if the server is
+caught up with you or not.  The one on the right is the more reliable
+one, and you should probably refrain from further action when it is
+stuck red.  If it sticks for an abnormally long time, try clicking on
+it (which will turn it green) and then moving the mouse in the window.
+If it sticks red again then you should keep waiting.
+<p>
+The other two applets are a disconnect button and a smaller browser 
+which gives you a radar
+view of the world.  You can connect this if you want (note that it
+asks for your name but doens't actually use it in any way).  This 
+gives a condensed view of the world, and you can navigate in this view
+using the navigation buttons as well.  Note that you cannot change the
+world using this viewer.  The disconnect button will close down the
+connections for both the regular and the rader browsers, and return
+them to the login state.  If things get stuck, go ahead and do this.
+Note that if you disconnect and reconnect you will be returned to the
+same place in the world that you left.  If you get lost, you are 
+better off opening the radar viewer to find yourself.
+<p>
+In terms of using the world, you use your left mouse button to select
+and pick up objects in the world.  You should become immediately aware
+of a text widget with your name on it.  This is provided to let you talk
+to the other users.  Click on it and type.  Please don't type on other
+people's text widgets, it's not polite (and will also be prohibited in
+the future).  Note that you are responsible
+for hitting enter rather than running off the end of the line (future
+versions will word-wrap, I promise).  Note also that the arrow keys
+are broken in Netscape.  You will have to use the Emacs shortcuts instead
+(ctrl-F and crtl-B are forward and back on a line, ctrl-N and ctrl-P are
+next and previous lines, ctrl-A is home and ctrl-E is end)
+<p>
+The reality check information on the browser is as follows:
+<ul>
+   <li> The text at the top should say "Kansas viewer: built Tue Sep 10 10:57:27
+        PDT 1996 on host ourselves"
+   <li> The login name should be "java user" by default, change this
+   <li> The password field should be blank
+   <li> The hostname (for the server) should be inherit
+   <li> The port number should be 1420
+</ul>
+<p>
+If clicking reconnect brings you back to the login prompt, then try it 
+again.  If it fails two or three times in a row, call me.  Please be patient
+when joining the world or moving around in areas with many objects.
+<p>
+If you have problems, my extension is x61604 (Andy), or you can email me
+at <a href="mailto:acollins@ourselves.sun.com">acollins@ourselves</a>
+<p>
+Have fun!  Further instructions await you in Kansas.
+<hr>
+<p>
+Use whatever (decent) name you want.  No passwords are currently required.
+Changing the host and port are permitted, but ill advised.
+<hr>
+<APPLET CODE="SelfViewer.class" WIDTH=646 HEIGHT=588>
+<param name="xorigin" value="0">
+<param name="yorigin" value="0">
+</APPLET>
+<hr>
+If all you get is a blank screen, try this:
+<applet code="SelfDisconnectButton.class" width=100 height=30>
+</applet>
+
+<hr>
+<applet code="SelfViewer.class" width=400 height=340>
+<param name="xorigin" value="0">
+<param name="yorigin" value="0">
+<param name="showRadarView" value="true">
+</applet>
+
+<hr>
+Send email to <a href="mailto:acollins@ourselves.sun.com">acollins@ourselves</a>
+</BODY>
+</HTML>

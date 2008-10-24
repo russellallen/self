@@ -1,0 +1,18 @@
+-- Sun-$Revision: 9.1 $
+
+abstract type number isa comparable;
+
+method asFloat(@:number):float { abstract }
+
+-- mixed int/float arithmetic behavior
+
+method =(l@:number,r@:number):boolean { l.asFloat = r.asFloat }
+method <(l@:number,r@:number):boolean { l.asFloat < r.asFloat }
+method +(l@:number,r@:number):number  { l.asFloat + r.asFloat }
+method -(l@:number,r@:number):number  { l.asFloat - r.asFloat }
+method *(l@:number,r@:number):number  { l.asFloat * r.asFloat }
+method /(l@:number,r@:number):number  { l.asFloat / r.asFloat }
+
+method negate(n@:number):number { 0 - n }
+
+method abs(n@:number):number { if(n < 0, { negate(n) }, { n }) }

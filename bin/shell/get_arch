@@ -1,0 +1,30 @@
+#! /bin/csh -f
+
+# Sun-$Revision: 30.7 $
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information.
+
+# figure out the right name for the architecture directory and echo it
+# dmu 6/1
+
+if (`uname` == Darwin) then
+  set arch=mac_osx
+else if (`uname` == Linux) then
+  set arch=linux
+else
+  switch (`uname -r`)
+  case 5.*:
+    set arch=svr4
+    breaksw
+  case 4.1*:
+   set arch=sun4
+   breaksw
+  default:
+   echo Unknown architecture
+   exit 1
+   breaksw
+  endsw
+endif
+
+echo $arch

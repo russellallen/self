@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>Self discussion forum and wiki</TITLE>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</HEAD>
+
+<BODY>
+
+<div class="main_body">
+
+<H1>Self discussion forum and wiki</H1>
+
+<P>If you want to discuss Self with other interested people, try the <A HREF="http://tech.groups.yahoo.com/group/self-interest/">Self discussion group</A>. We would like to thank Jecel Assumpcao Jr for investing the time and effort to deeply understand the Self system, and furthermore for his help in explaining Self to many folks on the discussion group. Jecel also hosts the <a href="http://www.merlintec.com:8080/Self">Self Swiki</a>.</P>
+
+</div>
+
+<!--#include virtual="template.shtml" -->
+
+</BODY></HTML>
+

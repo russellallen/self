@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>The Self Group</TITLE>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</HEAD>
+<BODY>
+
+<div class="main_body">
+         
+<H1>The Self Group</H1>
+         
+<P>The Self Group was:</P>
+         
+<UL>
+  <LI>Ole Agesen</LI>
+  <LI>Lars Bak</LI>
+  <LI><A HREF="http://www.cs.washington.edu/people/faculty/chambers.html">Craig Chambers</A></LI>
+  <LI>Bay-Wei Chang</LI>
+  <LI>Robert Duvall</LI>
+  <LI><A HREF="http://www.cs.ucsb.edu/~urs">Urs H&ouml;lzle</A></LI>
+  <LI>Ole Lehrmann Madsen</LI>
+  <LI>John Maloney</LI>
+  <LI><A HREF="http://www.sun.com/research/people/randall.smith">Randy Smith</A></LI>
+  <LI>David Ungar</LI>
+  <LI><A HREF="http://www.sun.com/research/people/mario">Mario Wolczko</A></LI>
+</UL>
+
+<HR>
+
+<H2><CENTER>Much of the Self group plus friends and family</CENTER></H2>
+
+<CENTER><IMG SRC="images/groupPhoto.gif" ALT="Self group photo" width="620" height="427" align="bottom" /></CENTER>
+
+</div>
+
+<!--#include virtual="template.shtml" -->
+         
+</BODY></HTML>

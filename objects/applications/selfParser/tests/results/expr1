@@ -1,0 +1,20 @@
+
+expressionSeries 12 2 3
+  pop 4 .
+  pop
+    unarySend: a
+      <implicitSelf> .
+  pop
+    unarySend: b
+      <implicitSelf> .
+  unarySend: c
+    <implicitSelf>
+  pop
+    unarySend: a
+      <implicitSelf> .
+  pop
+    unarySend: b
+      <implicitSelf> .
+  pop
+    unarySend: c
+      <implicitSelf> .

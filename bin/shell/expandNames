@@ -1,0 +1,70 @@
+#! /bin/csh -f
+
+# Sun-$Revision: 30.6 $
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+# expandNames compute the list of existing files in the set:
+#  "files + (names * suffixes)"
+
+set nonomatch
+
+set names      = ()
+set extensions = ()
+set files      = ()
+
+while ($#argv > 0)
+    switch ("$1")
+	case "-e":
+            # Specify the possible extensions to the files
+	    shift
+	    if ($#argv == 0) goto usage
+            set extensions = ($extensions $1)
+            breaksw
+	case "-f":
+            # Specify files
+	    shift
+	    if ($#argv == 0) goto usage
+            set files = ($files $1)
+            breaksw
+	case "-n":
+            # Specify names (files with possible extensions)
+	    shift
+	    if ($#argv == 0) goto usage
+            set names = ($names $1)
+            breaksw
+	default:
+	    break
+    endsw
+    shift
+end
+
+set filelist = ()
+
+# Add existing ("names" X "extensions") to filelist
+foreach workfile ($names)
+    unset found
+    foreach ext ($extensions)
+        if (-e $workfile$ext) then
+            if ($?print) then
+               echo "$workfile exists; processing"
+	    endif
+            set found
+            set filelist = ($filelist $workfile$ext)
+        endif
+    end
+
+    if (! $?found) then
+	echo "error: $workfile does not exist; ignoring"
+	exit -1
+    endif
+end
+
+echo $files $filelist
+
+exit 0
+
+usage:
+    echo "usage: expandNames {-f file|-n name|-e suffix}*"
+    exit 1

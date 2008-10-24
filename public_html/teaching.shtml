@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>Teaching Self and Prototype-Based Programming</TITLE>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</HEAD>
+<BODY>
+
+<div class="main_body">
+
+<H1>Teaching Self and Prototype-Based Programming</H1>
+
+<p>Self's simple yet powerful object model makes it an ideal vehicle for introducing object concepts.</p>
+
+<p>Several institutions have used Self in this capacity, to a variety of target audiences.</p>
+
+<ul>
+
+<li>A group at <A HREF="http://www.cs.brown.edu">Brown
+University</A> has investigated Self as a medium for introductory
+programming courses.  Their Web site contains a description of their
+<A HREF="http://www.cs.brown.edu/courses/cs196b/">course</A>, intended
+to teach the teachers about OOP.  There is also a <A
+HREF="http://www.cs.brown.edu/courses/cs196b/slides/SunSummary.fm.pdf">report</A>
+on their experiences.  (To read this, and some other documents at
+Brown, you will need <A
+HREF="http://www.adobe.com/Software/Acrobat/">Adobe's Acrobat
+software</A>.)</li>
+
+<li>The <A HREF="http://www.cs.man.ac.uk/peve/index.html">PEVE Unit at
+the University of Manchester</A> has run an <A
+HREF="http://www.cs.man.ac.uk/peve/Courses/oops-self.html">introductory
+course on object concepts</A>, using Self 3.0 as an explanatory
+medium.  <A HREF="./manuals/manchester-course.ps.gz">Notes for the course</A>
+are available in PostScript (600Kb, uncompressed).</li>
+
+<li><A HREF="http://www.doc.mmu.ac.uk">The Dept of Computing at
+Manchester Metropolitan University</A> has been teaching Self as part
+of a Masters-level module on OOP.  More information will be available
+on the course in Spring 1996.  The contact for the course is <A
+HREF="http://www.doc.mmu.ac.uk/STAFF/M.Fisher">Michael
+Fisher</A>.</li>
+
+<li><A HREF="http://www.daimi.aau.dk">The Dept of Computer Science at
+The University of Aarhus</A> is teaching Self as part of a course on
+prototype-based languages.  <A
+HREF="http://www.daimi.aau.dk/DAIMI/ScientificStaffProfiles/olm.html">Ole
+Lehrmann Madsen</A> is the contact for this course.</li>
+
+<li> There is a <A
+HREF="./manuals/tutorial.ps.gz">Self 4.0 tutorial</A>
+and <A HREF="./manuals/tutorial-slides.ps.gz">related
+slides</A> available, serves as an introduction to the language and
+system.</li>
+
+</ul>
+
+<hr>
+
+<P>
+Last modified 5 Dec 1995.
+
+</div>
+
+<!--#include virtual="template.shtml" -->
+
+</BODY></HTML>
+

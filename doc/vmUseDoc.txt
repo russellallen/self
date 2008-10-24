@@ -1,0 +1,528 @@
+% Sun-$Revision: 30.2 $
+
+
+Notes on how to Use the Self Development System
+===============================================
+
+  Miles Ohlrich, Jeffrey Dean, Christine Ahrens, and Craig Chambers
+  Department of Computer Science and Engineering
+  University of Washington
+
+
+Working trees, baselines, and all that
+--------------------------------------
+
+There exists a directory tree called the baseline that holds all the
+standard source code for the Self implementation and the Self code.
+Each baseline directory containing text files also contains an RCS
+subdirectory which holds RCS files for all the text files.
+
+Each person who wants to be making modifications to this code gets
+his/her own copy of the whole directory tree; this personal copy of
+the tree is called a working tree.  To make modifications to the
+system, the person modifies his/her own working tree to their heart's
+content.  There exist scripts that support checking in all local
+changes to the baseline (called a publish) and merging all
+improvements published by other users into a person's working tree
+(called an update).  These scripts internally perform RCS commands,
+ensuring that there's a log of all changes that have been made.
+
+One invariant: the baseline should always be a correct working system,
+suitable for demos.  Never publish changes that would violate this
+invariant.
+
+At UW, the baseline is in /projects/self/self-baseline; working
+trees are typically placed in $(HOME)/self.
+
+
+Your .cshrc File
+----------------
+
+Before running Self or recompiling Self, you need to move the
+following into your .cshrc (the directories used are appropriate for
+UW):
+
+  setenv SELF_WORKING_DIR  ~/self	   # the place for the working tree
+  setenv SELF_BASELINE_DIR /projects/self/self-baseline # the baseline
+
+  setenv SELF_LD_PATH $SELF_BASELINE_DIR/lib
+  if ($?LD_LIBRARY_PATH) then
+     setenv LD_LIBRARY_PATH	 ${LD_LIBRARY_PATH}:${SELF_LD_PATH  }
+  else
+     setenv LD_LIBRARY_PATH	 $SELF_LD_PATH
+  endif
+  unsetenv SELF_LD_PATH
+
+  set path=($SELF_WORKING_DIR/bin/{$arch,shell} \
+	    $SELF_BASELINE_DIR/bin/{$arch,shell} \
+	    $path \
+	    {$SELF_WORKING_DIR,$SELF_BASELINE_DIR}/self \
+	    {$SELF_WORKING_DIR,$SELF_BASELINE_DIR}/optimized/sun4 )
+
+This code may also be found in ${SELF_BASELINE_DIR}/self.cshrc at UW, which
+can simply be source'd as part of reading your .cshrc.
+
+
+make options
+------------
+
+Each directory has a Makefile which supports a variety of
+operations.  When invoked in $(HOME)/self, recursively traverses all
+subdirectories, too.
+
+make update
+  Updates files from the baseline.  For all files that have been
+  changed in the baseline since the last update, this operation will
+  create a new file that contains the merge of local changes and other
+  published changes.  If any changes overlap, then a merge conflict
+  arises; these need to be resolved by hand.  To assist in understanding
+  what happened during an update, the original pre-update file is always
+  available in a file named *.OLD.
+
+  Update will also create new files added to the baseline, and remove
+  old files removed from the baseline.  If changes have been made to the
+  local file and it was deleted as part of the update, the local file is
+  still around, renamed to *.OLD.
+
+  Update merges the baseline with the changes that you have already
+  made.  Thus, if you make changes and want to get rid of them, delete
+  the files before doing a make update.
+
+  You should do make browse once you've updated.  It will show
+  you the difference between new and old versions of your working tree
+  source (i.e., the changes to your code that resulted from make
+  update).
+
+  To avoid browsing changes from earlier updates, it's a good
+  idea to remove all the *.OLD files before an update.
+
+  See the section on updating for more information.
+
+make publish
+  Publishes changed files to the baseline.  Publish only works if no
+  other publishes have happened since the last time you did an update,
+  so as a general rule, do a make update just prior to a make
+  publish, to ensure that no one else has done a publish recently.
+  Since make publish gives new revision numbers to all published
+  files, a make touch after the publish will avoid unnecessary
+  recompilation after a publish.
+
+  For new files, make publish will ask whether the files should be
+  checked in.  Text files containing $\Revision$ lines (without the \)
+  should be, while binary executables should not.
+
+  Make publish might also ask if you want to remove an old baseline
+  file.  This is expected if you have removed a file locally and want it
+  to be removed in the baseline, too.  If not, then something is amiss
+  and further checking is called for (just say no to the question and
+  then investigate).  Removing a baseline file doesn't remove the RCS
+  log; that stays around forever.
+
+  See the section on publishing for more details.
+
+make browse
+  Reports all changes made as a result of a make update.
+
+make compare
+  Reports differences between files in the working tree and the baseline.
+
+make lists
+  After adding and/or removing a file from the list of C++/asm source
+  files (the list of files that get compiled and linked to form Self),
+  possibly through an update, you need to run make lists in any of
+  the sun[34]/{debug,optimized,profiled} directories you want to
+  recompile.  This rebuilds all the symbolic links to the scattered
+  source files and automatically runs make includeDB at the end.
+
+make includeDB
+  If you add or remove a #include dependency by editing the
+  includeDB file in $(HOME)/self, you need to run make
+  includeDB to get these updates included in future recompilations.  DO
+  NOT modify the includeDB file in the compiling directories; they
+  are automatically generated from the master file in
+  $(HOME)/self.  The includeDB file contains an entry for every
+  #include dependency from one file to another.  No source files
+  directly include any dependencies, except for .c and .s
+  files which must include the single line
+
+    #include "file.[cs].incl"
+
+  make includeDB generates a file.[cs].incl file and a
+  file.[cs].dep file for each source file; the latter are read in to
+  the Makefile to reflect inter-file dependencies for make.
+
+make touch
+  This command does a touch on all .o and other
+  compilation-related output files in the directory.  Useful after a
+  make publish.
+
+make backup
+  Calls the Backup script for all source files.  Pretty old.
+
+make files
+  Makes all the .o files but doesn't do the link step.  Useful for
+  a bunch of makes run in parallel.  A make Self command
+  should be run on one machine to do the actual linking.
+
+  Parallel makes are automatically managed by the makefiles so that only
+  one machine compiles any particular file. This is implemented by
+  creating a lock file for each file as the compile begins, and avoiding
+  compiling already-locked files (see the lock_run program and
+  the Makefile for details).
+
+  A naked make (not make Self) removes all old lock files
+  first, so a naked make shouldn't be done if there's already an
+  existing make files running in that directory.
+
+make clean
+  This removes all automatically-generated files from a directory.
+
+make convertToUWRevs and make convertToSunRevs
+  Things that Craig runs to transfer files between Sun/Stanford and UW.
+
+make selfWorkingTree
+make vmWorkingTree
+make cecilWorkingTree
+  Builds a fresh new working tree directory structure for a new
+  person.  Run make update afterwards to fill it in with files.
+  The first command builds something for people who just want to write
+  and run Self programs.  The second builds the full working tree for 
+  people who want to modify the Self virtual machine implementation.
+  The third command is useful for people who want to run or modify the
+  Cecil interpreter, written in Self.
+
+make tags
+  Makes a tags file from the sources.
+
+make ftp
+  Used to ftp a new release of the system to the appropriate place.
+
+
+How to add or delete a file
+---------------------------
+
+Put the file in a source directory.  New files should NOT be created
+in the compilation directories
+$(HOME)/self/sun[34]/{debug,optimized,profiled}, which is where
+all the soft links are made.  At the beginning of the file, put a line
+that looks like:
+
+	/* $\Revision$ */
+
+without the \ (which is there so checking in this text file won't
+alter the text above!).
+
+This line will be filled in with a revision number when you publish the file.
+
+You must also include #pragma lines.  The #pragmas are
+entered by hand and are commands to GNU gcc to avoid duplicating
+symbols and other stuff in every .c file that #includes a
+.h file.  Each .h file (almost) should have a
+#pragma interface line (all except those read by the assembler,
+which doesn't like #pragmas), and exactly one .c file
+should have a #pragma implementation for each header file.  A
+#pragma line looks like the following:
+
+	# pragma implementation "file.h" (in file.c file)
+
+	# pragma interface  (in file.h file)
+
+Add the new file to the list of files in the Makefile in that
+source directory.  Then add the headers that it will use into
+$(HOME)/self/includeDB.  Now do make lists (this runs
+make includeDB automatically at the end).  Whenever you make changes
+to the file, do a make.  Whenever you add or remove an include
+dependency, do make includeDB, then make.
+
+If you delete a file, remove its lines from the original includeDB
+(in $(HOME)/self) and run make lists and make.
+
+
+MachineName files
+-----------------
+
+Located typically in $(HOME)/bin are the following files: 
+
+  compileMachineNames
+  linkMachineName
+  nicedCompiledMachineNames
+  nicedLinkMachineName
+
+These files contain the names of the machines used in a parallel make.
+
+
+Useful Programs
+---------------
+
+mf
+  mf does a parallel make on a group of machines.  The machines to
+  use are derived by running the various MachineName scripts
+  described above.  In order to stop a parallel make, use mzap
+  below.
+
+mzap and zap
+  Typing zap make kills a make on the current machine.
+  mzap does an rsh to all machines and runs zap make on each
+  machine.  mzap is used to stop a parallel make started by
+  mf.
+
+
+Compiling Self tricks
+---------------------
+
+Just changing debug.h to add new user changeable variables.
+It's only necessary to recompile debug.o, prim.o, and
+oop.o.  Touch the appropriate files to prevent a massive
+recompilation.
+
+
+Updating Notes
+--------------
+
+There are a few source files that are generated automatically by the
+Self primitive maker program.  These files include *.primMaker.h
+and *.wrappers.self files.  (They all have a comment at the top
+saying they're machine generated.)  These files do not have revision
+numbers automatically-generated for them.  This means that if they're
+changed (by running the primitive maker on a new set of templates),
+then make update won't be able to figure out what to do.  It
+reports a message like "bad revision numbers" and then asks if you
+want to update anyway.
+
+If you haven't changed the file, then it's pretty likely that the
+change is due to someone else changing the baseline version, and you
+want to get their changes, so you normally answer y to this
+question.
+
+If for some reason you have changed the file (because you added,
+changed, and/or removed some glue primitives to the system), then
+you'll get this message too, but you won't want to throw away all your
+local changes, so you say n to the question.  Since someone else
+might have changed the file too, in this case you need to manually run
+diff on the two files to see if there are any other changes you need
+to incorporate in your local version of the file.  Or you can just
+re-run the primitive maker to regenerate your file after answering
+y to the question.
+
+If in doubt, answer y, and then do a make browse or a
+diff to see what happened, and manually get the files correct.
+
+
+Publishing Notes
+----------------
+
+When publishing a set of revisions you should generally follow the
+following steps:
+
+  Do a make update in your ~/self directory, to ensure
+  that you have the latest set of revisions.
+
+  Compile all 3 versions of the compiler for the Sun-4.  These are
+  found in ~/self/sun4/{debug,optimized,profiled}.
+
+  Test your revisions sufficiently to ensure they are working
+  correctly.  At a minimum, this involves running tests runSuite
+  from the Self prompt in the debug and optimized versions.  It's
+  important to run the debug version of the tests because the
+  assertions in that version will detect many problems that might not
+  arise using the optimized version.  If the changes were substantial,
+  you should run the test suite in all three versions of the compiler.
+  The optimized version should be run too because this is the version
+  that is used for demos and by people who just want to use Self rather
+  than modify it.
+
+  If you have other tests that you feel are appropriate, run
+  these to ensure that they give the expected results.  If you feel
+  these are generally useful, consider adding them to the test suite.
+
+  Do a make compare in ~/self to ensure that the
+  changes you made are sensible and that you aren't publishing code in
+  an unclean state (commented out debugging code, unused variables,
+  etc).  Make sure that it is clear what your changes do, either
+  directly from the code or from comments.
+
+  Once you are confident that your revisions work correctly, type 
+  make publish in ~/self.  This will check in all the
+  modified files to the baseline version of the system.
+
+  Send mail to the other implementors at your site notifying them
+  of the new version so that they can update.
+
+
+Snapshots
+---------
+
+This stuff is all described in much more detail in the Self manual.
+
+You create a snapshot with the command 'all' run followed
+by 'ws'.
+
+Load a snapshot in a couple of ways:
+
+  Use Snapshot instead of Self to start up the system.
+
+  Use rs from the Self prompt.  Short for 'Snapshot'
+  _ReadSnapshot (sort of).
+
+
+Tests and Benchmarks
+--------------------
+
+To test the system, start Self, read in the world ('all'
+run), create a snapshot (ws), and evaluate tests
+runSuite.  This will run tons of Self code and do a pretty good test
+of the system.  It takes a while, though.  If you're running Self on
+the Sun workstation at your desk (i.e., not remotely on another
+machine), then you can test the UI by evaluating ui test.
+
+
+Run benchmarks with the benchmarks measurePerformance command.
+This will run the basic benchmarks suite.  There are also other
+benchmark suites in the benchmarks library:
+
+  coreSuite - Just the Stanford integer benchmarks (nice and small)
+  largeSuite - Suite of large program which take a long time to compile
+  measuringSuite - all benchmarks
+
+An example of running one of these suites is:
+
+  benchmarks measurePerformanceOf: benchmarks measuringSuite
+
+When running any of the suites with the large programs which take a
+while to compile, it is best to set _MaxCompilePause: 300000
+(or some large number) and _MaxCompilerResourceUsage: 15 * 1024
+* 1024.  This will prevent compilations from running out of time
+and/or space and taking forever to execute because bad code is
+generated.
+
+If you're running benchmarks and then want to re-run them, you must do
+a _Flush if you want the compilation times to be accurate, or if you
+have changed some parameters which affect the compiler.  This will
+force the compiler to recompile everything.
+
+
+If you want to use the inlining compiler (slower to compile but
+generated code is faster), you have to set _FirstCompiler:
+'new'.  If you want the non-inlining compiler (the nic), the new
+compiler after so many executions of any given method), you should say
+_FirstCompiler: 'nic'.  I generally leave the compiler set to
+'nic' and modified my benchmarks.self file to turn on the
+new compiler just before it runs a benchmark and turn it back off
+again when it finishes.  Otherwise, things slow down pretty badly.
+Additionally, if you set
+_FirstCompiler: 'nic' but do not set _Recompiler: 'none',
+then the system will automatically recompile methods with the new
+compiler after they have been called 10,000 times (settable by a debug
+parameter; see the manual or debug.h).  If you do not want any
+recompilations of this sort, set _Recompiler: 'none'.  But why
+wouldn't you?
+
+
+Profiling
+---------
+
+To make a profile of your system (using the profiled version of Self):
+
+  VM# _VMProfiling: true
+  VM# [ ... ] value
+  VM# _VMProfiling: false
+  VM# _Quit
+
+  ;; this creates gmon.out, a gprof data file
+
+  ;; now put profile data in a nice form
+  lutefisk% profile [output file name, defaults to Profile]
+
+
+Self Subdirectory Contents
+--------------------------
+
+memory
+
+	Object representations
+	g.c. (various types:  generational scavenging and mark and sweep)
+	and heap spaces
+
+fast_compiler
+
+    	The nic compiler implementation
+	unoptimized compiler
+	works on SPARC and Sun-3
+
+new_compiler
+
+	new optimizing compiler
+	runs only on SPARC
+
+asm
+
+	back end assembler
+
+zone
+
+	``nmethods'' = native code methods, compiled, as in [Deutch-Schiffman]
+	``nmln'' = nmethod link, implementation of dependency links
+		(doubly linked list)
+	``codeTable'' = optimizes method lookup if method not found in lookup
+		hash table
+
+parser
+
+	recursive descent parser, handwritten for Self
+	constructs objects from text and stores them in the heap
+
+lookup
+
+	definitions for method lookup
+	inline caching
+
+runtime
+
+	runtime support (asm glue, which ties compiled code and C++ together)
+	stack frames
+	multiple processes
+
+prims
+
+	system primitives
+
+altered
+
+	system .h files changed by Self group
+
+self
+
+	Self code
+
+sun[34]
+
+	debug
+	optimized
+	profiled - optimized and profiled
+
+mac
+
+	mac OS port - dead
+
+doc
+
+	various short documents
+
+bin
+
+        shell - supporting shell scripts
+	src - C/C++ source code for other support programs
+	sun[34] - binaries generated from src
+
+applications
+
+	A place for Self applications that aren't part of the kernel
+	release, such as the Cecil interpreter.
+
+
+Other Ideas
+-----------
+
+gdb
+style sheet
+running and adding test suites

@@ -1,0 +1,34 @@
+-- Sun-$Revision: 9.1 $
+
+-- For starting and quitting the cecilUI,
+-- and adding results of evaluated expressions to the cecilUI
+
+prim method start_ui():void { "
+    cecilUI startOn: context interp.  cecil_void
+" "
+    fatal(\"sorry, not implemented\");
+" }
+
+prim method quit_ui():void { "
+    cecilUI quit.  cecil_void
+" "
+    fatal(\"sorry, not implemented\");
+" }
+
+prim method ui_add(obj:any):void { "
+    cecilUI addObj: obj.  cecil_void
+" "
+    fatal(\"sorry, not implemented\");
+" }
+
+prim method add_result():void { "
+    context interp showInCecilUI: true.  cecil_void
+" "
+    fatal(\"sorry, not implemented\");
+" }
+
+prim method no_add_result():void { "
+    context interp showInCecilUI: false.  cecil_void
+" "
+    fatal(\"sorry, not implemented\");
+" }

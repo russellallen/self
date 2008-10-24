@@ -1,0 +1,170 @@
+#! /bin/csh -f
+
+# Sun-$Revision: 30.6 $
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+# saves off the current revision #'s to a file and restores new revision #'s
+
+if (! $?MAKE) set MAKE = gmake
+
+# check # of args
+
+if ($#argv < 2) then
+    goto usage
+endif
+
+# compute revision prefixes
+
+set srcPrefix = $1
+shift
+if ($srcPrefix != UW && $srcPrefix != Sun) then
+    echo "Unexpected source prefix $srcPrefix; aborting"
+    goto usage
+endif
+
+set dstPrefix = $1
+shift
+if ($dstPrefix != UW && $dstPrefix != Sun) then
+    echo "Unexpected destination prefix $dstPrefix; aborting"
+    goto usage
+endif
+
+if ($srcPrefix == $dstPrefix) then
+    echo "source and destination prefixes are the same: $srcPrefix; aborting"
+    goto usage
+endif
+
+
+set rootdir = $SELF_TRANSFER_DIR
+set revdir  = $SELF_REVISIONS_DIR
+
+# process options
+
+while ($#argv > 0)
+    switch ("$1")
+	case "-d":
+	    # set root directory name
+	    shift
+	    if ($#argv == 0) goto usage
+	    set rootdir = $1
+	    breaksw
+	case "-r":
+	    # set revisions directory name
+	    shift
+	    if ($#argv == 0) goto usage
+	    set revdir = $1
+	    breaksw
+	case "-v":
+	    # verbose: print out the logic of the update
+	    set print
+	    breaksw
+	case "-h":
+	    # print out usage information
+	    goto usage
+	case "-":
+	    # assume all remaining arguments are files to be updated
+	    shift
+	    break
+	case "-?":
+	    # ignore all other switches
+	    echo "warning: switch $1 ignored"
+	    breaksw
+	default:
+	    # assume all remaining arguments are files to update
+	    break
+    endsw
+    shift
+end
+
+
+# compute files to process
+
+if ($#argv != 0) then
+    set files = ($*)
+else
+    set files = `$MAKE rcsFileList`
+endif
+
+
+# compute relative directory
+
+if (! -d $rootdir) then
+    echo "$rootdir is not a directory; aborting"
+    exit -1
+endif
+set reldir = `cwdRootedIn $rootdir`/
+if ($status != 0) then
+    exit -1
+endif
+if ($reldir == ./) then
+    set reldir = ""
+endif
+
+
+# compute revision files
+
+set srcfile = $revdir/${srcPrefix}Revisions
+set dstfile = $revdir/${dstPrefix}Revisions
+if (! -e $srcfile) then
+    echo "$srcfile does not exist; aborting"
+    exit -1
+endif
+if (! -e $dstfile) then
+    echo "$dstfile does not exist; aborting"
+    exit -1
+endif
+
+# extract, save, load, and insert revision numbers for each file
+
+foreach f ($files)
+    # check errors
+    if ({ grep -s $dstPrefix'-$\Revision[^\]*\$' $f }) then
+        echo "$f already converted to $dstPrefix revision numbers; not converting"
+        continue
+    endif
+    if (! { grep -s '$\Revision[^\]*\$' $f }) then
+        echo $f has no \$Revision\$ line\; ignoring
+        continue
+    endif
+
+    # save old revision number
+    if ($?print) then
+        echo Saving revision number of $f
+    endif
+    echo -n $reldir$f >> $srcfile
+    echo 's|^.*[^-]$\(Revision[^\]*$\).*$| $\1|p' > /tmp/t$$
+    echo 's|^.*'$srcPrefix'-$\(Revision[^\]*$\).*$| $\1|p' >> /tmp/t$$
+    echo 's|^$\(Revision[^\]*$\).*$| $\1|p' >> /tmp/t$$
+    sed -n -f /tmp/t$$ $f >> $srcfile
+    rm /tmp/t$$
+
+    # restore new revision number
+    if ($?print) then
+	echo Restoring revision number of $f
+    endif
+    set entry = `grep \^$reldir$f' ' $dstfile`
+    if ("$entry" == "") then
+	set rev = \$\Revision\$
+    else
+	set rev = `echo $entry | sed -n -e 's|^.*$\(Revision[^\]*\)$.*$|$\1$|p'`
+    endif
+    mv $f $f.OLD.$$
+    echo 's|'$srcPrefix'-$\Revision[^\]*\$|'$dstPrefix'-'$rev'|' > /tmp/t$$
+    echo 's|\([^-]\)$\Revision[^\]*\$|\1'$dstPrefix'-'$rev'|' >> /tmp/t$$
+    echo 's|^$\Revision[^\]*\$|'$dstPrefix'-'$rev'|' >> /tmp/t$$
+    sed -f /tmp/t$$ $f.OLD.$$ > $f
+    rm /tmp/t$$
+    if (-x $f.OLD.$$) then
+	 chmod +x $f
+    endif
+    rm $f.OLD.$$
+end
+
+exit
+
+usage:
+    echo "usage: $0 UW|Sun Sun|UW [-d rootdir] [-r revdir] [-s] [-v] [-] [files]"
+    echo "   or: $0 -h"
+    exit -1

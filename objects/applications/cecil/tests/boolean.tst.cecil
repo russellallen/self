@@ -1,0 +1,71 @@
+-- "Sun-$Revision: 9.1 $"
+-- load("boolean.tst.cecil");
+
+method boolean_tests() {
+       print_line("*** boolean.tst.cecil ***");           
+       if( boolean_test1() != 123 , {  print("***test1 fail***"); });
+       if( boolean_test2() != "false" , { print("***test2 fail***"); });
+       if( boolean_test3() != "true ok" , { print("***test3 fail***"); });
+       if( boolean_test4() != "false ok" , { print("***test4 fail***"); });
+       if( boolean_test5() != "true ok" , { print("***test5 fail***"); });
+       if( boolean_test6() != "false ok" , { print("***test6 fail***"); });
+       print_line("done");
+}
+
+method boolean_test1():integer {
+	var a := { ^ 123 };
+	if(true, a);
+	1
+}
+
+-- boolean_test1();
+-- 123
+
+method boolean_test2():string {
+	var a := { ^ "123" };
+	if(false, a);
+	^ "false"
+}
+
+-- boolean_test2();
+-- "false"
+
+method boolean_test3():string {
+	var a := { ^ "true ok" };
+	var b := { ^ "false then fail" };
+	if(true, a, b);
+	^ "error"
+}
+
+-- boolean_test3();
+-- true ok
+
+method boolean_test4():string {
+	var a := { ^ "true then fail" };
+	var b := { ^ "false ok" };
+	if(false, a, b);
+	^ "error"
+}
+
+-- boolean_test4();
+-- false ok
+
+method boolean_test5():string {
+	var a := { ^ "true ok" };
+	var b := { ^ "false oh no" };
+	if( 1 = 1, a, b);
+	"neither"
+}
+
+-- boolean_test5();
+-- true ok
+
+method boolean_test6():string {
+	var a := { ^ "true oh no" };
+	var b := { ^ "false ok" };
+	if( 11=1, a, b);
+	"neither"
+}
+
+-- boolean_test6();
+-- false ok

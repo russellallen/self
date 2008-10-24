@@ -1,0 +1,10 @@
+-- Sun-$Revision: 9.1 $
+
+-- methods for collections with an unordered group of elements
+
+abstract type unordered_collection[T] isa collection[T];
+
+abstract type set[T] isa unordered_collection[T];
+
+abstract type bag[T] isa unordered_collection[T];
+

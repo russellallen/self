@@ -1,0 +1,27 @@
+#! /bin/csh -f
+# Sun-$Revision: 30.6 $
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+set output = Profile
+set program = Self
+
+switch ($#argv)
+  case 0:
+    breaksw
+  case 1:
+    set output = $1
+    breaksw
+  case 2:
+    set output = $1
+    set program = $2
+    breaksw
+  default:
+    echo illegal arguments
+    exit
+endsw
+
+gprof -b -E _moncontrol -E _profil -E .mcount $program | grep -v '\[[_a-zA-Z.]' > $output
+
+rm gmon.out

@@ -1,0 +1,18 @@
+
+expressionSeries
+  object (
+    slotList |
+      slot
+        unarySlotName a .
+      annotatedSlotGroup { 'b'
+        slot
+          unarySlotName c .
+        slot
+          unarySlotName d
+        annotatedSlotGroup { 'e'
+          slot
+            unarySlotName f } .
+        slot
+          unarySlotName g . }
+      slot
+        unarySlotName h | )

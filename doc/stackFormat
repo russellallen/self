@@ -1,0 +1,69 @@
+/* Sun-$Revision: 30.3 $ */
+
+Copyright 1992-2001 Sun Microsystems, Inc. and Stanford University.
+See the LICENSE file for license information.
+
+Sparc Format of Self & C Stack/Registers:
+
+    argn		    ; args past the 5th are pushed on the stack
+    ...
+    arg7
+    arg6
+    in registers	    ; space to dump I0-I5 (if this frame was a C frame)
+    hidden parameter word   ; hidden parameter (if this frame was a C frame)
+    caller I7		    ; caller's saved register window
+    ...
+FP: caller L0
+    link		    ; stack frame nmethod link word
+    currentPC		    ; current PC (valid only for frame with
+			    ; invalid nmethod)
+    unused		    ; unused (SP must be doubleword-aligned)
+    temp1		    ; this frame's temporary stack locations
+    temp2
+    ...
+    tempn
+    callee argn		    ; space for callee's args past the 5th
+    ...
+    callee arg7
+    callee arg6
+    callee in registers	    ; space for callee to dump I0-I5 registers
+    callee hidden parameter ; space for callee's hidden parameter word
+      ; register window on stack
+    I7: return pc	    ; return address for this frame
+    I6: FP	    	    ; pointer to top of this frame
+    I5: arg5		    ; first 5 arguments in registers
+    I4: arg4
+    I3: arg3
+    I2: arg2
+    I1: arg1
+    I0: receiver[/parent]   ; receiver (and parent block in old compiler)
+    L7:
+    L6:
+    L5:
+    L4:
+    L3:
+    L2:
+    L1:
+SP: L0:
+
+
+68000 Format of Self & C stack:
+
+    argn		    ; args pushed on right to left; receiver in D0
+    ...
+    arg2
+    arg1
+    return pc		    ; then call the callee
+FP: frame		    ; do a LINK
+    link		    ; stack frame nmethod link word
+    currentPC		    ; current PC (valid only for frame with
+			    ; invalid nmethod)
+    unused		    ; unused (to reduce differences with sparc version)
+    temp1[parent]	    ; callee's temps (parent block in old compiler)
+    ...
+    tempn
+    registers		    ; saved registers (subset of D2-D7, A2-A5)
+    callee argn		    ; outgoing arguments
+    ...			    ; (stack frame always has same size)
+    callee arg2
+    callee arg1

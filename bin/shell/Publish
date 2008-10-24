@@ -1,0 +1,439 @@
+#! /bin/csh -f
+
+# Sun-$Revision: 30.8 $
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+# moves and checks in specified files from the current into a target directory,
+# checking first that the revision numbers match.
+
+set nonomatch
+
+set copyfn = cp
+
+set basedir = $SELF_BASELINE_DIR
+set rootdir = $SELF_WORKING_DIR
+if (! $?MAKE) set MAKE = gmake
+
+set arch=`get_arch`
+
+# make sure we get the right executables
+# (would break if . is in path and publishing binaries of another architecture)
+set path = ($SELF_WORKING_DIR/bin/{$arch,shell} \
+	    $SELF_BASELINE_DIR/bin/{$arch,shell} \
+	    $SELF_BASELINE_DIR/other/bin/$arch \
+	    $path)
+
+unalias pushd popd
+
+set ciflags = "-q -t/dev/null"
+
+set msg = Update
+
+# best to change these values in this file, so they remain in effect in the 
+# future (-rev and -N should probably not be used normally)
+set rev = 30
+set name = Ported_Interpreter_Only_To_PPC
+
+set noRCSfiles    = () 
+
+while ($#argv > 0)
+    switch ("$1")
+	case "-d":
+	    # set root directory name
+	    shift
+	    if ($#argv == 0) goto usage
+	    set rootdir = $1
+	    breaksw
+        case "-b":
+            # binaries
+	    shift
+	    if ($#argv == 0) goto usage
+            set noRCSfiles = ($noRCSfiles $1)
+            breaksw
+	case "-rev":
+	    # specify the ci revision number explicitly
+	    shift
+	    if ($#argv == 0) goto usage
+	    set rev = $1
+	    breaksw
+	case "-M":
+	    # specify the -m field to ci
+	    shift
+	    if ($#argv == 0) goto usage
+	    set msg = $1
+	    breaksw
+	case "-N":
+	    # specify the -N field to ci
+	    shift
+	    if ($#argv == 0) goto usage
+	    set name = $1
+	    breaksw
+	case "-s":
+	    # specify the -s field to ci
+	    shift
+	    if ($#argv == 0) goto usage
+	    set ciflags = "$ciflags -s$1"
+	    breaksw
+	case "-f":
+	    # force a publish for all files, not just those that changed
+	    set force
+	    set ciflags = "$ciflags -f"
+	    breaksw
+	case "-l":
+	    # use symbolic links rather than copying
+	    set links
+	    set copyfn = "ln -s"
+	    breaksw
+	case "-v":
+	    # verbose: print out the logic of the publish
+	    set print
+	    breaksw
+	case "-t":
+	    # don't test for revision conflicts
+	    set notest
+	    breaksw
+	case "-a":
+	    # publishing all files; clean out any others
+	    set pubAll
+	    breaksw
+	case "-h":
+	    # print out usage information
+	    goto usage
+	case "-":
+	    # assume all remaining arguments are files to be published
+	    shift
+	    break
+	case "-?":
+	    # any other switch is ignored
+	    echo "warning: $1 switch ignored"
+	    breaksw
+	default:
+	    # not a switch; all remaining arguments are files to be published
+	    break
+    endsw
+    shift
+end
+
+if (! -d $rootdir) then
+    echo "$rootdir is not a directory; aborting"
+    exit -1
+endif
+set subdir = `cwdRootedIn $rootdir`
+if ( $status != 0) then
+  exit 1
+endif
+
+set dir = $basedir/$subdir
+
+if ($#argv != 0) then
+    set files = ($*)
+else
+    set files = `$MAKE publishList`
+endif
+
+set ciflags = "-u$rev -m$msg -N$name $ciflags"
+
+set lockfile = $dir/.lock
+
+onintr cleanup
+
+set oldmask = `umask`
+umask 222
+echo -n $user is publishing > /tmp/$$
+if (! { cp /tmp/$$ $lockfile >& /dev/null }) then
+	cat $lockfile
+	echo "; please try again later."
+	umask $oldmask
+	exit
+endif
+umask $oldmask
+
+if ($?print) then
+    echo "Publishing to ${dir}:" $files
+endif
+
+if ($?print) then
+    echo Testing files for revision conflicts...
+else
+    echo -n Testing files for revision conflicts...
+endif
+
+set pubfiles = ()
+set linkfiles = ()
+set copyfiles = ()
+
+foreach workfile ($files)
+    if ($workfile != ${workfile:t}) then
+      echo "$workfile is not in this directory."
+      continue
+    endif
+
+    if (! -e $workfile) then
+	echo "warning: $workfile does not exist."
+    endif
+end
+
+if ($?print) then
+    echo processing
+    echo " - files:      "  $files
+    echo " - noRCSfiles: "  $noRCSfiles
+endif
+
+foreach workfile ($files)
+    if ($?print) then
+	echo -n "Testing $workfile ... "
+    endif
+
+    unset publish link
+
+    set basefile = $dir/$workfile
+    set baseRCSfile = $dir/RCS/$workfile,v
+
+    if (! -e $workfile) then
+	echo "$workfile doesn't exist; ignoring"
+    else if (! -e $basefile) then
+	if ($?print) then
+	    echo "$workfile is new; publishing"
+	endif
+	set publish
+    else if ({ linked $workfile $basefile }) then
+	if ($?print) then
+	    echo "$workfile is linked to $basefile; ignoring"
+	endif
+    else if ({ PublishCompare $workfile $basefile }) then
+    	if ($?links) then
+    	    if ($?print) then
+    	    	echo "$workfile has not changed; turning into a link"
+    	    endif
+    	    set link
+        else if ($?force) then
+	    if ($?print) then
+	        echo "$workfile hasn't changed; forcing publish"
+	    endif
+ 	    set publish
+    	else
+    	    if ($?print) then
+	    	echo "$workfile has not changed; ignoring"
+    	    endif
+	endif
+    else if (! -e $baseRCSfile) then
+        # baseline is present but not baseRCSfile
+	echo "$workfile is not under RCS control as expected; ignoring"
+    else if ($?notest) then
+	if ($?print) then
+	    echo "$workfile is different; publishing (assuming correct revisions)"
+	endif
+	set publish
+    else
+	set baserev = `getRevision $basefile`
+	set workrev = `getRevision $workfile`
+	if ("$workrev" == "$baserev") then
+	    if ($?print) then
+		echo "$workfile is different; publishing"
+	    endif
+	    set publish
+	else
+	    if (! $?errorflag) then
+		set errorflag
+		echo
+	    endif
+	    echo "version mismatch: $workfile ($workrev => $baserev)"
+	endif
+    endif
+
+    if ($?publish) then
+	set pubfiles = ($pubfiles $workfile)
+    endif
+
+    if ($?link) then
+    	set linkfiles = ($linkfiles $workfile)
+    endif
+end
+
+if ($?errorflag) then
+    echo Publish aborted due to revision conflicts
+    goto cleanup
+endif
+
+if ($?print) then
+    echo No conflicts.
+else
+    echo none.
+endif
+
+foreach workfile ($noRCSfiles)
+    if ($?print) then
+	echo -n "Testing $workfile ... "
+    endif
+
+    unset copy link
+
+    set basefile = $dir/$workfile
+
+    if (! -e $workfile) then
+	echo "$workfile doesn't exist; ignoring"
+    else if (! -e $basefile) then
+	if ($?print) then
+	    echo "$workfile is new; copying"
+	endif
+	set copy
+    else if ({ linked $workfile $basefile }) then
+	if ($?print) then
+	    echo "$workfile is linked to $basefile; ignoring"
+	endif
+    else if ({ PublishCompare $workfile $basefile }) then
+    	if ($?links) then
+    	    if ($?print) then
+    	    	echo "$workfile has not changed; turning into a link"
+    	    endif
+    	    set link
+    	else
+    	    if ($?print) then
+	    	echo "$workfile has not changed; ignoring"
+    	    endif
+	endif
+    else
+    	if ($?print) then
+	    echo "$workfile is different; copying"
+    	endif
+    	set copy
+    endif
+
+    if ($?copy) then
+	set copyfiles = ($copyfiles $workfile)
+    endif
+
+    if ($?link) then
+    	set linkfiles = ($linkfiles $workfile)
+    endif
+end
+
+if ($?print) then
+  echo "pubfiles:  " $pubfiles
+  echo "copyfiles: " $copyfiles
+  echo "linkfiles: " $linkfiles
+endif
+
+foreach workfile ($pubfiles)
+    set updateFileStatus
+    set basefile = $dir/$workfile
+    echo Publishing $workfile
+    if (-e $basefile) then
+	if ($?force && { linked $workfile $basefile }) then
+	    set tmpfile = /tmp/${workfile:t}$$
+	    mv $workfile $tmpfile
+	    cp $tmpfile $workfile
+	    rm -f $tmpfile
+	endif
+	rm -f $basefile
+    endif
+    AddTrailingNewline $workfile
+    cp $workfile $basefile
+    (   cd $dir &&					\
+	if (-e RCS/$workfile,v) rcs -U -q $workfile &&  \
+	ci $ciflags $workfile				\
+	)
+    if ($status != 0) then
+	# check-in failed
+	echo "warning: unable to check-in $workfile"
+	rm -f $basefile
+	cp $workfile $basefile
+    endif
+    if (-x $workfile) then
+	chmod 555 $basefile
+    else
+	chmod 444 $basefile
+    endif
+    rm -f $workfile
+    $copyfn $basefile $workfile
+    if (! { linked $workfile $basefile }) then
+	chmod +w $workfile
+	if (-x $basefile) then
+	    chmod +x $workfile
+	endif
+    endif
+end
+
+foreach workfile ($copyfiles)
+    set updateFileStatus
+    set basefile = $dir/$workfile
+    echo Copying $workfile
+    rm -f $basefile
+    cp $workfile $basefile
+    if (-x $workfile) then
+	chmod 555 $basefile
+    else
+	chmod 444 $basefile
+    endif
+    if ($copyfn != cp) then
+        rm -f $workfile
+        $copyfn $basefile $workfile
+        if (! { linked $workfile $basefile }) then
+    	    chmod +w $workfile
+	    if (-x $basefile) then
+	        chmod +x $workfile
+    	    endif
+	endif
+    endif
+end
+
+foreach workfile ($linkfiles)
+    set updateFileStatus
+    set basefile = $dir/$workfile
+    echo Relinking $workfile
+    rm -f $workfile
+    $copyfn $basefile $workfile
+end
+
+if ($?pubAll) then
+    pushd $dir >& /dev/null
+    set basefiles = (*)
+    popd >& /dev/null
+    foreach workfile ($basefiles)
+	set basefile = $dir/$workfile
+	if (-d $basefile) continue
+	foreach f ($files $noRCSfiles)
+	    if ($workfile == $f) goto found
+	end
+	echo -n "Remove old baseline file $workfile? [ny] "
+	set answer = $<
+	if ($answer !~ y*) then
+            echo "Not removing old baseline file $workfile"
+	else
+	    echo "Removing old baseline file $workfile"
+	    rm -f $basefile
+	endif
+found:
+    end
+endif
+
+# Create .file_status for this directory
+if ($?updateFileStatus) then
+    CreateFileStatus -d $rootdir
+endif
+
+echo Done.
+
+goto rmtmpfiles
+
+cleanup:
+    # Remove the status file
+    set outfile = $dir/.file_status
+    if (-e ${outfile}) then
+        rm -f ${outfile}
+    endif
+
+rmtmpfiles:
+    rm -f $lockfile /tmp/$$
+    if ($?tmpfile) then
+	mv $tmpfile{,.OLD}
+    endif
+    exit
+
+usage:
+    echo "usage: Publish [-d rootdir] [-v] [-l] [-f] [-t] [-a]"
+    echo "               [-rev revision] [-M msg] [-N name] [-s state]"
+    echo "               [-] files"
+    echo "   or: Publish -h"

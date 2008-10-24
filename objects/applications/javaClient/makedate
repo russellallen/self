@@ -1,0 +1,15 @@
+#!/bin/csh
+#############################################################
+# Make a java class to get the build date of the applet
+#   (i.e. the date and time string from when makedate was run)
+#############################################################
+# $Revision: 30.1 $
+#    Andy Collins, Sun Microsystems Laboratories, Summer 1996
+
+rm -f BuildInfo.java
+echo '// Automatically generated - do not edit'            >  BuildInfo.java
+echo 'final class BuildInfo'                               >> BuildInfo.java
+echo '{'                                                   >> BuildInfo.java
+echo '    public static final String buildDate = "'`date`'";'     >> BuildInfo.java
+echo '    public static final String buildHost = "'`hostname`'";' >> BuildInfo.java
+echo '}'                                                   >> BuildInfo.java

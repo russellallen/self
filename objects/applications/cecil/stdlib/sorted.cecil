@@ -1,0 +1,50 @@
+-- Sun-$Revision: 9.1 $
+
+-- methods for collections whose elements are kept sorted
+
+abstract type sorted_collection[T <= comparable] isa collection[T];
+public method add(c@:sorted_collection[`T <= comparable], x:T)
+	:sorted_collection[T] { abstract }
+public method includes(c@:sorted_collection[`T <= comparable], x:T):boolean { 
+    abstract }
+
+-- an implementation of sorted collections based on binary trees
+
+abstract object binary_tree[T <= comparable] isa sorted_collection[T];
+public method collection_name(@:binary_tree[`T <= comparable]):string { 
+    "bin_tree" }
+
+concrete object empty_tree[T <= comparable] isa binary_tree[T];
+public method add(t@:empty_tree[`T <= comparable], x:T):sorted_collection[T] {
+    concrete object isa tree_node[T] { data := x } }
+public method includes(t@:empty_tree[`T <= comparable], x:T):boolean { false }
+public method length(t@:empty_tree[`T <= comparable]):integer { 0 }
+public method do(t@:empty_tree[`T <= comparable], c:&(T):void):void {}
+
+template object tree_node[T <= comparable] isa binary_tree[T];
+private field left(t@:tree_node[`T <= comparable]):sorted_collection[T] := 
+    empty_sorted_collection[T]();
+private field right(t@:tree_node[`T <= comparable]):sorted_collection[T] := 
+    empty_sorted_collection[T]();
+private field data(t@:tree_node[`T <= comparable]);
+public method add(t@:tree_node[`T <= comparable], i:T):sorted_collection[T] {
+	-- Insert a new tree tree_node at the appopriate position
+	if( i < t.data, 
+	    { t.left  := add(t.left,  i); }, 
+	    { t.right := add(t.right, i); } );
+	t }
+public method includes(t@:tree_node[`T <= comparable], i):boolean {
+	if( i = t.data, { ^ true });
+	if( i < t.data, 
+	    { includes(t.left,  i) }, 
+	    { includes(t.right, i) } ) }
+public method length(t@:tree_node[`T <= comparable]):integer {
+        t.left.length + t.right.length + 1 }
+public method do(t@:tree_node[`T <= comparable], c:&(T):void):void { 
+	do(t.left, c);
+	eval(c, t.data);
+	do(t.right, c);
+}
+
+public method empty_sorted_collection[T <= comparable]():sorted_collection[T] { 
+    empty_tree[T] }

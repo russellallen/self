@@ -1,0 +1,26 @@
+(* Sun-$Revision: 30.6 $ *)
+ 
+(* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+   See the LICENSE file for license information. *)
+
+(* This structured grammar describes a simple expression language. *)
+
+Name:     'mangoTest'
+Behavior: 'mangoTest.behavior.self'
+
+Syntax:  SLR(1)
+Transformations: 'elimEpsilons', 'elimSingletons' ;
+
+  <exp>            ::+  <term>   <addOp> ;
+  <term>           ::+  <factor> <mulOp> ;
+  <factor>         ::|  <parenthesized> {number} ;
+  <parenthesized>  ::=  '(' <exp> ')' ;
+  <addOp>          ::|  '+' '-' ;
+  <mulOp>          ::|  '*' '/' ;
+
+Lex:  SLR(1)
+Transformations: 'elimEpsilons', 'elimSingletons', 'useCharClasses' ;
+
+  {whitespace}     ->  [ \t\n]+ ;
+  {number}         ->  {digits} ('.' {digits})?  ;
+  {digits}          =  [0-9]+ ;

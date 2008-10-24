@@ -1,0 +1,28 @@
+#!/bin/csh -f
+# Sun-$Revision: 30.2 $
+# script to fix kernel for self group
+#
+# Thanks to Tom Wadlow and Barry Riddle
+#
+# dmu 7/26
+#
+#!/bin/csh
+echo adbing kernel for ntp clock, more tmpfs memory, and snapshoting to local disk
+adb -k -w /vmunix /dev/mem << EoF
+dosynctodr/D
+./W 0    
+./D 
+.?W 0
+.?D 
+
+tmpfs_maxkmem/D
+./W 10000000
+.?W 10000000
+
+ufs_WRITES/X
+./W 0
+.?W 0
+\$q
+EoF
+#
+# in addition to this stuff, we run with maxusers 64, and the GFC-2.2 patch

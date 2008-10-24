@@ -1,0 +1,13 @@
+<div class="nav">
+  <ul class="nav_list">
+    <li class="nav_list_item"><a class="nav_link" href="../about.shtml">About</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../download.shtml">Download</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../documentation.shtml">Documentation</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../discussion.shtml">Discussion</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../papers/papers.shtml">Papers</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../teaching.shtml">Education</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../other-projects.shtml">Projects elsewhere</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../contrib.shtml">Odds and ends</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../smalltalk.shtml">Smalltalk</a></li>
+  </ul>
+</div>

@@ -1,0 +1,251 @@
+-- "Sun-$Revision: 9.1 $"
+-- load("closure.tst.cecil");
+
+method closure_tests() {
+	print_line("*** closure.tst.cecil ***");           
+(-- these test things that don't work in the compiler
+        if( closure_test3() != closure_cons , {  print("***test3 fail***"); });
+        if( closure_test4() != 4 , { print("***test4 fail***"); });
+        if( closure_test6(closure_tmp) != closure_cons , { print("***test6 fail***"); });
+--)
+        if( closure_test8() != 4 , { print("***test8 fail***"); });
+        closure_cons.head := closure_tmp;
+        closure_cons.tail := closure_cons2;
+        if( closure_blk1(closure_cons) != "done", { print("***blk1 fail***"); });
+        if( closure_blk2(closure_cons) != closure_tmp, { print("***blk2 fail***"); });
+        if( closure_blk3(closure_cons) != 123, { print("***blk3 fail***"); });       
+        if( closure_test10(closure_cons) != 1, { print("***test10 fail***"); });
+(--
+        method closure_test11(c) { var b := &(i){ length(i) }; eval(b,c) };
+        if( closure_test11(closure_cons) != 1, { print("***test11 fail***"); });
+        if( closure_e1() != "in blk & child", { print("***e1 fail***"); });
+        if( closure_e3() != "in blk & parent", { print("***e3 fail***"); });
+        if( closure_e4() != "in blk & parent", { print("***e4 fail***"); });
+--)
+        if( closure_test_loop_exit_value() != 2, { print("***loop_exit_value fail***");});
+        if( closure_test_until_true() != 3, { print("***test_until_true fail***");});
+        if( closure_test_until_false() != 1, { print("***test_until_false fail***");});
+
+	-- these don't return values we can check; 
+	-- but run them anyway to check for internal errors
+	closure_test_while_true();
+	closure_test_loop_exit();
+	closure_test_exit();
+	closure_test_exit_value();
+
+	print_line("\nmanual: closure_e2(); closure_test21();");
+
+	print_line("done");
+}
+
+concrete object closure_nil;
+method length(n@closure_nil) {  0 }
+
+concrete object closure_cons;
+field head(c@closure_cons);
+field tail(c@closure_cons);
+method length(c@closure_cons) { 1 }
+
+concrete object closure_tmp;
+field value(v@closure_tmp);
+method length(c@closure_tmp) { 123 }
+
+(-- test things that don't work in the compiler
+method closure_test2(c@closure_cons) {  {  c } }
+
+method closure_test3() {  eval(closure_test2(closure_cons)) }
+-- closure_test3();
+-- concrete closure_cons
+
+method closure_test4() { var d := 123; var b := &(i){ ^i }; 
+	         eval(b, 4); -- should perform nonlocal return
+		 var v := 1;
+}  					    -- closure_test4();
+					    -- 4
+
+method closure_test5(v@closure_tmp) { v.value := closure_test2(closure_cons); }
+
+method closure_test6(v@closure_tmp) { closure_test5(v);  eval(v.value) } 
+					    -- closure_test6(closure_tmp);
+					    -- concrete closure_cons
+--)
+
+method closure_test7(b) { eval(b,4) } 
+method closure_test8() {
+	var v := 3;
+	var b := &(i) { v := i; };
+	var b2 := &(v) { eval(b,v) };
+	closure_test7(b2);
+	v
+}					    -- closure_test8();
+					    -- 4
+
+
+-- *** for loop closure_tests ***
+
+method closure_blk1(c@closure_cons) { 
+	closure_for(c, &(i) {  length(i) }); "done" }
+method closure_blk2(c@closure_cons) {
+	closure_for(c, &(i) {  length(i) }); head(c) }
+method closure_blk3(c@closure_cons) { 
+	closure_for(c, &(i) { ^length(i) }); head(c) }
+
+method closure_for(c@closure_cons, b) {
+	eval(b, c.head);
+	eval(b, c.tail) };
+
+method closure_test10(c@closure_cons) { 
+	var b := &(i) { length(i) };
+	closure_blk2(c);
+	eval(b, c)
+}
+	
+
+concrete object closure_cons2 inherits closure_cons;
+method length(t@closure_cons2) { 2 }
+
+-- closure_cons.head := closure_tmp;
+-- cecil_void
+
+-- closure_cons.tail := closure_cons2;
+-- cecil_void
+
+-- blk1(closure_cons);
+-- "done"
+
+-- blk2(closure_cons);
+-- closure_tmp
+
+-- blk3(closure_cons);
+-- 123
+
+-- closure_test10(closure_cons);
+-- 1
+
+-- declare a new method
+-- method closure_test11(c) { var b := &(i){ length(i) }; eval(b,c) };
+-- Hashing new method ... closure_test11
+
+-- closure_test11(closure_cons);
+-- 1
+
+-- *** closure cecil_eval_method tests ***
+
+(-- doesn't work with compiler
+
+method closure_e1() {
+	object parent; 	
+	object child inherits parent;
+	var blk = &(a@child) { "in blk & child" };
+	eval(blk, child)
+}
+
+-- e1();
+-- "in blk & child"
+
+method closure_e2() {
+	object parent; 	
+	object child inherits parent;
+	var blk = &(a@child) { print("in blk & child") };
+	eval(blk, parent)
+}
+
+-- e2();
+-- message not understood, take the default behavior (but commented out now)
+
+method closure_e3() {
+	object parent;
+	object child inherits parent;
+	var blk = &(a@parent) { "in blk & parent" };
+	eval(blk, child)
+}
+
+-- e3();
+-- "in blk & parent"
+
+method closure_e4() {
+	object parent;
+	object child inherits parent;
+	var blk = &(a@parent) { "in blk & parent" };
+	eval(blk, parent)
+}
+
+-- e4();
+-- "in blk & parent"
+
+method closure_test20() {
+	var blk := &(j) { ^ j };
+	blk 
+}
+
+method closure_test21() {
+	eval(closure_test20(), 3)
+}
+
+-- closure_test21();
+-- error: non-LIFO non-local return
+
+--)
+
+-- *** test closure.cecil *** 
+
+method closure_test_while_true() {
+	var i := 0;
+	while_true( { i < 3 }, { print(i);  i:= i + 1; } );
+}
+
+-- closure_test_while_true();
+-- prints out 0, 1, 2 returns cecil_void
+
+method closure_test_loop_exit() {
+	var i := 0;
+	loop_exit(&(exit){ if( i > 1, exit, { i := i + 1; print(i) } ) } );
+}
+
+-- closure_test_loop_exit();
+-- prints out 1, 2 returns cecil_void
+
+method closure_test_loop_exit_value() {
+	var i := 0;
+	loop_exit_value( &(exit_closure){ 
+	    if( i > 1, { eval(exit_closure, i) }, { i := i + 1; print(i); } ) }
+	)
+}
+
+-- closure_test_loop_exit_value();
+-- prints out 1, 2 returns 2
+
+method closure_test_exit() {
+	exit( &(e){
+		print("prepare to stop"); eval(e); print("never executed"); } )
+}
+
+-- closure_test_exit();
+
+method closure_test_exit_value() {
+	exit_value( &(e){
+		print("prepare to stop");
+		eval(e, "Return value");
+		print("never executed"); } )
+}
+
+-- closure_test_exit_value();
+
+method closure_test_until_true() {
+	var i := 0;
+	until_true( { i:= i + 1; }, { i > 2 } );
+	i
+}
+
+-- closure_test_until_true();
+-- 3
+
+method closure_test_until_false() {
+	var i := 0;
+	until_false( { i:= i + 1; }, { i > 2 } );
+	i
+}
+
+-- closure_test_until_false();
+-- 1
+

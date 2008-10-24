@@ -1,0 +1,52 @@
+#!/bin/csh -f
+# Sun-$Revision: 30.8 $
+
+# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information. 
+
+# This script waits until all compiles on all machines have finished
+# so that the link can start.	       -Urs
+#
+
+
+set LS_COMMAND = '/bin/ls _[a-z]*.lock'
+
+$LS_COMMAND >& /dev/null
+if ($status != 0) exit
+
+renice +20 $$ >/dev/null
+
+while (1)
+    set files = `$LS_COMMAND`
+    # get rid of .lock and underscores
+    set printfiles = `echo $files | sed -e "s/\.lock//g" -e "s/_//g"`
+    # I'm bored... so let's get really fancy: insert commas and 'and'
+    set nfiles = $#printfiles
+    switch ($nfiles)
+	case 0:
+	    breaksw
+	case 1:    
+	    echo "Waiting for lock on $printfiles"
+	    breaksw
+	case 2:
+	    set printfiles = `echo $printfiles | sed -e "s/ / and /"`
+	    echo "Waiting for locks on $printfiles"
+	    breaksw
+	default:
+	    set nfiles = `echo "$nfiles - 1" | bc`
+	    set printfiles = `echo $printfiles | sed -e "s/ /,_and_/$nfiles"`
+	    set printfiles = `echo $printfiles | sed -e 's/ /,_/g'`
+	    set printfiles = `echo $printfiles | sed -e 's/_/ /g'`
+	    echo "Waiting for locks on $printfiles"
+	    breaksw
+    endsw
+    while ("${files}x" != "x")
+	set nextfile = $files[1]
+	shift files
+	while (-e $nextfile)
+	    sleep 1
+	end
+    end
+    $LS_COMMAND >& /dev/null
+    if ($status != 0) exit
+end

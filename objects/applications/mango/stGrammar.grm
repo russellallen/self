@@ -1,0 +1,132 @@
+(* Sun-$Revision: 30.6 $ *)
+
+(* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+   See the LICENSE file for license information. *)
+
+
+(* This (structured) grammar describes a representation for structured
+   grammars. *)
+
+Name:     'applications/mango/stGrammar'
+Behavior: 'applications/mango/stGrammar.behavior.self'
+
+Syntax:  SLR(1)
+Transformations: 'elimEpsilons', 'elimSingletons' ;
+
+  <start>          ::=  'Name:'       {name:string}
+                        'Behavior:'   {behaviorFile:string}
+                        <optionsPartOpt>
+                        <syntaxPart>  <lexPart>                             ;
+
+  <optionsPartOpt> ::?  <optionsPart>                                       ;
+  <optionsPart>    ::=  'Options:' <options> ';'                            ;
+  <options>        ::+  {string} ','                                        ;
+
+  <prologue>       ::=  <parseTableKind>  <transformsOpt>                   ;
+  <parseTableKind> ::|  'SLR(1)'  'LALR(1)'  'LR(1)'                        ;
+  <transformsOpt>  ::?  <transforms>                                        ;
+  <transforms>     ::=  'Transformations:'  <transNames>  ';'               ;
+  <transNames>     ::+  <transName> ','                                     ;
+  <transName>      ::=  {trans:string}                                      ;
+
+  <syntaxPart>     ::=  'Syntax:'  <prologue>  <productions>                ;
+
+  <productions>    ::*  <production0>                                       ;
+  <production0>    ::=  <production>  ';'                                   ;
+
+  <production>     ::|  <alternation> <construction>
+                        <lst0> <lst1> <optional>                            ;
+
+  <alternation>    ::=  <lhs:nonterminal> '::|' <alternatives>              ;
+  <construction>   ::=  <lhs:nonterminal> '::=' <symbols>                   ;
+  <lst0>           ::=  <lhs:nonterminal> '::*' <elm:symbol> <sep:symOpt>   ;
+  <lst1>           ::=  <lhs:nonterminal> '::+' <elm:symbol> <sep:symOpt>   ;
+  <optional>       ::=  <lhs:nonterminal> '::?' <elm:symbol>                ;
+
+  <alternatives>   ::+  <symbol>                                            ;
+  <symbols>        ::*  <symbol>                                            ;
+  <symOpt>         ::?  <symbol>                                            ;
+  <symbol>         ::|  <nonterminal> <terminal> <literalTerm>              ;
+  <literalTerm>    ::=  {string}                                            ;
+
+  <terminal>       ::|  <terminalNT>    <terminalT>                         ;
+  <nonterminal>    ::|  <nonterminalNT> <nonterminalT>                      ;
+
+  <terminalNT>     ::=  '{' {kind:identifier} '}'                           ;
+  <nonterminalNT>  ::=  '<' {kind:identifier} '>'                           ;
+  <terminalT>      ::=  '{' {tag:identifier} ':' {kind:identifier} '}'      ;
+  <nonterminalT>   ::=  '<' {tag:identifier} ':' {kind:identifier} '>'      ;
+
+  <lexPart>        ::=  'Lex:'  <prologue>  <lexdefs>                       ;
+  <lexdefs>        ::*  <lexdef>                                            ;
+
+  <lexdef>         ::=  <regExpName> <binder> <regExp> ';'                  ;
+  <binder>         ::|  <external> <internal>                               ;
+  <external>       ::=  '->'                                                ;
+  <internal>       ::=  '='                                                 ;
+
+  <regExp>         ::+  <term>  '|'                                         ;
+  <term>           ::*  <factor>                                            ;
+  <factor>         ::=  <base> <unaryOpOpt>                                 ;
+  <base>           ::|  <regExpName> <literalExp> <parenExp>                ;
+  <parenExp>       ::=  '(' <regExp> ')'                                    ;
+  <literalExp>     ::|  {string} {charSet}                                  ;
+  <unaryOpOpt>     ::?  <unaryOp>                                           ;
+  <unaryOp>        ::|  <closure0> <closure1> <lexoptional>                 ;
+  <closure0>       ::=  '*'                                                 ;
+  <closure1>       ::=  '+'                                                 ;
+  <lexoptional>    ::=  '?'                                                 ;
+  <regExpName>     ::=  <terminalNT>                                        ;
+
+Lex:  SLR(1)
+Transformations: 'elimEpsilons', 'elimSingletons', 'useCharClasses' ;
+
+  {whitespace}         ->  {blank}+                                         ;
+  {string}             ->  '\'' {stringStuff}* '\''                         ;
+  {charSet}            ->  '[' {charSetStuff}* ']'                          ;
+  {identifier}         ->  {letter} ({letterOrDigit} | '_')*                ;
+
+  {letterOrDigit}       =  {letter} | {digit}                               ;
+  {letter}              =  [A-Za-z]                                         ;
+  {digit}               =  [0-9]                                            ;
+  {octalDigit}          =  [0-7]                                            ;
+  {hexDigit}            =  [0-9a-fA-F]                                      ;
+  {blank}               =  [ \t\n] | {comment}                              ;
+
+  {comment}             =  '(*'  {commentStuff}                             ;
+
+  {commentStuff}        =  {notStarOrParenBegin} {commentStuff}  |
+                           '('  {commentStuffHasPB}              |  
+                           '*'  {commentStuffHasStar}                       ;
+
+  {commentStuffHasPB}   =  {notStarOrParenBegin} {commentStuff}  |
+                           '('  {commentStuffHasPB}              |
+                           '*'  {commentStuff} {commentStuff}               ;
+
+  {commentStuffHasStar} =  {notStarOrParenEnd} {commentStuff}    |
+                           '*'  {commentStuffHasStar}            |
+                           ')'                                              ;
+
+  {stringStuff}         =  {notQuoteOrBS}  | {commonEscape}                 ;
+
+  {charSetStuff}        =  {notEndBraceOrBS}  | 
+                           '\\]'  |  '\\-'  | {commonEscape}                ;
+
+  {commonEscape}        =  '\\' {shortEscape} | '\\' {numericEscape}        ;
+  {shortEscape}         =  [tbnfrva0\\'"?]                                  ;
+  {numericEscape}       =  {hexEscape} | {decimalEscape} | {octalEscape}    ;
+  {hexEscape}           =  'x' {hexDigit}   {hexDigit}                      ;
+  {decimalEscape}       =  'd' {digit}      {digit}      {digit}            ;
+  {octalEscape}         =  'o' {octalDigit} {octalDigit} {octalDigit}       ;
+
+  {innocentChar}        =  [^*()\\\]']                                      ;
+  {notQuoteOrBS}        =  {innocentChar} | [*()\]]                         ;
+  {notEndBraceOrBS}     =  {innocentChar} | [*()']                          ;
+  {notStarOrParenBegin} =  {innocentChar} | [)\\\]']                        ;
+  {notStarOrParenEnd}   =  {innocentChar} | [(\\\]']                        ;
+
+  (* This {innocentChar} thing is mostly just a manual refactoring to avoid 
+     too many productions in the lex grammar. The same thing is partially
+     done automatically by specifying the 'useCharClasses' transformation,
+     but doing it in the source has the advantage that the factoring is
+     obvious to the reader and takes place as early as possible. *)

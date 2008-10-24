@@ -1,0 +1,4035 @@
+
+expressionSeries 'Sun-$Revision: 30.5 $' '
+Copyright 1992-2004 Sun Microsystems, Inc. and Stanford University.
+See the LICENSE file for license information.
+' '-- Module body'
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        unarySend: stub
+          unarySend: bootstrap
+            <implicitSelf>
+        'defaultBehavior'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fComment: Used only for collections.
+See printStringSize:Depth: in traits collection
+-- dmu\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            keywordSlotNameWithFormals printStringSize: s Depth: d =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: printStringSize:
+                  <implicitSelf>
+                  unarySend: s
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'globals'
+        'modules'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+          slot
+            unarySlotName collection =
+            keywordSend: define:ToBe:
+              unarySend: bootstrap
+                <implicitSelf>
+              binarySend: ->
+                binarySend: ->
+                  binarySend: ->
+                    binarySend: ->
+                      unarySend: stub
+                        unarySend: bootstrap
+                          <implicitSelf>
+                      'globals'
+                    'modules'
+                  'collection'
+                object ( )
+              keywordSend: addSlotsTo:From:
+                unarySend: bootstrap
+                  <implicitSelf>
+                object (
+                  expressionSeries
+                    keywordSend: remove:From:
+                      unarySend: bootstrap
+                        <implicitSelf>
+                      'comment'
+                      keywordSend: remove:From:
+                        unarySend: bootstrap
+                          <implicitSelf>
+                        'directory'
+                        keywordSend: remove:From:
+                          unarySend: bootstrap
+                            <implicitSelf>
+                          'fileInTimeString'
+                          keywordSend: remove:From:
+                            unarySend: bootstrap
+                              <implicitSelf>
+                            'postFileIn'
+                            keywordSend: remove:From:
+                              unarySend: bootstrap
+                                <implicitSelf>
+                              'revision'
+                              keywordSend: remove:From:
+                                unarySend: bootstrap
+                                  <implicitSelf>
+                                'subpartNames'
+                                unarySend: copy
+                                  unarySend: init
+                                    unarySend: modules
+                                      unarySend: globals
+                                        <implicitSelf> )
+                keywordSend: setObjectAnnotationOf:From:
+                  unarySend: bootstrap
+                    <implicitSelf>
+                  binarySend: ->
+                    binarySend: ->
+                      binarySend: ->
+                        binarySend: ->
+                          unarySend: stub
+                            unarySend: bootstrap
+                              <implicitSelf>
+                          'globals'
+                        'modules'
+                      'collection'
+                    object ( )
+                  object (
+                    slotList |
+                      slot
+                        objectAnnotationSlotName {} = 'ModuleInfo: Creator: globals modules collection.
+
+CopyDowns:
+globals modules init. copy 
+SlotsToOmit: comment directory fileInTimeString postFileIn revision subpartNames.
+
+\x7fIsComplete: ' . | ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'globals'
+          'modules'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName comment <- ' \'\'
+            \" A minimalist collection subsystem.  dmu 2/90\"' . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'globals'
+          'modules'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName directory <- 'core' . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'globals'
+          'modules'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: InitializeToExpression: (_CurrentTimeString)\x7fVisibility: public'
+          slot
+            unarySlotName fileInTimeString <-
+            unarySend: _CurrentTimeString
+              <implicitSelf> . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'globals'
+          'modules'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName revision <- 'Sun-$Revision: 30.5 $' . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'globals'
+          'modules'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName subpartNames <- '' . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        unarySend: stub
+          unarySend: bootstrap
+            <implicitSelf>
+        'traits'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: collections\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName collection =
+            keywordSend: setObjectAnnotationOf:From:
+              unarySend: bootstrap
+                <implicitSelf>
+              binarySend: ->
+                binarySend: ->
+                  binarySend: ->
+                    unarySend: stub
+                      unarySend: bootstrap
+                        <implicitSelf>
+                    'traits'
+                  'collection'
+                object ( )
+              object (
+                slotList |
+                  slot
+                    objectAnnotationSlotName {} = 'ModuleInfo: Creator: traits collection.
+' . | ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: concatenating\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            binarySlotNameWithFormal , c =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: addAll:
+                  object( "Returns the concatenation of this collection with c,
+             a collection like the receiver consisting of all the
+             elements of the receiver followed by all the elements of
+             the argument collection. If the argument is an unordered
+             collection such as a set, its arguments are appended in
+             enumeration order. If the receiver is unordered, then
+             the result is also unordered. Consider using & and
+             flatXXX when concatenating more than 50 collections;
+             see collector.self for details." )  (
+                    expressionSeries
+                      keywordSend: addAll:
+                        unarySend: copyRemoveAll
+                          <implicitSelf>
+                        self )
+                  unarySend: c
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: comparing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            binarySlotNameWithFormal < c =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: ==
+                      <implicitSelf>
+                      unarySend: c
+                        <implicitSelf>
+                    block [
+                      expressionSeries
+                        return ^
+                          unarySend: false
+                            <implicitSelf> ] .
+                pop
+                  keywordSend: with:Do:
+                    <implicitSelf>
+                    unarySend: c
+                      <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :e1 .
+                        slot
+                          unarySlotName :e2 |
+                      expressionSeries
+                        keywordSend: ifFalse:
+                          binarySend: =
+                            unarySend: e1
+                              <implicitSelf>
+                            unarySend: e2
+                              <implicitSelf>
+                          block [
+                            expressionSeries
+                              return ^
+                                binarySend: <
+                                  unarySend: e1
+                                    <implicitSelf>
+                                  unarySend: e2
+                                    <implicitSelf> ] ] .
+                binarySend: <
+                  unarySend: size
+                    <implicitSelf>
+                  unarySend: size
+                    unarySend: c
+                      <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: comparing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            binarySlotNameWithFormal = c =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: ==
+                      <implicitSelf>
+                      unarySend: c
+                        <implicitSelf>
+                    block [
+                      expressionSeries
+                        return ^
+                          unarySend: true
+                            <implicitSelf> ] .
+                keywordSend: equalsCollection:
+                  unarySend: c
+                    <implicitSelf>
+                  self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: adding\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals add: v WithKey: k =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: at:Put:
+                  <implicitSelf>
+                  unarySend: k
+                    <implicitSelf>
+                  unarySend: v
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: adding\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals addAll: c =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: do:
+                    unarySend: c
+                      <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :v .
+                        slot
+                          unarySlotName :k |
+                      expressionSeries
+                        keywordSend: add:WithKey:
+                          <implicitSelf>
+                          unarySend: v
+                            <implicitSelf>
+                          unarySend: k
+                            <implicitSelf> ] . self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName areKeysOrdered =
+            binarySend: ->
+              binarySend: ->
+                binarySend: ->
+                  unarySend: stub
+                    unarySend: bootstrap
+                      <implicitSelf>
+                  'globals'
+                'false'
+              object ( ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName asByteVector =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: copyContaining:
+                  unarySend: byteVector
+                    <implicitSelf>
+                  self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName asDictionary =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: copyContaining:
+                  unarySend: dictionary
+                    <implicitSelf>
+                  self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName asList =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: copyContaining:
+                  unarySend: list
+                    <implicitSelf>
+                  self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName asSequence =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: copyContaining:
+                  unarySend: sequence
+                    <implicitSelf>
+                  self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName asSet =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: copyContaining:
+                  unarySend: set
+                    <implicitSelf>
+                  self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName asString =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: copyContaining:
+                  unarySend: mutableString
+                    <implicitSelf>
+                  self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName asTreeBag =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: copyContaining:
+                  unarySend: treeBag
+                    <implicitSelf>
+                  self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName asTreeSet =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: copyContaining:
+                  unarySend: treeSet
+                    <implicitSelf>
+                  self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName asVMByteVector =
+            method (
+              slotList | |
+              expressionSeries
+                unarySend: asByteVector
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName asVector =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: copyContaining:
+                  unarySend: vector
+                    <implicitSelf>
+                  self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: sorting\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName ascendingOrder =
+            keywordSend: setObjectAnnotationOf:From:
+              unarySend: bootstrap
+                <implicitSelf>
+              binarySend: ->
+                binarySend: ->
+                  binarySend: ->
+                    binarySend: ->
+                      unarySend: stub
+                        unarySend: bootstrap
+                          <implicitSelf>
+                      'traits'
+                    'collection'
+                  'ascendingOrder'
+                object ( )
+              object (
+                slotList |
+                  slot
+                    objectAnnotationSlotName {} = 'ModuleInfo: Creator: traits collection ascendingOrder.
+' . | ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'traits'
+          'collection'
+        'ascendingOrder'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+          slot
+            keywordSlotNameWithFormals element: e1 Precedes: e2 =
+            method (
+              slotList | |
+              expressionSeries
+                binarySend: <
+                  unarySend: e1
+                    <implicitSelf>
+                  unarySend: e2
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: accessing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals at: k =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: at:IfAbsent:
+                  <implicitSelf>
+                  unarySend: k
+                    <implicitSelf>
+                  block [
+                    expressionSeries
+                      keywordSend: error:
+                        <implicitSelf>
+                        binarySend: ,
+                          unarySend: printString
+                            unarySend: k
+                              <implicitSelf>
+                          ' is absent' ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            keywordSlotNameWithFormals buildStringWith: block =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+                  slot
+                    unarySlotName str . } |
+              expressionSeries
+                pop
+                  keywordSend: str:
+                    <implicitSelf>
+                    binarySend: &
+                      unarySend: collectionName
+                        <implicitSelf>
+                      unarySend: leftBracket
+                        <implicitSelf> .
+                pop
+                  keywordSend: doFirst:MiddleLast:IfEmpty:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :e .
+                        slot
+                          unarySlotName :k |
+                      expressionSeries
+                        keywordSend: str:
+                          <implicitSelf>
+                          binarySend: &
+                            unarySend: str
+                              <implicitSelf>
+                            object (
+                              expressionSeries
+                                keywordSend: value:With:With:
+                                  unarySend: block
+                                    <implicitSelf>
+                                  unarySend: e
+                                    <implicitSelf>
+                                  unarySend: k
+                                    <implicitSelf>
+                                  unarySend: str
+                                    <implicitSelf> ) ]
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :e .
+                        slot
+                          unarySlotName :k . |
+                      expressionSeries
+                        keywordSend: str:
+                          <implicitSelf>
+                          binarySend: &
+                            binarySend: &
+                              unarySend: str
+                                <implicitSelf>
+                              unarySend: separator
+                                <implicitSelf>
+                            object (
+                              expressionSeries
+                                keywordSend: value:With:With:
+                                  unarySend: block
+                                    <implicitSelf>
+                                  unarySend: e
+                                    <implicitSelf>
+                                  unarySend: k
+                                    <implicitSelf>
+                                  unarySend: str
+                                    <implicitSelf> ) ]
+                    block [ ] .
+                binarySend: &
+                  unarySend: str
+                    <implicitSelf>
+                  unarySend: rightBracket
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName collectionName =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: error:
+                  <implicitSelf>
+                  binarySend: ,
+                    'child should implement '
+                    '(see method comment in traits collection)' ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName comment1 =
+            method (
+              slotList | |
+              expressionSeries 'Objects that print should understand the four messages printString,
+            printStringSize:, printStringDepth:, and printStringSize:Depth:.
+            Children of traits collection may simply implement 
+            printStringSize:Depth: and inherit reasonable behavior from here.
+
+            To get the UI to print an object, its prototype (not traits) should
+            be annotated with isComplete = true.
+            See nameSize: in traits mirror to understand how this works.' ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: sorting\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName comment2 =
+            method (
+              slotList | |
+              expressionSeries 'Any ordered collection can be copySorted (via heapsort).
+
+            The sort methods supplied here return a collection of the same
+            type as the receiver. If the receiver is an unordered collection
+            such as a set, the result will also be unordered, which is not
+            very useful. Typically, one uses "mySet asVector sort" in this
+            situation.
+
+            Note:  Heapsort is known as an "unstable" sort. That is, if you
+            sorted a collection of addressBookEntry objects first by name,
+            and then state, the second sort would not preserve the by-name
+            ordering within each state. For these situations, it is best
+            to convert the collection into a vector or sequence and sort
+            that, since indexable collections are sorted using mergeSort,
+            which is a stable sort.' ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: comparing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals compare: c IfLess: lb Equal: eb Greater: gb =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: ==
+                      <implicitSelf>
+                      unarySend: c
+                        <implicitSelf>
+                    block [
+                      expressionSeries
+                        return ^
+                          unarySend: value
+                            unarySend: eb
+                              <implicitSelf> ] . ( "optimization" ) 
+                pop
+                  keywordSend: with:Do:
+                    <implicitSelf>
+                    unarySend: c
+                      <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :v1 .
+                        slot
+                          unarySlotName :v2 |
+                      expressionSeries
+                        pop
+                          keywordSend: ifFalse:
+                            binarySend: =
+                              unarySend: v1
+                                <implicitSelf>
+                              unarySend: v2
+                                <implicitSelf>
+                            block [
+                              expressionSeries
+                                return ^
+                                  keywordSend: ifTrue:False:
+                                    binarySend: <
+                                      unarySend: v1
+                                        <implicitSelf>
+                                      unarySend: v2
+                                        <implicitSelf>
+                                    unarySend: lb
+                                      <implicitSelf>
+                                    unarySend: gb
+                                      <implicitSelf> ] . ] .
+                keywordSend: compare:IfLess:Equal:Greater:
+                  unarySend: size
+                    <implicitSelf>
+                  unarySend: size
+                    unarySend: c
+                      <implicitSelf>
+                  unarySend: lb
+                    <implicitSelf>
+                  unarySend: eb
+                    <implicitSelf>
+                  unarySend: gb
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName continued = ' ...}' . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: copying\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals copyContaining: c =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: addAll:
+                  unarySend: copyRemoveAll
+                    <implicitSelf>
+                  unarySend: c
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals copyFilteredBy: eb =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: filterBy:Into:
+                  <implicitSelf>
+                  unarySend: eb
+                    <implicitSelf>
+                  unarySend: copyRemoveAll
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals copyMappedBy: eb =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: mapBy:
+                  unarySend: copy
+                    <implicitSelf>
+                  unarySend: eb
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: sorting\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName copySort =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: copySortBy:
+                  <implicitSelf>
+                  unarySend: ascendingOrder
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: sorting\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals copySortBy: cmp =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+                  slot
+                    unarySlotName result . } |
+              expressionSeries
+                pop
+                  keywordSend: result:
+                    <implicitSelf>
+                    unarySend: copyRemoveAll
+                      <implicitSelf> .
+                pop
+                  keywordSend: sortedBy:Do:
+                    <implicitSelf>
+                    unarySend: cmp
+                      <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :el |
+                      expressionSeries
+                        keywordSend: add:
+                          unarySend: result
+                            <implicitSelf>
+                          unarySend: el
+                            <implicitSelf> ] .
+                unarySend: result
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: reducing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals countHowMany: testBlock =
+            method (
+              slotList |
+                slot
+                  unarySlotName r <- 0 . |
+              expressionSeries
+                pop
+                  keywordSend: do:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :e .
+                        slot
+                          unarySlotName :i |
+                      expressionSeries
+                        keywordSend: ifTrue:
+                          object (
+                            expressionSeries
+                              keywordSend: value:With:
+                                unarySend: testBlock
+                                  <implicitSelf>
+                                unarySend: e
+                                  <implicitSelf>
+                                unarySend: i
+                                  <implicitSelf> )
+                          block [
+                            expressionSeries
+                              keywordSend: r:
+                                <implicitSelf>
+                                unarySend: succ
+                                  unarySend: r
+                                    <implicitSelf> ] ] .
+                unarySend: r
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName defaultPrintSize = 400 . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName descendantResponsibilities =
+            keywordSend: setObjectAnnotationOf:From:
+              unarySend: bootstrap
+                <implicitSelf>
+              binarySend: ->
+                binarySend: ->
+                  binarySend: ->
+                    binarySend: ->
+                      unarySend: stub
+                        unarySend: bootstrap
+                          <implicitSelf>
+                      'traits'
+                    'collection'
+                  'descendantResponsibilities'
+                object ( )
+              object (
+                slotList |
+                  slot
+                    objectAnnotationSlotName {} = 'Comment: The following methods must be implemented by a descendant.\x7fModuleInfo: Creator: traits collection descendantResponsibilities.
+' . | ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'traits'
+          'collection'
+        'descendantResponsibilities'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals at: k IfAbsent: b =
+            method (
+              slotList | |
+              expressionSeries 'Return the value at the given key. Evaluate the block
+             b if there is no value associated with the given key.' ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'traits'
+          'collection'
+        'descendantResponsibilities'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals at: k Put: v =
+            method (
+              slotList | |
+              expressionSeries 'Insert the given value at the given key.' ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'traits'
+          'collection'
+        'descendantResponsibilities'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName copy =
+            method (
+              slotList | |
+              expressionSeries 'Return a copy of the receiver.' ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'traits'
+          'collection'
+        'descendantResponsibilities'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName copyRemoveAll =
+            method (
+              slotList | |
+              expressionSeries 'Return an empty copy of the receiver.' ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'traits'
+          'collection'
+        'descendantResponsibilities'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals do: b =
+            method (
+              slotList | |
+              expressionSeries 'Evaluate the given block for each element. The first
+             argument passed to the block is the key, the second is
+             the value. If desired, doFirst:MiddleLast:IfEmpty: can
+             be implemented instead of do:.' ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          binarySend: ->
+            unarySend: stub
+              unarySend: bootstrap
+                <implicitSelf>
+            'traits'
+          'collection'
+        'descendantResponsibilities'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName prototype =
+            method (
+              slotList | |
+              expressionSeries 'Return the prototype for this collection.
+             This is used for filing out (via storeStringIfFail:)
+             and for printing out the names of collections.
+             --dmu 4/93' ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iterating\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals do: b =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: doFirst:MiddleLast:IfEmpty:
+                  <implicitSelf>
+                  unarySend: b
+                    <implicitSelf>
+                  unarySend: b
+                    <implicitSelf>
+                  self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteratingWithEnds\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals doFirst: f Middle: m Last: lst IfEmpty: e =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+                  slot
+                    unarySlotName i <- 0 . }
+                annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+                  slot
+                    unarySlotName pk . }
+                annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+                  slot
+                    unarySlotName pv . } |
+              expressionSeries
+                pop
+                  keywordSend: do:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :v .
+                        slot
+                          unarySlotName :k |
+                      expressionSeries
+                        pop
+                          keywordSend: ifTrue:False:
+                            binarySend: =
+                              0
+                              unarySend: i
+                                <implicitSelf>
+                            block [
+                              expressionSeries
+                                keywordSend: i:
+                                  <implicitSelf>
+                                  1 ]
+                            block [
+                              expressionSeries
+                                pop
+                                  keywordSend: value:With:
+                                    object (
+                                      expressionSeries
+                                        keywordSend: ifTrue:False:
+                                          binarySend: =
+                                            1
+                                            unarySend: i
+                                              <implicitSelf>
+                                          block [
+                                            expressionSeries
+                                              pop
+                                                keywordSend: i:
+                                                  <implicitSelf>
+                                                  2 .
+                                              unarySend: f
+                                                <implicitSelf> ]
+                                          block [
+                                            expressionSeries
+                                              unarySend: m
+                                                <implicitSelf> ] )
+                                    unarySend: pv
+                                      <implicitSelf>
+                                    unarySend: pk
+                                      <implicitSelf> . ] .
+                        pop
+                          keywordSend: pv:
+                            <implicitSelf>
+                            unarySend: v
+                              <implicitSelf> .
+                        pop
+                          keywordSend: pk:
+                            <implicitSelf>
+                            unarySend: k
+                              <implicitSelf> . ] .
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: =
+                      0
+                      unarySend: i
+                        <implicitSelf>
+                    block [
+                      expressionSeries
+                        return ^
+                          unarySend: value
+                            unarySend: e
+                              <implicitSelf> ] .
+                pop
+                  keywordSend: value:With:
+                    object (
+                      expressionSeries
+                        keywordSend: ifTrue:False:
+                          binarySend: =
+                            1
+                            unarySend: i
+                              <implicitSelf>
+                          block [
+                            expressionSeries
+                              unarySend: f
+                                <implicitSelf> ]
+                          block [
+                            expressionSeries
+                              unarySend: lst
+                                <implicitSelf> ] )
+                    unarySend: pv
+                      <implicitSelf>
+                    unarySend: pk
+                      <implicitSelf> . self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteratingWithEnds\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals doFirst: f MiddleLast: ml =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: doFirst:Middle:Last:IfEmpty:
+                  <implicitSelf>
+                  unarySend: f
+                    <implicitSelf>
+                  unarySend: ml
+                    <implicitSelf>
+                  unarySend: ml
+                    <implicitSelf>
+                  block [ ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteratingWithEnds\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals doFirst: f MiddleLast: ml IfEmpty: e =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: doFirst:Middle:Last:IfEmpty:
+                  <implicitSelf>
+                  unarySend: f
+                    <implicitSelf>
+                  unarySend: ml
+                    <implicitSelf>
+                  unarySend: ml
+                    <implicitSelf>
+                  unarySend: e
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteratingWithEnds\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals doFirstLast: fl Middle: m =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: doFirst:Middle:Last:IfEmpty:
+                  <implicitSelf>
+                  unarySend: fl
+                    <implicitSelf>
+                  unarySend: m
+                    <implicitSelf>
+                  unarySend: fl
+                    <implicitSelf>
+                  block [ ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteratingWithEnds\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals doFirstLast: fl Middle: m IfEmpty: e =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: doFirst:Middle:Last:IfEmpty:
+                  <implicitSelf>
+                  unarySend: fl
+                    <implicitSelf>
+                  unarySend: m
+                    <implicitSelf>
+                  unarySend: fl
+                    <implicitSelf>
+                  unarySend: e
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteratingWithEnds\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals doFirstMiddle: fm Last: lst =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: doFirst:Middle:Last:IfEmpty:
+                  <implicitSelf>
+                  unarySend: fm
+                    <implicitSelf>
+                  unarySend: fm
+                    <implicitSelf>
+                  unarySend: lst
+                    <implicitSelf>
+                  block [ ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iteratingWithEnds\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals doFirstMiddle: fm Last: lst IfEmpty: e =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: doFirst:Middle:Last:IfEmpty:
+                  <implicitSelf>
+                  unarySend: fm
+                    <implicitSelf>
+                  unarySend: fm
+                    <implicitSelf>
+                  unarySend: lst
+                    <implicitSelf>
+                  unarySend: e
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: comparing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            keywordSlotNameWithFormals equalsCollection: c =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: ifFalse:
+                    binarySend: =
+                      unarySend: size
+                        <implicitSelf>
+                      unarySend: size
+                        unarySend: c
+                          <implicitSelf>
+                    block [
+                      expressionSeries
+                        return ^
+                          unarySend: false
+                            <implicitSelf> ] .
+                pop
+                  keywordSend: with:Do:
+                    <implicitSelf>
+                    unarySend: c
+                      <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :e1 .
+                        slot
+                          unarySlotName :e2 |
+                      expressionSeries
+                        keywordSend: ifFalse:
+                          binarySend: =
+                            unarySend: e1
+                              <implicitSelf>
+                            unarySend: e2
+                              <implicitSelf>
+                          block [
+                            expressionSeries
+                              return ^
+                                unarySend: false
+                                  <implicitSelf> ] ] .
+                unarySend: true
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals filterBy: eb Into: c =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: do:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :v .
+                        slot
+                          unarySlotName :k |
+                      expressionSeries
+                        keywordSend: ifTrue:
+                          object (
+                            expressionSeries
+                              keywordSend: value:With:
+                                unarySend: eb
+                                  <implicitSelf>
+                                unarySend: v
+                                  <implicitSelf>
+                                unarySend: k
+                                  <implicitSelf> )
+                          block [
+                            expressionSeries
+                              keywordSend: add:WithKey:
+                                unarySend: c
+                                  <implicitSelf>
+                                unarySend: v
+                                  <implicitSelf>
+                                unarySend: k
+                                  <implicitSelf> ] ] .
+                unarySend: c
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: searching\x7fComment: Evaluate eb for each element and index.
+If true is returned, evaluate fb with the element and index,
+and return the result.  Raise an error if no element returns
+true.\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals findFirst: eb IfPresent: fb =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: findFirst:IfPresent:IfAbsent:
+                  <implicitSelf>
+                  unarySend: eb
+                    <implicitSelf>
+                  unarySend: fb
+                    <implicitSelf>
+                  block [
+                    expressionSeries
+                      keywordSend: error:
+                        <implicitSelf>
+                        'value not found!' ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: searching\x7fComment: Evaluate eb for each element and index.
+If true is returned, evaluate fb with the element and index,
+and return the result.  Otherwise, evaluate `fail\' and return
+the result.\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals findFirst: eb IfPresent: fb IfAbsent: fail =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: do:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :v .
+                        slot
+                          unarySlotName :k |
+                      expressionSeries
+                        pop
+                          keywordSend: ifTrue:
+                            object (
+                              expressionSeries
+                                keywordSend: value:With:
+                                  unarySend: eb
+                                    <implicitSelf>
+                                  unarySend: v
+                                    <implicitSelf>
+                                  unarySend: k
+                                    <implicitSelf> )
+                            block [
+                              expressionSeries
+                                return ^
+                                  keywordSend: value:With:
+                                    unarySend: fb
+                                      <implicitSelf>
+                                    unarySend: v
+                                      <implicitSelf>
+                                    unarySend: k
+                                      <implicitSelf> ] . ] .
+                unarySend: value
+                  unarySend: fail
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: accessing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName first =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: doFirst:MiddleLast:IfEmpty:
+                  <implicitSelf>
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName :e |
+                    expressionSeries
+                      return ^
+                        unarySend: e
+                          <implicitSelf> ]
+                  block [
+                    expressionSeries
+                      keywordSend: error:
+                        <implicitSelf>
+                        'should not get here' ]
+                  block [
+                    expressionSeries
+                      keywordSend: error:
+                        <implicitSelf>
+                        'empty collection' ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: comparing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName hash =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+                  slot
+                    unarySlotName h <- 0 . } |
+              expressionSeries
+                pop
+                  keywordSend: do:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :e |
+                      expressionSeries
+                        keywordSend: h:
+                          <implicitSelf>
+                          binarySend: ^^
+                            unarySend: h
+                              <implicitSelf>
+                            unarySend: hash
+                              unarySend: e
+                                <implicitSelf> ] .
+                unarySend: h
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: searching\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals includes: v =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: findFirst:IfPresent:IfAbsent:
+                  <implicitSelf>
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName :e |
+                    expressionSeries
+                      binarySend: =
+                        unarySend: v
+                          <implicitSelf>
+                        unarySend: e
+                          <implicitSelf> ]
+                  unarySend: true
+                    <implicitSelf>
+                  unarySend: false
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: setLikeOperations\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals includesAll: c =
+            method (
+              slotList | | ( "subset" ) 
+              expressionSeries
+                pop
+                  keywordSend: do:
+                    unarySend: c
+                      <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :v |
+                      expressionSeries
+                        pop
+                          keywordSend: ifFalse:
+                            object (
+                              expressionSeries
+                                keywordSend: includes:
+                                  <implicitSelf>
+                                  unarySend: v
+                                    <implicitSelf> )
+                            block [
+                              expressionSeries
+                                return ^
+                                  unarySend: false
+                                    <implicitSelf> ] . ] .
+                unarySend: true
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: setLikeOperations\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals intersect: c =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+                  slot
+                    unarySlotName r . } |
+              expressionSeries
+                pop
+                  keywordSend: r:
+                    <implicitSelf>
+                    unarySend: copy
+                      <implicitSelf> .
+                pop
+                  keywordSend: do:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :v |
+                      expressionSeries
+                        pop
+                          keywordSend: ifFalse:
+                            object (
+                              expressionSeries
+                                keywordSend: includes:
+                                  unarySend: c
+                                    <implicitSelf>
+                                  unarySend: v
+                                    <implicitSelf> )
+                            block [
+                              expressionSeries
+                                keywordSend: remove:
+                                  unarySend: r
+                                    <implicitSelf>
+                                  unarySend: v
+                                    <implicitSelf> ] . ] .
+                unarySend: r
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: sizing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName isEmpty =
+            method (
+              slotList | |
+              expressionSeries
+                binarySend: =
+                  0
+                  unarySend: size
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: comparing\x7fComment: is self a prefix of c?\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals isPrefixOf: c =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: with:Do:
+                    <implicitSelf>
+                    unarySend: c
+                      <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :prefixElem .
+                        slot
+                          unarySlotName :testElem . |
+                      expressionSeries
+                        pop
+                          keywordSend: ifFalse:
+                            binarySend: =
+                              unarySend: prefixElem
+                                <implicitSelf>
+                              unarySend: testElem
+                                <implicitSelf>
+                            block [
+                              expressionSeries
+                                return ^
+                                  unarySend: false
+                                    <implicitSelf> ] . ] .
+                binarySend: <=
+                  unarySend: size
+                    <implicitSelf>
+                  unarySend: size
+                    unarySend: c
+                      <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: comparing\x7fComment: is self a suffix of c?\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals isSuffixOf: c =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: with:ReverseDo:
+                    <implicitSelf>
+                    unarySend: c
+                      <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :suffixElem .
+                        slot
+                          unarySlotName :testElem . |
+                      expressionSeries
+                        pop
+                          keywordSend: ifFalse:
+                            binarySend: =
+                              unarySend: suffixElem
+                                <implicitSelf>
+                              unarySend: testElem
+                                <implicitSelf>
+                            block [
+                              expressionSeries
+                                return ^
+                                  unarySend: false
+                                    <implicitSelf> ] . ] .
+                binarySend: <=
+                  unarySend: size
+                    <implicitSelf>
+                  unarySend: size
+                    unarySend: c
+                      <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: searching\x7fComment: Return the key of elem -- Mario, 4/11/95\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals keyOf: elem =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: keyOf:IfAbsent:
+                  <implicitSelf>
+                  unarySend: elem
+                    <implicitSelf>
+                  unarySend: raiseError
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: searching\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals keyOf: elem IfAbsent: ab =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: findFirst:IfPresent:IfAbsent:
+                  <implicitSelf>
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName :v |
+                    expressionSeries
+                      binarySend: =
+                        unarySend: elem
+                          <implicitSelf>
+                        unarySend: v
+                          <implicitSelf> ]
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName :v .
+                      slot
+                        unarySlotName :k . |
+                    expressionSeries
+                      unarySend: k
+                        <implicitSelf> ]
+                  unarySend: ab
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals keyedStoreStringIfFail: fb =
+            method (
+              slotList |
+                slot
+                  unarySlotName atPuts .
+                slot
+                  unarySlotName r . |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: >
+                      unarySend: size
+                        <implicitSelf>
+                      20
+                    block [
+                      expressionSeries
+                        return ^
+                          keywordSend: value:
+                            unarySend: fb
+                              <implicitSelf>
+                            'too big' ] .
+                pop
+                  keywordSend: atPuts:
+                    <implicitSelf>
+                    unarySend: copyRemoveAll
+                      unarySend: list
+                        <implicitSelf> .
+                pop
+                  keywordSend: do:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :v .
+                        slot
+                          unarySlotName :k |
+                      expressionSeries
+                        keywordSend: addLast:
+                          unarySend: atPuts
+                            <implicitSelf>
+                          binarySend: ,
+                            binarySend: ,
+                              binarySend: ,
+                                binarySend: ,
+                                  object (
+                                    expressionSeries
+                                      keywordSend: storeStringIfFail:
+                                        unarySend: k
+                                          <implicitSelf>
+                                        block [
+                                          slotList |
+                                            slot
+                                              unarySlotName :e |
+                                          expressionSeries
+                                            return ^
+                                              keywordSend: value:
+                                                unarySend: fb
+                                                  <implicitSelf>
+                                                unarySend: e
+                                                  <implicitSelf> ] )
+                                  ')'
+                                ' Put: ('
+                              object (
+                                expressionSeries
+                                  keywordSend: storeStringIfFail:
+                                    unarySend: v
+                                      <implicitSelf>
+                                    block [
+                                      slotList |
+                                        slot
+                                          unarySlotName :e |
+                                      expressionSeries
+                                        return ^
+                                          keywordSend: value:
+                                            unarySend: fb
+                                              <implicitSelf>
+                                            unarySend: e
+                                              <implicitSelf> ] )
+                            ')' ] .
+                pop
+                  keywordSend: atPuts:
+                    <implicitSelf>
+                    unarySend: asVector
+                      unarySend: atPuts
+                        <implicitSelf> .
+                pop
+                  keywordSend: ifFalse:
+                    unarySend: areKeysOrdered
+                      <implicitSelf>
+                    block [
+                      expressionSeries
+                        keywordSend: atPuts:
+                          <implicitSelf>
+                          unarySend: copySort
+                            unarySend: atPuts
+                              <implicitSelf> ] .
+                pop
+                  keywordSend: r:
+                    <implicitSelf>
+                    keywordSend: copyFirst:
+                      unarySend: collector
+                        <implicitSelf>
+                      '' ( "ugh!" )  .
+                pop
+                  keywordSend: do:
+                    object (
+                      expressionSeries
+                        keywordSend: max:
+                          unarySend: pred
+                            unarySend: size
+                              <implicitSelf>
+                          0 )
+                    block [
+                      expressionSeries
+                        keywordSend: r:
+                          <implicitSelf>
+                          binarySend: &
+                            unarySend: r
+                              <implicitSelf>
+                            '(' ] .
+                pop
+                  keywordSend: r:
+                    <implicitSelf>
+                    binarySend: &
+                      binarySend: &
+                        unarySend: r
+                          <implicitSelf>
+                        unarySend: collectionName
+                          <implicitSelf>
+                      ' copyRemoveAll' .
+                pop
+                  keywordSend: do:
+                    unarySend: atPuts
+                      <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :s .
+                        slot
+                          unarySlotName :i . |
+                      expressionSeries
+                        pop
+                          keywordSend: r:
+                            <implicitSelf>
+                            binarySend: &
+                              binarySend: &
+                                binarySend: &
+                                  unarySend: r
+                                    <implicitSelf>
+                                  ' at: ('
+                                unarySend: s
+                                  <implicitSelf>
+                              object (
+                                expressionSeries
+                                  keywordSend: ifFalse:True:
+                                    binarySend: =
+                                      unarySend: i
+                                        <implicitSelf>
+                                      unarySend: lastKey
+                                        unarySend: atPuts
+                                          <implicitSelf>
+                                    ')'
+                                    '' ) . ] .
+                unarySend: flatString
+                  unarySend: r
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: accessing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName keys =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+                  slot
+                    unarySlotName r . } |
+              expressionSeries
+                pop
+                  keywordSend: r:
+                    <implicitSelf>
+                    unarySend: copyRemoveAll
+                      unarySend: list
+                        <implicitSelf> .
+                pop
+                  keywordSend: do:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :e .
+                        slot
+                          unarySlotName :k |
+                      expressionSeries
+                        keywordSend: addLast:
+                          unarySend: r
+                            <implicitSelf>
+                          unarySend: k
+                            <implicitSelf> ] .
+                unarySend: r
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName leftBracket = '{' . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals mapBy: eb =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: mapBy:Into:
+                  <implicitSelf>
+                  unarySend: eb
+                    <implicitSelf>
+                  self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: transforming\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals mapBy: eb Into: c =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: do:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :v .
+                        slot
+                          unarySlotName :k |
+                      expressionSeries
+                        keywordSend: add:WithKey:
+                          unarySend: c
+                            <implicitSelf>
+                          object (
+                            expressionSeries
+                              keywordSend: value:With:
+                                unarySend: eb
+                                  <implicitSelf>
+                                unarySend: v
+                                  <implicitSelf>
+                                unarySend: k
+                                  <implicitSelf> )
+                          unarySend: k
+                            <implicitSelf> ] .
+                unarySend: c
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: reducing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName max =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: reduceWith:IfSingleton:
+                  <implicitSelf>
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName :e1 .
+                      slot
+                        unarySlotName :e2 |
+                    expressionSeries
+                      keywordSend: max:
+                        unarySend: e1
+                          <implicitSelf>
+                        unarySend: e2
+                          <implicitSelf> ]
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName :e |
+                    expressionSeries
+                      unarySend: e
+                        <implicitSelf> ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: reducing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName mean =
+            method (
+              slotList | |
+              expressionSeries
+                binarySend: /~
+                  unarySend: sum
+                    <implicitSelf>
+                  unarySend: size
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: reducing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName min =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: reduceWith:IfSingleton:
+                  <implicitSelf>
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName :e1 .
+                      slot
+                        unarySlotName :e2 |
+                    expressionSeries
+                      keywordSend: min:
+                        unarySend: e1
+                          <implicitSelf>
+                        unarySend: e2
+                          <implicitSelf> ]
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName :e |
+                    expressionSeries
+                      unarySend: e
+                        <implicitSelf> ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName minContentsSize = 2 . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName minElSize = 15 . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: sizing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName nonEmpty =
+            method (
+              slotList | |
+              expressionSeries
+                unarySend: not
+                  unarySend: isEmpty
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: searching\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals occurrencesOf: v =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+                  slot
+                    unarySlotName i <- 0 . } |
+              expressionSeries
+                pop
+                  keywordSend: do:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :e |
+                      expressionSeries
+                        keywordSend: ifTrue:
+                          binarySend: =
+                            unarySend: v
+                              <implicitSelf>
+                            unarySend: e
+                              <implicitSelf>
+                          block [
+                            expressionSeries
+                              keywordSend: i:
+                                <implicitSelf>
+                                unarySend: succ
+                                  unarySend: i
+                                    <implicitSelf> ] ] .
+                unarySend: i
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName parent parent =
+            binarySend: ->
+              binarySend: ->
+                binarySend: ->
+                  unarySend: stub
+                    unarySend: bootstrap
+                      <implicitSelf>
+                  'traits'
+                'orderedClonable'
+              object ( ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fComment: Most collections don\'t print keys...\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            keywordSlotNameWithFormals printStringKey: k =
+            method (
+              slotList | |
+              expressionSeries '' ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fComment: No longer a general method.
+Use this only for collections, and only
+for collections of concrete objects.
+-- dmu\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals printStringSize: smax Depth: dmax =
+            method (
+              slotList |
+                slot
+                  unarySlotName r .
+                slot
+                  unarySlotName sizePerEl .
+                slot
+                  unarySlotName totalSubSize . |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: ||
+                      object (
+                        expressionSeries
+                          binarySend: <=
+                            unarySend: dmax
+                              <implicitSelf>
+                            0 )
+                      object (
+                        expressionSeries
+                          binarySend: >=
+                            object (
+                              expressionSeries
+                                binarySend: +
+                                  binarySend: +
+                                    binarySend: +
+                                      unarySend: size
+                                        unarySend: collectionName
+                                          <implicitSelf>
+                                      unarySend: size
+                                        unarySend: leftBracket
+                                          <implicitSelf>
+                                    unarySend: size
+                                      unarySend: continued
+                                        <implicitSelf>
+                                  unarySend: minContentsSize
+                                    <implicitSelf> )
+                            unarySend: smax
+                              <implicitSelf> )
+                    block [
+                      expressionSeries
+                        return ^
+                          pop
+                            keywordSend: copyAtMostWithEllipsis:
+                              unarySend: collectionName
+                                <implicitSelf>
+                              unarySend: smax
+                                <implicitSelf> . ] .
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: =
+                      unarySend: size
+                        <implicitSelf>
+                      0
+                    block [
+                      expressionSeries
+                        return ^
+                          binarySend: ,
+                            binarySend: ,
+                              unarySend: collectionName
+                                <implicitSelf>
+                              unarySend: leftBracket
+                                <implicitSelf>
+                            unarySend: rightBracket
+                              <implicitSelf> ] .
+                pop
+                  keywordSend: totalSubSize:
+                    <implicitSelf>
+                    binarySend: -
+                      binarySend: -
+                        binarySend: -
+                          binarySend: -
+                            unarySend: smax
+                              <implicitSelf>
+                            object (
+                              expressionSeries
+                                binarySend: *
+                                  unarySend: size
+                                    <implicitSelf>
+                                  unarySend: size
+                                    unarySend: separator
+                                      <implicitSelf> )
+                          unarySend: size
+                            unarySend: collectionName
+                              <implicitSelf>
+                        unarySend: size
+                          unarySend: leftBracket
+                            <implicitSelf>
+                      unarySend: size
+                        unarySend: rightBracket
+                          <implicitSelf> .
+                pop
+                  keywordSend: sizePerEl:
+                    <implicitSelf>
+                    keywordSend: max:
+                      binarySend: /
+                        unarySend: totalSubSize
+                          <implicitSelf>
+                        unarySend: size
+                          <implicitSelf>
+                      unarySend: minElSize
+                        <implicitSelf> .
+                pop
+                  keywordSend: r:
+                    <implicitSelf>
+                    keywordSend: buildStringWith:
+                      <implicitSelf>
+                      block [
+                        slotList |
+                          slot
+                            unarySlotName :e .
+                          slot
+                            unarySlotName :k .
+                          slot
+                            unarySlotName :oldStr .
+                          slot
+                            unarySlotName elString .
+                          slot
+                            unarySlotName newSize |
+                        expressionSeries
+                          pop
+                            keywordSend: elString:
+                              <implicitSelf>
+                              binarySend: &
+                                object (
+                                  expressionSeries
+                                    keywordSend: printStringKey:
+                                      <implicitSelf>
+                                      unarySend: k
+                                        <implicitSelf> )
+                                object (
+                                  expressionSeries
+                                    keywordSend: printStringSize:Depth:
+                                      unarySend: e
+                                        <implicitSelf>
+                                      unarySend: sizePerEl
+                                        <implicitSelf>
+                                      unarySend: pred
+                                        unarySend: dmax
+                                          <implicitSelf> ) .
+                          pop
+                            keywordSend: newSize:
+                              <implicitSelf>
+                              binarySend: +
+                                binarySend: +
+                                  binarySend: +
+                                    unarySend: flatSizeHint
+                                      unarySend: oldStr
+                                        <implicitSelf>
+                                    unarySend: size
+                                      unarySend: separator
+                                        <implicitSelf>
+                                  unarySend: flatSizeHint
+                                    unarySend: elString
+                                      <implicitSelf>
+                                unarySend: size
+                                  unarySend: continued
+                                    <implicitSelf> .
+                          pop
+                            keywordSend: ifTrue:
+                              binarySend: >
+                                unarySend: newSize
+                                  <implicitSelf>
+                                unarySend: smax
+                                  <implicitSelf>
+                              block [
+                                expressionSeries
+                                  return ^
+                                    unarySend: flatString
+                                      object (
+                                        expressionSeries
+                                          binarySend: &
+                                            unarySend: oldStr
+                                              <implicitSelf>
+                                            unarySend: continued
+                                              <implicitSelf> ) ] .
+                          unarySend: elString
+                            <implicitSelf> ] .
+                unarySend: flatString
+                  unarySend: r
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: reducing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName product =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: reduceWith:IfSingleton:IfEmpty:
+                  <implicitSelf>
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName :e1 .
+                      slot
+                        unarySlotName :e2 |
+                    expressionSeries
+                      binarySend: *
+                        unarySend: e1
+                          <implicitSelf>
+                        unarySend: e2
+                          <implicitSelf> ]
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName :e |
+                    expressionSeries
+                      unarySend: e
+                        <implicitSelf> ]
+                  1 ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: reducing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals reduceWith: b =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: reduceWith:IfSingleton:IfEmpty:
+                  <implicitSelf>
+                  unarySend: b
+                    <implicitSelf>
+                  block [
+                    expressionSeries
+                      keywordSend: error:
+                        <implicitSelf>
+                        'singleton!' ]
+                  block [
+                    expressionSeries
+                      keywordSend: error:
+                        <implicitSelf>
+                        'I am empty!' ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: reducing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals reduceWith: b IfSingleton: sb =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: reduceWith:IfSingleton:IfEmpty:
+                  <implicitSelf>
+                  unarySend: b
+                    <implicitSelf>
+                  unarySend: sb
+                    <implicitSelf>
+                  block [
+                    expressionSeries
+                      keywordSend: error:
+                        <implicitSelf>
+                        'I am empty!' ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: reducing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals reduceWith: b IfSingleton: sb IfEmpty: mt =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+                  slot
+                    unarySlotName r . } |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: =
+                      unarySend: size
+                        <implicitSelf>
+                      1
+                    block [
+                      expressionSeries
+                        return ^
+                          keywordSend: value:
+                            unarySend: sb
+                              <implicitSelf>
+                            unarySend: first
+                              <implicitSelf> ] .
+                pop
+                  keywordSend: doFirst:MiddleLast:IfEmpty:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :e |
+                      expressionSeries
+                        keywordSend: r:
+                          <implicitSelf>
+                          unarySend: e
+                            <implicitSelf> ]
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :e |
+                      expressionSeries
+                        keywordSend: r:
+                          <implicitSelf>
+                          keywordSend: value:With:
+                            unarySend: b
+                              <implicitSelf>
+                            unarySend: r
+                              <implicitSelf>
+                            unarySend: e
+                              <implicitSelf> ]
+                    block [
+                      expressionSeries
+                        keywordSend: r:
+                          <implicitSelf>
+                          unarySend: value
+                            unarySend: mt
+                              <implicitSelf> ] .
+                unarySend: r
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: removing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals remove: x =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: remove:IfAbsent:
+                    <implicitSelf>
+                    unarySend: x
+                      <implicitSelf>
+                    block [
+                      expressionSeries
+                        keywordSend: error:
+                          <implicitSelf>
+                          binarySend: ,
+                            unarySend: printString
+                              unarySend: x
+                                <implicitSelf>
+                            ' is absent' ] . self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: removing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals removeAll: aCollection =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: do:
+                    unarySend: aCollection
+                      <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :e |
+                      expressionSeries
+                        keywordSend: remove:
+                          <implicitSelf>
+                          unarySend: e
+                            <implicitSelf> ] . self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName rightBracket = '}' . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName separator = ', ' . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: sizing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName size =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+                  slot
+                    unarySlotName i <- 0 . } |
+              expressionSeries
+                pop
+                  keywordSend: do:
+                    <implicitSelf>
+                    block [
+                      expressionSeries
+                        keywordSend: i:
+                          <implicitSelf>
+                          unarySend: succ
+                            unarySend: i
+                              <implicitSelf> ] .
+                unarySend: i
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: sorting\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals sortedBy: cmp Do: b =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+                  slot
+                    unarySlotName queue . } |
+              expressionSeries
+                pop
+                  keywordSend: queue:
+                    <implicitSelf>
+                    unarySend: copyRemoveAll
+                      unarySend: priorityQueue
+                        <implicitSelf> .
+                pop
+                  keywordSend: sorter:
+                    unarySend: queue
+                      <implicitSelf>
+                    unarySend: cmp
+                      <implicitSelf> .
+                pop
+                  keywordSend: do:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :el |
+                      expressionSeries
+                        keywordSend: add:
+                          unarySend: queue
+                            <implicitSelf>
+                          unarySend: el
+                            <implicitSelf> ] .
+                pop
+                  keywordSend: whileFalse:
+                    block [
+                      expressionSeries
+                        unarySend: isEmpty
+                          unarySend: queue
+                            <implicitSelf> ]
+                    block [
+                      expressionSeries
+                        keywordSend: value:
+                          unarySend: b
+                            <implicitSelf>
+                          unarySend: removeFirst
+                            unarySend: queue
+                              <implicitSelf> ] . self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: sorting\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals sortedDo: b =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: sortedBy:Do:
+                  <implicitSelf>
+                  unarySend: ascendingOrder
+                    <implicitSelf>
+                  unarySend: b
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName statePrintString =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: ifTrue:False:
+                  binarySend: <=
+                    unarySend: size
+                      <implicitSelf>
+                    7
+                  block [
+                    expressionSeries
+                      unarySend: statePrintStringOfElements
+                        <implicitSelf> ]
+                  block [
+                    expressionSeries
+                      unarySend: statePrintStringOfSize
+                        <implicitSelf> ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName statePrintStringOfElements =
+            method (
+              slotList |
+                slot
+                  unarySlotName r <- '' . |
+              expressionSeries
+                pop
+                  keywordSend: doFirst:MiddleLast:IfEmpty:
+                    <implicitSelf>
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :e |
+                      expressionSeries
+                        keywordSend: r:
+                          <implicitSelf>
+                          binarySend: &
+                            unarySend: r
+                              <implicitSelf>
+                            unarySend: safeName
+                              object (
+                                expressionSeries
+                                  keywordSend: reflect:
+                                    <implicitSelf>
+                                    unarySend: e
+                                      <implicitSelf> ) ]
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :e |
+                      expressionSeries
+                        keywordSend: r:
+                          <implicitSelf>
+                          binarySend: &
+                            binarySend: &
+                              unarySend: r
+                                <implicitSelf>
+                              ', '
+                            unarySend: safeName
+                              object (
+                                expressionSeries
+                                  keywordSend: reflect:
+                                    <implicitSelf>
+                                    unarySend: e
+                                      <implicitSelf> ) ]
+                    block [
+                      expressionSeries
+                        return ^ '' ] .
+                unarySend: flatString
+                  unarySend: r
+                    <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            unarySlotName statePrintStringOfSize =
+            method (
+              slotList | |
+              expressionSeries
+                binarySend: ,
+                  unarySend: printString
+                    unarySend: size
+                      <implicitSelf>
+                  ' elements' ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals storeStringForUnkeyedCollectorIfFail: fb =
+            method (
+              slotList |
+                annotatedSlotGroup { 'ModuleInfo: Module: collection InitialContents: FollowSlot'
+                  slot
+                    unarySlotName ss . } |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    binarySend: >
+                      unarySend: size
+                        <implicitSelf>
+                      50
+                    block [
+                      expressionSeries
+                        return ^
+                          keywordSend: value:
+                            unarySend: fb
+                              <implicitSelf>
+                            'too big' ] .
+                pop
+                  keywordSend: ss:
+                    <implicitSelf>
+                    keywordSend: copyMappedBy:
+                      <implicitSelf>
+                      block [
+                        slotList |
+                          slot
+                            unarySlotName :e |
+                        expressionSeries
+                          pop
+                            binarySend: ,
+                              binarySend: ,
+                                '('
+                                object (
+                                  expressionSeries
+                                    keywordSend: storeStringIfFail:
+                                      unarySend: e
+                                        <implicitSelf>
+                                      block [
+                                        slotList |
+                                          slot
+                                            unarySlotName :e |
+                                        expressionSeries
+                                          return ^
+                                            keywordSend: value:
+                                              unarySend: fb
+                                                <implicitSelf>
+                                              unarySend: e
+                                                <implicitSelf> ] )
+                              ')' . ] .
+                pop
+                  keywordSend: ifFalse:
+                    unarySend: isOrdered
+                      <implicitSelf>
+                    block [
+                      expressionSeries
+                        keywordSend: ss:
+                          <implicitSelf>
+                          unarySend: sort
+                            unarySend: asVector
+                              unarySend: ss
+                                <implicitSelf> ] .
+                keywordSend: reduceWith:IfSingleton:
+                  unarySend: ss
+                    <implicitSelf>
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName :e1 .
+                      slot
+                        unarySlotName :e2 |
+                    expressionSeries
+                      binarySend: ,
+                        binarySend: ,
+                          unarySend: e1
+                            <implicitSelf>
+                          '\n\t& '
+                        unarySend: e2
+                          <implicitSelf> ]
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName :e1 |
+                    expressionSeries
+                      return ^
+                        binarySend: ,
+                          'collector copyFirst: '
+                          unarySend: e1
+                            <implicitSelf> ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals storeStringIfFail: fb =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: ifFalse:True:
+                  unarySend: isEmpty
+                    <implicitSelf>
+                  block [
+                    expressionSeries
+                      keywordSend: value:
+                        unarySend: fb
+                          <implicitSelf>
+                        'collection not empty' ]
+                  block [
+                    expressionSeries
+                      binarySend: ,
+                        binarySend: ,
+                          unarySend: collectionName
+                            <implicitSelf>
+                          ' '
+                        'copyRemoveAll' ] ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName storeStringNeeds =
+            method (
+              slotList | |
+              expressionSeries
+                unarySend: prototype
+                  <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: reducing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            unarySlotName sum =
+            method (
+              slotList | |
+              expressionSeries
+                keywordSend: reduceWith:IfSingleton:IfEmpty:
+                  <implicitSelf>
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName :e1 .
+                      slot
+                        unarySlotName :e2 |
+                    expressionSeries
+                      binarySend: +
+                        unarySend: e1
+                          <implicitSelf>
+                        unarySend: e2
+                          <implicitSelf> ]
+                  block [
+                    slotList |
+                      slot
+                        unarySlotName :e |
+                    expressionSeries
+                      unarySend: e
+                        <implicitSelf> ]
+                  0 ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: printing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals unkeyedStoreStringIfFail: fb =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: ifTrue:
+                    unarySend: isEmpty
+                      <implicitSelf>
+                    block [
+                      expressionSeries
+                        return ^
+                          binarySend: ,
+                            binarySend: ,
+                              unarySend: collectionName
+                                <implicitSelf>
+                              ' '
+                            'copyRemoveAll' ] .
+                binarySend: ,
+                  binarySend: ,
+                    binarySend: ,
+                      '('
+                      object (
+                        expressionSeries
+                          keywordSend: storeStringForUnkeyedCollectorIfFail:
+                            <implicitSelf>
+                            block [
+                              slotList |
+                                slot
+                                  unarySlotName :e |
+                              expressionSeries
+                                return ^
+                                  keywordSend: value:
+                                    unarySend: fb
+                                      <implicitSelf>
+                                    unarySend: e
+                                      <implicitSelf> ] )
+                    ') as'
+                  unarySend: capitalize
+                    unarySend: collectionName
+                      <implicitSelf> ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iterating\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+          slot
+            keywordSlotNameWithFormals with: c Do: b =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: withNonindexable:Do:
+                    unarySend: c
+                      <implicitSelf>
+                    self
+                    block [
+                      slotList |
+                        slot
+                          unarySlotName :v1 .
+                        slot
+                          unarySlotName :v2 .
+                        slot
+                          unarySlotName :k1 .
+                        slot
+                          unarySlotName :k2 |
+                      expressionSeries
+                        keywordSend: value:With:With:With:
+                          unarySend: b
+                            <implicitSelf>
+                          unarySend: v2
+                            <implicitSelf>
+                          unarySend: v1
+                            <implicitSelf>
+                          unarySend: k2
+                            <implicitSelf>
+                          unarySend: k1
+                            <implicitSelf> ] . self ) . } | )
+  keywordSend: addSlotsTo:From:
+    unarySend: bootstrap
+      <implicitSelf>
+    binarySend: ->
+      binarySend: ->
+        binarySend: ->
+          unarySend: stub
+            unarySend: bootstrap
+              <implicitSelf>
+          'traits'
+        'collection'
+      object ( )
+    object (
+      slotList |
+        annotatedSlotGroup { 'Category: iterating\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: private'
+          slot
+            keywordSlotNameWithFormals withNonindexable: c Do: b =
+            method (
+              slotList | |
+              expressionSeries
+                pop
+                  keywordSend: error:
+                    <implicitSelf>
+                    'cannot co-iterate these two collections' . self ) . } | ) '-- Side effects'
+  unarySend: postFileIn
+    unarySend: collection
+      unarySend: modules
+        unarySend: globals
+          <implicitSelf>

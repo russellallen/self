@@ -1,0 +1,11 @@
+The files in this directory are derived from GNU Smalltalk 1.1.1.
+The copying policy that applies to the files in this directory and
+this directory alone is enumerated in the file Smalltalk_copying_policy.
+
+These files have not been extensively tested with the Self Smalltalk
+implementation.  Do not assume that anything works!
+
+More details about the Self Smalltalk implementation can be found in
+the Self 4.0 documentation.
+
+$Revision: 30.1 $

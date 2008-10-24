@@ -1,0 +1,21 @@
+-- Sun-$Revision: 9.1 $
+
+abstract type list[T] isa sequence[T];
+method collection_name(@:list[`T]):string { "list" }
+
+concrete object nil isa list[`T];
+method length(@:nil):integer { 0 }
+method do(@:nil, :&(`T):void):void {}
+method is_empty(@:nil):boolean { true }
+
+template object cons[T] isa list[T];
+private put field head(@:cons[`T]):T;
+private put field tail(@:cons[`T]):list[T] := nil;
+method length(c@:cons[`T]):integer { 1 + c.tail.length }
+method do(c@:cons[`T], closure:&(T):void):void {
+    eval(closure, c.head);
+    do(c.tail, closure);
+}
+method is_empty(@:cons[`T]):boolean { false }
+method cons(hd:T, tl:list[`T]):list[T] {
+    object isa cons[T] { head := hd, tail := tl } }

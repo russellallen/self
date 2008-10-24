@@ -1,0 +1,29 @@
+-- Sun-$Revision: 9.1 $
+
+-- methods for character objects
+
+(--
+prim init_only field value(@:char):char := ' ';
+--)
+
+-- ascii conversion behavior
+
+prim method from_ascii(i@:integer):char { "
+    cecil_char_literal 
+	copyValue: (i integerValueInContext: context) asCharacter 
+	InContext: context
+" "
+    *_result = asTaggedPointer(new CecilCharObject((char) unBoxInteger(i)));
+" }
+
+prim method ascii_code(c@:char):integer { "
+    cecil_integer_literal
+	copyValue: (c charValueInContext: context) asByte 
+    	InContext: context
+" "
+    *_result = asTaggedInteger((int) c->asCharObj()->ch);
+" }
+
+-- printing behavior
+
+method print_string(c@:char):string { ("'" || as_string(c)) || "'" }

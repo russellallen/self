@@ -1,0 +1,8 @@
+
+expressionSeries
+  object (
+    slotList |
+      slot
+        keywordSlotNameWithFormals a: b =
+        method (
+          expressionSeries self ) | )

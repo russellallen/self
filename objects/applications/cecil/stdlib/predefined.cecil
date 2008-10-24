@@ -1,0 +1,40 @@
+-- Sun-$Revision: 9.1 $
+
+(-- system predefines the following declarations:
+template type integer;
+template type float;
+template type char;
+template type array[T];
+template type string;
+template type mutable_string;
+abstract object closure;
+concrete object true;
+concrete object false;
+--)
+
+include "general.cecil";
+
+include "system.cecil";
+include "ui.cecil";
+
+include "closure.cecil";
+
+include "boolean.cecil";
+
+include "comparable.cecil";
+include "number.cecil";
+include "integer.cecil";
+include "float.cecil";
+
+include "character.cecil";
+
+include "collection.cecil";
+include "sequence.cecil";
+include "table.cecil";
+include "indexed.cecil";
+include "array.cecil";
+include "string.cecil";
+include "list.cecil";
+include "stack.cecil";
+include "unordered.cecil";
+include "sorted.cecil";

@@ -1,0 +1,44 @@
+<html>
+<head>
+<TITLE>Self paper: "Write Barrier"</title>
+</head>
+
+<body>
+<H1>A Fast Write Barrier for Generational Garbage Collectors</H1>
+
+<hr>
+
+Urs Hoelzle
+<hr>
+
+<b>Abstract:</b>
+Generational garbage collectors need to keep track of references from
+older to younger generations so that younger generations can be
+garbage-collected without inspecting every object in the older
+generation(s). The set of locations potentially
+containing pointers to newer objects is often called the remembered
+set. At every store, the system must ensure that the updated
+location is added to the remembered set if the store creates a
+reference from an older to a newer object. This mechanism is usually
+referred to as a write barrier or store check.
+<p>
+For some stores, the
+compiler can know statically that no store check is necessary, for
+example, when storing an integer (assuming that integers are
+implemented as immediates rather than as real heap-allocated objects).
+However, in the general case, a store check must be executed for every
+store operation. Since stores are fairly frequent in non-functional
+languages, an efficient write barrier implementation is essential. The
+write barrier implementation described here reduces the write barrier
+overhead in the mutator to only two extra instructions per checked
+store.
+<hr>
+<i>
+OOPSLA'93 Workshop on Garbage Collection, Washington, D.C., October 1993
+</i>
+<p>
+To get the PostScript file, click
+<a href="ftp://self.stanford.edu/pub/papers/write-barrier.ps.Z">here</a>.
+<hr>
+
+<a href="papers.html">Back to bibliography</a>

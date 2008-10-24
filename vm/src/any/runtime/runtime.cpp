@@ -1,0 +1,23 @@
+/* Sun-$Revision: 30.8 $ */
+
+/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+   See the LICENSE file for license information. */
+
+# pragma implementation "runtime.hh"
+# include "_runtime.cpp.incl"
+
+// This file holds C-level things that some platforms put in
+//  their runtime_foo.s 's.
+
+
+// Well, all platforms need this here.
+// It is used by asm glue for trap handling
+char* continuePC;
+
+
+// a routine that assembly glue can call if a process returns off the top
+
+extern "C" void ReturnOffTopOfProcess() {
+  fatal("Self process returned past top");
+}
+

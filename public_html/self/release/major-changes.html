@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>Major Changes in the Self 3.0 System</title>
+</head>
+
+<body>
+
+<h1>Major Changes in Self 3.0</h1>
+ 
+Below is a list of changes and enhancements that have been made since
+the last release (2.0.1). Only the major changes are included. 
+ <P>
+
+<DL>
+<DT> The <em>graphical browser has been extended</em> to include editing
+capabilities.
+<DD> All programming tasks may now be performed through the
+graphical user interface (the "ui"). Type-ins allow for expression
+evaluation, menus support slot editing, and methods can be entered and
+edited. If you are familiar with a previous version of the Self
+system, Section 14.1 of the manual entitled "How to Use Self 3.0"
+contains a quick introduction to the graphical user interface. The
+impatient might want to read that first.
+ <P>
+<DT> A mechanism - the <em>transporter</em> - has been added to allow arbitrary
+object graphs to be saved into files as Self source.
+<DD> The system has been completely modularized to use the transporter;
+every item of source now resides in a transporter-generated
+module. Transport-generated files have the suffix .sm to distinguish
+them from "handwritten" files (.Self), though this may change as we
+move away from handwritten source. The transporter is usable but rough,
+we are still working on it.
+ <P>
+<DT> Every slot or object may now have an <em>annotation</em> describing the
+purpose of the slot.
+<DD>  In the current system, annotations are strings
+used to categorize slots. We no longer categorize slots using
+explicit category parent objects. Extra syntax is provided to annotate
+objects and slots.
+<p>
+<DT> A <em>new profiler</em> has been added.
+<DD> The new profiler can properly account for the
+time spent in different processes and the run-time system, and which
+presents a source-level profile including type information (i.e.,
+methods inherited by different objects are not amalgamated in the
+profile, nor are calls to the same method from different sites). It
+also presents a consistent source-level view, abstracting from the
+various compiler optimizations (such as inlining) which may confuse
+the programmer.
+ <P> 
+<DT> <em>Privacy is not enforced</em>, although the privacy syntax is still
+accepted.
+<DD>  The previous scheme was at once too restrictive (in that
+there was no notion of "friend" objects) and too lax (too many object
+had access to a private slot). We hope to include a better scheme in
+the next release.
+<p>
+<DT> The "new" compiler has been supplanted by the
+<em>SIC ("simple inlining compiler")</em>.
+<DD> The standard configuration of the
+system is to compile first with a fast non-optimizing compiler and to 
+recompile later with the SIC. Pauses due to compilation or
+recompilation are much smaller.
+<p>
+<DT> <em>Characters are now single-byte strings</em>.
+<DD> There is no separate character traits.
+ <P>
+<DT> <em>Prioritized inheritance has been removed</em>. 
+<DD>  The programmer must now
+manually resolve conflicts. We found the priority mechanism of
+limited use, and had the potential for obscure errors.
+ <P>
+</DL>
+
+</body>
+</html>

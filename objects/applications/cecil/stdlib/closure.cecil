@@ -1,0 +1,113 @@
+-- Sun-$Revision: 9.1 $
+
+prim method loop(c@closure:&():void):no_return {
+ -- eval(c) over and over until a nlr in c exits the loop
+"
+   [ | m. argList. |
+	argList: cecil_obj_list copy add: c.
+	m: context method_lookup: 'eval'
+	    Args: argList Params: cecil_param_list copyRemoveAll.
+	[ m eval: context WithArgs: argList ] loop.
+   ] value.
+" "
+    struct CecilLoopContext: CecilEnv {
+      OOP _closure;
+      CecilLoopContext(CecilEnv* d, CecilEnv* s): CecilEnv(d,s,1) {};
+    };
+    CecilLoopContext envVar1(currentEnv, GLOBAL_ENV);
+    currentEnv = &envVar1;
+    envVar1._closure = c;
+    for (;;) {
+      OOP t1;
+      OOPList1 args(envVar1._closure);
+      OOPList1 privileges(GLOBAL(base,_closure));
+      ReturnCode returnVal1 = send(msg_eval, &t1, 1, args, privileges);
+      PROP_NLR(returnVal1, t1, &envVar1);
+    }
+    fatal(\"should never get here\");
+" }
+
+-- looping controlled by a boolean closure expression
+method while_true(cond:&():boolean, c:&():void):void {
+	loop({ 
+		if(not(eval(cond)), {^}); 
+		eval(c);
+	});
+}
+method while_false(cond:&():boolean, c:&():void):void {
+	while_true({ not(eval(cond)) }, c);
+}
+method while(cond:&():boolean, c:&():void):void {
+	while_true(cond, c);
+}
+
+method until_true(c:&():void, cond:&():boolean):void {
+	loop({
+		eval(c);
+		if(eval(cond), {^});
+	});
+}
+method until_false(c:&():void, cond:&():boolean):void {
+	until_true(c, { not(eval(cond)) });
+}
+method until(c:&():void, cond:&():boolean):void {
+	until_true(c, cond);
+}
+
+method do_while_true(cond:&():boolean, c:&():void):void {
+	loop({
+		if(not(eval(cond)), {^}); 
+		eval(c);
+	});
+}
+method do_while_false(cond:&():boolean, c:&():void):void {
+	do_while_true({ not(eval(cond)) }, c);
+}
+method do_while(cond:&():boolean, c:&():void):void {
+	do_while_true(cond, c);
+}
+
+method do_until_true(c:&():void, cond:&():boolean):void {
+	loop({ 
+		eval(c);
+		if(eval(cond), {^});
+	});
+}
+method do_until_false(c:&():void, cond:&():boolean):void {
+	do_until_true(c, { not(eval(cond)) });
+}
+method do_until(c:&():void, cond:&():boolean):void {
+	do_until_true(c, cond);
+}
+
+-- endlessly loop until the closure's first arg is invoked; 
+--   do not return a result
+method loop_exit(c:&(&():void):void):void {
+	loop({ eval(c, {^}); } );
+}
+
+-- similar to loop_exit, except it returns a value
+method loop_exit_value(c:&(&(`T):no_return):no_return):T {
+	loop({ eval(c, &(e:T){ ^e } ); } );
+}
+
+-- if the closure's argument is evaluated, exit the closure with cecil_void
+method exit(c:&(&():void):void):void {
+	eval(c, {^});
+}
+
+-- similar to exit, except it returns a value
+method exit_value(c:&(&(`T):no_return):`T):T {
+	eval(c, &(e:T){ ^e })
+}
+	
+(-- ignore these for the moment (the type checker can't utilize them)
+method eval(a) { a }
+method eval(a,b) { eval(a) }
+method eval(a,b,c) { eval(a,b) }
+method eval(a,b,c,d) { eval(a,b,c) }
+--)
+
+-- printing behavior
+
+method print_string(@closure):string { "<a closure>" }

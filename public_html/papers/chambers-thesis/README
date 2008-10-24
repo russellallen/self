@@ -1,0 +1,15 @@
+Craig Chambers' Ph.D. thesis, entitled "The Design and Implementation
+of the Self Compiler, an Optimizing Compiler for Object-Oriented
+Programming Languages," is available in compressed postscript form in
+the file thesis.ps.Z.  Two charts do not print out correctly in this
+file; the separate postscript files chart-page-164.ps.Z and
+chart-page-200.ps.Z contain correct versions of the chart data.
+Please note that the thesis is approximately 250 pages long.  To
+enable transferring and printing of smaller sections, each chapter and
+appendix also is available separately in the following files (in order):
+t{0,hesisTOC,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,a1,a2,a3,r}.ps.Z.
+
+A bound hardcopy version of the thesis is available from Stanford as
+technical report number STAN-CS-92-1420.  Stanford charges $20 (plus
+tax for orders from within California), paid in advance, for this
+service.  Contact publications@cs.stanford.edu for more details.

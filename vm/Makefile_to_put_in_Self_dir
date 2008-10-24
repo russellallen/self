@@ -1,0 +1,25 @@
+# Sun-$Revision: 30.2 $
+ 
+# Copyright 1994-2006 Sun Microsystems, Inc. and Stanford University.
+# See the LICENSE file for license information.
+
+# Root Makefile
+
+# You should set the SELF_BASELINE_DIR environment variable to the 
+#   root directory of the self baseline, say ~self.
+# You may want to set the SELF_WORKING_DIR environment variable to the
+#   root directory of your local working tree, say ~/self.
+# Finally, your path should include
+#   {$SELF_WORKING_DIR,$SELF_BASELINE_DIR}/bin/{shell,`arch`}
+#   before using make.
+
+
+# The make files require GNU make -- Sun's make won't run them.  If
+# GNU make is installed as gmake (or under any other name), change the
+# line below accordingly.
+MAKE	     = gmake
+
+ROOT         = .
+FILES        = Makefile todo
+DIRECTORIES  = templates objects vm doc ftpinfo bin
+include        ${ROOT}/templates/sources.make

@@ -1,0 +1,93 @@
+-- "Sun-$Revision: 9.1 $"
+-- load("resend.tst.cecil");
+
+method resend_tests() {
+       print_line("*** resend.tst.cecil ***");            
+       if( length(resend_nil) != 0 , {  print("***length(resend_nil) fail***"); });
+       if( length(resend_cons) != 1 , { print("***length(resend_cons) fail***"); });
+       if( length(resend_cons1) != 1 , { print("***length(resend_cons1) fail***"); });
+       if( length(resend_consNil) != 0 , { print("***length(resend_consNil) fail***"); });
+       if( length(resend_twice) != 0 , { print("***length(resend_twice) fail***"); });
+       if( length2(resend_nil) != 0 , {  print("***length2(resend_nil) fail***"); });
+       if( length2(resend_cons) != 1 , { print("***length2(resend_cons) fail***"); });
+       if( length2(resend_cons1) != 1 , { print("***length2(resend_cons1) fail***"); });
+       resend_test_direct_resends();
+       print_line("\nmanual: length(resend_ambiguousConsNil); length(resend_cell); length(resend_bar);");
+       print_line("\nmanual: length2(resend_ambiguousConsNil); length2(resend_cell);");
+       print_line("done");
+}
+
+concrete object resend_nil;
+method length(@resend_nil) { 0 }
+ -- length(resend_nil);        
+ --    return 0
+method length2(@resend_nil) { 0 }
+					
+concrete object resend_cons;
+method length(@resend_cons) { 1 }
+ -- length(resend_cons);       
+ --    return 1
+method length2(@resend_cons) { 1 }
+method for(c@resend_cons, b) {			
+	eval(b, c.head);
+	eval(b, c.tail) };
+ 
+concrete object resend_cons1 inherits resend_cons;
+method length(c@resend_cons1) { resend(c) }
+ -- length(resend_cons1);       
+ --    resend to its ancestor resend_cons for length message returns 1
+method length2(@resend_cons1) { resend }
+ 
+concrete object resend_ambiguousConsNil inherits resend_cons, resend_nil;
+method length(c@resend_ambiguousConsNil) { resend(c) }
+ -- length(resend_ambiguousConsNil);  
+ --    ambiguous length msg from both ancestors 
+method length2(@resend_ambiguousConsNil) { resend }
+ 
+concrete object resend_consNil inherits resend_cons, resend_nil;
+method length(c@resend_consNil) { resend(c@resend_nil) }
+ -- length(resend_consNil);        
+ --    direct resend to the resend_nil ancestor returns 0
+ 
+concrete object resend_cell;
+method length(c@resend_cell) { resend(c) }
+ -- length(resend_cell);       
+ --    resend to nowhere
+method length2(@resend_cell) { resend }
+ 
+concrete object resend_bar inherits resend_consNil, resend_cons1;
+method length(b@resend_bar) { resend(b) }
+ -- length(resend_bar);        
+ --    ambiguous 
+method length2(@resend_bar) { resend }
+ 
+concrete object resend_twice inherits resend_consNil, resend_cons1;
+method length(b@resend_twice) { resend(b@resend_consNil) }
+ -- length(resend_twice);       
+ --    direct resend resend_twice returns 0
+
+field state(c@resend_cons) := "initState";
+method printState(c@resend_cons) { print(c.state) }
+method printState(n@resend_cons1) {
+	print("in resend_cons1");
+	resend(n);
+}
+method printState(c@resend_consNil) {
+	print("in resend_consNil");
+	resend(c);
+}
+method printState(b@resend_twice) {
+	print("in resend_twice");
+	resend(b@resend_consNil);
+}
+
+method resend_test_direct_resends() {
+	resend_cons1.state := "resend_cons1";
+	resend_consNil.state := "resend_consNil";
+	printState(resend_cons1);
+-- prints out "in resend_cons1" and its state resend_cons1.
+	resend_twice.state := "resend_twice";
+	printState(resend_twice);
+-- prints out "in resend_twice" and "in resend_consNil" and its State is resend_twice.
+}
+

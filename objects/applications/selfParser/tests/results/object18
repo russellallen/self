@@ -1,0 +1,13 @@
+
+expressionSeries
+  object (
+    slotList |
+      slot
+        keywordSlotNameWithoutFormals a: B: =
+        method (
+          slotList |
+            slot
+              unarySlotName :z .
+            slot
+              unarySlotName :x |
+          expressionSeries 12 ) | )
