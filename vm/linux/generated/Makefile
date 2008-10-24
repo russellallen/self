@@ -12,6 +12,9 @@ CLEAN_EXPR    = Tags Objs.* out.* Dependencies.cpp incls/* deps/*
 INCLUDEDB     = ${ROOT}/vm/src/includeDB
 PLATFORM      = ${ROOT}/vm/src/Platform_linux
 
+# We are already in Gnu land - set for $SELF_WORKING_DIR/bin/shell/makeFileLists
+export MAKE := make
+
 default:	includeDB  Platform_linux
 
 # for SRC_DIRS
