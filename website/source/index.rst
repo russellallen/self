@@ -1,15 +1,9 @@
-.. Self Website documentation master file, created by sphinx-quickstart on Sat Nov 22 09:33:51 2008.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Welcome to Self
 ===============
 
-Contents:
-
 .. toctree::
-   :maxdepth: 0
-   
+   :maxdepth: 1
+
    download/index
    documentation/index
    
@@ -26,6 +20,6 @@ Self is available for Solaris, Linux and natively on MacOS X under a BSD-like li
 News
 ====
 
-* Self is now available for Linux! (7 Nov 08)
+* Self is now available for Linux! (1 December 2008)
 
 

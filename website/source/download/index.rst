@@ -1,15 +1,6 @@
-.. Self Website documentation master file, created by sphinx-quickstart on Sat Nov 22 09:33:51 2008.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Download
 ========
 
-Contents:
-
-.. toctree::
-   :maxdepth: 1
-   
 Current Version
 ---------------
 

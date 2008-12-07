@@ -1,13 +1,13 @@
 Changes
 =======
 
-Contents:
+Detailed Changes
+----------------
 
 .. toctree::
    :maxdepth: 1
    
    detailed/index
-
 
 What’s Changed Since Self 4.2.1
 -------------------------------
@@ -25,3 +25,4 @@ Self now implements David Ungar and Kristen McIntyre’s patented (U.S. patent #
 *Graphical Profiler*
 
 We have created an outliner to graphically display the results of running the performance profiler. (Call profileSlice on a block to invoke it.) It includes a pruning algorithm which attempts to eliminate uninteresting nodes from the profile tree. (You can fiddle with the settings by pressing the Controls button on the profile morph.) Both the user interface and the pruning algorithm are still very rough; we haven't had a lot of time to spend on them.
+
