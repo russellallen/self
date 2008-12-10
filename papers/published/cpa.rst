@@ -25,6 +25,6 @@ The cartesian product algorithm has been used in the Self system
 since late 1993. We present measurements to document its performance 
 and compare it against several previous algorithms.
 
-*ECOOP'95 Conference Proceedings, &Aring;rhus, Denmark, August 1995.*
+*ECOOP'95 Conference Proceedings, Århus, Denmark, August 1995.*
 
 `PDF <cpa.pdf>`_
