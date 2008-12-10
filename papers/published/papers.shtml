@@ -1,0 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+<HEAD>
+<TITLE>Papers about Self and OO Programming</TITLE>
+
+<link rel="stylesheet" type="text/css" href="../stylesheet.css">
+</HEAD>
+<BODY>
+
+<div class="main_body">
+         
+         <H1>A Self Bibliography</H1>
+         
+         <P>
+         
+         <HR>
+         
+         </P>
+         
+         <H2>Retrospective</H2>
+         
+         <DL>
+            <DT><A HREF="programming-as-experience.shtml">Programming
+            as an Experience: The Inspiration for Self </A>
+            (1995)</DT>
+            
+            <DD><A HREF="http://www.sun.com/research/people/randall.smith">Randall
+            B. Smith</A> and David Ungar
+            
+            <P>&nbsp;</P></DD>
+         </DL>
+         
+         <P>
+         
+         <HR>
+         
+         </P>
+         
+         <H2>Language</H2>
+         
+         <DL>
+            <DT><A HREF="self-power.shtml">Self: The Power of
+            Simplicity</A> (1987)</DT>
+            
+            <DD>David Ungar and <A HREF="http://www.sun.com/research/people/randall.smith">Randall
+            B. Smith</A>
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="parents-shared-parts.shtml">Parents are
+            Shared Parts: Inheritance and Encapsulation in Self</A>
+            (1991)</DT>
+            
+            <DD><A HREF="http://www.cs.washington.edu/people/faculty/chambers.html">Craig
+            Chambers</A>, David Ungar, Bay-Wei Chang, and <A HREF="http://www.cs.ucsb.edu/~urs">
+            Urs H&ouml;lzle</A>
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="organizing-programs.shtml">Organizing
+            Programs Without Classes</A> (1991)</DT>
+            
+            <DD>David Ungar, <A HREF="http://www.cs.washington.edu/people/faculty/chambers.html">Craig
+            Chambers</A>, Bay-Wei Chang, and <A HREF="http://www.cs.ucsb.edu/~urs">
+            Urs H&ouml;lzle</A>
+            
+            <P>&nbsp;</P></DD>
+         </DL>
+         
+         <P>
+         
+         <HR>
+         
+         </P>
+         
+         <H2>Implementation</H2>
+         
+         <DL>
+            <DT><A HREF="elgin-thesis.shtml">Object Storage and
+            Inheritance for Self</A> (1988)</DT>
+            
+            <DD>Elgin Lee
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="customization.shtml">Customization:
+            Optimizing Compiler Technology for Self, a
+            Dynamically-Typed Object-Oriented Programming
+            Language</A> (1989)</DT>
+            
+            <DD><A HREF="http://www.cs.washington.edu/people/faculty/chambers.html">Craig
+            Chambers</A> and David Ungar
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="implementation.shtml">An Efficient
+            Implementation of Self, a Dynamically-Typed
+            Object-Oriented Language Based on Prototypes</A>
+            (1989)</DT>
+            
+            <DD><A HREF="http://www.cs.washington.edu/people/faculty/chambers.html">Craig
+            Chambers</A>, David Ungar, and Elgin Lee
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="iterative-type-analysis.shtml">Iterative Type
+            Analysis and Extended Message Splitting: Optimizing
+            Dynamically-Typed Object-Oriented Programs</A>
+            (1990)</DT>
+            
+            <DD><A HREF="http://www.cs.washington.edu/people/faculty/chambers.html">Craig
+            Chambers</A> and David Ungar
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="practical.shtml">Making Pure Object-Oriented
+            Languages Practical</A> (1991)</DT>
+            
+            <DD><A HREF="http://www.cs.washington.edu/people/faculty/chambers.html">Craig
+            Chambers</A> and David Ungar
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="pics.shtml">Optimizing Dynamically-Typed
+            Object-Oriented Programming Languages with Polymorphic
+            Inline Caches</A> (1991)</DT>
+            
+            <DD><A HREF="http://www.cs.ucsb.edu/~urs">Urs
+            H&ouml;lzle</A>, <A HREF="http://www.cs.washington.edu/people/faculty/chambers.html">Craig
+            Chambers</A>, and David Ungar
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="craig-thesis.shtml">The Design and
+            Implementation of the Self Compiler, an Optimizing
+            Compiler for Object-Oriented Programming Languages</A>
+            (1992)</DT>
+            
+            <DD><A HREF="http://www.cs.washington.edu/people/faculty/chambers.html">Craig
+            Chambers</A>
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="dynamic-deoptimization.shtml">Debugging
+            Optimized Code with Dynamic Deoptimization</A>
+            (1992)</DT>
+            
+            <DD><A HREF="http://www.cs.ucsb.edu/~urs">Urs
+            H&ouml;lzle</A>, <A HREF="http://www.cs.washington.edu/people/faculty/chambers.html">Craig
+            Chambers</A>, and David Ungar
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="object-msg-perf.shtml">Object, Message, and
+            Performance: How They Coexist in Self</A> (1992)</DT>
+            
+            <DD>David Ungar, <A HREF="http://www.sun.com/research/people/randall.smith">Randall
+            B. Smith</A>, <A HREF="http://www.cs.washington.edu/people/faculty/chambers.html">Craig
+            Chambers</A>, and <A HREF="http://www.cs.ucsb.edu/~urs">
+            Urs H&ouml;lzle</A>
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="write-barrier.shtml">A Fast Write Barrier for
+            Generational Garbage Collectors</A> (1993)</DT>
+            
+            <DD><A HREF="http://www.cs.ucsb.edu/~urs">Urs
+            H&ouml;lzle</A>
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="type-feedback.shtml">Optimizing
+            Dynamically-Dispatched Calls with Run-Time Type
+            Feedback</A> (1994)</DT>
+            
+            <DD><A HREF="http://www.cs.ucsb.edu/~urs">Urs
+            H&ouml;lzle</A> and David Ungar
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="urs-thesis.shtml">Adaptive optimization for
+            Self: Reconciling High Performance with Exploratory
+            Programming</A> (1994)</DT>
+            
+            <DD><A HREF="http://www.cs.ucsb.edu/~urs">Urs
+            H&ouml;lzle</A>
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="third-generation.shtml">A Third-Generation
+            Self Implementation </A> (OOPSLA '94)</DT>
+            
+            <DD><A HREF="http://www.cs.ucsb.edu/~urs">Urs
+            H&ouml;lzle</A> and David Ungar
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="http://www.cs.ucsb.edu/~urs/oocsb/papers/oo-hardware.html">Do
+            object-oriented languages need special hardware support?
+            </A> (ECOOP '95)</DT>
+            
+            <DD><A HREF="http://www.cs.ucsb.edu/~urs">Urs
+            H&ouml;lzle</A> and David Ungar
+            
+            <P>&nbsp;</P></DD>
+         </DL>
+         
+         <P>
+         
+         <HR>
+         
+         </P>
+         
+         <H2>User Interface</H2>
+         
+         <DL>
+            <DT><A HREF="experiencing-self-objects.shtml">Experiencing
+            Self Objects: An Object-Based Artificial Reality</A>
+            (1990)</DT>
+            
+            <DD>Bay-Wei Chang and David Ungar
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="use-mention.shtml">The Use-Mention
+            Perspective on Programming for the Interface</A>
+            (1992)</DT>
+            
+            <DD><A HREF="http://www.sun.com/research/people/randall.smith">Randall
+            B. Smith</A>, David Ungar, and Bay-Wei Chang
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="animation.shtml">Animation: From Cartoons to
+            the User Interface</A> (1993)</DT>
+            
+            <DD>Bay-Wei Chang and David Ungar
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="object-focus.shtml">Getting Close to Objects:
+            Object-Focused Programming Environments</A> (1995)</DT>
+            
+            <DD>Bay-Wei Chang, David Ungar, and <A HREF="http://www.sun.com/research/people/randall.smith">Randall
+            B. Smith</A>
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="self4.0UserInterface.shtml">The Self-4.0 User
+            Interface: Manifesting a System-wide Vision of
+            Concreteness, Uniformity, and Flexibility </A>
+            (1995)</DT>
+            
+            <DD><A HREF="http://www.sun.com/research/people/randall.smith">Randall
+            B. Smith</A>, John Maloney, and David Ungar
+            
+            <P>&nbsp;</P></DD>
+         </DL>
+         
+         <P>
+         
+         <HR>
+         
+         </P>
+         
+         <H2>Type inference and application extraction</H2>
+         
+         <DL>
+            <DT><A HREF="type-inference.shtml">Type Inference of Self:
+            Analysis of Objects with Dynamic and Multiple
+            Inheritance</A> (ECOOP'93)</DT>
+            
+            <DD>Ole Agesen, Jens Palsberg, and Michael I.
+            Schwartzbach
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="sas94.shtml">Constraint-Based Type Inference
+            and Parametric Polymorphism</A> (SAS'94)</DT>
+            
+            <DD>Ole Agesen
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="gold.shtml">Sifting Out the Gold: Delivering
+            Compact Applications From an Exploratory Object-Oriented
+            Programming Environment</A> (OOPSLA'94)</DT>
+            
+            <DD>Ole Agesen and David Ungar
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="cpa.shtml">The Cartesian Product
+            Algorithm</A> (ECOOP'95)</DT>
+            
+            <DD>Ole Agesen
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT>Type Feedback vs. Type Inference: A Comparison of
+            Optimization Techniques for Object-Oriented Languages
+            (OOPSLA'95)</DT>
+            
+            <DD>Ole Agesen and <A HREF="http://www.cs.ucsb.edu/~urs">Urs
+            H&ouml;lzle</A>
+            
+            <P>
+            
+            <HR>
+            
+            </P></DD>
+         </DL>
+         
+         <H2>Other</H2>
+         
+         <DL>
+            <DT><A HREF="oop-components.shtml">Integrating
+            Independently-Developed Components in Object-Oriented
+            Languages</A> (1993)</DT>
+            
+            <DD><A HREF="http://www.cs.ucsb.edu/~urs">Urs
+            H&ouml;lzle</A>
+            
+            <P>&nbsp;</P></DD>
+            
+            <DT><A HREF="mango.shtml">Mango - A Parser Generator for
+            Self</A> (1994)</DT>
+            
+            <DD>Ole Agesen
+            
+            <P>&nbsp;</P></DD>
+         </DL>
+         
+</div>
+
+<div class="nav">
+  <ul class="nav_list">
+    <li class="nav_list_item"><a class="nav_link" href="../about.shtml">About</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="http://sourceforge.net/project/platformdownload.php?group_id=178862">Download</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../documentation.shtml">Documentation</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../discussion.shtml">Discussion</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../papers/papers.shtml">Papers</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../teaching.shtml">Education</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../other-projects.shtml">Projects elsewhere</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../contrib.shtml">Odds and ends</a></li>
+    <li class="nav_list_item"><a class="nav_link" href="../smalltalk.shtml">Smalltalk</a></li>
+    <li class="nav_list_item"><a href="http://sourceforge.net"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=178862&amp;type=2" width="125" height="37" border="0" alt="SourceForge.net Logo" /></li>
+  </ul>
+</div>
+
+<div class="header">
+  <p class="logo_block"><a href="../index.shtml" class="link_to_welcome_page"><img class="logo" src="../images/logo.gif" alt="Self Logo" width="169" height="63" /></a></p>
+  <p class="site_title">The Power of Simplicity</p>
+</div>
+
+
+
+
+</BODY></HTML>
+

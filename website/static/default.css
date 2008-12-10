@@ -3,8 +3,8 @@
  */
 
 body {
-    font-family: 0.8em/1.6em "Lucida Grande", Lucida, Verdana, sans-serif;
-    font-size: 0.85em;
+    font-family: 1.2em/1.8em "Lucida Grande", Lucida, Verdana, sans-serif;
+    font-size: 1em;
     background-color: white;
     color: #000;
     margin: 0;
@@ -27,8 +27,8 @@ div.bodywrapper {
 }
 
 div.body {
-    background-color: #F9F9F9;
-    padding: 0 20px 30px 20px;
+    background-color: #FFFFFF;
+    padding: 20px 40px 30px 20px;
 }
 
 div.sphinxsidebarwrapper {
@@ -39,7 +39,7 @@ div.sphinxsidebar {
     float: left;
     width: 230px;
     margin-left: -100%;
-    font-size: 0.7em;
+    font-size: 1em;
 }
 
 div.clearer {
@@ -512,15 +512,15 @@ div.body h3,
 div.body h4,
 div.body h5,
 div.body h6 {
-    font-family: 0.8em/1.6em "Lucida Grande", Lucida, Verdana, sans-serif;
+    font-family: 1.2em/1.8em "Lucida Grande", Lucida, Verdana, sans-serif;
     font-weight: normal;
-    color: #008000;
+    color: #000000;
     margin: 0 0 8px 0;
 }
 
-div.body h1 { font-size: 1.2em; font-weight: bold; }
-div.body h2 { font-size: 1em; font-weight: bold;  }
-div.body h3 { font-size: 140%; }
+div.body h1 { font-size: 160%; font-weight: bold; }
+div.body h2 { font-size: 120%; font-weight: bold;  }
+div.body h3 { font-size: 120%; }
 div.body h4 { font-size: 120%; }
 div.body h5 { font-size: 110%; }
 div.body h6 { font-size: 100%; }
