@@ -35,6 +35,7 @@ html:
 	cp -rf ../manuals/* static/manuals
 	mkdir -p static/tutorial
 	cp -rf ../tutorial/* static/tutorial
+	tar zxvf static/tutorial/Tutorial.tar.gz -C static/tutorial 
 	mkdir -p build/html build/doctrees
 	@echo "Building site"
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) build/html

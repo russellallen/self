@@ -14,6 +14,8 @@ About
 
    Download Self <download/index>
    Browse Self Documentation <documentation/index>
+   Discuss Self with other users <discuss/index>
+   Follow links to other useful information <links/index>
    
 Self is a prototype-based dynamic object-oriented programming language, environment, and virtual machine centered around the principles of simplicity, uniformity, concreteness, and liveness. 
 
