@@ -22,7 +22,9 @@ Other Prototyping Languages
 
 * `Io <http://iolanguage.com>`_
 * `Ioke <http://kenai.com/projects/ioke/>`_
+* `NewSpeak <http://newspeaklanguage.org/>`_
 * Javascript (of course)
+* `Slate <http://slatelanguage.org>`_
 
 Other Open Source Smalltalks
 ----------------------------

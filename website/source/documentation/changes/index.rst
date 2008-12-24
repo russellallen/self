@@ -1,9 +1,6 @@
 Changes
 =======
 
-Detailed Changes
-----------------
-
 .. toctree::
    :maxdepth: 1
    

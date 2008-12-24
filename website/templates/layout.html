@@ -4,9 +4,11 @@
 {%- endblock %}
 {%- set reldelim1 = reldelim1 is not defined and ' &raquo;' or reldelim1 %}
 {%- set reldelim2 = reldelim2 is not defined and ' |' or reldelim2 %}
+
+
+
 {%- macro relbar %}
     <div class="related">
-      <h3>Navigation</h3>
       <ul>
         {%- for rellink in rellinks %}
         <li class="right" {% if loop.first %}style="margin-right: 10px"{% endif %}>
@@ -24,15 +26,12 @@
       </ul>
     </div>
 {%- endmacro %}
+
 {%- macro sidebar %}
       {%- if builder != 'htmlhelp' %}
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-          {%- block sidebarlogo %}
-          {%- if logo %}
-            <p class="logo"><img class="logo" src="{{ pathto('_static/' + logo, 1) }}" alt="Logo"/></p>
-          {%- endif %}
-          {%- endblock %}
+
 {#
           {%- block sidebartoc %}
           {%- if display_toc %}
@@ -51,7 +50,22 @@
           {%- endif %}
           {%- endblock %}
 #}          
+          {%- block sidebarsearch %}
+          {%- if pagename != "search" %}
+            <h3>{{ builder == 'web' and 'Keyword' or 'Quick' }} search</h3>
+            <form class="search" action="{{ pathto('search') }}" method="get">
+              <input type="text" name="q" size="18" /> <input type="submit" value="Go" />
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+            {%- if builder == 'web' %}
+            <p style="font-size: 90%">Enter a module, class or function name.</p>
+            {%- endif %}
+          {%- endif %}
+          {%- endblock %}
+
             {# TABLE OF CONTENTS FOR SITE #}
+            <p>&nbsp;</p>
             <h3>Contents</h3>
             <ul class=this-page-menu">
               <li><a href="{{ pathto('index') }}">Welcome</a></li>
@@ -62,6 +76,7 @@
             </ul>
             
           {%- if sourcename %}
+            <p>&nbsp;</p>
             <h3>This Page</h3>
             {{ toc }}
             <ul class="this-page-menu">
@@ -77,19 +92,7 @@
           {%- if customsidebar %}
           {{ rendertemplate(customsidebar) }}
           {%- endif %}
-          {%- block sidebarsearch %}
-          {%- if pagename != "search" %}
-            <h3>{{ builder == 'web' and 'Keyword' or 'Quick' }} search</h3>
-            <form class="search" action="{{ pathto('search') }}" method="get">
-              <input type="text" name="q" size="18" /> <input type="submit" value="Go" />
-              <input type="hidden" name="check_keywords" value="yes" />
-              <input type="hidden" name="area" value="default" />
-            </form>
-            {%- if builder == 'web' %}
-            <p style="font-size: 90%">Enter a module, class or function name.</p>
-            {%- endif %}
-          {%- endif %}
-          {%- endblock %}
+
         </div>
       </div>
       {%- endif %}
@@ -157,7 +160,14 @@
   </head>
   <body>
 
-{%- block relbar1 %}{{ relbar() }}{% endblock %}
+        {# Header #}
+        <div class="header">
+            <div class="logo">
+                        <img class="logo" src="{{ pathto('_static/' + logo, 1) }}" alt="[Self]"/>
+                        <h1><a href="{{ pathto('index') }}"> - the power of simplicity</a></h1>
+                        {%- block relbar1 %}{{ relbar() }}{% endblock %}
+            </div>
+        </div>
 
 {%- block sidebar1 %}{# possible location for sidebar #}{% endblock %}
 
@@ -180,7 +190,7 @@
       <div class="clearer"></div>
     </div>
 
-{%- block relbar2 %}{{ relbar() }}{% endblock %}
+{# {%- block relbar2 %}{{ relbar() }}{% endblock %} #}
 
 {%- block footer %}
     <div class="footer">
@@ -190,10 +200,10 @@
       &copy; Copyright {{ copyright }}.
     {%- endif %}
     {%- if last_updated %}
-      Last updated on {{ last_updated }}.
+      <br />Last updated on {{ last_updated }}.
     {%- endif %}
     {%- if show_sphinx %}
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+      <br />Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>, based on a Creative Commons licensed style by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>
     {%- endif %}
     </div>
 {%- endblock %}
