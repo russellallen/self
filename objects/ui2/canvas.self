@@ -2410,6 +2410,14 @@ the pixmapCache some day.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindowCanvas' -> () From: ( | {
+         'Category: portable access\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         originalDisplayName = ( |
+            | 
+            display originalName).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindowCanvas' -> () From: ( | {
          'ModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'abstractWindowCanvas' -> ().
