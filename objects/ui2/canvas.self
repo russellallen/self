@@ -1,4 +1,4 @@
- '$Revision: 30.16 $'
+ '$Revision: 30.17 $'
  '
 Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
@@ -955,7 +955,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'canvas' -> () From: ( | {
          'ModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
-         revision <- '$Revision: 30.16 $'.
+         revision <- '$Revision: 30.17 $'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'canvas' -> () From: ( | {
@@ -2403,6 +2403,14 @@ the pixmapCache some day.
             buildGrayMask.
             display flush.
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindowCanvas' -> () From: ( | {
+         'Category: portable access\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         originalDisplayName = ( |
+            | 
+            display originalName).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindowCanvas' -> () From: ( | {
