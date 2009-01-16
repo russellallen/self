@@ -88,7 +88,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					243,
+					423,
 					20,
 					48,
 					43,
@@ -105,53 +105,42 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 247662407;
-			PBXWorkspaceStateSaveDate = 247662407;
+			PBXPerProjectTemplateStateSaveDate = 253782638;
+			PBXWorkspaceStateSaveDate = 253782638;
 		};
 		perUserProjectItems = {
-			BA1BDF210EC3062C003F36D6 = BA1BDF210EC3062C003F36D6 /* PBXTextBookmark */;
-			BA43085B0EC3067800DE9E1A = BA43085B0EC3067800DE9E1A /* PBXTextBookmark */;
-			BA8AF89B0EC3074E0029A65B /* PBXTextBookmark */ = BA8AF89B0EC3074E0029A65B /* PBXTextBookmark */;
+			BA449E620F2071C80065A2A5 /* PBXTextBookmark */ = BA449E620F2071C80065A2A5 /* PBXTextBookmark */;
+			BA8AF8A60EC3083D0029A65B /* PBXTextBookmark */ = BA8AF8A60EC3083D0029A65B /* PBXTextBookmark */;
 		};
 		sourceControlManager = 25D9446E07B15AA800FF306F /* Source Control */;
 		userBuildSettings = {
 		};
 	};
-	BA1BDF210EC3062C003F36D6 /* PBXTextBookmark */ = {
+	BA449E620F2071C80065A2A5 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = DA458A96036079E503C91932 /* Application.applescript */;
-		name = "Application.applescript: 1";
+		name = "Application.applescript: 45";
 		rLen = 0;
-		rLoc = 0;
+		rLoc = 1349;
 		rType = 0;
-		vrLen = 160;
-		vrLoc = 43;
+		vrLen = 712;
+		vrLoc = 340;
 	};
-	BA43085B0EC3067800DE9E1A /* PBXTextBookmark */ = {
+	BA8AF8A60EC3083D0029A65B /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = DA458A96036079E503C91932 /* Application.applescript */;
 		name = "Application.applescript: 1";
 		rLen = 0;
-		rLoc = 0;
+		rLoc = 29;
 		rType = 0;
-		vrLen = 151;
-		vrLoc = 43;
-	};
-	BA8AF89B0EC3074E0029A65B /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = DA458A96036079E503C91932 /* Application.applescript */;
-		name = "Application.applescript: 1";
-		rLen = 0;
-		rLoc = 0;
-		rType = 0;
-		vrLen = 124;
+		vrLen = 132;
 		vrLoc = 14;
 	};
 	DA458A96036079E503C91932 /* Application.applescript */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {594, 443}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRect = "{{0, 15}, {441, 50}}";
+			sepNavIntBoundsRect = "{{0, 0}, {726, 667}}";
+			sepNavSelRange = "{1349, 0}";
+			sepNavVisRect = "{{0, 167}, {621, 298}}";
 		};
 	};
 }
