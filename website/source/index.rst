@@ -4,7 +4,7 @@ Welcome to Self
 News
 ----
 
-* Welcome to our new website! (15 December 2008)
+* Welcome to our new website! (18 January 2009)
 
 About
 -----
