@@ -220,11 +220,21 @@ performance tuning to the system.\x7fModuleInfo: Module: desktop InitialContents
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( | {
+         'Category: state\x7fComment: Set in the snapshotAction module to true if the -c commandline option is set.\x7fModuleInfo: Module: desktop InitialContents: InitializeToExpression: (false)'
+        
+         restartSuppressed <- bootstrap stub -> 'globals' -> 'false' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( | {
          'Category: opening and closing\x7fComment: Reopen the ui2 window(s) after returning from a snapshot,
-if it was open when the snapshot was made.\x7fModuleInfo: Module: desktop InitialContents: FollowSlot\x7fVisibility: public'
+if it was open when the snapshot was made, unless the user has 
+requested we not open by the \'-c\' flag.\x7fModuleInfo: Module: desktop InitialContents: FollowSlot\x7fVisibility: public'
         
          returnFromSnapshot = ( |
             | 
+            restartSuppressed ifTrue: [
+              restartSuppressed: false. "Reset for next time"
+              ^ self].
             worlds isEmpty ifFalse: [
                 adjustVMParametersForBetterSpeed.
                 "reset the flag so that color problems are reported."
