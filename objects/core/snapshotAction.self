@@ -104,7 +104,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                        DoAction: (| parent* = lobby.
                                     value: i With: arg = (
                                      "Don't start up desktop this time"
-                                     desktop restartSuppressed: true.
+                                     desktop suppressRestart.
                                      i succ).
                                  |).
                                  

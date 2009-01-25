@@ -220,9 +220,9 @@ performance tuning to the system.\x7fModuleInfo: Module: desktop InitialContents
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( | {
-         'Category: state\x7fComment: Set in the snapshotAction module to true if the -c commandline option is set.\x7fModuleInfo: Module: desktop InitialContents: InitializeToExpression: (false)'
+         'Category: state\x7fComment: Set to true if the -c commandline option is set.\x7fModuleInfo: Module: desktop InitialContents: InitializeToExpression: (false)'
         
-         restartSuppressed <- bootstrap stub -> 'globals' -> 'false' -> ().
+         restartSuppressedFlag <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( | {
@@ -232,8 +232,8 @@ requested we not open by the \'-c\' flag.\x7fModuleInfo: Module: desktop Initial
         
          returnFromSnapshot = ( |
             | 
-            restartSuppressed ifTrue: [
-              restartSuppressed: false. "Reset for next time"
+            restartSuppressedFlag ifTrue: [
+              restartSuppressedFlag: false. "Reset for next time"
               ^ self].
             worlds isEmpty ifFalse: [
                 adjustVMParametersForBetterSpeed.
@@ -276,6 +276,16 @@ requested we not open by the \'-c\' flag.\x7fModuleInfo: Module: desktop Initial
             | 
             worldsDo: [|:w| w stop].
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( | {
+         'Category: opening and closing\x7fComment: Sent from the snapshotAction module 
+if the -c flag is set on the command line at
+start up.  Supresses the opening of the desktop only
+for one time.\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         suppressRestart = ( |
+            | restartSuppressedFlag: true).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( | {
