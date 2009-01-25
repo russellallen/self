@@ -105,7 +105,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                                     value: i With: arg = (
                                      "Don't start up desktop this time"
                                      desktop restartSuppressed: true.
-                                     i succ.
+                                     i succ).
                                  |).
                                  
             'Fhprtw' do: [|:opt|
