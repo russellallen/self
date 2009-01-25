@@ -4,7 +4,7 @@ Welcome to Self
 News
 ----
 
-* Welcome to the new offical website and one-stop-shop for Self! (26 January 2009)
+* Welcome to the new official website and one-stop-shop for Self! (26 January 2009)
 
 About
 -----
