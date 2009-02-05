@@ -1863,6 +1863,15 @@ oldGlobalBounds. \x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
          parent* = bootstrap stub -> 'traits' -> 'morph' -> ().
         } | ) 
 
+bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
+         'Category: window management\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
+        
+         platformSpecificNameFor: displayName = ( |
+            | 
+            host osName == 'macOSX' ifTrue: [^'quartz'].
+            displayName == 'quartz' ifTrue: [^ ''].
+            displayName).
+        } | ) 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
          'Category: structure\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: private'
         
@@ -2112,7 +2121,7 @@ on the default display.\x7fModuleInfo: Module: worldMorph InitialContents: Follo
                 oldBounds: (3@24 max: wc position) ## wc size.
                 oldOffset: wc offset.
                 releaseParts.
-                addWindowOnDisplay: wc displayName Bounds: oldBounds.
+                addWindowOnDisplay: (platformSpecificNameFor: wc displayName) Bounds: oldBounds.
                 winCanvases first offset: oldOffset.  "set scroll offset of new canvas"
 
                 morphsDo: [| :m |
