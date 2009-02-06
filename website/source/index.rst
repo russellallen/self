@@ -4,6 +4,7 @@ Welcome to Self
 News
 ----
 
+* As a technology preview of the new MacOS X performance and of the new Linux VM, Self 4.4 Alpha 1 is released (`download now <download/index>`_).  We look forward to help and feedback.  (6 February 2009)
 * Welcome to the new official website and one-stop-shop for Self! (26 January 2009)
 
 About

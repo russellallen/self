@@ -1,8 +1,19 @@
 Download
 ========
 
-Current Version
----------------
+
+Experimental Version
+--------------------
+
+The latest experimental version is Self 4.4 Alpha 1.  This is missing functionality and hasn't been properly tested - use at your own risk! 
+
+`MacOS X <http://selflanguage/files/releases/4.4/alpha1/Self-4.4.alpha1.dmg>`_
+
+`Linux x86 <http://selflanguage/files/releases/4.4/alpha1/Self-4.4.alpha1.tar.gz>`_
+
+
+Stable Version
+--------------
 
 The current version of Self is 4.3.  You can download Self 4.3 for Mac OS X and for Sparc Solaris.
 
