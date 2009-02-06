@@ -7,9 +7,9 @@ Experimental Version
 
 The latest experimental version is Self 4.4 Alpha 1.  This is missing functionality and hasn't been properly tested - use at your own risk! 
 
-`MacOS X <http://selflanguage/files/releases/4.4/alpha1/Self-4.4.alpha1.dmg>`_
+`MacOS X <http://selflanguage.org/files/releases/4.4/alpha1/Self-4.4.alpha1.dmg>`_
 
-`Linux x86 <http://selflanguage/files/releases/4.4/alpha1/Self-4.4.alpha1.tar.gz>`_
+`Linux x86 <http://selflanguage.org/files/releases/4.4/alpha1/Self-4.4.alpha1.tar.gz>`_
 
 
 Stable Version
