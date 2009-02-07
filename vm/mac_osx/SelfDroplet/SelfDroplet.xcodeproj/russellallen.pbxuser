@@ -109,14 +109,14 @@
 			PBXWorkspaceStateSaveDate = 253782638;
 		};
 		perUserProjectItems = {
-			BA449E620F2071C80065A2A5 /* PBXTextBookmark */ = BA449E620F2071C80065A2A5 /* PBXTextBookmark */;
+			BA43085B0EC3067800DE9E1A /* PBXTextBookmark */ = BA43085B0EC3067800DE9E1A /* PBXTextBookmark */;
 			BA8AF8A60EC3083D0029A65B /* PBXTextBookmark */ = BA8AF8A60EC3083D0029A65B /* PBXTextBookmark */;
 		};
 		sourceControlManager = 25D9446E07B15AA800FF306F /* Source Control */;
 		userBuildSettings = {
 		};
 	};
-	BA449E620F2071C80065A2A5 /* PBXTextBookmark */ = {
+	BA43085B0EC3067800DE9E1A /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = DA458A96036079E503C91932 /* Application.applescript */;
 		name = "Application.applescript: 45";
@@ -138,9 +138,9 @@
 	};
 	DA458A96036079E503C91932 /* Application.applescript */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {726, 667}}";
-			sepNavSelRange = "{1349, 0}";
-			sepNavVisRect = "{{0, 167}, {621, 298}}";
+			sepNavIntBoundsRect = "{{0, 0}, {594, 443}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRect = "{{0, 15}, {441, 73}}";
 		};
 	};
 }
