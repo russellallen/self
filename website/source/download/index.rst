@@ -11,6 +11,8 @@ The latest experimental version is Self 4.4 Alpha 1.  This is missing functional
 
 `Linux x86 <http://selflanguage.org/files/releases/4.4/alpha1/Self-4.4.alpha1.tar.gz>`_
 
+`Source <http://selflanguage.org/files/releases/4.4/alpha1/Self-4.4.alpha1.src.tar.gz>`_ (see also the repositories below)
+
 
 Stable Version
 --------------
