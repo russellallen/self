@@ -27,12 +27,16 @@ on openSnapshot(fileName)
 		set unixFileDir to (unixFileDir & i & "/")
 	end repeat
 	
-	tell application "Terminal"
-		-- The double quotes below are necessary so that the application/snapshot paths
-		-- are interpreted correctly by the shell even if they include spaces in their names.
-		do script with command ¬
-			"cd \"" & unixFileDir & "\"; \"" & dropletDir & "/Self.app/Contents/MacOS/Self\" -s \"" & unixFileName & "\""
-	end tell
+	-- Build the command.  echo $! gets the PID of the VM
+	set theCommand to "cd \"" & unixFileDir & "\"
+	\"" & dropletDir & "/Self.app/Contents/MacOS/Self\" -s \"" & unixFileName & "\" &> /dev/null &
+	echo $!"
+	set thePID to do shell script theCommand
+	
+	-- Tell Self to come to the front
+	delay 0.5 -- give it some time to register so that System Events can see it; may need to change this value
+	tell application "System Events" to set frontmost of (every process whose unix id is (thePID as integer)) to true
+	
 end openSnapshot
 
 on idle

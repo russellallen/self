@@ -1,0 +1,142 @@
+// !$*UTF8*$!
+{
+	0F2E5B830357958D4446223E /* All Platforms */ = {
+		activeExec = 0;
+		executables = (
+			BAF3977A0F3AEF16001F6219 /* All Platforms */,
+		);
+	};
+	20286C28FDCF999611CA2CEA /* Project object */ = {
+		activeArchitecture = i386;
+		activeBuildConfigurationName = "Optimized Self";
+		activeExecutable = BAF397790F3AEF16001F6219 /* Self */;
+		activeTarget = BC9F9D590558F27700ECBD80 /* Self */;
+		codeSenseManager = BAF3978D0F3AEF91001F6219 /* Code sense */;
+		executables = (
+			BAF397790F3AEF16001F6219 /* Self */,
+			BAF3977A0F3AEF16001F6219 /* All Platforms */,
+			BAF3977B0F3AEF16001F6219 /* Self cocoa.debug */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					243,
+					20,
+					48.16259765625,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 255520534;
+			PBXWorkspaceStateSaveDate = 255520534;
+		};
+		sourceControlManager = BAF3978C0F3AEF91001F6219 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	BAF397790F3AEF16001F6219 /* Self */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = Self;
+		sourceDirectories = (
+		);
+	};
+	BAF3977A0F3AEF16001F6219 /* All Platforms */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = "All Platforms";
+		sourceDirectories = (
+		);
+	};
+	BAF3977B0F3AEF16001F6219 /* Self cocoa.debug */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = "Self cocoa.debug";
+		sourceDirectories = (
+		);
+	};
+	BAF3978C0F3AEF91001F6219 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+		};
+	};
+	BAF3978D0F3AEF91001F6219 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	BC48A54D04D0A68D0075BA8B /* Self cocoa.debug */ = {
+		activeExec = 0;
+		executables = (
+			BAF3977B0F3AEF16001F6219 /* Self cocoa.debug */,
+		);
+	};
+	BC9F9D590558F27700ECBD80 /* Self */ = {
+		activeExec = 0;
+		executables = (
+			BAF397790F3AEF16001F6219 /* Self */,
+		);
+	};
+}
