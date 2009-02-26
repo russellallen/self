@@ -248,7 +248,7 @@ option is used.\x7fModuleInfo: Module: snapshotAction InitialContents: FollowSlo
              v.
             | 
             v: _VMversion.
-            '\n\tWelcome to the Self system!  (Version 4.2)\n' printLine.
+            '\n\tWelcome to the Self system!  (Version 4.4)\n' printLine.
             modules init copyright printLine.
             'Type _Credits for full credits.\n' printLine.
             ('VM version: ',

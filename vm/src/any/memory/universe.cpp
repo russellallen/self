@@ -13,7 +13,7 @@
 // it to zero when changing the minor or major version
 smi VM_major_version    = 4;
 smi VM_minor_version    = 1;
-smi VM_snapshot_version = 12;
+smi VM_snapshot_version = 13;
 
 
 universe* Memory;
