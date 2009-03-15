@@ -2094,6 +2094,7 @@ frame conversion of all frames.\x7fModuleInfo: Module: tests InitialContents: Fo
              sequenceTest.
              orderedSet unitTests run.
              traits indexable unitTests run.
+             traits byteVector unitTests run.
              traits universalSetOrDictionary unitTests run.
              messageTest.
              parserTest.

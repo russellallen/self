@@ -1,2 +1,9 @@
 .DS_Store
-
+Self.app
+SelfDroplet.app
+*.OLD
+*.snap
+*.snap.backup
+Snapshot
+Snapshot.backup
+*-lex.conflicts

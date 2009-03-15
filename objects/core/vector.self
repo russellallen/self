@@ -69,6 +69,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: bit-wise operations\x7fComment: bitwise \"and\" on another byteVector of the same size\x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: public'
+        
+         && x = ( |
+            | 
+            bitwiseOperationWith: x Do: [|:b1. :b2| b1 && b2]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
          'ModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: public'
         
          , arg = ( |
@@ -99,6 +107,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          = s = ( |
             | 0   = (byteVectorCompare: s IfFail: [^ resend.=  s])).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: bit-wise operations\x7fComment: bitwise \"xor\" on another byteVector of the same size\x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: public'
+        
+         ^^ x = ( |
+            | 
+            bitwiseOperationWith: x Do: [|:b1. :b2| b1 ^^ b2]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
@@ -198,6 +214,21 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                _BigEndianUnsignedIntSize: bitSize At: index Put: anInt IfFail: errBlk.
             ].
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: bit-wise operations\x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: private'
+        
+         bitwiseOperationWith: x Do: blk = ( |
+             r.
+            | 
+            [size = x size] assert.
+            r: copySize: size.
+            bytesDo: [|:b1. :i. b2|
+              b2: x byteAt: i.
+              r at: i Put: blk value: b1 With: b2 With: i.
+            ].
+            r).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
@@ -439,6 +470,21 @@ if space overflows. -- dmu 5/04\x7fModuleInfo: Module: vector InitialContents: F
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: printing\x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: public'
+        
+         hexPrintString = ( |
+             r <- ''.
+             s.
+            | 
+            bytesDo: [|:b|
+              s: b hexPrintString.
+              s: ('00' copySize: 2 - s size), s.
+              r: r, s.
+            ].
+            r).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
          'Category: C types\x7fCategory: Retrieving\x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: public'
         
          littleEndianIntSize: bitSize Signed: bool At: index = ( |
@@ -506,6 +552,85 @@ if space overflows. -- dmu 5/04\x7fModuleInfo: Module: vector InitialContents: F
         
          size = ( |
             | asVMByteVector _ByteSize).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: unit tests\x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: private'
+        
+         unitTests = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'byteVector' -> 'unitTests' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits byteVector unitTests.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> 'unitTests' -> () From: ( | {
+         'ModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'byteVector' -> 'unitTests' -> 'parent' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits byteVector unitTests parent.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> 'unitTests' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: private'
+        
+         assert: b = ( |
+            | 
+            b value ifFalse: [error: 'assertion failure in byteVector unitTests']).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> 'unitTests' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: private'
+        
+         assert: x Equals: y = ( |
+            | 
+            "This method is useful only because it lets you get at the arguments
+             very easily in the debugger. -- ads, 2/04"
+            assert: x = y).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> 'unitTests' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'oddball' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> 'unitTests' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: public'
+        
+         run = ( |
+            | 
+            testBitwiseOperations.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> 'unitTests' -> 'parent' -> () From: ( | {
+         'Category: bitwise operations\x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: private'
+        
+         testBitwiseOperations = ( |
+            | 
+            assert: byteVector ^^ byteVector
+            Equals: byteVector.
+
+            assert: (1 & 3 & 5 & 7 & 9) asByteVector ^^ (3 & 5 & 7 & 9 & 11) asByteVector
+            Equals: (2 & 6 & 2 & 14 & 2) asByteVector.
+
+            assert: (1 & 3 & 5 & 7 & 9) asByteVector || (3 & 5 & 7 & 9 & 11) asByteVector
+            Equals: (3 & 7 & 7 & 15 & 11) asByteVector.
+
+            assert: (1 & 3 & 5 & 7 & 9) asByteVector && (3 & 5 & 7 & 9 & 11) asByteVector
+            Equals: (1 & 1 & 5 & 1 & 9) asByteVector.
+
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: bit-wise operations\x7fComment: bitwise \"or\" on another byteVector of the same size\x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: public'
+        
+         || x = ( |
+            | 
+            bitwiseOperationWith: x Do: [|:b1. :b2| b1 || b2]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {

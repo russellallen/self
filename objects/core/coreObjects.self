@@ -108,6 +108,7 @@ activationText
 fakeSlot
 fakeSlotsIterator
 absBCInterpreter
+streams
 '.
         } | ) 
 
@@ -167,6 +168,7 @@ absBCInterpreter
  bootstrap read: 'fakeSlot' From: 'core'
  bootstrap read: 'fakeSlotsIterator' From: 'core'
  bootstrap read: 'absBCInterpreter' From: 'core'
+ bootstrap read: 'streams' From: 'core'
 
 
 
