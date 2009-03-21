@@ -263,6 +263,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
+         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
+        
+         atEnd = ( |
+            | 
+            atEOF).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
          'Category: socket operations\x7fCategory: binding\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
         
          bindFamily: family Port: port Address: address = ( |

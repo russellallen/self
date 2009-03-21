@@ -156,6 +156,16 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'positionableStream' -> 'parent' -> 'readingMixin' -> () From: ( | {
          'Category: reading\x7fModuleInfo: Module: streams InitialContents: FollowSlot\x7fVisibility: public'
         
+         readBigEndianIntegerOfByteCount: bc Signed: isSigned IfFail: fb = ( |
+             bytes.
+            | 
+            bytes: readCount: bc IfFail: [|:e| ^ fb value: e].
+            bytes bigEndianIntSize: bc * 8 Signed: isSigned At: 0 IfFail: fb).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'positionableStream' -> 'parent' -> 'readingMixin' -> () From: ( | {
+         'Category: reading\x7fModuleInfo: Module: streams InitialContents: FollowSlot\x7fVisibility: public'
+        
          readCount: m = ( |
             | 
             readMin: m Max: m).
@@ -275,6 +285,16 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'positionableStream' -> 'parent' -> 'readingMixin' -> () From: ( | {
          'Category: reading\x7fModuleInfo: Module: streams InitialContents: FollowSlot\x7fVisibility: public'
         
+         readLittleEndianIntegerOfByteCount: bc Signed: isSigned IfFail: fb = ( |
+             bytes.
+            | 
+            bytes: readCount: bc IfFail: [|:e| ^ fb value: e].
+            bytes littleEndianIntSize: bc * 8 Signed: isSigned At: 0 IfFail: fb).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'positionableStream' -> 'parent' -> 'readingMixin' -> () From: ( | {
+         'Category: reading\x7fModuleInfo: Module: streams InitialContents: FollowSlot\x7fVisibility: public'
+        
          readMin: min = ( |
             | readMin: min Max: 8 * 1024).
         } | ) 
@@ -378,6 +398,17 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'positionableStream' -> 'parent' -> 'writingMixin' -> () From: ( | {
          'Category: writing\x7fModuleInfo: Module: streams InitialContents: FollowSlot\x7fVisibility: public'
         
+         writeBigEndianInteger: i ByteCount: bc Signed: isSigned IfFail: fb = ( |
+             bytes.
+            | 
+            bytes: byteVector copySize: bc.
+            bytes bigEndianIntSize: bc * 8 Signed: isSigned At: 0 Put: i IfFail: [|:e| ^ fb value: e].
+            write: bytes IfFail: fb).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'positionableStream' -> 'parent' -> 'writingMixin' -> () From: ( | {
+         'Category: writing\x7fModuleInfo: Module: streams InitialContents: FollowSlot\x7fVisibility: public'
+        
          writeFrom: buf Count: count = ( |
             | writeFrom: buf Count: count Start: 0).
         } | ) 
@@ -397,6 +428,17 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             | 
             writeFrom: buf Count: count Start: start
               IfFail: [ | :e | error: e Op: 'write' FileName: name ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'positionableStream' -> 'parent' -> 'writingMixin' -> () From: ( | {
+         'Category: writing\x7fModuleInfo: Module: streams InitialContents: FollowSlot\x7fVisibility: public'
+        
+         writeLittleEndianInteger: i ByteCount: bc Signed: isSigned IfFail: fb = ( |
+             bytes.
+            | 
+            bytes: byteVector copySize: bc.
+            bytes littleEndianIntSize: bc * 8 Signed: isSigned At: 0 Put: i IfFail: [|:e| ^ fb value: e].
+            write: bytes IfFail: fb).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'positionableStream' -> () From: ( | {
@@ -469,6 +511,14 @@ SlotsToOmit: parent.
             numberRead: withoutChangingPositionReadInto: buf Min: 0 Max: n At: 0 IfFail: [|:e| ^ fb value: e].
             numberRead = n ifFalse: [buf: buf copySize: numberRead].
             buf).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'readStream' -> 'parent' -> () From: ( | {
+         'Category: reading\x7fModuleInfo: Module: streams InitialContents: FollowSlot\x7fVisibility: public'
+        
+         peekAtNextByte = ( |
+            | 
+            (peek: 1) byteAt: 0).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'readStream' -> 'parent' -> () From: ( | {
