@@ -181,6 +181,12 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> 'directedResend' -> () From: ( | {
          'ModuleInfo: Module: message InitialContents: FollowSlot'
         
+         isResend = bootstrap stub -> 'globals' -> 'true' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> 'directedResend' -> () From: ( | {
+         'ModuleInfo: Module: message InitialContents: FollowSlot'
+        
          parent* = bootstrap stub -> 'traits' -> 'message' -> ().
         } | ) 
 
@@ -257,6 +263,12 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'Category: testing\x7fModuleInfo: Module: message InitialContents: FollowSlot\x7fVisibility: public'
         
          isImmutableForFilingOut = bootstrap stub -> 'globals' -> 'true' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> () From: ( | {
+         'Category: testing\x7fModuleInfo: Module: message InitialContents: FollowSlot\x7fVisibility: public'
+        
+         isResend = bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> () From: ( | {
@@ -473,6 +485,12 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
              {} = 'ModuleInfo: Creator: traits message undirectedResend.
 '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> 'undirectedResend' -> () From: ( | {
+         'ModuleInfo: Module: message InitialContents: FollowSlot'
+        
+         isResend = bootstrap stub -> 'globals' -> 'true' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> 'undirectedResend' -> () From: ( | {

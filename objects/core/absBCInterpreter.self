@@ -109,6 +109,18 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstractBytecodeInterpreter' -> 'parent' -> () From: ( | {
+         'Category: interpreting general\x7fModuleInfo: Module: absBCInterpreter InitialContents: FollowSlot\x7fVisibility: private'
+        
+         bytecodeAt: i = ( |
+             bc.
+             proto.
+            | 
+            bc: codes byteAt: i IfAbsent: [^ nil].
+            proto: (instructionSet opcodeNameOf: bc) sendTo: bytecodes. "could optimize"
+            proto copyForInterpreter: self PC: i Code: bc).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstractBytecodeInterpreter' -> 'parent' -> () From: ( | {
          'Category: helpers\x7fModuleInfo: Module: absBCInterpreter InitialContents: FollowSlot'
         
          bytecodes = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'abstractBytecodeInterpreter' -> 'parent' -> 'bytecodes' -> () From: ( |
@@ -334,11 +346,8 @@ See the LICENSE file for license information.
         
          interpretBytecode = ( |
              b.
-             bc.
             | 
-            bc: codes byteAt: pc.
-            b: (instructionSet opcodeNameOf: bc) sendTo: bytecodes. "could optimize"
-            b: b copyForInterpreter: self PC: pc Code: bc.
+            b: peekAtNextBytecode.
             pc: pc succ.
             interpret: b).
         } | ) 
@@ -429,6 +438,14 @@ See the LICENSE file for license information.
          'ModuleInfo: Module: absBCInterpreter InitialContents: FollowSlot'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstractBytecodeInterpreter' -> 'parent' -> () From: ( | {
+         'Category: interpreting general\x7fModuleInfo: Module: absBCInterpreter InitialContents: FollowSlot\x7fVisibility: private'
+        
+         peekAtNextBytecode = ( |
+            | 
+            bytecodeAt: pc).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstractBytecodeInterpreter' -> 'parent' -> () From: ( | {

@@ -56,7 +56,8 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'block' -> () From: ( | {
          'ModuleInfo: Module: block InitialContents: FollowSlot\x7fVisibility: private'
         
-         subpartNames <- ''.
+         subpartNames <- 'blockTests
+'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
@@ -600,27 +601,6 @@ for the sake of compatibility. -- Ausch\x7fModuleInfo: Module: block InitialCont
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'block' -> () From: ( | {
          'Category: testing VM\x7fModuleInfo: Module: block InitialContents: FollowSlot\x7fVisibility: public'
         
-         withAndWithoutInlining = ( |
-             i.
-            | 
-            _Interpret ifTrue: [^self].
-
-            (_Compilers size = 1)  &&  [_Compilers first = 'nic']
-              ifTrue: [^ value].
-
-            i: _Inline.
-
-            _Inline: false. _Flush. value.
-            _Inline: true.  _Flush. value.
-
-            _Inline: i. _Flush.
-
-            self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'block' -> () From: ( | {
-         'Category: testing VM\x7fModuleInfo: Module: block InitialContents: FollowSlot\x7fVisibility: public'
-        
          withCompiler: compiler = ( |
              c.
              l.
@@ -679,6 +659,12 @@ for the sake of compatibility. -- Ausch\x7fModuleInfo: Module: block InitialCont
             _PrintGC: f1.
             r).
         } | ) 
+
+
+
+ '-- Sub parts'
+
+ bootstrap read: 'blockTests' From: 'core'
 
 
 
