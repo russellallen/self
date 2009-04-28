@@ -181,6 +181,12 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> 'directedResend' -> () From: ( | {
          'ModuleInfo: Module: message InitialContents: FollowSlot'
         
+         isDirectedResend = bootstrap stub -> 'globals' -> 'true' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> 'directedResend' -> () From: ( | {
+         'ModuleInfo: Module: message InitialContents: FollowSlot'
+        
          isResend = bootstrap stub -> 'globals' -> 'true' -> ().
         } | ) 
 
@@ -262,6 +268,12 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> () From: ( | {
          'Category: testing\x7fModuleInfo: Module: message InitialContents: FollowSlot\x7fVisibility: public'
         
+         isDirectedResend = bootstrap stub -> 'globals' -> 'false' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> () From: ( | {
+         'Category: testing\x7fModuleInfo: Module: message InitialContents: FollowSlot\x7fVisibility: public'
+        
          isImmutableForFilingOut = bootstrap stub -> 'globals' -> 'true' -> ().
         } | ) 
 
@@ -272,22 +284,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> () From: ( | {
-         'Category: lookup\x7fModuleInfo: Module: message InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: testing\x7fModuleInfo: Module: message InitialContents: FollowSlot\x7fVisibility: public'
         
-         lookupSlotUsing: aSlotFinder = ( |
-            | aSlotFinder soleSlotFrom:  lookupSlotsUsing: aSlotFinder).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> () From: ( | {
-         'Category: lookup\x7fModuleInfo: Module: message InitialContents: FollowSlot\x7fVisibility: public'
-        
-         lookupSlotsUsing: aSlotFinder = ( |
-            | 
-            aSlotFinder selector: selector.
-            case
-              if:   [type = undirectedResend type] Then: [ aSlotFinder                                                                 findSlotsInParents]
-              If:   [type =   directedResend type] Then: [(aSlotFinder copyForMirror: (aSlotFinder mirror slotAt: delegatee) contents) findSlots         ]
-                                                   Else: [ aSlotFinder                                                                 findSlots         ]).
+         isUndirectedResend = bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> 'normal' -> () From: ( | {
@@ -491,6 +490,12 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'ModuleInfo: Module: message InitialContents: FollowSlot'
         
          isResend = bootstrap stub -> 'globals' -> 'true' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> 'undirectedResend' -> () From: ( | {
+         'ModuleInfo: Module: message InitialContents: FollowSlot'
+        
+         isUndirectedResend = bootstrap stub -> 'globals' -> 'true' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'message' -> 'undirectedResend' -> () From: ( | {
