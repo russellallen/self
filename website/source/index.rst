@@ -10,6 +10,10 @@ News
 About
 -----
 
+.. raw:: html
+
+   <!--
+
 .. toctree::
    :maxdepth: 1
 
@@ -17,6 +21,10 @@ About
    Browse Self Documentation <documentation/index>
    Discuss Self with other users <discuss/index>
    Follow links to other useful information <links/index>
+   
+.. raw:: html
+
+   -->
    
 Self is a prototype-based dynamic object-oriented programming language, environment, and virtual machine centered around the principles of simplicity, uniformity, concreteness, and liveness. 
 
