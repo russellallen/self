@@ -559,7 +559,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          'Category: inserting\x7fComment: Inserts the specified element after the first
 element in the list satisfying the condition
 block (or calls the IfAbsent: block if no such
-element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
+element is found). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
         
          insert: x AfterElementSatisfying: blk IfAbsent: aBlk = ( |
             | 
@@ -574,7 +574,7 @@ element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: Fo
          'Category: inserting\x7fComment: Inserts the specified element before the first
 element in the list satisfying the condition
 block (or calls the IfAbsent: block if no such
-element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
+element is found). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
         
          insert: x BeforeElementSatisfying: blk IfAbsent: aBlk = ( |
             | 
@@ -589,7 +589,7 @@ element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: Fo
          'Category: inserting\x7fComment: Inserts the specified elements after the first
 element in the list satisfying the condition
 block (or calls the IfAbsent: block if no such
-element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
+element is found). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
         
          insertAll: c AfterElementSatisfying: blk IfAbsent: aBlk = ( |
             | 
@@ -608,7 +608,7 @@ element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: Fo
          'Category: inserting\x7fComment: Inserts the specified elements before the first
 element in the list satisfying the condition
 block (or calls the IfAbsent: block if no such
-element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
+element is found). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
         
          insertAll: c BeforeElementSatisfying: blk IfAbsent: aBlk = ( |
             | 
