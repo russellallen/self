@@ -14,8 +14,8 @@ Projects elsewhere using Self
 * James Noble's `Tarraingím <http://www.mri.mq.edu.au/~kjx/tgim.html>`_
 * `Self for CS Education <http://www.cs.brown.edu/courses/cs196b>`_ at Brown
 * Nick Drew's 3D Object Browser (this link is broken)
-* `Urs Hölzle <http://www.cs.ucsb.edu/~urs>`_'s research at UCSB</li>
-* `Ivan Moore's <http://www.guruinfo.co.uk/>`_ program restructuring tool, Guru.</li>
+* `Urs Hölzle <http://www.cs.ucsb.edu/~urs>`_'s research at UCSB
+* `Ivan Moore's <http://www.guruinfo.co.uk/>`_ program restructuring tool, Guru.
 
 Other Prototyping Languages
 ---------------------------

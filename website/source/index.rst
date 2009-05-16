@@ -4,6 +4,8 @@ Welcome to Self
 News
 ----
 
+* `From the blog: <http://blog.selflanguage.org/2009/05/15/david-ungar-receives-dahl-nygaard-prize/>`_ Congrats to Dave Ungar for winning the the 2009 Dahl-Nygaard Senior Prize for his work on Self and object orientation! (16 May 2009)
+* We have an `official Self blog <http://blog.selflanguage.org>`_! Check it out today! (16 May 2009)
 * Self 4.4 Alpha 2 is released - the Demo snapshot is back, and MacOS X snapshots can be run without requiring the Terminal.app to be open (though commandline execution is of course still available) (`download now <download/index.html>`_).  We look forward to help and feedback.  (9 May 2009)
 * As a technology preview of the new MacOS X performance and of the new Linux VM, Self 4.4 Alpha 1 is released (`download now <download/index.html>`_).  We look forward to help and feedback.  (6 February 2009)
 * Welcome to the new official website and one-stop-shop for Self! (26 January 2009)
