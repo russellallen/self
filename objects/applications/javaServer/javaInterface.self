@@ -578,7 +578,7 @@ This saves recomputing the bounds for most morphs.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'javaUser' -> () From: ( | {
          'ModuleInfo: Module: javaInterface InitialContents: InitializeToExpression: (os_file)'
         
-         socket <- bootstrap stub -> 'globals' -> 'os_file' -> ().
+         socket <- os_file.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'javaUser' -> () From: ( | {
@@ -2860,15 +2860,18 @@ forcibly resized using this method.\x7fModuleInfo: Module: javaInterface Initial
         
          expand: evt = ( |
             | 
-                        isExpanded ifFalse: [
-                          expander isExpanded ifFalse: [ expander expand: evt ].
+                        expander isNil || [isExpanded]  ifFalse: [
+                          expander isExpanded  ifFalse: [ expander expand: evt ].
                           itemsCached ifFalse: [
                             buildBody.
                             constructItems.
+                            constructBoxedItems.
                             itemsCached: true.
+                          ].
+                          safelyDo: [
+                            addBodyMorph.
                             colorAll: color. "dave's experiment"
                           ].
-                          frame addMorphFirst: body.
                           body morphs do: [ |:m| m javaChanged: 'all' ].
                           "Andy 7/10/96 - The remote clients aren't so lucky as to be caching"
             "               safelyDo: [
