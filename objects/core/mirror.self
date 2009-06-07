@@ -3879,6 +3879,18 @@ but tries to fit in s characters.\x7fModuleInfo: Module: mirror InitialContents:
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> () From: ( | {
          'ModuleInfo: Module: mirror InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
+         assignableParentBlock.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> () From: ( | {
+         'ModuleInfo: Module: mirror InitialContents: InitializeToExpression: (list)\x7fVisibility: private'
+        
+         leftToVisit <- bootstrap stub -> 'globals' -> 'list' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> () From: ( | {
+         'ModuleInfo: Module: mirror InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
+        
          mirror.
         } | ) 
 
@@ -3895,7 +3907,10 @@ but tries to fit in s characters.\x7fModuleInfo: Module: mirror InitialContents:
          'Category: copying\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
         
          copy = ( |
-            | resend.copy visited: visited copy).
+            | 
+            (resend.copy
+                  leftToVisit: leftToVisit copy)
+                      visited: visited     copy).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> 'parent' -> () From: ( | {
@@ -3919,19 +3934,25 @@ but tries to fit in s characters.\x7fModuleInfo: Module: mirror InitialContents:
         
          findSlots = ( |
             | 
-            findSlotsIn: mirror AndAddResultsTo: set copy).
+            leftToVisit add: mirror.
+            findSlotsAndAddResultsTo: set copy).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> 'parent' -> () From: ( | {
          'Category: finding slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
         
-         findSlotsIn: aMirror AndAddResultsTo: aSet = ( |
+         findSlotsAndAddResultsTo: aSet = ( |
             | 
-            if: aMirror HasNotBeenVisitedThenMarkItAsVisitedAndDo: [
-              slotIn: aMirror IfPresent: [|:s|
-                (isInterestedInSlot: s) ifTrue: [aSet add: s. ^ aSet].
+            [leftToVisit isEmpty] whileFalse: [| mir |
+              mir: leftToVisit removeFirst.
+              visited if: mir IsAbsentAddAndDo: [
+                [|:exit|
+                 slotIn: mir IfPresent: [|:s|
+                   (isInterestedInSlot: s) ifTrue: [aSet add: s. exit value].
+                 ].
+                 followParentSlotsOf: mir.
+                ] exit.
               ].
-              findSlotsInParentsOf: aMirror AndAddResultsTo: aSet.
             ].
             aSet).
         } | ) 
@@ -3941,18 +3962,8 @@ but tries to fit in s characters.\x7fModuleInfo: Module: mirror InitialContents:
         
          findSlotsInParents = ( |
             | 
-            findSlotsInParentsOf: mirror AndAddResultsTo: set copy).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> 'parent' -> () From: ( | {
-         'Category: finding slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
-        
-         findSlotsInParentsOf: aMirror AndAddResultsTo: aSet = ( |
-            | 
-            aMirror parentsDo: [|:parentSlot|
-              findSlotsIn: parentSlot contents AndAddResultsTo: aSet.
-            ].
-            aSet).
+            followParentSlotsOf: mirror.
+            findSlotsAndAddResultsTo: set copy).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> 'parent' -> () From: ( | {
@@ -3974,9 +3985,13 @@ but tries to fit in s characters.\x7fModuleInfo: Module: mirror InitialContents:
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> 'parent' -> () From: ( | {
          'Category: finding slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
         
-         if: aMirror HasNotBeenVisitedThenMarkItAsVisitedAndDo: aBlock = ( |
+         followParentSlotsOf: aMirror = ( |
             | 
-            visited if: aMirror IsAbsentAddAndDo: aBlock).
+            aMirror parentsDo: [|:parentSlot|
+              parentSlot isAssignable ifTrue: [assignableParentBlock value: parentSlot].
+              leftToVisit add: parentSlot contents.
+            ].
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> 'parent' -> () From: ( | {
