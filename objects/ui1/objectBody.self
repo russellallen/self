@@ -2004,8 +2004,8 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             enum mapBy: [ | :m |
                   type = 'senders' ifTrue: [ m ] False: [
                   type = 'implementors' ifTrue: [ m reflectee ] False: [
-                  m mirror isReflecteeMethod ifTrue: [ m mirror ]
-                                             False: [ m mirror reflectee ] ] ] ]
+                  m isReflecteeMethod ifTrue: [ m mirror ]
+                                             False: [ m reflectee ] ] ] ]
                   Into: er.
             er: reflect: er.
             sprout: er Blueprint: blueprint FromCpt: cpt.
