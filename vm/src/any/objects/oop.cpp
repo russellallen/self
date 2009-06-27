@@ -207,11 +207,19 @@ oop oopClass::operating_system_prim() {
 }
 
 oop oopClass::credits_prim() {
-  lprintf("\nThis product contains Self, which has been brought to you by\n");
-  lprintf("Ole Agesen, Lars Bak, Craig Chambers, Bay-Wei Chang, Robert Duvall\n");
-  lprintf("Urs Hoelzle, Ole Lehrmann Madsen, John Maloney, Randy Smith,\n");
-  lprintf("David Ungar, and Mario Wolczko.\n\n");
-  lprintf("The Self Group would like to thank Elgin Lee, James \"kjx\" Noble,\n");
+  lprintf("\nSelf is a community driven, open source project and includes this VM\n");
+  lprintf("objects, documentation and materials.\n");
+  lprintf("\nIt is a continuation of the Self system as developed at\n");
+  lprintf("Xerox Parc, Stanford University and Sun Microsystems.\n");
+  lprintf("\nThe first version of the Self language was designed in 1986 by\n");
+  lprintf("David Ungar and Randall B. Smith at Xerox PARC. \n");
+  lprintf("\nA series of Self implementations and a graphical programming environment\n"); 
+  lprintf("were built at Stanford University by Craig Chambers, Urs Hšlzle, \n");
+  lprintf("Ole Agesen, Elgin Lee, Bay-Wei Chang, and David Ungar. \n");
+  lprintf("\nThe project continued at Sun Microsystems Laboratories, where it benefited \n");
+  lprintf("from the efforts of Randall B. Smith, Mario Wolczko, John Maloney, and \n");
+  lprintf("Lars Bak under the joint leadership of Smith and Ungar. \n");
+  lprintf("\nThe Self Group would like to thank Elgin Lee, James \"kjx\" Noble,\n");
   lprintf("Christine Ahrens, Jeff Dean, Erik Ernst, Ivan Moore, and\n");
   lprintf("Michael Abd-El-Malek for their contributions.\n\n");
   lprintf("Finally, thanks go to Sun Microsystems Laboratories, Stanford University,\n");
@@ -219,7 +227,7 @@ oop oopClass::credits_prim() {
   lprintf("Aarhus University, Apple, Cray, the Danish Research Academy, DEC, IBM,\n");
   lprintf("the National Science Foundation, NCR, the Swiss Nationalfonds, Tandem,\n");
   lprintf("Texas Instruments, and Xerox.\n\n");
-  lprintf("Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.\n");
+  lprintf("Copyright 2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.\n");
   lprintf("See the LICENSE file for license information.\n\n");
   return new_string("Thanks!");
 }
