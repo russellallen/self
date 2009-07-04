@@ -3,7 +3,8 @@ Self.app
 SelfDroplet.app
 *.OLD
 *.snap
-*.snap.backup
+*.backup
+*.o
 Snapshot
 Snapshot.backup
 *-lex.conflicts
