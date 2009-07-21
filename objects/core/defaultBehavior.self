@@ -468,6 +468,19 @@ arguments when only the first argument is of interest.\x7fModuleInfo: Module: de
             | value: a With: b With: c With: d With: e).
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'defaultBehavior' -> () From: ( | {
+         'Category: evaluating\x7fComment: 
+Convenient behavior for key/value and value* messages. By default, an
+object is its own key and value. The default value:{With:} messages
+strip off the trailing argument and retry. For example, this behavior
+allows a block taking one argument to be substituted for one taking two
+arguments when only the first argument is of interest.\x7fModuleInfo: Module: defaultBehavior InitialContents: FollowSlot\x7fVisibility: public'
+        
+         value: a With: b With: c With: d With: e With: f With: g = ( |
+            | 
+            value: a With: b With: c With: d With: e With: f).
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: defaultBehavior InitialContents: FollowSlot'
         
