@@ -247,7 +247,8 @@ static void set_sockaddr_in(struct sockaddr_in &a,
 
   long aLong;
 #   if  TARGET_OS_VERSION == SOLARIS_VERSION  \
-    ||  TARGET_OS_VERSION == MACOSX_VERSION
+    ||  TARGET_OS_VERSION == MACOSX_VERSION   \
+    ||  TARGET_OS_VERSION == LINUX_VERSION
     memcpy((char*) &aLong, address, sizeof(long));
     memset(a.sin_zero, 0, sizeof(a.sin_zero));
 # elif  TARGET_OS_VERSION == SUNOS_VERSION
