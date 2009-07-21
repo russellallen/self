@@ -4145,6 +4145,12 @@ in the OS specific objects.\x7fModuleInfo: Creator: traits unixFile bsdAndSolari
             | ) .
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'linux' -> 'socketConstants' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         bsdShared* = bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'bsd' -> 'socketConstants' -> ().
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'linux' -> () From: ( | {
          'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
         
