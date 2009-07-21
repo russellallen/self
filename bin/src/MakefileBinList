@@ -70,14 +70,14 @@ skipComments: skipComments.l
 	@echo Making $@
 	@lex -t ../src/skipComments.l > skipComments.c
 	@${COMPILE.c} skipComments.c
-	@${LINK.c} -o $@ skipComments.o -ll
+	@${LINK.c} -o $@ skipComments.o -lfl
 	@rm skipComments.c
 
 removeUnderscore: removeUnderscore.l
 	@echo Making $@
 	@lex -t ../src/removeUnderscore.l > removeUnderscore.c
 	@${COMPILE.c} removeUnderscore.c
-	@${LINK.c} -o $@ removeUnderscore.o -ll
+	@${LINK.c} -o $@ removeUnderscore.o -lfl
 	@rm removeUnderscore.c
 
 obj_patch: obj_patch.cpp

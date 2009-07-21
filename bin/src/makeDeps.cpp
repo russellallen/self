@@ -56,7 +56,7 @@
 # endif
 
 # ifdef __linux__
-#   include <c++/4.1/new>
+#   include <new>
 # endif
 
 
