@@ -1,6 +1,6 @@
  '$Revision: 30.8 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -3362,7 +3362,7 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'htmlParser' -> 'entities' -> () From: ( | {
          'Category: cached state\x7fModuleInfo: Module: webBrowser InitialContents: InitializeToExpression: (nil)'
         
-         cachedCodes <- bootstrap stub -> 'globals' -> 'nil' -> ().
+         cachedCodes.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'htmlParser' -> 'entities' -> () From: ( | {
@@ -3374,7 +3374,7 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'htmlParser' -> 'entities' -> () From: ( | {
          'Category: cached state\x7fModuleInfo: Module: webBrowser InitialContents: InitializeToExpression: (nil)'
         
-         cachedRawCodes <- bootstrap stub -> 'globals' -> 'nil' -> ().
+         cachedRawCodes.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'htmlParser' -> 'entities' -> () From: ( | {
@@ -6998,7 +6998,7 @@ globals webBrowser htmlParser tags abstractFormatChanger. copy
               ( urlContentsForRequest: url ), 
               ( "requestName uncapitalizeAll = 'get' ifTrue: '' False:" ' HTTP/1.0' ), 
               '\r\n',
-
+              'Host: ', (url host), '\r\n',
               ( isCachingOK ifTrue: '' False: 'Pragma: no-cache\r\n' ),
               '\r\n'
              Limit: lim).
