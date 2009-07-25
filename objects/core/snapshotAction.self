@@ -99,6 +99,15 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                                      i + 2)
                                  |).
 
+            snapshotAction
+              forCommandLineArg: '-headless'
+                       DoAction: (| parent* = lobby.
+                                    value: i With: arg = (
+                                     "Don't start up desktop this time"
+                                     desktop suppressRestart.
+                                     i succ).
+                                 |).
+                                 
             'Fhprtw' do: [|:opt|
               snapshotAction
                 forCommandLineArg: '-', opt

@@ -220,11 +220,21 @@ performance tuning to the system.\x7fModuleInfo: Module: desktop InitialContents
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( | {
+         'Category: state\x7fComment: Set to true if the -headless commandline option is set.\x7fModuleInfo: Module: desktop InitialContents: InitializeToExpression: (false)'
+        
+         restartSuppressedFlag <- bootstrap stub -> 'globals' -> 'false' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( | {
          'Category: opening and closing\x7fComment: Reopen the ui2 window(s) after returning from a snapshot,
-if it was open when the snapshot was made.\x7fModuleInfo: Module: desktop InitialContents: FollowSlot\x7fVisibility: public'
+if it was open when the snapshot was made, unless the user has 
+requested we not open by the \'-headless\' flag.\x7fModuleInfo: Module: desktop InitialContents: FollowSlot\x7fVisibility: public'
         
          returnFromSnapshot = ( |
             | 
+            restartSuppressedFlag ifTrue: [
+              restartSuppressedFlag: false. "Reset for next time"
+              ^ self].
             worlds isEmpty ifFalse: [
                 adjustVMParametersForBetterSpeed.
                 "reset the flag so that color problems are reported."
@@ -266,6 +276,16 @@ if it was open when the snapshot was made.\x7fModuleInfo: Module: desktop Initia
             | 
             worldsDo: [|:w| w stop].
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( | {
+         'Category: opening and closing\x7fComment: Sent from the snapshotAction module 
+if the -headless flag is set on the command line at
+start up.  Supresses the opening of the desktop only
+for one time.\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         suppressRestart = ( |
+            | restartSuppressedFlag: true).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( | {
