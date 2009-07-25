@@ -220,7 +220,7 @@ performance tuning to the system.\x7fModuleInfo: Module: desktop InitialContents
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( | {
-         'Category: state\x7fComment: Set to true if the -c commandline option is set.\x7fModuleInfo: Module: desktop InitialContents: InitializeToExpression: (false)'
+         'Category: state\x7fComment: Set to true if the -headless commandline option is set.\x7fModuleInfo: Module: desktop InitialContents: InitializeToExpression: (false)'
         
          restartSuppressedFlag <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
@@ -228,7 +228,7 @@ performance tuning to the system.\x7fModuleInfo: Module: desktop InitialContents
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( | {
          'Category: opening and closing\x7fComment: Reopen the ui2 window(s) after returning from a snapshot,
 if it was open when the snapshot was made, unless the user has 
-requested we not open by the \'-c\' flag.\x7fModuleInfo: Module: desktop InitialContents: FollowSlot\x7fVisibility: public'
+requested we not open by the \'-headless\' flag.\x7fModuleInfo: Module: desktop InitialContents: FollowSlot\x7fVisibility: public'
         
          returnFromSnapshot = ( |
             | 
@@ -280,7 +280,7 @@ requested we not open by the \'-c\' flag.\x7fModuleInfo: Module: desktop Initial
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( | {
          'Category: opening and closing\x7fComment: Sent from the snapshotAction module 
-if the -c flag is set on the command line at
+if the -headless flag is set on the command line at
 start up.  Supresses the opening of the desktop only
 for one time.\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
         
