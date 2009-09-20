@@ -8,3 +8,5 @@ SelfDroplet.app
 Snapshot
 Snapshot.backup
 *-lex.conflicts
+bin/mac_osx
+

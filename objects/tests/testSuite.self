@@ -86,6 +86,17 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> 'suite' -> () From: ( | {
          'Category: assertions\x7fModuleInfo: Module: testSuite InitialContents: FollowSlot\x7fVisibility: private'
         
+         assert: a Equals: b = ( |
+            | 
+            "This method is just useful because you
+             can click on a and b right in the debugger
+             to see what the two values are."
+            assert: [a = b]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> 'suite' -> () From: ( | {
+         'Category: assertions\x7fModuleInfo: Module: testSuite InitialContents: FollowSlot\x7fVisibility: private'
+        
          assert: a Is: b = ( |
             | 
             "This method is just useful because you
@@ -108,7 +119,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         
          fail = ( |
             | 
-            assert: [false]).
+            error: 'assertion failure').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> 'suite' -> () From: ( | {

@@ -153,7 +153,8 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'list' -> () From: ( | {
          'ModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: private'
         
-         subpartNames <- ''.
+         subpartNames <- 'sortedList
+'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'link' -> () From: ( | {
@@ -396,7 +397,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          addAll: c = ( |
             | 
-            c do: [ | :v | addLast:  v ].
+            c do: [ | :v | add: v ].
             self).
         } | ) 
 
@@ -737,6 +738,12 @@ element is found). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: Fo
                 b value: v1 value With: v2 With: k1 value With: k2].
             self).
         } | ) 
+
+
+
+ '-- Sub parts'
+
+ bootstrap read: 'sortedList' From: 'core'
 
 
 
