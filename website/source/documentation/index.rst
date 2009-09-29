@@ -11,15 +11,14 @@ A good starting point is the tutorial 'Prototype-Based Application Construction 
 * `browse the tutorial <../_static/tutorial/Tutorial/index.html>`_
 * `download as a gzipped tarball for offline use <tutorials/Tutorial.tar.gz>`_.
 
-Manuals
--------
+Handbook
+--------
 
-After the tutorial, and for more indepth information on Self, there are a number of comprehensive manuals available in PDF form.
+After the tutorial, and for more indepth information on Self, there is the Self Handbook (which is based on the 
 
-* `How to Program Self 4.0 <../_static/manuals/Self-4.1-Pgm-Env.pdf>`_ - a guide to the programming environment.
-* `Morphic: The Self User Interface Framework <../_static/manuals/Self-4.1-UI-Framework.pdf>`_ - how to build user interfaces with Self 4.0.
-* `The Self Programmer's Reference Manual <../_static/manuals/Self-4.1-Pgmers-Ref.pdf>`_ - the language description and overview of many important objects, with lots of gory detail.
-* `Self 4.0 Smalltalk Emulator <../_static/manuals/smalltalk.ps.gz>`_ - an overview of the optional Smalltalk subsystem.
+* `browse the Handbook <http://docs.selflanguage.org>`_
+* download the PDF for offline use (coming soon).
+
 
 Published Papers
 ----------------
