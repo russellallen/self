@@ -12,6 +12,9 @@ void InterruptedContext::set_next_pc(void *npc){
 
 
 void InterruptedContext::set_continuation_address(char *addr, bool mustWork, bool setSema) {
+  InterruptedContext::the_interrupted_context->must_be_in_self_thread();
+  
+
   assert(!continuePC, "continuePC already set");
   if (setSema) processSemaphore = true; 
   if (the_interrupted_context->next_pc() == the_interrupted_context->pc() + 4) {
@@ -65,6 +68,7 @@ int InterruptedContext::system_trap() {
 // only with extra SPARC stuff and it's called within signal handling -- dmu 1/96
 
 void InterruptedContext::setupPreemptionFromSignal() {
+    InterruptedContext::the_interrupted_context->must_be_in_self_thread();
   
     if (continuePC) fatal("recursive setSPLimit");
     if ( the_interrupted_context->pc()      >= first_inst_addr( setSPLimitAndContinue )

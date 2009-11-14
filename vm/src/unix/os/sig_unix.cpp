@@ -197,6 +197,9 @@ void SignalInterface::init_sig_mask() {
 
 
 static int32 ctrl_z_handler(int sig) {
+  if (InterruptedContext::the_interrupted_context->forwarded_to_self_thread(sig))
+    return 0;
+  
   FlagSettingInt fs(errno, 0);  // save errno
   if (sig == SIGTSTP) {
     OS::handle_suspend_and_resume(true);
@@ -213,11 +216,15 @@ static int32 ctrl_z_handler(int sig) {
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
   ||  TARGET_OS_VERSION ==   LINUX_VERSION
 static void signal_handler(int sig, self_code_info_t *info, self_sig_context_t *scp) {
-    if (SignalInterface::currentNonTimerSignal || SignalInterface::currentTimerSignal)
-       fatal3("signal_handler:  cannot nest (only one interrupted context).\n"
-              "Received sig %d while in sig %d or timer sig %d.\n"
-              "MacOSX ApplicationEnhancer causes apps to get signals that should be blocked.",
-              sig, SignalInterface::currentNonTimerSignal, SignalInterface::currentTimerSignal);
+  if (InterruptedContext::the_interrupted_context->forwarded_to_self_thread(sig))
+    return;
+ 
+  if (SignalInterface::currentNonTimerSignal || SignalInterface::currentTimerSignal) {
+      fatal3("signal_handler:  cannot nest (only one interrupted context).\n"
+             "Received sig %d while in sig %d or timer sig %d.\n"
+             "MacOSX ApplicationEnhancer causes apps to get signals that should be blocked.",
+             sig, SignalInterface::currentNonTimerSignal, SignalInterface::currentTimerSignal);
+    }
 
     SignalInterface::currentNonTimerSignal = sig;
 

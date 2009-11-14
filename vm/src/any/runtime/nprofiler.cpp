@@ -1152,6 +1152,8 @@ extern "C" { void ContinueAfterProfilerInterrupt(); }
 char** profiler_return_addr;
 
 StackInfo* Profiler::collect_stack(bool in_interrupt) {
+  InterruptedContext::the_interrupted_context->must_be_in_self_thread();
+  
   assert(!in_interrupt || InterruptedContext::the_interrupted_context->is_set(), "needed for stack walking");
   
   CSect cs(profilerCollectStackSemaphore);
@@ -1337,6 +1339,8 @@ void Profiler::printProfile(float cutoff) {
 
 
 void Profiler::tick() {
+  InterruptedContext::the_interrupted_context->must_be_in_self_thread();
+  
   if (status != profiling)    return;
   if (_process->nesting == 0) return; // ignore if _process is inactive
 

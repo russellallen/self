@@ -166,6 +166,9 @@ void InterruptedContext::continue_abort_at(char *addr, bool addDummyFrame) {
   // continue abort handling code on normal stack; resume at addr
   // create a dummy frame for the last frame peice so that Self stack trace
   // is complete
+  InterruptedContext::the_interrupted_context->must_be_in_self_thread();
+  
+
   if (addDummyFrame) {
     the_interrupted_context->set_sp(
       the_interrupted_context->sp()
@@ -186,6 +189,7 @@ volatile void fatal_handler() {
 
 
 void InterruptedContext::set(self_sig_context_t* scp_arg) {
+  must_be_in_self_thread();
   if (scp_arg && is_set())
      fatal2("should not be set already, possibly signals were not blocked,\n"
             "see comment about ApplicationEnhancer in sig_unix.hh,\n"
@@ -222,5 +226,6 @@ class InterruptedContext* InterruptedContext::the_interrupted_context;
 
 void abort_init() {
   InterruptedContext::the_interrupted_context = new InterruptedContext();
+  InterruptedContext::the_interrupted_context->set_the_self_thread();
   InterruptedContext::the_interrupted_context->invalidate();
 }  

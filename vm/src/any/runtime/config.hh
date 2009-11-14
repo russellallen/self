@@ -68,6 +68,15 @@
 
 // continued in os_includes.h so it can be after os_includes_<os>.h
 
+
+# ifndef __APPLE__
+# define __APPLE__ 0
+# endif
+# if __APPLE__
+# define TARGET_OS_FAMILY UNIX_FAMILY
+# define TARGET_OS_VERSION MACOSX_VERSION
+# endif
+
 # if TARGET_OS_VERSION == MACOSX_VERSION
 
   # ifdef TARGET_ARCH
@@ -92,8 +101,9 @@
   
   # define   TIGER_RELEASE 4
   # define LEOPARD_RELEASE 5
+  # define SNOW_LEOPARD_RELEASE 6
   # ifndef OSX_RELEASE
-    # define OSX_RELEASE LEOPARD_RELEASE
+    # define OSX_RELEASE SNOW_LEOPARD_RELEASE
   # endif
 
   // Apple asm syntax changed in 2006 sometime

@@ -96,6 +96,7 @@ void IntervalTimer::enable() {
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
   ||  TARGET_OS_VERSION ==   LINUX_VERSION
   action.sa_sigaction = (void (*)(int, siginfo_t*, void*)) IntervalTimerTick;
+  
 # elif COMPILER != GCC_COMPILER  &&  TARGET_OS_VERSION == SUNOS_VERSION
   action.sa_handler = (void (*)()) IntervalTimerTick;
 # else
@@ -189,13 +190,18 @@ void IntervalTimerTick(int sig, self_code_info_t *info, self_sig_context_t *scp)
   // Now we are getting SIGIO's while in the SIGVTALRM handler, maybe
   // caused by ApplicationEnhancer--argh! -- dmu 6/03
   
+  if (InterruptedContext::the_interrupted_context->forwarded_to_self_thread(sig))
+    return;
+  
   if (SignalInterface::currentNonTimerSignal || SignalInterface::currentTimerSignal) {
     static bool haveWarned = false;
     if (!haveWarned) {
-      warning3("IntervalTimerTick: signal_handler cannot nest (only one interrupted context).\n"
-               "Received timer sig %d while in sig %d or timer sig %d.\n"
+      warning6("IntervalTimerTick: signal_handler cannot nest (only one interrupted context).\n"
+               "Received timer sig %d (sig%s) while in sig %d (sig%s) or timer sig %d (sig%s).\n"
                "MacOSX ApplicationEnhancer causes apps to get signals that should be blocked.",
-               sig, SignalInterface::currentNonTimerSignal, SignalInterface::currentTimerSignal);
+               sig, sys_signame[sig],
+               SignalInterface::currentNonTimerSignal, sys_signame[SignalInterface::currentNonTimerSignal],
+               SignalInterface::currentTimerSignal, sys_signame[SignalInterface::currentTimerSignal]);
       haveWarned = true;
     }
     return;
@@ -235,7 +241,7 @@ void IntervalTimerTick(int sig, self_code_info_t *info, self_sig_context_t *scp)
 
   if (IntervalTimer::dont_use_any_timer  && sig == SIGVTALRM)
     IntervalTimerTick(SIGALRM, info, scp);  // simulate real timer
-}
+  }
 
 
 void IntervalTimer::do_async_tasks() {

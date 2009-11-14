@@ -52,7 +52,7 @@ void recompile_init() {
   for (fint i= 0; i < nstages; i++)
     compileCounts[i]= 0;
   compileAvg = new SlidingAverage(TicksPerSec);
-  IntervalTimer::CPU_timer()->enroll_async(TicksPerSec, compileAvgTracker);
+  IntervalTimer::CPU_timer()->enroll_async(TicksPerSec, compileAvgTracker); 
 }
 
 

@@ -299,6 +299,8 @@ void HProfiler::stop() {
 nmethod** nms;
 
 void HProfiler::tick() {
+  InterruptedContext::the_interrupted_context->must_be_in_self_thread();
+  
   if (!resources.in_consistent_state()) {
     warning("HProfiler::tick() skipping because resource area is not consistent");
     return;

@@ -179,6 +179,13 @@ void LoadLevelMonitor::compute_load_level() {
 
 
 void InterruptedFrameMonitor::get_frame_and_pc( frame*& f, char*& pc ) {
+  if (!InterruptedContext::the_interrupted_context->is_set()) {
+    f = NULL;  pc = NULL;
+    return;
+  }
+  InterruptedContext::the_interrupted_context->must_be_in_self_thread();
+  
+
   f  = InterruptedContext::the_interrupted_context->sp();
   pc = InterruptedContext::the_interrupted_context->pc();
 }

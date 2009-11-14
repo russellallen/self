@@ -11,6 +11,7 @@
 
 // This must be a macro - can't return current frame from a real function.
 # define GET_LAST_FRAME1(fr)                                                  \
+  InterruptedContext::the_interrupted_context->must_be_in_self_thread();      \
   frame* fr;                                                                  \
   if (process != currentProcess) {                                            \
     fr = (frame*)process->lastSP();                                           \

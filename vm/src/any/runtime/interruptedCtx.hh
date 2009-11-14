@@ -14,6 +14,7 @@ class InterruptedContext {
  private:
   self_sig_context_t* scp;
   static self_sig_context_t dummy_scp;
+  pthread_t the_self_thread; // NULL if platform doesn't do pthreads
   
  public:
   static void continue_abort_at(char *addr, bool addDummyFrame);
@@ -29,7 +30,12 @@ class InterruptedContext {
   
   void  set(self_sig_context_t* sc = 0);
   void  set(InterruptedContext* ic) { scp = ic->scp; }
-  bool  is_set() { return scp != &dummy_scp  &&  scp != NULL; }
+  
+  bool  is_set() { 
+     bool r   =   scp != &dummy_scp  &&  scp != NULL; 
+     assert(!r || scp->uc_mcontext != NULL, "Snow Leopard isSet bug hut");
+     return r;
+  }
 
   char**  pc_addr();
   char* pc();
@@ -43,6 +49,8 @@ class InterruptedContext {
   void   set_sp(void *sp);
 
   void   invalidate();
+  
+  bool   forwarded_to_self_thread(int);
 
   bool  in_system_trap();
   bool  in_read_trap();
@@ -50,9 +58,15 @@ class InterruptedContext {
   int   system_trap();
   int   code_at_pc();
   
+  bool is_in_self_thread();
+  void must_be_in_self_thread();
+  
   static void  setupPreemptionFromSignal();
   
  private:
+  friend void abort_init();
+  void set_the_self_thread();
+  
   // fatal menu helper fns
   static void quit_self();
   static void print_stack();

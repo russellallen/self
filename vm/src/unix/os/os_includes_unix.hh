@@ -77,6 +77,7 @@ extern "C" {
 #   include <ucontext.h>
 #   include <termios.h>
 #   include <sys/ioctl.h>
+#   include <pthread.h>
 # else
 #   include <termio.h>
 # endif

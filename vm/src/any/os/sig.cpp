@@ -229,8 +229,9 @@ void SignalInterface::handle_OS_signal(int ossig, char* addr, int32 code) {
   if (handle_SIC_OS_signal(ossig, addr, code))
     return;
 
-  lprintf("\nInternal error: signal %d code %d addr 0x%lx pc 0x%lx.\n",
-         (void*)ossig, (void*)code, (void*)(long unsigned)addr,
+  lprintf("\nInternal error: signal %d (sig%s) code %d addr 0x%lx pc 0x%lx.\n",
+         (void*)ossig, (void*)sys_signame[ossig],
+         (void*)code, (void*)(long unsigned)addr,
          (void*)(long unsigned)(InterruptedContext::the_interrupted_context->pc()));
   error_breakpoint();
   if (WizardAbortMode) {
@@ -248,6 +249,8 @@ void SignalInterface::handle_OS_signal(int ossig, char* addr, int32 code) {
 
 
 bool SignalInterface::handle_SIC_OS_signal(int ossig, char* addr, int32 code) {
+  InterruptedContext::the_interrupted_context->must_be_in_self_thread();
+  
   assert( !(ossig == SIGNonLifo && code == ST_ShouldNeverHappen),
           "SIC compiler error: should never get to this trap instruction");
 
