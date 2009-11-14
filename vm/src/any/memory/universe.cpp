@@ -397,7 +397,19 @@ void universe::read_versions_in_snapshot_header(FILE *file)
 
   bool can_read_snapshot_with_mismatched_version =
         snapshot_version == 10  &&  VM_snapshot_version == 11
-    || (snapshot_version == 10 || snapshot_version == 11)  &&  VM_snapshot_version == 12;
+    || (snapshot_version == 10 || snapshot_version == 11)  &&  VM_snapshot_version == 12
+    || (snapshot_version == 12) && VM_snapshot_version == 13;
+    
+  if (can_read_snapshot_with_mismatched_version)
+  	warning6("\n\tThis snapshot was saved using a different version\n"
+                 "\tof the Self Virtual Machine (%d.%d.%d) and may behave unexpectedly\n"
+                 "\tor not work correctly with this version (%d.%d.%d).\n", 
+                 read_major_version,
+                 read_minor_version,
+                 snapshot_version,
+                 VM_major_version,
+                 VM_minor_version,
+                 VM_snapshot_version);
 
   if (!can_read_snapshot_with_mismatched_version)
     fatalNoMenu6("\n\tThis snapshot was saved using a different version\n"

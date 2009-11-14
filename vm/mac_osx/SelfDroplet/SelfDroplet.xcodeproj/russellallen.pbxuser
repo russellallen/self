@@ -28,6 +28,9 @@
 			};
 		};
 		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
 		debuggerPlugin = ASKDebugger;
 		disassemblyDisplayState = 0;
 		dylibVariantSuffix = "";
@@ -58,6 +61,7 @@
 		executableUserSymbolLevel = 0;
 		libgmallocEnabled = 0;
 		name = SelfDroplet;
+		showTypeColumn = 0;
 		sourceDirectories = (
 		);
 	};
@@ -66,6 +70,9 @@
 		fallbackIsa = XCSourceControlManager;
 		isSCMEnabled = 0;
 		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
 		};
 		scmType = "";
 	};
@@ -74,7 +81,7 @@
 		indexTemplatePath = "";
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
-		activeArchitecture = i386;
+		activeArchitecturePreference = i386;
 		activeBuildConfigurationName = Release;
 		activeExecutable = 25D9446807B15AA000FF306F /* SelfDroplet */;
 		activeTarget = 25757362072882A0000BE9CA /* SelfDroplet */;
@@ -88,7 +95,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					423,
+					706,
 					20,
 					48,
 					43,
@@ -105,26 +112,26 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 253782638;
-			PBXWorkspaceStateSaveDate = 253782638;
+			PBXPerProjectTemplateStateSaveDate = 279456217;
+			PBXWorkspaceStateSaveDate = 279456217;
 		};
 		perUserProjectItems = {
-			BA43085B0EC3067800DE9E1A /* PBXTextBookmark */ = BA43085B0EC3067800DE9E1A /* PBXTextBookmark */;
+			BA3D053F10A82E4E00A90A64 /* PBXTextBookmark */ = BA3D053F10A82E4E00A90A64 /* PBXTextBookmark */;
 			BA8AF8A60EC3083D0029A65B /* PBXTextBookmark */ = BA8AF8A60EC3083D0029A65B /* PBXTextBookmark */;
 		};
 		sourceControlManager = 25D9446E07B15AA800FF306F /* Source Control */;
 		userBuildSettings = {
 		};
 	};
-	BA43085B0EC3067800DE9E1A /* PBXTextBookmark */ = {
+	BA3D053F10A82E4E00A90A64 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = DA458A96036079E503C91932 /* Application.applescript */;
-		name = "Application.applescript: 45";
+		name = "Application.applescript: 33";
 		rLen = 0;
-		rLoc = 1349;
+		rLoc = 1051;
 		rType = 0;
-		vrLen = 712;
-		vrLoc = 340;
+		vrLen = 718;
+		vrLoc = 794;
 	};
 	BA8AF8A60EC3083D0029A65B /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -138,8 +145,9 @@
 	};
 	DA458A96036079E503C91932 /* Application.applescript */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {594, 443}}";
-			sepNavSelRange = "{0, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {884, 735}}";
+			sepNavSelRange = "{1051, 0}";
+			sepNavVisRange = "{794, 718}";
 			sepNavVisRect = "{{0, 15}, {441, 73}}";
 		};
 	};

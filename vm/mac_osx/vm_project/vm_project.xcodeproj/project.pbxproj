@@ -90,6 +90,7 @@
 /* End PBXApplicationTarget section */
 
 /* Begin PBXBuildFile section */
+		BAE817531081CA190015DF49 /* SelfIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BAE817521081CA190015DF49 /* SelfIcon.icns */; };
 		BC01AEED0A2007FF00DFA7F4 /* vframe_i386.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6AFD96709C40F6E005CC280 /* vframe_i386.cpp */; };
 		BC01AEEE0A2007FF00DFA7F4 /* uncommonBranch_i386.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6AFD96609C40F6E005CC280 /* uncommonBranch_i386.cpp */; };
 		BC01AEEF0A20080100DFA7F4 /* trapdoors_i386.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6AFD98109C40F6E005CC280 /* trapdoors_i386.cpp */; };
@@ -1259,7 +1260,7 @@
 		0640BAA4FFF0323A11CA0E50 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
 		0640BAA5FFF0323A11CA0E50 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		0867D6ABFE840B52C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0F1DB5A9033BC3D344000126 /* make data executable */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; name = "make data executable"; path = "/Users/ungar/Desktop/make data executable"; sourceTree = "<absolute>"; };
+		0F1DB5A9033BC3D344000126 /* make data executable */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = "make data executable"; path = "/Users/ungar/Desktop/make data executable"; sourceTree = "<absolute>"; };
 		0F2E5B840357958D4446223E /* All Platforms */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = "All Platforms"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FC4A3D703072ADF44000126 /* stat_glue.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = stat_glue.cpp; path = ../../../objects/glue/stat_glue.cpp; sourceTree = SOURCE_ROOT; };
 		0FC4A3D803072ADF44000126 /* termcap_glue.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = termcap_glue.cpp; path = ../../../objects/glue/termcap_glue.cpp; sourceTree = SOURCE_ROOT; };
@@ -1330,7 +1331,7 @@
 		0FE703C002222F9344000113 /* target.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = target.cpp; sourceTree = "<group>"; };
 		0FE703C102222F9344000113 /* target.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = target.hh; sourceTree = "<group>"; };
 		0FE703C202222F9344000113 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		0FE703C402222F9344000113 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; path = .DS_Store; sourceTree = "<group>"; };
+		0FE703C402222F9344000113 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = text; path = .DS_Store; sourceTree = "<group>"; };
 		0FE703C502222F9344000113 /* ageTable.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = ageTable.cpp; sourceTree = "<group>"; };
 		0FE703C602222F9344000113 /* ageTable.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = ageTable.hh; sourceTree = "<group>"; };
 		0FE703C702222F9344000113 /* asmErrorCodes.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = asmErrorCodes.hh; sourceTree = "<group>"; };
@@ -1622,7 +1623,7 @@
 		0FE704EF02222F9344000113 /* util.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = util.hh; sourceTree = "<group>"; };
 		0FE704F002222F9344000113 /* vframe.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = vframe.cpp; sourceTree = "<group>"; };
 		0FE704F102222F9344000113 /* vframe.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = vframe.hh; sourceTree = "<group>"; };
-		0FE704F302222F9344000113 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; path = .DS_Store; sourceTree = "<group>"; };
+		0FE704F302222F9344000113 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = text; path = .DS_Store; sourceTree = "<group>"; };
 		0FE704F402222F9344000113 /* aNode.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = aNode.cpp; sourceTree = "<group>"; };
 		0FE704F502222F9344000113 /* aNode.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = aNode.hh; sourceTree = "<group>"; };
 		0FE704F602222F9344000113 /* basicBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = basicBlock.cpp; sourceTree = "<group>"; };
@@ -1694,7 +1695,7 @@
 		0FE7053902222F9344000113 /* zoneHeap.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = zoneHeap.hh; sourceTree = "<group>"; };
 		0FE7053A02222F9344000113 /* includeDB */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = includeDB; path = ../../src/includeDB; sourceTree = SOURCE_ROOT; };
 		0FE7053B02222F9344000113 /* Platform_mac_osx */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = Platform_mac_osx; path = ../../src/Platform_mac_osx; sourceTree = SOURCE_ROOT; };
-		0FE7053D02222F9344000113 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; path = .DS_Store; sourceTree = "<group>"; };
+		0FE7053D02222F9344000113 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = text; path = .DS_Store; sourceTree = "<group>"; };
 		0FE7053F02222F9344000113 /* asm_inline_ppc.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = asm_inline_ppc.hh; sourceTree = "<group>"; };
 		0FE7054002222F9344000113 /* asm_ppc.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = asm_ppc.cpp; sourceTree = "<group>"; };
 		0FE7054102222F9344000113 /* asm_ppc.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = asm_ppc.hh; sourceTree = "<group>"; };
@@ -1726,12 +1727,12 @@
 		0FE7055D02222F9344000113 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		0FE7055F02222F9344000113 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		0FE7056002222F9344000113 /* search_ppc.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = search_ppc.hh; sourceTree = "<group>"; };
-		0FE7056202222F9344000113 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; path = .DS_Store; sourceTree = "<group>"; };
+		0FE7056202222F9344000113 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = text; path = .DS_Store; sourceTree = "<group>"; };
 		0FE7056302222F9344000113 /* asmPrims_gcc_ppc.s */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.asm; path = asmPrims_gcc_ppc.s; sourceTree = "<group>"; };
 		0FE7056402222F9344000113 /* asmPrims_mw_ppc.s */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.asm; path = asmPrims_mw_ppc.s; sourceTree = "<group>"; };
 		0FE7056502222F9344000113 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		0FE7056602222F9344000113 /* prim_table_arch_ppc.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = prim_table_arch_ppc.hh; sourceTree = "<group>"; };
-		0FE7056802222F9344000113 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; path = .DS_Store; sourceTree = "<group>"; };
+		0FE7056802222F9344000113 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = text; path = .DS_Store; sourceTree = "<group>"; };
 		0FE7056902222F9344000113 /* aCompiler_ppc.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = aCompiler_ppc.cpp; sourceTree = "<group>"; };
 		0FE7056A02222F9344000113 /* aCompiler_ppc.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = aCompiler_ppc.hh; sourceTree = "<group>"; };
 		0FE7056B02222F9344000113 /* asmDefs_gcc_ppc.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = asmDefs_gcc_ppc.hh; sourceTree = "<group>"; };
@@ -1757,7 +1758,7 @@
 		0FE7057F02222F9344000113 /* runtime_ppc.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = runtime_ppc.hh; sourceTree = "<group>"; };
 		0FE7058002222F9344000113 /* stubs_ppc.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = stubs_ppc.cpp; sourceTree = "<group>"; };
 		0FE7058102222F9344000113 /* vframe_ppc.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = vframe_ppc.cpp; sourceTree = "<group>"; };
-		0FE7058302222F9344000113 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; path = .DS_Store; sourceTree = "<group>"; };
+		0FE7058302222F9344000113 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = text; path = .DS_Store; sourceTree = "<group>"; };
 		0FE7058402222F9344000113 /* genHelper_ppc.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = genHelper_ppc.hh; sourceTree = "<group>"; };
 		0FE7058502222F9344000113 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		0FE7058702222F9344000113 /* addrDesc_ppc.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = addrDesc_ppc.cpp; sourceTree = "<group>"; };
@@ -1819,6 +1820,7 @@
 		545D31EB03841FF100EA753E /* sic_ppc.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = sic_ppc.hh; sourceTree = "<group>"; };
 		545D31EE038421C700EA753E /* uncommonBranch_ppc.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = uncommonBranch_ppc.cpp; sourceTree = "<group>"; };
 		549352F303B2BFDB004628E8 /* basicNode_ppc.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; path = basicNode_ppc.hh; sourceTree = "<group>"; };
+		BAE817521081CA190015DF49 /* SelfIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = SelfIcon.icns; sourceTree = "<group>"; };
 		BC2944AA04D4EA72007FAAC0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		BC29450E04D4EB8B007FAAC0 /* Self.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = Self.nib; path = os/Self.nib; sourceTree = "<group>"; };
 		BC48A76704D0A68D0075BA8B /* Self cocoa.debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = "Self cocoa.debug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1940,7 +1942,7 @@
 		BCF0EF9C0BADD297002F9EAC /* unixPrimTemplates.self */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = unixPrimTemplates.self; path = ../../../objects/glue/unixPrimTemplates.self; sourceTree = SOURCE_ROOT; };
 		BCF0EF9D0BADD297002F9EAC /* xglTemplates.self */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = xglTemplates.self; path = ../../../objects/glue/xglTemplates.self; sourceTree = SOURCE_ROOT; };
 		BCF0EF9E0BADD297002F9EAC /* xlibTemplates.self */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = xlibTemplates.self; path = ../../../objects/glue/xlibTemplates.self; sourceTree = SOURCE_ROOT; };
-		BCF9DF990597F23700FDFCBD /* Exp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Exp-Info.plist"; path = "/Users/ungar/self/vm/mac_osx/vm_project/Exp-Info.plist"; sourceTree = "<absolute>"; };
+		BCF9DF990597F23700FDFCBD /* Exp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "Exp-Info.plist"; path = "/Users/ungar/self/vm/mac_osx/vm_project/Exp-Info.plist"; sourceTree = "<absolute>"; };
 		C6AFD92409C40F6E005CC280 /* asm_i386.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = asm_i386.cpp; path = ../../src/i386/asm/asm_i386.cpp; sourceTree = SOURCE_ROOT; };
 		C6AFD92509C40F6E005CC280 /* asm_i386.hh */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.h; name = asm_i386.hh; path = ../../src/i386/asm/asm_i386.hh; sourceTree = SOURCE_ROOT; };
 		C6AFD92609C40F6E005CC280 /* asm_inline_i386.hh */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.h; name = asm_inline_i386.hh; path = ../../src/i386/asm/asm_inline_i386.hh; sourceTree = SOURCE_ROOT; };
@@ -2889,6 +2891,7 @@
 		20286C2CFDCF999611CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BAE817521081CA190015DF49 /* SelfIcon.icns */,
 				0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */,
 			);
 			name = Resources;
@@ -3926,6 +3929,7 @@
 				BCF0EFA50BADD297002F9EAC /* unixPrimTemplates.self in Resources */,
 				BCF0EFA60BADD297002F9EAC /* xglTemplates.self in Resources */,
 				BCF0EFA70BADD297002F9EAC /* xlibTemplates.self in Resources */,
+				BAE817531081CA190015DF49 /* SelfIcon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4672,6 +4676,8 @@
 					"NATIVE_ARCH=${NATIVE_ARCH}",
 				);
 				INFOPLIST_FILE = "Info-Self_debug__Upgraded_.plist";
+				PATH = "${PATH}:${SELF_WORKING_DIR}/bin/mac_osx:${SELF_WORKING_DIR}/bin/shell/";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 			};
 			name = "Debug Self Intel";
@@ -4751,7 +4757,6 @@
 				LIBRARY_SEARCH_PATHS = "";
 				MAKE = make;
 				OBJROOT = "$(OBJROOT)/debug";
-				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = (
 					"-DCOCOA_EXP=1",
 					"-DGCC3=1",
@@ -4899,6 +4904,8 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SYSTEM_LIBRARY_DIR)/Frameworks/ApplicationServices.framework/Versions/A/Frameworks\"";
+				PATH = "${PATH}:${SELF_WORKING_DIR}/bin/mac_osx:${SELF_WORKING_DIR}/bin/shell/";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 			};
 			name = "Not Used - Development";
@@ -4911,6 +4918,8 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SYSTEM_LIBRARY_DIR)/Frameworks/ApplicationServices.framework/Versions/A/Frameworks\"";
+				PATH = "${PATH}:${SELF_WORKING_DIR}/bin/mac_osx:${SELF_WORKING_DIR}/bin/shell/";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 			};
 			name = "Not Used - Deployment";
@@ -4943,11 +4952,14 @@
 					"GCC_OPTIMIZATION_LEVEL=${GCC_OPTIMIZATION_LEVEL}",
 					"NATIVE_ARCH=${NATIVE_ARCH}",
 				);
+				MAKE = /usr/bin/make;
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
 					"-lcurses",
 				);
+				PATH = "${PATH}:${SELF_WORKING_DIR}/bin/mac_osx:${SELF_WORKING_DIR}/bin/shell/";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
 			};
@@ -4982,6 +4994,8 @@
 					"GCC_OPTIMIZATION_LEVEL=${GCC_OPTIMIZATION_LEVEL}",
 					"NATIVE_ARCH=${NATIVE_ARCH}",
 				);
+				PATH = "${PATH}:${SELF_WORKING_DIR}/bin/mac_osx:${SELF_WORKING_DIR}/bin/shell/";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 			};
 			name = "Optimized Self w FAST_FLOATS";
@@ -5013,6 +5027,8 @@
 					"GCC_OPTIMIZATION_LEVEL=${GCC_OPTIMIZATION_LEVEL}",
 					"NATIVE_ARCH=${NATIVE_ARCH}",
 				);
+				PATH = "${PATH}:${SELF_WORKING_DIR}/bin/mac_osx:${SELF_WORKING_DIR}/bin/shell/";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 			};
 			name = "Debug Self";
@@ -5045,6 +5061,8 @@
 					"GCC_OPTIMIZATION_LEVEL=${GCC_OPTIMIZATION_LEVEL}",
 					"NATIVE_ARCH=${NATIVE_ARCH}",
 				);
+				PATH = "${PATH}:${SELF_WORKING_DIR}/bin/mac_osx:${SELF_WORKING_DIR}/bin/shell/";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 			};
 			name = "Optimized w/ Asserts Self";
@@ -5078,6 +5096,8 @@
 					"GCC_OPTIMIZATION_LEVEL=${GCC_OPTIMIZATION_LEVEL}",
 					"NATIVE_ARCH=${NATIVE_ARCH}",
 				);
+				PATH = "${PATH}:${SELF_WORKING_DIR}/bin/mac_osx:${SELF_WORKING_DIR}/bin/shell/";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 			};
 			name = "Profiled Self";
@@ -5090,6 +5110,8 @@
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
 				);
 				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SYSTEM_LIBRARY_DIR)/Frameworks/ApplicationServices.framework/Versions/A/Frameworks\"";
+				PATH = "${PATH}:${SELF_WORKING_DIR}/bin/mac_osx:${SELF_WORKING_DIR}/bin/shell/";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 			};
 			name = Default;
@@ -5387,7 +5409,6 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
 				MAKE = make;
-				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = (
 					"-DCOCOA_EXP=1",
 					"-DGCC3=1",
@@ -5447,7 +5468,7 @@
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GLUE_LIB_DIR = "\"../../../objects/glue/mac_osx/\"";
 				HEADER_SEARCH_PATHS = (
 					../../../objects/glue,
@@ -5480,7 +5501,6 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
 				MAKE = make;
-				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = (
 					"-DCOCOA_EXP=1",
 					"-DGCC3=1",
@@ -5539,7 +5559,7 @@
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GLUE_LIB_DIR = "\"../../../objects/glue/mac_osx/\"";
 				HEADER_SEARCH_PATHS = (
 					../../../objects/glue,
@@ -5573,7 +5593,6 @@
 				LIBRARY_SEARCH_PATHS = "";
 				MAKE = make;
 				OBJROOT = "$(OBJROOT)/optimized";
-				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = (
 					"-DCOCOA_EXP=1",
 					"-DGCC3=1",
@@ -5633,7 +5652,7 @@
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GLUE_LIB_DIR = "\"../../../objects/glue/mac_osx/\"";
 				HEADER_SEARCH_PATHS = (
 					../../../objects/glue,
@@ -5668,7 +5687,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				MAKE = make;
 				OBJROOT = "$(OBJROOT)/optimized_fast_floats";
-				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = (
 					"-DCOCOA_EXP=1",
 					"-DGCC3=1",
@@ -5763,7 +5781,6 @@
 				LIBRARY_SEARCH_PATHS = "";
 				MAKE = make;
 				OBJROOT = "$(OBJROOT)/debug";
-				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = (
 					"-DCOCOA_EXP=1",
 					"-DGCC3=1",
@@ -5824,7 +5841,7 @@
 				APPSUFFIX = " Opt Asserts";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GLUE_LIB_DIR = "\"../../../objects/glue/mac_osx/\"";
 				HEADER_SEARCH_PATHS = (
 					../../../objects/glue,
@@ -5858,7 +5875,6 @@
 				LIBRARY_SEARCH_PATHS = "";
 				MAKE = make;
 				OBJROOT = "$(OBJROOT)/optAssert";
-				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = (
 					"-DCOCOA_EXP=1",
 					"-DGCC3=1",
@@ -5920,7 +5936,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_PROFILING_CODE = YES;
-				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GLUE_LIB_DIR = "\"../../../objects/glue/mac_osx/\"";
 				HEADER_SEARCH_PATHS = (
 					../../../objects/glue,
@@ -5954,7 +5970,6 @@
 				LIBRARY_SEARCH_PATHS = "";
 				MAKE = make;
 				OBJROOT = "$(OBJROOT)/profiled";
-				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = (
 					"-DCOCOA_EXP=1",
 					"-DGCC3=1",
@@ -6013,6 +6028,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GLUE_LIB_DIR = "\"../../../objects/glue/mac_osx/\"";
 				HEADER_SEARCH_PATHS = (
 					../../../objects/glue,
@@ -6045,7 +6061,6 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "";
 				MAKE = make;
-				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = (
 					"-DCOCOA_EXP=1",
 					"-DGCC3=1",
@@ -6778,13 +6793,15 @@
 					/usr/X11R6/lib,
 					.,
 				);
+				MAKE = /usr/bin/make;
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
 					"-lcurses",
 				);
+				PATH = "${PATH}:${SELF_WORKING_DIR}/bin/mac_osx:${SELF_WORKING_DIR}/bin/shell/";
 				PRODUCT_NAME = Self;
-				SELF_WORKING_DIR = "${HOME}/self";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};

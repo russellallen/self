@@ -40,7 +40,7 @@
 	<key>CFBundleGetInfoString</key>
 	<string>Self 4.1.6 carbon project builder</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>SelfIcon</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
