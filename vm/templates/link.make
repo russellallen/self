@@ -33,10 +33,13 @@ DEFS = ${SYSDEFS}  ${CONFIGDEFS} ${UNDEFS} ${OSDEFS} \
 GNUFLAGS += \
 	   -Wimplicit -Wreturn-type -Wswitch -Wcomment -Wformat \
 	   -Wpointer-arith \
-	   -Wconversion -Woverloaded-virtual \
-	   -fkeep-inline-functions
+	   -Wtraditional-conversion -Woverloaded-virtual \
+	   -fkeep-inline-functions -Wno-write-strings
 # would like to use -Wall but this includes -Wunused which gives just too
 # many errors in conjunction with ifdefs  -Urs 1/93
+#
+# GCC 4.3+ changes some of the warnings. To stop genuine errors being lost
+# in the forest, some of the warnings are reduced - Russell 11/09
 
 INCLUDES += $(SRC_PATH:%=-I%)
 

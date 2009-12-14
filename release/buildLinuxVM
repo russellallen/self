@@ -6,13 +6,14 @@
 #
 #
 #   From:
-#       Clean Ubuntu 7.04
+#       Clean Ubuntu 9.04
 #
 #   Install:
+#     csh
 #     libc6-dev
 #     g++
 #     flex-old
-#     build-essentials
+#     build-essential
 #     xorg-dev
 #     libncurses5-dev
 #
