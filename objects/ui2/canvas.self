@@ -1,6 +1,6 @@
  '$Revision: 30.17 $'
  '
-Copyright 1992-2008 Russell Allen, Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -2355,7 +2355,7 @@ the pixmapCache some day.
             n: displayName.
 
             "For Linux, default to local display"
-            host os = 'linux' ifTrue: [n: ''].
+            host osName = 'linux' ifTrue: [n: ''].
 
             [ | err |
               err: [|:exit|
