@@ -31,7 +31,7 @@ CLIBS = -lstdc++ -lnsl -lc
 
 # link termcap and ucb statically to avoid having to mess with LD_LIBRARY_PATH
 #OS_GLUE_LIBS = /usr/ucblib/libtermcap.a /usr/ucblib/libucb.a -lm
-OS_GLUE_LIBS =   /usr/lib/libncurses.a -lm
+OS_GLUE_LIBS =   /usr/lib/libncurses.a -lm -lpthread
 
 # precomp headers for  Linux
 # _precompiled.hh is in generated/incls, _precomiped.gch is in debug, optimized, etc.

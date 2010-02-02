@@ -228,11 +228,16 @@ void SignalInterface::handle_OS_signal(int ossig, char* addr, int32 code) {
   
   if (handle_SIC_OS_signal(ossig, addr, code))
     return;
-
+# if TARGET_OS_VERSION == LINUX_VERSION
+  lprintf("\nInternal error: signal %d code %d addr 0x%lx pc 0x%lx.\n",
+         (void*)ossig, (void*)code, (void*)(long unsigned)addr,
+         (void*)(long unsigned)(InterruptedContext::the_interrupted_context->pc()));
+# else
   lprintf("\nInternal error: signal %d (sig%s) code %d addr 0x%lx pc 0x%lx.\n",
          (void*)ossig, (void*)sys_signame[ossig],
          (void*)code, (void*)(long unsigned)addr,
          (void*)(long unsigned)(InterruptedContext::the_interrupted_context->pc()));
+# endif
   error_breakpoint();
   if (WizardAbortMode) {
     // for better VM debugging - see regs and stack undisturbed, but

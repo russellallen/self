@@ -7,7 +7,7 @@
   # pragma interface
 # endif
 
-
+#include <pthread.h>
 
 
 class InterruptedContext {

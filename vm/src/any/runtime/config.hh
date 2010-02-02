@@ -69,10 +69,7 @@
 // continued in os_includes.h so it can be after os_includes_<os>.h
 
 
-# ifndef __APPLE__
-# define __APPLE__ 0
-# endif
-# if __APPLE__
+# ifdef __APPLE__
 # define TARGET_OS_FAMILY UNIX_FAMILY
 # define TARGET_OS_VERSION MACOSX_VERSION
 # endif
