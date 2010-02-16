@@ -153,7 +153,8 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'list' -> () From: ( | {
          'ModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: private'
         
-         subpartNames <- ''.
+         subpartNames <- 'sortedList
+'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'link' -> () From: ( | {
@@ -396,7 +397,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          addAll: c = ( |
             | 
-            c do: [ | :v | addLast:  v ].
+            c do: [ | :v | add: v ].
             self).
         } | ) 
 
@@ -559,7 +560,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          'Category: inserting\x7fComment: Inserts the specified element after the first
 element in the list satisfying the condition
 block (or calls the IfAbsent: block if no such
-element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
+element is found). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
         
          insert: x AfterElementSatisfying: blk IfAbsent: aBlk = ( |
             | 
@@ -574,7 +575,7 @@ element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: Fo
          'Category: inserting\x7fComment: Inserts the specified element before the first
 element in the list satisfying the condition
 block (or calls the IfAbsent: block if no such
-element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
+element is found). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
         
          insert: x BeforeElementSatisfying: blk IfAbsent: aBlk = ( |
             | 
@@ -589,7 +590,7 @@ element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: Fo
          'Category: inserting\x7fComment: Inserts the specified elements after the first
 element in the list satisfying the condition
 block (or calls the IfAbsent: block if no such
-element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
+element is found). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
         
          insertAll: c AfterElementSatisfying: blk IfAbsent: aBlk = ( |
             | 
@@ -608,7 +609,7 @@ element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: Fo
          'Category: inserting\x7fComment: Inserts the specified elements before the first
 element in the list satisfying the condition
 block (or calls the IfAbsent: block if no such
-element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
+element is found). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
         
          insertAll: c BeforeElementSatisfying: blk IfAbsent: aBlk = ( |
             | 
@@ -737,6 +738,12 @@ element is fount). -- Adam, 5/06\x7fModuleInfo: Module: list InitialContents: Fo
                 b value: v1 value With: v2 With: k1 value With: k2].
             self).
         } | ) 
+
+
+
+ '-- Sub parts'
+
+ bootstrap read: 'sortedList' From: 'core'
 
 
 

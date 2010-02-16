@@ -524,6 +524,7 @@ are _Defined. Do not put any state in mirrors -- dmu 2/93'.
          'ModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
         
          subpartNames <- 'metaCollections
+mirrorProgramming
 '.
         } | ) 
 
@@ -1466,113 +1467,6 @@ create the same kind of method:
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: replacing one object with another\x7fCategory: hooks for observers\x7fComment: If you want to get notifed of defines,
-call me and pass in an object that understands justMutated:
-Perhaps the module cache hooks should be changes to use this facility someday. -- dmu 5/04\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         addObjectMutationObserver: obj = ( |
-            | 
-            objectMutationObservers add: obj.
-            self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming environment\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         addOrChange: allSlots FormerlyKnownAs: oldName IfAnyFail: failBlock = ( |
-             anyFailed <- bootstrap stub -> 'globals' -> 'false' -> ().
-             batchAdds.
-             batchRms.
-             defaultModule.
-             nonAsgSlots.
-             priorModules.
-            | 
-
-            batchAdds: list copyRemoveAll.  batchRms: list copyRemoveAll.
-
-            defaultModule: defaultModuleIfFail: ''.  priorModules: moduleNames.
-
-            nonAsgSlots: allSlots asList copyFilteredBy: [|:s| s isAssignment not].
-            nonAsgSlots do: [|:s|
-              (shouldChangeSlot: s FormerlyKnownAs: oldName)
-               ifFalse: [ anyFailed: true ]
-               True: [
-                batchAdds addLast: s.
-                case
-                 if: [s isAssignable] Then: [ | as |
-                     "oops, better ask about replacing method with new assignment, too"
-                      as: s correspondingAssignmentSlot.
-                      (shouldChangeAssignmentSlot: as)
-                         ifTrue: [ batchAdds addLast: as ] 
-                          False: [ anyNotAdded: true ].
-                ]
-                If: [s isMethod not] Then: [
-                     "and better remove assignment slot if replacing var with const"
-                     [|:exit. ss| 
-                       ss: at: s name IfFail: exit.
-                       ss isAssignable  ifTrue: [batchRms addLast: ss correspondingAssignmentSlot].
-                     ] exit.
-                ].
-              ]. 
-            ].
-            addSlotsToMeAndDescendants:      batchAdds.
-            removeSlotsFromMeAndDescendants: batchRms. 
-
-            nonAsgSlots do: [|:s|
-              (includes: s name) ifTrue: [
-                (at: s name) maybeSetModuleTo: defaultModule IfNot: priorModules
-              ].
-            ].
-            anyFailed ifTrue: failBlock False: [self]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding a slot\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         addSlot: slot = ( |
-            | addSlot: slot IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding a slot\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         addSlot: slot IfFail: fb = ( |
-            | 
-            defineAndSave: (copyAddSlot: slot IfFail: [|:e| ^ fb value: e]) IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding multiple slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         addSlots: collectionOfSlots = ( |
-            | addSlots: collectionOfSlots IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding multiple slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         addSlots: collectionOfSlots IfFail: fb = ( |
-            | defineAndSave: (copyAddSlots: collectionOfSlots IfFail: [|:e| ^ fb value: e]) IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding multiple slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         addSlotsIfAbsent: collectionOfSlots = ( |
-            | addSlotsIfAbsent: collectionOfSlots IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding multiple slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         addSlotsIfAbsent: collectionOfSlots IfFail: fb = ( |
-            | 
-            defineAndSave: (copyAddSlotsIfAbsent: collectionOfSlots 
-                                   IfFail: [|:e| ^ fb value: e]
-                    ) IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
          'Category: changing objects preserving copy-downs\x7fCategory: adding\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
         
          addSlotsToMeAndDescendants: slots = ( |
@@ -1653,21 +1547,6 @@ Perhaps the module cache hooks should be changes to use this facility someday. -
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating annotation\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         annotation: a = ( |
-            | annotation: a IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating annotation\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         annotation: a IfFail: fb = ( |
-            | 
-            defineAndSave: (copyAnnotation: a IfFail: [|:e| ^ fb value: e]) IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
          'Category: annotation info\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
         
          annotationIfFail: fb = ( |
@@ -1738,23 +1617,6 @@ Perhaps the module cache hooks should be changes to use this facility someday. -
         
          at: n IfFail: fb = ( |
             | at: n IfAbsent: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding a slot and setting contents\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         at: n PutContents: mir = ( |
-            | at: n PutContents: mir IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding a slot and setting contents\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         at: n PutContents: mir IfFail: fb = ( |
-            | 
-            defineAndSave:      
-              (copyAt: n PutContents: mir IfFail: [|:e| ^ fb value: e]) 
-             IfFail: fb).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
@@ -1864,20 +1726,6 @@ respecting copy-downs.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: comments\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         comment: c = ( |
-            | comment: c IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: comments\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         comment: c IfFail: fb = ( |
-            | annotation: (annotation copyForComment: c) IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
          'Category: completeness\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
         
          completeObjectSelectors = bootstrap setObjectAnnotationOf: ( (('asOutliner')
@@ -1895,198 +1743,6 @@ respecting copy-downs.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding a slot\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyAddSlot: slot = ( |
-            | copyAddSlot: slot IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding a slot\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyAddSlot: slot IfFail: fb = ( |
-            | 
-            primitiveCopyAt: slot key 
-                PutContents: slot value 
-                   IsParent: slot isParent
-                 IsArgument: slot isArgument
-                 Annotation: slot annotation
-                     IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding multiple slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyAddSlots: collectionOfSlots = ( |
-            | copyAddSlots: collectionOfSlots IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding multiple slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyAddSlots: collectionOfSlots IfFail: fb = ( |
-            | 
-            copyAddSlots: collectionOfSlots Overwrite: true IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding multiple slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
-        
-         copyAddSlots: collectionOfSlots Overwrite: overwrite IfFail: fb = ( | {
-                 'ModuleInfo: Module: mirror InitialContents: FollowSlot'
-                
-                 assignmentsLast.
-                }  {
-                 'ModuleInfo: Module: mirror InitialContents: FollowSlot'
-                
-                 r.
-                } 
-            | 
-            assignmentsLast: list copyRemoveAll.
-            collectionOfSlots do: [|:s|  
-              s isAssignment 
-                ifTrue: [assignmentsLast addLast:  s] 
-                 False: [assignmentsLast addFirst: s].
-            ].
-            r: self.
-            assignmentsLast do: [|:s| 
-              overwrite || [(r includesKey: s name) not]
-                    ifTrue: [r: r copyAddSlot: s IfFail: [|:e| ^ fb value: e]].
-            ].
-            r).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding multiple slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyAddSlotsIfAbsent: collectionOfSlots = ( |
-            | copyAddSlotsIfAbsent: collectionOfSlots IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding multiple slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyAddSlotsIfAbsent: collectionOfSlots IfFail: fb = ( |
-            | 
-            copyAddSlots: collectionOfSlots Overwrite: false IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming environment\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyAdoptingArgumentSlotsFrom: argSlotDonor = ( |
-             r.
-            | 
-            r: copyRemoveAllArgumentSlots.
-            argSlotDonor do: [|:s|
-              s isArgument ifTrue: [ 
-                r: r copyAddSlot: s.
-              ].
-            ].
-            r).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating annotation\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyAnnotation: a = ( |
-            | copyAnnotation: a IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating annotation\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyAnnotation: a IfFail: fb = ( |
-            | 
-            reflectionPrimitives forMirror: self CopyAnnotation: a IfFail: [|:err|
-                'outOfMemoryError' == err ifFalse: [
-                   fb value: err
-                ] True: [
-                  memory allocationFailed.
-                  reflectionPrimitives forMirror: self CopyAnnotation: a IfFail: fb]]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding a slot and setting contents\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyAt: n PutContents: mir = ( |
-            | copyAt: n PutContents: mir IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: adding a slot and setting contents\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyAt: n PutContents: mir IfFail: fb = ( |
-            | 
-            primitiveCopyAt: n 
-                PutContents: mir 
-                   IsParent: ( primitiveIsParentAt:   n IfFail: false )
-                 IsArgument: ( primitiveIsArgumentAt: n IfFail: false )
-                 Annotation: ( primitiveAnnotationAt: n IfFail: slotAnnotation )
-                     IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: comments\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyComment: c = ( |
-            | copyComment: c IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: comments\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyComment: c IfFail: fb = ( |
-            | copyAnnotation: (annotation copyForComment: c) IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating copy-down annotations\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyCopyDowns: cds = ( |
-            | copyCopyDowns: cds IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating copy-down annotations\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyCopyDowns: cds IfFail: fb = ( |
-            | copyModuleInfo: (moduleInfo copyForCopyDowns: cds) IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating creator\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyCreatorPath: p = ( |
-            | copyCreatorPath: p IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating creator\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyCreatorPath: p IfFail: fb = ( |
-            | 
-            copyCreatorSlot: (p targetSlotIfAbsent: [
-              ^ fb value: 'cannot set creator of: ', name, ' cannot find target of path: ',
-                          p fullName.
-            ]) IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating creator\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyCreatorSlot: s = ( |
-            | copyCreatorSlot: s IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating creator\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyCreatorSlot: s IfFail: fb = ( |
-            | copyModuleInfo: (moduleInfo copyForCreatorSlotHint: s) IfFail: fb.  self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
          'Category: changing objects preserving copy-downs\x7fCategory: adding\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
         
          copyDownForParent: parent IfAbsent: blk = ( |
@@ -2098,177 +1754,10 @@ respecting copy-downs.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: higher-level operations\x7fCategory: helpers\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
-        
-         copyDownFrom: parentMirror Sending: copySelector Omitting: slotsToOmit = ( |
-             cd.
-            | 
-            cd: (((transporter moduleInfo copyDown)
-                copyForParentMirror: parentMirror)
-                copyForSelector: copySelector)
-                copyForSlotsToOmit: [
-                  slotsToOmit asVector copyMappedBy: [|:s| s name]].
-
-            copyDowns: vector copyAddLast: cd.
-            addCopiedDownSlotsToMeAndDescendants:
-                (cd copiedParentMirror
-                  removeSlotsFromMeAndDescendants: slotsToOmit)
-              From: parentMirror.
-
-            self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
          'Category: annotation info\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
         
          copyDowns = ( |
             | moduleInfo copyDowns).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating copy-down annotations\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyDowns: cds = ( |
-            | copyDowns: cds IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating copy-down annotations\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyDowns: cds IfFail: fb = ( |
-            | moduleInfo: (moduleInfo copyForCopyDowns: cds) IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: completeness\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyIsComplete: aBool = ( |
-            | 
-            copyIsComplete: aBool IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: completeness\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyIsComplete: aBool IfFail: fb = ( |
-            | 
-            copyAnnotation: (annotation copyIsComplete: aBool) IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating module info\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyModuleInfo: mi = ( |
-            | 
-            copyModuleInfo: mi IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating module info\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyModuleInfo: mi IfFail: fb = ( |
-            | 
-            copyAnnotation: (annotation copyForModuleInfo: mi) IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: removing all slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyRemoveAll = ( |
-            | copyRemoveAllSlots).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming environment\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyRemoveAllArgumentSlots = ( |
-             r.
-            | 
-            r: self.
-            do: [|:s| 
-              s isArgument ifTrue: [ 
-                r: (r at: s name) copyHolderForRemove.      
-              ].
-            ].
-            r).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: removing all slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyRemoveAllSlots = ( |
-            | copyRemoveAllSlotsIfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: removing all slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyRemoveAllSlotsIfFail: fb = ( |
-             r.
-            | 
-            r: self.
-            do: [|:s| s isAssignment ifFalse: [r: (r at: s name) copyHolderForRemove.]].
-            r).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: removing a slot\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyRemoveSlot: n = ( |
-            | copyRemoveSlot: n IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: removing a slot\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyRemoveSlot: n IfFail: fb = ( |
-            | 
-            primitiveCopyRemoveSlot: n IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: higher-level operations\x7fComment: make a copy-down child of this object,
-Make a new, empty parent of my parent that
-inherits from my parents.
-Set the creator of my parent slot.\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         createSubclass = ( |
-             copySelector.
-             newChild.
-             newTraits.
-             parentsToOmit.
-             pname = 'parent'.
-            | 
-            newChild: copyRemoveAll isComplete: false.
-            newTraits: reflect: () _Clone.
-            parentsToOmit:  asSet copyFilteredBy: [|:s| s isParent ].
-
-            copySelector:
-             copyDowns isEmpty 
-              ifFalse: [copyDowns first selector]
-                 True: [|cdc. sels. selCounts|
-                        cdc: browseWellKnown copyDownChildrenOfReflectee: self Limit: 1.
-                        sels: cdc asVector copyMappedBy: [|:m| m copyDowns first selector].
-                        sels at: 0 IfAbsent: 'copy'
-              ].
-
-            copySelector: userQueryMorph askString: 'Copydown selector?' 
-                                     DefaultAnswer: copySelector
-                                             Event: process this birthEvent.
-            newChild copyDownFrom: self Sending: copySelector Omitting: parentsToOmit.
-
-            do: [|:s|
-              s isParent ifTrue: [
-                newTraits addSlot: s copyHolderForModule: ''
-              ]
-            ].
-             newChild at: pname PutContents: newTraits.
-            (newChild at: pname) isParent: true.
-            (newChild at: pname) visibility: privateSlot.
-            newTraits creatorSlot: newChild at: pname.
-            newChild isComplete: isComplete.
-
-            newChild).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
@@ -2287,24 +1776,6 @@ else invoke absentBlock with me as argument.\x7fModuleInfo: Module: mirror Initi
         
          creatorPath = ( |
             | creatorPathIfPresent: [|:p| p] IfAbsent: nullPath).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating creator\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         creatorPath: p = ( |
-            | creatorPath: p IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating creator\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         creatorPath: p IfFail: fb = ( |
-            | 
-            creatorSlot: (p targetSlotIfAbsent: [
-              ^ fb value: 'cannot set creator of: ', name, ' cannot find target of path: ',
-                          p fullName.
-            ]) IfFail: fb).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
@@ -2344,20 +1815,6 @@ else invoke absentBlock with me as argument.\x7fModuleInfo: Module: mirror Initi
             names isEmpty ifTrue: [names addLast: 'lobby'].
 
             pb value:  path copyWithAll: names).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating creator\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         creatorSlot: s = ( |
-            | creatorSlot: s IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating creator\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         creatorSlot: s IfFail: fb = ( |
-            | moduleInfo: (moduleInfo copyForCreatorSlotHint: s) IfFail: fb.  self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
@@ -2402,24 +1859,6 @@ a new slot before adding it.
             r isEmpty ifFalse: [^ r].
             creatorSlotIfPresent: [|:s| s module]
                         IfAbsent: blk).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: replacing one object with another\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         define: newObjMir = ( |
-            | define: newObjMir IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: replacing one object with another\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         define: newObjMir IfFail: failBlock = ( |
-             r.
-            | 
-            r: primitiveDefine: newObjMir IfFail: failBlock.
-            safelyTellObserversAboutMutationOf: r.
-            r).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
@@ -2469,42 +1908,6 @@ a new slot before adding it.
         
          evaluate: m = ( |
             | reflectionPrimitives forMirror: self Evaluate: m).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming environment\x7fCategory: missing slots\x7fComment: Iterates through all the selectors which are sent implicitly to self
-in all of the reflectee\'s methods, but which the reflectee does not
-understand. -- Adam, 6/05\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         everyMessageReflecteeSendsToSelfButDoesNotUnderstandDo: b = ( |
-             understood.
-            | 
-            understood: everyMessageReflecteeUnderstands.
-            everyMessageReflecteeSendsToSelfDo: [|:n|
-              (understood includes: n) ifFalse: [b value: n].
-            ].
-            self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming environment\x7fCategory: missing slots\x7fComment: Iterates through all the non-primitive selectors sent implicitly
-to self in all of the reflectee\'s methods. Does not yield any
-selector more than once. -- Adam, 6/05\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         everyMessageReflecteeSendsToSelfDo: b = ( |
-             alreadySeen.
-            | 
-            alreadySeen: set copyRemoveAll.
-            slotsInMeAndAncestorsUpTo: (reflect: ()) Do: [|:s|
-              s isMethod ifTrue: [
-                s contents allImplicitSelfSendsDo: [|:n|
-                  alreadySeen if: n IsAbsentAddAndDo: [
-                    ('_' isPrefixOf: n) ifFalse: [b value: n].
-                  ].
-                ].
-              ].
-            ].
-            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
@@ -2575,24 +1978,6 @@ responds to.\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibi
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming timestamp\x7fModuleInfo: Module: mirror InitialContents: InitializeToExpression: (0)\x7fVisibility: private'
-        
-         freezeDelta <- 0.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming timestamp\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         freezeProgrammingTimestampDo: aBlock = ( |
-             ts.
-            | 
-            ts: programmingTimestamp.
-            aBlock onReturn: [
-              freezeDelta: freezeDelta + (programmingTimestamp - ts).
-            ]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
          'Category: incremental changes\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
         
          frozenDefine: newMir = ( |
@@ -2605,15 +1990,6 @@ responds to.\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibi
          frozenDefine: newMir IfFail: fb = ( |
             | 
             freezeProgrammingTimestampDo: [define: newMir IfFail: fb]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming environment\x7fCategory: missing slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         hasAnyMissingSlots = ( |
-            | 
-            everyMessageReflecteeSendsToSelfButDoesNotUnderstandDo: [^ true].
-            false).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
@@ -2692,22 +2068,6 @@ responds to.\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibi
          isComplete = ( |
             | 
             (annotationIfFail: [^ false]) isComplete).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: completeness\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         isComplete: aBool = ( |
-            | 
-            isComplete: aBool IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: completeness\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         isComplete: aBool IfFail: fb = ( |
-            | 
-            annotation: (annotation copyForIsComplete: aBool) IfFail: fb).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
@@ -2955,36 +2315,6 @@ responds to.\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibi
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming environment\x7fCategory: missing slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         missingSlots = ( |
-             mir.
-            | 
-
-            "To see an example of the result of this method, choose the
-             Find Missing Slots operation from the menu of an object
-             outliner. -- Adam, 6/05"
-
-            mir: reflect: objectToDisplayMissingSlots.
-
-            [objectToDisplayMissingSlots objectWithMissingSlots]. "browsing"
-            mir: ((mir slotAt: 'objectWithMissingSlots') copyHolderForContents: self) holder.
-
-            everyMessageReflecteeSendsToSelfButDoesNotUnderstandDo: [|:n. sel. r <- ''. slot |
-              sel:  selector copyStr: n.
-              r: r & (sel intersperse: (vector copySize: sel numberOfArguments) copyMappedBy: [|:x. :i| 'arg', i succ asString]).
-              r: r & ' = (childMustImplement)'.
-              slot: (r flatString asSlotIfFail: raiseError) first.
-              slot: slot copyHolderForCategory:    'messages that should be implemented'.
-              slot: slot copyHolderForVisibility:  visibility privateSlot.
-              slot: slot copyHolderForComment:     'Use \'Senders in family\' to find out where this message is sent.'.
-              mir: mir copyAddSlot: slot.
-            ].
-
-            mir).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
          'Category: annotation info\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
         
          moduleInfo = ( |
@@ -2994,22 +2324,6 @@ responds to.\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibi
              the transporter just so that we can have
              moduleInfo. -- Adam, 11/04"
             moduleInfoIfFail: [mi objectInfo]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating module info\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         moduleInfo: mi = ( |
-            | 
-            moduleInfo: mi IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: changing annotation\x7fCategory: mutating module info\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         moduleInfo: mi IfFail: fb = ( |
-            | 
-            annotation: (annotation copyForModuleInfo: mi) IfFail: fb).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
@@ -3170,23 +2484,6 @@ including the object\'s printString\x7fModuleInfo: Module: mirror InitialContent
         
          namesIfFail: fb = ( |
             | reflectionPrimitives forMirror: self NamesIfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: replacing one object with another\x7fCategory: hooks for observers\x7fModuleInfo: Module: mirror InitialContents: InitializeToExpression: (set copyRemoveAll)\x7fVisibility: private'
-        
-         objectMutationObservers <- set copyRemoveAll.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming environment\x7fCategory: missing slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
-        
-         objectToDisplayMissingSlots = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'objectToDisplayMissingSlots' -> () From: ( |
-             {} = 'Comment: This object is the result of a Find Missing Slots operation.
-It shows you a list of messages that the objectWithMissingSlots
-sends to itself but does not understand yet.\x7fModuleInfo: Creator: traits mirrors abstractMirror objectToDisplayMissingSlots.
-'.
-            | ) .
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'objectToDisplayMissingSlots' -> () From: ( | {
@@ -3363,70 +2660,6 @@ It only invokes the ambiguous block if the paths find different slots.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: programming primitives\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
-        
-         primitiveCopyAt: n PutContents: objMirr IsParent: p IsArgument: isA Annotation: a IfFail: failBlock = ( |
-            | 
-            reflectionPrimitives
-                forMirror:  self
-                   CopyAt:  n asString canonicalize
-                      Put:  objMirr
-                 IsParent:  p
-               IsArgument:  isA
-               Annotation:  a
-                   IfFail:  [|:error|
-              'outOfMemoryError' == error ifFalse: [
-                failBlock value: error
-              ] True: [
-                 memory allocationFailed.
-                 ^ reflectionPrimitives
-                      forMirror:  self
-                         CopyAt:  n asString canonicalize
-                            Put:  objMirr
-                       IsParent:  p
-                     IsArgument: isA
-                     Annotation: a
-                         IfFail:  failBlock
-              ]]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: programming primitives\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
-        
-         primitiveCopyRemoveSlot: n IfFail: fb = ( |
-            | 
-            reflectionPrimitives
-                        forMirror: self
-                   CopyRemoveSlot: n asString canonicalize 
-                           IfFail: [|:error|
-               'outOfMemoryError' == error ifFalse: [
-                 fb value: error
-               ] True: [
-                 memory allocationFailed.
-                 reflectionPrimitives
-                             forMirror: self
-                        CopyRemoveSlot: n asString canonicalize 
-                                IfFail: fb
-               ]
-            ]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: replacing one object with another\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
-        
-         primitiveDefine: newObjMir IfFail: fb = ( |
-            | 
-             reflectionPrimitives forMirror: self Define: newObjMir IfFail: [|:error|
-              'outOfMemoryError' == error ifFalse: [
-                fb value: error
-              ] True: [
-                memory allocationFailed.
-                reflectionPrimitives forMirror: self Define: newObjMir IfFail: fb
-              ]
-            ]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
          'Category: slot-like primitives\x7fComment: call only from slot\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
         
          primitiveIsArgumentAt: n IfFail: fb = ( |
@@ -3445,21 +2678,6 @@ It only invokes the ambiguous block if the paths find different slots.
         
          primitiveIsParentAt: n IfFail: fb = ( |
             | reflectionPrimitives forMirror: self IsParentAt: n asString canonicalize  IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming timestamp\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         programmingTimestamp = ( |
-            | 
-            programmingTimestampIfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming timestamp\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         programmingTimestampIfFail: fb = ( |
-            | _ProgrammingTimestampIfFail: fb).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
@@ -3575,27 +2793,6 @@ is it a literal vector of some method)? -- Mario, 1/13/95\x7fModuleInfo: Module:
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: removing all slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         removeAll = ( |
-            | removeAllSlots).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: removing all slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         removeAllSlots = ( |
-            | removeAllSlotsIfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: removing all slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         removeAllSlotsIfFail: fb = ( |
-            | defineAndSave: (copyRemoveAllSlotsIfFail: [|:e| ^ fb value: e] ) IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
          'Category: changing objects preserving copy-downs\x7fCategory: removing\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
         
          removeCopiedDownSlotsFromMeAndDescendants: slots From: parent = ( |
@@ -3656,15 +2853,6 @@ is it a literal vector of some method)? -- Mario, 1/13/95\x7fModuleInfo: Module:
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: replacing one object with another\x7fCategory: hooks for observers\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         removeObjectMutationObserver: obj = ( |
-            | 
-            objectMutationObservers remove: obj IfAbsent: [].
-            self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
          'Category: changing objects preserving copy-downs\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
         
          removeRedundantAssignmentSlotsFrom: slots = ( |
@@ -3672,21 +2860,6 @@ is it a literal vector of some method)? -- Mario, 1/13/95\x7fModuleInfo: Module:
             slots asList copyFilteredBy: [|:s|
               ( s isAssignment  &&  [ slots includes: s correspondingDataSlot ] ) not
             ]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: removing a slot\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         removeSlot: n = ( |
-            | removeSlot: n IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: removing a slot\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         removeSlot: n IfFail: b = ( |
-            | 
-            defineAndSave: (copyRemoveSlot: n IfFail: [|:e| ^b value: e]) IfFail: b).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
@@ -3791,44 +2964,6 @@ but tries to fit in s characters.\x7fModuleInfo: Module: mirror InitialContents:
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: replacing one object with another\x7fCategory: hooks for observers\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
-        
-         safelyTellObserversAboutMutationOf: newMir = ( |
-            | 
-            [tellObserversAboutMutationOf: newMir]. "browsing"
-            scheduler isRunning            ifFalse: [^ self]. "fork would break"
-            objectMutationObservers isEmpty ifTrue: [^ self]. "a little optimization"
-            (message copy receiver: self Selector: 'tellObserversAboutMutationOf:' With: newMir) fork.
-            self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming environment\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
-        
-         shouldChangeAssignmentSlot: as = ( |
-            | 
-                 ( includesKey: as name) not
-            ||  [( at: as name ) isAssignment
-            ||  [  userQuery askYesNo:  
-                    'Do you want to replace method "', 
-                     as name, 
-                 '"\nwith an assignment slot?' ]]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming environment\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
-        
-         shouldChangeSlot: s FormerlyKnownAs: oldName = ( |
-            | 
-            "if already there, need to ask about adding it"
-              "oldName set if the user explicity changed it from oldName"
-                   ( includesKey: s name ) not
-              || [ ( s name = oldName )
-              || [ ( (at: s name) contents = s contents ) "OK if just recategorizing (same contents)"
-              || [   userQuery askYesNo: 'Slot: "', s name, '" is already in object.\nAdd it anyway?' ]]]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
          'Category: debugging help\x7fComment: Bring an outliner on this mirror to the user\'s hand.\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
         
          showMe = ( |
@@ -3879,6 +3014,18 @@ but tries to fit in s characters.\x7fModuleInfo: Module: mirror InitialContents:
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> () From: ( | {
          'ModuleInfo: Module: mirror InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
+         assignableParentBlock.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> () From: ( | {
+         'ModuleInfo: Module: mirror InitialContents: InitializeToExpression: (list)\x7fVisibility: private'
+        
+         leftToVisit <- bootstrap stub -> 'globals' -> 'list' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> () From: ( | {
+         'ModuleInfo: Module: mirror InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
+        
          mirror.
         } | ) 
 
@@ -3895,7 +3042,10 @@ but tries to fit in s characters.\x7fModuleInfo: Module: mirror InitialContents:
          'Category: copying\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
         
          copy = ( |
-            | resend.copy visited: visited copy).
+            | 
+            (resend.copy
+                  leftToVisit: leftToVisit copy)
+                      visited: visited     copy).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> 'parent' -> () From: ( | {
@@ -3919,19 +3069,25 @@ but tries to fit in s characters.\x7fModuleInfo: Module: mirror InitialContents:
         
          findSlots = ( |
             | 
-            findSlotsIn: mirror AndAddResultsTo: set copy).
+            leftToVisit add: mirror.
+            findSlotsAndAddResultsTo: set copy).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> 'parent' -> () From: ( | {
          'Category: finding slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
         
-         findSlotsIn: aMirror AndAddResultsTo: aSet = ( |
+         findSlotsAndAddResultsTo: aSet = ( |
             | 
-            if: aMirror HasNotBeenVisitedThenMarkItAsVisitedAndDo: [
-              slotIn: aMirror IfPresent: [|:s|
-                (isInterestedInSlot: s) ifTrue: [aSet add: s. ^ aSet].
+            [leftToVisit isEmpty] whileFalse: [| mir |
+              mir: leftToVisit removeFirst.
+              visited if: mir IsAbsentAddAndDo: [
+                [|:exit|
+                 slotIn: mir IfPresent: [|:s|
+                   (isInterestedInSlot: s) ifTrue: [aSet add: s. exit value].
+                 ].
+                 followParentSlotsOf: mir.
+                ] exit.
               ].
-              findSlotsInParentsOf: aMirror AndAddResultsTo: aSet.
             ].
             aSet).
         } | ) 
@@ -3941,18 +3097,8 @@ but tries to fit in s characters.\x7fModuleInfo: Module: mirror InitialContents:
         
          findSlotsInParents = ( |
             | 
-            findSlotsInParentsOf: mirror AndAddResultsTo: set copy).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> 'parent' -> () From: ( | {
-         'Category: finding slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
-        
-         findSlotsInParentsOf: aMirror AndAddResultsTo: aSet = ( |
-            | 
-            aMirror parentsDo: [|:parentSlot|
-              findSlotsIn: parentSlot contents AndAddResultsTo: aSet.
-            ].
-            aSet).
+            followParentSlotsOf: mirror.
+            findSlotsAndAddResultsTo: set copy).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> 'parent' -> () From: ( | {
@@ -3974,9 +3120,13 @@ but tries to fit in s characters.\x7fModuleInfo: Module: mirror InitialContents:
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> 'parent' -> () From: ( | {
          'Category: finding slots\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
         
-         if: aMirror HasNotBeenVisitedThenMarkItAsVisitedAndDo: aBlock = ( |
+         followParentSlotsOf: aMirror = ( |
             | 
-            visited if: aMirror IsAbsentAddAndDo: aBlock).
+            aMirror parentsDo: [|:parentSlot|
+              parentSlot isAssignable ifTrue: [assignableParentBlock value: parentSlot].
+              leftToVisit add: parentSlot contents.
+            ].
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> 'slotFinder' -> 'parent' -> () From: ( | {
@@ -4151,15 +3301,6 @@ not included.
                                  IfAbsent:  []
             ] IfAbsent: [].
             absentBlock value: self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
-         'Category: programming\x7fCategory: replacing one object with another\x7fCategory: hooks for observers\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: private'
-        
-         tellObserversAboutMutationOf: newObjMir = ( |
-            | 
-            objectMutationObservers do: [|:ob| ob justMutated: newObjMir].
-            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'abstractMirror' -> () From: ( | {
@@ -5668,15 +4809,6 @@ x = start, y = end
         
          branchTargets = ( |
             | 
-            ["obsoleted by abstractBytecodeInterpreter, -- dmu 5/02"
-              | res |
-              res: sequence copy.
-              obsoleteBytecodesDo: [|:bci. :op. :lit|
-                ('branchAlways' = op) || ['branchIfTrue' = op] || ['branchIfFalse' = op] ifTrue: [
-                    res add: lit.
-                ] False: ['branchIndexed' = op ifTrue: [res addAll: lit]].
-              ].
-            ].
             branchTargetFinder copyInterpretMethod: self).
         } | ) 
 
@@ -5785,19 +4917,6 @@ x = start, y = end
         
          disassemble = ( |
             | 
-            [ "obsoleted by methodDisassembler -- dmu 5/02"
-              | bciLen <- 0. r <- '' |
-              bciLen: codes size printString size.
-              obsoleteBytecodesDo: [ | :bci. :opcode. :literal. :nextBCI |
-                r: r 
-                   &  (bci printStringPadWith: ' ' ToSize: bciLen )
-                   &  ':  ' 
-                   & opcode & ' '
-                   & ((reflect: literal) isComplete ifTrue: [literal printString] False: [(reflect: literal) name]). 
-                nextBCI = 0   ifFalse: [r: r & '\n'].
-              ].
-              r flatString
-            ].
             methodDisassembler copyInterpretMethod: self).
         } | ) 
 
@@ -6003,22 +5122,6 @@ the debugger should not stop here during a step command.
              b.
              n.
             | 
-            [ "obsoleted by abstractBytecodeIntepreter -- dmu 5/02"
-              obsoleteBytecodesDo:[| :bci. :op. :literal|
-                  bci >= index ifTrue: [
-                          op = 'send'  ifTrue: [^false ].
-                         (op = 'implicitSelfSend') ||
-                        [(op = 'undirectedResend') ||
-                        [(op = 'branchAlways')     || 
-                        [(op = 'branchIfTrue')     ||
-                        [(op = 'branchIfFalse')    ||
-                        [(op = 'branchIndexed')]]]]]
-                       ifTrue: [^ isSendingNameSimple: literal]
-                        False: [^ true].
-                  ].
-              ].
-            false].
-
             b: codes byteAt: index IfAbsent: [^ false].
             n: instructionSet opcodeNameOf: b.
              'send'   =           n   ifTrue:  [^ false].
@@ -6157,8 +5260,6 @@ a copy of the original vector of literals.) -- Adam, 4/06\x7fModuleInfo: Module:
         
          messagesDo: b = ( |
              locals <- bootstrap stub -> 'globals' -> 'set' -> ().
-             r1.
-             r2.
              useLocs <- bootstrap stub -> 'globals' -> 'true' -> ().
             | 
             useLocs: _UseLocalAccessBytecodes.
@@ -6167,21 +5268,10 @@ a copy of the original vector of literals.) -- Adam, 4/06\x7fModuleInfo: Module:
               locals: locals copy.
               names do: [|:n| locals add: n].
             ].
-            r1: set copyRemoveAll.
-            ["obsolete"
-              obsoleteBytecodesDo: [| :bci. :op. :literal |
-                (op = 'send')  || 
-                [op = 'implicitSelfSend'] ||
-                [op = 'undirectedResend'] ifTrue: [
-                    useLocs || [(locals includes: literal) not]
-                      ifTrue: [r1 add: "b value:" literal]
-                ]
-             ].
-            ] value.
-            r2: selectorFinder copyInterpretMethod: self.
-            r2 do: [|:sel| sel = '' ifFalse: [b value: sel]].
-            r2: r2 asSet remove: ''.
-            r1 = r2 ifFalse: [error: 'xxx'].
+
+            (selectorFinder copyInterpretMethod: self) do: [|:sel|
+              sel = '' ifFalse: [b value: sel].
+            ].
 
             literalsDo: [|:lit|
                 (reflect: lit) messagesDo: [|:m|
@@ -6220,62 +5310,6 @@ a copy of the original vector of literals.) -- Adam, 4/06\x7fModuleInfo: Module:
          objectIDName = ( |
             | 
             safeName).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'method' -> () From: ( | {
-         'Category: byte codes\x7fComment: invoke blk once per bytecode passing in:
-  byte code index (int),
-  opcode name (string),
-  literal value (oop),
-  next byte code index or zero (int)\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
-        
-         obsoleteBytecodesDo: blk = ( |
-             hasUndirectedResend <- bootstrap stub -> 'globals' -> 'false' -> ().
-             inx <- 0.
-             is.
-             lexLevel <- 0.
-             lits.
-            | 
-
-            [error: 'Obsoleted by abstractBytecodeIntepreter -- David Ungar May 2002'].
-
-            lits: literals.       "Cache it; will be used a lot."
-            is:   instructionSet. "Cache it; will be used a lot."
-            codes bytesDo: [|:bc. :bci.  op <- ''. literal <- ''. none = (). |
-              op: is opcodeNameOf: bc.
-              inx: inx || (bytecodeFormat indexOf: bc).
-              literal:
-                case
-                  if: [ (bci = 0) "ignore inst. set specifier"
-                  &&  [ bytecodeFormat isInstructionSetBytecode: bc ]]
-                      Then: [none]
-                  If: ['lexicalLevel'     = op] Then: [lexLevel: inx. none]
-                  If: ['index'            = op] Then: [none]
-                  If: ['send'             = op] Then: [lits at: inx]
-                  If: ['implicitSelfSend' = op] Then: [hasUndirectedResend ifTrue: [op: 'undirectedResend'.
-                                                                                    hasUndirectedResend: false].
-                                                       lits at: inx]
-                  If: ['undirectedResend' = op] Then: [hasUndirectedResend: true. none]
-                  If: ['literal'          = op] Then: [lits at: inx]
-                  If: ['readLocal'        = op] Then: [|j| j: lexLevel. lexLevel: 0. localReadSelectorLexicalLevel:  j Index: inx]
-                  If: ['writeLocal'       = op] Then: [|j| j: lexLevel. lexLevel: 0. localWriteSelectorLexicalLevel: j Index: inx]
-                  If: ['pushSelf'         = op] Then: ['self']
-                  If: ['delegatee'        = op] Then: [lits at: inx]
-                  If: ['nonlocalReturn'   = op] Then: nil "Force eval of blk on this op."
-                  If: ['pop'              = op] Then: nil "Force eval of blk on this op."
-                  If: ['branchAlways'     = op] Then: [lits at: inx]
-                  If: ['branchIfTrue'     = op] Then: [lits at: inx]
-                  If: ['branchIfFalse'    = op] Then: [lits at: inx]
-                  If: ['branchIndexed'    = op] Then: [lits at: inx]
-                  If: ['argumentCount'    = op] Then: [inx]
-                  Else: [none].
-              (none _Eq: literal) ifFalse: [| nextBCI <- 0. |
-                  bci succ < codes size ifTrue: [nextBCI: bci succ].
-                  blk value: bci With: op With: literal With: nextBCI.
-              ].
-              'index' = op ifTrue: [inx: inx << bytecodeFormat indexBitSize] False: [inx: 0].
-            ].
-            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrors' -> 'method' -> () From: ( | {
@@ -6909,6 +5943,7 @@ x = start, y = end
  '-- Sub parts'
 
  bootstrap read: 'metaCollections' From: 'core'
+ bootstrap read: 'mirrorProgramming' From: 'core'
 
 
 

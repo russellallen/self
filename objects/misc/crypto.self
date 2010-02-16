@@ -60,7 +60,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fModuleInfo: Module: crypto InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: cryptography\x7fModuleInfo: Module: crypto InitialContents: FollowSlot\x7fVisibility: public'
         
          rsa = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'rsa' -> () From: ( |
              {} = 'Comment: This is the substance in an RSA object.\x7fModuleInfo: Creator: globals rsa.

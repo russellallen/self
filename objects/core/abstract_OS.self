@@ -263,11 +263,27 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
+         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
+        
+         atEnd = ( |
+            | 
+            atEOF).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
          'Category: socket operations\x7fCategory: binding\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
         
          bindFamily: family Port: port Address: address = ( |
             | 
             bindFamily: family Port: port Address: address IfFail: raiseError).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
+         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: private'
+        
+         bufferPrototype = ( |
+            | 
+            mutableString).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
@@ -293,35 +309,6 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          connectFamily: family Port: port Address: address = ( |
             | 
             connectFamily: family Port: port Address: address IfFail: raiseError).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fCategory: entire file\x7fComment: Return contents of entire file as a string.\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         contents = ( |
-            | 
-            contentsAs: mutableString).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fCategory: entire file\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: private'
-        
-         contentsAs: proto = ( |
-             n <- 0.
-             res.
-            | 
-            n: size.
-            res: (proto copySize: n).
-            readInto: res Count: n. 
-            res).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fCategory: entire file\x7fComment: Return contents of entire file as a byte vector.\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         contentsAsByteVector = ( |
-            | 
-            contentsAs: byteVector).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
@@ -760,124 +747,6 @@ Return the expanded file name.\x7fModuleInfo: Module: abstract_OS InitialContent
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
          'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
         
-         read = ( |
-            | readMin: 1).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readCount: m = ( |
-            | 
-            readMin: m Max: m).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readCount: m IfFail: fb = ( |
-            | 
-            readMin: m Max: m IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readIfFail: fb = ( |
-            | 
-            readMin: 1 IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readInto: buf = ( |
-            | readInto: buf Min: 1).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readInto: buf Count: count = ( |
-            | readInto: buf Min: count Max: count).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readInto: buf Count: count At: i = ( |
-            | 
-            readInto: buf Min: count Max: count At: i).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readInto: buf Count: count IfFail: fb = ( |
-            | 
-            readInto: buf Min: count Max: count IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readInto: buf IfFail: fb = ( |
-            | 
-            readInto: buf Min: 1 IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readInto: buf Min: min = ( |
-            | 
-            readInto: buf Min: min Max: buf size).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readInto: buf Min: min At: i = ( |
-            | 
-            readInto: buf Min: min Max: buf size At: i).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readInto: buf Min: min At: i IfFail: fb = ( |
-            | 
-            readInto: buf Min: min Max: buf size At: i IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readInto: buf Min: min IfFail: fb = ( |
-            | 
-            readInto: buf Min: min  Max: buf size IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readInto: buf Min: min Max: max = ( |
-            | 
-            readInto: buf Min: min Max: max At: 0).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readInto: buf Min: min Max: max At: i = ( |
-            | 
-            readInto: buf Min: min Max: max At: i
-              IfFail: [ | :e | error: e Op: 'read' FileName: name ]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
          readInto: buf Min: min Max: max At: start IfFail: fb = ( |
              bytesRead <- 0.
              err.
@@ -889,14 +758,6 @@ Return the expanded file name.\x7fModuleInfo: Module: abstract_OS InitialContent
             ].
             err ifNotNil: [fb value: err]
                    IfNil: bytesRead).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readInto: buf Min: min Max: max IfFail: fb = ( |
-            | 
-            readInto: buf Min: min Max: max At: 0 IfFail: fb).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
@@ -917,67 +778,6 @@ Return the expanded file name.\x7fModuleInfo: Module: abstract_OS InitialContent
                 line: line, buf.
             ].
             line).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readMin: min = ( |
-            | readMin: min Max: 8 * 1024).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readMin: min IfFail: fb = ( |
-            | readMin: min  Max: 8 * 1024  IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readMin: min Max: max = ( |
-            | 
-            readMin: min  Max: max
-              IfFail: [ | :e | error: e Op: 'read' FileName: name ]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fComment: may return less than min if it reaches EOF\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readMin: min Max: max IfFail: fb = ( | {
-                 'ModuleInfo: Module: unix InitialContents: FollowSlot'
-                
-                 b.
-                }  {
-                 'ModuleInfo: Module: unix InitialContents: FollowSlot'
-                
-                 howMany <- 0.
-                } 
-            | 
-            b: mutableString copySize: max.
-            howMany: readInto: b Min: min Max: max IfFail: [ |:e| ^ fb value: e ].
-            howMany = max ifTrue: [b] False: [b copySize: howMany]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readOneChar = ( |
-            | 
-            (readCount: 1) first).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         readOneCharIfFail: fb = ( |
-            | 
-            "Note: 'readCount:IfFail:' eventually calls 'readMin:Max:IfFail:'
-             which may return FEWER than 'min' characters (in this case fewer
-             than one character) when EOF occurs. So we need to be careful when
-             attempting to extract the character, i.e., use 'at:IfAbsent:'."
-            (readCount: 1 IfFail: fb) at: 0 IfAbsent: fb).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
@@ -1138,48 +938,22 @@ be no other access; e.g., in stdin preemptReadLine\x7fModuleInfo: Module: abstra
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
+         'Category: reading\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: private'
+        
+         streamReadingMixin* = bootstrap stub -> 'globals' -> 'positionableStream' -> 'parent' -> 'readingMixin' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
+         'Category: writing\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: private'
+        
+         streamWritingMixin* = bootstrap stub -> 'globals' -> 'positionableStream' -> 'parent' -> 'writingMixin' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
          'Category: asyncIO\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
         
          suspendForIO = ( |
             | fileTableEntry wait.  self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: writing\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         write: buf = ( |
-            | writeFrom: buf Count: buf size).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: writing\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         write: buf IfFail: fb = ( |
-            | writeFrom: buf Count: buf size  IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: writing\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         writeFrom: buf Count: count = ( |
-            | writeFrom: buf Count: count Start: 0).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: writing\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         writeFrom: buf Count: count IfFail: fb = ( |
-            | 
-            writeFrom: buf Count: count Start: 0 IfFail: fb).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {
-         'Category: writing\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
-        
-         writeFrom: buf Count: count Start: start = ( |
-            | 
-            writeFrom: buf Count: count Start: start
-              IfFail: [ | :e | error: e Op: 'write' FileName: name ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( | {

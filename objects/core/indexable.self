@@ -404,6 +404,23 @@ at the end, and between every element in self.\x7fModuleInfo: Module: indexable 
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
+         'Category: substitution\x7fComment: Returns a copy of this collection, with any elements that
+satisfy the conditionBlk replaced with the result of
+running the replacementBlk.\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
+        
+         replaceAllSatisfying: conditionBlk With: replacementBlk = ( |
+             c.
+            | 
+            c: copy.
+            do: [|:v. :k|
+              (conditionBlk value: v With: k) ifTrue: [
+                c at: k Put: replacementBlk value: v With: k.
+              ].
+            ].
+            c).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
          'Category: substitution\x7fComment: Removes the range [start...end) from this collection
 and insert the specified new stuff in its place.\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
         

@@ -657,6 +657,15 @@ the result.\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVis
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'collection' -> () From: ( | {
          'Category: accessing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
         
+         ifNone: noneBlock = ( |
+            | 
+            isEmpty ifTrue: [^ noneBlock].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'collection' -> () From: ( | {
+         'Category: accessing\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+        
          ifNone: noneBlock IfOne: oneBlock IfMany: manyBlock = ( |
              soleElement.
             | 

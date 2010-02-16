@@ -210,6 +210,22 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
              (can mixin mixins identity if desired) ').
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> 'ordered' -> () From: ( | {
+         'ModuleInfo: Module: rootTraits InitialContents: FollowSlot\x7fVisibility: public'
+        
+         max: x = ( |
+            | 
+            > x ifTrue: [self] False: [x]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> 'ordered' -> () From: ( | {
+         'ModuleInfo: Module: rootTraits InitialContents: FollowSlot\x7fVisibility: public'
+        
+         min: x = ( |
+            | 
+            < x ifTrue: [self] False: [x]).
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> () From: ( | {
          'Category: standard\x7fModuleInfo: Module: rootTraits InitialContents: FollowSlot'
         

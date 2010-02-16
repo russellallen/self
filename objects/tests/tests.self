@@ -64,6 +64,8 @@ deltablue
 sicTests
 branchTests
 nicTests
+testSuite
+languageTests
 '.
         } | ) 
 
@@ -2094,6 +2096,7 @@ frame conversion of all frames.\x7fModuleInfo: Module: tests InitialContents: Fo
              sequenceTest.
              orderedSet unitTests run.
              traits indexable unitTests run.
+             traits byteVector unitTests run.
              traits universalSetOrDictionary unitTests run.
              messageTest.
              parserTest.
@@ -2142,6 +2145,7 @@ frame conversion of all frames.\x7fModuleInfo: Module: tests InitialContents: Fo
                 unwindProtectTest.
                 nlrInliningTest.
                 lowLevelTest.
+                resending run.
                 mirrorTest.
                 enumerationTest.
                 timeTest.
@@ -2695,6 +2699,8 @@ Return the result\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVi
  bootstrap read: 'sicTests' From: 'tests'
  bootstrap read: 'branchTests' From: 'tests'
  bootstrap read: 'nicTests' From: 'tests'
+ bootstrap read: 'testSuite' From: 'tests'
+ bootstrap read: 'languageTests' From: 'tests'
 
 
 

@@ -203,6 +203,12 @@ See the LICENSE file for license information.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstractBytecodeInterpreter' -> 'parent' -> 'bytecodes' -> 'abstract' -> 'parent' -> () From: ( | {
          'Category: testing\x7fModuleInfo: Module: absBCBytecodes InitialContents: FollowSlot\x7fVisibility: public'
         
+         isPop = bootstrap stub -> 'globals' -> 'false' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstractBytecodeInterpreter' -> 'parent' -> 'bytecodes' -> 'abstract' -> 'parent' -> () From: ( | {
+         'Category: testing\x7fModuleInfo: Module: absBCBytecodes InitialContents: FollowSlot\x7fVisibility: public'
+        
          isPushSelf = bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
@@ -1371,6 +1377,12 @@ SlotsToOmit: parent.
          'Category: testing\x7fModuleInfo: Module: absBCBytecodes InitialContents: FollowSlot\x7fVisibility: public'
         
          isExtended = bootstrap stub -> 'globals' -> 'true' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstractBytecodeInterpreter' -> 'parent' -> 'bytecodes' -> 'pop' -> 'parent' -> () From: ( | {
+         'Category: testing\x7fModuleInfo: Module: absBCBytecodes InitialContents: FollowSlot\x7fVisibility: public'
+        
+         isPop = bootstrap stub -> 'globals' -> 'true' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstractBytecodeInterpreter' -> 'parent' -> 'bytecodes' -> 'pop' -> 'parent' -> () From: ( | {
