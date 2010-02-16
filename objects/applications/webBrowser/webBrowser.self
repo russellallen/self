@@ -806,12 +806,12 @@ SlotsToOmit: parent prototype.
          buildImage = ( |
             | 
             case
-              if:   [ sourceURL suffix = 'gif' ]
+              if:   [ sourceURL suffix uncapitalizeAll = 'gif' ]
               Then: [ buildGIFImage ]
-
-              If:   [ sourceURL suffix = 'GIF' ]
-              Then: [ buildGIFImage ]
-
+              If:   [ sourceURL suffix uncapitalizeAll = 'jpg' ]
+              Then: [ buildJPGImageSource: (stripMimeHeader: sourceURL getContentsString) ]
+              If:   [ sourceURL suffix uncapitalizeAll = 'png' ]
+              Then: [ buildPNGImageSource: (stripMimeHeader: sourceURL getContentsString) ]
               If:   [ sourceURL suffix = 'xbm' ]
               Then: [ buildXBitmapImage ]
               Else: [ cannotBuildImage  ].
@@ -841,6 +841,8 @@ SlotsToOmit: parent prototype.
                              os unlink: tfn IfFail: []. ]
               If:   [ sourceURL suffix uncapitalizeAll = 'jpg' ]
               Then: [ buildJPEGImageSource: s ]
+              If:   [ sourceURL suffix uncapitalizeAll = 'png' ]
+              Then: [ buildPNGImageSource: s ]
               Else: [ cannotBuildImage ].
             self).
         } | ) 
@@ -853,6 +855,19 @@ SlotsToOmit: parent prototype.
             | 
             tfn: writeToTempFile: s. 
             setImage:  ui2Image copyFromJPEGFile: tfn. 
+            os unlink: tfn IfFail: [].
+            cacheMe.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'webImageMorph' -> 'parent' -> () From: ( | {
+         'Category: construction\x7fCategory: PNG\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot'
+        
+         buildPNGImageSource: s = ( |
+             tfn.
+            | 
+            tfn: writeToTempFile: s. 
+            setImage:  ui2Image copyFromPNGFile: tfn. 
             os unlink: tfn IfFail: [].
             cacheMe.
             self).
@@ -3362,7 +3377,7 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'htmlParser' -> 'entities' -> () From: ( | {
          'Category: cached state\x7fModuleInfo: Module: webBrowser InitialContents: InitializeToExpression: (nil)'
         
-         cachedCodes.
+         cachedCodes <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'htmlParser' -> 'entities' -> () From: ( | {
@@ -3374,7 +3389,7 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'htmlParser' -> 'entities' -> () From: ( | {
          'Category: cached state\x7fModuleInfo: Module: webBrowser InitialContents: InitializeToExpression: (nil)'
         
-         cachedRawCodes.
+         cachedRawCodes <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'htmlParser' -> 'entities' -> () From: ( | {
@@ -7147,7 +7162,7 @@ globals webBrowser htmlParser tags abstractFormatChanger. copy
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'requester' -> () From: ( | {
          'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: InitializeToExpression: (nil)'
         
-         socket.
+         socket <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'requester' -> () From: ( | {
@@ -7720,7 +7735,7 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'webPage' -> 'parent' -> () From: ( | {
          'Category: web page behavior\x7fModuleInfo: Module: webBrowser InitialContents: InitializeToExpression: (nil)'
         
-         defaultButtonHolder.
+         defaultButtonHolder <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'webPage' -> 'parent' -> () From: ( | {
@@ -7926,7 +7941,8 @@ Return result of whichever block.
          'Category: creation\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot\x7fVisibility: public'
         
          copyFromGIFFile: fileName = ( |
-            | copy readFromGIFFile: fileName).
+            | 
+            copy readUsingImageMagick: fileName Type: 'gif').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Image' -> () From: ( | {
@@ -7934,48 +7950,34 @@ Return result of whichever block.
         
          copyFromJPEGFile: fileName = ( |
             | 
-            copy readFromJPEGFile: fileName).
+            copy readUsingImageMagick: fileName Type: 'jpg').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Image' -> () From: ( | {
+         'Category: creation\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyFromPNGFile: fileName = ( |
+            | 
+            copy readUsingImageMagick: fileName Type: 'png').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Image' -> () From: ( | {
          'Category: creationSupport\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot\x7fVisibility: private'
         
-         readFromGIFFile: fileName = ( |
+         readUsingImageMagick: fileName Type: type = ( |
              cmd.
              r.
              tmpfn.
             | 
-            "hack for WWW -- dmu"
-            tmpfn: os_file temporaryFileName.
-            cmd: 'giftoppm ', fileName, ' 2> /dev/null  | ',
-                 'pnmtorast -standard 2> /dev/null  > ', tmpfn.
-            r:  os command: cmd
-                  ExecutingAll: ('giftoppm' & 'pnmtorast') asVector
-                  IfFail: [|:err| error: 'Command "', cmd, '" failed: ', err].
-            r != 0  ifTrue: [ error: 'Command "', cmd, '" returned ', r printString ].
-            readFromSunRasterFile: tmpfn.
-            os unlink: tmpfn IfFail: [].
-            self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Image' -> () From: ( | {
-         'Category: creationSupport\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot\x7fVisibility: private'
-        
-         readFromJPEGFile: fileName = ( |
-             cmd.
-             r.
-             tmpfn.
-            | 
-            "hack for WWW -- dmu"
-            tmpfn: os_file temporaryFileName.
-            cmd: 'alchemy -s ', fileName, ' ', tmpfn, '2> /dev/null'.
+            tmpfn: (os_file temporaryFileName),'.ras'.
+            cmd: 'convert ', type, ':', fileName, ' ', tmpfn.
             r: os command: cmd
-                  Executing: 'alchemy'
+                  Executing: 'convert'
                      IfFail: [|:err| error: 'Command "', cmd, '" failed: ', err].
             r = 0 ifFalse: [
               error: 'Command "', cmd, '" returned ', r printString.
             ].
-            readFromSunRasterFile: tmpfn, '2.rast'.
+            readFromSunRasterFile: tmpfn.
             os unlink: tmpfn IfFail: [].
             self).
         } | ) 

@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.10 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -496,7 +496,8 @@ SlotsToOmit: parent prototype.
              quantizing to avoid double-quantizing artifacts."
 
             (colorQuantizing &&
-             [paintMgr policy != paintMgr quantizingColors]) ifTrue: [
+             [paintMgr areColorsMapped &&
+             [paintMgr policy != paintMgr quantizingColors] ]) ifTrue: [
                 colors copy mapBy: [| :c | c copyRGBQuantized ].
             ] False: [
                 colors copy.
