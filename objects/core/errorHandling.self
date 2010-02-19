@@ -32,7 +32,7 @@ method performs a sanity check on an error message argument.\x7fModuleInfo: Modu
             mir isReflecteeString || [mir isReflecteeByteVector] ifTrue: [
                 ^ msg.
             ].
-            'message = ', mir objectID).
+            mir isComplete ifTrue: [ msg printString ] False: ['message = ', mir objectID]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'defaultBehavior' -> () From: ( | {

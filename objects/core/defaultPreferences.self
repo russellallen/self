@@ -163,15 +163,15 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
          'Category: user interface preferences (mostly for ui1)\x7fComment: Names of X fonts used in the ui.  Use \"xlsfonts\" in a
-	      shell to see which fonts are available.\x7fModuleInfo: Module: defaultPreferences InitialContents: InitializeToExpression: (\'Courier\')\x7fVisibility: public'
+	      shell to see which fonts are available.\x7fModuleInfo: Module: defaultPreferences InitialContents: InitializeToExpression: (\'lucidasanstypewriter\')\x7fVisibility: public'
         
-         editorFont <- 'Courier'.
+         editorFont <- 'lucidasanstypewriter'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
-         'Category: user interface preferences (mostly for ui1)\x7fComment: Size of code font in the ui.\x7fModuleInfo: Module: defaultPreferences InitialContents: InitializeToExpression: (13)\x7fVisibility: public'
+         'Category: user interface preferences (mostly for ui1)\x7fComment: Size of code font in the ui.\x7fModuleInfo: Module: defaultPreferences InitialContents: InitializeToExpression: (12)\x7fVisibility: public'
         
-         editorFontSize <- 13.
+         editorFontSize <- 12.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
