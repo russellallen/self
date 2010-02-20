@@ -4,7 +4,6 @@
    See the LICENSE file for license information. */
 
 # pragma implementation "itimer_unix.hh"
-
 # include "_itimer_unix.cpp.incl"
 
 
@@ -196,12 +195,21 @@ void IntervalTimerTick(int sig, self_code_info_t *info, self_sig_context_t *scp)
   if (SignalInterface::currentNonTimerSignal || SignalInterface::currentTimerSignal) {
     static bool haveWarned = false;
     if (!haveWarned) {
+# if TARGET_OS_VERSION == LINUX_VERSION
+      warning3("IntervalTimerTick: signal_handler cannot nest (only one interrupted context).\n"
+               "Received timer sig %d while in sig %d or timer sig %d.\n"
+               "MacOSX ApplicationEnhancer causes apps to get signals that should be blocked.",
+               sig, 
+               SignalInterface::currentNonTimerSignal,
+               SignalInterface::currentTimerSignal);
+# else
       warning6("IntervalTimerTick: signal_handler cannot nest (only one interrupted context).\n"
                "Received timer sig %d (sig%s) while in sig %d (sig%s) or timer sig %d (sig%s).\n"
                "MacOSX ApplicationEnhancer causes apps to get signals that should be blocked.",
                sig, sys_signame[sig],
                SignalInterface::currentNonTimerSignal, sys_signame[SignalInterface::currentNonTimerSignal],
                SignalInterface::currentTimerSignal, sys_signame[SignalInterface::currentTimerSignal]);
+# endif
       haveWarned = true;
     }
     return;
