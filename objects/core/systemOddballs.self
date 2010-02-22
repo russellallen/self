@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.12 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -815,7 +815,7 @@ set all code cache sizes relative to current values.\x7fModuleInfo: Module: syst
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'memory' -> 'snapshotOptionsPrototype' -> 'zcatCompressionFilters' -> () From: ( | {
          'ModuleInfo: Module: systemOddballs InitialContents: FollowSlot'
         
-         compression_filter = 'compress'.
+         compression_filter = 'gzip'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'memory' -> 'snapshotOptionsPrototype' -> 'zcatCompressionFilters' -> () From: ( | {
