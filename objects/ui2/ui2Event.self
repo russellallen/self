@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.24 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -457,6 +457,8 @@ Feel free to inherit me and override the ones you can implement.
             combo nonmodifierKeyCap isArrow ifTrue: [handleMediumArrowPress: combo IfCannot: b].
 
             combo nonmodifierKeyCap = keyCaps oddballs enter ifTrue: [^ acceptTextChanges: combo event].
+
+            combo nonmodifierKeyCap isPrintable ifTrue: [^combo nonmodifierKeyCap printString do: [|:c| insert_char: c]].
 
             b value).
         } | ) 
