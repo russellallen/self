@@ -569,7 +569,7 @@ Feel free to inherit me and override the ones you can implement.
         
          handlePressWithOptionDown: combo IfCannot: b = ( |
             | 
-            handlePressWithAltDown: combo IfCannot: b).
+            handlePressWithNoModifiers: combo IfCannot: b).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractUI2Event' -> 'editorKeyCapComboHandler' -> () From: ( | {
