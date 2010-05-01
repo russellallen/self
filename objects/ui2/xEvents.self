@@ -1,6 +1,6 @@
  '$Revision: 30.18 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -180,6 +180,17 @@ SlotsToOmit: parent.
         
          middleMouseMask = ( |
             | xlib events xInputEvent button2Mask).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( | {
+         'Category: keyboard Event Handling\x7fComment: On Linux keyboards where the keyboard
+is a non-USA layout, dealing with modifier keys
+causes problems. Disabled for now, to be reintroduced
+later. - rca 01-05-2010\x7fModuleInfo: Module: xEvents InitialContents: FollowSlot\x7fVisibility: private'
+        
+         modifierKeyCapsPressed = ( |
+            | 
+            set copyRemoveAll).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( | {
