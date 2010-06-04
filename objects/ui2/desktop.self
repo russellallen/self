@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.10 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -236,6 +236,8 @@ requested we not open by the \'-headless\' flag.\x7fModuleInfo: Module: desktop 
               restartSuppressedFlag: false. "Reset for next time"
               ^ self].
             worlds isEmpty ifFalse: [
+                "Reset the keyboard mappings for Linux"
+                traits ui2XEvent keySymMapper reset.
                 adjustVMParametersForBetterSpeed.
                 "reset the flag so that color problems are reported."
                  worlds do: [|:w| w reopen].

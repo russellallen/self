@@ -297,8 +297,6 @@ Result is a vector of byte vectors (each byte vector is an IP address).
             || [ ( host osName = 'macOSX' )
             || [   host osName = 'linux' ]]
               ifTrue: [ currentOsVariant: host osVariantName sendTo: osVariants ].
-
-            host osName = 'linux' ifTrue: [traits ui2XEvent keySymMapper reset].
             os_file initializeOsVariant.
             self).
         } | ) 
