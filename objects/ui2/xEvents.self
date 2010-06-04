@@ -161,6 +161,73 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( | {
+         'Category: keyboard Event Handling\x7fModuleInfo: Module: xEvents InitialContents: FollowSlot'
+        
+         keySymMapper = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui2XEvent' -> 'keySymMapper' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui2XEvent keySymMapper.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> 'keySymMapper' -> () From: ( | {
+         'ModuleInfo: Module: xEvents InitialContents: FollowSlot'
+        
+         keyCapFor: keySym = ( |
+            | 
+            keySym = 'Home'   ifTrue: [ ^ keyCaps oddballs home     ].
+            keySym = 'End'    ifTrue: [ ^ keyCaps oddballs end      ].
+
+            keySym = 'Down'   ifTrue: [ ^ keyCaps arrows  down  ].
+            keySym = 'Up'     ifTrue: [ ^ keyCaps arrows  up    ].
+            keySym = 'Left'   ifTrue: [ ^ keyCaps arrows  left  ].
+            keySym = 'Right'  ifTrue: [ ^ keyCaps arrows  right ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> 'keySymMapper' -> () From: ( | {
+         'ModuleInfo: Module: xEvents InitialContents: FollowSlot'
+        
+         keyCapForKeycode: keycode IfFail: failBlock = ( |
+            | 
+            map ifNil: [updateMap].
+            map at: keycode IfAbsent: failBlock value).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> 'keySymMapper' -> () From: ( | {
+         'ModuleInfo: Module: xEvents InitialContents: InitializeToExpression: (nil)'
+        
+         map <- bootstrap stub -> 'globals' -> 'nil' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> 'keySymMapper' -> () From: ( | {
+         'ModuleInfo: Module: xEvents InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'oddball' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> 'keySymMapper' -> () From: ( | {
+         'ModuleInfo: Module: xEvents InitialContents: FollowSlot'
+        
+         reset = ( |
+            | map: nil).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> 'keySymMapper' -> () From: ( | {
+         'ModuleInfo: Module: xEvents InitialContents: FollowSlot'
+        
+         updateMap = ( |
+             s.
+            | 
+            s: os outputOfCommand: 'xmodmap -pke' Delay: 500 IfFail: [0].
+            s: s asTokensSeparatedByCharactersIn: '\n'.
+            map: dictionary copy.
+            s do: [|:l. t |
+              t: (l asTokensSeparatedByWhiteSpace).
+              t size > 3 ifTrue: [
+                map at: (t at: 1) asInteger Put: (keyCapFor: t at: 3)
+              ]]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( | {
          'Category: stateMasks\x7fModuleInfo: Module: xEvents InitialContents: FollowSlot\x7fVisibility: public'
         
          leftMouseMask = ( |
@@ -180,17 +247,6 @@ SlotsToOmit: parent.
         
          middleMouseMask = ( |
             | xlib events xInputEvent button2Mask).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( | {
-         'Category: keyboard Event Handling\x7fComment: On Linux keyboards where the keyboard
-is a non-USA layout, dealing with modifier keys
-causes problems. Disabled for now, to be reintroduced
-later. - rca 01-05-2010\x7fModuleInfo: Module: xEvents InitialContents: FollowSlot\x7fVisibility: private'
-        
-         modifierKeyCapsPressed = ( |
-            | 
-            set copyRemoveAll).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( | {
@@ -438,20 +494,7 @@ later. - rca 01-05-2010\x7fModuleInfo: Module: xEvents InitialContents: FollowSl
               keycode = 132 ifTrue: [ ^ keyCaps oddballs  paste_cmd    ].
               keycode = 130 ifTrue: [ ^ keyCaps oddballs  cut_cmd      ].
 
-            ] False: [
-
-              keycode = 122 ifTrue: [ ^ keyCaps oddballs insert   ].
-              keycode = 124 ifTrue: [ ^ keyCaps oddballs pageUp   ].
-              keycode = 129 ifTrue: [ ^ keyCaps oddballs pageDown ].
-              keycode = 123 ifTrue: [ ^ keyCaps oddballs home     ].
-              keycode = 127 ifTrue: [ ^ keyCaps oddballs end      ].
-
-              keycode = 133 ifTrue: [ ^ keyCaps arrows  down  ].
-              keycode = 134 ifTrue: [ ^ keyCaps arrows  up    ].
-              keycode = 131 ifTrue: [ ^ keyCaps arrows  left  ].
-              keycode = 132 ifTrue: [ ^ keyCaps arrows  right ].
-
-            ].
+            ] False: [^ keySymMapper keyCapForKeycode: keycode IfFail: [nb value]].
 
             nb value).
         } | ) 

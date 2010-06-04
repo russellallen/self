@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.17 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -297,6 +297,8 @@ Result is a vector of byte vectors (each byte vector is an IP address).
             || [ ( host osName = 'macOSX' )
             || [   host osName = 'linux' ]]
               ifTrue: [ currentOsVariant: host osVariantName sendTo: osVariants ].
+
+            host osName = 'linux' ifTrue: [traits ui2XEvent keySymMapper reset].
             os_file initializeOsVariant.
             self).
         } | ) 
@@ -4148,21 +4150,6 @@ in the OS specific objects.\x7fModuleInfo: Creator: traits unixFile bsdAndSolari
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'linux' -> () From: ( | {
          'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
         
-         socketConstants = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'linux' -> 'socketConstants' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits unixFile osVariants linux socketConstants.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'linux' -> 'socketConstants' -> () From: ( | {
-         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
-        
-         bsdShared* = bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'bsd' -> 'socketConstants' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'linux' -> () From: ( | {
-         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
-        
          fcntls = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'linux' -> 'fcntls' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits unixFile osVariants linux fcntls.
 '.
@@ -4927,6 +4914,21 @@ in the OS specific objects.\x7fModuleInfo: Creator: traits unixFile bsdAndSolari
          setOwnerIfFail: fb = ( |
             | 
             fcntl: fcntls f_setown With: os getpid IfFail: fb).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'linux' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         socketConstants = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'linux' -> 'socketConstants' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants linux socketConstants.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'linux' -> 'socketConstants' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         bsdShared* = bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'bsd' -> 'socketConstants' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'linux' -> () From: ( | {
