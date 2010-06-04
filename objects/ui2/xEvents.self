@@ -503,7 +503,7 @@ SlotsToOmit: parent.
          'Category: keyboard Event Handling\x7fModuleInfo: Module: xEvents InitialContents: FollowSlot\x7fVisibility: private'
         
          x11KeyCapsPressed = ( |
-            | vector copyAddFirst: x11KeyCapPressedIfNone: [^ vector]).
+            | vector copyAddFirst: x11KeyCapPressedIfNone: [vector]).
         } | ) 
 
 
