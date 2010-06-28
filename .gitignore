@@ -2,6 +2,7 @@
 *.o
 *~
 *.snap
+*.old
 Self
 bin/linux/AddTrailingNewline
 bin/linux/UpdateFiles
