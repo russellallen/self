@@ -237,7 +237,6 @@ requested we not open by the \'-headless\' flag.\x7fModuleInfo: Module: desktop 
               ^ self].
             worlds isEmpty ifFalse: [
                 "Reset the keyboard mappings for Linux"
-                traits ui2XEvent keySymMapper reset.
                 adjustVMParametersForBetterSpeed.
                 "reset the flag so that color problems are reported."
                  worlds do: [|:w| w reopen].

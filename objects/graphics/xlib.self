@@ -1,6 +1,6 @@
  '$Revision: 30.16 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -1355,6 +1355,17 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
+         'Category: lookup\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         lookupKeySym = ( |
+             v.
+            | 
+            v: vector copySize: 1.
+            lookupStringKeySymVector: v.
+            v first).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
          'Category: lookup\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          lookupString = ( |
@@ -1410,9 +1421,33 @@ evaluate \'ksBlk\' on the keysym.\x7fModuleInfo: Module: xlib InitialContents: F
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
+         'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         xk_Alt_L = 65513.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
+         'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         xk_Alt_R = 65514.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
          'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          xk_BackSpace = 65288.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
+         'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         xk_Control_L = 65507.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
+         'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         xk_Control_R = 65508.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
@@ -1677,6 +1712,30 @@ evaluate \'ksBlk\' on the keysym.\x7fModuleInfo: Module: xlib InitialContents: F
          'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          xk_Right = 65363.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
+         'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         xk_Shift_L = 65505.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
+         'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         xk_Shift_R = 65506.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
+         'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         xk_Super_L = 65515.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
+         'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         xk_Super_R = 65516.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {

@@ -29,6 +29,12 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstractUI2Event' -> () From: ( | {
+         'ModuleInfo: Module: ui2Event InitialContents: InitializeToExpression: (0)'
+        
+         keySym <- 0.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstractUI2Event' -> () From: ( | {
          'ModuleInfo: Module: ui2Event InitialContents: FollowSlot\x7fVisibility: public'
         
          keycode <- 0.

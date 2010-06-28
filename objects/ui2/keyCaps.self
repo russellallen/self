@@ -1,6 +1,6 @@
  '$Revision: 30.4 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -594,6 +594,21 @@ See the LICENSE file for license information.
         
          printString = ( |
             | character).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'keyCaps' -> () From: ( | {
+         'ModuleInfo: Module: keyCaps InitialContents: FollowSlot'
+        
+         unknown = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'keyCaps' -> 'unknown' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals keyCaps unknown.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'keyCaps' -> 'unknown' -> () From: ( | {
+         'ModuleInfo: Module: keyCaps InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'globals' -> 'keyCaps' -> 'oddballs' -> 'abstract' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
