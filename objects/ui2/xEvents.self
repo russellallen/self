@@ -157,74 +157,32 @@ SlotsToOmit: parent.
              bs.
             | 
             bs: resend.keyCapsPressed.
-            bs isEmpty ifFalse: [bs] True: [x11KeyCapsPressed]).
+            bs isEmpty ifFalse: [bs] True: [vector copyAddFirst: keySym]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( | {
          'Category: keyboard Event Handling\x7fModuleInfo: Module: xEvents InitialContents: FollowSlot'
         
-         keySymMapper = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui2XEvent' -> 'keySymMapper' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits ui2XEvent keySymMapper.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> 'keySymMapper' -> () From: ( | {
-         'ModuleInfo: Module: xEvents InitialContents: FollowSlot'
-        
-         keyCapFor: keySym = ( |
+         keySymFrom: xEvt = ( |
+             k.
             | 
-            keySym = 'Home'   ifTrue: [ ^ keyCaps oddballs home     ].
-            keySym = 'End'    ifTrue: [ ^ keyCaps oddballs end      ].
+            k: xEvt lookupKeySym.
 
-            keySym = 'Down'   ifTrue: [ ^ keyCaps arrows  down  ].
-            keySym = 'Up'     ifTrue: [ ^ keyCaps arrows  up    ].
-            keySym = 'Left'   ifTrue: [ ^ keyCaps arrows  left  ].
-            keySym = 'Right'  ifTrue: [ ^ keyCaps arrows  right ]).
-        } | ) 
+            k =  xEvt xk_Left     ifTrue: [ ^ keyCaps arrows  left  ].
+            k =  xEvt xk_Up       ifTrue: [ ^ keyCaps arrows  up    ].
+            k =  xEvt xk_Right    ifTrue: [ ^ keyCaps arrows  right ].
+            k =  xEvt xk_Down     ifTrue: [ ^ keyCaps arrows  down  ].
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> 'keySymMapper' -> () From: ( | {
-         'ModuleInfo: Module: xEvents InitialContents: FollowSlot'
-        
-         keyCapForKeycode: keycode IfFail: failBlock = ( |
-            | 
-            map ifNil: [updateMap].
-            map at: keycode IfAbsent: failBlock value).
-        } | ) 
+            k =  xEvt xk_Shift_L    ifTrue: [ ^ keyCaps oddballs shift   ].
+            k =  xEvt xk_Shift_R    ifTrue: [ ^ keyCaps oddballs shift   ].
+            k =  xEvt xk_Control_L  ifTrue: [ ^ keyCaps oddballs control ].
+            k =  xEvt xk_Control_R  ifTrue: [ ^ keyCaps oddballs control ].
+            k =  xEvt xk_Alt_L      ifTrue: [ ^ keyCaps oddballs alt     ].
+            k =  xEvt xk_Alt_R      ifTrue: [ ^ keyCaps oddballs alt     ].
+            k =  xEvt xk_Super_L    ifTrue: [ ^ keyCaps oddballs command ].
+            k =  xEvt xk_Super_R    ifTrue: [ ^ keyCaps oddballs command ].
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> 'keySymMapper' -> () From: ( | {
-         'ModuleInfo: Module: xEvents InitialContents: InitializeToExpression: (nil)'
-        
-         map <- bootstrap stub -> 'globals' -> 'nil' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> 'keySymMapper' -> () From: ( | {
-         'ModuleInfo: Module: xEvents InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'oddball' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> 'keySymMapper' -> () From: ( | {
-         'ModuleInfo: Module: xEvents InitialContents: FollowSlot'
-        
-         reset = ( |
-            | map: nil).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> 'keySymMapper' -> () From: ( | {
-         'ModuleInfo: Module: xEvents InitialContents: FollowSlot'
-        
-         updateMap = ( |
-             s.
-            | 
-            s: os outputOfCommand: 'xmodmap -pke' Delay: 500 IfFail: [0].
-            s: s asTokensSeparatedByCharactersIn: '\n'.
-            map: dictionary copy.
-            s do: [|:l. t |
-              t: (l asTokensSeparatedByWhiteSpace).
-              t size > 3 ifTrue: [
-                map at: (t at: 1) asInteger Put: (keyCapFor: t at: 3)
-              ]]).
+            keyCaps unknown).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( | {
@@ -399,6 +357,7 @@ SlotsToOmit: parent.
             state:      xEvt state.
             keycode:    xEvt keycode.
             keystrokes: xEvt lookupString.
+            keySym:     keySymFrom: xEvt.
             self).
         } | ) 
 
@@ -453,57 +412,6 @@ SlotsToOmit: parent.
         
          shiftMask = ( |
             | xlib events xInputEvent shiftMask).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( | {
-         'Category: keyboard Event Handling\x7fModuleInfo: Module: xEvents InitialContents: FollowSlot\x7fVisibility: private'
-        
-         x11KeyCapPressedIfNone: nb = ( |
-            | 
-            host hasSolaris ifTrue: [
-              "Arrow keys"
-              keycode =  88  ifTrue: [ ^ keyCaps arrows  down ].
-              keycode =  87  ifTrue: [ ^ keyCaps arrows  left ].
-              keycode =  89  ifTrue: [ ^ keyCaps arrows  up   ].
-              keycode =  86  ifTrue: [ ^ keyCaps arrows  right].
-
-              "Arrow keys on numerical pad"
-              keycode =  97  ifTrue: [ ^ keyCaps arrows  down ].
-              keycode =  99  ifTrue: [ ^ keyCaps arrows  left ].
-              keycode = 103  ifTrue: [ ^ keyCaps arrows  up   ].
-              keycode = 101  ifTrue: [ ^ keyCaps arrows  right].
-
-              "The combination arrow keys on the numerical pad"
-              keycode = 102 ifTrue: [ ^ keyCaps arrows  upLeft    ].
-              keycode = 104 ifTrue: [ ^ keyCaps arrows  upRight   ].
-              keycode =  96 ifTrue: [ ^ keyCaps arrows  downLeft  ].
-              keycode =  98 ifTrue: [ ^ keyCaps arrows  downRight ].
-
-              keycode =  80 ifTrue: [ ^ keyCaps oddballs insert   ].
-              keycode =  82 ifTrue: [ ^ keyCaps oddballs pageUp   ].
-              keycode =  85 ifTrue: [ ^ keyCaps oddballs pageDown ].
-              keycode =  81 ifTrue: [ ^ keyCaps oddballs home     ].
-              keycode =  84 ifTrue: [ ^ keyCaps oddballs end      ].
-
-              "Undo Cut Copy and Paste keys"
-
-              "Note- Undo isn't implemented yet.  Calling it will cause"
-              "the system to printLine a message saying so"
-              keycode = 129 ifTrue: [ ^ keyCaps oddballs  undo_cmd     ].
-              keycode = 131 ifTrue: [ ^ keyCaps oddballs  copy_cmd     ].
-              keycode = 132 ifTrue: [ ^ keyCaps oddballs  paste_cmd    ].
-              keycode = 130 ifTrue: [ ^ keyCaps oddballs  cut_cmd      ].
-
-            ] False: [^ keySymMapper keyCapForKeycode: keycode IfFail: [nb value]].
-
-            nb value).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( | {
-         'Category: keyboard Event Handling\x7fModuleInfo: Module: xEvents InitialContents: FollowSlot\x7fVisibility: private'
-        
-         x11KeyCapsPressed = ( |
-            | vector copyAddFirst: x11KeyCapPressedIfNone: [vector]).
         } | ) 
 
 
