@@ -1342,8 +1342,8 @@ SlotsToOmit: parent.
             at: 83  Put: traits xlib events xInputEvent controlMask "control")
             at: 127 Put: traits xlib events xInputEvent mod1Mask    "meta_left")
             at: 129 Put: traits xlib events xInputEvent mod1Mask    "meta_right")
-            at: 20  Put: traits xlib events xInputEvent mod2Mask    "alt_graph")
-            at: 105 Put: traits xlib events xInputEvent mod3Mask    "num_lock")
+            at: 20  Put: traits xlib events xInputEvent mod2Mask    "num_lock")
+            at: 105 Put: traits xlib events xInputEvent mod3Mask    "command_mask")
             at: 26  Put: traits xlib events xInputEvent mod4Mask    "alt").
         } | ) 
 
@@ -1655,9 +1655,21 @@ evaluate \'ksBlk\' on the keysym.\x7fModuleInfo: Module: xlib InitialContents: F
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
+         'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         xk_KP_Down = 65433.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
          'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          xk_KP_Enter = 65421.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
+         'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         xk_KP_Left = 65430.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
@@ -1667,9 +1679,21 @@ evaluate \'ksBlk\' on the keysym.\x7fModuleInfo: Module: xlib InitialContents: F
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
+         'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         xk_KP_Right = 65432.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
          'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          xk_KP_Subtract = 65453.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {
+         'Category: kb constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         xk_KP_Up = 65431.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xKeyEvent' -> () From: ( | {

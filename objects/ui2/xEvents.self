@@ -131,7 +131,8 @@ SlotsToOmit: parent.
          'Category: stateMasks\x7fModuleInfo: Module: xEvents InitialContents: FollowSlot\x7fVisibility: public'
         
          commandMask = ( |
-            | xlib events xInputEvent mod2Mask).
+            | 
+            xlib events xInputEvent mod3Mask).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( | {
@@ -173,6 +174,11 @@ SlotsToOmit: parent.
             k =  xEvt xk_Right    ifTrue: [ ^ keyCaps arrows  right ].
             k =  xEvt xk_Down     ifTrue: [ ^ keyCaps arrows  down  ].
 
+            k =  xEvt xk_KP_Left   ifTrue: [ ^ keyCaps arrows  left  ].
+            k =  xEvt xk_KP_Up     ifTrue: [ ^ keyCaps arrows  up    ].
+            k =  xEvt xk_KP_Right  ifTrue: [ ^ keyCaps arrows  right ].
+            k =  xEvt xk_KP_Down   ifTrue: [ ^ keyCaps arrows  down  ].
+
             k =  xEvt xk_Shift_L    ifTrue: [ ^ keyCaps oddballs shift   ].
             k =  xEvt xk_Shift_R    ifTrue: [ ^ keyCaps oddballs shift   ].
             k =  xEvt xk_Control_L  ifTrue: [ ^ keyCaps oddballs control ].
@@ -211,7 +217,8 @@ SlotsToOmit: parent.
          'Category: stateMasks\x7fModuleInfo: Module: xEvents InitialContents: FollowSlot\x7fVisibility: public'
         
          numLockMask = ( |
-            | xlib events xInputEvent mod3Mask).
+            | 
+            xlib events xInputEvent mod2Mask).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( | {
