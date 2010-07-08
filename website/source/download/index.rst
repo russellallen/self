@@ -1,7 +1,7 @@
 Download
 ========
 
-The current version is Self 4.4 Beta 1.  
+The current version is Self 4.4 Release Candidate 1.  
 
 To use Self you will need two parts - the Self virtual machine and a snapshot of a Self world.  The Self virtual machine is available for Mac OS X and for Linux.
 
@@ -10,11 +10,11 @@ To use Self you will need two parts - the Self virtual machine and a snapshot of
 -------------------
 
 
-Linux - `Self-4.4.beta1.tar.gz <http://selflanguage.org/files/releases/4.4/beta1/Self-4.4.beta1.tar.gz>`_
+Linux - `Self-4.4.tar.gz <http://selflanguage.org/files/releases/4.4/rc1/Self-4.4.tar.gz>`_
 
 On Linux run the INSTALL.sh shell script.  This will install the VM in /usr/share/self/0/ and add a symbolic link to it at /usr/bin/Self.
 
-Mac OS X - `Self-4.4.beta1.pkg <http://selflanguage.org/files/releases/4.4/beta1/Self-4.4.beta1.pkg>`_
+Mac OS X - `Self-4.4.pkg <http://selflanguage.org/files/releases/4.4/rc1/Self-4.4.pkg>`_
 
 On Mac OS X run the 'Self.pgk' installer.  This will install the VM and Droplet in /Library/Self/0/ and add a small shell script at /usr/bin/Self.
 
@@ -25,11 +25,11 @@ On Mac OS X run the 'Self.pgk' installer.  This will install the VM and Droplet 
 
 Self worlds are self-contained sets of objects that implement GUIs, web servers, command lines etc. Each world can be saved in a 'snapshot', which is like a Smalltalk image and can be interacted with by opening the snapshot with the VM.  Self worlds can be built from scratch from the sources - see below for download instructions.  For convenience, we provide here two different snapshots:
 
-`Clean.snap <http://selflanguage.org/files/releases/4.4/beta1/Clean-4.4.beta1.snap>`_
+`Clean.snap <http://selflanguage.org/files/releases/4.4/rc1/Clean-4.4.snap>`_
 
 The 'Clean' snapshot contains a clean base set of objects suitable for investigating the Morphic GUI and for developing on.
 
-`Demo.snap <http://selflanguage.org/files/releases/4.4/beta1/Demo-4.4.beta1.snap>`_
+`Demo.snap <http://selflanguage.org/files/releases/4.4/rc1/Demo-4.4.snap>`_
 
 The 'Demo' snapshot starts from the Clean snapshot and adds the Smalltalk subsystem and an interactive tutorial to familiarise yourself with the Morphic user interface.
 
@@ -65,7 +65,7 @@ The official source repository for 4.3 and earlier is the `Sourceforge CVS tree 
 Older Versions
 --------------
 
-Alpha versions of 4.4 are `available for download <http://selflanguage.org/files/>`_ .
+Alpha and Beta versions of 4.4 are `available for download <http://selflanguage.org/files/>`_ .
 
 The previous version of Self was 4.3.  You can download Self 4.3 for Mac OS X and for Sparc Solaris.
 
