@@ -616,7 +616,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( ((root rawMorphs at: 5) rawMorphs at: 0) rawMorphs at: 0 ) baseMinHeight: 10.
 ( ((root rawMorphs at: 5) rawMorphs at: 0) rawMorphs at: 0 ) baseMinWidth: 10.
 ( ((root rawMorphs at: 5) rawMorphs at: 0) rawMorphs at: 0 ) depressedColor: paint copyRed: 0.934506 Green: 0.875855  Blue: 0.772238.
-( ((root rawMorphs at: 5) rawMorphs at: 0) rawMorphs at: 0 ) isAsynchronous: false.
+( ((root rawMorphs at: 5) rawMorphs at: 0) rawMorphs at: 0 ) isAsynchronous: true.
 ( ((root rawMorphs at: 5) rawMorphs at: 0) rawMorphs at: 0 ) rawIsGrayedOut: false.
 ( ((root rawMorphs at: 5) rawMorphs at: 0) rawMorphs at: 0 ) rawState: 'up'.
 ( ((root rawMorphs at: 5) rawMorphs at: 0) rawMorphs at: 0 ) script: '    [ | displayName |
