@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.10 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -941,9 +941,11 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
                                    ' for font ', fullName) printLine.
                                   ]. "too much kvetching"
                                   wc display loadFont: substituteName IfFail: [
-                                      error: 'could not load substitute font: ', substituteName.
+                                    "Try anything!"
+                                     wc display loadFont: '*' IfFail: [
+                                        error: 'could not load substitute font: ', substituteName.
                                      ^nil
-                              ].
+                              ]].
                     ].
                 fontStructs at: fSpec Put: fontStruct.
                 fontStruct
