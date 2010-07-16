@@ -4,6 +4,7 @@ Welcome to Self
 News
 ----
 
+* Self 4.4 is released! - `download now <download/index.html>`_.  (16 July 2010)
 * Self 4.4 Release Candidate 1 is released - `download now <download/index.html>`_.  Final soon.  (8 July 2010)
 * Self 4.4 Beta 1 is released - `download now <download/index.html>`_.  We look forward to help and feedback.  (10 March 2010)
 * `From the blog: <http://blog.selflanguage.org/2009/09/29/announcing-the-self-handbook/>`_ Announcing the Self Handbook (30 September 2009)
