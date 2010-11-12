@@ -1,6 +1,6 @@
  '$Revision: 30.30 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -1170,19 +1170,17 @@ draw the morphs from the given list that intersect the given
 rectangle onto the given canvas.\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: private'
         
          drawMorphs: mList Intersecting: r On: aCanvas Offset: offset = ( |
-             fill.
              morphsToDraw.
              redrawBoxes.
             | 
             morphsToDraw: list copyRemoveAll.
             redrawBoxes:  list copyRemoveAll.
-            fill: filterMorphsIn: mList
-                    Intersecting: r
-                            Into: morphsToDraw
-                 RedrawBoxesInto: redrawBoxes
-                          Offset: offset.
-
-            fill ifTrue: [ aCanvas fillRectangle: r Color: color ].
+             filterMorphsIn: mList
+               Intersecting: r
+                       Into: morphsToDraw
+            RedrawBoxesInto: redrawBoxes
+                     Offset: offset.
+            aCanvas fillRectangle: r Color: color.
             morphsToDraw with: redrawBoxes ReverseDo: [| :m. :rBox |
                aCanvas redrawBox:  rBox.
                 m drawOn: aCanvas.
@@ -1236,14 +1234,11 @@ simply lands on the world.\x7fModuleInfo: Module: worldMorph InitialContents: Fo
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
          'Category: running\x7fCategory: private\x7fCategory: step process\x7fComment: Support for efficient incremental display update. The given list of morphs
 is scanned for morphs that intersect the given damage rectangle. Such
-morphs are appended to morphsToDraw. Scanning terminates if any morph
-completely fills the given rectangle, since morphs behind this morph are
-completely obscured. On the other hand, if a morph is itself completely
+morphs are appended to morphsToDraw. If a morph is itself completely
 enclosed by the rectangle, there is nothing to be gained by pruning the
 drawing of its submorphs to the given rectangle; this fact is recorded
 by appending nil to redrawBoxes (versus the pruning box). This method
-returns a boolean indicating whether the background is visible (true)
-or completely obscured by some morph.\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: private'
+puts the morphs to be drawn into the morphsToDraw list and the pruningBoxes into the redrawBoxes list.\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: private'
         
          filterMorphsIn: mList Intersecting: r Into: morphsToDraw RedrawBoxesInto: redrawBoxes Offset: offset = ( |
              pruningBox.
@@ -1256,15 +1251,9 @@ or completely obscured by some morph.\x7fModuleInfo: Module: worldMorph InitialC
                     redrawBoxes  add:
                         "nil means draw entire morph; otherwise, append the box for pruning"
                         ((r enclosesOrEquals: mBnds) ifTrue: nil False: pruningBox).
-                    (m isRectangular && [m noStickOuts && [mBnds enclosesOrEquals: r]]) ifTrue: [
-                        "m completely fills the given rectangle, hiding the morphs behind
-                         it and covering the background as well"
-                        ^ false.
-                    ].
                 ].
             ].
-            "if we get here, no morph fills the rectangle, so the background may show"
-            true).
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
@@ -1863,7 +1852,7 @@ oldGlobalBounds. \x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
          parent* = bootstrap stub -> 'traits' -> 'morph' -> ().
         } | ) 
 
-bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
          'Category: window management\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
         
          platformSpecificNameFor: displayName = ( |
@@ -1872,6 +1861,7 @@ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( |
             displayName == 'quartz' ifTrue: [^ ''].
             displayName).
         } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
          'Category: structure\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: private'
         
