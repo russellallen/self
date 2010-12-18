@@ -8,10 +8,10 @@ Welcome to Self
 .. toctree::
    :maxdepth: 1
 
-   Download Self <download/index>
-   Browse Self Documentation <documentation/index>
-   Discuss Self with other users <discuss/index>
-   Follow links to other useful information <links/index>
+   Download <download/index>
+   Documentation <documentation/index>
+   Mailing list and IRC <discuss/index>
+   `Blog <http://blog.selflanguage.org>`_
    
 .. raw:: html
 

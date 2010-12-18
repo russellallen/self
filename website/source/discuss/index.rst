@@ -9,4 +9,4 @@ self-interest-unsubscribe@yahoogroups.com.
 
 An `archive of pre-2009 posts to the list <http://tech.groups.yahoo.com/group/self-interest/>`_ is available.
 
-
+You can also catch us on Freenode IRC channel #self-lang
