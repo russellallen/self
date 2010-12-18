@@ -96,7 +96,6 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          subpartNames <- '
              init
 	     allCore
-	     allGraphics
 	     crypto
 	     primitiveMaker
 	     allTests
@@ -108,8 +107,6 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  '-- Sub parts'
 
  bootstrap read: 'allCore' From: 'core'
- bootstrap read: 'allGraphics' From: 'graphics'
- "bootstrap read: 'allUI' From: 'ui1'"
  bootstrap read: 'crypto' From: 'misc'
  bootstrap read: 'primitiveMaker' From: 'glue'
  bootstrap read: 'allTests' From: 'tests'
