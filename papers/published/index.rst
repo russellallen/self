@@ -50,6 +50,7 @@ User Interface
     use-mention
     object-focus
     self4.0UserInterface
+    directness
             
 Type inference and application extraction
 -----------------------------------------
