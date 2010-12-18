@@ -8,7 +8,7 @@ Welcome to Self
    Documentation <documentation/index>
    Mailing list and IRC <discuss/index>
 
-Self News at `our Blog <http://blog.selflanguage.org>`_
+Self news, now at `our Blog <http://blog.selflanguage.org>`_!
       
 Self is a prototype-based dynamic object-oriented programming language, environment, and virtual machine centered around the principles of simplicity, uniformity, concreteness, and liveness. 
 
