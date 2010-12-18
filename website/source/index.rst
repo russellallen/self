@@ -1,22 +1,15 @@
 Welcome to Self
 ===============
 
-.. raw:: html
-
-   <!--
-
 .. toctree::
    :maxdepth: 1
 
    Download <download/index>
    Documentation <documentation/index>
    Mailing list and IRC <discuss/index>
-   `Blog <http://blog.selflanguage.org>`_
-   
-.. raw:: html
 
-   -->
-   
+Self News at `our Blog <http://blog.selflanguage.org>`_
+      
 Self is a prototype-based dynamic object-oriented programming language, environment, and virtual machine centered around the principles of simplicity, uniformity, concreteness, and liveness. 
 
 Self includes a programming language, a collection of objects defined in the Self language, and a programming environment built in Self for writing Self programs. The language and environment attempt to present objects to the programmer and user in as direct and physical a way as possible. The system uses the prototype-based style of object construction.
