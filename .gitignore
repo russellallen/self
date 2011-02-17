@@ -39,6 +39,7 @@ vm/linux/generated/Objs.zone
 vm/linux/generated/Platform_linux
 vm/linux/generated/Tags
 vm/linux/generated/glueCheckSum
+vm/linux/generated/glueFileList
 vm/linux/generated/incls/_precompiled.hh
 vm/linux/generated/includeDB
 vm/linux/optimized/Self

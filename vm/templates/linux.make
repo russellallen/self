@@ -20,18 +20,18 @@ SRC_PATH = ${ROOT}/vm/${VM_SUBDIR}/generated/incls \
 	   $(SRC_DIRS:%=${ROOT}/vm/src/%)
 
 #ASM_FILTER    = | removeUnderscore | sed 's;//.*;;'
-GLUE_LD_FLAGS = -G
+GLUE_LD_FLAGS = -G -m32
 VPATH        += $(SRC_PATH:%=%:)
 CPP           = /usr/bin/cpp
 
-XLIBLIBDIRS = -L/usr/lib
+XLIBLIBDIRS = 
 CLIBS = -lstdc++ -lnsl -lc
 # no -lsocket
 
 
 # link termcap and ucb statically to avoid having to mess with LD_LIBRARY_PATH
 #OS_GLUE_LIBS = /usr/ucblib/libtermcap.a /usr/ucblib/libucb.a -lm
-OS_GLUE_LIBS =   /usr/lib/libncurses.a -lm -lpthread
+OS_GLUE_LIBS = -lncurses -lm -lpthread
 
 # precomp headers for  Linux
 # _precompiled.hh is in generated/incls, _precomiped.gch is in debug, optimized, etc.
@@ -56,7 +56,7 @@ CONFIGDEFS = \
              -DMANUFACTURER=${MANUFACTURER}
 
 INCLUDE_PRECOMP = -include _precompiled.hh
-GNUFLAGS +=  -fno-exceptions -ffriend-injection -Winvalid-pch -fno-stack-protector
+GNUFLAGS +=  -m32 -fno-exceptions -ffriend-injection -Winvalid-pch -fno-stack-protector
 
 INCLUDES += -I/usr/include -I/usr/include/X11 -I/usr/lib/c++/4.1
 

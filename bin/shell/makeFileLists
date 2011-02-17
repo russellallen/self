@@ -62,7 +62,7 @@ echo '${AOUT} files: ${PATCHED_OBJS}'   >> $dep
 echo '${AOUT}:' `cat $allobjs` '${GLUE_LIBS}' >> $dep
 echo -n '	@lock_run _$@.lock' "'" >> $dep
 echo ' echo Compiling vmDate ; \' 	>> $dep
-echo '	make_vmDate; ${AS} vmDate.s -o vmDate.o; \'>> $dep
+echo '	make_vmDate; ${AS} ${ASFLAGS} vmDate.s -o vmDate.o; \'>> $dep
 echo '	check_locks ; \' 		>> $dep
 echo '	echo Linking $@ ; \' 		>> $dep
 echo '	rm -rf $@ cleanLocks; \' 	>> $dep   # if disk space is tight...
