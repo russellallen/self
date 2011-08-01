@@ -5,6 +5,7 @@ The Self Handbook
 :Release: |release|
 :Date: |today|
 
+
 Edited by Russell Allen.
 
 Authors (in alphabetical order): Ole Agesen, Lars Bak, Craig Chambers, Bay-Wei Chang, Urs Hölzle, John Maloney, Randall B. Smith, David Ungar and Mario Wolczko.

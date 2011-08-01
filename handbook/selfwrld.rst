@@ -16,8 +16,6 @@ the use of traits objects and prototype objects, and the organizing principles o
 discussed in :ref:`[UCC91] <citations>`.
 
 .. toctree::
-   :maxdepth: 2
-   :numbered:
 
    worldorg.rst
    roots.rst
