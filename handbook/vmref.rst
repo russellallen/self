@@ -346,6 +346,8 @@ The Self World)
 
 **Table 1 Objects in the initial Self world**
 
+.. tabularcolumns:: p{5cm} p{10cm}  
+
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Object               |         Description                                                                                                                                                                            |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -353,6 +355,8 @@ The Self World)
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 *Objects in the lobby*
+
+.. tabularcolumns:: p{5cm} p{10cm}  
 
 +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
 | shell              |        After reading in the world, shell is the context in which expressions typed in at the prompt are evaluated.                                |
@@ -363,6 +367,8 @@ The Self World)
 +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
 
 *Objects in systemObjects*
+
+.. tabularcolumns:: p{5cm} p{10cm}   
 
 +--------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | nil                |           The initializer for slots that are not explicitly initialized. Indicates “not a useful object.”                                                                                                                                  |
@@ -396,6 +402,8 @@ The Self World)
    single:  block
 
 *Literals and their parents*
+
+.. tabularcolumns:: p{5cm} p{10cm}   
 
 +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | integers           |           Integers have one slot, a parent slot called parent. All integers have the same parent: see 0 parent, below.                                                                                                                                                    |                                
@@ -438,6 +446,8 @@ Prototypical mirrors
 
 All of the prototypical mirrors consist of one slot, a parent slot named parent. Each of
 these parent slots points to an empty object (denoted in Figure 5 by “( )”).
+
+.. tabularcolumns:: p{5cm} p{10cm}   
 
 +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 |    smiMirror                            |      Prototypical mirror on a small integer; the reflectee is 0.                                                      |
@@ -511,6 +521,8 @@ primitive ``_PrintOptionPrimitives.``
 
 
 **Table 2 Some useful option primitives**
+
+.. tabularcolumns:: p{5cm} p{10cm}  
 
 +----------------------------+-----------------------------------------------------------------------------------+
 |  Name                      |   Description                                                                     |
@@ -1158,6 +1170,8 @@ C or C++ value:
 
 **Table 3 : Argument conversions - from Self to C/C++**
 
+.. tabularcolumns:: p{2cm} p{2cm} p{2cm} p{2cm} p{3cm} p{2cm} 
+
 ================= ====================== ================================= ================= ============================================================== =========  
 Conversion        Second part            Self type                         C/C++ type        Errors                                                         Notes    
 ================= ====================== ================================= ================= ============================================================== =========
@@ -1176,6 +1190,13 @@ signed_long                              smallInt                          signe
 unsigned_long                            smallInt                          unsigned long     badSignError                                                            
 smi                                      smallInt                          smi               badTypeError                                                   2        
 unsigned_smi                             smallInt                          smi               badSignError badTypeError                                      2        
+================= ====================== ================================= ================= ============================================================== =========  
+
+.. tabularcolumns:: p{2cm} p{2cm} p{2cm} p{2cm} p{3cm} p{2cm} 
+
+================= ====================== ================================= ================= ============================================================== =========  
+Conversion        Second part            Self type                         C/C++ type        Errors                                                         Notes    
+================= ====================== ================================= ================= ============================================================== =========
 float                                    float                             float             badTypeError                                                   3        
 double                                   float                             double            badTypeError                                                   3        
 long_double                              float                             long double       badTypeError                                                   3        
@@ -1269,6 +1290,8 @@ column contains references to numbered notes. The notes are found in the paragra
 the table.  
 
 **Table 4 : Result conversions - from C/C++ to Self**
+
+.. tabularcolumns:: p{2cm} p{2cm} p{2cm} p{2cm} p{2cm} p{2cm} 
 
 +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
 |  Conversion            | Second part                       |  C/C++ type     |  Self type      |  Errors            |  Notes    |

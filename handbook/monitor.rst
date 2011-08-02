@@ -19,6 +19,8 @@ The following table lists the individual indicators:
 
 **Table 5 The system monitor display: indicators**
 
+.. tabularcolumns:: p{5cm} p{10cm} 
+
 ===============   ====================================================================================================
 CPU               Bar What It Means
 ===============   ====================================================================================================
@@ -34,6 +36,8 @@ Dot               Below the CPU bar is a small dot which moves whenever a proces
 ===============   ====================================================================================================
 
 \ 
+
+.. tabularcolumns:: p{5cm} p{10cm} 
 
 ===============  ===================================================================================================
 Indicator        What It Means
@@ -64,6 +68,8 @@ form, as described below:
 
 **Table 6 VM memory status information**
 
+.. tabularcolumns:: p{5cm} p{10cm} 
+
 ===============  ===================================================================================================
 Name             Description
 ===============  ===================================================================================================
@@ -79,6 +85,8 @@ to the actual sizes of the memory spaces. The next table explains the details of
 monitor’s display.
 
 **Table 7 The system monitor display: memory status**
+
+.. tabularcolumns:: p{5cm} p{10cm} 
 
 ===============  =============================================================================================================
 Space            Description
@@ -103,6 +111,8 @@ code cache       These four bars represent the cache holding compiled methods wi
 ===============  =============================================================================================================       
 
 \ 
+
+.. tabularcolumns:: p{5cm} p{10cm} 
 
 =====  ==========================================
 Color  Meaning
