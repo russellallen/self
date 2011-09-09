@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.19 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -12,7 +12,7 @@ See the LICENSE file for license information.
         
          < m = ( |
             | 
-            name < m name).
+            nameOrNone < m nameOrNone).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {
@@ -534,12 +534,28 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
         
          name = ( |
             | 
+            nameIfAbsent: [error: 'module object: ', objectID, ' has no name ']).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {
+         'Category: naming\x7fModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: public'
+        
+         nameIfAbsent: failBlock = ( |
+            | 
             (reflect: self) creatorSlotIfPresent: [|:s| s name ] IfAbsent: [
               "Fallback strategy; enumerate all slots in 'modules'"
               (reflect: modules) findFirst: [|:s| s contents = (reflect: self)]
                                  IfPresent: [|:s| s name]
-                                 IfAbsent: [error: 'module object: ', objectID, 
-                                                   ' has no name ']]).
+                                 IfAbsent:  failBlock
+            ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {
+         'Category: naming\x7fModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: public'
+        
+         nameOrNone = ( |
+            | 
+            nameIfAbsent: 'noName').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {
