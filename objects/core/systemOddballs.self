@@ -140,10 +140,8 @@ it should be the only thing that does.\x7fModuleInfo: Module: systemOddballs Ini
         
          doGarbageCollect = ( |
             | 
-            userQuery showEverybody: 'Collecting Garbage' While: [
-              _GarbageCollect.
-              _ZombieProcesses do: [|:p| p abortIfLive: 'doGarbageCollect' ].
-            ]).
+            _GarbageCollect.
+            _ZombieProcesses do: [|:p| p abortIfLive: 'doGarbageCollect' ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'memory' -> () From: ( | {
