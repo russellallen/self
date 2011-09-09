@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.11 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -245,7 +245,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          methodHolderString = ( |
             | 
-            methodHolder ifNil: [ '' ] IfNotNil: [
+            nil == methodHolder ifTrue: [ '' ] False: [
              '\nSending method holder is ', (reflect: methodHolder) safeName, '.']).
         } | ) 
 
