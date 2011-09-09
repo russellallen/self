@@ -862,8 +862,8 @@ Bool list::compareLists(register list* s, database* cur, database* prev) {
 void list::add(list* s) {
   register item* i = new item(s);
   // next two statements are for debugging
-  if (  i->next     )    { printf("next %x\n", (unsigned)i->next);      Plat.abort();}
-  if ( !i->contents )    { printf("c = %x\n",  (unsigned)i->contents);  Plat.abort();}
+  if (  i->next     )    { printf("next %p\n", i->next);      Plat.abort();}
+  if ( !i->contents )    { printf("c = %p\n",  i->contents);  Plat.abort();}
   
   if (last)   last->next = i;
   else             first = i;

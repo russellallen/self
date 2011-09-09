@@ -79,12 +79,12 @@ else
   LINK.gnu = CC  -norunpath 
 endif
 
-COMPILE.gnu.o	  = ${COMPILE.gnu} ${CFLAGS}    -c
-COMPILE.gnu.o.nog = ${COMPILE.gnu} ${CFLAGSnog} -c
-COMPILE.gnu.s	  = ${COMPILE.gnu} ${CFLAGS} -S
-COMPILE.gnu.i	  = ${COMPILE.gnu} ${CFLAGS} -E
+COMPILE.gnu.o	  = ${COMPILE.gnu} ${GNUFLAGS} ${CFLAGS}    -c
+COMPILE.gnu.o.nog = ${COMPILE.gnu} ${GNUFLAGS} ${CFLAGSnog} -c
+COMPILE.gnu.s	  = ${COMPILE.gnu} ${GNUFLAGS} ${CFLAGS} -S
+COMPILE.gnu.i	  = ${COMPILE.gnu} ${GNUFLAGS} ${CFLAGS} -E
 
-ASFLAGS =
+ASFLAGS = --32
 ifeq (${COMPILER}, GCC_COMPILER)
  COMPILE1.s = ${COMPILE.gnu.i} -xc++
 else
@@ -133,7 +133,7 @@ ifeq (${COMPILER}, GCC_COMPILER)
     # LD = PURIFYOPTIONS="-HOME=$(PURELINKHOME)" \
     #      ${GCC} ${CC_PURELINK_OPTS} ${LDFLAGS}
   else
-    LDFLAGS += ${LIBDIRS} -e start -dc -dp
+    LDFLAGS += ${LIBDIRS} -e start -dc -dp -m32
     # Get gcc to call ld directly
     # for Jaguar:
     LD = ${GCC} -B/usr/bin/ ${LDFLAGS}

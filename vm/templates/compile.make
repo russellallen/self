@@ -124,6 +124,7 @@ glue.o: glue.cpp
 	@lock_run _$@.lock " \
 		echo Linking $@; \
 		ld ${GLUE_LD_FLAGS} -o $@ $< ${EXTRA_LIBS} ${$*_libs}; \
+		ld ${GLUE_LD_FLAGS} -o $@ $< ${EXTRA_LIBS} ${$*_libs}; \
 	"
 
 # Creating patched sigaction
