@@ -108,6 +108,29 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             process this perspective: h. r).
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'process' -> () From: ( | {
+         'Category: creating\x7fModuleInfo: Module: perspectives InitialContents: FollowSlot\x7fVisibility: private'
+        
+         initialize: msg CauseOfBirth: cob = ( |
+            | 
+            setProcessStatus:         processStatus newborn.
+            onQueue:                  noQueue.
+            basicSetPriority:         defaultInitialPriority.
+            wakeTime:                 times real.
+            birthMessage:             msg statePrintString.
+            causeOfBirth:             cob.
+            deathWaiters:             barrier copy.
+            suspensionWaiters:        barrier copy.
+            (suspensionWaiters = nil) ifTrue: [halt. "Should never happen. If it does, find out why. This is an attempt to catch a strange GC bug. Ausch - 10/04"].
+            stackShot:                list copyRemoveAll.
+            filesToShow:              preferences filesToShow copy.
+            setPerProcessGlobalsFrom: process this.
+            perspective:              process this perspective.
+            resetTiming.
+            suspend.
+            self).
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'string' -> () From: ( | {
          'Category: perspectives\x7fModuleInfo: Module: perspectives InitialContents: FollowSlot'
         

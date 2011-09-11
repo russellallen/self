@@ -1,7 +1,7 @@
  'Sun-$Revision: 30.16 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -745,28 +745,6 @@ doubled again for profiling Klein -- ads 6/04\x7fModuleInfo: Module: process Ini
             | 
             = scheduler schedulerProcess
                ifFalse: blk True: [error: 'cannot single-step scheduler process']).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'process' -> () From: ( | {
-         'Category: creating\x7fModuleInfo: Module: process InitialContents: FollowSlot\x7fVisibility: private'
-        
-         initialize: msg CauseOfBirth: cob = ( |
-            | 
-            setProcessStatus:         processStatus newborn.
-            onQueue:                  noQueue.
-            basicSetPriority:         defaultInitialPriority.
-            wakeTime:                 times real.
-            birthMessage:             msg statePrintString.
-            causeOfBirth:             cob.
-            deathWaiters:             barrier copy.
-            suspensionWaiters:        barrier copy.
-            (suspensionWaiters = nil) ifTrue: [halt. "Should never happen. If it does, find out why. This is an attempt to catch a strange GC bug. Ausch - 10/04"].
-            stackShot:                list copyRemoveAll.
-            filesToShow:              preferences filesToShow copy.
-            setPerProcessGlobalsFrom: process this.
-            resetTiming.
-            suspend.
-            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'process' -> () From: ( | {
