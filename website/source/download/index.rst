@@ -1,7 +1,17 @@
 Download
 ========
 
-The current version is Self 4.4.  
+Summary for the impatient
+-------------------------
+
+VM: `Linux <http://selflanguage.org/files/releases/4.4/Self-4.4.tar.gz>`_, `Mac OS X <http://selflanguage.org/files/releases/4.4/Self-4.4.pkg>`_
+
+Snapshot: `Current Development Version <http://selflanguage.org/files/Self-Latest-Unstable.snap>`_, `4.4 Release <http://selflanguage.org/files/releases/4.4/Clean-4.4.snap>`_
+
+Explanations
+------------
+
+The most recent version is Self 4.4.  
 
 To use Self you will need two parts - the Self virtual machine and a snapshot of a Self world.  The Self virtual machine is available for Mac OS X and for Linux.
 
