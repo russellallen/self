@@ -1595,18 +1595,20 @@ May cause me to expand if doExpand is true. -- dmu 10/04\x7fModuleInfo: Module: 
          'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
         
          preferredHeaderColor = ( |
+             s.
             | 
+            s: preferences outliner currentHeaderColorScheme.
             ((reflect: referrent) includesKey: 'mirror') ifTrue: [| m | 
                 m: referrent mirror.
-                m isReflecteeFloat   ifTrue: [^ paint named: 'forest'].
-                m isReflecteeInteger ifTrue: [^ paint named: 'azure'].
-                m isReflecteeString  ifTrue: [^ paint named: 'purple'].   
+                m isReflecteeFloat   ifTrue: [^ s float].
+                m isReflecteeInteger ifTrue: [^ s integer].
+                m isReflecteeString  ifTrue: [^ s string].   
                 m creatorPathIfPresent: [|:p| 
-                    p first = 'traits' ifTrue: [^ paint named: 'royal'].
-                    p first = 'mixins' ifTrue: [^ paint named: 'leaf']]
-                  IfAbsent: [ ^ paint named: 'lightGray' ].
-                paint named: 'teal']
-               False: [ paint named: 'darkGray' ]).
+                    p first = 'traits' ifTrue: [^ s traits].
+                    p first = 'mixins' ifTrue: [^ s mixins]]
+                  IfAbsent: [ ^ s unnamed ].
+                ^ s named]
+               False: [ ^ s unusual ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {

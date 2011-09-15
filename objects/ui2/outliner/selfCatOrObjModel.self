@@ -1,7 +1,7 @@
  '$Revision: 30.11 $'
  '
-Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -90,6 +90,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          subpartNames <- 'selfCategoryModel
 selfObjectModel
 '.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> () From: ( | {
+         'Comment: When set to true, outliners will
+use the experimental Kevo-like
+mode and will show all parent slots.\x7fModuleInfo: Module: selfCatOrObjModel InitialContents: InitializeToExpression: (false)'
+        
+         kevooidal <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
@@ -225,9 +233,10 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfCatOrObjModel' -> 'parent' -> () From: ( | {
-         'Category: kevo-oidal option: fold parents in\x7fModuleInfo: Module: selfCatOrObjModel InitialContents: InitializeToExpression: (false)'
+         'Category: kevo-oidal option: fold parents in\x7fModuleInfo: Module: selfCatOrObjModel InitialContents: FollowSlot'
         
-         kevooidal <- bootstrap stub -> 'globals' -> 'false' -> ().
+         kevooidal = ( |
+            | preferences outliner kevooidal).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfCatOrObjModel' -> 'parent' -> () From: ( | {
