@@ -1,6 +1,6 @@
  '$Revision: 30.38 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -488,7 +488,7 @@ globals generalModel parent buttonDescriptions. _Clone
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalProcessModel' -> 'parent' -> () From: ( | {
          'Category: command buttons\x7fModuleInfo: Module: pluggableDebugger InitialContents: FollowSlot\x7fVisibility: private'
         
-         commandButtonFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'helvetica' copyMutable Size: 12 Style: 'bold') From: ( |
+         commandButtonFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'verdana' copyMutable Size: 12 Style: 'bold') From: ( |
              {} = 'Comment: I am an abstract, portable, description of a font.
 I am also immutable.\x7fModuleInfo: Creator: globals generalProcessModel parent commandButtonFontSpec.
 \x7fIsComplete: '.
@@ -1036,7 +1036,7 @@ SlotsToOmit: parent.
             | 
             b: ui2Button copy.
             b label: lblScript x
-              FontSpec: (fontSpec copyName: 'helvetica' Style: 'bold')
+              FontSpec: (fontSpec copyName: 'verdana' Style: 'bold')
               FontColor: myOutliner color textColorForBackground.
             ((b script: lblScript y) target: self) isAsynchronous.
             b).

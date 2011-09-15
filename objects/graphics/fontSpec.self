@@ -1,6 +1,6 @@
  '$Revision: 30.6 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -15,6 +15,12 @@ See the LICENSE file for license information.
 I am also immutable.\x7fModuleInfo: Creator: globals fontSpec.
 \x7fIsComplete: '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'fontSpec' -> () From: ( | {
+         'Category: state\x7fComment: One of \'sans\', \'serif\', \'mono\'\x7fModuleInfo: Module: fontSpec InitialContents: FollowSlot'
+        
+         fGenericFamily = 'sans'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'fontSpec' -> () From: ( | {
@@ -120,6 +126,20 @@ I am also immutable.\x7fModuleInfo: Creator: globals fontSpec.
             ( name = x name )
             && [ ( style = x style )
             && [   size  = x size ] ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'fontSpec' -> 'parent' -> () From: ( | {
+         'Category: accessors\x7fModuleInfo: Module: fontSpec InitialContents: FollowSlot'
+        
+         generic = ( |
+            | fGenericFamily).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'fontSpec' -> 'parent' -> () From: ( | {
+         'Category: mutators\x7fModuleInfo: Module: fontSpec InitialContents: FollowSlot'
+        
+         generic: aString = ( |
+            | fGenericFamily: aString).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'fontSpec' -> 'parent' -> () From: ( | {

@@ -1,6 +1,6 @@
  '$Revision: 30.14 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -316,6 +316,8 @@ Return true if I do.\x7fModuleInfo: Module: sliceGroupOutliner InitialContents: 
             | 
             resend.initialize.
             beFlexibleHorizontally.
+            "removeMorph: lastMorph."
+            lastMorph colorAll: paint copyRandom.
             isLazy ifFalse: [
               "Hack: I need to prebuild the morphs for
               my (expanded) body so that subobjects can be added to me"

@@ -1,6 +1,6 @@
  '$Revision: 30.9 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -185,7 +185,7 @@ wants to write a snapshot first.  Valid responses:
             | 
             "memory quickCleanup." "OS X is so fast..."
             userQuery showEverybody: 'Writing snapshot to ', memory snapshotOptions fileName
-                              While: [ times delay: 100. "graphics update time"
+                              While: [ times delay: 500. "graphics update time"
                                        memory writeSnapshot  ].
             self).
         } | ) 

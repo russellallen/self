@@ -1,6 +1,6 @@
  '$Revision: 30.18 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -288,7 +288,6 @@ use hold  for mac menu
             commentEditor borderWidth: 1.
             addMorphToTop: commentEditor.
             commentButton open.
-            colorAll: color.
             self).
         } | ) 
 
@@ -404,7 +403,7 @@ boxedItems.\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot
         
          buildBody = ( |
             | 
-            body: rowMorph copy color: color.
+            body: rowMorph copy color: preferredColor.
             body  borderWidth: 0.
             body  baseMinHeight: 0.
             body  beFlexible.
@@ -446,8 +445,20 @@ boxedItems.\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot
          buildHeader = ( |
             | 
             header: rowMorph copy removeAllMorphs beFlexible borderWidth: 0.
+            header borderWidth: 4.
             fillInHeader.
             header).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {
+         'Category: building\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot'
+        
+         buildSpacer = ( |
+            | 
+            morph copy
+              beRigidHorizontally
+              beFlexibleVertically
+              setWidth: 2).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {
@@ -889,11 +900,14 @@ Same for collapse:, expandAll: collapseAll: -- dmu 4/1\x7fModuleInfo: Module: pl
         
          fillInHeader = ( |
             | 
+            header addMorphLast: buildSpacer.
             header addMorphLast: buildExpander.
+            header addMorphLast: buildSpacer.
             header addMorphLast: buildTitle.
+            header addMorphLast: buildSpacer.
             addCommentButtonToHeader.
             addButtonsToHeader.
-            header colorAll: preferredColor.
+            header colorAll: preferredHeaderColor.
             self).
         } | ) 
 
@@ -1153,6 +1167,13 @@ Same for collapse:, expandAll: collapseAll: -- dmu 4/1\x7fModuleInfo: Module: pl
         
          preferredColor = ( |
             | model preferredColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {
+         'Category: plug-in operations\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot'
+        
+         preferredHeaderColor = ( |
+            | model preferredHeaderColor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {

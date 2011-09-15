@@ -1,6 +1,6 @@
  '$Revision: 30.15 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -315,7 +315,6 @@ But some children use the updating mechanism instead.\x7fModuleInfo: Module: out
               ].
               safelyDo: [
                 addBodyMorph.
-                colorAll: color. "dave's experiment"
               ].
             ].
             self).
@@ -397,7 +396,7 @@ Hack for asynchronous buttons: start script with an \"A\"\x7fModuleInfo: Module:
             columnUnderHeader: newColumnUnderHeader.
             addMorphLast: columnUnderHeader.
             addMorphFirst: buildHeader.
-            colorAll: preferredColor. 
+            color: preferredColor. 
             self).
         } | ) 
 
@@ -502,6 +501,7 @@ outliner has non-items that might be counterfactual.\x7fModuleInfo: Module: outl
             c leftJustify.
             c borderWidth: 0.
             c baseMinHeight: 0.
+            c color: preferredColor.
             c).
         } | ) 
 
@@ -872,7 +872,7 @@ Overridden to get a different header.\x7fModuleInfo: Module: outliner InitialCon
 each type of outliner remembers its own
 default menu button, from the previous time.\x7fModuleInfo: Module: outliner InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
-         defaultButtonHolder <- bootstrap stub -> 'globals' -> 'nil' -> ().
+         defaultButtonHolder.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'nonpluggableOutliner' -> () From: ( | {
@@ -1039,6 +1039,14 @@ Would not override.\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\
          preferredColor = ( |
             | 
             preferences color).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'nonpluggableOutliner' -> () From: ( | {
+         'Category: preferences (override for variation)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
+        
+         preferredHeaderColor = ( |
+            | 
+            preferences headerColor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'nonpluggableOutliner' -> () From: ( | {
@@ -1485,13 +1493,8 @@ and an commentButtonMorph in the commentButton slot.
             commentEditor frameStyle: insetBezelStyle.
             commentEditor borderWidth: 1.
             commentEditor receiver: receiver.
-            "   commentMorph copyString: commentHolder comment
-                                Target: self
-                                Accept: acceptAction
-                                 Style: preferences commentStyle."
             safelyDo: [ columnUnderHeader addMorphFirst: commentEditor ].
             commentButton open.
-            colorAll: color.
             self).
         } | ) 
 

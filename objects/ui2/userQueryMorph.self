@@ -1,6 +1,6 @@
  '$Revision: 30.14 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -348,15 +348,49 @@ for user reponses are added via buttonLabel:Result:.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'userQueryMorph' -> () From: ( | {
+         'Category: query construction\x7fModuleInfo: Module: userQueryMorph InitialContents: FollowSlot'
+        
+         copyQuestionForNotice: queryText = ( |
+             c.
+             mphs.
+             new.
+            | 
+            new: copyRemoveAllMorphs beShrinkWrap.
+            new colorAll: paint copyRed: 0 Green: 0 Blue: 0 Alpha: 0.7.
+            new doneSema: (doneSema copyCount: 0 Capacity: 1).
+            mphs: list copyRemoveAll.
+            (queryText asTextLines) do: [| :line |
+                mphs add:
+                    (labelMorph copyLabel: line
+                                 FontSpec: defaultFontSpec
+                                    Color: defaultFontColor).
+            ].
+            mphs add: spacerMorph copyV: 10 Color: color.
+            new buttonExpressions: buttonExpressions copyRemoveAll.
+            new buttonRow:    (rowMorph    copy beFlexible borderWidth: 0).
+            new widgetColumn: (columnMorph copy beFlexible borderWidth: 0).
+            new widgetColumn baseMinWidth:  0.
+            new widgetColumn baseMinHeight: 0.
+            new buttonRow addMorph: spacerMorph copy beFlexible.
+            mphs add: new widgetColumn.
+            mphs add: spacerMorph copyV: 5 Color: color.
+            mphs add: new buttonRow.
+            c: columnMorph copy beFlexible borderWidth: 20.
+            c addAllMorphs: mphs.
+            new addMorph: c.
+            new).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'userQueryMorph' -> () From: ( | {
          'Category: default fonts\x7fModuleInfo: Module: userQueryMorph InitialContents: InitializeToExpression: (paint named: \'black\')\x7fVisibility: private'
         
          defaultFontColor <- paint named: 'black'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'userQueryMorph' -> () From: ( | {
-         'Category: default fonts\x7fModuleInfo: Module: userQueryMorph InitialContents: InitializeToExpression: (fontSpec copyName: \'times\' Size: 14 Style: \'bold\')\x7fVisibility: private'
+         'Category: default fonts\x7fModuleInfo: Module: userQueryMorph InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 14 Style: \'bold\')\x7fVisibility: private'
         
-         defaultFontSpec <- fontSpec copyName: 'times' Size: 14 Style: 'bold'.
+         defaultFontSpec <- fontSpec copyName: 'verdana' Size: 14 Style: 'bold'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'userQueryMorph' -> () From: ( | {
@@ -501,7 +535,7 @@ for user reponses are added via buttonLabel:Result:.
          show: showText Event: evt = ( |
              qm.
             | 
-            qm: copyQuestion: showText.
+            qm: copyQuestionForNotice: showText.
             qm popUpWhereEventHappened: evt.
             qm drawAttention.
             qm).
@@ -528,7 +562,7 @@ for user reponses are added via buttonLabel:Result:.
             qms: list copyRemoveAll.
             desktop worldsDo: [| :w |
               w winCanvases do: [| :c. qm |
-                qm: copyQuestion: showText.
+                qm: copyQuestionForNotice: showText.
                 qm popUpInWorld: w
                          Canvas: c
                              At: c boundingBoxInWorld center + everybodyOffset.

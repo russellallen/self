@@ -1,6 +1,6 @@
  '$Revision: 30.7 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -50,7 +50,7 @@ See the LICENSE file for license information.
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          fontSpec = ( |
-            | globals fontSpec copyName: 'times' Size: mediumFontSize Style: 'italic').
+            | globals fontSpec copyName: 'verdana' Size: mediumFontSize Style: 'italic').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'categoryOutlinerPreferences' -> () From: ( | {
@@ -100,7 +100,7 @@ See the LICENSE file for license information.
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          fontSpec = ( |
-            | resend.fontSpec copyName: 'times' Style: '').
+            | resend.fontSpec copyName: 'verdana' Style: '').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'copyDownSlotOutlinerPreferences' -> 'privateSlotStyle' -> () From: ( | {
@@ -122,7 +122,7 @@ See the LICENSE file for license information.
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          fontSpec = ( |
-            | resend.fontSpec copyName: 'times' Style: 'bold').
+            | resend.fontSpec copyName: 'verdana' Style: 'bold').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'copyDownSlotOutlinerPreferences' -> 'publicSlotStyle' -> () From: ( | {
@@ -145,7 +145,7 @@ See the LICENSE file for license information.
         
          fontSpec = ( |
             | 
-            resend.fontSpec copyName: 'helvetica' Size: mediumFontSize Style: '').
+            resend.fontSpec copyName: 'verdana' Size: mediumFontSize Style: '').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'copyDownSlotOutlinerPreferences' -> 'undeclaredSlotStyle' -> () From: ( | {
@@ -176,7 +176,7 @@ See the LICENSE file for license information.
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          fontSpec = ( |
-            | resend.fontSpec copyName: 'times'  Style: '').
+            | resend.fontSpec copyName: 'verdana'  Style: '').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'debuggerPreferences' -> 'buttonStyle' -> () From: ( | {
@@ -290,7 +290,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          fontSpec = ( |
-            | globals fontSpec copyName: 'times' Size: largeFontSize Style: 'bold').
+            | globals fontSpec copyName: 'verdana' Size: largeFontSize Style: 'bold').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'objectOutlinerPreferences' -> () From: ( | {
@@ -387,7 +387,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> 'commentButtonStyle' -> () From: ( | {
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         fontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'helvetica' Size: 8 Style: 'bold') From: ( |
+         fontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'verdana' Size: 8 Style: 'bold') From: ( |
              {} = 'Comment: I am an abstract, portable, description of a font.
 I am also immutable.\x7fModuleInfo: Creator: globals outlinerPreferences commentButtonStyle fontSpec.
 \x7fIsComplete: '.
@@ -414,7 +414,7 @@ I am also immutable.\x7fModuleInfo: Creator: globals outlinerPreferences comment
         
          fontSpec = ( |
             | 
-            globals fontSpec copyName: 'helvetica' Size: smallFontSize Style: '').
+            globals fontSpec copyName: 'verdana' Size: smallFontSize Style: '').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> 'commentStyle' -> () From: ( | {
@@ -458,11 +458,18 @@ default font size or style.\x7fModuleInfo: Module: outlinerPreferences InitialCo
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> () From: ( | {
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         headerButtonFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'helvetica' Size: 8 Style: 'bold') From: ( |
+         headerButtonFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'verdana' Size: 8 Style: 'bold') From: ( |
              {} = 'Comment: I am an abstract, portable, description of a font.
 I am also immutable.\x7fModuleInfo: Creator: globals outlinerPreferences headerButtonFontSpec.
 \x7fIsComplete: '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         headerColor = ( |
+            | paint copyRandom).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> () From: ( | {
@@ -500,9 +507,9 @@ I am also immutable.\x7fModuleInfo: Creator: globals outlinerPreferences headerB
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> () From: ( | {
-         'ModuleInfo: Module: outlinerPreferences InitialContents: InitializeToExpression: (fontSpec copyName: \'times\' Size: 11 Style: \'\')'
+         'ModuleInfo: Module: outlinerPreferences InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 11 Style: \'\')'
         
-         myFontSpec <- fontSpec copyName: 'times' Size: 11 Style: ''.
+         myFontSpec <- fontSpec copyName: 'verdana' Size: 11 Style: ''.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> () From: ( | {
@@ -643,7 +650,7 @@ good for introducing language semantics, say.
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          fontSpec = ( |
-            | resend.fontSpec copyName: 'times' Style: '').
+            | resend.fontSpec copyName: 'verdana' Style: '').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotOutlinerPreferences' -> 'privateSlotStyle' -> () From: ( | {
@@ -665,7 +672,7 @@ good for introducing language semantics, say.
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          fontSpec = ( |
-            | resend.fontSpec copyName: 'times' Style: 'bold').
+            | resend.fontSpec copyName: 'verdana' Style: 'bold').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotOutlinerPreferences' -> 'publicSlotStyle' -> () From: ( | {
@@ -694,7 +701,7 @@ good for introducing language semantics, say.
         
          fontSpec = ( |
             | 
-            globals fontSpec copyName: 'helvetica' Size: mediumFontSize Style: '').
+            globals fontSpec copyName: 'verdana' Size: mediumFontSize Style: '').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotOutlinerPreferences' -> 'undeclaredSlotStyle' -> () From: ( | {

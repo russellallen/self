@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.12 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -352,7 +352,7 @@ SlotsToOmit: baseMinHeight baseMinWidth parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Button' -> () From: ( | {
          'Category: events\x7fModuleInfo: Module: ui2Button InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
-         defaultButtonHolder <- bootstrap stub -> 'globals' -> 'nil' -> ().
+         defaultButtonHolder.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Button' -> () From: ( | {
@@ -362,9 +362,9 @@ SlotsToOmit: baseMinHeight baseMinWidth parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Button' -> () From: ( | {
-         'Category: construction\x7fModuleInfo: Module: ui2Button InitialContents: InitializeToExpression: (globals fontSpec copyName: \'times\' Size: 14)\x7fVisibility: public'
+         'Category: construction\x7fModuleInfo: Module: ui2Button InitialContents: InitializeToExpression: (globals fontSpec copyName: \'verdana\' Size: 14)\x7fVisibility: public'
         
-         defaultFontSpec <- globals fontSpec copyName: 'times' Size: 14.
+         defaultFontSpec <- globals fontSpec copyName: 'verdana' Size: 14.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Button' -> () From: ( | {
@@ -625,7 +625,7 @@ they contain this button -- Randy, 1/10/95\x7fModuleInfo: Module: ui2Button Init
          outdentAndSelect: isSelected = ( |
             | 
             "Used when in a menu by the menu."
-             frameStyle: bezelStyle.
+             frameStyle: flatStyle.
              rawState: isSelected ifTrue: 'down' False: 'up').
         } | ) 
 

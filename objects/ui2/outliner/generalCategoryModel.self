@@ -398,7 +398,7 @@ SlotsToOmit: parent.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalCategoryModel' -> 'parent' -> () From: ( | {
          'Category: title\x7fModuleInfo: Module: generalCategoryModel InitialContents: FollowSlot\x7fVisibility: private'
         
-         objectTitleFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'times' Size: 14 Style: 'bold') From: ( |
+         objectTitleFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'verdana' Size: 12 Style: '') From: ( |
              {} = 'Comment: I am an abstract, portable, description of a font.
 I am also immutable.\x7fModuleInfo: Creator: globals generalCategoryModel parent objectTitleFontSpec.
 \x7fIsComplete: '.

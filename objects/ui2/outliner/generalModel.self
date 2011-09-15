@@ -1,7 +1,7 @@
  '$Revision: 30.19 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -518,7 +518,7 @@ they go to my outliner\'s morphs.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
          'Category: annotation info\x7fCategory: override these\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot\x7fVisibility: public'
         
-         annotationInfoFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'times' Size: 12 Style: '') From: ( |
+         annotationInfoFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'verdana' Size: 12 Style: '') From: ( |
              {} = 'Comment: I am an abstract, portable, description of a font.
 I am also immutable.\x7fModuleInfo: Creator: globals generalModel parent annotationInfoFontSpec.
 \x7fIsComplete: '.
@@ -851,7 +851,7 @@ public slots make asynchronous buttons.\x7fModuleInfo: Creator: globals generalM
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
          'Category: comment\x7fCategory: comment button\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
         
-         commentButtonFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'helvetica' Size: 8 Style: 'bold') From: ( |
+         commentButtonFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'verdana' Size: 8 Style: 'bold') From: ( |
              {} = 'Comment: I am an abstract, portable, description of a font.
 I am also immutable.\x7fModuleInfo: Creator: globals generalModel parent commentButtonFontSpec.
 \x7fIsComplete: '.
@@ -882,7 +882,7 @@ I am also immutable.\x7fModuleInfo: Creator: globals generalModel parent comment
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
          'Category: comment\x7fCategory: comment editor\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
         
-         commentFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'times' Size: 12 Style: '') From: ( |
+         commentFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'verdana' Size: 12 Style: '') From: ( |
              {} = 'Comment: I am an abstract, portable, description of a font.
 I am also immutable.\x7fModuleInfo: Creator: globals generalModel parent commentFontSpec.
 \x7fIsComplete: '.
@@ -1586,9 +1586,27 @@ May cause me to expand if doExpand is true. -- dmu 10/04\x7fModuleInfo: Module: 
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
-         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: InitializeToExpression: (fontSpec copyName: \'arial\' Size: 12 Style: \'bold\')\x7fVisibility: public'
+         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 12 Style: \'bold\')\x7fVisibility: public'
         
-         preferredFontSpec <- fontSpec copyName: 'arial' Size: 12 Style: 'bold'.
+         preferredFontSpec <- fontSpec copyName: 'verdana' Size: 12 Style: 'bold'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
+        
+         preferredHeaderColor = ( |
+            | 
+            ((reflect: referrent) includesKey: 'mirror') ifTrue: [| m | 
+                m: referrent mirror.
+                m isReflecteeFloat   ifTrue: [^ paint named: 'forest'].
+                m isReflecteeInteger ifTrue: [^ paint named: 'azure'].
+                m isReflecteeString  ifTrue: [^ paint named: 'purple'].   
+                m creatorPathIfPresent: [|:p| 
+                    p first = 'traits' ifTrue: [^ paint named: 'royal'].
+                    p first = 'mixins' ifTrue: [^ paint named: 'leaf']]
+                  IfAbsent: [ ^ paint named: 'lightGray' ].
+                paint named: 'teal']
+               False: [ paint named: 'darkGray' ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
@@ -1780,7 +1798,7 @@ May cause me to expand if doExpand is true. -- dmu 10/04\x7fModuleInfo: Module: 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
          'Category: title\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot\x7fVisibility: public'
         
-         titleFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'times' Size: 14 Style: '') From: ( |
+         titleFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'verdana' Size: 12 Style: '') From: ( |
              {} = 'Comment: I am an abstract, portable, description of a font.
 I am also immutable.\x7fModuleInfo: Creator: globals generalModel parent titleFontSpec.
 \x7fIsComplete: '.

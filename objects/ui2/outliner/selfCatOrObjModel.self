@@ -1,6 +1,6 @@
  '$Revision: 30.11 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -127,7 +127,16 @@ SlotsToOmit: parent.
                               FontSpec: moduleSummaryFontSpec
                                  Color: moduleSummaryFontColor.
             moduleSummary colorAll: myOutliner color.
-            safelyDo: [myOutliner addItemFirst: moduleSummary].
+            safelyDo: [
+              myOutliner addItemFirst: (
+                  (morph copy 
+                    setHeight: 4)
+                    colorAll: myOutliner color).
+              myOutliner addItemFirst: moduleSummary.
+              myOutliner addItemFirst: (
+                  (morph copy 
+                    setHeight: 4)
+                    colorAll: myOutliner color)].
             self).
         } | ) 
 
@@ -216,9 +225,22 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfCatOrObjModel' -> 'parent' -> () From: ( | {
-         'Category: kevo-oidal option: fold parents in\x7fModuleInfo: Module: selfCatOrObjModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: kevo-oidal option: fold parents in\x7fModuleInfo: Module: selfCatOrObjModel InitialContents: InitializeToExpression: (false)'
         
-         kevooidal = bootstrap stub -> 'globals' -> 'false' -> ().
+         kevooidal <- bootstrap stub -> 'globals' -> 'false' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfCatOrObjModel' -> 'parent' -> () From: ( | {
+         'Category: kevo-oidal option: fold parents in\x7fModuleInfo: Module: selfCatOrObjModel InitialContents: FollowSlot'
+        
+         kevooidalAddSlot: s Category: cs Parent: p To: res = ( |
+            | 
+            res add: 
+               ((slotWithFakedCategories _Clone theSlot: s) 
+                      category: cs, 
+                            (s category isEmpty || [cs isEmpty] ifTrue: '' False: [annotation annotationSeparator]),
+                             s category)
+                      categories: p asList copy addAll: s categories).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfCatOrObjModel' -> 'parent' -> () From: ( | {
@@ -240,16 +262,13 @@ SlotsToOmit: parent.
             p do: [|:n| cs: cs, annotation annotationSeparator, n].
             cs: cs copyWithoutFirst.
             m do: [|:s|
-              s isParent
-                ifTrue: [kevooidalSlotsInMirror: s contents Into: res Visited: v Parents: p asList copy addLast: s name, '*']
-                 False: [
-                  res add: 
-                    ((slotWithFakedCategories _Clone theSlot: s) 
-                             category: cs, 
-                                       (s category isEmpty || [cs isEmpty] ifTrue: '' False: [annotation annotationSeparator]),
-                                       s category)
-                             categories: p asList copy addAll: s categories.
-                 ].
+              (s isParent && (s value != reflect: lobby))
+                ifTrue: [
+                    "We are at top level, so include parents"
+                    p isEmpty ifTrue: [kevooidalAddSlot: s Category: cs Parent: p To: res].
+                    "Add to shared slots"
+                    kevooidalSlotsInMirror: s contents Into: res Visited: v Parents: list copyRemoveAll addLast: '* Shared Slots']
+                 False: [kevooidalAddSlot: s Category: cs Parent: p To: res].
             ].
             res).
         } | ) 
@@ -281,7 +300,7 @@ SlotsToOmit: parent.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfCatOrObjModel' -> 'parent' -> () From: ( | {
          'Category: module summary\x7fModuleInfo: Module: selfCatOrObjModel InitialContents: FollowSlot'
         
-         moduleSummaryFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'palatino' Size: 12 Style: '') From: ( |
+         moduleSummaryFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'verdana' Size: 12 Style: '') From: ( |
              {} = 'Comment: I am an abstract, portable, description of a font.
 I am also immutable.\x7fModuleInfo: Creator: globals selfCatOrObjModel parent moduleSummaryFontSpec.
 \x7fIsComplete: '.
@@ -411,6 +430,13 @@ object or category outliner
             | 
             (selfModuleSetter copyForOutliner: myOutliner)
               chooseSlotsAndSetModule: evt).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfCatOrObjModel' -> 'parent' -> () From: ( | {
+         'Category: menu\x7fModuleInfo: Module: selfCatOrObjModel InitialContents: FollowSlot'
+        
+         showParents = ( |
+            | kevooidal: false).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfCatOrObjModel' -> 'parent' -> () From: ( | {

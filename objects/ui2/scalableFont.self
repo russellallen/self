@@ -922,12 +922,8 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
              xFontName.
             | 
             "Details: If a font with the given name cannot be found, we substitute
-             times (non-bold, non-italic) for the font. Someday this over-simplistic
-             font substitution policy should be improved. For now, it lets you keep
-             running if on a non-Sun X server. It is assumed that the times font is
-             ubiquitous. Nothing is done about size substitution. While many X
-             servers support font scaling, if you happen to have one that doesn't
-             and you ask for a size that it doesn't have, you are out of luck."
+             6x13 (non-bold, non-italic) for the font. This is ugly but hopefully on all
+             systems, even newer ones."
 
             xFontName: xFontNameOf: fSpec.
             fontStructs at: fSpec IfAbsent: [| fullName. fontStruct |
@@ -935,15 +931,11 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
                 fontStruct: 
                     wc display loadFont: fullName 
                               IfFail: [| substituteName |
-                                  substituteName: (fullNameFor: x11Globals scalableFont times Size: fSpec size).
-                                  [
-                                    ('Substituting font ', substituteName,
-                                   ' for font ', fullName) printLine.
-                                  ]. "too much kvetching"
+                                  substituteName: (fullNameFor: '6x13' Size: 13).
                                   wc display loadFont: substituteName IfFail: [
-                                    "Try anything!"
+                                    "Last ditch attempt to get any font at all..."
                                      wc display loadFont: '*' IfFail: [
-                                        error: 'could not load substitute font: ', substituteName.
+                                        error: 'Could not load substitute font: ', substituteName.
                                      ^nil
                               ]].
                     ].

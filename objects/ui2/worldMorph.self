@@ -700,7 +700,7 @@ evaluate fb if there is none.\x7fModuleInfo: Module: worldMorph InitialContents:
              n.
             | 
             n: userQuery
-             askMultipleChoice: ''
+             askMultipleChoice: 'Quit Self?'
              Choices: ('Just quit' & 'Save then quit' & 'Cancel') asVector
              Results: ('Just quit' & 'Save then quit' & 'Cancel') asVector.
             n = 'Cancel' ifTrue: [^ self ].

@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.15 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
 See the LICENSE file for license information.
 '
 
@@ -116,7 +116,7 @@ SlotsToOmit: parent prototype rawColor.
          addButton: b = ( |
             | 
             b frameStyle: b flatStyle.
-            b borderWidth: 1.
+            b borderWidth: 4.
             b beShrinkWrapHorizontally.
             b beFlexibleHorizontally. 
             b globalPosition: globalBounds bottomLeft.
@@ -443,9 +443,9 @@ morphs. -- Randy, 1/10/95\x7fModuleInfo: Module: ui2Menu InitialContents: Follow
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Menu' -> () From: ( | {
-         'Category: construction\x7fModuleInfo: Module: ui2Menu InitialContents: InitializeToExpression: (fontSpec copyName: \'times\' Size: 12 Style: \'\')\x7fVisibility: public'
+         'Category: construction\x7fModuleInfo: Module: ui2Menu InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 12 Style: \'\')\x7fVisibility: public'
         
-         defaultFontSpec <- fontSpec copyName: 'times' Size: 12 Style: ''.
+         defaultFontSpec <- fontSpec copyName: 'verdana' Size: 12 Style: ''.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Menu' -> () From: ( | {
@@ -522,7 +522,7 @@ May also be used with the prototype.
         
          initializeTearOff = ( |
             | 
-            tearOffButtonProto color:  color.
+            tearOffButtonProto color: color.
             tearOffButtonProto frameStyle: tearOffButtonProto bezelStyle.
             tearOffButtonProto setWidth: 10 Height: 10. 
             tearOffButtonProto beRigidVertically.
