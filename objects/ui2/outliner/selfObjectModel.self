@@ -1,7 +1,7 @@
  '$Revision: 30.12 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -518,7 +518,9 @@ SlotsToOmit: parent.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> () From: ( | {
          'Category: appearance\x7fModuleInfo: Module: selfObjectModel InitialContents: FollowSlot\x7fVisibility: public'
         
-         preferredColor = paint copyRed: 0.839687 Green: 0.839687  Blue: 0.839687.
+         preferredColor = ( |
+            | 
+            preferences outliner currentColorScheme selfObjectModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> () From: ( | {

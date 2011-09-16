@@ -1377,7 +1377,9 @@ and calling \"expand:\"\x7fModuleInfo: Module: generalModel InitialContents: Fol
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
          'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot\x7fVisibility: private'
         
-         menuColor = paint copyRed: 0.942326 Green: 0.904203  Blue: 0.815249.
+         menuColor = ( |
+            | 
+            preferences outliner currentColorScheme generalModelMenuColor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
@@ -1597,7 +1599,7 @@ May cause me to expand if doExpand is true. -- dmu 10/04\x7fModuleInfo: Module: 
          preferredHeaderColor = ( |
              s.
             | 
-            s: preferences outliner currentHeaderColorScheme.
+            s: preferences outliner currentColorScheme.
             ((reflect: referrent) includesKey: 'mirror') ifTrue: [| m | 
                 m: referrent mirror.
                 m isReflecteeFloat   ifTrue: [^ s float].

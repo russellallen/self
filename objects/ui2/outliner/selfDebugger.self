@@ -1,7 +1,7 @@
  '$Revision: 30.19 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -575,7 +575,9 @@ SlotsToOmit: parent.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfProcessModel' -> 'parent' -> () From: ( | {
          'ModuleInfo: Module: selfDebugger InitialContents: FollowSlot\x7fVisibility: public'
         
-         preferredColor = paint copyRed: 0.820137 Green: 0.86999  Blue: 0.820137.
+         preferredColor = ( |
+            | 
+            preferences outliner currentColorScheme selfProcessModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfProcessModel' -> 'parent' -> () From: ( | {

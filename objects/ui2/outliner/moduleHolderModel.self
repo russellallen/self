@@ -1,7 +1,7 @@
  '$Revision: 30.8 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -87,7 +87,8 @@ globals generalModel parent buttonDescriptions. _Clone
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'moduleHolderModel' -> 'parent' -> () From: ( | {
          'Category: appearance\x7fModuleInfo: Module: moduleHolderModel InitialContents: FollowSlot\x7fVisibility: private'
         
-         menuColor = paint copyRed: 0.942326 Green: 0.904203  Blue: 0.815249.
+         menuColor = ( |
+            | preferences outliner currentColorScheme moduleHolderModelMenuColor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'moduleHolderModel' -> 'parent' -> () From: ( | {
@@ -99,7 +100,9 @@ globals generalModel parent buttonDescriptions. _Clone
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'moduleHolderModel' -> 'parent' -> () From: ( | {
          'Category: appearance\x7fModuleInfo: Module: moduleHolderModel InitialContents: FollowSlot\x7fVisibility: public'
         
-         preferredColor = paint copyRed: 0.86999 Green: 0.820137  Blue: 0.820137.
+         preferredColor = ( |
+            | 
+            preferences outliner currentColorScheme moduleHolderModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'moduleHolderModel' -> 'parent' -> () From: ( | {
