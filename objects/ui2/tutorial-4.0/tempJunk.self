@@ -42,7 +42,7 @@ root: ui2Button copyRemoveAllMorphs.
 ( root rawMorphs at: 0 ) myAscent: 12.
 ( root rawMorphs at: 0 ) myBox: ((2)@(2)) # ((39)@(17)).
 ( root rawMorphs at: 0 ) myDescent: 3.
-( root rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'times' Style: 'bold' Size: 14.
+( root rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
 ( root rawMorphs at: 0 ) myLabel: ' Beep '.
 ( root rawMorphs at: 0 ) myPosition: (2)@(14).
 ( root rawMorphs at: 0 ) myWidth: 37.

@@ -72,9 +72,9 @@ SlotsToOmit: parent prototype rawBox rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'caretMorph' -> () From: ( | {
-         'ModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (globals fontSpec copyName: \'times\' Size: 12 Style: \'bold\')\x7fVisibility: public'
+         'ModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (globals fontSpec copyName: \'verdana\' Size: 12 Style: \'bold\')\x7fVisibility: public'
         
-         fontSpec <- globals fontSpec copyName: 'times' Size: 12 Style: 'bold'.
+         fontSpec <- globals fontSpec copyName: 'verdana' Size: 12 Style: 'bold'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
@@ -666,9 +666,9 @@ SlotsToOmit: parent prototype rawBox rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'editorRowMorph' -> () From: ( | {
-         'Category: fontDefaults\x7fModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (fontSpec copyName: \'newCenturySchoolbook\' Size: 12 Style: \'\')\x7fVisibility: public'
+         'Category: fontDefaults\x7fModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 12 Style: \'\')\x7fVisibility: public'
         
-         defaultFontSpec <- fontSpec copyName: 'newCenturySchoolbook' Size: 12 Style: ''.
+         defaultFontSpec <- fontSpec copyName: 'verdana' Size: 12 Style: ''.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'editorRowMorph' -> () From: ( | {

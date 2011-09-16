@@ -578,7 +578,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         
          initializePrototype = ( |
             | 
-            fontSpec: globals fontSpec copyName: 'times' Size: 24 Style: ''.
+            fontSpec: globals fontSpec copyName: 'verdana' Size: 24 Style: ''.
             self).
         } | ) 
 

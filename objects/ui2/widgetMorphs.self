@@ -706,7 +706,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             s beRigidHorizontally setWidth: 10.
             s color: (paint named: 'gray') copyBrightness: 0.84.
             lbl: labelMorph copy.
-            lbl fontSpec: globals fontSpec copyName: 'times' Size: 18.
+            lbl fontSpec: globals fontSpec copyName: 'verdana' Size: 18.
             col: columnMorph copy beFlexible color: c.
             col baseMinHeight: 50.
             col borderWidth: 0.

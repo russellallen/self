@@ -68,7 +68,7 @@ w addMorph: m.
 ( root rawMorphs at: 0 ) myAscent: 12.
 ( root rawMorphs at: 0 ) myBox: ((2)@(2)) # ((69)@(17)).
 ( root rawMorphs at: 0 ) myDescent: 3.
-( root rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'times' Size: 14 Style: 'bold'.
+( root rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'verdana' Size: 14 Style: 'bold'.
 ( root rawMorphs at: 0 ) myLabel: ' Smalltalk ' copyMutable.
 ( root rawMorphs at: 0 ) myPosition: (2)@(14).
 ( root rawMorphs at: 0 ) myWidth: 67.

@@ -2687,7 +2687,7 @@ SlotsToOmit: isPlaceHolder isPlaceHolder: parent prototype.
               nil = contentsLabel inner ifTrue: [
                 contentsLabel inner: 
                     ((labelMorph copy label: contentsString)
-                                   fontSpec: mediumFontSpec copyName: 'times' Style: 'italic')
+                                   fontSpec: mediumFontSpec copyName: 'verdana' Style: 'italic')
                                    colorAll: color.
                 contentsLabel open.
               ] False: [| c <- ''|
@@ -5273,7 +5273,7 @@ Set the creator of my parent slot.\x7fModuleInfo: Module: obsObjOutliner Initial
          buildTitle = ( |
             | 
             title: labelMorph copyLabel: titleString
-                               FontSpec: ( mediumFontSpec copyName: 'times' Style: 'italic' )
+                               FontSpec: ( mediumFontSpec copyName: 'verdana' Style: 'italic' )
                                   Color: (paint named: 'blue') copyDarkerBy: 0.3.
             title).
         } | ) 
@@ -5358,7 +5358,7 @@ Set the creator of my parent slot.\x7fModuleInfo: Module: obsObjOutliner Initial
          buildTitle = ( |
             | 
             labelMorph copyLabel: titleString
-                        FontSpec: (fontSpec copyName: 'times' )
+                        FontSpec: (fontSpec copyName: 'verdana' )
                            Color: (paint named: 'blue') copyDarkerBy: 0.3).
         } | ) 
 

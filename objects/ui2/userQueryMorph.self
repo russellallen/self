@@ -388,9 +388,9 @@ for user reponses are added via buttonLabel:Result:.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'userQueryMorph' -> () From: ( | {
-         'Category: default fonts\x7fModuleInfo: Module: userQueryMorph InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 14 Style: \'bold\')\x7fVisibility: private'
+         'Category: default fonts\x7fModuleInfo: Module: userQueryMorph InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 12 Style: \'bold\')\x7fVisibility: private'
         
-         defaultFontSpec <- fontSpec copyName: 'verdana' Size: 14 Style: 'bold'.
+         defaultFontSpec <- fontSpec copyName: 'verdana' Size: 12 Style: 'bold'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'userQueryMorph' -> () From: ( | {

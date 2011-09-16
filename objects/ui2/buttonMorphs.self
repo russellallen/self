@@ -801,7 +801,7 @@ SlotsToOmit: parent prototype.
             labelRow: rowMorph copy color: color.
             labelRow beFlexible borderWidth: 2.
             labelRowLabel: labelMorph copy.
-            labelRowLabel fontSpec: labelRowLabel fontSpec copyName: 'times' Style: 'italic'.
+            labelRowLabel fontSpec: labelRowLabel fontSpec copyName: 'verdana' Style: 'italic'.
             labelRow addMorph: labelRowLabel.
 
             "make the inset bezel:"

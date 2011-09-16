@@ -439,7 +439,7 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'operandSelectorsMorph' -> 'operandSelector' -> 'parent' -> () From: ( | {
          'Category: construction\x7fModuleInfo: Module: operandSelectors InitialContents: FollowSlot\x7fVisibility: private'
         
-         labelFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'times' Size: 14 Style: '') From: ( |
+         labelFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'verdana' Size: 12 Style: '') From: ( |
              {} = 'Comment: I am an abstract, portable, description of a font.
 I am also immutable.\x7fModuleInfo: Creator: traits operandSelectorsMorph operandSelector parent labelFontSpec.
 \x7fIsComplete: '.

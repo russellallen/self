@@ -100,7 +100,7 @@ SlotsToOmit: parent.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalLeafModel' -> 'parent' -> () From: ( | {
          'Category: contents label\x7fModuleInfo: Module: generalLeafModel InitialContents: FollowSlot'
         
-         contentsLabelFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'times' Size: 12 Style: 'italic') From: ( |
+         contentsLabelFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'verdana' Size: 12 Style: 'italic') From: ( |
              {} = 'Comment: I am an abstract, portable, description of a font.
 I am also immutable.\x7fModuleInfo: Creator: globals generalLeafModel parent contentsLabelFontSpec.
 \x7fIsComplete: '.

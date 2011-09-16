@@ -568,7 +568,7 @@ I am also immutable.\x7fModuleInfo: Creator: globals outlinerPreferences headerB
             ui2_textField fontSpec: globals fontSpec copyName: '6x13' Size: 13.
 
             ui2Menu   defaultFontSpec: ui2Menu   defaultFontSpec copySize: 12.
-            ui2Button defaultFontSpec: ui2Button defaultFontSpec copySize: 14.
+            ui2Button defaultFontSpec: ui2Button defaultFontSpec copySize: 12.
             flushMenuCaches.
             self).
         } | ) 
@@ -627,16 +627,16 @@ good for introducing language semantics, say.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'headerColorSchemes' -> () From: ( | {
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         default45 = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'headerColorSchemes' -> 'default45' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals preferences outliner headerColorSchemes default45.
+         muted = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'headerColorSchemes' -> 'muted' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals preferences outliner headerColorSchemes muted.
 '.
             | ) .
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> () From: ( | {
-         'ModuleInfo: Module: outlinerPreferences InitialContents: InitializeToExpression: (preferences outliner headerColorSchemes default45)'
+         'ModuleInfo: Module: outlinerPreferences InitialContents: InitializeToExpression: (preferences outliner headerColorSchemes muted)'
         
-         currentHeaderColorScheme <- bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'headerColorSchemes' -> 'default45' -> ().
+         currentHeaderColorScheme <- bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'headerColorSchemes' -> 'muted' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> () From: ( | {
@@ -644,6 +644,15 @@ good for introducing language semantics, say.
         
          headerColorSchemes = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'headerColorSchemes' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals preferences outliner headerColorSchemes.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'headerColorSchemes' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         default45 = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'headerColorSchemes' -> 'default45' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals preferences outliner headerColorSchemes default45.
 '.
             | ) .
         } | ) 
@@ -751,15 +760,6 @@ good for introducing language semantics, say.
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          unusual = paint named: 'outlinerGray'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'headerColorSchemes' -> () From: ( | {
-         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
-        
-         muted = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'headerColorSchemes' -> 'muted' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals preferences outliner headerColorSchemes muted.
-'.
-            | ) .
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'headerColorSchemes' -> 'muted' -> () From: ( | {

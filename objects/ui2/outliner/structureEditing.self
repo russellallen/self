@@ -573,7 +573,7 @@ globals labelMorph. copy
             bl: resend.copy.
             bl label: lab.
             [
-            bl fontSpec: fontSpec copyName: 'times' Size: 10.
+            bl fontSpec: fontSpec copyName: 'verdana' Size: 10.
             ].
             bl theObject: obj.
             bl).
@@ -646,7 +646,7 @@ globals labelMorph. copy
             nil != theObject
                ifTrue: [ browserLabel copy: title Object: theObject]
                False: [ (labelMorph copy label: title)
-                                      fontSpec: globals fontSpec copyName: 'times' Size: 10 Style: 'italic']).
+                                      fontSpec: globals fontSpec copyName: 'verdana' Size: 10 Style: 'italic']).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstractSyntax' -> 'browser' -> () From: ( | {
@@ -6526,7 +6526,7 @@ SlotsToOmit: prototype.
              t <- ''.
             | 
             m: resend.copy.
-            m fontSpec: fontSpec copyName: 'times' Size: 12.
+            m fontSpec: fontSpec copyName: 'verdana' Size: 12.
             m theTemplate: tp.
             m theTypeInfMorph: tim.
             m direction: dir.
@@ -7300,7 +7300,7 @@ SlotsToOmit: prototype.
              m.
             | 
             m: resend.copy.
-            m fontSpec: fontSpec copyName: 'times' Size: 12.
+            m fontSpec: fontSpec copyName: 'verdana' Size: 12.
             m theEditor: ed.
             tp nicePrintStringSize: 80
                MainResult: [| :a | m typeString: str , a ]
@@ -7471,8 +7471,8 @@ SlotsToOmit: prototype.
                DoMethodTargets: [| :tpv|
                  m: buildExpander: 'Templates called by selection'
                     Templates: tpv Direction: 1"Called" ]
-               DoReads: [ |:x | l add: (labelMorph copy label: x) fontSpec: globals fontSpec copyName: 'times' Size: 12 ]
-               DoWrites: [|:x | l add: (labelMorph copy label: x) fontSpec: globals fontSpec copyName: 'times' Size: 12 ].
+               DoReads: [ |:x | l add: (labelMorph copy label: x) fontSpec: globals fontSpec copyName: 'verdana' Size: 12 ]
+               DoWrites: [|:x | l add: (labelMorph copy label: x) fontSpec: globals fontSpec copyName: 'verdana' Size: 12 ].
             "the slot may be methods, reads or writes or arbitrary combinations.
              Only methods are returned in 'm'!!!"
             nil = m ifTrue: [
@@ -7668,7 +7668,7 @@ method relative to current main-method.
             removeResultType.
             resultTypeMorph: 
                 (labelMorph copy label: t) 
-                              fontSpec: globals fontSpec copyName: 'times' Size: 12.
+                              fontSpec: globals fontSpec copyName: 'verdana' Size: 12.
             addMorphLast: resultTypeMorph.
             calledTemplateMorph: calledTemplates).
         } | ) 
@@ -7835,7 +7835,7 @@ SlotsToOmit: parent prototype.
              t <- ''.
             | 
             m: resend.copy.
-            m fontSpec: fontSpec copyName: 'times' Size: 12.
+            m fontSpec: fontSpec copyName: 'verdana' Size: 12.
             m theTemplate: tp.
             (inf methodPatcher isResultOfPatch: tp meth theMember )
                 ifTrue: [t: '-- Result of patch: '].
@@ -8806,7 +8806,7 @@ Problems:
             | 
             p: resend.copy.
             p label: t.
-            p fontSpec: fontSpec copyName: 'times' Size: 12 Style: 'bold'.
+            p fontSpec: fontSpec copyName: 'verdana' Size: 12 Style: 'bold'.
             p).
         } | ) 
 

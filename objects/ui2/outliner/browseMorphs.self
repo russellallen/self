@@ -1638,7 +1638,7 @@ SlotsToOmit: mirror parent prototype.
 
             t: labelMorph copy label:
               (outer nameAt: index) copyAtMostWithEllipsis: 80.
-            t fontSpec: globals fontSpec copyName: 'times' Size: fontSpec size Style: 'italic'.
+            t fontSpec: globals fontSpec copyName: 'verdana' Size: fontSpec size Style: 'italic'.
             header addMorphLast: t.
             addButtonsToHeader.
             header).

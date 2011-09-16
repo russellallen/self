@@ -76,7 +76,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( root rawMorphs at: 3 ) myAscent: 11.
 ( root rawMorphs at: 3 ) myBox: ((84)@(64)) # ((420)@(78)).
 ( root rawMorphs at: 3 ) myDescent: 3.
-( root rawMorphs at: 3 ) myFontSpec: fontSpec copyName: 'times' Size: 14 Style: 'bold'.
+( root rawMorphs at: 3 ) myFontSpec: fontSpec copyName: 'verdana' Size: 14 Style: 'bold'.
 ( root rawMorphs at: 3 ) myLabel: '         A tutorial on the basics of Self objects, messages
 ' copyMutable.
 ( root rawMorphs at: 3 ) myPosition: (84)@(75).
@@ -110,7 +110,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( root rawMorphs at: 6 ) myAscent: 11.
 ( root rawMorphs at: 6 ) myBox: ((85)@(9)) # ((85)@(23)).
 ( root rawMorphs at: 6 ) myDescent: 3.
-( root rawMorphs at: 6 ) myFontSpec: fontSpec copyName: 'times' Size: 14 Style: 'bold'.
+( root rawMorphs at: 6 ) myFontSpec: fontSpec copyName: 'verdana' Size: 14 Style: 'bold'.
 ( root rawMorphs at: 6 ) myLabel: mutableString.
 ( root rawMorphs at: 6 ) myPosition: (85)@(20).
 ( root rawMorphs at: 6 ) myWidth: 0.
@@ -125,7 +125,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( (root rawMorphs at: 3) rawMorphs at: 0 ) myAscent: 11.
 ( (root rawMorphs at: 3) rawMorphs at: 0 ) myBox: ((0)@(7)) # ((226)@(21)).
 ( (root rawMorphs at: 3) rawMorphs at: 0 ) myDescent: 3.
-( (root rawMorphs at: 3) rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'times' Size: 14 Style: 'bold'.
+( (root rawMorphs at: 3) rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'verdana' Size: 14 Style: 'bold'.
 ( (root rawMorphs at: 3) rawMorphs at: 0 ) myLabel: '               and the Self module system' copyMutable.
 ( (root rawMorphs at: 3) rawMorphs at: 0 ) myPosition: (0)@(18).
 ( (root rawMorphs at: 3) rawMorphs at: 0 ) myWidth: 226.
@@ -140,7 +140,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( (root rawMorphs at: 6) rawMorphs at: 0 ) myAscent: 11.
 ( (root rawMorphs at: 6) rawMorphs at: 0 ) myBox: ((0)@(7)) # ((112)@(21)).
 ( (root rawMorphs at: 6) rawMorphs at: 0 ) myDescent: 3.
-( (root rawMorphs at: 6) rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'times' Size: 14 Style: 'bold'.
+( (root rawMorphs at: 6) rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'verdana' Size: 14 Style: 'bold'.
 ( (root rawMorphs at: 6) rawMorphs at: 0 ) myLabel: 'Move up to find:
 ' copyMutable.
 ( (root rawMorphs at: 6) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -156,7 +156,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( ((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 11.
 ( ((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(7)) # ((273)@(21)).
 ( ((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( ((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'times' Size: 14 Style: 'bold'.
+( ((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'verdana' Size: 14 Style: 'bold'.
 ( ((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: '         Self\'s surprising Smalltalk emulation.
 ' copyMutable.
 ( ((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).

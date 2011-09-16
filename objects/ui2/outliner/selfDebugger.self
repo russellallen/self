@@ -307,7 +307,7 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
             t: labelMorph copy.
             "t color: color."
             t label: ' in: '.
-            t fontSpec: globals fontSpec copyName: 'times' Size: fontSpec size Style: 'italic'.
+            t fontSpec: globals fontSpec copyName: 'verdana' Size: fontSpec size Style: 'italic'.
             r addMorphLast: t.
 
             f: frameMorph copy beShrinkWrap color: homet color.

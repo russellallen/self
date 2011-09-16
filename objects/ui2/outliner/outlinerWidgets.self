@@ -2131,7 +2131,7 @@ SlotsToOmit: parent prototype.
             labelRow: rowMorph copy color: color.
             labelRow beFlexible borderWidth: 1.
             labelRowLabel: labelMorph copyLabel: str.
-            labelRowLabel fontSpec: globals fontSpec copyName: 'times' Size: outlinerPreferences fontSpec size Style: 'bold'.
+            labelRowLabel fontSpec: globals fontSpec copyName: 'verdana' Size: outlinerPreferences fontSpec size Style: 'bold'.
             labelRow addMorphLast: labelRowLabel.
             labelRow).
         } | ) 
@@ -2786,7 +2786,7 @@ SlotsToOmit: parent prototype.
             c borderWidth: 4.
             c addMorph:
                 (labelMorph copyLabel: title)
-                             fontSpec: globals fontSpec copyName: 'times' Size: outlinerPreferences mediumFontSize Style: 'italic'.
+                             fontSpec: globals fontSpec copyName: 'verdana' Size: outlinerPreferences mediumFontSize Style: 'italic'.
             removeAllMorphs.
 
             "make border be thin, black line when closed"
@@ -2892,7 +2892,7 @@ SlotsToOmit: parent prototype.
 
             titleLabel:
                 (labelMorph copyLabel: title)
-                             fontSpec:  globals fontSpec copyName: 'times' Size: outlinerPreferences mediumFontSize Style: 'bold'.
+                             fontSpec:  globals fontSpec copyName: 'verdana' Size: outlinerPreferences mediumFontSize Style: 'bold'.
             r: rowMorph copy color: color.
             r borderWidth: 0.
             r addAllMorphs: (
