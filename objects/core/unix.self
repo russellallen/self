@@ -1,7 +1,7 @@
  'Sun-$Revision: 30.17 $'
  '
-Copyright 1992-2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -3760,6 +3760,12 @@ in the OS specific objects.\x7fModuleInfo: Creator: traits unixFile bsdAndSolari
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'bsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         nonblock = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'bsd' -> 'flags' -> () From: ( | {
          'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
         
          read = 0.
@@ -4455,6 +4461,12 @@ in the OS specific objects.\x7fModuleInfo: Creator: traits unixFile bsdAndSolari
          'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
         
          create = 64.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'linux' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         nonblock = 4.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'linux' -> 'flags' -> () From: ( | {
