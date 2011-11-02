@@ -3148,6 +3148,7 @@ convertSysCallresultToInt:.\x7fModuleInfo: Module: unix InitialContents: FollowS
             | 
             [
                 [ | :exit_inner_and_retry |
+                    process this sleep: 1.
                     ^ callBlock value: [ | :error |
                          error = 'EINTR' ifTrue: exit_inner_and_retry.
                          errBlk value: error.
