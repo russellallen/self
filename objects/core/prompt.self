@@ -1,7 +1,7 @@
  'Sun-$Revision: 30.8 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -79,6 +79,27 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'ModuleInfo: Module: prompt InitialContents: FollowSlot\x7fVisibility: private'
         
          continuing <- bootstrap stub -> 'globals' -> 'false' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'perProcessGlobals' -> 'prompt' -> () From: ( | {
+         'ModuleInfo: Module: prompt InitialContents: FollowSlot'
+        
+         myProcess <- bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'perProcessGlobals' -> 'prompt' -> 'myProcess' -> () From: ( |
+             {} = 'Comment: Dummy process that understands suspend and resume.\x7fModuleInfo: Creator: globals perProcessGlobals prompt myProcess.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'perProcessGlobals' -> 'prompt' -> 'myProcess' -> () From: ( | {
+         'ModuleInfo: Module: prompt InitialContents: FollowSlot'
+        
+         resume.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'perProcessGlobals' -> 'prompt' -> 'myProcess' -> () From: ( | {
+         'ModuleInfo: Module: prompt InitialContents: FollowSlot'
+        
+         suspend.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
@@ -259,6 +280,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          inputLoop = ( |
              input <- ''.
             | 
+            myProcess: process this.
             stopping:        false.
             waitingForInput: false.
             continuing:      false.
@@ -435,6 +457,15 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         
          start = ( |
             | scheduler start).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'prompt' -> () From: ( | {
+         'ModuleInfo: Module: prompt InitialContents: FollowSlot'
+        
+         suspendWhile: b = ( |
+             t.
+            | 
+            myProcess suspend. stdin reset. t: b value. stdin reset. myProcess resume. printPrompt. t).
         } | ) 
 
 
