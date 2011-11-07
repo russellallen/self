@@ -81,25 +81,21 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          continuing <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'perProcessGlobals' -> 'prompt' -> () From: ( | {
-         'ModuleInfo: Module: prompt InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'prompt' -> () From: ( | {
+         'Category: suspending\x7fModuleInfo: Module: prompt InitialContents: FollowSlot\x7fVisibility: private'
         
-         myProcess <- bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'perProcessGlobals' -> 'prompt' -> 'myProcess' -> () From: ( |
-             {} = 'Comment: Dummy process that understands suspend and resume.\x7fModuleInfo: Creator: globals perProcessGlobals prompt myProcess.
+         dummyInputLoopProcess = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'prompt' -> 'dummyInputLoopProcess' -> () From: ( |
+             {} = 'Comment: I am a dummy that understands
+suspend and resume so that there
+is a sane default for perProcessGlobals prompt inputLoopProcess\x7fModuleInfo: Creator: traits prompt dummyInputLoopProcess.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'perProcessGlobals' -> 'prompt' -> 'myProcess' -> () From: ( | {
-         'ModuleInfo: Module: prompt InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'perProcessGlobals' -> 'prompt' -> () From: ( | {
+         'ModuleInfo: Module: prompt InitialContents: InitializeToExpression: (traits prompt dummyInputLoopProcess)'
         
-         resume.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'perProcessGlobals' -> 'prompt' -> 'myProcess' -> () From: ( | {
-         'ModuleInfo: Module: prompt InitialContents: FollowSlot'
-        
-         suspend.
+         inputLoopProcess <- bootstrap stub -> 'traits' -> 'prompt' -> 'dummyInputLoopProcess' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
@@ -186,6 +182,18 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'Category: promptPrinting\x7fModuleInfo: Module: prompt InitialContents: FollowSlot\x7fVisibility: private'
         
          continuationPromptSuffix = '>> '.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'prompt' -> 'dummyInputLoopProcess' -> () From: ( | {
+         'ModuleInfo: Module: prompt InitialContents: FollowSlot'
+        
+         resume.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'prompt' -> 'dummyInputLoopProcess' -> () From: ( | {
+         'ModuleInfo: Module: prompt InitialContents: FollowSlot'
+        
+         suspend.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'prompt' -> () From: ( | {
@@ -280,7 +288,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          inputLoop = ( |
              input <- ''.
             | 
-            myProcess: process this.
+            inputLoopProcess: process this.
             stopping:        false.
             waitingForInput: false.
             continuing:      false.
@@ -460,12 +468,15 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'prompt' -> () From: ( | {
-         'ModuleInfo: Module: prompt InitialContents: FollowSlot'
+         'Category: suspending\x7fComment: The prompt interferes with other REPL like users of
+stdin/stdout. To avoid this, wrap your REPL in a block
+and use this method to temporarily suspend the prompt
+loop.\x7fModuleInfo: Module: prompt InitialContents: FollowSlot\x7fVisibility: public'
         
          suspendWhile: b = ( |
              t.
             | 
-            myProcess suspend. stdin reset. t: b value. stdin reset. myProcess resume. printPrompt. t).
+            inputLoopProcess suspend. stdin reset. t: b value. stdin reset. inputLoopProcess resume. printPrompt. t).
         } | ) 
 
 
