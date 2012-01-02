@@ -1,0 +1,80 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=430 valign=top><h3>
+
+<h2> Drawing </h2>
+Add a baseDrawOn: method
+<P>
+<IMG ALIGN=bottom SRC="pie2.gif"> <BR>
+<IMG ALIGN=bottom SRC="pie?.gif"> <BR>
+
+
+</h3></td><td valign=top>
+
+
+<h3>Making the pie wedge draw</h3>
+
+Use `Show Morph' on the pie wedge object's middle-button menu to make it 
+appear as a morph. We have not changed any behavior, so it draws as a circle.
+<P>
+
+Use `Move to Own Window' to move the morph into a window on a new world. 
+This makes it easier to fix errors in the draw method, since the main programming 
+window can still be used even if the morph's drawing method is broken.
+<P>
+
+Add the following slots to the object:
+<P>
+
+<PRE>
+	baseDrawOn: canvas = (| r. |
+		"X bug: zero span angle draws full circle!"
+		percent = 0 ifTrue: [ ^self ]. 
+		"X bug: fillArc sometimes goes one pixel out of bounds"
+		r: baseBounds indent: 1. 
+		canvas
+			fillArcWithin: r 
+			From: startAngle 
+			Spanning: spanAngle
+			Color: color.
+		self
+	).
+
+	spanAngle = (  3.6 * percent ).
+</PRE>
+
+baseDrawOn: is the primary method used to render a morph (but not its 
+submorphs). It takes a canvas as argument (an object which serves as a proxy for 
+an X drawable).
+<P>
+
+We need a couple of lines to work around problems with the underlying X 
+graphics operations. First, if we try to draw a filled arc with span of zero, X 
+interprets this as a full circle. Second, the X server we tested this code on 
+occasionally drew slightly outside the specified bounds. 
+<P>
+
+Pick up the pie wedge to make it redraw. It should show as a third of a circle.
+<P>
+
+<h3>If something goes wrong...</h3>
+
+If you write an erroneous baseDrawOn: method, e.g., one that results in a run-time 
+error, then you are likely to crash the world containing the object being drawn. 
+Under these circumstances, Morphic usually detects that the display loop is 
+failing, and creates a debugger on the failing process, placing the debugger in 
+another, new world. However, it is tedious to repair the problem in a completely 
+new world (because of the lack of context). Hence, when working on a critical 
+operation in a morph, such as baseDrawOn:, it is better to put the morph 
+representation in a world of its own. If that world crashes, you can still work on 
+the morph via its object representation in the original world.
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="PieWedge.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Geometry.html"> Next  </a> ]
+</center>
+

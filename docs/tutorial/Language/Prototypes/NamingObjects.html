@@ -1,0 +1,61 @@
+<p>
+<table cellpadding=0 cellspacing=0>
+<tr>
+
+<td valign=top>
+
+<H2> Naming objects </H2>
+<H3>
+
+<UL>
+<LI> Names are paths from the <i> lobby </i>. <BR>
+<IMG ALIGN=bottom SRC="../../Images/Lobby/lobby1.gif"> <BR>
+
+<LI> Most objects ultimately inherit from the <i> lobby </i>.
+<LI> We can set the name of an object by making a <BR>path from the lobby.
+</UL>
+
+</H3>
+
+</td>
+<td valign=top>
+
+
+<h3> Naming objects </h3>
+
+You may have noticed that all the objects we created were labelled simply 'an 
+object', whereas traits clonable was labelled as such. How do objects in Self 
+get names?
+<P>
+
+In Self, an object is named by a path. A path is a sequence of data slots we 
+must traverse to get to the object. The path starts at a special object, known as the 
+lobby. (Most objects ultimately inherit from the lobby, but they do not have to). We 
+can summon the lobby from an evaluator. The small button between the expander 
+and the name denotes that there is an object comment. We can view the comment 
+by clicking the button.
+<P>
+
+There may be none, one or many paths to an object from the lobby. If there are none 
+it does not have a global name.
+<P>
+
+For an object to be well-known, there must be at least one path to the object from the 
+lobby. Furthermore, one path must be designated as the creator path to distinguish 
+it from the other paths. We will go into more detail about this later, but for now it 
+is sufficient to say that we must set a creator path for an object for it to have a name.
+<P>
+
+Let's install our bank and stock accounts so that they are well-known.
+<P>
+
+</td>
+</tr>
+
+<P>
+<center>
+[ <a href="UsingInheritedMethods.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="InstallingAccounts.html"> Next  </a> ]
+</center>
+

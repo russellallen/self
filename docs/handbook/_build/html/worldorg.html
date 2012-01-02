@@ -1,0 +1,129 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>World Organization &mdash; Self Handbook for Self 4.5 (r 1) documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'for Self 4.5 (r 1)',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Self Handbook for Self 4.5 (r 1) documentation" href="index.html" />
+    <link rel="up" title="The Self World" href="selfwrld.html" />
+    <link rel="next" title="The Roots of Behavior" href="roots.html" />
+    <link rel="prev" title="The Self World" href="selfwrld.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="index.html">
+          <span>Self Handbook for Self 4.5 (r 1) documentation</span></a></h1>
+        <h2 class="heading"><span>World Organization</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="selfwrld.html">The Self World</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="roots.html">The Roots of Behavior</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="world-organization">
+<h1>World Organization<a class="headerlink" href="#world-organization" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-lobby">
+<h2>The Lobby<a class="headerlink" href="#the-lobby" title="Permalink to this headline">¶</a></h2>
+<p>The lobby object is thus named because it is where objects enter the Self world. For example,
+when a script that creates a new object is read into the system, all expressions in that script are evaluated
+in the context of the lobby. That is, the lobby is the receiver of all messages sent to “self” by
+expressions in the script. To refer to some existing object in a script, the object must be accessible
+by sending a message to the lobby. For example, the expression:</p>
+<div class="highlight-python"><pre>_AddSlots: ( | newObject = ( | entries &lt;- list copy ... | ) | )</pre>
+</div>
+<p>requires that the message <tt class="docutils literal"><span class="pre">list</span></tt> be understood by the lobby (the implicit receiver of the message)
+so that the <tt class="docutils literal"><span class="pre">entries</span></tt> slot of the new object can be initialized. The lobby slots <tt class="docutils literal"><span class="pre">traits</span></tt>, <tt class="docutils literal"><span class="pre">globals</span></tt>,
+and <tt class="docutils literal"><span class="pre">mixins</span></tt> are the roots of the object namespaces accessible from the lobby. The organization of
+these namespaces is described in the next section. The slot <tt class="docutils literal"><span class="pre">lobby</span></tt> allows the lobby itself to be referred
+by name.</p>
+<p>The lobby also has a number of other functions: it is the location of the default behavior inherited
+by most objects in the system (slot <tt class="docutils literal"><span class="pre">defaultBehavior</span></tt>).</p>
+</div>
+<div class="section" id="names-and-paths">
+<h2>Names and Paths<a class="headerlink" href="#names-and-paths" title="Permalink to this headline">¶</a></h2>
+<p>For convenience, the lobby’s namespace is broken into three pieces, implemented as separate objects
+rooted at the lobby:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>traits</dt>
+<dd>objects that encapsulate shared behavior. Typically, each prototype object has an associated traits object of the same name that describes the shared part of its behavior.</dd>
+<dt>globals</dt>
+<dd>prototypical objects and one-of-a-kind objects (“oddballs”)</dd>
+<dt>mixins</dt>
+<dd>small, parentless bundles of behavior designed to be “mixed into” some other object</dd>
+</dl>
+</div></blockquote>
+<p>Each of these namespace objects is categorized to aid navigation.</p>
+<p>For example, to find the parent of the prototype list object, one could start with the <tt class="docutils literal"><span class="pre">globals</span></tt> slot
+of the lobby, then get the <tt class="docutils literal"><span class="pre">list</span></tt> slot of that object, and then the <tt class="docutils literal"><span class="pre">parent</span></tt> slot of the list. The sequence
+of slot names, <tt class="docutils literal"><span class="pre">globals</span> <span class="pre">list</span> <span class="pre">parent</span></tt> is called a <em>path</em> and constitutes the list parent’s
+<em>full name</em>. Parent slots can be omitted from an object’s full name, since the slots in a parent are visible
+in the child via inheritance. A path with parent slots omitted forms the <em>short name</em> for an object.
+For example, the short name for the list parent is simply <tt class="docutils literal"><span class="pre">list</span> <span class="pre">parent</span></tt>.</p>
+<p>Non-parent slots are used when it is desirable to keep a part of the name space distinct. For example,
+the <tt class="docutils literal"><span class="pre">traits</span></tt> slot of the lobby is not a parent slot. This allows a convention that gives prototypes
+and their associated traits objects similar names: a prototype and its associated traits object have
+the same local name, but the prototype is placed in a slot in the <tt class="docutils literal"><span class="pre">globals</span></tt> object, whereas the traits
+of the prototype is placed in a slot in the <tt class="docutils literal"><span class="pre">traits</span></tt> object. Since the <tt class="docutils literal"><span class="pre">traits</span></tt> slot of the lobby is not
+a parent slot, the name of the traits object must start with the prefix <tt class="docutils literal"><span class="pre">traits</span></tt>. The <tt class="docutils literal"><span class="pre">globals</span></tt> slot,
+on the other hand, is a parent slot, so the name of a prototype object needs no prefix. Thus, <tt class="docutils literal"><span class="pre">list</span></tt>
+refers to the prototype list while <tt class="docutils literal"><span class="pre">traits</span> <span class="pre">list</span></tt> refers to its traits object for lists.</p>
+<p>As a matter of style, programs should refer to objects by the shortest possible name. This makes it
+easier to re-organize the global namespace as the system evolves. (If programs used full path
+names, then many more names would have to be updated to reflect changes to the namespace organization,
+a tedious chore.)</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="selfwrld.html">The Self World</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="roots.html">The Roots of Behavior</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2011, Russell Allen (Ed.).
+      Last updated on Nov 03, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

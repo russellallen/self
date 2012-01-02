@@ -1,0 +1,47 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Input handling </h2>
+<UL>
+<P><LI>	Can define <i>keyUp:, keyDown:, leftMouseDown: middleDoubleClick:</i>, etc., for any morph.
+<P><LI>	Argument is a <i>ui2Event</i>.
+Encodes type, state at time of event, source hand, etc.,
+<P><LI>	Events are processed in order
+</UL>
+
+
+
+</h3></td><td valign=top>
+
+<h3> Input handling</h3>
+
+In general, we can make a morph sensitive to input events by defining these 
+methods appropriately:
+<P>
+
+<PRE>
+	keyUp:, keyDown:
+	leftMouseUp: leftMouseDown:, middleMouseUp, rightMouseUp,...
+	leftDoubleClick:, middleDoubleClick, rightDoubleClick:
+	mouseMove:
+</PRE>
+
+<P>
+Morphic represents user actions such as pressing a key or mouse button using 
+ui2Event objects. A ui2Event actually carries two kinds of information: its type, such 
+as "leftMouseDown", and the state of the mouse buttons and certain keyboard 
+keys when the event occurred. This allows a program to tell, for example, if the 
+shift key was held down when the left mouse button was pressed. As events occur, 
+they are placed into a buffer. Morphic removes and processes events from this 
+buffer in order. Thus, even if a user occasionally gets ahead of the system, the 
+system will eventually catch up.
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="DragAndDrop.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="../Other/Installation.html"> Next  </a> ]
+</center>

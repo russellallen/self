@@ -1,0 +1,50 @@
+
+<table cellpadding=0 cellspacing=0><tr><td valign=top>
+<H3>
+
+<H2> Factoring the bank account </H2>
+
+Compying the parent slot (during): <BR>
+<IMG ALIGN=bottom SRC="../../Images/Bank/bank10.gif"> <BR>
+After: <BR>
+<IMG ALIGN=bottom SRC="../../Images/Bank/bank11.gif"> <BR>
+
+</h3>
+</td><td valign=top>
+
+<h3> Factoring the bank account </h3>
+
+<B> Why factor? </B> 
+
+We currently have two bank account objects. If we decide to rewrite the deposit: 
+method, and we edit the definition in one object, it will not affect the other object. 
+We could propagate the new definition to the other object by copying and pasting, 
+but this is tedious and error-prone if there are lots of copies. We would like to share 
+the methods among all copies, so that a change is visible in all of them.
+<P>
+
+<h3> Making a traits object </h3>
+
+We are going to interpose a parent object between the bank account and traits 
+clonable. This will be the bank account's traits object. Then, we can move behavior 
+from the bank account to its traits, so that when we have many bank accounts we 
+can modify them all by modifying the traits.
+<P>
+
+Our new traits is to inherit from traits clonable. We already have a parent slot that 
+refers to traits clonable, so that's a good starting point for our new object. We can 
+copy this slot using the middle-button menu on the slot, and drop it into the 
+background. This will cause a new object to be created containing this slot.
+<P>
+
+</td></tr></table>
+
+
+<P>
+<center>
+[ <a href="Organizing.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="RedirectingParentSlot.html"> Next  </a> ]
+</center>
+
+

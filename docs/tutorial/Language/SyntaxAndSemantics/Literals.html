@@ -1,0 +1,69 @@
+
+<table cellpadding=0 cellspacing=0><tr><td valign=top>
+
+<H3>
+
+<H2>Literals</H2>
+<UL>
+
+<LI>	integers
+2, -42, 16rFF, 2r101010
+<LI>	floats
+2.2, -3e6, 3.14159
+<LI>	strings
+'a', ", '\", '\n', 'Hello sailor!'
+<LI>	comments
+"this is a comment"
+<LI>	identifiers: [a-z][a-zA-Z0-9_]*
+<LI>	reserved identifiers:
+		self resend
+</UL>
+
+</H3>
+
+</td><td valign=top>
+
+
+<h3> Literals  </h3>
+
+There are three kinds of simple literals in Self:
+<P>
+
+<UL>
+<LI>	Integers (non-decimal bases prefixed by the decimal base and r)
+<LI>	Floats (all the usual forms)
+<LI>	Strings (including embedded C-like escape sequences) enclosed in single 
+quotes:
+</UL>
+
+<PRE>
+	'a string'
+	'an embedded \' quote'
+	''			the empty string
+	'lots\tof\nstrange\r\\characters\0'
+</PRE>
+
+<P>
+The comment convention is to surround the comment string with double quotes:
+<P>
+
+<PRE>
+	"this is a comment"
+</PRE>
+
+<P>
+self and resend are the only reserved identifiers.
+<P>
+
+Identifiers can contain any letter, digit or underscore, and must start with a small 
+letter. Case is significant.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="SyntaxAndSemantics.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Messages.html"> Next  </a> ]
+</center>

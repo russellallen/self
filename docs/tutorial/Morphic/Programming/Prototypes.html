@@ -1,0 +1,41 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Morph prototypes and traits hierarchies </h2>
+<UL>
+<P><LI>	Each prototypical morph has a traits
+<P><LI>	Each prototypical morph (except the root) is defined by copy-downs.
+<P><LI>	The prototypes and traits (usually) follow parallel hierarchies.
+<P><LI>	The roots are globals <i>morph</i> (or simply <i>morph</i>) and traits <i>morph</i>.
+</UL>
+
+</h3></td><td valign=top>
+
+
+<h3> Morph prototypes and traits hierarchies </h3>
+
+Morphic organizes morphs into a hierarchy much like a class hierarchy. The 
+behavior for all copies of a given morph prototype is defined in a traits object 
+which is a parent of all the copies. 
+<P>
+
+The root of the morph hierarchy is traits morph. All morphs inherit from traits morph, 
+either directly or via one or more intermediate traits objects. (Note: to see the entire 
+morph hierarchy, invoke the "Show Traits Family" menu command on traits 
+morph. Be patient; the morph hierarchy is quite large.)
+<P>
+
+Usually, the prototype of a given morph contains all the slots of the morph from 
+which it is derived plus, possibly, a few additions. Each morph is defined using the 
+copy-down facility.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="ManipulatingMorphs.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Layout.html"> Next  </a> ]
+</center>

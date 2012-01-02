@@ -1,0 +1,67 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=370 valign=top>
+
+<h2> Resends </h2>
+
+<UL>
+   <LI>	Used to invoke overridden methods: <BR>
+   <PRE>
+	at: key = (resend.at: hash: key)
+   </PRE>
+   <P>
+   <DT> Syntax for different message types: <BR>
+   <PRE>
+		resend.unary 
+		resend.+ arg	"binary" 
+		resend.foo: bar	"keyword" 
+   </PRE>
+   <LI>	Directed resend chooses between multiple parents: <BR>
+<PRE>
+	(|
+		parent1* = (| foo = 3 |).	
+		parent2* = (| foo = 4 |).
+		foo = (parent1.foo + parent2.foo)
+	|)
+</PRE>
+</UL>
+
+</td><td valign=top>
+
+<h3> Resends </h3>
+
+Self has a resend mechanism, using the keyword resend. This enables an 
+overriding method to invoke the overridden method.
+<P>
+
+The syntax used is to attach the message selector to resend with a period, e.g.:
+<P>
+
+<PRE>
+	at: key = (resend.at: hash: key)
+</PRE>
+
+This example defines a method at: which invokes an overridden version of at:, 
+passing it the hash of its argument.
+<P>
+
+When an object has multiple parents, a directed resend can be used to 
+disambiguate conflicting inherited slots. In this case resend is replaced by the name 
+of the parent slot:
+<P>
+
+<PRE>
+	(|
+		parent1* = (| foo = 3 |).	
+		parent2* = (| foo = 4 |).
+		foo = (parent1.foo + parent2.foo)
+	|)
+</PRE>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Blocks.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Invocation.html"> Next  </a> ]
+</center>

@@ -1,0 +1,66 @@
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Annotations </h2>
+
+Per-object and per-slot annotations support:
+<UL>
+<LI>	Comments
+<LI>	Categories
+<LI>	Module information
+<LI>	Visibility declarations (private, etc.)
+</UL>
+Set and accessed using mirrors.<P>
+All clones of an object share the same annotations, unless explicitly changed. Prototypes: objectAnnotation, slotAnnotation.
+
+</h3></td><td valign=top>
+
+<h3> Annotations </h3> 
+
+Additional support for the programming environment is provided by annotations. 
+Every object and every slot can have an associated annotation, which can be any 
+kind of object. Self syntax only supports string annotations. However, 
+mirrors allow you to set any kind of object as an annotation. Self 4.0 
+provides a structured, extensible annotation system to support comments, 
+categories, privacy and module information. These are converted to and from 
+strings when source is saved or loaded.
+<P>
+
+One caveat: a clone of an object shares the same annotations as the original. 
+Although you can change the annotation in the clone, there is a space penalty for 
+this.
+<P>
+
+The current uses for annotations are:
+<P>
+
+<UL>
+<LI>	object and slot comments
+<LI>	slot categories
+<LI>	module information (see the section on the transporter, to come)
+<LI>	visibility declarations (i.e., private, public)
+</UL>
+
+<P>
+You can access the annotation of an object obj using this expression:
+<P>
+
+<PRE> 	
+	(reflect: obj) annotation 
+</PRE> 
+
+<P>
+And to access the annotation of a slot s in object obj, use this:
+<P>
+
+<PRE> 	
+	((reflect: obj) at: s) annotation
+</PRE> 	
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Mirrors.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Recap.html"> Next  </a> ]
+</center>

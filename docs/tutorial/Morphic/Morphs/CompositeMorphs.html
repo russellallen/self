@@ -1,0 +1,50 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=370 valign=top><h3>
+
+<h2> Composite morphs </h2>
+<UL>
+<P><LI>	Any morph may have or be a submorph.
+<P><LI>	Can only be a submorph of one morph ± forms a tree.
+<P><LI>	All morphs on the screen are submorphs of a worldMorph.
+<P><LI>	The hand is represented by a handMorph
+</UL>
+
+<center>
+<IMG ALIGN=bottom SRC="composite.gif"> <BR>
+</center>
+
+</h3></td><td valign=top>
+
+<h3>Composite Morphs</h3>
+
+A composite morph is a morph that contains other morphs known as submorphs. 
+Note that the terms "composite" and "submorph" refer to roles that can be played 
+by any morph. Submorphs can be added to any kind of morph-even morphs such 
+as circleMorphs or labelMorphs that are atomic in some other systems. Copying, 
+deleting, moving, drawing, and layout operations are applied to the composite 
+morph as a whole.
+<P>
+
+The structure of a composite morph forms a tree. When morph B is a submorph of 
+morph A, B's owner is A and B appears in A's submorphs list. A morph can only be 
+a submorph of at most one morph at a time, so its owner is a single value, not a 
+collection. A window containing a collection of morphs is itself just a morph 
+known as a worldMorph. Each user's cursor is represented by a handMorph. 
+Grabbing a morph with the mouse is implemented by removing the target morph 
+from the worldMorph and adding it to the handMorph. Dropping a morph when the 
+mouse is released is implemented by reversing this process. A handMorph is itself 
+a submorph of its world. The message root can be sent to a morph to get the 
+topmost owner of a composite morph (stopping just short of the worldMorph or 
+handMorph that contains it). If a morph is not a submorph of any morph, its owner 
+is nil.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Factory.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Manipulating.html"> Next  </a> ]
+</center>

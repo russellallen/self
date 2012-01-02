@@ -1,0 +1,62 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=400 valign=top>
+
+<h2> Block activation </h2>
+<h3>
+<UL>
+<LI>	When literal block is compiled, a block object b1 is created with <i> value </i>  method slot and <i> parent* </i> slot, set to traits block.
+<P>
+<LI>	When expression containing the reference to the block is evaluated, the block is cloned to give an object b2, with an extra hidden slot containing a reference to the current activation, <i> m </i> .
+<P>
+<LI>	When b2 is activated (using <i> value </i> ), its method is cloned, and a hidden parent installed by copying the reference to <i> m </i>.
+</UL>
+
+<UL>
+<DT> Example of block activation <BR>
+Source (in traits number):
+<PRE>
+	signChar = 
+	(| s <- ©+© | < 0 ifTrue: [s: ©-©].··s)
+</PRE>
+<BR>
+ <DT>After compilation: <BR>
+In -42 signChar, about to send ifTrue: <BR>
+In the block:
+</h3>
+<IMG ALIGN=bottom SRC="../../Images/???.gif"> <BR>
+
+</UL>
+
+</td><td valign=top>
+
+<h3> Block activation </h3>
+
+Block activation is similar to method activation, except that there is an extra stage. 
+First, a block object is created at compile time. This has a parent* slot that refers to 
+traits block, and a value method (appropriate to the number of arguments), with the 
+block's code as the method body.
+<P>
+
+When the expression containing a reference to this block is evaluated, the block is 
+cloned, and the clone is given a hidden slot that refer's to the current activation 
+object.
+<P>
+
+When the block's method is activated (via a value message), the method is cloned 
+and a hidden parent slot is added, containing a reference to the activation object 
+saved in the previous step (not a self slot, as per methods). This allows the block to 
+access the slots of enclosing block's and the outermost method (lexical scoping).
+<P>
+
+
+
+
+</td></tr></table>
+
+
+<P>
+<center>
+[ <a href="Invocation.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Non-localReturns.html"> Next  </a> ]
+</center>

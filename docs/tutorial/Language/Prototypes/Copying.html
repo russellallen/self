@@ -1,0 +1,62 @@
+
+<table cellpadding=0 cellspacing=0><tr><td valign=top>
+
+<h2> Copying </h2>
+
+<h3>
+
+<UL>
+<LI> Original object is a prototype.
+<P>
+<LI> Programming is making prototypes
+<P>
+<LI> Some SELF prototypes:
+<P>
+<UL>
+<LI> point, list, sequence, byteVector, 
+set, dictionary, unixFile, process, 
+profiler, time, colorPickerMorph, 
+ debugger, paint, webBrowser... 
+</UL>
+</UL>
+</h3>
+
+</td><td valign=top>
+
+<h3> Copying </h3>
+
+A running program usually creates lot of objects: things like points, collections and 
+graphical widgets. In Self, these usually possess the same structure and 
+behavior as existing objects, and are made by copying. The master object from 
+which all objects of the same type are copied (directly or indirectly via another 
+copy) is known as a prototype.
+<P>
+
+Programming in a prototype-based language means creating a collection of 
+prototypical objects with the desired structure and behavior, such that when the 
+program is running new objects are created and interact with each other to achieve 
+the desired overall effect.
+<P>
+
+Each data type is represented, then, by a prototypical instance of that data type. 
+For example, lists are represented by an empty list object. If we want a new list, we 
+copy the prototypical list.
+<P>
+
+A Self system has hundreds of prototypes. Here are the names of some:
+<P>
+
+<PRE>
+	point, list, sequence, byteVector, set, dictionary, unixFile,
+	process, profiler, time, colorPickerMorph, debugger, paint,
+	webBrowser...
+</PRE>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Prototypes.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Inheritance.html"> Next  </a> ]
+</center>

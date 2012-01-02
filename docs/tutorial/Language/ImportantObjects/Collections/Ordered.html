@@ -1,0 +1,39 @@
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Ordered collections: lists and sequences </h2>
+<UL>
+<LI>	A list is a growable collection, implemented as a linked list. Access and update at the ends is fast, in the middle is slow.
+<P>
+<LI>	A sequence is a growable collection which uses an underlying vector, making a new vector when it fills. Similar to a Smalltalk OrderedCollection.
+</UL>
+
+
+</h3></td><td valign=top>
+
+<h3>Ordered collections: lists and sequences</h3>
+
+A list is growable collection, implemented using a linked list. It is fast to add and 
+remove objects at either end, but relatively slow to access objects in the middle. 
+Adding and removing in the middle is not supported. Special list messages 
+include addFirst:, addLast:, removeFirst and removeLast.
+<P>
+
+A sequence is a growable collection, implemented using a vector. When the vector 
+fills, a new, bigger vector is created and substituted. Hence, growing can be 
+expensive when the vector is full. However, access and update is fast. Removing 
+from the middle is slow, as elements have to be shifted to close up the gap. A 
+sequence is analogous to a Smalltalk OrderedCollection.
+<P>
+
+With the exception of messages like add:, addFirst: and removeFirst:, a sequence 
+behaves similarly to a vector.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Unordered.html"> Previous  </a> ]
+[ <a href="../../../index.html"> Index  </a> ]
+[ <a href="Iterators.html"> Next  </a> ]
+</center>

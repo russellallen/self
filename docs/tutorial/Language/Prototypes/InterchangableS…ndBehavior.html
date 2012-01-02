@@ -1,0 +1,77 @@
+
+<table cellpadding=0 cellspacing=0><tr><td valign=top>
+
+<H2> Interchangeable state and behavior </H2>
+<H3>
+
+Sender does not distinguish between state and behavior; 
+implementor can choose as desired. <BR>
+Stock-based account: <BR>
+<IMG ALIGN=bottom SRC="../../Images/Bank/bank15.gif"> <BR>
+
+</h3>
+
+</td><td valign=top>
+
+<h3> Benefits of interchangeable state and behavior </h3>
+
+Another important property of Self is that when we send a message we do 
+not distinguish whether that message activates a method or accesses a data slot. 
+We can change our implementation between state and behavior at will.
+<P>
+
+As an example, let's make a new kind of account based on shares of stock. We'll do 
+this by modifying an existing bank account.
+<P>
+
+First, we add slots to represent the current stock price, and the number of shares 
+held. Adding slots is accomplished using the middle-button menu, and the syntax 
+we use for the current stock price slot is this:
+<P>
+
+<PRE>
+	pricePerShare <- 50.0
+ </PRE>	
+
+<P>
+This is the syntax for the slot containing the number of shares in the account:
+<P>
+
+<PRE>
+	numShares <- 10 
+</PRE>	
+
+<P>
+The use of the <- indicates that the slot is to be an assignable data slot, and the value 
+to the right is the initial value of the slot.
+<P>
+
+The balance slot that remains is now incorrect: the balance should be computed 
+from the stock held. We can edit this slot, using the middle-button menu item, 
+`Edit', and replace it with a method slot:
+<P>
+
+<PRE>
+	balance = (numShares * pricePerShare) 
+</PRE>
+
+<P>
+If we want to set the balance directly, we can add a method slot balance:, like this:
+<P>
+
+<PRE>
+	balance: b = (numShares: b / pricePerShare) 
+</PRE>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="MixingStateAndBehavior.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="TestingStockAccount.html"> Next  </a> ]
+</center>
+
+
+
+

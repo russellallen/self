@@ -1,0 +1,82 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Drag-and-drop </h2>
+<UL>
+
+<P><LI>	Override wantsMorph:Event:, which states whether a morph being dropped will be accepted. Default accept action is to embed the morph as a submorph.
+<PRE>
+wantsMorph: m Event: evt = (
+	m morphTypeName =
+		©pieWedgeMorph©)
+</PRE>
+<P><LI>	Make wedge sensitive to left mouse click:
+
+<PRE>
+leftMouseDown: evt = (
+	evt shiftIsDown
+	&& [owner morphTypeName=©pieChartMorph©]
+		ifTrue: [evt sourceHand addMorph: self]
+		False: [resend.leftMouseDown: evt ].
+	self
+).
+</PRE>
+
+<P><LI>	Adds wedge to hand if in a chart and shift key is down
+<P><LI>	Otherwise calls default action
+
+
+
+</h3></td><td valign=top>
+
+
+<h1> Drag-and-drop </h1>
+
+Wouldn't it be nice if you could just drag wedges between pie charts? Let's 
+implement this!
+
+The basic method to be overridden is wantsMorph:Event:. This is sent to a morph to 
+enquire if it wants to accept a morph being dropped onto it, and we should make 
+charts accept wedges. The argument is a ui2Event (which characterizes the mouse 
+position, source hand and so on), which we can ignore. This method is added to 
+the chart traits:
+<P>
+
+<PRE>
+	wantsMorph: m Event: evt = (
+		m morphTypeName = 'pieWedgeMorph').
+</PRE>
+
+
+
+<P>
+Now we need to make wedges mouse-sensitive, so we add this method to the 
+wedge traits.
+<P>
+
+<PRE>
+	leftMouseDown: evt = (
+		evt shiftIsDown
+		&& [owner morphTypeName = 'pieChartMorph']
+			ifTrue: [evt sourceHand addMorph: self]
+			False: [resend.leftMouseDown: evt ].
+		self
+	).
+</PRE>
+
+<P>
+This lets us extract a wedge by holding the shift key down while using the left 
+mouse button. The wedge is added to the hand that clicked the button. If the 
+wedge is not in a chart, the default left mouse activity is invoked.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="../PieChart/Traits.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="InputHandling.html"> Next  </a> ]
+</center>
+

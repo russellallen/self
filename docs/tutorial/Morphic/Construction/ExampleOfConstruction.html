@@ -1,0 +1,59 @@
+<title> Example of construction by direct manipulation </title>
+
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Construction by direct manipulation </h2>
+<P>
+After 'Create Button':
+<P>
+<center>
+<IMG ALIGN=bottom SRC="bankui1.gif"> <BR>
+</center>
+<P>
+The deposit: widget
+<P>
+<center>
+<IMG ALIGN=bottom SRC="bankui2.gif"> <BR>
+</center>
+
+</h3></td><td valign=top>
+
+<h2>Example of construction by direct manipulation </h2>
+
+Let's build a simple interface to a bank account that mimics an ATM. We want to 
+withdraw and deposit specified sums of cash, and also have a "fast cash" button 
+that gives us a predetermined amount.
+<P>
+We'll start with the deposit and withdraw operations.
+<P>
+
+On the slot menu for the deposit: slot there is an item, `Create Button'. If we invoke 
+this, we get a small widget that allows us to specify an argument and send the 
+deposit: message. However, if we try to `Do it', we get a debugger. The widget is 
+sending deposit: to the traits.
+<P>
+
+To direct it at the bank account, we place it over the bank account object, and 
+invoke the `Set Target' middle-button menu. If we try the `Do it' button now, it 
+works.
+<P>
+
+We can now re-arrange this widget to be more realistic looking.
+<P>
+
+First, we want the `Do it' button labelled as `deposit:', and to the left of the editor. 
+To do this we rip the `Do it' label out and discard it, rip the existing deposit label 
+out and place it in the button, then move the button to where the deposit label used 
+to be. Finally we rip out the row that holds the `Get it' button and discard it.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="../Programming/Resizing.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="FastCash.html"> Next  </a> ]
+</center>

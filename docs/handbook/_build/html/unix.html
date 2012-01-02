@@ -1,0 +1,124 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>I/O and Unix &mdash; Self Handbook for Self 4.5 (r 1) documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'for Self 4.5 (r 1)',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Self Handbook for Self 4.5 (r 1) documentation" href="index.html" />
+    <link rel="up" title="The Self World" href="selfwrld.html" />
+    <link rel="next" title="Other Objects" href="oddball.html" />
+    <link rel="prev" title="Foreign Objects" href="foreign.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="index.html">
+          <span>Self Handbook for Self 4.5 (r 1) documentation</span></a></h1>
+        <h2 class="heading"><span>I/O and Unix</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="foreign.html">Foreign Objects</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="oddball.html">Other Objects</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="i-o-and-unix">
+<h1>I/O and Unix<a class="headerlink" href="#i-o-and-unix" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><div class="highlight-python"><pre>oddball
+        unix
+clonable
+        proxy
+                unixFile (mixes in traits unixFile currentOsVariant)</pre>
+</div>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>This page is out of date for Self 4.5.</p>
+<p class="last">Start looking at the object <tt class="docutils literal"><span class="pre">os</span></tt> instead of <tt class="docutils literal"><span class="pre">unix</span></tt>.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If reading from <tt class="docutils literal"><span class="pre">stdin</span></tt>, the <tt class="docutils literal"><span class="pre">prompt</span></tt> object may interfere with your
+code by stealing input from you.  To avoid this, wrap calls in
+<tt class="docutils literal"><span class="pre">prompt</span> <span class="pre">suspendWhile:</span> <span class="pre">[</span> <span class="pre">]</span></tt>, for example:</p>
+<p><tt class="docutils literal"><span class="pre">prompt</span> <span class="pre">suspendWhile:</span> <span class="pre">[</span> <span class="pre">stdin</span> <span class="pre">readLine</span> <span class="pre">printLine</span> <span class="pre">]</span></tt></p>
+<p class="last">which will read a line from the stdin and echo it to stdout.</p>
+</div>
+<p>The oddball object <tt class="docutils literal"><span class="pre">unix</span></tt> provides access to selected Unix system calls. The most common calls
+are the file operations: <tt class="docutils literal"><span class="pre">creat()</span></tt>, <tt class="docutils literal"><span class="pre">open()</span></tt>, <tt class="docutils literal"><span class="pre">close()</span></tt>, <tt class="docutils literal"><span class="pre">read()</span></tt>, <tt class="docutils literal"><span class="pre">write()</span></tt>, <tt class="docutils literal"><span class="pre">lseek()</span></tt> and <tt class="docutils literal"><span class="pre">unlink()</span></tt>.
+<tt class="docutils literal"><span class="pre">tcpConnectToHost:Port:IfFail:</span></tt> opens a TCP connection. The <tt class="docutils literal"><span class="pre">select()</span></tt> call
+and the indirect system call are also supported (taking a variable number of integer, float or byte
+vector arguments, the latter being passed as C pointers). <tt class="docutils literal"><span class="pre">unixFile</span></tt> provides a higher level interface
+to the Unix file operations. The oddball object <tt class="docutils literal"><span class="pre">tty</span></tt> implements terminal control facilities such
+as cursor positioning and highlighting.</p>
+<p>Relevant oddballs:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>stdin, stdout, stderr</td>
+<td>standard Unix streams</td>
+</tr>
+<tr class="row-even"><td>tty</td>
+<td>console terminal capabilities</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Modules: unix, stdin, tty, ttySupport, termcap</p>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="foreign.html">Foreign Objects</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="oddball.html">Other Objects</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2011, Russell Allen (Ed.).
+      Last updated on Nov 03, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

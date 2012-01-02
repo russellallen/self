@@ -1,0 +1,101 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Messages &mdash; Self Handbook for Self 4.5 (r 1) documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'for Self 4.5 (r 1)',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Self Handbook for Self 4.5 (r 1) documentation" href="index.html" />
+    <link rel="up" title="The Self World" href="selfwrld.html" />
+    <link rel="next" title="Processes and the Prompt" href="processes.html" />
+    <link rel="prev" title="Mirrors" href="mirrors.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="index.html">
+          <span>Self Handbook for Self 4.5 (r 1) documentation</span></a></h1>
+        <h2 class="heading"><span>Messages</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="mirrors.html">Mirrors</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="processes.html">Processes and the Prompt</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="messages">
+<h1>Messages<a class="headerlink" href="#messages" title="Permalink to this headline">¶</a></h1>
+<p>Self allows messages to be manipulated as objects when convenient. For example, if an object
+fails to understand a message, the object is notified of the problem via a message whose arguments
+include the selector of the message that was not understood. While most objects inherit default
+behavior for handling this situation (by halting with an error), it is sometimes convenient for an object
+to handle the situation itself, perhaps by resending the message to some other object. Objects
+that do this are called transparent forwarders. An example is given in <tt class="docutils literal"><span class="pre">interceptor</span></tt>.</p>
+<p>A string has the basic ability to use itself as a message selector using the messages <tt class="docutils literal"><span class="pre">sendTo</span></tt>: (normal
+message sends), <tt class="docutils literal"><span class="pre">resendTo</span></tt>: (resends), or <tt class="docutils literal"><span class="pre">sendTo:DelegatingTo:</span></tt> (delegated sends).
+Each of these messages has a number of variations based on the number of arguments the message
+has. For example, one would used <tt class="docutils literal"><span class="pre">sendTo:With:With:</span></tt> to send a message with <tt class="docutils literal"><span class="pre">at:Put:</span></tt> as the
+selector and two arguments:</p>
+<div class="highlight-python"><pre>'at:Put:' sendTo: aDict With: k With: v</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Primitives such as _Print cannot be sent in the current system.</p>
+</div>
+<p>A selector, receiver, delegatee, methodHolder, and arguments can be bundled together in a <tt class="docutils literal"><span class="pre">message</span></tt>
+object. The message gets <tt class="docutils literal"><span class="pre">sent</span></tt> when the message object receives the send message. Message
+objects are used to describe delayed actions, such as the actions that should occur just before or after
+a snapshot is read. They are also used as an argument to new process creation (you can create a
+new process to execute the message by sending it <tt class="docutils literal"><span class="pre">fork</span></tt>).</p>
+<p>Modules: sending, message, selector, interceptor</p>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="mirrors.html">Mirrors</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="processes.html">Processes and the Prompt</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2011, Russell Allen (Ed.).
+      Last updated on Nov 03, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

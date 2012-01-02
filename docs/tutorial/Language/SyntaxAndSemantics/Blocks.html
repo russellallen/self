@@ -1,0 +1,118 @@
+
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top>
+
+<H3>
+
+<H2>
+Blocks
+</H2>
+<LI>	Code objects, evaluated by being sent <i> value </i>.
+<UL>
+	<DT> acc: bankAccount copy.
+	<DT>acc balance: 100.
+	<DT>b:··[acc deposit: 50].
+	<DT>acc balance.··"returns 100"
+	<DT>b value.
+	<DT>b value.
+	<DT>acc balance.··"returns 200"
+</UL>
+<LI>	Can take arguments (evaluated with <i> value:, value:With:, value:With:With:,</i> ...)
+<UL>
+	<DT>adder: [| :x. :y | x + y].
+	<DT>adder value: 3 With: 4	"returns 7"
+</UL>
+
+<LI>	Used to implement control structures, e.g., if-then-else:
+<UL>
+	<DT>In true:
+	<DT>	ifTrue: t False: f = (t value)
+	<DT>In false:
+	<DT>	ifTrue: t False: f = (f value)
+	<DT>Example of use:
+	<DT>	x != 0 ifTrue: [x reciprocal] False: 0
+</UL>
+<LI>	Other examples:
+<UL>
+	<DT>[i < j] whileTrue: [i: i * 2].
+	<DT>20 do: [| :n | n printLine].
+	<DT>vec do: [| :el | el printLine]
+</UL>
+
+</H3>
+
+</td><td valign=top>
+
+
+<h3> Blocks </h3>
+
+A block is a kind of code object. It differs from a method in that its code is evaluated 
+only when the block itself is sent a value message. Blocks are similar to anonymous 
+functions (lambdas) in Lisp and functional languages. The syntax for a block is like 
+that of a method, except that brackets are used instead of parentheses:
+<P>
+
+<PRE>
+	acc: bankAccount copy.
+	acc balance: 100.
+	b: [acc deposit: 50].
+	acc balance.				"returns 100"
+	b value.
+	b value.
+	acc balance.				"returns 200"
+</PRE>
+
+<P>
+Blocks can take arguments, using the same syntax as methods. A 1-argument block 
+is evaluated using the message value:, a 2-argument block with value:With:, a 3-
+argument block with value:With:With:, etc.
+<P>
+
+<PRE>
+	adder: [| :x. :y | x + y].
+	adder value: 3 With: 4	"returns 7"
+</PRE>
+
+<P>
+Blocks are used to implement control structures. For example, an if-then-else 
+statement is implemented by having ifTrue:False: methods in true and false. In true, 
+the definition is:
+<P>
+
+<PRE>
+	ifTrue: t False: f = (t value)
+</PRE>
+
+<P>
+whereas in false the definition is:
+<P>
+
+<PRE>
+	ifTrue: t False: f = (f value)
+</PRE>
+
+<P>
+A typical usage is then:
+<P>
+
+<PRE>
+	x != 0 ifTrue: [x reciprocal] False: 0
+</PRE>
+
+<P>
+(In defaultBehavior, value is defined to return self.)
+<P>
+
+In Self 4.0, every block must appear as a literal within a method. Blocks 
+may be nested. In contrast, methods may not be nested. A block is evaluated in the 
+context of the surrounding method/block.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Methods.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Resends.html"> Next  </a> ]
+</center>

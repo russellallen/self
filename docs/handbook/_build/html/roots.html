@@ -1,0 +1,138 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The Roots of Behavior &mdash; Self Handbook for Self 4.5 (r 1) documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'for Self 4.5 (r 1)',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Self Handbook for Self 4.5 (r 1) documentation" href="index.html" />
+    <link rel="up" title="The Self World" href="selfwrld.html" />
+    <link rel="next" title="Blocks, Booleans, and Control Structures" href="blocks.html" />
+    <link rel="prev" title="World Organization" href="worldorg.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="index.html">
+          <span>Self Handbook for Self 4.5 (r 1) documentation</span></a></h1>
+        <h2 class="heading"><span>The Roots of Behavior</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="worldorg.html">World Organization</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="blocks.html">Blocks, Booleans, and Control Structures</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="the-roots-of-behavior">
+<h1>The Roots of Behavior<a class="headerlink" href="#the-roots-of-behavior" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="default-behavior">
+<h2>Default Behavior<a class="headerlink" href="#default-behavior" title="Permalink to this headline">¶</a></h2>
+<p>Certain common behavior is shared by nearly all objects in the Self world. This basic behavior is
+defined in the <tt class="docutils literal"><span class="pre">defaultBehavior</span></tt> slot of the lobby and includes:</p>
+<blockquote>
+<div><ul class="simple">
+<li>identity comparisons (== and !==)</li>
+<li>inequality (!=)</li>
+<li>default behavior for printing (reimplement printString in descendants)</li>
+<li>mirror creation (reflect:)</li>
+<li>support for point, and list construction (&#64; and &amp;)</li>
+<li>behavior that allows blocks to ignore extra arguments</li>
+<li>behavior that allows an object to behave like a block that evaluates to that object (this permits a non-block object to be passed to a method that expects a block)</li>
+<li>behavior that allows an object to be its own key in a collection (key)</li>
+<li>default behavior for doubly-dispatched messages</li>
+<li>behavior for printing error messages and stack dumps (error: and halt)</li>
+</ul>
+</div></blockquote>
+<p>It is important to note that not all objects in the system inherit this default behavior. It is entirely
+permissible to construct objects that do not inherit from the lobby, and the Self world contains
+quite a few such objects. For example, the objects used to break a namespace into separate categories
+typically do not inherit from the lobby. Any program intended to operate on arbitrary objects,
+such as a debugger, must therefore assume that the objects it manipulates do not understand even
+the messages in <tt class="docutils literal"><span class="pre">defaultBehavior</span></tt>.</p>
+<p>Modules: defaultBehavior, errorHandling</p>
+</div>
+<div class="section" id="the-root-traits-traits-clonable-and-traits-oddball">
+<h2>The Root Traits: Traits Clonable and Traits Oddball<a class="headerlink" href="#the-root-traits-traits-clonable-and-traits-oddball" title="Permalink to this headline">¶</a></h2>
+<p>Most concrete objects in the Self world are descendants of one of two top-level traits objects:
+<tt class="docutils literal"><span class="pre">traits</span> <span class="pre">clonable</span></tt> and <tt class="docutils literal"><span class="pre">traits</span> <span class="pre">oddball</span></tt>. The distinction between the two is based on whether
+or not the object is <em>unique</em>. For example, <tt class="docutils literal"><span class="pre">true</span></tt> is a unique object. There is only one <tt class="docutils literal"><span class="pre">true</span></tt> object in
+the entire system, although there are many references to it. On the other hand, a list object is not
+unique. There may be many lists in the system, each containing different elements. A unique object
+responds to the message <tt class="docutils literal"><span class="pre">copy</span></tt> by returning itself and uses identity to test for equality. The general
+rule is:</p>
+<blockquote>
+<div><ul class="simple">
+<li>unique objects usually inherit from <tt class="docutils literal"><span class="pre">traits</span> <span class="pre">oddball</span></tt></li>
+<li>non-unique objects usually inherit from <tt class="docutils literal"><span class="pre">traits</span> <span class="pre">clonable</span></tt></li>
+</ul>
+</div></blockquote>
+<p>Module: rootTraits</p>
+</div>
+<div class="section" id="mixins">
+<h2>Mixins<a class="headerlink" href="#mixins" title="Permalink to this headline">¶</a></h2>
+<p>Like traits objects, mixin objects encapsulate a bundle of shared behavior. Unlike traits objects,
+however, mixin objects are generally parentless to allow their behavior to be added to an object
+without necessarily also adding unwanted behavior (such as access to the lobby namespace). Mixins
+are generally used in objects that also have other parents. An example is <tt class="docutils literal"><span class="pre">mixins</span> <span class="pre">identity</span></tt>.</p>
+</div>
+<div class="section" id="the-identity-mixin">
+<h2>The Identity Mixin<a class="headerlink" href="#the-identity-mixin" title="Permalink to this headline">¶</a></h2>
+<p>Two objects are usually tested for equality based on whether they have “the same value” within a
+common domain. For example, <tt class="docutils literal"><span class="pre">3.0</span> <span class="pre">=</span> <span class="pre">3</span></tt> within the domain of numbers, even though they are not
+the same object or even the same kind of object. In some domains, however, two objects are equal
+if and only if they are the exact same object. For example, even two process objects with the same
+state are not considered equal unless they are identical. In such cases, identity comparison is used
+to implement equality tests, and <tt class="docutils literal"><span class="pre">mixins</span> <span class="pre">identity</span></tt> can be mixed in to get the desired behavior.</p>
+<p>Module: rootTraits</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="worldorg.html">World Organization</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="blocks.html">Blocks, Booleans, and Control Structures</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2011, Russell Allen (Ed.).
+      Last updated on Nov 03, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

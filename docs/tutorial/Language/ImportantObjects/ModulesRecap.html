@@ -1,0 +1,42 @@
+<table cellpadding=0 cellspacing=0><tr><td width=400 valign=top><h3>
+
+<h2> Modules </h2>
+<UL>
+<LI>	Collection of slots
+<P>
+<LI>	Directory name for the source file, comment, revision number (for RCS), time of file-in.
+<P>
+<LI>	List of submodules
+<P>
+<LI>	postFileIn method for further initialization
+</UL>
+
+<IMG ALIGN=bottom SRC="../../Images/module.gif"> <BR>
+
+</h3></td><td valign=top>
+
+<h3> Modules</h3> 
+
+In addition to being a collection of slots, a module contains some other 
+information: it names a directory (where to find the source file), a list of 
+submodules to be read in whenever it is read, and a postFileIn method to be run 
+after the module is read, to perform initializations. These data allow modules to be 
+organized hierarchically by subsystem. For example the smalltalk module includes 
+all the modules in the Smalltalk emulation system, and is contained in the 
+directory applications/smalltalk. (Directories are relative to the 
+environment variable $SELF_WORKING_DIR.)
+<P>
+
+The name of a module must be a valid Self unary selector; the same name 
+will used for the source file, with a .self suffix. The module object can be 
+accessed by sending a message with its name to modules.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Slots.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="ChangeManagement.html"> Next  </a> ]
+</center>

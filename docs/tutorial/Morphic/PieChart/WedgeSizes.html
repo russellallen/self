@@ -1,0 +1,62 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Computing wedge sizes </h2>
+<UL>
+<P><LI>	Chart sums wedge's amounts
+<P><LI>	Computes percentages, updates wedges.
+</UL>
+
+<IMG ALIGN=bottom SRC="pie5.gif"> <BR>
+
+
+</h3></td><td valign=top>
+
+
+<h3>Computing wedge sizes</h3>
+
+The scheme we will adopt for computing the wedge sizes is that the chart object 
+will be in control. When asked to updateWedges it will sum the amount in each 
+individual wedge, then share out the pie based on the ratio of each wedge's 
+amount to the total.
+<P>
+
+<PRE>
+
+updateWedges = ( | wList. total. nextAngle. |
+	wList: wedges.
+
+	"compute total of wedge amounts"
+	total: (wList copyMappedBy: [| :w | w amount ]) sum.
+
+	"special case: the total is zero"
+	total = 0 ifTrue: [
+		wList do: [| :w | w percent: 0 ].
+		^self.
+	].
+
+	"divide pie among wedges proportionally"
+	nextAngle: 0.
+	wList do: [| :w |
+		w startAngle: nextAngle.
+		w percent: 100.0 * (w amount /= total).
+		nextAngle: nextAngle + w spanAngle.
+	].
+	changed. "redraw me"
+	self
+).
+</PRE>
+
+Sending the message changed causes the user interface to request the object to re-
+draw itself in all the windows in which it is visible.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Building.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Changes.html"> Next  </a> ]
+</center>

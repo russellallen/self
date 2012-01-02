@@ -1,0 +1,50 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> A module is a set of slots </h2>
+<UL>
+<LI>	A module can add whole objects, but can also add new slots to existing objects.
+<P>
+<LI>	Each slot names the module it belongs to.
+<P>
+<LI>	User interface shows slot summaries; exposing annotation shows a slot's module.
+</UL>
+
+<IMG ALIGN=bottom SRC="../../Images/slotAnno1.gif"> <BR>
+
+</h3></td><td valign=top>
+
+
+
+<h3>A module is a set of slots</h3>
+
+What is in a module? Although a module adds objects to a system, it can also add 
+slots to existing objects. For example, a module to find palindromes might add a 
+slot to traits string called isPalindrome, with a method in the slot.
+<P>
+
+Hence, the granularity of a module is an individual slot; each slot's annotation 
+names its module, which gives the name of the source file containing the code that 
+is responsible for recreating that slot in a new snapshot.
+<P>
+
+This implies that one object may be built incrementally as the result of reading 
+several files, and so the transporter endeavors to keep the order that the files are 
+read in as independent as possible. 
+<P>
+
+Since each object can possess slots in different modules, the user interface shows a 
+summary of the modules of an object, sorted by frequency. By using the 'Show 
+Annotation' menu item on a slot, we can find out and change a slot's module. We 
+can also use the 'Set module...' menu item on a slot to set its module, or the 'Set 
+module...' menu item on an object to set the module of many slots in the object.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Changes.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="ModulesRecap.html"> Next  </a> ]
+</center>

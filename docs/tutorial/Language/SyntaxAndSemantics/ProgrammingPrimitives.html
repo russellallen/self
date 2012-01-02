@@ -1,0 +1,100 @@
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top>
+
+<h2> Programming primitives </h2>
+<UL>
+<LI>	obj1 _Define: obj2 <BR>
+Make obj1 be a shallow copy of obj2.
+<P>
+<LI>	obj1 _AddSlots: obj2 <BR>
+Add to obj1 slots like those in obj2, with the same values. Existing slots of the same name are overwritten.
+<P>
+<LI>	obj1 _AddSlotsIfAbsent: obj2 <BR>
+As _AddSlots, but do not overwrite existing slots.
+<P>
+<LI>	obj1 _RemoveSlot: slotName <BR>
+Remove slot with name slotName
+</UL>
+
+
+<h2> Exercise </h2>
+<UL>
+<PRE>
+	| x <- () |
+	x _Define: (| a = 3 |)
+	x _AddSlots: (| b = 4. a = 2 |).
+	x _AddSlotsIfAbsent: (| a = ©x©. c = 3@4 |).
+	x _RemoveSlot: ©b©
+</PRE>
+</UL>
+</h3>
+
+</td><td valign=top>
+
+<h3> Programming primitives </h3>
+
+Up to now we have described the execution model in terms of ready-to-run 
+objects. To provide an incremental programming environment we also need 
+mechanism to alter the structure of an object (add and remove slots). These are the 
+programming primitives. It is not typical to use them from within an application, 
+although in some cases this makes sense (e.g., the Self parser-generator, 
+Mango, builds a program).
+<P>
+
+Each of these primitives has a mirror-based form (see later), which should be used 
+in preference to the naked primitive.
+<P>
+
+These are the most important of Self's programming primitives:
+<P>
+
+<UL>
+<DT> <B>_Define:</B> <DD>
+obj The receiver is redefined to be a shallow copy of the argument. All 
+preexisting slots in the receiver are discarded. Sometimes known as a `one-
+way become'.
+<P>
+
+<DT> <B>_AddSlots:</B> <DD>
+obj Add to the receiver slots with the same names and values as in 
+the argument. A slot in the receiver with the same name as a slot in the 
+argument takes the value of the argument's slot.
+<P>
+
+<DT> <B>_AddSlotsIfAbsent:</B> <DD>
+obj Add to the receiver slots with the same names and values 
+as in the argument. A slot in the receiver with the same name as a slot in the 
+argument is not affected.
+<P>
+
+<DT> <B>_RemoveSlot:</B> <DD>
+slotName removes the slot with the name (a string) from the 
+receiver.
+<P>
+
+<DT> <B> _RemoveAllSlots</B> <DD>
+removes all slots from the receiver.
+<P>
+
+</UL>
+
+<HR>
+
+Exercise: What are the effects of the following statements?
+<P>
+
+<PRE>
+	| x <- () |
+	x _Define: (| a = 3 |)
+	x _AddSlots: (| b = 4. a = 2 |).
+	x _AddSlotsIfAbsent: (| a = 'x'. c = 3@4 |).
+	x _RemoveSlot: 'b'
+</PRE>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Primitives.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Mirrors.html"> Next  </a> ]
+</center>

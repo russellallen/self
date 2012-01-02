@@ -1,0 +1,146 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Numbers and Time &mdash; Self Handbook for Self 4.5 (r 1) documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'for Self 4.5 (r 1)',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Self Handbook for Self 4.5 (r 1) documentation" href="index.html" />
+    <link rel="up" title="The Self World" href="selfwrld.html" />
+    <link rel="next" title="Collections" href="collections.html" />
+    <link rel="prev" title="Blocks, Booleans, and Control Structures" href="blocks.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="index.html">
+          <span>Self Handbook for Self 4.5 (r 1) documentation</span></a></h1>
+        <h2 class="heading"><span>Numbers and Time</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="blocks.html">Blocks, Booleans, and Control Structures</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="collections.html">Collections</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="numbers-and-time">
+<h1>Numbers and Time<a class="headerlink" href="#numbers-and-time" title="Permalink to this headline">¶</a></h1>
+<p>The SELF number traits form the hierarchy shown below. (In this and subsequent hierarchy descriptions,
+indentation indicates that one traits object is a child of another. The prefix “traits” is
+omitted since these hierarchy descriptions always describe the interrelationship between traits objects.
+In most cases, leaf traits are concrete and have an associated prototype with the same name.)</p>
+<blockquote>
+<div><div class="highlight-python"><pre>orderedOddball
+        number
+                float
+                integer
+                        smallInt
+                        bigInt</pre>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">traits</span> <span class="pre">number</span></tt> defines behavior common to all numbers, such as <tt class="docutils literal"><span class="pre">successor</span></tt>, <tt class="docutils literal"><span class="pre">succ</span></tt>, <tt class="docutils literal"><span class="pre">predecessor</span></tt>,
+<tt class="docutils literal"><span class="pre">pred</span></tt>, <tt class="docutils literal"><span class="pre">absoluteValue</span></tt>, <tt class="docutils literal"><span class="pre">negate</span></tt>, <tt class="docutils literal"><span class="pre">double</span></tt>, <tt class="docutils literal"><span class="pre">half</span></tt>, <tt class="docutils literal"><span class="pre">max:</span></tt>, and <tt class="docutils literal"><span class="pre">min:</span></tt>. <tt class="docutils literal"><span class="pre">traits</span> <span class="pre">number</span></tt>
+inherits from <tt class="docutils literal"><span class="pre">traits</span> <span class="pre">orderedOddball</span></tt>, so sending <tt class="docutils literal"><span class="pre">copy</span></tt> or <tt class="docutils literal"><span class="pre">clone</span></tt> to a number returns the
+number itself. <tt class="docutils literal"><span class="pre">traits</span> <span class="pre">integer</span></tt> defines behavior common to all integers such as <tt class="docutils literal"><span class="pre">even</span></tt>, <tt class="docutils literal"><span class="pre">odd</span></tt>, and
+<tt class="docutils literal"><span class="pre">factorial</span></tt>. There are four division operators for integers that allow the programmer to control
+how the result is truncated or rounded. Integers also include behavior for iterating through a subrange,
+including:</p>
+<div class="highlight-python"><pre>to:Do:
+to:By:Do:
+to:ByNegative:Do:
+upTo:Do:
+upTo:By:Do:
+downTo:Do:
+downTo:By:Do:</pre>
+</div>
+<p>Relevant oddballs:</p>
+<blockquote>
+<div><ul class="simple">
+<li>infinity IEEE floating-point infinity</li>
+<li>minSmallInt smallest smallInt in this implementation</li>
+<li>maxSmallInt biggest smallInt in this implementation</li>
+</ul>
+</div></blockquote>
+<p>Modules: number, float, integer, smallInt, bigInt</p>
+<div class="section" id="random-numbers">
+<h2>Random Numbers<a class="headerlink" href="#random-numbers" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>clonable
+random
+randomLC
+prototypes random</pre>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">Traits</span> <span class="pre">random</span></tt> defines the abstract behavior of random number generators. A random number
+generator can be used to generate random booleans, integers, floats, characters or strings. <tt class="docutils literal"><span class="pre">traits</span>
+<span class="pre">randomLC</span></tt> defines a concrete specialization based on a simple linear congruence algorithm. For
+convenience, the prototype for <tt class="docutils literal"><span class="pre">randomLC</span></tt> is “<tt class="docutils literal"><span class="pre">random</span></tt>,” not “<tt class="docutils literal"><span class="pre">randomLC</span></tt>”.</p>
+<p>Modules: random</p>
+</div>
+<div class="section" id="time">
+<h2>Time<a class="headerlink" href="#time" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="n">clonable</span>
+<span class="n">time</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>A time object represents a date and time (to the nearest millisecond) since midnight GMT on January
+1, 1970. The message <tt class="docutils literal"><span class="pre">current</span></tt> returns a new time object containing the current time. Two
+times can be compared using the standard comparison operators. One time can be subtracted from
+another to produce a value in milliseconds. An offset in milliseconds can be added or subtracted
+from a time object to produce a new time object. However, it is an error to add two time objects
+together.</p>
+<p>Modules: time</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="blocks.html">Blocks, Booleans, and Control Structures</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="collections.html">Collections</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2011, Russell Allen (Ed.).
+      Last updated on Nov 03, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

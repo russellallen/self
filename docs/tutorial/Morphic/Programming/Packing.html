@@ -1,0 +1,49 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<H2> Packing </H2>
+<UL>
+<P><LI>	Layout morphs use linear, non-overlapping packing.
+<P><LI>	Rows: left-to-right.
+<P><LI>	Columns, frames: top-to-bottom.
+<P><LI>	Packing done in one dimension
+<P><LI>	Justification controls position in other dimension
+</UL>
+
+<IMG ALIGN=bottom SRC="layout.gif"> <BR>
+
+</h3></td><td valign=top>
+
+<h3>Packing</h3>
+
+The current set of layout morphs all use the same layout strategy: linear, non-
+overlapping packing. Rows pack horizontally from left-to-right. Columns, frames, 
+and their descendents pack vertically from top-to-bottom. This simple approach, 
+while it does not handle every conceivable layout problem (e.g., tables whose rows 
+and columns adjust to the size of their contents), is surprisingly powerful. All 
+automatic layout in Morphic is based on nested combinations of rows and 
+columns.
+<P>
+
+Linear packing is best explained procedurally. Consider a rowMorph. Its task is to 
+arrange its submorphs into a row such that the left edge of each morph just touches 
+the right edge of the next morph. The submorphs are processed in order; that is, 
+the first submorph will be placed at the left end of the row, then the next submorph 
+will be placed to the right of the first, and so on. The last submorph will be placed 
+at right-most end of the row. Notice that the order of the submorphs is not affected 
+by the packing process. Also notice that the packing is done only in one primary 
+dimension-the horizontal dimension in this case. The other dimension is also 
+considered during packing, and is controlled by the <i>justification</i> parameter of the 
+row. Depending on this parameter, the tops, bottoms, or centers of the submorphs 
+can be aligned with the top, bottom, or center of the row.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Layout.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Space-filling.html"> Next  </a> ]
+</center>

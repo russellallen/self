@@ -1,0 +1,43 @@
+<P>
+<center>
+[ <a href="SavingBankAccount.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="CopyDowns.html"> Next  </a> ]
+</center>
+
+
+<h3> Reading a module </h3>
+
+A module can be read in a number of ways.
+<P>
+
+If it is being read for the first time into a snapshot, you can use the runScript 
+message:
+<P>
+
+<PRE>
+	'applications/accounts.self' runScript
+</PRE>
+
+Or use the bootstrap object:
+<PRE>
+	bootstrap read: 'accounts' From: 'applications'
+</PRE>
+
+Or use the _RunScript primitive directly (this is only necessary with an empty VM, 
+for example when rebuilding the system from scratch):
+
+<PRE>
+	'release4_0.self' _RunScript
+</PRE>
+
+Or, if the module is being re-read (perhaps someone has given you a newer 
+version) there are several alternatives:
+
+<PRE>
+	modules accounts fileIn
+	cc accounts				"with apologies to C programmers!"
+</PRE>
+
+In Self 4.0, there will be a module cache refill the next time a programming 
+change is made after a file is read in; this may be eliminated in future versions.

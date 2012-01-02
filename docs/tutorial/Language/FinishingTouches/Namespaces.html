@@ -1,0 +1,63 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top>
+
+<H3> 
+
+<h2> More about namespaces </h2>
+<LI>	The lobby has two parents:
+<UL>
+<BR> <i> defaultBehavior </i> contains methods of general applicability.
+<BR> <i> globals </i> provides a global namespace for prototypes.
+</UL> 
+<P>
+Additional namespaces (deprecated):
+<UL>
+<LI>	<i> traits </i> organizes the globally-accessible traits objects
+<LI>	<i> mixins </i> does the same for mixins 
+<BR> (objects intended to be used only as parents, similar to abstract classes).
+</UL>
+
+</H3>
+
+</td><td valign=top>
+
+<h3> More about namespaces </h3>
+
+The lobby has two parents, in fact. The other parent slot is called defaultBehavior, 
+and it contains methods applicable to all objects (such as the identity test, ==, and 
+default implementations of printString, error: and halt).
+<P>
+
+Any object that inherits from the lobby can therefore respond to the messages 
+defined in defaultBehavior, and access the prototypes via globals.
+<P>
+
+Separating defaultBehavior from globals allows an object to choose to inherit from 
+one but not the other, if that is appropriate.
+<P>
+
+<h3> Other namespaces </h3>
+
+The lobby contains two additional namespaces, accessible via non-parent slots:
+<P>
+
+<OL>
+<DT> 1. traits contains a collection of other traits.
+<DT> 2. mixins contains trait-like objects intended to be used as mixins 
+(i.e., their children all have other parents, which provide the main functionality).
+</OL>
+
+We are gradually moving away from the use of these namespaces. New 
+applications do not tend to add to these namespaces, but keep their traits and 
+mixins locally. Examples: webBrowser, transporter, smalltalkEmulator. This avoids 
+potential name clashes in these spaces.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Comments.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="PracticalIssues.html"> Next  </a> ]
+</center>

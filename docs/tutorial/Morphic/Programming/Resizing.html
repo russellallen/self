@@ -1,0 +1,60 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+
+<h2> Resizing: summary </h2>
+<UL>
+<P><LI>	Resizing behavior in one dimension is independent of the other dimension.
+<P><LI>	Can be one of:
+rigid, space-filling, shrink-wrap
+<P><LI>	Can be inspected and changed using core sampler and property sheet:
+</UL>
+
+<IMG ALIGN=bottom SRC="sizing.gif"> <BR>
+
+</h3></td><td valign=top>
+
+<h3>Resize Attribute Summary</h3>
+
+The resizing behavior of a morph in one dimension is completely independent of 
+its behavior in the other dimension; that is, a morph actually has two independent 
+resizing attributes, one for the horizontal dimension and one for the vertical 
+dimension.
+<P>
+
+To summarize, the resizing behavior of a morph along a given dimension is 
+controlled by its resizing attribute, which has one of three values:
+<P>
+
+<UL>
+<B> rigid </B> <BR> 
+The morph is not resized.
+<P>
+
+<B>space-filling</B> <BR> 
+In a row or column, the size of the morph adapts to fill the 
+available space. Extra space is shared evenly with any other space-filling 
+morphs in that row or column.
+<P>
+
+<B>shrink-wrap</B> <BR> 
+The morph is shrunk to just fit around its submorphs, or to its 
+minimum size, whichever is smaller. Enclosed space-filling morphs are 
+shrunk if necessary.
+<P>
+
+</UL>
+
+A morph's minimum size in a given dimension determines the smallest amount of 
+space that should be allocated to it during layout. The core sampler and/or 
+properties sheet (another blue menu item) can be used to change these attributes.
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="MinimumSizes.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="../Construction/ExampleOfConstruction.html"> Next  </a> ]
+</center>

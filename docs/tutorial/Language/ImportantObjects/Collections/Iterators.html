@@ -1,0 +1,68 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Iterators, etc.</h2>
+
+<UL>
+<LI>	Apply a block to each element of a collection:
+<PRE>
+aSet do: [| :el | el printLine]
+vec do: [| :e. :k. | e position: k]
+</PRE>
+
+<P>
+<LI>	Mapping operators:
+<PRE>
+coll mapBy: [| :e | e squared ]
+</PRE>
+
+<P>
+<LI>	Filtering:
+<PRE>
+iList filterBy: [| :n | n even]
+</PRE>
+
+<P>
+<LI>	Convertors:
+<PRE>
+aSet asVector
+vec asSet
+</PRE>
+</UL>
+
+</h3></td><td valign=top>
+
+
+<h3>Iterators, filters, mappers, convertors</h3>
+
+There are many operations common to all collections. Perhaps the most important 
+are those that can apply a block to each element of a collection. The basic <i> iterator </i> is 
+do:. It takes a block (or anything that responds to value:With:) as argument, and 
+sends it value:With: with each element and key of the collection. (For unordered 
+collections, the key has little meaning. Note that blocks in Self can take 
+fewer arguments that supplied, so the key can be ignored.) Browse traits collection 
+and traits indexable for the complete set of iterators.
+<P>
+
+The elements of a collection can be mapped using a block as the mapping function, 
+with the messages mapBy:, copyMappedBy: and mapBy:Into:.
+<P>
+
+Collections can have elements filtered from them using a block as a predicate; the 
+messages are filterBy:, copyFilteredBy: and filterBy:Into:. Searching iterators are 
+provided too, such as findFirst:IfPresent:IfAbsent:.
+<P>
+
+New collections can be created from the elements of an existing collections using 
+asDictionary, asList, asSequence, asSet, etc. Two collections can be concatenated to 
+form a new collection using the comma message (,).
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Ordered.html"> Previous  </a> ]
+[ <a href="../../../index.html"> Index  </a> ]
+[ <a href="Collectors.html"> Next  </a> ]
+</center>

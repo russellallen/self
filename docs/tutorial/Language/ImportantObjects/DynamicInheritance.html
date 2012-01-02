@@ -1,0 +1,47 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Dynamic inheritance </h2>
+<UL>
+<LI>	Assigning to a parent slot changes the inherited behavior of an object.
+<P>
+<LI>	Usually used to switch between states where behavior is significantly different.
+<P>
+<LI>	Use with caution!
+</UL>
+
+<IMG ALIGN=bottom SRC="../../Images/di.gif"> <BR>
+
+</h3></td><td valign=top>
+
+
+<h3> Dynamic inheritance </h3>
+
+Because parent slots are potentially assignable, we have a new concept in 
+Self not present in class-based languages such as Smalltalk, C++ and 
+Eiffel: <i> dynamic </i> inheritance.
+<P>
+
+Using dynamic inheritance, an object can change one or more of its parents during 
+execution.
+<P>
+
+Typically, this is used when an object can be in one of a small number of discrete 
+states, each having significantly different behavior from the others. An example is 
+the object unix, which represents the Unix system call interface. It has a dynamic 
+parent, currentOsVariant, which can be set to an object containing behavior specific 
+to a particular variant of Unix; this is done every time the system is started.
+<P>
+
+Dynamic inheritance should be used with caution: it is easy to construct programs 
+which are very hard to understand!
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="MultipleInheritance.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="ControlStructures.html"> Next  </a> ]
+</center>

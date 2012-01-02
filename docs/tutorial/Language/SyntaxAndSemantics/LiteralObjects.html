@@ -1,0 +1,126 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top>
+
+
+<H3>
+
+<H2>
+Literal objects
+</H2>
+<UL>
+<LI>	Plain objects	(| x. y. z |) "assignable data slots"
+<LI>	Methods	
+<UL>	
+	<DT>	(| x. y |
+	<DT>	x: 3.∑∑y: 4. 
+	<DT>	x squared + y squared)
+</UL>
+
+<LI>	Constant slots:
+<UL>	
+	<DT>(| x = 3.∑∑y = 4 |)
+</UL>
+<LI>	Initialized assignable slots:
+<UL>	
+	<DT>(| x <± 3.∑∑y <± 4 |)
+</UL>
+<LI>	Parent slots:
+<UL>	
+	<DT> (| parent* = traits point.∑∑x.∑∑y |)
+</UL>
+
+
+</H3>
+<PRE>
+
+	(|
+		parent* = traits clonable.
+		x <- 0.
+		y <- 0.
+		r = 		(| x2y2 |
+				x2y2:∑∑x squared + y squared.
+				x2y2 squareRoot).
+		+ p =		(| newPt |
+				newPt: copy.
+				newPt x:∑∑x + p x.
+				newPt y:∑∑y + p y.
+				newPt)
+	|)
+</PRE>
+
+</td><td valign=top>
+
+
+<h3> Literal objects </h3>
+
+Other objects can also be constructed as literals. There are three kinds of slot-
+containing objects:
+<P>
+
+<UL>
+<DT>1.	Plain objects
+<DT>2.	Methods
+<DT>3.	Blocks
+</UL>
+
+<P>
+Plain objects are constructed by including a list of slot descriptions in a slot list, 
+delimited by vertical bars, which in turn is enclosed in parentheses:
+<P>
+
+<PRE>
+	(| x. y. z |)
+</PRE>
+
+<P>
+This object contains three assignable data slots: x, y, z (all initialized to nil).
+<P>
+
+A method resembles a plain object except that code follows the slot list. When the 
+method is evaluated, the slots play the role of local variables. The value returned 
+by the method is the value of the last expression. We will look at method 
+invocation semantics in more detail later.
+<P>
+
+<PRE>
+	(| x. y | x: 3.  y: 4.  x squared + y squared )
+</PRE>
+
+<P>
+A constant slot can be created by supplying an initial value after an equals sign:
+<P>
+
+<PRE>
+	(| x = 3. y = 4 | x squared + y squared )
+</PRE>
+
+<P>
+An assignable slot can also be initialized, using a left arrow:
+<P>
+
+<PRE>
+	(| x <- 3. y <- 3 | y: y + 1.  x squared + y squared )
+</PRE>
+
+<P>
+All the above forms of slot declaration can be used in plain, method and block 
+objects. In the initializing forms, the initializing expression is evaluated at compile-
+time in the context of the lobby.
+<P>
+
+Finally, a parent slot can be created using any of the above forms, by suffixing the 
+name of the slot with an asterisk (*).
+<P>
+
+The example shows the initial definition of a prototypical 2-d point, to illustrate the 
+various kinds of literal object declarations.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Messages.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Methods.html"> Next  </a> ]
+</center>

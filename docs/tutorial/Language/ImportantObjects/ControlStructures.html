@@ -1,0 +1,75 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Control structures </h2>
+<UL>
+<LI>	Fully extensible Conditionals
+<PRE>
+n even ifTrue: [h: n / 2]
+n even
+	ifTrue: [h: n / 2]
+	False: [h: n pred / 2]
+ans:d= 0 ifTrue: ©infinity© False: [n / d]
+../Control structures
+</PRE>
+<P>
+<LI>	Also fully extensible
+Loops
+<PRE>
+[i < thresh] whileTrue: [i: i * 2]
+[| c |
+c: nextCommand.
+c = 'end' ifTrue: [^self].
+] loop
+
+[| :exit. c |
+c: nextCommand.
+c = 'end' ifTrue: exit.
+] loopExit
+</PRE>
+</UL>
+
+</h3></td><td valign=top>
+
+<h2> Control structures </h2>
+
+<h3> Conditionals </h3>
+
+<UL>
+<BR> bool ifTrue: blockOrValue
+<BR>bool ifFalse: blockOrValue
+<BR>bool ifTrue: b1 False: b2
+<BR>bool ifFalse: b1 True: b2
+</UL>
+
+Any object that responds to value can be used in place of a block. Value in 
+defaultBehavior returns self.
+
+<h3> Looping </h3>
+
+<UL>
+<BR>condBlock whileTrue: bodyBlock
+<BR>condBlock whileFalse: bodyBlock
+<BR>condBlock whileTrue
+<BR>condBlock whileFalse
+<BR>
+<BR>bodyBlock untilTrue: condBlock
+<BR>bodyBlock untilFalse: condBlock
+<BR>
+<BR>block loop
+<BR>block loopExit
+</UL>
+
+See traits block for more. Feel free to add your own!
+<P>
+
+
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="DynamicInheritance.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Collections/Collections.html"> Next  </a> ]
+</center>

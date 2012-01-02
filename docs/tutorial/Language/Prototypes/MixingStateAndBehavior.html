@@ -1,0 +1,38 @@
+<table cellpadding=0 cellspacing=0><tr><td valign=top>
+
+<h2> Mixing state and behavior </h2>
+<h3>
+<UL>
+<LI>	Data and method slots can be freely mixed.
+<P>
+<LI>	Can use the freedom to experiment in safety: make a copy of an object, put a copy of a method in it, experiment with the method, the move it back to the traits when done.
+</UL>
+
+</td><td valign=top>
+
+<h3> Benefits of mixed state and behavior </h3>
+
+In Self, we can put method and data slots in whichever object we choose 
+- it is up to us to exercise good taste and careful design to get the effect we want.
+<P>
+
+We can also use this flexibility to explore new designs in a safe way. For example, 
+suppose we want to try a new deposit: method, but we are unsure of ourselves and 
+don't want to break any existing bank accounts until we are certain that our new 
+method works.
+<P>
+
+We can make a new bank account by copying an existing one, and put a local copy 
+of deposit: inside it. We can then experiment with deposit: sure in the knowledge 
+that no other object will be affected. When we are convinced our new method is 
+working, we can move it back to the traits, so all accounts use it.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="TestingFactoredAccount.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="InterchangableStateAndBehavior.html"> Next  </a> ]
+</center>

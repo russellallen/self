@@ -1,0 +1,56 @@
+
+<table cellpadding=0 cellspacing=0><tr><td valign=top>
+
+<H2> Inheritance </H2>
+<h3>
+<UL>
+<LI>	Parent slots implement object-based inheritance by extending message lookup to other objects.
+<P>
+<LI>	A parent slot is a kind of data slot, designated by a trailing *.
+<P>
+<LI>	If no slot matching a message is found in the local object, the search continues in the parent, and the parent©s parent, etc.
+</UL>
+</h3>
+
+</td><td valign=top>
+
+
+<h3> Inheritance </h3>
+
+As we have described lookup so far, a message must match one of the receiver's 
+slots. If not, an error will result, and a debugger will appear.
+<P>
+
+Inheritance modifies the lookup procedure by extending the search to other 
+objects. These objects are located via <i> parent</i> slots, which are a special kind of data 
+slot. Any data slot can be designated a parent, by attaching an asterisk to the slot 
+name.
+<P>
+
+If a message is sent to an object with a parent slot, then the search for a matching 
+slot is extended to the parent if no slot is found within the object.
+<P>
+
+If the search locates a method, then the method is executed in the context of the 
+receiver of the message (i.e., self is bound to the receiver of the message, not the 
+object in which the method was found).
+<P>
+
+By this simple device, inheritance has been liberated from the domain of classes 
+and made available to all objects. We can, if we so choose, make object structures 
+that mimic the conventional class-instance relationship, but we are no longer 
+forced to do so.
+<P>
+
+Terminology:  we use the terms parent, child, ancestor and descendant in ways 
+analogous to their usual meaning.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Copying.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="AddingCopyMethod.html"> Next  </a> ]
+</center>

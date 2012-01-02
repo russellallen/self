@@ -1,0 +1,78 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=450 valign=top><h3>
+
+
+<h2> Copy-downs </h2>
+<P>
+Used to propagate structure from one prototype to another:
+<P>
+<IMG ALIGN=bottom SRC="../../Images/copyDown1.gif"> <BR>
+
+<P>	Copied slots are shown in pink.
+<P><LI>	Need to specify:
+<UL>
+<LI>	copy-down parent
+<LI>	selector to use to make copy
+<LI>	slots to omit (optional)
+</UL>
+<P>
+<IMG ALIGN=bottom SRC="../../Images/copyDown2.gif"> <BR>
+
+<P><LI>		Programming environment propagates changes to copied-down descendants
+</UL>
+
+</h3></td><td valign=top>
+
+
+<h3> Copy-downs </h3>
+
+Because Self eschews classes, it is necessary to copy down slots when 
+refining an object. For example, the prototypical dictionary object is derived from 
+the prototypical set, and contains many slots that were prescribed by the 
+implementation of set. Some mechanism is needed to ensure that the relationship 
+between the two objects is maintained, should set be changed. 
+<P>
+
+In a class-based language, this need is met by a rule ensuring that subclasses 
+include any instance variables defined in their superclasses. In Self, this 
+inheritance of structure is separated from the inheritance of information 
+performed by the normal hierarchy of parent slots.
+<P>
+
+Instead of including in the language a facility for inheriting structure, Self 
+4.0 implements a facility in the environment, called "copy-down." An object's 
+annotation can contain a copy-down parent, copy-down selector, and set of slots 
+to omit. The copy-down parent is sent the message given by the copy-down 
+selector, and (except for the slots-to-omit), the slots in the result are added to the 
+object. Copied-down slots are shown in pink. 
+<P>
+
+In creating dictionary from set, the slots parent and prototype were omitted because 
+their contents had to be different; copied-down slots are copied, they cannot be 
+specially initialized in Self 4.0. It is also possible to omit a slot because it is 
+simply not needed; most other object-oriented programming systems would not 
+allow a subclass to avoid inheriting an instance variable.
+<P>
+
+The Self 4.0 programming environment uses the copy-down information 
+to allow the programmer to use a classical style when appropriate. For example, if 
+the programmer adds a slot to set, the environment will offer to add it to dictionary, 
+too.
+<P>
+
+The least convenient aspect of using copy-downs is that to do the moral equivalent 
+of creating a subclass, the programmer has to create two objects: a new traits object, 
+and a new prototype, and then specify that the new prototype is to be copied 
+down.
+<P>
+
+
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="ReadingModules.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Recap.html"> Next  </a> ]
+</center>

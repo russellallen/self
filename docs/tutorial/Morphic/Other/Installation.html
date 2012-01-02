@@ -1,0 +1,58 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Installation </h2>
+<UL>
+<P><LI>	Make global names for the prototypes.
+<P><LI>	Set the creator path for the prototypes and the traits.
+<P><LI>	Edit the prototype slots in the prototypes.
+<P><LI>	Make each prototype a copy-down of circleMorph.
+<P><LI>	Set module information for the slots in globals, the prototypes and the traits.
+<P><LI>	Save the module.
+<P><LI>	Add a morph to the factory.
+</UL>
+
+</h3></td><td valign=top>
+
+<h2> Installation </h2>
+
+We can now install our objects in the global namespace, make a module, and save 
+it.
+<P>
+
+First, we open globals so that the category ui2/Applications is exposed. We can 
+then drag the slot pieWedgeMorph from the chart prototype and drop it in. Then we 
+can add a slot pieChartMorph, and connect it to the chart.
+<P>
+
+Next, we use `Make creator' on these slots, and on the parent slots in the 
+prototypes.
+<P>
+
+After that, we edit the prototype slots in the objects to refer to the correct slots 
+(namely pieChartMorph and pieWedgeMorph).
+<P>
+
+Our prototypes are copies of circleMorphs, and should maintain their structure in 
+the face of changes to circleMorph. Hence, we make each of them a copy-down of 
+circleMorph. Omit the slots parent and prototype when setting the copy-down 
+information.
+<P>
+
+Finally, we can add module information into the new slots in globals, the 
+prototypes and the traits, placing all of them in a module pieChart. At this point, we 
+can file out the module.
+<P>
+
+You may even consider embedding a pie chart into the factory.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="../DragAndDrop/InputHandling.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="SomeUsefullMorphs.html"> Next  </a> ]
+</center>

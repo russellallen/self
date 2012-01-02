@@ -28,21 +28,17 @@ clean:
 html:
 	@echo "Setting up files"
 	mkdir -p source/documentation/published
-	cp -rf ../papers/published/*.rst source/documentation/published
+	cp -rf ../docs/papers/*.rst source/documentation/published
 	mkdir -p static/published
-	cp -rf ../papers/published/*.pdf static/published
-	mkdir -p static/manuals
-	cp -rf ../manuals/* static/manuals
+	cp -rf ../docs/papers/*.pdf static/published
 	mkdir -p static/tutorial
-	cp -rf ../tutorial/* static/tutorial
-	tar zxvf static/tutorial/Tutorial.tar.gz -C static/tutorial 
+	cp -rf ../docs/tutorial/* static/tutorial
 	mkdir -p build/html build/doctrees
 	@echo "Building site"
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) build/html
 	@echo "Cleaning up and copying support files"
 	rm -rf source/documentation/published
 	rm -rf static/published
-	rm -rf static/manuals
 	rm -rf static/tutorial
 	@echo
 	@echo "Build finished. The HTML pages are in build/html."

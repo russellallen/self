@@ -1,0 +1,47 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Collectors </h2>
+<UL>
+<LI> All descendants of defaultBehavior respond to &, making a new collector list with the arg.
+<P>
+<LI> Collectors respond to & by appending the arg to the list
+<P>
+<LI> Collectors can be turned into collections using asSet, asList, asVector, etc.
+<PRE> (1 & false & nil & ©foo©) asVector </PRE>
+</UL>
+
+</h3></td><td valign=top>
+
+<h3>Collectors</h3>
+
+A useful kind of object when building a collection is a collector. A collector is a node 
+in a linked list of collectors.
+<P>
+
+All objects that inherit from defaultBehavior respond to the binary message & by 
+making a new collector list containing the receiver and argument. Collectors 
+respond to & by appending the argument to the list. Collector lists can be 
+converted to the other kinds of collections using asList, asSequence, asSet, etc.
+<P>
+
+Hence, a convenient way to make a collection from literal objects is using 
+collectors:
+<P>
+
+<PRE>	
+	(1 & false & nil & 'foo') asVector 
+</PRE>
+
+Because the & operation is fast, a collector is also a useful way of accumulating all 
+the elements of a collection before actually constructing the collection.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Iterators.html"> Previous  </a> ]
+[ <a href="../../../index.html"> Index  </a> ]
+[ <a href="../Processes.html"> Next  </a> ]
+</center>

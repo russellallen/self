@@ -1,0 +1,51 @@
+
+<table cellpadding=0 cellspacing=0><tr><td valign=top>
+
+<h2> The debugger </h2>
+
+<IMG ALIGN=bottom SRC="debugger2.gif"> <BR>
+<IMG ALIGN=bottom SRC="debugger3.gif"> <BR>
+
+</td><td valign=top>
+
+<P>
+We can walk through the execution of a method using the Self debugger. 
+To invoke the debugger, we send the message halt to an object that understands it, 
+such as an integer. This puts a debugger in the hand.
+<P>
+
+We can then use the `Step' button to step execution. `Step' steps over messages that 
+result in slot accesses or assignments, but steps into other methods. To execute a 
+message send to completion, without showing any of the details, use `Next'.
+<P>
+
+For the withdraw: message shown, we can:
+<P>
+
+<UL>
+
+<LI>	Step over the halt; this causes the top-level expression to become visible, with 
+the pending expression highlighted.
+<P>
+
+
+<LI>	Step into withdraw:.
+<P>
+
+<LI>	Use `Next' to skip over details of the subtraction and the max: message.
+<P>
+
+<LI>	Use `Continue' to complete execution, or `Abort' to abort the computation.
+<P>
+
+</UL>
+
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="MessageExamples.html">Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="../Prototypes/Prototypes.html"> Next  </a> ]
+</center>

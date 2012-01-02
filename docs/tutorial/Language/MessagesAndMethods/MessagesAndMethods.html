@@ -1,0 +1,71 @@
+
+<table cellpadding=0 cellspacing=0><tr><td valign=top>
+
+<h2> Messages and methods </h2> <BR>
+<P>
+<h3>
+
+All computation is initiated by messages. <BR>
+
+A message can get or set the value of a data slot, or invoke a
+method, which can send more messages. <BR>
+
+<IMG ALIGN=bottom SRC="../../Images/Bank/bank4.gif"> <BR>
+
+</h3>
+
+</td><td valign=top>
+
+<h3> Messages and methods </h3>
+
+In Self, all computation is initiated by messages. A message can result in 
+an atomic action, such as getting the value of a data slot or assigning a value to an 
+assignable slot, or can cause a method to be executed. In turn, the method may 
+contain further message sends.
+<P>
+
+We can try sending messages to the account using an evaluator. To get an evaluator 
+for an object, we use the middle-button (yellow) menu on the title bar of the object. 
+Any expression we enter in the evaluator will be evaluated in the context of the 
+object (i.e., with self bound to the object itself) by clicking on the evaluate button.
+<P>
+
+
+For example:
+<P>
+<UL>
+
+<DT><B> balance </B><DD>	
+returns the current balance
+<P>
+
+<DT><B> deposit: n </B><DD>
+increases the balance by n.
+<P>
+
+<DT><B> withdraw: n </B><DD>	
+decreases the balance by n, to a limit of zero.
+<P>
+
+</UL>
+
+Every evaluation has a result object. The result of the deposit; and withdraw: 
+messages is the bank account object itself. The result, if different from the host of 
+the evaluation, becomes attached to the cursor. We sometimes call the cursor the 
+hand, and say the object is in the hand. You can drop an object that is in the hand by 
+clicking the left button. If the evaluation results in the receiver object itself, rather than attaching to the hand, it wiggles slightly.
+<P>
+
+If you're not interested in the result of the evaluation, you can use the `Do 
+selection' middle-button menu item in the evaluator to evaluate the selected 
+expression but ignore the result.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="../ObjectsAndSlots/ObjectsAndSlots.html"> Previous </a> ]
+[ <a href="../../index.html"> Index </a> ]
+[ <a href="../MessagesAndMethods/MessageExamples.html"> Next </a> ]
+</center>

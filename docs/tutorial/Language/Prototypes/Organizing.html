@@ -1,0 +1,59 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top>
+
+<h2> Organizing programs without classes </h2>
+<h3>
+<UL>
+<LI>	one-of-a-kind: true, false, nil
+<P>
+<LI>	self-contained: can keep code and data together
+<P>
+<LI>	sharing achieved through inheritance.
+<P>
+<LI>	A parent of many objects is called a traits.
+</UL>
+
+</td><td valign=top>
+
+<h3>Organizing programs without classes </h3>
+
+Several new possibilities are opened up by making inheritance a first-class citizen.
+<P>
+
+First, we can make one-of-a-kind objects directly, without having to build a class 
+and enforce that it has a sole instance (e.g., in Smalltalk true is the sole instance of 
+class True).
+<P>
+
+Second, we can make any object, even those intended to be cloned, self-contained 
+(i.e., containing all its own data and method slots). We do not need to separate the 
+variables from the methods, in two distinct objects.
+<P>
+
+However, if we do find that an object can be factored into separate reusable parts, 
+we can construct them and share the parts. In Self, these reusable parts are 
+usually called <i> traits objects </i>.
+<P>
+
+<h3> Traits objects </h3>
+
+A traits objects contains only shareable state and behavior, intended to be used by 
+inheritance. Unlike a class it does not mandate a particular storage structure in its 
+descendants. It is usually incomplete (i.e., it does not implement all the messages 
+it send to self; these are to be implemented in descendants). Any object which 
+implements the appropriate messages can inherit from the traits object.
+<P>
+
+A traits object becomes truly useful when it has more than one descendant. Then, 
+we can change the behavior of all descendants by changing the behavior of the 
+traits. Let's factor our counter to demonstrate this.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="AddingCopyMethod.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="FactoringBankAcount.html"> Next  </a> ]
+</center>

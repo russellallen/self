@@ -1,0 +1,54 @@
+
+<table cellpadding=0 cellspacing=0><tr><td valign=top>
+
+
+<h2> Semantics of method and block invocation </h2>
+<UL>
+<LI>	Methods are prototypes
+<P>
+<LI>	When bound to a message, a method is cloned, arguments and self* are initialized.
+</UL>
+<IMG ALIGN=bottom SRC="../../Images/???.gif"> <BR>
+
+</td><td valign=top>
+
+<h3> Semantics of method and block invocation </h3>
+
+A method should be thought of as a prototype for the corresponding method 
+activation. When a message is bound to a method:
+<P>
+
+<UL>
+<BR> 1.	The method is cloned.
+<BR> 2.	The clone's argument slots are initialized with arguments from the message.
+<BR> 3.	A slot, self*, is added to the cloned method and bound to the receiver of the message. 
+<BR> This ensures that subsequent messages to self are correctly bound.
+</UL>
+
+Note that when a method sends a message using the implicit form of self, the 
+lookup first starts in the method itself (thereby making the argument, method 
+locals and self accessible), then proceeds up the inheritance chain defined by self.
+<P>
+
+Example:
+<P>
+
+<PRE>
+	send foo: 3 to
+
+	(|	x = 42.
+		foo: = (| :arg. local | local: arg+x. local*2 )
+	|)
+</PRE>
+
+The state of the activation after the assignment to local is shown overleaf.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Resends.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="BlockActivation.html"> Next  </a> ]
+</center>

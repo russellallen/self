@@ -1,0 +1,54 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Collections </h2>
+<UL>
+<LI>	Vectors. Fixed-size, ordered collections.
+<P>
+<LI>	Unordered collections, e.g., sets and dictionaries.
+<P>
+<LI>	Growable, ordered collections, such as lists and sequences
+</UL>
+
+<center>
+<IMG ALIGN=bottom SRC="collections2.gif"> <BR>
+</center>
+
+</h3></td><td valign=top>
+
+<h3>Vectors</h3>
+
+Vectors are the most primitive kind of collection, and are directly supported by the 
+Virtual Machine.
+<P>
+
+A vector is a fixed-size collection; it can contain references to any kind of object. 
+Typically, a vector is created by sending copySize:FillingWith: to the prototype. size 
+returns the size of the vector.
+<P>
+
+Elements are accessed by sending at: with an integer index, and modified by 
+sending at:Put: with an integer index and new element.
+<P>
+
+Smalltalk programmers: N.B.: Indexes are 0-based in Self!
+<P>
+
+Useful shorthands: firstKey returns the first index (0), lastKey the last index (size - 
+1), first and last the first and last elements, and first: and last: can be used to change 
+the first and last elements.
+<P>
+
+<h3> Special kinds of vector </h3>
+
+byteVectors are restricted to contained byte-size integers (0 to 255).
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Collections.html"> Previous  </a> ]
+[ <a href="../../../index.html"> Index  </a> ]
+[ <a href="Strings.html"> Next  </a> ]
+</center>

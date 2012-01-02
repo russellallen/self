@@ -1,0 +1,86 @@
+<table cellpadding=0 cellspacing=0><tr><td valign=top>
+
+<h2> Examples </h2>
+<P>
+
+<h3>
+
+deposit:50 <BR>
+<IMG ALIGN=bottom SRC="../../Images/Bank/bank5.gif"> <BR>
+
+withdraw:20 <BR>
+<IMG ALIGN=bottom SRC="../../Images/Bank/bank6.gif"> <BR>
+
+</h3>
+
+</td><td valign=top>
+
+
+<h3> Examples of method invocation: </h3>
+<P>
+
+<PRE> 
+	deposit: 50 and withdraw: 20 
+</PRE>
+<P>
+
+Sending deposit: 50 to the bank account causes a lookup for a slot named deposit:. 
+This locates the method of the same name. Execution of the method begins by 
+binding the formal argument, d, to the actual argument, 50, and by binding the 
+name self to the bank account object.
+<P>
+
+The deposit: method can be read as follows (we will explain the syntax and 
+semantics of Self in detail later):
+<P>
+
+<UL>
+<LI>	Send the message balance to self (i.e., the counter), to get the value of the 
+balance slot. Note that when a message is sent to self, we need not state the 
+receiver explicitly (unlike Smalltalk).
+<P>
+
+<LI>	Get the value of the argument, d (50).
+<P>
+
+<LI>	To the result of balance, send the message + with the result of d as argument. 
+This will return their sum.
+<P>
+
+<LI>	Send the message balance: to self, passing the result of balance+d as an 
+argument. This assigns the new value to balance. The result of the assignment 
+is self (i.e., the bank account object), not the assigned value.
+<P>
+
+</UL>
+
+If we made everything in deposit: as explicit as possible, it would look like this:
+<P>
+
+<PRE>	
+	self balance: ((self balance) + d) 
+</PRE>
+
+<P>
+Sending withdraw: 20 is similar, except that before the final balance: message is sent, 
+the result of balance-w is passed as an argument to the max: message, which is sent 
+to 0. Here, the receiver of the message is explicit. Max: sent to a number with 
+another number as argument returns the larger of the numbers.
+<P>
+
+Fully parenthesized with explicit messages to self, withdraw: would be like this:
+<P>
+
+<PRE>		
+	self balance: (0 max: ((self balance) - w)) 
+</PRE>
+
+</td></tr></table>
+
+
+<P>
+<center>
+[ <a href="MessagesAndMethods.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Debugger.html"> Next  </a> ]
+</center>

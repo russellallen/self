@@ -1,0 +1,999 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Useful Selectors &mdash; Self Handbook for Self 4.5 (r 1) documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'for Self 4.5 (r 1)',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Self Handbook for Self 4.5 (r 1) documentation" href="index.html" />
+    <link rel="up" title="Appendices" href="appendices.html" />
+    <link rel="next" title="Every Menu Item in the Programming Environment" href="menus.html" />
+    <link rel="prev" title="Built-in types" href="builtintypes.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="index.html">
+          <span>Self Handbook for Self 4.5 (r 1) documentation</span></a></h1>
+        <h2 class="heading"><span>Useful Selectors</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="builtintypes.html">Built-in types</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="menus.html">Every Menu Item in the Programming Environment</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="useful-selectors">
+<h1>Useful Selectors<a class="headerlink" href="#useful-selectors" title="Permalink to this headline">¶</a></h1>
+<p>This is a list of selectors which Selfers should find useful as a starting point.</p>
+<p><strong>Copying</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>clone</td>
+<td>shallow copy (for use within an object; clients should use copy)</td>
+</tr>
+<tr class="row-even"><td>copy</td>
+<td>copy the receiver, possibly with embedded copies or initialization</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Comparing</strong></p>
+<p><em>Equality</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>=</td>
+<td>equal</td>
+</tr>
+<tr class="row-even"><td>!=</td>
+<td>not equal</td>
+</tr>
+<tr class="row-odd"><td>hash</td>
+<td>hash value</td>
+</tr>
+<tr class="row-even"><td>==</td>
+<td>identical (the same object; this is reflective and should be avoided)</td>
+</tr>
+<tr class="row-odd"><td>!==</td>
+<td>not identical</td>
+</tr>
+</tbody>
+</table>
+<p><em>Ordered</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="54%" />
+<col width="46%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&lt;</td>
+<td>less than</td>
+</tr>
+<tr class="row-even"><td>&gt;</td>
+<td>greater than</td>
+</tr>
+<tr class="row-odd"><td>&lt;=</td>
+<td>less than or equal</td>
+</tr>
+<tr class="row-even"><td>&gt;=</td>
+<td>greater than or equal</td>
+</tr>
+<tr class="row-odd"><td>compare: IfLess: Equal: Greater:</td>
+<td>three way comparison</td>
+</tr>
+<tr class="row-even"><td>compare: IfLess: Equal: Greater: Incomparable:</td>
+<td>three way comparison with failure</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Numeric operations</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>+</td>
+<td>add</td>
+</tr>
+<tr class="row-even"><td>-</td>
+<td>subtract</td>
+</tr>
+<tr class="row-odd"><td>*</td>
+<td>multiply</td>
+</tr>
+<tr class="row-even"><td>/</td>
+<td>divide</td>
+</tr>
+<tr class="row-odd"><td>/=</td>
+<td>divide exactly (returns float)</td>
+</tr>
+<tr class="row-even"><td>/~</td>
+<td>divide and round to integer (tends to round up)</td>
+</tr>
+<tr class="row-odd"><td>/+</td>
+<td>divide and round up to integer</td>
+</tr>
+<tr class="row-even"><td>/-%</td>
+<td>divide and round down to integer modulus</td>
+</tr>
+<tr class="row-odd"><td>absoluteValue</td>
+<td>absolute value</td>
+</tr>
+<tr class="row-even"><td>inverse</td>
+<td>multiplicative inverse</td>
+</tr>
+<tr class="row-odd"><td>negate</td>
+<td>additive inverse</td>
+</tr>
+<tr class="row-even"><td>ceil</td>
+<td>round towards positive infinity</td>
+</tr>
+<tr class="row-odd"><td>floor</td>
+<td>round towards negative infinity</td>
+</tr>
+<tr class="row-even"><td>truncate</td>
+<td>truncate towards zero</td>
+</tr>
+<tr class="row-odd"><td>round</td>
+<td>round</td>
+</tr>
+<tr class="row-even"><td>asFloat</td>
+<td>coerce to float</td>
+</tr>
+<tr class="row-odd"><td>asInteger</td>
+<td>coerce to integer</td>
+</tr>
+<tr class="row-even"><td>double</td>
+<td>multiply by two</td>
+</tr>
+<tr class="row-odd"><td>quadruple</td>
+<td>multiply by four</td>
+</tr>
+<tr class="row-even"><td>half</td>
+<td>divide by two</td>
+</tr>
+<tr class="row-odd"><td>quarter</td>
+<td>divide by four</td>
+</tr>
+<tr class="row-even"><td>min:</td>
+<td>minimum of receiver and argument</td>
+</tr>
+<tr class="row-odd"><td>max:</td>
+<td>maximum of receiver and argument</td>
+</tr>
+<tr class="row-even"><td>mean:</td>
+<td>mean of receiver and argument</td>
+</tr>
+<tr class="row-odd"><td>pred</td>
+<td>predecessor</td>
+</tr>
+<tr class="row-even"><td>predecessor</td>
+<td>predecessor</td>
+</tr>
+<tr class="row-odd"><td>succ</td>
+<td>successor</td>
+</tr>
+<tr class="row-even"><td>successor</td>
+<td>successor</td>
+</tr>
+<tr class="row-odd"><td>power:</td>
+<td>raise receiver to integer power</td>
+</tr>
+<tr class="row-even"><td>log:</td>
+<td>logarithm of argument base receiver, rounded down to integer</td>
+</tr>
+<tr class="row-odd"><td>square</td>
+<td>square</td>
+</tr>
+<tr class="row-even"><td>squareRoot</td>
+<td>square root</td>
+</tr>
+<tr class="row-odd"><td>factorial</td>
+<td>factorial</td>
+</tr>
+<tr class="row-even"><td>fibonacci</td>
+<td>fibonacci</td>
+</tr>
+<tr class="row-odd"><td>sign</td>
+<td>signum (-1, 0, 1)</td>
+</tr>
+<tr class="row-even"><td>even</td>
+<td>true if receiver is even</td>
+</tr>
+<tr class="row-odd"><td>odd</td>
+<td>true if receiver is odd</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bitwise operations (integers)</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&amp;&amp;</td>
+<td>and</td>
+</tr>
+<tr class="row-even"><td>||</td>
+<td>or</td>
+</tr>
+<tr class="row-odd"><td>^^</td>
+<td>xor</td>
+</tr>
+<tr class="row-even"><td>complement</td>
+<td>bitwise complement</td>
+</tr>
+<tr class="row-odd"><td>&lt;&lt;</td>
+<td>logical left shift</td>
+</tr>
+<tr class="row-even"><td>&gt;&gt;</td>
+<td>logical right shift</td>
+</tr>
+<tr class="row-odd"><td>&lt;+</td>
+<td>arithmetic left shift</td>
+</tr>
+<tr class="row-even"><td>+&gt;</td>
+<td>arithmetic right shift</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Logical operations (booleans)</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&amp;&amp;</td>
+<td>and</td>
+</tr>
+<tr class="row-even"><td>||</td>
+<td>or</td>
+</tr>
+<tr class="row-odd"><td>^^</td>
+<td>xor</td>
+</tr>
+<tr class="row-even"><td>not</td>
+<td>logical complement</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Constructing</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&#64;</td>
+<td>point construction (receiver and argument are integers)</td>
+</tr>
+<tr class="row-even"><td>#</td>
+<td>rectangle construction (receiver and argument are points)</td>
+</tr>
+<tr class="row-odd"><td>##</td>
+<td>rectangle construction (receiver is a point, argument is an extent)</td>
+</tr>
+<tr class="row-even"><td>&amp;</td>
+<td>collection construction (result can be converted into collection)</td>
+</tr>
+<tr class="row-odd"><td>,</td>
+<td>concatenation</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Printing</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>print</td>
+<td>print object on stdout</td>
+</tr>
+<tr class="row-even"><td>printLine</td>
+<td>print object on stdout with trailing newline</td>
+</tr>
+<tr class="row-odd"><td>printString</td>
+<td>return a string label</td>
+</tr>
+<tr class="row-even"><td>printStringDepth:</td>
+<td>return a string label with depth limitation request</td>
+</tr>
+<tr class="row-odd"><td>printStringSize:</td>
+<td>return a string label with number of characters limitation request</td>
+</tr>
+<tr class="row-even"><td>printStringSize: Depth:</td>
+<td>return a string label with depth and size limitation request</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Control</strong></p>
+<p><em>Block evaluation</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>value[: {With: }]</td>
+<td>evaluate a block, passing arguments</td>
+</tr>
+</tbody>
+</table>
+<p><em>Selection</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>ifTrue:</td>
+<td>evaluate argument if receiver is true</td>
+</tr>
+<tr class="row-even"><td>ifFalse:</td>
+<td>evaluate argument if receiver is false</td>
+</tr>
+<tr class="row-odd"><td>ifTrue: False:</td>
+<td>evaluate first arg if true, second arg if false</td>
+</tr>
+<tr class="row-even"><td>ifFalse: True:</td>
+<td>evaluate first arg if false, second arg if true</td>
+</tr>
+</tbody>
+</table>
+<p><em>Local exiting</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>exit</td>
+<td>exit block and return nil if block’s argument is evaluated</td>
+</tr>
+<tr class="row-even"><td>exitValue</td>
+<td>exit block and return a value if block’s argument is evaluated</td>
+</tr>
+</tbody>
+</table>
+<p><em>Basic looping</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>loop</td>
+<td>repeat the block forever</td>
+</tr>
+<tr class="row-even"><td>loopExit</td>
+<td>repeat the block until argument is evaluated; then exit and return nil</td>
+</tr>
+<tr class="row-odd"><td>loopExitValue</td>
+<td>repeat the block until argument is evaluated; then exit and return a value</td>
+</tr>
+</tbody>
+</table>
+<p><em>Pre-test looping</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>whileTrue</td>
+<td>repeat the receiver until it evaluates to true</td>
+</tr>
+<tr class="row-even"><td>whileFalse</td>
+<td>repeat the receiver until it evaluates to false</td>
+</tr>
+<tr class="row-odd"><td>whileTrue:</td>
+<td>repeat the receiver and argument until receiver evaluates to true</td>
+</tr>
+<tr class="row-even"><td>whileFalse:</td>
+<td>repeat the receiver and argument until receiver evaluates to false</td>
+</tr>
+</tbody>
+</table>
+<p><em>Post-test looping</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>untilTrue:</td>
+<td>repeat the receiver and argument until argument evaluates to true</td>
+</tr>
+<tr class="row-even"><td>untilFalse:</td>
+<td>repeat the receiver and argument until argument evaluates to false</td>
+</tr>
+</tbody>
+</table>
+<p><em>Iterators</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>do:</td>
+<td>iterate, passing each element to the argument block</td>
+</tr>
+<tr class="row-even"><td>to: By: Do:</td>
+<td>iterate, with stepping</td>
+</tr>
+<tr class="row-odd"><td>to: Do:</td>
+<td>iterate forward</td>
+</tr>
+<tr class="row-even"><td>upTo: By: Do:</td>
+<td>iterate forward, without last element, with stepping</td>
+</tr>
+<tr class="row-odd"><td>upTo: Do:</td>
+<td>iterate forward, without last element</td>
+</tr>
+<tr class="row-even"><td>downTo: By: Do:</td>
+<td>reverse iterate, with stepping</td>
+</tr>
+<tr class="row-odd"><td>downTo: Do:</td>
+<td>reverse iterate</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Collections</strong></p>
+<p><em>Sizing</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="69%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>isEmpty test</td>
+<td>if collection is empty</td>
+</tr>
+<tr class="row-even"><td>size</td>
+<td>return number of elements in collection</td>
+</tr>
+</tbody>
+</table>
+<p><em>Adding</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>add:</td>
+<td>add argument element to collection receiver</td>
+</tr>
+<tr class="row-even"><td>addAll:</td>
+<td>add all elements of argument to receiver</td>
+</tr>
+<tr class="row-odd"><td>at: Put:</td>
+<td>add key-value pair</td>
+</tr>
+<tr class="row-even"><td>at: Put: IfAbsent:</td>
+<td>add key-value pair, evaluating block if key is absent</td>
+</tr>
+<tr class="row-odd"><td>addFirst:</td>
+<td>add element to head of list</td>
+</tr>
+<tr class="row-even"><td>addLast:</td>
+<td>add element to tail of list</td>
+</tr>
+<tr class="row-odd"><td>copyAddAll:</td>
+<td>return a copy containing the elements of both receiver and argument</td>
+</tr>
+<tr class="row-even"><td>copyContaining:</td>
+<td>return a copy containing only the elements of the argument</td>
+</tr>
+</tbody>
+</table>
+<p><em>Removing</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>remove:</td>
+<td>remove the given element</td>
+</tr>
+<tr class="row-even"><td>remove: IfAbsent:</td>
+<td>remove the given element, evaluating block if absent</td>
+</tr>
+<tr class="row-odd"><td>removeAll</td>
+<td>remove all elements</td>
+</tr>
+<tr class="row-even"><td>removeFirst</td>
+<td>remove first element from list</td>
+</tr>
+<tr class="row-odd"><td>removeLast</td>
+<td>remove last element from list</td>
+</tr>
+<tr class="row-even"><td>removeAllOccurences:</td>
+<td>remove all occurrences of this element from list</td>
+</tr>
+<tr class="row-odd"><td>removeKey:</td>
+<td>remove element at the given key</td>
+</tr>
+<tr class="row-even"><td>removeKey: IfAbsent:</td>
+<td>remove element at the given key, evaluating block if absent</td>
+</tr>
+<tr class="row-odd"><td>copyRemoveAll</td>
+<td>return an empty copy</td>
+</tr>
+</tbody>
+</table>
+<p><em>Accessing</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>first</td>
+<td>return the first element</td>
+</tr>
+<tr class="row-even"><td>last</td>
+<td>return the last element</td>
+</tr>
+<tr class="row-odd"><td>includes:</td>
+<td>test if element is member of the collection</td>
+</tr>
+<tr class="row-even"><td>occurrencesOf:</td>
+<td>return number of occurences of element in collection</td>
+</tr>
+<tr class="row-odd"><td>findFirst: IfPresent: IfAbsent:</td>
+<td>evaluate present block on first element found satisfying criteria, absent block if no such element</td>
+</tr>
+<tr class="row-even"><td>at:</td>
+<td>return element at the given key</td>
+</tr>
+<tr class="row-odd"><td>at: IfAbsent:</td>
+<td>return element at the given key, evaluating block if absent</td>
+</tr>
+<tr class="row-even"><td>includesKey:</td>
+<td>test if collection contains a given key</td>
+</tr>
+</tbody>
+</table>
+<p><em>Iterating</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>do:</td>
+<td>iterate, passing each element to argument block</td>
+</tr>
+<tr class="row-even"><td>doFirst: Middle: Last: IfEmpty:</td>
+<td>iterate, with special behavior for first and last</td>
+</tr>
+<tr class="row-odd"><td>doFirst: MiddleLast: IfEmpty:</td>
+<td>iterate, with special behavior for first</td>
+</tr>
+<tr class="row-even"><td>doFirstLast: Middle: IfEmpty:</td>
+<td>iterate, with special behavior for ends</td>
+</tr>
+<tr class="row-odd"><td>doFirstMiddle: Last: IfEmpty:</td>
+<td>iterate, with special behavior for last</td>
+</tr>
+<tr class="row-even"><td>reverseDo:</td>
+<td>iterate backwards through list</td>
+</tr>
+<tr class="row-odd"><td>with: Do:</td>
+<td>co-iterate, passing corresponding elements to block</td>
+</tr>
+</tbody>
+</table>
+<p><em>Reducing</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>max</td>
+<td>return maximum element</td>
+</tr>
+<tr class="row-even"><td>mean</td>
+<td>return mean of elements</td>
+</tr>
+<tr class="row-odd"><td>min</td>
+<td>return minimum element</td>
+</tr>
+<tr class="row-even"><td>sum</td>
+<td>return sum of elements</td>
+</tr>
+<tr class="row-odd"><td>product</td>
+<td>return product of elements</td>
+</tr>
+<tr class="row-even"><td>reduceWith:</td>
+<td>evaluate reduction block with elements</td>
+</tr>
+<tr class="row-odd"><td>reduceWith: IfEmpty:</td>
+<td>evaluate reduction block with elements, evaluating block if empty</td>
+</tr>
+</tbody>
+</table>
+<p><em>Transforming</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>asByteVector</td>
+<td>return a byte vector with same elements</td>
+</tr>
+<tr class="row-even"><td>asString</td>
+<td>return a string with same elements</td>
+</tr>
+<tr class="row-odd"><td>asVector</td>
+<td>return a vector with same elements</td>
+</tr>
+<tr class="row-even"><td>asList</td>
+<td>return a list with the same elements</td>
+</tr>
+<tr class="row-odd"><td>filterBy: Into:</td>
+<td>add elements that satisfy filter block to a collection</td>
+</tr>
+<tr class="row-even"><td>mapBy:</td>
+<td>add result of evaluating map block with each element to this collection</td>
+</tr>
+<tr class="row-odd"><td>mapBy: Into:</td>
+<td>add result of evaluating map block with each element to a collection</td>
+</tr>
+</tbody>
+</table>
+<p><em>Sorting</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>sort</td>
+<td>sort receiver in place</td>
+</tr>
+<tr class="row-even"><td>copySorted</td>
+<td>copy sorted in ascending order</td>
+</tr>
+<tr class="row-odd"><td>copyReverseSorted</td>
+<td>copy sorted in descending order</td>
+</tr>
+<tr class="row-even"><td>copySortedBy:</td>
+<td>copy sorted by custom sort criteria</td>
+</tr>
+<tr class="row-odd"><td>sortedDo:</td>
+<td>iterate in ascending order</td>
+</tr>
+<tr class="row-even"><td>reverseSortedDo:</td>
+<td>iterate in descending order</td>
+</tr>
+<tr class="row-odd"><td>sortedBy: Do:</td>
+<td>iterate in order of custom sort criteria</td>
+</tr>
+</tbody>
+</table>
+<p><em>Indexable-specific</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>firstKey</td>
+<td>return the first key</td>
+</tr>
+<tr class="row-even"><td>lastKey</td>
+<td>return the last key</td>
+</tr>
+<tr class="row-odd"><td>loopFrom: Do:</td>
+<td>circularly iterate, starting from element n</td>
+</tr>
+<tr class="row-even"><td>copyAddFirst:</td>
+<td>return a copy of this collection with element added to beginning</td>
+</tr>
+<tr class="row-odd"><td>copyAddLast:</td>
+<td>return a copy of this collection with element added to end</td>
+</tr>
+<tr class="row-even"><td>copyFrom:</td>
+<td>return a copy of this collection from element n</td>
+</tr>
+<tr class="row-odd"><td>copyFrom: UpTo:</td>
+<td>return a copy of this collection from element n up to element m</td>
+</tr>
+<tr class="row-even"><td>copyWithoutLast</td>
+<td>return a copy of this collection without the last element</td>
+</tr>
+<tr class="row-odd"><td>copySize:</td>
+<td>copy with size n</td>
+</tr>
+<tr class="row-even"><td>copySize: FillingWith:</td>
+<td>copy with size n, filling in any extra elements with second arg</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Timing</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>realTime</td>
+<td>elapsed real time to execute a block</td>
+</tr>
+<tr class="row-even"><td>cpuTime</td>
+<td>CPU time to execute a block</td>
+</tr>
+<tr class="row-odd"><td>userTime</td>
+<td>CPU time in user process to execute a block</td>
+</tr>
+<tr class="row-even"><td>systemTime</td>
+<td>CPU time in system kernel to execute a block</td>
+</tr>
+<tr class="row-odd"><td>totalTime</td>
+<td>system + user time to execute a block</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Message Sending</strong></p>
+<p><em>Sending</em> (like Smalltalk <tt class="docutils literal"><span class="pre">perform</span></tt>; receiver is a string)</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>sendTo: {With: }</td>
+<td>send receiver string as a message</td>
+</tr>
+<tr class="row-even"><td>sendTo: WithArguments:</td>
+<td>indirect send with arguments in a vector</td>
+</tr>
+<tr class="row-odd"><td>sendTo: DelegatingTo: {With: }</td>
+<td>indirect delegated send</td>
+</tr>
+<tr class="row-even"><td>sendTo: DelegatingTo: WithArguments:</td>
+<td>indirect delegated send with arg vector</td>
+</tr>
+<tr class="row-odd"><td>resendTo: {With: }</td>
+<td>indirect resend</td>
+</tr>
+<tr class="row-even"><td>resendTo: WithArguments:</td>
+<td>indirect resend with arguments in a vector</td>
+</tr>
+</tbody>
+</table>
+<p><em>Message object protocol</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>send</td>
+<td>perform the send described by a message object</td>
+</tr>
+<tr class="row-even"><td>fork</td>
+<td>start a new process; the new process performs the message</td>
+</tr>
+<tr class="row-odd"><td>receiver:</td>
+<td>set receiver</td>
+</tr>
+<tr class="row-even"><td>selector:</td>
+<td>set selector</td>
+</tr>
+<tr class="row-odd"><td>methodHolder:</td>
+<td>set method holder</td>
+</tr>
+<tr class="row-even"><td>delegatee:</td>
+<td>set delegatee of the message object</td>
+</tr>
+<tr class="row-odd"><td>arguments:</td>
+<td>set arguments (packaged in a vector)</td>
+</tr>
+<tr class="row-even"><td>receiver: Selector:</td>
+<td>set receiver and selector</td>
+</tr>
+<tr class="row-odd"><td>receiver: Selector: Arguments:</td>
+<td>set receiver, selector, and arguments</td>
+</tr>
+<tr class="row-even"><td>receiver: Selector: Type: Delegatee: MethodHolder: Arguments:</td>
+<td>set all components</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Reflection (mirrors)</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>reflect:</td>
+<td>returns a mirror on the argument</td>
+</tr>
+<tr class="row-even"><td>reflectee</td>
+<td>returns the object the mirror receiver reflects</td>
+</tr>
+<tr class="row-odd"><td>contentsAt:</td>
+<td>returns a mirror on the contents of slot n</td>
+</tr>
+<tr class="row-even"><td>isAssignableAt:</td>
+<td>tests if slot n is an assignable slot</td>
+</tr>
+<tr class="row-odd"><td>isParentAt:</td>
+<td>tests if slot n is a parent slot</td>
+</tr>
+<tr class="row-even"><td>isArgumentAt:</td>
+<td>tests if slot n is an argument slot</td>
+</tr>
+<tr class="row-odd"><td>parentPriorityAt:</td>
+<td>returns the parent priority of slot n</td>
+</tr>
+<tr class="row-even"><td>slotAt:</td>
+<td>returns a slot object representing slot n</td>
+</tr>
+<tr class="row-odd"><td>contentsAt:</td>
+<td>returns the contents of the slot named n</td>
+</tr>
+<tr class="row-even"><td>visibilityAt:</td>
+<td>returns a visibility object representing visibility of slot n</td>
+</tr>
+</tbody>
+</table>
+<p><strong>System-wide Enumerations (messages sent to the oddball object browse)</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>all[Limit: ]</td>
+<td>returns a vector of mirrors on all objects in the system (up to the limit)</td>
+</tr>
+<tr class="row-even"><td>referencesOf: [Limit: ]</td>
+<td>returns a vector of mirrors on all objects referring to arg (up to the limit)</td>
+</tr>
+<tr class="row-odd"><td>referencesOfReflectee: [Limit: ]</td>
+<td>returns a vector of mirrors on all objects referring to argument’s reflectee (up to the limit); allows one to find references to a method</td>
+</tr>
+<tr class="row-even"><td>childrenOf: [Limit: ]</td>
+<td>returns a vector of mirrors on all objects with a parent slot referring to the given object (up to the limit)</td>
+</tr>
+<tr class="row-odd"><td>implementorsOf: [Limit: ]</td>
+<td>returns a vector of mirrors on objects with slots whose names match the given selector (up to the limit)</td>
+</tr>
+<tr class="row-even"><td>sendersOf: [Limit: ]</td>
+<td>returns a vector of mirrors on methods whose selectors match the given selector (up to the limit)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Debugging</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>halt</td>
+<td>halt the current process</td>
+</tr>
+<tr class="row-even"><td>halt:</td>
+<td>halt and print a message string</td>
+</tr>
+<tr class="row-odd"><td>error:</td>
+<td>halt, print an error message, and display the stack</td>
+</tr>
+<tr class="row-even"><td>warning:</td>
+<td>beep, print a warning message, and continue</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Virtual Machine-Generated</strong></p>
+<p><em>Errors</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="49%" />
+<col width="51%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>undefinedSelector: Type: Delegatee: MethodHolder: Arguments:</td>
+<td>lookup found no matching slot</td>
+</tr>
+<tr class="row-even"><td>ambiguousSelector: Type: Delegatee: MethodHolder: Arguments:</td>
+<td>lookup found more than one matching slot</td>
+</tr>
+<tr class="row-odd"><td>missingParentSelector: Type: Delegatee: MethodHolder: Arguments:</td>
+<td>parent slot through which resend was delegated was not found</td>
+</tr>
+<tr class="row-even"><td>performTypeErrorSelector: Type: Delegatee: MethodHolder: Arguments:</td>
+<td>first argument to the _Perform primitive was not a canonical string</td>
+</tr>
+<tr class="row-odd"><td>mismatchedArgumentCountSelector: Type: Delegatee: MethodHolder: Arguments:</td>
+<td>number of args supplied to _Perform primitive does not match selector</td>
+</tr>
+<tr class="row-even"><td>primitiveFailedError: Name:</td>
+<td>the named primitive failed with given error string</td>
+</tr>
+</tbody>
+</table>
+<p><em>Other system-triggered messages</em></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="52%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>postRead</td>
+<td>slot to evaluate after reading a snapshot</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="builtintypes.html">Built-in types</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="menus.html">Every Menu Item in the Programming Environment</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2011, Russell Allen (Ed.).
+      Last updated on Nov 03, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

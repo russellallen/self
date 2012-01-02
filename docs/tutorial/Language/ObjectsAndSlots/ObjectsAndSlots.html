@@ -1,0 +1,55 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top>
+
+<h2> Objects and slots </h2>
+<h3>
+<UL>
+<LI> An object is made up of slots.
+<LI> A slot can ba a method slot or a data slot.
+<LI> Slot names are bound to message selectors.
+<LI> A message bound to a method slot executes the method and returns its result.
+<LI> A message, <i> foo </i>, bound to a data slot, <BR> <i> foo </i> returns the contents of the slot.
+<LI> A message, <i> bar </i>: v, bound to <BR> an assignable data slot, <i> bar </i> assigns <i> v </i> to the slot.
+</UL>
+</h3>
+
+</td><td valign=top>
+
+<h2> Objects and slots </h2>
+
+In Self, an object is made up of slots. 
+A slot has a name and contains a reference to an object. <BR>
+In Self, all of an object's state and behaviour is contained in its slots.
+<P>
+
+When a message is sent to an object, the name of the message (its selector) is 
+matched against the slot of the same name, in a process known as message lookup. 
+We will describe lookup in more detail later.
+<P>
+
+What happens in response to the message depends on the contents of the slot it is 
+matched against. It could be a method slot or a data slot.
+<P>
+
+A slot is a method slot if it contains a method (an object containing executable code). 
+In response to the message, the method is executed, and its result is returned.
+<P>
+
+A data slot just contains a reference to anything other than a method, i.e., any other 
+kind of object. If a message matches a data slot, its contents are returned.
+<P>
+
+Data slots can be constant or assignable. A constant data slot, foo, responds to a 
+message, foo, by returning the value in the slot. An assignable data slot, bar, 
+responds to bar by returning the value in the slot, but also responds to bar: v by 
+replacing its contents with v.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="../../General/History.html"> Previous </a> ]
+[ <a href="../../index.html"> Index </a> ]
+[ <a href="ExamplesOfSlots.html"> Next </a> ]
+</center>

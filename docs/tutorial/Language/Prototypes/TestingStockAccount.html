@@ -1,0 +1,50 @@
+<table cellpadding=0 cellspacing=0><tr><td valign=top>
+
+<H2> Testing the stock account </H2>
+<H3>
+
+Editing the <i> balance: </i> slot: <BR>
+<IMG ALIGN=bottom SRC="../../Images/Bank/bank16.gif"> <BR>
+
+</h3>
+</td><td valign=top>
+
+<h3> Testing the stock account </h3>
+
+<P>
+We can now test our stock account by asking for the balance, or setting the balance. 
+However, there is a problem: we can set the balance so that we get a non-integral 
+number of shares. Let's modify the balance: method so that it always rounds down 
+to an integer. Clicking on the balance: slot's button exposes a text editor. We can 
+then change the method body to read:
+<P>
+
+<PRE>
+	numShares: b /- pricePerShare 
+</PRE>
+
+<P>
+The /- method on numbers returns the result of division rounded down; /+ rounds 
+up.
+<P>
+
+As soon as we change the text of the method, the green and red `counterfactual' 
+bars appear. Whenever you see these bars in Self, they indicate that the 
+associated item is `counterfactual', i.e., that it does not correspond to the `truth'. In 
+this case, the text in the editor does not correspond to the source of the installed 
+method. We can either make it truthful by clicking on the green bar (i.e., accepting 
+it), or revert the view to the installed method, and discard our changes, by clicking 
+the red bar.
+<P>
+
+After accepting the new version, we can test it.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="InterchangableStateAndBehavior.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="UsingInheritedMethods.html"> Next  </a> ]
+</center>

@@ -1,0 +1,40 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<H2> Discovering the slots in a module </H2>
+<UL>
+<P><LI>	Search from the lobby for all slots.
+<P><LI>	Each should be in a module.
+<P><LI>	SELF 4.0 contains ~16000 reachable slots.
+<P><LI>	Cannot save unreachable objects using the SELF 4.0 transporter.
+</UL>
+
+</h3></td><td valign=top>
+
+<h3>Discovering the slots in a module</h3>
+
+In order to be able to install a saved slot into an object in a different snapshot, we 
+must be able to locate that object. In Self 4.0, this means that the object 
+must be reachable from the lobby by a path (i.e., sequence of data slots).
+<P>
+
+When operating, the transporter locates every slot reachable from the lobby via 
+such a path (with some exceptions, listed below). Every slot should be in a module; 
+any that are not are known as expatriate, and can be listed from the changed 
+modules middle-button menu. In Self 4.0, there are about 16000 slots 
+reachable from the lobby, and every one is assigned to a module.
+<P>
+
+Slots and objects that are not reachable from the lobby constitute the local state of 
+a snapshot, and cannot be saved using the transporter. (The mechanism used to 
+save morphs does not involve the transporter.)
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="ChangeManagement.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="SavingSlots.html"> Next  </a> ]
+</center>

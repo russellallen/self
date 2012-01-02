@@ -1,0 +1,39 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=400 valign=top><h3>
+
+<h2> Desktop </h2>
+<UL>
+<LI> desktop open <BR>
+<LI> desktop close <BR>
+<LI> desktop stop <BR>
+<LI> desktop go "useful if the UI crashes" <BR>
+</UL>
+
+<IMG ALIGN=bottom SRC="desktop.gif"> <BR>
+
+</h3></td><td valign=top>
+
+<h3>The desktop object</h3>
+
+Overall control of Kansas is centralized in desktop.
+
+desktop close closes all the windows and ceases further UI activity. The user 
+interface can be restarted with a new, almost empty world with desktop open. All 
+activity in the user interface can be suspended with desktop stop. It can be restarted 
+with desktop go, which is often effective should the user interface process crash 
+(due to a failed experiment, for example).
+<P>
+
+When you restart a snapshot, the user interface is reverted to its previous state, if 
+it was running. However, windows are only opened on the default display 
+($DISPLAY); there is no attempt to re-establish windows on other displays.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="MultipleUsers.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="../Morphs/Morphs.html"> Next  </a> ]
+</center>

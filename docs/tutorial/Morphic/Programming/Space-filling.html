@@ -1,0 +1,55 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Space-filling </h2>
+<UL>
+<P><LI>	Morphs can expand to fill available space
+<P><LI>	Several space-filling morphs in the same row or column divide the available space evenly.
+<P><LI>	Useful for resizable morphs:
+</UL>
+
+<center>
+<IMG ALIGN=bottom SRC="spaceFill.gif"> <BR>
+<IMG ALIGN=bottom SRC="spaceFill2.gif"> <BR>
+</center>
+
+</h3></td><td valign=top>
+
+<h3>Space-filling</h3>
+
+For simplicity, the packing strategy was described as if the submorphs to be 
+packed were all rigid. In order to support "stretchy" layouts, morphs can be 
+designated as <i>space-filling</i>. (Note: The source code uses the older term, flexible.) 
+When there is extra space, a space-filling morph expands to fill this space. If there 
+is no extra space, a space-filling morph shrinks to its minimum size. When there 
+are several space-filling morphs in a single row or column, any extra space is 
+divided evenly among them.
+<P>
+
+Space-filling morphs can be used to control the placement of submorphs within 
+the primary dimension when a row or column is stretched. For example, suppose 
+one wanted a row with three buttons, one at the left end, one at the right end, and 
+one in the middle. This can be accomplished by inserting space-filling morphs 
+between the buttons:
+<P>
+
+<PRE>
+	[See images] <button1><spacer><button2><spacer><button3>
+</PRE>
+
+<P>
+When the row is stretched, the extra space is divided evenly between the two 
+spacers, button2 stays in the center, and button3 stays at the far right. By making 
+the color of the spacers match that of the underlying row, they become effectively 
+invisible. This is a common technique.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Packing.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Shrink.html"> Next  </a> ]
+</center>

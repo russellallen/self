@@ -1,0 +1,55 @@
+<table cellpadding=0 cellspacing=0><tr><td width=426 valign=top><h3>
+
+<h2> Nil, true and false </h2>
+<UL>
+<LI>	Assignable data slots in a new object are set to nil if not otherwise initialized.
+<P>
+<LI>	All inherit from mixins oddball, which defines copy to return self.
+<P>
+<LI>	Names are not special; just slots in globals.
+</UL>
+
+<IMG ALIGN=bottom SRC="../../Images/niltruefalse.gif"> <BR>
+
+</h3></td><td valign=top>
+
+<h3> Nil, true and false </h3>
+
+<P>
+These are one-of-a-kind objects, which are in some way special to the Virtual 
+Machine.
+<P>
+
+When an object is created using a literal object expression, assignable data slots 
+with no specified initial value are set to nil.
+<P>
+
+Nil inherits from traits oddball, which in turn inherits from mixins oddball, which 
+defines copy to return self.
+<P>
+
+True and false both inherit from traits boolean, but each has quite a lot of object-
+specific behavior (for boolean logic, conditional evaluation, and so on). Traits 
+boolean also inherits ultimately from mixins oddball.
+<P>
+
+True and false are special in that they are the results of the relational primitives 
+(_IntLE:, _FloatGT:, etc.).
+<P>
+
+Note that unlike Smalltalk, the names nil, true and false are not special - they are 
+just slots in globals.
+<P>
+
+Note to Smalltalk programmers: the logical connectives are && and ||. Both send 
+value to their argument, so can be passed a block.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="ImportantSelfObjects.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="MultipleInheritance.html"> Next  </a> ]
+</center>

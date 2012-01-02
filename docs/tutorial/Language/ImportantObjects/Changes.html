@@ -1,0 +1,53 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> A module is a set of related changes </h2>
+<UL>
+<LI>	Each module, when read in, extends the underlying system with new objects and slots. SELF 4.0 contains 175 modules.
+<P>
+<LI>	Each module is saved in a SELF source file, generated from the objects and module information in the snapshot.
+<P>
+<LI>	The system can be reconstructed from the source files.
+<P>
+<LI>	Modules may be omitted.
+<P>
+<LI>	Source files can be versioned.
+</UL>
+
+</h3></td><td valign=top>
+
+
+<h3> A module is a set of related changes</h3>
+
+When a module is read in, it extends the system in some way by creating and 
+modifying objects. The Self 4.0 system, for example, contains 175 modules 
+in the snapshot, and there are over 100 other modules which can be filed in to a 
+system (including test suites, benchmarks, and the Self 3.0 user interface).
+<P>
+
+Each module is saved in a Self source file (suffix .self), which can, in 
+principle, be modified with a text editor (although it is not recommended). The 
+files are generated from the objects and module information in a snapshot.
+<P>
+
+This approach has several advantages:
+<P>
+
+<UL>
+<LI>	The system can always be reconstructed from the module files. Losing the 
+snapshot is not catastrophic.
+<P>
+<LI>	We can construct new systems by omitting modules. If a module defines 
+changes that are not needed, it can be omitted.
+<P>
+<LI>	We can use conventional version control systems to manage the source files.
+</UL>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="LiveObjects.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Slots.html"> Next  </a> ]
+</center>

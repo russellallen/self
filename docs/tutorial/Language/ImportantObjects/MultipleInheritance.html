@@ -1,0 +1,33 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Multiple inheritance </h2>
+<UL>
+<LI> Multiple parent slots yield multiple inheritance.
+<P>
+<LI> All parents are searched. Only one slot must match; otherwise it's an error.
+</UL>
+
+<UL>
+<IMG ALIGN=bottom SRC="../../Images/mi.gif"> <BR>
+</UL>
+
+</h3></td><td valign=top>
+
+<h3> Multiple inheritance </h3>
+
+Note that traits oddball has more than one parent slot - in fact, it has four. Because 
+any slot can be a parent, multiple inheritance is achieved through the use of 
+multiple parents. When a message is sent and cannot be bound to a local slot, all 
+parents are searched for a matching slot. If more than one slot is found with a 
+matching name, an error results. It does not matter how many inheritance paths 
+there are to the slot.
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="NilTrueFalse.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="DynamicInheritance.html"> Next  </a> ]
+</center>

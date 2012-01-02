@@ -1,0 +1,63 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top>
+
+<h2> Primitives </h2>
+<UL>
+<LI>	Primitives are named like keyword messages, but start with an underscore:
+<PRE>
+_Clone	_IntLE:
+_At:Put:	_CurrentTimeString
+</PRE>
+<LI>	Syntax is a variant of keyword messages, but they are not messages.
+<LI>	Primitive failure handled in fail block:
+<PRE>
++ a = (asSmallInteger _IntAdd: a IfFail: [
+			| : error. :name |
+			(©badTypeError© == error) ifTrue: 
+				...)
+</PRE>
+</td><td valign=top>
+
+
+<h2> Primitives </h2>
+
+Real work - arithmetic, array access and update, copying, etc. - is done in <i>primitives</i>. 
+Each primitive is a procedure in the Self virtual machine. 
+<P>
+
+In Self, primitives are named using the syntax of keyword messages, 
+except that the primitive name begins with an underscore. A primitive call may 
+appear anywhere in a method. Primitive calls are <i>not</i> messages - they are not 
+dynamically bound.
+<P>
+
+Every primitive has two forms, the simple form and one with an argument which 
+is a <i>failure block</i>. The latter's name is derived by appending IfFail: to the former's. If 
+the primitive fails (e.g., due to one of the arguments being of an incorrect type, or 
+an arithmetic error), the fail block is invoked by sending it value:With:, with the first 
+string argument describing the kind of failure, and the second naming the 
+primitive.
+<P>
+
+A primitive call is typically embedded in a method wrapper. Direct use of 
+primitives is considered bad style (but acceptable in limited amounts for 
+pedagogical purposes!).
+<P>
+
+<i> Useful protocol </i>
+
+
+<PRE>
+	primitives primitiveList "returns a vector of primitive names"
+	primitives at: '_Clone'  "returns a documentation string"
+	primtiives match: '_Clone*' "returns a vector of primitive names matching the pattern"
+</PRE>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Non-localReturns.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="ProgrammingPrimitives.html"> Next  </a> ]
+</center>

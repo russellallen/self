@@ -1,0 +1,75 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top>
+
+<H3>
+
+<H2>
+Methods
+</H2>
+<UL>
+<LI>	After slot list, series of expressions, separated by periods.
+<P>
+<LI>	Arguments indicated with argument slots:
+<DT> 	(| :x. :y | x squared + y squared)
+<P>
+<LI>	Shorthand for method arguments:
+<UL>
+	<DT>add: el = (addLast: el)
+	<DT>add: = (| :el | addLast: el)
+	<DT>+ = (| :pt | ((x + pt x) @ (y + pt y))
+	<DT>+ pt = ((x + pt x) @ (y + pt y))
+</UL>
+</UL>
+
+</H3>
+
+</td><td valign=top>
+
+<h2> Methods </h2>
+
+After a method's slot list (which is optional) comes the body of the method. 
+This is a sequence of expressions, separated by periods. 
+The value returned by the  method is the value of the last expression.
+<P>
+
+Each expression will usually be a message send (as there is no point in merely 
+mentioning a literal, except as the last expression).
+<P>
+
+<h3> Arguments to methods </h3>
+
+<P>
+Some methods require arguments. The formal arguments are indicated with 
+argument slots:
+<P>
+
+<PRE>
+	(| :x. :y | x squared + y squared )
+</PRE>
+
+<P>
+This defines a method object which accepts two arguments, accessible as x and y in 
+the method.
+<P>
+
+When defining a method slot, a short form is provided. These are equivalent:
+<P>
+
+<PRE>
+	add: = (| :el | addLast: el)
+	add: el = (addLast: el)
+
+	+ = (| :pt | ((x + pt x) @ (y + pt y))
+	+ pt = ((x + pt x) @ (y + pt y))
+</PRE>
+
+The long form is rarely used in practice.
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="LiteralObjects.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Blocks.html"> Next  </a> ]
+</center>

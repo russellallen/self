@@ -1,0 +1,136 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How to use the low-level interrupt facilities &mdash; Self Handbook for Self 4.5 (r 1) documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'for Self 4.5 (r 1)',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Self Handbook for Self 4.5 (r 1) documentation" href="index.html" />
+    <link rel="up" title="The Self World" href="selfwrld.html" />
+    <link rel="next" title="Using the textual debugger" href="textdebug.html" />
+    <link rel="prev" title="How to build the world" href="buildworld.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="index.html">
+          <span>Self Handbook for Self 4.5 (r 1) documentation</span></a></h1>
+        <h2 class="heading"><span>How to use the low-level interrupt facilities</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="buildworld.html">How to build the world</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="textdebug.html">Using the textual debugger</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="how-to-use-the-low-level-interrupt-facilities">
+<h1>How to use the low-level interrupt facilities<a class="headerlink" href="#how-to-use-the-low-level-interrupt-facilities" title="Permalink to this headline">¶</a></h1>
+<p>There are two low-level ways to interrupt a running Self program <a class="footnote-reference" href="#f1" id="id1">[1]</a> , Control-C and Control-\. The
+second way works even if the Self process scheduler is not running.
+In response to the interrupt, you will see one of two things. If the Self scheduler is not running,
+you will be returned directly to the <tt class="docutils literal"><span class="pre">VM#</span></tt> prompt. If the scheduler is running, you will be presented
+with a list of Self processes (the process menu):</p>
+<blockquote>
+<div><div class="highlight-python"><pre>Self 9&gt; 100000 * 100000 do: []
+^C
+        ----------------Interrupt-----------------
+        Ready:
+                &lt;25&gt; scheduling process 100000 * 100000 do: []
+        ------------------------------------------
+        Select a process (or q to quit scheduler): 25
+        Select &lt;return&gt; for no action
+                p to print the stack
+                k to kill the process
+                b to resume execution of the process in the background
+                s to suspend execution of the process
+        for process 25: k
+        Process 25 killed.
+        ------------------------------------------
+Self 10&gt;</pre>
+</div>
+</div></blockquote>
+<p>In this example, the loop was interrupted by typing Control-C, and the process menu was used to
+abort the process. If the user had typed “q” to quit the scheduler, all current processes would have
+been aborted along with the scheduler itself:</p>
+<blockquote>
+<div><div class="highlight-python"><pre>        ...
+        ------------------------------------------
+        Select a process (or q to quit scheduler): q
+        Scheduler shut down.
+        ------------------------------------------
+prompt
+VM#</pre>
+</div>
+</div></blockquote>
+<p>The scheduler has been stopped, returning the user to the VM# prompt. The command prompt
+start restarts the scheduler:</p>
+<blockquote>
+<div><div class="highlight-python"><pre>VM# prompt start
+Self 11&gt;</pre>
+</div>
+</div></blockquote>
+<p>Although the VM# prompt can be used to evaluate expressions directly, the scheduler supports
+much nicer error messages and debugging, so it is usually best to run the scheduler. (The scheduler
+is started automatically when the default world is created.)</p>
+<p>Certain virtual machine operations like garbage collection, reading a snapshot, and compilation
+cannot be interrupted; interrupts during these operations will be deferred until the operation is
+complete. As a last resort (e.g., if the system appears to be “hung”), you can force an abort by
+pressing Control-\ five times in a row.</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Normally, you would use debugging facilities provided in the programming environment.</td></tr>
+</tbody>
+</table>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="buildworld.html">How to build the world</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="textdebug.html">Using the textual debugger</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2011, Russell Allen (Ed.).
+      Last updated on Nov 03, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

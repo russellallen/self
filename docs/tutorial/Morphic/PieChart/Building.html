@@ -1,0 +1,57 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Building a pie chart morph </h2>
+
+<IMG ALIGN=bottom SRC="pie4.gif"> <BR>
+
+</h3></td><td valign=top>
+
+<h3>Building the pie chart morph</h3>
+
+Next we can build the morph that will contain the wedges.
+<P>
+
+Again, we start with a circleMorph. The wedges will be submorphs. To be sure that 
+we can distinguish wedges from other kinds of submorphs (should these be added 
+later), we add this slot to the wedge:
+<P>
+
+<PRE>
+	morphTypeName = 'pieWedgeMorph'
+</PRE>
+
+The type name is also used in the object's header; as soon as the method is added, 
+the header updates.
+<P>
+
+Next, to make the chart morph, we make another copy of the circleMorph prototype, 
+and start adding slots. The first will be a method that computes the list of wedges 
+in the morph.
+<P>
+
+<PRE>
+	wedges = (| wList |
+		wList: list copyRemoveAll.
+		morphsDo: [| :m |
+			m morphTypeName = 'pieWedgeMorph' ifTrue: [
+				wList add: m.
+			].
+		].
+		wList
+	).
+</PRE>
+
+Note that we defensively use copyRemoveAll when making a new list; this protects 
+us against prototype corruption.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Geometry.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="WedgeSizes.html"> Next  </a> ]
+</center>

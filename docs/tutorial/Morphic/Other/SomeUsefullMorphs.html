@@ -1,0 +1,169 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Useful morphs</h2>
+
+<UL>
+Widgets: 
+<UL>
+<LI>	sliderMorph
+<LI>	ui2Button
+<LI>	ui2Menu
+<LI>	checkBoxMorph, checkCircleMorph, checkMarkMorph
+</UL>
+<P>
+
+Structural morphs:
+<UL>
+<LI>	rowMorph, columnMorph
+<LI>	frameMorph
+<LI>	spacerMorph
+</UL>
+<P>
+
+Decoration or information display:
+<UL>
+<LI>	labelMorph
+<LI>	circleMorph
+<LI>	imageMorph
+</UL>
+<P>
+
+Editors:
+<UL>
+<LI>	editorMorph
+<LI>	uglyTextEditor
+</UL>
+<P>
+
+Dialogs:
+<UL>
+<LI>	userQueryMorph, userQuery
+</UL>
+</UL>
+
+</h3></td><td valign=top>
+
+<h3> Some useful morphs </h3>
+
+The Self system comes with a large library of morphs. While some morphs 
+exist solely to supporting the programming environment, many are general-
+purpose and can be reused to construct new applications. Here we mention a few. 
+To find out more about a given morph, use the programming environment to 
+examine its prototype and traits objects. Useful comments are sometimes buried in 
+the bodies of methods.
+<P>
+
+<i> Widget morphs</i> are interactive, allowing the user to invoke an action or input some 
+data.
+<P>
+
+<UL>
+<DT><B> sliderMorph </B><DD> 
+Allows the user to specify a numerical value in some range. 
+When the slider is manipulated, its target object is sent a user-specified 
+message with the new slider value as an argument.
+<P>
+
+<DT><B> ui2Button </B><DD>
+Executes a user-specified script when the button is pressed. The 
+script can refer to the button's target. The target of a button or slider morph 
+can be set by using the middle-mouse menu "Set Target" command. This 
+sets the target slot of the button or slider to the morph directly below it. 
+Buttons are often decorated with a textual label, but a button can contain 
+arbitrary morphs instead of, or in addition to, this label.
+<P>
+
+<DT><B> ui2Menu </B><DD>			
+A column full of buttons. A menu can be "pinned down" using 
+the unlabeled button at its top. It can then be manipulated or disassembled 
+like any other morph. Menus support a rich set of messages for adding 
+normal or grayed out buttons and for inserting dividing lines.
+<P>
+
+<DT><B> checkBoxMorph, checkCircleMorph, checkMarkMorph </B><DD>
+These morph provide bi-state indicators with different visual 
+representations. They can be arranged in "radio button" groups so that the 
+states are mutually exclusive.
+<P>
+
+<DT><B> Structural morphs </B><DD>
+are typically used to bind morphs together and arrange them into 
+a pleasing layout.
+<P>
+
+<DT><B> rowMorph and columnMorph </B><DD>					
+Pack their submorphs into a row or column. 
+These morphs offer several justification options and can also provide a 
+border of empty space around their contents.
+<P>
+
+<DT><B> frameMorph </B><DD>
+Like a columnMorph, except that it can display various kinds of 
+borders around its contents. Bezelled frameMorphs are used heavily in the 
+programming environment to provide a three-dimensional look.
+<P>
+
+<DT><B> spacerMorph </B><DD>
+While many types of morph (such as an empty rowMorph) could 
+be used to fill a space between morphs, it is preferable to use a spacerMorph 
+to make it clear that the only purpose of the morph is to control spacing. 
+(Just as is it important to write readable programs, it is important to build 
+composite morphs with "readable structure.")
+<P>
+</UL>
+
+Other morphs supply decorative or information content for user interfaces.
+<P>
+
+<UL>
+
+<DT><B> labelMorph </B><DD>				
+displays a single-line string in a single font style, size, and color.
+<P>
+
+<DT><B> circleMorph </B><DD>				
+displays a filled circle.
+<P>
+
+<DT><B> imageMorph </B><DD>				
+displays an image (currently, at most 8 bits deep).
+<P>
+
+</UL>
+
+<P>
+The library includes two kinds of text editors.
+<P>
+
+<UL>
+
+<DT><B> editorMorph </B><DD> 			
+a general editor that allows arbitrary morphs to be embedded in 
+the text.
+<P>
+
+<DT><B> uglyTextEditor </B><DD> 				
+a simple, text-only editor that is a bit faster for editing larger 
+amounts of text.
+<P>
+
+</UL>
+
+<P>
+Dialogs can be constructed using a userQueryMorph. This provides methods for 
+simple yes/no questions, prompts for a string response, and multiple choice 
+questions. The more general userQuery object has similar interface. If the user 
+interface is not running, userQuery will conduct the dialog through the controlling 
+terminal; otherwise it will construct an appropriate userQueryMorph.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Installation.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="NotCovered.html"> Next  </a> ]
+</center>

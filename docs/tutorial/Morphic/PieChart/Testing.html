@@ -1,0 +1,97 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=400 valign=top><h3>
+
+<h2>Testing the pie chart</h2>
+<UL>
+<P><LI>	Add a copy method that makes a complete pie with wedges
+<P><LI>	Need a name for the prototypical wedge.
+</UL>
+
+
+<IMG ALIGN=bottom SRC="pie6.gif"> <BR>
+<IMG ALIGN=bottom SRC="pie7.gif"> <BR>
+<IMG ALIGN=bottom SRC="pie8.gif"> <BR>
+
+
+</h3></td><td valign=top>
+
+<h3>Testing the pie chart</h3>
+
+We are now ready to test the chart and wedge. We can do this by making copies of 
+the wedge, setting amounts, then embedding the wedge morphs into the chart, but 
+this soon gets tedious.
+<P>
+
+Instead, let's add a method to make a whole chart, including wedges. We'll put the 
+method in the chart. It needs some way to name the prototypical wedge, so we'll 
+add a slot called pieWedgeMorph to the chart object and connect it to our 
+prototypical wedge by arrow-dragging.
+<P>
+
+We should also add a morphTypeName slot to the chart, so that the header is more 
+informative:
+<P>
+
+	morphTypeName = 'pieChartMorph'
+
+The method copyData: will take a collection of values, build wedges corresponding 
+to them, and return a new chart containing the wedges:
+<P>
+
+<PRE>
+	copyNewData: data = (| new. wList. |
+		new: copyRemoveAllMorphs.
+		wList:
+			data copy mapBy: [| :val. w |
+				w: pieWedgeMorph copyRemoveAllMorphs.
+				w color: paint copyRandom.
+				w amount: val.
+			].
+		new addAllMorphs: wList.
+		new
+	).
+</PRE>
+
+Sending copyNewData: (10 & 20 & 40 & 30) asVector to the chart gives us a new chart. 
+We can drag this to the other window, then apply `Show Morph'. We should get a 
+pie chart like the one shown (but with differently colored wedges).
+<P>
+
+Try the following:
+<P>
+
+<UL>
+<BR> 1.	Resizing the pie chart
+<BR> 2.	Copying the pie chart
+<BR> 3.	Using the core sampler to extract a wedge
+<BR> 4.	Add the wedge to the other pie chart
+<BR> 5.	Get an object view of a wedge via the core sampler, change its amount, then 
+send it layoutChanged to force layout to be updated.
+</UL>
+
+This last test points out a weakness in the design: changing the amount does not 
+automatically change the visual representation.
+<P>
+
+To fix this we rename the amount slot to rawAmount, then add these methods:
+<P>
+
+<PRE>
+	amount = (rawAmount)
+
+	amount: a = (rawAmount: a. layoutChanged)
+</PRE>
+
+rawAmount should be declared as private. Be sure to make the change in the 
+prototype, not a copy!
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Changes.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Traits.html"> Next  </a> ]
+</center>

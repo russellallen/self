@@ -1,0 +1,58 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Saving the account </h2>
+<UL>
+<P><LI>	Experimental morph-saving facility used for directly-constructed morphs. 
+<P><LI>	Not as robust as it should be; in particular many morphs do not define the right methods. This example needs a bug fix.
+</UL>
+
+
+<IMG ALIGN=bottom SRC="bankui7.gif"> <BR>
+
+</h3></td><td valign=top>
+
+
+<h3>Saving morphs in files</h3>
+
+Self 4.0 includes a morph-saving facility. This facility was added 
+relatively late in the development of the system, and is not as robust as other parts 
+of the system. Also, many morph types do not define all the appropriate methods 
+to allow them to be saved.
+<P>
+
+The morph which we started with, created by using `Create Button' on a method 
+slot, is a case in point. In the release, copies of this morph (abstractSyntax 
+complexMorphButton) cannot be saved. However, a patched version is available at 
+the ftp site or from the first author. The module you need to file in is 
+structureEditing.
+<P>
+
+To save our mini-application, we need to send the message saveMorphInFile to our 
+top-level morph, most easily done from an evaluator. This will ask us for a file 
+name, and then take a minute or so to write out the code which will reconstruct the 
+morph.
+<P>
+
+Evaluating the file, e.g., by using the expression 'accountMorph.self' runScript, 
+constructs a morph like the original. Using `Show Morph' makes the morph 
+representation visible. Another way to get the same effect is to evaluate worldMorph 
+loadMorphFromFile. Due to another bug, the balance does not update automatically; 
+animations are not resumed when a morph is reconstructed in this way. To restart 
+the updating, send the updatingLabelMorph the message startGettingStepped.
+<P>
+
+To give the application to another Self user, we need to give the account 
+implementation in the module accounts (saved in accounts.self), and the 
+saved morph.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Color.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="../PieChart/PieChartMorph.html"> Next  </a> ]
+</center>

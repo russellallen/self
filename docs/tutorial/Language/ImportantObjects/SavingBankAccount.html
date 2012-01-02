@@ -1,0 +1,69 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=400 valign=top><h3>
+
+<h2> Saving the accounts </h2>
+<P>
+Setting the module for the global slots:
+<P>
+<IMG ALIGN=bottom SRC="../../Images/Bank/bank22.gif"> <BR>
+<P>
+Setting slot initializers:
+<P>
+<IMG ALIGN=bottom SRC="../../Images/Bank/bank23.gif"> <BR>
+<P>
+Filing out the accounts module:
+<P>
+<IMG ALIGN=bottom SRC="../../Images/Bank/bank24.gif"> <BR>
+<P>
+To read a module:
+<PRE> 'applications/accounts.self' runScript </PRE>
+
+
+</h3></td><td valign=top>
+
+<h3> Saving the bank and stock accounts </h3>
+
+To illustrate the use of the module system, let's put our account example into a 
+module of its own.
+<P>
+
+We start by putting the bankAccount and stockAccount slots in globals into a new 
+module. To do this, we expose their annotation using the slot menu item, 'Show 
+Annotation.'
+<P>
+
+We then type the module name into the space provided. We'll call the module 
+accounts. As soon as we accept the change, the system notes that there is no module 
+of that name, so we tell it to create one.
+<P>
+
+It will ask us if the new module is to be a submodule of some existing module; it is 
+not. It then asks which directory the source file is to live in; the default, 
+applications, is acceptable.
+<P>
+
+Having put both of the global slots into the module, we could actually try filing the 
+module out now using the 'Changed Modules' object. The transporter would note 
+that the slots referenced objects not yet in a module, and would offer to put them 
+in the same module for us.
+<P>
+
+Alternatively, we can set the modules of the slots in the account objects and their 
+parent using the 'Set module...' menu item on each slot individually (tedious) or 
+all the slots in each object.
+<P>
+
+However, we're not quite done yet. We have been experimenting with the 
+accounts and they have arbitrary values for the number of shares and balance. We 
+should check that the slot initializers for these slots have reasonable defaults, and 
+change them if necessary. Having done this, the module can be filed out.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="SavingSlots.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="ReadingModules.html"> Next  </a> ]
+</center>

@@ -1,0 +1,42 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Automatic change management </h2>
+<UL>
+<LI>	The transporter maintains a mapping from modules to slots (the module cache).
+<P>
+<LI>	Whenever a programming change is made, the cache is updated, and the appropriate modules noted as changed.
+</UL>
+
+<IMG ALIGN=bottom SRC="../../Images/changedModules.gif"> <BR>
+
+</h3></td><td valign=top>
+
+<h3> Automatic change management </h3>
+
+Now here comes the nice part: the Self environment incrementally 
+maintains a mapping from modules to slots (the module cache), and a list of changed 
+modules, which can be obtained from the middle-button background menu. When 
+you make a change, the appropriate module will be added to the list, and can be 
+written as a source file by clicking the `w' button in the list of changed modules. 
+<P>
+
+The middle-button menu on the changed modules list contains a host of useful 
+entries for understanding what has been changed.
+<P>
+
+N.B. If you use the `naked' programming primitives to change objects (_Define:, 
+_AddSlots:, etc.) then the module cache is invalidated, and the next time it is needed 
+there will be a pause of 10-60 seconds while it is refilled. Hence, you should use 
+the mirror-level primitives (e.g., (reflect: obj) define: (reflect: new)), which maintain 
+the module cache.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="ModulesRecap.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="FindingSlots.html"> Next  </a> ]
+</center>

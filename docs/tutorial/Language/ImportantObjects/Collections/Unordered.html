@@ -1,0 +1,70 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Unordered collections: sets and dictionaries </h2>
+<UL>
+<LI>	A set contains an object only once.
+<P>
+<LI>	A dictionary is an arbitrary mapping.
+<P>
+<LI>	Both implemented using hash tables. Set elements and dictionary keys must be comparable using = and return an integer hash value when sent hash. defaultBehavior defines <i> hash </i> as <i> identityHash </i>, a VM hash function.
+</UL>
+</h3>
+
+<h2> Examples </h2>
+<UL>
+<PRE>
+s: set copy.
+s add: ©x©. s add: 23. s add: nil.
+s size.			"3"
+s remove: nil.
+s includes: ©x©.	"true"
+d: dictionary copy.
+d at: ©x© Put: 42.
+d at: nil Put: ().
+d includesKey: nil.	"true"
+d includes: nil.	"false"
+d removeKey: nil
+</PRE>
+</UL>
+
+</h3></td><td valign=top>
+
+<h3> Unordered collections: sets and dictionaries</h3>
+
+Sets and dictionaries are unordered collections of objects. A set contains objects in 
+no particular order. No matter how many times an object is added to a set, it can 
+be removed only once.
+<P>
+
+A dictionary is a mapping from objects to objects. The keys of the dictionary form 
+a set (i.e., no two keys are equal).
+<P>
+
+Both sets and dictionaries are implemented using hash tables. The elements of a set 
+and the keys of a dictionary must be comparable using = and able to return an 
+integer hash value when sent hash (this value must not vary while the object is in 
+the collection). In defaultBehavior is a method, identityHash, which uses a primitive 
+hashing function supplied by the Virtual Machine.
+<P>
+
+Objects are added to sets using add:, and removed using remove: or remove:IfAbsent: 
+(which takes a block as second argument). Set membership can be tested with 
+includes:.
+<P>
+
+Dictionaries can be accessed using at: (which takes a key and returns the 
+corresponding mapped object), or at:IfAbsent: (which sends value: to the second 
+argument if the key is not in the dictionary), and updated using at:Put:. 
+Membership can be tested with includes: and includesKey:.
+<P>
+
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Strings.html"> Previous  </a> ]
+[ <a href="../../../index.html"> Index  </a> ]
+[ <a href="Ordered.html"> Next  </a> ]
+</center>

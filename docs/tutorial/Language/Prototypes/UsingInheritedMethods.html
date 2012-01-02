@@ -1,0 +1,38 @@
+
+<table BORDER="0" cellpadding=0 cellspacing=0><tr><td width=400 valign=top>
+
+<H3>
+
+<H2> Using inherited methods </H2>
+
+Sending deposit: or withdraw: uses the original methods, 
+which still work,  despite changing <i> balance </i> and <i> balance: </i> to methods. <BR>
+<IMG ALIGN=bottom SRC="../../Images/Bank/bank17.gif"> <BR>
+</h3>
+
+</td><td valign=top>
+
+<h3> Using the methods inherited  from the bank account traits </h3>
+
+We can now also try depositing and withdrawing funds from the stock account.
+<P>
+
+We will be using the deposit: and withdraw: methods from the bank account traits, 
+as we have not altered the stock account's parent.
+<P>
+
+Note that although these methods were created when the balance and balance: 
+messages accessed and set a data slot, they still do the right thing because we have 
+provided suitable implementations in the child.
+<P>
+
+
+</td></tr></table>
+
+
+<P>
+<center>
+[ <a href="TestingStockAccount.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="NamingObjects.html"> Next  </a> ]
+</center>

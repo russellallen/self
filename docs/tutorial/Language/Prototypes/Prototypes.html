@@ -1,0 +1,73 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top>
+
+<h2> Prototypes </h2>
+
+<h3>
+
+<UL>
+<LI> Conventional OO languages make objects by instantiating from classes.
+Cons: 
+<P>
+<UL>
+<LI> Need to make new class to make a new kind of object <BR>
+<LI> To change an object's behavior or structure, need to change the class. 
+<LI> Browse classes, not objects.
+</UL>
+<P>
+
+<LI> In SELF, new objects are made by copying existing ones. 
+Safe to change a copy.  
+
+</UL>
+</h3>
+
+</td><td valign=top>
+
+<h2> Prototypes </h2>
+
+Self is a <i> prototype-based </i> language. What does this mean?
+<P>
+
+
+Conventional object-oriented languages use classes to define the structure and 
+behavior of objects. When a new object is required, a class must be <i> instantiated </i>. 
+Modifying an object's structure or behavior means the class has to be modified.
+<P>
+
+There are disadvantages to this approach:
+<P>
+
+<UL>
+
+<LI>	Before making a new kind of object, we need to make a new class. Whenever 
+we want to change the object's structure or behavior, we have to change the 
+class. Some systems do not even permit existing objects to have their class 
+changed; the object has to be reconstructed after the class has changed. When 
+we change the class, we have to be sure that there are no other instances which 
+require the old behavior; otherwise we need to make a new subclass. This 
+slows down development and hinders experimentation.
+<P>
+
+<LI>	When we want to make a new kind of object, we don't usually look for an 
+existing object that is similar to what we want, but we look for a class that 
+defines objects similar to our intent. Then we have to imagine an instance, or, 
+if we are lucky, we can instantiate the class and examine the object. But it's still 
+somewhat indirect.
+<P>
+
+
+The Self language doesn't have any classes. When we want a new object, 
+we find an existing one and copy it. We can then change the copy, safe in the 
+knowledge that we have not affected anything else.
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="../MessagesAndMethods/Debugger.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Copying.html"> Next  </a> ]
+</center>
+</UL>
+<P>

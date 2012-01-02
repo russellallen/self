@@ -1,0 +1,50 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Building a pie wedge morph </h2>
+
+Copy a <i>circleMorph</i>, add <i>amount</i>, <i>percent</i>, <i>startAngle</i>.
+<P>
+<center>
+<IMG ALIGN=bottom SRC="pie1.gif"> <BR>
+</center>
+
+</h3></td><td valign=top>
+
+<h3>Building a pie wedge morph</h3>
+
+A pie wedge is just a segment of a circle, so we will start with a circleMorph. Get a 
+copy of the prototype using
+
+<PRE>
+	circleMorph copy
+</PRE>
+
+We next some state to define which section of the circle is drawn and what quantity 
+it represents. Add the following slots:
+<P>
+
+<PRE>
+	percent <- 33.0
+	startAngle <- 0
+	amount <- 10
+</PRE>
+
+The startAngle slot defines the angle of the start of the pie wedge. The angle is given 
+in degrees, where zero is at 3 o'clock and the angle increases counter-clockwise, as 
+per geometrical convention. The size of the pie wedge is defined by the percent slot, 
+where 25% is a quarter of a circle, 50% is a half circle, and so on. The amount slot 
+defines what quantity the pie wedge represents. The idea is that the client will 
+specify the amount for each wedge and the enclosing pie chart will compute what 
+fraction of the pie each wedge represents and set the percent slot accordingly.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="PieChartMorph.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Drawing.html"> Next  </a> ]
+</center>

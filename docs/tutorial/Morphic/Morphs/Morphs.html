@@ -1,0 +1,39 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Objects, worlds and windows : Morphs </h2>
+<UL>
+<LI>	An object with a visual representation. May be picked up, moved.
+<LI>	May be composite. The components are submorphs (which in turn may have submorphs).
+<LI>	A composite morph is treated as a unit for moving, copying, deleting.
+<LI>	Composition morphs are like any other; visible, manipulable.
+</UL>
+
+</h3></td><td valign=top>
+
+<h1>Morphs</h1>
+
+The central abstraction of Morphic is the graphical object or morph (from the Greek 
+for "shape" or "form"). A morph has a visual representation that can be picked up 
+and moved.
+
+Any morph can have component morphs (called submorphs). A morph with 
+submorphs is called a composite morph. A composite morph is treated as a unit; 
+moving, copying, or deleting a composite morph causes all its submorphs to be 
+moved, copied, or deleted as well. 
+<P>
+
+By convention, all morphs are visible; Morphic does not use invisible structural 
+morphs for aggregation. This means that if a composite morph is disassembled, all 
+its component morphs can be seen and manipulated.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="../Morphic/MultipleUsers.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Direct.html"> Next  </a> ]
+</center>

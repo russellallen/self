@@ -1,0 +1,57 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Strings </h2>
+<UL>
+<LI>	Vectors containing 8-bit characters.
+<P>
+<LI>	String literals yield <i> canonical </i> strings, which are immutable. No two canonical strings have the same sequence of characters. Can use identity (==) to test equality.
+<P>
+<LI>	Sending copyMutable to a canonical string gives you a mutable string. Responds to <i> at:Put: </i>, etc.
+<P>
+<LI>	Useful methods in traits string.
+</UL>
+
+</h3></td><td valign=top>
+
+<h3>Strings</h3>
+
+Strings are vectors which can contain 8-bit characters.
+<P>
+
+There are two kinds of strings in Self, mutable strings and immutable 
+strings, also known as canonical strings.
+<P>
+
+A string literal, e.g., 'foo', is always a canonical string. The Virtual Machine has an 
+internal table of canonical strings, such that there are no two canonical strings with 
+the same sequence of characters. Hence, identity comparison can be used as 
+equality on canonical strings. Self's identity comparison message is ==, 
+just like Smalltalk. Canonical strings cannot be modified.
+<P>
+
+To do string processing, you can make mutable strings from canonical strings by 
+sending copyMutable.
+<P>
+
+Mutable strings respond to at:Put:, first:, etc. 
+<P>
+
+Most of the useful operations on strings are defined in traits string. There you will 
+find methods to do simple parsing, evaluating strings as Self expressions, 
+pattern matching, ordering, and many other things.
+<P>
+
+One unusual feature (especially for Smalltalk programmers): when you send at: to 
+a string, the returned value is a one-element string! There are no distinct character 
+objects.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Vectors.html"> Previous  </a> ]
+[ <a href="../../../index.html"> Index  </a> ]
+[ <a href="Unordered.html"> Next  </a> ]
+</center>

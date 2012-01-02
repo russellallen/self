@@ -1,0 +1,49 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> For the interested reader... </h2>
+<UL>
+<P><LI>	Animation
+<P><LI>	Copying composite morphs
+<P><LI>	Synchronization
+</UL>
+
+</h3></td><td valign=top>
+
+<h2>Things we have not covered</h2>
+
+There are several important parts of Morphic that we have not dealt with. These 
+are advanced topics, which are required for serious use, but beyond the scope of 
+an introductory tutorial. They are dealt with in more detail in the Morphic manual:
+
+<h3> Animation</h3>
+Morphic provides ubiquitous animation. Every morph can participate in 
+animation. Animation can be as simple as having a method applied 
+regularly, causing a change in the appearance of the morph, or it can be as 
+complex as synchronized transformations involving many morphs.
+
+<h3>Copying composite morphs</h3>
+When a composite morph is copied, the entire structure is duplicated. As 
+part of the copying process, internal references between morphs have to be 
+dealt with so that the new structure is consistent (and does not contain 
+references to the original morphs). Morphic supplies a framework for doing 
+this in a controlled fashion.
+
+<h3>Synchronization</h3>
+Morphic is a live system, and has to respond to many concurrent stimuli. 
+Many user can be acting on the system at the same time, together with self-
+driven animations and other processes. It is in this context that applications 
+modify the display. Some synchronization is required to ensure that this 
+proceeds as expected, and Morphic provides hooks for this.
+
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="SomeUsefullMorphs.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="../Recap.html"> Next  </a> ]
+</center>
+

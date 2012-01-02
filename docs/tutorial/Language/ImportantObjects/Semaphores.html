@@ -1,0 +1,57 @@
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+
+
+<h2> Semaphores and the scheduler </h2>
+<UL>
+<LI>	Preemptive scheduler written in SELF, with support from the virtual machine
+<LI>	Semaphores built in SELF.
+<PRE> 
+	semaphore copy
+	semaphore copyBinary
+</PRE>
+<LI>	Understand signal, wait, protect: aBlock
+<PRE>
+	lock: semaphore copyBinary.
+	...
+	lock protect: [critical region]
+</PRE>
+<LI>	recursiveSemaphore doesn't block a process that holds the lock
+</UL>
+
+</h3></td><td valign=top>
+
+
+<h3>Semaphores and the scheduler</h3>
+
+A coroutining primitive allows a preemptive scheduler to be constructed entirely 
+in Self. The scheduling process has special status as a distinguished 
+process.
+<P>
+
+The scheduler is in a global slot, scheduler. Typing ^C into the controlling terminal 
+window suspends all processing and causes the scheduler to list runnable and 
+sleeping processes; these can be killed, suspended or resumed.
+<P>
+
+Semaphores are implemented in Self with the cooperation of the 
+scheduler.
+<P>
+
+Classical semaphores are obtained by sending copy, copyBinary to semaphore. 
+Semaphores understand signal and wait, and can be used to implement critical 
+regions using protect: aBlock (which waits before executing the block, then signals).
+<P>
+
+A recursiveSemaphore is like a semaphore excepts multiple waits from within the 
+same process count as a single wait. This can be useful in avoiding deadlock.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Processes.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Modules.html"> Next  </a> ]
+</center>

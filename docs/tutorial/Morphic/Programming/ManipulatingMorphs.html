@@ -1,0 +1,70 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Morph program interface </h2>
+Making one morph a submorph of another: <BR>
+<PRE>
+	ownerMorph addMorph: subMorph
+</PRE>
+
+Removing a submorph from its owner: <BR>
+<PRE>
+	morph delete
+	ownerMorph removeMorph: subMorph
+</PRE>
+
+Other useful messages to morphs: <BR>
+<PRE>
+	owner
+	morphs, morphCount, morphsDo:
+	allMorphsDo:
+	isInWorld, world
+	copy, copyRemoveAllMorphs
+</PRE>
+
+
+
+</h3></td><td valign=top>
+
+<h2>Programmatic manipulation of morphs</h2>
+
+A morph can be made a submorph of some other morph using the addMorph: 
+operation. This operation updates both the owner slot of the submorph and the 
+submorphs list of the owner to reflect the desired configuration. For example, 
+adding morph B to morph A adds B to A submorph list, removes B from its old 
+owner (if any), and sets B's owner to A. The addMorph: operation also updates the 
+layout of both B's old and new owners. The global position of a morph is held 
+invariant by addMorph: (although some morphs may perform an automatic layout 
+as a side-effect of addMorph:, immediately changing the position of the newly-
+added morph.).
+<P>
+
+Here are some other useful messages to morphs:
+<P>
+
+<PRE>
+owner			"a morph's owner"
+morphs			"a copy of the morphs submorph list"
+morphCount		"the number of submorphs"
+morphsDo: aBlock	"iterate over the direct submorphs"
+allMorphsDo: aBlock	"iterate over the morph and all its submorphs"
+
+delete			"remove the morph from its owner"
+removeMorph: m		"remove the submorph m"
+isInWorld		"is the morph in a world?"
+world			"the morph's world (must be in a world)"
+
+copy			"copy the morph and its submorphs"
+copyRemoveAllMorphs	"copy the morph without its submorphs"
+</PRE>
+
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="../Morphs/CoreSampler.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Prototypes.html"> Next  </a> ]
+</center>

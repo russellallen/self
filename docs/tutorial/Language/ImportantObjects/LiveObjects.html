@@ -1,0 +1,56 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> A SELF 'program' consists of live objects </h2>
+<UL>
+<LI>	No edit/run mode: just change the object directly.
+<P>
+<LI>	Smallest unit of exchange is a set of logically related changes: a module.
+<P>
+<LI>	Extra information must be supplied by the programmer.
+</UL>
+
+</h3></td><td valign=top>
+
+<h3>A SELF `program' consists of live objects</h3>
+
+Self has no edit/run mode. To change an object, you do not retreat to a 
+source file, or even to a class, you just change the object itself. This was a major 
+design aim of the Self system. However, this stance creates a big problem 
+the moment you want to give your work to somebody else. You could give them a 
+snapshot, but how do they combine your work with theirs? There needs to be some 
+way to separate a `program' from a snapshot.
+<P>
+
+For Self, we take the view that the smallest unit which can be usefully 
+communicated to someone else is a set of logically related changes to a 
+Self system that provides the functionality required for a new 
+`application.'
+<P>
+
+How are these changes identified and communicated? We do not want to have 
+every change to every object become part of a new program, as this would be 
+unwieldy, causing unnecessary state to be saved. Instead, the programmer should 
+identify which changes to the system are logically related. A set of logically related 
+changes is called a module. We will shy away from the term `program' as it has 
+many unwanted connotations.
+<P>
+
+The programmer also needs to communicate how these changes should be applied 
+in a new system. For example, suppose an object contains a slot with 1024 in it. 
+Should that value be copied literally? Perhaps it is the result of some computation 
+(such as the width of the current screen) and should be recomputed instead. There 
+simply is not enough information in a Self object to extract a module 
+completely automatically from a snapshot, and the programmer must 
+communicate her intent occasionally.
+<P>
+
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Modules.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Changes.html"> Next  </a> ]
+</center>

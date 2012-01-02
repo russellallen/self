@@ -1,0 +1,39 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Minimum sizes </h2>
+<UL>
+<P><LI>	Accessible via <i>minWidth</i> and <i>minHeight</i>.
+<P><LI>	Layout morphs take into account their submorphs' minimum sizes.
+<P><LI>	Absolute minimum size (with no submorphs) is accessible via <i>baseMinWidth</i>, <i>baseMinHeight</i>.
+</UL>
+
+</h3></td><td valign=top>
+
+<h3>Minimum Sizes</h3>
+
+Morphs have a minimum size in each dimension (minWidth and minHeight). These 
+sizes determine the minimum amount of space that will be allocated to a morph 
+during layout. 
+<P>
+
+The minimum size of a layout morph takes into account the minimum sizes of its 
+submorphs. For example, the minimum width of a row is the sum of the minimum 
+widths of its submorphs (plus a little bit for a border, if it has one).
+<P>
+
+The absolute minimum width and height of a morph, even when it has no 
+submorphs, is specified by its baseMinWidth and baseMinHeight. For some kinds of 
+morph, these values are stored in assignable slots in the morph. For others, these 
+values are defined by inherited constant slots to save space. One can use these 
+attributes to give a space-filling morph a minimum size.
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Shrink.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Resizing.html"> Next  </a> ]
+</center>

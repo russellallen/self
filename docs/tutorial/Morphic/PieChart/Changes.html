@@ -1,0 +1,59 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Propagating changes from pie to wedges </h2>
+<UL>
+<P><LI>	Chart must update wedges when its size or submorphs list changes:
+<PRE>
+layoutInPlace = (
+	resend.layoutInPlace.
+	wedges do: [| :w |
+		 w center: 0@0.
+		"+2 is workaround for display bug"
+		 w radius: radius + 2.
+	].
+	updateWedges.
+	self
+).
+</PRE>
+
+
+</h3></td><td valign=top>
+
+<h3>Propagating changes from pie to wedges</h3>
+
+We would like to pie chart to lay itself out whenever a pie wedge is added or 
+removed and when the pie chart is resized. All of these operations cause the 
+message layoutInPlace to be sent to the pie chart. Thus, we can get the desired 
+behavior just by extending this method:
+<P>
+
+<PRE>
+	layoutInPlace = (
+		resend.layoutInPlace.
+		wedges do: [| :w |
+			 w center: 0@0.
+			 w radius: radius + 2. "+2 is workaround for display bug"
+		].
+		updateWedges.
+		self
+	).
+</PRE>
+
+Note that the method sets the center of each wedge to 0@0, the center of the pie 
+chart itself and the origin of the pie chart's coordinate system. The radius of each 
+wedge is made a bit larger than the radius of the pie chart itself so that the wedges 
+hide the underlying circle completely. (After the next step, try changing this to 
+make the radius of the wedges smaller instead of larger. Try resizing a pie chart. 
+What happens?)
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="WedgeSizes.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Testing.html"> Next  </a> ]
+</center>

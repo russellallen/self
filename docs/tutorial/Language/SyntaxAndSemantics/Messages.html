@@ -1,0 +1,148 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top>
+
+<H3>
+
+<H2>
+Messages
+</H2>
+
+Unary messages (no arguments)
+<UL>
+<DT> 3.14 sin							"send sin to 3.14"
+<DT> account balance				 "send balance to account"
+</UL>
+<P>
+Keyword messages (>0 arguments)
+<UL>
+<DT>account deposit: 100			"send deposit: to account with arg 100"
+<DT> vec at: 2 Put: ©c©				"send at:Put: to vec with  args 2 and 'c' "
+</UL>
+<P>
+
+Binary messages (1 argument)
+<UL>
+<DT> 3 + 4					"send + to 3 with arg 4"
+<DT> 23.1 @ 40.4					"send @ to 23.1 with arg 40.4"
+</UL>
+</UL>
+
+Precedence:
+<UL>
+<DT>Unary					highest
+<DT>Binary
+<DT>Keyword				lowest
+</UL>
+
+<P>
+
+Associativity
+<UL>
+<DT>Unary					left-to-right
+<DT>Binary					left-to-right
+<DT>Keyword				right-to-left
+</UL>
+
+<PRE>
+
+x + y squared	x + (y squared)
+sq at: n + 1 Put: n squared
+	sq at: (n + 1) Put: (n squared)
+x + y + z	(x + y) + z
+a max: b min: c	a max: (b min: c)
+
+</PRE>
+
+</H3>
+
+<P>
+<center>
+[ <a href="Literals.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="LiteralObjects.html"> Next  </a> ]
+</center>
+
+
+</td><td valign=top>
+
+
+<h3> Messages </h3>
+
+There are three syntactic forms of message, distinguished by how many 
+arguments are being passed (the syntax is very close to Smalltalk):
+<P>
+
+Unary messages have no arguments, and consist of an identifier after the 
+expression denoting the receiver. Examples:
+<P>
+
+<PRE>
+	3.14 sin	"send sin to 3.14" 
+	account balance	"send balance to account"
+</PRE>
+
+Keyword messages contain one or more keywords, each followed by an 
+expression that denotes the argument. Each keyword is an identifier 
+immediately followed by a colon. The first keyword in a keyword message 
+must begin with a small letter; successive keywords must begin with a 
+capital letter. 
+<P>
+Examples:
+<P>
+
+<PRE>
+	account deposit: 100		"send deposit: to account with arg 100"
+	vec at: 2 Put: 'c'	"send at:Put: to vec with args 2 and 'c'"
+</PRE>
+
+<P>
+Binary messages are used to pass a single argument, and consist of a symbol 
+made of one or more non-alphanumeric characters (excluding various 
+special characters). The symbol appears between the receiver and the 
+argument. Examples:
+<P>
+
+<PRE>
+	3 + 4	"send + to 3 with arg 4"
+	23.1 @ 40.4	"send @ to 23.1 with arg 40.4"
+</PRE>
+
+
+
+<P>
+When combined, the order of precedence is unary, then binary then keyword 
+messages. Unary and binary messages associate left-to-right, keyword messages 
+right-to-left. Although all binary messages have the same precedence, a binary 
+message cannot be sent to the result of a binary message expression unless the 
+messages are the same or parentheses are used to associate them.
+<P>
+
+More examples, with their parenthesized equivalents:
+<P>
+
+<PRE>
+	x + y squared				x + (y squared)
+	sq at: n + 1 Put: n squared		sq at: (n + 1)Put: (n squared)
+	x + y + z					(x + y) + x
+	a max: b min: c			a max: (b min: c)
+</PRE>
+
+
+<HR>
+
+<h3> Exercise: What are the values of the following expressions? </h3>
+
+<PRE>
+	1 + 2 * 3 + 4
+	1 max: 4 + 3 negated min: 0
+</PRE>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Literals.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="LiteralObjects.html"> Next  </a> ]
+</center>
+

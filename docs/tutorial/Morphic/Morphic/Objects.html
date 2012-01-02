@@ -1,0 +1,19 @@
+
+<h3>Objects, worlds and windows</h3>
+
+A given user can have several Morphic windows open, either on the same morph 
+world or on different morph worlds, and can drag morphs between these 
+windows.
+<P>
+
+A new world can be created using the expression desktop openNewWorld or desktop 
+openNewWorldOnDisplay: displayName where displayName is an X display name 
+such as 'host:0.1'.
+<P>
+
+Each world has a name, shown in the window title. You can access the world 
+object, a worldMorph, using desktop worldNamed: nameString. desktop worlds returns 
+a list of all the worlds. To open a new window on an existing world w, use w 
+alsoOpenOnDisplay: displayName.
+<P>
+

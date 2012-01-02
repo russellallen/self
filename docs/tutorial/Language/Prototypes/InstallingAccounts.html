@@ -1,0 +1,43 @@
+<table cellpadding=0 cellspacing=0><tr><td valign=top>
+
+
+<H2> Installing the accounts </H2>
+<H3>
+The global namespace is implemented by the <i> globals </i> object in the lobby. <BR>
+<IMG ALIGN=bottom SRC="../../Images/globals.gif"> <BR>
+
+</H3>
+</td><td valign=top>
+
+
+<h3> Installing the account objects in the global namespace </h3>
+
+The bank account and stock account objects are prototypes; we can make new 
+accounts by copying them. The most common way to make a prototype well-
+known is to install it in the global namespace.
+<P>
+
+The global namespace is implemented by an object which is reached by the globals 
+slot in the lobby. Globals is a parent slot, so anything that inherits from the lobby 
+also inherits all the slots in globals. In Self 4.0, there are 313 slots in this 
+object.
+<P>
+
+<h3>Categories organize slots</h3>
+
+To organize the slots in an object, each slot can be in a category. Categories can 
+themselves be categorized, forming a hierarchy. The category name can be 
+anything - it serves no purpose other than documentation. New categories can be 
+added using the `Add category' item on the middle-button menu. A category 
+name can be edited by double-clicking on it. Slots can be moved between 
+categories in the same way that they can be moved between objects.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="NamingObjects.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="AddingSlotsToGlobals.html"> Next  </a> ]
+</center>

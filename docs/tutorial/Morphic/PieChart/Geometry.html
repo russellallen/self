@@ -1,0 +1,49 @@
+<html>
+
+<table cellpadding=0 cellspacing=0><tr><td width=420 valign=top><h3>
+
+<h2> Defining the pie wedge's geometry </h2>
+Redefining baseContainsPt:
+<P>
+<IMG ALIGN=bottom SRC="pie3.gif"> <BR>
+
+
+</h3></td><td valign=top>
+
+<h3>Defining the pie wedge's geometry</h3>
+
+Notice that you can pick up the pie wedge by clicking anywhere within the 
+imaginary circle from which the wedge was cut. The wedge inherits this behavior 
+from circleMorph.
+<P>
+
+We need to redefine the method baseContainsPt:, which is the test used to define 
+whether a point is within a morph.
+<P>
+
+<PRE>
+ baseContainsPt: p = (| v. angle. |
+	v: (p - center) xAxisReflect. "expect y to increase vertically"
+	angle: v thetaDegrees.
+	v r > radius ifTrue: [ ^false ].
+	(angle >= startAngle) && [angle <= (startAngle + spanAngle)]
+)
+</PRE>
+
+We need to transform from the display coordinate system (which has y increasing 
+downwards) to the coordinate system we're using within wedges, which assumes 
+y increases upwards; hence the xAxisReflect.
+<P>
+
+Once this method is entered, the morph can only be picked up by clicking in its 
+visible area.
+<P>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Drawing.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Building.html"> Next  </a> ]
+</center>

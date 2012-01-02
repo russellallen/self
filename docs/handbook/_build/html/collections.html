@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Collections &mdash; Self Handbook for Self 4.5 (r 1) documentation</title>
+    
+    <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'for Self 4.5 (r 1)',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="Self Handbook for Self 4.5 (r 1) documentation" href="index.html" />
+    <link rel="up" title="The Self World" href="selfwrld.html" />
+    <link rel="next" title="Pairs" href="pairs.html" />
+    <link rel="prev" title="Numbers and Time" href="numbers.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="index.html">
+          <span>Self Handbook for Self 4.5 (r 1) documentation</span></a></h1>
+        <h2 class="heading"><span>Collections</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="numbers.html">Numbers and Time</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="pairs.html">Pairs</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="collections">
+<h1>Collections<a class="headerlink" href="#collections" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><div class="highlight-python"><pre>clonable
+        collection
+                ... collection hierarchy ...</pre>
+</div>
+</div></blockquote>
+<p>Collections are containers that hold zero or more other objects. In Self, collections behave as if
+they have a key associated with each value in the collection. Collections without an obvious key,
+such as lists, use each element as both key and value. Iterations over collections always pass both
+the value and the key of each element (in that order) to the iteration block. Since Self blocks ignore
+extra arguments, this allows applications that don’t care about keys to simply provide a block
+that takes only one argument.</p>
+<p>Collections have a rich protocol. Additions are made with <tt class="docutils literal"><span class="pre">at:Put:</span></tt>, or with <tt class="docutils literal"><span class="pre">add:</span></tt> or <tt class="docutils literal"><span class="pre">addAll:</span></tt> for
+implicitly keyed collections. Iteration can be done with do: or with variations that allow the programmer
+to specify special handling of the first and/or last element. <tt class="docutils literal"><span class="pre">with:Do:</span></tt> allows pairwise iteration
+through two collections. The <tt class="docutils literal"><span class="pre">includes:</span></tt>, <tt class="docutils literal"><span class="pre">occurrencesOf:</span></tt>, and <tt class="docutils literal"><span class="pre">findFirst:</span></tt>
+<tt class="docutils literal"><span class="pre">IfPresent:IfAbsent:</span></tt> messages test for the presence of particular values in the collection.
+<tt class="docutils literal"><span class="pre">filterBy:Into:</span></tt> creates a new collection including only those elements that satisfy a predicate
+block, while <tt class="docutils literal"><span class="pre">mapBy:Into:</span></tt> creates a new collection whose elements are the result of applying the
+argument block to each element of the original collection.</p>
+<p>Abstract collection behavior is defined in traits collection. Only a small handful of operations need
+be implemented to create a new type of collection; the rest can be inherited from <tt class="docutils literal"><span class="pre">traits</span> <span class="pre">collection</span></tt>.
+(See the <tt class="docutils literal"><span class="pre">descendantResponsibility</span></tt> slot of <tt class="docutils literal"><span class="pre">traits</span> <span class="pre">collection</span></tt>.) The following
+sections discuss various kinds of collection in more detail.</p>
+<p>Modules: collection (abstract collection behavior)</p>
+<div class="section" id="indexable-collections">
+<h2>Indexable Collections<a class="headerlink" href="#indexable-collections" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>collection
+        indexable
+                mutableIndexable
+                        byteVector
+                                ...the string hierarchy
+                        sequence
+                                sortedSequence
+                        vector</pre>
+</div>
+</div></blockquote>
+<p>Indexable collections allow random access to their elements via keys that are integers. All sequences
+and vectors are indexable. The message <tt class="docutils literal"><span class="pre">at:</span></tt> is used to retrieve an element of an indexable collection
+while <tt class="docutils literal"><span class="pre">at:Put:</span></tt> is used to update an element of a <tt class="docutils literal"><span class="pre">mutableIndexable</span></tt> collection (other
+than a <tt class="docutils literal"><span class="pre">sortedSequence</span></tt>).</p>
+<p>Modules: indexable, abstractString, vector, sequence, sortedSequence</p>
+</div>
+<div class="section" id="strings-characters-and-paragraphs">
+<h2>Strings, Characters, and Paragraphs<a class="headerlink" href="#strings-characters-and-paragraphs" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>collection
+        ...
+        byteVector
+                string
+                        mutableString
+                        immutableString
+                                canonicalString</pre>
+</div>
+</div></blockquote>
+<p>A string is a vector whose elements are character objects. There are three kinds of concrete string:
+immutable strings, mutable strings and canonical strings. <tt class="docutils literal"><span class="pre">traits</span> <span class="pre">string</span></tt> defines the behavior
+shared by all strings. A character is a string of length one that references itself in its sole indexable
+slot.</p>
+<p>Mutable strings can be changed using the message <tt class="docutils literal"><span class="pre">at:Put:</span></tt>, which takes a character argument, or
+<tt class="docutils literal"><span class="pre">at:PutByte:</span></tt>, which takes an integer argument. An immutable string cannot be modified, but
+sending it the <tt class="docutils literal"><span class="pre">copyMutable</span></tt> message returns a mutable string containing the same characters.</p>
+<p>Canonical strings are registered in an table inside the virtual machine, like Symbol objects in
+Smalltalk or atoms in LISP. The VM guarantees that there is at most one canonical string for any
+given sequence of bytes, so two canonical strings are equal (have the same contents) if and only if
+they are identical (are the same object). This allows efficient equality checks between canonical
+strings. All message selectors and string literals are canonical strings, and some primitives require
+canonical strings as arguments. Sending <tt class="docutils literal"><span class="pre">canonicalize</span></tt> to any string returns the corresponding
+canonical string.</p>
+<p>Character objects behave like immutable strings of length one. There are 256 well-known character
+objects in the Self universe. They are stored in a 256-element vector named <tt class="docutils literal"><span class="pre">ascii</span></tt>, with each
+character stored at the location corresponding to its ASCII value. Characters respond to the message
+<tt class="docutils literal"><span class="pre">asByte</span></tt> by returning their ASCII value (that is, their index in <tt class="docutils literal"><span class="pre">ascii</span></tt>). The inverse of <tt class="docutils literal"><span class="pre">asByte</span></tt>,
+<tt class="docutils literal"><span class="pre">asCharacter</span></tt>, can be sent to an integer between 0 and 255 to obtain the corresponding
+character object.</p>
+<p>Module: string</p>
+</div>
+<div class="section" id="unordered-sets-and-dictionaries">
+<h2>Unordered Sets and Dictionaries<a class="headerlink" href="#unordered-sets-and-dictionaries" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>collection
+        setOrDictionary
+                set
+                        sharedSet
+                dictionary
+                        sharedDictionary</pre>
+</div>
+</div></blockquote>
+<p>There are two implementations of sets and dictionaries in the system. The one described in this
+section is based on hash tables. The one discussed in the following section is based on sorted binary
+trees. The hash table implementation has better performance over a wide range of conditions.
+(An unfortunate ordering of element addtions can cause the unbalanced trees used in the tree version
+to degenerate into an ordered lists, resulting in linear access times.)</p>
+<p>A set behaves like a mathematical set. It contains elements without duplication in no particular order.
+A dictionary implements a mapping from keys to values, where both keys and values are arbitrary
+objects. Dictionaries implement the usual collection behavior plus keyed access using <tt class="docutils literal"><span class="pre">at:</span></tt>
+and <tt class="docutils literal"><span class="pre">at:Put:</span></tt> and the dictionary-specific operations <tt class="docutils literal"><span class="pre">includesKey:</span></tt> and <tt class="docutils literal"><span class="pre">removeKey:</span></tt>. In order
+to store an object in a set or use it as a dictionary key, the object must understand the messages
+<tt class="docutils literal"><span class="pre">hash</span></tt> and <tt class="docutils literal"><span class="pre">=</span></tt>, the latter applying to any pair of items in the collection. This is because sets and dictionaries
+are implemented as hash tables.</p>
+<p>Derived from set and dictionary are <tt class="docutils literal"><span class="pre">sharedSet</span></tt> and <tt class="docutils literal"><span class="pre">sharedDictionary</span></tt>. These provide locking
+to maintain internal consistency in the presence of concurrency.</p>
+<p>Modules: setAndDictionary, sharedSetAndDictionary</p>
+</div>
+<div class="section" id="tree-based-sets-and-dictionaries">
+<h2>Tree-Based Sets and Dictionaries<a class="headerlink" href="#tree-based-sets-and-dictionaries" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>collection
+        tree
+                treeNodes abstract
+                        treeNodes bag
+                        treeNodes set
+                emptyTrees abstract
+                        emptyTrees bag
+                        emptyTrees set</pre>
+</div>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">treeSet</span></tt> and <tt class="docutils literal"><span class="pre">treeBag</span></tt> implement sorted collections using binary trees. The set variant ignores
+duplicates, while the bag variant does not. Tree sets and bags allow both explicit and implicit keys
+(that is, adding elements can be done with either <tt class="docutils literal"><span class="pre">at:Put:</span></tt> or <tt class="docutils literal"><span class="pre">add:</span></tt>), where a tree set that uses
+explicit keys behaves like a dictionary. Sorting is done on explicit keys if present, values otherwise,
+and the objects sorted must be mutually comparable. Comparisons between keys are made using
+<tt class="docutils literal"><span class="pre">compare:IfLess:Equal:Greater:</span></tt>.</p>
+<p>The implementation of trees uses dynamic inheritance to distinguish the differing behavior of empty
+and non-empty subtrees. The prototype <tt class="docutils literal"><span class="pre">treeSet</span></tt> represents an empty (sub)tree; when an element
+is added to it, its parent is switched from <tt class="docutils literal"><span class="pre">traits</span> <span class="pre">emptyTrees</span> <span class="pre">set</span></tt>, which holds behavior
+for empty (sub)trees, to a new copy of <tt class="docutils literal"><span class="pre">treeSetNode</span></tt>, which represents a tree node holding an element.
+Thus, the <tt class="docutils literal"><span class="pre">treeSet</span></tt> object now behaves as a <tt class="docutils literal"><span class="pre">treeSetNode</span></tt> object, with right and left subtrees
+(initially copies of the empty subtree <tt class="docutils literal"><span class="pre">treeSet</span></tt>). Dynamic inheritance allows one object to
+behave modally without using clumsy if-tests throughout every method.</p>
+<p>One caveat: since these trees are not balanced, they can degenerate into lists if their elements are
+added in sorted order. However, a more complex tree data structure might obscure the main point
+of this implementation: to provide a canonical example of the use of dynamic inheritance.</p>
+<p>Modules: tree</p>
+</div>
+<div class="section" id="lists-and-priorityqueues">
+<h2>Lists and PriorityQueues<a class="headerlink" href="#lists-and-priorityqueues" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>collection
+        list
+        priorityQueue</pre>
+</div>
+</div></blockquote>
+<p>A list is an unkeyed, circular, doubly-linked list of objects. Additions and removals at either end
+are efficient, but removing an object in the middle is less so, as a linear search is involved.</p>
+<p>A priorityQueue is an unkeyed, unordered collection with the property that the element with the
+highest priority is always at the front of the queue. Priority queues are useful for sorting (heapsort)
+and scheduling. The default comparison uses &lt;, but this can be changed.</p>
+<p>Modules: list. priorityQueue</p>
+</div>
+<div class="section" id="constructing-and-concatenating-collections">
+<h2>Constructing and Concatenating Collections<a class="headerlink" href="#constructing-and-concatenating-collections" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python"><pre>clonable
+        collector</pre>
+</div>
+</div></blockquote>
+<p>Two kinds of objects play supporting roles for collections. A <tt class="docutils literal"><span class="pre">collector</span></tt> object is created using
+the &amp; operator (inherited from <tt class="docutils literal"><span class="pre">defaultBehavior</span></tt>), and represents a collection under construction.
+The &amp; operator provides a concise syntax for constructing small collections. For example:</p>
+<div class="highlight-python"><pre>(1 &amp; ’abc’ &amp; x) asList</pre>
+</div>
+<p>constructs a list containing an integer, a string, and the object x. A <tt class="docutils literal"><span class="pre">collector</span></tt> object is not itself
+a collection; it is converted into one using a conversion message such as <tt class="docutils literal"><span class="pre">asList</span></tt>, <tt class="docutils literal"><span class="pre">asVector</span></tt>, or
+<tt class="docutils literal"><span class="pre">asString</span></tt>.</p>
+<p>Modules: collector</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="numbers.html">Numbers and Time</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="pairs.html">Pairs</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+        &copy; Copyright 2011, Russell Allen (Ed.).
+      Last updated on Nov 03, 2011.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div>
+  </body>
+</html>

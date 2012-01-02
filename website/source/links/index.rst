@@ -13,7 +13,6 @@ Projects elsewhere using Self
 * `Manchester Self course <http://www.cs.man.ac.uk/peve/Courses/oops-self.html>`_
 * James Noble's `Tarraingím <http://www.mri.mq.edu.au/~kjx/tgim.html>`_
 * `Self for CS Education <http://www.cs.brown.edu/courses/cs196b>`_ at Brown
-* Nick Drew's 3D Object Browser (this link is broken)
 * `Urs Hölzle <http://www.cs.ucsb.edu/~urs>`_'s research at UCSB
 * `Ivan Moore's <http://www.guruinfo.co.uk/>`_ program restructuring tool, Guru.
 
@@ -22,13 +21,20 @@ Other Prototyping Languages
 
 * `Io <http://iolanguage.com>`_
 * `Ioke <http://kenai.com/projects/ioke/>`_
-* `NewSpeak <http://newspeaklanguage.org/>`_
 * Javascript (of course)
 * `Slate <http://slatelanguage.org>`_
 
 Other Open Source Smalltalks
 ----------------------------
 
-* `Squeak <http://squeak.org>`_
+* `Squeak <http://squeak.org>`_ and `Pharo <http://www.pharo-project.org/home>`_
 * `Gnu Smalltalk <http://smalltalk.gnu.org>`_
+* `Redline Smalltalk <http://www.redline.st/>`_ (Smalltalk on the JVM)
+* `Amber Smalltalk <http://amber-lang.net/>`_ (Smalltalk on Javascript)
 * Little Smalltalk
+
+Other Interesting and Related Languages
+---------------------------------------
+
+* `NewSpeak <http://newspeaklanguage.org/>`_ 
+* `Dart <http://www.dartlang.org/>`_

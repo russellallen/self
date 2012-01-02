@@ -1,0 +1,25 @@
+<html>
+
+<P>
+<center>
+[ <a href="Testing.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="../DragAndDrop/DragAndDrop.html"> Next  </a> ]
+</center>
+
+<h3>Making traits for the morphs</h3>
+
+Before we continue extending the example, we should note that it is getting 
+tedious to make new copies of the wedge and chart every time we change a 
+method. This is a good clue that it is time to introduce traits.
+<P>
+
+We'll do this in the simplest way possible: For each of the chart and wedge 
+prototypes, copy the parent slot to the background to make a new object, connect 
+the original parent slot to this object by arrow-dragging, and then move the 
+relevant slots (all the methods and constant data slots) to the parent. This is 
+probably a good time to introduce categories, too, label slots as public/private, 
+and add comments.
+<P>
+
+<IMG ALIGN=bottom SRC="pie9.gif"> <BR>

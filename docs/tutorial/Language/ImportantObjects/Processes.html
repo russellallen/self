@@ -1,0 +1,65 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+
+<h2> Processes </h2>
+<UL>
+<LI>	Multi-tasking capability available using threads (known as processes within SELF)
+<P>
+<LI>	Create using a message object:
+<PRE>
+	(message copy
+		receiver: 
+		Selector: ) fork
+</PRE>
+<P>
+<LI>	Every evaluation runs in a separate process.
+<P>
+<LI>	Processes assigned fixed-size stack, started with a message
+</UL>
+
+</h3></td><td valign=top>
+
+<h2>Processes</h2>
+
+Self includes a multi-tasking capability, in the form of multiple threads 
+within a single Self program. Each thread is a copy of process.
+<P>
+
+The easiest way to create a process programmatically is by sending fork to a 
+message object:
+<P>
+
+<PRE>	
+	(message copy receiver: 100 Selector: 'factorial') fork
+</PRE>	
+
+<P>
+Every computation started from an evaluator runs in its own process. The user 
+interface has several processes of its own.
+<P>
+
+In Self 4.0, each process's stack is of fixed-size, allocated when the process 
+starts.
+<P>
+
+These are useful messages to a process:
+<P>
+
+<UL>
+<BR> abort		"kill the process"
+<BR> suspend	"suspend until resumed"
+<BR> resume		
+<BR> waitForSuspension	"returns when the process suspends"
+<BR> waitForDeath		"returns when the process dies"
+<BR> returnValue		"the return value of a completed process"
+<BR> this	"the currently executing process"
+</UL>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="Collections/Collectors.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Semaphores.html"> Next  </a> ]
+</center>

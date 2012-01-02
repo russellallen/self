@@ -1,0 +1,74 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.1.1}{System Overview}{chapter.1}% 2
+\BOOKMARK [0][-]{chapter.2}{Language Reference}{}% 3
+\BOOKMARK [1][-]{section.2.1}{Objects}{chapter.2}% 4
+\BOOKMARK [1][-]{section.2.2}{Slot descriptors}{chapter.2}% 5
+\BOOKMARK [1][-]{section.2.3}{Expressions}{chapter.2}% 6
+\BOOKMARK [1][-]{section.2.4}{Lexical elements}{chapter.2}% 7
+\BOOKMARK [0][-]{chapter.3}{The Self World}{}% 8
+\BOOKMARK [1][-]{section.3.1}{World Organization}{chapter.3}% 9
+\BOOKMARK [1][-]{section.3.2}{The Roots of Behavior}{chapter.3}% 10
+\BOOKMARK [1][-]{section.3.3}{Blocks, Booleans, and Control Structures}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.4}{Numbers and Time}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.5}{Collections}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.6}{Pairs}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.7}{Mirrors}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.8}{Messages}{chapter.3}% 16
+\BOOKMARK [1][-]{section.3.9}{Processes and the Prompt}{chapter.3}% 17
+\BOOKMARK [1][-]{section.3.10}{Foreign Objects}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.11}{I/O and Unix}{chapter.3}% 19
+\BOOKMARK [1][-]{section.3.12}{Other Objects}{chapter.3}% 20
+\BOOKMARK [1][-]{section.3.13}{How to build the world}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.14}{How to use the low-level interrupt facilities}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.15}{Using the textual debugger}{chapter.3}% 23
+\BOOKMARK [0][-]{chapter.4}{A Guide to Programming Style}{}% 24
+\BOOKMARK [1][-]{section.4.1}{Behaviorism versus Reflection}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.2}{Objects Have Many Roles}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.3}{Naming and Printing}{chapter.4}% 27
+\BOOKMARK [1][-]{section.4.4}{How to Return Multiple Values}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.5}{Substituting Values for Blocks}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.6}{nil Considered Naughty}{chapter.4}% 30
+\BOOKMARK [1][-]{section.4.7}{Hash and =}{chapter.4}% 31
+\BOOKMARK [1][-]{section.4.8}{Equality, Identity, and Indistinguishability}{chapter.4}% 32
+\BOOKMARK [0][-]{chapter.5}{How to Program in Self}{}% 33
+\BOOKMARK [1][-]{section.5.1}{Introduction}{chapter.5}% 34
+\BOOKMARK [1][-]{section.5.2}{Browsing Concepts}{chapter.5}% 35
+\BOOKMARK [1][-]{section.5.3}{Hacking Objects}{chapter.5}% 36
+\BOOKMARK [1][-]{section.5.4}{The Transporter}{chapter.5}% 37
+\BOOKMARK [0][-]{chapter.6}{Morphic: The Self User Interface Framework}{}% 38
+\BOOKMARK [1][-]{section.6.1}{Overview}{chapter.6}% 39
+\BOOKMARK [1][-]{section.6.2}{Composite Morphs}{chapter.6}% 40
+\BOOKMARK [1][-]{section.6.3}{Morph Traits and Prototypes}{chapter.6}% 41
+\BOOKMARK [1][-]{section.6.4}{Saving a Composite Morph}{chapter.6}% 42
+\BOOKMARK [1][-]{section.6.5}{Handling User Input}{chapter.6}% 43
+\BOOKMARK [1][-]{section.6.6}{Drag and Drop}{chapter.6}% 44
+\BOOKMARK [1][-]{section.6.7}{Automatic Layout}{chapter.6}% 45
+\BOOKMARK [1][-]{section.6.8}{Animation}{chapter.6}% 46
+\BOOKMARK [1][-]{section.6.9}{Other Issues}{chapter.6}% 47
+\BOOKMARK [1][-]{section.6.10}{Morph Responsibilities}{chapter.6}% 48
+\BOOKMARK [1][-]{section.6.11}{Some Useful Morphs}{chapter.6}% 49
+\BOOKMARK [1][-]{section.6.12}{The Graphical Environment}{chapter.6}% 50
+\BOOKMARK [0][-]{chapter.7}{Virtual Machine Reference}{}% 51
+\BOOKMARK [1][-]{section.7.1}{Startup options}{chapter.7}% 52
+\BOOKMARK [1][-]{section.7.2}{System-triggered messages}{chapter.7}% 53
+\BOOKMARK [1][-]{section.7.3}{Run-time message lookup errors}{chapter.7}% 54
+\BOOKMARK [1][-]{section.7.4}{Low-level error messages}{chapter.7}% 55
+\BOOKMARK [1][-]{section.7.5}{An example}{chapter.7}% 56
+\BOOKMARK [1][-]{section.7.6}{Lookup errors}{chapter.7}% 57
+\BOOKMARK [1][-]{section.7.7}{Programmer defined errors}{chapter.7}% 58
+\BOOKMARK [1][-]{section.7.8}{Primitive errors}{chapter.7}% 59
+\BOOKMARK [1][-]{section.7.9}{Nonrecoverable process errors}{chapter.7}% 60
+\BOOKMARK [1][-]{section.7.10}{Fatal errors}{chapter.7}% 61
+\BOOKMARK [1][-]{section.7.11}{The initial Self world}{chapter.7}% 62
+\BOOKMARK [1][-]{section.7.12}{Option Primitives}{chapter.7}% 63
+\BOOKMARK [1][-]{section.7.13}{Interfacing with other languages}{chapter.7}% 64
+\BOOKMARK [0][-]{chapter.8}{References}{}% 65
+\BOOKMARK [0][-]{chapter.9}{Appendices}{}% 66
+\BOOKMARK [1][-]{section.9.1}{Glossary}{chapter.9}% 67
+\BOOKMARK [1][-]{section.9.2}{Lexical overview}{chapter.9}% 68
+\BOOKMARK [1][-]{section.9.3}{Syntax overview}{chapter.9}% 69
+\BOOKMARK [1][-]{section.9.4}{Built-in types}{chapter.9}% 70
+\BOOKMARK [1][-]{section.9.5}{Useful Selectors}{chapter.9}% 71
+\BOOKMARK [1][-]{section.9.6}{Every Menu Item in the Programming Environment}{chapter.9}% 72
+\BOOKMARK [1][-]{section.9.7}{The system monitor}{chapter.9}% 73
+\BOOKMARK [1][-]{section.9.8}{Primitives}{chapter.9}% 74

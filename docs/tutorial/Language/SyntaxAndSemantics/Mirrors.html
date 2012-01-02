@@ -1,0 +1,64 @@
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top><h3>
+<h2> Mirrors </h2>
+<UL>
+<LI>	The mechanism by which the programming environment can reflect on the system.
+<P>
+<LI>	Created with _Mirror on a reflectee <BR> (or reflect: reflectee).
+<P>
+<LI>	Can access slot names, contents, and annotations.
+<P>
+<LI>	Also provide access to programming primitives.
+</UL>
+
+</h3></td><td valign=top>
+
+<h3> Mirrors </h3>
+
+How does the programming environment discover the structure of an object, if 
+there are no classes? In particular:
+<P>
+
+<UL>
+<LI> How are slot names found?
+<LI> How is the source of a method obtained? 
+<LI> Indeed, how is a reference to a method obtained, given the evaluation rules?
+</UL>
+
+Bear in mind that the user interface must be able to deal with any object, including 
+empty objects (no slots at all), and objects which are incomplete (e.g., under 
+construction).
+<P>
+
+The answer is provided by special objects known as mirrors which have reflective 
+powers (groan).
+<P>
+
+A mirror can be obtained on any object using the _Mirror primitive. The subject of 
+the mirror's scrutiny is known as its reflectee. defaultBehavior defines a method, 
+reflect: obj, which returns a mirror on obj.
+<P>
+
+Look in traits mirrors abstractMirror for all the possibilities.
+<P>
+<PRE>
+	reflectee	"return the object being inspected"
+	size		"number of slots in the reflectee"
+	names		"a vector of slot names"
+	at: slotName PutContents: mirror    "Change the contents
+		of slotName to be the reflectee of mirror"
+	parentsDo: aBlock	"Iterate over the parent slots"
+	addSlot: slotMirror	"Add a slot"
+	addSlots: mirror 	"Add all the slots from the mirror's reflectee"
+	addSlotsIfAbsent: mirror
+	define: mirror		"Make the reflectee of the receiver look like
+		the reflectee of the argument"
+</PRE>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="ProgrammingPrimitives.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Annotation.html"> Next  </a> ]
+</center>

@@ -1,0 +1,66 @@
+
+<table cellpadding=0 cellspacing=0><tr><td width=350 valign=top>
+
+<h3>
+
+<h2> Non-local returns </h2>
+
+A block©s last expression may be preceded by an up-arrow (^). <P>
+This means that when the block completes execution it does not return to the caller (the activation that sent it <i>value</i>), but returns to the caller of the home activation (i.e., the activation corresponding to lexically-enclosing method).<BR>
+
+<PRE>
+	foo
+		3 < 4 ifTrue: [^nil].
+		...
+
+	obj foo
+</PRE>
+
+</h3>
+</td><td valign=top>
+
+<h3>Non-local returns</h3>
+
+A block may end with a return statement, causing a return via the lexically-
+enclosing method activation. The return statement is an expression preceded by an 
+up-arrow (^).
+<P>
+
+<hr>
+
+Exercise: Describe the steps taken in executing the following method, once the 
+result of 3<4 is returned:
+<P>
+
+<PRE>
+	3 < 4 ifTrue: [^nil]
+</PRE>
+
+<P>
+
+<HR>
+
+Exercise: What are the effects of the following expressions?
+<P>
+
+<PRE>
+	| b. z.
+	 e = (| z <- 7.ÊÊdo: blk = ( blk value: z ) |)
+	|
+	b: 	[| :x.ÊÊy <- 1 |
+		y: x + y.
+		z: y + z.
+		z printLine].
+	b value: 3.
+	b value: 4.
+	e do: b.
+</PRE>
+
+</td></tr></table>
+
+<P>
+<center>
+[ <a href="BlockActivation.html"> Previous  </a> ]
+[ <a href="../../index.html"> Index  </a> ]
+[ <a href="Primitives.html"> Next  </a> ]
+</center>
