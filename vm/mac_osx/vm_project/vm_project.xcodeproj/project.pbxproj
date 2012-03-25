@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXApplicationTarget section */
@@ -3892,9 +3892,16 @@
 /* Begin PBXProject section */
 		20286C28FDCF999611CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0410;
+			};
 			buildConfigurationList = BC4C11D4093BD55B00A3D738 /* Build configuration list for PBXProject "vm_project" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 20286C29FDCF999611CA2CEA /* ¬´PROJECTNAME¬ª */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -4691,7 +4698,6 @@
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/Frameworks/ApplicationServices.framework/Versions/A/Frameworks",
 				);
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				OBJROOT = "$(OBJROOT)/debug";
 				OTHER_CFLAGS = (
@@ -4722,7 +4728,6 @@
 				APPSUFFIX = " debug";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GLUE_LIB_DIR = "\"../../../objects/glue/mac_osx/\"";
 				HEADER_SEARCH_PATHS = (
@@ -4884,6 +4889,7 @@
 					/usr/X11R6/lib,
 					.,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -5125,7 +5131,6 @@
 					"$(SYSTEM_LIBRARY_DIR)/Frameworks/ApplicationServices.framework/Versions/A/Frameworks",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -5158,7 +5163,6 @@
 				);
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				OTHER_CFLAGS = (
 					"-DTARGET_IS_FOR_DEBUGGING=0",
@@ -5188,7 +5192,6 @@
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/Frameworks/ApplicationServices.framework/Versions/A/Frameworks",
 				);
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				OBJROOT = "$(OBJROOT)/optimized";
 				OTHER_CFLAGS = (
@@ -5220,7 +5223,6 @@
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/Frameworks/ApplicationServices.framework/Versions/A/Frameworks",
 				);
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				MACOSX_DEPLOYMENT_TARGET = 10.3;
 				OBJROOT = "$(OBJROOT)/optimized_fast_floats";
@@ -5254,7 +5256,6 @@
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/Frameworks/ApplicationServices.framework/Versions/A/Frameworks",
 				);
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				OBJROOT = "$(OBJROOT)/debug";
 				OTHER_CFLAGS = (
@@ -5287,7 +5288,6 @@
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/Frameworks/ApplicationServices.framework/Versions/A/Frameworks",
 				);
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				OBJROOT = "$(OBJROOT)/optAssert";
 				OTHER_CFLAGS = (
@@ -5320,7 +5320,6 @@
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/Frameworks/ApplicationServices.framework/Versions/A/Frameworks",
 				);
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_PROFILING_CODE = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				OBJROOT = "$(OBJROOT)/profiled";
@@ -5331,7 +5330,6 @@
 				);
 				OTHER_LDFLAGS = "";
 				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = "All Platforms";
 				REZ_EXECUTABLE = YES;
 				SECTORDER_FLAGS = "";
@@ -5373,7 +5371,6 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -5467,7 +5464,6 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GLUE_LIB_DIR = "\"../../../objects/glue/mac_osx/\"";
 				HEADER_SEARCH_PATHS = (
@@ -5558,7 +5554,6 @@
 				APPSUFFIX = "";
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GLUE_LIB_DIR = "\"../../../objects/glue/mac_osx/\"";
 				HEADER_SEARCH_PATHS = (
@@ -5651,7 +5646,6 @@
 				APPSUFFIX = fast_floats;
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GLUE_LIB_DIR = "\"../../../objects/glue/mac_osx/\"";
 				HEADER_SEARCH_PATHS = (
@@ -5746,7 +5740,6 @@
 				APPSUFFIX = " debug";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GLUE_LIB_DIR = "\"../../../objects/glue/mac_osx/\"";
 				HEADER_SEARCH_PATHS = (
@@ -5840,7 +5833,6 @@
 			buildSettings = {
 				APPSUFFIX = " Opt Asserts";
 				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GLUE_LIB_DIR = "\"../../../objects/glue/mac_osx/\"";
 				HEADER_SEARCH_PATHS = (
@@ -5934,7 +5926,6 @@
 				APPSUFFIX = " Profiled";
 				DEPLOYMENT_LOCATION = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_PROFILING_CODE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GLUE_LIB_DIR = "\"../../../objects/glue/mac_osx/\"";
@@ -5997,7 +5988,6 @@
 					"-lcurses",
 				);
 				OTHER_REZFLAGS = "";
-				PREBINDING = NO;
 				PRODUCT_NAME = "Self cocoa.debug";
 				SECTORDER_FLAGS = "";
 				SELF_WORKING_DIR = "${HOME}/self";
@@ -6183,6 +6173,7 @@
 					/usr/X11R6/lib,
 					.,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6270,6 +6261,7 @@
 					/usr/X11R6/lib,
 					.,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6356,6 +6348,7 @@
 					/usr/X11R6/lib,
 					.,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6444,6 +6437,7 @@
 					/usr/X11R6/lib,
 					.,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6532,6 +6526,7 @@
 					/usr/X11R6/lib,
 					.,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6619,6 +6614,7 @@
 					/usr/X11R6/lib,
 					.,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6706,6 +6702,7 @@
 					/usr/X11R6/lib,
 					.,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6793,6 +6790,7 @@
 					/usr/X11R6/lib,
 					.,
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				MAKE = /usr/bin/make;
 				OTHER_LDFLAGS = (
 					"-lX11",

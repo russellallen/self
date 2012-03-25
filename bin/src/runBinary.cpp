@@ -1,6 +1,7 @@
+# include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include <CoreServices/CoreServices.h>
+# include <sys/mman.h>
 
 // $Revision: 30.2 $
 
@@ -26,7 +27,7 @@ main(int argc, char* argv[]) {
 		perror("fread");
 		exit(1);
 	}
-  	MakeDataExecutable(buf, len);
+  	mprotect(buf, len, PROT_EXEC || PROT_READ || PROT_WRITE);
 	typedef int (*fn_t)(...);
 	int args[3];
 	int argsToSkip = 2; // name of me, name of testfile
