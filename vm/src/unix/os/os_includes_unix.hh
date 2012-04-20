@@ -74,7 +74,7 @@ extern "C" {
 # include <math.h>
 # if TARGET_OS_VERSION == MACOSX_VERSION
 #   undef ASSEMBLER
-#   include <ucontext.h>
+#   include <sys/ucontext.h>
 #   include <termios.h>
 #   include <sys/ioctl.h>
 #   include <pthread.h>

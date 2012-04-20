@@ -294,38 +294,42 @@ bool OS::setup_snapshot_to_run(char* fileName) {
 
 # else
 
-/* The following two functions were written by Kristen McIntyre */
-static bool path_to_fsspec(char *path, FSSpec *fspec)
+
+
+
+/* The following two functions were written by Kristen McIntyre, changed by Tobias Pape
+ because of deprecation waringns. */
+static bool path_to_fsref(char *path, FSRef *fref)
 {
-  FSRef fref;
-  
-  if (FSPathMakeRef((const UInt8 *)path, &fref, NULL) == noErr)
-    if (FSGetCatalogInfo(&fref, kFSCatInfoNone, NULL, NULL, fspec, NULL) == noErr)
-      return true;
-  return false;
+    if (FSPathMakeRef((const UInt8 *)path, &fref, NULL) == noErr)
+        return true;
+    return false;
 }
 
 static bool set_type_creator(char *path, const char *type, const char *creator)
 {
-  FInfo finfo;
-  FSSpec fss;
-  
-  if (path_to_fsspec(path, &fss) == false)
+  FileInfo* finfo;
+  FSRef fsr;
+  FSCatalogInfo cinfo;
+    
+  if (path_to_fsref(path, &fsr) == false)
     return false;
-  if (FSpGetFInfo(&fss, &finfo) != noErr)
+  if (FSGetCatalogInfo(fsr, kFSCatInfoFinderInfo | kFSCatInfoFinderInfo, &cinfo, NULL, NULL, NULL);
     return false;
+      
+  finfo = &((FileInfo) cinfo.finderInfo);
 
-  finfo.fdType = 0;
+  finfo->fileType = 0;
   if (type != NULL)
       for (int i = 0; i < 4; i++)
-        finfo.fdType |= ((unsigned char)type[i]) << ((3 - i) * 8);
+        finfo->fileType |= ((unsigned char)type[i]) << ((3 - i) * 8);
 
-  finfo.fdCreator = 0;
+  finfo->fileCreator = 0
   if (creator != NULL)
      for (int i = 0; i < 4; i++)
-       finfo.fdCreator |= (unsigned char)creator[i] << ((3 - i) * 8);
+       finfo->fileCreator |= (unsigned char)creator[i] << ((3 - i) * 8);
 
-  return FSpSetFInfo(&fss, &finfo) == noErr;
+  return FSSetCatalogInfo(fsr, kFSCatInfoFinderInfo, &cinfo) == noErr;
 }
 
 bool OS::setup_snapshot_to_run(char* fileName) {
