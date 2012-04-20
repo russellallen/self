@@ -58,7 +58,7 @@
     NSTask *t;
     NSEnumerator* myIterator = [running objectEnumerator];
     
-    while( t = [myIterator nextObject])
+    while((t = [myIterator nextObject]))
     {
         [t terminate];
     }

@@ -115,7 +115,7 @@
         if (myStatus == errAuthorizationSuccess)
             for(;;)
             {
-                int bytesRead = read (fileno (myCommunicationsPipe),
+                size_t bytesRead = read (fileno (myCommunicationsPipe),
                                       myReadBuffer, sizeof (myReadBuffer));
                 
                 if (bytesRead < 1) goto DoneWorking;
@@ -176,13 +176,6 @@
 
 // END QUITTING
 
-// EMPTY VM
-
-- (void)emptyVM:(NSNotification *)aNotification
-{
-    [self showIntroAlert];
-}
-
 -(void)showIntroAlert
 {
     NSAlert *alert = [[[NSAlert alloc] init] autorelease];
@@ -191,6 +184,12 @@
     [alert setInformativeText:@"You will need to choose a current working directory to start the VM from."];
     [alert setAlertStyle:NSInformationalAlertStyle];
     [alert beginSheetModalForWindow:window modalDelegate:self didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:) contextInfo:nil];
+}
+
+// EMPTY VM
+- (void)emptyVM:(NSNotification *)aNotification
+{
+    [self showIntroAlert];
 }
 
 - (void)alertDidEnd:(NSAlert *)alert returnCode:(NSInteger)returnCode
@@ -202,6 +201,13 @@
                                    selector:@selector(cwdDialog)
                                    userInfo:nil
                                     repeats:NO];
+}
+
+- (void)openEmptyVM:(NSURL*)aUrl
+{
+    SelfWorld *w = [[SelfWorld alloc] init];
+    [w runEmptyOn:aUrl];
+    [vmManagerModel registerRunningVM: w];
 }
 
 - (void)cwdDialog
@@ -220,14 +226,6 @@
     }];
     
 }
-
-- (void)openEmptyVM:(NSURL*)aUrl
-{
-    SelfWorld *w = [[SelfWorld alloc] init];
-    [w runEmptyOn:aUrl];
-    [vmManagerModel registerRunningVM: w];
-}
-
 
 // END EMPTY VM
 
