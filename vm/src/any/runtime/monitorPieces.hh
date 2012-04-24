@@ -76,7 +76,7 @@ class OSActivityMonitor {
   enum SystemState { nothing,
                      reading, writing, disk_IO, disk_in, disk_out, in_os, idle};
   static OSActivityMonitor::SystemState activity();
-  static char* state_string(OSActivityMonitor::SystemState);
+  static const char* state_string(OSActivityMonitor::SystemState);
 };
 
 
@@ -124,9 +124,9 @@ class Indicator: public CHeapObj {
 // Constant text
 class IndicatorLabel : public Indicator {
  private:
-  char* text;
+  const char* text;
  public:
-  IndicatorLabel(char* t) { text = t; }
+  IndicatorLabel(const char* t) { text = t; }
   void show() { Indicator::show(text); }
   void show(const char* t) {Indicator::show(t);} // silence STUPID C++ warning
 };
@@ -155,7 +155,7 @@ class ValueIndicator : public Indicator {
   bool showSum;       // show sliding sum instead of average
  public:
   bool changed;       // redrawn during last update() ?
-  ValueIndicator(char* t, bool sum, fint d, fint n = 1, fint off = 0);
+  ValueIndicator(const char* t, bool sum, fint d, fint n = 1, fint off = 0);
   void reposition(fint X, fint Y, fint W) {
     Indicator::reposition(X, Y, W); show(); }
   void show() { Indicator::show(text); }
@@ -164,14 +164,14 @@ class ValueIndicator : public Indicator {
   int32 value() { return lastVal; }
   
  protected:
-  static void printWithCommas(char* s, fint length, fint offset, int32 n);
+  static void printWithCommas( char* s, fint length, fint offset, int32 n);
 };
 
 class DifferenceIndicator : public ValueIndicator {
  protected:
   int32 lastSum;      // last sum shown
  public:
-  DifferenceIndicator(char* t, fint d, fint n = 1, fint off = 0)
+  DifferenceIndicator(const char* t, fint d, fint n = 1, fint off = 0)
     : ValueIndicator(t, d, n, off) { lastSum = -1; }
   void update(int32 newSum, bool incremental);
 };
@@ -185,7 +185,7 @@ class CompileIndicator : public Indicator {
   char name[compile_len];
  public:
   CompileIndicator() : Indicator() {};
-  void show(const char *name, const char* compiler, bool recompiling);
+  void show(const char* name, const char* compiler, bool recompiling);
   void show(const char* t) {Indicator::show(t);} // silence STUPID C++ warning
 };
 

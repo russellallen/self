@@ -176,7 +176,7 @@ float* objVectorOopClass::convertFloatArray() {
 }
 
 
-void* objVectorOopClass::convertProxyArray(void* seal) {
+void* objVectorOopClass::convertProxyArray(const void* seal) {
   oop*   src    = objs();
   oop*   end    = src + length();
   void** result = NEW_RESOURCE_ARRAY( void*, length());

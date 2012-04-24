@@ -52,7 +52,7 @@ void slotsMapDeps::shift_obj_slots(smiOop offset, fint delta) {
 }
 
 
-slotsOop create_slots(slotList* slots, char* annotation) {
+slotsOop create_slots(slotList* slots, const char* annotation) {
   slotsMapDeps m1;
   slotsOop obj;
   slotsMapDeps* sm= (slotsMapDeps*) create_map(sizeof(slotsMapDeps),

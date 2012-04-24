@@ -12,10 +12,10 @@
 
 /* Type seals. */
 
-extern char *sealSeal;   /* Type seal for proxies containing a type seal.   */
-extern char *TS_SO;      /* Type seal for dl handles (shared objects).      */
-extern char *TS_symb;    /* Type seal for symbol addresses (from dynLink).  */
-extern char *TS_func;    /* Type seal for functions (from dynLink).         */
+extern const char *sealSeal;   /* Type seal for proxies containing a type seal.   */
+extern const char *TS_SO;      /* Type seal for dl handles (shared objects).      */
+extern const char *TS_symb;    /* Type seal for symbol addresses (from dynLink).  */
+extern const char *TS_func;    /* Type seal for functions (from dynLink).         */
 
 # define byteVector_glue                                                                                                                                 \
   CC_mber_2(oop,,         oop,byteVector,      bv_concatenate_prim, bv_concatenate_prim_glue,   fail,   oop,byteVector, oop,byteVector                 ) \

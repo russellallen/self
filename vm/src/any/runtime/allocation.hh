@@ -252,7 +252,7 @@ extern void malloc_init();
 extern bool MallocInProgress;  // allocating on C heap right now?
 
 
-inline char* AllocateHeap(int32 size, char* name, bool mustAllocate= true) {
+inline char* AllocateHeap(int32 size, const char* name, bool mustAllocate= true) {
   char* b = (char *) selfs_malloc(size);
   if (mustAllocate && b == NULL) OS::allocate_failed(name);
 # if GENERATE_DEBUGGING_AIDS

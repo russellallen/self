@@ -37,7 +37,7 @@
     SSelfScope* currentScope() {
       return scopeStack->isEmpty() ? NULL : scopeStack->top(); }
     Node* append(Node* n);
-    Node* comment(char* s);
+    Node* comment(const char* s);
     
     void prologue(bool needToFlushRegWindow, bool isAccessMethod, fint nargs);
     void testStackOverflow(PRegBList* exprStack, SplitSig* s);
@@ -106,14 +106,14 @@
                      PRegBList*           exprStackPRs, 
                      SplitSig*            s );
                      
-    char* splitCondBranch( MergeNode*           targetNode,
-                           bool                 isBackwards,
-                           PReg*                targetPR,
-                           SExpr*               testExpr,
-                           BranchBCTargetStack* targetStack,
-                           SExprStack*          exprStack,
-                           PRegBList*           exprStackPRs, 
-                           SplitSig*            s );
+    const char* splitCondBranch( MergeNode*           targetNode,
+                                 bool                 isBackwards,
+                                 PReg*                targetPR,
+                                 SExpr*               testExpr,
+                                 BranchBCTargetStack* targetStack,
+                                 SExprStack*          exprStack,
+                                 PRegBList*           exprStackPRs, 
+                                 SplitSig*            s );
                           
     void branchIndexedCode( int32                 nCases,
                             MergeNode**           targetNode,

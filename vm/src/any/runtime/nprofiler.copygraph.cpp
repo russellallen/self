@@ -177,7 +177,7 @@ class slot_info {
   static const smi invalid_offset;
  public:
   smi offset() { return _offset; }
-  void init(oop node_pt, char* selector);
+  void init(oop node_pt, const char* selector);
   bool is_present() { return _offset >= 0; }
   void set(oop node_oop, oop value) {
     Memory->store(oopsOop(node_oop)->oops(offset()), value);
@@ -186,7 +186,7 @@ class slot_info {
 
 const smi slot_info::invalid_offset = -1;
 
-void slot_info::init(oop node_pt, char* selector) {
+void slot_info::init(oop node_pt, const char* selector) {
   // Check if node_pt has data_slot selector and save offset in _offset.
   stringOop sel = Memory->string_table->lookup(selector, strlen(selector));
   slotDesc* sd = node_pt->find_slot(sel);

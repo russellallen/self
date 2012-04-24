@@ -10,14 +10,14 @@
 
 class String: public ParseNode {
  public:
-  char* str;
-  smi   len;    // Necessary since strings may contain '\0'.
+  const char* str;
+  smi         len;    // Necessary since strings may contain '\0'.
   
-  String(char* s)        { str = s; len = strlen(str); }
-  String(char* s, smi l) { str = s; len = l; }
+  String(const char* s)        { str = s; len = strlen(str); }
+  String(const char* s, smi l) { str = s; len = l; }
   
-  char* AsCharP()  { return str; }
-  fint arg_count() { return str_arg_count(str); }
+  const char*   AsCharP() { return str; }
+  fint        arg_count() { return str_arg_count(str); }
 
   bool equals(String* other) {
     return strcmp(AsCharP(), other->AsCharP()) == 0;

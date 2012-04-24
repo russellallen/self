@@ -39,7 +39,7 @@ void Parser::prematureEOF(Token *t) {
   }
 }
 
-void Parser::syntaxErrorExpecting(Token*t , char *expected) {
+void Parser::syntaxErrorExpecting(Token*t , const char *expected) {
   if (!silent) scanner->ErrorMessage("unexpected token", t->line, t->column);
   if (!parse_error_message) {
     error                = parseErr;
@@ -51,12 +51,12 @@ void Parser::syntaxErrorExpecting(Token*t , char *expected) {
 }
 
 
-void Parser::syntaxError(char* msg, Token* t) {
+void Parser::syntaxError(const char* msg, Token* t) {
   syntaxError(msg, t->line, t->column);
 }
 
 
-void Parser::syntaxError(char* msg, int32 l, int32 c) {
+void Parser::syntaxError(const char* msg, int32 l, int32 c) {
   if (!silent) scanner->ErrorMessage(msg, l, c);
   if (!parse_error_message) {
     error               = parseErr;
@@ -424,16 +424,16 @@ Object* Parser::parseObject(char match, Token* t, fint nargs,
   SlotList* slots;
   ExprList* code;
 
-  fint  source_body_line;
-  fint  source_body_col;
-  char* source_body_start;
-  fint  source_body_length;
-  Token* object_annotation = NULL;
+  fint        source_body_line;
+  fint        source_body_col;
+  const char* source_body_start;
+  fint        source_body_length;
+  Token*      object_annotation = NULL;
 
-  fint  source_line   = t->line;
-  fint  source_column = t->column;
-  char* source_start  = t->sourceStart;
-  fint  source_length;
+  fint        source_line   = t->line;
+  fint        source_column = t->column;
+  const char* source_start  = t->sourceStart;
+  fint        source_length;
 
   t = scanner->get_token(); CHECK_TOKEN(t);
 
@@ -507,7 +507,7 @@ Object* Parser::parseObject(char match, Token* t, fint nargs,
 }
 
 bool Parser::parseBody(SlotList*& slots, ExprList*& code, Token* t, fint nargs,
-                       char*& sourceStart, fint& line, fint& col,
+                       const char*& sourceStart, fint& line, fint& col,
                        Token*& object_annotation) {
   if (t->type == '|') {
     slots = parseObjectSlots(t, object_annotation);
@@ -582,7 +582,7 @@ SlotList* Parser::parseObjectSlots(Token* t, Token*& object_annotation) {
 }
 
 
-SlotList* Parser::parseAnnotatedSlots(Token* t, SlotList* slots, char* annos,
+SlotList* Parser::parseAnnotatedSlots(Token* t, SlotList* slots, const char* annos,
                                       Token*& object_annotation) {
   assertToken(t, Token::ANNOTATION_START, "an annotation start token");
 
@@ -605,7 +605,7 @@ SlotList* Parser::parseAnnotatedSlots(Token* t, SlotList* slots, char* annos,
   return slots;
 }
 
-SlotList* Parser::parseSlots(SlotList* slots, char* annos, Token*& finalT,
+SlotList* Parser::parseSlots(SlotList* slots, const char* annos, Token*& finalT,
                              Token*& object_annotation) {
   Token* t = scanner->get_token(); CHECK_TOKEN(t);
   for (;;) {
@@ -654,7 +654,7 @@ SlotList* Parser::parseSlots(SlotList* slots, char* annos, Token*& finalT,
 }
 
 
-SlotList* Parser::parseSlot(SlotList* slots, Token* t, char* anno) {
+SlotList* Parser::parseSlot(SlotList* slots, Token* t, const char* anno) {
   switch (t->type) {
    case Token::ARG:
     return parseArgSlot(slots, t, anno);
@@ -675,13 +675,13 @@ SlotList* Parser::parseSlot(SlotList* slots, Token* t, char* anno) {
   }
 }
 
-SlotList* Parser::parseArgSlot(SlotList* slots, Token* t, char* anno) {
+SlotList* Parser::parseArgSlot(SlotList* slots, Token* t, const char* anno) {
   assertToken(t, Token::ARG, "an argument token");
   if (!isValidSlotName(t)) return NULL;
   return slots->Append(new ArgSlot(t->string, t, anno), this);
 }
 
-SlotList* Parser::parseUnarySlot(SlotList* slots, Token* t0, char* anno) {
+SlotList* Parser::parseUnarySlot(SlotList* slots, Token* t0, const char* anno) {
   if (t0->type != Token::NAME && t0->type != Token::PRIMNAME) {
     expecting(t0, "a name token");
     return NULL;
@@ -692,7 +692,7 @@ SlotList* Parser::parseUnarySlot(SlotList* slots, Token* t0, char* anno) {
   bool is_parent_slot = false;
   if (t->type == Token::OPERATOR) {
     // check token for '*'
-    char* s = StringFromOp(t)->AsCharP();
+    const char* s = StringFromOp(t)->AsCharP();
     if (*s == '*') {
       int tokLen= strlen(s);
       if (tokLen > 1) {
@@ -765,7 +765,7 @@ Object* Parser::parseMethodDecl(Token* t, fint nargs, fint nargsSeen) {
 }
 
 
-SlotList* Parser::parseBinarySlot(SlotList* slots, Token* t, char* anno) {
+SlotList* Parser::parseBinarySlot(SlotList* slots, Token* t, const char* anno) {
   Token* t0 = t;
   if (! isOp(t)) {
     expecting(t, "a binary operator token");
@@ -788,7 +788,7 @@ SlotList* Parser::parseBinarySlot(SlotList* slots, Token* t, char* anno) {
   return slots->Append(new DataSlot(name, expr, t0, anno), this);
 }
 
-SlotList* Parser::parseKeywordSlot(SlotList* slots, Token* t, char* anno) {
+SlotList* Parser::parseKeywordSlot(SlotList* slots, Token* t, const char* anno) {
   Token* t0 = t;
   if (t->type != Token::KEYWORD && t->type != Token::PRIMKEYWORD) {
     expecting(t, "a keyword token");
@@ -827,7 +827,7 @@ SlotList* Parser::parseKeywordSlot(SlotList* slots, Token* t, char* anno) {
   return slots->Append(new DataSlot(s, expr, t0, anno), this);
 }
 
-void Parser::expecting(Token* t, char* c) {
+void Parser::expecting(Token* t, const char* c) {
   if (t->type == Token::ACCEPT) {
     // don't print the error message
     prematureEOF(t);
@@ -865,7 +865,7 @@ bool Parser::testDone() {
   return true;
 }
 
-Expr* Parser::readExpr(fint& line, char*& sourceStart, fint& sourceLength) {
+Expr* Parser::readExpr(fint& line, const char*& sourceStart, fint& sourceLength) {
   Token* t = scanner->get_token();
   line = t->line;
   Expr* e = NULL;
@@ -900,15 +900,15 @@ Expr* Parser::readExpr(fint& line, char*& sourceStart, fint& sourceLength) {
 }
 
 Object* Parser::readBody(fint& line, fint& col,
-                         char*& sourceStart, fint& sourceLength) {
+                         const char*& sourceStart, fint& sourceLength) {
   Token* t = scanner->get_token();
   line = t->line;
   col  = t->column;
 
-  fint  source_line  = t->line;
-  fint  source_column = t->column;
-  char* source_start = t->sourceStart;
-  fint  source_length;
+  fint        source_line  = t->line;
+  fint        source_column = t->column;
+  const char* source_start = t->sourceStart;
+  fint        source_length;
   
   sourceStart = scanner->lastWhiteSpaceBefore(t->sourceStart);
 
@@ -955,7 +955,7 @@ Object* Parser::readBody(fint& line, fint& col,
   return NULL;
 }
 
-bool fill_data_slot(oop obj, char* slot_name, oop value) {
+bool fill_data_slot(oop obj, const char* slot_name, oop value) {
   stringOop name = Memory->string_table->lookup(slot_name, strlen(slot_name));
   slotDesc* sd   = obj->find_slot(name);
   if (sd && sd->type->is_obj_slot()) {

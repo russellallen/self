@@ -874,7 +874,7 @@ class nmsizes {
     deps += other.deps; scopes += other.scopes;
   }
   bool isEmpty() { return n == 0; }
-  void print(char* name, nmsizes& tot) {
+  void print(const char* name, nmsizes& tot) {
     int32 bigTotal = tot.total();
     int32 myTotal = total();
     if (! isEmpty()) {
@@ -892,7 +892,7 @@ class nmsizes {
              myTotal, myTotal, bigTotal);
     }
   }
-  void print_stats(char* name) {
+  void print_stats(const char* name) {
     if (! isEmpty()) {
       lprintf("%-13s: %7ld %7ld %7ld %7ld %7ld %7ld\n",
              name, long(n), long(n*sizeof(nmethod)), long(insts), long(locs),

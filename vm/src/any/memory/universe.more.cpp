@@ -363,7 +363,7 @@ typedef enum { okStatus,
                notAssignableStatus,
                noMemStatus } slotStatus;
 
-static slotStatus get_space_usage(slotsOop proto, char *slotName, space *s)
+static slotStatus get_space_usage(slotsOop proto, const char *slotName, space *s)
 {
   bool inObj;
   oop *p= proto->get_slot_data_address_if_present(slotName, inObj); 
@@ -382,7 +382,7 @@ static slotStatus get_space_usage(slotsOop proto, char *slotName, space *s)
    if (st == noMemStatus) goto out_of_mem;                              \
 
 
-static slotStatus set_slot(slotsOop proto, char *slotName, smi val)
+static slotStatus set_slot(slotsOop proto, const char *slotName, smi val)
 {
   bool inObj;
   oop *p= proto->get_slot_data_address_if_present(slotName, inObj); 
@@ -467,7 +467,7 @@ class InterestingMap: public ResourceObj {
   int32 count;
   int32 size;
 
-  InterestingMap(Map* m, char* n) {
+  InterestingMap(Map* m, const char* n) {
     map = m; count = size = 0;
     name = NEW_RESOURCE_ARRAY( char, strlen(n));
     strncpy(name, n, strlen(n));
@@ -491,7 +491,7 @@ class GenericInterestingMap : public InterestingMap {
  public:
   matchFn pred;
 
-  GenericInterestingMap(char* nm, matchFn predicate) :
+  GenericInterestingMap(const char* nm, matchFn predicate) :
     InterestingMap(NULL, nm) { pred = predicate; }
   bool matches(oop p, Map* m) { return pred(p, m); }
 };
@@ -508,8 +508,8 @@ class MemoryHistogram: public ResourceObj {
   InterestingMap** iMaps;
 
   void init(fint maxSize, fint imaps);
-  void addGenericMap(char* name, matchFn predicate);
-  void addMap(Map* m, char* name);
+  void addGenericMap(const char* name, matchFn predicate);
+  void addMap(Map* m, const char* name);
   void add(oop p);
   void print();
 };
@@ -527,11 +527,11 @@ void MemoryHistogram::init(fint maxS, fint imaps) {
   for ( i = 0; i < imaps; i++) iMaps[i] = NULL;
 }
 
-void MemoryHistogram::addGenericMap(char* name, matchFn predicate) {
+void MemoryHistogram::addGenericMap(const char* name, matchFn predicate) {
   iMaps[interesting++] = new GenericInterestingMap(name, predicate);
 }
 
-void MemoryHistogram::addMap(Map* m, char* name) {
+void MemoryHistogram::addMap(Map* m, const char* name) {
   iMaps[interesting++] = new InterestingMap(m, name);
 }
 

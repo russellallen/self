@@ -178,8 +178,8 @@ class universe {
 
   // snapshotting operations
   const char *check_sizes_for_snapshot(spaceSizes &snap_sizes);
-  bool  write_snapshot(char *fileName,
-                       char *compression_filter, char *decompression_filter,
+  bool  write_snapshot(const char *fileName,
+                       const char *compression_filter, const char *decompression_filter,
                        spaceSizes *snap_sizes);
 private:
 

@@ -27,7 +27,7 @@ bool Send::GenByteCodes(AbstractByteCode* b, Object* parent, bool isExpr) {
   // if (receiver && receiver->IsSelf()) {
   //  warning("sending messages to explicit \"self\" is considered bad style");
   // }
-  char* msg= message->AsCharP();
+  const char* msg= message->AsCharP();
   
   stringOop selector = new_string(msg);
   
@@ -87,7 +87,7 @@ void Unary::Print() {
 
 bool Unary::GenByteCodes(AbstractByteCode* b, Object* parent, bool isExpr) {
   Unused(isExpr);
-  char* msg= message->AsCharP();
+  const char* msg= message->AsCharP();
   if (strncmp(msg, "__", 2) == 0) {
     ErrorMessage("illegal pseudo-primitive");
     return false;
@@ -151,7 +151,7 @@ void Keyword::Print() {
 
 bool Keyword::GenByteCodes(AbstractByteCode* b, Object* parent, bool isExpr) {
   Unused(isExpr);
-  char* msg= message->AsCharP();
+  const char* msg= message->AsCharP();
    
   if (strcmp(msg, "__DefineLabel:") == 0) {
     return  GenLabelDefinition(b, parent);

@@ -85,7 +85,7 @@ class AbstractByteCode: public preservedVmObj {
    LabelSet*  labelSet;
   BranchSet* branchSet;
   
-  char* errorMessage;
+  const char* errorMessage;
   bool  ranOutOfMemory;
   
  public:
@@ -213,9 +213,9 @@ class ByteCode: public AbstractByteCode {
 
 
   bool Finish();
-  bool Finish(char* fname, fint sourceLine, char* srcStart, fint srcLen);
-  bool Finish(char* fname, char* src);
-  bool Finish(char* fname, fint sourceLine, fint srcOffset, fint srcLen);
+  bool Finish(const char* fname, fint sourceLine, const char* srcStart, fint srcLen);
+  bool Finish(const char* fname, const char* src);
+  bool Finish(const char* fname, fint sourceLine, fint srcOffset, fint srcLen);
   
   // preserve  operation
   void oops_do(oopsDoFn f) { 

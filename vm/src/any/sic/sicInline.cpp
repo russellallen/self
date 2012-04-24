@@ -425,7 +425,7 @@
     return shouldInlineSend(info, rs, rcvr, meth, NormalFnLimit);
   }
   
-  SSelfScope* SCodeScope::notify(stringOop selector, char* msg) {
+  SSelfScope* SCodeScope::notify(stringOop selector, const char* msg) {
     if (PrintInlining) {
       lprintf("%*s*cannot inline %s, cost = %ld (%s)\n", (void*)depth, "",
               selector_string(selector), (void*)msgCost, msg);

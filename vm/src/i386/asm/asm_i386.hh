@@ -63,11 +63,11 @@ class Assembler: public BaseAssembler {
     *((int32*)destp) += (int32)target;
   }
   
-  void printRM(RegSize rs, Location r, int32 d, OperandType t, Location index, Scale s, char* ps, bool is_call = false);
+  void printRM(RegSize rs, Location r, int32 d, OperandType t, Location index, Scale s, const char* ps, bool is_call = false);
   void printRM_disp(int32 d,  OperandType t);
-  void printR(RegSize rs, Location r, char* ps);
+  void printR(RegSize rs, Location r, const char* ps);
   void printDest(int32 dest, OperandType t, Label* L);
-  void printImm( int32 imm, OperandType t = NumberOperand, char* ps = "");
+  void printImm( int32 imm, OperandType t = NumberOperand, const char* ps = "");
 
   void mod_rm_reg(int32 mod, int32 rm, int32 reg) { Byte( (mod << 6) | rm | (reg << 3) ); }
   void sib(int32 ss, int32 index, Location reg) {mod_rm_reg(ss, reg, index); }
@@ -76,7 +76,7 @@ class Assembler: public BaseAssembler {
                       Location reg_operand, Location base_reg, 
                       int32 disp, OperandType t, 
                       Location index_reg, Scale scale,
-                      char* suffix,
+                      const char* suffix,
                       bool is_call = false);
 
   void numberBase_disp8_reg( Location reg_operand, Location base_reg, int32 disp,
@@ -119,8 +119,8 @@ class Assembler: public BaseAssembler {
   };
   
   void word_branch_target(int32 dest, OperandType t, Label* L);
-  void std_jmp_or_loop(char* j_or_loop, char* ccs, int32 op8, int32 op32, int32 dest, OperandType disp_type, Label* L, bool add_0f_prefix = true);                       
-  void jcc( char* ccs, jump_conds::conds cc, jump_ops::ops op, int32 d, OperandType t, Label* L);
+  void std_jmp_or_loop(const char* j_or_loop, const char* ccs, int32 op8, int32 op32, int32 dest, OperandType disp_type, Label* L, bool add_0f_prefix = true);                       
+  void jcc( const char* ccs, jump_conds::conds cc, jump_ops::ops op, int32 d, OperandType t, Label* L);
 
   
  public:
@@ -162,13 +162,13 @@ class Assembler: public BaseAssembler {
  private:
 
   bool do_special_shifts(int32 op_imm_rm, int32 imm);
-  void like_add8_imm(char* name, int32 imm, Location dst_reg, int32 dst_disp, OperandType dt, 
+  void like_add8_imm(const char* name, int32 imm, Location dst_reg, int32 dst_disp, OperandType dt, 
                      Location index, Scale s, int32 op_imm8_al, int32 op_imm8_rm8, int32 opExt);
-  void like_add32_imm(char* name, int32 imm, OperandType st, Location dst_reg, int32 dst_disp, OperandType dt,
+  void like_add32_imm(const char* name, int32 imm, OperandType st, Location dst_reg, int32 dst_disp, OperandType dt,
                       Location index, Scale s, int32 op_imm32_eax, int32 op_imm8_rm32, int32 op_imm32_rm32, int32 opExt );
-  void like_add_r_rm(char* name, char bOrL, Location src, 
+  void like_add_r_rm(const char* name, char bOrL, Location src, 
                     Location dst_base, int32 dst_disp, OperandType dt, Location index, Scale s, int32 op);
-  void like_add_rm_r(char* name, char bOrL, 
+  void like_add_rm_r(const char* name, char bOrL, 
                     Location src_base, int32 src_disp, OperandType st, Location index, Scale s, 
                     Location dst, int32 op); 
 

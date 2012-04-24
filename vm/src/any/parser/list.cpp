@@ -26,7 +26,7 @@ fint List::Length() {
   return count;
 }
 
-void List::PrintSeparatedBy(char* sep) {
+void List::PrintSeparatedBy(const char* sep) {
   for (ListElement* e = Head(); e; e = e->Next()) {
     e->Print();
     if (sep) lprintf("%s", sep);

@@ -444,7 +444,7 @@
     Unused(mustBeLegal);
     return newValueName(constant()); }
 
-  void SExpr::print_expr(char* type) {
+  void SExpr::print_expr(const char* type) {
     lprintf(" (Node %#lx)", (unsigned long)node());
     if (next) lprintf(" (next %#lx)", (unsigned long)next);
     lprintf("    p *(%s*)%#lx\n", type, (unsigned long)this);

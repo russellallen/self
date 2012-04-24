@@ -18,20 +18,20 @@ oop check_glue_return(oop value) {
 
 
 
-oop glue_conversion_error(smi err, char *additional_msg) {
+oop glue_conversion_error(smi err, const char* additional_msg) {
   // Called from glue code, when argument/result conversion error detected.
   // E.g. err == BADTYPEERROR, additional_msg == ": s_arg_0 should be int".
   ResourceMark rm;
   int err_len = VMString[err]->length();
-  char   *str = NEW_RESOURCE_ARRAY( char, err_len + strlen(additional_msg) +1);
+  char*   str = NEW_RESOURCE_ARRAY( char, err_len + strlen(additional_msg) +1);
   memcpy(str, VMString[err]->bytes(), err_len);
   strcpy(str + err_len, additional_msg);
   return ErrorCodes::general_prim_error(str);
 }
 
 
-static inline failure_handle *indicate_failure(void *FH) {
-  failure_handle *FH0 = (failure_handle *)FH;
+static inline failure_handle* indicate_failure(void* FH) {
+  failure_handle* FH0 = (failure_handle* )FH;
   if (FH0->fh_magic != FH_MAGIC)
     fatal("failure function called with invalid failure handle");
   FH0->failed = true;
@@ -39,34 +39,34 @@ static inline failure_handle *indicate_failure(void *FH) {
 }
 
 
-extern "C" void failure(void *FH, const char *msg) {
+extern "C" void failure(void* FH, const char* msg) {
   // This function is called from 'glued-in' functions to raise an exception.
-  failure_handle *FH0 = indicate_failure(FH);
+  failure_handle* FH0 = indicate_failure(FH);
   FH0->msg = ErrorCodes::general_prim_error(msg);
 }
 
 
-extern "C" void unix_failure(void *FH, int err) {
+extern "C" void unix_failure(void* FH, int err) {
   // Like failure, but interpretes err as a unix error no (if err has
   // value -1, the current value of errno is used instead).
   if (err == -1)
     err = errno;
-  failure_handle *FH0 = indicate_failure(FH);
+  failure_handle* FH0 = indicate_failure(FH);
   FH0->msg = ErrorCodes::os_prim_error(err);
 }
 
 
-extern "C" void prim_failure(void *FH, VMStringsIndex err) {
+extern "C" void prim_failure(void* FH, VMStringsIndex err) {
   // Like failure, but constructs an error msg in the same way as ErrorCodes::vmString_prim_error.
-  failure_handle *FH0 = indicate_failure(FH);
+  failure_handle* FH0 = indicate_failure(FH);
   FH0->msg = ErrorCodes::vmString_prim_error(err);
 }
 
 
-extern "C" void out_of_memory_failure(void *FH, int32 size, int32 bsize) {
+extern "C" void out_of_memory_failure(void* FH, int32 size, int32 bsize) {
   // Out of memory (could not allocate an object of size oops and bsize 
   // words in byte area
-  failure_handle *FH0 = indicate_failure(FH);
+  failure_handle* FH0 = indicate_failure(FH);
   FH0->msg = ErrorCodes::vmString_prim_error(OUTOFMEMORYERROR);
   // need to do something clever with sizes --miw
   Unused(size); Unused(bsize);
@@ -74,7 +74,7 @@ extern "C" void out_of_memory_failure(void *FH, int32 size, int32 bsize) {
 
 
 
-char *nameOfArgc(char *fctName) {
+char* nameOfArgc(const char* fctName) {
   // A crude way to determine the name of the variable which contains the argc
   // for the function with SYMBOL name fctName. This function should probably
   // be generalized, and rely on the C++ name mangler/demangler. 

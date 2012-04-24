@@ -93,7 +93,7 @@ nmethod* FCompiler::compile() {
 }
 
 
-void FCompiler::trace_compile(char *s) {
+void FCompiler::trace_compile(const char *s) {
   if (PrintCompilation) {
     lprintf("*NIC-compiling %s method for %s:\n",
             s, sprintName(NULL, L->selector()));

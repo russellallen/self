@@ -79,7 +79,7 @@ oop real_time_prim(void *FH);
 
 inline smi monitor_height_prim() { return TheSpy->max_height(); }
 
-oop primitive_documentation(char *prim_name);
+oop primitive_documentation(const char *prim_name);
 
 oop primitive_list_prim(void *FH);
 

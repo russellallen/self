@@ -85,7 +85,7 @@ protected:
 public:
   void check_length();
 
-  FileName(char* d, char* p, char* s, char* x, char* i, char* a) {
+  FileName(const char* d, const char* p, const char* s, const char* x, const char* i, const char* a) {
     strcpy( dir, d);
     strcpy( prefix, p);
     strcpy( stem, s);
@@ -101,20 +101,20 @@ public:
     check_length();
   }
 
-  inline char* dir_pre_stem_suff()    { return dpss; }
-  inline char* pre_stem_altSuff()     { return psa; }
-  inline char* dir_pre_stem_altSuff() { return dpsa; }
-  inline char* pre_stem_suff()        { return pss; }
+  inline const char* dir_pre_stem_suff()    { return dpss; }
+  inline const char* pre_stem_altSuff()     { return psa; }
+  inline const char* dir_pre_stem_altSuff() { return dpsa; }
+  inline const char* pre_stem_suff()        { return pss; }
 
-  FileName* copy_stem(char* newStem) {
+  FileName* copy_stem(const char* newStem) {
     return new FileName(dir, prefix, newStem, suffix, inverseDir, altSuffix);
   }
 
-  Bool suffix_matches(char* s);
+  Bool suffix_matches(const char* s);
 
-  char* nameOfList() { return stem; }
+  const char* nameOfList() { return stem; }
 
-  char* getInvDir() { return inverseDir; }
+  const char* getInvDir() { return inverseDir; }
 
 };
 
@@ -143,7 +143,7 @@ class AbstractPlatform {
       GDFileTemplate = new FileName( "", "",  "Dependencies.hh",       "",      "", "");
   }
 
-  char** outer_suffixes() { 
+  const char** outer_suffixes() { 
     abort(); // should not run me; copy me for each platform
     /* Compiler bug:
       static char *suffs[] = { ".cpp", 0 };
@@ -185,13 +185,13 @@ class AbstractPlatform {
   
   // The comment prefix indicates a comment line in includeDB
   
-  inline char* commentPrefix()  const { return "//"; }
+  inline const char* commentPrefix()  const { return "//"; }
 
 
   // A line with a filename and the noGrandInclude string means that
   // this file cannot use the precompiled header.
   
-  inline char* noGrandInclude()  const { return "no_precompiled_headers"; }
+  inline const char* noGrandInclude()  const { return "no_precompiled_headers"; }
   
   // A line with a filename and the generatePlatformDependentInclude means that
   // an include file for the header file must be generate.
@@ -201,32 +201,32 @@ class AbstractPlatform {
   // means that this program will create a file called "foo_pd.hh"
   // containing # include "foo_sparc.hh" (assuming arch = sparc).
     
-  inline char* generatePlatformDependentInclude()  const { return "generate_platform_dependent_include"; }
+  inline const char* generatePlatformDependentInclude()  const { return "generate_platform_dependent_include"; }
 
   // Format strings for emitting Makefile rules
-  virtual char* obj_file_format()  = 0;
-  virtual char* asm_file_format()  = 0;
-  virtual char* dependent_format() = 0;
+  virtual const char* obj_file_format()  = 0;
+  virtual const char* asm_file_format()  = 0;
+  virtual const char* dependent_format() = 0;
 
   // platform-dependent exit routines:
   // abort means an internal error
    
   virtual void abort() = 0;
    
-  void set_args(int& /*argc*/, char**& /*argv*/) {} // per-platform argument setting
+  void set_args(int& /*argc*/, const char**& /*argv*/) {} // per-platform argument setting
 
-  Bool fileNameStringEquality(char* a, char* b) { return strcmp(a, b) == 0; }
+  Bool fileNameStringEquality(const char* a, const char* b) { return strcmp(a, b) == 0; }
 
-  void fileNamePortabilityCheck(char* name );
-  void fileNamePortabilityCheck(char* name, char* matchingName);
+  void fileNamePortabilityCheck(const char* name );
+  void fileNamePortabilityCheck(const char* name, const char* matchingName);
 
   int fileNameLengthLimit() { return 31; } // max is 31 on mac, so warn
 
   int  defaultGrandIncludeThreshold() { return 30; }
   
-  virtual char* GIFileForDependency() { return GIFileTemplate->pre_stem_suff(); }
+  virtual const char* GIFileForDependency() { return GIFileTemplate->pre_stem_suff(); }
 
-  virtual void fatal(char* msg = "See console window") { fprintf(stderr, "%s\n", msg); exit(1); }
+  virtual void fatal(const char* msg = "See console window") { fprintf(stderr, "%s\n", msg); exit(1); }
 };
 
 
@@ -239,14 +239,14 @@ class MetroWerksMacPlatform:  public AbstractPlatform {
         GIFileTemplate = new FileName( "",        "",  "SelfMacPrecompHeader", ".pch",  "", "");
         GDFileTemplate = DummyFileTemplate;
   }
-  char** outer_suffixes() { 
+  const char** outer_suffixes() { 
    static char *suffs[] = { ".cpp", ".c", ".s", 0 };
    return suffs;
   }
 
-  char* obj_file_format()  { return "NOT ON MAC"; }
-  char* asm_file_format()  { return "NOT ON MAC"; }
-  char* dependent_format() { return "NOT ON MAC"; }
+  const char* obj_file_format()  { return "NOT ON MAC"; }
+  const char* asm_file_format()  { return "NOT ON MAC"; }
+  const char* dependent_format() { return "NOT ON MAC"; }
 
 
 #   ifdef TARGET_IS_SELF
@@ -282,14 +282,14 @@ class MetroWerksMacPlatform:  public AbstractPlatform {
 
   void abort() { Debugger(); }
   
-  void fatal(char* msg = "See console window") {
+  void fatal(const char* msg = "See console window") {
     fprintf(stderr, "%s\n", msg);
     SIOUXSettings.autocloseonquit  = False;
     SIOUXSettings.asktosaveonclose = True;
     exit(1);
   }
   
-  void set_args(int& argc, char**& argv) {
+  void set_args(int& argc, const char**& argv) {
     argc = ccommand(&argv);
 #   ifdef TARGET_IS_SELF
           if (argc == 1) {

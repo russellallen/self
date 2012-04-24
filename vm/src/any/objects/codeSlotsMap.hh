@@ -24,7 +24,7 @@ class oldMapList;
 
 class methodMap: public codeSlotsMap {
   friend slotsOop create_outerMethod(slotList* slots, ByteCode* b,
-                                     char* annotation = "",
+                                     const char* annotation = "",
                                      IntBList* stack_deltas = NULL);
  protected:
   // instance variables
@@ -183,7 +183,7 @@ class methodMap: public codeSlotsMap {
 class outerMethodMap: public methodMap {
  public:
   friend slotsOop create_outerMethod(slotList* slots, ByteCode* b,
-                                     char* annotation,
+                                     const char* annotation,
                                      IntBList* stack_deltas);
   
   VtblMapType vtblMapType() { return MAP_TYPE_NAME(outerMethodMap); }
@@ -203,7 +203,7 @@ class blockMethodMap: public methodMap {
   friend slotsOop basic_create_method(slotList* slots,
                                       ByteCode* b,
                                       methodMap &m1,
-                                      char* annotation,
+                                      const char* annotation,
                                       bool isBlock);
   friend class methodMap;
  public: // needs to be public for MW
@@ -227,10 +227,10 @@ class blockMethodMap: public methodMap {
   oop mirror_source_length(oop r) { Unused(r);  return _sourceLen; }
 
   friend slotsOop create_blockMethod(slotList* slots, ByteCode* b,
-                                     char* annotation = "",
+                                     const char* annotation = "",
                                      IntBList* stack_deltas = NULL);
   friend slotsOop basic_create_method(slotList* slots, ByteCode* b,
-                                      methodMap* m1, char* annotation,
+                                      methodMap* m1, const char* annotation,
                                       bool isBlock);
   MethodKind kind()             { return BlockMethodType; }
   mirrorOop mirror_proto()      { return Memory->blockMethodMirrorObj; }

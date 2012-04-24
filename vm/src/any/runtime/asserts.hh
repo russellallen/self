@@ -8,7 +8,7 @@
 # endif
 
 
-void assert(bool b, char* fmt);
+void assert(bool b, const char* fmt);
 extern bool CheckAssertions; // defined in debug.h but need it sooner
 
 

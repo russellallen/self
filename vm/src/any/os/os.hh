@@ -18,14 +18,14 @@ class OS {
   static const int seconds_per_day = 86400;
   
   static char*   allocate_heap_aligned(caddr_t desired_address,
-                                       int32 size, int32 align, char* name,
+                                       int32 size, int32 align, const char* name,
                                        bool mustAllocate = true);
                                        
                                        
   static char*   expand_unix_dir(const char* in,  char* out);
   static bool    expand_user_name(const char* in, const char* slash, char*& dirName);
-  static char*   get_user_directory(char* user);
-  static void    convert_unix_filename(char* src, char* dst);
+  static char*   get_user_directory(const char* user);
+  static void    convert_unix_filename(const char* src, char* dst);
   static bool    is_pipe(FILE* f);
   static bool    is_fifo(mode_t);
   
@@ -47,10 +47,10 @@ class OS {
   // returns true if allocate_idealized_page_aligned should get desiredAddr below
   static bool   is_directed_allocation_supported();
   
-  static char*  allocate_idealized_page_aligned(int32 &size, char* name,
+  static char*  allocate_idealized_page_aligned(int32 &size, const char* name,
                                                 caddr_t desiredAddr= 0, 
                                                 bool mustAllocate= true);
-  static void   allocate_failed(char* what);
+  static void   allocate_failed(const char* what);
 
                                       
   // Sometimes we want not the real page size, but the largest page size
@@ -101,29 +101,29 @@ class OS {
   static bool    is_non_unix_path(const char*);
   
   // Other file manipulation
-  static bool    setup_snapshot_to_run(char*);
+  static bool    setup_snapshot_to_run(const char*);
   static void    set_log_buf(FILE* f, char* buf, int bs);
-  static char*   log_file_name();
+  static const char*   log_file_name();
   
   // Process calls:
   static void    set_args(int& argc, char**& argv);
   // (an encapsulation of a standard Unix facility)
-  static int     getopt(int argc,  char* const* argv,  char* optstring);
+  static int     getopt(int argc,  char* const* argv,  const char* optstring);
   static char*   optarg;
   static int     opterr, optind, optopt;
  private:
-  static int     simulated_getopt(int argc,  char* const* argv,  char* optstring);
+  static int     simulated_getopt(int argc,  char* const* argv, const char* optstring);
  public:
  
-  static char*   get_environment_variable(char* name) { return getenv(name); }  
+  static char*   get_environment_variable(const char* name) { return getenv(name); }  
   static bool    get_swap_space_info(int &totalK, int &freeK);
   static void    core_dump();
   static void    enable_core_dumps();
   
   // Snapshot helpers, etc.:
-  static FILE*     start_compressing_snapshot(char* compression_f, char* fullFileName, SignalBlocker*& sb);
+  static FILE*     start_compressing_snapshot(const char* compression_f, const char* fullFileName, SignalBlocker*& sb);
   static int         end_compressing_snapshot(FILE* snapFile);
-  static FILE*   start_decompressing_snapshot(FILE* snap, char* decompression_filter);
+  static FILE*   start_decompressing_snapshot(FILE* snap, const char* decompression_filter);
   static void      end_decompressing_snapshot();
   
   static void    snapshot_failed(FILE* snapFile, bool is_compressed, SignalBlocker* sb);
@@ -181,10 +181,10 @@ class OS {
   static char*   strdup(const char* s);
 
   // Other names:
-  static char*   get_host_name();
-  static char*   get_operating_system(); // Returns a string describing the OS.
-  static char*   get_user_name();
-  static char*   get_manufacturer_name();
+  static       char*   get_host_name();
+  static const char*   get_operating_system(); // Returns a string describing the OS.
+  static const char*   get_user_name();
+  static const char*   get_manufacturer_name();
   
   static void    print_memory();
   

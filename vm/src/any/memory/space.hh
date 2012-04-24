@@ -51,15 +51,15 @@ class space: public CHeapObj {
   friend bool rSet::verify(bool);
 
  public:
-  char* name;
+  const char* name;
   
   // constructors; none allocate object space
-  space(char *nm, int32 &size) {
+  space(const char *nm, int32 &size) {
     Unused(size); name= nm; } // dummy just for oldSpace
-  space(char* nm, int32 &size, char *bottom) {
+  space(const char* nm, int32 &size, char *bottom) {
     init_space(nm, size, bottom); };
-  space(char* nm, char *bottom, char *top);
-  space(char* nm, FILE *snap);
+  space(const char* nm, char *bottom, char *top);
+  space(const char* nm, FILE *snap);
 
   void read_snapshot(FILE* snap, char *bottom, char *top);
 
@@ -67,7 +67,7 @@ class space: public CHeapObj {
   ~space() { delete [] name; }
 
  protected:
-  void init_space(char* nm, int32 &size, char *bottom);
+  void init_space(const char* nm, int32 &size, char *bottom);
 
  public:
   // allocation test
@@ -259,8 +259,8 @@ class newSpace: public space {
   bool scavenge_contents();
 
   // called by Memory
-  newSpace(char* n, int32 &size, char* bottom) : space(n, size, bottom) {}
-  newSpace(char* n, int32 &size, FILE* snap);
+  newSpace(const char* n, int32 &size, char* bottom) : space(n, size, bottom) {}
+  newSpace(const char* n, int32 &size, FILE* snap);
 };
 
 
@@ -291,11 +291,11 @@ class oldSpace: public space {
   // constructors
   // allocates object space too; sets size to amount allocated, 0 if none
   // tries to start space at desiredAddress if non-zero.
-  oldSpace(char* nm, int32 &size, caddr_t desiredAddress);
+  oldSpace(const char* nm, int32 &size, caddr_t desiredAddress);
 
   // constructors which do not allocate object space
-  oldSpace(char *nm, FILE *snap) : space(nm, snap) { next_space= NULL; }
-  oldSpace(char *nm, char *bottom, char *top) : space(nm, bottom, top) {
+  oldSpace(const char *nm, FILE *snap) : space(nm, snap) { next_space= NULL; }
+  oldSpace(const char *nm, char *bottom, char *top) : space(nm, bottom, top) {
     next_space= NULL; }
 
   void prepare_for_scavenge();

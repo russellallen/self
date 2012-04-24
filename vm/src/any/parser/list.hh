@@ -77,7 +77,7 @@ class List: public ParseNode {
 
   void addCommentAnnotations(Scanner* scanner);
   
-  void PrintSeparatedBy(char* sep);
+  void PrintSeparatedBy(const char* sep);
   void Print() { PrintSeparatedBy(". "); }
   
   void oops_do(oopsDoFn f);

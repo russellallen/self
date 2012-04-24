@@ -54,32 +54,32 @@ VERIFYCHECKSUM
     template(Region)
 
 # define defineXTypeSeals(stem)						      \
-    char* CONC(stem,_seal) = STR(stem);
+    const char* CONC(stem,_seal) = STR(stem);
 
 xTypeSealsDo(defineXTypeSeals)
 
 // All events need to have the same type seal. For convenience, define
 // extra names for them, so that we can write the templates more concisely.
 // E.g., can use 'XAnyEvent' instead of 'proxy {XAnyEvent *} XEvent_seal'.
-char* XAnyEvent_seal            = XEvent_seal;
-char* XButtonEvent_seal         = XEvent_seal;
-char* XClientMessageEvent_seal  = XEvent_seal;
-char* XColormapEvent_seal       = XEvent_seal;
-char* XConfigureEvent_seal      = XEvent_seal;
-char* XCrossingEvent_seal       = XEvent_seal;
-char* XEnterWindowEvent_seal    = XEvent_seal;
-char* XExposeEvent_seal         = XEvent_seal;
-char* XFocusChangeEvent_seal    = XEvent_seal;
-char* XGraphicsExposeEvent_seal = XEvent_seal;
-char* XKeyEvent_seal            = XEvent_seal;
-char* XLeaveWindowEvent_seal    = XEvent_seal;
-char* XMapEvent_seal            = XEvent_seal;
-char* XMappingEvent_seal        = XEvent_seal;
-char* XMotionEvent_seal         = XEvent_seal;
-char* XNoExposeEvent_seal       = XEvent_seal;
-char* XReparentEvent_seal       = XEvent_seal;
-char* XUnmapEvent_seal          = XEvent_seal;
-char* XVisibilityEvent_seal     = XEvent_seal;
+const char* XAnyEvent_seal            = XEvent_seal;
+const char* XButtonEvent_seal         = XEvent_seal;
+const char* XClientMessageEvent_seal  = XEvent_seal;
+const char* XColormapEvent_seal       = XEvent_seal;
+const char* XConfigureEvent_seal      = XEvent_seal;
+const char* XCrossingEvent_seal       = XEvent_seal;
+const char* XEnterWindowEvent_seal    = XEvent_seal;
+const char* XExposeEvent_seal         = XEvent_seal;
+const char* XFocusChangeEvent_seal    = XEvent_seal;
+const char* XGraphicsExposeEvent_seal = XEvent_seal;
+const char* XKeyEvent_seal            = XEvent_seal;
+const char* XLeaveWindowEvent_seal    = XEvent_seal;
+const char* XMapEvent_seal            = XEvent_seal;
+const char* XMappingEvent_seal        = XEvent_seal;
+const char* XMotionEvent_seal         = XEvent_seal;
+const char* XNoExposeEvent_seal       = XEvent_seal;
+const char* XReparentEvent_seal       = XEvent_seal;
+const char* XUnmapEvent_seal          = XEvent_seal;
+const char* XVisibilityEvent_seal     = XEvent_seal;
 
 
 // This class is simply a wrapper around the XSetWindowAttributes structure
@@ -414,7 +414,7 @@ void XDrawString16_wrap(Display *display, Drawable drawable,
 }
 
 
-XFontStruct* XLoadQueryFont_wrap(Display* display, char* name, void* FH) {
+XFontStruct* XLoadQueryFont_wrap(Display* display, const char* name, void* FH) {
   XFontStruct* font_struct = XLoadQueryFont(display, name);
   if (font_struct == NULL) {
     failure(FH, "font does not exist");

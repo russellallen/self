@@ -65,7 +65,7 @@ class CountStub : public NCodeBase {
   void initSendDesc(nmln* sd_nmln);
   virtual void init(nmethod* nm) { Unused(nm); }
   void print();
-  virtual char* name() = 0;
+  virtual const char* name() = 0;
   bool verify() { return verify2(pic()); }
   bool verify2(CacheStub *calling_pic);
   void read_snapshot(FILE *f);
@@ -87,7 +87,7 @@ class CountingStub: public CountStub {
   void* operator new(size_t size);
   CountType countType()         { return Counting; }
   fint size();                  // size in bytes
-  char* name()                  { return "CountingStub"; }
+  const char* name()                  { return "CountingStub"; }
   friend bool isCountStub(void* p);
 };
 
@@ -99,7 +99,7 @@ class ComparingStub: public CountStub {
   CountType countType()         { return Comparing; }
   fint size();                  // size in bytes
   void init(nmethod* nm);
-  char* name()                  { return "ComparingStub"; }
+  const char* name()                  { return "ComparingStub"; }
   friend bool isCountStub(void* p);
  protected:
   void  set_recompile_addr(pc_t addr);
@@ -118,7 +118,7 @@ class AgingStub : public ComparingStub {
   AgingStub(nmethod* t, pc_t entryPoint, nmln* sd_nmln);
   void init(nmethod* nm);
   bool isAgingStub()            { return true; }
-  char* name()                  { return "AgingStub"; }
+  const char* name()                  { return "AgingStub"; }
   friend bool isCountStub(void* p);
 
   // initializiation

@@ -606,7 +606,7 @@ bool Process::verify() {
 
 
 void Process::print() {
-  static char* pstate[] = {
+  static const char* pstate[] = {
     "initialized", "ready", "stopped", "aborting", "defunct" };
   lprintf("Process %#lx: state = %s, %s, obj = %#lx, method = %#lx\n",
          this, pstate[state],

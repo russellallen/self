@@ -75,7 +75,7 @@ class objVectorOopClass: public slotsOopClass {
   short *convertShortArray();
   unsigned short *convertUnsignedShortArray();
   float *convertFloatArray();
-  void  *convertProxyArray(void*);
+  void  *convertProxyArray(const void*);
 
   // compiler support
   friend int32 objVector_len_offset() {

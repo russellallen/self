@@ -39,7 +39,7 @@
     *data = (char)i;
   }
 
-  inline void BaseAssembler::Comment(pc_t s) {
+  inline void BaseAssembler::Comment(const char* s) {
     if (printing) {
       lprintf("  // %s\n", s); 
     }

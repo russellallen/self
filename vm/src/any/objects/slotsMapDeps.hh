@@ -55,7 +55,7 @@ class slotsMapDeps: public slotsMap {
 
  public:
   // creation operations
-  friend slotsOop create_slots(slotList* slots, char* annotation = "");
+  friend slotsOop create_slots(slotList* slots, const char* annotation = "");
   oop fill_in_slots(slotList* slist, fint slotCount);
   
   // map chain and dependents

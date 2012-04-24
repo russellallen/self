@@ -21,7 +21,7 @@ class floatOopClass: public oopClass {
   Map* map() { return Memory->float_map; }
   
   // printing
-  void make_print_string(char* buf, char* format = "%g");   // private
+  void make_print_string(char* buf, const char* format = "%g");   // private
   void print_oop();
   void print() { print_oop(); lprintf("\n"); }
   void print_string(char* buf);

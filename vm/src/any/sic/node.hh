@@ -493,9 +493,9 @@ class    CommentNode;           // for debugging
    public:
     bool _isLoopHead;
     bool didStartBB;            // used for debugging / assertion checks
-    char* why;                  // help find where these come from -- dmu
+    const char* why;            // help find where these come from -- dmu
 
-    MergeNode(char* why);
+    MergeNode(const char* why);
     MergeNode(Node* prev1, Node* prev2);
 
     fint cost()                 { return 0; }
@@ -615,7 +615,7 @@ class    CommentNode;           // for debugging
     virtual bool operIsConst() = 0;
     virtual int32 operConst() = 0;
     virtual bool doCopyPropagate(BB* bb, PUse* u, PReg* d, bool repl);
-    char* opName();
+    const char* opName();
   };
 
   class ArithRRNode : public ArithNode {  // reg op reg => reg
@@ -1299,18 +1299,18 @@ class    CommentNode;           // for debugging
     char* print_string(char* buf, bool printAddr = true);
     void check();
    protected:
-    void checkMap(SExpr* expr, oop p, char* msg, fint n = 0);
+    void checkMap(SExpr* expr, oop p, const char* msg, fint n = 0);
     bool checkContents(ValueLocationNameDesc* nd);
-    void fail(char* msg, void* arg);
+    void fail(const char* msg, const void* arg);
     bool describePReg(PReg* r, SCodeScope** scopes,
                       ValueLocationNameDesc*& nd, bool describeUnallocated);
   };
   
   class CommentNode : public PNode {
    unknown:
-    char* comment;
+    const char* comment;
    public:
-    CommentNode(char* s);
+    CommentNode(const char* s);
     bool isTrivial()            { return true; }
     bool isCommentNode()        { return true; }
     bool canBeBetweenMarkerAndSend() { return true; }

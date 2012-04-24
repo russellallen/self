@@ -20,10 +20,10 @@ extern oop catchThisOne;
 
 // utilities
 
-char* copy_string(char* s);
-char* copy_string(char* s, smi len);
+char* copy_string(const char* s);
+char* copy_string(const char* s, smi len);
 
-char* copy_c_heap_string(char* s);
+char* copy_c_heap_string(const char* s);
 
 // copying oops must be accompanied by record_multistores for remembered set
 void copy_oops_up(oop* from, oop* to, fint count);
@@ -52,7 +52,7 @@ void set_bytes(char* to, fint count, char value = NULL);
 
 // like strcmp, but with slightly different order for slot
 // ordering (sorts foo: before foo0 so that it immediately follows foo)
-int compare_slot_names(char *s1, fint l1, char *s2, fint l2);
+int compare_slot_names(const char *s1, fint l1, const char *s2, fint l2);
 
 int compare_bytes(const char* b1, int l1, const char* b2, int l2);
 
@@ -149,8 +149,8 @@ inline void UsedOnlyInAssert(void *x) { x, 0; }
 #endif
 
 extern "C" { 
-  volatile void ShouldNotCall(char *file, int line);
-  volatile void ShouldNotReach(char *file, int line);
+  volatile void ShouldNotCall(const char *file, int line);
+  volatile void ShouldNotReach(const char *file, int line);
 }
 
 #define ShouldNotCallThis()   ShouldNotCall(__FILE__, __LINE__)

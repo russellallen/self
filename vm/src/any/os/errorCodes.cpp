@@ -38,7 +38,7 @@ markOop ErrorCodes::os_prim_error(fint error) {
 # define      EXTRACT_MESSAGE_ARGUMENT(template,s1,s2,s3)  template(s3)
 # define PASS_THROUGH_MESSAGE_ARGUMENT(s)  s ,
 
-static char* errorMessages[] = {
+static  const char* errorMessages[] = {
   ErrorStrings(PASS_THROUGH_MESSAGE_ARGUMENT, EXTRACT_MESSAGE_ARGUMENT)
 };
 # undef      EXTRACT_MESSAGE_ARGUMENT

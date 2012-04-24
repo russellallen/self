@@ -10,7 +10,7 @@
 slotsOop basic_create_method(slotList* slots,
                              ByteCode* b,
                              methodMap &m1,
-                             char* annotation,
+                             const char* annotation,
                              bool isBlock) {
 
   slotsOop method;
@@ -210,10 +210,10 @@ void blockMethodMap::set_lexical_links( slotsOop  enclosingMethod,
 // by Process::initialize to create method to start a process
 // by evalExpressions in shell for top-level read-eval-print loop
 
-slotsOop create_outerMethod( slotList* slots, 
-                             ByteCode* b,
-                             char*     annotation,
-                             IntBList* stack_deltas ) {
+slotsOop create_outerMethod( slotList*   slots, 
+                             ByteCode*   b,
+                             const char* annotation,
+                             IntBList*   stack_deltas ) {
   slots = slots->add(VMString[SELF], vm_parent_map_slotType, NULL);
   outerMethodMap m;
   slotsOop method = basic_create_method(slots, b, m, annotation, false);
@@ -221,10 +221,10 @@ slotsOop create_outerMethod( slotList* slots,
 }
 
 
-slotsOop create_blockMethod( slotList* slots, 
-                             ByteCode* b, 
-                             char*     annotation,
-                             IntBList* stack_deltas) {
+slotsOop create_blockMethod( slotList*   slots, 
+                             ByteCode*   b, 
+                             const char* annotation,
+                             IntBList*   stack_deltas) {
   slots = slots->add(VMString[LEXICAL_PARENT], vm_parent_map_slotType, 
                      Memory->lobbyObj);
   blockMethodMap m;

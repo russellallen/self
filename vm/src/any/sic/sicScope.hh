@@ -381,7 +381,7 @@
     Node*  copyPath(Node* n, Node* start, Node* end, PReg* oldPR, PReg* newPR,
                     MergeSExpr* rcvr, SExpr* newRcvr);
     SExpr* doInline(SSelfScope* s, SExpr* rcvr, Node* start, MergeNode* end);
-    SSelfScope* notify(stringOop sel, char* msg);
+    SSelfScope* notify(stringOop sel, const char* msg);
     void memoizeBlocks(stringOop sel);
     
     bool calleeTooBig      (SendInfo* info, RScope* rs, InlineLimitType t);
@@ -410,7 +410,7 @@
     void continue_NLR();
     void genNLRPoints();
     SExpr* local(SCodeScope* sender, slotDesc* sd, fint argc, PReg* res);
-    bool checkPerform(char* sel, fint len, fint prefix, LookupType& l);
+    bool checkPerform(const char* sel, fint len, fint prefix, LookupType& l);
     bool checkPerformPrim(stringOop sel, LookupType& performLookupType);
     inline void allocateDown(PReg* r, fint start, fint end, bool okToOverlap);
     inline void getLiveRange(PReg* r, fint& start, fint& end);

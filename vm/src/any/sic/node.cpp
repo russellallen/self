@@ -88,7 +88,7 @@
     // NODE_COST(MarkerNode)
   }
   
-  CommentNode::CommentNode(char* s) {
+  CommentNode::CommentNode(const char* s) {
     comment = s;
     // give all comments negative ids (don't disturb node numbers by turning
     // SICDebug off and on)
@@ -205,7 +205,7 @@
   MergeNode::MergeNode(Node* prev1, Node* prev2) :
     AbstractMergeNode(prev1, prev2) { _isLoopHead = didStartBB = false; 
                                        why = "beats me"; }
-  MergeNode::MergeNode(char* w) { _isLoopHead = didStartBB = false; 
+  MergeNode::MergeNode(const char* w) { _isLoopHead = didStartBB = false; 
                                   why = w;
   }
 
@@ -1558,7 +1558,7 @@
     return b;
   }
  
-  char* ArithNode::opName() { return ArithOpName[op]; }
+  const char* ArithNode::opName() { return ArithOpName[op]; }
  
   char* ArithRRNode::print_string(char* buf, bool printAddr) {
     char* b = buf;
@@ -1939,7 +1939,7 @@
     }
   }
 
-  void MarkerNode::checkMap(SExpr* expr, oop p, char* msg, fint n) {
+  void MarkerNode::checkMap(SExpr* expr, oop p, const char* msg, fint n) {
     // assert(p != badOop, "should know p");
     // NB: can have badOops if in primitive failure -- expr stack is
     // still the primitive call expr stack, not the fail send expr stack
@@ -2359,7 +2359,7 @@
     return sd;
   }
 
-  void MarkerNode::fail(char* msg, void* arg) { 
+  void MarkerNode::fail(const char* msg, const void* arg) { 
     if (PrintRecompilation) warning1(msg, arg);
     invalid = true;
     theRecompilation->isReplacementSimple = active = false;

@@ -10,7 +10,7 @@ EventLog* eventLog;
 
 void eventlog_init() { eventLog = new EventLog; }
 
-static char* noEvent = "no event";
+static const char* noEvent = "no event";
 
 void EventLog::init() {
   buf = next = NEW_C_HEAP_ARRAY( Event, EventLogLength);
@@ -49,7 +49,7 @@ void EventLog::printPartial(int32 n) {
   int32 indent = 0;
   lprintf("Printing events from earliest to most recent:\n");
   for (; i < n && e != next; i++, e = nextEvent(e, buf, bufEnd)) {
-    char* s;
+    const char* s;
     switch (e->status) {
      case starting: s = "{ "; break;
      case ending:   s = "} "; indent--; break;

@@ -25,7 +25,7 @@ enum OperandType {
   DIVMAddressOperand            // for DIDescs, sets IsDIDesc() in loc
 };
 
-extern char* OperandTypeNames[];
+extern const char* OperandTypeNames[];
 
 
 class BaseAssembler: public ResourceObj {
@@ -63,7 +63,7 @@ public:
   void Data(oop p, bool print = true);
   void Zero();
 
-  void Comment(pc_t s);
+  void Comment(const char* s);
   void printX(int32 x, OperandType t, bool imm = false);
   void print_disp(int32 x, OperandType t);
   

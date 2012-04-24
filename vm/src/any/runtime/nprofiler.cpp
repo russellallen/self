@@ -107,7 +107,7 @@ class EventBuffer : public CHeapObj {
 # ifdef UNUSED
   void event(char* ident);
 # endif
-  void time(char* ident, ProcessTime t);
+  void time(const char* ident, ProcessTime t);
 };
 
 #ifdef UNUSED
@@ -120,7 +120,7 @@ void EventBuffer::event(char* ident) {
 }
 #endif
 
-void EventBuffer::time(char* ident, ProcessTime t) {
+void EventBuffer::time(const char* ident, ProcessTime t) {
   ProcessInfo::update();
   fprintf(file, "%-20s %6.3f %6.3f %6.3f\n",
           ident,
@@ -1272,7 +1272,7 @@ void Profiler::collect_return_addresses_above_interrupted_context(StackInfo* st,
 }
 
 
-static void print_exclude(char* title, float t) {
+static void print_exclude(const char* title, float t) {
   if (t > 0.0) {
     lprintf(" %4.1f (ms) %s\n", t, title);
   }

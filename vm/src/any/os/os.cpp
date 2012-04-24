@@ -20,7 +20,7 @@ extern "C" {
 // returns NULL if successful; otherwise returns an error string
 char* OS::expand_unix_dir(const char* in,  char* out) {
   static char err[max_path_length + 50];
-  char* dirName = "";
+  char* dirName = (char*) "";
   
   if (*in != '~') {
     if (strlen(in) >= max_path_length) {
@@ -120,7 +120,7 @@ void OS::setDateTimeBuf(struct tm *tod, smi buf[]) {
 // If desiredAddress not 0, try to get that area; assume the caller 
 // knows what he wants.
 
-char* OS::allocate_idealized_page_aligned(int32 &size, char *name,
+char* OS::allocate_idealized_page_aligned(int32 &size, const char *name,
                                           caddr_t desiredAddress, 
                                           bool mustAllocate) {
   size= roundTo(size, idealized_page_size);
@@ -132,7 +132,7 @@ char* OS::allocate_idealized_page_aligned(int32 &size, char *name,
 }
 
 
-void OS::allocate_failed(char* what) {
+void OS::allocate_failed(const char* what) {
   lprintf("\n**** could not allocate space for %s\n", what);
   lprintf("Out of virtual memory - please add swap space to your system.\n");
 
@@ -261,7 +261,7 @@ void OS::date_time(smi day, smi msec, smi buf[]) {
 // ================================================================
 
 
-char *OS::get_operating_system() {
+const char *OS::get_operating_system() {
   struct utsname name;
   char* str = NEW_RESOURCE_ARRAY(char, sizeof(utsname));
   uname(&name);
@@ -295,7 +295,7 @@ int     OS::opterr, OS::optind = 1, OS::optopt;
 // simulate Unix stdlib routine
 
 
-int OS::simulated_getopt(int argc,  char* const* argv,  char* optstring) {
+int OS::simulated_getopt(int argc,  char* const* argv,  const char* optstring) {
   if (optind >= argc) return EOF;
   int i = optind;
   ++optind;
@@ -306,7 +306,7 @@ int OS::simulated_getopt(int argc,  char* const* argv,  char* optstring) {
   }
   
   optarg = NULL;
-  for ( char* osp = optstring;  *osp;  ++osp) {
+  for ( const char* osp = optstring;  *osp;  ++osp) {
     if ( *osp == ':' ) continue;
     if ( *osp != c   ) continue;
     if ( osp[1] != ':')  return c;

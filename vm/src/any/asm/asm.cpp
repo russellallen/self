@@ -95,7 +95,7 @@ void BaseAssembler::print_disp(int32 d, OperandType t) {
 }
 
 
-char* OperandTypeNames[] = {
+const char* OperandTypeNames[] = {
   "RegisterOperand",
   "NumberOperand",
   "OopOperand",

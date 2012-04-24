@@ -12,7 +12,7 @@
 
 # include "_oop.cpp.incl"
 
-oop* oopClass::get_slot_data_address_if_present(char *name, bool &inObj) {
+oop* oopClass::get_slot_data_address_if_present(const char* name, bool &inObj) {
   return get_slot_data_address_if_present(new_string(name), inObj); }
 
 smi oopClass::objectID_prim() {

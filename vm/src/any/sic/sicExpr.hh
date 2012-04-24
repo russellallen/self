@@ -79,7 +79,7 @@
     void  setNode(Node* n, PReg* p)     { _node = n; _preg = p; }
     SSelfScope* scope();
     virtual NameNode* nameNode(bool mustBeLegal = true);
-    void print_expr(char* type);
+    void print_expr(const char* type);
   };
 
   class UnknownSExpr : public SExpr {

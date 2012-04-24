@@ -7,7 +7,7 @@
 
 # include "_errorCodes_unix.cpp.incl"
 
-  static char* unixError[] = {
+  static const char* unixError[] = {
   
 # if TARGET_OS_VERSION == SOLARIS_VERSION
 
@@ -185,7 +185,7 @@ extern int   sys_nerr;                  // length of above table
 #endif // !MACOSX_VERSION
 
 
-char* ErrorCodes::os_error_name(int error) {
+const char* ErrorCodes::os_error_name(int error) {
   static char buf[128];
   return 0 <= error && error < numUnixErrors()  &&  unixError[error][0]
     ? unixError[error]

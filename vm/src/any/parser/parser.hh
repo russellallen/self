@@ -12,26 +12,26 @@ class Parser: public ResourceObj {
  public:
   Parser(Scanner* scanner, bool silent);
 
-  Expr*   readExpr(fint& line, char*& sourceStart, fint& sourceLength);
-  Object* readBody(fint& line, fint& col, char*& sourceStart, fint& sourceLength);
+  Expr*   readExpr(fint& line, const char*& sourceStart, fint& sourceLength);
+  Object* readBody(fint& line, fint& col, const char*& sourceStart, fint& sourceLength);
 
   // Syntax error reporting
   bool noParseError();
   bool prematureEndOfInputError();
   void fillErrorObj(oop errorObj);
 
-  void syntaxError(char* msg, Token* t);
-  void syntaxError(char* msg, int32 l = -1, int32 c = -1);
+  void syntaxError(const char* msg, Token* t);
+  void syntaxError(const char* msg, int32 l = -1, int32 c = -1);
 
  private:
 
   bool silent;
 
   // Syntax errors
-  void syntaxErrorExpecting(Token* t,  char* expected);
-  char  *parse_error_message;
+  void syntaxErrorExpecting(Token* t,  const char* expected);
+  const char  *parse_error_message;
   int32  parse_error_line, parse_error_column;
-  char  *parse_error_expected;
+  const char  *parse_error_expected;
   enum parseErrorKind { noParseErr, parseErr, prematureEndErr } error;
 
   Expr* implicitSelf;
@@ -53,7 +53,7 @@ class Parser: public ResourceObj {
   //       <  0: indefinite number of arg slots
   //       >  0: exactly nargs arg slots required
   bool parseBody(SlotList*& slots, ExprList*& code,
-                 Token* t, fint nargs, char*& sourceStart, 
+                 Token* t, fint nargs, const char*& sourceStart, 
                  fint& line, fint& col,
                  Token*& object_annotation);
 
@@ -63,20 +63,20 @@ class Parser: public ResourceObj {
   SlotList* parseObjectSlots(Token* t, Token*& object_annotation);
 
   // called recursively to accomodate neted annotations.
-  SlotList* parseAnnotatedSlots(Token* t, SlotList* s, char* annos,
+  SlotList* parseAnnotatedSlots(Token* t, SlotList* s, const char* annos,
                                 Token*& object_annotation);
-  SlotList* parseSlots(SlotList* s, char* annos, Token*& finalT,
+  SlotList* parseSlots(SlotList* s, const char* annos, Token*& finalT,
                        Token*& object_annotation);
 
-  SlotList* parseSlot(        SlotList* slots, Token* t, char* anno);
-  SlotList* parseArgSlot(     SlotList* slots, Token* t, char* anno);
-  SlotList* parseUnarySlot(   SlotList* slots, Token* t, char* anno);
-  SlotList* parseBinarySlot(  SlotList* slots, Token* t, char* anno);
-  SlotList* parseKeywordSlot( SlotList* slots, Token* t, char* anno);
+  SlotList* parseSlot(        SlotList* slots, Token* t, const char* anno);
+  SlotList* parseArgSlot(     SlotList* slots, Token* t, const char* anno);
+  SlotList* parseUnarySlot(   SlotList* slots, Token* t, const char* anno);
+  SlotList* parseBinarySlot(  SlotList* slots, Token* t, const char* anno);
+  SlotList* parseKeywordSlot( SlotList* slots, Token* t, const char* anno);
 
   void prematureEOF(Token* t);
 
-  void expecting(Token* t, char* c);
+  void expecting(Token* t, const char* c);
 
   inline bool isupper(fint c) {
     return c >= 'A' && c <= 'Z';

@@ -48,7 +48,7 @@ class FCompiler:  public AbstractCompiler {
   void assignmentCode();
   void     methodCode();
 
-  void trace_compile(char *s);
+  void trace_compile(const char *s);
 
  public:
   nmethod* compile();

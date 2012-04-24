@@ -19,21 +19,21 @@ class ArgSlotList;
 
 class Expr: public ParseNode {
  public:
-  char*   source_file;
-  fint    source_line;
-  fint    source_column;
-  char*   source_start;
-  fint    source_length;
-  Parser* parser; // for error messages
+  const char* source_file;
+  fint        source_line;
+  fint        source_column;
+  const char* source_start;
+  fint        source_length;
+  Parser*     parser; // for error messages
 
-  char* source_end() { return source_start + source_length; }
+  const char* source_end() { return source_start + source_length; }
   
   Expr(Parser* p) { 
     source_file = source_start = ""; 
     source_line = source_column = source_length = 0;
     parser = p;}
 
-  Expr(char* start, char* end, char* file, fint line, fint col, Parser* p) { 
+  Expr(const char* start, const char* end, const char* file, fint line, fint col, Parser* p) { 
     source_start  = start;
     source_length = end - start;
     source_file = file;
@@ -62,7 +62,7 @@ class Expr: public ParseNode {
   
   virtual oop Eval(bool printing, bool inSlot, bool mustAllocate);
 
-  void ErrorMessage(char* msg);
+  void ErrorMessage(const char* msg);
 
   fint position_in_method(Object* parent);
 };
@@ -87,7 +87,7 @@ class ExprList: public List {
 
 class Pop: public Expr {
  public:
-  Pop(char* start, char* end, char* file, fint line, fint col, Parser* p)
+  Pop(const char* start, const char* end, const char* file, fint line, fint col, Parser* p)
     : Expr(start, end, file, line, col, p) {}
     
   bool GenByteCodes(AbstractByteCode* b, Object* parent, bool isExpr = true);
@@ -98,7 +98,7 @@ class Pop: public Expr {
 
 class Self: public Expr {
  public:
-  Self(char* start, char* end, char* file, fint line, fint col, Parser* p)
+  Self(const char* start, const char* end, const char* file, fint line, fint col, Parser* p)
     : Expr(start, end, file, line, col, p) {}
   
   bool IsSelf() { return true; }
@@ -114,7 +114,7 @@ class Constant: public Expr {
   
   Constant(oop v, Parser* p) : Expr(p) { value = v; }
 
-  Constant(oop val, char* start, char* end, char* file, fint line, fint col, Parser* p)
+  Constant(oop val, const char* start, const char* end, const char* file, fint line, fint col, Parser* p)
     : Expr(start, end, file, line, col, p) { 
       value = val;
     }
@@ -134,7 +134,7 @@ class Integer: public Constant {
  public:
   Integer(int32 v, Parser* p) : Constant(as_smiOop(v), p) {}
 
-  Integer(int32 v, char* start, char* end, char* file, fint line, fint col, Parser* p)
+  Integer(int32 v, const char* start, const char* end, const char* file, fint line, fint col, Parser* p)
     : Constant(as_smiOop(v), start, end, file, line, col, p) {}
   
   void Print();
@@ -143,7 +143,7 @@ class Integer: public Constant {
 class Float: public Constant {
  public:
   Float(float v, Parser* p) : Constant(as_floatOop(v), p) {}
-  Float(float v, char* start, char* end, char* file, fint line, fint col, Parser* p)
+  Float(float v, const char* start, const char* end, const char* file, fint line, fint col, Parser* p)
     : Constant(as_floatOop(v), start, end, file, line, col, p) {}
   
   void Print();
@@ -154,7 +154,7 @@ class StringLiteral: public Constant {
   StringLiteral(String* v, Parser* p) 
   : Constant(new_string(v->AsCharP(), v->len), p) {}
 
-  StringLiteral(String* v, char* start, char* end, char* file, fint line, 
+  StringLiteral(String* v, const char* start, const char* end, const char* file, fint line, 
                 fint col, Parser* p)
     : Constant(new_string(v->AsCharP(), v->len), start, end, file, line, col, p){}
     
@@ -163,31 +163,31 @@ class StringLiteral: public Constant {
 
 class Object: public Constant {
  public:
-  SlotList* slots;
-  ExprList* body;
-  char*     annotation;
+  SlotList*   slots;
+  ExprList*   body;
+  const char* annotation;
 
   // excluded the slots and the parentheses of the object.
-  char* source_body_start;
-  fint  source_body_length;
-  fint  source_body_line;
-  fint  source_body_column;
+  const char* source_body_start;
+  fint        source_body_length;
+  fint        source_body_line;
+  fint        source_body_column;
 
   bool isDeferred; // true if this is a block.
 
-  Object(SlotList* slots, 
-         ExprList* body, 
-         bool      isDeferred,
-         char*     source_file, 
-         fint      source_line,
-         fint      source_column,
-         char*     source_start,
-         fint      source_length,
-         fint      source_body_line,
-         fint      source_body_col,
-         char*     source_body_start,
-         fint      source_body_length,
-         Parser*   p);
+  Object(SlotList*   slots, 
+         ExprList*   body, 
+         bool        isDeferred,
+         const char* source_file, 
+         fint        source_line,
+         fint        source_column,
+         const char* source_start,
+         fint        source_length,
+         fint        source_body_line,
+         fint        source_body_col,
+         const char* source_body_start,
+         fint        source_body_length,
+         Parser*     p);
   
   bool IsObject() { return true; }
   bool IsMethod() { return !isDeferred && body->Length() != 0; }
@@ -225,7 +225,7 @@ class Return: public Expr {
  public:
   Expr* result;
   
-  Return(Expr* r, char* start, char* end, char* file, fint line, fint col,
+  Return(Expr* r, const char* start, const char* end, const char* file, fint line, fint col,
          Parser* p) 
     : Expr(start, end, file, line, col, p) { result = r; }
   
@@ -239,7 +239,7 @@ class Return: public Expr {
 };
 
 // return anno + separtator + comment_keyword + comment.
-char* extend_annotation_with_comment(char* anno, Token* comment);
+char* extend_annotation_with_comment(const char* anno, Token* comment);
 
 // return anno + separator + string.
-char* extend_annotation_with_string(char* anno, Token* string);
+char* extend_annotation_with_string(const char* anno, Token* string);

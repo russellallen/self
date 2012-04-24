@@ -59,7 +59,7 @@ class abstract_monitor: public CHeapObj {
   bool active;          // true if spy is running
   int32 tickNo;         // # of tick within this second
   FILE* logf;                   // log file
-  char* logfn;          // log file name
+  const char* logfn;          // log file name
 
   abstract_monitor();
   ~abstract_monitor();
@@ -122,7 +122,7 @@ class abstract_monitor: public CHeapObj {
 // the following are defined in class "monitor" so they
 //  can use macros & inlines instead of virtuals
 public:
-  void activate(char* filename = NULL) {
+  void activate(const char* filename = NULL) {
     Unused(filename); SubclassResponsibility(); }
   void adjust_after_resize();
  protected:
@@ -165,7 +165,7 @@ protected:
   void set_port()   {}
   void reset_port() {}
   
-  void draw_text(char* /*text*/, int /*x*/, int /*y*/) {}
+  void draw_text(const char* /*text*/, int /*x*/, int /*y*/) {}
   void clear_rectangle(int /*x*/, int /*y*/, int /*w*/, int /*h*/) {}
   void  draw_square(int /*x*/, int /*y*/, int /*s*/) {}
   void clear_square(int /*x*/, int /*y*/, int /*s*/) {}
@@ -187,7 +187,7 @@ protected:
    static oop   resetLog_prim(oop rcvr);  
    static oop   annotateLog_prim(oop rcvr);
  protected:
-   static FILE* openLogFile(char* filename);
+   static FILE* openLogFile(const char* filename);
    static void set_log_buf(FILE* /*f*/, char* /*buf*/, int /*bs*/) {}
 };
 
@@ -199,19 +199,19 @@ class showLookup {
   ~showLookup() { lookupNesting--; }
 };
 
-extern char* methodBeingCompiled;
+extern const char* methodBeingCompiled;
 
 class showCompile: CHeapObj {
-  void doShowCompile(oop selector, char* compiler, bool opt);
+  void doShowCompile(oop selector, const char* compiler, bool opt);
 public:
-  showCompile(oop selector, char* compiler, bool optimize);
+  showCompile(oop selector, const char* compiler, bool optimize);
   ~showCompile();
 };
 
 class showVMActivity: CHeapObj { 
-  char* oldActivity;
+  const char* oldActivity;
 public:
-  showVMActivity(char* what);
+  showVMActivity(const char* what);
   ~showVMActivity();
 };
 
@@ -253,11 +253,11 @@ void monitor_tick_redraw();
    public:
     Indicator();
     virtual void reposition(fint X, fint Y, fint W);
-    virtual void show(char *text);
+    virtual void show(const char *text);
     virtual void show() { SilenceOverrideWarning(); }
-    virtual void show(char *text, fint new_state)  { 
+    virtual void show(const char *text, fint new_state)  { 
       Unused(text); Unused( new_state ); SilenceOverrideWarning(); }
-    virtual void show(char *name, char* compiler, bool recompiling) {
+    virtual void show(const char *name, const char* compiler, bool recompiling) {
       Unused(name); Unused(compiler); Unused(recompiling);
       SilenceOverrideWarning(); }
 
@@ -266,9 +266,9 @@ void monitor_tick_redraw();
   
   class IndicatorLabel : public Indicator {
    private:
-    char* text;
+    const char* text;
    public:
-    IndicatorLabel(char* t) { text = t; }
+    IndicatorLabel(const char* t) { text = t; }
     void show() { Indicator::show(text); }
   };
 
@@ -288,13 +288,13 @@ void monitor_tick_redraw();
     char name[COMPILE_LEN];
    public:
     CompileIndicator() : Indicator() {};
-    void show(char *name, char* compiler, bool recompiling);
+    void show(const char* name, const char* compiler, bool recompiling);
   };
   
   
   class ValueIndicator : public Indicator {
    protected:
-    char* text;         // text string (with room at end for number)
+    const char* text;         // text string (with room at end for number)
     int32 lastVal;      // last value shown
     SlidingAverage* data;
     fint digits;        // number of digits
@@ -302,7 +302,7 @@ void monitor_tick_redraw();
     bool showSum;       // show sliding sum instead of average
    public:
     bool changed;       // redrawn during last update() ?
-    ValueIndicator(char* t, bool sum, fint d, fint n = 1, fint off = 0) {
+    ValueIndicator(const char* t, bool sum, fint d, fint n = 1, fint off = 0) {
       text = OS::strdup(t); showSum = sum; lastVal = -1; digits = d; offset = off;
       data = new SlidingAverage(n);
     }
@@ -317,7 +317,7 @@ void monitor_tick_redraw();
    protected:
     int32 lastSum;      // last sum shown
    public:
-    DifferenceIndicator(char* t, fint d, fint n = 1, fint off = 0)
+    DifferenceIndicator(const char* t, fint d, fint n = 1, fint off = 0)
       : ValueIndicator(t, d, n, off) { lastSum = -1; }
     void update(int32 newSum, bool incremental);
   };

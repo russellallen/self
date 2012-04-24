@@ -1619,7 +1619,7 @@
   }
   
   
-  bool SCodeScope::checkPerform(char* sel, fint len, fint prefix,
+  bool SCodeScope::checkPerform(const char* sel, fint len, fint prefix,
                                 LookupType& performLookupType) {
     // check if this is really a perform primitive; if so, also
     // return perform type

@@ -93,7 +93,7 @@ class oopClass {
   inline oop* get_slot_data_address(slotDesc* slot);
   inline oop* get_slot_data_address(stringOop name);
   inline oop* get_slot_data_address_if_present(stringOop name, bool &inObj);
-  oop* get_slot_data_address_if_present(char *name, bool &inObj);
+  oop* get_slot_data_address_if_present(const char*name, bool &inObj);
   inline oop get_slot(slotDesc* slot);
   inline oop get_slot(stringOop name);
 

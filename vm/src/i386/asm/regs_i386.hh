@@ -21,12 +21,12 @@
   const      fint NumIArgRegisters = 0;
   const      fint NumRegistersInMask = 0; 
 
-  extern char* ByteRegisterNames[];
-  extern char* ShortRegisterNames[];
+  extern const char* ByteRegisterNames[];
+  extern const char* ShortRegisterNames[];
   
   enum RegSize { byte_reg, short_reg, long_reg };
   
-  extern char** RegisterNamesBySize[];
+  extern const char** RegisterNamesBySize[];
 
   enum Location {
     // change RegisterNames[] and ByteRegisterNames[] if you change this enum!

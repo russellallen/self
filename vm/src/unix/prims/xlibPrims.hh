@@ -10,7 +10,7 @@
 
 # ifdef XLIB
 
-  extern char* Display_seal;
+  extern const char* Display_seal;
 
   Display* XOpenDisplay_wrap(char*, void*);
   void XCloseDisplay_wrap(Display*);

@@ -37,7 +37,7 @@ static bool isFullPath(const char* path) {
 
 FILE* FileTable::openSnapshotFile( const char*  name,
                                    const char*  modeArg,
-                                   char**       fullFileName) {
+                                   const char**       fullFileName) {
   return openFile(name, OS::mode_for_binary(modeArg), NULL, "", fullFileName);
 }
 
@@ -53,7 +53,7 @@ FILE* FileTable::openFile(const char* name,
                           const char* mode,
                           const char* path,
                           const char* suffix,
-                          char** fullname) {
+                          const char** fullname) {
 
   if (fullname) *fullname = NULL;
   
@@ -116,7 +116,7 @@ FILE* FileTable::openFile(const char* name,
 FILE* FileTable::tryOpen(const char*   name,
                          const char*   suffix,
                          const char*   mode,
-                         char**  fullname) {
+                         const char**  fullname) {
 
   static char expandedName[OS::max_path_length];
   if (!OS::expand_dir(name, expandedName)) return NULL;

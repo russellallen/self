@@ -86,7 +86,7 @@ extern "C" void lprint_warning(lprint_format_t msg, ...) {
   PrintVMMessages = saved;
 }
 
-extern "C" volatile void lprint_fatal(char* file, int line, lprint_format_t msg, ...) {
+extern "C" volatile void lprint_fatal(const char* file, int line, lprint_format_t msg, ...) {
   bool saved = PrintVMMessages; PrintVMMessages = true;
   lprintf("Self VM fatal error (%s, line %ld): ", file, (void*)line );
   va_list ap;
@@ -98,7 +98,7 @@ extern "C" volatile void lprint_fatal(char* file, int line, lprint_format_t msg,
   fatal_handler();
 }
 
-extern "C" volatile void lprint_fatalNoMenu(char* file, int line, lprint_format_t msg, ...) {
+extern "C" volatile void lprint_fatalNoMenu(const char* file, int line, lprint_format_t msg, ...) {
   Unused(file);
   Unused(line);
   bool saved = PrintVMMessages; PrintVMMessages = true;

@@ -30,7 +30,7 @@ enum ResultType {
 };
   
 
-char* lookupStatusString(LookupStatus l);
+const char* lookupStatusString(LookupStatus l);
 
   
 class simpleLookup: public ResourceObj {
@@ -116,7 +116,7 @@ class simpleLookup: public ResourceObj {
   void generateLookupErrorMethod(int32 perform_arg_count);
 
   // helpers for above fn:
-  void selectorAndSourceForLookupError(stringOop& sel, char*& src);
+  void selectorAndSourceForLookupError(stringOop& sel, const char*& src);
   stringOop  messageTypeForLookupError();
   int32         argCountForLookupError(int32 perform_arg_count);
   

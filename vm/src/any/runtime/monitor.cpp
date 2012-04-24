@@ -28,7 +28,7 @@ Monitor::~Monitor() { deactivate(); }
 // Activating
 
 
-void Monitor::activate(char* filename)   {
+void Monitor::activate(const char* filename)   {
   _measurements_per_second = get_measurements_per_second();
   if (filename) {
     logfn = OS::strdup(filename);
@@ -65,7 +65,7 @@ void Monitor::deactivate() {
 
 // And the log file...
 
-FILE* Monitor::open_log_file(char* filename) {
+FILE* Monitor::open_log_file(const char* filename) {
   FILE* logf = fopen(filename, "w");
   if (!logf) {
     perror("spy: cannot open log file");
@@ -94,7 +94,7 @@ void Monitor::reset_log() {
 }
 
 
-void Monitor::annotate_log(char* fn) {
+void Monitor::annotate_log(const char* fn) {
   if (logf) {
     SignalBlocker sb;   // to block timer ticks 
     fputc('\n', logf);

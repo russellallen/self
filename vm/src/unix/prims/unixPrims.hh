@@ -8,7 +8,7 @@
 # endif
 
 
-extern char *UnixFile_seal;
+extern const char *UnixFile_seal;
 
 extern fd_set activeFDs;                      // active file descriptors
 

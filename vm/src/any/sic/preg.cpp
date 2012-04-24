@@ -445,7 +445,7 @@
   }
   
   
-  bool PReg::if_why(bool b, char* why) {
+  bool PReg::if_why(bool b, const char* why) {
     if (PrintSICEliminateUnneededNodes)
       lprintf("*%s eliminate %s: %s\n", 
               b ? "ok to" : "uncool to", why, name());

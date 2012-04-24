@@ -42,7 +42,7 @@
 # endif
 
 
-static oop byteVectorFromCFString(CFStringRef cfs, char* primName, void* FH) {
+static oop byteVectorFromCFString(CFStringRef cfs, const char* primName, void* FH) {
   int len = CFStringGetLength(cfs);
   byteVectorOop r = Memory->byteVectorObj->cloneSize(len);
   CFIndex usedLen = -1;
@@ -62,7 +62,7 @@ static oop byteVectorFromCFString(CFStringRef cfs, char* primName, void* FH) {
 }
 
 
-static void* reportOSError(OSStatus e, char* n, void* FH)  {
+static void* reportOSError(OSStatus e, const char* n, void* FH)  {
     static char buf[1000];
     sprintf(buf, "%s failed: error %d", n, (int)e);
     failure(FH, buf);
@@ -92,7 +92,7 @@ void QDEndCGContext_wrap( OpaqueGrafPtr* port, CGContext* carg, void* FH ) {
 
 
 
-ATSFontFamilyRef ATSFontFamilyFindFromName_wrap( char* name ) {
+ATSFontFamilyRef ATSFontFamilyFindFromName_wrap( const char* name ) {
   CFStringRef cfs = CFStringCreateWithCStringNoCopy( NULL, name, 
                      kCFStringEncodingMacRoman, kCFAllocatorNull);
   return ATSFontFamilyFindFromName( cfs, kNilOptions);
@@ -108,14 +108,14 @@ oop ATSFontFamilyGetName_wrap( ATSFontFamilyRef id, void* FH ) {
 
 
 
-ATSFontRef ATSFontFindFromName_wrap( char* name ) {
+ATSFontRef ATSFontFindFromName_wrap( const char* name ) {
   CFStringRef cfs = CFStringCreateWithCStringNoCopy( NULL, name, 
                      kCFStringEncodingMacRoman, kCFAllocatorNull);
   return ATSFontFindFromName( cfs, kNilOptions);
 }
 
 
-ATSFontRef ATSFontFindFromPostScriptName_wrap( char* name ) {
+ATSFontRef ATSFontFindFromPostScriptName_wrap( const char* name ) {
   CFStringRef cfs = CFStringCreateWithCStringNoCopy( NULL, name, 
                      kCFStringEncodingMacRoman, kCFAllocatorNull);
   return ATSFontFindFromPostScriptName( cfs, kNilOptions);
@@ -330,7 +330,7 @@ ATSUTextLayout ATSUCreateTextLayoutWithTextPtr_wrap(
 }
 
 
-void CGContextSelectFont_wrap(CGContext* c, char* s, float siz) {
+void CGContextSelectFont_wrap(CGContext* c, const char* s, float siz) {
   return CGContextSelectFont(c, s, siz, kCGEncodingMacRoman);
 }
 
@@ -358,7 +358,7 @@ void CGContextDrawLayerAtPoint_wrap( CGContext *con, CGLayer* lay, float x, floa
   CGContextDrawLayerAtPoint( con, CGPointMake(x, y), lay);
 }
 
-static bool convertFloatObjVector( objVectorOop v, char* prinName, void* FH, float*& floats, uint32& count) {
+static bool convertFloatObjVector( objVectorOop v, const char* prinName, void* FH, float*& floats, uint32& count) {
   count = v->length();
   floats = NEW_RESOURCE_ARRAY(float, count);
   int badI = -1;
@@ -1006,31 +1006,31 @@ void CGContextSetRenderingIntent_wrap(CGContextRef c, uint32 i) {
      CGContextSetRenderingIntent(c, CGColorRenderingIntent(i));
 }
 
-char*       CGDirectDisplayID_seal = "CGDirectDisplayID";
-char*            QuartzWindow_seal = "QuartzWindow";
-char*                 CGLayer_seal = "CGLayer";
-char*               CGContext_seal = "CGContext";
-char*          ATSFontMetrics_seal = "ATSFontMetrics";
-char*  ATSFontFamilyIterator__seal = "ATSFontFamilyIterator";
-char*        ATSFontIterator__seal = "ATSFontIterator";
-char*    OpaqueATSUTextLayout_seal = "OpaqueATSUTextLayout";
-char*         OpaqueATSUStyle_seal = "OpaqueATSUStyle";
-char*                  CGFont_seal = "CGFont";
-char*                  CGPath_seal = "CGPath";
-char*                 CGColor_seal = "CGColor";
-char*            CGColorSpace_seal = "CGColorSpace";
-char*               CGPattern_seal = "CGPattern";
-char*                 CGImage_seal = "CGImage";
-char*           CGImageSource_seal = "CGImageSource";
-char*               CGShading_seal = "CGShading";
-char*          CGDataProvider_seal = "CGDataProvider";
-char*          OpaqueEventRef_seal = "OpaqueEventRef";
-char*           OpaqueGrafPtr_seal = "OpaqueGrafPtr";
-char*         OpaqueWindowPtr_seal = "OpaqueWindowPtr";
+const char*       CGDirectDisplayID_seal = "CGDirectDisplayID";
+const char*            QuartzWindow_seal = "QuartzWindow";
+const char*                 CGLayer_seal = "CGLayer";
+const char*               CGContext_seal = "CGContext";
+const char*          ATSFontMetrics_seal = "ATSFontMetrics";
+const char*  ATSFontFamilyIterator__seal = "ATSFontFamilyIterator";
+const char*        ATSFontIterator__seal = "ATSFontIterator";
+const char*    OpaqueATSUTextLayout_seal = "OpaqueATSUTextLayout";
+const char*         OpaqueATSUStyle_seal = "OpaqueATSUStyle";
+const char*                  CGFont_seal = "CGFont";
+const char*                  CGPath_seal = "CGPath";
+const char*                 CGColor_seal = "CGColor";
+const char*            CGColorSpace_seal = "CGColorSpace";
+const char*               CGPattern_seal = "CGPattern";
+const char*                 CGImage_seal = "CGImage";
+const char*           CGImageSource_seal = "CGImageSource";
+const char*               CGShading_seal = "CGShading";
+const char*          CGDataProvider_seal = "CGDataProvider";
+const char*          OpaqueEventRef_seal = "OpaqueEventRef";
+const char*           OpaqueGrafPtr_seal = "OpaqueGrafPtr";
+const char*         OpaqueWindowPtr_seal = "OpaqueWindowPtr";
 
-// char*            WindowRef_seal = "WindowRef";
+// const char*            WindowRef_seal = "WindowRef";
 
-extern char* EventRecord_seal;
+extern const char* EventRecord_seal;
 
 
 

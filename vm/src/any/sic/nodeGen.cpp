@@ -50,7 +50,7 @@
     return APPEND(n); 
   }
   
-  Node* NodeGen::comment(char* s) { return APPEND(new CommentNode(s)); }
+  Node* NodeGen::comment(const char* s) { return APPEND(new CommentNode(s)); }
 
   void NodeGen::testStackOverflow(PRegBList* exprStack, SplitSig* sig) {
     APPEND(new InterruptCheckNode(exprStack, sig));
@@ -298,14 +298,14 @@
     // branch if top of stack == target_oop, uncond if PRs NULL
     
     if ( targetPR != NULL  &&  SICBranchSplitting ) {
-      char* whyNot =  splitCondBranch( targetNode,
-                                       isBackwards,
-                                       targetPR,
-                                       testExpr,
-                                       targetStack,
-                                       exprStack,
-                                       exprStackPRs,
-                                       s );
+      const char* whyNot =  splitCondBranch( targetNode,
+                                             isBackwards,
+                                             targetPR,
+                                             testExpr,
+                                             targetStack,
+                                             exprStack,
+                                             exprStackPRs,
+                                             s );
       if (PrintSICBranchSplitting)
         if (!whyNot)
           lprintf("branch splitting succeeded\n");
@@ -337,14 +337,14 @@
   }
   
 
-  char* NodeGen::splitCondBranch( MergeNode*           targetNode,
-                                  bool                 isBackwards,
-                                  PReg*                targetPR,
-                                  SExpr*               testExpr,
-                                  BranchBCTargetStack* targetStack,
-                                  SExprStack*          exprStack,
-                                  PRegBList*           exprStackPRs, 
-                                  SplitSig*            s ) {
+  const char* NodeGen::splitCondBranch( MergeNode*           targetNode,
+                                        bool                 isBackwards,
+                                        PReg*                targetPR,
+                                        SExpr*               testExpr,
+                                        BranchBCTargetStack* targetStack,
+                                        SExprStack*          exprStack,
+                                        PRegBList*           exprStackPRs, 
+                                        SplitSig*            s ) {
     // try to split a conditional branch bc to avoid materializing
     // the boolean
     

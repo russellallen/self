@@ -89,11 +89,11 @@ public:
 class primPnode : public pnode {      // for primitive leaves: lookup, compile, gc
 public:
   // ignore all inherited members -- they're not used
-  int32 _ticks;
-  char* name;
-  bool  included;
+  int32       _ticks;
+  const char* name;
+  bool        included;
 
-  primPnode(char* n, int32 t, bool i) : pnode(0,0,false) {
+  primPnode(const char* n, int32 t, bool i) : pnode(0,0,false) {
     name = n; _ticks = t; included = i;}
   void* operator new(size_t size);
   void  operator delete(void* p);

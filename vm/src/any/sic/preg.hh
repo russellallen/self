@@ -126,7 +126,7 @@
     virtual bool canEliminateAndStillDebug();
   protected:
     bool canRuntimeValueBeReconstructed();
-    bool if_why(bool, char*);
+    bool if_why(bool, const char*);
   public:
   
     void eliminatePR( bool removingUnreachableCode );
@@ -160,7 +160,7 @@
     virtual void print();
     virtual void print_short()  { lprintf("%s", name()); }
     virtual char* name();       // string representing the preg name
-    virtual char* prefix()      { return "P"; }
+    virtual const char* prefix()      { return "P"; }
     virtual bool verify();
     virtual NameNode* nameNode(bool mustBeLegal = true); // for debugging info
     PReg* cpReg();                  // return "cp-equivalent" PReg
@@ -181,7 +181,7 @@
     bool isTempPReg()           { return true; }
     bool isLiveAt(Node* n)      { Unused(n);  return false; }
     bool canCopyPropagate()     { return false; }
-    char* prefix()              { return "TempP"; }
+    const char* prefix()              { return "TempP"; }
   };
   
   
@@ -225,7 +225,7 @@
     bool isLiveAt(Node* n);
     bool isSAPReg()             { return true; }
     SCodeScope* nscope()        { return (SCodeScope*)scope; }
-    char* prefix()              { return "SAP"; }
+    const char* prefix()              { return "SAP"; }
     bool verify();
    protected:
     bool basic_isLiveAt(SCodeScope* s, fint bci);
@@ -241,7 +241,7 @@
     ArgSAPReg(SCodeScope* s, Location l, bool incU, bool incD,
               fint st, fint en) : SAPReg(s, l, incU, incD, st, en) {}
     bool isArgSAPReg()          { return true; }
-    char* prefix()              { return "ArgSAP"; }
+    const char* prefix()              { return "ArgSAP"; }
   };
   
   // SplitPRegs hold the receiver of a split message send; their main
@@ -258,7 +258,7 @@
     bool extendLiveRange(Node* n);
     bool isLiveAt(Node* n);
     bool isSplitPReg()          { return true; }
-    char* prefix()              { return "SplitP"; }
+    const char* prefix()              { return "SplitP"; }
     char* name();
   };
   
@@ -284,7 +284,7 @@
     void markEscaped();     // mark this block as escaping
     bool isMemoized()           { return memoized; }
     bool canEliminateAndStillDebug();
-    char* prefix()              { return "BlkP"; }
+    const char* prefix()              { return "BlkP"; }
     char* name();
     bool verify();
 
@@ -301,7 +301,7 @@
     }
     virtual bool isNoPReg()     { return true; }
     bool canCopyPropagate() { return false; }
-    char* name()                { return "nil"; }
+    char* name()                { return (char*) "nil"; }
     bool verify();
   };
 
@@ -331,7 +331,7 @@
 #   endif
     bool needsRegister();
     NameNode* nameNode(bool mustBeLegal = true);
-    char* prefix()              { return "ConstP"; }
+    const char* prefix()              { return "ConstP"; }
     char* name();
     bool verify();
   };

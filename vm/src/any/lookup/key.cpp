@@ -11,7 +11,7 @@ char* selector_string(oop selector) {
   if (selector->is_string()) {
     return stringOop(selector)->copy_null_terminated();
   } else {
-    return "<not a string>";
+    return (char*) "<not a string>";
   }
 }
 

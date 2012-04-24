@@ -242,7 +242,7 @@ class Recompilation: public AbstractRecompilation {
   void checkForBlockArgs();
   void tryRecompileCaller(nmethod* nm, fint limit, bool blocksAreOK = true);
   void getVScopes();
-  char* replaceOnStack();
+  const char* replaceOnStack();
   void replaceFrames(fint n, fint diff);
   bool pushFrame(frame* copy);
   void fillValues(frame* newFR);
@@ -1136,7 +1136,7 @@ void Recompilation::doit(char* pc) {
     }
   }
   
-  char* msg = replaceOnStack();
+  const char* msg = replaceOnStack();
   if (msg == NULL) {
     // replaced on stack
     restartAddr= NULL;
@@ -1313,7 +1313,7 @@ void Recompilation::getVScopes() {
 }
 
 
-char* Recompilation::replaceOnStack() {
+const char* Recompilation::replaceOnStack() {
   // try to replace unoptimized nmethods on stack with new nmethod
   // return NULL if successful, error string if not
   if (!SICReplaceOnStack) return "!SICReplaceOnStack";

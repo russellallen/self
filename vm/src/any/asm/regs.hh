@@ -14,7 +14,7 @@
 
 extern "C" {                            // extern "C" for easier debugging
   void printLocation(Location l);
-  char* locationName(Location l);       // what printLocation prints
+  const char* locationName(Location l);       // what printLocation prints
 }
 
 
@@ -22,7 +22,7 @@ extern "C" {                            // extern "C" for easier debugging
 
 // machine-specific implementations:
 
-extern char* RegisterNames[];
+extern const char* RegisterNames[];
 
 // WARNING: duplicated in asmDefs_ppc.h
 const fint NumNonVolRegisters       = HighestNonVolReg - LowestNonVolReg      + 1;

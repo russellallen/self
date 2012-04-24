@@ -52,21 +52,21 @@ void set_bytes(char* to, fint count, char value) {
   }
 
 
-char* copy_string(char* s) {
+char* copy_string(const char* s) {
   fint len = strlen(s) + 1;
   char* str = NEW_RESOURCE_ARRAY( char, len);
   strcpy(str, s);
   return str;
 }
 
-char* copy_c_heap_string(char* s) {
+char* copy_c_heap_string(const char* s) {
   fint len = strlen(s) + 1;
   char* str = NEW_C_HEAP_ARRAY( char, len);
   strcpy(str, s);
   return str;
 }
 
-char* copy_string(char* s, smi len) {
+char* copy_string(const char* s, smi len) {
   char* str = NEW_RESOURCE_ARRAY( char, len+1);
   memcpy(str, s, len+1);
   str[len] = '\0';
@@ -74,7 +74,7 @@ char* copy_string(char* s, smi len) {
 }
 
 
-int compare_slot_names(char *s1, fint l1, char *s2, fint l2) {
+int compare_slot_names(const char *s1, fint l1, const char *s2, fint l2) {
   int len= min(l1, l2);
   while (len > 0 && *s1 == *s2) {
     ++s1;

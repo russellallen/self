@@ -55,8 +55,8 @@ bool MonitorWindow::open_and_resize(Monitor* m) {
 
 
 const char* MonitorWindow::compute_display_name() {
-  char* ev = OS::get_environment_variable("DISPLAY");
-  char* prim = SpyDisplay;
+  const char* ev = OS::get_environment_variable("DISPLAY");
+  const char* prim = SpyDisplay;
   return  prim && prim[0]  ?  prim
        :  ev               ?  ev
        :  ":0";
@@ -64,8 +64,8 @@ const char* MonitorWindow::compute_display_name() {
 
     
 const char* MonitorWindow::compute_window_name() {
-  char *username= OS::get_user_name();
-  char *hostName= OS::get_host_name();
+  const char *username= OS::get_user_name();
+  const char *hostName= OS::get_host_name();
   const char* window_base_name = "Self Spy of ";
   char* window_name =
     (char*)selfs_malloc(strlen(window_base_name) + strlen(username) + 1

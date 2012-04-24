@@ -61,7 +61,7 @@ OSActivityMonitor::SystemState OSActivityMonitor::activity() {
 }
 
 
-char* OSActivityMonitor::state_string(OSActivityMonitor::SystemState s) {
+const char* OSActivityMonitor::state_string(OSActivityMonitor::SystemState s) {
   switch (s) {
    case disk_IO:  return " disk I/O ";
    case disk_in:  return " disk in ";
@@ -139,13 +139,13 @@ void SharedIndicator::hide() {
   state = -1;
 }
   
-ValueIndicator::ValueIndicator(char* t, bool sum, fint d, fint n, fint off) {
+ValueIndicator::ValueIndicator(const char* t, bool sum, fint d, fint n, fint off) {
   text = OS::strdup(t); showSum = sum; lastVal = -1; digits = d; offset = off;
   data = new SlidingAverage(n);
 }
 
 
-void ValueIndicator::printWithCommas(char* s, fint length, fint offset, int32 n) {
+void ValueIndicator::printWithCommas( char* s, fint length, fint offset, int32 n) {
   // format n into s as "999,999" (length digits), right-justified at end-offset
   const char* digits = "0123456789";
   assert(n >= 0, "number must be positive");

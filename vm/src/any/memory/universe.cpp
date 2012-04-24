@@ -715,14 +715,14 @@ void universe::snapshot_failed() {
   fatal("no recovery; sorry");
 }
 
-bool universe::write_snapshot(char *fileName,
-                              char *compression_f,
-                              char *decompression_f,
+bool universe::write_snapshot(const char *fileName,
+                              const char *compression_f,
+                              const char *decompression_f,
                               spaceSizes *snap_sizes) {
 
   compressed_snapshot= compression_f && decompression_f;
 
-  char *fullFileName;
+  const char *fullFileName;
   snapFile= Files->openSnapshotFile(fileName, "w", &fullFileName);
   if (snapFile == NULL) return NULL;
 
@@ -822,7 +822,7 @@ bool universe::write_snapshot(char *fileName,
 // Get the value of the slotName from the map.
 // Return true if the slot is not present, or has a positive integer value,
 // otherwise return false.
-static bool get_space_size(slotsOop obj, char *slotName, smi &val)
+static bool get_space_size(slotsOop obj, const char *slotName, smi &val)
 {
   bool junk;
   oop *slotp= obj->get_slot_data_address_if_present(slotName, junk);

@@ -44,7 +44,7 @@ char* lookupTypeName(LookupType l) {
     strcpy(name, "DelegatedPerform");
     break;
    default:
-    char* baseName;
+    const char* baseName;
     switch (baseLookupType(l)) {
      case NormalBaseLookupType:
       baseName ="NormalBaseLookup "; break;

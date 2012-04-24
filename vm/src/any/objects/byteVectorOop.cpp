@@ -378,7 +378,7 @@ oop byteVectorOopClass::parseObject_prim(char* fn, oop errorObj, void *FH) {
   }    
 
   // need a copy because Eval can cause GC before source is captured.
-  char* source= copy_null_terminated(len);
+  const char* source= copy_null_terminated(len);
   
   StringScanner scanner(source, len, fn, 1, 1);
   Parser parser(&scanner, true);
@@ -417,7 +417,7 @@ oop byteVectorOopClass::parseObjectIntoPositionTable_prim() {
   fint line, col, len;
 
   // need a copy because Eval can cause GC.
-  char* source= copy_null_terminated(len);
+  const char* source= copy_null_terminated(len);
 
   StringScanner scanner(source, len, "<position table primitive>");
   Parser parser(&scanner, true); // make parser silent (for Klein) 7/04 dmu

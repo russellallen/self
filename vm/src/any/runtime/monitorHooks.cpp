@@ -41,7 +41,7 @@ int32 TrackCHeapInMonitor::allocated() {
 void TrackCHeapInMonitor::set_allocated(int32 a) { _allocated = a; }
 
 
-ShowCompileInMonitor::ShowCompileInMonitor(oop selector, char* compiler, bool optimize) {
+ShowCompileInMonitor::ShowCompileInMonitor(oop selector, const char* compiler, bool optimize) {
     if (TheSpy->is_active()) do_show_compile(selector, compiler, optimize); }
 
 ShowCompileInMonitor::~ShowCompileInMonitor() { method_being_compiled = NULL; }
@@ -57,7 +57,7 @@ ResetMonitor::ResetMonitor() { if (TheSpy != NULL) TheSpy->reset(); }
 
 // ==============================================================
   
-void ShowCompileInMonitor::do_show_compile(oop sel, char* compiler, bool optimize) {
+void ShowCompileInMonitor::do_show_compile(oop sel, const char* compiler, bool optimize) {
   method_being_compiled = selector_string(sel);
   current_compiler_name = compiler;
   current_compiler_ticks = &compiler_ticks[optimize];

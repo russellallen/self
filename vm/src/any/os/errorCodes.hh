@@ -24,6 +24,6 @@ class ErrorCodes {
  private:
   // platform-specific fns:
   static char* os_error_message(char* s);  // takes ptr to non-terminated str, returns stringOop, 0 or -1
-  static char* os_error_name(fint error);
+  static const char* os_error_name(fint error);
 };
 

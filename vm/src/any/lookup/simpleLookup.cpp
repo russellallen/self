@@ -327,7 +327,7 @@ void simpleLookup::handleRecursiveLookupError() {
   
 
 void simpleLookup::selectorAndSourceForLookupError(stringOop& sel,
-                                                   char*& source) {
+                                                   const char*& source) {
   switch (status) {
 
    case foundNone:
@@ -403,7 +403,7 @@ int32 simpleLookup::argCountForLookupError(int32 perform_arg_count) {
 
 void simpleLookup::generateLookupErrorMethod(int32 perform_arg_count) {
   stringOop sel;
-  char* source;
+  const char* source;
   selectorAndSourceForLookupError(sel, source);
   stringOop msgType = messageTypeForLookupError();
   int32 argc = argCountForLookupError(perform_arg_count);
@@ -505,7 +505,7 @@ void simpleLookup::print() {
 }
 
 
-char* lookupStatusString(LookupStatus status) {
+const char* lookupStatusString(LookupStatus status) {
   switch (status) {
    case foundNone:                    return "not found";
    case foundOne:                     return "found one";

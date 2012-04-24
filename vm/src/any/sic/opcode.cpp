@@ -6,7 +6,7 @@
 # pragma implementation "opcode.hh"
 # include "_opcode.cpp.incl"
 
-char* BranchOpName[] = {
+const char* BranchOpName[] = {
   "Bra",
   "Beq", "Bne",
   "Blt", "Ble", "Bltu", "Bleu",
@@ -19,7 +19,7 @@ char* BranchOpName[] = {
   "Last (INVALID)"
   };
 
-char* ArithOpName[] = {
+const char* ArithOpName[] = {
   "Nil (INVALID)",
   "Add", "Sub", "Mul", "Div",
   "And", "Or", "XOr",

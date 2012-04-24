@@ -57,7 +57,7 @@ class ShowCompileInMonitor: CHeapObj {
   friend class ExecutionMonitor;
   friend class SelfMonitor;
   
-  void do_show_compile(oop selector, char* compiler, bool opt);
+  void do_show_compile(oop selector, const char* compiler, bool opt);
   static const char* current_compiler_name;
   static fint* current_compiler_ticks;
   static fint  compiler_ticks[2];
@@ -67,7 +67,7 @@ class ShowCompileInMonitor: CHeapObj {
 
  public:
   static const char*     method_being_compiled;
-  ShowCompileInMonitor(oop selector, char* compiler, bool optimize);
+  ShowCompileInMonitor(oop selector, const char* compiler, bool optimize);
   ~ShowCompileInMonitor();
   static bool method_changed();
 };

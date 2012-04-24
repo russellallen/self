@@ -11,10 +11,10 @@ extern "C" {
   double rint(double x);
 }
 
-char *sealSeal = "Type seal for proxies representing a type seal.";
-char *TS_SO    = "Type seal for ld shared object handles.";
-char *TS_symb  = "Type seal for symbol addresses.";
-char *TS_func  = "Type seal for functions.";
+const char *sealSeal = "Type seal for proxies representing a type seal.";
+const char *TS_SO    = "Type seal for ld shared object handles.";
+const char *TS_symb  = "Type seal for symbol addresses.";
+const char *TS_func  = "Type seal for functions.";
 
 
 # define WHAT_GLUE FUNCTIONS

@@ -128,18 +128,18 @@ class FlagSettingInt {
     ((EventLogLength = smiOop(flag)->value()), eventLog->resize()),           \
     "length of VM event log (for VM debugging)", true)                        \
                                                                               \
-    template(DirPath, char*, "<str>", StringPrimType, "",                     \
+    template(DirPath, const char*, "<str>", StringPrimType, "",               \
     new_string(DirPath), flag->is_byteVector(),                               \
-    (selfs_free(DirPath),                                                     \
+    (selfs_free((void*)DirPath),                                              \
      DirPath = byteVectorOop(flag)->copy_c_heap_null_terminated()),           \
     "directory path for source files and snapshots", false)                   \
                                                                               \
-    template(SpyDisplay, char*, "<str>", StringPrimType,                     \
+    template(SpyDisplay, const char*, "<str>", StringPrimType,                \
     "", new_string(SpyDisplay), flag->is_byteVector(),                       \
     (SpyDisplay = byteVectorOop(flag)->copy_c_heap_null_terminated()),       \
     "name of display for Spy\n(OSX: use empty string for Mac Toolbox, nonempty for X)", false) \
                                                                               \
-    template(SpyFont, char*, "<str>", StringPrimType, "",                     \
+    template(SpyFont, const char*, "<str>", StringPrimType, "",               \
     new_string(SpyFont), flag->is_byteVector(),                               \
     (SpyFont = byteVectorOop(flag)->copy_c_heap_null_terminated()),           \
     "name of X font for Spy", false)                                          \

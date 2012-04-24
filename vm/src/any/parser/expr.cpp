@@ -52,7 +52,7 @@ oop Expr::Eval(bool printing, bool inSlot, bool mustAllocate) {
 }
 
 
-void Expr::ErrorMessage(char* msg) {
+void Expr::ErrorMessage(const char* msg) {
   parser->syntaxError(msg, source_line, source_column);
 }
 
@@ -101,19 +101,19 @@ void StringLiteral::Print() {
   lprintf("'");
 }
 
-Object::Object(SlotList* slots_arg, 
-               ExprList* body_arg, 
-               bool      isDeferred_arg,
-               char*     source_file_arg, 
-               fint      source_line_arg,
-               fint      source_column_arg,
-               char*     source_start_arg,
-               fint      source_length_arg,
-               fint      source_body_line_arg,
-               fint      source_body_column_arg,
-               char*     source_body_start_arg,
-               fint      source_body_length_arg,
-               Parser*   p)
+Object::Object(SlotList*   slots_arg, 
+               ExprList*   body_arg, 
+               bool        isDeferred_arg,
+               const char* source_file_arg, 
+               fint        source_line_arg,
+               fint        source_column_arg,
+               const char* source_start_arg,
+               fint        source_length_arg,
+               fint        source_body_line_arg,
+               fint        source_body_column_arg,
+               const char* source_body_start_arg,
+               fint        source_body_length_arg,
+               Parser*     p)
    : Constant(0, p) {
      slots      = slots_arg;
      body       = body_arg;
@@ -269,14 +269,14 @@ bool Object::ContainsMethod() {
 }
 
 static void print_comment_warning(const char* msg, 
-                                  Slot* s, Token* comment, char* file) {
+                                  Slot* s, Token* comment, const char* file) {
   Unused(s);
   lprintf("%s\n", msg);
   lprintf("%s:%d \"", file, comment->line);
   comment->string->Print(); lprintf("\"\n");
 }
 
-static char* extend_annotation(char* anno, char* keyword, char* str, int len) {
+static char* extend_annotation(const char* anno, const char* keyword, const char* str, int len) {
   const char* separator = "\177";
   fint prefix_len = strlen(anno) ? strlen(anno) + strlen(separator) : 0;
   char *new_anno = NEW_RESOURCE_ARRAY( char, 
@@ -290,14 +290,14 @@ static char* extend_annotation(char* anno, char* keyword, char* str, int len) {
   return new_anno;
 }
 
-static char* extend_annotation(char* anno, char* keyword, Token* string) {
+static char* extend_annotation(const char* anno, const char* keyword, Token* string) {
   return extend_annotation(anno, keyword, 
                            string->string->AsCharP(), string->string->len);}
-char* extend_annotation_with_string(char* annotation, Token* string) {
+char* extend_annotation_with_string(const char* annotation, Token* string) {
   return extend_annotation(annotation, "", string); }
-char* extend_annotation_with_comment(char* annotation, Token* comment) {
+char* extend_annotation_with_comment(const char* annotation, Token* comment) {
   return extend_annotation(annotation, "Comment: ", comment); }
-char* extend_annotation_with_filename(char* annotation, char* name) {
+char* extend_annotation_with_filename(const char* annotation, const char* name) {
   return extend_annotation(annotation, "File: ", name, strlen(name)); }
 
 void Object::addCommentAnnotations(Scanner* scanner) {

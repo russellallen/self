@@ -57,7 +57,7 @@ extern "C" {
 }
 # endif
 
-char *UnixFile_seal = "UnixFile";
+const char *UnixFile_seal = "UnixFile";
 
 fd_set activeFDs;                      // active file descriptors
 

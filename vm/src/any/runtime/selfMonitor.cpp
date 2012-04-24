@@ -356,35 +356,35 @@ int SelfMonitor::mbar_x()   {  return  opt_x() + (_show_sends ? opt_w() : 0);  }
 int SelfMonitor::eden_y()   {  return  vm_yb();  }
 
 // memory bar label positions
-int   SelfMonitor::pics_x()   {  return  _pic_zone->x;  }
-int   SelfMonitor::pics_y()   {  return  _pic_zone->y - mw()->font_height();  }
-char* SelfMonitor::pics_t()   {  return  "PICs";  }
-int   SelfMonitor::pics_w()   {  return  4*mw()->font_width();  }
+int         SelfMonitor::pics_x()   {  return  _pic_zone->x;  }
+int         SelfMonitor::pics_y()   {  return  _pic_zone->y - mw()->font_height();  }
+const char* SelfMonitor::pics_t()   {  return  "PICs";  }
+int         SelfMonitor::pics_w()   {  return  4*mw()->font_width();  }
 
-int   SelfMonitor::code_x()   {  return  _i_zone->x + (_i_zone->w / 2) - (code_w() / 2);  }
-int   SelfMonitor::code_y()   {  return  _i_zone->y + _i_zone->h + 2;  }
-char* SelfMonitor::code_t()   {  return  "code";  }
-int   SelfMonitor::code_w()   {  return  4*mw()->font_width();  }
+int         SelfMonitor::code_x()   {  return  _i_zone->x + (_i_zone->w / 2) - (code_w() / 2);  }
+int         SelfMonitor::code_y()   {  return  _i_zone->y + _i_zone->h + 2;  }
+const char* SelfMonitor::code_t()   {  return  "code";  }
+int         SelfMonitor::code_w()   {  return  4*mw()->font_width();  }
 
-int   SelfMonitor::nic_x()   {  return  _i_zone->x;  }
-int   SelfMonitor::nic_y()   {  return  code_y();  }
-char* SelfMonitor::nic_t()   {  return  "NIC";  }
-int   SelfMonitor::nic_w()   {  return  3*mw()->font_width();  }
+int         SelfMonitor::nic_x()   {  return  _i_zone->x;  }
+int         SelfMonitor::nic_y()   {  return  code_y();  }
+const char* SelfMonitor::nic_t()   {  return  "NIC";  }
+int         SelfMonitor::nic_w()   {  return  3*mw()->font_width();  }
 
-int   SelfMonitor::sic_x()   {  return  _i_zone->x + _i_zone->w - sic_w();  }
-int   SelfMonitor::sic_y()   {  return  code_y();  }
-char* SelfMonitor::sic_t()   {  return  "SIC";  }
-int   SelfMonitor::sic_w()   {  return  3*mw()->font_width();  }
+int         SelfMonitor::sic_x()   {  return  _i_zone->x + _i_zone->w - sic_w();  }
+int         SelfMonitor::sic_y()   {  return  code_y();  }
+const char* SelfMonitor::sic_t()   {  return  "SIC";  }
+int         SelfMonitor::sic_w()   {  return  3*mw()->font_width();  }
 
-int   SelfMonitor::deps_x()   {  return  _d_zone->x;  }
-int   SelfMonitor::deps_y()   {  return  _d_zone->y + _d_zone->h + 2;  }
-char* SelfMonitor::deps_t()   {  return  "deps";  }
-int   SelfMonitor::deps_w()   {  return  4*mw()->font_width();  }
+int         SelfMonitor::deps_x()   {  return  _d_zone->x;  }
+int         SelfMonitor::deps_y()   {  return  _d_zone->y + _d_zone->h + 2;  }
+const char* SelfMonitor::deps_t()   {  return  "deps";  }
+int         SelfMonitor::deps_w()   {  return  4*mw()->font_width();  }
 
-int   SelfMonitor::dbug_x()   {  return  _s_zone->x;  }
-int   SelfMonitor::dbug_y()   {  return  _s_zone->y + _s_zone->h + 2;  }
-char* SelfMonitor::dbug_t()   {  return  "debug";  }
-int   SelfMonitor::dbug_w()   {  return  5*mw()->font_width();  }
+int         SelfMonitor::dbug_x()   {  return  _s_zone->x;  }
+int         SelfMonitor::dbug_y()   {  return  _s_zone->y + _s_zone->h + 2;  }
+const char* SelfMonitor::dbug_t()   {  return  "debug";  }
+int         SelfMonitor::dbug_w()   {  return  5*mw()->font_width();  }
 
 
 

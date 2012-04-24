@@ -267,8 +267,8 @@ bool ByteCode::Finish() {
 }
 
 
-bool ByteCode::Finish(char* fname, fint sourceLine,
-                      char* srcStart, fint srcLen) {
+bool ByteCode::Finish(const char* fname, fint sourceLine,
+                      const char* srcStart, fint srcLen) {
   if (!Finish())
     return false;
   file= mustAllocate ? new_string(fname) : new_string_or_fail(fname);
@@ -288,12 +288,12 @@ bool ByteCode::Finish(char* fname, fint sourceLine,
 }
 
 
-bool ByteCode::Finish(char* fname, char* src) {
+bool ByteCode::Finish(const char* fname, const char* src) {
   return Finish(fname, 1, src, strlen(src));
 }
 
 
-bool ByteCode::Finish(char* fname, fint sourceLine, fint srcOffset, fint srcLen) {
+bool ByteCode::Finish(const char* fname, fint sourceLine, fint srcOffset, fint srcLen) {
   bool r = Finish();
   if (!r) return false;
   if ((file= new_string(fname)) == failedAllocationOop) {
