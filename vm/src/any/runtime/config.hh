@@ -79,7 +79,9 @@
 # if TARGET_OS_VERSION == MACOSX_VERSION
 
   # ifdef TARGET_ARCH
-    # error no need to define this
+    //  # error no need to define this
+    // we determine ourselves
+    # undef TARGET_ARCH
   # endif
   # if defined(__ppc__)
     # define TARGET_ARCH PPC_ARCH
