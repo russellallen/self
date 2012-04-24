@@ -44,6 +44,7 @@
 
 <os>Prims.cpp                 <os>Prims.hh
 <os>Prims.cpp                 allocation.hh
+<os>Prims.cpp                 asserts.hh
 <os>Prims.cpp                 fctProxyOop.hh
 <os>Prims.cpp                 generation_inline.hh
 <os>Prims.cpp                 glueSupport.hh
@@ -2150,6 +2151,7 @@ processMap.cpp                vmStrings.hh
 processMap.hh                 slotsMapDeps.hh
 
 processOop.cpp                allocation.hh
+processOop.cpp                asserts.hh
 processOop.cpp                blist.hh
 processOop.cpp                glueSupport.hh
 processOop.cpp                interruptedCtx.hh

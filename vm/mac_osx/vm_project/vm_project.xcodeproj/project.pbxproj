@@ -4817,7 +4817,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PFE_FILE_C_DIALECTS = "c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/_precompiled.h;
+				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/SelfMacPrecompHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"GENERATE_DEBUGGING_AIDS=1",
 					"SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=1",
@@ -6105,7 +6105,7 @@
 				GCC_MODEL_TUNING = "";
 				GCC_PFE_FILE_C_DIALECTS = "c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/_precompiled.h;
+				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/SelfMacPrecompHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"GENERATE_DEBUGGING_AIDS=0",
 					"SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=0",
@@ -6198,7 +6198,7 @@
 				GCC_MODEL_TUNING = "";
 				GCC_PFE_FILE_C_DIALECTS = "c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/_precompiled.h;
+				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/SelfMacPrecompHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"GENERATE_DEBUGGING_AIDS=0",
 					"SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=0",
@@ -6291,7 +6291,7 @@
 				GCC_MODEL_TUNING = "";
 				GCC_PFE_FILE_C_DIALECTS = "c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/_precompiled.h;
+				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/SelfMacPrecompHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"GENERATE_DEBUGGING_AIDS=0",
 					"SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=0",
@@ -6383,7 +6383,7 @@
 				GCC_MODEL_TUNING = "";
 				GCC_PFE_FILE_C_DIALECTS = "c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/_precompiled.h;
+				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/SelfMacPrecompHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					FAST_FLOATS,
 					"GENERATE_DEBUGGING_AIDS=0",
@@ -6478,7 +6478,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PFE_FILE_C_DIALECTS = "c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/_precompiled.h;
+				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/SelfMacPrecompHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"GENERATE_DEBUGGING_AIDS=1",
 					"SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=1",
@@ -6571,7 +6571,7 @@
 				GCC_MODEL_TUNING = "";
 				GCC_PFE_FILE_C_DIALECTS = "c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/_precompiled.h;
+				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/SelfMacPrecompHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"GENERATE_DEBUGGING_AIDS=1",
 					"SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=0",
@@ -6664,7 +6664,7 @@
 				GCC_MODEL_TUNING = "";
 				GCC_PFE_FILE_C_DIALECTS = "c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/_precompiled.h;
+				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/SelfMacPrecompHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"GENERATE_DEBUGGING_AIDS=0",
 					"SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=0",
@@ -6756,7 +6756,7 @@
 				GCC_MODEL_TUNING = "";
 				GCC_PFE_FILE_C_DIALECTS = "c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/_precompiled.h;
+				GCC_PREFIX_HEADER = ../../mac_osx/generated/incls/SelfMacPrecompHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"GENERATE_DEBUGGING_AIDS=0",
 					"SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=0",
