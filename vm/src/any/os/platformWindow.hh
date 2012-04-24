@@ -3,6 +3,8 @@
 /* Copyright 1998-2006 Sun Microsystems, Inc.
    See the LICENSE file for license information. */
 
+# pragma once
+
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif

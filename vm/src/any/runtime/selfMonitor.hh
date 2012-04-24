@@ -7,6 +7,8 @@
 // Monitor monitors system activity ("Self spy")
    
 
+# pragma once
+
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif

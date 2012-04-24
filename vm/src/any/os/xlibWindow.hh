@@ -6,6 +6,8 @@
 // Contains platform-specific declarations for PlatformWindow.
 // This file is included into middle of class declaration.
 
+# pragma once
+
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif

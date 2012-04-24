@@ -7,6 +7,8 @@
 // The "L" business is needed to get C++ to type-check correctly
 // (otherwise myList->append(anyPointer) happily matches SList::append)
 
+# pragma once
+
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif

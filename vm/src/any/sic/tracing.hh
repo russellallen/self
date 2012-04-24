@@ -6,6 +6,8 @@
 /* control stuff for instruction tracing with shade */
 /* C not C++ for compatibility with shade */
 
+# pragma once
+
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif

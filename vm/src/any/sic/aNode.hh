@@ -8,9 +8,12 @@
 // in, but our beloved C++ makes this very hard to do (e.g.
 // can't cast a virtual base ptr to the concrete class).
 
+# pragma once
+
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
+
 
 
 # ifdef SIC_COMPILER
