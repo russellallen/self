@@ -163,11 +163,16 @@ void error_breakpoint() {
   # endif
 }
 
-volatile void ShouldNotCall(char *file, int line) {
+volatile void ShouldNotCall(const char *file, int line) {
   lprint_fatal(file, line, "Calling member function which shouldn't be called");
 }
 
-volatile void ShouldNotReach(char *file, int line) {
+volatile void ShouldNotReach(const char *file, int line) {
   lprint_fatal(file, line, "Reached supposedly impossible case");
 }
 
+// just in case asserts go haywire
+# if defined(assert)
+#    undef assert
+# endif
+void assert(bool b, const char* msg) {};
