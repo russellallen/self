@@ -152,6 +152,20 @@ class abstract_interpreter_interbytecode_state: public PartObj {
 // that do it.
 // I only know about "syntax".
 
+// Forward-declaration for friend
+void check_index_range(           abstract_interpreter*, oop);
+void check_selector_string(       abstract_interpreter*, oop);
+void check_branch_target(         abstract_interpreter*, oop);
+void check_no_send_modifiers(     abstract_interpreter*, oop);
+void check_no_lexical_level(      abstract_interpreter*, oop);
+void check_no_two_send_modifiers( abstract_interpreter*, oop);
+void check_no_argument_count(     abstract_interpreter*, oop);
+void check_no_operand(            abstract_interpreter*, oop);
+void check_delegatee(             abstract_interpreter*, oop);
+void check_branch_vector(         abstract_interpreter*, oop);
+void check_for_pop(               abstract_interpreter*, oop);
+Location location_of_interpreter(void*); 
+
 class abstract_interpreter: public AnywhereObj {
   friend class frame; // for the ITERATORs (ugh)
   friend class FrameIterator; // for the ITERATORs (ugh)

@@ -9,6 +9,10 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend
+slotsOop create_slots(slotList* , const char*);
+int32 map_chain_offset();
+slotsMapDeps* map_from_map_chain(nmln* p) ;
 
 class slotsMapDeps: public slotsMap {
  protected:

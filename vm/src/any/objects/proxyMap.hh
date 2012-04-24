@@ -9,6 +9,8 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend
+proxyOop create_proxy();
 
 class proxyMap: public foreignMap {
  public:

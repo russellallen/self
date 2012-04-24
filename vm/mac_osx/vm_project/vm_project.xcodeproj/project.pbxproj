@@ -2879,8 +2879,10 @@
 				0FE7053C02222F9344000113 /* ppc */,
 				C6AFD92209C40F6E005CC280 /* i386 */,
 			);
+			indentWidth = 2;
 			name = Sources;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		20286C2CFDCF999611CA2CEA /* Resources */ = {
 			isa = PBXGroup;
@@ -4877,17 +4879,15 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				MAKE = /usr/bin/make;
-				OTHER_CPLUSPLUSFLAGS = (
-					"-ffriend-injection",
-					"$(OTHER_CFLAGS)",
-				);
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
 					"-lcurses",
 				);
 				PRODUCT_NAME = Self_debug;
-				SELF_WORKING_DIR = "${HOME}/self";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
@@ -6166,17 +6166,15 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				MAKE = /usr/bin/make;
-				OTHER_CPLUSPLUSFLAGS = (
-					"-ffriend-injection",
-					"$(OTHER_CFLAGS)",
-				);
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
 					"-lcurses",
 				);
 				PRODUCT_NAME = Self;
-				SELF_WORKING_DIR = "${HOME}/self";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
@@ -6259,17 +6257,15 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				MAKE = "/usr/bin/make\n";
-				OTHER_CPLUSPLUSFLAGS = (
-					"-ffriend-injection",
-					"$(OTHER_CFLAGS)",
-				);
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
 					"-lcurses",
 				);
 				PRODUCT_NAME = Self;
-				SELF_WORKING_DIR = "${HOME}/self";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
@@ -6350,17 +6346,15 @@
 					.,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				OTHER_CPLUSPLUSFLAGS = (
-					"-ffriend-injection",
-					"$(OTHER_CFLAGS)",
-				);
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
 					"-lcurses",
 				);
 				PRODUCT_NAME = Self;
-				SELF_WORKING_DIR = "${HOME}/self";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
@@ -6444,17 +6438,15 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				MAKE = /usr/bin/make;
-				OTHER_CPLUSPLUSFLAGS = (
-					"-ffriend-injection",
-					"$(OTHER_CFLAGS)",
-				);
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
 					"-lcurses",
 				);
 				PRODUCT_NAME = Self_fast_floats;
-				SELF_WORKING_DIR = "${HOME}/self";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
@@ -6538,17 +6530,15 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				MAKE = /usr/bin/make;
-				OTHER_CPLUSPLUSFLAGS = (
-					"-ffriend-injection",
-					"$(OTHER_CFLAGS)",
-				);
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
 					"-lcurses",
 				);
 				PRODUCT_NAME = Self_debug;
-				SELF_WORKING_DIR = "${HOME}/self";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
@@ -6631,17 +6621,15 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				MAKE = /usr/bin/make;
-				OTHER_CPLUSPLUSFLAGS = (
-					"-ffriend-injection",
-					"$(OTHER_CFLAGS)",
-				);
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
 					"-lcurses",
 				);
 				PRODUCT_NAME = Self_opt_asserts;
-				SELF_WORKING_DIR = "${HOME}/self";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
@@ -6724,17 +6712,15 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				MAKE = /usr/bin/make;
-				OTHER_CPLUSPLUSFLAGS = (
-					"-ffriend-injection",
-					"$(OTHER_CFLAGS)",
-				);
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
 					"-lcurses",
 				);
 				PRODUCT_NAME = Self_profiled;
-				SELF_WORKING_DIR = "${HOME}/self";
+				SELF_WORKING_DIR = "${PROJECT_DIR}/../../../";
 				SKIP_INSTALL = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
@@ -6817,10 +6803,8 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				MAKE = /usr/bin/make;
-				OTHER_CPLUSPLUSFLAGS = (
-					"-ffriend-injection",
-					"$(OTHER_CFLAGS)",
-				);
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",

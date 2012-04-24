@@ -9,6 +9,8 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend
+int32 scope_offset();
 
 class blockOopClass: public slotsOopClass {
 private:

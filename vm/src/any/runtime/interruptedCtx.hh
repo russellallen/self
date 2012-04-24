@@ -11,6 +11,8 @@
 
 #include <pthread.h>
 
+// Forward-declaration for friend
+void abort_init();
 
 class InterruptedContext {
  private:

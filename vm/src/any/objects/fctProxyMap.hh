@@ -9,6 +9,8 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend
+fctProxyOop create_fctProxy(); // To create initial proxy
 
 class fctProxyMap: public proxyMap {
  public:

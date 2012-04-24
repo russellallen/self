@@ -24,6 +24,17 @@ class codeSlotsMap: public slotsMap {
 
 class oldMapList;
 
+// Forward-declaration for friend
+slotsOop basic_create_method(slotList* slots, ByteCode* b,
+                             methodMap &m1, char *annotation,
+                             bool isBlock);
+slotsOop create_outerMethod(slotList* slots, ByteCode* b,
+                            const char* annotation,
+                            IntBList* stack_deltas);
+const char* check_byteCodes_and_literals( smi& errorIndex,
+                                          IntBList*& stack_deltas,
+                                          byteVectorOop codes,
+                                          objVectorOop literals );
 class methodMap: public codeSlotsMap {
   friend slotsOop create_outerMethod(slotList* slots, ByteCode* b,
                                      const char* annotation = "",
@@ -202,6 +213,15 @@ class outerMethodMap: public methodMap {
 
   methodMap* get_lexical_link_map() { return NULL; }
 };
+
+// Forward-declaration for friend
+
+slotsOop create_blockMethod(slotList* slots, ByteCode* b,
+                            const char* annotation,
+                            IntBList* stack_deltas);
+slotsOop basic_create_method(slotList* slots, ByteCode* b,
+                             methodMap* m1, const char* annotation,
+                             bool isBlock);
 
 class blockMethodMap: public methodMap {
   friend slotsOop basic_create_method(slotList* slots,

@@ -14,6 +14,10 @@ extern "C" {
   oop scavenge_prim(oop);
 }
 
+// Forward-declaration for friend
+oop unwind_protect_prim(oop doBlock, oop protectBlock);
+
+
 class oopClass {
  public:
   // _mark moved up here from memOop to avoid C++ bogosity --dmu

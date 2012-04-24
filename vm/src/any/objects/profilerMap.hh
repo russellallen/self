@@ -9,6 +9,8 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend  
+profilerOop create_profiler();
 
 class profilerMap : public slotsMapDeps {
  public:

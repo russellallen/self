@@ -18,6 +18,9 @@ extern "C" {
   int32 getObjectID(oop obj);
 }
 
+// Forward-declaration for friend
+Map* create_map(fint size, slotList *slots, Map *mm, oop *obj);
+void findSlot_init();
 
 class Map {
  public:

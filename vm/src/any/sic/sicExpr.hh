@@ -219,6 +219,12 @@
     SExpr* pop();
   };
   
+
+  // Forward-declaration for friend
+  BranchBCTargetStack* new_BranchBCTargetStack(SCodeScope* s,
+                                               bool  isTargetOfBackwardsBranch,
+                                               int32 len,
+                                               int32 targetBCI );
   
   class BranchBCTargetStack : public SExprBList {
     // keeps track of s exprs in expr stack at target of a branch bytecode

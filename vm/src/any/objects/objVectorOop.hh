@@ -9,6 +9,12 @@
   # pragma interface
 # endif
 
+objVectorOop create_objVector(oop parent);
+objVectorOop create_objVector(fint size);
+oop ov_at_prim(oop rcvr, oop index);
+oop ov_at_put_prim(oop rcvr, oop index, oop contents);
+oop ov_size_prim(oop rcvr);
+int32 objVector_len_offset();
 
 class objVectorOopClass: public slotsOopClass {
  public:

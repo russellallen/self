@@ -14,6 +14,8 @@
 extern "C" void moncontrol(bool);
 # endif
 
+// Forward-declaration for friend
+char*   ExpandDir_prim(const char* in, void* FH);
 
 class OS {
  private:

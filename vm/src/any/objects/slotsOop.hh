@@ -9,6 +9,10 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend
+slotsOop as_slotsOop(void* p);
+slotsOop create_slots(fint size);
+
 
 class slotsOopClass: public oopsOopClass {
  public:

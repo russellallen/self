@@ -11,6 +11,11 @@
 
 
 // constructors
+// Forward-declaration for friend
+stringOop create_string(fint size);
+stringOop make_string(const char* value, fint len,
+                      bool mustAllocate);
+
 inline stringOop as_stringOop(void* p) {
   return stringOop(as_byteVectorOop(p)); }
 

@@ -47,6 +47,17 @@ static nmethod* shutUpCompiler = NULL;
       ((nmethod*)((char*)p - (char*)&shutUpCompiler->fieldName))
 
 
+// Forward-declaration for friend
+bool     isNMethod(void* p);
+nmethod* nmethodContaining(char* pc, char* likelyEntryPoint);
+nmethod* findNMethod(void* start);
+nmethod* findNMethod_maybe(void* start);
+nmethod* nmethod_from_insts(char* insts);
+nmethod* new_nmethod(AbstractCompiler* c,
+                     bool generateDebugCode);
+// cf. cacheStub
+void set_nmethod_vtbl_value();
+
 class nmethod : public OopNCode {
  public:
   int32 depsLen;

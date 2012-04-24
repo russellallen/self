@@ -47,6 +47,11 @@ const int32 overflow_hash_in_place = first_hash_in_place;
 const int32 overflow_age_in_place = age_mask_in_place;
 
 
+// topa: Sorry, this cannot be expressed by the macro below...
+// Forward-declaration for friend
+int32 max_hash();
+int32 max_age();
+
 class markOopClass: public oopClass {
  public:
   Map* map() { return Memory->mark_map; }
@@ -56,6 +61,7 @@ class markOopClass: public oopClass {
     markOop  with_objectIsMarked()    { return markOop( int32(this) |  object_is_marked_mask_in_place); }
     markOop  without_objectIsMarked() { return markOop( int32(this) & ~object_is_marked_mask_in_place); }
     
+    // TODO:  2012-04-24 topa, do something about the fried here
 # define VALUE_ACCESSOR(name, setAction, setAssert)                           \
                                                                               \
     int32 name() {                                                            \

@@ -15,6 +15,9 @@
 // initial scopeDesc value
 # define BLOCK_PROTO_DESC  as_smiOop(-1)
 
+// Forward-declaration for friend
+blockOop create_block(slotsOop valueMethod);
+
 class blockMap: public Map {
   friend class blockOopClass;
   friend class SCodeScope;

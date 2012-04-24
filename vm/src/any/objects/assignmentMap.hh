@@ -10,6 +10,9 @@
 # endif
 
 
+// Forward-declaration for friend
+assignmentOop create_assignment();
+
 class assignmentMap: public codeLikeSlotsMap {
  public:
   // accessors

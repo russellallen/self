@@ -9,6 +9,8 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend
+mirrorOop create_mirror(oop reflectee);
 
 class mirrorMap: public slotsMapDeps {
  public:

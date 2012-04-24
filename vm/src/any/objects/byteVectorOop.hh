@@ -9,6 +9,17 @@
   # pragma interface
 # endif
 
+// Forwar-declaration for friend
+byteVectorOop as_byteVectorOop(void* p);
+byteVectorOop create_byteVector(oop parent);
+byteVectorOop create_byteVector(fint size);
+oop bv_at_prim(oop rcvr, oop index);
+oop bv_at_put_prim(oop rcvr, oop index, oop cval);
+oop bv_size_prim(oop rcvr);
+oop bv_compare_prim(oop rcvr, oop arg);
+int32 byteVector_len_offset();
+int32 byteVector_bytes_offset();
+
 
 inline smi lengthWords(smi l) { return roundTo((l), oopSize) / oopSize; }
 

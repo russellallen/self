@@ -28,6 +28,11 @@
   // TempPRegs: local to one BB, used for certain hard-coded idioms (e.g.
   // loading an uplevel-accessed value)
   
+
+  // Forward-declaration for friend  
+  SCodeScope* findAncestor(SSelfScope* s1, fint& bci1,
+                           SSelfScope* s2, fint& bci2);
+
   class PReg : public ResourceObj {
    protected:
     fint _id;                   // unique id
@@ -209,6 +214,12 @@
   // and so an expr stack element can always be a SAPReg.
   // -- dmu 9/96 (as explained by Urs)
   
+  // Forward-declaration for friend  
+  SplitPReg* regCovering(SCodeScope* s1, fint bci1,
+                         SCodeScope* s2, fint bci2,
+                         SplitSig* sig);
+
+
   class SAPReg : public PReg {
    public:
     SCodeScope* creationScope;  // source scope to which receiver belongs
@@ -263,7 +274,10 @@
     const char* prefix()              { return "SplitP"; }
     char* name();
   };
-  
+
+  // Forward-declaration for friend  
+  SCodeScope* scopeFromBlockMap(mapOop blockMap);
+
   class BlockPReg : public SAPReg {
    public:
     blockOop block;
@@ -306,6 +320,14 @@
     char* name()                { return (char*) "nil"; }
     bool verify();
   };
+
+
+
+  // Forward-declaration for friend
+  ConstPReg* new_ConstPReg(SSelfScope* s, oop c);
+  #   ifdef UNUSED
+  ConstPReg* findConstPReg(Node* n, oop c);
+  #   endif
 
   class ConstPReg : public PReg {
     // ConstPRegs are used to CSE constants; at register allocation time,

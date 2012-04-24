@@ -77,10 +77,10 @@ class space: public CHeapObj {
   bool would_fit(fint size, fint bsize = 0) {
     return objs_top + size  <  bytes_bottom - bsize; }
     
- protected:
   // allocators; called by new,oldGeneration, and by string and block
   // allocators.
   oop* alloc_objs_local(fint size) {
+    // was protected but neede by slotOop
     oop* p = objs_top;
     oop* p1 = p + size;
     if (p1 < bytes_bottom) {
@@ -89,6 +89,8 @@ class space: public CHeapObj {
     } else {
       return NULL;
     } }
+
+ protected:
   void unalloc_objs_local(fint size) { objs_top -= size; }    
   oop* alloc_objs_and_bytes_local(fint size, fint bsize, char*& bytes) {
     oop* p = objs_top;
@@ -198,6 +200,18 @@ inline void space::clear() {
 # endif
 }
 
+// Forward-declaration for friend
+oop clone0_prim(slotsOop rcvr);
+oop clone1_prim(slotsOop rcvr);
+oop clone2_prim(slotsOop rcvr);
+oop clone3_prim(slotsOop rcvr);
+oop clone4_prim(slotsOop rcvr);
+oop clone5_prim(slotsOop rcvr);
+oop clone6_prim(slotsOop rcvr);
+oop clone7_prim(slotsOop rcvr);
+oop clone8_prim(slotsOop rcvr);
+oop clone9_prim(slotsOop rcvr);
+
 class newSpace: public space {
   friend class universe;
   friend class generation;
@@ -206,17 +220,7 @@ class newSpace: public space {
   // these allocate directly in a newSpace
   // friend oop blockOopClass::clone_block(oop);
   friend class blockOopClass;
-  friend oop clone0_prim(slotsOop rcvr);
-  friend oop clone1_prim(slotsOop rcvr);
-  friend oop clone2_prim(slotsOop rcvr);
-  friend oop clone3_prim(slotsOop rcvr);
-  friend oop clone4_prim(slotsOop rcvr);
-  friend oop clone5_prim(slotsOop rcvr);
-  friend oop clone6_prim(slotsOop rcvr);
-  friend oop clone7_prim(slotsOop rcvr);
-  friend oop clone8_prim(slotsOop rcvr);
-  friend oop clone9_prim(slotsOop rcvr);
-
+  
   // friend byteVectorOop byteVectorOopClass::scavenge(fint);
   friend class ::byteVectorOopClass;
 

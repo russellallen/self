@@ -13,6 +13,9 @@
 // stringOops are canonical strings; all stringOops are registered in the
 // string table
 
+// Forward-declaration for friend
+void create_initial_strings(oop parent);
+
 class stringMap: public byteVectorMap {
  public:
   // testers

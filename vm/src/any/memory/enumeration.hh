@@ -38,6 +38,10 @@ class enumeration_list: public ResourceObj {
   void oops_do(oopsDoFn f);
 };
 
+// Forward-declaration for friend
+void package_enumeration_result(oop* p);
+void package_enumeration_maps(oop* p);
+
 
 class enumeration: public ResourceObj {
   
@@ -113,6 +117,9 @@ class enumeration: public ResourceObj {
 };
 
 
+// Forward-declaration for friend
+oop enumerate_vector_references(objVectorOop vector, oop limit);
+
 class referencesEnumeration: public enumeration {
   friend oop enumerate_vector_references(objVectorOop vector, oop limit);
   
@@ -138,6 +145,8 @@ class referencesEnumeration: public enumeration {
   void consider_obj(   oopsOop obj, oop* matching_cell, smi targetNo);
 };
 
+// Forward-declaration for friend
+oop enumerate_vector_implementors(objVectorOop vector, oop limit);
 
 class implementorsEnumeration: public enumeration {
   friend oop enumerate_vector_implementors(objVectorOop vector, oop limit);
@@ -156,6 +165,9 @@ class implementorsEnumeration: public enumeration {
   void  filter_match(oopsOop obj, oop* matching_cell, smi targetNo);
   void  filter_map(mapOop obj) { Unused(obj); ShouldNotCallThis(); }
 };
+
+// Forward-declaration for friend
+oop enumerate_all_objs(oop limit);
 
 class allObjEnumeration: public enumeration {
   friend oop enumerate_all_objs(oop limit);

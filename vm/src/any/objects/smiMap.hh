@@ -9,6 +9,8 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend
+Map* create_smiMap(oop parent);
 
 class smiMap: public immediateMap {
  public:

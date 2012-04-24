@@ -12,6 +12,9 @@
 
 static const fint enclosed_map_offset = sizeof(oopsOopClass) / oopSize; // words from start of object to embedded map
 
+// Forward-declaration for friend
+mapOop as_mapOop(void* p);
+
 class mapOopClass: public oopsOopClass /* WARNING if you change oopsOopClass, fix enclosed_map_offset above */ {
  protected:
   //  really a whole Map (or subclass thereof) -- dmu 7/03

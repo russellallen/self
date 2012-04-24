@@ -10,6 +10,9 @@
 # endif
 
 
+// Forward-declaration for friend
+floatOop as_floatOop(float value);
+
 class floatOopClass: public oopClass {
  public:
   // constructor

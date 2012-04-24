@@ -15,6 +15,10 @@ const int32 card_size  = 1 << card_shift;
 const int32 card_size_in_oops = card_size / oopSize;
 const int32 byte_map_grain = 8 * BytesPerWord; // private and wired-in
 
+// Forward-declaration for friend
+oop*  card_for(oop* p);
+char* next_zero_byte(char*, char *);
+
 class rSet: public CHeapObj {
   
   friend class oldSpace;

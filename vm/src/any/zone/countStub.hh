@@ -21,6 +21,11 @@ extern int32* sendCounts;       // counter array
 extern fint nsendCounts;        // size of counter array
 
 class CountCodePattern; // instruction pattern for stub
+
+// Forward-declaration for friend
+CountStub* new_CountStub(nmethod* target, pc_t entryPoint,
+                         nmln* sd_nmln, CountType t);
+
   
 class CountStub : public NCodeBase {
  protected:
@@ -82,6 +87,11 @@ class CountStub : public NCodeBase {
   friend void countStub2_init();
 };
 
+// Forward-declaration for friend
+bool isCountStub(void* p);
+// cf. cacheStub
+void set_CountingStub_vtbl_value();
+
 class CountingStub: public CountStub {
   VTBL_AND_SETTER(CountingStub, :CountStub(1.0));
  public:
@@ -92,6 +102,10 @@ class CountingStub: public CountStub {
   const char* name()                  { return "CountingStub"; }
   friend bool isCountStub(void* p);
 };
+
+// Forward-declaration for friend
+// cf. cacheStub
+void set_ComparingStub_vtbl_value();
 
 class ComparingStub: public CountStub {
   VTBL_AND_SETTER(ComparingStub, :CountStub(1.0));
@@ -114,6 +128,11 @@ class ComparingStub: public CountStub {
 // when the counter overflows, the nmethod becomes old.  This helps prevent
 // premature recompilation (which can cause uncommon traps because the pics
 // aren't primed yet.)
+
+// Forward-declaration for friend
+// cf. cacheStub
+void set_AgingStub_vtbl_value();
+
 class AgingStub : public ComparingStub {
   VTBL_AND_SETTER(AgingStub, :ComparingStub(1.0));
  public:

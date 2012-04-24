@@ -9,6 +9,9 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend
+oopsOop as_oopsOop(void* p);
+
 
 class oopsOopClass: public memOopClass {
  public:

@@ -10,6 +10,9 @@
 # endif
 
 
+// Forward-declaration for friend
+Map* create_mapMap();
+
 class mapMap: public Map {
  public:
   // testers

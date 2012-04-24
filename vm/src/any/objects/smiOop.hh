@@ -20,6 +20,11 @@
 # define smiOop_max   smiOop(lowerBits((AllBits << Tag_Size) + Int_Tag,       \
     BitsPerWord - 1))
 
+
+// Forward-declaration for friend
+smiOop as_smiOop(smi value);
+smiOop as_byte_count_smiOop(smi value);
+
 class smiOopClass: public oopClass {
  public:
   // constructors

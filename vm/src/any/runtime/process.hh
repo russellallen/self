@@ -55,6 +55,14 @@ enum ProcessState {
 
 typedef void (*process_p)();
 
+
+// Forward-declaration for friend  
+void startCurrentProcess();
+void interruptCheck();
+class Processes;
+class processOopClass;
+class vframeMirror;
+
 class Process: public CHeapObj {
   char* suspendedSP;    // process state - saved in runtime_(sparc_mac_ppc).s
   char* suspendedPC;

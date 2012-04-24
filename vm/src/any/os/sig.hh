@@ -68,6 +68,8 @@ class OSToSelfSignalMapper /* AllStatic */ {
   }
 };
 
+// Forward-declaration for friend
+bool  BlockSignals_prim(bool); 
 
 class SignalInterface /* AllStatic */ {
 

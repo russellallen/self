@@ -9,6 +9,8 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend
+Map* create_markMap();
 
 class markMap: public Map {
  public:

@@ -9,6 +9,8 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend
+oop as_mirror_prim(oop obj);
 
 class mirrorOopClass: public slotsOopClass {
   

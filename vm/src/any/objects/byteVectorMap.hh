@@ -9,6 +9,9 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend
+byteVectorOop create_byteVector(slotList* slots);
+
 
 class byteVectorMap: public slotsMapDeps {
  public:

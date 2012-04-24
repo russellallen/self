@@ -13,6 +13,12 @@
 # endif
 
 
+// Forward-declaration for friend
+bool isCacheStub(void* p);
+CountStub* new_CountStub(nmethod* target, pc_t entryPoint,
+                         nmln* sd_nmln, CountType t);
+
+
 // A CountStub can be inserted between caller and callee nmethods to keep
 // track of how often the call is executed.  All it does is increment a
 // counter and then jump to the nmethod.
@@ -82,6 +88,10 @@ class CountStub : public NCodeBase {
   friend void countStub2_init();
 };
 
+// Forward-declaration for friend
+// cf. cacheStub
+void set_CountigStub_vtbl_value();
+
 class CountingStub: public CountStub {
   VTBL_AND_SETTER(CountingStub, :CountStub(1.0));
  public:
@@ -92,6 +102,10 @@ class CountingStub: public CountStub {
   char* name()                  { return "CountingStub"; }
   friend bool isCountStub(void* p);
 };
+
+// Forward-declaration for friend
+// cf. cacheStub
+void set_ComparingStub_vtbl_value();
 
 class ComparingStub: public CountStub {
   VTBL_AND_SETTER(ComparingStub, :CountStub(1.0));
@@ -114,6 +128,11 @@ class ComparingStub: public CountStub {
 // when the counter overflows, the nmethod becomes old.  This helps prevent
 // premature recompilation (which can cause uncommon traps because the pics
 // aren't primed yet.)
+
+// Forward-declaration for friend
+// cf. cacheStub
+void set_AgingStub_vtbl_value();
+
 class AgingStub : public ComparingStub {
   VTBL_AND_SETTER(AgingStub, :ComparingStub(1.0));
  public:

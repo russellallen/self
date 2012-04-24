@@ -9,6 +9,8 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend  
+processOop create_process(Process* process);
 
 class processMap: public slotsMapDeps {
  public:

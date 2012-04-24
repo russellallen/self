@@ -23,6 +23,14 @@ extern "C" {
   //  for ( ; (*middle) != target; --middle) return middle;
 }
 
+// Forward-declaration for friend
+memOop as_memOop(void* p);
+bool is_object_start(oop p);
+int32 map_offset();
+memOop mark_memOop(memOop p);
+memOop unmark_memOop(memOop p);
+bool is_marked_memOop(memOop p);
+
 class memOopClass: public oopClass {
  public:
   // instance variable

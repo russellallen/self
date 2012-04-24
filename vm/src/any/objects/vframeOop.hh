@@ -12,6 +12,12 @@
 
 // A vframeOop represents a live activation object.  It contains enough
 // information to construct the corresponding vframe.
+ 
+// Forward-declaration for friend
+vframeOop create_vframeOop(oop method);          // for prototype
+vframeOop new_vframeOop(Process* p,abstract_vframe* vf);
+vframeOop new_senderVFrameOop(Process* p, vframeOop from,
+                              abstract_vframe* vf);
 
 class vframeOopClass : public slotsOopClass {
  protected:

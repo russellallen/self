@@ -62,6 +62,22 @@ public:
   MapList(slotsMapDeps *m, MapList *n) { next= n; map= m; }
 };
 
+
+// Forward-declaration for friend
+oop clone0_prim(slotsOop rcvr);
+oop clone1_prim(slotsOop rcvr);
+oop clone2_prim(slotsOop rcvr);
+oop clone3_prim(slotsOop rcvr);
+oop clone4_prim(slotsOop rcvr);
+oop clone5_prim(slotsOop rcvr);
+oop clone6_prim(slotsOop rcvr);
+oop clone7_prim(slotsOop rcvr);
+oop clone8_prim(slotsOop rcvr);
+oop clone9_prim(slotsOop rcvr);
+#ifndef NOASM
+void itrace(fint);
+#endif
+
 class newGeneration: public generation {
 
   friend class rSet;
@@ -159,6 +175,14 @@ class newGeneration: public generation {
   void write_snapshot(FILE* file);
 };
 
+// Forward-declaration for friend
+oop expand_heap_prim(oop, smi);
+stringOop create_string(fint);
+inline void handlePreemption();
+void create_initial_strings(oop);
+#ifndef NOASM
+void itrace(fint);
+#endif
 
 class oldGeneration: public generation {
 

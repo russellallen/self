@@ -9,6 +9,8 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend
+Map* create_floatMap(oop parent);
 
 class floatMap: public immediateMap {
  public:

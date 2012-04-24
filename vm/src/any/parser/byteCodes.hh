@@ -168,6 +168,22 @@ class AbstractByteCode: public preservedVmObj {
   int32 getLabelIndex( oop label);
 };
 
+
+// Forward-declaration for friend
+oop create_outer_method_prim( oop ignore,
+                             byteVectorOop bv,
+                             objVectorOop lits,
+                             stringOop file,
+                             smiOop line,
+                             stringOop source);
+
+oop create_block_method_prim( oop ignore,
+                             byteVectorOop bv,
+                             objVectorOop lits,
+                             stringOop file,
+                             smiOop line,
+                             stringOop source);
+
 class ByteCode: public AbstractByteCode {
  public:
   

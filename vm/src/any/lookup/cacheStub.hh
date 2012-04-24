@@ -10,6 +10,7 @@
 # endif
 
 
+
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
 // A CacheStub implements a polymorphic inline cache (PIC).
@@ -37,6 +38,14 @@ class cacheStubInfo {
   unsigned int is_megamorphic : 1;
   unsigned int arity          : 29;
 };
+
+// Forward-declaration for friend
+bool isCacheStub(void* p);
+# if  GENERATE_DEBUGGING_AIDS
+CacheStub* StubFromNmln(nmln* l);
+#endif
+// topa: sorry, this is not expressible by the macro
+void set_CacheStub_vtbl_value();
 
 class CacheStub : public OopNCode {
   VTBL_AND_SETTER(CacheStub,);

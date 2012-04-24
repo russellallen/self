@@ -20,6 +20,9 @@
 
   const fint MaxSplitDepth = 7;
 
+  // Forward-declaration for friend
+  SplitSig* new_SplitSig(SplitSig* current, fint splitID);
+
   class SplitSig {
     // "this" encodes 7 split 4-bit IDs plus nesting level in lowest bits
     // this == 0 means top level, not in any split
@@ -28,7 +31,6 @@
     SplitSig()            { ShouldNotCallThis(); }
     SplitSig(SplitSig &s) { ShouldNotCallThis(); }
     friend SplitSig* new_SplitSig(SplitSig* current, fint splitID);
-
     fint level()        { return uint32(this) & LevelMask; }
     bool contains(SplitSig* other) {
       // other sig is in same branch iff the receiver is a prefix of other

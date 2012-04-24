@@ -9,6 +9,9 @@
   # pragma interface
 # endif
 
+// Forward-declaration for friend
+objVectorOop create_objVector(slotList* slots);
+
 
 class objVectorMap: public slotsMapDeps {
  public:
