@@ -652,7 +652,6 @@
 		BC48A75E04D0A68D0075BA8B /* countPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 543EDB3F03B00414004628E8 /* countPattern.cpp */; };
 		BC48A75F04D0A68D0075BA8B /* deadBlockNode_ppc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCD8FFCC03F6514400000103 /* deadBlockNode_ppc.cpp */; };
 		BC48A76304D0A68D0075BA8B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
-		BC48A76404D0A68D0075BA8B /* libstdc++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0249A669FF388E3911CA2CEA /* libstdc++.a */; };
 		BC48A76D04D0A7780075BA8B /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = BC48A76A04D0A7780075BA8B /* main.mm */; };
 		BC48A76E04D0A7780075BA8B /* SelfConsole.h in Headers */ = {isa = PBXBuildFile; fileRef = BC48A76B04D0A7780075BA8B /* SelfConsole.h */; };
 		BC48A76F04D0A7780075BA8B /* SelfConsole.mm in Sources */ = {isa = PBXBuildFile; fileRef = BC48A76C04D0A7780075BA8B /* SelfConsole.mm */; };
@@ -1218,7 +1217,6 @@
 		BC9F9F690558F27700ECBD80 /* countPattern_ppc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 543EDB3B03B003E9004628E8 /* countPattern_ppc.cpp */; };
 		BC9F9F6A0558F27700ECBD80 /* countPattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 543EDB3F03B00414004628E8 /* countPattern.cpp */; };
 		BC9F9F6B0558F27700ECBD80 /* deadBlockNode_ppc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCD8FFCC03F6514400000103 /* deadBlockNode_ppc.cpp */; };
-		BC9F9F700558F27700ECBD80 /* libstdc++.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0249A669FF388E3911CA2CEA /* libstdc++.a */; };
 		BCD9AFB60D28E73B001D80BE /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20286C33FDCF999611CA2CEA /* Carbon.framework */; };
 		BCF0EAB80BAC996E002F9EAC /* quartzWindow.hh in Headers */ = {isa = PBXBuildFile; fileRef = BCF0EAB70BAC996E002F9EAC /* quartzWindow.hh */; };
 		BCF0EAB90BAC996E002F9EAC /* quartzWindow.hh in Headers */ = {isa = PBXBuildFile; fileRef = BCF0EAB70BAC996E002F9EAC /* quartzWindow.hh */; };
@@ -1256,7 +1254,6 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
-		0249A669FF388E3911CA2CEA /* libstdc++.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libstdc++.a"; path = "/usr/lib/libstdc++.a"; sourceTree = "<absolute>"; };
 		0640BAA4FFF0323A11CA0E50 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
 		0640BAA5FFF0323A11CA0E50 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		0867D6ABFE840B52C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1921,7 +1918,7 @@
 		BC833C8D05587D860054DE0E /* Info-Self_debug__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Info-Self_debug__Upgraded_.plist"; sourceTree = "<group>"; };
 		BC9A116E05F330A00000034B /* search_ppc.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = search_ppc.cpp; path = ../../src/ppc/memory/search_ppc.cpp; sourceTree = SOURCE_ROOT; };
 		BC9F9F740558F27700ECBD80 /* Info-Self_optimized__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Info-Self_optimized__Upgraded_.plist"; sourceTree = "<group>"; };
-		BC9F9F750558F27800ECBD80 /* Self.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Self.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC9F9F750558F27800ECBD80 /* Self.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Self.app; path = Self_debug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCD0EDD05893B260079952B /* xgl.primMaker.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; name = xgl.primMaker.hh; path = ../../../objects/glue/xgl.primMaker.hh; sourceTree = SOURCE_ROOT; };
 		BCCD0EDE05893B260079952B /* unixPrims.primMaker.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; name = unixPrims.primMaker.hh; path = ../../../objects/glue/unixPrims.primMaker.hh; sourceTree = SOURCE_ROOT; };
 		BCCD0EDF05893B260079952B /* transcendental.primMaker.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; name = transcendental.primMaker.hh; path = ../../../objects/glue/transcendental.primMaker.hh; sourceTree = SOURCE_ROOT; };
@@ -2041,7 +2038,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC48A76304D0A68D0075BA8B /* Carbon.framework in Frameworks */,
-				BC48A76404D0A68D0075BA8B /* libstdc++.a in Frameworks */,
 				BC2944AB04D4EA72007FAAC0 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2050,7 +2046,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC9F9F700558F27700ECBD80 /* libstdc++.a in Frameworks */,
 				BC8190E60BABE01B00425E55 /* ApplicationServices.framework in Frameworks */,
 				BCD9AFB60D28E73B001D80BE /* Carbon.framework in Frameworks */,
 			);
@@ -2859,7 +2854,6 @@
 			children = (
 				20286C2AFDCF999611CA2CEA /* Sources */,
 				20286C2CFDCF999611CA2CEA /* Resources */,
-				20286C32FDCF999611CA2CEA /* Libraries */,
 				195DF8C9FE9D4F0611CA2CBB /* Products */,
 				0F1DB5A9033BC3D344000126 /* make data executable */,
 				BC2944AC04D4EA7D007FAAC0 /* Frameworks */,
@@ -2895,14 +2889,6 @@
 				0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		20286C32FDCF999611CA2CEA /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				0249A669FF388E3911CA2CEA /* libstdc++.a */,
-			);
-			name = Libraries;
 			sourceTree = "<group>";
 		};
 		BC2944AC04D4EA7D007FAAC0 /* Frameworks */ = {
@@ -3893,7 +3879,7 @@
 		20286C28FDCF999611CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0410;
+				LastUpgradeCheck = 0420;
 			};
 			buildConfigurationList = BC4C11D4093BD55B00A3D738 /* Build configuration list for PBXProject "vm_project" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -4890,6 +4876,11 @@
 					.,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MAKE = /usr/bin/make;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffriend-injection",
+					"$(OTHER_CFLAGS)",
+				);
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6174,6 +6165,11 @@
 					.,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MAKE = /usr/bin/make;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffriend-injection",
+					"$(OTHER_CFLAGS)",
+				);
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6262,6 +6258,11 @@
 					.,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MAKE = "/usr/bin/make\n";
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffriend-injection",
+					"$(OTHER_CFLAGS)",
+				);
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6349,6 +6350,10 @@
 					.,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffriend-injection",
+					"$(OTHER_CFLAGS)",
+				);
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6438,6 +6443,11 @@
 					.,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MAKE = /usr/bin/make;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffriend-injection",
+					"$(OTHER_CFLAGS)",
+				);
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6527,6 +6537,11 @@
 					.,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MAKE = /usr/bin/make;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffriend-injection",
+					"$(OTHER_CFLAGS)",
+				);
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6615,6 +6630,11 @@
 					.,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MAKE = /usr/bin/make;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffriend-injection",
+					"$(OTHER_CFLAGS)",
+				);
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6703,6 +6723,11 @@
 					.,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MAKE = /usr/bin/make;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffriend-injection",
+					"$(OTHER_CFLAGS)",
+				);
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",
@@ -6792,6 +6817,10 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				MAKE = /usr/bin/make;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-ffriend-injection",
+					"$(OTHER_CFLAGS)",
+				);
 				OTHER_LDFLAGS = (
 					"-lX11",
 					"-lXext",

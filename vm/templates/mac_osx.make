@@ -48,9 +48,11 @@ CONFIGDEFS = \
              -DMANUFACTURER=${MANUFACTURER}
 # -DUSE_TWO_UNDERSCORES
 
+GNUFLAGS +=  -m32 -fno-exceptions -ffriend-injection -Winvalid-pch -fno-stack-protector
+
 INCLUDES += -I/usr/X11R6/include
 
-COMPILE.gnu.precomp  = ${COMPILE.gnu} ${CFLAGS} -precomp
+COMPILE.gnu.precomp  = ${COMPILE.gnu} ${GNUFLAGS} ${CPPFLAGS}  ${CFLAGS} -precomp
 
 # needed for OS X
 LOCALLIBS += -lcurses -framework CoreServices -framework Carbon
