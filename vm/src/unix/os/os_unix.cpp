@@ -312,22 +312,28 @@ static bool set_type_creator(const char *path, const char *type, const char *cre
   FSRef fsr;
   FSCatalogInfo cinfo;
     
-  if (path_to_fsref(path, &fsr) == false)
+  if (path_to_fsref(path, &fsr) == false) {
     return false;
-  if (FSGetCatalogInfo(&fsr, kFSCatInfoFinderInfo | kFSCatInfoFinderInfo, &cinfo, NULL, NULL, NULL));
+  }
+  if (FSGetCatalogInfo(&fsr, kFSCatInfoFinderInfo | kFSCatInfoFinderInfo, &cinfo, NULL, NULL, NULL) != noErr) {
     return false;
-      
+  }
+  
   finfo = (FileInfo*) &cinfo.finderInfo;
 
   finfo->fileType = 0;
-  if (type != NULL)
-      for (int i = 0; i < 4; i++)
-        finfo->fileType |= ((unsigned char)type[i]) << ((3 - i) * 8);
+  if (type != NULL) {
+    for (int i = 0; i < 4; i++) {
+        finfo->fileType |= ((unsigned char)type[i]) << ((3 - i) * 8); 
+    }
+  }
 
   finfo->fileCreator = 0;
-  if (creator != NULL)
-     for (int i = 0; i < 4; i++)
+  if (creator != NULL) {
+    for (int i = 0; i < 4; i++) {
        finfo->fileCreator |= (unsigned char)creator[i] << ((3 - i) * 8);
+    }
+  }
 
   return FSSetCatalogInfo(&fsr, kFSCatInfoFinderInfo, &cinfo) == noErr;
 }

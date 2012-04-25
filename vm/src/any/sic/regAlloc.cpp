@@ -128,7 +128,7 @@ void SICAllocator::allocate(PRegBList* g, RegisterString inc) {
       wasAllocatedHere = (r->loc != UnAllocated);
     } else if (  r->uplevelW
            ||   (keepUplevelRPRegsInMemory && r->uplevelR)
-           ||   SICDontUseRegs && !(r->isSAPReg() || r->isTempPReg())) {
+           ||   (SICDontUseRegs && !(r->isSAPReg() || r->isTempPReg()))) {
       // allocate uplevel-written _local_ vars to stack.
       allocateToStack(r);
       wasAllocatedHere = true;

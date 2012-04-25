@@ -1860,7 +1860,7 @@ void Process::prepare_to_return_to_self_after_conversion(
 
 bool Process::is_done_with_killing_or_deoptimizing(frame* dest_self_fr) {
   return  isDeoptimizing() // only used for goto bytecode primitive (only last stack frame)
-  ||      isKilling()  &&  killVF()->as_vframe()->fr == dest_self_fr; // for killActivationsUpTo prim
+  ||      (isKilling()  &&  killVF()->as_vframe()->fr == dest_self_fr); // for killActivationsUpTo prim
 
 }
 

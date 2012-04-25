@@ -692,8 +692,8 @@ void compiled_vframe::get_exprStackInfo_outgoing_args(
   else if ( calleeOrNull == NULL
        ||   calleeOrNull->desc == NULL
        ||   calleeOrNull->desc->is_lite()
-       ||   isSendOp(op)  &&  sel->is_string() 
-                          &&  stringOop(sel)->is_prim_name()) {
+       ||   (isSendOp(op)  &&  sel->is_string() 
+                          &&  stringOop(sel)->is_prim_name())) {
                           
     get_outgoing_arg_info_no_sendee( vfs, nds, i, len, e2 );
   } 

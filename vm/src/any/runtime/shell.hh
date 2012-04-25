@@ -14,7 +14,7 @@ void  abortSelf();                      // handle ^C
 
 oop   evalExpressions(Scanner* scanner);
 
-oop   eval(char* expression, char* fn = "<an eval string>");
+oop   eval(char* expression, const char* fn = "<an eval string>");
 
 extern const char **prog_argv;
 extern int          prog_argc;

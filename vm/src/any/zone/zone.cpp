@@ -1168,7 +1168,7 @@ int32 zone::sweeper(int32 maxVisit, int32 maxReclaim,
     
     if ((p->isZombie() ||
          p->isDebug()  ||
-         p->codeTableLink == NULL && !p->isUncommon() && !p->isDI()) &&
+         (p->codeTableLink == NULL && !p->isUncommon() && !p->isDI())) &&
         p->frame_chain == NoFrameChain) {
       // can be flushed - nobody will ever use it again
       if (PrintLRUSweep2) lprintf(" %s; flushed",
@@ -1352,7 +1352,7 @@ static void findNM_helper2(nmethod* nm) {
     if (first) {
       first = false;    // ignore top-level scope -- already printed
     } else if (s->key.selector == findNM_sel) {
-      if (ignoreRcvr || !s->isDeadBlockScope() && s->selfMapOop() == findNM_map) {
+      if (ignoreRcvr || (!s->isDeadBlockScope() && s->selfMapOop() == findNM_map)) {
         lprintf("nmethod 16r%lx \'%s\'\n", nm,
                selector_string(nm->key.selector));
         findNM_found++;

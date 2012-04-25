@@ -153,7 +153,7 @@ class memOopClass: public oopClass {
   int32 compute_derived_offset();
   friend bool is_object_start(oop p) {
     assert(((int)p & 0xffffff00) != 0x21212100, "catching a bug!");
-    return p->is_mark() || p->is_mem() && is_marked_memOop(memOop(p)); } 
+    return p->is_mark() || (p->is_mem() && is_marked_memOop(memOop(p))); } 
   int32 derived_offset() {
     assert(((int)this & 0xffffff00) != 0x21212100, "bug catching");
     return is_object_start(mark()) ? 0 : compute_derived_offset(); }

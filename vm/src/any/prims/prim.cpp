@@ -2511,7 +2511,7 @@ PrimDesc* getPrimDescOfBytes(const char* s, fint len, bool internal) {
   for (PrimDesc** ft = &fntable[0]; *ft; ft++) {
     for (e = *ft; e->name(); e++) {
       if (strncmp(s, e->name(), len) == 0 && e->name()[len] == '\0') {
-        if (   e->type() == InternalPrimitive && !internal
+        if (   (e->type() == InternalPrimitive && !internal)
             || e->type() == NotReallyAPrimitive) {
           goto error;
         } else {
@@ -2542,7 +2542,7 @@ PrimDesc* getPrimDescOfFirstInstruction(char* fn_start_arg, bool internal) {
     for (e = *ft; true; e++) {
       if ( e->fn() != NULL
       &&   fn_start == first_inst_addr((void*)e->fn())) {
-        if (   e->type() == InternalPrimitive && !internal
+        if (   (e->type() == InternalPrimitive && !internal)
             || e->type() == NotReallyAPrimitive) {
           return NULL;
         } else {

@@ -1094,8 +1094,8 @@ void Stubs::cleanup() {
   // happened
   needsWork = false;
   if (reserve == NULL ||
-      stubZone->freeBytes() * 100 / stubZone->capacity() > MaxFreePerc &&
-      stubZone->freeBytes() > MinFree) {
+      (stubZone->freeBytes() * 100 / stubZone->capacity() > MaxFreePerc &&
+      stubZone->freeBytes() > MinFree)) {
     LOG_EVENT("compacting PIC zone");
     if (PrintCodeReclamation) {
       lprintf("*compacting PIC zone\n");

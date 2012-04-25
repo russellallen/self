@@ -179,7 +179,7 @@ FLOAT_CMP_PRIM(float_ge_prim, >=)
 void floatOopClass::make_print_string(char* buf, const char* format) {
   sprintf(buf, format, value());
   char c = buf[0];
-  if (c >= '0' && c <= '9' || c == '-' && buf[1] >= '0' && buf[1] <= '9') {
+  if ((c >= '0' && c <= '9') || (c == '-' && buf[1] >= '0' && buf[1] <= '9')) {
     char *p;
     for (p = &buf[0]; c= *p, c != '\0' ; p++)
       if (c == '.' || c == 'e' || c == 'E')

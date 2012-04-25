@@ -35,8 +35,8 @@ class oTableBuffer: public oTableObj {
   oTableBuffer() { next = NULL; }
 
   bool is_oTableEntry(void* p) {
-    return p >= (void*) &entries[0] && p < (void*) &entries[object_table_size]
-      || next && next->is_oTableEntry(p); }
+    return (p >= (void*) &entries[0] && p < (void*) &entries[object_table_size])
+      || (next && next->is_oTableEntry(p)); }
 };
 
 class oTablePoint {

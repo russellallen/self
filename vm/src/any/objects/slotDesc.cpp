@@ -43,8 +43,8 @@ bool slotDesc::verify(Map* m) {
         error1("slot 0x%lx is in the object of a non-slots map", this);
         flag = false;
       } else if (offset->value() < 0 || 
-                 m && 
-                 offset->value() >= ((slotsMap*) m)->object_length->value()) {
+                 (m && 
+                 offset->value() >= ((slotsMap*) m)->object_length->value())) {
         error1("slot 0x%lx offset is out of range", this);
         flag = false;
       }

@@ -853,7 +853,7 @@ protected:
         || !includeMySends
         || selector->is_prim_name())
       return;
-    if (argc == 0  ||  argc == 1 && !is_punct(selector->bytes()[0])) {
+    if (argc == 0  ||  (argc == 1 && !is_punct(selector->bytes()[0]))) {
       addName(selector, mi.map());
     }
   }

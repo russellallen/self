@@ -697,7 +697,7 @@
       Node* succ = successors->nth(i);
       succ->removePrev(this);
       oop m = maps->nth(i);
-      if ( c && constant == m          // have a constant
+      if ( (c && constant == m)          // have a constant
       ||   theMap == m                 // have a map, found it
       ||   m->map() == theMap->map_addr()  // have an oop, looking for a map
          ) {
@@ -2162,7 +2162,7 @@
                                 bool describeUnallocated) {
     // set nd (if possible) and return whether PReg is live and allocated
     fint dummy1, dummy2;
-    if (r == NULL || r->loc == UnAllocated && !describeUnallocated) {
+    if (r == NULL || (r->loc == UnAllocated && !describeUnallocated)) {
       // not used
       return false;
     } else if (r->scope == NULL) {

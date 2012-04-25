@@ -132,8 +132,8 @@ void compilingLookup::chooseCompiler() {
     // Note: count is incremented BEFORE a Sic compile
     if (compiler == SIC) {
       ++SICCompilationCount;
-      if (SICMinCompilationCount != -1  &&  SICMinCompilationCount > SICCompilationCount
-      ||  SICMaxCompilationCount != -1  &&  SICMaxCompilationCount < SICCompilationCount)
+      if ((SICMinCompilationCount != -1  &&  SICMinCompilationCount > SICCompilationCount)
+      ||  (SICMaxCompilationCount != -1  &&  SICMaxCompilationCount < SICCompilationCount))
         compiler = NIC;
     }
   # endif // SIC_COMPILER

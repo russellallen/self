@@ -729,7 +729,7 @@ Token* Scanner::read_number(fint c) {
       return TokenizingError("numeric constant too large");
     i *= 10;
     i += asnum(c);
-    if (i > MAXSELFINT || i == MAXSELFINT && !neg) {
+    if (i > MAXSELFINT || (i == MAXSELFINT && !neg)) {
       return TokenizingError("numeric constant too large");
     }
   }
@@ -753,13 +753,13 @@ Token* Scanner::read_number(fint c) {
         }
         int32 newi = i * base + v;
         int32 maxi = MAXSELFINT / base;
-        if ((i > maxi || i == maxi && !neg) ||
-            (newi > MAXSELFINT || newi == MAXSELFINT && !neg)) {
+        if ((i > maxi || (i == maxi && !neg)) ||
+            (newi > MAXSELFINT || (newi == MAXSELFINT && !neg))) {
           return TokenizingError("numeric constant too large");
         }
         i = newi;
         c = get_char();
-      } while (is_digit(c) || base > 10 && is_alphadigit(c));
+      } while (is_digit(c) || (base > 10 && is_alphadigit(c)));
     } else {
       return TokenizingError("expecting a number after the base specifier");
     }
@@ -845,7 +845,7 @@ Token* Scanner::read_general_string(char delimiter, Token::TokenType tokenType) 
     if (b >= &buffer[ScannerBufferSize]) {
       return TokenizingError("string literal or comment too long");
     }
-  } while (cannot_be_a_delimeter  ||  c != delimiter && c != EOF);
+  } while (cannot_be_a_delimeter  ||  (c != delimiter && c != EOF));
   if (c == EOF) {
     return TokenizingError("missing trailing ' of string literal or comment");
   }

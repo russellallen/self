@@ -29,16 +29,17 @@ slotsOop basic_create_method(slotList* slots, ByteCode* b,
                              methodMap &m1, char *annotation,
                              bool isBlock);
 slotsOop create_outerMethod(slotList* slots, ByteCode* b,
-                            const char* annotation,
-                            IntBList* stack_deltas);
+                            const char* annotation = "",
+                            IntBList* stack_deltas = NULL);
+
 const char* check_byteCodes_and_literals( smi& errorIndex,
                                           IntBList*& stack_deltas,
                                           byteVectorOop codes,
                                           objVectorOop literals );
 class methodMap: public codeSlotsMap {
   friend slotsOop create_outerMethod(slotList* slots, ByteCode* b,
-                                     const char* annotation = "",
-                                     IntBList* stack_deltas = NULL);
+                                     const char* annotation,
+                                     IntBList* stack_deltas);
  protected:
   // instance variables
   byteVectorOop    _codes;
@@ -217,8 +218,8 @@ class outerMethodMap: public methodMap {
 // Forward-declaration for friend
 
 slotsOop create_blockMethod(slotList* slots, ByteCode* b,
-                            const char* annotation,
-                            IntBList* stack_deltas);
+                            const char* annotation = "",
+                            IntBList* stack_deltas = NULL);
 slotsOop basic_create_method(slotList* slots, ByteCode* b,
                              methodMap* m1, const char* annotation,
                              bool isBlock);
@@ -251,8 +252,8 @@ class blockMethodMap: public methodMap {
   oop mirror_source_length(oop r) { Unused(r);  return _sourceLen; }
 
   friend slotsOop create_blockMethod(slotList* slots, ByteCode* b,
-                                     const char* annotation = "",
-                                     IntBList* stack_deltas = NULL);
+                                     const char* annotation,
+                                     IntBList* stack_deltass);
   friend slotsOop basic_create_method(slotList* slots, ByteCode* b,
                                       methodMap* m1, const char* annotation,
                                       bool isBlock);

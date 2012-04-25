@@ -25,8 +25,8 @@ bool MonitorWindow::open_and_resize(Monitor* m) {
     x = true;
   # endif
   pw = q && !SpyDisplay[0]   ?  (AbstractPlatformWindow*) new     QuartzWindow
-     : x                     ?  (AbstractPlatformWindow*) new  XPlatformWindow
-     :                          NULL;
+     : (x                    ?  (AbstractPlatformWindow*) new  XPlatformWindow
+     :                          NULL);
   if (pw == NULL) {
     warning("no window system for spy");
     return false;

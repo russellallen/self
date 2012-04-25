@@ -1702,8 +1702,8 @@ bool Recompilation::checkForActivationMirrors() {
              end->vfo_locals_of_home_frame());
 
   return  vfo->is_equal(start)
-    ||    vfo->is_above(start) && (vfo->is_below(end)
-    ||    vfo->is_equal(end));
+    ||    (vfo->is_above(start) && (vfo->is_below(end)
+    ||    vfo->is_equal(end)));
 }
 
 
@@ -1741,8 +1741,8 @@ void Recompilation::fillValues(frame* newFr) {
         // but be careful not to remap blocks whose homes still run the old
         // version of the nmethod
         frame* bs = blockOop(b)->scope(true);
-        if (   bs >= firstBS1 && bs <= lastBS1
-            || bs >= firstBS2 && bs <= lastBS2) {
+        if (   (bs >= firstBS1 && bs <= lastBS1)
+            || (bs >= firstBS2 && bs <= lastBS2)) {
           // block's home is either in removed frame or in copy of it
           blockOop(b)->remap(nd->block->map(), newFr);
         }

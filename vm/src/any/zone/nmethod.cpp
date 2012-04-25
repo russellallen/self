@@ -1323,7 +1323,7 @@ void sendDescFinder::find_it() {
                           : a->asSendDesc(nm);
     
     PcDesc* sdpc= nm->containingPcDesc((char*)sd);
-    if ( ( sdpc->byteCode == pc  ||   pc == PrologueBCI && sdpc->byteCode == mi.firstBCI())
+    if ( ( sdpc->byteCode == pc  ||   (pc == PrologueBCI && sdpc->byteCode == mi.firstBCI()))
     &&   sdpc->scope == p->scope) {
       // found the right sendDesc: bytecodes & scope match, or got first
       // intr check (which may be in bci 0 instead of prologue)

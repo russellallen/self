@@ -105,6 +105,7 @@ const int32 oopSize = sizeof(oop); // Warning: Duplicated in asmDefs_ppc.h
 
 // some useful macros
 
+
 # define MYSELF(foo) foo
 
 # define LOOP_UNROLL(count, body)                                             \
@@ -140,15 +141,16 @@ const int32 oopSize = sizeof(oop); // Warning: Duplicated in asmDefs_ppc.h
  * inline void Unused(void *x) { x, 0; }
  * inline void Unused(void (*x)(...)) { x, 0; }
  */
- 
-# define Unused(x) ((x), 0)
 
+// # define Unused(x) ((x), 0)
+// This macro is more portable -- topa
+#define Unused(x) (void)(x)
 
 #if GENERATE_DEBUGGING_AIDS
 # define UsedOnlyInAssert(v)
 #else
-inline void UsedOnlyInAssert(double x)   { x, 0; }
-inline void UsedOnlyInAssert(void *x) { x, 0; }
+inline void UsedOnlyInAssert(double x)   { (void)(x), 0; }
+inline void UsedOnlyInAssert(void *x) { (void)(x), 0; }
 #endif
 
 extern "C" { 

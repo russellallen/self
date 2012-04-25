@@ -99,7 +99,7 @@ oop vframeMap::mirror_sender(oop obj) {
   abstract_vframe* vf = vfo->as_vframe();
   abstract_vframe* sender = vf->sender();
   if (! sender ||
-      vfo->process() != vmProcess && sender->is_first_self_vframe())
+      (vfo->process() != vmProcess && sender->is_first_self_vframe()))
     return ErrorCodes::vmString_prim_error(NOSENDERERROR);
   
   vframeOop nvfo = new_senderVFrameOop(vfo->process(), vfo, sender);

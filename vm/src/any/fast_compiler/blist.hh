@@ -68,7 +68,7 @@ template<class data_type> class BoundedListTemplate : public ResourceObj {
   }
 
   void nthPut(int32 i, data_type elem, bool okGrow = true) {
-    if (i < 0 || i > len || !okGrow && i == len)
+    if (i < 0 || i > len || (!okGrow && i == len))
       fatal("accessing nonexisting list element");
     if (okGrow && i == len) {
       append(elem);   /* data array needs to grow */

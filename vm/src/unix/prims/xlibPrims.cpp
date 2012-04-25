@@ -58,10 +58,11 @@
 
   // the X I/O error handler must not return (or X will abort Self)
   int XErrorHandlers::handle_X_IO_error(Display* display) {
+    Unused(display);
     const char *msg= "X I/O Error .. aborting process.\n";
     write(1, msg, strlen(msg)); // don't use lprintf (calls malloc)
     print_stack_and_abort();
-    return(display, 0);    // to mollify compiler
+    return 0;    // to mollify compiler
   }
  
 

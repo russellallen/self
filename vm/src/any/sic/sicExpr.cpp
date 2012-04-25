@@ -61,8 +61,8 @@
   }
 
   bool ConstantSExpr::equals(SExpr* other) {
-    return other->isConstantSExpr() && other->constant() == constant() ||
-           other->isMapSExpr() && other->myMapOop() == myMapOop();
+    return (other->isConstantSExpr() && other->constant() == constant()) ||
+           (other->isMapSExpr() && other->myMapOop() == myMapOop());
   }
 
   const fint MergeSExpr::SplittableBit        = 2;
@@ -193,7 +193,7 @@
     if (!e->node()) setSplittable(false);
     for (fint i = 0; i < exprs->length(); i++) {
       SExpr* e1 = exprs->nth(i);
-      if (e->hasMap() && e1->hasMap() && e->myMapOop() == e1->myMapOop() ||
+      if ((e->hasMap() && e1->hasMap() && e->myMapOop() == e1->myMapOop()) ||
           e->equals(e1)) {
         // an equivalent expression is already in our list
         // if unsplittable we don't need to do anything except

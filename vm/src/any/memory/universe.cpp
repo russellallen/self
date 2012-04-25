@@ -396,9 +396,9 @@ void universe::read_versions_in_snapshot_header(FILE *file)
   // snapshot whose version is 10. -mabdelmalek 11/02
 
   bool can_read_snapshot_with_mismatched_version =
-        snapshot_version == 10  &&  VM_snapshot_version == 11
-    || (snapshot_version == 10 || snapshot_version == 11)  &&  VM_snapshot_version == 12
-    || (snapshot_version == 12) && VM_snapshot_version == 13;
+        (snapshot_version == 10  &&  VM_snapshot_version == 11)
+    || ((snapshot_version == 10 || snapshot_version == 11)  &&  VM_snapshot_version == 12)
+    || ((snapshot_version == 12) && VM_snapshot_version == 13);
     
   if (can_read_snapshot_with_mismatched_version)
   	warning6("\n\tThis snapshot was saved using a different version\n"

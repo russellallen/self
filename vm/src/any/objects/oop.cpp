@@ -350,7 +350,7 @@ mirrorOop oopClass::as_mirror(bool mustAllocate) {
 // eval method as if self is receiver
 
 oop oopClass::evaluate_in_context_prim(oop method) {
-  if ( !NakedMethods && is_method_like()
+  if ( (!NakedMethods && is_method_like())
   ||   is_vframe())
     return ErrorCodes::vmString_prim_error(BADTYPEERROR);
   

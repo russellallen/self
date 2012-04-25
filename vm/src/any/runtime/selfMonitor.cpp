@@ -147,7 +147,7 @@ void SelfMonitor:: initialize_contents() {
   _is_paging_showing = false;
   _old_rsrc_used = -1;
   _old_num_calls = MonitorCallsToVM::all_calls() - 1;
-  _old_access_calls = MonitorCallsToVM::access_method_calls(); - 1;
+  _old_access_calls = MonitorCallsToVM::access_method_calls() - 1;
   _elapsed_ticks = 0;
   _total_tick_no = 1;        // 1 to avoid divide-by-zero 
   _old_switches = 0;
@@ -872,7 +872,7 @@ ExecutionMonitor::Activities ExecutionMonitor::compiled_activity(char* pc) {
 ExecutionMonitor::Activities ExecutionMonitor::current_tick_activity() {
   // find part of system to which current tick should be attributed
   if ( ShowLookupInMonitor::lookup_nesting >  1 
-  ||   ShowLookupInMonitor::lookup_nesting == 1  &&  !ShowCompileInMonitor::method_being_compiled )
+  ||   (ShowLookupInMonitor::lookup_nesting == 1  &&  !ShowCompileInMonitor::method_being_compiled) )
     return lookup;
   
   if (ShowCompileInMonitor::method_being_compiled)

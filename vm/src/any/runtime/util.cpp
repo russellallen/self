@@ -148,12 +148,12 @@ oop catchThisOne;
 
 void breakpoint() {
   fint junk = 0;
-  junk, 0;
+  (void)junk;
 }
 
 void error_breakpoint() {
   static fint junk = 0;
-  junk, 0;
+  (void)junk;
   # if COMPILER == MWERKS_COMPILER
     // cannot run code from debugger:
     if (WizardMode) {

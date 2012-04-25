@@ -10,7 +10,7 @@
 # endif
 
 // Forward-declaration for friend
-mirrorOop create_mirror(oop reflectee);
+mirrorOop create_mirror(oop reflectee=create_slots((slotList*)NULL));
 
 class mirrorMap: public slotsMapDeps {
  public:
@@ -19,7 +19,7 @@ class mirrorMap: public slotsMapDeps {
   VtblMapType vtblMapType() { return MAP_TYPE_NAME(mirrorMap); }
 
   // creation operation
-  friend mirrorOop create_mirror(oop reflectee= create_slots((slotList*)NULL));
+  friend mirrorOop create_mirror(oop reflectee);
   
   // mirror operation
   mirrorOop mirror_proto() { return Memory->mirrorMirrorObj; }

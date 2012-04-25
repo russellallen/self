@@ -1393,7 +1393,7 @@
     if (info->uninlinable) {
       lookupType |= UninlinableSendMask;
     }
-    if (nstages == 1 || recompilee && recompilee->version() >= MaxVersions-1) {
+    if (nstages == 1 || (recompilee && recompilee->version() >= MaxVersions-1)) {
       // don't use any counting code
       lookupType = withCountBits(lookupType, NonCounting);
     } else if (currentProcess->isUncommon() && !info->uninlinable) {
@@ -1475,8 +1475,8 @@
       assert(argc == 0 || argc == 1, "wrong number of args");
       NameDesc* nd = NULL;
       if (sd->is_map_slot() ||
-          s->isVFrameScope() &&
-          (nd = s->vf()->get_name_desc(sd, true), nd && nd->isValue())) {
+          (s->isVFrameScope() &&
+          (nd = s->vf()->get_name_desc(sd, true), nd && nd->isValue()))) {
         // load value of constant slot or of unallocated (constant) data slot
         assert(argc == 0, "must be an access");
         oop p = nd ? nd->value() : sd->data;
@@ -2225,8 +2225,8 @@
           // to a caller nmethod?  Find out.
           frame* home = blockOop(val)->scope(true);
           if (home == NULL ||
-              theSIC->vscopes &&
-              home > theSIC->vscopes->last()->vf->fr->block_scope_of_home_frame()) {
+              (theSIC->vscopes &&
+              home > theSIC->vscopes->last()->vf->fr->block_scope_of_home_frame())) {
             // ok, don't need to remap the block
           } else {
             if (PrintRecompilation) {

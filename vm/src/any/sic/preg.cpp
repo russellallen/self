@@ -989,7 +989,7 @@
   bool NoPReg::verify() { return true; }
   
   bool ConstPReg::verify() {
-    bool ok = PReg::verify() && constant->is_map() || constant->verify();
+    bool ok = (PReg::verify() && constant->is_map()) || constant->verify();
 # if TARGET_ARCH == SPARC_ARCH
     if (int32(constant) < maxImmediate && int32(constant) > -maxImmediate
         && loc != UnAllocated) {

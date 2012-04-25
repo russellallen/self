@@ -334,7 +334,7 @@ void Stack::print() {
   fint curFrame = 0;
   fint printFrame = 0;
   for (; curFrame < maxFrame;  ++curFrame) {
-    if (v == NULL || v->is_first_self_vframe() && omitFirst) return;
+    if (v == NULL || (v->is_first_self_vframe() && omitFirst)) return;
     if (v->print_frame(printFrame)) {
       printFrame ++;
     }

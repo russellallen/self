@@ -257,8 +257,8 @@ class compiled_vframe: public abstract_vframe {
   bool EQ(abstract_vframe *f) {
     return 
       this == f
-      ||     fr == f->fr
-         &&  desc->is_equal(f->as_compiled()->desc); }
+      ||     (fr == f->fr
+         &&  desc->is_equal(f->as_compiled()->desc)); }
 
   
  protected:

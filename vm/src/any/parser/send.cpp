@@ -14,7 +14,7 @@
     ErrorMessage(b->errorMessage); \
     return false; \
   } else /* else is for semicolon */ \
-   0 /* silence unwanted ; warning */
+   (void)0 /* silence unwanted ; warning */
   
   
 void Send::PrintDelegatee() {

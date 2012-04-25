@@ -251,22 +251,22 @@ class FlagSettingInt {
   /* profiling impossible */
 # define FOR_ALL_PROFILING_DEBUG_PRIMS(template)                              \
     template(VMProfileCompaction, bool, "<bool>", BooleanPrimType, false,     \
-    Memory->falseObj, (flag == Memory->falseObj), 0,                          \
+    Memory->falseObj, (flag == Memory->falseObj), (void)0,                    \
     "no profiling of zone compaction (cannot be changed)", true)              \
     template(VMProfiling, bool, "<bool>", BooleanPrimType, false,             \
-    Memory->falseObj, (flag == Memory->falseObj), 0,                          \
+    Memory->falseObj, (flag == Memory->falseObj), (void)0,                    \
     "no VM-level profiling (cannot be changed)", true)                        \
     template(VMCompilerProfiling, bool, "<bool>", BooleanPrimType, false,     \
-    Memory->falseObj, (flag == Memory->falseObj), 0,                          \
+    Memory->falseObj, (flag == Memory->falseObj), (void)0,                    \
     "no VM-level profiling of the compiler (cannot be changed)", true)        \
     template(VMSICProfiling, bool, "<bool>", BooleanPrimType, false,          \
-    Memory->falseObj, (flag == Memory->falseObj), 0,                          \
+    Memory->falseObj, (flag == Memory->falseObj), (void)0,                    \
     "no VM-level profiling of the SIC (cannot be changed)", true)             \
     template(VMSICLongProfiling, bool, "<bool>", BooleanPrimType, false,      \
-    Memory->falseObj, (flag == Memory->falseObj), 0,                          \
+    Memory->falseObj, (flag == Memory->falseObj), (void)0,                    \
     "no VM-level profiling of the SIC (cannot be changed)", true)             \
     template(VMNICProfiling, bool, "<bool>", BooleanPrimType, false,          \
-    Memory->falseObj, (flag == Memory->falseObj), 0,                          \
+    Memory->falseObj, (flag == Memory->falseObj), (void)0,                    \
     "no VM-level profiling of the NIC (cannot be changed)", true)
 
 # endif // TARGET_IS_PROFILED

@@ -10,7 +10,7 @@
 # endif
 
 // Forward-declaration for friend
-slotsOop create_slots(slotList* , const char*);
+slotsOop create_slots(slotList* , const char* annotation= "");
 int32 map_chain_offset();
 slotsMapDeps* map_from_map_chain(nmln* p) ;
 
@@ -61,7 +61,7 @@ class slotsMapDeps: public slotsMap {
 
  public:
   // creation operations
-  friend slotsOop create_slots(slotList* slots, const char* annotation = "");
+  friend slotsOop create_slots(slotList* slots, const char* annotation);
   oop fill_in_slots(slotList* slist, fint slotCount);
   
   // map chain and dependents
