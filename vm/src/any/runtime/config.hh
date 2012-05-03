@@ -188,10 +188,10 @@
 
 
 
-
+# if GCC3
 // GCC3.0 complains if pragmas are enabled
 class DefineGCC3ToFix_storage_size_of_ZTxxXXXXX_isnt_known {
  public:
   virtual void print();
 };
-
+# endif
