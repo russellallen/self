@@ -78,7 +78,9 @@ void relay(int sock) {
       int count = read(sock, buf, sizeof(buf));
       if (count <= 0)
 	break;
-      write(1, buf, count);
+      if (write(1, buf, count) == -1) {
+	break; // this is bad.
+      }
     }
     trace("read failed - assuming shutdown");
     /* Now exit, thereby terminating parent (and child). */

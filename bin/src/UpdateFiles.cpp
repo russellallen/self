@@ -152,7 +152,10 @@ char* File::getRevisionFromDate(char *date) {
     exit(-1);
   }
 
-  fgets(line_buf, line_buf_size, file);
+  if (fgets(line_buf, line_buf_size, file) == NULL) {
+    fprintf(stderr, "Couldn't read line from %s", path);
+    exit(-1);
+  }
   line_buf[strlen(line_buf) - 1] = '\0';
   fclose(file);
   return strdup(line_buf);
@@ -227,7 +230,10 @@ void File::become(File& src, int save) {
 void File::becomeIfConfirmed(File& basefile, int save) {
   char line[LINE_LENGTH];
   fprintf(stderr, "Copy %s to %s [yn]? ", basefile.path, path);
-  gets(line);
+  if (fgets(line, LINE_LENGTH, stdin) == NULL) {
+    fprintf(stderr, "Couldn't read line from stdin");
+    exit(-1);
+  }
   if (line[0] == '\0' || line[0] == 'y' || line[0] == 'Y') {
     become(basefile, save);
   }

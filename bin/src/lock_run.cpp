@@ -91,8 +91,8 @@ int lock_file(char *name) {
   char msg[2*MAXHOSTNAMELEN];
   strcpy(msg, "locked by compile on ");
   strcat(msg, hostname);
-  write(lock_fd, msg, strlen(msg));
-  return 0;
+  ssize_t written = write(lock_fd, msg, strlen(msg));
+  return (written >= 0) ? 0 : -1;
 }
 
 main(int argc, char *argv[]) {

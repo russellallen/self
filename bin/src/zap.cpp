@@ -58,7 +58,11 @@ main(int argc, char **argv) {
     exit(1);
   }
 
-  fgets(buf, sizeof buf, fin);
+  if (fgets(buf, sizeof buf, fin) == NULL) {
+    fprintf( stderr, "cant read from process\n" );
+    exit(1);
+  }
+
   for ( i=0; buf[i] != 'C' && buf[i] != '\0'; i++);
   if (buf[i] == 'C')
     text_pos = i;
