@@ -19,7 +19,7 @@
 # define gethostname(h,l) sysinfo(SI_HOSTNAME,(h),(l)) 
 #endif
 
-char *ps = "ps -gx";
+const char *ps = "ps -gx";
 
 char hostname[MAXHOSTNAMELEN];
 

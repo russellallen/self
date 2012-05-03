@@ -12,7 +12,7 @@
  * tests whether a named file is a dangling link
  */
 
-char usage[] = "usage: dangling file\n";
+const char usage[] = "usage: dangling file\n";
 
 main(argc, argv)
      int argc;

@@ -33,7 +33,7 @@
   bool OS::is_directed_allocation_supported() { return true; } // should return desiredAddress
 
   char* OS::allocate_heap_aligned(caddr_t desiredAddress,
-                                  int32 size, int32 align, char* name,
+                                  int32 size, int32 align, const char* name,
                                   bool mustAllocate) {
       if ( desiredAddress != NULL
       &&   desiredAddress ==
@@ -279,7 +279,7 @@ bool OS::is_non_unix_path(const char* s) {
 
 # if TARGET_OS_VERSION != MACOSX_VERSION
 
-bool OS::setup_snapshot_to_run(char* fileName) {
+bool OS::setup_snapshot_to_run(const char* fileName) {
   // make executable
   struct stat stb;
   if (stat(fileName, &stb)) return false;

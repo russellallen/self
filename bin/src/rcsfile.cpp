@@ -16,7 +16,7 @@ static char line[BUFSIZE];
 # define true  1
 # define false 0
 
-static int isprefix(char* s, char* t) {
+static int isprefix(const char* s,const char* t) {
   //return true if t is prefix of s; false otherwise  */
   int  j, k;
 

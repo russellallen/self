@@ -87,7 +87,10 @@ void usage() {
 struct File {
   char* path;
 
-  File(char* s0, char* s1 = NULL, char* s2 = NULL, char* s3 = NULL);
+  File(const char* s0, 
+       const char* s1 = NULL, 
+       const char* s2 = NULL,
+       const char* s3 = NULL);
   ~File() { free(path); }
 
   time_t modTime();
@@ -99,7 +102,7 @@ struct File {
   void becomeIfOutdated(File& basefile, int save);
 
   int addTrailingNewline();
-  int addTrailingNewlineInto(File*& copy, char* copy_name);
+  int addTrailingNewlineInto(File*& copy, const char* copy_name);
 
   char *getRevisionFromDate(char *date);
 
@@ -134,11 +137,11 @@ char* File::getRevisionFromDate(char *date) {
   return strdup(line_buf);
 }
 
-File::File(char* s0, char* s1, char* s2, char* s3) {
-  int length =             strlen(s0)
-    	       + (s1 ? 1 + strlen(s1) : 0)
-	       + (s2 ? 1 + strlen(s2) : 0)
-	       + (s3 ? 1 + strlen(s3) : 0);
+File::File(const char* s0, const char* s1, const char* s2, const char* s3) {
+  int length =  strlen(s0)
+    + (s1 ? 1 + strlen(s1) : 0)
+    + (s2 ? 1 + strlen(s2) : 0)
+    + (s3 ? 1 + strlen(s3) : 0);
   path = (char*) malloc(length + 1);
   strcpy(path, s0);
   if (s1) { strcat(path, "/"); strcat(path, s1); }
@@ -302,7 +305,7 @@ int File::addTrailingNewline() {
   return 0;
 }
 
-int File::addTrailingNewlineInto(File*& copy, char* copy_name) {
+int File::addTrailingNewlineInto(File*& copy, const char* copy_name) {
   FILE* file;
   if (!(file = fopen(path, "r"))) {
     fprintf(stderr, "Couldn't open %s, which should already exist\n", path);

@@ -12,7 +12,7 @@
  * tests whether two named files are linked together
  */
 
-char usage[] = "usage: linked file1 file2\n";
+const char usage[] = "usage: linked file1 file2\n";
 
 main(argc, argv)
      int argc;
