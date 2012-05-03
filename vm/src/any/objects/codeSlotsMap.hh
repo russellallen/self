@@ -60,16 +60,14 @@ class methodMap: public codeSlotsMap {
 
   virtual methodMap* get_lexical_link_map() = 0;
 
-  // protected: (does not work.)
+ protected:
   void setLiterals(objVectorOop lit) {
     Memory->store((oop*)&_literals, lit); }
   void setCodes(byteVectorOop c) {
     Memory->store((oop*)&_codes, c); }
   void setSource(stringOop s)   {
     Memory->store((oop*)&_source, s); }
-
-  protected: // was above (does not work.)
-
+  
   // functions to implement local access bytecodes
    
   void fix_local_bytecodes_and_links(    oldMapList* old_maps,
