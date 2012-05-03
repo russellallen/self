@@ -3,12 +3,9 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma once
-
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
-
 
 
 // hint: if you change this file, do a "touch *.o; rm {oop,prim,debug}.o"

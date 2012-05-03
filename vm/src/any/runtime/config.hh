@@ -3,8 +3,6 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma once
-
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
@@ -184,10 +182,10 @@
 
 
 
-# if defined(__GNUC__) && __GNUC__ < 4
+
 // GCC3.0 complains if pragmas are enabled
 class DefineGCC3ToFix_storage_size_of_ZTxxXXXXX_isnt_known {
  public:
   virtual void print();
 };
-# endif
+

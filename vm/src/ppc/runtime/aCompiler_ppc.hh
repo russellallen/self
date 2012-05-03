@@ -5,8 +5,6 @@
    See the LICENSE file for license information. */
 
 
-# pragma once
-
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif

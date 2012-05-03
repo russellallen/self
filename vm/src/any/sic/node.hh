@@ -5,8 +5,6 @@
 
 // This file defines the intermediate language used by the SIC
 
-# pragma once
-
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif

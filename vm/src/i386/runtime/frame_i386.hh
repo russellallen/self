@@ -7,8 +7,6 @@
 // This file is INCLUDED into the middle of the frame class.
 
 
-# pragma once
-
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif

@@ -6,8 +6,6 @@
 // Contains platform-specific declarations for MacToolboxWindow.
 // This file is included into middle of class declaration.
 
-# pragma once
-
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif

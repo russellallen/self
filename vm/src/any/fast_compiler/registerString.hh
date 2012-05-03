@@ -5,8 +5,6 @@
 
 # ifdef FAST_COMPILER
 
-# pragma once
-
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
