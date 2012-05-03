@@ -132,9 +132,15 @@
 # endif
 # undef s
 
-# if TARGET_OS_VERSION == LINUX_VERSION
-  # define GCC3 1
-#endif
+
+# if defined(__GNUC__)
+  # define GCC 1
+  # if __GNUC__ < 4
+    # define GCC3 1
+  # else
+    # define GCC4 1
+  # endif
+# endif
 
 // The following definitions make machine-dependent asserts more convenient
 # if  TARGET_ARCH == SPARC_ARCH

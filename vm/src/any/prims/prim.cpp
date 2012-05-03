@@ -2447,7 +2447,7 @@ static PrimDesc fntable2[] = {
 },
 # endif
 
-# if GCC3
+# if GCC
   // define debug prims last 'cause they mess up indentation
   # define DefineDebugPrim(                                                     \
     flagName, flagType, flagTypeName, primReturnType,                         \
