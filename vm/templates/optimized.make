@@ -1,4 +1,4 @@
-# Sun-$Revision: 30.9 $
+# Sun-$Revision: 30.9 $ -*- mode: makefile -*-
  
 # Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information.

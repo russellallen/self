@@ -1,4 +1,4 @@
-# Sun-$Revision: 30.15 $
+# Sun-$Revision: 30.15 $ -*- mode: makefile -*-
 
 # Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information.
@@ -19,10 +19,11 @@ FLAGS = -O2 \
         -DCOMPILER=GCC_COMPILER \
         -fno-exceptions
 
-COMPILE.c = gcc ${FLAGS} -c
-COMPILE.cpp = gcc -xc++ ${FLAGS} -c
-LINK.c = gcc
-LINK.cpp = gcc
+GCC ?= ${CC}
+COMPILE.c = ${GCC} ${FLAGS} -c
+COMPILE.cpp = ${GCC} -xc++ ${FLAGS} -c
+LINK.c = ${GCC}
+LINK.cpp = ${GCC}
 
 CLEAN_EXPR = ${AOUT} *.o
 

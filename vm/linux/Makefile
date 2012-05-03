@@ -5,13 +5,14 @@
  
 ROOT         = ../..
 FILES        = Makefile
-DIRECTORIES  = debug optimized profiled interpreter generated links
+DIRECTORIES  = generated debug optimized profiled interpreter links
 
 default:
+	@cd generated; ${MAKE}
 	@cd debug;     ${MAKE}
 	@cd optimized; ${MAKE}
 	@cd interpreter; ${MAKE}
-	@cd generated; ${MAKE}
+
 
 include        ${ROOT}/templates/sources.make
 
