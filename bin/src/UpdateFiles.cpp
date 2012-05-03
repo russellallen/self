@@ -6,14 +6,16 @@
 # include <stddef.h> 
 # include <stdio.h>
 # include <stdlib.h>
+# include <time.h>
 # include <dirent.h>
 # include <string.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/param.h>
 # include <errno.h>
-#if TARGET_OS_VERSION == SOLARIS_VERSION \
-||  TARGET_OS_VERSION == MAC_OSX_VERSION
+#if TARGET_OS_VERSION == SUNOS_VERSION \
+||  TARGET_OS_VERSION == MACOSX_VERSION \
+||  TARGET_OS_VERSION == LINUX_VERSION
 # include <unistd.h>
 #else
   extern "C" int unlink(const char *);
@@ -83,6 +85,25 @@ void usage() {
   fprintf(stderr, " -h: print this message.\n");
   fprintf(stderr, " If no files are specified, the directory is updated.\n");
 }
+
+char* timeAsString(time_t t) {
+
+  char* outstr = (char*) malloc(sizeof(char) * 64);
+  time_t timeToConvert = t;
+  struct tm* localtm = localtime(&timeToConvert);
+  if (localtm == NULL) {
+    perror("localtime");
+    exit(EXIT_FAILURE);
+  }
+
+  if (strftime(outstr, sizeof(outstr), "%c", localtm) == 0) {
+    fprintf(stderr, "strftime returned 0");
+    exit(EXIT_FAILURE);
+  }  
+  return outstr;
+}
+
+
 
 struct File {
   char* path;
@@ -215,10 +236,14 @@ void File::becomeIfConfirmed(File& basefile, int save) {
 void File::becomeIfOutdated(File& basefile, int save) {
   if (modTime() < basefile.modTime()) {
     if (verbose) {
+      char* local = timeAsString(modTime());
+      char* base = timeAsString(basefile.modTime());
       fprintf(stderr,
 	      "Updating %s since outdated\n"
-	      "  (local file mod time: %d; basefile mod time: %d)",
-	      path, modTime(), basefile.modTime());
+	      "  (local file mod time: %s; basefile mod time: %s)",
+	      path, local, base);
+      free(local);
+      free(base);
     }
     if (strcmp(path, program) == 0) {
       // The file we are about to overwrite has the same name as the
@@ -240,10 +265,14 @@ void File::becomeIfOutdated(File& basefile, int save) {
     }
   } else {
     if (verbose) {
+      char* local = timeAsString(modTime());
+      char* base = timeAsString(basefile.modTime());
       fprintf(stderr,
 	      "Not updating %s since not outdated\n"
-	      "  (local file mod time: %d; basefile mod time: %d)",
-	      path, modTime(), basefile.modTime());
+	      "  (local file mod time: %s; basefile mod time: %s)",
+	      path, local, base);
+      free(local);
+      free(base);
     }
   }
 }
