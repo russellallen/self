@@ -1,7 +1,7 @@
 # ifdef __ppc__
 // Sun-$Revision: 30.9 $ 
 
-// Copyright 1992-9 Sun Microsystems, Inc. and Stanford University.
+// Copyright 1992-2012 AUTHORS.
 //   See the LICENSE file for license information. 
 
 # define round(x, y) (((x) + (y)-1) & ~((y)-1))

@@ -1,7 +1,7 @@
 %{
   /* Sun-$Revision: 30.6 $ */
 
-  /* Copyright 1993-2006 Sun Microsystems, Inc. and Stanford University.
+  /* Copyright 1992-2012 AUTHORS.
      See the LICENSE file for license information. */
 
   /* Remove "_" in front of all identifiers. */

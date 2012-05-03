@@ -1,7 +1,7 @@
 # ifdef __i386__
 // Sun-$Revision: 1.6 $ 
 
-// Copyright 1992-9 Sun Microsystems, Inc. and Stanford University.
+// Copyright 1992-2012 AUTHORS.
 //   See the LICENSE file for license information. 
 
 // next 5 lines DUPLICATED in config.hh

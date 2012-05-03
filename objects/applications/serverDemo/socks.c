@@ -1,6 +1,6 @@
 /* Sun-$Revision: 10.1 $ */
 
-/* Copyright 1992 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # include <sys/types.h>

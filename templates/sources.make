@@ -1,6 +1,6 @@
 # Sun-$Revision: 30.16 $
  
-# Copyright 1994-2003 Sun Microsystems, Inc. and Stanford University.
+# Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information.
 
 # Makefile include

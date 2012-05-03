@@ -1,6 +1,6 @@
 # Sun-$Revision: 30.3 $
  
-# Copyright 1992-9 Sun Microsystems, Inc. and Stanford University.
+# Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information.
  
 # Makefile for the Self mac_osx generated directory
