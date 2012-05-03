@@ -28,6 +28,8 @@ class oopClass {
   oopClass()            { ShouldNotCallThis(); }
   oopClass(oopClass &o) { Unused(o); ShouldNotCallThis(); }
   
+
+  virtual ~oopClass() {};
   // accesses
   fint tag() { return maskBits(int32(this), Tag_Mask); }
   

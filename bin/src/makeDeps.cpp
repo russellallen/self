@@ -133,6 +133,8 @@ FileName*    GDFileTemplate;  // a GD (grand-dependencies) file that tells Unix 
 // I define what must be specified for each platform
 class AbstractPlatform {
  public:
+  virtual ~AbstractPlatform() {};
+
   // an incl file is the file included by each.cpp file that includes all needed header files
 
     

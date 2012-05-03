@@ -30,7 +30,7 @@ class VMObj {
   void set_vtbl_value(VtblPtr_t v) { *((VtblPtr_t*) this) = v; }
   void kill_vtbl_value() { set_vtbl_value(0); }
 
-  MACOSX_DESTRUCTOR_BUG(VMObj)
+  virtual ~VMObj() {};
 };
 
 

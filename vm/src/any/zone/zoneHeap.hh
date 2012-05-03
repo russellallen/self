@@ -16,7 +16,8 @@ class HeapChunk {       // a heap chunk is a consecutive sequence of blocks
  public:
   nmln link;
   int32 size;           // size in blocks (only for heterogenuous list)
-  
+  virtual ~HeapChunk() {};
+
   HeapChunk* next()             { return (HeapChunk*)link.next; }
 # ifdef UNUSED
   HeapChunk* prev()             { return (HeapChunk*)link.prev; }
