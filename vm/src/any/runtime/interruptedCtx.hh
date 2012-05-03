@@ -34,8 +34,10 @@ class InterruptedContext {
   void  set(InterruptedContext* ic) { scp = ic->scp; }
   
   bool  is_set() { 
-     bool r   =   scp != &dummy_scp  &&  scp != NULL; 
-     assert(!r || scp->uc_mcontext != NULL, "Snow Leopard isSet bug hut");
+     bool r   =   (scp != &dummy_scp)  &&  (scp != 0); 
+# if TARGET_OS_VERSION == MACOSX_VERSION
+     assert(!r || (scp->uc_mcontext != NULL), "Snow Leopard isSet bug hut");
+# endif
      return r;
   }
 
