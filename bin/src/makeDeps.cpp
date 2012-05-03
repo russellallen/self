@@ -1421,7 +1421,7 @@ void database::copy_file(const char* src,const char* dst) {
   for (;;) {
     size_t n = fread( buf, 1, sizeof(buf), s );
          if (n == 0)   break;
-    else if (n <  0) { perror(src); Plat.fatal(); }
+	 else if (ferror(s) != 0) { perror(src); Plat.fatal(); }
     size_t nn = 0;
     for (;;) {
       nn += fwrite( buf, 1, n, d);
