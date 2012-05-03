@@ -336,8 +336,9 @@ class MACOSX_Platform: public AbstractPlatform {
 
   int defaultGrandIncludeThreshold() { return 10000; }
 
+  Bool includeGIDependencies() { return True; }
  
-  Bool includeGIInEachIncl() { return True; }
+  Bool includeGIInEachIncl() { return False; }
 
   void writeGIInclude(FILE* inclFile ) {
     fprintf(inclFile, "# include \"%s\"\n", GIFileTemplate->pre_stem_suff());
