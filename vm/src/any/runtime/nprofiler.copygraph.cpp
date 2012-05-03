@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.14 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 // Part of the nprofiler creating the self level call graph 

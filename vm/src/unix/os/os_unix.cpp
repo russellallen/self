@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.32 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 /* There used to be a TARGET_OS_VERSION == MACOSX_VERSION check instead of __APPLE__.

@@ -1,7 +1,7 @@
 #! /bin/csh -f
 # Sun-$Revision: 30.8 $
 
-# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information. 
 
 # does a make files in the directory named by the first argument

@@ -4,7 +4,7 @@
 ; // Sun-$Revision: 30.11 $
 
 
- ; Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+ ; Copyright 1992-2012 AUTHORS.
  ;   See the LICENSE file for license information.
 
 ; This file is obsolete as of 1/03.

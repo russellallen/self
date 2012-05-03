@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.6 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
    
 // This file is put in the prefix file field of the MW

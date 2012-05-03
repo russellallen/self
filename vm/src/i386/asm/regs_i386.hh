@@ -1,7 +1,7 @@
 # ifdef __i386__
 /* Sun-$Revision: 1.6 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.x
+/* Copyright 1992-2012 AUTHORS.x
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS

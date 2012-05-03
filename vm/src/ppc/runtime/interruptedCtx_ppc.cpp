@@ -1,7 +1,7 @@
 # if  TARGET_ARCH == PPC_ARCH
 /* Sun-$Revision: 30.15 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # include "_interruptedCtx_ppc.cpp.incl"
