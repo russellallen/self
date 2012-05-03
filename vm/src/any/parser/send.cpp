@@ -170,7 +170,7 @@ bool Keyword::GenByteCodes(AbstractByteCode* b, Object* parent, bool isExpr) {
   static const char* casePrefix= "__BranchIndexedBy:To:";
   static const fint  casePrefixLength= 21;
   assert(strlen(casePrefix) == casePrefixLength, "recount length");
-  if (strncmp(msg, casePrefix, sizeof(casePrefix)) == 0) {
+  if (strncmp(msg, casePrefix, strlen(casePrefix)) == 0) {
     return GenIndexedBranch(b, parent);
   }
   if (strncmp(msg, "__", 2) == 0) {

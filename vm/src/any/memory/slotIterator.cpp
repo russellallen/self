@@ -17,7 +17,7 @@ void SlotIterator::init(Map *m) {
 #if GENERATE_DEBUGGING_AIDS
   if (CheckAssertions) {
     nActive++;
-    if (!bootstrapping && !GCInProgress || ScavengeInProgress)
+    if ((!bootstrapping && !GCInProgress) || ScavengeInProgress)
       // if compacting, map might not have been unmarked
       assert_map(m->enclosing_mapOop(), "not a map");
   }

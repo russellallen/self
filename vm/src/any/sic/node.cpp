@@ -673,7 +673,7 @@
          fatal("about to remove all good cases");
        Node* k = NULL;
        for (fint i = 0;  i < _nxt->length(); i++) {
-         if ( c && c->constant == maps->nth(i)  ||  theMap == maps->nth(i)
+	 if ( (c && c->constant == maps->nth(i))  ||  theMap == maps->nth(i)
          || maps->nth(i)->map() == theMap->map_addr())
            if (k) fatal(">1");
            else k = _nxt->nth(i);
