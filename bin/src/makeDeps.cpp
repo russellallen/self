@@ -1234,31 +1234,39 @@ void database::write_grand_unix_makefile() {
   if (!Plat.writeDeps()) 
     return;
 
+  // 2012-05-02 topa: newer cpp do not like the multi-line style
+  // hence, we generate the file with one-line things directly
   printf("\twriting dependencies file\n");
   FILE* gd = fileFor(GDFileTemplate->dir_pre_stem_suff());
   
   { // write Obj_Files = ...
-    fprintf(gd, "Obj_Files = \\\n");
+
+    // fprintf(gd, "Obj_Files = \\\n");
+    fprintf(gd, "Obj_Files = ");
     for ( item* si = outerFiles->first;  si;  si = si->next) {
       list* anOuterFile = si->contents;
       char* stemName = remove_suffix_from(anOuterFile->name);
       fprintf(gd, Plat.obj_file_format(), stemName);
-      fprintf(gd, " \\\n");
+      // fprintf(gd, " \\\n");
+      fprintf(gd, " ");
     }
     fprintf(gd, "\n\n");
   }
 
   if ( Plat.includeGIDependencies()  &&  nPrecompiledFiles > 0 ) {
       // write Precompiled_Files = ...
-      fprintf(gd, "Precompiled_Files = \\\n");
+      // fprintf(gd, "Precompiled_Files = \\\n");
+      fprintf(gd, "Precompiled_Files = ");
       for ( item* si = grand_include->first;  si;  si = si->next) {
 	      if (si->contents->count < threshold) 
 	        continue;
-        fprintf(gd, "%s \\\n", si->contents->name);
+        // fprintf(gd, "%s \\\n", si->contents->name);
+        fprintf(gd, "%s ", si->contents->name);
         // if .hh has plat dep incls, we also depend on them:
         if (si->contents->platformDependentIncludees != NULL)
           for ( item* pdi = si->contents->platformDependentIncludees->first;  pdi;  pdi = pdi->next)
-            fprintf(gd, "%s \\\n", pdi->contents->name);
+	    // fprintf(gd, "%s \\\n", pdi->contents->name);
+            fprintf(gd, "%s ", pdi->contents->name);
       }
       fprintf(gd, "\n\n");
   }
@@ -1273,7 +1281,7 @@ void database::write_grand_unix_makefile() {
       fprintf(gd, Plat.obj_file_format(), stemName);
       fprintf(gd, " ");
       fprintf(gd, Plat.asm_file_format(), stemName);
-      fprintf(gd, ": \\\n");
+      fprintf(gd, ": ");
 
       print_dependent_on(gd, anII->name);
       print_dependent_on(gd, inclFileName );
@@ -1298,8 +1306,8 @@ void database::write_grand_unix_makefile() {
   // write deps for grand include file:
   if ( Plat.includeGIDependencies()  
   &&   nPrecompiledFiles > 0 ) {
-      fprintf( gd, "%s: \\\n", Plat.GIFileForDependency());
-      fprintf( gd, "    $(Precompiled_Files) \n" );
+      fprintf( gd, "%s: ", Plat.GIFileForDependency());
+      fprintf( gd, "$(Precompiled_Files) \n" );
   }
 
   fclose( gd );
