@@ -19,7 +19,6 @@
     BaseCacheElement(int sel, OOPList& args, OOPList& privs,
 		       int constrainedPositionsMask, c_proc resender,
 		       BaseCacheElement* n);
-    virtual ~BaseCacheElement() {};
 
     virtual bool isPredicateCacheElement() { return false; };
 
@@ -47,7 +46,6 @@
     int visitCount;
    public:
     PredicateDecisionNode() { visitCount = 0; }
-    virtual ~PredicateDecisionNode() {};
 
     virtual bool isLeaf() { return false; }
     virtual bool isInterior() { return false; }

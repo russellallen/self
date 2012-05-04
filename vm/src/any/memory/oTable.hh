@@ -12,8 +12,7 @@
 
 class oTableObj {
 public: 
-  void* operator new(size_t size);
-  virtual ~oTableObj() {};
+ void* operator new(size_t size);
 };
 
 class oTableEntry {

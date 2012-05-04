@@ -239,7 +239,7 @@ class node_info {
     accuracy.init(node_pt,  "accuracy");
 # endif
   }
-  virtual ~node_info() {};
+
   void fill(oop node_oop, call_graph_node* n);
 };
 

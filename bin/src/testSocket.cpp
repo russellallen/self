@@ -133,8 +133,7 @@ class SocketUser {
 protected:
   Socket s;
 public:
-  SocketUser(const Socket& ss) : s(ss) {};
-  virtual ~SocketUser() {};
+  SocketUser(const Socket& ss) : s(ss) {}
 };
 
 

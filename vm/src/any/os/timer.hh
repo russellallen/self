@@ -16,7 +16,6 @@ class timer {                  // measures user CPU time in ms
   int32 user_time;
   
   timer() {}
-  virtual ~timer() {};
   void start() { user_time = OS::cpu_time(); }
   int32 time() { return OS::cpu_time() - user_time; }
   int32 secs() { return (time() + 500) / 1000; }

@@ -32,7 +32,6 @@ class ScopeLookupKey {
     lookupType = l; selector = s; delegatee = d; }
 
   ScopeLookupKey() {}
-  virtual ~ScopeLookupKey() {};
 
   void set_from(ScopeLookupKey &nmk);
 

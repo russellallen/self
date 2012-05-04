@@ -62,7 +62,6 @@ class Map {
 
   // constructor
   friend Map* create_map(fint size, slotList *slots, Map *mm, oop *obj);
-  virtual ~Map() {};
 
   // creation op
   virtual oop fill_in_slots(slotList* slist, fint slotCount) = 0;

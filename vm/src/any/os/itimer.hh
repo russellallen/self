@@ -132,8 +132,7 @@ class AbstractTimerEntry {
   bool is_doing_sync_fn;       // prevents bad recursions
   
  public:
-  virtual ~AbstractTimerEntry() {};
-
+ 
   void initialize(doFn sp, doFn ap) { 
      sync_fn = sp;  
      async_fn = ap; 
