@@ -26,7 +26,7 @@
         NSRange newCommandStringRange = NSMakeRange(newCommandIndex, textLength - newCommandIndex);
         NSAttributedString* newCommandANString = [aTextView attributedSubstringFromRange: newCommandStringRange];
         NSString*           newCommandString   = [newCommandANString string];
-        printf("New command = %s\n", [newCommandString cString]);
+        printf("New command = %s\n", [newCommandString UTF8String]);
         [self appendString: "\n"];
         lastTextLength = newCommandIndex = textLength + 1; // skip the newline character
         retval = YES;
@@ -41,9 +41,12 @@
 
 
 - (void) appendString: (const char *) cString {
-    NSString*            nsString = [NSString stringWithCString: cString];
-    NSAttributedString* ansString = [[NSAttributedString alloc] initWithString: nsString];
-    [[textView textStorage] appendAttributedString: ansString];
+  NSString*            nsString = [NSString stringWithCString: cString encoding: NSUTF8StringEncoding];
+  NSAttributedString* ansString = [[NSAttributedString alloc] initWithString: nsString];
+  NSTextStorage*    textStorage = [textView textStorage];
+  [textStorage beginEditing];
+  [textStorage appendAttributedString: ansString];
+  [textStorage endEditing];
 }
 
 
