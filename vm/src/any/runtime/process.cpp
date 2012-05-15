@@ -40,7 +40,7 @@ bool traceP = false;
 bool traceV = false;
 
 # if GENERATE_DEBUGGING_AIDS
-  void printP(char* s, void* p) {
+  void printP(const char* s, void* p) {
     if (traceP) {
       lprintf("**P** %s ", s);
       if (p == (void*)&dummyProcess) lprintf("dummyProcess ");
