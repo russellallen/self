@@ -12,10 +12,27 @@ endif(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.4)
 # CMake versions to try to be backwards-compatible with the desired version
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
-
-set(PROJECT_NAME Self\ VM)
+set(PROJECT_NAME Self)
 project(${PROJECT_NAME})
 
-file(GLOB_RECURSE SRC *.c??)
+set(LOCAL_CMAKE_FILES "cmake")
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/${LOCAL_CMAKE_FILES}" )
 
-add_executable(${PROJECT_NAME} ${SRC})
+include("${LOCAL_CMAKE_FILES}/common.cmake")
+include("${LOCAL_CMAKE_FILES}/platform.cmake")
+
+include("${platform}/platform.cmake")
+
+
+# TODO: the incls still need to be built manually.
+# get around this soon!
+include_directories(${platform}/generated/incls)
+
+add_subdirectory(src)
+
+message("src2: ${SRC}")
+
+
+add_subdirectory(${platform})
+
+set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
