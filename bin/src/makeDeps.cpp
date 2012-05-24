@@ -319,7 +319,7 @@ class MACOSX_Platform: public AbstractPlatform {
  public:
   void setupFileTemplates() {
     InclFileTemplate = new FileName( "incls/", "_", "",  ".incl", "", "");
-      GIFileTemplate = new FileName( "incls/", "",  "SelfMacPrecompHeader", ".pch", "", "");
+      GIFileTemplate = new FileName( "incls/", "",  "_precompiled", ".hh", "", ".hh.gch");
       GDFileTemplate = new FileName( "", "",  "Dependencies.hh",      "",      "", "");
   }
       
