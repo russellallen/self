@@ -16,7 +16,10 @@
   #  undef Alloc
   
   #  include <Carbon/Carbon.h>
-  #  include <CoreGraphics/CoreGraphics.h>
+  #  include <ApplicationServices/ApplicationServices.h>
+
+  // implicit by the above. 
+  // #  include <CoreGraphics/CoreGraphics.h>
 
   // remove Carbon macros to avoid name collisions
   #  undef assert

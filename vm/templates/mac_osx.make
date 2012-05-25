@@ -13,7 +13,7 @@ HOST_ARCH = $(TARGET_ARCH)
 
 
 AS     = as
-GCC    = g++2
+GCC    = gcc
 
 SRC_DIRS = $(shell cd ${ROOT}/vm/src; ${MAKE} TARGET_COMPILER=gcc TARGET_ARCH=ppc srcDirList)
 # include . for the precompiled header file
@@ -25,7 +25,7 @@ SRC_PATH = . \
 ASM_FILTER    = | removeUnderscore | sed 's;//.*;;'
 GLUE_LD_FLAGS = -G
 VPATH        += $(SRC_PATH:%=%:)
-CPP           = /usr/bin/cpp
+CPP           = gcc -E
 
 XLIBLIBDIRS = -L/usr/X11R6/lib
 XLIBLIBS = -lX11 -lXext
@@ -35,7 +35,7 @@ CLIBS =
 OS_GLUE_LIBS =
 
 # precomp headers for OS X
-%.p: %.h
+%.hh.gch: %.hh
 	@lock_run _$@.lock " \
 		echo Precompiling header $< to $@; \
 		${COMPILE.gnu.precomp}  $< -o $@; \
