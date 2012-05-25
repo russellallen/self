@@ -44,10 +44,10 @@ foreach dir ($*)
     if (-e $SELF_WORKING_DIR/vm/src/$dir/$file) then
       echo $file >> Tags
       if ($ext == c || $ext == cpp || $ext == s) then
-	echo ${base}.o >> $objs
-	if ($ext == c  || $ext == cpp) then 
-	  set d = deps/_${base}.${ext}.dep
-	endif
+        echo ${base}.o >> $objs
+        if ($ext == c  || $ext == cpp) then 
+          set d = deps/_${base}.${ext}.dep
+          endif
       endif
     endif
   end
@@ -56,21 +56,20 @@ end
 
 echo Finishing up dependencies
 
-echo '#include' \"Dependencies.hh\"     >> $dep
-echo ''					>> $dep
-echo '${AOUT} files: ${PATCHED_OBJS}'   >> $dep
-echo '${AOUT}:' `cat $allobjs` '${GLUE_LIBS}' >> $dep
-echo -n '	@lock_run _$@.lock' "'" >> $dep
-echo ' echo Compiling vmDate ; \' 	>> $dep
-echo '	make_vmDate; ${AS} ${ASFLAGS} vmDate.s -o vmDate.o; \'>> $dep
-echo '	check_locks ; \' 		>> $dep
-echo '	echo Linking $@ ; \' 		>> $dep
-echo '	rm -rf $@ cleanLocks; \' 	>> $dep   # if disk space is tight...
-echo '	${LD} -o $@' `cat $allobjs` '${PATCHED_OBJS}' '${LIBS}' "'"  >> $dep
-echo ''					>> $dep
-
-echo files: `cat $allobjs`  	    	>> $dep
-echo ''					>> $dep
+echo '#include' \"Dependencies.hh\"            >> $dep
+echo ''                                        >> $dep
+echo '${AOUT} files: ${PATCHED_OBJS}'          >> $dep
+echo '${AOUT}:' `cat $allobjs` '${GLUE_LIBS}'  >> $dep
+echo -n '        @lock_run _$@.lock' "'"       >> $dep
+echo ' echo Compiling vmDate ; \'              >> $dep
+echo '        make_vmDate; ${AS} ${ASFLAGS} vmDate.s -o vmDate.o; \'>> $dep
+echo '        check_locks ; \'                 >> $dep
+echo '        echo Linking $@ ; \'             >> $dep
+echo '        rm -rf $@ cleanLocks; \'         >> $dep   # if disk space is  tight...
+echo '        ${LD} -o $@' `cat $allobjs` '${PATCHED_OBJS}' '${LIBS}' "'"  >> $dep
+echo ''                                        >> $dep
+echo files: `cat $allobjs`                     >> $dep
+echo ''                                        >> $dep
 
 rm -f Dependencies.cpp
 mv $dep Dependencies.cpp
