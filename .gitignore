@@ -5,6 +5,7 @@
 *.old
 *.file_status
 *.xcuserdatad
+*.xcworkspace
 bin/*/runBinary
 bin/*/AddTrailingNewline
 bin/*/UpdateFiles
