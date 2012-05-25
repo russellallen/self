@@ -1,6 +1,6 @@
  ../../../vm/src/any/prims/glueDefs.cpp 
  ../../../vm/mac_osx/generated/incls/_glueDefs.cpp.incl 
- ../../../vm/mac_osx/generated/incls/SelfMacPrecompHeader.pch 
+ ../../../vm/mac_osx/generated/incls/_precompiled.hh 
  ../../../vm/src/any/runtime/config.hh 
  ../../../vm/mac_osx/generated/incls/_config_pd.hh.incl 
  ../../../vm/src/unix/runtime/config_unix.hh 
