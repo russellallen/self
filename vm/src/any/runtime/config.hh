@@ -165,8 +165,8 @@
 # define MACOSX_DESTRUCTOR_BUG(className)
 # endif
 
-# if !GCC3
-  # define INTERFACE_PRAGMAS 1 // GCC3 fails with interface pragmas
+# if !GCC
+  # define INTERFACE_PRAGMAS 1 // GCC >3 fails with interface pragmas
 # endif
 
 
