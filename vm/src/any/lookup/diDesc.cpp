@@ -32,7 +32,7 @@ pc_t SendDIMessage(sendDesc* sd, frame* lookupFrame, DIDesc* dc,
                     int32 verified, oop receiver, oop arg1) {
   Unused(verified);                   
   NMethodLookupKey& k =
-    findNMethod(nmethod_from_insts((pc_t)dc))->key;
+    nmethod::findNMethod(nmethod_from_insts((pc_t)dc))->key;
   assert(k.methodHolder_or_map() != MH_TBD,
          "should be a real method holder");
   NumberOfDILookups++;

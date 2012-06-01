@@ -172,7 +172,7 @@
 
   static bool cpCreateFailed = false;
 
-  CPInfo* new_CPInfo(Node* n) {
+  CPInfo* CPInfo::new_CPInfo(Node* n) {
     CPInfo* cpi = new CPInfo(n);
     if (cpCreateFailed) {
       cpCreateFailed = false;

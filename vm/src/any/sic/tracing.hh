@@ -39,5 +39,5 @@ typedef class TraceControl {
 
 # if defined(SIC_COMPILER) && !defined(NOASM)
   oop itrace_prim(oop onoff, oop mode);
-  void itrace(bool onoff);
+  void itrace(fint fn);
 # endif

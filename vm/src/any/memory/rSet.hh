@@ -13,10 +13,6 @@ const int32 card_size  = 1 << card_shift;
 const int32 card_size_in_oops = card_size / oopSize;
 const int32 byte_map_grain = 8 * BytesPerWord; // private and wired-in
 
-// Forward-declaration for friend
-oop*  card_for(oop* p);
-char* next_zero_byte(char*, char *);
-
 class rSet: public CHeapObj {
   
   friend class oldSpace;
@@ -33,10 +29,10 @@ class rSet: public CHeapObj {
   oop*  oop_for(char* p) {
     return (oop*)(low_boundary  +  (p - byte_map  <<  card_shift)); }
 
-  friend oop*  card_for(oop* p) { return (oop*)(int32(p) & ~(card_size - 1)); }
+  static oop*  card_for(oop* p) { return (oop*)(int32(p) & ~(card_size - 1)); }
   
   inline char* byte_map_end();
-  friend char* next_zero_byte(char*, char *);
+  static char* next_zero_byte(char*, char *);
   
  public:
   int byte_map_size() { return (high_boundary - low_boundary) / card_size; }

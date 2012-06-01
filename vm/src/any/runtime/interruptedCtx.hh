@@ -9,9 +9,6 @@
 
 #include <pthread.h>
 
-// Forward-declaration for friend
-void abort_init();
-
 class InterruptedContext {
  private:
   self_sig_context_t* scp;

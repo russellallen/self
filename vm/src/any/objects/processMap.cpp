@@ -6,7 +6,7 @@
 # pragma implementation "processMap.hh"
 # include "_processMap.cpp.incl"
 
-processOop create_process(Process* process) {
+processOop processMap::create_process(Process* process) {
   slotList* slots = new slotList(VMString[PARENT],
                                  parent_map_slotType,
                                  create_slots((slotList*)NULL));

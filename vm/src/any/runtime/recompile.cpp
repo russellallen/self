@@ -926,7 +926,7 @@ static char* continueRecompile2(RecompBuf* buf, frame* last) {
   processes->convert();
   verifyAfterRecompile(cont, pc);
   
-  nmethod* continueNM = findNMethod(pc);
+  nmethod* continueNM = nmethod::findNMethod(pc);
   if (ScavengeAfterRecompilation) Memory->need_scavenge();
   assert(currentProcess->verifyFramePatches(), "patching bug");
   OutgoingArgsOfReturnTrapOrRecompileFrame = NULL;
@@ -1011,7 +1011,7 @@ nmethod* also_Recompile( sendDesc* send_desc,
                        reCompilee, vmfr);
   recomp.doit(reCompilee->insts());
   recomp.finalize();
-  nmethod* nm= findNMethod(recomp.restartAddr); // why not just save nmethod? xxx miw
+  nmethod* nm= nmethod::findNMethod(recomp.restartAddr); // why not just save nmethod? xxx miw
   if (nm == reCompilee) { // xxx miw
     // may not have been optimized, e.g. because of DI; force optimization
     FrameChainer fc(Memory->code);
@@ -1953,7 +1953,7 @@ char* MakeOld(sendDesc* sd, frame* callerFrame, oop receiver,
   //  where the caller needs recompilation, but makes no other calls but
   //  this one. So check the caller, too. -- dmu 5/96
 
-  nmethod* sendingNM = findNMethod(sd);
+  nmethod* sendingNM = nmethod::findNMethod(sd);
   if ( sendingNM->isToBeRecompiled()) {
     // Must make sender old, so it can be chosen as recompilee
     {

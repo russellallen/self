@@ -511,7 +511,7 @@
   }
   
   
-  BranchBCTargetStack* new_BranchBCTargetStack(
+  BranchBCTargetStack* BranchBCTargetStack::new_BranchBCTargetStack(
               SCodeScope* s,
               bool  isTargetOfBackwardsBranch,
               int32 len,

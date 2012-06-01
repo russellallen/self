@@ -197,18 +197,6 @@ inline void space::clear() {
 # endif
 }
 
-// Forward-declaration for friend
-oop clone0_prim(slotsOop rcvr);
-oop clone1_prim(slotsOop rcvr);
-oop clone2_prim(slotsOop rcvr);
-oop clone3_prim(slotsOop rcvr);
-oop clone4_prim(slotsOop rcvr);
-oop clone5_prim(slotsOop rcvr);
-oop clone6_prim(slotsOop rcvr);
-oop clone7_prim(slotsOop rcvr);
-oop clone8_prim(slotsOop rcvr);
-oop clone9_prim(slotsOop rcvr);
-
 class newSpace: public space {
   friend class universe;
   friend class generation;

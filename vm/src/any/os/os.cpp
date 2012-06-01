@@ -213,7 +213,7 @@ bool OS::expand_dir(const char* in,  char* out) { // returns true on success
 }
 
 
-char* ExpandDir_prim(const char* in, void* FH) {
+char* OS::ExpandDir_prim(const char* in, void* FH) {
   static char mid[OS::max_path_length];
   static char out[OS::max_path_length];
   char* err = OS::expand_unix_dir(in, mid);

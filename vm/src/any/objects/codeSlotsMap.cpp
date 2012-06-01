@@ -7,11 +7,11 @@
 # include "_codeSlotsMap.cpp.incl"
 
 
-slotsOop basic_create_method(slotList* slots,
-                             ByteCode* b,
-                             methodMap &m1,
-                             const char* annotation,
-                             bool isBlock) {
+slotsOop methodMap::basic_create_method(slotList* slots,
+                                         ByteCode* b,
+                                         methodMap &m1,
+                                         const char* annotation,
+                                         bool isBlock) {
 
   slotsOop method;
   methodMap* m= (methodMap*) create_map(isBlock
@@ -210,26 +210,26 @@ void blockMethodMap::set_lexical_links( slotsOop  enclosingMethod,
 // by Process::initialize to create method to start a process
 // by evalExpressions in shell for top-level read-eval-print loop
 
-slotsOop create_outerMethod( slotList*   slots, 
-                             ByteCode*   b,
-                             const char* annotation,
-                             IntBList*   stack_deltas ) {
+slotsOop methodMap::create_outerMethod( slotList*   slots, 
+                                        ByteCode*   b,
+                                        const char* annotation,
+                                        IntBList*   stack_deltas ) {
   slots = slots->add(VMString[SELF], vm_parent_map_slotType, NULL);
   outerMethodMap m;
-  slotsOop method = basic_create_method(slots, b, m, annotation, false);
+  slotsOop method = methodMap::basic_create_method(slots, b, m, annotation, false);
   return (slotsOop) method->fix_up_method(NULL, true, true, stack_deltas);
 }
 
 
-slotsOop create_blockMethod( slotList*   slots, 
-                             ByteCode*   b, 
-                             const char* annotation,
-                             IntBList*   stack_deltas) {
+slotsOop blockMethodMap::create_blockMethod( slotList*   slots, 
+                                             ByteCode*   b, 
+                                             const char* annotation,
+                                             IntBList*   stack_deltas) {
   slots = slots->add(VMString[LEXICAL_PARENT], vm_parent_map_slotType, 
                      Memory->lobbyObj);
   blockMethodMap m;
   // since starting from slot list do not have to fix it up
-  slotsOop method = basic_create_method(slots, b, m, annotation, true);
+  slotsOop method = methodMap::basic_create_method(slots, b, m, annotation, true);
   // except for stack_deltas!
   return stack_deltas 
     ?  (slotsOop) method->fix_up_method(NULL, true, true, stack_deltas) 
@@ -1379,10 +1379,10 @@ protected:
 // Returns null iff the byte codes and literals are OK -- dmu 2/93
 // Sets the errorIndex to the position of the bad bytecode, or -1.
   
-const char* check_byteCodes_and_literals( smi&            errorIndex,
-                                    IntBList*&      stack_deltas,
-                                    byteVectorOop   codes,
-                                    objVectorOop    literals ) {
+const char* methodMap::check_byteCodes_and_literals( smi&            errorIndex,
+                                                     IntBList*&      stack_deltas,
+                                                     byteVectorOop   codes,
+                                                     objVectorOop    literals ) {
   BytecodeChecker ch(codes, literals);
   ch.interpret_method();
   errorIndex= ch.pc;

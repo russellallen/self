@@ -138,7 +138,7 @@
     }
   }
   
-  ConstPReg* new_ConstPReg(SSelfScope* s, oop c) {
+  ConstPReg* ConstPReg::new_ConstPReg(SSelfScope* s, oop c) {
     for (fint i = 0; i < constants->length(); i++) {
       ConstPReg* r = constants->nth(i);
       if (r->constant == c) {
@@ -154,7 +154,7 @@
   }
   
 # ifdef UNUSED
-  ConstPReg* findConstPReg(Node* n, oop c) {
+  ConstPReg* PReg::bfindConstPReg(Node* n, oop c) {
     // return const preg for oop or NULL if none exists
     for (fint i = 0; i < constants->length(); i++) {
       ConstPReg* r = constants->nth(i);
@@ -666,8 +666,8 @@
     return true;
   }
 
-  SCodeScope* findAncestor(SSelfScope* s1, fint& bci1,
-                           SSelfScope* s2, fint& bci2) {
+  SCodeScope* PReg::findAncestor(SSelfScope* s1, fint& bci1,
+                                 SSelfScope* s2, fint& bci2) {
     // find closest common ancestor of s1 and s2, and the
     // respective sender bcis in that scope
     if (s1->depth > s2->depth) {
@@ -694,11 +694,11 @@
     return sig->contains(sig2);
   }
 
-  SplitPReg* regCovering(SCodeScope* s1, fint bci1,
-                         SCodeScope* s2, fint bci2, SplitSig* sig) {
+  SplitPReg* SAPReg::regCovering(SCodeScope* s1, fint bci1,
+                                 SCodeScope* s2, fint bci2, SplitSig* sig) {
     // return a PReg covering both s1 and s2; use s2 as the creation scope
     fint b1 = bci1, b2 = bci2;
-    SCodeScope* ss = findAncestor(s1, b1, s2, b2);
+    SCodeScope* ss = PReg::findAncestor(s1, b1, s2, b2);
     assert(b1 >= b2, "use (b1) should come after def (b2)");
     SplitPReg* r = new SplitPReg(ss, b2, b1, sig);
     r->creationScope = s2;
@@ -787,7 +787,7 @@
     return scopeFromBlockMap(block->map()->enclosing_mapOop());
   }
 
-  SCodeScope* scopeFromBlockMap(mapOop block_map) {
+  SCodeScope* BlockPReg::scopeFromBlockMap(mapOop block_map) {
     blockMap *b= (blockMap*)block_map->map_addr();
     smiOop desc= b->desc();
     assert_smi(desc, "should be an integer");

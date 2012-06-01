@@ -12,10 +12,6 @@ extern "C" {
   oop scavenge_prim(oop);
 }
 
-// Forward-declaration for friend
-oop unwind_protect_prim(oop doBlock, oop protectBlock);
-
-
 class oopClass {
  public:
   // _mark moved up here from memOop to avoid C++ bogosity --dmu
@@ -110,7 +106,7 @@ class oopClass {
   inline oop copy_add_slot(stringOop name, slotType t, oop contents,
                            oop anno, bool mustAllocate= false);
   inline oop copy_remove_slot(stringOop name, bool mustAllocate= false);
-  friend oop unwind_protect_prim(oop doBlock, oop protectBlock);
+  static oop unwind_protect_prim(oop doBlock, oop protectBlock);
 
   void switch_pointer(oop* where, oop to); // part of define
 

@@ -7,9 +7,6 @@
   # pragma interface
 # endif
 
-// Forward-declaration for friend  
-profilerOop create_profiler();
-
 class profilerMap : public slotsMapDeps {
  public:
   // Type test operation
@@ -23,7 +20,7 @@ class profilerMap : public slotsMapDeps {
   bool verify(oop obj);
 
   // creation operation
-  friend profilerOop create_profiler(); // To create initial profilerOop
+  static profilerOop create_profiler(); // To create initial profilerOop
   
   // killable operations
   void    kill(oop p);

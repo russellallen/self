@@ -21,7 +21,7 @@ bool stringOopClass::is_unary(fint upToLen) {
   return true;
 }
 
-stringOop create_string(fint size) {
+stringOop stringOopClass::create_string(fint size) {
   char* nb;
   oop *p= Memory->old_gen->alloc_objs_and_bytes(size, 0, nb);
   stringOop obj= as_stringOop(p);

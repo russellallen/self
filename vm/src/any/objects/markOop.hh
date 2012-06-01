@@ -44,12 +44,6 @@ const int32 second_hash_in_place = second_hash << hash_shift;
 const int32 overflow_hash_in_place = first_hash_in_place;
 const int32 overflow_age_in_place = age_mask_in_place;
 
-
-// topa: Sorry, this cannot be expressed by the macro below...
-// Forward-declaration for friend
-int32 max_hash();
-int32 max_age();
-
 class markOopClass: public oopClass {
  public:
   Map* map() { return Memory->mark_map; }

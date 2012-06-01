@@ -22,22 +22,11 @@ class codeSlotsMap: public slotsMap {
 
 class oldMapList;
 
-// Forward-declaration for friend
-slotsOop basic_create_method(slotList* slots, ByteCode* b,
-                             methodMap &m1, char *annotation,
-                             bool isBlock);
-slotsOop create_outerMethod(slotList* slots, ByteCode* b,
-                            const char* annotation = "",
-                            IntBList* stack_deltas = NULL);
-
-const char* check_byteCodes_and_literals( smi& errorIndex,
-                                          IntBList*& stack_deltas,
-                                          byteVectorOop codes,
-                                          objVectorOop literals );
 class methodMap: public codeSlotsMap {
-  friend slotsOop create_outerMethod(slotList* slots, ByteCode* b,
-                                     const char* annotation,
-                                     IntBList* stack_deltas);
+ public:
+  static slotsOop create_outerMethod(slotList* slots, ByteCode* b,
+                                     const char* annotation = "",
+                                     IntBList* stack_deltas = NULL);
  protected:
   // instance variables
   byteVectorOop    _codes;
@@ -156,8 +145,8 @@ class methodMap: public codeSlotsMap {
   virtual slotDesc* slots() { return (slotDesc*) (this + 1); }
   
   // creation operation
-  friend slotsOop basic_create_method(slotList* slots, ByteCode* b,
-                                      methodMap &m1, char *annotation,
+  static slotsOop basic_create_method(slotList* slots, ByteCode* b,
+                                      methodMap &m1, const char *annotation,
                                       bool isBlock);
 
  protected:
@@ -171,10 +160,10 @@ class methodMap: public codeSlotsMap {
  public:
 
   // programming
-  friend  const char* check_byteCodes_and_literals( smi& errorIndex,
-                                                    IntBList*& stack_deltas,
-                                                    byteVectorOop codes,
-                                                    objVectorOop literals );
+  static const char* check_byteCodes_and_literals( smi& errorIndex,
+                                                   IntBList*& stack_deltas,
+                                                   byteVectorOop codes,
+                                                   objVectorOop literals );
   
   // used by programming prims to set backpointers
 
@@ -194,9 +183,18 @@ class methodMap: public codeSlotsMap {
   bool verify(oop obj);
 };
 
+static inline slotsOop create_outerMethod(slotList* slots, ByteCode* b,
+                                          const char* annotation = "",
+                                          IntBList* stack_deltas = NULL) {
+  return methodMap::create_outerMethod(slots, b, annotation, stack_deltas);
+}
+
+
+
+
 class outerMethodMap: public methodMap {
  public:
-  friend slotsOop create_outerMethod(slotList* slots, ByteCode* b,
+  static slotsOop create_outerMethod(slotList* slots, ByteCode* b,
                                      const char* annotation,
                                      IntBList* stack_deltas);
   
@@ -213,21 +211,8 @@ class outerMethodMap: public methodMap {
   methodMap* get_lexical_link_map() { return NULL; }
 };
 
-// Forward-declaration for friend
-
-slotsOop create_blockMethod(slotList* slots, ByteCode* b,
-                            const char* annotation = "",
-                            IntBList* stack_deltas = NULL);
-slotsOop basic_create_method(slotList* slots, ByteCode* b,
-                             methodMap* m1, const char* annotation,
-                             bool isBlock);
 
 class blockMethodMap: public methodMap {
-  friend slotsOop basic_create_method(slotList* slots,
-                                      ByteCode* b,
-                                      methodMap &m1,
-                                      const char* annotation,
-                                      bool isBlock);
   friend class methodMap;
  public: // needs to be public for MW
   smiOop _sourceOffset, _sourceLen;
@@ -249,12 +234,9 @@ class blockMethodMap: public methodMap {
   oop mirror_source_offset(oop r) { Unused(r);  return _sourceOffset; }
   oop mirror_source_length(oop r) { Unused(r);  return _sourceLen; }
 
-  friend slotsOop create_blockMethod(slotList* slots, ByteCode* b,
+  static slotsOop create_blockMethod(slotList* slots, ByteCode* b,
                                      const char* annotation,
-                                     IntBList* stack_deltass);
-  friend slotsOop basic_create_method(slotList* slots, ByteCode* b,
-                                      methodMap* m1, const char* annotation,
-                                      bool isBlock);
+                                     IntBList* stack_deltas);
   MethodKind kind()             { return BlockMethodType; }
   mirrorOop mirror_proto()      { return Memory->blockMethodMirrorObj; }
   oop mirror_parent(oop obj);
@@ -271,4 +253,9 @@ class blockMethodMap: public methodMap {
   IntList* uplevel_accessed_slots(methodMap* parentMap);
 };
 
+static inline slotsOop create_blockMethod(slotList* slots, ByteCode* b,
+                                          const char* annotation = "",
+                                          IntBList* stack_deltas = NULL) {
+  return blockMethodMap::create_blockMethod(slots, b, annotation, stack_deltas);
+}
 

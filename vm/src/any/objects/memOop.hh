@@ -21,14 +21,6 @@ extern "C" {
   //  for ( ; (*middle) != target; --middle) return middle;
 }
 
-// Forward-declaration for friend
-memOop as_memOop(void* p);
-bool is_object_start(oop p);
-int32 map_offset();
-memOop mark_memOop(memOop p);
-memOop unmark_memOop(memOop p);
-bool is_marked_memOop(memOop p);
-
 class memOopClass: public oopClass {
  public:
   // instance variable
@@ -41,7 +33,7 @@ class memOopClass: public oopClass {
   // friend void enumeration_list::add_families_1(oop* bottom, oop* top);
   
   // constructor
-  friend memOop as_memOop(void* p) { return memOop(int32(p) + Mem_Tag); }
+  static memOop as_memOop(void* p) { return memOop(int32(p) + Mem_Tag); }
   
   // "destructor"
   memOopClass* addr() { return (memOopClass*) (int32(this) - Mem_Tag); }
@@ -149,7 +141,7 @@ class memOopClass: public oopClass {
   
   // derived pointer support
   int32 compute_derived_offset();
-  friend bool is_object_start(oop p) {
+  static bool is_object_start(oop p) {
     assert(((int)p & 0xffffff00) != 0x21212100, "catching a bug!");
     return p->is_mark() || (p->is_mem() && is_marked_memOop(memOop(p))); } 
   int32 derived_offset() {
@@ -157,7 +149,20 @@ class memOopClass: public oopClass {
     return is_object_start(mark()) ? 0 : compute_derived_offset(); }
 
   // compiler support
-  friend int32 map_offset() {
+  static int32 map_offset() {
     // byte offset from a tagged memOop (i.e. returns 3)
     return int32(&memOop(NULL)->addr()->_map); }
 };
+
+static inline memOop as_memOop(void* p) {
+  return memOopClass::as_memOop(p);
+}
+
+static inline int32 map_offset() {
+  return memOopClass::map_offset();
+}
+
+static inline bool is_object_start(oop p) {
+  return memOopClass::is_object_start(p);
+}
+

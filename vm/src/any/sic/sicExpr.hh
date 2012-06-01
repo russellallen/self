@@ -218,20 +218,14 @@
   };
   
 
-  // Forward-declaration for friend
-  BranchBCTargetStack* new_BranchBCTargetStack(SCodeScope* s,
-                                               bool  isTargetOfBackwardsBranch,
-                                               int32 len,
-                                               int32 targetBCI );
-  
   class BranchBCTargetStack : public SExprBList {
+   public:
     // keeps track of s exprs in expr stack at target of a branch bytecode
-   friend BranchBCTargetStack* new_BranchBCTargetStack(
+    static BranchBCTargetStack* new_BranchBCTargetStack(
               SCodeScope* s,
               bool  isTargetOfBackwardsBranch,
               int32 len,
               int32 targetBCI );
-   public:
      BranchBCTargetStack( int32 len );
      void mergeInExprsFromStack( SExprStack* stk, 
                                  Node*       mergeNode, 
@@ -248,6 +242,17 @@
                       Node*  mergeNode,
                       bool   isBackwards ) = 0;
   };
+
+  static inline BranchBCTargetStack* new_BranchBCTargetStack(
+             SCodeScope* s,
+             bool  isTargetOfBackwardsBranch,
+             int32 len,
+             int32 targetBCI ) {
+    return BranchBCTargetStack::new_BranchBCTargetStack(s, 
+                                                        isTargetOfBackwardsBranch,
+                                                        len, targetBCI);    
+  }
+
 
   class FBranchBCTargetStack : public BranchBCTargetStack {
     // keeps track of s exprs in expr stack at target of a branch bytecode

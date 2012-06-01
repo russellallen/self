@@ -20,11 +20,6 @@ extern fint nsendCounts;        // size of counter array
 
 class CountCodePattern; // instruction pattern for stub
 
-// Forward-declaration for friend
-CountStub* new_CountStub(nmethod* target, pc_t entryPoint,
-                         nmln* sd_nmln, CountType t);
-
-  
 class CountStub : public NCodeBase {
  protected:
          // shouldn't call this except via constructors in subclasses
@@ -40,12 +35,13 @@ class CountStub : public NCodeBase {
   // convention: the calling sd/PIC is responsible for maintaining the
   // call/jump to the count stub, except for deallocate (resets
   // sendDesc jump addr)
-  friend CountStub* new_CountStub(nmethod* target, pc_t entryPoint,
+  static CountStub* new_CountStub(nmethod* target, pc_t entryPoint,
                                   nmln* sd_nmln, CountType t);
   friend class nmethod;
   friend class sendDesc;
   void deallocate();
   bool isCountStub()            { return true; }
+  static bool isCountStub(void* p);
   virtual CountType countType() = 0;
   pc_t insts()                 { return (pc_t)(this + 1); }
   fint id();
@@ -54,9 +50,7 @@ class CountStub : public NCodeBase {
   nmethod* target();
   sendDesc* sender_sendDesc() {
     sendDesc *s= sd();  return s ? s : pic()->sd(); }
-  nmethod* sender() {           // sending nmethod
-    nmethod *findNMethod(void *s);
-    return findNMethod(sender_sendDesc()); }
+  nmethod* sender();           // sending nmethod
   sendDesc* sd();               // calling sendDesc (NULL if PIC)
   CacheStub* pic();             // calling PIC (NULL if sendDesc)
   virtual void moveTo_inner(NCodeBase* to, int32 delta, int32 size);
@@ -85,11 +79,6 @@ class CountStub : public NCodeBase {
   friend void countStub2_init();
 };
 
-// Forward-declaration for friend
-bool isCountStub(void* p);
-// cf. cacheStub
-void set_CountingStub_vtbl_value();
-
 class CountingStub: public CountStub {
   VTBL_AND_SETTER(CountingStub, :CountStub(1.0));
  public:
@@ -98,12 +87,9 @@ class CountingStub: public CountStub {
   CountType countType()         { return Counting; }
   fint size();                  // size in bytes
   const char* name()                  { return "CountingStub"; }
-  friend bool isCountStub(void* p);
+  //friend bool isCountStub(void* p);
+  friend class CountStub;
 };
-
-// Forward-declaration for friend
-// cf. cacheStub
-void set_ComparingStub_vtbl_value();
 
 class ComparingStub: public CountStub {
   VTBL_AND_SETTER(ComparingStub, :CountStub(1.0));
@@ -114,7 +100,8 @@ class ComparingStub: public CountStub {
   fint size();                  // size in bytes
   void init(nmethod* nm);
   const char* name()                  { return "ComparingStub"; }
-  friend bool isCountStub(void* p);
+  //friend bool isCountStub(void* p);
+  friend class CountStub;
  protected:
   void  set_recompile_addr(pc_t addr);
 # ifdef UNUSED
@@ -126,11 +113,6 @@ class ComparingStub: public CountStub {
 // when the counter overflows, the nmethod becomes old.  This helps prevent
 // premature recompilation (which can cause uncommon traps because the pics
 // aren't primed yet.)
-
-// Forward-declaration for friend
-// cf. cacheStub
-void set_AgingStub_vtbl_value();
-
 class AgingStub : public ComparingStub {
   VTBL_AND_SETTER(AgingStub, :ComparingStub(1.0));
  public:
@@ -138,7 +120,9 @@ class AgingStub : public ComparingStub {
   void init(nmethod* nm);
   bool isAgingStub()            { return true; }
   const char* name()                  { return "AgingStub"; }
-  friend bool isCountStub(void* p);
+  //friend bool isCountStub(void* p);
+  friend class CountStub;
+
 
   // initializiation
   static int32 add_inst;

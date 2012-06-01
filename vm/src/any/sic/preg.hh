@@ -26,11 +26,6 @@
   // TempPRegs: local to one BB, used for certain hard-coded idioms (e.g.
   // loading an uplevel-accessed value)
   
-
-  // Forward-declaration for friend  
-  SCodeScope* findAncestor(SSelfScope* s1, fint& bci1,
-                           SSelfScope* s2, fint& bci2);
-
   class PReg : public ResourceObj {
    protected:
     fint _id;                   // unique id
@@ -170,7 +165,7 @@
     virtual NameNode* nameNode(bool mustBeLegal = true); // for debugging info
     PReg* cpReg();                  // return "cp-equivalent" PReg
 
-    friend SCodeScope* findAncestor(SSelfScope* s1, fint& bci1,
+    static SCodeScope* findAncestor(SSelfScope* s1, fint& bci1,
                                     SSelfScope* s2, fint& bci2);
       // find closest common ancestor of s1 and s2, and the
       // respective sender bcis in that scope
@@ -211,11 +206,6 @@
   // (in source terms), there cannot be any intervening defs,
   // and so an expr stack element can always be a SAPReg.
   // -- dmu 9/96 (as explained by Urs)
-  
-  // Forward-declaration for friend  
-  SplitPReg* regCovering(SCodeScope* s1, fint bci1,
-                         SCodeScope* s2, fint bci2,
-                         SplitSig* sig);
 
 
   class SAPReg : public PReg {
@@ -238,11 +228,11 @@
     SCodeScope* nscope()        { return (SCodeScope*)scope; }
     const char* prefix()              { return "SAP"; }
     bool verify();
-   protected:
-    bool basic_isLiveAt(SCodeScope* s, fint bci);
-    friend SplitPReg* regCovering(SCodeScope* s1, fint bci1,
+    static SplitPReg* regCovering(SCodeScope* s1, fint bci1,
                                   SCodeScope* s2, fint bci2,
                                   SplitSig* sig);
+   protected:
+    bool basic_isLiveAt(SCodeScope* s, fint bci);
   };
 
   // like SAPReg, but only used for outgoing arguments
@@ -273,9 +263,6 @@
     char* name();
   };
 
-  // Forward-declaration for friend  
-  SCodeScope* scopeFromBlockMap(mapOop blockMap);
-
   class BlockPReg : public SAPReg {
    public:
     blockOop block;
@@ -302,7 +289,7 @@
     char* name();
     bool verify();
 
-    friend SCodeScope* scopeFromBlockMap(mapOop blockMap);
+    static SCodeScope* scopeFromBlockMap(mapOop blockMap);
   };
   
 
@@ -319,14 +306,6 @@
     bool verify();
   };
 
-
-
-  // Forward-declaration for friend
-  ConstPReg* new_ConstPReg(SSelfScope* s, oop c);
-  #   ifdef UNUSED
-  ConstPReg* findConstPReg(Node* n, oop c);
-  #   endif
-
   class ConstPReg : public PReg {
     // ConstPRegs are used to CSE constants; at register allocation time,
     // they can either get a register (if one is available), or they're
@@ -338,9 +317,9 @@
    protected:
     ConstPReg(SSelfScope* s, oop c) : PReg(s) { constant = c; }
    public:
-    friend ConstPReg* new_ConstPReg(SSelfScope* s, oop c);
+    static ConstPReg* new_ConstPReg(SSelfScope* s, oop c);
 #   ifdef UNUSED
-    friend ConstPReg* findConstPReg(Node* n, oop c);
+    static ConstPReg* findConstPReg(Node* n, oop c);
 #   endif
     bool isConstPReg()          { return true; }
     // def cannot be targeted - source is a constant
@@ -357,6 +336,11 @@
     char* name();
     bool verify();
   };
+
+  static inline ConstPReg* new_ConstPReg(SSelfScope* s, oop c) {
+    return ConstPReg::new_ConstPReg(s, c);
+  }
+
   
 # endif
   

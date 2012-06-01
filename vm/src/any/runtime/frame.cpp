@@ -179,16 +179,16 @@ nmethod* frame::code() {
   // The subtraction below does not seem to be needed to me.
   // But We need to work on Klein, so I'm not messing with it. -- dmu 2/04
   // Note, this also occurs in Pc::my_nmethod.
-  nmethod* r = nmethodContaining(return_addr() - sizeof(class nmethod), NULL);
+  nmethod* r = nmethod::nmethodContaining(return_addr() - sizeof(class nmethod), NULL);
   # if GENERATE_DEBUGGING_AIDS
     if (CheckAssertions) {
       char* ra = return_addr();
       nmethod* nm1 = NULL;
            if   (r->contains(ra))  ;
-      else if ((nm1 = nmethodContaining(ra, NULL))->contains(ra))
+      else if ((nm1 = nmethod::nmethodContaining(ra, NULL))->contains(ra))
               fatal("should not have subtracted");
       else    fatal3("value 0x%x is not in any nmethod, either 0x%x, or 0x%x",
-                     ra, r, nmethodContaining(ra, NULL));
+                     ra, r, nmethod::nmethodContaining(ra, NULL));
     }
   # endif
   return r;
@@ -643,7 +643,7 @@ bool return_trap_was_just_for_vframeOops(char* selfPC, frame* convertFrame) {
   return !currentProcess->isKillingOrDeoptimizing()
       && !currentProcess->isUncommon()
 #     if defined(FAST_COMPILER) || defined(SIC_COMPILER)
-      && !(selfPC && findNMethod(selfPC)->isInvalid())
+      && !(selfPC && nmethod::findNMethod(selfPC)->isInvalid())
 #     endif
       && !currentProcess->isSingleStepping()
       && !currentProcess->isStopping()

@@ -7,10 +7,6 @@
   # pragma interface
 # endif
 
-
-// Forward-declaration for friend
-Map* create_mapMap();
-
 class mapMap: public Map {
  public:
   // testers
@@ -30,7 +26,7 @@ class mapMap: public Map {
                 oop filler= NULL);
   
   // creation operation
-  friend Map* create_mapMap();
+  static Map* create_mapMap();
   oop fill_in_slots(slotList* slist, fint slotCount) {
     ShouldNotCallThis(); Unused(slist); Unused(slotCount); return badOop; }
   

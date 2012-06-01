@@ -441,10 +441,6 @@ class compiled_vframe: public abstract_vframe {
   void print_code(fint curFrame);
 };
 
-
-// Forward-declaration for friend
-dummy_vframe* new_dummy_vframe(frame* sender);
-
 // used to represent the callee of the actual last vframe (to get at out-
 // going args)...somewhat hacky - only get_contents is guaranteed to work
 class dummy_vframe : public compiled_vframe {

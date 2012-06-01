@@ -107,14 +107,14 @@ byteVectorOop byteVectorOopClass::remove(fint s, fint change_point,
   return r;
 }
 
-byteVectorOop create_byteVector(oop parent) {
+byteVectorOop byteVectorOopClass::create_byteVector(oop parent) {
   slotList* slist = new slotList(VMString[PARENT],
                                  parent_map_slotType,
                                  parent); 
-  return create_byteVector(slist);
+  return ::create_byteVector(slist);
 }
 
-byteVectorOop create_byteVector(fint size) {
+byteVectorOop byteVectorOopClass::create_byteVector(fint size) {
   char* nb;
   oop *p= Memory->alloc_objs_and_bytes(size, 0, nb);
   byteVectorOop obj= as_byteVectorOop(p);
@@ -239,12 +239,12 @@ char* byteVectorOopClass::copy_c_heap_null_terminated() {
 
 // byte vector primitives
 
-oop bv_size_prim(oop rcvr) {
+oop byteVectorOopClass::bv_size_prim(oop rcvr) {
   if (!rcvr->is_byteVector()) return ErrorCodes::vmString_prim_error(BADTYPEERROR);
   return as_smiOop(byteVectorOop(rcvr)->length());
 }
 
-oop bv_compare_prim(oop rcvr,  oop arg) {
+oop byteVectorOopClass::bv_compare_prim(oop rcvr,  oop arg) {
   if (!rcvr->is_byteVector()) return ErrorCodes::vmString_prim_error(BADTYPEERROR);
   if (!arg ->is_byteVector()) return ErrorCodes::vmString_prim_error(BADTYPEERROR);
   return as_smiOop(
@@ -285,7 +285,7 @@ oop byteVectorOopClass::bv_concatenate_prim(byteVectorOop arg,
   return r;
 }
 
-oop bv_at_prim(oop rcvr, oop indexOop) { 
+oop byteVectorOopClass::bv_at_prim(oop rcvr, oop indexOop) { 
   if (!rcvr->is_byteVector()) return ErrorCodes::vmString_prim_error(BADTYPEERROR);
   if (!indexOop->is_smi())    return ErrorCodes::vmString_prim_error(BADTYPEERROR);
   smi index = smiOop(indexOop)->value();
@@ -295,7 +295,7 @@ oop bv_at_prim(oop rcvr, oop indexOop) {
 }
 
 
-oop bv_at_put_prim(oop rcvr, oop indexOop, oop contents) {
+oop byteVectorOopClass::bv_at_put_prim(oop rcvr, oop indexOop, oop contents) {
   if (!rcvr->is_byteVector() || rcvr->is_string())
     return ErrorCodes::vmString_prim_error(BADTYPEERROR);
   if (!indexOop->is_smi()) return ErrorCodes::vmString_prim_error(BADTYPEERROR);

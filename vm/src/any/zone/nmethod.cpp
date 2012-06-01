@@ -27,7 +27,7 @@ static nmln* depsStart;
 static nmln* depsEndArg;
 static int32 dLen;
 
-nmethod* new_nmethod(AbstractCompiler* c, bool generateDebugCode) {
+nmethod* nmethod::new_nmethod(AbstractCompiler* c, bool generateDebugCode) {
   // This grossness is brought to you by the great way in which C++
   // handles non-standard allocation...
   Assembler* instsA = c->instructions();
@@ -1155,13 +1155,11 @@ void nmethod::printPcs() {
 }
 #endif
 
-// Friend operations
-
-bool isNMethod(void* p) {
+bool nmethod::isNMethod(void* p) {
   return ((NCodeBase*)p)->vtbl_value() == ((nmethod*)NULL)->static_vtbl_value();
 }
 
-nmethod* nmethodContaining(char* pc, char* likelyEntryPoint) {
+nmethod* nmethod::nmethodContaining(char* pc, char* likelyEntryPoint) {
   assert(Memory->code->contains(pc), "should contain address");
   if (likelyEntryPoint && Memory->code->contains(likelyEntryPoint)) {
     nmethod* result = nmethod_from_insts(likelyEntryPoint);
@@ -1170,13 +1168,13 @@ nmethod* nmethodContaining(char* pc, char* likelyEntryPoint) {
   return findNMethod(pc);
 }
 
-nmethod* findNMethod(void* start) {
+nmethod* nmethod::findNMethod(void* start) {
   nmethod* m = Memory->code->findNMethod(start);
   assert(m->encompasses(start), "returned wrong nmethod");
   return m;
 }
 
-nmethod* findNMethod_maybe(void* start) {
+nmethod* nmethod::findNMethod_maybe(void* start) {
   nmethod* m = Memory->code->findNMethod_maybe(start);
   assert(!m || m->encompasses(start), "returned wrong nmethod");
   return m;

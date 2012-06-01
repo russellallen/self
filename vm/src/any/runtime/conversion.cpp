@@ -328,7 +328,7 @@ void Conversion::finish() {
 char* Conversion::copyArgsAndGetContinuationPC(sendDesc *sd_arg) {
   // work out continuationPC, copy outgoing args
   char *continuationPC;
-  nmethod* nm= findNMethod(sd_arg);
+  nmethod* nm= nmethod::findNMethod(sd_arg);
   PcDesc* pcd= nm->containingPcDescOrNULL((char*)sd_arg);
   assert(pcd, "shouldn't be in prologue");
   continuationPC= nm->insts() + pcd->pc;

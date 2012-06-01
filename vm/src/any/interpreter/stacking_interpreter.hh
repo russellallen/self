@@ -28,7 +28,7 @@ class stacking_interpreter : public abstract_interpreter {
   }
 
   virtual bool check_and_pop(fint n = 1) {
-    if ( !check(::check_for_pop, as_smiOop(n)) )
+    if ( !check(abstract_interpreter::check_for_pop, as_smiOop(n)) )
       return false;
     pop(n);
     return true;

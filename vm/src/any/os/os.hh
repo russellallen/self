@@ -12,9 +12,6 @@
 extern "C" void moncontrol(bool);
 # endif
 
-// Forward-declaration for friend
-char*   ExpandDir_prim(const char* in, void* FH);
-
 class OS {
  private:
   static const int seconds_per_day = 86400;
@@ -99,7 +96,7 @@ class OS {
   
   // File names
   static bool    expand_dir(const char* in, char* out);
-  friend char*   ExpandDir_prim(const char* in, void* FH);
+  static char*   ExpandDir_prim(const char* in, void* FH);
   static bool    is_non_unix_path(const char*);
   
   // Other file manipulation
@@ -196,6 +193,11 @@ class OS {
   
 # include "_os_pd.hh.incl"  
 };
+
+static inline char* ExpandDir_prim(const char* in, void* FH) {
+  return OS::ExpandDir_prim(in, FH);
+}
+
 
 oop get_swap_space_prim(oop rcvrIgnored, void *FH);
 

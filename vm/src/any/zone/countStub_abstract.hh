@@ -11,11 +11,6 @@
 # endif
 
 
-// Forward-declaration for friend
-bool isCacheStub(void* p);
-CountStub* new_CountStub(nmethod* target, pc_t entryPoint,
-                         nmln* sd_nmln, CountType t);
-
 
 // A CountStub can be inserted between caller and callee nmethods to keep
 // track of how often the call is executed.  All it does is increment a
@@ -41,7 +36,7 @@ class CountStub : public NCodeBase {
   // convention: the calling sd/PIC is responsible for maintaining the
   // call/jump to the count stub, except for deallocate (resets
   // sendDesc jump addr)
-  friend CountStub* new_CountStub(nmethod* target, pc_t entryPoint,
+  static CountStub* new_CountStub(nmethod* target, pc_t entryPoint,
                                   nmln* sd_nmln, CountType t);
   friend class nmethod;
   friend class sendDesc;
@@ -56,8 +51,7 @@ class CountStub : public NCodeBase {
   sendDesc* sender_sendDesc() {
     sendDesc *s= sd();  return s ? s : pic()->sd(); }
   nmethod* sender() {           // sending nmethod
-    nmethod *findNMethod(void *s);
-    return findNMethod(sender_sendDesc()); }
+    return nmethod::findNMethod(sender_sendDesc()); }
   sendDesc* sd();               // calling sendDesc (NULL if PIC)
   CacheStub* pic();             // calling PIC (NULL if sendDesc)
   virtual void moveTo_inner(NCodeBase* to, int32 delta, int32 size);
@@ -86,10 +80,6 @@ class CountStub : public NCodeBase {
   friend void countStub2_init();
 };
 
-// Forward-declaration for friend
-// cf. cacheStub
-void set_CountigStub_vtbl_value();
-
 class CountingStub: public CountStub {
   VTBL_AND_SETTER(CountingStub, :CountStub(1.0));
  public:
@@ -100,10 +90,6 @@ class CountingStub: public CountStub {
   char* name()                  { return "CountingStub"; }
   friend bool isCountStub(void* p);
 };
-
-// Forward-declaration for friend
-// cf. cacheStub
-void set_ComparingStub_vtbl_value();
 
 class ComparingStub: public CountStub {
   VTBL_AND_SETTER(ComparingStub, :CountStub(1.0));
@@ -126,10 +112,6 @@ class ComparingStub: public CountStub {
 // when the counter overflows, the nmethod becomes old.  This helps prevent
 // premature recompilation (which can cause uncommon traps because the pics
 // aren't primed yet.)
-
-// Forward-declaration for friend
-// cf. cacheStub
-void set_AgingStub_vtbl_value();
 
 class AgingStub : public ComparingStub {
   VTBL_AND_SETTER(AgingStub, :ComparingStub(1.0));

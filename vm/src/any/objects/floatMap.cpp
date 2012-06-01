@@ -8,7 +8,7 @@
 
 DO_NOT_CROSS_COMPILE 
   
-Map* create_floatMap(oop parent) {
+Map* floatMap::create_floatMap(oop parent) {
   slotList *s= new slotList(VMString[PARENT], 
                             parent_map_slotType,
                             parent,

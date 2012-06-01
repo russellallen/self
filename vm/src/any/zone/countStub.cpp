@@ -86,6 +86,10 @@ void* ComparingStub::operator new(size_t size) {
 // see comment in cacheStub.c for missing operator delete
 
 
+nmethod* CountStub::sender() {
+  return nmethod::findNMethod(sender_sendDesc()); 
+}
+
 void CountStub::shift_count_addr(int32 delta) {
   CountCodePattern* patt = CountStub::pattern[countType()];
   set_count_addr(patt, count_addr(patt) + delta);
@@ -95,8 +99,8 @@ fint CountStub::id() {
   return (int32*)count_addr(pattern[countType()]) - idManager->data;
 }
 
-CountStub* new_CountStub(nmethod* target, pc_t entry,
-                         nmln* sd_nmln, CountType t){
+CountStub* CountStub::new_CountStub(nmethod* target, pc_t entry,
+                                    nmln* sd_nmln, CountType t){
   CountStub* s;
   switch (t) {
    case Counting:   s = new CountingStub(target, entry, sd_nmln);
@@ -278,7 +282,7 @@ void CountStub::print() {
          sd(), sendCounts[id()]);
 }
 
-nmethod* CountStub::target() { return findNMethod(jump_addr()); }
+nmethod* CountStub::target() { return nmethod::findNMethod(jump_addr()); }
 
 sendDesc* CountStub::sd() {
   if (Memory->code->contains(sdLink.next)) {
@@ -327,7 +331,7 @@ bool CountStub::verify2(CacheStub *calling_pic) {
   return r;
 }
 
-bool isCountStub(void* p) {
+bool CountStub::isCountStub(void* p) {
   VtblPtr_t vtbl = ((NCodeBase*)p)->vtbl_value();
   return vtbl == (( CountingStub*)NULL)->static_vtbl_value() ||
          vtbl == ((ComparingStub*)NULL)->static_vtbl_value() ||

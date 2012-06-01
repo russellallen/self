@@ -286,14 +286,14 @@ static PrimDesc fntable1[] = {
  "For debugging the VM; returns the receiver."
 },
 {
-"ByteAt:", fntype(&bv_at_prim),
+"ByteAt:", fntype(&byteVectorOopClass::bv_at_prim),
  ByteAtPrimitive, IntegerPrimType,
  SIDEEFFECTS,      // cannot be constant-folded (exc. for string literal)
  "Analogous to _At:, but for byte vectors.  Returns an integer in the "
  "range [0..255]."
 },
 {
-"ByteAt:Put:", fntype(&bv_at_put_prim),
+"ByteAt:Put:", fntype(&byteVectorOopClass::bv_at_put_prim),
  ByteAtPutPrimitive, ReceiverPrimType,
  SIDEEFFECTS,
  "Store into a byte vector element; analogous to _At:Put:.  The value "
@@ -301,13 +301,13 @@ static PrimDesc fntable1[] = {
  "receiver is a canonical string."
 },
 {
-"ByteSize", fntype(&bv_size_prim),
+"ByteSize", fntype(&byteVectorOopClass::bv_size_prim),
  ByteSizePrimitive, IntegerPrimType,
  NOSIDEEFFECTS,
  "Analogous to _Size, but for byte vectors."
 },
 {
-"ByteVectorCompare:", fntype(&bv_compare_prim),
+"ByteVectorCompare:", fntype(&byteVectorOopClass::bv_compare_prim),
  ExternalPrimitive, IntegerPrimType,
  NOSIDEEFFECTS,
  "Compares two byte vectors, returning -1, 0, or 1 if the receiver is "
@@ -1650,7 +1650,7 @@ fntype(&call_and_convert5_glue),
  "necessary.  _ObjectID is the reverse to _AsObject"
 },
 {
-"OnNonLocalReturn:", fntype(&unwind_protect_prim),
+ "OnNonLocalReturn:", fntype(&oopClass::unwind_protect_prim),
  UnwindProtectPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
  "Sends 'value' to the receiver; "

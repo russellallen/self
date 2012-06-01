@@ -7,13 +7,10 @@
   # pragma interface
 # endif
 
-// Forward-declaration for friend
-Map* create_smiMap(oop parent);
-
 class smiMap: public immediateMap {
  public:
   // creation operation
-  friend Map* create_smiMap(oop parent);
+  static Map* create_smiMap(oop parent);
   
   // testing
   VtblMapType vtblMapType() { return MAP_TYPE_NAME(smiMap); }

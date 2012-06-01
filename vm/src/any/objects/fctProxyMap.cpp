@@ -7,7 +7,7 @@
 # include "_fctProxyMap.cpp.incl"
 
 
-fctProxyOop create_fctProxy() {
+fctProxyOop fctProxyMap::create_fctProxy() {
   slotList* slots = new slotList(VMString[PARENT], 
                                  parent_map_slotType,
                                  create_slots((slotList*)NULL));

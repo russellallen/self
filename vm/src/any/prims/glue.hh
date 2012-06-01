@@ -51,7 +51,7 @@ extern const char *TS_func;    /* Type seal for functions (from dynLink).       
 
 # define process_glue                                                                                                                                    \
   CC_mber_4(oop,,         oop,process,         NewProcess_prim,        NewProcess_prim_glue,        fail, smi,, any_oop,, oop,string, oop,objVector    ) \
-   C_func_1(bool,,                             BlockSignals_prim,      BlockSignals_prim_glue,          , bool,                                        ) \
+   C_func_1(bool,,            SignalInterface::BlockSignals_prim,      BlockSignals_prim_glue,          , bool,                                        ) \
    C_func_0(smi,,                              TWAINSResultSize_prim,  TWAINSResultSize_prim_glue,                                                     ) \
   CC_mber_3(oop,,         oop,process,         TWAINS_prim,            TWAINS_prim_glue,            fail, oop,objVector,  bool,,  any_oop,             ) \
   CC_mber_0(oop,,         oop,process,         AbortProcess_prim,      AbortProcess_prim_glue,      fail                                               ) \

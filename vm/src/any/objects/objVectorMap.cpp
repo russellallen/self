@@ -43,7 +43,7 @@ oop objVectorMap::cloneSize(oop obj, fint len, bool mustAllocate, oop filler) {
   return v;
 }
 
-objVectorOop create_objVector(slotList* slots) {
+objVectorOop objVectorMap::create_objVector(slotList* slots) {
   objVectorOop ov;
   objVectorMap m1;
   (void)create_map(sizeof(objVectorMap), slots, &m1, (oop*)&ov);

@@ -164,10 +164,9 @@ class interpreter: public abstract_interpreter {
     
   void print();
 
- public: // should be prot but friend doesn't work
+ protected:
   void setup_for_method( );
   void setup_for_block(  );
- protected:
   void start_NLR(oop res);
   void continue_NLR();
 };

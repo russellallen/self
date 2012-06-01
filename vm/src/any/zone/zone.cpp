@@ -493,7 +493,7 @@ void zone::flushZombies() {
   nmln nonFlushable;
   while (zombies.notEmpty()) {
     nmethod* nm = NMETHOD_FROM(zoneLink, zombies.next);
-    assert(isNMethod(nm), "invalid nmethod");
+    assert(nmethod::isNMethod(nm), "invalid nmethod");
     assert(nm->isZombie(), "not a zombie");
     if (nm->frame_chain != NoFrameChain) {
       // temporarily remove non-flushable nmethods from zombie chain
@@ -1067,7 +1067,7 @@ nmethod* zone::findNMethod(void* start) {
   nmethod* n;
   if (iZone->contains(start)) {
     n = (nmethod*)iZone->findStartOfBlock(start);
-    assert(isNMethod(n), "not an nmethod");
+    assert(nmethod::isNMethod(n), "not an nmethod");
 #   if GENERATE_DEBUGGING_AIDS
     if (CheckAssertions) {
       if ((char*)start >= (char*)n->locsEnd()) {
@@ -1096,7 +1096,7 @@ void zone::findNMethodOrMap(nmln* n, nmethod* &nm, slotsMapDeps* &s) {
   nm= NULL;  s= NULL;
   if (iZone->contains(n)) {
     nm= (nmethod*)iZone->findStartOfBlock(n);
-    assert(isNMethod(nm), "not an nmethod");
+    assert(nmethod::isNMethod(nm), "not an nmethod");
     assert((char*)n < (char*)nm->locsEnd(), "found wrong nmethod");
   } else if (dZone->contains(n)) {
     void *p= *(void**)dZone->findStartOfBlock(n);
@@ -1133,7 +1133,7 @@ int32 zone::instsSize()  { return iZone->capacity(); }
 inline nmethod* zone::next_circular_nm(nmethod* nm) {
   nm = next_nm(nm);
   if (nm == NULL) nm = first_nm();
-  assert(nm == NULL || isNMethod(nm), "not a valid nmethod");
+  assert(nm == NULL || nmethod::isNMethod(nm), "not a valid nmethod");
   return nm;
 }
 
@@ -1164,7 +1164,7 @@ int32 zone::sweeper(int32 maxVisit, int32 maxReclaim,
   do {
     if (PrintLRUSweep2) lprintf("\n*inspecting %#lx (id %ld): ",
                                (void*)(long unsigned)p, (void*)long(p->id));
-    assert(isNMethod(p), "invalid nmethod");
+    assert(nmethod::isNMethod(p), "invalid nmethod");
     
     if ((p->isZombie() ||
          p->isDebug()  ||
@@ -1449,11 +1449,11 @@ void zone::read_snapshot(FILE* f) {
 
       stubs->zone()->read_snapshot(f);
 
-            set_nmethod_vtbl_value();
-          set_CacheStub_vtbl_value();
-       set_CountingStub_vtbl_value();
-      set_ComparingStub_vtbl_value();
-          set_AgingStub_vtbl_value();
+          nmethod::set_vtbl_value();
+        CacheStub::set_vtbl_value();
+     CountingStub::set_vtbl_value();
+    ComparingStub::set_vtbl_value();
+        AgingStub::set_vtbl_value();
 
       if (!okToUseCodeFromSnapshot)
         clear();

@@ -7,8 +7,6 @@
   # pragma interface
 # endif
 
-// Forward-declaration for friend
-mirrorOop create_mirror(oop reflectee=create_slots((slotList*)NULL));
 
 class mirrorMap: public slotsMapDeps {
  public:
@@ -17,7 +15,7 @@ class mirrorMap: public slotsMapDeps {
   VtblMapType vtblMapType() { return MAP_TYPE_NAME(mirrorMap); }
 
   // creation operation
-  friend mirrorOop create_mirror(oop reflectee);
+  static mirrorOop create_mirror(oop reflectee = create_slots((slotList*)NULL));
   
   // mirror operation
   mirrorOop mirror_proto() { return Memory->mirrorMirrorObj; }
@@ -31,7 +29,8 @@ class mirrorMap: public slotsMapDeps {
   // enumerating
   virtual bool is_enumerable(oop obj, oop* matching_cell) {
     Unused(obj); Unused(matching_cell);
-    return true; }
+    return true; 
+  }
 
   // programming
   void switch_pointer(oop obj, oop* where, oop to);

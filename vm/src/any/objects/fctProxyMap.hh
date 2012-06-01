@@ -7,8 +7,6 @@
   # pragma interface
 # endif
 
-// Forward-declaration for friend
-fctProxyOop create_fctProxy(); // To create initial proxy
 
 class fctProxyMap: public proxyMap {
  public:
@@ -18,7 +16,7 @@ class fctProxyMap: public proxyMap {
 
   
   // creation operation
-  friend fctProxyOop create_fctProxy(); // To create initial proxy
+  static fctProxyOop create_fctProxy(); // To create initial proxy
 
   // mirror operation
   mirrorOop mirror_proto() { return Memory->fctProxyMirrorObj; }

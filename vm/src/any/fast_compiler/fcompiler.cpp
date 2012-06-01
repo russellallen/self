@@ -62,7 +62,7 @@ nmethod* FCompiler::compile() {
   
   codeGen->scopeDescs->generate();
   if (PrintCompilationStatistics) t.stop();     // don't include nmethod alloc
-  nmethod* nm = new_nmethod(this, generateDebugCode);
+  nmethod* nm = nmethod::new_nmethod(this, generateDebugCode);
   assert(theAssembler->verifyLabels(), "undefined labels");
   em.event.args[1] = nm;
   if (PrintCompilation || PrintCompilationStatistics) {

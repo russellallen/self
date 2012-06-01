@@ -191,7 +191,7 @@ void Process::initialize(oop rcvr, stringOop sel, objVectorOop args) {
   init(first_inst_addr(startCurrentProcess));
 }
 
-void startCurrentProcess() {
+void Process::startCurrentProcess() {
   currentProcess->start();
 }
 

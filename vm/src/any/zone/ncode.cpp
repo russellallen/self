@@ -245,7 +245,7 @@ NCodeBase* findThing(void* addr) {
     return findStub(addr);
   } else if (Memory->code->contains(addr)) {
     nmethod* n= nmethod_from_insts((char*)addr);
-    assert(isNMethod(n), "not a method");
+    assert(nmethod::isNMethod(n), "not a method");
     return n;
   } else {
     return NULL;

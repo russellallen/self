@@ -348,7 +348,7 @@ void HProfiler::tick() {
   if (Memory->code->iZone->contains(InterruptedContext::the_interrupted_context->pc())) {
     // bottommost nmethod may have no frame (e.g. access methods)
     // so it may be omitted from the stack trace
-    nmethod* last = findNMethod(InterruptedContext::the_interrupted_context->pc());
+    nmethod* last = nmethod::findNMethod(InterruptedContext::the_interrupted_context->pc());
     if (last != f->code()) nms[n++] = last;
   }
   for ( ; f; f = f->selfSender()) {

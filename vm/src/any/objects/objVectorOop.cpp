@@ -20,14 +20,14 @@ objVectorOop objVectorOopClass::shrink(fint delta, bool mustAllocate) {
   return v;
 }
 
-objVectorOop create_objVector(oop parent) {
+objVectorOop objVectorOopClass::create_objVector(oop parent) {
   slotList* slist = new slotList(VMString[PARENT],
                                  parent_map_slotType,
                                  parent); 
-  return create_objVector(slist);
+  return ::create_objVector(slist);
 }
 
-objVectorOop create_objVector(fint size) {
+objVectorOop objVectorOopClass::create_objVector(fint size) {
   objVectorOop obj = (objVectorOop) create_slots(size);
   obj->set_length(0);
   return obj;
@@ -45,12 +45,12 @@ bool objVectorOopClass::verify() {
   return flag;
 }
 
-oop ov_size_prim(oop rcvr) {
+oop objVectorOopClass::ov_size_prim(oop rcvr) {
   if (!rcvr->is_objVector()) return ErrorCodes::vmString_prim_error(BADTYPEERROR);
   return as_smiOop(objVectorOop(rcvr)->length());
 }
 
-oop ov_at_prim(oop rcvr, oop indexOop) {
+oop objVectorOopClass::ov_at_prim(oop rcvr, oop indexOop) {
   if (!rcvr->is_objVector())
     return ErrorCodes::vmString_prim_error(BADTYPEERROR);
   if (!indexOop->is_smi())
@@ -61,7 +61,7 @@ oop ov_at_prim(oop rcvr, oop indexOop) {
   return objVectorOop(rcvr)->obj_at(index);
 }
 
-oop ov_at_put_prim(oop rcvr, oop indexOop, oop contents) {
+oop objVectorOopClass::ov_at_put_prim(oop rcvr, oop indexOop, oop contents) {
   if (!rcvr->is_objVector()) return ErrorCodes::vmString_prim_error(BADTYPEERROR);
   if (!indexOop->is_smi()) return ErrorCodes::vmString_prim_error(BADTYPEERROR);
   smi index = smiOop(indexOop)->value();
@@ -100,11 +100,11 @@ oop objVectorOopClass::ov_methodPointer_prim() {
 }
 
 oop objVectorOopClass::ov_references_prim(oop limit) {
-  return enumerate_vector_references( this, limit);
+  return referencesEnumeration::enumerate_vector_references( this, limit);
 }
 
 oop objVectorOopClass::ov_implementors_prim(oop limit) {
-  return enumerate_vector_implementors( this, limit);
+  return implementorsEnumeration::enumerate_vector_implementors( this, limit);
 }
 
 int32* objVectorOopClass::convertIntArray() {

@@ -7,9 +7,6 @@
   # pragma interface
 # endif
 
-// Forward-declaration for friend  
-processOop create_process(Process* process);
-
 class processMap: public slotsMapDeps {
  public:
   // testing operations
@@ -19,7 +16,7 @@ class processMap: public slotsMapDeps {
 
   
   // creation operation
-  friend processOop create_process(Process* process);
+  static processOop create_process(Process* process);
   
   oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL);
   bool can_inline_clone() { return false; }
@@ -46,3 +43,7 @@ class processMap: public slotsMapDeps {
   // profiler operation
   void dummy_initialize(oop obj, oop filler);
 };
+
+static inline processOop create_process(Process* process) {
+  return processMap::create_process(process);
+}

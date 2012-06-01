@@ -6,7 +6,7 @@
 # pragma implementation "mirrorOop.hh"
 # include "_mirrorOop.cpp.incl"
 
-oop as_mirror_prim(oop obj) {
+oop mirrorOopClass::as_mirror_prim(oop obj) {
   return obj->as_mirror();
 }
 

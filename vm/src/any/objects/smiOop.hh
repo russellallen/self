@@ -18,19 +18,16 @@
 # define smiOop_max   smiOop(lowerBits((AllBits << Tag_Size) + Int_Tag,       \
     BitsPerWord - 1))
 
-
-// Forward-declaration for friend
-smiOop as_smiOop(smi value);
-smiOop as_byte_count_smiOop(smi value);
-
 class smiOopClass: public oopClass {
  public:
   // constructors
-  friend inline smiOop as_smiOop(smi value) {
-    return smiOop((value << Tag_Size) + Int_Tag); }
-  friend inline smiOop as_byte_count_smiOop(smi value) {
+  static inline smiOop as_smiOop(smi value) {
+    return smiOop((value << Tag_Size) + Int_Tag); 
+  }
+  static inline smiOop as_byte_count_smiOop(smi value) {
     assert(lowerBits(value, Tag_Size) == 0, "not a legal byte count");
-    return smiOop(value + Int_Tag); }
+    return smiOop(value + Int_Tag); 
+  }
   
   // accessors
   smi value() { return (smi(this) - Int_Tag) >> Tag_Size; }
@@ -56,6 +53,14 @@ class smiOopClass: public oopClass {
   oop address_as_oop_prim();
 
 };
+
+static inline smiOop as_smiOop(smi value) {
+  return smiOopClass::as_smiOop(value);
+}
+
+static inline smiOop as_byte_count_smiOop(smi value) {
+  return smiOopClass::as_byte_count_smiOop(value);
+}
 
 oop smi_lt_prim(oop rcvr, oop arg);
 oop smi_le_prim(oop rcvr, oop arg);

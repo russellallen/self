@@ -15,10 +15,7 @@
 
   typedef void (*intDoFn)(int i);
 
-  // Forward-declaration for friend
-  fint findFirstUnused(LongRegisterString** strings, fint len,
-                       fint start);
-  
+ 
   class BitVector:  public ResourceObj {
    protected:
     int32 maxLength;
@@ -94,5 +91,6 @@
     friend fint findFirstUnused(LongRegisterString** strings, fint len,
                                 fint start);
   };
-  
+
+
 # endif

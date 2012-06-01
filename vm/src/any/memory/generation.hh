@@ -60,22 +60,6 @@ public:
   MapList(slotsMapDeps *m, MapList *n) { next= n; map= m; }
 };
 
-
-// Forward-declaration for friend
-oop clone0_prim(slotsOop rcvr);
-oop clone1_prim(slotsOop rcvr);
-oop clone2_prim(slotsOop rcvr);
-oop clone3_prim(slotsOop rcvr);
-oop clone4_prim(slotsOop rcvr);
-oop clone5_prim(slotsOop rcvr);
-oop clone6_prim(slotsOop rcvr);
-oop clone7_prim(slotsOop rcvr);
-oop clone8_prim(slotsOop rcvr);
-oop clone9_prim(slotsOop rcvr);
-#ifndef NOASM
-void itrace(fint);
-#endif
-
 class newGeneration: public generation {
 
   friend class rSet;
@@ -173,15 +157,6 @@ class newGeneration: public generation {
   void write_snapshot(FILE* file);
 };
 
-// Forward-declaration for friend
-oop expand_heap_prim(oop, smi);
-stringOop create_string(fint);
-inline void handlePreemption();
-void create_initial_strings(oop);
-#ifndef NOASM
-void itrace(fint);
-#endif
-
 class oldGeneration: public generation {
 
   friend class rSet;
@@ -195,8 +170,10 @@ class oldGeneration: public generation {
   friend oop expand_heap_prim(oop, smi);
   friend class oldSpace;
   // these alloc_ directly here
-  friend stringOop create_string(fint);
+  // friend stringOop stringOopClass::create_string(fint);
   // friend stringOop stringOopClass::make_string(char*, fint, bool);
+  // only called at startup
+  // friend void create_initial_strings(oop);
   friend class stringOopClass;
 
 // the following does not work with Metroworks precompiled headers
@@ -250,8 +227,6 @@ class oldGeneration: public generation {
   oldGeneration(            int32 initial_size, int32 reserved_amount);
   oldGeneration(FILE* snap, int32 initial_size, int32 reserved_amount);
 
-  // only called at startup
-  friend void create_initial_strings(oop);
   char* empty_bytes_addr() {
     assert(first_space != NULL && first_space->next_space == NULL,
            "empty_bytes_addr called too late");
