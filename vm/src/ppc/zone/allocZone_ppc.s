@@ -1,4 +1,4 @@
-# ifdef __ppc__`
+# ifdef __ppc__
 ;/* Sun-$Revision: 30.10 $ */
 
 ;/* Copyright 1992-2012 AUTHORS.
