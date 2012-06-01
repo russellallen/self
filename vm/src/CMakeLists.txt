@@ -2,7 +2,7 @@
 
 #config below.
 
-set(SRC_ANY
+set(SRC_any
   any/asm/asm.cpp
   any/asm/asm.hh
   any/asm/asm_abstract.hh
@@ -534,12 +534,12 @@ set(SRC_ppc
   ppc/memory/search_ppc.cpp
   ppc/memory/search_ppc.hh
   ppc/prims/asmPrims_gcc_ppc.s
-  ppc/prims/asmPrims_mw_ppc.s
+#  ppc/prims/asmPrims_mw_ppc.s only metrowerks
   ppc/prims/prim_table_arch_ppc.hh
   ppc/runtime/aCompiler_ppc.cpp
   ppc/runtime/aCompiler_ppc.hh
   ppc/runtime/asmDefs_gcc_ppc.hh
-  ppc/runtime/asmDefs_mw_ppc.hh
+#  ppc/runtime/asmDefs_mw_ppc.hh
   ppc/runtime/conversion_ppc.cpp
   ppc/runtime/conversion_ppc.hh
   ppc/runtime/frame_format_ppc.cpp
@@ -555,7 +555,7 @@ set(SRC_ppc
   ppc/runtime/registerLocator_ppc.cpp
   ppc/runtime/registerLocator_ppc.hh
   ppc/runtime/runtime_asm_gcc_ppc.s
-  ppc/runtime/runtime_asm_mw_ppc.s
+#  ppc/runtime/runtime_asm_mw_ppc.s
   ppc/runtime/runtime_ppc.cpp
   ppc/runtime/runtime_ppc.hh
   ppc/runtime/stubs_ppc.cpp
@@ -700,14 +700,16 @@ set(SRC_cocoa
   cocoa/os/SelfConsole.mm
 )
 
+# include non-dependent
+set(SRC_src ${SRC_src} ${SRC_any})
 
 # include unix files
 if(UNIX)
-    set(SRC ${SRC} ${SRC_unix})
+    set(SRC_src ${SRC_src} ${SRC_unix})
 endif(UNIX)
 
 # inlcude platform files
-set(SRC ${SRC} ${SRC_${platform_processor}})
+set(SRC_src ${SRC_src} ${SRC_${platform_processor}})
 
 # hack apple:
 # inlcude "other platform files
@@ -717,18 +719,9 @@ if(APPLE)
   else()
     set(other_arch i386)
   endif()
-  set(SRC ${SRC} ${SRC_${other_arch}})
+  set(SRC_src ${SRC_src} ${SRC_${other_arch}})
 endif(APPLE)
 
-source_groups_from_src(SRC)
+prepend_every_item(SRC_src "${CMAKE_CURRENT_SOURCE_DIR}/")
 
-#fixup.
-set(SRC)
-foreach(file ${SRC})
-  set(SRC ${SRC} ${CMAKE_CURRENT_SOURCE_DIR}/${file})
-endforeach()
-
-message("${SRC}")
-list(APPEND SRC foo)
-
-set(SRC ${SRC} PARENT_SCOPE)
+set(SRC_src ${SRC_src} PARENT_SCOPE)

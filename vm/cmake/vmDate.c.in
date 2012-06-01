@@ -1,0 +1,1 @@
+char* vmDate = "@DATE@ @PLATFORM@@GIT_REVISION@";

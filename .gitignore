@@ -26,6 +26,7 @@ bin/*/rself
 bin/*/skipComments
 bin/*/zap
 vm/*/generated/incls/*.incl
+vm/*/generated/incls/vmDate.c
 vm/*/generated/Dependencies
 vm/*/generated/Dependencies.cpp
 vm/*/generated/Dependencies.hh
