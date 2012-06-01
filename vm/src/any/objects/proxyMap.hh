@@ -7,9 +7,6 @@
   # pragma interface
 # endif
 
-// Forward-declaration for friend
-proxyOop create_proxy();
-
 class proxyMap: public foreignMap {
  public:
   // testing operations
@@ -18,7 +15,7 @@ class proxyMap: public foreignMap {
 
   
   // creation operation
-  friend proxyOop create_proxy();             // To create initial proxy
+  static proxyOop create_proxy();             // To create initial proxy
 
   // mirror operation
   mirrorOop mirror_proto() { return Memory->proxyMirrorObj; }

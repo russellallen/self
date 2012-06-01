@@ -22,9 +22,6 @@ class SharedIndicator;
 enum SYS_state { nothing,
                  reading, writing, disk_IO, disk_in, disk_out, in_unix, idle};
 
-// Forward-declaration for friend
-void selfs_free(void* ptr);
-
 class abstract_monitor: public CHeapObj {
  friend class barDesc;
  friend class sampledBarDesc;

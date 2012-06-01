@@ -7,18 +7,6 @@
   # pragma interface
 # endif
 
-// Forwar-declaration for friend
-byteVectorOop as_byteVectorOop(void* p);
-byteVectorOop create_byteVector(oop parent);
-byteVectorOop create_byteVector(fint size);
-oop bv_at_prim(oop rcvr, oop index);
-oop bv_at_put_prim(oop rcvr, oop index, oop cval);
-oop bv_size_prim(oop rcvr);
-oop bv_compare_prim(oop rcvr, oop arg);
-int32 byteVector_len_offset();
-int32 byteVector_bytes_offset();
-
-
 inline smi lengthWords(smi l) { return roundTo((l), oopSize) / oopSize; }
 
 class byteVectorOopClass: public slotsOopClass {
@@ -28,7 +16,7 @@ class byteVectorOopClass: public slotsOopClass {
   char* _bytes;
 
   // constructor
-  friend byteVectorOop as_byteVectorOop(void* p) {
+  static inline byteVectorOop as_byteVectorOop(void* p) {
     return byteVectorOop(as_slotsOop(p)); }
 
   // accessors
@@ -70,8 +58,8 @@ class byteVectorOopClass: public slotsOopClass {
                                                   filler)); }
 
   // creation operations
-  friend byteVectorOop create_byteVector(oop parent);
-  friend byteVectorOop create_byteVector(fint size);
+  static byteVectorOop create_byteVector(oop parent);
+  static byteVectorOop create_byteVector(fint size);
 
   // memory operations
   byteVectorOop scavenge(fint size);
@@ -113,10 +101,10 @@ class byteVectorOopClass: public slotsOopClass {
   void string_print(fint offset, fint len) { lprintf_string( len, bytes()+offset); }
 
   // primitives
-  friend oop bv_at_prim(oop rcvr, oop index);
-  friend oop bv_at_put_prim(oop rcvr, oop index, oop cval);
-  friend oop bv_size_prim(oop rcvr);
-  friend oop bv_compare_prim(oop rcvr, oop arg);
+  static oop bv_at_prim(oop rcvr, oop index);
+  static oop bv_at_put_prim(oop rcvr, oop index, oop cval);
+  static oop bv_size_prim(oop rcvr);
+  static oop bv_compare_prim(oop rcvr, oop arg);
   oop bv_concatenate_prim(byteVectorOop arg, byteVectorOop proto, void *FH);
   oop bv_clone_prim(smi size, u_char filler, void *FH); // Caller must handle size < 0.
 
@@ -137,10 +125,23 @@ class byteVectorOopClass: public slotsOopClass {
   byteVectorOop verify_opts_prim();
 
   // compiler support
-  friend int32 byteVector_len_offset() {
+  static inline int32 byteVector_len_offset() {
     return int32(&byteVectorOop(0)->addr()->_len); }
-  friend int32 byteVector_bytes_offset() {
+  static inline int32 byteVector_bytes_offset() {
     return int32(&byteVectorOop(0)->addr()->_bytes); }
 
 };
+ 
 
+// creation operations
+static inline byteVectorOop create_byteVector(oop parent) {
+  return byteVectorOopClass::create_byteVector(parent);
+}
+
+static inline byteVectorOop create_byteVector(fint size) {
+  return byteVectorOopClass::create_byteVector(size);
+}
+
+static inline byteVectorOop as_byteVectorOop(void* p) {
+  return byteVectorOopClass::as_byteVectorOop(p);
+}

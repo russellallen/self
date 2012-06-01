@@ -78,7 +78,7 @@ bool codeTable::verify() {
     for (nmln* q = p->next;  q != p;  q = q->next) {
       codeTableEntry *e= entryForLink(q);
       nmethod* nm= e->nm;
-      if (!isNMethod(nm)) {
+      if (!nmethod::isNMethod(nm)) {
         error2("bad nmethod 0x%lx in bucket 0x%lx", nm, p);
         flag = false;
       }

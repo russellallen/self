@@ -11,9 +11,6 @@
 // stringOops are canonical strings; all stringOops are registered in the
 // string table
 
-// Forward-declaration for friend
-void create_initial_strings(oop parent);
-
 class stringMap: public byteVectorMap {
  public:
   // testers
@@ -25,7 +22,7 @@ class stringMap: public byteVectorMap {
   bool should_canonicalize() { return false; }  
   
   // constructors
-  friend void create_initial_strings(oop parent);
+  static void create_initial_strings(oop parent);
   
   // mirror operation
   mirrorOop mirror_proto() { return Memory->stringMirrorObj; }
@@ -49,3 +46,8 @@ class stringMap: public byteVectorMap {
   void print_oop(oop obj);
   void print(oop obj);
 };
+
+
+static inline void create_initial_strings(oop parent) {
+  return stringMap::create_initial_strings(parent);
+}

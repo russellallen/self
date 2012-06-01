@@ -8,13 +8,10 @@
 # endif
 
 
-// Forward-declaration for friend
-floatOop as_floatOop(float value);
-
 class floatOopClass: public oopClass {
  public:
   // constructor
-  friend floatOop as_floatOop(float value);
+  static floatOop as_floatOop(float value);
   
   // accessors
   float value();
@@ -33,6 +30,11 @@ class floatOopClass: public oopClass {
   char *print_string_prim();
   char *print_string_precision_prim(smi precision);
 };
+
+static inline floatOop as_floatOop(float value) {
+  return floatOopClass::as_floatOop(value);
+}
+
 
 extern floatOop infinityOop;
 

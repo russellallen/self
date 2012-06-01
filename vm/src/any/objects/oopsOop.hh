@@ -7,14 +7,11 @@
   # pragma interface
 # endif
 
-// Forward-declaration for friend
-oopsOop as_oopsOop(void* p);
-
 
 class oopsOopClass: public memOopClass {
  public:
   // constructor
-  friend oopsOop as_oopsOop(void* p) { return (oopsOop) as_memOop(p); }
+  static oopsOop as_oopsOop(void* p) { return (oopsOop) as_memOop(p); }
   
   // accessors
   oop* oops(fint which = 0) { return &((oop*) addr())[which]; }
@@ -86,3 +83,8 @@ class oopsOopClass: public memOopClass {
   void gc_mark_referents();
   bool verify();
 };
+
+static inline oopsOop as_oopsOop(void* p) { 
+  return oopsOopClass::as_oopsOop(p);
+}
+

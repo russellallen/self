@@ -24,12 +24,6 @@ class addrDesc;
 
 enum nm_compiler {nm_nic, nm_sic, nm_last};
 
-// Forward-declaration for friend
-void moveInsts(char* from, char* to, int32 size);
-void printAllNMethods();
-void sweepTrigger();
-
-
 class zone: public CHeapObj {
  protected:
   int32* bottom;

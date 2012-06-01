@@ -7,10 +7,6 @@
   # pragma interface
 # endif
 
-// Forward-declaration for friend
-byteVectorOop create_byteVector(slotList* slots);
-
-
 class byteVectorMap: public slotsMapDeps {
  public:
   // testers
@@ -45,8 +41,8 @@ class byteVectorMap: public slotsMapDeps {
   oop cloneSize(oop obj, fint len, bool mustAllocate= true, oop filler= NULL);
   
   // creation operations
-  friend byteVectorOop create_byteVector(slotList* slots);
-  slotsOop create_object(fint size) { return create_byteVector(size); }
+  static byteVectorOop create_byteVector(slotList* slots);
+  slotsOop create_object(fint size) { return ::create_byteVector(size); }
   
   // mirror operation
   mirrorOop mirror_proto() { return Memory->byteVectorMirrorObj; }
@@ -68,3 +64,8 @@ class byteVectorMap: public slotsMapDeps {
   // printing support
   void print_byteVector(oop obj);
 };
+
+static inline byteVectorOop create_byteVector(slotList* slots) {
+  return byteVectorMap::create_byteVector(slots);
+}
+

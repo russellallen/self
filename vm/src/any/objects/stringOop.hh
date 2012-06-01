@@ -9,11 +9,6 @@
 
 
 // constructors
-// Forward-declaration for friend
-stringOop create_string(fint size);
-stringOop make_string(const char* value, fint len,
-                      bool mustAllocate);
-
 inline stringOop as_stringOop(void* p) {
   return stringOop(as_byteVectorOop(p)); }
 
@@ -28,11 +23,8 @@ inline stringOop new_string_or_fail(const char* value) {
 class stringOopClass: public byteVectorOopClass {
  public:
   // creation operations
-  friend stringOop create_string(fint size);
+  static stringOop create_string(fint size);
   stringOop make_string(const char* value, fint len, bool mustAllocate= true);
-  friend stringOop make_string(const char* value, fint len,
-                               bool mustAllocate= true) {
-    return Memory->stringObj->make_string(value, len, mustAllocate); }
   
   // accessors
   fint arg_count() {
@@ -77,3 +69,10 @@ class stringOopClass: public byteVectorOopClass {
   bool verify();
 };
 
+static inline stringOop create_string(fint size) {
+  return stringOopClass::create_string(size);
+}
+static inline stringOop make_string(const char* value, fint len,
+                                    bool mustAllocate= true) {
+  return Memory->stringObj->make_string(value, len, mustAllocate);
+}

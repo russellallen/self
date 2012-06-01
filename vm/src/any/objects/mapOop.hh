@@ -10,9 +10,6 @@
 
 static const fint enclosed_map_offset = sizeof(oopsOopClass) / oopSize; // words from start of object to embedded map
 
-// Forward-declaration for friend
-mapOop as_mapOop(void* p);
-
 class mapOopClass: public oopsOopClass /* WARNING if you change oopsOopClass, fix enclosed_map_offset above */ {
  protected:
   //  really a whole Map (or subclass thereof) -- dmu 7/03
@@ -22,7 +19,7 @@ class mapOopClass: public oopsOopClass /* WARNING if you change oopsOopClass, fi
   // constructor
     
   // DO NOT USE THIS to get mapOop from Map*; use enclosing_mapOop -- dmu 7/03
-  friend mapOop as_mapOop(void* p) { return mapOop(as_memOop(p)); }
+  static mapOop as_mapOop(void* p) { return mapOop(as_memOop(p)); }
 
   static mapOop enclosing_mapOop(Map* m) { 
     return as_mapOop( ((oop*)m) - enclosed_map_offset ); }
@@ -54,3 +51,4 @@ class mapOopClass: public oopsOopClass /* WARNING if you change oopsOopClass, fi
   bool equal(mapOop other);
 };
 
+inline mapOop as_mapOop(void* p) { return mapOopClass::as_mapOop(p); }

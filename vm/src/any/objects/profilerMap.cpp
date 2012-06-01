@@ -6,7 +6,7 @@
 # pragma implementation "profilerMap.hh"
 # include "_profilerMap.cpp.incl"
 
-profilerOop create_profiler() {
+profilerOop profilerMap::create_profiler() {
   slotList* slots = new slotList(VMString[PARENT], 
                                  parent_map_slotType,
                                  create_slots((slotList*)NULL));

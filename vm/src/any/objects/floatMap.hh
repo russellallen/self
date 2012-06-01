@@ -7,13 +7,10 @@
   # pragma interface
 # endif
 
-// Forward-declaration for friend
-Map* create_floatMap(oop parent);
-
 class floatMap: public immediateMap {
  public:
   // creation operation
-  friend Map* create_floatMap(oop parent);
+  static Map* create_floatMap(oop parent);
   
   // testing operation
   VtblMapType vtblMapType() { return MAP_TYPE_NAME(floatMap); }

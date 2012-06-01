@@ -113,7 +113,7 @@ void SignalInterface::initialize(bool ctrlC) {
 }
 
 
-bool BlockSignals_prim(bool b) {
+bool SignalInterface::BlockSignals_prim(bool b) {
   bool old = SignalInterface::are_self_signals_blocked();
   if (b) {
     SignalInterface::block_self_signals();

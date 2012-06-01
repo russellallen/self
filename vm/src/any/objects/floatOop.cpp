@@ -39,7 +39,7 @@ static const fint expOffset = fractSize;
   floatOop infinityOop = floatOop(nthMask(selfExpSize) << selfExpOffset
                                   |  Float_Tag);
   
-  floatOop as_floatOop(float value) {
+  floatOop floatOopClass::as_floatOop(float value) {
     union { float f; uint32 i; } x;
     x.f = value;
     uint32 i = x.i;
@@ -99,7 +99,7 @@ static const fint expOffset = fractSize;
 # define FLOAT_PRIM(name, op)                                                 \
   oop name(floatOop x, floatOop y) {                                          \
     CHECK_XY;                                                                 \
-    return as_floatOop(x->value() op y->value());                             \
+    return as_floatOop(x->value() op y->value());              \
   }
 
 FLOAT_PRIM(float_add_prim, +)

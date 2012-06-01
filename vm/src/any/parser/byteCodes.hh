@@ -167,21 +167,6 @@ class AbstractByteCode: public preservedVmObj {
 };
 
 
-// Forward-declaration for friend
-oop create_outer_method_prim( oop ignore,
-                             byteVectorOop bv,
-                             objVectorOop lits,
-                             stringOop file,
-                             smiOop line,
-                             stringOop source);
-
-oop create_block_method_prim( oop ignore,
-                             byteVectorOop bv,
-                             objVectorOop lits,
-                             stringOop file,
-                             smiOop line,
-                             stringOop source);
-
 class ByteCode: public AbstractByteCode {
  public:
   
@@ -253,17 +238,38 @@ class ByteCode: public AbstractByteCode {
 
   // programming
 
-  friend oop create_outer_method_prim( oop ignore,
+  static oop create_outer_method_prim( oop ignore,
                                        byteVectorOop bv,
                                        objVectorOop lits,
                                        stringOop file,
                                        smiOop line,
                                        stringOop source);
   
-  friend oop create_block_method_prim( oop ignore,
+  static oop create_block_method_prim( oop ignore,
                                       byteVectorOop bv,
                                       objVectorOop lits,
                                       stringOop file,
                                       smiOop line,
                                       stringOop source);
 };
+
+
+inline oop create_outer_method_prim( oop ignore,
+                                     byteVectorOop bv,
+                                     objVectorOop lits,
+                                     stringOop file,
+                                     smiOop line,
+                                     stringOop source) {
+    return ByteCode::create_outer_method_prim(ignore, 
+                                              bv, lits, file, line, source);
+}
+
+inline oop create_block_method_prim( oop ignore,
+                                 byteVectorOop bv,
+                                 objVectorOop lits,
+                                 stringOop file,
+                                 smiOop line,
+                                 stringOop source) {
+    return ByteCode::create_block_method_prim(ignore, 
+                                              bv, lits, file, line, source);
+}

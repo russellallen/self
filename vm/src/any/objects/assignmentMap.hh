@@ -8,8 +8,6 @@
 # endif
 
 
-// Forward-declaration for friend
-assignmentOop create_assignment();
 
 class assignmentMap: public codeLikeSlotsMap {
  public:
@@ -31,7 +29,7 @@ class assignmentMap: public codeLikeSlotsMap {
                 oop filler= NULL);
   
   // creation operation
-  friend assignmentOop create_assignment();
+  static assignmentOop create_assignment();
   
   // mirror operations
   mirrorOop mirror_proto() { return Memory->assignmentMirrorObj; }

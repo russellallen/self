@@ -6,7 +6,7 @@
 # pragma implementation "smiMap.hh"
 # include "_smiMap.cpp.incl"
 
-Map* create_smiMap(oop parent) {
+Map* smiMap::create_smiMap(oop parent) {
   slotList *s= new slotList(VMString[PARENT], 
                             parent_map_slotType,
                             parent,

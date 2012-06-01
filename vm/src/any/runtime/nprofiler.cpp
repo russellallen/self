@@ -334,14 +334,14 @@ static fint num_of_profilers = 0;
 nmethod* Pc::my_nmethod() {
   // Taken from frame.c, nmethod* frame::code() [dates from antiquity]
   // But, I don't understand the subtraction. 12/03, dmu
-  nmethod* r = nmethodContaining(value - sizeof(class nmethod), NULL);
+  nmethod* r = nmethod::nmethodContaining(value - sizeof(class nmethod), NULL);
   # if GENERATE_DEBUGGING_AIDS
     if (CheckAssertions) {
            if (r->contains(value))  ;
-      else if (nmethodContaining(value, NULL)->contains(value))
+      else if (nmethod::nmethodContaining(value, NULL)->contains(value))
               fatal("should not have subtracted");
       else    fatal3("value 0x%x is not in any nmethod, either 0x%x, or 0x%x",
-                     value, r, nmethodContaining(value, NULL));
+                     value, r, nmethod::nmethodContaining(value, NULL));
     }
   # endif
   return r;

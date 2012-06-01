@@ -6,7 +6,7 @@
 # pragma implementation "slotsOop.hh"
 # include "_slotsOop.cpp.incl"
 
-slotsOop create_slots(fint size) {
+slotsOop slotsOopClass::create_slots(fint size) {
   oop *p= Memory->alloc_objs(size);
   slotsOop obj = as_slotsOop(p);
   obj->init_mark();

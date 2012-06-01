@@ -95,7 +95,7 @@ void universe::genesis()
   
   // create map_map
   objectAnnotationObj = smiOop_zero; // so mapMap.annotation is a vaild oop
-  map_map = create_mapMap();
+  map_map = mapMap::create_mapMap();
   
   // create annotation objects; works cause these have no slots
     slotAnnotationObj= create_slots((slotList*)NULL);
@@ -139,9 +139,9 @@ void universe::genesis()
   falseObj = create_slots(slots);
   
   // create maps
-  smi_map   = create_smiMap  (create_slots(slots));
-  float_map = create_floatMap(create_slots(slots));
-  mark_map  = create_markMap();
+  smi_map   = smiMap::create_smiMap  (create_slots(slots));
+  float_map = floatMap::create_floatMap(create_slots(slots));
+  mark_map  = markMap::create_markMap();
   
   // create block traits
   blockTraitsObj = create_slots(slots);
@@ -172,36 +172,36 @@ void universe::genesis()
   processObj = create_process(0);
 
   // create profiler object
-  profilerObj = create_profiler();
+  profilerObj = profilerMap::create_profiler();
 
   // create proxy objects
-  proxyObj    = create_proxy();
-  fctProxyObj = create_fctProxy();
+  proxyObj    = proxyMap::create_proxy();
+  fctProxyObj = fctProxyMap::create_fctProxy();
   
   // create assignment object
-  assignmentObj = create_assignment();
+  assignmentObj = assignmentMap::create_assignment();
 
   // create dummy error object
   errorObj= create_slots(slots);
 
   // create mirror objects and associated objects
-       assignmentMirrorObj = create_mirror(assignmentObj);
-            blockMirrorObj = create_mirror(create_block(blockMethod));
-       byteVectorMirrorObj = create_mirror(byteVectorObj);
-      outerMethodMirrorObj = create_mirror(outerMethod);
-      blockMethodMirrorObj = create_mirror(blockMethod);
-            floatMirrorObj = create_mirror(as_floatOop(0.0));
-        objVectorMirrorObj = create_mirror(objVectorObj);
-            slotsMirrorObj = create_mirror();
-              smiMirrorObj = create_mirror(as_smiOop(0));
-          processMirrorObj = create_mirror(processObj);
-  outerActivationMirrorObj = create_mirror(outerActivationObj);
-  blockActivationMirrorObj = create_mirror(blockActivationObj);
-           stringMirrorObj = create_mirror(stringObj);
-            proxyMirrorObj = create_mirror(proxyObj);
-         fctProxyMirrorObj = create_mirror(fctProxyObj);
-         profilerMirrorObj = create_mirror(profilerObj);
-           mirrorMirrorObj = create_mirror(slotsMirrorObj);
+       assignmentMirrorObj = mirrorMap::create_mirror(assignmentObj);
+            blockMirrorObj = mirrorMap::create_mirror(create_block(blockMethod));
+       byteVectorMirrorObj = mirrorMap::create_mirror(byteVectorObj);
+      outerMethodMirrorObj = mirrorMap::create_mirror(outerMethod);
+      blockMethodMirrorObj = mirrorMap::create_mirror(blockMethod);
+            floatMirrorObj = mirrorMap::create_mirror(as_floatOop(0.0));
+        objVectorMirrorObj = mirrorMap::create_mirror(objVectorObj);
+            slotsMirrorObj = mirrorMap::create_mirror();
+              smiMirrorObj = mirrorMap::create_mirror(as_smiOop(0));
+          processMirrorObj = mirrorMap::create_mirror(processObj);
+  outerActivationMirrorObj = mirrorMap::create_mirror(outerActivationObj);
+  blockActivationMirrorObj = mirrorMap::create_mirror(blockActivationObj);
+           stringMirrorObj = mirrorMap::create_mirror(stringObj);
+            proxyMirrorObj = mirrorMap::create_mirror(proxyObj);
+         fctProxyMirrorObj = mirrorMap::create_mirror(fctProxyObj);
+         profilerMirrorObj = mirrorMap::create_mirror(profilerObj);
+           mirrorMirrorObj = mirrorMap::create_mirror(slotsMirrorObj);
   
   // create systemObjects
   slots = new slotList(new_string("nil"), map_slotType, nilObj);

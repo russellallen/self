@@ -7,10 +7,6 @@
   # pragma interface
 # endif
 
-// Forward-declaration for friend
-objVectorOop create_objVector(slotList* slots);
-
-
 class objVectorMap: public slotsMapDeps {
  public:
   // testers
@@ -57,8 +53,8 @@ class objVectorMap: public slotsMapDeps {
   bool verify(oop obj);
   
   // creation operation
-  friend objVectorOop create_objVector(slotList* slots);
-  slotsOop create_object(fint size) { return create_objVector(size); }
+  static objVectorOop create_objVector(slotList* slots);
+  slotsOop create_object(fint size) { return ::create_objVector(size); }
 
   // printing support
   void print_objVector(oop obj);
@@ -70,3 +66,8 @@ class objVectorMap: public slotsMapDeps {
   // profiler operation
   void dummy_initialize(oop obj, oop filler);
 };
+
+static inline objVectorOop create_objVector(slotList* slots) {
+  return objVectorMap::create_objVector(slots);
+}
+

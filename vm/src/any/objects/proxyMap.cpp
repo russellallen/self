@@ -9,7 +9,7 @@
 # include "_proxyMap.cpp.incl"
 
 
-proxyOop create_proxy() {
+proxyOop proxyMap::create_proxy() {
   slotList* slots = new slotList(VMString[PARENT], 
                                  parent_map_slotType,
                                  create_slots((slotList*)NULL));

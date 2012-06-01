@@ -829,7 +829,7 @@
              "should have a result");
       result = new NoResultSExpr;
     } else if (result->hasMap() && result->map()->is_block()) {
-      SCodeScope* s = scopeFromBlockMap(result->myMapOop());
+      SCodeScope* s = BlockPReg::scopeFromBlockMap(result->myMapOop());
       if (s && isSenderOrSame(s)) {
         // prevent block from being inlined because block is non-LIFO
         result = new UnknownSExpr(resultPR);

@@ -38,7 +38,9 @@ oop oopClass::print_prim() {
   return Memory->nilObj; // dont return ``this'', printing it may fail!
 }
 
-oop oopClass::all_prim(oop lim){ return enumerate_all_objs(lim); }
+oop oopClass::all_prim(oop lim){ 
+  return allObjEnumeration::enumerate_all_objs(lim); 
+}
 
 void oopClass::print_string(char* buf) {
   fint t = tag();
@@ -364,7 +366,7 @@ oop oopClass::evaluate_in_context_prim(oop method) {
   return res;
 }
 
-oop unwind_protect_prim(oop doBlock, oop protectBlock) {
+oop oopClass::unwind_protect_prim(oop doBlock, oop protectBlock) {
   // send "value" to doBlock;
   //   if this msg returns V normally, then return V as result of primitive.
   //   otherwise, msg returns V with non-local return or abort;

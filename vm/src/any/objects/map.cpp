@@ -7,7 +7,7 @@
 
 # include "_map.cpp.incl" 
 
-Map* create_map(fint size, slotList *slots, Map* mm, oop *obj) {
+Map* Map::create_map(fint size, slotList *slots, Map* mm, oop *obj) {
   fint slotCount= slots ? slots->length() : 0;
   mapOop mo = as_mapOop(
     Memory->alloc_objs(   enclosed_map_offset + (size + slotCount * sizeof(slotDesc))/oopSize)  );

@@ -105,7 +105,8 @@
   ByteArrayAtNode::ByteArrayAtNode(PReg* r, PReg* idx, bool ia,
                                    PReg* res, PReg* err)
   : AbstractArrayAtNode(r, idx, ia, res, err,
-                        byteVector_bytes_offset(), byteVector_len_offset()) {
+                        byteVectorOopClass::byteVector_bytes_offset(), 
+                        byteVectorOopClass::byteVector_len_offset()) {
     NODE_COST(ByteArrayAtNode);    
   }
 
@@ -120,8 +121,8 @@
                                          bool ia, PReg* el, bool ie,
                                          PReg* res, PReg* err)
   : AbstractArrayAtPutNode(r, idx, ia, el, res, err,
-                           byteVector_bytes_offset(),
-                           byteVector_len_offset()) {
+                           byteVectorOopClass::byteVector_bytes_offset(),
+                           byteVectorOopClass::byteVector_len_offset()) {
     intElem = ie; NODE_COST(ByteArrayAtPutNode);    
  }
 
@@ -2171,8 +2172,8 @@
     } else if (r->scope != scopes[r->scope->depth]) {
       // not in current call stack --> not live
       return false;
-    } else if (!r->scope->isSenderOrSame(findAncestor(_scope, dummy1,
-                                                      r->scope, dummy2))) {
+    } else if (!r->scope->isSenderOrSame(PReg::findAncestor(_scope, dummy1,
+                                                          r->scope, dummy2))) {
       // scope of r is below marker scope, so it cannot be live
       return false;
     } else if (r->isLiveAt(this)) {

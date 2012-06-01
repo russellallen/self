@@ -216,12 +216,12 @@ fint AbstractByteCode::GenExtendedIndex(fint offset, fint length, fint x) {
   return x & MAXINDEX;
 }
 
-oop create_outer_method_prim(oop ignore,
-                             byteVectorOop bv,
-                             objVectorOop lits,
-                             stringOop file,
-                             smiOop line,
-                             stringOop source) {
+oop ByteCode::create_outer_method_prim(oop ignore,
+                                       byteVectorOop bv,
+                                       objVectorOop lits,
+                                       stringOop file,
+                                       smiOop line,
+                                       stringOop source) {
   Unused(ignore);
   ResourceMark rm;
 
@@ -230,8 +230,9 @@ oop create_outer_method_prim(oop ignore,
 
   smi errorIndex;
   IntBList* stack_deltas;
-  const char* errorMsg = check_byteCodes_and_literals( errorIndex, stack_deltas,
-                                                       bv, lits );
+  const char* errorMsg = methodMap::check_byteCodes_and_literals( errorIndex, 
+                                                                  stack_deltas,
+                                                                  bv, lits );
   if (errorMsg) {
     char buf[BUFSIZ];
     (void) sprintf(buf, "Error: bad byte code at: %d <%s>", 
@@ -309,12 +310,12 @@ bool ByteCode::Finish(const char* fname, fint sourceLine, fint srcOffset, fint s
 }
 
 
-oop create_block_method_prim(oop ignore,
-                             byteVectorOop bv,
-                             objVectorOop lits,
-                             stringOop file,
-                             smiOop line,
-                             stringOop source) {
+oop ByteCode::create_block_method_prim(oop ignore,
+                                       byteVectorOop bv,
+                                       objVectorOop lits,
+                                       stringOop file,
+                                       smiOop line,
+                                       stringOop source) {
   Unused(ignore);
   ResourceMark rm;
 
@@ -323,8 +324,9 @@ oop create_block_method_prim(oop ignore,
 
   smi errorIndex;
   IntBList* stack_deltas;
-  const char* errorMsg = check_byteCodes_and_literals( errorIndex, stack_deltas,
-                                                       bv, lits );
+  const char* errorMsg = methodMap::check_byteCodes_and_literals( errorIndex, 
+                                                                  stack_deltas,
+                                                                  bv, lits );
   if ( errorMsg ) {
     char buf[BUFSIZ];
     (void) sprintf(buf, "Error: bad byte code at: %d <%s>",

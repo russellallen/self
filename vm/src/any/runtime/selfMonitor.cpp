@@ -860,7 +860,7 @@ void ExecutionMonitor::initialize() {
 
 ExecutionMonitor::Activities ExecutionMonitor::compiled_activity(char* pc) {
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
-    nmethod* nm = findNMethod(pc);
+    nmethod* nm = nmethod::findNMethod(pc);
     fint c = nm->compiler();
     return  c == NIC  ?  fast_execution  :  opt_execution;
 # else

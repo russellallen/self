@@ -16,10 +16,6 @@ extern "C" {
   int32 getObjectID(oop obj);
 }
 
-// Forward-declaration for friend
-Map* create_map(fint size, slotList *slots, Map *mm, oop *obj);
-void findSlot_init();
-
 class Map {
  public:
   // testing operations
@@ -61,7 +57,7 @@ class Map {
   void set_vtbl_value(VtblPtr_t vtbl) {((VtblPtr_t*) this)[0] = vtbl; }
 
   // constructor
-  friend Map* create_map(fint size, slotList *slots, Map *mm, oop *obj);
+  static Map* create_map(fint size, slotList *slots, Map *mm, oop *obj);
 
   // creation op
   virtual oop fill_in_slots(slotList* slist, fint slotCount) = 0;
@@ -294,6 +290,11 @@ public:
 
   virtual bool is_enumerable(oop obj, oop* matching_cell) = 0;
 };
+
+
+static inline Map* create_map(fint size, slotList *slots, Map *mm, oop *obj) {
+  return Map::create_map(size, slots, mm, obj);
+}
 
 
 // Because repeated searches for the same selector are common,

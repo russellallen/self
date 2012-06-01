@@ -85,7 +85,7 @@ void rSet::record_multistores(oop* start, oop* end) {
   }
   
   // middle cards, starting at p
-  oop* end_card = card_for(end);
+  oop* end_card = rSet::card_for(end);
   for( ;
       p < end_card;
       p += card_size_in_oops) {
@@ -149,7 +149,7 @@ bool rSet::scavenge_contents(oop* start, oop* end) {
       }                                                                       \
     }
   
-  oop* p = card_for(start);
+  oop* p = rSet::card_for(start);
   assert(p == start,
          "this routine assumes start on card boundary (start of old space)");
   
@@ -157,7 +157,7 @@ bool rSet::scavenge_contents(oop* start, oop* end) {
   char* cp = byte_for(p);
   char* end_byte = byte_for(end);
   for (;;) {
-    cp = next_zero_byte(cp, end_byte);
+    cp = rSet::next_zero_byte(cp, end_byte);
     if (cp >= end_byte) break;
     assert(*cp == 0, "next_zero_byte failed");
     char oc;
@@ -213,14 +213,14 @@ bool rSet::verify(bool postScavenge) {
   {FOR_EACH_OLD_SPACE(space) {
     oop* start = space->oopsStart();
     oop* end   = space->oopsEnd(); 
-    oop* end_card = card_for(end);
+    oop* end_card = rSet::card_for(end);
     char should_be;
     char* bound = Memory->new_gen->boundary();
   
 # define CHECK(w)                                                             \
     if (byte_for(w)[0] != should_be &&                                        \
         (!AllowOffsetCheckStores ||                                           \
-         byte_for(w)[-1] != should_be || card_for(w) == start)) {             \
+         byte_for(w)[-1] != should_be || rSet::card_for(w) == start)) {       \
       if (!should_be) {                                                       \
         error3("byte at 0x%x for card at 0x%x is %d should be 0\n",           \
                byte_for(w), w, (int32)*byte_for(w));                                 \
@@ -238,7 +238,7 @@ bool rSet::verify(bool postScavenge) {
   
     oop *p;
     for (p= start; p < end_card; p += card_size_in_oops) {
-      assert(p == card_for(p), "should be a card boundary");
+      assert(p == rSet::card_for(p), "should be a card boundary");
 #     define S(i) if (Memory->new_gen->is_new(p[i], bound)) should_be = 0; else
       S( 0) S( 1) S( 2) S( 3) S( 4) S( 5) S( 6) S( 7) S( 8) S( 9)
       S(10) S(11) S(12) S(13) S(14) S(15) S(16) S(17) S(18) S(19)
@@ -249,7 +249,7 @@ bool rSet::verify(bool postScavenge) {
       CHECK(p)
       }
     assert(p == end_card,  "just checking");
-    assert(card_for(p) == card_for(end), "just checking");
+    assert(rSet::card_for(p) == rSet::card_for(end), "just checking");
   
     should_be = AllBits;
     switch (end - p) {
@@ -274,7 +274,7 @@ bool rSet::verify(bool postScavenge) {
 // returns end if no zero found
 // exploits extra 8 words at end of map
 
-char* next_zero_byte(char *cp, char* end) {
+char* rSet::next_zero_byte(char *cp, char* end) {
   // put zero sentinel at end before scanning
   char old_end = *end;
   *end = 0;

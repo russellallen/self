@@ -11,7 +11,6 @@
   if (dependents)                                                       \
     for (nmln* d= dependents, *dend= d + length_slots(); d < dend; d++) \
 
-
 oop slotsMapDeps::define(oop obj, oop contents) {
   if (VerifyZoneOften)
     Memory->code->verify();
@@ -52,7 +51,7 @@ void slotsMapDeps::shift_obj_slots(smiOop offset, fint delta) {
 }
 
 
-slotsOop create_slots(slotList* slots, const char* annotation) {
+slotsOop slotsMapDeps::create_slots(slotList* slots, const char* annotation) {
   slotsMapDeps m1;
   slotsOop obj;
   slotsMapDeps* sm= (slotsMapDeps*) create_map(sizeof(slotsMapDeps),

@@ -98,12 +98,15 @@
     bool isConstant();
     oop  constant();
     void print();
+    static CPInfo* new_CPInfo(Node* def); // may return NULL if def isn't suitable
    protected:
     CPInfo(Node* def);
-    friend CPInfo* new_CPInfo(Node* def);
   };
 
-  CPInfo* new_CPInfo(Node* def); // may return NULL if def isn't suitable
+  static inline CPInfo* new_CPInfo(Node* def) {
+    return CPInfo::new_CPInfo(def);
+  }
+
   void forAllDefsDo(PRegBBIndexBList* l, defDoFn f);
   void forAllUsesDo(PRegBBIndexBList* l, useDoFn f);
   void printDefsAndUses(PRegBBIndexBList* l);   // for debugging

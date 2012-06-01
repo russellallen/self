@@ -173,7 +173,7 @@ void NLRSupport::non_lifo_abort(pc_t nonLifoAbortPC) {
   
   // was in compiled code
   // need to flush nmethod of dead block (next invocation could be ok)
-  nmethod* deadBlock = findNMethod(nonLifoAbortPC);
+  nmethod* deadBlock = nmethod::findNMethod(nonLifoAbortPC);
 
   // Initialize our return address so that it looks like our caller is C
   // (the "caller" really is the non-lifo block nmethod, but we can't display

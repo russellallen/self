@@ -11,7 +11,7 @@ void blockMap::init(stringOop name, slotsOop method) {
   Memory->store((oop*)&valueMethod, oop(method));
 }
 
-blockOop create_block(slotsOop meth) {
+blockOop blockMap::create_block(slotsOop meth) {
   stringOop name;
   fint arg_count = meth->map()->arg_count();
   switch (arg_count) {

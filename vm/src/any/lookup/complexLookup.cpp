@@ -155,7 +155,7 @@ nmethod* compilingLookup::compileNMethod() {
     diDeps = dc->dependency();
     assert(diDeps->isEmpty(), "should be empty");
     // make sure that other method won't be flushed from the zone
-    other = findNMethod(dc);
+    other = nmethod::findNMethod(dc);
     other->save_unlinked_frame_chain();
   }
 

@@ -325,9 +325,9 @@ void oldSpace::switch_pointers_by_card(oop from, oop to)
   
   // first & middle cards:
   char *cp;
-  for (cp = next_zero_byte(start_byte, end_byte);
+  for (cp = rSet::next_zero_byte(start_byte, end_byte);
        cp < end_byte;
-       cp = next_zero_byte(cp + 1, end_byte)) {
+       cp = rSet::next_zero_byte(cp + 1, end_byte)) {
     assert(*cp == 0, "next_zero_byte failed");
     switch_pointers_in_region(from, to, rs->oop_for(cp), rs->oop_for(cp+1));
   }

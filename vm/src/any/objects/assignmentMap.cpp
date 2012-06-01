@@ -8,7 +8,7 @@
 
 static bool createdAssignment = false;
 
-assignmentOop create_assignment() {
+assignmentOop assignmentMap::create_assignment() {
   if (createdAssignment)
     ShouldNotReachHere(); // should create only one assignment obj
   createdAssignment= true;

@@ -130,7 +130,7 @@ bool enumeration::is_target(oop t) {
 //  holds the vframe oops, the the rest holds the non-vframe objects
 //  (not mirrors)
 //   -- LB & DU  12/91
-oop enumerate_vector_references(objVectorOop vector, oop limit) {
+oop referencesEnumeration::enumerate_vector_references(objVectorOop vector, oop limit) {
   unsigned long cLim;
   VMStringsIndex failIndex;
   if (!compute_limit(limit, cLim, failIndex))
@@ -241,7 +241,7 @@ void referencesEnumeration::filter_map(mapOop obj) {
 
 
 // Enumerate implementors.
-oop enumerate_vector_implementors(objVectorOop vector, oop limit) {
+oop implementorsEnumeration::enumerate_vector_implementors(objVectorOop vector, oop limit) {
   unsigned long cLim;
   VMStringsIndex failIndex;
   if (!compute_limit(limit, cLim, failIndex))
@@ -327,7 +327,7 @@ void implementorsEnumeration::filter_match(oopsOop obj,
 
 
 // Enumerate all objects in the self world.
-oop enumerate_all_objs(oop limit) {
+oop allObjEnumeration::enumerate_all_objs(oop limit) {
   unsigned long cLim;
   VMStringsIndex failIndex;
   if (!compute_limit(limit, cLim, failIndex))

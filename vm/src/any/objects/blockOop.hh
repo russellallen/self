@@ -7,16 +7,13 @@
   # pragma interface
 # endif
 
-// Forward-declaration for friend
-int32 scope_offset();
-
 class blockOopClass: public slotsOopClass {
 private:
   smiOop scopeHomeFr; // this does double duty as a scope and a pointer
                       // to the home frame
 public:
   // constructor
-  friend blockOop as_blockOop(void* p) { return (blockOop) as_slotsOop(p); }
+  static blockOop as_blockOop(void* p) { return (blockOop) as_slotsOop(p); }
   
   // accessors
   blockOopClass* addr()    { return (blockOopClass*) slotsOopClass::addr(); }
@@ -60,13 +57,16 @@ public:
   blockOop copy()  { return (blockOop) clone_block(smiOop(NULL)); }
 
   // compiler support
-  friend int32 scope_offset() {
+  static int32 scope_offset() {
     blockOopClass* p = NULL;
     return (int32) (& (p->scopeHomeFr) ) - Mem_Tag; }
   blockOop clone_and_set_desc(smiOop);
   void remap(nmethod* nm, frame* newHome);
   void remap(Map* newMap, frame* newHome);
 };
+
+inline blockOop as_blockOop(void* p) { return blockOopClass::as_blockOop(p); }
+inline int32 scope_offset() { return blockOopClass::scope_offset(); }
 
 oop clone_block_prim(oop rcvr, smiOop fp);
 oop catch_interprocess_returns(oop blk);

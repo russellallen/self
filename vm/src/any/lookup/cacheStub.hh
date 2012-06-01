@@ -16,13 +16,13 @@
 #define VTBL_AND_SETTER(classname, INIT) \
  protected:                                                             \
   static VtblPtr_t _vtbl_value;                                         \
-  classname(float /* unLikelyToCallByAccident */) INIT {}                     \
+  classname(float /* unLikelyToCallByAccident */) INIT {}               \
                  /* shouldn't call this except in the function below */ \
                                                                         \
-  friend void CONC3(set_,classname,_vtbl_value)() {                     \
+ public:                                                                \
+  static void set_vtbl_value() {                                        \
     classname c(1.0);                                                   \
     _vtbl_value= c.vtbl_value(); }                                      \
- public:                                                                \
   VtblPtr_t static_vtbl_value() { return _vtbl_value; }                 \
 
 
@@ -36,14 +36,6 @@ class cacheStubInfo {
   unsigned int is_megamorphic : 1;
   unsigned int arity          : 29;
 };
-
-// Forward-declaration for friend
-bool isCacheStub(void* p);
-# if  GENERATE_DEBUGGING_AIDS
-CacheStub* StubFromNmln(nmln* l);
-#endif
-// topa: sorry, this is not expressible by the macro
-void set_CacheStub_vtbl_value();
 
 class CacheStub : public OopNCode {
   VTBL_AND_SETTER(CacheStub,);

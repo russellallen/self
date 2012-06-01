@@ -6,7 +6,7 @@
 # pragma implementation "markMap.hh"
 # include "_markMap.cpp.incl"
 
-Map* create_markMap() {
+Map* markMap::create_markMap() {
   markMap m1;
   oop ignored;
   return create_map(sizeof(markMap), NULL, &m1, &ignored);
