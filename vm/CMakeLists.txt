@@ -50,7 +50,7 @@ include_directories_from_src(SRC)
 
 # we need a vmDate thing.
 set(SRC_VMDATE ${SELF_GENERATED_INLCUDE_FILES_DIR}/vmDate.c)
-set(SRC_VMDATE_IN ${LOCAL_CMAKE_DIR}/vmDate.c.in)
+set(SRC_VMDATE_IN ${SELF_BUILD_SUPPORT_DIR}/vmDate.c.in)
 configure_file(
   "${LOCAL_CMAKE_DIR}/configureVmDate.cmake.in"
   "${CMAKE_BINARY_DIR}/configureVmDate.cmake" @ONLY

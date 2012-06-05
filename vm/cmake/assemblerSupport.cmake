@@ -41,8 +41,15 @@ macro(setup_target_assembler_support target)
   if(CMAKE_GENERATOR MATCHES Xcode)
     # second part, target-dependent.
     
+    
+    #
+    # the next lines are to pic up the necessary
+    # definitions, flags and includes from the respective
+    # target/directories. this is somewhat cumbersome...
+    #
+    
     gather_directory_defines(_COMMON_DEFINES ${CMAKE_SOURCE_DIR} "")
-
+    
     foreach(conf _DEBUG _RELEASE _MINSIZEREL _RELWITHDEBINFO "")
       gather_defines(_DEFINES${conf} ${target} "${conf}")
       set(_DEFINES${conf} "${_DEFINES${conf}} ${_COMMON_DEFINES} ${CMAKE_ASM_DEFINES}")
@@ -55,6 +62,11 @@ macro(setup_target_assembler_support target)
     gather_incls(_INCLS ${target} "")    
     separate_arguments(_INCLS)
     
+    
+    #
+    # Setup custom build commands for each and every asm file
+    # we have to cope with Xcode configurations here.
+    #
     set(destPre ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.build)
     set(destPost ${_assemblies_lib_name}.build/Objects-normal/${platform_processor})
     set(destDir ${destPre}/ASM/${destPost})
@@ -73,7 +85,14 @@ macro(setup_target_assembler_support target)
       set(OBJS_ASM ${OBJS_ASM} ${destDir}/${dest})
     endforeach()
     set_source_files_properties(${OBJS_ASM} PROPERTIES GENERATED TRUE)
-    # create a librarie our main target can refer to.
+    #
+    # create a library from our asseblies our main target can refer to.
+    # note: we mess with xcode's way of compiling here.
+    # Xcode can't determine the kind of source of the asm files
+    # (because CMake sets it to 'sourcecode' where 'sourcecode.asm' would be 
+    # rigtht) and cannot compile them.
+    # but not adding the files gets the linker command wrong.
+    #    
     add_library(${_assemblies_lib_name} STATIC ${OBJS_ASM} ${SRC_ASM})
     set_target_properties(${_assemblies_lib_name} PROPERTIES LINKER_LANGUAGE C)
     add_custom_command(TARGET ${_assemblies_lib_name} PRE_BUILD 

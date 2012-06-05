@@ -3,6 +3,11 @@
 # cmake-custom directory for find_package() and other config stuff
 get_filename_component(LOCAL_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH) 
 
+set(SELF_BUILD_SUPPORT_DIR 
+  "${CMAKE_SOURCE_DIR}/build_support" 
+  CACHE PATH
+  "Path where to find build support files, like for vmDate, Mac OSX etc."
+)
 option(SELF_PROFILE "Select whether to do a profiled build" OFF)
 option(SELF_FAST_FLOATS "Select whether to do a build with fast floats" OFF)
 
@@ -41,3 +46,12 @@ macro(setup_target_common target)
   # we _know_ we have to deal with assembler.
   setup_target_assembler_support(${target})
 endmacro()
+
+# read the version info
+parse_version_information(${CMAKE_SOURCE_DIR}/src/any/memory/universe.cpp SELF_VERSION_MAJOR SELF_VERSION_MINOR SELF_VERSION_SNAPSHOT)
+determine_build_information(SELF_BUILD)
+set(SELF_VERSION_MAJOR    ${SELF_VERSION_MAJOR}    CACHE STRING "Self VM major version"    FORCE)
+set(SELF_VERSION_MINOR    ${SELF_VERSION_MINOR}    CACHE STRING "Self VM minor version"    FORCE)
+set(SELF_VERSION_SNAPSHOT ${SELF_VERSION_SNAPSHOT} CACHE STRING "Self VM snapshot version" FORCE)
+set(SELF_BUILD            ${SELF_BUILD}            CACHE STRING "Self VM build number"     FORCE)
+message(STATUS "Preparing Self VM ${SELF_VERSION_MAJOR}.${SELF_VERSION_MINOR}.${SELF_VERSION_SNAPSHOT} (build ${SELF_BUILD})")

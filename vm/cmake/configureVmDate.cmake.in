@@ -49,7 +49,7 @@ else()
     OUTPUT_VARIABLE GIT_REVISION 
     ERROR_VARIABLE GIT_REVISION 
     OUTPUT_STRIP_TRAILING_WHITESPACE) 
-  set(GIT_REVISION " v${GIT_REVISION}")
+  set(GIT_REVISION " (${GIT_REVISION})")
   if(git_result) 
     message(FATAL_ERROR "Failed to determine git revision:\n${GIT_REVISION}") 
   endif() 

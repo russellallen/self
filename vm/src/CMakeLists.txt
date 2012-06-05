@@ -2,6 +2,11 @@
 
 #config below.
 
+set(SRC_misc
+  includeDB
+)
+set(SRC_src ${SRC_src} ${SRC_misc})
+
 set(SRC_any
   any/asm/asm.cpp
   any/asm/asm.hh
@@ -696,6 +701,7 @@ set(SRC_unix
 )
 set(SRC_cocoa
   cocoa/os/main.mm
+  cocoa/os/Self.nib
   cocoa/os/SelfConsole.h
   cocoa/os/SelfConsole.mm
 )
@@ -721,6 +727,10 @@ if(APPLE)
   endif()
   set(SRC_src ${SRC_src} ${SRC_${other_arch}})
 endif(APPLE)
+
+if(SELF_OSX_COCOA)
+  set(SRC_src ${SRC_src} ${SRC_cocoa})
+endif()
 
 prepend_every_item(SRC_src "${CMAKE_CURRENT_SOURCE_DIR}/")
 

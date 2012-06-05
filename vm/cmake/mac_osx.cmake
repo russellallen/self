@@ -15,12 +15,38 @@ set(MANUFACTURER      "")
 set(TARGET_OS_VERSION "MACOSX_VERSION")
 set(TARGET_OS_FAMILY  "UNIX_FAMILY")
 
+option(SELF_OSX_COCOA
+  "EXPERIMENTAL: Build with the Cocoa console" OFF)
+if(SELF_OSX_COCOA)
+  message(STATUS "WARNING: Using experimental Cocoa console")
+  add_definitions(-DCOCOA_EXP)
+endif()
+
 
 mark_as_advanced(DYNAMIC COMPILER ASSEMBLER MANUFACTURER TARGET_OS_VERSION TARGET_OS_FAMILY)
 
-# icon files to copy in the bundle
-#set(OSX_ICON_FILES ${CMAKE_CURRENT_SOURCE_DIR}/vm_project/SelfIcon.icns ${CMAKE_CURRENT_SOURCE_DIR}/Snapshot.icns)  #tbd
-set(OSX_ICON_FILES ${CMAKE_CURRENT_SOURCE_DIR}/${platform}/vm_project/SelfIcon.icns) 
+year(YEAR)
+
+set(MACOSX_BUNDLE_GUI_IDENTIFIER
+  "org.selflanguage.${PROJECT_NAME}")
+set(MACOSX_BUNDLE_BUNDLE_NAME 
+  "${PROJECT_NAME}")
+set(MACOSX_BUNDLE_SHORT_VERSION_STRING 
+  "${SELF_VERSION_MAJOR}.${SELF_VERSION_MINOR}.${SELF_VERSION_SNAPSHOT}")
+set(MACOSX_BUNDLE_BUNDLE_VERSION 
+  ${SELF_BUILD})
+set(MACOSX_BUNDLE_LONG_VERSION_STRING 
+  "${PROJECT_NAME} ${SELF_VERSION_MAJOR}.${SELF_VERSION_MINOR}.${SELF_VERSION_SNAPSHOT} (${SELF_BUILD})")
+set(MACOSX_BUNDLE_COPYRIGHT
+  "© ${YEAR} Self Authors.")
+set(MACOSX_BUNDLE_INFO_STRING
+  "${PROJECT_NAME} ${SELF_VERSION_MAJOR}.${SELF_VERSION_MINOR}.${SELF_VERSION_SNAPSHOT}, ${MACOSX_BUNDLE_COPYRIGHT}")
+set(MACOSX_BUNDLE_ICON_FILE 
+  SelfIcon.icns)
+set(MACOSX_DEPLOYMENT_TARGET # to be configured by Xcode
+  "\${MACOSX_DEPLOYMENT_TARGET}")
+
+set(OSX_ICON_FILES ${SELF_BUILD_SUPPORT_DIR}/${platform}/${MACOSX_BUNDLE_ICON_FILE}) 
 # set where in the bundle to put the icns files
 set_source_files_properties(${OSX_ICON_FILES} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
 # include the icns files in the target
@@ -40,24 +66,29 @@ set(frameworks ${COCOA_LIBRARY} ${APP_SERVICES_LIBRARY} ${CARBON_LIBRARY} ${CORE
 
 set(EXTRA_LIBRARIES ${frameworks})
 
-## TBD
-# configure CMake to use a custom Info.plist
-# set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/MyInfoPlist.plist )
 
+#
+# Mac compile definitons, independent of  generator
+#
+add_definitions(
+  -DQUARTZ_LIB
+  # there was -DMACTOOLBOX_LIB , but seems unused.
+  -DDEBUG # ?? this is straight from mac_osx.make
+  -DGCC3=1 #lets see if we can live withiout it
+  -DGLUE_CHECKSUM=0
+)
 
-
+#
+# "API". Set up target specific stuff.
+#
 macro(setup_target target)
-  
+  # "super"
   setup_target_common(${target})
   
-  
   if(CMAKE_GENERATOR MATCHES Xcode)
-
-    
     # we want to reuse the GCC_OPTIMIZATION_LEVEL
     add_definitions(-DGCC_OPTIMIZATION_LEVEL=\${GCC_OPTIMIZATION_LEVEL})
-    
-    
+        
     # Select Xcode compiler based on user choice
     if (${CMAKE_C_COMPILER} MATCHES ".*clang")
       set(CMAKE_XCODE_ATTRIBUTE_GCC_VERSION "com.apple.compilers.llvm.clang.1_0")
@@ -103,21 +134,13 @@ macro(setup_target target)
     
   endif()
   
+  # configure CMake to use a custom Info.plist
+  set_target_properties(${target} PROPERTIES 
+    MACOSX_BUNDLE_INFO_PLIST ${SELF_BUILD_SUPPORT_DIR}/${platform}/Info.plist)
+  
+  
 endmacro()
 
-
-
-#
-# Mac compile definitons, independent of  generator
-#
-add_definitions(
-  -DQUARTZ_LIB
-)
-# there was -DMACTOOLBOX_LIB , but seems unused.
-
-add_definitions(-DDEBUG) # ?? this is straight from mac_osx.make
-add_definitions(-DGCC3=1) #lets see if we can live withiout it
-add_definitions(-DGLUE_CHECKSUM=0)
 
 
 
