@@ -81,6 +81,9 @@ add_definitions(
   -DGLUE_CHECKSUM=0
 )
 
+set(CMAKE_ASM_FLAGS ${CMAKE_ASM_FLAGS} -arch ${platform_processor})
+
+
 #
 # "API". Set up target specific stuff.
 #
