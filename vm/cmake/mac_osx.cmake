@@ -8,12 +8,15 @@ set(GUI_TYPE MACOSX_BUNDLE)
 set(CMAKE_OSX_ARCHITECTURES i386) #no x86_64 atm.
 
 # TODO: these are frome the project file, reconsider
-set(DYNAMIC           "-DDYNLINK_SUPPORTED")
+set(DYNAMIC           "-DDYNLINK_SUPPORTED -DDYNAMIC")
 set(COMPILER          "GCC_COMPILER")
 set(ASSEMBLER         "")
 set(MANUFACTURER      "")
-set(TARGET_OS_VERSION "MACOSX_VERSION")
-set(TARGET_OS_FAMILY  "UNIX_FAMILY")
+# still implicit in config.hh
+#set(TARGET_OS_VERSION "MACOSX_VERSION")
+#set(TARGET_OS_FAMILY  "UNIX_FAMILY")
+#set(TARGET_ARCH       "I386_ARCH")
+#set(HOST_ARCH       "I386_ARCH")
 
 option(SELF_OSX_COCOA
   "EXPERIMENTAL: Build with the Cocoa console" OFF)
