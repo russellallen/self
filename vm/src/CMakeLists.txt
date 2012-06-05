@@ -462,7 +462,7 @@ set(SRC_i386
   i386/lookup/sendDesc_i386.hh
   i386/memory/search_i386.cpp
   i386/memory/search_i386.hh
-  i386/prims/asmPrims_gcc_i386.s
+  i386/prims/asmPrims_gcc_i386.S
   i386/prims/prim_table_arch_i386.hh
   i386/runtime/aCompiler_i386.cpp
   i386/runtime/aCompiler_i386.hh
@@ -481,7 +481,7 @@ set(SRC_i386
   i386/runtime/interruptedCtx_i386.hh
   i386/runtime/registerLocator_i386.cpp
   i386/runtime/registerLocator_i386.hh
-  i386/runtime/runtime_asm_gcc_i386.s
+  i386/runtime/runtime_asm_gcc_i386.S
   i386/runtime/runtime_i386.cpp
   i386/runtime/runtime_i386.hh
   i386/runtime/stubs_i386.cpp
@@ -500,7 +500,7 @@ set(SRC_i386
   i386/sic/sic_i386.hh
   i386/zone/addrDesc_i386.cpp
   i386/zone/addrDesc_i386.hh
-  i386/zone/allocZone_i386.s
+  i386/zone/allocZone_i386.S
   i386/zone/countPattern_i386.cpp
   i386/zone/countPattern_i386.hh
   i386/zone/countStub_i386.cpp
@@ -538,8 +538,8 @@ set(SRC_ppc
   ppc/lookup/sendDesc_ppc.hh
   ppc/memory/search_ppc.cpp
   ppc/memory/search_ppc.hh
-  ppc/prims/asmPrims_gcc_ppc.s
-#  ppc/prims/asmPrims_mw_ppc.s only metrowerks
+  ppc/prims/asmPrims_gcc_ppc.S
+#  ppc/prims/asmPrims_mw_ppc.S only metrowerks
   ppc/prims/prim_table_arch_ppc.hh
   ppc/runtime/aCompiler_ppc.cpp
   ppc/runtime/aCompiler_ppc.hh
@@ -559,8 +559,8 @@ set(SRC_ppc
   ppc/runtime/interruptedCtx_ppc.hh
   ppc/runtime/registerLocator_ppc.cpp
   ppc/runtime/registerLocator_ppc.hh
-  ppc/runtime/runtime_asm_gcc_ppc.s
-#  ppc/runtime/runtime_asm_mw_ppc.s
+  ppc/runtime/runtime_asm_gcc_ppc.S
+#  ppc/runtime/runtime_asm_mw_ppc.S
   ppc/runtime/runtime_ppc.cpp
   ppc/runtime/runtime_ppc.hh
   ppc/runtime/stubs_ppc.cpp
@@ -579,7 +579,7 @@ set(SRC_ppc
   ppc/sic/sic_ppc.hh
   ppc/zone/addrDesc_ppc.cpp
   ppc/zone/addrDesc_ppc.hh
-  ppc/zone/allocZone_ppc.s
+  ppc/zone/allocZone_ppc.S
   ppc/zone/countPattern_ppc.cpp
   ppc/zone/countPattern_ppc.hh
   ppc/zone/countStub_ppc.cpp
@@ -616,14 +616,14 @@ set(SRC_sparc
   sparc/lookup/cacheStub_sparc.hh
   sparc/lookup/diDesc_sparc.cpp
   sparc/lookup/diDesc_sparc.hh
-  sparc/lookup/search_sparc.s
+  sparc/lookup/search_sparc.S
   sparc/lookup/sendDesc_sparc.cpp
   sparc/lookup/sendDesc_sparc.hh
-  sparc/memory/enum_sparc.s
+  sparc/memory/enum_sparc.S
   sparc/memory/search_sparc.cpp
   sparc/memory/search_sparc.hh
-  sparc/prims/asmPrims_sparc.s
-  sparc/prims/memCopyPrims_sparc.s
+  sparc/prims/asmPrims_sparc.S
+  sparc/prims/memCopyPrims_sparc.S
   sparc/prims/prim_table_arch_sparc.hh
   sparc/runtime/aCompiler_sparc.cpp
   sparc/runtime/aCompiler_sparc.hh
@@ -642,7 +642,7 @@ set(SRC_sparc
   sparc/runtime/interruptedCtx_sparc.hh
   sparc/runtime/registerLocator_sparc.cpp
   sparc/runtime/registerLocator_sparc.hh
-  sparc/runtime/runtime_asm_gcc_sparc.s
+  sparc/runtime/runtime_asm_gcc_sparc.S
   sparc/runtime/runtime_sparc.cpp
   sparc/runtime/runtime_sparc.hh
   sparc/runtime/uncommonBranch_sparc.cpp
@@ -660,7 +660,7 @@ set(SRC_sparc
   sparc/sic/sic_sparc.hh
   sparc/zone/addrDesc_sparc.cpp
   sparc/zone/addrDesc_sparc.hh
-  sparc/zone/allocZone_sparc.s
+  sparc/zone/allocZone_sparc.S
   sparc/zone/countPattern_sparc.cpp
   sparc/zone/countPattern_sparc.hh
   sparc/zone/countStub_sparc.cpp
