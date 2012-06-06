@@ -8,7 +8,7 @@ include_directories(${X11_INCLUDE_DIR})
 list(APPEND 3RD_PARTY_LIBS ${X11_LIBRARIES})
 
 # (n)curses
-find_package(curses REQUIRED)
+find_package(Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 list(APPEND 3RD_PARTY_LIBS ${CURSES_LIBRARIES})
 #
