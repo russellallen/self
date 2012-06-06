@@ -1,13 +1,6 @@
 #!/usr/bin/env cmake
 
 
-# we need to use assembler
-#enable_language(ASM)
-set(CMAKE_ASM_FLAGS ${CMAKE_ASM_FLAGS} -arch ${platform_processor})
-
-
-#
-#
 # The following is only due to the CMake Xcode generator
 # being ignorant to asm files.
 # Xcode itself is actually capable of handling them correctly
@@ -20,6 +13,7 @@ set(_assemblies_lib_name assemblies)
 macro(setup_assembler_support sourcesVar)
 
   if(CMAKE_GENERATOR MATCHES Xcode)
+
     #the Xcode Generator is being stupid about 
     # filetypes and cannot be told to know better...
     # currently, (CMake 2.8.8) at least.
