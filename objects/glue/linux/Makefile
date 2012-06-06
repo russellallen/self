@@ -17,12 +17,17 @@ include        ${ROOT}/vm/templates/${ARCH}.make
 include        ${ROOT}/vm/templates/optimized.make
 include        ${ROOT}/templates/sources.make
 
+ifeq (${COMPILER}, GCC_COMPILER)
+  GNUFLAGS += -fkeep-inline-functions
+endif
+
 #EXTRA_LIBS   = 
 #INCLUDES    += -I${XGLHOME}/include
 #GLUE_LD_FLAGS += 
 
 #xgl_glue_libs            = -L${XGLHOME}/lib -lxgl
-termcap_glue_libs        = -L/usr/ucblib -ltermcap -lucb
+#termcap_glue_libs        = -L/usr/ucblib -ltermcap -lucb
+termcap_glue_libs        = -ltermcap
 transcendental_glue_libs = -lm
 
 stat_glue.o:    	stat.primMaker.hh
