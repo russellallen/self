@@ -8,7 +8,7 @@
 ROOT          = ../../..
 FILES         = Makefile glueCheckSum glueFileList
 DIRECTORIES   = incls
-CLEAN_EXPR    = Tags Objs.* out.* Dependencies Dependencies.cpp incls/* deps/*
+CLEAN_EXPR    = Tags Objs.* out.* Dependencies Dependencies.cpp incls/_* deps/*
 INCLUDEDB     = ${ROOT}/vm/src/includeDB
 PLATFORM      = ${ROOT}/vm/src/Platform_linux
 
