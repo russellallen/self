@@ -6,7 +6,6 @@
 *.file_status
 *.xcuserdatad
 *.xcworkspace
-CMake*/
 build/
 bin/*/runBinary
 bin/*/AddTrailingNewline
