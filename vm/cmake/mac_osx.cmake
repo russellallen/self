@@ -16,7 +16,7 @@ set(MANUFACTURER      "")
 #set(TARGET_OS_VERSION "MACOSX_VERSION")
 #set(TARGET_OS_FAMILY  "UNIX_FAMILY")
 #set(TARGET_ARCH       "I386_ARCH")
-#set(HOST_ARCH       "I386_ARCH")
+#set(HOST_ARCH         "I386_ARCH")
 
 option(SELF_OSX_COCOA
   "EXPERIMENTAL: Build with the Cocoa console" OFF)
@@ -24,7 +24,6 @@ if(SELF_OSX_COCOA)
   message(STATUS "WARNING: Using experimental Cocoa console")
   add_definitions(-DCOCOA_EXP)
 endif()
-
 
 mark_as_advanced(DYNAMIC COMPILER ASSEMBLER MANUFACTURER TARGET_OS_VERSION TARGET_OS_FAMILY)
 
@@ -56,16 +55,23 @@ set_source_files_properties(${OSX_ICON_FILES} PROPERTIES MACOSX_PACKAGE_LOCATION
 set(SRC ${SRC} ${OSX_ICON_FILES})
 
 
+
+macro(add_framework_to_list listVar framework)
+  find_library(${framework}_LIBRARY ${framework})
+  list (APPEND ${listVar} ${${framework}_LIBRARY})
+  mark_as_advanced(${${framework}_LIBRARY})
+endmacro()
+
 # the frameworks we need
-find_library(COCOA_LIBRARY Cocoa)
-find_library(APP_SERVICES_LIBRARY ApplicationServices)
-find_library(CARBON_LIBRARY Carbon)
-find_library(CORE_SERVICES_LIBRARY CoreServices)
-mark_as_advanced(COCOA_LIBRARY
-                 APP_SERVICES_LIBRARY
-                 CARBON_LIBRARY
-                 CORE_SERVICES_LIBRARY)
-set(frameworks ${COCOA_LIBRARY} ${APP_SERVICES_LIBRARY} ${CARBON_LIBRARY} ${CORE_SERVICES_LIBRARY})
+set(frameworks)
+add_framework_to_list(frameworks ApplicationServices)
+add_framework_to_list(frameworks CoreServices)
+
+if(SELF_OSX_COCOA)
+  add_framework_to_list(frameworks Cocoa)
+endif()
+
+add_framework_to_list(frameworks Carbon)
 
 set(EXTRA_LIBRARIES ${frameworks})
 
