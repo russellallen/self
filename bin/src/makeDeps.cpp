@@ -240,7 +240,7 @@ class MetroWerksMacPlatform:  public AbstractPlatform {
         GDFileTemplate = DummyFileTemplate;
   }
   const char** outer_suffixes() { 
-   static const char* suffs[] = { ".cpp", ".c", ".s", 0 };
+   static const char* suffs[] = { ".cpp", ".c", ".s", ".S", 0 };
    return suffs;
   }
 
@@ -324,7 +324,7 @@ class MACOSX_Platform: public AbstractPlatform {
   }
       
   const char** outer_suffixes() { 
-      static const char *suffs[] = { ".cpp", ".c", ".s", 0 };
+      static const char *suffs[] = { ".cpp", ".c", ".s", ".S", ".m", ".mm", 0 };
       return suffs;
   }
 
@@ -404,7 +404,7 @@ class LinuxPlatform: public AbstractPlatform {
   }
       
   const char** outer_suffixes() { 
-    static const char* suffs[] = { ".cpp", ".c", ".s", 0 };
+    static const char* suffs[] = { ".cpp", ".c", ".s", ".S", 0 };
     return suffs;
   }
 
@@ -440,7 +440,7 @@ class UnixPlatform: public AbstractPlatform {
   }
       
   const char** outer_suffixes() { 
-    static char *suffs[] = { ".cpp", ".c", ".s", 0 };
+    static char *suffs[] = { ".cpp", ".c", ".s", ".S", 0 };
     return suffs;
   }
 
