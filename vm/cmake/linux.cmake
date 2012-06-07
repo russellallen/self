@@ -1,7 +1,7 @@
 #!/usr/bin/env cmake
 
 # TODO: these are frome the project file, reconsider
-set(DYNAMIC           "-DDYNLINK_SUPPORTED -DDYNAMIC")
+set(DYNAMIC           "-DDYNLINK_SUPPORTED")
 set(COMPILER          "GCC_COMPILER")
 set(ASSEMBLER         "")
 set(MANUFACTURER      "")
@@ -28,8 +28,12 @@ add_definitions(
   -DGLUE_CHECKSUM=0
 )
 
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+
+set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -m32")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32")
-set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
+set(CMAKE_REQUIRED_DEFINITIONS ${CMAKE_REQUIRED_DEFINITIONS} -m32)
 #set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_LD_FLAGS} -m32)
 
 

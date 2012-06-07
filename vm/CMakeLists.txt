@@ -18,10 +18,6 @@ project(${PROJECT_NAME} C CXX ASM)
 # sets ${platform} ${platform_processor} ${LOCAL_CMAKE_DIR}
 include(common)
 
-# specify the libs we depend on
-# sets ${3RD_PARTY_LIBS}
-include(dependencies)
-
 
 # sets SRC_src
 add_subdirectory(src)
@@ -75,6 +71,11 @@ set_source_files_properties(
 ## setup assemby support
 #
 setup_assembler_support(SRC)
+
+
+# specify the libs we depend on
+# sets ${3RD_PARTY_LIBS}
+include(dependencies)
 
 ## setup the acutal executable.
 #
