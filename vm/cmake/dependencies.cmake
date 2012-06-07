@@ -14,3 +14,8 @@ list(APPEND 3RD_PARTY_LIBS ${CURSES_LIBRARIES})
 #
 # hide things that CURSES forgot to hide
 mark_as_advanced(CURSES_CURSES_H_PATH CURSES_FORM_LIBRARY CURSES_HAVE_CURSES_H)
+
+# if this system has a libdl, we probably need it (eg, linux)
+if(CMAKE_DL_LIBS)
+  list(APPEND 3RD_PARTY_LIBS ${CMAKE_DL_LIBS})
+endif()
