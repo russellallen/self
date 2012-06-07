@@ -59,7 +59,7 @@ function(year yearVar)
 endfunction()
 
 
-set(SOURCE_EXT "\\.(cp?p?|hh?|s|mm?|.ib)$")
+set(SOURCE_EXT "\\.(cp?p?|hh?|s|S|mm?|.ib)$")
 
 #
 # make include dirs out of the sources list
