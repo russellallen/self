@@ -12,11 +12,19 @@
 # endif
 
 # ifdef __APPLE__
+  # define MACRO(name, ...) .macro name // __VA_ARGS__
   # define ENDMACRO .endmacro
   # define C_SYM(name) _##name
 # elif defined(__linux__)
-  # define ENDMACRO .endm
-  # define C_SYM(name) name
+  # ifdef __clang__
+    # define MACRO(name, ...) .macro name // __VA_ARGS__
+    # define ENDMACRO .endmacro
+    # define C_SYM(name) name
+  # else
+    # define MACRO(name, ...) .macro name __VA_ARGS__
+    # define ENDMACRO .endm
+    # define C_SYM(name) name
+  # endif
 # else
   # error what?
 # endif
@@ -70,19 +78,23 @@
 
 // ---------------------------------------------------------
 
-# if defined(__APPLE__)
-    .macro start_exported_function // name
-    .globl _$0
- _$0:
-    .endmacro
-# elif defined(__linux)
-    .macro start_exported_function name
-    .global \name
-  \name:
-    .endm
+MACRO(start_exported_function, name)
+
+# if defined(__APPLE__) || (defined(__linux__) && defined(__clang__))
+
+  .globl C_SYM($0)
+C_SYM($0):
+
+# elif defined(__linux__) && !defined(__clang__)
+
+  .global C_SYM(\name)
+C_SYM(\name):
+
 # else
   # error what?
 # endif
+
+ENDMACRO
 
 
 
@@ -112,12 +124,12 @@
 
 // =====================================================
 
-    .macro Untested  // &string, &tmp
+    MACRO(Untested)  // &string, &tmp
     hlt
     ENDMACRO
 
 
-    .macro align_send_desc_call_rm // call is 3 bytes, jmp is 5 bytes, jmpl is 5
+    MACRO(align_send_desc_call_rm) // call is 3 bytes, jmp is 5 bytes, jmpl is 5
         .align 2; nop; nop; nop;
     ENDMACRO
 
@@ -125,59 +137,59 @@
 
     # if defined(__APPLE__) && OSX_ASM_RELEASE == PRE_2007_OSX_ASM_RELEASE
 
-      .macro jmp_reg  // jump to contents of reg
+      MACRO(jmp_reg, reg)  // jump to contents of reg
         jmp $0
-      .endmacro
+      ENDMACRO
 
-      .macro jmp_reg_indir // reg contains memory address of word containing jmp addr
+      MACRO(jmp_reg_indir, reg) // reg contains memory address of word containing jmp addr
         jmp ($0)
-      .endmacro
+      ENDMACRO
 
-      .macro call_disp_reg_indir // reg contents + disp contains memory addr of word containing call addr
+      MACRO(call_disp_reg_indir, disp reg) // reg contents + disp contains memory addr of word containing call addr
         call $0($1)
-      .endmacro
+      ENDMACRO
 
-      .macro jmp_label // jump to label with four bytes for label
+      MACRO(jmp_label, label) // jump to label with four bytes for label
         jmpl $0
-    .endmacro
+      ENDMACRO
 
-    # elif defined(__APPLE__) && OSX_ASM_RELEASE == POST_2007_OSX_ASM_RELEASE
+    # elif (defined(__APPLE__) && OSX_ASM_RELEASE == POST_2007_OSX_ASM_RELEASE) \
+        || (defined(__linux__) && defined(__clang__))
 
-      .macro jmp_reg  // jump to contents of reg
+      MACRO(jmp_reg, reg)  // jump to contents of reg
         jmp *$0
-      .endmacro
+      ENDMACRO
 
-      .macro jmp_reg_indir // reg contains memory address of word containing jmp addr
+      MACRO(jmp_reg_indir, reg) // reg contains memory address of word containing jmp addr
         jmp *($0)
-      .endmacro
+      ENDMACRO
 
-      .macro call_disp_reg_indir // reg contents + disp contains memory addr of word containing call addr
+      MACRO(call_disp_reg_indir, disp reg) // reg contents + disp contains memory addr of word containing call addr
         call *$0($1)
-      .endmacro
+      ENDMACRO
 
-      .macro jmp_label // jump to label with four bytes for label
+      MACRO(jmp_label, label) // jump to label with four bytes for label
         jmp $0
-      .endmacro
+      ENDMACRO
 
 
     # elif defined(__linux__)
+      MACRO(jmp_reg, reg)
+        jmp *\reg
+      ENDMACRO
 
-	.macro jmp_reg reg
-	  jmp *\reg
-	.endm
+      MACRO(jmp_reg_indir, reg)
+        jmp *(\reg)
+      ENDMACRO
 
-	.macro jmp_reg_indir reg
-	  jmp *(\reg)
-	.endm
+      MACRO(call_disp_reg_indir, disp reg)
+        call *\disp(\reg)
+      ENDMACRO
 
-	.macro call_disp_reg_indir disp, reg
-	  call *\disp(\reg)
-	.endm
-
-	.macro jmp_label label
-	  .globl \label // force 32-bits for the label
-	  jmp \label
-	.endm
+      MACRO(jmp_label, label)
+        .globl \label // force 32-bits for the label
+        jmp \label
+      ENDMACRO
     # else
       # error what?
     # endif
