@@ -18,7 +18,8 @@
 	    .globl C_SYM(VMString)
 	    leal   C_SYM(VMString), %eax
 
-	# if defined(__APPLE__) || (defined(__linux__) && defined(__clang__))
+	# if defined(__APPLE__) \
+	|| (defined(__linux__) && defined(__clang__) && !defined(NO_INTEGRATED_AS_clang))
 	    movl   $0(%eax), %eax
 
 	# elif defined(__linux__)
@@ -37,7 +38,8 @@ ret_bad_type: ret_prim_error badTypeOffset
 ret_overflow: ret_prim_error overflowOffset  
 	
 	MACRO(setup_arith_prim, name rcreg argreg)
-	# if defined(__APPLE__) || (defined(__linux__) && defined(__clang__))
+	# if defined(__APPLE__) \
+	|| (defined(__linux__) && defined(__clang__) && !defined(NO_INTEGRATED_AS_clang))
 	    start_exported_function $0
 	     movl    8(%esp), $2
 	     testl   $(Tag_Mask), $2
