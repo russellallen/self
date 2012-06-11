@@ -27,7 +27,7 @@ endif()
 
 if(PKG_CONFIG_FOUND)
   # do it the pkg-config way
-  pkg_check_modules(CURSES ncurses)
+  pkg_check_modules(CURSES QUIET ncurses)
 endif()
 
 if(NOT PKG_CONFIG_FOUND OR (NOT CURSES_FOUND))
