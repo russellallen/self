@@ -2,7 +2,12 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <sys/mman.h>
-
+# if defined(__APPLE__) \
+  && defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) \
+  && ((__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__-0) >= 1050)
+  # include <libkern/OSCacheControl.h>
+  # define DO_INVALIDATE_ICACHE
+# endif
 // $Revision: 30.2 $
 
 int
@@ -27,7 +32,10 @@ main(int argc, char* argv[]) {
 		perror("fread");
 		exit(1);
 	}
-  	mprotect(buf, len, PROT_EXEC || PROT_READ || PROT_WRITE);
+  	mprotect(buf, len, PROT_EXEC | PROT_READ | PROT_WRITE);
+#if defined(DO_INVALIDATE_ICACHE)
+	sys_icache_invalidate(buf, len);
+#endif
 	typedef int (*fn_t)(...);
 	int args[3];
 	int argsToSkip = 2; // name of me, name of testfile
