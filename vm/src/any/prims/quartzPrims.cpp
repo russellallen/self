@@ -216,7 +216,7 @@ oop ATSUGetGlyphBounds_wrap( ATSUTextLayout     iTextLayout,
     &b, &oActualNumberOfBounds);       /* can be NULL */ 
 
   if (e != noErr) {
-      return  (oop)reportOSError(e, "ATSUGetUnjustifiedBounds", FH);
+      return  (oop)reportOSError(e, "ATSUGetGlyphBounds", FH);
   }
   if (oActualNumberOfBounds < 1) {
    static char buf[1000];
