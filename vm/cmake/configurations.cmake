@@ -30,67 +30,72 @@ if(CMAKE_CONFIGURATION_TYPES OR CMAKE_BUILD_TYPE)
   
   # Release definitions
   ##
-  get_property(_defs TARGET ${PROJECT_NAME} PROPERTY COMPILE_DEFINITIONS_RELEASE)
-  if(FAST_FLOATS)
-    list(APPEND _defs "FAST_FLOATS")
-  endif()
-  list(APPEND _defs 
+  set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY 
+    COMPILE_DEFINITIONS_RELEASE 
     "GENERATE_DEBUGGING_AIDS=0"
     "SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=0"
     "TARGET_IS_OPTIMIZED=1"
     "TARGET_IS_PROFILED=${_is_profiled}"
     "TARGET_IS_FOR_DEBUGGING=0")
-  set_property(TARGET ${PROJECT_NAME} PROPERTY COMPILE_DEFINITIONS_RELEASE ${_defs})
+  if(FAST_FLOATS)
+    set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY 
+      COMPILE_DEFINITIONS_RELEASE 
+      "FAST_FLOATS")
+  endif()
+  
   
   # Release definitions, size optimized
   ##
-  get_property(_defs TARGET ${PROJECT_NAME} PROPERTY COMPILE_DEFINITIONS_MINSIZEREL)
-  if(FAST_FLOATS)
-    list(APPEND _defs "FAST_FLOATS")
-  endif()
-  list(APPEND _defs 
+  set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY 
+    COMPILE_DEFINITIONS_MINSIZEREL
     "GENERATE_DEBUGGING_AIDS=0"
     "SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=0"
     "TARGET_IS_OPTIMIZED=1"
     "TARGET_IS_PROFILED=${_is_profiled}"
     "TARGET_IS_FOR_DEBUGGING=0")
-  set_property(TARGET ${PROJECT_NAME} PROPERTY COMPILE_DEFINITIONS_MINSIZEREL ${_defs})
+  if(FAST_FLOATS)
+    set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY 
+      COMPILE_DEFINITIONS_MINSIZEREL 
+      "FAST_FLOATS")
+  endif()
     
   # Debug definitions
   ##
-  get_property(_defs TARGET ${PROJECT_NAME} PROPERTY COMPILE_DEFINITIONS_DEBUG)
-  if(FAST_FLOATS)
-    list(APPEND _defs "FAST_FLOATS")
-  endif()
-  list(APPEND _defs 
+  set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY 
+    COMPILE_DEFINITIONS_DEBUG
     "GENERATE_DEBUGGING_AIDS=1"
     "SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=1"
     "TARGET_IS_OPTIMIZED=0"
     "TARGET_IS_PROFILED=${_is_profiled}"
     "TARGET_IS_FOR_DEBUGGING=1"
     "GENERATE_ASSERTIONS=")
-  set_property(TARGET ${PROJECT_NAME} PROPERTY COMPILE_DEFINITIONS_DEBUG ${_defs})
+  if(FAST_FLOATS)
+    set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY 
+      COMPILE_DEFINITIONS_DEBUG 
+      "FAST_FLOATS")
+  endif()
   
   # Release definitions, with debug infos
   ##
-  get_property(_defs TARGET ${PROJECT_NAME} PROPERTY COMPILE_DEFINITIONS_RELWITHDEBINFO)
-  if(FAST_FLOATS)
-    list(APPEND _defs "FAST_FLOATS")
-  endif()
-  list(APPEND _defs 
+  set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY 
+    COMPILE_DEFINITIONS_RELWITHDEBINFO
     "GENERATE_DEBUGGING_AIDS=1"
     "SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=1"
     "TARGET_IS_OPTIMIZED=1"
     "TARGET_IS_PROFILED=${_is_profiled}"
     "TARGET_IS_FOR_DEBUGGING=1"
     "GENERATE_ASSERTIONS=")
-  set_property(TARGET ${PROJECT_NAME} PROPERTY COMPILE_DEFINITIONS_RELWITHDEBINFO ${_defs})
+  if(FAST_FLOATS)
+    set_property(TARGET ${PROJECT_NAME} APPEND PROPERTY 
+      COMPILE_DEFINITIONS_RELWITHDEBINFO 
+      "FAST_FLOATS")
+  endif()
 
 else()
   
   # we are under a makefile-like config.
   # let the user decide
-  set(SELF_BUILD_LEVEL "optimized" CACHE STRING "Select the build level for ${PRODUCT_NAME} from 'optimized', 'debug'" FORCE)
+  set(SELF_BUILD_LEVEL "optimized" CACHE STRING "Select the build level for ${PRODUCT_NAME} from 'optimized', 'debug'")
   if(SELF_BUILD_LEVEL STREQUAL "debug")
     set(_is_debug 1)
   else()
@@ -111,6 +116,11 @@ else()
   add_definitions(-DTARGET_IS_OPTIMIZED=${_is_optimized})
   add_definitions(-DTARGET_IS_PROFILED=${_is_profiled})
   add_definitions(-DTARGET_IS_FOR_DEBUGGING=${_is_debug})
-  
-  
+
+endif()
+
+if(CMAKE_BUILD_TYPE)
+  message(STATUS "Configuring for default ${CMAKE_BUILD_TYPE}")
+else()
+  message(STATUS "Configuring for build level ${SELF_BUILD_LEVEL}")
 endif()
