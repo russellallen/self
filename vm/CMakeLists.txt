@@ -54,18 +54,17 @@ configure_file(
 
 add_custom_target(create_vmDate
     COMMAND "${CMAKE_COMMAND}" -P "${CMAKE_BINARY_DIR}/configureVmDate.cmake" 
+    DEPENDS ${SRC}
     COMMENT "Creating ${SRC_VMDATE}"
 ) 
 
+set_source_files_properties(${SRC_VMDATE} 
+  PROPERTIES 
+  GENERATED TRUE
+  OBJECT_DEPENDS ${SRC}
+)
+
 set(SRC ${SRC} ${SRC_VMDATE})
-set_source_files_properties(
-  ${CMAKE_SOURCE_DIR}/vm/src/any/memory/universe.cpp 
-  PROPERTIES OBJECT_DEPENDS ${SRC_VMDATE}
-)
-set_source_files_properties(
-  ${SRC_VMDATE} 
-  PROPERTIES GENERATED TRUE
-)
 
 
 ## setup assemby support
