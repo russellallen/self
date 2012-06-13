@@ -25,7 +25,7 @@ function(determine_build_information buildVar)
   if(_git_not_there)
     set(${buildVar} PARENT_SCOPE)
   else()
-    execute_process(COMMAND git describe --tags --dirty
+    execute_process(COMMAND git --git-dir=${CMAKE_SOURCE_DIR}/../.git describe --tags --dirty
       RESULT_VARIABLE git_result
       OUTPUT_VARIABLE _revision 
       ERROR_VARIABLE _error 
@@ -107,6 +107,18 @@ macro(prepend_every_item listVar prefix)
   endforeach()
   set(${listVar} ${_outList})
 endmacro()
+
+
+macro(add_definitions_if_cmakevar)
+  set(_denfs)
+  foreach(_cmakevar ${ARGV})
+    if(DEFINED ${_cmakevar})
+      list(APPEND _defns -D${_cmakevar}=${${_cmakevar}})
+    endif()
+  endforeach()
+  add_definitions(${_defns})
+endmacro()
+
 
 
 macro(gather_prop resultVar onTarget src property config prefix)
