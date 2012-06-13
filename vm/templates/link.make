@@ -33,11 +33,13 @@ DEFS = ${SYSDEFS}  ${CONFIGDEFS} ${UNDEFS} ${OSDEFS} \
 # -Wimplicit is not valid for C++ anymore -topa 5/2012
 # added line staring with -Wabi in 2012.
 GNUFLAGS += \
-           -Wabi -Wnon-virtual-dtor -Wreorder  \
-	   -Wreturn-type -Wswitch -Wcomment -Wformat \
-	   -Wpointer-arith \
-	   -Woverloaded-virtual \
-	   -fkeep-inline-functions -Wno-write-strings
+           -fvisibility=default \
+           -fno-visibility-inlines-hidden \
+           -Wabi -Wno-non-virtual-dtor -Wreorder  \
+           -Wreturn-type -Wswitch -Wcomment -Wformat \
+           -Wpointer-arith \
+           -Woverloaded-virtual \
+           -fkeep-inline-functions -Wno-write-strings
 # would like to use -Wall but this includes -Wunused which gives just too
 # many errors in conjunction with ifdefs  -Urs 1/93
 #
@@ -58,7 +60,7 @@ CPPFLAGS = ${DEFS} ${INCLUDES}
 # don't use -O2 -- it breaks the VM...(gcc 2.3.3)  -Urs
 # Still causing problems with 2.7.2  -Mario
 # Don't use -finline-functions either, breaks VM (gcc 2.7.2)
-GNUOPTFLAGS =  -O -fno-defer-pop 
+GNUOPTFLAGS =  -O -fno-defer-pop -fkeep-inline-functions
 
 GLUE_LIB_DIR = ../../../objects/glue/${VM_SUBDIR}
 GLUE_LIBS = ${GLUE_LIB_DIR}/xlib_glue.o \

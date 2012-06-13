@@ -34,6 +34,8 @@ typedef unsigned int    uint32;         // unsigned integer with >= 32 bits
 # elif  TARGET_ARCH == M68K_ARCH
   //typedef int16               fint;   // fastest precision-irrelevant int
   typedef int32         fint;           // portablest precision-irrelevant int
+# else
+# error what?
 # endif
 
 typedef int32 smi;
