@@ -42,12 +42,9 @@ endif()
 
 
 
-
-include_directories(${X11_INCLUDE_DIRS})
-list(APPEND 3RD_PARTY_LIBS ${X11_LIBRARIES})
-
-include_directories(${CURSES_INCLUDE_DIRS})
-list(APPEND 3RD_PARTY_LIBS ${CURSES_LIBRARIES})
+link_directories(${X11_LIBRARY_DIRS} ${CURSES_LIBRARY_DIRS})
+include_directories(${X11_INCLUDE_DIRS} ${CURSES_INCLUDE_DIRS})
+list(APPEND 3RD_PARTY_LIBS ${X11_LIBRARIES} ${CURSES_LIBRARIES})
 
 # if this system has a libdl, we probably need it (eg, linux)
 if(CMAKE_DL_LIBS)
