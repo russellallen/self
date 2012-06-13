@@ -61,7 +61,7 @@ add_custom_target(create_vmDate
 set_source_files_properties(${SRC_VMDATE} 
   PROPERTIES 
   GENERATED TRUE
-  OBJECT_DEPENDS ${SRC}
+  OBJECT_DEPENDS "${SRC}"
 )
 
 set(SRC ${SRC} ${SRC_VMDATE})
