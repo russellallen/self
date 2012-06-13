@@ -41,6 +41,13 @@ include_directories(${SELF_GENERATED_INLCUDE_FILES_DIR})
 set(EXTRA_LIBRARIES)
 
 
+macro(configure_end)
+    if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
+        set(CONFIG_HAS_BEEN_RUN_BEFORE 1 CACHE INTERNAL 
+        "Flag to track whether this is the first time running CMake or if CMake has been configured before")
+    endif(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
+endmacro(configure_end)
+
 macro(setup_target_common target)
   set_target_properties(${target} PROPERTIES LINKER_LANGUAGE CXX)
   # we _know_ we have to deal with assembler.

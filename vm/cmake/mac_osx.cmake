@@ -3,12 +3,8 @@ if(NOT APPLE)
     message(FATAL "This is only for Mac OS X")
 endif(NOT APPLE)
 
-set(GUI_TYPE MACOSX_BUNDLE)
-
-set(CMAKE_OSX_ARCHITECTURES i386) #no x86_64 atm.
-
 # TODO: these are frome the project file, reconsider
-set(DYNAMIC           "-DDYNLINK_SUPPORTED -DDYNAMIC")
+set(DYNAMIC           "-DDYNLINK_SUPPORTED")
 set(COMPILER          "GCC_COMPILER")
 set(ASSEMBLER         "")
 set(MANUFACTURER      "")
@@ -17,6 +13,7 @@ set(MANUFACTURER      "")
 #set(TARGET_OS_FAMILY  "UNIX_FAMILY")
 #set(TARGET_ARCH       "I386_ARCH")
 #set(HOST_ARCH         "I386_ARCH")
+mark_as_advanced(DYNAMIC COMPILER ASSEMBLER MANUFACTURER TARGET_OS_VERSION TARGET_OS_FAMILY)
 
 option(SELF_OSX_COCOA
   "EXPERIMENTAL: Build with the Cocoa console" OFF)
@@ -25,7 +22,38 @@ if(SELF_OSX_COCOA)
   add_definitions(-DCOCOA_EXP)
 endif()
 
-mark_as_advanced(DYNAMIC COMPILER ASSEMBLER MANUFACTURER TARGET_OS_VERSION TARGET_OS_FAMILY)
+
+
+set(GUI_TYPE MACOSX_BUNDLE)
+
+#
+# Things we only check once.
+#
+if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
+  # no x86_64 atm, 
+  # so forcibilly overwrite
+  set(CMAKE_OSX_ARCHITECTURES i386 CACHE STRING
+     "Build architectures for OSX"
+    FORCE)
+  # we need to be 10.6 compliant.
+  # so forcibilly overwrite
+  set(CMAKE_OSX_DEPLOYMENT_TARGET "10.6" CACHE STRING
+    "Minimum OS X version to target for deployment (at runtime); newer APIs weak linked. Set to empty string for default value."
+    FORCE)
+  if((DEFINED _CURRENT_OSX_VERSION) AND (_CURRENT_OSX_VERSION VERSION_GREATER "10.6"))
+    # On Lion, force a 10.6 sdk, we still rely on 
+    # deprecated carbon stuff that went away in the 10.7 sdk.
+    # this is in Dawin.cmake:
+    #  SET(CMAKE_OSX_SYSROOT_DEFAULT
+    #    "${_CMAKE_OSX_SDKS_DIR}/MacOSX${_CURRENT_OSX_VERSION}.sdk")
+    # hence: 
+    set(_version "10.6")
+    set(_new_sysroot "${_CMAKE_OSX_SDKS_DIR}/MacOSX${_version}.sdk")
+    set(CMAKE_OSX_SYSROOT ${_new_sysroot} CACHE PATH
+      "The product will be built against the headers and libraries located inside the indicated SDK."
+      FORCE)
+  endif()
+endif()
 
 year(YEAR)
 
@@ -36,7 +64,7 @@ set(MACOSX_BUNDLE_BUNDLE_NAME
 set(MACOSX_BUNDLE_SHORT_VERSION_STRING 
   "${SELF_VERSION_MAJOR}.${SELF_VERSION_MINOR}.${SELF_VERSION_SNAPSHOT}")
 set(MACOSX_BUNDLE_BUNDLE_VERSION 
-  ${SELF_BUILD})
+  "${SELF_BUILD}")
 set(MACOSX_BUNDLE_LONG_VERSION_STRING 
   "${PROJECT_NAME} ${SELF_VERSION_MAJOR}.${SELF_VERSION_MINOR}.${SELF_VERSION_SNAPSHOT} (${SELF_BUILD})")
 set(MACOSX_BUNDLE_COPYRIGHT
@@ -59,7 +87,7 @@ set(SRC ${SRC} ${OSX_ICON_FILES})
 macro(add_framework_to_list listVar framework)
   find_library(${framework}_LIBRARY ${framework})
   list (APPEND ${listVar} ${${framework}_LIBRARY})
-  mark_as_advanced(${${framework}_LIBRARY})
+  mark_as_advanced(${framework}_LIBRARY)
 endmacro()
 
 # the frameworks we need
@@ -144,12 +172,26 @@ macro(setup_target target)
     math(EXPR GCC_OPTIMIZATION_LEVEL "${_is_optimized} * 3")
     add_definitions(-DGCC_OPTIMIZATION_LEVEL=${GCC_OPTIMIZATION_LEVEL})
     
+    add_definitions(
+      --sysroot ${CMAKE_OSX_SYSROOT}
+      -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}
+    )
+    
+    foreach(_flags 
+      CMAKE_EXE_LINKER_FLAGS
+      CMAKE_EXE_LINKER_FLAGS_DEBUG
+      CMAKE_EXE_LINKER_FLAGS_RELEASE
+      CMAKE_EXE_LINKER_FLAGS_MINSIZEREL
+      CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO
+    )
+      set(${_flags} "${${_flags}} -isysroot ${CMAKE_OSX_SYSROOT} -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}")
+    endforeach()
+
   endif()
   
   # configure CMake to use a custom Info.plist
   set_target_properties(${target} PROPERTIES 
     MACOSX_BUNDLE_INFO_PLIST ${SELF_BUILD_SUPPORT_DIR}/${platform}/Info.plist)
-  
   
 endmacro()
 
@@ -165,9 +207,9 @@ macro(include_prefix_header target)
   if(CMAKE_GENERATOR MATCHES Xcode)
     set_target_properties(${target} PROPERTIES XCODE_ATTRIBUTE_GCC_PRECOMPILE_PREFIX_HEADER "YES")
     set_target_properties(${target} PROPERTIES XCODE_ATTRIBUTE_GCC_PREFIX_HEADER "${_fullPrefixFile}")
-  else(CMAKE_GENERATOR MATCHES Xcode)
+  else()
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${_fullPrefixFile} -Winvalid-pch")
-  endif(CMAKE_GENERATOR MATCHES Xcode)
+  endif()
 endmacro()
 
 

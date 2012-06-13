@@ -95,3 +95,5 @@ target_link_libraries(${PROJECT_NAME} ${EXTRA_LIBRARIES} ${3RD_PARTY_LIBS})
 
 # setup target-specific definitions
 setup_target(${PROJECT_NAME})
+
+configure_end()
