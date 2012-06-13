@@ -120,7 +120,7 @@ static const uint32 maxCodeAndStubSizeForMachine =  (uint32)(1  <<  (branch_disp
 
 void zone::set_sizes_for_statically_allocated_code_and_stub_area(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize, char*& stb) {
 
-  if (OS::make_statically_allocated_memory_executable(zoneStart(), zoneEnd()-zoneStart()))
+  if (OS::make_memory_executable(zoneStart(), zoneEnd()-zoneStart()))
     fatal3("Couldn't make PIC area writable: zoneStart() = 0x%x, zoneEnd() = 0x%x, difference = %d",
           zoneStart(), zoneEnd(), zoneEnd() - zoneStart());
           
@@ -150,6 +150,7 @@ void zone::set_sizes_for_statically_allocated_code_and_stub_area(int32& codeSize
 
 
 void zone::set_sizes_and_allocate_code_and_stub_area(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize, char*& stb) {
+  
     round_sizes(codeSize, stubSize, depSize, debugSize);
     int codeSize_p = roundTo(codeSize, idealized_page_size);
     int stubSize_p = roundTo(stubSize, idealized_page_size);
@@ -179,6 +180,11 @@ void zone::set_sizes_and_allocate_code_and_stub_area(int32& codeSize, int32& stu
     // See zone::code_start() and zone::code::end()
     bottom= (int32*)OS::allocate_idealized_page_aligned(codeAndStubSize_p, "nmethod zone (inst + stubs)", NMethodStart);
     stb= (char*)bottom + codeSize_p; 
+  
+    if (OS::make_memory_executable(bottom, codeAndStubSize_p))
+      fatal2("Couldn't make PIC area writable: start = 0x%x, length = %d",
+             bottom, codeSize_p);
+
 }
 
 
