@@ -850,6 +850,6 @@ extern "C" {
 # endif
 
 
-int OS::make_statically_allocated_memory_executable(caddr_t addr, size_t len) {
+int OS::make_memory_executable(void* addr, size_t len) {
   return mprotect(addr, len, PROT_READ|PROT_WRITE|PROT_EXEC);
 }

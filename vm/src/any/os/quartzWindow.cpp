@@ -538,28 +538,93 @@ void QuartzWindow::warp_pointer(int x, int y) {
 }
 
 
+#define kUTTypeOldMacText CFSTR("com.apple.traditional-mac-plain-text")
+
+
 oop QuartzWindow::get_scrap_text() {
-  // Listing 2-4(MTb), Inside mac: Mor Mac Toolbox pg 2-21
-  ScrapRef s;
-  if (GetCurrentScrap(&s) == noErr) {
-    long size_of_text_data = 0;
-    if ( GetScrapFlavorSize(s, 'TEXT', &size_of_text_data) == noErr ) {
-      byteVectorOop r = Memory->byteVectorObj->cloneSize(size_of_text_data, CANFAIL);
-      if (!r->is_mark()
-      &&  GetScrapFlavorData(s, 'TEXT', &size_of_text_data, r->bytes()) == noErr)
+  // See Pasteboard Manager Programming guide
+  PasteboardRef       clipboard;
+  PasteboardSyncFlags syncFlags;
+  CFDataRef           textData = NULL;
+  ItemCount           itemCount;
+  
+  if (PasteboardCreate(kPasteboardClipboard, &clipboard) != noErr) 
+    goto BailOut;
+  
+  if (PasteboardSynchronize(clipboard) & kPasteboardModified)
+    goto BailOut;
+
+  if (PasteboardGetItemCount(clipboard, &itemCount) != noErr) 
+    goto BailOut;
+  
+  for(UInt32 itemIndex = 1; itemIndex <= itemCount; itemIndex++) {
+    PasteboardItemID itemID = 0;
+    CFArrayRef       flavorTypeArray = NULL;
+    CFIndex          flavorCount = 0;
+
+    if (PasteboardGetItemIdentifier(clipboard, itemIndex, &itemID) != noErr)
+      continue;
+  
+    if (PasteboardCopyItemFlavors(clipboard, itemID, &flavorTypeArray) != noErr)
+      continue;
+
+    flavorCount = CFArrayGetCount(flavorTypeArray);
+     
+    for(CFIndex flavorIndex = 0; flavorIndex < flavorCount; flavorIndex++) {
+      CFStringRef flavorType;
+      CFDataRef   flavorData;
+      CFIndex     flavorDataSize;
+      char        flavorText[256];
+      
+      
+      flavorType = (CFStringRef)CFArrayGetValueAtIndex( flavorTypeArray,// 6
+                                                       flavorIndex );
+      
+      if (UTTypeConformsTo(flavorType, kUTTypeOldMacText)) {
+        
+        if (PasteboardCopyItemFlavorData(clipboard, itemID, flavorType, 
+                                         &flavorData) != noErr)
+          continue;
+          
+        flavorDataSize = CFDataGetLength(flavorData);
+
+        // allocate new string.
+        byteVectorOop r = Memory->byteVectorObj->cloneSize(flavorDataSize, CANFAIL);
+        if (r->is_mark()) {
+          CFRelease (flavorData);
+          CFRelease (flavorTypeArray);
+          goto BailOut;          
+        }
+        // copy over
+        CFDataGetBytes(flavorData, CFRangeMake(0,CFDataGetLength(flavorData)),
+                       (UInt8 *)r->bytes());          
+        CFRelease(flavorData);
+        CFRelease(flavorTypeArray);
         return r;
+      } // else try next      
     }
-  }
+    CFRelease(flavorTypeArray);
+  }  
+  
+BailOut:
+  
   return new_string("", 0);
 }
 
-
 int QuartzWindow::put_scrap_text(const char* s, int len) {
-  // Listting 2-1(MTb) Writing data to the scrap, Inside Mac: More Mac Toolbox, pg 2-16
-  OSStatus      err = ClearCurrentScrap();   if (err != noErr)  return err;
-  ScrapRef sc;  err = GetCurrentScrap(&sc);  if (err != noErr)  return err;
+  // See Pasteboard Manager Programming guide
+  PasteboardRef clipboard;
+  OSStatus      err;
+  CFDataRef     textData = CFDataCreate(kCFAllocatorDefault, 
+                                        (const UInt8*)s, len);
+  if (textData == NULL) return -1;
+  if ((err = PasteboardCreate(kPasteboardClipboard, &clipboard)) != noErr) return err;
+  if ((err = PasteboardClear(clipboard)) != noErr) return err;
+
+  return PasteboardPutItemFlavor(clipboard, (PasteboardItemID)s, 
+                                 kUTTypeOldMacText, textData, 
+                                 kPasteboardFlavorNoFlags);
   
-  return PutScrapFlavor( sc, 'TEXT', kScrapFlavorMaskNone, len, s );
 }
 
 // Convert WindowPtr to QuartzWindow by using refcon

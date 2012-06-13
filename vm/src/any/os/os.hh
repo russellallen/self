@@ -154,7 +154,7 @@ class OS {
   static void  dont_need_pages(char* start, char* end);
   
   // Set OS permissions on memory:
-  static int make_statically_allocated_memory_executable(caddr_t addr, size_t len);
+  static int make_memory_executable(void* addr, size_t len);
 
   static unsigned int real_mem_size;
   static void    profile(bool flag) {
