@@ -17,7 +17,7 @@ include        ${ROOT}/vm/templates/compile.make
 
 ifeq (${COMPILER}, GCC_COMPILER)
   #g++ allows -g with -O -- makes it easier to locate bugs in optimized version
-  CFLAGSnog = ${GNUOPTFLAGS}   # no -g for some files -- compiles much faster
+  CFLAGSnog = ${GNUOPTFLAGS}  -fkeep-inline-functions   # no -g for some files -- compiles much faster
   CFLAGS   = ${CFLAGSnog} -g
 else
   CFLAGSnog = -O 
