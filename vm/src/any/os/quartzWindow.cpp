@@ -103,12 +103,22 @@ bool QuartzWindow::open( const char* /* display_name  unimp mac */,
                            int min_w, int max_w, int min_h, int max_h, // -1 for don't care
                            const char* window_name,  const char* /*icon_name*/,
                            const char* font_name,    int   font_size ) {
-  if ( !open( kDocumentWindowClass, 
-              kWindowStandardDocumentAttributes
-            | kWindowInWindowMenuAttribute
-            | kWindowAsyncDragAttribute
-            | kWindowLiveResizeAttribute
-            | kWindowStandardHandlerAttribute, // cannot get even mouse events with this
+
+  int options[8] = {
+    kHIWindowBitCloseBox        ,
+    kHIWindowBitZoomBox         ,
+    kHIWindowBitCollapseBox     ,
+    kHIWindowBitResizable       ,
+    // kHIWindowBitToolbarButton     ,
+    // kHIWindowBitUnifiedTitleAndToolbar,
+    // kHIWindowBitTextured         ,
+    kHIWindowBitRoundBottomBarCorners,
+    // ?kHIWindowBitCompositing,
+    kHIWindowBitStandardHandler,
+    0
+  };
+
+  if ( !open( kDocumentWindowClass, options,
              x, y, x + w, y + h, window_name, font_name, font_size))
     return false;
   if ( !change_size_hints(min_w, max_w, min_h, max_h)) { close();  return false; }
@@ -119,8 +129,8 @@ bool QuartzWindow::open( const char* /* display_name  unimp mac */,
 
 
 bool QuartzWindow::open( 
-                    uint32 /* WindowClass */ wc,
-                    uint32 /* WindowAttributes */  attrs,
+                    uint32  /* WindowClass */ wc,
+                    int*    /* WindowAttributes  */  attrs,
                     int   left,
                     int   top, 
                     int   right, 
@@ -128,10 +138,9 @@ bool QuartzWindow::open(
                     const char* title,
                     const char* font_name,
                     int   font_size ) {
-  Rect bounds; SetRect(&bounds, left, top, right, bottom);
-  // CGRect bounds = CGRectMake(left, top, right, bottom);
+  HIRect bounds = (HIRect) CGRectMake(left, top, right, bottom);
   
-  OSStatus err = CreateNewWindow( wc, attrs, &bounds, &_quartz_win);
+  OSStatus err =  HIWindowCreate(wc, attrs, NULL, kHICoordSpace72DPIGlobal, &bounds, &_quartz_win);
   if (err != noErr)
     return false;
   SetWRefCon(my_window(), (int32)this);
@@ -235,21 +244,18 @@ void QuartzWindow::close() {
 
 
 static CGDirectDisplayID screen(void* w) {
-  RgnHandle rgn = NewRgn();
-  OSStatus err = GetWindowRegion( (WindowRef)w, kWindowGlobalPortRgn, rgn);
+  HIRect bounds;
+  OSStatus err = HIWindowGetBounds((WindowRef)w, kWindowGlobalPortRgn, 
+                                   kHICoordSpace72DPIGlobal, &bounds);
   if (err) {
     lprintf("GetWindowRegion failed: %d\n", err);
-    DisposeRgn(rgn);
     return CGMainDisplayID();
   }
-  Rect r;
-  GetRegionBounds(rgn, &r);
-  DisposeRgn(rgn);
   CGDirectDisplayID display;
-  CGDisplayCount c;
-  CGDisplayErr e = CGGetDisplaysWithPoint( CGPointMake( r.left, r.top ), 1,
-                             &display, &c);
-  return c ? display : CGMainDisplayID();
+  CGDisplayCount displayCount;
+  CGDisplayErr e = CGGetDisplaysWithRect(bounds, 1, 
+                                         &display, &displayCount);
+  return (displayCount && !e) ? display : CGMainDisplayID();
 }
 
 
@@ -311,14 +317,18 @@ int QuartzWindow::inset_bottom() {
 
 
 void QuartzWindow::get_window_region_rect(int wh, Rect* r) {
-  RgnHandle wrh = NewRgn();
-  OSStatus err = GetWindowRegion(my_window(), (WindowRegionCode)wh, wrh);
-  if (err != noErr) {
+  HIRect bounds;
+  OSStatus err = HIWindowGetBounds(my_window(), wh, 
+                                   kHICoordSpace72DPIGlobal, &bounds);
+  if (err) {
+    lprintf("HIWindowGetBounds failed: %d\n", err);
     r->left = r->top = 0; r->bottom = r->right = 1;
+  } else {
+    r->left   = (short) CGRectGetMinX(bounds);
+    r->top    = (short) CGRectGetMinY(bounds);
+    r->bottom = (short) CGRectGetMaxY(bounds);
+    r->right  = (short) CGRectGetMaxX(bounds);
   }
-  else
-    GetRegionBounds(wrh, r);
-  DisposeRgn(wrh);
 }
 
 

@@ -1833,7 +1833,7 @@
 		BC833C8D05587D860054DE0E /* Info-Self_debug__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Info-Self_debug__Upgraded_.plist"; sourceTree = "<group>"; };
 		BC9A116E05F330A00000034B /* search_ppc.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = search_ppc.cpp; path = ../../src/ppc/memory/search_ppc.cpp; sourceTree = SOURCE_ROOT; };
 		BC9F9F740558F27700ECBD80 /* Info-Self_optimized__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Info-Self_optimized__Upgraded_.plist"; sourceTree = "<group>"; };
-		BC9F9F750558F27800ECBD80 /* Self_debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Self_debug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC9F9F750558F27800ECBD80 /* Self_debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Self_debug.app; path = Self.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCCD0EDD05893B260079952B /* xgl.primMaker.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; name = xgl.primMaker.hh; path = ../../../objects/glue/xgl.primMaker.hh; sourceTree = SOURCE_ROOT; };
 		BCCD0EDE05893B260079952B /* unixPrims.primMaker.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; name = unixPrims.primMaker.hh; path = ../../../objects/glue/unixPrims.primMaker.hh; sourceTree = SOURCE_ROOT; };
 		BCCD0EDF05893B260079952B /* transcendental.primMaker.hh */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 30; name = transcendental.primMaker.hh; path = ../../../objects/glue/transcendental.primMaker.hh; sourceTree = SOURCE_ROOT; };
@@ -4627,7 +4627,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPSUFFIX = debug;
-				ARCHS = i386;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = YES;
@@ -4956,10 +4956,7 @@
 		BC4C11D5093BD55B00A3D738 /* Not Used - Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = YES;
@@ -5051,10 +5048,7 @@
 		BC4C11D6093BD55B00A3D738 /* Not Used - Deployment */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = YES;
@@ -5146,10 +5140,7 @@
 		BC4C11D7093BD55B00A3D738 /* Optimized Self */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = YES;
@@ -5240,10 +5231,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPSUFFIX = fast_floats;
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = YES;
@@ -5336,10 +5324,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPSUFFIX = debug;
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = YES;
@@ -5433,10 +5418,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPSUFFIX = opt_asserts;
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = YES;
@@ -5528,10 +5510,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPSUFFIX = profiled;
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = YES;
@@ -5622,10 +5601,7 @@
 		BC4C11DE093BD55B00A3D738 /* Default */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_LOCATION = YES;

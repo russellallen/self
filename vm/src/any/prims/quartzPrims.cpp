@@ -777,21 +777,26 @@ OSStatus ATSUDisposeTextLayout_wrap(ATSUTextLayout lay) {
 
 
 oop GetWindowRegion_wrap( WindowRef w, uint16 reg, void* FH) {
-  Rect rect;
-  RgnHandle rgn = NewRgn();
-  
-  OSStatus e = GetWindowRegion(w, reg, rgn );
-  if (e != noErr) {
-    DisposeRgn(rgn);
-    return  (oop)reportOSError(e, "GetWindowRegion", FH);
+  // 
+  // TODO: GetWindoRegion is deprecated and not avialiable in >=10.7
+  // For now, we emulate with HIWindowGetBounds
+  //
+  HIRect bounds;
+  OSStatus err = HIWindowGetBounds((WindowRef)w, reg, 
+                                   kHICoordSpace72DPIGlobal, &bounds);
+  if (err) {
+    return  (oop)reportOSError(err, "GetWindowRegion", FH);
   }
-  GetRegionBounds(rgn, &rect);
-  DisposeRgn(rgn);
+
   objVectorOop r = Memory->objVectorObj->cloneSize(4);
-  r->obj_at_put(0, as_smiOop(rect.left  ),  false);
-  r->obj_at_put(1, as_smiOop(rect.top   ),  false);
-  r->obj_at_put(2, as_smiOop(rect.right ),  false);
-  r->obj_at_put(3, as_smiOop(rect.bottom),  false);
+//  r->obj_at_put(0, as_floatOop(CGRectGetMinX(bounds)), false);
+//  r->obj_at_put(1, as_floatOop(CGRectGetMinY(bounds)), false);
+//  r->obj_at_put(2, as_floatOop(CGRectGetMaxX(bounds)), false);
+//  r->obj_at_put(3, as_floatOop(CGRectGetMaxY(bounds)), false);
+  r->obj_at_put(0, as_smiOop((short)CGRectGetMinX(bounds)), false);
+  r->obj_at_put(1, as_smiOop((short)CGRectGetMinY(bounds)), false);
+  r->obj_at_put(2, as_smiOop((short)CGRectGetMaxX(bounds)), false);
+  r->obj_at_put(3, as_smiOop((short)CGRectGetMaxY(bounds)), false);
   
   return r;
 }

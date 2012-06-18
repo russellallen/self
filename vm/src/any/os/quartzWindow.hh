@@ -287,8 +287,8 @@ public:
           
   
   virtual bool  open( 
-          uint32 /* WindowClass */,
-          uint32 /* WindowAttributes */,
+          uint32  /* WindowClass */,
+          int*    /* WindowAttributes */,
           int   left            = 100,
           int   top             = 100, 
           int   right           = 200, 
