@@ -40,19 +40,6 @@ if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
   set(CMAKE_OSX_DEPLOYMENT_TARGET "10.6" CACHE STRING
     "Minimum OS X version to target for deployment (at runtime); newer APIs weak linked. Set to empty string for default value."
     FORCE)
-  if((DEFINED _CURRENT_OSX_VERSION) AND (_CURRENT_OSX_VERSION VERSION_GREATER "10.6"))
-    # On Lion, force a 10.6 sdk, we still rely on 
-    # deprecated carbon stuff that went away in the 10.7 sdk.
-    # this is in Dawin.cmake:
-    #  SET(CMAKE_OSX_SYSROOT_DEFAULT
-    #    "${_CMAKE_OSX_SDKS_DIR}/MacOSX${_CURRENT_OSX_VERSION}.sdk")
-    # hence: 
-    set(_version "10.6")
-    set(_new_sysroot "${_CMAKE_OSX_SDKS_DIR}/MacOSX${_version}.sdk")
-    set(CMAKE_OSX_SYSROOT ${_new_sysroot} CACHE PATH
-      "The product will be built against the headers and libraries located inside the indicated SDK."
-      FORCE)
-  endif()
 endif()
 
 year(YEAR)
