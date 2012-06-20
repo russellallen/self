@@ -43,7 +43,7 @@ foreach dir ($*)
     set base = $file:r
     if (-e $SELF_WORKING_DIR/vm/src/$dir/$file) then
       echo $file >> Tags
-      if ($ext == c || $ext == cpp || $ext == s) then
+      if ($ext == c || $ext == cpp || $ext == s || $ext == S) then
         echo ${base}.o >> $objs
         if ($ext == c  || $ext == cpp) then 
           set d = deps/_${base}.${ext}.dep
