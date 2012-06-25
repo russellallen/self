@@ -31,10 +31,11 @@ class floatOopClass: public oopClass {
   char *print_string_precision_prim(smi precision);
 };
 
+# ifndef FAST_FLOAT
 static inline floatOop as_floatOop(float value) {
   return floatOopClass::as_floatOop(value);
 }
-
+# endif
 
 extern floatOop infinityOop;
 

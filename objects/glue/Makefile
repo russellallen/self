@@ -19,8 +19,7 @@ OBJECT_FILES = stat.primMaker.hh \
 	       xgl.primMaker.hh \
 	       xlib.primMaker.hh \
 	       \
-	       macPrims.primMaker.hh \
-	       macToolbox.primMaker.hh \
+	       macPrims.primMaker.hh 
 
 SELF_MODULES = primitiveMaker \
                stat_wrappers statTemplates \
@@ -30,8 +29,7 @@ SELF_MODULES = primitiveMaker \
 	       xgl_wrappers xglTemplates \
 	       xlib_wrappers xlibTemplates \
 	       \
-	       macPrims_wrappers macPrimTemplates \
-	       macToolbox_wrappers macToolboxTemplates \
+	       macPrims_wrappers macPrimTemplates 
 
 DIRECTORIES  = sun4 svr4 mac_osx
 
