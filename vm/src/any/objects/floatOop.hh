@@ -31,12 +31,6 @@ class floatOopClass: public oopClass {
   char *print_string_precision_prim(smi precision);
 };
 
-# ifndef FAST_FLOAT
-static inline floatOop as_floatOop(float value) {
-  return floatOopClass::as_floatOop(value);
-}
-# endif
-
 extern floatOop infinityOop;
 
 oop float_add_prim(floatOop x, floatOop y);
@@ -66,7 +60,7 @@ oop float_ge_prim(floatOop x, floatOop y);
     uint32 i;
   };
   
-  inline floatOop as_floatOop(float value) {
+  static inline floatOop as_floatOop(float value) {
     // this trashes the least significant mantissa bits
     // might want to kill exponent bits
     floatHolder x;
@@ -79,5 +73,9 @@ oop float_ge_prim(floatOop x, floatOop y);
     floatHolder x;
     x.i = uint32(this) - Float_Tag;
     return x.f;
+  }
+# else
+  static inline floatOop as_floatOop(float value) {
+    return floatOopClass::as_floatOop(value);
   }
 # endif
