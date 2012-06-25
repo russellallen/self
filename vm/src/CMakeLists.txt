@@ -701,9 +701,13 @@ set(SRC_unix
 )
 set(SRC_cocoa
   cocoa/os/main.mm
+  cocoa/os/Pty.h
+  cocoa/os/Pty.m
+  cocoa/os/SelfAppDelegate.h
+  cocoa/os/SelfAppDelegate.m
   cocoa/os/Self.nib
-  cocoa/os/SelfConsole.h
-  cocoa/os/SelfConsole.mm
+  cocoa/os/SelfConsoleView.h
+  cocoa/os/SelfConsoleView.m
 )
 
 # include non-dependent
@@ -730,8 +734,10 @@ endif(APPLE)
 
 if(SELF_OSX_COCOA)
   set(SRC_src ${SRC_src} ${SRC_cocoa})
+  set(SELF_MACOSX_NIBS ${SELF_MACOSX_NIBS} ${CMAKE_CURRENT_SOURCE_DIR}/cocoa/os/Self.nib)
 endif()
 
 prepend_every_item(SRC_src "${CMAKE_CURRENT_SOURCE_DIR}/")
 
 set(SRC_src ${SRC_src} PARENT_SCOPE)
+set(SELF_MACOSX_NIBS ${SELF_MACOSX_NIBS} PARENT_SCOPE)

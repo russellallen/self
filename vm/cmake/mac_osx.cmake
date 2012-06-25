@@ -15,11 +15,14 @@ set(MANUFACTURER      "")
 #set(HOST_ARCH         "I386_ARCH")
 mark_as_advanced(DYNAMIC COMPILER ASSEMBLER MANUFACTURER TARGET_OS_VERSION TARGET_OS_FAMILY)
 
+set(SELF_OSX_INFO_PLIST Info)
+
+
 option(SELF_OSX_COCOA
   "EXPERIMENTAL: Build with the Cocoa console" OFF)
 if(SELF_OSX_COCOA)
-  message(STATUS "WARNING: Using experimental Cocoa console")
   add_definitions(-DCOCOA_EXP)
+  set(SELF_OSX_INFO_PLIST InfoCocoa)
 endif()
 
 
@@ -178,8 +181,10 @@ macro(setup_target target)
   
   # configure CMake to use a custom Info.plist
   set_target_properties(${target} PROPERTIES 
-    MACOSX_BUNDLE_INFO_PLIST ${SELF_BUILD_SUPPORT_DIR}/${platform}/Info.plist)
-  
+    MACOSX_BUNDLE_INFO_PLIST ${SELF_BUILD_SUPPORT_DIR}/${platform}/${SELF_OSX_INFO_PLIST}.plist)
+  foreach(_nib ${SELF_MACOSX_NIBS})
+	  set_source_files_properties(${_nib} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)		  
+  endforeach()
 endmacro()
 
 
