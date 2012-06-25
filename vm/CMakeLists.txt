@@ -4,11 +4,16 @@ set(PROJECT_NAME Self)
 
 # This is for a cmake compatibility check
 if(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.4)
-    message(FATAL_ERROR "${PROJECT_NAME} requires at least CMake v2.4."
+    message(FATAL_ERROR "${PROJECT_NAME} requires at least CMake v2.8.8"
         " You are running v${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}."
         " Please upgrade." )
 endif(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.4)
-cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR)
+if(APPLE)
+  # it has to be 2.8.8 on OSX 
+  cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR)
+else()
+  cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+endif()
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
