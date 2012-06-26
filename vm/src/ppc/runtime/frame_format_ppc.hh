@@ -212,7 +212,7 @@ inline int32 stackLocation_offset(fint i, fint max_no_of_outgoing_args_and_rcvr)
 int32 spOffset(Location reg, fint frameSize, fint max_no_of_outgoing_args_and_rcvr);
 
 
-// Duplicated in asmDefs_gcc_ppc.hh, asmDefs_mw_ppc.hh
+// Duplicated in asmDefs_gcc_ppc.hh
 const fint PerformSelectorLoc_sp_offset  =  -(NumLocalNonVolRegisters + 1) * oopSize;
 const fint PerformDelegateeLoc_sp_offset =  -(NumLocalNonVolRegisters + 2) * oopSize;
 # endif // __ppc__

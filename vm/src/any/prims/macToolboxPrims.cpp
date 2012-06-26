@@ -5,10 +5,6 @@
 
 # pragma implementation "macToolboxPrims.hh"
 
-
-// MW doesn't set it till headers below.
-// So OR with TARGET_API_MAC_CARBON
-
 # if defined(MACTOOLBOX_LIB) || TARGET_API_MAC_CARBON
 
 # if TARGET_OS_VERSION == MACOSX_VERSION && !TARGET_API_MAC_CARBON

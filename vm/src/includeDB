@@ -990,7 +990,7 @@ genHelper_<arch>.cpp          target.hh
 generate_platform_dependent_include aCompiler.hh aCompiler_pd.hh aCompiler_<arch>.hh
 generate_platform_dependent_include addrDesc.hh addrDesc_pd.hh addrDesc_<arch>.hh
 generate_platform_dependent_include asm.hh asm_pd.hh asm_<arch>.hh
-generate_platform_dependent_include asmDefs.hh asmDefs_pd.hh asmDefs_<compiler>_<arch>.hh
+generate_platform_dependent_include asmDefs.hh asmDefs_pd.hh asmDefs_<arch>.hh
 generate_platform_dependent_include asm_inline.hh asm_inline_pd.hh asm_inline_<arch>.hh
 generate_platform_dependent_include cacheStub.hh cacheStub_pd.hh cacheStub_<arch>.hh
 generate_platform_dependent_include cacheStub_inline.hh cacheStub_inline_pd.hh cacheStub_inline_<arch>.hh
@@ -2395,8 +2395,8 @@ runtime_<arch>.cpp            process.hh
 runtime_<arch>.cpp            regs.hh
 runtime_<arch>.cpp            runtime.hh
 
-runtime_asm_<compiler>_<arch>.s asmDefs.hh
-runtime_asm_<compiler>_<arch>.s macros.hh
+runtime_asm_<arch>.S          asmDefs.hh
+runtime_asm_<arch>.S          macros.hh
 
 scanner.cpp                   files.hh
 scanner.cpp                   generation_inline.hh
@@ -3258,9 +3258,6 @@ vframe_<arch>.cpp             table.hh
 vframe_<arch>.cpp             vframe.hh
 vframe_<arch>.cpp             vframeOop.hh
 vframe_<arch>.cpp             vmStrings.hh
-
-vmDate_mw.cpp                 config.hh
-vmDate_mw.cpp                 macros.hh
 
 vmObj.hh                      process.hh
 vmObj.hh                      top.hh

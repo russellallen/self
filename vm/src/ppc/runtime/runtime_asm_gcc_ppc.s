@@ -5,10 +5,6 @@
  ; Copyright 1992-2012 AUTHORS.
  ;   See the LICENSE file for license information.
 
-
-/* remove me from MW project when compiling under MW */
-
-
 # include "asmDefs_gcc_ppc.hh"
         
     start_exported_function currentFrame

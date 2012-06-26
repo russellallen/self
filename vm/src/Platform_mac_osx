@@ -4,5 +4,3 @@ arch = i386
 arch = ppc
 os   = unix
 os_version = macosx
-compiler = gcc
-

@@ -43,14 +43,7 @@ typedef unsigned char u_char;
 typedef   signed char s_char;
 typedef u_char bool8;
 
-# if COMPILER == MWERKS_COMPILER 
-  typedef long int sigset_t; // for interruptedContext
-  
-  // enable bool support in project file
-
-# elif COMPILER == GCC_COMPILER // worse: built-in bool is an int!
-
-# elif COMPILER == CC_COMPILER
+# if COMPILER == CC_COMPILER
   const bool false = 0;
   const bool true  = 1;
 # endif

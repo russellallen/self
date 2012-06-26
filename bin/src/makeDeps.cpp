@@ -48,13 +48,6 @@
 
 // Changed to support new filename extensions: .cpp and .hh -- dmu 2/01
 
-# if defined(__MWERKS__) && !defined(Mach_O)
-# include <MacHeadersPPC++>
-# include <SIOUX.h>
-# include <console.h>
-# include <new.h>
-# endif
-
 # ifdef __linux__
 #   include <new>
 # endif
@@ -228,88 +221,6 @@ class AbstractPlatform {
 
   virtual void fatal(const char* msg = "See console window") { fprintf(stderr, "%s\n", msg); exit(1); }
 };
-
-
-# if defined(__MWERKS__) && !defined(Mach_O)
-
-class MetroWerksMacPlatform:  public AbstractPlatform {
- public:
-  void setupFileTemplates() {
-      InclFileTemplate = new FileName( ":incls:", "_", "",                   ".incl", "", "");
-        GIFileTemplate = new FileName( "",        "",  "SelfMacPrecompHeader", ".pch",  "", "");
-        GDFileTemplate = DummyFileTemplate;
-  }
-  const char** outer_suffixes() { 
-   static const char* suffs[] = { ".cpp", ".c", ".s", 0 };
-   return suffs;
-  }
-
-  const char* obj_file_format()  { return "NOT ON MAC"; }
-  const char* asm_file_format()  { return "NOT ON MAC"; }
-  const char* dependent_format() { return "NOT ON MAC"; }
-
-
-#   ifdef TARGET_IS_SELF
-
-    Bool includeGIInEachIncl() { return True; }
-
-    int defaultGrandIncludeThreshold() { return 150; }
-   
-   
-    void writeGIInclude(FILE* inclFile ) {
-       fprintf(inclFile, 
-               "# if __option(dont_inline) == 1\n"
-               "# include \"%s_debug\"\n"
-               "# else\n"
-               "# include \"%s_optimized\"\n"
-               "#endif\n\n",           
-                GIFileTemplate->dir_pre_stem_altSuff(),
-                GIFileTemplate->dir_pre_stem_altSuff());
-    }
-#   endif
-
-  void writeGIPragma(FILE* giFile ) {
-    fprintf( giFile,
-             "# if __option(dont_inline) == 1\n" \
-             "#pragma precompile_target \"%s_debug\"\n" \
-             "# else\n" \
-             "#pragma precompile_target \"%s_optimized\"\n" \
-             "# endif\n\n",
-             GIFileTemplate->pre_stem_altSuff(),
-             GIFileTemplate->pre_stem_altSuff());
-  }
-
-
-  void abort() { Debugger(); }
-  
-  void fatal(const char* msg = "See console window") {
-    fprintf(stderr, "%s\n", msg);
-    SIOUXSettings.autocloseonquit  = False;
-    SIOUXSettings.asktosaveonclose = True;
-    exit(1);
-  }
-  
-  void set_args(int& argc, const char**& argv) {
-    argc = ccommand(&argv);
-#   ifdef TARGET_IS_SELF
-          if (argc == 1) {
-            static char *default_args[] = {
-              "", "-100", "Platform_macosx", "includeDB", 
-              ":::src:Platform_mac", ":::src:includeDB"};
-            argc = sizeof(default_args) / sizeof(default_args[0]);
-            argv = default_args;
-          }
-#   endif
-    SIOUXSettings.autocloseonquit  = True;
-    SIOUXSettings.asktosaveonclose = False;
-    
-    void fatal_on_new_error();
-    set_new_handler(fatal_on_new_error);
-  }
-    
-} Plat;
-
-void fatal_on_new_error() {Plat.fatal("new error"); }
 
 # elif defined(__GNUC__) && defined(__APPLE__)
 
@@ -1034,8 +945,6 @@ void database::get(const char* plat_fileName, const char* db_fileName) {
 
     token1[0] = token2[0] = token3[0] = token4[0] = '\0';
     int n = sscanf(line, " %s %s %s %s", token1, token2, token3, token4);
-    if (n < 0)  n = sscanf(line, " %s %s %s", token1, token2, token3); // added this line because of next one
-    if (n < 0)  n = sscanf(line, " %s %s", token1, token2); // added this line for MW 4
     if (n <= 0) {
       // empty line?
       char *c;

@@ -2476,13 +2476,7 @@ static PrimDesc fntable2[] = {
     "Simple " ## flagTypeName ## " primitive: " ## explanation},
 # endif
 
-// used to be FOR_ALL_DEBUG_PRIMS(DefineDebugPrim) but MW could not handle it--dmu
-
-    FOR_ALL_INTEGER_DEBUG_PRIMS(DefineDebugPrim)
-    FOR_ALL_BOOLEAN_DEBUG_PRIMS(DefineDebugPrim)
-    FOR_ALL_PROFILING_DEBUG_PRIMS(DefineDebugPrim)
-    FOR_ALL_MISC_DEBUG_PRIMS(DefineDebugPrim)
-    
+    FOR_ALL_DEBUG_PRIMS(DefineDebugPrim)
 # undef DefineDebugPrim
           
   // must be last entry in each prim table

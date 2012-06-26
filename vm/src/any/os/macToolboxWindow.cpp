@@ -8,11 +8,6 @@
 
 # pragma implementation
 
-// unix make sets MACTOOLBOX_LIB in Makefile, but
-// MW doesn't set it till headers below.
-// So OR with __MWERKS__
-
-
 # if defined(MACTOOLBOX_LIB) || TARGET_API_MAC_CARBON
 
 # if TARGET_OS_VERSION == MACOSX_VERSION && !TARGET_API_MAC_CARBON

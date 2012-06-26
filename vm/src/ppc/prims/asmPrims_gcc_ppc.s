@@ -4,8 +4,6 @@
 ;/* Copyright 1992-2012 AUTHORS.
 ;   See the LICENSE file for license information. */
 
-/* remove me from MW project when compiling under MW */
-
 ; some integer primitives
 
 

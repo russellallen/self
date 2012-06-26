@@ -5,10 +5,6 @@
 
 # pragma implementation "quartzPrims.hh"
 
-
-// MW doesn't set it till headers below.
-// So OR with TARGET_API_MAC_CARBON
-
 # if defined(QUARTZ_LIB)
 
 # if TARGET_OS_VERSION == MACOSX_VERSION

@@ -8,9 +8,8 @@
 ROOT         = ../../../..
 
 FILES        = Makefile \
-         asmPrims_gcc_ppc.s \
-         asmPrims_mw_ppc.s \
-         prim_table_arch_ppc.hh \
-                        
-         
+               asmPrims_gcc_ppc.s \
+               prim_table_arch_ppc.hh \
+
+
 include        ${ROOT}/templates/sources.make

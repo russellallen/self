@@ -64,35 +64,10 @@ extern "C" { void  HandleUncommonTrap(); }
 
 // to convert a function to the address of its first instruction,
 //  use first_inst_addr
-
-#  if  COMPILER == MWERKS_COMPILER
-// the Power MAC trucks in transfer vectors that have a level of indirection!
-// but we assume everything is in same code segment (better check it)
-//  For example, in process::transfer, there is no way to pass in the RTOC to
-//  SetSpAndCall -- dmu 12/95
-inline char* first_inst_addr(void* fnPtr) { 
-  assert( currentRTOC() == ((void**)fnPtr)[1], 
-              "Self VM assumes all code in same segment");
-    return *(char**)fnPtr; 
-  }
-# else
-
-  // Mac OS X is simpler.
-  // With GCC 3's strict type checking, it's more convenient to make first_inst_addr
-  // a macro, rather than a function. -mabdelmalek
+// With GCC 3's strict type checking, it's more convenient to make first_inst_addr
+// a macro, rather than a function. -mabdelmalek
 
 # define first_inst_addr(fnPtr)  ((char*) (fnPtr))
-
-# if 0
-  // this version either 1) produces a lot of GCC 3 warnings, or 2) requires every
-  // call to cast its parameter to (void*) -mabdelmalek 5/03
-  inline char* first_inst_addr(void* fnPtr) {
-    return (char*)fnPtr;
-  }
-# endif
-
-# endif
-
 
 // ppc interpreter needs help finding int arg on stack
 

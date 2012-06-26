@@ -304,17 +304,15 @@ static void MallocFailed(void) { OS::allocate_failed("VM use"); }
 
 static int32 true_size_of_malloced_obj(int32* p) {
   static const int32 s_offset = 
-#   if    TARGET_ARCH == SPARC_ARCH  &&  COMPILER == GCC_COMPILER
+#   if    TARGET_ARCH == SPARC_ARCH
       -2;
-#   elif  TARGET_ARCH == M68K_ARCH   &&  COMPILER == GCC_COMPILER
+#   elif  TARGET_ARCH == M68K_ARCH
       -1;
-#   elif  TARGET_ARCH == PPC_ARCH    &&  COMPILER == MWERKS_COMPILER
-      -1;
-#   elif  TARGET_ARCH == PPC_ARCH    &&  COMPILER == GCC_COMPILER
+#   elif  TARGET_ARCH == PPC_ARCH
       -2;
-#   elif  TARGET_ARCH == I386_ARCH   &&  COMPILER == GCC_COMPILER   &&   TARGET_OS_VERSION == MACOSX_VERSION
+#   elif  TARGET_ARCH == I386_ARCH   &&   TARGET_OS_VERSION == MACOSX_VERSION
       -2;
-#   elif  TARGET_ARCH == I386_ARCH   &&  COMPILER == GCC_COMPILER   &&   TARGET_OS_VERSION ==  LINUX_VERSION
+#   elif  TARGET_ARCH == I386_ARCH   &&   TARGET_OS_VERSION ==  LINUX_VERSION
       -1;
 #   else
 	# error What is it?

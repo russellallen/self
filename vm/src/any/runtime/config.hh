@@ -58,7 +58,7 @@
 
 # define         CC_COMPILER 1
 # define        GCC_COMPILER 2
-# define     MWERKS_COMPILER 3
+# define     MWERKS_COMPILER 3 /* No longer supported */
 # define SPARCWORKS_COMPILER 4
 
 # define MPW_ASM 1
@@ -147,13 +147,6 @@
 # define isSparc 1
 # else 
 # define isSparc 0
-# endif
-
-
-#  if  COMPILER == MWERKS_COMPILER
-  // need to always generate assertion code for MWERKS because
-  // it uses the same precompiled headers for all targets
-  # define GENERATE_DEBUGGING_AIDS 1
 # endif
 
 // Mac OS X compiler won't link if certain destructors are implicit, sigh

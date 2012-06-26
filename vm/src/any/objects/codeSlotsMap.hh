@@ -214,7 +214,7 @@ class outerMethodMap: public methodMap {
 
 class blockMethodMap: public methodMap {
   friend class methodMap;
- public: // needs to be public for MW
+ public:
   smiOop _sourceOffset, _sourceLen;
  protected:
   void set_lexical_links( slotsOop   enclosingMethod,

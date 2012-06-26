@@ -13,12 +13,6 @@
 
 CodeGen* theCodeGen;
 
-
-# if COMPILER == MWERKS_COMPILER
-# pragma dont_inline on // needed to avoid bug in CW 5.0, dmu: 9/99
-# endif
-
-
 void CodeGen::moveComplicated(Location dest, Location src, bool set_cc) {
   // dest may be R0
   assert(!(isRegister(src) && isRegister(dest)), "shouldn't call this");

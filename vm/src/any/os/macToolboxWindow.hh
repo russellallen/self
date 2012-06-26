@@ -11,7 +11,7 @@
 # endif
 
 
-# if defined(MACTOOLBOX_LIB) || __MWERKS__
+# if defined(MACTOOLBOX_LIB)
 
 class EventQueue;
 class FontInfo;

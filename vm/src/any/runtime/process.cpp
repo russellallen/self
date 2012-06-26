@@ -643,10 +643,7 @@ void PreservedList::oops_do(oopsDoFn f, Process* proc) {
     UsedOnlyInAssert(proc);
     if (i > 0) {
       preservedVmObj* prev = list.nth(i - 1);
-      // The latest MW compiler does not guarantee this property:
-      // Two stack allocated objects in same activation may not be ordered.
-      // -- dmu 6/1
-      // assert(moreRecent(p, prev), "prev preservedObj should be more recent");
+      assert(moreRecent(p, prev), "prev preservedObj should be more recent");
     }
     p->oops_do(f);
   }
@@ -658,23 +655,18 @@ void Process::preserve(preservedVmObj* p) {
                                            p, this);
 # endif
 
-// The latest MW compiler does not guarantee this property:
-// Two stack allocated objects in same activation may not be ordered.
-// -- dmu 6/1
-# if 0
-    while (preservedList.list.nonEmpty()) {
-      preservedVmObj* prev = preservedList.list.last();
-      if (moreRecent(p, prev)) {
-        break;            // everything is ok
-      } else {
-        // there's at least one dangling preservedObj on the stack
-        // (not cleaned up because of some C frame popping)
-        if (traceP) lprintf("*discarding %#lx (process %#lx)\n",
-                            (long unsigned)prev, (long unsigned)this);
-        preservedList.list.pop();
-      }
+  while (preservedList.list.nonEmpty()) {
+    preservedVmObj* prev = preservedList.list.last();
+    if (moreRecent(p, prev)) {
+      break;            // everything is ok
+    } else {
+      // there's at least one dangling preservedObj on the stack
+      // (not cleaned up because of some C frame popping)
+      if (traceP) lprintf("*discarding %#lx (process %#lx)\n",
+                          (long unsigned)prev, (long unsigned)this);
+      preservedList.list.pop();
     }
-# endif
+  }
   preservedList.list.push(p);
 }
 

@@ -158,56 +158,13 @@ void Assembler::increase_all_immediate_fields( AddressList* l, int32 delta) {
 }
 
 
-# if COMPILER == MWERKS_COMPILER
-
-extern "C" asm void Untested_Stub() {
-# define out_of_the_way 320 // more than frame could possibly be
-# define i  roundTo(/*linkage_area_end*/6 + 2 + 32 + 8, 4) //quad word + 1 for ctr, xer, + 8 for outgoing arg (warning thinks it's getting lots args)
-# define wSize 4
-
-  subi sp, sp, out_of_the_way;
-  subi sp, sp, i * wSize
-  stmw r0, ((i - 32) * wSize)(sp)
-  mfctr r0
-  stw r0, ((i - 33) * wSize)(sp)
-  mfxer r0
-  stw r0, ((i - 34) * wSize)(sp)
-  mflr r0
-  stw r0, ((i + /*saved_pc_offset*/2) * wSize)(sp)
-  mfcr r0
-  stw r0, ((i + /*saved_cr_offset*/1) * wSize)(sp)
-  mflr r3
-  lwz r3, 0(r3)
-  lwz r4, warning(RTOC)
-  lwz r4, 0(r4)
-  mtlr r4
-  blrl
-  lwz r0, ((i + /*saved_cr_offset*/1) * wSize)(sp)
-  mtcrf 0xff, r0
-  lwz r3, ((i + /*saved_pc_offset*/2) * wSize)(sp)
-  addi r3, r3, wSize // cannot addi to r0
-  mtlr r3
-  lwz r0, ((i - 34) * wSize)(sp)
-  mtxer r0
-  lwz r0, ((i - 33) * wSize)(sp)
-  mtctr r0
-  lmw r0, ((i - 32) * wSize)(sp)
-  addi sp, sp, i * wSize
-  addi sp, sp, out_of_the_way
-  blr
-# undef out_of_the_way
-# undef i
-# undef wSize
-}
-
-# elif COMPILER == GCC_COMPILER
+# if COMPILER == GCC_COMPILER
   extern "C" void Untested_Stub() {
     fatal("unimp for OS X");
   }
 # else
   # error which?
-# endif // MWERKS_COMPILER
-
+# endif
 
 void Assembler::_Untested(char* msg, Location temp1, bool save_link) {
   // assumes we may not have a frame

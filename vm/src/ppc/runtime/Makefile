@@ -11,7 +11,6 @@ FILES        = Makefile \
                aCompiler_ppc.hh \
                aCompiler_ppc.cpp \
                asmDefs_gcc_ppc.hh \
-               asmDefs_mw_ppc.hh \
                conversion_ppc.cpp \
                conversion_ppc.hh \
                framePieces_ppc.cpp \
@@ -27,7 +26,6 @@ FILES        = Makefile \
                registerLocator_ppc.cpp \
                registerLocator_ppc.hh \
                runtime_asm_gcc_ppc.s \
-               runtime_asm_mw_ppc.s \
                runtime_ppc.cpp \
                runtime_ppc.hh \
                stubs_ppc.cpp \

@@ -39,7 +39,6 @@ class FlagSettingInt {
 //          getCurrentValue, checkNewValue, setNewValue, explanation,
 //          wizardOnly)
 
-// this next one too big for MW: have to change by hand when you change it
 
 # define FOR_ALL_BOOLEAN_DEBUG_PRIMS(template)                                \
      FOR_ALL_GEN_BOOLEAN_DEBUG_PRIMS(template)                                \
@@ -182,9 +181,6 @@ class FlagSettingInt {
     ZapResourceArea =  (flag == Memory->trueObj ? true : false),              \
     "zap the resource area when deallocated", true)                    
 
-
-// next macro is too long for MW, so if you change this,
-//  also change it in oop.c and prim.c, sigh
 
 # define FOR_ALL_DEBUG_PRIMS(template)                                        \
     FOR_ALL_INTEGER_DEBUG_PRIMS(template)                                     \

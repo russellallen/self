@@ -2,7 +2,7 @@
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
-# if defined(MACTOOLBOX_LIB) || __MWERKS__
+# if defined(MACTOOLBOX_LIB)
 #  ifdef IN_PRIM_TABLE
 
     macToolbox1_entries
