@@ -11,6 +11,22 @@ endif(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.4)
 if(APPLE)
   # it has to be 2.8.8 on OSX 
   cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR)
+  if(CMAKE_GENERATOR MATCHES Xcode)
+    # also, 10.8 + Xcode 4.2 4C199 + clang goes haywire, pretend to know that
+    # everything will be ok.
+    execute_process(COMMAND xcodebuild -version
+      RESULT_VARIABLE _xcodebuild_failed OUTPUT_VARIABLE XCODE_OUT ERROR_VARIABLE _) 
+    if(NOT _xcodebuild_failed AND (XCODE_OUT MATCHES 4C199))
+      set(CMAKE_C_COMPILER_WORKS 1)
+      set(CMAKE_CXX_COMPILER_WORKS 1)
+      message(
+"WARNING:  Xcode 4.2 4C199 with Clang seems to have
+           build process bugs. Fasten your seatbelts. 
+           If compilation fails, try to open the 
+           Self.xcodeproj in Xcode manually."
+       )
+    endif()
+  endif()
 else()
   cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 endif()
