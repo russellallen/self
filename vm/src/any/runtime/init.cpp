@@ -107,10 +107,6 @@ EXIT_DO(DEFINE_TEMPLATE)
   UNIX_EXIT_DO(DEFINE_TEMPLATE)
 # endif
 
-# if TARGET_IS_PROFILED
-  extern "C" void monitor(int);         // HACK until we have gnulib_p
-# endif
-
 void init_globals() {
 
 # if TARGET_IS_PROFILED
@@ -147,9 +143,6 @@ bool do_exit_cleanup = true;
 
 void prepare_to_exit_self() {
   if (do_exit_cleanup) {
-#   if TARGET_IS_PROFILED
-      monitor(0);
-#   endif
     exit_globals();
   }
 }
