@@ -11,11 +11,10 @@
 # include "asmDefs_gcc_i386.hh"
 
 
- .globl _CompiledSelfCode, _CompiledSelfCodeEnd
-  
-_CompiledSelfCode: .space ProfiledZoneSize, 0
+start_exported_function CompiledSelfCode
+  .space ProfiledZoneSize, 0
 
-_CompiledSelfCodeEnd:
+start_exported_function CompiledSelfCodeEnd
 
 # endif
 
