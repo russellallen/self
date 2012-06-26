@@ -16,11 +16,11 @@ if(APPLE)
     # everything will be ok.
     execute_process(COMMAND xcodebuild -version
       RESULT_VARIABLE _xcodebuild_failed OUTPUT_VARIABLE XCODE_OUT ERROR_VARIABLE _) 
-    if(NOT _xcodebuild_failed AND (XCODE_OUT MATCHES 4C199))
+    if(NOT _xcodebuild_failed AND (XCODE_OUT MATCHES 4C199 OR (XCODE_OUT MATCHES "Xcode 3.2")))
       set(CMAKE_C_COMPILER_WORKS 1)
       set(CMAKE_CXX_COMPILER_WORKS 1)
       message(
-"WARNING:  Xcode 4.2 4C199 with Clang seems to have
+"WARNING:  Xcode  3.2/4.2 with Clang seems to have
            build process bugs. Fasten your seatbelts. 
            If compilation fails, try to open the 
            Self.xcodeproj in Xcode manually."
