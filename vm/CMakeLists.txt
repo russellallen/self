@@ -19,8 +19,12 @@ if(APPLE)
     if(NOT _xcodebuild_failed AND (XCODE_OUT MATCHES 4C199))
       set(CMAKE_C_COMPILER_WORKS 1)
       set(CMAKE_CXX_COMPILER_WORKS 1)
-      message("WARNING:  Xcode 4.2 4C199 with Clang seems to have
-               build process bugs. Fasten your seatbelts.")
+      message(
+"WARNING:  Xcode 4.2 4C199 with Clang seems to have
+           build process bugs. Fasten your seatbelts. 
+           If compilation fails, try to open the 
+           Self.xcodeproj in Xcode manually."
+       )
     endif()
   endif()
 else()
