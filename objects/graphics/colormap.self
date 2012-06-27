@@ -98,22 +98,6 @@ See the LICENSE file for license information.
          xcm <- bootstrap stub -> 'traits' -> 'colormap' -> 'nullXCM' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'macToolboxGlobals' -> () From: ( | {
-         'Category: graphics (ui1)\x7fModuleInfo: Module: colormap InitialContents: FollowSlot\x7fVisibility: public'
-        
-         newPlatformColorForPixel: i = ( |
-            | 
-            0 macToolbox colorSpec new value: i).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'macToolboxGlobals' -> () From: ( | {
-         'Category: graphics (ui1)\x7fModuleInfo: Module: colormap InitialContents: FollowSlot\x7fVisibility: public'
-        
-         platformColormap = ( |
-            | 
-            0 macToolbox colorTable).
-        } | ) 
-
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: colormap InitialContents: FollowSlot'
         

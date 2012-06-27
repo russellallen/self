@@ -136,7 +136,7 @@ class FlagSettingInt {
     template(SpyDisplay, const char*, "<str>", StringPrimType,                \
     "", new_string(SpyDisplay), flag->is_byteVector(),                       \
     (SpyDisplay = byteVectorOop(flag)->copy_c_heap_null_terminated()),       \
-    "name of display for Spy\n(OSX: use empty string for Mac Toolbox, nonempty for X)", false) \
+    "name of display for Spy\n(OSX: use empty string for Quartz, nonempty for X)", false) \
                                                                               \
     template(SpyFont, const char*, "<str>", StringPrimType, "",               \
     new_string(SpyFont), flag->is_byteVector(),                               \

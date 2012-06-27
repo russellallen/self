@@ -3242,12 +3242,6 @@ SlotsToOmit: parent.
             | write || create || truncate).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macOS_File' -> 'inetConstants' -> () From: ( | {
-         'Comment: From header file netinet/in.h\x7fModuleInfo: Module: unix InitialContents: InitializeToExpression: (byteVector copySize: 4 FillingWith: 0)\x7fVisibility: public'
-        
-         in_addr_any = byteVector copySize: 4 FillingWith: 0.
-        } | ) 
-
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> () From: ( | {
          'Category: socket operations\x7fCategory: accepting\x7fComment: Returns a socket.
 Accept returns NOERR if there is no connetion yet.

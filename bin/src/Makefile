@@ -6,7 +6,7 @@
 # Makefile for the Self C utilities source
 
 ROOT         = ../..
-FILES        = Makefile MakefileBinList carbon_prefix.hh Mach_O.hh Carbon.r machDebugServer.hh
+FILES        = Makefile MakefileBinList machDebugServer.hh
 C_MODULES    = cmprev \
                dangling \
                fixTar \
