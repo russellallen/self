@@ -23,7 +23,7 @@ endif()
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
-project(${PROJECT_NAME} C CXX ASM)
+project(${PROJECT_NAME} CXX ASM)
 
 # setup the routines and variables we might use
 # sets ${platform} ${platform_processor} ${LOCAL_CMAKE_DIR}
@@ -55,26 +55,10 @@ include(setup)
 # set up the self-specific include-directories
 include_directories_from_src(SRC)
 
+
 # we need a vmDate thing.
-set(SRC_VMDATE ${SELF_GENERATED_INLCUDE_FILES_DIR}/vmDate.c)
-set(SRC_VMDATE_IN ${SELF_BUILD_SUPPORT_DIR}/vmDate.c.in)
-configure_file(
-  "${LOCAL_CMAKE_DIR}/configureVmDate.cmake.in"
-  "${CMAKE_BINARY_DIR}/configureVmDate.cmake" @ONLY
-) 
-
-add_custom_target(create_vmDate
-    COMMAND "${CMAKE_COMMAND}" -P "${CMAKE_BINARY_DIR}/configureVmDate.cmake" 
-    DEPENDS ${SRC}
-    COMMENT "Creating ${SRC_VMDATE}"
-) 
-
-set_source_files_properties(${SRC_VMDATE} 
-  PROPERTIES 
-  GENERATED TRUE
-  OBJECT_DEPENDS "${SRC}"
-)
-
+# sets $SRC_VMDATE
+include(setupVmDate)
 set(SRC ${SRC} ${SRC_VMDATE})
 
 

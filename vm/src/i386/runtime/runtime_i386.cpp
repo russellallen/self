@@ -118,7 +118,7 @@ extern "C" {
   oop EnterSelf(oop recv, char* entryPoint, oop arg1) { fatal("stub");}
   frame* currentFrame() { return 0; }
   void firstSelfFrameSendDescEnd(...) {fatal("stub");}
-  char* vmDate;
+  const char* vmDate;
 
   oop Recompile_stub(...) {fatal("stub");}
   oop MakeOld_stub(...) {fatal("stub");}
