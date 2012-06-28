@@ -20,6 +20,12 @@ set(
 
 set_property(GLOBAL PROPERTY USE_FOLDERS On)
 
+
+include(platform)
+include(policies)
+include(functions)
+include(assemblerSupport)
+
 # TODO: the incls still need to be built manually.
 # get around this soon!
 set(
@@ -30,12 +36,6 @@ set(
 )
 
 include_directories(${SELF_GENERATED_INLCUDE_FILES_DIR})
-
-#include(force_clang)
-include(platform)
-include(policies)
-include(functions)
-include(assemblerSupport)
 
 set(EXTRA_LIBRARIES)
 

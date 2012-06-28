@@ -131,7 +131,7 @@ macro(setup_target target)
     add_definitions(-DGCC_OPTIMIZATION_LEVEL=\${GCC_OPTIMIZATION_LEVEL})
         
     # Select Xcode compiler based on user choice
-    if (${CMAKE_C_COMPILER} MATCHES ".*clang")
+    if (${CMAKE_CXX_COMPILER} MATCHES ".*[Cc]lang.*")
       set(CMAKE_XCODE_ATTRIBUTE_GCC_VERSION "com.apple.compilers.llvm.clang.1_0")
       message(STATUS "Using Clang for Xcode")
     else()
