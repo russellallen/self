@@ -1,6 +1,6 @@
 #!/usr/bin/env cmake
 
-# cmake-custom directory for find_package() and other config stuff
+# cmake-custom directory
 get_filename_component(LOCAL_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH) 
 
 set(SELF_BUILD_SUPPORT_DIR 
@@ -18,14 +18,6 @@ set(
   "The directory where to find the glue files emitted by the primitiveMaker"
 )
 
-
-
-#include(force_clang)
-include(platform)
-include(policies)
-include(functions)
-include(assemblerSupport)
-
 set_property(GLOBAL PROPERTY USE_FOLDERS On)
 
 # TODO: the incls still need to be built manually.
@@ -36,11 +28,20 @@ set(
   CACHE PATH
   "Path to the generated include files (preliminary)"
 )
+
 include_directories(${SELF_GENERATED_INLCUDE_FILES_DIR})
+
+#include(force_clang)
+include(platform)
+include(policies)
+include(functions)
+include(assemblerSupport)
 
 set(EXTRA_LIBRARIES)
 
-
+#
+# To be run at the very end of the main Listfile
+#
 macro(configure_end)
     if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
         set(CONFIG_HAS_BEEN_RUN_BEFORE 1 CACHE INTERNAL 

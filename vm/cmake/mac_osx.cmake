@@ -1,7 +1,18 @@
 #!/usr/bin/env cmake
 if(NOT APPLE)
-    message(FATAL "This is only for Mac OS X")
+    message(FATAL_ERROR "This is only for Mac OS X")
 endif(NOT APPLE)
+
+execute_process(COMMAND xcodebuild -version
+  RESULT_VARIABLE _xcodebuild_failed OUTPUT_VARIABLE XCODE_OUT ERROR_VARIABLE _) 
+if(NOT _xcodebuild_failed 
+	AND ((XCODE_OUT MATCHES "Xcode 3")
+	AND (CMAKE_CXX_COMPILER MATCHES ".*clang.*")))
+    message("WARNING:  Self on Xcode 3 does not work with Clang. 
+         It simply lacks C++ support.")
+endif()
+
+
 
 # TODO: these are frome the project file, reconsider
 set(DYNAMIC           "-DDYNLINK_SUPPORTED")

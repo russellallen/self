@@ -3,20 +3,16 @@ set(PROJECT_NAME Self)
 
 
 # This is for a cmake compatibility check
+# old style:
 if(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.4)
-    message(FATAL_ERROR "${PROJECT_NAME} requires at least CMake v2.8.8"
+    message(FATAL_ERROR "${PROJECT_NAME} requires at least CMake v2.8"
         " You are running v${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}."
         " Please upgrade." )
 endif(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.4)
+# new style:
 if(APPLE)
   # it has to be 2.8.8 on OSX 
   cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR)
-  execute_process(COMMAND xcodebuild -version
-    RESULT_VARIABLE _xcodebuild_failed OUTPUT_VARIABLE XCODE_OUT ERROR_VARIABLE _) 
-  if(NOT _xcodebuild_failed AND (XCODE_OUT MATCHES "Xcode 3"))
-      message("WARNING:  Xcode 3 does not work with Clang. 
-           It simply lacks C++ support.")
-  endif()
 else()
   cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 endif()
@@ -26,7 +22,9 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 project(${PROJECT_NAME} CXX ASM)
 
 # setup the routines and variables we might use
-# sets ${platform} ${platform_processor} ${LOCAL_CMAKE_DIR}
+# sets 
+#	${platform} ${platform_processor} 
+#	${LOCAL_CMAKE_DIR}
 include(common)
 
 
@@ -43,15 +41,16 @@ source_group("glue" FILES ${SRC_glue} "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 set(SRC ${SRC_src} ${SRC_glue})
 
 # get platform-dependent configuratio
-# sets ${GUI_TYPE}, ${EXTRA_LIBRARIES} 
-# ${COMPILER} ${ASSEMBLER} ${MANUFACTURER}
-# ${TARGET_OS_VERSION} ${TARGET_OS_FAMILY}
+# sets 
+#	$GUI_TYPE 
+#	$EXTRA_LIBRARIES 
+# 	$COMPILER $ASSEMBLER $MANUFACTURER
+# 	$TARGET_OS_VERSION $TARGET_OS_FAMILY
 include(${platform})
 
 # setup general definitions. 
 # this depends on the platform
 include(setup)
-
 # set up the self-specific include-directories
 include_directories_from_src(SRC)
 
