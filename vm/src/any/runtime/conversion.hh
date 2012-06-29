@@ -35,7 +35,7 @@ private:
   int32 vdepth;                 // # of vframes in convertFrame
   
   frame* newFr;                 // current new frame
-  frame* rlFr;                  // frame below current new frame, spoof of ReturnTrap on PPC
+  frame* rlFr;                  // frame below current new frame
   RegisterLocator* newFrRl;     // register locator for new frame
   
   ResourceMark* rm;             // because rm can't be on the stack

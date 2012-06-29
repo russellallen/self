@@ -81,7 +81,7 @@ inline float  max(float  a, float  b) { return a > b ? a : b; }
 
 inline int32 iabs(int32 a) { return a >= 0 ? a : -a; }
 
-# if TARGET_ARCH == I386_ARCH  ||  TARGET_ARCH == PPC_ARCH
+# if TARGET_ARCH == I386_ARCH
 extern "C" {  void swap_bytes(int32* xp); } // Do it with special instruction
 # else  
   inline void swap_bytes(int32* xp) { 
@@ -97,7 +97,7 @@ extern "C" {  void swap_bytes(int32* xp); } // Do it with special instruction
 const int32 K = 1024;
 const int32 M = K * K;
 
-const int32 oopSize = sizeof(oop); // Warning: Duplicated in asmDefs_ppc.h
+const int32 oopSize = sizeof(oop);
 
 
 // some useful macros

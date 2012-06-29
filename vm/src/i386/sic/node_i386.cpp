@@ -911,10 +911,10 @@
 
 
   void TBranchNode::testTagsIfNecessary(bool haveImmediate, Location rcvrReg, Location argReg) {
-    // this function doesn't do anything on PPC.  it's needed because on the SPARC,
+    // this function doesn't do anything on i386.  it's needed because on the SPARC,
     // if there's an overflow, we need to check the tag bits to see if the overflow
     // is caused by non-smi arguments, or by an actual integer overflow.
-    // but on PPC, we always check the object tags in the beginning, so if an overflow
+    // but on i386, we always check the object tags in the beginning, so if an overflow
     // occurs, it's a "real" integer overflow. -mabdelmalek 12/02
   }
 

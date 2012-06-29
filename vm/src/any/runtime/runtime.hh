@@ -38,7 +38,7 @@ extern "C" {
 extern     char*          ReturnTrap_returnPC;
 extern     char*       ReturnTrapNLR_returnPC;
 extern     char*      Recompile_stub_returnPC;
-extern     char*    DIRecompile_stub_returnPC; // not implemented on PPC
+extern     char*    DIRecompile_stub_returnPC; // only implemented on SPARC
 extern     char*        MakeOld_stub_returnPC;
 extern     char*    SendMessage_stub_returnPC;
 

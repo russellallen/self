@@ -542,11 +542,11 @@ void MethodScopeNode::verify(ScopeDesc* sd) {
 class TopLevelBlockScopeNode: public CodeScopeNode {
  public:
   NameNode* self_name;
-  NameNode* cachedSelf_name; // cached copy  (for PPC)
+  NameNode* cachedSelf_name;
   oop       self_map;
   oop       methodHolder_or_map;
   NameNode* block_name;
-  NameNode* cachedBlock_name; // cached copy (for PPC)
+  NameNode* cachedBlock_name;
   mapOop    _receiverMapOop;
 
   u_char code() { return TOPLEVELBLOCK_CODE; }
@@ -762,11 +762,11 @@ ScopeInfo ScopeDescRecorder::addTopLevelBlockScope(ScopeLookupKey* k,
                                                    oop meth,
                                                    mapOop rm,
                                                    NameNode* self_nm,
-                                                   NameNode* self_nm2, // cached value for PPC
+                                                   NameNode* self_nm2,
                                                    oop self_mp,
                                                    oop meth_holder,
                                                    NameNode* receiver,
-                                                   NameNode* receiver2, // cached value for PPC
+                                                   NameNode* receiver2,
                                                    bool lte,
                                                    int32 scpID,
                                                    ScopeInfo senderScope, 

@@ -43,7 +43,6 @@ class FlagSettingInt {
 # define FOR_ALL_BOOLEAN_DEBUG_PRIMS(template)                                \
      FOR_ALL_GEN_BOOLEAN_DEBUG_PRIMS(template)                                \
      FOR_ALL_SPARC_BOOLEAN_DEBUG_PRIMS(template)                              \
-     FOR_ALL_PPC_BOOLEAN_DEBUG_PRIMS(template)                                \
      FOR_ALL_I386_BOOLEAN_DEBUG_PRIMS(template)                               \
      FOR_ALL_SIC_BOOLEAN_DEBUG_PRIMS(template)                                \
      FOR_ALL_NEW_BOOLEAN_DEBUG_PRIMS(template)
@@ -465,7 +464,7 @@ class FlagSettingInt {
     BOOLEAN_PRIM_TEMPLATE(template, AllowLocalAccessInCreatedMethods, false, \
     "allow Self code to directly create methods with local read/write bcs", false) \
     BOOLEAN_PRIM_TEMPLATE(template, SaveOutgoingArgumentsOfPatchedFrames, false, \
-    "capture outgoing arguments of patched frames (needed for PPC SIC, broken for SPARC)", true) \
+    "capture outgoing arguments of patched frames (broken for SPARC)", true)  \
 
 
 # if TARGET_ARCH == SPARC_ARCH                                                
@@ -475,21 +474,6 @@ class FlagSettingInt {
 # else
 # define FOR_ALL_SPARC_BOOLEAN_DEBUG_PRIMS(template)
 # endif    
-   
-# if TARGET_ARCH == PPC_ARCH
-# define FOR_ALL_PPC_BOOLEAN_DEBUG_PRIMS(template)                            \
-    BOOLEAN_PRIM_TEMPLATE(template, FastMapTest, true,                        \
-    "do fast map tests", true)                                                \
-    BOOLEAN_PRIM_TEMPLATE(template, UseByteMapBaseReg, true,                  \
-    "use register to hold the byte map base", true)                           \
-    BOOLEAN_PRIM_TEMPLATE(template, UseSPLimitReg, false,                     \
-    "use register to hold the stack pointer limit (risky, relies on C not using this register)", true) \
-    BOOLEAN_PRIM_TEMPLATE(template, UseShortBranches, true,                   \
-    "Use PPC one-word (relative) branches to call self & prims", true)        \
-
-# else
-# define FOR_ALL_PPC_BOOLEAN_DEBUG_PRIMS(template)
-# endif
 
 # if TARGET_ARCH == I386_ARCH
   static const bool UseByteMapBaseReg = false; // doesn't seem worth it for I386 -- dmu 5/06

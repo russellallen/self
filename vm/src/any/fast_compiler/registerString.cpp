@@ -44,10 +44,6 @@ Location pick(RegisterString& alloc, RegisterString mask) {
   return Location(reg);
 }
   
-
-// ppc uses ldm, stm to save/restore nonvol regs, so must allocate
-// them from top (r31 downwards)_:
-
 Location pickReverse(RegisterString& alloc, RegisterString mask) {
   unsigned r = mask & ~alloc;
   if (r == 0) return UnAllocated;

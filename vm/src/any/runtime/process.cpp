@@ -1842,10 +1842,6 @@ void Process::prepare_to_return_to_self_after_conversion(
   
   frame* kill_target = new_last_self_frame;
     
-  # if TARGET_ARCH == PPC_ARCH // only works for PPC -- dmu 1/03
-    assert(!isKilling()  ||  killVF()->as_vframe()->fr >= kill_target,
-           "passed kill_target");  
-  # endif
   if (traceV && isKilling() && killVF()->as_vframe()->fr == kill_target)
     lprintf("*** stopping senseless killing of innocent frames, kill_target = 0x%x\n", kill_target);
 }

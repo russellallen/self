@@ -9,7 +9,7 @@
 
 
 // to convert a function to the address of its first instruction,
-//  use first_inst_addr (really for PPC)(
+// use first_inst_addr
 
 //  inline char* first_inst_addr(void* fnPtr) { return (char*)fnPtr; }
 # define first_inst_addr(fnPtr) ((char*)(fnPtr))
@@ -69,7 +69,7 @@ extern oop  saved_outregs[8];         // o0..o7 saved & restored by asm glue
 
 
 
-// ppc interpreter needs help finding int arg on stack
+// historic: ppc interpreter needs help finding int arg on stack
 
 inline     void* save1Arg(void* p) { return p; }
 

@@ -110,7 +110,7 @@ class zone: public CHeapObj {
   }
 
 
-  // zone creation (for PPC) must put stubs right after iZone
+  // zone creation must put stubs right after iZone
   pc_t code_start() { return Memory->code->      iZone->startAddr(); }
   pc_t code_end()   { return Memory->code->stubs->zone()->endAddr(); }
 

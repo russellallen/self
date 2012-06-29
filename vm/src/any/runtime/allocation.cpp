@@ -306,10 +306,6 @@ static int32 true_size_of_malloced_obj(int32* p) {
   static const int32 s_offset = 
 #   if    TARGET_ARCH == SPARC_ARCH
       -2;
-#   elif  TARGET_ARCH == M68K_ARCH
-      -1;
-#   elif  TARGET_ARCH == PPC_ARCH
-      -2;
 #   elif  TARGET_ARCH == I386_ARCH   &&   TARGET_OS_VERSION == MACOSX_VERSION
       -2;
 #   elif  TARGET_ARCH == I386_ARCH   &&   TARGET_OS_VERSION ==  LINUX_VERSION
@@ -351,7 +347,7 @@ void malloc_init() {
       fatal("malloc/free aren't reentrant");
     }
     MallocInProgress = true;              // for hprofiler
-    size = max(1, size); // malloc does not seem to like zero, at least on PPC
+    size = max(1, size); // malloc does not seem to like zero
     char* result = (char*)malloc(size);
   if ((int)result & 0x80000000) fatal("xxxxxxx");
     MallocInProgress = false;

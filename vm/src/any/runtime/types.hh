@@ -28,12 +28,8 @@ typedef unsigned int    uint32;         // unsigned integer with >= 32 bits
 
 
 # if  TARGET_ARCH == SPARC_ARCH  \
-  ||  TARGET_ARCH ==   PPC_ARCH  \
   ||  TARGET_ARCH ==  I386_ARCH
   typedef int32         fint;           // fastest precision-irrelevant int
-# elif  TARGET_ARCH == M68K_ARCH
-  //typedef int16               fint;   // fastest precision-irrelevant int
-  typedef int32         fint;           // portablest precision-irrelevant int
 # else
 # error what?
 # endif
