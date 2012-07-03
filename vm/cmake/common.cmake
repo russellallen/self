@@ -8,7 +8,8 @@ set(SELF_BUILD_SUPPORT_DIR
   CACHE PATH
   "Path where to find build support files, like for vmDate, Mac OSX etc."
 )
-option(SELF_PROFILE "Select whether to do a profiled build" OFF)
+option(SELF_PROFILE     "Select whether to do a profiled build"         OFF)
+option(SELF_COVERAGE    "Select whether to do a coverage build"         OFF)
 option(SELF_FAST_FLOATS "Select whether to do a build with fast floats" OFF)
 
 set(

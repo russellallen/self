@@ -34,7 +34,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
 set(CMAKE_REQUIRED_DEFINITIONS ${CMAKE_REQUIRED_DEFINITIONS} -m32)
 #set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_LD_FLAGS} -m32)
 
-if(CMAKE_CXX_COMPILER MATCHES ".*clang.*")
+if(clang)
   # 
   # clang 3.0 integrated assembler on linux
   # seems not to produce 32bit jump targets 

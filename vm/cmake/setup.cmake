@@ -32,6 +32,17 @@ add_definitions(
   -fno-stack-protector
 )
 
+if(SELF_COVERAGE)
+  add_definitions(
+    -ftest-coverage
+    -fprofile-arcs
+  )
+  if(clang)
+    list(APPEND EXTRA_LIBRARIES libprofile_rt.a)
+  else()
+    list(APPEND EXTRA_LIBRARIES gcov)
+  endif()
+endif()
 
 #
 # setup all warning flags

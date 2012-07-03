@@ -1,1 +1,1 @@
-extern "C" const char* vmDate = "@DATE@ @PLATFORM@@GIT_REVISION@";
+const char* vmDate = "@DATE@ @PLATFORM@@GIT_REVISION@";

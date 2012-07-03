@@ -6,8 +6,8 @@ endif(NOT APPLE)
 execute_process(COMMAND xcodebuild -version
   RESULT_VARIABLE _xcodebuild_failed OUTPUT_VARIABLE XCODE_OUT ERROR_VARIABLE _) 
 if(NOT _xcodebuild_failed 
-	AND ((XCODE_OUT MATCHES "Xcode 3")
-	AND (CMAKE_CXX_COMPILER MATCHES ".*clang.*")))
+  AND ((XCODE_OUT MATCHES "Xcode 3")
+  AND (clang)))
     message("WARNING:  Self on Xcode 3 does not work with Clang. 
          It simply lacks C++ support.")
 endif()
@@ -102,7 +102,7 @@ endif()
 
 add_framework_to_list(frameworks Carbon)
 
-set(EXTRA_LIBRARIES ${frameworks})
+set(EXTRA_LIBRARIES ${EXTRA_LIBRARIES} ${frameworks})
 
 
 #
@@ -131,7 +131,7 @@ macro(setup_target target)
     add_definitions(-DGCC_OPTIMIZATION_LEVEL=\${GCC_OPTIMIZATION_LEVEL})
         
     # Select Xcode compiler based on user choice
-    if (${CMAKE_CXX_COMPILER} MATCHES ".*[Cc]lang.*")
+    if (clang)
       set(CMAKE_XCODE_ATTRIBUTE_GCC_VERSION "com.apple.compilers.llvm.clang.1_0")
       message(STATUS "Using Clang for Xcode")
     else()
@@ -161,9 +161,18 @@ macro(setup_target target)
     # set(CMAKE_XCODE_ATTRIBUTE_GCC_ENABLE_CPP_RTTI "NO")
     # remove_definitions(-fno-rtti)
     
+    if(SELF_COVERAGE)
+      set(CMAKE_XCODE_ATTRIBUTE_GCC_GENERATE_TEST_COVERAGE_FILES "YES")
+      remove_definitions(-ftest-coverage)
+      set(CMAKE_XCODE_ATTRIBUTE_GCC_INSTRUMENT_PROGRAM_FLOW_ARCS "YES")
+      remove_definitions(-fprofile-arcs)
+    endif()
+  
     set(CMAKE_XCODE_ATTRIBUTE_COPY_PHASE_STRIP "NO")
     set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT "dwarf-with-dsym")
     
+  
+  
     # cmake adds warnings hardcoded which we dont want.
     # mess with the warnings
     set_target_properties(${target} PROPERTIES XCODE_ATTRIBUTE_WARNING_CFLAGS "")
@@ -194,7 +203,7 @@ macro(setup_target target)
   set_target_properties(${target} PROPERTIES 
     MACOSX_BUNDLE_INFO_PLIST ${SELF_BUILD_SUPPORT_DIR}/${platform}/${SELF_OSX_INFO_PLIST}.plist)
   foreach(_nib ${SELF_MACOSX_NIBS})
-	  set_source_files_properties(${_nib} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)		  
+    set_source_files_properties(${_nib} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)      
   endforeach()
 endmacro()
 

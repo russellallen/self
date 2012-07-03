@@ -23,8 +23,8 @@ project(${PROJECT_NAME} CXX ASM)
 
 # setup the routines and variables we might use
 # sets 
-#	${platform} ${platform_processor} 
-#	${LOCAL_CMAKE_DIR}
+#  ${platform} ${platform_processor} 
+#  ${LOCAL_CMAKE_DIR}
 include(common)
 
 
@@ -42,10 +42,10 @@ set(SRC ${SRC_src} ${SRC_glue})
 
 # get platform-dependent configuratio
 # sets 
-#	$GUI_TYPE 
-#	$EXTRA_LIBRARIES 
-# 	$COMPILER $ASSEMBLER $MANUFACTURER
-# 	$TARGET_OS_VERSION $TARGET_OS_FAMILY
+#   $GUI_TYPE 
+#   $EXTRA_LIBRARIES 
+#   $COMPILER $ASSEMBLER $MANUFACTURER
+#   $TARGET_OS_VERSION $TARGET_OS_FAMILY
 include(${platform})
 
 # setup general definitions. 

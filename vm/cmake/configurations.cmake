@@ -95,10 +95,12 @@ else()
   
   # we are under a makefile-like config.
   # let the user decide
-  set(SELF_BUILD_LEVEL "optimized" CACHE STRING "Select the build level for ${PRODUCT_NAME} from 'optimized', 'debug'")
-  if(SELF_BUILD_LEVEL STREQUAL "debug")
+  set(SELF_BUILD_LEVEL "optimized" CACHE STRING "Select the build level for ${PRODUCT_NAME} from 'optimized', 'debug','optimized_with_debug'")
+  if(SELF_BUILD_LEVEL MATCHES "debug")
     set(_is_debug 1)
-  else()
+  endif()
+  
+  if(SELF_BUILD_LEVEL MATCHES "optimized")
     set(_is_optimized 1)
   endif()
   
