@@ -131,12 +131,18 @@ macro(setup_target target)
     add_definitions(-DGCC_OPTIMIZATION_LEVEL=\${GCC_OPTIMIZATION_LEVEL})
         
     # Select Xcode compiler based on user choice
-    if (clang)
+    if(clang)
       set(CMAKE_XCODE_ATTRIBUTE_GCC_VERSION "com.apple.compilers.llvm.clang.1_0")
       message(STATUS "Using Clang for Xcode")
     else()
-      set(CMAKE_XCODE_ATTRIBUTE_GCC_VERSION "com.apple.compilers.llvmgcc42")
-      message(STATUS "Using LLVM-gcc for Xcode")
+      if(CMAKE_CXX_COMPILER MATCHES ".*4\.2.*")
+        # someone specificed the non-llvm gcc.
+        set(CMAKE_XCODE_ATTRIBUTE_GCC_VERSION "com.apple.compilers.gcc.4_2")
+        message(STATUS "Using GCC 4.2 for Xcode")
+      else()
+        set(CMAKE_XCODE_ATTRIBUTE_GCC_VERSION "com.apple.compilers.llvmgcc42")
+        message(STATUS "Using LLVM-gcc for Xcode")
+      endif()
     endif()
         
     # These are the XCode-equivalendts for the flags/warnings in setup.
