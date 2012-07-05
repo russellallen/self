@@ -154,13 +154,6 @@ void breakpoint() {
 void error_breakpoint() {
   static fint junk = 0;
   (void)junk;
-  # if COMPILER == MWERKS_COMPILER
-    // cannot run code from debugger:
-    if (WizardMode) {
-      eventLog->printPartial(50);
-      currentProcess->stack()->print();
-    }
-  # endif
 }
 
 volatile void ShouldNotCall(const char *file, int line) {

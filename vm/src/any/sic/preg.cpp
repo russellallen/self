@@ -172,8 +172,6 @@
 # if TARGET_ARCH == SPARC_ARCH
     return SICCSEConstants && weight > 1 && 
       (int32(constant) > maxImmediate || int32(constant) < -maxImmediate);
-# elif TARGET_ARCH == PPC_ARCH
-    return SICCSEConstants && weight > 1 && !fits_within_si(int32(constant));
 # elif TARGET_ARCH == I386_ARCH
     return false; // regs tight, use immediates
 # endif
@@ -993,8 +991,6 @@
 # if TARGET_ARCH == SPARC_ARCH
     if (int32(constant) < maxImmediate && int32(constant) > -maxImmediate
         && loc != UnAllocated) {
-# elif TARGET_ARCH == PPC_ARCH
-    if (fits_within_si(int32(constant)) && loc != UnAllocated) {
 # elif TARGET_ARCH == I386_ARCH
     if (loc != UnAllocated) {
 # endif

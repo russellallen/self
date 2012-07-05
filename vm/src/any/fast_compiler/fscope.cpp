@@ -101,7 +101,7 @@ void FSelfScope::initialize() {
     }
   }
   // This must come AFTER args so that self register does not overlap
-  // arg registers. PPC assumes r3 -> r31, r4 -> r30 etc.
+  // arg registers.
   if (isBlockSelfScope()) {
     // also preallocate self
     self = allocs->pickPermanent();

@@ -87,7 +87,7 @@ extern "C" {
 # include <sys/resource.h>
 # include <sys/file.h>
 # if TARGET_OS_VERSION != LINUX_VERSION
-  # include <sys/filio.h>
+#   include <sys/filio.h>
 # endif
 # include <sys/param.h>
 # include <limits.h>
@@ -173,20 +173,12 @@ extern "C" {
 
 
 # if TARGET_OS_VERSION == MACOSX_VERSION
-  # undef _MACH_PPC_VM_TYPES
   # undef ASSEMBLER
 
   # include <mach/mach_types.h>
   # include <sys/sysctl.h>
-  # if TARGET_ARCH == PPC_ARCH 
-    # include <mach/ppc/vm_types.h> // for mman.h
-    # include <mach/ppc/thread_status.h> // for interruptedCtx_ppc.c ppc_thread_state_t
-  # elif TARGET_ARCH == I386_ARCH
-    # include <mach/i386/vm_types.h> // for mman.h
-    # include <mach/i386/thread_status.h> // for interruptedCtx_ppc.c ppc_thread_state_t
-  # else
-    # error what?
-  # endif
+  # include <mach/machine/vm_types.h> // for mman.h
+  # include <mach/machine/thread_status.h> // for interruptedCtx_*.cpp *_thread_state_t
 # endif
 
 

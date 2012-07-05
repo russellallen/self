@@ -13,7 +13,7 @@
 // Currently, the message is logged to a file if LogVMMessages is true and
 // printed to stderr if PrintVMMessages is true
 
-typedef const char* lprint_format_t; // const for MW 6
+typedef const char* lprint_format_t;
 
 
 extern "C" void lprintf(lprint_format_t m, ...);

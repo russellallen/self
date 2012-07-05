@@ -4,8 +4,8 @@
 # See the LICENSE file for license information.
 
 ROOT         = ../..
-FILES        = Makefile includeDB Platform_mac Platform_mac_osx Platform_sparc
-DIRECTORIES  = any ppc sparc unix
+FILES        = Makefile includeDB Platform_linux Platform_mac_osx Platform_sparc
+DIRECTORIES  = any cocoa i386 sparc unix
 
 SUBSYSTEMS = asm fast_compiler interpreter lookup memory objects os parser prims
 

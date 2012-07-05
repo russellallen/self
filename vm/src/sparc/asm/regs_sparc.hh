@@ -58,8 +58,8 @@ enum Location {
   Temp3 = G3,
 #   ifdef SIC_COMPILER
     // additional temp, but must be reserved.  on SIC, we do this through the
-    // markAllocated function.  See AbstractArrayAtNode::markAllocated (either on
-    // SPARC or PPC).  When markAllocated changes the use/def count of the temp register,
+    // markAllocated function.  See AbstractArrayAtNode::markAllocated.
+    // When markAllocated changes the use/def count of the temp register,
     // it won't be used in the temporary register allocation.  -mabdelmalek 12/02
     //
     // Also need to define canCopyPropagateFrom. See AbstractArrayAtNode::canCopyPropagateFrom

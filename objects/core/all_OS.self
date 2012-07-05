@@ -69,7 +69,6 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          subpartNames <- 'abstract_OS
 unix
-macOS
 '.
         } | ) 
 
@@ -79,7 +78,6 @@ macOS
 
  bootstrap read: 'abstract_OS' From: 'core'
  bootstrap read: 'unix' From: 'core'
- bootstrap read: 'macOS' From: 'core'
 
 
 

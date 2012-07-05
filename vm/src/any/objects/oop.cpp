@@ -264,14 +264,7 @@ void print_option_primitives(bool changedOnly) {
     lprintf("\n\n");                                                           \
   }
     
-// CodeWarrer cannot handle the following: FOR_ALL_DEBUG_PRIMS(ListPrimName)
-// so use:
-    FOR_ALL_INTEGER_DEBUG_PRIMS(ListPrimName)
-    FOR_ALL_BOOLEAN_DEBUG_PRIMS(ListPrimName)
-    FOR_ALL_PROFILING_DEBUG_PRIMS(ListPrimName)
-    FOR_ALL_MISC_DEBUG_PRIMS(ListPrimName)
-
-      
+  FOR_ALL_DEBUG_PRIMS(ListPrimName)
 #     undef ListPrimName
   }
 
@@ -296,56 +289,28 @@ mirrorOop oopClass::as_mirror(bool mustAllocate) {
   return mirror;
 }
 
-// used to be one macro, DefineDebugPrim, I had to split it up for MW -- dmu
-
-# define DefineDebugGetPrim(                                                  \
+# define DefineDebugPrim(                                                     \
     flagName, flagType, flagTypeName, primReturnType,                         \
     initialValue, getCurrentValue, checkNewValue, setNewValue,                \
     explanation, wizardOnly)                                                  \
                                                                               \
     oop CONC3(get_,flagName,_prim)(oop rcvr)     {                            \
-    Unused(rcvr);                                                             \
-    return getCurrentValue;                                                   \
-  }
-# define DefineDebugSetPrim(                                                  \
-    flagName, flagType, flagTypeName, primReturnType,                         \
-    initialValue, getCurrentValue, checkNewValue, setNewValue,                \
-    explanation, wizardOnly)                                                  \
+      Unused(rcvr);                                                           \
+      return getCurrentValue;                                                 \
+    }                                                                         \
                                                                               \
     oop CONC3(set_,flagName,_prim)(oop rcvr, oop flag) {                      \
-    breakpoint();\
-    Unused(rcvr); Unused(flag);                                               \
-    if (! (checkNewValue)) return ErrorCodes::vmString_prim_error(BADTYPEERROR); \
-    oop oldValue = getCurrentValue;                                           \
-    setNewValue;                                                              \
-    return oldValue;                                                          \
-  }
+      breakpoint();                                                           \
+      Unused(rcvr); Unused(flag);                                             \
+      if (! (checkNewValue)) {                                                \
+        return ErrorCodes::vmString_prim_error(BADTYPEERROR);                 \
+      }                                                                       \
+      oop oldValue = getCurrentValue;                                         \
+      setNewValue;                                                            \
+      return oldValue;                                                        \
+    }
 
-# if COMPILER != MWERKS_COMPILER
-  // too big for MWERKS
-  FOR_ALL_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_DEBUG_PRIMS(DefineDebugSetPrim)
-# else
-  FOR_ALL_INTEGER_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_GEN_BOOLEAN_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_SPARC_BOOLEAN_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_PPC_BOOLEAN_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_I386_BOOLEAN_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_SIC_BOOLEAN_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_NEW_BOOLEAN_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_PROFILING_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_MISC_DEBUG_PRIMS(DefineDebugGetPrim)
-  
-  FOR_ALL_INTEGER_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_GEN_BOOLEAN_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_SPARC_BOOLEAN_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_PPC_BOOLEAN_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_I386_BOOLEAN_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_SIC_BOOLEAN_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_NEW_BOOLEAN_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_PROFILING_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_MISC_DEBUG_PRIMS(DefineDebugSetPrim)
-# endif                               
+  FOR_ALL_DEBUG_PRIMS(DefineDebugPrim)
 
 # undef DefineDebugPrim
 

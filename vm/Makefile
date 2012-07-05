@@ -5,7 +5,7 @@
 
 ROOT         = ..
 FILES        = Makefile
-DIRECTORIES  = src templates svr4 mac_osx mac_project_builder
+DIRECTORIES  = src templates svr4 mac_osx
 
 
 include        ${ROOT}/templates/sources.make

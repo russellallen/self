@@ -153,6 +153,7 @@ class    CommentNode;           // for debugging
         // canCopyPropagateOop: can node replace a use with a copy-propagated 
         // oop?  if true, must handle ConstPRegs; implies canCopyPropagate
     virtual bool canCopyPropagateFrom(PReg* /* d */) { return true; }
+    // This is historic now >>
         // PPC ArrayAt/Put nodes use extra temp regs
         // Consider:
         //   r27 := r3
@@ -165,6 +166,7 @@ class    CommentNode;           // for debugging
         // Since AtPut on PPC uses r3 as a temp (Temp3) this breaks!
         // So I'm adding a PReg-specific test that can be customized per platform
         // -- dmu 1/2003
+    // <<
     virtual bool isAssignmentLike()     { return false; }
         // isAssignmentLike: node copies src to dest (implies hasSrc/Dest)
     virtual bool hasSrc()               { return false; }
@@ -377,8 +379,7 @@ class    CommentNode;           // for debugging
    unknown:
     PReg* frame;        // frame pointer of stack frame
     PUse* frameUse;
-    nmethod* nm;        // nmethod of that frame (used to retrieve frame's frame size (and
-                        // max # of outgoing register args - for PPC))
+    nmethod* nm;        // nmethod of that frame (used to retrieve frame's frame size)
     NameDesc* nd;       // name to load
     oop name;           // slot name (for printing)
    public:
@@ -441,8 +442,7 @@ class    CommentNode;           // for debugging
    unknown:
     PReg* frame;        // frame pointer of stack frame
     PUse* frameUse;
-    nmethod* nm;        // nmethod of that frame (used to retrieve frame's frame size (and
-                        // max # of outgoing register args - for PPC))
+    nmethod* nm;        // nmethod of that frame (used to retrieve frame's frame size)  
     NameDesc* nd;       // name to store into
     oop name;           // slot name (for printing)
    public:
@@ -1224,13 +1224,8 @@ class    CommentNode;           // for debugging
     char* print_string(char* buf, bool printAddr = true);
   };
   
-  
-// On SPARC, execution of a non-lifo block is signaled by a "trap" instruction.
-// However, we can't do that on PPC - we use a primitive call instead.  As a result,
-// there's two different definitions of DeadEndNode. -mabdelmalek 1/03
 
 # include "_deadBlockNode_pd.hh.incl"
-
 
   class DeadEndNode : public PNode {
    public:

@@ -5,5 +5,5 @@
 
 ROOT         = ..
 FILES        = Makefile
-DIRECTORIES  = shell src sun4 svr4 mac_carbon mac_68k mac_osx project_builder linux
+DIRECTORIES  = shell src sun4 svr4  mac_osx linux
 include        ${ROOT}/templates/sources.make

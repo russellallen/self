@@ -202,8 +202,6 @@ set(SRC_any
   any/os/errorCodes.hh
   any/os/itimer.cpp
   any/os/itimer.hh
-#  any/os/macToolboxWindow.cpp
-#  any/os/macToolboxWindow.hh
   any/os/monitorWindow.cpp
   any/os/monitorWindow.hh
   any/os/os.cpp
@@ -259,14 +257,11 @@ set(SRC_any
   any/prims/glueSupport.cpp
   any/prims/glueSupport.hh
   any/prims/include_glue.hh
-#  any/prims/macToolboxPrims.cpp
-#  any/prims/macToolboxPrims.hh
   any/prims/miscPrims.cpp
   any/prims/miscPrims.hh
   any/prims/prim.cpp
   any/prims/prim.hh
   any/prims/prim_table_arch.hh
-#  any/prims/prim_table_macToolbox.hh
   any/prims/prim_table_os.hh
   any/prims/prim_table_quartz.hh
   any/prims/quartzPrims.cpp
@@ -510,85 +505,6 @@ set(SRC_i386
   i386/zone/trapdoors_i386.cpp
   i386/zone/trapdoors_i386.hh
 )
-set(SRC_ppc
-  ppc/asm/asm_inline_ppc.hh
-  ppc/asm/asm_ppc.cpp
-  ppc/asm/asm_ppc.hh
-  ppc/asm/disasm_ppc.cpp
-  ppc/asm/disasm_ppc.hh
-  ppc/asm/fields_ppc.cpp
-  ppc/asm/fields_ppc.hh
-  ppc/asm/regs_ppc.cpp
-  ppc/asm/regs_ppc.hh
-  ppc/fast_compiler/codeGen_inline_ppc.hh
-  ppc/fast_compiler/codeGen_ppc.cpp
-  ppc/fast_compiler/codeGen_ppc.hh
-  ppc/fast_compiler/fcompiler_ppc.cpp
-  ppc/fast_compiler/fcompiler_ppc.hh
-  ppc/fast_compiler/registerState_ppc.cpp
-  ppc/fast_compiler/registerState_ppc.hh
-  ppc/fast_compiler/registerString_ppc.cpp
-  ppc/fast_compiler/registerString_ppc.hh
-  ppc/lookup/cacheStub_inline_ppc.hh
-  ppc/lookup/cacheStub_ppc.cpp
-  ppc/lookup/cacheStub_ppc.hh
-  ppc/lookup/diDesc_ppc.cpp
-  ppc/lookup/diDesc_ppc.hh
-  ppc/lookup/sendDesc_ppc.cpp
-  ppc/lookup/sendDesc_ppc.hh
-  ppc/memory/search_ppc.cpp
-  ppc/memory/search_ppc.hh
-  ppc/prims/asmPrims_gcc_ppc.S
-#  ppc/prims/asmPrims_mw_ppc.S only metrowerks
-  ppc/prims/prim_table_arch_ppc.hh
-  ppc/runtime/aCompiler_ppc.cpp
-  ppc/runtime/aCompiler_ppc.hh
-  ppc/runtime/asmDefs_gcc_ppc.hh
-#  ppc/runtime/asmDefs_mw_ppc.hh
-  ppc/runtime/conversion_ppc.cpp
-  ppc/runtime/conversion_ppc.hh
-  ppc/runtime/frame_format_ppc.cpp
-  ppc/runtime/frame_format_ppc.hh
-  ppc/runtime/frame_iterator_ppc.cpp
-  ppc/runtime/frame_iterator_ppc.hh
-  ppc/runtime/frame_ppc.cpp
-  ppc/runtime/frame_ppc.hh
-  ppc/runtime/framePieces_ppc.cpp
-  ppc/runtime/framePieces_ppc.hh
-  ppc/runtime/interruptedCtx_ppc.cpp
-  ppc/runtime/interruptedCtx_ppc.hh
-  ppc/runtime/registerLocator_ppc.cpp
-  ppc/runtime/registerLocator_ppc.hh
-  ppc/runtime/runtime_asm_gcc_ppc.S
-#  ppc/runtime/runtime_asm_mw_ppc.S
-  ppc/runtime/runtime_ppc.cpp
-  ppc/runtime/runtime_ppc.hh
-  ppc/runtime/stubs_ppc.cpp
-  ppc/runtime/uncommonBranch_ppc.cpp
-  ppc/runtime/vframe_ppc.cpp
-  ppc/sic/basicNode_ppc.hh
-  ppc/sic/deadBlockNode_ppc.cpp
-  ppc/sic/deadBlockNode_ppc.hh
-  ppc/sic/genHelper_ppc.cpp
-  ppc/sic/genHelper_ppc.hh
-  ppc/sic/longRegString_ppc.cpp
-  ppc/sic/longRegString_ppc.hh
-  ppc/sic/node_ppc.cpp
-  ppc/sic/prologueNode_ppc.hh
-  ppc/sic/sic_ppc.cpp
-  ppc/sic/sic_ppc.hh
-  ppc/zone/addrDesc_ppc.cpp
-  ppc/zone/addrDesc_ppc.hh
-  ppc/zone/allocZone_ppc.S
-  ppc/zone/countPattern_ppc.cpp
-  ppc/zone/countPattern_ppc.hh
-  ppc/zone/countStub_ppc.cpp
-  ppc/zone/countStub_ppc.hh
-  ppc/zone/nmethod_ppc.cpp
-  ppc/zone/nmethod_ppc.hh
-  ppc/zone/trapdoors_ppc.cpp
-  ppc/zone/trapdoors_ppc.hh
-)
 set(SRC_sparc
   sparc/asm/asm_inline_sparc.hh
   sparc/asm/asm_sparc.cpp
@@ -720,17 +636,6 @@ endif(UNIX)
 
 # inlcude platform files
 set(SRC_src ${SRC_src} ${SRC_${platform_processor}})
-
-# hack apple:
-# inlcude "other platform files
-if(APPLE)
-  if(platform_processor STREQUAL "i386")
-    set(other_arch ppc)
-  else()
-    set(other_arch i386)
-  endif()
-  set(SRC_src ${SRC_src} ${SRC_${other_arch}})
-endif(APPLE)
 
 if(SELF_OSX_COCOA)
   set(SRC_src ${SRC_src} ${SRC_cocoa})
