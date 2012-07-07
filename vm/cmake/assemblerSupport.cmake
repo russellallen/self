@@ -37,7 +37,7 @@ macro(setup_target_assembler_support target)
     
     
     #
-    # the next lines are to pic up the necessary
+    # the next lines are to pick up the necessary
     # definitions, flags and includes from the respective
     # target/directories. this is somewhat cumbersome...
     #

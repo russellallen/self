@@ -116,10 +116,44 @@ macro(add_definitions_if_cmakevar)
       list(APPEND _defns -D${_cmakevar}=${${_cmakevar}})
     endif()
   endforeach()
-  add_definitions(${_defns})
+  list(APPEND _defines ${_defns})
 endmacro()
 
 
+macro(add_pch_rule _header_filename _src_list)
+  get_filename_component(_header_filename_full ${_header_filename} ABSOLUTE)
+  if(NOT CMAKE_GENERATOR MATCHES Xcode)  
+    set(_args)
+    set(_gch_filename "${_header_filename_full}.gch")
+    list(APPEND ${_src_list} ${_gch_filename})
+    
+    #
+    # workaround CMake not including arch in
+    # FLAGS even when defined in CMAKE_OSX_ARCHITECTURES
+    #
+    if(APPLE)
+      foreach(arch ${CMAKE_OSX_ARCHITECTURES})
+        list(APPEND _args -arch ${arch})
+      endforeach()
+    endif()
+    
+    gather_directory_incls(_incls ${CMAKE_SOURCE_DIR} "")
+    list(APPEND _args ${_defines} ${_flags} ${_incls})
+    list(APPEND _args -c ${_header_filename_full} -o ${_gch_filename})
+    separate_arguments(_args)  
+    add_custom_command(OUTPUT ${_gch_filename}
+      # COMMAND rm -f ${_gch_filename}
+      COMMAND ${CMAKE_CXX_COMPILER} ${CMAKE_CXX_COMPILER_ARG1} ${_args}
+      DEPENDS ${_header_filename_full})
+    set_source_files_properties(${_gch_filename} PROPERTIES GENERATED TRUE)
+  endif()
+  
+endmacro()
+
+
+
+#
+#
 
 macro(gather_prop resultVar onTarget src property config prefix)
   set(_${property} "")
@@ -148,11 +182,18 @@ function(gather_directory_defines resultVar target config)
   gather_prop(${resultVar} FALSE ${target} COMPILE_DEFINITIONS "${config}" "-D")
 endfunction()
 
-
 function(gather_flags resultVar target config)
   gather_prop(${resultVar} TRUE ${target} COMPILE_FLAGS "${config}" "")
 endfunction()
 
+function(gather_directory_flags resultVar target config)
+  gather_prop(${resultVar} FALSE ${target} COMPILE_FLAGS "${config}" "")
+endfunction()
+
 function(gather_incls resultVar target config)
   gather_prop(${resultVar} TRUE ${target} INCLUDE_DIRECTORIES "${config}" "-I")
+endfunction()
+
+function(gather_directory_incls resultVar target config)
+  gather_prop(${resultVar} FALSE ${target} INCLUDE_DIRECTORIES "${config}" "-I")
 endfunction()

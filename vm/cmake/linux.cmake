@@ -23,7 +23,7 @@ set(EXTRA_LIBRARIES ${EXTRA_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 #
 # Linux compile definitons
 #
-add_definitions(
+list(APPEND _defines
   -DDEBUG
   -DGLUE_CHECKSUM=0
 )
@@ -74,35 +74,14 @@ endif()
 macro(setup_target target)
   # "super"
   setup_target_common(${target}) 
-  
 endmacro()
 
 
-
-
-# TODO: this is potenitally dangerous
-set(_prefixFile "${SELF_GENERATED_INLCUDE_FILES_DIR}/_precompiled.hh")
-
-macro(include_prefix_header target)
-  get_filename_component(_fullPrefixFile ${_prefixFile} ABSOLUTE)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${_fullPrefixFile} -Winvalid-pch")
+#
+# "API". Setup prefix headers
+#
+macro(include_prefix_header target file)  
+  # "super"
+  include_prefix_header_common(${target} ${file})
 endmacro()
 
-
-
-#TBD
-# elseif ("${_compilerID}" MATCHES "GNU|Clang")
-#     # GCC / Clang options used
-#     # -x specify the source language
-#     # -c compile but do not link
-#     # -o place output in file
-#     set (_xLanguage_C "c-header")
-#     set (_xLanguage_CXX "c++-header")
-#     if (_flags)
-#       # append to list
-#       list (APPEND _flags "-x" "${_xLanguage_${_language}}" "-c" "${_prefixFile}" -o "${_pchFile}")
-#     else()
-#       # return as a flag string
-#       set (_flags "-x ${_xLanguage_${_language}} -c \"${_prefixFile}\" -o \"${_pchFile}\"")
-#     endif()
-#   else()

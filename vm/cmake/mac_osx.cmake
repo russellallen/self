@@ -32,7 +32,7 @@ set(SELF_OSX_INFO_PLIST Info)
 option(SELF_OSX_COCOA
   "EXPERIMENTAL: Build with the Cocoa console" OFF)
 if(SELF_OSX_COCOA)
-  add_definitions(-DCOCOA_EXP)
+  list(APPEND _defines -DCOCOA_EXP)
   set(SELF_OSX_INFO_PLIST InfoCocoa)
 endif()
 
@@ -108,7 +108,7 @@ set(EXTRA_LIBRARIES ${EXTRA_LIBRARIES} ${frameworks})
 #
 # Mac compile definitons, independent of  generator
 #
-add_definitions(
+list(APPEND _defines
   -DQUARTZ_LIB
   # there was -DMACTOOLBOX_LIB , but seems unused.
   -DDEBUG # ?? this is straight from mac_osx.make
@@ -120,6 +120,29 @@ set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -arch ${platform_processor}")
 
 
 #
+# Things that do not depend on a target
+#
+if(NOT CMAKE_GENERATOR MATCHES Xcode)
+    
+    list(APPEND _flags
+      --sysroot ${CMAKE_OSX_SYSROOT}
+      -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}
+    )
+    
+    foreach(_link_flags 
+      CMAKE_EXE_LINKER_FLAGS
+      CMAKE_EXE_LINKER_FLAGS_DEBUG
+      CMAKE_EXE_LINKER_FLAGS_RELEASE
+      CMAKE_EXE_LINKER_FLAGS_MINSIZEREL
+      CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO
+    )
+      set(${_link_flags} "${${_flags}} -isysroot ${CMAKE_OSX_SYSROOT} -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}")
+    endforeach()
+endif()
+
+
+
+#
 # "API". Set up target specific stuff.
 #
 macro(setup_target target)
@@ -127,9 +150,6 @@ macro(setup_target target)
   setup_target_common(${target})
   
   if(CMAKE_GENERATOR MATCHES Xcode)
-    # we want to reuse the GCC_OPTIMIZATION_LEVEL
-    add_definitions(-DGCC_OPTIMIZATION_LEVEL=\${GCC_OPTIMIZATION_LEVEL})
-        
     # Select Xcode compiler based on user choice
     if(clang)
       set(CMAKE_XCODE_ATTRIBUTE_GCC_VERSION "com.apple.compilers.llvm.clang.1_0")
@@ -175,34 +195,11 @@ macro(setup_target target)
     endif()
   
     set(CMAKE_XCODE_ATTRIBUTE_COPY_PHASE_STRIP "NO")
-    set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT "dwarf-with-dsym")
+    set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT "dwarf")
     
-  
-  
     # cmake adds warnings hardcoded which we dont want.
     # mess with the warnings
     set_target_properties(${target} PROPERTIES XCODE_ATTRIBUTE_WARNING_CFLAGS "")
-    
-  else()
-    # guess optimization level…
-    math(EXPR GCC_OPTIMIZATION_LEVEL "${_is_optimized} * 3")
-    add_definitions(-DGCC_OPTIMIZATION_LEVEL=${GCC_OPTIMIZATION_LEVEL})
-    
-    add_definitions(
-      --sysroot ${CMAKE_OSX_SYSROOT}
-      -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}
-    )
-    
-    foreach(_flags 
-      CMAKE_EXE_LINKER_FLAGS
-      CMAKE_EXE_LINKER_FLAGS_DEBUG
-      CMAKE_EXE_LINKER_FLAGS_RELEASE
-      CMAKE_EXE_LINKER_FLAGS_MINSIZEREL
-      CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO
-    )
-      set(${_flags} "${${_flags}} -isysroot ${CMAKE_OSX_SYSROOT} -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}")
-    endforeach()
-
   endif()
   
   # configure CMake to use a custom Info.plist
@@ -213,38 +210,12 @@ macro(setup_target target)
   endforeach()
 endmacro()
 
-
-
-
-
-# TODO: this is potenitally dangerous
-set(_prefixFile "${SELF_GENERATED_INLCUDE_FILES_DIR}/_precompiled.hh")
-
-macro(include_prefix_header target)
-  get_filename_component(_fullPrefixFile ${_prefixFile} ABSOLUTE)
+# API
+macro(include_prefix_header target file)
   if(CMAKE_GENERATOR MATCHES Xcode)
     set_target_properties(${target} PROPERTIES XCODE_ATTRIBUTE_GCC_PRECOMPILE_PREFIX_HEADER "YES")
-    set_target_properties(${target} PROPERTIES XCODE_ATTRIBUTE_GCC_PREFIX_HEADER "${_fullPrefixFile}")
+    set_target_properties(${target} PROPERTIES XCODE_ATTRIBUTE_GCC_PREFIX_HEADER "${file}")
   else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${_fullPrefixFile} -Winvalid-pch")
+    include_prefix_header_common(${target} ${file})
   endif()
 endmacro()
-
-
-
-#TBD
-# elseif ("${_compilerID}" MATCHES "GNU|Clang")
-#     # GCC / Clang options used
-#     # -x specify the source language
-#     # -c compile but do not link
-#     # -o place output in file
-#     set (_xLanguage_C "c-header")
-#     set (_xLanguage_CXX "c++-header")
-#     if (_flags)
-#       # append to list
-#       list (APPEND _flags "-x" "${_xLanguage_${_language}}" "-c" "${_prefixFile}" -o "${_pchFile}")
-#     else()
-#       # return as a flag string
-#       set (_flags "-x ${_xLanguage_${_language}} -c \"${_prefixFile}\" -o \"${_pchFile}\"")
-#     endif()
-#   else()
