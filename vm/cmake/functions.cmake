@@ -123,7 +123,9 @@ endmacro()
 macro(add_pch_rule _header_filename _src_list)
   get_filename_component(_header_filename_full ${_header_filename} ABSOLUTE)
   if(NOT CMAKE_GENERATOR MATCHES Xcode)  
-    set(_args)
+    set(_cmd)
+    list(APPEND _cmd ${CMAKE_CXX_COMPILER} ${CMAKE_CXX_COMPILER_ARG1})
+    separate_arguments(_cmd)
     set(_gch_filename "${_header_filename_full}.gch")
     list(APPEND ${_src_list} ${_gch_filename})
     
@@ -143,7 +145,7 @@ macro(add_pch_rule _header_filename _src_list)
     separate_arguments(_args)  
     add_custom_command(OUTPUT ${_gch_filename}
       # COMMAND rm -f ${_gch_filename}
-      COMMAND ${CMAKE_CXX_COMPILER} ${CMAKE_CXX_COMPILER_ARG1} ${_args}
+      COMMAND ${_cmd} ${_args}
       DEPENDS ${_header_filename_full})
     set_source_files_properties(${_gch_filename} PROPERTIES GENERATED TRUE)
   endif()
