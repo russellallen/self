@@ -49,7 +49,12 @@ void InterruptedContext::fatal_menu() {
     lprintf("   5) Print the interrupted context registers\n");
     lprintf("Your choice: ");
     char c[255];
-    fgets(c, sizeof(c), stdin);
+
+    if (fgets(c, sizeof(c), stdin) == NULL && !(feof(stdin))) {
+      lprintf("\nError while handling error - hit return to exit >");
+      getchar();
+      OS::terminate(1);
+    }
 
     if (feof(stdin) || iter > 10) {
       print_stack();
@@ -84,7 +89,12 @@ void InterruptedContext::quit_self() {
   lprintf("Enter snapshot name (hit return to omit snapshot) > ");
   char c[255];
   c[0] = '\0';
-  fgets(c, sizeof(c), stdin);
+  if (fgets(c, sizeof(c), stdin) == NULL) {
+    lprintf("\nError while reading snapshot name - hit return to exit >");
+    getchar();
+    OS::terminate(1);
+  }
+
   if (c[0] == '\n') {
     lprintf("No snapshot specified, will skip this step\n");
   }
@@ -98,7 +108,11 @@ void InterruptedContext::quit_self() {
     lprintf("_Verify primitive.  If this reports problems, it is not\n");
     lprintf("wise to continue using the snapshot.\n");
     lprintf("Hit return to exit > ");
-    fgets(c, 255, stdin);
+    if (fgets(c, sizeof(c), stdin) == NULL) {
+      lprintf("\nError while reading newline? - hit return to exit >");
+      getchar();
+      OS::terminate(1);
+    }
   }
   currentProcess = NULL;            // to avoid a silly assertion failure 
   OS::terminate(-1);

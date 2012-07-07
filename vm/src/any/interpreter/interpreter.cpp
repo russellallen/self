@@ -61,7 +61,7 @@ inline interpreter::interpreter( oop rcv,
   
   if (mi.map()->kind() == OuterMethodType) {
     setup_for_method();
-  } 
+  }
   else {
     assert( receiver->is_block_with_code(), "receiver must be block" );
     setup_for_block();

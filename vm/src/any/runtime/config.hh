@@ -145,7 +145,7 @@
 // The following definitions make machine-dependent asserts more convenient
 # if  TARGET_ARCH == SPARC_ARCH
 # define isSparc 1
-# else 
+# else
 # define isSparc 0
 # endif
 

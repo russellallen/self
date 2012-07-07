@@ -210,7 +210,11 @@ void BaseAssembler::assemble_test_file() {
     # endif
     test_file_s, test_file_co, test_file_so, test_file_out);
   lprintf( "Testing assembler by running: %s\n", buf);
-  system(buf);
+  int ret = system(buf);
+  if(ret != 0) {
+    fprintf(stderr, "Cannot run command `%s'", buf);
+    exit(ret);
+  }
 }
 
 

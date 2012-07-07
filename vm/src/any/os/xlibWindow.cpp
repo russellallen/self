@@ -202,7 +202,7 @@ int  XPlatformWindow::inset_bottom()  { return 0; }  // Mac needs this
 
 // Accessors:
 
-bool XPlatformWindow::is_open() { return _xwindow != NULL; }
+bool XPlatformWindow::is_open() { return _xwindow != None; }
 bool XPlatformWindow::is_mono() { return _is_mono; }
 
 int  XPlatformWindow::left()   { return _window_x; }
