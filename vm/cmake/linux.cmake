@@ -16,6 +16,7 @@ mark_as_advanced(DYNAMIC COMPILER ASSEMBLER MANUFACTURER TARGET_OS_VERSION TARGE
 year(YEAR)
 
 # Threads
+enable_language(C)
 find_package(Threads REQUIRED)
 set(EXTRA_LIBRARIES ${EXTRA_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
@@ -23,19 +24,18 @@ set(EXTRA_LIBRARIES ${EXTRA_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 #
 # Linux compile definitons
 #
-add_definitions(
+list(APPEND _defines
   -DDEBUG
   -DGLUE_CHECKSUM=0
 )
 
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -m32")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -m32")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
-set(CMAKE_REQUIRED_DEFINITIONS ${CMAKE_REQUIRED_DEFINITIONS} -m32)
+list(APPEND _flags -m32)
+list(APPEND CMAKE_REQUIRED_DEFINITIONS -m32)
 #set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_LD_FLAGS} -m32)
 
-if(CMAKE_CXX_COMPILER MATCHES ".*clang.*")
+if(clang)
   # 
   # clang 3.0 integrated assembler on linux
   # seems not to produce 32bit jump targets 
@@ -75,35 +75,14 @@ endif()
 macro(setup_target target)
   # "super"
   setup_target_common(${target}) 
-  
 endmacro()
 
 
-
-
-# TODO: this is potenitally dangerous
-set(_prefixFile "${SELF_GENERATED_INLCUDE_FILES_DIR}/_precompiled.hh")
-
-macro(include_prefix_header target)
-  get_filename_component(_fullPrefixFile ${_prefixFile} ABSOLUTE)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${_fullPrefixFile} -Winvalid-pch")
+#
+# "API". Setup prefix headers
+#
+macro(include_prefix_header target file)  
+  # "super"
+  include_prefix_header_common(${target} ${file})
 endmacro()
 
-
-
-#TBD
-# elseif ("${_compilerID}" MATCHES "GNU|Clang")
-#     # GCC / Clang options used
-#     # -x specify the source language
-#     # -c compile but do not link
-#     # -o place output in file
-#     set (_xLanguage_C "c-header")
-#     set (_xLanguage_CXX "c++-header")
-#     if (_flags)
-#       # append to list
-#       list (APPEND _flags "-x" "${_xLanguage_${_language}}" "-c" "${_prefixFile}" -o "${_pchFile}")
-#     else()
-#       # return as a flag string
-#       set (_flags "-x ${_xLanguage_${_language}} -c \"${_prefixFile}\" -o \"${_pchFile}\"")
-#     endif()
-#   else()

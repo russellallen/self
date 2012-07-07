@@ -3,4 +3,3 @@
 arch = i386
 os   = unix
 os_version = linux
-compiler = gcc

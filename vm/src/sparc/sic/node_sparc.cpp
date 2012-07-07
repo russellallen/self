@@ -569,7 +569,8 @@
 
   // helper functions for n-way type test; similar to PIC code (cacheStub.c)
 
-  // Next three are for PPC, someday could refactor SPARC to use them -- dmu 10/03
+  // historic:
+  // Next three were for PPC, someday could refactor SPARC to use them -- dmu 10/03
   
   void TypeTestNode::br_if_smi(Assembler* , Location , fint ) {
     fatal("not used on SPARC");

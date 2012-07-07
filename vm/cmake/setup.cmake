@@ -2,7 +2,7 @@
 #
 # setup all necessary build definition variables
 #
-add_definitions(
+list(APPEND _defines
   -DXLIB 
   -DFAST_COMPILER 
   -DSIC_COMPILER
@@ -24,7 +24,7 @@ add_definitions_if_cmakevar(
 #
 # setup all necessary build flags
 #
-add_definitions(
+list(APPEND _flags
   -fno-threadsafe-statics
   -fvisibility=default
   -fkeep-inline-functions
@@ -32,11 +32,22 @@ add_definitions(
   -fno-stack-protector
 )
 
+if(SELF_COVERAGE)
+  list(APPEND _flags
+    -ftest-coverage
+    -fprofile-arcs
+  )
+  if(clang)
+    list(APPEND EXTRA_LIBRARIES profile_rt)
+  else()
+    list(APPEND EXTRA_LIBRARIES gcov)
+  endif()
+endif()
 
 #
 # setup all warning flags
 #
-add_definitions(
+list(APPEND _flags
   -Wabi 
   -Wreorder 
   -Wreturn-type 

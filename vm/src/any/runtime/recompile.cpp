@@ -56,8 +56,7 @@ void recompile_init() {
 }
 
 
-# if ( TARGET_ARCH ==  PPC_ARCH  \
-||     TARGET_ARCH == I386_ARCH )
+# if (TARGET_ARCH == I386_ARCH)
   oop DIRecompile_stub(...) { fatal("no DI recompilation"); return NULL; }
 # endif
 
@@ -213,11 +212,13 @@ class Recompilation: public AbstractRecompilation {
   char* newPC;                  // continuation PC after on-stack repl.
 
 # if TARGET_ARCH == SPARC_ARCH
-  // I'm in the process of porting the SIC to PPC.  I haven't got around
-  // to porting this file yet.  For now, I just enclose Sparc-specific
-  // code with "# if TARGET_ARCH == SPARCH_ARCH".
-  // Once the SIC port is completed, platform-dependent versions of this file
-  // will be created. -mabdelmalek 10/02
+  // This is now historic >>
+    // I'm in the process of porting the SIC to PPC.  I haven't got around
+    // to porting this file yet.  For now, I just enclose Sparc-specific
+    // code with "# if TARGET_ARCH == SPARCH_ARCH".
+    // Once the SIC port is completed, platform-dependent versions of this file
+    // will be created. -mabdelmalek 10/02
+  // <<
   sparc_sp* newFramePiece;      // part of frame with newNM = newNM block home
 # endif
 
@@ -958,8 +959,7 @@ static char* continueRecompile2(RecompBuf* buf, frame* last) {
     LOG_EVENT2("ContinueAfterRecompilation pc=%#lx sp=%#lx", pc, sp);
 #   if TARGET_ARCH == SPARC_ARCH
       ContinueAfterReturnTrap(pc, sp);
-#   elif TARGET_ARCH ==  PPC_ARCH  \
-     ||  TARGET_ARCH == I386_ARCH
+#   elif TARGET_ARCH == I386_ARCH
       fatal("xxx unimp mac, unimp intel: where is result?");
       // ContinueAfterReturnTrap(result, pc, sp);
 #   else
@@ -1792,7 +1792,6 @@ void Recompilation::handleRemappedBlocks() {
   oop rcvr;
   fint i;
   for ( i = n - 1; i >= 0; i--) {
-    // NB: for PPC this will have to be modified to avoid quadratic RegisterLocator allocation
     abstract_vframe* vf = (new_vframe(frames[i]))->top();
     rcvr = vf->receiver();
 # if TARGET_ARCH == SPARC_ARCH

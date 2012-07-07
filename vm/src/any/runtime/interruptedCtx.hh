@@ -40,9 +40,9 @@ class InterruptedContext {
 
   char**  pc_addr();
   char* pc();
-  char* next_pc(); // noop on PPC
+  char* next_pc();
   void  set_pc(void* pc);
-  void  set_next_pc(void* npc); // noop on PPC
+  void  set_next_pc(void* npc);
 
 
   int*   sp_addr();

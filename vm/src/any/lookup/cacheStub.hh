@@ -30,7 +30,6 @@
 
 class cacheStubInfo {
  public:
-  // NOTE: metrowerks requires int, not short etc. for proper bit fields
   unsigned int has_smi        : 1;
   unsigned int has_float      : 1;
   unsigned int is_megamorphic : 1;

@@ -21,7 +21,7 @@ extern bool SnapshotCode;       // reading=>snap contains code; writing=>write c
 extern bool okToUseCodeFromSnapshot;
 extern bool noCodeWarnings;     // Suppress VM startup warnings about code
 
-extern char* vmDate;
+extern const char* vmDate;
 
 class universe {
  public:

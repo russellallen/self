@@ -10,7 +10,7 @@
 
 const char** RegisterNamesBySize[] = {ByteRegisterNames, ShortRegisterNames, RegisterNames};
 
-// change Location enum in regs_ppc.h if you change this!
+// change Location enum in regs_i386.h if you change this!
 const char* RegisterNames[] = {
     "%eax", "%ecx", "%edx", "%ebx", "%esp", "%ebp", "%esi", "%edi",
     "",

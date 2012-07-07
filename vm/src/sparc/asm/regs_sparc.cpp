@@ -124,9 +124,7 @@ static char* locationNameHelper(Location base, int num) {
     switch (base) {
       case StackLocations:     tbl=     StackRegisterNames; break;
       case ExtraArgLocations:  tbl=  ExtraArgRegisterNames; break;
-      # if TARGET_ARCH != PPC_ARCH // same for ppc
       case ExtraIArgLocations: tbl= ExtraIArgRegisterNames; break;
-      # endif
       default: ShouldNotReachHere();
     }
     return tbl[num];

@@ -8,14 +8,14 @@
 TARGET_OS_VERSION       = MACOSX_VERSION
 # another name for the same thing
 VM_SUBDIR          = mac_osx
-TARGET_ARCH = PPC_ARCH
+TARGET_ARCH = I386_ARCH
 HOST_ARCH = $(TARGET_ARCH)
 
 
 AS     = as
 GCC    = gcc
 
-SRC_DIRS = $(shell cd ${ROOT}/vm/src; ${MAKE} TARGET_COMPILER=gcc TARGET_ARCH=ppc srcDirList)
+SRC_DIRS = $(shell cd ${ROOT}/vm/src; ${MAKE} TARGET_COMPILER=gcc TARGET_ARCH=i386 srcDirList)
 # include . for the precompiled header file
 SRC_PATH = . \
            ${ROOT}/vm/${VM_SUBDIR}/generated/incls \
@@ -42,7 +42,7 @@ OS_GLUE_LIBS =
 	"
 
 CONFIGDEFS = \
-             ${DYNAMIC} -DXLIB -DMACTOOLBOX_LIB -DFAST_COMPILER \
+             ${DYNAMIC} -DXLIB -DQUARTZ_LIB -DFAST_COMPILER \
 	           -DDEBUG \
              -DCOMPILER=${COMPILER} -DASSEMBLER=${ASSEMBLER} \
              -DMANUFACTURER=${MANUFACTURER}

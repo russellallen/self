@@ -44,10 +44,6 @@ PrimDesc* CodeGen::blockClone() {
   return blkClone;
 }
 
-# if COMPILER == MWERKS_COMPILER
-# pragma dont_inline on // needed to avoid bug in CW 5.0, dmu: 9/99
-# endif
-
 
 Location CodeGen::loadPath(Location dest,
                            lookupTarget* target,

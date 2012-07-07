@@ -1306,7 +1306,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          openWindowOn: disp = ( |
              rect.
             | 
-            ui1GraphicsGlobals: disp isEmpty ifTrue: [macToolboxGlobals] False: [x11Globals].
+            ui1GraphicsGlobals: disp isEmpty ifTrue: [error: 'No Display'] False: [x11Globals].
             rect: getInitialRectFrom: ui1GraphicsGlobals window.
             [todo ui1 dmu experimental].
             window: ui1GraphicsGlobals window copy.

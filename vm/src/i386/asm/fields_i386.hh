@@ -9,8 +9,7 @@
 # endif
 
 
-// helper functions to access individual fields of PPC instructions
-
+// helper functions to access individual fields of instructions
 
 typedef u_char inst_t;
 

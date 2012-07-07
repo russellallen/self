@@ -463,9 +463,8 @@ oop graph_creator::clone_block_pt(block_node* n) {
   }
 
   if (!SpendTimeForDebugging) 
-    assert(TARGET_ARCH == PPC_ARCH  ||  lex_oop,
-           "lexical node should be on stack (but PPC may miss frame next to bottom)");
-  else if (TARGET_ARCH != PPC_ARCH  &&  !lex_oop)  { 
+    assert(lex_oop, "lexical node should be on stack");
+  else if (!lex_oop)  { 
     lprintf("\n\nlexical node should be on stack\n"); 
     lprintf("\n\nselector:\n");
     n->selector()->print();

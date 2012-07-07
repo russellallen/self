@@ -1,42 +1,41 @@
 #!/usr/bin/env cmake
 set(PROJECT_NAME Self)
 
+#
+#
+# Prologue
+#
 
 # This is for a cmake compatibility check
+# old style:
 if(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.4)
-    message(FATAL_ERROR "${PROJECT_NAME} requires at least CMake v2.8.8"
+    message(FATAL_ERROR "${PROJECT_NAME} requires at least CMake v2.8"
         " You are running v${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}."
         " Please upgrade." )
 endif(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.4)
+# new style:
 if(APPLE)
   # it has to be 2.8.8 on OSX 
   cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR)
-  if(CMAKE_GENERATOR MATCHES Xcode)
-    # also, 10.8 + Xcode 4.2 4C199 + clang goes haywire, pretend to know that
-    # everything will be ok.
-    execute_process(COMMAND xcodebuild -version
-      RESULT_VARIABLE _xcodebuild_failed OUTPUT_VARIABLE XCODE_OUT ERROR_VARIABLE _) 
-    if(NOT _xcodebuild_failed AND (XCODE_OUT MATCHES 4C199))
-      set(CMAKE_C_COMPILER_WORKS 1)
-      set(CMAKE_CXX_COMPILER_WORKS 1)
-      message(
-"WARNING:  Xcode 4.2 4C199 with Clang seems to have
-           build process bugs. Fasten your seatbelts. 
-           If compilation fails, try to open the 
-           Self.xcodeproj in Xcode manually."
-       )
-    endif()
-  endif()
+  set(CMAKE_TRY_COMPILE_OSX_ARCHITECTURES i386)
 else()
   cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 endif()
 
+
+#
+# Actual start.
+#
+#
+#
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
-project(${PROJECT_NAME} C CXX ASM)
+project(${PROJECT_NAME} CXX ASM)
 
 # setup the routines and variables we might use
-# sets ${platform} ${platform_processor} ${LOCAL_CMAKE_DIR}
+# sets 
+#  ${platform} ${platform_processor} 
+#  ${LOCAL_CMAKE_DIR}
 include(common)
 
 
@@ -50,41 +49,26 @@ source_groups_from_src(SRC_src "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 add_subdirectory(${SELF_GLUE_DIRECTORY} _glue)
 source_group("glue" FILES ${SRC_glue} "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 
-set(SRC ${SRC_src} ${SRC_glue})
+set(SRC ${SRC} ${SRC_src} ${SRC_glue})
 
 # get platform-dependent configuratio
-# sets ${GUI_TYPE}, ${EXTRA_LIBRARIES} 
-# ${COMPILER} ${ASSEMBLER} ${MANUFACTURER}
-# ${TARGET_OS_VERSION} ${TARGET_OS_FAMILY}
+# sets 
+#   $GUI_TYPE 
+#   $EXTRA_LIBRARIES 
+#   $COMPILER $ASSEMBLER $MANUFACTURER
+#   $TARGET_OS_VERSION $TARGET_OS_FAMILY
 include(${platform})
 
 # setup general definitions. 
 # this depends on the platform
 include(setup)
-
 # set up the self-specific include-directories
 include_directories_from_src(SRC)
 
+
 # we need a vmDate thing.
-set(SRC_VMDATE ${SELF_GENERATED_INLCUDE_FILES_DIR}/vmDate.c)
-set(SRC_VMDATE_IN ${SELF_BUILD_SUPPORT_DIR}/vmDate.c.in)
-configure_file(
-  "${LOCAL_CMAKE_DIR}/configureVmDate.cmake.in"
-  "${CMAKE_BINARY_DIR}/configureVmDate.cmake" @ONLY
-) 
-
-add_custom_target(create_vmDate
-    COMMAND "${CMAKE_COMMAND}" -P "${CMAKE_BINARY_DIR}/configureVmDate.cmake" 
-    DEPENDS ${SRC}
-    COMMENT "Creating ${SRC_VMDATE}"
-) 
-
-set_source_files_properties(${SRC_VMDATE} 
-  PROPERTIES 
-  GENERATED TRUE
-  OBJECT_DEPENDS "${SRC}"
-)
-
+# sets $SRC_VMDATE
+include(setupVmDate)
 set(SRC ${SRC} ${SRC_VMDATE})
 
 
@@ -97,18 +81,18 @@ setup_assembler_support(SRC)
 # sets ${3RD_PARTY_LIBS}
 include(dependencies)
 
+# pre-compiled headers. (not for Xcode, has its own way)
+if(NOT CMAKE_GENERATOR MATCHES Xcode)
+  add_pch_rule(${SELF_PREFIX_HEADER} SRC)
+endif()
+
 ## setup the acutal executable.
 #
 add_executable(${PROJECT_NAME} ${GUI_TYPE} ${SRC})
 add_dependencies(${PROJECT_NAME} create_vmDate)
 
-
-# setup configuration-specific (release/debug) stuff
-# must come after add_executable
-include(configurations)
-
 # setup prefix-header for target
-include_prefix_header(${PROJECT_NAME})
+include_prefix_header(${PROJECT_NAME} ${SELF_PREFIX_HEADER})
 
 # setup linked libraries for target
 target_link_libraries(${PROJECT_NAME} ${EXTRA_LIBRARIES} ${3RD_PARTY_LIBS})

@@ -3,7 +3,6 @@
 #config below.
 
 set(SRC_glue
-    macPrims.primMaker.hh
     quartz.primMaker.hh
     stat_glue.cpp
     stat.primMaker.hh

@@ -50,5 +50,21 @@ else(false)
     
 endif(false)
 
+# Compiler detection
+
+if(CMAKE_CXX_COMPILER_ID MATCHES ".*[Cc]lang.*")
+  
+  set(clang 1)
+
+elseif(CMAKE_CXX_COMPILER_ID MATCHES ".*[Gg][Nn][Uu].*")
+
+  set(gcc 1)
+
+else(false)
+    
+    message(FATAL_ERROR "Compiler ${CMAKE_CXX_COMPILER} not supported")
+    
+endif()
+
 
 message(STATUS "Preparing for ${platform_name} on ${platform_processor}")

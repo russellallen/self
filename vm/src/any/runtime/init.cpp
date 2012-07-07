@@ -55,9 +55,6 @@ inline void      sendDesc_init() {      sendDesc::init(); }
 inline void IntervalTimer_init() { IntervalTimer::init(); }
 inline void IntervalTimer_exit() { IntervalTimer::exit(); }
  
-# define PPC_INIT_DO(template) \
-  template(regs_ppc_init)                                                     \
-  
 # define I386_INIT_DO(template) \
   template(regs_i386_init)                                                     \
   
@@ -92,8 +89,6 @@ inline void IntervalTimer_exit() { IntervalTimer::exit(); }
 INIT_DO(DEFINE_TEMPLATE)
 # if TARGET_ARCH == SPARC_ARCH
   SPARC_INIT_DO(DEFINE_TEMPLATE)
-# elif TARGET_ARCH == PPC_ARCH
-  PPC_INIT_DO(DEFINE_TEMPLATE)
 # elif TARGET_ARCH == I386_ARCH
   I386_INIT_DO(DEFINE_TEMPLATE)
 # endif
@@ -115,8 +110,6 @@ void init_globals() {
   INIT_DO(CALL_TEMPLATE)
 # if TARGET_ARCH == SPARC_ARCH
   SPARC_INIT_DO(CALL_TEMPLATE)
-# elif TARGET_ARCH == PPC_ARCH
-  PPC_INIT_DO(CALL_TEMPLATE)
 # elif TARGET_ARCH == I386_ARCH
   I386_INIT_DO(CALL_TEMPLATE)
 # endif

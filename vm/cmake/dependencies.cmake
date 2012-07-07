@@ -2,6 +2,11 @@
 
 set(3RD_PARTY_LIBS)
 
+#
+# this is neccessary for finding X etc.
+#
+enable_language(C)
+
 find_package(PkgConfig QUIET)
 
 #
@@ -33,7 +38,7 @@ endif()
 if(NOT PKG_CONFIG_FOUND OR (NOT CURSES_FOUND))
   # do it the CMake way
   # (n)curses
-  find_package(Curses QUIET REQUIRED)
+  find_package(Curses REQUIRED)
   #
   # hide things that CURSES forgot to hide
   mark_as_advanced(CURSES_CURSES_H_PATH CURSES_FORM_LIBRARY CURSES_HAVE_CURSES_H)

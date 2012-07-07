@@ -53,14 +53,6 @@ See the LICENSE file for license information.
             | size printString).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'macToolboxGlobals' -> () From: ( | {
-         'Category: graphics (ui1)\x7fModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
-        
-         platformPixmap = ( |
-            | 
-            0  macToolbox pixMap).
-        } | ) 
-
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: bitmap InitialContents: FollowSlot'
         

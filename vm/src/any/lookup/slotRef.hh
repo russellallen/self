@@ -47,7 +47,6 @@ class abstractSlotRef: public CListEntry {
     return (realSlotRef*) this; }
   
   // NOT VIRTUAL
-  // rename from EQ to avoid MW warning
   bool EQsr(abstractSlotRef* s);
 
   virtual void add_dependency(slotDesc* sd, simpleLookup* L) {

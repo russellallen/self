@@ -161,9 +161,9 @@ bool Object::GenBody(Object* parent) {
 
   if (body->Length()) {
     // Create block or method.
-    ByteCode b(true); // I am not sure that this method can handle space failure
     preservedObj ps(s); // since GenByteCodes can cause a gc,
                         // preserve the generated slotList.
+    ByteCode b(true); // I am not sure that this method can handle space failure
                               
     if ( !body->GenByteCodes(&b, this, false)
     ||  NLRSupport::have_NLR_through_C()) 
