@@ -72,7 +72,7 @@ macro(setup_target_common target)
 endmacro()
 
 macro(include_prefix_header_common target file)
-    list(APPEND _flags -include ${file} -Winvalid-pch)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${file} -Winvalid-pch")
 endmacro()
 
 # read the version info

@@ -59,9 +59,6 @@ list(APPEND SRC ${SRC_src} ${SRC_glue})
 #   $TARGET_OS_VERSION $TARGET_OS_FAMILY
 include(${platform})
 
-# setup general definitions. 
-# this depends on the platform
-include(setup)
 # set up the self-specific include-directories
 include_directories_from_src(SRC)
 
@@ -72,14 +69,21 @@ include(setupVmDate)
 list(APPEND SRC ${SRC_VMDATE})
 
 
+# setup general definitions. 
+include(setup)
+
 ## setup assemby support
 #
 setup_assembler_support(SRC)
 
 
+# setup configuration-specific (release/debug) stuff
+include(configurations)
+
 # specify the libs we depend on
 # sets ${3RD_PARTY_LIBS}
 include(dependencies)
+
 
 # pre-compiled headers. (not for Xcode, has its own way)
 if(NOT CMAKE_GENERATOR MATCHES Xcode)
@@ -91,7 +95,10 @@ endif()
 add_executable(${PROJECT_NAME} ${GUI_TYPE} ${SRC})
 add_dependencies(${PROJECT_NAME} create_vmDate)
 
+
+
 # setup prefix-header for target
+
 include_prefix_header(${PROJECT_NAME} ${SELF_PREFIX_HEADER})
 
 # setup linked libraries for target

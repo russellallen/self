@@ -50,5 +50,3 @@ list(APPEND _flags
   -Wparentheses
 )
 
-# setup configuration-specific (release/debug) stuff
-include(configurations)
