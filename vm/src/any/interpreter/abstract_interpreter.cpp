@@ -220,6 +220,7 @@ void abstract_interpreter::check_no_operand(abstract_interpreter *ai, oop) {
 
 void abstract_interpreter::check_delegatee(abstract_interpreter *ai, oop) {
   oop p= ai->get_literal();
+  Unused(p); //debugging
   if ( !ai->error_msg  &&  !ai->get_literal()->is_string())
     ai->set_error_msg( "delegatee must be string"); 
 }

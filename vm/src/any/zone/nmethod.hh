@@ -39,11 +39,6 @@ class nmFlags {
 
 nmethod* constructDoItMethod(oop receiver, oop method);
 
-// GGC3 needs 0 not NULL
-static nmethod* shutUpCompiler = NULL;
-# define NMETHOD_FROM(fieldName, p)                                           \
-      ((nmethod*)((char*)p - (char*)&shutUpCompiler->fieldName))
-
 class nmethod : public OopNCode {
  public:
   int32 depsLen;

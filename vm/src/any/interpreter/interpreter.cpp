@@ -277,7 +277,6 @@ void interpreter::local_slot_desc( interpreter*& r,
                                    abstract_vframe*& rvf,
                                    slotDesc*& sd) {
   
-  bool flushed = false;
   interpreter* interp = this;
   abstract_vframe* vf = NULL;
   

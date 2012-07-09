@@ -392,7 +392,7 @@ void write_delim(FILE *file, char *delim);
 
 # define DERIVED_SWITCH_POINTERS_TEMPLATE(p)                                  \
     { int32 __o = oop(*p)->derived_offset();                                  \
-      oop __p = UNDERIVE(*p,__o);                                             \
+      oop __p = UNDERIVE(*p,__o); Unused(__p);                                \
       if (UNDERIVE(*p, __o) == (oop) from) {                                  \
         *((oop*) p) = REDERIVE((oop) to,__o);                                 \
       } }
