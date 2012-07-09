@@ -5,7 +5,6 @@
 /*  Copyright 1992-2012 AUTHORS.
     See the LICENSE file for license information. */
 
-#undef ASSEMBLER
 #import <Cocoa/Cocoa.h>
 #import "SelfAppDelegate.h"
 #import "SelfConsoleView.h"

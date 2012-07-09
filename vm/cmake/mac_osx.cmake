@@ -17,14 +17,12 @@ endif()
 # TODO: these are frome the project file, reconsider
 set(DYNAMIC           "-DDYNLINK_SUPPORTED")
 set(COMPILER          "GCC_COMPILER")
-set(ASSEMBLER         "")
-set(MANUFACTURER      "")
 # still implicit in config.hh
 #set(TARGET_OS_VERSION "MACOSX_VERSION")
 #set(TARGET_OS_FAMILY  "UNIX_FAMILY")
 #set(TARGET_ARCH       "I386_ARCH")
 #set(HOST_ARCH         "I386_ARCH")
-mark_as_advanced(DYNAMIC COMPILER ASSEMBLER MANUFACTURER TARGET_OS_VERSION TARGET_OS_FAMILY)
+mark_as_advanced(DYNAMIC COMPILER TARGET_OS_VERSION TARGET_OS_FAMILY)
 
 set(SELF_OSX_INFO_PLIST Info)
 

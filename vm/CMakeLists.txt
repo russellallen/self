@@ -55,7 +55,7 @@ list(APPEND SRC ${SRC_src} ${SRC_glue})
 # sets 
 #   $GUI_TYPE 
 #   $EXTRA_LIBRARIES 
-#   $COMPILER $ASSEMBLER $MANUFACTURER
+#   $COMPILER
 #   $TARGET_OS_VERSION $TARGET_OS_FAMILY
 include(${platform})
 

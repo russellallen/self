@@ -12,8 +12,6 @@ list(APPEND _defines
 
 add_definitions_if_cmakevar( 
   COMPILER
-  ASSEMBLER
-  MANUFACTURER
   TARGET_OS_VERSION
   TARGET_OS_FAMILY
   TARGET_ARCH

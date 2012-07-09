@@ -6,7 +6,6 @@
     See the LICENSE file for license information. */
 
 
-#undef ASSEMBLER
 #import <Cocoa/Cocoa.h>
 #import "SelfConsoleView.h"
 #import "Pty.h"

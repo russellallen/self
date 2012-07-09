@@ -11,7 +11,6 @@
 # if defined(QUARTZ_LIB) 
 
 # if TARGET_OS_VERSION == MACOSX_VERSION  &&  !TARGET_API_MAC_CARBON
-  #  undef ASSEMBLER
   #  undef Alloc
   #  undef Status
 
