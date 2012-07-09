@@ -49,7 +49,7 @@ source_groups_from_src(SRC_src "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 add_subdirectory(${SELF_GLUE_DIRECTORY} _glue)
 source_group("glue" FILES ${SRC_glue} "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 
-set(SRC ${SRC} ${SRC_src} ${SRC_glue})
+list(APPEND SRC ${SRC_src} ${SRC_glue})
 
 # get platform-dependent configuratio
 # sets 
@@ -69,7 +69,7 @@ include_directories_from_src(SRC)
 # we need a vmDate thing.
 # sets $SRC_VMDATE
 include(setupVmDate)
-set(SRC ${SRC} ${SRC_VMDATE})
+list(APPEND SRC ${SRC_VMDATE})
 
 
 ## setup assemby support

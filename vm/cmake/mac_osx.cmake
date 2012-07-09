@@ -81,7 +81,7 @@ set(OSX_ICON_FILES ${SELF_BUILD_SUPPORT_DIR}/${platform}/${MACOSX_BUNDLE_ICON_FI
 # set where in the bundle to put the icns files
 set_source_files_properties(${OSX_ICON_FILES} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
 # include the icns files in the target
-set(SRC ${SRC} ${OSX_ICON_FILES})
+list(APPEND SRC ${OSX_ICON_FILES})
 
 
 

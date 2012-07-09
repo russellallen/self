@@ -3,6 +3,7 @@
 # cmake-custom directory
 get_filename_component(LOCAL_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH) 
 
+set(SRC)
 set(SRC_src)
 set(_flags)
 set(_defines)

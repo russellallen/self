@@ -5,7 +5,7 @@
 set(SRC_misc
   includeDB
 )
-set(SRC_src ${SRC_src} ${SRC_misc})
+list(APPEND SRC_src ${SRC_misc})
 
 set(SRC_any
   any/asm/asm.cpp
@@ -627,18 +627,18 @@ set(SRC_cocoa
 )
 
 # include non-dependent
-set(SRC_src ${SRC_src} ${SRC_any})
+list(APPEND SRC_src ${SRC_any})
 
 # include unix files
 if(UNIX)
-    set(SRC_src ${SRC_src} ${SRC_unix})
+    list(APPEND SRC_src ${SRC_unix})
 endif(UNIX)
 
 # inlcude platform files
-set(SRC_src ${SRC_src} ${SRC_${platform_processor}})
+list(APPEND SRC_src ${SRC_${platform_processor}})
 
 if(SELF_OSX_COCOA)
-  set(SRC_src ${SRC_src} ${SRC_cocoa})
+  list(APPEND SRC_src ${SRC_cocoa})
   set(SELF_MACOSX_NIBS ${SELF_MACOSX_NIBS} ${CMAKE_CURRENT_SOURCE_DIR}/cocoa/os/Self.nib)
 endif()
 
