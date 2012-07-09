@@ -102,7 +102,7 @@ endif()
 
 add_framework_to_list(frameworks Carbon)
 
-set(EXTRA_LIBRARIES ${EXTRA_LIBRARIES} ${frameworks})
+list(APPEND EXTRA_LIBRARIES ${frameworks})
 
 
 #

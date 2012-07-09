@@ -31,8 +31,6 @@ include(platform)
 include(policies)
 include(functions)
 include(assemblerSupport)
-# setup configuration-specific (release/debug) stuff
-include(configurations)
 
 # TODO: the incls still need to be built manually.
 # get around this soon!
@@ -68,14 +66,13 @@ macro(configure_end)
 endmacro(configure_end)
 
 macro(setup_target_common target)
-  add_definitions(${_defines} ${_flags})
   set_target_properties(${target} PROPERTIES LINKER_LANGUAGE CXX)
   # we _know_ we have to deal with assembler.
   setup_target_assembler_support(${target})
 endmacro()
 
 macro(include_prefix_header_common target file)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${file} -Winvalid-pch")
+    list(APPEND _flags -include ${file} -Winvalid-pch)
 endmacro()
 
 # read the version info

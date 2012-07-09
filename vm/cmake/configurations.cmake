@@ -90,12 +90,17 @@ if(CMAKE_CONFIGURATION_TYPES OR CMAKE_BUILD_TYPE)
       COMPILE_DEFINITIONS_RELWITHDEBINFO 
       "FAST_FLOATS")
   endif()
-
+  
+  add_definitions(${_flags} ${_defines})
+  
+  
 else()
   
   # we are under a makefile-like config.
   # let the user decide
-  set(SELF_BUILD_LEVEL "optimized" CACHE STRING "Select the build level for ${PRODUCT_NAME} from 'optimized', 'debug','optimized_with_debug'")
+  set(SELF_BUILD_LEVEL "optimized" 
+    CACHE STRING 
+    "Select the build level for ${PRODUCT_NAME} from 'optimized', 'debug','optimized_with_debug'")
   if(SELF_BUILD_LEVEL MATCHES "debug")
     set(_is_debug 1)
   endif()
@@ -120,6 +125,11 @@ else()
     -DTARGET_IS_PROFILED=${_is_profiled}
     -DTARGET_IS_FOR_DEBUGGING=${_is_debug}
   )
+  
+  foreach(_flag ${_flags})
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${_flag}")
+  endforeach()
+  add_definitions(${_defines})
 
 endif()
 

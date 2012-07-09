@@ -33,15 +33,7 @@ list(APPEND _flags
 )
 
 if(SELF_COVERAGE)
-  list(APPEND _flags
-    -ftest-coverage
-    -fprofile-arcs
-  )
-  if(clang)
-    list(APPEND EXTRA_LIBRARIES profile_rt)
-  else()
-    list(APPEND EXTRA_LIBRARIES gcov)
-  endif()
+  list(APPEND _flags --coverage)
 endif()
 
 #
@@ -59,3 +51,6 @@ list(APPEND _flags
   -Wno-write-strings
   -Wparentheses
 )
+
+# setup configuration-specific (release/debug) stuff
+include(configurations)
