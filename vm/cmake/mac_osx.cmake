@@ -136,7 +136,7 @@ if(NOT CMAKE_GENERATOR MATCHES Xcode)
       CMAKE_EXE_LINKER_FLAGS_MINSIZEREL
       CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO
     )
-      set(${_link_flags} "${${_flags}} -isysroot ${CMAKE_OSX_SYSROOT} -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}")
+      set(${_link_flags} "${${_link_flags}} -isysroot ${CMAKE_OSX_SYSROOT} -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}")
     endforeach()
 endif()
 

@@ -30,7 +30,7 @@ endif()
 #
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
-project(${PROJECT_NAME} CXX ASM)
+project(${PROJECT_NAME} C CXX ASM)
 
 # setup the routines and variables we might use
 # sets 
