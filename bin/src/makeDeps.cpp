@@ -48,6 +48,10 @@
 
 // Changed to support new filename extensions: .cpp and .hh -- dmu 2/01
 
+// Changed to support preprocessed Assembler filess: .S -- topa 6/12
+
+// Changed to support Mac OS X specific Objective-C extensions: .m and .mm -- topa 6/12
+
 # ifdef __linux__
 #   include <new>
 # endif
