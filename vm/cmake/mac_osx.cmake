@@ -122,22 +122,49 @@ set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -arch ${platform_processor}")
 #
 # Things that do not depend on a target
 #
-if(NOT CMAKE_GENERATOR MATCHES Xcode)
-    
-    list(APPEND _flags
-      --sysroot ${CMAKE_OSX_SYSROOT}
-      -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}
-    )
-    
-    foreach(_link_flags 
-      CMAKE_EXE_LINKER_FLAGS
-      CMAKE_EXE_LINKER_FLAGS_DEBUG
-      CMAKE_EXE_LINKER_FLAGS_RELEASE
-      CMAKE_EXE_LINKER_FLAGS_MINSIZEREL
-      CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO
-    )
-      set(${_link_flags} "${${_link_flags}} -isysroot ${CMAKE_OSX_SYSROOT} -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}")
-    endforeach()
+if(CMAKE_GENERATOR MATCHES Xcode)
+  # Nib files.
+  foreach(_nib ${SELF_MACOSX_NIBS})
+    set_source_files_properties(${_nib} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+  endforeach()
+else()
+  # Nib files. Xcode does it easier
+  foreach(_nib ${SELF_MACOSX_NIBS})
+    if(IS_DIRECTORY ${_nib})
+      get_filename_component(_nib_name ${_nib} NAME)
+      get_filename_component(_nib_path ${_nib} PATH)
+      file(GLOB_RECURSE _nib_contents RELATIVE ${_nib} ${_nib}/*)
+      foreach(_content ${_nib_contents})
+        set(_nib_content_relpath ${_nib_name}/${_content})
+        set(_nib_content_fullpath ${_nib_path}/${_nib_content_relpath})
+        get_filename_component(_nib_content_path ${_nib_content_relpath} PATH)        
+        list(APPEND SRC ${_nib_content_fullpath})
+        set_source_files_properties(${_nib_content_fullpath}
+          PROPERTIES MACOSX_PACKAGE_LOCATION 
+          Resources/${_nib_content_path})
+      endforeach()
+    else()
+      set_source_files_properties(${_nib} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+    endif()
+  endforeach()
+  
+  
+  # Flags. Xcode does it already
+  
+  list(APPEND _flags
+    --sysroot ${CMAKE_OSX_SYSROOT}
+    -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}
+  )
+  
+  foreach(_link_flags 
+    CMAKE_EXE_LINKER_FLAGS
+    CMAKE_EXE_LINKER_FLAGS_DEBUG
+    CMAKE_EXE_LINKER_FLAGS_RELEASE
+    CMAKE_EXE_LINKER_FLAGS_MINSIZEREL
+    CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO
+  )
+    set(${_link_flags} "${${_link_flags}} -isysroot ${CMAKE_OSX_SYSROOT} -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}")
+  endforeach()
 endif()
 
 
@@ -205,9 +232,6 @@ macro(setup_target target)
   # configure CMake to use a custom Info.plist
   set_target_properties(${target} PROPERTIES 
     MACOSX_BUNDLE_INFO_PLIST ${SELF_BUILD_SUPPORT_DIR}/${platform}/${SELF_OSX_INFO_PLIST}.plist)
-  foreach(_nib ${SELF_MACOSX_NIBS})
-    set_source_files_properties(${_nib} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)      
-  endforeach()
 endmacro()
 
 # API
