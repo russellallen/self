@@ -293,7 +293,7 @@ void universe::genesis()
                            new_string("\n"
    "\tTo begin using Self, you must read in the world of Self objects.\n"
    "\tTo read in the world, type:\n\n"
-   "\t\t'smallUI2.self' _RunScript\n\n"
+   "\t\t'worldBuilder.self' _RunScript\n\n"
    "\tWhen this process is complete, you will be at the Self prompt.\n"
    "\tAt the Self prompt, you can start the user interface by typing:\n\n"
    "\t\tdesktop open\n\n\n"),
