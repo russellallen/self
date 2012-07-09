@@ -27,7 +27,7 @@
   }
   
  inline void BaseAssembler::Short(int32 i) {
-   int16 s = i;
+   int16 s = i; Unused(s); // non-debug case
    assert(int32(s) == i, "short must be short");
    Alloc(int16);
    *data = i;

@@ -14,6 +14,7 @@ profilerOop profilerMap::create_profiler() {
   profilerOop prof;
   profilerMap* m= (profilerMap*)create_map(sizeof(profilerMap), slots,
                                            &pm, (oop*)&prof);
+  Unused(m); // profiling
   prof->initialize();
   return prof;
 }

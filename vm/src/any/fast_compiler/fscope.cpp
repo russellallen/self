@@ -351,8 +351,10 @@ bool FSelfScope::testMemoization(u_char* bytes, u_char* end, oop* literals) {
        || nextOp == IMPLICIT_SEND_CODE
        || nextOp == ARGUMENT_COUNT_CODE)
     &&   literals[nextIndex]->is_string()) {
-      char* sel = byteVectorOop(literals[nextIndex])->bytes();
+      char* sel = byteVectorOop(literals[nextIndex])->bytes();  
+      Unused(sel); //debugging
       fint  len = byteVectorOop(literals[nextIndex])->length();
+      Unused(len); //debugging
       if (stringOop(literals[nextIndex])->is_prim_name() 
       &&  stringOop(literals[nextIndex])->has_IfFail()) {
         // YES!  This block must be a failure block.

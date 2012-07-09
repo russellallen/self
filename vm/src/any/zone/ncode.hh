@@ -9,11 +9,6 @@
   # pragma interface
 # endif
 
-static OopNCode* shutUpCompiler_OopNCode = NULL;
-# define OOPNCODE_FROM(fieldName, p)                                          \
-      ((OopNCode*)((char*)p - (char*)&shutUpCompiler_OopNCode->fieldName))
-
-
 // NCodeBase is the superclass of all things containing native code.
 
 class NCodeBase : public VMObj {

@@ -541,7 +541,7 @@ public:
   ByteCode bcode;
 
   BytecodeFixerUpper(methodMap *mm, oldMapList *oml, IntBList* sds) 
-    : bcode(true), abstract_interpreter(mm) {
+    : abstract_interpreter(mm), bcode(true) {
     old_maps= oml;
     bool gotOne;
     mm->branch_targets(gotOne, &branchTargets); 

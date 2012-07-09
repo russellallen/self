@@ -47,6 +47,18 @@ int32 zone::frame_chain_nesting = 0;
 # define FOR_ALL_NMETHODS(var)                                                \
     for (nmethod *var = first_nm(); var; var = next_nm(var))
 
+
+static nmethod* fieldOffsetDetector_nmethod = NULL;
+# define NMETHOD_FROM(fieldName, p)                                           \
+  ((nmethod*)((char*)p - (char*)&fieldOffsetDetector_nmethod->fieldName))
+
+
+static OopNCode* fieldOffsetDetector_OopNCode = NULL;
+# define OOPNCODE_FROM(fieldName, p)                                          \
+  ((OopNCode*)((char*)p - (char*)&fieldOffsetDetector_OopNCode->fieldName))
+
+
+
 inline int32 roundSize(int32 s, int32 blockSize) {
   return (s + blockSize - 1) / blockSize * blockSize;
 }

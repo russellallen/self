@@ -119,7 +119,6 @@ oop float_div_prim(floatOop x, floatOop y) {
 
 oop float_mod_prim(floatOop x, floatOop y) {
   CHECK_XY;
-  float xv = x->value();
   float yv = y->value();
   if (yv == 0) {
     return ErrorCodes::vmString_prim_error(DIVISIONBYZEROERROR);

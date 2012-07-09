@@ -82,9 +82,9 @@ class OS {
                }
   static void  FWrite_mem(void* buffer_start, void *buffer_end, FILE* stream) {
                    // next three added solely to aid debugging
-                   void* bs_debug = buffer_start;
-                   void* be_debug = buffer_end;
-                   FILE* stream_debug = stream;
+                   void* bs_debug = buffer_start; Unused(bs_debug);
+                   void* be_debug = buffer_end;   Unused(be_debug);
+                   FILE* stream_debug = stream;   Unused(stream_debug);
                    FWrite(buffer_start, (char*)buffer_end - (char*)buffer_start, stream);
                }
   static void    Mmap(void* start, void *end, FILE* stream);
