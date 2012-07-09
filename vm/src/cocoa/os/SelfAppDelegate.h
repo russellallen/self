@@ -11,6 +11,17 @@
 #import "SelfConsoleView.h"
 #import "Pty.h"
 
+# if defined(__clang__)
+  # define BEGIN_AUTORELEASE_POOL @autoreleasepool {
+  # define END_AUTORELEASE_POOL }
+# else
+  # define BEGIN_AUTORELEASE_POOL \
+    NSAutoreleasePool *localPool; \
+    localPool = [[NSAutoreleasePool alloc] init];
+  # define END_AUTORELEASE_POOL \
+    [localPool release];
+# endif
+
 #pragma mark Arguments Container
 
 @interface MainArgs : NSObject 

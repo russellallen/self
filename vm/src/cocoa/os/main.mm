@@ -18,9 +18,9 @@ extern int old_main(int argc, char *argv[]);
 @implementation SelfVMStarter
 
 - (void) startSelfVM: (MainArgs*) args {
-  @autoreleasepool {
+  BEGIN_AUTORELEASE_POOL
     old_main(args->argc, args->argv);
-  }
+  END_AUTORELEASE_POOL
 }
 
 @end

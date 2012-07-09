@@ -23,7 +23,8 @@ extern MainArgs* args;
 {
   BOOL indicated = NO;
   size_t argLen = strlen(arg);
-  for (int i=0; i < argc; ++i) {
+  int i;
+  for (i=0; i < argc; ++i) {
     if (strncmp(args->argv[i], arg, MIN(strlen(args->argv[i]), argLen)) == 0) {
       if (!parameter || argc > i) {
         indicated = YES;
@@ -80,7 +81,7 @@ extern MainArgs* args;
 
 - (void) startVMWithArgs: (MainArgs*) args
 {
-  @autoreleasepool {
+  BEGIN_AUTORELEASE_POOL
     if (!self.vmIsRunning) {
       SelfVMStarter* vmStarter = [[SelfVMStarter alloc] init];
       [NSThread detachNewThreadSelector: @selector(startSelfVM:) 
@@ -88,7 +89,7 @@ extern MainArgs* args;
                              withObject: (id)args];
       self.vmIsRunning = YES;
     }
-  }
+  END_AUTORELEASE_POOL
 }
 
 - (void) startVMWithFile: (NSURL*) url
@@ -105,7 +106,8 @@ extern MainArgs* args;
   newArgv[1] = [[url path] hasSuffix: @"snap"] ?  "-s" : "-f";  
   newArgv[2] = strdup([[url path] UTF8String]);
   /* the 1st to last arg are mapped to 3rd to (old-last)+2 */
-  for (int i = 3; i < (args->argc + 2); i++) {
+  int i;
+  for (i = 3; i < (args->argc + 2); i++) {
     newArgv[i] = args->argv[i - 3];
   }
   args->argv = newArgv;
