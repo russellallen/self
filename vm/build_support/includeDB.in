@@ -1,0 +1,3341 @@
+// Sun-$Revision: 30.32 $
+
+// Copyright 1992-2012 AUTHORS.
+// See the LICENSE file for license information. 
+
+// This file must have redundant dependencies--
+//  It should be redone with a section for class deps, etc.
+
+// Its format:
+// a comment starts with '// ' and goes to the end of the line
+// anything else is a pair of filenames.  The line "x.cpp y.hh" means
+// "x.cpp must include y.hh".  Similarly, "y.hh z.hh" means "any file including
+// y.hh must also include z.hh, and z.hh must be included before y.hh".
+
+// A line can be a quad of tokens:
+// "generate_platform_dependent_include foo.hh foo_pd.hh foo_${platform_processor}.hh"
+// will create a foo_pd.hh.incl file that #includes foo_${platform_processor}.hh.
+// It also does the right thing with dependencies.
+// foo.hh is expected to contain #include foo_pd.hh somewhere in it.
+
+// To make a change, edit this file in SELFDIR and then do a "make includeDB"
+// in the binary dirs.
+
+// style hint: we try to keep the entries ordered alphabetically, both
+// globally (left-hand sides) and within a given file (right-hand sides)
+
+// Naming conventions: a simple class has two files foo.hh and foo.cpp.
+// Some classes need a third file to hold inline functions, foo_inline.hh.
+// For classes that are platform-dependent, there is a foo_abstract.hh,
+//  holding the abstract class, a foo_sparc.hh for the sparc platform,
+//  a foo.hh, which holds common items that have to come after the
+//  platform-specific stuff, and foo.cpp and foo_sparc.cpp for the C files.
+// Of course there can also be a foo_sparc_inline.hh (comes after foo.hh)
+//  and a foo_inline.hh (comes after all foo_inline_sparc.hh). -- dmu
+
+// This file was fixed up with the help of Warn.snap 7/03 -- dmu
+
+// XCode has no way to turn off precompiled headers, so I commented out all lines
+// with no_precompiled_headers for now. -- dmu 11/03
+
+// For Linux, the precompiled headers must be included before the first C token,
+// so I added the includes to the source files themselves. -- dmu 12/07
+
+
+${platform_kind}Prims.cpp                 ${platform_kind}Prims.hh
+${platform_kind}Prims.cpp                 allocation.hh
+${platform_kind}Prims.cpp                 asserts.hh
+${platform_kind}Prims.cpp                 fctProxyOop.hh
+${platform_kind}Prims.cpp                 generation_inline.hh
+${platform_kind}Prims.cpp                 glueSupport.hh
+${platform_kind}Prims.cpp                 itimer.hh
+${platform_kind}Prims.cpp                 quartzWindow.hh
+// ${platform_kind}Prims.cpp                 no_precompiled_headers
+${platform_kind}Prims.cpp                 space_inline.hh
+${platform_kind}Prims.cpp                 stringMap.hh
+${platform_kind}Prims.cpp                 vmStrings.hh
+
+${platform_kind}Prims.glue.cpp            ${platform_kind}Prims.hh
+${platform_kind}Prims.glue.cpp            generation_inline.hh
+${platform_kind}Prims.glue.cpp            quartzWindow.hh
+// ${platform_kind}Prims.glue.cpp            no_precompiled_headers
+${platform_kind}Prims.glue.cpp            os.hh
+${platform_kind}Prims.glue.cpp            platformWindow.hh
+${platform_kind}Prims.glue.cpp            space_inline.hh
+
+${platform_kind}Prims.hh                  glueDefs.hh
+${platform_kind}Prims.hh                  include_glue.hh
+${platform_kind}Prims.hh                  objVectorOop.hh
+${platform_kind}Prims.hh                  os_includes.hh
+${platform_kind}Prims.hh                  stringOop.hh
+
+aCompiler.cpp                 aCompiler.hh
+aCompiler.cpp                 abstract_interpreter_inline.hh
+aCompiler.cpp                 complexLookup.hh
+aCompiler.cpp                 nmethod_inline.hh
+aCompiler.cpp                 objVectorOop.hh
+aCompiler.cpp                 process.hh
+aCompiler.cpp                 recompile.hh
+aCompiler.cpp                 slotRef.hh
+aCompiler.cpp                 vframe.hh
+
+aCompiler.hh                  allocation.hh
+aCompiler.hh                  nmethod.hh
+aCompiler.hh                  simpleLookup.hh
+aCompiler.hh                  types.hh
+
+aCompiler_${platform_processor}.cpp          aCompiler.hh
+aCompiler_${platform_processor}.cpp          label_inline.hh
+
+aNode.cpp                     aNode.hh
+
+aNode.hh                      blist.hh
+aNode.hh                      slist.hh
+
+abstract_interpreter.cpp      abstract_interpreter_inline.hh
+abstract_interpreter.cpp      blockOop_inline.hh
+abstract_interpreter.cpp      label_inline.hh
+abstract_interpreter.cpp      oop_inline.hh
+abstract_interpreter.cpp      space_inline.hh
+
+abstract_interpreter.hh       byteCodes.hh
+abstract_interpreter.hh       mapOop.hh
+abstract_interpreter.hh       oop.hh
+
+abstract_interpreter_inline.hh abstract_interpreter.hh
+abstract_interpreter_inline.hh codeSlotsMap.hh
+abstract_interpreter_inline.hh debug.hh
+abstract_interpreter_inline.hh oop_inline.hh
+abstract_interpreter_inline.hh stringOop.hh
+
+addrDesc.cpp                  addrDesc.hh
+addrDesc.cpp                  cacheStub_inline.hh
+addrDesc.cpp                  diDesc.hh
+addrDesc.cpp                  error.hh
+addrDesc.cpp                  fields.hh
+addrDesc.cpp                  label_inline.hh
+addrDesc.cpp                  nmethod_inline.hh
+addrDesc.cpp                  prim.hh
+addrDesc.cpp                  runtime.hh
+addrDesc.cpp                  sendDesc.hh
+addrDesc.cpp                  zone.hh
+
+addrDesc.hh                   machineCache.hh
+addrDesc.hh                   machineCache.hh
+addrDesc.hh                   top.hh
+
+addrDesc_${platform_processor}.cpp           addrDesc.hh
+addrDesc_${platform_processor}.cpp           diDesc.hh
+addrDesc_${platform_processor}.cpp           fields.hh
+addrDesc_${platform_processor}.cpp           label_inline.hh
+addrDesc_${platform_processor}.cpp           nmethod.hh
+
+ageTable.cpp                  ageTable.hh
+ageTable.cpp                  generation_inline.hh
+ageTable.cpp                  space_inline.hh
+
+ageTable.hh                   map.hh
+ageTable.hh                   oop_inline.hh
+
+allocZone_${platform_processor}.S            spaceSizeMacros.hh
+allocZone_${platform_processor}.S            no_precompiled_headers
+
+allocation.cpp                allocation.hh
+allocation.cpp                debug.hh
+allocation.cpp                generation_inline.hh
+allocation.cpp                hprofiler.hh
+allocation.cpp                interruptedCtx.hh
+allocation.cpp                monitorHooks.hh
+allocation.cpp                nprofiler.hh
+allocation.cpp                os.hh
+allocation.cpp                process.hh
+allocation.cpp                sig.hh
+allocation.cpp                space_inline.hh
+
+allocation.hh                 debugPrintable.hh
+allocation.hh                 os_includes.hh
+allocation.hh                 top.hh
+
+asm.cpp                       abstract_interpreter_inline.hh
+asm.cpp                       asm_inline.hh
+asm.cpp                       fcompiler.hh
+asm.cpp                       label_inline.hh
+
+asm.hh                        asm_abstract.hh
+asm.hh                        oop_inline.hh
+
+asmDefs.hh                    macros.hh
+
+asmPrims_${platform_processor}.S             asmDefs.hh
+asmPrims_${platform_processor}.S             asmErrorCodes.hh
+
+asm_${platform_processor}.cpp                abstract_interpreter_inline.hh
+asm_${platform_processor}.cpp                asm_inline.hh
+asm_${platform_processor}.cpp                fcompiler.hh
+asm_${platform_processor}.cpp                label_inline.hh
+
+asm_abstract.hh               addrDesc.hh
+asm_abstract.hh               fields.hh
+asm_abstract.hh               label.hh
+
+asm_inline.hh                 addrDesc.hh
+asm_inline.hh                 asm_inline_abstract.hh
+asm_inline.hh                 debug.hh
+asm_inline.hh                 fields.hh
+asm_inline.hh                 label.hh
+asm_inline.hh                 nmethod_inline.hh
+asm_inline.hh                 prim.hh
+asm_inline.hh                 stringOop.hh
+asm_inline.hh                 tracing.hh
+
+asm_inline_abstract.hh        asm.hh
+asm_inline_abstract.hh        fields.hh
+
+asserts.hh                    config.hh
+asserts.hh                    error.hh
+asserts.hh                    macros.hh
+asserts.hh                    types.hh
+
+assignmentMap.cpp             assignmentMap.hh
+assignmentMap.cpp             enumeration.hh
+assignmentMap.cpp             generation_inline.hh
+assignmentMap.cpp             space_inline.hh
+
+assignmentMap.hh              codeLikeSlotsMap.hh
+
+assignmentOop.hh              slotsOop.hh
+
+asyncMalloc.cpp               asyncMalloc.hh
+asyncMalloc.cpp               debug.hh
+
+asyncMalloc.hh                allocation.hh
+asyncMalloc.hh                top.hh
+
+basicBlock.cpp                abstract_interpreter_inline.hh
+basicBlock.cpp                basicBlock_inline.hh
+basicBlock.cpp                bitVector.hh
+basicBlock.cpp                blist.hh
+basicBlock.cpp                debug.hh
+basicBlock.cpp                node.hh
+basicBlock.cpp                nodeGen.hh
+basicBlock.cpp                process.hh
+basicBlock.cpp                regAlloc.hh
+basicBlock.cpp                registerString.hh
+basicBlock.cpp                regs.hh
+basicBlock.cpp                regs.hh
+basicBlock.cpp                sicScope.hh
+
+basicBlock.hh                 aNode.hh
+basicBlock.hh                 blist.hh
+basicBlock.hh                 debug.hh
+basicBlock.hh                 defUse.hh
+basicBlock.hh                 sic.hh
+basicBlock.hh                 slist.hh
+
+basicBlock_inline.hh          basicBlock.hh
+basicBlock_inline.hh          defUse_inline.hh
+
+bitVector.cpp                 bitVector.hh
+
+bitVector.hh                  allocation.hh
+bitVector.hh                  process.hh
+bitVector.hh                  top.hh
+
+bits.hh                       asserts.hh
+
+blist.cpp                     blist.hh
+blist.cpp                     process.hh
+
+blist.hh                      allocation.hh
+blist.hh                      regs.hh
+blist.hh                      top.hh
+
+blockMap.cpp                  allocation.hh
+blockMap.cpp                  blockMap.hh
+blockMap.cpp                  blockOop_inline.hh
+blockMap.cpp                  enumeration.hh
+blockMap.cpp                  frame.hh
+blockMap.cpp                  label_inline.hh
+blockMap.cpp                  mirrorOop.hh
+blockMap.cpp                  slotsOop.hh
+blockMap.cpp                  stringMap.hh
+blockMap.cpp                  vframe.hh
+blockMap.cpp                  vframeOop.hh
+
+blockMap.hh                   blockOop.hh
+blockMap.hh                   os_includes.hh
+blockMap.hh                   slotsMap.hh
+blockMap.hh                   vmStrings.hh
+
+blockOop.cpp                  blockOop_inline.hh
+blockOop.cpp                  frame.hh
+blockOop.cpp                  interpreter.hh
+blockOop.cpp                  interruptedCtx.hh
+blockOop.cpp                  label_inline.hh
+blockOop.cpp                  nlrSupport.hh
+blockOop.cpp                  stack.hh
+blockOop.cpp                  vframe.hh
+
+blockOop.hh                   slotsOop.hh
+
+blockOop_inline.hh            blockMap.hh
+
+branchSet.cpp                 branchSet_inline.hh
+branchSet.cpp                 generation_inline.hh
+branchSet.cpp                 labelSet_inline.hh
+branchSet.cpp                 objVectorOop.hh
+branchSet.cpp                 space_inline.hh
+
+branchSet.hh                  allocation.hh
+branchSet.hh                  oop.hh
+branchSet.hh                  preserve.hh
+
+branchSet_inline.hh           branchSet.hh
+
+byteCodes.cpp                 abstract_interpreter_inline.hh
+byteCodes.cpp                 blockOop_inline.hh
+byteCodes.cpp                 byteCodes.hh
+byteCodes.cpp                 byteCodes.hh
+byteCodes.cpp                 codeSlotsMap.hh
+byteCodes.cpp                 generation_inline.hh
+byteCodes.cpp                 label_inline.hh
+byteCodes.cpp                 oop_inline.hh
+byteCodes.cpp                 slotsOop.hh
+byteCodes.cpp                 space_inline.hh
+byteCodes.cpp                 stringMap.hh
+
+byteCodes.hh                  branchSet.hh
+byteCodes.hh                  byteVectorMap.hh
+byteCodes.hh                  byteVectorOop.hh
+byteCodes.hh                  debug.hh
+byteCodes.hh                  kinds.hh
+byteCodes.hh                  labelSet.hh
+byteCodes.hh                  objVectorMap.hh
+byteCodes.hh                  objVectorOop.hh
+byteCodes.hh                  oop_inline.hh
+byteCodes.hh                  preserve.hh
+byteCodes.hh                  stringMap.hh
+byteCodes.hh                  stringOop.hh
+
+byteVectorMap.cpp             byteVectorMap.hh
+byteVectorMap.cpp             enumeration.hh
+byteVectorMap.cpp             generation_inline.hh
+byteVectorMap.cpp             smiOop.hh
+byteVectorMap.cpp             space_inline.hh
+
+byteVectorMap.hh              byteVectorOop.hh
+byteVectorMap.hh              slotsMapDeps.hh
+
+byteVectorOop.cpp             ageTable.hh
+byteVectorOop.cpp             byteVectorMap.hh
+byteVectorOop.cpp             byteVectorOop.hh
+byteVectorOop.cpp             debug.hh
+byteVectorOop.cpp             expr.hh
+byteVectorOop.cpp             files.hh
+byteVectorOop.cpp             glueSupport.hh
+byteVectorOop.cpp             interruptedCtx.hh
+byteVectorOop.cpp             label_inline.hh
+byteVectorOop.cpp             mirrorOop.hh
+byteVectorOop.cpp             miscPrims.hh
+byteVectorOop.cpp             nlrSupport.hh
+byteVectorOop.cpp             os_includes.hh
+byteVectorOop.cpp             parser.hh
+byteVectorOop.cpp             positionTable.hh
+byteVectorOop.cpp             runtime.hh
+byteVectorOop.cpp             scanner.hh
+byteVectorOop.cpp             shell.hh
+byteVectorOop.cpp             space_inline.hh
+byteVectorOop.cpp             stringMap.hh
+byteVectorOop.cpp             stringOop.hh
+byteVectorOop.cpp             util.hh
+byteVectorOop.cpp             vmStrings.hh
+
+byteVectorOop.hh              slotsOop.hh
+byteVectorOop.hh              smiOop.hh
+
+cacheStub.cpp                 allocation.hh
+cacheStub.cpp                 asm_inline.hh
+cacheStub.cpp                 blist.hh
+cacheStub.cpp                 cacheStub_inline.hh
+cacheStub.cpp                 countStub.hh
+cacheStub.cpp                 label_inline.hh
+cacheStub.cpp                 monitor.hh
+cacheStub.cpp                 nmethod_inline.hh
+cacheStub.cpp                 sendDesc.hh
+cacheStub.cpp                 zone.hh
+cacheStub.cpp                 zoneHeap.hh
+
+cacheStub.hh                  addrDesc.hh
+cacheStub.hh                  asm.hh
+cacheStub.hh                  ncode.hh
+cacheStub.hh                  nmln.hh
+cacheStub.hh                  zoneHeap.hh
+
+cacheStub_${platform_processor}.cpp          asm_inline.hh
+cacheStub_${platform_processor}.cpp          cacheStub_inline.hh
+cacheStub_${platform_processor}.cpp          label_inline.hh
+cacheStub_${platform_processor}.cpp          nmethod_inline.hh
+cacheStub_${platform_processor}.cpp          sendDesc.hh
+
+cacheStub_inline.hh           asm_inline.hh
+cacheStub_inline.hh           cacheStub.hh
+
+callgraph.cpp                 abstract_interpreter_inline.hh
+callgraph.cpp                 blockOop_inline.hh
+callgraph.cpp                 callgraph.hh
+callgraph.cpp                 codeSlotsMap.hh
+callgraph.cpp                 generation_inline.hh
+callgraph.cpp                 label_inline.hh
+callgraph.cpp                 objVectorOop.hh
+callgraph.cpp                 oop_inline.hh
+callgraph.cpp                 print.hh
+callgraph.cpp                 scopeDesc.hh
+callgraph.cpp                 space_inline.hh
+
+callgraph.hh                  allocation.hh
+callgraph.hh                  nprofiler.hh
+callgraph.hh                  oop_inline.hh
+callgraph.hh                  timer.hh
+
+clist.cpp                     clist.hh
+clist.cpp                     generation_inline.hh
+clist.cpp                     space_inline.hh
+
+clist.hh                      allocation.hh
+clist.hh                      oop_inline.hh
+clist.hh                      top.hh
+
+codeGen.cpp                   codeGen_inline_${platform_processor}.hh
+codeGen.cpp                   label_inline.hh
+codeGen.cpp                   scopeDescRecorder.hh
+
+codeGen.hh                    asm_inline.hh
+codeGen.hh                    fscope.hh
+codeGen.hh                    simpleLookup_inline.hh
+codeGen.hh                    types.hh
+
+codeGen_${platform_processor}.cpp            asm_inline.hh
+codeGen_${platform_processor}.cpp            blockOop_inline.hh
+codeGen_${platform_processor}.cpp            byteVectorOop.hh
+codeGen_${platform_processor}.cpp            codeGen_inline_${platform_processor}.hh
+codeGen_${platform_processor}.cpp            complexLookup.hh
+codeGen_${platform_processor}.cpp            error.hh
+codeGen_${platform_processor}.cpp            fcompiler.hh
+codeGen_${platform_processor}.cpp            fields.hh
+codeGen_${platform_processor}.cpp            frame_format.hh
+codeGen_${platform_processor}.cpp            interruptedCtx.hh
+codeGen_${platform_processor}.cpp            label_inline.hh
+codeGen_${platform_processor}.cpp            nlrSupport.hh
+codeGen_${platform_processor}.cpp            nmethod_inline.hh
+codeGen_${platform_processor}.cpp            objVectorMap.hh
+codeGen_${platform_processor}.cpp            os_includes.hh
+codeGen_${platform_processor}.cpp            prim.hh
+codeGen_${platform_processor}.cpp            process.hh
+codeGen_${platform_processor}.cpp            recompile.hh
+codeGen_${platform_processor}.cpp            registerState.hh
+codeGen_${platform_processor}.cpp            runtime.hh
+codeGen_${platform_processor}.cpp            slotRef.hh
+codeGen_${platform_processor}.cpp            stack.hh
+codeGen_${platform_processor}.cpp            universe.hh
+codeGen_${platform_processor}.cpp            vframe.hh
+codeGen_${platform_processor}.cpp            vmStrings.hh
+
+codeGen_inline_${platform_processor}.hh      codeGen.hh
+
+codeLikeSlotsMap.cpp          blockMap.hh
+codeLikeSlotsMap.cpp          blockOop.hh
+codeLikeSlotsMap.cpp          blockOop_inline.hh
+codeLikeSlotsMap.cpp          byteCodes.hh
+codeLikeSlotsMap.cpp          codeLikeSlotsMap.hh
+codeLikeSlotsMap.cpp          enumeration.hh
+codeLikeSlotsMap.cpp          generation_inline.hh
+codeLikeSlotsMap.cpp          os_includes.hh
+codeLikeSlotsMap.cpp          scanner.hh
+codeLikeSlotsMap.cpp          space_inline.hh
+codeLikeSlotsMap.cpp          vmStrings.hh
+
+codeLikeSlotsMap.hh           errorCodes.hh
+codeLikeSlotsMap.hh           slotsMapDeps.hh
+
+codeSlotsMap.cpp              abstract_interpreter_inline.hh
+codeSlotsMap.cpp              blockMap.hh
+codeSlotsMap.cpp              blockOop.hh
+codeSlotsMap.cpp              blockOop_inline.hh
+codeSlotsMap.cpp              byteCodes.hh
+codeSlotsMap.cpp              codeSlotsMap.hh
+codeSlotsMap.cpp              enumeration.hh
+codeSlotsMap.cpp              generation_inline.hh
+codeSlotsMap.cpp              label_inline.hh
+codeSlotsMap.cpp              os_includes.hh
+codeSlotsMap.cpp              scanner.hh
+codeSlotsMap.cpp              space_inline.hh
+codeSlotsMap.cpp              stacking_interpreter.hh
+codeSlotsMap.cpp              vmStrings.hh
+
+codeSlotsMap.hh               abstract_interpreter.hh
+codeSlotsMap.hh               byteCodes.hh
+codeSlotsMap.hh               byteVectorOop.hh
+codeSlotsMap.hh               clist.hh
+codeSlotsMap.hh               errorCodes.hh
+codeSlotsMap.hh               kinds.hh
+codeSlotsMap.hh               label.hh
+codeSlotsMap.hh               mirrorOop.hh
+codeSlotsMap.hh               objVectorOop.hh
+codeSlotsMap.hh               scanner.hh
+codeSlotsMap.hh               slotsMap.hh
+codeSlotsMap.hh               slotsOop.hh
+
+codeTable.cpp                 abstract_interpreter_inline.hh
+codeTable.cpp                 codeTable.hh
+codeTable.cpp                 key.hh
+codeTable.cpp                 label_inline.hh
+codeTable.cpp                 nmethod_inline.hh
+codeTable.cpp                 simpleLookup_inline.hh
+codeTable.cpp                 zone.hh
+
+codeTable.hh                  allocation.hh
+codeTable.hh                  key.hh
+codeTable.hh                  nmln.hh
+
+complexLookup.cpp             abstract_interpreter_inline.hh
+complexLookup.cpp             codeTable.hh
+complexLookup.cpp             complexLookup.hh
+complexLookup.cpp             fcompiler.hh
+complexLookup.cpp             inlining.hh
+complexLookup.cpp             nprofiler.hh
+complexLookup.cpp             print.hh
+complexLookup.cpp             recompile.hh
+complexLookup.cpp             sicExpr.hh
+complexLookup.cpp             sicScope.hh
+complexLookup.cpp             vframe.hh
+
+complexLookup.hh              simpleLookup_inline.hh
+
+conversion.cpp                allocation.hh
+conversion.cpp                blockOop_inline.hh
+conversion.cpp                codeSlotsMap.hh
+conversion.cpp                codeTable.hh
+conversion.cpp                complexLookup.hh
+conversion.cpp                conversion.hh
+conversion.cpp                debug.hh
+conversion.cpp                fcompiler.hh
+conversion.cpp                frame.hh
+conversion.cpp                interpreter.hh
+conversion.cpp                label_inline.hh
+conversion.cpp                nlrSupport.hh
+conversion.cpp                nmethod_inline.hh
+conversion.cpp                prim.hh
+conversion.cpp                process.hh
+conversion.cpp                registerLocator.hh
+conversion.cpp                slotRef.hh
+conversion.cpp                space_inline.hh
+conversion.cpp                stack.hh
+conversion.cpp                table.hh
+conversion.cpp                uncommonBranch.hh
+conversion.cpp                vframe.hh
+conversion.cpp                vframeOop.hh
+
+conversion.hh                 allocation.hh
+conversion.hh                 types.hh
+
+conversion_${platform_processor}.cpp         conversion.hh
+conversion_${platform_processor}.cpp         label_inline.hh
+conversion_${platform_processor}.cpp         registerLocator.hh
+conversion_${platform_processor}.cpp         vframe.hh
+
+countPattern.cpp              countPattern.hh
+
+countPattern.hh               allocation.hh
+countPattern.hh               kinds.hh
+
+countPattern_${platform_processor}.cpp       asm_inline.hh
+countPattern_${platform_processor}.cpp       countPattern.hh
+countPattern_${platform_processor}.cpp       fields.hh
+countPattern_${platform_processor}.cpp       label_inline.hh
+countPattern_${platform_processor}.cpp       regs.hh
+countPattern_${platform_processor}.cpp       zone.hh
+
+countStub.cpp                 abstract_interpreter_inline.hh
+countStub.cpp                 asm_inline.hh
+countStub.cpp                 cacheStub_inline.hh
+countStub.cpp                 countPattern.hh
+countStub.cpp                 countStub.hh
+countStub.cpp                 fields.hh
+countStub.cpp                 nmethod_inline.hh
+countStub.cpp                 recompile.hh
+countStub.cpp                 regs.hh
+countStub.cpp                 sendDesc.hh
+countStub.cpp                 zone.hh
+
+countStub.hh                  blist.hh
+countStub.hh                  cacheStub.hh
+countStub.hh                  countPattern.hh
+countStub.hh                  kinds.hh
+countStub.hh                  ncode.hh
+
+countStub_${platform_processor}.cpp          abstract_interpreter_inline.hh
+countStub_${platform_processor}.cpp          countStub.hh
+countStub_${platform_processor}.cpp          nmethod.hh
+countStub_${platform_processor}.cpp          recompile.hh
+countStub_${platform_processor}.cpp          zone.hh
+
+deadBlockNode_${platform_processor}.cpp      abstract_interpreter_inline.hh
+deadBlockNode_${platform_processor}.cpp      nlrSupport.hh
+deadBlockNode_${platform_processor}.cpp      node.hh
+deadBlockNode_${platform_processor}.cpp      prim.hh
+
+debug.cpp                     abstract_interpreter_inline.hh
+debug.cpp                     debug.hh
+debug.cpp                     fprofiler.hh
+debug.cpp                     hprofiler.hh
+debug.cpp                     interruptedCtx.hh
+debug.cpp                     itimer.hh
+debug.cpp                     label_inline.hh
+debug.cpp                     map.hh
+debug.cpp                     monitor.hh
+debug.cpp                     sic.hh
+debug.cpp                     sig.hh
+debug.cpp                     signalBlocker.hh
+debug.cpp                     space_inline.hh
+
+debug.hh                      eventlog.hh
+debug.hh                      top.hh
+
+debugPrintable.cpp            debugPrintable.hh
+debugPrintable.cpp            generation_inline.hh
+debugPrintable.cpp            oop_inline.hh
+debugPrintable.cpp            print.hh
+debugPrintable.cpp            regs.hh
+debugPrintable.cpp            space_inline.hh
+
+debugPrintable.hh             types.hh
+
+defUse.cpp                    abstract_interpreter_inline.hh
+defUse.cpp                    debug.hh
+defUse.cpp                    defUse_inline.hh
+defUse.cpp                    markOop.hh
+defUse.cpp                    node.hh
+defUse.cpp                    sicScope.hh
+
+defUse.hh                     allocation.hh
+defUse.hh                     blist.hh
+defUse.hh                     slist.hh
+defUse.hh                     top.hh
+
+defUse_inline.hh              basicBlock.hh
+defUse_inline.hh              defUse.hh
+
+deps.cpp                      deps.hh
+deps.cpp                      generation_inline.hh
+deps.cpp                      space_inline.hh
+
+deps.hh                       slotsMapDeps.hh
+
+diDesc.cpp                    abstract_interpreter_inline.hh
+diDesc.cpp                    complexLookup.hh
+diDesc.cpp                    diDesc.hh
+diDesc.cpp                    fields.hh
+diDesc.cpp                    label_inline.hh
+diDesc.cpp                    nmethod.hh
+diDesc.cpp                    nmln.hh
+diDesc.cpp                    process.hh
+diDesc.cpp                    selfMonitor.hh
+diDesc.cpp                    sendDesc.hh
+diDesc.cpp                    trapdoors.hh
+diDesc.cpp                    vframe.hh
+
+diDesc.hh                     machineCache.hh
+diDesc.hh                     runtime.hh
+
+diDesc_${platform_processor}.cpp             diDesc.hh
+diDesc_${platform_processor}.cpp             fields.hh
+
+disasm.cpp                    disasm.hh
+
+disasm.hh                     top.hh
+
+disasm_${platform_processor}.cpp             abstract_interpreter_inline.hh
+disasm_${platform_processor}.cpp             blockOop_inline.hh
+disasm_${platform_processor}.cpp             cacheStub_inline.hh
+disasm_${platform_processor}.cpp             codeSlotsMap.hh
+disasm_${platform_processor}.cpp             countStub.hh
+disasm_${platform_processor}.cpp             disasm.hh
+disasm_${platform_processor}.cpp             fields.hh
+disasm_${platform_processor}.cpp             frame_format.hh
+disasm_${platform_processor}.cpp             label_inline.hh
+disasm_${platform_processor}.cpp             nmethod_inline.hh
+disasm_${platform_processor}.cpp             oop_inline.hh
+disasm_${platform_processor}.cpp             pcDesc.hh
+disasm_${platform_processor}.cpp             prim.hh
+disasm_${platform_processor}.cpp             scopeDesc.hh
+disasm_${platform_processor}.cpp             sendDesc.hh
+
+dynLink.cpp                   allocation.hh
+dynLink.cpp                   dynLink.hh
+dynLink.cpp                   fctProxyOop.hh
+dynLink.cpp                   generation_inline.hh
+dynLink.cpp                   glueSupport.hh
+dynLink.cpp                   macros.hh
+dynLink.cpp                   os_includes.hh
+dynLink.cpp                   space_inline.hh
+dynLink.cpp                   vmStrings.hh
+
+dynLink.hh                    oop_inline.hh
+dynLink.hh                    top.hh
+
+enum_${platform_processor}.S                 asmDefs.hh
+
+enumeration.cpp               allocation.hh
+enumeration.cpp               byteVectorOop.hh
+enumeration.cpp               enumeration.hh
+enumeration.cpp               errorCodes.hh
+enumeration.cpp               label_inline.hh
+enumeration.cpp               mirrorOop.hh
+enumeration.cpp               objVectorOop.hh
+enumeration.cpp               vframeOop.hh
+enumeration.cpp               vmStrings.hh
+
+enumeration.hh                oop_inline.hh
+enumeration.hh                preserve.hh
+enumeration.hh                top.hh
+
+error.hh                      config.hh
+error.hh                      lprintf.hh
+
+errorCodes.cpp                allocation.hh
+errorCodes.cpp                asmErrorCodes.hh
+errorCodes.cpp                errorCodes.hh
+errorCodes.cpp                generation_inline.hh
+errorCodes.cpp                macros.hh
+errorCodes.cpp                markOop.hh
+errorCodes.cpp                space_inline.hh
+errorCodes.cpp                stringMap.hh
+errorCodes.cpp                types.hh
+errorCodes.cpp                vmStrings.hh
+
+errorCodes.hh                 types.hh
+errorCodes.hh                 vmStrings.hh
+
+errorCodes_${platform_kind}.cpp           errorCodes.hh
+// errorCodes_${platform_kind}.cpp           no_precompiled_headers
+
+eventlog.cpp                  allocation.hh
+eventlog.cpp                  debug.hh
+eventlog.cpp                  eventlog.hh
+eventlog.cpp                  generation_inline.hh
+eventlog.cpp                  smiOop.hh
+eventlog.cpp                  space_inline.hh
+eventlog.cpp                  stringOop.hh
+eventlog.cpp                  vmStrings.hh
+
+eventlog.hh                   allocation.hh
+eventlog.hh                   top.hh
+
+exec.cpp                      allocation.hh
+exec.cpp                      codeTable.hh
+exec.cpp                      exec.hh
+exec.cpp                      fcompiler.hh
+
+exec.hh                       simpleLookup_inline.hh
+
+expr.cpp                      allocation.hh
+expr.cpp                      blockMap.hh
+expr.cpp                      codeSlotsMap.hh
+expr.cpp                      debug.hh
+expr.cpp                      expr.hh
+expr.cpp                      interpreter.hh
+expr.cpp                      label_inline.hh
+expr.cpp                      nlrSupport.hh
+expr.cpp                      nmethod_inline.hh
+expr.cpp                      parser.hh
+expr.cpp                      process.hh
+expr.cpp                      runtime.hh
+expr.cpp                      scanner.hh
+expr.cpp                      send.hh
+expr.cpp                      shell.hh
+expr.cpp                      simpleLookup_inline.hh
+expr.cpp                      slot.hh
+expr.cpp                      stack.hh
+expr.cpp                      vmStrings.hh
+
+expr.hh                       floatMap.hh
+expr.hh                       floatOop.hh
+expr.hh                       positionTable.hh
+expr.hh                       str.hh
+expr.hh                       stringMap.hh
+
+fcompiler.cpp                 codeGen.hh
+fcompiler.cpp                 codeGen_inline_${platform_processor}.hh
+fcompiler.cpp                 complexLookup.hh
+fcompiler.cpp                 fcompiler.hh
+fcompiler.cpp                 fscope.hh
+fcompiler.cpp                 itimer.hh
+fcompiler.cpp                 print.hh
+fcompiler.cpp                 registerState.hh
+fcompiler.cpp                 regs.hh
+fcompiler.cpp                 scopeDescRecorder.hh
+fcompiler.cpp                 selfMonitor.hh
+fcompiler.cpp                 slotRef.hh
+fcompiler.cpp                 timer.hh
+
+fcompiler.hh                  aCompiler.hh
+fcompiler.hh                  simpleLookup_inline.hh
+
+fcompiler_${platform_processor}.cpp          codeGen.hh
+fcompiler_${platform_processor}.cpp          fcompiler.hh
+
+fctProxyMap.cpp               byteVectorOop.hh
+fctProxyMap.cpp               fctProxyMap.hh
+fctProxyMap.cpp               fctProxyOop.hh
+fctProxyMap.cpp               generation_inline.hh
+fctProxyMap.cpp               space_inline.hh
+
+fctProxyMap.hh                fctProxyOop.hh
+fctProxyMap.hh                proxyMap.hh
+
+fctProxyOop.cpp               allocation.hh
+fctProxyOop.cpp               byteVectorOop.hh
+fctProxyOop.cpp               errorCodes.hh
+fctProxyOop.cpp               fctProxyOop.hh
+fctProxyOop.cpp               generation_inline.hh
+fctProxyOop.cpp               glueSupport.hh
+fctProxyOop.cpp               space_inline.hh
+fctProxyOop.cpp               stringMap.hh
+fctProxyOop.cpp               stringOop.hh
+fctProxyOop.cpp               vmStrings.hh
+
+fctProxyOop.hh                proxyOop.hh
+fctProxyOop.hh                stringMap.hh
+
+fields.cpp                    fields.hh
+
+fields.hh                     machineCache.hh
+fields.hh                     regs.hh
+fields.hh                     top.hh
+
+fields_${platform_processor}.cpp             fields.hh
+fields_${platform_processor}.cpp             label_inline.hh
+fields_${platform_processor}.cpp             space_inline.hh
+fields_${platform_processor}.cpp             zone.hh
+
+files.cpp                     debug.hh
+files.cpp                     files.hh
+files.cpp                     os_includes.hh
+files.cpp                     stringUtil.hh
+
+files.hh                      debug.hh
+files.hh                      top.hh
+
+floatMap.cpp                  enumeration.hh
+floatMap.cpp                  floatMap.hh
+floatMap.cpp                  generation_inline.hh
+floatMap.cpp                  space_inline.hh
+floatMap.cpp                  vmStrings.hh
+
+floatMap.hh                   floatOop.hh
+floatMap.hh                   immediateMap.hh
+
+floatOop.cpp                  errorCodes.hh
+floatOop.cpp                  floatMap.hh
+floatOop.cpp                  floatOop.hh
+floatOop.cpp                  generation_inline.hh
+floatOop.cpp                  glueSupport.hh
+floatOop.cpp                  os_includes.hh
+floatOop.cpp                  space_inline.hh
+floatOop.cpp                  stringMap.hh
+floatOop.cpp                  vmStrings.hh
+
+floatOop.hh                   oop.hh
+floatOop.hh                   universe.hh
+
+foreignMap.hh                 foreignOop.hh
+foreignMap.hh                 slotsMapDeps.hh
+
+foreignOop.cpp                foreignOop.hh
+foreignOop.cpp                generation_inline.hh
+foreignOop.cpp                space_inline.hh
+
+foreignOop.hh                 slotsOop.hh
+
+fprofiler.cpp                 abstract_interpreter_inline.hh
+fprofiler.cpp                 allocation.hh
+fprofiler.cpp                 blockOop_inline.hh
+fprofiler.cpp                 cacheStub_inline.hh
+fprofiler.cpp                 codeSlotsMap.hh
+fprofiler.cpp                 fprofiler.hh
+fprofiler.cpp                 label_inline.hh
+fprofiler.cpp                 oop_inline.hh
+fprofiler.cpp                 os_includes.hh
+fprofiler.cpp                 universe.hh
+fprofiler.cpp                 vmStrings.hh
+fprofiler.cpp                 zone.hh
+
+fprofiler.hh                  nmethod_inline.hh
+
+frame.cpp                     frame_inline.hh
+frame.cpp                     frame_iterator.hh
+frame.cpp                     oopClosures.hh
+frame.cpp                     registerLocator.hh
+frame.cpp                     space_inline.hh
+
+frame.hh                      debug.hh
+frame.hh                      framePieces.hh
+frame.hh                      frame_format.hh
+frame.hh                      process.hh
+frame.hh                      regs.hh
+frame.hh                      runtime.hh
+frame.hh                      stack.hh
+frame.hh                      types.hh
+frame.hh                      universe_inline.hh
+frame.hh                      zone.hh
+
+framePieces.cpp               framePieces_inline.hh
+framePieces.cpp               label_inline.hh
+
+framePieces.hh                frame_format.hh
+framePieces.hh                space_inline.hh
+framePieces.hh                top.hh
+
+framePieces_${platform_processor}.cpp        framePieces_inline.hh
+framePieces_${platform_processor}.cpp        label_inline.hh
+
+framePieces_inline.hh         frame.hh
+framePieces_inline.hh         framePieces.hh
+
+frame_${platform_processor}.cpp              frame_inline.hh
+frame_${platform_processor}.cpp              oopClosures.hh
+frame_${platform_processor}.cpp              registerLocator.hh
+
+frame_format.cpp              frame_format.hh
+
+frame_format.hh               asm_abstract.hh
+frame_format.hh               regs.hh
+
+frame_format_${platform_processor}.cpp       frame_format.hh
+frame_format_${platform_processor}.cpp       label_inline.hh
+frame_format_${platform_processor}.cpp       nmethod.hh
+
+frame_inline.hh               allocation.hh
+frame_inline.hh               blockOop_inline.hh
+frame_inline.hh               cacheStub_inline.hh
+frame_inline.hh               conversion.hh
+frame_inline.hh               fields.hh
+frame_inline.hh               frame.hh
+frame_inline.hh               interpreter.hh
+frame_inline.hh               nmethod_inline.hh
+frame_inline.hh               prim.hh
+frame_inline.hh               print.hh
+frame_inline.hh               recompile.hh
+frame_inline.hh               simpleLookup_inline.hh
+frame_inline.hh               vframe.hh
+
+frame_iterator.cpp            frame_iterator.hh
+frame_iterator.cpp            interpreter.hh
+frame_iterator.cpp            label_inline.hh
+frame_iterator.cpp            oopClosures.hh
+frame_iterator.cpp            space_inline.hh
+
+frame_iterator.hh             frame.hh
+
+frame_iterator_${platform_processor}.cpp     frame_iterator.hh
+frame_iterator_${platform_processor}.cpp     label_inline.hh
+frame_iterator_${platform_processor}.cpp     nmethod.hh
+frame_iterator_${platform_processor}.cpp     oopClosures.hh
+frame_iterator_${platform_processor}.cpp     registerLocator.hh
+
+fscope.cpp                    abstract_interpreter_inline.hh
+fscope.cpp                    allocation.hh
+fscope.cpp                    byteCodes.hh
+fscope.cpp                    byteVectorOop.hh
+fscope.cpp                    codeGen.hh
+fscope.cpp                    codeGen_inline_${platform_processor}.hh
+fscope.cpp                    codeSlotsMap.hh
+fscope.cpp                    fcompiler.hh
+fscope.cpp                    fscope.hh
+fscope.cpp                    label_inline.hh
+fscope.cpp                    prim.hh
+fscope.cpp                    registerState.hh
+fscope.cpp                    registerString.hh
+fscope.cpp                    scopeDescRecorder.hh
+fscope.cpp                    vframe.hh
+
+fscope.hh                     abstract_interpreter_inline.hh
+fscope.hh                     blist.hh
+fscope.hh                     clist.hh
+fscope.hh                     label_inline.hh
+fscope.hh                     types.hh
+fscope.hh                     vframe.hh
+
+genHelper.cpp                 abstract_interpreter_inline.hh
+genHelper.cpp                 allocation.hh
+genHelper.cpp                 basicBlock_inline.hh
+genHelper.cpp                 frame_format.hh
+genHelper.cpp                 genHelper.hh
+genHelper.cpp                 label_inline.hh
+genHelper.cpp                 preg.hh
+genHelper.cpp                 regs.hh
+
+genHelper.hh                  target.hh
+genHelper.hh                  top.hh
+
+genHelper_${platform_processor}.cpp          abstract_interpreter_inline.hh
+genHelper_${platform_processor}.cpp          asm_inline.hh
+genHelper_${platform_processor}.cpp          genHelper.hh
+genHelper_${platform_processor}.cpp          preg.hh
+genHelper_${platform_processor}.cpp          recompile.hh
+genHelper_${platform_processor}.cpp          sic.hh
+genHelper_${platform_processor}.cpp          slotRef.hh
+genHelper_${platform_processor}.cpp          target.hh
+
+generate_platform_dependent_include aCompiler.hh aCompiler_pd.hh aCompiler_${platform_processor}.hh
+generate_platform_dependent_include addrDesc.hh addrDesc_pd.hh addrDesc_${platform_processor}.hh
+generate_platform_dependent_include asm.hh asm_pd.hh asm_${platform_processor}.hh
+generate_platform_dependent_include asmDefs.hh asmDefs_pd.hh asmDefs_${platform_processor}.hh
+generate_platform_dependent_include asm_inline.hh asm_inline_pd.hh asm_inline_${platform_processor}.hh
+generate_platform_dependent_include cacheStub.hh cacheStub_pd.hh cacheStub_${platform_processor}.hh
+generate_platform_dependent_include cacheStub_inline.hh cacheStub_inline_pd.hh cacheStub_inline_${platform_processor}.hh
+generate_platform_dependent_include codeGen.hh codeGen_pd.hh codeGen_${platform_processor}.hh
+generate_platform_dependent_include config.hh config_pd.hh config_${platform_kind}.hh
+generate_platform_dependent_include conversion.hh conversion_pd.hh conversion_${platform_processor}.hh
+generate_platform_dependent_include countPattern.hh countPattern_pd.hh countPattern_${platform_processor}.hh
+generate_platform_dependent_include countStub.hh countStub_pd.hh countStub_${platform_processor}.hh
+generate_platform_dependent_include diDesc.hh diDesc_pd.hh diDesc_${platform_processor}.hh
+generate_platform_dependent_include disasm.hh disasm_pd.hh disasm_${platform_processor}.hh
+generate_platform_dependent_include fcompiler.hh fcompiler_pd.hh fcompiler_${platform_processor}.hh
+generate_platform_dependent_include fields.hh fields_pd.hh fields_${platform_processor}.hh
+generate_platform_dependent_include frame.hh frame_pd.hh frame_${platform_processor}.hh
+generate_platform_dependent_include framePieces.hh framePieces_pd.hh framePieces_${platform_processor}.hh
+generate_platform_dependent_include frame_format.hh frame_format_pd.hh frame_format_${platform_processor}.hh
+generate_platform_dependent_include frame_iterator.hh frame_iterator_pd.hh frame_iterator_${platform_processor}.hh
+generate_platform_dependent_include genHelper.hh genHelper_pd.hh genHelper_${platform_processor}.hh
+generate_platform_dependent_include include_glue.hh include_glue_pd.hh include_glue_${platform_kind}.hh
+generate_platform_dependent_include interruptedCtx.hh interruptedCtx_pd.hh interruptedCtx_${platform_processor}.hh
+generate_platform_dependent_include itimer.hh itimer_pd.hh itimer_${platform_kind}.hh
+generate_platform_dependent_include longRegString.hh longRegString_pd.hh longRegString_${platform_processor}.hh
+generate_platform_dependent_include machineCache.hh machineCache_pd.hh machineCache_${platform_kind}.hh
+generate_platform_dependent_include nmethod.hh nmethod_pd.hh nmethod_${platform_processor}.hh
+generate_platform_dependent_include node.hh basicNode_pd.hh basicNode_${platform_processor}.hh
+generate_platform_dependent_include node.hh deadBlockNode_pd.hh deadBlockNode_${platform_processor}.hh
+generate_platform_dependent_include node.hh prologueNode_pd.hh prologueNode_${platform_processor}.hh
+generate_platform_dependent_include os.hh os_pd.hh os_${platform_kind}.hh
+generate_platform_dependent_include os_includes.hh os_includes_pd.hh os_includes_${platform_kind}.hh
+generate_platform_dependent_include prim_table_arch.hh prim_table_arch_pd.hh prim_table_arch_${platform_processor}.hh
+generate_platform_dependent_include prim_table_os.hh prim_table_os_pd.hh prim_table_os_${platform_kind}.hh
+generate_platform_dependent_include registerLocator.hh registerLocator_pd.hh registerLocator_${platform_processor}.hh
+generate_platform_dependent_include registerState.hh registerState_pd.hh registerState_${platform_processor}.hh
+generate_platform_dependent_include registerString.hh registerString_pd.hh registerString_${platform_processor}.hh
+generate_platform_dependent_include regs.hh regs_pd.hh regs_${platform_processor}.hh
+generate_platform_dependent_include runtime.hh runtime_pd.hh runtime_${platform_processor}.hh
+generate_platform_dependent_include search.hh search_pd.hh search_${platform_processor}.hh
+generate_platform_dependent_include sendDesc.hh sendDesc_pd.hh sendDesc_${platform_processor}.hh
+generate_platform_dependent_include sic.hh sic_pd.hh sic_${platform_processor}.hh
+generate_platform_dependent_include sig.hh sig_pd.hh sig_${platform_kind}.hh
+generate_platform_dependent_include signalBlocker.hh signalBlocker_pd.hh signalBlocker_${platform_kind}.hh
+generate_platform_dependent_include timer.hh timer_pd.hh timer_${platform_kind}.hh
+generate_platform_dependent_include trapdoors.hh trapdoors_pd.hh trapdoors_${platform_processor}.hh
+
+generation.cpp                generation.hh
+generation.cpp                generation_inline.hh
+generation.cpp                glueSupport.hh
+generation.cpp                interruptedCtx.hh
+generation.cpp                monitorHooks.hh
+generation.cpp                oop.hh
+generation.cpp                slotsMapDeps.hh
+generation.cpp                space_inline.hh
+generation.cpp                universe.hh
+
+generation.hh                 allocation.hh
+generation.hh                 process.hh
+generation.hh                 space.hh
+
+generation_inline.hh          generation.hh
+generation_inline.hh          oop_inline.hh
+
+glue.cpp                      ${platform_kind}Prims.hh
+glue.cpp                      abstract_interpreter_inline.hh
+glue.cpp                      byteCodes.hh
+glue.cpp                      fctProxyOop.hh
+glue.cpp                      fprofiler.hh
+glue.cpp                      glue.hh
+glue.cpp                      hprofiler.hh
+glue.cpp                      itimer.hh
+glue.cpp                      mirrorOop.hh
+glue.cpp                      miscPrims.hh
+glue.cpp                      processOop.hh
+glue.cpp                      profilerOop.hh
+glue.cpp                      recompile.hh
+glue.cpp                      sic.hh
+
+glue.hh                       dynLink.hh
+glue.hh                       glueDefs.hh
+
+glueCheckSum.cpp              top.hh
+
+glueDefs.cpp                  generation_inline.hh
+glueDefs.cpp                  glueDefs.hh
+glueDefs.cpp                  space_inline.hh
+
+glueDefs.hh                   allocation.hh
+glueDefs.hh                   byteVectorOop.hh
+glueDefs.hh                   errorCodes.hh
+glueDefs.hh                   floatOop.hh
+glueDefs.hh                   glueSupport.hh
+glueDefs.hh                   interruptedCtx.hh
+glueDefs.hh                   macros.hh
+glueDefs.hh                   objVectorOop.hh
+glueDefs.hh                   os_includes.hh
+glueDefs.hh                   proxyOop.hh
+glueDefs.hh                   signalBlocker.hh
+glueDefs.hh                   smiOop.hh
+glueDefs.hh                   stringMap.hh
+glueDefs.hh                   universe.hh
+
+glueImpl.hh                   allocation.hh
+glueImpl.hh                   byteVectorOop.hh
+glueImpl.hh                   errorCodes.hh
+glueImpl.hh                   floatOop.hh
+glueImpl.hh                   macros.hh
+glueImpl.hh                   os_includes.hh
+glueImpl.hh                   proxyOop.hh
+glueImpl.hh                   smiOop.hh
+glueImpl.hh                   stringMap.hh
+glueImpl.hh                   universe.hh
+
+glueSupport.cpp               errorCodes.hh
+glueSupport.cpp               generation_inline.hh
+glueSupport.cpp               glueDefs.hh
+glueSupport.cpp               glueSupport.hh
+glueSupport.cpp               space_inline.hh
+
+glueSupport.hh                types.hh
+glueSupport.hh                vmStrings.hh
+
+hprofiler.cpp                 abstract_interpreter_inline.hh
+hprofiler.cpp                 allocation.hh
+hprofiler.cpp                 asyncMalloc.hh
+hprofiler.cpp                 fcompiler.hh
+hprofiler.cpp                 frame.hh
+hprofiler.cpp                 hprofiler.hh
+hprofiler.cpp                 interruptedCtx.hh
+hprofiler.cpp                 itimer.hh
+hprofiler.cpp                 label_inline.hh
+hprofiler.cpp                 nmethod_inline.hh
+hprofiler.cpp                 print.hh
+hprofiler.cpp                 processOop.hh
+hprofiler.cpp                 selfMonitor.hh
+hprofiler.cpp                 sic.hh
+hprofiler.cpp                 space_inline.hh
+hprofiler.cpp                 universe.hh
+hprofiler.cpp                 zone.hh
+
+hprofiler.hh                  top.hh
+
+immediateMap.cpp              enumeration.hh
+immediateMap.cpp              generation_inline.hh
+immediateMap.cpp              immediateMap.hh
+immediateMap.cpp              space_inline.hh
+immediateMap.cpp              vmStrings.hh
+
+immediateMap.hh               map.hh
+
+init.cpp                      errorCodes.hh
+init.cpp                      init.hh
+init.cpp                      itimer.hh
+init.cpp                      label_inline.hh
+init.cpp                      os.hh
+init.cpp                      sendDesc.hh
+init.cpp                      slotIterator.hh
+init.cpp                      space_inline.hh
+
+init.hh                       top.hh
+
+inlining.cpp                  abstract_interpreter_inline.hh
+inlining.cpp                  blist.hh
+inlining.cpp                  blockOop_inline.hh
+inlining.cpp                  codeSlotsMap.hh
+inlining.cpp                  inlining.hh
+inlining.cpp                  sicScope.hh
+
+inlining.hh                   types.hh
+
+interpreter.cpp               abstract_interpreter_inline.hh
+interpreter.cpp               byteCodes.hh
+interpreter.cpp               codeSlotsMap.hh
+interpreter.cpp               complexLookup.hh
+interpreter.cpp               interpreter.hh
+interpreter.cpp               interruptedCtx.hh
+interpreter.cpp               kinds.hh
+interpreter.cpp               label_inline.hh
+interpreter.cpp               nlrSupport.hh
+interpreter.cpp               prim.hh
+interpreter.cpp               regs.hh
+interpreter.cpp               runtime.hh
+interpreter.cpp               sendDesc.hh
+interpreter.cpp               shell.hh
+interpreter.cpp               sig.hh
+
+interpreter.hh                abstract_interpreter_inline.hh
+interpreter.hh                objVectorOop.hh
+interpreter.hh                oopClosures.hh
+interpreter.hh                oop_inline.hh
+interpreter.hh                vframe.hh
+
+interruptedCtx.cpp            ${platform_kind}Prims.hh
+interruptedCtx.cpp            fields.hh
+interruptedCtx.cpp            files.hh
+interruptedCtx.cpp            frame.hh
+interruptedCtx.cpp            interruptedCtx.hh
+interruptedCtx.cpp            label_inline.hh
+interruptedCtx.cpp            monitorHooks.hh
+interruptedCtx.cpp            nlrSupport.hh
+interruptedCtx.cpp            nmethod_inline.hh
+interruptedCtx.cpp            os_includes.hh
+interruptedCtx.cpp            process.hh
+interruptedCtx.cpp            scanner.hh
+interruptedCtx.cpp            sig.hh
+interruptedCtx.cpp            signalBlocker.hh
+interruptedCtx.cpp            space_inline.hh
+interruptedCtx.cpp            stack.hh
+interruptedCtx.cpp            uncommonBranch.hh
+interruptedCtx.cpp            universe.hh
+interruptedCtx.cpp            vframe.hh
+interruptedCtx.cpp            zone.hh
+
+interruptedCtx.hh             markOop.hh
+interruptedCtx.hh             sig.hh
+interruptedCtx.hh             signalBlocker.hh
+interruptedCtx.hh             top.hh
+
+interruptedCtx_${platform_processor}.cpp     ${platform_kind}Prims.hh
+interruptedCtx_${platform_processor}.cpp     fields.hh
+interruptedCtx_${platform_processor}.cpp     files.hh
+interruptedCtx_${platform_processor}.cpp     frame.hh
+interruptedCtx_${platform_processor}.cpp     interruptedCtx.hh
+interruptedCtx_${platform_processor}.cpp     label_inline.hh
+interruptedCtx_${platform_processor}.cpp     monitorHooks.hh
+interruptedCtx_${platform_processor}.cpp     nmethod_inline.hh
+// interruptedCtx_${platform_processor}.cpp     no_precompiled_headers
+interruptedCtx_${platform_processor}.cpp     os_includes.hh
+interruptedCtx_${platform_processor}.cpp     process.hh
+interruptedCtx_${platform_processor}.cpp     scanner.hh
+interruptedCtx_${platform_processor}.cpp     sig.hh
+interruptedCtx_${platform_processor}.cpp     signalBlocker.hh
+interruptedCtx_${platform_processor}.cpp     stack.hh
+interruptedCtx_${platform_processor}.cpp     uncommonBranch.hh
+interruptedCtx_${platform_processor}.cpp     universe.hh
+interruptedCtx_${platform_processor}.cpp     vframe.hh
+interruptedCtx_${platform_processor}.cpp     zone.hh
+
+interruptedCtx_${platform_kind}.cpp       ${platform_kind}Prims.hh
+interruptedCtx_${platform_kind}.cpp       fields.hh
+interruptedCtx_${platform_kind}.cpp       files.hh
+interruptedCtx_${platform_kind}.cpp       frame.hh
+interruptedCtx_${platform_kind}.cpp       interruptedCtx.hh
+interruptedCtx_${platform_kind}.cpp       label_inline.hh
+interruptedCtx_${platform_kind}.cpp       monitorHooks.hh
+interruptedCtx_${platform_kind}.cpp       nmethod_inline.hh
+// interruptedCtx_${platform_kind}.cpp       no_precompiled_headers
+interruptedCtx_${platform_kind}.cpp       os_includes.hh
+interruptedCtx_${platform_kind}.cpp       process.hh
+interruptedCtx_${platform_kind}.cpp       scanner.hh
+interruptedCtx_${platform_kind}.cpp       sig.hh
+interruptedCtx_${platform_kind}.cpp       signalBlocker.hh
+interruptedCtx_${platform_kind}.cpp       stack.hh
+interruptedCtx_${platform_kind}.cpp       uncommonBranch.hh
+interruptedCtx_${platform_kind}.cpp       universe.hh
+interruptedCtx_${platform_kind}.cpp       vframe.hh
+interruptedCtx_${platform_kind}.cpp       zone.hh
+
+itimer.cpp                    ${platform_kind}Prims.hh
+itimer.cpp                    interruptedCtx.hh
+itimer.cpp                    itimer.hh
+itimer.cpp                    label_inline.hh
+itimer.cpp                    os_includes.hh
+itimer.cpp                    process.hh
+itimer.cpp                    selfMonitor.hh
+itimer.cpp                    sig.hh
+itimer.cpp                    smiOop.hh
+itimer.cpp                    space_inline.hh
+itimer.cpp                    vmStrings.hh
+
+itimer.hh                     debug.hh
+itimer.hh                     sig.hh
+itimer.hh                     top.hh
+
+itimer_${platform_kind}.cpp               generation_inline.hh
+itimer_${platform_kind}.cpp               interruptedCtx.hh
+itimer_${platform_kind}.cpp               itimer.hh
+// itimer_${platform_kind}.cpp               no_precompiled_headers
+itimer_${platform_kind}.cpp               process.hh
+itimer_${platform_kind}.cpp               space_inline.hh
+
+key.cpp                       codeTable.hh
+key.cpp                       key.hh
+key.cpp                       label_inline.hh
+key.cpp                       nmethod.hh
+key.cpp                       sendDesc.hh
+
+key.hh                        kinds.hh
+key.hh                        oop_inline.hh
+key.hh                        stringOop.hh
+
+kinds.cpp                     allocation.hh
+kinds.cpp                     kinds.hh
+kinds.cpp                     process.hh
+
+kinds.hh                      top.hh
+
+label.cpp                     label_inline.hh
+
+label.hh                      allocation.hh
+label.hh                      blist.hh
+
+labelSet.cpp                  byteCodes.hh
+labelSet.cpp                  generation_inline.hh
+labelSet.cpp                  labelSet_inline.hh
+labelSet.cpp                  space_inline.hh
+
+labelSet.hh                   top.hh
+
+labelSet_inline.hh            labelSet.hh
+
+label_inline.hh               asm_inline.hh
+label_inline.hh               label.hh
+
+list.cpp                      generation_inline.hh
+list.cpp                      list.hh
+list.cpp                      space_inline.hh
+
+list.hh                       byteCodes.hh
+list.hh                       positionTable.hh
+
+longRegString.cpp             bitVector.hh
+longRegString.cpp             longRegString.hh
+
+longRegString.hh              allocation.hh
+longRegString.hh              registerString.hh
+longRegString.hh              regs.hh
+
+longRegString_${platform_processor}.cpp      abstract_interpreter_inline.hh
+longRegString_${platform_processor}.cpp      bitVector.hh
+longRegString_${platform_processor}.cpp      label_inline.hh
+longRegString_${platform_processor}.cpp      longRegString.hh
+longRegString_${platform_processor}.cpp      sic.hh
+
+lprintf.cpp                   lprintf.hh
+lprintf.cpp                   os.hh
+lprintf.cpp                   sig.hh
+lprintf.cpp                   signalBlocker.hh
+lprintf.cpp                   top_includes.hh
+lprintf.cpp                   types.hh
+lprintf.cpp                   util.hh
+
+lprintf.hh                    os_includes.hh
+
+
+machineCache.cpp              label_inline.hh
+machineCache.cpp              machineCache.hh
+machineCache.cpp              runtime.hh
+machineCache.cpp              space_inline.hh
+machineCache.cpp              universe.hh
+machineCache.cpp              zone.hh
+
+machineCache.hh               top.hh
+
+machineCache_${platform_kind}.cpp         label_inline.hh
+machineCache_${platform_kind}.cpp         machineCache.hh
+// machineCache_${platform_kind}.cpp         no_precompiled_headers
+machineCache_${platform_kind}.cpp         runtime.hh
+machineCache_${platform_kind}.cpp         space_inline.hh
+machineCache_${platform_kind}.cpp         universe.hh
+machineCache_${platform_kind}.cpp         zone.hh
+
+map.cpp                       abstract_interpreter_inline.hh
+map.cpp                       assignmentMap.hh
+map.cpp                       assignmentOop.hh
+map.cpp                       blockOop_inline.hh
+map.cpp                       codeSlotsMap.hh
+map.cpp                       debug.hh
+map.cpp                       enumeration.hh
+map.cpp                       glueSupport.hh
+map.cpp                       label_inline.hh
+map.cpp                       map.hh
+map.cpp                       mapTable.hh
+map.cpp                       mapVtbls.hh
+map.cpp                       mirrorOop.hh
+map.cpp                       monitorPieces.hh
+map.cpp                       nprofiler.hh
+map.cpp                       objVectorOop.hh
+map.cpp                       slotDesc.hh
+map.cpp                       space_inline.hh
+map.cpp                       stringOop.hh
+map.cpp                       zone.hh
+
+map.hh                        floatOop.hh
+map.hh                        mapOop.hh
+map.hh                        mapVtbls.hh
+map.hh                        oopsOop.hh
+map.hh                        slotIterator.hh
+map.hh                        slotList.hh
+map.hh                        smiOop.hh
+map.hh                        universe_inline.hh
+map.hh                        vmStrings.hh
+
+mapMap.cpp                    blockMap.hh
+mapMap.cpp                    enumeration.hh
+mapMap.cpp                    generation_inline.hh
+mapMap.cpp                    mapMap.hh
+mapMap.cpp                    mapTable.hh
+mapMap.cpp                    mapVtbls.hh
+mapMap.cpp                    oop_inline.hh
+mapMap.cpp                    slotsMapDeps.hh
+mapMap.cpp                    space_inline.hh
+
+mapMap.hh                     map.hh
+
+mapOop.cpp                    blockMap.hh
+mapOop.cpp                    generation_inline.hh
+mapOop.cpp                    map.hh
+mapOop.cpp                    mapOop.hh
+mapOop.cpp                    space_inline.hh
+
+mapOop.hh                     oopsOop.hh
+
+mapTable.cpp                  generation_inline.hh
+mapTable.cpp                  mapTable.hh
+mapTable.cpp                  slotsMapDeps.hh
+mapTable.cpp                  space_inline.hh
+
+mapTable.hh                   stringOop.hh
+
+mapVtbls.cpp                  abstract_interpreter_inline.hh
+mapVtbls.cpp                  assignmentMap.hh
+mapVtbls.cpp                  blockMap.hh
+mapVtbls.cpp                  byteVectorMap.hh
+mapVtbls.cpp                  codeSlotsMap.hh
+mapVtbls.cpp                  fctProxyMap.hh
+mapVtbls.cpp                  floatMap.hh
+mapVtbls.cpp                  label_inline.hh
+mapVtbls.cpp                  map.hh
+mapVtbls.cpp                  mapMap.hh
+mapVtbls.cpp                  mapVtbls.hh
+mapVtbls.cpp                  markMap.hh
+mapVtbls.cpp                  mirrorMap.hh
+mapVtbls.cpp                  objVectorMap.hh
+mapVtbls.cpp                  processMap.hh
+mapVtbls.cpp                  profilerMap.hh
+mapVtbls.cpp                  proxyMap.hh
+mapVtbls.cpp                  smiMap.hh
+mapVtbls.cpp                  stringMap.hh
+mapVtbls.cpp                  vframeMap.hh
+
+mapVtbls.hh                   top.hh
+
+markMap.cpp                   enumeration.hh
+markMap.cpp                   generation_inline.hh
+markMap.cpp                   markMap.hh
+markMap.cpp                   space_inline.hh
+
+markMap.hh                    map.hh
+
+markOop.cpp                   generation_inline.hh
+markOop.cpp                   markOop.hh
+markOop.cpp                   space_inline.hh
+
+markOop.hh                    smiOop.hh
+
+memOop.cpp                    generation_inline.hh
+memOop.cpp                    map.hh
+memOop.cpp                    mapTable.hh
+memOop.cpp                    memOop_inline.hh
+memOop.cpp                    oop_inline.hh
+memOop.cpp                    slotsMapDeps.hh
+memOop.cpp                    space_inline.hh
+memOop.cpp                    vmStrings.hh
+
+memOop.hh                     markOop.hh
+memOop.hh                     oTable.hh
+memOop.hh                     universe.hh
+
+memOop_inline.hh              memOop.hh
+memOop_inline.hh              oTable_inline.hh
+
+mirrorMap.cpp                 abstract_interpreter_inline.hh
+mirrorMap.cpp                 blockOop_inline.hh
+mirrorMap.cpp                 codeSlotsMap.hh
+mirrorMap.cpp                 generation_inline.hh
+mirrorMap.cpp                 label_inline.hh
+mirrorMap.cpp                 mirrorMap.hh
+mirrorMap.cpp                 mirrorOop.hh
+mirrorMap.cpp                 oop_inline.hh
+mirrorMap.cpp                 slotsOop.hh
+mirrorMap.cpp                 space_inline.hh
+mirrorMap.cpp                 stringOop.hh
+mirrorMap.cpp                 stringTable.hh
+mirrorMap.cpp                 vmStrings.hh
+
+mirrorMap.hh                  slotsMapDeps.hh
+mirrorMap.hh                  vmStrings.hh
+
+mirrorOop.cpp                 abstract_interpreter_inline.hh
+mirrorOop.cpp                 allocation.hh
+mirrorOop.cpp                 codeSlotsMap.hh
+mirrorOop.cpp                 glueSupport.hh
+mirrorOop.cpp                 interruptedCtx.hh
+mirrorOop.cpp                 label_inline.hh
+mirrorOop.cpp                 mirrorOop.hh
+mirrorOop.cpp                 shell.hh
+mirrorOop.cpp                 simpleLookup_inline.hh
+mirrorOop.cpp                 slotsOop.hh
+mirrorOop.cpp                 stringMap.hh
+mirrorOop.cpp                 stringTable.hh
+mirrorOop.cpp                 vmStrings.hh
+
+mirrorOop.hh                  mirrorMap.hh
+mirrorOop.hh                  slotDesc.hh
+
+miscPrims.cpp                 allocation.hh
+miscPrims.cpp                 byteVectorOop.hh
+miscPrims.cpp                 errorCodes.hh
+miscPrims.cpp                 glueSupport.hh
+miscPrims.cpp                 label_inline.hh
+miscPrims.cpp                 miscPrims.hh
+miscPrims.cpp                 objVectorOop.hh
+miscPrims.cpp                 os.hh
+miscPrims.cpp                 prim.hh
+miscPrims.cpp                 shell.hh
+miscPrims.cpp                 space_inline.hh
+miscPrims.cpp                 stringMap.hh
+miscPrims.cpp                 vmStrings.hh
+
+miscPrims.hh                  selfMonitor.hh
+
+monitor.cpp                   abstract_interpreter_inline.hh
+monitor.cpp                   allocation.hh
+monitor.cpp                   cacheStub_inline.hh
+monitor.cpp                   countStub.hh
+monitor.cpp                   debug.hh
+monitor.cpp                   frame.hh
+monitor.cpp                   generation.hh
+monitor.cpp                   interruptedCtx.hh
+monitor.cpp                   itimer.hh
+monitor.cpp                   monitor.hh
+monitor.cpp                   monitorHooks.hh
+monitor.cpp                   monitorPieces.hh
+monitor.cpp                   nmethod_inline.hh
+monitor.cpp                   nprofiler.hh
+monitor.cpp                   os_includes.hh
+monitor.cpp                   process.hh
+monitor.cpp                   recompile.hh
+monitor.cpp                   sig.hh
+monitor.cpp                   signalBlocker.hh
+monitor.cpp                   space_inline.hh
+monitor.cpp                   universe_inline.hh
+monitor.cpp                   zone.hh
+
+monitor.hh                    allocation.hh
+monitor.hh                    asserts.hh
+monitor.hh                    monitorHooks.hh
+monitor.hh                    monitorPieces.hh
+monitor.hh                    monitorWindow.hh
+monitor.hh                    os.hh
+monitor.hh                    stringUtil.hh
+monitor.hh                    top.hh
+monitor.hh                    types.hh
+
+monitorHooks.cpp              abstract_interpreter_inline.hh
+monitorHooks.cpp              frame.hh
+monitorHooks.cpp              interruptedCtx.hh
+monitorHooks.cpp              key.hh
+monitorHooks.cpp              monitor.hh
+monitorHooks.cpp              monitorHooks.hh
+monitorHooks.cpp              nmethod.hh
+monitorHooks.cpp              os_includes.hh
+monitorHooks.cpp              recompile.hh
+monitorHooks.cpp              selfMonitor.hh
+monitorHooks.cpp              space_inline.hh
+
+monitorHooks.hh               top.hh
+
+monitorHooks_${platform_kind}.cpp         frame.hh
+monitorHooks_${platform_kind}.cpp         label_inline.hh
+monitorHooks_${platform_kind}.cpp         monitorHooks.hh
+// monitorHooks_${platform_kind}.cpp         no_precompiled_headers
+
+monitorPieces.cpp             label_inline.hh
+monitorPieces.cpp             monitor.hh
+monitorPieces.cpp             monitorPieces.hh
+monitorPieces.cpp             os.hh
+monitorPieces.cpp             os_includes.hh
+monitorPieces.cpp             selfMonitor.hh
+monitorPieces.cpp             space_inline.hh
+
+monitorPieces.hh              os_includes.hh
+monitorPieces.hh              top.hh
+monitorPieces.hh              zone.hh
+monitorPieces.hh              zoneHeap.hh
+
+monitorPieces_${platform_kind}.cpp        frame.hh
+monitorPieces_${platform_kind}.cpp        generation_inline.hh
+monitorPieces_${platform_kind}.cpp        interruptedCtx.hh
+monitorPieces_${platform_kind}.cpp        label_inline.hh
+monitorPieces_${platform_kind}.cpp        monitorPieces.hh
+// monitorPieces_${platform_kind}.cpp        no_precompiled_headers
+
+monitorWindow.cpp             debug.hh
+monitorWindow.cpp             label_inline.hh
+monitorWindow.cpp             monitor.hh
+monitorWindow.cpp             monitorWindow.hh
+monitorWindow.cpp             quartzWindow.hh
+monitorWindow.cpp             signalBlocker.hh
+monitorWindow.cpp             space_inline.hh
+monitorWindow.cpp             xlibWindow.hh
+
+monitorWindow.hh              platformWindow.hh
+
+nameDesc.cpp                  asm_inline.hh
+nameDesc.cpp                  blockOop_inline.hh
+nameDesc.cpp                  label_inline.hh
+nameDesc.cpp                  nameDesc.hh
+nameDesc.cpp                  print.hh
+nameDesc.cpp                  regs.hh
+
+nameDesc.hh                   allocation.hh
+nameDesc.hh                   oop_inline.hh
+nameDesc.hh                   regs.hh
+nameDesc.hh                   top.hh
+
+ncode.cpp                     addrDesc.hh
+ncode.cpp                     allocation.hh
+ncode.cpp                     cacheStub_inline.hh
+ncode.cpp                     fields.hh
+ncode.cpp                     label_inline.hh
+ncode.cpp                     ncode.hh
+ncode.cpp                     nmethod_inline.hh
+ncode.cpp                     universe_inline.hh
+ncode.cpp                     zone.hh
+
+ncode.hh                      generation_inline.hh
+ncode.hh                      nmln.hh
+ncode.hh                      universe.hh
+
+nlrSupport.cpp                frame.hh
+nlrSupport.cpp                label_inline.hh
+nlrSupport.cpp                monitorHooks.hh
+nlrSupport.cpp                nlrSupport.hh
+nlrSupport.cpp                nmethod.hh
+nlrSupport.cpp                space_inline.hh
+
+nlrSupport.hh                 top.hh
+
+nmethod.cpp                   abstract_interpreter_inline.hh
+nmethod.cpp                   addrDesc.hh
+nmethod.cpp                   allocation.hh
+nmethod.cpp                   asm_inline.hh
+nmethod.cpp                   byteCodes.hh
+nmethod.cpp                   cacheStub_inline.hh
+nmethod.cpp                   codeSlotsMap.hh
+nmethod.cpp                   complexLookup.hh
+nmethod.cpp                   countStub.hh
+nmethod.cpp                   debug.hh
+nmethod.cpp                   disasm.hh
+nmethod.cpp                   fcompiler.hh
+nmethod.cpp                   fields.hh
+nmethod.cpp                   fprofiler.hh
+nmethod.cpp                   frame.hh
+nmethod.cpp                   inlining.hh
+nmethod.cpp                   machineCache.hh
+nmethod.cpp                   nmethod_inline.hh
+nmethod.cpp                   nprofiler.hh
+nmethod.cpp                   print.hh
+nmethod.cpp                   recompile.hh
+nmethod.cpp                   scopeDescRecorder.hh
+nmethod.cpp                   sendDesc.hh
+nmethod.cpp                   sic.hh
+nmethod.cpp                   slotRef.hh
+nmethod.cpp                   zone.hh
+
+nmethod.hh                    codeTable.hh
+nmethod.hh                    frame.hh
+nmethod.hh                    key.hh
+nmethod.hh                    ncode.hh
+nmethod.hh                    nmethodScopes.hh
+nmethod.hh                    nmln.hh
+nmethod.hh                    sendDesc.hh
+nmethod.hh                    zone.hh
+
+nmethodScopes.cpp             abstract_interpreter_inline.hh
+nmethodScopes.cpp             allocation.hh
+nmethodScopes.cpp             asm_inline.hh
+nmethodScopes.cpp             byteCodes.hh
+nmethodScopes.cpp             cacheStub_inline.hh
+nmethodScopes.cpp             codeSlotsMap.hh
+nmethodScopes.cpp             codeTable.hh
+nmethodScopes.cpp             debug.hh
+nmethodScopes.cpp             fcompiler.hh
+nmethodScopes.cpp             fprofiler.hh
+nmethodScopes.cpp             frame.hh
+nmethodScopes.cpp             machineCache.hh
+nmethodScopes.cpp             nmethodScopes.hh
+nmethodScopes.cpp             nmethod_inline.hh
+nmethodScopes.cpp             print.hh
+nmethodScopes.cpp             recompile.hh
+nmethodScopes.cpp             scopeDesc.hh
+nmethodScopes.cpp             scopeDescRecorder.hh
+nmethodScopes.cpp             sendDesc.hh
+nmethodScopes.cpp             simpleLookup_inline.hh
+nmethodScopes.cpp             zone.hh
+
+nmethodScopes.hh              key.hh
+nmethodScopes.hh              ncode.hh
+nmethodScopes.hh              nmln.hh
+nmethodScopes.hh              scopeDesc.hh
+nmethodScopes.hh              zone.hh
+
+nmethod_${platform_processor}.cpp            aCompiler.hh
+nmethod_${platform_processor}.cpp            label_inline.hh
+nmethod_${platform_processor}.cpp            nmethod.hh
+
+nmethod_inline.hh             nmethod.hh
+
+nmln.cpp                      allocation.hh
+nmln.cpp                      cacheStub_inline.hh
+nmln.cpp                      codeTable.hh
+nmln.cpp                      countStub.hh
+nmln.cpp                      diDesc.hh
+nmln.cpp                      label_inline.hh
+nmln.cpp                      mapTable.hh
+nmln.cpp                      nmethod_inline.hh
+nmln.cpp                      nmln.hh
+nmln.cpp                      os_includes.hh
+nmln.cpp                      sendDesc.hh
+nmln.cpp                      zone.hh
+
+nmln.hh                       top.hh
+
+node.cpp                      abstract_interpreter_inline.hh
+node.cpp                      asm.hh
+node.cpp                      assignmentOop.hh
+node.cpp                      basicBlock_inline.hh
+node.cpp                      byteVectorOop.hh
+node.cpp                      codeSlotsMap.hh
+node.cpp                      complexLookup.hh
+node.cpp                      fctProxyOop.hh
+node.cpp                      genHelper.hh
+node.cpp                      key.hh
+node.cpp                      markOop.hh
+node.cpp                      nameDesc.hh
+node.cpp                      nodeGen.hh
+node.cpp                      node_inline.hh
+node.cpp                      objVectorOop.hh
+node.cpp                      preg.hh
+node.cpp                      prim.hh
+node.cpp                      processOop.hh
+node.cpp                      proxyOop.hh
+node.cpp                      recompile.hh
+node.cpp                      registerString.hh
+node.cpp                      rscope.hh
+node.cpp                      scopeDescRecorder.hh
+node.cpp                      sic.hh
+node.cpp                      sicExpr.hh
+node.cpp                      sicScope.hh
+node.cpp                      sicSplit.hh
+node.cpp                      stringOop.hh
+node.cpp                      vmStrings.hh
+
+node.hh                       aNode.hh
+node.hh                       basicBlock_inline.hh
+node.hh                       blist.hh
+node.hh                       debug.hh
+node.hh                       defUse_inline.hh
+node.hh                       kinds.hh
+node.hh                       label_inline.hh
+node.hh                       nameDesc.hh
+node.hh                       opcode.hh
+node.hh                       preg.hh
+node.hh                       sendDesc.hh
+node.hh                       sic.hh
+node.hh                       slist.hh
+
+nodeGen.cpp                   abstract_interpreter_inline.hh
+nodeGen.cpp                   asm.hh
+nodeGen.cpp                   basicBlock_inline.hh
+nodeGen.cpp                   fields.hh
+nodeGen.cpp                   nodeGen.hh
+nodeGen.cpp                   node_inline.hh
+nodeGen.cpp                   preg.hh
+nodeGen.cpp                   prim.hh
+nodeGen.cpp                   sic.hh
+nodeGen.cpp                   sicExpr.hh
+nodeGen.cpp                   sicScope.hh
+nodeGen.cpp                   slotRef.hh
+
+nodeGen.hh                    kinds.hh
+nodeGen.hh                    markOop.hh
+nodeGen.hh                    node.hh
+nodeGen.hh                    sicScope.hh
+
+node_${platform_processor}.cpp               abstract_interpreter_inline.hh
+node_${platform_processor}.cpp               asm_inline.hh
+node_${platform_processor}.cpp               basicBlock_inline.hh
+node_${platform_processor}.cpp               byteVectorOop.hh
+node_${platform_processor}.cpp               codeSlotsMap.hh
+node_${platform_processor}.cpp               complexLookup.hh
+node_${platform_processor}.cpp               fields.hh
+node_${platform_processor}.cpp               genHelper.hh
+node_${platform_processor}.cpp               node.hh
+node_${platform_processor}.cpp               nodeGen.hh
+node_${platform_processor}.cpp               node_inline.hh
+node_${platform_processor}.cpp               objVectorOop.hh
+node_${platform_processor}.cpp               os_includes.hh
+node_${platform_processor}.cpp               prim.hh
+node_${platform_processor}.cpp               recompile.hh
+node_${platform_processor}.cpp               registerString.hh
+node_${platform_processor}.cpp               rscope.hh
+node_${platform_processor}.cpp               scopeDescRecorder.hh
+node_${platform_processor}.cpp               sic.hh
+node_${platform_processor}.cpp               sicExpr.hh
+node_${platform_processor}.cpp               sicScope.hh
+node_${platform_processor}.cpp               tag.hh
+
+node_inline.hh                node.hh
+
+nprofiler.copygraph.cpp       blockOop_inline.hh
+nprofiler.copygraph.cpp       callgraph.hh
+nprofiler.copygraph.cpp       enumeration.hh
+nprofiler.copygraph.cpp       label_inline.hh
+nprofiler.copygraph.cpp       nprofiler.hh
+nprofiler.copygraph.cpp       objVectorOop.hh
+nprofiler.copygraph.cpp       oopsOop.hh
+nprofiler.copygraph.cpp       preserve.hh
+nprofiler.copygraph.cpp       slotDesc.hh
+nprofiler.copygraph.cpp       space_inline.hh
+nprofiler.copygraph.cpp       stringOop.hh
+nprofiler.copygraph.cpp       stringTable.hh
+
+nprofiler.cpp                 abstract_interpreter_inline.hh
+nprofiler.cpp                 allocation.hh
+nprofiler.cpp                 byteCodes.hh
+nprofiler.cpp                 cacheStub_inline.hh
+nprofiler.cpp                 callgraph.hh
+nprofiler.cpp                 codeSlotsMap.hh
+nprofiler.cpp                 fcompiler.hh
+nprofiler.cpp                 frame.hh
+nprofiler.cpp                 interruptedCtx.hh
+nprofiler.cpp                 itimer.hh
+nprofiler.cpp                 label_inline.hh
+nprofiler.cpp                 nmethod_inline.hh
+nprofiler.cpp                 nprofiler.hh
+nprofiler.cpp                 print.hh
+nprofiler.cpp                 processOop.hh
+nprofiler.cpp                 scopeDesc.hh
+nprofiler.cpp                 selfMonitor.hh
+nprofiler.cpp                 sic.hh
+nprofiler.cpp                 space_inline.hh
+nprofiler.cpp                 stringTable.hh
+nprofiler.cpp                 universe.hh
+nprofiler.cpp                 zone.hh
+
+nprofiler.hh                  blist.hh
+nprofiler.hh                  config.hh
+nprofiler.hh                  monitorPieces.hh
+nprofiler.hh                  timer.hh
+
+oTable.cpp                    eventlog.hh
+oTable.cpp                    generation_inline.hh
+oTable.cpp                    map.hh
+oTable.cpp                    oTable_inline.hh
+oTable.cpp                    oop_inline.hh
+oTable.cpp                    space_inline.hh
+
+oTable.hh                     top.hh
+
+oTable_inline.hh              memOop.hh
+oTable_inline.hh              oTable.hh
+
+objVectorMap.cpp              enumeration.hh
+objVectorMap.cpp              generation_inline.hh
+objVectorMap.cpp              objVectorMap.hh
+objVectorMap.cpp              space_inline.hh
+
+objVectorMap.hh               objVectorOop.hh
+objVectorMap.hh               slotsMapDeps.hh
+
+objVectorOop.cpp              enumeration.hh
+objVectorOop.cpp              glueSupport.hh
+objVectorOop.cpp              label_inline.hh
+objVectorOop.cpp              mirrorOop.hh
+objVectorOop.cpp              objVectorMap.hh
+objVectorOop.cpp              objVectorOop.hh
+objVectorOop.cpp              proxyOop.hh
+objVectorOop.cpp              slotDesc.hh
+objVectorOop.cpp              vframe.hh
+objVectorOop.cpp              vframeOop.hh
+objVectorOop.cpp              vmStrings.hh
+
+objVectorOop.hh               slotsMap.hh
+objVectorOop.hh               slotsOop.hh
+objVectorOop.hh               smiOop.hh
+
+oop.cpp                       allocation.hh
+oop.cpp                       complexLookup.hh
+oop.cpp                       countStub.hh
+oop.cpp                       debug.hh
+oop.cpp                       enumeration.hh
+oop.cpp                       files.hh
+oop.cpp                       fprofiler.hh
+oop.cpp                       glueSupport.hh
+oop.cpp                       hprofiler.hh
+oop.cpp                       interpreter.hh
+oop.cpp                       label_inline.hh
+oop.cpp                       mapTable.hh
+oop.cpp                       mirrorOop.hh
+oop.cpp                       nlrSupport.hh
+oop.cpp                       nprofiler.hh
+oop.cpp                       os_includes.hh
+oop.cpp                       process.hh
+oop.cpp                       scanner.hh
+oop.cpp                       selfMonitor.hh
+oop.cpp                       shell.hh
+oop.cpp                       sic.hh
+oop.cpp                       slotsOop.hh
+oop.cpp                       stringMap.hh
+oop.cpp                       universe_inline.hh
+oop.cpp                       vmStrings.hh
+oop.cpp                       zone.hh
+
+oop.hh                        debug.hh
+oop.hh                        kinds.hh
+oop.hh                        top.hh
+
+oopClosures.cpp               blockOop.hh
+oopClosures.cpp               generation_inline.hh
+oopClosures.cpp               oopClosures.hh
+oopClosures.cpp               space_inline.hh
+
+oopClosures.hh                oop_inline.hh
+
+oop_inline.hh                 debug.hh
+oop_inline.hh                 floatOop.hh
+oop_inline.hh                 map.hh
+oop_inline.hh                 memOop_inline.hh
+oop_inline.hh                 oop.hh
+oop_inline.hh                 smiOop.hh
+oop_inline.hh                 universe.hh
+
+oopsOop.cpp                   ageTable.hh
+oopsOop.cpp                   generation_inline.hh
+oopsOop.cpp                   oopsOop_inline.hh
+oopsOop.cpp                   space_inline.hh
+
+oopsOop.hh                    memOop_inline.hh
+
+oopsOop_inline.hh             oop_inline.hh
+oopsOop_inline.hh             oopsOop.hh
+
+opc_${platform_processor}.cpp                ${platform_processor}.hh
+opc_${platform_processor}.cpp                top.hh
+
+opcode.cpp                    generation_inline.hh
+opcode.cpp                    opcode.hh
+opcode.cpp                    space_inline.hh
+opcode.cpp                    stringOop.hh
+opcode.cpp                    vmStrings.hh
+
+opcode.hh                     top.hh
+
+os.cpp                        frame.hh
+os.cpp                        glueSupport.hh
+os.cpp                        interruptedCtx.hh
+os.cpp                        itimer.hh
+os.cpp                        label_inline.hh
+os.cpp                        objVectorOop.hh
+os.cpp                        os.hh
+os.cpp                        os_includes.hh
+os.cpp                        selfMonitor.hh
+os.cpp                        universe.hh
+
+os.hh                         error.hh
+os.hh                         os_includes.hh
+os.hh                         spaceSizeMacros.hh
+os.hh                         types.hh
+os.hh                         types.hh
+os.hh                         util.hh
+
+os_${platform_kind}.cpp                   ${platform_kind}Prims.hh
+os_${platform_kind}.cpp                   frame.hh
+os_${platform_kind}.cpp                   glueSupport.hh
+os_${platform_kind}.cpp                   init.hh
+os_${platform_kind}.cpp                   interruptedCtx.hh
+os_${platform_kind}.cpp                   itimer.hh
+os_${platform_kind}.cpp                   label_inline.hh
+os_${platform_kind}.cpp                   monitor.hh
+os_${platform_kind}.cpp                   monitorHooks.hh
+// os_${platform_kind}.cpp                   no_precompiled_headers
+os_${platform_kind}.cpp                   objVectorOop.hh
+os_${platform_kind}.cpp                   os.hh
+os_${platform_kind}.cpp                   os_includes.hh
+os_${platform_kind}.cpp                   platformWindow.hh
+os_${platform_kind}.cpp                   quartzWindow.hh
+os_${platform_kind}.cpp                   shell.hh
+
+os_includes.hh                config.hh
+
+parser.cpp                    generation_inline.hh
+parser.cpp                    parser.hh
+parser.cpp                    process.hh
+parser.cpp                    scanner.hh
+parser.cpp                    send.hh
+parser.cpp                    slot.hh
+parser.cpp                    slotType.hh
+parser.cpp                    space_inline.hh
+parser.cpp                    stringTable.hh
+
+parser.hh                     expr.hh
+
+pcDesc.cpp                    label_inline.hh
+pcDesc.cpp                    nmethod_inline.hh
+pcDesc.cpp                    pcDesc.hh
+
+pcDesc.hh                     nmethod.hh
+
+pinsn_${platform_processor}.cpp              ${platform_processor}.hh
+pinsn_${platform_processor}.cpp              disasm.hh
+pinsn_${platform_processor}.cpp              regs.hh
+pinsn_${platform_processor}.cpp              top.hh
+
+platformWindow.cpp            platformWindow.hh
+// keep x_includes out of precompiled headers
+// platformWindow.cpp            no_precompiled_headers
+
+
+platformWindow.hh             allocation.hh
+platformWindow.hh             os.hh
+platformWindow.hh             top.hh
+platformWindow.hh             x_includes.hh
+
+positionTable.cpp             generation_inline.hh
+positionTable.cpp             positionTable.hh
+positionTable.cpp             space_inline.hh
+positionTable.cpp             stringMap.hh
+
+positionTable.hh              byteCodes.hh
+positionTable.hh              errorCodes.hh
+positionTable.hh              kinds.hh
+positionTable.hh              objVectorMap.hh
+positionTable.hh              objVectorOop.hh
+positionTable.hh              oop_inline.hh
+positionTable.hh              stringMap.hh
+positionTable.hh              stringOop.hh
+
+preg.cpp                      abstract_interpreter_inline.hh
+preg.cpp                      asm.hh
+preg.cpp                      basicBlock_inline.hh
+preg.cpp                      blockOop_inline.hh
+preg.cpp                      defUse_inline.hh
+preg.cpp                      nameDesc.hh
+preg.cpp                      node.hh
+preg.cpp                      nodeGen.hh
+preg.cpp                      objVectorOop.hh
+preg.cpp                      preg.hh
+preg.cpp                      process.hh
+preg.cpp                      regAlloc.hh
+preg.cpp                      regs.hh
+preg.cpp                      scopeDescRecorder.hh
+preg.cpp                      sicExpr.hh
+preg.cpp                      sicScope.hh
+preg.cpp                      sicSplit.hh
+
+preg.hh                       allocation.hh
+preg.hh                       blist.hh
+preg.hh                       defUse_inline.hh
+preg.hh                       regs.hh
+preg.hh                       scopeDesc.hh
+preg.hh                       slist.hh
+preg.hh                       types.hh
+
+preserve.hh                   process.hh
+preserve.hh                   top.hh
+preserve.hh                   universe.hh
+
+prim.cpp                      ${platform_kind}Prims.hh
+prim.cpp                      abstract_interpreter_inline.hh
+prim.cpp                      blockOop.hh
+prim.cpp                      byteVectorOop.hh
+prim.cpp                      cacheStub_inline.hh
+prim.cpp                      debug.hh
+prim.cpp                      fctProxyOop.hh
+prim.cpp                      floatOop.hh
+prim.cpp                      fprofiler.hh
+prim.cpp                      glue.hh
+prim.cpp                      hprofiler.hh
+prim.cpp                      include_glue.hh
+prim.cpp                      interruptedCtx.hh
+prim.cpp                      itimer.hh
+prim.cpp                      mirrorOop.hh
+prim.cpp                      miscPrims.hh
+prim.cpp                      nlrSupport.hh
+prim.cpp                      objVectorOop.hh
+prim.cpp                      prim.hh
+prim.cpp                      prim_table_arch.hh
+prim.cpp                      prim_table_quartz.hh
+prim.cpp                      prim_table_os.hh
+prim.cpp                      print.hh
+prim.cpp                      processOop.hh
+prim.cpp                      profilerOop.hh
+prim.cpp                      recompile.hh
+prim.cpp                      runtime.hh
+prim.cpp                      sendDesc.hh
+prim.cpp                      spaceSize.hh
+prim.cpp                      space_inline.hh
+prim.cpp                      stack.hh
+prim.cpp                      stringMap.hh
+prim.cpp                      stringOop.hh
+prim.cpp                      tracing.hh
+prim.cpp                      vmStrings.hh
+prim.cpp                      xlibPrims.hh
+
+prim.hh                       config.hh
+prim.hh                       top.hh
+
+prim_table_quartz.hh          quartzPrims.hh
+
+print.cpp                     abstract_interpreter_inline.hh
+print.cpp                     debugPrintable.hh
+print.cpp                     label_inline.hh
+print.cpp                     prim.hh
+print.cpp                     print.hh
+print.cpp                     slotRef.hh
+print.cpp                     space_inline.hh
+
+print.hh                      table.hh
+
+process.cpp                   allocation.hh
+process.cpp                   byteCodes.hh
+process.cpp                   cacheStub_inline.hh
+process.cpp                   codeSlotsMap.hh
+process.cpp                   fields.hh
+process.cpp                   glueSupport.hh
+process.cpp                   interpreter.hh
+process.cpp                   interruptedCtx.hh
+process.cpp                   itimer.hh
+process.cpp                   monitorHooks.hh
+process.cpp                   nlrSupport.hh
+process.cpp                   nmethod_inline.hh
+process.cpp                   nprofiler.hh
+process.cpp                   os_includes.hh
+process.cpp                   prim.hh
+process.cpp                   process.hh
+process.cpp                   processOop.hh
+process.cpp                   recompile.hh
+process.cpp                   regs.hh
+process.cpp                   shell.hh
+process.cpp                   sig.hh
+process.cpp                   signalBlocker.hh
+process.cpp                   simpleLookup_inline.hh
+process.cpp                   stack.hh
+process.cpp                   vmStrings.hh
+
+process.hh                    allocation.hh
+process.hh                    blist.hh
+process.hh                    regs.hh
+process.hh                    stack.hh
+process.hh                    top.hh
+process.hh                    types.hh
+
+processMap.cpp                label_inline.hh
+processMap.cpp                processMap.hh
+processMap.cpp                processOop.hh
+processMap.cpp                vmStrings.hh
+
+processMap.hh                 slotsMapDeps.hh
+
+processOop.cpp                allocation.hh
+processOop.cpp                asserts.hh
+processOop.cpp                blist.hh
+processOop.cpp                glueSupport.hh
+processOop.cpp                interruptedCtx.hh
+processOop.cpp                label_inline.hh
+processOop.cpp                mirrorOop.hh
+processOop.cpp                nlrSupport.hh
+processOop.cpp                nprofiler.hh
+processOop.cpp                objVectorOop.hh
+processOop.cpp                os_includes.hh
+processOop.cpp                process.hh
+processOop.cpp                processOop.hh
+processOop.cpp                sig.hh
+processOop.cpp                stringOop.hh
+processOop.cpp                types.hh
+processOop.cpp                vframe.hh
+
+processOop.hh                 slotsOop.hh
+processOop.hh                 slotsOop.hh
+processOop.hh                 vframeOop.hh
+
+profilerMap.cpp               byteVectorOop.hh
+profilerMap.cpp               debug.hh
+profilerMap.cpp               enumeration.hh
+profilerMap.cpp               label_inline.hh
+profilerMap.cpp               mapOop.hh
+profilerMap.cpp               mirrorOop.hh
+profilerMap.cpp               profilerMap.hh
+profilerMap.cpp               vmStrings.hh
+profilerMap.cpp               zone.hh
+
+profilerMap.hh                profilerOop.hh
+profilerMap.hh                slotsMapDeps.hh
+profilerMap.hh                smiOop.hh
+
+profilerOop.cpp               byteVectorOop.hh
+profilerOop.cpp               debug.hh
+profilerOop.cpp               files.hh
+profilerOop.cpp               glueSupport.hh
+profilerOop.cpp               interruptedCtx.hh
+profilerOop.cpp               label_inline.hh
+profilerOop.cpp               nprofiler.hh
+profilerOop.cpp               preserve.hh
+profilerOop.cpp               profilerMap.hh
+profilerOop.cpp               profilerOop.hh
+profilerOop.cpp               runtime.hh
+profilerOop.cpp               scanner.hh
+profilerOop.cpp               shell.hh
+profilerOop.cpp               stringMap.hh
+profilerOop.cpp               vmStrings.hh
+profilerOop.cpp               zone.hh
+
+profilerOop.hh                processOop.hh
+profilerOop.hh                slotsOop.hh
+
+proxyMap.cpp                  generation_inline.hh
+proxyMap.cpp                  proxyMap.hh
+proxyMap.cpp                  space_inline.hh
+
+proxyMap.hh                   foreignMap.hh
+proxyMap.hh                   proxyOop.hh
+
+proxyOop.cpp                  generation_inline.hh
+proxyOop.cpp                  proxyMap.hh
+proxyOop.cpp                  proxyOop.hh
+proxyOop.cpp                  space_inline.hh
+
+proxyOop.hh                   foreignOop.hh
+
+quartzPrims.cpp               generation_inline.hh
+quartzPrims.cpp               quartzPrims.hh
+// quartzPrims.cpp            no_precompiled_headers
+quartzPrims.cpp               os.hh
+quartzPrims.cpp               platformWindow.hh
+quartzPrims.cpp               quartzWindow.hh
+quartzPrims.cpp               space_inline.hh
+
+quartzPrims.hh                glueDefs.hh
+quartzPrims.hh                include_glue.hh
+quartzPrims.hh                objVectorOop.hh
+quartzPrims.hh                os_includes.hh
+quartzPrims.hh                quartzWindow.hh
+quartzPrims.hh                stringOop.hh
+
+
+quartzWindow.cpp              itimer.hh
+quartzWindow.cpp              label_inline.hh
+quartzWindow.cpp              quartzWindow.hh
+quartzWindow.cpp              monitor.hh
+// quartzWindow.cpp           no_precompiled_headers
+quartzWindow.cpp              signalBlocker.hh
+quartzWindow.cpp              space_inline.hh
+quartzWindow.cpp              xlibPrims.hh
+
+quartzWindow.hh               platformWindow.hh
+
+
+rSet.cpp                      generation_inline.hh
+rSet.cpp                      oopsOop_inline.hh
+rSet.cpp                      os.hh
+rSet.cpp                      rSet_inline.hh
+rSet.cpp                      runtime.hh
+rSet.cpp                      space_inline.hh
+
+rSet.hh                       allocation.hh
+rSet.hh                       top.hh
+
+rSet_inline.hh                rSet.hh
+rSet_inline.hh                universe_inline.hh
+
+recompile.cpp                 abstract_interpreter_inline.hh
+recompile.cpp                 allocation.hh
+recompile.cpp                 cacheStub_inline.hh
+recompile.cpp                 codeSlotsMap.hh
+recompile.cpp                 complexLookup.hh
+recompile.cpp                 countStub.hh
+recompile.cpp                 fields.hh
+recompile.cpp                 frame.hh
+recompile.cpp                 glueSupport.hh
+recompile.cpp                 inlining.hh
+recompile.cpp                 itimer.hh
+recompile.cpp                 nmethod_inline.hh
+recompile.cpp                 node.hh
+recompile.cpp                 nprofiler.hh
+recompile.cpp                 objVectorOop.hh
+recompile.cpp                 os_includes.hh
+recompile.cpp                 prim.hh
+recompile.cpp                 recompile.hh
+recompile.cpp                 registerLocator.hh
+recompile.cpp                 rscope.hh
+recompile.cpp                 selfMonitor.hh
+recompile.cpp                 sicScope.hh
+recompile.cpp                 spaceSize.hh
+recompile.cpp                 space_inline.hh
+recompile.cpp                 uncommonBranch.hh
+recompile.cpp                 vframeOop.hh
+
+recompile.hh                  blist.hh
+recompile.hh                  errorCodes.hh
+recompile.hh                  node.hh
+recompile.hh                  sic.hh
+
+regAlloc.cpp                  abstract_interpreter_inline.hh
+regAlloc.cpp                  basicBlock_inline.hh
+regAlloc.cpp                  debug.hh
+regAlloc.cpp                  node.hh
+regAlloc.cpp                  preg.hh
+regAlloc.cpp                  regAlloc.hh
+regAlloc.cpp                  registerString.hh
+regAlloc.cpp                  regs.hh
+regAlloc.cpp                  sic.hh
+regAlloc.cpp                  sicScope.hh
+
+regAlloc.hh                   allocation.hh
+regAlloc.hh                   blist.hh
+regAlloc.hh                   preg.hh
+regAlloc.hh                   types.hh
+
+registerLocator.cpp           abstract_interpreter_inline.hh
+registerLocator.cpp           frame.hh
+registerLocator.cpp           nprofiler.hh
+registerLocator.cpp           recompile.hh
+registerLocator.cpp           registerLocator.hh
+
+registerLocator.hh            allocation.hh
+registerLocator.hh            regs.hh
+registerLocator.hh            regs.hh
+registerLocator.hh            top.hh
+
+registerLocator_${platform_processor}.cpp    frame.hh
+registerLocator_${platform_processor}.cpp    interruptedCtx.hh
+registerLocator_${platform_processor}.cpp    label_inline.hh
+registerLocator_${platform_processor}.cpp    nmethod.hh
+registerLocator_${platform_processor}.cpp    registerLocator.hh
+
+registerState.cpp             asm_inline.hh
+registerState.cpp             codeGen.hh
+registerState.cpp             fcompiler.hh
+registerState.cpp             registerState.hh
+
+registerState.hh              blist.hh
+registerState.hh              registerString.hh
+registerState.hh              top.hh
+
+registerState_${platform_processor}.cpp      asm_inline.hh
+registerState_${platform_processor}.cpp      codeGen.hh
+registerState_${platform_processor}.cpp      fcompiler.hh
+registerState_${platform_processor}.cpp      registerState.hh
+
+registerString.cpp            bitVector.hh
+registerString.cpp            registerString.hh
+
+registerString.hh             allocation.hh
+registerString.hh             regs.hh
+
+registerString_${platform_processor}.cpp     bitVector.hh
+registerString_${platform_processor}.cpp     registerString.hh
+
+regs.cpp                      allocation.hh
+regs.cpp                      process.hh
+regs.cpp                      regs.hh
+
+regs.hh                       bits.hh
+regs.hh                       top.hh
+regs.hh                       types.hh
+
+regs_${platform_processor}.cpp               regs.hh
+
+require.cpp                   require.hh
+
+require.hh                    table.hh
+
+rscope.cpp                    abstract_interpreter_inline.hh
+rscope.cpp                    addrDesc.hh
+rscope.cpp                    codeSlotsMap.hh
+rscope.cpp                    countStub.hh
+rscope.cpp                    fields.hh
+rscope.cpp                    recompile.hh
+rscope.cpp                    rscope.hh
+rscope.cpp                    sicExpr.hh
+rscope.cpp                    sicScope.hh
+rscope.cpp                    simpleLookup_inline.hh
+rscope.cpp                    uncommonBranch.hh
+
+rscope.hh                     allocation.hh
+rscope.hh                     blist.hh
+rscope.hh                     pcDesc.hh
+rscope.hh                     scopeDesc.hh
+rscope.hh                     vframe.hh
+
+runtime.cpp                   runtime.hh
+
+runtime.hh                    regs.hh
+runtime.hh                    top.hh
+
+runtime_${platform_processor}.cpp            debug.hh
+runtime_${platform_processor}.cpp            frame.hh
+runtime_${platform_processor}.cpp            frame_format.hh
+runtime_${platform_processor}.cpp            label_inline.hh
+runtime_${platform_processor}.cpp            objVectorOop.hh
+runtime_${platform_processor}.cpp            process.hh
+runtime_${platform_processor}.cpp            regs.hh
+runtime_${platform_processor}.cpp            runtime.hh
+
+runtime_asm_${platform_processor}.S          asmDefs.hh
+runtime_asm_${platform_processor}.S          macros.hh
+
+scanner.cpp                   files.hh
+scanner.cpp                   generation_inline.hh
+scanner.cpp                   interruptedCtx.hh
+scanner.cpp                   os.hh
+scanner.cpp                   scanner.hh
+scanner.cpp                   space_inline.hh
+
+scanner.hh                    allocation.hh
+scanner.hh                    files.hh
+scanner.hh                    str.hh
+scanner.hh                    types.hh
+
+scopeDesc.cpp                 abstract_interpreter_inline.hh
+scopeDesc.cpp                 asm_inline.hh
+scopeDesc.cpp                 blockOop_inline.hh
+scopeDesc.cpp                 byteCodes.hh
+scopeDesc.cpp                 codeSlotsMap.hh
+scopeDesc.cpp                 nmethod_inline.hh
+scopeDesc.cpp                 print.hh
+scopeDesc.cpp                 regs.hh
+scopeDesc.cpp                 scopeDesc.hh
+scopeDesc.cpp                 scopeDescRecorder.hh
+scopeDesc.cpp                 sicExpr.hh
+scopeDesc.cpp                 simpleLookup_inline.hh
+scopeDesc.cpp                 slotRef.hh
+scopeDesc.cpp                 stringOop.hh
+scopeDesc.cpp                 vmStrings.hh
+
+scopeDesc.hh                  key.hh
+scopeDesc.hh                  nameDesc.hh
+
+scopeDescRecorder.cpp         label_inline.hh
+scopeDescRecorder.cpp         nmethodScopes.hh
+scopeDescRecorder.cpp         pcDesc.hh
+scopeDescRecorder.cpp         scopeDescRecorder.hh
+
+scopeDescRecorder.hh          blockOop_inline.hh
+scopeDescRecorder.hh          key.hh
+scopeDescRecorder.hh          scopeDesc.hh
+
+search.cpp                    asserts.hh
+search.cpp                    oop.hh
+search.cpp                    search.hh
+
+search.hh                     types.hh
+
+search_${platform_processor}.cpp             asserts.hh
+search_${platform_processor}.cpp             oop.hh
+search_${platform_processor}.cpp             runtime.hh
+search_${platform_processor}.cpp             search.hh
+
+selfMonitor.cpp               abstract_interpreter_inline.hh
+selfMonitor.cpp               frame.hh
+selfMonitor.cpp               interruptedCtx.hh
+selfMonitor.cpp               itimer.hh
+selfMonitor.cpp               monitorHooks.hh
+selfMonitor.cpp               nmethod.hh
+selfMonitor.cpp               nprofiler.hh
+selfMonitor.cpp               recompile.hh
+selfMonitor.cpp               selfMonitor.hh
+selfMonitor.cpp               signalBlocker.hh
+
+selfMonitor.hh                monitor.hh
+
+send.cpp                      generation_inline.hh
+send.cpp                      scanner.hh
+send.cpp                      send.hh
+send.cpp                      space_inline.hh
+
+send.hh                       expr.hh
+
+sendDesc.cpp                  abstract_interpreter_inline.hh
+sendDesc.cpp                  blist.hh
+sendDesc.cpp                  cacheStub_inline.hh
+sendDesc.cpp                  complexLookup.hh
+sendDesc.cpp                  countStub.hh
+sendDesc.cpp                  fields.hh
+sendDesc.cpp                  prim.hh
+sendDesc.cpp                  recompile.hh
+sendDesc.cpp                  registerString.hh
+sendDesc.cpp                  selfMonitor.hh
+sendDesc.cpp                  sendDesc.hh
+sendDesc.cpp                  stringOop.hh
+sendDesc.cpp                  universe_inline.hh
+sendDesc.cpp                  zone.hh
+sendDesc.cpp                  zoneHeap.hh
+
+sendDesc.hh                   blist.hh
+sendDesc.hh                   config.hh
+sendDesc.hh                   fields.hh
+sendDesc.hh                   kinds.hh
+sendDesc.hh                   machineCache.hh
+sendDesc.hh                   registerString.hh
+sendDesc.hh                   runtime.hh
+sendDesc.hh                   stringOop.hh
+sendDesc.hh                   trapdoors.hh
+sendDesc.hh                   zone.hh
+
+sendDesc_${platform_processor}.cpp           label_inline.hh
+sendDesc_${platform_processor}.cpp           sendDesc.hh
+sendDesc_${platform_processor}.cpp           space_inline.hh
+
+shell.cpp                     ${platform_kind}Prims.hh
+shell.cpp                     allocation.hh
+shell.cpp                     codeSlotsMap.hh
+shell.cpp                     dynLink.hh
+shell.cpp                     expr.hh
+shell.cpp                     files.hh
+shell.cpp                     fprofiler.hh
+shell.cpp                     hprofiler.hh
+shell.cpp                     init.hh
+shell.cpp                     interpreter.hh
+shell.cpp                     interruptedCtx.hh
+shell.cpp                     itimer.hh
+shell.cpp                     mapTable.hh
+shell.cpp                     monitor.hh
+shell.cpp                     monitorHooks.hh
+shell.cpp                     nlrSupport.hh
+shell.cpp                     os_includes.hh
+shell.cpp                     parser.hh
+shell.cpp                     process.hh
+shell.cpp                     recompile.hh
+shell.cpp                     scanner.hh
+shell.cpp                     shell.hh
+shell.cpp                     sig.hh
+shell.cpp                     simpleLookup_inline.hh
+shell.cpp                     vmStrings.hh
+
+shell.hh                      top.hh
+
+sic.cpp                       abstract_interpreter_inline.hh
+sic.cpp                       asm.hh
+sic.cpp                       basicBlock_inline.hh
+sic.cpp                       complexLookup.hh
+sic.cpp                       genHelper.hh
+sic.cpp                       glueSupport.hh
+sic.cpp                       inlining.hh
+sic.cpp                       itimer.hh
+sic.cpp                       nlrSupport.hh
+sic.cpp                       node.hh
+sic.cpp                       nodeGen.hh
+sic.cpp                       preg.hh
+sic.cpp                       print.hh
+sic.cpp                       recompile.hh
+sic.cpp                       regAlloc.hh
+sic.cpp                       registerString.hh
+sic.cpp                       rscope.hh
+sic.cpp                       scopeDescRecorder.hh
+sic.cpp                       selfMonitor.hh
+sic.cpp                       sic.hh
+sic.cpp                       sicScope.hh
+sic.cpp                       slotRef.hh
+sic.cpp                       spaceSize.hh
+sic.cpp                       timer.hh
+
+sic.hh                        aCompiler.hh
+sic.hh                        simpleLookup_inline.hh
+sic.hh                        slist.hh
+
+sicExpr.cpp                   abstract_interpreter_inline.hh
+sicExpr.cpp                   asm.hh
+sicExpr.cpp                   blockOop_inline.hh
+sicExpr.cpp                   nameDesc.hh
+sicExpr.cpp                   node.hh
+sicExpr.cpp                   nodeGen.hh
+sicExpr.cpp                   preg.hh
+sicExpr.cpp                   scopeDescRecorder.hh
+sicExpr.cpp                   sic.hh
+sicExpr.cpp                   sicExpr.hh
+sicExpr.cpp                   sicScope.hh
+
+sicExpr.hh                    allocation.hh
+sicExpr.hh                    blist.hh
+sicExpr.hh                    blockMap.hh
+sicExpr.hh                    mapOop.hh
+sicExpr.hh                    process.hh
+sicExpr.hh                    sicScope.hh
+
+sicInline.cpp                 abstract_interpreter_inline.hh
+sicInline.cpp                 asm.hh
+sicInline.cpp                 blockMap.hh
+sicInline.cpp                 codeSlotsMap.hh
+sicInline.cpp                 complexLookup.hh
+sicInline.cpp                 inlining.hh
+sicInline.cpp                 node.hh
+sicInline.cpp                 nodeGen.hh
+sicInline.cpp                 oop_inline.hh
+sicInline.cpp                 preg.hh
+sicInline.cpp                 prim.hh
+sicInline.cpp                 print.hh
+sicInline.cpp                 recompile.hh
+sicInline.cpp                 registerString.hh
+sicInline.cpp                 rscope.hh
+sicInline.cpp                 sic.hh
+sicInline.cpp                 sicExpr.hh
+sicInline.cpp                 sicScope_inline.hh
+sicInline.cpp                 slotRef.hh
+sicInline.cpp                 spaceSize.hh
+sicInline.cpp                 stringOop.hh
+
+sicPrimline.cpp               abstract_interpreter_inline.hh
+sicPrimline.cpp               byteCodes.hh
+sicPrimline.cpp               byteVectorOop.hh
+sicPrimline.cpp               nodeGen.hh
+sicPrimline.cpp               node_inline.hh
+sicPrimline.cpp               objVectorOop.hh
+sicPrimline.cpp               oop_inline.hh
+sicPrimline.cpp               preg.hh
+sicPrimline.cpp               prim.hh
+sicPrimline.cpp               rscope.hh
+sicPrimline.cpp               sic.hh
+sicPrimline.cpp               sicExpr.hh
+sicPrimline.cpp               sicScope.hh
+sicPrimline.cpp               slotsOop.hh
+
+sicScope.cpp                  abstract_interpreter_inline.hh
+sicScope.cpp                  asm.hh
+sicScope.cpp                  basicBlock_inline.hh
+sicScope.cpp                  blockMap.hh
+sicScope.cpp                  codeSlotsMap.hh
+sicScope.cpp                  complexLookup.hh
+sicScope.cpp                  nodeGen.hh
+sicScope.cpp                  node_inline.hh
+sicScope.cpp                  oop_inline.hh
+sicScope.cpp                  preg.hh
+sicScope.cpp                  prim.hh
+sicScope.cpp                  print.hh
+sicScope.cpp                  recompile.hh
+sicScope.cpp                  regAlloc.hh
+sicScope.cpp                  registerString.hh
+sicScope.cpp                  rscope.hh
+sicScope.cpp                  scopeDescRecorder.hh
+sicScope.cpp                  sic.hh
+sicScope.cpp                  sicExpr.hh
+sicScope.cpp                  sicScope_inline.hh
+sicScope.cpp                  slotRef.hh
+sicScope.cpp                  stringOop.hh
+
+sicScope.hh                   basicBlock.hh
+sicScope.hh                   blist.hh
+sicScope.hh                   longRegString.hh
+sicScope.hh                   node.hh
+sicScope.hh                   preg.hh
+sicScope.hh                   registerString.hh
+sicScope.hh                   sic.hh
+sicScope.hh                   slist.hh
+sicScope.hh                   types.hh
+sicScope.hh                   vframe.hh
+
+sicScope_inline.hh            sicScope.hh
+
+sicSplit.cpp                  abstract_interpreter_inline.hh
+sicSplit.cpp                  node.hh
+sicSplit.cpp                  nodeGen.hh
+sicSplit.cpp                  sic.hh
+sicSplit.cpp                  sicExpr.hh
+sicSplit.cpp                  sicScope.hh
+sicSplit.cpp                  sicSplit.hh
+
+sicSplit.hh                   top.hh
+
+sic_${platform_processor}.cpp                abstract_interpreter_inline.hh
+sic_${platform_processor}.cpp                regAlloc.hh
+sic_${platform_processor}.cpp                sic.hh
+sic_${platform_processor}.cpp                sicScope.hh
+
+sig.cpp                       ${platform_kind}Prims.hh
+sig.cpp                       interruptedCtx.hh
+sig.cpp                       itimer.hh
+sig.cpp                       label_inline.hh
+sig.cpp                       nlrSupport.hh
+sig.cpp                       os_includes.hh
+sig.cpp                       shell.hh
+sig.cpp                       sig.hh
+sig.cpp                       signalBlocker.hh
+sig.cpp                       uncommonBranch.hh
+
+sig.hh                        top.hh
+sig.hh                        vmStrings.hh
+
+sig_${platform_kind}.cpp                  ${platform_kind}Prims.hh
+sig_${platform_kind}.cpp                  interruptedCtx.hh
+sig_${platform_kind}.cpp                  itimer.hh
+sig_${platform_kind}.cpp                  label_inline.hh
+// sig_${platform_kind}.cpp                  no_precompiled_headers
+sig_${platform_kind}.cpp                  os_includes.hh
+sig_${platform_kind}.cpp                  os_includes.hh
+sig_${platform_kind}.cpp                  quartzWindow.hh
+sig_${platform_kind}.cpp                  shell.hh
+sig_${platform_kind}.cpp                  sig.hh
+sig_${platform_kind}.cpp                  uncommonBranch.hh
+
+signalBlocker.hh              sig.hh
+
+signalBlocker_${platform_kind}.cpp        signalBlocker.hh
+
+simpleLookup.cpp              abstract_interpreter_inline.hh
+simpleLookup.cpp              allocation.hh
+simpleLookup.cpp              byteCodes.hh
+simpleLookup.cpp              cacheStub_inline.hh
+simpleLookup.cpp              codeSlotsMap.hh
+simpleLookup.cpp              debug.hh
+simpleLookup.cpp              label_inline.hh
+simpleLookup.cpp              print.hh
+simpleLookup.cpp              process.hh
+simpleLookup.cpp              selfMonitor.hh
+simpleLookup.cpp              simpleLookup_inline.hh
+simpleLookup.cpp              slotRef.hh
+simpleLookup.cpp              stringMap.hh
+simpleLookup.cpp              stringOop.hh
+simpleLookup.cpp              target.hh
+
+simpleLookup.hh               clist.hh
+simpleLookup.hh               deps.hh
+simpleLookup.hh               key.hh
+simpleLookup.hh               top.hh
+
+simpleLookup_inline.hh        diDesc.hh
+simpleLookup_inline.hh        interruptedCtx.hh
+simpleLookup_inline.hh        runtime.hh
+simpleLookup_inline.hh        sendDesc.hh
+simpleLookup_inline.hh        simpleLookup.hh
+simpleLookup_inline.hh        slotRef.hh
+simpleLookup_inline.hh        target.hh
+
+slist.cpp                     slist.hh
+
+slist.hh                      allocation.hh
+slist.hh                      types.hh
+
+slot.cpp                      allocation.hh
+slot.cpp                      generation_inline.hh
+slot.cpp                      parser.hh
+slot.cpp                      scanner.hh
+slot.cpp                      slot.hh
+slot.cpp                      slotList.hh
+slot.cpp                      space_inline.hh
+
+slot.hh                       expr.hh
+
+slotDesc.cpp                  generation_inline.hh
+slotDesc.cpp                  oop_inline.hh
+slotDesc.cpp                  slotDesc.hh
+slotDesc.cpp                  slotsMap.hh
+slotDesc.cpp                  space_inline.hh
+slotDesc.cpp                  stringOop.hh
+
+slotDesc.hh                   nmln.hh
+slotDesc.hh                   slotType.hh
+slotDesc.hh                   universe.hh
+
+slotIterator.cpp              blockMap.hh
+slotIterator.cpp              generation_inline.hh
+slotIterator.cpp              slotIterator.hh
+slotIterator.cpp              space_inline.hh
+slotIterator.cpp              vmStrings.hh
+
+slotIterator.hh               slotDesc.hh
+
+slotList.cpp                  generation_inline.hh
+slotList.cpp                  slotList.hh
+slotList.cpp                  space_inline.hh
+slotList.cpp                  stringOop.hh
+
+slotList.hh                   preserve.hh
+slotList.hh                   slotDesc.hh
+slotList.hh                   slotType.hh
+slotList.hh                   top.hh
+
+slotRef.cpp                   debug.hh
+slotRef.cpp                   fcompiler.hh
+slotRef.cpp                   interpreter.hh
+slotRef.cpp                   recompile.hh
+slotRef.cpp                   slotRef.hh
+
+slotRef.hh                    codeSlotsMap.hh
+slotRef.hh                    target.hh
+
+slotType.cpp                  slotType.hh
+
+slotType.hh                   debug.hh
+slotType.hh                   top.hh
+
+slotsMap.cpp                  assignmentOop.hh
+slotsMap.cpp                  byteVectorOop.hh
+slotsMap.cpp                  debug.hh
+slotsMap.cpp                  enumeration.hh
+slotsMap.cpp                  errorCodes.hh
+slotsMap.cpp                  label_inline.hh
+slotsMap.cpp                  mapOop.hh
+slotsMap.cpp                  mapTable.hh
+slotsMap.cpp                  mirrorOop.hh
+slotsMap.cpp                  slotsMap.hh
+slotsMap.cpp                  space_inline.hh
+slotsMap.cpp                  stringMap.hh
+slotsMap.cpp                  stringOop.hh
+slotsMap.cpp                  vmStrings.hh
+slotsMap.cpp                  zone.hh
+
+slotsMap.hh                   map.hh
+slotsMap.hh                   slotsOop.hh
+slotsMap.hh                   smiOop.hh
+
+slotsMapDeps.cpp              assignmentOop.hh
+slotsMapDeps.cpp              byteVectorOop.hh
+slotsMapDeps.cpp              debug.hh
+slotsMapDeps.cpp              label_inline.hh
+slotsMapDeps.cpp              mapOop.hh
+slotsMapDeps.cpp              mapTable.hh
+slotsMapDeps.cpp              mirrorOop.hh
+slotsMapDeps.cpp              slotsMap.hh
+slotsMapDeps.cpp              space_inline.hh
+slotsMapDeps.cpp              stringMap.hh
+slotsMapDeps.cpp              stringOop.hh
+slotsMapDeps.cpp              vmStrings.hh
+slotsMapDeps.cpp              zone.hh
+
+slotsMapDeps.hh               slotsMap.hh
+
+slotsOop.cpp                  blockMap.hh
+slotsOop.cpp                  byteVectorOop.hh
+slotsOop.cpp                  debug.hh
+slotsOop.cpp                  files.hh
+slotsOop.cpp                  glueSupport.hh
+slotsOop.cpp                  interruptedCtx.hh
+slotsOop.cpp                  label_inline.hh
+slotsOop.cpp                  preserve.hh
+slotsOop.cpp                  runtime.hh
+slotsOop.cpp                  scanner.hh
+slotsOop.cpp                  shell.hh
+slotsOop.cpp                  slotsMap.hh
+slotsOop.cpp                  slotsOop.hh
+slotsOop.cpp                  space_inline.hh
+slotsOop.cpp                  stringMap.hh
+slotsOop.cpp                  vmStrings.hh
+slotsOop.cpp                  zone.hh
+
+slotsOop.hh                   oopsOop_inline.hh
+
+smiMap.cpp                    enumeration.hh
+smiMap.cpp                    generation_inline.hh
+smiMap.cpp                    smiMap.hh
+smiMap.cpp                    space_inline.hh
+smiMap.cpp                    vmStrings.hh
+
+smiMap.hh                     immediateMap.hh
+
+smiOop.cpp                    debug.hh
+smiOop.cpp                    errorCodes.hh
+smiOop.cpp                    generation_inline.hh
+smiOop.cpp                    objVectorOop.hh
+smiOop.cpp                    oop_inline.hh
+smiOop.cpp                    space_inline.hh
+smiOop.cpp                    vmStrings.hh
+
+smiOop.hh                     oop.hh
+smiOop.hh                     universe.hh
+
+space.cpp                     blockOop_inline.hh
+space.cpp                     byteVectorOop.hh
+space.cpp                     enumeration.hh
+space.cpp                     label_inline.hh
+space.cpp                     mapOop.hh
+space.cpp                     mapTable.hh
+space.cpp                     mapVtbls.hh
+space.cpp                     objVectorOop.hh
+space.cpp                     os.hh
+space.cpp                     os_includes.hh
+space.cpp                     processOop.hh
+space.cpp                     rSet.hh
+space.cpp                     rSet_inline.hh
+space.cpp                     search.hh
+space.cpp                     space_inline.hh
+space.cpp                     universe_inline.hh
+space.cpp                     vframe.hh
+space.cpp                     vframeOop.hh
+space.cpp                     vmStrings.hh
+
+space.hh                      allocation.hh
+space.hh                      rSet.hh
+space.hh                      top.hh
+
+spaceSize.cpp                 generation_inline.hh
+spaceSize.cpp                 glueSupport.hh
+spaceSize.cpp                 slotList.hh
+spaceSize.cpp                 spaceSize.hh
+spaceSize.cpp                 space_inline.hh
+spaceSize.cpp                 stringMap.hh
+spaceSize.cpp                 universe.hh
+
+spaceSize.hh                  spaceSizeMacros.hh
+spaceSize.hh                  types.hh
+spaceSize.hh                  util.hh
+
+space_inline.hh               space.hh
+space_inline.hh               universe.hh
+
+sparc.hh                      types.hh
+
+stack.cpp                     allocation.hh
+stack.cpp                     enumeration.hh
+stack.cpp                     frame.hh
+stack.cpp                     interpreter.hh
+stack.cpp                     interruptedCtx.hh
+stack.cpp                     label_inline.hh
+stack.cpp                     prim.hh
+stack.cpp                     process.hh
+stack.cpp                     registerLocator.hh
+stack.cpp                     sendDesc.hh
+stack.cpp                     shell.hh
+stack.cpp                     stack.hh
+stack.cpp                     stringMap.hh
+stack.cpp                     vframe.hh
+stack.cpp                     vframeOop.hh
+
+stack.hh                      runtime.hh
+
+stacking_interpreter.cpp      blockOop_inline.hh
+stacking_interpreter.cpp      generation_inline.hh
+stacking_interpreter.cpp      label_inline.hh
+stacking_interpreter.cpp      oop_inline.hh
+stacking_interpreter.cpp      space_inline.hh
+stacking_interpreter.cpp      stacking_interpreter.hh
+stacking_interpreter.cpp      stringOop.hh
+
+stacking_interpreter.hh       abstract_interpreter_inline.hh
+
+str.cpp                       expr.hh
+str.cpp                       generation_inline.hh
+str.cpp                       space_inline.hh
+str.cpp                       str.hh
+
+str.hh                        list.hh
+str.hh                        stringUtil.hh
+
+stringMap.cpp                 enumeration.hh
+stringMap.cpp                 generation.hh
+stringMap.cpp                 generation_inline.hh
+stringMap.cpp                 objVectorOop.hh
+stringMap.cpp                 space_inline.hh
+stringMap.cpp                 stringMap.hh
+stringMap.cpp                 stringTable.hh
+stringMap.cpp                 universe.hh
+stringMap.cpp                 vmStrings.hh
+
+stringMap.hh                  byteVectorMap.hh
+stringMap.hh                  stringOop.hh
+
+stringOop.cpp                 debug.hh
+stringOop.cpp                 files.hh
+stringOop.cpp                 generation.hh
+stringOop.cpp                 generation_inline.hh
+stringOop.cpp                 interruptedCtx.hh
+stringOop.cpp                 process.hh
+stringOop.cpp                 runtime.hh
+stringOop.cpp                 scanner.hh
+stringOop.cpp                 shell.hh
+stringOop.cpp                 space_inline.hh
+stringOop.cpp                 stringMap.hh
+stringOop.cpp                 stringOop.hh
+stringOop.cpp                 stringTable.hh
+stringOop.cpp                 universe.hh
+stringOop.cpp                 vmStrings.hh
+
+stringOop.hh                  byteVectorOop.hh
+stringOop.hh                  stringUtil.hh
+stringOop.hh                  vmStrings.hh
+
+stringTable.cpp               generation_inline.hh
+stringTable.cpp               space_inline.hh
+stringTable.cpp               stringOop.hh
+stringTable.cpp               stringTable.hh
+stringTable.cpp               vmStrings.hh
+
+stringTable.hh                stringOop.hh
+
+stringUtil.cpp                generation_inline.hh
+stringUtil.cpp                os_includes.hh
+stringUtil.cpp                scanner.hh
+stringUtil.cpp                space_inline.hh
+stringUtil.cpp                stringUtil.hh
+stringUtil.cpp                top.hh
+
+stringUtil.hh                 types.hh
+
+stubs_${platform_processor}.cpp              generation_inline.hh
+stubs_${platform_processor}.cpp              oop_inline.hh
+stubs_${platform_processor}.cpp              space_inline.hh
+
+table.cpp                     generation_inline.hh
+table.cpp                     objVectorOop.hh
+table.cpp                     space_inline.hh
+table.cpp                     table.hh
+
+table.hh                      clist.hh
+table.hh                      regs.hh
+
+tag.hh                        bits.hh
+tag.hh                        types.hh
+
+target.cpp                    abstract_interpreter_inline.hh
+target.cpp                    sicExpr.hh
+target.cpp                    sicScope.hh
+target.cpp                    slotRef.hh
+target.cpp                    target.hh
+
+target.hh                     debug.hh
+target.hh                     simpleLookup.hh
+target.hh                     types.hh
+target.hh                     vframe.hh
+
+timer.cpp                     timer.hh
+
+timer.hh                      os_includes.hh
+timer.hh                      top.hh
+
+// timer_${platform_kind}.cpp                no_precompiled_headers
+timer_${platform_kind}.cpp                timer.hh
+
+
+
+top.hh                        asserts.hh
+top.hh                        config.hh
+top.hh                        error.hh
+top.hh                        lprintf.hh
+top.hh                        macros.hh
+top.hh                        os.hh
+top.hh                        tag.hh
+top.hh                        types.hh
+top.hh                        util.hh
+
+tracing.cpp                   byteVectorOop.hh
+tracing.cpp                   cacheStub_inline.hh
+tracing.cpp                   errorCodes.hh
+tracing.cpp                   label_inline.hh
+tracing.cpp                   slotsOop.hh
+tracing.cpp                   tracing.hh
+tracing.cpp                   universe_inline.hh
+tracing.cpp                   zone.hh
+
+tracing.hh                    types.hh
+
+trapdoors.cpp                 allocation.hh
+trapdoors.cpp                 trapdoors.hh
+
+trapdoors.hh                  regs.hh
+trapdoors.hh                  runtime.hh
+trapdoors.hh                  top.hh
+
+trapdoors_${platform_processor}.cpp          asm_inline.hh
+trapdoors_${platform_processor}.cpp          label_inline.hh
+trapdoors_${platform_processor}.cpp          trapdoors.hh
+
+types.hh                      config.hh
+types.hh                      os_includes.hh
+
+uncommonBranch.cpp            aCompiler.hh
+uncommonBranch.cpp            abstract_interpreter_inline.hh
+uncommonBranch.cpp            allocation.hh
+uncommonBranch.cpp            countStub.hh
+uncommonBranch.cpp            fields.hh
+uncommonBranch.cpp            nprofiler.hh
+uncommonBranch.cpp            os_includes.hh
+uncommonBranch.cpp            recompile.hh
+uncommonBranch.cpp            runtime.hh
+uncommonBranch.cpp            sendDesc.hh
+uncommonBranch.cpp            uncommonBranch.hh
+uncommonBranch.cpp            vframe.hh
+
+uncommonBranch.hh             frame.hh
+uncommonBranch.hh             interruptedCtx.hh
+
+uncommonBranch_${platform_processor}.cpp     allocation.hh
+uncommonBranch_${platform_processor}.cpp     fields.hh
+uncommonBranch_${platform_processor}.cpp     label_inline.hh
+uncommonBranch_${platform_processor}.cpp     nmethod.hh
+uncommonBranch_${platform_processor}.cpp     uncommonBranch.hh
+
+universe.cpp                  abstract_interpreter_inline.hh
+universe.cpp                  ageTable.hh
+universe.cpp                  allocation.hh
+universe.cpp                  assignmentMap.hh
+universe.cpp                  assignmentOop.hh
+universe.cpp                  blockMap.hh
+universe.cpp                  byteCodes.hh
+universe.cpp                  byteVectorMap.hh
+universe.cpp                  cacheStub_inline.hh
+universe.cpp                  codeSlotsMap.hh
+universe.cpp                  fctProxyMap.hh
+universe.cpp                  fctProxyOop.hh
+universe.cpp                  files.hh
+universe.cpp                  floatMap.hh
+universe.cpp                  floatOop.hh
+universe.cpp                  generation.hh
+universe.cpp                  glueSupport.hh
+universe.cpp                  hprofiler.hh
+universe.cpp                  interruptedCtx.hh
+universe.cpp                  label_inline.hh
+universe.cpp                  mapMap.hh
+universe.cpp                  mapTable.hh
+universe.cpp                  mapVtbls.hh
+universe.cpp                  markMap.hh
+universe.cpp                  mirrorMap.hh
+universe.cpp                  mirrorOop.hh
+universe.cpp                  nprofiler.hh
+universe.cpp                  objVectorMap.hh
+universe.cpp                  os_includes.hh
+universe.cpp                  process.hh
+universe.cpp                  processMap.hh
+universe.cpp                  processOop.hh
+universe.cpp                  profilerMap.hh
+universe.cpp                  proxyMap.hh
+universe.cpp                  proxyOop.hh
+universe.cpp                  runtime.hh
+universe.cpp                  scanner.hh
+universe.cpp                  shell.hh
+universe.cpp                  sig.hh
+universe.cpp                  signalBlocker.hh
+universe.cpp                  slotList.hh
+universe.cpp                  slotsMapDeps.hh
+universe.cpp                  smiMap.hh
+universe.cpp                  spaceSize.hh
+universe.cpp                  stack.hh
+universe.cpp                  stringMap.hh
+universe.cpp                  stringTable.hh
+universe.cpp                  universe_inline.hh
+universe.cpp                  zone.hh
+universe.cpp                  zoneHeap.hh
+
+universe.hh                   generation.hh
+universe.hh                   nmln.hh
+universe.hh                   os.hh
+universe.hh                   process.hh
+universe.hh                   rSet.hh
+universe.hh                   space.hh
+universe.hh                   spaceSize.hh
+universe.hh                   stack.hh
+universe.hh                   top.hh
+
+universe.more.cpp             abstract_interpreter_inline.hh
+universe.more.cpp             ageTable.hh
+universe.more.cpp             allocation.hh
+universe.more.cpp             assignmentMap.hh
+universe.more.cpp             blockMap.hh
+universe.more.cpp             byteVectorMap.hh
+universe.more.cpp             cacheStub_inline.hh
+universe.more.cpp             codeSlotsMap.hh
+universe.more.cpp             debug.hh
+universe.more.cpp             disasm.hh
+universe.more.cpp             fctProxyMap.hh
+universe.more.cpp             floatMap.hh
+universe.more.cpp             generation_inline.hh
+universe.more.cpp             glueSupport.hh
+universe.more.cpp             hprofiler.hh
+universe.more.cpp             interruptedCtx.hh
+universe.more.cpp             label_inline.hh
+universe.more.cpp             mapMap.hh
+universe.more.cpp             markMap.hh
+universe.more.cpp             mirrorMap.hh
+universe.more.cpp             nprofiler.hh
+universe.more.cpp             objVectorMap.hh
+universe.more.cpp             objVectorOop.hh
+universe.more.cpp             os.hh
+universe.more.cpp             os_includes.hh
+universe.more.cpp             process.hh
+universe.more.cpp             processMap.hh
+universe.more.cpp             profilerMap.hh
+universe.more.cpp             proxyMap.hh
+universe.more.cpp             rSet_inline.hh
+universe.more.cpp             selfMonitor.hh
+universe.more.cpp             smiMap.hh
+universe.more.cpp             stringMap.hh
+universe.more.cpp             stringTable.hh
+universe.more.cpp             timer.hh
+universe.more.cpp             top.hh
+universe.more.cpp             universe_inline.hh
+universe.more.cpp             vframeMap.hh
+universe.more.cpp             zone.hh
+
+universe_inline.hh            mapOop.hh
+universe_inline.hh            memOop_inline.hh
+universe_inline.hh            universe.hh
+
+util.cpp                      debug.hh
+util.cpp                      eventlog.hh
+util.cpp                      process.hh
+util.cpp                      top.hh
+
+util.hh                       error.hh
+util.hh                       types.hh
+
+vframe.cpp                    allocation.hh
+vframe.cpp                    byteCodes.hh
+vframe.cpp                    codeSlotsMap.hh
+vframe.cpp                    debug.hh
+vframe.cpp                    enumeration.hh
+vframe.cpp                    fields.hh
+vframe.cpp                    generation_inline.hh
+vframe.cpp                    interpreter.hh
+vframe.cpp                    recompile.hh
+vframe.cpp                    registerLocator.hh
+vframe.cpp                    search.hh
+vframe.cpp                    sendDesc.hh
+vframe.cpp                    space_inline.hh
+vframe.cpp                    table.hh
+vframe.cpp                    vframe.hh
+vframe.cpp                    vframeOop.hh
+vframe.cpp                    vmStrings.hh
+
+vframe.hh                     blockOop_inline.hh
+vframe.hh                     frame.hh
+vframe.hh                     nameDesc.hh
+vframe.hh                     nmethod_inline.hh
+vframe.hh                     pcDesc.hh
+vframe.hh                     scopeDesc.hh
+vframe.hh                     types.hh
+
+vframeMap.cpp                 abstract_interpreter_inline.hh
+vframeMap.cpp                 allocation.hh
+vframeMap.cpp                 assignmentOop.hh
+vframeMap.cpp                 codeLikeSlotsMap.hh
+vframeMap.cpp                 codeSlotsMap.hh
+vframeMap.cpp                 enumeration.hh
+vframeMap.cpp                 label_inline.hh
+vframeMap.cpp                 mirrorOop.hh
+vframeMap.cpp                 objVectorOop.hh
+vframeMap.cpp                 stringMap.hh
+vframeMap.cpp                 vframe.hh
+vframeMap.cpp                 vframeMap.hh
+vframeMap.cpp                 vframeOop.hh
+
+vframeMap.hh                  codeLikeSlotsMap.hh
+
+vframeOop.cpp                 abstract_interpreter_inline.hh
+vframeOop.cpp                 allocation.hh
+vframeOop.cpp                 codeSlotsMap.hh
+vframeOop.cpp                 kinds.hh
+vframeOop.cpp                 label_inline.hh
+vframeOop.cpp                 vframe.hh
+vframeOop.cpp                 vframeOop.hh
+
+vframeOop.hh                  slotsOop.hh
+vframeOop.hh                  vframe.hh
+vframeOop.hh                  vframeMap.hh
+
+vframe_${platform_processor}.cpp             allocation.hh
+vframe_${platform_processor}.cpp             byteCodes.hh
+vframe_${platform_processor}.cpp             codeSlotsMap.hh
+vframe_${platform_processor}.cpp             debug.hh
+vframe_${platform_processor}.cpp             enumeration.hh
+vframe_${platform_processor}.cpp             fields.hh
+vframe_${platform_processor}.cpp             interpreter.hh
+vframe_${platform_processor}.cpp             recompile.hh
+vframe_${platform_processor}.cpp             registerLocator.hh
+vframe_${platform_processor}.cpp             search.hh
+vframe_${platform_processor}.cpp             sendDesc.hh
+vframe_${platform_processor}.cpp             table.hh
+vframe_${platform_processor}.cpp             vframe.hh
+vframe_${platform_processor}.cpp             vframeOop.hh
+vframe_${platform_processor}.cpp             vmStrings.hh
+
+vmObj.hh                      process.hh
+vmObj.hh                      top.hh
+vmObj.hh                      universe.hh
+
+vmStrings.cpp                 generation_inline.hh
+vmStrings.cpp                 space_inline.hh
+vmStrings.cpp                 stringMap.hh
+vmStrings.cpp                 vmStrings.hh
+
+vmStrings.hh                  top.hh
+
+
+xlibPrims.cpp                 debug.hh
+xlibPrims.cpp                 glueSupport.hh
+xlibPrims.cpp                 interruptedCtx.hh
+xlibPrims.cpp                 label_inline.hh
+xlibPrims.cpp                 monitor.hh
+xlibPrims.cpp                 os_includes.hh
+xlibPrims.cpp                 process.hh
+xlibPrims.cpp                 sig.hh
+xlibPrims.cpp                 signalBlocker.hh
+xlibPrims.cpp                 space_inline.hh
+xlibPrims.cpp                 stack.hh
+xlibPrims.cpp                 unixPrims.hh
+xlibPrims.cpp                 xlibPrims.hh
+// xlibPrims.cpp                 no_precompiled_headers
+
+xlibPrims.hh                  glueDefs.hh
+xlibPrims.hh                  x_includes.hh
+
+xlibWindow.cpp                label_inline.hh
+xlibWindow.cpp                monitor.hh
+// xlibWindow.cpp                no_precompiled_headers
+xlibWindow.cpp                signalBlocker.hh
+xlibWindow.cpp                space_inline.hh
+xlibWindow.cpp                xlibPrims.hh
+xlibWindow.cpp                xlibWindow.hh
+
+xlibWindow.h                  platformWindow.h
+
+zone.cpp                      allocation.hh
+zone.cpp                      cacheStub_inline.hh
+zone.cpp                      codeTable.hh
+zone.cpp                      countStub.hh
+zone.cpp                      debug.hh
+zone.cpp                      errorCodes.hh
+zone.cpp                      fprofiler.hh
+zone.cpp                      frame.hh
+zone.cpp                      interruptedCtx.hh
+zone.cpp                      itimer.hh
+zone.cpp                      label_inline.hh
+zone.cpp                      machineCache.hh
+zone.cpp                      mirrorOop.hh
+zone.cpp                      nmethod_inline.hh
+zone.cpp                      nprofiler.hh
+zone.cpp                      os_includes.hh
+zone.cpp                      print.hh
+zone.cpp                      selfMonitor.hh
+zone.cpp                      spaceSize.hh
+zone.cpp                      timer.hh
+zone.cpp                      trapdoors.hh
+zone.cpp                      util.hh
+zone.cpp                      zone.hh
+zone.cpp                      zoneHeap.hh
+
+zone.hh                       countStub.hh
+zone.hh                       nmln.hh
+zone.hh                       timer.hh
+zone.hh                       trapdoors.hh
+zone.hh                       zoneHeap.hh
+
+zoneHeap.cpp                  allocation.hh
+zoneHeap.cpp                  label_inline.hh
+zoneHeap.cpp                  nmethod.hh
+zoneHeap.cpp                  os.hh
+zoneHeap.cpp                  zoneHeap.hh
+
+zoneHeap.hh                   allocation.hh
+zoneHeap.hh                   top.hh
+zoneHeap.hh                   types.hh

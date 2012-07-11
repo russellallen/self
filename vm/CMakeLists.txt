@@ -28,10 +28,14 @@ endif()
 #
 #
 #
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 project(${PROJECT_NAME} C CXX ASM)
 
+if(DEFINED SELF_MACOSX_XCODEPROJECTNAME)
+else()
+  set(SELF_MACOSX_XCODEPROJECTNAME ${PROJECT_NAME})
+endif()
 # setup the routines and variables we might use
 # sets 
 #  ${platform} ${platform_processor} 
@@ -63,19 +67,12 @@ include(${platform})
 include_directories_from_src(SRC)
 
 
-# we need a vmDate thing.
-# sets $SRC_VMDATE
-include(setupVmDate)
-list(APPEND SRC ${SRC_VMDATE})
-
-
 # setup general definitions. 
 include(setup)
 
 ## setup assemby support
 #
 setup_assembler_support(SRC)
-
 
 # setup configuration-specific (release/debug) stuff
 include(configurations)
@@ -84,6 +81,18 @@ include(configurations)
 # sets ${3RD_PARTY_LIBS}
 include(dependencies)
 
+# 
+# generate dependent include files.
+# sets ${SELF_PREFIX_HEADER}
+#
+get_directory_property(le_dirs INCLUDE_DIRECTORIES)
+
+include(makeDeps)
+
+# we need a vmDate thing.
+# sets $SRC_VMDATE
+include(setupVmDate)
+list(APPEND SRC ${SRC_VMDATE})
 
 # pre-compiled headers. (not for Xcode, has its own way)
 if(NOT CMAKE_GENERATOR MATCHES Xcode)
@@ -106,5 +115,8 @@ target_link_libraries(${PROJECT_NAME} ${EXTRA_LIBRARIES} ${3RD_PARTY_LIBS})
 
 # setup target-specific definitions
 setup_target(${PROJECT_NAME})
+# we _know_ we have to deal with assembler.
+setup_target_assembler_support(${PROJECT_NAME})
+
 
 configure_end()

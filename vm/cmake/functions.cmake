@@ -25,7 +25,7 @@ function(determine_build_information buildVar)
   if(_git_not_there)
     set(${buildVar} PARENT_SCOPE)
   else()
-    execute_process(COMMAND git --git-dir=${CMAKE_SOURCE_DIR}/../.git describe --tags --dirty
+    execute_process(COMMAND git --git-dir=${CMAKE_CURRENT_SOURCE_DIR}/../.git describe --tags --dirty
       RESULT_VARIABLE git_result
       OUTPUT_VARIABLE _revision 
       ERROR_VARIABLE _error 
@@ -139,7 +139,7 @@ macro(add_pch_rule _header_filename _src_list)
       endforeach()
     endif()
     
-    gather_directory_incls(_incls ${CMAKE_SOURCE_DIR} "")
+    gather_directory_incls(_incls ${CMAKE_CURRENT_SOURCE_DIR} "")
     list(APPEND _args ${_defines} ${_flags} ${_incls})
     list(APPEND _args -c ${_header_filename_full} -o ${_gch_filename})
     separate_arguments(_args)  

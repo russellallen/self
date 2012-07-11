@@ -1,3 +1,0 @@
-#!/bin/csh
-ln -fs /usr/X11R6/lib/libX11.a /tmp/libX11.a.wob
-ln -fs /usr/X11R6/lib/libXext.a /tmp/libXext.a.wob

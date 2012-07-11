@@ -34,6 +34,10 @@ if(SELF_COVERAGE)
   list(APPEND _flags --coverage)
 endif()
 
+if(SELF_PROFILE)
+  list(APPEND _flags -pg)
+endif()
+
 #
 # setup all warning flags
 #

@@ -2,10 +2,9 @@
 
 # CPU detection
 
-if(false)
-elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^Intel" OR
-       CMAKE_SYSTEM_PROCESSOR MATCHES "^i.86" OR
-       CMAKE_SYSTEM_PROCESSOR MATCHES "^x86_")
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "^Intel" OR
+   CMAKE_SYSTEM_PROCESSOR MATCHES "^i.86" OR
+   CMAKE_SYSTEM_PROCESSOR MATCHES "^x86_")
     
     set(platform_processor "i386")
     
@@ -19,36 +18,38 @@ elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^sparc")
     
     set(platform_processor "spac")
     
-else(false)
+else()
     
     message(FATAL_ERROR "Processor type ${CMAKE_SYSTEM_PROCESSOR} not supported")
     
-endif(false)
+endif()
 
 
 # OS detection
 
-if(false)
-elseif(CMAKE_SYSTEM_NAME MATCHES "Darwin")
+if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
     
+    set(platform_kind "unix")
     set(platform_name "Mac OS X")
     set(platform "mac_osx")
     
 elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
     
+    set(platform_kind "unix")
     set(platform_name "Linux")
     set(platform "linux")
     
 elseif(CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
     
+    set(platform_kind "unix")
     set(platform_name "Solaris")
     set(platform "svr4")
     
-else(false)
+else()
     
     message(FATAL_ERROR "OS type ${CMAKE_SYSTEM_NAME} not supported")
     
-endif(false)
+endif()
 
 # Compiler detection
 
@@ -60,7 +61,7 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES ".*[Gg][Nn][Uu].*")
 
   set(gcc 1)
 
-else(false)
+else()
     
     message(FATAL_ERROR "Compiler ${CMAKE_CXX_COMPILER} not supported")
     

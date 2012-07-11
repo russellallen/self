@@ -368,7 +368,7 @@ fint CodeGen::verifyParents(objectLookupTarget* target, Location t, fint count) 
     
     // must align nmln to follow
     // There is a call coming, each 5 bytes, so want pc + 5 to be 0 mod 4.
-    // See align * in asmDefs_gcc_i386.s
+    // See align * in asmDefs_i386.S
     // get ic value to pass in, cannot use call cause of backpatching, etc.
     Label next;
     a.call(&next);
@@ -549,7 +549,7 @@ Label* CodeGen::selfCall(RegisterState* s, LookupType lookupType,
   
   // must align nmln to follow
   // There are a call and two jumps coming, each 5 bytes, so want pc to be 1 mod 4.
-  // See align * in asmDefs_gcc_i386.s
+  // See align * in asmDefs_i386.S
   fint x = ((fint)a.offset() - 1) & 3;
   fint num_nops = (4 - x) & 3;
   for (fint i = 0;  i < num_nops; ++i) a.nop();

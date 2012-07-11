@@ -5,7 +5,7 @@
 
 #if TARGET_IS_PROFILED
 
-# include "_allocZone_sparc.s.incl"
+# include "_allocZone_sparc.S.incl"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

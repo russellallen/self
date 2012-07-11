@@ -3,11 +3,7 @@ if(NOT APPLE)
     message(FATAL_ERROR "This is only for Mac OS X")
 endif(NOT APPLE)
 
-execute_process(COMMAND xcodebuild -version
-  RESULT_VARIABLE _xcodebuild_failed OUTPUT_VARIABLE XCODE_OUT ERROR_VARIABLE _) 
-if(NOT _xcodebuild_failed 
-  AND ((XCODE_OUT MATCHES "Xcode 3")
-  AND (clang)))
+if((CMAKE_GENERATOR MATCHES Xcode) AND ((XCODE_VERSION VERSION_LESS "4") AND (clang)))
     message("WARNING:  Self on Xcode 3 does not work with Clang. 
          It simply lacks C++ support.")
 endif()
@@ -212,6 +208,11 @@ macro(setup_target target)
     # set(CMAKE_XCODE_ATTRIBUTE_GCC_ENABLE_CPP_RTTI "NO")
     # remove_definitions(-fno-rtti)
     
+    if(SELF_PROFILE)
+      set(CMAKE_XCODE_ATTRIBUTE_GENERATE_PROFILING_CODE "YES")
+      remove_definitions(-pg)
+    endif()
+    
     if(SELF_COVERAGE)
       set(CMAKE_XCODE_ATTRIBUTE_GCC_GENERATE_TEST_COVERAGE_FILES "YES")
       remove_definitions(-ftest-coverage)
@@ -235,6 +236,8 @@ endmacro()
 # API
 macro(include_prefix_header target file)
   if(CMAKE_GENERATOR MATCHES Xcode)
+    get_target_property(target_sources ${target} SOURCES)
+    set_source_files_properties(${target_sources} PROPERTIES OBJECT_DEPENDS "${file}")
     set_target_properties(${target} PROPERTIES XCODE_ATTRIBUTE_GCC_PRECOMPILE_PREFIX_HEADER "YES")
     set_target_properties(${target} PROPERTIES XCODE_ATTRIBUTE_GCC_PREFIX_HEADER "${file}")
   else()

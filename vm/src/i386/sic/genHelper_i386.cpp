@@ -191,7 +191,7 @@
     
     // must align nmln to follow
     // There is a call coming, each 5 bytes, so want pc + 5 to be 0 mod 4.
-    // See align * in asmDefs_gcc_i386.s
+    // See align * in asmDefs_i386.S
     // get ic value to pass in, cannot use call cause of backpatching, etc.
     Label next;
     a->call(&next);

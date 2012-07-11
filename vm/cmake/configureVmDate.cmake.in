@@ -2,7 +2,7 @@
 set(WIN32 @WIN32@) 
 set(UNIX @UNIX@) 
 set(PLATFORM "@platform_name@ @platform_processor@")
-set(GIT_DIR "@CMAKE_SOURCE_DIR@/../.git/")
+set(GIT_DIR "@CMAKE_CURRENT_SOURCE_DIR@/../.git/")
 set(IN_FILE "@SRC_VMDATE_IN@") 
 set(OUT_FILE "@SRC_VMDATE@") 
 

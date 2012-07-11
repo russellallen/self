@@ -4,10 +4,9 @@
 #	$SRC_VMDATE
 #
 # in:
-#	$SELF_GENERATED_INLCUDE_FILES_DIR
-#	$SELF_BUILD_SUPPORT_DIR
-#	$LOCAL_CMAKE_DIR
-#	($CMAKE_BINARY_DIR)
+#   $SELF_BUILD_SUPPORT_DIR
+#   $LOCAL_CMAKE_DIR
+#   ($CMAKE_BINARY_DIR)
 
 set(SRC_VMDATE ${SELF_GENERATED_INLCUDE_FILES_DIR}/vmDate.cpp)
 set(SRC_VMDATE_IN ${SELF_BUILD_SUPPORT_DIR}/vmDate.cpp.in)
@@ -21,6 +20,7 @@ add_custom_target(create_vmDate
     DEPENDS ${SRC}
     COMMENT "Creating ${SRC_VMDATE}"
 ) 
+set_target_properties(create_vmDate PROPERTIES FOLDER "${SELF_HELPER_FOLDER}")
 
 set_source_files_properties(${SRC_VMDATE} 
   PROPERTIES 

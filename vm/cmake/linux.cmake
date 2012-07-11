@@ -13,6 +13,8 @@ mark_as_advanced(DYNAMIC COMPILER TARGET_OS_VERSION TARGET_OS_FAMILY)
 
 year(YEAR)
 
+set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS OFF)
+
 # Threads
 enable_language(C)
 find_package(Threads REQUIRED)

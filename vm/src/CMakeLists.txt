@@ -2,11 +2,6 @@
 
 #config below.
 
-set(SRC_misc
-  includeDB
-)
-list(APPEND SRC_src ${SRC_misc})
-
 set(SRC_any
   any/asm/asm.cpp
   any/asm/asm.hh
@@ -457,11 +452,11 @@ set(SRC_i386
   i386/lookup/sendDesc_i386.hh
   i386/memory/search_i386.cpp
   i386/memory/search_i386.hh
-  i386/prims/asmPrims_gcc_i386.S
+  i386/prims/asmPrims_i386.S
   i386/prims/prim_table_arch_i386.hh
   i386/runtime/aCompiler_i386.cpp
   i386/runtime/aCompiler_i386.hh
-  i386/runtime/asmDefs_gcc_i386.hh
+  i386/runtime/asmDefs_i386.hh
   i386/runtime/conversion_i386.cpp
   i386/runtime/conversion_i386.hh
   i386/runtime/frame_format_i386.cpp
@@ -476,7 +471,7 @@ set(SRC_i386
   i386/runtime/interruptedCtx_i386.hh
   i386/runtime/registerLocator_i386.cpp
   i386/runtime/registerLocator_i386.hh
-  i386/runtime/runtime_asm_gcc_i386.S
+  i386/runtime/runtime_asm_i386.S
   i386/runtime/runtime_i386.cpp
   i386/runtime/runtime_i386.hh
   i386/runtime/stubs_i386.cpp
@@ -543,7 +538,7 @@ set(SRC_sparc
   sparc/prims/prim_table_arch_sparc.hh
   sparc/runtime/aCompiler_sparc.cpp
   sparc/runtime/aCompiler_sparc.hh
-  sparc/runtime/asmDefs_gcc_sparc.hh
+  sparc/runtime/asmDefs_sparc.hh
   sparc/runtime/conversion_sparc.cpp
   sparc/runtime/conversion_sparc.hh
   sparc/runtime/frame_format_sparc.cpp
@@ -558,7 +553,7 @@ set(SRC_sparc
   sparc/runtime/interruptedCtx_sparc.hh
   sparc/runtime/registerLocator_sparc.cpp
   sparc/runtime/registerLocator_sparc.hh
-  sparc/runtime/runtime_asm_gcc_sparc.S
+  sparc/runtime/runtime_asm_sparc.S
   sparc/runtime/runtime_sparc.cpp
   sparc/runtime/runtime_sparc.hh
   sparc/runtime/uncommonBranch_sparc.cpp
