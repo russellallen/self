@@ -9,7 +9,7 @@
 Map* markMap::create_markMap() {
   markMap m1;
   oop ignored;
-  return create_map(sizeof(markMap), NULL, &m1, &ignored);
+  return create_map(sizeof(markMap), 0, &m1, &ignored);
 }
 
 void markMap::print(oop obj) {

@@ -76,8 +76,8 @@
 
     sp = (char*)newSP;
     
-    newFr = newSP->push_new_sp(NULL)->as_callers_frame(); // Sparc needs extra frame
-    rlFr  = NULL;
+    newFr = newSP->push_new_sp(0)->as_callers_frame(); // Sparc needs extra frame
+    rlFr  = 0;
     newFrRl = RegisterLocator::for_frame(newFr);
     
     sd = sd_of_created_frame;
@@ -101,7 +101,7 @@
                      char* self_sparc_fp_or_ppc_sp ) {
                                                
     saved_outregs[0] = res;
-    OutgoingArgsOfReturnTrapOrRecompileFrame = NULL; // done with this                                           
+    OutgoingArgsOfReturnTrapOrRecompileFrame = 0; // done with this                                           
     ContinueAfterReturnTrap(continuationPC, self_sparc_fp_or_ppc_sp);
   }
   

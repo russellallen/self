@@ -34,7 +34,7 @@ class frame {
  public:      frame* sender();
 
  protected:   char**   real_return_addr_addr();
- public:      void** location_addr(Location r, RegisterLocator* rl = NULL);
+ public:      void** location_addr(Location r, RegisterLocator* rl = 0);
  protected:   oop*   location_addr_of_incoming_argument(Location r, RegisterLocator* rl);
 
  protected:   void  copy_to(char* sp, char* caller, char* pc, bool adjust);
@@ -43,9 +43,9 @@ class frame {
  protected:  void adjust_blocks(frame* oldScope,  frame* newScope, RegisterLocator* rl);
  public:     void fix_frame(char* pc, char* sp);
 
- public:      frame* home_frame_of_block_scope(frame* hint = NULL);
+ public:      frame* home_frame_of_block_scope(frame* hint = 0);
  public:      frame* block_scope_of_home_frame();
- public:      frame* home_frame_of_vfo_locals(frame* hint = NULL);
+ public:      frame* home_frame_of_vfo_locals(frame* hint = 0);
  public:      frame* vfo_locals_of_home_frame();
 
  protected:   int32 frame_size_of_uncopied_frame();
@@ -89,7 +89,7 @@ class frame {
   // now the platform-independent ones:
 
 
- public:     frame* sendee(frame* hint = NULL);
+ public:     frame* sendee(frame* hint = 0);
  public:     bool verify(int n, RegisterLocator* rl);
 
 // nmethod_frame_chain methods
@@ -110,13 +110,13 @@ class frame {
   // and put the pointer in the frame.
   
 public:
- objVectorOop      patched_frame_saved_outgoing_args(nmethod* nm = NULL);
- void          set_patched_frame_saved_outgoing_args(objVectorOop, nmethod* nm = NULL);
- objVectorOop                  extract_outgoing_args(frame* sendeeOrNULL = NULL);
+ objVectorOop      patched_frame_saved_outgoing_args(nmethod* nm = 0);
+ void          set_patched_frame_saved_outgoing_args(objVectorOop, nmethod* nm = 0);
+ objVectorOop                  extract_outgoing_args(frame* sendeeOrNULL = 0);
  
 private:
  friend class FrameIterator;
- objVectorOop*  patched_frame_saved_outgoing_args_addr(nmethod* nm = NULL);
+ objVectorOop*  patched_frame_saved_outgoing_args_addr(nmethod* nm = 0);
  oop            perform_selector_of_SendMessage_stub_frame();
 
   
@@ -277,4 +277,4 @@ extern "C" {
 const fint HandleReturnTrap_arg_count = 5;
 
 # define SavedFrameChain ((frame*)1)
-# define NoFrameChain    NULL
+# define NoFrameChain    0

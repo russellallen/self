@@ -15,13 +15,13 @@
 
 
 extern "C" {
-  oop UncommonBranch(...) { fatal("unimp intel");  return NULL; }
+  oop UncommonBranch(...) { fatal("unimp intel");  return 0; }
   // Note: do not have a stack frame yet; link is link of caller
   // Also, they must preserve Temp1 and Temp2
   }
 
 // Only needed for interpreter/compiler interoperation:
-extern "C" {  oop ReturnResult_stub(...) { fatal("unimp intel");  return NULL; } }
+extern "C" {  oop ReturnResult_stub(...) { fatal("unimp intel");  return 0; } }
 oop ReturnResult_stub_result;
 
 # endif // TARGET_ARCH == I386_ARCH

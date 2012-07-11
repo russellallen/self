@@ -39,7 +39,7 @@ const char *architecture_pname[] = {
         "v7",
         "v8",
         "sparclite",
-        NULL,
+        0,
 };
 
 

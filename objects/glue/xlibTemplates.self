@@ -569,7 +569,7 @@ traits: traits xlib display
 traits: traits xlib window
  visibility: publicSlot
   void nullWindow \
-    	    = proxy_null Window Window_seal {xlib window deadCopy} get NULL 
+    	    = proxy_null Window Window_seal {xlib window deadCopy} get 0 
 
 
 
@@ -582,7 +582,7 @@ traits: traits xlib window
 traits: traits xlib pixmap
  visibility: publicSlot
   void nullPixmap \
-    	    = proxy_null Pixmap Pixmap_seal {xlib pixmap deadCopy} get NULL 
+    	    = proxy_null Pixmap Pixmap_seal {xlib pixmap deadCopy} get 0 
 
 
 
@@ -592,7 +592,7 @@ traits: traits xlib pixmap
 traits: traits xlib region
  visibility: publicSlot
   void nullRegion \
-    	    = proxy_null Region Region_seal {xlib region deadCopy} get NULL 
+    	    = proxy_null Region Region_seal {xlib region deadCopy} get 0 
   void xCreateRegion = proxy Region Region_seal {xlib region deadCopy} \
 	      call XCreateRegion_wrap canAWS
   proxy Region Region_seal xDestroyRegion = void call XDestroyRegion_wrap canAWS
@@ -635,7 +635,7 @@ traits: traits xlib region
 traits: traits xlib cursor
  visibility: publicSlot
   void nullCursor \
-    	    = proxy_null Cursor Cursor_seal {xlib cursor deadCopy} get NULL 
+    	    = proxy_null Cursor Cursor_seal {xlib cursor deadCopy} get 0 
 
 
 

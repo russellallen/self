@@ -17,7 +17,7 @@
 
    public:
     DeadBlockNode(PRegBList* e, SplitSig* signal)
-      : PrimNode(non_lifo_abort, NULL, 1, e, signal, NULL) {}
+      : PrimNode(non_lifo_abort, 0, 1, e, signal, 0) {}
 
     Node* clone(PReg* from, PReg* to);
     void gen();

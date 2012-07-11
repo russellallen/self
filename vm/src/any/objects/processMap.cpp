@@ -9,7 +9,7 @@
 processOop processMap::create_process(Process* process) {
   slotList* slots = new slotList(VMString[PARENT],
                                  parent_map_slotType,
-                                 create_slots((slotList*)NULL));
+                                 create_slots((slotList*)0));
   processMap mm;
   processOop mr;
   (void)create_map(sizeof(processMap), slots, &mm, (oop*)&mr);
@@ -24,7 +24,7 @@ oop processMap::clone(oop obj, bool mustAllocate, oop genObj) {
   vframeOop m= Memory->outerActivationObj->basic_clone(mustAllocate, genObj);
   if (oop(p) != failedAllocationOop  &&  oop(m) != failedAllocationOop) {
     assert(!m->is_live(), "shouldn't be live");
-    assert(m->next() == NULL, "should be empty");
+    assert(m->next() == 0, "should be empty");
     Memory->store((oop*)&p->addr()->_vframeList, m);
     p->set_return_oop(smiOop_zero);
   }
@@ -48,7 +48,7 @@ void processMap::gc_mark_contents(oop p) {
   processOop procObj= processOop(p);
   assert(procObj->is_forwarded(), "otherwise how did we get here?");
   Process *proc= procObj->process();
-  if (proc == NULL // not a live process
+  if (proc == 0 // not a live process
       || proc == currentProcess || proc == twainsProcess) // already done
     return;
   if (proc->processObj() == procObj) // not a clone
@@ -70,7 +70,7 @@ void processMap::switch_pointer(oop obj, oop* where, oop to) {
 
 void processMap::dummy_initialize(oop obj, oop filler) {
   assert_process(obj, "obj must be process");
-  processOop(obj)->set_process(NULL);
+  processOop(obj)->set_process(0);
   Memory->store((oop*)&processOop(obj)->addr()->_vframeList, filler);  
   Memory->store((oop*)&processOop(obj)->addr()->_return_oop, filler);  
 }

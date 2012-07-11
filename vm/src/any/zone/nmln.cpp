@@ -57,7 +57,7 @@ inline int32 nmln::hash() {
   return (int32(this) >> IgnoreBits) & nthMask(MapBits);
 }
 
-static nmln** nmlnCache = NULL;
+static nmln** nmlnCache = 0;
 // direct-mapped cache of 2^MapBits nmlns to speed up verify
 
 # if GENERATE_DEBUGGING_AIDS
@@ -70,7 +70,7 @@ void initNmlnCache() {
   memset((char*)nmlnCache, 0, sizeof(nmln*) * (1 << MapBits));
 }
 
-void resetNmlnCache() { nmlnCache = NULL; }
+void resetNmlnCache() { nmlnCache = 0; }
 
 void nmln::print() {
   lprintf("0x%lx: prev: 0x%lx, next: 0x%lx",
@@ -178,21 +178,21 @@ void nmln::flush() {
 // the asXXX functions are not inlined to reduce .h dependencies
 CacheStub* nmln::asCacheStub() {
   NCodeBase* s =
-    Memory->code->stubs->contains(this) ? findStub(this) : NULL;
-  return s && s->isCacheStub() ? (CacheStub*)s : NULL;
+    Memory->code->stubs->contains(this) ? findStub(this) : 0;
+  return s && s->isCacheStub() ? (CacheStub*)s : 0;
 }
 
 CountStub* nmln::asCountStub() {
   NCodeBase* s =
-    Memory->code->stubs->contains(this) ? findStub(this) : NULL;
-  return s && s->isCountStub() ? (CountStub*)s : NULL;
+    Memory->code->stubs->contains(this) ? findStub(this) : 0;
+  return s && s->isCountStub() ? (CountStub*)s : 0;
 }
 
 sendDesc* nmln::asSendDesc_or_null() {
   return
     Memory->code->contains(this) 
       ?  sendDesc::sendDesc_from_nmln(this)
-      :  NULL;
+      :  0;
 }
 
 sendDesc* nmln::asSendDesc() {
@@ -210,7 +210,7 @@ sendDesc* nmln::callingSendDesc() {
   if (cs) return cs->sd();
 
   ShouldNotReachHere(); // what is it?
-  return NULL;
+  return 0;
 }
 
 DIDesc* nmln::asDIDesc() {
@@ -230,7 +230,7 @@ nmethod* nmln::asSender() {
   } else {
     ShouldNotReachHere(); // what is it?
   }
-  return NULL;
+  return 0;
 }
 
 

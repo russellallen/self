@@ -20,10 +20,10 @@ static int compare_pregs(const void* p1,  const void* p2) {
 
 SICAllocator::SICAllocator() {
   theAllocator = this; 
-  globals = NULL;
+  globals = 0;
   pairs = new RegisterPairList(100);
   regClasses = new RegisterEqClassBList(50);
-  regClasses->append(NULL);     // make first index be 1, not 0
+  regClasses->append(0);     // make first index be 1, not 0
 }
 
 void SICAllocator::allocateToStack(PReg* r) {
@@ -314,20 +314,20 @@ void PReg::targetUses(RegisterString incoming, bool recursive) {
         PReg* r = targetedRegs->pop();
         r->scope->allocateReg(r);
       }
-      targetedRegs = NULL;
+      targetedRegs = 0;
     }
   }
 }
 
 RegisterEqClass::RegisterEqClass(PReg* f) {
   first = last = f;
-  assert(last->regClassLink == NULL, "should be empty");
+  assert(last->regClassLink == 0, "should be empty");
 }
 
 void RegisterEqClass::append(PReg* other) {
   assert(first->regClass && first->regClass == last->regClass,
          "bad regClass");
-  assert(last->regClassLink == NULL, "should be empty");
+  assert(last->regClassLink == 0, "should be empty");
   last->regClassLink = other;
   fint c = first->regClass;
   for ( ; last->regClassLink; last = last->regClassLink) {
@@ -338,7 +338,7 @@ void RegisterEqClass::append(PReg* other) {
 
 void RegisterPair::add() { theAllocator->pairs->append(this); }
 
-static SAPReg* check_lhs = NULL;
+static SAPReg* check_lhs = 0;
 static bool check_ok = false;
 
 static void checkDef(PDef* u) {

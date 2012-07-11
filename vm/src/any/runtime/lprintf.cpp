@@ -8,7 +8,7 @@
 
 # include <stdarg.h>
 
-static FILE* logFile = NULL;
+static FILE* logFile = 0;
 static char fname[80];
 
 // dont't use include files for the thing below because this would include
@@ -24,7 +24,7 @@ extern "C" {
 void lprintf_exit() {
   if (logFile) {
     fclose(logFile);
-    logFile = NULL;
+    logFile = 0;
     unlink(fname);
   }
 }

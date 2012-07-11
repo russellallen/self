@@ -64,7 +64,7 @@ void* nmethod::operator new(size_t size) {
   while( number_of_tries++ < 2) {
     p = Memory->code->alloc(iLen, sLen, ilLen, dLen + sizeof(nmethod*),
                             iAddr, sAddr, lAddr, dAddr);
-    if (p != NULL) {
+    if (p != 0) {
       return p;
     }
   }
@@ -72,7 +72,7 @@ void* nmethod::operator new(size_t size) {
         "You should increase the size of the code cache by writing\n"
         "a snapshot with code_size increased (see the documentation\n"
         "for _MemoryWriteSnapshot:Compress:Sizes:).");
-  return p; // Was NULL, but gcc3 complains
+  return p; // Was 0, but gcc3 complains
 }
 
 nmethod::nmethod(AbstractCompiler* c, bool generateDebugCode) {
@@ -103,7 +103,7 @@ nmethod::nmethod(AbstractCompiler* c, bool generateDebugCode) {
   frameCreationOffset = c->frameCreationOffset();
   
   rememberLink.init();
-  codeTableLink= NULL;
+  codeTableLink= 0;
   diLink.init(c->diLink);
   if (diLink.notEmpty()) flags.isDI = true;
   flags.level = c->level();
@@ -313,7 +313,7 @@ void nmethod::remove_me_from_inline_cache() {
   static int n = 0;
   while (linkedSends.notEmpty()) {
     nmln *x= linkedSends.next;
-    assert(x->next != NULL, "");
+    assert(x->next != 0, "");
     findThing(x)->unlink_me(x);
   }
 }
@@ -329,11 +329,11 @@ void nmethod::makeYoung() {
     lnext= l->next; // because we're mutating l
     sendDesc* sd= l->asSendDesc_or_null();
     if (sd)
-      sd->rebind(this, NULL);
+      sd->rebind(this, 0);
     else {
       CacheStub *pic= l->asCacheStub();
       if (pic)
-        pic->rebind(l, this, NULL);
+        pic->rebind(l, this, 0);
     }
   }
 }
@@ -368,7 +368,7 @@ void nmethod::makeOld() {
       } else {
         CacheStub *pic= a->pic();
         assert(pic, "no pic for sendDesc");
-        pic->rebind(a->sdLink.next, this, NULL);
+        pic->rebind(a->sdLink.next, this, 0);
         a->deallocate();
       }
     }
@@ -419,7 +419,7 @@ void nmethod::removeFromCodeTable() {
     e->next_hash.remove();
     delete e;
   }
-  codeTableLink= NULL;
+  codeTableLink= 0;
 }
 
 
@@ -651,7 +651,7 @@ void nmethod::relinkDI(int32 n, nmln*& savedDIChildren) {
 # endif
 
 PcDesc* nmethod::containingPcDescOrNULL(char* pc) {
-  // returns PcDesc that is closest one before or == to pc, or NULL if
+  // returns PcDesc that is closest one before or == to pc, or 0 if
   // no stored pcDesc exists 
   // called a lot, so watch out for performance bugs
   assert(contains(pc), "nmethod must contain pc into frame");
@@ -664,7 +664,7 @@ PcDesc* nmethod::containingPcDescOrNULL(char* pc) {
   assert(start < end, "no PcDescs to search");
   if (start->pc > offset)
     // in prologue; caller has to deal with this
-    return NULL;
+    return 0;
 
   // binary search to find approx. location
   PcDesc* middle;
@@ -690,7 +690,7 @@ PcDesc* nmethod::containingPcDescOrNULL(char* pc) {
       PcDesc* d = pcs();
       PcDesc* closest = d;
       for (; d <= end; d ++) {
-        if (d->pc <= offset && (closest == NULL || closest->pc <= d->pc)) {
+        if (d->pc <= offset && (closest == 0 || closest->pc <= d->pc)) {
           closest = d;
         }
       }
@@ -961,7 +961,7 @@ bool nmethod::verify() {
            frame_word_alignment);
     r = false;
   }
-  if (codeTableLink != NULL) {
+  if (codeTableLink != 0) {
     nmethod *tableResult =
       isDebug() ? Memory->code->debugTable->lookup(key) :
                   Memory->code->table     ->lookup(key);
@@ -1156,7 +1156,7 @@ void nmethod::printPcs() {
 #endif
 
 bool nmethod::isNMethod(void* p) {
-  return ((NCodeBase*)p)->vtbl_value() == ((nmethod*)NULL)->static_vtbl_value();
+  return ((NCodeBase*)p)->vtbl_value() == ((nmethod*)0)->static_vtbl_value();
 }
 
 nmethod* nmethod::nmethodContaining(char* pc, char* likelyEntryPoint) {
@@ -1195,8 +1195,8 @@ bool nmethod::encompasses(void* p) {
 
 
 ScopeDesc* nmethod::correspondingScopeDesc(ScopeDesc* s) {
-  // find scope corresponding to s; return NULL if not found
-  ScopeDesc* scope = NULL;
+  // find scope corresponding to s; return 0 if not found
+  ScopeDesc* scope = 0;
 
   FOR_EACH_SCOPE(scopes, c) {
     // compare c and its senders
@@ -1205,9 +1205,9 @@ ScopeDesc* nmethod::correspondingScopeDesc(ScopeDesc* s) {
          c1 && s1 && c1->s_equivalent(s1);
          c1= c1->sender(), s1= s1->sender())
       ;
-    if (c1 == NULL || s1 == NULL) {
+    if (c1 == 0 || s1 == 0) {
       // c corresponds to s
-      assert(scope == NULL, "found more than one scope");
+      assert(scope == 0, "found more than one scope");
       scope = c;
 # if !GENERATE_DEBUGGING_AIDS
     if (!CheckAssertions) {
@@ -1232,7 +1232,7 @@ PcDesc* nmethod::correspondingPC(ScopeDesc* sd, int32 bci) {
     return p;
   } else {
     // no PC corresponding to this scope
-    return NULL;
+    return 0;
   }
 }
 #endif
@@ -1450,7 +1450,7 @@ Map* nmethod::blockMapFor(blockOop bl) {
   assert_block(bl, "not a block");
   if (compiler() != NIC) fatal("cannot find blocks in optimized method");
   oop valueMethod = bl->value();
-  oop foundBlk = NULL;
+  oop foundBlk = 0;
   for (addrDesc* p = locs(), *pend = locsEnd(); p < pend; p++) {
     if (!p->isOop()) // not no oops here
       continue;
@@ -1458,7 +1458,7 @@ Map* nmethod::blockMapFor(blockOop bl) {
     if (blk->is_block()) {
       oop method2 = blockOop(blk)->value();
       if (valueMethod == method2) {
-        assert(foundBlk == NULL || foundBlk == blk, "duplicate block found");
+        assert(foundBlk == 0 || foundBlk == blk, "duplicate block found");
         foundBlk = blockOop(blk);       // found it
 # if !GENERATE_DEBUGGING_AIDS
     if (!CheckAssertions) {
@@ -1470,23 +1470,23 @@ Map* nmethod::blockMapFor(blockOop bl) {
   }
   if (method() == valueMethod) {
     // it's the receiver block
-    assert(foundBlk == NULL || foundBlk->map() == key.receiverMap(),
+    assert(foundBlk == 0 || foundBlk->map() == key.receiverMap(),
            "can't handle duplicate blocks");
     return key.receiverMap();
   }
   if (foundBlk) return foundBlk->map();
   ShouldNotReachHere(); // didn't find block
-  return NULL;
+  return 0;
 }
 
 addrDesc* nmethod::addrDesc_at(char* pc) {
-  // return addrDesc for pc or NULL if none
+  // return addrDesc for pc or 0 if none
   assert(insts() <= pc && pc < instsEnd(), "not in this nmethod");
   fint offset = pc - insts();
   for (addrDesc* p = locs(), *pend = locsEnd(); p < pend; p++) {
     if (p->offset() == offset) return p;
   }
-  return NULL;
+  return 0;
 }
 
 
@@ -1497,7 +1497,7 @@ bool  nmethod::has_frame_at(char* pc) {
     // has been overwriten follow the branch to find the save.
     int32* save_inst = (int32*)(insts() + frameCreationOffset- sizeof(long));
     char* save_addr = address_of_overwritten_NIC_save_instruction(save_inst);
-    if ( save_addr != NULL ) // save was moved, is at save_addr
+    if ( save_addr != 0 ) // save was moved, is at save_addr
       return  pc >= insts() + frameCreationOffset  &&  pc != save_addr;
   }
   return pc >= insts() + frameCreationOffset;
@@ -1506,7 +1506,7 @@ bool  nmethod::has_frame_at(char* pc) {
 
 bool  nmethod::in_self_code_at(char* pc) {
   PcDesc* pd = containingPcDescOrNULL(pc);
-  if (pd == NULL) return false;
+  if (pd == 0) return false;
   return  pd->byteCode != PrologueBCI
       &&  pd->byteCode != EpilogueBCI;
 }
@@ -1521,11 +1521,11 @@ static nmethod* constructDoItMethod_cont(oop receiver, oop method) {
   ResourceMark rm;
   compilingLookup L( receiver,
                      VMString[DO_IT],
-                     NULL,     // delegatee
+                     0,     // delegatee
                      receiver, // method holder
-                     NULL,     // vframe
+                     0,     // vframe
                      sendDesc::first_sendDesc(),
-                     NULL,     // DIDesc
+                     0,     // DIDesc
                      false );  // don't want debug version
   L.setResult(method);
   nmethod *nm= L.lookupNMethod();

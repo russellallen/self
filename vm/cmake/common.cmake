@@ -8,6 +8,9 @@ set(SRC_src)
 set(_flags)
 set(_defines)
 
+set(NEED_PCH_EXT "\\.(cp?p?|s|S?|hh?)$")
+set(SOURCE_EXT "\\.(cp?p?|hh?|s|S|mm?|.ib)$")
+
 set(SELF_BUILD_SUPPORT_DIR 
   "${CMAKE_CURRENT_SOURCE_DIR}/build_support" 
   CACHE PATH
@@ -60,7 +63,14 @@ macro(setup_target_common target)
 endmacro()
 
 macro(include_prefix_header_common target file)
-    set_target_properties(${target} PROPERTIES COMPILE_FLAGS " -include ${file} -Winvalid-pch")
+  get_target_property(_allSources ${target} SOURCES)
+  set(_need_pch_source)
+  foreach(source ${_allSources})
+    if(source MATCHES ${NEED_PCH_EXT})
+      list(APPEND _need_pch_source ${source})
+    endif()
+  endforeach()
+  set_source_files_properties(${_need_pch_source} PROPERTIES COMPILE_FLAGS " -include ${file} -Winvalid-pch")
 endmacro()
 
 # read the version info

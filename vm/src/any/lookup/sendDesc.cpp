@@ -93,7 +93,7 @@ void sendDesc::extend(nmethod* nm, mapOop receiverMapOop,
     CacheStub* s= pic();
     # if GENERATE_DEBUGGING_AIDS
       if (CheckAssertions) {
-        assert(cs_from_pic==NULL, "discarding countStub?");
+        assert(cs_from_pic==0, "discarding countStub?");
         if (!s) {
           // turning monomorphic ic into PIC; PIC will carry dependencies
           assert(dependency()->notEmpty(), "shouldn't be empty");
@@ -118,7 +118,7 @@ void sendDesc::extend(nmethod* nm, mapOop receiverMapOop,
       // remove existing PIC
       if (s) s->deallocate();
     }
-    rebind(nm, NULL, cs_from_pic);
+    rebind(nm, 0, cs_from_pic);
   }
   MachineCache::flush_instruction_cache_for_debugging();
   if (VerifyZoneOften) verify();
@@ -128,13 +128,13 @@ void sendDesc::extend(nmethod* nm, mapOop receiverMapOop,
 void sendDesc::rebind(nmethod* nm, char* addr, CountStub *cs_from_pic) {
   if (VerifyZoneOften) {
     nm->linkedSends.verify_list_integrity();
-    if (dependency()->next == NULL  &&  dependency()->prev == NULL)
+    if (dependency()->next == 0  &&  dependency()->prev == 0)
       ; // not initted yet
     else
       verify();
   }
-  if (addr == NULL) addr= nm->entryPointFor(this);
-  assert(pic() == NULL, "shouldn't call");
+  if (addr == 0) addr= nm->entryPointFor(this);
+  assert(pic() == 0, "shouldn't call");
   assert(nm->key.selector
          == static_or_dynamic_selector(nm->key.selector, nm->key.lookupType),
          "mismatched selector");
@@ -150,7 +150,7 @@ void sendDesc::rebind(nmethod* nm, char* addr, CountStub *cs_from_pic) {
     assert(countType() == NonCounting, "oops");
   }
   CountStub *oldcs= countStub();
-  assert(cs_from_pic == NULL || oldcs == NULL,
+  assert(cs_from_pic == 0 || oldcs == 0,
          "got count stub from pic and count stub from sendDesc");
 
   if (cs_from_pic) {
@@ -245,11 +245,11 @@ bool sendDesc::verify() {
       flag = false;
     }
     nmethod* nm = target();
-    if (nm == NULL) {
+    if (nm == 0) {
       CountStub* cs = countStub();
       if (cs) nm = cs->target();
     }
-    if (nm == NULL) {
+    if (nm == 0) {
       CacheStub* cs = pic();
       if (cs) {
         nm= cs->get_method(0);
@@ -282,7 +282,7 @@ bool sendDesc::verify() {
     pic()->verify();
   } else {
     CountStub *cs= countStub();
-    if (cs == NULL) {
+    if (cs == 0) {
       if (isCounting() && jump_addr() != lookupRoutine())
         error1("sendDesc %#lx: doesn't have countStub but is counting", this);
     } else {
@@ -290,7 +290,7 @@ bool sendDesc::verify() {
         error1("sendDesc %#lx: has countStub but is not counting", this);
       if (dependency()->next != dependency()->prev)
         error1("sendDesc %#lx: more than one elem in dependency chain", this);
-      countStub()->verify2(NULL);
+      countStub()->verify2(0);
     }
   }
   return flag;
@@ -369,12 +369,12 @@ CacheStub* sendDesc::pic() {
   char* addr = jump_addr();
   if (Memory->code->contains(addr)) {
     // linked to a nmethod
-    return NULL;
+    return 0;
   } else if (Memory->code->stubs->contains(addr)) {
     NCodeBase* stub = findStub(addr);
-    return stub->isCacheStub() ? (CacheStub*)stub : NULL;
+    return stub->isCacheStub() ? (CacheStub*)stub : 0;
   } else {
-    return NULL;
+    return 0;
   }
 }
 
@@ -383,28 +383,28 @@ CountStub* sendDesc::countStub() {
   if (Memory->code->contains(addr)) {
     // linked to a nmethod
     assert(!Memory->code->stubs->contains(addr), "zones overlap");
-    return NULL;
+    return 0;
   } else if (Memory->code->stubs->contains(addr)) {
     NCodeBase* stub = findStub(addr);
-    return stub->isCountStub() ? (CountStub*)stub : NULL;
+    return stub->isCountStub() ? (CountStub*)stub : 0;
   } else {
-    return NULL;
+    return 0;
   }
 }
   
 nmethod* sendDesc::target() {
   char* addr = jump_addr();
-  return Memory->code->contains(addr) ? nmethod_from_insts(addr) : NULL;
+  return Memory->code->contains(addr) ? nmethod_from_insts(addr) : 0;
 } 
 
 // NB: get_method() is not quite equivalent to target(): the former returns
 // an nmethod even when it is called via a count stub, the latter returns
-// NULL in this case.
+// 0 in this case.
 // It can also be called on dummy sendDescs representing glue code
 nmethod* sendDesc::get_method() {
   char *addr= jump_addr();
   if (Memory->code->contains(addr)) return nmethod_from_insts(addr);
-  if (!Memory->code->stubs->contains(addr)) return NULL;
+  if (!Memory->code->stubs->contains(addr)) return 0;
   NCodeBase *n= findStub(addr);
   assert(n->isCountStub(), "shouldn't call on PICs");
   return ((CountStub*)n)->target();
@@ -432,7 +432,7 @@ fint sendDesc::nsends() {
         // this one doesn't have a count stub
       }
     }
-  } else if ((cs = countStub()) != NULL) {
+  } else if ((cs = countStub()) != 0) {
     n = cs->count();
   }
   return n;
@@ -504,7 +504,7 @@ void sendDesc::sendMessagePrologue( oop  receiver, frame* lookupFrame ) {
 static nmethod* SendMessage_cont( compilingLookup* L) {
   if ( Interpret ) {
     L->perform_full_lookup();
-    return NULL;
+    return 0;
   }
   return L->send_desc()->lookup_compile_and_backpatch(L);
 }
@@ -546,7 +546,7 @@ char* sendDesc::sendMessage( frame* lookupFrame,
                         MH_TBD,  // method holder
                         new_vframe(lookupFrame),
                         this,
-                        NULL,    // DIDesc
+                        0,    // DIDesc
                         false ); // don't want a debug version
 
   // should we have switched stacks sooner? (dmu) also in SendDIMessage
@@ -568,24 +568,24 @@ char* sendDesc::fastCacheLookupAndBackpatch( LookupType t,
                                              oop del ) {
   if (needsDelegatee(t) || isResendLookupType(t) || isPerformLookupType(t)) {
     // too complicated to short-circuit these lookups
-    return NULL;
+    return 0;
   }
   // try mh-independent 
   MethodLookupKey key(t, MH_TBD, receiverMapOop, sel, del);
   nmethod* nm= Memory->code->lookup(key);
   
-  if (nm == NULL) {
+  if (nm == 0) {
     NumberOfFastLookupMisses++;
-    return NULL;
+    return 0;
   }
   NumberOfFastLookupHits++;
 
   if (nm->needToRecompileFor(this))
-    return NULL;
+    return 0;
 
   if (InlineCache) {
     NumberOfICMisses++;
-    extend(nm, receiverMapOop, NULL);
+    extend(nm, receiverMapOop, 0);
   }
   return nm->verifiedEntryPoint();
 }
@@ -595,13 +595,13 @@ nmethod* sendDesc::lookup_compile_and_backpatch( compilingLookup* L ) {
 
   nmethod* nm= L->lookupNMethod();
   
-  assert(zone::frame_chain_nesting == 0 || recompilee != NULL,
+  assert(zone::frame_chain_nesting == 0 || recompilee != 0,
          "should not be nested");
   
   if (InlineCache &&
       (InlineCacheNonStatic || L->isReceiverStatic())) {
     // add to PIC
-    extend(nm, L->receiverMapOop(), NULL);
+    extend(nm, L->receiverMapOop(), 0);
     NumberOfICMisses++;
   }
   return nm;

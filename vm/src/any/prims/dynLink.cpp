@@ -57,8 +57,8 @@
 
 # ifndef DYNLINK_SUPPORTED
     // dummy functions to enable static linking of Self
-    extern "C" void* dlopen(char*, int) { return NULL; }
-    extern "C" void* dlsym(void*, char*) { return NULL; }
+    extern "C" void* dlopen(char*, int) { return 0; }
+    extern "C" void* dlsym(void*, char*) { return 0; }
     extern "C" int   dlclose(void*) { return -1; }
     extern "C" char* dlerror() { return "dynamic linking not available"; }
 # endif

@@ -73,7 +73,7 @@ void frame::copy_to( char* sp,
 
   if (adjust) {
     // make sure all memoized blocks exist, then adjust their scope
-    abstract_vframe* callee = NULL;
+    abstract_vframe* callee = 0;
     OopOopTable* dummy = EMPTY;
     for ( abstract_vframe* vf = new_vframe(this);
           vf  &&  vf->fr == this;
@@ -176,11 +176,11 @@ int32 frame::frame_size_of_uncopied_frame() {
 
 char* frame::c_entry_point() {
   frame* s = sender();
-  if ( s == NULL ) return NULL;
+  if ( s == 0 ) return 0;
   char* r = s->real_return_addr(); // where sender will return into
-  if (Memory->code->contains(r)) return NULL;
+  if (Memory->code->contains(r)) return 0;
   int32* callp = (int32*) r;
-  if (callp == NULL  ||  !isCall(callp)) return NULL;
+  if (callp == 0  ||  !isCall(callp)) return 0;
   return (char*)getCallImm(callp);
 }
 
@@ -296,7 +296,7 @@ sendDesc* frame::send_desc() {
     callp -= 2;             // 2 instructions
     if (!isCall(callp)) {
       // usually an error, but some callers tolerate it so don't break here
-      return NULL;
+      return 0;
     }
   } else if (isCall(callp - 2)) {
     // the "call" might be the register mask of a send/prim call
@@ -309,7 +309,7 @@ sendDesc* frame::send_desc() {
 # else
 
   ShouldNotReachHere(); // compiled frame but no compiler?
-  return NULL;
+  return 0;
 
 # endif
 }
@@ -342,7 +342,7 @@ sendDesc* frame::slow_send_desc(int32* callp) {
     return sendDesc::sendDesc_from_call_instruction(callp);
   } else {
     fatal("call must be either at offset1 or at offset2");
-    return NULL;
+    return 0;
   }
 }
 

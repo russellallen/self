@@ -122,7 +122,7 @@ bool newSpace::scavenge_contents() {
 
 oldSpace::oldSpace(const char *nm, int32 &size, caddr_t desiredAddress) : space(nm, size)
 {
-  next_space= NULL;
+  next_space= 0;
   size++;  // +1 for the invariant
   // size rounded up for us in OS::allocate_idealized_page_aligned
   char *mem= OS::allocate_idealized_page_aligned(size, nm, desiredAddress, false);
@@ -147,7 +147,7 @@ oop* oldSpace::alloc_objs_and_bytes(fint size,
                                     char*& bytes,
                                     bool mustAllocate) {
   oop *p= alloc_objs_and_bytes_local(size, bsize, bytes);
-  if (!p) return NULL;
+  if (!p) return 0;
 
   if ( this == Memory->old_gen->reserve_space )
     Memory->old_gen->reselect_reserve_space();
@@ -157,7 +157,7 @@ oop* oldSpace::alloc_objs_and_bytes(fint size,
 
   unalloc_objs_and_bytes_local(size, bsize);
   Memory->old_gen->reselect_reserve_space();
-  return NULL;
+  return 0;
 }
 
 
@@ -211,7 +211,7 @@ void space::compact(mapOop unmarked_map_map,
       // figure out size
       Map* nm = mapOop(obj->map()->enclosing_mapOop()->gc_unmark())->map_addr();
       fint size = nm->object_size(obj);
-      byteVectorOop bv= NULL;
+      byteVectorOop bv= 0;
       int32 bsize= 0;
       if (nm->is_byteVector()) {
         bv= byteVectorOop(obj);
@@ -289,7 +289,7 @@ oop space::find_oop_backwards(void* start) {
     return as_memOop(p);
   }
   ShouldNotReachHere(); // not in this space
-  return NULL; // for C++
+  return 0; // for C++
 }
 
 void space::oops_do(oopsDoFn f) {

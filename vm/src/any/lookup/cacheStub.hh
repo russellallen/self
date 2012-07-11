@@ -26,7 +26,7 @@
   VtblPtr_t static_vtbl_value() { return _vtbl_value; }                 \
 
 
-#define CHECK_VTBL_VALUE   if (_vtbl_value == NULL) _vtbl_value = vtbl_value();
+#define CHECK_VTBL_VALUE   if (_vtbl_value == 0) _vtbl_value = vtbl_value();
 
 class cacheStubInfo {
  public:
@@ -42,7 +42,7 @@ class CacheStub : public OopNCode {
   // The globals below are shared by various routines during an extension.
   static Assembler* a;
   static nmethod** n;           // n[newMethods] = method currently added
-  static CountStub** st;        // corresponding count stub or NULL
+  static CountStub** st;        // corresponding count stub or 0
   static fint newMethods;
   static sendDesc* theSendDesc;
   static Assembler* oldAssembler;
@@ -130,11 +130,11 @@ class CacheStub : public OopNCode {
   void copy_prologue(sendDesc *sd);
   void find_immediate_nmethods(nmethod *del);
   CacheStub* copy_epilogue();
-  void gen_copy(fint total, fint delIndex, nmethod *delnm= NULL,
-                nmethod *a1= NULL, mapOop m1= mapOop(badOop),
-                CountStub *s1= NULL,
-                nmethod *a2= NULL, mapOop m2= mapOop(badOop),
-                CountStub *s2= NULL);
+  void gen_copy(fint total, fint delIndex, nmethod *delnm= 0,
+                nmethod *a1= 0, mapOop m1= mapOop(badOop),
+                CountStub *s1= 0,
+                nmethod *a2= 0, mapOop m2= mapOop(badOop),
+                CountStub *s2= 0);
 
   CacheStub* makeMegamorphic(sendDesc* sd, nmethod* nm, mapOop rcvrMapOop);
   CacheStub* extendMegamorphic(sendDesc* sd, nmethod* nm, mapOop rcvrMapOop);
@@ -162,7 +162,7 @@ class Stubs {
   Heap* stubZone;
  public:
   bool needsWork;       // true if compaction/expansion is needed
-  void* reserve;        // space for emergencies (NULL if none)
+  void* reserve;        // space for emergencies (0 if none)
   
   Stubs(Heap* s);
   void* operator new(size_t size) {

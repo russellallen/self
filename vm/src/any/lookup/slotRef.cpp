@@ -137,7 +137,7 @@ oop abstractSlotRef::interpretData(oop receiver, oop sel, oop arg1) {
 
    default:
     fatal("should never happen");
-    return NULL;
+    return 0;
   }
 }
 

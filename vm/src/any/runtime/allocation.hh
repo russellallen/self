@@ -21,8 +21,8 @@ class VMObj {
   
   void print_zero();
   void print_short_zero();
-  void print_short_null() { if (this != NULL) print_short(); }  
-  void print_null()     { if (this != NULL) print(); }
+  void print_short_null() { if (this != 0) print_short(); }  
+  void print_null()     { if (this != 0) print(); }
 
   virtual void oops_do(oopsDoFn f) { Unused((void*)f); }
 
@@ -147,7 +147,7 @@ public:
   char* allocate_bytes(fint size) {
     char* p = first_free;
     if (first_free + size  >  top)
-      return NULL;
+      return 0;
 
 # if  GENERATE_DEBUGGING_AIDS
       extern bool PrintResourceAllocation; // to break cycle in includeDB
@@ -196,7 +196,7 @@ class ResourceArea {
     assert(nesting >= 0, "memory leak!");
     if (size == 0) {
       // want to return an invalid pointer for a zero-sized allocation,
-      // but not NULL, because routines may want to use NULL for failure.
+      // but not 0, because routines may want to use 0 for failure.
       return (char*) 1;
     }
     size = roundTo(size, oopSize);
@@ -211,7 +211,7 @@ class ResourceArea {
   fint capacity() { return chunk ? chunk->_allocated : 0; }
   
   int32 used();
-  bool contains(void* p) { return chunk != NULL && chunk->contains(p); }
+  bool contains(void* p) { return chunk != 0 && chunk->contains(p); }
 };
 
 // A resource mark releases all resources allocated after it was created
@@ -254,7 +254,7 @@ extern bool MallocInProgress;  // allocating on C heap right now?
 
 inline char* AllocateHeap(int32 size, const char* name, bool mustAllocate= true) {
   char* b = (char *) selfs_malloc(size);
-  if (mustAllocate && b == NULL) OS::allocate_failed(name);
+  if (mustAllocate && b == 0) OS::allocate_failed(name);
 # if GENERATE_DEBUGGING_AIDS
   if (CheckAssertions  &&  b && (char*)catchThisOne == b) warning("AllocateHeap caught one");
 # endif

@@ -96,26 +96,26 @@ SelfMonitor::SelfMonitor() : Monitor() {
   _bpp = 1000000;
   _tick_no = _total_tick_no = _measurements_per_second = 0;
   _old_num_calls = _old_access_calls = _old_rsrc_used = _old_switches = 0;
-  _sys = NULL;  _page = NULL;  _eden = NULL;  _from = NULL;  _to = NULL;  _old = NULL;
+  _sys = 0;  _page = 0;  _eden = 0;  _from = 0;  _to = 0;  _old = 0;
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
-  _i_zone = _d_zone = _s_zone = _pic_zone = NULL;
+  _i_zone = _d_zone = _s_zone = _pic_zone = 0;
 # endif 
-  _cpu_bar = NULL;  _self_bar = NULL;  _lookup_bar = NULL;   _compiler_bar = NULL;  _vm_bar = NULL;  _access_bar = NULL;  
-  _activity = _resource_areas = NULL;
-  _allocs = NULL;
-  _blockClones = _blockInvocations = _sends = NULL;
-  _blkShort = _blkLong = NULL;
-     _cpu_label = _self_label = _lookup_label = _compiler_label =    _vm_label = NULL;
-  _access_label = _pics_label =   _code_label =     _deps_label = _debug_label = NULL,
-      _nic_label = _sic_label  = NULL;
+  _cpu_bar = 0;  _self_bar = 0;  _lookup_bar = 0;   _compiler_bar = 0;  _vm_bar = 0;  _access_bar = 0;  
+  _activity = _resource_areas = 0;
+  _allocs = 0;
+  _blockClones = _blockInvocations = _sends = 0;
+  _blkShort = _blkLong = 0;
+     _cpu_label = _self_label = _lookup_label = _compiler_label =    _vm_label = 0;
+  _access_label = _pics_label =   _code_label =     _deps_label = _debug_label = 0,
+      _nic_label = _sic_label  = 0;
   
-  _compile = NULL;  
+  _compile = 0;  
 }
 
 
 void SelfMonitor::reset()   {
   ShowLookupInMonitor::lookup_nesting = 0;
-  ShowCompileInMonitor::method_being_compiled = NULL;
+  ShowCompileInMonitor::method_being_compiled = 0;
 }
 
 
@@ -185,7 +185,7 @@ void SelfMonitor::tick_measure() {
 
 
 void SelfMonitor::tick_redraw() {  
-  if (!is_active() || _eden == NULL) return; // in progress activating
+  if (!is_active() || _eden == 0) return; // in progress activating
   if (MallocInProgress) return;  // to be safe, don't do X calls
   if (_elapsed_ticks < ticks_per_update  &&  incremental)  return;
   
@@ -477,7 +477,7 @@ void SelfMonitor::draw_memory_ruler() {
 
 
 void SelfMonitor::resize_mem_zone_bars() {
-  if ( !is_active()  ||  _eden == NULL )   return;
+  if ( !is_active()  ||  _eden == 0 )   return;
   SignalBlocker sb;
   mw()->pw->clear_rectangle(mbar_x(), 0, mw()->width() - mbar_x(),  mw()->height());
   incremental = false;
@@ -545,10 +545,10 @@ void SelfMonitor::create_old_bars() {
   if (_old) {
     for (int n= 0;  n < _n_old_bars;  ++n) {
       delete _old[n];
-      _old[n] = NULL; // paranoia
+      _old[n] = 0; // paranoia
     }
     delete [] _old;
-    _old = NULL; // paranoia
+    _old = 0; // paranoia
   }
   _old=  new MonitorMemBar *[TrackObjectHeapInMonitor::n_spaces()];
   _n_old_bars= 0;
@@ -639,7 +639,7 @@ void SelfMonitor::count_ticks() {
 
 void SelfMonitor::measure_current_tick_activity() {
   char c = ExecutionMonitor::count_tick_and_return_log_char();
-  if (logf != NULL)  fputc(c, logf);
+  if (logf != 0)  fputc(c, logf);
 }
 
 
@@ -697,7 +697,7 @@ void SelfMonitor::redraw_context_switches() {
 
 
 void SelfMonitor::redraw_method_being_compiled() {
-  if (ShowCompileInMonitor::method_being_compiled == NULL) {
+  if (ShowCompileInMonitor::method_being_compiled == 0) {
     _compile->hide();
   }
   else if (ShowCompileInMonitor::method_changed()) {
@@ -905,7 +905,7 @@ ExecutionMonitor::Activities ExecutionMonitor::current_tick_activity() {
     }
 # endif  // defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
-  if ( f != NULL  &&  f->is_interpreted_self_frame())
+  if ( f != 0  &&  f->is_interpreted_self_frame())
     return int_execution;
 
   if (processes->isIdle())  return idle;

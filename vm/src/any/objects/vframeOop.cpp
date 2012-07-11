@@ -32,7 +32,7 @@ abstract_vframe* vframeOopClass::as_vframe() {
 void vframeOopClass::kill_vframe() {
   if (traceV) lprintf("*** killing vframeOop %#lx\n", this);
   LOG_EVENT2("killing vframe %#lx (locals = %#lx)", this, locals());
-  set_locals(NULL); 
+  set_locals(0); 
 }
 
 bool vframeOopClass::is_below(frame* fr) {
@@ -146,11 +146,11 @@ vframeOop vframeOopClass::create_vframeOop(oop method) {
   assert(sizeof(vframeMap) == sizeof(bvframeMap) &&
          sizeof(vframeMap) == sizeof(ovframeMap), "should be the same");
   vframeOop p;
-  vframeMap* m = (vframeMap*)create_map(sizeof(vframeMap), NULL, vf, (oop*)&p);
-  p->set_next(NULL);
+  vframeMap* m = (vframeMap*)create_map(sizeof(vframeMap), 0, vf, (oop*)&p);
+  p->set_next(0);
   p->set_method(method);
-  p->set_locals(NULL);
-  p->set_process(NULL);
+  p->set_locals(0);
+  p->set_process(0);
   p->set_descOffset(0);
   return p;
 }
@@ -167,7 +167,7 @@ bool vframeOopClass::equal(vframeOop v) {
 bool vframeOopClass::verify() {
   bool flag = slotsOopClass::verify();
   if (flag && is_live()) {
-    if (next() != NULL && !next()->is_vframe()) {
+    if (next() != 0 && !next()->is_vframe()) {
       error1("vframeOop %#lx: next isn't a vframeOop", this);
       flag = false;
     }

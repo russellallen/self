@@ -45,7 +45,7 @@ class ListElement: public ParseNode {
   ParseNode* data;
   ListElement* next;
   
-  ListElement(ParseNode* d, ListElement* n = NULL) { data = d; next = n; }
+  ListElement(ParseNode* d, ListElement* n = 0) { data = d; next = n; }
   
   ParseNode* Data() { return data; }
   ListElement* Next() { return next; }
@@ -62,12 +62,12 @@ class List: public ParseNode {
   ListElement* head;
   ListElement* tail;
   
-  List() { head = tail = NULL; }
+  List() { head = tail = 0; }
   List(ParseNode* e) { head = tail = new ListElement(e); }
   
-  ListElement* Head() { return this ? head : NULL; }
-  ListElement* Tail() { return this ? tail : NULL; }
-  bool IsEmpty() { return this == NULL || head == NULL; }
+  ListElement* Head() { return this ? head : 0; }
+  ListElement* Tail() { return this ? tail : 0; }
+  bool IsEmpty() { return this == 0 || head == 0; }
   
   List* Append(ParseNode* e);
   

@@ -42,7 +42,7 @@ FSelfScope::FSelfScope(bool d, MethodLookupKey *key, oop method) :
   exprStack = new      LocationList(codeLength);
   blocks =    new BlockLocationList(codeLength);
   nlrPoints = new LabelList(codeLength + 1);
-  nlrPoints->append(NULL);
+  nlrPoints->append(0);
   
   bool got_one;
   method_map->branch_targets(got_one, &branchTargetFlags);
@@ -50,12 +50,12 @@ FSelfScope::FSelfScope(bool d, MethodLookupKey *key, oop method) :
   if (got_one) {
     branchTargets = new LabelList(branchTargetFlags->length());
     for ( int32 i = 0,  n = branchTargetFlags->length();  i < n;  ++i)
-      branchTargets->nthPut(i, new Label(theCodeGen->a.printing, NULL), true);
+      branchTargets->nthPut(i, new Label(theCodeGen->a.printing, 0), true);
   }
   else {
-    branchTargets = NULL;
+    branchTargets = 0;
   }
-  initializedBlockLocations = NULL;
+  initializedBlockLocations = 0;
   
   frequentPreemption = theCompiler->generateDebugCode;
   // If doing consistent stack alloc for branches, must also
@@ -372,7 +372,7 @@ void FSelfScope::blockLiteral(int32 litIndex, blockOop literal,
   Location loc = initBlocksInPrologue 
     ? initializedBlockLocations->nth(litIndex)
     : allocs->pickPermanent();
-  nlrPoints->append(NULL);
+  nlrPoints->append(0);
 
   // need to give the block a new map
   blockOop clone = literal->clone_and_set_desc(as_smiOop(descOffset()));
@@ -495,7 +495,7 @@ void FSelfScope::genSend(bool isSelfImplicit,
   
   // check for perform (and pop selector if so)
   LookupType performLookupType;
-  LocationList* argRegs = NULL;
+  LocationList* argRegs = 0;
   bool isPerform = checkPerformPrim_and_push_arguments(sel, performLookupType, argRegs);
   
   LookupType lookupType;
@@ -503,7 +503,7 @@ void FSelfScope::genSend(bool isSelfImplicit,
   if (isPerform) {
     lookupType = performLookupType;
   }
-  else if (del != NULL) {
+  else if (del != 0) {
     assert(isSelfImplicit, "directed resend must be to implicit self");
     lookupType = DirectedResendLookupType;
   }
@@ -556,7 +556,7 @@ void FSelfScope::genSend(bool isSelfImplicit,
       argRegs->append(rcvr);
     }
     
-    Label* nlr = NULL;
+    Label* nlr = 0;
     nlr = genCall(lookupType, rcvr, lastArg, argc, sel, del);
     // wait til here with deallocation (for scavenging)
     while (argRegs->length() > 0) {
@@ -589,7 +589,7 @@ Location FSelfScope::pickStackLocAndMove(Location src ) {
 
 FScope* FMethodScope::lookup(stringOop sel, slotDesc*& sd) {
   sd = method()->find_slot(sel);
-  return sd ? this : NULL;
+  return sd ? this : 0;
 }
 
 
@@ -601,7 +601,7 @@ FScope* FLexicalScope::lookup(stringOop sel, slotDesc*& sd) {
 
 FScope* FVFrameMethodScope::lookup(stringOop sel, slotDesc*& sd) {
   sd = _vf->method()->find_slot(sel);
-  return sd ? this : NULL;
+  return sd ? this : 0;
 }
 
   
@@ -628,15 +628,15 @@ void FSelfScope::genLocalAccess( bool isRead,
 
 
 bool FSelfScope::genLocalSend(stringOop sel, fint argc, slotDesc* sd, FScope* s) {
-  if (sd == NULL) {
+  if (sd == 0) {
     s = lookup(sel, sd);
   }
-  if (s != NULL) {
+  if (s != 0) {
     // found a lexically-scoped slot with this name
     // s is the scope containing the slot
 
     assert(argc == 0 || argc == 1, "wrong number of args");
-    NameDesc* nd = NULL;
+    NameDesc* nd = 0;
     if (sd->is_map_slot() ||
         (s->isVFrameScope() &&
         (nd = s->vf()->get_name_desc(sd, true), nd && nd->isValue()))) {
@@ -994,7 +994,7 @@ Label* FSelfScope::genCall(LookupType lookupType,
          Location rcvr, Location lastArg, fint argc, 
          stringOop selector, oop del) {
   // adjust lookupType if method holder isn't known
-  Label* l = NULL;
+  Label* l = 0;
   if (selector->is_prim_name()) {
     // primitive send
     if (!isPerformLookupType(lookupType)) 
@@ -1023,7 +1023,7 @@ Label* FSelfScope::genCall(LookupType lookupType,
       // failure handling
     if (canFail) {
         // make sure failure block is created if memoized
-        blockOop failBlock = NULL;
+        blockOop failBlock = 0;
         if (!blocks->isEmpty()) {
           BlockLocation bl = blocks->top();
           if (bl.loc == lastArg && bl.memoized) {
@@ -1147,7 +1147,7 @@ FVFrameLexicalScope::FVFrameLexicalScope(bool dbg, compiled_vframe* f)
   if (parent) {
     _parent = new_FVFrameScope(debugging, parent);
   } else {
-    _parent = NULL;
+    _parent = 0;
   }
 }
 
@@ -1155,7 +1155,7 @@ oop FVFrameScope::method() { return _vf->desc->method(); }
 oop FVFrameScope::methodHolder_or_map() { return _vf->desc->methodHolder_or_map(); }
 
 FDeadBlockScope::FDeadBlockScope(bool dbg, MethodLookupKey* key, oop method)
-  : FBlockScope(dbg, key, method, NULL) {}
+  : FBlockScope(dbg, key, method, 0) {}
 
 void FDeadBlockScope::genCode() {
   prologue();    // to create stack frame
@@ -1179,7 +1179,7 @@ FVFrameScope* new_FVFrameScope(bool debugging, compiled_vframe* vf) {
     return new FVFrameBlockScope(debugging, vf);
    default:
     ShouldNotReachHere();
-    return NULL;
+    return 0;
   }
 }
   

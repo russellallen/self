@@ -26,7 +26,7 @@ oop reflectee_eq_prim(mirrorOop rcvr, oop anotherMirror) {
 
 oop mirrorOopClass::define_prim(mirrorOop cont, void *FH) {
   oop result= reflectee()->define_prim(cont->reflectee(), FH);
-  if (result == NULL) return NULL;
+  if (result == 0) return 0;
   return  result->is_mark() ?  result : this;
 }
 
@@ -81,7 +81,7 @@ oop mirrorOopClass::copy_set_annotation_prim(oop a, void *FH) {
   oop r= reflectee()->mirror_copy_set_annotation(a);
   if (r == failedAllocationOop) {
     out_of_memory_failure(FH, this->size());
-    return NULL;
+    return 0;
   }
   return r->is_mark() ? r : r->as_mirror();
 }

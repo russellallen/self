@@ -63,7 +63,7 @@ void handleMapLoadTrap(InterruptedContext* c) {
         // so don't know what the correct map is.  But it's not really needed
         // (only important thing is that it's different from any mem map) since
         // the map testing code always checks the tag if an immediate is expected.
-        resultMap = NULL;
+        resultMap = 0;
     # endif
 
     NCodeBase* thing = findThing(pc);

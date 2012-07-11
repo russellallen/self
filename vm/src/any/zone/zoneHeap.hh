@@ -66,7 +66,7 @@ class Heap: public CHeapObj {
   bool combineMode;     // do eager block combination on deallocs?
   
  public:
-  Heap(int32 s, int32 bs, int32 nf, char* baseAddr = NULL,
+  Heap(int32 s, int32 bs, int32 nf, char* baseAddr = 0,
        bool on_c_heap = true);
   ~Heap();
 

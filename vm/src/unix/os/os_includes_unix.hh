@@ -244,9 +244,3 @@ extern "C" { int malloc_verify(); }
 # if TARGET_OS_VERSION == MACOSX_VERSION
   typedef size_t nbytes_t;
 # endif
-
-// Using g++include files results in NULL is defined as (void *) but
-// the virtual machine expects NULL to be 0. LB 
-# undef NULL
-# define NULL 0
-

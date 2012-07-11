@@ -9,7 +9,7 @@
 
 void profilerOopClass::initialize() {
   set_process(illegal_process());
-  set_profiler(NULL);
+  set_profiler(0);
 }
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
@@ -21,7 +21,7 @@ oop profilerOopClass::ProfilerProcess_prim(void *FH) {
   TRACE("process");
   if (!is_active()) {
     prim_failure(FH, NOPROCESSERROR);
-    return NULL;
+    return 0;
   }
   return get_process(); 
 }
@@ -31,7 +31,7 @@ oop profilerOopClass::ProfilerEngage_prim(oop process, void *FH) {
   // Fail if argument it is not a process
   if(!process->is_process() ) {
     prim_failure(FH, BADTYPEERROR);
-    return NULL;
+    return 0;
   } 
   processOop p = processOop(process);
 
@@ -39,10 +39,10 @@ oop profilerOopClass::ProfilerEngage_prim(oop process, void *FH) {
   if(!p->process() || p->process()->processObj() != p ) {
     // dead process or a clone of a process obj
     prim_failure(FH, NOPROCESSERROR);
-    return NULL;
+    return 0;
   }
 
-  if (get_profiler() == NULL) {
+  if (get_profiler() == 0) {
     set_profiler(new Profiler(this));
   }
   
@@ -59,13 +59,13 @@ oop profilerOopClass::ProfilerDisengage_prim(void *FH) {
   if (!is_active()) {
     // No profiler active for this 
     prim_failure(FH, NOPROCESSERROR);
-    return NULL;
+    return 0;
   }
 
   assert(process->process()->profiler, "Profiler should be present");
 
   process->process()->profiler->disengage();
-  process->process()->profiler = NULL;
+  process->process()->profiler = 0;
 
   set_process(illegal_process());
 
@@ -86,16 +86,16 @@ oop profilerOopClass::ProfilerTicks_prim(oop tick_pt, void *FH) {
 
   if (!get_profiler()) {
     prim_failure(FH, NOPROFILINGINFOERROR);
-    return NULL;
+    return 0;
   }
   if (!tick_pt->is_slots()) {
     prim_failure(FH, BADTYPEERROR);
-    return NULL;
+    return 0;
   }
   oop tick_node = get_profiler()->copy_tick_info(tick_pt);
   if (tick_node == failedAllocationOop) {
     out_of_memory_failure(FH);
-    return NULL;
+    return 0;
   }
   return tick_node;
 }
@@ -105,16 +105,16 @@ oop profilerOopClass::ProfilerTimes_prim(oop time_pt, void *FH) {
 
   if (!get_profiler()) {
     prim_failure(FH, NOPROFILINGINFOERROR);
-    return NULL;
+    return 0;
   }
   if (!time_pt->is_slots()) {
     prim_failure(FH, BADTYPEERROR);
-    return NULL;
+    return 0;
   }
   oop time_node = get_profiler()->copy_time_info(time_pt);
   if (time_node == failedAllocationOop) {
     out_of_memory_failure(FH);
-    return NULL;
+    return 0;
   }
   return time_node;
 }
@@ -134,7 +134,7 @@ oop profilerOopClass::ProfilerCopyGraph_prim(oop method_pt, oop block_pt,
 
   if (!get_profiler()) {
     prim_failure(FH, NOPROFILINGINFOERROR);
-    return NULL;
+    return 0;
   }
 
   // check method_pt, block_pt, and prim_pt are vector objects and
@@ -146,7 +146,7 @@ oop profilerOopClass::ProfilerCopyGraph_prim(oop method_pt, oop block_pt,
       ! leaf_pt->is_slots()       ||
       ! fold_pt->is_slots()) {
     prim_failure(FH, BADTYPEERROR);
-    return NULL;
+    return 0;
   }
 
   oop call_graph = get_profiler()->
@@ -156,7 +156,7 @@ oop profilerOopClass::ProfilerCopyGraph_prim(oop method_pt, oop block_pt,
 
   if (call_graph == failedAllocationOop) {
     out_of_memory_failure(FH);
-    return NULL;
+    return 0;
   }
   return call_graph;
 }

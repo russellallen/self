@@ -41,7 +41,7 @@ class AbstractPlatformWindow: public CHeapObj {
   virtual const char* default_fixed_font_name() = 0;
   virtual int   default_fixed_font_size() = 0;
   
-  virtual void*  xdisplay() { return NULL; }
+  virtual void*  xdisplay() { return 0; }
 
   
   

@@ -63,7 +63,7 @@ class lookupTarget: public ResourceObj {
   // for interpretation & al
   
   virtual oop  get_slot(slotDesc* sd) {
-    Unused(sd); ShouldNotCallThis(); return NULL; }
+    Unused(sd); ShouldNotCallThis(); return 0; }
   virtual void set_slot(slotDesc* sd, oop x) {
     Unused(sd); Unused(x); ShouldNotCallThis(); }
 
@@ -108,7 +108,7 @@ public:
   assignableSlotLink* next;
   
   assignableSlotLink(slotDesc* s, objectLookupTarget* t) {
-    slot = s; target = t; next = NULL; }
+    slot = s; target = t; next = 0; }
   assignableSlotLink* add(slotDesc* s, objectLookupTarget* t);
   
   void print();
@@ -130,8 +130,8 @@ class objectLookupTarget: public objectOrMapLookupTarget {
  public:
   objectLookupTarget(oop p)
   : objectOrMapLookupTarget(p->map()) {
-      obj = p; prevTargetSlot = NULL;
-      links = NULL; value_constrained = false; }
+      obj = p; prevTargetSlot = 0;
+      links = 0; value_constrained = false; }
   
   bool EQ(lookupTarget* t) {
     if (t->is_object()) {

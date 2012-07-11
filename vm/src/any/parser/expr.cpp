@@ -136,7 +136,7 @@ Object::Object(SlotList*   slots_arg,
 
 Expr* Object::AddArg(ArgSlot* arg, Parser* parser) {
   slots = slots->Append(arg, parser);
-  return slots ? this : NULL;
+  return slots ? this : 0;
 }
 
 Expr* Object::AddArgs(ArgSlotList* args, Parser* parser) { 
@@ -318,7 +318,7 @@ void Object::addCommentAnnotations(Scanner* scanner) {
           sl->name->Print();
           lprintf("\n");
         }
-        Token* t = commentList->isEmpty() ? NULL :commentList->first();
+        Token* t = commentList->isEmpty() ? 0 :commentList->first();
         while (t && t->line <= sl->startToken->line) {
           // Check if the comment token should be promoted to a slot annotation.
           if (t->line < sl->startToken->line) {
@@ -339,7 +339,7 @@ void Object::addCommentAnnotations(Scanner* scanner) {
             sl->annotation = extend_annotation_with_comment(sl->annotation, t);
           }
           commentList->remove(t);
-          t = commentList->isEmpty() ? NULL :commentList->first();
+          t = commentList->isEmpty() ? 0 :commentList->first();
         }
       }
     }

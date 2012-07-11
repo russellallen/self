@@ -90,10 +90,10 @@ class AbstractByteCode: public preservedVmObj {
   
  public:
  
-   AbstractByteCode( bool ma, objVectorOop lits = NULL) {
+   AbstractByteCode( bool ma, objVectorOop lits = 0) {
      mustAllocate = ma;
      
-     if ( lits == NULL ) {
+     if ( lits == 0 ) {
        literals= Memory->literalsObj->cloneSize(50);
        literalIndex= 0;
      }
@@ -188,7 +188,7 @@ class ByteCode: public AbstractByteCode {
     maxCodeIndex = 100;
     codeIndex = 0;
     codes= Memory->byteVectorObj->cloneSize(maxCodeIndex);
-    file = NULL; source = NULL;     // must initialize for GC
+    file = 0; source = 0;     // must initialize for GC
     sourceOffset= smiOop_zero;
     sourceLen=    smiOop_zero;
     

@@ -89,7 +89,7 @@ class abstract_interpreter_interbytecode_state: public PartObj {
   fint       index;          // set by index code for extended indices
   oop        last_literal;   // set by literal code, used for setting delegatee
   
-  stringOop  delegatee;      // delegatee for next send, or NULL
+  stringOop  delegatee;      // delegatee for next send, or 0
   bool       is_undirected_resend;
   
   fint       argument_count; // count of upcoming send
@@ -100,16 +100,16 @@ class abstract_interpreter_interbytecode_state: public PartObj {
   void reset_index()          { index= 0; }
   void reset_lexical_level()  { lexical_level= 0; }
   void reset_send_modifiers() {
-    delegatee= NULL;  is_undirected_resend= false; argument_count= 0; }
+    delegatee= 0;  is_undirected_resend= false; argument_count= 0; }
 
 
   
   const char* check_no_index()         { 
-    return  index == 0  ?  NULL  :  "this code does not use or preserve index";
+    return  index == 0  ?  0  :  "this code does not use or preserve index";
   }
   const char* check_no_lexical_level() { 
     return  lexical_level == 0  
-               ?  NULL  
+               ?  0  
                :  "this code does not use or preserve lexical_level";
   }
   const char* check_no_operand() {
@@ -117,18 +117,18 @@ class abstract_interpreter_interbytecode_state: public PartObj {
     return c ? c : check_no_lexical_level();
   }
   const char* check_no_send_modifiers() {
-    return !is_undirected_resend  &&  delegatee == NULL
-      ?  NULL
+    return !is_undirected_resend  &&  delegatee == 0
+      ?  0
       :  "send modifiers should be set right before the send" ;
   }
   const char* check_no_argument_count() {
     return argument_count == 0
-      ?  NULL
+      ?  0
       :  "argument count should not be set twice in a row";
   }
   const char* check_no_two_send_modifiers() {
-    return !is_undirected_resend  ||  delegatee == NULL
-      ?  NULL
+    return !is_undirected_resend  ||  delegatee == 0
+      ?  0
       :  "send cannot be both undirected and directed" ;
   }
   
@@ -210,7 +210,7 @@ class abstract_interpreter: public AnywhereObj {
       set_error_msg( "bad branch target");
   }
   
-  virtual bool check(aiCheckFn fn, oop p = NULL) {
+  virtual bool check(aiCheckFn fn, oop p = 0) {
     assert(
       ( (*fn)(this, p), !error_msg), 
       error_msg);
@@ -228,7 +228,7 @@ class abstract_interpreter: public AnywhereObj {
 
 
   oop get_literal() {
-    return check(check_index_range)  ?  mi.literals[is.index]  :  NULL;
+    return check(check_index_range)  ?  mi.literals[is.index]  :  0;
   }
 
   inline stringOop get_selector();

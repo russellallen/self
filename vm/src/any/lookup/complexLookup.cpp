@@ -19,7 +19,7 @@ vframeLookup::vframeLookup( LookupType l,
 
   sendingVFrame= f;
 
-  if (f == NULL) return;
+  if (f == 0) return;
 
   if (!isResendLookupType(lookupType())) {
     key.set_methodHolder_or_map( MH_NOT_A_RESEND);
@@ -86,11 +86,11 @@ compilingLookup::compilingLookup(oop rcvr,
 
 // Compile an nmethod
 nmethod* compilingLookup::lookupNMethod() {
-  if (result() == NULL)                                       
+  if (result() == 0)                                       
     perform_full_lookup();
 
 # if GENERATE_DEBUGGING_AIDS
-    if ( dc != NULL  &&  status == foundOne )
+    if ( dc != 0  &&  status == foundOne )
       assert_methodHolder_is_object();
 # endif
 
@@ -149,9 +149,9 @@ nmethod* compilingLookup::compileOrReuse() {
 
 nmethod* compilingLookup::compileNMethod() {
   nmethod* other;
-  nmln* diDeps = NULL;
+  nmln* diDeps = 0;
   
-  if (dc != NULL) {
+  if (dc != 0) {
     diDeps = dc->dependency();
     assert(diDeps->isEmpty(), "should be empty");
     // make sure that other method won't be flushed from the zone
@@ -161,7 +161,7 @@ nmethod* compilingLookup::compileNMethod() {
 
   nmethod* nm = doCompile(diDeps);
 
-  if (dc != NULL) {
+  if (dc != 0) {
     assert(diDeps->notEmpty(), "should be rebound now");
     other->unlink_saved_frame_chain();
   }
@@ -187,7 +187,7 @@ nmethod* compilingLookup::doCompile(nmln* diLink) {
   }
   nmethod* nm = activeCompiler->compile();
   activeCompiler->finalize();
-  activeCompiler = NULL;
+  activeCompiler = 0;
   return nm;
 }
 
@@ -266,7 +266,7 @@ bool compilingLookup::forcedCompilerIsSIC() {
 
 
 void compilingLookup::trace(nmethod *nm) {
-  if (sendingVFrame == NULL)
+  if (sendingVFrame == 0)
     return; // nothing I can do, top fram??
   // print out some tracing information
   if (nm->scopes->root()->isDataAssignmentScope()) {
@@ -348,7 +348,7 @@ bool cacheProbingLookup::mightBeAbleToReuseNMethod() {
     break;
   }
   // cannot deal with DI, so forget it if have dc (DI desc)
-  if (dc != NULL)  return false;
+  if (dc != 0)  return false;
 
   return true; // TA DA!
 }
@@ -376,7 +376,7 @@ bool cacheProbingLookup::shouldCompileReusableNMethod( nmethod* nm) {
 }
 
 
-static const nmethod* cannotReuse = NULL;
+static const nmethod* cannotReuse = 0;
 static const nmethod* compileAndReuse = (nmethod*)-1;
 
 
@@ -422,7 +422,7 @@ nmethod* cacheProbingLookup::compileOrReuse() {
     return nm;
   }
   // reuse nm
-  const char *s= sprintName(NULL, selector());
+  const char *s= sprintName(0, selector());
   if (PrintCompilation)
     lprintf("*Reusing NIC method %#lx for selector %s\n", nm, s);
   LOG_EVENT1("Reusing NIC method %#lx", nm);
@@ -433,13 +433,13 @@ nmethod* cacheProbingLookup::compileOrReuse() {
 
 
 nmethod *cacheProbingLookup::probeCache() {
-  if (dc) return NULL; // don't cache DI methods
+  if (dc) return 0; // don't cache DI methods
   nmethod *nm= Memory->code->lookup(key, needDebug);
-  if (nm == NULL) return NULL;
+  if (nm == 0) return 0;
   // Only check for perform errors if cache hits, because perform_full_lookup
   // also does same check (since caching is subclass-add-on) -- dmu
   if (perform_error_status(sd->quick_perform_arg_count()) != foundNone)
-    return NULL;
+    return 0;
   if (nm->needToRecompileFor(sd))
     nm= also_Recompile(sd, this, nm);
   return nm;
@@ -449,11 +449,11 @@ nmethod *cacheProbingLookup::probeCache() {
 
 void cacheProbingLookup::updateCache(nmethod *nm, MethodLookupKey *k) {
 
-  // Enter nm in codeTable at k (use this->key if k==NULL), if sensible.
+  // Enter nm in codeTable at k (use this->key if k==0), if sensible.
   // NB static receiver bit already cleared in lookup type (important 'cause
   // cache is receiver-identity-insensitive)
   
-  if (   dc == NULL          // don't cache DI methods
+  if (   dc == 0          // don't cache DI methods
       && status == foundOne  // don't cache error methods
       && result()->is_real() // don't cache doIts or conversions
       && result()->as_real()->holder->is_object_or_map() )

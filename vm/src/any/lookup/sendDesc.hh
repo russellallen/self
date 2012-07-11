@@ -143,10 +143,10 @@ public:
       return oop(0);
     } }
   
-  CacheStub* pic();             // NULL if 0 or 1 targets
-  CountStub* countStub();       // NULL if none or PIC
+  CacheStub* pic();             // 0 if 0 or 1 targets
+  CountStub* countStub();       // 0 if none or PIC
 
-  nmethod* target();            // directly called nmethod or NULL if none/PIC
+  nmethod* target();            // directly called nmethod or 0 if none/PIC
   nmethod* get_method();        // get the target nmethod (mustn't be a PIC)
   fint ntargets();              // number of nmethods in inline cache
   fint nsends();                // # of times this send was executed
@@ -161,10 +161,10 @@ public:
   void unlink_countStub(CountStub *cs);
   void unlink_pic(CacheStub *pic);
   void unlink();
-  void extend(nmethod* nm, mapOop rcvrMap, CountStub *cs= NULL);
+  void extend(nmethod* nm, mapOop rcvrMap, CountStub *cs= 0);
   void rebind(nmethod* nm,          // rebind target (monomorph. only)
-              char* addr= NULL,     // NULL means use default entry point
-              CountStub *cs= NULL);
+              char* addr= 0,     // 0 means use default entry point
+              CountStub *cs= 0);
   void shift(int32 delta, nmethod* ours) {    // our nmethod has moved
     dependency()->shift(delta, (NCodeBase*)ours); }
 

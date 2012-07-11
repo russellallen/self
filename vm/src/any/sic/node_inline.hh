@@ -12,7 +12,7 @@
 
     
 inline bool BasicNode::isReachable() { 
-  return bb() != NULL; // true iff node is on bb's node list
+  return bb() != 0; // true iff node is on bb's node list
 }
 
 
@@ -182,7 +182,7 @@ inline void BlockZapNode::makeUses(BB* bb) {
 inline void AbstractArrayAtNode::makeUses(BB* bb) {
   srcUse = bb->addUse(this, _src); destDef = bb->addDef(this, _dest);
   argUse = bb->addUse(this, arg);
-  errorDef = error ? bb->addDef(this, error) : NULL;
+  errorDef = error ? bb->addDef(this, error) : 0;
   AbstractBranchNode::makeUses(bb);
 }
 inline void AbstractArrayAtNode::checkUses(PReg* r) { 

@@ -22,7 +22,7 @@
 // Finally, all nmethods containing young objects are linked together on
 // another such list for scavenging.
 
-# define nullNMln ((nmln*)NULL)
+# define nullNMln ((nmln*)0)
 
 extern "C" {
   void initNmlnCache();
@@ -155,9 +155,9 @@ class nmln {
   
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)  
 
-  CacheStub* asCacheStub();        // NULL if not in a cache stub
-  CountStub* asCountStub();        // NULL if not in a count stub
-  sendDesc* asSendDesc_or_null();  // NULL if not in a sendDesc
+  CacheStub* asCacheStub();        // 0 if not in a cache stub
+  CountStub* asCountStub();        // 0 if not in a count stub
+  sendDesc* asSendDesc_or_null();  // 0 if not in a sendDesc
   sendDesc* asSendDesc();          // fatal error if not in a sendDesc
   sendDesc* callingSendDesc();     // calling sendDesc (possibly transitively)
   DIDesc* asDIDesc();

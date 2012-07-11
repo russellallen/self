@@ -93,8 +93,8 @@ class SignalInterface /* AllStatic */ {
   // is_on...  returns true if such a stack exists and VM is currently running on it.
   // is_off... returns true if such a stack exists and VM is currently NOT running on it.
   // ( TERNARY logic; return false if not applicable )
-  static bool  is_on_signal_stack(char* sp = NULL);
-  static bool is_off_signal_stack(char* sp = NULL);
+  static bool  is_on_signal_stack(char* sp = 0);
+  static bool is_off_signal_stack(char* sp = 0);
   
   // Similar to is_on... this test returns true if we are handling a signal resulting
   // from a map load. (Self uses load alignment signals to trap a load of an int map.)

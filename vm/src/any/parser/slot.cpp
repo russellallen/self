@@ -20,7 +20,7 @@
                          ? Memory->slotAnnotationObj
                          : new_string(annotation));
     } else {
-      return NULL;
+      return 0;
     }
   }
 
@@ -54,7 +54,7 @@ SlotList* SlotList::Append(Slot* elem, Parser* parser) {
       char errmsg[255];
       sprintf(errmsg, "slot %s already defined", elem->name->AsCharP());
       parser->syntaxError(errmsg, elem->startToken);
-      return NULL;
+      return 0;
     }
   }
   return (SlotList*) List::Append(elem);
@@ -69,7 +69,7 @@ void ArgSlot::Print() {
 
 Object* ArgSlotList::AddArgs(Object* b, Parser* parser) {
   for (ArgSlotListElement* e = Head(); e && b; e = e->Next()) {
-    if (b->AddArg(e->Data(), parser) == NULL) return NULL;
+    if (b->AddArg(e->Data(), parser) == 0) return 0;
   }
   return b;
 }

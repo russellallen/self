@@ -20,7 +20,7 @@ class AbstractRecompilation : public ResourceObj {
   MarkerNode* activeMarker;             // marker to be used (if any)
   bool isReplacementSimple;             // is replacing recompilee simple?
   AbstractRecompilation() {
-    recompileeVScopes = NULL; markers = NULL; activeMarker = NULL;
+    recompileeVScopes = 0; markers = 0; activeMarker = 0;
     isReplacementSimple = true;
   }
 };
@@ -65,7 +65,7 @@ oop recompile_prim(oop);
 
 # else
 
-# define theRecompilation NULL
+# define theRecompilation 0
 # define RecompilationInProgress false
 
 oop get_compilers_prim(oop);

@@ -50,11 +50,11 @@ static oop byteVectorFromCFString(CFStringRef cfs, const char* primName, void* F
     fatal3("%s: used %d, max was %d", primName, usedLen, len);
   if (usedLen < len)  {
     failure(FH, "did not use full buffer");
-    return NULL;
+    return 0;
   }
   if (nBytes != len)  {
     failure(FH, "did not copy right amount");
-    return NULL;
+    return 0;
   }
   return r;
 }
@@ -64,13 +64,13 @@ static void* reportOSError(OSStatus e, const char* n, void* FH)  {
     static char buf[1000];
     sprintf(buf, "%s failed: error %d", n, (int)e);
     failure(FH, buf);
-    return NULL;
+    return 0;
   }
 
 
 
 CGLayer* CGLayerCreateWithContext_wrap(CGContextRef context, float w, float h) {
-  return CGLayerCreateWithContext( context, CGSizeMake(w, h), NULL);
+  return CGLayerCreateWithContext( context, CGSizeMake(w, h), 0);
 }
 
 
@@ -91,7 +91,7 @@ void QDEndCGContext_wrap( OpaqueGrafPtr* port, CGContext* carg, void* FH ) {
 
 
 ATSFontFamilyRef ATSFontFamilyFindFromName_wrap( const char* name ) {
-  CFStringRef cfs = CFStringCreateWithCStringNoCopy( NULL, name, 
+  CFStringRef cfs = CFStringCreateWithCStringNoCopy( 0, name, 
                      kCFStringEncodingMacRoman, kCFAllocatorNull);
   return ATSFontFamilyFindFromName( cfs, kNilOptions);
 }
@@ -99,7 +99,7 @@ ATSFontFamilyRef ATSFontFamilyFindFromName_wrap( const char* name ) {
 
 oop ATSFontFamilyGetName_wrap( ATSFontFamilyRef id, void* FH ) {
   CFStringRef cfs;
-  OSStatus e = ATSFontFamilyGetName(id, NULL, &cfs);
+  OSStatus e = ATSFontFamilyGetName(id, 0, &cfs);
   return  e != noErr  ?  (oop)reportOSError(e, "ATSFontFamilyGetName", FH)  : 
                          byteVectorFromCFString(cfs, "ATSFontFamilyGetName", FH);
 }
@@ -107,14 +107,14 @@ oop ATSFontFamilyGetName_wrap( ATSFontFamilyRef id, void* FH ) {
 
 
 ATSFontRef ATSFontFindFromName_wrap( const char* name ) {
-  CFStringRef cfs = CFStringCreateWithCStringNoCopy( NULL, name, 
+  CFStringRef cfs = CFStringCreateWithCStringNoCopy( 0, name, 
                      kCFStringEncodingMacRoman, kCFAllocatorNull);
   return ATSFontFindFromName( cfs, kNilOptions);
 }
 
 
 ATSFontRef ATSFontFindFromPostScriptName_wrap( const char* name ) {
-  CFStringRef cfs = CFStringCreateWithCStringNoCopy( NULL, name, 
+  CFStringRef cfs = CFStringCreateWithCStringNoCopy( 0, name, 
                      kCFStringEncodingMacRoman, kCFAllocatorNull);
   return ATSFontFindFromPostScriptName( cfs, kNilOptions);
 }
@@ -122,14 +122,14 @@ ATSFontRef ATSFontFindFromPostScriptName_wrap( const char* name ) {
 
 oop ATSFontGetName_wrap( ATSFontRef id, void* FH ) {
   CFStringRef cfs;
-  OSStatus e = ATSFontGetName(id, NULL, &cfs);
+  OSStatus e = ATSFontGetName(id, 0, &cfs);
   return  e != noErr  ?  (oop)reportOSError(e, "ATSFontGetName", FH)  : 
                          byteVectorFromCFString(cfs, "ATSFontGetName", FH);
 }
 
 oop ATSFontGetPostScriptName_wrap( ATSFontRef id, void* FH ) {
   CFStringRef cfs;
-  OSStatus e = ATSFontGetPostScriptName(id, NULL, &cfs);
+  OSStatus e = ATSFontGetPostScriptName(id, 0, &cfs);
   return  e != noErr  ?  (oop)reportOSError(e, "ATSFontGetPostScriptName", FH)  : 
                          byteVectorFromCFString(cfs, "ATSFontGetPostScriptName", FH);
 }
@@ -137,7 +137,7 @@ oop ATSFontGetPostScriptName_wrap( ATSFontRef id, void* FH ) {
 
 ATSFontFamilyIterator ATSFontFamilyIteratorCreate_wrap( ATSFontContext iContext, ATSOptionFlags iOptions, void* FH ) {
     ATSFontFamilyIterator it;
-    OSStatus e = ATSFontFamilyIteratorCreate( iContext, NULL, NULL, iOptions, &it);
+    OSStatus e = ATSFontFamilyIteratorCreate( iContext, 0, 0, iOptions, &it);
   return  e != noErr  ?  (ATSFontFamilyIterator)reportOSError(e, "ATSFontFamilyIteratorCreate", FH)  :  it;
 }
 
@@ -151,7 +151,7 @@ ATSFontFamilyRef ATSFontFamilyIteratorNext_wrap( ATSFontFamilyIterator it, void*
 
 OSStatus ATSFontFamilyIteratorReset_wrap( ATSFontFamilyIterator it, ATSFontContext iContext, ATSOptionFlags iOptions ) {
     ATSFontFamilyIterator itx = it;
-    return ATSFontFamilyIteratorReset( iContext, NULL, NULL, iOptions, &itx);
+    return ATSFontFamilyIteratorReset( iContext, 0, 0, iOptions, &itx);
 }
 
 
@@ -165,7 +165,7 @@ OSStatus ATSFontFamilyIteratorRelease_wrap(ATSFontFamilyIterator it) {
 
 ATSFontIterator ATSFontIteratorCreate_wrap( ATSFontContext iContext, ATSOptionFlags iOptions, void* FH ) {
     ATSFontIterator it;
-    OSStatus e = ATSFontIteratorCreate( iContext, NULL, NULL, iOptions, &it);
+    OSStatus e = ATSFontIteratorCreate( iContext, 0, 0, iOptions, &it);
   return  e != noErr  ?  (ATSFontIterator)reportOSError(e, "ATSFontIteratorCreate", FH)  :  it;
 }
 
@@ -179,7 +179,7 @@ ATSFontRef ATSFontIteratorNext_wrap( ATSFontIterator it, void* FH) {
 
 OSStatus ATSFontIteratorReset_wrap( ATSFontIterator it, ATSFontContext iContext, ATSOptionFlags iOptions ) {
     ATSFontIterator itx = it;
-    return ATSFontIteratorReset( iContext, NULL, NULL, iOptions, &itx);
+    return ATSFontIteratorReset( iContext, 0, 0, iOptions, &itx);
 }
 
 
@@ -208,7 +208,7 @@ oop ATSUGetGlyphBounds_wrap( ATSUTextLayout     iTextLayout,
     iBoundsCharStart, iBoundsCharLength,
     iTypeOfBounds,
     1, //   ItemCount iMaxNumberOfBounds,
-    &b, &oActualNumberOfBounds);       /* can be NULL */ 
+    &b, &oActualNumberOfBounds);       /* can be 0 */ 
 
   if (e != noErr) {
       return  (oop)reportOSError(e, "ATSUGetGlyphBounds", FH);
@@ -217,7 +217,7 @@ oop ATSUGetGlyphBounds_wrap( ATSUTextLayout     iTextLayout,
    static char buf[1000];
     sprintf(buf, "ATSUGetGlyphBounds failed: returned %d bounds instead of 1", (int)oActualNumberOfBounds);
     failure(FH, buf);
-    return NULL;
+    return 0;
   }
   float L = min((float)Fix2X(b.upperLeft.x), (float)Fix2X(b.lowerLeft.x ));
   float T = max((float)Fix2X(b.upperLeft.y), (float)Fix2X(b.upperRight.y));
@@ -554,7 +554,7 @@ CGImageRef CGImageCreate_wrap( float w, float h,
       ?  CGImageCreate(w, h, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpace,
                        bitmapInfo, provider, decodeArray, shouldInterpolate,
                        CGColorRenderingIntent(colorRenderingIntent))
-      : NULL;
+      : 0;
 }
             
 
@@ -567,7 +567,7 @@ CGImageRef CGImageCreate_wrap( float w, float h,
                                bool shouldInterpolate,
                                uint32 colorRenderingIntent) {
   return CGImageCreate(w, h, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpace,
-                       bitmapInfo, provider, NULL, shouldInterpolate,
+                       bitmapInfo, provider, 0, shouldInterpolate,
                        CGColorRenderingIntent(colorRenderingIntent));;
 }
             
@@ -584,7 +584,7 @@ CGImageRef CGImageMaskCreate_wrap( float w, float h,
     convertFloatObjVector( decodeArrayOop, "CGImageCreateMask", FH, decodeArray, decodeLen)
       ?  CGImageMaskCreate(w, h, bitsPerComponent, bitsPerPixel, bytesPerRow,
                            provider, decodeArray, shouldInterpolate)
-      : NULL;
+      : 0;
 }
             
 
@@ -594,7 +594,7 @@ CGImageRef CGImageMaskCreate_wrap( float w, float h,
                                CGDataProviderRef provider,
                                bool shouldInterpolate) {
   return CGImageMaskCreate(w, h, bitsPerComponent, bitsPerPixel, bytesPerRow,
-                           provider, NULL, shouldInterpolate);
+                           provider, 0, shouldInterpolate);
 }
             
 
@@ -616,7 +616,7 @@ CGImageRef CGImageCreateWithJPEGDataProvider_wrap(
     convertFloatObjVector( decodeArrayOop, "CGImageCreateWithJPEGDataProvider", FH,
                            decodeArray, decodeLen)
       ?  CGImageCreateWithJPEGDataProvider( source, decodeArray, shouldInterpolate, CGColorRenderingIntent(colorRenderingIntent))
-      : NULL;
+      : 0;
 }
 
 
@@ -624,7 +624,7 @@ CGImageRef CGImageCreateWithJPEGDataProvider_wrap(
    CGDataProviderRef source,
    bool shouldInterpolate,
    uint32 colorRenderingIntent) {
-  return CGImageCreateWithJPEGDataProvider( source, NULL, shouldInterpolate, CGColorRenderingIntent(colorRenderingIntent));
+  return CGImageCreateWithJPEGDataProvider( source, 0, shouldInterpolate, CGColorRenderingIntent(colorRenderingIntent));
 }
 
 CGImageRef CGImageCreateWithPNGDataProvider_wrap(
@@ -638,14 +638,14 @@ CGImageRef CGImageCreateWithPNGDataProvider_wrap(
     convertFloatObjVector( decodeArrayOop, "CGImageCreateWithPNGDataProvider", FH,
                            decodeArray, decodeLen)
       ?  CGImageCreateWithPNGDataProvider( source, decodeArray, shouldInterpolate, CGColorRenderingIntent(colorRenderingIntent))
-      : NULL;
+      : 0;
 }
 
 CGImageRef CGImageCreateWithPNGDataProvider_wrap(
    CGDataProviderRef source,
    bool shouldInterpolate,
    uint32 colorRenderingIntent) {
-  return CGImageCreateWithPNGDataProvider( source, NULL, shouldInterpolate, CGColorRenderingIntent(colorRenderingIntent));
+  return CGImageCreateWithPNGDataProvider( source, 0, shouldInterpolate, CGColorRenderingIntent(colorRenderingIntent));
 }
             
 
@@ -672,27 +672,27 @@ static void releaseData(void* info, const void* data, size_t size) {
 CGDataProviderRef CGDataProviderCreateFromBV(u_char* bytes, uint32 len) {
     u_char* stable_bytes = NEW_C_HEAP_ARRAY( u_char, len );
     copy_bytes((const char*)bytes, (char*)stable_bytes, len);
-    return CGDataProviderCreateWithData(NULL, stable_bytes, len, releaseData);
+    return CGDataProviderCreateWithData(0, stable_bytes, len, releaseData);
 }
 
 CGDataProviderRef CGDataProviderCreateFromURL_wrap(u_char* bytes, uint32 len) {
-  return CGDataProviderCreateWithURL(CFURLCreateWithBytes( kCFAllocatorDefault, bytes, len, kCFStringEncodingMacRoman, NULL));
+  return CGDataProviderCreateWithURL(CFURLCreateWithBytes( kCFAllocatorDefault, bytes, len, kCFStringEncodingMacRoman, 0));
 }
 
 CGImageSourceRef CGImageSourceCreateWithURL_wrap(u_char* bytes, uint32 len) {
-  return CGImageSourceCreateWithURL(CFURLCreateWithBytes( kCFAllocatorDefault, bytes, len, kCFStringEncodingMacRoman, NULL), NULL);
+  return CGImageSourceCreateWithURL(CFURLCreateWithBytes( kCFAllocatorDefault, bytes, len, kCFStringEncodingMacRoman, 0), 0);
 }
 
 CGImageRef CGImageSourceCreateImageAtIndex_wrap(CGImageSourceRef is, uint32 index) {
-  return CGImageSourceCreateImageAtIndex(is, index, NULL);
+  return CGImageSourceCreateImageAtIndex(is, index, 0);
 }
 
 uint32 CGGetDisplayCount_wrap(float x, float y, float w, float h, void* FH) {
   CGDisplayCount count;
   CGDisplayErr e = 
     w == 0.0  &&  h == 0.0
-      ? CGGetDisplaysWithPoint( CGPointMake(x, y), 0, NULL, &count)
-      : CGGetDisplaysWithRect(  CGRectMake(x, y, w, h), 0, NULL, &count);
+      ? CGGetDisplaysWithPoint( CGPointMake(x, y), 0, 0, &count)
+      : CGGetDisplaysWithRect(  CGRectMake(x, y, w, h), 0, 0, &count);
   return e != CGDisplayNoErr
     ? (uint32)reportOSError(e, "CGGetDisplayCount", FH)
     : count;
@@ -708,14 +708,14 @@ CGDirectDisplayID CGGetDisplayAt_wrap(uint32 n, float x, float y, float w, float
       ? CGGetDisplaysWithPoint( CGPointMake(x, y),      n + 1, displays, &count)
       : CGGetDisplaysWithRect(  CGRectMake(x, y, w, h), n + 1, displays, &count);
   return  e != CGDisplayNoErr  ?  (CGDirectDisplayID)reportOSError(e, "CGGetDisplayAt", FH)
-  :       count < n + 1        ?  (CGDirectDisplayID)(failure(FH, "not enough displays"), NULL)
+  :       count < n + 1        ?  (CGDirectDisplayID)(failure(FH, "not enough displays"), 0)
   :                               displays[n];
 }
 
 
 uint32 CGGetActiveDisplayCount_wrap(void* FH) {
   uint32 count;
-  CGDisplayErr e = CGGetActiveDisplayList( 0, NULL, &count);
+  CGDisplayErr e = CGGetActiveDisplayList( 0, 0, &count);
   return e != CGDisplayNoErr
     ? (uint32)reportOSError(e, "CGGetActiveDisplayCount", FH)
     : count;
@@ -727,14 +727,14 @@ CGDirectDisplayID CGGetActiveDisplayAt_wrap(uint32 n, void* FH) {
   CGDirectDisplayID *displays = NEW_RESOURCE_ARRAY(CGDirectDisplayID, n + 1);
   CGDisplayErr e =  CGGetActiveDisplayList( n + 1, displays, &count);
   return  e != CGDisplayNoErr  ?  (CGDirectDisplayID)reportOSError(e, "CGGetActiveDisplayAt", FH)
-  :       count < n + 1        ?  (CGDirectDisplayID)(failure(FH, "not enough displays"), NULL)
+  :       count < n + 1        ?  (CGDirectDisplayID)(failure(FH, "not enough displays"), 0)
   :                               displays[n];
 }
 
 
 uint32 CGGetOnlineDisplayCount_wrap(void* FH) {
   uint32 count;
-  CGDisplayErr e = CGGetOnlineDisplayList( 0, NULL, &count);
+  CGDisplayErr e = CGGetOnlineDisplayList( 0, 0, &count);
   return e != CGDisplayNoErr
     ? (uint32)reportOSError(e, "CGGetOnlineDisplayCount", FH)
     : count;
@@ -746,7 +746,7 @@ CGDirectDisplayID CGGetOnlineDisplayAt_wrap(uint32 n, void* FH) {
   CGDirectDisplayID *displays = NEW_RESOURCE_ARRAY(CGDirectDisplayID, n + 1);
   CGDisplayErr e =  CGGetOnlineDisplayList( n + 1, displays, &count);
   return  e != CGDisplayNoErr  ?  (CGDirectDisplayID)reportOSError(e, "CGGetOnlineDisplayAt", FH)
-  :       count < n + 1        ?  (CGDirectDisplayID)(failure(FH, "not enough displays"), NULL)
+  :       count < n + 1        ?  (CGDirectDisplayID)(failure(FH, "not enough displays"), 0)
   :                               displays[n];
 }
 
@@ -765,7 +765,7 @@ int CGGetLastMouseDelta_y() {  int x, y;  CGGetLastMouseDelta(&x, &y); return y;
 
 OSStatus ATSUDisposeTextLayout_wrap(ATSUTextLayout lay) {
   void* oText;
-  OSStatus e = ATSUGetTextLocation(lay, &oText, NULL, NULL, NULL, NULL);
+  OSStatus e = ATSUGetTextLocation(lay, &oText, 0, 0, 0, 0);
   if (!e)  FreeHeap(oText);
   return ATSUDisposeTextLayout(lay);
 }
@@ -826,7 +826,7 @@ oop GetEventClass_wrap(EventRef evt) {
   if (type_len != 1) { failure(FH, "type length is not 1 32-bit int"); return 0; } \
   typename r; \
   OSStatus e = GetEventParameter( evt, EndianU32_BtoN(*name), EndianU32_BtoN(*type), \
-                                  NULL, sizeof(r), NULL, &r); \
+                                  0, sizeof(r), 0, &r); \
   if (e == noErr)  return r; \
   reportOSError(e, "GetEventParamScalar", FH); \
   return 0; \
@@ -856,7 +856,7 @@ oop GetEventParam_CGPoint(EventRef evt, uint32* name, uint32 name_len, void* FH)
   if (name_len != 1) failure(FH, "name length is not 1 32-bit int");
   HIPoint p;
   OSStatus e = GetEventParameter( evt, EndianU32_BtoN(*name), typeHIPoint,
-                                  NULL, sizeof(p), NULL, &p);
+                                  0, sizeof(p), 0, &p);
   if (e != noErr)  return (oop)reportOSError(e, "GetEventParam_CGPoint", FH);
   objVectorOop r = Memory->objVectorObj->cloneSize(2);
   r->obj_at_put(0, as_floatOop(p.x), false);
@@ -869,7 +869,7 @@ oop GetEventParam_CGSize(EventRef evt, uint32* name, uint32 name_len, void* FH) 
   if (name_len != 1) failure(FH, "name length is not 1 32-bit int");
   HISize p;
   OSStatus e = GetEventParameter( evt, EndianU32_BtoN(*name), typeHISize,
-                                  NULL, sizeof(p), NULL, &p);
+                                  0, sizeof(p), 0, &p);
   if (e != noErr)  return (oop)reportOSError(e, "GetEventParam_CGSize", FH);
   objVectorOop r = Memory->objVectorObj->cloneSize(2);
   r->obj_at_put(0, as_floatOop(p.width), false);
@@ -882,7 +882,7 @@ oop GetEventParam_CGRect(EventRef evt, uint32* name, uint32 name_len, void* FH) 
   if (name_len != 1) failure(FH, "name length is not 1 32-bit int");
   CGRect x;
   OSStatus e = GetEventParameter( evt, EndianU32_BtoN(*name), typeHISize,
-                                  NULL, sizeof(x), NULL, &x);
+                                  0, sizeof(x), 0, &x);
   if (e != noErr)  return (oop)reportOSError(e, "GetEventParam_CGRect", FH);
   objVectorOop r = Memory->objVectorObj->cloneSize(4);
   r->obj_at_put(0, as_floatOop(x.origin.x), false);
@@ -893,7 +893,7 @@ oop GetEventParam_CGRect(EventRef evt, uint32* name, uint32 name_len, void* FH) 
 }
 
 OSStatus SetMouseCoalescingEnabled_wrap(bool newState) {
-  return SetMouseCoalescingEnabled(newState, NULL);
+  return SetMouseCoalescingEnabled(newState, 0);
 }
 
 
@@ -937,7 +937,7 @@ void CGContextClipToMask_wrap(CGContextRef c, float x, float y, float w, float h
 
 
 void CGContextBeginTransparencyLayer_wrap(CGContextRef c) {
-  CGContextBeginTransparencyLayer(c, NULL);
+  CGContextBeginTransparencyLayer(c, 0);
 }  
 
 

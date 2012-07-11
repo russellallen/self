@@ -130,11 +130,11 @@ void Assembler::printRM_disp(int32 d, OperandType t) {
 void Assembler::printDest( int32 dest, OperandType t, Label* L ) {
   if (!printing)  return;
   if (is_testing()) {
-    assert(L == NULL, "cannot test labels (yet)");
+    assert(L == 0, "cannot test labels (yet)");
     int32 relDot = dest - int32(instsEnd);
     asm_lprintf(". %c %d", relDot < 0 ? '-' : '+', abs(relDot));
  }
- else if (L != NULL)
+ else if (L != 0)
    asm_lprintf("L%d%c", L->id(),  L->isDefined() ? 'b' : 'f');
  else
    print_disp(dest, t);
@@ -279,8 +279,8 @@ void Assembler::reg_reg(Location reg_operand, Location rm_reg,  Location index_r
 
 
 void Assembler::word_branch_target(int32 dest, OperandType t, Label* L) {
-  assert(L == NULL  ||  dest == 0  &&  t == NumberOperand, "???");
-  if (L == NULL)
+  assert(L == 0  ||  dest == 0  &&  t == NumberOperand, "???");
+  if (L == 0)
     ;
   else if (L->isDefined()) {
     dest = (int32)L->target();
@@ -301,9 +301,9 @@ void Assembler::std_jmp_or_loop(const char* j_or_loop, const char* ccs, int32 op
   if (printing)  {
     asm_lprintf("%s%s ", j_or_loop, ccs);
   }
-  int32 rel8 = (L == NULL  ?  dest  :  (int32)L->target() )  -  ((int32)instsEnd + 2);
+  int32 rel8 = (L == 0  ?  dest  :  (int32)L->target() )  -  ((int32)instsEnd + 2);
   
-  if ( L == NULL  &&  is_disp8( rel8, disp_type)  &&  op8 != -1) {
+  if ( L == 0  &&  is_disp8( rel8, disp_type)  &&  op8 != -1) {
     if (printing) {
       asm_lprintf(
        	   !is_testing() ? "<byte> "  

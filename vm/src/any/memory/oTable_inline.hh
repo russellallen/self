@@ -9,7 +9,7 @@
 
 
 inline memOop offsetEntry::add_offset(memOop p, memOop* _ptr) {
-  if (this == NULL) return p;
+  if (this == 0) return p;
   if (ptr == _ptr) return memOop(REDERIVE(p, offset));
   return next->add_offset(p, _ptr);
 }

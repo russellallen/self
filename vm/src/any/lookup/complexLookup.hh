@@ -101,7 +101,7 @@ class cacheProbingLookup: public compilingLookup {
   nmethod* findMethodToReuse();
 
   nmethod* probeCache();
-  void    updateCache(nmethod *nm, MethodLookupKey *k = NULL);
+  void    updateCache(nmethod *nm, MethodLookupKey *k = 0);
 };
 
 

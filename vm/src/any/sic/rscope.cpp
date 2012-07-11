@@ -22,21 +22,21 @@
                                          ScopeDesc* d, mapOop m)
   : RScope(s, bci), uncommon(1) {
     desc = d;
-    if (d == NULL || d->isAccessScope()) {
+    if (d == 0 || d->isAccessScope()) {
       ncodes = 1;
     } else {
       methodMap* mm = (methodMap *) d->method()->map();
       ncodes = mm->length_codes();
     }
     _subScopes = NEW_RESOURCE_ARRAY(RScopeBList*, ncodes);
-    for (fint i = 0; i < ncodes; i++) _subScopes[i] = NULL;
+    for (fint i = 0; i < ncodes; i++) _subScopes[i] = 0;
     _receiverMapOop = m;
   }
 
   RPICScope::RPICScope(nmethod* cllr, PcDesc* pc, sendDesc* s, mapOop rcvrMap,
                        nmethod* clle, CountStub *cs, fint lev, bool tr)
-    : RAbstractSelfScope(NULL, pc->byteCode,
-                         clle ? clle->scopes->root() : NULL,
+    : RAbstractSelfScope(0, pc->byteCode,
+                         clle ? clle->scopes->root() : 0,
                          rcvrMap) {
     caller= cllr;
     pcDesc= pc;
@@ -52,7 +52,7 @@
   }
   
   RUntakenScope::RUntakenScope(nmethod* c, PcDesc* pc, sendDesc* s, fint lev)
-    : RPICScope(c, pc, s, mapOop(badOop), NULL, NULL, lev, true) { }
+    : RPICScope(c, pc, s, mapOop(badOop), 0, 0, lev, true) { }
   
   bool RAbstractSelfScope::equivalent_lookup(simpleLookup* l) {
     if (desc->l_equivalent(l)) {
@@ -88,7 +88,7 @@
 
   void RAbstractSelfScope::addScope(fint bci, RScope* s) {
     assert(bci >= 0 && bci < ncodes, "bci out of range");
-    if (_subScopes[bci] == NULL) _subScopes[bci] = new RScopeBList(5);
+    if (_subScopes[bci] == 0) _subScopes[bci] = new RScopeBList(5);
     assert(!_subScopes[bci]->contains(s), "already there");
     _subScopes[bci]->append(s);
   }
@@ -97,7 +97,7 @@
     // return the subscope matching the lookup
     assert(bci >= 0 && bci < ncodes, "bci out of range");
     RScopeBList* list = _subScopes[bci];
-    if (list == NULL) return new RNullScope(this);
+    if (list == 0) return new RNullScope(this);
     for (fint i = 0; i < list->length(); i++) {
       RScope* rs = list->nth(i);
       if (rs->equivalent_lookup(k))
@@ -110,13 +110,13 @@
     // return all subscopes at bci
     assert(bci >= 0 && bci < ncodes, "bci out of range");
     RScopeBList* list = _subScopes[bci];
-    if (list == NULL) return new RScopeBList(1);
+    if (list == 0) return new RScopeBList(1);
     return list;
   }
 
   bool RAbstractSelfScope::hasSubScopes(fint bci) {
     assert(bci >= 0 && bci < ncodes, "bci out of range");
-    return _subScopes[bci] != NULL;
+    return _subScopes[bci] != 0;
   }
 
   bool RAbstractSelfScope::isUncommonAt(fint bci, bool primCall) {
@@ -175,18 +175,18 @@
     // (gives more efficient testing code)
     if (receiverMapOop() == mapOop(badOop)) {
       if (WizardMode) warning("SIC: unknown receiver expression");
-      return new UnknownSExpr(NULL);
+      return new UnknownSExpr(0);
     } else if (receiverMap() == Memory->true_map()) {
-      return new ConstantSExpr(Memory->trueObj, NULL, NULL);
+      return new ConstantSExpr(Memory->trueObj, 0, 0);
     } else if (receiverMap() == Memory->false_map()) {
-      return new ConstantSExpr(Memory->falseObj, NULL, NULL);
+      return new ConstantSExpr(Memory->falseObj, 0, 0);
     } else {
-      return new MapSExpr(receiverMapOop(), NULL, NULL);
+      return new MapSExpr(receiverMapOop(), 0, 0);
     }
   }
 
   SExpr* RUntakenScope::receiverExpr() {
-    return new UnknownSExpr(NULL, NULL, sd->wasNeverExecuted());
+    return new UnknownSExpr(0, 0, sd->wasNeverExecuted());
   }
 
   bool RUntakenScope::isUnlikely() { return sd->wasNeverExecuted(); }
@@ -264,7 +264,7 @@
               break;
             case 1: {
               // monomorphic IC
-              assert (sd->pic() == NULL, "shouldn't have a PIC");
+              assert (sd->pic() == 0, "shouldn't have a PIC");
               nmethod *callee= sd->get_method();
               // If we are reusing nmethods and the method is reusable and
               // we skip the prologue, then we don't really know the rcvr
@@ -337,8 +337,8 @@
     // level > 0 means recursive invocation through a RPICScope (level
     // is the recursion depth); trusted means PICs info is considered
     // accurate
-    RAbstractSelfScope* current = NULL;
-    RAbstractSelfScope* root = NULL;
+    RAbstractSelfScope* current = 0;
+    RAbstractSelfScope* root = 0;
     PcDescBList* uncommon;
     RPICScopeBList* sends;
     getCallees(nm, uncommon, sends, trusted, level);
@@ -412,7 +412,7 @@
 
   void RAbstractSelfScope::printSubScopes() {
     fint i;
-    for (i = 0; i < ncodes && _subScopes[i] == NULL; i++) ;
+    for (i = 0; i < ncodes && _subScopes[i] == 0; i++) ;
     if (i < ncodes) {
       lprintf("{ ");
       for (i = 0; i < ncodes; i++) {

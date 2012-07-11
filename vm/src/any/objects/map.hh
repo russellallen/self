@@ -123,17 +123,17 @@ public:
                              oop old_optimized_method,
                              bool isOKToBashLiteralVector= false,
                              bool mustAllocate= true,
-           IntBList* stack_deltas = NULL);
+           IntBList* stack_deltas = 0);
   
   // obj array operations -- none make sense on maps
   virtual fint length_obj_array(oop obj) {
     Unused(obj); ShouldNotCallThis(); return 0; }
   virtual oop* obj_array(oop obj, fint which = 0) {
     Unused(obj); Unused(which);
-    ShouldNotCallThis(); return NULL; }
+    ShouldNotCallThis(); return 0; }
   virtual oop obj_at(oop obj, fint which) {
     Unused(obj); Unused(which);
-    ShouldNotCallThis(); return NULL; }
+    ShouldNotCallThis(); return 0; }
   virtual void obj_at_put(oop obj, fint which, oop contents) {
     Unused(obj); Unused(which); Unused(contents);
     ShouldNotCallThis(); }
@@ -143,7 +143,7 @@ public:
     Unused(obj); ShouldNotCallThis(); return 0; }
   virtual char* byte_array(oop obj, fint which = 0) {
     Unused(obj); Unused(which);
-    ShouldNotCallThis(); return NULL; }
+    ShouldNotCallThis(); return 0; }
   virtual char byte_at(oop obj, fint which) {
     Unused(obj); Unused(which);
     ShouldNotCallThis(); return 0; }
@@ -154,25 +154,25 @@ public:
   // code operations -- most don't make sense here
   virtual bool has_code() { return false; }
   virtual byteVectorOop codes() { 
-    ShouldNotCallThis(); return byteVectorOop(NULL); }
+    ShouldNotCallThis(); return byteVectorOop(0); }
   virtual objVectorOop literals() {
-    ShouldNotCallThis(); return objVectorOop(NULL); }
+    ShouldNotCallThis(); return objVectorOop(0); }
   virtual stringOop file() {
-    ShouldNotCallThis(); return stringOop(NULL); }
+    ShouldNotCallThis(); return stringOop(0); }
   virtual smiOop line() {
     ShouldNotCallThis(); return smiOop_zero; }
   virtual stringOop source() { 
-    ShouldNotCallThis(); return stringOop(NULL); }
+    ShouldNotCallThis(); return stringOop(0); }
   virtual MethodKind kind() {
-    ShouldNotCallThis(); return MethodKind(NULL); }
+    ShouldNotCallThis(); return MethodKind(0); }
   
   // cloning operations
-  virtual oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL) = 0;
+  virtual oop clone(oop obj, bool mustAllocate= true, oop genObj= 0) = 0;
   virtual bool can_inline_clone() { return false; }
   // If this returns true, the compiler may replace _Clone by _CloneN.
   // This means that the actual definition of clone() is ignored!!
   virtual oop cloneSize(oop obj, fint length, bool mustAllocate= true,
-                        oop filler= NULL);
+                        oop filler= 0);
   
   virtual Map* initialize() { return this; }
   virtual void init(stringOop name, slotsOop method) { 
@@ -222,11 +222,11 @@ public:
 protected:
   Map *allocInit(mapOop new_map) { 
     return new_map == mapOop(failedAllocationOop)
-             ? NULL
+             ? 0
              : new_map->map_addr()->initialize(); }
 
 public:
-  Map* copy(bool mustAllocate= true, oop genObj= NULL) {
+  Map* copy(bool mustAllocate= true, oop genObj= 0) {
     // return a copy of the receiver
     return allocInit( enclosing_mapOop()->copy( enclosing_mapOop()->size(), mustAllocate, genObj) );
   }

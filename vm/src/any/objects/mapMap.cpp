@@ -9,7 +9,7 @@
 Map* mapMap::create_mapMap() {
   oop ignored;
   mapMap m1;
-  Map* m = create_map(sizeof(mapMap), NULL, &m1, &ignored);
+  Map* m = create_map(sizeof(mapMap), 0, &m1, &ignored);
   m->enclosing_mapOop()->set_map(m); // mapMap is its own map
   return m;
 }
@@ -46,7 +46,7 @@ bool mapMap::verify(oop obj) {
     error1("map 0x%lx has a weird slot length", obj);
     isOK = false;
   }
-  slotDesc *prev= NULL;
+  slotDesc *prev= 0;
   fint offset= m->is_slots() ? m->empty_object_size() : 0;
   FOR_EACH_SLOTDESC(m, slot) {
     if (! slot->verify(m)) {

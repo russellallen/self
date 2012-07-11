@@ -9,7 +9,7 @@
 profilerOop profilerMap::create_profiler() {
   slotList* slots = new slotList(VMString[PARENT], 
                                  parent_map_slotType,
-                                 create_slots((slotList*)NULL));
+                                 create_slots((slotList*)0));
   profilerMap pm;
   profilerOop prof;
   profilerMap* m= (profilerMap*)create_map(sizeof(profilerMap), slots,
@@ -24,7 +24,7 @@ void profilerMap::kill(oop p) {
 }
 
 bool profilerMap::is_live(oop p) {
- return profilerOop(p)->get_profiler() != NULL;
+ return profilerOop(p)->get_profiler() != 0;
 }
 
 fint profilerMap::empty_object_size() {

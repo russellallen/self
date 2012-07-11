@@ -21,7 +21,7 @@
    public:                                                                    \
     ClassName *_prev, *_next;                                                 \
                                                                               \
-    ClassName() { _prev = _next = NULL; }                                     \
+    ClassName() { _prev = _next = 0; }                                     \
                                                                               \
     virtual bool hasSingleSuccessor()   { return true; }                      \
     virtual bool hasSinglePredecessor() { return true; }                      \
@@ -30,22 +30,22 @@
     virtual bool isPredecessor(ClassName* n) { return _prev == n; }           \
     virtual bool isSuccessor(ClassName* n)   { return _next == n; }           \
     ClassName* next()                   { return _next; }                     \
-    virtual ClassName* next1()          { return NULL; }                      \
+    virtual ClassName* next1()          { return 0; }                      \
     virtual ClassName* nexti(fint i)    {                                     \
-      if (i == 0) return _next; else { fatal("single next"); return NULL;} }  \
+      if (i == 0) return _next; else { fatal("single next"); return 0;} }  \
     virtual ClassName* firstPrev()      { return _prev; }                     \
     virtual ClassName* prev(fint i) {                                         \
-      if (i == 0) return _prev; else { fatal("single prev"); return NULL;} }  \
+      if (i == 0) return _prev; else { fatal("single prev"); return 0;} }  \
                                                                               \
     virtual void setPrev(ClassName* p) {                                      \
-      assert(_prev == NULL, "already set");                                   \
+      assert(_prev == 0, "already set");                                   \
       _prev = p; }                                                            \
     virtual void movePrev(ClassName* from, ClassName* to) {                   \
       assert(_prev == from, "mismatched prev link");                          \
       _prev = to; }                                                           \
                                                                               \
     void setNext(ClassName* n) {                                              \
-      assert(_next == NULL, "already set"); _next = n; }                      \
+      assert(_next == 0, "already set"); _next = n; }                      \
     virtual void setNext1(ClassName* n) { Unused(n); ShouldNotCallThis(); }   \
     virtual void setNexti(fint i, ClassName* n) {                             \
       if (i == 0) setNext(n); else fatal("subclass"); }                       \
@@ -57,7 +57,7 @@
       assert(hasSingleSuccessor() && hasSinglePredecessor(), "subclass");     \
       if (_prev) _prev->moveNext(this, _next);                                \
       if (_next) _next->movePrev(this, _prev);                                \
-      _prev = _next = NULL;                                                   \
+      _prev = _next = 0;                                                   \
     }                                                                         \
                                                                               \
    /*protected:*/                                                             \
@@ -65,7 +65,7 @@
       /* cut the _prev link between this and n  */                            \
       assert(hasSinglePredecessor(), "subclass");                             \
       assert(_prev == n, "should be same");                                   \
-      _prev = NULL;                                                           \
+      _prev = 0;                                                           \
     }                                                                         \
                                                                               \
    public:                                                                    \
@@ -74,11 +74,11 @@
       assert(hasSingleSuccessor(), "subclass");                               \
       assert(_next == n, "should be same");                                   \
       n->removePrev(this);                                                    \
-      _next = NULL;                                                           \
+      _next = 0;                                                           \
     }                                                                         \
                                                                               \
     ClassName* endOfList() {                                                  \
-      if (_next == NULL) return this;                                         \
+      if (_next == 0) return this;                                         \
       ClassName* n;                                                           \
       for (n = _next; n->_next; n = n->_next) {                               \
         assert(n->hasSingleSuccessor(), ">1 successors");                     \
@@ -117,8 +117,8 @@
                                                                               \
     BranchClassName() { _nxt = new CONC(NodeName, BList)(N); }                \
     NodeName* next1()                           {                             \
-      return _nxt->length() ? _nxt->nth(0) : NULL; }                          \
-    bool hasSingleSuccessor() { return next1() == NULL; }                     \
+      return _nxt->length() ? _nxt->nth(0) : 0; }                          \
+    bool hasSingleSuccessor() { return next1() == 0; }                     \
     fint nSuccessors()        { return _nxt->length() + (_next ? 1 : 0); }    \
     NodeName* next()          { return _next; }                               \
     NodeName* nexti(fint i)   {                                               \
@@ -135,7 +135,7 @@
       /* cut the next link between this and n */                              \
       if (n == _next) {                                                       \
         n->removePrev(this);                                                  \
-        _next = NULL;                                                         \
+        _next = 0;                                                         \
       } else {                                                                \
         fint i;                                                               \
         for (i = 0; i < _nxt->length() && _nxt->nth(i) != n; i++) ;           \
@@ -194,7 +194,7 @@
     bool hasSinglePredecessor() { return _prevs->length() <= 1; }             \
     fint nPredecessors()        { return _prevs->length(); }                  \
     NodeName* firstPrev()       {                                             \
-      return _prevs->isEmpty() ? NULL : _prevs->nth(0); }                     \
+      return _prevs->isEmpty() ? 0 : _prevs->nth(0); }                     \
                                                                               \
     void setPrev(NodeName* p) {                                               \
       assert(p, "should be something");                                       \

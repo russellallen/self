@@ -19,7 +19,7 @@ AbstractCompiler::AbstractCompiler(compilingLookup* l,
   diLink = d;
   send_desc = sd;
   
-  countCompilation(); parentVFrame = NULL; initBugHunt();
+  countCompilation(); parentVFrame = 0; initBugHunt();
 }
 
 

@@ -56,7 +56,7 @@
     sp = (char*)newSP;
     
     newFr = (frame*)newSP;
-    rlFr  = NULL;
+    rlFr  = 0;
     newFrRl = RegisterLocator::for_frame(newFr);    
     sd = sd_of_created_frame;    
     return isInInterruptCheck;
@@ -76,13 +76,13 @@
                      oop res, 
                      char* continuationPC, 
                      char* self_sparc_fp_or_ppc_sp ) {
-    OutgoingArgsOfReturnTrapOrRecompileFrame = NULL; // done with this                                           
+    OutgoingArgsOfReturnTrapOrRecompileFrame = 0; // done with this                                           
     ContinueAfterReturnTrap(res, continuationPC, self_sparc_fp_or_ppc_sp);
   }
   
   
   oop Conversion::get_result() {
-    fatal("Unimplemented"); return NULL;
+    fatal("Unimplemented"); return 0;
   }
   
 # endif // defined(FAST_COMPILER) || defined(SIC_COMPILER)

@@ -327,7 +327,7 @@
   
   
   static void force_overflow(Node* failNode) {
-    if (failNode == NULL)
+    if (failNode == 0)
       return;
     // The SIC uses the eq condition code bit to decide if this is overflow error
     // or operand type error, sigh. See sicPrimline.cpp.
@@ -343,7 +343,7 @@
   
   
   static void check_overflow(Node* failNode) {
-    if (failNode == NULL)
+    if (failNode == 0)
       return;
     Label ok(theAssembler->printing);
     theAssembler->jno(&ok);
@@ -696,7 +696,7 @@
     // used elsewhere in the compiler for ArithRRNode
     assert(op != DivArithOp,
            "would have to do markAllocated and canCopyPropagate for ArithRRNode, will use eax");
-    return arith_genHelper( sreg, true /* no check */, oper, true, dest, op, NULL);
+    return arith_genHelper( sreg, true /* no check */, oper, true, dest, op, 0);
   }    
   
   
@@ -1054,7 +1054,7 @@
       return;           // done -- tested all constants
     }
 
-    Label* loadMapAfterHandlingImmediates = NULL;
+    Label* loadMapAfterHandlingImmediates =  0;
     fint n = prologue(theAssembler, r, smiIndex, floatIndex, immediateOnly, loadMapAfterHandlingImmediates);
 
     if (n) {
@@ -1161,7 +1161,7 @@
   void AbstractArrayAtNode::gen() {
     BasicNode::gen();
     Assembler* a = theAssembler;
-    Label* argFail = NULL;          // if arg isn't a smi
+    Label* argFail =  0;          // if arg isn't a smi
     Label* indexFail = new Label(a->printing);  // if arg is out of bounds
     Location arr = genHelper->moveToReg(_src, Temp2);
     Location index = genHelper->moveToReg(arg, Temp1);
@@ -1268,7 +1268,7 @@
       if (((ConstPReg*)elem)->constant->is_smi()) {
         theAssembler->Untested("ByteArrayAtPutNode::testArg2");
         // no run-time check required
-        return NULL;
+        return  0;
       }
       theAssembler->Untested("ByteArrayAtPutNode::testArg2");
       // primitive will always fail

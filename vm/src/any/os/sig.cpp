@@ -183,7 +183,7 @@ void SignalInterface::handle_Self_signal(SelfSignal ssig) {
   lprintf("\nDo you really want to force a 'hard' abort (y/n)? ");
   char c[255];
   c[0] = '\0';
-  if (fgets(c, sizeof(c), stdin) == NULL) {
+  if (fgets(c, sizeof(c), stdin) == 0) {
     lprintf("\nError while reading answer, quitting.");
     OS::terminate(1);
   }
@@ -208,7 +208,7 @@ void SignalInterface::safely_handle_Self_signal(SelfSignal ssig) {
   if (preemptCause == cNoCause)
     preemptCause = cSignal;
 
-  if ( twainsProcess != NULL
+  if ( twainsProcess != 0
   ||   PendingSelfSignals::keyboard_signals() != 0
   ||   need_preemptor_for_timer )
     preemptor();
@@ -220,7 +220,7 @@ void SignalInterface::handle_OS_signal(int ossig, char* addr, int32 code) {
 
   FlagSettingInt fs(errno, 0);  // save errno
 
-  if (eventLog != NULL) // might not exist yet
+  if (eventLog != 0) // might not exist yet
     LOG_EVENT3("signal %ld pc %#lx npc %#lx",
                ossig, InterruptedContext::the_interrupted_context->pc(), InterruptedContext::the_interrupted_context->next_pc());
 

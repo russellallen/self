@@ -15,7 +15,7 @@ class mirrorMap: public slotsMapDeps {
   VtblMapType vtblMapType() { return MAP_TYPE_NAME(mirrorMap); }
 
   // creation operation
-  static mirrorOop create_mirror(oop reflectee = create_slots((slotList*)NULL));
+  static mirrorOop create_mirror(oop reflectee = create_slots((slotList*)0));
   
   // mirror operation
   mirrorOop mirror_proto() { return Memory->mirrorMirrorObj; }

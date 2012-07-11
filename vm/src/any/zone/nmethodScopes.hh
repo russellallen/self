@@ -18,8 +18,8 @@
 
 
 # define FOR_EACH_SCOPE(SCOPES, VAR)\
-   for(ScopeDesc* VAR = SCOPES->getNext(NULL); \
-       VAR != NULL; VAR =  SCOPES->getNext(VAR) )
+   for(ScopeDesc* VAR = SCOPES->getNext(0); \
+       VAR != 0; VAR =  SCOPES->getNext(VAR) )
 
 class nmethodScopes : public ResourceObj {
  public:
@@ -107,7 +107,7 @@ private:
     fint offset = s->next_offset();
 
     if (offset + (sizeof(int32) - (offset%sizeof(int32))) % sizeof(int32)
-        >= (_oops_offset)*sizeof(oop)) return NULL;
+        >= (_oops_offset)*sizeof(oop)) return 0;
     return at(offset);
   }
 

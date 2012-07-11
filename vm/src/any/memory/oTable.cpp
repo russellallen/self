@@ -24,7 +24,7 @@ void oTable::grow() {
 #   endif
    bottom = new oTableBuffer; 
    point.buffer = bottom; 
-   offsets = NULL; 
+   offsets = 0; 
  } else {
    point.buffer->next = new oTableBuffer;
    point.buffer = point.buffer->next;

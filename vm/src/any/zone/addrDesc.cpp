@@ -22,7 +22,7 @@ pc_t* addrDesc::addr(OopNCode* m) {
     return (pc_t*) nm->scopes->at(off);
   }
   ShouldNotReachHere(); // there should be no addrDescs beyond scopes
-  return NULL;
+  return 0;
 }
 
 bool addrDesc::verify(CacheStub* m) {

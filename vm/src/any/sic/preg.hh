@@ -37,7 +37,7 @@
    public:
     static fint currentNo;      // id of next PReg created
     PRegBBIndexBList dus;       // defs and uses
-    SSelfScope* scope;          // scope to which I belong (or NULL)
+    SSelfScope* scope;          // scope to which I belong (or 0)
     Location loc;               // real location assigned to this preg
     CPInfo* cpInfo;             // to follow effects of copy propagation
     PRegBList* cpRegs;          // regs cp-ed away by me
@@ -52,8 +52,8 @@
     void initialize() {
       _id = currentNo++; 
       uplevelR = uplevelW = debug = false;
-      _nuses = _ndefs = _nsoftUses = weight = 0; cpInfo = NULL; regClass = 0;
-      regClassLink = 0; cpRegs = NULL;
+      _nuses = _ndefs = _nsoftUses = weight = 0; cpInfo = 0; regClass = 0;
+      regClassLink = 0; cpRegs = 0;
     }
     static const fint VeryNegative;
     
@@ -270,14 +270,14 @@
     bool isMaterialized;    // ensures that all materialized blocks are exposed
     bool isEliminated;      // needed to avoid assert bug
     SCodeScope* primFailBlockScope;
-        // if non-NULL, block is exposed only by prim failure in this scope
+        // if non-0, block is exposed only by prim failure in this scope
     bool escapes;
     static fint numBlocks;
     
     BlockPReg(SCodeScope* s, blockOop b, fint st, fint e) : SAPReg(s, st, e) {
       block = b; memoized = escapes = false; numBlocks++;
       isMaterialized = isEliminated = false;
-      primFailBlockScope = NULL; }
+      primFailBlockScope = 0; }
     bool isBlockPReg() { return true; }
     NameNode* locNameNode(bool mustBeLegal);
     SCodeScope* parent();
@@ -296,7 +296,7 @@
   // move this class to a PD-preg.hh and also move all of its users (Sparc instructions)
   class NoPReg : public PReg {  // "no result" register (e.g. GO)
    public:
-    NoPReg() : PReg(NULL) {
+    NoPReg() : PReg(0) {
         loc = NoReg;
         initialize();
     }

@@ -36,7 +36,7 @@ void profil( unsigned short* /*buf*/,
 
 FlatProfiler* flatProfiler;
 typedef uint16 PCounter;
-static char* buf = NULL;
+static char* buf = 0;
 static int32 bufSize;
 
 # define bufStart  ((PCounter*) buf)
@@ -190,7 +190,7 @@ static int32 printStubNumbers() {
     if (p < e) {
       return p;
     } else {
-      return NULL;
+      return 0;
     }
   }
 # endif

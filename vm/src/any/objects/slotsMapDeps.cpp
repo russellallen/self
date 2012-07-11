@@ -63,7 +63,7 @@ slotsOop slotsMapDeps::create_slots(slotList* slots, const char* annotation) {
 
 oop slotsMapDeps::fill_in_slots(slotList* slist, fint slotCount) {
   add_slot_dependents()->init();
-  dependents= NULL;
+  dependents= 0;
   return slotsMap::fill_in_slots(slist, slotCount);
 }
 
@@ -107,7 +107,7 @@ void slotsMapDeps::delete_map() {
 nmln* slotsMapDeps::dependents_for_slot(slotDesc *s) {
   assert(s >= slots() && s < slot(length_slots()),
          "slotDesc not part of map");
-  if (dependents == NULL) {
+  if (dependents == 0) {
     dependents= Memory->allocateSlotDeps(this);
     FOR_EACH_SLOT_DEP(d) {
       d->init();
@@ -119,7 +119,7 @@ nmln* slotsMapDeps::dependents_for_slot(slotDesc *s) {
 void slotsMapDeps::deallocate_slot_dependents() {
   if (dependents) {
     Memory->deallocateSlotDeps(dependents, length_slots());
-    dependents= NULL;
+    dependents= 0;
   }
 }
 
@@ -132,7 +132,7 @@ void slotsMapDeps::moveDeps(nmln* newDeps, int32 delta) {
 
 // receiver should be a new map
 void slotsMapDeps::init_dependents() {
-  dependents= NULL;
+  dependents= 0;
   add_slot_dependents()->init();
 }
 

@@ -297,7 +297,7 @@ void MonitorBar::calculate_VM_stats() {
   calculateVMRegion(int32(start1()), used1(), in_core_percentage_1, old_len_1);
   assert(in_core_percentage_1 >= 0 && in_core_percentage_1 <= 100,
          "wrong percentage");
-  if (start2() != NULL) {
+  if (start2() != 0) {
     calculateVMRegion(int32(start2()), used2(), in_core_percentage_2, old_len_2);
     assert(in_core_percentage_2 >= 0 && in_core_percentage_2 <= 100,
            "wrong percentage");

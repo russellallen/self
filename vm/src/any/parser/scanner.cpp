@@ -326,7 +326,7 @@ void Scanner::initialize() {
 }
 
 Scanner::Scanner() {
-  sourceBuf= NULL;
+  sourceBuf= 0;
   initialize();
 }
 
@@ -358,10 +358,10 @@ void InteractiveScanner::discardInput() {
 }
 
 FILE* FileScanner::openFileAndReturnFile(const char* fn) {
-  _fullName = NULL;
+  _fullName = 0;
   file = Files->openSelfFile(fn, &_fullName);
   fileError= file ? 0 : errno;
-  if (file == NULL) {
+  if (file == 0) {
     if (fileError == 0) // yes, Virginia, some unix ops can fail to set errno
       fileError= ENOENT;  // such as fopen("", "r")
     return 0;
@@ -436,10 +436,10 @@ void Scanner::initSourcePos() {
 }
 
 void Scanner::resetTokenList() {
-  assert(   tokens == NULL
-         || tokens->prev == NULL && tokens->token->type == Token::ACCEPT,
+  assert(   tokens == 0
+         || tokens->prev == 0 && tokens->token->type == Token::ACCEPT,
          "unexpected token");
-  tokens= NULL;
+  tokens= 0;
 }
 
 
@@ -449,7 +449,7 @@ void Scanner::SuppressErrors(bool b) { suppress = b; }
 
 Token* Scanner::TokenizingError(const char* msg) {
   if (suppress) {
-    return NULL;
+    return 0;
   } else {
     return new Token(Token::ERROR_TOKEN, line, column - 1, msg);
   }
@@ -507,21 +507,21 @@ Token* Scanner::read_numeric_escape(fint base, fint howmany, char& ch) {
     }
   }
   ch = char(value);
-  return NULL;
+  return 0;
 }
 
 // read next char and store in into buf; read 2 chars if first char is \'
 Token* Scanner::read_char(char*& buf, bool& cannot_be_a_delimeter) {
   char c = get_char();
-  Token* t = NULL;
+  Token* t = 0;
   cannot_be_a_delimeter = false;
   
   switch (c) {
-   default:  *buf = c;  return NULL;
+   default:  *buf = c;  return 0;
     
     // all self code assumes annotation strings have newlines in them
    // but mac reads them as \r -- dmu 6/99
-   case '\r':  *buf = '\n';  return NULL;
+   case '\r':  *buf = '\n';  return 0;
 
    case '\\':  return read_escaped_char(buf, cannot_be_a_delimeter);
   }
@@ -531,7 +531,7 @@ Token* Scanner::read_char(char*& buf, bool& cannot_be_a_delimeter) {
 Token* Scanner::read_escaped_char(char*& buf, bool& cannot_be_a_delimeter) {
   fint c1 = get_char();
   char c;
-  Token* t = NULL;
+  Token* t = 0;
   switch (c1) {
    // An escaped newline or CR translates to nothing, 
    // recurse to force a read of whatever is next -- dmu 6/99
@@ -597,7 +597,7 @@ Token* Scanner::skip_comment() {
     String* s = new String(copy_string(buffer));
     commentList->append( new Token(Token::COMMENT, s, l, col, ss));
   }
-  return NULL;
+  return 0;
 }
 
 
@@ -663,7 +663,7 @@ Token* Scanner::read_name(fint c) {
       t == Token::KEYWORD || t == Token::PRIMKEYWORD || t == Token::CAPKEYWORD) {
     s = new String(copy_string(buffer));
   } else {
-    s = NULL;
+    s = 0;
   }
   return new Token(t, s, l, col, ss);
 }
@@ -678,7 +678,7 @@ Token* Scanner::read_op(fint c) {
   push_char(c);
   buffer[len] = '\0';
   Token::TokenType t;
-  String* s = NULL;
+  String* s = 0;
   if (strcmp(buffer, "<-") == 0) t = Token::ARROW;
   else if (strcmp(buffer, "=") == 0) t = as_TokenType('=');
   else if (strcmp(buffer, "|") == 0) t = as_TokenType('|');
@@ -869,8 +869,8 @@ Token* Scanner::get_token() {
     t = tokens->token;
     tokens = tokens->prev;
   } else {
-    t = NULL;
-    while (t == NULL) {
+    t = 0;
+    while (t == 0) {
       fint c = get_char();
       switch (c) {
        case EOF:

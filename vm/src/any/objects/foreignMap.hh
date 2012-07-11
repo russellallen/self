@@ -21,7 +21,7 @@ class foreignMap: public slotsMapDeps {
 
   virtual bool can_inline_clone() {return false;}
 
-  virtual oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL) {
+  virtual oop clone(oop obj, bool mustAllocate= true, oop genObj= 0) {
     oop r= slotsMapDeps::clone(obj, mustAllocate, genObj);
     if (r != failedAllocationOop) r->kill();
     return r;
@@ -35,6 +35,6 @@ class foreignMap: public slotsMapDeps {
   void dummy_initialize(oop obj, oop filler) {
     Unused(filler);
     assert( obj->is_foreign(), "a foreignOop is expected");
-    foreignOop(obj)->set_pointer(NULL);
+    foreignOop(obj)->set_pointer(0);
   }
 };

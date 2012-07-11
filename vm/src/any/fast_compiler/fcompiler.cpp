@@ -9,7 +9,7 @@
 
 # ifdef FAST_COMPILER
 
-FCompiler* theCompiler = NULL;
+FCompiler* theCompiler = 0;
 
 int32 FCompiler::verifiedOffset() { return codeGen->verifiedOffset; }
 int32 FCompiler::diCheckOffset()  { return codeGen->diCheckOffset; }
@@ -26,15 +26,15 @@ FCompiler::FCompiler(compilingLookup* k, sendDesc* sd, nmln* d)
 
 
 void FCompiler::finalize() {
-  theCompiler  = NULL;
-  theCodeGen   = NULL;
-  theAssembler = NULL;
+  theCompiler  = 0;
+  theCodeGen   = 0;
+  theAssembler = 0;
   AbstractCompiler::finalize();
   if (VMNICProfiling) OS::profile(false);
 }
 
 void FCompiler::initialize() {
-  assert(theCompiler == NULL,
+  assert(theCompiler == 0,
          "shouldn't have but one fast compiler at a time");
   theCompiler = this;
   generateDebugCode = false;
@@ -51,7 +51,7 @@ void FCompiler::initialize() {
 
 
 nmethod* FCompiler::compile() {
-  EventMarker em("NIC-compiling %#lx %#lx", L->selector(), NULL);
+  EventMarker em("NIC-compiling %#lx %#lx", L->selector(), 0);
   ElapsedTimer t(PrintCompilation || PrintCompilationStatistics);
   ShowCompileInMonitor sc(L->selector(), "NIC", false);
   // don't do any inlining when converting / single-stepping
@@ -96,7 +96,7 @@ nmethod* FCompiler::compile() {
 void FCompiler::trace_compile(const char *s) {
   if (PrintCompilation) {
     lprintf("*NIC-compiling %s method for %s:\n",
-            s, sprintName(NULL, L->selector()));
+            s, sprintName(0, L->selector()));
   }
 }
 
@@ -159,7 +159,7 @@ void FCompiler::constantCode() {
 void FCompiler::methodCode() {
   trace_compile("normal");
   
-  if (PrintNICSource  &&  method()  &&  method()->source() != NULL  &&  method()->source()->copy_null_terminated()) {
+  if (PrintNICSource  &&  method()  &&  method()->source() != 0  &&  method()->source()->copy_null_terminated()) {
     lprintf( "NIC source: ");
     method()->source()->string_print();
     lprintf( "\n");
@@ -180,7 +180,7 @@ void FCompiler::methodCode() {
       break;
 
     case BlockMethodType: {
-      FScope* parentScope = NULL;
+      FScope* parentScope = 0;
       assert(ReuseNICMethods || L->receiverMap()->is_block(),
              "was expecting block");
       blockOop block = (blockOop) L->receiver;
@@ -207,7 +207,7 @@ void FCompiler::methodCode() {
         //  ? L->sendingVFrame->fr
         //  : currentProcess->last_self_frame(false);
 
-        parentVFrame = block->parentVFrame(NULL, true)->as_compiled();
+        parentVFrame = block->parentVFrame(0, true)->as_compiled();
         if (parentVFrame) parentScope = new_FVFrameScope(debugging, parentVFrame);
       }
 

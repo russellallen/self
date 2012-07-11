@@ -10,8 +10,8 @@
 # include "_monitorWindow.cpp.incl"
 
 MonitorWindow::MonitorWindow() {
-  _m = NULL;
-  pw = NULL;
+  _m = 0;
+  pw = 0;
 }
 
 
@@ -26,8 +26,8 @@ bool MonitorWindow::open_and_resize(Monitor* m) {
   # endif
   pw = q && !SpyDisplay[0]   ?  (AbstractPlatformWindow*) new     QuartzWindow
      : (x                    ?  (AbstractPlatformWindow*) new  XPlatformWindow
-     :                          NULL);
-  if (pw == NULL) {
+     :                          0);
+  if (pw == 0) {
     warning("no window system for spy");
     return false;
   }
