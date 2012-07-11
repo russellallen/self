@@ -44,30 +44,6 @@ if(clang)
   #
   set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -no-integrated-as -DNO_INTEGRATED_AS_clang")
 endif()
-
-#
-# check for ubunut 12.
-# 
-execute_process(COMMAND lsb_release
-  RESULT_VARIABLE _lsb_release_not_here
-  OUTPUT_VARIABLE _  ERROR_VARIABLE _) 
-if(NOT _lsb_release_not_here)
-  execute_process(COMMAND lsb_release -c -s
-    RESULT_VARIABLE _lsb_release_result
-    OUTPUT_VARIABLE linux_codename
-    ERROR_VARIABLE _error 
-    OUTPUT_STRIP_TRAILING_WHITESPACE) 
-  if(_lsb_release_result) 
-    message(WARNING "Failed to determine Linux version:\n${_error}") 
-  endif() 
-  if(linux_codename MATCHES ".*precise.*")
-    #
-    # pkg-config is necessary on unbuntu 12
-    #
-    set(NEEDS_PKGCONFIG YES)
-  endif()
-endif()
-
   
 #
 # "API". Set up target specific stuff.
