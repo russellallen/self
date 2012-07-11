@@ -359,7 +359,7 @@ class UnixPlatform: public AbstractPlatform {
   }
       
   const char** outer_suffixes() { 
-    static char *suffs[] = { ".cpp", ".c", ".s", ".S", 0 };
+    static const char *suffs[] = { ".cpp", ".c", ".s", ".S", 0 };
     return suffs;
   }
 
