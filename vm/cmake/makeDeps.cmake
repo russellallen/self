@@ -42,7 +42,8 @@ include_directories(${SELF_GENERATED_INLCUDE_FILES_DIR})
 #
 set(
   SELF_PREFIX_PREFIX_THRESHOLD 
-  "20"
+  "35"
+  # DO NOT SET BELOW 35. Breaks X-includes!
   CACHE STRING
   "The minimum number of times for an include file to occur bein included to be included in the prefix header"
 )
