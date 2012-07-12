@@ -91,7 +91,7 @@ MACRO(start_exported_function, name)
   .globl C_SYM($0)
 C_SYM($0):
 
-# elif defined(__linux__)
+# elif defined(__linux__) || (defined(SOLARIS) && SOLARIS)
 
   .global C_SYM(\name)
 C_SYM(\name):
@@ -179,7 +179,7 @@ ENDMACRO
       ENDMACRO
 
 
-    # elif defined(__linux__)
+    # elif defined(__linux__) || (defined(SOLARIS) && SOLARIS)
       MACRO(jmp_reg, reg)
         jmp *\reg
       ENDMACRO

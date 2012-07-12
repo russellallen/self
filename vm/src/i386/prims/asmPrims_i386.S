@@ -47,7 +47,7 @@ ret_overflow: ret_prim_error overflowOffset
              movl    4(%esp), $1
              testl   $(Tag_Mask), $1
              jne     ret_bad_type
-        # elif defined(__linux__)
+        # elif defined(__linux__) || (defined(SOLARIS) && SOLARIS)
             start_exported_function \name
              movl    8(%esp), \argreg
              testl   $(Tag_Mask), \argreg
