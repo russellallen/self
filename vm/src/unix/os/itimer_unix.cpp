@@ -197,7 +197,7 @@ void IntervalTimerTick(int sig, self_code_info_t *info, self_sig_context_t *scp)
     if (!haveWarned) {
 # if TARGET_OS_VERSION == LINUX_VERSION
       warning3("IntervalTimerTick: signal_handler cannot nest (only one interrupted context).\n"
-               "Received timer sig %d while in sig %d or timer sig %d.\n"
+               "Received timer sig %d while in sig %d or timer sig %d.\n",
                sig, 
                SignalInterface::currentNonTimerSignal,
                SignalInterface::currentTimerSignal);
