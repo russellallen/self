@@ -11,11 +11,16 @@
   # define OSX_ASM_RELEASE POST_2007_OSX_ASM_RELEASE
 # endif
 
+# if (defined(sun) || defined(__sun)) && \
+     (defined(__SVR4) || defined(__svr4__))
+  # define SOLARIS 1
+# endif
+
 # if defined(__APPLE__)
   # define MACRO(name, ...) .macro name // __VA_ARGS__
   # define ENDMACRO .endmacro
   # define C_SYM(name) _##name
-# elif defined(__linux__)
+# elif defined(__linux__) || (defined(SOLARIS) && SOLARIS)
   # if defined(__clang__) && !defined(NO_INTEGRATED_AS_clang)
     # define MACRO(name, ...) .macro name // __VA_ARGS__
     # define ENDMACRO .endmacro

@@ -22,7 +22,7 @@
          || (defined(__linux__) && defined(__clang__) && !defined(NO_INTEGRATED_AS_clang))
             movl   $0(%eax), %eax
         
-        # elif defined(__linux__)
+        # elif defined(__linux__) || (defined(SOLARIS) && SOLARIS)
             movl   \error_code(%eax), %eax
         
         # else
