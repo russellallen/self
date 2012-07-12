@@ -198,10 +198,15 @@ void IntervalTimerTick(int sig, self_code_info_t *info, self_sig_context_t *scp)
 # if TARGET_OS_VERSION == LINUX_VERSION
       warning3("IntervalTimerTick: signal_handler cannot nest (only one interrupted context).\n"
                "Received timer sig %d while in sig %d or timer sig %d.\n"
-               "MacOSX ApplicationEnhancer causes apps to get signals that should be blocked.",
                sig, 
                SignalInterface::currentNonTimerSignal,
                SignalInterface::currentTimerSignal);
+# elif TARGET_OS_VERSION == SOLARIS_VERSION
+      warning6("IntervalTimerTick: signal_handler cannot nest (only one interrupted context).\n"
+               "Received timer sig %d (%s) while in sig %d (%s) or timer sig %d (%s).\n",
+               sig, strsignal(sig),
+               SignalInterface::currentNonTimerSignal, strsignal(SignalInterface::currentNonTimerSignal),
+               SignalInterface::currentTimerSignal, strsignal(SignalInterface::currentTimerSignal));
 # else
       warning6("IntervalTimerTick: signal_handler cannot nest (only one interrupted context).\n"
                "Received timer sig %d (sig%s) while in sig %d (sig%s) or timer sig %d (sig%s).\n"
