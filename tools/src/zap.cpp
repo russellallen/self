@@ -38,7 +38,7 @@ void kill_if_match(int pid, char *pid_text, char *match_text) {
   }
 }
 
-#if !defined(__APPLE__)
+#if !defined(__APPLE__) && !defined(__linux__)
   extern "C" FILE *popen(...);
 # endif
 
