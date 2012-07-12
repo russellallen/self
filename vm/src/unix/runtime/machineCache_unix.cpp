@@ -80,6 +80,13 @@
 
   void MachineCache::flush_instruction_cache_range(void* s, void* e) {}
   
+# elif TARGET_OS_VERSION == SOLARIS_VERSION \
+    && TARGET_ARCH       == I386_ARCH
+  void MachineCache::flush_instruction_cache_word(void* addr) { }
+
+  void MachineCache::flush_instruction_cache_range(void* s, void* e) {}
+  
+  
 # else
   # error for which machine?  
 

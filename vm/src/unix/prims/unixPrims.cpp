@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# if TARGET_OS_VERSION != MACOSX_VERSION \
-  && TARGET_OS_VERSION !=  LINUX_VERSION
+# if !(   TARGET_OS_VERSION ==  MACOSX_VERSION \
+     ||   TARGET_OS_VERSION ==   LINUX_VERSION \
+     || ( TARGET_OS_VERSION == SOLARIS_VERSION \
+             && TARGET_ARCH == I386_ARCH))
   # define FD_SETSIZE     256             /* max. number of open files */
 # endif
   
