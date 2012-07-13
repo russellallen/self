@@ -45,6 +45,7 @@
   * [Assembler] Unified GNU/Apple `as` handling for i386.
   * [Build] Certain tools used for building have been moved, some have been
     removed. See _Fate of the tools_ below.
+
 ## De-Deprecation ##
 
   * [C++] String literals are now all “const char*”
