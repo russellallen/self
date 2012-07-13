@@ -6,8 +6,8 @@
     **removed**
   * Build process uses **CMake** now
   
-  * Less files: 2022 (Makefiles/Xcode) → 1681 (CMake) -341 files
-  * Less code: ca. 415,000 SLOC → 399,000 SLOC
+  * Less files: 2022 (Makefiles/Xcode) → 1681 (CMake), that is -341 files
+  * Less code: ca. 415,000 SLOC → ca. 399,000 SLOC, that is ca. -16,000 SLOC
   
   * New supported compilers: **GCC** ≥ 4.2, **Clang**
   * Experimental Mac OS X support for Self as double-clickable Application
