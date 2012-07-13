@@ -14,9 +14,7 @@
 #include <stdlib.h>
 
 #if defined(sun) || defined(__sun)
-# include <sys/systeminfo.h>
 # define MAXHOSTNAMELEN 257
-# define gethostname(h,l) sysinfo(SI_HOSTNAME,(h),(l)) 
 #endif
 
 const char *ps = "ps -gx";
@@ -37,10 +35,6 @@ void kill_if_match(int pid, char *pid_text, char *match_text) {
     kill( pid, SIGKILL);
   }
 }
-
-#if !defined(__APPLE__) && !defined(__linux__)
-  extern "C" FILE *popen(...);
-# endif
 
 int main(int argc, char **argv) {
   FILE *fin;

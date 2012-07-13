@@ -12,17 +12,6 @@
 # include <stdio.h>
 # include <string.h>
 
-# if defined(sun) || defined(__sun)
-# include <sys/systeminfo.h>
-extern "C" {
-  int gethostname(char* n, int len) { 
-    return sysinfo(SI_HOSTNAME, (char*) n, len); }
-}
-/* For some reason this one is not declared in any header file. */
-extern "C" int shutdown(int socketFD, int how); 
-# endif
-
-
 short port_number    =  1275;
 const int   debug          =     0;
 const int   hostNameLength =   100;

@@ -113,15 +113,23 @@ void resetTerminal() {
     // C library write()
   }
   static int c_lib_write(int fd, const char* buf, int nbytes) {
+  # if TARGET_ARCH == I386_ARCH
+    return write(fd, buf, nbytes);
+  # else
     return _WRITE(fd, buf, nbytes);
+  # endif
   }
+
 
   typedef unsigned int nbytes_t;
   // Note: Both _write and _libc_write are patched in write.o
+  # if TARGET_ARCH != I386_ARCH
   extern "C"  int write(int, const void*, nbytes_t);
   extern "C"  int  _write(int fd, const void* b, nbytes_t nbytes) { return write(fd, b, nbytes); }
   extern "C" int _libc_write(int fd, const void* b, unsigned int nbytes) {
     return _write(fd, b, nbytes); }
+  # endif
+
 # elif  TARGET_OS_VERSION == SUNOS_VERSION
 
   // Emulate blocking write on a possibly non-blocking filedescriptor; this

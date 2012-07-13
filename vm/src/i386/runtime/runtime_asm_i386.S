@@ -381,7 +381,7 @@ start_exported_function firstSelfFrame_returnPC
                    jmp_label send_desc_end      // XXXintel may not need this if do it like sparc, offset 2/2, len 5
                   .long 0                       // reg mask  XXXintel not needed, offset 3/3 len 4
                    jmp_label contNLR             // XXXintel could be short inst if fix sendDesc offsets
-                  .globl  _firstSelfFrame_nmlns // for alignment checking
+                  .globl  C_SYM(firstSelfFrame_nmlns) // for alignment checking
                   .long 0                       // placeholder for nmlns, offset 1/0 WRONG
                   .long 0                       // placeholder for nmlns
                   .long 0                       // placeholder for selector

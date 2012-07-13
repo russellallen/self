@@ -18,10 +18,10 @@ year(YEAR)
 
 set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS OFF)
 
-# Threads
+# Threads and sockets
 enable_language(C)
 find_package(Threads REQUIRED)
-set(EXTRA_LIBRARIES ${EXTRA_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+list(APPEND EXTRA_LIBRARIES ${CMAKE_THREAD_LIBS_INIT} socket nsl)
 
 
 #
