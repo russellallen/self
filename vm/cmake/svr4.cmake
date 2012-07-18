@@ -1,23 +1,6 @@
 #!/usr/bin/env cmake
 
 
-#!/usr/bin/env cmake
-
-# TODO: these are frome the project file, reconsider
-set(DYNAMIC           "-DDYNLINK_SUPPORTED")
-set(COMPILER          "GCC_COMPILER")
-set(TARGET_OS_VERSION "SOLARIS_VERSION")
-set(TARGET_OS_FAMILY  "UNIX_FAMILY")
-set(TARGET_ARCH       "I386_ARCH")
-set(HOST_ARCH         "I386_ARCH")
-
-
-mark_as_advanced(DYNAMIC COMPILER TARGET_OS_VERSION TARGET_OS_FAMILY)
-
-year(YEAR)
-
-set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS OFF)
-
 # Threads and sockets
 enable_language(C)
 find_package(Threads REQUIRED)
