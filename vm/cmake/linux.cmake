@@ -2,6 +2,12 @@
 
 set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS OFF)
 
+
+set(SELF_PREFIX_PREFIX_THRESHOLD_INIT
+  "35" # DO NOT SET BELOW 35. Breaks X-includes!
+)
+
+
 # Threads
 enable_language(C)
 find_package(Threads REQUIRED)

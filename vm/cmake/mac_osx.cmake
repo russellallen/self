@@ -19,6 +19,9 @@ if(SELF_OSX_COCOA)
   set(SELF_OSX_INFO_PLIST InfoCocoa)
 endif()
 
+set(SELF_PREFIX_PREFIX_THRESHOLD_INIT
+  "20" # DO NOT SET ABVOE 20. Breaks X-includes!
+)
 
 
 set(GUI_TYPE MACOSX_BUNDLE)

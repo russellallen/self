@@ -1,6 +1,11 @@
 #!/usr/bin/env cmake
 
 
+set(SELF_PREFIX_PREFIX_THRESHOLD_INIT
+  "250" # DO NOT SET BELOW 250. Breaks Assembler.
+)
+
+
 # Threads and sockets
 enable_language(C)
 find_package(Threads REQUIRED)
