@@ -7,6 +7,3 @@
   # pragma interface
 # endif
 
-
-// Not much needed: vm/templates/{debug,profiled,optimized}.make set the flags
-
