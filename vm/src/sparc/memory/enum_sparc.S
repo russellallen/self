@@ -13,7 +13,7 @@
 #include "_enum_sparc.S.incl"
 
 
-.globl _find_prior_reference, _find_this_object, _find_next_object
+.globl find_prior_reference, find_this_object, find_next_object
 
 /*
   oop* find_prior_reference(oop* p, oop target); 
@@ -24,7 +24,7 @@
 # define p              %o0
 # define target         %o1
 
-_find_prior_reference:
+find_prior_reference:
         btst    4, p
         bnz,a   1f;     sub     p, 4, p
         ld      [p], %o4
@@ -52,7 +52,7 @@ _find_prior_reference:
         retl;                   add     p, 8, p
                                 ! + 8 not -8 cause p already decremented
 
-_find_this_object:
+find_this_object:
         btst    4, p
         bnz,a   1f;     sub     p, 4, p
         ld      [p], %o4
@@ -85,7 +85,7 @@ _find_this_object:
         retl;                   add     p, 8, p
                                 ! + 8 not -8 cause p already decremented
 
-_find_next_object:
+find_next_object:
         add     p,4,p           ! Find next object ++p
         btst    4, p
         be,a    1f;     nop

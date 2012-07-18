@@ -8,44 +8,44 @@
 
 #include "_asmPrims_sparc.S.incl"
 
-.global _smi_add_prim, _smi_sub_prim, _smi_mul_prim
-.global _smi_complement_prim
-.global _smi_and_prim, _smi_xor_prim
-.global _smi_or_prim
-.global _smi_arithmetic_shift_left_prim
-.global _smi_logical_shift_left_prim
-.global _smi_arithmetic_shift_right_prim
-.global _smi_logical_shift_right_prim
+.global smi_add_prim, smi_sub_prim, smi_mul_prim
+.global smi_complement_prim
+.global smi_and_prim, smi_xor_prim
+.global smi_or_prim
+.global smi_arithmetic_shift_left_prim
+.global smi_logical_shift_left_prim
+.global smi_arithmetic_shift_right_prim
+.global smi_logical_shift_right_prim
 
-.global _breakpoint_prim, _gdb_breakpoint
+.global breakpoint_prim, gdb_breakpoint
 
-.global _VMString
+.global VMString
 
 
 #define arith(rcv, arg, do)                                                   \
         do      rcv, arg, t;                                                  \
-        bvs,a   _whichError;                                                  \
+        bvs,a   whichError;                                                  \
         or      rcv, arg, t;                                                  \
         retl;                                                                 \
         mov     t, result
 
-_smi_add_prim: arith(receiver, arg1, taddcc)
-_smi_sub_prim: arith(receiver, arg1, tsubcc)
+smi_add_prim: arith(receiver, arg1, taddcc)
+smi_sub_prim: arith(receiver, arg1, tsubcc)
 
-_whichError:
+whichError:
         andcc   t, Tag_Mask, t
         cmp     t, 0
         bne,a   handleError
         mov     badTypeOffset, arg1
         mov     overflowOffset, arg1
 handleError:                    /* arg1 = offset into VMString array */
-        sethi   %hi(_VMString), result
-        or      result, %lo(_VMString), result
+        sethi   %hi(VMString), result
+        or      result, %lo(VMString), result
         ld      [result + arg1], result /* fetch error string */
         retl
         add     result, Mark_Tag - Mem_Tag, result      /* markify result */
 
-_smi_mul_prim:
+smi_mul_prim:
         andcc   receiver, Tag_Mask, %g0
         beq,a   ok1
         andcc   arg1, Tag_Mask, %g0
@@ -68,15 +68,15 @@ ok2:    mov     ireceiver, receiver
 upper:  beq,a   done
         mov     %o0, iresult
 
-        sethi   %hi(_VMString), iresult
-        or      iresult, %lo(_VMString), iresult
+        sethi   %hi(VMString), iresult
+        or      iresult, %lo(VMString), iresult
         ld      [iresult + overflowOffset], iresult    /* fetch error string */
         add     iresult, Mark_Tag - Mem_Tag, iresult    /* markify result */
 
 done:   ret
         restore
 
-_smi_complement_prim:
+smi_complement_prim:
         andcc   receiver, Tag_Mask, %g0
         bz      1f
         nop
@@ -99,12 +99,12 @@ _smi_complement_prim:
         retl;                                                                 \
         op      receiver, arg, result
 
-_smi_and_prim: bitwise(and, arg1)
-_smi_or_prim: bitwise(or, arg1)
-_smi_xor_prim: bitwise(xor, arg1)
+smi_and_prim: bitwise(and, arg1)
+smi_or_prim: bitwise(or, arg1)
+smi_xor_prim: bitwise(xor, arg1)
 
 
-_smi_arithmetic_shift_left_prim:
+smi_arithmetic_shift_left_prim:
         typetest2(receiver, arg1)
         sra     arg1, Tag_Size, t
         sll     receiver, t, t
@@ -116,7 +116,7 @@ _smi_arithmetic_shift_left_prim:
 2:      retl
         nop
 
-_smi_logical_shift_left_prim:
+smi_logical_shift_left_prim:
         typetest2(receiver, arg1)
         sra     arg1, Tag_Size, t
         retl
@@ -129,26 +129,26 @@ _smi_logical_shift_left_prim:
         retl;                                                                 \
         and     receiver, intMask, result
 
-_smi_arithmetic_shift_right_prim: shift(sra)
-_smi_logical_shift_right_prim: shift(srl)
+smi_arithmetic_shift_right_prim: shift(sra)
+smi_logical_shift_right_prim: shift(srl)
 
 
-_the_gdb_breakpoint:
+the_gdb_breakpoint:
         save    %sp, (16 + 8) * -4, %sp
         mov     %g0, %o7        ! prevent gdb from screwing up
                                 ! (without this, it may think this frame is
                                 ! a Self frame)
-_gdb_breakpoint:
+gdb_breakpoint:
         nop
         nop
         ret
         restore
 
-_breakpoint_prim:
+breakpoint_prim:
         save    %sp, (16 + 8) * -4, %sp ! make new register window
         ! The call is needed to print the Self stack in gdb, including
         ! the last frame.
-        call    _the_gdb_breakpoint
+        call    the_gdb_breakpoint
         mov     %i0, %o0
         ret
         restore

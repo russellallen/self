@@ -3,44 +3,44 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-       .globl   _Vectorfind_max_targets
-_Vectorfind_max_targets:        .word   15
+       .globl   Vectorfind_max_targets
+Vectorfind_max_targets:        .word   15
 
 
-        .globl  _Vectorfind_max_chunk_size
-_Vectorfind_max_chunk_size:     .word   8192
+        .globl  Vectorfind_max_chunk_size
+Vectorfind_max_chunk_size:     .word   8192
 
 
-        .globl  _vectorfind_next_match
-_vectorfind_next_match:
+        .globl  vectorfind_next_match
+vectorfind_next_match:
         cmp     %o2,0
         bg,a    1f;             cmp     %o2,15
         retl;                   mov     -1,%o0
 1:      ble,a   1f;             sll     %o2, 2, %o2
         retl;                   mov     -1,%o0
-1:      set     _vectorfind_next_match_table, %o4
+1:      set     vectorfind_next_match_table, %o4
         add     %o2, %o4, %o2
         ld      [%o2-4],%o2
         jmp     %o2;            ;nop
 
-_vectorfind_next_match_table:
-        .word   _vectorfind_next_match_1
-        .word   _vectorfind_next_match_2
-        .word   _vectorfind_next_match_3
-        .word   _vectorfind_next_match_4
-        .word   _vectorfind_next_match_5
-        .word   _vectorfind_next_match_6
-        .word   _vectorfind_next_match_7
-        .word   _vectorfind_next_match_8
-        .word   _vectorfind_next_match_9
-        .word   _vectorfind_next_match_10
-        .word   _vectorfind_next_match_11
-        .word   _vectorfind_next_match_12
-        .word   _vectorfind_next_match_13
-        .word   _vectorfind_next_match_14
-        .word   _vectorfind_next_match_15
+vectorfind_next_match_table:
+        .word   vectorfind_next_match_1
+        .word   vectorfind_next_match_2
+        .word   vectorfind_next_match_3
+        .word   vectorfind_next_match_4
+        .word   vectorfind_next_match_5
+        .word   vectorfind_next_match_6
+        .word   vectorfind_next_match_7
+        .word   vectorfind_next_match_8
+        .word   vectorfind_next_match_9
+        .word   vectorfind_next_match_10
+        .word   vectorfind_next_match_11
+        .word   vectorfind_next_match_12
+        .word   vectorfind_next_match_13
+        .word   vectorfind_next_match_14
+        .word   vectorfind_next_match_15
 
-_vectorfind_next_match_1:
+vectorfind_next_match_1:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         btst    4, %i0
@@ -61,7 +61,7 @@ _vectorfind_next_match_1:
         st      %l0, [%i3]
         ret;                    restore
 
-_vectorfind_next_match_2:
+vectorfind_next_match_2:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         ld      [%i1 + 4], %l3
@@ -92,7 +92,7 @@ _vectorfind_next_match_2:
         st      %l0, [%i3]
         ret;                    restore
 
-_vectorfind_next_match_3:
+vectorfind_next_match_3:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         ld      [%i1 + 4], %l3
@@ -133,7 +133,7 @@ _vectorfind_next_match_3:
         st      %l0, [%i3]
         ret;                    restore
 
-_vectorfind_next_match_4:
+vectorfind_next_match_4:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         ld      [%i1 + 4], %l3
@@ -184,7 +184,7 @@ _vectorfind_next_match_4:
         st      %l0, [%i3]
         ret;                    restore
 
-_vectorfind_next_match_5:
+vectorfind_next_match_5:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         ld      [%i1 + 4], %l3
@@ -245,7 +245,7 @@ _vectorfind_next_match_5:
         st      %l0, [%i3]
         ret;                    restore
 
-_vectorfind_next_match_6:
+vectorfind_next_match_6:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         ld      [%i1 + 4], %l3
@@ -316,7 +316,7 @@ _vectorfind_next_match_6:
         st      %l0, [%i3]
         ret;                    restore
 
-_vectorfind_next_match_7:
+vectorfind_next_match_7:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         ld      [%i1 + 4], %l3
@@ -397,7 +397,7 @@ _vectorfind_next_match_7:
         st      %l0, [%i3]
         ret;                    restore
 
-_vectorfind_next_match_8:
+vectorfind_next_match_8:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         ld      [%i1 + 4], %l3
@@ -488,7 +488,7 @@ _vectorfind_next_match_8:
         st      %l0, [%i3]
         ret;                    restore
 
-_vectorfind_next_match_9:
+vectorfind_next_match_9:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         ld      [%i1 + 4], %l3
@@ -589,7 +589,7 @@ _vectorfind_next_match_9:
         st      %l0, [%i3]
         ret;                    restore
 
-_vectorfind_next_match_10:
+vectorfind_next_match_10:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         ld      [%i1 + 4], %l3
@@ -700,7 +700,7 @@ _vectorfind_next_match_10:
         st      %l0, [%i3]
         ret;                    restore
 
-_vectorfind_next_match_11:
+vectorfind_next_match_11:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         ld      [%i1 + 4], %l3
@@ -821,7 +821,7 @@ _vectorfind_next_match_11:
         st      %l0, [%i3]
         ret;                    restore
 
-_vectorfind_next_match_12:
+vectorfind_next_match_12:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         ld      [%i1 + 4], %l3
@@ -952,7 +952,7 @@ _vectorfind_next_match_12:
         st      %l0, [%i3]
         ret;                    restore
 
-_vectorfind_next_match_13:
+vectorfind_next_match_13:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         ld      [%i1 + 4], %l3
@@ -1093,7 +1093,7 @@ _vectorfind_next_match_13:
         st      %l0, [%i3]
         ret;                    restore
 
-_vectorfind_next_match_14:
+vectorfind_next_match_14:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         ld      [%i1 + 4], %l3
@@ -1244,7 +1244,7 @@ _vectorfind_next_match_14:
         st      %l0, [%i3]
         ret;                    restore
 
-_vectorfind_next_match_15:
+vectorfind_next_match_15:
         save    %sp, -112, %sp
         ld      [%i1 + 0], %l2
         ld      [%i1 + 4], %l3

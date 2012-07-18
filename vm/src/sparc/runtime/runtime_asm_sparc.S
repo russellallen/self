@@ -14,55 +14,55 @@
 
 ! runtime routines
 
-.global _SendMessage_stub, _SendMessage_stub_returnPC
-.global _SendDIMessage_stub
-.global _ReturnResult_stub
-.global _ReturnResult_stub_result
+.global SendMessage_stub, SendMessage_stub_returnPC
+.global SendDIMessage_stub
+.global ReturnResult_stub
+.global ReturnResult_stub_result
 
 #ifdef SIC_COMPILER
-.global _HandleUncommonTrap
+.global HandleUncommonTrap
 #endif
-.global _DIRecompile_stub, _DIRecompile_stub_returnPC, _Recompile_stub, _Recompile_stub_returnPC
-.global _MakeOld_stub, _MakeOld_stub_returnPC, _saved_globals, _saved_outregs
+.global DIRecompile_stub, DIRecompile_stub_returnPC, Recompile_stub, Recompile_stub_returnPC
+.global MakeOld_stub, MakeOld_stub_returnPC, saved_globals, saved_outregs
 
-.global _ReturnTrap, _ReturnTrap2, _PrimCallReturnTrap, _ReturnTrap_returnPC, _ReturnTrapNLR_returnPC
-.global _HandleReturnTrap
-.global _ProfilerTrap
+.global ReturnTrap, ReturnTrap2, PrimCallReturnTrap, ReturnTrap_returnPC, ReturnTrapNLR_returnPC
+.global HandleReturnTrap
+.global ProfilerTrap
 #if defined(FAST_COMPILER) || defined(SIC_COMPILER)
-.global _HandleProfilerTrap
+.global HandleProfilerTrap
 #endif
-.global _ContinueAfterReturnTrap, _ContinueNLRAfterReturnTrap
-.global _ContinueAfterProfilerInterrupt
+.global ContinueAfterReturnTrap, ContinueNLRAfterReturnTrap
+.global ContinueAfterProfilerInterrupt
 
-.global _setSPLimitAndContinue, _setSPLimitAndContinueEnd, _newSPLimit, _continuePC
-.global _processSemaphore
-.global _EnterSelf, _ContinueNLRFromC, _DiscardStack, _firstSelfFrame_returnPC
-.global _firstSelfFrameSendDescEnd
-.global _NLRResultFromC, _NLRHomeFromC, _NLRHomeIDFromC, _capture_NLR_parameters_from_registers
-.global _Set_Byte_Map_Base, _Byte_Map_Base, _FlushRegisterWindows_stub
-.global  _FlushInstruction
+.global setSPLimitAndContinue, setSPLimitAndContinueEnd, newSPLimit, continuePC
+.global processSemaphore
+.global EnterSelf, ContinueNLRFromC, DiscardStack, firstSelfFrame_returnPC
+.global firstSelfFrameSendDescEnd
+.global NLRResultFromC, NLRHomeFromC, NLRHomeIDFromC, capture_NLR_parameters_from_registers
+.global Set_Byte_Map_Base, Byte_Map_Base, FlushRegisterWindows_stub
+.global  FlushInstruction
 
-.global _LowReturnAddress, _HighReturnAddress
+.global LowReturnAddress, HighReturnAddress
 
-.global _CallPrimitiveFromInterpreter
+.global CallPrimitiveFromInterpreter
 
-.global _currentFP, _currentFrame, _currentReturnAddr
-.global _SwitchStack0, _SwitchStack1, _SwitchStack2, _SwitchStack3
-.global _SwitchStack4
-.global _setSPLimit, _currentSPLimit, _SetSPAndCall
+.global currentFP, currentFrame, currentReturnAddr
+.global SwitchStack0, SwitchStack1, SwitchStack2, SwitchStack3
+.global SwitchStack4
+.global setSPLimit, currentSPLimit, SetSPAndCall
 
         .seg    "data"
         .align  8
-_saved_globals:                         ! buffer for saving global regs
+saved_globals:                         ! buffer for saving global regs
         .word   0, 0, 0, 0, 0, 0, 0, 0
-_saved_outregs:                         ! buffer for saving o0..o7
+saved_outregs:                         ! buffer for saving o0..o7
         .word   0, 0, 0, 0, 0, 0, 0, 0
         .seg    "text"
 
 ! arrive here upon inline cache miss
 
-_LowReturnAddress:
-_SendMessage_stub:              
+LowReturnAddress:
+SendMessage_stub:              
 #if defined(FAST_COMPILER) || defined(SIC_COMPILER)
         save    %sp, (16 + 8) * -4, %sp ! make new register window
         mov     selector_for_performs,  nonvolatile_selector_for_performs ! save sel, next 2 are globals
@@ -72,8 +72,8 @@ _SendMessage_stub:
         mov     selector_for_performs,  arg3    ! save these
         mov     delegatee_for_performs, arg4    ! two
         mov     iarg1, arg5             ! pass in arg1 to interp assignments
-_SendMessage_stub_returnPC:
-        call    _SendMessage            ! call routine to lookup & send message
+SendMessage_stub_returnPC:
+        call    SendMessage            ! call routine to lookup & send message
         mov     %i7, arg0               ! inline cache addr
 ! return here
         mov     nonvolatile_selector_for_performs,  selector_for_performs  ! restore selector_for_performs
@@ -85,7 +85,7 @@ _SendMessage_stub_returnPC:
 
 ! arrive here upon DI parent check failure
         
-_SendDIMessage_stub:
+SendDIMessage_stub:
 #if defined(FAST_COMPILER) || defined(SIC_COMPILER)
         save    %sp, (16 + 8) * -4, %sp ! make new register window
         mov     %sp, arg1               ! lookup frame pointer
@@ -93,7 +93,7 @@ _SendDIMessage_stub:
         mov     diVerified, arg3        ! verified parents count
         mov     ireceiver, arg4         ! receiver
         mov     iarg1, arg5             ! arg1 for interp assignments
-        call    _SendDIMessage          ! call special di lookup routine
+        call    SendDIMessage          ! call special di lookup routine
         mov     %i7, arg0               ! inline cache addr
         jmp     result                  ! jump to the found method
         restore                         ! pop off frame
@@ -102,46 +102,46 @@ _SendDIMessage_stub:
         .seg "data"
 ! a place to hold the result of an access or assignment for the interpreter
 ! should be a register, but dont have any -- dmu
-_ReturnResult_stub_result:
+ReturnResult_stub_result:
         .word   0
         .seg "text"
 
 
-_ReturnResult_stub:   ! called instead of a real Self method to return a result
-        sethi   %hi(_ReturnResult_stub_result), %l0
+ReturnResult_stub:   ! called instead of a real Self method to return a result
+        sethi   %hi(ReturnResult_stub_result), %l0
         retl
-        ld      [%l0+%lo(_ReturnResult_stub_result)], result
+        ld      [%l0+%lo(ReturnResult_stub_result)], result
 
 
 
 #ifdef SIC_COMPILER
-_HandleUncommonTrap:
+HandleUncommonTrap:
         ! save all registers (including outs/globals) and call C handler
         save    %sp, (16 + 8) * -4, %sp
-        set     _saved_globals, %l0
+        set     saved_globals, %l0
         std     %g0, [%l0]              ! save global regs
         std     %g2, [%l0 + 8]  
         std     %g4, [%l0 + 16] 
         std     %g6, [%l0 + 24] 
-        set     _saved_outregs, %l1
+        set     saved_outregs, %l1
         std     %i0, [%l1]              ! save out regs
         std     %i2, [%l1 + 8]  
         std     %i4, [%l1 + 16] 
         std     %i6, [%l1 + 24] 
         ! make it look as if we were called by Self
-        sethi   %hi(_continuePC), %l1
-        ld      [%l1 + %lo(_continuePC)], %i7
-        st      %g0, [%l1 + %lo(_continuePC)]       ! clear continuePC
-        sethi   %hi(_processSemaphore), %o1
+        sethi   %hi(continuePC), %l1
+        ld      [%l1 + %lo(continuePC)], %i7
+        st      %g0, [%l1 + %lo(continuePC)]       ! clear continuePC
+        sethi   %hi(processSemaphore), %o1
         mov     %i7, %o0
-        call    _recompileUncommon
-        stb     %g0, [%o1 + %lo(_processSemaphore)]    ! clear semaphore
-        set     _saved_globals, %l0     ! reload addr just to be sure
+        call    recompileUncommon
+        stb     %g0, [%o1 + %lo(processSemaphore)]    ! clear semaphore
+        set     saved_globals, %l0     ! reload addr just to be sure
         ldd     [%l0]    ,  %g0         ! restore global regs
         ldd     [%l0 + 8],  %g2  
         ldd     [%l0 + 16], %g4 
         ldd     [%l0 + 24], %g6
-        set     _saved_outregs, %l1     ! reload addr just to be sure
+        set     saved_outregs, %l1     ! reload addr just to be sure
         ldd     [%l1]    ,  %i0         ! restore out regs
         ldd     [%l1 + 8],  %i2  
         ldd     [%l1 + 16], %i4 
@@ -150,18 +150,18 @@ _HandleUncommonTrap:
         restore %g0, %g0, %g0
 #endif
 
-_Recompile_stub:
+Recompile_stub:
 #if defined(FAST_COMPILER) || defined(SIC_COMPILER)
         ! called when a normal method''s counter overflows
         ! called by a count stub or NIC nmethod
         ! do not overwrite the incoming args!
         save    %sp, (16 + 8) * -4, %sp ! create temporary frame to save regs
-        set     _saved_globals, %l0
+        set     saved_globals, %l0
         std     %g0, [%l0]              ! save global regs
         std     %g2, [%l0 + 8]  
         std     %g4, [%l0 + 16] 
         std     %g6, [%l0 + 24] 
-        set     _saved_outregs, %l1
+        set     saved_outregs, %l1
         std     %i0, [%l1]              ! save incoming args
         std     %i2, [%l1 + 8]  
         std     %i4, [%l1 + 16] 
@@ -170,17 +170,17 @@ _Recompile_stub:
         mov     ireceiver, arg2         ! receiver
         mov     %g0, arg3               ! no DI
         mov     recompileLinkReg, arg4  ! nmethod/stub calling us
-_Recompile_stub_returnPC:
-        call    _Recompile              ! do the recompilation
+Recompile_stub_returnPC:
+        call    Recompile              ! do the recompilation
         mov     %i7, arg0               ! inline cache addr
 
         ! we will only get here if recompilation didn''t replace on stack
-        set     _saved_globals, %l0     ! reload addr just to be sure
+        set     saved_globals, %l0     ! reload addr just to be sure
         ldd     [%l0]    ,  %g0         ! restore global regs
         ldd     [%l0 + 8],  %g2  
         ldd     [%l0 + 16], %g4 
         ldd     [%l0 + 24], %g6
-        set     _saved_outregs, %l1     ! reload addr just to be sure
+        set     saved_outregs, %l1     ! reload addr just to be sure
         ldd     [%l1]    ,  %i0         ! restore out regs
         ldd     [%l1 + 8],  %i2  
         ldd     [%l1 + 16], %i4 
@@ -189,7 +189,7 @@ _Recompile_stub_returnPC:
         restore %g0, %g0, %g0           ! pop off frame
 #endif
 
-_DIRecompile_stub:
+DIRecompile_stub:
 #if defined(FAST_COMPILER) || defined(SIC_COMPILER)
         ! called when a DI method''s counter overflows
         mov     diCache, %l0            ! save DI link
@@ -198,8 +198,8 @@ _DIRecompile_stub:
         mov     ireceiver, arg2         ! receiver
         mov     diRecompileLink, arg3   ! DI method to recompile
                                         ! arg4 is ignored for DI recompiles
-_DIRecompile_stub_returnPC:
-        call    _Recompile              ! do the recompilation
+DIRecompile_stub_returnPC:
+        call    Recompile              ! do the recompilation
         mov     %i7, arg0               ! inline cache addr
         mov     %l0, diCache            ! restore DI link
         mov     %l1, diVerified         ! restore  DI count
@@ -207,18 +207,18 @@ _DIRecompile_stub_returnPC:
         restore                         ! pop off frame
 #endif
 
-_MakeOld_stub:
+MakeOld_stub:
 #if defined(FAST_COMPILER) || defined(SIC_COMPILER)
         ! called when a young nmethod''s counter overflows
         ! called by a count stub
         ! do not overwrite the incoming args!
         save    %sp, (16 + 8) * -4, %sp ! create temporary frame to save regs
-        set     _saved_globals, %l0
+        set     saved_globals, %l0
         std     %g0, [%l0]              ! save global regs
         std     %g2, [%l0 + 8]  
         std     %g4, [%l0 + 16] 
         std     %g6, [%l0 + 24] 
-        set     _saved_outregs, %l1
+        set     saved_outregs, %l1
         std     %i0, [%l1]              ! save incoming args
         std     %i2, [%l1 + 8]  
         std     %i4, [%l1 + 16] 
@@ -227,17 +227,17 @@ _MakeOld_stub:
         mov     ireceiver, arg2         ! receiver
         mov     %g0, arg3               ! no DI
         mov     recompileLinkReg, arg4  ! nmethod/stub calling us
-_MakeOld_stub_returnPC:        
-        call    _MakeOld                ! clear nmethod flag etc.
+MakeOld_stub_returnPC:        
+        call    MakeOld                ! clear nmethod flag etc.
         mov     %i7, arg0               ! inline cache addr
 
         ! just continue
-        set     _saved_globals, %l0     ! reload addr just to be sure
+        set     saved_globals, %l0     ! reload addr just to be sure
         ldd     [%l0]    ,  %g0         ! restore global regs
         ldd     [%l0 + 8],  %g2  
         ldd     [%l0 + 16], %g4 
         ldd     [%l0 + 24], %g6
-        set     _saved_outregs, %l1     ! reload addr just to be sure
+        set     saved_outregs, %l1     ! reload addr just to be sure
         ldd     [%l1]    ,  %i0         ! restore out regs
         ldd     [%l1 + 8],  %i2  
         ldd     [%l1 + 16], %i4 
@@ -246,12 +246,12 @@ _MakeOld_stub_returnPC:
         restore %g0, %g0, %g0           ! pop off frame
 #endif
 
-_EnterSelf:
+EnterSelf:
         ! gets receiver, entry point, arg1 in i0, i1, i2
         save    %sp, (16 + 8) * -4, %sp ! make new register window
         mov     %i2, arg1
 
-_firstSelfFrame_returnPC:   ! never branch to here, just need to mark this pc for testing
+firstSelfFrame_returnPC:   ! never branch to here, just need to mark this pc for testing
         call    %i1
         mov     %i0, receiver
 
@@ -262,7 +262,7 @@ _firstSelfFrame_returnPC:   ! never branch to here, just need to mark this pc fo
         .word   0, 0                    ! placeholder for nmlns
         .word   0                       ! placeholder for selector
         .word   20                      ! lookup type = StaticNormalLookupType
-_firstSelfFrameSendDescEnd:
+firstSelfFrameSendDescEnd:
         ret
         restore result, %g0, result
 
@@ -271,12 +271,12 @@ _firstSelfFrameSendDescEnd:
 contNLR:
         mov     NLRHomeReg, arg1
         mov     NLRHomeIDReg, arg2
-        call    _capture_NLR_parameters_from_registers
+        call    capture_NLR_parameters_from_registers
         mov     NLRResultReg, receiver
         ret                             ! return to C++
         restore result, %g0, result
         
-_ContinueNLRFromC:                      ! called by VM 
+ContinueNLRFromC:                      ! called by VM 
         mov     receiver, NLRTempReg    ! return address
         mov     arg1, NLRResultReg      ! borrow this global to save interp flag
         mov     arg2, NLRHomeReg        ! called from Self ic? (must save)
@@ -290,63 +290,63 @@ _ContinueNLRFromC:                      ! called by VM
         beq     cont                    ! no, goto compiled variant
         nop
 
-        sethi   %hi(_processSemaphore), NLRTempReg
+        sethi   %hi(processSemaphore), NLRTempReg
         retl                            ! interp, so just return
-        stb     %g0, [NLRTempReg + %lo(_processSemaphore)]    ! clear semaphore
+        stb     %g0, [NLRTempReg + %lo(processSemaphore)]    ! clear semaphore
 
 cont:   tst     NLRHomeReg              ! find out how to return
                                         ! now load NLR params from globals
-        sethi   %hi(_NLRResultFromC), NLRHomeReg
-        ld      [NLRHomeReg+%lo(_NLRResultFromC)], NLRResultReg
-        sethi   %hi(_NLRHomeIDFromC), NLRHomeReg
-        ld      [NLRHomeReg+%lo(_NLRHomeIDFromC)], NLRHomeIDReg
-        sethi   %hi(_NLRHomeFromC), NLRHomeReg
+        sethi   %hi(NLRResultFromC), NLRHomeReg
+        ld      [NLRHomeReg+%lo(NLRResultFromC)], NLRResultReg
+        sethi   %hi(NLRHomeIDFromC), NLRHomeReg
+        ld      [NLRHomeReg+%lo(NLRHomeIDFromC)], NLRHomeIDReg
+        sethi   %hi(NLRHomeFromC), NLRHomeReg
         bne     contIC
-        ld      [NLRHomeReg+%lo(_NLRHomeFromC)], NLRHomeReg
-        sethi   %hi(_processSemaphore), NLRTempReg
+        ld      [NLRHomeReg+%lo(NLRHomeFromC)], NLRHomeReg
+        sethi   %hi(processSemaphore), NLRTempReg
         jmp     %o7+8  +   non_local_return_offset-primitive_end_offset
-        stb     %g0, [NLRTempReg + %lo(_processSemaphore)]    ! clear semaphore
+        stb     %g0, [NLRTempReg + %lo(processSemaphore)]    ! clear semaphore
         ! return thru inline cache of primitive
         nop
-contIC: sethi   %hi(_processSemaphore), NLRTempReg
+contIC: sethi   %hi(processSemaphore), NLRTempReg
         jmp     %o7 + non_local_return_offset
         ! return thru normal inline cache
-        stb     %g0, [NLRTempReg + %lo(_processSemaphore)]    ! clear semaphore
+        stb     %g0, [NLRTempReg + %lo(processSemaphore)]    ! clear semaphore
         nop
 
-_DiscardStack:                          ! discard entire Self stack (no zapping)
-_HighReturnAddress:
+DiscardStack:                          ! discard entire Self stack (no zapping)
+HighReturnAddress:
         restore                         ! pop caller''s frame
-        sethi   %hi(_firstSelfFrame_returnPC), NLRTempReg
-        add     NLRTempReg, %lo(_firstSelfFrame_returnPC), NLRTempReg
+        sethi   %hi(firstSelfFrame_returnPC), NLRTempReg
+        add     NLRTempReg, %lo(firstSelfFrame_returnPC), NLRTempReg
 
 3:      cmp     %o7, NLRTempReg         ! test ret pc
         bne     3b                      ! loop if not found
         restore                         ! pop another frame
 
-        sethi   %hi(_continue_discard_stack), NLRTempReg    ! don''t use call!
-        jmp     NLRTempReg + %lo(_continue_discard_stack)   ! (it destroys o7)
+        sethi   %hi(continue_discard_stack), NLRTempReg    ! don''t use call!
+        jmp     NLRTempReg + %lo(continue_discard_stack)   ! (it destroys o7)
         mov     %g0, receiver
 
         .word 0,0                       ! should never get here
 
-_currentFP:
+currentFP:
         retl
         mov     %fp, result
         
-_currentFrame:
+currentFrame:
         retl
         mov     %sp, result
 
-_currentReturnAddr:
+currentReturnAddr:
         retl
         mov     %i7, result
 
-_SwitchStack0:                          ! switch to vm stack
-_SwitchStack1:  
-_SwitchStack2:  
-_SwitchStack3:  
-_SwitchStack4:  
+SwitchStack0:                          ! switch to vm stack
+SwitchStack1:  
+SwitchStack2:  
+SwitchStack3:  
+SwitchStack4:  
         mov     arg1, %sp               ! set SP
         mov     arg0, t                 ! save function pointer
         mov     arg2, arg0              ! copy arguments
@@ -357,66 +357,66 @@ _SwitchStack4:
         retl                            ! return result
         nop
 
-_setSPLimit:
+setSPLimit:
         mov     receiver, splimit 
-        set     _saved_globals, %o1
+        set     saved_globals, %o1
         retl
         st      splimit, [%o1 + splimit_offset]
 
-_setSPLimitAndContinue:
+setSPLimitAndContinue:
         ! caution: this is executed in the context of the running
         ! program --> don''t touch registers or condition codes
         save    %sp, (16 + 8) * -4, %sp         ! get a new window
-        sethi   %hi(_continuePC), %l0
-        ld      [%l0 + %lo(_continuePC)], %l1   ! %l1 = continuePC
-        st      %g0, [%l0 + %lo(_continuePC)]   ! clear continuePC
-        sethi   %hi(_newSPLimit), %l2
-        ld      [%l2 + %lo(_newSPLimit)], splimit   ! splimit = newSPLimit
-        st      %g0, [%l2 + %lo(_newSPLimit)]     ! clear newSPLimit
-        set     _saved_globals, %l3
+        sethi   %hi(continuePC), %l0
+        ld      [%l0 + %lo(continuePC)], %l1   ! %l1 = continuePC
+        st      %g0, [%l0 + %lo(continuePC)]   ! clear continuePC
+        sethi   %hi(newSPLimit), %l2
+        ld      [%l2 + %lo(newSPLimit)], splimit   ! splimit = newSPLimit
+        st      %g0, [%l2 + %lo(newSPLimit)]     ! clear newSPLimit
+        set     saved_globals, %l3
         st      splimit, [%l3 + splimit_offset]
-        sethi   %hi(_processSemaphore), %l3
-        stb     %g0, [%l3 + %lo(_processSemaphore)]    ! clear semaphore
+        sethi   %hi(processSemaphore), %l3
+        stb     %g0, [%l3 + %lo(processSemaphore)]    ! clear semaphore
         jmp     %l1
         restore
-_setSPLimitAndContinueEnd:
+setSPLimitAndContinueEnd:
 
-_currentSPLimit:
+currentSPLimit:
         retl
         mov     splimit, %o0
 
-_Byte_Map_Base:
+Byte_Map_Base:
         retl
         mov     byte_map_base, %o0 
 
-_Set_Byte_Map_Base:
+Set_Byte_Map_Base:
         mov     receiver, byte_map_base
-        set     _saved_globals, %o1
+        set     saved_globals, %o1
         retl
         st      byte_map_base, [%o1 + byte_map_base_offset]
 
-_FlushRegisterWindows_stub:
+FlushRegisterWindows_stub:
         ta      ST_FLUSH_WINDOWS
         retl
         nop
 
-_FlushInstruction:
+FlushInstruction:
         retl
         iflush  %o0
 
-_SetSPAndCall:
+SetSPAndCall:
         save    %sp, (16 + 8) * -4, %sp ! make new register window
         ta      ST_FLUSH_WINDOWS        ! save registers
         tst     iarg0                   ! save process status?
-        beq     _dontSave
+        beq     dontSave
         mov     iarg3, t1               ! save semaphore address
 
         st      %fp, [iarg0]            ! save sp and ret addr of curr proc
         add     %i7, 8, %i7
         st      %i7, [iarg0+4]
-_dontSave:
+dontSave:
         tst     iarg2                   ! init ?
-        bne     _initProcess            ! yes, initial transfer
+        bne     initProcess            ! yes, initial transfer
         mov     iarg1, t2               ! get callee save address
 
         ld      [t2+0], %fp             ! switch to new stack
@@ -425,7 +425,7 @@ _dontSave:
         jmp     t                       ! jump to code of new process
         stb     %g0, [t1]               ! clear semaphore
 
-_initProcess:
+initProcess:
         ld      [t2+0], %sp             ! switch to new stack
         ld      [t2+4], t               ! get pc
         add     %sp, 64, %fp            ! set up fp
@@ -433,12 +433,12 @@ _initProcess:
         jmp     t                       ! and jump to code of new process
         stb      %g0, [t1]              ! clear semaphore
 
-_ReturnTrap:
+ReturnTrap:
         ! this code must look like an inline cache
         .word   0                       ! call instruction
         .word   0                       ! delay slot
         .word   0                       ! allocated registers
-        ba      _convNLR                ! NLR code, word 1
+        ba      convNLR                ! NLR code, word 1
         save    %sp, (16 + 8) * -4, %sp ! NLR code, word 2
         .word   0, 0                    ! nmlns
         .word   0                       ! selector
@@ -446,34 +446,34 @@ _ReturnTrap:
         nop                             ! could be delegatee
         ! fall through
 
-_ReturnTrap2:   ! called via uncommon trap
+ReturnTrap2:   ! called via uncommon trap
         save    %sp, (16 + 8) * -4, %sp ! make new register window
-        set     _saved_globals, %l0
+        set     saved_globals, %l0
         std     %g0, [%l0]              ! save global regs
         std     %g2, [%l0 + 8]  
         std     %g4, [%l0 + 16] 
         std     %g6, [%l0 + 24] 
-        set     _saved_outregs, %l1
+        set     saved_outregs, %l1
         std     %i0, [%l1]              ! save incoming args
         std     %i2, [%l1 + 8]  
         std     %i4, [%l1 + 16] 
         std     %i6, [%l1 + 24] 
-_conv:  mov     %fp, arg1
+conv:  mov     %fp, arg1
         mov     0, arg2                 ! not a NLR
         mov     0, arg3
         mov     0, arg4
-_ReturnTrap_returnPC:
-        call    _HandleReturnTrap
+ReturnTrap_returnPC:
+        call    HandleReturnTrap
         mov     iresult, arg0           ! result of returning method
         .word   0,0                     ! should never return
 
-_convNLR:
-        set     _saved_globals, %l0
+convNLR:
+        set     saved_globals, %l0
         std     %g0, [%l0]              ! save global regs
         std     %g2, [%l0 + 8]  
         std     %g4, [%l0 + 16] 
         std     %g6, [%l0 + 24] 
-        set     _saved_outregs, %l1
+        set     saved_outregs, %l1
         std     %i0, [%l1]              ! save incoming args
         std     %i2, [%l1 + 8]  
         std     %i4, [%l1 + 16] 
@@ -482,18 +482,18 @@ _convNLR:
         mov     1, arg2                 ! is a NLR
         mov     NLRHomeReg, arg3
         mov     NLRHomeIDReg, arg4
-_ReturnTrapNLR_returnPC:
-        call    _HandleReturnTrap
+ReturnTrapNLR_returnPC:
+        call    HandleReturnTrap
         mov     NLRResultReg, receiver
         .word   0,0                     ! should never return
 
-_ProfilerTrap:
+ProfilerTrap:
 #if defined(FAST_COMPILER) || defined(SIC_COMPILER)
         ! this code must look like an inline cache
         .word   0                       ! call instruction
         .word   0                       ! delay slot
         .word   0                       ! allocated registers
-        ba      _returnProfilerNLR      ! NLR code, word 1
+        ba      returnProfilerNLR      ! NLR code, word 1
         nop                             ! NLR code, word 2
         .word   0, 0                    ! nmlns
         .word   0                       ! selector
@@ -504,7 +504,7 @@ _ProfilerTrap:
         ld      [%fp+current_pc_offset], t1
         save    %sp, (16 + 8) * -4, %sp ! make new register window
         mov     t1, arg0
-        call    _HandleProfilerTrap
+        call    HandleProfilerTrap
         nop
         mov     arg0, t2
         mov     t1, arg0
@@ -513,11 +513,11 @@ _ProfilerTrap:
         restore
         nop
         .word   0,0                     ! should never return
-        sethi   %hi(_processSemaphore), %g1
-        stb     %g0, [%g1 + %lo(_processSemaphore)]    ! clear semaphore
+        sethi   %hi(processSemaphore), %g1
+        stb     %g0, [%g1 + %lo(processSemaphore)]    ! clear semaphore
 #endif
 
-_returnProfilerNLR:
+returnProfilerNLR:
         ! Retrieve the real return address from the frame and 
         ! return to the non local return point
         ld      [%fp+current_pc_offset], %o7
@@ -527,15 +527,15 @@ _returnProfilerNLR:
 
 
 
-_PrimCallReturnTrap:                    ! normal return point for prims
+PrimCallReturnTrap:                    ! normal return point for prims
         ! this code must look like a primitive call
         ! better to keep this separate because of different NLR offset
-        ba      _convNLR                ! NLR code, word 1
+        ba      convNLR                ! NLR code, word 1
         save    %sp, (16 + 8) * -4, %sp ! NLR code, word 2
-        ba      _conv
+        ba      conv
         save    %sp, (16 + 8) * -4, %sp
 
-_ContinueNLRAfterReturnTrap:
+ContinueNLRAfterReturnTrap:
         mov     arg2, NLRResultReg      ! set up NLR registers
         mov     arg3, NLRHomeReg
         mov     arg4, NLRHomeIDReg
@@ -543,33 +543,33 @@ _ContinueNLRAfterReturnTrap:
         ta      ST_FLUSH_WINDOWS        ! flush all reg windows
         mov     iarg1, %fp              ! set fp (= sp of Self frame above)
         sub     %fp, 64, %sp            ! set sp
-        sethi   %hi(_processSemaphore), %l2
-        stb     %g0, [%l2 + %lo(_processSemaphore)]    ! clear semaphore
+        sethi   %hi(processSemaphore), %l2
+        stb     %g0, [%l2 + %lo(processSemaphore)]    ! clear semaphore
         jmp     iarg0
         restore iarg2, %g0, result      ! set result
 
-_ContinueAfterReturnTrap:
+ContinueAfterReturnTrap:
         save    %sp, (16 + 8) * -4, %sp ! make new register window
         ta      ST_FLUSH_WINDOWS        ! flush all reg windows
         mov     iarg0, %l1              ! save 1st arg (return PC)
         mov     iarg1, %l2              ! save 2nd arg (FP)
-        set     _saved_globals, %l0
+        set     saved_globals, %l0
         ldd     [%l0]    ,  %g0         ! restore global regs
         ldd     [%l0 + 8],  %g2  
         ldd     [%l0 + 16], %g4 
         ldd     [%l0 + 24], %g6
-        set     _saved_outregs, %l0
+        set     saved_outregs, %l0
         ldd     [%l0]    ,  %i0         ! restore o0-o5 of caller
         ldd     [%l0 + 8],  %i2  
         ldd     [%l0 + 16], %i4 
         mov     %l2, %fp                ! set fp (= sp of Self frame above)
         sub     %fp, 64, %sp            ! set sp
-        sethi   %hi(_processSemaphore), %l2
-        stb     %g0, [%l2 + %lo(_processSemaphore)]    ! clear semaphore
+        sethi   %hi(processSemaphore), %l2
+        stb     %g0, [%l2 + %lo(processSemaphore)]    ! clear semaphore
         jmp     %l1
         restore %g0, %g0, %g0           ! pop stack frame
 
-_ContinueAfterProfilerInterrupt:
+ContinueAfterProfilerInterrupt:
 #if defined(FAST_COMPILER) || defined(SIC_COMPILER)
         ! caution: this is executed in the context of the running
         ! program --> don''t touch registers or condition codes
@@ -578,13 +578,13 @@ _ContinueAfterProfilerInterrupt:
         ta      ST_FLUSH_WINDOWS                ! flush register windows
 
         ! load continue pc.
-        sethi   %hi(_continuePC), %l0
-        ld      [%l0 + %lo(_continuePC)], %l1   ! %l1 = continuePC
-        st      %g0, [%l0 + %lo(_continuePC)]   ! clear continuePC
+        sethi   %hi(continuePC), %l0
+        ld      [%l0 + %lo(continuePC)], %l1   ! %l1 = continuePC
+        st      %g0, [%l0 + %lo(continuePC)]   ! clear continuePC
 
-        ! load the address of _profiler_return_addr (def in nprofiler.c)
-        sethi   %hi(_profiler_return_addr), %l0
-        ld      [%l0 + %lo(_profiler_return_addr)], %l2 !
+        ! load the address of profiler_return_addr (def in nprofiler.c)
+        sethi   %hi(profiler_return_addr), %l0
+        ld      [%l0 + %lo(profiler_return_addr)], %l2 !
 
         ! store the continue pc 
         st      %l1, [%l2+0]
@@ -599,8 +599,8 @@ _ContinueAfterProfilerInterrupt:
         ! store %fp
         st      %fp, [%l2+24]
 
-        sethi   %hi(_processSemaphore), %l3
-        stb     %g0, [%l3 + %lo(_processSemaphore)]    ! clear semaphore
+        sethi   %hi(processSemaphore), %l3
+        stb     %g0, [%l3 + %lo(processSemaphore)]    ! clear semaphore
 
         jmp     %l1
         restore
@@ -609,7 +609,7 @@ _ContinueAfterProfilerInterrupt:
         
 ! called with entry point, rcv, argp, arg_count
 
-_CallPrimitiveFromInterpreter:
+CallPrimitiveFromInterpreter:
         subcc   %o3, 5, %o4             ! will pass five non-rcv args in reg
         blt,a   1f                      ! if o4 < 0, make it be 0
         clr %o4                         ! clear if branch taken
@@ -653,36 +653,36 @@ _CallPrimitiveFromInterpreter:
 
 
 # ifdef OLD_GCC     /* see prim.c */
-.global _initializePrimDesc
+.global initializePrimDesc
 
-_initializePrimDesc:
+initializePrimDesc:
         save    %sp, (16 + 8) * -4, %sp         ! get a new window
         nop
-        call    __GLOBAL_$I$name__8PrimDesc
+        call    _GLOBAL_$I$name__8PrimDesc
         nop
         ret
         restore
 # endif
 
 #if TARGET_OS_VERSION == SUNOS_VERSION
-.global _mapToLoad
+.global mapToLoad
 
 #define mapLoad(reg, body)                                                    \
-.global CONC3(_,reg,_mapLoadHandler);                                         \
-CONC3(_,reg,_mapLoadHandler):                                                 \
+.global CONC2(reg,mapLoadHandler);                                            \
+CONC2(reg,mapLoadHandler):                                                    \
         body                                                                  \
 
 #define doLoad(reg)                                                           \
         /* load mapToLoad into reg, then continue at continuePC */            \
         /* CAUTION: do not change any other register! */                      \
         save  %sp, (16 + 8) * -4, %sp;       /* get a new window */           \
-        sethi %hi(_mapToLoad), %l0;                                           \
-        ld    [%l0 + %lo(_mapToLoad)], %l0;/* load map temporarily into l0 */ \
-        sethi %hi(_continuePC), %l1;                                          \
-        ld    [%l1 + %lo(_continuePC)], %l2;                                  \
-        st    %g0, [%l1 + %lo(_continuePC)];                                  \
-        sethi %hi(_processSemaphore), %l1;                                    \
-        stb    %g0, [%l1 + %lo(_processSemaphore)];                           \
+        sethi %hi(mapToLoad), %l0;                                            \
+        ld    [%l0 + %lo(mapToLoad)], %l0;/* load map temporarily into l0 */  \
+        sethi %hi(continuePC), %l1;                                           \
+        ld    [%l1 + %lo(continuePC)], %l2;                                   \
+        st    %g0, [%l1 + %lo(continuePC)];                                   \
+        sethi %hi(processSemaphore), %l1;                                     \
+        stb    %g0, [%l1 + %lo(processSemaphore)];                            \
         jmpl  %l2 + 0, %g0;                  /* return to normal program */   \
         restore %l0, %g0, reg;               /* and set result (map) reg */   \
 

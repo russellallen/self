@@ -12,7 +12,7 @@
 
         .text
 
-        .global _CompiledSelfCode, _CompiledSelfCodeEnd
+        .global CompiledSelfCode, CompiledSelfCodeEnd
 #   if TARGET_OS_VERSION == SOLARIS_VERSION
         .align 8192
 #   else
@@ -20,13 +20,13 @@
 #   endif
  
 
-_CompiledSelfCode:
+CompiledSelfCode:
         .skip ProfiledZoneSize
 #   ifdef SOLARIS
         .align 8192
 #   endif
 
-_CompiledSelfCodeEnd:
+CompiledSelfCodeEnd:
 
 # endif // defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
