@@ -90,7 +90,7 @@
       lprintf("%#lx (%f)", memaddr,
              floatOop(memaddr)->value());
     } else if (Memory->code->iZone->contains(memaddr) &&
-               (nm = findNMethod_maybe(memaddr)) != 0 &&
+               (nm = nmethod::findNMethod_maybe(memaddr)) != 0 &&
                nm != printNM) {
       lprintf("%#lx (nmethod %#lx \"%s\")",
              (long unsigned)memaddr, (long unsigned)nm,

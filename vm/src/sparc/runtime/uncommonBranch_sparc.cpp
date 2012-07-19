@@ -70,7 +70,7 @@ void handleMapLoadTrap(InterruptedContext* c) {
     if (!thing->isNMethod()) {
       // a PIC -- no problem, will fix itself to eliminate trap
     } else {
-      nmethod* nm = findNMethod(pc);
+      nmethod* nm = nmethod::findNMethod(pc);
       if ((char*)pc >= nm->verifiedEntryPoint()) {
         // the trap happened in the body, not in the prologue
         if (nm->flags.trapCount > MapLoadTrapLimit) {
