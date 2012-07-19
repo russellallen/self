@@ -84,7 +84,7 @@ Location IRegisterFromORegister[] = {
   IllegalLocation, IllegalLocation, IllegalLocation, IllegalLocation
   };
 
-char* RegisterNames[] = {
+const char* RegisterNames[] = {
   "g0", "g1", "g2", "g3", "g4", "g5", "g6", "g7",
   "o0", "o1", "o2", "o3", "o4", "o5", "sp", "o7",
   "l0", "l1", "l2", "l3", "l4", "l5", "l6", "l7",
@@ -140,7 +140,7 @@ static char* locationNameHelper(Location base, int num) {
   }
 }
 
-char *locationName(Location l) {
+const char *locationName(Location l) {
   Location base;
   int num;
   if          (isStackRegister(l)) { base= StackLocations;     num= l - base; }

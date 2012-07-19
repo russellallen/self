@@ -2397,6 +2397,7 @@ runtime_${platform_processor}.cpp            runtime.hh
 
 runtime_asm_${platform_processor}.S          asmDefs.hh
 runtime_asm_${platform_processor}.S          macros.hh
+runtime_asm_${platform_processor}.S          config.hh
 
 scanner.cpp                   files.hh
 scanner.cpp                   generation_inline.hh

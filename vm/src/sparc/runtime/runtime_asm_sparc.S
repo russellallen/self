@@ -665,11 +665,12 @@ initializePrimDesc:
 # endif
 
 #if TARGET_OS_VERSION == SUNOS_VERSION
+# error wrong.
 .global mapToLoad
 
 #define mapLoad(reg, body)                                                    \
-.global CONC2(reg,mapLoadHandler);                                            \
-CONC2(reg,mapLoadHandler):                                                    \
+.global CONC(reg,mapLoadHandler);                                             \
+CONC(reg,mapLoadHandler):                                                     \
         body                                                                  \
 
 #define doLoad(reg)                                                           \

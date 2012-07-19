@@ -166,7 +166,7 @@ extern Location NoFrameKilledRegisters[];
 extern Location RegisterFromStack[];
 extern fint StackFromRegister[];
 extern Location IRegisterFromORegister[];
-extern char* RegisterNames[];
+extern const char* RegisterNames[];
 extern fint NoFrameRegisterNumbers[];
 
 const RegisterString LocalMask =
