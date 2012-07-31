@@ -16,13 +16,13 @@ To build a Self VM, you need [CMake][1] in at least version 2.8.
   * You can do an in-tree build with
 
         cmake .
-        make
+        cmake --build . 
 
     or an out-of-tree build with
 
         mkdir -p $YOU_BUILD_DIRECTORY; cd $YOU_BUILD_DIRECTORY
         cmake $DIRECTORY_OF_SELF_CHECKOUT
-        make
+        cmake --build $YOU_BUILD_DIRECTORY
 
   * Self builds with [GCC][2] ≥ 4.2 or [Clang][3] ≥ 2.0. CMake respects
     your environment variables, so to build Self with Clang, configure it 
