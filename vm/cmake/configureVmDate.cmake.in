@@ -2,7 +2,7 @@
 set(WIN32 @WIN32@) 
 set(UNIX @UNIX@) 
 set(PLATFORM "@platform_name@ @platform_processor@")
-set(GIT_DIR "@CMAKE_CURRENT_SOURCE_DIR@/../.git/")
+set(GIT_DIR "@CMAKE_CURRENT_SOURCE_DIR@/..")
 set(IN_FILE "@SRC_VMDATE_IN@") 
 set(OUT_FILE "@SRC_VMDATE@") 
 
@@ -44,7 +44,8 @@ execute_process(COMMAND git --version
 if(_git_not_there)
   set(GIT_REVISION "")
 else()
-  execute_process(COMMAND git --git-dir=${GIT_DIR} describe --tags --dirty
+  execute_process(COMMAND git describe --tags --dirty
+    WORKING_DIRECTORY "${GIT_DIR}"
     RESULT_VARIABLE git_result
     OUTPUT_VARIABLE GIT_REVISION 
     ERROR_VARIABLE GIT_REVISION 

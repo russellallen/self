@@ -25,7 +25,8 @@ function(determine_build_information buildVar)
   if(_git_not_there)
     set(${buildVar} PARENT_SCOPE)
   else()
-    execute_process(COMMAND git --git-dir=${CMAKE_CURRENT_SOURCE_DIR}/../.git describe --tags --dirty
+    execute_process(COMMAND git describe --tags --dirty
+      WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/.."
       RESULT_VARIABLE git_result
       OUTPUT_VARIABLE _revision 
       ERROR_VARIABLE _error 
