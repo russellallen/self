@@ -25,8 +25,10 @@
   # ifdef transcendental_entries
           transcendental_glue
   # endif
-  # ifdef xlib_entries
-          xlib_glue
+  # ifdef XLIB
+    # ifdef xlib_entries
+            xlib_glue
+    # endif
   # endif
 # undef WHAT_GLUE
 
@@ -2408,9 +2410,11 @@ termcap_entries
 transcendental_entries
 #endif
 
-#ifdef xlib_entries
-xlib_entries
-#endif
+# ifdef XLIB
+  #ifdef xlib_entries
+  xlib_entries
+  #endif
+# endif
 
 LARGE_INT_PRIM_TABLE_ENTRIES
 

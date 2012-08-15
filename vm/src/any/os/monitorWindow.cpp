@@ -17,17 +17,21 @@ MonitorWindow::MonitorWindow() {
 
 bool MonitorWindow::open_and_resize(Monitor* m) {
   _m = m;
-  bool q = false, x = false, t = false;
+  
+  pw = 0;
   # ifdef QUARTZ_LIB
-    q = true;
+  if (!SpyDisplay[0]) {
+    pw = (AbstractPlatformWindow*) new QuartzWindow;
+  }
   # endif
+  
   # ifdef XLIB
-    x = true;
+  if (!pw) {
+    pw = (AbstractPlatformWindow*) new XPlatformWindow;
+  }
   # endif
-  pw = q && !SpyDisplay[0]   ?  (AbstractPlatformWindow*) new     QuartzWindow
-     : (x                    ?  (AbstractPlatformWindow*) new  XPlatformWindow
-     :                          0);
-  if (pw == 0) {
+
+  if (!pw) {
     warning("no window system for spy");
     return false;
   }
