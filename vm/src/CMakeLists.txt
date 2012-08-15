@@ -204,15 +204,17 @@ set(SRC_any
   any/os/os_includes.hh
   any/os/platformWindow.cpp
   any/os/platformWindow.hh
-  any/os/quartzWindow.cpp
-  any/os/quartzWindow.hh
+  # -> Quartz
+  # any/os/quartzWindow.cpp
+  # any/os/quartzWindow.hh
   any/os/sig.cpp
   any/os/sig.hh
   any/os/signalBlocker.hh
   any/os/timer.cpp
   any/os/timer.hh
-  any/os/xlibWindow.cpp
-  any/os/xlibWindow.hh
+  # -> X11
+  # any/os/xlibWindow.cpp
+  # any/os/xlibWindow.hh
   any/parser/branchSet.cpp
   any/parser/branchSet.hh
   any/parser/branchSet_inline.hh
@@ -258,9 +260,10 @@ set(SRC_any
   any/prims/prim.hh
   any/prims/prim_table_arch.hh
   any/prims/prim_table_os.hh
-  any/prims/prim_table_quartz.hh
-  any/prims/quartzPrims.cpp
-  any/prims/quartzPrims.hh
+  # -> quartz
+  # any/prims/prim_table_quartz.hh
+  # any/prims/quartzPrims.cpp
+  # any/prims/quartzPrims.hh
   any/runtime/aCompiler.cpp
   any/runtime/aCompiler.hh
   any/runtime/allocation.cpp
@@ -424,6 +427,9 @@ set(SRC_any
   any/zone/zoneHeap.cpp
   any/zone/zoneHeap.hh
 )
+# include non-dependent
+list(APPEND SRC_src ${SRC_any})
+
 set(SRC_i386
   i386/asm/asm_i386.cpp
   i386/asm/asm_i386.hh
@@ -581,6 +587,11 @@ set(SRC_sparc
   sparc/zone/trapdoors_sparc.cpp
   sparc/zone/trapdoors_sparc.hh
 )
+
+# inlcude platform files
+list(APPEND SRC_src ${SRC_${platform_processor}})
+
+
 set(SRC_unix
   unix/os/errorCodes_unix.cpp
   unix/os/errorCodes_unix.hh
@@ -600,9 +611,10 @@ set(SRC_unix
   unix/prims/unixPrims.cpp
   unix/prims/unixPrims.glue.cpp
   unix/prims/unixPrims.hh
-  unix/prims/x_includes.hh
-  unix/prims/xlibPrims.cpp
-  unix/prims/xlibPrims.hh
+  # -> X11
+  # unix/prims/x_includes.hh
+  # unix/prims/xlibPrims.cpp
+  # unix/prims/xlibPrims.hh
   unix/runtime/config_unix.hh
   unix/runtime/interruptedCtx_unix.cpp
   unix/runtime/machineCache_unix.cpp
@@ -610,6 +622,38 @@ set(SRC_unix
   unix/runtime/monitorHooks_unix.cpp
   unix/runtime/monitorPieces_unix.cpp
 )
+
+# include unix files
+if(UNIX)
+    list(APPEND SRC_src ${SRC_unix})
+endif(UNIX)
+
+
+set(SRC_x11
+    any/os/xlibWindow.cpp
+    any/os/xlibWindow.hh
+    unix/prims/x_includes.hh
+    unix/prims/xlibPrims.cpp
+    unix/prims/xlibPrims.hh
+)
+
+if(SELF_X11)
+    list(APPEND SRC_src ${SRC_x11})
+endif()
+
+set(SRC_quartz
+    any/prims/prim_table_quartz.hh
+    any/prims/quartzPrims.cpp
+    any/prims/quartzPrims.hh
+    any/os/quartzWindow.cpp
+    any/os/quartzWindow.hh
+)
+
+if(SELF_QUARTZ)
+    list(APPEND SRC_src ${SRC_quartz})
+endif()
+
+
 set(SRC_cocoa
   cocoa/os/main.mm
   cocoa/os/Pty.h
@@ -620,17 +664,6 @@ set(SRC_cocoa
   cocoa/os/SelfConsoleView.h
   cocoa/os/SelfConsoleView.m
 )
-
-# include non-dependent
-list(APPEND SRC_src ${SRC_any})
-
-# include unix files
-if(UNIX)
-    list(APPEND SRC_src ${SRC_unix})
-endif(UNIX)
-
-# inlcude platform files
-list(APPEND SRC_src ${SRC_${platform_processor}})
 
 if(SELF_OSX_COCOA)
   list(APPEND SRC_src ${SRC_cocoa})

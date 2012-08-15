@@ -36,6 +36,7 @@ if(DEFINED SELF_MACOSX_XCODEPROJECTNAME)
 else()
   set(SELF_MACOSX_XCODEPROJECTNAME ${PROJECT_NAME})
 endif()
+
 # setup the routines and variables we might use
 # sets 
 #  ${platform} ${platform_processor} 

@@ -11,9 +11,10 @@ endif()
 
 set(SELF_OSX_INFO_PLIST Info)
 
-
-option(SELF_OSX_COCOA
-  "EXPERIMENTAL: Build with the Cocoa console" OFF)
+# do not use X11 on OSX by default.
+set(SELF_X11_INIT OFF)
+option(SELF_QUARTZ    "Select whether to build Self with Quartz Platform windows" ON)
+option(SELF_OSX_COCOA "EXPERIMENTAL: Build with the Cocoa console" OFF)
 if(SELF_OSX_COCOA)
   list(APPEND _defines -DCOCOA_EXP)
   set(SELF_OSX_INFO_PLIST InfoCocoa)
@@ -95,8 +96,6 @@ list(APPEND EXTRA_LIBRARIES ${frameworks})
 # Mac compile definitons, independent of  generator
 #
 list(APPEND _defines
-  -DQUARTZ_LIB
-  # there was -DMACTOOLBOX_LIB , but seems unused.
   -DDEBUG # ?? this is straight from mac_osx.make
   -DGCC3=1 #lets see if we can live withiout it
   -DGLUE_CHECKSUM=0

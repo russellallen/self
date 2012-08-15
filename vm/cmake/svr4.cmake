@@ -4,7 +4,7 @@
 set(SELF_PREFIX_PREFIX_THRESHOLD_INIT
   "250" # DO NOT SET BELOW 250. Breaks Assembler.
 )
-
+set(SELF_X11_INIT ON)
 
 # Threads and sockets
 enable_language(C)

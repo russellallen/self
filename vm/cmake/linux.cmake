@@ -7,6 +7,8 @@ set(SELF_PREFIX_PREFIX_THRESHOLD_INIT
   "35" # DO NOT SET BELOW 35. Breaks X-includes!
 )
 
+set(SELF_X11_INIT ON)
+
 
 # Threads
 enable_language(C)

@@ -43,6 +43,7 @@ include(policies)
 include(functions)
 include(assemblerSupport)
 
+option(SELF_X11 "Select whether to build Self with X11 Platform windows" ${SELF_X11_INIT})
 
 set(EXTRA_LIBRARIES)
 

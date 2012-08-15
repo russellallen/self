@@ -2,8 +2,16 @@
 #
 # setup all necessary build definition variables
 #
+
+if(SELF_QUARTZ)
+    list(APPEND _defines -DQUARTZ_LIB)
+endif()
+
+if(SELF_X11)
+    list(APPEND _defines DXLIB)
+endif()
+
 list(APPEND _defines
-  -DXLIB 
   -DFAST_COMPILER 
   -DSIC_COMPILER
   -DNATIVE_ARCH=${platform_processor}
