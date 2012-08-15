@@ -9,7 +9,7 @@ if(SELF_QUARTZ)
 endif()
 
 if(SELF_X11)
-    list(APPEND _defines DXLIB)
+    list(APPEND _defines -DXLIB)
 endif()
 
 list(APPEND _defines
