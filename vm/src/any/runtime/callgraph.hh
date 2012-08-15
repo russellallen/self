@@ -70,7 +70,7 @@ class call_graph_node : public CHeapObj {
   void add_blocks(fint num)      { block_clones        += num; }
 
   call_graph_node();
-  ~call_graph_node();
+  virtual ~call_graph_node();
 
   int num_of_edges(float cutoff);
 
