@@ -20,6 +20,17 @@ option(SELF_PROFILE     "Select whether to do a profiled build"         OFF)
 option(SELF_COVERAGE    "Select whether to do a coverage build"         OFF)
 option(SELF_FAST_FLOATS "Select whether to do a build with fast floats" OFF)
 
+# do not use X11 on OSX by default.
+if(APPLE)
+  set(SELF_X11_INIT OFF)
+  option(SELF_QUARTZ    "Select whether to build Self with Quartz Platform windows" ON)
+else()
+  set(SELF_X11_INIT ON)
+endif()
+
+option(SELF_X11 "Select whether to build Self with X11 Platform windows" ${SELF_X11_INIT})
+
+
 set(
   SELF_GLUE_DIRECTORY 
   "${CMAKE_CURRENT_SOURCE_DIR}/../objects/glue" 

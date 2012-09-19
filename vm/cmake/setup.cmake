@@ -2,13 +2,9 @@
 #
 # setup all necessary build definition variables
 #
-option(SELF_X11 "Select whether to build Self with X11 Platform windows" ${SELF_X11_INIT})
-
-if(SELF_QUARTZ)
-    list(APPEND _defines -DQUARTZ_LIB)
-endif()
 
 if(SELF_X11)
+    message(STATUS "Using X11 plaform windows.")
     list(APPEND _defines -DXLIB)
 endif()
 

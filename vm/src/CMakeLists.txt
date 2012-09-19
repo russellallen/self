@@ -625,32 +625,32 @@ set(SRC_unix
 
 # include unix files
 if(UNIX)
-    list(APPEND SRC_src ${SRC_unix})
+  list(APPEND SRC_src ${SRC_unix})
 endif(UNIX)
 
 
 set(SRC_x11
-    any/os/xlibWindow.cpp
-    any/os/xlibWindow.hh
-    unix/prims/x_includes.hh
-    unix/prims/xlibPrims.cpp
-    unix/prims/xlibPrims.hh
+  any/os/xlibWindow.cpp
+  any/os/xlibWindow.hh
+  unix/prims/x_includes.hh
+  unix/prims/xlibPrims.cpp
+  unix/prims/xlibPrims.hh
 )
 
 if(SELF_X11)
-    list(APPEND SRC_src ${SRC_x11})
+  list(APPEND SRC_src ${SRC_x11})
 endif()
 
 set(SRC_quartz
-    any/prims/prim_table_quartz.hh
-    any/prims/quartzPrims.cpp
-    any/prims/quartzPrims.hh
-    any/os/quartzWindow.cpp
-    any/os/quartzWindow.hh
+  any/prims/prim_table_quartz.hh
+  any/prims/quartzPrims.cpp
+  any/prims/quartzPrims.hh
+  any/os/quartzWindow.cpp
+  any/os/quartzWindow.hh
 )
 
 if(SELF_QUARTZ)
-    list(APPEND SRC_src ${SRC_quartz})
+  list(APPEND SRC_src ${SRC_quartz})
 endif()
 
 

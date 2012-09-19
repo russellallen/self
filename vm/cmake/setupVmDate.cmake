@@ -1,7 +1,7 @@
 #!/usr/bin/env cmake
 #
 # out:
-#	$SRC_VMDATE
+#    $SRC_VMDATE
 #
 # in:
 #   $SELF_BUILD_SUPPORT_DIR

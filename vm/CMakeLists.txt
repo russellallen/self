@@ -2,31 +2,19 @@
 set(PROJECT_NAME Self)
 
 #
-#
 # Prologue
-#
-
-# This is for a cmake compatibility check
-# old style:
-if(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.4)
-    message(FATAL_ERROR "${PROJECT_NAME} requires at least CMake v2.8"
-        " You are running v${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}."
-        " Please upgrade." )
+if(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.4) # old style:
+    message(FATAL_ERROR "${PROJECT_NAME} requires at least CMake v2.8, you use v${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.")
 endif(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.4)
-# new style:
 if(APPLE)
-  # it has to be 2.8.8 on OSX 
-  cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR)
+  cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR) # it has to be 2.8.8 on OSX 
   set(CMAKE_TRY_COMPILE_OSX_ARCHITECTURES i386)
 else()
   cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 endif()
 
-
 #
 # Actual start.
-#
-#
 #
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
@@ -56,7 +44,7 @@ source_group("glue" FILES ${SRC_glue} "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 
 list(APPEND SRC ${SRC_src} ${SRC_glue})
 
-# get platform-dependent configuratio
+# get platform-dependent configuration
 # sets 
 #   $GUI_TYPE 
 #   $EXTRA_LIBRARIES 

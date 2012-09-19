@@ -1,7 +1,7 @@
 #!/usr/bin/env cmake
 if(NOT APPLE)
     message(FATAL_ERROR "This is only for Mac OS X")
-endif(NOT APPLE)
+endif()
 
 if((CMAKE_GENERATOR MATCHES Xcode) AND ((XCODE_VERSION VERSION_LESS "4") AND (clang)))
     message("WARNING:  Self on Xcode 3 does not work with Clang. 
@@ -11,9 +11,11 @@ endif()
 
 set(SELF_OSX_INFO_PLIST Info)
 
-# do not use X11 on OSX by default.
-set(SELF_X11_INIT OFF)
-option(SELF_QUARTZ    "Select whether to build Self with Quartz Platform windows" ON)
+if(SELF_QUARTZ)
+    message(STATUS "Using Quartz plaform windows.")
+    list(APPEND _defines -DQUARTZ_LIB)
+endif()
+
 option(SELF_OSX_COCOA "EXPERIMENTAL: Build with the Cocoa console" OFF)
 if(SELF_OSX_COCOA)
   list(APPEND _defines -DCOCOA_EXP)
@@ -96,8 +98,7 @@ list(APPEND EXTRA_LIBRARIES ${frameworks})
 # Mac compile definitons, independent of  generator
 #
 list(APPEND _defines
-  -DDEBUG # ?? this is straight from mac_osx.make
-  -DGCC3=1 #lets see if we can live withiout it
+#  -DGCC3=1 #lets see if we can live withiout it
   -DGLUE_CHECKSUM=0
 )
 
@@ -212,7 +213,7 @@ macro(setup_target target)
     endif()
   
     set(CMAKE_XCODE_ATTRIBUTE_COPY_PHASE_STRIP "NO")
-    set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT "dwarf")
+    set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT "dwarf-with-dsym")
     
     # cmake adds warnings hardcoded which we dont want.
     # mess with the warnings
