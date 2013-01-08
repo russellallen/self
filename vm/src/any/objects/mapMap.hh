@@ -1,12 +1,11 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
-
 
 class mapMap: public Map {
  public:
@@ -27,7 +26,7 @@ class mapMap: public Map {
                 oop filler= NULL);
   
   // creation operation
-  friend Map* create_mapMap();
+  static Map* create_mapMap();
   oop fill_in_slots(slotList* slist, fint slotCount) {
     ShouldNotCallThis(); Unused(slist); Unused(slotCount); return badOop; }
   

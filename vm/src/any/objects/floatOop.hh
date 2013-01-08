@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -11,7 +11,7 @@
 class floatOopClass: public oopClass {
  public:
   // constructor
-  friend floatOop as_floatOop(float value);
+  static floatOop as_floatOop(float value);
   
   // accessors
   float value();
@@ -21,7 +21,7 @@ class floatOopClass: public oopClass {
   Map* map() { return Memory->float_map; }
   
   // printing
-  void make_print_string(char* buf, char* format = "%g");   // private
+  void make_print_string(char* buf, const char* format = "%g");   // private
   void print_oop();
   void print() { print_oop(); lprintf("\n"); }
   void print_string(char* buf);
@@ -60,7 +60,7 @@ oop float_ge_prim(floatOop x, floatOop y);
     uint32 i;
   };
   
-  inline floatOop as_floatOop(float value) {
+  static inline floatOop as_floatOop(float value) {
     // this trashes the least significant mantissa bits
     // might want to kill exponent bits
     floatHolder x;
@@ -73,5 +73,9 @@ oop float_ge_prim(floatOop x, floatOop y);
     floatHolder x;
     x.i = uint32(this) - Float_Tag;
     return x.f;
+  }
+# else
+  static inline floatOop as_floatOop(float value) {
+    return floatOopClass::as_floatOop(value);
   }
 # endif

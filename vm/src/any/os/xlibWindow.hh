@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1998-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 // Contains platform-specific declarations for PlatformWindow.

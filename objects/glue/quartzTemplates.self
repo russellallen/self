@@ -52,10 +52,10 @@ primitiveMaker reader copy beNoisy staticLinking create: 'quartz' Flag: 'quartz_
     proxy CGDirectDisplayID CGDirectDisplayID_seal getWidth  = float call CGDirectDisplayWidth_wrap
     proxy CGDirectDisplayID CGDirectDisplayID_seal getHeight = float call CGDirectDisplayHeight_wrap
     
-    proxy CGDirectDisplayID CGDirectDisplayID_seal bitsPerPixel = unsigned_int call CGDisplayBitsPerPixel
-    proxy CGDirectDisplayID CGDirectDisplayID_seal bitsPerSample = unsigned_int call CGDisplayBitsPerSample
-    proxy CGDirectDisplayID CGDirectDisplayID_seal samplesPerPixel = unsigned_int call CGDisplaySamplesPerPixel
-    proxy CGDirectDisplayID CGDirectDisplayID_seal bytesPerRow = unsigned_int call CGDisplayBytesPerRow
+    // deprecated proxy CGDirectDisplayID CGDirectDisplayID_seal bitsPerPixel = unsigned_int call CGDisplayBitsPerPixel
+    // deprecated proxy CGDirectDisplayID CGDirectDisplayID_seal bitsPerSample = unsigned_int call CGDisplayBitsPerSample
+    // deprecated proxy CGDirectDisplayID CGDirectDisplayID_seal samplesPerPixel = unsigned_int call CGDisplaySamplesPerPixel
+    // deprecated proxy CGDirectDisplayID CGDirectDisplayID_seal bytesPerRow = unsigned_int call CGDisplayBytesPerRow
     
     void captureAll = must_be_zero call CGCaptureAllDisplays
     void captureAllOptions: unsigned_int = must_be_zero call CGCaptureAllDisplaysWithOptions

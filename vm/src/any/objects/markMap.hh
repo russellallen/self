@@ -1,12 +1,11 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
-
 
 class markMap: public Map {
  public:
@@ -20,7 +19,7 @@ class markMap: public Map {
   fint length_nonVM_slots() { return 0; }
   
   // creation operation
-  friend Map* create_markMap();
+  static Map* create_markMap();
   oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL) {
     // shouldn't be cloning a mark
     Unused(mustAllocate); Unused(genObj);

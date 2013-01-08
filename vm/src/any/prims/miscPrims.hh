@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -79,7 +79,7 @@ oop real_time_prim(void *FH);
 
 inline smi monitor_height_prim() { return TheSpy->max_height(); }
 
-oop primitive_documentation(char *prim_name);
+oop primitive_documentation(const char *prim_name);
 
 oop primitive_list_prim(void *FH);
 

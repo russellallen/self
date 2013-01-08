@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.6 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 // replaces first occurrence of "from" pattern with "to" pattern
@@ -75,7 +75,10 @@ main(int argc, char* argv[]) {
     char* buf = (char*) malloc(size);
     char* end = buf + size - len + 1;
     FILE* f = fopen(fname, "r+");
-    fread(buf, size, 1, f);
+    if (1 !=  fread(buf, size, 1, f)) {
+      perror("error");
+      exit(1);
+    }
     char* fromPos = buf;
     while(1) {
       fromPos = (char*)memchr(fromPos, from[0], end - fromPos);

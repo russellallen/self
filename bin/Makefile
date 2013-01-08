@@ -1,9 +1,9 @@
 # Sun-$Revision: 30.10 $
  
-# Copyright 1994-2006 Sun Microsystems, Inc. and Stanford University.
+# Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information.
 
 ROOT         = ..
 FILES        = Makefile
-DIRECTORIES  = shell src sun4 svr4 mac_carbon mac_68k mac_osx project_builder linux
+DIRECTORIES  = shell src sun4 svr4  mac_osx linux
 include        ${ROOT}/templates/sources.make

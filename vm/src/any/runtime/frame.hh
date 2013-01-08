@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.15 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -104,7 +104,7 @@ class frame {
   // patched_frame_saved_outgoing_args methods:
   // Sometimes after a return trap, we need to restart a send.
   // (For instance, when killing activations.)
-  // Since the outgoing args are gone on the PPC after a frame returns,
+  // Since the outgoing args are gone on certain processors after a frame returns,
   // we need to save them before taking the return trap.
   // So, when patching the frame, save the args in an object vector
   // and put the pointer in the frame.

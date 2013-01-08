@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "byteCodes.hh"
@@ -216,12 +216,12 @@ fint AbstractByteCode::GenExtendedIndex(fint offset, fint length, fint x) {
   return x & MAXINDEX;
 }
 
-oop create_outer_method_prim(oop ignore,
-                             byteVectorOop bv,
-                             objVectorOop lits,
-                             stringOop file,
-                             smiOop line,
-                             stringOop source) {
+oop ByteCode::create_outer_method_prim(oop ignore,
+                                       byteVectorOop bv,
+                                       objVectorOop lits,
+                                       stringOop file,
+                                       smiOop line,
+                                       stringOop source) {
   Unused(ignore);
   ResourceMark rm;
 
@@ -230,8 +230,9 @@ oop create_outer_method_prim(oop ignore,
 
   smi errorIndex;
   IntBList* stack_deltas;
-  const char* errorMsg = check_byteCodes_and_literals( errorIndex, stack_deltas,
-                                                       bv, lits );
+  const char* errorMsg = methodMap::check_byteCodes_and_literals( errorIndex, 
+                                                                  stack_deltas,
+                                                                  bv, lits );
   if (errorMsg) {
     char buf[BUFSIZ];
     (void) sprintf(buf, "Error: bad byte code at: %d <%s>", 
@@ -267,8 +268,8 @@ bool ByteCode::Finish() {
 }
 
 
-bool ByteCode::Finish(char* fname, fint sourceLine,
-                      char* srcStart, fint srcLen) {
+bool ByteCode::Finish(const char* fname, fint sourceLine,
+                      const char* srcStart, fint srcLen) {
   if (!Finish())
     return false;
   file= mustAllocate ? new_string(fname) : new_string_or_fail(fname);
@@ -288,12 +289,12 @@ bool ByteCode::Finish(char* fname, fint sourceLine,
 }
 
 
-bool ByteCode::Finish(char* fname, char* src) {
+bool ByteCode::Finish(const char* fname, const char* src) {
   return Finish(fname, 1, src, strlen(src));
 }
 
 
-bool ByteCode::Finish(char* fname, fint sourceLine, fint srcOffset, fint srcLen) {
+bool ByteCode::Finish(const char* fname, fint sourceLine, fint srcOffset, fint srcLen) {
   bool r = Finish();
   if (!r) return false;
   if ((file= new_string(fname)) == failedAllocationOop) {
@@ -309,12 +310,12 @@ bool ByteCode::Finish(char* fname, fint sourceLine, fint srcOffset, fint srcLen)
 }
 
 
-oop create_block_method_prim(oop ignore,
-                             byteVectorOop bv,
-                             objVectorOop lits,
-                             stringOop file,
-                             smiOop line,
-                             stringOop source) {
+oop ByteCode::create_block_method_prim(oop ignore,
+                                       byteVectorOop bv,
+                                       objVectorOop lits,
+                                       stringOop file,
+                                       smiOop line,
+                                       stringOop source) {
   Unused(ignore);
   ResourceMark rm;
 
@@ -323,8 +324,9 @@ oop create_block_method_prim(oop ignore,
 
   smi errorIndex;
   IntBList* stack_deltas;
-  const char* errorMsg = check_byteCodes_and_literals( errorIndex, stack_deltas,
-                                                       bv, lits );
+  const char* errorMsg = methodMap::check_byteCodes_and_literals( errorIndex, 
+                                                                  stack_deltas,
+                                                                  bv, lits );
   if ( errorMsg ) {
     char buf[BUFSIZ];
     (void) sprintf(buf, "Error: bad byte code at: %d <%s>",

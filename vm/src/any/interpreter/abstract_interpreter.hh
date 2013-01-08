@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.13 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -150,6 +150,7 @@ class abstract_interpreter_interbytecode_state: public PartObj {
 // that do it.
 // I only know about "syntax".
 
+
 class abstract_interpreter: public AnywhereObj {
   friend class frame; // for the ITERATORs (ugh)
   friend class FrameIterator; // for the ITERATORs (ugh)
@@ -176,17 +177,17 @@ class abstract_interpreter: public AnywhereObj {
   
  protected:  // Checkers
  
-  friend void check_index_range(           abstract_interpreter*, oop);
-  friend void check_selector_string(       abstract_interpreter*, oop);
-  friend void check_branch_target(         abstract_interpreter*, oop);
-  friend void check_no_send_modifiers(     abstract_interpreter*, oop);
-  friend void check_no_lexical_level(      abstract_interpreter*, oop);
-  friend void check_no_two_send_modifiers( abstract_interpreter*, oop);
-  friend void check_no_argument_count(     abstract_interpreter*, oop);
-  friend void check_no_operand(            abstract_interpreter*, oop);
-  friend void check_delegatee(             abstract_interpreter*, oop);
-  friend void check_branch_vector(         abstract_interpreter*, oop);
-  friend void check_for_pop(               abstract_interpreter*, oop);
+  static void check_index_range(           abstract_interpreter*, oop);
+  static void check_selector_string(       abstract_interpreter*, oop);
+  static void check_branch_target(         abstract_interpreter*, oop);
+  static void check_no_send_modifiers(     abstract_interpreter*, oop);
+  static void check_no_lexical_level(      abstract_interpreter*, oop);
+  static void check_no_two_send_modifiers( abstract_interpreter*, oop);
+  static void check_no_argument_count(     abstract_interpreter*, oop);
+  static void check_no_operand(            abstract_interpreter*, oop);
+  static void check_delegatee(             abstract_interpreter*, oop);
+  static void check_branch_vector(         abstract_interpreter*, oop);
+  static void check_for_pop(               abstract_interpreter*, oop);
   
   void set_error_msg(const char* s) {
     if (!error_msg) error_msg= s; } // want first one
@@ -235,7 +236,7 @@ class abstract_interpreter: public AnywhereObj {
   
   int32 get_branch_pc() {
     oop p = get_literal();
-    return check(::check_branch_target, p)  ?  smiOop(p)->value()  :  0;
+    return check(abstract_interpreter::check_branch_target, p)  ?  smiOop(p)->value()  :  0;
   }
 
   objVectorOop get_branch_vector() {

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.19 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "zone.hh"
@@ -46,6 +46,18 @@ int32 zone::frame_chain_nesting = 0;
 
 # define FOR_ALL_NMETHODS(var)                                                \
     for (nmethod *var = first_nm(); var; var = next_nm(var))
+
+
+static nmethod* fieldOffsetDetector_nmethod = NULL;
+# define NMETHOD_FROM(fieldName, p)                                           \
+  ((nmethod*)((char*)p - (char*)&fieldOffsetDetector_nmethod->fieldName))
+
+
+static OopNCode* fieldOffsetDetector_OopNCode = NULL;
+# define OOPNCODE_FROM(fieldName, p)                                          \
+  ((OopNCode*)((char*)p - (char*)&fieldOffsetDetector_OopNCode->fieldName))
+
+
 
 inline int32 roundSize(int32 s, int32 blockSize) {
   return (s + blockSize - 1) / blockSize * blockSize;
@@ -108,11 +120,7 @@ zone::zone(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize) {
 }
 
 
-# if TARGET_ARCH == PPC_ARCH
-  static const int32 branch_disp_bits = li_bits; 
-# else
-  static const int32 branch_disp_bits = 32;
-# endif
+static const int32 branch_disp_bits = 32;
 
 static const uint32 maxCodeAndStubSizeForMachine =  (uint32)(1  <<  (branch_disp_bits - 1)); // -1 because disp may be + or -
 
@@ -120,7 +128,7 @@ static const uint32 maxCodeAndStubSizeForMachine =  (uint32)(1  <<  (branch_disp
 
 void zone::set_sizes_for_statically_allocated_code_and_stub_area(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize, char*& stb) {
 
-  if (OS::make_statically_allocated_memory_executable(zoneStart(), zoneEnd()-zoneStart()))
+  if (OS::make_memory_executable(zoneStart(), zoneEnd()-zoneStart()))
     fatal3("Couldn't make PIC area writable: zoneStart() = 0x%x, zoneEnd() = 0x%x, difference = %d",
           zoneStart(), zoneEnd(), zoneEnd() - zoneStart());
           
@@ -150,6 +158,7 @@ void zone::set_sizes_for_statically_allocated_code_and_stub_area(int32& codeSize
 
 
 void zone::set_sizes_and_allocate_code_and_stub_area(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize, char*& stb) {
+  
     round_sizes(codeSize, stubSize, depSize, debugSize);
     int codeSize_p = roundTo(codeSize, idealized_page_size);
     int stubSize_p = roundTo(stubSize, idealized_page_size);
@@ -175,10 +184,14 @@ void zone::set_sizes_and_allocate_code_and_stub_area(int32& codeSize, int32& stu
     }
           
     // allocate stubs and code together for span-limited branches -- dmu
-    // Warning: PPC Assembler::Assembler counts on stubs being after izone
     // See zone::code_start() and zone::code::end()
     bottom= (int32*)OS::allocate_idealized_page_aligned(codeAndStubSize_p, "nmethod zone (inst + stubs)", NMethodStart);
     stb= (char*)bottom + codeSize_p; 
+  
+    if (OS::make_memory_executable(bottom, codeAndStubSize_p))
+      fatal2("Couldn't make PIC area writable: start = 0x%x, length = %d",
+             bottom, codeSize_p);
+
 }
 
 
@@ -493,7 +506,7 @@ void zone::flushZombies() {
   nmln nonFlushable;
   while (zombies.notEmpty()) {
     nmethod* nm = NMETHOD_FROM(zoneLink, zombies.next);
-    assert(isNMethod(nm), "invalid nmethod");
+    assert(nmethod::isNMethod(nm), "invalid nmethod");
     assert(nm->isZombie(), "not a zombie");
     if (nm->frame_chain != NoFrameChain) {
       // temporarily remove non-flushable nmethods from zombie chain
@@ -874,7 +887,7 @@ class nmsizes {
     deps += other.deps; scopes += other.scopes;
   }
   bool isEmpty() { return n == 0; }
-  void print(char* name, nmsizes& tot) {
+  void print(const char* name, nmsizes& tot) {
     int32 bigTotal = tot.total();
     int32 myTotal = total();
     if (! isEmpty()) {
@@ -892,7 +905,7 @@ class nmsizes {
              myTotal, myTotal, bigTotal);
     }
   }
-  void print_stats(char* name) {
+  void print_stats(const char* name) {
     if (! isEmpty()) {
       lprintf("%-13s: %7ld %7ld %7ld %7ld %7ld %7ld\n",
              name, long(n), long(n*sizeof(nmethod)), long(insts), long(locs),
@@ -1067,7 +1080,7 @@ nmethod* zone::findNMethod(void* start) {
   nmethod* n;
   if (iZone->contains(start)) {
     n = (nmethod*)iZone->findStartOfBlock(start);
-    assert(isNMethod(n), "not an nmethod");
+    assert(nmethod::isNMethod(n), "not an nmethod");
 #   if GENERATE_DEBUGGING_AIDS
     if (CheckAssertions) {
       if ((char*)start >= (char*)n->locsEnd()) {
@@ -1096,7 +1109,7 @@ void zone::findNMethodOrMap(nmln* n, nmethod* &nm, slotsMapDeps* &s) {
   nm= NULL;  s= NULL;
   if (iZone->contains(n)) {
     nm= (nmethod*)iZone->findStartOfBlock(n);
-    assert(isNMethod(nm), "not an nmethod");
+    assert(nmethod::isNMethod(nm), "not an nmethod");
     assert((char*)n < (char*)nm->locsEnd(), "found wrong nmethod");
   } else if (dZone->contains(n)) {
     void *p= *(void**)dZone->findStartOfBlock(n);
@@ -1133,7 +1146,7 @@ int32 zone::instsSize()  { return iZone->capacity(); }
 inline nmethod* zone::next_circular_nm(nmethod* nm) {
   nm = next_nm(nm);
   if (nm == NULL) nm = first_nm();
-  assert(nm == NULL || isNMethod(nm), "not a valid nmethod");
+  assert(nm == NULL || nmethod::isNMethod(nm), "not a valid nmethod");
   return nm;
 }
 
@@ -1164,11 +1177,11 @@ int32 zone::sweeper(int32 maxVisit, int32 maxReclaim,
   do {
     if (PrintLRUSweep2) lprintf("\n*inspecting %#lx (id %ld): ",
                                (void*)(long unsigned)p, (void*)long(p->id));
-    assert(isNMethod(p), "invalid nmethod");
+    assert(nmethod::isNMethod(p), "invalid nmethod");
     
     if ((p->isZombie() ||
          p->isDebug()  ||
-         p->codeTableLink == NULL && !p->isUncommon() && !p->isDI()) &&
+         (p->codeTableLink == NULL && !p->isUncommon() && !p->isDI())) &&
         p->frame_chain == NoFrameChain) {
       // can be flushed - nobody will ever use it again
       if (PrintLRUSweep2) lprintf(" %s; flushed",
@@ -1352,7 +1365,7 @@ static void findNM_helper2(nmethod* nm) {
     if (first) {
       first = false;    // ignore top-level scope -- already printed
     } else if (s->key.selector == findNM_sel) {
-      if (ignoreRcvr || !s->isDeadBlockScope() && s->selfMapOop() == findNM_map) {
+      if (ignoreRcvr || (!s->isDeadBlockScope() && s->selfMapOop() == findNM_map)) {
         lprintf("nmethod 16r%lx \'%s\'\n", nm,
                selector_string(nm->key.selector));
         findNM_found++;
@@ -1449,11 +1462,11 @@ void zone::read_snapshot(FILE* f) {
 
       stubs->zone()->read_snapshot(f);
 
-            set_nmethod_vtbl_value();
-          set_CacheStub_vtbl_value();
-       set_CountingStub_vtbl_value();
-      set_ComparingStub_vtbl_value();
-          set_AgingStub_vtbl_value();
+          nmethod::set_vtbl_value();
+        CacheStub::set_vtbl_value();
+     CountingStub::set_vtbl_value();
+    ComparingStub::set_vtbl_value();
+        AgingStub::set_vtbl_value();
 
       if (!okToUseCodeFromSnapshot)
         clear();

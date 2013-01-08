@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.12 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "stack.hh"
@@ -334,7 +334,7 @@ void Stack::print() {
   fint curFrame = 0;
   fint printFrame = 0;
   for (; curFrame < maxFrame;  ++curFrame) {
-    if (v == NULL || v->is_first_self_vframe() && omitFirst) return;
+    if (v == NULL || (v->is_first_self_vframe() && omitFirst)) return;
     if (v->print_frame(printFrame)) {
       printFrame ++;
     }

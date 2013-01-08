@@ -1,13 +1,13 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "fctProxyMap.hh"
 # include "_fctProxyMap.cpp.incl"
 
 
-fctProxyOop create_fctProxy() {
+fctProxyOop fctProxyMap::create_fctProxy() {
   slotList* slots = new slotList(VMString[PARENT], 
                                  parent_map_slotType,
                                  create_slots((slotList*)NULL));

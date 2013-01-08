@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef SIC_COMPILER
@@ -425,7 +425,7 @@
     return shouldInlineSend(info, rs, rcvr, meth, NormalFnLimit);
   }
   
-  SSelfScope* SCodeScope::notify(stringOop selector, char* msg) {
+  SSelfScope* SCodeScope::notify(stringOop selector, const char* msg) {
     if (PrintInlining) {
       lprintf("%*s*cannot inline %s, cost = %ld (%s)\n", (void*)depth, "",
               selector_string(selector), (void*)msgCost, msg);

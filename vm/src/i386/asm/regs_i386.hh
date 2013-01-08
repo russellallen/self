@@ -1,7 +1,7 @@
 # ifdef __i386__
 /* Sun-$Revision: 1.6 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.x
+/* Copyright 1992-2012 AUTHORS.x
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -21,12 +21,12 @@
   const      fint NumIArgRegisters = 0;
   const      fint NumRegistersInMask = 0; 
 
-  extern char* ByteRegisterNames[];
-  extern char* ShortRegisterNames[];
+  extern const char* ByteRegisterNames[];
+  extern const char* ShortRegisterNames[];
   
   enum RegSize { byte_reg, short_reg, long_reg };
   
-  extern char** RegisterNamesBySize[];
+  extern const char** RegisterNamesBySize[];
 
   enum Location {
     // change RegisterNames[] and ByteRegisterNames[] if you change this enum!
@@ -70,11 +70,9 @@
     Temp2 = ecx,
 #   ifdef SIC_COMPILER
     // additional temp, but must be reserved.  on SIC, we do this through the
-    // markAllocated function.  See AbstractArrayAtNode::markAllocated (either on
-    // SPARC or PPC).  When markAllocated changes the use/def count of the temp register,
+    // markAllocated function.  See AbstractArrayAtNode::markAllocated.
+    // When markAllocated changes the use/def count of the temp register,
     // it won't be used in the temporary register allocation.  -mabdelmalek 12/02
-    //
-    // Also need to define canCopyPropagateFrom, as in node_ppc.cpp -- dmu 1/03
     Temp3 = eax,
     Temp4 = edx,
 #   endif
@@ -155,7 +153,7 @@ const RegisterString LocalMask = 0;
   extern Location CalleeSavedRegs[];
   
   inline bool isInitializedInFillValues(Location loc) {
-    fatal("unimplemented for PPC");
+    fatal("unimplemented for i386");
     return false;
   }
   

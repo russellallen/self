@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -35,7 +35,6 @@ class enumeration_list: public ResourceObj {
   }
   void oops_do(oopsDoFn f);
 };
-
 
 class enumeration: public ResourceObj {
   
@@ -110,9 +109,7 @@ class enumeration: public ResourceObj {
   virtual void  filter_map(mapOop obj) = 0;
 };
 
-
 class referencesEnumeration: public enumeration {
-  friend oop enumerate_vector_references(objVectorOop vector, oop limit);
   
   referencesEnumeration(oop* targetp_arg,  
                         smi  num_targets_arg,
@@ -131,15 +128,15 @@ class referencesEnumeration: public enumeration {
   void  filter_match(oopsOop obj, oop* matching_cell, smi targetNo);
   void  filter_map(mapOop obj);
   
-  protected:
+ protected:
   void consider_vframe(oopsOop obj, oop* matching_cell, smi targetNo);
   void consider_obj(   oopsOop obj, oop* matching_cell, smi targetNo);
+ public:
+  static oop enumerate_vector_references(objVectorOop vector, oop limit);
+
 };
 
-
-class implementorsEnumeration: public enumeration {
-  friend oop enumerate_vector_implementors(objVectorOop vector, oop limit);
-  
+class implementorsEnumeration: public enumeration {  
   smi poss_assignments_index;
 
   implementorsEnumeration(oop* targetp_arg, smi num_targets_arg,
@@ -153,10 +150,11 @@ class implementorsEnumeration: public enumeration {
   void  enumerate();
   void  filter_match(oopsOop obj, oop* matching_cell, smi targetNo);
   void  filter_map(mapOop obj) { Unused(obj); ShouldNotCallThis(); }
+ public:  
+  static oop enumerate_vector_implementors(objVectorOop vector, oop limit);
 };
 
 class allObjEnumeration: public enumeration {
-  friend oop enumerate_all_objs(oop limit);
   
   allObjEnumeration(smi lim)
     : enumeration(lim) {
@@ -167,4 +165,7 @@ class allObjEnumeration: public enumeration {
     Unused(obj); Unused(matching_cell); Unused(targetNo);
     ShouldNotCallThis(); }
   void  filter_map(mapOop obj) { Unused(obj); ShouldNotCallThis(); }
+
+ public:
+  static oop enumerate_all_objs(oop limit);
 };

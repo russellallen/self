@@ -3,11 +3,13 @@
 
 
 @interface MainArgs : NSObject {
-    int    argc;
-    char **argv;
+@public
+  int    argc;
+  char **argv;
 }
 - (MainArgs*) initWithArgc: (int)argc argv: (char**)argv;
 @end
+
 
 
 

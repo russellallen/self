@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation
@@ -16,7 +16,7 @@ static char line[BUFSIZE];
 # define true  1
 # define false 0
 
-static int isprefix(char* s, char* t) {
+static int isprefix(const char* s,const char* t) {
   //return true if t is prefix of s; false otherwise  */
   int  j, k;
 

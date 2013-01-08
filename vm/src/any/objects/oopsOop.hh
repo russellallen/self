@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -11,7 +11,7 @@
 class oopsOopClass: public memOopClass {
  public:
   // constructor
-  friend oopsOop as_oopsOop(void* p) { return (oopsOop) as_memOop(p); }
+  static oopsOop as_oopsOop(void* p) { return (oopsOop) as_memOop(p); }
   
   // accessors
   oop* oops(fint which = 0) { return &((oop*) addr())[which]; }
@@ -83,3 +83,8 @@ class oopsOopClass: public memOopClass {
   void gc_mark_referents();
   bool verify();
 };
+
+static inline oopsOop as_oopsOop(void* p) { 
+  return oopsOopClass::as_oopsOop(p);
+}
+

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.20 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -32,9 +32,7 @@
    
      FAST_COMPILER (generate non-inlining compiler)
       SIC_COMPILER (generate simple inlining compiler)
-	  
-     ROSETTA (try to run under ROSETTA)
-                    
+                  
                     
    -- dmu
 */
@@ -42,12 +40,12 @@
 // some cpp's need numbers: 
 
 # define SPARC_ARCH 1
-# define  M68K_ARCH 2
-# define   PPC_ARCH 3
+# define  M68K_ARCH 2 /* No longer supported */
+# define   PPC_ARCH 3 /* No longer supported */
 # define  I386_ARCH 4
 
 # define  UNIX_FAMILY 1
-# define MACOS_FAMILY 2
+# define MACOS_FAMILY 2 /* No longer supported */
 
 # define          SUNOS_VERSION 1
 # define        SOLARIS_VERSION 2
@@ -58,7 +56,7 @@
 
 # define         CC_COMPILER 1
 # define        GCC_COMPILER 2
-# define     MWERKS_COMPILER 3
+# define     MWERKS_COMPILER 3 /* No longer supported */
 # define SPARCWORKS_COMPILER 4
 
 # define MPW_ASM 1
@@ -77,30 +75,33 @@
 # if TARGET_OS_VERSION == MACOSX_VERSION
 
   # ifdef TARGET_ARCH
-    # error no need to define this
+    //  # error no need to define this
+    // we determine ourselves
+    # undef TARGET_ARCH
   # endif
-  # if defined(__ppc__)
-    # define TARGET_ARCH PPC_ARCH
-  # elif defined(__i386__)
+  # if defined(__i386__)
     # define TARGET_ARCH I386_ARCH
+  # elif defined(__LP64__)
+    # error 64bit not supported yet
   # else
     # error A new Mac CPU?
   # endif
   
-  # if NATIVE_ARCH == ppc
-  # define HOST_ARCH PPC_ARCH
-  # elif NATIVE_ARCH == i386
+  # if NATIVE_ARCH == i386
   # define HOST_ARCH I386_ARCH
   # else 
   # error what?
   # endif
   //or could: # define HOST_ARCH TARGET_ARCH // cross compiling is invisible on OSX
   
-  # define   TIGER_RELEASE 4
-  # define LEOPARD_RELEASE 5
-  # define SNOW_LEOPARD_RELEASE 6
+  # define         TIGER_RELEASE 4
+  # define       LEOPARD_RELEASE 5
+  # define  SNOW_LEOPARD_RELEASE 6
+  # define          LION_RELEASE 7
+  # define MOUNTAIN_LION_RELEASE 8
+	  
   # ifndef OSX_RELEASE
-    # define OSX_RELEASE SNOW_LEOPARD_RELEASE
+    # define OSX_RELEASE LION_RELEASE
   # endif
 
   // Apple asm syntax changed in 2006 sometime
@@ -120,32 +121,20 @@
 # define DO_NOT_CROSS_COMPILE cannotCrossCompileMe
 # endif
 
-# define s 17
-# if TARGET_OS_VERSION == MACOSX_VERSION
-  # ifndef GCC_OPTIMIZATION_LEVEL
-    # error The xcode project PREPROCESSOR_MACROS should include GCC_OPTIMIZATION_LEVEL=${GCC_OPTIMIZATION_LEVEL}
-  # elif GCC_OPTIMIZATION_LEVEL == s
-    # error -Os breaks Self, use -O3 instead (when making a snapshot, some slots in globals are missing their annotations on the PPC)
+# if defined(__GNUC__)
+  # define GCC 1
+  # if __GNUC__ < 4
+    # define GCC3 1
+  # else
+    # define GCC4 1
   # endif
 # endif
-# undef s
-
-# if TARGET_OS_VERSION == LINUX_VERSION
-  # define GCC3 1
-#endif
 
 // The following definitions make machine-dependent asserts more convenient
 # if  TARGET_ARCH == SPARC_ARCH
 # define isSparc 1
 # else 
 # define isSparc 0
-# endif
-
-
-#  if  COMPILER == MWERKS_COMPILER
-  // need to always generate assertion code for MWERKS because
-  // it uses the same precompiled headers for all targets
-  # define GENERATE_DEBUGGING_AIDS 1
 # endif
 
 // Mac OS X compiler won't link if certain destructors are implicit, sigh
@@ -157,8 +146,8 @@
 # define MACOSX_DESTRUCTOR_BUG(className)
 # endif
 
-# if !GCC3
-  # define INTERFACE_PRAGMAS 1 // GCC3 fails with interface pragmas
+# if !GCC
+  # define INTERFACE_PRAGMAS 1 // GCC >3 fails with interface pragmas
 # endif
 
 
@@ -180,10 +169,10 @@
 
 
 
-
+# if GCC3
 // GCC3.0 complains if pragmas are enabled
 class DefineGCC3ToFix_storage_size_of_ZTxxXXXXX_isnt_known {
  public:
   virtual void print();
 };
-
+# endif

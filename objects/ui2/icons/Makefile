@@ -1,6 +1,6 @@
 # Sun-$Revision: 10.3 $
  
-# Copyright 1994 Sun Microsystems, Inc. and Stanford University.
+# Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information.
 
 ROOT         = ../../..

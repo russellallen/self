@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef SIC_COMPILER
@@ -128,7 +128,7 @@ void SICAllocator::allocate(PRegBList* g, RegisterString inc) {
       wasAllocatedHere = (r->loc != UnAllocated);
     } else if (  r->uplevelW
            ||   (keepUplevelRPRegsInMemory && r->uplevelR)
-           ||   SICDontUseRegs && !(r->isSAPReg() || r->isTempPReg())) {
+           ||   (SICDontUseRegs && !(r->isSAPReg() || r->isTempPReg()))) {
       // allocate uplevel-written _local_ vars to stack.
       allocateToStack(r);
       wasAllocatedHere = true;

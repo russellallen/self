@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.15 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -51,15 +51,15 @@ class space: public CHeapObj {
   friend bool rSet::verify(bool);
 
  public:
-  char* name;
+  const char* name;
   
   // constructors; none allocate object space
-  space(char *nm, int32 &size) {
+  space(const char *nm, int32 &size) {
     Unused(size); name= nm; } // dummy just for oldSpace
-  space(char* nm, int32 &size, char *bottom) {
+  space(const char* nm, int32 &size, char *bottom) {
     init_space(nm, size, bottom); };
-  space(char* nm, char *bottom, char *top);
-  space(char* nm, FILE *snap);
+  space(const char* nm, char *bottom, char *top);
+  space(const char* nm, FILE *snap);
 
   void read_snapshot(FILE* snap, char *bottom, char *top);
 
@@ -67,17 +67,17 @@ class space: public CHeapObj {
   ~space() { delete [] name; }
 
  protected:
-  void init_space(char* nm, int32 &size, char *bottom);
+  void init_space(const char* nm, int32 &size, char *bottom);
 
  public:
   // allocation test
   bool would_fit(fint size, fint bsize = 0) {
     return objs_top + size  <  bytes_bottom - bsize; }
     
- protected:
   // allocators; called by new,oldGeneration, and by string and block
   // allocators.
   oop* alloc_objs_local(fint size) {
+    // was protected but neede by slotOop
     oop* p = objs_top;
     oop* p1 = p + size;
     if (p1 < bytes_bottom) {
@@ -86,6 +86,8 @@ class space: public CHeapObj {
     } else {
       return NULL;
     } }
+
+ protected:
   void unalloc_objs_local(fint size) { objs_top -= size; }    
   oop* alloc_objs_and_bytes_local(fint size, fint bsize, char*& bytes) {
     oop* p = objs_top;
@@ -203,17 +205,7 @@ class newSpace: public space {
   // these allocate directly in a newSpace
   // friend oop blockOopClass::clone_block(oop);
   friend class blockOopClass;
-  friend oop clone0_prim(slotsOop rcvr);
-  friend oop clone1_prim(slotsOop rcvr);
-  friend oop clone2_prim(slotsOop rcvr);
-  friend oop clone3_prim(slotsOop rcvr);
-  friend oop clone4_prim(slotsOop rcvr);
-  friend oop clone5_prim(slotsOop rcvr);
-  friend oop clone6_prim(slotsOop rcvr);
-  friend oop clone7_prim(slotsOop rcvr);
-  friend oop clone8_prim(slotsOop rcvr);
-  friend oop clone9_prim(slotsOop rcvr);
-
+  
   // friend byteVectorOop byteVectorOopClass::scavenge(fint);
   friend class ::byteVectorOopClass;
 
@@ -259,8 +251,8 @@ class newSpace: public space {
   bool scavenge_contents();
 
   // called by Memory
-  newSpace(char* n, int32 &size, char* bottom) : space(n, size, bottom) {}
-  newSpace(char* n, int32 &size, FILE* snap);
+  newSpace(const char* n, int32 &size, char* bottom) : space(n, size, bottom) {}
+  newSpace(const char* n, int32 &size, FILE* snap);
 };
 
 
@@ -291,11 +283,11 @@ class oldSpace: public space {
   // constructors
   // allocates object space too; sets size to amount allocated, 0 if none
   // tries to start space at desiredAddress if non-zero.
-  oldSpace(char* nm, int32 &size, caddr_t desiredAddress);
+  oldSpace(const char* nm, int32 &size, caddr_t desiredAddress);
 
   // constructors which do not allocate object space
-  oldSpace(char *nm, FILE *snap) : space(nm, snap) { next_space= NULL; }
-  oldSpace(char *nm, char *bottom, char *top) : space(nm, bottom, top) {
+  oldSpace(const char *nm, FILE *snap) : space(nm, snap) { next_space= NULL; }
+  oldSpace(const char *nm, char *bottom, char *top) : space(nm, bottom, top) {
     next_space= NULL; }
 
   void prepare_for_scavenge();

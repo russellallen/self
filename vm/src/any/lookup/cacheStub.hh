@@ -1,11 +1,12 @@
 /* Sun-$Revision: 30.12 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
+
 
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
@@ -15,13 +16,13 @@
 #define VTBL_AND_SETTER(classname, INIT) \
  protected:                                                             \
   static VtblPtr_t _vtbl_value;                                         \
-  classname(float /* unLikelyToCallByAccident */) INIT {}                     \
+  classname(float /* unLikelyToCallByAccident */) INIT {}               \
                  /* shouldn't call this except in the function below */ \
                                                                         \
-  friend void CONC3(set_,classname,_vtbl_value)() {                     \
+ public:                                                                \
+  static void set_vtbl_value() {                                        \
     classname c(1.0);                                                   \
     _vtbl_value= c.vtbl_value(); }                                      \
- public:                                                                \
   VtblPtr_t static_vtbl_value() { return _vtbl_value; }                 \
 
 
@@ -29,7 +30,6 @@
 
 class cacheStubInfo {
  public:
-  // NOTE: metrowerks requires int, not short etc. for proper bit fields
   unsigned int has_smi        : 1;
   unsigned int has_float      : 1;
   unsigned int is_megamorphic : 1;

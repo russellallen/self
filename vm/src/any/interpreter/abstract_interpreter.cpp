@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "abstract_interpreter.hh"
@@ -188,48 +188,49 @@ bool abstract_interpreter::verify() {
 }
 
 
-void check_index_range(abstract_interpreter *ai, oop) {
+void abstract_interpreter::check_index_range(abstract_interpreter *ai, oop) {
   if ( ai->is.index < ai->mi.length_literals ) return;
   ai->set_error_msg( "index out of bounds");
 }
 
-void check_selector_string(abstract_interpreter *ai, oop s) {
+void abstract_interpreter::check_selector_string(abstract_interpreter *ai, oop s) {
   if ( s->is_string() ) return;
   ai->set_error_msg( "selector must be a string");
 }
 
-void check_branch_target(abstract_interpreter *ai, oop p) {
+void abstract_interpreter::check_branch_target(abstract_interpreter *ai, oop p) {
   ai->check_branch_target(p);
 }
 
-void check_no_send_modifiers(abstract_interpreter *ai, oop) {
+void abstract_interpreter::check_no_send_modifiers(abstract_interpreter *ai, oop) {
   ai->set_error_msg( ai->is.check_no_send_modifiers());
 }
 
-void check_no_lexical_level(abstract_interpreter *ai, oop) {
+void abstract_interpreter::check_no_lexical_level(abstract_interpreter *ai, oop) {
   ai->set_error_msg( ai->is.check_no_lexical_level());
 }
 
-void check_no_two_send_modifiers(abstract_interpreter *ai, oop) {
+void abstract_interpreter::check_no_two_send_modifiers(abstract_interpreter *ai, oop) {
   ai->set_error_msg( ai->is.check_no_two_send_modifiers());
 }
 
-void check_no_operand(abstract_interpreter *ai, oop) {
+void abstract_interpreter::check_no_operand(abstract_interpreter *ai, oop) {
   ai->set_error_msg( ai->is.check_no_operand());
 }
 
-void check_delegatee(abstract_interpreter *ai, oop) {
+void abstract_interpreter::check_delegatee(abstract_interpreter *ai, oop) {
   oop p= ai->get_literal();
+  Unused(p); //debugging
   if ( !ai->error_msg  &&  !ai->get_literal()->is_string())
     ai->set_error_msg( "delegatee must be string"); 
 }
 
-void check_no_argument_count(abstract_interpreter *ai, oop) {
+void abstract_interpreter::check_no_argument_count(abstract_interpreter *ai, oop) {
   if (ai->is.argument_count != 0)
     ai->set_error_msg( "should not have argument count before argument count setter");
 }
 
-void check_branch_vector(abstract_interpreter *ai, oop) {
+void abstract_interpreter::check_branch_vector(abstract_interpreter *ai, oop) {
   oop p= ai->get_literal();
   if (ai->error_msg)  return;
   if (!p->is_objVector()) {
@@ -244,7 +245,7 @@ void check_branch_vector(abstract_interpreter *ai, oop) {
   }
 }
 
-void check_for_pop(abstract_interpreter *ai, oop n) {
+void abstract_interpreter::check_for_pop(abstract_interpreter *ai, oop n) {
   ai->check_for_pop(n);
 }
 

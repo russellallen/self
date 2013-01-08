@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.13 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "conversion.hh"
@@ -151,11 +151,9 @@ void Conversion::init() {
   frame*           copiedFrame    = convertFrame   ->copy();
   RegisterLocator* copiedFrame_rl = convertFrame_rl->for_copied_frame(copiedFrame);
   
-  # if TARGET_ARCH != PPC_ARCH  // vdepth fails for copiedFrame on PPC because it has no register locator -- dmu 12/02
-    assert(copiedFrame->code() == convertNM &&
-           copiedFrame->vdepth(true) == convertFrame->vdepth(true),
-           "frame copy doesn't work");
-  # endif
+  assert(copiedFrame->code() == convertNM &&
+         copiedFrame->vdepth(true) == convertFrame->vdepth(true),
+         "frame copy doesn't work");
 
   // pop off the frame to be converted; use copiedFrame for the conversion
   // because the original frame will be overwritten
@@ -328,7 +326,7 @@ void Conversion::finish() {
 char* Conversion::copyArgsAndGetContinuationPC(sendDesc *sd_arg) {
   // work out continuationPC, copy outgoing args
   char *continuationPC;
-  nmethod* nm= findNMethod(sd_arg);
+  nmethod* nm= nmethod::findNMethod(sd_arg);
   PcDesc* pcd= nm->containingPcDescOrNULL((char*)sd_arg);
   assert(pcd, "shouldn't be in prologue");
   continuationPC= nm->insts() + pcd->pc;

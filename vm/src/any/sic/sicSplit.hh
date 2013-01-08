@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -26,7 +26,6 @@
     SplitSig()            { ShouldNotCallThis(); }
     SplitSig(SplitSig &s) { ShouldNotCallThis(); }
     friend SplitSig* new_SplitSig(SplitSig* current, fint splitID);
-
     fint level()        { return uint32(this) & LevelMask; }
     bool contains(SplitSig* other) {
       // other sig is in same branch iff the receiver is a prefix of other

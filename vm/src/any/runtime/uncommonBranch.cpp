@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "uncommonBranch.hh"
@@ -40,7 +40,7 @@
              selector_string(oldNM->key.selector));
       vf->print_frame();
     }
-    assert(oldNM == findNMethod(pc), "should be the same");
+    assert(oldNM == nmethod::findNMethod(pc), "should be the same");
     assert(!oldNM->isDI(), "can't handle DI yet");
     vf = vf->top()->as_compiled();
     compiled_vframe* vfs = vf->sender()->as_compiled();
@@ -66,7 +66,7 @@
     }
 
     // sanity check: trap must be in an nmethod
-    nmethod* trapNM = findNMethod(instp);
+    nmethod* trapNM = nmethod::findNMethod(instp);
     if (trapNM->insts() > (char*)instp || trapNM->instsEnd() <= (char*)instp)
       fatal("got trap which isn't in any nmethod");
 

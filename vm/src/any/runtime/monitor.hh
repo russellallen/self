@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -26,7 +26,7 @@ class Monitor: public CHeapObj {
   MonitorWindow _mw;
                                 
   FILE* logf;                   // log file
-  char* logfn;                  // log file name
+  const char* logfn;                  // log file name
   
   int32 _measurements_per_second;
   
@@ -35,7 +35,7 @@ class Monitor: public CHeapObj {
                                 
 
  public:
-  void activate(char* filename = NULL);
+  void activate(const char* filename = NULL);
   void deactivate();
   bool is_active()    { return _is_active; }
   
@@ -45,7 +45,7 @@ class Monitor: public CHeapObj {
   fint max_height();
   
   void     reset_log();
-  void  annotate_log(char *);
+  void  annotate_log(const char*);
   
   void full_redraw();
 
@@ -63,7 +63,7 @@ class Monitor: public CHeapObj {
   void enroll();
   void withdraw();
   
-  FILE* open_log_file(char* filename);
+  FILE* open_log_file(const char* filename);
   
   // interrupt handlers
   static void monitor_tick();

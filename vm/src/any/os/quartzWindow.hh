@@ -3,7 +3,7 @@
 /* Copyright 2007 David Ungar
    See the LICENSE file for license information. */
 
-// Contains platform-specific declarations for MacToolboxWindow.
+// Contains platform-specific declarations for quartzWindow.
 // This file is included into middle of class declaration.
 
 # ifdef INTERFACE_PRAGMAS
@@ -287,8 +287,8 @@ public:
           
   
   virtual bool  open( 
-          uint32 /* WindowClass */,
-          uint32 /* WindowAttributes */,
+          uint32  /* WindowClass */,
+          int*    /* WindowAttributes */,
           int   left            = 100,
           int   top             = 100, 
           int   right           = 200, 

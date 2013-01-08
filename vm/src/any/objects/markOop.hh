@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -44,7 +44,6 @@ const int32 second_hash_in_place = second_hash << hash_shift;
 const int32 overflow_hash_in_place = first_hash_in_place;
 const int32 overflow_age_in_place = age_mask_in_place;
 
-
 class markOopClass: public oopClass {
  public:
   Map* map() { return Memory->mark_map; }
@@ -54,6 +53,7 @@ class markOopClass: public oopClass {
     markOop  with_objectIsMarked()    { return markOop( int32(this) |  object_is_marked_mask_in_place); }
     markOop  without_objectIsMarked() { return markOop( int32(this) & ~object_is_marked_mask_in_place); }
     
+    // TODO:  2012-04-24 topa, do something about the fried here
 # define VALUE_ACCESSOR(name, setAction, setAssert)                           \
                                                                               \
     int32 name() {                                                            \

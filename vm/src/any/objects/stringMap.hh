@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -22,7 +22,7 @@ class stringMap: public byteVectorMap {
   bool should_canonicalize() { return false; }  
   
   // constructors
-  friend void create_initial_strings(oop parent);
+  static void create_initial_strings(oop parent);
   
   // mirror operation
   mirrorOop mirror_proto() { return Memory->stringMirrorObj; }
@@ -46,3 +46,8 @@ class stringMap: public byteVectorMap {
   void print_oop(oop obj);
   void print(oop obj);
 };
+
+
+static inline void create_initial_strings(oop parent) {
+  return stringMap::create_initial_strings(parent);
+}

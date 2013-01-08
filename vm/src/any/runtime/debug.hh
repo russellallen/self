@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.22 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -39,12 +39,10 @@ class FlagSettingInt {
 //          getCurrentValue, checkNewValue, setNewValue, explanation,
 //          wizardOnly)
 
-// this next one too big for MW: have to change by hand when you change it
 
 # define FOR_ALL_BOOLEAN_DEBUG_PRIMS(template)                                \
      FOR_ALL_GEN_BOOLEAN_DEBUG_PRIMS(template)                                \
      FOR_ALL_SPARC_BOOLEAN_DEBUG_PRIMS(template)                              \
-     FOR_ALL_PPC_BOOLEAN_DEBUG_PRIMS(template)                                \
      FOR_ALL_I386_BOOLEAN_DEBUG_PRIMS(template)                               \
      FOR_ALL_SIC_BOOLEAN_DEBUG_PRIMS(template)                                \
      FOR_ALL_NEW_BOOLEAN_DEBUG_PRIMS(template)
@@ -128,18 +126,18 @@ class FlagSettingInt {
     ((EventLogLength = smiOop(flag)->value()), eventLog->resize()),           \
     "length of VM event log (for VM debugging)", true)                        \
                                                                               \
-    template(DirPath, char*, "<str>", StringPrimType, "",                     \
+    template(DirPath, const char*, "<str>", StringPrimType, "",               \
     new_string(DirPath), flag->is_byteVector(),                               \
-    (selfs_free(DirPath),                                                     \
+    (selfs_free((void*)DirPath),                                              \
      DirPath = byteVectorOop(flag)->copy_c_heap_null_terminated()),           \
     "directory path for source files and snapshots", false)                   \
                                                                               \
-    template(SpyDisplay, char*, "<str>", StringPrimType,                     \
+    template(SpyDisplay, const char*, "<str>", StringPrimType,                \
     "", new_string(SpyDisplay), flag->is_byteVector(),                       \
     (SpyDisplay = byteVectorOop(flag)->copy_c_heap_null_terminated()),       \
-    "name of display for Spy\n(OSX: use empty string for Mac Toolbox, nonempty for X)", false) \
+    "name of display for Spy\n(OSX: use empty string for Quartz, nonempty for X)", false) \
                                                                               \
-    template(SpyFont, char*, "<str>", StringPrimType, "",                     \
+    template(SpyFont, const char*, "<str>", StringPrimType, "",               \
     new_string(SpyFont), flag->is_byteVector(),                               \
     (SpyFont = byteVectorOop(flag)->copy_c_heap_null_terminated()),           \
     "name of X font for Spy", false)                                          \
@@ -182,9 +180,6 @@ class FlagSettingInt {
     ZapResourceArea =  (flag == Memory->trueObj ? true : false),              \
     "zap the resource area when deallocated", true)                    
 
-
-// next macro is too long for MW, so if you change this,
-//  also change it in oop.c and prim.c, sigh
 
 # define FOR_ALL_DEBUG_PRIMS(template)                                        \
     FOR_ALL_INTEGER_DEBUG_PRIMS(template)                                     \
@@ -248,22 +243,22 @@ class FlagSettingInt {
   /* profiling impossible */
 # define FOR_ALL_PROFILING_DEBUG_PRIMS(template)                              \
     template(VMProfileCompaction, bool, "<bool>", BooleanPrimType, false,     \
-    Memory->falseObj, (flag == Memory->falseObj), 0,                          \
+    Memory->falseObj, (flag == Memory->falseObj), (void)0,                    \
     "no profiling of zone compaction (cannot be changed)", true)              \
     template(VMProfiling, bool, "<bool>", BooleanPrimType, false,             \
-    Memory->falseObj, (flag == Memory->falseObj), 0,                          \
+    Memory->falseObj, (flag == Memory->falseObj), (void)0,                    \
     "no VM-level profiling (cannot be changed)", true)                        \
     template(VMCompilerProfiling, bool, "<bool>", BooleanPrimType, false,     \
-    Memory->falseObj, (flag == Memory->falseObj), 0,                          \
+    Memory->falseObj, (flag == Memory->falseObj), (void)0,                    \
     "no VM-level profiling of the compiler (cannot be changed)", true)        \
     template(VMSICProfiling, bool, "<bool>", BooleanPrimType, false,          \
-    Memory->falseObj, (flag == Memory->falseObj), 0,                          \
+    Memory->falseObj, (flag == Memory->falseObj), (void)0,                    \
     "no VM-level profiling of the SIC (cannot be changed)", true)             \
     template(VMSICLongProfiling, bool, "<bool>", BooleanPrimType, false,      \
-    Memory->falseObj, (flag == Memory->falseObj), 0,                          \
+    Memory->falseObj, (flag == Memory->falseObj), (void)0,                    \
     "no VM-level profiling of the SIC (cannot be changed)", true)             \
     template(VMNICProfiling, bool, "<bool>", BooleanPrimType, false,          \
-    Memory->falseObj, (flag == Memory->falseObj), 0,                          \
+    Memory->falseObj, (flag == Memory->falseObj), (void)0,                    \
     "no VM-level profiling of the NIC (cannot be changed)", true)
 
 # endif // TARGET_IS_PROFILED
@@ -469,7 +464,7 @@ class FlagSettingInt {
     BOOLEAN_PRIM_TEMPLATE(template, AllowLocalAccessInCreatedMethods, false, \
     "allow Self code to directly create methods with local read/write bcs", false) \
     BOOLEAN_PRIM_TEMPLATE(template, SaveOutgoingArgumentsOfPatchedFrames, false, \
-    "capture outgoing arguments of patched frames (needed for PPC SIC, broken for SPARC)", true) \
+    "capture outgoing arguments of patched frames (broken for SPARC)", true)  \
 
 
 # if TARGET_ARCH == SPARC_ARCH                                                
@@ -479,21 +474,6 @@ class FlagSettingInt {
 # else
 # define FOR_ALL_SPARC_BOOLEAN_DEBUG_PRIMS(template)
 # endif    
-   
-# if TARGET_ARCH == PPC_ARCH
-# define FOR_ALL_PPC_BOOLEAN_DEBUG_PRIMS(template)                            \
-    BOOLEAN_PRIM_TEMPLATE(template, FastMapTest, true,                        \
-    "do fast map tests", true)                                                \
-    BOOLEAN_PRIM_TEMPLATE(template, UseByteMapBaseReg, true,                  \
-    "use register to hold the byte map base", true)                           \
-    BOOLEAN_PRIM_TEMPLATE(template, UseSPLimitReg, false,                     \
-    "use register to hold the stack pointer limit (risky, relies on C not using this register)", true) \
-    BOOLEAN_PRIM_TEMPLATE(template, UseShortBranches, true,                   \
-    "Use PPC one-word (relative) branches to call self & prims", true)        \
-
-# else
-# define FOR_ALL_PPC_BOOLEAN_DEBUG_PRIMS(template)
-# endif
 
 # if TARGET_ARCH == I386_ARCH
   static const bool UseByteMapBaseReg = false; // doesn't seem worth it for I386 -- dmu 5/06

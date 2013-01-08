@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "scopeDesc.hh"
@@ -209,7 +209,6 @@ void ScopeDesc::doForNames(fint bci, nameDescStringDoFn fn) {
         IntList* es = mm->expression_stack(bci, true);
         IntList* bl = mm->blocks_upto(bci);
         for (fint i = 0; i < mm->length_codes(); i++) {
-          bool matches = false;
           if (es->nonEmpty() && es->first() == i) {
             es->removeHead();
             NameDesc* n_d = exprStackElem(i);

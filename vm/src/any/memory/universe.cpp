@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.18 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation  "universe.hh"
@@ -95,7 +95,7 @@ void universe::genesis()
   
   // create map_map
   objectAnnotationObj = smiOop_zero; // so mapMap.annotation is a vaild oop
-  map_map = create_mapMap();
+  map_map = mapMap::create_mapMap();
   
   // create annotation objects; works cause these have no slots
     slotAnnotationObj= create_slots((slotList*)NULL);
@@ -139,9 +139,9 @@ void universe::genesis()
   falseObj = create_slots(slots);
   
   // create maps
-  smi_map   = create_smiMap  (create_slots(slots));
-  float_map = create_floatMap(create_slots(slots));
-  mark_map  = create_markMap();
+  smi_map   = smiMap::create_smiMap  (create_slots(slots));
+  float_map = floatMap::create_floatMap(create_slots(slots));
+  mark_map  = markMap::create_markMap();
   
   // create block traits
   blockTraitsObj = create_slots(slots);
@@ -172,36 +172,36 @@ void universe::genesis()
   processObj = create_process(0);
 
   // create profiler object
-  profilerObj = create_profiler();
+  profilerObj = profilerMap::create_profiler();
 
   // create proxy objects
-  proxyObj    = create_proxy();
-  fctProxyObj = create_fctProxy();
+  proxyObj    = proxyMap::create_proxy();
+  fctProxyObj = fctProxyMap::create_fctProxy();
   
   // create assignment object
-  assignmentObj = create_assignment();
+  assignmentObj = assignmentMap::create_assignment();
 
   // create dummy error object
   errorObj= create_slots(slots);
 
   // create mirror objects and associated objects
-       assignmentMirrorObj = create_mirror(assignmentObj);
-            blockMirrorObj = create_mirror(create_block(blockMethod));
-       byteVectorMirrorObj = create_mirror(byteVectorObj);
-      outerMethodMirrorObj = create_mirror(outerMethod);
-      blockMethodMirrorObj = create_mirror(blockMethod);
-            floatMirrorObj = create_mirror(as_floatOop(0.0));
-        objVectorMirrorObj = create_mirror(objVectorObj);
-            slotsMirrorObj = create_mirror();
-              smiMirrorObj = create_mirror(as_smiOop(0));
-          processMirrorObj = create_mirror(processObj);
-  outerActivationMirrorObj = create_mirror(outerActivationObj);
-  blockActivationMirrorObj = create_mirror(blockActivationObj);
-           stringMirrorObj = create_mirror(stringObj);
-            proxyMirrorObj = create_mirror(proxyObj);
-         fctProxyMirrorObj = create_mirror(fctProxyObj);
-         profilerMirrorObj = create_mirror(profilerObj);
-           mirrorMirrorObj = create_mirror(slotsMirrorObj);
+       assignmentMirrorObj = mirrorMap::create_mirror(assignmentObj);
+            blockMirrorObj = mirrorMap::create_mirror(create_block(blockMethod));
+       byteVectorMirrorObj = mirrorMap::create_mirror(byteVectorObj);
+      outerMethodMirrorObj = mirrorMap::create_mirror(outerMethod);
+      blockMethodMirrorObj = mirrorMap::create_mirror(blockMethod);
+            floatMirrorObj = mirrorMap::create_mirror(as_floatOop(0.0));
+        objVectorMirrorObj = mirrorMap::create_mirror(objVectorObj);
+            slotsMirrorObj = mirrorMap::create_mirror();
+              smiMirrorObj = mirrorMap::create_mirror(as_smiOop(0));
+          processMirrorObj = mirrorMap::create_mirror(processObj);
+  outerActivationMirrorObj = mirrorMap::create_mirror(outerActivationObj);
+  blockActivationMirrorObj = mirrorMap::create_mirror(blockActivationObj);
+           stringMirrorObj = mirrorMap::create_mirror(stringObj);
+            proxyMirrorObj = mirrorMap::create_mirror(proxyObj);
+         fctProxyMirrorObj = mirrorMap::create_mirror(fctProxyObj);
+         profilerMirrorObj = mirrorMap::create_mirror(profilerObj);
+           mirrorMirrorObj = mirrorMap::create_mirror(slotsMirrorObj);
   
   // create systemObjects
   slots = new slotList(new_string("nil"), map_slotType, nilObj);
@@ -293,7 +293,7 @@ void universe::genesis()
                            new_string("\n"
    "\tTo begin using Self, you must read in the world of Self objects.\n"
    "\tTo read in the world, type:\n\n"
-   "\t\t'smallUI2.self' _RunScript\n\n"
+   "\t\t'worldBuilder.self' _RunScript\n\n"
    "\tWhen this process is complete, you will be at the Self prompt.\n"
    "\tAt the Self prompt, you can start the user interface by typing:\n\n"
    "\t\tdesktop open\n\n\n"),
@@ -396,9 +396,9 @@ void universe::read_versions_in_snapshot_header(FILE *file)
   // snapshot whose version is 10. -mabdelmalek 11/02
 
   bool can_read_snapshot_with_mismatched_version =
-        snapshot_version == 10  &&  VM_snapshot_version == 11
-    || (snapshot_version == 10 || snapshot_version == 11)  &&  VM_snapshot_version == 12
-    || (snapshot_version == 12) && VM_snapshot_version == 13;
+        (snapshot_version == 10  &&  VM_snapshot_version == 11)
+    || ((snapshot_version == 10 || snapshot_version == 11)  &&  VM_snapshot_version == 12)
+    || ((snapshot_version == 12) && VM_snapshot_version == 13);
     
   if (can_read_snapshot_with_mismatched_version)
   	warning6("\n\tThis snapshot was saved using a different version\n"
@@ -715,14 +715,14 @@ void universe::snapshot_failed() {
   fatal("no recovery; sorry");
 }
 
-bool universe::write_snapshot(char *fileName,
-                              char *compression_f,
-                              char *decompression_f,
+bool universe::write_snapshot(const char *fileName,
+                              const char *compression_f,
+                              const char *decompression_f,
                               spaceSizes *snap_sizes) {
 
   compressed_snapshot= compression_f && decompression_f;
 
-  char *fullFileName;
+  const char *fullFileName;
   snapFile= Files->openSnapshotFile(fileName, "w", &fullFileName);
   if (snapFile == NULL) return NULL;
 
@@ -822,7 +822,7 @@ bool universe::write_snapshot(char *fileName,
 // Get the value of the slotName from the map.
 // Return true if the slot is not present, or has a positive integer value,
 // otherwise return false.
-static bool get_space_size(slotsOop obj, char *slotName, smi &val)
+static bool get_space_size(slotsOop obj, const char *slotName, smi &val)
 {
   bool junk;
   oop *slotp= obj->get_slot_data_address_if_present(slotName, junk);

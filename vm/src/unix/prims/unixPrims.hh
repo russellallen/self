@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -8,7 +8,7 @@
 # endif
 
 
-extern char *UnixFile_seal;
+extern const char *UnixFile_seal;
 
 extern fd_set activeFDs;                      // active file descriptors
 

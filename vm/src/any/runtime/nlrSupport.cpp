@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "nlrSupport.hh"
@@ -119,9 +119,6 @@ volatile void NLRSupport::continue_NLR_into_compiled_Self(bool remove_patches, f
   // On SPARC, the return pointer is increased at a prim call site so a normal return
   // will skip in the inline cache.
   // All lookup routines are between Low- and HighReturnAddress.
-  
-  // On PPC, is_Self_IC flag ignored, and do not have to put lookup routines
-  // between Low and HighReturnAddress.
   bool is_Self_IC = is_Self_return_address(vm_addr);  
   ContinueNLRFromC(ret_addr, false, is_Self_IC);
   ShouldNotReachHere(); // should not return to here
@@ -173,7 +170,7 @@ void NLRSupport::non_lifo_abort(pc_t nonLifoAbortPC) {
   
   // was in compiled code
   // need to flush nmethod of dead block (next invocation could be ok)
-  nmethod* deadBlock = findNMethod(nonLifoAbortPC);
+  nmethod* deadBlock = nmethod::findNMethod(nonLifoAbortPC);
 
   // Initialize our return address so that it looks like our caller is C
   // (the "caller" really is the non-lifo block nmethod, but we can't display

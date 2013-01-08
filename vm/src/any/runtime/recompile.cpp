@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.20 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "recompile.hh"
@@ -56,8 +56,7 @@ void recompile_init() {
 }
 
 
-# if ( TARGET_ARCH ==  PPC_ARCH  \
-||     TARGET_ARCH == I386_ARCH )
+# if (TARGET_ARCH == I386_ARCH)
   oop DIRecompile_stub(...) { fatal("no DI recompilation"); return NULL; }
 # endif
 
@@ -213,11 +212,13 @@ class Recompilation: public AbstractRecompilation {
   char* newPC;                  // continuation PC after on-stack repl.
 
 # if TARGET_ARCH == SPARC_ARCH
-  // I'm in the process of porting the SIC to PPC.  I haven't got around
-  // to porting this file yet.  For now, I just enclose Sparc-specific
-  // code with "# if TARGET_ARCH == SPARCH_ARCH".
-  // Once the SIC port is completed, platform-dependent versions of this file
-  // will be created. -mabdelmalek 10/02
+  // This is now historic >>
+    // I'm in the process of porting the SIC to PPC.  I haven't got around
+    // to porting this file yet.  For now, I just enclose Sparc-specific
+    // code with "# if TARGET_ARCH == SPARCH_ARCH".
+    // Once the SIC port is completed, platform-dependent versions of this file
+    // will be created. -mabdelmalek 10/02
+  // <<
   sparc_sp* newFramePiece;      // part of frame with newNM = newNM block home
 # endif
 
@@ -242,7 +243,7 @@ class Recompilation: public AbstractRecompilation {
   void checkForBlockArgs();
   void tryRecompileCaller(nmethod* nm, fint limit, bool blocksAreOK = true);
   void getVScopes();
-  char* replaceOnStack();
+  const char* replaceOnStack();
   void replaceFrames(fint n, fint diff);
   bool pushFrame(frame* copy);
   void fillValues(frame* newFR);
@@ -926,7 +927,7 @@ static char* continueRecompile2(RecompBuf* buf, frame* last) {
   processes->convert();
   verifyAfterRecompile(cont, pc);
   
-  nmethod* continueNM = findNMethod(pc);
+  nmethod* continueNM = nmethod::findNMethod(pc);
   if (ScavengeAfterRecompilation) Memory->need_scavenge();
   assert(currentProcess->verifyFramePatches(), "patching bug");
   OutgoingArgsOfReturnTrapOrRecompileFrame = NULL;
@@ -958,8 +959,7 @@ static char* continueRecompile2(RecompBuf* buf, frame* last) {
     LOG_EVENT2("ContinueAfterRecompilation pc=%#lx sp=%#lx", pc, sp);
 #   if TARGET_ARCH == SPARC_ARCH
       ContinueAfterReturnTrap(pc, sp);
-#   elif TARGET_ARCH ==  PPC_ARCH  \
-     ||  TARGET_ARCH == I386_ARCH
+#   elif TARGET_ARCH == I386_ARCH
       fatal("xxx unimp mac, unimp intel: where is result?");
       // ContinueAfterReturnTrap(result, pc, sp);
 #   else
@@ -1011,7 +1011,7 @@ nmethod* also_Recompile( sendDesc* send_desc,
                        reCompilee, vmfr);
   recomp.doit(reCompilee->insts());
   recomp.finalize();
-  nmethod* nm= findNMethod(recomp.restartAddr); // why not just save nmethod? xxx miw
+  nmethod* nm= nmethod::findNMethod(recomp.restartAddr); // why not just save nmethod? xxx miw
   if (nm == reCompilee) { // xxx miw
     // may not have been optimized, e.g. because of DI; force optimization
     FrameChainer fc(Memory->code);
@@ -1136,7 +1136,7 @@ void Recompilation::doit(char* pc) {
     }
   }
   
-  char* msg = replaceOnStack();
+  const char* msg = replaceOnStack();
   if (msg == NULL) {
     // replaced on stack
     restartAddr= NULL;
@@ -1313,7 +1313,7 @@ void Recompilation::getVScopes() {
 }
 
 
-char* Recompilation::replaceOnStack() {
+const char* Recompilation::replaceOnStack() {
   // try to replace unoptimized nmethods on stack with new nmethod
   // return NULL if successful, error string if not
   if (!SICReplaceOnStack) return "!SICReplaceOnStack";
@@ -1702,8 +1702,8 @@ bool Recompilation::checkForActivationMirrors() {
              end->vfo_locals_of_home_frame());
 
   return  vfo->is_equal(start)
-    ||    vfo->is_above(start) && (vfo->is_below(end)
-    ||    vfo->is_equal(end));
+    ||    (vfo->is_above(start) && (vfo->is_below(end)
+    ||    vfo->is_equal(end)));
 }
 
 
@@ -1741,8 +1741,8 @@ void Recompilation::fillValues(frame* newFr) {
         // but be careful not to remap blocks whose homes still run the old
         // version of the nmethod
         frame* bs = blockOop(b)->scope(true);
-        if (   bs >= firstBS1 && bs <= lastBS1
-            || bs >= firstBS2 && bs <= lastBS2) {
+        if (   (bs >= firstBS1 && bs <= lastBS1)
+            || (bs >= firstBS2 && bs <= lastBS2)) {
           // block's home is either in removed frame or in copy of it
           blockOop(b)->remap(nd->block->map(), newFr);
         }
@@ -1792,7 +1792,6 @@ void Recompilation::handleRemappedBlocks() {
   oop rcvr;
   fint i;
   for ( i = n - 1; i >= 0; i--) {
-    // NB: for PPC this will have to be modified to avoid quadratic RegisterLocator allocation
     abstract_vframe* vf = (new_vframe(frames[i]))->top();
     rcvr = vf->receiver();
 # if TARGET_ARCH == SPARC_ARCH
@@ -1953,7 +1952,7 @@ char* MakeOld(sendDesc* sd, frame* callerFrame, oop receiver,
   //  where the caller needs recompilation, but makes no other calls but
   //  this one. So check the caller, too. -- dmu 5/96
 
-  nmethod* sendingNM = findNMethod(sd);
+  nmethod* sendingNM = nmethod::findNMethod(sd);
   if ( sendingNM->isToBeRecompiled()) {
     // Must make sender old, so it can be chosen as recompilee
     {

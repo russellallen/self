@@ -1,7 +1,7 @@
 # ifdef __i386__
 /* Sun-$Revision: 1.5 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -51,14 +51,12 @@ extern "C" { void  HandleUncommonTrap(); }
 //  use first_inst_addr
 
 
-  // Mac OS X is simpler.
-  // With GCC 3's strict type checking, it's more convenient to make first_inst_addr
-  // a macro, rather than a function. -mabdelmalek
-
+// With GCC 3's strict type checking, it's more convenient to make first_inst_addr
+// a macro, rather than a function. -mabdelmalek
 # define first_inst_addr(fnPtr)  ((char*) (fnPtr))
 
+// historic:
 // ppc interpreter needs help finding int arg on stack
-
 extern "C" void* save1Arg(void*);
 inline void* save1Arg(void*) {fatal("unimp intel"); return 0; }
 

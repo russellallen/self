@@ -6,7 +6,7 @@ Please do not change it manually. -- dmu 12/91  */\
 # endif
 # undef PRIMITIVE_GLUE_FLAG_CODE
 # define PRIMITIVE_GLUE_FLAG_CODE BlockGlueFlag gf(xlib_semaphore);
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.  */\
+/* Copyright 1992-2012 AUTHORS.  */\
 \
 /* See the LICENSE file for license information.  */\
 \
@@ -4357,7 +4357,7 @@ Please do not change it manually. -- dmu 12/91  */\
 # endif
 # undef PRIMITIVE_GLUE_FLAG_CODE
 # define PRIMITIVE_GLUE_FLAG_CODE BlockGlueFlag gf(xlib_semaphore);
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.  */\
+/* Copyright 1992-2012 AUTHORS.  */\
 \
 /* See the LICENSE file for license information.  */\
 \

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -66,7 +66,6 @@ class OSToSelfSignalMapper /* AllStatic */ {
   }
 };
 
-
 class SignalInterface /* AllStatic */ {
 
  // State:
@@ -87,7 +86,7 @@ class SignalInterface /* AllStatic */ {
   static void  unblock_self_signals() { _block_self_signals = false; }
   
   static bool  are_self_signals_blocked()  { return _block_self_signals; }
-  friend bool  BlockSignals_prim(bool); // Self-level primitive
+  static bool  BlockSignals_prim(bool); // Self-level primitive
   
   
   // Some platforms have a separate signal stack.

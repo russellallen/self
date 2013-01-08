@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.15 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "space.hh"
@@ -8,7 +8,7 @@
 
 # include "_space.cpp.incl"
 
-void space::init_space(char *n, int32 &size, char *bottom) {
+void space::init_space(const char *n, int32 &size, char *bottom) {
   size = roundTo(size, idealized_page_size);
   name = n;
   objs_bottom = objs_top = (oop*)bottom;
@@ -16,7 +16,7 @@ void space::init_space(char *n, int32 &size, char *bottom) {
 }
 
 
-space::space(char *n, char *bottom, char *top) {
+space::space(const char *n, char *bottom, char *top) {
   assert(is_idealized_page_multiple(int(bottom)) && is_idealized_page_multiple(int(top)),
          "invalid space boundaries");
   name = n;
@@ -25,7 +25,7 @@ space::space(char *n, char *bottom, char *top) {
 }
 
 
-space::space(char *n, FILE *snap) {
+space::space(const char *n, FILE *snap) {
   name = n;
 
   OS::FRead_swap(&old_objs_bottom, oopSize, snap);
@@ -40,7 +40,7 @@ space::space(char *n, FILE *snap) {
 }
 
 
-static void snap_error(char *msg) { fatal1("snapshot format error: %s", msg); }
+static void snap_error(const char *msg) { fatal1("snapshot format error: %s", msg); }
 
 void space::read_snapshot(FILE* snap, char *bottom, char *top)
 {
@@ -80,7 +80,7 @@ oop space::get_allocation_vector() {
 }
 
 
-newSpace::newSpace(char *nm, int32 &size, FILE *snap) : space(nm, snap) {
+newSpace::newSpace(const char *nm, int32 &size, FILE *snap) : space(nm, snap) {
   int32 snap_size = old_size_bytes();
   if (size < snap_size) {
     warning1("Default size for %s too small for snapshot; ignoring", nm);
@@ -120,7 +120,7 @@ bool newSpace::scavenge_contents() {
 }
 
 
-oldSpace::oldSpace(char *nm, int32 &size, caddr_t desiredAddress) : space(nm, size)
+oldSpace::oldSpace(const char *nm, int32 &size, caddr_t desiredAddress) : space(nm, size)
 {
   next_space= NULL;
   size++;  // +1 for the invariant
@@ -325,9 +325,9 @@ void oldSpace::switch_pointers_by_card(oop from, oop to)
   
   // first & middle cards:
   char *cp;
-  for (cp = next_zero_byte(start_byte, end_byte);
+  for (cp = rSet::next_zero_byte(start_byte, end_byte);
        cp < end_byte;
-       cp = next_zero_byte(cp + 1, end_byte)) {
+       cp = rSet::next_zero_byte(cp + 1, end_byte)) {
     assert(*cp == 0, "next_zero_byte failed");
     switch_pointers_in_region(from, to, rs->oop_for(cp), rs->oop_for(cp+1));
   }

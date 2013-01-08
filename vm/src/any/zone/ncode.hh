@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.12 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
    
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
@@ -8,11 +8,6 @@
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
-
-static OopNCode* shutUpCompiler_OopNCode = NULL;
-# define OOPNCODE_FROM(fieldName, p)                                          \
-      ((OopNCode*)((char*)p - (char*)&shutUpCompiler_OopNCode->fieldName))
-
 
 // NCodeBase is the superclass of all things containing native code.
 

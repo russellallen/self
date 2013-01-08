@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef SIC_COMPILER
@@ -172,7 +172,7 @@
 
   static bool cpCreateFailed = false;
 
-  CPInfo* new_CPInfo(Node* n) {
+  CPInfo* CPInfo::new_CPInfo(Node* n) {
     CPInfo* cpi = new CPInfo(n);
     if (cpCreateFailed) {
       cpCreateFailed = false;

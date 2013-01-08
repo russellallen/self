@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef SIC_COMPILER
@@ -61,8 +61,8 @@
   }
 
   bool ConstantSExpr::equals(SExpr* other) {
-    return other->isConstantSExpr() && other->constant() == constant() ||
-           other->isMapSExpr() && other->myMapOop() == myMapOop();
+    return (other->isConstantSExpr() && other->constant() == constant()) ||
+           (other->isMapSExpr() && other->myMapOop() == myMapOop());
   }
 
   const fint MergeSExpr::SplittableBit        = 2;
@@ -193,7 +193,7 @@
     if (!e->node()) setSplittable(false);
     for (fint i = 0; i < exprs->length(); i++) {
       SExpr* e1 = exprs->nth(i);
-      if (e->hasMap() && e1->hasMap() && e->myMapOop() == e1->myMapOop() ||
+      if ((e->hasMap() && e1->hasMap() && e->myMapOop() == e1->myMapOop()) ||
           e->equals(e1)) {
         // an equivalent expression is already in our list
         // if unsplittable we don't need to do anything except
@@ -444,7 +444,7 @@
     Unused(mustBeLegal);
     return newValueName(constant()); }
 
-  void SExpr::print_expr(char* type) {
+  void SExpr::print_expr(const char* type) {
     lprintf(" (Node %#lx)", (unsigned long)node());
     if (next) lprintf(" (next %#lx)", (unsigned long)next);
     lprintf("    p *(%s*)%#lx\n", type, (unsigned long)this);
@@ -511,7 +511,7 @@
   }
   
   
-  BranchBCTargetStack* new_BranchBCTargetStack(
+  BranchBCTargetStack* BranchBCTargetStack::new_BranchBCTargetStack(
               SCodeScope* s,
               bool  isTargetOfBackwardsBranch,
               int32 len,

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.12 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -53,7 +53,7 @@ enum ProcessState {
 typedef void (*process_p)();
 
 class Process: public CHeapObj {
-  char* suspendedSP;    // process state - saved in runtime_(sparc_mac_ppc).s
+  char* suspendedSP;    // process state
   char* suspendedPC;
   
   bool pcWasSet; // Intel needs to know this
@@ -91,8 +91,8 @@ class Process: public CHeapObj {
 
   Profiler* profiler;   // profiler for this process.
   
-  friend void startCurrentProcess();
-  friend void interruptCheck();
+  static void startCurrentProcess();
+  static void interruptCheck();
   friend class Processes;
   friend class processOopClass;
   friend class vframeMirror;

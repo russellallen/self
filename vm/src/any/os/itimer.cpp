@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.12 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "itimer.hh"
@@ -14,11 +14,7 @@ IntervalTimer* IntervalTimer::_Real_timer = NULL;
 IntervalTimer* IntervalTimer::_CPU_timer  = NULL;
 
 bool IntervalTimer::dont_use_real_timer = false;
-# ifdef ROSETTA
-  bool IntervalTimer::dont_use_any_timer  = true;
-# else
-  bool IntervalTimer::dont_use_any_timer  = false;
-# endif
+bool IntervalTimer::dont_use_any_timer  = false;
 bool IntervalTimer::use_real_instead_of_cpu_timer = false;
 
 // Changed by -o argument; see processArguments() in shell.cpp

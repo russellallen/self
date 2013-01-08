@@ -1,12 +1,11 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
-
 
 class processMap: public slotsMapDeps {
  public:
@@ -17,7 +16,7 @@ class processMap: public slotsMapDeps {
 
   
   // creation operation
-  friend processOop create_process(Process* process);
+  static processOop create_process(Process* process);
   
   oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL);
   bool can_inline_clone() { return false; }
@@ -44,3 +43,7 @@ class processMap: public slotsMapDeps {
   // profiler operation
   void dummy_initialize(oop obj, oop filler);
 };
+
+static inline processOop create_process(Process* process) {
+  return processMap::create_process(process);
+}

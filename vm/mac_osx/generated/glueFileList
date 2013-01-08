@@ -1,6 +1,6 @@
  ../../../vm/src/any/prims/glueDefs.cpp 
  ../../../vm/mac_osx/generated/incls/_glueDefs.cpp.incl 
- ../../../vm/mac_osx/generated/incls/_precompiled.h 
+ ../../../vm/mac_osx/generated/incls/_precompiled.hh 
  ../../../vm/src/any/runtime/config.hh 
  ../../../vm/mac_osx/generated/incls/_config_pd.hh.incl 
  ../../../vm/src/unix/runtime/config_unix.hh 
@@ -25,11 +25,9 @@
  ../../../vm/src/any/parser/kinds.hh 
  ../../../vm/src/any/objects/oop.hh ../../../vm/src/any/asm/regs.hh 
  ../../../vm/mac_osx/generated/incls/_regs_pd.hh.incl 
- ../../../vm/src/ppc/asm/regs_ppc.hh 
  ../../../vm/src/any/fast_compiler/blist.hh 
  ../../../vm/src/any/runtime/runtime.hh 
  ../../../vm/mac_osx/generated/incls/_runtime_pd.hh.incl 
- ../../../vm/src/ppc/runtime/runtime_ppc.hh 
  ../../../vm/src/any/runtime/stack.hh 
  ../../../vm/src/any/runtime/process.hh 
  ../../../vm/src/any/memory/rSet.hh 
@@ -69,7 +67,6 @@
  ../../../vm/src/unix/os/signalBlocker_unix.hh 
  ../../../vm/src/any/runtime/interruptedCtx.hh 
  ../../../vm/mac_osx/generated/incls/_interruptedCtx_pd.hh.incl 
- ../../../vm/src/ppc/runtime/interruptedCtx_ppc.hh 
  ../../../vm/src/any/objects/slotsMap.hh 
  ../../../vm/src/any/objects/objVectorOop.hh 
  ../../../vm/src/any/objects/foreignOop.hh 

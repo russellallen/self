@@ -1,13 +1,13 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "map.hh"
 
 # include "_map.cpp.incl" 
 
-Map* create_map(fint size, slotList *slots, Map* mm, oop *obj) {
+Map* Map::create_map(fint size, slotList *slots, Map* mm, oop *obj) {
   fint slotCount= slots ? slots->length() : 0;
   mapOop mo = as_mapOop(
     Memory->alloc_objs(   enclosed_map_offset + (size + slotCount * sizeof(slotDesc))/oopSize)  );
@@ -63,7 +63,7 @@ fint Map::find_slot_index_binary_for(stringOop name, bool &found) {
     fint i= (low + high) / 2;
     stringOop sin= s[i].name;
     if (sin == name
-    ||  sin == shortName && s[i].is_obj_slot()) {
+    ||  (sin == shortName && s[i].is_obj_slot())) {
       found= true;
       return i;
     }
@@ -88,7 +88,7 @@ inline slotDesc* Map::find_slot_linear(stringOop name) {
   if (findSlotCache.checkFor1ArgKW(name, shortName)) {
     FOR_EACH_SLOTDESC(this, slot) {
       if (slot->name == name
-          || slot->is_obj_slot() && slot->name == shortName)
+          || (slot->is_obj_slot() && slot->name == shortName))
         return slot;
     }
   } else {
@@ -106,7 +106,7 @@ fint Map::find_slot_index_linear_for(stringOop name, bool &found) {
   if (findSlotCache.checkFor1ArgKW(name, shortName)) {
     FOR_EACH_SLOTDESC_N(this, slot, i) {
       if (slot->name == name
-          || slot->is_obj_slot() && slot->name == shortName) {
+          || (slot->is_obj_slot() && slot->name == shortName)) {
         found= true;
         return i;
       }

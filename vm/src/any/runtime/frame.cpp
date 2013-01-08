@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.19 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "frame.hh"
@@ -139,7 +139,7 @@ interpreter* frame::get_interpreter_of_block_scope() {
 
 
 interpreter* frame::get_interpreter() {
-  //  on sparc uses sender, on ppc, same frame
+  //  on sparc uses sender
   frame* f= block_scope_of_home_frame();
   if (f == NULL)
     return NULL;
@@ -179,16 +179,16 @@ nmethod* frame::code() {
   // The subtraction below does not seem to be needed to me.
   // But We need to work on Klein, so I'm not messing with it. -- dmu 2/04
   // Note, this also occurs in Pc::my_nmethod.
-  nmethod* r = nmethodContaining(return_addr() - sizeof(class nmethod), NULL);
+  nmethod* r = nmethod::nmethodContaining(return_addr() - sizeof(class nmethod), NULL);
   # if GENERATE_DEBUGGING_AIDS
     if (CheckAssertions) {
       char* ra = return_addr();
       nmethod* nm1 = NULL;
            if   (r->contains(ra))  ;
-      else if ((nm1 = nmethodContaining(ra, NULL))->contains(ra))
+      else if ((nm1 = nmethod::nmethodContaining(ra, NULL))->contains(ra))
               fatal("should not have subtracted");
       else    fatal3("value 0x%x is not in any nmethod, either 0x%x, or 0x%x",
-                     ra, r, nmethodContaining(ra, NULL));
+                     ra, r, nmethod::nmethodContaining(ra, NULL));
     }
   # endif
   return r;
@@ -283,9 +283,7 @@ void frame::patch_compiled_self_frame(returnTrapHandlerFn new_fn) {
 // We will need the outgoing arguments of the patched frame.
 // On architectures like the PPC, we need to get this from the callee frame
 // BEFORE it returns. So get them now and save in a place findable from this frame.
-// This counts on a trampoline when going into primitives that can walk the stack,
-// which only currently works for PPC.
-
+// This counts on a trampoline when going into primitives that can walk the stack
 void frame::save_outgoing_arguments() {
   if (!SaveOutgoingArgumentsOfPatchedFrames) {
     return;
@@ -643,7 +641,7 @@ bool return_trap_was_just_for_vframeOops(char* selfPC, frame* convertFrame) {
   return !currentProcess->isKillingOrDeoptimizing()
       && !currentProcess->isUncommon()
 #     if defined(FAST_COMPILER) || defined(SIC_COMPILER)
-      && !(selfPC && findNMethod(selfPC)->isInvalid())
+      && !(selfPC && nmethod::findNMethod(selfPC)->isInvalid())
 #     endif
       && !currentProcess->isSingleStepping()
       && !currentProcess->isStopping()
@@ -824,6 +822,7 @@ frame* frame::find_last_frame_to_copy(fint nsenders) {
   // init to sender, because even if nsenders is zero,
   //  need my sender to copy any arguments to me beyond i5 -- dmu
   //
+  // historic:
   // Also, on PPC need my sender to copy any incoming arguments
   // (which are saved in sender's frame). -- dmu 6/99
   frame* last_frame_to_copy = sender();

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.32 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 /* There used to be a TARGET_OS_VERSION == MACOSX_VERSION check instead of __APPLE__.
@@ -33,7 +33,7 @@
   bool OS::is_directed_allocation_supported() { return true; } // should return desiredAddress
 
   char* OS::allocate_heap_aligned(caddr_t desiredAddress,
-                                  int32 size, int32 align, char* name,
+                                  int32 size, int32 align, const char* name,
                                   bool mustAllocate) {
       if ( desiredAddress != NULL
       &&   desiredAddress ==
@@ -57,7 +57,7 @@
   bool OS::is_directed_allocation_supported() { return false; } 
 
   char* OS::allocate_heap_aligned(caddr_t ,
-                                  int32 size, int32 align, char* name,
+                                  int32 size, int32 align, const char* name,
                                   bool mustAllocate) {
     // fake it
     char* b = (char*)selfs_malloc(size + align - 1);
@@ -133,7 +133,7 @@
   # endif // EXPERIMENT_WITH_APPLE_EVENTS
 
 
-char* OS::get_user_directory(char* user) {
+char* OS::get_user_directory(const char* user) {
   struct passwd* p = getpwnam(user);
   return  p == NULL  ?  NULL  :  p->pw_dir;
 }
@@ -279,7 +279,7 @@ bool OS::is_non_unix_path(const char* s) {
 
 # if TARGET_OS_VERSION != MACOSX_VERSION
 
-bool OS::setup_snapshot_to_run(char* fileName) {
+bool OS::setup_snapshot_to_run(const char* fileName) {
   // make executable
   struct stat stb;
   if (stat(fileName, &stb)) return false;
@@ -294,41 +294,51 @@ bool OS::setup_snapshot_to_run(char* fileName) {
 
 # else
 
-/* The following two functions were written by Kristen McIntyre */
-static bool path_to_fsspec(char *path, FSSpec *fspec)
+
+
+
+/* The following two functions were written by Kristen McIntyre, 
+ changed by Tobias Pape because of deprecation warnings. */
+static bool path_to_fsref(const char *path, FSRef *fref)
 {
-  FSRef fref;
-  
-  if (FSPathMakeRef((const UInt8 *)path, &fref, NULL) == noErr)
-    if (FSGetCatalogInfo(&fref, kFSCatInfoNone, NULL, NULL, fspec, NULL) == noErr)
-      return true;
-  return false;
+    if (FSPathMakeRef((UInt8*) path, fref, NULL) == noErr)
+        return true;
+    return false;
 }
 
-static bool set_type_creator(char *path, const char *type, const char *creator)
+static bool set_type_creator(const char *path, const char *type, const char *creator)
 {
-  FInfo finfo;
-  FSSpec fss;
+  FileInfo* finfo;
+  FSRef fsr;
+  FSCatalogInfo cinfo;
+    
+  if (path_to_fsref(path, &fsr) == false) {
+    return false;
+  }
+  if (FSGetCatalogInfo(&fsr, kFSCatInfoFinderInfo | kFSCatInfoFinderInfo, &cinfo, NULL, NULL, NULL) != noErr) {
+    return false;
+  }
   
-  if (path_to_fsspec(path, &fss) == false)
-    return false;
-  if (FSpGetFInfo(&fss, &finfo) != noErr)
-    return false;
+  finfo = (FileInfo*) &cinfo.finderInfo;
 
-  finfo.fdType = 0;
-  if (type != NULL)
-      for (int i = 0; i < 4; i++)
-        finfo.fdType |= ((unsigned char)type[i]) << ((3 - i) * 8);
+  finfo->fileType = 0;
+  if (type != NULL) {
+    for (int i = 0; i < 4; i++) {
+        finfo->fileType |= ((unsigned char)type[i]) << ((3 - i) * 8); 
+    }
+  }
 
-  finfo.fdCreator = 0;
-  if (creator != NULL)
-     for (int i = 0; i < 4; i++)
-       finfo.fdCreator |= (unsigned char)creator[i] << ((3 - i) * 8);
+  finfo->fileCreator = 0;
+  if (creator != NULL) {
+    for (int i = 0; i < 4; i++) {
+       finfo->fileCreator |= (unsigned char)creator[i] << ((3 - i) * 8);
+    }
+  }
 
-  return FSpSetFInfo(&fss, &finfo) == noErr;
+  return FSSetCatalogInfo(&fsr, kFSCatInfoFinderInfo, &cinfo) == noErr;
 }
 
-bool OS::setup_snapshot_to_run(char* fileName) {
+bool OS::setup_snapshot_to_run(const char* fileName) {
   return set_type_creator(fileName, "Snap", "Self");
 }
 
@@ -351,7 +361,7 @@ void OS::set_log_buf(FILE* f, char* buf, int bs) {
 }
 
 
-char* OS::log_file_name() {
+const char* OS::log_file_name() {
   static char fname[100];
   sprintf(fname, "/tmp/Self.vmlog.%ld", long(getpid()));
   assert(strlen(fname) < sizeof(fname), "");
@@ -673,14 +683,14 @@ char* OS::get_host_name() {
 }
 
 
-char* OS::get_user_name() {
+const char* OS::get_user_name() {
   static struct passwd* p = getpwuid (getuid());
-  char *username= p ? p->pw_name : (char*)"the user with no name";
+  const char *username= p ? p->pw_name : "the user with no name";
   return username;
 };
 
 
-void OS::convert_unix_filename(char* src, char* dst) {
+void OS::convert_unix_filename(const char* src, char* dst) {
   if (strlen(src) >= MAXPATHLEN)
     fatal("path too long");
   strcpy( dst, src);
@@ -690,7 +700,7 @@ void OS::convert_unix_filename(char* src, char* dst) {
 int OS::zero_fd;
 
 
-FILE*  OS::start_compressing_snapshot(char* compression_f, char* fullFileName, SignalBlocker*& sb) {
+FILE*  OS::start_compressing_snapshot(const char* compression_f, const char* fullFileName, SignalBlocker*& sb) {
   char *cmd= new char[strlen(compression_f) + 4 +
                       strlen(fullFileName)  + 1];
   strcpy(cmd, compression_f);
@@ -717,7 +727,7 @@ extern "C" {
 
 // Spawn off a decompression program reading from snap at the current offset
 // and return a stream reading from the decompression program.
-FILE* OS::start_decompressing_snapshot(FILE *snap, char* decompression_filter)
+FILE* OS::start_decompressing_snapshot(FILE *snap, const char* decompression_filter)
 {
   // The trick here is get the decompression program started in the
   // right place in the file...were it not for this, we could just
@@ -772,7 +782,7 @@ void OS::snapshot_failed(FILE* snapFile, bool compressed_snapshot, SignalBlocker
     fclose(snapFile);
 }
 
-char* OS::get_manufacturer_name() { return "sun"; }
+const char* OS::get_manufacturer_name() { return "sun"; }
 
 void OS::print_memory() {
   Indent++;
@@ -807,7 +817,7 @@ const char* OS::mode_for_binary(const char* m)  { return m; }
 # endif
 
   
-int     OS::getopt(int argc,  char* const* argv,  char* optstring) {
+int     OS::getopt(int argc,  char* const* argv,  const char* optstring) {
   ::optarg = optarg;
   ::optopt = optopt;
   ::opterr = opterr;
@@ -840,6 +850,6 @@ extern "C" {
 # endif
 
 
-int OS::make_statically_allocated_memory_executable(caddr_t addr, size_t len) {
+int OS::make_memory_executable(void* addr, size_t len) {
   return mprotect(addr, len, PROT_READ|PROT_WRITE|PROT_EXEC);
 }

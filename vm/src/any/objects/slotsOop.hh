@@ -1,23 +1,22 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
 
-
 class slotsOopClass: public oopsOopClass {
  public:
   // constructor
-  friend slotsOop as_slotsOop(void* p) { return (slotsOop) as_oopsOop(p); }
+  static slotsOop as_slotsOop(void* p) { return (slotsOop) as_oopsOop(p); }
   
   // accessors
   slotsOopClass* addr() { return (slotsOopClass*) oopsOopClass::addr(); }
   
   // creation operation
-  friend slotsOop create_slots(fint size);
+  static slotsOop create_slots(fint size);
   
   // cloning operation (just putting a nice return type on the fn's)
   slotsOop clone(bool mustAllocate= true) {
@@ -44,6 +43,16 @@ class slotsOopClass: public oopsOopClass {
   oop copy_remove_slot_prim(stringOop name, void *FH);
   oop create_block_prim();
 };
+
+static inline slotsOop as_slotsOop(void* p) {
+  return slotsOopClass::as_slotsOop(p);
+}
+
+static inline slotsOop create_slots(fint size) {
+  return slotsOopClass::create_slots(size);
+}
+
+
 
 # define EMPTY_SLOTS_OOP_SIZE   (sizeof(slotsOopClass)/oopSize)
 

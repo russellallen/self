@@ -1,11 +1,12 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
+
 
 
 class assignmentMap: public codeLikeSlotsMap {
@@ -28,7 +29,7 @@ class assignmentMap: public codeLikeSlotsMap {
                 oop filler= NULL);
   
   // creation operation
-  friend assignmentOop create_assignment();
+  static assignmentOop create_assignment();
   
   // mirror operations
   mirrorOop mirror_proto() { return Memory->assignmentMirrorObj; }

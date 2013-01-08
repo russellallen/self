@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "errorCodes.hh"
@@ -38,7 +38,7 @@ markOop ErrorCodes::os_prim_error(fint error) {
 # define      EXTRACT_MESSAGE_ARGUMENT(template,s1,s2,s3)  template(s3)
 # define PASS_THROUGH_MESSAGE_ARGUMENT(s)  s ,
 
-static char* errorMessages[] = {
+static  const char* errorMessages[] = {
   ErrorStrings(PASS_THROUGH_MESSAGE_ARGUMENT, EXTRACT_MESSAGE_ARGUMENT)
 };
 # undef      EXTRACT_MESSAGE_ARGUMENT

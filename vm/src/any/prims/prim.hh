@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -55,10 +55,9 @@ enum primExprType {
 
 class PrimDesc {
  public:
-  char* _name;              // Name of primitive, does not include initial
+  const char* _name;        // Name of primitive, does not include initial
                             // "_".
   fntype _fn;               // Pointer to function implementing primitive.
-                            // (A transition vector on the PPC mac).
   primType _type;           // Specifies optimizations that can be applied
                             // (see also def. of primType).
   primExprType _etype;      // Return type of prim. (see def. of primExprType).
@@ -78,9 +77,9 @@ class PrimDesc {
                             // If true, then canScavenge must also be true!
   bool _canAbortProcess;    // Set true if prim. may cause a process abort.
                             // If true, then canScavenge must also be true!
-  char* _docString;         // documentation string
+  const char* _docString;    // documentation string
 // public:
-  char*         name() { return _name; }
+  const char*   name() { return _name; }
   primType      type() { return _type; }
   fntype        fn() { return _fn; }
   primExprType  etype()                 { return _etype; }
@@ -91,7 +90,7 @@ class PrimDesc {
   bool          canWalkStack()          { return _canWalkStack; }
   bool          canAbortProcess()       { return _canAbortProcess; }
   bool          needsNLRCode()          { return _canAbortProcess; }
-  char*         docString()             { return _docString; }
+  const char*   docString()             { return _docString; }
   
   fint          arg_count();  // excludes receiver
   inline void   verify();

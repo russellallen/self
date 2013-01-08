@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 
@@ -43,10 +43,6 @@ PrimDesc* CodeGen::blockClone() {
     blkClone = getPrimDescOfSelector(VMString[BLOCK_CLONE], true);
   return blkClone;
 }
-
-# if COMPILER == MWERKS_COMPILER
-# pragma dont_inline on // needed to avoid bug in CW 5.0, dmu: 9/99
-# endif
 
 
 Location CodeGen::loadPath(Location dest,

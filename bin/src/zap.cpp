@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 // zap sends signal SIGKILL to all processes owned by you 
@@ -19,7 +19,7 @@
 # define gethostname(h,l) sysinfo(SI_HOSTNAME,(h),(l)) 
 #endif
 
-char *ps = "ps -gx";
+const char *ps = "ps -gx";
 
 char hostname[MAXHOSTNAMELEN];
 
@@ -58,7 +58,11 @@ main(int argc, char **argv) {
     exit(1);
   }
 
-  fgets(buf, sizeof buf, fin);
+  if (fgets(buf, sizeof buf, fin) == NULL) {
+    fprintf( stderr, "cant read from process\n" );
+    exit(1);
+  }
+
   for ( i=0; buf[i] != 'C' && buf[i] != '\0'; i++);
   if (buf[i] == 'C')
     text_pos = i;

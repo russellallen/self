@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "miscPrims.hh"
@@ -468,15 +468,15 @@ oop primitive_list_prim(void *FH) {
 }
 
 // Returns the documentation for a primitive
-oop primitive_documentation(char *prim_name) {
+oop primitive_documentation(const char *prim_name) {
   if (!str_is_prim_name(prim_name)) return NULL;
-  char* name = &prim_name[1];
+  const char* name = &prim_name[1];
   PrimDesc* e;
   for (PrimDesc** ft = primDescTable(); *ft; ft++)
     for (e = *ft; e->name(); e++)
       if (e->type() != InternalPrimitive)
         if (strcmp(e->name(), name) == 0) {
-          char* doc = e->docString();
+          const char* doc = e->docString();
           return new_string(doc ? doc : "");
         }
   return NULL;

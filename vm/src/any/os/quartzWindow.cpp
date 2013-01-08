@@ -17,7 +17,9 @@
 
   #  include <Carbon/Carbon.h>
   #  include <ApplicationServices/ApplicationServices.h>
-  #  include <CoreGraphics/CoreGraphics.h>
+  
+  // implicit by the above. 
+  // #  include <CoreGraphics/CoreGraphics.h>
   
   // remove Carbon macros to avoid name collisions
   #  undef assert
@@ -101,12 +103,22 @@ bool QuartzWindow::open( const char* /* display_name  unimp mac */,
                            int min_w, int max_w, int min_h, int max_h, // -1 for don't care
                            const char* window_name,  const char* /*icon_name*/,
                            const char* font_name,    int   font_size ) {
-  if ( !open( kDocumentWindowClass, 
-              kWindowStandardDocumentAttributes
-            | kWindowInWindowMenuAttribute
-            | kWindowAsyncDragAttribute
-            | kWindowLiveResizeAttribute
-            | kWindowStandardHandlerAttribute, // cannot get even mouse events with this
+
+  int options[8] = {
+    kHIWindowBitCloseBox        ,
+    kHIWindowBitZoomBox         ,
+    kHIWindowBitCollapseBox     ,
+    kHIWindowBitResizable       ,
+    // kHIWindowBitToolbarButton     ,
+    // kHIWindowBitUnifiedTitleAndToolbar,
+    // kHIWindowBitTextured         ,
+    kHIWindowBitRoundBottomBarCorners,
+    // ?kHIWindowBitCompositing,
+    kHIWindowBitStandardHandler,
+    0
+  };
+
+  if ( !open( kDocumentWindowClass, options,
              x, y, x + w, y + h, window_name, font_name, font_size))
     return false;
   if ( !change_size_hints(min_w, max_w, min_h, max_h)) { close();  return false; }
@@ -117,8 +129,8 @@ bool QuartzWindow::open( const char* /* display_name  unimp mac */,
 
 
 bool QuartzWindow::open( 
-                    uint32 /* WindowClass */ wc,
-                    uint32 /* WindowAttributes */  attrs,
+                    uint32  /* WindowClass */ wc,
+                    int*    /* WindowAttributes  */  attrs,
                     int   left,
                     int   top, 
                     int   right, 
@@ -126,10 +138,9 @@ bool QuartzWindow::open(
                     const char* title,
                     const char* font_name,
                     int   font_size ) {
-  Rect bounds; SetRect(&bounds, left, top, right, bottom);
-  // CGRect bounds = CGRectMake(left, top, right, bottom);
+  HIRect bounds = (HIRect) CGRectMake(left, top, right, bottom);
   
-  OSStatus err = CreateNewWindow( wc, attrs, &bounds, &_quartz_win);
+  OSStatus err =  HIWindowCreate(wc, attrs, NULL, kHICoordSpace72DPIGlobal, &bounds, &_quartz_win);
   if (err != noErr)
     return false;
   SetWRefCon(my_window(), (int32)this);
@@ -233,21 +244,18 @@ void QuartzWindow::close() {
 
 
 static CGDirectDisplayID screen(void* w) {
-  RgnHandle rgn = NewRgn();
-  OSStatus err = GetWindowRegion( (WindowRef)w, kWindowGlobalPortRgn, rgn);
+  HIRect bounds;
+  OSStatus err = HIWindowGetBounds((WindowRef)w, kWindowGlobalPortRgn, 
+                                   kHICoordSpace72DPIGlobal, &bounds);
   if (err) {
     lprintf("GetWindowRegion failed: %d\n", err);
-    DisposeRgn(rgn);
     return CGMainDisplayID();
   }
-  Rect r;
-  GetRegionBounds(rgn, &r);
-  DisposeRgn(rgn);
   CGDirectDisplayID display;
-  CGDisplayCount c;
-  CGDisplayErr e = CGGetDisplaysWithPoint( CGPointMake( r.left, r.top ), 1,
-                             &display, &c);
-  return c ? display : CGMainDisplayID();
+  CGDisplayCount displayCount;
+  CGDisplayErr e = CGGetDisplaysWithRect(bounds, 1, 
+                                         &display, &displayCount);
+  return (displayCount && !e) ? display : CGMainDisplayID();
 }
 
 
@@ -309,14 +317,18 @@ int QuartzWindow::inset_bottom() {
 
 
 void QuartzWindow::get_window_region_rect(int wh, Rect* r) {
-  RgnHandle wrh = NewRgn();
-  OSStatus err = GetWindowRegion(my_window(), (WindowRegionCode)wh, wrh);
-  if (err != noErr) {
+  HIRect bounds;
+  OSStatus err = HIWindowGetBounds(my_window(), wh, 
+                                   kHICoordSpace72DPIGlobal, &bounds);
+  if (err) {
+    lprintf("HIWindowGetBounds failed: %d\n", err);
     r->left = r->top = 0; r->bottom = r->right = 1;
+  } else {
+    r->left   = (short) CGRectGetMinX(bounds);
+    r->top    = (short) CGRectGetMinY(bounds);
+    r->bottom = (short) CGRectGetMaxY(bounds);
+    r->right  = (short) CGRectGetMaxX(bounds);
   }
-  else
-    GetRegionBounds(wrh, r);
-  DisposeRgn(wrh);
 }
 
 
@@ -536,28 +548,93 @@ void QuartzWindow::warp_pointer(int x, int y) {
 }
 
 
+#define kUTTypeOldMacText CFSTR("com.apple.traditional-mac-plain-text")
+
+
 oop QuartzWindow::get_scrap_text() {
-  // Listing 2-4(MTb), Inside mac: Mor Mac Toolbox pg 2-21
-  ScrapRef s;
-  if (GetCurrentScrap(&s) == noErr) {
-    long size_of_text_data = 0;
-    if ( GetScrapFlavorSize(s, 'TEXT', &size_of_text_data) == noErr ) {
-      byteVectorOop r = Memory->byteVectorObj->cloneSize(size_of_text_data, CANFAIL);
-      if (!r->is_mark()
-      &&  GetScrapFlavorData(s, 'TEXT', &size_of_text_data, r->bytes()) == noErr)
+  // See Pasteboard Manager Programming guide
+  PasteboardRef       clipboard;
+  PasteboardSyncFlags syncFlags;
+  CFDataRef           textData = NULL;
+  ItemCount           itemCount;
+  
+  if (PasteboardCreate(kPasteboardClipboard, &clipboard) != noErr) 
+    goto BailOut;
+  
+  if (PasteboardSynchronize(clipboard) & kPasteboardModified)
+    goto BailOut;
+
+  if (PasteboardGetItemCount(clipboard, &itemCount) != noErr) 
+    goto BailOut;
+  
+  for(UInt32 itemIndex = 1; itemIndex <= itemCount; itemIndex++) {
+    PasteboardItemID itemID = 0;
+    CFArrayRef       flavorTypeArray = NULL;
+    CFIndex          flavorCount = 0;
+
+    if (PasteboardGetItemIdentifier(clipboard, itemIndex, &itemID) != noErr)
+      continue;
+  
+    if (PasteboardCopyItemFlavors(clipboard, itemID, &flavorTypeArray) != noErr)
+      continue;
+
+    flavorCount = CFArrayGetCount(flavorTypeArray);
+     
+    for(CFIndex flavorIndex = 0; flavorIndex < flavorCount; flavorIndex++) {
+      CFStringRef flavorType;
+      CFDataRef   flavorData;
+      CFIndex     flavorDataSize;
+      char        flavorText[256];
+      
+      
+      flavorType = (CFStringRef)CFArrayGetValueAtIndex( flavorTypeArray,// 6
+                                                       flavorIndex );
+      
+      if (UTTypeConformsTo(flavorType, kUTTypeOldMacText)) {
+        
+        if (PasteboardCopyItemFlavorData(clipboard, itemID, flavorType, 
+                                         &flavorData) != noErr)
+          continue;
+          
+        flavorDataSize = CFDataGetLength(flavorData);
+
+        // allocate new string.
+        byteVectorOop r = Memory->byteVectorObj->cloneSize(flavorDataSize, CANFAIL);
+        if (r->is_mark()) {
+          CFRelease (flavorData);
+          CFRelease (flavorTypeArray);
+          goto BailOut;          
+        }
+        // copy over
+        CFDataGetBytes(flavorData, CFRangeMake(0,CFDataGetLength(flavorData)),
+                       (UInt8 *)r->bytes());          
+        CFRelease(flavorData);
+        CFRelease(flavorTypeArray);
         return r;
+      } // else try next      
     }
-  }
+    CFRelease(flavorTypeArray);
+  }  
+  
+BailOut:
+  
   return new_string("", 0);
 }
 
-
 int QuartzWindow::put_scrap_text(const char* s, int len) {
-  // Listting 2-1(MTb) Writing data to the scrap, Inside Mac: More Mac Toolbox, pg 2-16
-  OSStatus      err = ClearCurrentScrap();   if (err != noErr)  return err;
-  ScrapRef sc;  err = GetCurrentScrap(&sc);  if (err != noErr)  return err;
+  // See Pasteboard Manager Programming guide
+  PasteboardRef clipboard;
+  OSStatus      err;
+  CFDataRef     textData = CFDataCreate(kCFAllocatorDefault, 
+                                        (const UInt8*)s, len);
+  if (textData == NULL) return -1;
+  if ((err = PasteboardCreate(kPasteboardClipboard, &clipboard)) != noErr) return err;
+  if ((err = PasteboardClear(clipboard)) != noErr) return err;
+
+  return PasteboardPutItemFlavor(clipboard, (PasteboardItemID)s, 
+                                 kUTTypeOldMacText, textData, 
+                                 kPasteboardFlavorNoFlags);
   
-  return PutScrapFlavor( sc, 'TEXT', kScrapFlavorMaskNone, len, s );
 }
 
 // Convert WindowPtr to QuartzWindow by using refcon

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.5 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # include "_glueDefs.cpp.incl"
@@ -12,9 +12,9 @@ VERIFYCHECKSUM
 
 // also declared in unixPrims.h
 // (but unixPrims.h cannot be included here without including other files)
-extern char *UnixFile_seal;
+extern const char *UnixFile_seal;
 
-char* stat_type_seal = "stat_type_seal";
+const char* stat_type_seal = "stat_type_seal";
 
 typedef struct stat stat_type;
 

@@ -1,12 +1,12 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "mirrorOop.hh"
 # include "_mirrorOop.cpp.incl"
 
-oop as_mirror_prim(oop obj) {
+oop mirrorOopClass::as_mirror_prim(oop obj) {
   return obj->as_mirror();
 }
 

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.17 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "sicScope.hh"
@@ -829,7 +829,7 @@
              "should have a result");
       result = new NoResultSExpr;
     } else if (result->hasMap() && result->map()->is_block()) {
-      SCodeScope* s = scopeFromBlockMap(result->myMapOop());
+      SCodeScope* s = BlockPReg::scopeFromBlockMap(result->myMapOop());
       if (s && isSenderOrSame(s)) {
         // prevent block from being inlined because block is non-LIFO
         result = new UnknownSExpr(resultPR);
@@ -1393,7 +1393,7 @@
     if (info->uninlinable) {
       lookupType |= UninlinableSendMask;
     }
-    if (nstages == 1 || recompilee && recompilee->version() >= MaxVersions-1) {
+    if (nstages == 1 || (recompilee && recompilee->version() >= MaxVersions-1)) {
       // don't use any counting code
       lookupType = withCountBits(lookupType, NonCounting);
     } else if (currentProcess->isUncommon() && !info->uninlinable) {
@@ -1475,8 +1475,8 @@
       assert(argc == 0 || argc == 1, "wrong number of args");
       NameDesc* nd = NULL;
       if (sd->is_map_slot() ||
-          s->isVFrameScope() &&
-          (nd = s->vf()->get_name_desc(sd, true), nd && nd->isValue())) {
+          (s->isVFrameScope() &&
+          (nd = s->vf()->get_name_desc(sd, true), nd && nd->isValue()))) {
         // load value of constant slot or of unallocated (constant) data slot
         assert(argc == 0, "must be an access");
         oop p = nd ? nd->value() : sd->data;
@@ -1619,7 +1619,7 @@
   }
   
   
-  bool SCodeScope::checkPerform(char* sel, fint len, fint prefix,
+  bool SCodeScope::checkPerform(const char* sel, fint len, fint prefix,
                                 LookupType& performLookupType) {
     // check if this is really a perform primitive; if so, also
     // return perform type
@@ -2134,11 +2134,11 @@
                               _method,
                               _key->receiverMapOop(),
                               self->nameNode(!lite),
-                              self->nameNode(!lite),     // woud be different for PPC
+                              self->nameNode(!lite),
                               self->myMapOop(),
                               methodHolder_or_map(),
                               receiver->nameNode(!lite),
-                              receiver->nameNode(!lite), // woud bedifferent for PPC   
+                              receiver->nameNode(!lite),
                               lite,
                               scopeID(),
                               _sender ? _sender->scopeInfo : NULL,
@@ -2225,8 +2225,8 @@
           // to a caller nmethod?  Find out.
           frame* home = blockOop(val)->scope(true);
           if (home == NULL ||
-              theSIC->vscopes &&
-              home > theSIC->vscopes->last()->vf->fr->block_scope_of_home_frame()) {
+              (theSIC->vscopes &&
+              home > theSIC->vscopes->last()->vf->fr->block_scope_of_home_frame())) {
             // ok, don't need to remap the block
           } else {
             if (PrintRecompilation) {

@@ -1,6 +1,6 @@
 # Sun-$Revision: 30.16 $
  
-# Copyright 1994-2003 Sun Microsystems, Inc. and Stanford University.
+# Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information.
 
 # Makefile include
@@ -17,20 +17,15 @@ SELF_EXT  = .self
 # .dcl.h is obsolete
 C_EXT     = .c .h .l \
             .cpp .hh \
-	    _abstract.h _inline.h .dcl.h \
-	    _abstract.hh _inline.hh .dcl.hh \
-	    _inline_abstract.h \
-	    _inline_abstract.hh \
-	    _sparc.h _inline_sparc.h _sparc.c \
-	    _sparc.hh _inline_sparc.hh _sparc.cpp \
-	    _ppc.h   _inline_ppc.h  _ppc.c \
-	    _ppc.hh   _inline_ppc.hh  _ppc.cpp \
-	    _m68k.h  _inline_m68k.h _m68k.c \
-	    _m68k.hh  _inline_m68k.hh _m68k.cpp \
-	    _unix.h  _inline_unix.h _unix.c \
-	    _unix.hh  _inline_unix.hh _unix.cpp \
-	    _mac.h   _inline_mac.h  _mac.c \
-	    _mac.hh   _inline_mac.hh  _mac.cpp
+            _abstract.h _inline.h .dcl.h \
+            _abstract.hh _inline.hh .dcl.hh \
+            _inline_abstract.h \
+            _inline_abstract.hh \
+            _sparc.h _inline_sparc.h _sparc.c \
+            _sparc.hh _inline_sparc.hh _sparc.cpp \
+            _unix.h  _inline_unix.h _unix.c \
+            _unix.hh  _inline_unix.hh _unix.cpp \
+
 
 RCS_FILE_CMD = echo $(FILES); \
                expandNames $(SELF_MODULES:%=-n %) $(SELF_EXT:%=-e %); \

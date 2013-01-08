@@ -1,6 +1,6 @@
  /* Sun-$Revision: 30.15 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -33,7 +33,7 @@
 # define extract1(a,b)         a
 # define extract2(a,b)         b
 
-# ifdef GCC3
+# ifdef GCC
   // Preprocessor rules changed, ugh! -- dmu 7/03
   # define pick_first(X)         extract1 X
   # define pick_second(X)        extract2 X
@@ -49,7 +49,7 @@
 # define extract2_3(a,b,c)     b
 # define extract3_3(a,b,c)     c
 
-# ifdef GCC3
+# ifdef GCC
   // Preprocessor rules changed, ugh! -- dmu 7/03
   # define pick_first_3(X)       extract1_3 X
   # define pick_second_3(X)      extract2_3 X

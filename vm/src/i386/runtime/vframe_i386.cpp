@@ -1,7 +1,7 @@
 # if  TARGET_ARCH == I386_ARCH
 /* Sun-$Revision: 1.4 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 // # pragma implementation "vframe_i386.hh"
@@ -99,7 +99,7 @@ void compiled_vframe::copy_outgoing_arg(fint argNo, NameDesc* nd2, compiled_vfra
 
 
 compiled_vframe* compiled_vframe::sendeeOrNULL_for_get_expr_stack() {
-  // From PPC: Cannot find a register locator when this makes a dummy_vframe, so live
+  // From former PPC: Cannot find a register locator when this makes a dummy_vframe, so live
   // with less info for recompilation. -- dmu 2/03
   //
   // Could maybe fix this for Intel.

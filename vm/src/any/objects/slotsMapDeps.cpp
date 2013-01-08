@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "slotsMapDeps.hh"
@@ -10,7 +10,6 @@
 # define FOR_EACH_SLOT_DEP(d)                                           \
   if (dependents)                                                       \
     for (nmln* d= dependents, *dend= d + length_slots(); d < dend; d++) \
-
 
 oop slotsMapDeps::define(oop obj, oop contents) {
   if (VerifyZoneOften)
@@ -52,7 +51,7 @@ void slotsMapDeps::shift_obj_slots(smiOop offset, fint delta) {
 }
 
 
-slotsOop create_slots(slotList* slots, char* annotation) {
+slotsOop slotsMapDeps::create_slots(slotList* slots, const char* annotation) {
   slotsMapDeps m1;
   slotsOop obj;
   slotsMapDeps* sm= (slotsMapDeps*) create_map(sizeof(slotsMapDeps),

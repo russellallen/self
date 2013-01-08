@@ -8,16 +8,16 @@ set file="vmDate.s"
 
 set arch=`get_arch`
 
-if ($arch == mac_osx_ppc ) then 
-  set arch="Mac OSX"
-  set label="_vmDate"
-  set data=".const"
-  set ascii=".asciz"
-  set comment="#"
-  set global=".globl"
-  set word=".long"
-else if ( $arch == mac_osx_i386 ) then
-  set arch="Mac OSX I386"
+if ($arch == mac_osx ) then 
+  set cpu=`arch`
+  if ($cpu == ppc) then
+    set arch="Mac OSX"
+  else if ($cpu == i386) then
+    set arch="Mac OSX I386"
+  else
+    set arch="Mac OSX 64bit" 
+    #not there yet
+  endif
   set label="_vmDate"
   set data=".const"
   set ascii=".asciz"

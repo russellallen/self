@@ -1,12 +1,12 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "smiMap.hh"
 # include "_smiMap.cpp.incl"
 
-Map* create_smiMap(oop parent) {
+Map* smiMap::create_smiMap(oop parent) {
   slotList *s= new slotList(VMString[PARENT], 
                             parent_map_slotType,
                             parent,

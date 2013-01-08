@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.13 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "process.hh"
@@ -40,7 +40,7 @@ bool traceP = false;
 bool traceV = false;
 
 # if GENERATE_DEBUGGING_AIDS
-  void printP(char* s, void* p) {
+  void printP(const char* s, void* p) {
     if (traceP) {
       lprintf("**P** %s ", s);
       if (p == (void*)&dummyProcess) lprintf("dummyProcess ");
@@ -191,7 +191,7 @@ void Process::initialize(oop rcvr, stringOop sel, objVectorOop args) {
   init(first_inst_addr(startCurrentProcess));
 }
 
-void startCurrentProcess() {
+void Process::startCurrentProcess() {
   currentProcess->start();
 }
 
@@ -606,7 +606,7 @@ bool Process::verify() {
 
 
 void Process::print() {
-  static char* pstate[] = {
+  static const char* pstate[] = {
     "initialized", "ready", "stopped", "aborting", "defunct" };
   lprintf("Process %#lx: state = %s, %s, obj = %#lx, method = %#lx\n",
          this, pstate[state],
@@ -1850,17 +1850,13 @@ void Process::prepare_to_return_to_self_after_conversion(
   
   frame* kill_target = new_last_self_frame;
     
-  # if TARGET_ARCH == PPC_ARCH // only works for PPC -- dmu 1/03
-    assert(!isKilling()  ||  killVF()->as_vframe()->fr >= kill_target,
-           "passed kill_target");  
-  # endif
   if (traceV && isKilling() && killVF()->as_vframe()->fr == kill_target)
     lprintf("*** stopping senseless killing of innocent frames, kill_target = 0x%x\n", kill_target);
 }
 
 bool Process::is_done_with_killing_or_deoptimizing(frame* dest_self_fr) {
   return  isDeoptimizing() // only used for goto bytecode primitive (only last stack frame)
-  ||      isKilling()  &&  killVF()->as_vframe()->fr == dest_self_fr; // for killActivationsUpTo prim
+  ||      (isKilling()  &&  killVF()->as_vframe()->fr == dest_self_fr); // for killActivationsUpTo prim
 
 }
 

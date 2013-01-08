@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -13,10 +13,13 @@
 // initial scopeDesc value
 # define BLOCK_PROTO_DESC  as_smiOop(-1)
 
+
 class blockMap: public Map {
   friend class blockOopClass;
   friend class SCodeScope;
-  friend SCodeScope* scopeFromBlockMap(mapOop blockMap);
+  // is static now
+  // friend SCodeScope* scopeFromBlockMap(mapOop blockMap);
+  friend class BlockPReg;
 private:
   smiOop _desc;
   stringOop valueMethodName;
@@ -64,7 +67,7 @@ public:
   slotsOop  value()             { return valueMethod; }
   
   // constructor
-  friend blockOop create_block(slotsOop valueMethod);
+  static blockOop create_block(slotsOop valueMethod);
   
   // cloning operations; users aren't allowed to clone blocks  -Urs
   oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL) {
@@ -104,6 +107,11 @@ public:
   // profiler operation
   void dummy_initialize(oop obj, oop filler);
 };
+
+static inline blockOop create_block(slotsOop valueMethod) {
+  return blockMap::create_block(valueMethod);
+}
+
 
 inline void blockMap::setSlots() {
   block_slots[1].name= valueMethodName;

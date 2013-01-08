@@ -1,17 +1,18 @@
 # Sun-$Revision: 1.1 $
  
-# Copyright 1994-2006 Sun Microsystems, Inc. and Stanford University.
+# Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information.
  
 ROOT         = ../..
 FILES        = Makefile
-DIRECTORIES  = debug optimized profiled interpreter generated links
+DIRECTORIES  = generated debug optimized profiled interpreter links
 
 default:
+	@cd generated; ${MAKE}
 	@cd debug;     ${MAKE}
 	@cd optimized; ${MAKE}
 	@cd interpreter; ${MAKE}
-	@cd generated; ${MAKE}
+
 
 include        ${ROOT}/templates/sources.make
 

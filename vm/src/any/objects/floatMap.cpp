@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "floatMap.hh"
@@ -8,7 +8,7 @@
 
 DO_NOT_CROSS_COMPILE 
   
-Map* create_floatMap(oop parent) {
+Map* floatMap::create_floatMap(oop parent) {
   slotList *s= new slotList(VMString[PARENT], 
                             parent_map_slotType,
                             parent,

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef FAST_COMPILER
@@ -48,7 +48,7 @@ class FCompiler:  public AbstractCompiler {
   void assignmentCode();
   void     methodCode();
 
-  void trace_compile(char *s);
+  void trace_compile(const char *s);
 
  public:
   nmethod* compile();

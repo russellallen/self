@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -23,7 +23,7 @@ private:
 
   FILE*         record(FILE* f);
   FILE*         tryOpen(const char* name, const char* suffix,
-                        const char* mode, char** fullName = NULL);
+                        const char* mode, const char** fullName = NULL);
 public:
   FileTable();
   ~FileTable();
@@ -35,14 +35,14 @@ public:
                          const char*  mode   = "r",
                          const char*  path   = "",
                          const char*  suffix = "",
-                         char** fullname = NULL);
+                         const char** fullname = NULL);
 
   // specific openers
   FILE*         openSnapshotFile(const char*  name,
                                  const char*  modeArg,
-                                 char** fullname = NULL);
+                                 const char** fullname = NULL);
 
-  FILE*         openSelfFile(const char*  name, char** fullname = NULL) {
+  FILE*         openSelfFile(const char*  name, const char** fullname = NULL) {
                   return openFile(name, "r", DirPath, 
                                   "" /* was ".self" */, 
                                   fullname);

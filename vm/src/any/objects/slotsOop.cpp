@@ -1,12 +1,12 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "slotsOop.hh"
 # include "_slotsOop.cpp.incl"
 
-slotsOop create_slots(fint size) {
+slotsOop slotsOopClass::create_slots(fint size) {
   oop *p= Memory->alloc_objs(size);
   slotsOop obj = as_slotsOop(p);
   obj->init_mark();

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "byteVectorMap.hh"
@@ -35,7 +35,7 @@ oop byteVectorMap::cloneSize(oop obj, fint len, bool mustAllocate,
   return v;
 }
 
-byteVectorOop create_byteVector(slotList* slots) {
+byteVectorOop byteVectorMap::create_byteVector(slotList* slots) {
   byteVectorOop bv;
   byteVectorMap m1;
   (void)create_map(sizeof(byteVectorMap), slots, &m1, (oop*)&bv);

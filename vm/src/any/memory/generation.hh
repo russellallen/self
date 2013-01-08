@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.12 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -157,7 +157,6 @@ class newGeneration: public generation {
   void write_snapshot(FILE* file);
 };
 
-
 class oldGeneration: public generation {
 
   friend class rSet;
@@ -171,8 +170,10 @@ class oldGeneration: public generation {
   friend oop expand_heap_prim(oop, smi);
   friend class oldSpace;
   // these alloc_ directly here
-  friend stringOop create_string(fint);
+  // friend stringOop stringOopClass::create_string(fint);
   // friend stringOop stringOopClass::make_string(char*, fint, bool);
+  // only called at startup
+  // friend void create_initial_strings(oop);
   friend class stringOopClass;
 
 // the following does not work with Metroworks precompiled headers
@@ -226,8 +227,6 @@ class oldGeneration: public generation {
   oldGeneration(            int32 initial_size, int32 reserved_amount);
   oldGeneration(FILE* snap, int32 initial_size, int32 reserved_amount);
 
-  // only called at startup
-  friend void create_initial_strings(oop);
   char* empty_bytes_addr() {
     assert(first_space != NULL && first_space->next_space == NULL,
            "empty_bytes_addr called too late");

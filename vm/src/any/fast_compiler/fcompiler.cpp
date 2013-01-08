@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 
@@ -62,7 +62,7 @@ nmethod* FCompiler::compile() {
   
   codeGen->scopeDescs->generate();
   if (PrintCompilationStatistics) t.stop();     // don't include nmethod alloc
-  nmethod* nm = new_nmethod(this, generateDebugCode);
+  nmethod* nm = nmethod::new_nmethod(this, generateDebugCode);
   assert(theAssembler->verifyLabels(), "undefined labels");
   em.event.args[1] = nm;
   if (PrintCompilation || PrintCompilationStatistics) {
@@ -93,7 +93,7 @@ nmethod* FCompiler::compile() {
 }
 
 
-void FCompiler::trace_compile(char *s) {
+void FCompiler::trace_compile(const char *s) {
   if (PrintCompilation) {
     lprintf("*NIC-compiling %s method for %s:\n",
             s, sprintName(NULL, L->selector()));

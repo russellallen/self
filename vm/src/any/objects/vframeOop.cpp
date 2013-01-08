@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "vframeOop.hh"
@@ -68,7 +68,7 @@ bool vframeOopClass::is_above(abstract_vframe* vf){
 #endif
   
 
-vframeOop new_senderVFrameOop(Process* p, vframeOop from, abstract_vframe* vf)
+vframeOop vframeOopClass::new_senderVFrameOop(Process* p, vframeOop from, abstract_vframe* vf)
 {
   vframeOop vfo;
   // vframeOops are canonical, so check first for existing vframeOop
@@ -101,7 +101,7 @@ vframeOop new_senderVFrameOop(Process* p, vframeOop from, abstract_vframe* vf)
   return vfo;
 }
 
-vframeOop new_vframeOop(Process* p, abstract_vframe* vf) {
+vframeOop vframeOopClass::new_vframeOop(Process* p, abstract_vframe* vf) {
   vframeOop vfo;
   // vframeOops are canonical, so check first for existing vframeOop
   vfo = p->findVFrameOop(vf);
@@ -134,7 +134,7 @@ vframeOop new_vframeOop(Process* p, abstract_vframe* vf) {
 
 static int32 createdVFrameProtos = 0;
 
-vframeOop create_vframeOop(oop method) {
+vframeOop vframeOopClass::create_vframeOop(oop method) {
   if (++createdVFrameProtos > 3)
     ShouldNotReachHere(); // should create only three vframe prototypes
   vframeMap *vf;

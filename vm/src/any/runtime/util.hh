@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.12 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -20,10 +20,10 @@ extern oop catchThisOne;
 
 // utilities
 
-char* copy_string(char* s);
-char* copy_string(char* s, smi len);
+char* copy_string(const char* s);
+char* copy_string(const char* s, smi len);
 
-char* copy_c_heap_string(char* s);
+char* copy_c_heap_string(const char* s);
 
 // copying oops must be accompanied by record_multistores for remembered set
 void copy_oops_up(oop* from, oop* to, fint count);
@@ -52,7 +52,7 @@ void set_bytes(char* to, fint count, char value = NULL);
 
 // like strcmp, but with slightly different order for slot
 // ordering (sorts foo: before foo0 so that it immediately follows foo)
-int compare_slot_names(char *s1, fint l1, char *s2, fint l2);
+int compare_slot_names(const char *s1, fint l1, const char *s2, fint l2);
 
 int compare_bytes(const char* b1, int l1, const char* b2, int l2);
 
@@ -81,7 +81,7 @@ inline float  max(float  a, float  b) { return a > b ? a : b; }
 
 inline int32 iabs(int32 a) { return a >= 0 ? a : -a; }
 
-# if TARGET_ARCH == I386_ARCH  ||  TARGET_ARCH == PPC_ARCH
+# if TARGET_ARCH == I386_ARCH
 extern "C" {  void swap_bytes(int32* xp); } // Do it with special instruction
 # else  
   inline void swap_bytes(int32* xp) { 
@@ -97,10 +97,11 @@ extern "C" {  void swap_bytes(int32* xp); } // Do it with special instruction
 const int32 K = 1024;
 const int32 M = K * K;
 
-const int32 oopSize = sizeof(oop); // Warning: Duplicated in asmDefs_ppc.h
+const int32 oopSize = sizeof(oop);
 
 
 // some useful macros
+
 
 # define MYSELF(foo) foo
 
@@ -137,20 +138,21 @@ const int32 oopSize = sizeof(oop); // Warning: Duplicated in asmDefs_ppc.h
  * inline void Unused(void *x) { x, 0; }
  * inline void Unused(void (*x)(...)) { x, 0; }
  */
- 
-# define Unused(x) ((x), 0)
 
+// # define Unused(x) ((x), 0)
+// This macro is more portable -- topa
+#define Unused(x) (void)(x)
 
 #if GENERATE_DEBUGGING_AIDS
 # define UsedOnlyInAssert(v)
 #else
-inline void UsedOnlyInAssert(double x)   { x, 0; }
-inline void UsedOnlyInAssert(void *x) { x, 0; }
+inline void UsedOnlyInAssert(double x)   { (void)(x), 0; }
+inline void UsedOnlyInAssert(void *x) { (void)(x), 0; }
 #endif
 
 extern "C" { 
-  volatile void ShouldNotCall(char *file, int line);
-  volatile void ShouldNotReach(char *file, int line);
+  volatile void ShouldNotCall(const char *file, int line);
+  volatile void ShouldNotReach(const char *file, int line);
 }
 
 #define ShouldNotCallThis()   ShouldNotCall(__FILE__, __LINE__)

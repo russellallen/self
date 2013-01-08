@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "print.hh"
@@ -34,7 +34,7 @@ const char* sprintName(methodMap* mm, oop selector) {
 char* sprintValueMethod( oop rcvr ) {
   // used for debugging only, if rcvr is block, print out source info for block
   if (!rcvr->is_block_with_code())
-    return "";
+    return (char*) "";
   methodMap* mm = (methodMap*)blockOop(rcvr)->value()->map();
   // get outermost method map
   methodMap* omm = mm;
@@ -55,7 +55,7 @@ char* sprintValueMethod( oop rcvr ) {
     sprintf(buf, "(%s:%ld)", f, long(line->value()));
     return buf;
   }
-  return "";
+  return (char*) "";
 }
 
 

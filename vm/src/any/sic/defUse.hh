@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -98,12 +98,15 @@
     bool isConstant();
     oop  constant();
     void print();
+    static CPInfo* new_CPInfo(Node* def); // may return NULL if def isn't suitable
    protected:
     CPInfo(Node* def);
-    friend CPInfo* new_CPInfo(Node* def);
   };
 
-  CPInfo* new_CPInfo(Node* def); // may return NULL if def isn't suitable
+  static inline CPInfo* new_CPInfo(Node* def) {
+    return CPInfo::new_CPInfo(def);
+  }
+
   void forAllDefsDo(PRegBBIndexBList* l, defDoFn f);
   void forAllUsesDo(PRegBBIndexBList* l, useDoFn f);
   void printDefsAndUses(PRegBBIndexBList* l);   // for debugging

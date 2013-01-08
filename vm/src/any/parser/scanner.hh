@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -31,16 +31,16 @@ class Token: public ResourceObj {
   };
   fint line;
   fint column;
-  char* sourceStart;
+  const char* sourceStart;
   
-  Token(TokenType t, fint l, fint c, char* ss) {
+  Token(TokenType t, fint l, fint c, const char* ss) {
     type = t; line = l; column = c; sourceStart = ss; }
   // wierd order to avoid overloading ambiguity
-  Token(TokenType t, char* ss, int32 i, fint l, fint c) {
+  Token(TokenType t, const char* ss, int32 i, fint l, fint c) {
     type = t; integer = i; line = l; column = c; sourceStart = ss; }
-  Token(TokenType t, float f, fint l, fint c, char* ss) {
+  Token(TokenType t, float f, fint l, fint c, const char* ss) {
     type = t; floating = f; line = l; column = c; sourceStart = ss; }
-  Token(TokenType t, String* s, fint l, fint c, char* ss) {
+  Token(TokenType t, String* s, fint l, fint c, const char* ss) {
     type = t; string = s; line = l; column = c; sourceStart = ss; }
   void print();
 };
@@ -67,7 +67,7 @@ class SourceBuffer: public ResourceObj {
   char *next, *last;
  public:
   int length;
-  char *first;
+  const char *first;
 
   SourceBuffer(long len) {
     if (len < 0)
@@ -75,15 +75,15 @@ class SourceBuffer: public ResourceObj {
     first = NEW_RESOURCE_ARRAY( char, len);
     if (!first)
       fatal1("new failed for length %d", len);
-    next = first;
-    last = first + len;
+    next = (char*) first;
+    last = (char*) first + len;
   }
 
-  SourceBuffer(char *start, long len) {
+  SourceBuffer(const char *start, long len) {
     if (len < 0)
       fatal1("bad length %d for SourceBuffer", len);
-    first= next= start;
-    last= first + len;
+    next= (char*) (first= start);
+    last= (char*) first + len;
   }
 
   SourceBuffer(FILE* source_file);
@@ -97,13 +97,13 @@ class SourceBuffer: public ResourceObj {
   char* where() { return next; }
   fint  current_char() { return next < last ? *next : EOF; }
   void  advance() { next++; }
-  void reset() { next = first; }
+  void reset() { next = (char*) first; }
   void pop() {
     if (next == first)
       fatal("bad pop in source buffer");
     --next;
   }
-  char* lastWhiteSpaceBefore(char* start);
+  const char* lastWhiteSpaceBefore(const char* start);
 };
 
 
@@ -145,15 +145,15 @@ class Scanner: public StackObj {
   
   void          initSourcePos();
   
-  Token*        TokenizingError(char* msg);
+  Token*        TokenizingError(const char* msg);
 
  public:
   void          push_char(fint c);
 
   TokenList*    commentList;
   
-  virtual char* fileName()                      = 0;
-  virtual void  start_line(char* prompt) { Unused(prompt); }
+  virtual const char* fileName()                      = 0;
+  virtual void  start_line(const char* prompt) { Unused(prompt); }
   virtual void  reset()                         {};
 
   int get_line_number() { return line; }
@@ -171,11 +171,11 @@ class Scanner: public StackObj {
   Token*        get_token();
   void          push_token(Token* t) { tokens = new TokenPushback(t, tokens); }
   char*         sourceAddr() { return sourceBuf->where(); }
-  char*         lastWhiteSpaceBefore(char* start) { 
+  const char*   lastWhiteSpaceBefore(const char* start) { 
     return sourceBuf->lastWhiteSpaceBefore(start); }
   virtual void  discardInput() {
     SubclassResponsibility(); } // only applies to the interactive scanner
-  virtual void ErrorMessage(char* msg, fint l, fint c);
+  virtual void ErrorMessage(const char* msg, fint l, fint c);
   void          resetTokenList();
 
  private:
@@ -188,52 +188,52 @@ class Scanner: public StackObj {
 
 class InteractiveScanner: public Scanner {
  protected:
-  void  ErrorMessage(char* msg, fint l, fint c);
+  void  ErrorMessage(const char* msg, fint l, fint c);
   fint  read_next_char();
   bool  is_buffer_filled() { return false; }
  public:
   InteractiveScanner();
   
-  char* fileName()    { return "<stdin>"; }
+  const char* fileName()    { return "<stdin>"; }
   void  reset()       { depth = 0; initSourcePos(); }
   
   bool  is_interactive() { return true; }
-  void  start_line(char* prompt);
+  void  start_line(const char* prompt);
 
   void  discardInput();
 };
 
 class FileScanner: public Scanner {
  protected:
-  FILE* file;
-  char* _fileName;
-  char* _fullName;
+  FILE*       file;
+  const char* _fileName;
+  const char* _fullName;
   fint  read_next_char() {
     return sourceBuf->current_char();
   }
-  FILE* openFileAndReturnFile(char* filename);
+  FILE* openFileAndReturnFile(const char* filename);
   bool  is_buffer_filled() { return true; }
  public:
   int32 fileError;
 
-  FileScanner(char* filename);
+  FileScanner(const char* filename);
   
   ~FileScanner();
 
-  char* fileName()       { return _fileName; }
-  char* fullName()       { return _fullName; }
+  const char* fileName() { return _fileName; }
+  const char* fullName() { return _fullName; }
 
   bool is_file_scanner() { return true;       }
 };
 
 class StringScanner : public Scanner {
  protected:
-  char* _fileName;
+  const char* _fileName;
   fint  read_next_char()   { return sourceBuf->current_char(); }
   bool  is_buffer_filled() { return true; }
  public:
-  StringScanner(char* s, fint len, char* fn = "<a string>", fint l = 1, fint c = 1);
-  char* fileName()         { return _fileName; }
+  StringScanner(const char* s, fint len, const char* fn = "<a string>", fint l = 1, fint c = 1);
+  const char* fileName()         { return _fileName; }
   bool is_string_scanner() { return true;      }
 };
 

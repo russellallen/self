@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -77,7 +77,7 @@ class List: public ParseNode {
 
   void addCommentAnnotations(Scanner* scanner);
   
-  void PrintSeparatedBy(char* sep);
+  void PrintSeparatedBy(const char* sep);
   void Print() { PrintSeparatedBy(". "); }
   
   void oops_do(oopsDoFn f);

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # if  !GENERATE_DEBUGGING_AIDS
@@ -27,7 +27,7 @@
   }
   
  inline void BaseAssembler::Short(int32 i) {
-   int16 s = i;
+   int16 s = i; Unused(s); // non-debug case
    assert(int32(s) == i, "short must be short");
    Alloc(int16);
    *data = i;
@@ -39,7 +39,7 @@
     *data = (char)i;
   }
 
-  inline void BaseAssembler::Comment(pc_t s) {
+  inline void BaseAssembler::Comment(const char* s) {
     if (printing) {
       lprintf("  // %s\n", s); 
     }

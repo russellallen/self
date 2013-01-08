@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.16 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 
@@ -88,7 +88,7 @@
     // NODE_COST(MarkerNode)
   }
   
-  CommentNode::CommentNode(char* s) {
+  CommentNode::CommentNode(const char* s) {
     comment = s;
     // give all comments negative ids (don't disturb node numbers by turning
     // SICDebug off and on)
@@ -105,7 +105,8 @@
   ByteArrayAtNode::ByteArrayAtNode(PReg* r, PReg* idx, bool ia,
                                    PReg* res, PReg* err)
   : AbstractArrayAtNode(r, idx, ia, res, err,
-                        byteVector_bytes_offset(), byteVector_len_offset()) {
+                        byteVectorOopClass::byteVector_bytes_offset(), 
+                        byteVectorOopClass::byteVector_len_offset()) {
     NODE_COST(ByteArrayAtNode);    
   }
 
@@ -120,8 +121,8 @@
                                          bool ia, PReg* el, bool ie,
                                          PReg* res, PReg* err)
   : AbstractArrayAtPutNode(r, idx, ia, el, res, err,
-                           byteVector_bytes_offset(),
-                           byteVector_len_offset()) {
+                           byteVectorOopClass::byteVector_bytes_offset(),
+                           byteVectorOopClass::byteVector_len_offset()) {
     intElem = ie; NODE_COST(ByteArrayAtPutNode);    
  }
 
@@ -205,7 +206,7 @@
   MergeNode::MergeNode(Node* prev1, Node* prev2) :
     AbstractMergeNode(prev1, prev2) { _isLoopHead = didStartBB = false; 
                                        why = "beats me"; }
-  MergeNode::MergeNode(char* w) { _isLoopHead = didStartBB = false; 
+  MergeNode::MergeNode(const char* w) { _isLoopHead = didStartBB = false; 
                                   why = w;
   }
 
@@ -673,7 +674,7 @@
          fatal("about to remove all good cases");
        Node* k = NULL;
        for (fint i = 0;  i < _nxt->length(); i++) {
-         if ( c && c->constant == maps->nth(i)  ||  theMap == maps->nth(i)
+	 if ( (c && c->constant == maps->nth(i))  ||  theMap == maps->nth(i)
          || maps->nth(i)->map() == theMap->map_addr())
            if (k) fatal(">1");
            else k = _nxt->nth(i);
@@ -697,7 +698,7 @@
       Node* succ = successors->nth(i);
       succ->removePrev(this);
       oop m = maps->nth(i);
-      if ( c && constant == m          // have a constant
+      if ( (c && constant == m)          // have a constant
       ||   theMap == m                 // have a map, found it
       ||   m->map() == theMap->map_addr()  // have an oop, looking for a map
          ) {
@@ -1558,7 +1559,7 @@
     return b;
   }
  
-  char* ArithNode::opName() { return ArithOpName[op]; }
+  const char* ArithNode::opName() { return ArithOpName[op]; }
  
   char* ArithRRNode::print_string(char* buf, bool printAddr) {
     char* b = buf;
@@ -1939,7 +1940,7 @@
     }
   }
 
-  void MarkerNode::checkMap(SExpr* expr, oop p, char* msg, fint n) {
+  void MarkerNode::checkMap(SExpr* expr, oop p, const char* msg, fint n) {
     // assert(p != badOop, "should know p");
     // NB: can have badOops if in primitive failure -- expr stack is
     // still the primitive call expr stack, not the fail send expr stack
@@ -2162,7 +2163,7 @@
                                 bool describeUnallocated) {
     // set nd (if possible) and return whether PReg is live and allocated
     fint dummy1, dummy2;
-    if (r == NULL || r->loc == UnAllocated && !describeUnallocated) {
+    if (r == NULL || (r->loc == UnAllocated && !describeUnallocated)) {
       // not used
       return false;
     } else if (r->scope == NULL) {
@@ -2171,8 +2172,8 @@
     } else if (r->scope != scopes[r->scope->depth]) {
       // not in current call stack --> not live
       return false;
-    } else if (!r->scope->isSenderOrSame(findAncestor(_scope, dummy1,
-                                                      r->scope, dummy2))) {
+    } else if (!r->scope->isSenderOrSame(PReg::findAncestor(_scope, dummy1,
+                                                          r->scope, dummy2))) {
       // scope of r is below marker scope, so it cannot be live
       return false;
     } else if (r->isLiveAt(this)) {
@@ -2359,7 +2360,7 @@
     return sd;
   }
 
-  void MarkerNode::fail(char* msg, void* arg) { 
+  void MarkerNode::fail(const char* msg, const void* arg) { 
     if (PrintRecompilation) warning1(msg, arg);
     invalid = true;
     theRecompilation->isReplacementSimple = active = false;

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef XLIB
@@ -8,7 +8,7 @@
 # pragma implementation "xlibPrims.hh"
 # include "_xlibPrims.cpp.incl"
 
-  char* Display_seal = "Display";
+  const char* Display_seal = "Display";
 
   Display* XOpenDisplay_wrap(char *name, void *FH) {
     // XOpenDisplay fails if a signal is received during the call.
@@ -58,10 +58,11 @@
 
   // the X I/O error handler must not return (or X will abort Self)
   int XErrorHandlers::handle_X_IO_error(Display* display) {
-    char *msg= "X I/O Error .. aborting process.\n";
+    Unused(display);
+    const char *msg= "X I/O Error .. aborting process.\n";
     write(1, msg, strlen(msg)); // don't use lprintf (calls malloc)
     print_stack_and_abort();
-    return(display, 0);    // to mollify compiler
+    return 0;    // to mollify compiler
   }
  
 

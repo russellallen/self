@@ -1,7 +1,7 @@
 # if  TARGET_ARCH == I386_ARCH
 /* Sun-$Revision: 1.6 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # include "_interruptedCtx_i386.cpp.incl"

@@ -1,29 +1,29 @@
 # if  TARGET_ARCH == I386_ARCH
 /* Sun-$Revision: 1.4 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
   
 # pragma implementation "regs_i386.hh"
   
 # include "_regs_i386.cpp.incl"
 
-char** RegisterNamesBySize[] = {ByteRegisterNames, ShortRegisterNames, RegisterNames};
+const char** RegisterNamesBySize[] = {ByteRegisterNames, ShortRegisterNames, RegisterNames};
 
-// change Location enum in regs_ppc.h if you change this!
-char* RegisterNames[] = {
+// change Location enum in regs_i386.h if you change this!
+const char* RegisterNames[] = {
     "%eax", "%ecx", "%edx", "%ebx", "%esp", "%ebp", "%esi", "%edi",
     "",
     
     "*UnAllocated*"
 };
-char* ByteRegisterNames[] = {
+const char* ByteRegisterNames[] = {
     "%al", "%cl", "%dl", "%bl", "%ah", "%ch", "%dh", "%bh",
     "",
     
     "*UnAllocated*"
 };
-char* ShortRegisterNames[] = {
+const char* ShortRegisterNames[] = {
     "%ax", "%cx", "%dx", "%bx", "%sp", "%bp", "%si", "%di",
     "",
     
@@ -34,8 +34,8 @@ char* ShortRegisterNames[] = {
 
 
 
-char *locationName(Location l) {
-  char* c;
+const char *locationName(Location l) {
+  const char* c;
   int num;
   
        if          ( is_IArgLocation(l)) {   c = "I";  num = index_for_IArgLocation(l); }

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "key.hh"
@@ -11,7 +11,7 @@ char* selector_string(oop selector) {
   if (selector->is_string()) {
     return stringOop(selector)->copy_null_terminated();
   } else {
-    return "<not a string>";
+    return (char*) "<not a string>";
   }
 }
 

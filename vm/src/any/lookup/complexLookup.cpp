@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.12 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "complexLookup.hh"
@@ -132,8 +132,8 @@ void compilingLookup::chooseCompiler() {
     // Note: count is incremented BEFORE a Sic compile
     if (compiler == SIC) {
       ++SICCompilationCount;
-      if (SICMinCompilationCount != -1  &&  SICMinCompilationCount > SICCompilationCount
-      ||  SICMaxCompilationCount != -1  &&  SICMaxCompilationCount < SICCompilationCount)
+      if ((SICMinCompilationCount != -1  &&  SICMinCompilationCount > SICCompilationCount)
+      ||  (SICMaxCompilationCount != -1  &&  SICMaxCompilationCount < SICCompilationCount))
         compiler = NIC;
     }
   # endif // SIC_COMPILER
@@ -155,7 +155,7 @@ nmethod* compilingLookup::compileNMethod() {
     diDeps = dc->dependency();
     assert(diDeps->isEmpty(), "should be empty");
     // make sure that other method won't be flushed from the zone
-    other = findNMethod(dc);
+    other = nmethod::findNMethod(dc);
     other->save_unlinked_frame_chain();
   }
 

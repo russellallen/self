@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -35,7 +35,7 @@ private:
   int32 vdepth;                 // # of vframes in convertFrame
   
   frame* newFr;                 // current new frame
-  frame* rlFr;                  // frame below current new frame, spoof of ReturnTrap on PPC
+  frame* rlFr;                  // frame below current new frame
   RegisterLocator* newFrRl;     // register locator for new frame
   
   ResourceMark* rm;             // because rm can't be on the stack

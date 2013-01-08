@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.15 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "oop.hh"
@@ -12,7 +12,7 @@
 
 # include "_oop.cpp.incl"
 
-oop* oopClass::get_slot_data_address_if_present(char *name, bool &inObj) {
+oop* oopClass::get_slot_data_address_if_present(const char* name, bool &inObj) {
   return get_slot_data_address_if_present(new_string(name), inObj); }
 
 smi oopClass::objectID_prim() {
@@ -38,7 +38,9 @@ oop oopClass::print_prim() {
   return Memory->nilObj; // dont return ``this'', printing it may fail!
 }
 
-oop oopClass::all_prim(oop lim){ return enumerate_all_objs(lim); }
+oop oopClass::all_prim(oop lim){ 
+  return allObjEnumeration::enumerate_all_objs(lim); 
+}
 
 void oopClass::print_string(char* buf) {
   fint t = tag();
@@ -227,7 +229,7 @@ oop oopClass::credits_prim() {
   lprintf("Aarhus University, Apple, Cray, the Danish Research Academy, DEC, IBM,\n");
   lprintf("the National Science Foundation, NCR, the Swiss Nationalfonds, Tandem,\n");
   lprintf("Texas Instruments, and Xerox.\n\n");
-  lprintf("Copyright 2009 AUTHORS, Sun Microsystems, Inc. and Stanford University.\n");
+  lprintf("Copyright 1992-2012 AUTHORS.\n");
   lprintf("See the LICENSE file for license information.\n\n");
   return new_string("Thanks!");
 }
@@ -262,14 +264,7 @@ void print_option_primitives(bool changedOnly) {
     lprintf("\n\n");                                                           \
   }
     
-// CodeWarrer cannot handle the following: FOR_ALL_DEBUG_PRIMS(ListPrimName)
-// so use:
-    FOR_ALL_INTEGER_DEBUG_PRIMS(ListPrimName)
-    FOR_ALL_BOOLEAN_DEBUG_PRIMS(ListPrimName)
-    FOR_ALL_PROFILING_DEBUG_PRIMS(ListPrimName)
-    FOR_ALL_MISC_DEBUG_PRIMS(ListPrimName)
-
-      
+  FOR_ALL_DEBUG_PRIMS(ListPrimName)
 #     undef ListPrimName
   }
 
@@ -294,63 +289,34 @@ mirrorOop oopClass::as_mirror(bool mustAllocate) {
   return mirror;
 }
 
-// used to be one macro, DefineDebugPrim, I had to split it up for MW -- dmu
-
-# define DefineDebugGetPrim(                                                  \
+# define DefineDebugPrim(                                                     \
     flagName, flagType, flagTypeName, primReturnType,                         \
     initialValue, getCurrentValue, checkNewValue, setNewValue,                \
     explanation, wizardOnly)                                                  \
                                                                               \
     oop CONC3(get_,flagName,_prim)(oop rcvr)     {                            \
-    Unused(rcvr);                                                             \
-    return getCurrentValue;                                                   \
-  }
-# define DefineDebugSetPrim(                                                  \
-    flagName, flagType, flagTypeName, primReturnType,                         \
-    initialValue, getCurrentValue, checkNewValue, setNewValue,                \
-    explanation, wizardOnly)                                                  \
+      Unused(rcvr);                                                           \
+      return getCurrentValue;                                                 \
+    }                                                                         \
                                                                               \
     oop CONC3(set_,flagName,_prim)(oop rcvr, oop flag) {                      \
-    breakpoint();\
-    Unused(rcvr); Unused(flag);                                               \
-    if (! (checkNewValue)) return ErrorCodes::vmString_prim_error(BADTYPEERROR); \
-    oop oldValue = getCurrentValue;                                           \
-    setNewValue;                                                              \
-    return oldValue;                                                          \
-  }
+      breakpoint();                                                           \
+      Unused(rcvr); Unused(flag);                                             \
+      if (! (checkNewValue)) {                                                \
+        return ErrorCodes::vmString_prim_error(BADTYPEERROR);                 \
+      oop oldValue = getCurrentValue;                                         \
+      setNewValue;                                                            \
+      return oldValue;                                                        \
+    }
 
-# if COMPILER != MWERKS_COMPILER
-  // too big for MWERKS
-  FOR_ALL_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_DEBUG_PRIMS(DefineDebugSetPrim)
-# else
-  FOR_ALL_INTEGER_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_GEN_BOOLEAN_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_SPARC_BOOLEAN_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_PPC_BOOLEAN_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_I386_BOOLEAN_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_SIC_BOOLEAN_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_NEW_BOOLEAN_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_PROFILING_DEBUG_PRIMS(DefineDebugGetPrim)
-  FOR_ALL_MISC_DEBUG_PRIMS(DefineDebugGetPrim)
-  
-  FOR_ALL_INTEGER_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_GEN_BOOLEAN_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_SPARC_BOOLEAN_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_PPC_BOOLEAN_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_I386_BOOLEAN_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_SIC_BOOLEAN_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_NEW_BOOLEAN_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_PROFILING_DEBUG_PRIMS(DefineDebugSetPrim)
-  FOR_ALL_MISC_DEBUG_PRIMS(DefineDebugSetPrim)
-# endif                               
+  FOR_ALL_DEBUG_PRIMS(DefineDebugPrim)
 
 # undef DefineDebugPrim
 
 // eval method as if self is receiver
 
 oop oopClass::evaluate_in_context_prim(oop method) {
-  if ( !NakedMethods && is_method_like()
+  if ( (!NakedMethods && is_method_like())
   ||   is_vframe())
     return ErrorCodes::vmString_prim_error(BADTYPEERROR);
   
@@ -364,7 +330,7 @@ oop oopClass::evaluate_in_context_prim(oop method) {
   return res;
 }
 
-oop unwind_protect_prim(oop doBlock, oop protectBlock) {
+oop oopClass::unwind_protect_prim(oop doBlock, oop protectBlock) {
   // send "value" to doBlock;
   //   if this msg returns V normally, then return V as result of primitive.
   //   otherwise, msg returns V with non-local return or abort;

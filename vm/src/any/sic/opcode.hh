@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -43,8 +43,8 @@ enum ArithOpCode {
   LastArithOp
   };
 
-extern char* BranchOpName[];    // indexed by BranchOpCode 
-extern char* ArithOpName[];     // indexed by ArithOpCode 
+extern const char* BranchOpName[];    // indexed by BranchOpCode 
+extern const char* ArithOpName[];     // indexed by ArithOpCode 
 
 ArithOpCode opcode_for_selector(oop sel);
 

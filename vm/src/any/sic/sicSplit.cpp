@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef SIC_COMPILER
@@ -496,7 +496,7 @@
     SSelfScope* s = expr->node()->scope();
     fint bci = expr->node()->bci();
     assert(s->isCodeScope(), "oops");
-    SplitPReg* r = regCovering(this, _bci, (SCodeScope*)s, bci, sg);
+    SplitPReg* r = SAPReg::regCovering(this, _bci, (SCodeScope*)s, bci, sg);
 #   if GENERATE_DEBUGGING_AIDS
       if (CheckAssertions) {
         for (SExpr* e = expr; e; e = e->next) {

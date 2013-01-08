@@ -1,6 +1,6 @@
-# Sun-$Revision: 30.15 $
+# Sun-$Revision: 30.15 $ -*- mode: makefile -*-
 
-# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information.
 
 # Makefile template for the Self C utilities
@@ -13,16 +13,17 @@ SHELL = /bin/sh
 
 FLAGS = -O2 \
         -DSOLARIS_VERSION=1 -DSUNOS_VERSION=2 \
-	-DSPARC_ARCH=3 -DM68K_ARCH=4 -DGCC_COMPILER=5 \
+        -DSPARC_ARCH=3 -DM68K_ARCH=4 -DGCC_COMPILER=5 \
         -DTARGET_OS_VERSION=${TARGET_OS_VERSION} \
         -DTARGET_ARCH=${TARGET_ARCH} \
         -DCOMPILER=GCC_COMPILER \
         -fno-exceptions
 
-COMPILE.c = gcc ${FLAGS} -c
-COMPILE.cpp = gcc -xc++ ${FLAGS} -c
-LINK.c = gcc
-LINK.cpp = gcc
+GCC ?= ${CC}
+COMPILE.c = ${GCC} ${FLAGS} -c
+COMPILE.cpp = ${GCC} -xc++ ${FLAGS} -c
+LINK.c = ${GCC}
+LINK.cpp = ${GCC}
 
 CLEAN_EXPR = ${AOUT} *.o
 

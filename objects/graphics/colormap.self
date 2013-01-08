@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.11 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2012 AUTHORS.
 See the LICENSE file for license information.
 '
 
@@ -96,22 +96,6 @@ See the LICENSE file for license information.
          'ModuleInfo: Module: colormap InitialContents: FollowSlot\x7fVisibility: private'
         
          xcm <- bootstrap stub -> 'traits' -> 'colormap' -> 'nullXCM' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'macToolboxGlobals' -> () From: ( | {
-         'Category: graphics (ui1)\x7fModuleInfo: Module: colormap InitialContents: FollowSlot\x7fVisibility: public'
-        
-         newPlatformColorForPixel: i = ( |
-            | 
-            0 macToolbox colorSpec new value: i).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'macToolboxGlobals' -> () From: ( | {
-         'Category: graphics (ui1)\x7fModuleInfo: Module: colormap InitialContents: FollowSlot\x7fVisibility: public'
-        
-         platformColormap = ( |
-            | 
-            0 macToolbox colorTable).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {

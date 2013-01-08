@@ -1,6 +1,6 @@
-# Sun-$Revision: 30.12 $
+# Sun-$Revision: 30.12 $ -*- mode: makefile -*-
  
-# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information.
 
 # Makefile template for VM object subdirectories
@@ -56,7 +56,7 @@ endif
 ${GLUECHECKSUM} : ${GLUEFILELIST}
 	@lock_run _`basename $@.lock` " \
 	    echo Calculating glue check sum ; \
-            cat /dev/null/ \`cat ${GLUEFILELIST}\` | skipComments | sum | awk '{print "1" \$$1}' >${GLUECHECKSUM} \
+            cat /dev/null \`cat ${GLUEFILELIST}\` | skipComments | sum | awk '{print "1" \$$1}' >${GLUECHECKSUM} \
 	   "
 
 glueCheckSum.o : ${GLUECHECKSUM_C} ${GLUECHECKSUM}

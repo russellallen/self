@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 /* control stuff for instruction tracing with shade */
@@ -39,5 +39,5 @@ typedef class TraceControl {
 
 # if defined(SIC_COMPILER) && !defined(NOASM)
   oop itrace_prim(oop onoff, oop mode);
-  void itrace(bool onoff);
+  void itrace(fint fn);
 # endif

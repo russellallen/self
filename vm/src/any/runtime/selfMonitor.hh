@@ -174,12 +174,12 @@ class SelfMonitor: public Monitor {
   int acc_x(), acc_w(), acc_y(), acc_wb(), acc_hb(), acc_xb(), acc_yb();
   
   int mbar_x(), eden_y();
-  int pics_x(), pics_y(), pics_w();  char* pics_t();
-  int code_x(), code_y(), code_w();  char* code_t();
-  int nic_x(),  nic_y(),  nic_w();  char*  nic_t();
-  int  sic_x(),  sic_y(),  sic_w();  char*  sic_t();
-  int deps_x(), deps_y(), deps_w();  char* deps_t();
-  int dbug_x(), dbug_y(), dbug_w();  char* dbug_t();
+  int pics_x(), pics_y(), pics_w();  const char* pics_t();
+  int code_x(), code_y(), code_w();  const char* code_t();
+  int  nic_x(),  nic_y(),  nic_w();  const char*  nic_t();
+  int  sic_x(),  sic_y(),  sic_w();  const char*  sic_t();
+  int deps_x(), deps_y(), deps_w();  const char* deps_t();
+  int dbug_x(), dbug_y(), dbug_w();  const char* dbug_t();
   
   
   int mz_gap() { return 30; }

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "stringOop.hh"
@@ -21,7 +21,7 @@ bool stringOopClass::is_unary(fint upToLen) {
   return true;
 }
 
-stringOop create_string(fint size) {
+stringOop stringOopClass::create_string(fint size) {
   char* nb;
   oop *p= Memory->old_gen->alloc_objs_and_bytes(size, 0, nb);
   stringOop obj= as_stringOop(p);

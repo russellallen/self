@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "send.hh"
@@ -14,7 +14,7 @@
     ErrorMessage(b->errorMessage); \
     return false; \
   } else /* else is for semicolon */ \
-   0 /* silence unwanted ; warning */
+   (void)0 /* silence unwanted ; warning */
   
   
 void Send::PrintDelegatee() {
@@ -27,7 +27,7 @@ bool Send::GenByteCodes(AbstractByteCode* b, Object* parent, bool isExpr) {
   // if (receiver && receiver->IsSelf()) {
   //  warning("sending messages to explicit \"self\" is considered bad style");
   // }
-  char* msg= message->AsCharP();
+  const char* msg= message->AsCharP();
   
   stringOop selector = new_string(msg);
   
@@ -87,7 +87,7 @@ void Unary::Print() {
 
 bool Unary::GenByteCodes(AbstractByteCode* b, Object* parent, bool isExpr) {
   Unused(isExpr);
-  char* msg= message->AsCharP();
+  const char* msg= message->AsCharP();
   if (strncmp(msg, "__", 2) == 0) {
     ErrorMessage("illegal pseudo-primitive");
     return false;
@@ -151,7 +151,7 @@ void Keyword::Print() {
 
 bool Keyword::GenByteCodes(AbstractByteCode* b, Object* parent, bool isExpr) {
   Unused(isExpr);
-  char* msg= message->AsCharP();
+  const char* msg= message->AsCharP();
    
   if (strcmp(msg, "__DefineLabel:") == 0) {
     return  GenLabelDefinition(b, parent);
@@ -170,7 +170,7 @@ bool Keyword::GenByteCodes(AbstractByteCode* b, Object* parent, bool isExpr) {
   static const char* casePrefix= "__BranchIndexedBy:To:";
   static const fint  casePrefixLength= 21;
   assert(strlen(casePrefix) == casePrefixLength, "recount length");
-  if (strncmp(msg, casePrefix, sizeof(casePrefix)) == 0) {
+  if (strncmp(msg, casePrefix, strlen(casePrefix)) == 0) {
     return GenIndexedBranch(b, parent);
   }
   if (strncmp(msg, "__", 2) == 0) {

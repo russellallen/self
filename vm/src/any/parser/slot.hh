@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -15,10 +15,10 @@
 class Slot: public ParseNode {
  public:
   String* name;
-  char* annotation;
+  const char* annotation;
   Token* startToken;
   
-  Slot(String* n, Token* t, char* anno) { 
+  Slot(String* n, Token* t, const char* anno) { 
     name = n; annotation = anno; startToken = t; }
   
   virtual oop slot_contents(fint& index) = 0;
@@ -59,7 +59,7 @@ class SlotList: public List {
 
 class ArgSlot: public Slot {
  public:
-  ArgSlot(String* n, Token* t, char* anno = "") 
+  ArgSlot(String* n, Token* t, const char* anno = "") 
     : Slot(n, t, anno) {}      
   
   oop slot_contents(fint& index) { return as_smiOop(index ++); }
@@ -95,7 +95,7 @@ class DataSlot: public Slot {
   bool is_parent;
   bool assignable;
   
-  DataSlot(String* n, Expr* e, Token* t, char* anno,
+  DataSlot(String* n, Expr* e, Token* t, const char* anno,
            bool parent = false, bool assign = false) 
     : Slot(n, t, anno) { 
       expr = e; is_parent = parent; assignable = assign; }
