@@ -19,7 +19,7 @@
 #
 #   Do:
 
-export SELF_WORKING_DIR=${PWD}/.. 
+export SELF_WORKING_DIR=${PWD}/../..
 echo Setting paths: SELF_WORKING_DIR = $SELF_WORKING_DIR
 
 export PATH=$PATH:$SELF_WORKING_DIR/bin/linux
