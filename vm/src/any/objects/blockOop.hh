@@ -1,12 +1,11 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
-
 
 class blockOopClass: public slotsOopClass {
 private:
@@ -14,7 +13,7 @@ private:
                       // to the home frame
 public:
   // constructor
-  friend blockOop as_blockOop(void* p) { return (blockOop) as_slotsOop(p); }
+  static blockOop as_blockOop(void* p) { return (blockOop) as_slotsOop(p); }
   
   // accessors
   blockOopClass* addr()    { return (blockOopClass*) slotsOopClass::addr(); }
@@ -58,13 +57,16 @@ public:
   blockOop copy()  { return (blockOop) clone_block(smiOop(NULL)); }
 
   // compiler support
-  friend int32 scope_offset() {
+  static int32 scope_offset() {
     blockOopClass* p = NULL;
     return (int32) (& (p->scopeHomeFr) ) - Mem_Tag; }
   blockOop clone_and_set_desc(smiOop);
   void remap(nmethod* nm, frame* newHome);
   void remap(Map* newMap, frame* newHome);
 };
+
+inline blockOop as_blockOop(void* p) { return blockOopClass::as_blockOop(p); }
+inline int32 scope_offset() { return blockOopClass::scope_offset(); }
 
 oop clone_block_prim(oop rcvr, smiOop fp);
 oop catch_interprocess_returns(oop blk);

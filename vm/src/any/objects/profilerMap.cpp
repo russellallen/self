@@ -1,12 +1,12 @@
 /* Sun-$Revision: 30.8 $ $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "profilerMap.hh"
 # include "_profilerMap.cpp.incl"
 
-profilerOop create_profiler() {
+profilerOop profilerMap::create_profiler() {
   slotList* slots = new slotList(VMString[PARENT], 
                                  parent_map_slotType,
                                  create_slots((slotList*)NULL));
@@ -14,6 +14,7 @@ profilerOop create_profiler() {
   profilerOop prof;
   profilerMap* m= (profilerMap*)create_map(sizeof(profilerMap), slots,
                                            &pm, (oop*)&prof);
+  Unused(m); // profiling
   prof->initialize();
   return prof;
 }

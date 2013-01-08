@@ -1,7 +1,7 @@
 # if  TARGET_ARCH == I386_ARCH
 /* Sun-$Revision: 1.4 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation  "runtime_i386.hh"
@@ -72,7 +72,7 @@ extern "C" oop breakpoint_prim(oop rcvr) {
 // I haven't implemented it yet, so I just put the stub here. -mabdelmalek 10/02.
 void  HandleUncommonTrap()
 {
-  fatal("uncommon traps unimplemented on PPC");
+  fatal("uncommon traps unimplemented on i386");
 }
 
 
@@ -110,64 +110,4 @@ void set_flags_for_platform() {
   SaveOutgoingArgumentsOfPatchedFrames = true;   lprintf("for I386:  SaveOutgoingArgumentsOfPatchedFrames = true\n");
 }
 
-
-# if HOST_ARCH == PPC_ARCH  &&  TARGET_ARCH == I386_ARCH //testing Intel asm
-
-# define STUBBIFY(a) void a() {fatal(XSTR(a));}
-extern "C" {
-  oop EnterSelf(oop recv, char* entryPoint, oop arg1) { fatal("stub");}
-  frame* currentFrame() { return 0; }
-  void firstSelfFrameSendDescEnd(...) {fatal("stub");}
-  char* vmDate;
-
-  oop Recompile_stub(...) {fatal("stub");}
-  oop MakeOld_stub(...) {fatal("stub");}
-  
-  oop SendMessage_stub(...) {fatal("stub");}
-  oop SendDIMessage_stub(...) {fatal("stub");}
-
-  oop smi_add_prim(smiOop, smiOop) { fatal("stub"); }
-  oop smi_and_prim(smiOop, smiOop) { fatal("stub"); }
-  oop smi_arithmetic_shift_left_prim(smiOop, smiOop) { fatal("stub"); }
-  oop smi_arithmetic_shift_right_prim(smiOop, smiOop) { fatal("stub"); }
-  oop smi_complement_prim(smiOop) { fatal("stub"); }
-  oop smi_logical_shift_left_prim(smiOop, smiOop) { fatal("stub"); }
-  oop smi_logical_shift_right_prim(smiOop, smiOop) { fatal("stub"); }
-  oop smi_mul_prim(smiOop, smiOop) { fatal("stub"); }
-  oop smi_or_prim(smiOop, smiOop) { fatal("stub"); }
-  oop smi_sub_prim(smiOop, smiOop) { fatal("stub"); }
-  oop smi_xor_prim(smiOop, smiOop) { fatal("stub"); }
-
-  void volatile ContinueNLRAfterReturnTrap(char* pc, char* sp, oop result,
-                                           frame* home, int32 homeID) {fatal("stub");}
-                                           
-  oop volatile ContinueNLRFromC(char* addr, bool isInterpreted, bool isSelfIC) {fatal("stub");}
-
-
-STUBBIFY(PrimCallReturnTrap)
-STUBBIFY(ProfilerTrap)
-STUBBIFY(ReturnTrap)
-
-
-  void  SetSPAndCall(char** callerSaveAddr, char** calleeSaveAddr,
-                     bool init, bool8* semaphore) {fatal("stub");}
-  
- char* SwitchStack0(char* fn_start,  char* newSP) {fatal("stub");}
-  char* SwitchStack1(char* fn_start,  char* newSP, void* arg1) {fatal("stub");}
-  char* SwitchStack2(char* fn_start,  char* newSP, void* arg1, void* arg2) {fatal("stub");}
-  char* SwitchStack3(char* fn_start,  char* newSP, void* arg1, void* arg2, void* arg3) {fatal("stub");}
-  char* SwitchStack4(char* fn_start,  char* newSP,
-                     void* arg1, void* arg2, void* arg3, void* arg4) {fatal("stub");}
-oop CallPrimitiveFromInterpreter(...) {fatal("stub"); }
-
-void      firstSelfFrame_returnPC(...) {fatal("stub");}
-char*          ReturnTrap_returnPC;
-char*       ReturnTrapNLR_returnPC;
-char*      Recompile_stub_returnPC;
-char*        MakeOld_stub_returnPC;
-char*    SendMessage_stub_returnPC;
-
-}
-
-# endif
 # endif // TARGET_ARCH == I386_ARCH

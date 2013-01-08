@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -14,8 +14,8 @@ class Send: public Expr {
   String* message;
   String* del;
   
-  Send(Expr* r, String* m, String* d, char* start, char* end, 
-       char* file, fint line, fint col, Parser* p)
+  Send(Expr* r, String* m, String* d, const char* start, const char* end, 
+       const char* file, fint line, fint col, Parser* p)
     : Expr(start, end, file, line, col, p){
       receiver = r; message = m; del = d;
     }
@@ -36,8 +36,8 @@ class Send: public Expr {
 
 class Unary: public Send {
  public:
-  Unary(Expr* r, String* m, String* d, char* start, char* end, 
-        char* file, fint line, fint col, Parser* p)
+  Unary(Expr* r, String* m, String* d, const char* start, const char* end, 
+        const char* file, fint line, fint col, Parser* p)
     : Send(r, m, d, start, end, file, line, col, p) {}
   
   bool GenByteCodes(AbstractByteCode* b, Object* parent, bool isExpr = true);
@@ -50,7 +50,8 @@ class Binary: public Unary {
   Expr* arg;
   
   Binary(Expr* r, String* m, Expr* a, String* d,
-         char* start, char* end, char* file, fint line, fint col, Parser* p)
+         const char* start, const char* end, const char* file, 
+         fint line, fint col, Parser* p)
     : Unary(r, m, d, start, end, file, line, col, p) {
       arg = a;
     }
@@ -72,7 +73,7 @@ class Keyword: public Send {
   ExprList* args;
   
   Keyword(Expr* r, StringList* k, ExprList* a, String* d,
-          char* start, char* end, char* file, fint line, fint col, Parser* p)
+          const char* start, const char* end, const char* file, fint line, fint col, Parser* p)
     : Send(r, 0, d, start, end, file, line, col, p) { 
       keywords = k; args = a; message = keywords->AsSelector();
     }

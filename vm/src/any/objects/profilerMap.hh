@@ -1,12 +1,11 @@
 /* Sun-$Revision: 30.10 $ $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
-
 
 class profilerMap : public slotsMapDeps {
  public:
@@ -21,7 +20,7 @@ class profilerMap : public slotsMapDeps {
   bool verify(oop obj);
 
   // creation operation
-  friend profilerOop create_profiler(); // To create initial profilerOop
+  static profilerOop create_profiler(); // To create initial profilerOop
   
   // killable operations
   void    kill(oop p);

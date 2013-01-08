@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
@@ -19,7 +19,7 @@ extern int32* sendCounts;       // counter array
 extern fint nsendCounts;        // size of counter array
 
 class CountCodePattern; // instruction pattern for stub
-  
+
 class CountStub : public NCodeBase {
  protected:
          // shouldn't call this except via constructors in subclasses
@@ -35,12 +35,13 @@ class CountStub : public NCodeBase {
   // convention: the calling sd/PIC is responsible for maintaining the
   // call/jump to the count stub, except for deallocate (resets
   // sendDesc jump addr)
-  friend CountStub* new_CountStub(nmethod* target, pc_t entryPoint,
+  static CountStub* new_CountStub(nmethod* target, pc_t entryPoint,
                                   nmln* sd_nmln, CountType t);
   friend class nmethod;
   friend class sendDesc;
   void deallocate();
   bool isCountStub()            { return true; }
+  static bool isCountStub(void* p);
   virtual CountType countType() = 0;
   pc_t insts()                 { return (pc_t)(this + 1); }
   fint id();
@@ -49,9 +50,7 @@ class CountStub : public NCodeBase {
   nmethod* target();
   sendDesc* sender_sendDesc() {
     sendDesc *s= sd();  return s ? s : pic()->sd(); }
-  nmethod* sender() {           // sending nmethod
-    nmethod *findNMethod(void *s);
-    return findNMethod(sender_sendDesc()); }
+  nmethod* sender();           // sending nmethod
   sendDesc* sd();               // calling sendDesc (NULL if PIC)
   CacheStub* pic();             // calling PIC (NULL if sendDesc)
   virtual void moveTo_inner(NCodeBase* to, int32 delta, int32 size);
@@ -65,7 +64,7 @@ class CountStub : public NCodeBase {
   void initSendDesc(nmln* sd_nmln);
   virtual void init(nmethod* nm) { Unused(nm); }
   void print();
-  virtual char* name() = 0;
+  virtual const char* name() = 0;
   bool verify() { return verify2(pic()); }
   bool verify2(CacheStub *calling_pic);
   void read_snapshot(FILE *f);
@@ -87,8 +86,9 @@ class CountingStub: public CountStub {
   void* operator new(size_t size);
   CountType countType()         { return Counting; }
   fint size();                  // size in bytes
-  char* name()                  { return "CountingStub"; }
-  friend bool isCountStub(void* p);
+  const char* name()                  { return "CountingStub"; }
+  //friend bool isCountStub(void* p);
+  friend class CountStub;
 };
 
 class ComparingStub: public CountStub {
@@ -99,8 +99,9 @@ class ComparingStub: public CountStub {
   CountType countType()         { return Comparing; }
   fint size();                  // size in bytes
   void init(nmethod* nm);
-  char* name()                  { return "ComparingStub"; }
-  friend bool isCountStub(void* p);
+  const char* name()                  { return "ComparingStub"; }
+  //friend bool isCountStub(void* p);
+  friend class CountStub;
  protected:
   void  set_recompile_addr(pc_t addr);
 # ifdef UNUSED
@@ -118,8 +119,10 @@ class AgingStub : public ComparingStub {
   AgingStub(nmethod* t, pc_t entryPoint, nmln* sd_nmln);
   void init(nmethod* nm);
   bool isAgingStub()            { return true; }
-  char* name()                  { return "AgingStub"; }
-  friend bool isCountStub(void* p);
+  const char* name()                  { return "AgingStub"; }
+  //friend bool isCountStub(void* p);
+  friend class CountStub;
+
 
   // initializiation
   static int32 add_inst;

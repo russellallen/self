@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -85,7 +85,7 @@ class AbstractByteCode: public preservedVmObj {
    LabelSet*  labelSet;
   BranchSet* branchSet;
   
-  char* errorMessage;
+  const char* errorMessage;
   bool  ranOutOfMemory;
   
  public:
@@ -166,6 +166,7 @@ class AbstractByteCode: public preservedVmObj {
   int32 getLabelIndex( oop label);
 };
 
+
 class ByteCode: public AbstractByteCode {
  public:
   
@@ -213,9 +214,9 @@ class ByteCode: public AbstractByteCode {
 
 
   bool Finish();
-  bool Finish(char* fname, fint sourceLine, char* srcStart, fint srcLen);
-  bool Finish(char* fname, char* src);
-  bool Finish(char* fname, fint sourceLine, fint srcOffset, fint srcLen);
+  bool Finish(const char* fname, fint sourceLine, const char* srcStart, fint srcLen);
+  bool Finish(const char* fname, const char* src);
+  bool Finish(const char* fname, fint sourceLine, fint srcOffset, fint srcLen);
   
   // preserve  operation
   void oops_do(oopsDoFn f) { 
@@ -237,17 +238,38 @@ class ByteCode: public AbstractByteCode {
 
   // programming
 
-  friend oop create_outer_method_prim( oop ignore,
+  static oop create_outer_method_prim( oop ignore,
                                        byteVectorOop bv,
                                        objVectorOop lits,
                                        stringOop file,
                                        smiOop line,
                                        stringOop source);
   
-  friend oop create_block_method_prim( oop ignore,
+  static oop create_block_method_prim( oop ignore,
                                       byteVectorOop bv,
                                       objVectorOop lits,
                                       stringOop file,
                                       smiOop line,
                                       stringOop source);
 };
+
+
+inline oop create_outer_method_prim( oop ignore,
+                                     byteVectorOop bv,
+                                     objVectorOop lits,
+                                     stringOop file,
+                                     smiOop line,
+                                     stringOop source) {
+    return ByteCode::create_outer_method_prim(ignore, 
+                                              bv, lits, file, line, source);
+}
+
+inline oop create_block_method_prim( oop ignore,
+                                 byteVectorOop bv,
+                                 objVectorOop lits,
+                                 stringOop file,
+                                 smiOop line,
+                                 stringOop source) {
+    return ByteCode::create_block_method_prim(ignore, 
+                                              bv, lits, file, line, source);
+}

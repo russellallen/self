@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.20 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "sig_unix.hh"
@@ -70,19 +70,17 @@ void SignalInterface::initialize_platform(bool ctrlC) {
   if (! signal_stack) {
     init_signal_stack();
   }
-  # ifndef ROSETTA
-    install_signal(SIGSEGV,        signal_handler);
-    install_signal(SIGNonLifo,     signal_handler);
+  install_signal(SIGSEGV,        signal_handler);
+  install_signal(SIGNonLifo,     signal_handler);
     
-    // catch all fatal errors
-    install_signal(SIGILL,         signal_handler);
-    install_signal(SIGABRT,        signal_handler);
-    // want to use gdb always
-    // install_signal(SIGEMT,         signal_handler);
-    install_signal(SIGFPE,         signal_handler);
-    install_signal(SIGBUS,         signal_handler);  
-    install_signal(SIGSYS,         signal_handler);
-  # endif
+  // catch all fatal errors
+  install_signal(SIGILL,         signal_handler);
+  install_signal(SIGABRT,        signal_handler);
+  // want to use gdb always
+  // install_signal(SIGEMT,         signal_handler);
+  install_signal(SIGFPE,         signal_handler);
+  install_signal(SIGBUS,         signal_handler);  
+  install_signal(SIGSYS,         signal_handler);
   // ^Z handling
   install_signal(SIGTSTP,        Signal_Handler_t(ctrl_z_handler));
   install_signal(SIGCONT,        Signal_Handler_t(ctrl_z_handler));
@@ -93,15 +91,13 @@ void SignalInterface::initialize_platform(bool ctrlC) {
     install_signal(SIGINT,       signal_handler);
   }
   install_signal(SIGIO,          signal_handler);
-  # ifndef ROSETTA
-    install_signal(SIGUSR1,        signal_handler);
-    install_signal(SIGUSR2,        signal_handler);
-    install_signal(SIGPIPE,        signal_handler);
-    install_signal(SIGTERM,        signal_handler);
-    install_signal(SIGURG,         signal_handler);
-    install_signal(SIGCHLD,        signal_handler);
-    install_signal(SIGHUP,         signal_handler);
-  # endif
+  install_signal(SIGUSR1,        signal_handler);
+  install_signal(SIGUSR2,        signal_handler);
+  install_signal(SIGPIPE,        signal_handler);
+  install_signal(SIGTERM,        signal_handler);
+  install_signal(SIGURG,         signal_handler);
+  install_signal(SIGCHLD,        signal_handler);
+  install_signal(SIGHUP,         signal_handler);
   install_signal(SIGWINCH,       signal_handler);
 
 # if TARGET_OS_VERSION == SUNOS_VERSION
@@ -169,7 +165,6 @@ void SignalInterface::install_signal(int sig, Signal_Handler_t handler) {
 
 
 void SignalInterface::init_sig_mask() {
-  // XXX ROSETTA
   if (CheckAssertions) {
     // only block timers and SIGIO - gdb doesn't work with all signals blocked
     sigemptyset(&sig_mask);
@@ -234,11 +229,7 @@ static void signal_handler(int sig, self_code_info_t *info, self_sig_context_t *
       fatal("sigprocmask failed");
     }
     if (!sigismember(&oset, sig))
-    # ifdef ROSETTA
-        warning2("signal %d is not member of 0x%x", sig, oset);
-    # else
-        fatal2("signal %d is not member of 0x%x", sig, (int*)(int*)&oset);
-    # endif
+    fatal2("signal %d is not member of 0x%x", sig, (int*)(int*)&oset);
       
     InterruptedContext::the_interrupted_context->set(scp);
     SignalInterface::handle_signal( sig, 
@@ -267,7 +258,6 @@ static void signal_handler(int sig, self_code_info_t *info, self_sig_context_t *
   ||  TARGET_OS_VERSION ==  LINUX_VERSION
 
 void SignalInterface::init_signal_stack() {
-  // ensure generic val is enough for ppc
   signal_stack_size = max(1 << 15, SIGSTKSZ); // 32K should be enough
   self_stack_t ss;
   ss.ss_sp    = signal_stack = (char*)valloc(signal_stack_size);
@@ -282,7 +272,6 @@ void SignalInterface::init_signal_stack() {
 # elif TARGET_OS_VERSION == SUNOS_VERSION
 
 void SignalInterface::init_signal_stack() {
-  // ensure generic val is enough for ppc
   signal_stack_size = max(1 << 15, SIGSTKSZ); // 32K should be enough
   signal_stack = (char*)valloc(signal_stack_size);
   struct sigstack ss;

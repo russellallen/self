@@ -1,6 +1,6 @@
 'Sun-$Revision: 30.7 $'
 
-"Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+"Copyright 1992-2012 AUTHORS.
  See the LICENSE file for license information."
 
 "CAUTION: This file is not part of the documented Self world.  It may be
@@ -13,7 +13,7 @@
 
 (primitiveMaker reader copy staticLinking) create: 'xlib' Flag: 'xlib_semaphore' From: ('
 
-  -- Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+  -- Copyright 1992-2012 AUTHORS.
   -- See the LICENSE file for license information.
 
   macroName: xlib

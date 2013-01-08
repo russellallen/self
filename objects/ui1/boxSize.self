@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.10 $'
  '
-Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+Copyright 1992-2012 AUTHORS.
 See the LICENSE file for license information.
 '
 
@@ -317,26 +317,6 @@ See the LICENSE file for license information.
          'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          textEditorFont.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'macToolboxGlobals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         boxSizePlatformMixin = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'macToolboxGlobals' -> 'boxSizePlatformMixin' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals macToolboxGlobals boxSizePlatformMixin.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'macToolboxGlobals' -> 'boxSizePlatformMixin' -> () From: ( | {
-         'Category: initializing\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: private'
-        
-         loadFont: name Style: style Size: size For: win IfFail: fb = ( |
-             fs.
-            | 
-            fs: fontSpec copyName: name Style: style Size: size.
-            macToolbox fontIDAndStruct 
-                copyForFontSpec: fs  Port: win gc).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {

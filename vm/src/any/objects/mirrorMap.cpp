@@ -1,12 +1,12 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "mirrorMap.hh"
 # include "_mirrorMap.cpp.incl"
 
-mirrorOop create_mirror(oop reflectee) {
+mirrorOop mirrorMap::create_mirror(oop reflectee) {
   slotList* slots = new slotList(VMString[PARENT], 
                                  parent_map_slotType,
                                  create_slots((slotList*)NULL));

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -8,7 +8,6 @@
 # endif
 
 #include <pthread.h>
-
 
 class InterruptedContext {
  private:
@@ -32,16 +31,18 @@ class InterruptedContext {
   void  set(InterruptedContext* ic) { scp = ic->scp; }
   
   bool  is_set() { 
-     bool r   =   scp != &dummy_scp  &&  scp != NULL; 
-     assert(!r || scp->uc_mcontext != NULL, "Snow Leopard isSet bug hut");
+     bool r   =   (scp != &dummy_scp)  &&  (scp != 0); 
+# if TARGET_OS_VERSION == MACOSX_VERSION
+     assert(!r || (scp->uc_mcontext != NULL), "Snow Leopard isSet bug hut");
+# endif
      return r;
   }
 
   char**  pc_addr();
   char* pc();
-  char* next_pc(); // noop on PPC
+  char* next_pc();
   void  set_pc(void* pc);
-  void  set_next_pc(void* npc); // noop on PPC
+  void  set_next_pc(void* npc);
 
 
   int*   sp_addr();

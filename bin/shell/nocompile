@@ -2,7 +2,7 @@
 
 # Sun-$Revision: 30.6 $
 
-# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information. 
 
 # allows a user to lock out compiles started by other people for a while

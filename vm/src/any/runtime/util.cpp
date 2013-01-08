@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "util.hh"
@@ -52,21 +52,21 @@ void set_bytes(char* to, fint count, char value) {
   }
 
 
-char* copy_string(char* s) {
+char* copy_string(const char* s) {
   fint len = strlen(s) + 1;
   char* str = NEW_RESOURCE_ARRAY( char, len);
   strcpy(str, s);
   return str;
 }
 
-char* copy_c_heap_string(char* s) {
+char* copy_c_heap_string(const char* s) {
   fint len = strlen(s) + 1;
   char* str = NEW_C_HEAP_ARRAY( char, len);
   strcpy(str, s);
   return str;
 }
 
-char* copy_string(char* s, smi len) {
+char* copy_string(const char* s, smi len) {
   char* str = NEW_RESOURCE_ARRAY( char, len+1);
   memcpy(str, s, len+1);
   str[len] = '\0';
@@ -74,7 +74,7 @@ char* copy_string(char* s, smi len) {
 }
 
 
-int compare_slot_names(char *s1, fint l1, char *s2, fint l2) {
+int compare_slot_names(const char *s1, fint l1, const char *s2, fint l2) {
   int len= min(l1, l2);
   while (len > 0 && *s1 == *s2) {
     ++s1;
@@ -148,26 +148,24 @@ oop catchThisOne;
 
 void breakpoint() {
   fint junk = 0;
-  junk, 0;
+  (void)junk;
 }
 
 void error_breakpoint() {
   static fint junk = 0;
-  junk, 0;
-  # if COMPILER == MWERKS_COMPILER
-    // cannot run code from debugger:
-    if (WizardMode) {
-      eventLog->printPartial(50);
-      currentProcess->stack()->print();
-    }
-  # endif
+  (void)junk;
 }
 
-volatile void ShouldNotCall(char *file, int line) {
+volatile void ShouldNotCall(const char *file, int line) {
   lprint_fatal(file, line, "Calling member function which shouldn't be called");
 }
 
-volatile void ShouldNotReach(char *file, int line) {
+volatile void ShouldNotReach(const char *file, int line) {
   lprint_fatal(file, line, "Reached supposedly impossible case");
 }
 
+// just in case asserts go haywire
+# if defined(assert)
+#    undef assert
+# endif
+void assert(bool b, const char* msg) {};

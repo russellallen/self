@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -79,7 +79,7 @@
     void  setNode(Node* n, PReg* p)     { _node = n; _preg = p; }
     SSelfScope* scope();
     virtual NameNode* nameNode(bool mustBeLegal = true);
-    void print_expr(char* type);
+    void print_expr(const char* type);
   };
 
   class UnknownSExpr : public SExpr {
@@ -217,15 +217,15 @@
     SExpr* pop();
   };
   
-  
+
   class BranchBCTargetStack : public SExprBList {
+   public:
     // keeps track of s exprs in expr stack at target of a branch bytecode
-   friend BranchBCTargetStack* new_BranchBCTargetStack(
+    static BranchBCTargetStack* new_BranchBCTargetStack(
               SCodeScope* s,
               bool  isTargetOfBackwardsBranch,
               int32 len,
               int32 targetBCI );
-   public:
      BranchBCTargetStack( int32 len );
      void mergeInExprsFromStack( SExprStack* stk, 
                                  Node*       mergeNode, 
@@ -242,6 +242,17 @@
                       Node*  mergeNode,
                       bool   isBackwards ) = 0;
   };
+
+  static inline BranchBCTargetStack* new_BranchBCTargetStack(
+             SCodeScope* s,
+             bool  isTargetOfBackwardsBranch,
+             int32 len,
+             int32 targetBCI ) {
+    return BranchBCTargetStack::new_BranchBCTargetStack(s, 
+                                                        isTargetOfBackwardsBranch,
+                                                        len, targetBCI);    
+  }
+
 
   class FBranchBCTargetStack : public BranchBCTargetStack {
     // keeps track of s exprs in expr stack at target of a branch bytecode

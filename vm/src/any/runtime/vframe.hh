@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.12 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -255,8 +255,8 @@ class compiled_vframe: public abstract_vframe {
   bool EQ(abstract_vframe *f) {
     return 
       this == f
-      ||     fr == f->fr
-         &&  desc->is_equal(f->as_compiled()->desc); }
+      ||     (fr == f->fr
+         &&  desc->is_equal(f->as_compiled()->desc)); }
 
   
  protected:
@@ -440,8 +440,6 @@ class compiled_vframe: public abstract_vframe {
  protected:
   void print_code(fint curFrame);
 };
-
-
 
 // used to represent the callee of the actual last vframe (to get at out-
 // going args)...somewhat hacky - only get_contents is guaranteed to work

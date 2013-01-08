@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.17 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "sendDesc_abstract.hh"
@@ -65,7 +65,7 @@ bool sendDesc::checkLookupTypeAndEntryPoint(nmethod *nm, char *entryPoint) {
   // check entry point
   if (   (lookupType() & ImplicitSelfBit)
       && !isResendLookupType(lsrc)
-      && findNMethod(this)->reusable()) {
+      && nmethod::findNMethod(this)->reusable()) {
     // If we don't really know the receiver type for sure
     // (because the it's an implicit self send and the
     // sending method is reusable),
@@ -99,7 +99,7 @@ void sendDesc::extend(nmethod* nm, mapOop receiverMapOop,
           assert(dependency()->notEmpty(), "shouldn't be empty");
           // check for duplicate nmethod & rcvr map
           CountStub *oldcs= countStub();
-          nmethod *oldnm= oldcs ? oldcs->target() : findNMethod(addr);
+          nmethod *oldnm= oldcs ? oldcs->target() : nmethod::findNMethod(addr);
           assert(   oldnm != nm
                  || receiverMapOop != oldnm->key.receiverMapOop(),
                  "already linked to this nmethod, why rebind?? (maybe I-cache did not get flushed)");
@@ -175,7 +175,8 @@ void sendDesc::rebind(nmethod* nm, char* addr, CountStub *cs_from_pic) {
   } else if (UseAgingStubs && isCounting()) {
     // create count stub
     if (current) dependency()->remove();        // unlink current target
-    CountStub *newcs= new_CountStub(nm, addr, dependency(), countType()); 
+    CountStub *newcs = 
+      CountStub::new_CountStub(nm, addr, dependency(), countType()); 
     set_jump_addr(newcs->insts());
   } else {
     // rebind inline cache
@@ -328,7 +329,7 @@ void sendDesc::print() {
   printIndent();
   lprintf("addr: %#lx", jump_addr());
   if (Memory->code->contains(jump_addr())) {
-    lprintf(" (nmethod %#lx)", findNMethod(jump_addr()));
+    lprintf(" (nmethod %#lx)", nmethod::findNMethod(jump_addr()));
   }
   lprintf("; mask: "); printMask(mask());
   lprintf("\n");
@@ -447,10 +448,6 @@ sendDesc* sendDesc::sendDesc_from_nmln(nmln* l) {
 // EnterSelf (<machine>.runtime.s). Lars July 92
 void sendDesc::init() {
   sendDesc::init_platform();
-  
-  # if HOST_ARCH == PPC_ARCH && TARGET_ARCH == I386_ARCH
-    if (true) return; // just testing asm
-  # endif
   sendDesc* f = sendDesc::first_sendDesc();
 
   // cannot do this test on sparc, it has a register-call which does not read as a call

@@ -1,6 +1,6 @@
-# Sun-$Revision: 30.5 $
+# Sun-$Revision: 30.5 $ -*- mode: makefile -*-
  
-# Copyright 1994-2006 Sun Microsystems, Inc. and Stanford University.
+# Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information.
 
 # Makefile template for compiling on the Sparc
@@ -14,15 +14,16 @@ HOST_ARCH = $(TARGET_ARCH)
 
 AS     = as
 GCC    = gcc
+#GCC   = clang
 
-SRC_DIRS = $(shell cd ${ROOT}/vm/src; ${MAKE} TARGET_COMPILER=gcc TARGET_ARCH=i386 srcDirList)
+SRC_DIRS = $(shell cd ${ROOT}/vm/src; ${MAKE} TARGET_ARCH=i386 srcDirList)
 SRC_PATH = ${ROOT}/vm/${VM_SUBDIR}/generated/incls \
 	   $(SRC_DIRS:%=${ROOT}/vm/src/%)
 
 #ASM_FILTER    = | removeUnderscore | sed 's;//.*;;'
-GLUE_LD_FLAGS = -G -m32
+GLUE_LD_FLAGS += -G -m32
 VPATH        += $(SRC_PATH:%=%:)
-CPP           = /usr/bin/cpp
+CPP           = ${GCC} -E
 
 XLIBLIBDIRS = 
 CLIBS = -lstdc++ -lnsl -lc
@@ -51,14 +52,20 @@ PRECOMP_DST_PATH = .
 
 CONFIGDEFS = \
              ${DYNAMIC} -DXLIB -DFAST_COMPILER -DSIC_COMPILER \
-	           -DDYNLINK_SUPPORTED -DDEBUG \
+           -DDYNLINK_SUPPORTED -DDEBUG \
              -DCOMPILER=${COMPILER} -DASSEMBLER=${ASSEMBLER} \
              -DMANUFACTURER=${MANUFACTURER}
 
 INCLUDE_PRECOMP = -include _precompiled.hh
-GNUFLAGS +=  -m32 -fno-exceptions -ffriend-injection -Winvalid-pch -fno-stack-protector
+#GNUFLAGS +=  -m32 -fno-exceptions -ffriend-injection -Winvalid-pch -fno-stack-protector
+GNUFLAGS += \
+            -m32 \
+            -fno-exceptions \
+            -Winvalid-pch \
+            -fno-stack-protector 
 
-INCLUDES += -I/usr/include -I/usr/include/X11 -I/usr/lib/c++/4.1
+
+#INCLUDES += -I/usr/include -I/usr/include/X11 -I/usr/lib/c++/4.1
 
 COMPILE.gnu.precomp  = ${GCC}   ${GNUFLAGS} ${CPPFLAGS} ${CFLAGS}
 #  ${GNUFLAGS} ${CPPFLAGS} -funit-at-a-time -maccumulate-outgoing-args -fpch-preprocess

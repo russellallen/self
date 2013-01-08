@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -29,10 +29,10 @@ class rSet: public CHeapObj {
   oop*  oop_for(char* p) {
     return (oop*)(low_boundary  +  (p - byte_map  <<  card_shift)); }
 
-  friend oop*  card_for(oop* p) { return (oop*)(int32(p) & ~(card_size - 1)); }
+  static oop*  card_for(oop* p) { return (oop*)(int32(p) & ~(card_size - 1)); }
   
   inline char* byte_map_end();
-  friend char* next_zero_byte(char*, char *);
+  static char* next_zero_byte(char*, char *);
   
  public:
   int byte_map_size() { return (high_boundary - low_boundary) / card_size; }

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -10,7 +10,6 @@
 
 // A vframeOop represents a live activation object.  It contains enough
 // information to construct the corresponding vframe.
-
 class vframeOopClass : public slotsOopClass {
  protected:
   vframeOop _next;              // next in list of live vframeOops
@@ -36,10 +35,10 @@ class vframeOopClass : public slotsOopClass {
 
   frame*     fr();
  public:
-  friend vframeOop create_vframeOop(oop method);          // for prototype
+  static vframeOop create_vframeOop(oop method);          // for prototype
   
-  friend vframeOop new_vframeOop(Process* p,abstract_vframe* vf);
-  friend vframeOop new_senderVFrameOop(Process* p, vframeOop from,
+  static vframeOop new_vframeOop(Process* p,abstract_vframe* vf);
+  static vframeOop new_senderVFrameOop(Process* p, vframeOop from,
                                        abstract_vframe* vf);
   
   frame*     locals()           { return addr()->_locals; }
@@ -91,3 +90,16 @@ class vframeOopClass : public slotsOopClass {
   friend class processMap;
   friend class Recompilation;
 };
+
+static inline vframeOop create_vframeOop(oop method) {
+  return vframeOopClass::create_vframeOop(method);
+}
+
+static inline vframeOop new_vframeOop(Process* p,abstract_vframe* vf) {
+  return vframeOopClass::new_vframeOop(p, vf);
+}
+static inline vframeOop new_senderVFrameOop(Process* p, vframeOop from,
+                                            abstract_vframe* vf) {
+  return vframeOopClass::new_senderVFrameOop(p, from, vf);
+}
+

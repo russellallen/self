@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.19 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -178,8 +178,8 @@ class universe {
 
   // snapshotting operations
   const char *check_sizes_for_snapshot(spaceSizes &snap_sizes);
-  bool  write_snapshot(char *fileName,
-                       char *compression_filter, char *decompression_filter,
+  bool  write_snapshot(const char *fileName,
+                       const char *compression_filter, const char *decompression_filter,
                        spaceSizes *snap_sizes);
 private:
 
@@ -392,7 +392,7 @@ void write_delim(FILE *file, char *delim);
 
 # define DERIVED_SWITCH_POINTERS_TEMPLATE(p)                                  \
     { int32 __o = oop(*p)->derived_offset();                                  \
-      oop __p = UNDERIVE(*p,__o);                                             \
+      oop __p = UNDERIVE(*p,__o); Unused(__p);                                \
       if (UNDERIVE(*p, __o) == (oop) from) {                                  \
         *((oop*) p) = REDERIVE((oop) to,__o);                                 \
       } }

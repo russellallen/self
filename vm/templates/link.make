@@ -1,6 +1,6 @@
-# Sun-$Revision: 30.13 $
+# Sun-$Revision: 30.13 $ -*- mode: makefile -*-
  
-# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information.
 
 # Makefile template for compiling directories, including tools
@@ -30,11 +30,16 @@ DEFS = ${SYSDEFS}  ${CONFIGDEFS} ${UNDEFS} ${OSDEFS} \
 # remove -fkeep-inline-functions for `production' version
 # -fmemoize-lookups -fsave-memoized break gcc (2.7.2)
 # removed -Wbad-function-cast for GCC3 -mabdelmalek 5/2003
+# -Wimplicit is not valid for C++ anymore -topa 5/2012
+# added line staring with -Wabi in 2012.
 GNUFLAGS += \
-	   -Wimplicit -Wreturn-type -Wswitch -Wcomment -Wformat \
-	   -Wpointer-arith \
-	   -Wtraditional-conversion -Woverloaded-virtual \
-	   -fkeep-inline-functions -Wno-write-strings
+           -fvisibility=default \
+           -fno-visibility-inlines-hidden \
+           -Wabi -Wno-non-virtual-dtor -Wreorder  \
+           -Wreturn-type -Wswitch -Wcomment -Wformat \
+           -Wpointer-arith \
+           -Woverloaded-virtual \
+           -fkeep-inline-functions -Wno-write-strings
 # would like to use -Wall but this includes -Wunused which gives just too
 # many errors in conjunction with ifdefs  -Urs 1/93
 #
@@ -55,7 +60,7 @@ CPPFLAGS = ${DEFS} ${INCLUDES}
 # don't use -O2 -- it breaks the VM...(gcc 2.3.3)  -Urs
 # Still causing problems with 2.7.2  -Mario
 # Don't use -finline-functions either, breaks VM (gcc 2.7.2)
-GNUOPTFLAGS =  -O -fno-defer-pop 
+GNUOPTFLAGS =  -O -fno-defer-pop -fkeep-inline-functions
 
 GLUE_LIB_DIR = ../../../objects/glue/${VM_SUBDIR}
 GLUE_LIBS = ${GLUE_LIB_DIR}/xlib_glue.o \
@@ -68,11 +73,9 @@ ${GLUE_LIBS} : alwaysMakeGlue
 alwaysMakeGlue :
 	cd ${GLUE_LIB_DIR} ; ${MAKE}
 
-# use "gcc -xc++" instead of "g++" -- the latter adds 3-5 secs for the
-# wrapper script   -Urs 9.93
 ifeq (${COMPILER}, GCC_COMPILER)
   COMPILE.gnu   = ${GCC} -xc++ ${GNUFLAGS} ${CPPFLAGS}
-  LINK.gnu      = ${GCC} -xc++
+  LINK.gnu      = ${GCC} ${LDFLAGS}
 else
   # can't figure out how to use +e1 to suppress multiple vtbls..
   COMPILE.gnu = CC -DNOASM -Dvolatile='' ${CPPFLAGS} +w +p -noex 
@@ -84,9 +87,9 @@ COMPILE.gnu.o.nog = ${COMPILE.gnu} ${GNUFLAGS} ${CFLAGSnog} -c
 COMPILE.gnu.s	  = ${COMPILE.gnu} ${GNUFLAGS} ${CFLAGS} -S
 COMPILE.gnu.i	  = ${COMPILE.gnu} ${GNUFLAGS} ${CFLAGS} -E
 
-ASFLAGS = --32
+ASFLAGS += --32
 ifeq (${COMPILER}, GCC_COMPILER)
- COMPILE1.s = ${COMPILE.gnu.i} -xc++
+ COMPILE1.s = ${COMPILE.gnu.i} -x assembler-with-cpp
 else
  COMPILE1.s = cpp -C ${CPPFLAGS}
 endif
@@ -133,10 +136,14 @@ ifeq (${COMPILER}, GCC_COMPILER)
     # LD = PURIFYOPTIONS="-HOME=$(PURELINKHOME)" \
     #      ${GCC} ${CC_PURELINK_OPTS} ${LDFLAGS}
   else
-    LDFLAGS += ${LIBDIRS} -e start -dc -dp -m32
-    # Get gcc to call ld directly
-    # for Jaguar:
-    LD = ${GCC} -B/usr/bin/ ${LDFLAGS}
+    ifeq (${TARGET_OS_VERSION},MACOSX_VERSION)
+        LDFLAGS += ${LIBDIRS} -e start -dc -dp -m32
+        # Get gcc to call ld directly
+        # for Jaguar:
+        LD = ${GCC} -B/usr/bin/ ${LDFLAGS}
+    else
+        LD = ${LINK.gnu} -m32
+    endif
   endif
 else
   LD = CC ${LIBDIRS}

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 #include <sys/types.h>
@@ -12,7 +12,7 @@
  * tests whether two named files are linked together
  */
 
-char usage[] = "usage: linked file1 file2\n";
+const char usage[] = "usage: linked file1 file2\n";
 
 main(argc, argv)
      int argc;

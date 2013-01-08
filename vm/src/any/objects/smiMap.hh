@@ -1,17 +1,16 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
 
-
 class smiMap: public immediateMap {
  public:
   // creation operation
-  friend Map* create_smiMap(oop parent);
+  static Map* create_smiMap(oop parent);
   
   // testing
   VtblMapType vtblMapType() { return MAP_TYPE_NAME(smiMap); }

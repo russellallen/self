@@ -1,19 +1,21 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # include <stddef.h> 
 # include <stdio.h>
 # include <stdlib.h>
+# include <time.h>
 # include <dirent.h>
 # include <string.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/param.h>
 # include <errno.h>
-#if TARGET_OS_VERSION == SOLARIS_VERSION \
-||  TARGET_OS_VERSION == MAC_OSX_VERSION
+#if TARGET_OS_VERSION == SUNOS_VERSION \
+||  TARGET_OS_VERSION == MACOSX_VERSION \
+||  TARGET_OS_VERSION == LINUX_VERSION
 # include <unistd.h>
 #else
   extern "C" int unlink(const char *);
@@ -84,10 +86,32 @@ void usage() {
   fprintf(stderr, " If no files are specified, the directory is updated.\n");
 }
 
+char* timeAsString(time_t t) {
+
+  char* outstr = (char*) malloc(sizeof(char) * 64);
+  time_t timeToConvert = t;
+  struct tm* localtm = localtime(&timeToConvert);
+  if (localtm == NULL) {
+    perror("localtime");
+    exit(EXIT_FAILURE);
+  }
+
+  if (strftime(outstr, sizeof(outstr), "%c", localtm) == 0) {
+    fprintf(stderr, "strftime returned 0");
+    exit(EXIT_FAILURE);
+  }  
+  return outstr;
+}
+
+
+
 struct File {
   char* path;
 
-  File(char* s0, char* s1 = NULL, char* s2 = NULL, char* s3 = NULL);
+  File(const char* s0, 
+       const char* s1 = NULL, 
+       const char* s2 = NULL,
+       const char* s3 = NULL);
   ~File() { free(path); }
 
   time_t modTime();
@@ -99,7 +123,7 @@ struct File {
   void becomeIfOutdated(File& basefile, int save);
 
   int addTrailingNewline();
-  int addTrailingNewlineInto(File*& copy, char* copy_name);
+  int addTrailingNewlineInto(File*& copy, const char* copy_name);
 
   char *getRevisionFromDate(char *date);
 
@@ -128,17 +152,20 @@ char* File::getRevisionFromDate(char *date) {
     exit(-1);
   }
 
-  fgets(line_buf, line_buf_size, file);
+  if (fgets(line_buf, line_buf_size, file) == NULL) {
+    fprintf(stderr, "Couldn't read line from %s", path);
+    exit(-1);
+  }
   line_buf[strlen(line_buf) - 1] = '\0';
   fclose(file);
   return strdup(line_buf);
 }
 
-File::File(char* s0, char* s1, char* s2, char* s3) {
-  int length =             strlen(s0)
-    	       + (s1 ? 1 + strlen(s1) : 0)
-	       + (s2 ? 1 + strlen(s2) : 0)
-	       + (s3 ? 1 + strlen(s3) : 0);
+File::File(const char* s0, const char* s1, const char* s2, const char* s3) {
+  int length =  strlen(s0)
+    + (s1 ? 1 + strlen(s1) : 0)
+    + (s2 ? 1 + strlen(s2) : 0)
+    + (s3 ? 1 + strlen(s3) : 0);
   path = (char*) malloc(length + 1);
   strcpy(path, s0);
   if (s1) { strcat(path, "/"); strcat(path, s1); }
@@ -203,7 +230,10 @@ void File::become(File& src, int save) {
 void File::becomeIfConfirmed(File& basefile, int save) {
   char line[LINE_LENGTH];
   fprintf(stderr, "Copy %s to %s [yn]? ", basefile.path, path);
-  gets(line);
+  if (fgets(line, LINE_LENGTH, stdin) == NULL) {
+    fprintf(stderr, "Couldn't read line from stdin");
+    exit(-1);
+  }
   if (line[0] == '\0' || line[0] == 'y' || line[0] == 'Y') {
     become(basefile, save);
   }
@@ -212,10 +242,14 @@ void File::becomeIfConfirmed(File& basefile, int save) {
 void File::becomeIfOutdated(File& basefile, int save) {
   if (modTime() < basefile.modTime()) {
     if (verbose) {
+      char* local = timeAsString(modTime());
+      char* base = timeAsString(basefile.modTime());
       fprintf(stderr,
 	      "Updating %s since outdated\n"
-	      "  (local file mod time: %d; basefile mod time: %d)",
-	      path, modTime(), basefile.modTime());
+	      "  (local file mod time: %s; basefile mod time: %s)",
+	      path, local, base);
+      free(local);
+      free(base);
     }
     if (strcmp(path, program) == 0) {
       // The file we are about to overwrite has the same name as the
@@ -237,10 +271,14 @@ void File::becomeIfOutdated(File& basefile, int save) {
     }
   } else {
     if (verbose) {
+      char* local = timeAsString(modTime());
+      char* base = timeAsString(basefile.modTime());
       fprintf(stderr,
 	      "Not updating %s since not outdated\n"
-	      "  (local file mod time: %d; basefile mod time: %d)",
-	      path, modTime(), basefile.modTime());
+	      "  (local file mod time: %s; basefile mod time: %s)",
+	      path, local, base);
+      free(local);
+      free(base);
     }
   }
 }
@@ -302,7 +340,7 @@ int File::addTrailingNewline() {
   return 0;
 }
 
-int File::addTrailingNewlineInto(File*& copy, char* copy_name) {
+int File::addTrailingNewlineInto(File*& copy, const char* copy_name) {
   FILE* file;
   if (!(file = fopen(path, "r"))) {
     fprintf(stderr, "Couldn't open %s, which should already exist\n", path);

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -126,7 +126,7 @@
     virtual bool canEliminateAndStillDebug();
   protected:
     bool canRuntimeValueBeReconstructed();
-    bool if_why(bool, char*);
+    bool if_why(bool, const char*);
   public:
   
     void eliminatePR( bool removingUnreachableCode );
@@ -160,12 +160,12 @@
     virtual void print();
     virtual void print_short()  { lprintf("%s", name()); }
     virtual char* name();       // string representing the preg name
-    virtual char* prefix()      { return "P"; }
+    virtual const char* prefix()      { return "P"; }
     virtual bool verify();
     virtual NameNode* nameNode(bool mustBeLegal = true); // for debugging info
     PReg* cpReg();                  // return "cp-equivalent" PReg
 
-    friend SCodeScope* findAncestor(SSelfScope* s1, fint& bci1,
+    static SCodeScope* findAncestor(SSelfScope* s1, fint& bci1,
                                     SSelfScope* s2, fint& bci2);
       // find closest common ancestor of s1 and s2, and the
       // respective sender bcis in that scope
@@ -181,7 +181,7 @@
     bool isTempPReg()           { return true; }
     bool isLiveAt(Node* n)      { Unused(n);  return false; }
     bool canCopyPropagate()     { return false; }
-    char* prefix()              { return "TempP"; }
+    const char* prefix()              { return "TempP"; }
   };
   
   
@@ -206,7 +206,8 @@
   // (in source terms), there cannot be any intervening defs,
   // and so an expr stack element can always be a SAPReg.
   // -- dmu 9/96 (as explained by Urs)
-  
+
+
   class SAPReg : public PReg {
    public:
     SCodeScope* creationScope;  // source scope to which receiver belongs
@@ -225,13 +226,13 @@
     bool isLiveAt(Node* n);
     bool isSAPReg()             { return true; }
     SCodeScope* nscope()        { return (SCodeScope*)scope; }
-    char* prefix()              { return "SAP"; }
+    const char* prefix()              { return "SAP"; }
     bool verify();
-   protected:
-    bool basic_isLiveAt(SCodeScope* s, fint bci);
-    friend SplitPReg* regCovering(SCodeScope* s1, fint bci1,
+    static SplitPReg* regCovering(SCodeScope* s1, fint bci1,
                                   SCodeScope* s2, fint bci2,
                                   SplitSig* sig);
+   protected:
+    bool basic_isLiveAt(SCodeScope* s, fint bci);
   };
 
   // like SAPReg, but only used for outgoing arguments
@@ -241,7 +242,7 @@
     ArgSAPReg(SCodeScope* s, Location l, bool incU, bool incD,
               fint st, fint en) : SAPReg(s, l, incU, incD, st, en) {}
     bool isArgSAPReg()          { return true; }
-    char* prefix()              { return "ArgSAP"; }
+    const char* prefix()              { return "ArgSAP"; }
   };
   
   // SplitPRegs hold the receiver of a split message send; their main
@@ -258,10 +259,10 @@
     bool extendLiveRange(Node* n);
     bool isLiveAt(Node* n);
     bool isSplitPReg()          { return true; }
-    char* prefix()              { return "SplitP"; }
+    const char* prefix()              { return "SplitP"; }
     char* name();
   };
-  
+
   class BlockPReg : public SAPReg {
    public:
     blockOop block;
@@ -284,11 +285,11 @@
     void markEscaped();     // mark this block as escaping
     bool isMemoized()           { return memoized; }
     bool canEliminateAndStillDebug();
-    char* prefix()              { return "BlkP"; }
+    const char* prefix()              { return "BlkP"; }
     char* name();
     bool verify();
 
-    friend SCodeScope* scopeFromBlockMap(mapOop blockMap);
+    static SCodeScope* scopeFromBlockMap(mapOop blockMap);
   };
   
 
@@ -301,7 +302,7 @@
     }
     virtual bool isNoPReg()     { return true; }
     bool canCopyPropagate() { return false; }
-    char* name()                { return "nil"; }
+    char* name()                { return (char*) "nil"; }
     bool verify();
   };
 
@@ -316,9 +317,9 @@
    protected:
     ConstPReg(SSelfScope* s, oop c) : PReg(s) { constant = c; }
    public:
-    friend ConstPReg* new_ConstPReg(SSelfScope* s, oop c);
+    static ConstPReg* new_ConstPReg(SSelfScope* s, oop c);
 #   ifdef UNUSED
-    friend ConstPReg* findConstPReg(Node* n, oop c);
+    static ConstPReg* findConstPReg(Node* n, oop c);
 #   endif
     bool isConstPReg()          { return true; }
     // def cannot be targeted - source is a constant
@@ -331,10 +332,15 @@
 #   endif
     bool needsRegister();
     NameNode* nameNode(bool mustBeLegal = true);
-    char* prefix()              { return "ConstP"; }
+    const char* prefix()              { return "ConstP"; }
     char* name();
     bool verify();
   };
+
+  static inline ConstPReg* new_ConstPReg(SSelfScope* s, oop c) {
+    return ConstPReg::new_ConstPReg(s, c);
+  }
+
   
 # endif
   

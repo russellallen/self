@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.12 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "ncode.hh"
@@ -15,7 +15,7 @@ void NCodeBase::moveTo(NCodeBase* to, int32 size) {
   // must use "to"; cannot use "this" anymore since there may be overlap
   if (to->isNMethod())
     ; // cannot do this simple check because moveTo_inner fixes up branches in place for nmethods()
-  else if (CheckAssertions || 1 /* turn this on for now, since PPC has been buggy */)
+  else if (CheckAssertions)
     check_branch_relocation( (char*)to->insts() - delta,  to->insts(),  instsLen() );
 
   MachineCache::flush_instruction_cache_range(to->insts(), to->instsEnd());
@@ -245,7 +245,7 @@ NCodeBase* findThing(void* addr) {
     return findStub(addr);
   } else if (Memory->code->contains(addr)) {
     nmethod* n= nmethod_from_insts((char*)addr);
-    assert(isNMethod(n), "not a method");
+    assert(nmethod::isNMethod(n), "not a method");
     return n;
   } else {
     return NULL;

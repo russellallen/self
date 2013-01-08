@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -10,7 +10,7 @@
 
 # ifdef XLIB
 
-  extern char* Display_seal;
+  extern const char* Display_seal;
 
   Display* XOpenDisplay_wrap(char*, void*);
   void XCloseDisplay_wrap(Display*);

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.18 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "prim.hh"
@@ -286,14 +286,14 @@ static PrimDesc fntable1[] = {
  "For debugging the VM; returns the receiver."
 },
 {
-"ByteAt:", fntype(&bv_at_prim),
+"ByteAt:", fntype(&byteVectorOopClass::bv_at_prim),
  ByteAtPrimitive, IntegerPrimType,
  SIDEEFFECTS,      // cannot be constant-folded (exc. for string literal)
  "Analogous to _At:, but for byte vectors.  Returns an integer in the "
  "range [0..255]."
 },
 {
-"ByteAt:Put:", fntype(&bv_at_put_prim),
+"ByteAt:Put:", fntype(&byteVectorOopClass::bv_at_put_prim),
  ByteAtPutPrimitive, ReceiverPrimType,
  SIDEEFFECTS,
  "Store into a byte vector element; analogous to _At:Put:.  The value "
@@ -301,13 +301,13 @@ static PrimDesc fntable1[] = {
  "receiver is a canonical string."
 },
 {
-"ByteSize", fntype(&bv_size_prim),
+"ByteSize", fntype(&byteVectorOopClass::bv_size_prim),
  ByteSizePrimitive, IntegerPrimType,
  NOSIDEEFFECTS,
  "Analogous to _Size, but for byte vectors."
 },
 {
-"ByteVectorCompare:", fntype(&bv_compare_prim),
+"ByteVectorCompare:", fntype(&byteVectorOopClass::bv_compare_prim),
  ExternalPrimitive, IntegerPrimType,
  NOSIDEEFFECTS,
  "Compares two byte vectors, returning -1, 0, or 1 if the receiver is "
@@ -1650,7 +1650,7 @@ fntype(&call_and_convert5_glue),
  "necessary.  _ObjectID is the reverse to _AsObject"
 },
 {
-"OnNonLocalReturn:", fntype(&unwind_protect_prim),
+ "OnNonLocalReturn:", fntype(&oopClass::unwind_protect_prim),
  UnwindProtectPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
  "Sends 'value' to the receiver; "
@@ -2447,7 +2447,7 @@ static PrimDesc fntable2[] = {
 },
 # endif
 
-# if GCC3
+# if GCC
   // define debug prims last 'cause they mess up indentation
   # define DefineDebugPrim(                                                     \
     flagName, flagType, flagTypeName, primReturnType,                         \
@@ -2476,13 +2476,7 @@ static PrimDesc fntable2[] = {
     "Simple " ## flagTypeName ## " primitive: " ## explanation},
 # endif
 
-// used to be FOR_ALL_DEBUG_PRIMS(DefineDebugPrim) but MW could not handle it--dmu
-
-    FOR_ALL_INTEGER_DEBUG_PRIMS(DefineDebugPrim)
-    FOR_ALL_BOOLEAN_DEBUG_PRIMS(DefineDebugPrim)
-    FOR_ALL_PROFILING_DEBUG_PRIMS(DefineDebugPrim)
-    FOR_ALL_MISC_DEBUG_PRIMS(DefineDebugPrim)
-    
+    FOR_ALL_DEBUG_PRIMS(DefineDebugPrim)
 # undef DefineDebugPrim
           
   // must be last entry in each prim table
@@ -2511,7 +2505,7 @@ PrimDesc* getPrimDescOfBytes(const char* s, fint len, bool internal) {
   for (PrimDesc** ft = &fntable[0]; *ft; ft++) {
     for (e = *ft; e->name(); e++) {
       if (strncmp(s, e->name(), len) == 0 && e->name()[len] == '\0') {
-        if (   e->type() == InternalPrimitive && !internal
+        if (   (e->type() == InternalPrimitive && !internal)
             || e->type() == NotReallyAPrimitive) {
           goto error;
         } else {
@@ -2542,7 +2536,7 @@ PrimDesc* getPrimDescOfFirstInstruction(char* fn_start_arg, bool internal) {
     for (e = *ft; true; e++) {
       if ( e->fn() != NULL
       &&   fn_start == first_inst_addr((void*)e->fn())) {
-        if (   e->type() == InternalPrimitive && !internal
+        if (   (e->type() == InternalPrimitive && !internal)
             || e->type() == NotReallyAPrimitive) {
           return NULL;
         } else {

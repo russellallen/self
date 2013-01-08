@@ -1,12 +1,11 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
-
 
 class slotsMapDeps: public slotsMap {
  protected:
@@ -36,11 +35,12 @@ class slotsMapDeps: public slotsMap {
 
  protected:
   // chain functions
-  friend int32 map_chain_offset() {
+  static int32 map_chain_offset() {
     return (int32) (((slotsMapDeps*) NULL)->map_chain());
   }
 
-  friend slotsMapDeps* map_from_map_chain(nmln* p) {
+  friend slotsMapDeps* map_from_map_chain(nmln* p);
+  static slotsMapDeps* map_from_map_chain(nmln* p) {
     return (slotsMapDeps*) (int32(p) - map_chain_offset());
   }
   
@@ -55,7 +55,7 @@ class slotsMapDeps: public slotsMap {
 
  public:
   // creation operations
-  friend slotsOop create_slots(slotList* slots, char* annotation = "");
+  static slotsOop create_slots(slotList* slots, const char* annotation = "");
   oop fill_in_slots(slotList* slist, fint slotCount);
   
   // map chain and dependents
@@ -78,4 +78,14 @@ class slotsMapDeps: public slotsMap {
     if (!okToUseCodeFromSnapshot) init_dependents();
     initialize(); }
 };
+
+inline slotsMapDeps* map_from_map_chain(nmln* p) {
+  return slotsMapDeps::map_from_map_chain(p);
+}
+
+static inline slotsOop create_slots(slotList* slots, 
+                                    const char* annotation = "") {
+  return slotsMapDeps::create_slots(slots, annotation);
+}
+
 

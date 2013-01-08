@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -12,10 +12,10 @@
 
 /* Type seals. */
 
-extern char *sealSeal;   /* Type seal for proxies containing a type seal.   */
-extern char *TS_SO;      /* Type seal for dl handles (shared objects).      */
-extern char *TS_symb;    /* Type seal for symbol addresses (from dynLink).  */
-extern char *TS_func;    /* Type seal for functions (from dynLink).         */
+extern const char *sealSeal;   /* Type seal for proxies containing a type seal.   */
+extern const char *TS_SO;      /* Type seal for dl handles (shared objects).      */
+extern const char *TS_symb;    /* Type seal for symbol addresses (from dynLink).  */
+extern const char *TS_func;    /* Type seal for functions (from dynLink).         */
 
 # define byteVector_glue                                                                                                                                 \
   CC_mber_2(oop,,         oop,byteVector,      bv_concatenate_prim, bv_concatenate_prim_glue,   fail,   oop,byteVector, oop,byteVector                 ) \
@@ -51,7 +51,7 @@ extern char *TS_func;    /* Type seal for functions (from dynLink).         */
 
 # define process_glue                                                                                                                                    \
   CC_mber_4(oop,,         oop,process,         NewProcess_prim,        NewProcess_prim_glue,        fail, smi,, any_oop,, oop,string, oop,objVector    ) \
-   C_func_1(bool,,                             BlockSignals_prim,      BlockSignals_prim_glue,          , bool,                                        ) \
+   C_func_1(bool,,            SignalInterface::BlockSignals_prim,      BlockSignals_prim_glue,          , bool,                                        ) \
    C_func_0(smi,,                              TWAINSResultSize_prim,  TWAINSResultSize_prim_glue,                                                     ) \
   CC_mber_3(oop,,         oop,process,         TWAINS_prim,            TWAINS_prim_glue,            fail, oop,objVector,  bool,,  any_oop,             ) \
   CC_mber_0(oop,,         oop,process,         AbortProcess_prim,      AbortProcess_prim_glue,      fail                                               ) \

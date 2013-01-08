@@ -1,7 +1,7 @@
 # if  TARGET_ARCH == I386_ARCH
 /* Sun-$Revision: 1.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "asm_i386.hh"
@@ -84,7 +84,7 @@ void Assembler::_Untested(const char* m1, const char* m2) {
 
 // General helpers:
 
-void Assembler::printR(RegSize rs, Location r, char* ps) {
+void Assembler::printR(RegSize rs, Location r, const char* ps) {
   if (printing) asm_lprintf("%s%s", RegisterNamesBySize[rs][r], ps);
 }
 
@@ -96,7 +96,7 @@ void Assembler::printR(RegSize rs, Location r, char* ps) {
 # endif
 
 
-void Assembler::printRM( RegSize rs, Location r, int32 d, OperandType t, Location index, Scale s, char* ps, bool is_call) {
+void Assembler::printRM( RegSize rs, Location r, int32 d, OperandType t, Location index, Scale s, const char* ps, bool is_call) {
   if (!printing) return;
   if ( t == RegisterOperand ) {
     printR(rs, r, ps);
@@ -142,7 +142,7 @@ void Assembler::printDest( int32 dest, OperandType t, Label* L ) {
 } 
 
 
-void Assembler::printImm( int32 imm, OperandType t, char* ps) {
+void Assembler::printImm( int32 imm, OperandType t, const char* ps) {
   if (!printing)    return;
   if (is_testing()) asm_lprintf("$0x%x", imm);
   else            { asm_lprintf("$");  print_disp(imm, t);  }
@@ -166,7 +166,7 @@ void Assembler::base_disp_reg(
     RegSize rs,
     Location reg_operand, 
     Location base_reg, int32 disp, OperandType t, Location index_reg, Scale scale,
-    char* suffix,
+    const char* suffix,
     bool is_call ) {
     
   assert(index_reg != esp, "esp cannot be index in i386");
@@ -297,7 +297,7 @@ void Assembler::word_branch_target(int32 dest, OperandType t, Label* L) {
 }
 
 
-void Assembler::std_jmp_or_loop(char* j_or_loop, char* ccs, int32 op8, int32 op32, int32 dest, OperandType disp_type, Label* L, bool add_0f_prefix) {
+void Assembler::std_jmp_or_loop(const char* j_or_loop, const char* ccs, int32 op8, int32 op32, int32 dest, OperandType disp_type, Label* L, bool add_0f_prefix) {
   if (printing)  {
     asm_lprintf("%s%s ", j_or_loop, ccs);
   }
@@ -324,7 +324,7 @@ void Assembler::std_jmp_or_loop(char* j_or_loop, char* ccs, int32 op8, int32 op3
 }
 
 
-void Assembler::jcc( char* ccs, jump_conds::conds cc, jump_ops::ops op, int32 d, OperandType t, Label* L) {
+void Assembler::jcc( const char* ccs, jump_conds::conds cc, jump_ops::ops op, int32 d, OperandType t, Label* L) {
   std_jmp_or_loop("j", ccs, 0x70 | op, 0x80 | op, d, t, L);
 }
 
@@ -398,7 +398,7 @@ bool Assembler::do_special_shifts(int32 op_imm_rm, int32 imm) {
 } 
 
 
-void Assembler::like_add8_imm(char* name, int32 imm, Location dst_reg, int32 dst_disp, OperandType dt, 
+void Assembler::like_add8_imm(const char* name, int32 imm, Location dst_reg, int32 dst_disp, OperandType dt, 
                Location index, Scale s, int32 op_imm8_al, int32 op_imm8_rm8, int32 opExt) {
   if (printing)
     asm_lprintf("%sb ", name);
@@ -428,7 +428,7 @@ void Assembler::like_add8_imm(char* name, int32 imm, Location dst_reg, int32 dst
 }
 
 
-void Assembler::like_add32_imm(char* name, int32 imm, OperandType st,
+void Assembler::like_add32_imm(const char* name, int32 imm, OperandType st,
                                Location dst_reg, int32 dst_disp, OperandType dt,
                                Location index, Scale s, int32 op_imm32_eax, int32 op_imm8_rm32, int32 op_imm32_rm32, int32 opExt ) {
   if (printing)
@@ -469,7 +469,7 @@ static inline bool gcc_optimizes_mov(int32 op) {
       || (op & 1); // earlier gcc only optimizes movl, not movb
 }
 
-void Assembler::like_add_r_rm(char* name, char bOrL, Location src, Location dst_base, int32 dst_disp, OperandType dt, Location index, Scale s, int32 op) {
+void Assembler::like_add_r_rm(const char* name, char bOrL, Location src, Location dst_base, int32 dst_disp, OperandType dt, Location index, Scale s, int32 op) {
   if (printing)   asm_lprintf("%s%c ", name, bOrL);
   printR(bOrL == 'l' ? long_reg : byte_reg,  src, ", ");
   // mov has special codes for just disp
@@ -489,7 +489,7 @@ void Assembler::like_add_r_rm(char* name, char bOrL, Location src, Location dst_
 }
 
 
-void Assembler::like_add_rm_r(char* name, char bOrL, Location src_base, int32 src_disp, OperandType st, Location index, Scale s, Location dst, int32 op) {
+void Assembler::like_add_rm_r(const char* name, char bOrL, Location src_base, int32 src_disp, OperandType st, Location index, Scale s, Location dst, int32 op) {
   if (printing)  asm_lprintf("%s%c ", name, bOrL);
   // mov has special codes for just disp
   if ( (op & ~1) == 0x8a  &&  src_base == no_reg  &&  index == no_reg  &&  dst == eax  &&  gcc_optimizes_mov(op) ) {

@@ -1,12 +1,12 @@
 'Sun-$Revision: 30.8 $'
 
-"Copyright 1994-2006 Sun Microsystems, Inc. and Stanford University.
+"Copyright 1992-2012 AUTHORS.
  See the LICENSE file for license information."
  
  
 primitiveMaker reader copy staticLinking create: 'transcendental' From: '
  
-  -- Copyright 1994-2002 Sun Microsystems, Inc. and Stanford University.
+  -- Copyright 1992-2012 AUTHORS.
   -- See the LICENSE file for license information.
 
   glueLibraryName: transcendental_glue.o

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.16 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "fscope.hh"
@@ -101,7 +101,7 @@ void FSelfScope::initialize() {
     }
   }
   // This must come AFTER args so that self register does not overlap
-  // arg registers. PPC assumes r3 -> r31, r4 -> r30 etc.
+  // arg registers.
   if (isBlockSelfScope()) {
     // also preallocate self
     self = allocs->pickPermanent();
@@ -208,8 +208,8 @@ void fcompiler_code_generator::fetch_and_decode_bytecode() {
     //   and it's faster this way.
     // Well, there is a mysterious infinite sendDesc finding bug, and I'm trying to fix it with this:
     //   -- dmu 5/02
-    ||   mi.instruction_set == TWENTIETH_CENTURY_PLUS_ARGUMENT_COUNT_INSTRUCTION_SET
-          &&  bc.op == ARGUMENT_COUNT_CODE
+    ||   (mi.instruction_set == TWENTIETH_CENTURY_PLUS_ARGUMENT_COUNT_INSTRUCTION_SET
+          &&  bc.op == ARGUMENT_COUNT_CODE)
 	 ) 
 	  ; // do not add pc desc for these, even if in debug mode
     else {
@@ -351,8 +351,10 @@ bool FSelfScope::testMemoization(u_char* bytes, u_char* end, oop* literals) {
        || nextOp == IMPLICIT_SEND_CODE
        || nextOp == ARGUMENT_COUNT_CODE)
     &&   literals[nextIndex]->is_string()) {
-      char* sel = byteVectorOop(literals[nextIndex])->bytes();
+      char* sel = byteVectorOop(literals[nextIndex])->bytes();  
+      Unused(sel); //debugging
       fint  len = byteVectorOop(literals[nextIndex])->length();
+      Unused(len); //debugging
       if (stringOop(literals[nextIndex])->is_prim_name() 
       &&  stringOop(literals[nextIndex])->has_IfFail()) {
         // YES!  This block must be a failure block.
@@ -636,8 +638,8 @@ bool FSelfScope::genLocalSend(stringOop sel, fint argc, slotDesc* sd, FScope* s)
     assert(argc == 0 || argc == 1, "wrong number of args");
     NameDesc* nd = NULL;
     if (sd->is_map_slot() ||
-        s->isVFrameScope() &&
-        (nd = s->vf()->get_name_desc(sd, true), nd && nd->isValue())) {
+        (s->isVFrameScope() &&
+        (nd = s->vf()->get_name_desc(sd, true), nd && nd->isValue()))) {
       // load value of constant slot or of an unallocated (constant) data slot
       assert(argc == 0, "must be an access");
       result = pickStackLoc();

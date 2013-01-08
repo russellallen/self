@@ -2,7 +2,7 @@
 
 # Sun-$Revision: 30.6 $
 
-# Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+# Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information. 
 
 # run a sed script (defaulting to ~/bin/sedscript) over files in the current

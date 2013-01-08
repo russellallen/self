@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -164,10 +164,9 @@ class interpreter: public abstract_interpreter {
     
   void print();
 
- public: // should be prot but friend doesn't work
+ protected:
   void setup_for_method( );
   void setup_for_block(  );
- protected:
   void start_NLR(oop res);
   void continue_NLR();
 };

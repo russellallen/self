@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -38,7 +38,7 @@ extern "C" {
 extern     char*          ReturnTrap_returnPC;
 extern     char*       ReturnTrapNLR_returnPC;
 extern     char*      Recompile_stub_returnPC;
-extern     char*    DIRecompile_stub_returnPC; // not implemented on PPC
+extern     char*    DIRecompile_stub_returnPC; // only implemented on SPARC
 extern     char*        MakeOld_stub_returnPC;
 extern     char*    SendMessage_stub_returnPC;
 

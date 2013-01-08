@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "objVectorMap.hh"
@@ -43,7 +43,7 @@ oop objVectorMap::cloneSize(oop obj, fint len, bool mustAllocate, oop filler) {
   return v;
 }
 
-objVectorOop create_objVector(slotList* slots) {
+objVectorOop objVectorMap::create_objVector(slotList* slots) {
   objVectorOop ov;
   objVectorMap m1;
   (void)create_map(sizeof(objVectorMap), slots, &m1, (oop*)&ov);

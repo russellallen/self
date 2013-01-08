@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -93,7 +93,7 @@ class oopClass {
   inline oop* get_slot_data_address(slotDesc* slot);
   inline oop* get_slot_data_address(stringOop name);
   inline oop* get_slot_data_address_if_present(stringOop name, bool &inObj);
-  oop* get_slot_data_address_if_present(char *name, bool &inObj);
+  oop* get_slot_data_address_if_present(const char*name, bool &inObj);
   inline oop get_slot(slotDesc* slot);
   inline oop get_slot(stringOop name);
 
@@ -106,7 +106,7 @@ class oopClass {
   inline oop copy_add_slot(stringOop name, slotType t, oop contents,
                            oop anno, bool mustAllocate= false);
   inline oop copy_remove_slot(stringOop name, bool mustAllocate= false);
-  friend oop unwind_protect_prim(oop doBlock, oop protectBlock);
+  static oop unwind_protect_prim(oop doBlock, oop protectBlock);
 
   void switch_pointer(oop* where, oop to); // part of define
 

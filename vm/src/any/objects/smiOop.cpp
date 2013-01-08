@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "smiOop.hh"
@@ -18,7 +18,7 @@ oop smiOopClass::as_object_prim() {
 oop smiOopClass::address_as_oop_prim() {
   oop p = oop(value());
   if (p->is_mark() || 
-      p->is_mem() && !Memory->really_contains(p) ||
+      (p->is_mem() && !Memory->really_contains(p)) ||
       !p->verify_oop())
     return ErrorCodes::vmString_prim_error(PRIMITIVEFAILEDERROR);
   return p;

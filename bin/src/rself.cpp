@@ -35,7 +35,7 @@ void usage(char* name) {
 }
 
 
-inline void safeDo(int dofail, char *s) {
+inline void safeDo(int dofail, const char *s) {
   if (dofail) {
     fprintf(stderr, "rself: %s\n", s);
     exit(-1);
@@ -43,7 +43,7 @@ inline void safeDo(int dofail, char *s) {
 }
 
 
-inline void trace(char *s) {
+inline void trace(const char *s) {
   if (debug)
     fprintf(stderr, "%s\n", s);
 }
@@ -78,7 +78,9 @@ void relay(int sock) {
       int count = read(sock, buf, sizeof(buf));
       if (count <= 0)
 	break;
-      write(1, buf, count);
+      if (write(1, buf, count) == -1) {
+	break; // this is bad.
+      }
     }
     trace("read failed - assuming shutdown");
     /* Now exit, thereby terminating parent (and child). */

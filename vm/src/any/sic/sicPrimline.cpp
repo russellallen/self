@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.15 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 // primitive inlining in the SIC
@@ -399,7 +399,9 @@ SExpr* SPrimScope::tryConstantFold() {
     
     NodeGen* n = theNodeGen;
     if (SICDebug) n->comment("inlined _Size:/_ByteSize:");
-    fint offset = objVector ? objVector_len_offset() : byteVector_len_offset();
+    fint offset = objVector ? 
+                  objVectorOopClass::objVector_len_offset() : 
+                  byteVectorOopClass::byteVector_len_offset();
     n->append(new LoadOffsetNode(receiver->preg(), offset, resultPR));
     return new MapSExpr(Memory->smi_map->enclosing_mapOop(), resultPR, n->current);
   }

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation  "asm.hh" 
@@ -83,7 +83,7 @@ void BaseAssembler::print_disp(int32 d, OperandType t) {
     lprintf("0x%lx <%s> (bp)", d, getPrimName((pc_t)d));
     break;
    case CodeAddressOperand: {
-    nmethod * nm = nmethodContaining((pc_t) d, NULL);
+    nmethod * nm = nmethod::nmethodContaining((pc_t) d, NULL);
     lprintf("0x%lx <%s>", d, nm->key.selector_string());
     break; }
    case DIVMAddressOperand:
@@ -95,7 +95,7 @@ void BaseAssembler::print_disp(int32 d, OperandType t) {
 }
 
 
-char* OperandTypeNames[] = {
+const char* OperandTypeNames[] = {
   "RegisterOperand",
   "NumberOperand",
   "OopOperand",

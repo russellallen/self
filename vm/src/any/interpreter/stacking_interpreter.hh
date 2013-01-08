@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -28,7 +28,7 @@ class stacking_interpreter : public abstract_interpreter {
   }
 
   virtual bool check_and_pop(fint n = 1) {
-    if ( !check(::check_for_pop, as_smiOop(n)) )
+    if ( !check(abstract_interpreter::check_for_pop, as_smiOop(n)) )
       return false;
     pop(n);
     return true;

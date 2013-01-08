@@ -1,6 +1,6 @@
 #! /self/bin/svr4/perl5 -I${SELF_WORKING_DIR}/objects/ui3D/perlForXgl
 
-# Copyright 1994 Sun Microsystems, Inc. and Stanford University.
+# Copyright 1992-2012 AUTHORS.
 # See the LICENSE file for license information.
 
 #---------------------------------------------------------------------------
@@ -565,7 +565,7 @@ sub printTemplates::printHeader {
 #  in the parser, you will need to add a concatenation operator(,) every 1,000
 #  lines (or so) for it to parse correctly."
 # 
-# "Copyright 1994 Sun Microsystems, Inc. and Stanford University.
+# "Copyright 1992-2012 AUTHORS.
 #  See the LICENSE file for license information."
 # 
 # "CAUTION: This file is not part of the documented Self world.  It may be
@@ -576,7 +576,7 @@ sub printTemplates::printHeader {
 # 
 # 
 # primitiveMaker reader copy dynamicLinking create: 'xgl' From: '
-#    -- Copyright 1994 Sun Microsystems, Inc. and Stanford University.
+#    -- Copyright 1992-2012 AUTHORS.
 #    -- See the LICENSE file for license information.
 # 
 #    macroName:          xgl

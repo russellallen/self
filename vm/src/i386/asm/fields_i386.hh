@@ -1,7 +1,7 @@
 # ifdef __i386__
 /* Sun-$Revision: 1.4 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -9,8 +9,7 @@
 # endif
 
 
-// helper functions to access individual fields of PPC instructions
-
+// helper functions to access individual fields of instructions
 
 typedef u_char inst_t;
 

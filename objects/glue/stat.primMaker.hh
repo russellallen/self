@@ -4,7 +4,7 @@ Please do not change it manually. -- dmu 12/91  */\
 # ifdef INTERFACE_PRAGMAS
 # pragma interface
 # endif
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.  */\
+/* Copyright 1992-2012 AUTHORS.  */\
 \
 /* See the LICENSE file for license information.  */\
 \
@@ -306,7 +306,7 @@ Please do not change it manually. -- dmu 12/91  */\
 # ifdef INTERFACE_PRAGMAS
 # pragma interface
 # endif
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.  */\
+/* Copyright 1992-2012 AUTHORS.  */\
 \
 /* See the LICENSE file for license information.  */\
 \

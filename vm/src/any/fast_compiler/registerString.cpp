@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "registerString.hh"
@@ -44,10 +44,6 @@ Location pick(RegisterString& alloc, RegisterString mask) {
   return Location(reg);
 }
   
-
-// ppc uses ldm, stm to save/restore nonvol regs, so must allocate
-// them from top (r31 downwards)_:
-
 Location pickReverse(RegisterString& alloc, RegisterString mask) {
   unsigned r = mask & ~alloc;
   if (r == 0) return UnAllocated;

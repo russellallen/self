@@ -1,12 +1,12 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "mapMap.hh"
 # include "_mapMap.cpp.incl"
 
-Map* create_mapMap() {
+Map* mapMap::create_mapMap() {
   oop ignored;
   mapMap m1;
   Map* m = create_map(sizeof(mapMap), NULL, &m1, &ignored);

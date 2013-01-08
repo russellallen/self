@@ -1,7 +1,7 @@
 # if  TARGET_ARCH == I386_ARCH
 /* Sun-$Revision: 1.4 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "frame_i386.hh"
@@ -164,7 +164,6 @@ void frame::fix_frame(char* pc, char* sp) {
    See, the home method's frame is the sp of the frame but the sp can vary, while the frame pointer cannot.
    So we store the frame pointer of the home frame in the block and crawl the stack to recover the stack pointer
    when needed by the VM.
-   PPC uses the sp, which saves a lot of work.
    Intel COULD use the sp, because it doesn't change.
    BUT, at block creation time (see loadBlockOop in codeGen_i388.cpp), we have the sp BEFORE
    pushing the pc and old base pointer, so would have to subtract 8 from what we have to create the block.
@@ -245,7 +244,7 @@ oop* frame::first_local_addr() {
 
 
 sendDesc* frame::send_desc() { 
-  return sendDesc::sendDesc_from_return_PC( return_addr());  // it is always the same on PPC
+  return sendDesc::sendDesc_from_return_PC( return_addr());  // it is always the same here
 }
 
 

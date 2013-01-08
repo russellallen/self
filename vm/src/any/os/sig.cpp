@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.12 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "sig.hh"
@@ -113,7 +113,7 @@ void SignalInterface::initialize(bool ctrlC) {
 }
 
 
-bool BlockSignals_prim(bool b) {
+bool SignalInterface::BlockSignals_prim(bool b) {
   bool old = SignalInterface::are_self_signals_blocked();
   if (b) {
     SignalInterface::block_self_signals();
@@ -270,9 +270,9 @@ bool SignalInterface::handle_SIC_OS_signal(int ossig, char* addr, int32 code) {
     // was uncommon branch trap
     return true;
     
-  if (ossig == SIGNonLifo     &&  is_uplevel_trap(code) 
-  ||  ossig == SIGBadHomeRef  &&  NLRSupport::is_bad_home_reference(addr)
-                              &&  Memory->code->contains(InterruptedContext::the_interrupted_context->pc())) {
+  if ((ossig == SIGNonLifo     &&  is_uplevel_trap(code)) 
+  ||  (ossig == SIGBadHomeRef  &&  NLRSupport::is_bad_home_reference(addr)
+                              &&  Memory->code->contains(InterruptedContext::the_interrupted_context->pc()))) {
     // continue in NLRSupport::non_lifo_abort
     // This is much easier than doing it here because the stack is in a mess right now.
     InterruptedContext::continue_abort_at(first_inst_addr(NLRSupport::non_lifo_abort_from_continuePC), false);

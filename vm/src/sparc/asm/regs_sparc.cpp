@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
   
 # pragma implementation "regs_sparc.hh"
@@ -124,9 +124,7 @@ static char* locationNameHelper(Location base, int num) {
     switch (base) {
       case StackLocations:     tbl=     StackRegisterNames; break;
       case ExtraArgLocations:  tbl=  ExtraArgRegisterNames; break;
-      # if TARGET_ARCH != PPC_ARCH // same for ppc
       case ExtraIArgLocations: tbl= ExtraIArgRegisterNames; break;
-      # endif
       default: ShouldNotReachHere();
     }
     return tbl[num];

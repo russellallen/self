@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.18 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # if TARGET_OS_VERSION != MACOSX_VERSION \
@@ -57,7 +57,7 @@ extern "C" {
 }
 # endif
 
-char *UnixFile_seal = "UnixFile";
+const char *UnixFile_seal = "UnixFile";
 
 fd_set activeFDs;                      // active file descriptors
 
@@ -141,7 +141,7 @@ void resetTerminal() {
   // is necessary because e.g. lprintf doesn't expect non-blocking files.
   
   // next statement is why we lose output from console, I bet -- dmu 12/02
-  # if 0 // don't use WRITE for now, seems to work, WRITE is defined in runtime_asm_ppc.s
+  # if 0 // don't use WRITE for now, seems to work, WRITE is commented in runtime_asm_gcc_i386.s
     extern "C" {
       int WRITE(int fd, const char* buf, int nbytes);
       // C library write()

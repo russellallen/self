@@ -1,12 +1,11 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
-
 
 class mirrorOopClass: public slotsOopClass {
   
@@ -22,7 +21,7 @@ class mirrorOopClass: public slotsOopClass {
     Memory->store(&addr()->_reflectee, r);
     return this;}
   
-  friend oop as_mirror_prim(oop obj);
+  static oop as_mirror_prim(oop obj);
   
   oop codes_prim()               { return reflectee()->mirror_codes();        }
   oop literals_prim()            { return reflectee()->mirror_literals();     }
@@ -81,3 +80,8 @@ class mirrorOopClass: public slotsOopClass {
 
 oop reflectee_eq_prim(mirrorOop rcvr, oop anotherMirror);
 oop reflectee_id_hash_prim(mirrorOop rcvr);
+
+static inline oop as_mirror_prim(oop obj) {
+  return mirrorOopClass::as_mirror_prim(obj);
+}
+

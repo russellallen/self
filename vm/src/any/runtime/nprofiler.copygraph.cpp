@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.14 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 // Part of the nprofiler creating the self level call graph 
@@ -177,7 +177,7 @@ class slot_info {
   static const smi invalid_offset;
  public:
   smi offset() { return _offset; }
-  void init(oop node_pt, char* selector);
+  void init(oop node_pt, const char* selector);
   bool is_present() { return _offset >= 0; }
   void set(oop node_oop, oop value) {
     Memory->store(oopsOop(node_oop)->oops(offset()), value);
@@ -186,7 +186,7 @@ class slot_info {
 
 const smi slot_info::invalid_offset = -1;
 
-void slot_info::init(oop node_pt, char* selector) {
+void slot_info::init(oop node_pt, const char* selector) {
   // Check if node_pt has data_slot selector and save offset in _offset.
   stringOop sel = Memory->string_table->lookup(selector, strlen(selector));
   slotDesc* sd = node_pt->find_slot(sel);
@@ -463,9 +463,8 @@ oop graph_creator::clone_block_pt(block_node* n) {
   }
 
   if (!SpendTimeForDebugging) 
-    assert(TARGET_ARCH == PPC_ARCH  ||  lex_oop,
-           "lexical node should be on stack (but PPC may miss frame next to bottom)");
-  else if (TARGET_ARCH != PPC_ARCH  &&  !lex_oop)  { 
+    assert(lex_oop, "lexical node should be on stack");
+  else if (!lex_oop)  { 
     lprintf("\n\nlexical node should be on stack\n"); 
     lprintf("\n\nselector:\n");
     n->selector()->print();

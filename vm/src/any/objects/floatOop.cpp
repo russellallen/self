@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "floatOop.hh"
@@ -39,7 +39,7 @@ static const fint expOffset = fractSize;
   floatOop infinityOop = floatOop(nthMask(selfExpSize) << selfExpOffset
                                   |  Float_Tag);
   
-  floatOop as_floatOop(float value) {
+  floatOop floatOopClass::as_floatOop(float value) {
     union { float f; uint32 i; } x;
     x.f = value;
     uint32 i = x.i;
@@ -99,7 +99,7 @@ static const fint expOffset = fractSize;
 # define FLOAT_PRIM(name, op)                                                 \
   oop name(floatOop x, floatOop y) {                                          \
     CHECK_XY;                                                                 \
-    return as_floatOop(x->value() op y->value());                             \
+    return as_floatOop(x->value() op y->value());              \
   }
 
 FLOAT_PRIM(float_add_prim, +)
@@ -119,7 +119,6 @@ oop float_div_prim(floatOop x, floatOop y) {
 
 oop float_mod_prim(floatOop x, floatOop y) {
   CHECK_XY;
-  float xv = x->value();
   float yv = y->value();
   if (yv == 0) {
     return ErrorCodes::vmString_prim_error(DIVISIONBYZEROERROR);
@@ -176,10 +175,10 @@ FLOAT_CMP_PRIM(float_ge_prim, >=)
 
 # define MaxFloatString 20
 
-void floatOopClass::make_print_string(char* buf, char* format) {
+void floatOopClass::make_print_string(char* buf, const char* format) {
   sprintf(buf, format, value());
   char c = buf[0];
-  if (c >= '0' && c <= '9' || c == '-' && buf[1] >= '0' && buf[1] <= '9') {
+  if ((c >= '0' && c <= '9') || (c == '-' && buf[1] >= '0' && buf[1] <= '9')) {
     char *p;
     for (p = &buf[0]; c= *p, c != '\0' ; p++)
       if (c == '.' || c == 'e' || c == 'E')

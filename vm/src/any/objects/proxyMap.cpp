@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "foreignMap.hh"
@@ -9,7 +9,7 @@
 # include "_proxyMap.cpp.incl"
 
 
-proxyOop create_proxy() {
+proxyOop proxyMap::create_proxy() {
   slotList* slots = new slotList(VMString[PARENT], 
                                  parent_map_slotType,
                                  create_slots((slotList*)NULL));

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.22 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "shell.hh"
@@ -10,7 +10,7 @@ oop evalExpressions(Scanner* scanner) {
   // evaluate expressions until scanner is at EOF or an error occurs
   oop res = NULL;
   fint line, len;
-  char* source;
+  const char* source;
   while (!res->is_mark() && !scanner->is_done()) {
     // This resource mark must be inside the loop otherwise long files can 
     // cause the resource area to become huge -miw, 12/5/94
@@ -63,7 +63,7 @@ oop evalExpressions(Scanner* scanner) {
   return res;
 }
 
-oop eval(char* expression, char* fn) {
+oop eval(const char* expression, const char* fn) {
   StringScanner scanner(expression, strlen(expression), fn);
   return evalExpressions(&scanner);
 }
@@ -214,7 +214,7 @@ void run_the_VM() {
   for (;;) {
     ResourceMark m;
     fint line, len;
-    char* source;
+    const char* source;
     Parser parser(VMScanner, false);
     resetTerminal();
     VMScanner->start_line("VM# ");

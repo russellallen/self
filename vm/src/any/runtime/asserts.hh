@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -8,7 +8,7 @@
 # endif
 
 
-void assert(bool b, char* fmt);
+void assert(bool b, const char* fmt);
 extern bool CheckAssertions; // defined in debug.h but need it sooner
 
 

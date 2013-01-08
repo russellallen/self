@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.12 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef SIC_COMPILER
@@ -426,7 +426,7 @@
       }
       if ( r->loc == UnAllocated
       && (PrintSICTempRegisterAllocation   
-          ||   WizardMode  &&  TARGET_ARCH != I386_ARCH /* happens normally in I386; few regs */ )) {
+          ||   (WizardMode  &&  TARGET_ARCH != I386_ARCH) /* happens normally in I386; few regs */ )) {
         lprintf("*could NOT find temp assignment for local %s in BB%ld\n",
                r->name(), (void*)id());
       } else if (r->loc == UnAllocated) {
@@ -531,7 +531,7 @@
         for (fint i = 0; i < n->nSuccessors(); i++) {
           Node* nnext = n->nexti(i);
           while (nnext &&
-                 (nnext->deleted || suppressTrivial && nnext->isTrivial()))
+                 (nnext->deleted || (suppressTrivial && nnext->isTrivial())))
             nnext = nnext->next();
           if (nnext) 
             fprintf(f, "edge:{ sourcename:\"%d\" targetname: \"%d\" }\n",
@@ -782,12 +782,12 @@
       for (next = i + 1;            // find next nonempty BB
            next < bbCount && bbTable->nth(next)->nnodes == 0;
            next++) ;
-      if (     next == bbCount 
-           &&  bbTable->nth(i)->next() 
-      ||       next < bbCount 
+      if (     (next == bbCount 
+           &&  bbTable->nth(i)->next()) 
+      ||       (next < bbCount 
            &&  bbTable->nth(i)->next() 
            &&  bbTable->nth(i)->next() != bbTable->nth(next) 
-           && !bbTable->nth(i)->last->isRestartNode() /* zzz or branch? */ ) {
+           && !bbTable->nth(i)->last->isRestartNode()) /* zzz or branch? */ ) {
         // non-sequential control flow - insert a branch
         Node* n = bbTable->nth(i)->next()->first;
         n->genBranch();
@@ -800,10 +800,10 @@
     for ( i = 0; i < bbCount; i++) {
       bbTable->nth(i)->print_code(suppressTrivial);
       int32 next = i + 1;
-      if (next == bbCount && bbTable->nth(i)->next() ||
-          next < bbCount && bbTable->nth(i)->next() &&
+      if ((next == bbCount && bbTable->nth(i)->next()) ||
+          (next < bbCount && bbTable->nth(i)->next() &&
           bbTable->nth(i)->next() != bbTable->nth(next) &&
-          !bbTable->nth(i)->last->isRestartNode()) {
+          !bbTable->nth(i)->last->isRestartNode())) {
         // non-sequential control flow - insert a branch
         Node* n = bbTable->nth(i)->next()->first;
         lprintf("\tgoto N%ld\n", (void*)n->id());
@@ -820,10 +820,10 @@
     for (i = 0; i < bbCount; i++) {
       bbTable->nth(i)->print_vcg_edges(f, suppressTrivial);
       int32 next = i + 1;
-      if (next == bbCount && bbTable->nth(i)->next() ||
-          next < bbCount && bbTable->nth(i)->next() &&
+      if ((next == bbCount && bbTable->nth(i)->next()) ||
+          (next < bbCount && bbTable->nth(i)->next() &&
           bbTable->nth(i)->next() != bbTable->nth(next) &&
-          !bbTable->nth(i)->last->isRestartNode()) {
+          !bbTable->nth(i)->last->isRestartNode())) {
         // non-sequential control flow - insert a branch
         Node* n = bbTable->nth(i)->next()->first;
       }
@@ -1007,7 +1007,7 @@
       for (Node* n = bb->first; n;  n = n->next()) {
         if ( n->deleted  ) {
   }
-  else if ( n->isExitNode()  &&  !n->isDeadEndNode()
+  else if ( (n->isExitNode()  &&  !n->isDeadEndNode())
              ||   n->isRestartNode())
           return; // found return!
         if (n == bb->last)

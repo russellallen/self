@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "slotIterator.hh"
@@ -17,7 +17,7 @@ void SlotIterator::init(Map *m) {
 #if GENERATE_DEBUGGING_AIDS
   if (CheckAssertions) {
     nActive++;
-    if (!bootstrapping && !GCInProgress || ScavengeInProgress)
+    if ((!bootstrapping && !GCInProgress) || ScavengeInProgress)
       // if compacting, map might not have been unmarked
       assert_map(m->enclosing_mapOop(), "not a map");
   }

@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.13 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 
@@ -39,12 +39,6 @@ class nmFlags {
 
 nmethod* constructDoItMethod(oop receiver, oop method);
 
-// GGC3 needs 0 not NULL
-static nmethod* shutUpCompiler = NULL;
-# define NMETHOD_FROM(fieldName, p)                                           \
-      ((nmethod*)((char*)p - (char*)&shutUpCompiler->fieldName))
-
-
 class nmethod : public OopNCode {
  public:
   int32 depsLen;
@@ -81,7 +75,7 @@ class nmethod : public OopNCode {
   void* operator new(size_t size);
   void deallocate()     { flush(); }
  public:
-  friend nmethod* new_nmethod(AbstractCompiler* c,
+  static nmethod* new_nmethod(AbstractCompiler* c,
                               bool generateDebugCode = false);
   
   char* insts()                 { return (char*)(this + 1); }
@@ -245,17 +239,27 @@ class nmethod : public OopNCode {
   void  printPcs();
 # endif
   
-  friend bool           isNMethod(void* p);
-  friend nmethod*       nmethodContaining(char* pc, char* likelyEntryPoint);
-  friend nmethod*       findNMethod(void* start);
-  friend nmethod*       findNMethod_maybe(void* start);
+  static bool           isNMethod(void* p);
+  static nmethod*       nmethodContaining(char* pc, char* likelyEntryPoint);
+  static nmethod*       findNMethod(void* start);
+  static nmethod*       findNMethod_maybe(void* start);
   
-  friend nmethod* nmethod_from_insts(char* insts) {     // for efficiency
+  static nmethod* nmethod_from_insts(char* insts) {     // for efficiency
     nmethod* nm = (nmethod*) insts - 1;
-    if (::isNMethod(nm)) return nm; else return findNMethod(nm);
+    if (isNMethod(nm)) return nm; else return findNMethod(nm);
   }
 # include "_nmethod_pd.hh.incl"
+
 };
+
+static inline nmethod* new_nmethod(AbstractCompiler* c,
+                                   bool generateDebugCode = false) {
+  return nmethod::new_nmethod(c, generateDebugCode);
+}
+
+static inline nmethod* nmethod_from_insts(char* insts) {
+  return nmethod::nmethod_from_insts(insts);
+}
 
 # else // defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

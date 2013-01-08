@@ -1,7 +1,7 @@
 # ifdef __i386__
 /* Sun-$Revision: 1.4 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -45,7 +45,6 @@
 
     normal_sendDesc_end_offset      = lookupType_offset + 4,
     
-    // end offset for nlr case not defined for PPC, could be variable
     
     // since always have branch, send getPrimCallEndOffset to the branch
        abortable_prim_continue_offset    = branch_around_desc_offset, 

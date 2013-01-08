@@ -38,11 +38,9 @@ extern int old_main(int argc, char *argv[]);
 void startCocoa(MainArgs* args, bool fork) {
     NSAutoreleasePool *localPool;
     localPool = [[NSAutoreleasePool alloc] init];
-    NSString* str = [NSString stringWithCString: "startCocoaConsole:"];
-    SEL sel = NSSelectorFromString(str);
     SelfConsole* console = [SelfConsole alloc];
     if (fork) {
-      [NSThread detachNewThreadSelector: sel toTarget: console withObject: (id)args];
+      [NSThread detachNewThreadSelector: @selector(startCocoaConsole:) toTarget: console withObject: (id)args];
     }
     else {
       [console startCocoaConsole: args];
@@ -54,11 +52,9 @@ void startCocoa(MainArgs* args, bool fork) {
 void startVM(MainArgs* args, bool fork) {
     NSAutoreleasePool *localPool;
     localPool = [[NSAutoreleasePool alloc] init];
-    NSString* str = [NSString stringWithCString: "startSelfVM:"];
-    SEL sel = NSSelectorFromString(str);
     SelfVMStarter* vmStarter = [SelfVMStarter alloc];
     if (fork) {
-      [NSThread detachNewThreadSelector: sel toTarget: vmStarter withObject: (id)args];
+      [NSThread detachNewThreadSelector: @selector(startSelfVM:) toTarget: vmStarter withObject: (id)args];
     }
     else {
       [vmStarter startSelfVM: args];

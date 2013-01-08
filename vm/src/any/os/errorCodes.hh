@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -24,6 +24,6 @@ class ErrorCodes {
  private:
   // platform-specific fns:
   static char* os_error_message(char* s);  // takes ptr to non-terminated str, returns stringOop, 0 or -1
-  static char* os_error_name(fint error);
+  static const char* os_error_name(fint error);
 };
 

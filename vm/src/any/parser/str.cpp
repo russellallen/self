@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "str.hh"
@@ -8,7 +8,7 @@
 
 void String::Print() {
   smi   n = 0, i;
-  char *s = str;
+  const char *s = str;
   while (n < len) {            // loop to handle all '\0' in string.
     lprintf("%s", s);
     int r = strlen(s);
@@ -22,7 +22,7 @@ void String::Print() {
 
 fint String::line_count() {
   fint count = 1;
-  for(char *s = str; *s; s++) if (*s == '\n') count++;
+  for(const char *s = str; *s; s++) if (*s == '\n') count++;
   return count;
 }
 
@@ -35,7 +35,7 @@ String* StringList::AsSelector() {
   char* buffer = NEW_RESOURCE_ARRAY( char, len+1);
   char* b = &buffer[0];
   for (e = Head(); e; e = e->Next()) {
-    for (char* d = e->Data()->AsCharP(); *d; b++, d++) {
+    for (const char* d = e->Data()->AsCharP(); *d; b++, d++) {
       *b = *d;
     }
   }

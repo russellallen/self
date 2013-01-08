@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.14 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "interpreter.hh"
@@ -277,7 +277,6 @@ void interpreter::local_slot_desc( interpreter*& r,
                                    abstract_vframe*& rvf,
                                    slotDesc*& sd) {
   
-  bool flushed = false;
   interpreter* interp = this;
   abstract_vframe* vf = NULL;
   

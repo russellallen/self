@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
@@ -9,6 +9,7 @@
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
+
 
 
 // A CountStub can be inserted between caller and callee nmethods to keep
@@ -35,7 +36,7 @@ class CountStub : public NCodeBase {
   // convention: the calling sd/PIC is responsible for maintaining the
   // call/jump to the count stub, except for deallocate (resets
   // sendDesc jump addr)
-  friend CountStub* new_CountStub(nmethod* target, pc_t entryPoint,
+  static CountStub* new_CountStub(nmethod* target, pc_t entryPoint,
                                   nmln* sd_nmln, CountType t);
   friend class nmethod;
   friend class sendDesc;
@@ -50,8 +51,7 @@ class CountStub : public NCodeBase {
   sendDesc* sender_sendDesc() {
     sendDesc *s= sd();  return s ? s : pic()->sd(); }
   nmethod* sender() {           // sending nmethod
-    nmethod *findNMethod(void *s);
-    return findNMethod(sender_sendDesc()); }
+    return nmethod::findNMethod(sender_sendDesc()); }
   sendDesc* sd();               // calling sendDesc (NULL if PIC)
   CacheStub* pic();             // calling PIC (NULL if sendDesc)
   virtual void moveTo_inner(NCodeBase* to, int32 delta, int32 size);
@@ -112,6 +112,7 @@ class ComparingStub: public CountStub {
 // when the counter overflows, the nmethod becomes old.  This helps prevent
 // premature recompilation (which can cause uncommon traps because the pics
 // aren't primed yet.)
+
 class AgingStub : public ComparingStub {
   VTBL_AND_SETTER(AgingStub, :ComparingStub(1.0));
  public:

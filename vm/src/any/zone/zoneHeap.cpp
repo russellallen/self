@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.12 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "zoneHeap.hh"
@@ -192,7 +192,7 @@ bool ChunkMap::isValid() {
     u_char* e = next()->asByte() - 1;
     int32 ovfl = isUsed() ? usedOvfl: unusedOvfl;
     ok = p[0] == e[0] &&
-        (p[0] != ovfl || p[1] == e[-3] && p[2] == e[-2] && p[3] == e[-1]);
+        (p[0] != ovfl || (p[1] == e[-3] && p[2] == e[-2] && p[3] == e[-1]));
   }
   return ok;
 }

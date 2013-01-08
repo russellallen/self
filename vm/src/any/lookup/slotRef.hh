@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -47,7 +47,6 @@ class abstractSlotRef: public CListEntry {
     return (realSlotRef*) this; }
   
   // NOT VIRTUAL
-  // rename from EQ to avoid MW warning
   bool EQsr(abstractSlotRef* s);
 
   virtual void add_dependency(slotDesc* sd, simpleLookup* L) {

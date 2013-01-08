@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "scanner.hh"
@@ -304,8 +304,8 @@ SourceBuffer::SourceBuffer(FILE* source_file) {
   
   first = OS::map_or_read_source_file(source_file, length);
 
-  next = first;
-  last = first + length;
+  next = (char*) first;
+  last = (char*) (first + length);
   
   Files->closeFile(source_file);
 } 
@@ -357,7 +357,7 @@ void InteractiveScanner::discardInput() {
   } while (c != EOF  &&  c != '\n');
 }
 
-FILE* FileScanner::openFileAndReturnFile(char* fn) {
+FILE* FileScanner::openFileAndReturnFile(const char* fn) {
   _fullName = NULL;
   file = Files->openSelfFile(fn, &_fullName);
   fileError= file ? 0 : errno;
@@ -370,16 +370,16 @@ FILE* FileScanner::openFileAndReturnFile(char* fn) {
   return file;
 }
 
-FileScanner::FileScanner(char* fn) : Scanner(openFileAndReturnFile(fn)) {}
+FileScanner::FileScanner(const char* fn) : Scanner(openFileAndReturnFile(fn)) {}
 
-StringScanner::StringScanner(char* s, fint len, char* fn, fint l, fint c) {
+StringScanner::StringScanner(const char* s, fint len, const char* fn, fint l, fint c) {
   sourceBuf= new SourceBuffer(s, len);
   _fileName = fn;
   line = l;
   column = c;
 }
 
-void InteractiveScanner::start_line(char* prompt) {
+void InteractiveScanner::start_line(const char* prompt) {
   initSourcePos();
   column += strlen(prompt);
   lprintf("%s", prompt);
@@ -447,7 +447,7 @@ void Scanner::resetTokenList() {
 
 void Scanner::SuppressErrors(bool b) { suppress = b; }
 
-Token* Scanner::TokenizingError(char* msg) {
+Token* Scanner::TokenizingError(const char* msg) {
   if (suppress) {
     return NULL;
   } else {
@@ -455,13 +455,13 @@ Token* Scanner::TokenizingError(char* msg) {
   }
 }
 
-void Scanner::ErrorMessage(char* msg, fint l, fint c) {
+void Scanner::ErrorMessage(const char* msg, fint l, fint c) {
   if (suppress)
     return;
   error4("%s on line %ld, character %ld of \"%s\"", msg, l, c, fileName());
 }
 
-void InteractiveScanner::ErrorMessage(char* msg, fint l, fint c) {
+void InteractiveScanner::ErrorMessage(const char* msg, fint l, fint c) {
   if (suppress)
     return;
   for (fint i = 1; i < c; i ++) putchar(' ');
@@ -469,7 +469,7 @@ void InteractiveScanner::ErrorMessage(char* msg, fint l, fint c) {
   error3("%s on line %ld, character %ld", msg, l, c);
 }
 
-char* SourceBuffer::lastWhiteSpaceBefore(char* start) {
+const char* SourceBuffer::lastWhiteSpaceBefore(const char* start) {
   // return last (most distant) whitespace character preceding start
   // include comments in start of source
 
@@ -574,7 +574,7 @@ Token* Scanner::read_escaped_char(char*& buf, bool& cannot_be_a_delimeter) {
 Token* Scanner::skip_comment() {
   fint l = line;
   fint col = column - 1;
-  char* ss = sourceAddr() - 1;
+  const char* ss = sourceAddr() - 1;
 
   int len = 0;
 
@@ -605,7 +605,7 @@ Token* Scanner::read_name(fint c) {
   Token::TokenType t;
   fint l = line;
   fint col = column - 1;
-  char* ss = sourceAddr() - 1;
+  const char* ss = sourceAddr() - 1;
   fint len;
   if (c == ':') {
     t = Token::ARG;
@@ -671,7 +671,7 @@ Token* Scanner::read_name(fint c) {
 Token* Scanner::read_op(fint c) {
   fint l = line;
   fint col = column - 1;
-  char* ss = sourceAddr() - 1;
+  const char* ss = sourceAddr() - 1;
   buffer[0] = char(c);
   fint len = 1;
   while (is_punct(c = get_char())) buffer[len++] = char(c);
@@ -698,7 +698,7 @@ Token* Scanner::read_number(fint c) {
   const int MAXSELFINT = smiOop_max->value() + 1; // maximum Self integer + 1
   fint l = line;
   fint col = column - 1;
-  char* ss = sourceAddr() - 1;
+  const char* ss = sourceAddr() - 1;
   bool neg = false;
   Token::TokenType t = Token::INTEGER;
   if (c == '-') {
@@ -729,7 +729,7 @@ Token* Scanner::read_number(fint c) {
       return TokenizingError("numeric constant too large");
     i *= 10;
     i += asnum(c);
-    if (i > MAXSELFINT || i == MAXSELFINT && !neg) {
+    if (i > MAXSELFINT || (i == MAXSELFINT && !neg)) {
       return TokenizingError("numeric constant too large");
     }
   }
@@ -753,13 +753,13 @@ Token* Scanner::read_number(fint c) {
         }
         int32 newi = i * base + v;
         int32 maxi = MAXSELFINT / base;
-        if ((i > maxi || i == maxi && !neg) ||
-            (newi > MAXSELFINT || newi == MAXSELFINT && !neg)) {
+        if ((i > maxi || (i == maxi && !neg)) ||
+            (newi > MAXSELFINT || (newi == MAXSELFINT && !neg))) {
           return TokenizingError("numeric constant too large");
         }
         i = newi;
         c = get_char();
-      } while (is_digit(c) || base > 10 && is_alphadigit(c));
+      } while (is_digit(c) || (base > 10 && is_alphadigit(c)));
     } else {
       return TokenizingError("expecting a number after the base specifier");
     }
@@ -834,7 +834,7 @@ Token* Scanner::read_string() {
 Token* Scanner::read_general_string(char delimiter, Token::TokenType tokenType) {
   fint l = line;
   fint col = column - 1;
-  char* ss = sourceAddr() - 1;
+  const char* ss = sourceAddr() - 1;
   char* b = buffer;
   fint c;
   bool cannot_be_a_delimeter;
@@ -845,7 +845,7 @@ Token* Scanner::read_general_string(char delimiter, Token::TokenType tokenType) 
     if (b >= &buffer[ScannerBufferSize]) {
       return TokenizingError("string literal or comment too long");
     }
-  } while (cannot_be_a_delimeter  ||  c != delimiter && c != EOF);
+  } while (cannot_be_a_delimeter  ||  (c != delimiter && c != EOF));
   if (c == EOF) {
     return TokenizingError("missing trailing ' of string literal or comment");
   }
@@ -859,7 +859,7 @@ Token* Scanner::read_general_string(char delimiter, Token::TokenType tokenType) 
 Token* Scanner::read_dot() {
   fint l = line;
   fint col = column - 1;
-  char* ss = sourceAddr() - 1;
+  const char* ss = sourceAddr() - 1;
   return new Token(as_TokenType('.'), l, col, ss);
 }
 

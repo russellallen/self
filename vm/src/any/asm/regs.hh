@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.10 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 
@@ -14,7 +14,7 @@
 
 extern "C" {                            // extern "C" for easier debugging
   void printLocation(Location l);
-  char* locationName(Location l);       // what printLocation prints
+  const char* locationName(Location l);       // what printLocation prints
 }
 
 
@@ -22,9 +22,8 @@ extern "C" {                            // extern "C" for easier debugging
 
 // machine-specific implementations:
 
-extern char* RegisterNames[];
+extern const char* RegisterNames[];
 
-// WARNING: duplicated in asmDefs_ppc.h
 const fint NumNonVolRegisters       = HighestNonVolReg - LowestNonVolReg      + 1;
 const fint NumLocalNonVolRegisters  = HighestNonVolReg - LowestLocalNonVolReg + 1;
 const fint NumGlobalNonVolRegisters = LowestLocalNonVolReg - LowestNonVolReg;

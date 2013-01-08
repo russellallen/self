@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -33,8 +33,8 @@ class oTableBuffer: public oTableObj {
   oTableBuffer() { next = NULL; }
 
   bool is_oTableEntry(void* p) {
-    return p >= (void*) &entries[0] && p < (void*) &entries[object_table_size]
-      || next && next->is_oTableEntry(p); }
+    return (p >= (void*) &entries[0] && p < (void*) &entries[object_table_size])
+      || (next && next->is_oTableEntry(p)); }
 };
 
 class oTablePoint {

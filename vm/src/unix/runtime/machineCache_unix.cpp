@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "machineCache_unix.hh"
@@ -20,9 +20,7 @@
 # endif  
 
 # define OVERDO_IT 0
-# if TARGET_OS_VERSION == MACOSX_VERSION  \
-  && (     TARGET_ARCH == PPC_ARCH \
-       ||  TARGET_ARCH == I386_ARCH  &&  !OVERDO_IT )
+# if TARGET_OS_VERSION == MACOSX_VERSION  && !OVERDO_IT
 
   extern "C" { void MakeDataExecutable(void*, unsigned long); }
 
@@ -33,8 +31,7 @@
     MakeDataExecutable(s, (char*)e - (char*)s);
   }
 
-# elif TARGET_OS_VERSION == MACOSX_VERSION \
-    && TARGET_ARCH == I386_ARCH  &&  OVERDO_IT
+# elif TARGET_OS_VERSION == MACOSX_VERSION && OVERDO_IT
   extern "C" { void MakeDataExecutable(void*, unsigned long); }
   void MachineCache::flush_instruction_cache_word(void* addr) { 
     const fint maxInstLen = 8; // a guess

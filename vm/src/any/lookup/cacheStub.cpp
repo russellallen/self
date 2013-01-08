@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.14 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "cacheStub_abstract.hh"
@@ -204,7 +204,7 @@ void CacheStub::computeJumpAddr(nmethod* nm, sendDesc* sd,
     stub= new AgingStub(nm, nm->verifiedEntryPoint(), NULL);
     addr= stub->insts();    
   } else if (sd->isCounting()) {
-    stub= new_CountStub(nm, nm->verifiedEntryPoint(), NULL, sd->countType());
+    stub= CountStub::new_CountStub(nm, nm->verifiedEntryPoint(), NULL, sd->countType());
     addr= stub->insts();
   } else {
     addr= nm->verifiedEntryPoint();
@@ -743,7 +743,7 @@ int32 CacheStub::flush() {              // try to flush this stub
     if (CheckAssertions  &&  this == (CacheStub*)catchThisOne) warning("caught cache stub");
 # endif
   assert(zone::frame_chain_nesting > 0, "frames must be chained");
-  nmethod* myMethod = findNMethod(sd());
+  nmethod* myMethod = nmethod::findNMethod(sd());
   if (myMethod->frame_chain != NoFrameChain) return 0;
   int32 s = size();
   deallocate();
@@ -901,7 +901,7 @@ sendDesc* CacheStub::sd() {
   assert(cacheLink.notEmpty(), "no sd");
   return sendDesc::sendDesc_from_nmln(cacheLink.next);
 }
-nmethod* CacheStub::sender() { return findNMethod(cacheLink.next); }
+nmethod* CacheStub::sender() { return nmethod::findNMethod(cacheLink.next); }
 
 void CacheStub::print() {
   printIndent();
@@ -952,7 +952,7 @@ bool isCacheStub(void* p) {
 NCodeBase* findStub(void* addr) {
   NCodeBase* s =
     (NCodeBase*)Memory->code->stubs->zone()->findStartOfBlock(addr);
-  assert(isCacheStub(s) || isCountStub(s), "what is it?");
+  assert(isCacheStub(s) || CountStub::isCountStub(s), "what is it?");
   return s;
 }
 
@@ -1094,8 +1094,8 @@ void Stubs::cleanup() {
   // happened
   needsWork = false;
   if (reserve == NULL ||
-      stubZone->freeBytes() * 100 / stubZone->capacity() > MaxFreePerc &&
-      stubZone->freeBytes() > MinFree) {
+      (stubZone->freeBytes() * 100 / stubZone->capacity() > MaxFreePerc &&
+      stubZone->freeBytes() > MinFree)) {
     LOG_EVENT("compacting PIC zone");
     if (PrintCodeReclamation) {
       lprintf("*compacting PIC zone\n");
@@ -1170,7 +1170,7 @@ void Stubs::flush() {
       // the PIC is deallocated
     } else {
       s->deallocate();
-      if (!next || isCacheStub(next) || isCountStub(next)) {
+      if (!next || isCacheStub(next) || CountStub::isCountStub(next)) {
         // ok
       } else {
         // next was a count stub called by PIC s, i.e. it has been deallocated

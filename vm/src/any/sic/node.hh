@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.19 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 // This file defines the intermediate language used by the SIC
@@ -153,6 +153,7 @@ class    CommentNode;           // for debugging
         // canCopyPropagateOop: can node replace a use with a copy-propagated 
         // oop?  if true, must handle ConstPRegs; implies canCopyPropagate
     virtual bool canCopyPropagateFrom(PReg* /* d */) { return true; }
+    // This is historic now >>
         // PPC ArrayAt/Put nodes use extra temp regs
         // Consider:
         //   r27 := r3
@@ -165,6 +166,7 @@ class    CommentNode;           // for debugging
         // Since AtPut on PPC uses r3 as a temp (Temp3) this breaks!
         // So I'm adding a PReg-specific test that can be customized per platform
         // -- dmu 1/2003
+    // <<
     virtual bool isAssignmentLike()     { return false; }
         // isAssignmentLike: node copies src to dest (implies hasSrc/Dest)
     virtual bool hasSrc()               { return false; }
@@ -377,8 +379,7 @@ class    CommentNode;           // for debugging
    unknown:
     PReg* frame;        // frame pointer of stack frame
     PUse* frameUse;
-    nmethod* nm;        // nmethod of that frame (used to retrieve frame's frame size (and
-                        // max # of outgoing register args - for PPC))
+    nmethod* nm;        // nmethod of that frame (used to retrieve frame's frame size)
     NameDesc* nd;       // name to load
     oop name;           // slot name (for printing)
    public:
@@ -441,8 +442,7 @@ class    CommentNode;           // for debugging
    unknown:
     PReg* frame;        // frame pointer of stack frame
     PUse* frameUse;
-    nmethod* nm;        // nmethod of that frame (used to retrieve frame's frame size (and
-                        // max # of outgoing register args - for PPC))
+    nmethod* nm;        // nmethod of that frame (used to retrieve frame's frame size)  
     NameDesc* nd;       // name to store into
     oop name;           // slot name (for printing)
    public:
@@ -493,9 +493,9 @@ class    CommentNode;           // for debugging
    public:
     bool _isLoopHead;
     bool didStartBB;            // used for debugging / assertion checks
-    char* why;                  // help find where these come from -- dmu
+    const char* why;            // help find where these come from -- dmu
 
-    MergeNode(char* why);
+    MergeNode(const char* why);
     MergeNode(Node* prev1, Node* prev2);
 
     fint cost()                 { return 0; }
@@ -615,7 +615,7 @@ class    CommentNode;           // for debugging
     virtual bool operIsConst() = 0;
     virtual int32 operConst() = 0;
     virtual bool doCopyPropagate(BB* bb, PUse* u, PReg* d, bool repl);
-    char* opName();
+    const char* opName();
   };
 
   class ArithRRNode : public ArithNode {  // reg op reg => reg
@@ -1224,13 +1224,8 @@ class    CommentNode;           // for debugging
     char* print_string(char* buf, bool printAddr = true);
   };
   
-  
-// On SPARC, execution of a non-lifo block is signaled by a "trap" instruction.
-// However, we can't do that on PPC - we use a primitive call instead.  As a result,
-// there's two different definitions of DeadEndNode. -mabdelmalek 1/03
 
 # include "_deadBlockNode_pd.hh.incl"
-
 
   class DeadEndNode : public PNode {
    public:
@@ -1299,18 +1294,18 @@ class    CommentNode;           // for debugging
     char* print_string(char* buf, bool printAddr = true);
     void check();
    protected:
-    void checkMap(SExpr* expr, oop p, char* msg, fint n = 0);
+    void checkMap(SExpr* expr, oop p, const char* msg, fint n = 0);
     bool checkContents(ValueLocationNameDesc* nd);
-    void fail(char* msg, void* arg);
+    void fail(const char* msg, const void* arg);
     bool describePReg(PReg* r, SCodeScope** scopes,
                       ValueLocationNameDesc*& nd, bool describeUnallocated);
   };
   
   class CommentNode : public PNode {
    unknown:
-    char* comment;
+    const char* comment;
    public:
-    CommentNode(char* s);
+    CommentNode(const char* s);
     bool isTrivial()            { return true; }
     bool isCommentNode()        { return true; }
     bool canBeBetweenMarkerAndSend() { return true; }

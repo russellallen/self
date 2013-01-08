@@ -1,12 +1,11 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
-
 
 class byteVectorMap: public slotsMapDeps {
  public:
@@ -42,8 +41,8 @@ class byteVectorMap: public slotsMapDeps {
   oop cloneSize(oop obj, fint len, bool mustAllocate= true, oop filler= NULL);
   
   // creation operations
-  friend byteVectorOop create_byteVector(slotList* slots);
-  slotsOop create_object(fint size) { return create_byteVector(size); }
+  static byteVectorOop create_byteVector(slotList* slots);
+  slotsOop create_object(fint size) { return ::create_byteVector(size); }
   
   // mirror operation
   mirrorOop mirror_proto() { return Memory->byteVectorMirrorObj; }
@@ -65,3 +64,8 @@ class byteVectorMap: public slotsMapDeps {
   // printing support
   void print_byteVector(oop obj);
 };
+
+static inline byteVectorOop create_byteVector(slotList* slots) {
+  return byteVectorMap::create_byteVector(slots);
+}
+

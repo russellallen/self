@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.7 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "slotDesc.hh"
@@ -43,8 +43,8 @@ bool slotDesc::verify(Map* m) {
         error1("slot 0x%lx is in the object of a non-slots map", this);
         flag = false;
       } else if (offset->value() < 0 || 
-                 m && 
-                 offset->value() >= ((slotsMap*) m)->object_length->value()) {
+                 (m && 
+                 offset->value() >= ((slotsMap*) m)->object_length->value())) {
         error1("slot 0x%lx offset is out of range", this);
         flag = false;
       }

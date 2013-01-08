@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.11 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
@@ -110,7 +110,7 @@ class zone: public CHeapObj {
   }
 
 
-  // zone creation (for PPC) must put stubs right after iZone
+  // zone creation must put stubs right after iZone
   pc_t code_start() { return Memory->code->      iZone->startAddr(); }
   pc_t code_end()   { return Memory->code->stubs->zone()->endAddr(); }
 

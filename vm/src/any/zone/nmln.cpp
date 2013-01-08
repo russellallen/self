@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.8 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # pragma implementation "nmln.hh"
@@ -124,7 +124,7 @@ bool nmln::verify_list_integrity() {
 #endif
 #   endif
     /* Too slow! and too specific!
-    else if (Memory->code->contains(p) && ! findNMethod(p)->encompasses(p)) {
+    else if (Memory->code->contains(p) && ! nmethod::findNMethod(p)->encompasses(p)) {
       error2("bad nmln list: 0x%lx not in a valid method in list 0x%lx",
              p, this);
       flag = false;

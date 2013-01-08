@@ -1,12 +1,11 @@
 /* Sun-$Revision: 30.9 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
 # endif
-
 
 class objVectorOopClass: public slotsOopClass {
  public:
@@ -54,16 +53,16 @@ class objVectorOopClass: public slotsOopClass {
                                                  filler)); }
   
   // creation operation
-  friend objVectorOop create_objVector(oop parent);
-  friend objVectorOop create_objVector(fint size);
+  static objVectorOop create_objVector(oop parent);
+  static objVectorOop create_objVector(fint size);
   
   // memory operations
   bool verify();
   
   // primitives
-  friend oop ov_at_prim(oop rcvr, oop index);
-  friend oop ov_at_put_prim(oop rcvr, oop index, oop contents);
-  friend oop ov_size_prim(oop rcvr);
+  static oop ov_at_prim(oop rcvr, oop index);
+  static oop ov_at_put_prim(oop rcvr, oop index, oop contents);
+  static oop ov_size_prim(oop rcvr);
   oop ov_clone_prim(smi size, oop filler, void *FH); // Caller must handle size < 0.
 
   oop ov_references_prim(oop limit);
@@ -75,10 +74,37 @@ class objVectorOopClass: public slotsOopClass {
   short *convertShortArray();
   unsigned short *convertUnsignedShortArray();
   float *convertFloatArray();
-  void  *convertProxyArray(void*);
+  void  *convertProxyArray(const void*);
 
   // compiler support
-  friend int32 objVector_len_offset() {
+  static int32 objVector_len_offset() {
     return int32(&objVectorOop(NULL)->addr()->_len); }
   
 };
+
+static inline objVectorOop create_objVector(oop parent) {
+  return objVectorOopClass::create_objVector(parent);
+}
+
+static inline objVectorOop create_objVector(fint size) {
+  return objVectorOopClass::create_objVector(size);
+}
+
+static inline int32 objVector_len_offset() {
+  return objVectorOopClass::objVector_len_offset();
+}
+
+static inline oop ov_at_prim(oop rcvr, oop index) {
+  return objVectorOopClass::ov_at_prim(rcvr, index);
+}
+
+static inline oop ov_at_put_prim(oop rcvr, oop index, oop contents) {
+  return objVectorOopClass::ov_at_put_prim(rcvr, index, contents);
+}
+
+static inline oop ov_size_prim(oop rcvr) {
+  return objVectorOopClass::ov_size_prim(rcvr);
+}
+
+
+

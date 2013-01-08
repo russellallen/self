@@ -12,7 +12,7 @@
 // CopyrightVersion 1.2
 
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
    
 
@@ -48,13 +48,6 @@
 
 // Changed to support new filename extensions: .cpp and .hh -- dmu 2/01
 
-# if defined(__MWERKS__) && !defined(Mach_O)
-# include <MacHeadersPPC++>
-# include <SIOUX.h>
-# include <console.h>
-# include <new.h>
-# endif
-
 # ifdef __linux__
 #   include <new>
 # endif
@@ -85,7 +78,7 @@ protected:
 public:
   void check_length();
 
-  FileName(char* d, char* p, char* s, char* x, char* i, char* a) {
+  FileName(const char* d, const char* p, const char* s, const char* x, const char* i, const char* a) {
     strcpy( dir, d);
     strcpy( prefix, p);
     strcpy( stem, s);
@@ -101,20 +94,20 @@ public:
     check_length();
   }
 
-  inline char* dir_pre_stem_suff()    { return dpss; }
-  inline char* pre_stem_altSuff()     { return psa; }
-  inline char* dir_pre_stem_altSuff() { return dpsa; }
-  inline char* pre_stem_suff()        { return pss; }
+  inline const char* dir_pre_stem_suff()    { return dpss; }
+  inline const char* pre_stem_altSuff()     { return psa; }
+  inline const char* dir_pre_stem_altSuff() { return dpsa; }
+  inline const char* pre_stem_suff()        { return pss; }
 
-  FileName* copy_stem(char* newStem) {
+  FileName* copy_stem(const char* newStem) {
     return new FileName(dir, prefix, newStem, suffix, inverseDir, altSuffix);
   }
 
-  Bool suffix_matches(char* s);
+  Bool suffix_matches(const char* s);
 
-  char* nameOfList() { return stem; }
+  const char* nameOfList() { return stem; }
 
-  char* getInvDir() { return inverseDir; }
+  const char* getInvDir() { return inverseDir; }
 
 };
 
@@ -143,7 +136,7 @@ class AbstractPlatform {
       GDFileTemplate = new FileName( "", "",  "Dependencies.hh",       "",      "", "");
   }
 
-  char** outer_suffixes() { 
+  const char** outer_suffixes() { 
     abort(); // should not run me; copy me for each platform
     /* Compiler bug:
       static char *suffs[] = { ".cpp", 0 };
@@ -185,13 +178,13 @@ class AbstractPlatform {
   
   // The comment prefix indicates a comment line in includeDB
   
-  inline char* commentPrefix()  const { return "//"; }
+  inline const char* commentPrefix()  const { return "//"; }
 
 
   // A line with a filename and the noGrandInclude string means that
   // this file cannot use the precompiled header.
   
-  inline char* noGrandInclude()  const { return "no_precompiled_headers"; }
+  inline const char* noGrandInclude()  const { return "no_precompiled_headers"; }
   
   // A line with a filename and the generatePlatformDependentInclude means that
   // an include file for the header file must be generate.
@@ -201,117 +194,35 @@ class AbstractPlatform {
   // means that this program will create a file called "foo_pd.hh"
   // containing # include "foo_sparc.hh" (assuming arch = sparc).
     
-  inline char* generatePlatformDependentInclude()  const { return "generate_platform_dependent_include"; }
+  inline const char* generatePlatformDependentInclude()  const { return "generate_platform_dependent_include"; }
 
   // Format strings for emitting Makefile rules
-  virtual char* obj_file_format()  = 0;
-  virtual char* asm_file_format()  = 0;
-  virtual char* dependent_format() = 0;
+  virtual const char* obj_file_format()  = 0;
+  virtual const char* asm_file_format()  = 0;
+  virtual const char* dependent_format() = 0;
 
   // platform-dependent exit routines:
   // abort means an internal error
    
   virtual void abort() = 0;
    
-  void set_args(int& /*argc*/, char**& /*argv*/) {} // per-platform argument setting
+  void set_args(int& /*argc*/, const char**& /*argv*/) {} // per-platform argument setting
 
-  Bool fileNameStringEquality(char* a, char* b) { return strcmp(a, b) == 0; }
+  Bool fileNameStringEquality(const char* a, const char* b) { return strcmp(a, b) == 0; }
 
-  void fileNamePortabilityCheck(char* name );
-  void fileNamePortabilityCheck(char* name, char* matchingName);
+  void fileNamePortabilityCheck(const char* name );
+  void fileNamePortabilityCheck(const char* name, const char* matchingName);
 
   int fileNameLengthLimit() { return 31; } // max is 31 on mac, so warn
 
   int  defaultGrandIncludeThreshold() { return 30; }
   
-  virtual char* GIFileForDependency() { return GIFileTemplate->pre_stem_suff(); }
+  virtual const char* GIFileForDependency() { return GIFileTemplate->pre_stem_suff(); }
 
-  virtual void fatal(char* msg = "See console window") { fprintf(stderr, "%s\n", msg); exit(1); }
+  virtual void fatal(const char* msg = "See console window") { fprintf(stderr, "%s\n", msg); exit(1); }
 };
 
-
-# if defined(__MWERKS__) && !defined(Mach_O)
-
-class MetroWerksMacPlatform:  public AbstractPlatform {
- public:
-  void setupFileTemplates() {
-      InclFileTemplate = new FileName( ":incls:", "_", "",                   ".incl", "", "");
-        GIFileTemplate = new FileName( "",        "",  "SelfMacPrecompHeader", ".pch",  "", "");
-        GDFileTemplate = DummyFileTemplate;
-  }
-  char** outer_suffixes() { 
-   static char *suffs[] = { ".cpp", ".c", ".s", 0 };
-   return suffs;
-  }
-
-  char* obj_file_format()  { return "NOT ON MAC"; }
-  char* asm_file_format()  { return "NOT ON MAC"; }
-  char* dependent_format() { return "NOT ON MAC"; }
-
-
-#   ifdef TARGET_IS_SELF
-
-    Bool includeGIInEachIncl() { return True; }
-
-    int defaultGrandIncludeThreshold() { return 150; }
-   
-   
-    void writeGIInclude(FILE* inclFile ) {
-       fprintf(inclFile, 
-               "# if __option(dont_inline) == 1\n"
-               "# include \"%s_debug\"\n"
-               "# else\n"
-               "# include \"%s_optimized\"\n"
-               "#endif\n\n",           
-                GIFileTemplate->dir_pre_stem_altSuff(),
-                GIFileTemplate->dir_pre_stem_altSuff());
-    }
-#   endif
-
-  void writeGIPragma(FILE* giFile ) {
-    fprintf( giFile,
-             "# if __option(dont_inline) == 1\n" \
-             "#pragma precompile_target \"%s_debug\"\n" \
-             "# else\n" \
-             "#pragma precompile_target \"%s_optimized\"\n" \
-             "# endif\n\n",
-             GIFileTemplate->pre_stem_altSuff(),
-             GIFileTemplate->pre_stem_altSuff());
-  }
-
-
-  void abort() { Debugger(); }
-  
-  void fatal(char* msg = "See console window") {
-    fprintf(stderr, "%s\n", msg);
-    SIOUXSettings.autocloseonquit  = False;
-    SIOUXSettings.asktosaveonclose = True;
-    exit(1);
-  }
-  
-  void set_args(int& argc, char**& argv) {
-    argc = ccommand(&argv);
-#   ifdef TARGET_IS_SELF
-          if (argc == 1) {
-            static char *default_args[] = {
-              "", "-100", "Platform_macosx", "includeDB", 
-              ":::src:Platform_mac", ":::src:includeDB"};
-            argc = sizeof(default_args) / sizeof(default_args[0]);
-            argv = default_args;
-          }
-#   endif
-    SIOUXSettings.autocloseonquit  = True;
-    SIOUXSettings.asktosaveonclose = False;
-    
-    void fatal_on_new_error();
-    set_new_handler(fatal_on_new_error);
-  }
-    
-} Plat;
-
-void fatal_on_new_error() {Plat.fatal("new error"); }
-
-# elif defined(__GNUC__) && defined(__APPLE__)
+# if defined(__GNUC__) && defined(__APPLE__)
 
 // For Apple Project Builder under OS X (MACHO) or just gcc on OS X
 
@@ -319,49 +230,44 @@ class MACOSX_Platform: public AbstractPlatform {
  public:
   void setupFileTemplates() {
     InclFileTemplate = new FileName( "incls/", "_", "",  ".incl", "", "");
-      GIFileTemplate = new FileName( "incls/", "",  "_precompiled", ".h", "", ".p");
+      GIFileTemplate = new FileName( "incls/", "",  "_precompiled", ".hh", "", ".hh.gch");
       GDFileTemplate = new FileName( "", "",  "Dependencies.hh",      "",      "", "");
   }
       
-  char** outer_suffixes();
+  const char** outer_suffixes() { 
+      static const char *suffs[] = { ".cpp", ".c", ".s", 0 };
+      return suffs;
+  }
 
-  char* obj_file_format()  { return "%s.o"; }
-  char* asm_file_format()  { return "%s.i"; }
-  char* dependent_format() { return "%s";   }
+  const char* obj_file_format()  { return "%s.o"; }
+  const char* asm_file_format()  { return "%s.i"; }
+  const char* dependent_format() { return "%s";   }
 
   void abort()     { ::abort(); }
 
   int defaultGrandIncludeThreshold() { return 10000; }
 
-  // For Unix make, include the dependencies for precompiled header files.
   Bool includeGIDependencies() { return True; }
-  
-  Bool includeGIInEachIncl() { return False; } // xcode reads it because target says so
  
+  Bool includeGIInEachIncl() { return False; }
+
   void writeGIInclude(FILE* inclFile ) {
     fprintf(inclFile, "# include \"%s\"\n", GIFileTemplate->pre_stem_suff());
   }
  
-  void set_args(int& argc, char**& argv);
-
-} Plat;
-
-char** MACOSX_Platform::outer_suffixes() { 
-  static char *suffs[] = { ".cpp", ".c", ".s", 0 };
-  return suffs;
-}
-
-void MACOSX_Platform::set_args(int& argc, char**& argv) {
+  void set_args(int& argc, const char**& argv) {
 #   ifdef TARGET_IS_SELF
-          if (argc == 1) {
-            static char *default_args[] = {
+      if (argc == 1) {
+          static const char *default_args[] = {
               "makeDeps", "-100000", "Platform_mac", "includeDB", 
               "../../src/Platform_mac", "../../src/includeDB"};
-            argc = sizeof(default_args) / sizeof(default_args[0]);
-            argv = default_args;
-          }
+          argc = sizeof(default_args) / sizeof(default_args[0]);
+          argv = default_args;
+      }
 #   endif
-}
+  }
+
+} Plat;
 
 # elif defined(_WIN32)
 
@@ -375,23 +281,23 @@ class WinGammaPlatform: public AbstractPlatform {
       GDFileTemplate = new FileName( "", "",  "Dependencies",         "",      "", "");
   }
 
-  char** outer_suffixes() { 
-   static char *suffs[] = { ".cpp", ".c", 0 };
+  const char** outer_suffixes() { 
+   static const char* suffs[] = { ".cpp", ".c", 0 };
    return suffs;
   }
 
-  char* obj_file_format()  { return "%s.obj";       }
-  char* asm_file_format()  { return "%s.i";         }
-  char* dependent_format() { return "$(VM_PATH)%s"; }
+  const char* obj_file_format()  { return "%s.obj";       }
+  const char* asm_file_format()  { return "%s.i";         }
+  const char* dependent_format() { return "$(VM_PATH)%s"; }
 
   Bool includeGIInEachIncl() { return False;}
 
   void abort() { ::abort(); }
      
   // I think windows file names are case-insensitive -- dmu
-  virtual Bool fileNameStringEquality(char* a, char* b) { return stricmp(a, b) == 0; }
+  virtual Bool fileNameStringEquality(const char* a, const char* b) { return stricmp(a, b) == 0; }
 
-  void fatal(char* msg = "See console window") {
+  void fatal(const char* msg = "See console window") {
     MessageBox(NULL, msg, "makeDeps error:", MB_OK);
     exit(1);
   }
@@ -408,14 +314,14 @@ class LinuxPlatform: public AbstractPlatform {
       GDFileTemplate = new FileName( "", "",  "Dependencies.hh",      "",      "", "");
   }
       
-  char** outer_suffixes() { 
-    static char *suffs[] = { ".cpp", ".c", ".s", 0 };
+  const char** outer_suffixes() { 
+    static const char* suffs[] = { ".cpp", ".c", ".s", 0 };
     return suffs;
   }
 
-  char* obj_file_format()  { return "%s.o"; }
-  char* asm_file_format()  { return "%s.i"; }
-  char* dependent_format() { return "%s";   }
+  const char* obj_file_format()  { return "%s.o"; }
+  const char* asm_file_format()  { return "%s.i"; }
+  const char* dependent_format() { return "%s";   }
 
   void abort()     { ::abort(); }
   int defaultGrandIncludeThreshold() { return 100; } // does not speed things up
@@ -429,7 +335,7 @@ class LinuxPlatform: public AbstractPlatform {
     fprintf(inclFile, "# include \"%s\"\n", GIFileTemplate->pre_stem_suff());
   }
   
-  char* GIFileForDependency() { return GIFileTemplate->pre_stem_altSuff(); }
+  const char* GIFileForDependency() { return GIFileTemplate->pre_stem_altSuff(); }
  
 } Plat;
 
@@ -444,14 +350,14 @@ class UnixPlatform: public AbstractPlatform {
       GDFileTemplate = new FileName( "", "",  "Dependencies.hh",      "",      "", "");
   }
       
-  char** outer_suffixes() { 
+  const char** outer_suffixes() { 
     static char *suffs[] = { ".cpp", ".c", ".s", 0 };
     return suffs;
   }
 
-  char* obj_file_format()  { return "%s.o"; }
-  char* asm_file_format()  { return "%s.i"; }
-  char* dependent_format() { return "%s";   }
+  const char* obj_file_format()  { return "%s.o"; }
+  const char* asm_file_format()  { return "%s.i"; }
+  const char* dependent_format() { return "%s";   }
 
   void abort()     { ::abort(); }
   // Do not change this; unless you fix things so precompiled header files
@@ -468,7 +374,7 @@ class UnixPlatform: public AbstractPlatform {
 
 
 void FileName::check_length() {
-  char* s = strlen(suffix) >= strlen(altSuffix)  ?  suffix  :  altSuffix;
+  const char* s = strlen(suffix) >= strlen(altSuffix)  ?  suffix  :  altSuffix;
   int len = strlen(prefix) + strlen(stem) + strlen(s);
   int lim = Plat.fileNameLengthLimit();
   if ( len  >  lim ) {
@@ -480,9 +386,9 @@ void FileName::check_length() {
 }
 
 
-Bool suffix_matches(char* s, char** suffixes) {
+Bool suffix_matches(const char* s, const char** suffixes) {
   register int len = strlen(s);
-  for ( char** suffp = suffixes;  *suffp;  ++suffp ) {
+  for ( char** suffp = (char**) suffixes;  *suffp;  ++suffp ) {
     register int suffLen = strlen(*suffp);
     if ( len >= suffLen  
     &&  Plat.fileNameStringEquality(&s[len - suffLen], *suffp))
@@ -491,7 +397,7 @@ Bool suffix_matches(char* s, char** suffixes) {
   return False;
 }
 
-Bool is_outer_file(char* s) { return suffix_matches(s, Plat.outer_suffixes()); }
+Bool is_outer_file(const char* s) { return suffix_matches(s, Plat.outer_suffixes()); }
 
 
 
@@ -516,11 +422,11 @@ class list {
   Bool mayBeCycle;
   Bool isCycle;
   Bool useGrandInclude; // put in list because a file can refuse to
-  char* platformDependentInclude; // e.g. if this is sig_unix.hh this field contains sig_pd.hh
+  const char* platformDependentInclude; // e.g. if this is sig_unix.hh this field contains sig_pd.hh
   list* platformDependentIncludees; // e.g. if this is sig.hh this field contains sig_unix.hh
   int  count;
 
-  list(char* n) {
+  list(const char* n) {
     first = last = (item*)NullItem;
     beenHere =  mayBeCycle = isCycle = False;
     platformDependentInclude = NULL;
@@ -531,7 +437,7 @@ class list {
     useGrandInclude = Plat.haveGrandInclude();
   }
 
-  list* listForFile(char*);
+  list* listForFile(const char*);
   Bool  isEmpty() { return first == 0; }
   void  add(list*);
   void  addFirst(list*);
@@ -567,8 +473,8 @@ class macro_definitions {
   macro macros[1000];
   int nmacros;
 
-  char** lookupAll(char* name, int nameLen,
-               char* pltf, char* dbf, char* line, int lineNo // for error msgs
+  char** lookupAll(const char* name, int nameLen,
+               const char* pltf, const char* dbf, const char* line, int lineNo // for error msgs
                ) {
     char** r = new char*[maxMatches + 1];
     int j = 0;
@@ -611,7 +517,7 @@ class macro_definitions {
   }
 
 
-  void  read_from(char* fileName, Bool missing_ok = False) {
+  void  read_from(const char* fileName, Bool missing_ok = False) {
     FILE* f = fopen(fileName, "r");
     if (!f && missing_ok)  return;
     if (!f) perror(fileName), Plat.fatal();
@@ -648,12 +554,12 @@ class macro_definitions {
    }
 
 
-  char** expandAll(char* token, 
-               char* pltf, char* dbf, char* line, int lineNo // for error msgs only
+  char** expandAll(const char* token, 
+               const char* pltf, const char* dbf, const char* line, int lineNo // for error msgs only
                ) { 
     // the token may contain one or more <macroName>'s
 
-    char* in = token;
+    const char* in = token;
     static const int maxMacrosPerLine = 10;
     char** macros[maxMacrosPerLine];
     int nMacros = 0;
@@ -662,8 +568,8 @@ class macro_definitions {
       if (*in != '<') { ++in; }
       else {
         // a macro!
-        char* leftAngle = in;
-        char* rightAngle = leftAngle + 1;
+        const char* leftAngle = in;
+        const char* rightAngle = leftAngle + 1;
         for ( ; *rightAngle != '>';  ++rightAngle)
           if (!*rightAngle) {
             char err[BUFSIZ];
@@ -745,13 +651,13 @@ class database {
   
  public:
   
-  void absolute_generation( char* new_plat_fn, char* new_db_fn);
+  void absolute_generation( const char* new_plat_fn, const char* new_db_fn);
   void relative_generation( database* prev, 
-                            char* old_plat_fn, char* old_db_fn, 
-                            char* new_plat_fn, char* new_db_fn);
-  void copy_file(char* src, char* dst);
+                            const char* old_plat_fn, const char* old_db_fn, 
+                            const char* new_plat_fn, const char* new_db_fn);
+  void copy_file(const char* src, const char* dst);
   void can_be_missing() { missing_ok = True; }
-  void get(char *macro_file, char * db_file);
+  void get(const char *macro_file, const char * db_file);
   void compute();
   void put();
   void verify();
@@ -775,24 +681,24 @@ class database {
   }
 
   protected:
-   void create_file_if_absent( char* );
+   void create_file_if_absent( const char* );
    void write_grand_include();
    void write_grand_unix_makefile();
    void write_individual_includes();
    void write_individual_includes(database* previous);
    
-   void get_pair(char* unexpanded_includer, char* unexpanded_includee,
-                 char* plat_fileName, char* db_fileName, char* line, int lineNo // for errors
+   void get_pair(const char* unexpanded_includer, const char* unexpanded_includee,
+                 const char* plat_fileName, const char* db_fileName, const char* line, int lineNo // for errors
                  );
-   void get_quad(char* plat_dep_inc, 
-                 char* unexpanded_foo_hh, char* unexpanded_foo_pd_hh, char* unexpanded_foo_arch_hh,
-                 char* plat_fileName, char* db_fileName, char* line, int lineNo // for errors
+   void get_quad(const char* plat_dep_inc, 
+                 const char* unexpanded_foo_hh, const char* unexpanded_foo_pd_hh, const char* unexpanded_foo_arch_hh,
+                 const char* plat_fileName, const char* db_fileName, const char* line, int lineNo // for errors
                  );
 };
 
 
 
-void AbstractPlatform::fileNamePortabilityCheck(char* name, char* matchingName) {
+void AbstractPlatform::fileNamePortabilityCheck(const char* name, const char* matchingName) {
   if (strcmp(name, matchingName) != 0) {
     char err[BUFSIZ];
     sprintf(err, 
@@ -804,7 +710,7 @@ void AbstractPlatform::fileNamePortabilityCheck(char* name, char* matchingName) 
 }
 
 
-void AbstractPlatform::fileNamePortabilityCheck(char* name) {
+void AbstractPlatform::fileNamePortabilityCheck(const char* name) {
   if ('A' <= name[0]  &&  name[0] <= 'Z') {
     char err[BUFSIZ];
     sprintf(err, 
@@ -818,7 +724,7 @@ void AbstractPlatform::fileNamePortabilityCheck(char* name) {
 
 
      
-list* list::listForFile(char* namea) {
+list* list::listForFile(const char* namea) {
   for ( register item* p = first;  p;  p = p->next)
     if ( Plat.fileNameStringEquality(p->contents->name, namea) ) {
       Plat.fileNamePortabilityCheck( namea, p->contents->name );
@@ -952,7 +858,7 @@ list* list::doCFile() {
 }
 
 
-FILE* fileFor(char* fname) {
+FILE* fileFor(const char* fname) {
   if (fname == NULL  ||  fname[0] == '\0')
     Plat.fatal("fileFor: empty or null name");
   FILE *r = fopen(fname, "w");
@@ -964,7 +870,7 @@ FILE* fileFor(char* fname) {
 }
 
 
-char* remove_suffix_from(char* s) {
+char* remove_suffix_from(const char* s) {
   char* r = new char[BUFSIZ];
   strcpy( r, s);
   char* p;
@@ -997,7 +903,7 @@ void list::put_incl_file( database* db ) {
 }
 
 
-void database::get(char* plat_fileName, char* db_fileName) {
+void database::get(const char* plat_fileName, const char* db_fileName) {
   printf("\treading platform file: %s\n", plat_fileName);
   macros->read_from(plat_fileName, missing_ok);
 
@@ -1039,8 +945,6 @@ void database::get(char* plat_fileName, char* db_fileName) {
 
     token1[0] = token2[0] = token3[0] = token4[0] = '\0';
     int n = sscanf(line, " %s %s %s %s", token1, token2, token3, token4);
-    if (n < 0)  n = sscanf(line, " %s %s %s", token1, token2, token3); // added this line because of next one
-    if (n < 0)  n = sscanf(line, " %s %s", token1, token2); // added this line for MW 4
     if (n <= 0) {
       // empty line?
       char *c;
@@ -1069,8 +973,8 @@ void database::get(char* plat_fileName, char* db_fileName) {
 
 
 
-void database::get_pair(char* unexpanded_includer, char* unexpanded_includee,
-                        char* pltf, char* dbf, char* line, int lineNo // for errors
+void database::get_pair(const char* unexpanded_includer, const char* unexpanded_includee,
+                        const char* pltf, const char* dbf, const char* line, int lineNo // for errors
                         ) {
   char** includers = macros->expandAll(unexpanded_includer, pltf, dbf, line, lineNo );
   char** includees = macros->expandAll(unexpanded_includee, pltf, dbf, line, lineNo );
@@ -1104,9 +1008,9 @@ void database::get_pair(char* unexpanded_includer, char* unexpanded_includee,
 }
 
 
-void database::get_quad(char* plat_dep_inc, 
-                        char* unexpanded_foo_hh, char* unexpanded_foo_pd_hh, char* unexpanded_foo_arch_hh,
-                        char* pltf, char* dbf, char* line, int lineNo // for errors
+void database::get_quad(const char* plat_dep_inc, 
+                        const char* unexpanded_foo_hh, const char* unexpanded_foo_pd_hh, const char* unexpanded_foo_arch_hh,
+                        const char* pltf, const char* dbf, const char* line, int lineNo // for errors
                        ) {
   if (strcmp( plat_dep_inc, Plat.generatePlatformDependentInclude()) != 0) {
       char err[BUFSIZ];
@@ -1120,7 +1024,7 @@ void database::get_quad(char* plat_dep_inc,
   
   for (char** foo_pd_hhp = &foo_pd_hhs[0];  *foo_pd_hhp;  ++foo_pd_hhp) {
     FileName* foo_pd_hh_name = InclFileTemplate->copy_stem(*foo_pd_hhp);
-    char* incls_foo_pd_hh = foo_pd_hh_name->dir_pre_stem_suff();
+    const char* incls_foo_pd_hh = foo_pd_hh_name->dir_pre_stem_suff();
     FILE* foo_pd_file = fileFor( incls_foo_pd_hh );
     for (char** foo_arch_hhp = &foo_arch_hhs[0];  *foo_arch_hhp;  ++foo_arch_hhp)
       fprintf(foo_pd_file, "# include \"%s\"\n", *foo_arch_hhp);
@@ -1230,7 +1134,7 @@ void database::write_grand_include() {
   fclose( inc );
 }
 
-static void print_dependent_on(FILE* gd, char* name) {
+static void print_dependent_on(FILE* gd, const char* name) {
   fprintf( gd, " ");
   fprintf( gd, Plat.dependent_format(), name);
 }
@@ -1239,31 +1143,39 @@ void database::write_grand_unix_makefile() {
   if (!Plat.writeDeps()) 
     return;
 
+  // 2012-05-02 topa: newer cpp do not like the multi-line style
+  // hence, we generate the file with one-line things directly
   printf("\twriting dependencies file\n");
   FILE* gd = fileFor(GDFileTemplate->dir_pre_stem_suff());
   
   { // write Obj_Files = ...
-    fprintf(gd, "Obj_Files = \\\n");
+
+    // fprintf(gd, "Obj_Files = \\\n");
+    fprintf(gd, "Obj_Files = ");
     for ( item* si = outerFiles->first;  si;  si = si->next) {
       list* anOuterFile = si->contents;
       char* stemName = remove_suffix_from(anOuterFile->name);
       fprintf(gd, Plat.obj_file_format(), stemName);
-      fprintf(gd, " \\\n");
+      // fprintf(gd, " \\\n");
+      fprintf(gd, " ");
     }
     fprintf(gd, "\n\n");
   }
 
   if ( Plat.includeGIDependencies()  &&  nPrecompiledFiles > 0 ) {
       // write Precompiled_Files = ...
-      fprintf(gd, "Precompiled_Files = \\\n");
+      // fprintf(gd, "Precompiled_Files = \\\n");
+      fprintf(gd, "Precompiled_Files = ");
       for ( item* si = grand_include->first;  si;  si = si->next) {
 	      if (si->contents->count < threshold) 
 	        continue;
-        fprintf(gd, "%s \\\n", si->contents->name);
+        // fprintf(gd, "%s \\\n", si->contents->name);
+        fprintf(gd, "%s ", si->contents->name);
         // if .hh has plat dep incls, we also depend on them:
         if (si->contents->platformDependentIncludees != NULL)
           for ( item* pdi = si->contents->platformDependentIncludees->first;  pdi;  pdi = pdi->next)
-            fprintf(gd, "%s \\\n", pdi->contents->name);
+	    // fprintf(gd, "%s \\\n", pdi->contents->name);
+            fprintf(gd, "%s ", pdi->contents->name);
       }
       fprintf(gd, "\n\n");
   }
@@ -1272,13 +1184,13 @@ void database::write_grand_unix_makefile() {
     for ( item* si = indiv_includes->first;  si;  si = si->next) {
       list* anII = si->contents;
 
-      char*     stemName = remove_suffix_from(anII->name);
-      char* inclFileName = InclFileTemplate->copy_stem(anII->name)->pre_stem_suff();
+      const char*     stemName = remove_suffix_from(anII->name);
+      const char* inclFileName = InclFileTemplate->copy_stem(anII->name)->pre_stem_suff();
 
       fprintf(gd, Plat.obj_file_format(), stemName);
       fprintf(gd, " ");
       fprintf(gd, Plat.asm_file_format(), stemName);
-      fprintf(gd, ": \\\n");
+      fprintf(gd, ": ");
 
       print_dependent_on(gd, anII->name);
       print_dependent_on(gd, inclFileName );
@@ -1303,8 +1215,8 @@ void database::write_grand_unix_makefile() {
   // write deps for grand include file:
   if ( Plat.includeGIDependencies()  
   &&   nPrecompiledFiles > 0 ) {
-      fprintf( gd, "%s: \\\n", Plat.GIFileForDependency());
-      fprintf( gd, "    $(Precompiled_Files) \n" );
+      fprintf( gd, "%s: ", Plat.GIFileForDependency());
+      fprintf( gd, "$(Precompiled_Files) \n" );
   }
 
   fclose( gd );
@@ -1338,7 +1250,7 @@ void database::putDiffs(database* previous) {
 }
 
 
-int main(int argc, char **argv) {
+int main(int argc, const char **argv) {
   Plat.setupFileTemplates();
 
   long int t = Plat.defaultGrandIncludeThreshold();
@@ -1373,14 +1285,14 @@ int main(int argc, char **argv) {
   return exitCode;
 }
 
-void database::absolute_generation(char* new_plat_fn, char* new_db_fn) {
+void database::absolute_generation(const char* new_plat_fn, const char* new_db_fn) {
   printf("New database:\n");
   get(new_plat_fn, new_db_fn);
   compute();
   put();
 }
 
-void database::create_file_if_absent(char* fn) {
+void database::create_file_if_absent(const char* fn) {
   FILE* f = fopen(fn, "r");
   if ( f == NULL ) {
     printf("Cannot open old file %s; will create then anew\n", fn);
@@ -1392,8 +1304,8 @@ void database::create_file_if_absent(char* fn) {
   
                                    
 void database::relative_generation(database* prev, 
-                                   char* old_plat_fn, char* old_db_fn, 
-                                   char* new_plat_fn, char* new_db_fn) {
+                                   const char* old_plat_fn, const char* old_db_fn, 
+                                   const char* new_plat_fn, const char* new_db_fn) {
   create_file_if_absent(old_plat_fn);
   create_file_if_absent(old_plat_fn);
                                    
@@ -1408,7 +1320,7 @@ void database::relative_generation(database* prev,
   printf("Copying finished\n");
 }
 
-void database::copy_file(char* src, char* dst) {
+void database::copy_file(const char* src,const char* dst) {
   static char buf[16 * 1024];
   printf("Copying %s -> %s...\n", src, dst);
   FILE* s = fopen(src, "r");  if (s == NULL) { perror(src); Plat.fatal(); }
@@ -1416,7 +1328,7 @@ void database::copy_file(char* src, char* dst) {
   for (;;) {
     size_t n = fread( buf, 1, sizeof(buf), s );
          if (n == 0)   break;
-    else if (n <  0) { perror(src); Plat.fatal(); }
+	 else if (ferror(s) != 0) { perror(src); Plat.fatal(); }
     size_t nn = 0;
     for (;;) {
       nn += fwrite( buf, 1, n, d);

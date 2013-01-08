@@ -1,6 +1,6 @@
 /* Sun-$Revision: 30.12 $ */
 
-/* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
+/* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
       
  public:
@@ -28,7 +28,6 @@
   friend class IntervalTimer; // for debugguging OS X
   static sigset_t old_mask, sig_mask;
   static char* signal_stack;
-  // ensure generic val is enough for ppc
   static int32 signal_stack_size;
   friend class SignalBlocker; // Unix version needs to see mask
 
