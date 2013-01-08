@@ -6,4 +6,4 @@ branches:
   only:
     - master
     # - cmake
-script: cd vm && bash ../docs/release/buildLinuxVM 
+script: cd vm && PATH=$PATH:$PWD/../bin/linux bash ../docs/release/buildLinuxVM 
