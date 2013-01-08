@@ -29,7 +29,7 @@ int32 compiled_vframe::register_offset(Location r) {
 
 # if defined(SIC_COMPILER)
 oop* compiled_vframe::special_register_contents_addr(Location r) {
-  return 0; // for SPARC
+  return NULL; // for SPARC
 }
 # endif
 
@@ -40,7 +40,7 @@ oop* compiled_vframe::register_contents_addr(Location r) {
 
 
 oop* compiled_vframe::register_contents_secondary_addr(Location r) {
-  return 0; // only in one place on I386
+  return NULL; // only in one place on I386
 }
   
   
@@ -99,11 +99,11 @@ void compiled_vframe::copy_outgoing_arg(fint argNo, NameDesc* nd2, compiled_vfra
 
 
 compiled_vframe* compiled_vframe::sendeeOrNULL_for_get_expr_stack() {
-  // From former PPC: Cannot find a register locator when this makes a dummy_vframe, so live
+  // From PPC: Cannot find a register locator when this makes a dummy_vframe, so live
   // with less info for recompilation. -- dmu 2/03
   //
   // Could maybe fix this for Intel.
-  return 0;
+  return NULL;
 }
 
 # endif // defined(FAST_COMPILER) || defined(SIC_COMPILER)

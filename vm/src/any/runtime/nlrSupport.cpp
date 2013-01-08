@@ -86,7 +86,7 @@ volatile void NLRSupport::continue_NLR_into_interpreted_Self() {
   set_have_NLR_through_C(); // interp needs this
   frame* f =
     currentProcess->stack()->interpreter_frame_for_continuing_NLR_from_primitive();
-  assert(f != 0, "could not find frame to return to");
+  assert(f != NULL, "could not find frame to return to");
   ContinueNLRFromC(f->real_return_addr(), true, false);
   ShouldNotReachHere(); // should not return to here
 }
@@ -119,6 +119,9 @@ volatile void NLRSupport::continue_NLR_into_compiled_Self(bool remove_patches, f
   // On SPARC, the return pointer is increased at a prim call site so a normal return
   // will skip in the inline cache.
   // All lookup routines are between Low- and HighReturnAddress.
+  
+  // On PPC, is_Self_IC flag ignored, and do not have to put lookup routines
+  // between Low and HighReturnAddress.
   bool is_Self_IC = is_Self_return_address(vm_addr);  
   ContinueNLRFromC(ret_addr, false, is_Self_IC);
   ShouldNotReachHere(); // should not return to here
@@ -160,7 +163,7 @@ void volatile NLRSupport::unwind_stack_to_kill_process(oop res) {
 
 void NLRSupport::non_lifo_abort_from_continuePC() {
   char* nonLifoAbortPC = continuePC;
-  continuePC = 0;
+  continuePC = NULL;
   non_lifo_abort(nonLifoAbortPC);
 }
 

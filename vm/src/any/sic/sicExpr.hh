@@ -27,14 +27,14 @@
   class SExpr : public ResourceObj {
    protected:
     PReg* _preg;                // PReg holding it
-    Node* _node;                // defining node or 0 if unknown
+    Node* _node;                // defining node or NULL if unknown
     SSelfScope* unlikelyScope;  // scope/bci making unknown unlikely
     fint unlikelyBCI;           // (only set if isUnknownUnlikely())
    public:
     SExpr* next;                // used for splittable MergeSExprs
     int32 flags;
 
-    SExpr(PReg* p, Node* n) { _preg = p; _node = n; next = 0; flags = 0; }
+    SExpr(PReg* p, Node* n) { _preg = p; _node = n; next = NULL; flags = 0; }
 
     SExpr* copyMergeWith(SExpr* other, PReg* p, Node* nod);
 
@@ -56,20 +56,20 @@
       Unused(s); ShouldNotCallThis(); return 0;}
     virtual bool isUnknownUnlikely()    { return false; }
 
-    virtual UnknownSExpr* findUnknown() { return 0; }
-    virtual SExpr* findMap(mapOop map)  { Unused(map);  return 0; }
+    virtual UnknownSExpr* findUnknown() { return NULL; }
+    virtual SExpr* findMap(mapOop map)  { Unused(map);  return NULL; }
 
     virtual SExpr* asReceiver() { return this; }
-    virtual MapSExpr* asMapSExpr() { ShouldNotCallThis(); return 0; }
+    virtual MapSExpr* asMapSExpr() { ShouldNotCallThis(); return NULL; }
     virtual ConstantSExpr* asConstantSExpr() {
-      ShouldNotCallThis(); return 0; }
+      ShouldNotCallThis(); return NULL; }
     virtual MergeSExpr* asMergeSExpr() {
-      ShouldNotCallThis(); return 0; }
+      ShouldNotCallThis(); return NULL; }
 
     virtual SExpr* shallowCopy(PReg* p, Node* n) = 0;
     
     // n must be the node where the merge happens, the merge node
-    // or 0 to disallow splitting -- dmu
+    // or NULL to disallow splitting -- dmu
     virtual SExpr* mergeWith(SExpr* other, Node* n) = 0;
     virtual SExpr* mapify(PReg* p, Node* n) = 0;
     virtual bool equals(SExpr* other) = 0;
@@ -84,7 +84,7 @@
 
   class UnknownSExpr : public SExpr {
    public:
-    UnknownSExpr(PReg* p, Node* n = 0, bool u = false) : SExpr(p, n) {
+    UnknownSExpr(PReg* p, Node* n = NULL, bool u = false) : SExpr(p, n) {
       setUnlikely(u); }
     bool isUnknownSExpr()       { return true; }
     bool containsUnknown()      { return true; }
@@ -102,7 +102,7 @@
 
   class NoResultSExpr : public SExpr {
    public:
-    NoResultSExpr(Node* n = 0);
+    NoResultSExpr(Node* n = NULL);
     bool isNoResultSExpr()      { return true; }
     bool containsUnknown()      { return false; }
     SExpr* shallowCopy(PReg* p, Node* n);
@@ -128,7 +128,7 @@
     SExpr* shallowCopy(PReg* p, Node* n);
     SExpr* mergeWith(SExpr* other, Node* n);
     SExpr* mapify(PReg* p, Node* n) { return shallowCopy(p, n); };
-    SExpr* findMap(mapOop map)  { return _myMapOop == map ? this : 0; }
+    SExpr* findMap(mapOop map)  { return _myMapOop == map ? this : NULL; }
     bool equals(SExpr* other);
     void print();
   };
@@ -175,7 +175,7 @@
    public:
     SExprBList* exprs;
 
-    MergeSExpr(PReg* p = 0, Node* n = 0);
+    MergeSExpr(PReg* p = NULL, Node* n = NULL);
     
     bool isMergeSExpr()         { return true; }
     FLAG_DEF(Splittable);
@@ -198,7 +198,7 @@
     bool equals(SExpr* other);
     void print();
 
-    UnknownSExpr* findUnknown();    // returns 0 if no expression found
+    UnknownSExpr* findUnknown();    // returns NULL if no expression found
     SExpr* findMap(mapOop map);
 
    protected:

@@ -21,7 +21,7 @@ class slotsOopClass: public oopsOopClass {
   // cloning operation (just putting a nice return type on the fn's)
   slotsOop clone(bool mustAllocate= true) {
     return (slotsOop) oopsOopClass::clone(mustAllocate); }
-  slotsOop cloneSize(fint length, bool mustAllocate= true, oop filler= 0) {
+  slotsOop cloneSize(fint length, bool mustAllocate= true, oop filler= NULL) {
     return (slotsOop) oopsOopClass::cloneSize(length, mustAllocate, filler); }
   
   // primitives

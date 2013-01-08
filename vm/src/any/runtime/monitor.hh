@@ -26,7 +26,7 @@ class Monitor: public CHeapObj {
   MonitorWindow _mw;
                                 
   FILE* logf;                   // log file
-  const char* logfn;                  // log file name
+  const char* logfn;            // log file name
   
   int32 _measurements_per_second;
   
@@ -35,7 +35,7 @@ class Monitor: public CHeapObj {
                                 
 
  public:
-  void activate(const char* filename = 0);
+  void activate(const char* filename = NULL);
   void deactivate();
   bool is_active()    { return _is_active; }
   

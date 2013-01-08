@@ -8,7 +8,7 @@
 
 
 bool isNull(VMObj* p) {
-  return (p == 0);
+  return (p == NULL);
 }
 
 void VMObj::print()            { print_short();}
@@ -43,7 +43,7 @@ void* ResourceObj::operator new(size_t size){
 }
 
 void ResourceObj::operator delete(void* p){
-  if (p != 0) {
+  if (p != NULL) {
 #   if GENERATE_DEBUGGING_AIDS
       if (CheckAssertions  &&  p == (void*) catchThisOne) breakpoint();
 #   endif
@@ -94,7 +94,7 @@ void ResourceAreaChunk::print() {
 }
 
 ResourceArea::ResourceArea() {
-  chunk = 0;
+  chunk = NULL;
 # if GENERATE_DEBUGGING_AIDS
   nesting = 0;
 # endif
@@ -103,7 +103,7 @@ ResourceArea::ResourceArea() {
 ResourceArea::~ResourceArea() {
   // deallocate all chunks
   ResourceAreaChunk* prevc;
-  for (ResourceAreaChunk* c = chunk; c != 0; c = prevc) {
+  for (ResourceAreaChunk* c = chunk; c != NULL; c = prevc) {
     prevc = c->prev;
     resources.addToFreeList(c);
   }
@@ -117,7 +117,7 @@ char* ResourceArea::allocate_more_bytes(int32 size) {
 }
 
 int32 ResourceArea::used() {
-  if (chunk == 0) return 0;
+  if (chunk == NULL) return 0;
   return chunk->used() + (chunk->prev ? chunk->prev->_previous_used : 0);
 }
 
@@ -171,7 +171,7 @@ void Resources::addToFreeList(ResourceAreaChunk* c) {
 
 ResourceAreaChunk* Resources::getFromFreeList(fint min_capacity) {
   CSect cs(profilerCollectStackSemaphore); // ensure nprofiler does not mess up free list
-  if (!freeChunks) return 0;
+  if (!freeChunks) return NULL;
 
   // Handle the first element specially
   if (freeChunks->capacity() >= min_capacity) {
@@ -197,7 +197,7 @@ ResourceAreaChunk* Resources::getFromFreeList(fint min_capacity) {
   }
 
   // No suitable chunk found
-  return 0;
+  return NULL;
 }
 
     
@@ -233,7 +233,7 @@ Resources::Resources() {
 ResourceMark::ResourceMark() {
   area  = &currentProcess->resource_area;
   chunk = area->chunk;
-  top   = chunk ? chunk->first_free : 0;
+  top   = chunk ? chunk->first_free : NULL;
   ++area->nesting;
 # if GENERATE_DEBUGGING_AIDS
     if (CheckAssertions) {
@@ -273,8 +273,8 @@ ResourceMark::~ResourceMark() {
     resources.addToFreeList(c);
   }
   area->chunk = c;
-  if (c == 0) {
-    top = 0;
+  if (c == NULL) {
+    top = NULL;
     return;
   }
   c->freeTo(top); 
@@ -295,7 +295,7 @@ ResourceMark::~ResourceMark() {
 int32 wastedBytes = 0;  // sum of wasted bytes on C heap (int. fragmentation
                         // and header info overhead)
                         
-caddr_t mallocReserve= 0;
+caddr_t mallocReserve= NULL;
 static const size_t mallocReserveAmount= 1 * 1024 * 1024; // wild guess
 bool MallocInProgress = false;
 
@@ -304,12 +304,15 @@ static void MallocFailed(void) { OS::allocate_failed("VM use"); }
 
 static int32 true_size_of_malloced_obj(int32* p) {
   static const int32 s_offset = 
-#   if    TARGET_ARCH == SPARC_ARCH
+#   if    TARGET_ARCH == SPARC_ARCH  &&  COMPILER == GCC_COMPILER
       -2;
-#   elif  TARGET_ARCH == I386_ARCH   &&   TARGET_OS_VERSION ==  MACOSX_VERSION
+#   elif  TARGET_ARCH == M68K_ARCH   &&  COMPILER == GCC_COMPILER
+      -1;
+#   elif  TARGET_ARCH == PPC_ARCH    &&  COMPILER == GCC_COMPILER
       -2;
-#   elif  TARGET_ARCH == I386_ARCH   &&  (TARGET_OS_VERSION ==   LINUX_VERSION \
-                                     ||   TARGET_OS_VERSION == SOLARIS_VERSION )
+#   elif  TARGET_ARCH == I386_ARCH   &&  COMPILER == GCC_COMPILER   &&   TARGET_OS_VERSION == MACOSX_VERSION
+      -2;
+#   elif  TARGET_ARCH == I386_ARCH   &&  COMPILER == GCC_COMPILER   &&    (TARGET_OS_VERSION ==  LINUX_VERSION  ||  TARGET_OS_VERSION == SOLARIS_VERSION)
       -1;
 #   else
 	# error What is it?
@@ -333,7 +336,7 @@ void malloc_init() {
       mallopt(M_MMAP_MAX, 0); // if Linux malloc mmaps, we get bit 31 on, which conflicts with memOop marking
     # endif
     mallocReserve= (caddr_t)malloc(mallocReserveAmount);
-    if (mallocReserve == 0)
+    if (mallocReserve == NULL)
         warning("Couldn't reserve enough memory: system is unlikely to run.\n"
                 "You should increase the amount of swap space available");
     std::set_new_handler(MallocFailed);
@@ -348,17 +351,17 @@ void malloc_init() {
       fatal("malloc/free aren't reentrant");
     }
     MallocInProgress = true;              // for hprofiler
-    size = max(1, size); // malloc does not seem to like zero
+    size = max(1, size); // malloc does not seem to like zero, at least on PPC
     char* result = (char*)malloc(size);
   if ((int)result & 0x80000000) fatal("xxxxxxx");
     MallocInProgress = false;
   
-    if (result == 0) {
+    if (result == NULL) {
       warning1("malloc failed to allocate %d bytes", size);
       if (mallocReserve  &&  size <= mallocReserveAmount) {
         MallocInProgress= true;
         free(mallocReserve);
-        mallocReserve= 0;
+        mallocReserve= NULL;
         result= (char*)malloc(size);
   if ((int)result & 0x80000000) fatal("xxxxxxx");
         MallocInProgress= false;
@@ -371,7 +374,7 @@ void malloc_init() {
             "\t'snapshotFileName' _WriteSnapshot"
             );
       } else
-        return 0;
+        return NULL;
     }
     int32* p = (int32*)result;
     // assert(true_size_of_malloced_obj(p) >= size, "should be rounded size");

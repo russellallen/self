@@ -20,12 +20,12 @@ char* frame::return_addr() {
   // Profiler uses this from interrupts, but last return address may not be right,
   // so return null.
   if ((frame*)InterruptedContext::the_interrupted_context->sp() == this)
-    return 0;
+    return NULL;
     
   // C compiler moves sp, but does not save pc for leaves
   if ( InterruptedContext::the_interrupted_context->sp()->sender()  ==  this
   &&   !Memory->code->contains(InterruptedContext::the_interrupted_context->pc()))
-    return 0;
+    return NULL;
     
   return platform_independent_return_addr();
 }
@@ -35,14 +35,14 @@ char* frame::return_addr() {
 
 char* frame::c_entry_point() {
   frame* s = sender();
-  if ( s == 0 ) return 0;
+  if ( s == NULL ) return NULL;
   
   char* r = s->real_return_addr(); // where sender will return into
   
   if ( Memory->code->contains(r))   
-    return 0;
+    return NULL;
   char* callp = r - 1;
-  if (callp == 0  ||  !isImmediateCall((inst_t*)callp)) return 0;
+  if (callp == NULL  ||  !isImmediateCall((inst_t*)callp)) return NULL;
   return  get_target_of_C_call_site((inst_t*)callp);
 }
 
@@ -98,7 +98,7 @@ void frame::copy_to( char* sp,
 
   if (adjust) {
     // make sure all memoized blocks exist, then adjust their scope
-    abstract_vframe* callee = 0;
+    abstract_vframe* callee = NULL;
     OopOopTable* dummy = EMPTY;
     for ( abstract_vframe* vf = new_vframe(this);
           vf  &&  vf->fr == this;
@@ -164,6 +164,7 @@ void frame::fix_frame(char* pc, char* sp) {
    See, the home method's frame is the sp of the frame but the sp can vary, while the frame pointer cannot.
    So we store the frame pointer of the home frame in the block and crawl the stack to recover the stack pointer
    when needed by the VM.
+   PPC uses the sp, which saves a lot of work.
    Intel COULD use the sp, because it doesn't change.
    BUT, at block creation time (see loadBlockOop in codeGen_i388.cpp), we have the sp BEFORE
    pushing the pc and old base pointer, so would have to subtract 8 from what we have to create the block.

@@ -25,7 +25,7 @@ unsigned long MaxUseCountSize=    (caddr_t)(512*M) - UseCountStart;
                                           true);                            \
 
 static oop get_space_sizes(spaceSizes *sizes) {
-  oop spaceObj = create_slots((slotList*)0);
+  oop spaceObj = create_slots((slotList*)NULL);
   APPLY_TO_SPACE_SIZES(MAKE_SPACE_SLOT_TEMPLATE);
   return spaceObj;
 }
@@ -51,7 +51,7 @@ oop get_current_space_sizes_prim(oop rcvrIgnored, slotsOop proto, void *FH) {
   return proto; 
  unassignable:
   prim_failure(FH, UNASSIGNABLESLOTERROR);
-  return 0;
+  return NULL;
 }
 
 

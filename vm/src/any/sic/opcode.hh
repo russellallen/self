@@ -43,8 +43,8 @@ enum ArithOpCode {
   LastArithOp
   };
 
-extern const char* BranchOpName[];    // indexed by BranchOpCode 
-extern const char* ArithOpName[];     // indexed by ArithOpCode 
+extern const char* BranchOpName[];    // indexed by BranchOpCode
+extern const char*  ArithOpName[];    // indexed by  ArithOpCode
 
 ArithOpCode opcode_for_selector(oop sel);
 

@@ -31,7 +31,7 @@ void setJumpImm(int32* instp, int32 val) {
 
 char* address_of_overwritten_NIC_save_instruction(int32* orig_save_addr) {
  if ( op(orig_save_addr)  ==  02  &&  op3(orig_save_addr) == 074) 
-   return 0; // not overwritten
+   return NULL; // not overwritten
    
   // the instruction must have been patched with a branch;
   assert(op(orig_save_addr)   ==  00 &&

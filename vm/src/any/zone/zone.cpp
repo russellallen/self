@@ -48,12 +48,12 @@ int32 zone::frame_chain_nesting = 0;
     for (nmethod *var = first_nm(); var; var = next_nm(var))
 
 
-static nmethod* fieldOffsetDetector_nmethod = 0;
+static nmethod* fieldOffsetDetector_nmethod = NULL;
 # define NMETHOD_FROM(fieldName, p)                                           \
   ((nmethod*)((char*)p - (char*)&fieldOffsetDetector_nmethod->fieldName))
 
 
-static OopNCode* fieldOffsetDetector_OopNCode = 0;
+static OopNCode* fieldOffsetDetector_OopNCode = NULL;
 # define OOPNCODE_FROM(fieldName, p)                                          \
   ((OopNCode*)((char*)p - (char*)&fieldOffsetDetector_OopNCode->fieldName))
 
@@ -89,8 +89,8 @@ void sweepTrigger() {
   char* zoneEnd()       { return first_inst_addr(CompiledSelfCodeEnd); }
   
 # else
-  char* zoneStart()     { return 0; }
-  char* zoneEnd()       { return 0; }
+  char* zoneStart()     { return NULL; }
+  char* zoneEnd()       { return NULL; }
 # endif
 
 
@@ -98,7 +98,7 @@ zone::zone(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize) {
   used_per_compiler[nm_nic]= 0;
   used_per_compiler[nm_sic]= 0;
   
-  char* stb = 0;
+  char* stb = NULL;
   if ( TARGET_IS_PROFILED )  set_sizes_for_statically_allocated_code_and_stub_area(codeSize, stubSize, depSize, debugSize, stb);
   else                                   set_sizes_and_allocate_code_and_stub_area(codeSize, stubSize, depSize, debugSize, stb);
 
@@ -120,7 +120,11 @@ zone::zone(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize) {
 }
 
 
-static const int32 branch_disp_bits = 32;
+# if TARGET_ARCH == PPC_ARCH
+  static const int32 branch_disp_bits = li_bits; 
+# else
+  static const int32 branch_disp_bits = 32;
+# endif
 
 static const uint32 maxCodeAndStubSizeForMachine =  (uint32)(1  <<  (branch_disp_bits - 1)); // -1 because disp may be + or -
 
@@ -184,6 +188,7 @@ void zone::set_sizes_and_allocate_code_and_stub_area(int32& codeSize, int32& stu
     }
           
     // allocate stubs and code together for span-limited branches -- dmu
+    // Warning: PPC Assembler::Assembler counts on stubs being after izone
     // See zone::code_start() and zone::code::end()
     bottom= (int32*)OS::allocate_idealized_page_aligned(codeAndStubSize_p, "nmethod zone (inst + stubs)", NMethodStart);
     stb= (char*)bottom + codeSize_p; 
@@ -271,7 +276,7 @@ void zone::clear() {
   sZone->clear();
   stubs->clear();
   flatProfiler->clear(instsStart(), instsStart() + instsSize());
-  LRUhand = 0;
+  LRUhand = NULL;
   LRUtime = 0;
   idManager->init();
   needsICompaction = needsDCompaction = needsSCompaction = _needsSweep = false;
@@ -323,9 +328,9 @@ nmethod* zone::alloc(int32 iLen, int32 sLen, int32 lLen,
       ShowVMActivityInMonitor ss(msg);
       EventMarker em(msg);
 
-      if (n == 0)          needsICompaction = iZone->extFrag() > MaxExtFrag;
-      if (dSize && d == 0) needsDCompaction = dZone->extFrag() > MaxExtFrag;
-      if (sSize && s == 0) needsSCompaction = sZone->extFrag() > MaxExtFrag;
+      if (n == NULL)          needsICompaction = iZone->extFrag() > MaxExtFrag;
+      if (dSize && d == NULL) needsDCompaction = dZone->extFrag() > MaxExtFrag;
+      if (sSize && s == NULL) needsSCompaction = sZone->extFrag() > MaxExtFrag;
       
       if (PrintCodeReclamation && n) {
         lprintf("*flushing methods because secondary zone %s%s is full\n",
@@ -362,7 +367,7 @@ nmethod* zone::alloc(int32 iLen, int32 sLen, int32 lLen,
         // allocation failed
         if (chainedFrames) unchainFrames();
         idManager->freeID(myID);
-        return 0;
+        return NULL;
       }
     }
   }
@@ -415,7 +420,7 @@ void zone::flush() {
   flushZombies();
 
   unchainFrames();
-  LRUhand = 0;
+  LRUhand = NULL;
   
   if (PrintCodeReclamation) {
     lprintf("done: %ld ms.\n", long(tmr.time()));
@@ -601,7 +606,7 @@ void zone::compact(bool forced) {
   
   chainFrames();
   flushZombies();
-  char* firstFree = 0;
+  char* firstFree = NULL;
   if (!forced) adjustPolicy();
   zoneTimer.timeRestart();
   if (needsICompaction) {
@@ -807,7 +812,7 @@ void zone::nmethods_do(nmethodDoFn f) { FOR_ALL_NMETHODS(p) f(p); }
 char* zone::allocateDeps(fint nbytes) {
   char *d= (char*) dZone->allocate(nbytes);
 
-  if (d == 0) {
+  if (d == NULL) {
     // allocation failed -- need to do some deallocation
     // this code is depressingly similar to the code in zone::alloc.
     // It would be nice if it could be factored...
@@ -852,10 +857,10 @@ char* zone::allocateDeps(fint nbytes) {
         // allocation failed
         if (chainedFrames) unchainFrames();
         idManager->freeID(myID);
-        return 0;
+        return NULL;
       }
       d= (char*) dZone->allocate(nbytes);
-    } while (d == 0);
+    } while (d == NULL);
 
     if (chainedFrames) unchainFrames();    
 
@@ -1106,7 +1111,7 @@ nmethod* zone::findNMethod(void* start) {
 
 
 void zone::findNMethodOrMap(nmln* n, nmethod* &nm, slotsMapDeps* &s) {
-  nm= 0;  s= 0;
+  nm= NULL;  s= NULL;
   if (iZone->contains(n)) {
     nm= (nmethod*)iZone->findStartOfBlock(n);
     assert(nmethod::isNMethod(nm), "not an nmethod");
@@ -1123,21 +1128,21 @@ void zone::findNMethodOrMap(nmln* n, nmethod* &nm, slotsMapDeps* &s) {
   } else {
     assert(Memory->is_obj_heap((oop*)n), "not a map");
   }
-  assert(nm == 0 || iZone->contains(nm), "not in zone");
-  assert(nm == 0 || nm->isNMethod(), "findNMethod didn't find nmethod");
-  assert(nm == 0 || nm->encompasses(n), "doesn't encompass start");
+  assert(nm == NULL || iZone->contains(nm), "not in zone");
+  assert(nm == NULL || nm->isNMethod(), "findNMethod didn't find nmethod");
+  assert(nm == NULL || nm->encompasses(n), "doesn't encompass start");
 }
 
 
 nmethod* zone::findNMethod_maybe(void* start) {
   // start *may* point into the instructions part of a nmethod; find it
-  if (!iZone->contains(start)) return 0;
+  if (!iZone->contains(start)) return NULL;
   // relies on FOR_ALL_NMETHODS to enumerate in ascending order
   FOR_ALL_NMETHODS(p) {
-    if (p->insts() > (char*)start) return 0;
+    if (p->insts() > (char*)start) return NULL;
     if (p->instsEnd() > (char*)start) return p;
   }
-  return 0;
+  return NULL;
 }
 
 char* zone::instsStart() { return iZone->startAddr(); };
@@ -1145,8 +1150,8 @@ int32 zone::instsSize()  { return iZone->capacity(); }
 
 inline nmethod* zone::next_circular_nm(nmethod* nm) {
   nm = next_nm(nm);
-  if (nm == 0) nm = first_nm();
-  assert(nm == 0 || nmethod::isNMethod(nm), "not a valid nmethod");
+  if (nm == NULL) nm = first_nm();
+  assert(nm == NULL || nmethod::isNMethod(nm), "not a valid nmethod");
   return nm;
 }
 
@@ -1181,7 +1186,7 @@ int32 zone::sweeper(int32 maxVisit, int32 maxReclaim,
     
     if ((p->isZombie() ||
          p->isDebug()  ||
-         (p->codeTableLink == 0 && !p->isUncommon() && !p->isDI())) &&
+         (p->codeTableLink == NULL && !p->isUncommon() && !p->isDI())) &&
         p->frame_chain == NoFrameChain) {
       // can be flushed - nobody will ever use it again
       if (PrintLRUSweep2) lprintf(" %s; flushed",
@@ -1255,7 +1260,7 @@ int32 zone::sweeper(int32 maxVisit, int32 maxReclaim,
 int32 zone::LRU_time() { return LRUtime; }
 
 void printAllNMethods() {
-  for(nmethod* m = Memory->code->first_nm(); m != 0;
+  for(nmethod* m = Memory->code->first_nm(); m != NULL;
       m = Memory->code->next_nm(m)) {
     lprintf("nmethod %#lx, id %ld (", m, long(m->id));
     printName(0, m->key.selector);
@@ -1317,11 +1322,11 @@ void zone::fixup() {
   table->clear();
   debugTable->clear();
   FOR_ALL_NMETHODS(p) {
-    if (p->codeTableLink == 0) {
+    if (p->codeTableLink == NULL) {
       // e.g. di methods; leave it empty
     } else {
       assert(! p->isZombie(), "codeTableLink not be empty");
-      p->codeTableLink= 0;
+      p->codeTableLink= NULL;
       if (p->isDebug()) {
         debugTable->add(p);
       } else {
@@ -1434,8 +1439,8 @@ oop printNMethodCode_prim(oop rcvr) {
 
 void zone::findNMethodOrMap(nmln *n, nmethod* &nm, slotsMapDeps* &s) {
   Unused(n);
-  nm = 0;
-  s = 0;
+  nm = NULL;
+  s = NULL;
 }
 
 # endif // defined(FAST_COMPILER) || defined(SIC_COMPILER)
@@ -1493,7 +1498,7 @@ void zone::read_snapshot(FILE* f) {
         relocate_nmln(&zombies);
         
       }
-      ((CountStub*)0)->read_snapshot(f);
+      ((CountStub*)NULL)->read_snapshot(f);
       
       MachineCache::flush_instruction_cache_range(iZone->startAddr(), iZone->endAddr());
       MachineCache::flush_instruction_cache_for_debugging();
@@ -1521,7 +1526,7 @@ void zone::write_snapshot(FILE* f) {
       dZone->write_snapshot(f);
       sZone->write_snapshot(f);
       stubs->zone()->write_snapshot(f);
-      ((CountStub*)0)->write_snapshot(f);
+      ((CountStub*)NULL)->write_snapshot(f);
 #   else // no compiler
       Unused(f);
       fatal("cannot snapshot code without compilers");

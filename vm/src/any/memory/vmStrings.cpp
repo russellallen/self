@@ -35,7 +35,7 @@ static void read_one(stringOop* p, FILE* file) {
 
   lprintf("VString: %d 0x%x 0x%x\n", p - VMString, *p, w);
 # endif
-  if (*p == 0)
+  if (*p == NULL)
     fatal1("entry %d of VMString was read as Null", p - VMString);
 }
 

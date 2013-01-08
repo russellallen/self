@@ -63,7 +63,7 @@ void byteVectorMap::dummy_initialize(oop obj, oop filler) {
  Unused(filler);
  assert_byteVector(obj, "not a byte vector");
  byteVectorOop(obj)->set_length(0);
- byteVectorOop(obj)->set_bytes(0);
+ byteVectorOop(obj)->set_bytes(NULL);
 }
 
 void byteVectorMap::print_byteVector(oop obj) {

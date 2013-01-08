@@ -216,7 +216,7 @@ class call_graph_edge : public CHeapObj {
   call_graph_node* callee; 
   int              bci;
 
-  call_graph_edge(fint bci, call_graph_node* callee = 0);
+  call_graph_edge(fint bci, call_graph_node* callee = NULL);
   virtual ~call_graph_edge();
 
   virtual bool is_fold_edge()  { return false; }

@@ -214,7 +214,7 @@ public:
 
 protected:
   virtual char* start1() = 0;
-  virtual char* start2() { return 0; }
+  virtual char* start2() { return NULL; }
   
   void  calculateVMRegion( int32 startAddr,
                            int32 size, 
@@ -246,7 +246,7 @@ public:
   int32 capacity()   { return z->capacity(); }
   int32 used1()      { return z->usedBytes(); }
   char* start1()   { return z->startAddr(); }
-  void resize(fint X, fint Y, fint H, fint factor, Heap *newZ= 0);
+  void resize(fint X, fint Y, fint H, fint factor, Heap *newZ= NULL);
 };
 
 
@@ -277,7 +277,7 @@ public:
   int32 capacity()            { return 100; }
   inline int32 used1();
   int32 current_usage()        { return (usedU + usedS); }
-  char* start1()   { return 0; }
+  char* start1()   { return NULL; }
   void calculate_VM_stats();
   void update();
 };
@@ -301,7 +301,7 @@ public:
   int32 capacity()   { return elapsed_ticks ? elapsed_ticks : 100; }
   int32 used1();
   int32 used2();
-  char* start1()     { return 0; }
+  char* start1()     { return NULL; }
   void calculate_VM_stats();
   void update(fint count1, fint count2, fint elapsed_ticks);
   void update(fint count1, fint count2, fint count3, fint count4, fint elapsed_ticks);

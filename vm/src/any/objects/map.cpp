@@ -80,7 +80,7 @@ fint Map::find_slot_index_binary_for(stringOop name, bool &found) {
 inline slotDesc* Map::find_slot_binary(stringOop name) {
   bool found;
   fint i= find_slot_index_binary_for(name, found);
-  return found ? slot(i) : 0;
+  return found ? slot(i) : NULL;
 }
 
 inline slotDesc* Map::find_slot_linear(stringOop name) {
@@ -97,7 +97,7 @@ inline slotDesc* Map::find_slot_linear(stringOop name) {
   return slot;
     }
   }
-  return 0;
+  return NULL;
 }
 
 
@@ -152,11 +152,11 @@ slotDesc* Map::find_slot(stringOop name) {
 
 slotDesc* Map::find_nonVM_slot(stringOop name) {
   slotDesc* sd = find_slot(name);
-  return  sd != 0  &&  !sd->is_vm_slot()  ?  sd  :  0;
+  return  sd != NULL  &&  !sd->is_vm_slot()  ?  sd  :  NULL;
 }
 
 
-// given "foo:", find "foo" (return 0 if not found)
+// given "foo:", find "foo" (return NULL if not found)
 slotDesc* Map::find_assignee_slot(stringOop assigner_name) {
   return find_slot(new_string(assigner_name->bytes(),
                               assigner_name->length() - 1));
@@ -202,13 +202,14 @@ static bool recursive_method_similarity_check(oop o1, oop o2) {
 
     if (    s1->name != s2->name
         ||  s1->type != s2->type
-        ||  s1->data != s2->data)
+        ||  s1->data != s2->data) {
       if (s1->is_vm_slot())
         assert(   s1->name == VMString[SELF]
                || s1->name == VMString[LEXICAL_PARENT],
                "Found a new VM slot in a method that I may not be able to ignore");
       else
         return false;
+    }
 
     it->next();
   }
@@ -327,7 +328,7 @@ oop Map::add_slots_to(oop src, oop dst, bool new_only, void *FH) {
       slotDesc *old;
       oop result2;
       if (new_only
-          && (old= dst->find_slot(s->name), old != 0)) {
+          && (old= dst->find_slot(s->name), old != NULL)) {
         if (s->is_obj_slot() && !old->is_obj_slot()) {
           // must add assignment slot
           assert_slots(result, "can only add slots to a slotsOop");
@@ -349,7 +350,7 @@ oop Map::add_slots_to(oop src, oop dst, bool new_only, void *FH) {
       }
       if (result2 == failedAllocationOop) {
         out_of_memory_failure(FH, result->size() + 1);
-        return 0;
+        return NULL;
       }
       result= result2;
       if (result->is_mark()) return result;
@@ -362,7 +363,7 @@ oop Map::add_slots_to(oop src, oop dst, bool new_only, void *FH) {
     oop result2= result->mirror_copy_set_annotation(anno);
     if (result2 == failedAllocationOop) {
       out_of_memory_failure(FH, result->size());
-      return 0;
+      return NULL;
     }
     result = result2;
   }
@@ -665,7 +666,7 @@ bool Map::matching_slots_assignment_name(oop match) {
 
 # define GET_SLOT_DESC                                                        \
     slotDesc* sd = find_nonVM_slot(name);                                     \
-    if (sd == 0) return ErrorCodes::vmString_prim_error(SLOTNAMEERROR)                          
+    if (sd == NULL) return ErrorCodes::vmString_prim_error(SLOTNAMEERROR)                          
 
 oop Map::mirror_is_parent_at(oop r, stringOop name) {
   Unused(r);
@@ -769,7 +770,7 @@ static int time_find_slot(slotDesc* (Map::*searchFn)(stringOop),
 }
 
 static Map* build_map_of_size(fint i) {
-  slotList* slist= 0;
+  slotList* slist= NULL;
   char nm[3];
   nm[0]= nm[1]= 'a'; nm[2]= 0;
   fint incCh= i > 26 ? 1 : 0;

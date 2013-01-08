@@ -292,7 +292,7 @@
     int      C_len(i);                                                        \
     /* The cast oop(smiOop_zero) is necessary because of a g++-1.94 bug. */   \
     if (allow_null && s_arg(i) == oop(smiOop_zero)) {                         \
-      C_arg(i) = 0;                                                        \
+      C_arg(i) = NULL;                                                        \
       C_len(i) = 0;                                                           \
     } else {                                                                  \
       check_cnvt(i, is_byteVector(), ptr_type)                                \
@@ -394,7 +394,7 @@
       if (the_actual_seal != (void*)proxy_type_seal(aux))                     \
         cnvt_err(BADTYPESEALERROR, s_arg(i), aux)                             \
       C_arg(i) = (proxy_pntr_type(aux)) proxyOop(s_arg(i))->get_pointer();    \
-      if (!allow_null  &&  C_arg(i) == 0)                                     \
+      if (!allow_null  &&  C_arg(i) == NULL)                                  \
         cnvt_err(NULLPOINTERERROR, s_arg(i), aux)                             \
     } else                                                                    \
       cnvt_err(DEADPROXYERROR, s_arg(i), aux)                                 \
@@ -823,7 +823,7 @@ typedef class {
     cnvt_err(NULLPOINTERERROR, result, fctProxy aux)                          \
 
 # define string_ret(dummy, aux)                                               \
-    if (res == 0)                                                          \
+    if (res == NULL)                                                          \
       cnvt_err(NULLPOINTERERROR, result, string)                              \
     { stringOop str= new_string_or_fail(res);                                 \
       if (oop(str) == failedAllocationOop)                                    \

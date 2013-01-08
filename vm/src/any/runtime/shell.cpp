@@ -8,7 +8,7 @@
 
 oop evalExpressions(Scanner* scanner) {
   // evaluate expressions until scanner is at EOF or an error occurs
-  oop res = 0;
+  oop res = NULL;
   fint line, len;
   const char* source;
   while (!res->is_mark() && !scanner->is_done()) {
@@ -68,8 +68,8 @@ oop eval(const char* expression, const char* fn) {
   return evalExpressions(&scanner);
 }
 
-static char* spyLogFile= 0;
-char* startUpSelfFile= 0;
+static char* spyLogFile= NULL;
+char* startUpSelfFile= NULL;
 
 const char **prog_argv;
 int    prog_argc;
@@ -214,7 +214,7 @@ void run_the_VM() {
   for (;;) {
     ResourceMark m;
     fint line, len;
-    const char* source;
+    const char* source = NULL;
     Parser parser(VMScanner, false);
     resetTerminal();
     VMScanner->start_line("VM# ");
@@ -292,7 +292,7 @@ int main(int argc, char *argv[]) {
   handle_dropped_snapshot();
 # endif  
   
-  vmProcess = new Process(0, SelfStackLimit);
+  vmProcess = new Process(NULL, SelfStackLimit);
   processes->startVMProcess();
   ShouldNotReachHere();
   return 0;

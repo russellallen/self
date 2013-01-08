@@ -52,20 +52,20 @@ class CountStub : public NCodeBase {
     sendDesc *s= sd();  return s ? s : pic()->sd(); }
   nmethod* sender() {           // sending nmethod
     return nmethod::findNMethod(sender_sendDesc()); }
-  sendDesc* sd();               // calling sendDesc (0 if PIC)
-  CacheStub* pic();             // calling PIC (0 if sendDesc)
+  sendDesc* sd();               // calling sendDesc (NULL if PIC)
+  CacheStub* pic();             // calling PIC (NULL if sendDesc)
   virtual void moveTo_inner(NCodeBase* to, int32 delta, int32 size);
   void shift_target(nmln* l, int32 delta);
   void shift_count_addr(int32 delta);
   NCodeBase* unlink_me(nmln* l);
   void forwardLinkedSend(nmln* l, nmethod* to);
-  void rebind(nmethod* nm, pc_t entryPoint = 0);
-  void setVerifiedEntryPoint(nmethod *nm= 0);
+  void rebind(nmethod* nm, pc_t entryPoint = NULL);
+  void setVerifiedEntryPoint(nmethod *nm= NULL);
   void unlinkFromSendDesc();
   void initSendDesc(nmln* sd_nmln);
   virtual void init(nmethod* nm) { Unused(nm); }
   void print();
-  virtual char* name() = 0;
+  virtual const char* name() = 0;
   void verify() { verify2(pic()); }
   void verify2(CacheStub *calling_pic);
   void read_snapshot(FILE *f);
@@ -87,7 +87,7 @@ class CountingStub: public CountStub {
   void* operator new(size_t size);
   CountType countType()         { return Counting; }
   fint size();                  // size in bytes
-  char* name()                  { return "CountingStub"; }
+  const char* name()                  { return "CountingStub"; }
   friend bool isCountStub(void* p);
 };
 
@@ -99,7 +99,7 @@ class ComparingStub: public CountStub {
   CountType countType()         { return Comparing; }
   fint size();                  // size in bytes
   void init(nmethod* nm);
-  char* name()                  { return "ComparingStub"; }
+  const char* name()                  { return "ComparingStub"; }
   friend bool isCountStub(void* p);
  protected:
   void  set_recompile_addr(pc_t addr);
@@ -107,6 +107,7 @@ class ComparingStub: public CountStub {
   pc_t get_recompile_addr();
 # endif
 };
+
 
 // AgingStubs temporarily count the invocations of newly recompiled nmethods;
 // when the counter overflows, the nmethod becomes old.  This helps prevent
@@ -119,7 +120,7 @@ class AgingStub : public ComparingStub {
   AgingStub(nmethod* t, pc_t entryPoint, nmln* sd_nmln);
   void init(nmethod* nm);
   bool isAgingStub()            { return true; }
-  char* name()                  { return "AgingStub"; }
+  const char* name()                  { return "AgingStub"; }
   friend bool isCountStub(void* p);
 
   // initializiation

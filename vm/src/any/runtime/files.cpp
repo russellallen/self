@@ -13,7 +13,7 @@ void files_exit() { delete Files; }
 
 FileTable::FileTable() {
   for (fint i = 0; i < FileTableSize; i++) {
-    _table[i] = 0;
+    _table[i] = NULL;
   }
 }
 
@@ -38,7 +38,7 @@ static bool isFullPath(const char* path) {
 FILE* FileTable::openSnapshotFile( const char*  name,
                                    const char*  modeArg,
                                    const char**       fullFileName) {
-  return openFile(name, OS::mode_for_binary(modeArg), 0, "", fullFileName);
+  return openFile(name, OS::mode_for_binary(modeArg), NULL, "", fullFileName);
 }
 
 
@@ -46,7 +46,7 @@ FILE* FileTable::openSnapshotFile( const char*  name,
 // and a null path component means the current directory-- dmu 10/91
 
 // returns the full path name of the file in *fullname if the file
-// could be opened and if fullname != 0.  The string is allocated
+// could be opened and if fullname != NULL.  The string is allocated
 // statically.
 
 FILE* FileTable::openFile(const char* name,
@@ -55,7 +55,7 @@ FILE* FileTable::openFile(const char* name,
                           const char* suffix,
                           const char** fullname) {
 
-  if (fullname) *fullname = 0;
+  if (fullname) *fullname = NULL;
   
   // null path means current directory
   if (OS::is_non_unix_path(name)  ||  isFullPath(name)  ||  !path) {
@@ -104,11 +104,11 @@ FILE* FileTable::openFile(const char* name,
     }
     
     FILE* f = tryOpen(tryMe, suffix, mode, fullname);
-    if (f != 0) {
+    if (f != NULL) {
       return f;
     }
     if (!*e)
-      return 0;
+      return NULL;
   }
 }
 
@@ -119,12 +119,12 @@ FILE* FileTable::tryOpen(const char*   name,
                          const char**  fullname) {
 
   static char expandedName[OS::max_path_length];
-  if (!OS::expand_dir(name, expandedName)) return 0;
+  if (!OS::expand_dir(name, expandedName)) return NULL;
 
 
   FILE* f= fopen(expandedName, mode);
-  if (f == 0) {
-    if (!suffix) return 0;
+  if (f == NULL) {
+    if (!suffix) return NULL;
   
     if (strlen(expandedName) + strlen(suffix)  >=  sizeof(expandedName)) {
       fatal3("file name %s%s is longer than %d",
@@ -140,7 +140,7 @@ FILE* FileTable::tryOpen(const char*   name,
     if (fstat(fileno(f), &st_buf) != 0
         || S_ISDIR(st_buf.st_mode)) { // no directories allowed
       fclose(f);
-      f= 0;
+      f= NULL;
 #     if TARGET_OS_FAMILY == UNIX_FAMILY
         errno= EISDIR;
 #     endif
@@ -153,7 +153,7 @@ FILE* FileTable::tryOpen(const char*   name,
 
 FILE* FileTable::record(FILE* f) {
   for (fint i = 0;  i < FileTableSize;  i++) {
-    if (_table[i] == 0) {
+    if (_table[i] == NULL) {
       _table[i] = f;
       return f;
     }
@@ -161,14 +161,14 @@ FILE* FileTable::record(FILE* f) {
   fclose(f);
   error("Can't open file -- file table full");
   errno = 0;
-  return 0;
+  return NULL;
 }
 
 
 void FileTable::closeFile(FILE* f) {
   for (fint i = 0; i < FileTableSize; i++) {
     if (_table[i] == f) {
-      _table[i] = 0;
+      _table[i] = NULL;
     }
   }
   (void) fclose(f);
@@ -177,9 +177,9 @@ void FileTable::closeFile(FILE* f) {
 
 void FileTable::closeAll() {
   for (fint i = 0; i < FileTableSize; i++) {
-    if (_table[i] != 0) {
+    if (_table[i] != NULL) {
       (void) fclose(_table[i]);
-      _table[i] = 0;
+      _table[i] = NULL;
     }
   }
 }

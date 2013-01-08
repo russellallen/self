@@ -37,7 +37,7 @@
    public:
     static fint currentNo;      // id of next PReg created
     PRegBBIndexBList dus;       // defs and uses
-    SSelfScope* scope;          // scope to which I belong (or 0)
+    SSelfScope* scope;          // scope to which I belong (or NULL)
     Location loc;               // real location assigned to this preg
     CPInfo* cpInfo;             // to follow effects of copy propagation
     PRegBList* cpRegs;          // regs cp-ed away by me
@@ -52,8 +52,8 @@
     void initialize() {
       _id = currentNo++; 
       uplevelR = uplevelW = debug = false;
-      _nuses = _ndefs = _nsoftUses = weight = 0; cpInfo = 0; regClass = 0;
-      regClassLink = 0; cpRegs = 0;
+      _nuses = _ndefs = _nsoftUses = weight = 0; cpInfo = NULL; regClass = 0;
+      regClassLink = 0; cpRegs = NULL;
     }
     static const fint VeryNegative;
     
@@ -159,7 +159,7 @@
    public:
     virtual void print();
     virtual void print_short()  { lprintf("%s", name()); }
-    virtual char* name();       // string representing the preg name
+    virtual const char* name();       // string representing the preg name
     virtual const char* prefix()      { return "P"; }
     virtual bool verify();
     virtual NameNode* nameNode(bool mustBeLegal = true); // for debugging info
@@ -260,7 +260,7 @@
     bool isLiveAt(Node* n);
     bool isSplitPReg()          { return true; }
     const char* prefix()              { return "SplitP"; }
-    char* name();
+    const char* name();
   };
 
   class BlockPReg : public SAPReg {
@@ -270,14 +270,14 @@
     bool isMaterialized;    // ensures that all materialized blocks are exposed
     bool isEliminated;      // needed to avoid assert bug
     SCodeScope* primFailBlockScope;
-        // if non-0, block is exposed only by prim failure in this scope
+        // if non-NULL, block is exposed only by prim failure in this scope
     bool escapes;
     static fint numBlocks;
     
     BlockPReg(SCodeScope* s, blockOop b, fint st, fint e) : SAPReg(s, st, e) {
       block = b; memoized = escapes = false; numBlocks++;
       isMaterialized = isEliminated = false;
-      primFailBlockScope = 0; }
+      primFailBlockScope = NULL; }
     bool isBlockPReg() { return true; }
     NameNode* locNameNode(bool mustBeLegal);
     SCodeScope* parent();
@@ -286,7 +286,7 @@
     bool isMemoized()           { return memoized; }
     bool canEliminateAndStillDebug();
     const char* prefix()              { return "BlkP"; }
-    char* name();
+    const char* name();
     bool verify();
 
     static SCodeScope* scopeFromBlockMap(mapOop blockMap);
@@ -296,13 +296,13 @@
   // move this class to a PD-preg.hh and also move all of its users (Sparc instructions)
   class NoPReg : public PReg {  // "no result" register (e.g. GO)
    public:
-    NoPReg() : PReg(0) {
+    NoPReg() : PReg(NULL) {
         loc = NoReg;
         initialize();
     }
     virtual bool isNoPReg()     { return true; }
     bool canCopyPropagate() { return false; }
-    char* name()                { return (char*) "nil"; }
+    const char* name()                { return (char*) "nil"; }
     bool verify();
   };
 
@@ -333,7 +333,7 @@
     bool needsRegister();
     NameNode* nameNode(bool mustBeLegal = true);
     const char* prefix()              { return "ConstP"; }
-    char* name();
+    const char* name();
     bool verify();
   };
 

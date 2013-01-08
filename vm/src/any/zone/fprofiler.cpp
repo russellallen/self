@@ -15,8 +15,16 @@
 # define PROFIL_SCALE   (0x10000 >> SHIFT)   /* see profil(2) man page */
 # define scale(offset)  ((offset >> SHIFT) / sizeof(PCounter))
 
+# if  TARGET_OS_VERSION == MACOSX_VERSION   &&  OSX_RELEASE >= MOUNTAIN_LION_RELEASE 
 
-# if TARGET_OS_FAMILY == UNIX_FAMILY
+extern "C" int profil( char* /*buf*/,
+            size_t   /*bufsiz*/,
+            unsigned long    /*offset*/,
+            unsigned int    /*scale*/ ) {
+  fatal("unimp mac");
+  return 0;
+}
+# elif TARGET_OS_FAMILY == UNIX_FAMILY
 /* Pick this up from header file:
   extern "C" void profil(unsigned short *buf,
                          unsigned int bufsiz,
@@ -24,19 +32,12 @@
                          unsigned int scale);
 */
                        
-# elif TARGET_OS_FAMILY == MACOS_FAMILY
-void profil( unsigned short* /*buf*/,
-             unsigned int    /*bufsiz*/,
-                      int    /*offset*/,
-             unsigned int    /*scale*/ ) {
-  fatal("unimp mac");
-}
 # endif
 
 
 FlatProfiler* flatProfiler;
 typedef uint16 PCounter;
-static char* buf = 0;
+static char* buf = NULL;
 static int32 bufSize;
 
 # define bufStart  ((PCounter*) buf)
@@ -190,7 +191,7 @@ static int32 printStubNumbers() {
     if (p < e) {
       return p;
     } else {
-      return 0;
+      return NULL;
     }
   }
 # endif

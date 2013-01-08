@@ -175,7 +175,9 @@ ENDMACRO
       ENDMACRO
 
       MACRO(jmp_label, label) // jump to label with four bytes for label
-        jmp $0
+          // as of Mountain Lion, the old way does not work
+          .byte 0xe9
+          .long $0 - (. + 4)
       ENDMACRO
 
 

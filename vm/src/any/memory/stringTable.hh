@@ -11,7 +11,7 @@
 // The string table (Memory->string_table) holds all canonical strings. 
 // It is implemented as an open hash table with a fixed number of buckets.
 // A bucket (stringTableEntry) is a union containing either:
-//   0             => bucket is empty.
+//   NULL             => bucket is empty.
 //   stringOop        => bucket has one element.
 //   stringTableLink* => bucket has more than one element.
 
@@ -36,7 +36,7 @@ class stringTableEntry {
  public:
   void* string_or_link;
   bool is_string() { return oop(string_or_link)->is_mem(); }
-  void clear()     { string_or_link = 0; }
+  void clear()     { string_or_link = NULL; }
 
   stringOop get_string() {
     return stringOop(string_or_link); }
@@ -95,7 +95,7 @@ class stringTable: public CHeapObj {
   void write_snapshot(FILE* file);
 
   // memory management for stringTableLinks
-  stringTableLink* new_link(stringOop s, stringTableLink* n = 0);
+  stringTableLink* new_link(stringOop s, stringTableLink* n = NULL);
   void             delete_link(stringTableLink* l);
 
   // histogram

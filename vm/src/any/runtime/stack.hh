@@ -39,11 +39,11 @@ class Stack: public StackObj {
   bool markDestroyed(); // answer true if stack mark was overwritten
 
   // frame operations
-  frame* last_self_frame(bool includePrologue, RegisterLocator** = 0);
+  frame* last_self_frame(bool includePrologue, RegisterLocator** = NULL);
                                 // return last (most recent) Self frame, & optionally a RegisterLocator
   frame* callee_of(const frame* f);
   frame* first_VM_frame();      // frame called by last_self_frame()
-  void   consistencyCheck(primDoFn f, frame* firstVmFrame = 0);
+  void   consistencyCheck(primDoFn f, frame* firstVmFrame = NULL);
   
   frame* interpreter_frame_for_continuing_NLR_from_primitive();
   frame* interpreter_frame_for_continuing_from_return_trap();
@@ -68,9 +68,9 @@ class Stack: public StackObj {
   
     
  public:
-  void frames_do(framesDoFn f, primDoFn pfn = 0);
+  void frames_do(framesDoFn f, primDoFn pfn = NULL);
         // apply f to all Self frames; pfn is for consistency check
-  void vframes_do(vframesDoFn fn, frame* f = 0);
+  void vframes_do(vframesDoFn fn, frame* f = NULL);
         // apply fn to all Self vframes, or start at f if non-null
   
   // programming operations
@@ -80,7 +80,7 @@ class Stack: public StackObj {
   // printing operations
   void print();
   int32 depth();
-  int32 vdepth(frame* f = 0);
+  int32 vdepth(frame* f = NULL);
 };
 
 extern "C" {

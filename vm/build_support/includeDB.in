@@ -990,7 +990,7 @@ genHelper_${platform_processor}.cpp          target.hh
 generate_platform_dependent_include aCompiler.hh aCompiler_pd.hh aCompiler_${platform_processor}.hh
 generate_platform_dependent_include addrDesc.hh addrDesc_pd.hh addrDesc_${platform_processor}.hh
 generate_platform_dependent_include asm.hh asm_pd.hh asm_${platform_processor}.hh
-generate_platform_dependent_include asmDefs.hh asmDefs_pd.hh asmDefs_${platform_processor}.hh
+generate_platform_dependent_include asmDefs.hh asmDefs_pd.hh asmDefs_${platform_compiler}_${platform_processor}.hh
 generate_platform_dependent_include asm_inline.hh asm_inline_pd.hh asm_inline_${platform_processor}.hh
 generate_platform_dependent_include cacheStub.hh cacheStub_pd.hh cacheStub_${platform_processor}.hh
 generate_platform_dependent_include cacheStub_inline.hh cacheStub_inline_pd.hh cacheStub_inline_${platform_processor}.hh
@@ -2395,9 +2395,9 @@ runtime_${platform_processor}.cpp            process.hh
 runtime_${platform_processor}.cpp            regs.hh
 runtime_${platform_processor}.cpp            runtime.hh
 
-runtime_asm_${platform_processor}.S          asmDefs.hh
-runtime_asm_${platform_processor}.S          macros.hh
-runtime_asm_${platform_processor}.S          config.hh
+runtime_asm_${platform_compiler}_${platform_processor}.S          asmDefs.hh
+runtime_asm_${platform_compiler}_${platform_processor}.S          macros.hh
+runtime_asm_${platform_compiler}_${platform_processor}.S          config.hh
 
 scanner.cpp                   files.hh
 scanner.cpp                   generation_inline.hh

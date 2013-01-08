@@ -208,5 +208,5 @@ char* ErrorCodes::os_error_message(char* s) {
       return ERROR_STRING(i);
     }
   }
-  return 0;
+  return NULL;
 }

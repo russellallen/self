@@ -15,9 +15,9 @@
   static void all_mode() {
     // trace all instructions
     trc.niranges = 1;
-    trc.irange[0] = (char*) "all";
-    trc.irange[1] = 0;
-    trc.irange[2] = (char*) -1;
+    trc.irange[0] = const_cast<char*>( "all");
+    trc.irange[1] = NULL;
+    trc.irange[2] =( char*)-1;
   }
   
   static void self_mode() {
@@ -25,19 +25,19 @@
     trc.niranges = 0;
 
     // turn off tracing everywhere
-    trc.irange[trc.niranges * 3    ] = 0;
-    trc.irange[trc.niranges * 3 + 1] = 0;
+    trc.irange[trc.niranges * 3    ] = NULL;
+    trc.irange[trc.niranges * 3 + 1] = NULL;
     trc.irange[trc.niranges * 3 + 2] = (char*)-1;
     trc.niranges++;
 
     // nmethods
-    trc.irange[trc.niranges * 3    ] = (char*) "Self";
+    trc.irange[trc.niranges * 3    ] = const_cast<char*>( "Self");
     trc.irange[trc.niranges * 3 + 1] = Memory->code->iZone->startAddr();
     trc.irange[trc.niranges * 3 + 2] = Memory->code->iZone->  endAddr();
     trc.niranges++;
 
     // PICs, count stubs
-    trc.irange[trc.niranges * 3    ] = (char*) "stubs";
+    trc.irange[trc.niranges * 3    ] = const_cast<char*>( "stubs");
     trc.irange[trc.niranges * 3 + 1] = Memory->code->stubs->zone()->startAddr();
     trc.irange[trc.niranges * 3 + 2] = Memory->code->stubs->zone()->  endAddr();
     trc.niranges++;
@@ -85,23 +85,23 @@
 
     if (!have_ranges && fn == TraceOn) {
       // old space
-      trc.drange[trc.ndranges * 3    ] = (char*) "old space";
+      trc.drange[trc.ndranges * 3    ] = const_cast<char*>( "old space");
       trc.drange[trc.ndranges * 3 + 1] = Memory->old_gen->low_boundary;
       trc.drange[trc.ndranges * 3 + 2] = Memory->old_gen->high_boundary;
       trc.ndranges++;
 
       // survivor spaces
-      trc.drange[trc.ndranges * 3    ] = (char*) "from space";
+      trc.drange[trc.ndranges * 3    ] = const_cast<char*>( "from space");
       trc.drange[trc.ndranges * 3 + 1] = Memory->new_gen->from_space->spaceStart();
       trc.drange[trc.ndranges * 3 + 2] = Memory->new_gen->from_space->spaceEnd();
       trc.ndranges++;
-      trc.drange[trc.ndranges * 3    ] = (char*) "to space";
+      trc.drange[trc.ndranges * 3    ] = const_cast<char*>( "to space");
       trc.drange[trc.ndranges * 3 + 1] = Memory->new_gen->to_space->spaceStart();
       trc.drange[trc.ndranges * 3 + 2] = Memory->new_gen->to_space->spaceEnd();
       trc.ndranges++;
 
       // eden
-      trc.drange[trc.ndranges * 3    ] = (char*) "eden space";
+      trc.drange[trc.ndranges * 3    ] = const_cast<char*>( "eden space");
       trc.drange[trc.ndranges * 3 + 1] = Memory->new_gen->eden_space->spaceStart();
       trc.drange[trc.ndranges * 3 + 2] = Memory->new_gen->eden_space->spaceEnd();
       trc.ndranges++;

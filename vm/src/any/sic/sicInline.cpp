@@ -13,9 +13,9 @@
   
   SExpr* SCodeScope::inlineSend(SendInfo* info) {
     stringOop sel = info->sel;
-    SExpr* res = 0;
+    SExpr* res = NULL;
     info->resReg = new SAPReg(this);
-    MergeNode* merge = 0;
+    MergeNode* merge = NULL;
     fint argc = sel->arg_count();
 
     if (!Inline && !InlineSTMessages) {
@@ -32,7 +32,7 @@
         // single map - try to inline this send
         SSelfScope* s = tryLookup(info, info->rcvr);
         if (s) {
-          SExpr* r = doInline(s, info->rcvr, theNodeGen->current, 0);
+          SExpr* r = doInline(s, info->rcvr, theNodeGen->current, NULL);
           if (r->isNoResultSExpr()) {
             res = r;
           } else {
@@ -84,12 +84,12 @@
   
   SExpr* SCodeScope::inlineMerge(SendInfo* info, MergeNode*& merge) {
     // inline the send by type-casing; return uninlined cases in others list
-    // If merge has no predecessors, return 0 for merge ref.
-    SExpr* res = 0;
+    // If merge has no predecessors, return NULL for merge ref.
+    SExpr* res = NULL;
     assert(info->rcvr->isMergeSExpr(), "must be a merge");
     MergeSExpr* r = (MergeSExpr*)info->rcvr;
     stringOop sel = info->sel;
-    merge = 0;
+    merge = NULL;
 
     if (r->isSplittable() && shouldSplit(info)) {
       return splitMerge(info, merge);
@@ -104,7 +104,7 @@
       }
       return res;
     }
-    assert( merge == 0, "I assume merge is out param only");
+    assert( merge == NULL, "I assume merge is out param only");
     merge = new MergeNode("inlineMerge merge");
 
     if (SICDebug) {
@@ -130,12 +130,12 @@
     fint i;
     for (i = 0; i < ncases; i++) {    
       SExpr* nth = r->exprs->nth(i);
-      assert(!nth->isConstantSExpr() || nth->next == 0 ||
+      assert(!nth->isConstantSExpr() || nth->next == NULL ||
              nth->constant() == nth->next->constant(),
              "shouldn't happen: merged consts - convert to map");
       SSelfScope* s;
 
-      if (!nth->hasMap()  ||  (s = tryLookup(info, nth)) == 0) {
+      if (!nth->hasMap()  ||  (s = tryLookup(info, nth)) == NULL) {
         // cannot inline
         others->append(nth);
         info->needRealSend = true;
@@ -151,13 +151,13 @@
         // Bug fix: instead of nth->shallowCopy, must generalize to any 
         // with same map, not just the same constant, because other ints (for example)
         // will pass the type test, too. -- dmu 6/05
-        elist ->append(new MapSExpr(map->enclosing_mapOop(), r->preg(), 0));
+        elist ->append(new MapSExpr(map->enclosing_mapOop(), r->preg(), NULL));
         mlist ->append(map->enclosing_mapOop());
         continue;
       }
       // can inline but not immediate map
       slist2->append(s);        // append later
-      elist2->append(nth->shallowCopy(r->preg(), 0)); // use preg of merge
+      elist2->append(nth->shallowCopy(r->preg(), NULL)); // use preg of merge
       if (nth->isConstantSExpr()) {
         mlist2->append(nth->constant());
       }
@@ -430,7 +430,7 @@
       lprintf("%*s*cannot inline %s, cost = %ld (%s)\n", (void*)depth, "",
               selector_string(selector), (void*)msgCost, msg);
     }
-    return 0;        // cheap trick to make calls more convenient
+    return NULL;        // cheap trick to make calls more convenient
   }
 
   SSelfScope* SCodeScope::tryLookup(SendInfo* info, SExpr* rcvr) {
@@ -451,7 +451,7 @@
     L->perform_lookup();
     info->key= new_MethodLookupKey(L->key);
     
-    if (L->result() == 0) {
+    if (L->result() == NULL) {
       // nothing found statically
       // should remove unused deps here
       if (L->status == foundNone) {
@@ -550,7 +550,7 @@
       // example: value:With: sends value:
       assert_block(theSIC->L->receiver, "expecting a block literal");
       blockOop block = (blockOop) theSIC->L->receiver;
-      compiled_vframe* vf = block->parentVFrame(0)->as_compiled();
+      compiled_vframe* vf = block->parentVFrame(NULL)->as_compiled();
       parentScope = new_SVFrameScope(vf);
     }
     else {
@@ -611,7 +611,7 @@
                 info->sel->copy_null_terminated());
       }
       if (makeUncommon) {
-        return new UnknownSExpr(info->rcvr->preg(), 0, true);
+        return new UnknownSExpr(info->rcvr->preg(), NULL, true);
       }
     }
     return info->rcvr;
@@ -647,11 +647,11 @@
             if (alreadyThere) {
               // generalize to map if only have constant
               if (alreadyThere->isConstantSExpr())
-                info->rcvr = info->rcvr->mergeWith(expr, 0);
+                info->rcvr = info->rcvr->mergeWith(expr, NULL);
             } else {
               // add map only if type isn't already present (for splitting)
               info->predicted = true;
-              info->rcvr = info->rcvr->mergeWith(expr, 0);
+              info->rcvr = info->rcvr->mergeWith(expr, NULL);
               if (expr->hasConstant() && l->length() == 1) {
                 // check to see if single predicted receiver is true or false;
                 // if so, add other boolean to prediction.  Reduces the number
@@ -660,12 +660,12 @@
                 oop c = expr->constant();
                 if (c == Memory->trueObj &&
                     !info->rcvr->findMap(Memory->false_mapOop())) {
-                  SExpr* f = new ConstantSExpr(Memory->falseObj, 0, 0);
-                  info->rcvr = info->rcvr->mergeWith(f, 0);
+                  SExpr* f = new ConstantSExpr(Memory->falseObj, NULL, NULL);
+                  info->rcvr = info->rcvr->mergeWith(f, NULL);
                 } else if (c == Memory->falseObj &&
                            !info->rcvr->findMap(Memory->true_mapOop())) {
-                  SExpr* t = new ConstantSExpr(Memory->trueObj, 0, 0);
-                  info->rcvr = info->rcvr->mergeWith(t, 0);
+                  SExpr* t = new ConstantSExpr(Memory->trueObj, NULL, NULL);
+                  info->rcvr = info->rcvr->mergeWith(t, NULL);
                 }
               }
             }
@@ -691,7 +691,7 @@
         lprintf("%*s*PIC-type-predicting %s as never executed (2)\n",
                 (void*)depth, "", info->sel->copy_null_terminated());
       }
-      info->rcvr = new UnknownSExpr(info->rcvr->preg(), 0, true);
+      info->rcvr = new UnknownSExpr(info->rcvr->preg(), NULL, true);
     }
      
     assert(info->rcvr->preg(), "should have a preg");
@@ -752,14 +752,14 @@
         }
       }
       SExpr* rcvr = info->rcvr;
-      SExpr* t = new ConstantSExpr(Memory->trueObj , r, 0);
-      SExpr* f = new ConstantSExpr(Memory->falseObj, r, 0);
+      SExpr* t = new ConstantSExpr(Memory->trueObj , r, NULL);
+      SExpr* f = new ConstantSExpr(Memory->falseObj, r, NULL);
       // make sure we don't destroy splitting info; only add types if not
       // already present
-      if (rcvr->findMap(Memory-> true_mapOop()) == 0)
-        rcvr = rcvr->mergeWith(t, 0);
-      if (rcvr->findMap(Memory->false_mapOop()) == 0)
-        rcvr = rcvr->mergeWith(f, 0);
+      if (rcvr->findMap(Memory-> true_mapOop()) == NULL)
+        rcvr = rcvr->mergeWith(t, NULL);
+      if (rcvr->findMap(Memory->false_mapOop()) == NULL)
+        rcvr = rcvr->mergeWith(f, NULL);
       return rcvr;
     }
     
@@ -791,7 +791,7 @@
       info->predicted = true;
       SExpr* res =
         info->rcvr->mergeWith(new MapSExpr(Memory->smi_map->enclosing_mapOop(),
-                                           r, 0), 0);
+                                           r, NULL), NULL);
       if (theSIC->useUncommonTraps && rscope->isUncommonAt(_bci, false)) {
         info->rcvr = res = res->makeUnknownUnlikely(this);
       }

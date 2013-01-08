@@ -13,8 +13,8 @@
 fint currentLabelID = 0;
 
 Label* Label::unify(Label* other) {
-  if (this == 0) return other;
-  if (other == 0) return this;
+  if (this == NULL) return other;
+  if (other == NULL) return this;
   if (isDefined()) {
     other->define(_target, this);
   } 

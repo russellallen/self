@@ -69,11 +69,11 @@ class foreignOopClass: public slotsOopClass {  // Abstract class.
 
   // Default implementation of kill/is_live. May be overridden.
   void kill_foreign() {  
-    set_pointer(0);
+    set_pointer(NULL);
   }
 
   bool is_live_foreign() {
-    return get_pointer() != 0;
+    return get_pointer() != NULL;
   }
 
 
@@ -88,7 +88,7 @@ class foreignOopClass: public slotsOopClass {  // Abstract class.
   }
 
   bool is_null() {
-    return get_pointer() == 0;
+    return get_pointer() == NULL;
   }
 
   foreignOop clone(bool mustAllocate) { 

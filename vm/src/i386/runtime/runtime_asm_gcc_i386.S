@@ -7,7 +7,7 @@
 
 
 
-# include "asmDefs_i386.hh"
+# include "asmDefs_gcc_i386.hh"
 
   .text
         
@@ -553,9 +553,11 @@ dummy:             hlt
 start_exported_function ReturnTrap
 start_exported_function PrimCallReturnTrap          
                    jmp_label    rt2         // XXXintel may not need this if do it like sparc
+
                   .long 0                       // reg mask  XXXintel not needed
 rt_NLR_pc:
                   jmp_label ReturnTrap_beyond_for_NLR // XXXintel could be short inst if fix sendDesc offsets
+
                   .long 0                       // placeholder for nmlns
                   .long 0                       // placeholder for nmlns
                   .long 0                       // placeholder for selector

@@ -22,7 +22,7 @@
   void initPRegs() {
     PReg::currentNo = 0; BlockPReg::numBlocks = 0;
     constants = new ConstPRegBList(50);
-    dummyPR = new PReg(0);
+    dummyPR = new PReg(NULL);
   }
 
   SAPReg::SAPReg(SCodeScope* s, fint st, fint en) : PReg(s) {
@@ -134,7 +134,7 @@
     } else {
       // both already have regClasses - combine the two classes
       classes->nth(regClass)->append(other);
-      classes->nthPut(other->regClass, 0);
+      classes->nthPut(other->regClass, NULL);
     }
   }
   
@@ -155,14 +155,14 @@
   
 # ifdef UNUSED
   ConstPReg* PReg::bfindConstPReg(Node* n, oop c) {
-    // return const preg for oop or 0 if none exists
+    // return const preg for oop or NULL if none exists
     for (fint i = 0; i < constants->length(); i++) {
       ConstPReg* r = constants->nth(i);
       if (r->constant == c) {
-        return r->covers(n) ? r : 0;
+        return r->covers(n) ? r : NULL;
       }
     }
-    return 0;                    // constant not found
+    return NULL;                    // constant not found
   }
 # endif
   
@@ -172,6 +172,8 @@
 # if TARGET_ARCH == SPARC_ARCH
     return SICCSEConstants && weight > 1 && 
       (int32(constant) > maxImmediate || int32(constant) < -maxImmediate);
+# elif TARGET_ARCH == PPC_ARCH
+    return SICCSEConstants && weight > 1 && !fits_within_si(int32(constant));
 # elif TARGET_ARCH == I386_ARCH
     return false; // regs tight, use immediates
 # endif
@@ -231,7 +233,7 @@
   }
   
   void PReg::removeUse(BB* bb, PUse* use) {
-    if (use == 0) return;
+    if (use == NULL) return;
     for (fint i = 0; i < dus.length(); i++) {
       PRegBBIndex* index = dus.nth(i);
       if (index->bb == bb) {
@@ -253,7 +255,7 @@
   }
   
   void PReg::removeDef(BB* bb, PDef* def) {
-    if (def == 0) return;
+    if (def == NULL) return;
     for (fint i = 0; i < dus.length(); i++) {
       PRegBBIndex* index = dus.nth(i);
       if (index->bb == bb) {
@@ -267,7 +269,7 @@
   
   void PReg::addDUHelper(Node* n, PDefUseList* l, PDefUse* el) {
     int32 myNum = n->num();
-    PDefUseListElem* prev = 0;
+    PDefUseListElem* prev = NULL;
     for (PDefUseListElem* e = l->head();
          e && e->data()->node->num() < myNum;
          prev = e, e = e->next()) ;
@@ -398,7 +400,7 @@
   bool PReg::checkEquivalentDefs() {
     // check if all defs are equivalent, i.e. assign the same preg
     if (ndefs() == 1) return true;
-    PReg* rhs = 0;
+    PReg* rhs = NULL;
     for (fint i = 0; i < dus.length(); i++) {
       DUInfo* info = dus.nth(i)->defUseInfo();
       for (PDefListElem* e = info->defs.head(); e; e = e->next()) {
@@ -602,7 +604,7 @@
               // must be debug-visible, too (so that it isn't allocated to
               // a temp reg)
               r->debug |= debug;
-              if (r->cpRegs == 0) r->cpRegs = new PRegBList(5);
+              if (r->cpRegs == NULL) r->cpRegs = new PRegBList(5);
               r->cpRegs->append(this);
             }
           }
@@ -792,8 +794,8 @@
     assert(desc != BLOCK_PROTO_DESC, "should have been changed");
     SCodeScope* s = (SCodeScope*)desc;
     // s may be invalid (receiver block) - make educated guess
-    if (int(s) < 256 * K) s = 0;     // not a valid address
-    assert(s == 0 || s->isCodeScope(), "should be non-access");
+    if (int(s) < 256 * K) s = NULL;     // not a valid address
+    assert(s == NULL || s->isCodeScope(), "should be non-access");
     return s;
   }
   
@@ -830,7 +832,7 @@
   PReg* PReg::cpReg() {
     assert(!cpInfo || loc == UnAllocated,
            "allocated regs shouldn't have cpInfo");
-    if (cpInfo == 0) {
+    if (cpInfo == NULL) {
       return this;
     } else {
       PReg* r;
@@ -840,7 +842,7 @@
   }
   
   void BlockPReg::memoize() {
-    if (primFailBlockScope == 0) memoized = true;
+    if (primFailBlockScope == NULL) memoized = true;
   }
   
   void BlockPReg::markEscaped() {
@@ -854,7 +856,7 @@
   }
       
   
-  char* PReg::name() {
+  const char* PReg::name() {
     char* n = NEW_RESOURCE_ARRAY(char, 25);
     if (loc == UnAllocated) { 
       sprintf(n, "%s%d%s%s%s", prefix(), id(),
@@ -872,20 +874,20 @@
     print_short(); lprintf(": "); printDefsAndUses(&dus);
   }
   
-  char* BlockPReg::name() {
+  const char* BlockPReg::name() {
     char* n = NEW_RESOURCE_ARRAY(char, 25);
     sprintf(n, "%s <%#lx>%s", PReg::name(), (unsigned long)block,
             memoized ? "#" : (primFailBlockScope ? "#F" : ""));
     return n;
   }
   
-  char* ConstPReg::name() {
+  const char* ConstPReg::name() {
     char* n = NEW_RESOURCE_ARRAY(char, 25);
     sprintf(n, "%s <%#lx>", PReg::name(), (unsigned long)constant);
     return n;
   }
   
-  char* SplitPReg::name() {
+  const char* SplitPReg::name() {
     char* n = NEW_RESOURCE_ARRAY(char, 25);
     char buf[MaxSplitDepth+1];
     sprintf(n, "%s <%s>", PReg::name(), sig->prefix(buf));
@@ -991,6 +993,8 @@
 # if TARGET_ARCH == SPARC_ARCH
     if (int32(constant) < maxImmediate && int32(constant) > -maxImmediate
         && loc != UnAllocated) {
+# elif TARGET_ARCH == PPC_ARCH
+    if (fits_within_si(int32(constant)) && loc != UnAllocated) {
 # elif TARGET_ARCH == I386_ARCH
     if (loc != UnAllocated) {
 # endif

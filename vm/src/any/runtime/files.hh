@@ -23,7 +23,7 @@ private:
 
   FILE*         record(FILE* f);
   FILE*         tryOpen(const char* name, const char* suffix,
-                        const char* mode, const char** fullName = 0);
+                        const char* mode, const char** fullName = NULL);
 public:
   FileTable();
   ~FileTable();
@@ -35,14 +35,14 @@ public:
                          const char*  mode   = "r",
                          const char*  path   = "",
                          const char*  suffix = "",
-                         const char** fullname = 0);
+                         const char** fullname = NULL);
 
   // specific openers
   FILE*         openSnapshotFile(const char*  name,
                                  const char*  modeArg,
-                                 const char** fullname = 0);
+                                 const char** fullname = NULL);
 
-  FILE*         openSelfFile(const char*  name, const char** fullname = 0) {
+  FILE*         openSelfFile(const char*  name, const char** fullname = NULL) {
                   return openFile(name, "r", DirPath, 
                                   "" /* was ".self" */, 
                                   fullname);

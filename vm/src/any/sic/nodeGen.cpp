@@ -19,16 +19,16 @@
     initPRegs();
     initNodes();
     scopeStack = new SSelfScopeBList(30);
-    start = current = 0;
+    start = current = NULL;
     L =l; send_desc = sd; diLink = d;
     haveStackFrame = false;
-    delPR = new PReg(0, PerformDelegateeLoc, true, true);
-    selPR = new PReg(0, PerformSelectorLoc, true, true);
-    nlrHomePR = new PReg(0, NLRHomeReg, true, true);
-    nlrHomeIDPR = new PReg(0, NLRHomeIDReg, true, true);
-    nlrResultPR = new PReg(0, NLRResultReg, true, true);
-    nlrTempPR = new PReg(0, NLRTempReg, true, true);
-    framePR = new PReg(0, FrameReg, true, true);
+    delPR = new PReg(NULL, PerformDelegateeLoc, true, true);
+    selPR = new PReg(NULL, PerformSelectorLoc, true, true);
+    nlrHomePR = new PReg(NULL, NLRHomeReg, true, true);
+    nlrHomeIDPR = new PReg(NULL, NLRHomeIDReg, true, true);
+    nlrResultPR = new PReg(NULL, NLRResultReg, true, true);
+    nlrTempPR = new PReg(NULL, NLRTempReg, true, true);
+    framePR = new PReg(NULL, FrameReg, true, true);
     noPR = new NoPReg;
     theNodeGen = this;
   }
@@ -41,7 +41,7 @@
 
   void NodeGen::prologue(bool needToFlushRegWindow, bool isAccessMethod,
                          fint nargs) {
-    assert(current == 0, "prologue must be first");
+    assert(current == NULL, "prologue must be first");
     current = start = new PrologueNode(needToFlushRegWindow, isAccessMethod,
                                        nargs, L);
   }
@@ -169,7 +169,7 @@
     Node* n = APPEND(new UncommonNode(exprStack, restartSend));
     assert(currentScope()->isCodeScope(), "must be non-access");
     ((SCodeScope*)currentScope())->addSend(exprStack);
-    current = 0;
+    current = NULL;
     return n;
   }
 
@@ -180,7 +180,7 @@
 
   void NodeGen::deadEnd() {
     APPEND(new DeadEndNode);
-    current = 0;
+    current = NULL;
   }
   void NodeGen::loadOop(oop p, PReg* dest) {
     APPEND(new AssignNode(new_ConstPReg(currentScope(), p), dest));
@@ -246,7 +246,7 @@
     // test if NLR has reached home; the node returned is the success
     // branch (i.e. the home has been reached), current is the other
     // branch
-    Node* homeIDTest = 0;
+    Node* homeIDTest = NULL;
     if (homeID) {       // note: will be 0 if no inlining
       if (isImmediate(smiOop(homeID))) {
         APPEND(new ArithRCNode(SubCCArithOp, nlrHomeIDPR, homeID, noPR));
@@ -275,12 +275,12 @@
 
   void NodeGen::continueNonLocalReturn() {
     // continue NLR (return through caller's inline cache)
-    APPEND(new NonLocalReturnNode(0, 0));
+    APPEND(new NonLocalReturnNode(NULL, NULL));
   }
 
   void NodeGen::branch(MergeNode* target) {
     // connect current with target
-    if (current != 0 && current != target) {
+    if (current != NULL && current != target) {
       current->append(target);
     }
     current = target;
@@ -295,9 +295,9 @@
                             PRegBList*           exprStackPRs, 
                             SplitSig*            s ) {
     // gen nodes for all but indexed branch bytecode
-    // branch if top of stack == target_oop, uncond if PRs 0
+    // branch if top of stack == target_oop, uncond if PRs NULL
     
-    if ( targetPR != 0  &&  SICBranchSplitting ) {
+    if ( targetPR != NULL  &&  SICBranchSplitting ) {
       const char* whyNot =  splitCondBranch( targetNode,
                                              isBackwards,
                                              targetPR,
@@ -306,18 +306,19 @@
                                              exprStack,
                                              exprStackPRs,
                                              s );
-      if (PrintSICBranchSplitting)
+      if (PrintSICBranchSplitting) {
         if (!whyNot)
           lprintf("branch splitting succeeded\n");
         else
           lprintf("branch splitting failed: %s\n", whyNot);
-          
+      }
+      
       if ( !whyNot )
         return;
     }
       
     BranchOpCode op;
-    if (targetPR == 0)
+    if (targetPR == NULL)
       op = ALBranchOp;
     else {
       APPEND( new ArithRRNode( SubCCArithOp, targetPR, testExpr->preg(), noPR));
@@ -399,15 +400,15 @@
     current = mergeForBranching;
     branchCode( targetNode,
                 isBackwards,
-                0,
-                0,
+                NULL,
+                NULL,
                 targetStack,
                 exprStack,
                 exprStackPRs,
                 s);
                 
     append(mergeForFallingThrough);
-    return 0;
+    return NULL;
   }
   
   

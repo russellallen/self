@@ -49,7 +49,7 @@ class codeTable: CHeapObj {
     &&     p <  (void*)&buckets[tableSize]; }
  protected:
   // should always add through zone->addToCodeTable()
-  void add(nmethod* nm, MethodLookupKey *k = 0);
+  void add(nmethod* nm, MethodLookupKey *k = NULL);
   friend class zone;
 };
 

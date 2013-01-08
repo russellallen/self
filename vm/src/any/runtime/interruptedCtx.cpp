@@ -23,7 +23,7 @@ void InterruptedContext::fatal_menu() {
           Memory ? (void*)Memory->snapshot_version  : 0,
           vmDate);
   // block all interrupts (e.g. timers)
-  continuePC = 0;
+  continuePC = NULL;
   SignalBlocker* sb = new SignalBlocker(SignalBlocker::block_signals_self_uses);
   
   OS::handle_suspend_and_resume(true);            // set stdin to normal mode
@@ -48,8 +48,8 @@ void InterruptedContext::fatal_menu() {
     lprintf("   4) Force a core dump\n");
     lprintf("   5) Print the interrupted context registers\n");
     lprintf("Your choice: ");
+    
     char c[255];
-
     if (fgets(c, sizeof(c), stdin) == 0 && !(feof(stdin))) {
       lprintf("\nError while handling error - hit return to exit >");
       getchar();
@@ -94,13 +94,13 @@ void InterruptedContext::quit_self() {
     getchar();
     OS::terminate(1);
   }
-
+  
   if (c[0] == '\n') {
     lprintf("No snapshot specified, will skip this step\n");
   }
   else {
     lprintf("Attempting to write a snapshot to `%s'...", c);
-    Memory->write_snapshot(c, 0, 0, &Memory->current_sizes);
+    Memory->write_snapshot(c, NULL, NULL, &Memory->current_sizes);
     lprintf("done.\n");
     lprintf("Note that it cannot be guaranteed that the snapshot is good.\n");
     lprintf("Even if it appears to start without problems, it is prudent\n");
@@ -109,12 +109,12 @@ void InterruptedContext::quit_self() {
     lprintf("wise to continue using the snapshot.\n");
     lprintf("Hit return to exit > ");
     if (fgets(c, sizeof(c), stdin) == 0) {
-      lprintf("\nError while reading newline? - hit return to exit >");
+      lprintf("\nError while reading snapshot name - hit return to exit >");
       getchar();
       OS::terminate(1);
     }
   }
-  currentProcess = 0;            // to avoid a silly assertion failure 
+  currentProcess = NULL;            // to avoid a silly assertion failure 
   OS::terminate(-1);
 }
 
@@ -127,9 +127,9 @@ void InterruptedContext::print_stack() {
     AbortContext.print_C_stack();
   }
   if (currentProcess->inSelf()) {
-    char* pc = the_interrupted_context ? AbortContext.pc() : 0;
-    frame* vmfr = 0;
-    char* oldPC = 0;
+    char* pc = the_interrupted_context ? AbortContext.pc() : NULL;
+    frame* vmfr = NULL;
+    char* oldPC = NULL;
     if (pc && Memory->code->contains(pc)) {
       // patch stack so that last Self frame is displayed
       vmfr = currentProcess->stack()->first_VM_frame();
@@ -225,7 +225,7 @@ void  InterruptedContext::set_pc(void *pc) { *pc_addr() = (char*)pc; }
 
 
 frame* InterruptedContext::sp() { 
-  return !is_set() ? 0 : (frame*) *sp_addr(); } 
+  return !is_set() ? NULL : (frame*) *sp_addr(); } 
   
 void InterruptedContext::set_sp(void* sp) { *sp_addr() = (int) sp; }
 

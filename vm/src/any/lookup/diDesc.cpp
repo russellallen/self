@@ -48,7 +48,7 @@ pc_t SendDIMessage(sendDesc* sd, frame* lookupFrame, DIDesc* dc,
 static nmethod* SendDIMessage_cont( compilingLookup* L ) {
   if ( Interpret ) {
     L->perform_full_lookup();
-    return 0;
+    return NULL;
   }
   return L->di_desc()->lookup_compile_and_backpatch(L);
 }

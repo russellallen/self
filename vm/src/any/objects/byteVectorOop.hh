@@ -7,6 +7,7 @@
   # pragma interface
 # endif
 
+
 inline smi lengthWords(smi l) { return roundTo((l), oopSize) / oopSize; }
 
 class byteVectorOopClass: public slotsOopClass {
@@ -39,7 +40,7 @@ class byteVectorOopClass: public slotsOopClass {
 
   // allocators
   byteVectorOop copy(fint size, bool mustAllocate, oop genObj, bool cs);
-  byteVectorOop copy(bool mustAllocate= true, oop genObj= 0, bool cs= true)
+  byteVectorOop copy(bool mustAllocate= true, oop genObj= NULL, bool cs= true)
     { return copy(size(), mustAllocate, genObj, cs); }
   byteVectorOop grow_bytes(fint delta, bool mustAllocate);
   byteVectorOop shrink_bytes(fint delta, bool mustAllocate);
@@ -53,7 +54,7 @@ class byteVectorOopClass: public slotsOopClass {
     return byteVectorOop(slotsOopClass::clone(mustAllocate)); }
 # endif
   byteVectorOop cloneSize(fint length, bool mustAllocate= true,
-                          oop filler= 0) {
+                          oop filler= NULL) {
     return byteVectorOop(slotsOopClass::cloneSize(length, mustAllocate,
                                                   filler)); }
 

@@ -65,7 +65,7 @@
     
     ResultReg = eax,
     
-    // Warning: Temp1, Temp2, Lowest/HighestNonVolReg are duplicated in asmDefs_i386.hh
+    // Warning: Temp1, Temp2, Lowest/HighestNonVolReg are duplicated in asmDefs_gcc_i386.hh
     Temp1 = ebx,
     Temp2 = ecx,
 #   ifdef SIC_COMPILER
@@ -73,6 +73,8 @@
     // markAllocated function.  See AbstractArrayAtNode::markAllocated.
     // When markAllocated changes the use/def count of the temp register,
     // it won't be used in the temporary register allocation.  -mabdelmalek 12/02
+    //
+    // Also need to define canCopyPropagateFrom, as in node_ppc.cpp -- dmu 1/03
     Temp3 = eax,
     Temp4 = edx,
 #   endif

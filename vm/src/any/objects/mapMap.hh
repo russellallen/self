@@ -21,9 +21,9 @@ class mapMap: public Map {
   fint object_size(oop obj) { return enclosed_map_offset + mapOop(obj)->map_addr()->size(); }
   
   // cloning operations
-  oop clone(oop obj, bool mustAllocate= true, oop genObj= 0);
+  oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL);
   oop cloneSize(oop obj, fint length, bool mustAllocate= true,
-                oop filler= 0);
+                oop filler= NULL);
   
   // creation operation
   static Map* create_mapMap();
@@ -41,9 +41,9 @@ class mapMap: public Map {
   }
 
   // bogus operations
-  mirrorOop mirror_proto() { ShouldNotCallThis(); return 0; }
+  mirrorOop mirror_proto() { ShouldNotCallThis(); return NULL; }
   oop dummy_obj(oop filler) {
-    Unused(filler);  ShouldNotCallThis(); return 0; }
+    Unused(filler);  ShouldNotCallThis(); return NULL; }
   fint empty_object_size() { ShouldNotCallThis(); return 0; }
   bool is_enumerable(oop obj, oop* matching_cell) {
     Unused(obj); Unused(matching_cell);

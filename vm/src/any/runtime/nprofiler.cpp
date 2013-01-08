@@ -130,12 +130,12 @@ void EventBuffer::time(const char* ident, ProcessTime t) {
 }
 
 # ifdef USE_LOG
-  # define CREATE_LOG event_buffer = PrintProfiling ? new EventBuffer() : 0;
+  # define CREATE_LOG event_buffer = PrintProfiling ? new EventBuffer() : NULL;
   # define DELETE_LOG   if (event_buffer) delete event_buffer;
   # define LOG_REC(C)   if (event_buffer) event_buffer->event(C);
   # define LOG_TIME(C,T) if (event_buffer) event_buffer->time(C,T);
 # else
-  # define CREATE_LOG   event_buffer = 0;
+  # define CREATE_LOG   event_buffer = NULL;
   # define DELETE_LOG
   # define LOG_REC(C)
   # define LOG_TIME(C,T)
@@ -151,7 +151,7 @@ NewNodeList::NewNodeList(fint initial_size) {
 }
 
 NewNodeList::~NewNodeList() {
-  if (list) { delete list; list= 0; }
+  if (list) { delete list; list= NULL; }
 }
 
 void NewNodeList::nodes_do(call_graph_nodeDoFn f) {
@@ -173,7 +173,7 @@ bool NewNodeList::verify() {
 }
 
 void NewNodeList::insert(call_graph_node* n) {
-  assert( n->my_new_list == 0, "node is already on list");
+  assert( n->my_new_list == NULL, "node is already on list");
     
   if (!n->is_new())
     return; // only keep nodes with new oops
@@ -218,7 +218,7 @@ void NewNodeList::appendNode(call_graph_node* n) {
 
 void NewNodeList::removeAt(int i) {
   assert(end > 0, "checking");
-  list[i]->my_new_list = 0;
+  list[i]->my_new_list = NULL;
   list[i] = list[--end];
 }  
 
@@ -229,7 +229,7 @@ class NodeCacheEntry {
   nmethod*         nm;
   fint             offset;
   call_graph_node* nodes;
-  void clear() { nm = 0; offset = 0; nodes = 0; }
+  void clear() { nm = NULL; offset = 0; nodes = NULL; }
 # if  GENERATE_DEBUGGING_AIDS
   bool verify(nmethod *m);
 # endif
@@ -237,7 +237,7 @@ class NodeCacheEntry {
 
 # if  GENERATE_DEBUGGING_AIDS
 bool NodeCacheEntry::verify(nmethod* m) {
-  if (nm == 0) return false;
+  if (nm == NULL) return false;
   if (nm != m) return false;
   if (nodes->is_method_node()) {
     method_node* nn = (method_node*) nodes;
@@ -265,7 +265,7 @@ class NodeCache : public CHeapObj {
   // Insert a new entry in the cache
   void insert(nmethod* nm, fint offset, call_graph_node* nodes);
   
-  // Find the nmethod in the cache. Returns 0 if no entry found.
+  // Find the nmethod in the cache. Returns NULL if no entry found.
   call_graph_node* find(nmethod* nm, fint offset);
 
   // remove all entries and delete call graph nodes
@@ -300,7 +300,7 @@ void NodeCache::insert(nmethod* nm, fint offset, call_graph_node* nodes) {
   
 call_graph_node* NodeCache::find(nmethod* nm, fint offset) {
   NodeCacheEntry* entry = entryFor(hash(nm,offset));
-  return (entry->nm == nm && entry->offset == offset) ? entry->nodes : 0;
+  return (entry->nm == nm && entry->offset == offset) ? entry->nodes : NULL;
 }
 
 void NodeCache::flush () {
@@ -334,14 +334,14 @@ static fint num_of_profilers = 0;
 nmethod* Pc::my_nmethod() {
   // Taken from frame.c, nmethod* frame::code() [dates from antiquity]
   // But, I don't understand the subtraction. 12/03, dmu
-  nmethod* r = nmethod::nmethodContaining(value - sizeof(class nmethod), 0);
+  nmethod* r = nmethod::nmethodContaining(value - sizeof(class nmethod), NULL);
   # if GENERATE_DEBUGGING_AIDS
     if (CheckAssertions) {
            if (r->contains(value))  ;
-      else if (nmethod::nmethodContaining(value, 0)->contains(value))
+      else if (nmethod::nmethodContaining(value, NULL)->contains(value))
               fatal("should not have subtracted");
       else    fatal3("value 0x%x is not in any nmethod, either 0x%x, or 0x%x",
-                     value, r, nmethod::nmethodContaining(value, 0));
+                     value, r, nmethod::nmethodContaining(value, NULL));
     }
   # endif
   return r;
@@ -349,7 +349,7 @@ nmethod* Pc::my_nmethod() {
 
 PcDesc* Pc::pcDesc(nmethod *nm) {
   nmethod *nm2= nm ? nm : my_nmethod();
-  PcDesc *p= nm2->contains(value) ? nm2->containingPcDescOrNULL(value) : 0;
+  PcDesc *p= nm2->contains(value) ? nm2->containingPcDescOrNULL(value) : NULL;
   return p ? p : nm2->pcs();
 }
 
@@ -376,7 +376,7 @@ stringOop Pc::current_selector() {
   if (op == SEND_CODE || op == IMPLICIT_SEND_CODE)
     return mm->get_selector_at(pd->byteCode);
   else
-    return 0;
+    return NULL;
 }
 
 bool Pc::in_block_clone() {
@@ -428,7 +428,7 @@ void Profiler::update_callee(fint bci, call_graph_node* n,
             path->nth(start_of_fold-1)->callee;
           
           fold_edge* e = insert_node->find_fold_edge(fold_e->bci, back_node);
-          if (e != 0) {
+          if (e != NULL) {
             e->inc();
           } else {
             // Create new fold edge 
@@ -507,7 +507,7 @@ Profiler::Profiler(profilerOop prof) :
 
   _profilerOop = prof;
 
-  _process     = 0;
+  _process     = NULL;
 
   new_list  = new NewNodeList(10000);
   use_new_list = true;
@@ -559,8 +559,8 @@ Profiler::Profiler(profilerOop prof) :
   start_of_match = 0;
   start_of_fold  = 0;
   max_self_frames_on_stack = 0;
-  path = 0;
-  back_edges_visited = 0;
+  path = NULL;
+  back_edges_visited = NULL;
   
   if (num_of_profilers == 0) {
     IntervalTimer* it = IntervalTimer::CPU_timer();
@@ -652,6 +652,8 @@ void Profiler::engage(Process* proc) {
 
 # if TARGET_ARCH == SPARC_ARCH
   fint min_self_frame_size = WindowSize * oopSize;
+# elif TARGET_ARCH == PPC_ARCH
+  fint min_self_frame_size = linkage_area_size;
 # else
   fint min_self_frame_size = 1;
 # endif
@@ -749,7 +751,7 @@ static const fint ScopeDescBList_initial_size = 20;
 
 void Profiler::addToCache(nmethod *nm, float optimized_user_time, fint bci) {
   call_graph_node* cache_result= cache->find(nm, 0);
-  if (cache_result == 0) {
+  if (cache_result == NULL) {
     cache_result= new_node(nm->scopes->root());
     cache->insert(nm, 0, cache_result);
   }
@@ -759,7 +761,7 @@ void Profiler::addToCache(nmethod *nm, float optimized_user_time, fint bci) {
 
 fint Profiler::merge_pc(Pc curr_pc, Pc prev_pc, fint prev_bci,
                         float user_time_arg) {
-  ScopeDesc* sd = 0;
+  ScopeDesc* sd = NULL;
 
   fint last_top_bci = 0;
 
@@ -803,14 +805,14 @@ fint Profiler::merge_pc(Pc curr_pc, Pc prev_pc, fint prev_bci,
         fint bci = top_bci;
 
         for (call_graph_node* n = cache_result; n; 
-             n = n->edges ? n->edges->callee : 0) {
+             n = n->edges ? n->edges->callee : NULL) {
           update_callee(bci, n, optimized_user_time);
           if (n->edges) bci = n->edges->bci;
         }
       }
     }
   }
-  else if (prev_pc.value != 0  &&  prev_bci >= 0  &&  prev_pc.in_self()) {
+  else if (prev_pc.value != NULL  &&  prev_bci >= 0  &&  prev_pc.in_self()) {
     // A c-frame has been encountered. Use the previous self frame 
     // to find the name of the called primitive.
     if (prev_pc.in_block_clone()) {
@@ -862,7 +864,7 @@ void Profiler::fix_stack_bottom(StackInfo* st) {
   if ( st->interrupted_pc.in_self() ) {
     nmethod* nm = st->interrupted_pc.my_nmethod();
     
-    if (nm == 0)
+    if (nm == NULL)
       ;
     else if (nm->isAccess()) {
       // access method
@@ -904,7 +906,7 @@ void Profiler::fix_stack_bottom(StackInfo* st) {
       //    non access method -- interrupted_return_addr_reg
       //    pic stub          --_pc
       if ( st->interrupted_return_addr_reg.in_self()
-      &&  !st->interrupted_return_addr_reg.in_pics() )  {
+      &&  !st->interrupted_return_addr_reg.in_pics() )  { // PPC temporarily sets link reg
         pc[--begin].set_value( st->interrupted_return_addr_reg.value, 9 );
       }
     }
@@ -966,7 +968,7 @@ void Profiler::merge_stack_info(StackInfo* st) {
 
  // Traverse the stack in reverse order, from top to bottom.
  Pc   prev_pc;
- prev_pc.value = 0;
+ prev_pc.value = NULL;
  fint prev_bci = 0;
  fint stack_end = st->end-1;
 
@@ -1091,7 +1093,7 @@ void Profiler::merge_stack_info(StackInfo* st) {
    ((fold_edge*) back_edges_visited->nth(x))->update();
  }
  
- back_edges_visited = 0;
+ back_edges_visited = NULL;
 }
 
 
@@ -1142,6 +1144,9 @@ void Profiler::convert_nmethod_information() {
 
 # if TARGET_ARCH == SPARC_ARCH
 extern "C" { void ContinueAfterProfilerInterrupt(); }
+# elif TARGET_ARCH == PPC_ARCH
+// not used: would need return from interrupt instruction
+// void ContinueAfterProfilerInterrupt() { fatal("unimp mac"); }
 # endif
 
 char** profiler_return_addr;
@@ -1157,7 +1162,7 @@ StackInfo* Profiler::collect_stack(bool in_interrupt) {
   StackInfo* st = &current_stack();
 
   st->begin = stack_index ? stack[stack_index-1].end : 0;
-  st->interrupted_pc.value = 0;
+  st->interrupted_pc.value = NULL;
 
 
   ++stack_index;
@@ -1178,15 +1183,13 @@ StackInfo* Profiler::collect_stack(bool in_interrupt) {
   if (in_interrupt) {
     // Make room for activations in the interrupted context
     for ( fint i = 0;  i < max_activations_in_context; ++i ) {
-      pc[index].value = 0;
-      pc[index++].fr  = 0;
+      pc[index].value = NULL;
+      pc[index++].fr  = NULL;
     }
 
     profiler_return_addr = (char**) &st->interrupted_pc;
     last_frame = InterruptedContext::the_interrupted_context->sp();
 
-
-    // THIS IS HISTORICAL NOW. >>
       // Want frame above the interrupted context, but on PPC that's frame
       // above sp. That way, can look at last_frame's saved return_addr.
       // The interrupted context's sp may NOT be pointing at frame wtih saved PC. -- dmu 12/03
@@ -1197,7 +1200,6 @@ StackInfo* Profiler::collect_stack(bool in_interrupt) {
       // I came back to it, made sure all the stubs save the link reg before stwu'ing the sp,
       // and assuming the C compiler is well behaved this should work with only one sender(); -- dmu 2/04
       // See frame_ppc.cpp frame::return_addr()
-    // <<
 
     st->frame_pointer = (char*) last_frame;
     bool inSelf = Memory->code->isSelfPC(InterruptedContext::the_interrupted_context->pc());
@@ -1207,8 +1209,8 @@ StackInfo* Profiler::collect_stack(bool in_interrupt) {
     else                                             self_ticks.inc();
   } 
   else {
-    st->interrupted_pc.value = 0;
-    last_frame = _process->inSelf() ? _process->last_self_frame(false): 0; 
+    st->interrupted_pc.value = NULL;
+    last_frame = _process->inSelf() ? _process->last_self_frame(false): NULL; 
     // _process->last_self_frame() ignores the last Self frame if
     // this activation is in the prologue code. However, fix_stack_bottom
     // captures the correct information by using the information in
@@ -1219,7 +1221,7 @@ StackInfo* Profiler::collect_stack(bool in_interrupt) {
   st->end = index;
 
   if (ProfilerIgnoreCallGraph  ||  st->user_time() == 0.0)
-    return 0;
+    return NULL;
   collect_return_addresses_above_interrupted_context(st, last_frame);
   return st;
 }
@@ -1254,7 +1256,7 @@ void Profiler::collect_return_addresses_above_interrupted_context(StackInfo* st,
         in_c = false;
       } else {
         if (!in_c) {
-          pc[index  ].value = 0;
+          pc[index  ].value = NULL;
           pc[index++].fr    = (char*)f;
           in_c = true;
         }
@@ -1373,10 +1375,20 @@ void Profiler::tick() {
     start_tick_timer();
 
     # if TARGET_ARCH == SPARC_ARCH
-      if ( st != 0 ) {
+      if ( st != NULL ) {
         InterruptedContext::set_continuation_address(first_inst_addr(ContinueAfterProfilerInterrupt),
                                                      false, false);
       }
+    # elif TARGET_ARCH == PPC_ARCH
+      if ( st != NULL ) {
+        frame* f = InterruptedContext::the_interrupted_context->sp();
+
+        st->interrupted_pc.                set_value( InterruptedContext::the_interrupted_context->pc(), 12 );
+        st->interrupted_return_addr_reg.   set_value( InterruptedContext::the_interrupted_context->lr(), 13 );
+        st->interrupted_stored_return_addr.value = NULL; // pick this up another way on PC, simply walking stack
+        st->interrupted_fp = (char*)f;
+      }
+      processSemaphore = false;
     # endif
   }
 }
@@ -1483,8 +1495,8 @@ bool Profiler::verify() {
 // ---- Profilers
 
 Profilers::Profilers(){
-  _first                  = 0;
-  _profiler_with_overflow = 0;
+  _first                  = NULL;
+  _profiler_with_overflow = NULL;
 }
 
 void Profilers::insert(Profiler* p) {
@@ -1499,22 +1511,22 @@ void Profilers::remove(Profiler* p) {
     found = true;
   } else {
     Profiler* pred = _first;
-    for (Profiler *c = pred->_next; c != 0; c = c->_next, pred = c) {
+    for (Profiler *c = pred->_next; c != NULL; c = c->_next, pred = c) {
       if (c == p) {
         pred->_next = c->_next;
         found = true;
       }
     }
   }
-  if (found) p->_next = 0;
+  if (found) p->_next = NULL;
   else       fatal("profiler not found in profiler list");
 }
 
 Profiler* Profilers::find_current() {
-  for (Profiler *p = _first; p != 0; p = p->_next) {
+  for (Profiler *p = _first; p != NULL; p = p->_next) {
     if (p->status == p->profiling) return p;
   }
-  return 0;
+  return NULL;
 }
 
 
@@ -1530,11 +1542,11 @@ void Profilers::raiseOverflow(Profiler* p) {
 void Profilers::handleOverflow() {
   assert(hasOverflow(), "must have profiler with overflow");
   _profiler_with_overflow->handleOverflow();
-  _profiler_with_overflow = 0;
+  _profiler_with_overflow = NULL;
 }
   
 #  define FOR_EACH_PROFILER(P) \
-   for (Profiler *P = _first; P != 0; P = P->_next)
+   for (Profiler *P = _first; P != NULL; P = P->_next)
 
 # else // ! PROFILER
 
@@ -1607,7 +1619,7 @@ BlockProfilerTicks::BlockProfilerTicks(block_type b_t) {
   bt = b_t;
 
   if (block_level == 0) {
-    if ((prof = profilers->find_current()) != 0) {
+    if ((prof = profilers->find_current()) != NULL) {
       prof->suspend();
 
       if (b_t == exclude_scavenging ||

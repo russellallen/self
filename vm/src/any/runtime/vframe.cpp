@@ -17,14 +17,14 @@
 dummy_vframe* new_dummy_vframe(frame* sender) {
   // create a dummy vframe for the callee
   if (!sender) sender = currentProcess->last_self_frame(false);
-  nmethod* callee = 0;
-  ScopeDesc* desc = 0;
+  nmethod* callee = NULL;
+  ScopeDesc* desc = NULL;
   // try to fill dummy vf with decent information (get_contents will work
   // anyway, but printing etc will break)
   sendDesc* sd = sender->send_desc();
   if (sd) {
     CacheStub *pic= sd->pic();
-    callee= pic ? 0 : sd->get_method();
+    callee= pic ? NULL : sd->get_method();
   }
   return new dummy_vframe(sender, callee, desc, PrologueBCI);
 }
@@ -77,7 +77,7 @@ void compiled_vframe::set_contents(NameDesc* n, oop p) {
     oop* addr = register_contents_addr(n->location());
     *addr = p;
     oop* addr2 = register_contents_secondary_addr(n->location());
-    if (addr2 != 0)  *addr2 = p;
+    if (addr2 != NULL)  *addr2 = p;
   } else if (n->isMemoizedBlock()) {
     assert(p->is_block() &&
            blockOop(p)->scope(true) != (frame*) BLOCK_PROTO_SCOPE,
@@ -85,7 +85,7 @@ void compiled_vframe::set_contents(NameDesc* n, oop p) {
     oop* addr = register_contents_addr(n->location());
     *addr = p;
     oop* addr2 = register_contents_secondary_addr(n->location());
-    if (addr2 != 0)  *addr2 = p;
+    if (addr2 != NULL)  *addr2 = p;
   } else if (n->isValue()) {
     assert(p == n->value(), "should be the same");
   } else {
@@ -127,7 +127,7 @@ bool compiled_vframe::isCallerOf(ScopeDesc* callee) {
 
 abstract_vframe* compiled_vframe::get_sender(bool skipC) {
   ScopeDesc* c = desc->sender();
-  if (c != 0) {
+  if (c != NULL) {
     int32 cbci = desc->senderByteCodeIndex();
     return new compiled_vframe(fr, code, c, cbci, reg_loc());
   }
@@ -140,15 +140,15 @@ abstract_vframe* compiled_vframe::get_sender(bool skipC) {
 abstract_vframe* compiled_vframe::parent() {
   ScopeDesc* d = desc;
   ScopeDesc* c = d->parent();
-  if (c == 0) {
+  if (c == NULL) {
     if (d->isDeadBlockScope()) {
       // non-LIFO block
-      return 0;
+      return NULL;
     } else if (d->isTopLevelBlockScope()) {
       return abstract_vframe::parent();
     } else {
       assert(d->isHome(), "unexpected scope kind");
-      return 0;
+      return NULL;
     }
   } else {
     int32 cbci = bciFromDesc(c);
@@ -185,7 +185,7 @@ oop compiled_vframe::get_contents(NameDesc* n,
   assert(n->isMemoizedBlock(), "unexpected name desc");
   oop* bp = register_contents_addr(n->location());
   oop b = *bp;
-  if (b != 0 && b != Memory->deadBlockObj) {
+  if (b != NULL && b != Memory->deadBlockObj) {
     assert(b->is_block(), "should be a block");
     return b;
   }
@@ -198,14 +198,14 @@ oop compiled_vframe::get_contents(NameDesc* n,
   b= blockOop(b)->clone_block((smiOop)fr->block_scope_of_home_frame());
   *bp = b;
   oop* bp2 = register_contents_secondary_addr(n->location());
-  if (bp2 != 0)  *bp2 = b;
+  if (bp2 != NULL)  *bp2 = b;
   
   return b;
 }
 
 
 static oop* checkAddr;
-static void checkAddrFn(oop* p) { if (p == checkAddr) checkAddr = 0; }
+static void checkAddrFn(oop* p) { if (p == checkAddr) checkAddr = NULL; }
 
 bool compiled_vframe::verify_NameDesc_for_get_contents(NameDesc* n) {
   // check if location is marked live in register mask
@@ -219,17 +219,17 @@ bool compiled_vframe::verify_NameDesc_for_get_contents(NameDesc* n) {
   ||   isDummy() 
   ||   !n->hasLocation() 
   ||   !fr->is_compiled_self_frame()
-  ||   fr->send_desc() == 0 
+  ||   fr->send_desc() == NULL 
   ||   fr->send_desc()->isPrimCall())
           return true;
 
-  frame* fr_to_search = 0;
-  RegisterLocator* rl_to_search = 0;
+  frame* fr_to_search = NULL;
+  RegisterLocator* rl_to_search = NULL;
   get_search_locations_for_liveness_check(n, fr_to_search, rl_to_search);        
   checkAddr = register_contents_addr(n->location()); 
   fr_to_search->stack_locations_do(checkAddrFn, rl_to_search);
           
-  if (checkAddr != 0) {
+  if (checkAddr != NULL) {
     n->print();
     error("location (above) isn't live; repeating for the debugger");        
     checkAddr = register_contents_addr(n->location()); 
@@ -238,11 +238,11 @@ bool compiled_vframe::verify_NameDesc_for_get_contents(NameDesc* n) {
   }
 
   checkAddr = register_contents_secondary_addr(n->location()); 
-  if (checkAddr == 0)
+  if (checkAddr == NULL)
     return true;
 
   fr_to_search->stack_locations_do(checkAddrFn, rl_to_search);
-  if (checkAddr == 0)
+  if (checkAddr == NULL)
     return true;
 
   n->print();
@@ -262,8 +262,8 @@ void compiled_vframe::createBlock(NameDesc* n, OopOopTable*& blockValues) {
   assert_block(p, "must be a block");
 
   oop clone = blockValues->lookup(p);
-  if (clone == 0) {
-    if (blockOop(p)->scope(true) == 0) {
+  if (clone == NULL) {
+    if (blockOop(p)->scope(true) == NULL) {
       frame* home = fr->block_scope_of_home_frame();
       clone = blockOop(p)->clone_block(smiOop(home));
     } else {
@@ -330,10 +330,10 @@ void compiled_vframe::copyOutgoingArgs( compiled_vframe* vf,
   prepareToCopyOutgoingArgs(vf,
                             e, isUncommon, startingArgNo, performSelArgNo, performDelArgNo);
   
-  dummy_vframe* dummy = new_dummy_vframe(0);
+  dummy_vframe* dummy = new_dummy_vframe(NULL);
 
   if (lastOnly) 
-    for ( ; e != 0  &&  e->next(); 
+    for ( ; e != NULL  &&  e->next(); 
             e = e->next(), ++startingArgNo) 
       {}
 
@@ -373,7 +373,7 @@ void compiled_vframe::prepareToCopyOutgoingArgs(
 
   methodMap* mm = (methodMap*) method()->map();
   IntList* bcs = mm->expression_stack(bci(), true);
-  isUncommon = vf->fr->send_desc() == 0;
+  isUncommon = vf->fr->send_desc() == NULL;
   fint op = getOp(mm->start_codes()[_bci]);
   startingArgNo = (op == SEND_CODE) ? -1 : 0;    // explicit or implicit self?
   stringOop sel= mm->get_selector_at(_bci);
@@ -421,7 +421,7 @@ oop compiled_vframe::copyValueFrom( compiled_vframe* toVF,
       p = clone;
     } 
     frame* home = blockOop(p)->scope(true);
-    if (home == 0) {
+    if (home == NULL) {
       // dead block - don't touch it
       // should translate it's map, but it doesn't really matter so why bother
       assert(fromNd->hasLocation(), "must have a location");
@@ -509,9 +509,9 @@ void compiled_vframe::valuesDo(compiled_vframe* vf,
     fn(this, get_cachedBlock_name(), vf, vf->get_cachedBlock_name());
   }
 
-  NameDesc* nd1 =     desc->getNextNameDesc(0);
-  NameDesc* nd2 = vf->desc->getNextNameDesc(0);
-  while (nd1 != 0) {
+  NameDesc* nd1 =     desc->getNextNameDesc(NULL);
+  NameDesc* nd2 = vf->desc->getNextNameDesc(NULL);
+  while (nd1 != NULL) {
      assert( nd2, "name desc length differs");
      fn(this, nd1,  vf, nd2);
      nd1 =     desc->getNextNameDesc(nd1);
@@ -526,8 +526,8 @@ void compiled_vframe::valuesDo(compiled_vframe* vf,
   // shouldn't be needed by the receiver vframe if/when resumed (extracting
   // them from optimized vframes requires looking at the called vf).
   // However: if returning from interruptCheck, still need to visit args.
-  bool includeArgs = wasInInterruptCheck || calleeOrNull != 0;
-  assert(!wasInInterruptCheck || calleeOrNull==0,
+  bool includeArgs = wasInInterruptCheck || calleeOrNull != NULL;
+  assert(!wasInInterruptCheck || calleeOrNull==NULL,
          "interrupt check implies no callee");
   IntList* bcs = mm->expression_stack(bci(), includeArgs);
   assert(real_bci() != PrologueBCI  ||  bcs->length() == 0,
@@ -683,17 +683,17 @@ void compiled_vframe::get_exprStackInfo_outgoing_args(
   
   if (   !currentProcess->isUncommon()
   &&     calleeOrNull
-  &&     calleeOrNull->desc == 0) {
+  &&     calleeOrNull->desc == NULL) {
   
     get_outgoing_arg_info_from_dummy_callee( isReceiverExplicit, 
                                              calleeOrNull,
                                              vfs, nds, i, len, sel );
   } 
-  else if ( calleeOrNull == 0
-       ||   calleeOrNull->desc == 0
+  else if ( calleeOrNull == NULL
+       ||   calleeOrNull->desc == NULL
        ||   calleeOrNull->desc->is_lite()
        ||   (isSendOp(op)  &&  sel->is_string() 
-                          &&  stringOop(sel)->is_prim_name())) {
+                           &&  stringOop(sel)->is_prim_name())) {
                           
     get_outgoing_arg_info_no_sendee( vfs, nds, i, len, e2 );
   } 
@@ -713,7 +713,7 @@ void compiled_vframe::get_outgoing_arg_info_no_sendee(
                         smi                len,
                         IntListElem*       e2 ) {
   // prim call / conversion / ucommon / recursive lookup error -- no sendee
-  // [NB: calleeOrNull == 0 isn't sufficient because some prims call
+  // [NB: calleeOrNull == NULL isn't sufficient because some prims call
   // Self]
   // can't read the args out of O registers because (1) C code might reuse
   // these regs, and (2) they're not scavenged, and (3) they might not
@@ -813,9 +813,9 @@ bool abstract_vframe::is_prologue() {
 
 abstract_vframe* abstract_vframe::get_sender(bool skipC) {
   frame* f = skipC ? fr->selfSender() : fr->sender();
-  if ( f == 0  ||  !f->is_self_frame() )
-    return 0;
-  return  new_vframe(f, is_compiled() ? as_compiled()->reg_loc()->climb_to_frame(f) : 0);
+  if ( f == NULL  ||  !f->is_self_frame() )
+    return NULL;
+  return  new_vframe(f, is_compiled() ? as_compiled()->reg_loc()->climb_to_frame(f) : NULL);
 }
 
 // factor out common case
@@ -825,22 +825,22 @@ abstract_vframe* abstract_vframe::parent() {
   assert(b->is_block(), "should be a block");
   frame* bs = b->scope(true);
   return
-    bs == 0
-      ?  0
+    bs == NULL
+      ?  NULL
       :  new_vframe( bs->home_frame_of_block_scope(),
                      b->desc(),
-                     0); // do NOT pass in rl of this vframe; may not be same stack
+                     NULL); // do NOT pass in rl of this vframe; may not be same stack
 }
 
 
 abstract_vframe* interpreted_vframe::parent() {
   if (interp()->mi.map()->kind() != BlockMethodType)
-    return 0;
+    return NULL;
   return interp()->parentVF();
 }
 
     
-// returns 0 if not found
+// returns NULL if not found
 
 abstract_vframe* abstract_vframe::sendee(abstract_vframe* last) {
   if (!last) {
@@ -865,12 +865,12 @@ abstract_vframe* abstract_vframe::sendee(abstract_vframe* last) {
     last = new_vframe(f);
   }
   // find right frame first
-  frame* next = 0;
+  frame* next = NULL;
   frame* lastFr;
   for ( lastFr = last->fr;
        lastFr && lastFr != fr && (next = lastFr->selfSender()) != fr;
        lastFr = next) ;
-  if (lastFr == 0) return 0; // rcvr must be in copied frame (conversion)
+  if (lastFr == NULL) return NULL; // rcvr must be in copied frame (conversion)
   if (lastFr != last->fr) last = new_vframe(lastFr);
   // now find right vframe
   abstract_vframe* vf = last;
@@ -878,7 +878,7 @@ abstract_vframe* abstract_vframe::sendee(abstract_vframe* last) {
   for ( vfs = vf->sender();
        vfs && !vfs->EQ(this);
        vf = vfs, vfs = vfs->sender()) ;
-  return vfs == 0 ? 0 : vf;
+  return vfs == NULL ? NULL : vf;
 }
 
 
@@ -913,7 +913,7 @@ void interpreted_vframe::createBlocks(abstract_vframe* calleeOrNull,
     oop b = interp()->mi.literals[i];
     if (!b->is_block()) continue;
     oop* p = &interp()->cloned_blocks[i];
-    if (*p == 0) {
+    if (*p == NULL) {
       frame* home = fr->block_scope_of_home_frame();
       *p = blockOop(b)->clone_block(smiOop(home));
     }
@@ -998,7 +998,7 @@ void abstract_vframe::print_contents() {
     if (WizardMode) {
       first = false;
       lprintf("| []* = ");
-      if (parent() == 0 ) {
+      if (parent() == NULL ) {
         lprintf("<dead>. ");
       } else {
         if (ConversionInProgress) {
@@ -1103,7 +1103,7 @@ void abstract_vframe::enumerate_references(enumeration* e) {
     CHECK;
     obj = selector();
     CHECK;
-    if (delegatee() != 0) {
+    if (delegatee() != NULL) {
       obj = delegatee();
       CHECK;
     }
@@ -1159,14 +1159,14 @@ abstract_vframe* new_vframe(frame* f, RegisterLocator* r) {
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
   assert(f->is_compiled_self_frame(), "f must be a self frame");
-  if ( r == 0 )
+  if ( r == NULL )
     r = RegisterLocator::for_frame(f);
   return  new compiled_vframe(f, r);
 
 # else
 
   ShouldNotReachHere();
-  return (abstract_vframe*) 0;
+  return (abstract_vframe*)NULL;
 
 # endif
 }
@@ -1180,16 +1180,16 @@ abstract_vframe* new_vframe(frame* f, smiOop offset, RegisterLocator* r) {
 
     assert(f->is_compiled_self_frame(), 
            "must not call with in-between C frame");
-    if ( r == 0 )
+    if ( r == NULL )
       r = RegisterLocator::for_frame(f);
-    RegisterLocator* rr = r == 0  ?  RegisterLocator::for_frame(f)  :  r->climb_to_frame(f);
+    RegisterLocator* rr = r == NULL  ?  RegisterLocator::for_frame(f)  :  r->climb_to_frame(f);
     return (new compiled_vframe(f, offset, rr)) -> as_abstract();
 
 # else
 
     ShouldNotReachHere();
     Unused(offset);
-    return 0;
+    return NULL;
 
 # endif
 }
@@ -1202,7 +1202,7 @@ oop  interpreted_vframe::delegatee()    { return interp()->delegatee; }
 oop  interpreted_vframe::method()       { return interp()->method_object; }
 oop  interpreted_vframe::methodHolder_or_map() {
   abstract_vframe* p = parent();
-  return p == 0 ? interp()->methodHolder() : p->home()->methodHolder_or_map(); }
+  return p == NULL ? interp()->methodHolder() : p->home()->methodHolder_or_map(); }
 
 oop interpreted_vframe::self()     { return interp()->self; }
 oop interpreted_vframe::receiver() { return interp()->receiver; }

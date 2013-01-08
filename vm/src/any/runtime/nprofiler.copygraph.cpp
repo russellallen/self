@@ -17,7 +17,7 @@
 
 class MapTableEntry : public CHeapObj {
  public:
-  MapTableEntry(mapOop m, oop o) { map = m; obj = o; next = 0; }
+  MapTableEntry(mapOop m, oop o) { map = m; obj = o; next = NULL; }
   ~MapTableEntry()               { if (next) delete next; }
   mapOop map;
   oop    obj;
@@ -43,7 +43,7 @@ class MapTable : public ResourceObj {
   // deallocates all MapTableEntries
   void deallocate();
 
-  bool insertIfAbsent(mapOop map, oop obj = 0);
+  bool insertIfAbsent(mapOop map, oop obj = NULL);
 
   void update(mapOop map, oop obj);
   
@@ -59,12 +59,12 @@ const fint MapTable::size = 3001;
 MapTable::MapTable() {
   num = 0;
   table= new MapTableEntry *[size];
-  for (fint i = 0; i < size; i++ ) table[i] = 0;
+  for (fint i = 0; i < size; i++ ) table[i] = NULL;
 }
 
 void MapTable::deallocate() {
   for (fint i = 0; i < size ; i++ ) {
-    if (table[i]) { delete table[i]; table[i]= 0; }
+    if (table[i]) { delete table[i]; table[i]= NULL; }
   }
 }
 
@@ -82,7 +82,7 @@ bool MapTable::insertIfAbsent(mapOop map, oop obj) {
 void MapTable::update(mapOop map, oop obj) {
   for (MapTableEntry* link = table[hash(map)]; link; link = link->next) {
     if (link->map->equal(map)) {
-      assert(link->obj == 0, "Invalid update");
+      assert(link->obj == NULL, "Invalid update");
       link->obj = obj;
       return;
     }
@@ -101,7 +101,7 @@ oop MapTable::find(mapOop map) {
   for (MapTableEntry* link = table[hash(map)]; link; link = link->next) {
     if (link->map->equal(map)) return link->obj;
   }
-  return 0;
+  return NULL;
 }
 
 class method_node_info;
@@ -369,8 +369,8 @@ graph_creator::graph_creator(call_graph_edge* e, MapTable* gm,
   oop_path  = new OopBList(200, true);
 
   out_of_memory = false;
-  _root = 0;
-  parent = next_parent = 0;
+  _root = NULL;
+  parent = next_parent = NULL;
   index = 0;
 }
 
@@ -402,14 +402,14 @@ void graph_creator::do_edge(call_graph_edge* e) {
     assert(parent->is_objVector(), "should be an objVector");
     // fill in an element in the parent vector
     objVectorOop p = objVectorOop(parent);
-    assert( p->obj_at(index * 2    ) == 0, "already there\n");
-    assert( p->obj_at(index * 2 + 1) == 0, "already there\n");
+    assert( p->obj_at(index * 2    ) == NULL, "already there\n");
+    assert( p->obj_at(index * 2 + 1) == NULL, "already there\n");
     p->obj_at_put(index * 2,     as_smiOop(e->bci));
     p->obj_at_put(index * 2 + 1, node_oop);
     index++;
   } 
   else {
-    assert(_root == 0, "_root already set");
+    assert(_root == NULL, "_root already set");
     _root = node_oop;
   }
   
@@ -454,7 +454,7 @@ oop graph_creator::clone_block_pt(block_node* n) {
 
   // find outer most lexical node
   oop o = n->outer_method();
-  oop lex_oop = 0;
+  oop lex_oop = NULL;
   for (int i= node_path->length() - 1; i >= 0 && !lex_oop ; i--) {
     if (node_path->nth(i)->callee->is_method_node()) {
       method_node* mn = (method_node*) node_path->nth(i)->callee;
@@ -463,8 +463,9 @@ oop graph_creator::clone_block_pt(block_node* n) {
   }
 
   if (!SpendTimeForDebugging) 
-    assert(lex_oop, "lexical node should be on stack");
-  else if (!lex_oop)  { 
+    assert(TARGET_ARCH == PPC_ARCH  ||  lex_oop,
+           "lexical node should be on stack (but PPC may miss frame next to bottom)");
+  else if (TARGET_ARCH != PPC_ARCH  &&  !lex_oop)  { 
     lprintf("\n\nlexical node should be on stack\n"); 
     lprintf("\n\nselector:\n");
     n->selector()->print();
@@ -521,7 +522,7 @@ oop graph_creator::clone_fold_edge_pt(fold_edge* e) {
   if (oop_node == failedAllocationOop) return failedAllocationOop;
 
   // find the fold node
-  oop fold_oop = 0;
+  oop fold_oop = NULL;
   for (int i = node_path->length() - 1; i >= 0 && !fold_oop ; i--) {
     if(node_path->nth(i)->callee == e->callee) fold_oop = oop_path->nth(i);
   }
@@ -567,8 +568,8 @@ map_collector::map_collector(call_graph_edge* e, MapTable* gm)
  
 void map_collector::add_map(oop mo) {
   static bool warned = false;
-  if (CheckAssertions  &&  !warned  &&  mo == 0) {
-    warning("collector::add_map: 0 mo (should never happen)\n");
+  if (CheckAssertions  &&  !warned  &&  mo == NULL) {
+    warning("collector::add_map: NULL mo (should never happen)\n");
     warned = true;
     return;
   }
@@ -657,7 +658,7 @@ oop Profiler::copy_call_graph(oop method_pt, oop block_pt, oop access_pt,
     // accumulated timing and allocation information
     
     if (!this->root->edges)
-      warning("Profiler::copy_call_graph: root edges are 0, profiled program probably was too brief");
+      warning("Profiler::copy_call_graph: root edges are NULL, profiled program probably was too brief");
     
     oop node = leaf_pt->clone(CANFAIL);
     if (node == failedAllocationOop) return failedAllocationOop;

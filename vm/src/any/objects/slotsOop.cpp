@@ -75,7 +75,7 @@ oop slotsOopClass::copy_add_slot_prim(stringOop      name,
 
   if (result == failedAllocationOop) {
     out_of_memory_failure(FH, size()+1);
-    return 0;
+    return NULL;
   }
   return result;
 }
@@ -101,7 +101,7 @@ oop slotsOopClass::remove_slot_prim(stringOop name, void *FH) {
   oop result= copy_remove_slot_prim(name, FH);
   if (result == failedAllocationOop) {
     out_of_memory_failure(FH, size());
-    return 0;
+    return NULL;
   }
   if (result->is_mark()) return result;
   return define_prim(result, FH);
@@ -126,7 +126,7 @@ oop slotsOopClass::remove_all_slots_prim(void *FH) {
     oop result2= result->copy_remove_slot_fixing_up_method(slot->name, CANFAIL);
     if (result2 == failedAllocationOop) {
       out_of_memory_failure(FH, size());
-      return 0;
+      return NULL;
     }
     if (result2->is_mark()) return result2;
     assert_slots(result2, "result of removing slot must be slotsOop");
@@ -141,7 +141,7 @@ oop slotsOopClass::copy_remove_slot_prim(stringOop name, void *FH) {
   oop result= copy_remove_slot_fixing_up_method(name, CANFAIL);
   if (result == failedAllocationOop) {
     out_of_memory_failure(FH, size());
-    return 0;
+    return NULL;
   }
   return result;
 }

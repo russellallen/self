@@ -287,7 +287,7 @@
       
       verifiedOffset = a.offset();
       if (SICCountTypeTests) a.endTypeTest();
-      Label generalMiss(a.printing, 0);
+      Label generalMiss(a.printing, NULL);
       a.Comment("verified entry point:");
       
       if (L->isPerform()) {
@@ -325,7 +325,7 @@
       a.SaveI(SP, -1, SP);     // correct frame size is patched in later
       frameCreationOffset = a.offset();
     } else {
-      prologueAddr = 0;
+      prologueAddr = NULL;
     }
 
     if (GenerateCountCode) {
@@ -356,9 +356,9 @@
       if (nargs > NumIArgRegisters) nargs = NumIArgRegisters;
       a.Comment("flush incoming args to stack");
       for (fint i = 0; i < nargs; i++) {
-        flushToStack(IArgLocation(i), 0);
+        flushToStack(IArgLocation(i), NULL);
       }
-      flushToStack(IReceiverReg, 0);       // flush receiver to stack
+      flushToStack(IReceiverReg, NULL);       // flush receiver to stack
 
       switch (kind) {
        case BlockMethodType:
@@ -472,7 +472,7 @@
           ok = a.BneForward(false);             // branch if parent is a float
           if (l->target->links) a.Nop();
         } else {
-          Label* miss = 0;
+          Label* miss = NULL;
           if (!FastMapTest) {
             a.AndCCI(Temp1, Mem_Tag, G0);       // test for mem tag
             Label* mem = a.BneForward(true);    // branch if parent is mem oop
@@ -559,11 +559,11 @@
     s->genMask();    // used register mask
     
     if ( !p->needsNLRCode()) {
-      return 0;
+      return NULL;
     }
     else if (continueNLR) {
       continueNonLocalReturn();
-      return 0;
+      return NULL;
     } 
     else {
       Label* l = a.BraForward(true);
@@ -591,7 +591,7 @@
     Label* success = a.BneForward(true);
     move(successLoc, CResultReg, true);         // move to right place
     // clone failure block if necessary
-    if (failBlock == 0) {
+    if (failBlock == NULL) {
       // block already exists
       a.SubI(CResultReg, Mark_Tag - Mem_Tag, Arg1);// mask mark bit
     } else {
@@ -616,7 +616,7 @@
     }
     loadOop(Arg2, selector);
     Label* l = selfCall(s, NormalLookupType, failReceiver, self, 
-                        failSelector, 0, 2);
+                        failSelector, NULL, 2);
     move(successLoc, ResultReg);
     success->define();
     return l;
@@ -839,7 +839,7 @@
     // continue:
     //   <epilogue>
 
-    Label* cont, *doNLR = 0;
+    Label* cont, *doNLR = NULL;
     if (homeID) {       // note: will be 0 if no inlining
       if (homeID < maxImmediate) {
         a.SubCCI(NLRHomeIDReg, homeID, G0);
@@ -959,7 +959,7 @@
     
     Label* nlr;
     if ( !allowPreemption) { 
-      nlr = 0;
+      nlr = NULL;
     } 
     else {
       Label* dst1;
@@ -994,7 +994,7 @@
     if ( !allowPreemption ) {
       a.Beq(dst, false);
       a.Nop(); // delay slot
-      return 0; // no nlr
+      return NULL; // no nlr
     }
     Label* end = a.BneForward(false);
     a.Nop();
@@ -1027,7 +1027,7 @@
     //    ...
     // end:
     
-    Label* nlr= 0;
+    Label* nlr= NULL;
     if (allowPreemption) {
       // Ideally would only do this in the arms that actually do
       // branch back.
@@ -1173,7 +1173,7 @@
     PrimDesc* pd = blockClone();
     assert(! pd->needsNLRCode(), "rewrite this - must backpatch NLR code");
     Label* l = cPrimCall(pd, s, false, true, 2 /* 1 arg + rcvr */);
-    assert(l == 0, "shouldn't need a label");
+    assert(l == NULL, "shouldn't need a label");
     move(dest, ResultReg);
   }
   

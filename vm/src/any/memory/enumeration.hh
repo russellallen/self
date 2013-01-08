@@ -23,7 +23,7 @@ class enumeration_list: public ResourceObj {
   void add_more(oop obj, enumeration_list*& head, fint& totalCount);
   
  public:
-  enumeration_list(enumeration* e) {count = 0; next = 0; my_enumeration = e; }
+  enumeration_list(enumeration* e) {count = 0; next = NULL; my_enumeration = e; }
   
   void add(oop obj, enumeration_list*& head, fint& totalCount) {
     if (obj->is_objectMarked()) {
@@ -35,6 +35,7 @@ class enumeration_list: public ResourceObj {
   }
   void oops_do(oopsDoFn f);
 };
+
 
 class enumeration: public ResourceObj {
   
@@ -135,6 +136,7 @@ class referencesEnumeration: public enumeration {
   static oop enumerate_vector_references(objVectorOop vector, oop limit);
 
 };
+
 
 class implementorsEnumeration: public enumeration {  
   smi poss_assignments_index;

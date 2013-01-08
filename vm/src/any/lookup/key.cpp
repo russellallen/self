@@ -7,11 +7,11 @@
 # include "_key.cpp.incl"
 
 
-char* selector_string(oop selector) {
+const char* selector_string(oop selector) {
   if (selector->is_string()) {
     return stringOop(selector)->copy_null_terminated();
   } else {
-    return (char*) "<not a string>";
+    return "<not a string>";
   }
 }
 
@@ -24,7 +24,7 @@ void ScopeLookupKey::set_from(ScopeLookupKey &k) {
 
 
 void ScopeLookupKey::print() {
-  if (delegatee != 0) {
+  if (delegatee != NULL) {
     if (delegatee->is_string()) {
       stringOop(delegatee)->string_print();
     } else {

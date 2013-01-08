@@ -215,7 +215,7 @@ class Object: public Constant {
 
 
 inline fint Expr::position_in_method(Object* parent) {
-  return parent != 0
+  return parent != NULL
     ? source_start - parent->source_body_start
     : 0;
 }

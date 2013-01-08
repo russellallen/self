@@ -6,7 +6,7 @@
 # pragma implementation "recompile.hh"
 # include "_recompile.cpp.incl"
 
-nmethod* recompilee = 0;
+nmethod* recompilee = NULL;
 
 fint nstages;
 fint* compilers;        
@@ -56,8 +56,9 @@ void recompile_init() {
 }
 
 
-# if (TARGET_ARCH == I386_ARCH)
-  oop DIRecompile_stub(...) { fatal("no DI recompilation"); return 0; }
+# if ( TARGET_ARCH ==  PPC_ARCH  \
+||     TARGET_ARCH == I386_ARCH )
+  oop DIRecompile_stub(...) { fatal("no DI recompilation"); return NULL; }
 # endif
 
 
@@ -97,7 +98,7 @@ fint recompileLevel() {
 
 
 fint currentCompiler() {
-  if (recompilee == 0) return compilers[0];
+  if (recompilee == NULL) return compilers[0];
 
   fint lev = recompilee->level() + 1;
   assert(lev >= 0 && lev <= MaxRecompilationLevels, "invalid level");
@@ -194,7 +195,7 @@ class Recompilation: public AbstractRecompilation {
   nmethod* newNM;               // recompiled nmethod
   nmethod* prevNM;              // optimized nmethod of previous recompilation
                                 // (top-down recompiles)
-  char *restartAddr;            // where to resume execution (possibly 0)
+  char *restartAddr;            // where to resume execution (possibly NULL)
   frame* firstReplaced;         // first (most recent) frame (partly) replaced
                                 // by newNM
   frame* lastReplaced;          // last (oldest) frame replaced (at least
@@ -212,18 +213,16 @@ class Recompilation: public AbstractRecompilation {
   char* newPC;                  // continuation PC after on-stack repl.
 
 # if TARGET_ARCH == SPARC_ARCH
-  // This is now historic >>
-    // I'm in the process of porting the SIC to PPC.  I haven't got around
-    // to porting this file yet.  For now, I just enclose Sparc-specific
-    // code with "# if TARGET_ARCH == SPARCH_ARCH".
-    // Once the SIC port is completed, platform-dependent versions of this file
-    // will be created. -mabdelmalek 10/02
-  // <<
+  // I'm in the process of porting the SIC to PPC.  I haven't got around
+  // to porting this file yet.  For now, I just enclose Sparc-specific
+  // code with "# if TARGET_ARCH == SPARCH_ARCH".
+  // Once the SIC port is completed, platform-dependent versions of this file
+  // will be created. -mabdelmalek 10/02
   sparc_sp* newFramePiece;      // part of frame with newNM = newNM block home
 # endif
 
   Recompilation(frame* f, sendDesc* s, oop r, frame* lf, nmethod* rc,
-                frame* tf, bool rec = false, nmethod* prev = 0);
+                frame* tf, bool rec = false, nmethod* prev = NULL);
     
   void doit(char* pc);
   void init(char* pc);
@@ -254,7 +253,7 @@ class Recompilation: public AbstractRecompilation {
   void discardNMethods();
   void fixStack();
   void printNewFrames(frame* newFr);
-  void noRecompilee()     { recompilee= 0; }
+  void noRecompilee()     { recompilee= NULL; }
   bool recompiling_trip() { return rdepth == -1; }
   void finalize() {
     assert(theRecompilation == this, "forgot to call finalize on prev.");
@@ -321,15 +320,15 @@ nvframe* nvframe::sender() {
     return r->stack.nth(depth + 1);
   } else {
     compiled_vframe* vf = compiled_vframe::sender()->as_compiled();
-    return vf ? new nvframe(vf, r, depth+1) : 0;
+    return vf ? new nvframe(vf, r, depth+1) : NULL;
   }
 }
 
 
 abstract_vframe* nvframe::parent() {
   compiled_vframe* vf = compiled_vframe::parent()->as_compiled();
-  if (vf == 0) return 0;
-  if (!currentProcess->stack()->contains((char*)vf->fr)) return 0;
+  if (vf == NULL) return NULL;
+  if (!currentProcess->stack()->contains((char*)vf->fr)) return NULL;
   nvframe* p;
   for (p = sender(); !p->EQ(vf); p = p->sender()) ;
   return p;
@@ -348,7 +347,7 @@ nvframe* nvframe::callee() {
   if (depth > 0) {
     return r->stack.nth(depth - 1);
   } else {
-    return 0;
+    return NULL;
   }
 }
 
@@ -370,7 +369,7 @@ RecompileFrame::RecompileFrame(frame* f) {
   fr= f;
   nm= f->code();
   sd= f->send_desc();
-  monomorphic= sd == 0  ||  sd->pic() == 0;
+  monomorphic= sd == NULL  ||  sd->pic() == NULL;
   orig_invocations= invocations= nm->invocationCount();
   orig_sends= sends= nm->nsends();
   cumulSends= 0;
@@ -388,7 +387,7 @@ RecompileFrame::RecompileFrame(frame* f) {
   }
 
   f= f->selfSender();
-  if (f == 0)
+  if (f == NULL)
     return;
 
   // try to get better invocation count from count stub
@@ -402,7 +401,7 @@ RecompileFrame::RecompileFrame(frame* f) {
   }
 
   CacheStub* pic= s->pic();
-  if (pic == 0)
+  if (pic == NULL)
     return;
 
   for (fint i= pic->arity() - 1; i >= 0; i--) {
@@ -491,11 +490,11 @@ Recompilation::Recompilation(frame* f, sendDesc* s, oop r, frame* lf,
   recompilee = rc; tripFrame = tf; recursive = rec; prevNM = prev;
   rdepth = -1; // -1 indicates recompilee==tripNM, and tripNM was in prologue
                // or in stub
-  thing = 0;
-  tripNM = newNM = 0;
-  newSP = newPC = 0;
-  copiedFrame = 0;
-  firstReplaced = lastReplaced = 0;
+  thing = NULL;
+  tripNM = newNM = NULL;
+  newSP = newPC = NULL;
+  copiedFrame = NULL;
+  firstReplaced = lastReplaced = NULL;
   nreplaced = nremaining = -1; 
   prevRecompilation = theRecompilation;
   theRecompilation = this;
@@ -542,7 +541,7 @@ bool Recompilation::findRecompileeHome(nvframe* vf) {
        top && !shouldRecompile(top->code, top->fr->sender());
        top = top->parent()->as_n()) 
     ;
-  if (top == 0) {
+  if (top == NULL) {
     // enclosing scopes are all optimized
     return false;
   }
@@ -609,11 +608,11 @@ nvframe* Recompilation::nvframeFromBlock(blockOop block, nvframe* thisFrame) {
   frame* bs = block->scope(true);
   // NB: block may be dead (receiver is block, but it may not be executing
   // the block method) or from a different process
-  if (bs == 0 || !currentProcess->contains(bs))
-    return 0;
+  if (bs == NULL || !currentProcess->contains(bs))
+    return NULL;
   nvframe* f = new nvframe(bs->home_frame_of_block_scope(), this);
   if (f  &&  f->depth - thisFrame->depth > MaxRecompilationDepth)
-    return 0;
+    return NULL;
   else
     return f;
 }
@@ -622,13 +621,13 @@ nvframe* Recompilation::nvframeFromBlock(blockOop block, nvframe* thisFrame) {
 void Recompilation::checkForBlockArgs() {
   // check if the recompilee has any block arguments; and go up to the
   // block's home frame if it seems worth it
-  if (callerFrame == 0 || !callerFrame->is_self_frame())
+  if (callerFrame == NULL || !callerFrame->is_self_frame())
     return;
-  nvframe* blockFrame = 0;
+  nvframe* blockFrame = NULL;
   nvframe* caller = new nvframe(callerFrame, this);
   if (receiver->is_block())
     blockFrame = nvframeFromBlock((blockOop)receiver, caller);
-  if (blockFrame == 0) {
+  if (blockFrame == NULL) {
     // look at the args.  NB: get info from caller, because callee may not
     // exist (is in prologue)
     oop* exprStack;
@@ -636,7 +635,7 @@ void Recompilation::checkForBlockArgs() {
     caller->get_expr_stack(exprStack, len, true);
     methodMap* mm = caller->desc->method_map();
     stringOop selector = mm->get_selector_at(caller->bci());
-    char* sel = selector_string(selector);
+    const char* sel = selector_string(selector);
     fint nargs = str_arg_count(sel);
     for (fint n = 0; n < nargs; n++) {
       // search for a "promising" block arg
@@ -699,8 +698,8 @@ void Recompilation::compute_better_counts(RecompileFrameBList frames) {
   fint i;
   const fint maxfr= frames.length() - 1;
   for (i= maxfr; i >= 0;  ) {
-    RecompileFrame* caller= i < maxfr ? frames.nth(i + 1) : 0;
-    RecompileFrame* callee= i > 0     ? frames.nth(i - 1) : 0;
+    RecompileFrame* caller= i < maxfr ? frames.nth(i + 1) : NULL;
+    RecompileFrame* callee= i > 0     ? frames.nth(i - 1) : NULL;
     if (frames.nth(i)->adjust(caller, callee) && i < maxfr) {
       i++;
     } 
@@ -760,8 +759,8 @@ void Recompilation::find_break_frame(RecompileFrameBList frames) {
 
 void Recompilation::findTopRecompilee() {
   // find recompilee in top-down fashion (if SICRecompileTopDown); also
-  // set recompilee if follow-up recompilation (prevNM != 0)
-  if (!SICRecompileTopDown && prevNM == 0) return;  // nothing to do
+  // set recompilee if follow-up recompilation (prevNM != NULL)
+  if (!SICRecompileTopDown && prevNM == NULL) return;  // nothing to do
 
   RecompileFrameBList frames(MaxStackToLookAt);
   fint i = 0;
@@ -775,7 +774,7 @@ void Recompilation::findTopRecompilee() {
     if (rf->nm == prevNM) break; // should this check rdepth? not sure -- miw
   }
   
-  if (prevNM == 0 && SICRecompileTopDown) {
+  if (prevNM == NULL && SICRecompileTopDown) {
     // first recompilation of this series
 
     compute_better_counts(frames);
@@ -815,7 +814,7 @@ inline void verifyAfterRecompile(char* cont, char* pc) {
             "saved_globals for splimit reg corrupted");
   # endif
   if (VerifyAfterRecompilation) {
-    bool safe = cont != 0;
+    bool safe = cont != NULL;
     if (! safe) {
       sendDesc* sd = sendDesc::sendDesc_from_return_PC(pc);
       if (   isCall((int32*)sd->call_instruction_addr()) 
@@ -854,8 +853,8 @@ class RecompBuf {
 
 static char* continueRecompile2(RecompBuf* buf, frame* last) {
   char *pc, *sp, *cont;
-  nmethod* prevNM = 0;
-  frame* lastReplaced = 0; // last (oldest) frame affected by recompile
+  nmethod* prevNM = NULL;
+  frame* lastReplaced = NULL; // last (oldest) frame affected by recompile
   FlushRegisterWindows();       // make sure last & above is flushed to stack
   assert(!currentProcess->restartAfterConversion, "shouldn't be set");
 
@@ -875,7 +874,7 @@ static char* continueRecompile2(RecompBuf* buf, frame* last) {
   fint i;
   for (i = 0; true; i++) {
     ResourceMark rm;
-    Recompilation recomp(buf->callerFrame, buf->sd, buf->receiver, last, 0,
+    Recompilation recomp(buf->callerFrame, buf->sd, buf->receiver, last, NULL,
                          last, false, prevNM);
     { BlockProfilerTicks bpt(exclude_recompile);
       FlagSetting f1(RecompilationInProgress, true);
@@ -894,7 +893,7 @@ static char* continueRecompile2(RecompBuf* buf, frame* last) {
       if (i == 0) {
         pc = cont;      // first comp., no on-stack replacement
       } else {
-        cont = 0;    // previous recomp set newPC...don't set them again
+        cont = NULL;    // previous recomp set newPC...don't set them again
       }
       break;
     }
@@ -923,14 +922,14 @@ static char* continueRecompile2(RecompBuf* buf, frame* last) {
     prevNM= recomp.newNM;
   }
 
-  // at this point, (cont != 0) == there was no on-stack replacement
+  // at this point, (cont != NULL) == there was no on-stack replacement
   processes->convert();
   verifyAfterRecompile(cont, pc);
   
   nmethod* continueNM = nmethod::findNMethod(pc);
   if (ScavengeAfterRecompilation) Memory->need_scavenge();
   assert(currentProcess->verifyFramePatches(), "patching bug");
-  OutgoingArgsOfReturnTrapOrRecompileFrame = 0;
+  OutgoingArgsOfReturnTrapOrRecompileFrame = NULL;
   
   if (continueNM->isInvalid()) {
     // the current nmethod belongs to a block that was invalidated because its
@@ -948,7 +947,7 @@ static char* continueRecompile2(RecompBuf* buf, frame* last) {
     // (we'll fall into [PrimCall]ReturnTrap)
     currentProcess->restartAfterConversion = true;
     LOG_EVENT("Continue into [PrimCall]ReturnTrap");
-    return 0;        
+    return NULL;        
   } 
   else if (cont) {
     assert(i == 0, "shouldn't be here");
@@ -959,7 +958,8 @@ static char* continueRecompile2(RecompBuf* buf, frame* last) {
     LOG_EVENT2("ContinueAfterRecompilation pc=%#lx sp=%#lx", pc, sp);
 #   if TARGET_ARCH == SPARC_ARCH
       ContinueAfterReturnTrap(pc, sp);
-#   elif TARGET_ARCH == I386_ARCH
+#   elif TARGET_ARCH ==  PPC_ARCH  \
+     ||  TARGET_ARCH == I386_ARCH
       fatal("xxx unimp mac, unimp intel: where is result?");
       // ContinueAfterReturnTrap(result, pc, sp);
 #   else
@@ -967,7 +967,7 @@ static char* continueRecompile2(RecompBuf* buf, frame* last) {
 #   endif
   }
   ShouldNotReachHere();
-  return 0;
+  return NULL;
 }
 
 
@@ -1016,7 +1016,7 @@ nmethod* also_Recompile( sendDesc* send_desc,
     // may not have been optimized, e.g. because of DI; force optimization
     FrameChainer fc(Memory->code);
     reCompilee->flush();
-    nm = 0;
+    nm = NULL;
   }
   return nm;
 }
@@ -1062,7 +1062,7 @@ void Recompilation::init(char* pc) {
       vf = vf->sender();
       if (vf) vf = vf->top()->as_n();
     }
-    // vf==0 => recompilee must be callee of last_self_frame
+    // vf==NULL => recompilee must be callee of last_self_frame
     rdepth= vf ? vf->depth : -1; 
   } else {
     if (!allowedToRecompile()) {
@@ -1076,7 +1076,7 @@ void Recompilation::init(char* pc) {
       }
     }
     findTopRecompilee();
-    if (recompilee == 0) {
+    if (recompilee == NULL) {
       if (showStack || PrintRecompilation2) doShowStack();
       findRecompilee(tripNM);
       assert(!recompilee || !mustNotRecompile(recompilee, callerFrame),
@@ -1099,10 +1099,10 @@ void Recompilation::init(char* pc) {
 void Recompilation::doit(char* pc) {
   init(pc);
 
-  EventMarker em( "recompiling %#lx: %#lx --> %#lx", tripNM, 0, 0);
+  EventMarker em( "recompiling %#lx: %#lx --> %#lx", tripNM, NULL, NULL);
 
   if (Interpret) return; // XXXX no recompile for interp for now -- dmu
-  if (recompilee == 0) {
+  if (recompilee == NULL) {
     if (PrintRecompilation) lprintf(": no recompilee\n");
     if (calledFromStub) {
       ((CountStub*)thing)->set_count(0);
@@ -1113,9 +1113,9 @@ void Recompilation::doit(char* pc) {
   FrameChainer fc(Memory->code);
   newNM = recompile();
   em.event.args[1] = recompilee; em.event.args[2] = newNM; 
-  ::recompilee = 0;
-  recompileeVScopes = 0;
-  if (recompilee == 0) return; // couldn't recompile (e.g. DI)
+  ::recompilee = NULL;
+  recompileeVScopes = NULL;
+  if (recompilee == NULL) return; // couldn't recompile (e.g. DI)
   
   checkEffectiveness(recompilee, newNM);
   recompilee->unlink_saved_frame_chain();
@@ -1137,9 +1137,9 @@ void Recompilation::doit(char* pc) {
   }
   
   const char* msg = replaceOnStack();
-  if (msg == 0) {
+  if (msg == NULL) {
     // replaced on stack
-    restartAddr= 0;
+    restartAddr= NULL;
     return; 
   }
   if (PrintRecompilation && SICReplaceOnStack) {
@@ -1158,7 +1158,7 @@ void Recompilation::doit(char* pc) {
 
 
 nmethod* Recompilation::recompile() {
-  nmethod* new_nm = 0;
+  nmethod* new_nm = NULL;
   if (   recompiling_trip()
       && receiver->map() != recompilee->key.receiverMap()
       && calledFromStub
@@ -1224,7 +1224,7 @@ nmethod* Recompilation::recompile() {
                               new_vframe(callerFrame),
                                       // windows already flushed
                               s,
-                              0,   // DIDesc
+                              NULL,   // DIDesc
                               false); // don't want debug version
 
     new_nm = s->lookup_compile_and_backpatch(L);
@@ -1294,11 +1294,11 @@ void Recompilation::checkEffectiveness(nmethod* oldNM, nmethod* new_nm) {
 
 
 void Recompilation::getVScopes() {
-  assert(recompileeVScopes == 0, "shouldn't be set");
+  assert(recompileeVScopes == NULL, "shouldn't be set");
   if (!SICReplaceOnStack) return;
   VScopeBList* vscopes = new VScopeBList(50);
   abstract_vframe* stop = new_vframe(callerFrame);
-  VScope* prev = 0;
+  VScope* prev = NULL;
   for (abstract_vframe* vf = new_vframe(currentProcess->last_self_frame(true));
        !vf->EQ(stop);
        vf = vf->sender()) {
@@ -1306,16 +1306,16 @@ void Recompilation::getVScopes() {
   }
   if (vscopes->isEmpty()) {
     // stopped in prologue - replacing on stack is trivial
-    vscopes = 0;
+    vscopes = NULL;
   }
   recompileeVScopes = vscopes;
-  markers = vscopes ? new MarkerNodeBList(vscopes->length()) : 0;
+  markers = vscopes ? new MarkerNodeBList(vscopes->length()) : NULL;
 }
 
 
 const char* Recompilation::replaceOnStack() {
   // try to replace unoptimized nmethods on stack with new nmethod
-  // return 0 if successful, error string if not
+  // return NULL if successful, error string if not
   if (!SICReplaceOnStack) return "!SICReplaceOnStack";
   if (currentProcess->isUncommon()) {
     // frame::adjust_blocks will fail (no sendDesc, no reg. mask)
@@ -1326,7 +1326,7 @@ const char* Recompilation::replaceOnStack() {
       && new_vframe(callerFrame)->is_prologue()) {
     return "not necessary (at beginning of nmethod)";
   }
-  if (recompilee == 0) return "no recompilee";
+  if (recompilee == NULL) return "no recompilee";
   if (!isReplacementSimple) return "not simple";
 
   if (!activeMarker || !activeMarker->active)
@@ -1345,13 +1345,13 @@ const char* Recompilation::replaceOnStack() {
 
   if (rdepth > MaxStackToLookAt) return "rdepth too big";
 
-  sendDesc* s = 0;
+  sendDesc* s = NULL;
   nremaining = rdepth - activeMarker->depth();
   if (nremaining > 0) {
     // didn't inline everything; make sure we can find sendDesc
     // XXXX interp?
     s = activeMarker->send_desc(newNM);
-    if (s == 0) return "can't find sendDesc";
+    if (s == NULL) return "can't find sendDesc";
   }
 
   // now check for C frames between tripFrame and recompilee's frame
@@ -1423,7 +1423,7 @@ const char* Recompilation::replaceOnStack() {
   handleRemappedBlocks();
   if (PrintSICReplacement) printNewFrames(lastFrame);
   discardNMethods();
-  return 0;
+  return NULL;
 }
 
 
@@ -1432,8 +1432,9 @@ void Recompilation::replaceFrames(fint nframes, fint diff) {
 
   frame* frameToCopy = tripFrame->make_full_frame_on_user_stack();
 
-  if (frameToCopy != tripFrame)
+  if (frameToCopy != tripFrame) {
     assert(recursive || SICMultipleRecompilation, "shouldn't normally happen");
+  }
   
   copiedFrame = frameToCopy->copy(nframes, true);
   if (!copiedFrame) fatal("couldn't copy frame");
@@ -1504,7 +1505,7 @@ void Recompilation::replaceFrames(fint nframes, fint diff) {
 
   LOG_EVENT1("setting newPC from active marker: %#lx", newPC);
 
-  // 0 out frame (needed for stack temps)
+  // NULL out frame (needed for stack temps)
   //  Why? XXX -- dmu
   set_oops(newFramePiece->as_oops(),  newNM->frameSize(),  0);
   
@@ -1629,11 +1630,11 @@ bool Recompilation::checkForRemappedBlocks() {
 
       //  nvframe* home;      
       //  for ( home = vf;
-      //        home != 0;
+      //        home != NULL;
       //        home = home->parent()->as_n()) 
       //     if (last <= home->depth  &&  home->depth <= rdepth)
       //       break;           
-      //  if (home == 0) 
+      //  if (home == NULL) 
       //    continue;
 
       // but this only works if method is block method, and
@@ -1641,8 +1642,8 @@ bool Recompilation::checkForRemappedBlocks() {
       //  with a recompiled enclosing scope -- dmu
 
       bool parentWillBeRecompiled = false;
-      for ( abstract_vframe*  parentVF = blockOop(rcvr)->parentVFrame(0, true);
-                              parentVF != 0;
+      for ( abstract_vframe*  parentVF = blockOop(rcvr)->parentVFrame(NULL, true);
+                              parentVF != NULL;
                               parentVF = parentVF->parent() ) {
         if ( startF <= parentVF->fr  &&  parentVF->fr <= endF ) {
           parentWillBeRecompiled = true;
@@ -1688,7 +1689,7 @@ bool Recompilation::checkForActivationMirrors() {
   vframeOop vfo = currentProcess->findInsertionPoint(stack.nth(0))->next();
   LOG_EVENT1("checkForActivationMirrors %#lx", vfo);
 
-  if (vfo == 0) return false;
+  if (vfo == NULL) return false;
 
   frame* start = stack.nth(0)->fr;
   frame* end   = stack.nth(max(0, rdepth))->fr;
@@ -1792,6 +1793,7 @@ void Recompilation::handleRemappedBlocks() {
   oop rcvr;
   fint i;
   for ( i = n - 1; i >= 0; i--) {
+    // NB: for PPC this will have to be modified to avoid quadratic RegisterLocator allocation
     abstract_vframe* vf = (new_vframe(frames[i]))->top();
     rcvr = vf->receiver();
 # if TARGET_ARCH == SPARC_ARCH
@@ -1818,7 +1820,7 @@ void Recompilation::handleRemappedBlocks() {
   // yup, this guy must be recompiled because the block map has changed
   assert(nm->frame_chain != NoFrameChain, "should be on stack");
   bool wasReplaced = false;
-  Recompilation* recomp = 0;
+  Recompilation* recomp = NULL;
   
   // Originally, the next bit was skipped if SICMultipleRecompilation
   //  was set, with the explanation:
@@ -2033,12 +2035,12 @@ oop set_recompilation_prim(oop r, objVectorOop comps,
 
 # else
 
-# define recompilee 0 // use define to avoid defining nmethod
+# define recompilee NULL // use define to avoid defining nmethod
 
 nmethod* also_Recompile( sendDesc*         /* send_desc */,
                          compilingLookup*  /* L */,
                          nmethod*          /* reCompilee */) {
-  return 0;
+  return NULL;
 }
 
 

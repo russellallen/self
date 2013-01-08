@@ -29,7 +29,7 @@ class mapOopClass: public oopsOopClass /* WARNING if you change oopsOopClass, fi
   Map*         map_addr() { return (Map*)&addr()->_my_map; }
   
   // copying operations
-  mapOop copy(fint size, bool mustAllocate= true, oop genObj= 0) {
+  mapOop copy(fint size, bool mustAllocate= true, oop genObj= NULL) {
     return mapOop(oopsOopClass::copy(size, mustAllocate, genObj)); }
   
   mapOop grow(fint size, fint delta, bool mustAllocate= true) {

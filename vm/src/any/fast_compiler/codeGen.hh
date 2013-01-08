@@ -37,12 +37,12 @@ class CodeGen: public ResourceObj {
   bool haveStackFrame;
   
   CodeGen(compilingLookup* l, sendDesc* sd, nmln* d);
-  ~CodeGen() { theCodeGen = 0; }
+  ~CodeGen() { theCodeGen = NULL; }
 
   void prologue(bool isAccessMethod, fint nargs);
   Label* postPrologue(RegisterState* s, bool frequentPreemption);
   void   testStackOverflow(RegisterState* s);
-  void testStackOverflowForLoop( Label*& dst, Label*& nlr, RegisterState* s); // allocs labels and sets dst and nlr (nlr may be set to 0)
+  void testStackOverflowForLoop( Label*& dst, Label*& nlr, RegisterState* s); // allocs labels and sets dst and nlr (nlr may be set to NULL)
   void epilogue(Location what = IllegalLocation);
   void fixupFrame(RegisterState* s);
     // to fix up the instruction creating the stack frame

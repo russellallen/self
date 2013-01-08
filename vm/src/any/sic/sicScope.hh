@@ -61,7 +61,7 @@
     bool restartPrim;           // restart primitive if uncommon?
 
     void init() {
-      resReg = 0; needRealSend = false; countType = NonCounting;
+      resReg = NULL; needRealSend = false; countType = NonCounting;
       nsends = -1; primFailure = predicted = uninlinable = false;
     }
 
@@ -69,7 +69,7 @@
               bool isSelfIm, bool isUR, 
               stringOop s, stringOop d) {
       rcvr = r; l = lt; isSelfImplicit = isSelfIm; isUndirectedResend = isUR; 
-      sel = s; del = d; key = 0;
+      sel = s; del = d; key = NULL;
       init();
     }
     SendInfo(MethodLookupKey* k);
@@ -90,7 +90,7 @@
     virtual bool isVFrameMethodScope()  { return false; }   
     virtual bool isVFrameBlockScope()   { return false; }
 
-    virtual SExpr* receiverExpr()       { ShouldNotCallThis(); return 0;}
+    virtual SExpr* receiverExpr()       { ShouldNotCallThis(); return NULL;}
     virtual mapOop receiverMapOop()             = 0;
     Map*   receiverMap() { return receiverMapOop()->map_addr(); }
     virtual oop      selfMapOop()               = 0;
@@ -100,8 +100,8 @@
     virtual void     set_methodHolder_or_map(oop mh)    = 0;
     virtual SScope*  parent()                   = 0;    // lexical parent
     virtual SCodeScope* sender()                = 0;    // caller
-    bool isTop()                        { return sender() == 0; }
-    bool isInlined()                    { return sender() != 0; }
+    bool isTop()                        { return sender() == NULL; }
+    bool isInlined()                    { return sender() != NULL; }
     
     virtual smi      scopeID()                  = 0;
     virtual smi      homeID()                   = 0;
@@ -137,8 +137,8 @@
     fint   depth;               // call nesting level (top = 0)
     fint   loopDepth;           // loop nesting level (top = 0)
     SExpr* receiver;
-    SExpr* result;              // result of normal return (0 if none)
-    SExpr* nlrResult;           // NLR result (non-0 only for blocks)
+    SExpr* result;              // result of normal return (NULL if none)
+    SExpr* nlrResult;           // NLR result (non-NULL only for blocks)
     PReg *resultPR;
 
     SSelfScope(SCodeScope* sender, RScope* rs, SendInfo* info);
@@ -266,14 +266,14 @@
     oop delegatee()             { return _key->delegatee; }
     smi scopeID()               { return _scopeID; }
     smi homeID()                { return _scopeID; }
-    compiled_vframe* vf()       { ShouldNotCallThis(); return 0; }
+    compiled_vframe* vf()       { ShouldNotCallThis(); return NULL; }
     fint bci()                  { return _bci; }
     bool isLite()               { return nsends == 0; }
     RegisterString mask(fint bci) {
       if (bci == PrologueBCI) return allocs[0];
       assert(0 <= bci && bci < ncodes, "bci invalid");
       assert(nsends == 0  ||  allocs[bci]  ||  TARGET_ARCH == I386_ARCH, "should be nonempty");
-      assert(allocs, "cannot be 0");
+      assert(allocs, "cannot be NULL");
       return allocs[bci];
     }
     void computeMasks(RegisterString base, fint stackLocs, fint nonRegisterArgs);
@@ -397,7 +397,7 @@
     SExpr* genRealSend(SendInfo* info);
     SExpr* genPrim(SendInfo* info);
     SExpr* genLocalSend(bool isRead, fint lexicalLevel, fint index);
-    SExpr* genLocalSend(stringOop sel, slotDesc* sd = 0,  SScope* s = 0);
+    SExpr* genLocalSend(stringOop sel, slotDesc* sd = NULL,  SScope* s = NULL);
     SExpr* blockLiteral(blockOop literal);
 
     bool testMemoization(u_char* bytes, u_char* end, oop* literals);
@@ -433,7 +433,7 @@
     
     bool isMethodScope()        { return true; }
     
-    SScope* parent()            { return 0; }
+    SScope* parent()            { return NULL; }
     oop  methodHolder_or_map()  { return _methodHolder_or_map; }
     void set_methodHolder_or_map(oop mh_or_map) { _methodHolder_or_map = mh_or_map; }
     SScope* lookup(stringOop sel, slotDesc*& sd);
@@ -513,18 +513,18 @@
     oop methodHolder_or_map()  { return receiverMapOop(); }
     void set_methodHolder_or_map(oop mh) { // can't set method holder
       Unused(mh); ShouldNotCallThis(); }
-    SScope* parent()    { return 0; }
+    SScope* parent()    { return NULL; }
     smi scopeID()       { ShouldNotCallThis(); return 0; }
     smi homeID()        { ShouldNotCallThis(); return 0; }
-    compiled_vframe* vf()  { ShouldNotCallThis(); return 0; }
+    compiled_vframe* vf()  { ShouldNotCallThis(); return NULL; }
     bool isRecursiveCall(oop method, oop rcvrMap, fint n) {
       Unused(method); Unused(rcvrMap); Unused(n);  return false; }
     SScope* lookup(stringOop sel, slotDesc*& sd) {
-      Unused(sel); Unused(sd);  ShouldNotCallThis(); return 0; }
+      Unused(sel); Unused(sd);  ShouldNotCallThis(); return NULL; }
     SExpr* genLocal(SScope* target, SCodeScope* sender,
                     slotDesc* sd, fint argc, PReg* t) {
       Unused(target); Unused(sender); Unused(sd); Unused(argc); Unused(t);
-      ShouldNotCallThis(); return 0; }
+      ShouldNotCallThis(); return NULL; }
     void allocateReg(PReg* r, bool okToOverlap = false);
     bool isRegAvailable(PReg* r, Location reg, RegisterString incoming);
     Location findReg(PReg* r, fint firstRegisterIndexToUse, RegisterString incoming);
@@ -580,7 +580,7 @@
     oop methodHolder_or_map();
     void set_methodHolder_or_map(oop mh)        { // cannot set method holder
       Unused(mh); ShouldNotCallThis(); }
-    SCodeScope* sender()                { return 0; }
+    SCodeScope* sender()                { return NULL; }
     
     SExpr* genLocal(SScope* target, SCodeScope* sender, slotDesc* sd,
                     fint argc, PReg* t);
@@ -598,7 +598,7 @@
     oop selfMapOop()    { return _vf->self()->map()->enclosing_mapOop(); }
     smi scopeID()       { return _vf->desc->scopeID(); }
     smi homeID()        { return _vf->desc->scopeID(); }
-    SScope* parent()    { return 0; }
+    SScope* parent()    { return NULL; }
     SScope* lookup(stringOop sel, slotDesc*& sd);
     
     void print_short();
@@ -673,17 +673,17 @@
     PRegBList* currentExprStack(fint n) { return _sender->currentExprStack(n);}
     
     SScope* lookup(stringOop sel, slotDesc*& sd) {
-      Unused(sel); Unused(sd); ShouldNotCallThis(); return 0; }
+      Unused(sel); Unused(sd); ShouldNotCallThis(); return NULL; }
     SExpr* genLocal(SScope* target, SCodeScope* sender, slotDesc* sd,
                     fint argc, PReg* t) {
       Unused(target); Unused(sender); Unused(sd); Unused(argc); Unused(t);
-      ShouldNotCallThis(); return 0; }
+      ShouldNotCallThis(); return NULL; }
     void loadParentScope(PReg* t) { Unused(t);  ShouldNotCallThis(); }
     
     void genCode();
    protected:
     virtual void initialize();
-    virtual void loadArgs(PRegBList* blocks = 0);
+    virtual void loadArgs(PRegBList* blocks = NULL);
     virtual SExpr* genCall();
     SExpr* tryConstantFold();
     SExpr* tryTypeCheck();
@@ -730,7 +730,7 @@
     void print_short();
    protected:
     SExpr* genCall();
-    void loadArgs(PRegBList* blocks = 0);
+    void loadArgs(PRegBList* blocks = NULL);
   };
 
   class SRestartPrimScope: public SPrimScope {

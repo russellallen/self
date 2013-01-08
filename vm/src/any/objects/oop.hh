@@ -115,7 +115,7 @@ class oopClass {
   oop fix_up_method( oop old_optimized_method, 
                      bool isOKToBashLiteralVector= false,
                      bool mustAllocate= true,
-                     IntBList* stack_deltas = 0);
+                     IntBList* stack_deltas = NULL);
 
   oop evaluate_in_context_prim(oop meth);
 
@@ -141,7 +141,7 @@ class oopClass {
 
   inline oop clone_into_same_gen(oop obj, bool mustAllocate= true);
   inline oop clone(bool mustAllocate= true);
-  inline oop cloneSize(fint length, bool mustAllocate= true, oop filler= 0);
+  inline oop cloneSize(fint length, bool mustAllocate= true, oop filler= NULL);
 
   inline bool verify_oop(bool expectErrorObj = false);
   inline bool verify_oop_mark_ok();

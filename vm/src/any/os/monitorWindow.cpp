@@ -10,8 +10,8 @@
 # include "_monitorWindow.cpp.incl"
 
 MonitorWindow::MonitorWindow() {
-  _m = 0;
-  pw = 0;
+  _m = NULL;
+  pw = NULL;
 }
 
 
@@ -19,18 +19,18 @@ bool MonitorWindow::open_and_resize(Monitor* m) {
   _m = m;
   
   pw = 0;
-  # ifdef QUARTZ_LIB
+# ifdef QUARTZ_LIB
   if (!SpyDisplay[0]) {
     pw = (AbstractPlatformWindow*) new QuartzWindow;
   }
-  # endif
+# endif
   
-  # ifdef XLIB
+# ifdef XLIB
   if (!pw) {
     pw = (AbstractPlatformWindow*) new XPlatformWindow;
   }
-  # endif
-
+# endif
+  
   if (!pw) {
     warning("no window system for spy");
     return false;
@@ -39,14 +39,14 @@ bool MonitorWindow::open_and_resize(Monitor* m) {
   // open the window, and resize for the spy
   // set size hints to don't care cause we will resize window below
   if (!  pw->open( compute_display_name(),
-                 100, 100, 500, 500, 
+                  100, 100, 500, 500,
                   -1,  -1,  -1,  -1,
-                 compute_window_name(),
-                 "Spy",
-                 SpyFont[0] ? SpyFont : pw->default_fixed_font_name(),
-                 pw->default_fixed_font_size()))
+                  compute_window_name(),
+                  "Spy",
+                  SpyFont[0] ? SpyFont : pw->default_fixed_font_name(),
+                  pw->default_fixed_font_size()))
     return false;
-    
+  
   // Spy uses fixed-width font and sizes window accordingly.
   // On some platforms, cannot get font till window is open.
   // So, now that window is opened, can ask spy for height, and
@@ -55,6 +55,7 @@ bool MonitorWindow::open_and_resize(Monitor* m) {
   if (!pw->change_size_hints( -1,  initial_width(), initial_height(), initial_height()))       { close();  return false; }
   return true;
 }
+
 
 
 

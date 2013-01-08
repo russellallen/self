@@ -110,7 +110,7 @@ class zone: public CHeapObj {
   }
 
 
-  // zone creation must put stubs right after iZone
+  // zone creation (for PPC) must put stubs right after iZone
   pc_t code_start() { return Memory->code->      iZone->startAddr(); }
   pc_t code_end()   { return Memory->code->stubs->zone()->endAddr(); }
 
@@ -148,7 +148,7 @@ class zone: public CHeapObj {
   int32    instsSize();
   int32    LRU_time();
   int32    sweeper(int32 maxVisit, int32 maxReclaim,
-                   int32* nvisited = 0, int32* nbytesReclaimed = 0);
+                   int32* nvisited = NULL, int32* nbytesReclaimed = NULL);
   int32    nextNMethodID();
   
   char *allocateDeps(fint nbytes);
@@ -252,7 +252,7 @@ class zone: public CHeapObj {
   void nonCombiningMode() {}
   
   char *allocateDeps(fint nbytes) {  // no zone; no deps
-    Unused(nbytes); ShouldNotCallThis(); return 0; }
+    Unused(nbytes); ShouldNotCallThis(); return NULL; }
   void deallocateDeps(char *d, fint nbytes) {
     Unused(d); Unused(nbytes); ShouldNotCallThis(); }
   void setDepsMap(nmln *deps, slotsMapDeps *m) {

@@ -18,7 +18,7 @@ class Slot: public ParseNode {
   const char* annotation;
   Token* startToken;
   
-  Slot(String* n, Token* t, const char* anno) { 
+  Slot(String* n, Token* t, const char* anno) {
     name = n; annotation = anno; startToken = t; }
   
   virtual oop slot_contents(fint& index) = 0;
@@ -59,7 +59,7 @@ class SlotList: public List {
 
 class ArgSlot: public Slot {
  public:
-  ArgSlot(String* n, Token* t, const char* anno = "") 
+  ArgSlot(String* n, Token* t, const char* anno = "")
     : Slot(n, t, anno) {}      
   
   oop slot_contents(fint& index) { return as_smiOop(index ++); }

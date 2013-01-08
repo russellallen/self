@@ -20,7 +20,7 @@ void universe::swapSurvivors() {
   new_gen->from_space->name= "from";
   new_gen->from_space->next_space= new_gen->to_space;
   new_gen->  to_space->name= "to";
-  new_gen->  to_space->next_space= 0;
+  new_gen->  to_space->next_space= NULL;
 }
 
 smi set_memory_tenuring_threshold_prim(oop rcvrIgnored, smi newThresh, void *FH)
@@ -28,7 +28,7 @@ smi set_memory_tenuring_threshold_prim(oop rcvrIgnored, smi newThresh, void *FH)
   Unused(rcvrIgnored);
   if (newThresh < 0 || newThresh > Memory->current_sizes.surv_size) {
     failure(FH, "Threshold out of range");
-    return 0;
+    return NULL;
   }
   smi oldThresh= Memory->Desired_Surv_Size;
   Memory->Desired_Surv_Size= newThresh;
@@ -250,7 +250,7 @@ oop universe::garbage_collect(oop p) {
   APPLY_TO_OLD_SPACES(OLD_SPACE_COMPACT_TEMPLATE);
   copySpace= (oldSpace*)c2;
   copySpace= copySpace->next_space;
-  while (copySpace != 0) {
+  while (copySpace != NULL) {
     copySpace->clear();
     copySpace= copySpace->next_space;
   }
@@ -291,13 +291,14 @@ oop universe::garbage_collect(oop p) {
     OS::normal_access((char*)s->oopsStart(), (char*)s->oopsEnd()); 
 # endif
     // Linux???
-    if (!plentyOfMemory)
+    if (!plentyOfMemory) {
       if (discardPgs)
         // +1 for sentinel
         OS::discard_pages((char*)(s->oopsEnd() + 1), s->bytesStart());
       else
         // +1 for sentinel
         OS::dont_need_pages((char*)(s->oopsEnd() + 1), s->bytesStart());
+    }
   }}
 
   APPLY_TO_ZONES(ZONE_NORMAL_ACCESS_TEMPLATE);
@@ -305,7 +306,7 @@ oop universe::garbage_collect(oop p) {
   // object_table contains a separate resource area which is freed by 
   // delete.
   delete object_table;
-  object_table = 0;
+  object_table = NULL;
   
   old_gen->update_caches(false);
 
@@ -354,7 +355,7 @@ space* universe::spaceFor(void* p) {
   {FOR_EACH_OLD_SPACE(s) if (s->contains(p)) return s;}
 
   ShouldNotReachHere(); // not in any space
-  return 0;
+  return NULL;
 }
 
 
@@ -367,7 +368,7 @@ static slotStatus get_space_usage(slotsOop proto, const char *slotName, space *s
 {
   bool inObj;
   oop *p= proto->get_slot_data_address_if_present(slotName, inObj); 
-  if (p == 0) return noSlotStatus;
+  if (p == NULL) return noSlotStatus;
   if (!inObj) return notAssignableStatus;
   oop vec= s->get_allocation_vector();
   if (vec == failedAllocationOop) return noMemStatus;
@@ -386,7 +387,7 @@ static slotStatus set_slot(slotsOop proto, const char *slotName, smi val)
 {
   bool inObj;
   oop *p= proto->get_slot_data_address_if_present(slotName, inObj); 
-  if (p == 0) return noSlotStatus;
+  if (p == NULL) return noSlotStatus;
   if (!inObj) return notAssignableStatus;
   Memory->store(p, as_smiOop(val));
   return okStatus;
@@ -444,11 +445,11 @@ oop universe::get_mem_current_state_prim(oop rcvrIgnored,
 
   out_of_mem: 
     out_of_memory_failure(FH);
-    return 0;
+    return NULL;
 
   unassignable: 
     prim_failure(FH, UNASSIGNABLESLOTERROR);
-    return 0;
+    return NULL;
 
 }
 
@@ -492,7 +493,7 @@ class GenericInterestingMap : public InterestingMap {
   matchFn pred;
 
   GenericInterestingMap(const char* nm, matchFn predicate) :
-    InterestingMap(0, nm) { pred = predicate; }
+    InterestingMap(NULL, nm) { pred = predicate; }
   bool matches(oop p, Map* m) { return pred(p, m); }
 };
 
@@ -524,7 +525,7 @@ void MemoryHistogram::init(fint maxS, fint imaps) {
   for (i = 0; i < maxSize; i++) sizeCounts[i] = 0;
   totalSize = nobjs = nmaps = mapSize = interesting = 0;
   iMaps = NEW_RESOURCE_ARRAY( InterestingMap*, imaps);
-  for ( i = 0; i < imaps; i++) iMaps[i] = 0;
+  for ( i = 0; i < imaps; i++) iMaps[i] = NULL;
 }
 
 void MemoryHistogram::addGenericMap(const char* name, matchFn predicate) {

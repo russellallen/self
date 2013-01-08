@@ -35,7 +35,7 @@
     lprintf("SplitSig %#lx: %s", this, prefix(buf));
   }
 
-  char* SplitSig::prefix(char* buf) {
+  const char* SplitSig::prefix(char* buf) {
     // fill buf with an ASCII representation of the receiver and return buf
     // e.g. a level-2 sig with first branch = 1 and 2nd branch = 3 --> "AB"
     fint l = level();
@@ -63,7 +63,7 @@
     fint cost = 0;
     fint costLimit = theSIC->inlineLimit[SplitCostLimit];
 
-    Node* n = 0;
+    Node* n = NULL;
     // compute the cost of all nodes that would be copied (i.e. all exprs
     // with a map type)
     fint i;
@@ -72,7 +72,7 @@
       if (!expr->hasMap()) continue;    // won't copy these
 
       // ConstantExprs, for example have no node, so have no cost
-      if ( expr->node() == 0 ) continue;
+      if ( expr->node() == NULL ) continue;
 
       SSelfScope* theScope = expr->node()->scope();
       fint theBCI = expr->node()->bci();
@@ -93,7 +93,7 @@
         // This for loop misses some merges becaues it only follows first successor of n.
         // That's why the assertion below is commented out. -- dmu 6/03
         for ( n = e->node(); 
-              cost <= costLimit  &&  n != 0  &&  n != current; 
+              cost <= costLimit  &&  n != NULL  &&  n != current; 
               n = n->next()) {
           cost += n->cost();
           if (!n->isSplittable()) {
@@ -110,7 +110,7 @@
 #         endif
         }
         // assert(n, "why didn't we find current?"); -- because only followed first succ above (dmu)
-        if ( n == 0  ||  cost > costLimit) goto done;
+        if ( n == NULL  ||  cost > costLimit) goto done;
       }
     }
     
@@ -184,7 +184,7 @@
     NodeBList*  splitHeads    = new  NodeBList(10);     // first node of each branch
 
     bool needMapLoad = false;
-    SExpr* resultOfInlinedSends = 0;
+    SExpr* resultOfInlinedSends = NULL;
     splitInlinablePaths( newMerge,
                          info,
                          oldRcvr,  
@@ -247,7 +247,7 @@
                                         bool&       needMapLoad,
                                         SExpr*&     resultOfInlinedSends ) {
     needMapLoad = false;
-    resultOfInlinedSends = 0;
+    resultOfInlinedSends = NULL;
     
     fint ncases = oldRcvr->exprs->length();
     for (fint i = 0; i < ncases; i++) {
@@ -289,13 +289,13 @@
     // is path inlinable?
     
     SExpr* nthOldRcvr = oldRcvr->exprs->nth(i);
-    assert(!nthOldRcvr->isConstantSExpr() || nthOldRcvr->next == 0 ||
+    assert(!nthOldRcvr->isConstantSExpr() || nthOldRcvr->next == NULL ||
            nthOldRcvr->constant() == nthOldRcvr->next->constant(),
              "shouldn't happen: merged consts - convert to map");
     if ( ! nthOldRcvr->hasMap() )
       return false;
     SSelfScope* nthScope = tryLookup(info, nthOldRcvr);
-    if ( nthScope == 0 )
+    if ( nthScope == NULL )
       return false;
     
     
@@ -336,10 +336,10 @@
 
     // copy everything between mapMerge and lastNodeToSplit
     theNodeGen->current = copyPath(mapMerge, oldRcvr->node(), lastNodeToSplit,
-                               0, 0, oldRcvr, nthNewRcvr);
+                               NULL, NULL, oldRcvr, nthNewRcvr);
       
     // now inline the send
-    SExpr* e = doInline(nthScope, nthNewRcvr, theNodeGen->current, 0);
+    SExpr* e = doInline(nthScope, nthNewRcvr, theNodeGen->current, NULL);
     if (!e->isNoResultSExpr()) {  
       theNodeGen->append(new NopNode);
       e = e->shallowCopy(info->resReg, theNodeGen->current);
@@ -440,7 +440,7 @@
         // generating the receiver value) and last node to split; this code
         // computes the args of the current send
         theNodeGen->current = copyPath(typeCase, oldNext, lastNodeToSplit,
-                                         0, 0, oldRcvr, unknownOldRcvr);
+                                         NULL, NULL, oldRcvr, unknownOldRcvr);
       } 
       else {
         assert(lastNodeToSplit == oldMerge, "oops");

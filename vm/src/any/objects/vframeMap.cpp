@@ -16,7 +16,7 @@
     if (!vfo->is_live()) return ErrorCodes::vmString_prim_error(NOACTIVATIONERROR);  \
     /* must check for dead vfos if current process */                         \
     if (vfo->process() == currentProcess)                                     \
-      currentProcess->killVFrameOopsAndSetWatermark(0);
+      currentProcess->killVFrameOopsAndSetWatermark(NULL);
 
 # define SLOTS_PRIM(name)                                                     \
     oop vframeMap::name(oop obj,  stringOop nam) {                            \
@@ -61,7 +61,7 @@ oop vframeMap::mirror_line(oop obj) {
 oop vframeMap::mirror_contents_at(oop obj, stringOop name) {
   TEST;
   slotDesc* sd = vfo->method()->find_nonVM_slot(name);
-  if (sd == 0) return ErrorCodes::vmString_prim_error(SLOTNAMEERROR);
+  if (sd == NULL) return ErrorCodes::vmString_prim_error(SLOTNAMEERROR);
   if (sd->is_obj_slot() && name->is_1arg_keyword())
     return Memory->assignmentMirrorObj;
   abstract_vframe* vf = vfo->as_vframe();
@@ -216,9 +216,9 @@ bool vframeMap::is_enumerable(oop obj,  oop* matching_cell) {
 
 void vframeMap::dummy_initialize(oop obj, oop filler) {
   assert( obj->is_vframe(), "a vframeOop is expected");
-  vframeOop(obj)->set_next(0);
+  vframeOop(obj)->set_next(NULL);
   vframeOop(obj)->set_method(filler);
-  vframeOop(obj)->set_locals(0);
-  vframeOop(obj)->set_process(0);
+  vframeOop(obj)->set_locals(NULL);
+  vframeOop(obj)->set_process(NULL);
   vframeOop(obj)->set_descOffset(0);
 }

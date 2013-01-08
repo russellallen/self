@@ -10,6 +10,7 @@
 
 // A vframeOop represents a live activation object.  It contains enough
 // information to construct the corresponding vframe.
+
 class vframeOopClass : public slotsOopClass {
  protected:
   vframeOop _next;              // next in list of live vframeOops
@@ -23,13 +24,13 @@ class vframeOopClass : public slotsOopClass {
   vframeOopClass* addr()  { return (vframeOopClass*)slotsOopClass::addr(); }
   void    kill_vframe();   // Don't call this fct. Call kill() instead.
   bool is_live_vframe() {  // Don't call this fct. Call is_live() instead.
-    return locals() != 0;
+    return locals() != NULL;
   }
 # ifdef UNUSED
   vframeOop clone(bool mustAllocate= true) {
     return vframeOop(map()->clone(this, mustAllocate)); }
 # endif
-  vframeOop basic_clone(bool mustAllocate= true, oop genObj= 0) {
+  vframeOop basic_clone(bool mustAllocate= true, oop genObj= NULL) {
     return vframeOop(((vframeMap*)map())->basic_clone(this,
                                                       mustAllocate, genObj)); }
 

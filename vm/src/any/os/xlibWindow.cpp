@@ -16,8 +16,8 @@
 
 
 XPlatformWindow::XPlatformWindow() : AbstractPlatformWindow() {
-  _display   = 0;
-  _font_info = 0;
+  _display   = NULL;
+  _font_info = NULL;
 }
 
 
@@ -72,9 +72,9 @@ bool XPlatformWindow::open( const char* display_name,
 
 
 bool XPlatformWindow::open_xdisplay(const char *n) {
-  if (n == 0) n = "";
+  if (n == NULL) n = "";
   _display = XOpenDisplay(n);
-  if (_display == 0) {
+  if (_display == NULL) {
     warning2("cannot open X display '%s' a.k.a. '%s'! window won't work.",
              n, XDisplayName(n));
     return false;
@@ -123,7 +123,7 @@ bool XPlatformWindow::tell_platform_size_hints() {
     
   // tell window manager that we'd like our own size and position
   XSizeHints* size_hints;
-  if ((size_hints = XAllocSizeHints()) == 0) {
+  if ((size_hints = XAllocSizeHints()) == NULL) {
     warning("X structure allocation for size hints failed--spy won't work.");
     close();
     return false;
@@ -141,7 +141,7 @@ bool XPlatformWindow::tell_platform_size_hints() {
 bool XPlatformWindow::set_font_info(const char* font_name) {  
   // must set _font_info here so that font_height() is defined for BOTTOM 
   _font_info = XLoadQueryFont(_display, font_name);
-  return _font_info != 0;
+  return _font_info != NULL;
 }
 
 
@@ -186,9 +186,9 @@ bool XPlatformWindow::setup_gcs() {
 
 
 void XPlatformWindow::close() { 
-  if (_font_info != 0) { XFreeFont(_display, _font_info); _font_info = 0; }
-  if (_gc        != 0) { XFreeGC(  _display, _gc);               _gc = 0; }
-  if (_display   != 0) { XCloseDisplay(_display);           _display = 0; }
+  if (_font_info != NULL) { XFreeFont(_display, _font_info); _font_info = NULL; }
+  if (_gc        != NULL) { XFreeGC(  _display, _gc);               _gc = NULL; }
+  if (_display   != NULL) { XCloseDisplay(_display);           _display = NULL; }
 }
 
 
@@ -234,11 +234,11 @@ bool XPlatformWindow::change_extent(int left, int top, int w, int h) {
   return true;
 }
 void XPlatformWindow::adjust_after_resize() { 
-  if (TheSpy != 0)
+  if (TheSpy != NULL)
     TheSpy->adjust_after_resize(); // in case this is the spy
 }
 void XPlatformWindow::full_redraw() {
-  if (TheSpy != 0)
+  if (TheSpy != NULL)
     TheSpy->full_redraw(); // in case this is the spy
 }
 

@@ -32,7 +32,7 @@
       = getPrimDescOfSelector(VMString[BLOCK_CLONE], true);
     InterruptCheckNode::intrCheck
       = getPrimDescOfSelector(VMString[INTERRUPT_CHECK], true);
-    BlockCloneNode::deadBlockPR = 0;
+    BlockCloneNode::deadBlockPR = NULL;
     Node::lastScopeInfo = (ScopeInfo)-1;  Node::lastBCI = IllegalBCI;
     initDeadBlockNode();
   }
@@ -44,10 +44,10 @@
   }
 
   BasicNode::BasicNode() {
-    _id = currentID++; _bb = 0;
+    _id = currentID++; _bb = NULL;
     setScope(theNodeGen->currentScope());       // no scope e.g. for accessors
-    _num = -1; _dest = _src = 0; srcUse = 0; destDef = 0;
-    hasSideEffects_now = deleted = false; l = 0;
+    _num = -1; _dest = _src = NULL; srcUse = NULL; destDef = NULL;
+    hasSideEffects_now = deleted = false; l = NULL;
   }
   
  fint BasicNode::spOffset(Location l) {
@@ -84,7 +84,7 @@
     exprStack->appendList(es);
     sig = signat;
     theRecompilation->markers->append(this);
-    active = invalid = false; locs = 0;
+    active = invalid = false; locs = NULL;
     // NODE_COST(MarkerNode)
   }
   
@@ -160,7 +160,7 @@
                              bool a1, bool a2) {
     op = o; _src = s; oper = o2, _dest = d;
     arg1IsInt = a1; arg2IsInt = a2;
-    hasSideEffects_now = true; constResult = 0;
+    hasSideEffects_now = true; constResult = NULL;
     // don't eliminate even if result unused because primitive might fail
     NODE_COST(TArithRRNode);    
   }
@@ -171,7 +171,7 @@
   }
 
   void BasicNode::setDest(BB* bb, PReg* d) {
-    // bb == 0 means don't update defs
+    // bb == NULL means don't update defs
     if (!hasDest()) fatal("has no dest");
     assert(bb || !destDef, "shouldn't have a def");
     if (destDef) _dest->removeDef(bb, destDef);
@@ -238,7 +238,7 @@
       assert(next1()->isMergeNode(), "should be a merge");
       return (MergeNode*)next1();
     } else {
-      return 0;
+      return NULL;
     }
   }
 
@@ -288,14 +288,14 @@
     pd = d; primFailBlock = failBlock;
     assert(!failBlock || failBlock->primFailBlockScope,
            "should have primFailBlockScope");
-    assert(pd->needsNLRCode() || n == 0, "no NLR target needed");
+    assert(pd->needsNLRCode() || n == NULL, "no NLR target needed");
     if (d->canScavenge()) {
       assert(e, "should have expr stack");
     } else {
       // the expression stack is only needed if the primitive can walk the
       // stack (then the elements will be debug-visible) or if the primitive
       // can scavenge (then the elems must be allocated to GCable regs)
-      exprStack = 0;        
+      exprStack = NULL;        
     }
     NODE_COST(PrimNode);
   }
@@ -367,38 +367,38 @@
   }
   Node* PrologueNode::clone(PReg* from, PReg* to) {
     Unused(from); Unused(to);
-    ShouldNotCallThis(); return 0; }
+    ShouldNotCallThis(); return NULL; }
   Node* NonLocalReturnNode::clone(PReg* from, PReg* to) {
     Unused(from); Unused(to);
-    ShouldNotCallThis(); return 0; }
+    ShouldNotCallThis(); return NULL; }
   Node* MethodReturnNode::clone(PReg* from, PReg* to) {
     Unused(from); Unused(to);
-    ShouldNotCallThis(); return 0; }
+    ShouldNotCallThis(); return NULL; }
   Node* BranchNode::clone(PReg* from, PReg* to) {
     Unused(from); Unused(to);
-    ShouldNotCallThis(); return 0; }
+    ShouldNotCallThis(); return NULL; }
   Node* TBranchNode::clone(PReg* from, PReg* to) {
     Unused(from); Unused(to);
-    ShouldNotCallThis(); return 0; }
+    ShouldNotCallThis(); return NULL; }
   Node* TypeTestNode::clone(PReg* from, PReg* to) {
     Unused(from); Unused(to);
-    ShouldNotCallThis(); return 0; }
+    ShouldNotCallThis(); return NULL; }
   Node* IndexedBranchNode::clone(PReg* from, PReg* to) {
     Unused(from); Unused(to);
-    ShouldNotCallThis(); return 0; }
+    ShouldNotCallThis(); return NULL; }
   Node* DeadBlockNode::clone(PReg* from, PReg* to) {
     Unused(from); Unused(to);
-    ShouldNotCallThis(); return 0; }
+    ShouldNotCallThis(); return NULL; }
   Node* DeadEndNode::clone(PReg* from, PReg* to) {
     Unused(from); Unused(to);
-    ShouldNotCallThis(); return 0; }
+    ShouldNotCallThis(); return NULL; }
   Node* RestartNode::clone(PReg* from, PReg* to) {
     Unused(from); Unused(to);
-    ShouldNotCallThis(); return 0; }
+    ShouldNotCallThis(); return NULL; }
   // flush nodes are created after splitting, so they can't ever be cloned
   Node* FlushNode::clone(PReg* from, PReg* to) {
     Unused(from); Unused(to);
-    ShouldNotCallThis(); return 0; }
+    ShouldNotCallThis(); return NULL; }
 
 # define TRANSLATE(s) ((s == from) ? to : s)
 
@@ -414,7 +414,7 @@
     return newNode;
   }
   Node* MergeNode::clone(PReg* from, PReg* to) {
-    Unused(from); Unused(to); return 0; }
+    Unused(from); Unused(to); return NULL; }
   Node* LoadOffsetNode::clone(PReg* from, PReg* to) {
     return new LoadOffsetNode(base, offset, TRANSLATE(_dest)); }
   Node* LoadIntNode::clone(PReg* from, PReg* to) {
@@ -514,13 +514,13 @@
   }
 
   Node* InlinedReturnNode::clone(PReg* from, PReg* to) {
-    Unused(from); Unused(to);  return 0; }
+    Unused(from); Unused(to);  return NULL; }
   Node* InlinedNonLocalReturnNode::clone(PReg* from, PReg* to) {
-    Unused(from); Unused(to);  return 0; }
+    Unused(from); Unused(to);  return NULL; }
   Node* NopNode::clone(PReg* from, PReg* to) { 
-    Unused(from); Unused(to);  return 0; }
+    Unused(from); Unused(to);  return NULL; }
   Node* CommentNode::clone(PReg* from, PReg* to) { 
-    Unused(from); Unused(to);  return 0; }
+    Unused(from); Unused(to);  return NULL; }
 
   // makeUses: construct all uses and defs
   
@@ -583,7 +583,7 @@
         succ->removeUpToMerge();
       }
       Node* nextn = n->next();
-      if (!n->deleted) n->eliminateNodeAndUsedPRs(thisBB, 0, true);
+      if (!n->deleted) n->eliminateNodeAndUsedPRs(thisBB, NULL, true);
       if (nextn) {
         BB* nextBB = nextn->bb();
         if (nextBB != thisBB) {
@@ -606,7 +606,7 @@
       }
       n = nextn;
     }
-    BB* nextBB = n ? n->bb() : 0;
+    BB* nextBB = n ? n->bb() : NULL;
     if (nextBB && nextBB != thisBB && nextBB->isPredecessor(thisBB)) {
       // cut the link between thisBB and nextBB
       thisBB->removeNext(nextBB);
@@ -619,7 +619,7 @@
     Node* np = nlrPoint();
     if (np) {
       _nxt->pop();              // remove nlrPoint
-      assert(nlrPoint() == 0, "should be 0 now");
+      assert(nlrPoint() == NULL, "should be NULL now");
       np->removePrev(this);     // and unlink the pred pointer
     }
     CallNode::eliminateNode(bb, r, rem, misc); 
@@ -640,14 +640,14 @@
                                    void* misc) {
     Unused(rem);
     if (deleted) return;
-    mapOop m = mapOop(0);
+    mapOop m = mapOop(NULL);
     assert( !m->is_map(),
-            "Since 0 is default value of misc, it had better not" 
+            "Since NULL is default value of misc, it had better not" 
             "look like a mapOop" );
-    assert( misc == 0  ||  mapOop(misc)->is_map(), "better be a mapOop");
-    mapOop theMap = misc == 0  ?  mapOop(badOop)  :  mapOop(misc);
+    assert( misc == NULL  ||  mapOop(misc)->is_map(), "better be a mapOop");
+    mapOop theMap = misc == NULL  ?  mapOop(badOop)  :  mapOop(misc);
     // completely eliminate receiver and all successors
-    eliminateAllBut(bb, r, (ConstPReg*)0, theMap);    
+    eliminateAllBut(bb, r, (ConstPReg*)NULL, theMap);    
     AbstractBranchNode::eliminateNode(bb, r, true, misc);
   }
   
@@ -672,21 +672,22 @@
        }
        if ( theMap == (mapOop)badOop && unknownDead) 
          fatal("about to remove all good cases");
-       Node* k = 0;
+       Node* k = NULL;
        for (fint i = 0;  i < _nxt->length(); i++) {
-	 if ( (c && c->constant == maps->nth(i))  ||  theMap == maps->nth(i)
-         || maps->nth(i)->map() == theMap->map_addr())
-           if (k) fatal(">1");
-           else k = _nxt->nth(i);
-       }
-       if ( unknownDead && !k) fatal("about to remove all good cases");
-    }
+         if ( (c && c->constant == maps->nth(i))  ||  theMap == maps->nth(i)
+             || maps->nth(i)->map() == theMap->map_addr()) {
+                 if (k) fatal(">1");
+                 else k = _nxt->nth(i);
+             }
+             if ( unknownDead && !k) fatal("about to remove all good cases");
+          }
+        }
 #   endif
     
     NodeBList* successors = _nxt;
     _nxt = new NodeBList(1);
     oop constant = c ? c->constant : 0;
-    Node* keep = 0;
+    Node* keep = NULL;
     if (PrintSICEliminateUnneededNodes) {
       lprintf("*eliminating tt node %#lx const %#lx map %#lx\n",
               this, constant, theMap);
@@ -702,7 +703,7 @@
       ||   theMap == m                 // have a map, found it
       ||   m->map() == theMap->map_addr()  // have an oop, looking for a map
          ) {
-        assert(keep == 0, "shouldn't have more than one match");
+        assert(keep == NULL, "shouldn't have more than one match");
         keep = succ;
       } else {
         succ->removeUpToMerge();
@@ -741,7 +742,7 @@
 
   void TypeTestNode::eliminateUnnecessary(mapOop m) {
     // eliminate unnecessary type test: receiver is known to have map m
-    eliminateNodeAndUsedPRs(bb(), 0, 0, (void*)m);
+    eliminateNodeAndUsedPRs(bb(), NULL, NULL, (void*)m);
   }
 
 
@@ -752,7 +753,7 @@
     Unused(rem);
     if (deleted) return;
     // if misc not null, source is known to be a constant, misc is the oop
-    oop constSrc = misc == 0  ?  badOop  :  ((ConstPReg*)misc)->constant;
+    oop constSrc = misc == NULL  ?  badOop  :  ((ConstPReg*)misc)->constant;
     // completely eliminate receiver and all successors
     eliminateAllBut(bb, r, constSrc);    
     AbstractBranchNode::eliminateNode(bb, r, true, misc);
@@ -768,7 +769,7 @@
     
     NodeBList* successors = _nxt;
     _nxt = new NodeBList(1);
-    Node* keep = 0;
+    Node* keep = NULL;
     if (PrintSICEliminateUnneededNodes) {
       lprintf("*eliminating indexed branch node %#lx oop %#lx\n",
               this, constSrc);
@@ -780,7 +781,7 @@
       Node* succ = successors->nth(i);
       succ->removePrev(this);
       if (constSrc == as_smiOop(i)) {
-        assert(keep == 0, "shouldn't have more than one match");
+        assert(keep == NULL, "shouldn't have more than one match");
         keep = succ;
       } else {
         succ->removeUpToMerge();
@@ -819,9 +820,9 @@
     assert(!deleted, "eliminateNodeAndUsedPRs should have caught this");
     // remove fail branch nodes first
     Node* fail = next1();
-    // next1 returns 0 if there is no next1
-    // 0 test inserted by dmu 4/26/96 to fix a bug
-    if (fail != 0) {
+    // next1 returns NULL if there is no next1
+    // NULL test inserted by dmu 4/26/96 to fix a bug
+    if (fail != NULL) {
       // eliminateNode assumes single succ, so remove fail first
       fail->removePrev(this); 
     }
@@ -895,7 +896,7 @@
                ?  nn->next()
                : (nn->bb()->next()
                     ?  nn->bb()->next()->first
-                    :  0);
+                    :  NULL);
     } while ( nn  &&  nn != succ &&  nn->deleted); 
     if ( nn == succ ) {
       //  make the remaining one the fall-thru case
@@ -1051,7 +1052,7 @@
         assert(dest()->isNoPReg(), "shouldn't use result");
         Node* branch = next();
         if (branch->isBranchNode()) {
-          eliminateNodeAndUsedPRs(_bb, 0, true);    // delete comparison
+          eliminateNodeAndUsedPRs(_bb, NULL, true);    // delete comparison
           ((BranchNode*)branch)->eliminateBranch(c1, c2, res);
         }
       } else {
@@ -1151,7 +1152,7 @@
       if (d->isConstPReg()) {
         // we know the receiver - the type test is unnecessary!
         ConstPReg* c = (ConstPReg*)d;
-        eliminateNodeAndUsedPRs(bb, 0, false, c->constant->map()->enclosing_mapOop());
+        eliminateNodeAndUsedPRs(bb, NULL, false, c->constant->map()->enclosing_mapOop());
         return true;
       } else {
         CP_HELPER(_src, srcUse);
@@ -1167,7 +1168,7 @@
       if (d->isConstPReg()) {
         // we know the receiver - the branch is unnecessary!
         ConstPReg* c = (ConstPReg*)d;
-        eliminateNodeAndUsedPRs(bb, 0, false, c);
+        eliminateNodeAndUsedPRs(bb, NULL, false, c);
         return true;
       } else {
         CP_HELPER(_src, srcUse);
@@ -1395,7 +1396,7 @@
      case 2:    return elem;
      default:   fatal("bad index");
     }
-    return 0;
+    return NULL;
   }
 
   void ByteArrayAtPutNode::simplify(PReg* r, oop m) {
@@ -1597,8 +1598,8 @@
  
   char* TBranchNode::print_string(char* buf, bool printAddr) {
     char* b = buf;
-    Node* n1 = nSuccessors() > 1 ? nexti(1) : 0;
-    Node* n2 = nSuccessors() > 2 ? nexti(2) : 0;
+    Node* n1 = nSuccessors() > 1 ? nexti(1) : NULL;
+    Node* n2 = nSuccessors() > 2 ? nexti(2) : NULL;
     mysprintf(buf, "T%s %s %s  N%ld N%ld fail N%ld",
               BranchOpName[op], _src->name(), arg->name(),
               (void*)(n1 ? n1->id() : -1),
@@ -1769,11 +1770,11 @@
       error1("BB doesn't contain PNode %#lx", this);
     if (next() && ! next()->isPredecessor(this))
       error1("next->prev != this for PNode %#lx", this);
-    if (_bb == 0) error1("PNode %#lx: doesn't belong to any BB", this);
-    if (next() == 0 && !isExitNode() && !isRestartNode() &&
+    if (_bb == NULL) error1("PNode %#lx: doesn't belong to any BB", this);
+    if (next() == NULL && !isExitNode() && !isRestartNode() &&
         !isCommentNode())   // for the "rest of method omitted (dead)" comment
       error1("Node %#lx has no successor", this);
-    if (next() != 0 && isExitNode()) {
+    if (next() != NULL && isExitNode()) {
       Node *n;
       for (n = next();
            n && (n->isCommentNode() || n->isDeadEndNode());
@@ -1959,7 +1960,7 @@
 
   void MarkerNode::check() {
     // check if current node could be a restart point; if not, mark it invalid
-    if (deleted || _bb == 0) {
+    if (deleted || _bb == NULL) {
       invalid = true;
       return;
     }
@@ -2163,10 +2164,10 @@
                                 bool describeUnallocated) {
     // set nd (if possible) and return whether PReg is live and allocated
     fint dummy1, dummy2;
-    if (r == 0 || (r->loc == UnAllocated && !describeUnallocated)) {
+    if (r == NULL || (r->loc == UnAllocated && !describeUnallocated)) {
       // not used
       return false;
-    } else if (r->scope == 0) {
+    } else if (r->scope == NULL) {
       assert(isGloballyAllocatedRegister(r->loc), "should be a hardwired reg");
       return false;
     } else if (r->scope != scopes[r->scope->depth]) {
@@ -2197,7 +2198,7 @@
         // couldn't figure out
       }
       
-      if (nd == 0 && r->cpRegs) {
+      if (nd == NULL && r->cpRegs) {
         // try to get info from equivalent regs
         for (fint i = r->cpRegs->length() - 1; i >= 0; i--) {
           if (describePReg(r->cpRegs->nth(i), scopes, nd, describeUnallocated))
@@ -2266,7 +2267,7 @@
         if (nd) nd->print(); else lprintf(" - not found");
         lprintf("\n"); 
       }
-      if (nd == 0) {
+      if (nd == NULL) {
         if (r->weight < 0) {
           // was targeted to a register - will probably find its
           // equivalent PReg later
@@ -2351,7 +2352,7 @@
           lprintf("*can't find Marker's sendDesc because of this node:\n");
           n->print();
         }
-        return 0;
+        return NULL;
       }
     }
     sendDesc* sd = sendDesc::sendDesc_from_call_instruction(
@@ -2368,7 +2369,7 @@
 
   
   void PrologueNode::checkReceiverMap() {
-    assert(theSIC->diLink == 0 && !L->isReceiverStatic(), "shouldn't be here");
+    assert(theSIC->diLink == NULL && !L->isReceiverStatic(), "shouldn't be here");
 
     // test receiver map
 #   if GENERATE_DEBUGGING_AIDS
@@ -2410,7 +2411,7 @@
     if (SICCountTypeTests) theAssembler->endTypeTest();
     theAssembler->Comment("verified entry point:");
 
-    Label generalMiss(theAssembler->printing, 0);
+    Label generalMiss(theAssembler->printing, NULL);
     if (L->isPerform()) {
       theAssembler->Comment("check selector");
       genHelper->checkOop(generalMiss, L->selector(), PerformSelectorLoc);
@@ -2493,7 +2494,7 @@
 
     prePrologue();
 
-    if (theSIC->diLink == 0)
+    if (theSIC->diLink == NULL)
       doMapSelectorDelegateeChecks(); // only do what's necessary
     else {
       // don't check receiver map, selector, delegatee if a DI cache miss
@@ -2628,8 +2629,8 @@
         theNodeGen->enterScope(scope());
         Node* n =
           new PrimNode(getPrimDescOfString("_Breakpoint"),
-                        0, 0, exprStack,
-                        0, 0);
+                        NULL, 0, exprStack,
+                        NULL, NULL);
         theNodeGen->exitScope(scope());
         n->gen();
       }

@@ -11,6 +11,7 @@
   if (dependents)                                                       \
     for (nmln* d= dependents, *dend= d + length_slots(); d < dend; d++) \
 
+
 oop slotsMapDeps::define(oop obj, oop contents) {
   if (VerifyZoneOften)
     Memory->code->verify();
@@ -63,7 +64,7 @@ slotsOop slotsMapDeps::create_slots(slotList* slots, const char* annotation) {
 
 oop slotsMapDeps::fill_in_slots(slotList* slist, fint slotCount) {
   add_slot_dependents()->init();
-  dependents= 0;
+  dependents= NULL;
   return slotsMap::fill_in_slots(slist, slotCount);
 }
 
@@ -107,7 +108,7 @@ void slotsMapDeps::delete_map() {
 nmln* slotsMapDeps::dependents_for_slot(slotDesc *s) {
   assert(s >= slots() && s < slot(length_slots()),
          "slotDesc not part of map");
-  if (dependents == 0) {
+  if (dependents == NULL) {
     dependents= Memory->allocateSlotDeps(this);
     FOR_EACH_SLOT_DEP(d) {
       d->init();
@@ -119,7 +120,7 @@ nmln* slotsMapDeps::dependents_for_slot(slotDesc *s) {
 void slotsMapDeps::deallocate_slot_dependents() {
   if (dependents) {
     Memory->deallocateSlotDeps(dependents, length_slots());
-    dependents= 0;
+    dependents= NULL;
   }
 }
 
@@ -132,7 +133,7 @@ void slotsMapDeps::moveDeps(nmln* newDeps, int32 delta) {
 
 // receiver should be a new map
 void slotsMapDeps::init_dependents() {
-  dependents= 0;
+  dependents= NULL;
   add_slot_dependents()->init();
 }
 

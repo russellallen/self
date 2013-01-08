@@ -32,8 +32,8 @@ class stringMap: public byteVectorMap {
   
   // cloning operations
   bool can_inline_clone() { return false; }
-  oop clone(oop obj, bool mustAllocate= true, oop genObj= 0);
-  oop cloneSize(oop obj, fint len, bool mustAllocate= true, oop filler= 0);
+  oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL);
+  oop cloneSize(oop obj, fint len, bool mustAllocate= true, oop filler= NULL);
   
   // memory operations
   virtual oop scavenge(oop obj);

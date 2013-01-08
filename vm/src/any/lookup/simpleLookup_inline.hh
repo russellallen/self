@@ -26,7 +26,7 @@ inline oop simpleLookup::evaluateResult(oop* argp, int32 nargs, nmethod* nm) {
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
   if (!Interpret) {
     assert(nargs <= 1, "have not implemented compiled evaluation > 1 arg");
-    assert(nm != 0, "need an nmethod");
+    assert(nm != NULL, "need an nmethod");
     return EnterSelf( receiver,
                       nm->insts(),
                       nargs == 0  ?  badOop  :  argp[0]);
@@ -56,4 +56,4 @@ inline char* simpleLookup::interpretResultForCompiledSender(oop arg1) {
 inline void simpleLookup::assert_methodHolder_is_object() {
   assert(  methodHolder_or_map() != MH_TBD 
   &&      !methodHolder_or_map()->is_map(),
-         "should be a real method holder now (or 0)"); }
+         "should be a real method holder now (or NULL)"); }

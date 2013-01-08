@@ -9,7 +9,7 @@
 # pragma interface
 
  private:
-  oop** addresses() { return 0; }
+  oop** addresses() { return NULL; }
   
  public:
   void fix_frame(frame* f) { my_frame = f; }

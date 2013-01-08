@@ -151,7 +151,7 @@ class memOopClass: public oopClass {
   // compiler support
   static int32 map_offset() {
     // byte offset from a tagged memOop (i.e. returns 3)
-    return int32(&memOop(0)->addr()->_map); }
+    return int32(&memOop(NULL)->addr()->_map); }
 };
 
 static inline memOop as_memOop(void* p) {

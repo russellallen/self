@@ -8,7 +8,7 @@
 
 
 stringOop new_string(const char* bytes, int32 len, bool mustAllocate) {
-  assert(bytes != 0, "new_string: null bytes");
+  assert(bytes != NULL, "new_string: null bytes");
   return Memory->string_table->lookup(bytes, len, mustAllocate); }
 
 bool stringOopClass::is_unary(fint upToLen) {
@@ -37,7 +37,7 @@ stringOop stringOopClass::make_string(const char* value, fint len,
   fint l= ::lengthWords(len);
   char* nb;
   oop* x= Memory->old_gen->alloc_objs_and_bytes(s, l, nb, mustAllocate);
-  if (x == 0)
+  if (x == NULL)
     return stringOop(failedAllocationOop);
   copy_oops(oops(), x, s);
   copy_bytes(value, nb, len);   // value maybe not word-aligned
@@ -53,7 +53,7 @@ stringOop stringOopClass::make_string(const char* value, fint len,
 stringOop stringOopClass::scavenge() {
   ShouldNotCallThis(); // shouldn't be scavenging canonical strings
                        // (should be tenured);
-  return 0;
+  return NULL;
 }
 
 bool stringOopClass::verify() {

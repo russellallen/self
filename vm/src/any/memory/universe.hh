@@ -141,9 +141,9 @@ class universe {
 
   // scavenging operations
   void swapSurvivors();
-  oop scavenge(oop p = 0);
-  oop tenure(oop p = 0);
-  oop default_low_space_handler(oop p= 0);
+  oop scavenge(oop p = NULL);
+  oop tenure(oop p = NULL);
+  oop default_low_space_handler(oop p= NULL);
   
   void need_scavenge() {
     if (! NeedScavenge) {
@@ -158,11 +158,11 @@ class universe {
   inline space* survivor_space(memOop p, fint size, fint bsize, bool &is_new);
   
   // garbage collecting operations
-  oop garbage_collect(oop p = 0);
+  oop garbage_collect(oop p = NULL);
 
   bool might_run_out_of_space_on_scavenge() { 
     old_gen->reselect_reserve_space();
-    return old_gen->reserve_space == 0  ||  old_gen->reserve_space->bytes_free() < new_gen->used(); }
+    return old_gen->reserve_space == NULL  ||  old_gen->reserve_space->bytes_free() < new_gen->used(); }
 
 
   // enumeration primitives
@@ -240,7 +240,7 @@ public:
   char* printAddr; // used for debug printing
 
   byteVectorOop verifyOpts(char *newOpts);
-  bool is_verify_opt(char c) { return strchr(verify_opts, c) != 0; }
+  bool is_verify_opt(char c) { return strchr(verify_opts, c) != NULL; }
 
 # if  GENERATE_DEBUGGING_AIDS
   void printRegion(char *&caddr, int count= 16);

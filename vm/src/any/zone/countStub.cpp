@@ -23,7 +23,7 @@ void shiftCounts(int32 delta) {
 
 void countStub1_init() {
   ResourceMark rm;
-  CountStub::pattern[NonCounting] = 0;     // invalid pattern
+  CountStub::pattern[NonCounting] = NULL;     // invalid pattern
   CountStub::pattern[Counting] = new CountCodePattern(Counting);
   CountStub::pattern[Comparing] = new CountCodePattern(Comparing);
   AgingStub::initPattern();
@@ -31,7 +31,7 @@ void countStub1_init() {
 
 void countStub2_init() {
   ResourceMark rm;
-  if (CountStub::idManager == 0 || !okToUseCodeFromSnapshot) {
+  if (CountStub::idManager == NULL || !okToUseCodeFromSnapshot) {
     fint size1 = sizeof(CountStub) + CountStub::pattern[Counting]->instsSize;
     fint size2 = sizeof(CountStub) + CountStub::pattern[Comparing]->instsSize;
     nsendCounts = Memory->code->stubs->zone()->capacity() / size1;
@@ -71,7 +71,7 @@ VtblPtr_t       AgingStub::_vtbl_value;
 
 int32 AgingStub::add_inst = 0;
 CountCodePattern* CountStub::pattern[Comparing + 1];
-IDManager* CountStub::idManager = 0;
+IDManager* CountStub::idManager = NULL;
 
 void* CountingStub::operator new(size_t size) {
   int32 newSize = size + CountStub::pattern[Counting]->instsSize;
@@ -199,7 +199,7 @@ void CountStub::forwardLinkedSend(nmln* l, nmethod* to)  {
   } else {
     CacheStub *pic= this->pic();
     assert(pic, "must have a sendDesc or a pic");
-    pic->rebind(sdLink.next, to, 0);
+    pic->rebind(sdLink.next, to, NULL);
   }
   deallocate();
 }
@@ -207,14 +207,14 @@ void CountStub::forwardLinkedSend(nmln* l, nmethod* to)  {
 
 // rebind: change target to new nmethod
 void CountStub::rebind(nmethod* nm, pc_t entryPoint) {
-  if (entryPoint == 0) entryPoint= nm->entryPointFor(sender_sendDesc());
+  if (entryPoint == NULL) entryPoint= nm->entryPointFor(sender_sendDesc());
   nmLink.rebind(&nm->linkedSends);
   set_callee((int32)entryPoint);
 }
 
 // change entry point as caller has changed (sendDesc to pic)
 void CountStub::setVerifiedEntryPoint(nmethod *nmHint) {
-  assert(nmHint == 0 || nmHint == target(), "wrong hint");
+  assert(nmHint == NULL || nmHint == target(), "wrong hint");
   nmethod *nm= nmHint ? nmHint : target();
   char *entryPoint= nm->verifiedEntryPoint();
   set_callee((int32)entryPoint);
@@ -250,7 +250,7 @@ NCodeBase* CountStub::unlink_me(nmln* l) {
   } else {
     sd()->unlink_countStub(this);
   }
-  return 0;
+  return NULL;
 }
 
   
@@ -288,13 +288,13 @@ sendDesc* CountStub::sd() {
   if (Memory->code->contains(sdLink.next)) {
     return sendDesc::sendDesc_from_nmln(sdLink.next);
   } else {
-    return 0;
+    return NULL;
   }
 }
 
 CacheStub* CountStub::pic() {
   if (Memory->code->contains(sdLink.next)) {
-    return 0;
+    return NULL;
   } else {
     assert(sdLink.notEmpty(), "not linked to anything");
     return findCacheStub(sdLink.next);
@@ -333,9 +333,9 @@ bool CountStub::verify2(CacheStub *calling_pic) {
 
 bool CountStub::isCountStub(void* p) {
   VtblPtr_t vtbl = ((NCodeBase*)p)->vtbl_value();
-  return vtbl == (( CountingStub*)0)->static_vtbl_value() ||
-         vtbl == ((ComparingStub*)0)->static_vtbl_value() ||
-         vtbl == ((    AgingStub*)0)->static_vtbl_value();
+  return vtbl == (( CountingStub*)NULL)->static_vtbl_value() ||
+         vtbl == ((ComparingStub*)NULL)->static_vtbl_value() ||
+         vtbl == ((    AgingStub*)NULL)->static_vtbl_value();
 }
 
 # if  GENERATE_DEBUGGING_AIDS

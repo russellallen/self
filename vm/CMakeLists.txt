@@ -39,7 +39,7 @@ endif()
 
 # setup the routines and variables we might use
 # sets 
-#  ${platform} ${platform_processor} 
+#  ${platform} ${platform_processor} ${platform_compiler}
 #  ${LOCAL_CMAKE_DIR}
 include(common)
 

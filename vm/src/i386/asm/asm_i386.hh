@@ -125,7 +125,7 @@ class Assembler: public BaseAssembler {
   
  public:
 
-  void call( int32 d, OperandType t, Label* L = 0);
+  void call( int32 d, OperandType t, Label* L = NULL);
   void call( Location base, int32 disp = 0, OperandType t = RegisterOperand, Location index = no_reg, Scale s = by_one );
   
   void call(Label*);
@@ -141,14 +141,14 @@ class Assembler: public BaseAssembler {
   
   void jmp(Location base, int32 d = 0, OperandType t = RegisterOperand, Location index = no_reg, Scale s = by_one);
   
-  void jmp(   int32 d, OperandType t, Label* L = 0);
-  void jecxz( int32 d, OperandType t, Label* L = 0);
-  void loop(  int32 d, OperandType t, Label* L = 0);
-  void loope( int32 d, OperandType t, Label* L = 0);
-  void loopne(int32 d, OperandType t, Label* L = 0);
+  void jmp(   int32 d, OperandType t, Label* L = NULL);
+  void jecxz( int32 d, OperandType t, Label* L = NULL);
+  void loop(  int32 d, OperandType t, Label* L = NULL);
+  void loope( int32 d, OperandType t, Label* L = NULL);
+  void loopne(int32 d, OperandType t, Label* L = NULL);
 
   # define J(cond) \
-   void CONC(j,cond)( int32 d, OperandType t, Label* L = 0 ); \
+   void CONC(j,cond)( int32 d, OperandType t, Label* L = NULL ); \
    void CONC(j,cond)( Label* );
    
   J(a) J(ae) J(b) J(be) J(c) J(e) J(g) J(ge) J(l) J(le) J(na) J(nae) J(nb) J(nbe) J(nc)
@@ -162,13 +162,13 @@ class Assembler: public BaseAssembler {
  private:
 
   bool do_special_shifts(int32 op_imm_rm, int32 imm);
-  void like_add8_imm(const char* name, int32 imm, Location dst_reg, int32 dst_disp, OperandType dt, 
+  void like_add8_imm(const char* name, int32 imm, Location dst_reg, int32 dst_disp, OperandType dt,
                      Location index, Scale s, int32 op_imm8_al, int32 op_imm8_rm8, int32 opExt);
   void like_add32_imm(const char* name, int32 imm, OperandType st, Location dst_reg, int32 dst_disp, OperandType dt,
                       Location index, Scale s, int32 op_imm32_eax, int32 op_imm8_rm32, int32 op_imm32_rm32, int32 opExt );
-  void like_add_r_rm(const char* name, char bOrL, Location src, 
+  void like_add_r_rm(const char* name, char bOrL, Location src,
                     Location dst_base, int32 dst_disp, OperandType dt, Location index, Scale s, int32 op);
-  void like_add_rm_r(const char* name, char bOrL, 
+  void like_add_rm_r(const char* name, char bOrL,
                     Location src_base, int32 src_disp, OperandType st, Location index, Scale s, 
                     Location dst, int32 op); 
 
@@ -237,6 +237,7 @@ class Assembler: public BaseAssembler {
 
   LIKE_ADD(lea,    -1,   -1,      -1,    -1,    -1,       -1,       -1,     -1,       -1,   0x8d);
 # undef LIKE_ADD
+
 
 
   # define LIKE_MOVZX(name, bOrW, op2) \

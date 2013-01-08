@@ -23,8 +23,8 @@ bool is_equal(oop m, oop n) {
 }
 
 call_graph_node::call_graph_node() {
-  edges = 0;
-  my_new_list = 0;
+  edges = NULL;
+  my_new_list = NULL;
 
   block_clones    = 0;
   bytes_allocated = 0;
@@ -60,7 +60,7 @@ call_graph_edge* call_graph_node::find_matching(int bci, call_graph_node* n) {
     if (!e->is_fold_edge() && e->is_matching_node(bci, n))
       return e;
   }
-  return 0;
+  return NULL;
 }
 
 call_graph_edge* call_graph_node::find_matching(int bci, stringOop sel) {
@@ -68,7 +68,7 @@ call_graph_edge* call_graph_node::find_matching(int bci, stringOop sel) {
     if (!e->is_fold_edge() && e->is_matching_sel(bci, sel))
       return e;
   }
-  return 0;
+  return NULL;
 }
 
 call_graph_edge* call_graph_node::find_leaf(int bci) {
@@ -76,7 +76,7 @@ call_graph_edge* call_graph_node::find_leaf(int bci) {
     if (!e->is_fold_edge() && e->is_matching_leaf(bci))
       return e;
   }
-  return 0;
+  return NULL;
 }
 
 fold_edge* call_graph_node::find_fold_edge(int bci, call_graph_node* n) {
@@ -84,7 +84,7 @@ fold_edge* call_graph_node::find_fold_edge(int bci, call_graph_node* n) {
     if (e->is_fold_edge() && e->is_matching_node(bci, n))
       return (fold_edge*) e;
   }
-  return 0;
+  return NULL;
 }    
 
 int call_graph_node::num_of_edges(float cutoff) {
@@ -383,7 +383,7 @@ void block_node::oops_do(oopsDoFn f) {
 call_graph_edge::call_graph_edge(int bci_arg, call_graph_node* callee_arg) {
   bci    = bci_arg;
   callee = callee_arg;
-  next   = 0;
+  next   = NULL;
 }
 
 call_graph_edge::~call_graph_edge() {
@@ -414,7 +414,7 @@ fold_edge::fold_edge(fint bci_arg, call_graph_node* callee_arg)
 fold_edge::~fold_edge() { 
   // callee is cleared before _call_graph_edge is magically executed
   // the C++ destructor semantic is bogus. LB.
-  callee = 0;
+  callee = NULL;
 }
 
 void fold_edge::print_node(bool verbose) {

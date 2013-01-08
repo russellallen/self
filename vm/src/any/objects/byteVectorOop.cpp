@@ -14,7 +14,7 @@ byteVectorOop byteVectorOopClass::copy(fint s, bool mustAlloc,
   oop* x= genObj
     ? genObj->my_generation()->alloc_objs_and_bytes(s, l, nb, mustAlloc)
       : Memory->alloc_objs_and_bytes(s, l, nb, mustAlloc);
-  if (x == 0)
+  if (x == NULL)
     return byteVectorOop(failedAllocationOop);
   copy_oops(oops(), x, s);
   copy_words((int32*) bytes(), (int32*) nb, l);
@@ -31,7 +31,7 @@ byteVectorOop byteVectorOopClass::grow_bytes(fint delta, bool mustAllocate) {
   fint nl= ::lengthWords(nlen);
   char* nb;
   oop* x= Memory->alloc_objs_and_bytes(s, nl, nb, mustAllocate);
-  if (x == 0)
+  if (x == NULL)
     return byteVectorOop(failedAllocationOop);
   copy_oops(oops(), x, s);
   copy_words((int32*) bytes(), (int32*) nb, l);
@@ -49,7 +49,7 @@ byteVectorOop byteVectorOopClass::shrink_bytes(fint delta, bool mustAllocate) {
   fint nl= ::lengthWords(nlen);
   char* nb;
   oop* x= Memory->alloc_objs_and_bytes(s, nl, nb, mustAllocate);
-  if (x == 0)
+  if (x == NULL)
     return byteVectorOop(failedAllocationOop);
   copy_oops(oops(), x, s);
   copy_words((int32*) bytes(), (int32*) nb, nl);
@@ -70,7 +70,7 @@ byteVectorOop byteVectorOopClass::insert(fint s, fint change_point,
   oop* x= sameGen
     ? my_generation()->alloc_objs_and_bytes(ns, l, nb, mustAllocate)
       : Memory->alloc_objs_and_bytes(ns, l, nb, mustAllocate);
-  if (x == 0) 
+  if (x == NULL) 
     return byteVectorOop(failedAllocationOop);
   oop* p = oops();
   copy_oops(p, x, change_point);
@@ -94,7 +94,7 @@ byteVectorOop byteVectorOopClass::remove(fint s, fint change_point,
   oop* x= sameGen
     ? my_generation()->alloc_objs_and_bytes(ns, l, nb, mustAllocate)
       : Memory->alloc_objs_and_bytes(ns, l, nb, mustAllocate);
-  if (x == 0)
+  if (x == NULL)
     return byteVectorOop(failedAllocationOop);
   oop* p = oops();
   copy_oops(p, x, change_point);
@@ -132,7 +132,7 @@ byteVectorOop byteVectorOopClass::scavenge(fint size) {
   space *copySpace= Memory->survivor_space(this, size, l, is_new);
   char *nb;
   oop *x= copySpace->alloc_objs_and_bytes_local(size, l, nb);
-  if (x == 0) fatal("out of space in scavenge");
+  if (x == NULL) fatal("out of space in scavenge");
   copy_oops(oops(), x, size);
   copy_words((int32*) bytes(), (int32*) nb, l);
   byteVectorOop r = as_byteVectorOop(x);
@@ -157,7 +157,7 @@ bool byteVectorOopClass::verify() {
       error1("byteVectorOop 0x%lx has negative length", this);
       flag = false;
     }
-    if (bytes() == 0) {
+    if (bytes() == NULL) {
       error1("byteVectorOop 0x%lx has a zero bytes part", this);
       flag = false;
     }
@@ -271,9 +271,9 @@ oop byteVectorOopClass::bv_concatenate_prim(byteVectorOop arg,
 
   char* nb;
   oop* x= Memory->alloc_objs_and_bytes(s, l, nb, false);
-  if (x == 0) {
+  if (x == NULL) {
     out_of_memory_failure(FH, s, l);
-    return 0;
+    return NULL;
   }
   copy_oops(proto->oops(), x, s);
   copy_bytes(this->bytes(), nb,        len1);
@@ -317,7 +317,7 @@ oop byteVectorOopClass::bv_clone_prim(smi size, u_char filler, void *FH) {
   oop c= cloneSize(size, CANFAIL, as_smiOop(filler));
   if (c == failedAllocationOop) {
     out_of_memory_failure(FH, this->size(), size);
-    return 0;
+    return NULL;
   }    
   // test for scavenging
   if (ScavengeInPrimitives && Memory->needs_scavenge()) {
@@ -363,7 +363,7 @@ oop byteVectorOopClass::run_script_prim() {
 
 oop byteVectorOopClass::parseObject_prim(char* fn, oop errorObj, void *FH) {
   ResourceMark rm;
-  oop res = 0;
+  oop res = NULL;
   fint line, col, len;
 
   // Check to see if allocation would fail
@@ -374,7 +374,7 @@ oop byteVectorOopClass::parseObject_prim(char* fn, oop errorObj, void *FH) {
   if (Memory->old_gen->bytes_free() - Memory->old_gen->get_VM_reserved_mem()
       < 4 * length()) {
     out_of_memory_failure(FH, 2 * size(), 2 * length());
-    return 0;
+    return NULL;
   }    
 
   // need a copy because Eval can cause GC before source is captured.
@@ -383,7 +383,7 @@ oop byteVectorOopClass::parseObject_prim(char* fn, oop errorObj, void *FH) {
   StringScanner scanner(source, len, fn, 1, 1);
   Parser parser(&scanner, true);
   Object* o = parser.readBody(line, col, source, len);
-  if (o == 0) {
+  if (o == NULL) {
     res = badOop;
   } 
   else {
@@ -396,12 +396,12 @@ oop byteVectorOopClass::parseObject_prim(char* fn, oop errorObj, void *FH) {
 
   if (res == failedAllocationOop) {
     out_of_memory_failure(FH, 4*length()); // wild guess
-    return 0;
+    return NULL;
   }
   if (res == badOop && !NLRSupport::have_NLR_through_C()) {
     parser.fillErrorObj(errorObj);
     prim_failure(FH, PRIMITIVEFAILEDERROR); // receiver had syntax errors
-    return 0;
+    return NULL;
   }
 
   currentProcess->cleanup_after_eval_prim(res);
@@ -449,7 +449,7 @@ oop byteVectorOopClass::write_snapshot_prim(void *FH) {
 oop byteVectorOopClass::primitive_documentation_prim(void *FH) {
   ResourceMark rm;
   oop result = primitive_documentation(copy_null_terminated());
-  if (result == 0) prim_failure(FH, PRIMITIVEFAILEDERROR);
+  if (result == NULL) prim_failure(FH, PRIMITIVEFAILEDERROR);
   return result;
 }
 

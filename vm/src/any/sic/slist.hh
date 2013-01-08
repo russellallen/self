@@ -19,9 +19,9 @@
     void* _data;
     SListElem*  _next;
    public: 
-    SListElem(void* d, SListElem* n = 0) { _data = d; _next = n; }
+    SListElem(void* d, SListElem* n = NULL) { _data = d; _next = n; }
     
-    void* dataL()               { return this ? _data : 0; }
+    void* dataL()               { return this ? _data : NULL; }
     void setDataL(void* d)      { _data = d; }
     
     SListElem* nextL()          { return _next; }
@@ -41,16 +41,16 @@
     SListElem* _tail;
     int32 _len;
    public:
-    SList() { _head = _tail = 0; _len = 0; }
+    SList() { _head = _tail = NULL; _len = 0; }
     
     void prependL(void* d) {
       _head = new SListElem(d, _head);
-      if (_tail == 0) _tail = _head;
+      if (_tail == NULL) _tail = _head;
       _len++;
     }
     void appendL(void* d) {
       SListElem* e = new SListElem(d);
-      if (_tail == 0) {
+      if (_tail == NULL) {
         _head = _tail = e;
       } else {
         _tail->_next = e;
@@ -64,10 +64,10 @@
     
     void applyL(void f(void*));
     
-    bool isEmpty()      { return _head == 0; }
+    bool isEmpty()      { return _head == NULL; }
     bool nonEmpty()     { return ! isEmpty(); }
     int32 length()      { return _len; }
-    bool includesL(void* p) { return findL(p) != 0; }
+    bool includesL(void* p) { return findL(p) != NULL; }
     SListElem* findL(void* p);
     SListElem* findL(void* p, slistFindFn f);
     
@@ -100,7 +100,7 @@
 # define SListTemplate(name,dataType)                                         \
     class CONC(name,ListElem) : public SListElem {                            \
    public:                                                                    \
-    CONC(name,ListElem)(dataType d, CONC(name,ListElem)* n = 0)            \
+    CONC(name,ListElem)(dataType d, CONC(name,ListElem)* n = NULL)            \
       : SListElem((void*) d, (SListElem*) n) {}                               \
                                                                               \
     dataType data() { return (dataType) SListElem::dataL(); }                 \

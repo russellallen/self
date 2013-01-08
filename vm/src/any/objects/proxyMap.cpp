@@ -12,12 +12,12 @@
 proxyOop proxyMap::create_proxy() {
   slotList* slots = new slotList(VMString[PARENT], 
                                  parent_map_slotType,
-                                 create_slots((slotList*)0));
+                                 create_slots((slotList*)NULL));
   proxyMap mm;
   proxyOop mr;
   (void)create_map(sizeof(proxyMap), slots, &mm, (oop*)&mr);
-  mr->set_pointer(0);
-  mr->set_type_seal(0);
+  mr->set_pointer(NULL);
+  mr->set_type_seal(NULL);
   mr->kill();
   assert(mr->is_killable() && mr->is_foreign() && !mr->is_live(), 
          "should be dead foreigner");
@@ -49,5 +49,5 @@ void proxyMap::print(oop obj) {
 
 void proxyMap::dummy_initialize(oop obj, oop filler){
   foreignMap::dummy_initialize(obj, filler);
-  proxyOop(obj)->set_type_seal(0);
+  proxyOop(obj)->set_type_seal(NULL);
 }

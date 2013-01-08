@@ -38,7 +38,7 @@
     firstMatch = true;
     regToMatch = Location(reg);
     sprintf(regName, "%s", RegisterNames[reg]);
-    if (printPC == 0) return regName;
+    if (printPC == NULL) return regName;
     fint bci = printPC->byteCode;
     for (ScopeDesc* scope = printScope; scope; scope = scope->sender()) {
       scope->doForNames(bci, printMatchingSlot);
@@ -90,17 +90,17 @@
       lprintf("%#lx (%f)", memaddr,
              floatOop(memaddr)->value());
     } else if (Memory->code->iZone->contains(memaddr) &&
-               (nm = nmethod::findNMethod_maybe(memaddr)) != 0 &&
+               (nm = nmethod::findNMethod_maybe(memaddr)) != NULL &&
                nm != printNM) {
       lprintf("%#lx (nmethod %#lx \"%s\")",
              (long unsigned)memaddr, (long unsigned)nm,
              selector_string(nm->key.selector));
     } else if (Memory->code->stubs->contains(memaddr) &&
-               (pic = findCacheStub_maybe(memaddr)) != 0) {
+               (pic = findCacheStub_maybe(memaddr)) != NULL) {
       lprintf("%#lx (PIC %#lx \"%s\")",
              (long unsigned)memaddr, (long unsigned)pic,
              selector_string(pic->sd()->selector()));
-    } else if ((printPD = getPrimDescOfFirstInstruction(memaddr, true)) != 0) {
+    } else if ((printPD = getPrimDescOfFirstInstruction(memaddr, true)) != NULL) {
       lprintf("%s", printPD->name());
     } else {
       lprintf("%#lx", memaddr);
@@ -129,12 +129,12 @@
   static CORE_ADDR printCall(nmethod* nm, CORE_ADDR pc, addrDesc* loc) {
     // pc is the beginning of an inline cache or primitive call
     // return last pc printed
-    printPD = 0;
+    printPD = NULL;
     printOneInstruction(pc);        // print call & set primDesc
     PrimDesc* pd = printPD;
     printOneInstruction(pc + 4);    // delay slot
     if (loc->isPrimitive()) {
-      // NB: pd can be 0, e.g. for jump to SendMessage_stub in prologue
+      // NB: pd can be NULL, e.g. for jump to SendMessage_stub in prologue
       if (pd && pd->canScavenge()) {
         printRegisterMaskLine(pc + 8);
         return pc + 8;
@@ -164,14 +164,14 @@
 
   void print_code(nmethod* nm, CORE_ADDR start, CORE_ADDR end) {
     ResourceMark rm;
-    printNM = nm; printPC = 0; printScope = 0;
+    printNM = nm; printPC = NULL; printScope = NULL;
     putchar('\n');
     for (CORE_ADDR p = start; p < end; p += 4) {
       ResourceMark rm2;
       if (!nm->isAccess()) {
         PcDesc* pc = nm->containingPcDesc(p);
         printScope = nm->containingScopeDesc(p);
-        if (printPC == 0 || !pc->source_equals(printPC)) {
+        if (printPC == NULL || !pc->source_equals(printPC)) {
           lprintf("%8s  %s (%d)@%d:", "",
                  selector_string(printScope->key.selector),
                  printScope->offset(), pc->byteCode);
@@ -184,7 +184,7 @@
         printPC = pc;
       }
       addrDesc* loc;
-      if ((loc = nm->addrDesc_at(p)) != 0 && loc->isCall()) {
+      if ((loc = nm->addrDesc_at(p)) != NULL && loc->isCall()) {
         p = printCall(nm, p, loc);
       } else {
         lprintf("%#8lx: ", p);

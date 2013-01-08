@@ -40,7 +40,7 @@ class fctProxyOopClass: public proxyOopClass {
 
     void kill_fctProxy() {
       // Don't call this function. Call kill() instead.
-      set_pointer(0);    /* Just a precaution. */
+      set_pointer(NULL);    /* Just a precaution. */
       set_type_seal(deadProxyObject);
       set_noOfArgs(0); // to init the word during universe::genesis
     }

@@ -37,7 +37,7 @@ public:
   ~SlotIterator() {
     if (CheckAssertions) {
       --nActive;
-      if (this == blockIterator) blockIterator= 0; 
+      if (this == blockIterator) blockIterator= NULL; 
     }
   }
 # endif
@@ -47,7 +47,7 @@ public:
   slotDesc *next() {
     assert(sd < end, "a step too far");
 #   if GENERATE_DEBUGGING_AIDS
-    if (CheckAssertions  &&  sd + 1 == end && this==blockIterator) blockIterator= 0;
+    if (CheckAssertions  &&  sd + 1 == end && this==blockIterator) blockIterator= NULL;
 #   endif
     return ++sd; }
 

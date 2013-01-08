@@ -35,7 +35,7 @@ inline void copy_oops_overlapping(oop* from, oop* to, fint count) {
   else if (from > to) copy_oops_up(from, to, count);
 }
 
-void set_oops(oop* to, fint count, oop value = 0);
+void set_oops(oop* to, fint count, oop value = NULL);
 
 void copy_bytes_up  (const char* from, char* to, fint count);
 void copy_bytes_down(const char* from, char* to, fint count);
@@ -48,7 +48,7 @@ inline void copy_bytes_overlapping(char* from, char* to, fint count) {
   else if (from > to) copy_bytes_up(from, to, count);
 }
 
-void set_bytes(char* to, fint count, char value = 0);
+void set_bytes(char* to, fint count, char value = NULL);
 
 // like strcmp, but with slightly different order for slot
 // ordering (sorts foo: before foo0 so that it immediately follows foo)
@@ -81,7 +81,7 @@ inline float  max(float  a, float  b) { return a > b ? a : b; }
 
 inline int32 iabs(int32 a) { return a >= 0 ? a : -a; }
 
-# if TARGET_ARCH == I386_ARCH
+# if TARGET_ARCH == I386_ARCH  ||  TARGET_ARCH == PPC_ARCH
 extern "C" {  void swap_bytes(int32* xp); } // Do it with special instruction
 # else  
   inline void swap_bytes(int32* xp) { 
@@ -97,7 +97,7 @@ extern "C" {  void swap_bytes(int32* xp); } // Do it with special instruction
 const int32 K = 1024;
 const int32 M = K * K;
 
-const int32 oopSize = sizeof(oop);
+const int32 oopSize = sizeof(oop); // Warning: Duplicated in asmDefs_ppc.h
 
 
 // some useful macros
@@ -147,7 +147,7 @@ const int32 oopSize = sizeof(oop);
 # define UsedOnlyInAssert(v)
 #else
 inline void UsedOnlyInAssert(double x)   { (void)(x), 0; }
-inline void UsedOnlyInAssert(void *x) { (void)(x), 0; }
+inline void UsedOnlyInAssert(void  *x)   { (void)(x), 0; }
 #endif
 
 extern "C" { 

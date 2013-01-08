@@ -651,14 +651,16 @@ void list::traceCycle(list* s) {
   exitCode = 1;
   for (register item* p = first; p; p = p->next) {
     register list* q = p->contents;
-    if (q->mayBeCycle)
+    if (q->mayBeCycle) {
       if (s == q) {
         char err[BUFSIZ];
         sprintf(err, "\tend of cycle for %s\n", s->name);
         Plat.fatal(err);
       }
-      else
+      else {
         q->traceCycle(s);
+      }
+    }
   }
 }
 

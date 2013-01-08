@@ -569,8 +569,7 @@
 
   // helper functions for n-way type test; similar to PIC code (cacheStub.c)
 
-  // historic:
-  // Next three were for PPC, someday could refactor SPARC to use them -- dmu 10/03
+  // Next three are for PPC, someday could refactor SPARC to use them -- dmu 10/03
   
   void TypeTestNode::br_if_smi(Assembler* , Location , fint ) {
     fatal("not used on SPARC");
@@ -735,7 +734,7 @@
     }
     
 
-    Label* firstMemOopTest = 0;
+    Label* firstMemOopTest = NULL;
     fint n = prologue(theAssembler, r, smiIndex, floatIndex, immediateOnly,
                       firstMemOopTest);
 
@@ -820,8 +819,8 @@
 
   void AbstractArrayAtNode::gen() {
     BasicNode::gen();
-    Label* argFail = 0;          // if arg isn't a smi
-    Label* indexFail = 0;        // if arg is out of bounds
+    Label* argFail = NULL;          // if arg isn't a smi
+    Label* indexFail = NULL;        // if arg is out of bounds
     Assembler* a = theAssembler;
     Location arr = genHelper->moveToReg(_src, Temp2);
     Location index = genHelper->moveToReg(arg, Temp1);
@@ -921,14 +920,14 @@
     if (elem->isConstPReg()) {
       if (((ConstPReg*)elem)->constant->is_smi()) {
         // no run-time check required
-        return 0;
+        return NULL;
       } else {
         // primitive will always fail
         return theAssembler->BraForward(false);
       }
     } else {
       Location e = genHelper->moveToReg(elem, Temp4);
-      Label* fail = 0;
+      Label* fail = NULL;
       if (!intElem) {
         // check for int
         if (SICCountTypeTests) {

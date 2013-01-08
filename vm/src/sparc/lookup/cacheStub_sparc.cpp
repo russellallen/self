@@ -38,17 +38,17 @@ Label* CacheStub::prologue(bool immediateOnly) {
   // mapTest:  
   //  setHi  ..., t1                       (may be delay slot)
   assert(((Float_Tag | Int_Tag) & Mem_Tag) == 0, "tagging scheme changed");
-  prevAddr = 0;
-  Label* result = 0;
-  Label* next = 0;
-  Label* mapTest = 0;
+  prevAddr = NULL;
+  Label* result = NULL;
+  Label* next = NULL;
+  Label* mapTest = NULL;
   char *floatAddr, *smiAddr;
   computeJumpAddr(nsmi, theSendDesc, stsmi, smiAddr);
   computeJumpAddr(nfloat, theSendDesc, stfloat, floatAddr);
   
   if (immediateOnly)
     ;
-  else if (FastMapTest  &&  nsmi == 0  &&  nfloat == 0)
+  else if (FastMapTest  &&  nsmi == NULL  &&  nfloat == NULL)
     a->LoadI(ReceiverReg, map_offset(), Temp1);
 
   else {
@@ -111,7 +111,7 @@ Label* CacheStub::test(oop map, pc_t addr, Label* prev) {
   //  cmp    t, map
   //  bne,a  _next
 
-  if (prevAddr != 0) {
+  if (prevAddr != NULL) {
     jump(prevAddr);
     prev->define();
   }

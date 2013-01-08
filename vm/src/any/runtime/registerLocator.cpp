@@ -11,10 +11,10 @@
 RegisterLocator::RegisterLocator(bool clear) 
  : ResourceObj() {
  
-  my_frame = 0;
+  my_frame = NULL;
   # if GENERATE_DEBUGGING_AIDS
     if (SpendTimeForDebugging) {
-      sendee = 0;
+      sendee = NULL;
       setHow = 0;
     }
   # endif
@@ -44,7 +44,7 @@ void RegisterLocator::set_address(Location reg, oop* a) {
 oop* RegisterLocator::address_of(Location reg) {
   assert( my_frame->is_aligned(), "frame not set");
   oop* r = addresses()[index_for_reg(reg)];
-  assert(r != 0  &&  (int(r) & (oopSize-1)) == 0,
+  assert(r != NULL  &&  (int(r) & (oopSize-1)) == 0,
          "If this is called from a primitive, be sure the primtive table entry sets canWalkStack");
   return r;
 }
@@ -66,7 +66,7 @@ RegisterLocator* RegisterLocator::sender() {
 
 void RegisterLocator::be_for_sender() {
   // NB: a frame saves registers and so provides their addresses for its SENDER
-  assert(my_frame != 0, "checking PPCSIC bug");
+  assert(my_frame != NULL, "checking PPCSIC bug");
   if (my_frame->is_compiled_self_frame())  update_addresses_from_self_frame();
   else                                     update_addresses_from_VM_frame();
   my_frame = my_frame->sender();
@@ -97,7 +97,7 @@ RegisterLocator* RegisterLocator::climb_to_frame(frame* f) {
 bool RegisterLocator::are_all_defined() {
   // return true of all addrs are defined
   for (fint i = LowestLocalNonVolReg;  i <= HighestNonVolReg;  ++i)
-    if ( address_of((Location)i) == 0 )
+    if ( address_of((Location)i) == NULL )
       return false;
   return true;
 }
@@ -105,7 +105,7 @@ bool RegisterLocator::are_all_defined() {
 
 void RegisterLocator::forget_everything() {
   for (fint i = LowestLocalNonVolReg;  i <= HighestNonVolReg;  ++i)
-    set_address((Location)i, 0);
+    set_address((Location)i, NULL);
 }
 
 

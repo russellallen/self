@@ -96,7 +96,7 @@ class stack_depth_interpreter : public stacking_interpreter {
   void init_stack() { stack_depth = 0; }
   
   void push() { ++stack_depth; }
-  void* pop(fint n = 1) { stack_depth -= n;  return 0; }
+  void* pop(fint n = 1) { stack_depth -= n;  return NULL; }
   
   fint get_stack_depth() { return stack_depth; }
   void set_stack_depth(fint d) { stack_depth = d; }

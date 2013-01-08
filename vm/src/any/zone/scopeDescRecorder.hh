@@ -43,7 +43,7 @@ class ScopeDescRecorder: public ResourceObj {
                            oop methodHolder_or_map,
                            bool lite = false,
                            int32 scopeID = 0,
-                           ScopeInfo senderScope = 0, 
+                           ScopeInfo senderScope = NULL, 
                            fint senderBCI = IllegalBCI,
                            bool visible = false);
 
@@ -58,7 +58,7 @@ class ScopeDescRecorder: public ResourceObj {
                                   NameNode* cachedReceiver_name,
                                   bool lite = false,
                                   int32 scopeID = 0,
-                                  ScopeInfo senderScope = 0, 
+                                  ScopeInfo senderScope = NULL, 
                                   fint senderBCI = IllegalBCI,
                                   bool visible = false);
 
@@ -69,7 +69,7 @@ class ScopeDescRecorder: public ResourceObj {
                           ScopeInfo parent,
                           bool lite = false,
                           int32 scopeID = 0,
-                          ScopeInfo senderScope = 0, 
+                          ScopeInfo senderScope = NULL, 
                           fint senderBCI = IllegalBCI,
                           bool visible = false);
 
@@ -78,7 +78,7 @@ class ScopeDescRecorder: public ResourceObj {
                               NameNode* block_name,
                               bool lite = false,
                               int32 scopeID = 0,
-                              ScopeInfo senderScope = 0, 
+                              ScopeInfo senderScope = NULL, 
                               fint senderBCI = IllegalBCI,
                               bool visible = false);
 
@@ -86,7 +86,7 @@ class ScopeDescRecorder: public ResourceObj {
                                NameNode* self_name,
                                oop self_type,
                                oop methodHolder_or_map,
-                               ScopeInfo senderScope = 0, 
+                               ScopeInfo senderScope = NULL, 
                                fint senderBCI = IllegalBCI,
                                bool visible = false);
 
@@ -94,7 +94,7 @@ class ScopeDescRecorder: public ResourceObj {
                                    NameNode* self_name,
                                    oop self_type,
                                    oop methodHolder_or_map,
-                                   ScopeInfo senderScope = 0, 
+                                   ScopeInfo senderScope = NULL, 
                                    fint senderBCI = IllegalBCI,
                                    bool visible = false);
 
@@ -102,7 +102,7 @@ class ScopeDescRecorder: public ResourceObj {
                                      NameNode* self_name,
                                      oop self_type,
                                      oop methodHolder_or_map,
-                                     ScopeInfo senderScope = 0,
+                                     ScopeInfo senderScope = NULL,
                                      fint senderBCI = IllegalBCI,
                                      bool visible = false);
 
@@ -110,7 +110,7 @@ class ScopeDescRecorder: public ResourceObj {
                                          NameNode* self_name,
                                          oop self_type,
                                          oop methodHolder_or_map,
-                                         ScopeInfo senderScope = 0, 
+                                         ScopeInfo senderScope = NULL, 
                                          fint senderBCI = IllegalBCI,
                                          bool visible = false);
 

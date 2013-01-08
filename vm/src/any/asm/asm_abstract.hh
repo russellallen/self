@@ -98,7 +98,7 @@ public:
   void trackLabel(Label* l) { labels->append(l); }
   void untrackLabel(Label* l) {
     assert(labels->nth(l->id()) == l, "wrong id");
-    labels->nthPut(l->id(), 0);
+    labels->nthPut(l->id(), NULL);
   }
 
   bool verifyLabels();

@@ -41,8 +41,8 @@ void CacheStub::add_case(nmethod* nm, CountStub* stArg, pc_t addr) {
 
 Label* CacheStub::prologue(bool immediateOnly) {
   assert(((Float_Tag | Int_Tag) & Mem_Tag) == 0, "tagging scheme changed");
-  Label* miss = 0;
-  Label* loadMapAfterHandlingImmediates = 0;
+  Label* miss = NULL;
+  Label* loadMapAfterHandlingImmediates = NULL;
   pc_t floatAddr, smiAddr;
   computeJumpAddr(nsmi, theSendDesc,   stsmi,   smiAddr);
   computeJumpAddr(nfloat, theSendDesc, stfloat, floatAddr);
@@ -68,7 +68,7 @@ Label* CacheStub::prologue(bool immediateOnly) {
     if (immediateOnly)
       miss = br_if_not_float(); // br if mem
     else
-      miss = 0;
+      miss = NULL;
     add_case(nfloat, stfloat, floatAddr);
   }
   else if (nsmi)   { miss = br_if_not_smi();    add_case(nsmi,   stsmi,     smiAddr);  }

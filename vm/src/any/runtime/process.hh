@@ -53,7 +53,7 @@ enum ProcessState {
 typedef void (*process_p)();
 
 class Process: public CHeapObj {
-  char* suspendedSP;    // process state
+  char* suspendedSP;    // process state - saved in runtime_(sparc_mac_ppc).s
   char* suspendedPC;
   
   bool pcWasSet; // Intel needs to know this
@@ -97,8 +97,8 @@ class Process: public CHeapObj {
   friend class processOopClass;
   friend class vframeMirror;
   
-  Process(processOop p, int32 sSize, oop rcvr = 0,
-          stringOop sel = 0, objVectorOop args = 0);
+  Process(processOop p, int32 sSize, oop rcvr = NULL,
+          stringOop sel = NULL, objVectorOop args = NULL);
   ~Process();
 
   void init(char* pcVal);
@@ -106,7 +106,7 @@ class Process: public CHeapObj {
   void print_short();
   
   // execution
-  bool hasStack() { return stk.base != 0; }
+  bool hasStack() { return stk.base != NULL; }
   bool allocate();
   void start();
   void terminate();                     
@@ -125,15 +125,15 @@ class Process: public CHeapObj {
   void nonLifoError();
   
   void setSingleStepping();     // set up single step mode
-  void patchForSingleStepping(frame* f = 0);
+  void patchForSingleStepping(frame* f = NULL);
                                 // sets SPLimit & frame patch if necessary
   bool isSingleStepping()       { return stepping; }
   void resetSingleStepping();
   
   void setUncommon(char* pc)    { _uncommonPC = pc; }
   char* uncommonPC()            { return _uncommonPC; }
-  bool isUncommon()             { return _uncommonPC != 0; }
-  void resetUncommon()          { _uncommonPC = 0; }
+  bool isUncommon()             { return _uncommonPC != NULL; }
+  void resetUncommon()          { _uncommonPC = NULL; }
   
   void setStopPoint(vframeOop stop);
   bool isStopping()             { return stopping; }
@@ -141,8 +141,8 @@ class Process: public CHeapObj {
   void resetStopping()          { stopping = false; }
 
   void killFrames(abstract_vframe* vf);
-  bool isKilling()              { return _killUpToVF != 0; }
-  void resetKilling()           { _killUpToVF = 0; }
+  bool isKilling()              { return _killUpToVF != NULL; }
+  void resetKilling()           { _killUpToVF = NULL; }
   vframeOop killVF()            { return _killUpToVF; }
 
   void setDeoptimizing()        { deoptimizing = true; }
@@ -168,7 +168,7 @@ class Process: public CHeapObj {
   
   oop runDoItMethod( oop rcv,
                      oop meth,
-                     oop* args = 0,
+                     oop* args = NULL,
                      fint arg_count = 0);
 
   oop  prepare_to_call_self();
@@ -192,7 +192,7 @@ class Process: public CHeapObj {
   bool  hadStackOverflow()      { return stk.markDestroyed(); }
   bool  hasEmptyStack();
   void  resetStackOverflow()    { stk.mark(); }
-  frame* last_self_frame(bool includePrologue,  RegisterLocator** rl = 0)  {
+  frame* last_self_frame(bool includePrologue,  RegisterLocator** rl = NULL)  {
     return stk.last_self_frame(includePrologue, rl); }
   
   void  setPC(process_p newPC)  { suspendedPC= first_inst_addr((char*)newPC); pcWasSet= true; }
@@ -257,7 +257,7 @@ class Process: public CHeapObj {
   // queuing
  public:
   void addAfter(Process* p)     { next = p->next; p->next = this; }
-  void remove(Process* p)       { p->next = next; next = 0; }
+  void remove(Process* p)       { p->next = next; next = NULL; }
 };
 
 bool isStackOverflow(char* sp);

@@ -55,13 +55,14 @@ void realSlotRef::set_contents(oop x) {
 
 ResultType realSlotRef::resultType(oop sel) {
   if (desc->is_arg_slot())  return dataResult;
-  if (desc->is_map_slot())
+  if (desc->is_map_slot()) {
     if (desc->data->has_code()) {
       // not sure why this is here, compiler uses it (dmu)
       ((objectLookupTarget*) holder)->value_constrained = true;
       return methodResult;
     }
-    else                        return constantResult;
+    return constantResult;
+  }
   if (stringOop(sel)->is_1arg_keyword())  return assignmentResult;
   else                                    return dataResult;
 }
@@ -137,7 +138,7 @@ oop abstractSlotRef::interpretData(oop receiver, oop sel, oop arg1) {
 
    default:
     fatal("should never happen");
-    return 0;
+    return NULL;
   }
 }
 

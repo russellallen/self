@@ -13,11 +13,11 @@ void printName(methodMap* mm, oop selector) {
 const char* sprintName(methodMap* mm, oop selector) {
   // used for debugging only; use static buffer for result string
   static char buf[800];
-  const char* sel = selector == 0 ? "" : selector_string(selector);
+  const char* sel = selector == NULL ? "" : selector_string(selector);
   if (mm) {
     stringOop file = mm->file();
     smiOop line = mm->line();
-    char *f, *fn = selector_string(file);
+    const char *f,   *fn = selector_string(file);
     // drop path name from file name to avoid excessive length
     for (f = fn + strlen(fn); f > fn && *f != '/'; f--) ;
     if (*f == '/') f++;
@@ -31,10 +31,10 @@ const char* sprintName(methodMap* mm, oop selector) {
 
 // should factor out last part of this and previous methods:
 
-char* sprintValueMethod( oop rcvr ) {
+const char* sprintValueMethod( oop rcvr ) {
   // used for debugging only, if rcvr is block, print out source info for block
   if (!rcvr->is_block_with_code())
-    return (char*) "";
+    return const_cast<char*>("");
   methodMap* mm = (methodMap*)blockOop(rcvr)->value()->map();
   // get outermost method map
   methodMap* omm = mm;
@@ -46,7 +46,7 @@ char* sprintValueMethod( oop rcvr ) {
   }
   stringOop file = omm->file();
   smiOop line = omm->line();
-  char *f, *fn = selector_string(file);
+  const char *f,  *fn = selector_string(file);
   // drop path name from file name to avoid excessive length
   for (f = fn + strlen(fn); f > fn && *f != '/'; f--) ;
   if (*f == '/') f++;
@@ -55,7 +55,7 @@ char* sprintValueMethod( oop rcvr ) {
     sprintf(buf, "(%s:%ld)", f, long(line->value()));
     return buf;
   }
-  return (char*) "";
+  return const_cast<char*>("");
 }
 
 

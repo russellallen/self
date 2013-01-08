@@ -21,7 +21,7 @@ void generation::print()
 
 newGeneration::newGeneration(int32 &eden_size, int32 &surv_size, FILE *snap) {
 
-  map_list= 0;
+  map_list= NULL;
   
   if (snap) {
     eden_space= new newSpace("eden", eden_size, snap);
@@ -63,7 +63,7 @@ newGeneration::newGeneration(int32 &eden_size, int32 &surv_size, FILE *snap) {
 
   eden_space->next_space = from_space;
   from_space->next_space =   to_space;
-    to_space->next_space =       0;
+    to_space->next_space =       NULL;
 
    low_boundary= new_spaces;
   high_boundary= new_spaces + new_size;
@@ -101,7 +101,7 @@ ACCUMULATE_NEW(used)
 ACCUMULATE_NEW(bytes_free)
 
 bool newGeneration::has_map(slotsMapDeps *m) {
-  for (MapList *p= map_list;  p != 0;  p= p->next)
+  for (MapList *p= map_list;  p != NULL;  p= p->next)
     if (p->map == m)
       return true;
   return false; }
@@ -110,7 +110,7 @@ void newGeneration::adjust_maps() {
   int n= 0, nDead= 0, nSurv= 0; // gather stats of length of list
   MapList *mapl;
   for ( MapList **prevp= &map_list; 
-        mapl= *prevp,  mapl != 0; 
+        mapl= *prevp,  mapl != NULL; 
         n++) {
     slotsMapDeps *map= mapl->map;
     mapOop m= map->enclosing_mapOop();
@@ -210,7 +210,7 @@ bool newGeneration::verify()
   bool r = true;
   if (   eden_space->next_space != from_space
       || from_space->next_space !=   to_space
-      || to_space->next_space != 0) {
+      || to_space->next_space != NULL) {
     error("misconnnected spaces in new gen");
     r = false;
   }
@@ -240,7 +240,7 @@ void newGeneration::write_snapshot(FILE* file)
 // ensure that you surround the call with {} to prevent s leaking out!
 #define FOR_EACH_OLD_SPACE(s) \
   for (oldSpace *s= first_space;                                \
-       s != 0;                                               \
+       s != NULL;                                               \
        s= s->next_space)
 
 
@@ -286,7 +286,7 @@ void oldGeneration::resort_spaces(int (*cmp_fn)(oldSpace**, oldSpace**))
   for (n= 0;  n < nSpaces-1;  ++n)
     sp[n]->next_space= sp[n+1];
   last_space= sp[n];
-  sp[n]->next_space= 0;
+  sp[n]->next_space= NULL;
   
   TrackObjectHeapInMonitor::recreate_old_bars();
 }
@@ -328,11 +328,11 @@ oldGeneration::oldGeneration(FILE* snap, int32 initial_size,
   OS::FRead_swap(&nSpaces, sizeof(nSpaces), snap);
   assert( nSpaces < 1000, "Snapshot corrupted, unbelievable number of spaces");
 
-  oldSpace *prev= 0;
+  oldSpace *prev= NULL;
   for (unsigned n= 0; n < nSpaces; n++) {
     char *name= new char[10];
     sprintf(name, "old%d", n);
-    s= new oldSpace(name, snap);
+    s= new oldSpace(const_cast<const char*>(name), snap);
     if (prev)
       prev->next_space= s;
     else
@@ -366,7 +366,7 @@ oldGeneration::oldGeneration(FILE* snap, int32 initial_size,
 
 void oldGeneration::coalesce_spaces()
 {
-  reserve_space= 0; 
+  reserve_space= NULL; 
   
   if (nSpaces == 1) {
     old0= tenuring_space= first_space;
@@ -377,7 +377,7 @@ void oldGeneration::coalesce_spaces()
   first_space->objs_top=     last_space->objs_top;
   first_space->bytes_bottom= last_space->bytes_bottom;
   oldSpace *s= first_space->next_space;
-  first_space->next_space= 0;
+  first_space->next_space= NULL;
   
   while (s) {
     oldSpace *n= s->next_space;
@@ -460,7 +460,7 @@ space* oldGeneration::tenuring_space_for(fint size, fint bsize)
       return tenuring_space= s;
   }
   fatal2("out of space for tenuring %d oops %d bytes", size, bsize);
-  return 0;
+  return NULL;
 }
 
 
@@ -502,7 +502,7 @@ int oldGeneration::expand(int32 size)
 
   char *name= new char[10];
   sprintf(name, "old%d", nSpaces);
-  oldSpace *s= new oldSpace(name, size, // modifies size for amount allocated
+  oldSpace *s= new oldSpace(const_cast<const char*>(name), size, // modifies size for amount allocated
                             top_of_old_space); 
 
   if (size == 0) 
@@ -540,7 +540,7 @@ oldSpace* oldGeneration::biggest_free_space(oldSpace *s)
   int32 room= big->bytes_free();
   for (;;) {
     s= s->next_space;
-    if (s == 0) return big;
+    if (s == NULL) return big;
     int32 t= s->bytes_free();
     if (t > room) {
       room= t;
@@ -563,14 +563,14 @@ void oldGeneration::append_space(oldSpace *last)
 {
   last_space->next_space= last;
   last_space= last;
-  last->next_space= 0;
+  last->next_space= NULL;
 }  
 
 void oldGeneration::reselect_reserve_space()
 {
   reserve_space= biggest_free_space(first_space);
   if (!reserve_space->reserveFree())
-    reserve_space= 0;
+    reserve_space= NULL;
 }
 
 
@@ -581,25 +581,25 @@ static oop* HeapAllocateFailed(){
           "despite warnings, or, if you did not get any warnings, the Self\n"
           "low space handler is broken.\n");
   fatal("out of memory");
-  return 0;
+  return NULL;
 }
 
 
 // Unify with tenuring code?? -- dmu 7/04
 oop* oldGeneration::alloc_objs_and_bytes(fint size, fint bsize, char*& bytes, bool mustAllocate) {
 
-  oop *p = 0;
+  oop *p = NULL;
 
   oldSpace* s;
-  for ( s = tenuring_space;   p == 0  &&  s != 0;            s = s->next_space)
+  for ( s = tenuring_space;   p == NULL  &&  s != NULL;            s = s->next_space)
     if (s != reserve_space)
       p = s->alloc_objs_and_bytes(size, bsize, bytes, mustAllocate);
 
-  for ( s = first_space;      p == 0  &&  s != tenuring_space;  s = s->next_space)
+  for ( s = first_space;      p == NULL  &&  s != tenuring_space;  s = s->next_space)
     if (s != reserve_space)
       p = s->alloc_objs_and_bytes(size, bsize, bytes, mustAllocate);
       
-  if ( p == 0  &&  reserve_space != 0 )
+  if ( p == NULL  &&  reserve_space != NULL )
     p = reserve_space->alloc_objs_and_bytes(size, bsize, bytes, mustAllocate);
 
   if (nSpaces > 1  &&  s == reserve_space)
@@ -607,9 +607,9 @@ oop* oldGeneration::alloc_objs_and_bytes(fint size, fint bsize, char*& bytes, bo
   else
     tenuring_space = s;
     
-  if ( p == 0 ) {
+  if ( p == NULL ) {
     if ( mustAllocate )  HeapAllocateFailed();
-    return 0;
+    return NULL;
   }
   # if GENERATE_DEBUGGING_AIDS
     if (CheckAssertions  &&  (p == (oop*)catchThisOne || bytes == (char*)catchThisOne)) {
@@ -700,7 +700,7 @@ smi set_memory_low_space_threshold_prim(oop rcvrIgnored, smi newLST, void *FH)
   Unused(rcvrIgnored);
   if (newLST < Memory->old_gen->get_VM_reserved_mem()) {
     failure(FH, "Threshold set below VM reserve");
-    return 0;
+    return NULL;
   }
   smi oldLST= Memory->old_gen->getLowSpaceThreshold();
   Memory->old_gen->setLowSpaceThreshold(newLST);

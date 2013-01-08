@@ -18,9 +18,9 @@ class processMap: public slotsMapDeps {
   // creation operation
   static processOop create_process(Process* process);
   
-  oop clone(oop obj, bool mustAllocate= true, oop genObj= 0);
+  oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL);
   bool can_inline_clone() { return false; }
-  oop cloneSize(oop obj, fint len, bool mustAllocate= true, oop filler= 0); 
+  oop cloneSize(oop obj, fint len, bool mustAllocate= true, oop filler= NULL); 
   
   // mirror operation
   mirrorOop mirror_proto()      { return Memory->processMirrorObj; } 
