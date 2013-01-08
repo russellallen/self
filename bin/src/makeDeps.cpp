@@ -222,7 +222,7 @@ class AbstractPlatform {
   virtual void fatal(const char* msg = "See console window") { fprintf(stderr, "%s\n", msg); exit(1); }
 };
 
-# elif defined(__GNUC__) && defined(__APPLE__)
+# if defined(__GNUC__) && defined(__APPLE__)
 
 // For Apple Project Builder under OS X (MACHO) or just gcc on OS X
 
