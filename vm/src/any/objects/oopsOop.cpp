@@ -14,7 +14,7 @@ oopsOop oopsOopClass::scavenge(fint size) {
   bool is_new;
   space *copySpace= Memory->survivor_space(this, size, 0, is_new);
   oop *x= copySpace->alloc_objs_local(size);
-  if (x == NULL) fatal("out of space in scavenge");
+  if (x == 0) fatal("out of space in scavenge");
 # if GENERATE_DEBUGGING_AIDS
   if (CheckAssertions  &&  x == (oop*)catchThisOne) {
     warning1("oopsOopClass::scavenge caught 0x%lx", x);

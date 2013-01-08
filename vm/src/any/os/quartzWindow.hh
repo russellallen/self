@@ -38,7 +38,6 @@ class WindowSet  /* AllStatic */ {
 };
 
 
-#  undef ASSEMBLER
 #  undef Alloc
 #  undef Status
 
@@ -73,13 +72,13 @@ class EventQueue {
  
   EventQueue() {
     _count = 0;  read_pos = 0;  write_pos = eventQ_length - 1;
-    last_put_event = NULL;
+    last_put_event = 0;
   }
   
   uint32 count() { return _count; }
   
   EventRef peek() {
-    if (count() == 0) return NULL;
+    if (count() == 0) return 0;
     EventRef e = evts[read_pos];
     RetainEvent(e); // Self will do a releae, but need to not release it yet
     return e;
@@ -87,7 +86,7 @@ class EventQueue {
   
   
   EventRef get() {
-    if (count() == 0) return NULL;
+    if (count() == 0) return 0;
     EventRef e = evts[read_pos];
     remove_event();
     return e;
@@ -106,9 +105,9 @@ class EventQueue {
     // and also mouse wheel events.
     
     # define GET_AXIS(evt, d) \
-      GetEventParameter(evt, kEventParamMouseWheelAxis, typeMouseWheelAxis, NULL, sizeof(d), NULL, &d)
+      GetEventParameter(evt, kEventParamMouseWheelAxis, typeMouseWheelAxis, 0, sizeof(d), 0, &d)
     # define GET_DELTA(evt, d) \
-      GetEventParameter(evt, kEventParamMouseWheelDelta, typeSInt32, NULL, sizeof(d), NULL, &d)
+      GetEventParameter(evt, kEventParamMouseWheelDelta, typeSInt32, 0, sizeof(d), 0, &d)
     
     # define SET_DELTA(evt, s) \
       SetEventParameter(evt, kEventParamMouseWheelDelta, typeSInt32, sizeof(s), &s)
@@ -221,7 +220,7 @@ class QuartzWindow: public AbstractPlatformWindow {
 
   WindowRef my_window() { return _quartz_win; }
   
-  void*  xdisplay() { return NULL; }
+  void*  xdisplay() { return 0; }
 
   
   
@@ -280,7 +279,7 @@ class QuartzWindow: public AbstractPlatformWindow {
   // Mac-specific open call:        
    
   // values for behind parameter in platform-specific open below
-  // static void* /* really WindowPtr */ behind_all() { return NULL; }
+  // static void* /* really WindowPtr */ behind_all() { return 0; }
   // static void* /* really WindowPtr */ front()      { return (void*)-1; }
   
 public:         

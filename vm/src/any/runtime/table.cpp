@@ -15,7 +15,7 @@ TableElem* Table::find(CListEntry* k) {
       return d;
     }
   }
-  return NULL;
+  return 0;
 }
 
 TableElem* Table::identityFind(CListEntry* k) {
@@ -25,7 +25,7 @@ TableElem* Table::identityFind(CListEntry* k) {
       return d;
     }
   }
-  return NULL;
+  return 0;
 }
 
 TableElem* Table::findContents(CListEntry* v) {
@@ -36,7 +36,7 @@ TableElem* Table::findContents(CListEntry* v) {
       return d;
     }
   }
-  return NULL;
+  return 0;
 }
 
 TableElem* Table::identityFindContents(CListEntry* v) {
@@ -46,12 +46,12 @@ TableElem* Table::identityFindContents(CListEntry* v) {
       return d;
     }
   }
-  return NULL;
+  return 0;
 }
 
 void Table::remove(CListEntry* k) {
   assert(k, "shouldn't be comparing zeros");
-  for (TableListElem* e = head(), *pe = NULL; e; pe = e, e = e->next()) {
+  for (TableListElem* e = head(), *pe = 0; e; pe = e, e = e->next()) {
     TableElem* d = e->data();
     assert(d->key, "shouldn't have a zero key");
     if (d->key->EQ(k)) {
@@ -62,7 +62,7 @@ void Table::remove(CListEntry* k) {
 }
 
 void Table::identityRemove(CListEntry* k) {
-  for (TableListElem* e = head(), *pe = NULL; e; pe = e, e = e->next()) {
+  for (TableListElem* e = head(), *pe = 0; e; pe = e, e = e->next()) {
     TableElem* d = e->data();
     if (d->key == k) {
       spliceOutNext(pe);

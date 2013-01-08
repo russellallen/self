@@ -30,7 +30,7 @@ BaseAssembler::BaseAssembler(int32 instsSize, int32 locsSize,
   locsOverflow = (addrDesc*) ((pc_t) locsStart + locsSize);
   printing = pr; isInstructions = isMain;
   if (isMain) {
-    assert(theAssembler == NULL, "forgot to reset theAssembler");
+    assert(theAssembler == 0, "forgot to reset theAssembler");
     theAssembler = (Assembler*)this;
     currentLabelID = 0;
   }
@@ -83,7 +83,7 @@ void BaseAssembler::print_disp(int32 d, OperandType t) {
     lprintf("0x%lx <%s> (bp)", d, getPrimName((pc_t)d));
     break;
    case CodeAddressOperand: {
-    nmethod * nm = nmethod::nmethodContaining((pc_t) d, NULL);
+    nmethod * nm = nmethod::nmethodContaining((pc_t) d, 0);
     lprintf("0x%lx <%s>", d, nm->key.selector_string());
     break; }
    case DIVMAddressOperand:
@@ -210,7 +210,11 @@ void BaseAssembler::assemble_test_file() {
     # endif
     test_file_s, test_file_co, test_file_so, test_file_out);
   lprintf( "Testing assembler by running: %s\n", buf);
-  system(buf);
+  int ret = system(buf);
+  if(ret != 0) {
+    fprintf(stderr, "Cannot run command `%s'", buf);
+    exit(ret);
+  }
 }
 
 

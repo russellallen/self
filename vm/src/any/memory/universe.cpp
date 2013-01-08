@@ -21,7 +21,7 @@ universe* Memory;
 bool NeedScavenge     = false;
 bool bootstrapping    = true;
 bool postReadSnapshot = true;
-char *WorldName       = NULL;
+char *WorldName       = 0;
 bool compressed_snapshot;
 char decompression_filter[80];
 bool page_aligned;
@@ -66,7 +66,7 @@ universe::universe() {
                  current_sizes.debug_size);
   age_table = new ageTable;
 
-  object_table = NULL;
+  object_table = 0;
 
   verify_opts= OS::strdup("nozprSvOmNMi");
 
@@ -98,8 +98,8 @@ void universe::genesis()
   map_map = mapMap::create_mapMap();
   
   // create annotation objects; works cause these have no slots
-    slotAnnotationObj= create_slots((slotList*)NULL);
-  objectAnnotationObj= create_slots((slotList*)NULL);
+    slotAnnotationObj= create_slots((slotList*)0);
+  objectAnnotationObj= create_slots((slotList*)0);
 
   // they have the wrong object annotation; fix it
   objectAnnotationObj =
@@ -108,10 +108,10 @@ void universe::genesis()
     slotAnnotationObj->mirror_copy_set_annotation(objectAnnotationObj, true);
   
   // create lobby
-  lobbyObj= create_slots((slotList*)NULL);
+  lobbyObj= create_slots((slotList*)0);
   
   // create initial strings, string canonicalization table, and vm string array
-  slotsOop stringParent= create_slots((slotList*)NULL);
+  slotsOop stringParent= create_slots((slotList*)0);
   create_initial_strings(stringParent);
   stringParent = (slotsOop)
     stringParent->copy_add_slot(VMString[PARENT],
@@ -152,10 +152,10 @@ void universe::genesis()
   // create dead block (for initialization of memoized blocks)
   ByteCode db(true);
   db.GenLiteralByteCode(0, 0, new_string("internal error: memoized block"));
-  db.GenSendByteCode(0, 0, new_string("error:"), true, false, NULL);
+  db.GenSendByteCode(0, 0, new_string("error:"), true, false, 0);
   bool ok = db.Finish("<internal>", " \"prototype dead block method (internal)\" ");
   assert(ok, "just checkin");
-  slotsOop deadBlockMethod = create_blockMethod(NULL, &db);
+  slotsOop deadBlockMethod = create_blockMethod(0, &db);
   deadBlockObj = create_block(deadBlockMethod);
 
   // create vframe prototypes
@@ -163,8 +163,8 @@ void universe::genesis()
   b.GenSelfByteCode(0, 0);
   ok = b.Finish("<predefined>", " \"prototype method\" self ");
   assert(ok, "just checkin");
-  slotsOop outerMethod = create_outerMethod(NULL, &b);
-  slotsOop blockMethod = create_blockMethod(NULL, &b);
+  slotsOop outerMethod = create_outerMethod(0, &b);
+  slotsOop blockMethod = create_blockMethod(0, &b);
   outerActivationObj = create_vframeOop(outerMethod);
   blockActivationObj = create_vframeOop(blockMethod);
   
@@ -359,7 +359,7 @@ void universe::read_first_line_in_snapshot_header(FILE *file)
 {
   char header[sizeof(SNAPSHOT_HEADER)];
   // cannot use fgets anymore because \n and \r are switched on Mac
-  // if (fgets(header, sizeof(header), file) == NULL)
+  // if (fgets(header, sizeof(header), file) == 0)
   //  fatalNoMenu("Could not read snapshot file header");
   for (fint i = 0;  i  <  sizeof(header) - 1; ++i ) {
     if (fread(header + i, 1, 1, file) != 1)
@@ -549,11 +549,11 @@ void check_delim(FILE *file, char *expected) {
 static bool check_endianness_of_vm_oops() {
   # define check_endianness_template(o) \
     if ((*o)->is_mem())  ++as_is_mem; \
-    else if (*o != NULL) ++as_is_not_mem; \
+    else if (*o != 0) ++as_is_not_mem; \
     x = (oop)*o; \
     swap_bytes((int32*)&x); \
     if (x->is_mem())    ++swapped_is_mem; \
-    else if (x != NULL) ++swapped_is_not_mem; 
+    else if (x != 0) ++swapped_is_not_mem; 
     
   oop x;
   fint  as_is_mem = 0, as_is_not_mem = 0, swapped_is_mem = 0, swapped_is_not_mem = 0;
@@ -697,7 +697,7 @@ void write_delim(FILE *file, char *delim)
 memOop universe::relocate(memOop p) {
   APPLY_TO_SPACES(SPACE_OOP_RELOCATE_TEMPLATE);
   ShouldNotReachHere(); // oop not in any old space
-  return NULL;
+  return 0;
 }
 
 #define WRITE_SPACE_SIZES_TEMPLATE(s) \
@@ -724,7 +724,7 @@ bool universe::write_snapshot(const char *fileName,
 
   const char *fullFileName;
   snapFile= Files->openSnapshotFile(fileName, "w", &fullFileName);
-  if (snapFile == NULL) return NULL;
+  if (snapFile == 0) return 0;
 
   if (!snap_sizes) snap_sizes= &current_sizes;
 
@@ -765,7 +765,7 @@ bool universe::write_snapshot(const char *fileName,
   if (compressed_snapshot) {
     fclose(snapFile);
     snapFile = OS::start_compressing_snapshot(compression_f, fullFileName, sb);
-    if (snapFile == NULL) {
+    if (snapFile == 0) {
       delete sb;
       return false;
     }
@@ -826,7 +826,7 @@ static bool get_space_size(slotsOop obj, const char *slotName, smi &val)
 {
   bool junk;
   oop *slotp= obj->get_slot_data_address_if_present(slotName, junk);
-  if (slotp == NULL) return true;
+  if (slotp == 0) return true;
   if (! (*slotp)->is_smi()) return false;
   val= smiOop(*slotp)->value();
   return val > 0;
@@ -857,13 +857,13 @@ oop full_write_snapshot_prim(oop rcvrIgnored, byteVectorOop name,
       return 0;
     }
   }
-  char *comp_f= NULL, *decomp_f= NULL;
+  char *comp_f= 0, *decomp_f= 0;
   { bool junk;
     oop *  compress_slotp=
       c_obj->get_slot_data_address_if_present(  "compression_filter", junk);
     oop *decompress_slotp=
       c_obj->get_slot_data_address_if_present("decompression_filter", junk);
-    if ((compress_slotp == NULL) != (decompress_slotp == NULL)) {
+    if ((compress_slotp == 0) != (decompress_slotp == 0)) {
       // either both or neither...
       failure(FH, "Must have both or neither of compression_filter and decompression_filter");
       return 0;
@@ -884,7 +884,7 @@ oop full_write_snapshot_prim(oop rcvrIgnored, byteVectorOop name,
 
   if (!Memory->write_snapshot(fn, comp_f, decomp_f, &snap_sizes)) {
     unix_failure(FH, errno);
-    return NULL;
+    return 0;
   }
   return name;
 }
@@ -1065,14 +1065,14 @@ void universe::canonize_map_vtbls() {
 const char *universe::check_eden_size(spaceSizes &snap_sizes) {
   return
     snap_sizes.eden_size < new_gen->eden_space->used()
-      ? "eden_size too small" : NULL; 
+      ? "eden_size too small" : 0; 
 }
 
 const char *universe::check_surv_size(spaceSizes &snap_sizes) {
   return
          snap_sizes.surv_size < new_gen->from_space->used()
       || snap_sizes.surv_size < new_gen->  to_space->used()
-        ? "surv_size too small" : NULL; }
+        ? "surv_size too small" : 0; }
 
 const char *universe::check_old_size(spaceSizes &snap_sizes) {
   if (snap_sizes.old_size < old_gen->used())
@@ -1084,7 +1084,7 @@ const char *universe::check_old_size(spaceSizes &snap_sizes) {
   if ( OS::is_directed_allocation_supported()
   &&   snap_sizes.old_size + snap_sizes.eden_size + 2*snap_sizes.surv_size  >  MaxHeapSize)
     return "total object heap size too big";
-  return NULL; }
+  return 0; }
 
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
@@ -1094,42 +1094,42 @@ const char *universe::check_code_size(spaceSizes &snap_sizes) {
     return "code_size too big";
   return
     SnapshotCode && snap_sizes.code_size < code->iZone->usedBytes()
-      ? "code_size too small" : NULL; }
+      ? "code_size too small" : 0; }
 
 const char *universe::check_deps_size(spaceSizes &snap_sizes) {
   if (snap_sizes.deps_size > MaxDepsSize)
     return "deps_size too big";
   return
     SnapshotCode && snap_sizes.deps_size < code->dZone->usedBytes()
-      ? "deps_size too small" : NULL; }
+      ? "deps_size too small" : 0; }
 
 const char *universe::check_pic_size(spaceSizes &snap_sizes) {
   if (snap_sizes.pic_size > MaxStubsSize)
     return "pic_size too big";
   return
     SnapshotCode && snap_sizes.pic_size < code->stubs->zone()->usedBytes()
-      ? "pic_size too small" : NULL; }
+      ? "pic_size too small" : 0; }
 
 const char *universe::check_debug_size(spaceSizes &snap_sizes) {
   if (snap_sizes.debug_size > MaxScopesSize)
     return "debug_size too big";
   return
     SnapshotCode && snap_sizes.debug_size < code->sZone->usedBytes()
-      ? "debug_size too small" : NULL; }
+      ? "debug_size too small" : 0; }
 
 # else // not: defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
 const char* universe::check_code_size(spaceSizes& snap_sizes) {
-  Unused(&snap_sizes); return NULL; }
+  Unused(&snap_sizes); return 0; }
 
 const char* universe::check_deps_size(spaceSizes& snap_sizes) {
-  Unused(&snap_sizes); return NULL; }
+  Unused(&snap_sizes); return 0; }
 
 const char* universe::check_pic_size(spaceSizes& snap_sizes) {
-  Unused(&snap_sizes); return NULL; }
+  Unused(&snap_sizes); return 0; }
 
 const char* universe::check_debug_size(spaceSizes& snap_sizes) {
-  Unused(&snap_sizes); return NULL; }
+  Unused(&snap_sizes); return 0; }
   
 # endif
 
@@ -1138,12 +1138,12 @@ const char* universe::check_debug_size(spaceSizes& snap_sizes) {
         err_str= CONC(check_, s)(snap_sizes);           \
         if (err_str) return err_str;
 
-// return NULL for OK, otherwise error string
+// return 0 for OK, otherwise error string
 const char *universe::check_sizes_for_snapshot(spaceSizes &snap_sizes)
 {
   const char *err_str;
   APPLY_TO_SPACE_SIZES(CHECK_SPACE_SIZE_TEMPLATE);
-  return NULL;
+  return 0;
 }
 
 

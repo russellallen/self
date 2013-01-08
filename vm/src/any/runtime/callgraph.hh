@@ -70,11 +70,11 @@ class call_graph_node : public CHeapObj {
   void add_blocks(fint num)      { block_clones        += num; }
 
   call_graph_node();
-  ~call_graph_node();
+  virtual ~call_graph_node();
 
   int num_of_edges(float cutoff);
 
-  virtual bool is_matching(call_graph_node* n) = NULL;
+  virtual bool is_matching(call_graph_node* n) = 0;
 
   void add_edge(call_graph_edge* e);
 
@@ -84,9 +84,9 @@ class call_graph_node : public CHeapObj {
 
   fold_edge* find_fold_edge(int bci, call_graph_node* n);
 
-  virtual call_graph_node* clone() = NULL;
+  virtual call_graph_node* clone() = 0;
 
-  virtual void print_node(bool verbose = false) = NULL;
+  virtual void print_node(bool verbose = false) = 0;
 
   // Memory management
   void scavenge_contents();
@@ -95,7 +95,7 @@ class call_graph_node : public CHeapObj {
   void gc_unmark_contents();
   void switch_pointers(oop from, oop to);
 
-  virtual bool is_new() = NULL;
+  virtual bool is_new() = 0;
 
   virtual void oops_do(oopsDoFn f) { Unused((void*)f); };
 
@@ -216,7 +216,7 @@ class call_graph_edge : public CHeapObj {
   call_graph_node* callee; 
   int              bci;
 
-  call_graph_edge(fint bci, call_graph_node* callee = NULL);
+  call_graph_edge(fint bci, call_graph_node* callee = 0);
   virtual ~call_graph_edge();
 
   virtual bool is_fold_edge()  { return false; }

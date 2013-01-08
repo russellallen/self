@@ -84,7 +84,7 @@ class space: public CHeapObj {
       objs_top = p1;
       return p;
     } else {
-      return NULL;
+      return 0;
     } }
 
  protected:
@@ -100,7 +100,7 @@ class space: public CHeapObj {
       bytes = (char*) bp1;
       return p;
     } else {
-      return NULL;
+      return 0;
     } }
   void unalloc_objs_and_bytes_local(fint size, fint bsize) {
     objs_top -= size;
@@ -286,9 +286,9 @@ class oldSpace: public space {
   oldSpace(const char* nm, int32 &size, caddr_t desiredAddress);
 
   // constructors which do not allocate object space
-  oldSpace(const char *nm, FILE *snap) : space(nm, snap) { next_space= NULL; }
+  oldSpace(const char *nm, FILE *snap) : space(nm, snap) { next_space= 0; }
   oldSpace(const char *nm, char *bottom, char *top) : space(nm, bottom, top) {
-    next_space= NULL; }
+    next_space= 0; }
 
   void prepare_for_scavenge();
   bool scavenge_promotions();

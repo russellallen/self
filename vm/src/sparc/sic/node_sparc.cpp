@@ -735,7 +735,7 @@
     }
     
 
-    Label* firstMemOopTest = NULL;
+    Label* firstMemOopTest = 0;
     fint n = prologue(theAssembler, r, smiIndex, floatIndex, immediateOnly,
                       firstMemOopTest);
 
@@ -820,8 +820,8 @@
 
   void AbstractArrayAtNode::gen() {
     BasicNode::gen();
-    Label* argFail = NULL;          // if arg isn't a smi
-    Label* indexFail = NULL;        // if arg is out of bounds
+    Label* argFail = 0;          // if arg isn't a smi
+    Label* indexFail = 0;        // if arg is out of bounds
     Assembler* a = theAssembler;
     Location arr = genHelper->moveToReg(_src, Temp2);
     Location index = genHelper->moveToReg(arg, Temp1);
@@ -921,14 +921,14 @@
     if (elem->isConstPReg()) {
       if (((ConstPReg*)elem)->constant->is_smi()) {
         // no run-time check required
-        return NULL;
+        return 0;
       } else {
         // primitive will always fail
         return theAssembler->BraForward(false);
       }
     } else {
       Location e = genHelper->moveToReg(elem, Temp4);
-      Label* fail = NULL;
+      Label* fail = 0;
       if (!intElem) {
         // check for int
         if (SICCountTypeTests) {

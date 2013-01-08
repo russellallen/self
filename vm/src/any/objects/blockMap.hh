@@ -70,7 +70,7 @@ public:
   static blockOop create_block(slotsOop valueMethod);
   
   // cloning operations; users aren't allowed to clone blocks  -Urs
-  oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL) {
+  oop clone(oop obj, bool mustAllocate= true, oop genObj= 0) {
     Unused(mustAllocate); Unused(genObj);
     return obj; }
   bool can_inline_clone()       { return false; }

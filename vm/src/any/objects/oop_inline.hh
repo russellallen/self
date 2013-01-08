@@ -189,7 +189,7 @@ inline oop* oopClass::get_slot_data_address(stringOop name) {
 inline oop* oopClass::get_slot_data_address_if_present(stringOop name,
                                                        bool &inObj) {
   slotDesc *s= find_slot(name);
-  return s ? inObj= s->is_obj_slot(), get_slot_data_address(s) : NULL;
+  return s ? inObj= s->is_obj_slot(), get_slot_data_address(s) : 0;
 }
 
 inline oop oopClass::get_slot(stringOop name) {

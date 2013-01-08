@@ -8,7 +8,6 @@
  * but we need to have the Carbon header included before the other headers.
  * So we have to make an exception and not use the TARGET_OS_VERSION macro. -ma and dmu 4/02 */
 # ifdef __APPLE__
-  #  undef ASSEMBLER
   #  undef Alloc
   #  include <Carbon/Carbon.h>
 
@@ -35,7 +34,7 @@
   char* OS::allocate_heap_aligned(caddr_t desiredAddress,
                                   int32 size, int32 align, const char* name,
                                   bool mustAllocate) {
-      if ( desiredAddress != NULL
+      if ( desiredAddress != 0
       &&   desiredAddress ==
                  mmap(desiredAddress, 
                       size + align,
@@ -45,7 +44,7 @@
         return desiredAddress;
         
       char* b = (char*)memalign(align, size);
-      if (b == NULL && mustAllocate)  allocate_failed(name);
+      if (b == 0 && mustAllocate)  allocate_failed(name);
       return b;     
   }
 
@@ -61,7 +60,7 @@
                                   bool mustAllocate) {
     // fake it
     char* b = (char*)selfs_malloc(size + align - 1);
-    if (b == NULL) {
+    if (b == 0) {
       if (mustAllocate)
          allocate_failed(name);
       return b;
@@ -100,7 +99,7 @@
     
     AppleEvent newAppleEvent;
     // e = AECreateAppleEvent(kCoreEventClass, kAEOpenApplication, 
-    e =  AESendMessage (&newAppleEvent, NULL, kAENoReply, 0);
+    e =  AESendMessage (&newAppleEvent, 0, kAENoReply, 0);
     if (e != noErr) {warning1("AESend %d", e); return noErr;}
 
     return noErr;
@@ -121,7 +120,7 @@
     }
     EventRecord evt;
     do {
-      WaitNextEvent( highLevelEventMask, &evt, 0, NULL ); // was 1 instead of zero but buttons sluggish
+      WaitNextEvent( highLevelEventMask, &evt, 0, 0 ); // was 1 instead of zero but buttons sluggish
         if ( evt.what == kHighLevelEvent ) {
           OSErr r = AEProcessAppleEvent(&evt);
           if (r != noErr)
@@ -135,7 +134,7 @@
 
 char* OS::get_user_directory(const char* user) {
   struct passwd* p = getpwnam(user);
-  return  p == NULL  ?  NULL  :  p->pw_dir;
+  return  p == 0  ?  0  :  p->pw_dir;
 }
 
 
@@ -193,7 +192,7 @@ void OS::init() {
   mib[0] = CTL_HW;
   mib[1] = HW_USERMEM;
   len = sizeof(mem_size);
-  sysctl(mib, 2, &mem_size, &len, NULL, 0);
+  sysctl(mib, 2, &mem_size, &len, 0, 0);
   real_mem_size = mem_size;
 # elif TARGET_OS_VERSION == LINUX_VERSION
   real_mem_size = 0x40000000; // punt for now
@@ -252,7 +251,7 @@ void OS::Mmap(void *start, void *fin, FILE *file)
   }
 }
 
-void OS::do_not_buffer(FILE* stream) { ::setbuf(stream, NULL); }
+void OS::do_not_buffer(FILE* stream) { ::setbuf(stream, 0); }
 
 
 # if TARGET_OS_VERSION == SUNOS_VERSION
@@ -301,7 +300,7 @@ bool OS::setup_snapshot_to_run(const char* fileName) {
  changed by Tobias Pape because of deprecation warnings. */
 static bool path_to_fsref(const char *path, FSRef *fref)
 {
-    if (FSPathMakeRef((UInt8*) path, fref, NULL) == noErr)
+    if (FSPathMakeRef((UInt8*) path, fref, 0) == noErr)
         return true;
     return false;
 }
@@ -315,21 +314,21 @@ static bool set_type_creator(const char *path, const char *type, const char *cre
   if (path_to_fsref(path, &fsr) == false) {
     return false;
   }
-  if (FSGetCatalogInfo(&fsr, kFSCatInfoFinderInfo | kFSCatInfoFinderInfo, &cinfo, NULL, NULL, NULL) != noErr) {
+  if (FSGetCatalogInfo(&fsr, kFSCatInfoFinderInfo | kFSCatInfoFinderInfo, &cinfo, 0, 0, 0) != noErr) {
     return false;
   }
   
   finfo = (FileInfo*) &cinfo.finderInfo;
 
   finfo->fileType = 0;
-  if (type != NULL) {
+  if (type != 0) {
     for (int i = 0; i < 4; i++) {
         finfo->fileType |= ((unsigned char)type[i]) << ((3 - i) * 8); 
     }
   }
 
   finfo->fileCreator = 0;
-  if (creator != NULL) {
+  if (creator != 0) {
     for (int i = 0; i < 4; i++) {
        finfo->fileCreator |= (unsigned char)creator[i] << ((3 - i) * 8);
     }

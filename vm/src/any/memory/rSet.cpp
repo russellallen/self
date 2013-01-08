@@ -12,7 +12,7 @@ rSet::rSet() {
    low_boundary = Memory->new_gen->low_boundary;
   high_boundary = Memory->old_gen->high_boundary;
   clear(); 
-  Set_Byte_Map_Base(byte_for(NULL));
+  Set_Byte_Map_Base(byte_for(0));
 }
 
 void* rSet::operator new(size_t size) {
@@ -37,7 +37,7 @@ rSet::rSet(rSet *old, char *start, char *end)
   high_boundary= Memory->old_gen->high_boundary;
   char *old_low=  old->low_boundary;
   char *old_high= old->high_boundary;
-  Set_Byte_Map_Base(byte_for(NULL));
+  Set_Byte_Map_Base(byte_for(0));
   memcpy(byte_for(old_low),
          old->byte_for(old_low),
          old->byte_for(old_high) - old->byte_for(old_low));

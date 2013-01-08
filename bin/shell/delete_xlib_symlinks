@@ -1,3 +1,0 @@
-#!/bin/csh
-rm -f /tmp/libX11.a.wob
-rm -f /tmp/libXext.a.wob

@@ -51,7 +51,7 @@ class FScope : public CListEntry {      // abstract
   virtual void     set_methodHolder_or_map(oop mh) = 0;
   virtual FScope*  parent()     = 0;
   virtual FSelfScope* sender()  = 0;
-  bool isTop()                  { return sender() == NULL; }
+  bool isTop()                  { return sender() == 0; }
   virtual FScope*  home()       = 0;
   virtual smi      scopeID()    = 0;
   virtual smi      homeID()     = 0;
@@ -147,7 +147,7 @@ class FSelfScope: public FScope {       // abstract
   smi scopeID()           { return _scopeID; }
   smi homeID()            { return _scopeID; }
 
-  compiled_vframe* vf() { ShouldNotCallThis(); return NULL; }
+  compiled_vframe* vf() { ShouldNotCallThis(); return 0; }
 
   void genCode();
  protected:
@@ -158,7 +158,7 @@ class FSelfScope: public FScope {       // abstract
   void genSend(bool isSelfImplicit, stringOop sel, fint arg_count, bool isUndirectedResend,
                stringOop del);
   void genLocalAccess(bool isRead, fint lexicalLevel, fint index);
-  bool genLocalSend(stringOop sel, fint arg_count, slotDesc* sd = NULL,  FScope* s = NULL);
+  bool genLocalSend(stringOop sel, fint arg_count, slotDesc* sd = 0,  FScope* s = 0);
   bool genReceiverDataAccess(stringOop sel);
   void blockLiteral(int32 litIndex, blockOop literal, 
                     bool memoized, BlockLocation& bl);
@@ -213,10 +213,10 @@ class FMethodScope: public FSelfScope {         // normal method
   bool isMethodSelfScope()      { return true; }
 
   FScope* home()                { return this; }
-  FScope* parent()              { return NULL; }
+  FScope* parent()              { return 0; }
   oop  methodHolder_or_map()    { return _methodHolder_or_map; }
   void set_methodHolder_or_map(oop mh) { _methodHolder_or_map = mh; }
-  FSelfScope* sender()          { return NULL; }
+  FSelfScope* sender()          { return 0; }
   FScope* lookup(stringOop sel, slotDesc*& sd);
 
   void loadParentScope(Location /*dst_reg*/, Location) { ShouldNotCallThis(); }
@@ -257,7 +257,7 @@ class FBlockScope: public FLexicalScope {       // block method
   FBlockScope(bool dbg, MethodLookupKey* key, oop method, FScope* p);
 
   bool isBlockSelfScope() { return true; }
-  FSelfScope* sender() { return NULL; }
+  FSelfScope* sender() { return 0; }
 
   void loadParentScope(Location dst_reg, Location child_sp_reg);
   void postPrologue();
@@ -278,7 +278,7 @@ class FDeadBlockScope: public FBlockScope {
   smi homeID()          { return 0; }
 
   void loadParentScope(Location, Location) { ShouldNotCallThis(); }
-  FScope* home() { ShouldNotCallThis(); return NULL; }
+  FScope* home() { ShouldNotCallThis(); return 0; }
 
   void postPrologue();
 
@@ -299,7 +299,7 @@ class FVFrameScope: public FScope {     // abstract; a scope on execution stack
 
   void set_methodHolder_or_map(oop mh) {
     Unused(mh);  ShouldNotCallThis(); }
-  FSelfScope* sender() { ShouldNotCallThis(); return NULL; }
+  FSelfScope* sender() { ShouldNotCallThis(); return 0; }
   void genCode() { ShouldNotCallThis(); }
   void genDescs() { ShouldNotCallThis(); }
 
@@ -319,7 +319,7 @@ class FVFrameMethodScope: public FVFrameScope {
   smi scopeID()         { return _vf->desc->scopeID(); }
   smi homeID()          { return _vf->desc->scopeID(); }
   FScope* home()        { return this; }
-  FScope* parent()      { return NULL; }
+  FScope* parent()      { return 0; }
   FScope* lookup(stringOop sel, slotDesc*& sd);
     
   void loadParentScope(Location, Location) { ShouldNotCallThis(); }

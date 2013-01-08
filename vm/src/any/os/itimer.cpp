@@ -10,8 +10,8 @@
 
 // entries
 
-IntervalTimer* IntervalTimer::_Real_timer = NULL;
-IntervalTimer* IntervalTimer::_CPU_timer  = NULL;
+IntervalTimer* IntervalTimer::_Real_timer = 0;
+IntervalTimer* IntervalTimer::_CPU_timer  = 0;
 
 bool IntervalTimer::dont_use_real_timer = false;
 bool IntervalTimer::dont_use_any_timer  = false;
@@ -138,7 +138,7 @@ void IntervalTimer::do_sync_tasks() {
 void AbstractTimerEntry::do_sync_fn() {
   if (!is_ready_to_do_sync_fn  ||  is_doing_sync_fn) 
     return;
-  if (sync_fn == NULL)      fatal("interval timer error");
+  if (sync_fn == 0)      fatal("interval timer error");
   
   is_doing_sync_fn = true;
   

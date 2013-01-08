@@ -84,6 +84,6 @@ class OopNCode : public NCodeBase {
   MACOSX_DESTRUCTOR_BUG(OopNCode)
 };
 
-NCodeBase* findThing(void* addr);   // returns NULL if addr not in a zone
+NCodeBase* findThing(void* addr);   // returns 0 if addr not in a zone
 
 # endif // defined(FAST_COMPILER) || defined(SIC_COMPILER)

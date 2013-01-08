@@ -1,0 +1,49 @@
+#!/bin/sh
+
+while [ $# -gt 0 ];
+do
+    arg=$1;
+    shift
+    case "$arg" in
+	"-o") 
+	    result="$1"
+	    shift
+	    ;;
+	"-c") 
+	    src="$1"
+	    shift
+	    ;;
+	*)
+	    args="$args $arg"
+	    ;;
+    esac
+done
+
+
+
+if [ -z "$result" -o -z "$src" ];
+then
+    gcc $args
+    exit $?
+fi
+
+filename=`basename "$src"`
+tmpdir=`mktemp -d` 
+if [ -z "$tmpdir" ]; then exit 1; fi
+
+intermediate="$tmpdir/$filename.s"
+
+gcc $args -E "$src" -o "$intermediate"
+
+exitcode=$?
+if [ $exitcode -ne 0 ]; then 
+    rm -rf "$tmpdir"
+    exit $exitcode; 
+fi
+
+
+gas -o $result $intermediate
+exitcode=$?
+
+rm -rf "$tmpdir"
+exit $exitcode; 

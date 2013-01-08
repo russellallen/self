@@ -7,7 +7,7 @@
 # include "_slotIterator.cpp.incl"
 
 #if GENERATE_DEBUGGING_AIDS
-SlotIterator *SlotIterator::blockIterator= NULL;
+SlotIterator *SlotIterator::blockIterator= 0;
 fint SlotIterator::nActive= 0;
 #endif
 
@@ -25,7 +25,7 @@ void SlotIterator::init(Map *m) {
   if (m->is_block()) {
 #if GENERATE_DEBUGGING_AIDS
     if (CheckAssertions) {
-      assert(blockIterator==NULL, "conflict in use of block_slots");
+      assert(blockIterator==0, "conflict in use of block_slots");
       blockIterator= this;
     }
 #endif

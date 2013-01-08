@@ -18,13 +18,13 @@ class immediateMap: public Map {
   fint length_nonVM_slots() { return 1; }
   
   // cloning operations
-  oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL) {
+  oop clone(oop obj, bool mustAllocate= true, oop genObj= 0) {
     UsedOnlyInAssert(obj); Unused(mustAllocate); Unused(genObj);
     assert(obj->is_smi() || obj->is_float(), "object isn't immediate");
     return obj; }
   bool can_inline_clone() { return false; }
   oop cloneSize(oop obj, fint length, bool mustAllocate= true,
-                oop filler= NULL) {
+                oop filler= 0) {
     Unused(length); Unused(mustAllocate); Unused(filler);
     ShouldNotCallThis(); // cannot resize an immediate oop
     return obj; }

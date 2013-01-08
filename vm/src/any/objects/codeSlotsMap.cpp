@@ -214,10 +214,10 @@ slotsOop methodMap::create_outerMethod( slotList*   slots,
                                         ByteCode*   b,
                                         const char* annotation,
                                         IntBList*   stack_deltas ) {
-  slots = slots->add(VMString[SELF], vm_parent_map_slotType, NULL);
+  slots = slots->add(VMString[SELF], vm_parent_map_slotType, 0);
   outerMethodMap m;
   slotsOop method = methodMap::basic_create_method(slots, b, m, annotation, false);
-  return (slotsOop) method->fix_up_method(NULL, true, true, stack_deltas);
+  return (slotsOop) method->fix_up_method(0, true, true, stack_deltas);
 }
 
 
@@ -232,7 +232,7 @@ slotsOop blockMethodMap::create_blockMethod( slotList*   slots,
   slotsOop method = methodMap::basic_create_method(slots, b, m, annotation, true);
   // except for stack_deltas!
   return stack_deltas 
-    ?  (slotsOop) method->fix_up_method(NULL, true, true, stack_deltas) 
+    ?  (slotsOop) method->fix_up_method(0, true, true, stack_deltas) 
     :             method;
     
 }
@@ -447,13 +447,13 @@ class oldMapList: public ResourceObj {
 
   oldMapList(methodMap* m) {
     method_map = m;
-    if (m == NULL) {
-      lexicalParent = NULL;
+    if (m == 0) {
+      lexicalParent = 0;
       return;
     }
     methodMap* mm = m->get_lexical_link_map();
-    if (mm == NULL) 
-      lexicalParent = NULL;
+    if (mm == 0) 
+      lexicalParent = 0;
     else
       lexicalParent = new oldMapList(mm);
   }
@@ -463,7 +463,7 @@ class oldMapList: public ResourceObj {
     lexicalParent = n;
   }
   methodMap* ancestor(fint n) {
-    assert(this != NULL, "ancestors past null");
+    assert(this != 0, "ancestors past null");
     return n == 0 ? method_map : lexicalParent->ancestor(n - 1);
   }
 };
@@ -474,7 +474,7 @@ class oldMapList: public ResourceObj {
 // obj had better be a brand-new method never executed
 //  cause we change the map without invalidating code or stack frames
 //
-// Pass in old optimized method (or NULL) to fix up local access bytecodes.
+// Pass in old optimized method (or 0) to fix up local access bytecodes.
 //  -- dmu
 
 oop methodMap::fix_up_method( oop       new_obj,
@@ -491,7 +491,7 @@ oop methodMap::fix_up_method( oop       new_obj,
   slotsOop new_meth = slotsOop(new_obj);
 
   methodMap* new_map = (methodMap*)copy(mustAllocate);
-  if (new_map == NULL) return failedAllocationOop;
+  if (new_map == 0) return failedAllocationOop;
   new_map->enclosing_mapOop()->init_mark();
 
   new_meth->set_map(new_map);
@@ -503,16 +503,16 @@ oop methodMap::fix_up_method( oop       new_obj,
   //   (if isOKToBaseLiteralVector then literals in top-level method
   //    were new and need not have been cloned)
 
-  methodMap* old_map = NULL;
-  if (old_optimized_method != NULL) {
+  methodMap* old_map = 0;
+  if (old_optimized_method != 0) {
     Map* m = old_optimized_method->map();
     assert(m->has_code(), "must be a methodMap");
     old_map = (methodMap*)m;
   }
   ResourceMark rm;
   oldMapList* old_maps = new oldMapList(old_map);
-  new_map->fix_local_bytecodes_and_links( old_optimized_method == NULL
-                                            ? NULL
+  new_map->fix_local_bytecodes_and_links( old_optimized_method == 0
+                                            ? 0
                                             : old_maps,
                                           new_meth,
                                           stack_deltas);
@@ -541,7 +541,7 @@ public:
   ByteCode bcode;
 
   BytecodeFixerUpper(methodMap *mm, oldMapList *oml, IntBList* sds) 
-    : abstract_interpreter(mm), bcode(true) {
+    : abstract_interpreter(mm), bcode(true)  {
     old_maps= oml;
     bool gotOne;
     mm->branch_targets(gotOne, &branchTargets); 
@@ -607,7 +607,7 @@ protected:
     mi.map()->GenSendOrLocal(&bcode, selector); }
     
   void do_SEND_CODE() {
-    bcode.GenSendByteCode( 0, 0, get_selector(), false, false, NULL); }
+    bcode.GenSendByteCode( 0, 0, get_selector(), false, false, 0); }
     
   void do_IMPLICIT_SEND_CODE() {
     if ( is.is_undirected_resend || is.delegatee ) {
@@ -626,7 +626,7 @@ void methodMap::fix_local_bytecodes_and_links_in_myself( oldMapList* old_maps,
                                                          slotsOop outerMethod,
                                                          IntBList* stack_deltas )
 {
-  if (old_maps != NULL)
+  if (old_maps != 0)
     assert(codes() == old_maps->method_map->codes(),
            "old map should have same codes");
 
@@ -666,7 +666,7 @@ void methodMap::fix_local_bytecodes_and_links_of_my_blocks(oldMapList* old_maps,
 
 void methodMap::GenSendOrLocal( ByteCode *bc,
                                 stringOop sel) {
-  stringOop selOfSlot = NULL;
+  stringOop selOfSlot = 0;
   methodMap* m = this;
 
   if ( UseLocalAccessBytecodes  &&  sel->is_unary() )
@@ -674,14 +674,14 @@ void methodMap::GenSendOrLocal( ByteCode *bc,
   else if ( UseLocalAccessBytecodes  &&  sel->is_1arg_keyword() )
     selOfSlot = sel->unary();  // writing
   else
-    m = NULL; // don't even try
+    m = 0; // don't even try
 
   fint lexicalLevel = 0;
   for ( ;
-        m != NULL;
+        m != 0;
         ++lexicalLevel,  m = m->get_lexical_link_map()) {
     slotDesc* sd = m->find_nonVM_slot(selOfSlot);
-    if ( sd != NULL 
+    if ( sd != 0 
          // check for write of const slot
          && (sel == selOfSlot  ||  sd->is_obj_slot())) {
       bc->GenRWLocalByteCode( 0, 0,
@@ -691,14 +691,14 @@ void methodMap::GenSendOrLocal( ByteCode *bc,
       return;
     }
   }
-  bc->GenSendByteCode(0, 0, sel, true, false, NULL);
+  bc->GenSendByteCode(0, 0, sel, true, false, 0);
 }
   
 
 // return contents of my lexical link
 slotsOop blockMethodMap::get_lexical_link() {
   slotDesc* lps = find_slot(VMString[LEXICAL_PARENT]);
-  assert(lps != NULL, "block must have lexical link");
+  assert(lps != 0, "block must have lexical link");
   assert(lps->is_map_slot(), "only have map");
   oop r = lps->data;
   assert_slots(r, "lexical parent must be a method");
@@ -709,7 +709,7 @@ slotsOop blockMethodMap::get_lexical_link() {
 // return contents of my lexical link
 methodMap* blockMethodMap::get_lexical_link_map() {
   Map* m = get_lexical_link()->map();
-  return m->has_code() ? (methodMap*)m : NULL;
+  return m->has_code() ? (methodMap*)m : 0;
 }
   
 
@@ -717,7 +717,7 @@ slotDesc* methodMap::getLocalSlot( fint lexicalLevel, fint index ) {
   methodMap* m = this;
   for (fint i = 0;  i < lexicalLevel; i++) {
     m = m->get_lexical_link_map();
-    assert(m != NULL, "bad lexical level");
+    assert(m != 0, "bad lexical level");
   }
   return m->slot(index);
 }
@@ -961,7 +961,7 @@ UplevelAccessedLocalsBytecodeScanner::UplevelAccessedLocalsBytecodeScanner(
          m != parentMap;
          m= m->get_lexical_link_map()) {
       ++targetLexicalLevel;
-      if (m == NULL)
+      if (m == 0)
         ShouldNotReachHere(); // could not find parent
     }
   }
@@ -1037,7 +1037,7 @@ class ExprStackBCIsBytecodeScanner : public stacking_interpreter {
       else
         used_bci_flags[ bci < 0  ?  -bci  :  bci] = '\1';
     }
-    return NULL; 
+    return 0; 
   }
   
   fint get_stack_depth() { return bcis->length(); }
@@ -1105,7 +1105,7 @@ void ExprStackBCIsBytecodeScanner::do_send_code(bool isImp, stringOop sel, fint 
   onlyForDebug = 
       !UseLocalAccessBytecodes  
   &&   isImp  
-  &&  (s= mi.map()->find_slot(sel)) != NULL
+  &&  (s= mi.map()->find_slot(sel)) != 0
   && s->is_arg_slot();
 
   stacking_interpreter::do_send_code(isImp, sel, arg_count);
@@ -1158,7 +1158,7 @@ public:
 
   int   get_stack_depth() { return stack->length(); }
   void  push() { stack= stack->push(pc); }
-  void* pop(fint n = 1) { stack->pop(n); return NULL; }
+  void* pop(fint n = 1) { stack->pop(n); return 0; }
   
   void interpret_bytecode() {
     // at bci, stop if not a send
@@ -1255,7 +1255,7 @@ public:
   
 protected:
   
-  bool check(aiCheckFn fn, oop p = NULL) {
+  bool check(aiCheckFn fn, oop p = 0) {
     (*fn)(this, p);
     return !error_msg;
   }
@@ -1389,7 +1389,7 @@ const char* methodMap::check_byteCodes_and_literals( smi&            errorIndex,
   stack_deltas= ch.stack_deltas;
   if (ch.get_error_msg())
     return ch.get_error_msg();
-  return NULL;
+  return 0;
 }
 
 
@@ -1440,7 +1440,7 @@ IntList* methodMap::blocks_upto(fint bci,  OopList** literals) {
     
   BlockBytecodeScanner sc(this, bci);
   sc.interpret_method();
-  if (literals != NULL)
+  if (literals != 0)
     *literals = sc.blkLiterals;
   return sc.blks;
 }
@@ -1469,11 +1469,11 @@ class BranchTargetFinder: public abstract_interpreter {
     branch_targets = new BoolBList(mi.length_codes + 1);
     backwards_branch_targets =   separateDirections
       ?  new BoolBList(mi.length_codes + 1)
-      :  NULL;
+      :  0;
     for (int32 i = 0;  i < mi.length_codes + 1;  ++i) {
-      branch_targets->push(NULL);
+      branch_targets->push(0);
       if (separateDirections)
-        backwards_branch_targets->push(NULL);
+        backwards_branch_targets->push(0);
     }
     got_one= false;
   }
@@ -1500,7 +1500,7 @@ class BranchTargetFinder: public abstract_interpreter {
 
 
 
-// if bacwkards_branch_targets is omitted (NULL)
+// if bacwkards_branch_targets is omitted (0)
 // return bcis that are branch bc targets in branch_targets.
 // If not null, return targets of fwd branches in branch_targets
 // and targets of backwards branches in last argument.
@@ -1508,7 +1508,7 @@ class BranchTargetFinder: public abstract_interpreter {
 void methodMap::branch_targets( bool& got_one,  
                                 BoolBList** branch_targets,
                                 BoolBList** backwards_branch_targets) {
-  bool discriminateDirection = backwards_branch_targets != NULL;
+  bool discriminateDirection = backwards_branch_targets != 0;
   BranchTargetFinder btf(this, discriminateDirection);
   btf.interpret_method();
   *branch_targets=  btf.branch_targets;
@@ -1539,7 +1539,7 @@ public:
       if (error_msg) {
         lprintf( "*** %s in preceeding bytecode\n", error_msg);
       }
-      error_msg = NULL;
+      error_msg = 0;
     }
   }
 
@@ -1549,7 +1549,7 @@ public:
     fint startBCI = pc;
     for (pc= mi.firstBCI();  pc < startBCI;  ++pc) {
       interpret_bytecode();
-      error_msg = NULL;
+      error_msg = 0;
     }
     pc = startBCI;
     do_print = true;
@@ -1559,7 +1559,7 @@ protected:
 
   bool do_print;
 
-  bool check(aiCheckFn fn, oop p = NULL) {
+  bool check(aiCheckFn fn, oop p = 0) {
     (*fn)(this, p);
     return !error_msg;
   }

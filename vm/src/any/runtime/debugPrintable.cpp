@@ -10,7 +10,7 @@
 # if  GENERATE_DEBUGGING_AIDS
 void pp(void* p) {
   FlagSetting fl(PrintVMMessages, true);
-  if (p == NULL) {
+  if (p == 0) {
     lprintf("0x0");
   } else if (int32(p) < 10000 && int32(p) > -10000) {
     // guess that it's a location
@@ -39,7 +39,7 @@ void pp_next(void* p) {
 
 void pp_short(void* p) {
   FlagSetting fl(PrintVMMessages, true);
-  if (p == NULL) {
+  if (p == 0) {
     lprintf("0x0");
   } else if (int32(p) < 10000 && int32(p) > -10000) {
     // guess that it's a location

@@ -9,7 +9,7 @@
 void stringMap::create_initial_strings(oop parent) {
   // create string map
   slotList* slist =
-    new slotList(NULL, parent_map_slotType, parent); 
+    new slotList(0, parent_map_slotType, parent); 
   stringMap m1;
   stringOop s;
   stringMap* m= (stringMap*) create_map(sizeof(stringMap), slist, &m1,
@@ -41,14 +41,14 @@ oop stringMap::clone(oop obj, bool mustAllocate, oop genObj) {
 oop stringMap::cloneSize(oop obj, fint len, bool mustAllocate, oop filler) {
   Unused(obj); Unused(len); Unused(mustAllocate); Unused(filler);
   ShouldNotCallThis(); // shouldn't be cloning/resizing a string
-  return NULL;
+  return 0;
 }
 
 oop stringMap::scavenge(oop obj) {
   Unused(obj);
   ShouldNotCallThis(); // shouldn't need to scavenge canonical strings
                        // (should be tenured)
-  return NULL;
+  return 0;
 }
 
 bool stringMap::verify(oop obj) {

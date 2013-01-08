@@ -32,14 +32,14 @@ class abstract_vframe: public ResourceObj {
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
   compiled_vframe* as_compiled() {
-    if (this == NULL) return NULL;
+    if (this == 0) return 0;
     assert_compiled();
     return (compiled_vframe*)this;
   }
 # endif
     
   interpreted_vframe* as_interpreted() {
-    if (this == NULL) return NULL;
+    if (this == 0) return 0;
     assert_interpreted();
     return (interpreted_vframe*)this;
   }
@@ -47,7 +47,7 @@ class abstract_vframe: public ResourceObj {
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
   nvframe* as_n() {
-    if (this == NULL) return NULL;
+    if (this == 0) return 0;
     assert_n();
     return (nvframe*)this;
   }
@@ -86,7 +86,7 @@ class abstract_vframe: public ResourceObj {
   bool  is_prologue(); 
 
  public:
-  abstract_vframe* sendee(abstract_vframe* lastSelfVf = NULL);// vframe below the receiver; SLOW!
+  abstract_vframe* sendee(abstract_vframe* lastSelfVf = 0);// vframe below the receiver; SLOW!
   
   virtual abstract_vframe* parent();
   abstract_vframe* sender()             { return get_sender(true); }
@@ -145,7 +145,7 @@ class interpreted_vframe: public abstract_vframe {
   bool is_compiled() { return false; }
 
   interpreted_vframe(frame* f);
-  interpreted_vframe() {fr = NULL;}
+  interpreted_vframe() {fr = 0;}
 
  public:
   smiOop  descOffset() { return smiOop_zero; }
@@ -221,7 +221,7 @@ class compiled_vframe: public abstract_vframe {
 
   // constructors
   
-  compiled_vframe() { fr = NULL, code = NULL, desc = NULL, rl = NULL, _bci = 0; }
+  compiled_vframe() { fr = 0, code = 0, desc = 0, rl = 0, _bci = 0; }
   
   compiled_vframe(frame* f, nmethod* c, ScopeDesc* d, fint b, RegisterLocator* _r) {
     fr = f; code = c; desc = d; _bci = b; set_rl( _r); }
@@ -457,5 +457,5 @@ class dummy_vframe : public compiled_vframe {
 # endif // defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
 
-extern abstract_vframe* new_vframe(frame* f, RegisterLocator* _rl = NULL);
-extern abstract_vframe* new_vframe(frame* f, smiOop offset, RegisterLocator* _rl = NULL);
+extern abstract_vframe* new_vframe(frame* f, RegisterLocator* _rl = 0);
+extern abstract_vframe* new_vframe(frame* f, smiOop offset, RegisterLocator* _rl = 0);

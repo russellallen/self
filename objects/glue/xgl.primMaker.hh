@@ -1434,7 +1434,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_x_window_delete, xgl_x_window_delete_Delete_glue, , proxy,(Xgl_X_window*,Xgl_X_window_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_X_window*,Xgl_X_window_seal), NULL, NULL_NilXWindow_glue) \
+ C_get_var( proxy_null,(Xgl_X_window*,Xgl_X_window_seal), 0, NULL_NilXWindow_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_X_window*,Xgl_X_window_seal), xgl_x_window_at, xgl_x_window_at_At__glue, , proxy,(Xgl_X_window*,Xgl_X_window_seal), unsigned_int,) \
@@ -1456,7 +1456,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_arc_ad3d_delete, xgl_arc_ad3d_delete_Delete_glue, , proxy,(Xgl_arc_ad3d*,Xgl_arc_ad3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_arc_ad3d*,Xgl_arc_ad3d_seal), NULL, NULL_NilArcAd3d_glue) \
+ C_get_var( proxy_null,(Xgl_arc_ad3d*,Xgl_arc_ad3d_seal), 0, NULL_NilArcAd3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_arc_ad3d*,Xgl_arc_ad3d_seal), xgl_arc_ad3d_at, xgl_arc_ad3d_at_At__glue, , proxy,(Xgl_arc_ad3d*,Xgl_arc_ad3d_seal), unsigned_int,) \
@@ -1480,7 +1480,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_arc_af3d_delete, xgl_arc_af3d_delete_Delete_glue, , proxy,(Xgl_arc_af3d*,Xgl_arc_af3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_arc_af3d*,Xgl_arc_af3d_seal), NULL, NULL_NilArcAf3d_glue) \
+ C_get_var( proxy_null,(Xgl_arc_af3d*,Xgl_arc_af3d_seal), 0, NULL_NilArcAf3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_arc_af3d*,Xgl_arc_af3d_seal), xgl_arc_af3d_at, xgl_arc_af3d_at_At__glue, , proxy,(Xgl_arc_af3d*,Xgl_arc_af3d_seal), unsigned_int,) \
@@ -1504,7 +1504,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_arc_d2d_delete, xgl_arc_d2d_delete_Delete_glue, , proxy,(Xgl_arc_d2d*,Xgl_arc_d2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_arc_d2d*,Xgl_arc_d2d_seal), NULL, NULL_NilArcD2d_glue) \
+ C_get_var( proxy_null,(Xgl_arc_d2d*,Xgl_arc_d2d_seal), 0, NULL_NilArcD2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_arc_d2d*,Xgl_arc_d2d_seal), xgl_arc_d2d_at, xgl_arc_d2d_at_At__glue, , proxy,(Xgl_arc_d2d*,Xgl_arc_d2d_seal), unsigned_int,) \
@@ -1528,7 +1528,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_arc_d3d_delete, xgl_arc_d3d_delete_Delete_glue, , proxy,(Xgl_arc_d3d*,Xgl_arc_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_arc_d3d*,Xgl_arc_d3d_seal), NULL, NULL_NilArcD3d_glue) \
+ C_get_var( proxy_null,(Xgl_arc_d3d*,Xgl_arc_d3d_seal), 0, NULL_NilArcD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_arc_d3d*,Xgl_arc_d3d_seal), xgl_arc_d3d_at, xgl_arc_d3d_at_At__glue, , proxy,(Xgl_arc_d3d*,Xgl_arc_d3d_seal), unsigned_int,) \
@@ -1557,7 +1557,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_arc_f2d_delete, xgl_arc_f2d_delete_Delete_glue, , proxy,(Xgl_arc_f2d*,Xgl_arc_f2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_arc_f2d*,Xgl_arc_f2d_seal), NULL, NULL_NilArcF2d_glue) \
+ C_get_var( proxy_null,(Xgl_arc_f2d*,Xgl_arc_f2d_seal), 0, NULL_NilArcF2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_arc_f2d*,Xgl_arc_f2d_seal), xgl_arc_f2d_at, xgl_arc_f2d_at_At__glue, , proxy,(Xgl_arc_f2d*,Xgl_arc_f2d_seal), unsigned_int,) \
@@ -1581,7 +1581,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_arc_f3d_delete, xgl_arc_f3d_delete_Delete_glue, , proxy,(Xgl_arc_f3d*,Xgl_arc_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_arc_f3d*,Xgl_arc_f3d_seal), NULL, NULL_NilArcF3d_glue) \
+ C_get_var( proxy_null,(Xgl_arc_f3d*,Xgl_arc_f3d_seal), 0, NULL_NilArcF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_arc_f3d*,Xgl_arc_f3d_seal), xgl_arc_f3d_at, xgl_arc_f3d_at_At__glue, , proxy,(Xgl_arc_f3d*,Xgl_arc_f3d_seal), unsigned_int,) \
@@ -1610,7 +1610,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_arc_i2d_delete, xgl_arc_i2d_delete_Delete_glue, , proxy,(Xgl_arc_i2d*,Xgl_arc_i2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_arc_i2d*,Xgl_arc_i2d_seal), NULL, NULL_NilArcI2d_glue) \
+ C_get_var( proxy_null,(Xgl_arc_i2d*,Xgl_arc_i2d_seal), 0, NULL_NilArcI2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_arc_i2d*,Xgl_arc_i2d_seal), xgl_arc_i2d_at, xgl_arc_i2d_at_At__glue, , proxy,(Xgl_arc_i2d*,Xgl_arc_i2d_seal), unsigned_int,) \
@@ -1634,7 +1634,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_arc_list_delete, xgl_arc_list_delete_Delete_glue, , proxy,(Xgl_arc_list*,Xgl_arc_list_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_arc_list*,Xgl_arc_list_seal), NULL, NULL_NilArcList_glue) \
+ C_get_var( proxy_null,(Xgl_arc_list*,Xgl_arc_list_seal), 0, NULL_NilArcList_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_arc_list*,Xgl_arc_list_seal), xgl_arc_list_at, xgl_arc_list_at_At__glue, , proxy,(Xgl_arc_list*,Xgl_arc_list_seal), unsigned_int,) \
@@ -1676,7 +1676,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_bbox_delete, xgl_bbox_delete_Delete_glue, , proxy,(Xgl_bbox*,Xgl_bbox_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_bbox*,Xgl_bbox_seal), NULL, NULL_NilBbox_glue) \
+ C_get_var( proxy_null,(Xgl_bbox*,Xgl_bbox_seal), 0, NULL_NilBbox_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_bbox*,Xgl_bbox_seal), xgl_bbox_at, xgl_bbox_at_At__glue, , proxy,(Xgl_bbox*,Xgl_bbox_seal), unsigned_int,) \
@@ -1702,7 +1702,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_bbox_d2d_delete, xgl_bbox_d2d_delete_Delete_glue, , proxy,(Xgl_bbox_d2d*,Xgl_bbox_d2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_bbox_d2d*,Xgl_bbox_d2d_seal), NULL, NULL_NilBboxD2d_glue) \
+ C_get_var( proxy_null,(Xgl_bbox_d2d*,Xgl_bbox_d2d_seal), 0, NULL_NilBboxD2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_bbox_d2d*,Xgl_bbox_d2d_seal), xgl_bbox_d2d_at, xgl_bbox_d2d_at_At__glue, , proxy,(Xgl_bbox_d2d*,Xgl_bbox_d2d_seal), unsigned_int,) \
@@ -1722,7 +1722,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_bbox_d3d_delete, xgl_bbox_d3d_delete_Delete_glue, , proxy,(Xgl_bbox_d3d*,Xgl_bbox_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_bbox_d3d*,Xgl_bbox_d3d_seal), NULL, NULL_NilBboxD3d_glue) \
+ C_get_var( proxy_null,(Xgl_bbox_d3d*,Xgl_bbox_d3d_seal), 0, NULL_NilBboxD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_bbox_d3d*,Xgl_bbox_d3d_seal), xgl_bbox_d3d_at, xgl_bbox_d3d_at_At__glue, , proxy,(Xgl_bbox_d3d*,Xgl_bbox_d3d_seal), unsigned_int,) \
@@ -1742,7 +1742,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_bbox_f2d_delete, xgl_bbox_f2d_delete_Delete_glue, , proxy,(Xgl_bbox_f2d*,Xgl_bbox_f2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_bbox_f2d*,Xgl_bbox_f2d_seal), NULL, NULL_NilBboxF2d_glue) \
+ C_get_var( proxy_null,(Xgl_bbox_f2d*,Xgl_bbox_f2d_seal), 0, NULL_NilBboxF2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_bbox_f2d*,Xgl_bbox_f2d_seal), xgl_bbox_f2d_at, xgl_bbox_f2d_at_At__glue, , proxy,(Xgl_bbox_f2d*,Xgl_bbox_f2d_seal), unsigned_int,) \
@@ -1762,7 +1762,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_bbox_f3d_delete, xgl_bbox_f3d_delete_Delete_glue, , proxy,(Xgl_bbox_f3d*,Xgl_bbox_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_bbox_f3d*,Xgl_bbox_f3d_seal), NULL, NULL_NilBboxF3d_glue) \
+ C_get_var( proxy_null,(Xgl_bbox_f3d*,Xgl_bbox_f3d_seal), 0, NULL_NilBboxF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_bbox_f3d*,Xgl_bbox_f3d_seal), xgl_bbox_f3d_at, xgl_bbox_f3d_at_At__glue, , proxy,(Xgl_bbox_f3d*,Xgl_bbox_f3d_seal), unsigned_int,) \
@@ -1782,7 +1782,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_bbox_i2d_delete, xgl_bbox_i2d_delete_Delete_glue, , proxy,(Xgl_bbox_i2d*,Xgl_bbox_i2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_bbox_i2d*,Xgl_bbox_i2d_seal), NULL, NULL_NilBboxI2d_glue) \
+ C_get_var( proxy_null,(Xgl_bbox_i2d*,Xgl_bbox_i2d_seal), 0, NULL_NilBboxI2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_bbox_i2d*,Xgl_bbox_i2d_seal), xgl_bbox_i2d_at, xgl_bbox_i2d_at_At__glue, , proxy,(Xgl_bbox_i2d*,Xgl_bbox_i2d_seal), unsigned_int,) \
@@ -1802,7 +1802,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_bbox_status_delete, xgl_bbox_status_delete_Delete_glue, , proxy,(Xgl_bbox_status*,Xgl_bbox_status_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_bbox_status*,Xgl_bbox_status_seal), NULL, NULL_NilBboxStatus_glue) \
+ C_get_var( proxy_null,(Xgl_bbox_status*,Xgl_bbox_status_seal), 0, NULL_NilBboxStatus_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_bbox_status*,Xgl_bbox_status_seal), xgl_bbox_status_at, xgl_bbox_status_at_At__glue, , proxy,(Xgl_bbox_status*,Xgl_bbox_status_seal), unsigned_int,) \
@@ -1822,7 +1822,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_bounds_d1d_delete, xgl_bounds_d1d_delete_Delete_glue, , proxy,(Xgl_bounds_d1d*,Xgl_bounds_d1d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_bounds_d1d*,Xgl_bounds_d1d_seal), NULL, NULL_NilBoundsD1d_glue) \
+ C_get_var( proxy_null,(Xgl_bounds_d1d*,Xgl_bounds_d1d_seal), 0, NULL_NilBoundsD1d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_bounds_d1d*,Xgl_bounds_d1d_seal), xgl_bounds_d1d_at, xgl_bounds_d1d_at_At__glue, , proxy,(Xgl_bounds_d1d*,Xgl_bounds_d1d_seal), unsigned_int,) \
@@ -1839,7 +1839,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_bounds_d2d_delete, xgl_bounds_d2d_delete_Delete_glue, , proxy,(Xgl_bounds_d2d*,Xgl_bounds_d2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_bounds_d2d*,Xgl_bounds_d2d_seal), NULL, NULL_NilBoundsD2d_glue) \
+ C_get_var( proxy_null,(Xgl_bounds_d2d*,Xgl_bounds_d2d_seal), 0, NULL_NilBoundsD2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_bounds_d2d*,Xgl_bounds_d2d_seal), xgl_bounds_d2d_at, xgl_bounds_d2d_at_At__glue, , proxy,(Xgl_bounds_d2d*,Xgl_bounds_d2d_seal), unsigned_int,) \
@@ -1863,7 +1863,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_bounds_d3d_delete, xgl_bounds_d3d_delete_Delete_glue, , proxy,(Xgl_bounds_d3d*,Xgl_bounds_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_bounds_d3d*,Xgl_bounds_d3d_seal), NULL, NULL_NilBoundsD3d_glue) \
+ C_get_var( proxy_null,(Xgl_bounds_d3d*,Xgl_bounds_d3d_seal), 0, NULL_NilBoundsD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_bounds_d3d*,Xgl_bounds_d3d_seal), xgl_bounds_d3d_at, xgl_bounds_d3d_at_At__glue, , proxy,(Xgl_bounds_d3d*,Xgl_bounds_d3d_seal), unsigned_int,) \
@@ -1891,7 +1891,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_bounds_f1d_delete, xgl_bounds_f1d_delete_Delete_glue, , proxy,(Xgl_bounds_f1d*,Xgl_bounds_f1d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_bounds_f1d*,Xgl_bounds_f1d_seal), NULL, NULL_NilBoundsF1d_glue) \
+ C_get_var( proxy_null,(Xgl_bounds_f1d*,Xgl_bounds_f1d_seal), 0, NULL_NilBoundsF1d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_bounds_f1d*,Xgl_bounds_f1d_seal), xgl_bounds_f1d_at, xgl_bounds_f1d_at_At__glue, , proxy,(Xgl_bounds_f1d*,Xgl_bounds_f1d_seal), unsigned_int,) \
@@ -1908,7 +1908,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_bounds_f2d_delete, xgl_bounds_f2d_delete_Delete_glue, , proxy,(Xgl_bounds_f2d*,Xgl_bounds_f2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_bounds_f2d*,Xgl_bounds_f2d_seal), NULL, NULL_NilBoundsF2d_glue) \
+ C_get_var( proxy_null,(Xgl_bounds_f2d*,Xgl_bounds_f2d_seal), 0, NULL_NilBoundsF2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_bounds_f2d*,Xgl_bounds_f2d_seal), xgl_bounds_f2d_at, xgl_bounds_f2d_at_At__glue, , proxy,(Xgl_bounds_f2d*,Xgl_bounds_f2d_seal), unsigned_int,) \
@@ -1932,7 +1932,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_bounds_f3d_delete, xgl_bounds_f3d_delete_Delete_glue, , proxy,(Xgl_bounds_f3d*,Xgl_bounds_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_bounds_f3d*,Xgl_bounds_f3d_seal), NULL, NULL_NilBoundsF3d_glue) \
+ C_get_var( proxy_null,(Xgl_bounds_f3d*,Xgl_bounds_f3d_seal), 0, NULL_NilBoundsF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_bounds_f3d*,Xgl_bounds_f3d_seal), xgl_bounds_f3d_at, xgl_bounds_f3d_at_At__glue, , proxy,(Xgl_bounds_f3d*,Xgl_bounds_f3d_seal), unsigned_int,) \
@@ -1960,7 +1960,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_bounds_i2d_delete, xgl_bounds_i2d_delete_Delete_glue, , proxy,(Xgl_bounds_i2d*,Xgl_bounds_i2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_bounds_i2d*,Xgl_bounds_i2d_seal), NULL, NULL_NilBoundsI2d_glue) \
+ C_get_var( proxy_null,(Xgl_bounds_i2d*,Xgl_bounds_i2d_seal), 0, NULL_NilBoundsI2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_bounds_i2d*,Xgl_bounds_i2d_seal), xgl_bounds_i2d_at, xgl_bounds_i2d_at_At__glue, , proxy,(Xgl_bounds_i2d*,Xgl_bounds_i2d_seal), unsigned_int,) \
@@ -1984,7 +1984,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_circle_ad3d_delete, xgl_circle_ad3d_delete_Delete_glue, , proxy,(Xgl_circle_ad3d*,Xgl_circle_ad3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_circle_ad3d*,Xgl_circle_ad3d_seal), NULL, NULL_NilCircleAd3d_glue) \
+ C_get_var( proxy_null,(Xgl_circle_ad3d*,Xgl_circle_ad3d_seal), 0, NULL_NilCircleAd3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_circle_ad3d*,Xgl_circle_ad3d_seal), xgl_circle_ad3d_at, xgl_circle_ad3d_at_At__glue, , proxy,(Xgl_circle_ad3d*,Xgl_circle_ad3d_seal), unsigned_int,) \
@@ -2001,7 +2001,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_circle_af3d_delete, xgl_circle_af3d_delete_Delete_glue, , proxy,(Xgl_circle_af3d*,Xgl_circle_af3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_circle_af3d*,Xgl_circle_af3d_seal), NULL, NULL_NilCircleAf3d_glue) \
+ C_get_var( proxy_null,(Xgl_circle_af3d*,Xgl_circle_af3d_seal), 0, NULL_NilCircleAf3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_circle_af3d*,Xgl_circle_af3d_seal), xgl_circle_af3d_at, xgl_circle_af3d_at_At__glue, , proxy,(Xgl_circle_af3d*,Xgl_circle_af3d_seal), unsigned_int,) \
@@ -2018,7 +2018,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_circle_d2d_delete, xgl_circle_d2d_delete_Delete_glue, , proxy,(Xgl_circle_d2d*,Xgl_circle_d2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_circle_d2d*,Xgl_circle_d2d_seal), NULL, NULL_NilCircleD2d_glue) \
+ C_get_var( proxy_null,(Xgl_circle_d2d*,Xgl_circle_d2d_seal), 0, NULL_NilCircleD2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_circle_d2d*,Xgl_circle_d2d_seal), xgl_circle_d2d_at, xgl_circle_d2d_at_At__glue, , proxy,(Xgl_circle_d2d*,Xgl_circle_d2d_seal), unsigned_int,) \
@@ -2035,7 +2035,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_circle_d3d_delete, xgl_circle_d3d_delete_Delete_glue, , proxy,(Xgl_circle_d3d*,Xgl_circle_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_circle_d3d*,Xgl_circle_d3d_seal), NULL, NULL_NilCircleD3d_glue) \
+ C_get_var( proxy_null,(Xgl_circle_d3d*,Xgl_circle_d3d_seal), 0, NULL_NilCircleD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_circle_d3d*,Xgl_circle_d3d_seal), xgl_circle_d3d_at, xgl_circle_d3d_at_At__glue, , proxy,(Xgl_circle_d3d*,Xgl_circle_d3d_seal), unsigned_int,) \
@@ -2060,7 +2060,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_circle_f2d_delete, xgl_circle_f2d_delete_Delete_glue, , proxy,(Xgl_circle_f2d*,Xgl_circle_f2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_circle_f2d*,Xgl_circle_f2d_seal), NULL, NULL_NilCircleF2d_glue) \
+ C_get_var( proxy_null,(Xgl_circle_f2d*,Xgl_circle_f2d_seal), 0, NULL_NilCircleF2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_circle_f2d*,Xgl_circle_f2d_seal), xgl_circle_f2d_at, xgl_circle_f2d_at_At__glue, , proxy,(Xgl_circle_f2d*,Xgl_circle_f2d_seal), unsigned_int,) \
@@ -2077,7 +2077,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_circle_f3d_delete, xgl_circle_f3d_delete_Delete_glue, , proxy,(Xgl_circle_f3d*,Xgl_circle_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_circle_f3d*,Xgl_circle_f3d_seal), NULL, NULL_NilCircleF3d_glue) \
+ C_get_var( proxy_null,(Xgl_circle_f3d*,Xgl_circle_f3d_seal), 0, NULL_NilCircleF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_circle_f3d*,Xgl_circle_f3d_seal), xgl_circle_f3d_at, xgl_circle_f3d_at_At__glue, , proxy,(Xgl_circle_f3d*,Xgl_circle_f3d_seal), unsigned_int,) \
@@ -2102,7 +2102,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_circle_i2d_delete, xgl_circle_i2d_delete_Delete_glue, , proxy,(Xgl_circle_i2d*,Xgl_circle_i2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_circle_i2d*,Xgl_circle_i2d_seal), NULL, NULL_NilCircleI2d_glue) \
+ C_get_var( proxy_null,(Xgl_circle_i2d*,Xgl_circle_i2d_seal), 0, NULL_NilCircleI2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_circle_i2d*,Xgl_circle_i2d_seal), xgl_circle_i2d_at, xgl_circle_i2d_at_At__glue, , proxy,(Xgl_circle_i2d*,Xgl_circle_i2d_seal), unsigned_int,) \
@@ -2119,7 +2119,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_circle_list_delete, xgl_circle_list_delete_Delete_glue, , proxy,(Xgl_circle_list*,Xgl_circle_list_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_circle_list*,Xgl_circle_list_seal), NULL, NULL_NilCircleList_glue) \
+ C_get_var( proxy_null,(Xgl_circle_list*,Xgl_circle_list_seal), 0, NULL_NilCircleList_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_circle_list*,Xgl_circle_list_seal), xgl_circle_list_at, xgl_circle_list_at_At__glue, , proxy,(Xgl_circle_list*,Xgl_circle_list_seal), unsigned_int,) \
@@ -2161,7 +2161,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_color_delete, xgl_color_delete_Delete_glue, , proxy,(Xgl_color*,Xgl_color_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_color*,Xgl_color_seal), NULL, NULL_NilColor_glue) \
+ C_get_var( proxy_null,(Xgl_color*,Xgl_color_seal), 0, NULL_NilColor_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_color*,Xgl_color_seal), xgl_color_at, xgl_color_at_At__glue, , proxy,(Xgl_color*,Xgl_color_seal), unsigned_int,) \
@@ -2182,7 +2182,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_color_facet_delete, xgl_color_facet_delete_Delete_glue, , proxy,(Xgl_color_facet*,Xgl_color_facet_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_color_facet*,Xgl_color_facet_seal), NULL, NULL_NilColorFacet_glue) \
+ C_get_var( proxy_null,(Xgl_color_facet*,Xgl_color_facet_seal), 0, NULL_NilColorFacet_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_color_facet*,Xgl_color_facet_seal), xgl_color_facet_at, xgl_color_facet_at_At__glue, , proxy,(Xgl_color_facet*,Xgl_color_facet_seal), unsigned_int,) \
@@ -2203,7 +2203,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_color_homogeneous_delete, xgl_color_homogeneous_delete_Delete_glue, , proxy,(Xgl_color_homogeneous*,Xgl_color_homogeneous_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_color_homogeneous*,Xgl_color_homogeneous_seal), NULL, NULL_NilColorHomogeneous_glue) \
+ C_get_var( proxy_null,(Xgl_color_homogeneous*,Xgl_color_homogeneous_seal), 0, NULL_NilColorHomogeneous_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_color_homogeneous*,Xgl_color_homogeneous_seal), xgl_color_homogeneous_at, xgl_color_homogeneous_at_At__glue, , proxy,(Xgl_color_homogeneous*,Xgl_color_homogeneous_seal), unsigned_int,) \
@@ -2218,7 +2218,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_color_list_delete, xgl_color_list_delete_Delete_glue, , proxy,(Xgl_color_list*,Xgl_color_list_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_color_list*,Xgl_color_list_seal), NULL, NULL_NilColorList_glue) \
+ C_get_var( proxy_null,(Xgl_color_list*,Xgl_color_list_seal), 0, NULL_NilColorList_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_color_list*,Xgl_color_list_seal), xgl_color_list_at, xgl_color_list_at_At__glue, , proxy,(Xgl_color_list*,Xgl_color_list_seal), unsigned_int,) \
@@ -2240,7 +2240,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_color_normal_facet_delete, xgl_color_normal_facet_delete_Delete_glue, , proxy,(Xgl_color_normal_facet*,Xgl_color_normal_facet_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_color_normal_facet*,Xgl_color_normal_facet_seal), NULL, NULL_NilColorNormalFacet_glue) \
+ C_get_var( proxy_null,(Xgl_color_normal_facet*,Xgl_color_normal_facet_seal), 0, NULL_NilColorNormalFacet_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_color_normal_facet*,Xgl_color_normal_facet_seal), xgl_color_normal_facet_at, xgl_color_normal_facet_at_At__glue, , proxy,(Xgl_color_normal_facet*,Xgl_color_normal_facet_seal), unsigned_int,) \
@@ -2263,7 +2263,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_color_rgb_delete, xgl_color_rgb_delete_Delete_glue, , proxy,(Xgl_color_rgb*,Xgl_color_rgb_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_color_rgb*,Xgl_color_rgb_seal), NULL, NULL_NilColorRgb_glue) \
+ C_get_var( proxy_null,(Xgl_color_rgb*,Xgl_color_rgb_seal), 0, NULL_NilColorRgb_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_color_rgb*,Xgl_color_rgb_seal), xgl_color_rgb_at, xgl_color_rgb_at_At__glue, , proxy,(Xgl_color_rgb*,Xgl_color_rgb_seal), unsigned_int,) \
@@ -2285,7 +2285,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_color_rgbw_delete, xgl_color_rgbw_delete_Delete_glue, , proxy,(Xgl_color_rgbw*,Xgl_color_rgbw_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_color_rgbw*,Xgl_color_rgbw_seal), NULL, NULL_NilColorRgbw_glue) \
+ C_get_var( proxy_null,(Xgl_color_rgbw*,Xgl_color_rgbw_seal), 0, NULL_NilColorRgbw_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_color_rgbw*,Xgl_color_rgbw_seal), xgl_color_rgbw_at, xgl_color_rgbw_at_At__glue, , proxy,(Xgl_color_rgbw*,Xgl_color_rgbw_seal), unsigned_int,) \
@@ -2309,7 +2309,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_color_type_supported_delete, xgl_color_type_supported_delete_Delete_glue, , proxy,(Xgl_color_type_supported*,Xgl_color_type_supported_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_color_type_supported*,Xgl_color_type_supported_seal), NULL, NULL_NilColorTypeSupported_glue) \
+ C_get_var( proxy_null,(Xgl_color_type_supported*,Xgl_color_type_supported_seal), 0, NULL_NilColorTypeSupported_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_color_type_supported*,Xgl_color_type_supported_seal), xgl_color_type_supported_at, xgl_color_type_supported_at_At__glue, , proxy,(Xgl_color_type_supported*,Xgl_color_type_supported_seal), unsigned_int,) \
@@ -2326,7 +2326,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_curve_color_spline_delete, xgl_curve_color_spline_delete_Delete_glue, , proxy,(Xgl_curve_color_spline*,Xgl_curve_color_spline_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_curve_color_spline*,Xgl_curve_color_spline_seal), NULL, NULL_NilCurveColorSpline_glue) \
+ C_get_var( proxy_null,(Xgl_curve_color_spline*,Xgl_curve_color_spline_seal), 0, NULL_NilCurveColorSpline_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_curve_color_spline*,Xgl_curve_color_spline_seal), xgl_curve_color_spline_at, xgl_curve_color_spline_at_At__glue, , proxy,(Xgl_curve_color_spline*,Xgl_curve_color_spline_seal), unsigned_int,) \
@@ -2350,7 +2350,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_ell_ad3d_delete, xgl_ell_ad3d_delete_Delete_glue, , proxy,(Xgl_ell_ad3d*,Xgl_ell_ad3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_ell_ad3d*,Xgl_ell_ad3d_seal), NULL, NULL_NilEllAd3d_glue) \
+ C_get_var( proxy_null,(Xgl_ell_ad3d*,Xgl_ell_ad3d_seal), 0, NULL_NilEllAd3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_ell_ad3d*,Xgl_ell_ad3d_seal), xgl_ell_ad3d_at, xgl_ell_ad3d_at_At__glue, , proxy,(Xgl_ell_ad3d*,Xgl_ell_ad3d_seal), unsigned_int,) \
@@ -2378,7 +2378,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_ell_af3d_delete, xgl_ell_af3d_delete_Delete_glue, , proxy,(Xgl_ell_af3d*,Xgl_ell_af3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_ell_af3d*,Xgl_ell_af3d_seal), NULL, NULL_NilEllAf3d_glue) \
+ C_get_var( proxy_null,(Xgl_ell_af3d*,Xgl_ell_af3d_seal), 0, NULL_NilEllAf3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_ell_af3d*,Xgl_ell_af3d_seal), xgl_ell_af3d_at, xgl_ell_af3d_at_At__glue, , proxy,(Xgl_ell_af3d*,Xgl_ell_af3d_seal), unsigned_int,) \
@@ -2406,7 +2406,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_ell_d3d_delete, xgl_ell_d3d_delete_Delete_glue, , proxy,(Xgl_ell_d3d*,Xgl_ell_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_ell_d3d*,Xgl_ell_d3d_seal), NULL, NULL_NilEllD3d_glue) \
+ C_get_var( proxy_null,(Xgl_ell_d3d*,Xgl_ell_d3d_seal), 0, NULL_NilEllD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_ell_d3d*,Xgl_ell_d3d_seal), xgl_ell_d3d_at, xgl_ell_d3d_at_At__glue, , proxy,(Xgl_ell_d3d*,Xgl_ell_d3d_seal), unsigned_int,) \
@@ -2439,7 +2439,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_ell_f3d_delete, xgl_ell_f3d_delete_Delete_glue, , proxy,(Xgl_ell_f3d*,Xgl_ell_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_ell_f3d*,Xgl_ell_f3d_seal), NULL, NULL_NilEllF3d_glue) \
+ C_get_var( proxy_null,(Xgl_ell_f3d*,Xgl_ell_f3d_seal), 0, NULL_NilEllF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_ell_f3d*,Xgl_ell_f3d_seal), xgl_ell_f3d_at, xgl_ell_f3d_at_At__glue, , proxy,(Xgl_ell_f3d*,Xgl_ell_f3d_seal), unsigned_int,) \
@@ -2472,7 +2472,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_ell_list_delete, xgl_ell_list_delete_Delete_glue, , proxy,(Xgl_ell_list*,Xgl_ell_list_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_ell_list*,Xgl_ell_list_seal), NULL, NULL_NilEllList_glue) \
+ C_get_var( proxy_null,(Xgl_ell_list*,Xgl_ell_list_seal), 0, NULL_NilEllList_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_ell_list*,Xgl_ell_list_seal), xgl_ell_list_at, xgl_ell_list_at_At__glue, , proxy,(Xgl_ell_list*,Xgl_ell_list_seal), unsigned_int,) \
@@ -2505,7 +2505,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_error_info_delete, xgl_error_info_delete_Delete_glue, , proxy,(Xgl_error_info*,Xgl_error_info_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_error_info*,Xgl_error_info_seal), NULL, NULL_NilErrorInfo_glue) \
+ C_get_var( proxy_null,(Xgl_error_info*,Xgl_error_info_seal), 0, NULL_NilErrorInfo_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_error_info*,Xgl_error_info_seal), xgl_error_info_at, xgl_error_info_at_At__glue, , proxy,(Xgl_error_info*,Xgl_error_info_seal), unsigned_int,) \
@@ -2534,7 +2534,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_facet_delete, xgl_facet_delete_Delete_glue, , proxy,(Xgl_facet*,Xgl_facet_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_facet*,Xgl_facet_seal), NULL, NULL_NilFacet_glue) \
+ C_get_var( proxy_null,(Xgl_facet*,Xgl_facet_seal), 0, NULL_NilFacet_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_facet*,Xgl_facet_seal), xgl_facet_at, xgl_facet_at_At__glue, , proxy,(Xgl_facet*,Xgl_facet_seal), unsigned_int,) \
@@ -2553,7 +2553,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_facet_list_delete, xgl_facet_list_delete_Delete_glue, , proxy,(Xgl_facet_list*,Xgl_facet_list_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_facet_list*,Xgl_facet_list_seal), NULL, NULL_NilFacetList_glue) \
+ C_get_var( proxy_null,(Xgl_facet_list*,Xgl_facet_list_seal), 0, NULL_NilFacetList_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_facet_list*,Xgl_facet_list_seal), xgl_facet_list_at, xgl_facet_list_at_At__glue, , proxy,(Xgl_facet_list*,Xgl_facet_list_seal), unsigned_int,) \
@@ -2581,7 +2581,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_facet_list_list_delete, xgl_facet_list_list_delete_Delete_glue, , proxy,(Xgl_facet_list_list*,Xgl_facet_list_list_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_facet_list_list*,Xgl_facet_list_list_seal), NULL, NULL_NilFacetListList_glue) \
+ C_get_var( proxy_null,(Xgl_facet_list_list*,Xgl_facet_list_list_seal), 0, NULL_NilFacetListList_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_facet_list_list*,Xgl_facet_list_list_seal), xgl_facet_list_list_at, xgl_facet_list_list_at_At__glue, , proxy,(Xgl_facet_list_list*,Xgl_facet_list_list_seal), unsigned_int,) \
@@ -2598,7 +2598,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_inquire_delete, xgl_inquire_delete_Delete_glue, , proxy,(Xgl_inquire*,Xgl_inquire_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_inquire*,Xgl_inquire_seal), NULL, NULL_NilInquire_glue) \
+ C_get_var( proxy_null,(Xgl_inquire*,Xgl_inquire_seal), 0, NULL_NilInquire_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_inquire*,Xgl_inquire_seal), xgl_inquire_at, xgl_inquire_at_At__glue, , proxy,(Xgl_inquire*,Xgl_inquire_seal), unsigned_int,) \
@@ -2651,7 +2651,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_irect_delete, xgl_irect_delete_Delete_glue, , proxy,(Xgl_irect*,Xgl_irect_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_irect*,Xgl_irect_seal), NULL, NULL_NilIrect_glue) \
+ C_get_var( proxy_null,(Xgl_irect*,Xgl_irect_seal), 0, NULL_NilIrect_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_irect*,Xgl_irect_seal), xgl_irect_at, xgl_irect_at_At__glue, , proxy,(Xgl_irect*,Xgl_irect_seal), unsigned_int,) \
@@ -2675,7 +2675,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_irect_list_delete, xgl_irect_list_delete_Delete_glue, , proxy,(Xgl_irect_list*,Xgl_irect_list_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_irect_list*,Xgl_irect_list_seal), NULL, NULL_NilIrectList_glue) \
+ C_get_var( proxy_null,(Xgl_irect_list*,Xgl_irect_list_seal), 0, NULL_NilIrectList_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_irect_list*,Xgl_irect_list_seal), xgl_irect_list_at, xgl_irect_list_at_At__glue, , proxy,(Xgl_irect_list*,Xgl_irect_list_seal), unsigned_int,) \
@@ -2692,7 +2692,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_matrix_d2d_delete, xgl_matrix_d2d_delete_Delete_glue, , proxy,(Xgl_matrix_d2d*,Xgl_matrix_d2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_matrix_d2d*,Xgl_matrix_d2d_seal), NULL, NULL_NilMatrixD2d_glue) \
+ C_get_var( proxy_null,(Xgl_matrix_d2d*,Xgl_matrix_d2d_seal), 0, NULL_NilMatrixD2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_matrix_d2d*,Xgl_matrix_d2d_seal), xgl_matrix_d2d_at, xgl_matrix_d2d_at_At__glue, , proxy,(Xgl_matrix_d2d*,Xgl_matrix_d2d_seal), unsigned_int,) \
@@ -2707,7 +2707,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_matrix_d3d_delete, xgl_matrix_d3d_delete_Delete_glue, , proxy,(Xgl_matrix_d3d*,Xgl_matrix_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_matrix_d3d*,Xgl_matrix_d3d_seal), NULL, NULL_NilMatrixD3d_glue) \
+ C_get_var( proxy_null,(Xgl_matrix_d3d*,Xgl_matrix_d3d_seal), 0, NULL_NilMatrixD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_matrix_d3d*,Xgl_matrix_d3d_seal), xgl_matrix_d3d_at, xgl_matrix_d3d_at_At__glue, , proxy,(Xgl_matrix_d3d*,Xgl_matrix_d3d_seal), unsigned_int,) \
@@ -2722,7 +2722,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_matrix_f2d_delete, xgl_matrix_f2d_delete_Delete_glue, , proxy,(Xgl_matrix_f2d*,Xgl_matrix_f2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_matrix_f2d*,Xgl_matrix_f2d_seal), NULL, NULL_NilMatrixF2d_glue) \
+ C_get_var( proxy_null,(Xgl_matrix_f2d*,Xgl_matrix_f2d_seal), 0, NULL_NilMatrixF2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_matrix_f2d*,Xgl_matrix_f2d_seal), xgl_matrix_f2d_at, xgl_matrix_f2d_at_At__glue, , proxy,(Xgl_matrix_f2d*,Xgl_matrix_f2d_seal), unsigned_int,) \
@@ -2737,7 +2737,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_matrix_f3d_delete, xgl_matrix_f3d_delete_Delete_glue, , proxy,(Xgl_matrix_f3d*,Xgl_matrix_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_matrix_f3d*,Xgl_matrix_f3d_seal), NULL, NULL_NilMatrixF3d_glue) \
+ C_get_var( proxy_null,(Xgl_matrix_f3d*,Xgl_matrix_f3d_seal), 0, NULL_NilMatrixF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_matrix_f3d*,Xgl_matrix_f3d_seal), xgl_matrix_f3d_at, xgl_matrix_f3d_at_At__glue, , proxy,(Xgl_matrix_f3d*,Xgl_matrix_f3d_seal), unsigned_int,) \
@@ -2752,7 +2752,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_matrix_i2d_delete, xgl_matrix_i2d_delete_Delete_glue, , proxy,(Xgl_matrix_i2d*,Xgl_matrix_i2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_matrix_i2d*,Xgl_matrix_i2d_seal), NULL, NULL_NilMatrixI2d_glue) \
+ C_get_var( proxy_null,(Xgl_matrix_i2d*,Xgl_matrix_i2d_seal), 0, NULL_NilMatrixI2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_matrix_i2d*,Xgl_matrix_i2d_seal), xgl_matrix_i2d_at, xgl_matrix_i2d_at_At__glue, , proxy,(Xgl_matrix_i2d*,Xgl_matrix_i2d_seal), unsigned_int,) \
@@ -2767,7 +2767,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_mono_text_delete, xgl_mono_text_delete_Delete_glue, , proxy,(Xgl_mono_text*,Xgl_mono_text_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_mono_text*,Xgl_mono_text_seal), NULL, NULL_NilMonoText_glue) \
+ C_get_var( proxy_null,(Xgl_mono_text*,Xgl_mono_text_seal), 0, NULL_NilMonoText_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_mono_text*,Xgl_mono_text_seal), xgl_mono_text_at, xgl_mono_text_at_At__glue, , proxy,(Xgl_mono_text*,Xgl_mono_text_seal), unsigned_int,) \
@@ -2784,7 +2784,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_mono_text_list_delete, xgl_mono_text_list_delete_Delete_glue, , proxy,(Xgl_mono_text_list*,Xgl_mono_text_list_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_mono_text_list*,Xgl_mono_text_list_seal), NULL, NULL_NilMonoTextList_glue) \
+ C_get_var( proxy_null,(Xgl_mono_text_list*,Xgl_mono_text_list_seal), 0, NULL_NilMonoTextList_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_mono_text_list*,Xgl_mono_text_list_seal), xgl_mono_text_list_at, xgl_mono_text_list_at_At__glue, , proxy,(Xgl_mono_text_list*,Xgl_mono_text_list_seal), unsigned_int,) \
@@ -2801,7 +2801,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_normal_facet_delete, xgl_normal_facet_delete_Delete_glue, , proxy,(Xgl_normal_facet*,Xgl_normal_facet_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_normal_facet*,Xgl_normal_facet_seal), NULL, NULL_NilNormalFacet_glue) \
+ C_get_var( proxy_null,(Xgl_normal_facet*,Xgl_normal_facet_seal), 0, NULL_NilNormalFacet_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_normal_facet*,Xgl_normal_facet_seal), xgl_normal_facet_at, xgl_normal_facet_at_At__glue, , proxy,(Xgl_normal_facet*,Xgl_normal_facet_seal), unsigned_int,) \
@@ -2816,7 +2816,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_nu_bspline_curve_delete, xgl_nu_bspline_curve_delete_Delete_glue, , proxy,(Xgl_nu_bspline_curve*,Xgl_nu_bspline_curve_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_nu_bspline_curve*,Xgl_nu_bspline_curve_seal), NULL, NULL_NilNuBsplineCurve_glue) \
+ C_get_var( proxy_null,(Xgl_nu_bspline_curve*,Xgl_nu_bspline_curve_seal), 0, NULL_NilNuBsplineCurve_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_nu_bspline_curve*,Xgl_nu_bspline_curve_seal), xgl_nu_bspline_curve_at, xgl_nu_bspline_curve_at_At__glue, , proxy,(Xgl_nu_bspline_curve*,Xgl_nu_bspline_curve_seal), unsigned_int,) \
@@ -2844,7 +2844,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_nurbs_curve_delete, xgl_nurbs_curve_delete_Delete_glue, , proxy,(Xgl_nurbs_curve*,Xgl_nurbs_curve_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_nurbs_curve*,Xgl_nurbs_curve_seal), NULL, NULL_NilNurbsCurve_glue) \
+ C_get_var( proxy_null,(Xgl_nurbs_curve*,Xgl_nurbs_curve_seal), 0, NULL_NilNurbsCurve_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_nurbs_curve*,Xgl_nurbs_curve_seal), xgl_nurbs_curve_at, xgl_nurbs_curve_at_At__glue, , proxy,(Xgl_nurbs_curve*,Xgl_nurbs_curve_seal), unsigned_int,) \
@@ -2868,7 +2868,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_nurbs_surf_delete, xgl_nurbs_surf_delete_Delete_glue, , proxy,(Xgl_nurbs_surf*,Xgl_nurbs_surf_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_nurbs_surf*,Xgl_nurbs_surf_seal), NULL, NULL_NilNurbsSurf_glue) \
+ C_get_var( proxy_null,(Xgl_nurbs_surf*,Xgl_nurbs_surf_seal), 0, NULL_NilNurbsSurf_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_nurbs_surf*,Xgl_nurbs_surf_seal), xgl_nurbs_surf_at, xgl_nurbs_surf_at_At__glue, , proxy,(Xgl_nurbs_surf*,Xgl_nurbs_surf_seal), unsigned_int,) \
@@ -2898,7 +2898,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_nurbs_surf_simple_geom_delete, xgl_nurbs_surf_simple_geom_delete_Delete_glue, , proxy,(Xgl_nurbs_surf_simple_geom*,Xgl_nurbs_surf_simple_geom_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_nurbs_surf_simple_geom*,Xgl_nurbs_surf_simple_geom_seal), NULL, NULL_NilNurbsSurfSimpleGeom_glue) \
+ C_get_var( proxy_null,(Xgl_nurbs_surf_simple_geom*,Xgl_nurbs_surf_simple_geom_seal), 0, NULL_NilNurbsSurfSimpleGeom_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_nurbs_surf_simple_geom*,Xgl_nurbs_surf_simple_geom_seal), xgl_nurbs_surf_simple_geom_at, xgl_nurbs_surf_simple_geom_at_At__glue, , proxy,(Xgl_nurbs_surf_simple_geom*,Xgl_nurbs_surf_simple_geom_seal), unsigned_int,) \
@@ -2943,7 +2943,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_obj_desc_delete, xgl_obj_desc_delete_Delete_glue, , proxy,(Xgl_obj_desc*,Xgl_obj_desc_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_obj_desc*,Xgl_obj_desc_seal), NULL, NULL_NilObjDesc_glue) \
+ C_get_var( proxy_null,(Xgl_obj_desc*,Xgl_obj_desc_seal), 0, NULL_NilObjDesc_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_obj_desc*,Xgl_obj_desc_seal), xgl_obj_desc_at, xgl_obj_desc_at_At__glue, , proxy,(Xgl_obj_desc*,Xgl_obj_desc_seal), unsigned_int,) \
@@ -2968,7 +2968,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pick_info_delete, xgl_pick_info_delete_Delete_glue, , proxy,(Xgl_pick_info*,Xgl_pick_info_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pick_info*,Xgl_pick_info_seal), NULL, NULL_NilPickInfo_glue) \
+ C_get_var( proxy_null,(Xgl_pick_info*,Xgl_pick_info_seal), 0, NULL_NilPickInfo_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pick_info*,Xgl_pick_info_seal), xgl_pick_info_at, xgl_pick_info_at_At__glue, , proxy,(Xgl_pick_info*,Xgl_pick_info_seal), unsigned_int,) \
@@ -2990,7 +2990,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_plane_delete, xgl_plane_delete_Delete_glue, , proxy,(Xgl_plane*,Xgl_plane_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_plane*,Xgl_plane_seal), NULL, NULL_NilPlane_glue) \
+ C_get_var( proxy_null,(Xgl_plane*,Xgl_plane_seal), 0, NULL_NilPlane_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_plane*,Xgl_plane_seal), xgl_plane_at, xgl_plane_at_At__glue, , proxy,(Xgl_plane*,Xgl_plane_seal), unsigned_int,) \
@@ -3007,7 +3007,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_plane_list_delete, xgl_plane_list_delete_Delete_glue, , proxy,(Xgl_plane_list*,Xgl_plane_list_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_plane_list*,Xgl_plane_list_seal), NULL, NULL_NilPlaneList_glue) \
+ C_get_var( proxy_null,(Xgl_plane_list*,Xgl_plane_list_seal), 0, NULL_NilPlaneList_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_plane_list*,Xgl_plane_list_seal), xgl_plane_list_at, xgl_plane_list_at_At__glue, , proxy,(Xgl_plane_list*,Xgl_plane_list_seal), unsigned_int,) \
@@ -3024,7 +3024,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_delete, xgl_pt_delete_Delete_glue, , proxy,(Xgl_pt*,Xgl_pt_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt*,Xgl_pt_seal), NULL, NULL_NilPt_glue) \
+ C_get_var( proxy_null,(Xgl_pt*,Xgl_pt_seal), 0, NULL_NilPt_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt*,Xgl_pt_seal), xgl_pt_at, xgl_pt_at_At__glue, , proxy,(Xgl_pt*,Xgl_pt_seal), unsigned_int,) \
@@ -3056,7 +3056,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_d2d_delete, xgl_pt_color_d2d_delete_Delete_glue, , proxy,(Xgl_pt_color_d2d*,Xgl_pt_color_d2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_d2d*,Xgl_pt_color_d2d_seal), NULL, NULL_NilPtColorD2d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_d2d*,Xgl_pt_color_d2d_seal), 0, NULL_NilPtColorD2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_d2d*,Xgl_pt_color_d2d_seal), xgl_pt_color_d2d_at, xgl_pt_color_d2d_at_At__glue, , proxy,(Xgl_pt_color_d2d*,Xgl_pt_color_d2d_seal), unsigned_int,) \
@@ -3087,7 +3087,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_d3d_delete, xgl_pt_color_d3d_delete_Delete_glue, , proxy,(Xgl_pt_color_d3d*,Xgl_pt_color_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_d3d*,Xgl_pt_color_d3d_seal), NULL, NULL_NilPtColorD3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_d3d*,Xgl_pt_color_d3d_seal), 0, NULL_NilPtColorD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_d3d*,Xgl_pt_color_d3d_seal), xgl_pt_color_d3d_at, xgl_pt_color_d3d_at_At__glue, , proxy,(Xgl_pt_color_d3d*,Xgl_pt_color_d3d_seal), unsigned_int,) \
@@ -3120,7 +3120,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_data_f3d_delete, xgl_pt_color_data_f3d_delete_Delete_glue, , proxy,(Xgl_pt_color_data_f3d*,Xgl_pt_color_data_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_data_f3d*,Xgl_pt_color_data_f3d_seal), NULL, NULL_NilPtColorDataF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_data_f3d*,Xgl_pt_color_data_f3d_seal), 0, NULL_NilPtColorDataF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_data_f3d*,Xgl_pt_color_data_f3d_seal), xgl_pt_color_data_f3d_at, xgl_pt_color_data_f3d_at_At__glue, , proxy,(Xgl_pt_color_data_f3d*,Xgl_pt_color_data_f3d_seal), unsigned_int,) \
@@ -3154,7 +3154,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_f2d_delete, xgl_pt_color_f2d_delete_Delete_glue, , proxy,(Xgl_pt_color_f2d*,Xgl_pt_color_f2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_f2d*,Xgl_pt_color_f2d_seal), NULL, NULL_NilPtColorF2d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_f2d*,Xgl_pt_color_f2d_seal), 0, NULL_NilPtColorF2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_f2d*,Xgl_pt_color_f2d_seal), xgl_pt_color_f2d_at, xgl_pt_color_f2d_at_At__glue, , proxy,(Xgl_pt_color_f2d*,Xgl_pt_color_f2d_seal), unsigned_int,) \
@@ -3185,7 +3185,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_f3d_delete, xgl_pt_color_f3d_delete_Delete_glue, , proxy,(Xgl_pt_color_f3d*,Xgl_pt_color_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_f3d*,Xgl_pt_color_f3d_seal), NULL, NULL_NilPtColorF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_f3d*,Xgl_pt_color_f3d_seal), 0, NULL_NilPtColorF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_f3d*,Xgl_pt_color_f3d_seal), xgl_pt_color_f3d_at, xgl_pt_color_f3d_at_At__glue, , proxy,(Xgl_pt_color_f3d*,Xgl_pt_color_f3d_seal), unsigned_int,) \
@@ -3218,7 +3218,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_flag_d3d_delete, xgl_pt_color_flag_d3d_delete_Delete_glue, , proxy,(Xgl_pt_color_flag_d3d*,Xgl_pt_color_flag_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_flag_d3d*,Xgl_pt_color_flag_d3d_seal), NULL, NULL_NilPtColorFlagD3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_flag_d3d*,Xgl_pt_color_flag_d3d_seal), 0, NULL_NilPtColorFlagD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_flag_d3d*,Xgl_pt_color_flag_d3d_seal), xgl_pt_color_flag_d3d_at, xgl_pt_color_flag_d3d_at_At__glue, , proxy,(Xgl_pt_color_flag_d3d*,Xgl_pt_color_flag_d3d_seal), unsigned_int,) \
@@ -3253,7 +3253,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_flag_data_f3d_delete, xgl_pt_color_flag_data_f3d_delete_Delete_glue, , proxy,(Xgl_pt_color_flag_data_f3d*,Xgl_pt_color_flag_data_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_flag_data_f3d*,Xgl_pt_color_flag_data_f3d_seal), NULL, NULL_NilPtColorFlagDataF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_flag_data_f3d*,Xgl_pt_color_flag_data_f3d_seal), 0, NULL_NilPtColorFlagDataF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_flag_data_f3d*,Xgl_pt_color_flag_data_f3d_seal), xgl_pt_color_flag_data_f3d_at, xgl_pt_color_flag_data_f3d_at_At__glue, , proxy,(Xgl_pt_color_flag_data_f3d*,Xgl_pt_color_flag_data_f3d_seal), unsigned_int,) \
@@ -3289,7 +3289,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_flag_f3d_delete, xgl_pt_color_flag_f3d_delete_Delete_glue, , proxy,(Xgl_pt_color_flag_f3d*,Xgl_pt_color_flag_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_flag_f3d*,Xgl_pt_color_flag_f3d_seal), NULL, NULL_NilPtColorFlagF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_flag_f3d*,Xgl_pt_color_flag_f3d_seal), 0, NULL_NilPtColorFlagF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_flag_f3d*,Xgl_pt_color_flag_f3d_seal), xgl_pt_color_flag_f3d_at, xgl_pt_color_flag_f3d_at_At__glue, , proxy,(Xgl_pt_color_flag_f3d*,Xgl_pt_color_flag_f3d_seal), unsigned_int,) \
@@ -3324,7 +3324,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_i2d_delete, xgl_pt_color_i2d_delete_Delete_glue, , proxy,(Xgl_pt_color_i2d*,Xgl_pt_color_i2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_i2d*,Xgl_pt_color_i2d_seal), NULL, NULL_NilPtColorI2d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_i2d*,Xgl_pt_color_i2d_seal), 0, NULL_NilPtColorI2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_i2d*,Xgl_pt_color_i2d_seal), xgl_pt_color_i2d_at, xgl_pt_color_i2d_at_At__glue, , proxy,(Xgl_pt_color_i2d*,Xgl_pt_color_i2d_seal), unsigned_int,) \
@@ -3355,7 +3355,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_normal_d3d_delete, xgl_pt_color_normal_d3d_delete_Delete_glue, , proxy,(Xgl_pt_color_normal_d3d*,Xgl_pt_color_normal_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_normal_d3d*,Xgl_pt_color_normal_d3d_seal), NULL, NULL_NilPtColorNormalD3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_normal_d3d*,Xgl_pt_color_normal_d3d_seal), 0, NULL_NilPtColorNormalD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_normal_d3d*,Xgl_pt_color_normal_d3d_seal), xgl_pt_color_normal_d3d_at, xgl_pt_color_normal_d3d_at_At__glue, , proxy,(Xgl_pt_color_normal_d3d*,Xgl_pt_color_normal_d3d_seal), unsigned_int,) \
@@ -3390,7 +3390,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_normal_data_f3d_delete, xgl_pt_color_normal_data_f3d_delete_Delete_glue, , proxy,(Xgl_pt_color_normal_data_f3d*,Xgl_pt_color_normal_data_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_normal_data_f3d*,Xgl_pt_color_normal_data_f3d_seal), NULL, NULL_NilPtColorNormalDataF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_normal_data_f3d*,Xgl_pt_color_normal_data_f3d_seal), 0, NULL_NilPtColorNormalDataF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_normal_data_f3d*,Xgl_pt_color_normal_data_f3d_seal), xgl_pt_color_normal_data_f3d_at, xgl_pt_color_normal_data_f3d_at_At__glue, , proxy,(Xgl_pt_color_normal_data_f3d*,Xgl_pt_color_normal_data_f3d_seal), unsigned_int,) \
@@ -3426,7 +3426,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_normal_f3d_delete, xgl_pt_color_normal_f3d_delete_Delete_glue, , proxy,(Xgl_pt_color_normal_f3d*,Xgl_pt_color_normal_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_normal_f3d*,Xgl_pt_color_normal_f3d_seal), NULL, NULL_NilPtColorNormalF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_normal_f3d*,Xgl_pt_color_normal_f3d_seal), 0, NULL_NilPtColorNormalF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_normal_f3d*,Xgl_pt_color_normal_f3d_seal), xgl_pt_color_normal_f3d_at, xgl_pt_color_normal_f3d_at_At__glue, , proxy,(Xgl_pt_color_normal_f3d*,Xgl_pt_color_normal_f3d_seal), unsigned_int,) \
@@ -3461,7 +3461,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_normal_flag_d3d_delete, xgl_pt_color_normal_flag_d3d_delete_Delete_glue, , proxy,(Xgl_pt_color_normal_flag_d3d*,Xgl_pt_color_normal_flag_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_normal_flag_d3d*,Xgl_pt_color_normal_flag_d3d_seal), NULL, NULL_NilPtColorNormalFlagD3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_normal_flag_d3d*,Xgl_pt_color_normal_flag_d3d_seal), 0, NULL_NilPtColorNormalFlagD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_normal_flag_d3d*,Xgl_pt_color_normal_flag_d3d_seal), xgl_pt_color_normal_flag_d3d_at, xgl_pt_color_normal_flag_d3d_at_At__glue, , proxy,(Xgl_pt_color_normal_flag_d3d*,Xgl_pt_color_normal_flag_d3d_seal), unsigned_int,) \
@@ -3498,7 +3498,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_normal_flag_data_f3d_delete, xgl_pt_color_normal_flag_data_f3d_delete_Delete_glue, , proxy,(Xgl_pt_color_normal_flag_data_f3d*,Xgl_pt_color_normal_flag_data_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_normal_flag_data_f3d*,Xgl_pt_color_normal_flag_data_f3d_seal), NULL, NULL_NilPtColorNormalFlagDataF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_normal_flag_data_f3d*,Xgl_pt_color_normal_flag_data_f3d_seal), 0, NULL_NilPtColorNormalFlagDataF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_normal_flag_data_f3d*,Xgl_pt_color_normal_flag_data_f3d_seal), xgl_pt_color_normal_flag_data_f3d_at, xgl_pt_color_normal_flag_data_f3d_at_At__glue, , proxy,(Xgl_pt_color_normal_flag_data_f3d*,Xgl_pt_color_normal_flag_data_f3d_seal), unsigned_int,) \
@@ -3536,7 +3536,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_color_normal_flag_f3d_delete, xgl_pt_color_normal_flag_f3d_delete_Delete_glue, , proxy,(Xgl_pt_color_normal_flag_f3d*,Xgl_pt_color_normal_flag_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_color_normal_flag_f3d*,Xgl_pt_color_normal_flag_f3d_seal), NULL, NULL_NilPtColorNormalFlagF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_color_normal_flag_f3d*,Xgl_pt_color_normal_flag_f3d_seal), 0, NULL_NilPtColorNormalFlagF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_color_normal_flag_f3d*,Xgl_pt_color_normal_flag_f3d_seal), xgl_pt_color_normal_flag_f3d_at, xgl_pt_color_normal_flag_f3d_at_At__glue, , proxy,(Xgl_pt_color_normal_flag_f3d*,Xgl_pt_color_normal_flag_f3d_seal), unsigned_int,) \
@@ -3573,7 +3573,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_d2d_delete, xgl_pt_d2d_delete_Delete_glue, , proxy,(Xgl_pt_d2d*,Xgl_pt_d2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_d2d*,Xgl_pt_d2d_seal), NULL, NULL_NilPtD2d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_d2d*,Xgl_pt_d2d_seal), 0, NULL_NilPtD2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_d2d*,Xgl_pt_d2d_seal), xgl_pt_d2d_at, xgl_pt_d2d_at_At__glue, , proxy,(Xgl_pt_d2d*,Xgl_pt_d2d_seal), unsigned_int,) \
@@ -3590,7 +3590,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_d2h_delete, xgl_pt_d2h_delete_Delete_glue, , proxy,(Xgl_pt_d2h*,Xgl_pt_d2h_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_d2h*,Xgl_pt_d2h_seal), NULL, NULL_NilPtD2h_glue) \
+ C_get_var( proxy_null,(Xgl_pt_d2h*,Xgl_pt_d2h_seal), 0, NULL_NilPtD2h_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_d2h*,Xgl_pt_d2h_seal), xgl_pt_d2h_at, xgl_pt_d2h_at_At__glue, , proxy,(Xgl_pt_d2h*,Xgl_pt_d2h_seal), unsigned_int,) \
@@ -3612,7 +3612,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_d3d_delete, xgl_pt_d3d_delete_Delete_glue, , proxy,(Xgl_pt_d3d*,Xgl_pt_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_d3d*,Xgl_pt_d3d_seal), NULL, NULL_NilPtD3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_d3d*,Xgl_pt_d3d_seal), 0, NULL_NilPtD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_d3d*,Xgl_pt_d3d_seal), xgl_pt_d3d_at, xgl_pt_d3d_at_At__glue, , proxy,(Xgl_pt_d3d*,Xgl_pt_d3d_seal), unsigned_int,) \
@@ -3634,7 +3634,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_d3h_delete, xgl_pt_d3h_delete_Delete_glue, , proxy,(Xgl_pt_d3h*,Xgl_pt_d3h_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_d3h*,Xgl_pt_d3h_seal), NULL, NULL_NilPtD3h_glue) \
+ C_get_var( proxy_null,(Xgl_pt_d3h*,Xgl_pt_d3h_seal), 0, NULL_NilPtD3h_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_d3h*,Xgl_pt_d3h_seal), xgl_pt_d3h_at, xgl_pt_d3h_at_At__glue, , proxy,(Xgl_pt_d3h*,Xgl_pt_d3h_seal), unsigned_int,) \
@@ -3658,7 +3658,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_data_f3d_delete, xgl_pt_data_f3d_delete_Delete_glue, , proxy,(Xgl_pt_data_f3d*,Xgl_pt_data_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_data_f3d*,Xgl_pt_data_f3d_seal), NULL, NULL_NilPtDataF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_data_f3d*,Xgl_pt_data_f3d_seal), 0, NULL_NilPtDataF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_data_f3d*,Xgl_pt_data_f3d_seal), xgl_pt_data_f3d_at, xgl_pt_data_f3d_at_At__glue, , proxy,(Xgl_pt_data_f3d*,Xgl_pt_data_f3d_seal), unsigned_int,) \
@@ -3681,7 +3681,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_f2d_delete, xgl_pt_f2d_delete_Delete_glue, , proxy,(Xgl_pt_f2d*,Xgl_pt_f2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_f2d*,Xgl_pt_f2d_seal), NULL, NULL_NilPtF2d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_f2d*,Xgl_pt_f2d_seal), 0, NULL_NilPtF2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_f2d*,Xgl_pt_f2d_seal), xgl_pt_f2d_at, xgl_pt_f2d_at_At__glue, , proxy,(Xgl_pt_f2d*,Xgl_pt_f2d_seal), unsigned_int,) \
@@ -3698,7 +3698,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_f2h_delete, xgl_pt_f2h_delete_Delete_glue, , proxy,(Xgl_pt_f2h*,Xgl_pt_f2h_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_f2h*,Xgl_pt_f2h_seal), NULL, NULL_NilPtF2h_glue) \
+ C_get_var( proxy_null,(Xgl_pt_f2h*,Xgl_pt_f2h_seal), 0, NULL_NilPtF2h_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_f2h*,Xgl_pt_f2h_seal), xgl_pt_f2h_at, xgl_pt_f2h_at_At__glue, , proxy,(Xgl_pt_f2h*,Xgl_pt_f2h_seal), unsigned_int,) \
@@ -3720,7 +3720,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_f3d_delete, xgl_pt_f3d_delete_Delete_glue, , proxy,(Xgl_pt_f3d*,Xgl_pt_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_f3d*,Xgl_pt_f3d_seal), NULL, NULL_NilPtF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_f3d*,Xgl_pt_f3d_seal), 0, NULL_NilPtF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_f3d*,Xgl_pt_f3d_seal), xgl_pt_f3d_at, xgl_pt_f3d_at_At__glue, , proxy,(Xgl_pt_f3d*,Xgl_pt_f3d_seal), unsigned_int,) \
@@ -3742,7 +3742,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_f3h_delete, xgl_pt_f3h_delete_Delete_glue, , proxy,(Xgl_pt_f3h*,Xgl_pt_f3h_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_f3h*,Xgl_pt_f3h_seal), NULL, NULL_NilPtF3h_glue) \
+ C_get_var( proxy_null,(Xgl_pt_f3h*,Xgl_pt_f3h_seal), 0, NULL_NilPtF3h_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_f3h*,Xgl_pt_f3h_seal), xgl_pt_f3h_at, xgl_pt_f3h_at_At__glue, , proxy,(Xgl_pt_f3h*,Xgl_pt_f3h_seal), unsigned_int,) \
@@ -3766,7 +3766,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_flag_d2d_delete, xgl_pt_flag_d2d_delete_Delete_glue, , proxy,(Xgl_pt_flag_d2d*,Xgl_pt_flag_d2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_flag_d2d*,Xgl_pt_flag_d2d_seal), NULL, NULL_NilPtFlagD2d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_flag_d2d*,Xgl_pt_flag_d2d_seal), 0, NULL_NilPtFlagD2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_flag_d2d*,Xgl_pt_flag_d2d_seal), xgl_pt_flag_d2d_at, xgl_pt_flag_d2d_at_At__glue, , proxy,(Xgl_pt_flag_d2d*,Xgl_pt_flag_d2d_seal), unsigned_int,) \
@@ -3788,7 +3788,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_flag_d3d_delete, xgl_pt_flag_d3d_delete_Delete_glue, , proxy,(Xgl_pt_flag_d3d*,Xgl_pt_flag_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_flag_d3d*,Xgl_pt_flag_d3d_seal), NULL, NULL_NilPtFlagD3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_flag_d3d*,Xgl_pt_flag_d3d_seal), 0, NULL_NilPtFlagD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_flag_d3d*,Xgl_pt_flag_d3d_seal), xgl_pt_flag_d3d_at, xgl_pt_flag_d3d_at_At__glue, , proxy,(Xgl_pt_flag_d3d*,Xgl_pt_flag_d3d_seal), unsigned_int,) \
@@ -3812,7 +3812,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_flag_data_f3d_delete, xgl_pt_flag_data_f3d_delete_Delete_glue, , proxy,(Xgl_pt_flag_data_f3d*,Xgl_pt_flag_data_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_flag_data_f3d*,Xgl_pt_flag_data_f3d_seal), NULL, NULL_NilPtFlagDataF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_flag_data_f3d*,Xgl_pt_flag_data_f3d_seal), 0, NULL_NilPtFlagDataF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_flag_data_f3d*,Xgl_pt_flag_data_f3d_seal), xgl_pt_flag_data_f3d_at, xgl_pt_flag_data_f3d_at_At__glue, , proxy,(Xgl_pt_flag_data_f3d*,Xgl_pt_flag_data_f3d_seal), unsigned_int,) \
@@ -3837,7 +3837,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_flag_f2d_delete, xgl_pt_flag_f2d_delete_Delete_glue, , proxy,(Xgl_pt_flag_f2d*,Xgl_pt_flag_f2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_flag_f2d*,Xgl_pt_flag_f2d_seal), NULL, NULL_NilPtFlagF2d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_flag_f2d*,Xgl_pt_flag_f2d_seal), 0, NULL_NilPtFlagF2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_flag_f2d*,Xgl_pt_flag_f2d_seal), xgl_pt_flag_f2d_at, xgl_pt_flag_f2d_at_At__glue, , proxy,(Xgl_pt_flag_f2d*,Xgl_pt_flag_f2d_seal), unsigned_int,) \
@@ -3859,7 +3859,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_flag_f3d_delete, xgl_pt_flag_f3d_delete_Delete_glue, , proxy,(Xgl_pt_flag_f3d*,Xgl_pt_flag_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_flag_f3d*,Xgl_pt_flag_f3d_seal), NULL, NULL_NilPtFlagF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_flag_f3d*,Xgl_pt_flag_f3d_seal), 0, NULL_NilPtFlagF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_flag_f3d*,Xgl_pt_flag_f3d_seal), xgl_pt_flag_f3d_at, xgl_pt_flag_f3d_at_At__glue, , proxy,(Xgl_pt_flag_f3d*,Xgl_pt_flag_f3d_seal), unsigned_int,) \
@@ -3883,7 +3883,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_flag_i2d_delete, xgl_pt_flag_i2d_delete_Delete_glue, , proxy,(Xgl_pt_flag_i2d*,Xgl_pt_flag_i2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_flag_i2d*,Xgl_pt_flag_i2d_seal), NULL, NULL_NilPtFlagI2d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_flag_i2d*,Xgl_pt_flag_i2d_seal), 0, NULL_NilPtFlagI2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_flag_i2d*,Xgl_pt_flag_i2d_seal), xgl_pt_flag_i2d_at, xgl_pt_flag_i2d_at_At__glue, , proxy,(Xgl_pt_flag_i2d*,Xgl_pt_flag_i2d_seal), unsigned_int,) \
@@ -3905,7 +3905,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_i2d_delete, xgl_pt_i2d_delete_Delete_glue, , proxy,(Xgl_pt_i2d*,Xgl_pt_i2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_i2d*,Xgl_pt_i2d_seal), NULL, NULL_NilPtI2d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_i2d*,Xgl_pt_i2d_seal), 0, NULL_NilPtI2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_i2d*,Xgl_pt_i2d_seal), xgl_pt_i2d_at, xgl_pt_i2d_at_At__glue, , proxy,(Xgl_pt_i2d*,Xgl_pt_i2d_seal), unsigned_int,) \
@@ -3922,7 +3922,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_i2h_delete, xgl_pt_i2h_delete_Delete_glue, , proxy,(Xgl_pt_i2h*,Xgl_pt_i2h_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_i2h*,Xgl_pt_i2h_seal), NULL, NULL_NilPtI2h_glue) \
+ C_get_var( proxy_null,(Xgl_pt_i2h*,Xgl_pt_i2h_seal), 0, NULL_NilPtI2h_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_i2h*,Xgl_pt_i2h_seal), xgl_pt_i2h_at, xgl_pt_i2h_at_At__glue, , proxy,(Xgl_pt_i2h*,Xgl_pt_i2h_seal), unsigned_int,) \
@@ -3944,7 +3944,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_list_delete, xgl_pt_list_delete_Delete_glue, , proxy,(Xgl_pt_list*,Xgl_pt_list_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_list*,Xgl_pt_list_seal), NULL, NULL_NilPtList_glue) \
+ C_get_var( proxy_null,(Xgl_pt_list*,Xgl_pt_list_seal), 0, NULL_NilPtList_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_list*,Xgl_pt_list_seal), xgl_pt_list_at, xgl_pt_list_at_At__glue, , proxy,(Xgl_pt_list*,Xgl_pt_list_seal), unsigned_int,) \
@@ -4081,7 +4081,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_list_list_delete, xgl_pt_list_list_delete_Delete_glue, , proxy,(Xgl_pt_list_list*,Xgl_pt_list_list_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_list_list*,Xgl_pt_list_list_seal), NULL, NULL_NilPtListList_glue) \
+ C_get_var( proxy_null,(Xgl_pt_list_list*,Xgl_pt_list_list_seal), 0, NULL_NilPtListList_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_list_list*,Xgl_pt_list_list_seal), xgl_pt_list_list_at, xgl_pt_list_list_at_At__glue, , proxy,(Xgl_pt_list_list*,Xgl_pt_list_list_seal), unsigned_int,) \
@@ -4103,7 +4103,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_normal_d3d_delete, xgl_pt_normal_d3d_delete_Delete_glue, , proxy,(Xgl_pt_normal_d3d*,Xgl_pt_normal_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_normal_d3d*,Xgl_pt_normal_d3d_seal), NULL, NULL_NilPtNormalD3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_normal_d3d*,Xgl_pt_normal_d3d_seal), 0, NULL_NilPtNormalD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_normal_d3d*,Xgl_pt_normal_d3d_seal), xgl_pt_normal_d3d_at, xgl_pt_normal_d3d_at_At__glue, , proxy,(Xgl_pt_normal_d3d*,Xgl_pt_normal_d3d_seal), unsigned_int,) \
@@ -4127,7 +4127,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_normal_data_f3d_delete, xgl_pt_normal_data_f3d_delete_Delete_glue, , proxy,(Xgl_pt_normal_data_f3d*,Xgl_pt_normal_data_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_normal_data_f3d*,Xgl_pt_normal_data_f3d_seal), NULL, NULL_NilPtNormalDataF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_normal_data_f3d*,Xgl_pt_normal_data_f3d_seal), 0, NULL_NilPtNormalDataF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_normal_data_f3d*,Xgl_pt_normal_data_f3d_seal), xgl_pt_normal_data_f3d_at, xgl_pt_normal_data_f3d_at_At__glue, , proxy,(Xgl_pt_normal_data_f3d*,Xgl_pt_normal_data_f3d_seal), unsigned_int,) \
@@ -4152,7 +4152,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_normal_f3d_delete, xgl_pt_normal_f3d_delete_Delete_glue, , proxy,(Xgl_pt_normal_f3d*,Xgl_pt_normal_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_normal_f3d*,Xgl_pt_normal_f3d_seal), NULL, NULL_NilPtNormalF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_normal_f3d*,Xgl_pt_normal_f3d_seal), 0, NULL_NilPtNormalF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_normal_f3d*,Xgl_pt_normal_f3d_seal), xgl_pt_normal_f3d_at, xgl_pt_normal_f3d_at_At__glue, , proxy,(Xgl_pt_normal_f3d*,Xgl_pt_normal_f3d_seal), unsigned_int,) \
@@ -4176,7 +4176,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_normal_flag_d3d_delete, xgl_pt_normal_flag_d3d_delete_Delete_glue, , proxy,(Xgl_pt_normal_flag_d3d*,Xgl_pt_normal_flag_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_normal_flag_d3d*,Xgl_pt_normal_flag_d3d_seal), NULL, NULL_NilPtNormalFlagD3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_normal_flag_d3d*,Xgl_pt_normal_flag_d3d_seal), 0, NULL_NilPtNormalFlagD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_normal_flag_d3d*,Xgl_pt_normal_flag_d3d_seal), xgl_pt_normal_flag_d3d_at, xgl_pt_normal_flag_d3d_at_At__glue, , proxy,(Xgl_pt_normal_flag_d3d*,Xgl_pt_normal_flag_d3d_seal), unsigned_int,) \
@@ -4202,7 +4202,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_normal_flag_data_f3d_delete, xgl_pt_normal_flag_data_f3d_delete_Delete_glue, , proxy,(Xgl_pt_normal_flag_data_f3d*,Xgl_pt_normal_flag_data_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_normal_flag_data_f3d*,Xgl_pt_normal_flag_data_f3d_seal), NULL, NULL_NilPtNormalFlagDataF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_normal_flag_data_f3d*,Xgl_pt_normal_flag_data_f3d_seal), 0, NULL_NilPtNormalFlagDataF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_normal_flag_data_f3d*,Xgl_pt_normal_flag_data_f3d_seal), xgl_pt_normal_flag_data_f3d_at, xgl_pt_normal_flag_data_f3d_at_At__glue, , proxy,(Xgl_pt_normal_flag_data_f3d*,Xgl_pt_normal_flag_data_f3d_seal), unsigned_int,) \
@@ -4229,7 +4229,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_normal_flag_f3d_delete, xgl_pt_normal_flag_f3d_delete_Delete_glue, , proxy,(Xgl_pt_normal_flag_f3d*,Xgl_pt_normal_flag_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_normal_flag_f3d*,Xgl_pt_normal_flag_f3d_seal), NULL, NULL_NilPtNormalFlagF3d_glue) \
+ C_get_var( proxy_null,(Xgl_pt_normal_flag_f3d*,Xgl_pt_normal_flag_f3d_seal), 0, NULL_NilPtNormalFlagF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_normal_flag_f3d*,Xgl_pt_normal_flag_f3d_seal), xgl_pt_normal_flag_f3d_at, xgl_pt_normal_flag_f3d_at_At__glue, , proxy,(Xgl_pt_normal_flag_f3d*,Xgl_pt_normal_flag_f3d_seal), unsigned_int,) \
@@ -4255,7 +4255,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_pt_type_supported_delete, xgl_pt_type_supported_delete_Delete_glue, , proxy,(Xgl_pt_type_supported*,Xgl_pt_type_supported_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_pt_type_supported*,Xgl_pt_type_supported_seal), NULL, NULL_NilPtTypeSupported_glue) \
+ C_get_var( proxy_null,(Xgl_pt_type_supported*,Xgl_pt_type_supported_seal), 0, NULL_NilPtTypeSupported_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_pt_type_supported*,Xgl_pt_type_supported_seal), xgl_pt_type_supported_at, xgl_pt_type_supported_at_At__glue, , proxy,(Xgl_pt_type_supported*,Xgl_pt_type_supported_seal), unsigned_int,) \
@@ -4281,7 +4281,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_rect_ad3d_delete, xgl_rect_ad3d_delete_Delete_glue, , proxy,(Xgl_rect_ad3d*,Xgl_rect_ad3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_rect_ad3d*,Xgl_rect_ad3d_seal), NULL, NULL_NilRectAd3d_glue) \
+ C_get_var( proxy_null,(Xgl_rect_ad3d*,Xgl_rect_ad3d_seal), 0, NULL_NilRectAd3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_rect_ad3d*,Xgl_rect_ad3d_seal), xgl_rect_ad3d_at, xgl_rect_ad3d_at_At__glue, , proxy,(Xgl_rect_ad3d*,Xgl_rect_ad3d_seal), unsigned_int,) \
@@ -4298,7 +4298,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_rect_af3d_delete, xgl_rect_af3d_delete_Delete_glue, , proxy,(Xgl_rect_af3d*,Xgl_rect_af3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_rect_af3d*,Xgl_rect_af3d_seal), NULL, NULL_NilRectAf3d_glue) \
+ C_get_var( proxy_null,(Xgl_rect_af3d*,Xgl_rect_af3d_seal), 0, NULL_NilRectAf3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_rect_af3d*,Xgl_rect_af3d_seal), xgl_rect_af3d_at, xgl_rect_af3d_at_At__glue, , proxy,(Xgl_rect_af3d*,Xgl_rect_af3d_seal), unsigned_int,) \
@@ -4315,7 +4315,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_rect_d2d_delete, xgl_rect_d2d_delete_Delete_glue, , proxy,(Xgl_rect_d2d*,Xgl_rect_d2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_rect_d2d*,Xgl_rect_d2d_seal), NULL, NULL_NilRectD2d_glue) \
+ C_get_var( proxy_null,(Xgl_rect_d2d*,Xgl_rect_d2d_seal), 0, NULL_NilRectD2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_rect_d2d*,Xgl_rect_d2d_seal), xgl_rect_d2d_at, xgl_rect_d2d_at_At__glue, , proxy,(Xgl_rect_d2d*,Xgl_rect_d2d_seal), unsigned_int,) \
@@ -4332,7 +4332,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_rect_d3d_delete, xgl_rect_d3d_delete_Delete_glue, , proxy,(Xgl_rect_d3d*,Xgl_rect_d3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_rect_d3d*,Xgl_rect_d3d_seal), NULL, NULL_NilRectD3d_glue) \
+ C_get_var( proxy_null,(Xgl_rect_d3d*,Xgl_rect_d3d_seal), 0, NULL_NilRectD3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_rect_d3d*,Xgl_rect_d3d_seal), xgl_rect_d3d_at, xgl_rect_d3d_at_At__glue, , proxy,(Xgl_rect_d3d*,Xgl_rect_d3d_seal), unsigned_int,) \
@@ -4357,7 +4357,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_rect_f2d_delete, xgl_rect_f2d_delete_Delete_glue, , proxy,(Xgl_rect_f2d*,Xgl_rect_f2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_rect_f2d*,Xgl_rect_f2d_seal), NULL, NULL_NilRectF2d_glue) \
+ C_get_var( proxy_null,(Xgl_rect_f2d*,Xgl_rect_f2d_seal), 0, NULL_NilRectF2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_rect_f2d*,Xgl_rect_f2d_seal), xgl_rect_f2d_at, xgl_rect_f2d_at_At__glue, , proxy,(Xgl_rect_f2d*,Xgl_rect_f2d_seal), unsigned_int,) \
@@ -4374,7 +4374,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_rect_f3d_delete, xgl_rect_f3d_delete_Delete_glue, , proxy,(Xgl_rect_f3d*,Xgl_rect_f3d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_rect_f3d*,Xgl_rect_f3d_seal), NULL, NULL_NilRectF3d_glue) \
+ C_get_var( proxy_null,(Xgl_rect_f3d*,Xgl_rect_f3d_seal), 0, NULL_NilRectF3d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_rect_f3d*,Xgl_rect_f3d_seal), xgl_rect_f3d_at, xgl_rect_f3d_at_At__glue, , proxy,(Xgl_rect_f3d*,Xgl_rect_f3d_seal), unsigned_int,) \
@@ -4399,7 +4399,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_rect_i2d_delete, xgl_rect_i2d_delete_Delete_glue, , proxy,(Xgl_rect_i2d*,Xgl_rect_i2d_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_rect_i2d*,Xgl_rect_i2d_seal), NULL, NULL_NilRectI2d_glue) \
+ C_get_var( proxy_null,(Xgl_rect_i2d*,Xgl_rect_i2d_seal), 0, NULL_NilRectI2d_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_rect_i2d*,Xgl_rect_i2d_seal), xgl_rect_i2d_at, xgl_rect_i2d_at_At__glue, , proxy,(Xgl_rect_i2d*,Xgl_rect_i2d_seal), unsigned_int,) \
@@ -4416,7 +4416,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_rect_list_delete, xgl_rect_list_delete_Delete_glue, , proxy,(Xgl_rect_list*,Xgl_rect_list_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_rect_list*,Xgl_rect_list_seal), NULL, NULL_NilRectList_glue) \
+ C_get_var( proxy_null,(Xgl_rect_list*,Xgl_rect_list_seal), 0, NULL_NilRectList_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_rect_list*,Xgl_rect_list_seal), xgl_rect_list_at, xgl_rect_list_at_At__glue, , proxy,(Xgl_rect_list*,Xgl_rect_list_seal), unsigned_int,) \
@@ -4458,7 +4458,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_render_component_desc_delete, xgl_render_component_desc_delete_Delete_glue, , proxy,(Xgl_render_component_desc*,Xgl_render_component_desc_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_render_component_desc*,Xgl_render_component_desc_seal), NULL, NULL_NilRenderComponentDesc_glue) \
+ C_get_var( proxy_null,(Xgl_render_component_desc*,Xgl_render_component_desc_seal), 0, NULL_NilRenderComponentDesc_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_render_component_desc*,Xgl_render_component_desc_seal), xgl_render_component_desc_at, xgl_render_component_desc_at_At__glue, , proxy,(Xgl_render_component_desc*,Xgl_render_component_desc_seal), unsigned_int,) \
@@ -4483,7 +4483,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_segment_delete, xgl_segment_delete_Delete_glue, , proxy,(Xgl_segment*,Xgl_segment_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_segment*,Xgl_segment_seal), NULL, NULL_NilSegment_glue) \
+ C_get_var( proxy_null,(Xgl_segment*,Xgl_segment_seal), 0, NULL_NilSegment_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_segment*,Xgl_segment_seal), xgl_segment_at, xgl_segment_at_At__glue, , proxy,(Xgl_segment*,Xgl_segment_seal), unsigned_int,) \
@@ -4500,7 +4500,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_spline_data_delete, xgl_spline_data_delete_Delete_glue, , proxy,(Xgl_spline_data*,Xgl_spline_data_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_spline_data*,Xgl_spline_data_seal), NULL, NULL_NilSplineData_glue) \
+ C_get_var( proxy_null,(Xgl_spline_data*,Xgl_spline_data_seal), 0, NULL_NilSplineData_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_spline_data*,Xgl_spline_data_seal), xgl_spline_data_at, xgl_spline_data_at_At__glue, , proxy,(Xgl_spline_data*,Xgl_spline_data_seal), unsigned_int,) \
@@ -4516,7 +4516,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_surf_color_spline_delete, xgl_surf_color_spline_delete_Delete_glue, , proxy,(Xgl_surf_color_spline*,Xgl_surf_color_spline_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_surf_color_spline*,Xgl_surf_color_spline_seal), NULL, NULL_NilSurfColorSpline_glue) \
+ C_get_var( proxy_null,(Xgl_surf_color_spline*,Xgl_surf_color_spline_seal), 0, NULL_NilSurfColorSpline_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_surf_color_spline*,Xgl_surf_color_spline_seal), xgl_surf_color_spline_at, xgl_surf_color_spline_at_At__glue, , proxy,(Xgl_surf_color_spline*,Xgl_surf_color_spline_seal), unsigned_int,) \
@@ -4546,7 +4546,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_surf_data_spline_delete, xgl_surf_data_spline_delete_Delete_glue, , proxy,(Xgl_surf_data_spline*,Xgl_surf_data_spline_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_surf_data_spline*,Xgl_surf_data_spline_seal), NULL, NULL_NilSurfDataSpline_glue) \
+ C_get_var( proxy_null,(Xgl_surf_data_spline*,Xgl_surf_data_spline_seal), 0, NULL_NilSurfDataSpline_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_surf_data_spline*,Xgl_surf_data_spline_seal), xgl_surf_data_spline_at, xgl_surf_data_spline_at_At__glue, , proxy,(Xgl_surf_data_spline*,Xgl_surf_data_spline_seal), unsigned_int,) \
@@ -4576,7 +4576,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_surf_data_spline_list_delete, xgl_surf_data_spline_list_delete_Delete_glue, , proxy,(Xgl_surf_data_spline_list*,Xgl_surf_data_spline_list_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_surf_data_spline_list*,Xgl_surf_data_spline_list_seal), NULL, NULL_NilSurfDataSplineList_glue) \
+ C_get_var( proxy_null,(Xgl_surf_data_spline_list*,Xgl_surf_data_spline_list_seal), 0, NULL_NilSurfDataSplineList_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_surf_data_spline_list*,Xgl_surf_data_spline_list_seal), xgl_surf_data_spline_list_at, xgl_surf_data_spline_list_at_At__glue, , proxy,(Xgl_surf_data_spline_list*,Xgl_surf_data_spline_list_seal), unsigned_int,) \
@@ -4593,7 +4593,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_texture_blend_rgb_delete, xgl_texture_blend_rgb_delete_Delete_glue, , proxy,(Xgl_texture_blend_rgb*,Xgl_texture_blend_rgb_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_texture_blend_rgb*,Xgl_texture_blend_rgb_seal), NULL, NULL_NilTextureBlendRgb_glue) \
+ C_get_var( proxy_null,(Xgl_texture_blend_rgb*,Xgl_texture_blend_rgb_seal), 0, NULL_NilTextureBlendRgb_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_texture_blend_rgb*,Xgl_texture_blend_rgb_seal), xgl_texture_blend_rgb_at, xgl_texture_blend_rgb_at_At__glue, , proxy,(Xgl_texture_blend_rgb*,Xgl_texture_blend_rgb_seal), unsigned_int,) \
@@ -4610,7 +4610,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_texture_color_comp_info_delete, xgl_texture_color_comp_info_delete_Delete_glue, , proxy,(Xgl_texture_color_comp_info*,Xgl_texture_color_comp_info_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_texture_color_comp_info*,Xgl_texture_color_comp_info_seal), NULL, NULL_NilTextureColorCompInfo_glue) \
+ C_get_var( proxy_null,(Xgl_texture_color_comp_info*,Xgl_texture_color_comp_info_seal), 0, NULL_NilTextureColorCompInfo_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_texture_color_comp_info*,Xgl_texture_color_comp_info_seal), xgl_texture_color_comp_info_at, xgl_texture_color_comp_info_at_At__glue, , proxy,(Xgl_texture_color_comp_info*,Xgl_texture_color_comp_info_seal), unsigned_int,) \
@@ -4626,7 +4626,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_texture_decal_rgb_delete, xgl_texture_decal_rgb_delete_Delete_glue, , proxy,(Xgl_texture_decal_rgb*,Xgl_texture_decal_rgb_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_texture_decal_rgb*,Xgl_texture_decal_rgb_seal), NULL, NULL_NilTextureDecalRgb_glue) \
+ C_get_var( proxy_null,(Xgl_texture_decal_rgb*,Xgl_texture_decal_rgb_seal), 0, NULL_NilTextureDecalRgb_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_texture_decal_rgb*,Xgl_texture_decal_rgb_seal), xgl_texture_decal_rgb_at, xgl_texture_decal_rgb_at_At__glue, , proxy,(Xgl_texture_decal_rgb*,Xgl_texture_decal_rgb_seal), unsigned_int,) \
@@ -4641,7 +4641,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_texture_desc_delete, xgl_texture_desc_delete_Delete_glue, , proxy,(Xgl_texture_desc*,Xgl_texture_desc_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_texture_desc*,Xgl_texture_desc_seal), NULL, NULL_NilTextureDesc_glue) \
+ C_get_var( proxy_null,(Xgl_texture_desc*,Xgl_texture_desc_seal), 0, NULL_NilTextureDesc_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_texture_desc*,Xgl_texture_desc_seal), xgl_texture_desc_at, xgl_texture_desc_at_At__glue, , proxy,(Xgl_texture_desc*,Xgl_texture_desc_seal), unsigned_int,) \
@@ -4665,7 +4665,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_texture_interp_info_delete, xgl_texture_interp_info_delete_Delete_glue, , proxy,(Xgl_texture_interp_info*,Xgl_texture_interp_info_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_texture_interp_info*,Xgl_texture_interp_info_seal), NULL, NULL_NilTextureInterpInfo_glue) \
+ C_get_var( proxy_null,(Xgl_texture_interp_info*,Xgl_texture_interp_info_seal), 0, NULL_NilTextureInterpInfo_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_texture_interp_info*,Xgl_texture_interp_info_seal), xgl_texture_interp_info_at, xgl_texture_interp_info_at_At__glue, , proxy,(Xgl_texture_interp_info*,Xgl_texture_interp_info_seal), unsigned_int,) \
@@ -4685,7 +4685,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_texture_mipmap_desc_delete, xgl_texture_mipmap_desc_delete_Delete_glue, , proxy,(Xgl_texture_mipmap_desc*,Xgl_texture_mipmap_desc_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_texture_mipmap_desc*,Xgl_texture_mipmap_desc_seal), NULL, NULL_NilTextureMipmapDesc_glue) \
+ C_get_var( proxy_null,(Xgl_texture_mipmap_desc*,Xgl_texture_mipmap_desc_seal), 0, NULL_NilTextureMipmapDesc_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_texture_mipmap_desc*,Xgl_texture_mipmap_desc_seal), xgl_texture_mipmap_desc_at, xgl_texture_mipmap_desc_at_At__glue, , proxy,(Xgl_texture_mipmap_desc*,Xgl_texture_mipmap_desc_seal), unsigned_int,) \
@@ -4714,7 +4714,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_threshold_delete, xgl_threshold_delete_Delete_glue, , proxy,(Xgl_threshold*,Xgl_threshold_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_threshold*,Xgl_threshold_seal), NULL, NULL_NilThreshold_glue) \
+ C_get_var( proxy_null,(Xgl_threshold*,Xgl_threshold_seal), 0, NULL_NilThreshold_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_threshold*,Xgl_threshold_seal), xgl_threshold_at, xgl_threshold_at_At__glue, , proxy,(Xgl_threshold*,Xgl_threshold_seal), unsigned_int,) \
@@ -4736,7 +4736,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_trim_curve_delete, xgl_trim_curve_delete_Delete_glue, , proxy,(Xgl_trim_curve*,Xgl_trim_curve_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_trim_curve*,Xgl_trim_curve_seal), NULL, NULL_NilTrimCurve_glue) \
+ C_get_var( proxy_null,(Xgl_trim_curve*,Xgl_trim_curve_seal), 0, NULL_NilTrimCurve_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_trim_curve*,Xgl_trim_curve_seal), xgl_trim_curve_at, xgl_trim_curve_at_At__glue, , proxy,(Xgl_trim_curve*,Xgl_trim_curve_seal), unsigned_int,) \
@@ -4765,7 +4765,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_trim_loop_delete, xgl_trim_loop_delete_Delete_glue, , proxy,(Xgl_trim_loop*,Xgl_trim_loop_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_trim_loop*,Xgl_trim_loop_seal), NULL, NULL_NilTrimLoop_glue) \
+ C_get_var( proxy_null,(Xgl_trim_loop*,Xgl_trim_loop_seal), 0, NULL_NilTrimLoop_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_trim_loop*,Xgl_trim_loop_seal), xgl_trim_loop_at, xgl_trim_loop_at_At__glue, , proxy,(Xgl_trim_loop*,Xgl_trim_loop_seal), unsigned_int,) \
@@ -4782,7 +4782,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_1( void,, xgl_trim_loop_list_delete, xgl_trim_loop_list_delete_Delete_glue, , proxy,(Xgl_trim_loop_list*,Xgl_trim_loop_list_seal)) \
 /* create nil proxy  */\
 \
- C_get_var( proxy_null,(Xgl_trim_loop_list*,Xgl_trim_loop_list_seal), NULL, NULL_NilTrimLoopList_glue) \
+ C_get_var( proxy_null,(Xgl_trim_loop_list*,Xgl_trim_loop_list_seal), 0, NULL_NilTrimLoopList_glue) \
 /* vector-ish messages  */\
 \
  C_func_2( proxy_null,(Xgl_trim_loop_list*,Xgl_trim_loop_list_seal), xgl_trim_loop_list_at, xgl_trim_loop_list_at_At__glue, , proxy,(Xgl_trim_loop_list*,Xgl_trim_loop_list_seal), unsigned_int,) \

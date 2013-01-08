@@ -41,7 +41,7 @@ const fint    top_oop_offset          = arg_bottom_offset;
 //  compiler allocates in every one of its frames
 
 const fint    nmethod_frame_chain_offset      = 0 - 1;
-// warning this is duplicated in asmDefs_gcc_sparc.hh
+// warning this is duplicated in asmDefs_sparc.hh
 const fint    current_pc_offset       = nmethod_frame_chain_offset - 1;
 const fint    patched_frame_saved_outgoing_args_offset = current_pc_offset - 1;
 const fint    last_runtime_info_offset = patched_frame_saved_outgoing_args_offset;

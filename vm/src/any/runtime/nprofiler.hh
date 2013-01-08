@@ -73,13 +73,13 @@ class Pc {
   # endif
   
   nmethod* my_nmethod();
-  PcDesc*  pcDesc(nmethod *nm = NULL);
+  PcDesc*  pcDesc(nmethod *nm = 0);
   bool     in_self();
   bool     in_pics();
   stringOop current_selector();
   bool     in_block_clone();
   bool     is_calling_prim();
-  void     set_value(char* v, int w = NULL) {
+  void     set_value(char* v, int w = 0) {
              value = v;  
              # if GENERATE_DEBUGGING_AIDS
                if (SpendTimeForDebugging)
@@ -88,7 +88,7 @@ class Pc {
            }
 };
 
-// WARNING: offsets into StackInfo are duplicated in continueProfilerTrap in runtime_asm_gcc_sparc.s
+// WARNING: offsets into StackInfo are duplicated in continueProfilerTrap in runtime_asm_sparc.S
 
 class StackInfo {
  public:
@@ -144,7 +144,7 @@ class edge_element : public CHeapObj {
  public:
   edge_element(call_graph_edge* e) {
      edge = e;
-     next = NULL;
+     next = 0;
   }
   call_graph_edge* edge;
   edge_element*    next;
@@ -346,11 +346,11 @@ class Profiler : public CHeapObj {
    inline void suspend() {}
    inline void resume() {}
    inline void disengage() {}   
-   inline oop copy_tick_info(oop ) { return NULL; }
+   inline oop copy_tick_info(oop ) { return 0; }
    inline void printProfile(float ) {}
    inline oop copy_call_graph(oop , oop , oop ,
                        oop ,   oop ,  oop , 
-                       oop ,   smi) { return NULL; }
+                       oop ,   smi) { return 0; }
    // memory functions
    inline void scavenge_contents() {}
    inline void gc_mark_contents() {}
@@ -384,11 +384,11 @@ class Profilers: public CHeapObj {
   Profiler* current_for_debugging() { return _first; }
 
   // Tells if the list of active profilers is empty.
-  inline bool isEmpty() { return NULL ==_first; }
+  inline bool isEmpty() { return 0 ==_first; }
 
   // Protocol for handling overfilled buffers
   void raiseOverflow(Profiler* p);
-  bool hasOverflow() { return _profiler_with_overflow != NULL; }
+  bool hasOverflow() { return _profiler_with_overflow != 0; }
   void handleOverflow();
   
 # else // defined(FAST_COMPILER) || defined(SIC_COMPILER)

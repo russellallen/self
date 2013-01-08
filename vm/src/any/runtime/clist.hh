@@ -48,7 +48,7 @@ class CListElem: public ResourceObj {
   CListEntry* _data;
   CListElem* _next;
   
-  CListElem(CListEntry* d, CListElem* n = NULL) { _data = d; _next = n; }
+  CListElem(CListEntry* d, CListElem* n = 0) { _data = d; _next = n; }
   ~CListElem() {
     delete _data;
     if (_next) {
@@ -72,7 +72,7 @@ class CList: public CListEntry {
   
   CList(CListEntry* d, CList* l) {
     _head = _tail = new CListElem(d); appendList(l); }
-  CList() { _head = _tail = NULL; }
+  CList() { _head = _tail = 0; }
   CList(CListEntry* d) { _head = _tail = new CListElem(d); }
   CList(CListEntry* d1, CListEntry* d2) {
     _tail = new CListElem(d2); _head = new CListElem(d1, _tail); }
@@ -93,7 +93,7 @@ class CList: public CListEntry {
   ~CList() {
     if (this) {
       delete _head;
-      _head = _tail = NULL;
+      _head = _tail = 0;
     }
   }
   
@@ -102,7 +102,7 @@ class CList: public CListEntry {
       return new CList(d);
     } else {
       _head = new CListElem(d, _head);
-      if (_tail == NULL) {
+      if (_tail == 0) {
         _tail = _head;
       }
       return this;
@@ -114,7 +114,7 @@ class CList: public CListEntry {
       return new CList(d);
     } else {
       e = new CListElem(d);
-      if (_tail == NULL) {
+      if (_tail == 0) {
         _head = _tail = e;
       } else {
         _tail->_next = e;
@@ -124,9 +124,9 @@ class CList: public CListEntry {
     } }
   CList* appendList(CList* l);
   
-  CListElem* head() { return this ? _head : NULL; }
+  CListElem* head() { return this ? _head : 0; }
   void setHead(CListElem* h) { _head = h; }
-  CListElem* tail() { return this ? _tail : NULL; }
+  CListElem* tail() { return this ? _tail : 0; }
   void setTail(CListElem* t) {
     assert(t || !_head, "probably doesn't do what you want; use appendList");
     _tail = t;}
@@ -153,11 +153,11 @@ class CList: public CListEntry {
 
   void oops_do(oopsDoFn f);
 
-  bool isEmpty() { return this == EMPTY || _head == NULL; }
+  bool isEmpty() { return this == EMPTY || _head == 0; }
   bool nonEmpty() { return ! isEmpty(); }
   
   bool isSingleton() {
-    return this != EMPTY && _head != NULL && _head == _tail; }
+    return this != EMPTY && _head != 0 && _head == _tail; }
   bool nonSingleton() { return !isSingleton(); }
   
   int32 length();
@@ -204,7 +204,7 @@ class CList: public CListEntry {
   CListEntry* removeHead() {
     assert(nonEmpty(), "removing from an empty list");
     CListEntry* d = first();
-    spliceOutNext(NULL);
+    spliceOutNext(0);
     return d; }
   
   CList* push(CListEntry* d) { return prepend(d); }
@@ -219,7 +219,7 @@ class CList: public CListEntry {
 # define ListTemplate(name,dataType)                                          \
     class CONC(name,ListElem): public CListElem {                            \
      public:                                                                  \
-      CONC(name,ListElem)(dataType d, CONC(name,ListElem)* n = NULL)            \
+      CONC(name,ListElem)(dataType d, CONC(name,ListElem)* n = 0)            \
     : CListElem((CListEntry*) d, (CListElem*) n) {}                           \
                                                                               \
     dataType data() { return (dataType) CListElem::data(); }                  \
@@ -318,7 +318,7 @@ class CList: public CListEntry {
 # define IdentityListTemplate(name,dataType)                                  \
     class CONC(name,ListElem): public CListElem {                            \
     public:                                                                   \
-    CONC(name,ListElem)(dataType d, CONC(name,ListElem)* n = NULL)            \
+    CONC(name,ListElem)(dataType d, CONC(name,ListElem)* n = 0)            \
     : CListElem((CListEntry*) d, (CListElem*) n) {}                           \
                                                                               \
     dataType data() { return (dataType) CListElem::data(); }                  \
@@ -422,7 +422,7 @@ class CList: public CListEntry {
                                                                               \
     void init(CONC(name,List)* lst,  dataType none) {                         \
       if (lst->nonEmpty())  {  rest=lst->head();  advance();  }               \
-      else                  {  rest= NULL;  current= none;    }               \
+      else                  {  rest= 0;  current= none;    }               \
     }                                                                         \
     void advance() { if (rest) { current= rest->data(); rest= rest->next();} }\
     void print_short() { lprintf("rest %#lx, current %#lx\n",                  \

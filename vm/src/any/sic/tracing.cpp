@@ -16,7 +16,7 @@
     // trace all instructions
     trc.niranges = 1;
     trc.irange[0] = (char*) "all";
-    trc.irange[1] = NULL;
+    trc.irange[1] = 0;
     trc.irange[2] = (char*) -1;
   }
   
@@ -25,8 +25,8 @@
     trc.niranges = 0;
 
     // turn off tracing everywhere
-    trc.irange[trc.niranges * 3    ] = NULL;
-    trc.irange[trc.niranges * 3 + 1] = NULL;
+    trc.irange[trc.niranges * 3    ] = 0;
+    trc.irange[trc.niranges * 3 + 1] = 0;
     trc.irange[trc.niranges * 3 + 2] = (char*)-1;
     trc.niranges++;
 

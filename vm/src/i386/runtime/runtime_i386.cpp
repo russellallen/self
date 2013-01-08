@@ -32,7 +32,7 @@ bool check_saved_byte_map_base() {
 } 
 
 
-// cannot used simple DiscardStack (as in runtime_sparc.s) because of restoring
+// cannot used simple DiscardStack (as in runtime_sparc.S) because of restoring
 // nonvol registers
 void volatile DiscardStack() {
   currentProcess->abort();
@@ -54,7 +54,7 @@ char* byte_map_base; // also use a register, too
 
 // define SPLimit if not kept in a register:
 
-char* SPLimit = NULL;
+char* SPLimit = 0;
 extern "C" {void set_SPLimitReg(char*); }
 void  setSPLimit(char* m)        { 
   SPLimit = m; 
@@ -68,7 +68,7 @@ extern "C" oop breakpoint_prim(oop rcvr) {
 }
 
 
-// This should be an assembly function, similar to sparc/runtime/runtime_asm_gcc_sparc.s.
+// This should be an assembly function, similar to sparc/runtime/runtime_asm_sparc.S
 // I haven't implemented it yet, so I just put the stub here. -mabdelmalek 10/02.
 void  HandleUncommonTrap()
 {
@@ -78,7 +78,7 @@ void  HandleUncommonTrap()
 
 
 // Not implemented on Intel:
-char* DIRecompile_stub_returnPC = NULL;
+char* DIRecompile_stub_returnPC = 0;
 
 
 

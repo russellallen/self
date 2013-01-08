@@ -39,7 +39,7 @@ mapOop CacheStub::get_map(fint which) {
     switch (which) {
     case 0: return (hasSmi() ? Memory->smi_map : Memory->float_map)->enclosing_mapOop();
     case 1: return Memory->float_map->enclosing_mapOop();
-    default: ShouldNotReachHere(); return NULL;
+    default: ShouldNotReachHere(); return 0;
     }
   } else
     return mapOop(locs()[getMapLocsIndex(which)].referent(this)); 
@@ -94,7 +94,7 @@ fint CacheStub::nOccurrences(nmethod *nm) {
 CountStub* CacheStub::countStub(fint which) {
   NCodeBase* s = get_thing(which);
   if (s->isNMethod()) {
-    return NULL;
+    return 0;
   } else {
     assert(s->isCountStub(), "what is it?");
     return (CountStub*)s;
@@ -125,8 +125,8 @@ CacheStub::CacheStub() {
   CHECK_VTBL_VALUE;
   cacheLink.init();
   info.arity= newMethods;
-  info.has_smi= nsmi != NULL;
-  info.has_float= nfloat != NULL;
+  info.has_smi= nsmi != 0;
+  info.has_float= nfloat != 0;
   info.is_megamorphic= false;
   _instsLen = roundTo(a->instsLen(), oopSize);
   _locsLen  = a->locsLen();
@@ -195,16 +195,16 @@ void CacheStub::computeJumpAddr(nmethod* nm, sendDesc* sd,
   // compute jump address (nmethod or count stub); create count stub if needed
   // CAUTION: stubs are deallocated later (or not at all, if they are
   // passed on to the new PIC), so don't deallocate stubs here
-  if (nm == NULL) return;
+  if (nm == 0) return;
   if (stub) {
     assert(stub->target() == nm, "wrong target");
     addr= stub->insts();
     stub->setVerifiedEntryPoint(nm); // xxx miw
   } else if (UseAgingStubs  &&  nm->isYoung()) {
-    stub= new AgingStub(nm, nm->verifiedEntryPoint(), NULL);
+    stub= new AgingStub(nm, nm->verifiedEntryPoint(), 0);
     addr= stub->insts();    
   } else if (sd->isCounting()) {
-    stub= CountStub::new_CountStub(nm, nm->verifiedEntryPoint(), NULL, sd->countType());
+    stub= CountStub::new_CountStub(nm, nm->verifiedEntryPoint(), 0, sd->countType());
     addr= stub->insts();
   } else {
     addr= nm->verifiedEntryPoint();
@@ -263,10 +263,10 @@ void CacheStub::rebind(fint index, nmethod* nm, CountStub* cs) {
   // rebind jump address (but NOT map) of indexth branch
   // make sure young nmethods always have an aging stub
 
-  if (UseAgingStubs  &&  cs == NULL && nm->isYoung()) {
-    cs = new AgingStub(nm, nm->verifiedEntryPoint(), NULL);
+  if (UseAgingStubs  &&  cs == 0 && nm->isYoung()) {
+    cs = new AgingStub(nm, nm->verifiedEntryPoint(), 0);
   }
-  if (cs == NULL) {
+  if (cs == 0) {
     // when a young method is replaced by an old one, there is no count stub
     // assert(!sd()->isCounting(),
     //        "call site claims to have a count stub but does not have one");
@@ -343,7 +343,7 @@ void CacheStub::insertCounters() {
   for (fint i = arity() - 1; i >= 0; i--) {
     nmethod* nm = get_method(i);
     CountStub* cs = countStub(i);
-    if (cs == NULL) {
+    if (cs == 0) {
       pc_t addr;
       computeJumpAddr(nm, send_desc, cs, addr);
       assert(cs, "should have created count stub");
@@ -376,7 +376,7 @@ void CacheStub::removeCounters() {
 void CacheStub::copy_prologue(sendDesc *sd) {
 
   oldAssembler= theAssembler;   // save current assembler
-  theAssembler= NULL;
+  theAssembler= 0;
   a= new Assembler(MaxStubSize, MaxStubSize, false, true);
 
   n=  NEW_RESOURCE_ARRAY(nmethod*,   MaxPICSize);
@@ -394,7 +394,7 @@ CacheStub* CacheStub::copy_epilogue() {
   theSendDesc->link(s);         // install new stub
   if (VerifyZoneOften) s->verify();
   theAssembler= oldAssembler;
-  theSendDesc= NULL;
+  theSendDesc= 0;
   return s;
 }
 
@@ -406,15 +406,15 @@ CacheStub* CacheStub::copy_epilogue() {
 
 void CacheStub::find_immediate_nmethods(nmethod *del) {
 
-  nsmi= nfloat= NULL;  stsmi= stfloat= NULL;
+  nsmi= nfloat= 0;  stsmi= stfloat= 0;
   fint arty= arity();
   if (arty == 0) return;
 
   nmethod *nm0= get_method(0);
   Map *m0= get_map(0)->map_addr();
 
-  nmethod *nm1= arty == 1 ? NULL : get_method(1);
-  Map      *m1= arty == 1 ? NULL : get_map(1)->map_addr();
+  nmethod *nm1= arty == 1 ? 0 : get_method(1);
+  Map      *m1= arty == 1 ? 0 : get_map(1)->map_addr();
 
   assert(!m1->is_smi(), "smallInt case must be first");
 
@@ -435,8 +435,8 @@ void CacheStub::find_immediate_nmethods(nmethod *del) {
 // Copies the receiver, making a PIC with `total' entries,
 // eliminating the case at delIndex (set it negative
 // otherwise), or eliminating all cases which are bound to delnm (set it to
-// NULL otherwise).
-// Adds up to two new cases, a1/m1/s1 (if a1!=NULL), and a2/m2/s2 (a2!=NULL).
+// 0 otherwise).
+// Adds up to two new cases, a1/m1/s1 (if a1!=0), and a2/m2/s2 (a2!=0).
 // Uses the class statics nsmi, nfloat, stsmi, stfloat.
 
 void CacheStub::gen_copy(fint total, fint delIndex, nmethod *delnm,
@@ -465,7 +465,7 @@ void CacheStub::gen_copy(fint total, fint delIndex, nmethod *delnm,
 
   Label* miss= prologue(immedOnly);
 
-  Label* prev= NULL;
+  Label* prev= 0;
   for (fint i= 0; i < arity(); i++) {
     if (i != delIndex) {
       nmethod* nm= get_method(i);
@@ -480,7 +480,7 @@ void CacheStub::gen_copy(fint total, fint delIndex, nmethod *delnm,
 }
 
 
-// Can be called with this==NULL to create a PIC
+// Can be called with this==0 to create a PIC
 
 CacheStub* CacheStub::copy_add_nmethod(sendDesc* send_desc,
                                        nmethod* add, mapOop receiverMapOop) {
@@ -497,26 +497,26 @@ CacheStub* CacheStub::copy_add_nmethod(sendDesc* send_desc,
   copy_prologue(send_desc);
 
   // if no existing PIC, fst was the method called from send_desc
-  nmethod* fst= this ? NULL : send_desc->get_method();
-  Map* mf= fst ? fst->key.receiverMap() : NULL;
+  nmethod* fst= this ? 0 : send_desc->get_method();
+  Map* mf= fst ? fst->key.receiverMap() : 0;
   CountStub *stub= send_desc->countStub();
-  find_immediate_nmethods(NULL);
+  find_immediate_nmethods(0);
   Map* ma= receiverMapOop->map_addr();
 
   if (ma->is_smi()) {
-    nsmi= add; stsmi= NULL; add= NULL;
+    nsmi= add; stsmi= 0; add= 0;
   } else if (mf->is_smi()) {
-    nsmi= fst; stsmi= stub; fst= NULL; 
+    nsmi= fst; stsmi= stub; fst= 0; 
   }
 
   if (ma->is_float()) {
-    nfloat= add; stfloat= NULL; add= NULL;
+    nfloat= add; stfloat= 0; add= 0;
   } else if (mf->is_float()) {
-    nfloat= fst; stfloat= stub; fst= NULL;
+    nfloat= fst; stfloat= stub; fst= 0;
   }
 
-  gen_copy(arity() + (add ? 1 : 0) + (fst ? 1 : 0), -1, NULL,
-           add, receiverMapOop, NULL,
+  gen_copy(arity() + (add ? 1 : 0) + (fst ? 1 : 0), -1, 0,
+           add, receiverMapOop, 0,
            fst, mf->enclosing_mapOop(), stub);
 
   // Delete current PIC (must do before allocating new one because this might 
@@ -574,7 +574,7 @@ CacheStub* CacheStub::copy_remove_all(sendDesc* send_desc, nmethod *delnm) {
   for (i= ndel= 0; i < arty; i++) {
     nmethod* nm= get_method(i);
     if (nm != delnm) {
-      delVec[i]= NULL;
+      delVec[i]= 0;
     } else {
       ++ndel;
       delVec[i]= countStub(i);
@@ -607,9 +607,9 @@ CacheStub* CacheStub::copy_replace_immediate(sendDesc* send_desc,
   find_immediate_nmethods(delnm);
   Map* ma= receiverMapOop->map_addr();
   if (ma->is_smi()) {
-    nsmi= add; stsmi= NULL;
+    nsmi= add; stsmi= 0;
   } else if (ma->is_float()) {
-    nfloat= add; stfloat= NULL;
+    nfloat= add; stfloat= 0;
   } else {
     fatal("should only be adding immediate case");
   }
@@ -632,7 +632,7 @@ NCodeBase* CacheStub::unlink_me(nmln *l) {
   if (nremaining == 0) {
     // clear the inline cache
     deallocate();
-    return NULL;
+    return 0;
   }
   if (nremaining > 1)
     // make new PIC for remaining 2 or more entries
@@ -643,7 +643,7 @@ NCodeBase* CacheStub::unlink_me(nmln *l) {
   for (remain= 0;  get_method(remain) == delnm;  remain++)
     assert(remain < arity(), "ran off end of PIC");
   replace_with_inline_cache(remain);
-  return NULL;
+  return 0;
 }
 
 
@@ -655,7 +655,7 @@ void CacheStub::replace_with_inline_cache(fint i)
   CountStub *cs;
   if (remainingThing->isNMethod()) {
     remainingMeth= (nmethod*)remainingThing;
-    cs= NULL;
+    cs= 0;
   } else {
     cs= (CountStub*)remainingThing;
     remainingMeth= cs->target();
@@ -668,7 +668,7 @@ void CacheStub::replace_with_inline_cache(fint i)
   fint j;
   CountStub **delVec= NEW_RESOURCE_ARRAY(CountStub*, arty);
   for (j= 0; j < arty; j++)
-    delVec[j]= i == j ? NULL : countStub(j);
+    delVec[j]= i == j ? 0 : countStub(j);
   deallocate2(true);
   for (j= 0; j < arty; j++)
     if (delVec[j]) delVec[j]->deallocate();
@@ -689,7 +689,7 @@ NCodeBase* CacheStub::unlink_one(nmln* l) {
     // install last remaining entry in inline cache
     assert(arity() == 2, "bizarre case in PIC contraction");
     replace_with_inline_cache(1 - index);
-    return NULL;
+    return 0;
   }
   // make new PIC for remaining 2 or more entries
   CacheStub* s=  copy_remove_nmethod(sd(), index);
@@ -762,7 +762,7 @@ void CacheStub::shift_target(nmln* l, int32 delta) {
 void CacheStub::forwardLinkedSend(nmln* l, nmethod* to) {
   fint index= indexOfDep(l);
   CountStub *cs= countStub(index);
-  rebind(index, to, cs && to->isYoung() ? cs : NULL);
+  rebind(index, to, cs && to->isYoung() ? cs : 0);
   if (cs && !to->isYoung()) {
     // discard count stub and make
     cs->deallocate();
@@ -821,8 +821,8 @@ bool CacheStub::verify() {
     CountStub* cs = countStub(i);
     if (sd()->isCounting()) {
       // when a method is replaced by an old SIC method, there is no count stub
-      // if (cs == NULL) error2("cache stub at %#lx, branch %ld: has no count stub", this, i);
-    } else if (cs != NULL && !cs->isAgingStub()) {
+      // if (cs == 0) error2("cache stub at %#lx, branch %ld: has no count stub", this, i);
+    } else if (cs != 0 && !cs->isAgingStub()) {
       error2("cache stub at %#lx, branch %ld: has count stub", this, i);
       r = false;
     }
@@ -878,14 +878,14 @@ bool CacheStub::verify() {
   }
   
   if (!ReuseNICMethods) {
-    Map* m0 = (arity() > 0 ? get_method(0)->key.receiverMap() : NULL);
-    Map* m1 = (arity() > 1 ? get_method(1)->key.receiverMap() : NULL);
-    if (hasSmi() && (m0 == NULL || !m0->is_smi())) {
+    Map* m0 = (arity() > 0 ? get_method(0)->key.receiverMap() : 0);
+    Map* m1 = (arity() > 1 ? get_method(1)->key.receiverMap() : 0);
+    if (hasSmi() && (m0 == 0 || !m0->is_smi())) {
       error1("cache stub at %#lx: wrong hasSmi flag", this);
       r = false;
     }
     if (hasFloat() &&
-        (m0 == NULL || !m0->is_float()) && (m1 == NULL || !m1->is_float())) {
+        (m0 == 0 || !m0->is_float()) && (m1 == 0 || !m1->is_float())) {
       error1("cache stub at %#lx: wrong hasFloat flag", this);
       r = false;
     }
@@ -946,7 +946,7 @@ void CacheStub::print() {
 }
 
 bool isCacheStub(void* p) {
-  return ((CacheStub*)p)->vtbl_value() == ((CacheStub*)NULL)->static_vtbl_value();
+  return ((CacheStub*)p)->vtbl_value() == ((CacheStub*)0)->static_vtbl_value();
 }
 
 NCodeBase* findStub(void* addr) {
@@ -964,22 +964,22 @@ CacheStub* findCacheStub(void* addr) {
 }
 
 CacheStub* findCacheStub_maybe(void* start) {
-  // start may point to code part of a cache stub; return that stub or NULL
-  if (!Memory->code->stubs->zone()->contains(start)) return NULL;
+  // start may point to code part of a cache stub; return that stub or 0
+  if (!Memory->code->stubs->zone()->contains(start)) return 0;
   // relies on FOR_ALL_STUBS to enumerate in ascending order
   FOR_ALL_STUBS(_p) {
     CHECK_PIC(_p, p);
-    if ( p->insts()    > (pc_t)start) return NULL;
+    if ( p->insts()    > (pc_t)start) return 0;
     if ( p->instsEnd() > (pc_t)start) return p;
   }
-  return NULL;
+  return 0;
 }
 
 # if  GENERATE_DEBUGGING_AIDS
 CacheStub* StubFromNmln(nmln* l) {
   // given the cacheLink nmln, return the PIC
   assert(Memory->code->stubs->contains(l), "not in PIC zone");
-  CacheStub* s = NULL;
+  CacheStub* s = 0;
   fint offset = (pc_t)&s->cacheLink - (pc_t)s;
   s = (CacheStub*)((pc_t)l - offset);
   assert(s->vtbl_value() == s->static_vtbl_value(), "not a PIC");
@@ -1063,19 +1063,19 @@ const fint MaxFreePerc = 20;            // max. % free before doubling size
 void* Stubs::allocate(int32 size) {
   void* p = stubZone->allocate(size);
   int32 nfree = stubZone->freeBytes();
-  if (p == NULL ||
+  if (p == 0 ||
       nfree < MinFree || nfree * 100 / stubZone->capacity() < MinFreePerc) {
     LOG_EVENT1("stubs low on space: %ld bytes left", nfree);
     currentProcess->setupPreemption();
     needsWork = true;
   }
-  if (p == NULL) {
+  if (p == 0) {
     // NB: cannot grow / compact here - callers would have to guard against
     // moved "this" pointers etc.
     if (reserve) {
       assert((verify(), true), "bad zone before freeing reserve");
       stubZone->deallocate(reserve, ReserveFree);
-      reserve = NULL;
+      reserve = 0;
       assert((verify(), true), "bad zone after freeing reserve");
       LOG_EVENT("stubs: freeing reserve");
       p = stubZone->allocate(size);
@@ -1083,7 +1083,7 @@ void* Stubs::allocate(int32 size) {
       // cannot verify stubs, because one is allocated, but not initialized
       assert((stubZone->verify(), true), "bad zone after using reserve");
     }
-    if (p == NULL) fatal("couldn't allocate in PIC zone");
+    if (p == 0) fatal("couldn't allocate in PIC zone");
   }
   return p;
 }
@@ -1093,7 +1093,7 @@ void Stubs::cleanup() {
   // negligible; only compact if > MaxFree % space free, or if emergency
   // happened
   needsWork = false;
-  if (reserve == NULL ||
+  if (reserve == 0 ||
       (stubZone->freeBytes() * 100 / stubZone->capacity() > MaxFreePerc &&
       stubZone->freeBytes() > MinFree)) {
     LOG_EVENT("compacting PIC zone");
@@ -1103,7 +1103,7 @@ void Stubs::cleanup() {
     if (reserve) {
       assert((verify(), true), "bad zone before freeing reserve");
       stubZone->deallocate(reserve, ReserveFree);
-      reserve = NULL;
+      reserve = 0;
     }
     assert((verify(), true), "bad zone before compaction");
     stubZone->compact(moveStubs);
@@ -1147,7 +1147,7 @@ void Stubs::clear() {
 bool Stubs::verify() {
   bool r = true;
   r &= stubZone->verify();
-  NCodeBase* last_s = NULL; // for debugging
+  NCodeBase* last_s = 0; // for debugging
   FOR_ALL_STUBS(s) {
     r &= s->verify();
     last_s = s;
@@ -1158,14 +1158,14 @@ bool Stubs::verify() {
 void Stubs::flush() {
   NCodeBase* next;
   if (reserve) stubZone->deallocate(reserve, ReserveFree);
-  reserve = NULL;
+  reserve = 0;
   NCodeBase* s = (NCodeBase*)stubZone->firstUsed();
   // Don't use FOR_ALL_STUBS for efficiency (in combining mode, flushed
   // stub might be combined with neighbors -> have to scan zone from
   // beginning to find next stub).
   for ( ; s; s = next) {
     next = (NCodeBase*)stubZone->nextUsed(s);
-    if (s->isCountStub() && ((CountStub*)s)->sd() == NULL) {
+    if (s->isCountStub() && ((CountStub*)s)->sd() == 0) {
       // this count stub is linked to a PIC; don't deallocate before 
       // the PIC is deallocated
     } else {

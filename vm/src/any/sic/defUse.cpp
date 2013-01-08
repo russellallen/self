@@ -60,7 +60,7 @@
     bool isAssignment = fromNode->isAssignmentLike();
     Node* toNode = use->node;
     bool hasSrc = fromNode->hasSrc();
-    PReg* fromPR = hasSrc ? fromNode->src() : NULL;
+    PReg* fromPR = hasSrc ? fromNode->src() : 0;
     bool isConst = hasSrc && fromPR->isConstPReg();
     if (  isAssignment 
     &&    isConst 
@@ -103,7 +103,7 @@
       assert(!global || r->ndefs() == 1, "not safe with >1 defs");
       assert(fromNode->dest() == r, "unexpected dest");
       fromNode->setDest(fromNode->bb(), toNode->dest());
-      toNode->eliminateNodeAndUsedPRs(toNode->bb(), NULL, false);
+      toNode->eliminateNodeAndUsedPRs(toNode->bb(), 0, false);
     } else {
       if (PrintSICCopyPropagation) {
         lprintf("*%s cp: can't propagate N%ld (%#lx) to N%ld (%#lx)\n",
@@ -176,7 +176,7 @@
     CPInfo* cpi = new CPInfo(n);
     if (cpCreateFailed) {
       cpCreateFailed = false;
-      return NULL;
+      return 0;
     }
     return cpi;
   }

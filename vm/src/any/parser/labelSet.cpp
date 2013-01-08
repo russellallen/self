@@ -19,7 +19,7 @@ LabelInfo* LabelSet::at( oop label) {
   for ( int32 i = 0;  i < index; ++i)
     if ( labels[i]->label == label )
       return labels[i];
-  return NULL;
+  return 0;
 }
 
 
@@ -32,7 +32,7 @@ int32 LabelSet::RecordLabelInfo( AbstractByteCode* b, oop label, int32 sd,
                               LabelOccurrence why,  int32 bci) {
   static char buf[BUFSIZ];                       
   LabelInfo* li= at(label);
-  if ( li == NULL ) {
+  if ( li == 0 ) {
     if (index == maxIndex)
       grow();
     labels[index++] = li= new LabelInfo(label, sd, bci, -1);
@@ -100,7 +100,7 @@ bool LabelSet::ResolveLabel( AbstractByteCode* b,
                              oop lbl, objVectorOop pcs, int32 i) {
   static char buf[BUFSIZ];
   LabelInfo* li = at(lbl);
-  if ( li == NULL  ||  !li->isDefined) { 
+  if ( li == 0  ||  !li->isDefined) { 
       char psb[BUFSIZ];
       lbl->print_string(psb);
       b->errorMessage = buf;

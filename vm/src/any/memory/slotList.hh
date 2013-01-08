@@ -14,13 +14,13 @@ class slotList: public ResourceObj {
   slotList* next;
   
   slotList(stringOop name, slotType type, oop contents,
-     oop anno, slotList* x= NULL)
+     oop anno, slotList* x= 0)
     : desc(name, type, contents, anno) {
     next= x; 
   }
   slotList(stringOop name, slotType type, oop contents)
     : desc(name, type, contents, Memory->slotAnnotationObj) {
-    next= NULL;
+    next= 0;
   }
   slotList* add(stringOop name, slotType type, oop contents) {
     return add(name, type, contents, Memory->slotAnnotationObj);

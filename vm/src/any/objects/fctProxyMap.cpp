@@ -10,7 +10,7 @@
 fctProxyOop fctProxyMap::create_fctProxy() {
   slotList* slots = new slotList(VMString[PARENT], 
                                  parent_map_slotType,
-                                 create_slots((slotList*)NULL));
+                                 create_slots((slotList*)0));
   fctProxyMap mm;
   fctProxyOop mr;
   (void)create_map(sizeof(fctProxyMap), slots, &mm, (oop*)&mr);

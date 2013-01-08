@@ -26,7 +26,7 @@ class methodMap: public codeSlotsMap {
  public:
   static slotsOop create_outerMethod(slotList* slots, ByteCode* b,
                                      const char* annotation = "",
-                                     IntBList* stack_deltas = NULL);
+                                     IntBList* stack_deltas = 0);
  protected:
   // instance variables
   byteVectorOop    _codes;
@@ -61,7 +61,7 @@ class methodMap: public codeSlotsMap {
    
   void fix_local_bytecodes_and_links(    oldMapList* old_maps,
                                          slotsOop   outerMethod,
-                                         IntBList*  stack_deltas = NULL);
+                                         IntBList*  stack_deltas = 0);
 
   void fix_local_bytecodes_and_links_of_my_blocks( oldMapList* old_maps,
                                                    slotsOop outerMethod);
@@ -127,14 +127,14 @@ class methodMap: public codeSlotsMap {
 
   IntList* expression_stack_bcis(bool debugMode);
 
-  IntList* all_blocks(OopList** literals = NULL);
-  IntList* blocks_upto(fint bci, OopList** literals = NULL);
+  IntList* all_blocks(OopList** literals = 0);
+  IntList* blocks_upto(fint bci, OopList** literals = 0);
     
 
  public:
   void branch_targets( bool& got_one,  
                        BoolBList** branch_targets,
-                       BoolBList** backwards_branch_targets = NULL);
+                       BoolBList** backwards_branch_targets = 0);
   
   int32 debug_size(oop p);
   
@@ -168,10 +168,10 @@ class methodMap: public codeSlotsMap {
   // used by programming prims to set backpointers
 
   oop fix_up_method( oop obj,
-                     oop old_optimized_method = NULL,
+                     oop old_optimized_method = 0,
                      bool isOKToBashLiteralVector = false,
                      bool mustAllocate= true,
-                     IntBList* stack_deltas = NULL);
+                     IntBList* stack_deltas = 0);
 
   // printing support
   void print_string(oop obj, char* buf);
@@ -185,7 +185,7 @@ class methodMap: public codeSlotsMap {
 
 static inline slotsOop create_outerMethod(slotList* slots, ByteCode* b,
                                           const char* annotation = "",
-                                          IntBList* stack_deltas = NULL) {
+                                          IntBList* stack_deltas = 0) {
   return methodMap::create_outerMethod(slots, b, annotation, stack_deltas);
 }
 
@@ -208,7 +208,7 @@ class outerMethodMap: public methodMap {
 
   bool verify(oop obj);
 
-  methodMap* get_lexical_link_map() { return NULL; }
+  methodMap* get_lexical_link_map() { return 0; }
 };
 
 
@@ -255,7 +255,7 @@ class blockMethodMap: public methodMap {
 
 static inline slotsOop create_blockMethod(slotList* slots, ByteCode* b,
                                           const char* annotation = "",
-                                          IntBList* stack_deltas = NULL) {
+                                          IntBList* stack_deltas = 0) {
   return blockMethodMap::create_blockMethod(slots, b, annotation, stack_deltas);
 }
 

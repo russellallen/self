@@ -14,7 +14,7 @@ oop processOopClass::NewProcess_prim(smi stackSize, oop rcvr, stringOop sel,
   char *selector = sel->copy_null_terminated();
   if (stackSize <= 0 || str_arg_count(selector) > args->length()) {
     prim_failure(FH, PRIMITIVEFAILEDERROR);
-    return NULL;
+    return 0;
   }
   Process* p;
   p = new Process(this, stackSize, rcvr, sel, args);
@@ -25,7 +25,7 @@ inline Process* checkProcess(oop p) {
   assert(p->is_process(), "not a process");
   Process* proc = processOop(p)->process();
   if (!proc || proc->processObj() != p) {
-    return NULL;                // dead process or a clone of a process obj
+    return 0;                // dead process or a clone of a process obj
   } else {
     return proc;
   }
@@ -33,14 +33,14 @@ inline Process* checkProcess(oop p) {
 
 
 void processOopClass::kill_process() {
-  set_process(NULL);
+  set_process(0);
   vframeOop sentinel = vframeList();
-  sentinel->set_next(NULL);
+  sentinel->set_next(0);
 }
 
 
 bool processOopClass::is_live_process() {
-  return checkProcess(this) != NULL;
+  return checkProcess(this) != 0;
 }
 
 
@@ -48,11 +48,11 @@ oop processOopClass::AbortProcess_prim(void *FH) {
   Process* proc = checkProcess(this);
   if (!proc) {
     prim_failure(FH, NOPROCESSERROR);
-    return NULL;
+    return 0;
   }
   if (proc == twainsProcess)  {
     prim_failure(FH, PRIMITIVEFAILEDERROR);
-    return NULL;
+    return 0;
   }
   preserved pres(this);
   proc->abort();
@@ -103,7 +103,7 @@ oop processOopClass::PrintProcessStack_prim(void *FH) {
   Process* p = checkProcess(this);
   if (!p) {
     prim_failure(FH, NOPROCESSERROR);
-    return NULL;
+    return 0;
   }
   switch (p->state) {
    case ready:
@@ -133,7 +133,7 @@ Process* processOopClass::TWAINS_receiver_check(void* FH) {
   Process* proc = checkProcess(this);
   if (!proc  || !proc->isRunnable()) {
     prim_failure(FH, NOPROCESSERROR);
-    return NULL;
+    return 0;
   }
   return proc;
 }
@@ -150,7 +150,7 @@ bool processOopClass::TWAINS_result_vector_check(objVectorOop resultArg,
 
 vframeOop processOopClass::TWAINS_stop_activation_check(Process* proc,
                                                         oop stop, void* FH) {
-  vframeOop stop_vfo = NULL;
+  vframeOop stop_vfo = 0;
   if (stop == Memory->nilObj) {
     // no stopping (common case)
   } else if (stop->is_mirror() && mirrorOop(stop)->reflectee()->is_vframe()) {
@@ -209,7 +209,7 @@ void processOopClass::TWAINS_transfer_to_another_process(
       proc->resetStopping();
       if (!isFatalCause(preemptCause)) preemptCause = cFinishedActivation;
     }
-    proc->setStopPoint(NULL);
+    proc->setStopPoint(0);
   } else {
     // couldn't allocate stack
     preemptCause= cCouldntAllocateStack;
@@ -237,11 +237,11 @@ oop processOopClass::TWAINS_prim(objVectorOop resultArg,
     warning("_TWAINS: signals are blocked (with _BlockSignals)");
   
   Process* proc= TWAINS_receiver_check(FH);
-  if (proc == NULL) return NULL;
-  if (!TWAINS_result_vector_check( resultArg, FH)) return NULL;
+  if (proc == 0) return 0;
+  if (!TWAINS_result_vector_check( resultArg, FH)) return 0;
   vframeOop stop_vfo= TWAINS_stop_activation_check(proc, stop, FH);
-  if (stop_vfo == vframeOop(badOop)) return NULL;
-  if (!TWAINS_parallel_check(FH)) return NULL;
+  if (stop_vfo == vframeOop(badOop)) return 0;
+  if (!TWAINS_parallel_check(FH)) return 0;
 
   preemptCause = cNoCause;
   twainsProcess = currentProcess;
@@ -255,7 +255,7 @@ oop processOopClass::TWAINS_prim(objVectorOop resultArg,
   else {
     TWAINS_await_signal();
   }
-  twainsProcess = NULL;
+  twainsProcess = 0;
   
   oop res = get_result(resultArg);
   LOG_EVENT3("TWAINS: res = %#lx { %#lx, %#lx, ... }", res,
@@ -268,7 +268,7 @@ oop processOopClass::TWAINS_prim(objVectorOop resultArg,
 oop processOopClass::ProcessReturnValue_prim(void *FH) {
   if (process()) {
     prim_failure(FH, NOPROCESSERROR);
-    return NULL;
+    return 0;
   }
   return get_return_oop();
 }
@@ -315,7 +315,7 @@ smi processOopClass::StackDepth_prim(void *FH) {
   Process* p = checkProcess(this);
   if (!p) {
     prim_failure(FH, NOPROCESSERROR);
-    return NULL;
+    return 0;
   }
   int32 vdepth = p->stack()->vdepth();
   if (p != vmProcess && vdepth > 0) vdepth--;   // hide dummy doIt vframe
@@ -355,7 +355,7 @@ oop processOopClass::ActivationStack_prim(void *FH) {
     p->killVFrameOopsAndSetWatermark( p->last_self_frame(false));
   if (!p) {
     prim_failure(FH, NOPROCESSERROR);
-    return NULL;
+    return 0;
   }
   FlushRegisterWindows();
 
@@ -370,7 +370,7 @@ oop processOopClass::ActivationStack_prim(void *FH) {
   objVectorOop resultVec= Memory->objVectorObj->cloneSize(len, CANFAIL);
   if (oop(resultVec) == failedAllocationOop) {
     out_of_memory_failure(FH, Memory->objVectorObj->size() + len);
-    return NULL;
+    return 0;
   }
 
   oop*         resultp   = resultVec->objs();
@@ -386,7 +386,7 @@ oop processOopClass::ActivationStack_prim(void *FH) {
       mirror= merge->as_mirror_or_fail();
       if (oop(mirror) == failedAllocationOop) {
         out_of_memory_failure(FH);
-        return NULL;
+        return 0;
       }
       prev  = merge;
       merge = merge->next();
@@ -394,12 +394,12 @@ oop processOopClass::ActivationStack_prim(void *FH) {
       vframeOop vfo= clone_vframeOop(vf, p, CANFAIL);
       if (oop(vfo) == failedAllocationOop) {
         out_of_memory_failure(FH);
-        return NULL;
+        return 0;
       }
       mirror= vfo->as_mirror_or_fail();
       if (oop(mirror) == failedAllocationOop) {
         out_of_memory_failure(FH);
-        return NULL;
+        return 0;
       }
       vfo->insertAfter(prev);
       prev = vfo;
@@ -417,11 +417,11 @@ abstract_vframe* processOopClass::vframe_at(smi index, void *FH, Process*& p,
   p = checkProcess(this);
   if (!p) {
     prim_failure(FH, NOPROCESSERROR);
-    return NULL;
+    return 0;
   }
   if (index < 0 || !p->inSelf()) {
     prim_failure(FH, BADINDEXERROR);
-    return NULL;
+    return 0;
   }
   FlushRegisterWindows();
   last = p->last_self_frame(false);
@@ -437,7 +437,7 @@ abstract_vframe* processOopClass::vframe_at(smi index, void *FH, Process*& p,
   }
   if (!vf || (vf->is_first_self_vframe() && hideFirst)) {
     prim_failure(FH, BADINDEXERROR);
-    return NULL;
+    return 0;
   }
   return vf;
 }
@@ -447,7 +447,7 @@ oop processOopClass::ActivationAt_prim(smi index, void *FH) {
   Process* p;
   frame* last;
  abstract_vframe* vf = vframe_at(index, FH, p, last);
-  if (!vf) return NULL; 
+  if (!vf) return 0; 
   oop vfo = new_vframeOop(p, vf)->as_mirror();
   if (p == currentProcess) p->killVFrameOopsAndSetWatermark(last);
   return vfo;
@@ -459,7 +459,7 @@ oop processOopClass::KillUpTo_prim(smi index, void *FH) {
   Process* p;
   frame* last;
   abstract_vframe* vf = vframe_at(index, FH, p, last);
-  if (!vf) return NULL; 
+  if (!vf) return 0; 
   if (!p->isRunnable()) {
     failure(FH, "process is not runnable");
     return 0;
@@ -484,7 +484,7 @@ oop processOopClass::GotoByteCode_prim(smi bci, objVectorOop exprStack,
   Process* p;
   frame* last;
   abstract_vframe* vf = vframe_at(0, FH, p, last);
-  if (!vf) return NULL; 
+  if (!vf) return 0; 
   if (!p->isRunnable()) {
     failure(FH, "processes is not runnable");
     return 0;

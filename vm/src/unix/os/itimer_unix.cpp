@@ -46,7 +46,7 @@ extern "C" int setitimer(int which,
 // initing the timers
 
 void IntervalTimer::init() {
-  assert(Real_timer() == NULL,  "must only init itimers once");
+  assert(Real_timer() == 0,  "must only init itimers once");
   
   _Real_timer = new IntervalTimer( SIGALRM,   ITIMER_REAL);
    _CPU_timer = new IntervalTimer( SIGVTALRM, ITIMER_VIRTUAL);
@@ -116,14 +116,14 @@ void IntervalTimer::enable() {
   sigdelset(&action.sa_mask, SIGFPE);
   sigdelset(&action.sa_mask, SIGSEGV);
 
-  if (sigaction( sig, &action, NULL) == -1) {
+  if (sigaction( sig, &action, 0) == -1) {
     perror("sigaction");
     fatal1("couldn't install signal handler for signal %ld", sig);
   }
   if (!sigismember(&action.sa_mask, sig) || !sigismember(&SignalInterface::sig_mask, sig))
     fatal1("should have masked %d", sig);
     
-  if (setitimer(timer, &dt, NULL)) fatal("cannot start timer!");
+  if (setitimer(timer, &dt, 0)) fatal("cannot start timer!");
   
   post_enable();
 }
@@ -133,7 +133,7 @@ void IntervalTimer::disable(bool) {
   pre_disable();
   static struct itimerval dt0;         // to deactivate (all zero)
   dt0.it_value.tv_sec = dt0.it_value.tv_usec = 0;
-  if (setitimer(timer, &dt0, NULL))
+  if (setitimer(timer, &dt0, 0))
     fatal("cannot reset timer!");
   // in OS X: can get timer killing process, try SIG_IGN instead of SIG_DFL
   (void)signal( sig, SIG_IGN);
@@ -197,11 +197,16 @@ void IntervalTimerTick(int sig, self_code_info_t *info, self_sig_context_t *scp)
     if (!haveWarned) {
 # if TARGET_OS_VERSION == LINUX_VERSION
       warning3("IntervalTimerTick: signal_handler cannot nest (only one interrupted context).\n"
-               "Received timer sig %d while in sig %d or timer sig %d.\n"
-               "MacOSX ApplicationEnhancer causes apps to get signals that should be blocked.",
+               "Received timer sig %d while in sig %d or timer sig %d.\n",
                sig, 
                SignalInterface::currentNonTimerSignal,
                SignalInterface::currentTimerSignal);
+# elif TARGET_OS_VERSION == SOLARIS_VERSION
+      warning6("IntervalTimerTick: signal_handler cannot nest (only one interrupted context).\n"
+               "Received timer sig %d (%s) while in sig %d (%s) or timer sig %d (%s).\n",
+               sig, strsignal(sig),
+               SignalInterface::currentNonTimerSignal, strsignal(SignalInterface::currentNonTimerSignal),
+               SignalInterface::currentTimerSignal, strsignal(SignalInterface::currentTimerSignal));
 # else
       warning6("IntervalTimerTick: signal_handler cannot nest (only one interrupted context).\n"
                "Received timer sig %d (sig%s) while in sig %d (sig%s) or timer sig %d (sig%s).\n"

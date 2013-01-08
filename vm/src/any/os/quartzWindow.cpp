@@ -11,7 +11,6 @@
 # if defined(QUARTZ_LIB) 
 
 # if TARGET_OS_VERSION == MACOSX_VERSION  &&  !TARGET_API_MAC_CARBON
-  #  undef ASSEMBLER
   #  undef Alloc
   #  undef Status
 
@@ -85,14 +84,14 @@ bool WindowSet::includes_window(WindowSet_WindowPtr w) {
 
 QuartzWindow::QuartzWindow() : AbstractPlatformWindow(), _evtQ() { 
   _is_open = false;
-  _my_event_handler_upp = NULL;
-  _my_event_handler = NULL;
-  _my_spy_event_handler_upp = NULL;
-  _my_spy_event_handler = NULL;
+  _my_event_handler_upp = 0;
+  _my_event_handler = 0;
+  _my_spy_event_handler_upp = 0;
+  _my_spy_event_handler = 0;
   _bounds_changed = false;
   _was_closed = false;
-  _quartz_win = NULL;
-  myContext = NULL;
+  _quartz_win = 0;
+  myContext = 0;
 }
 
 
@@ -140,13 +139,13 @@ bool QuartzWindow::open(
                     int   font_size ) {
   HIRect bounds = (HIRect) CGRectMake(left, top, right, bottom);
   
-  OSStatus err =  HIWindowCreate(wc, attrs, NULL, kHICoordSpace72DPIGlobal, &bounds, &_quartz_win);
+  OSStatus err =  HIWindowCreate(wc, attrs, 0, kHICoordSpace72DPIGlobal, &bounds, &_quartz_win);
   if (err != noErr)
     return false;
   SetWRefCon(my_window(), (int32)this);
 
     
-  CFStringRef cftitle = CFStringCreateWithCString(NULL, title, kCFStringEncodingMacRoman);
+  CFStringRef cftitle = CFStringCreateWithCString(0, title, kCFStringEncodingMacRoman);
   SetWindowTitleWithCFString(my_window(), cftitle);
   CFRelease(cftitle);
 
@@ -182,7 +181,7 @@ void QuartzWindow::init_font_info() {
     kCFAllocatorDefault, default_fixed_font_name(), kCFStringEncodingMacRoman);
     
   ATSFontIterator fi;
-  OSStatus e = ATSFontIteratorCreate( kATSFontContextLocal, NULL, NULL,
+  OSStatus e = ATSFontIteratorCreate( kATSFontContextLocal, 0, 0,
                                       kATSOptionFlagsDefaultScope, &fi);
   if (e) fatal1("could not create ATSFontIterator %d", e);
   
@@ -223,7 +222,7 @@ void QuartzWindow::close() {
   if (!is_open())
     return;
   CGrafPtr gp = GetWindowPort(my_window());
-  if (gp != NULL) // already closed by std handler
+  if (gp != 0) // already closed by std handler
     QDEndCGContext( gp, &myContext );
   CGColorRelease((CGColorRef) _red);
   CGColorRelease((CGColorRef) _yellow);
@@ -232,14 +231,14 @@ void QuartzWindow::close() {
   CGColorRelease((CGColorRef) _white);
   CGColorSpaceRelease(_color_space);
   WindowSet::rm_window(my_window());
-  if (gp != NULL)
+  if (gp != 0)
     DisposeWindow(my_window());
   _is_open = false; 
   DisposeEventHandlerUPP(_my_event_handler_upp);
   DisposeEventHandlerUPP(_my_spy_event_handler_upp);
-  _my_event_handler = NULL;
-  _my_spy_event_handler = NULL;
-  _quartz_win = NULL;
+  _my_event_handler = 0;
+  _my_spy_event_handler = 0;
+  _quartz_win = 0;
 }
 
 
@@ -360,9 +359,9 @@ bool QuartzWindow::change_extent(int left, int top, int w, int h) {
   // Remember, left, top, w and h are for outer parts of window.  
   // convert to inner
   CGrafPtr gp = GetWindowPort(my_window());
-  if (gp != NULL) // already closed by std handler
+  if (gp != 0) // already closed by std handler
     QDEndCGContext( gp, &myContext );
-  myContext = NULL;  
+  myContext = 0;  
   MoveWindow( my_window(), left + inset_left(), top + inset_top(), false); 
   SizeWindow( my_window(), w - inset_left() - inset_right(), h - inset_top() - inset_bottom(), true);              
 
@@ -396,7 +395,7 @@ void QuartzWindow::adjust_after_resize() {
     CGContextTranslateCTM(myContext, -x.tx, -x.ty);
     setupCTM();
   }  
-  if (TheSpy != NULL)
+  if (TheSpy != 0)
     TheSpy->adjust_after_resize(); // might be the spy
 }
 
@@ -412,7 +411,7 @@ bool QuartzWindow::pre_draw(bool incremental) {
     _was_closed = false;
     return false;
   }
-  if ( myContext == NULL ) {
+  if ( myContext == 0 ) {
     // Self does this for Self windows, so only do it for Spy windows--that's why it's here and not in open
     SetPortWindowPort(my_window());
     QDBeginCGContext( GetWindowPort(my_window()), &myContext);
@@ -448,7 +447,7 @@ void QuartzWindow::post_draw(bool incremental) {
   
  
 void QuartzWindow::full_redraw() {
-  if (TheSpy != NULL)
+  if (TheSpy != 0)
     TheSpy->full_redraw(); // might be the spy
 }
 
@@ -555,7 +554,7 @@ oop QuartzWindow::get_scrap_text() {
   // See Pasteboard Manager Programming guide
   PasteboardRef       clipboard;
   PasteboardSyncFlags syncFlags;
-  CFDataRef           textData = NULL;
+  CFDataRef           textData = 0;
   ItemCount           itemCount;
   
   if (PasteboardCreate(kPasteboardClipboard, &clipboard) != noErr) 
@@ -569,7 +568,7 @@ oop QuartzWindow::get_scrap_text() {
   
   for(UInt32 itemIndex = 1; itemIndex <= itemCount; itemIndex++) {
     PasteboardItemID itemID = 0;
-    CFArrayRef       flavorTypeArray = NULL;
+    CFArrayRef       flavorTypeArray = 0;
     CFIndex          flavorCount = 0;
 
     if (PasteboardGetItemIdentifier(clipboard, itemIndex, &itemID) != noErr)
@@ -627,7 +626,7 @@ int QuartzWindow::put_scrap_text(const char* s, int len) {
   OSStatus      err;
   CFDataRef     textData = CFDataCreate(kCFAllocatorDefault, 
                                         (const UInt8*)s, len);
-  if (textData == NULL) return -1;
+  if (textData == 0) return -1;
   if ((err = PasteboardCreate(kPasteboardClipboard, &clipboard)) != noErr) return err;
   if ((err = PasteboardClear(clipboard)) != noErr) return err;
 
@@ -639,7 +638,7 @@ int QuartzWindow::put_scrap_text(const char* s, int len) {
 
 // Convert WindowPtr to QuartzWindow by using refcon
 QuartzWindow* QuartzWindow::getPlatformWindow(WindowRef ww, void* FH) {
-    if (!WindowSet::includes_window(ww))  { failure(FH, "not a QuartzPLatformWindow"); return NULL; }
+    if (!WindowSet::includes_window(ww))  { failure(FH, "not a QuartzPLatformWindow"); return 0; }
     QuartzWindow* w = (QuartzWindow*) GetWRefCon(ww);
     assert(w->my_window() == ww, "");
     return w;
@@ -658,9 +657,9 @@ int  QuartzWindow::events_pending(void* FH) {
 EventRef  QuartzWindow::peek_event(void* FH) {
   if (!is_open())  { failure(FH, "window is closed"); return 0; }
   EventRef e = _evtQ.peek();
-  if (e == NULL) {
+  if (e == 0) {
     failure(FH, "no more events");
-    return NULL;
+    return 0;
   }
   return e;
 }
@@ -669,9 +668,9 @@ EventRef  QuartzWindow::peek_event(void* FH) {
 EventRef  QuartzWindow::next_event(void* FH) {
   if (!is_open())  { failure(FH, "window is closed"); return 0; }
   EventRef e = _evtQ.get();
-  if (e == NULL) {
+  if (e == 0) {
     failure(FH, "no more events");
-    return NULL;
+    return 0;
   }
   return e;
 }
@@ -700,16 +699,16 @@ static OSStatus handle_spy_event(EventHandlerCallRef handler_call_chain, EventRe
 
 void QuartzWindow::init_events() {
   _my_event_handler_upp = NewEventHandlerUPP(::handle_event);
-  OSStatus e = InstallWindowEventHandler(my_window(), _my_event_handler_upp, 0, NULL, this, &_my_event_handler);
+  OSStatus e = InstallWindowEventHandler(my_window(), _my_event_handler_upp, 0, 0, this, &_my_event_handler);
   if (e != noErr) fatal1("could not install event handler: %d\n", e);
   
   _my_spy_event_handler_upp = NewEventHandlerUPP(::handle_spy_event);
-  e = InstallWindowEventHandler(my_window(), _my_spy_event_handler_upp, 0, NULL, this, &_my_spy_event_handler);
+  e = InstallWindowEventHandler(my_window(), _my_spy_event_handler_upp, 0, 0, this, &_my_spy_event_handler);
   if (e != noErr) fatal1("could not install spy event handler: %d\n", e);
 }
 
 OSStatus QuartzWindow::AddHandledEvent_wrap( uint32* eclass, uint ec_len, uint ekind, void* FH) {
-  if (ec_len != 1)  { failure( FH, "class needs to have four bytes"); return NULL; }
+  if (ec_len != 1)  { failure( FH, "class needs to have four bytes"); return 0; }
   EventTypeSpec es;
   es.eventClass = EndianU32_BtoN(*eclass);
   es.eventKind = ekind;
@@ -717,7 +716,7 @@ OSStatus QuartzWindow::AddHandledEvent_wrap( uint32* eclass, uint ec_len, uint e
 }
 
 OSStatus QuartzWindow::RemoveHandledEvent_wrap( uint32* eclass, uint ec_len, uint ekind, void* FH) {
-  if (ec_len != 1)  { failure( FH, "class needs to have four bytes"); return NULL; }
+  if (ec_len != 1)  { failure( FH, "class needs to have four bytes"); return 0; }
   EventTypeSpec es;
   es.eventClass = EndianU32_BtoN(*eclass);
   es.eventKind = ekind;
@@ -726,8 +725,8 @@ OSStatus QuartzWindow::RemoveHandledEvent_wrap( uint32* eclass, uint ec_len, uin
  
  
 static uint16 get_short_event_parm(EventRef evt, EventParamName n, EventParamType t) {
-  uint16 r = NULL;
-  OSStatus e = GetEventParameter(evt, n, t, NULL, sizeof(r), NULL, &r);
+  uint16 r = 0;
+  OSStatus e = GetEventParameter(evt, n, t, 0, sizeof(r), 0, &r);
   uint32 nb = EndianU32_NtoB(n);
   if (e) lprintf("scalar event parm failed: %4.4s, %d\n", (char*)&n, e);
   return r;
@@ -735,8 +734,8 @@ static uint16 get_short_event_parm(EventRef evt, EventParamName n, EventParamTyp
  
  
 static void* get_scalar_event_parm(EventRef evt, EventParamName n, EventParamType t) {
-  void* r = NULL;
-  OSStatus e = GetEventParameter(evt, n, t, NULL, sizeof(r), NULL, &r);
+  void* r = 0;
+  OSStatus e = GetEventParameter(evt, n, t, 0, sizeof(r), 0, &r);
   if (e == noErr || e == -9870) return r;
   uint32 nb = EndianU32_NtoB(n);
   lprintf("scalar event parm failed: %4.4s, %d\n", (char*)&n, e);
@@ -762,7 +761,7 @@ OSStatus QuartzWindow::handle_event(EventHandlerCallRef handler_call_chain, Even
  
   // Hack: if this is a user-level window (not SPY) and if it is window-close,
   // must leave it for Self, otherwise let standard handler do it
-  if ( myContext == NULL  &&  GetEventClass
+  if ( myContext == 0  &&  GetEventClass
   &&   GetEventClass(e) == kEventClassWindow 
   &&   GetEventKind(e)  == kEventWindowClose )
     return noErr;
@@ -777,7 +776,7 @@ void QuartzWindow::check_carbon_events() {
 
   for (;;) {
     EventRef evt;
-    ReceiveNextEvent(0, NULL, kEventDurationNoWait, true, &evt);
+    ReceiveNextEvent(0, 0, kEventDurationNoWait, true, &evt);
     if (!evt) return;
     SendEventToEventTarget(evt, GetEventDispatcherTarget());
   }

@@ -26,7 +26,7 @@ typedef class TraceControl {
   int niranges;             /* # of address ranges to trace (instructions) */
   char* irange[50*3];       /* 3 entries per address range: */
                             /* 1. = name, 2./3. = [start..end) */
-                            /* name == NULL means dont trace this range */
+                            /* name == 0 means dont trace this range */
   int ndranges;             /* # of data address ranges */
   char* drange[50*3];       /* 3 entries per address range: */
                             /* 1. = name, 2./3. = [start..end) */

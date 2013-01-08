@@ -73,7 +73,6 @@ extern "C" {
 # include <memory.h>
 # include <math.h>
 # if TARGET_OS_VERSION == MACOSX_VERSION
-#   undef ASSEMBLER
 #   include <sys/ucontext.h>
 #   include <termios.h>
 #   include <sys/ioctl.h>
@@ -173,8 +172,6 @@ extern "C" {
 
 
 # if TARGET_OS_VERSION == MACOSX_VERSION
-  # undef ASSEMBLER
-
   # include <mach/mach_types.h>
   # include <sys/sysctl.h>
   # include <mach/machine/vm_types.h> // for mman.h
@@ -247,9 +244,3 @@ extern "C" { int malloc_verify(); }
 # if TARGET_OS_VERSION == MACOSX_VERSION
   typedef size_t nbytes_t;
 # endif
-
-// Using g++include files results in NULL is defined as (void *) but
-// the virtual machine expects NULL to be 0. LB 
-# undef NULL
-# define NULL 0
-

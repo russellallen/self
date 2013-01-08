@@ -31,5 +31,5 @@ SignalBlocker::SignalBlocker(SignalBlockerType sbt) {
 
 
 SignalBlocker::~SignalBlocker() {
-  if (sigprocmask(SIG_SETMASK, &saved_mask, NULL)) perror("sigprocmask");
+  if (sigprocmask(SIG_SETMASK, &saved_mask, 0)) perror("sigprocmask");
 }

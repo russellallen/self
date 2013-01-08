@@ -16,7 +16,7 @@ class AbstractCompiler : public ResourceObj {
  public:
 
   compilingLookup* L;           // the lookup that found me
-  nmln* diLink;                 // for DI methods ( or NULL)
+  nmln* diLink;                 // for DI methods ( or 0)
  
    // We choose to not support compilation of block methods whose
   //  homes are interpeted. This is so that the compiler will not have to know

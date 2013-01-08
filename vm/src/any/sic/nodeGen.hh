@@ -25,7 +25,7 @@
     bool haveStackFrame;        // create stack frame?
 
     NodeGen(compilingLookup* k, sendDesc* sd, nmln* d);
-    ~NodeGen() { theNodeGen = NULL; }
+    ~NodeGen() { theNodeGen = 0; }
 
     // fixed registers
     PReg  *delPR, *selPR,
@@ -35,7 +35,7 @@
     void enterScope(SSelfScope* s);
     void exitScope (SSelfScope* s);
     SSelfScope* currentScope() {
-      return scopeStack->isEmpty() ? NULL : scopeStack->top(); }
+      return scopeStack->isEmpty() ? 0 : scopeStack->top(); }
     Node* append(Node* n);
     Node* comment(const char* s);
     

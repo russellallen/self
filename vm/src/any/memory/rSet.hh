@@ -40,7 +40,7 @@ class rSet: public CHeapObj {
   void* operator new(size_t size);
   
   inline void clear();
-  char* byte_map_base()         { return byte_for(NULL); }
+  char* byte_map_base()         { return byte_for(0); }
   void record_store(void* p)    { *byte_for(p) = 0; }
   void record_multistores(oop* start, oop* end);
   // next one is here because of include file orderings

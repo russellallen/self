@@ -1,5 +1,0 @@
-// Sun-$Revision: 30.4 $
-
-arch = i386
-os   = unix
-os_version = macosx

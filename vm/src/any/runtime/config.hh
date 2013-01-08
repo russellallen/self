@@ -99,13 +99,13 @@
   # define  SNOW_LEOPARD_RELEASE 6
   # define          LION_RELEASE 7
   # define MOUNTAIN_LION_RELEASE 8
-	  
+
   # ifndef OSX_RELEASE
     # define OSX_RELEASE LION_RELEASE
   # endif
 
   // Apple asm syntax changed in 2006 sometime
-  // next 5 lines DUPLICATED in asmDefs_gcc_i386.hh
+  // next 5 lines DUPLICATED in asmDefs_i386.hh
   # define   PRE_2007_OSX_ASM_RELEASE 4
   # define  POST_2007_OSX_ASM_RELEASE 5
   # ifndef OSX_ASM_RELEASE
@@ -133,7 +133,7 @@
 // The following definitions make machine-dependent asserts more convenient
 # if  TARGET_ARCH == SPARC_ARCH
 # define isSparc 1
-# else 
+# else
 # define isSparc 0
 # endif
 

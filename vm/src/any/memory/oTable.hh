@@ -30,7 +30,7 @@ class oTableBuffer: public oTableObj {
   oTableBuffer* next;
   oTableEntry entries[object_table_size];
 
-  oTableBuffer() { next = NULL; }
+  oTableBuffer() { next = 0; }
 
   bool is_oTableEntry(void* p) {
     return (p >= (void*) &entries[0] && p < (void*) &entries[object_table_size])
@@ -68,7 +68,7 @@ class oTable: public ResourceObj {
   // use its own resource area.
   ResourceArea resource_area;
   
-  oTable()  { bottom = NULL; }
+  oTable()  { bottom = 0; }
 
   void grow();
   

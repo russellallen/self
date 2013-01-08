@@ -46,7 +46,7 @@ public:
   Conversion(oop r, char* s, bool n, frame* h, int32 id,
              ResourceMark* mark,
              bool isInterp) {
-    result = r; sp = s; nlr = n; nlrHome = h; nlrHomeID = id; sd = NULL;
+    result = r; sp = s; nlr = n; nlrHome = h; nlrHomeID = id; sd = 0;
     rm = mark;
     isInterpreting = isInterp; }
 

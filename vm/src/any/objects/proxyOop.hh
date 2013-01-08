@@ -38,7 +38,7 @@ class proxyOopClass: public foreignOopClass {
 
     void kill_proxy() {
       // Don't call this function. Call kill() instead.
-      set_pointer(NULL);    /* Just a precaution. */
+      set_pointer(0);    /* Just a precaution. */
       set_type_seal(deadProxyObject);
     }
 

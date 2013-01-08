@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# if TARGET_OS_VERSION != MACOSX_VERSION \
-  && TARGET_OS_VERSION !=  LINUX_VERSION
+# if !(   TARGET_OS_VERSION ==  MACOSX_VERSION \
+     ||   TARGET_OS_VERSION ==   LINUX_VERSION \
+     || ( TARGET_OS_VERSION == SOLARIS_VERSION \
+             && TARGET_ARCH == I386_ARCH))
   # define FD_SETSIZE     256             /* max. number of open files */
 # endif
   
@@ -106,20 +108,22 @@ void resetTerminal() {
   // Emulate blocking write on a possibly non-blocking filedescriptor; this
   // is necessary because e.g. lprintf doesn't expect non-blocking files.
 
-  extern "C" {
-    int _WRITE(int fd, const char* buf, int nbytes);
-    // C library write()
-  }
-  static int c_lib_write(int fd, const char* buf, int nbytes) {
-    return _WRITE(fd, buf, nbytes);
-  }
-
   typedef unsigned int nbytes_t;
-  // Note: Both _write and _libc_write are patched in write.o
+  # if TARGET_ARCH != I386_ARCH
   extern "C"  int write(int, const void*, nbytes_t);
   extern "C"  int  _write(int fd, const void* b, nbytes_t nbytes) { return write(fd, b, nbytes); }
   extern "C" int _libc_write(int fd, const void* b, unsigned int nbytes) {
     return _write(fd, b, nbytes); }
+  # endif
+
+  static int c_lib_write(int fd, const char* buf, int nbytes) {
+  # if TARGET_ARCH == I386_ARCH
+    return write(fd, buf, nbytes);
+  # else
+    return _write(fd, buf, nbytes);
+  # endif
+  }
+
 # elif  TARGET_OS_VERSION == SUNOS_VERSION
 
   // Emulate blocking write on a possibly non-blocking filedescriptor; this
@@ -141,7 +145,7 @@ void resetTerminal() {
   // is necessary because e.g. lprintf doesn't expect non-blocking files.
   
   // next statement is why we lose output from console, I bet -- dmu 12/02
-  # if 0 // don't use WRITE for now, seems to work, WRITE is commented in runtime_asm_gcc_i386.s
+  # if 0 // don't use WRITE for now, seems to work, WRITE is commented in runtime_asm_i386.S
     extern "C" {
       int WRITE(int fd, const char* buf, int nbytes);
       // C library write()
@@ -187,7 +191,7 @@ extern "C" int write(int fd, const void* b, nbytes_t nbytes) {
           // sometimes forgets to restart them... arghhh!
           timeval millisecond;
           millisecond.tv_sec = 0; millisecond.tv_usec = 1000;
-          select(0, NULL, NULL, NULL, &millisecond);
+          select(0, 0, 0, 0, &millisecond);
           errno = 0;
         } else {
           return -1;    // write error
@@ -302,7 +306,7 @@ oop gethostbyname_wrap(char* name, void* FH) {
   int addrCount = 0;
   hostent* h = gethostbyname(name);
 
-  if (h == NULL) { unix_failure(FH); return NULL; }
+  if (h == 0) { unix_failure(FH); return 0; }
   for (char **p = h->h_addr_list; *p; p++) 
     addrCount++;
   objVectorOop res = Memory->objVectorObj->cloneSize(addrCount);
@@ -319,7 +323,7 @@ oop gethostbyname_wrap(char* name, void* FH) {
 
 char *gethostbyaddr_wrap(char *addr, int addrlen, int addrtype, void *FH) {
   struct hostent *h = gethostbyaddr(addr, addrlen, addrtype);
-  if (!h) { unix_failure(FH, h_errno); return NULL; }
+  if (!h) { unix_failure(FH, h_errno); return 0; }
   return h->h_name; 
 }
 
@@ -397,7 +401,7 @@ void register_file_descriptor(int fd) {
   FD_SET(fd, &r);
   FD_SET(fd, &w);
   
-  if ( select(FD_SETSIZE, &r, &w, NULL, &nowait) < 0 )
+  if ( select(FD_SETSIZE, &r, &w, 0, &nowait) < 0 )
     return;
   
   // end of check
@@ -434,7 +438,7 @@ int select_wrap(objVectorOop vec, int howMany, void *FH) {
   timeval nowait;
   nowait.tv_sec  = 0; 
   nowait.tv_usec = 0;
-  if (select(howMany, &r, &w, NULL, &nowait) < 0) {
+  if (select(howMany, &r, &w, 0, &nowait) < 0) {
     unix_failure(FH);
     return 0;
   }
@@ -458,7 +462,7 @@ int select_read_wrap(objVectorOop vec, int howMany, void *FH) {
   timeval nowait;
   nowait.tv_sec  = 0; 
   nowait.tv_usec = 0;
-  if (select(howMany, &r, NULL, NULL, &nowait) < 0) {
+  if (select(howMany, &r, 0, 0, &nowait) < 0) {
     unix_failure(FH);
     return 0;
   }
@@ -498,9 +502,9 @@ char *getcwd_wrap(void *FH) {
   char *r= getcwd(path, sizeof(path));
   if (strlen(path) >= sizeof(path))
     fatal("just checkin'");
-  if (r == NULL) {
+  if (r == 0) {
     unix_failure(FH);
-    return NULL;
+    return 0;
   }
   return path;
 }
@@ -587,10 +591,10 @@ void unixPrims_exit() { delete ioC; }
 # if TARGET_OS_VERSION == MACOSX_VERSION \
   || TARGET_OS_VERSION ==  LINUX_VERSION
   static struct utsname my_utsname;
-  char*  sysname_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname. sysname; }
-  char* nodename_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname.nodename; }
-  char*  release_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname. release; }
-  char*  version_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname. version; }
-  char*  machine_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname. machine; }
+  char*  sysname_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)0) : my_utsname. sysname; }
+  char* nodename_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)0) : my_utsname.nodename; }
+  char*  release_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)0) : my_utsname. release; }
+  char*  version_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)0) : my_utsname. version; }
+  char*  machine_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)0) : my_utsname. machine; }
 # endif
     

@@ -36,9 +36,9 @@ class objVectorMap: public slotsMapDeps {
     objVectorOop(obj)->obj_at_put(which, contents); }
   
   // cloning operations
-  oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL);
+  oop clone(oop obj, bool mustAllocate= true, oop genObj= 0);
   bool can_inline_clone() { return false; }
-  oop cloneSize(oop obj, fint len, bool mustAllocate= true, oop filler= NULL);
+  oop cloneSize(oop obj, fint len, bool mustAllocate= true, oop filler= 0);
   
   // mirror operation
   mirrorOop mirror_proto() { return Memory->objVectorMirrorObj; }

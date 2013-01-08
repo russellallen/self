@@ -14,7 +14,7 @@ frame* blockOopClass::scope(bool orNone) {
   frame* f= b->homeFr();
   if (NLRSupport::is_bad_home_reference((char*)f)) {
     // prototype block or non-LIFO block
-    f = NULL;
+    f = 0;
   }
   assert(f || orNone, "blockMap::scope: block is dead");
   return f;
@@ -26,7 +26,7 @@ void blockOopClass::setScope(frame* newScope) {
   frame* f= b->homeFr();
   if (NLRSupport::is_bad_home_reference((char*)f)) {
     // prototype block or non-LIFO block
-    if (newScope != NULL)
+    if (newScope != 0)
       ShouldNotReachHere(); // shouldn't try to set scope pointer
   } else {
     assert_smi(newScope, "should be a word-aligned pointer");
@@ -88,15 +88,15 @@ oop clone_block_prim(oop rcvr, smiOop fp) {
 
   
 frame* blockOopClass::parentFrame(frame* currentFrame, bool orNone) {
-  // currentFrame, if non-NULL, is a hint (where to start searching for
+  // currentFrame, if non-0, is a hint (where to start searching for
   // the full frame for this block)
   frame* sc = scope(orNone);
-  if (sc == NULL) return NULL;
+  if (sc == 0) return 0;
   if (currentFrame) {
     // the hint may be wrong (rarely) if the two frames are on different
     // stacks)
     Stack* stk = processes->stackFor(currentFrame);
-    if (!stk->contains(sc)) currentFrame = NULL;
+    if (!stk->contains(sc)) currentFrame = 0;
   }
   frame* pf = sc->home_frame_of_block_scope(currentFrame);
   assert(pf->block_scope_of_home_frame() == sc, "wrong frame");
@@ -116,17 +116,17 @@ frame* blockOopClass::parentFrame(frame* currentFrame, bool orNone) {
 
 abstract_vframe* blockOopClass::parentVFrame(frame* currentFrame, bool orNone) {
   frame* pf= parentFrame(currentFrame, orNone);
-  return pf == NULL  ?  NULL  :  new_vframe(pf, desc());
+  return pf == 0  ?  0  :  new_vframe(pf, desc());
 }
 
 stringOop blockOopClass::outermostMethodSelector() {
-  oop selector = NULL;
-  for ( abstract_vframe* pp = parentVFrame(NULL, true); 
-                         pp != NULL;
+  oop selector = 0;
+  for ( abstract_vframe* pp = parentVFrame(0, true); 
+                         pp != 0;
                          pp = pp->parent())
     selector = pp->selector();
     
-  if (selector == NULL) { // block was zapped  
+  if (selector == 0) { // block was zapped  
     /* should really get name from lexical linkes
        here's a start:
         slotsOop v = value();
@@ -218,7 +218,7 @@ oop catch_interprocess_returns(oop blk) {
   if (!b->is_live())
     return b;
   frame* myScope = b->scope(true);
-  if (myScope == NULL)
+  if (myScope == 0)
     return b;
   if (!currentProcess->contains(myScope)) {
     b->kill();

@@ -23,12 +23,12 @@ class oopsOopClass: public memOopClass {
   void fix_generation(fint size) { if (is_old()) record_promotion(size); }
   
   // allocators
-  oopsOop copy(fint size, bool mustAllocate= true, oop genObj= NULL, 
+  oopsOop copy(fint size, bool mustAllocate= true, oop genObj= 0, 
                bool cs= true) {
     oop* x= genObj
       ? genObj->my_generation()->alloc_objs(size, mustAllocate)
         : Memory->alloc_objs(size, mustAllocate);
-    if (x == NULL)
+    if (x == 0)
       return oopsOop(failedAllocationOop);
     copy_oops(oops(), x, size);
     oopsOop r= as_oopsOop(x);
@@ -36,7 +36,7 @@ class oopsOopClass: public memOopClass {
     return r; }
   oopsOop grow(fint size, fint delta, bool mustAllocate= true) {
     oop* x= Memory->alloc_objs(size + delta, mustAllocate);
-    if (x == NULL)
+    if (x == 0)
       return oopsOop(failedAllocationOop);
     copy_oops(oops(), x, size);
     oopsOop r = as_oopsOop(x);
@@ -44,7 +44,7 @@ class oopsOopClass: public memOopClass {
     return r; }
   oopsOop shrink(fint size, fint delta, bool mustAllocate= true) {
     oop* x= Memory->alloc_objs(size - delta, mustAllocate);
-    if (x == NULL)
+    if (x == 0)
       return oopsOop(failedAllocationOop);
     copy_oops(oops(), x, size - delta);
     oopsOop r = as_oopsOop(x);
@@ -55,7 +55,7 @@ class oopsOopClass: public memOopClass {
     oop* x= sameGen
       ? my_generation()->alloc_objs(size + delta, mustAllocate)
         : Memory->alloc_objs(size + delta, mustAllocate);
-    if (x == NULL)
+    if (x == 0)
       return oopsOop(failedAllocationOop);
     oop* p = oops();
     copy_oops(p, x, change_point);
@@ -68,7 +68,7 @@ class oopsOopClass: public memOopClass {
     oop* x= sameGen
       ? my_generation()->alloc_objs(size - delta, mustAllocate)
         : Memory->alloc_objs(size - delta, mustAllocate);
-    if (x == NULL)
+    if (x == 0)
       return oopsOop(failedAllocationOop);
     oop* p = oops();
     copy_oops(p, x, change_point);

@@ -136,7 +136,7 @@ ChunkMap* ChunkMap::findStart(ChunkMap* mapStart, ChunkMap* mapEnd) {
   if (*p < MaxDistance) {
     // we're outside the header, so just walk down the trail
     # if  GENERATE_DEBUGGING_AIDS
-      u_char *lastp = NULL, *lastlastp = NULL;
+      u_char *lastp = 0, *lastlastp = 0;
     # endif
     while (*p < MaxDistance) {
       assert(*p, "stuck in endless loop");
@@ -223,7 +223,7 @@ void FreeList::remove(HeapChunk* h) {
   
 HeapChunk* FreeList::get() {
   if (link.isEmpty()) {
-    return NULL;
+    return 0;
   } else {
     HeapChunk* res = anchor()->next();
     remove(res);
@@ -260,7 +260,7 @@ Heap::Heap(int32 s, int32 bs, int32 nf, char* baseAddr, bool och) {
   heapMap = (ChunkMap*)(AllocateHeap(mapSize() + 2, "zone free map") + 1);
   // + 2 for sentinels
   freeList = NEW_C_HEAP_ARRAY( FreeList, nfree);
-  newHeap = NULL;
+  newHeap = 0;
   clear();
 }
 
@@ -279,7 +279,7 @@ void Heap::clear() {
 Heap::~Heap() {
 # if GENERATE_DEBUGGING_AIDS
     if (CheckAssertions) {
-      set_oops((oop*)base, capacity() / oopSize, NULL);
+      set_oops((oop*)base, capacity() / oopSize, 0);
     }
 # endif
   if (on_c_heap) selfs_free(_base);
@@ -320,7 +320,7 @@ void* Heap::allocFromLists(int32 wantedBytes) {
   int32 wantedBlocks = wantedBytes >> log2BS;
   assert(wantedBlocks > 0, "negative alloc size");
   int32 blocks = wantedBlocks - 1;
-  void* p = NULL;
+  void* p = 0;
   while (!p && ++blocks <= nfree) {
     p = freeList[blocks-1].get();
   }
@@ -397,7 +397,7 @@ void Heap::deallocate(void* p, int32 bytes) {
 # define INC(p, n)   p = asChunkMap(p->asByte() + n)
 
 char* Heap::compact(moveChunkFn move) {
-  if (usedBytes() == capacity()) return NULL;
+  if (usedBytes() == capacity()) return 0;
   
   ChunkMap* m = heapMap;
   ChunkMap* end = heapEnd();
@@ -492,7 +492,7 @@ int32 Heap::combineAll() {
 }
 
 void* Heap::firstUsed() {
-  if (usedBytes() == 0) return NULL;
+  if (usedBytes() == 0) return 0;
   if (heapMap->isUsed()) {
     return base;
   } else {
@@ -535,7 +535,7 @@ void* Heap::nextUsed(void* p) {
   assert(m->isValid(), "something's wrong");
   assert(m <= heapEnd(), "past end of heap");
   if (m == heapEnd()) {
-    return NULL;                                        // was last one
+    return 0;                                        // was last one
   } else {
     void* next = blockAddr(m);
     assert(next > p, "must be monotonic");

@@ -48,7 +48,7 @@ int32 hash(const char* name, int32 len) {
 
 stringTable::stringTable() {
   for (int32 i = 0; i < string_table_size; i ++) buckets[i].clear();
-  free_list = first_free_link = end_block = NULL;
+  free_list = first_free_link = end_block = 0;
 }
 
 stringOop stringTable::basic_add(const char *name, int32 len, int32 hashValue,
@@ -133,7 +133,7 @@ void stringTable::gc_mark_contents() {
           // unreachable; remove from table
           stringTableLink* d = l;
           *p = l = l->next;
-          d->next = NULL;
+          d->next = 0;
           Memory->string_table->delete_link(d);
         } else {
           MARK_TEMPLATE(&l->string);

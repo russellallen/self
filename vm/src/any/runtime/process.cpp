@@ -16,19 +16,19 @@
 // dummyProcess starts out in state 'defunct', all others in 'initialized'.
 
 static Process* dummyProcess;
-static Process* processList = NULL;
+static Process* processList = 0;
 Process* currentProcess;
-Process* prevProcess = NULL;            // proc transferring to current
+Process* prevProcess = 0;            // proc transferring to current
 Process* vmProcess;                     // vm prompt process
-Process* twainsProcess = NULL;
-static char* vmStackEnd = NULL;         // start (highest addr) of VM stack
+Process* twainsProcess = 0;
+static char* vmStackEnd = 0;         // start (highest addr) of VM stack
 bool ConversionInProgress = false;
 bool8 processSemaphore = false;
 PreemptCause preemptCause = cNoCause;
 oop yieldArg  = 0;
 oop yieldRcvr = 0;
 
-char* newSPLimit = NULL;                  // for setSPLimitAndContinue
+char* newSPLimit = 0;                  // for setSPLimitAndContinue
 static void (* processTermFunc)();      // termination func; set during abort
 
 void process_init() {
@@ -81,7 +81,7 @@ void Process::transfer() {
   char** nextAddr = &this          ->suspendedSP;
   if (currentProcess == dummyProcess) {
     // creation of first process
-    currAddr = NULL;
+    currAddr = 0;
     vmStackEnd = (char*)currentFrame() - 128;
     prevProcess = this;
   } else {
@@ -94,7 +94,7 @@ void Process::transfer() {
   // resuming Self code.
   if (!initializingDstProcStack) {
     assert(nesting > 0, "not in Self");
-    killVFrameOopsAndSetWatermark(NULL);
+    killVFrameOopsAndSetWatermark(0);
   } else {
     clearPreemption();
   }
@@ -129,23 +129,23 @@ Process::Process(processOop p, int32 sSize, oop rcvr, stringOop sel,
     int32 npages = (sSize + pageSize - 1) / pageSize;
     int32 size = npages * pageSize;
     while (size < 2 * PrimStackSize) size += pageSize;
-    stk.init(this, NULL, size);
+    stk.init(this, 0, size);
     method= as_smiOop(0); // just for the vmProcess
     state = initialized;
     procObj = currentProcess == dummyProcess ? Memory->processObj : p->clone();
     procObj->set_process(this);
   } else {
     // dummy process
-    stk.init(NULL, NULL, 0); procObj = NULL; state = defunct;
+    stk.init(0, 0, 0); procObj = 0; state = defunct;
   }
   
-  next = NULL;
-  suspendedPC = NULL; nesting = 0; 
-  stopActivation = NULL;
+  next = 0;
+  suspendedPC = 0; nesting = 0; 
+  stopActivation = 0;
   stepping = stopping = deoptimizing = restartAfterConversion = false;
-  _killUpToVF = NULL;
-  _uncommonPC = NULL;
-  aborter = NULL;
+  _killUpToVF = 0;
+  _uncommonPC = 0;
+  aborter = 0;
   clear_check_vfo_locals();
   zombie= false;
   if (rcvr) {
@@ -154,7 +154,7 @@ Process::Process(processOop p, int32 sSize, oop rcvr, stringOop sel,
     init(0);
   }
   if (processList) addAfter(processList);
-  profiler = NULL;
+  profiler = 0;
 }
 
 void Process::init(char* pcVal) {
@@ -178,11 +178,11 @@ void Process::initialize(oop rcvr, stringOop sel, objVectorOop args) {
   stringOop receiverString = new_string("receiver");
   slots = slots->add(receiverString, parent_map_slotType, rcvr);
 
-  b.GenSendByteCode(0, 0, receiverString, true, false, NULL);
+  b.GenSendByteCode(0, 0, receiverString, true, false, 0);
   for(int32 i = 0; i < sel->arg_count(); i++) {
     b.GenLiteralByteCode(0, 0, args->obj_at(i));
   }
-  b.GenSendByteCode(0, 0, sel, false, false, NULL);
+  b.GenSendByteCode(0, 0, sel, false, false, 0);
   bool ok = b.Finish("<process creation>",
                      " \"create the process and send the initial message\" ");
   assert(ok, "should not be errors");
@@ -217,7 +217,7 @@ void Process::start() {
   // nesting = 0;
 
   preservedList.clear();
-  killVFrameOops(NULL);
+  killVFrameOops(0);
   NLRSupport::reset_have_NLR_through_C();
   SignalInterface::unblock_self_signals();
 
@@ -260,8 +260,8 @@ Process::~Process() {
              this, processObj(), stk.base);
   if (this == currentProcess) fatal("process: cannot destroy myself");
   if (state == defunct) fatal("process already destroyed");
-  if (this == prevProcess) prevProcess = NULL;
-  Process *p, *q = NULL;
+  if (this == prevProcess) prevProcess = 0;
+  Process *p, *q = 0;
   for (p = processList; p && p != this; q = p, p = p->next) ;
   assert(p, "process not on process list");
   if (q) {
@@ -287,9 +287,9 @@ bool Process::allocate() {
 // using macros, but it would be a pain to debug.
 
 void terminateMe() {
-  if (currentProcess == twainsProcess) twainsProcess = NULL;
+  if (currentProcess == twainsProcess) twainsProcess = 0;
   void (* p)() = processTermFunc;
-  processTermFunc = NULL;       // clear it for assertions
+  processTermFunc = 0;       // clear it for assertions
   p();
 }
 
@@ -310,19 +310,19 @@ void Process::kill() {
     stack()->consistencyCheck(checkAbort);
     // make sure we don't crash (again) because we don't have a sendDesc
     //   but only compiled frames have one
-    { // It's possible that lsf is NULL (eg first frame calls interruptCheck
+    { // It's possible that lsf is 0 (eg first frame calls interruptCheck
       // and the process is then killed).
       frame *lsf;
       
       while (    lsf= last_self_frame(false),
                  lsf
              && !lsf->is_interpreted_self_frame()
-             &&  lsf->send_desc() == NULL)
+             &&  lsf->send_desc() == 0)
         suspendedSP = (char*)lsf->sender();
     }
     // don't do any programming conversions - just pop all frames; not strictly
     // necessary but saves some work
-    killVFrameOops(NULL);       // kill all activation mirrors
+    killVFrameOops(0);       // kill all activation mirrors
     stack()->remove_patches();  
     if (this == currentProcess) {
       terminateMe();    
@@ -379,7 +379,7 @@ frame* Process::stopFrame() {
     assert(stopActivation->is_live(), "should be live");
     return stopActivation->locals();
   } else {
-    return NULL;
+    return 0;
   }
 } 
 
@@ -389,7 +389,7 @@ void Process::killFrames(abstract_vframe* vf) {
   resetSingleStepping();
   resetStopping();
   killVFrameOops(vf);
-  vf->fr->patch(NULL);
+  vf->fr->patch(0);
   _killUpToVF = new_vframeOop(this, vf);
   if (traceV)
     lprintf("*** killFrames: starting kiling: _killUpToVF = 0x%x\n, fr = 0x%x, descOffset = %d\n",
@@ -413,7 +413,7 @@ void Process::deoptimize(frame* last) {
   resetSingleStepping();
   resetStopping();
   setDeoptimizing();
-  last->patch(NULL);
+  last->patch(0);
   NLRSupport::set_NLR_home_from_C( (int32)last->block_scope_of_home_frame() );
   // Why no NLRSupport::set_NLR_home_ID_from_C??? -- dmu 1/03
   // I don't think the arguments need to be saved, since gotoByteCode caller will set them anyway
@@ -459,7 +459,7 @@ void Process::gotoByteCode(abstract_vframe* vf, smi newBCI, objVectorOop exprSta
                                                 vf->as_compiled()->desc,
                                                 newBCI,
                                                 vf->as_compiled()->reg_loc());
-  newVF->get_exprStackInfo(NULL, vfs, nds, len);
+  newVF->get_exprStackInfo(0, vfs, nds, len);
   if (len != exprStack->length()) {
     char msg[80];
     sprintf(msg, "invalid expression stack length (should be %ld)", long(len));
@@ -539,7 +539,7 @@ void Process::gotoByteCode(abstract_vframe* vf, smi newBCI, objVectorOop exprSta
 
 
 bool Process::inSelf(bool including_prologue) {
-  return nesting > 0 && last_self_frame(including_prologue) != NULL;
+  return nesting > 0 && last_self_frame(including_prologue) != 0;
 }
   
 bool Process::hasEmptyStack() {
@@ -552,7 +552,7 @@ bool Process::hasEmptyStack() {
     // top frame is hidden doIt (with the initial perform)
     // check if we have a second vframe
     abstract_vframe* vf = new_vframe(last_self_frame(false));
-    return vf->sender() == NULL;
+    return vf->sender() == 0;
   }
 }
 
@@ -749,7 +749,7 @@ void Process::read_snapshot(FILE* f) {
     procObj = Memory->processObj;
     procObj->set_process(this);
   } else {
-    procObj = NULL;           // procObj was overwritten by snapshot
+    procObj = 0;           // procObj was overwritten by snapshot
     state = aborting;         // discard this process ASAP
   }
 }
@@ -765,7 +765,7 @@ inline void handlePreemption() {
   if (Memory->code->stubs->needsWork) Memory->code->stubs->cleanup();
 # endif // defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
-  if (twainsProcess == NULL && Memory->old_gen->needToSignalLowOnSpace) {
+  if (twainsProcess == 0 && Memory->old_gen->needToSignalLowOnSpace) {
     Memory->old_gen->needToSignalLowOnSpace= false;
     Memory->default_low_space_handler();
   }
@@ -880,7 +880,7 @@ vframeOop Process::findInsertionPoint(abstract_vframe* target) {
   // can also return prev for interpreter, since all vfo's in same real frame
   //  are for same vframe.
 
-  if ( l == NULL  ||  l->is_above(target->fr)  ||  target->is_interpreted()) {
+  if ( l == 0  ||  l->is_above(target->fr)  ||  target->is_interpreted()) {
     return prev;
   }
 
@@ -901,7 +901,7 @@ vframeOop Process::findInsertionPoint(abstract_vframe* target) {
   // CAUTION: some vframeOops might be dead --> do not construct vframes
   
   for (;;) {
-    if (l == NULL) {
+    if (l == 0) {
       // at end of list, insert after prev
       assert(  prev == sentinel
            ||  prev->is_below(ctarget->fr)
@@ -911,7 +911,7 @@ vframeOop Process::findInsertionPoint(abstract_vframe* target) {
       if (traceV) lprintf("A");
       return prev;
     }
-    if (  trial_vframe_in_target_frame == NULL
+    if (  trial_vframe_in_target_frame == 0
       ||  l->is_above( trial_vframe_in_target_frame->fr )) {
       // list didn't contain any vframe above target
       assert(l->is_above(ctarget->fr), "should be beyond this frame");
@@ -948,7 +948,7 @@ vframeOop Process::findInsertionPoint(abstract_vframe* target) {
   }
 # else // defined(FAST_COMPILER) || defined(SIC_COMPILER)
   ShouldNotReachHere();
-  return NULL;
+  return 0;
 # endif
 }
 
@@ -960,14 +960,14 @@ vframeOop Process::findVFrameOop(abstract_vframe* vf) {
   if (nxt && vf->EQ(nxt->as_vframe())) {
     return nxt;
   } else {
-    return NULL;
+    return 0;
   }
 }
 
 vframeOop Process::insertVFrameOop(vframeOop vfm) {
   ResourceMark rm;
   assert(vfm->process() == this, "wrong process");
-  assert(vfm->next() == NULL, "shouldn't be linked");
+  assert(vfm->next() == 0, "shouldn't be linked");
   vframeOop last = findInsertionPoint(vfm->as_vframe());
   vframeOop nxt = last->next();
   if (nxt && vfm->equal(nxt)) {
@@ -993,7 +993,7 @@ void Process::killVFrameOops(abstract_vframe* currentVF) {
               currentVF, currentVF->fr, lastToKill);
   } else {
     // was last self frame - kill all vframes
-    lastToKill = NULL;
+    lastToKill = 0;
   }
   vframeOop sentinel = procObj->vframeList();
   if (lastToKill != sentinel) {
@@ -1002,7 +1002,7 @@ void Process::killVFrameOops(abstract_vframe* currentVF) {
       l->kill(); 
     }
     if (l) l->kill();
-    sentinel->set_next(l ? l->next() : NULL);
+    sentinel->set_next(l ? l->next() : 0);
   }
 
   if (check_vfo_locals) {
@@ -1026,7 +1026,7 @@ void Process::killVFrameOops(abstract_vframe* currentVF) {
 void Process::killVFrameOopsInCurrentFrame(abstract_vframe* currentVF) {
   
   frame* f = frame_for_check_vfo_locals(currentVF);
-  if (f == NULL) return;
+  if (f == 0) return;
 
   vframeOop sentinel = procObj->vframeList();
 
@@ -1056,7 +1056,7 @@ void Process::killVFrameOopsInCurrentFrame(abstract_vframe* currentVF) {
 
 // check_vfo_locals records the vfo locals of the last frame there
 //  was a live vfo for.
-// If that frame is not still on the stack, just return NULL.
+// If that frame is not still on the stack, just return 0.
 
 // This routine finds the corresponding frame for check_vfo_locals.
 // It also checks that control came back here soon enough
@@ -1072,8 +1072,8 @@ void Process::killVFrameOopsInCurrentFrame(abstract_vframe* currentVF) {
 
 frame* Process::frame_for_check_vfo_locals(abstract_vframe* currentVF) {
   
-  if (currentVF == NULL)
-    return NULL;
+  if (currentVF == 0)
+    return 0;
   
   frame* first  = currentVF->fr;
   frame* second = first->selfSender();
@@ -1084,7 +1084,7 @@ frame* Process::frame_for_check_vfo_locals(abstract_vframe* currentVF) {
   // normal procedure
 
   if ( check_vfo_locals_sender < first->vfo_locals_of_home_frame()->sender() )
-     return NULL;
+     return 0;
 
      
   if (traceV) lprintf("*check ");
@@ -1102,7 +1102,7 @@ frame* Process::frame_for_check_vfo_locals(abstract_vframe* currentVF) {
     return second;
   }
   fatal("check_vfo_locals must be either first or second - stopped too late");
-  return NULL;
+  return 0;
 }
 
 
@@ -1124,7 +1124,7 @@ void Process::set_check_vfo_locals(abstract_vframe* currentVF) {
 
 
 void Process::clear_check_vfo_locals() {
-  check_vfo_locals = check_vfo_locals_sender = NULL;
+  check_vfo_locals = check_vfo_locals_sender = 0;
   check_vfo_locals_is_uncommon = false;
 }
   
@@ -1210,26 +1210,26 @@ void Process::convertVFrameOops( frame* fr,
 
 // remove dead vframeOops and set up things to regain control at the
 // appropriate point(s)
-// current is current Self frame (passed in as a speed optimization) or NULL
+// current is current Self frame (passed in as a speed optimization) or 0
 
 void Process::killVFrameOopsAndSetWatermark(frame* current) {
 
   // first check for the common case - no vframeOops at all
 
-  if (procObj->vframeList()->next() == NULL) {
+  if (procObj->vframeList()->next() == 0) {
     clearWatermark();
     return;
   }
 
   ResourceMark rm;
 
-  if (current == NULL && inSelf()) current = stk.last_self_frame(true); 
+  if (current == 0 && inSelf()) current = stk.last_self_frame(true); 
   assert(     !current
           ||  stack()->contains((char*)current )
           ||  ConversionInProgress && isOnVMStack(current),
          "not in my stack");
 
-  abstract_vframe* currentVF = current ? new_vframe(current) : NULL;
+  abstract_vframe* currentVF = current ? new_vframe(current) : 0;
 
   traceAndLog_killVFrameOopsAndSetWatermark(current, currentVF);
 
@@ -1237,7 +1237,7 @@ void Process::killVFrameOopsAndSetWatermark(frame* current) {
 
   // may not be anymore vframes to do
 
-  if (procObj->vframeList()->next() == NULL) {
+  if (procObj->vframeList()->next() == 0) {
     clearWatermark();
     return;
   }
@@ -1291,7 +1291,7 @@ void Process::setWatermark( abstract_vframe* currentVF ) {
     
     setupPreemption();
     frame* target = current->selfSender();
-    if (target) target->patch(NULL);
+    if (target) target->patch(0);
   }
 }
 
@@ -1412,7 +1412,7 @@ void Processes::startVMProcess() {
 
 static enum { terminateIt, abortIt, discardIt } termMode;
 static void terminateProcess(Process* p) {
-  if (p == twainsProcess) twainsProcess = NULL;
+  if (p == twainsProcess) twainsProcess = 0;
   if (p != vmProcess) {
     switch (termMode) {
      case terminateIt: p->terminate(); break;
@@ -1475,15 +1475,15 @@ static Process* pfp;
 static void proc_frame_for(Process* p) { if (p->contains(pf)) pfp = p; }
 Stack* Processes::slowStackFor(void* f) {
   pf = (char*)f;
-  pfp = NULL;
+  pfp = 0;
   processesDo(proc_frame_for);
-  if (pfp == NULL) {
+  if (pfp == 0) {
     if (ConversionInProgress) {
       // saved stack frame (can only be printed by VM -- for debugging)
       return currentProcess->stack();
     } else {
       // usually fatal error, but don't fatal here because verify tests for it
-      return NULL;
+      return 0;
     }
   }
   assert(pfp != currentProcess, "must not return current stack");
@@ -1699,7 +1699,7 @@ oop Process::runDoItMethod( oop rcv,
 #   endif
   }
   else {
-    res = interpret( rcv, VMString[DO_IT], NULL, method, rcv, args, arg_count);
+    res = interpret( rcv, VMString[DO_IT], 0, method, rcv, args, arg_count);
   }  
   cleanup_after_calling_self();
 
@@ -1730,7 +1730,7 @@ oop Process::prepare_to_call_self() {
     // should immediately preempt
     setupPreemption();
   }
-  killVFrameOopsAndSetWatermark(NULL);
+  killVFrameOopsAndSetWatermark(0);
   nesting++;
   
   // in case mac itimer is pending, but it zapped max sp of
@@ -1743,13 +1743,13 @@ oop Process::prepare_to_call_self() {
 
 void Process::cleanup_after_calling_self() {
   nesting--;
-  killVFrameOopsAndSetWatermark(NULL);
+  killVFrameOopsAndSetWatermark(0);
   if ( nesting == 0  &&  this == vmProcess ) {
 
     // return to the VM prompt; make sure that everything is consistent
     // (could have been aborted)
 
-    assert(twainsProcess == NULL, "shouldn't have twains process");
+    assert(twainsProcess == 0, "shouldn't have twains process");
     NLRSupport::reset_have_NLR_through_C();
     SignalBlocker sb;
     processSemaphore = false;

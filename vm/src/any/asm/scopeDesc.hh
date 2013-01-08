@@ -36,16 +36,16 @@ const fint IllegalDescOffset = -2;  // not -1 because that's BLOCK_PROTO_DESC
 // nmethods possible; each scopeDesc describes a method activation
 
 # define FOR_EACH_LOCAL_NAME_DESC(DESC, VAR)                                  \
-   for(NameDesc* VAR = DESC->getNextNameDesc(NULL);                           \
-       VAR != NULL; VAR = DESC->getNextNameDesc(VAR) )
+   for(NameDesc* VAR = DESC->getNextNameDesc(0);                           \
+       VAR != 0; VAR = DESC->getNextNameDesc(VAR) )
 
 #define FOR_EACH_STACK_EXPR(DESC, VAR)                                        \
-   for(NameDesc* VAR = DESC->getNextExprDesc(NULL);                           \
-       VAR != NULL; VAR = DESC->getNextExprDesc(VAR) )
+   for(NameDesc* VAR = DESC->getNextExprDesc(0);                           \
+       VAR != 0; VAR = DESC->getNextExprDesc(VAR) )
 
 #define FOR_EACH_BLOCK(DESC, VAR)                                             \
-   for(NameDesc* VAR = DESC->getNextBlockDesc(NULL);                          \
-       VAR != NULL; VAR = DESC->getNextBlockDesc(VAR) )
+   for(NameDesc* VAR = DESC->getNextBlockDesc(0);                          \
+       VAR != 0; VAR = DESC->getNextBlockDesc(VAR) )
 
 class ScopeDesc : public ResourceObj {          // abstract
  unknown:
@@ -71,7 +71,7 @@ class ScopeDesc : public ResourceObj {          // abstract
     assert(!is_lite(), "cannot get nameDesc from lite scopeDesc");
     int32 offset = n ? n->next : start_offset;
     if (offset < end_offset) return nameDescAt(offset);
-    return NULL;
+    return 0;
   }
  
  public:
@@ -152,11 +152,11 @@ class ScopeDesc : public ResourceObj {          // abstract
   bool isLiveBlockScope() { return isBlockScope() && !isDeadBlockScope(); }
 
   virtual int32 scopeID() { SubclassResponsibility(); return 0; }
-  virtual NameDesc* block() { SubclassResponsibility(); return NULL; }
+  virtual NameDesc* block() { SubclassResponsibility(); return 0; }
   virtual NameDesc* cachedBlock() { return block(); }
   
   virtual NameDesc* receiver() = 0;
-  virtual mapOop receiverMapOop() { SubclassResponsibility(); return NULL; }
+  virtual mapOop receiverMapOop() { SubclassResponsibility(); return 0; }
   Map*   receiverMap() { return receiverMapOop()->map_addr(); }
 
   virtual NameDesc* slot(stringOop name, bool canFail = false) = 0;
@@ -229,7 +229,7 @@ class MethodScopeDesc : public CodeScopeDesc { // normal method
 
   oop methodHolder_or_map() { return _methodHolder_or_map; }
   
-  ScopeDesc* parent()   { return NULL; }
+  ScopeDesc* parent()   { return 0; }
   
   bool isMethodScope()  { return true; }
 #if GENERATE_DEBUGGING_AIDS
@@ -283,7 +283,7 @@ class TopLevelBlockScopeDesc : public LexicalScopeDesc {
 # endif
   oop methodHolder_or_map() { return _methodHolder_or_map; }
   
-  ScopeDesc* parent() { return NULL; }
+  ScopeDesc* parent() { return 0; }
   
   void printMethodHolder();
   void printSelf();
@@ -344,12 +344,12 @@ class DeadBlockScopeDesc : public CodeScopeDesc {
   NameDesc* self() { return blockName; }
   mapOop selfMapOop() { ShouldNotCallThis(); return mapOop(badOop); }
 # ifdef SIC_COMPILER
-  SExpr* selfExpr() { ShouldNotCallThis(); return NULL; }
-  SExpr* rcvrExpr() { ShouldNotCallThis(); return NULL; }
+  SExpr* selfExpr() { ShouldNotCallThis(); return 0; }
+  SExpr* rcvrExpr() { ShouldNotCallThis(); return 0; }
 # endif
   oop methodHolder_or_map() { ShouldNotCallThis(); return badOop; }
   
-  ScopeDesc* parent() { return NULL; }
+  ScopeDesc* parent() { return 0; }
   
   void printMethodHolder();
   void printSelf();
@@ -381,10 +381,10 @@ class AccessScopeDesc : public ScopeDesc {      // abstract
     SExpr* selfExpr();
     SExpr* rcvrExpr()   { return selfExpr(); }
 # endif
-  oop method() { ShouldNotCallThis(); return NULL; }
+  oop method() { ShouldNotCallThis(); return 0; }
   oop methodHolder_or_map() { return _methodHolder_or_map; }
   
-  ScopeDesc* parent()   { return NULL; }
+  ScopeDesc* parent()   { return 0; }
 
 #if GENERATE_DEBUGGING_AIDS
   bool isHome()         { return true; }
@@ -395,9 +395,9 @@ class AccessScopeDesc : public ScopeDesc {      // abstract
   NameDesc* slot(stringOop name, bool canFail = false);
   NameDesc* exprStackElem(int32 bci, bool includeTrivial = true) {
     Unused(bci); Unused(includeTrivial);
-    ShouldNotCallThis(); return NULL; }
+    ShouldNotCallThis(); return 0; }
   NameDesc* blockElem(int32 bci) { 
-    Unused(bci); ShouldNotCallThis(); return NULL; }
+    Unused(bci); ShouldNotCallThis(); return 0; }
   
  protected:
   void printMethod() {}

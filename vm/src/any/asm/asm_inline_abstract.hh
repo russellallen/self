@@ -15,7 +15,7 @@
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
   inline void BaseAssembler::finalize() {
-    if ((BaseAssembler*)theAssembler == this) theAssembler = NULL;
+    if ((BaseAssembler*)theAssembler == this) theAssembler = 0;
   }
   
   inline void BaseAssembler::Data(int32 p, bool print) {

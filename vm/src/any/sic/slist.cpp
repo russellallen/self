@@ -12,14 +12,14 @@
     for (SListElem* e = headL(); e; e = e->nextL()) {
       if (e->dataL() == p) return e;
     }
-    return NULL;
+    return 0;
   }
   
   SListElem* SList::findL(void* token, slistFindFn f) {
     for (SListElem* e = headL(); e; e = e->nextL()) {
       if (f(token, e->dataL())) return e;
     }
-    return NULL;
+    return 0;
   }
   
   void* SList::nthL(fint n) {
@@ -32,7 +32,7 @@
   void SList::insertAfterL(SListElem* e, void* d) {
     if (e == tailL()) {
       appendL(d);
-    } else if (e == NULL) {
+    } else if (e == 0) {
       prependL(d);
     } else {
       SListElem* newe = new SListElem(d, e->nextL());
@@ -42,7 +42,7 @@
   }
 
   void SList::removeAfterL(SListElem* e) {
-    if (e == NULL) {
+    if (e == 0) {
       removeHeadL();
     } else {
       SListElem* deletee = e->nextL();
@@ -53,10 +53,10 @@
   }
 
   void SList::removeL(void* p) {
-    SListElem *e, *prev = NULL;
+    SListElem *e, *prev = 0;
     for (e = headL(); e && e->dataL() != p;
          prev = e, e = e->nextL()) ;
-    if (e == NULL) fatal("not in list");
+    if (e == 0) fatal("not in list");
     removeAfterL(prev);
     assert(!includesL(p), "remove doesn't work");
   }

@@ -25,8 +25,8 @@ class Label: public ResourceObj {
   Label* next;                  // chain of unified labels
 
  public:
-  Label(bool isPrinting = false, char* p = NULL) {
-    patch = p; _target = NULL; next = NULL; 
+  Label(bool isPrinting = false, char* p = 0) {
+    patch = p; _target = 0; next = 0; 
 
 #   if GENERATE_DEBUGGING_AIDS // need this either if printing or if GENERATE_DEBUGGING_AIDS
       if (CheckAssertions) {
@@ -54,11 +54,11 @@ class Label: public ResourceObj {
 
   fint id()             { return _id; }
   char* target()        { return _target; }
-  bool isDefined()      { return target() != NULL; }
+  bool isDefined()      { return target() != 0; }
 
   Label* unify(Label* l);
   void define();
-  void define(char* target, Label* other = NULL);
+  void define(char* target, Label* other = 0);
   
 # ifdef UNUSED
   void jump(char* p) {
@@ -76,7 +76,7 @@ class Label: public ResourceObj {
 
 class DefinedLabel : public Label {     // label for current position
  public:
-  DefinedLabel(bool isPrinting) : Label(isPrinting, NULL) { define(); }
+  DefinedLabel(bool isPrinting) : Label(isPrinting, 0) { define(); }
 };
 
 typedef BoundedListTemplate<Label*> LabelList;

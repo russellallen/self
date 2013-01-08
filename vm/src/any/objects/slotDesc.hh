@@ -32,7 +32,7 @@ class slotDesc {
     type = t;
     Memory->store(&data, d, cs);
     set_annotation(a, cs);
-    assert(verify(NULL), "verify failed");
+    assert(verify(0), "verify failed");
   }
 
   // testers

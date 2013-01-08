@@ -52,17 +52,17 @@ class Table: public TableList {
       return (Table*)realDeepCopy(); 
     }
   }
-  bool includes(CListEntry* k) { return find(k) != NULL; }
-  bool identityIncludes(CListEntry* k) { return identityFind(k) != NULL; }
-  bool contains(CListEntry* v) { return findContents(v) != NULL; }
+  bool includes(CListEntry* k) { return find(k) != 0; }
+  bool identityIncludes(CListEntry* k) { return identityFind(k) != 0; }
+  bool contains(CListEntry* v) { return findContents(v) != 0; }
   bool identityContains(CListEntry* v) {
-    return identityFindContents(v) != NULL; }
+    return identityFindContents(v) != 0; }
   CListEntry* lookup(CListEntry* k) {
     TableElem* d = find(k);
-    return d ? d->value : NULL; }
+    return d ? d->value : 0; }
   CListEntry* identityLookup(CListEntry* k) {
     TableElem* d = identityFind(k);
-    return d ? d->value : NULL; }
+    return d ? d->value : 0; }
   Table* append(TableElem* e) { return (Table*) TableList::append(e); }
   Table* store(CListEntry* k, CListEntry* v) {
     TableElem* d = find(k);
@@ -89,7 +89,7 @@ class TableIterator: public ResourceObj {
   
   TableIterator(Table* t) { elem = t->head(); }
   
-  bool done() { return elem == NULL; }
+  bool done() { return elem == 0; }
   TableElem* data() {
     assert(!done(), "iteration done"); return (TableElem*) elem->data(); }
   void* next() {        // cfront wants a return value to use in a for stmt
@@ -114,7 +114,7 @@ inline TableIterator* Table::iterator() { return new TableIterator(this); }
                                                                               \
     class CONC(nm,TableListElem): public CListElem {                                \
     public:                                                                   \
-    CONC(nm,TableListElem) (CListEntry* d, CListElem* n = NULL)               \
+    CONC(nm,TableListElem) (CListEntry* d, CListElem* n = 0)               \
       : CListElem(d, n) {}                                                    \
     CONC(nm,TableElem)* data() {                                              \
     return (CONC(nm,TableElem)*) CListElem::data(); }                         \
@@ -175,7 +175,7 @@ inline TableIterator* Table::iterator() { return new TableIterator(this); }
                                                                               \
     class CONC(nm,TableListElem): public CListElem {                                \
     public:                                                                   \
-    CONC(nm,TableListElem) (CListEntry* d, CListElem* n = NULL)               \
+    CONC(nm,TableListElem) (CListEntry* d, CListElem* n = 0)               \
       : CListElem(d, n) {}                                                    \
     CONC(nm,TableElem)* data() {                                              \
     return (CONC(nm,TableElem)*) CListElem::data(); }                         \
@@ -236,7 +236,7 @@ inline TableIterator* Table::iterator() { return new TableIterator(this); }
                                                                               \
     class CONC(nm,TableListElem): public CListElem {                                \
     public:                                                                   \
-    CONC(nm,TableListElem) (CListEntry* d, CListElem* n = NULL)               \
+    CONC(nm,TableListElem) (CListEntry* d, CListElem* n = 0)               \
       : CListElem(d, n) {}                                                    \
     CONC(nm,TableElem)* data() {                                              \
     return (CONC(nm,TableElem)*) CListElem::data(); }                         \
@@ -298,7 +298,7 @@ inline TableIterator* Table::iterator() { return new TableIterator(this); }
                                                                               \
     class CONC(nm,TableListElem): public CListElem {                                \
     public:                                                                   \
-    CONC(nm,TableListElem) (CListEntry* d, CListElem* n = NULL)               \
+    CONC(nm,TableListElem) (CListEntry* d, CListElem* n = 0)               \
       : CListElem(d, n) {}                                                    \
     CONC(nm,TableElem)* data() {                                              \
     return (CONC(nm,TableElem)*) CListElem::data(); }                         \

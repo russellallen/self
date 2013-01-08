@@ -13,7 +13,7 @@ class InterruptedContext {
  private:
   self_sig_context_t* scp;
   static self_sig_context_t dummy_scp;
-  pthread_t the_self_thread; // NULL if platform doesn't do pthreads
+  pthread_t the_self_thread; // 0 if platform doesn't do pthreads
   
  public:
   static void continue_abort_at(char *addr, bool addDummyFrame);
@@ -33,7 +33,7 @@ class InterruptedContext {
   bool  is_set() { 
      bool r   =   (scp != &dummy_scp)  &&  (scp != 0); 
 # if TARGET_OS_VERSION == MACOSX_VERSION
-     assert(!r || (scp->uc_mcontext != NULL), "Snow Leopard isSet bug hut");
+     assert(!r || (scp->uc_mcontext != 0), "Snow Leopard isSet bug hut");
 # endif
      return r;
   }

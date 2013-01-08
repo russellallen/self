@@ -10,8 +10,8 @@
 
   bool verifyOften = false;
 
-  SICompiler* theSIC = NULL;
-  SICompiler* lastSIC = NULL;       // for debugging
+  SICompiler* theSIC = 0;
+  SICompiler* lastSIC = 0;       // for debugging
   BBIterator* last_bbIterator;
 
   static const int32 SICScopesSize              = 25 * K;
@@ -72,7 +72,7 @@
     } else if (strcmp(which, "Split") == 0) {
       return limits[SplitCostLimit];
     } else {
-      return NULL;
+      return 0;
     }
   }
 
@@ -113,7 +113,7 @@
       }
       n[i] = smiOop(param)->value();
     }
-    oop res = get_sic_params_prim(r, which, NULL);
+    oop res = get_sic_params_prim(r, which, 0);
     l->clear();
     for (i = 0; i < len; i++) l->push(n[i]);
     return res;
@@ -130,12 +130,12 @@
   
   
   void SICompiler::finalize() {
-    theSIC = NULL;
-    theNodeGen = NULL;
-    genHelper = NULL;
+    theSIC = 0;
+    theNodeGen = 0;
+    genHelper = 0;
     theAssembler->finalize();
     last_bbIterator = bbIterator;
-    bbIterator = NULL;
+    bbIterator = 0;
     AbstractCompiler::finalize();
     if (VMSICProfiling) OS::profile(false);
   }
@@ -150,21 +150,21 @@
   }
 
   void SICompiler::initialize() {
-    assert(theSIC == NULL, "shouldn't have but one compiler at a time");
+    assert(theSIC == 0, "shouldn't have but one compiler at a time");
     theSIC = lastSIC = this;
     theAssembler = new Assembler(SICInstructionsSize, SICInstructionsSize / 2,
                                  PrintSICCompiledCode, true);
     stackLocCount = argCount = 0;
     countID = 0;
     nodeGen = new NodeGen(L, send_desc, diLink);
-    topScope = NULL;
-    splitSig = NULL;
+    topScope = 0;
+    splitSig = 0;
     bbIterator = new BBIterator;
     /* theAllocator = */ new SICAllocator();
     if (theRecompilation && theRecompilation->recompileeVScopes) {
       vscopes = theRecompilation->recompileeVScopes;
     } else {
-      vscopes = NULL; 
+      vscopes = 0; 
     }
     if (baseLookupType(L->lookupType()) == NormalBaseLookupType) {
       // ignore the receiver static bit (same nmethod covers both cases)
@@ -192,7 +192,7 @@
     } else {
       level = AbstractCompiler::level();
       nextLevel = MaxRecompilationLevels - 1;
-      if (nstages > 1 && recompilee == NULL) {
+      if (nstages > 1 && recompilee == 0) {
         // always use a counter in first version
         nextLevel = nstages - 1;
       }
@@ -269,13 +269,13 @@
   }
   
   nmethod* SICompiler::compile() {
-    EventMarker em("SIC-compiling %#lx %#lx", L->selector(), NULL);
-    ShowCompileInMonitor sc(L->selector(), "SIC", recompilee != NULL);
+    EventMarker em("SIC-compiling %#lx %#lx", L->selector(), 0);
+    ShowCompileInMonitor sc(L->selector(), "SIC", recompilee != 0);
 
     // cannot recompile uncommon branches in DI nmethods & top nmethod yet 
     FlagSetting fs2(SICDeferUncommonBranches,
                     SICDeferUncommonBranches &&
-                    diLink == NULL && L->adeps->length() == 0 &&
+                    diLink == 0 && L->adeps->length() == 0 &&
                     L->selector() != VMString[DO_IT]);
     // don't use uncommon traps when recompiling because of trap
     useUncommonTraps = 
@@ -287,7 +287,7 @@
     # if TARGET_ARCH != I386_ARCH // no FastMapTest possible on I386
       // don't use fast map loads if this nmethod trapped a lot
       FlagSetting fs4(FastMapTest, FastMapTest &&
-                      (recompilee == NULL ||
+                      (recompilee == 0 ||
                       recompilee->flags.trapCount < MapLoadTrapLimit));
     # endif
 
@@ -389,7 +389,7 @@
         lprintf("*SIC-%s%scompiling ",
                currentProcess->isUncommon() ? "uncommon-" : "",
                recompilee ? "re" : "");
-        methodMap* mm = method() ? (methodMap*) method()->map() : NULL;
+        methodMap* mm = method() ? (methodMap*) method()->map() : 0;
         printName(mm, L->selector());
         lprintf(": %#lx (%ld ms; level %ld)\n", nm, (void*)ms, (void*)nm->level());
       } else if (PrintCompilation) {
@@ -480,14 +480,14 @@
   void SICompiler::initTopScope() {
     recompileeScope =
       recompilee ? (RScope*)constructRScopes(recompilee) 
-                 : (RScope*)new RNullScope(NULL);
+                 : (RScope*)new RNullScope(0);
     if (PrintPICScopes) recompileeScope->printTree(0, 0);
 
     nodeGen->haveStackFrame = true;
     MethodKind kind = method()->kind();
     countID = Memory->code->nextNMethodID();
     SCodeScope* s;
-    SScope* parentScope = NULL;
+    SScope* parentScope = 0;
     
     if (L->receiverMap()->is_block()) {
       blockOop block = (blockOop) L->receiver;
@@ -509,14 +509,14 @@
     switch (kind) {
      case OuterMethodType:
       s = new SMethodScope(method(), methodHolder_or_map(),
-                           NULL, recompileeScope, info);
+                           0, recompileeScope, info);
       break;
      case BlockMethodType:
       // taken from NIC by dmu 7/1
       assert(L->receiverMap()->is_block(), "was expecting block");
       if (parentScope) {
         s = new SBlockScope(method(), parentScope, 
-                            NULL, recompileeScope, info);
+                            0, recompileeScope, info);
       } else {
         s = new SDeadBlockScope(method(), info);
       }
@@ -527,7 +527,7 @@
     
     needRegWindowFlushes = false;
     topScope = s;
-    s->vscope = vscopes ? vscopes->top() : NULL;
+    s->vscope = vscopes ? vscopes->top() : 0;
   }
   
   void SICompiler::print() {
@@ -556,11 +556,11 @@
   void SICompiler::print_short() { lprintf("SIC %#lx", this); }
 
   void SICompiler::print_code(bool suppressTrivial)  {
-    if (theSIC == NULL) {
+    if (theSIC == 0) {
       last_bbIterator->print_code(suppressTrivial);
       last_bbIterator->print();
     } else {
-      bool hadBBs = bbIterator != NULL;
+      bool hadBBs = bbIterator != 0;
       if (! hadBBs) {
         // need BBs for printing
         bbIterator = new BBIterator;
@@ -570,7 +570,7 @@
       bbIterator->print();
       if (!hadBBs) {
         bbIterator->clear();
-        bbIterator = NULL;
+        bbIterator = 0;
       }
     }
   }
@@ -581,10 +581,10 @@
     FILE* f = fopen(fn, "w");
     fprintf(f, "graph: {\n");
     fprintf(f, "xmax: 800 ymax: 800  xspace: 10 yspace: 10");
-    if (theSIC == NULL) {
+    if (theSIC == 0) {
       last_bbIterator->print_vcg_code(f, suppressTrivial);
     } else {
-      bool hadBBs = bbIterator != NULL;
+      bool hadBBs = bbIterator != 0;
       if (! hadBBs) {
         // need BBs for printing
         bbIterator = new BBIterator;
@@ -593,7 +593,7 @@
       bbIterator->print_vcg_code(f, suppressTrivial);
       if (!hadBBs) {
         bbIterator->clear();
-        bbIterator = NULL;
+        bbIterator = 0;
       }
     }
     fprintf(f, "}\n");

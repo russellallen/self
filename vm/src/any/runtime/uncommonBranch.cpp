@@ -30,7 +30,7 @@
     // (can't handle trap in trap handler itself - stack is messed up)
     BlockProfilerTicks bpt(exclude_uncommon_branch);
     ResourceMark rm;
-    assert(continuePC == NULL, "should have been reset by glue");
+    assert(continuePC == 0, "should have been reset by glue");
     frame* fr = currentProcess->last_self_frame(false);
     compiled_vframe* vf = new_vframe(fr)->as_compiled();
     nmethod* oldNM = vf->code;
@@ -48,7 +48,7 @@
     recompilee = oldNM;
     if (Interpret) fatal("XXXX cannot recompile when interping yet");
     char* newInsts = Recompile(vfs->fr->send_desc(), vfs->fr, vf->receiver(),
-                               NULL, pc);
+                               0, pc);
     // should replace on stack if in loop - fix this
     // for now, just convert
     assert(currentProcess->isUncommon(), "should be in uncommon mode");
@@ -158,14 +158,14 @@
   }
 
   void uncommonBranch_init() {
-    mapLoadHandler[G0] = NULL;
+    mapLoadHandler[G0] = 0;
     mapLoadHandler[G1] = G1_mapLoadHandler;
     mapLoadHandler[G2] = G2_mapLoadHandler;
     mapLoadHandler[G3] = G3_mapLoadHandler;
     mapLoadHandler[G4] = G4_mapLoadHandler;
     mapLoadHandler[G5] = G5_mapLoadHandler;
-    mapLoadHandler[G6] = NULL;
-    mapLoadHandler[G7] = NULL;
+    mapLoadHandler[G6] = 0;
+    mapLoadHandler[G7] = 0;
     
     mapLoadHandler[O0] = O0_mapLoadHandler;
     mapLoadHandler[O1] = O1_mapLoadHandler;
@@ -173,8 +173,8 @@
     mapLoadHandler[O3] = O3_mapLoadHandler;
     mapLoadHandler[O4] = O4_mapLoadHandler;
     mapLoadHandler[O5] = O5_mapLoadHandler;
-    mapLoadHandler[O6] = NULL;
-    mapLoadHandler[O7] = NULL;
+    mapLoadHandler[O6] = 0;
+    mapLoadHandler[O7] = 0;
     
     mapLoadHandler[L0] = L0_mapLoadHandler;
     mapLoadHandler[L1] = L1_mapLoadHandler;
@@ -185,14 +185,14 @@
     mapLoadHandler[L6] = L6_mapLoadHandler;
     mapLoadHandler[L7] = L7_mapLoadHandler;
     
-    mapLoadHandler[I0] = NULL;
+    mapLoadHandler[I0] = 0;
     mapLoadHandler[I1] = I1_mapLoadHandler;
     mapLoadHandler[I2] = I2_mapLoadHandler;
     mapLoadHandler[I3] = I3_mapLoadHandler;
     mapLoadHandler[I4] = I4_mapLoadHandler;
     mapLoadHandler[I5] = I5_mapLoadHandler;
-    mapLoadHandler[I6] = NULL;
-    mapLoadHandler[I7] = NULL;
+    mapLoadHandler[I6] = 0;
+    mapLoadHandler[I7] = 0;
   }
 # else
   # error what?

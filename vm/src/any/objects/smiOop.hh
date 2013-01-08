@@ -15,8 +15,23 @@
 
 // minimum and maximum smiOops
 # define smiOop_min   smiOop((1L << (BitsPerWord - 1)) + Int_Tag)
-# define smiOop_max   smiOop(lowerBits((AllBits << Tag_Size) + Int_Tag,       \
+
+# if GCC4 && __GNUC_MINOR__ > 5
+#  pragma GCC diagnostic push
+#  pragma GCC diagnostic ignored "-Woverflow"
+# endif
+const smiOop smiOop_max = smiOop(lowerBits((AllBits << Tag_Size) + Int_Tag, 
+					   BitsPerWord - 1));
+
+/* was:
+# define smiOop_max   smiOop(lowerBits((AllBits << Tag_Size) + Int_Tag, \
     BitsPerWord - 1))
+which caused an overflow-warning
+*/
+# if GCC4 && __GNUC_MINOR__ > 5
+#  pragma GCC diagnostic pop
+# endif
+
 
 class smiOopClass: public oopClass {
  public:

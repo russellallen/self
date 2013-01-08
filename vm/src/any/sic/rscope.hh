@@ -43,14 +43,14 @@
     virtual bool equivalent_scope(SScope* s) = 0;
     virtual bool equivalent_lookup(simpleLookup* l) = 0;
     virtual RScope* subScope(fint bci, simpleLookup* l) {
-      Unused(bci); Unused(l); ShouldNotCallThis(); return NULL;}
+      Unused(bci); Unused(l); ShouldNotCallThis(); return 0;}
     virtual RScopeBList* subScopes(fint bci) {
-      Unused(bci); ShouldNotCallThis(); return NULL;}
+      Unused(bci); ShouldNotCallThis(); return 0;}
     virtual bool  hasSubScopes(fint bci) {
       Unused(bci); ShouldNotCallThis(); return false;}
     virtual bool isUncommonAt(fint bci, bool primCall) {
       Unused(bci); Unused(primCall); ShouldNotCallThis(); return false; }
-    virtual SExpr* receiverExpr() { ShouldNotCallThis(); return NULL; }
+    virtual SExpr* receiverExpr() { ShouldNotCallThis(); return 0; }
     virtual oop method() { ShouldNotCallThis(); return 0; }
     virtual void print();
     virtual void print_short() = 0;
@@ -146,7 +146,7 @@
 
   class RNullScope : public RScope {
     // dummy scope for convenience; e.g. can call subScope() w/o checking for
-    // this==NULL
+    // this==0
    public:
     RNullScope(RAbstractSelfScope* s) : RScope(s, 0) {}
     bool isNullScope()          { return true; }

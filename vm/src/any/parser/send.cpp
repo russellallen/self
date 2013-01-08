@@ -37,7 +37,7 @@ bool Send::GenByteCodes(AbstractByteCode* b, Object* parent, bool isExpr) {
   }
 
   bool isUndirectedResend = false;
-  stringOop delegatee = NULL;
+  stringOop delegatee = 0;
   if (!del)
     ;
   else if ( del->len == 0  ||  strcmp(del->AsCharP(), "resend") == 0 )
@@ -157,7 +157,7 @@ bool Keyword::GenByteCodes(AbstractByteCode* b, Object* parent, bool isExpr) {
     return  GenLabelDefinition(b, parent);
   }
   if (strcmp(msg, "__BranchTo:") == 0) {
-    return  GenBranch(b, parent, false, NULL, args->Tail()->Data());
+    return  GenBranch(b, parent, false, 0, args->Tail()->Data());
   }
   if (strcmp(msg, "__BranchIfTrue:To:") == 0) {
     return GenBranch(b, parent, true,  args->Head()->Data(), 

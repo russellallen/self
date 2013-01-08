@@ -127,7 +127,7 @@ class newGeneration: public generation {
   inline bool is_new(oop p,    char *boundary); // ditto
 
   // constructor, called by Memory
-  newGeneration(int32 &eden_size, int32 &surv_size, FILE *snap = NULL);
+  newGeneration(int32 &eden_size, int32 &surv_size, FILE *snap = 0);
 
   // scavenger-related items
   // these are actually called by Memory
@@ -136,7 +136,7 @@ class newGeneration: public generation {
 
   MapList* map_list;
   void init_map_list() {
-    while (map_list != NULL) {
+    while (map_list != 0) {
       MapList *n= map_list->next;
       delete map_list;
       map_list= n; }
@@ -228,7 +228,7 @@ class oldGeneration: public generation {
   oldGeneration(FILE* snap, int32 initial_size, int32 reserved_amount);
 
   char* empty_bytes_addr() {
-    assert(first_space != NULL && first_space->next_space == NULL,
+    assert(first_space != 0 && first_space->next_space == 0,
            "empty_bytes_addr called too late");
     return first_space->bytesStart();
   }
@@ -289,7 +289,7 @@ smi set_memory_low_space_threshold_prim(oop rcvr, smi newLST, void *FH);
 // ensure that you surround the call with {} to prevent s leaking out!
 #define FOR_EACH_OLD_SPACE(s) \
   for (oldSpace *s= Memory->old_gen->first_space;               \
-       s != NULL;                                               \
+       s != 0;                                               \
        s= s->next_space)
 
 

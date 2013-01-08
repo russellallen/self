@@ -23,13 +23,13 @@ class vframeOopClass : public slotsOopClass {
   vframeOopClass* addr()  { return (vframeOopClass*)slotsOopClass::addr(); }
   void    kill_vframe();   // Don't call this fct. Call kill() instead.
   bool is_live_vframe() {  // Don't call this fct. Call is_live() instead.
-    return locals() != NULL;
+    return locals() != 0;
   }
 # ifdef UNUSED
   vframeOop clone(bool mustAllocate= true) {
     return vframeOop(map()->clone(this, mustAllocate)); }
 # endif
-  vframeOop basic_clone(bool mustAllocate= true, oop genObj= NULL) {
+  vframeOop basic_clone(bool mustAllocate= true, oop genObj= 0) {
     return vframeOop(((vframeMap*)map())->basic_clone(this,
                                                       mustAllocate, genObj)); }
 

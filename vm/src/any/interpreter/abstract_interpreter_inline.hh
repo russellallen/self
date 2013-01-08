@@ -33,21 +33,21 @@ inline abstract_interpreter_interbytecode_state::abstract_interpreter_interbytec
   reset_lexical_level();
   reset_index();
   reset_send_modifiers();
-  last_literal= NULL;
+  last_literal= 0;
 }
   
 
 inline abstract_interpreter::abstract_interpreter(oop meth)
  : mi((methodMap*)meth->map()) {
   pc= mi.firstBCI();
-  error_msg= NULL;
+  error_msg= 0;
 }
 
 
 inline abstract_interpreter::abstract_interpreter(methodMap *m)
  : mi(m) {
   pc= mi.firstBCI();
-  error_msg= NULL;
+  error_msg= 0;
 }
 
 
@@ -55,7 +55,7 @@ inline abstract_interpreter::abstract_interpreter(byteVectorOop codes,
                                                   objVectorOop literals)
  : mi(codes, literals) {
   pc= mi.firstBCI();
-  error_msg= NULL;
+  error_msg= 0;
 }
 
 

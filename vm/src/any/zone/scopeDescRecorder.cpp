@@ -259,7 +259,7 @@ NameList::NameList(fint sz) {
   size  = sz;
   end   = 0;
   nodes = NEW_RESOURCE_ARRAY(NameNode*, size);
-  for(fint i= 0 ; i < sz; i++) nodes[i] = NULL;
+  for(fint i= 0 ; i < sz; i++) nodes[i] = 0;
   count = 0;
 }
 
@@ -270,7 +270,7 @@ void NameList::extend(fint newSize) {
     newNodes[i] = nodes[i];
   }
   for (    ; i < newSize; i++) {
-    newNodes[i] = NULL;
+    newNodes[i] = 0;
   }
   nodes = newNodes;
   size  = newSize;
@@ -288,7 +288,7 @@ void NameList::insert(fint index, NameNode* node){
   if (index>=size) extend( index >= size*2 ? index*2 : size*2);
   if (index>=end)  end = index +1;
   assert( index < size, "did not extend enough");
-  assert( nodes[index] == NULL,"overlapping name desc");
+  assert( nodes[index] == 0,"overlapping name desc");
   nodes[index] = node;
 }
 
@@ -378,15 +378,15 @@ ScopeInfoClass::ScopeInfoClass(ScopeLookupKey* k, bool lte,
   exprList   = new NameList(INITIAL_EXPR_SIZE);
   blockList  = new NameList(INITIAL_BLOCK_SIZE);
   offset     = INVALID_OFFSET;
-  scopesHead = NULL;
-  scopesTail = NULL;
+  scopesHead = 0;
+  scopesTail = 0;
   usedInPcs  = false;
   visible    = vis;
 }
 
 void ScopeInfoClass::addNested(ScopeInfo scope) {
-  scope->next = NULL;
-  if (scopesHead == NULL) {
+  scope->next = 0;
+  if (scopesHead == 0) {
     scopesHead = scopesTail = scope; 
   } else {
     scopesTail->next = scope;
@@ -435,7 +435,7 @@ void ScopeInfoClass::generateBody(ScopeDescRecorder* rec,
                                 rec->codes->size());
   }
   
-  for(ScopeInfo p = scopesHead; p  != NULL; p = p->next) {
+  for(ScopeInfo p = scopesHead; p  != 0; p = p->next) {
     if (p->visible) {
       p->generate(rec, offset);
       p->generateBody(rec, offset);
@@ -452,7 +452,7 @@ void ScopeInfoClass::verify(ScopeDesc* sd) {
 }
 
 void ScopeInfoClass::verifyBody() {
-  for(ScopeInfo p = scopesHead; p  != NULL; p = p->next) {
+  for(ScopeInfo p = scopesHead; p  != 0; p = p->next) {
     if (p->visible) {
       p->verify(_getNextScopeDesc());
       p->verifyBody();
@@ -461,7 +461,7 @@ void ScopeInfoClass::verifyBody() {
 }
 
 bool ScopeInfoClass::computeVisibility() {
-  for(ScopeInfo p = scopesHead; p  != NULL; p = p->next) {
+  for(ScopeInfo p = scopesHead; p  != 0; p = p->next) {
     visible = p->computeVisibility() || visible;
   }
   visible = visible || (usedInPcs && GenerateLiteScopeDescs) || !lite;
@@ -727,11 +727,11 @@ void ScopeDescRecorder::generate() {
 }
 
 ScopeInfo ScopeDescRecorder::addScope(ScopeInfo scope, ScopeInfo senderScope){
-  if (root == NULL) {
-    assert( senderScope == NULL, "Root scope must be the first"); 
+  if (root == 0) {
+    assert( senderScope == 0, "Root scope must be the first"); 
     root = scope;
   } else {
-    assert( senderScope != NULL, "More than one root scope is generated"); 
+    assert( senderScope != 0, "More than one root scope is generated"); 
     senderScope->addNested(scope);
   }
   return scope;
@@ -1011,7 +1011,7 @@ void ScopeDescRecorder::addIllegalPcDesc(fint pcOffset) {
 void ScopeDescRecorder::verify(nmethodScopes* scopes) {
   // Initialize iterator
   _scopes = scopes;
-  _sd     = NULL;
+  _sd     = 0;
 
   assert( root, "root must be present to verify");
   root->verify(_getNextScopeDesc());

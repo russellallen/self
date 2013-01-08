@@ -14,7 +14,7 @@
 bool SICAllocator::keepUplevelRPRegsInMemory = true; 
 
 void SICompiler::initializeForPlatform() {
-  nlrLabel = NULL;
+  nlrLabel = 0;
 }
 
 

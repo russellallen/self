@@ -47,7 +47,7 @@ int32 mapTable::hash(int32 length, VtblPtr_t vtbl_value, slotDesc* slot) {
 
 
 nmln* mapTable::bucketFor(slotsMapDeps* m) {
-  if (!CanonicalizeMaps  ||  !m->should_canonicalize()) return NULL;
+  if (!CanonicalizeMaps  ||  !m->should_canonicalize()) return 0;
   return &buckets[hash(m->length_slots(), m->vtbl_value(), m->slots())];
 }
 
@@ -55,7 +55,7 @@ void mapTable::add(slotsMapDeps* m) {
   assert((m->map_chain()->isEmpty()),
          "map being added should not already point to other maps");  
   nmln* head = bucketFor(m);
-  if (head == NULL) return;
+  if (head == 0) return;
   head->add(m->map_chain());
 }
 
@@ -67,7 +67,7 @@ static int32 numCompareCalled = 0;
 
 slotsMapDeps* mapTable::equivalent_map(slotsMapDeps* currMap) {
   nmln* head_nmln = bucketFor(currMap);
-  if (head_nmln == NULL) return currMap;
+  if (head_nmln == 0) return currMap;
   nmln* curr_nmln = head_nmln->next;
   
 # ifdef MONITOR_MAP_SETTINGS
@@ -84,7 +84,7 @@ slotsMapDeps* mapTable::equivalent_map(slotsMapDeps* currMap) {
     if (aMap->compare(currMap)) return aMap;
     curr_nmln = curr_nmln->next;
   }
-  return NULL;
+  return 0;
 }
 
 
@@ -264,7 +264,7 @@ bool mapTable::verify_map(slotsMapDeps* m) {
     }
     return r;
   }
-  if (em == NULL) {
+  if (em == 0) {
     error1("Map 0x%1x is not in the map table", m);
     m->print_map();
     r = false;

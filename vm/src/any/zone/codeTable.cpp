@@ -30,7 +30,7 @@ void codeTable::clear() {
 
 
 static inline codeTableEntry *entryForLink(nmln *n) {
-  static codeTableEntry* shutUpCompiler = NULL;
+  static codeTableEntry* shutUpCompiler = 0;
   static const pc_t next_hash_offset =
       (pc_t)&shutUpCompiler->next_hash ;
 
@@ -45,12 +45,12 @@ nmethod* codeTable::lookup(MethodLookupKey &k) {
       return e->nm;
     }
   }
-  return NULL;
+  return 0;
 }
 
 
 void codeTable::add(nmethod* nm, MethodLookupKey* k) {
-  if (k == NULL) k= &nm->key;
+  if (k == 0) k= &nm->key;
   k->init_hash();
 # if GENERATE_DEBUGGING_AIDS
     if (CheckAssertions) {

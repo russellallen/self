@@ -136,6 +136,9 @@ bool do_exit_cleanup = true;
 
 void prepare_to_exit_self() {
   if (do_exit_cleanup) {
+#   if TARGET_IS_PROFILED
+      moncontrol(false);
+#   endif
     exit_globals();
   }
 }

@@ -70,7 +70,7 @@ oop slotsMap::copy_add_argument_slot(slotsOop obj,
 
   slotDesc* old = find_slot(name);
   slotsOop result;
-  if (old == NULL)
+  if (old == 0)
     result= obj;
   else if (old->is_arg_slot()) {
     // No need to remove and reinsert because order is the same.
@@ -113,7 +113,7 @@ oop slotsMap::copy_add_assignment_slot(slotsOop obj,
 
   slotDesc* ds= find_assignee_slot(name);
 
-  if (ds == NULL)
+  if (ds == 0)
     return ErrorCodes::vmString_prim_error(LONELYASSIGNMENTSLOTERROR);
 
   if (ds->is_obj_slot())
@@ -164,7 +164,7 @@ oop slotsMap::copy_add_method_slot( slotsOop obj,
     // skip all the checks and do not try to remove it, since
     // vm slots do not change from obj to map, and rm will fetch anyway
     slotDesc* sd = obj->find_slot(name);
-    return sd != NULL
+    return sd != 0
      ? change_slot      (obj, sd,   type, contents, anno, mustAllocate)
      : copy_add_new_slot(obj, name, type, contents, anno, mustAllocate);
   }
@@ -245,7 +245,7 @@ slotsOop slotsMap::copy_add_new_slot(slotsOop  obj,
   fint newIndex= find_slot_index_for(name, found);
   assert(!found, "I only add new slots");
   slotsMap* new_map= (slotsMap*) insert(newIndex, mustAllocate);
-  if (new_map == NULL) return slotsOop(failedAllocationOop);
+  if (new_map == 0) return slotsOop(failedAllocationOop);
 
   slotDesc* s= new_map->slot(newIndex);
   new_map->slots_length= new_map->slots_length->increment();
@@ -303,7 +303,7 @@ oop slotsMap::change_slot(oop obj,
                           oop contents,
                           oop anno,
                           bool mustAllocate) {
-  assert(slot != NULL, "cannot change the contents of a non-existent slot");
+  assert(slot != 0, "cannot change the contents of a non-existent slot");
   assert(!obj->is_string(), "cannot clone strings!");
   assert_slots(obj, "object isn't a slotsOop");
 
@@ -334,7 +334,7 @@ oop slotsMap::change_slot(oop obj,
   
   // create a new map for this object
   slotsMap* new_map= copy_for_changing(mustAllocate);
-  if (new_map == NULL) return failedAllocationOop;
+  if (new_map == 0) return failedAllocationOop;
   slot = slot->shift(this, new_map);
   slot->type = type;
   slot->set_annotation(anno);
@@ -350,7 +350,7 @@ oop slotsMap::change_slot(oop obj,
 
 slotsMap* slotsMap::copy_for_changing(bool mustAllocate) {
   slotsMap* new_map= (slotsMap*) copy(mustAllocate);
-  if (new_map == NULL) return NULL;
+  if (new_map == 0) return 0;
   new_map->init_dependents();
   mapOop new_moop = new_map->enclosing_mapOop();
   new_moop->init_mark();
@@ -374,7 +374,7 @@ oop slotsMap::copy_remove_slot(oop obj, stringOop name, bool mustAllocate) {
   slotsOop sobj = slotsOop(obj);
 
   slotDesc* d= find_slot(name);
-  if (d == NULL || d->is_vm_slot()) {
+  if (d == 0 || d->is_vm_slot()) {
     return ErrorCodes::vmString_prim_error(BADSLOTNAMEERROR); 
   }
 
@@ -409,7 +409,7 @@ slotsOop slotsMap::copy_remove_one_slot(slotsOop obj, slotDesc *slot,
          "slotDesc not part of map");
 
   slotsMap* new_map= (slotsMap*) remove(slot, 1, mustAllocate);
-  if (new_map == NULL) return slotsOop(failedAllocationOop);
+  if (new_map == 0) return slotsOop(failedAllocationOop);
   new_map->slots_length = new_map->slots_length->decrement();
   new_map->init_dependents();
   mapOop new_moop = new_map->enclosing_mapOop();
@@ -515,7 +515,7 @@ oop slotsMap::fill_in_slots(slotList* slist, fint slotCount) {
     oop data;
     switch (slist->type()->slot_type()) {
      case obj_slot_type:
-      assert(slist->contents() == NULL ||
+      assert(slist->contents() == 0 ||
              NakedMethods ||
              !slist->contents()->has_code() ||
              slist->type()->is_vm_slot(),
@@ -604,7 +604,7 @@ oop slotsMap::mirror_copy_set_annotation(oop r, oop a, bool mustAllocate) {
     return slotsOop(failedAllocationOop);
 
   slotsMap* new_map= copy_for_changing(mustAllocate);
-  if (new_map == NULL) return slotsOop(failedAllocationOop);
+  if (new_map == 0) return slotsOop(failedAllocationOop);
   new_map->set_annotation(a);
   new_obj->set_canonical_map(new_map);
   return new_obj->fix_up_method(r, false, mustAllocate);

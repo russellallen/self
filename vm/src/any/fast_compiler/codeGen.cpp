@@ -31,15 +31,15 @@ CodeGen::CodeGen(compilingLookup* l, sendDesc* sd, nmln* d)
 }
 
 PrimDesc* CodeGen::intrCheck() {
-  static PrimDesc* intCk = NULL;
-  if (intCk == NULL)
+  static PrimDesc* intCk = 0;
+  if (intCk == 0)
     intCk = getPrimDescOfSelector(VMString[INTERRUPT_CHECK], true);
   return intCk;
 }
 
 PrimDesc* CodeGen::blockClone() {
-  static PrimDesc* blkClone = NULL;
-  if (blkClone == NULL)
+  static PrimDesc* blkClone = 0;
+  if (blkClone == 0)
     blkClone = getPrimDescOfSelector(VMString[BLOCK_CLONE], true);
   return blkClone;
 }

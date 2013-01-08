@@ -104,7 +104,7 @@ extern "C" {
   // to continue in C or Self after a trap, we sometimes need to go through
   // some assembly glue.  During such periods, continuePC holds the real
   // continuation PC that the assembly glue will jump to when it's done.
-  // Otherwise, continuePC is NULL.
+  // Otherwise, continuePC is 0.
 }
 
 
