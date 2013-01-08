@@ -3,9 +3,9 @@ compiler:
   - gcc
   - clang
 before_install:
-  - sudo apt-get install csh libx11-dev flex libncurses5-dev
+  - sudo apt-get install csh
 branches:
   only:
     - master
     # - cmake
-script: cd vm && bash ../docs/release/buildLinuxVM
+script: bash ../docs/release/buildLinuxVM
