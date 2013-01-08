@@ -7,3 +7,4 @@ branches:
     #- master
     - cmake
 script: mkdir -p build; cd build; cmake .. && cmake --build .
+
