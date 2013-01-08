@@ -1,0 +1,9 @@
+language: cpp
+compiler:
+  - gcc
+  - clang
+branches:
+  only:
+    - master
+    # - cmake
+script: cd vm && bash ../docs/release/buildLinuxVM 
