@@ -8,4 +8,4 @@ branches:
   only:
     - master
     # - cmake
-script: cd doc/release && bash buildLinuxVM
+script: cd docs/release && bash buildLinuxVM
