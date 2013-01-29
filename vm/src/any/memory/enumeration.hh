@@ -36,6 +36,7 @@ class enumeration_list: public ResourceObj {
   void oops_do(oopsDoFn f);
 };
 
+
 class enumeration: public ResourceObj {
   
   friend void package_enumeration_result(oop* p);
@@ -135,6 +136,7 @@ class referencesEnumeration: public enumeration {
   static oop enumerate_vector_references(objVectorOop vector, oop limit);
 
 };
+
 
 class implementorsEnumeration: public enumeration {  
   smi poss_assignments_index;

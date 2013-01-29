@@ -164,7 +164,7 @@ bool Object::GenBody(Object* parent) {
     preservedObj ps(s); // since GenByteCodes can cause a gc,
                         // preserve the generated slotList.
     ByteCode b(true); // I am not sure that this method can handle space failure
-                              
+    
     if ( !body->GenByteCodes(&b, this, false)
     ||  NLRSupport::have_NLR_through_C()) 
       return false;

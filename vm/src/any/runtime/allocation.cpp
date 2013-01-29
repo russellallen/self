@@ -304,12 +304,15 @@ static void MallocFailed(void) { OS::allocate_failed("VM use"); }
 
 static int32 true_size_of_malloced_obj(int32* p) {
   static const int32 s_offset = 
-#   if    TARGET_ARCH == SPARC_ARCH
+#   if    TARGET_ARCH == SPARC_ARCH  &&  COMPILER == GCC_COMPILER
       -2;
-#   elif  TARGET_ARCH == I386_ARCH   &&   TARGET_OS_VERSION ==  MACOSX_VERSION
+#   elif  TARGET_ARCH == M68K_ARCH   &&  COMPILER == GCC_COMPILER
+      -1;
+#   elif  TARGET_ARCH == PPC_ARCH    &&  COMPILER == GCC_COMPILER
       -2;
-#   elif  TARGET_ARCH == I386_ARCH   &&  (TARGET_OS_VERSION ==   LINUX_VERSION \
-                                     ||   TARGET_OS_VERSION == SOLARIS_VERSION )
+#   elif  TARGET_ARCH == I386_ARCH   &&  COMPILER == GCC_COMPILER   &&   TARGET_OS_VERSION == MACOSX_VERSION
+      -2;
+#   elif  TARGET_ARCH == I386_ARCH   &&  COMPILER == GCC_COMPILER   &&    (TARGET_OS_VERSION ==  LINUX_VERSION  ||  TARGET_OS_VERSION == SOLARIS_VERSION)
       -1;
 #   else
 	# error What is it?
@@ -348,7 +351,7 @@ void malloc_init() {
       fatal("malloc/free aren't reentrant");
     }
     MallocInProgress = true;              // for hprofiler
-    size = max(1, size); // malloc does not seem to like zero
+    size = max(1, size); // malloc does not seem to like zero, at least on PPC
     char* result = (char*)malloc(size);
   if ((int)result & 0x80000000) fatal("xxxxxxx");
     MallocInProgress = false;

@@ -652,6 +652,8 @@ void Profiler::engage(Process* proc) {
 
 # if TARGET_ARCH == SPARC_ARCH
   fint min_self_frame_size = WindowSize * oopSize;
+# elif TARGET_ARCH == PPC_ARCH
+  fint min_self_frame_size = linkage_area_size;
 # else
   fint min_self_frame_size = 1;
 # endif
@@ -904,7 +906,7 @@ void Profiler::fix_stack_bottom(StackInfo* st) {
       //    non access method -- interrupted_return_addr_reg
       //    pic stub          --_pc
       if ( st->interrupted_return_addr_reg.in_self()
-      &&  !st->interrupted_return_addr_reg.in_pics() )  {
+      &&  !st->interrupted_return_addr_reg.in_pics() )  { // PPC temporarily sets link reg
         pc[--begin].set_value( st->interrupted_return_addr_reg.value, 9 );
       }
     }
@@ -1142,6 +1144,9 @@ void Profiler::convert_nmethod_information() {
 
 # if TARGET_ARCH == SPARC_ARCH
 extern "C" { void ContinueAfterProfilerInterrupt(); }
+# elif TARGET_ARCH == PPC_ARCH
+// not used: would need return from interrupt instruction
+// void ContinueAfterProfilerInterrupt() { fatal("unimp mac"); }
 # endif
 
 char** profiler_return_addr;
@@ -1185,8 +1190,6 @@ StackInfo* Profiler::collect_stack(bool in_interrupt) {
     profiler_return_addr = (char**) &st->interrupted_pc;
     last_frame = InterruptedContext::the_interrupted_context->sp();
 
-
-    // THIS IS HISTORICAL NOW. >>
       // Want frame above the interrupted context, but on PPC that's frame
       // above sp. That way, can look at last_frame's saved return_addr.
       // The interrupted context's sp may NOT be pointing at frame wtih saved PC. -- dmu 12/03
@@ -1197,7 +1200,6 @@ StackInfo* Profiler::collect_stack(bool in_interrupt) {
       // I came back to it, made sure all the stubs save the link reg before stwu'ing the sp,
       // and assuming the C compiler is well behaved this should work with only one sender(); -- dmu 2/04
       // See frame_ppc.cpp frame::return_addr()
-    // <<
 
     st->frame_pointer = (char*) last_frame;
     bool inSelf = Memory->code->isSelfPC(InterruptedContext::the_interrupted_context->pc());
@@ -1377,6 +1379,16 @@ void Profiler::tick() {
         InterruptedContext::set_continuation_address(first_inst_addr(ContinueAfterProfilerInterrupt),
                                                      false, false);
       }
+    # elif TARGET_ARCH == PPC_ARCH
+      if ( st != NULL ) {
+        frame* f = InterruptedContext::the_interrupted_context->sp();
+
+        st->interrupted_pc.                set_value( InterruptedContext::the_interrupted_context->pc(), 12 );
+        st->interrupted_return_addr_reg.   set_value( InterruptedContext::the_interrupted_context->lr(), 13 );
+        st->interrupted_stored_return_addr.value = NULL; // pick this up another way on PC, simply walking stack
+        st->interrupted_fp = (char*)f;
+      }
+      processSemaphore = false;
     # endif
   }
 }

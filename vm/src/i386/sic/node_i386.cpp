@@ -177,7 +177,7 @@
     
     // must align nmln to follow
     // There are a call and two jumps coming, each 5 bytes, so want pc to be 1 mod 4.
-    // See align * in asmDefs_i386.S
+    // See align * in asmDefs_gcc_i386.[sS]
     fint x = ((fint)theAssembler->offset() - 1) & 3;
     fint num_nops = (4 - x) & 3;
     for (fint i = 0;  i < num_nops; ++i) theAssembler->nop();

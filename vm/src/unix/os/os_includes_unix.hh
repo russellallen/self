@@ -73,6 +73,7 @@ extern "C" {
 # include <memory.h>
 # include <math.h>
 # if TARGET_OS_VERSION == MACOSX_VERSION
+#   undef ASSEMBLER
 #   include <sys/ucontext.h>
 #   include <termios.h>
 #   include <sys/ioctl.h>
@@ -172,6 +173,9 @@ extern "C" {
 
 
 # if TARGET_OS_VERSION == MACOSX_VERSION
+  # undef _MACH_PPC_VM_TYPES
+  # undef ASSEMBLER
+
   # include <mach/mach_types.h>
   # include <sys/sysctl.h>
   # include <mach/machine/vm_types.h> // for mman.h

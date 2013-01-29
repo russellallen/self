@@ -8,6 +8,7 @@
 # if defined(QUARTZ_LIB)
 
 # if TARGET_OS_VERSION == MACOSX_VERSION
+  #  undef ASSEMBLER
   #  undef Alloc
   
   #  include <Carbon/Carbon.h>

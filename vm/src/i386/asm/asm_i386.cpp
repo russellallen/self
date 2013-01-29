@@ -398,7 +398,7 @@ bool Assembler::do_special_shifts(int32 op_imm_rm, int32 imm) {
 } 
 
 
-void Assembler::like_add8_imm(const char* name, int32 imm, Location dst_reg, int32 dst_disp, OperandType dt, 
+void Assembler::like_add8_imm(const char* name, int32 imm, Location dst_reg, int32 dst_disp, OperandType dt,
                Location index, Scale s, int32 op_imm8_al, int32 op_imm8_rm8, int32 opExt) {
   if (printing)
     asm_lprintf("%sb ", name);

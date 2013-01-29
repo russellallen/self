@@ -21,26 +21,26 @@ void PendingSelfSignals::init() {
 
   _are_any_pending     = false;
   _know_if_any_pending = true;
-
+  
   for ( int i = 0;  i < sizeof(_name)/sizeof(_name[0]);  ++i) {
     _name [i] = SIG_UNKNOWN;
     _count[i] = 0;
   }
   _name[ sigint        ] = SIG_INT;
   _name[ sigquit       ] = SIG_QUIT;
-  _name[ sigio         ] = SIG_IO;
-  _name[ siguser1      ] = SIG_USER1;
-  _name[ siguser2      ] = SIG_USER2;
-  _name[ sigpipe       ] = SIG_PIPE;
-  _name[ sigterm       ] = SIG_TERM;
-  _name[ sigurg        ] = SIG_URG;
-  _name[ sigchild      ] = SIG_CHILD;
-  _name[ sighup        ] = SIG_HUP;
-  _name[ sigwinch      ] = SIG_WINCH;
-  _name[ sigrealtimer  ] = SIG_REALTIMER;
-  _name[ sigcputimer   ] = SIG_CPUTIMER;
+  _name[ sigio         ] = SIG_IO; 
+  _name[ siguser1      ] = SIG_USER1; 
+  _name[ siguser2      ] = SIG_USER2; 
+  _name[ sigpipe       ] = SIG_PIPE; 
+  _name[ sigterm       ] = SIG_TERM; 
+  _name[ sigurg        ] = SIG_URG; 
+  _name[ sigchild      ] = SIG_CHILD; 
+  _name[ sighup        ] = SIG_HUP; 
+  _name[ sigwinch      ] = SIG_WINCH; 
+  _name[ sigrealtimer  ] = SIG_REALTIMER; 
+  _name[ sigcputimer   ] = SIG_CPUTIMER; 
 }
-
+    
 
 smi PendingSelfSignals::Self_result_size() {
   return 2 * n_real_SelfSignals  +  1;
@@ -53,7 +53,7 @@ void PendingSelfSignals::pass_to_Self(oop resultArg) {
   { SignalBlocker sb;
     fint index = 1;
     for (fint i = 0;
-              i < n_real_SelfSignals;
+              i < n_real_SelfSignals;  
             ++i ) {
       smi c = count(SelfSignal(i));
       if ( c != 0) {
@@ -91,14 +91,14 @@ SelfSignal OSToSelfSignalMapper::_map[Last_OS_Signal];
 void OSToSelfSignalMapper::init() {
   for ( int32 i = 0;  i < Last_OS_Signal;  i++)
     _map[i] = sigunknown;
-
+    
   init_platform();
 }
 
 // ===============================================================
 
 
-bool SignalInterface::_block_self_signals  = false;
+bool SignalInterface::_block_self_signals  = false; 
 bool SignalInterface::_initializing        = false;
 bool SignalInterface::_is_in_map_load      = false;
 
@@ -118,7 +118,7 @@ bool SignalInterface::BlockSignals_prim(bool b) {
   if (b) {
     SignalInterface::block_self_signals();
     if (old) warning("_BlockSignals: signals already blocked");
-  }
+  } 
   else {
     SignalInterface::unblock_self_signals();
     //  LOG_EVENT("unblocking signals");
@@ -128,7 +128,7 @@ bool SignalInterface::BlockSignals_prim(bool b) {
     }
   }
   return old;
-}
+}  
 
 
 // for timers started by Self primitives:
@@ -155,7 +155,7 @@ void SignalInterface::flush_input_after_ctrl_c() {
   }
 }
 
-
+    
 void SignalInterface::simulate_fatal_signal() {
   InterruptedContext::the_interrupted_context->set();
   AbortContext.invalidate();
@@ -169,11 +169,11 @@ void SignalInterface::handle_Self_signal(SelfSignal ssig) {
   const int max_ctrl_c = 5;
   FlagSettingInt fs(errno, 0);  // save errno
   safely_handle_Self_signal(ssig);
-
+  
   smi kbs = PendingSelfSignals::keyboard_signals();
   if  ( kbs < max_ctrl_c )
     return; // OK
-
+    
   if  ( kbs == max_ctrl_c ) {
     warning("press one more ^\\ or ^C to force abort");
     return ;
@@ -189,7 +189,7 @@ void SignalInterface::handle_Self_signal(SelfSignal ssig) {
   }
   if (c[0] == 'y') {
     fatal("forced ^\\ abort");
-  }
+  } 
   else {
     lprintf("--- not aborted.\n");
     PendingSelfSignals::reset_keyboard_signals(1);
@@ -204,10 +204,10 @@ void SignalInterface::safely_handle_Self_signal(SelfSignal ssig) {
   PendingSelfSignals::increment(ssig);
   if (are_self_signals_blocked())
     return; // no more for now
-
-  if (preemptCause == cNoCause)
+    
+  if (preemptCause == cNoCause) 
     preemptCause = cSignal;
-
+    
   if ( twainsProcess != NULL
   ||   PendingSelfSignals::keyboard_signals() != 0
   ||   need_preemptor_for_timer )
@@ -223,12 +223,12 @@ void SignalInterface::handle_OS_signal(int ossig, char* addr, int32 code) {
   if (eventLog != NULL) // might not exist yet
     LOG_EVENT3("signal %ld pc %#lx npc %#lx",
                ossig, InterruptedContext::the_interrupted_context->pc(), InterruptedContext::the_interrupted_context->next_pc());
-
+            
   # if TARGET_OS_VERSION != MACOSX_VERSION
   assert(!is_off_signal_stack(), "should be on interrupt stack");
   # endif
   // Linux???
-
+  
   if (handle_SIC_OS_signal(ossig, addr, code))
     return;
 # if TARGET_OS_VERSION == LINUX_VERSION
@@ -237,9 +237,9 @@ void SignalInterface::handle_OS_signal(int ossig, char* addr, int32 code) {
          (void*)(long unsigned)(InterruptedContext::the_interrupted_context->pc()));
 # elif TARGET_OS_VERSION == SOLARIS_VERSION
   lprintf("\nInternal error: signal %d (sig%s) code %d addr 0x%lx pc 0x%lx.\n",
-         (void*)ossig, (void*)strsignal(ossig),
-         (void*)code, (void*)(long unsigned)addr,
-         (void*)(long unsigned)(InterruptedContext::the_interrupted_context->pc()));
+          (void*)ossig, (void*)strsignal(ossig),
+          (void*)code, (void*)(long unsigned)addr,
+          (void*)(long unsigned)(InterruptedContext::the_interrupted_context->pc()));
 # else
   lprintf("\nInternal error: signal %d (sig%s) code %d addr 0x%lx pc 0x%lx.\n",
          (void*)ossig, (void*)sys_signame[ossig],
@@ -251,7 +251,7 @@ void SignalInterface::handle_OS_signal(int ossig, char* addr, int32 code) {
     // for better VM debugging - see regs and stack undisturbed, but
     // printing/traversing Self stack may break
     InterruptedContext::fatal_menu();
-  }
+  } 
   else {
     // let user print the stack etc; easier to do in user context
     WizardAbortMode = true; // next bit might fail over and over
@@ -263,7 +263,7 @@ void SignalInterface::handle_OS_signal(int ossig, char* addr, int32 code) {
 
 bool SignalInterface::handle_SIC_OS_signal(int ossig, char* addr, int32 code) {
   InterruptedContext::the_interrupted_context->must_be_in_self_thread();
-
+  
   assert( !(ossig == SIGNonLifo && code == ST_ShouldNeverHappen),
           "SIC compiler error: should never get to this trap instruction");
 
@@ -277,15 +277,15 @@ bool SignalInterface::handle_SIC_OS_signal(int ossig, char* addr, int32 code) {
   if (ossig == SIGUncommon && handleUncommonTrap())
     // was uncommon branch trap
     return true;
-
-  if ((ossig == SIGNonLifo     &&  is_uplevel_trap(code))
-  ||  (ossig == SIGBadHomeRef  &&  NLRSupport::is_bad_home_reference(addr)
-                              &&  Memory->code->contains(InterruptedContext::the_interrupted_context->pc()))) {
+    
+  if ( (ossig == SIGNonLifo     &&  is_uplevel_trap(code))
+  ||   (ossig == SIGBadHomeRef  &&  NLRSupport::is_bad_home_reference(addr)
+                                &&  Memory->code->contains(InterruptedContext::the_interrupted_context->pc()))) {
     // continue in NLRSupport::non_lifo_abort
     // This is much easier than doing it here because the stack is in a mess right now.
     InterruptedContext::continue_abort_at(first_inst_addr(NLRSupport::non_lifo_abort_from_continuePC), false);
     return true;
-  }
+  } 
 
   return false;
 }

@@ -11,6 +11,7 @@
   if (dependents)                                                       \
     for (nmln* d= dependents, *dend= d + length_slots(); d < dend; d++) \
 
+
 oop slotsMapDeps::define(oop obj, oop contents) {
   if (VerifyZoneOften)
     Memory->code->verify();

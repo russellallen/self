@@ -8,7 +8,6 @@
 # endif
 
 // includes for X
-
 # ifdef XLIB
 # define Cursor SelfX11Cursor // prevent clash with Carbon
 # include <X11/Xlib.h>

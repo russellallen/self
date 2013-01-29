@@ -41,7 +41,7 @@
 
 # define SPARC_ARCH 1
 # define  M68K_ARCH 2 /* No longer supported */
-# define   PPC_ARCH 3 /* No longer supported */
+# define   PPC_ARCH 3 /* No longer supported, but may bring back sometime */
 # define  I386_ARCH 4
 
 # define  UNIX_FAMILY 1
@@ -79,7 +79,9 @@
     // we determine ourselves
     # undef TARGET_ARCH
   # endif
-  # if defined(__i386__)
+  # if defined(__ppc__)
+    # define TARGET_ARCH PPC_ARCH
+  # elif defined(__i386__)
     # define TARGET_ARCH I386_ARCH
   # elif defined(__LP64__)
     # error 64bit not supported yet
@@ -87,7 +89,9 @@
     # error A new Mac CPU?
   # endif
   
-  # if NATIVE_ARCH == i386
+  # if NATIVE_ARCH == ppc
+  # define HOST_ARCH PPC_ARCH
+  # elif NATIVE_ARCH == i386
   # define HOST_ARCH I386_ARCH
   # else 
   # error what?
@@ -101,11 +105,11 @@
   # define MOUNTAIN_LION_RELEASE 8
 	  
   # ifndef OSX_RELEASE
-    # define OSX_RELEASE LION_RELEASE
+    # define OSX_RELEASE MOUNTAIN_LION_RELEASE
   # endif
 
   // Apple asm syntax changed in 2006 sometime
-  // next 5 lines DUPLICATED in asmDefs_i386.hh
+  // next 5 lines DUPLICATED in asmDefs_gcc_i386.hh
   # define   PRE_2007_OSX_ASM_RELEASE 4
   # define  POST_2007_OSX_ASM_RELEASE 5
   # ifndef OSX_ASM_RELEASE
@@ -121,6 +125,17 @@
 # define DO_NOT_CROSS_COMPILE cannotCrossCompileMe
 # endif
 
+# define s 17
+# if TARGET_OS_VERSION == MACOSX_VERSION  &&  TARGET_ARCH == PPC_ARCH
+  # ifndef GCC_OPTIMIZATION_LEVEL
+    # error The xcode project PREPROCESSOR_MACROS should include GCC_OPTIMIZATION_LEVEL=${GCC_OPTIMIZATION_LEVEL}
+  # elif GCC_OPTIMIZATION_LEVEL == s
+    # error -Os breaks Self, use -O3 instead (when making a snapshot, some slots in globals are missing their annotations on the PPC)
+  # endif
+# endif
+# undef s
+
+
 # if defined(__GNUC__)
   # define GCC 1
   # if __GNUC__ < 4
@@ -133,7 +148,7 @@
 // The following definitions make machine-dependent asserts more convenient
 # if  TARGET_ARCH == SPARC_ARCH
 # define isSparc 1
-# else
+# else 
 # define isSparc 0
 # endif
 

@@ -214,7 +214,7 @@ void run_the_VM() {
   for (;;) {
     ResourceMark m;
     fint line, len;
-    const char* source;
+    const char* source = NULL;
     Parser parser(VMScanner, false);
     resetTerminal();
     VMScanner->start_line("VM# ");

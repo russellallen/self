@@ -15,7 +15,7 @@
 //  the receiver is available separately.
 
 
-extern char* selector_string(oop sel);
+extern const char* selector_string(oop sel);
 
 // NB: not a VMObj to save space (keys are stored in ScopeDescs)
 
@@ -109,7 +109,8 @@ class MethodLookupKey: public ScopeLookupKey {
   fint arg_count() {
     return selector && selector->is_string() ?
       stringOop(selector)->arg_count() : 0; }
-  char* selector_string() { return ::selector_string(selector); }
+
+  const char* selector_string() { return ::selector_string(selector); }
   
   void print();
   

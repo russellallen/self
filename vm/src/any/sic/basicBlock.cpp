@@ -800,10 +800,10 @@
     for ( i = 0; i < bbCount; i++) {
       bbTable->nth(i)->print_code(suppressTrivial);
       int32 next = i + 1;
-      if ((next == bbCount && bbTable->nth(i)->next()) ||
-          (next < bbCount && bbTable->nth(i)->next() &&
-          bbTable->nth(i)->next() != bbTable->nth(next) &&
-          !bbTable->nth(i)->last->isRestartNode())) {
+      if ( ( next == bbCount && bbTable->nth(i)->next() )  ||
+           ( next <  bbCount && bbTable->nth(i)->next() &&
+                                bbTable->nth(i)->next() != bbTable->nth(next) &&
+                               !bbTable->nth(i)->last->isRestartNode())) {
         // non-sequential control flow - insert a branch
         Node* n = bbTable->nth(i)->next()->first;
         lprintf("\tgoto N%ld\n", (void*)n->id());
@@ -820,10 +820,10 @@
     for (i = 0; i < bbCount; i++) {
       bbTable->nth(i)->print_vcg_edges(f, suppressTrivial);
       int32 next = i + 1;
-      if ((next == bbCount && bbTable->nth(i)->next()) ||
-          (next < bbCount && bbTable->nth(i)->next() &&
-          bbTable->nth(i)->next() != bbTable->nth(next) &&
-          !bbTable->nth(i)->last->isRestartNode())) {
+      if ( ( next == bbCount && bbTable->nth(i)->next() )   ||
+           ( next <  bbCount && bbTable->nth(i)->next() &&
+                                bbTable->nth(i)->next() != bbTable->nth(next) &&
+                               !bbTable->nth(i)->last->isRestartNode())) {
         // non-sequential control flow - insert a branch
         Node* n = bbTable->nth(i)->next()->first;
       }

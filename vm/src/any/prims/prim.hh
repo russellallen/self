@@ -58,6 +58,7 @@ class PrimDesc {
   const char* _name;        // Name of primitive, does not include initial
                             // "_".
   fntype _fn;               // Pointer to function implementing primitive.
+                            // (A transition vector on the PPC mac).
   primType _type;           // Specifies optimizations that can be applied
                             // (see also def. of primType).
   primExprType _etype;      // Return type of prim. (see def. of primExprType).
@@ -77,7 +78,7 @@ class PrimDesc {
                             // If true, then canScavenge must also be true!
   bool _canAbortProcess;    // Set true if prim. may cause a process abort.
                             // If true, then canScavenge must also be true!
-  const char* _docString;    // documentation string
+  const char* _docString;   // documentation string
 // public:
   const char*   name() { return _name; }
   primType      type() { return _type; }

@@ -291,13 +291,14 @@ oop universe::garbage_collect(oop p) {
     OS::normal_access((char*)s->oopsStart(), (char*)s->oopsEnd()); 
 # endif
     // Linux???
-    if (!plentyOfMemory)
+    if (!plentyOfMemory) {
       if (discardPgs)
         // +1 for sentinel
         OS::discard_pages((char*)(s->oopsEnd() + 1), s->bytesStart());
       else
         // +1 for sentinel
         OS::dont_need_pages((char*)(s->oopsEnd() + 1), s->bytesStart());
+    }
   }}
 
   APPLY_TO_ZONES(ZONE_NORMAL_ACCESS_TEMPLATE);

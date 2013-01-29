@@ -8,7 +8,7 @@
 # if TARGET_IS_PROFILED
 
 # include "_allocZone_i386.S.incl"
-# include "asmDefs_i386.hh"
+# include "asmDefs_gcc_i386.hh"
 
 
 start_exported_function CompiledSelfCode

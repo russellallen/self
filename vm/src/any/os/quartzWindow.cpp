@@ -11,6 +11,7 @@
 # if defined(QUARTZ_LIB) 
 
 # if TARGET_OS_VERSION == MACOSX_VERSION  &&  !TARGET_API_MAC_CARBON
+  #  undef ASSEMBLER
   #  undef Alloc
   #  undef Status
 
@@ -247,7 +248,7 @@ static CGDirectDisplayID screen(void* w) {
   OSStatus err = HIWindowGetBounds((WindowRef)w, kWindowGlobalPortRgn, 
                                    kHICoordSpace72DPIGlobal, &bounds);
   if (err) {
-    lprintf("GetWindowRegion failed: %d\n", err);
+    lprintf("HIWindowGetBounds failed: %d\n", err);
     return CGMainDisplayID();
   }
   CGDirectDisplayID display;
@@ -557,16 +558,12 @@ oop QuartzWindow::get_scrap_text() {
   CFDataRef           textData = NULL;
   ItemCount           itemCount;
   
-  if (PasteboardCreate(kPasteboardClipboard, &clipboard) != noErr) 
-    goto BailOut;
+  if ( PasteboardCreate(kPasteboardClipboard, &clipboard) != noErr
+  ||  (PasteboardSynchronize(clipboard) & kPasteboardModified)
+  ||   PasteboardGetItemCount(clipboard, &itemCount) != noErr  ) 
+    return new_string("", 0);
   
-  if (PasteboardSynchronize(clipboard) & kPasteboardModified)
-    goto BailOut;
-
-  if (PasteboardGetItemCount(clipboard, &itemCount) != noErr) 
-    goto BailOut;
-  
-  for(UInt32 itemIndex = 1; itemIndex <= itemCount; itemIndex++) {
+  for( UInt32 itemIndex = 1; itemIndex <= itemCount; itemIndex++ ) {
     PasteboardItemID itemID = 0;
     CFArrayRef       flavorTypeArray = NULL;
     CFIndex          flavorCount = 0;
@@ -602,7 +599,7 @@ oop QuartzWindow::get_scrap_text() {
         if (r->is_mark()) {
           CFRelease (flavorData);
           CFRelease (flavorTypeArray);
-          goto BailOut;          
+          return new_string("", 0);
         }
         // copy over
         CFDataGetBytes(flavorData, CFRangeMake(0,CFDataGetLength(flavorData)),
@@ -615,9 +612,6 @@ oop QuartzWindow::get_scrap_text() {
     CFRelease(flavorTypeArray);
   }  
   
-BailOut:
-  
-  return new_string("", 0);
 }
 
 int QuartzWindow::put_scrap_text(const char* s, int len) {

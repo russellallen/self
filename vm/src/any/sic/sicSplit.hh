@@ -26,6 +26,7 @@
     SplitSig()            { ShouldNotCallThis(); }
     SplitSig(SplitSig &s) { ShouldNotCallThis(); }
     friend SplitSig* new_SplitSig(SplitSig* current, fint splitID);
+
     fint level()        { return uint32(this) & LevelMask; }
     bool contains(SplitSig* other) {
       // other sig is in same branch iff the receiver is a prefix of other
@@ -35,7 +36,7 @@
       return ((uint32(this) ^ uint32(other)) >> shift) == 0;
     }
     void print();
-    char* prefix(char* buf);
+    const char* prefix(char* buf);
   };
 
 # endif

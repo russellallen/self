@@ -157,6 +157,7 @@ class newGeneration: public generation {
   void write_snapshot(FILE* file);
 };
 
+
 class oldGeneration: public generation {
 
   friend class rSet;

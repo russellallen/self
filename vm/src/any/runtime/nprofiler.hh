@@ -88,7 +88,7 @@ class Pc {
            }
 };
 
-// WARNING: offsets into StackInfo are duplicated in continueProfilerTrap in runtime_asm_sparc.S
+// WARNING: offsets into StackInfo are duplicated in continueProfilerTrap in runtime_asm_gcc_sparc.s
 
 class StackInfo {
  public:

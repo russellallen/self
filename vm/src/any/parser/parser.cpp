@@ -89,7 +89,7 @@ String* Parser::OpStringFromNum(Token* t) {
 
 String* Parser::StringFromOp(Token* t) {
   switch (t->type) {
-    // TODO (topa 2012-05-06):  = and ~ are no TokenTypes in Token...
+   // TODO (topa 2012-05-06):  = and ~ are no TokenTypes in Token...
    case '=':             return new String("=");
    case '~':             return new String("~");
    case Token::ARROW:    return new String("<-");

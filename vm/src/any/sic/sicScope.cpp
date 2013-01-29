@@ -2134,11 +2134,11 @@
                               _method,
                               _key->receiverMapOop(),
                               self->nameNode(!lite),
-                              self->nameNode(!lite),
+                              self->nameNode(!lite),     // woud be different for PPC
                               self->myMapOop(),
                               methodHolder_or_map(),
                               receiver->nameNode(!lite),
-                              receiver->nameNode(!lite),
+                              receiver->nameNode(!lite), // woud be different for PPC   
                               lite,
                               scopeID(),
                               _sender ? _sender->scopeInfo : NULL,

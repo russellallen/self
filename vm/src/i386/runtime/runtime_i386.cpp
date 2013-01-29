@@ -32,7 +32,7 @@ bool check_saved_byte_map_base() {
 } 
 
 
-// cannot used simple DiscardStack (as in runtime_sparc.S) because of restoring
+// cannot used simple DiscardStack (as in runtime_sparc.[sS]) because of restoring
 // nonvol registers
 void volatile DiscardStack() {
   currentProcess->abort();
@@ -68,7 +68,7 @@ extern "C" oop breakpoint_prim(oop rcvr) {
 }
 
 
-// This should be an assembly function, similar to sparc/runtime/runtime_asm_sparc.S
+// This should be an assembly function, similar to sparc/runtime/runtime_asm_gcc_sparc.[sS].
 // I haven't implemented it yet, so I just put the stub here. -mabdelmalek 10/02.
 void  HandleUncommonTrap()
 {

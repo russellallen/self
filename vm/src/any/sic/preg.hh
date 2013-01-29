@@ -159,7 +159,7 @@
    public:
     virtual void print();
     virtual void print_short()  { lprintf("%s", name()); }
-    virtual char* name();       // string representing the preg name
+    virtual const char* name();       // string representing the preg name
     virtual const char* prefix()      { return "P"; }
     virtual bool verify();
     virtual NameNode* nameNode(bool mustBeLegal = true); // for debugging info
@@ -260,7 +260,7 @@
     bool isLiveAt(Node* n);
     bool isSplitPReg()          { return true; }
     const char* prefix()              { return "SplitP"; }
-    char* name();
+    const char* name();
   };
 
   class BlockPReg : public SAPReg {
@@ -286,7 +286,7 @@
     bool isMemoized()           { return memoized; }
     bool canEliminateAndStillDebug();
     const char* prefix()              { return "BlkP"; }
-    char* name();
+    const char* name();
     bool verify();
 
     static SCodeScope* scopeFromBlockMap(mapOop blockMap);
@@ -302,7 +302,7 @@
     }
     virtual bool isNoPReg()     { return true; }
     bool canCopyPropagate() { return false; }
-    char* name()                { return (char*) "nil"; }
+    const char* name()                { return (char*) "nil"; }
     bool verify();
   };
 
@@ -333,7 +333,7 @@
     bool needsRegister();
     NameNode* nameNode(bool mustBeLegal = true);
     const char* prefix()              { return "ConstP"; }
-    char* name();
+    const char* name();
     bool verify();
   };
 

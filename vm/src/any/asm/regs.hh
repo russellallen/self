@@ -24,6 +24,7 @@ extern "C" {                            // extern "C" for easier debugging
 
 extern const char* RegisterNames[];
 
+// WARNING: duplicated in asmDefs_ppc.h
 const fint NumNonVolRegisters       = HighestNonVolReg - LowestNonVolReg      + 1;
 const fint NumLocalNonVolRegisters  = HighestNonVolReg - LowestLocalNonVolReg + 1;
 const fint NumGlobalNonVolRegisters = LowestLocalNonVolReg - LowestNonVolReg;

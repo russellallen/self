@@ -66,11 +66,13 @@ if(CMAKE_CXX_COMPILER_ID MATCHES ".*[Cc]lang.*")
   
   set(clang 1)
   set(COMPILER          "GCC_COMPILER")
+  set(platform_compiler "gcc")
 
 elseif(CMAKE_CXX_COMPILER_ID MATCHES ".*[Gg][Nn][Uu].*")
 
   set(gcc 1)
   set(COMPILER          "GCC_COMPILER")
+  set(platform_compiler "gcc")
 
 else()
   

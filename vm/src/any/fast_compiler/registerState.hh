@@ -23,7 +23,7 @@ class RegisterState: public ResourceObj {
   unsigned* stackPerms;                 // permanent stack locations
   int32 initStackTemps;                 // # initialized stack temps (e.g. 
                                         // locals; don't need to zero them)
-  int32 argDepth; //  # extra outgoing args (on sparc), excludes rcvr
+  int32 argDepth; // max # of outgoing args (ppc), # extra outgoing args (on sparc), excludes rcvr
 
   RegisterState(fint maxTemps);
   

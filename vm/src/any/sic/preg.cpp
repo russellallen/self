@@ -172,6 +172,8 @@
 # if TARGET_ARCH == SPARC_ARCH
     return SICCSEConstants && weight > 1 && 
       (int32(constant) > maxImmediate || int32(constant) < -maxImmediate);
+# elif TARGET_ARCH == PPC_ARCH
+    return SICCSEConstants && weight > 1 && !fits_within_si(int32(constant));
 # elif TARGET_ARCH == I386_ARCH
     return false; // regs tight, use immediates
 # endif
@@ -854,7 +856,7 @@
   }
       
   
-  char* PReg::name() {
+  const char* PReg::name() {
     char* n = NEW_RESOURCE_ARRAY(char, 25);
     if (loc == UnAllocated) { 
       sprintf(n, "%s%d%s%s%s", prefix(), id(),
@@ -872,20 +874,20 @@
     print_short(); lprintf(": "); printDefsAndUses(&dus);
   }
   
-  char* BlockPReg::name() {
+  const char* BlockPReg::name() {
     char* n = NEW_RESOURCE_ARRAY(char, 25);
     sprintf(n, "%s <%#lx>%s", PReg::name(), (unsigned long)block,
             memoized ? "#" : (primFailBlockScope ? "#F" : ""));
     return n;
   }
   
-  char* ConstPReg::name() {
+  const char* ConstPReg::name() {
     char* n = NEW_RESOURCE_ARRAY(char, 25);
     sprintf(n, "%s <%#lx>", PReg::name(), (unsigned long)constant);
     return n;
   }
   
-  char* SplitPReg::name() {
+  const char* SplitPReg::name() {
     char* n = NEW_RESOURCE_ARRAY(char, 25);
     char buf[MaxSplitDepth+1];
     sprintf(n, "%s <%s>", PReg::name(), sig->prefix(buf));
@@ -991,6 +993,8 @@
 # if TARGET_ARCH == SPARC_ARCH
     if (int32(constant) < maxImmediate && int32(constant) > -maxImmediate
         && loc != UnAllocated) {
+# elif TARGET_ARCH == PPC_ARCH
+    if (fits_within_si(int32(constant)) && loc != UnAllocated) {
 # elif TARGET_ARCH == I386_ARCH
     if (loc != UnAllocated) {
 # endif

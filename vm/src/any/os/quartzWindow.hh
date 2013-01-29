@@ -38,6 +38,7 @@ class WindowSet  /* AllStatic */ {
 };
 
 
+#  undef ASSEMBLER
 #  undef Alloc
 #  undef Status
 

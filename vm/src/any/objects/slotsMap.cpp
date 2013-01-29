@@ -32,12 +32,13 @@ oop slotsMap::copy_add_slot(oop obj,
                             oop anno,
                             bool mustAllocate) {
 
-  if (!type->is_vm_slot())
+  if (!type->is_vm_slot()) {
     if (   !obj->is_programmable_slots()  // cannot add slot to some objects
         || contents->is_vframe())         // cannot put vframe in a slot
       return ErrorCodes::vmString_prim_error(BADTYPEERROR);
     else if (type->is_parent()  &&  contents->is_method_like())
       return ErrorCodes::vmString_prim_error(PARENTERROR);
+  }
 
   slotsOop sobj = slotsOop(obj);
 

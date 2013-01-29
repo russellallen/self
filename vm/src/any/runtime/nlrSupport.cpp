@@ -119,6 +119,9 @@ volatile void NLRSupport::continue_NLR_into_compiled_Self(bool remove_patches, f
   // On SPARC, the return pointer is increased at a prim call site so a normal return
   // will skip in the inline cache.
   // All lookup routines are between Low- and HighReturnAddress.
+  
+  // On PPC, is_Self_IC flag ignored, and do not have to put lookup routines
+  // between Low and HighReturnAddress.
   bool is_Self_IC = is_Self_return_address(vm_addr);  
   ContinueNLRFromC(ret_addr, false, is_Self_IC);
   ShouldNotReachHere(); // should not return to here

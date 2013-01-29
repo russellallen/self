@@ -4,13 +4,11 @@
 #/* Copyright 1992-2012 AUTHORS.
 #   See the LICENSE file for license information. */
 
-/* remove me from MW project when compiling under MW */
-
 # // some integer primitives
 
 
-#  // .include "../../src/i386/runtime/asmDefs_i386.hh"
-# include "asmDefs_i386.hh"
+#  // .include "../../src/i386/runtime/asmDefs_gcc_i386.hh"
+# include "asmDefs_gcc_i386.hh"
 
 
         // C calling convention for prims for now

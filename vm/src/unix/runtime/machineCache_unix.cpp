@@ -20,7 +20,9 @@
 # endif  
 
 # define OVERDO_IT 0
-# if TARGET_OS_VERSION == MACOSX_VERSION  && !OVERDO_IT
+# if TARGET_OS_VERSION == MACOSX_VERSION  \
+  && (     TARGET_ARCH == PPC_ARCH \
+       ||  TARGET_ARCH == I386_ARCH  &&  !OVERDO_IT )
 
   extern "C" { void MakeDataExecutable(void*, unsigned long); }
 
@@ -31,7 +33,8 @@
     MakeDataExecutable(s, (char*)e - (char*)s);
   }
 
-# elif TARGET_OS_VERSION == MACOSX_VERSION && OVERDO_IT
+# elif TARGET_OS_VERSION == MACOSX_VERSION \
+    && TARGET_ARCH == I386_ARCH  &&  OVERDO_IT
   extern "C" { void MakeDataExecutable(void*, unsigned long); }
   void MachineCache::flush_instruction_cache_word(void* addr) { 
     const fint maxInstLen = 8; // a guess
@@ -79,15 +82,14 @@
   void MachineCache::flush_instruction_cache_word(void* addr) { }
 
   void MachineCache::flush_instruction_cache_range(void* s, void* e) {}
-  
+
 # elif TARGET_OS_VERSION == SOLARIS_VERSION \
     && TARGET_ARCH       == I386_ARCH
-  void MachineCache::flush_instruction_cache_word(void* addr) { }
+void MachineCache::flush_instruction_cache_word(void* addr) { }
 
-  void MachineCache::flush_instruction_cache_range(void* s, void* e) {}
-  
-  
+void MachineCache::flush_instruction_cache_range(void* s, void* e) {}
+
 # else
-  # error for which machine?  
+  # error for which machine?
 
 # endif

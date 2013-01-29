@@ -541,7 +541,7 @@ public:
   ByteCode bcode;
 
   BytecodeFixerUpper(methodMap *mm, oldMapList *oml, IntBList* sds) 
-    : abstract_interpreter(mm), bcode(true)  {
+    : abstract_interpreter(mm), bcode(true) {
     old_maps= oml;
     bool gotOne;
     mm->branch_targets(gotOne, &branchTargets); 
@@ -626,9 +626,10 @@ void methodMap::fix_local_bytecodes_and_links_in_myself( oldMapList* old_maps,
                                                          slotsOop outerMethod,
                                                          IntBList* stack_deltas )
 {
-  if (old_maps != NULL)
+  if (old_maps != NULL) {
     assert(codes() == old_maps->method_map->codes(),
            "old map should have same codes");
+  }
 
   BytecodeFixerUpper b(this, old_maps, stack_deltas);
   b.interpret_method();

@@ -16,6 +16,7 @@ extern "C" {
   int32 getObjectID(oop obj);
 }
 
+
 class Map {
  public:
   // testing operations

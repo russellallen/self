@@ -99,7 +99,7 @@ static const fint expOffset = fractSize;
 # define FLOAT_PRIM(name, op)                                                 \
   oop name(floatOop x, floatOop y) {                                          \
     CHECK_XY;                                                                 \
-    return as_floatOop(x->value() op y->value());              \
+    return as_floatOop(x->value() op y->value());                             \
   }
 
 FLOAT_PRIM(float_add_prim, +)
@@ -119,11 +119,12 @@ oop float_div_prim(floatOop x, floatOop y) {
 
 oop float_mod_prim(floatOop x, floatOop y) {
   CHECK_XY;
-  float yv = y->value();
+  const float xv = x->value();
+  const float yv = y->value();
   if (yv == 0) {
     return ErrorCodes::vmString_prim_error(DIVISIONBYZEROERROR);
   }
-  double res= fmod(x->value(), yv);
+  double res= fmod(xv, yv);
   return as_floatOop(res);
 }
 

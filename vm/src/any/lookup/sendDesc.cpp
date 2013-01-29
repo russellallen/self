@@ -302,7 +302,7 @@ bool sendDesc::isPrimCall() {
   bool b=    !Memory->code->contains(insts)
           && !Memory->code->stubs->contains(insts)
           && insts != lookupRoutine();
-  if (b) assert(getPrimDescOfFirstInstruction(insts, true), "not a prim call");
+  if (b)  { assert(getPrimDescOfFirstInstruction(insts, true), "not a prim call"); }
   return b;
 }
 
@@ -448,6 +448,10 @@ sendDesc* sendDesc::sendDesc_from_nmln(nmln* l) {
 // EnterSelf (<machine>.runtime.s). Lars July 92
 void sendDesc::init() {
   sendDesc::init_platform();
+  
+  # if HOST_ARCH == PPC_ARCH && TARGET_ARCH == I386_ARCH
+    if (true) return; // just testing asm
+  # endif
   sendDesc* f = sendDesc::first_sendDesc();
 
   // cannot do this test on sparc, it has a register-call which does not read as a call

@@ -8,6 +8,7 @@
  * but we need to have the Carbon header included before the other headers.
  * So we have to make an exception and not use the TARGET_OS_VERSION macro. -ma and dmu 4/02 */
 # ifdef __APPLE__
+  #  undef ASSEMBLER
   #  undef Alloc
   #  include <Carbon/Carbon.h>
 

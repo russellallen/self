@@ -3,7 +3,7 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-#include "_runtime_asm_sparc.S.incl"
+#include "_runtime_asm_gcc_sparc.S.incl"
 
 # if TARGET_OS_VERSION == SOLARIS_VERSION
 #  undef __cplusplus

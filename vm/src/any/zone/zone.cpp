@@ -120,7 +120,11 @@ zone::zone(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize) {
 }
 
 
-static const int32 branch_disp_bits = 32;
+# if TARGET_ARCH == PPC_ARCH
+  static const int32 branch_disp_bits = li_bits; 
+# else
+  static const int32 branch_disp_bits = 32;
+# endif
 
 static const uint32 maxCodeAndStubSizeForMachine =  (uint32)(1  <<  (branch_disp_bits - 1)); // -1 because disp may be + or -
 
@@ -184,6 +188,7 @@ void zone::set_sizes_and_allocate_code_and_stub_area(int32& codeSize, int32& stu
     }
           
     // allocate stubs and code together for span-limited branches -- dmu
+    // Warning: PPC Assembler::Assembler counts on stubs being after izone
     // See zone::code_start() and zone::code::end()
     bottom= (int32*)OS::allocate_idealized_page_aligned(codeAndStubSize_p, "nmethod zone (inst + stubs)", NMethodStart);
     stb= (char*)bottom + codeSize_p; 

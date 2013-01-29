@@ -7,6 +7,7 @@
   # pragma interface
 # endif
 
+
 inline smi lengthWords(smi l) { return roundTo((l), oopSize) / oopSize; }
 
 class byteVectorOopClass: public slotsOopClass {

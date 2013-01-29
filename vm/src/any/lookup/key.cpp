@@ -7,11 +7,11 @@
 # include "_key.cpp.incl"
 
 
-char* selector_string(oop selector) {
+const char* selector_string(oop selector) {
   if (selector->is_string()) {
     return stringOop(selector)->copy_null_terminated();
   } else {
-    return (char*) "<not a string>";
+    return "<not a string>";
   }
 }
 

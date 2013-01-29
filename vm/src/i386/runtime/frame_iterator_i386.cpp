@@ -64,8 +64,9 @@ void FrameIterator::do_incoming_arguments_of_vm_frame_called_from_self() {
     }      
     # if GENERATE_DEBUGGING_AIDS
       if (CheckAssertions)
-        for ( fint j = i; j  <  sizeof(RegisterString) * BitsPerByte;  ++j)
+        for ( fint j = i; j  <  sizeof(RegisterString) * BitsPerByte;  ++j)  {
           assert( !isSet(mask, j), "nonsensical bit set in mask");
+        }
     # endif
     
     for (  ;  i < nm->number_of_memory_locals();  ++i, --p ) {

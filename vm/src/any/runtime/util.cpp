@@ -147,8 +147,8 @@ int compare_bytes(const char* b1, int l1, const char* b2, int l2) {
 oop catchThisOne;
 
 void breakpoint() {
-  fint junk = 0;
-  (void)junk;
+  static fint junk = 0;
+  junk = 1;
 }
 
 void error_breakpoint() {

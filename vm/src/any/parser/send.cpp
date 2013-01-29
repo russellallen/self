@@ -168,8 +168,6 @@ bool Keyword::GenByteCodes(AbstractByteCode* b, Object* parent, bool isExpr) {
                args->Tail()->Data());
   }
   static const char* casePrefix= "__BranchIndexedBy:To:";
-  static const fint  casePrefixLength= 21;
-  assert(strlen(casePrefix) == casePrefixLength, "recount length");
   if (strncmp(msg, casePrefix, strlen(casePrefix)) == 0) {
     return GenIndexedBranch(b, parent);
   }

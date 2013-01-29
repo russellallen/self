@@ -10,6 +10,7 @@
 
 // A vframeOop represents a live activation object.  It contains enough
 // information to construct the corresponding vframe.
+
 class vframeOopClass : public slotsOopClass {
  protected:
   vframeOop _next;              // next in list of live vframeOops

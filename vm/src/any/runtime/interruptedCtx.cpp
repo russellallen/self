@@ -48,6 +48,7 @@ void InterruptedContext::fatal_menu() {
     lprintf("   4) Force a core dump\n");
     lprintf("   5) Print the interrupted context registers\n");
     lprintf("Your choice: ");
+    
     char c[255];
 
     if (fgets(c, sizeof(c), stdin) == NULL && !(feof(stdin))) {
@@ -94,7 +95,7 @@ void InterruptedContext::quit_self() {
     getchar();
     OS::terminate(1);
   }
-
+  
   if (c[0] == '\n') {
     lprintf("No snapshot specified, will skip this step\n");
   }

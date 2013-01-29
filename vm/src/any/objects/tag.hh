@@ -8,7 +8,7 @@
 # endif
 
 
-// WARNING: Duplicated in asmDefs.hh
+// WARNING: Duplicated in asmDefs.hh and asmDefs_ppc.hh
 
 const fint Int_Tag      = 0;
 const fint Mem_Tag      = 1;

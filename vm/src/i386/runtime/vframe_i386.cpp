@@ -99,7 +99,7 @@ void compiled_vframe::copy_outgoing_arg(fint argNo, NameDesc* nd2, compiled_vfra
 
 
 compiled_vframe* compiled_vframe::sendeeOrNULL_for_get_expr_stack() {
-  // From former PPC: Cannot find a register locator when this makes a dummy_vframe, so live
+  // From PPC: Cannot find a register locator when this makes a dummy_vframe, so live
   // with less info for recompilation. -- dmu 2/03
   //
   // Could maybe fix this for Intel.

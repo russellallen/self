@@ -139,9 +139,9 @@ void universe::genesis()
   falseObj = create_slots(slots);
   
   // create maps
-  smi_map   = smiMap::create_smiMap  (create_slots(slots));
-  float_map = floatMap::create_floatMap(create_slots(slots));
-  mark_map  = markMap::create_markMap();
+    smi_map  =   smiMap::create_smiMap  (create_slots(slots));
+  float_map  = floatMap::create_floatMap(create_slots(slots));
+   mark_map  =  markMap::create_markMap();
   
   // create block traits
   blockTraitsObj = create_slots(slots);
@@ -175,8 +175,8 @@ void universe::genesis()
   profilerObj = profilerMap::create_profiler();
 
   // create proxy objects
-  proxyObj    = proxyMap::create_proxy();
-  fctProxyObj = fctProxyMap::create_fctProxy();
+     proxyObj  =    proxyMap::create_proxy();
+  fctProxyObj  = fctProxyMap::create_fctProxy();
   
   // create assignment object
   assignmentObj = assignmentMap::create_assignment();

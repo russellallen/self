@@ -108,7 +108,7 @@ nmethod::nmethod(AbstractCompiler* c, bool generateDebugCode) {
   if (diLink.notEmpty()) flags.isDI = true;
   flags.level = c->level();
   if (flags.level >= MaxRecompilationLevels) { // added = zzzz
-    warning1("setting invalid nmethod level %x", flags.level);  // fix this
+    warning1("setting invalid nmethod level %ld", flags.level);  // fix this
     flags.level = 0;
   }
   flags.version = c->version();

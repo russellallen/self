@@ -332,7 +332,7 @@ oldGeneration::oldGeneration(FILE* snap, int32 initial_size,
   for (unsigned n= 0; n < nSpaces; n++) {
     char *name= new char[10];
     sprintf(name, "old%d", n);
-    s= new oldSpace(name, snap);
+    s= new oldSpace(const_cast<const char*>(name), snap);
     if (prev)
       prev->next_space= s;
     else
@@ -502,7 +502,7 @@ int oldGeneration::expand(int32 size)
 
   char *name= new char[10];
   sprintf(name, "old%d", nSpaces);
-  oldSpace *s= new oldSpace(name, size, // modifies size for amount allocated
+  oldSpace *s= new oldSpace(const_cast<const char*>(name), size, // modifies size for amount allocated
                             top_of_old_space); 
 
   if (size == 0) 

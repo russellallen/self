@@ -75,15 +75,15 @@ class SourceBuffer: public ResourceObj {
     first = NEW_RESOURCE_ARRAY( char, len);
     if (!first)
       fatal1("new failed for length %d", len);
-    next = (char*) first;
-    last = (char*) first + len;
+    next = const_cast<char*>(first);
+    last = const_cast<char*>(first + len);
   }
 
   SourceBuffer(const char *start, long len) {
     if (len < 0)
       fatal1("bad length %d for SourceBuffer", len);
-    next= (char*) (first= start);
-    last= (char*) first + len;
+    next= const_cast<char*>(first= start);
+    last= const_cast<char*>(first + len);
   }
 
   SourceBuffer(FILE* source_file);
@@ -97,7 +97,7 @@ class SourceBuffer: public ResourceObj {
   char* where() { return next; }
   fint  current_char() { return next < last ? *next : EOF; }
   void  advance() { next++; }
-  void reset() { next = (char*) first; }
+  void reset() { next = const_cast<char*>(first); }
   void pop() {
     if (next == first)
       fatal("bad pop in source buffer");
@@ -171,7 +171,7 @@ class Scanner: public StackObj {
   Token*        get_token();
   void          push_token(Token* t) { tokens = new TokenPushback(t, tokens); }
   char*         sourceAddr() { return sourceBuf->where(); }
-  const char*   lastWhiteSpaceBefore(const char* start) { 
+  const char*   lastWhiteSpaceBefore(const char* start) {
     return sourceBuf->lastWhiteSpaceBefore(start); }
   virtual void  discardInput() {
     SubclassResponsibility(); } // only applies to the interactive scanner

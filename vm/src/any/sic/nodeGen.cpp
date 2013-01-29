@@ -306,12 +306,13 @@
                                              exprStack,
                                              exprStackPRs,
                                              s );
-      if (PrintSICBranchSplitting)
+      if (PrintSICBranchSplitting) {
         if (!whyNot)
           lprintf("branch splitting succeeded\n");
         else
           lprintf("branch splitting failed: %s\n", whyNot);
-          
+      }
+      
       if ( !whyNot )
         return;
     }

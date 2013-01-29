@@ -35,7 +35,7 @@
     lprintf("SplitSig %#lx: %s", this, prefix(buf));
   }
 
-  char* SplitSig::prefix(char* buf) {
+  const char* SplitSig::prefix(char* buf) {
     // fill buf with an ASCII representation of the receiver and return buf
     // e.g. a level-2 sig with first branch = 1 and 2nd branch = 3 --> "AB"
     fint l = level();

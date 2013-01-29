@@ -268,4 +268,4 @@ class nmethod {
   void invalidate() {}
 };
 
-# endif
+# endif  //  defined(FAST_COMPILER) || defined(SIC_COMPILER)

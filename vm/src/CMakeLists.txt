@@ -462,7 +462,7 @@ set(SRC_i386
   i386/prims/prim_table_arch_i386.hh
   i386/runtime/aCompiler_i386.cpp
   i386/runtime/aCompiler_i386.hh
-  i386/runtime/asmDefs_i386.hh
+  i386/runtime/asmDefs_gcc_i386.hh
   i386/runtime/conversion_i386.cpp
   i386/runtime/conversion_i386.hh
   i386/runtime/frame_format_i386.cpp
@@ -477,7 +477,7 @@ set(SRC_i386
   i386/runtime/interruptedCtx_i386.hh
   i386/runtime/registerLocator_i386.cpp
   i386/runtime/registerLocator_i386.hh
-  i386/runtime/runtime_asm_i386.S
+  i386/runtime/runtime_asm_gcc_i386.S
   i386/runtime/runtime_i386.cpp
   i386/runtime/runtime_i386.hh
   i386/runtime/stubs_i386.cpp

@@ -95,17 +95,17 @@ const char* RegisterNames[] = {
 
 static const int staticNames = 16;
   
-char *StackRegisterNames[staticNames] = {
+const char* StackRegisterNames[staticNames] = {
   "T0", "T1", "T2", "T3", "T4", "T5", "T6", "T7", 
   "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15"
 };
 
-char *ExtraArgRegisterNames[staticNames] = {
+const char* ExtraArgRegisterNames[staticNames] = {
   "E0", "E1", "E2", "E3", "E4", "E5", "E6", "E7", 
   "E8", "E9", "E10", "E11", "E12", "E13", "E14", "E15"
 };
-char *ExtraIArgRegisterNames[staticNames] = {
-  "I0", "I1", "I2", "I3", "I4", "I5", "I6", "I7", 
+const char *ExtraIArgRegisterNames[staticNames] = {
+  "I0", "I1", "I2", "I3", "I4"* "I5", "I6", "I7",
   "I8", "I9", "I10", "I11", "I12", "I13", "I14", "I15"
 };
 
@@ -124,7 +124,9 @@ static char* locationNameHelper(Location base, int num) {
     switch (base) {
       case StackLocations:     tbl=     StackRegisterNames; break;
       case ExtraArgLocations:  tbl=  ExtraArgRegisterNames; break;
+      # if TARGET_ARCH != PPC_ARCH // same for ppc
       case ExtraIArgLocations: tbl= ExtraIArgRegisterNames; break;
+      # endif
       default: ShouldNotReachHere();
     }
     return tbl[num];

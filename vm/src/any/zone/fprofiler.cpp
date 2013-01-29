@@ -15,30 +15,24 @@
 # define PROFIL_SCALE   (0x10000 >> SHIFT)   /* see profil(2) man page */
 # define scale(offset)  ((offset >> SHIFT) / sizeof(PCounter))
 
+# if  TARGET_OS_VERSION == MACOSX_VERSION   &&  OSX_RELEASE >= MOUNTAIN_LION_RELEASE 
 
-
-# if TARGET_OS_FAMILY == MACOS_FAMILY \
-|| (defined(OSX_RELEASE) && OSX_RELEASE > LION_RELEASE)
-
-//void profil( unsigned short* /*buf*/,
-//            unsigned int    /*bufsiz*/,
-//            int    /*offset*/,
-//            unsigned int    /*scale*/ ) {
-//  fatal("unimp mac");
-//}
-
-#define profil(buf,bufsiz,offset,scale) fatal("unimp mac: profil(2) not supported")
-
-# else
+extern "C" int profil( char* /*buf*/,
+            size_t   /*bufsiz*/,
+            unsigned long    /*offset*/,
+            unsigned int    /*scale*/ ) {
+  fatal("unimp mac");
+  return 0;
+}
+# elif TARGET_OS_FAMILY == UNIX_FAMILY
 /* Pick this up from header file:
   extern "C" void profil(unsigned short *buf,
                          unsigned int bufsiz,
                          unsigned int offset,
                          unsigned int scale);
 */
-# endif
                        
-
+# endif
 
 
 FlatProfiler* flatProfiler;

@@ -139,7 +139,7 @@ interpreter* frame::get_interpreter_of_block_scope() {
 
 
 interpreter* frame::get_interpreter() {
-  //  on sparc uses sender
+  //  on sparc uses sender, on ppc, same frame
   frame* f= block_scope_of_home_frame();
   if (f == NULL)
     return NULL;
@@ -283,7 +283,9 @@ void frame::patch_compiled_self_frame(returnTrapHandlerFn new_fn) {
 // We will need the outgoing arguments of the patched frame.
 // On architectures like the PPC, we need to get this from the callee frame
 // BEFORE it returns. So get them now and save in a place findable from this frame.
-// This counts on a trampoline when going into primitives that can walk the stack
+// This counts on a trampoline when going into primitives that can walk the stack,
+// which only currently works for PPC.
+
 void frame::save_outgoing_arguments() {
   if (!SaveOutgoingArgumentsOfPatchedFrames) {
     return;

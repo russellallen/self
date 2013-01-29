@@ -486,13 +486,14 @@ CacheStub* CacheStub::copy_add_nmethod(sendDesc* send_desc,
                                        nmethod* add, mapOop receiverMapOop) {
   ResourceMark rm;
 
-  if (PrintPIC)
+  if (PrintPIC) {
     if (this)
       lprintf("*extending PIC %#lx with nmethod %#lx, map %#lx",
               this, add, receiverMapOop);
     else
       lprintf("*creating PIC with nmethod %#lx, map %#lx for old nmethod %#lx",
               add, receiverMapOop, send_desc->get_method());
+  }
 
   copy_prologue(send_desc);
 

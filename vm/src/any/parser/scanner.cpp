@@ -304,8 +304,8 @@ SourceBuffer::SourceBuffer(FILE* source_file) {
   
   first = OS::map_or_read_source_file(source_file, length);
 
-  next = (char*) first;
-  last = (char*) (first + length);
+  next = const_cast<char*>(first);
+  last = const_cast<char*>(first + length);
   
   Files->closeFile(source_file);
 } 

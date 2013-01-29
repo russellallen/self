@@ -151,9 +151,11 @@ void Conversion::init() {
   frame*           copiedFrame    = convertFrame   ->copy();
   RegisterLocator* copiedFrame_rl = convertFrame_rl->for_copied_frame(copiedFrame);
   
-  assert(copiedFrame->code() == convertNM &&
-         copiedFrame->vdepth(true) == convertFrame->vdepth(true),
-         "frame copy doesn't work");
+  # if TARGET_ARCH != PPC_ARCH  // vdepth fails for copiedFrame on PPC because it has no register locator -- dmu 12/02
+    assert(copiedFrame->code() == convertNM &&
+           copiedFrame->vdepth(true) == convertFrame->vdepth(true),
+           "frame copy doesn't work");
+  # endif
 
   // pop off the frame to be converted; use copiedFrame for the conversion
   // because the original frame will be overwritten

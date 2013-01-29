@@ -202,13 +202,14 @@ static bool recursive_method_similarity_check(oop o1, oop o2) {
 
     if (    s1->name != s2->name
         ||  s1->type != s2->type
-        ||  s1->data != s2->data)
+        ||  s1->data != s2->data) {
       if (s1->is_vm_slot())
         assert(   s1->name == VMString[SELF]
                || s1->name == VMString[LEXICAL_PARENT],
                "Found a new VM slot in a method that I may not be able to ignore");
       else
         return false;
+    }
 
     it->next();
   }

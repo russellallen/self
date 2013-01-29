@@ -28,10 +28,14 @@ typedef unsigned int    uint32;         // unsigned integer with >= 32 bits
 
 
 # if  TARGET_ARCH == SPARC_ARCH  \
+  ||  TARGET_ARCH ==   PPC_ARCH  \
   ||  TARGET_ARCH ==  I386_ARCH
   typedef int32         fint;           // fastest precision-irrelevant int
+# elif  TARGET_ARCH == M68K_ARCH
+  //typedef int16               fint;   // fastest precision-irrelevant int
+  typedef int32         fint;           // portablest precision-irrelevant int
 # else
-# error what?
+#  error Which architecture?
 # endif
 
 typedef int32 smi;
@@ -39,7 +43,9 @@ typedef unsigned char u_char;
 typedef   signed char s_char;
 typedef u_char bool8;
 
-# if COMPILER == CC_COMPILER
+# if   COMPILER == GCC_COMPILER // worse: built-in bool is an int!
+
+# elif COMPILER == CC_COMPILER
   const bool false = 0;
   const bool true  = 1;
 # endif

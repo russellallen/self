@@ -53,7 +53,7 @@ enum ProcessState {
 typedef void (*process_p)();
 
 class Process: public CHeapObj {
-  char* suspendedSP;    // process state
+  char* suspendedSP;    // process state - saved in runtime_(sparc_mac_ppc).s
   char* suspendedPC;
   
   bool pcWasSet; // Intel needs to know this

@@ -64,7 +64,7 @@ class space: public CHeapObj {
   void read_snapshot(FILE* snap, char *bottom, char *top);
 
   // destructor
-  ~space() { delete [] name; }
+  ~space() { }
 
  protected:
   void init_space(const char* nm, int32 &size, char *bottom);
@@ -77,7 +77,7 @@ class space: public CHeapObj {
   // allocators; called by new,oldGeneration, and by string and block
   // allocators.
   oop* alloc_objs_local(fint size) {
-    // was protected but neede by slotOop
+    // was protected but needed by slotOop
     oop* p = objs_top;
     oop* p1 = p + size;
     if (p1 < bytes_bottom) {

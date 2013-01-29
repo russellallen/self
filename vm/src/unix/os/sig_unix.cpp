@@ -258,6 +258,7 @@ static void signal_handler(int sig, self_code_info_t *info, self_sig_context_t *
   ||  TARGET_OS_VERSION ==  LINUX_VERSION
 
 void SignalInterface::init_signal_stack() {
+  // ensure generic val is enough for ppc
   signal_stack_size = max(1 << 15, SIGSTKSZ); // 32K should be enough
   self_stack_t ss;
   ss.ss_sp    = signal_stack = (char*)valloc(signal_stack_size);
@@ -272,6 +273,7 @@ void SignalInterface::init_signal_stack() {
 # elif TARGET_OS_VERSION == SUNOS_VERSION
 
 void SignalInterface::init_signal_stack() {
+  // ensure generic val is enough for ppc
   signal_stack_size = max(1 << 15, SIGSTKSZ); // 32K should be enough
   signal_stack = (char*)valloc(signal_stack_size);
   struct sigstack ss;

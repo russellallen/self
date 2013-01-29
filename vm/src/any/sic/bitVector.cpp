@@ -59,8 +59,9 @@
     }
 #   if GENERATE_DEBUGGING_AIDS
       if (CheckAssertions)
-        for (fint i = first; i <= last; i++)
+        for (fint i = first; i <= last; i++) {
           assert(includes(i), "bit should be set");
+        }
 #   endif
   }
 

@@ -87,5 +87,3 @@ static inline slotsOop create_slots(slotList* slots,
                                     const char* annotation = "") {
   return slotsMapDeps::create_slots(slots, annotation);
 }
-
-

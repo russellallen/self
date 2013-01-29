@@ -91,15 +91,15 @@ void InterruptedContext::setupPreemptionFromSignal() {
 
 # elif TARGET_OS_VERSION == SOLARIS_VERSION
 
-  char** InterruptedContext::pc_addr() {
-    return (char**) &((ucontext_t*) scp)->uc_mcontext.gregs[REG_PC];
-  }
-  int* InterruptedContext::sp_addr() {
-    return (int*) &((ucontext_t*) scp)->uc_mcontext.gregs[REG_SP];
-  }
-  int* InterruptedContext::ebp_addr() {
-    return (int*) &((ucontext_t*) scp)->uc_mcontext.gregs[REG_FP];
-  }
+char** InterruptedContext::pc_addr() {
+  return (char**) &((ucontext_t*) scp)->uc_mcontext.gregs[REG_PC];
+}
+int* InterruptedContext::sp_addr() {
+  return (int*) &((ucontext_t*) scp)->uc_mcontext.gregs[REG_SP];
+}
+int* InterruptedContext::ebp_addr() {
+  return (int*) &((ucontext_t*) scp)->uc_mcontext.gregs[REG_FP];
+}
 
 # else
   # error What OS version?
@@ -156,29 +156,29 @@ void InterruptedContext::print_registers() {
     lprintf("trapno    = 0x%x\n", gregs[REG_TRAPNO]);
     lprintf("err       = 0x%x\n", gregs[REG_ERR]);
     lprintf("uesp      = 0x%x\n", gregs[REG_UESP]);
-
-  # elif TARGET_OS_VERSION == SOLARIS_VERSION
-
-    greg_t *gregs = ((ucontext_t*) ic->scp)->uc_mcontext.gregs;
-    lprintf("eax       = 0x%x\n", gregs[EAX]);
-    lprintf("ebx       = 0x%x\n", gregs[EBX]);
-    lprintf("ecx       = 0x%x\n", gregs[ECX]);
-    lprintf("edx       = 0x%x\n", gregs[EDX]);
-    lprintf("esi       = 0x%x\n", gregs[ESI]);
-    lprintf("edi       = 0x%x\n", gregs[EDI]);
-    lprintf("ebp       = 0x%x\n", gregs[EBP]);
-    lprintf("esp       = 0x%x\n", gregs[ESP]);
-    lprintf("ss        = 0x%x\n", gregs[SS]);
-    lprintf("efl       = 0x%x\n", gregs[EFL]);
-    lprintf("eip       = 0x%x\n", gregs[EIP]);
-    lprintf("cs        = 0x%x\n", gregs[CS]);
-    lprintf("ds        = 0x%x\n", gregs[DS]);
-    lprintf("es        = 0x%x\n", gregs[ES]);
-    lprintf("fs        = 0x%x\n", gregs[FS]);
-    lprintf("gs        = 0x%x\n", gregs[GS]);
-    lprintf("trapno    = 0x%x\n", gregs[TRAPNO]);
-    lprintf("err       = 0x%x\n", gregs[ERR]);
-    lprintf("uesp      = 0x%x\n", gregs[UESP]);
+  
+# elif TARGET_OS_VERSION == SOLARIS_VERSION
+  
+  greg_t *gregs = ((ucontext_t*) ic->scp)->uc_mcontext.gregs;
+  lprintf("eax       = 0x%x\n", gregs[EAX]);
+  lprintf("ebx       = 0x%x\n", gregs[EBX]);
+  lprintf("ecx       = 0x%x\n", gregs[ECX]);
+  lprintf("edx       = 0x%x\n", gregs[EDX]);
+  lprintf("esi       = 0x%x\n", gregs[ESI]);
+  lprintf("edi       = 0x%x\n", gregs[EDI]);
+  lprintf("ebp       = 0x%x\n", gregs[EBP]);
+  lprintf("esp       = 0x%x\n", gregs[ESP]);
+  lprintf("ss        = 0x%x\n", gregs[SS]);
+  lprintf("efl       = 0x%x\n", gregs[EFL]);
+  lprintf("eip       = 0x%x\n", gregs[EIP]);
+  lprintf("cs        = 0x%x\n", gregs[CS]);
+  lprintf("ds        = 0x%x\n", gregs[DS]);
+  lprintf("es        = 0x%x\n", gregs[ES]);
+  lprintf("fs        = 0x%x\n", gregs[FS]);
+  lprintf("gs        = 0x%x\n", gregs[GS]);
+  lprintf("trapno    = 0x%x\n", gregs[TRAPNO]);
+  lprintf("err       = 0x%x\n", gregs[ERR]);
+  lprintf("uesp      = 0x%x\n", gregs[UESP]);
 
   # else
 	# error What OS?

@@ -9,6 +9,7 @@
 
 #include <pthread.h>
 
+
 class InterruptedContext {
  private:
   self_sig_context_t* scp;
@@ -40,9 +41,9 @@ class InterruptedContext {
 
   char**  pc_addr();
   char* pc();
-  char* next_pc();
+  char* next_pc(); // noop on PPC
   void  set_pc(void* pc);
-  void  set_next_pc(void* npc);
+  void  set_next_pc(void* npc); // noop on PPC
 
 
   int*   sp_addr();
