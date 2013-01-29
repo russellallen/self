@@ -128,9 +128,9 @@
 # define s 17
 # if TARGET_OS_VERSION == MACOSX_VERSION  &&  TARGET_ARCH == PPC_ARCH
   # ifndef GCC_OPTIMIZATION_LEVEL
-    # error The xcode project PREPROCESSOR_MACROS should include GCC_OPTIMIZATION_LEVEL=${GCC_OPTIMIZATION_LEVEL}
+    # warning The xcode project PREPROCESSOR_MACROS should include GCC_OPTIMIZATION_LEVEL=${GCC_OPTIMIZATION_LEVEL}
   # elif GCC_OPTIMIZATION_LEVEL == s
-    # error -Os breaks Self, use -O3 instead (when making a snapshot, some slots in globals are missing their annotations on the PPC)
+    # warning -Os breaks Self, use -O3 instead (when making a snapshot, some slots in globals are missing their annotations on the PPC)
   # endif
 # endif
 # undef s
