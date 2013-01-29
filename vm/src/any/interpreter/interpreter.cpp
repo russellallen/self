@@ -56,8 +56,8 @@ inline interpreter::interpreter( oop rcv,
   rcvToSend= rcv;
   selToSend= VMString[VALUE]; // just a placeholder
   return_patch_reason= not_patched;
-  current_primDesc = 0;
-  _block_scope_or_NLR_target = 0;
+  current_primDesc = NULL;
+  _block_scope_or_NLR_target = NULL;
   
   if (mi.map()->kind() == OuterMethodType) {
     setup_for_method();
@@ -95,7 +95,7 @@ inline int32 interpreter::length_cloned_blocks() { return mi.length_literals; }
 inline void  interpreter::set_cloned_blocks(void* p) { 
   cloned_blocks= (oop*)p; 
   for (int32 i = 0;  i < length_cloned_blocks();  ++i)   
-    cloned_blocks[i] = 0;
+    cloned_blocks[i] = NULL;
 }
 
 
@@ -141,7 +141,7 @@ oop interpret( oop rcv,
 void interpreter::setup_for_method() {
   self = receiver;
   hasParentLocalSlot = false;
-  parentI = 0;
+  parentI = NULL;
 }
 
 
@@ -160,7 +160,7 @@ void interpreter::setup_for_block() {
     hasParentLocalSlot = p->hasParentLocalSlot;
   }
   else {
-    parentI = 0;
+    parentI = NULL;
     ResourceMark rm; // for vf
     abstract_vframe* vf = parentVF();
     self = vf->self();
@@ -195,7 +195,7 @@ void interpreter::interpret_method() {
   for ( oop* cb = cloned_blocks;  
         cb < cloned_blocks + mi.length_literals;  
         cb++ ) {
-    if (*cb != 0) {
+    if (*cb != NULL) {
       assert_block(*cb, "must be a block");
       blockOop(*cb)->kill_block();
     }
@@ -243,7 +243,7 @@ void interpreter::do_BRANCH_INDEXED_CODE() {
 void interpreter::do_literal_code(oop lit) {
   if (lit->is_block()) {
     oop cb = cloned_blocks[is.index];
-    if (cb == 0 ) {
+    if (cb == NULL ) {
       // When mix w/ compiled code may need to clone_and_set_desc(smiOop(0))
       //  to give it new map to avoid false cache hits
       //  No, I think it's OK, cause the COMPILERS change the map
@@ -278,7 +278,7 @@ void interpreter::local_slot_desc( interpreter*& r,
                                    slotDesc*& sd) {
   
   interpreter* interp = this;
-  abstract_vframe* vf = 0;
+  abstract_vframe* vf = NULL;
   
   for ( fint i = 0;  i < is.lexical_level;  ++i) {
     if ( interp ) 
@@ -286,7 +286,7 @@ void interpreter::local_slot_desc( interpreter*& r,
         interp = interp->parentI;
       else {
         vf = interp->parentVF();  
-        interp = 0; 
+        interp = NULL; 
       }
     else {
       vf = vf->parent();
@@ -326,7 +326,7 @@ void interpreter::do_send_code(bool isSelfImplicit, stringOop selector, fint arg
   
   if      ( !isSelfImplicit )          type =         NormalLookupType;
   else if ( is.is_undirected_resend)   type =         ResendLookupType;
-  else if ( is.delegatee != 0)      type = DirectedResendLookupType;
+  else if ( is.delegatee != NULL)      type = DirectedResendLookupType;
   else                                 type =   ImplicitSelfLookupType;
         
       
@@ -469,7 +469,7 @@ oop interpreter::send_prim() {
   if (NLRSupport::have_NLR_through_C()) { // for tests unwindProtectFn2
     return NLRSupport::NLR_result_from_C(); // might be returning badOop if killing proc
   }
-  current_primDesc = 0;
+  current_primDesc = NULL;
   if (!res->is_mark())
     return res;
     
@@ -492,7 +492,7 @@ oop interpreter::send_prim() {
   
   return lookup_and_send( NormalLookupType,
                           rcvToSend,
-                          0);
+                          NULL);
 }
 
 
@@ -519,7 +519,7 @@ oop interpreter::try_perform_prim( bool hasFailBlock,
   is_perform = true;
     
   selToSend = stack[sp - arg_count];  --arg_count;
-  oop delToSend = 0;
+  oop delToSend = NULL;
   if ( strncmp(sel + performKeywordLen, "DelegatingTo:", 13) == 0) {
     performKeywordLen += 13;
     t = DelegatedPerformType;
@@ -550,7 +550,7 @@ oop interpreter::lookup_and_send( LookupType type,
     if (NLRSupport::have_NLR_through_C()) { // recursive lookup error 
       return NLRSupport::NLR_result_from_C();
     }
-    return  L.evaluateResult(&stack[sp - arg_count], arg_count, 0);
+    return  L.evaluateResult(&stack[sp - arg_count], arg_count, NULL);
   }
   else {
     FlushRegisterWindows();
@@ -561,8 +561,8 @@ oop interpreter::lookup_and_send( LookupType type,
                     delOrNameToSend,
                     mh,
                     &ivf,
-                    0,
-                    0);
+                    NULL,
+                    NULL);
                   
     // XXXXXX check code table, use compiled method, get compiler to call me
 
@@ -579,9 +579,9 @@ oop interpreter::lookup_and_send( LookupType type,
       return NLRSupport::NLR_result_from_C();
     }
   
-    return L.evaluateResult(&stack[sp - arg_count], arg_count, 0);
+    return L.evaluateResult(&stack[sp - arg_count], arg_count, NULL);
   }
-  return 0; // silence compiler
+  return NULL; // silence compiler
 }
 
 
@@ -612,7 +612,7 @@ void interpreter::print() {
   lprintf("\n\trcv: ");  receiver->print_oop();
   lprintf("\n\tself: "); self->print_oop();
   lprintf("\n\tsel: ");  selector->print_oop();
-  if (delegatee != 0) { lprintf("\n\tdel: ");  delegatee->print_oop(); }
+  if (delegatee != NULL) { lprintf("\n\tdel: ");  delegatee->print_oop(); }
   abstract_interpreter::print();
   lprintf("\n\tmethodHolder: ");  methodHolder()->print_oop();
   lprintf("\n\tpc: %d", pc);
@@ -629,7 +629,7 @@ void interpreter::print() {
     }
   }
   for (i = 0;  i < mi.length_literals;  i++) {
-    if (cloned_blocks[i] != 0) {
+    if (cloned_blocks[i] != NULL) {
       lprintf("\n\tcloned_blocks[%d] = ", i); cloned_blocks[i]->print_oop();
     }
   }

@@ -392,18 +392,18 @@ oop date_time_prim(smi day, smi msec) {
 oop convert_to_day_ms_prim(objVectorOop l, void *FH) {
   if (l->length() != 8) {
     prim_failure(FH, BADSIZEERROR);
-    return 0;
+    return NULL;
   }
   for (int i=0; i < 8; i++) {
     if (!l->obj_at(i)->is_smi()) {
       prim_failure(FH, BADTYPEERROR);
-      return 0;
+      return NULL;
     }
   }
   smi msAndDays[2];
   if (!OS::time_to_day_and_ms(l, msAndDays)) {
     prim_failure(FH, PRIMITIVEFAILEDERROR);
-    return 0;
+    return NULL;
   }
   objVectorOop res = Memory->objVectorObj->cloneSize(2);
   res->obj_at_put(0, as_smiOop(msAndDays[0]), false);
@@ -418,7 +418,7 @@ oop real_time_prim(void *FH) {
   if (as_smiOop(buf[0])->value() != buf[0] ||
       as_smiOop(buf[1])->value() != buf[1]) {
     prim_failure(FH, OVERFLOWERROR);
-    return 0;
+    return NULL;
   }
   objVectorOop res = Memory->objVectorObj->cloneSize(2);
   res->obj_at_put(0, as_smiOop(buf[0]), false);
@@ -448,7 +448,7 @@ oop primitive_list_prim(void *FH) {
   objVectorOop result= Memory->objVectorObj->cloneSize(num_of_prim, CANFAIL);
   if (oop(result) == failedAllocationOop) {
     out_of_memory_failure(FH, Memory->objVectorObj->size() + num_of_prim);
-    return 0;
+    return NULL;
   }
 
   int index = 0;
@@ -460,7 +460,7 @@ oop primitive_list_prim(void *FH) {
         oop string= oop(new_string_or_fail(prim_name));
         if (string == oop(failedAllocationOop)) {
           out_of_memory_failure(FH);
-          return 0;
+          return NULL;
         }
         result->obj_at_put(index++, string);
       }
@@ -469,7 +469,7 @@ oop primitive_list_prim(void *FH) {
 
 // Returns the documentation for a primitive
 oop primitive_documentation(const char *prim_name) {
-  if (!str_is_prim_name(prim_name)) return 0;
+  if (!str_is_prim_name(prim_name)) return NULL;
   const char* name = &prim_name[1];
   PrimDesc* e;
   for (PrimDesc** ft = primDescTable(); *ft; ft++)
@@ -479,7 +479,7 @@ oop primitive_documentation(const char *prim_name) {
           const char* doc = e->docString();
           return new_string(doc ? doc : "");
         }
-  return 0;
+  return NULL;
 }
 
 // Returns command line arguments
@@ -487,14 +487,14 @@ oop command_line_prim(void *FH) {
   objVectorOop result= Memory->objVectorObj->cloneSize(prog_argc, CANFAIL);
   if (oop(result) == failedAllocationOop) {
     out_of_memory_failure(FH, Memory->objVectorObj->size() + prog_argc);
-    return 0;
+    return NULL;
   }
 
   for (int index= 0; index < prog_argc; index++) {
     oop argi= new_string_or_fail((char*)prog_argv[index]);
     if (argi == failedAllocationOop) {
       out_of_memory_failure(FH);
-      return 0;
+      return NULL;
     }
     result->obj_at_put(index, argi);
   }
@@ -565,7 +565,7 @@ inline static void memorycopy(void *to, void *from, int size) {
 #define CONVERT_1_ARG(ctype)                                                  \
   static oop CONC(convert1arg_, ctype)(oop o1, ctype *a1) {                   \
     CONVERT_ARG(ctype, o1, a1)                                                \
-    return 0;                                                              \
+    return NULL;                                                              \
   }
 
 #define CONVERT_2_ARGS(ctype)                                                 \
@@ -573,7 +573,7 @@ inline static void memorycopy(void *to, void *from, int size) {
                          (oop o1, oop o2, ctype *a1, ctype *a2) {             \
     CONVERT_ARG(ctype, o1, a1)                                                \
     CONVERT_ARG(ctype, o2, a2)                                                \
-    return 0;                                                              \
+    return NULL;                                                              \
   }
 
 #define CONVERT_INTEGER_RESULT(ctype)                                         \

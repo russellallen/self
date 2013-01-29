@@ -70,7 +70,7 @@
   class BBDUTable : public ResourceObj {        
    unknown:
     DUInfoBList* info;          // one element per PReg used/defd
-    BBDUTable() { info = 0; }
+    BBDUTable() { info = NULL; }
 
     void print_short() { lprintf("BBDUTable %#lx", this); }
     void print();    
@@ -98,7 +98,7 @@
     bool isConstant();
     oop  constant();
     void print();
-    static CPInfo* new_CPInfo(Node* def); // may return 0 if def isn't suitable
+    static CPInfo* new_CPInfo(Node* def); // may return NULL if def isn't suitable
    protected:
     CPInfo(Node* def);
   };

@@ -125,7 +125,7 @@ class Assembler: public BaseAssembler {
   
  public:
 
-  void call( int32 d, OperandType t, Label* L = 0);
+  void call( int32 d, OperandType t, Label* L = NULL);
   void call( Location base, int32 disp = 0, OperandType t = RegisterOperand, Location index = no_reg, Scale s = by_one );
   
   void call(Label*);
@@ -141,14 +141,14 @@ class Assembler: public BaseAssembler {
   
   void jmp(Location base, int32 d = 0, OperandType t = RegisterOperand, Location index = no_reg, Scale s = by_one);
   
-  void jmp(   int32 d, OperandType t, Label* L = 0);
-  void jecxz( int32 d, OperandType t, Label* L = 0);
-  void loop(  int32 d, OperandType t, Label* L = 0);
-  void loope( int32 d, OperandType t, Label* L = 0);
-  void loopne(int32 d, OperandType t, Label* L = 0);
+  void jmp(   int32 d, OperandType t, Label* L = NULL);
+  void jecxz( int32 d, OperandType t, Label* L = NULL);
+  void loop(  int32 d, OperandType t, Label* L = NULL);
+  void loope( int32 d, OperandType t, Label* L = NULL);
+  void loopne(int32 d, OperandType t, Label* L = NULL);
 
   # define J(cond) \
-   void CONC(j,cond)( int32 d, OperandType t, Label* L = 0 ); \
+   void CONC(j,cond)( int32 d, OperandType t, Label* L = NULL ); \
    void CONC(j,cond)( Label* );
    
   J(a) J(ae) J(b) J(be) J(c) J(e) J(g) J(ge) J(l) J(le) J(na) J(nae) J(nb) J(nbe) J(nc)

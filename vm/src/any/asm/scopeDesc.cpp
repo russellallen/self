@@ -71,14 +71,14 @@ bool ScopeDesc::l_equivalent(simpleLookup* l) {
 }
 
 ScopeDesc* ScopeDesc::sender() {
-  return senderScopeOffset ? _scopes->at(_offset - senderScopeOffset) : 0; 
+  return senderScopeOffset ? _scopes->at(_offset - senderScopeOffset) : NULL; 
 }
 
 NameDesc* ScopeDesc::nameDescAt(int32 offset) {
   if (offset < _next)
     return _scopes->unpackNameDescAt(offset);
   else
-    return 0;
+    return NULL;
 }
 
 void ScopeDesc::print() {
@@ -133,7 +133,7 @@ void ScopeDesc::print() {
 
 
 void ScopeDesc::print_slots() {
-  NameDesc* nd = getNextNameDesc(0);
+  NameDesc* nd = getNextNameDesc(NULL);
   FOR_EACH_SLOTDESC(method()->map(), sd) {
     if (sd->is_obj_slot() || sd->is_arg_slot()) {
       assert( nd, "name desc is missing");
@@ -196,7 +196,7 @@ void ScopeDesc::doForNames(fint bci, nameDescStringDoFn fn) {
   // quite inefficient, but used only for debugging
   if (isCodeScope()) {
     if (!is_lite()) {  
-      NameDesc* nd = getNextNameDesc(0);
+      NameDesc* nd = getNextNameDesc(NULL);
       FOR_EACH_SLOTDESC(method()->map(), sd) {
         if (sd->is_obj_slot() || sd->is_arg_slot()) {
           assert( nd, "name desc is missing");
@@ -296,7 +296,7 @@ bool CodeScopeDesc::l_equivalent(simpleLookup* l) {
 NameDesc* CodeScopeDesc::slot(stringOop name, bool canFail) {
   if (name == VMString[SELF]) return self();
 
-  NameDesc* nd = getNextNameDesc(0);
+  NameDesc* nd = getNextNameDesc(NULL);
   FOR_EACH_SLOTDESC(method()->map(), s) {
     if (s->is_vm_slot()) continue;
     if (s->is_map_slot()) {
@@ -307,7 +307,7 @@ NameDesc* CodeScopeDesc::slot(stringOop name, bool canFail) {
     }     
   }
   if (!canFail) ShouldNotReachHere(); // slot not found
-  return 0;
+  return NULL;
 }
 
 
@@ -320,7 +320,7 @@ class trivialExprStackElemFinder: public abstract_interpreter {
   NameDesc* result;
   
   trivialExprStackElemFinder( oop meth, CodeScopeDesc* c, int32 bci) 
-   : abstract_interpreter(meth ) {  pc = bci;  csd= c;  result =0; }
+   : abstract_interpreter(meth ) {  pc = bci;  csd= c;  result =NULL; }
    
   void do_SELF_CODE() { result= csd->self(); }
   void do_READ_LOCAL_CODE();
@@ -389,7 +389,7 @@ NameDesc* CodeScopeDesc::exprStackElem(int32 bci, bool includeTrivial) {
   // exprStackBCIList contains the bcis who are described in the scopeDesc
   // so if we find our pc there, we can use its NameDesc
   IntList* exprStackBCIList = mm->expression_stack_bcis(debugMode);
-  NameDesc* nd = getNextExprDesc(0);
+  NameDesc* nd = getNextExprDesc(NULL);
   for (IntListElem* e = exprStackBCIList->head(); e; e = e->next()) {
     if (e->data() == bci) {
       // assert(!nd->isIllegal(), "shouldn't be accessing illegal name desc");
@@ -400,7 +400,7 @@ NameDesc* CodeScopeDesc::exprStackElem(int32 bci, bool includeTrivial) {
   }
 
   // haven't found it in the ScopeDesc, so it must be a trivial byte code
-  if (!includeTrivial) return 0;
+  if (!includeTrivial) return NULL;
   
   trivialExprStackElemFinder esf(m, this, bci);
   esf.interpret_bytecode();
@@ -417,7 +417,7 @@ NameDesc* CodeScopeDesc::blockElem(int32 bci) {
   methodMap* mm = (methodMap*) m->map();
     
   IntList* blockBCIList = mm->all_blocks();
-  NameDesc* nd = getNextBlockDesc(0);
+  NameDesc* nd = getNextBlockDesc(NULL);
   for (IntListElem* e = blockBCIList->head();  e;  e = e->next()) {
     if (e->data() == bci) {
       // assert(!nd->isIllegal(), "shouldn't be accessing illegal name desc");
@@ -427,7 +427,7 @@ NameDesc* CodeScopeDesc::blockElem(int32 bci) {
     nd = getNextBlockDesc(nd);
   }
   fatal("did not find block");
-  return 0;
+  return NULL;
 }
 
   
@@ -551,7 +551,7 @@ void BlockScopeDesc::printName() {
 }
 
 ScopeDesc* BlockScopeDesc::parent() {
-  return parentScopeOffset ? _scopes->at(_offset - parentScopeOffset) : 0; 
+  return parentScopeOffset ? _scopes->at(_offset - parentScopeOffset) : NULL; 
 }
 
 
@@ -630,14 +630,14 @@ void DataAssignmentScopeDesc::printName() {
   static SExpr* getSExpr(oop self_type) {
     if (self_type->is_map()) {
       if (self_type == Memory->true_mapOop()) {
-        return new ConstantSExpr(Memory->trueObj, 0, 0);
+        return new ConstantSExpr(Memory->trueObj, NULL, NULL);
       } else if (self_type == Memory->false_mapOop()) {
-        return new ConstantSExpr(Memory->falseObj, 0, 0);
+        return new ConstantSExpr(Memory->falseObj, NULL, NULL);
       } else {
-        return new MapSExpr(mapOop(self_type), 0, 0);
+        return new MapSExpr(mapOop(self_type), NULL, NULL);
       }
     } else {
-      return new ConstantSExpr(self_type, 0, 0);
+      return new ConstantSExpr(self_type, NULL, NULL);
     }
   }
   

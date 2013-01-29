@@ -62,7 +62,7 @@ oop ErrorCodes::error_message_prim(byteVectorOop errString) {
   
   char* r = ErrorCodes::os_error_message(s);
   if (r == (char*)-1 )  return errString;
-  if (r == 0      )  return ErrorCodes::vmString_prim_error(PRIMITIVEFAILEDERROR);
+  if (r == NULL      )  return ErrorCodes::vmString_prim_error(PRIMITIVEFAILEDERROR);
   else                  return new_string(r); 
 }
 

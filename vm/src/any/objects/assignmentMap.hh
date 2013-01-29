@@ -22,11 +22,11 @@ class assignmentMap: public codeLikeSlotsMap {
 
 
   // cloning
-  oop clone(oop obj, bool mustAllocate= true, oop genObj= 0) {
+  oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL) {
     Unused(obj); Unused(mustAllocate); Unused(genObj);
-    ShouldNotCallThis(); return 0;}
+    ShouldNotCallThis(); return NULL;}
   oop cloneSize(oop obj, fint length, bool mustAllocate= true,
-                oop filler= 0);
+                oop filler= NULL);
   
   // creation operation
   static assignmentOop create_assignment();

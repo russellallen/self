@@ -196,10 +196,10 @@ class    CommentNode;           // for debugging
     virtual void checkUses(PReg* r) { Unused(r); }
     
     virtual void eliminateNodeAndUsedPRs(BB* bb, PReg* r, bool removing = false,
-                                         void* misc = 0);
+                                         void* misc = NULL);
    protected:
     virtual void eliminateNode(BB* bb, PReg* r, bool removing = false,
-                               void* misc = 0) = 0;
+                               void* misc = NULL) = 0;
     
    public:
     virtual bool hasSideEffects() { return hasSideEffects_now; }
@@ -215,8 +215,8 @@ class    CommentNode;           // for debugging
     virtual bool isFailureUncommon()    { fatal("subclass"); return false; }
                         // will incorrect type produce uncommon trap?
     virtual fint numTested()            { fatal("subclass"); return 0; }
-    virtual PReg* testedReg(fint n)     { fatal("subclass"); return 0; };
-    virtual oop testedType(fint n)      { fatal("subclass"); return 0; }
+    virtual PReg* testedReg(fint n)     { fatal("subclass"); return NULL; };
+    virtual oop testedType(fint n)      { fatal("subclass"); return NULL; }
                         // mapOop of expected type for nth tested reg
     virtual void simplify(PReg* r, oop m) { fatal("subclass"); }
                         // r has map m; simplify/eliminate test if possible
@@ -226,7 +226,7 @@ class    CommentNode;           // for debugging
     virtual char* print_string(char* buf, bool printAddr = true) = 0;
     virtual bool isTrivial()            { return false; }
 
-    int32 id()              { return this == 0 ? -1 : _id; }
+    int32 id()              { return this == NULL ? -1 : _id; }
     int32 num()             { return _num; }
     SSelfScope* scope()     { return _scope; }
     fint bci()              { return _bci; }
@@ -238,8 +238,8 @@ class    CommentNode;           // for debugging
 
     virtual void verify() {}
     void printID();
-    virtual void print_succs(Node* n = 0); // for debugging
-    virtual void print_preds(Node* n = 0); // for debugging
+    virtual void print_succs(Node* n = NULL); // for debugging
+    virtual void print_preds(Node* n = NULL); // for debugging
 
 # include "_basicNode_pd.hh.incl"
   };
@@ -259,12 +259,12 @@ class    CommentNode;           // for debugging
     void removeUses(BB* bb);
     
    protected:
-    void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = 0);
+    void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = NULL);
     
    public:
     void verify();
-    void print_succs(Node* n = 0); // for debugging
-    void print_preds(Node* n = 0); // for debugging
+    void print_succs(Node* n = NULL); // for debugging
+    void print_preds(Node* n = NULL); // for debugging
   };
 
   class PrologueNode : public PNode {
@@ -315,7 +315,7 @@ class    CommentNode;           // for debugging
     ConstPRegBList constants;           // constants allocated to registers
 
     ConstInitNode() : constants(5) {
-      nextCopy = 0; // NODE_COST();    
+      nextCopy = NULL; // NODE_COST();    
     }
     bool isTrivial()            { return constants.isEmpty(); }
     fint cost()                 { return 0; }
@@ -331,7 +331,7 @@ class    CommentNode;           // for debugging
   class LoadNode : public PNode {
    unknown:
     LoadNode(PReg* d) {
-      _dest = d; assert(d, "dest is 0"); }
+      _dest = d; assert(d, "dest is NULL"); }
 
     bool hasDest()              { return true; }
     bool canCopyPropagate()     { return true; }
@@ -385,7 +385,7 @@ class    CommentNode;           // for debugging
    public:
     LoadStackNode(PReg* f, nmethod* nm_, NameDesc* n, PReg* d, oop nam)
       : LoadNode(d) {
-      frame = f; assert(f, "frame is 0"); nm = nm_;
+      frame = f; assert(f, "frame is NULL"); nm = nm_;
       nd = n; name = nam; 
       NODE_COST(LoadStackNode); }
     Node* clone(PReg* from, PReg* to);
@@ -403,7 +403,7 @@ class    CommentNode;           // for debugging
   class StoreNode : public PNode {
    unknown:
     StoreNode(PReg* s)          {
-      _src = s; assert(_src, "src is 0"); }
+      _src = s; assert(_src, "src is NULL"); }
     bool canCopyPropagate()     { return true; }
     bool canCopyPropagateOop()  { return true; }
     bool hasSrc()               { return true; }
@@ -424,7 +424,7 @@ class    CommentNode;           // for debugging
     bool needCheckStore;
 
     StoreOffsetNode(PReg* s, PReg* b, fint o, bool ncs) : StoreNode(s) {
-      base = b; assert(b, "base is 0"); offset = o; needCheckStore = ncs; }
+      base = b; assert(b, "base is NULL"); offset = o; needCheckStore = ncs; }
     Node* clone(PReg* from, PReg* to);
     inline void makeUses(BB* bb);
     inline void removeUses(BB* bb);
@@ -448,7 +448,7 @@ class    CommentNode;           // for debugging
    public:
     StoreStackNode(PReg* s, PReg* f, nmethod* nm_, NameDesc* n, oop nam)
       : StoreNode(s) {
-      frame = f; assert(f, "frame is 0"); nm = nm_;
+      frame = f; assert(f, "frame is NULL"); nm = nm_;
       nd = n; name = nam; NODE_COST(StoreStackNode); }
     Node* clone(PReg* from, PReg* to);
     inline void makeUses(BB* bb);
@@ -466,7 +466,7 @@ class    CommentNode;           // for debugging
    public:
 
     AssignNode(PReg* s, PReg* d) : StoreNode(s) {
-      _dest = d; assert(d, "dest is 0");
+      _dest = d; assert(d, "dest is NULL");
       assert(s != d, "creating dummy assignment");
       NODE_COST(AssignNode); }
     fint cost()                 { return oopSize/2; }  // assume 50% eliminated
@@ -597,16 +597,16 @@ class    CommentNode;           // for debugging
     // NB: ArithNodes are not used for tagged int arithmetic -- see TArithNode
    unknown:
     ArithOpCode op;
-    ConstPReg* constResult;     // non-0 if constant-folded
+    ConstPReg* constResult;     // non-NULL if constant-folded
    public:
     ArithNode(ArithOpCode o, PReg* s, PReg* d) {
-      op = o; _src = s; _dest = d; constResult = 0; }
+      op = o; _src = s; _dest = d; constResult = NULL; }
 
     bool canCopyPropagate()     { return true; }
     bool canCopyPropagateOop()  { return true; }
     bool hasSrc()               { return true; }
     bool hasDest()              { return true; }
-    bool isAssignmentLike()     { return constResult != 0; }
+    bool isAssignmentLike()     { return constResult != NULL; }
     inline void makeUses(BB* bb);
     inline void removeUses(BB* bb);
     inline void checkUses(PReg* r);
@@ -674,7 +674,7 @@ class    CommentNode;           // for debugging
     // If node is already deleted, I don't care.
 
     inline void eliminateNode(BB* bb, PReg* r, bool removing, 
-                              void* misc = 0) = 0; 
+                              void* misc = NULL) = 0; 
   };
   
   class TArithRRNode : public AbstractBranchNode {  
@@ -687,12 +687,12 @@ class    CommentNode;           // for debugging
 
    public:
     bool arg1IsInt, arg2IsInt;
-    ConstPReg* constResult;     // non-0 if constant-folded
+    ConstPReg* constResult;     // non-NULL if constant-folded
     TArithRRNode(ArithOpCode o, PReg* s, PReg* o2, PReg* d, bool a1, bool a2);
 
     static bool isOpInlinable(ArithOpCode o);
     
-    bool isAssignmentLike()     { return constResult != 0; }
+    bool isAssignmentLike()     { return constResult != NULL; }
     bool canCopyPropagate()     { return true; }
     bool canCopyPropagateOop()  { return true; }
     bool canCopyPropagateFrom(PReg* d);
@@ -717,14 +717,14 @@ class    CommentNode;           // for debugging
     char* print_string(char* buf, bool printAddr = true);
 
    protected:
-    inline void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = 0); 
+    inline void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = NULL); 
     bool doCopyPropagate(BB* bb, PUse* u, PReg* d, bool replace = false);
   };
 
   class CallNode : public AbstractBranchNode {
     // next1 is the NLR branch (if there is one)
    public:
-    PRegBList* exprStack;       // current expr. stack (0 if not needed)
+    PRegBList* exprStack;       // current expr. stack (NULL if not needed)
     fint argc;                  // number of args (excluding receiver)
     SplitSig* sig;      
 
@@ -745,7 +745,7 @@ class    CommentNode;           // for debugging
     void nlrCode();             // generate NLR code sequence
     
    protected:
-    inline void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = 0); 
+    inline void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = NULL); 
   };
   
   class SendNode : public CallNode {
@@ -780,7 +780,7 @@ class    CommentNode;           // for debugging
     RegisterString mask();
     
    protected:
-    void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = 0);
+    void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = NULL);
     
    public:
     void gen();
@@ -792,7 +792,7 @@ class    CommentNode;           // for debugging
     static PrimDesc* intrCheck;
     
     InterruptCheckNode(PRegBList* e, SplitSig* signal)
-      : PrimNode(intrCheck, 0, 0, e, signal, 0) {}
+      : PrimNode(intrCheck, NULL, 0, e, signal, NULL) {}
     Node* clone(PReg* from, PReg* to);
     void gen();
     char* print_string(char* buf, bool printAddr = true);
@@ -826,7 +826,7 @@ class    CommentNode;           // for debugging
     bool clonePrimFailBlock;        // true if special prim. fail. blk clone
 
     BlockCloneNode(BlockPReg* b, SplitSig* signal, bool pfb = false)
-      : PrimNode(blockClone, 0, 0, 0, signal, 0) {
+      : PrimNode(blockClone, NULL, 0, NULL, signal, NULL) {
       // call to block clone primitive takes 2 arguments (only "allocate" 1 because
       // we always have at least one other argument - the rcvr) -mabdelmalek
       theSIC->allocateArgs(1, true);
@@ -907,7 +907,7 @@ class    CommentNode;           // for debugging
     void eliminateBranch(int32 op1, int32 op2, int32 res);
     
    protected:
-    inline void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = 0);
+    inline void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = NULL);
     
    public:
     void markAllocated(fint* use_count, fint* def_count) {
@@ -999,7 +999,7 @@ class    CommentNode;           // for debugging
     inline void markAllocated(fint* use_count, fint* def_count);
     
    protected:
-    void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = 0);
+    void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = NULL);
     void eliminateAllBut(BB* bb, PReg* r, ConstPReg* c, mapOop m);
     
    public:
@@ -1063,7 +1063,7 @@ class    CommentNode;           // for debugging
     inline void markAllocated(fint* use_count, fint* def_count);
     
    protected:
-    void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = 0);
+    void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = NULL);
     void eliminateAllBut(BB* bb, PReg* r, oop constSrc);
     
    public:
@@ -1115,14 +1115,14 @@ class    CommentNode;           // for debugging
     void markAllocated(fint* use_count, fint* def_count);
     
    protected:
-    void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = 0);
+    void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = NULL);
     
    public:
     void addFlushNode(FlushNode* n);
     void gen();
    protected:
     virtual bool genAccess(Location arr, Location index, Location dest) = 0;
-    virtual Label* testArg2() { return 0; }
+    virtual Label* testArg2() { return NULL; }
   };
 
   class ArrayAtNode : public AbstractArrayAtNode {
@@ -1212,9 +1212,9 @@ class    CommentNode;           // for debugging
     void computeExposedBlocks(BlockPRegBList* l);
     
     void eliminateNodeAndUsedPRs(BB* bb, PReg* r, bool removing, 
-                                 void* misc = 0);
+                                 void* misc = NULL);
    protected:
-    inline void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = 0);
+    inline void eliminateNode(BB* bb, PReg* r, bool removing, void* misc = NULL);
     
     void flushRegister(PReg*);
 

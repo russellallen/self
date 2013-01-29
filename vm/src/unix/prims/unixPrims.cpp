@@ -191,7 +191,7 @@ extern "C" int write(int fd, const void* b, nbytes_t nbytes) {
           // sometimes forgets to restart them... arghhh!
           timeval millisecond;
           millisecond.tv_sec = 0; millisecond.tv_usec = 1000;
-          select(0, 0, 0, 0, &millisecond);
+          select(0, NULL, NULL, NULL, &millisecond);
           errno = 0;
         } else {
           return -1;    // write error
@@ -306,7 +306,7 @@ oop gethostbyname_wrap(char* name, void* FH) {
   int addrCount = 0;
   hostent* h = gethostbyname(name);
 
-  if (h == 0) { unix_failure(FH); return 0; }
+  if (h == NULL) { unix_failure(FH); return NULL; }
   for (char **p = h->h_addr_list; *p; p++) 
     addrCount++;
   objVectorOop res = Memory->objVectorObj->cloneSize(addrCount);
@@ -323,7 +323,7 @@ oop gethostbyname_wrap(char* name, void* FH) {
 
 char *gethostbyaddr_wrap(char *addr, int addrlen, int addrtype, void *FH) {
   struct hostent *h = gethostbyaddr(addr, addrlen, addrtype);
-  if (!h) { unix_failure(FH, h_errno); return 0; }
+  if (!h) { unix_failure(FH, h_errno); return NULL; }
   return h->h_name; 
 }
 
@@ -401,7 +401,7 @@ void register_file_descriptor(int fd) {
   FD_SET(fd, &r);
   FD_SET(fd, &w);
   
-  if ( select(FD_SETSIZE, &r, &w, 0, &nowait) < 0 )
+  if ( select(FD_SETSIZE, &r, &w, NULL, &nowait) < 0 )
     return;
   
   // end of check
@@ -438,7 +438,7 @@ int select_wrap(objVectorOop vec, int howMany, void *FH) {
   timeval nowait;
   nowait.tv_sec  = 0; 
   nowait.tv_usec = 0;
-  if (select(howMany, &r, &w, 0, &nowait) < 0) {
+  if (select(howMany, &r, &w, NULL, &nowait) < 0) {
     unix_failure(FH);
     return 0;
   }
@@ -462,7 +462,7 @@ int select_read_wrap(objVectorOop vec, int howMany, void *FH) {
   timeval nowait;
   nowait.tv_sec  = 0; 
   nowait.tv_usec = 0;
-  if (select(howMany, &r, 0, 0, &nowait) < 0) {
+  if (select(howMany, &r, NULL, NULL, &nowait) < 0) {
     unix_failure(FH);
     return 0;
   }
@@ -502,9 +502,9 @@ char *getcwd_wrap(void *FH) {
   char *r= getcwd(path, sizeof(path));
   if (strlen(path) >= sizeof(path))
     fatal("just checkin'");
-  if (r == 0) {
+  if (r == NULL) {
     unix_failure(FH);
-    return 0;
+    return NULL;
   }
   return path;
 }
@@ -591,10 +591,10 @@ void unixPrims_exit() { delete ioC; }
 # if TARGET_OS_VERSION == MACOSX_VERSION \
   || TARGET_OS_VERSION ==  LINUX_VERSION
   static struct utsname my_utsname;
-  char*  sysname_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)0) : my_utsname. sysname; }
-  char* nodename_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)0) : my_utsname.nodename; }
-  char*  release_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)0) : my_utsname. release; }
-  char*  version_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)0) : my_utsname. version; }
-  char*  machine_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)0) : my_utsname. machine; }
+  char*  sysname_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname. sysname; }
+  char* nodename_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname.nodename; }
+  char*  release_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname. release; }
+  char*  version_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname. version; }
+  char*  machine_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname. machine; }
 # endif
     

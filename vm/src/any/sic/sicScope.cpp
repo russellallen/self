@@ -14,7 +14,7 @@
 
 
   SendInfo::SendInfo(MethodLookupKey* k) {
-    rcvr = 0;
+    rcvr = NULL;
     l = k->lookupType;
     isSelfImplicit = (l &  ImplicitSelfBit) ? true : false;
     isUndirectedResend = baseLookupType(l) == ResendBaseLookupType;
@@ -43,11 +43,11 @@
       _senderBCI = IllegalBCI;
       depth = loopDepth = 0;
     }
-    receiver = result = nlrResult = 0;
+    receiver = result = nlrResult = NULL;
     if (info && info->resReg) {
       resultPR = info->resReg;
     } else {
-      resultPR = 0;
+      resultPR = NULL;
     }
     rscope = rs;
     if (rscope) {
@@ -67,20 +67,20 @@
         if (!vscope->vf->receiver()->map()->equal(receiver->map())) {
           // receiver types don't match (e.g. wrong branch of PIC-predicted
           // send)
-          vscope = 0;
+          vscope = NULL;
         } else if (method() != vscope->vf->method() ||
                    selector() != vscope->vf->selector()) {
           // this scope was affected by programming -- don't use it
-          vscope = 0;
+          vscope = NULL;
         }
       }
     } else {
-      vscope = 0;
+      vscope = NULL;
     }
   }
   
   void SSelfScope::addResult(SExpr* e) {
-    if (result == 0) {
+    if (result == NULL) {
       result = e;
     } else {
       result = result->mergeWith(e, result->node());
@@ -106,7 +106,7 @@
     args = NEW_RESOURCE_ARRAY(SExpr*, nslots);
     locals = NEW_RESOURCE_ARRAY(PReg*, nslots);
     fint i;
-    for (i = 0; i < nslots; i++) { args[i] = 0; locals[i] = 0; }
+    for (i = 0; i < nslots; i++) { args[i] = NULL; locals[i] = NULL; }
     method_map = (methodMap *) m->map();
     ncodes = method_map->length_codes();
     theSIC->ncodes += ncodes;
@@ -125,15 +125,15 @@
     for (i = 0; i < ncodes; i++) { regs[i] = new LongRegisterString(); }
     expressions = NEW_RESOURCE_ARRAY(PReg*, ncodes);
     pushedLocal = NEW_RESOURCE_ARRAY(PReg*, ncodes);
-    for (i = 0; i < ncodes; i++) { expressions[i] = pushedLocal[i] = 0; }
+    for (i = 0; i < ncodes; i++) { expressions[i] = pushedLocal[i] = NULL; }
     
     init_branch_targets();
         
     _scopeID = currentScopeID++;
-    scopeInfo = 0;
-    marker = 0;
+    scopeInfo = NULL;
+    marker = NULL;
     splitRegs = new PRegBList(5);
-    sig = sender ? sender->sig : 0;
+    sig = sender ? sender->sig : NULL;
     // for correct register allocation, result has to belong to sender scope
     if (!resultPR) {
       if (sender) {
@@ -158,8 +158,8 @@
         branchTargets[i] = 
           btBCIs->nth(i) || backwards_branch_targets->nth(i)
             ?  new MergeNode("br bc merge") 
-            :  0;
-        branchTargetStacks[i] = 0;
+            :  NULL;
+        branchTargetStacks[i] = NULL;
       }
     }
   }
@@ -202,7 +202,7 @@
         new MapSExpr(receiverMapOop(),
                      new SAPReg(this, IReceiverReg, false, false,
                                 PrologueBCI, ncodes-1),
-                     0);
+                     NULL);
       incoming = allocateRegister(incoming, IReceiverReg);
       FOR_EACH_SLOTDESC_N(method()->map(), s, i) {
         if (s->is_arg_slot()) {
@@ -216,7 +216,7 @@
         } 
       }
     } else {
-      self = receiver = 0;            // will be set by caller
+      self = receiver = NULL;            // will be set by caller
       // get args from sender's expression stack
       fint firstArgIndex=   sender()->exprStack->length()
                           - method()->map()->arg_count();
@@ -237,7 +237,7 @@
     theNodeGen->enterScope(this);
 
     nlrPoints = NEW_RESOURCE_ARRAY(MergeNode*, ncodes + 1);
-    for (fint i = 0; i < ncodes + 1; i++) { nlrPoints[i] = 0; }
+    for (fint i = 0; i < ncodes + 1; i++) { nlrPoints[i] = NULL; }
 
     if (isTop()) {
       theNodeGen->prologue(theSIC->needRegWindowFlushes, false, nargs);
@@ -272,7 +272,7 @@
       assert(self->scope()->isSenderOrSame(this),
              "self must be in parent scope");
       for (fint j= 0; j < nslots; j++) {
-        assert(args[j] == 0 || args[j]->scope()->isSenderOrSame(this),
+        assert(args[j] == NULL || args[j]->scope()->isSenderOrSame(this),
                "arg must be in parent scope");
       }
     }
@@ -305,11 +305,11 @@
       }
     }
     else
-      blockExprs = 0;
+      blockExprs = NULL;
   }
 
   void SCodeScope::postPrologue() {
-    if (self == 0) {
+    if (self == NULL) {
       self = receiver;
       assert(!isBlockScope(), "should set self differently");
     }
@@ -435,7 +435,7 @@
   
   void sic_code_generator::fetch_and_decode_bytecode() {
     abstract_interpreter::fetch_and_decode_bytecode();
-    expr= 0;
+    expr= NULL;
     sscope->prepareForBytecode(pc);
   }
   
@@ -497,14 +497,14 @@
     if (pc == exprStackBCIs.current) {
       // remember expr stack elem for debugging info
       sscope->exprStackElems->append(sscope->endsDead
-                                     ? 0
+                                     ? NULL
                                      : sscope->exprStack->top());
       exprStackBCIs.advance();
     }
     if (sscope->endsDead) {
       // write placeholders for the dead expr stack elems
       while (sscope->exprStackElems->length()  <  exprStackLength) {
-        sscope->exprStackElems->append(0);
+        sscope->exprStackElems->append(NULL);
       } 
     }
   }
@@ -535,7 +535,7 @@
   void SCodeScope::genCode() {
     startOfScope = (MergeNode*)theNodeGen->append(
       new MergeNode("genCode startOfScope"));
-    endOfScope = isTop() ? 0 : new MergeNode("genCode endOfScope");
+    endOfScope = isTop() ? NULL : new MergeNode("genCode endOfScope");
     
     sic_code_generator scg(this);
     
@@ -571,7 +571,7 @@
   BranchBCTargetStack* SCodeScope::getBranchTargetStack( int32 pc ) {
     // get the stack of SExprs for a branch going to bci pc
     BranchBCTargetStack*& res = branchTargetStacks[pc];
-    if ( res == 0 ) {
+    if ( res == NULL ) {
       res = new_BranchBCTargetStack( 
               this,
               backwards_branch_targets->nth(pc),
@@ -590,8 +590,8 @@
     SExpr* testExpr;
     PReg*  targetPR;
     if ( target_oop == badOop ) {
-      targetPR = 0;
-      testExpr = 0;
+      targetPR = NULL;
+      testExpr = NULL;
     }
     else {
       targetPR = new_ConstPReg( this, target_oop);
@@ -697,8 +697,8 @@
       theNodeGen->loadArg( -1, receiver->preg(), true);
       theNodeGen->append(
         new PrimNode( pd,
-                      0, 0, currentExprStack(0),
-                      0, 0));
+                      NULL, 0, currentExprStack(0),
+                      NULL, NULL));
     }
     // load home scope and other NLR registers
     SScope* s = this;
@@ -754,7 +754,7 @@
           SCodeScope* s2= (SCodeScope*)s;
           theNodeGen->move(nlrResult->preg(), s2->resultPR);
           theNodeGen->branch(s2->endOfScope);
-          s2->addResult(nlrResult->shallowCopy(s2->resultPR, 0));
+          s2->addResult(nlrResult->shallowCopy(s2->resultPR, NULL));
         }
         return;
       } 
@@ -768,7 +768,7 @@
         theNodeGen->move(nlrResult->preg(), theNodeGen->nlrResultPR);
         assert(s->isSelfScope(), "must be a SelfScope");
         SSelfScope* s2 = (SSelfScope*)s;
-        s2->addResult(nlrResult->shallowCopy(s2->resultPR, 0));
+        s2->addResult(nlrResult->shallowCopy(s2->resultPR, NULL));
       }
     }
     // jump to NLRpoint (to kill off blocks etc.)
@@ -780,7 +780,7 @@
     // EpilogueBCI would be more correct but creates lots of bugs
     _bci = ncodes - 1;
     inEpilogue = true;
-    SExpr* resExpr = 0;
+    SExpr* resExpr = NULL;
     if (!endsDead) {
       bool noNLR = exprStack->length() == 1;
       if (noNLR) {
@@ -821,7 +821,7 @@
           theNodeGen->append(new InlinedReturnNode(resExpr->preg(), resultPR));
       }
       else
-        theNodeGen->current = 0;
+        theNodeGen->current = NULL;
     }
     if (!result) {
       // scope never returns anything
@@ -840,7 +840,7 @@
   
   inline MergeNode* SCodeScope::nlrPoint(fint n) {
     // wrapper for nlrPoints array - creates merge nodes on demand
-    if (nlrPoints[n] == 0) {
+    if (nlrPoints[n] == NULL) {
       nlrPoints[n] = new MergeNode("nlrPoint n");
       nlrPoints[n]->setScope(this); // 'cause we might not be current scope
     }
@@ -872,7 +872,7 @@
 
   MergeNode* SCodeScope::nlrPoint() {
     // return nlr point for current # of blocks
-    return haveNLRPoint() ? nlrPoint(blocks->length()) : 0;
+    return haveNLRPoint() ? nlrPoint(blocks->length()) : NULL;
   }
 
   PRegBList* SCodeScope::currentExprStack(fint exclude) {
@@ -902,7 +902,7 @@
       // but we need to be able to continue NLRs, so generate code for that
       theNodeGen->current = nlrPoint(n);
       continue_NLR();
-      theNodeGen->current = 0;
+      theNodeGen->current = NULL;
       return;
     }
     // order NLR code so can share code -- so NLR point with longest
@@ -929,7 +929,7 @@
         finalReturn->append(new MethodReturnNode(offset, true,
                                                  theNodeGen->nlrResultPR));
       } else {
-        if (result == 0) {
+        if (result == NULL) {
           // normal code doesn't reach end of method, and none of our
           // blocks' NLRs was inlined
           assert(endsDead, "should have a result");
@@ -942,7 +942,7 @@
         finalReturn->append(nn);
         nn->append(endOfScope);
       }
-      theNodeGen->current = 0;
+      theNodeGen->current = NULL;
     } else {
       // can't be the target of any NLR
       continue_NLR(); 
@@ -967,7 +967,7 @@
     // primitive call or perform
     LookupType performLookupType;
     bool isPerform = checkPerformPrim(info->sel, performLookupType);
-    SExpr* rcvr = info->isSelfImplicit  ? self : 0;    
+    SExpr* rcvr = info->isSelfImplicit  ? self : NULL;    
     SPrimScope* prim;
     if (isPerform) {
       prim = new SPerformPrimScope(this, performLookupType, info->sel,
@@ -1082,7 +1082,7 @@
     // the bits corresponding to SAPRegs have already been set
     if (nsends == 0) {
       // don't need to compute masks
-      allocs = 0; // to catch bugs - shouldn't ever ask for allocs
+      allocs = NULL; // to catch bugs - shouldn't ever ask for allocs
       return;
     }
 
@@ -1331,7 +1331,7 @@
                               stringOop del,
                               fint arg_count) {
                             
-    SendInfo* info = new SendInfo(0, 0, 
+    SendInfo* info = new SendInfo(NULL, 0, 
                                   isReceiverImplicit,
                                   isUndirectedResend,
                                   sel,
@@ -1342,7 +1342,7 @@
     }
     
     LookupType lookupType;
-    if (del != 0) {
+    if (del != NULL) {
       assert(isReceiverImplicit, "directed resend must be to implicit self");
       lookupType = DirectedResendLookupType;
     }
@@ -1441,7 +1441,7 @@
   
   SScope* SMethodScope::lookup(stringOop sel, slotDesc*& sd) {
     sd = method()->find_slot(sel);
-    return sd ? this : 0;
+    return sd ? this : NULL;
   }
   
   SScope* SBlockScope::lookup(stringOop sel, slotDesc*& sd) {
@@ -1451,12 +1451,12 @@
   
   SScope* SDeadBlockScope::lookup(stringOop sel, slotDesc*& sd) {
     Unused(sel);
-    sd = 0; return 0;
+    sd = NULL; return NULL;
   }
   
   SScope* SVFrameMethodScope::lookup(stringOop sel, slotDesc*& sd) {
     sd = _vf->method()->find_slot(sel);
-    return sd ? this : 0;
+    return sd ? this : NULL;
   }
   
   SScope* SVFrameBlockScope::lookup(stringOop sel, slotDesc*& sd) {
@@ -1465,15 +1465,15 @@
   }
   
   SExpr* SCodeScope::genLocalSend( stringOop sel, slotDesc* sd, SScope* s) {
-    if (sd == 0) {
+    if (sd == NULL) {
       s = lookup(sel, sd);
     }
-    if (s != 0) {
+    if (s != NULL) {
       // found a lexically-scoped slot with this name
       // s is the scope containing the slot
       fint argc = sel->arg_count();
       assert(argc == 0 || argc == 1, "wrong number of args");
-      NameDesc* nd = 0;
+      NameDesc* nd = NULL;
       if (sd->is_map_slot() ||
           (s->isVFrameScope() &&
           (nd = s->vf()->get_name_desc(sd, true), nd && nd->isValue()))) {
@@ -1484,11 +1484,11 @@
         return new ConstantSExpr(p, reg, theNodeGen->current);
       } else {
         // generate access code
-        PReg* reg = s->isVFrameScope() ? new TempPReg(this) : 0; 
+        PReg* reg = s->isVFrameScope() ? new TempPReg(this) : NULL; 
         return genLocal(s, this, sd, argc, reg);
       }
     } else {
-      return 0;
+      return NULL;
     }
   }
   
@@ -1660,7 +1660,7 @@
     } else {
       failSelector = VMString[PRIMITIVE_FAILED_ERROR_NAME_];
       hasFailBlock = false;
-      failBlock = 0;
+      failBlock = NULL;
     }
     pd = getPrimDescOfSelector((stringOop)_selector);
     args = new SExprBList(nargs);
@@ -1670,7 +1670,7 @@
     npop = nargs;
     fint top = exprStack()->length() - 1;
     for (fint i = 0; i < nargs; i++) args->append(exprStack()->nth(top - i));
-    if (receiver == 0) {
+    if (receiver == NULL) {
       receiver = exprStack()->nth(top - nargs);
       npop++;
     }
@@ -1708,7 +1708,7 @@
             // args already popped, thus currentExprStack(0)
     theNodeGen->move(n->dest(), resultPR);
     successNode = theNodeGen->current;
-    return 0;
+    return NULL;
   }
   
   void SPrimScope::genCode() {
@@ -1744,8 +1744,8 @@
         result = new MapSExpr(Memory->byteVectorObj->map()->enclosing_mapOop(), r, c);
         break;
        case BooleanPrimType:
-        result = (new ConstantSExpr(Memory->trueObj,  r, 0))->copyMergeWith(
-          new ConstantSExpr(Memory->falseObj, r, 0),
+        result = (new ConstantSExpr(Memory->trueObj,  r, NULL))->copyMergeWith(
+          new ConstantSExpr(Memory->falseObj, r, NULL),
           r, c);
         break;
        case NoReturnPrimType:
@@ -1767,12 +1767,12 @@
   }
 
   SExpr* SPrimScope::genCall() {
-    BlockPReg* failReg = 0;
+    BlockPReg* failReg = NULL;
     if (needZap && pd->canScavenge() && failBlock->preg()->isBlockPReg()) {
       BlockPReg* r = (BlockPReg*)failBlock->preg();
       if (r->primFailBlockScope) failReg = r;
     }
-    MergeNode* nlr = pd->needsNLRCode() ? _sender->nlrPoint() : 0;
+    MergeNode* nlr = pd->needsNLRCode() ? _sender->nlrPoint() : NULL;
     PRegBList* es = currentExprStack(npop); 
     PrimNode* call =
       theNodeGen->primCall(_sender, pd, nlr, nargs, es, _sender->sig, failReg);
@@ -1780,9 +1780,9 @@
     // failure handling
     SExpr* failResult;
     if (pd->canFail()) {
-      Node* test = 0;
-      MergeNode* done = 0;
-      failResult = genPrimFailure(call, 0, test, done, resultPR);
+      Node* test = NULL;
+      MergeNode* done = NULL;
+      failResult = genPrimFailure(call, NULL, test, done, resultPR);
       // move success result to right place and merge with fail branch
       successNode = test->append1(new AssignNode(call->dest(), resultPR));
       if (done) {
@@ -1792,7 +1792,7 @@
       else
         theNodeGen->current = successNode;
     } else {
-      failResult = 0;
+      failResult = NULL;
       theNodeGen->move(call->dest(), resultPR);
       successNode = theNodeGen->current;
     }
@@ -1820,13 +1820,13 @@
   }
   
   void SPerformPrimScope::initialize() {
-    bool explicitReceiver = receiver == 0;
+    bool explicitReceiver = receiver == NULL;
     if (explicitReceiver) receiver = (SExpr*)1; // fake for SPrimSc::init
     SPrimScope::initialize();
     while (npop-- > 0) exprStack()->pop();
     if (explicitReceiver) receiver = exprStack()->pop();
     sel = args->pop(); nargs--; // subtract selector
-    del = 0;
+    del = NULL;
     if (needsDelegatee(lookupType)) {
       del = args->pop(); nargs--; // subtract delegatee
     }
@@ -1862,7 +1862,7 @@
     // load self
     if (parent()->isVFrameScope()) {
       SAPReg* selfPR = new SAPReg(this, PrologueBCI, ncodes-1);
-      self = new MapSExpr(mapOop(selfMapOop()), selfPR , 0);
+      self = new MapSExpr(mapOop(selfMapOop()), selfPR , NULL);
 
       compiled_vframe* vf = parent()->vf();
       NameDesc* selfName = vf->get_self_name();
@@ -1875,7 +1875,7 @@
       } else {
         // do dummy load to test for dead block
         theNodeGen->comment("dummy load for dead block test");
-        theNodeGen->loadSaved(t, vf->code, 0, theNodeGen->noPR, VMString[SELF]);
+        theNodeGen->loadSaved(t, vf->code, NULL, theNodeGen->noPR, VMString[SELF]);
         theNodeGen->current->hasSideEffects_now = true;
         theNodeGen->loadOop(selfName->value(), self->preg());
       }
@@ -1896,7 +1896,7 @@
     if (parent) {
       _parent = new_SVFrameScope(parent->as_compiled());
     } else {
-      _parent = 0;
+      _parent = NULL;
     }
   }
 
@@ -1921,7 +1921,7 @@
     return _vf->methodHolder_or_map(); }
   
   SDeadBlockScope::SDeadBlockScope(oop m, SendInfo* info)
-  : SBlockScope(m, 0, 0, new RNullScope(0), info) {}
+  : SBlockScope(m, NULL, NULL, new RNullScope(NULL), info) {}
   
   void SDeadBlockScope::genCode() {
     prologue();                // to create stack frame
@@ -1942,15 +1942,15 @@
       return new SVFrameBlockScope(vf);
      default:
       fatal("unexpected byte code kind");
-      return 0;
+      return NULL;
     }
   }
 
 
   SPrimScope::SPrimScope(SCodeScope* s, oop sel,
                          SExpr* rcvr, bool last)
-  : SSelfScope(s, s->rscope, 0) {
-    _selector = sel; receiver = rcvr; lastBCI = last; successNode = 0;
+  : SSelfScope(s, s->rscope, NULL) {
+    _selector = sel; receiver = rcvr; lastBCI = last; successNode = NULL;
     // for correct register allocation, result has to belong to sender scope
     if (!resultPR) {
       assert(s, "must have sender");
@@ -2120,7 +2120,7 @@
                      self->nameNode(!lite),
                      self->myMapOop(),
                      _methodHolder_or_map, lite, scopeID(),
-                     _sender ? _sender->scopeInfo : 0,
+                     _sender ? _sender->scopeInfo : NULL,
                      _senderBCI,
                      predicted);
   }
@@ -2141,7 +2141,7 @@
                               receiver->nameNode(!lite),
                               lite,
                               scopeID(),
-                              _sender ? _sender->scopeInfo : 0,
+                              _sender ? _sender->scopeInfo : NULL,
                               _senderBCI,
                               predicted);
     } else {
@@ -2150,7 +2150,7 @@
       scopeInfo = theSIC->rec->
         addBlockScope(_key, _method, _key->receiverMapOop(),
                       receiver->nameNode(!lite), p->scopeInfo, lite,
-                      scopeID(), _sender ? _sender->scopeInfo : 0,
+                      scopeID(), _sender ? _sender->scopeInfo : NULL,
                       _senderBCI, predicted);
     }
   }
@@ -2159,7 +2159,7 @@
     bool lite = isLite();
     scopeInfo = theSIC->rec->
       addDeadBlockScope(_key, _method, receiver->nameNode(!lite), lite,
-                        scopeID(), _sender ? _sender->scopeInfo : 0,
+                        scopeID(), _sender ? _sender->scopeInfo : NULL,
                         _senderBCI, predicted);
   }
 
@@ -2213,7 +2213,7 @@
     } else {
       SExpr* expr;
       val = valueFor(r, expr);
-      if (val == badOop) return 0;
+      if (val == badOop) return NULL;
       if (val->is_block()) {
         if (expr && expr->hasMap()) {
           // fabricate a dummy block with the right map
@@ -2224,7 +2224,7 @@
           // Couldn't find new map for the block; maybe the block belongs
           // to a caller nmethod?  Find out.
           frame* home = blockOop(val)->scope(true);
-          if (home == 0 ||
+          if (home == NULL ||
               (theSIC->vscopes &&
               home > theSIC->vscopes->last()->vf->fr->block_scope_of_home_frame())) {
             // ok, don't need to remap the block
@@ -2233,7 +2233,7 @@
               lprintf("*couldn't find block map for %s (oop %#lx)\n",
                       r->name(), blk);
             }
-            return 0;            // sorry, need map and couldn't find it
+            return NULL;            // sorry, need map and couldn't find it
           }
         }
       }
@@ -2258,7 +2258,7 @@
         if (args[i] && args[i]->preg()->isCPEquivalent(r)) {
           RETURN(vf->get_slot2(sd, true, true), args[i]);
         } else if (locals[i] && locals[i]->isCPEquivalent(r)) {
-          RETURN(vf->get_slot2(sd, true, true), 0);
+          RETURN(vf->get_slot2(sd, true, true), NULL);
         }
       }
     }
@@ -2277,7 +2277,7 @@
              i--) ;
         assert(i >= 0, "should have found block");
         RETURN(block, new MapSExpr(blocks->nth(i)->block->map()->enclosing_mapOop(),
-                                   blocks->nth(i), 0));
+                                   blocks->nth(i), NULL));
       }
     }
 
@@ -2292,9 +2292,9 @@
 
     // not a source-level name - may be an outgoing arg
     if (r->isArgSAPReg() && isArgRegister(r->loc)) {
-      RETURN(vf->register_contents(r->loc), 0);
+      RETURN(vf->register_contents(r->loc), NULL);
     }
-    RETURN(badOop, 0);           // not found
+    RETURN(badOop, NULL);           // not found
 #   undef RETURN
   }
 

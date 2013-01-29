@@ -35,7 +35,7 @@ class Monitor: public CHeapObj {
                                 
 
  public:
-  void activate(const char* filename = 0);
+  void activate(const char* filename = NULL);
   void deactivate();
   bool is_active()    { return _is_active; }
   

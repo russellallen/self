@@ -21,7 +21,7 @@ class ageTable: public CHeapObj {
   ageTable();
   
   // operations
-  void clear() { set_oops((oop*) &sizes[0], age_table_size, 0); }
+  void clear() { set_oops((oop*) &sizes[0], age_table_size, NULL); }
   void add(memOop p) {
     int32 age = p->mark()->age();
     assert(age >= 0 && age < age_table_size, "invalid age of object");

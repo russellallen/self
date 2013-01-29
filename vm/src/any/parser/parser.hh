@@ -47,7 +47,7 @@ class Parser: public ResourceObj {
   Expr          * parseExpr   ();
 
   Object* parseObject(char match, Token* t, fint nargs,
-                      bool methodCandidate = false, Token* anno = 0);
+                      bool methodCandidate = false, Token* anno = NULL);
 
   // nargs == 0: no argument slots allowed
   //       <  0: indefinite number of arg slots

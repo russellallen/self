@@ -43,7 +43,7 @@
 
 FlatProfiler* flatProfiler;
 typedef uint16 PCounter;
-static char* buf = 0;
+static char* buf = NULL;
 static int32 bufSize;
 
 # define bufStart  ((PCounter*) buf)
@@ -197,7 +197,7 @@ static int32 printStubNumbers() {
     if (p < e) {
       return p;
     } else {
-      return 0;
+      return NULL;
     }
   }
 # endif

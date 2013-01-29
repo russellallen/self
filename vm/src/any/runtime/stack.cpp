@@ -39,22 +39,22 @@ frame* Stack::callee_of(const frame* f) {
     assert(!p->is_first_self_frame(), "cannot find bottom of frame!");
   }
   ShouldNotReachHere(); // cannot find bottom of frame
-  return 0;
+  return NULL;
 }
 
 
 
 frame* Stack::first_VM_frame() {
   if (process->nesting == 0)
-    return 0;
+    return NULL;
   GET_LAST_FRAME(f);
   assert(f->is_aligned(), "alignment");
   frame* res = f;
   frame* senderFrame;
   for (;;) {
     senderFrame = res->sender();
-    if (senderFrame == 0)
-      return 0;
+    if (senderFrame == NULL)
+      return NULL;
     if (senderFrame->is_self_frame())
       return res;
     res = senderFrame;
@@ -68,14 +68,14 @@ frame* Stack::first_VM_frame() {
 
 frame* Stack::last_self_frame(bool includePrologue, RegisterLocator** rl) {
   frame* ff = first_VM_frame(); // sets senderFrame as side-effect
-  if (ff == 0) return 0;
+  if (ff == NULL) return NULL;
   
   frame* senderFrame = ff->sender();
   frame* result = !includePrologue  &&  senderFrame->is_in_prologue()
     ?  senderFrame->selfSender()    // if in prologue. sender is the first real frame
     :  senderFrame;                 // includePrologue means: return this frame even if nmethod is in prologue
 
-  if (rl != 0) {
+  if (rl != NULL) {
     GET_LAST_FRAME(f);
     RegisterLocator* first_rl = RegisterLocator::for_sender_of(f);
     *rl = first_rl->climb_to_frame(result);
@@ -92,7 +92,7 @@ frame* Stack::find_frame_entering(char* ep) {
   for (  frame* res = f;  res;  res = res->sender())
     if (res->c_entry_point() == ep)
       return res;    
-  return 0;
+  return NULL;
 }
 
 // If the interpreter calls a primitive which starts a non-local
@@ -110,7 +110,7 @@ frame* Stack::interpreter_frame_for_continuing_NLR_from_primitive() {
     ||   ep == first_inst_addr( InterpreterLookup_cont ))
       return res->sender();    
   }
-  return 0;
+  return NULL;
 }
 
 
@@ -135,7 +135,7 @@ void Stack::consistencyCheck(primDoFn pfn, frame* lastSelfFrame) {
   if ( lastSelfFrame->is_compiled_self_frame() ) {
 #   if defined(FAST_COMPILER) || defined(SIC_COMPILER)
     sendDesc* sd = lastSelfFrame->send_desc();
-    if (sd == 0) return;     // uncommon trap, or after fatal error
+    if (sd == NULL) return;     // uncommon trap, or after fatal error
     // sd could be a prim. call or a lookup
     // don't need to check canScavenge et al for a lookup
     if (!sd->isPrimCall()) return;
@@ -149,10 +149,10 @@ void Stack::consistencyCheck(primDoFn pfn, frame* lastSelfFrame) {
 #   endif
   } else {
     interpreter* interp = lastSelfFrame->get_interpreter();
-    assert( interp != 0,
+    assert( interp != NULL,
             "if interpreted, lastSelfFrame must be tops for this activation");
     pd = interp->getPrimDesc();
-    if (pd == 0) return;
+    if (pd == NULL) return;
   }
   pfn(pd);
 }
@@ -175,7 +175,7 @@ void Stack::frames_do(framesDoFn fn, primDoFn pfn) {
 # if  GENERATE_DEBUGGING_AIDS
     frame *ff, *fff, *ffff;
 # endif
-  for ( ; f != 0;  
+  for ( ; f != NULL;  
           f = f->sender()) {
           
     if (f->is_self_frame()) {
@@ -183,7 +183,7 @@ void Stack::frames_do(framesDoFn fn, primDoFn pfn) {
       (*fn)(f, reg_locs);
     }
     else
-      (*fn)(f, 0);
+      (*fn)(f, NULL);
       
     ++frame_count;
     assert(frame_count < 1000000, "figure-6 bug");
@@ -290,7 +290,7 @@ void Stack::enumerate_references(enumeration *e) {
 
       abstract_vframe* vf   = new_vframe(last_self_frame(false));
       abstract_vframe* tvf  = vframeOop(targetp[index + e->get_num_live_vframes()])->as_vframe();
-      abstract_vframe* prev = 0;
+      abstract_vframe* prev = NULL;
       for (  ; vf  &&  !vf->EQ(tvf);  prev = vf, vf = vf->sender()) {
         abstract_vframe* parentVF = vf->parent();
         if (parentVF && parentVF->EQ(tvf)) {
@@ -322,7 +322,7 @@ void Stack::print() {
   LOG_EVENT("VM stack dump");           // mark likely point of error
   int32 maxFrame = StackPrintLimit;
   frame* last = last_self_frame(false);
-  if (last == 0) {
+  if (last == NULL) {
     lprintf("No Self stack!\n\n");
     return;
   }
@@ -334,7 +334,7 @@ void Stack::print() {
   fint curFrame = 0;
   fint printFrame = 0;
   for (; curFrame < maxFrame;  ++curFrame) {
-    if (v == 0 || (v->is_first_self_vframe() && omitFirst)) return;
+    if (v == NULL || (v->is_first_self_vframe() && omitFirst)) return;
     if (v->print_frame(printFrame)) {
       printFrame ++;
     }
@@ -405,7 +405,7 @@ void Stack::convert() {
   ResourceMark rm;
   if (!process->inSelf()) return;
   frame* f = last_self_frame(true);
-  frame* prev = 0;
+  frame* prev = NULL;
   do {
     if (f->is_compiled_self_frame()) {
       nmethod* nm = f->code();
@@ -446,7 +446,7 @@ bool Stack::markDestroyed() {
 
 bool Stack::allocate() {
   base= AllocateHeap(size, "a process stack", false);
-  return base != 0;
+  return base != NULL;
 }
 
 void Stack::deallocate() {

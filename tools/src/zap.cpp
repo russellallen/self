@@ -47,12 +47,12 @@ int main(int argc, char **argv) {
     exit(1);
   }
 
-  if ((fin = popen(ps, "r")) == 0) {
+  if ((fin = popen(ps, "r")) == NULL) {
     fprintf( stderr, "%s: can't run %s\n", argv[0], ps);
     exit(1);
   }
 
-  if (fgets(buf, sizeof buf, fin) == 0) {
+  if (fgets(buf, sizeof buf, fin) == NULL) {
     fprintf( stderr, "cant read from process\n" );
     exit(1);
   }
@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
     exit(1);
   }
 
-  while (fgets(buf, sizeof buf, fin) != 0) {
+  while (fgets(buf, sizeof buf, fin) != NULL) {
     sscanf(buf, "%d", &pid);
     buf[strlen(buf)-1] = '\0';
     pid_text = &buf[text_pos];

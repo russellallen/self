@@ -14,7 +14,7 @@
 
 oop* dummy_vframe::register_contents_addr(Location r) {
   const bool traceRCA = false;
-  oop* old_result = 0;
+  oop* old_result = NULL;
   if (isIArgRegister(r)) {
     // the nameDesc specifies an i register, but the actual contents are
     // in saved_outregs
@@ -42,7 +42,7 @@ oop* dummy_vframe::register_contents_addr(Location r) {
 
 
 oop* compiled_vframe::register_contents_secondary_addr(Location r) {
-  return 0; // never on SPARC
+  return NULL; // never on SPARC
 }
 
 
@@ -139,7 +139,7 @@ void compiled_vframe::copy_outgoing_arg(fint argNo, NameDesc* nd2, compiled_vfra
 compiled_vframe* compiled_vframe::sendeeOrNULL_for_get_expr_stack() {
   // Cannot find a register locator when this makes a dummy_vframe, so live
   // with less info for recompilation. -- dmu 2/03
-  return 0;
+  return NULL;
 }
 
 # endif // defined(FAST_COMPILER) || defined(SIC_COMPILER)

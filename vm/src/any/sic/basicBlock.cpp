@@ -65,7 +65,7 @@
       if (isSourceOfDefUsedTwice(def, usedTwice))
         continue; // r := f(r2), and r2 is aliased preallocated - can't handle
       u = findFirstUseOfDef(def, u);
-      if (u == 0)
+      if (u == NULL)
         break; // done with this chain (or PReg)
       u = localCopyPropagateEachUseOfThisDef(dui, d, u, usedTwice);
     }
@@ -91,7 +91,7 @@
       dui->propagateTo(this, dui->reg, def, u->data(), false);
       
       u = u->next();  
-      if (u == 0) return 0; 
+      if (u == NULL) return NULL; 
       u_id = u->data()->node->num();
     }
     return u;
@@ -107,13 +107,13 @@
   PUseListElem* BB::findFirstUseOfDef(PDef* def, PUseListElem* startingUse) {
     fint d_id = def->node->num();
     for ( PUseListElem* u = startingUse;
-                        u != 0;
+                        u != NULL;
                         u = u->next() ) {
       fint u_id = u->data()->node->num();
       if (u_id >= d_id)
         return u;
     }
-    return 0;
+    return NULL;
   }
   
   
@@ -121,13 +121,13 @@
     PDefListElem* nextd = d->next();
     const fint BIG = ~(fint(1) << fint(sizeof(fint) * BitsPerByte  -  1));
     assert(sizeof(fint) != 4  ||  BIG == 0x7fffffff, "just checking");
-    return nextd == 0  ?  BIG  : nextd->data()->node->num();
+    return nextd == NULL  ?  BIG  : nextd->data()->node->num();
   }
 
 
   void BB::makeUses() {
     // collect defs and uses for all pregs (and fill pregTable in the process)
-    assert(duInfo.info == 0, "shouldn't be set");
+    assert(duInfo.info == NULL, "shouldn't be set");
     duInfo.info = new DUInfoBList(nnodes + 10);
     // note: BB may grow during loop below (inserting FlushNodes)
     // Or new BBs may be added
@@ -154,9 +154,9 @@
   }
 
   void BB::addAfter(Node* prev, Node* newNode) {
-    // prev == 0 means add as first node
+    // prev == NULL means add as first node
     assert(nnodes, "shouldn't add anything to this BB");
-    assert(prev == 0 || contains(prev), "node isn't in this BB");
+    assert(prev == NULL || contains(prev), "node isn't in this BB");
     BB* newNodeBB = this;
     if (prev) {
       prev->insertNext(newNode);
@@ -235,7 +235,7 @@
 
   PUse* BB::addUse(Node* n, PReg* r, bool soft) {
     assert(contains(n), "node isn't in this BB");
-    if (r->isNoPReg()) return 0;
+    if (r->isNoPReg()) return NULL;
     PUse* u = soft ? new PSoftUse(n) : new PUse(n);
     r->incUses(u);
     fint index = addUDHelper(r);
@@ -245,7 +245,7 @@
     
   PDef* BB::addDef(Node* n, PReg* r) {
     assert(contains(n), "node isn't in this BB");
-    if (r->isNoPReg()) return 0;
+    if (r->isNoPReg()) return NULL;
     PDef* d = new PDef(n);
     r->incDefs(d);
     fint index = addUDHelper(r);
@@ -262,7 +262,7 @@
     if (!nnodes) return;            // empty BB
 
     RegisterEqClassBList regClasses(nnodes + 1);
-    regClasses.append(0);        // first reg class has index 1
+    regClasses.append(NULL);        // first reg class has index 1
 
     fint  use_count[NumRegisters], def_count[NumRegisters];
     for (fint i = 0; i < NumRegisters; i++) use_count[i] = def_count[i] = 0;
@@ -573,9 +573,9 @@
 
 
   void BBIterator::build(Node* first) {
-    assert(bbTable == 0, "already built");
+    assert(bbTable == NULL, "already built");
     bbCount = 0;
-    pregTable = globals = 0;
+    pregTable = globals = NULL;
     buildBBs(first);
   }
 
@@ -605,7 +605,7 @@
     // predBB (which must preceede newBB).
     
     fint newBBId = predBB->id() + 1;
-    bbTable->append(0); // create place holder
+    bbTable->append(NULL); // create place holder
     for ( fint i = bbCount - 1;  i >= newBBId;  --i ) {
       BB* b = bbTable->nth(i);
       assert(b->id() == i,  "bb id must be same as bb index");
@@ -632,7 +632,7 @@
       MergeNode* loopHeadNode = ((RestartNode*)last)->loopStart;
       BB* loopHeadBB = loopHeadNode->bb();
       
-      bool wasNull = loopHeadBB == 0; // added for branch bcs
+      bool wasNull = loopHeadBB == NULL; // added for branch bcs
       if ( wasNull ) {                   // added for branch bcs
         loopHeadBB = loopHeadNode->newBB();
       }
@@ -647,7 +647,7 @@
       fint i;
       for (i = 0;  i < n;  i++) {
         Node* next = last->nexti(i);
-        if (next == 0) continue;     // for printing incomplete graphs
+        if (next == NULL) continue;     // for printing incomplete graphs
         BB* nextBB = next->newBB();
         append(i, nextBB);
       } 
@@ -662,13 +662,13 @@
   
   static void clearNodes(BB* bb) {
     for (Node* n = bb->first; n != bb->last->next(); n = n->next()) {
-      n->setBB(0);
+      n->setBB(NULL);
     }
   }
   
   void BBIterator::clear() {
     apply(clearNodes);
-    bbTable = 0; pregTable = globals = 0;
+    bbTable = NULL; pregTable = globals = NULL;
 }
 
   void BBIterator::makeUses() {
@@ -677,7 +677,7 @@
     const fint ExtraPRegs = 10;
     fint n = PReg::currentNo + ExtraPRegs;
     pregTable = new PRegBList(n);
-    for (fint i = 0; i < n; i++) pregTable->append(0);
+    for (fint i = 0; i < n; i++) pregTable->append(NULL);
     for (fint i = 0; i < bbCount; i++) { bbTable->nth(i)->makeUses(); }
     usesBuilt = true;
   }
@@ -703,7 +703,7 @@
       PReg* r = pregTable->nth(i);
       if (r) {
         if (r->isUnused()) {
-          pregTable->nthPut(i, 0);           // no longer needed
+          pregTable->nthPut(i, NULL);           // no longer needed
         } else if (r->loc == UnAllocated) {
           globals->append(r);
         } else {
@@ -922,7 +922,7 @@
     // dominated node can be eliminated
     Node* dominator = ott_tt[index];
     Node* dominated = ott_tt[ott_dominated];
-    if (dominated == dominator || dominator == 0) return;
+    if (dominated == dominator || dominator == NULL) return;
 
     if (!dominator->isFailureUncommon()) return;
 
@@ -953,7 +953,7 @@
       if (bb->last->isTypeTestLike()) {
         tt[i] = bb->last;
       } else {
-        tt[i] = 0;
+        tt[i] = NULL;
       }
     }
 

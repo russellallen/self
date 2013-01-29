@@ -64,10 +64,10 @@ class MethodLookupKey: public ScopeLookupKey {
   //  suppose an object includes a method that does a resend,
   //    by keying nmethod found for the resend on a MAP,
   //    the nmethod can be reused for clones of the object
-  // 0 if lookup not a resend;
+  // NULL if lookup not a resend;
   // badOop if not yet determined
 
-# define MH_NOT_A_RESEND 0
+# define MH_NOT_A_RESEND NULL
 # define MH_TBD          badOop
 
   oop           _methodHolder_or_map;

@@ -54,7 +54,7 @@ char* byte_map_base; // also use a register, too
 
 // define SPLimit if not kept in a register:
 
-char* SPLimit = 0;
+char* SPLimit = NULL;
 extern "C" {void set_SPLimitReg(char*); }
 void  setSPLimit(char* m)        { 
   SPLimit = m; 
@@ -78,7 +78,7 @@ void  HandleUncommonTrap()
 
 
 // Not implemented on Intel:
-char* DIRecompile_stub_returnPC = 0;
+char* DIRecompile_stub_returnPC = NULL;
 
 
 

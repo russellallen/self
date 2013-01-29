@@ -75,7 +75,7 @@ oop objVectorOopClass::ov_clone_prim(smi size, oop filler, void *FH) {
   oop c= cloneSize(size, CANFAIL, filler);
   if (c == failedAllocationOop) {
     out_of_memory_failure(FH, map()->empty_object_size() + size);
-    return 0;
+    return NULL;
   }    
   // test for scavenging
   if (ScavengeInPrimitives && Memory->needs_scavenge()) {
@@ -87,7 +87,7 @@ oop objVectorOopClass::ov_clone_prim(smi size, oop filler, void *FH) {
 
 oop objVectorOopClass::methodPointer() {
   slotDesc* methodPointerSlot = find_slot( VMString[METHOD_POINTER]);
-  return methodPointerSlot != 0
+  return methodPointerSlot != NULL
     ? get_slot(methodPointerSlot)
     : badOop;
 }
@@ -115,7 +115,7 @@ int32* objVectorOopClass::convertIntArray() {
   while (src < end) {
     oop s = *src++;
     if (!s->is_smi())
-      return 0;
+      return NULL;
     *dst++ = smiOop(s)->value();
   }
   return result;
@@ -130,10 +130,10 @@ short* objVectorOopClass::convertShortArray() {
   while (src < end) {
     oop s = *src++;
     if (!s->is_smi())
-      return 0;
+      return NULL;
     int32 v = smiOop(s)->value();
     if (int32(short(v)) != v)
-      return 0;
+      return NULL;
     *dst++ = short(v);
   }
   return result;
@@ -148,10 +148,10 @@ unsigned short* objVectorOopClass::convertUnsignedShortArray() {
   while (src < end) {
     oop s = *src++;
     if (!s->is_smi())
-      return 0;
+      return NULL;
     int32 v = smiOop(s)->value();
     if (int32((unsigned short)v) != v)
-      return 0;
+      return NULL;
     *dst++ = (unsigned short)v;
   }
   return result;
@@ -170,7 +170,7 @@ float* objVectorOopClass::convertFloatArray() {
     else if (s->is_float())
       *dst++ = floatOop(s)->value();
     else
-      return 0;
+      return NULL;
   }
   return result;
 }
@@ -187,7 +187,7 @@ void* objVectorOopClass::convertProxyArray(const void* seal) {
     if ( !s->is_proxy()  
     ||   !p->is_live()  
     ||    p->get_type_seal() != seal)
-      return 0;
+      return NULL;
 
     *dst++ = proxyOop(s)->get_pointer();
   }

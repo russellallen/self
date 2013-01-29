@@ -23,7 +23,7 @@ oop oopClass::clone_prim(void *FH) {
   oop p= clone(CANFAIL);
   if (p == failedAllocationOop) {
     out_of_memory_failure(FH, size());
-    return  0;
+    return NULL;
   }
   if (ScavengeInPrimitives && Memory->needs_scavenge()) {
     oop r = Memory->scavenge(p);
@@ -275,7 +275,7 @@ oop oopClass::quit_prim() {
     lprintf("Writing profile statistics...\n");
 # endif
   OS::terminate(0);
-  return  0;
+  return NULL;
 }
 
 oop bad_prim(oop rcvr) {
@@ -356,16 +356,16 @@ oop oopClass::unwind_protect_prim(oop doBlock, oop protectBlock) {
 
 #   if defined (FAST_COMPILER) || defined(SIC_COMPILER)
 #   define makeALookup(theLookup, r, s) \
-      cacheProbingLookup theLookup(r, s, 0, MH_TBD, vf, sendDesc::first_sendDesc(), \
-                                   0, false)
+      cacheProbingLookup theLookup(r, s, NULL, MH_TBD, vf, sendDesc::first_sendDesc(), \
+                                   NULL, false)
 #   else
 #   define makeALookup(theLookup, r, s) \
-      simpleLookup theLookup(NormalLookupType, MH_NOT_A_RESEND, r, s, 0)
+      simpleLookup theLookup(NormalLookupType, MH_NOT_A_RESEND, r, s, NULL)
 #   endif
         
     makeALookup( L, doBlock, VMString[VALUE] );
     
-    nmethod* nm =  0;
+    nmethod* nm = NULL;
     if (Interpret)
       L.perform_full_lookup_n(0);
     else {
@@ -400,13 +400,13 @@ oop oopClass::unwind_protect_prim(oop doBlock, oop protectBlock) {
     NLRSupport::reset_have_NLR_through_C();    // forget the old NLR, for now
 
     bool original_aborting = res->is_mark();
-    assert( res == badOop  ||  res == 0  ||  OriginalNLRHomeFromC != 0,
+    assert( res == badOop  ||  res == 0  ||  OriginalNLRHomeFromC != NULL,
            "if not aborting, must have a how frame");
     
     // lookup nmethod for 2nd value: message send
     makeALookup( Ltwo, protectBlock, VMString[VALUE_] );
                             
-    nmethod* nm2 =  0;
+    nmethod* nm2 = NULL;
     if (Interpret)
       Ltwo.perform_full_lookup_n(1);
     else {
@@ -472,7 +472,7 @@ oop oopClass::define_prim(oop contents, void *FH) {
   oop result= define(contents);
   if (result == failedAllocationOop) {
     out_of_memory_failure(FH, contents->size());
-    return  0;
+    return NULL;
   }
   if (bootstrapping || result->is_mark()) {
     // can't call convert() while creating lobby!

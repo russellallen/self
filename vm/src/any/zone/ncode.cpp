@@ -248,7 +248,7 @@ NCodeBase* findThing(void* addr) {
     assert(nmethod::isNMethod(n), "not a method");
     return n;
   } else {
-    return 0;
+    return NULL;
   }
 }  
 

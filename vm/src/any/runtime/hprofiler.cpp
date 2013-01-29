@@ -30,7 +30,7 @@ class pnodeBase {
   virtual ~pnodeBase() {};
 };
 
-static pnode* newList = 0;   // list of pnodes with new oops
+static pnode* newList = NULL;   // list of pnodes with new oops
 
 class pnode : public pnodeBase {      // node in profiled calling tree
 public:
@@ -48,12 +48,12 @@ public:
  
   pnode(oop meth, oop sel, bool isAcc) {
     method = meth; selector = sel; isAccess = isAcc;
-    callee = next = 0;
+    callee = next = NULL;
     _ticks[0] = _ticks[1] = _ownTicks[0] = _ownTicks[1] = 0;
     if (is_new()) {
       nextNew = newList->nextNew; newList->nextNew = this;
     } else {
-      nextNew = 0;
+      nextNew = NULL;
     }
   }
 
@@ -124,7 +124,7 @@ static int32   nleaves;         // # elements in leaves
 void pnode::dealloc() {
 # if  GENERATE_CODE_TO_AID_DEBUGGING_ALLOC
     ref_ptr = this;             // wish we had GC...
-    last_ref = 0;
+    last_ref = NULL;
     hprofiler->top->pnodeDo(count_ref_fn);
     lprintf("deleting %#lx ", this);
 #endif
@@ -163,7 +163,7 @@ void pnode::sort() {
     for ( ; n > 0; n--) {
       pns[n]->next = pns[n-1];
     }
-    pns[0]->next = 0;
+    pns[0]->next = NULL;
 #   if GENERATE_DEBUGGING_AIDS
       if (CheckAssertions) {
         for (p = callee; p->next; p = p->next) {
@@ -188,7 +188,7 @@ void pnode::printSelf(float percent) {
   if (isTop()) return;          // dummy top node
   printNum(percent);
   if (isAccess) {
-    printName(0, selector);
+    printName(NULL, selector);
     lprintf(" (slot accessor)");
   } else {
     printName((methodMap*) method->map(), selector);
@@ -257,7 +257,7 @@ void pnode::addLeaf() {
   // not there -- add a copy of myself
   leaves[nleaves] = new pnode(method, selector, isAccess);
   *leaves[nleaves] = *this;
-  leaves[nleaves]->next = leaves[nleaves]->callee = 0;
+  leaves[nleaves]->next = leaves[nleaves]->callee = NULL;
   nleaves++;
 }
 
@@ -271,10 +271,10 @@ bool pnode::equal(nmethod* nm) {
 }
 
 void HProfiler::reset() {
-  if (top) { top->dealloc(); top= 0; }
-  p = 0;
+  if (top) { top->dealloc(); top= NULL; }
+  p = NULL;
   ticks = gcTicks = lookupTicks = compilerTicks = primTicks = 0;
-  if (newList) { delete newList; newList= 0; }
+  if (newList) { delete newList; newList= NULL; }
 }
 
 // Would be safer to synchronize with Self (wait til next interrupt point)
@@ -293,7 +293,7 @@ void HProfiler::start(Process* pr) {
 
 void HProfiler::stop() {
   IntervalTimer::CPU_timer()->withdraw(htick);
-  p = 0;
+  p = NULL;
 }
 
 nmethod** nms;
@@ -432,8 +432,8 @@ void HProfiler::print_hp(float fcutoff, float fskip, smi maxDepth) {
       delete leaves[i];
     }
   }
-  leaves = 0;
-  top->prefix = 0;
+  leaves = NULL;
+  top->prefix = NULL;
 }
 
 static oop start_cont_p;
@@ -457,13 +457,13 @@ static void print_profile_cont() {
 static void newListDo(pnodeDoFn f) {
   pnode* prev = newList;
   pnode* pn;
-  while ((pn = prev->nextNew) != 0) {
+  while ((pn = prev->nextNew) != NULL) {
     f(pn);
     if (pn->is_new()) {
       prev = pn;
     } else {
       prev->nextNew = pn->nextNew;      // no longer new -- remove from list
-      pn->nextNew = 0;
+      pn->nextNew = NULL;
     }
   }
 }
@@ -493,7 +493,7 @@ static void pnode_verify(pnode* pn) {
 
 HProfiler::HProfiler() {
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
-  top = 0;
+  top = NULL;
   reset();
 # endif
 }

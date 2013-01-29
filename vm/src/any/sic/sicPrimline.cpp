@@ -14,14 +14,14 @@
 
 SExpr* SPrimScope::tryConstantFold() {
     const fint MaxPrimArgs = 5; // fix switch stmt below when increasing this
-    if (!pd->canBeConstantFolded() || nargs > MaxPrimArgs) return 0;
+    if (!pd->canBeConstantFolded() || nargs > MaxPrimArgs) return NULL;
     oop a[MaxPrimArgs];         // argument oops
-    if (!receiver->isConstantSExpr()) return 0;
+    if (!receiver->isConstantSExpr()) return NULL;
     oop r = receiver->constant();
     // get arguments (NB: args is in reverse order)
     fint i;
     for (i = 0; i < nargs; i++) {
-      if (!args->nth(i)->isConstantSExpr()) return 0;
+      if (!args->nth(i)->isConstantSExpr()) return NULL;
       a[nargs - i - 1] = args->nth(i)->constant();
     };
     // ok, all args are consts: call the primitive
@@ -55,9 +55,9 @@ SExpr* SPrimScope::tryConstantFold() {
       // primitive will always fail
       ConstPReg* error = new_ConstPReg(_sender, res->memify());
       Node* dummy;
-      MergeNode* mdummy = 0;
+      MergeNode* mdummy = NULL;
       SExpr* failExpr =
-        genPrimFailure(0, error, dummy, mdummy, resultPR, false);
+        genPrimFailure(NULL, error, dummy, mdummy, resultPR, false);
       return failExpr;
     } else {
       theNodeGen->loadOop(res, resultPR);
@@ -76,14 +76,14 @@ SExpr* SPrimScope::tryConstantFold() {
 
   SExpr* SPrimScope::tryTypeCheck() {
     // for inlined prims, try to see if primitive will always fail
-    if (!InlinePrimitives) return 0;
+    if (!InlinePrimitives) return NULL;
     
     bool fail = false;
     switch (pd->type()) {
      case NotReallyAPrimitive:
      case InternalPrimitive:
       fatal("cannot call an internal primitive from Self code");
-      return 0;
+      return NULL;
      case IntComparisonPrimitive:
      case IntArithmeticPrimitive:
       // must have two smis
@@ -120,27 +120,27 @@ SExpr* SPrimScope::tryConstantFold() {
       break;
 
      default:
-      return 0;          
+      return NULL;          
     }
     
     if (fail) {
       // primitive will always fail
       ConstPReg* error = new_ConstPReg(_sender, VMString[BADTYPEERROR]);
       Node* dummy;
-      MergeNode* mdummy = 0;
-      return genPrimFailure(0, error, dummy, mdummy, resultPR, false);
+      MergeNode* mdummy = NULL;
+      return genPrimFailure(NULL, error, dummy, mdummy, resultPR, false);
     } else {
-      return 0;
+      return NULL;
     }
   }
 
   SExpr* SPrimScope::tryInline() {
-    if (!InlinePrimitives) return 0;
+    if (!InlinePrimitives) return NULL;
     switch (pd->type()) {
      case NotReallyAPrimitive:
      case InternalPrimitive:
       fatal("cannot call an internal primitive from Self code");
-      return 0;
+      return NULL;
      case ClonePrimitive:
       return inlineClone(); break;
      case IntComparisonPrimitive:
@@ -170,9 +170,9 @@ SExpr* SPrimScope::tryConstantFold() {
      case FloatComparisonPrimitive:
      case ExternalPrimitive:        // can't inline these
      default:
-      return 0;          
+      return NULL;          
     }
-    return 0;
+    return NULL;
   }
 
   ConstPReg* SPrimScope::truePR() {
@@ -208,7 +208,7 @@ SExpr* SPrimScope::tryConstantFold() {
   SExpr* SPrimScope::inlineClone() {
     // clones aren't really inlined, but can call specialized version if size
     // is known
-    if (!receiver->hasMap()) return 0;
+    if (!receiver->hasMap()) return NULL;
 
     Map* map = receiver->map();
     if (map->is_smi() || map->is_float() || map->is_string()) {
@@ -222,7 +222,7 @@ SExpr* SPrimScope::tryConstantFold() {
 
     if ( map->empty_object_size() != EMPTY_SLOTS_OOP_SIZE  // inlined clone method assumes this
     ||  !map->can_inline_clone())
-      return 0;
+      return NULL;
 
     fint slotCount = map->length_obj_slots();
     if (slotCount < 10) {
@@ -230,7 +230,7 @@ SExpr* SPrimScope::tryConstantFold() {
       pd = getPrimDescOfSelector(VMString[_CLONE_0 + slotCount], true);
       assert(pd->type() == InternalPrimitive, "should be internal");
     }
-    return 0;
+    return NULL;
   }
 
 
@@ -254,7 +254,7 @@ SExpr* SPrimScope::tryConstantFold() {
                                "", ArithOpName[op]);
 
     if (!TArithRRNode::isOpInlinable(op))
-      return 0;
+      return NULL;
       
     NodeGen* n = theNodeGen;
     Node* arith = n->append(new TArithRRNode(op, receiver->preg(), arg->preg(),
@@ -305,7 +305,7 @@ SExpr* SPrimScope::tryConstantFold() {
         n->branch(cont);
       }
       Node* dummy;
-      SExpr* failExpr = genPrimFailure(0, error, dummy, done, resultPR);
+      SExpr* failExpr = genPrimFailure(NULL, error, dummy, done, resultPR);
       assert(done, "merge should always exist");
       return succExpr->mergeWith(failExpr, done);
     }
@@ -326,7 +326,7 @@ SExpr* SPrimScope::tryConstantFold() {
     } else if (_selector == VMString[_INT_NE_]) {
       cond = NEBranchOp;
     } else {
-      return 0;
+      return NULL;
     }
 
     bool intRcvr =
@@ -370,7 +370,7 @@ SExpr* SPrimScope::tryConstantFold() {
         PReg* err = new_ConstPReg(_sender, VMString[BADTYPEERROR]);
         n->current = branch->append(2, new AssignNode(err, error));
         Node* dummy;
-        SExpr* failExpr = genPrimFailure(0, error, dummy, done, resultPR);
+        SExpr* failExpr = genPrimFailure(NULL, error, dummy, done, resultPR);
         assert(done, "merge should always exist");
         res = (MergeSExpr*)res->mergeWith(failExpr, done);
       }
@@ -391,7 +391,7 @@ SExpr* SPrimScope::tryConstantFold() {
     }
     if (!okRcvr) {
       // receiver type not known statically
-      return 0;
+      return NULL;
     }
     if (PrintInlining)
       lprintf("%*s*inlining %s\n", (void*)(depth-1), "",
@@ -421,7 +421,7 @@ SExpr* SPrimScope::tryConstantFold() {
     }
     if (!okRcvr) {
       // receiver type not known statically
-      return 0;
+      return NULL;
     }
     if (PrintInlining)
       lprintf("%*s*inlining %s\n", (void*)(depth-1), "",
@@ -437,7 +437,7 @@ SExpr* SPrimScope::tryConstantFold() {
       sender()->rscope->isUncommonAt(sender()->bci(), true);
     // optimization: don't set error reg if using uncommon trap
     // (primitive will be reexecuted anyway)
-    PReg* errorPR = useUncommonTrap ? 0 : new SAPReg(_sender, b, b);
+    PReg* errorPR = useUncommonTrap ? NULL : new SAPReg(_sender, b, b);
     Node* at;
     if (objVector) {
       fint size = ((slotsMap*)rm)->empty_vector_object_size();
@@ -465,7 +465,7 @@ SExpr* SPrimScope::tryConstantFold() {
       ng->current = done;
     } else {
       Node* dummy;
-      SExpr* failExpr = genPrimFailure(0, errorPR, dummy, done, resultPR);
+      SExpr* failExpr = genPrimFailure(NULL, errorPR, dummy, done, resultPR);
       assert(done, "merge should exist");
     }
     return new UnknownSExpr(resultPR, ok);
@@ -486,7 +486,7 @@ SExpr* SPrimScope::tryConstantFold() {
     }
     if (!okRcvr) {
       // receiver type not known statically
-      return 0;
+      return NULL;
     }
     if (PrintInlining)
       lprintf("%*s*inlining _%sAtPut:\n", (void*)(depth-1),
@@ -500,7 +500,7 @@ SExpr* SPrimScope::tryConstantFold() {
     bool willFail = arg->hasMap() && arg->map() != Memory->smi_map;
     bool useUncommonTrap = !willFail && theSIC->useUncommonTraps &&
       sender()->rscope->isUncommonAt(sender()->bci(), true);
-    PReg* errorPR = useUncommonTrap ? 0 : new SAPReg(_sender, b, b);
+    PReg* errorPR = useUncommonTrap ? NULL : new SAPReg(_sender, b, b);
     Node* at;
     if (objVector) {
       PReg* elementArgPR = args->nth(0)->preg();
@@ -538,7 +538,7 @@ SExpr* SPrimScope::tryConstantFold() {
       ng->current = done;
     } else {
       Node* dummy;
-      SExpr* failExpr = genPrimFailure(0, errorPR, dummy, done, resultPR);
+      SExpr* failExpr = genPrimFailure(NULL, errorPR, dummy, done, resultPR);
       assert(done, "node should always exist");
       res = res->mergeWith(failExpr, done);
     }
@@ -550,10 +550,10 @@ SExpr* SPrimScope::tryConstantFold() {
                                     PReg* resultReg, bool failure) {
     // generate primitive failure code
     // two modes:
-    //    if call == 0, omit the test for failure because it's already
+    //    if call == NULL, omit the test for failure because it's already
     //          been generated (inlined prim.); in this case, errorReg
     //          must be set
-    //    if call != 0, generate test code (setting test & merge node args)
+    //    if call != NULL, generate test code (setting test & merge node args)
     // returns the result of the failure branch
 
     // pop prim args (they're not on the expr stack anymore in the fail branch)
@@ -577,10 +577,10 @@ SExpr* SPrimScope::tryConstantFold() {
 
     SExpr* failReceiver = hasFailBlock ? failBlock : receiver;
     SendInfo* info = new SendInfo(failReceiver, NormalLookupType, false, false,
-                                  (stringOop)failSelector, 0);
+                                  (stringOop)failSelector, NULL);
     info->computeNSends(rscope, bci());
     info->primFailure = failure;
-    info->restartPrim = call == 0;   // restart inlined prims (unc. traps)
+    info->restartPrim = call == NULL;   // restart inlined prims (unc. traps)
     s->exprStack->push(failReceiver);
     if (errorReg->isConstPReg()) {
       s->exprStack->push(new ConstantSExpr(((ConstPReg*)errorReg)->constant,
@@ -590,12 +590,12 @@ SExpr* SPrimScope::tryConstantFold() {
                                       errorReg, ng->current));
     }
     ConstPReg* failSelReg = new_ConstPReg(s, selector());
-    s->exprStack->push(new ConstantSExpr(selector(), failSelReg, 0));
+    s->exprStack->push(new ConstantSExpr(selector(), failSelReg, NULL));
     SExpr* res = s->inlineSend(info);
 
     if (res->isNoResultSExpr()) {
       // never returns
-      ng->current = merge; // set to 0 if no merge
+      ng->current = merge; // set to NULL if no merge
     } 
     else {
       if (needZap) {
@@ -606,7 +606,7 @@ SExpr* SPrimScope::tryConstantFold() {
       res = res->shallowCopy(resultReg, ng->current);
       // moved creation down from before if res->isNoResult... 
       //   to avoid creating unreachable merge -- dmu
-      if (merge == 0) merge = new MergeNode("genPrimFailure merge"); 
+      if (merge == NULL) merge = new MergeNode("genPrimFailure merge"); 
       ng->append(merge);
     }
     return res;

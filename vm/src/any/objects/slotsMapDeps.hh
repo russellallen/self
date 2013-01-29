@@ -36,7 +36,7 @@ class slotsMapDeps: public slotsMap {
  protected:
   // chain functions
   static int32 map_chain_offset() {
-    return (int32) (((slotsMapDeps*) 0)->map_chain());
+    return (int32) (((slotsMapDeps*) NULL)->map_chain());
   }
 
   friend slotsMapDeps* map_from_map_chain(nmln* p);
@@ -65,7 +65,7 @@ class slotsMapDeps: public slotsMap {
 
   // dependents operations
   virtual bool can_have_dependents() { return true; }
-  bool has_slot_dependents() { return dependents != 0; }
+  bool has_slot_dependents() { return dependents != NULL; }
   nmln *dependents_for_slot(slotDesc *);
   void moveDeps(nmln* newDeps, int32 delta);
 

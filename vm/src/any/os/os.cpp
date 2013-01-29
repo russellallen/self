@@ -17,7 +17,7 @@ extern "C" {
 
 // expand ~/asfd/wert/sd or ~user/wer/wer/sdf
 // out is OS::max_path_length long
-// returns 0 if successful; otherwise returns an error string
+// returns NULL if successful; otherwise returns an error string
 char* OS::expand_unix_dir(const char* in,  char* out) {
   static char err[max_path_length + 50];
   char* dirName = (char*) "";
@@ -28,12 +28,12 @@ char* OS::expand_unix_dir(const char* in,  char* out) {
       return err;
     }
     strcpy(out, in);
-    return 0;
+    return NULL;
   }
   
   // slash is location of slash after user name
   const char* slash = strchr(in, '/');  
-  if (slash == 0)  
+  if (slash == NULL)  
     slash = in + strlen(in);
   
   if (in + 1  ==  slash) {
@@ -52,7 +52,7 @@ char* OS::expand_unix_dir(const char* in,  char* out) {
     return err;
   }
   sprintf(out, "%s%s", dirName, slash);
-  return 0;
+  return NULL;
 }
 
 
@@ -74,7 +74,7 @@ bool OS::expand_user_name(const char* in, const char* slash, char*& dirName) {
   strncpy(user, in + 1,  slash - (in + 1));
   user[slash - (in + 1)] = '\0';
   dirName = get_user_directory(user);
-  if (dirName == 0) {
+  if (dirName == NULL) {
     static char err[max_path_length + 50];
     sprintf(err, "unable to find a home directory for user: %s\n", user);
     dirName = err;
@@ -87,7 +87,7 @@ bool OS::expand_user_name(const char* in, const char* slash, char*& dirName) {
 // is f a pipe?  cache a result to speed things up
 bool OS::is_pipe(FILE *f) {
   static bool lastAns;
-  static FILE *last= 0;
+  static FILE *last= NULL;
   static int fd= -1;
   if (f == last  &&  fileno(f) == fd) return lastAns;
   last = f;
@@ -127,7 +127,7 @@ char* OS::allocate_idealized_page_aligned(int32 &size, const char *name,
   assert(idealized_page_size % get_page_size() == 0, "page size mismatch");
   char* b = allocate_heap_aligned(desiredAddress, size, idealized_page_size,
                                     name, mustAllocate);
-  if (b == 0) size= 0;
+  if (b == NULL) size= 0;
   return b;
 }
 
@@ -205,7 +205,7 @@ bool OS::expand_dir(const char* in,  char* out) { // returns true on success
   }
   char* err = expand_unix_dir(in, mid);
   convert_unix_filename(mid, out);
-  if ( err != 0 ) {
+  if ( err != NULL ) {
     warning(err);
     return false;
   }
@@ -219,7 +219,7 @@ char* OS::ExpandDir_prim(const char* in, void* FH) {
   char* err = OS::expand_unix_dir(in, mid);
   if (err) {
     failure(FH, err);
-    return 0;
+    return NULL;
   }
   OS::convert_unix_filename(mid, out);
   return out;
@@ -305,7 +305,7 @@ int OS::simulated_getopt(int argc,  char* const* argv,  const char* optstring) {
     return EOF;
   }
   
-  optarg = 0;
+  optarg = NULL;
   for ( const char* osp = optstring;  *osp;  ++osp) {
     if ( *osp == ':' ) continue;
     if ( *osp != c   ) continue;

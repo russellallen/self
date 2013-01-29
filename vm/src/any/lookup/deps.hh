@@ -18,7 +18,7 @@ private:
   
 public:
   dependencyList() {
-    if (dependentsArrayS == 0)
+    if (dependentsArrayS == NULL)
       dependentsArrayS = (nmln*)
         AllocateHeap(DependentsArraySize * sizeof(nmln), "dependents buffer");
     top = dependentsArrayS; }
@@ -69,7 +69,7 @@ class assignableDependencyList: public ResourceObj {
   objectLookupTarget** top;
   
   assignableDependencyList() {
-    if (dependentsArrayS == 0)
+    if (dependentsArrayS == NULL)
       dependentsArrayS = (objectLookupTarget**)
         AllocateHeap(AssignableDependentsArraySize *
                      sizeof(objectLookupTarget*),

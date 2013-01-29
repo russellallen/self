@@ -9,7 +9,7 @@
 mirrorOop mirrorMap::create_mirror(oop reflectee) {
   slotList* slots = new slotList(VMString[PARENT], 
                                  parent_map_slotType,
-                                 create_slots((slotList*)0));
+                                 create_slots((slotList*)NULL));
   mirrorMap mm;
   mirrorOop mr;
   (void)create_map(sizeof(mirrorMap), slots, &mm, (oop*)&mr);

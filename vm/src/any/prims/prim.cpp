@@ -1028,7 +1028,7 @@ fntype(&call_and_convert5_glue),
  ExternalPrimitive, BooleanPrimType,
  SIDEEFFECTS,
  "The receiver is a proxy or fctProxy object.  Returns true iff the "
- "pointer it encapsulates is 0."
+ "pointer it encapsulates is NULL."
 },
 {
 "ForeignKill", fntype(&foreign_kill_glue),
@@ -1695,7 +1695,7 @@ fntype(&call_and_convert5_glue),
 },
 {
 "Perform:",
- fntype(0),
+ fntype(NULL),
  NotReallyAPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
  "Sends the unary message named by the first argument (a canonical string) to the "
@@ -1713,7 +1713,7 @@ fntype(&call_and_convert5_glue),
 },
 {
 "Perform:With:",
- fntype(0),
+ fntype(NULL),
  NotReallyAPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
  "Similar to _Perform:, except that the selector must be a binary or "
@@ -1723,7 +1723,7 @@ fntype(&call_and_convert5_glue),
 },
 {
 "Perform:With:With:",
- fntype(0),
+ fntype(NULL),
  NotReallyAPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
  "Similar to _Perform:, except that the selector must be a "
@@ -1735,7 +1735,7 @@ fntype(&call_and_convert5_glue),
 },
 {
 "PerformResend:",
- fntype(0),
+ fntype(NULL),
  NotReallyAPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
  "Similar to _Perform:, except that it performs an undirected resend.\n"
@@ -1745,7 +1745,7 @@ fntype(&call_and_convert5_glue),
 },
 {
 "PerformResend:With:",
- fntype(0),
+ fntype(NULL),
  NotReallyAPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
  "Similar to _PerformResend:, except that the selector must be a binary or "
@@ -1754,7 +1754,7 @@ fntype(&call_and_convert5_glue),
 },
 {
 "Perform:With:With:",
- fntype(0),
+ fntype(NULL),
  NotReallyAPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
  "Similar to _PerformResend:, except that the selector must be a "
@@ -1763,7 +1763,7 @@ fntype(&call_and_convert5_glue),
 },
 {
 "Perform:DelegatingTo:",
- fntype(0),
+ fntype(NULL),
  NotReallyAPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
  "This primitive performs a delegated send.  "
@@ -1773,7 +1773,7 @@ fntype(&call_and_convert5_glue),
 },
 {
 "Perform:DelegatingTo:With:",
- fntype(0),
+ fntype(NULL),
  NotReallyAPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
  "Similar to _Perform:DelegatingTo:, except that the selector must be a binary or "
@@ -1782,7 +1782,7 @@ fntype(&call_and_convert5_glue),
 },
 {
 "Perform:DelegatingTo:With:With:",
- fntype(0),
+ fntype(NULL),
  NotReallyAPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
  "Similar to _Perform:DelegatingTo:, except that the selector must be a "
@@ -2072,7 +2072,7 @@ fntype(&call_and_convert5_glue),
  "For internal consumption only."
 },
 {
-"Restart", 0,
+"Restart", NULL,
  RestartPrimitive, UnknownPrimType,
  false, true, false, true, true, true,
  "Restart the current method, i.e., jump to the beginning of the "
@@ -2420,7 +2420,7 @@ LARGE_INT_PRIM_TABLE_ENTRIES
 
 {
   // must be last entry in each prim table
-  0, fntype(&bad_prim),
+  NULL, fntype(&bad_prim),
   ExternalPrimitive, UnknownPrimType,
   true, false, false, true, false, false,
   ""
@@ -2485,14 +2485,14 @@ static PrimDesc fntable2[] = {
           
   // must be last entry in each prim table
 {
-  0, fntype(&bad_prim),
+  NULL, fntype(&bad_prim),
   ExternalPrimitive, UnknownPrimType,
   SIDEEFFECTS,
   ""
 }   
   };
 
-static PrimDesc* fntable[] = { &fntable1[0], &fntable2[0], 0 };
+static PrimDesc* fntable[] = { &fntable1[0], &fntable2[0], NULL };
 
 PrimDesc** primDescTable() { return fntable; }
 
@@ -2519,7 +2519,7 @@ PrimDesc* getPrimDescOfBytes(const char* s, fint len, bool internal) {
     }
   }
  error: ;
-  // set e to the 0 primitive entry (bad primitive)
+  // set e to the NULL primitive entry (bad primitive)
   e = &fntable1[sizeof(fntable1)/sizeof(PrimDesc) - 1];
  done: ;
   e->verify();
@@ -2538,20 +2538,20 @@ PrimDesc* getPrimDescOfFirstInstruction(char* fn_start_arg, bool internal) {
   PrimDesc* e;
   for (PrimDesc** ft = &fntable[0]; *ft; ft++) {
     for (e = *ft; true; e++) {
-      if ( e->fn() != 0
+      if ( e->fn() != NULL
       &&   fn_start == first_inst_addr((void*)e->fn())) {
         if (   (e->type() == InternalPrimitive && !internal)
             || e->type() == NotReallyAPrimitive) {
-          return 0;
+          return NULL;
         } else {
           // NB: matches even badPrim because check for e->name() is below
           return e;
         }
       }
-      if (e->name() == 0) break;        // end of table
+      if (e->name() == NULL) break;        // end of table
     }
   }
-  return 0;
+  return NULL;
 }
 
 const char* getPrimName(char* fn_start) {
@@ -2578,13 +2578,13 @@ int32 getPrimCallEndOffset(char* fn_start) {
   PrimDesc* e;
   for (PrimDesc** ft = &fntable[0]; *ft; ft++) {
     for (e = *ft; true; e++) {
-      if (e->fn() != 0  &&  first_inst_addr((void*)e->fn()) == fn_start) {
+      if (e->fn() != NULL  &&  first_inst_addr((void*)e->fn()) == fn_start) {
         int32 off =
           e->canAbortProcess() ? sendDesc::abortable_prim_continue_offset 
                                : sendDesc::nonabortable_prim_continue_offset;
         return off;
       }
-      if (e->name() == 0) break;
+      if (e->name() == NULL) break;
     }
   }
   ShouldNotReachHere(); // primitive not found

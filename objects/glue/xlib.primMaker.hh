@@ -4518,10 +4518,10 @@ Please do not change it manually. -- dmu 12/91  */\
 \
  C_func_2( void,, XStoreBytes_wrap, XStoreBytes_wrap_XStoreBytes__glue, fail, proxy,(Display*,Display_seal), string,) \
  C_func_1( string,, XFetchBytes_wrap, XFetchBytes_wrap_XFetchBytes_glue, fail, proxy,(Display*,Display_seal)) \
- C_get_var( proxy_null,(Window,Window_seal), 0, NULL_NullWindow_glue) \
+ C_get_var( proxy_null,(Window,Window_seal), NULL, NULL_NullWindow_glue) \
  C_func_1( int,, MYSELF, MYSELF_WindowDescriptor_glue, , proxy_null,(int,Window_seal)) \
- C_get_var( proxy_null,(Pixmap,Pixmap_seal), 0, NULL_NullPixmap_glue) \
- C_get_var( proxy_null,(Region,Region_seal), 0, NULL_NullRegion_glue) \
+ C_get_var( proxy_null,(Pixmap,Pixmap_seal), NULL, NULL_NullPixmap_glue) \
+ C_get_var( proxy_null,(Region,Region_seal), NULL, NULL_NullRegion_glue) \
  C_func_0( proxy,(Region,Region_seal), XCreateRegion_wrap, XCreateRegion_wrap_XCreateRegion_glue, ) \
  C_func_1( void,, XDestroyRegion_wrap, XDestroyRegion_wrap_XDestroyRegion_glue, , proxy,(Region,Region_seal)) \
  C_func_1( bool,, XEmptyRegion_wrap, XEmptyRegion_wrap_XEmptyRegion_glue, , proxy,(Region,Region_seal)) \
@@ -4532,7 +4532,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_3( void,, XXorRegion_wrap, XXorRegion_wrap_XXorRegion_Region__glue, , proxy,(Region,Region_seal), proxy,(Region,Region_seal), proxy,(Region,Region_seal)) \
  C_func_3( void,, XSubtractRegion_wrap, XSubtractRegion_wrap_XSubtractRegion_Region__glue, , proxy,(Region,Region_seal), proxy,(Region,Region_seal), proxy,(Region,Region_seal)) \
  C_func_3( void,, XOffsetRegion_wrap, XOffsetRegion_wrap_XOffsetX_Y__glue, , proxy,(Region,Region_seal), int,, int,) \
- C_get_var( proxy_null,(Cursor,Cursor_seal), 0, NULL_NullCursor_glue) \
+ C_get_var( proxy_null,(Cursor,Cursor_seal), NULL, NULL_NullCursor_glue) \
  C_func_1( proxy,(Window,Window_seal), RootWindowOfScreen, RootWindowOfScreen_RootWindowOfScreen_glue, , proxy,(Screen*,Screen_seal)) \
  C_func_1( proxy,(Visual*,Visual_seal), DefaultVisualOfScreen, DefaultVisualOfScreen_DefaultVisualOfScreen_glue, , proxy,(Screen*,Screen_seal)) \
  C_func_1( proxy,(GC,GC_seal), DefaultGCOfScreen, DefaultGCOfScreen_DefaultGCOfScreen_glue, , proxy,(Screen*,Screen_seal)) \

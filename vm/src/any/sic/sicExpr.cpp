@@ -23,7 +23,7 @@
   MergeSExpr::MergeSExpr(PReg* p, Node* nod) : SExpr(p, nod) { initialize(); }
 
   void MergeSExpr::initialize() {
-    exprs = new SExprBList(MaxPICSize + 1); setSplittable(_node != 0);
+    exprs = new SExprBList(MaxPICSize + 1); setSplittable(_node != NULL);
   }
 
   NoResultSExpr::NoResultSExpr(Node* n) : SExpr(theNodeGen->noPR, n) {}
@@ -82,11 +82,11 @@
         SExpr* e = copyMergeWith(other, preg(), n);
         return e;
       } else {
-        _node = 0;   // prevent future splitting
+        _node = NULL;   // prevent future splitting
         return this;
       }
     } else {
-      PReg* r = _preg == other->preg() ? _preg : 0;
+      PReg* r = _preg == other->preg() ? _preg : NULL;
       return copyMergeWith(other, r, n);
     }
   }
@@ -100,10 +100,10 @@
     if ((other->isMapSExpr() || other->isConstantSExpr())
         && other->myMapOop() == myMapOop()) {
       // generalize map + constant in same clone family --> map
-      _node = 0;     // prevent future splitting
+      _node = NULL;     // prevent future splitting
       return this;
     } else {
-      PReg* r = _preg == other->preg() ? _preg : 0;
+      PReg* r = _preg == other->preg() ? _preg : NULL;
       return copyMergeWith(other, r, n);
     }
   }
@@ -116,11 +116,11 @@
         SExpr* e = copyMergeWith(other, preg(), n);
         return e;
       } else {
-        _node = 0;   // prevent future splitting
+        _node = NULL;   // prevent future splitting
         return this;
       }
     } else {
-      PReg* r = _preg == other->preg() ? _preg : 0;
+      PReg* r = _preg == other->preg() ? _preg : NULL;
       return copyMergeWith(other, r, n);
     }
   }
@@ -135,13 +135,13 @@
         SExpr* e = copyMergeWith(other, preg(), n);
         return e;
       } else {
-        _node = 0;   // prevent future splitting
+        _node = NULL;   // prevent future splitting
         return this;
       }
     } else if (other->isMapSExpr()) {
       return other->mergeWith(this, n);
     } else {
-      PReg* r = _preg == other->preg() ? _preg : 0;
+      PReg* r = _preg == other->preg() ? _preg : NULL;
       return copyMergeWith(other, r, n);
     }
   }
@@ -149,19 +149,19 @@
   SExpr* MergeSExpr::mergeWith(SExpr* other, Node* n) {
     if (other->isNoResultSExpr()) return this;
     setUnknownSet(false);
-    if (n == 0) setSplittable(false);
+    if (n == NULL) setSplittable(false);
     _node = n;
     if (other->isMergeSExpr()) {
       MergeSExpr* o = other->asMergeSExpr();
       if (o->isSplittable() && !isSplittable()) return o->mergeWith(this, n);
       for (fint i = 0; i < o->exprs->length(); i++) {
-        // must be careful when adding splittable exprs (e->next != 0)
+        // must be careful when adding splittable exprs (e->next != NULL)
         // to avoid creating loops in the ->next chain
         SExpr* e = o->exprs->nth(i);
         SExpr* nexte;
         for ( ; e; e = nexte) {
           nexte = e->next;
-          e->next = 0;
+          e->next = NULL;
           add(e);
         }
       }
@@ -187,7 +187,7 @@
   }
 
   void MergeSExpr::add(SExpr* e) {
-    assert(e->next == 0, "shouldn't be set");
+    assert(e->next == NULL, "shouldn't be set");
     setUnknownSet(false);
     if (exprs->isFull()) return;
     if (!e->node()) setSplittable(false);
@@ -239,8 +239,8 @@
     if (exprs->length() == MaxPICSize) {
       // our capacity overflows, so make sure we've got at least one Unknown
       // type in our set
-      if (findUnknown() == 0)
-        exprs->append(new UnknownSExpr(e->preg(), 0));
+      if (findUnknown() == NULL)
+        exprs->append(new UnknownSExpr(e->preg(), NULL));
     } else {
       exprs->append(e);
     }
@@ -344,8 +344,8 @@
   bool MergeSExpr::containsUnknown() {
     if (isUnknownSet()) {
       UnknownSExpr* u;
-      assert((u = findUnknown()) == 0 && !isContainingUnknown() ||
-             u != 0 && isContainingUnknown(), "isContainingUnknown wrong");
+      assert((u = findUnknown()) == NULL && !isContainingUnknown() ||
+             u != NULL && isContainingUnknown(), "isContainingUnknown wrong");
       return isContainingUnknown();
     }
     setUnknownSet(true);
@@ -363,7 +363,7 @@
     for (fint i = 0; i < exprs->length(); i++) {
       if (exprs->nth(i)->isUnknownSExpr()) return (UnknownSExpr*)exprs->nth(i);
     }
-    return 0;
+    return NULL;
   }
 
   SExpr* MergeSExpr::findMap(mapOop map) {
@@ -371,7 +371,7 @@
       SExpr* e = exprs->nth(i);
       if (e->hasMap() && e->myMapOop() == map) return e;
     }
-    return 0;
+    return NULL;
   }
 
   SExpr* UnknownSExpr::makeUnknownUnlikely(SSelfScope* s)    {
@@ -402,10 +402,10 @@
       }
     }
     ShouldNotReachHere(); // contains no unknown expression
-    return 0;
+    return NULL;
   }
 
-  SExpr* ConstantSExpr::findMap(mapOop m) { return myMapOop() == m ? this : 0; }
+  SExpr* ConstantSExpr::findMap(mapOop m) { return myMapOop() == m ? this : NULL; }
   
   SExpr* UnknownSExpr::shallowCopy(PReg* p, Node* n) {
     return new UnknownSExpr(p, n);
@@ -588,7 +588,7 @@
       ?  myExpr // too late to change myExpr, but already put in UnknownSExpr
       :  myExpr->copyMergeWith(stkExpr,
                                myExpr->preg(),
-                               0); // 0 so is not splittable
+                               NULL); // NULL so is not splittable
   }
 
   
@@ -617,7 +617,7 @@
     // types of values coming in backwards in time for
     // node generation.
     // Later, in mergeInExpr, will make
-    // a merge expr with 0 node to turn off splitting.
+    // a merge expr with NULL node to turn off splitting.
     // Urs says splitting is unprepared to deal with the topologies
     // of a backwards branch (a branch below the center of the Y). -- dmu
     

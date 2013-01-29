@@ -150,7 +150,7 @@ class nmethod : public OopNCode {
 
   bool is_frame_chain_saved() { return frame_chain == SavedFrameChain; }
   void save_frame_chain()     { frame_chain= SavedFrameChain; }
-  void clear_frame_chain()    { frame_chain= 0; }
+  void clear_frame_chain()    { frame_chain= NULL; }
   void unlink_saved_frame_chain() {
     if (frame_chain == SavedFrameChain) frame_chain= NoFrameChain; }
   void save_unlinked_frame_chain() {

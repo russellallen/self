@@ -23,7 +23,7 @@ stat_type* stat_wrapper(char* path, void* FH) {
   buf = new stat_type;
   if (stat(path, buf) == -1) {
     unix_failure(FH);
-    return 0;
+    return NULL;
   }
   return buf;
 }
@@ -33,7 +33,7 @@ stat_type* lstat_wrapper(char* path, void* FH) {
   buf = new stat_type;
   if (lstat(path, buf) == -1) {
     unix_failure(FH);
-    return 0;
+    return NULL;
   }
   return buf;
 }
@@ -43,7 +43,7 @@ stat_type* fstat_wrapper(int fd, void* FH) {
   buf = new stat_type;
   if (fstat(fd, buf) == -1) {
     unix_failure(FH);
-    return 0;
+    return NULL;
   }
   return buf;
 }

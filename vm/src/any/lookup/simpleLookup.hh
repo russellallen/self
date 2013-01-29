@@ -43,7 +43,7 @@ class simpleLookup: public ResourceObj {
   abstractSlotRef* _result;
 
  public:  
-  // set to 0 for no tracking:
+  // set to NULL for no tracking:
   dependencyList* deps;
   assignableDependencyList* adeps;
 
@@ -52,8 +52,8 @@ class simpleLookup: public ResourceObj {
                oop sel,
                oop dgt,
                oop mhOrMap, 
-               dependencyList* dps = 0,
-               assignableDependencyList* adps = 0);
+               dependencyList* dps = NULL,
+               assignableDependencyList* adps = NULL);
   
   LookupType lookupType()     { return key.lookupType; }
   oop        selector()       { return key.selector; }
@@ -125,13 +125,13 @@ class simpleLookup: public ResourceObj {
  public:
   
   void remove_all_deps() {
-    if ( deps  != 0)  deps->remove();
-    if ( adeps != 0) adeps->remove(); }
+    if ( deps  != NULL)  deps->remove();
+    if ( adeps != NULL) adeps->remove(); }
                                
   void add_dependency(slotDesc* s, Map* map) {
-    if ( deps == 0 ) return;
+    if ( deps == NULL ) return;
     if (map->is_block()) return;
-    if (s == 0 || s->is_parent()) {
+    if (s == NULL || s->is_parent()) {
       deps->add(map);
     } else if (map->can_have_dependents()) {
       assert(s >= map->slots() && s < map->slot(map->length_slots()),
@@ -140,7 +140,7 @@ class simpleLookup: public ResourceObj {
     } }
 
   void add_slot_dependency(Map* map) {
-    if ( deps == 0 )  return;
+    if ( deps == NULL )  return;
     deps->add(map); }
 
   void add_asg_parent_dependency(objectLookupTarget* otarg,

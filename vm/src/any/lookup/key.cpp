@@ -24,7 +24,7 @@ void ScopeLookupKey::set_from(ScopeLookupKey &k) {
 
 
 void ScopeLookupKey::print() {
-  if (delegatee != 0) {
+  if (delegatee != NULL) {
     if (delegatee->is_string()) {
       stringOop(delegatee)->string_print();
     } else {

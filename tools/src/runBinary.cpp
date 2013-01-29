@@ -17,7 +17,7 @@ main(int argc, char* argv[]) {
 		exit(1);
 	}
 	FILE* f = fopen(argv[1], "r");
-	if (f == 0) {
+	if (f == NULL) {
 		perror(argv[1]);
 		exit(1);
 	}

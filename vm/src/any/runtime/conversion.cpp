@@ -37,7 +37,7 @@ void Conversion::convert() {
     // already interpreted frame
     vdepth = 0;
     sd = convertFrame->send_desc();
-    convertFrame_rl = 0; // deallocating it
+    convertFrame_rl = NULL; // deallocating it
     return;
   }
   
@@ -52,7 +52,7 @@ void Conversion::convert() {
     // already in debug form
     sd = convertFrame->send_desc();
     vdepth = 0;
-    convertFrame_rl = 0;
+    convertFrame_rl = NULL;
     return;
   }
   if (PrintFrameConversion) {
@@ -71,7 +71,7 @@ void Conversion::convert() {
     lprintf("done.\n");
   }  
   assert( ((frame*)sp)->is_aligned(), "should be aligned");
-  convertFrame_rl = 0;
+  convertFrame_rl = NULL;
 # else // defined(FAST_COMPILER) || defined(SIC_COMPILER)
   ShouldNotReachHere();
 # endif
@@ -97,8 +97,8 @@ void Conversion::build_vfs_to_convert() {
 
 void Conversion::create_previously_optimized_blocks() {
   // create all blocks which were completely optimized away in convertNM
-  blockValues = 0;
-  { abstract_vframe* callee= 0;
+  blockValues = NULL;
+  { abstract_vframe* callee= NULL;
     for (fint i= vdepth; i > 0; i--) {
       vf[i]->createBlocks(callee, blockValues);
       callee= vf[i];
@@ -120,16 +120,16 @@ void Conversion::retarget_vfs_to_convert(frame* copiedFrame, RegisterLocator* co
 
 void Conversion::copy_caller() {
   frame* callerFrame = convertFrame->immediateSelfSender();
-  // callerFrame can be 0 e.g. when convertNM = doIt
+  // callerFrame can be NULL e.g. when convertNM = doIt
   // also, callerFrame is only a piece of a frame because we popped the
   // convertLocals; thus we better use a copy of it
   
   // XXXX May get an interpreter frame here, then what?
   
-  if (callerFrame == 0) {
+  if (callerFrame == NULL) {
     sd = sendDesc::first_sendDesc();
     nonvols_for_caller = convertFrame_rl->sender()->for_copied_frame(convertFrame->sender());
-    vf[0] = 0;
+    vf[0] = NULL;
   }
   else {
     sd = callerFrame->send_desc();
@@ -165,9 +165,9 @@ void Conversion::init() {
 
   nms   = NEW_RESOURCE_ARRAY(         nmethod*, vdepth+1);
   newVF = NEW_RESOURCE_ARRAY( compiled_vframe*, vdepth+1);
-  for (fint i = 0; i <= vdepth; i++) { nms[i] = 0;  newVF[i] = 0; }
+  for (fint i = 0; i <= vdepth; i++) { nms[i] = NULL;  newVF[i] = NULL; }
 
-  newFr = 0;
+  newFr = NULL;
 }
 
 
@@ -214,7 +214,7 @@ nmethod* Conversion::newCodeForVframe(fint i) {
                                               MH_TBD, // method holder
                                               vf[i-1],
                                               sd, 
-                                              0, // DIDesc
+                                              NULL, // DIDesc
                                               true,  // need a debug method
                                               // gen reusable iff orig reusable
                                               convertNM->reusable()
@@ -246,7 +246,7 @@ void Conversion::copyVFrame(fint i, nmethod *newNM, bool wasInInterruptCheck) {
   newVF[i] = new compiled_vframe(newFr, newNM, s, vf[i]->bci(), newFrRl );
   // copy values from old to new frame
 
-  abstract_vframe* calleeOrNull = i < vdepth ? vf[i + 1] : 0;
+  abstract_vframe* calleeOrNull = i < vdepth ? vf[i + 1] : NULL;
 
   // XXXX must redo for interp
 
@@ -277,7 +277,7 @@ void Conversion::copyVFrame(fint i, nmethod *newNM, bool wasInInterruptCheck) {
 void Conversion::ensure_death_of_conversion_nmethods() {
   fint i;
   for ( i = 1; i <= vdepth; i++) {
-    if (nms[i] == 0) continue;
+    if (nms[i] == NULL) continue;
     assert(nms[i]->is_frame_chain_saved(), "should be set");
     nms[i]->clear_frame_chain();
     // Conversion nmethods are flushed as soon as they are off the stack;
@@ -351,12 +351,12 @@ void Conversion::returnToSelf(oop res, char* self_sparc_fp_or_ppc_sp,
 
   // All values are passed on the stack so that we can safely reset
   // the resource mark below ("this" is in the resource area!).
-  // Also, this method can be called with this == 0 (in this case, no
+  // Also, this method can be called with this == NULL (in this case, no
   // conversion was performed and we just want to return to the Self
   // program).
   assert(zone::frame_chain_nesting == 0, "frames shouldn't be chained");
   frame* dest_self_fr =
-                 this == 0       ?  currentProcess->last_self_frame(true)
+                 this == NULL       ?  currentProcess->last_self_frame(true)
               :  isInterpretingArg  ?  convertFrame  // for interpreter, needs to be the official interp frame
                                     :  fixConversionStack_for_returning_to_self( self_sparc_fp_or_ppc_sp, self_sd );
   
@@ -387,7 +387,7 @@ void Conversion::returnToSelf(oop res, char* self_sparc_fp_or_ppc_sp,
 
   
   
-// this may be 0
+// this may be NULL
 void Conversion::return_to_interpreted_self(frame* dest_self_fr, bool restartSend,
                                                    char* self_sparc_fp_or_ppc_sp, oop res, frame* nlrHome_arg, int32 nlrHomeID_arg) {
    // a bit slow, for sparc f is just callee of self_sparc_fp_or_ppc_sp, same frame on ppc
@@ -400,12 +400,12 @@ void Conversion::return_to_interpreted_self(frame* dest_self_fr, bool restartSen
       NLRSupport::reset_have_NLR_through_C();
     ConversionInProgress = false;
     if (this) delete rm; // free all resources
-    OutgoingArgsOfReturnTrapOrRecompileFrame = 0; // done
+    OutgoingArgsOfReturnTrapOrRecompileFrame = NULL; // done
     ContinueNLRAfterReturnTrap( continuationPC, self_sparc_fp_or_ppc_sp, res, nlrHome_arg, nlrHomeID_arg );
     ShouldNotReachHere();
 }
  
-// this may be 0
+// this may be NULL
 void Conversion::nlr_to_compiled_self( 
                       oop res, bool restartSend, frame* nlrHome_arg, int32 nlrHomeID_arg,
                       sendDesc* self_sd,
@@ -417,14 +417,14 @@ void Conversion::nlr_to_compiled_self(
 
   # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
     char* continuationPC = (char*)self_sd + sendDesc::non_local_return_offset;
-    OutgoingArgsOfReturnTrapOrRecompileFrame = 0; // done with this
+    OutgoingArgsOfReturnTrapOrRecompileFrame = NULL; // done with this
     ContinueNLRAfterReturnTrap( continuationPC, self_sparc_fp_or_ppc_sp, res, nlrHome_arg, nlrHomeID_arg );
   # endif
   ShouldNotReachHere();
 }
 
 
-// this may be 0
+// this may be NULL
 void Conversion::return_to_compiled_self( 
                     oop res, bool restartSend, bool nlr_arg,
                     bool wasUncommon, int32* uncommonPC,
@@ -478,7 +478,7 @@ void Conversion::setup_compiled_restart( char*& continuationPC,
 
   // I don't understand how you could get here w/o the SIC -- dmu 6/99
 
-  stringOop sel = 0;
+  stringOop sel = NULL;
   if (this && vdepth) {
     methodMap* mm = (methodMap*)vf[vdepth]->method()->map();
     sel = mm->get_selector_at(vf[vdepth]->bci());

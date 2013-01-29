@@ -39,7 +39,7 @@ class objVectorOopClass: public slotsOopClass {
   oop methodPointer();
 
   // allocators
-  objVectorOop copy(bool mustAllocate= true, oop genObj= 0, bool cs= true) {
+  objVectorOop copy(bool mustAllocate= true, oop genObj= NULL, bool cs= true) {
     return (objVectorOop)slotsOopClass::copy(size(), mustAllocate, genObj, cs); }
 
   objVectorOop grow(fint delta, bool mustAllocate= true);
@@ -48,7 +48,7 @@ class objVectorOopClass: public slotsOopClass {
   objVectorOop clone(bool mustAllocate= true) {
     return objVectorOop(slotsOopClass::clone(mustAllocate)); }
   objVectorOop cloneSize(fint length, bool mustAllocate= true,
-                         oop filler= 0) {
+                         oop filler= NULL) {
     return objVectorOop(slotsOopClass::cloneSize(length, mustAllocate,
                                                  filler)); }
   
@@ -78,7 +78,7 @@ class objVectorOopClass: public slotsOopClass {
 
   // compiler support
   static int32 objVector_len_offset() {
-    return int32(&objVectorOop(0)->addr()->_len); }
+    return int32(&objVectorOop(NULL)->addr()->_len); }
   
 };
 

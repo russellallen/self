@@ -36,7 +36,7 @@ void AbstractByteCode::GenSendByteCode( fint offset, fint length,
                                         bool isUndirectedResend, 
                                         stringOop resendTarget) {
                                         
-  if (resendTarget != 0) {
+  if (resendTarget != NULL) {
     GenDelegateeByteCode(offset, length, resendTarget);
   }
   else if ( isUndirectedResend )
@@ -336,7 +336,7 @@ oop ByteCode::create_block_method_prim(oop ignore,
   // clone bv & lits for cheap insurance
   ByteCode b(false, new_string(bv->bytes(), bv->length()),
              lits->clone(), file, line, source);
-  oop m = create_blockMethod(0, &b, "", stack_deltas);
+  oop m = create_blockMethod(NULL, &b, "", stack_deltas);
 
   return m->as_mirror();
 }

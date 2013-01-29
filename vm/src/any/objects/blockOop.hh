@@ -21,7 +21,7 @@ public:
   void setHomeFr(smiOop s) { scopeHomeFr= s; }
 
   // block operations
-  // scope(true) can return 0; scope() will fail an assertion in that case.
+  // scope(true) can return NULL; scope() will fail an assertion in that case.
   // note: scope frames may be not same frame as home frame! -- dmu
   frame* scope(bool orNone = false);
   void setScope(frame* newScope);
@@ -43,8 +43,8 @@ public:
 # endif
 
   // killable operations
-  void kill_block()    { setScope(0); }         // Use kill(); not this fct.
-  bool is_live_block() { return scope(true) != 0; } // Use is_live().
+  void kill_block()    { setScope(NULL); }         // Use kill(); not this fct.
+  bool is_live_block() { return scope(true) != NULL; } // Use is_live().
   
   // primitives
 private:
@@ -54,11 +54,11 @@ public:
   oop clone_block_for_interpreter(frame* f);
 
   // copy() is for the compilers, not for the user
-  blockOop copy()  { return (blockOop) clone_block(smiOop(0)); }
+  blockOop copy()  { return (blockOop) clone_block(smiOop(NULL)); }
 
   // compiler support
   static int32 scope_offset() {
-    blockOopClass* p = 0;
+    blockOopClass* p = NULL;
     return (int32) (& (p->scopeHomeFr) ) - Mem_Tag; }
   blockOop clone_and_set_desc(smiOop);
   void remap(nmethod* nm, frame* newHome);

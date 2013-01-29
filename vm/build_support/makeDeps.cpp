@@ -151,7 +151,7 @@ class AbstractPlatform {
       static char *suffs[] = { ".cpp", 0 };
       return suffs;
     */
-    return 0;
+    return NULL;
   }
 
   // empty file name -> no grand include file
@@ -306,7 +306,7 @@ class WinGammaPlatform: public AbstractPlatform {
   virtual Bool fileNameStringEquality(const char* a, const char* b) { return stricmp(a, b) == 0; }
 
   void fatal(const char* msg = "See console window") {
-    MessageBox(0, msg, "makeDeps error:", MB_OK);
+    MessageBox(NULL, msg, "makeDeps error:", MB_OK);
     exit(1);
   }
 
@@ -437,8 +437,8 @@ class list {
   list(const char* n) {
     first = last = (item*)NullItem;
     beenHere =  mayBeCycle = isCycle = False;
-    platformDependentInclude = 0;
-    platformDependentIncludees = 0;
+    platformDependentInclude = NULL;
+    platformDependentIncludees = NULL;
     name = new char[(int)strlen(n) + 1];
     count = 0;
     strcpy(name, n);
@@ -454,7 +454,7 @@ class list {
   list* doCFile();
   void  doHFile(list* s);
   void  traceCycle(list* s);
-  Bool  compareLists(list* s, database* cur = 0, database* prev = 0);
+  Bool  compareLists(list* s, database* cur = NULL, database* prev = NULL);
 
   void  put_incl_file( database* );
 };
@@ -568,8 +568,8 @@ list* list::listForFile(const char* namea) {
 
 
 Bool list::compareLists(register list* s, database* cur, database* prev) {
-  if (    platformDependentInclude != 0
-  &&   s->platformDependentInclude != 0
+  if (    platformDependentInclude != NULL
+  &&   s->platformDependentInclude != NULL
   &&   strcmp(    platformDependentInclude, 
                s->platformDependentInclude ) != 0 )
     return False; // difference in platformDependentIncludes
@@ -585,7 +585,7 @@ Bool list::compareLists(register list* s, database* cur, database* prev) {
             return True; // equal
     if ( !Plat.fileNameStringEquality( mine->contents->name, his->contents->name))
             return False; // crude: order dependent
-    if ( cur == 0 )
+    if ( cur == NULL )
       ;
     else if ( cur ->hfile_is_in_grand_include( mine->contents, this )
          !=   prev->hfile_is_in_grand_include( his->contents,  s    ))
@@ -630,12 +630,12 @@ void list::addIfAbsent(list* s) {
 void list::doFiles(list* s) {
   for ( register item* p = first;  p;  p = p->next) {
     list* h = p->contents;
-    if (h->platformDependentInclude != 0) {
+    if (h->platformDependentInclude != NULL) {
       fprintf(stderr, "Error: The source for %s is %s.\n\tIt shouldn't be included directly by %s.\n",
         h->platformDependentInclude,
         h->name,
         name);
-      h->platformDependentInclude = 0; // report once per file
+      h->platformDependentInclude = NULL; // report once per file
       exitCode = 1;
     }
     h->doHFile(s);
@@ -688,10 +688,10 @@ list* list::doCFile() {
 
 
 FILE* fileFor(const char* fname) {
-  if (fname == 0  ||  fname[0] == '\0')
+  if (fname == NULL  ||  fname[0] == '\0')
     Plat.fatal("fileFor: empty or null name");
   FILE *r = fopen(fname, "w");
-  if (r == 0) {
+  if (r == NULL) {
     perror(fname);
     Plat.fatal();
   }
@@ -847,7 +847,7 @@ void database::get_quad(const char* plat_dep_inc,
   foo_pd_list->platformDependentInclude = incls_foo_pd_hh; // mark foo_unix.hh for error checking    
   
   list* foo_list = allFiles->listForFile(foo_hh);
-  if (foo_list->platformDependentIncludees == 0)
+  if (foo_list->platformDependentIncludees == NULL)
     foo_list->platformDependentIncludees = new list("my platformDependentIncludees");
   foo_list->platformDependentIncludees->add(allFiles->listForFile(foo_arch_hh));
 }
@@ -977,7 +977,7 @@ void database::write_grand_unix_makefile() {
           continue;
         fprintf(gd, "%s ", si->contents->name);
         // if .hh has plat dep incls, we also depend on them:
-        if (si->contents->platformDependentIncludees != 0)
+        if (si->contents->platformDependentIncludees != NULL)
           for ( item* pdi = si->contents->platformDependentIncludees->first;  pdi;  pdi = pdi->next)
             fprintf(gd, "%s ", pdi->contents->name);
       }
@@ -1008,7 +1008,7 @@ void database::write_grand_unix_makefile() {
           continue;
          print_dependent_on( gd, hi->contents->name);
          // need to add dependency for e.g., sig_unix.hh
-        if (hi->contents->platformDependentIncludees != 0) 
+        if (hi->contents->platformDependentIncludees != NULL) 
           for ( item* pdi = hi->contents->platformDependentIncludees->first;  pdi;  pdi = pdi->next)
             print_dependent_on(gd, pdi->contents->name);
       }
@@ -1098,10 +1098,10 @@ void database::absolute_generation(const char* new_db_fn) {
 
 void database::create_file_if_absent(const char* fn) {
   FILE* f = fopen(fn, "r");
-  if ( f == 0 ) {
+  if ( f == NULL ) {
     printf("Cannot open old file %s; will create then anew\n", fn);
     f = fopen(fn, "w");
-    if (f == 0) { perror(fn); Plat.fatal(); }
+    if (f == NULL) { perror(fn); Plat.fatal(); }
   }
   fclose(f);
 }
@@ -1124,8 +1124,8 @@ void database::relative_generation(database* prev,
 void database::copy_file(const char* src,const char* dst) {
   static char buf[16 * 1024];
   printf("Copying %s -> %s...\n", src, dst);
-  FILE* s = fopen(src, "r");  if (s == 0) { perror(src); Plat.fatal(); }
-  FILE* d = fopen(dst, "w");  if (s == 0) { perror(dst); Plat.fatal(); }
+  FILE* s = fopen(src, "r");  if (s == NULL) { perror(src); Plat.fatal(); }
+  FILE* d = fopen(dst, "w");  if (s == NULL) { perror(dst); Plat.fatal(); }
   for (;;) {
     size_t n = fread( buf, 1, sizeof(buf), s );
          if (n == 0)   break;

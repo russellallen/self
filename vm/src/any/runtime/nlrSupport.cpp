@@ -86,7 +86,7 @@ volatile void NLRSupport::continue_NLR_into_interpreted_Self() {
   set_have_NLR_through_C(); // interp needs this
   frame* f =
     currentProcess->stack()->interpreter_frame_for_continuing_NLR_from_primitive();
-  assert(f != 0, "could not find frame to return to");
+  assert(f != NULL, "could not find frame to return to");
   ContinueNLRFromC(f->real_return_addr(), true, false);
   ShouldNotReachHere(); // should not return to here
 }
@@ -126,7 +126,7 @@ volatile void NLRSupport::continue_NLR_into_compiled_Self(bool remove_patches, f
 
 
 void NLRSupport::save_NLR_results(oop res, int32 targetFrame, int32 targetID) { 
-  assert(res == badOop  ||  res == 0  ||  targetFrame != 0,
+  assert(res == badOop  ||  res == 0  ||  targetFrame != NULL,
          "either aborting/terminating process or have a target");
   set_NLR_result_from_C(res);
   set_NLR_home_from_C(targetFrame);
@@ -160,7 +160,7 @@ void volatile NLRSupport::unwind_stack_to_kill_process(oop res) {
 
 void NLRSupport::non_lifo_abort_from_continuePC() {
   char* nonLifoAbortPC = continuePC;
-  continuePC = 0;
+  continuePC = NULL;
   non_lifo_abort(nonLifoAbortPC);
 }
 

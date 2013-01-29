@@ -36,8 +36,8 @@
 
   class SICompiler : public AbstractCompiler {
    public:
-    RScope* recompileeScope;            // recompilee's rscope (or 0)
-    VScopeBList* vscopes;               // recompilee VScopes (or 0)
+    RScope* recompileeScope;            // recompilee's rscope (or NULL)
+    VScopeBList* vscopes;               // recompilee VScopes (or NULL)
     int32 countID;                      // recompile counter ID
     bool needRegWindowFlushes;          // compile reg-window flushing blocks
     

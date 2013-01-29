@@ -73,10 +73,10 @@ class slotsMap: public Map {
 
  public:
   // cloning operations
-  oop clone(oop obj, bool mustAllocate= true, oop genObj= 0);
+  oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL);
   bool can_inline_clone() { return true; }
   oop cloneSize(oop obj, fint length, bool mustAllocate= true,
-                oop filler= 0);
+                oop filler= NULL);
   
   // creation operations
   virtual oop fill_in_slots(slotList* slist, fint slotCount);

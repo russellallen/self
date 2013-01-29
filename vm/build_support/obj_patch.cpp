@@ -83,7 +83,7 @@ int main(int argc, char* argv[]) {
     while(1) {
       fromPos = (char*)memchr(fromPos, from[0], end - fromPos);
       if (is_match(from,len+1,fromPos, buf)) break;
-      if (fromPos == 0) {
+      if (fromPos == NULL) {
   printf("error: from pattern (%s) not found\n", from);
   exit(1);
       }

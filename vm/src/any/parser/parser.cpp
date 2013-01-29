@@ -14,16 +14,16 @@ DO_NOT_CROSS_COMPILE
 # define CHECK_TOKEN(t)                                                       \
     if (t->type == Token::ERROR_TOKEN) {                                      \
       syntaxError( t->sourceStart, t);                                        \
-      return 0; }
+      return NULL; }
 
 Parser::Parser(Scanner* scanr, bool silnt) {
   scanner        = scanr;
   silent         = silnt;
 
-  implicitSelf         = 0;
+  implicitSelf         = NULL;
 
   error                = noParseErr;
-  parse_error_message  = 0;
+  parse_error_message  = NULL;
   parse_error_line     = -1;
   parse_error_column   = -1;
   parse_error_expected = "";
@@ -94,13 +94,13 @@ String* Parser::StringFromOp(Token* t) {
    case '~':             return new String("~");
    case Token::ARROW:    return new String("<-");
    case Token::OPERATOR: return t->string;
-   default:    error("parser: should not be here"); return 0;
+   default:    error("parser: should not be here"); return NULL;
   }
 }
 
 Expr* Parser::parseExpr(Token* t, bool methodCandidate) {
   Expr* expr;
-  Token* delegate = 0;
+  Token* delegate = NULL;
   Token* tStart = t;
   if (t->type == Token::DELEGATE || t->type == Token::RESEND_TOKEN) {
     delegate = t;
@@ -108,26 +108,26 @@ Expr* Parser::parseExpr(Token* t, bool methodCandidate) {
     if (t->type != Token::KEYWORD) {
       scanner->push_token(t);
       t = delegate;
-      delegate = 0;
+      delegate = NULL;
     }
   }
   if (t->type == Token::KEYWORD || t->type == Token::PRIMKEYWORD) {
     expr = implicitSelf;
   } else {
     expr = parseBinary(t, methodCandidate);
-    if (! expr) return 0;
+    if (! expr) return NULL;
     t = scanner->get_token(); CHECK_TOKEN(t);
   }
   if (t->type == Token::KEYWORD || t->type == Token::PRIMKEYWORD) {
     StringList* keywords = new StringList(t->string);
     Expr* arg = parseExpr();
-    if (! arg) return 0;
+    if (! arg) return NULL;
     ExprList* args = new ExprList(arg);
     t = scanner->get_token(); CHECK_TOKEN(t);
     while (t->type == Token::Token::CAPKEYWORD) {
       keywords = keywords->Append(t->string);
       arg = parseExpr();
-      if (! arg) return 0;
+      if (! arg) return NULL;
       args = args->Append(arg);
       t = scanner->get_token(); CHECK_TOKEN(t);
     }
@@ -178,8 +178,8 @@ bool Parser::checkSubExpression(ExprList* body, Token* s) {
 
 Expr* Parser::parseBinary(Token* t, bool methodCandidate) {
   Expr* expr;
-  Token* delegate = 0;
-  String* old_op = 0;
+  Token* delegate = NULL;
+  String* old_op = NULL;
   Token* tStart = t;
   if (t->type == Token::DELEGATE || t->type == Token::RESEND_TOKEN) {
     delegate = t;
@@ -187,7 +187,7 @@ Expr* Parser::parseBinary(Token* t, bool methodCandidate) {
     if (! isOp(t)) {
       scanner->push_token(t);
       t = delegate;
-      delegate = 0;
+      delegate = NULL;
     }
   }
   if (isOp(t)) {
@@ -199,16 +199,16 @@ Expr* Parser::parseBinary(Token* t, bool methodCandidate) {
       scanner->push_token(s);
     }
     expr = parseUnary(t, methodCandidate);
-    if (! expr) return 0;
+    if (! expr) return NULL;
     t = scanner->get_token(); CHECK_TOKEN(t);
     if (methodCandidate && expr->IsMethod() && isPossibleOp(t)) {
      Object* obj = (Object *) expr;
      if (!obj->slots->IsEmpty()) {
        innerMethodError(s);
-       return 0;
+       return NULL;
      } else
        if (!checkSubExpression(obj->body,s))
-         return 0;
+         return NULL;
    }
   }
   while (isPossibleOp(t)) {
@@ -220,7 +220,7 @@ Expr* Parser::parseBinary(Token* t, bool methodCandidate) {
     }
     if (old_op && strcmp(old_op->AsCharP(), op->AsCharP())) {
       syntaxError("no precedence for binary operator - please use parentheses", t);
-      return 0;
+      return NULL;
     }
     old_op = op;
     Expr* arg;
@@ -230,7 +230,7 @@ Expr* Parser::parseBinary(Token* t, bool methodCandidate) {
     } else {
       arg = parseUnary(t);
     }
-    if (! arg) return 0;
+    if (! arg) return NULL;
     if (delegate) {
       switch (delegate->type) {
        case Token::DELEGATE:
@@ -238,14 +238,14 @@ Expr* Parser::parseBinary(Token* t, bool methodCandidate) {
                           tStart->sourceStart, arg->source_end(),
                           scanner->fileName(), tStart->line, tStart->column,
                           this);
-        delegate = 0;
+        delegate = NULL;
         break;
        case Token::RESEND_TOKEN:
         expr = new Binary(expr, op, arg, new String("resend"),
                           tStart->sourceStart, arg->source_end(),
                           scanner->fileName(), tStart->line, tStart->column,
                           this);
-        delegate = 0;
+        delegate = NULL;
         break;
        default:
         fatal1("incorrect delegate token type %ld", delegate->type);
@@ -264,29 +264,29 @@ Expr* Parser::parseBinary(Token* t, bool methodCandidate) {
 
 Expr* Parser::parseUnary(Token* t, bool methodCandidate) {
   Expr* expr;
-  Token* delegate = 0;
+  Token* delegate = NULL;
   Token* tStart = t;
   switch (t->type) {
    case Token::INTEGER:
     expr = parseInteger(t);
-    if (! expr) return 0;
+    if (! expr) return NULL;
     t = scanner->get_token(); CHECK_TOKEN(t);
     break;
    case Token::FLOAT: 
     expr = parseFloat(t);
-    if (! expr) return 0;
+    if (! expr) return NULL;
     t = scanner->get_token(); CHECK_TOKEN(t);
     break;
    case Token::STRING:
     expr = parseString(t);
-    if (! expr) return 0;
+    if (! expr) return NULL;
     t = scanner->get_token(); CHECK_TOKEN(t);
     break;
    case Token::ANNOTATION_START:
    case '(':
    case '[':
     { bool enclosed_in_annotation = t->type == Token::ANNOTATION_START;
-      Token* anno = 0;
+      Token* anno = NULL;
 
       if (enclosed_in_annotation) {
         t = scanner->get_token(); CHECK_TOKEN(t);
@@ -297,7 +297,7 @@ Expr* Parser::parseUnary(Token* t, bool methodCandidate) {
         
         if (t->type != Token::STRING) {
           expecting(t, "a string containing an annotation");
-          return 0;
+          return NULL;
         }
         anno = t;
         t = scanner->get_token(); CHECK_TOKEN(t);
@@ -309,11 +309,11 @@ Expr* Parser::parseUnary(Token* t, bool methodCandidate) {
       }
       if ( t->type != '(' && t->type != '[') {
           expecting(t, "'(' or '['");
-          return 0;
+          return NULL;
       }
       expr = parseObject(t->type == '(' ? ')' : ']', t, 0, 
                          methodCandidate, anno);
-      if (! expr) return 0;
+      if (! expr) return NULL;
       t = scanner->get_token(); CHECK_TOKEN(t);
       if (enclosed_in_annotation) {
         // Skip annoying ACCEPT tokens.
@@ -323,7 +323,7 @@ Expr* Parser::parseUnary(Token* t, bool methodCandidate) {
 
         if (t->type != Token::ANNOTATION_END) {
           expecting(t, "'}' at end of annotated slot list");
-          return 0;
+          return NULL;
         }
         t = scanner->get_token(); CHECK_TOKEN(t);
       }
@@ -339,7 +339,7 @@ Expr* Parser::parseUnary(Token* t, bool methodCandidate) {
     // Check for capitalized name
     if (isupper(t->string->AsCharP()[0])) {
       syntaxError("unary name must begin with a lowercase letter", t);
-      return 0;
+      return NULL;
     }
    case Token::PRIMNAME:
     expr = implicitSelf;
@@ -353,7 +353,7 @@ Expr* Parser::parseUnary(Token* t, bool methodCandidate) {
     break;
    default:
     expecting(t, "a token beginning a unary expression");
-    return 0;
+    return NULL;
   }
   if (delegate) {
     switch (delegate->type) {
@@ -378,7 +378,7 @@ Expr* Parser::parseUnary(Token* t, bool methodCandidate) {
   while (t->type == Token::NAME || t->type == Token::PRIMNAME) {
     if (t->type == Token::NAME && isupper(t->string->AsCharP()[0])) {
       syntaxError("unary name must begin with a lowercase letter", t);
-      return 0;
+      return NULL;
     }
     expr = new Unary(expr, t->string, 0,
                      tStart->sourceStart, scanner->sourceAddr(),
@@ -429,7 +429,7 @@ Object* Parser::parseObject(char match, Token* t, fint nargs,
   fint        source_body_col;
   const char* source_body_start;
   fint        source_body_length;
-  Token*      object_annotation = 0;
+  Token*      object_annotation = NULL;
 
   fint        source_line   = t->line;
   fint        source_column = t->column;
@@ -441,15 +441,15 @@ Object* Parser::parseObject(char match, Token* t, fint nargs,
   bool ok = parseBody(slots, code, t, nargs, 
                       source_body_start, source_body_line, source_body_col,
                       object_annotation);
-  if (! ok) return 0;
+  if (! ok) return NULL;
 
   if ( !methodCandidate && (match == ')') && !code->IsEmpty() ) {
     if (!slots->IsEmpty()) {
       innerMethodError(t);
-      return 0;
+      return NULL;
     } else
       if (!checkSubExpression(code,t))
-        return 0;
+        return NULL;
   }
 
   // If this object has code code make sure its slots are non methods
@@ -463,7 +463,7 @@ Object* Parser::parseObject(char match, Token* t, fint nargs,
     assertToken(closing_token, ']', "a ']' token");
     if (code->Length() == 0 && slots->ArgCount() > 0) {
       syntaxError("blocks without code cannot have arguments", t);
-      return 0;
+      return NULL;
     }
   }
   source_length = scanner->sourceAddr() - source_start;
@@ -488,11 +488,11 @@ Object* Parser::parseObject(char match, Token* t, fint nargs,
 
   if (!o->body->IsEmpty()) {
     Token* tok = scanner->commentList->isEmpty() 
-      ? 0 : scanner->commentList->last();
+      ? NULL : scanner->commentList->last();
     while (tok && tok->sourceStart >= source_start) {
       scanner->commentList->pop();
       tok = scanner->commentList->isEmpty() 
-        ? 0 :  scanner->commentList->last();
+        ? NULL :  scanner->commentList->last();
     }
   }
   
@@ -501,7 +501,7 @@ Object* Parser::parseObject(char match, Token* t, fint nargs,
     // check existence of local methods in blocks with code
     if (o->ContainsMethod()) {
       syntaxError("sorry - local methods not implemented yet", t);
-      return 0;
+      return NULL;
     }    
   }
   return o;
@@ -528,12 +528,12 @@ bool Parser::parseBody(SlotList*& slots, ExprList*& code, Token* t, fint nargs,
 
   scanner->start_allowing_comments();
   code = new ExprList;
-  Token* periodTok = 0;
+  Token* periodTok = NULL;
   for (;;) {
     if (t->type == ')' || t->type == ']' || t->type == Token::ACCEPT) {
       break;
     }
-    if ( periodTok != 0)
+    if ( periodTok != NULL)
       code = code->Append(new Pop( periodTok->sourceStart, 
                                    periodTok->sourceStart + 1,
                                    scanner->fileName(),
@@ -573,11 +573,11 @@ SlotList* Parser::parseObjectSlots(Token* t, Token*& object_annotation) {
   SlotList* slots = new SlotList;
   slots = parseSlots(slots, "", finalT, object_annotation);
   if (!slots) {
-    return 0;
+    return NULL;
   }
   if (finalT->type != '|') {
     expecting(finalT, "'|' at end of slot list");
-    return 0;
+    return NULL;
   }
   return slots;
 }
@@ -590,18 +590,18 @@ SlotList* Parser::parseAnnotatedSlots(Token* t, SlotList* slots, const char* ann
   t = scanner->get_token(); CHECK_TOKEN(t);
   if (t->type != Token::STRING) {
     expecting(t, "a string containing an annotation");
-    return 0;
+    return NULL;
   }
 
   Token* finalT;
   slots = parseSlots(slots, extend_annotation_with_string(annos, t), finalT,
                      object_annotation);
   if (!slots) {
-    return 0;
+    return NULL;
   }
   if (finalT->type != Token::ANNOTATION_END) {
     expecting(finalT, "'}' at end of annotated slot list");
-    return 0;
+    return NULL;
   }
   return slots;
 }
@@ -617,12 +617,12 @@ SlotList* Parser::parseSlots(SlotList* slots, const char* annos, Token*& finalT,
         t = scanner->get_token(); CHECK_TOKEN(t);
         if (t->type != '=') {
           expecting(t, "'=' when defining an object annotation");
-          return 0;
+          return NULL;
         }
         t = scanner->get_token(); CHECK_TOKEN(t);
         if (t->type != Token::STRING) {
           expecting(t, "a string containing an annotation");
-          return 0;
+          return NULL;
         }
         object_annotation = t;
       } else {
@@ -672,22 +672,22 @@ SlotList* Parser::parseSlot(SlotList* slots, Token* t, const char* anno) {
     return parseKeywordSlot(slots, t, anno);
    default:
     expecting(t, "a slot name expression");
-    return 0;
+    return NULL;
   }
 }
 
 SlotList* Parser::parseArgSlot(SlotList* slots, Token* t, const char* anno) {
   assertToken(t, Token::ARG, "an argument token");
-  if (!isValidSlotName(t)) return 0;
+  if (!isValidSlotName(t)) return NULL;
   return slots->Append(new ArgSlot(t->string, t, anno), this);
 }
 
 SlotList* Parser::parseUnarySlot(SlotList* slots, Token* t0, const char* anno) {
   if (t0->type != Token::NAME && t0->type != Token::PRIMNAME) {
     expecting(t0, "a name token");
-    return 0;
+    return NULL;
   }
-  if (!isValidSlotName(t0)) return 0;
+  if (!isValidSlotName(t0)) return NULL;
   String* name = t0->string;
   Token* t = scanner->get_token(); CHECK_TOKEN(t);
   bool is_parent_slot = false;
@@ -699,7 +699,7 @@ SlotList* Parser::parseUnarySlot(SlotList* slots, Token* t0, const char* anno) {
       if (tokLen > 1) {
         if (s[1] == '*') {
           syntaxError("only a single * is allowed for a parent slot", t);
-          return 0;
+          return NULL;
         } else {
           while (--tokLen > 0)
             scanner->push_char(s[tokLen]);
@@ -711,10 +711,10 @@ SlotList* Parser::parseUnarySlot(SlotList* slots, Token* t0, const char* anno) {
   }
   if (t->type == '=') {                  // read-only slot or unary method
     Expr* expr = parseExpr(scanner->get_token(), true); 
-    if (! expr) return 0;
+    if (! expr) return NULL;
     if (expr->IsMethod() && expr->ContainsMethod()) {
       syntaxError("sorry - local methods not implemented yet", t0);
-      return 0;
+      return NULL;
     }    
     return slots->Append(new DataSlot(name, expr, t0, anno, is_parent_slot),
                          this);
@@ -722,14 +722,14 @@ SlotList* Parser::parseUnarySlot(SlotList* slots, Token* t0, const char* anno) {
     Expr* expr;
     if (t->type == Token::ARROW) {
       expr = parseExpr();          
-      if (! expr) return 0;
+      if (! expr) return NULL;
       if (expr->IsMethod()) {
         syntaxError("sorry - assignable methods not implemented", t0);
-        return 0;
+        return NULL;
       }
     } else {
       scanner->push_token(t);
-      expr = 0;
+      expr = NULL;
     }
     slots = slots->Append(new DataSlot(name, expr, t0, 
                                        anno, is_parent_slot, true), this);
@@ -749,17 +749,17 @@ Object* Parser::parseMethodDecl(Token* t, fint nargs, fint nargsSeen) {
     } else {
       syntaxError("object expected", t);
     }
-    return 0;
+    return NULL;
   }
   obj = parseObject(t->type == '(' ? ')' : ']', t, nargs - nargsSeen, true);
-  if (! obj) return 0;
+  if (! obj) return NULL;
   if (nargs > 0 && !obj->IsMethod()) {
     syntaxError("empty objects cannot have arguments", t);
-    return 0;
+    return NULL;
   }
   if (obj->ContainsMethod()) {
     syntaxError("sorry - local methods not implemented yet", t);
-    return 0;
+    return NULL;
   }    
 
   return obj;
@@ -770,21 +770,21 @@ SlotList* Parser::parseBinarySlot(SlotList* slots, Token* t, const char* anno) {
   Token* t0 = t;
   if (! isOp(t)) {
     expecting(t, "a binary operator token");
-    return 0;
+    return NULL;
   }
   String* name = StringFromOp(t);
   t = scanner->get_token(); CHECK_TOKEN(t);
   Expr* expr;
   if (t->type == Token::NAME) {                    // argument
-    if (!isValidSlotName(t)) return 0;
+    if (!isValidSlotName(t)) return NULL;
     Token* argument_token = t;
     t = scanner->get_token(); CHECK_TOKEN(t);
     expr = parseMethodDecl(t, 1, 1);        // no arg slot
-    if (! expr) return 0;
+    if (! expr) return NULL;
     expr = expr->AddArg(new ArgSlot(argument_token->string, argument_token), this);
   } else {
     expr = parseMethodDecl(t, 1, 0);        // should have 1 arg slot
-    if (! expr) return 0;
+    if (! expr) return NULL;
   }
   return slots->Append(new DataSlot(name, expr, t0, anno), this);
 }
@@ -793,10 +793,10 @@ SlotList* Parser::parseKeywordSlot(SlotList* slots, Token* t, const char* anno) 
   Token* t0 = t;
   if (t->type != Token::KEYWORD && t->type != Token::PRIMKEYWORD) {
     expecting(t, "a keyword token");
-    return 0;
+    return NULL;
   }
   StringList* keywords = new StringList(t->string);
-  if (!isValidSlotName(t)) return 0;
+  if (!isValidSlotName(t)) return NULL;
   t = scanner->get_token(); CHECK_TOKEN(t);
   Expr* expr;
   if (t->type == Token::NAME) {                    // args in selector
@@ -811,9 +811,9 @@ SlotList* Parser::parseKeywordSlot(SlotList* slots, Token* t, const char* anno) 
     }
     expr = parseMethodDecl(t, args->Length(), args->Length());      
   // no more arg slots, please
-    if (! expr) return 0;
+    if (! expr) return NULL;
     expr = expr->AddArgs(args, this);
-    if (! expr) return 0;
+    if (! expr) return NULL;
   } else {                                // args slot names in body
     fint nargs = 1;
     while (t->type == Token::CAPKEYWORD) {
@@ -822,7 +822,7 @@ SlotList* Parser::parseKeywordSlot(SlotList* slots, Token* t, const char* anno) 
       t = scanner->get_token(); CHECK_TOKEN(t);
     }
     expr = parseMethodDecl(t, nargs, 0);  // must have arg slots
-    if (! expr) return 0;
+    if (! expr) return NULL;
   }
   String* s = keywords->AsSelector();
   return slots->Append(new DataSlot(s, expr, t0, anno), this);
@@ -869,12 +869,12 @@ bool Parser::testDone() {
 Expr* Parser::readExpr(fint& line, const char*& sourceStart, fint& sourceLength) {
   Token* t = scanner->get_token();
   line = t->line;
-  Expr* e = 0;
+  Expr* e = NULL;
   if (t->type != Token::ACCEPT) {
     if (t->type == Token::ERROR_TOKEN) {
       sourceStart= scanner->sourceAddr();
       sourceLength= 0;
-      return 0;
+      return NULL;
     }
     sourceStart = scanner->lastWhiteSpaceBefore(t->sourceStart);
     e = parseExpr(t, true);
@@ -915,17 +915,17 @@ Object* Parser::readBody(fint& line, fint& col,
 
   if (t->type == Token::ACCEPT) {
     prematureEOF(t);
-    return 0;
+    return NULL;
   }
 
   if (t->type == Token::ERROR_TOKEN) {
     syntaxError("syntax error", t);
-    return 0;
+    return NULL;
   }
 
   SlotList* slots;
   ExprList* code;
-  Token* object_annotation = 0;
+  Token* object_annotation = NULL;
 
   if (parseBody(slots, code, t, -1, sourceStart, line, col, object_annotation)) {
     testDone();
@@ -948,12 +948,12 @@ Object* Parser::readBody(fint& line, fint& col,
     
     if (!e->body->IsEmpty() && e->ContainsMethod()) {
       syntaxError("sorry - local methods not implemented yet", t);
-      return 0;
+      return NULL;
     }
     return e;
   }
   assert(parse_error_message, "Parse error missing");
-  return 0;
+  return NULL;
 }
 
 bool fill_data_slot(oop obj, const char* slot_name, oop value) {

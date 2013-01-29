@@ -15,12 +15,12 @@ class vframeMap : public codeLikeSlotsMap {
   bool is_programmable_slots()  { return false; }
 
   // cloning
-  oop basic_clone(oop obj, bool mustAllocate= true, oop genObj= 0) {
+  oop basic_clone(oop obj, bool mustAllocate= true, oop genObj= NULL) {
     return slotsMapDeps::clone(obj, mustAllocate, genObj); }
-  oop clone(oop obj, bool mustAllocate= true, oop genObj= 0);
+  oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL);
   bool can_inline_clone() { return false; }
   oop cloneSize(oop obj, fint length, bool mustAllocate= true,
-                oop filler= 0);
+                oop filler= NULL);
   
   // mirror operations
   oop mirror_names(oop r);

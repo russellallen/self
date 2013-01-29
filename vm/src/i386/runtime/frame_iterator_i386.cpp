@@ -20,14 +20,14 @@ void FrameIterator::do_vm_frame() {
 
 void FrameIterator::do_incoming_arguments_of_vm_frame_called_from_self() {
   frame* s = f->sender();
-  if (s == 0  ||  !s->is_self_frame())
+  if (s == NULL  ||  !s->is_self_frame())
     return;
   // hit the outgoing args of the self frame in case it is later patched
   // (when a frame is patched we grab its outgoing args)
   fint n = s->outgoing_arg_count(f);
   for (fint i = 0;  i < n + 1 /*rcvr*/;  ++i)
     oop_closure->do_oop(
-      f->location_addr_of_incoming_argument(LocationOfSavedOutgoingArgInSendee(i-1), 0));
+      f->location_addr_of_incoming_argument(LocationOfSavedOutgoingArgInSendee(i-1), NULL));
 }
 
 

@@ -199,7 +199,7 @@
       }
       ok->define();
     } else {
-      Label* checkMap = 0;
+      Label* checkMap = NULL;
       a->AndCCI(LReceiverReg, Mem_Tag, G0);  // test for mem tag
       checkMap = a->BneForward(true);       // branch if receiver is a mem oop
       a->LoadI(LReceiverReg, map_offset(), Temp1);   // load map in delay slot
@@ -263,7 +263,7 @@
           ok = a->BneForward(false);            // branch if parent is a float
           if (l->target->links) a->Nop();
         } else {
-          Label* miss = 0;
+          Label* miss = NULL;
           if (!FastMapTest) {
             a->AndCCI(Temp1, Mem_Tag, G0);      // test for mem tag
             Label* mem = a->BneForward(true);   // branch if parent is mem oop

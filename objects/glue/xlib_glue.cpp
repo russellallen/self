@@ -193,13 +193,13 @@ oop XNextEvent_wrap(Display *display, bool peek,
     sprintf(err, "unknown X event, type = %d", type);
     failure(FH, err);
     delete evt;
-    return 0;
+    return NULL;
   }
   oop proto = eventProtos->obj_at(type);
   if (!proto->is_proxy()) {
     prim_failure(FH, BADTYPEERROR);
     delete evt;
-    return 0;
+    return NULL;
   }
   proxyOop res = proxyOop(proto)->clone();
   res->set_pointer(evt);
@@ -238,7 +238,7 @@ XWindowAttributes *XGetWindowAttributes_wrap(Display *display,
   if (!XGetWindowAttributes(display, win, attrs)) {
     prim_failure(FH, PRIMITIVEFAILEDERROR);
     delete attrs;
-    return 0;
+    return NULL;
   }
   return attrs;
 }
@@ -407,7 +407,7 @@ void XDrawString16_wrap(Display *display, Drawable drawable,
   assert(sizeof(XChar2b) == sizeof(unsigned short),
          "XDrawString16_wrap: bad int sizes");
   XChar2b *xstr = (XChar2b *)str->convertUnsignedShortArray();
-  if (xstr == 0)
+  if (xstr == NULL)
     prim_failure(FH, BADTYPEERROR);
   else
     XDrawString16(display, drawable, gc, x, y, xstr, str->length());
@@ -416,9 +416,9 @@ void XDrawString16_wrap(Display *display, Drawable drawable,
 
 XFontStruct* XLoadQueryFont_wrap(Display* display, const char* name, void* FH) {
   XFontStruct* font_struct = XLoadQueryFont(display, name);
-  if (font_struct == 0) {
+  if (font_struct == NULL) {
     failure(FH, "font does not exist");
-    return 0;
+    return NULL;
   }
   return font_struct;
 }
@@ -448,7 +448,7 @@ int XStringToTextProperty_wrap(XTextProperty* textProperty, char* string) {
 int XLookupString_wrap(XKeyEvent* event, char* string, int len,
                        objVectorOop keySym) {
   KeySym ks;
-  int n = XLookupString(event, string, len, &ks, 0);
+  int n = XLookupString(event, string, len, &ks, NULL);
   if (keySym->length() >= 1) keySym->obj_at_put(0, as_smiOop(ks), false);
   return n;
 }
@@ -507,7 +507,7 @@ XVisualInfo* XMatchVisualInfo_wrap(Display* display, int screen, int depth,
   if (!XMatchVisualInfo(display, screen, depth, vclass, vinfo_return)) {
     delete vinfo_return;
     failure(FH, "no matching visual found");
-    return 0;
+    return NULL;
   }
   return vinfo_return;
 }
@@ -547,7 +547,7 @@ char *XFetchBytes_wrap(Display* display, void *FH) {
   char* buffer;
   if ((result = XFetchBytes(display, &size)) == 0) {
     failure(FH, "xFetchBytes failed");
-    return 0;
+    return NULL;
   }
 
   // null terminate the string before returning.
@@ -631,7 +631,7 @@ Window XTranslateCoordinates_wrap(Display *display,
   if (src_coords->length() < 3)  {   // Yes, 3. We need a place for the bool
                                      // result of XTranslateCoordinates.
     prim_failure(FH, BADSIZEERROR);
-    return 0;
+    return NULL;
   }
   oop ox, oy, ret;
   int newX, newY;
@@ -640,7 +640,7 @@ Window XTranslateCoordinates_wrap(Display *display,
   oy = src_coords->obj_at(1);
   if (!ox->is_smi() || !oy->is_smi()) {
     prim_failure(FH, BADTYPEERROR);
-    return 0;
+    return NULL;
   }
   if (XTranslateCoordinates(display, src_w, dst_w, 
                             smiOop(ox)->value(), smiOop(oy)->value(),

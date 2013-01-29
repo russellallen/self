@@ -51,15 +51,15 @@ class CountStub : public NCodeBase {
   sendDesc* sender_sendDesc() {
     sendDesc *s= sd();  return s ? s : pic()->sd(); }
   nmethod* sender();           // sending nmethod
-  sendDesc* sd();               // calling sendDesc (0 if PIC)
-  CacheStub* pic();             // calling PIC (0 if sendDesc)
+  sendDesc* sd();               // calling sendDesc (NULL if PIC)
+  CacheStub* pic();             // calling PIC (NULL if sendDesc)
   virtual void moveTo_inner(NCodeBase* to, int32 delta, int32 size);
   void shift_target(nmln* l, int32 delta);
   void shift_count_addr(int32 delta);
   NCodeBase* unlink_me(nmln* l);
   void forwardLinkedSend(nmln* l, nmethod* to);
-  void rebind(nmethod* nm, pc_t entryPoint = 0);
-  void setVerifiedEntryPoint(nmethod *nm= 0);
+  void rebind(nmethod* nm, pc_t entryPoint = NULL);
+  void setVerifiedEntryPoint(nmethod *nm= NULL);
   void unlinkFromSendDesc();
   void initSendDesc(nmln* sd_nmln);
   virtual void init(nmethod* nm) { Unused(nm); }

@@ -34,7 +34,7 @@ class NameDesc: public ResourceObj {
 
   virtual bool hasLocation()    { return false; }
   virtual Location location() { SubclassResponsibility(); return Location(0); }
-  virtual oop value()   { SubclassResponsibility(); return 0; } 
+  virtual oop value()   { SubclassResponsibility(); return NULL; } 
   
   virtual bool verify() { return true; }
   virtual void print() = 0;

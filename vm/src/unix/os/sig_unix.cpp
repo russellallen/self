@@ -14,9 +14,9 @@ int SignalInterface::currentTimerSignal = 0;
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
   ||  TARGET_OS_VERSION ==   LINUX_VERSION
-  static void signal_handler(int sig, self_code_info_t *info = 0, self_sig_context_t *scp = 0);
+  static void signal_handler(int sig, self_code_info_t *info = NULL, self_sig_context_t *scp = NULL);
 # elif TARGET_OS_VERSION == SUNOS_VERSION
-  static void signal_handler(int sig, int code = 0, self_sig_context_t *scp = 0, char *addr = 0);
+  static void signal_handler(int sig, int code = 0, self_sig_context_t *scp = NULL, char *addr = NULL);
 # else
   # error what?
 # endif
@@ -48,7 +48,7 @@ void OSToSelfSignalMapper::init_platform() {
 
 
 bool SignalInterface::is_on_signal_stack(char* sp) {
-  if (sp == 0)  sp = (char*)currentFrame();
+  if (sp == NULL)  sp = (char*)currentFrame();
   return signal_stack <= sp  
       &&           sp <  signal_stack + signal_stack_size;
 }
@@ -60,7 +60,7 @@ bool SignalInterface::is_off_signal_stack(char* sp) {
   
   
 void SignalInterface::wait_for_any() {
-  select(0, 0, 0, 0, 0);
+  select(0, NULL, NULL, NULL, NULL);
   IntervalTimer::do_all_sync_tasks();
 }
 
@@ -129,7 +129,7 @@ bool SignalInterface::is_map_load_signal(int sig) { return sig == SIGSEGV  || si
 static void currentMask() {
  sigset_t current_mask;
 
- sigprocmask(SIG_SETMASK, 0, &current_mask);
+ sigprocmask(SIG_SETMASK, NULL, &current_mask);
  for(int i = 1; i < 34; i++) {
    if (sigismember(&current_mask, i)) fprintf(stderr, "Sig-%d, ", i);
  }
@@ -152,7 +152,7 @@ void SignalInterface::install_signal(int sig, Signal_Handler_t handler) {
   action.sa_mask    = sig_mask;
   action.sa_flags   = install_flags();
 
-  if (sigaction(sig, &action, 0) == -1) {
+  if (sigaction(sig, &action, NULL) == -1) {
     perror("sigaction");
     fatal1("couldn't install signal action for signal %ld", sig);
   }
@@ -224,7 +224,7 @@ static void signal_handler(int sig, self_code_info_t *info, self_sig_context_t *
     SignalInterface::currentNonTimerSignal = sig;
 
     sigset_t oset;
-    if (sigprocmask(0, 0, &oset) != 0) {
+    if (sigprocmask(0, NULL, &oset) != 0) {
       perror("sigprocmask");
       fatal("sigprocmask failed");
     }
@@ -233,8 +233,8 @@ static void signal_handler(int sig, self_code_info_t *info, self_sig_context_t *
       
     InterruptedContext::the_interrupted_context->set(scp);
     SignalInterface::handle_signal( sig, 
-                                    info == 0  ?  0  :  (char*)info->si_addr, 
-                                    info == 0  ?  0  :         info->si_code );
+                                    info == NULL  ?  NULL  :  (char*)info->si_addr, 
+                                    info == NULL  ?  NULL  :         info->si_code );
     InterruptedContext::the_interrupted_context->invalidate();
 
     SignalInterface::currentNonTimerSignal = 0;
@@ -263,7 +263,7 @@ void SignalInterface::init_signal_stack() {
   ss.ss_sp    = signal_stack = (char*)valloc(signal_stack_size);
   ss.ss_size  = signal_stack_size;
   ss.ss_flags = 0;
-  if ( sigaltstack(&ss, 0) == -1) {
+  if ( sigaltstack(&ss, NULL) == -1) {
     perror("sigaltstack");
     fatal("cannot install alternate signal stack");
   }
@@ -277,7 +277,7 @@ void SignalInterface::init_signal_stack() {
   struct sigstack ss;
   ss.ss_sp = signal_stack + signal_stack_size;     // stack grows downwards
   ss.ss_onstack = false;
-  if (sigstack(&ss, 0) == -1) {
+  if (sigstack(&ss, NULL) == -1) {
    perror("sigstack");
   fatal("cannot install signal stack");
   }

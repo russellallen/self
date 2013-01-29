@@ -48,7 +48,7 @@ class interpreter: public abstract_interpreter {
   int32 _length_locals;
   int32 minOffset;
   bool hasParentLocalSlot;
-  oop* cloned_blocks; // 0 or cloned block
+  oop* cloned_blocks; // NULL or cloned block
   oop* stack;
   int32 sp;
   oop self;
@@ -68,7 +68,7 @@ class interpreter: public abstract_interpreter {
   ReturnPatchReason  return_patch_reason;
   bool               restartSend;
   
-  interpreter* parentI; // interp of lexical parent or 0
+  interpreter* parentI; // interp of lexical parent or NULL
   
  protected:
    frame* _block_scope_or_NLR_target;
@@ -203,7 +203,7 @@ extern void InterpreterLookup_cont( simpleLookup *L, int32 arg_count);
     for ( p = (interp)->cloned_blocks;  \
           p < &(interp)->cloned_blocks[(interp)->mi.length_literals]; \
         ++p) { \
-      if (*p != 0) { template; }  \
+      if (*p != NULL) { template; }  \
     } \
     for (p = (interp)->stack;  p < &(interp)->stack[(interp)->sp];  p++) { \
       template; \
@@ -251,7 +251,7 @@ class InterpreterIterator: public StackObj {
     for ( p = (interp)->cloned_blocks;   
           p < &(interp)->cloned_blocks[(interp)->mi.length_literals];
         ++p) { 
-      if (*p != 0) { oop_closure->do_oop(p); } 
+      if (*p != NULL) { oop_closure->do_oop(p); } 
     }
     for (p = (interp)->stack;  p < &(interp)->stack[(interp)->sp];  p++) { 
       oop_closure->do_oop(p);

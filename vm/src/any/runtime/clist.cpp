@@ -95,14 +95,14 @@ void CList::nthPut(fint i, CListEntry* d) {
 
 CListElem* CList::spliceOutNext(CListElem* pe) {
   CListElem* e;
-  if (pe == 0) {
+  if (pe == NULL) {
     e = head()->next();
     _head = e;
   } else {
     e = pe->next()->next();
     pe->setNext(e);
   }
-  if (e == 0) {
+  if (e == NULL) {
     _tail = pe;
   }
   return e;
@@ -179,7 +179,7 @@ bool CList::identityEQ(CList* l) {
 }
 
 void CList::remove(CListEntry* d) {
-  for (CListElem* e = head(), *pe = 0; e; pe = e, e = e->next()) {
+  for (CListElem* e = head(), *pe = NULL; e; pe = e, e = e->next()) {
     if (e->data()->EQ(d)) {
       spliceOutNext(pe);
       break;
@@ -194,7 +194,7 @@ void CList::removeList(CList* l) {
 }
 
 void CList::identityRemove(CListEntry* d) {
-  for (CListElem* e = head(), *pe = 0; e; pe = e, e = e->next()) {
+  for (CListElem* e = head(), *pe = NULL; e; pe = e, e = e->next()) {
     if (e->data() == d) {
       spliceOutNext(pe);
       break;
@@ -210,7 +210,7 @@ void CList::identityRemoveList(CList* l) {
 
 #ifdef UNUSED
 CList* CList::intersection(CList* l, bool makeCopy) {
-  CListElem* e = head(), *pe = 0;
+  CListElem* e = head(), *pe = NULL;
   while (e) {
     CListEntry* x = e->data();
     if (! l->includes(x)) {
@@ -227,7 +227,7 @@ CList* CList::intersection(CList* l, bool makeCopy) {
 #endif
 
 CList* CList::identityIntersection(CList* l, bool makeCopy) {
-  CListElem* e = head(), *pe = 0;
+  CListElem* e = head(), *pe = NULL;
   while (e) {
     CListEntry* x = e->data();
     if (! l->identityIncludes(x)) {

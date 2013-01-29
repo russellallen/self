@@ -12,7 +12,7 @@ lookupTarget* objectLookupTarget::get_target_for_slot(slotDesc* s,
     return new objectLookupTarget( obj->get_slot(s));
   
   if (L->is_for_inlining())
-    return 0;
+    return NULL;
 
   objectLookupTarget* target =
     new objectLookupTarget(obj->get_slot(s));
@@ -30,7 +30,7 @@ lookupTarget* mapLookupTarget::get_target_for_slot(slotDesc* s,
   if ( s->is_map_slot() )
     return new objectLookupTarget( s->data);
   
-  return 0;
+  return NULL;
 }
     
   
@@ -64,10 +64,10 @@ lookupTarget*
         return ( new mapLookupTarget(t->map())) -> be_receiver();
       } else {
         // don't know the receiver type
-        return 0;
+        return NULL;
       }
     } else if (! s->is_map_slot()) {
-      return 0;
+      return NULL;
     } else {
       return new objectLookupTarget(s->data);
     }
@@ -85,7 +85,7 @@ lookupTarget*
 assignableSlotLink* assignableSlotLink::add(slotDesc* s,
                                             objectLookupTarget* t) {
   assignableSlotLink* e = new assignableSlotLink(s, t);
-  if (this == 0) return e;
+  if (this == NULL) return e;
   assignableSlotLink *l, *n;
   for (l = this, n = l->next;
        n;

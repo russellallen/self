@@ -20,7 +20,7 @@ smi fctProxyOopClass::get_noOfArgs_prim(void *FH) {
 oop fctProxyOopClass::set_noOfArgs_prim(smi n, void *FH) {
   if (!is_live()) {
     prim_failure(FH, DEADPROXYERROR);
-    return 0;
+    return NULL;
   }
   set_noOfArgs(n);
   return this;

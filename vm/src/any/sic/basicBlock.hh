@@ -28,7 +28,7 @@
     int32 _id;                  // unique BB id
    public:      
     void init(Node* f, Node* l, fint n);
-    int32 id() { return this == 0 ? -1 : _id; }
+    int32 id() { return this == NULL ? -1 : _id; }
   };
   
   NodeClassTemplate(AbstractBB, BasicBlockBase)
@@ -40,7 +40,7 @@
    public:
     BB(Node* f, Node* l, fint n) { init(f, l, n); }
 
-    bool hasSingleSuccessor()   { return next1() == 0; }
+    bool hasSingleSuccessor()   { return next1() == NULL; }
     bool hasSinglePredecessor() { return _prevs->length() <= 1; }
     
     void localCopyPropagate();
@@ -107,7 +107,7 @@
     
    public:
     BBIterator() {
-      bbTable = 0; dominators = 0; bbCount = 0; usesBuilt = false; 
+      bbTable = NULL; dominators = NULL; bbCount = 0; usesBuilt = false; 
     }
 
     void build(Node* first);            // build bbTable

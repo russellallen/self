@@ -10,8 +10,8 @@
 # include "_monitorWindow.cpp.incl"
 
 MonitorWindow::MonitorWindow() {
-  _m = 0;
-  pw = 0;
+  _m = NULL;
+  pw = NULL;
 }
 
 
@@ -30,7 +30,6 @@ bool MonitorWindow::open_and_resize(Monitor* m) {
     pw = (AbstractPlatformWindow*) new XPlatformWindow;
   }
   # endif
-
   if (!pw) {
     warning("no window system for spy");
     return false;

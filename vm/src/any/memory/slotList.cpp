@@ -8,7 +8,7 @@
 
 slotList* slotList::add(stringOop name, slotType type, oop contents, oop anno)
 {
-  if (this == 0) {
+  if (this == NULL) {
     // empty list
     return new slotList(name, type, contents, anno);
   }

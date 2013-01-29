@@ -192,7 +192,7 @@
   static bool checkLocalSlot(stringOop sel, checkLocalSendFn isLocal) {
     assert(!UseLocalAccessBytecodes, "relic of the past");
     for (fint i = methodStack->length() - 1; i >= 0; i--) {
-      if (methodStack->nth(i)->find_slot(sel) != 0) return true;
+      if (methodStack->nth(i)->find_slot(sel) != NULL) return true;
     }
     return isLocal(sel);
   }
@@ -329,7 +329,7 @@
   static bool checkLocal(stringOop sel) {
     assert(!UseLocalAccessBytecodes, "relic of the past");
     slotDesc* sd;
-    return checkLocal_scope->lookup(sel, sd) != 0;
+    return checkLocal_scope->lookup(sel, sd) != NULL;
   }
 
   fint sicCost(oop meth, SCodeScope* s, CostParam* cp) {

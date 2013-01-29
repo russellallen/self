@@ -8,11 +8,11 @@
 # include "_monitorHooks.cpp.incl"
 
 fint  ShowLookupInMonitor::lookup_nesting = 0;
-const char* ShowVMActivityInMonitor::current_activity = 0;
-const char* ShowCompileInMonitor::method_being_compiled = 0;
-const char* ShowCompileInMonitor::old_method_being_compiled = 0;
-const char* ShowCompileInMonitor::current_compiler_name = 0;
-fint* ShowCompileInMonitor::current_compiler_ticks = 0;
+const char* ShowVMActivityInMonitor::current_activity = NULL;
+const char* ShowCompileInMonitor::method_being_compiled = NULL;
+const char* ShowCompileInMonitor::old_method_being_compiled = NULL;
+const char* ShowCompileInMonitor::current_compiler_name = NULL;
+fint* ShowCompileInMonitor::current_compiler_ticks = NULL;
 fint  ShowCompileInMonitor::compiler_ticks[2] = {0, 0};
 bool  ShowCompileInMonitor::recompiling = false;
 int32 TrackCHeapInMonitor::_allocated = 0;
@@ -44,7 +44,7 @@ void TrackCHeapInMonitor::set_allocated(int32 a) { _allocated = a; }
 ShowCompileInMonitor::ShowCompileInMonitor(oop selector, const char* compiler, bool optimize) {
     if (TheSpy->is_active()) do_show_compile(selector, compiler, optimize); }
 
-ShowCompileInMonitor::~ShowCompileInMonitor() { method_being_compiled = 0; }
+ShowCompileInMonitor::~ShowCompileInMonitor() { method_being_compiled = NULL; }
 
 bool ShowCompileInMonitor::method_changed() { 
   bool r = old_method_being_compiled != method_being_compiled;
@@ -52,7 +52,7 @@ bool ShowCompileInMonitor::method_changed() {
   return r;
 }
 
-ResetMonitor::ResetMonitor() { if (TheSpy != 0) TheSpy->reset(); } 
+ResetMonitor::ResetMonitor() { if (TheSpy != NULL) TheSpy->reset(); } 
 
 
 // ==============================================================
@@ -62,7 +62,7 @@ void ShowCompileInMonitor::do_show_compile(oop sel, const char* compiler, bool o
   current_compiler_name = compiler;
   current_compiler_ticks = &compiler_ticks[optimize];
   assert(optimize == 0 || optimize == 1, "should use true or false");
-  recompiling = recompilee != 0;
+  recompiling = recompilee != NULL;
 }
 
 ShowVMActivityInMonitor::ShowVMActivityInMonitor(const char* what)  { 

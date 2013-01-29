@@ -70,7 +70,7 @@ class abstract_monitor: public CHeapObj {
   void tick_measure();
   virtual void tick_redraw() = 0;
   virtual void get_interrupted_frame_and_pc( frame*& f, char*& pc ) {
-    f = 0;  pc = 0; }
+    f = NULL;  pc = NULL; }
   virtual bool get_graphics_semaphore() { return false; }
   void show_activities();
   virtual void show_os_stuff();
@@ -122,7 +122,7 @@ class abstract_monitor: public CHeapObj {
 // the following are defined in class "monitor" so they
 //  can use macros & inlines instead of virtuals
 public:
-  void activate(const char* filename = 0) {
+  void activate(const char* filename = NULL) {
     Unused(filename); SubclassResponsibility(); }
   void adjust_after_resize();
  protected:

@@ -17,7 +17,7 @@ void   frame::set_nmethod_frame_chain(frame* f, nmethod* nm) {
   
 objVectorOop frame::patched_frame_saved_outgoing_args(nmethod* nm) {
   if (!SaveOutgoingArgumentsOfPatchedFrames)
-    return 0;
+    return NULL;
   assert(is_patched(), "saved outoing args only in patched frame");
   return *patched_frame_saved_outgoing_args_addr(nm); 
 }
@@ -65,7 +65,7 @@ void frame::adjust_return_addr(int32 delta) {set_return_addr(return_addr() + del
 
 Stack* frame::my_stack()   { 
   Stack* s = processes->stackFor(this); 
-  assert(s != 0, "");
+  assert(s != NULL, "");
   return s;
 }
 
@@ -82,7 +82,7 @@ bool frame::is_self_frame() {
 }
     
 bool frame::is_first_self_frame() {
-  return is_self_frame() && selfSender() == 0;
+  return is_self_frame() && selfSender() == NULL;
 }
 
 
@@ -92,7 +92,7 @@ frame* frame::sendee(frame* startFrameHint) {
   // used during conversions if the full frame could be a copied frame
   frame* f = startFrameHint;
   while (f && f->sender() != this) f = f->sender();
-  if (f == 0) f = my_stack()->callee_of(this);
+  if (f == NULL) f = my_stack()->callee_of(this);
   return f;
 }
 
@@ -103,7 +103,7 @@ frame* frame::selfSender() {
   frame* f = this;
   for (;;) {
     f = f->sender();
-    if (f == 0  ||  f->is_self_frame())
+    if (f == NULL  ||  f->is_self_frame())
       return f;
   }
 }
@@ -112,7 +112,7 @@ frame* frame::selfSender() {
 
 frame* frame::immediateSelfSender() {
   frame* f = sender();
-  return f != 0  &&  f->is_self_frame() ? f : 0;
+  return f != NULL  &&  f->is_self_frame() ? f : NULL;
 }
 
 
@@ -132,17 +132,17 @@ int32 frame::frame_size() {
 
 interpreter* frame::get_interpreter_of_block_scope() {
   char* cep = c_entry_point();
-  if (cep == 0)  return 0;
+  if (cep == NULL)  return NULL;
   Location loc = location_of_interpreter_of_block_scope( cep);
-  return loc == IllegalLocation ? 0 : (interpreter*) *location_addr(loc);
+  return loc == IllegalLocation ? NULL : (interpreter*) *location_addr(loc);
 }
 
 
 interpreter* frame::get_interpreter() {
   //  on sparc uses sender
   frame* f= block_scope_of_home_frame();
-  if (f == 0)
-    return 0;
+  if (f == NULL)
+    return NULL;
   return f->get_interpreter_of_block_scope();
 }
 
@@ -154,7 +154,7 @@ bool frame::is_interpreted_self_frame() {
   if (Interpret) fatal("Interpreter does not work on OSX");
   return false;
 # else
-  return get_interpreter() != 0;
+  return get_interpreter() != NULL;
 # endif
 }
   
@@ -179,22 +179,22 @@ nmethod* frame::code() {
   // The subtraction below does not seem to be needed to me.
   // But We need to work on Klein, so I'm not messing with it. -- dmu 2/04
   // Note, this also occurs in Pc::my_nmethod.
-  nmethod* r = nmethod::nmethodContaining(return_addr() - sizeof(class nmethod), 0);
+  nmethod* r = nmethod::nmethodContaining(return_addr() - sizeof(class nmethod), NULL);
   # if GENERATE_DEBUGGING_AIDS
     if (CheckAssertions) {
       char* ra = return_addr();
-      nmethod* nm1 = 0;
+      nmethod* nm1 = NULL;
            if   (r->contains(ra))  ;
-      else if ((nm1 = nmethod::nmethodContaining(ra, 0))->contains(ra))
+      else if ((nm1 = nmethod::nmethodContaining(ra, NULL))->contains(ra))
               fatal("should not have subtracted");
       else    fatal3("value 0x%x is not in any nmethod, either 0x%x, or 0x%x",
-                     ra, r, nmethod::nmethodContaining(ra, 0));
+                     ra, r, nmethod::nmethodContaining(ra, NULL));
     }
   # endif
   return r;
 # else
   ShouldNotReachHere();
-  return 0;
+  return NULL;
 # endif
 }
 
@@ -307,15 +307,15 @@ void frame::save_outgoing_arguments() {
 
 objVectorOop frame::extract_outgoing_args(frame* sendeeOrNULL) {
   if (!SaveOutgoingArgumentsOfPatchedFrames) {
-    return 0;
+    return NULL;
   }
   assert(is_self_frame(), "only works for Self frames");
   const bool traceEOA = false;
  
-  frame* s = sendeeOrNULL == 0  ?  sendee()  :  sendeeOrNULL;
+  frame* s = sendeeOrNULL == NULL  ?  sendee()  :  sendeeOrNULL;
   fint nargs = outgoing_arg_count(s);
   ResourceMark rm;
-  RegisterLocator* srl = s->is_self_frame() ? RegisterLocator::for_frame(s) : 0;
+  RegisterLocator* srl = s->is_self_frame() ? RegisterLocator::for_frame(s) : NULL;
   objVectorOop saved_args_and_rcvr = Memory->objVectorObj->cloneSize(nargs + 1 /* rcvr */);
   if (traceEOA) lprintf("***** frame::extract_outgoing_args: ");
   for (fint i = 0;  i < nargs + 1;  ++i) {
@@ -338,7 +338,7 @@ fint frame::outgoing_arg_count(frame* sendee) {
   if (sd->isPrimCall()) {
     char* addr = sd->jump_addr();
     PrimDesc* pd = getPrimDescOfFirstInstruction(addr, true);
-    assert(pd != 0, "no primitive descriptor");
+    assert(pd != NULL, "no primitive descriptor");
     r = pd->arg_count();
     if (traceOAC) lprintf("***** frame::outgoing_arg_count: pd = %s, r = %d\n", pd->name(), r);
   }
@@ -384,7 +384,7 @@ returnTrapHandlerFn frame::return_addr_for_patching( bool forceSelfFrame,
 
 bool frame::is_patched() {
   interpreter* interp = get_interpreter();
-  if (interp != 0)  return interp->is_return_patched();
+  if (interp != NULL)  return interp->is_return_patched();
   return isPatchedReturnAddress(real_return_addr()); 
 }
 
@@ -591,7 +591,7 @@ void HandleReturnTrap(oop result, char* sp_of_patched_frame,
 }  
 
 
-objVectorOop OutgoingArgsOfReturnTrapOrRecompileFrame = 0;
+objVectorOop OutgoingArgsOfReturnTrapOrRecompileFrame = NULL;
 
 void  unpatch_the_convertFrame_and_get_returnTrap_info(
         char* sp_of_patched_frame,
@@ -652,11 +652,11 @@ void trivial_exit_from_return_trap(oop result, char* sp_of_patched_frame, bool n
                                    frame* nlrHome, int32 nlrHomeID, char* selfPC,
                                    frame* patched_self_frame) {
   // trap was for vframeOops; continue
-  conversion = 0;
+  conversion = NULL;
   // returnToSelf will clear processSemaphore
   conversion->returnToSelf(result, sp_of_patched_frame, nlr, nlrHome, nlrHomeID,
                             selfPC == 0
-                              ?  0
+                              ?  NULL
                               :  patched_self_frame->send_desc(),
                             selfPC == 0);
   ShouldNotReachHere();
@@ -686,26 +686,26 @@ void NLR_exit_from_return_trap(
   if (selfPC == 0) { // interpreting
     convertFrame->get_interpreter()->restartSend = false;
     processSemaphore = false;
-    OutgoingArgsOfReturnTrapOrRecompileFrame = 0; // done with this
+    OutgoingArgsOfReturnTrapOrRecompileFrame = NULL; // done with this
     // return into interpreter
     return;
   } 
   
   # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
-    ((Conversion*)0)->nlr_to_compiled_self( result, false, nlrHome, nlrHomeID, (sendDesc*)selfPC, sp_of_patched_frame);
+    ((Conversion*)NULL)->nlr_to_compiled_self( result, false, nlrHome, nlrHomeID, (sendDesc*)selfPC, sp_of_patched_frame);
   # endif
     ShouldNotReachHere();
 }
 
 
 void patch_frame_at_end_of_NLR_for_returnTrap(frame* convertFrame, frame* nlrHome) {
-  if (nlrHome == 0) {
+  if (nlrHome == NULL) {
     // the block is from another process -- home isn't on our stack
     LOG_EVENT("HandleReturnTrap, nlrHome=0");
   }
   else {
     frame *f, *prev;
-    for (f= convertFrame, prev= 0;
+    for (f= convertFrame, prev= NULL;
          f && f->block_scope_of_home_frame() != nlrHome;
          prev= f, f= f->sender())
       ;
@@ -741,7 +741,7 @@ char *HandleProfilerTrap(char* return_address) {
 bool frame::verify(int n, RegisterLocator* rl) {
   bool r = true;
   interpreter* interp = get_interpreter();
-  if (interp != 0)
+  if (interp != NULL)
     r &= interp->verify();
   if (!ConversionInProgress || n > 0) {
 #   if defined(FAST_COMPILER) || defined(SIC_COMPILER)
@@ -789,7 +789,7 @@ void frame::printVerbose() {
   # endif
 
   interpreter* interp = get_interpreter();
-  if (interp != 0) interp->print();
+  if (interp != NULL) interp->print();
 }
 
 
@@ -801,9 +801,9 @@ void frame::printVerbose() {
 
 
 frame* frame::copy(fint nsenders, bool adjustBlocks) {
-  assert(this != 0, "");
+  assert(this != NULL, "");
   frame* last_frame_to_copy = find_last_frame_to_copy(nsenders);
-  if (last_frame_to_copy == 0) return 0;
+  if (last_frame_to_copy == NULL) return NULL;
   
   frame* first_copied_frame = copy_frames_through(last_frame_to_copy);
   adjust_frame_links_of_copied_frames(last_frame_to_copy, first_copied_frame);
@@ -828,7 +828,7 @@ frame* frame::find_last_frame_to_copy(fint nsenders) {
   frame* last_frame_to_copy = sender();
   for ( fint i = 0;  i < nsenders;  ++i ) {
     last_frame_to_copy = last_frame_to_copy->sender();
-    if (last_frame_to_copy == 0) return 0;
+    if (last_frame_to_copy == NULL) return NULL;
   }
   return last_frame_to_copy;
 }
@@ -873,7 +873,7 @@ RegisterString frame::mask_if_present() {
   if (!is_self_frame())  return 0;
   sendDesc* s = send_desc();
   // bottommost frame may have no sendDesc (uncommon trap etc.)
-  return s == 0  ?  0  :  s->mask();
+  return s == NULL  ?  0  :  s->mask();
 }
 
 bool frame::is_aligned() { 

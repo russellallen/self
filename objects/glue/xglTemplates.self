@@ -332,7 +332,7 @@ traits: traits xgl raw xWindow
 
   -- create nil proxy
   visibility: publicSlot
-   void nilXWindow = proxy_null Xgl_X_window* Xgl_X_window_seal {xgl xWindow deadCopy} get 0
+   void nilXWindow = proxy_null Xgl_X_window* Xgl_X_window_seal {xgl xWindow deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -366,7 +366,7 @@ traits: traits xgl raw arcAd3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilArcAd3d = proxy_null Xgl_arc_ad3d* Xgl_arc_ad3d_seal {xgl arcAd3d deadCopy} get 0
+   void nilArcAd3d = proxy_null Xgl_arc_ad3d* Xgl_arc_ad3d_seal {xgl arcAd3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -404,7 +404,7 @@ traits: traits xgl raw arcAf3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilArcAf3d = proxy_null Xgl_arc_af3d* Xgl_arc_af3d_seal {xgl arcAf3d deadCopy} get 0
+   void nilArcAf3d = proxy_null Xgl_arc_af3d* Xgl_arc_af3d_seal {xgl arcAf3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -442,7 +442,7 @@ traits: traits xgl raw arcD2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilArcD2d = proxy_null Xgl_arc_d2d* Xgl_arc_d2d_seal {xgl arcD2d deadCopy} get 0
+   void nilArcD2d = proxy_null Xgl_arc_d2d* Xgl_arc_d2d_seal {xgl arcD2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -480,7 +480,7 @@ traits: traits xgl raw arcD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilArcD3d = proxy_null Xgl_arc_d3d* Xgl_arc_d3d_seal {xgl arcD3d deadCopy} get 0
+   void nilArcD3d = proxy_null Xgl_arc_d3d* Xgl_arc_d3d_seal {xgl arcD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -528,7 +528,7 @@ traits: traits xgl raw arcF2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilArcF2d = proxy_null Xgl_arc_f2d* Xgl_arc_f2d_seal {xgl arcF2d deadCopy} get 0
+   void nilArcF2d = proxy_null Xgl_arc_f2d* Xgl_arc_f2d_seal {xgl arcF2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -566,7 +566,7 @@ traits: traits xgl raw arcF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilArcF3d = proxy_null Xgl_arc_f3d* Xgl_arc_f3d_seal {xgl arcF3d deadCopy} get 0
+   void nilArcF3d = proxy_null Xgl_arc_f3d* Xgl_arc_f3d_seal {xgl arcF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -614,7 +614,7 @@ traits: traits xgl raw arcI2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilArcI2d = proxy_null Xgl_arc_i2d* Xgl_arc_i2d_seal {xgl arcI2d deadCopy} get 0
+   void nilArcI2d = proxy_null Xgl_arc_i2d* Xgl_arc_i2d_seal {xgl arcI2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -652,7 +652,7 @@ traits: traits xgl raw arcList
 
   -- create nil proxy
   visibility: publicSlot
-   void nilArcList = proxy_null Xgl_arc_list* Xgl_arc_list_seal {xgl arcList deadCopy} get 0
+   void nilArcList = proxy_null Xgl_arc_list* Xgl_arc_list_seal {xgl arcList deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -744,7 +744,7 @@ traits: traits xgl raw bbox
 
   -- create nil proxy
   visibility: publicSlot
-   void nilBbox = proxy_null Xgl_bbox* Xgl_bbox_seal {xgl bbox deadCopy} get 0
+   void nilBbox = proxy_null Xgl_bbox* Xgl_bbox_seal {xgl bbox deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -788,7 +788,7 @@ traits: traits xgl raw bboxD2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilBboxD2d = proxy_null Xgl_bbox_d2d* Xgl_bbox_d2d_seal {xgl bboxD2d deadCopy} get 0
+   void nilBboxD2d = proxy_null Xgl_bbox_d2d* Xgl_bbox_d2d_seal {xgl bboxD2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -818,7 +818,7 @@ traits: traits xgl raw bboxD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilBboxD3d = proxy_null Xgl_bbox_d3d* Xgl_bbox_d3d_seal {xgl bboxD3d deadCopy} get 0
+   void nilBboxD3d = proxy_null Xgl_bbox_d3d* Xgl_bbox_d3d_seal {xgl bboxD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -848,7 +848,7 @@ traits: traits xgl raw bboxF2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilBboxF2d = proxy_null Xgl_bbox_f2d* Xgl_bbox_f2d_seal {xgl bboxF2d deadCopy} get 0
+   void nilBboxF2d = proxy_null Xgl_bbox_f2d* Xgl_bbox_f2d_seal {xgl bboxF2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -878,7 +878,7 @@ traits: traits xgl raw bboxF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilBboxF3d = proxy_null Xgl_bbox_f3d* Xgl_bbox_f3d_seal {xgl bboxF3d deadCopy} get 0
+   void nilBboxF3d = proxy_null Xgl_bbox_f3d* Xgl_bbox_f3d_seal {xgl bboxF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -908,7 +908,7 @@ traits: traits xgl raw bboxI2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilBboxI2d = proxy_null Xgl_bbox_i2d* Xgl_bbox_i2d_seal {xgl bboxI2d deadCopy} get 0
+   void nilBboxI2d = proxy_null Xgl_bbox_i2d* Xgl_bbox_i2d_seal {xgl bboxI2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -938,7 +938,7 @@ traits: traits xgl raw bboxStatus
 
   -- create nil proxy
   visibility: publicSlot
-   void nilBboxStatus = proxy_null Xgl_bbox_status* Xgl_bbox_status_seal {xgl bboxStatus deadCopy} get 0
+   void nilBboxStatus = proxy_null Xgl_bbox_status* Xgl_bbox_status_seal {xgl bboxStatus deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -968,7 +968,7 @@ traits: traits xgl raw boundsD1d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilBoundsD1d = proxy_null Xgl_bounds_d1d* Xgl_bounds_d1d_seal {xgl boundsD1d deadCopy} get 0
+   void nilBoundsD1d = proxy_null Xgl_bounds_d1d* Xgl_bounds_d1d_seal {xgl boundsD1d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -992,7 +992,7 @@ traits: traits xgl raw boundsD2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilBoundsD2d = proxy_null Xgl_bounds_d2d* Xgl_bounds_d2d_seal {xgl boundsD2d deadCopy} get 0
+   void nilBoundsD2d = proxy_null Xgl_bounds_d2d* Xgl_bounds_d2d_seal {xgl boundsD2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1030,7 +1030,7 @@ traits: traits xgl raw boundsD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilBoundsD3d = proxy_null Xgl_bounds_d3d* Xgl_bounds_d3d_seal {xgl boundsD3d deadCopy} get 0
+   void nilBoundsD3d = proxy_null Xgl_bounds_d3d* Xgl_bounds_d3d_seal {xgl boundsD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1076,7 +1076,7 @@ traits: traits xgl raw boundsF1d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilBoundsF1d = proxy_null Xgl_bounds_f1d* Xgl_bounds_f1d_seal {xgl boundsF1d deadCopy} get 0
+   void nilBoundsF1d = proxy_null Xgl_bounds_f1d* Xgl_bounds_f1d_seal {xgl boundsF1d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1100,7 +1100,7 @@ traits: traits xgl raw boundsF2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilBoundsF2d = proxy_null Xgl_bounds_f2d* Xgl_bounds_f2d_seal {xgl boundsF2d deadCopy} get 0
+   void nilBoundsF2d = proxy_null Xgl_bounds_f2d* Xgl_bounds_f2d_seal {xgl boundsF2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1138,7 +1138,7 @@ traits: traits xgl raw boundsF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilBoundsF3d = proxy_null Xgl_bounds_f3d* Xgl_bounds_f3d_seal {xgl boundsF3d deadCopy} get 0
+   void nilBoundsF3d = proxy_null Xgl_bounds_f3d* Xgl_bounds_f3d_seal {xgl boundsF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1184,7 +1184,7 @@ traits: traits xgl raw boundsI2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilBoundsI2d = proxy_null Xgl_bounds_i2d* Xgl_bounds_i2d_seal {xgl boundsI2d deadCopy} get 0
+   void nilBoundsI2d = proxy_null Xgl_bounds_i2d* Xgl_bounds_i2d_seal {xgl boundsI2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1222,7 +1222,7 @@ traits: traits xgl raw circleAd3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilCircleAd3d = proxy_null Xgl_circle_ad3d* Xgl_circle_ad3d_seal {xgl circleAd3d deadCopy} get 0
+   void nilCircleAd3d = proxy_null Xgl_circle_ad3d* Xgl_circle_ad3d_seal {xgl circleAd3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1246,7 +1246,7 @@ traits: traits xgl raw circleAf3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilCircleAf3d = proxy_null Xgl_circle_af3d* Xgl_circle_af3d_seal {xgl circleAf3d deadCopy} get 0
+   void nilCircleAf3d = proxy_null Xgl_circle_af3d* Xgl_circle_af3d_seal {xgl circleAf3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1270,7 +1270,7 @@ traits: traits xgl raw circleD2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilCircleD2d = proxy_null Xgl_circle_d2d* Xgl_circle_d2d_seal {xgl circleD2d deadCopy} get 0
+   void nilCircleD2d = proxy_null Xgl_circle_d2d* Xgl_circle_d2d_seal {xgl circleD2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1294,7 +1294,7 @@ traits: traits xgl raw circleD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilCircleD3d = proxy_null Xgl_circle_d3d* Xgl_circle_d3d_seal {xgl circleD3d deadCopy} get 0
+   void nilCircleD3d = proxy_null Xgl_circle_d3d* Xgl_circle_d3d_seal {xgl circleD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1334,7 +1334,7 @@ traits: traits xgl raw circleF2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilCircleF2d = proxy_null Xgl_circle_f2d* Xgl_circle_f2d_seal {xgl circleF2d deadCopy} get 0
+   void nilCircleF2d = proxy_null Xgl_circle_f2d* Xgl_circle_f2d_seal {xgl circleF2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1358,7 +1358,7 @@ traits: traits xgl raw circleF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilCircleF3d = proxy_null Xgl_circle_f3d* Xgl_circle_f3d_seal {xgl circleF3d deadCopy} get 0
+   void nilCircleF3d = proxy_null Xgl_circle_f3d* Xgl_circle_f3d_seal {xgl circleF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1398,7 +1398,7 @@ traits: traits xgl raw circleI2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilCircleI2d = proxy_null Xgl_circle_i2d* Xgl_circle_i2d_seal {xgl circleI2d deadCopy} get 0
+   void nilCircleI2d = proxy_null Xgl_circle_i2d* Xgl_circle_i2d_seal {xgl circleI2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1422,7 +1422,7 @@ traits: traits xgl raw circleList
 
   -- create nil proxy
   visibility: publicSlot
-   void nilCircleList = proxy_null Xgl_circle_list* Xgl_circle_list_seal {xgl circleList deadCopy} get 0
+   void nilCircleList = proxy_null Xgl_circle_list* Xgl_circle_list_seal {xgl circleList deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1515,7 +1515,7 @@ traits: traits xgl raw color
 
   -- create nil proxy
   visibility: publicSlot
-   void nilColor = proxy_null Xgl_color* Xgl_color_seal {xgl color deadCopy} get 0
+   void nilColor = proxy_null Xgl_color* Xgl_color_seal {xgl color deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1545,7 +1545,7 @@ traits: traits xgl raw colorFacet
 
   -- create nil proxy
   visibility: publicSlot
-   void nilColorFacet = proxy_null Xgl_color_facet* Xgl_color_facet_seal {xgl colorFacet deadCopy} get 0
+   void nilColorFacet = proxy_null Xgl_color_facet* Xgl_color_facet_seal {xgl colorFacet deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1575,7 +1575,7 @@ traits: traits xgl raw colorHomogeneous
 
   -- create nil proxy
   visibility: publicSlot
-   void nilColorHomogeneous = proxy_null Xgl_color_homogeneous* Xgl_color_homogeneous_seal {xgl colorHomogeneous deadCopy} get 0
+   void nilColorHomogeneous = proxy_null Xgl_color_homogeneous* Xgl_color_homogeneous_seal {xgl colorHomogeneous deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1596,7 +1596,7 @@ traits: traits xgl raw colorList
 
   -- create nil proxy
   visibility: publicSlot
-   void nilColorList = proxy_null Xgl_color_list* Xgl_color_list_seal {xgl colorList deadCopy} get 0
+   void nilColorList = proxy_null Xgl_color_list* Xgl_color_list_seal {xgl colorList deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1630,7 +1630,7 @@ traits: traits xgl raw colorNormalFacet
 
   -- create nil proxy
   visibility: publicSlot
-   void nilColorNormalFacet = proxy_null Xgl_color_normal_facet* Xgl_color_normal_facet_seal {xgl colorNormalFacet deadCopy} get 0
+   void nilColorNormalFacet = proxy_null Xgl_color_normal_facet* Xgl_color_normal_facet_seal {xgl colorNormalFacet deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1663,7 +1663,7 @@ traits: traits xgl raw colorRgb
 
   -- create nil proxy
   visibility: publicSlot
-   void nilColorRgb = proxy_null Xgl_color_rgb* Xgl_color_rgb_seal {xgl colorRgb deadCopy} get 0
+   void nilColorRgb = proxy_null Xgl_color_rgb* Xgl_color_rgb_seal {xgl colorRgb deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1697,7 +1697,7 @@ traits: traits xgl raw colorRgbw
 
   -- create nil proxy
   visibility: publicSlot
-   void nilColorRgbw = proxy_null Xgl_color_rgbw* Xgl_color_rgbw_seal {xgl colorRgbw deadCopy} get 0
+   void nilColorRgbw = proxy_null Xgl_color_rgbw* Xgl_color_rgbw_seal {xgl colorRgbw deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1735,7 +1735,7 @@ traits: traits xgl raw colorTypeSupported
 
   -- create nil proxy
   visibility: publicSlot
-   void nilColorTypeSupported = proxy_null Xgl_color_type_supported* Xgl_color_type_supported_seal {xgl colorTypeSupported deadCopy} get 0
+   void nilColorTypeSupported = proxy_null Xgl_color_type_supported* Xgl_color_type_supported_seal {xgl colorTypeSupported deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1759,7 +1759,7 @@ traits: traits xgl raw curveColorSpline
 
   -- create nil proxy
   visibility: publicSlot
-   void nilCurveColorSpline = proxy_null Xgl_curve_color_spline* Xgl_curve_color_spline_seal {xgl curveColorSpline deadCopy} get 0
+   void nilCurveColorSpline = proxy_null Xgl_curve_color_spline* Xgl_curve_color_spline_seal {xgl curveColorSpline deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1797,7 +1797,7 @@ traits: traits xgl raw ellAd3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilEllAd3d = proxy_null Xgl_ell_ad3d* Xgl_ell_ad3d_seal {xgl ellAd3d deadCopy} get 0
+   void nilEllAd3d = proxy_null Xgl_ell_ad3d* Xgl_ell_ad3d_seal {xgl ellAd3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1843,7 +1843,7 @@ traits: traits xgl raw ellAf3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilEllAf3d = proxy_null Xgl_ell_af3d* Xgl_ell_af3d_seal {xgl ellAf3d deadCopy} get 0
+   void nilEllAf3d = proxy_null Xgl_ell_af3d* Xgl_ell_af3d_seal {xgl ellAf3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1889,7 +1889,7 @@ traits: traits xgl raw ellD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilEllD3d = proxy_null Xgl_ell_d3d* Xgl_ell_d3d_seal {xgl ellD3d deadCopy} get 0
+   void nilEllD3d = proxy_null Xgl_ell_d3d* Xgl_ell_d3d_seal {xgl ellD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -1945,7 +1945,7 @@ traits: traits xgl raw ellF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilEllF3d = proxy_null Xgl_ell_f3d* Xgl_ell_f3d_seal {xgl ellF3d deadCopy} get 0
+   void nilEllF3d = proxy_null Xgl_ell_f3d* Xgl_ell_f3d_seal {xgl ellF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2001,7 +2001,7 @@ traits: traits xgl raw ellList
 
   -- create nil proxy
   visibility: publicSlot
-   void nilEllList = proxy_null Xgl_ell_list* Xgl_ell_list_seal {xgl ellList deadCopy} get 0
+   void nilEllList = proxy_null Xgl_ell_list* Xgl_ell_list_seal {xgl ellList deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2066,7 +2066,7 @@ traits: traits xgl raw errorInfo
 
   -- create nil proxy
   visibility: publicSlot
-   void nilErrorInfo = proxy_null Xgl_error_info* Xgl_error_info_seal {xgl errorInfo deadCopy} get 0
+   void nilErrorInfo = proxy_null Xgl_error_info* Xgl_error_info_seal {xgl errorInfo deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2108,7 +2108,7 @@ traits: traits xgl raw facet
 
   -- create nil proxy
   visibility: publicSlot
-   void nilFacet = proxy_null Xgl_facet* Xgl_facet_seal {xgl facet deadCopy} get 0
+   void nilFacet = proxy_null Xgl_facet* Xgl_facet_seal {xgl facet deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2135,7 +2135,7 @@ traits: traits xgl raw facetList
 
   -- create nil proxy
   visibility: publicSlot
-   void nilFacetList = proxy_null Xgl_facet_list* Xgl_facet_list_seal {xgl facetList deadCopy} get 0
+   void nilFacetList = proxy_null Xgl_facet_list* Xgl_facet_list_seal {xgl facetList deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2185,7 +2185,7 @@ traits: traits xgl raw facetListList
 
   -- create nil proxy
   visibility: publicSlot
-   void nilFacetListList = proxy_null Xgl_facet_list_list* Xgl_facet_list_list_seal {xgl facetListList deadCopy} get 0
+   void nilFacetListList = proxy_null Xgl_facet_list_list* Xgl_facet_list_list_seal {xgl facetListList deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2209,7 +2209,7 @@ traits: traits xgl raw inquire
 
   -- create nil proxy
   visibility: publicSlot
-   void nilInquire = proxy_null Xgl_inquire* Xgl_inquire_seal {xgl inquire deadCopy} get 0
+   void nilInquire = proxy_null Xgl_inquire* Xgl_inquire_seal {xgl inquire deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2287,7 +2287,7 @@ traits: traits xgl raw irect
 
   -- create nil proxy
   visibility: publicSlot
-   void nilIrect = proxy_null Xgl_irect* Xgl_irect_seal {xgl irect deadCopy} get 0
+   void nilIrect = proxy_null Xgl_irect* Xgl_irect_seal {xgl irect deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2325,7 +2325,7 @@ traits: traits xgl raw irectList
 
   -- create nil proxy
   visibility: publicSlot
-   void nilIrectList = proxy_null Xgl_irect_list* Xgl_irect_list_seal {xgl irectList deadCopy} get 0
+   void nilIrectList = proxy_null Xgl_irect_list* Xgl_irect_list_seal {xgl irectList deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2349,7 +2349,7 @@ traits: traits xgl raw matrixD2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilMatrixD2d = proxy_null Xgl_matrix_d2d* Xgl_matrix_d2d_seal {xgl matrixD2d deadCopy} get 0
+   void nilMatrixD2d = proxy_null Xgl_matrix_d2d* Xgl_matrix_d2d_seal {xgl matrixD2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2370,7 +2370,7 @@ traits: traits xgl raw matrixD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilMatrixD3d = proxy_null Xgl_matrix_d3d* Xgl_matrix_d3d_seal {xgl matrixD3d deadCopy} get 0
+   void nilMatrixD3d = proxy_null Xgl_matrix_d3d* Xgl_matrix_d3d_seal {xgl matrixD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2391,7 +2391,7 @@ traits: traits xgl raw matrixF2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilMatrixF2d = proxy_null Xgl_matrix_f2d* Xgl_matrix_f2d_seal {xgl matrixF2d deadCopy} get 0
+   void nilMatrixF2d = proxy_null Xgl_matrix_f2d* Xgl_matrix_f2d_seal {xgl matrixF2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2412,7 +2412,7 @@ traits: traits xgl raw matrixF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilMatrixF3d = proxy_null Xgl_matrix_f3d* Xgl_matrix_f3d_seal {xgl matrixF3d deadCopy} get 0
+   void nilMatrixF3d = proxy_null Xgl_matrix_f3d* Xgl_matrix_f3d_seal {xgl matrixF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2433,7 +2433,7 @@ traits: traits xgl raw matrixI2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilMatrixI2d = proxy_null Xgl_matrix_i2d* Xgl_matrix_i2d_seal {xgl matrixI2d deadCopy} get 0
+   void nilMatrixI2d = proxy_null Xgl_matrix_i2d* Xgl_matrix_i2d_seal {xgl matrixI2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2454,7 +2454,7 @@ traits: traits xgl raw monoText
 
   -- create nil proxy
   visibility: publicSlot
-   void nilMonoText = proxy_null Xgl_mono_text* Xgl_mono_text_seal {xgl monoText deadCopy} get 0
+   void nilMonoText = proxy_null Xgl_mono_text* Xgl_mono_text_seal {xgl monoText deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2478,7 +2478,7 @@ traits: traits xgl raw monoTextList
 
   -- create nil proxy
   visibility: publicSlot
-   void nilMonoTextList = proxy_null Xgl_mono_text_list* Xgl_mono_text_list_seal {xgl monoTextList deadCopy} get 0
+   void nilMonoTextList = proxy_null Xgl_mono_text_list* Xgl_mono_text_list_seal {xgl monoTextList deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2502,7 +2502,7 @@ traits: traits xgl raw normalFacet
 
   -- create nil proxy
   visibility: publicSlot
-   void nilNormalFacet = proxy_null Xgl_normal_facet* Xgl_normal_facet_seal {xgl normalFacet deadCopy} get 0
+   void nilNormalFacet = proxy_null Xgl_normal_facet* Xgl_normal_facet_seal {xgl normalFacet deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2524,7 +2524,7 @@ traits: traits xgl raw nuBsplineCurve
 
   -- create nil proxy
   visibility: publicSlot
-   void nilNuBsplineCurve = proxy_null Xgl_nu_bspline_curve* Xgl_nu_bspline_curve_seal {xgl nuBsplineCurve deadCopy} get 0
+   void nilNuBsplineCurve = proxy_null Xgl_nu_bspline_curve* Xgl_nu_bspline_curve_seal {xgl nuBsplineCurve deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2570,7 +2570,7 @@ traits: traits xgl raw nurbsCurve
 
   -- create nil proxy
   visibility: publicSlot
-   void nilNurbsCurve = proxy_null Xgl_nurbs_curve* Xgl_nurbs_curve_seal {xgl nurbsCurve deadCopy} get 0
+   void nilNurbsCurve = proxy_null Xgl_nurbs_curve* Xgl_nurbs_curve_seal {xgl nurbsCurve deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2608,7 +2608,7 @@ traits: traits xgl raw nurbsSurf
 
   -- create nil proxy
   visibility: publicSlot
-   void nilNurbsSurf = proxy_null Xgl_nurbs_surf* Xgl_nurbs_surf_seal {xgl nurbsSurf deadCopy} get 0
+   void nilNurbsSurf = proxy_null Xgl_nurbs_surf* Xgl_nurbs_surf_seal {xgl nurbsSurf deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2658,7 +2658,7 @@ traits: traits xgl raw nurbsSurfSimpleGeom
 
   -- create nil proxy
   visibility: publicSlot
-   void nilNurbsSurfSimpleGeom = proxy_null Xgl_nurbs_surf_simple_geom* Xgl_nurbs_surf_simple_geom_seal {xgl nurbsSurfSimpleGeom deadCopy} get 0
+   void nilNurbsSurfSimpleGeom = proxy_null Xgl_nurbs_surf_simple_geom* Xgl_nurbs_surf_simple_geom_seal {xgl nurbsSurfSimpleGeom deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2741,7 +2741,7 @@ traits: traits xgl raw objDesc
 
   -- create nil proxy
   visibility: publicSlot
-   void nilObjDesc = proxy_null Xgl_obj_desc* Xgl_obj_desc_seal {xgl objDesc deadCopy} get 0
+   void nilObjDesc = proxy_null Xgl_obj_desc* Xgl_obj_desc_seal {xgl objDesc deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2777,7 +2777,7 @@ traits: traits xgl raw pickInfo
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPickInfo = proxy_null Xgl_pick_info* Xgl_pick_info_seal {xgl pickInfo deadCopy} get 0
+   void nilPickInfo = proxy_null Xgl_pick_info* Xgl_pick_info_seal {xgl pickInfo deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2811,7 +2811,7 @@ traits: traits xgl raw plane
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPlane = proxy_null Xgl_plane* Xgl_plane_seal {xgl plane deadCopy} get 0
+   void nilPlane = proxy_null Xgl_plane* Xgl_plane_seal {xgl plane deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2835,7 +2835,7 @@ traits: traits xgl raw planeList
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPlaneList = proxy_null Xgl_plane_list* Xgl_plane_list_seal {xgl planeList deadCopy} get 0
+   void nilPlaneList = proxy_null Xgl_plane_list* Xgl_plane_list_seal {xgl planeList deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2859,7 +2859,7 @@ traits: traits xgl raw pt
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPt = proxy_null Xgl_pt* Xgl_pt_seal {xgl pt deadCopy} get 0
+   void nilPt = proxy_null Xgl_pt* Xgl_pt_seal {xgl pt deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2917,7 +2917,7 @@ traits: traits xgl raw ptColorD2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorD2d = proxy_null Xgl_pt_color_d2d* Xgl_pt_color_d2d_seal {xgl ptColorD2d deadCopy} get 0
+   void nilPtColorD2d = proxy_null Xgl_pt_color_d2d* Xgl_pt_color_d2d_seal {xgl ptColorD2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -2975,7 +2975,7 @@ traits: traits xgl raw ptColorD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorD3d = proxy_null Xgl_pt_color_d3d* Xgl_pt_color_d3d_seal {xgl ptColorD3d deadCopy} get 0
+   void nilPtColorD3d = proxy_null Xgl_pt_color_d3d* Xgl_pt_color_d3d_seal {xgl ptColorD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3040,7 +3040,7 @@ traits: traits xgl raw ptColorDataF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorDataF3d = proxy_null Xgl_pt_color_data_f3d* Xgl_pt_color_data_f3d_seal {xgl ptColorDataF3d deadCopy} get 0
+   void nilPtColorDataF3d = proxy_null Xgl_pt_color_data_f3d* Xgl_pt_color_data_f3d_seal {xgl ptColorDataF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3107,7 +3107,7 @@ traits: traits xgl raw ptColorF2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorF2d = proxy_null Xgl_pt_color_f2d* Xgl_pt_color_f2d_seal {xgl ptColorF2d deadCopy} get 0
+   void nilPtColorF2d = proxy_null Xgl_pt_color_f2d* Xgl_pt_color_f2d_seal {xgl ptColorF2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3165,7 +3165,7 @@ traits: traits xgl raw ptColorF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorF3d = proxy_null Xgl_pt_color_f3d* Xgl_pt_color_f3d_seal {xgl ptColorF3d deadCopy} get 0
+   void nilPtColorF3d = proxy_null Xgl_pt_color_f3d* Xgl_pt_color_f3d_seal {xgl ptColorF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3230,7 +3230,7 @@ traits: traits xgl raw ptColorFlagD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorFlagD3d = proxy_null Xgl_pt_color_flag_d3d* Xgl_pt_color_flag_d3d_seal {xgl ptColorFlagD3d deadCopy} get 0
+   void nilPtColorFlagD3d = proxy_null Xgl_pt_color_flag_d3d* Xgl_pt_color_flag_d3d_seal {xgl ptColorFlagD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3302,7 +3302,7 @@ traits: traits xgl raw ptColorFlagDataF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorFlagDataF3d = proxy_null Xgl_pt_color_flag_data_f3d* Xgl_pt_color_flag_data_f3d_seal {xgl ptColorFlagDataF3d deadCopy} get 0
+   void nilPtColorFlagDataF3d = proxy_null Xgl_pt_color_flag_data_f3d* Xgl_pt_color_flag_data_f3d_seal {xgl ptColorFlagDataF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3376,7 +3376,7 @@ traits: traits xgl raw ptColorFlagF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorFlagF3d = proxy_null Xgl_pt_color_flag_f3d* Xgl_pt_color_flag_f3d_seal {xgl ptColorFlagF3d deadCopy} get 0
+   void nilPtColorFlagF3d = proxy_null Xgl_pt_color_flag_f3d* Xgl_pt_color_flag_f3d_seal {xgl ptColorFlagF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3448,7 +3448,7 @@ traits: traits xgl raw ptColorI2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorI2d = proxy_null Xgl_pt_color_i2d* Xgl_pt_color_i2d_seal {xgl ptColorI2d deadCopy} get 0
+   void nilPtColorI2d = proxy_null Xgl_pt_color_i2d* Xgl_pt_color_i2d_seal {xgl ptColorI2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3507,7 +3507,7 @@ traits: traits xgl raw ptColorNormalD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorNormalD3d = proxy_null Xgl_pt_color_normal_d3d* Xgl_pt_color_normal_d3d_seal {xgl ptColorNormalD3d deadCopy} get 0
+   void nilPtColorNormalD3d = proxy_null Xgl_pt_color_normal_d3d* Xgl_pt_color_normal_d3d_seal {xgl ptColorNormalD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3579,7 +3579,7 @@ traits: traits xgl raw ptColorNormalDataF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorNormalDataF3d = proxy_null Xgl_pt_color_normal_data_f3d* Xgl_pt_color_normal_data_f3d_seal {xgl ptColorNormalDataF3d deadCopy} get 0
+   void nilPtColorNormalDataF3d = proxy_null Xgl_pt_color_normal_data_f3d* Xgl_pt_color_normal_data_f3d_seal {xgl ptColorNormalDataF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3653,7 +3653,7 @@ traits: traits xgl raw ptColorNormalF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorNormalF3d = proxy_null Xgl_pt_color_normal_f3d* Xgl_pt_color_normal_f3d_seal {xgl ptColorNormalF3d deadCopy} get 0
+   void nilPtColorNormalF3d = proxy_null Xgl_pt_color_normal_f3d* Xgl_pt_color_normal_f3d_seal {xgl ptColorNormalF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3725,7 +3725,7 @@ traits: traits xgl raw ptColorNormalFlagD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorNormalFlagD3d = proxy_null Xgl_pt_color_normal_flag_d3d* Xgl_pt_color_normal_flag_d3d_seal {xgl ptColorNormalFlagD3d deadCopy} get 0
+   void nilPtColorNormalFlagD3d = proxy_null Xgl_pt_color_normal_flag_d3d* Xgl_pt_color_normal_flag_d3d_seal {xgl ptColorNormalFlagD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3804,7 +3804,7 @@ traits: traits xgl raw ptColorNormalFlagDataF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorNormalFlagDataF3d = proxy_null Xgl_pt_color_normal_flag_data_f3d* Xgl_pt_color_normal_flag_data_f3d_seal {xgl ptColorNormalFlagDataF3d deadCopy} get 0
+   void nilPtColorNormalFlagDataF3d = proxy_null Xgl_pt_color_normal_flag_data_f3d* Xgl_pt_color_normal_flag_data_f3d_seal {xgl ptColorNormalFlagDataF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3885,7 +3885,7 @@ traits: traits xgl raw ptColorNormalFlagF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtColorNormalFlagF3d = proxy_null Xgl_pt_color_normal_flag_f3d* Xgl_pt_color_normal_flag_f3d_seal {xgl ptColorNormalFlagF3d deadCopy} get 0
+   void nilPtColorNormalFlagF3d = proxy_null Xgl_pt_color_normal_flag_f3d* Xgl_pt_color_normal_flag_f3d_seal {xgl ptColorNormalFlagF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3964,7 +3964,7 @@ traits: traits xgl raw ptD2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtD2d = proxy_null Xgl_pt_d2d* Xgl_pt_d2d_seal {xgl ptD2d deadCopy} get 0
+   void nilPtD2d = proxy_null Xgl_pt_d2d* Xgl_pt_d2d_seal {xgl ptD2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -3988,7 +3988,7 @@ traits: traits xgl raw ptD2h
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtD2h = proxy_null Xgl_pt_d2h* Xgl_pt_d2h_seal {xgl ptD2h deadCopy} get 0
+   void nilPtD2h = proxy_null Xgl_pt_d2h* Xgl_pt_d2h_seal {xgl ptD2h deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4022,7 +4022,7 @@ traits: traits xgl raw ptD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtD3d = proxy_null Xgl_pt_d3d* Xgl_pt_d3d_seal {xgl ptD3d deadCopy} get 0
+   void nilPtD3d = proxy_null Xgl_pt_d3d* Xgl_pt_d3d_seal {xgl ptD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4056,7 +4056,7 @@ traits: traits xgl raw ptD3h
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtD3h = proxy_null Xgl_pt_d3h* Xgl_pt_d3h_seal {xgl ptD3h deadCopy} get 0
+   void nilPtD3h = proxy_null Xgl_pt_d3h* Xgl_pt_d3h_seal {xgl ptD3h deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4094,7 +4094,7 @@ traits: traits xgl raw ptDataF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtDataF3d = proxy_null Xgl_pt_data_f3d* Xgl_pt_data_f3d_seal {xgl ptDataF3d deadCopy} get 0
+   void nilPtDataF3d = proxy_null Xgl_pt_data_f3d* Xgl_pt_data_f3d_seal {xgl ptDataF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4130,7 +4130,7 @@ traits: traits xgl raw ptF2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtF2d = proxy_null Xgl_pt_f2d* Xgl_pt_f2d_seal {xgl ptF2d deadCopy} get 0
+   void nilPtF2d = proxy_null Xgl_pt_f2d* Xgl_pt_f2d_seal {xgl ptF2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4154,7 +4154,7 @@ traits: traits xgl raw ptF2h
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtF2h = proxy_null Xgl_pt_f2h* Xgl_pt_f2h_seal {xgl ptF2h deadCopy} get 0
+   void nilPtF2h = proxy_null Xgl_pt_f2h* Xgl_pt_f2h_seal {xgl ptF2h deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4188,7 +4188,7 @@ traits: traits xgl raw ptF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtF3d = proxy_null Xgl_pt_f3d* Xgl_pt_f3d_seal {xgl ptF3d deadCopy} get 0
+   void nilPtF3d = proxy_null Xgl_pt_f3d* Xgl_pt_f3d_seal {xgl ptF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4222,7 +4222,7 @@ traits: traits xgl raw ptF3h
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtF3h = proxy_null Xgl_pt_f3h* Xgl_pt_f3h_seal {xgl ptF3h deadCopy} get 0
+   void nilPtF3h = proxy_null Xgl_pt_f3h* Xgl_pt_f3h_seal {xgl ptF3h deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4260,7 +4260,7 @@ traits: traits xgl raw ptFlagD2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtFlagD2d = proxy_null Xgl_pt_flag_d2d* Xgl_pt_flag_d2d_seal {xgl ptFlagD2d deadCopy} get 0
+   void nilPtFlagD2d = proxy_null Xgl_pt_flag_d2d* Xgl_pt_flag_d2d_seal {xgl ptFlagD2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4294,7 +4294,7 @@ traits: traits xgl raw ptFlagD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtFlagD3d = proxy_null Xgl_pt_flag_d3d* Xgl_pt_flag_d3d_seal {xgl ptFlagD3d deadCopy} get 0
+   void nilPtFlagD3d = proxy_null Xgl_pt_flag_d3d* Xgl_pt_flag_d3d_seal {xgl ptFlagD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4332,7 +4332,7 @@ traits: traits xgl raw ptFlagDataF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtFlagDataF3d = proxy_null Xgl_pt_flag_data_f3d* Xgl_pt_flag_data_f3d_seal {xgl ptFlagDataF3d deadCopy} get 0
+   void nilPtFlagDataF3d = proxy_null Xgl_pt_flag_data_f3d* Xgl_pt_flag_data_f3d_seal {xgl ptFlagDataF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4372,7 +4372,7 @@ traits: traits xgl raw ptFlagF2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtFlagF2d = proxy_null Xgl_pt_flag_f2d* Xgl_pt_flag_f2d_seal {xgl ptFlagF2d deadCopy} get 0
+   void nilPtFlagF2d = proxy_null Xgl_pt_flag_f2d* Xgl_pt_flag_f2d_seal {xgl ptFlagF2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4406,7 +4406,7 @@ traits: traits xgl raw ptFlagF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtFlagF3d = proxy_null Xgl_pt_flag_f3d* Xgl_pt_flag_f3d_seal {xgl ptFlagF3d deadCopy} get 0
+   void nilPtFlagF3d = proxy_null Xgl_pt_flag_f3d* Xgl_pt_flag_f3d_seal {xgl ptFlagF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4444,7 +4444,7 @@ traits: traits xgl raw ptFlagI2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtFlagI2d = proxy_null Xgl_pt_flag_i2d* Xgl_pt_flag_i2d_seal {xgl ptFlagI2d deadCopy} get 0
+   void nilPtFlagI2d = proxy_null Xgl_pt_flag_i2d* Xgl_pt_flag_i2d_seal {xgl ptFlagI2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4478,7 +4478,7 @@ traits: traits xgl raw ptI2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtI2d = proxy_null Xgl_pt_i2d* Xgl_pt_i2d_seal {xgl ptI2d deadCopy} get 0
+   void nilPtI2d = proxy_null Xgl_pt_i2d* Xgl_pt_i2d_seal {xgl ptI2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4502,7 +4502,7 @@ traits: traits xgl raw ptI2h
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtI2h = proxy_null Xgl_pt_i2h* Xgl_pt_i2h_seal {xgl ptI2h deadCopy} get 0
+   void nilPtI2h = proxy_null Xgl_pt_i2h* Xgl_pt_i2h_seal {xgl ptI2h deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4537,7 +4537,7 @@ traits: traits xgl raw ptList
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtList = proxy_null Xgl_pt_list* Xgl_pt_list_seal {xgl ptList deadCopy} get 0
+   void nilPtList = proxy_null Xgl_pt_list* Xgl_pt_list_seal {xgl ptList deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4949,7 +4949,7 @@ traits: traits xgl raw ptListList
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtListList = proxy_null Xgl_pt_list_list* Xgl_pt_list_list_seal {xgl ptListList deadCopy} get 0
+   void nilPtListList = proxy_null Xgl_pt_list_list* Xgl_pt_list_list_seal {xgl ptListList deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -4983,7 +4983,7 @@ traits: traits xgl raw ptNormalD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtNormalD3d = proxy_null Xgl_pt_normal_d3d* Xgl_pt_normal_d3d_seal {xgl ptNormalD3d deadCopy} get 0
+   void nilPtNormalD3d = proxy_null Xgl_pt_normal_d3d* Xgl_pt_normal_d3d_seal {xgl ptNormalD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5021,7 +5021,7 @@ traits: traits xgl raw ptNormalDataF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtNormalDataF3d = proxy_null Xgl_pt_normal_data_f3d* Xgl_pt_normal_data_f3d_seal {xgl ptNormalDataF3d deadCopy} get 0
+   void nilPtNormalDataF3d = proxy_null Xgl_pt_normal_data_f3d* Xgl_pt_normal_data_f3d_seal {xgl ptNormalDataF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5061,7 +5061,7 @@ traits: traits xgl raw ptNormalF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtNormalF3d = proxy_null Xgl_pt_normal_f3d* Xgl_pt_normal_f3d_seal {xgl ptNormalF3d deadCopy} get 0
+   void nilPtNormalF3d = proxy_null Xgl_pt_normal_f3d* Xgl_pt_normal_f3d_seal {xgl ptNormalF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5099,7 +5099,7 @@ traits: traits xgl raw ptNormalFlagD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtNormalFlagD3d = proxy_null Xgl_pt_normal_flag_d3d* Xgl_pt_normal_flag_d3d_seal {xgl ptNormalFlagD3d deadCopy} get 0
+   void nilPtNormalFlagD3d = proxy_null Xgl_pt_normal_flag_d3d* Xgl_pt_normal_flag_d3d_seal {xgl ptNormalFlagD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5141,7 +5141,7 @@ traits: traits xgl raw ptNormalFlagDataF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtNormalFlagDataF3d = proxy_null Xgl_pt_normal_flag_data_f3d* Xgl_pt_normal_flag_data_f3d_seal {xgl ptNormalFlagDataF3d deadCopy} get 0
+   void nilPtNormalFlagDataF3d = proxy_null Xgl_pt_normal_flag_data_f3d* Xgl_pt_normal_flag_data_f3d_seal {xgl ptNormalFlagDataF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5185,7 +5185,7 @@ traits: traits xgl raw ptNormalFlagF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtNormalFlagF3d = proxy_null Xgl_pt_normal_flag_f3d* Xgl_pt_normal_flag_f3d_seal {xgl ptNormalFlagF3d deadCopy} get 0
+   void nilPtNormalFlagF3d = proxy_null Xgl_pt_normal_flag_f3d* Xgl_pt_normal_flag_f3d_seal {xgl ptNormalFlagF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5227,7 +5227,7 @@ traits: traits xgl raw ptTypeSupported
 
   -- create nil proxy
   visibility: publicSlot
-   void nilPtTypeSupported = proxy_null Xgl_pt_type_supported* Xgl_pt_type_supported_seal {xgl ptTypeSupported deadCopy} get 0
+   void nilPtTypeSupported = proxy_null Xgl_pt_type_supported* Xgl_pt_type_supported_seal {xgl ptTypeSupported deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5269,7 +5269,7 @@ traits: traits xgl raw rectAd3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilRectAd3d = proxy_null Xgl_rect_ad3d* Xgl_rect_ad3d_seal {xgl rectAd3d deadCopy} get 0
+   void nilRectAd3d = proxy_null Xgl_rect_ad3d* Xgl_rect_ad3d_seal {xgl rectAd3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5293,7 +5293,7 @@ traits: traits xgl raw rectAf3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilRectAf3d = proxy_null Xgl_rect_af3d* Xgl_rect_af3d_seal {xgl rectAf3d deadCopy} get 0
+   void nilRectAf3d = proxy_null Xgl_rect_af3d* Xgl_rect_af3d_seal {xgl rectAf3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5317,7 +5317,7 @@ traits: traits xgl raw rectD2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilRectD2d = proxy_null Xgl_rect_d2d* Xgl_rect_d2d_seal {xgl rectD2d deadCopy} get 0
+   void nilRectD2d = proxy_null Xgl_rect_d2d* Xgl_rect_d2d_seal {xgl rectD2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5341,7 +5341,7 @@ traits: traits xgl raw rectD3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilRectD3d = proxy_null Xgl_rect_d3d* Xgl_rect_d3d_seal {xgl rectD3d deadCopy} get 0
+   void nilRectD3d = proxy_null Xgl_rect_d3d* Xgl_rect_d3d_seal {xgl rectD3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5381,7 +5381,7 @@ traits: traits xgl raw rectF2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilRectF2d = proxy_null Xgl_rect_f2d* Xgl_rect_f2d_seal {xgl rectF2d deadCopy} get 0
+   void nilRectF2d = proxy_null Xgl_rect_f2d* Xgl_rect_f2d_seal {xgl rectF2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5405,7 +5405,7 @@ traits: traits xgl raw rectF3d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilRectF3d = proxy_null Xgl_rect_f3d* Xgl_rect_f3d_seal {xgl rectF3d deadCopy} get 0
+   void nilRectF3d = proxy_null Xgl_rect_f3d* Xgl_rect_f3d_seal {xgl rectF3d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5445,7 +5445,7 @@ traits: traits xgl raw rectI2d
 
   -- create nil proxy
   visibility: publicSlot
-   void nilRectI2d = proxy_null Xgl_rect_i2d* Xgl_rect_i2d_seal {xgl rectI2d deadCopy} get 0
+   void nilRectI2d = proxy_null Xgl_rect_i2d* Xgl_rect_i2d_seal {xgl rectI2d deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5469,7 +5469,7 @@ traits: traits xgl raw rectList
 
   -- create nil proxy
   visibility: publicSlot
-   void nilRectList = proxy_null Xgl_rect_list* Xgl_rect_list_seal {xgl rectList deadCopy} get 0
+   void nilRectList = proxy_null Xgl_rect_list* Xgl_rect_list_seal {xgl rectList deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5562,7 +5562,7 @@ traits: traits xgl raw renderComponentDesc
 
   -- create nil proxy
   visibility: publicSlot
-   void nilRenderComponentDesc = proxy_null Xgl_render_component_desc* Xgl_render_component_desc_seal {xgl renderComponentDesc deadCopy} get 0
+   void nilRenderComponentDesc = proxy_null Xgl_render_component_desc* Xgl_render_component_desc_seal {xgl renderComponentDesc deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5604,7 +5604,7 @@ traits: traits xgl raw segment
 
   -- create nil proxy
   visibility: publicSlot
-   void nilSegment = proxy_null Xgl_segment* Xgl_segment_seal {xgl segment deadCopy} get 0
+   void nilSegment = proxy_null Xgl_segment* Xgl_segment_seal {xgl segment deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5628,7 +5628,7 @@ traits: traits xgl raw splineData
 
   -- create nil proxy
   visibility: publicSlot
-   void nilSplineData = proxy_null Xgl_spline_data* Xgl_spline_data_seal {xgl splineData deadCopy} get 0
+   void nilSplineData = proxy_null Xgl_spline_data* Xgl_spline_data_seal {xgl splineData deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5651,7 +5651,7 @@ traits: traits xgl raw surfColorSpline
 
   -- create nil proxy
   visibility: publicSlot
-   void nilSurfColorSpline = proxy_null Xgl_surf_color_spline* Xgl_surf_color_spline_seal {xgl surfColorSpline deadCopy} get 0
+   void nilSurfColorSpline = proxy_null Xgl_surf_color_spline* Xgl_surf_color_spline_seal {xgl surfColorSpline deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5701,7 +5701,7 @@ traits: traits xgl raw surfDataSpline
 
   -- create nil proxy
   visibility: publicSlot
-   void nilSurfDataSpline = proxy_null Xgl_surf_data_spline* Xgl_surf_data_spline_seal {xgl surfDataSpline deadCopy} get 0
+   void nilSurfDataSpline = proxy_null Xgl_surf_data_spline* Xgl_surf_data_spline_seal {xgl surfDataSpline deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5751,7 +5751,7 @@ traits: traits xgl raw surfDataSplineList
 
   -- create nil proxy
   visibility: publicSlot
-   void nilSurfDataSplineList = proxy_null Xgl_surf_data_spline_list* Xgl_surf_data_spline_list_seal {xgl surfDataSplineList deadCopy} get 0
+   void nilSurfDataSplineList = proxy_null Xgl_surf_data_spline_list* Xgl_surf_data_spline_list_seal {xgl surfDataSplineList deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5775,7 +5775,7 @@ traits: traits xgl raw textureBlendRgb
 
   -- create nil proxy
   visibility: publicSlot
-   void nilTextureBlendRgb = proxy_null Xgl_texture_blend_rgb* Xgl_texture_blend_rgb_seal {xgl textureBlendRgb deadCopy} get 0
+   void nilTextureBlendRgb = proxy_null Xgl_texture_blend_rgb* Xgl_texture_blend_rgb_seal {xgl textureBlendRgb deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5799,7 +5799,7 @@ traits: traits xgl raw textureColorCompInfo
 
   -- create nil proxy
   visibility: publicSlot
-   void nilTextureColorCompInfo = proxy_null Xgl_texture_color_comp_info* Xgl_texture_color_comp_info_seal {xgl textureColorCompInfo deadCopy} get 0
+   void nilTextureColorCompInfo = proxy_null Xgl_texture_color_comp_info* Xgl_texture_color_comp_info_seal {xgl textureColorCompInfo deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5822,7 +5822,7 @@ traits: traits xgl raw textureDecalRgb
 
   -- create nil proxy
   visibility: publicSlot
-   void nilTextureDecalRgb = proxy_null Xgl_texture_decal_rgb* Xgl_texture_decal_rgb_seal {xgl textureDecalRgb deadCopy} get 0
+   void nilTextureDecalRgb = proxy_null Xgl_texture_decal_rgb* Xgl_texture_decal_rgb_seal {xgl textureDecalRgb deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5843,7 +5843,7 @@ traits: traits xgl raw textureDesc
 
   -- create nil proxy
   visibility: publicSlot
-   void nilTextureDesc = proxy_null Xgl_texture_desc* Xgl_texture_desc_seal {xgl textureDesc deadCopy} get 0
+   void nilTextureDesc = proxy_null Xgl_texture_desc* Xgl_texture_desc_seal {xgl textureDesc deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5881,7 +5881,7 @@ traits: traits xgl raw textureInterpInfo
 
   -- create nil proxy
   visibility: publicSlot
-   void nilTextureInterpInfo = proxy_null Xgl_texture_interp_info* Xgl_texture_interp_info_seal {xgl textureInterpInfo deadCopy} get 0
+   void nilTextureInterpInfo = proxy_null Xgl_texture_interp_info* Xgl_texture_interp_info_seal {xgl textureInterpInfo deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5911,7 +5911,7 @@ traits: traits xgl raw textureMipmapDesc
 
   -- create nil proxy
   visibility: publicSlot
-   void nilTextureMipmapDesc = proxy_null Xgl_texture_mipmap_desc* Xgl_texture_mipmap_desc_seal {xgl textureMipmapDesc deadCopy} get 0
+   void nilTextureMipmapDesc = proxy_null Xgl_texture_mipmap_desc* Xgl_texture_mipmap_desc_seal {xgl textureMipmapDesc deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5959,7 +5959,7 @@ traits: traits xgl raw threshold
 
   -- create nil proxy
   visibility: publicSlot
-   void nilThreshold = proxy_null Xgl_threshold* Xgl_threshold_seal {xgl threshold deadCopy} get 0
+   void nilThreshold = proxy_null Xgl_threshold* Xgl_threshold_seal {xgl threshold deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -5993,7 +5993,7 @@ traits: traits xgl raw trimCurve
 
   -- create nil proxy
   visibility: publicSlot
-   void nilTrimCurve = proxy_null Xgl_trim_curve* Xgl_trim_curve_seal {xgl trimCurve deadCopy} get 0
+   void nilTrimCurve = proxy_null Xgl_trim_curve* Xgl_trim_curve_seal {xgl trimCurve deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -6035,7 +6035,7 @@ traits: traits xgl raw trimLoop
 
   -- create nil proxy
   visibility: publicSlot
-   void nilTrimLoop = proxy_null Xgl_trim_loop* Xgl_trim_loop_seal {xgl trimLoop deadCopy} get 0
+   void nilTrimLoop = proxy_null Xgl_trim_loop* Xgl_trim_loop_seal {xgl trimLoop deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot
@@ -6059,7 +6059,7 @@ traits: traits xgl raw trimLoopList
 
   -- create nil proxy
   visibility: publicSlot
-   void nilTrimLoopList = proxy_null Xgl_trim_loop_list* Xgl_trim_loop_list_seal {xgl trimLoopList deadCopy} get 0
+   void nilTrimLoopList = proxy_null Xgl_trim_loop_list* Xgl_trim_loop_list_seal {xgl trimLoopList deadCopy} get NULL
 
   -- vector-ish messages
   visibility: publicSlot

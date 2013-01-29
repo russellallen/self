@@ -33,7 +33,7 @@ blockOop blockMap::create_block(slotsOop meth) {
   
   blockMap m1;
   oop ignored;
-  blockMap* b= (blockMap*)create_map(sizeof(blockMap), 0, &m1, &ignored);
+  blockMap* b= (blockMap*)create_map(sizeof(blockMap), NULL, &m1, &ignored);
   b->setDesc(BLOCK_PROTO_DESC);
   b->init(name, meth);
   blockOop block= (blockOop)create_slots(b->empty_object_size());
@@ -50,7 +50,7 @@ slotDesc* blockMap::find_slot(stringOop name) {
   }
   if (name == VMString[PARENT])
     return &block_slots[0];
-  return 0;
+  return NULL;
 }
     
 
@@ -97,13 +97,13 @@ bool blockMap::verify(oop obj) {
     // verify scope bs
     if (flag && bs && VerifyBlockHomes) {
       Stack* stk = processes->stackFor(bs);
-      if (stk == 0) {
+      if (stk == NULL) {
         error1("scope of blockOop %#lx isn't in any stack", obj);
         flag = false;
       } else {
         frame* f = stk->last_self_frame(false);
         while (f && f != bs)  f = f->selfSender();
-        if (f == 0) {
+        if (f == NULL) {
           error1("scope of blockOop %#lx isn't a valid frame pointer", obj);
           flag = false;
         }

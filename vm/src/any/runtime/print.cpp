@@ -13,7 +13,7 @@ void printName(methodMap* mm, oop selector) {
 const char* sprintName(methodMap* mm, oop selector) {
   // used for debugging only; use static buffer for result string
   static char buf[800];
-  const char* sel = selector == 0 ? "" : selector_string(selector);
+  const char* sel = selector == NULL ? "" : selector_string(selector);
   if (mm) {
     stringOop file = mm->file();
     smiOop line = mm->line();

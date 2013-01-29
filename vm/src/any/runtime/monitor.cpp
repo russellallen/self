@@ -19,7 +19,7 @@ Monitor* TheSpy;
 
 Monitor::Monitor() : _mw() {
   incremental = _is_active = false; 
-  logf = 0; logfn = 0;
+  logf = NULL; logfn = NULL;
 }
 
 Monitor::~Monitor() { deactivate(); }
@@ -56,9 +56,9 @@ void Monitor::deactivate() {
   _is_active = false;
   withdraw();
   mw()->close();
-  if (logf != 0) {
+  if (logf != NULL) {
     fclose(logf); 
-    logf = 0; 
+    logf = NULL; 
   } 
 }
 
@@ -86,7 +86,7 @@ void Monitor::reset_log() {
     // you might think that ftruncate would do the job...but it doesn't work
     // (SunOS 4.1.3)
     FILE* f = logf;
-    logf = 0;
+    logf = NULL;
     fclose(f);
     unlink(logfn);
     logf = open_log_file(logfn);

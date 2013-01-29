@@ -20,7 +20,7 @@ class markMap: public Map {
   
   // creation operation
   static Map* create_markMap();
-  oop clone(oop obj, bool mustAllocate= true, oop genObj= 0) {
+  oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL) {
     // shouldn't be cloning a mark
     Unused(mustAllocate); Unused(genObj);
     ShouldNotCallThis(); return obj; }
@@ -33,9 +33,9 @@ class markMap: public Map {
   void switch_pointer(oop obj, oop* where, oop to) {
     Unused(obj); Unused(where); Unused(to);
     ShouldNotCallThis(); }
-  mirrorOop mirror_proto() { ShouldNotCallThis(); return 0; }
+  mirrorOop mirror_proto() { ShouldNotCallThis(); return NULL; }
   oop dummy_obj(oop filler) {
-    Unused(filler); ShouldNotCallThis(); return 0; }
+    Unused(filler); ShouldNotCallThis(); return NULL; }
   fint empty_object_size() { ShouldNotCallThis(); return 0; }
   fint object_size(oop obj) {
     Unused(obj); ShouldNotCallThis(); return 0; }

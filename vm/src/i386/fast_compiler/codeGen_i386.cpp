@@ -190,7 +190,7 @@ void CodeGen::prologue(bool isAccessMethod, fint nargs) {
     }
     
     verifiedOffset = a.offset();
-    Label generalMiss(a.printing, 0);
+    Label generalMiss(a.printing, NULL);
     a.Comment("verified entry point:");
     
     if (L->isPerform()) {
@@ -223,7 +223,7 @@ void CodeGen::prologue(bool isAccessMethod, fint nargs) {
   if (recomp) checkRecompilation();
 
   if (!haveStackFrame) {
-     prologueAddr = 0;
+     prologueAddr = NULL;
   }
   else {
     a.Comment("make stack frame (next instruction will be backpatched)");
@@ -325,7 +325,7 @@ fint CodeGen::verifyParents(objectLookupTarget* target, Location t, fint count) 
   
   
   a.Comment("verify");
-  assert(target->links != 0, "expecting an assignable parent link");
+  assert(target->links != NULL, "expecting an assignable parent link");
     
   for ( assignableSlotLink* l = target->links; ; ) {
     // load assignable parent slot value
@@ -451,7 +451,7 @@ Label* CodeGen::cPrimCall(PrimDesc* p, RegisterState* s,
                           bool continueNLR, bool trust_fns_arg_count, fint arg_and_rcvr_count) {
 
   a.Comment("cPrimCall");
-  Label* where_nlr_jumps_to = 0;
+  Label* where_nlr_jumps_to = NULL;
   // WARNING: following code sequences are known to get_target_of_Self_call_site
   // and set_target_of_Self_call_site
   // Also, getPrimCallEndOffset assumes continuation is right after sequence.
@@ -498,7 +498,7 @@ Label* CodeGen::primFailure(Location failReceiver, Location self,
   a.subl( Mark_Tag - Mem_Tag, NumberOperand, result );
 
   // clone failure block if necessary
-  if (failBlock == 0) {
+  if (failBlock == NULL) {
     // block already exists
     move(ArgLocation(0), result);
   }
@@ -514,7 +514,7 @@ Label* CodeGen::primFailure(Location failReceiver, Location self,
   
   // now invoke the fail block
   Label* l = selfCall(s, NormalLookupType, failReceiver, self, 
-                      failSelector, 0, 2);
+                      failSelector, NULL, 2);
   
   assert(ResultReg == CResultReg, "exploit move after success.define");    
   
@@ -848,12 +848,12 @@ Label* CodeGen::unconditionalBranchCode( Label* dst,
   // (this code lifted from what used to be restart)
   
   a.Comment("unconditionalBranchCode");
-  Label* nlr = 0;
+  Label* nlr = NULL;
   if ( !allowPreemption) { 
-    nlr = 0;
+    nlr = NULL;
   } 
   else {
-    Label* dst1 = 0;
+    Label* dst1 = NULL;
     testStackOverflowForLoop(dst1, nlr, s); // allocs label and sets dst1
     dst->unify( dst1 );
   }
@@ -884,7 +884,7 @@ Label* CodeGen::conditionalBranchCode( Location testMe,
 
   if ( !allowPreemption ) {
     a.je(dst);
-    return 0; // no nlr
+    return NULL; // no nlr
   }
   Label end;
   a.jne(&end);
@@ -918,14 +918,14 @@ Label* CodeGen::indexedBranchCode( Location        testMe,
   // end:
   
   a.Comment("indexedBranchCode");
-  Label* nlr= 0;
+  Label* nlr= NULL;
   if (allowPreemption) {
     // Ideally would only do this in the arms that actually do
     // branch back.
     // Beware: the stack overflow test could call other code that
     // could clobber Temp1 and Temp2, so it cannot be in the
     // middle somewhere. -- dmu
-    Label* afterTest = 0;
+    Label* afterTest = NULL;
     testStackOverflowForLoop( afterTest, nlr, s ); // sets afterTest
     afterTest->define();
   }
@@ -1017,15 +1017,15 @@ void CodeGen::loadBlockOop(Location dest, slotsOop p, RegisterState* s) {
   PrimDesc* pd = blockClone();
   assert(! pd->needsNLRCode(), "rewrite this - must backpatch NLR code");
   Label* l = cPrimCall(pd, s, false, true, 2 /* 1 arg + rcvr */);
-  assert(l == 0, "shouldn't need a label");
+  assert(l == NULL, "shouldn't need a label");
   move(dest, CResultReg);
 }
 
 
 void CodeGen::nonLifoTrap(RegisterState* s) {
   a.Comment("nonLifoTrap");
-  static PrimDesc* non_lifo_abort = 0;
-  if (non_lifo_abort == 0)
+  static PrimDesc* non_lifo_abort = NULL;
+  if (non_lifo_abort == NULL)
     non_lifo_abort = getPrimDescOfFunction(
                        fntype(&NLRSupport::non_lifo_abort), 
                        true);
@@ -1038,7 +1038,7 @@ void CodeGen::nonLifoTrap(RegisterState* s) {
   s->allocateArgs(0, true); // for receiver
 
   Label* nlr_dest = cPrimCall(non_lifo_abort, s, true, true, 1);
-  assert(nlr_dest == 0, "should not need a label");
+  assert(nlr_dest == NULL, "should not need a label");
 }
 
 

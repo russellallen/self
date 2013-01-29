@@ -14,7 +14,7 @@ assignmentOop assignmentMap::create_assignment() {
   createdAssignment= true;
   assignmentMap m1;
   assignmentOop p;
-  (void)create_map(sizeof(assignmentMap), 0, &m1, (oop*)&p);
+  (void)create_map(sizeof(assignmentMap), NULL, &m1, (oop*)&p);
   return p;
 }
 

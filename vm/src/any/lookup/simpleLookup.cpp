@@ -47,7 +47,7 @@ simpleLookup::simpleLookup(LookupType type,
     key._receiverMapOop= rcvr->map()->enclosing_mapOop();
   }
   status = foundNone;
-  _result = 0;
+  _result = NULL;
 
   deps = dps;
   adeps = adps;
@@ -57,7 +57,7 @@ simpleLookup::simpleLookup(LookupType type,
 void simpleLookup::add_asg_parent_dependency( objectLookupTarget* otarg,
                                               objectLookupTarget* ntarg,
                                               slotDesc* sd) {
-  if ( adeps == 0 ) return;
+  if ( adeps == NULL ) return;
   
   if (otarg->links == EMPTY)  adeps->add(otarg);
   otarg->links = otarg->links->add(sd, ntarg);
@@ -98,7 +98,7 @@ void simpleLookup::perform_full_lookup_n(int32 perform_arg_count) {
   } else {
     assert_methodHolder_is_object();
     perform_lookup();
-    if (result() == 0)
+    if (result() == NULL)
       lookupErrorCode(perform_arg_count);
   }
 }
@@ -107,7 +107,7 @@ void simpleLookup::perform_full_lookup_n(int32 perform_arg_count) {
 void simpleLookup::perform_lookup() {
   lookupTarget* t = create_initial_target();
 
-  if ( t == 0 ) // check for errors
+  if ( t == NULL ) // check for errors
     return;
   
   if ( baseLookupType(lookupType()) == ResendBaseLookupType )
@@ -130,7 +130,7 @@ lookupTarget* simpleLookup::create_initial_target() {
 
    default:
     ShouldNotReachHere(); // unexpected base lookup type
-    return 0;
+    return NULL;
   }
 }
 
@@ -157,13 +157,13 @@ lookupTarget* simpleLookup::directed_resend_lookup_target() {
   slotDesc* desc= rm->find_slot(stringOop(delegatee()));
   add_dependency(desc, rm);
 
-  if (desc == 0 || desc->is_vm_slot()) {
+  if (desc == NULL || desc->is_vm_slot()) {
     // didn't find parent to delegate through
     status = delegateeNotFound;
-    return 0;
+    return NULL;
   }
   if ( ! check_slot_for_directed_resend(desc) )
-    return 0;
+    return NULL;
   
   oop delegatee= methodHolder_or_map()->get_slot(desc);
   return new objectLookupTarget(delegatee);
@@ -195,7 +195,7 @@ bool simpleLookup::objectLookup(lookupTarget* target) {
   
   realSlotRef* slot = new realSlotRef(target, desc);
 
-  if (result() != 0  &&  slot->EQsr(result()->as_real())) {
+  if (result() != NULL  &&  slot->EQsr(result()->as_real())) {
     // found same slot, no change
     return true;
   }
@@ -208,7 +208,7 @@ bool simpleLookup::objectLookup(lookupTarget* target) {
     
    case foundOne:
     status = foundSeveral;
-    _result = 0;
+    _result = NULL;
     break;
     
    case foundSeveral:
@@ -216,7 +216,7 @@ bool simpleLookup::objectLookup(lookupTarget* target) {
     
    case foundAssignableParent:
    case resendUndecidable:
-    _result = 0;
+    _result = NULL;
     break;
     
    case delegateeNotFound:
@@ -243,9 +243,9 @@ bool simpleLookup::parentsLookup(lookupTarget* target) {
     target->add_dependency(s, this);    // record a dependency
     
     lookupTarget* parent = target->get_target_for_slot(s, this);
-    if (parent == 0) {
+    if (parent == NULL) {
       status = foundAssignableParent;       // can only occur at compile-time
-      _result = 0;
+      _result = NULL;
       return true;
     }
     
@@ -380,7 +380,7 @@ stringOop simpleLookup::messageTypeForLookupError() {
      return VMString[DELEGATED];
    default:
      ShouldNotReachHere();  // bad lookup type
-     return 0;
+     return NULL;
   }
 }
 
@@ -414,7 +414,7 @@ void simpleLookup::generateLookupErrorMethod(int32 perform_arg_count) {
   slotList* slots = EMPTY;
 
   // push the receiver of the method send
-  b.GenSendByteCode(0, 0, new_string("_ThisProcess"), true, false, 0);
+  b.GenSendByteCode(0, 0, new_string("_ThisProcess"), true, false, NULL);
 
   // push the arguments
   
@@ -425,14 +425,14 @@ void simpleLookup::generateLookupErrorMethod(int32 perform_arg_count) {
   // with: (dmu 1/03)
   stringOop attemptedSelector = new_string("selector");
   slots = slots->add( attemptedSelector, map_slotType, selector());
-  b.GenSendByteCode(0, 0, attemptedSelector, true, false, 0);
+  b.GenSendByteCode(0, 0, attemptedSelector, true, false, NULL);
 
   b.GenSelfByteCode(0, 0);
   
   b.GenLiteralByteCode(0, 0, msgType);
   
   b.GenLiteralByteCode(0, 0,
-                       delegatee() == 0 ? Memory->nilObj : delegatee());
+                       delegatee() == NULL ? Memory->nilObj : delegatee());
   
   assert_methodHolder_is_object();
   assert(!methodHolder_or_map()->has_code(),
@@ -442,13 +442,13 @@ void simpleLookup::generateLookupErrorMethod(int32 perform_arg_count) {
   slots = slots->add( del, map_slotType,
                       isResendLookupType(lookupType())
                       ? methodHolder_or_map() : Memory->nilObj);
-  b.GenSendByteCode(0, 0, del, true, false, 0);
+  b.GenSendByteCode(0, 0, del, true, false, NULL);
   
   // create vector to hold args: "vector _Clone: arc _FillingWith: nil"
   b.GenLiteralByteCode(0, 0, Memory->objVectorObj);
   b.GenLiteralByteCode(0, 0, as_smiOop(argc));
   b.GenLiteralByteCode(0, 0, Memory->nilObj);
-  b.GenSendByteCode(0, 0, VMString[_CLONE_FILLER_], false, false, 0);
+  b.GenSendByteCode(0, 0, VMString[_CLONE_FILLER_], false, false, NULL);
   
   // also cons up arg names, add arg slots, get args into stack
   for (fint i = 0; i < argc; i++) {
@@ -462,12 +462,12 @@ void simpleLookup::generateLookupErrorMethod(int32 perform_arg_count) {
     
     // <vector> at: i Put: <arg>
     b.GenLiteralByteCode(0, 0, as_smiOop(i));
-    b.GenSendByteCode(0, 0, arg, true, false, 0);
-    b.GenSendByteCode(0, 0, VMString[_AT_PUT_], false, false, 0);
+    b.GenSendByteCode(0, 0, arg, true, false, NULL);
+    b.GenSendByteCode(0, 0, VMString[_AT_PUT_], false, false, NULL);
   }
   
   // send the message to the receiver.
-  b.GenSendByteCode(0, 0, sel, false, false, 0);
+  b.GenSendByteCode(0, 0, sel, false, false, NULL);
   
   // NB: don't change <error> below without consulting recompile.c;
   // the code there uses it to recognize these weird methods.  Should
@@ -518,5 +518,5 @@ const char* lookupStatusString(LookupStatus status) {
    default:
     fatal("unknown lookup failure status");
   }
-  return 0;
+  return NULL;
 }

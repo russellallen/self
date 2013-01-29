@@ -6,7 +6,7 @@
 
 # include "_interruptedCtx_i386.cpp.incl"
 
-char* InterruptedContext::next_pc(){ return 0; }
+char* InterruptedContext::next_pc(){ return NULL; }
 void InterruptedContext::set_next_pc(void *) {}
 
 
@@ -27,7 +27,7 @@ bool InterruptedContext::in_system_trap() {
 
 
 int InterruptedContext::system_trap() {
-  return 0; // unimp for now
+  return NULL; // unimp for now
 }
 
 
@@ -108,9 +108,9 @@ void InterruptedContext::setupPreemptionFromSignal() {
 void InterruptedContext::print_registers() {
   InterruptedContext* ic = 
     the_interrupted_context && the_interrupted_context->is_set()  ?  the_interrupted_context  :
-   (AbortContext.is_set() ? &AbortContext : 0);
+   (AbortContext.is_set() ? &AbortContext : NULL);
    
-  if (ic == 0) {
+  if (ic == NULL) {
     lprintf("context is not set\n");
     return;
   }
