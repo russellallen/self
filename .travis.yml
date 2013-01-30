@@ -6,5 +6,5 @@ branches:
   only:
     #- master
     - cmake
-script: mkdir -p build; cd build; cmake .. && cmake --build .
+script: mkdir -p build; cd build; cmake .. && cmake --build . && cd ../objects && ../build/Self -f ci.self
 
