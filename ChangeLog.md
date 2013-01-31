@@ -2,12 +2,12 @@
 
 ## *Shortlog* ##
 
-  * Support for **PPC**, **Mac Classic**, and **MetroWerks** compiler 
-    **removed**
+  * Support for **Mac Classic**, and **MetroWerks** compiler  **removed**
   * Build process uses **CMake** now
   
-  * Less files: 2022 (Makefiles/Xcode) → 1681 (CMake), that is -341 files
-  * Less code: ca. 415,000 SLOC → ca. 399,000 SLOC, that is ca. -16,000 SLOC
+  * Less files: 2022 (Makefiles/Xcode) → 1709 (CMake), that is -313 files
+  * Less code: ca. 510,000 (130,000 w/o Self source) SLOC → ca. 499,00 (123,500 w/o Self source) SLOC, 
+    that is ca. -11,000 (6,500 w/o Self source) SLOC
   
   * New supported compilers: **GCC** ≥ 4.2, **Clang**
   * Experimental Mac OS X support for Self as double-clickable Application
@@ -17,13 +17,13 @@
   * [CLANG] Self can now be built with the Clang C++ compiler
   * [OSX] The experimental Cocoa launcher now supports asking for Snapshots. 
     [0c0c5a1]
-  * [OSX] Self can be compiled on Mac OS 10.6 and 10.7 [08544b3 et al.]
+  * [OSX] Self can be compiled on Mac OS 10.6, 10.7, and 10.8 [08544b3 et al.]
   * [VM] The VM can now be built with coverage data generation [f6de5d6]
   
 ## Removed Features ###
 
-  * [VM] PPC, Mac OS pre-X, and the MetroWerks Compiler are gone. 
-    [c2aacb7, ed4495c, 4d476d9]
+  * [VM] Mac OS pre-X, and the MetroWerks Compiler are gone. 
+    [ed4495c, 4d476d9]
   * [VM] The ASSEMBLER, MANUFACTURER preprocessor macros have been removed
     [2820d73]
   * [Building] The `bin` directory no longer exists. See _Fate of the tools_ 
@@ -61,8 +61,6 @@
         now static members of their class and also have a static inline 
         non-member function.
     [cdeb93c]
-  * [C++] Standard bodies and compilers encourage and require `0` instead of 
-    `NULL`. Self compiles now visibly. [a6e2fbf]
   * [GCC] Self can be built with GCC 4.2.1, GCC 4.5, GCC 4.6, GCC 4.7, 
     and LLVM-GCC 4.2
   * [OSX/Carbon] Some functionality used by certain primitives was deprecated in
