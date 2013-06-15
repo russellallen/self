@@ -60,7 +60,7 @@
     task = [[[NSTask alloc]init]retain];
     //[task setLaunchPath:@"/bin/sh"];
     [task setLaunchPath:@"/usr/bin/screen"];
-    [task setArguments: [NSArray arrayWithObjects: @"-S", [[cwd stringByAppendingString:snap]stringByReplacingOccurrencesOfString:@"/"withString:@""], @"-D", @"-m", @"sh", tmp, nil]];
+    [task setArguments: [NSArray arrayWithObjects: @"-S", [self screenID: cwd snap: snap], @"-D", @"-m", @"sh", tmp, nil]];
     [task setEnvironment:environment];
     [task setStandardInput:inputPipe];
     [task setStandardOutput:outputPipe];
@@ -73,6 +73,11 @@
     [taskOutput readInBackgroundAndNotify];
         
     return self;
+}
+
+-(NSString*)screenID:(NSString*)cwd snap:(NSString*)snap
+{
+    return [@"XX" stringByAppendingString:[[cwd stringByAppendingString:snap]stringByReplacingOccurrencesOfString:@"/"withString:@""]];
 }
 
 -(SelfWorld *)runEmptyOn:(NSURL *)aUrl
