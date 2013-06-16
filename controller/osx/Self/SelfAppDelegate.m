@@ -3,7 +3,7 @@
 //  Self
 //
 //  Created by Russell Allen on 7/01/12.
-//  Copyright 2012 AUTHORS. All rights reserved.
+//  Copyright 2013 AUTHORS. All rights reserved.
 //
 
 #import "SelfAppDelegate.h"
@@ -127,7 +127,7 @@
     
     AuthorizationFree (myAuthorizationRef, kAuthorizationFlagDefaults); // 10
     
-    if (myStatus) printf("Status: %d\n", myStatus);
+    //if (myStatus) printf("Status: %ld\n", myStatus);
     
     return myStatus;
     

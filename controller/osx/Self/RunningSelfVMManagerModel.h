@@ -19,7 +19,7 @@
 
 -(void)registerRunningVM:(SelfWorld *)vm;
 -(void)killAll;
--(NSString*)nameOfSelectedWorld;
+-(NSString*)screenIDOfSelectedWorld;
 -(BOOL)warnBeforeClose;
 -(void)notifyTaskEnded:(SelfWorld *)vm;
 -(void)forceQuit:(NSNotification *)aNotification;

@@ -10,6 +10,7 @@
 #import "RunningSelfVMManagerModel.h"
 
 #include <unistd.h>
+#include <signal.h>
 
 @implementation SelfWorld
 
@@ -60,7 +61,7 @@
     task = [[[NSTask alloc]init]retain];
     //[task setLaunchPath:@"/bin/sh"];
     [task setLaunchPath:@"/usr/bin/screen"];
-    [task setArguments: [NSArray arrayWithObjects: @"-S", [self screenID: cwd snap: snap], @"-D", @"-m", @"sh", tmp, nil]];
+    [task setArguments: [NSArray arrayWithObjects: @"-S", [self getNameForScreen], @"-D", @"-m", @"sh", tmp, nil]];
     [task setEnvironment:environment];
     [task setStandardInput:inputPipe];
     [task setStandardOutput:outputPipe];
@@ -73,11 +74,6 @@
     [taskOutput readInBackgroundAndNotify];
         
     return self;
-}
-
--(NSString*)screenID:(NSString*)cwd snap:(NSString*)snap
-{
-    return [@"XX" stringByAppendingString:[[cwd stringByAppendingString:snap]stringByReplacingOccurrencesOfString:@"/"withString:@""]];
 }
 
 -(SelfWorld *)runEmptyOn:(NSURL *)aUrl
@@ -100,9 +96,26 @@
     return name;
 }
 
+-(NSString *)getDisplayName
+{
+    return [[[name lastPathComponent] stringByAppendingString: @" - "] stringByAppendingString:name];
+}
+
 -(NSString *)getNameForScreen
 {
-    return [name stringByReplacingOccurrencesOfString:@"/"withString:@""];
+    // Lazy initialise a unique id for screen
+    if (screenid == NULL){
+        screenid = [@"SELF" stringByAppendingString:[[self UUIDString] stringByReplacingOccurrencesOfString: @"-" withString: @""]];
+    }
+    return screenid;
+}
+
+-(NSString*)UUIDString
+{
+    CFUUIDRef theUUID = CFUUIDCreate(NULL);
+    CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+    CFRelease(theUUID);
+    return [(NSString *)string autorelease];
 }
 
 -(BOOL)isRunning
@@ -112,7 +125,8 @@
 
 -(void)terminate
 {
-    if ([task isRunning]) {[task terminate];}
+    if ([task isRunning]) {kill(task.processIdentifier, SIGKILL);}
+    //was {[task terminate];} but SIGKILL not SIGTERM to make sure we die
 }
 
 -(void)notifyMe:(RunningSelfVMManagerModel *)m

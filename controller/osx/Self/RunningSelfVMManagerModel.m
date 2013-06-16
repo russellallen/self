@@ -76,7 +76,7 @@
    objectValueForTableColumn:(NSTableColumn *)tableColumn
                   row:(NSInteger)row {
     
-        return [[running objectAtIndex:row] getName];
+        return [[running objectAtIndex:row] getDisplayName];
      
 }
 
@@ -97,7 +97,7 @@
     }
 }
 
-- (NSString*)nameOfSelectedWorld
+- (NSString*)screenIDOfSelectedWorld
 {
     return [(SelfWorld*)[running objectAtIndex:[myTable selectedRow]] getNameForScreen];
 }
@@ -107,7 +107,7 @@
 - (void)openTerminal:(NSNotification *)aNotification
 {
     NSString *s = [NSString stringWithFormat:
-                   @"tell application \"Terminal\" to do script \"screen -t Self -D -r %@\"", [self nameOfSelectedWorld]];
+                   @"tell application \"Terminal\" to do script \"screen -t Self -D -r %@\"", [self screenIDOfSelectedWorld]];
     NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
     [as executeAndReturnError:nil];
     

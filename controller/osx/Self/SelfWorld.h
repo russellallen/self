@@ -14,6 +14,7 @@
 @interface SelfWorld : NSObject {
     NSTask *task;
     NSString *name;
+    NSString *screenid;
     RunningSelfVMManagerModel *manager;
     
     NSFileHandle *taskOutput;
@@ -26,6 +27,7 @@
 -(SelfWorld *)runSnapshot:(NSURL *)aUrl;
 -(SelfWorld *)runEmptyOn:(NSURL *)aUrl;
 -(NSString *)getName;
+-(NSString *)getDisplayName;
 -(NSString *)getNameForScreen;
 -(void)terminate;
 -(BOOL)isRunning;
