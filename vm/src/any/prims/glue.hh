@@ -22,6 +22,7 @@ extern const char *TS_func;    /* Type seal for functions (from dynLink).       
   CC_mber_0(oop,,         oop,byteVector,      string_canonicalize_prim, string_canonicalize_prim_glue,                                                ) \
   CC_mber_0(oop,,         oop,byteVector,      string_print_prim,      string_print_prim_glue,                                                         ) \
   CC_mber_0(oop,,         oop,byteVector,      run_script_prim,        run_script_prim_glue,                                                           ) \
+  CC_mber_1(oop,,         oop,byteVector,      run_native_passing_prim, run_native_passing_prim_glue,, oop,byteVector                                  ) \
   CC_mber_0(oop,,         oop,byteVector,      write_snapshot_prim,    write_snapshot_prim_glue, fail                                                  ) \
   CC_mber_2(oop,,         oop,byteVector,      parseObject_prim,       parseObject_prim_glue,       fail, string,, any_oop,                            ) \
   CC_mber_0(oop,,         oop,byteVector,      parseObjectIntoPositionTable_prim, parseObjectIntoPositionTable_prim_glue,                              ) \

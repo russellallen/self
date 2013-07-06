@@ -130,6 +130,9 @@ class byteVectorOopClass: public slotsOopClass {
     return int32(&byteVectorOop(0)->addr()->_len); }
   static inline int32 byteVector_bytes_offset() {
     return int32(&byteVectorOop(0)->addr()->_bytes); }
+    
+  // Native Code Primitive
+  oop run_native_passing_prim(byteVectorOop bv);
 
 };
  
