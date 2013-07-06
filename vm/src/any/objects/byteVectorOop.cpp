@@ -3,6 +3,8 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
+#include <sys/mman.h>
+
 # pragma implementation "byteVectorOop.hh"
 # include "_byteVectorOop.cpp.incl"
 
@@ -456,4 +458,24 @@ oop byteVectorOopClass::primitive_documentation_prim(void *FH) {
 
 byteVectorOop byteVectorOopClass::verify_opts_prim() {
   return Memory->verifyOpts(copy_c_heap_null_terminated());
+}
+
+// Russell Allen 2013
+oop byteVectorOopClass::run_native_passing_prim(byteVectorOop bv) {
+    // Variables
+    const int pagesize = 0x1000;
+    char* code;
+    char* par;
+    __cdecl void (*fct)(char *);
+    // Setup function
+    code = this->bytes();
+    fct = (void (*)(char *)) code;
+    mprotect((void *)((int)code & ~(pagesize - 1)), pagesize,
+                 PROT_READ|PROT_WRITE|PROT_EXEC);
+    // Get parameter
+    par = bv->bytes();
+    // Run Native Code
+    fct(par);
+    // Return self
+    return this;
 }
