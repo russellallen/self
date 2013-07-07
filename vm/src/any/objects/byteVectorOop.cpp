@@ -461,21 +461,36 @@ byteVectorOop byteVectorOopClass::verify_opts_prim() {
 }
 
 // Russell Allen 2013
-oop byteVectorOopClass::run_native_passing_prim(byteVectorOop bv) {
+oop byteVectorOopClass::run_native_passing_prim(
+            byteVectorOop arg0,
+            byteVectorOop arg1,
+            byteVectorOop arg2,
+            byteVectorOop arg3,
+            byteVectorOop arg4,
+            byteVectorOop arg5,
+            byteVectorOop arg6,
+            byteVectorOop arg7 ) {
     // Variables
     const int pagesize = 0x1000;
     char* code;
-    char* par;
-    __cdecl void (*fct)(char *);
+    char *p0, *p1, *p2, *p3, *p4, *p5, *p6, *p7;
+    __cdecl void (*fct)(char *, char *, char *, char *, char *, char *, char *, char *);
     // Setup function
     code = this->bytes();
-    fct = (void (*)(char *)) code;
+    fct = (void (*)(char *, char *, char *, char *, char *, char *, char *, char *)) code;
     mprotect((void *)((int)code & ~(pagesize - 1)), pagesize,
                  PROT_READ|PROT_WRITE|PROT_EXEC);
-    // Get parameter
-    par = bv->bytes();
+    // Get parameters
+    p0 = arg0->bytes();
+    p1 = arg1->bytes();
+    p2 = arg2->bytes();
+    p3 = arg3->bytes();
+    p4 = arg4->bytes();
+    p5 = arg5->bytes();
+    p6 = arg6->bytes();
+    p7 = arg7->bytes();
     // Run Native Code
-    fct(par);
+    fct(p0,p1,p2,p3,p4,p5,p6,p7);
     // Return self
     return this;
 }
