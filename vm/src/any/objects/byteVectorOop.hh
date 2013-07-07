@@ -37,7 +37,7 @@ class byteVectorOopClass: public slotsOopClass {
   void byte_at_put(fint which, char contents) {
     assert(which >= 0 && which < length(), "index out of bounds");
     *bytes(which) = contents; }
-
+    
   // allocators
   byteVectorOop copy(fint size, bool mustAllocate, oop genObj, bool cs);
   byteVectorOop copy(bool mustAllocate= true, oop genObj= NULL, bool cs= true)
@@ -131,8 +131,16 @@ class byteVectorOopClass: public slotsOopClass {
   static inline int32 byteVector_bytes_offset() {
     return int32(&byteVectorOop(0)->addr()->_bytes); }
     
-  // Native Code Primitive
-  oop run_native_passing_prim(byteVectorOop bv);
+  // native code primitive
+  oop run_native_passing_prim(
+      byteVectorOop arg0,
+      byteVectorOop arg1,
+      byteVectorOop arg2,
+      byteVectorOop arg3,
+      byteVectorOop arg4,
+      byteVectorOop arg5,
+      byteVectorOop arg6,
+      byteVectorOop arg7 );
 
 };
  

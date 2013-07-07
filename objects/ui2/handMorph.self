@@ -427,6 +427,7 @@ will also change the screen edges, but not the held objects.\x7fModuleInfo: Modu
          'Category: damageManagement\x7fModuleInfo: Module: handMorph InitialContents: FollowSlot\x7fVisibility: private'
         
          damagedLeft: l Right: r Top: t Bottom: b From: m = ( |
+             extraShadowOffsetHackToAvoidQuartzShadowTurds = 1.
              p.
             | 
             "Override this message to add the shadow offset."
@@ -436,9 +437,9 @@ will also change the screen edges, but not the held objects.\x7fModuleInfo: Modu
                 px: p x.
                 py: p y.
                 owner damagedLeft: l + px
-                            Right: r + px + shadowOffset x
+                            Right: r + px + shadowOffset x + extraShadowOffsetHackToAvoidQuartzShadowTurds
                               Top: t + py
-                           Bottom: b + py + shadowOffset y
+                           Bottom: b + py + shadowOffset y + extraShadowOffsetHackToAvoidQuartzShadowTurds
                              From: m.
             ].
             self).

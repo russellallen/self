@@ -2077,7 +2077,7 @@ fntype(&call_and_convert5_glue),
  "method.  Used to implement looping in blocks."
 },
 {
-"RunNativePassing:",   fntype(&run_native_passing_prim_glue),
+"RunNativePassing:With:With:With:With:With:With:With:",   fntype(&run_native_passing_prim_glue),
   ExternalPrimitive, UnknownPrimType,
   SIDEEFFECTS,
  "The receiver is a bytevector. Jumps to it and runs it as"

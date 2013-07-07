@@ -78,6 +78,19 @@ Try: native example returnSafely\x7fModuleInfo: Creator: globals native.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
+         'Category: support\x7fComment: send \'adjustToPlatform\' too all slots, so 
+they can make sure they are correctly setup\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         adjustToPlatform = ( |
+            | 
+            (reflect: self) do: [|:e|
+              e isMethod not && 
+              e isAssignment not &&
+              e isParent not ifTrue: [ e value reflectee adjustToPlatform ]].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
          'ModuleInfo: Module: native InitialContents: FollowSlot'
         
          example = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'example' -> () From: ( |
@@ -107,9 +120,9 @@ Try: native example returnSafely\x7fModuleInfo: Creator: globals native.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'example' -> () From: ( | {
-         'ModuleInfo: Module: native InitialContents: FollowSlot'
+         'ModuleInfo: Module: native InitialContents: InitializeToExpression: (native example x86osx)'
         
-         currentPlatform* = bootstrap stub -> 'globals' -> 'native' -> 'example' -> 'x86osx' -> ().
+         currentPlatform* <- bootstrap stub -> 'globals' -> 'native' -> 'example' -> 'x86osx' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'example' -> () From: ( | {
@@ -130,14 +143,53 @@ Try: native example returnSafely\x7fModuleInfo: Creator: globals native.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'example' -> 'unknown' -> () From: ( | {
          'ModuleInfo: Module: native InitialContents: FollowSlot'
         
-         p* = bootstrap stub -> 'traits' -> 'oddball' -> ().
+         hello = ( |
+            | error: 'Unknown Platform for Native Code').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'example' -> 'unknown' -> () From: ( | {
          'ModuleInfo: Module: native InitialContents: FollowSlot'
         
-         returnSafely = ( |
-            | error: 'Unknown Platform for Native Code').
+         p* = bootstrap stub -> 'traits' -> 'oddball' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'example' -> 'x86osx' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         hello = ( |
+             bv.
+             x.
+            | 
+            x: byteVector copySize: 5.
+            hello_bv ifNil: [hello_bv: native nasm assemble: 
+            '
+            USE32
+
+            ; Callee responsibilities:
+            PUSH  EBP       ; store callers EBP
+            MOV   EBP, ESP  ; save current stack pointer in EBP
+
+            ; ... Code ...
+            MOV  EAX, [EBP + 8] ; Load parameter 0 into EAX
+            MOV  [EAX],   byte 0x48
+            MOV  [EAX+1], byte 0x45
+            MOV  [EAX+2], byte 0x4C
+            MOV  [EAX+3], byte 0x4C
+            MOV  [EAX+4], byte 0x4F
+
+            ; Callee responsibilities:
+            MOV   ESP, EBP  ; remove an unknown number of local data elements
+            POP   EBP       ; restore callers EBP
+            RET             ; return
+            '].
+            hello_bv runNativePassing: x.
+            x asString).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'example' -> 'x86osx' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: InitializeToExpression: (nil)'
+        
+         hello_bv <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'example' -> 'x86osx' -> () From: ( | {
@@ -146,16 +198,17 @@ Try: native example returnSafely\x7fModuleInfo: Creator: globals native.
          p* = bootstrap stub -> 'traits' -> 'oddball' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'example' -> 'x86osx' -> () From: ( | {
-         'ModuleInfo: Module: native InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
+         'Category: support\x7fComment: registers with startup to call
+\'adjustToPlatform\'\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
-         returnSafely = ( |
-             bv.
+         installStartup = ( |
             | 
-            bv: native nasm assemble: '
-              ret
-            '.
-            bv _RunNativePassing: bv.
+            snapshotAction schedulerInitialMessages
+             findFirst: [|:a | a receiver = self ] 
+                   IfPresent: true
+                   IfAbsent: [snapshotAction addSchedulerInitialMessage:
+                          (message copy receiver: self Selector: 'adjustToPlatform')].
             self).
         } | ) 
 
@@ -166,6 +219,13 @@ Try: native example returnSafely\x7fModuleInfo: Creator: globals native.
              {} = 'ModuleInfo: Creator: globals native nasm.
 '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'nasm' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         adjustToPlatform = ( |
+            | self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'nasm' -> () From: ( | {
@@ -199,10 +259,23 @@ Try: native example returnSafely\x7fModuleInfo: Creator: globals native.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
          'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
+         p* = bootstrap stub -> 'traits' -> 'oddball' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
          simpleAssembler = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'simpleAssembler' -> () From: ( |
              {} = 'Comment: For testing and bootstrapping\"\x7fModuleInfo: Creator: globals native simpleAssembler.
 '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'simpleAssembler' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         adjustToPlatform = ( |
+            | self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'simpleAssembler' -> () From: ( | {
@@ -241,6 +314,69 @@ Try: native example returnSafely\x7fModuleInfo: Creator: globals native.
         
          ret = ( |
             | l addLast: 16rC3. self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: native\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         runNative = ( |
+            | _RunNativePassing: self With: self With: self With: self With: self With: self With: self With: self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: native\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         runNativePassing: a = ( |
+            | _RunNativePassing: a With: self With: self With: self With: self With: self With: self With: self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: native\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         runNativePassing: a With: b = ( |
+            | _RunNativePassing: a With: b With: self With: self With: self With: self With: self With: self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: native\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         runNativePassing: a With: b With: c = ( |
+            | _RunNativePassing: a With: b With: c With: self With: self With: self With: self With: self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: native\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         runNativePassing: a With: b With: c With: d = ( |
+            | _RunNativePassing: a With: b With: c With: d With: self With: self With: self With: self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: native\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         runNativePassing: a With: b With: c With: d With: e = ( |
+            | _RunNativePassing: a With: b With: c With: d With: e With: self With: self With: self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: native\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         runNativePassing: a With: b With: c With: d With: e With: f = ( |
+            | _RunNativePassing: a With: b With: c With: d With: e With: f With: self With: self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: native\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         runNativePassing: a With: b With: c With: d With: e With: f With: g = ( |
+            | _RunNativePassing: a With: b With: c With: d With: e With: f With: g With: self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: native\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         runNativePassing: a With: b With: c With: d With: e With: f With: g With: h = ( |
+            | _RunNativePassing: a With: b With: c With: d With: e With: f With: g With: h).
         } | ) 
 
 

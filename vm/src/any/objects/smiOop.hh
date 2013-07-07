@@ -51,6 +51,9 @@ class smiOopClass: public oopClass {
   
   smi identity_hash() { return value(); }
   
+  // for _RunNative
+  void* bits() { return (void*) value(); }
+  
   // arithmetic
   smiOop increment() { return smiOop(smi(this) + smi(smiOop_one)); }
   smiOop decrement() { return smiOop(smi(this) - smi(smiOop_one)); }
