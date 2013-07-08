@@ -98,7 +98,7 @@ class fctProxyOopClass: public proxyOopClass {
                            void *a6, void *a7, void *a8, void *a9);
     oop call_and_convert10(void *a1, void *a2, void *a3, void *a4, void *a5,
                            void *a6, void *a7, void *a8, void *a9, void *a10);
-
+                           
 #   ifdef UNUSED
     fctProxyOop clone(bool mustAllocate= true) { 
       return (fctProxyOop) proxyOopClass::clone(mustAllocate); 

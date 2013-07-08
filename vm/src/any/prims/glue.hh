@@ -47,7 +47,7 @@ extern const char *TS_func;    /* Type seal for functions (from dynLink).       
   CC_mber_0(smi,,         oop,foreign,         foreign_hash,           foreign_hash_glue,                                                              ) \
   CC_mber_1(bool,,        oop,foreign,         same_pointer_as,        same_pointer_as_glue,,  oop,foreign                                             ) \
   CC_mber_0(proxy,(void *,sealSeal),oop,proxy, get_type_seal,          get_type_seal_glue,                                                             ) \
-
+  CC_mber_1(oop,,  oop,foreign, pointer_in_bytevector_prim, pointer_in_bytevector_prim_glue,, oop,byteVector ) \
 
 
 # define process_glue                                                                                                                                    \
@@ -200,7 +200,6 @@ extern const char *TS_func;    /* Type seal for functions (from dynLink).       
   fctProxy_glue_5 \
   fctProxy_glue_6 \
   fctProxy_glue_7 \
-
 
 # define mirror_glue                                                                                                                                     \
    CC_mber_0(oop,,  oop,mirror,   get_reflectee_prim,     get_reflectee_prim_glue,                                                                     ) \

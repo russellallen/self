@@ -105,5 +105,8 @@ class foreignOopClass: public slotsOopClass {  // Abstract class.
   
   bool verify();
   
+  // to help _RunNative
+  oop pointer_in_bytevector_prim(byteVectorOop bv);
+  
   friend class foreignMap;
 };

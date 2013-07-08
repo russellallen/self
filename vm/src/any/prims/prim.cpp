@@ -1789,6 +1789,13 @@ fntype(&call_and_convert5_glue),
  "arguments."
 },
 {
+"PointerInByteVector:",
+  fntype(&pointer_in_bytevector_prim_glue),
+  ExternalPrimitive, UnknownPrimType,
+  SIDEEFFECTS,
+ "The receiver is a proxy. Returns the pointer starting at offset 0 of byteVector."
+},
+{
 "PrimitiveDocumentation",
  fntype(&primitive_documentation_prim_glue),
  ExternalPrimitive, UnknownPrimType,
