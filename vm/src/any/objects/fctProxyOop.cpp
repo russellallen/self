@@ -26,7 +26,6 @@ oop fctProxyOopClass::set_noOfArgs_prim(smi n, void *FH) {
   return this;
 }
 
-
 # if  GENERATE_DEBUGGING_AIDS
 bool fctProxyOopClass::verify() {
   bool flag = proxyOopClass::verify();
