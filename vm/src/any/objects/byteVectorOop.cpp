@@ -460,7 +460,6 @@ byteVectorOop byteVectorOopClass::verify_opts_prim() {
   return Memory->verifyOpts(copy_c_heap_null_terminated());
 }
 
-// Russell Allen 2013
 oop byteVectorOopClass::run_native_passing_prim(
             byteVectorOop arg0,
             byteVectorOop arg1,

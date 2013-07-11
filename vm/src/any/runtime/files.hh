@@ -7,7 +7,6 @@
   # pragma interface
 # endif
 
-
 // redone for new path stuff -- dmu 10/91
 
 # ifndef _NFILE

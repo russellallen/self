@@ -31,6 +31,7 @@ discussed in :ref:`[UCC91] <citations>`.
    oddball.rst
    buildworld.rst
    lowlevel.rst
+   native.rst
    textdebug.rst
-
+   
 
