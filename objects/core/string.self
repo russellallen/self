@@ -1,7 +1,7 @@
  'Sun-$Revision: 30.23 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -124,6 +124,19 @@ SlotsToOmit: parent.
          bytesDo: aBlock = ( |
             | 
             do: aBlock).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: copying\x7fModuleInfo: Module: string InitialContents: FollowSlot'
+        
+         copyContainingString: s = ( |
+             bv.
+             k.
+            | 
+            bv: copySize: s size.
+            k: firstKey.
+            s do: [ | :v | bv at: k Put: v asByte. k: k succ ].
+            bv).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
@@ -253,13 +266,6 @@ SlotsToOmit: parent.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableString' -> () From: ( | {
          'ModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
         
-         asByteVector = ( |
-            | byteVector copyContaining: self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableString' -> () From: ( | {
-         'ModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
-        
          copy = ( |
             | clone).
         } | ) 
@@ -342,6 +348,14 @@ when nothing is filed in yet. -- dmu 4/1\x7fModuleInfo: Module: string InitialCo
                     ' (', self, ') have size ', size printString.
             ].
             firstByte).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'string' -> () From: ( | {
+         'Category: transforming\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
+        
+         asByteVector = ( |
+            | 
+            byteVector copyContainingString: self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'string' -> () From: ( | {

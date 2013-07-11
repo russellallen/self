@@ -25,7 +25,6 @@ bool foreignOopClass::verify() {
 
 oop foreignOopClass::pointer_in_bytevector_prim(byteVectorOop bv){
     void* p = get_pointer();
-    verify();
     if (bv->length() < sizeof(void*) ) {
         // can't store, return self
         error1("Proxy %#lx: byteVector too small to fit pointer", this);
