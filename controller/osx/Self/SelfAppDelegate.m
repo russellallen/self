@@ -46,9 +46,9 @@
     NSString* myVM = [myBundle pathForResource:@"Self"ofType:@"app"];
     myVM = [myVM stringByAppendingString:@"/Contents/MacOS/Self"];
 
-    NSString* str = @"#!/bin/sh\n";
+    NSString* str = @"#!/bin/sh\n\"";
     str = [str stringByAppendingString:myVM];
-    str = [str stringByAppendingString:@" $@"];
+    str = [str stringByAppendingString:@"\" $@"];
     
     NSMutableDictionary *attributes = [[NSMutableDictionary alloc] init]; 
     [attributes setObject:[NSNumber numberWithInt:493] forKey:NSFilePosixPermissions]; 
