@@ -1,7 +1,7 @@
  'Sun-$Revision: 30.20 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -482,6 +482,20 @@ if space overflows. -- dmu 5/04\x7fModuleInfo: Module: vector InitialContents: F
               r: r, s.
             ].
             r).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: C types\x7fCategory: Retrieving\x7fCategory: Non-overflow\x7fComment: Won\'t overflow, may return bigInt\x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: public'
+        
+         littleEndian32bitUnsignedAt: index IfFail: errBlk = ( |
+            | 
+             (littleEndianIntSize: 16 Signed: false At: 0 IfFail: errBlk)
+            +
+            (
+             (littleEndianIntSize: 16 Signed: false At: 2 IfFail: errBlk)
+             *
+             (2 power: 16)
+            )).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
