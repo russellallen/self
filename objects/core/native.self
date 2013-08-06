@@ -50,7 +50,8 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'ModuleInfo: Module: native InitialContents: FollowSlot'
         
          postFileIn = ( |
-            | resend.postFileIn).
+            | 
+            native installStartup. resend.postFileIn).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'native' -> () From: ( | {
@@ -72,7 +73,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
              {} = 'Comment: I contain native code!
 Run with care, here be
 dragons.
-Try: native example returnSafely\x7fModuleInfo: Creator: globals native.
+Try: 
+native example hello
+native sodium randomInt\x7fModuleInfo: Creator: globals native.
 '.
             | ) .
         } | ) 
@@ -110,6 +113,21 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
             self).
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeModuleParent' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         unknownPlatform = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeModuleParent' -> 'unknownPlatform' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals native support nativeModuleParent unknownPlatform.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'example' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: InitializeToExpression: (native support nativeModuleParent unknownPlatform)'
+        
+         currentPlatform* <- bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeModuleParent' -> 'unknownPlatform' -> ().
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> () From: ( | {
          'ModuleInfo: Module: native InitialContents: FollowSlot'
         
@@ -120,9 +138,18 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'example' -> () From: ( | {
-         'ModuleInfo: Module: native InitialContents: FollowSlot'
+         'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
          p* = bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeModuleParent' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'example' -> () From: ( | {
+         'Category: platforms\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         x86osx = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'example' -> 'x86osx' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals native example x86osx.
+'.
+            | ) .
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'example' -> 'x86osx' -> () From: ( | {
@@ -158,6 +185,12 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
             x asString).
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'example' -> 'x86osx' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (nil)'
+        
+         hello_bv <- bootstrap stub -> 'globals' -> 'nil' -> ().
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
          'Category: modules\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
@@ -165,6 +198,29 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
              {} = 'ModuleInfo: Creator: globals native exampleBinding.
 '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'exampleBinding' -> () From: ( | {
+         'Category: adjust to platform\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         adjustToPlatform = ( |
+            | 
+            host osName  = 'macOSX' 
+              ifTrue: [currentPlatform: x86osx]
+               False: [currentPlatform: unknownPlatform].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'exampleBinding' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: InitializeToExpression: (native support nativeModuleParent unknownPlatform)'
+        
+         currentPlatform* <- bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeModuleParent' -> 'unknownPlatform' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'exampleBinding' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         p* = bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeModuleParent' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'exampleBinding' -> () From: ( | {
@@ -202,15 +258,15 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'exampleBinding' -> 'x86osx' -> () From: ( | {
-         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (nil)'
+         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (proxy)'
         
-         fct <- bootstrap stub -> 'globals' -> 'nil' -> ().
+         fct <- bootstrap stub -> 'globals' -> 'proxy' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'exampleBinding' -> 'x86osx' -> () From: ( | {
-         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (nil)'
+         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (proxy)'
         
-         lib <- bootstrap stub -> 'globals' -> 'nil' -> ().
+         lib <- bootstrap stub -> 'globals' -> 'proxy' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'exampleBinding' -> 'x86osx' -> () From: ( | {
@@ -291,6 +347,148 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
+         'Category: modules\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         sodium = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals native sodium.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> () From: ( | {
+         'Category: adjust to platform\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         adjustToPlatform = ( |
+            | 
+            host osName  = 'macOSX' 
+              ifTrue: [currentPlatform: x86osx]
+               False: [currentPlatform: unknownPlatform].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: InitializeToExpression: (native support nativeModuleParent unknownPlatform)'
+        
+         currentPlatform* <- bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeModuleParent' -> 'unknownPlatform' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         p* = bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeModuleParent' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> () From: ( | {
+         'Category: platforms\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         x86osx = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals native sodium x86osx.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
+         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (nil)'
+        
+         abs_bv <- bootstrap stub -> 'globals' -> 'nil' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         addressOf: fp = ( |
+             bv.
+            | 
+            bv: byteVector copySize: 4.
+            fp _PointerInByteVector: bv.
+            bv).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         clean = ( |
+            | 
+            lib: foreignCode copy. abs_bv: nil).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
+         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (fctProxy)'
+        
+         fctP <- bootstrap stub -> 'globals' -> 'fctProxy' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
+         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (byteVector copy)'
+        
+         fctPBV <- byteVector copy.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
+         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (proxy)'
+        
+         lib <- bootstrap stub -> 'globals' -> 'proxy' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         loadAsm = ( |
+             a.
+            | 
+            a: native support nasm copy.
+            a addCdeclCalleeEntry. "Pushes 2 dwords onto stack"
+            a add: '
+            ; Get address of function
+            mov   edx, dword [ebp + 8]  ; mov addr of bv contining addr of cfunc
+            mov   eax, dword [edx]      ; mov addr of cfunc into eax
+            push  dword [ebp + 12]      ; save addr of bv(res) 
+
+            ; Call
+            ; push  dword 0x0           ; align to 16 byte boundary for OS X
+            call  eax                   ; call function 
+            ; add   esp, 4              ; stack cleaning - remove the argument(s)
+            ; add   esp, 4              ; stack cleaning - remove alignment
+
+            ; Save Result
+            pop   ecx                   ; get addr of bv(res)
+            mov   dword [ecx], eax      ; move result to res byteVector
+            '.
+            a addCdeclCalleeReturn.
+            abs_bv: a assemble).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         loadCaches = ( |
+            | 
+            lib isLoaded ifFalse: [
+            lib: foreignCodeDB at: '/usr/local/lib/libsodium.4.dylib' IfFail: [|:e| error: e].
+            fctP: lib lookupFunction: 'randombytes_random'.
+            fctPBV: addressOf: fctP.
+            loadAsm.]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         p* = bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeModuleParent' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
+         'Comment: Should probably return 3007012 on a recent OS X\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         randomInt = ( |
+             res.
+            | 
+            loadCaches.
+            res: byteVector copySize: 4.
+            abs_bv runNativePassing: fctPBV With: res.
+            res littleEndian32bitUnsignedAt: 0 IfFail: [|:e| error: e]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
          'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
          support = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'support' -> () From: ( |
@@ -316,9 +514,42 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nasm' -> () From: ( | {
-         'ModuleInfo: Module: native InitialContents: FollowSlot'
+         'ModuleInfo: Module: native InitialContents: FollowSlot\x7fVisibility: public'
         
-         assemble: s = ( |
+         add: rawString = ( |
+            | s: s, rawString).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nasm' -> () From: ( | {
+         'Category: calling\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         addCdeclCalleeEntry = ( |
+            | add: '
+            ; Callee responsibilities:
+            push  ebp       ; store callers EBP
+            mov   ebp, esp  ; save current stack pointer in EBP
+            push  ebx       ; save ebx
+            ').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nasm' -> () From: ( | {
+         'Category: calling\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         addCdeclCalleeReturn = ( |
+            | 
+            add: '
+            ; Callee responsibilities:
+            pop   ebx       ; restore ebx
+            mov   esp, ebp  ; remove an unknown number of local data elements
+            pop   ebp       ; restore callers EBP
+            ret             ; return
+            ').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nasm' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot\x7fVisibility: public'
+        
+         assemble = ( |
              bv.
              f.
              fn.
@@ -338,9 +569,23 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nasm' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copy = ( |
+            | 
+            resend.copy s: 'USE32\n').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nasm' -> () From: ( | {
          'ModuleInfo: Module: native InitialContents: FollowSlot'
         
-         p* = bootstrap stub -> 'traits' -> 'oddball' -> ().
+         p* = bootstrap stub -> 'traits' -> 'clonable' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nasm' -> () From: ( | {
+         'Category: internal state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (\'USE32\\n\')'
+        
+         s <- 'USE32\n'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeModuleParent' -> () From: ( | {
@@ -354,15 +599,6 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
          'ModuleInfo: Module: native InitialContents: FollowSlot'
         
          p* = bootstrap stub -> 'traits' -> 'oddball' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeModuleParent' -> () From: ( | {
-         'ModuleInfo: Module: native InitialContents: FollowSlot'
-        
-         unknownPlatform = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeModuleParent' -> 'unknownPlatform' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals native support nativeModuleParent unknownPlatform.
-'.
-            | ) .
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeModuleParent' -> 'unknownPlatform' -> () From: ( | {
