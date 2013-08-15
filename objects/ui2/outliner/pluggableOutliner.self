@@ -1,7 +1,7 @@
  '$Revision: 30.18 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -403,7 +403,7 @@ boxedItems.\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot
         
          buildBody = ( |
             | 
-            body: rowMorph copy color: preferredColor.
+            body: rowMorph copy color: (paint named: 'transparent').
             body  borderWidth: 0.
             body  baseMinHeight: 0.
             body  beFlexible.
@@ -411,7 +411,7 @@ boxedItems.\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot
             buildItemsHolder.
 
             indentSubParts ifTrue: [
-              body addMorphLast: rigidSpacer copy color: color
+              body addMorphLast: rigidSpacer copy color: (paint named: 'transparent')
             ].
             body addMorphLast: items.
             body).
@@ -445,6 +445,7 @@ boxedItems.\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot
          buildHeader = ( |
             | 
             header: rowMorph copy removeAllMorphs beFlexible borderWidth: 0.
+            "header color: preferredHeaderColor." "see recolor"
             header borderWidth: 4.
             fillInHeader.
             header).
@@ -455,7 +456,7 @@ boxedItems.\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot
         
          buildSpacer = ( |
             | 
-            morph copy
+            (morph copy color: paint named: 'transparent')
               beRigidHorizontally
               beFlexibleVertically
               setWidth: 2).
@@ -590,10 +591,12 @@ update the object\'s title\x7fModuleInfo: Module: pluggableOutliner InitialConte
         
          colorAll: newC = ( |
             | 
-            resend.colorAll: 
+            "resend.colorAll: 
               preferredColor = prototype preferredColor
                 ifTrue: [ newC ]
-                 False: [ preferredColor ]).
+                 False: [ preferredColor ]"
+            "REMEMBERTHIS"
+             self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {
@@ -907,7 +910,6 @@ Same for collapse:, expandAll: collapseAll: -- dmu 4/1\x7fModuleInfo: Module: pl
             header addMorphLast: buildSpacer.
             addCommentButtonToHeader.
             addButtonsToHeader.
-            header colorAll: preferredHeaderColor.
             self).
         } | ) 
 
@@ -1177,12 +1179,30 @@ Same for collapse:, expandAll: collapseAll: -- dmu 4/1\x7fModuleInfo: Module: pl
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {
+         'Category: plug-in operations\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot'
+        
+         preferredTitleColor = ( |
+            | model preferredTitleColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {
          'Category: dropping\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          receiveDroppingPointerToModel: m IfAccepted: aBlk = ( |
             | 
             model receiveDroppingPointerToModel: m
                                      IfAccepted: aBlk).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {
+         'Category: color\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot'
+        
+         recolor = ( |
+            | 
+            (owner isNil || [owner isWorldMorph])
+              ifTrue: [header color: preferredHeaderColor]
+               False: [header color: preferredColor].
+            resend.recolor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {

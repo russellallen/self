@@ -1,7 +1,7 @@
  '$Revision: 30.9 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -151,10 +151,10 @@ SlotsToOmit: parent prototype.
             tle: buildTitle.
             header addMorphLast: tle.
             addCommentButtonToHeader.
-            header addMorphLast: flexibleSpacer copy color: color.
+            header addMorphLast: flexibleSpacer copy color: (paint named: 'transparent').
             contentsLabel: optionalMorph copy color: color.
             header addMorphLast: contentsLabel.
-            header addMorphLast: rigidSpacer copyH: 4 Color: color.
+            header addMorphLast: rigidSpacer copyH: 4 Color: (paint named: 'transparent').
             header addMorphLast: buildExpander.
 
             " put contents string and sprout box at bottom of tall title "
@@ -170,6 +170,7 @@ SlotsToOmit: parent prototype.
          initializeForModel: m = ( |
             | 
             resend.initializeForModel: m.
+            color: m preferredColor.
             borderWidth: 1.
             beFlexible.
             frameStyle: insetBezelStyle.

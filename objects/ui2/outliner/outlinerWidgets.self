@@ -1,7 +1,7 @@
  '$Revision: 30.22 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -340,6 +340,12 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'expanderMorph' -> () From: ( | {
+         'ModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (paint named: \'black\')'
+        
+         savedColor <- paint named: 'black'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'expanderMorph' -> () From: ( | {
          'ModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
          target.
@@ -617,12 +623,13 @@ SlotsToOmit: parent prototype.
          smallEditorMorph = bootstrap define: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
              bootstrap remove: 'prototype' From:
+             bootstrap remove: 'rawColor' From:
              globals rowMorph copyRemoveAllMorphs ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals smallEditorMorph.
 
 CopyDowns:
 globals rowMorph. copyRemoveAllMorphs 
-SlotsToOmit: parent prototype.
+SlotsToOmit: parent prototype rawColor.
 
 \x7fIsComplete: '.
             | ) .
@@ -644,6 +651,12 @@ SlotsToOmit: parent prototype.
          'ModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
          cachedFontSpec.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (nil)'
+        
+         cachedLabelMorph.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
@@ -705,15 +718,34 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'Category: filing out\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+        
+         prototype = ( |
+            | smallEditorMorph).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'Category: Basic Morph State\x7fModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (paint named: \'transparent\')\x7fVisibility: private'
+        
+         rawColor <- paint named: 'transparent'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
          'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          rawEditMode <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
-         'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (paint named: \'transparent\')\x7fVisibility: public'
         
-         savedColor <- paint named: 'lightGray'.
+         savedColor <- paint named: 'transparent'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (paint named: \'black\')\x7fVisibility: public'
+        
+         savedLabelColor <- paint named: 'black'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
@@ -777,15 +809,17 @@ SlotsToOmit: parent prototype.
             panel: nil.
             lines: textLines copyLines: string.
             lines size <= 1 ifTrue: [
-              addMorphLast: labelMorph copyLabel: string
+              cachedLabelMorph: labelMorph copyLabel: string
                                         FontSpec: style fontSpec
-                                           Color: color textColorForBackground
+                                           Color: savedLabelColor.
+              addMorphLast: cachedLabelMorph
             ] False: [| col |
               col: (columnMorph copy leftJustify beShrinkWrap borderWidth: 0) color: color.
               lines do: [| :l |
-                col addMorphLast: labelMorph copyLabel: l
+                cachedLabelMorph: labelMorph copyLabel: l
                                               FontSpec: style fontSpec
-                                                 Color: color textColorForBackground
+                                                 Color: savedLabelColor.
+                col addMorphLast: cachedLabelMorph
               ].
               addMorphLast: col
             ].
@@ -864,6 +898,16 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
          'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
+         copyString: str Target: tar Accept: accept Cancel: cancel Style: sty LabelColor: c = ( |
+            | 
+            ((((((copy target: tar) string: str) accept: accept) style: sty) savedLabelColor: c)
+              cancelAction: cancel)
+              initialize).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+        
          copyString: str Target: tar Accept: accept Style: sty = ( |
             | 
             ((((copy target: tar) string: str) accept: accept) style: sty)
@@ -924,7 +968,6 @@ SlotsToOmit: parent prototype.
         
          initialize = ( |
             | 
-            color: style color.
             addLabels).
         } | ) 
 
@@ -951,6 +994,17 @@ SlotsToOmit: parent prototype.
          'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          isSmallEditorMorph = bootstrap stub -> 'globals' -> 'true' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+        
+         labelColor: c = ( |
+            | 
+            savedLabelColor: c.
+            cachedLabelMorph isNil ifFalse: [
+              cachedLabelMorph color: c].
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
@@ -2277,9 +2331,6 @@ SlotsToOmit: parent prototype.
         
          colorAll: newC = ( |
             | 
-            "See comment in traits morph for general idea.
-             Here, for legibility do not change color."
-
             morphsDo: [| :m | m colorAll: newC ].
             color: normalColorFor: newC.
             self).
@@ -2322,6 +2373,7 @@ SlotsToOmit: parent prototype.
          initializePrototype = ( |
             | 
             color: paint named: 'black'.
+            savedColor: color.
             collapse: ui2Event.
             self).
         } | ) 
@@ -2350,6 +2402,7 @@ SlotsToOmit: parent prototype.
         
          leftMouseDown: evt = ( |
             | 
+            savedColor: color.
             color: pressedColor.
             evt sourceHand subscribeUntilAllUp: self.
             self).
@@ -2405,8 +2458,7 @@ SlotsToOmit: parent prototype.
         
          normalColor = ( |
             | 
-            owner ifNil: [^ paint named: 'black'].
-            normalColorFor: owner color).
+            savedColor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'expanderMorph' -> () From: ( | {
@@ -2427,8 +2479,6 @@ SlotsToOmit: parent prototype.
         
          pressedColor = ( |
             | 
-            "normalColor outlineColorForBackground"
-            "above didn't show up enough"
             paint named: 'red').
         } | ) 
 
@@ -2665,6 +2715,7 @@ SlotsToOmit: parent prototype.
             panel: nil.
 
             kwCol: columnMorph copy beShrinkWrap rightJustify borderWidth: 0.
+            kwCol color: paint named: 'transparent'.
             formalCol: kwCol copy leftJustify.
 
             sel keywords
@@ -2672,16 +2723,15 @@ SlotsToOmit: parent prototype.
                 Do: [| :kw. :arg |
                   kwCol addMorphLast: labelMorph copyLabel: kw, ' '
                             FontSpec: style fontSpec
-                               Color: paint named: 'black'.
+                               Color: savedLabelColor.
 
                   formalCol addMorphLast: labelMorph copyLabel: arg
                                 FontSpec: style fontSpec
-                                   Color: paint named: 'black'.
+                                   Color: savedLabelColor.
             ].
 
             addMorphLast: kwCol.
             addMorphLast: formalCol.
-            colorAll: color.
             self).
         } | ) 
 

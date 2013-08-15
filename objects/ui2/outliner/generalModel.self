@@ -573,6 +573,8 @@ Index outliner should probably use something else.\x7fModuleInfo: Module: genera
             | 
             myOutliner expander:
               expanderMorph copyTarget: self Action: expanderAction.
+            myOutliner expander color:
+              preferredTitleColor.
             myOutliner expander).
         } | ) 
 
@@ -589,7 +591,8 @@ update the object\'s title\x7fModuleInfo: Module: generalModel InitialContents: 
                     Target: myOutliner
                     Accept: acceptNameChange
                     Cancel: cancelNameChange
-                     Style: titleStyle.
+                     Style: titleStyle
+                LabelColor: preferredTitleColor.
             titleEditor isAsynchronous: true.
             myOutliner titleEditor: titleEditor.
             titleEditor).
@@ -1578,7 +1581,8 @@ May cause me to expand if doExpand is true. -- dmu 10/04\x7fModuleInfo: Module: 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
          'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot\x7fVisibility: public'
         
-         preferredColor = paint named: 'gray'.
+         preferredColor = ( |
+            | preferences outliner currentColorScheme generalModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
@@ -1597,20 +1601,16 @@ May cause me to expand if doExpand is true. -- dmu 10/04\x7fModuleInfo: Module: 
          'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
         
          preferredHeaderColor = ( |
-             s.
             | 
-            s: preferences outliner currentColorScheme.
-            ((reflect: referrent) includesKey: 'mirror') ifTrue: [| m | 
-                m: referrent mirror.
-                m isReflecteeFloat   ifTrue: [^ s float].
-                m isReflecteeInteger ifTrue: [^ s integer].
-                m isReflecteeString  ifTrue: [^ s string].   
-                m creatorPathIfPresent: [|:p| 
-                    p first = 'traits' ifTrue: [^ s traits].
-                    p first = 'mixins' ifTrue: [^ s mixins]]
-                  IfAbsent: [ ^ s unnamed ].
-                ^ s named]
-               False: [ ^ s unusual ]).
+            preferences outliner currentColorScheme headerColorFor: referrent).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
+        
+         preferredTitleColor = ( |
+            | 
+            preferences outliner currentColorScheme titleColorFor: referrent).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {

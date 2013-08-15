@@ -1,7 +1,7 @@
  '$Revision: 30.30 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -1443,6 +1443,7 @@ puts the morphs to be drawn into the morphsToDraw list and the pruningBoxes into
             joinedMorphs:       joinedMorphs copyRemoveAll.
             outlinerActivities: outlinerActivities copyRemoveAll.
 
+            color: preferences desktop backgroundColor.
             backgroundMenu: nil.
             desktop setNameOfNewWorld: self.
             addWindowOnDisplay: dispName Bounds: b.

@@ -1,7 +1,7 @@
  '$Revision: 30.9 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -1281,13 +1281,6 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          prototype = ( |
             | 
             slotsInModuleMorph).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
-         'Category: filing out\x7fModuleInfo: Module: morphSaving InitialContents: FollowSlot\x7fVisibility: public'
-        
-         prototype = ( |
-            | smallEditorMorph).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'spacerMorph' -> () From: ( | {

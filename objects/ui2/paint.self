@@ -168,9 +168,12 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             paintNames at:   'azure'        Put: (paint copyRed: 0.3 Green: 0.6 Blue: 0.8).
             paintNames at:   'royal'        Put: (paint copyRed: 0.5 Green: 0.3 Blue: 0.8).
             paintNames at:   'purple'       Put: (paint copyRed: 0.7 Green: 0.3 Blue: 0.8).
-            
+
             "some UI colors"
-            paintNames at:   'outlinerGray' Put: (paint copyRed: 0.839687 Green: 0.839687  Blue: 0.839687)).
+            paintNames at:   'outlinerGray' Put: (paint copyRed: 0.839687 Green: 0.839687  Blue: 0.839687).
+            
+            "a non-color"
+            paintNames at:   'transparent' Put: (paint copyRed: 0 Green: 0  Blue: 0 Alpha: 0)).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'paint' -> () From: ( | {

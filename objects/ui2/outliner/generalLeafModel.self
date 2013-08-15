@@ -1,7 +1,7 @@
  '$Revision: 30.7 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -82,8 +82,8 @@ SlotsToOmit: parent.
     '       ' &
     '       ' ) asVector
  Colors: (
-    (paint named: 'black') &
-    (paint named: 'black')) asVector] value) From: ( |
+    (paint named: 'transparent') &
+    (paint named: 'transparent')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: globals generalLeafModel parent buttonIcon.
 \x7fIsComplete: '.
             | ) .
@@ -147,18 +147,6 @@ I am also immutable.\x7fModuleInfo: Creator: globals generalLeafModel parent con
          'ModuleInfo: Module: generalLeafModel InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalLeafModel' -> 'parent' -> () From: ( | {
-         'Category: appearance\x7fModuleInfo: Module: generalLeafModel InitialContents: FollowSlot\x7fVisibility: public'
-        
-         preferredColor = ( |
-             o.
-            | 
-            o: myOutliner owner.
-            o isNil || [o isHandMorph] "don't change color when being carried"
-                ifTrue: [myOutliner color]
-                 False: [o color]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalLeafModel' -> 'parent' -> () From: ( | {

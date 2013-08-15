@@ -1,7 +1,7 @@
  '$Revision: 30.18 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -640,9 +640,9 @@ SlotsToOmit: parent prototype.
             | 
             "See comment in traits morph for general idea.
              Here, for readability, do not change color."
-
             morphsDo: [| :m | m colorAll: newC ].
-            color: newC textColorForBackground.
+            "color: newC textColorForBackground." 
+            " - disabled Aug13 rca to stop outliners coloring wrong"
             self).
         } | ) 
 

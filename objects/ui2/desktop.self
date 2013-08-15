@@ -425,6 +425,68 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          subpartNames <- ''.
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
+         'Category: ui2\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         desktop = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals preferences desktop.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'Comment: At the moment, all worlds are the same color.\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         backgroundColor = ( |
+            | backgroundColor: raw. raw).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'ModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         backgroundColor: aPaint = ( |
+            | desktop worldsDo: [|:w| w color: aPaint]. raw: aPaint).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'Category: example colors\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         gray44 = ( |
+            | (paint named: 'gray') copyBrightness: 0.93).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'Category: example colors\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         offWhite = ( |
+            | 
+            paint copyRed: 16rF6 / 16rFF asFloat 
+                    Green: 16rF6 / 16rFF asFloat 
+                     Blue: 16rF6 / 16rFF asFloat).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'Category: private\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         p* = bootstrap stub -> 'traits' -> 'oddball' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'Category: private\x7fModuleInfo: Module: desktop InitialContents: InitializeToExpression: (paint named: \'white\')'
+        
+         raw <- paint named: 'white'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'Category: example colors\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         warmWhite = ( |
+            | 
+            paint copyRed: 16rFD asFloat / 16rFF asFloat 
+                    Green: 16rFD asFloat / 16rFF asFloat 
+                     Blue: 16rF0 asFloat / 16rFF asFloat).
+        } | ) 
+
 
 
  '-- Side effects'

@@ -1,7 +1,7 @@
  '$Revision: 30.15 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -432,7 +432,7 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'leafPointerButton' -> () From: ( | {
          'ModuleInfo: Module: pointerMorph InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
-         defaultButtonHolder <- bootstrap stub -> 'globals' -> 'nil' -> ().
+         defaultButtonHolder.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'leafPointerButton' -> () From: ( | {
@@ -535,7 +535,7 @@ on a new object to serve as replacement slot contents. -- Randy, 5/2/95\x7fModul
             button globalPosition: new headMorph globalPosition - (button bounds size / 2).
             new headMorph addMorph: button.
             button target: new headMorph.
-            button script: headButtonScript. 
+            button script: headButtonScript.
             new           color: lo color.
             new headMorph color: lo color.
             new).
