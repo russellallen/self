@@ -388,54 +388,35 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
-         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (nil)'
-        
-         abs_bv <- bootstrap stub -> 'globals' -> 'nil' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
-        
-         addressOf: fp = ( |
-             bv.
-            | 
-            bv: byteVector copySize: 4.
-            fp _PointerInByteVector: bv.
-            bv).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
          'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
          clean = ( |
             | 
-            lib: foreignCode copy. abs_bv: nil).
+            lib: foreignCode copy. self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
-         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (fctProxy)'
+         'Category: nativeFunctions\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
-         fctP <- bootstrap stub -> 'globals' -> 'fctProxy' -> ().
+         crypto_box_keypair = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> 'crypto_box_keypair' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals native sodium x86osx crypto_box_keypair.
+'.
+            | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
-         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (byteVector copy)'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> 'crypto_box_keypair' -> () From: ( | {
+         'Category: caches\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (nil)'
         
-         fctPBV <- byteVector copy.
+         byteV <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
-         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (proxy)'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> 'crypto_box_keypair' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
         
-         lib <- bootstrap stub -> 'globals' -> 'proxy' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
-        
-         loadAsm = ( |
+         initialise = ( |
              a.
             | 
+            str isNil ifTrue: [
             a: native support nasm copy.
             a addCdeclCalleeEntry. "Pushes 2 dwords onto stack"
             a add: '
@@ -455,7 +436,39 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
             mov   dword [ecx], eax      ; move result to res byteVector
             '.
             a addCdeclCalleeReturn.
-            abs_bv: a assemble).
+            str: a assemble asString].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> 'crypto_box_keypair' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: InitializeToExpression: (nil)'
+        
+         str.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> 'crypto_box_keypair' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         value = ( |
+            | 
+            byteV isNil ifTrue: [byteV: str asByteVector].
+            byteV).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
+         'Category: initialise\x7fComment: Requires NASM in path. You don\'t need to do
+this.\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         initialiseNativeFunctions = ( |
+            | 
+            nativeFunctions randombytes_random initialize.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
+         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (proxy)'
+        
+         lib <- bootstrap stub -> 'globals' -> 'proxy' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
@@ -465,9 +478,8 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
             | 
             lib isLoaded ifFalse: [
             lib: foreignCodeDB at: '/usr/local/lib/libsodium.4.dylib' IfFail: [|:e| error: e].
-            fctP: lib lookupFunction: 'randombytes_random'.
-            fctPBV: addressOf: fctP.
-            loadAsm.]).
+            randombytes_random_fproxy: lib lookupFunction: 'randombytes_random'.
+            initialiseNativeFunctions.]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
@@ -484,8 +496,83 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
             | 
             loadCaches.
             res: byteVector copySize: 4.
-            abs_bv runNativePassing: fctPBV With: res.
+            randombytes_random value runNativePassing: randombytes_random_fproxy machineAddressAsByteVector 
+                                           With: res.
             res littleEndian32bitUnsignedAt: 0 IfFail: [|:e| error: e]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
+         'Category: nativeFunctions\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         randombytes_random <- bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> 'randombytes_random' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals native sodium x86osx randombytes_random.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> 'randombytes_random' -> () From: ( | {
+         'Category: caches\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (nil)'
+        
+         byteV <- bootstrap stub -> 'globals' -> 'nil' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> 'randombytes_random' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         initialise = ( |
+             a.
+            | 
+            str isNil ifTrue: [
+            a: native support nasm copy.
+            a addCdeclCalleeEntry. "Pushes 2 dwords onto stack"
+            a add: '
+            ; Get address of function
+            mov   edx, dword [ebp + 8]  ; mov addr of bv contining addr of cfunc
+            mov   eax, dword [edx]      ; mov addr of cfunc into eax
+            push  dword [ebp + 12]      ; save addr of bv(res) 
+
+            ; Call
+            ; push  dword 0x0           ; align to 16 byte boundary for OS X
+            call  eax                   ; call function 
+            ; add   esp, 4              ; stack cleaning - remove the argument(s)
+            ; add   esp, 4              ; stack cleaning - remove alignment
+
+            ; Save Result
+            pop   ecx                   ; get addr of bv(res)
+            mov   dword [ecx], eax      ; move result to res byteVector
+            '.
+            a addCdeclCalleeReturn.
+            str: a assemble asString].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> 'randombytes_random' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         str <- bootstrap setObjectAnnotationOf: ( 'U\x89\xe5S\x8bU\b\x8b\x02\xffu\f\xff\xd0Y\x89\x01[\x89\xec]\xc3' copyMutable) From: ( |
+             {} = 'ModuleInfo: Creator: globals native sodium x86osx randombytes_random str.
+
+CopyDowns:
+globals byteVector. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> 'randombytes_random' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         value = ( |
+            | 
+            byteV isNil ifTrue: [byteV: str asByteVector].
+            byteV).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'sodium' -> 'x86osx' -> () From: ( | {
+         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (2 _AsObject)'
+        
+         randombytes_random_fproxy <- 2 _AsObject.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
@@ -502,6 +589,15 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
         
          adjustToPlatform = ( |
             | self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         asm = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'asm' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals native support asm.
+'.
+            | ) .
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> () From: ( | {
@@ -723,6 +819,18 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
         
          runNativePassing: a With: b With: c With: d With: e With: f With: g With: h = ( |
             | _RunNativePassing: a With: b With: c With: d With: e With: f With: g With: h).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'fctProxy' -> () From: ( | {
+         'Comment: For use in native framework.
+Very dangerous - use with care.\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         machineAddressAsByteVector = ( |
+             bv.
+            | 
+            bv: byteVector copySize: 4.
+            _PointerInByteVector: bv.
+            bv).
         } | ) 
 
 
