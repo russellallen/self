@@ -102,7 +102,7 @@ abstract class StringImageCreator
       for (int i = 0; i < size; ++i)
          {
          int colorOffset = Integer.parseInt (pixels.substring (i*2, i*2 + 2), 16);
-         int rgb = Integer.parseInt (colors.substring (colorOffset*8, colorOffset*8 + 8), 16);
+         int rgb = Integer.parseInt (colors.substring (colorOffset*8+2, colorOffset*8 + 6), 16);
          if (useColors)
             pixelData[i] = rgb;
          else

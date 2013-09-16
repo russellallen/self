@@ -19,26 +19,26 @@ all: $(SelfViewer) $(SelfDisconnectButton)
 $(SelfViewer): SelfViewer.java $(Utils) $(RadarViewer) $(Viewer) \
                $(LensRadarViewer) $(Structure) $(CutoutBrowser)
 	./makedate
-	javac BuildInfo.java
-	javac SelfViewer.java
+	javac -cp . BuildInfo.java
+	javac -cp . SelfViewer.java
 
 $(Utils): Utils.java
-	javac Utils.java
+	javac -cp . Utils.java
 
 $(Viewer): Viewer.java $(Utils) $(Structure)
-	javac Viewer.java
+	javac -cp . Viewer.java
 
 $(Structure): Structure.java $(Utils)
-	javac Structure.java
+	javac -cp . Structure.java
 
 $(RadarViewer): RadarViewer.java $(Utils) $(Structure)
-	javac RadarViewer.java
+	javac -cp . RadarViewer.java
 
 $(LensRadarViewer): LensRadarViewer.java $(Utils) $(Structure)
-	javac LensRadarViewer.java
+	javac -cp . LensRadarViewer.java
 
 $(CutoutBrowser): CutoutBrowser.java $(Structure) $(Utils)
-	javac CutoutBrowser.java
+	javac -cp . CutoutBrowser.java
 
 $(SelfDisconnectButton): SelfDisconnectButton.java $(SelfViewer)
-	javac SelfDisconnectButton.java
+	javac -cp . SelfDisconnectButton.java
