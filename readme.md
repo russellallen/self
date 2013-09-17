@@ -20,9 +20,9 @@ To build a Self VM, you need [CMake][1] in at least version 2.8.
 
     or an out-of-tree build with
 
-        mkdir -p $YOU_BUILD_DIRECTORY; cd $YOU_BUILD_DIRECTORY
+        mkdir -p $YOUR_BUILD_DIRECTORY; cd $YOUR_BUILD_DIRECTORY
         cmake $DIRECTORY_OF_SELF_CHECKOUT
-        cmake --build $YOU_BUILD_DIRECTORY
+        cmake --build $YOUR_BUILD_DIRECTORY
 
   * Self builds with [GCC][2] ≥ 4.2 or [Clang][3] ≥ 2.0. CMake respects
     your environment variables, so to build Self with Clang, configure it 
@@ -34,7 +34,7 @@ To build a Self VM, you need [CMake][1] in at least version 2.8.
 
         cmake -GXcode $DIRECTORY_OF_SELF_CHECKOUT
 
-  * On 64bit Linux, you may want to explicitely use 32bit compilation:
+  * On 64bit Linux, you may want to explicitly use 32bit compilation:
 
         CC="gcc -m32" CXX="g++ -m32" cmake $DIRECTORY_OF_SELF_CHECKOUT
 
