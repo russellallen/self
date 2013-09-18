@@ -31,6 +31,7 @@ java code.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility:
              bootstrap remove: 'comment' From:
              bootstrap remove: 'directory' From:
              bootstrap remove: 'fileInTimeString' From:
+             bootstrap remove: 'myComment' From:
              bootstrap remove: 'postFileIn' From:
              bootstrap remove: 'revision' From:
              bootstrap remove: 'subpartNames' From:
@@ -46,12 +47,6 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pep' -> () From: ( | {
-         'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (\'\')\x7fVisibility: private'
-        
-         myComment <- ''.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pep' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          directory <- 'applications/pep'.
@@ -61,6 +56,12 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (_CurrentTimeString)\x7fVisibility: public'
         
          fileInTimeString <- _CurrentTimeString.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pep' -> () From: ( | {
+         'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (\'\')\x7fVisibility: private'
+        
+         myComment <- ''.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pep' -> () From: ( | {
@@ -81,8 +82,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pep' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (\'pep_runtime\')\x7fVisibility: public'
         
-         subpartNames <- 'pep_runtime
-	 pep_extensions'.
+         subpartNames <- 'pep_runtime'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
@@ -892,9 +892,9 @@ defined by the Java VM.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
-         charArray = bootstrap define: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'charArray' -> () ToBe: bootstrap addSlotsTo: (
+         charArray = bootstrap define: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'charArray') -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals vector copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'charArray' -> () From: ( |
+             globals vector copy ) From: bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'charArray') -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pep arrayBuildMixin array_masters charArray.
 
 CopyDowns:
@@ -914,13 +914,13 @@ SlotsToOmit: parent.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'charArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'charArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          array_parent* = bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'traits_vectorBasedArray' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'charArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'charArray') -> 'my_class' -> () From: ( | {
          'Comment: This slot will be modified to contain a reference
 to the class that this array\'s elements are instances
 of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
@@ -928,7 +928,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
          elem_class = bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'charArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'charArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_caload: index = ( |
@@ -936,7 +936,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_inst_at: index).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'charArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'charArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_castore: index With: value = ( |
@@ -944,7 +944,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_inst_at: index Put: value && 16rffff).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'charArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'charArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          java_inst_filler = ( |
@@ -952,7 +952,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_zero_char).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'charArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'charArray') -> 'my_class' -> () From: ( | {
          'Comment: This slot corresponds to the \'obj_flags\' slot
 defined by the Java VM.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -962,9 +962,9 @@ defined by the Java VM.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
-         doubleArray = bootstrap define: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'doubleArray' -> () ToBe: bootstrap addSlotsTo: (
+         doubleArray = bootstrap define: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'doubleArray') -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals vector copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'doubleArray' -> () From: ( |
+             globals vector copy ) From: bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'doubleArray') -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pep arrayBuildMixin array_masters doubleArray.
 
 CopyDowns:
@@ -975,13 +975,13 @@ SlotsToOmit: parent.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'doubleArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'doubleArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          array_parent* = bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'traits_vectorBasedArray' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'doubleArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'doubleArray') -> 'my_class' -> () From: ( | {
          'Comment: This slot will be modified to contain a reference
 to the class that this array\'s elements are instances
 of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
@@ -989,7 +989,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
          elem_class = bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'doubleArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'doubleArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_daload: index = ( |
@@ -997,7 +997,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_inst_at: index).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'doubleArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'doubleArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_dastore: index With: value = ( |
@@ -1005,7 +1005,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_inst_at: index Put: value).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'doubleArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'doubleArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          java_inst_filler = ( |
@@ -1013,7 +1013,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_zero_double).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'doubleArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'doubleArray') -> 'my_class' -> () From: ( | {
          'Comment: This slot corresponds to the \'obj_flags\' slot
 defined by the Java VM.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -1023,9 +1023,9 @@ defined by the Java VM.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
-         floatArray = bootstrap define: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'floatArray' -> () ToBe: bootstrap addSlotsTo: (
+         floatArray = bootstrap define: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'floatArray') -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals vector copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'floatArray' -> () From: ( |
+             globals vector copy ) From: bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'floatArray') -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pep arrayBuildMixin array_masters floatArray.
 
 CopyDowns:
@@ -1036,13 +1036,13 @@ SlotsToOmit: parent.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'floatArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'floatArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          array_parent* = bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'traits_vectorBasedArray' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'floatArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'floatArray') -> 'my_class' -> () From: ( | {
          'Comment: This slot will be modified to contain a reference
 to the class that this array\'s elements are instances
 of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
@@ -1050,7 +1050,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
          elem_class = bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'floatArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'floatArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_faload: index = ( |
@@ -1058,7 +1058,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_inst_at: index).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'floatArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'floatArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_fastore: index With: value = ( |
@@ -1066,7 +1066,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_inst_at: index Put: value).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'floatArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'floatArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          java_inst_filler = ( |
@@ -1074,7 +1074,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_zero_float).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'floatArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'floatArray') -> 'my_class' -> () From: ( | {
          'Comment: This slot corresponds to the \'obj_flags\' slot
 defined by the Java VM.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -1084,9 +1084,9 @@ defined by the Java VM.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
-         intArray = bootstrap define: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'intArray' -> () ToBe: bootstrap addSlotsTo: (
+         intArray = bootstrap define: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'intArray') -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals vector copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'intArray' -> () From: ( |
+             globals vector copy ) From: bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'intArray') -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pep arrayBuildMixin array_masters intArray.
 
 CopyDowns:
@@ -1097,13 +1097,13 @@ SlotsToOmit: parent.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'intArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'intArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          array_parent* = bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'traits_vectorBasedArray' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'intArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'intArray') -> 'my_class' -> () From: ( | {
          'Comment: This slot will be modified to contain a reference
 to the class that this array\'s elements are instances
 of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
@@ -1111,7 +1111,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
          elem_class = bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'intArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'intArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          java_inst_filler = ( |
@@ -1119,7 +1119,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_zero_int).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'intArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'intArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_iaload: index = ( |
@@ -1127,7 +1127,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_inst_at: index).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'intArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'intArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_iastore: index With: value = ( |
@@ -1135,7 +1135,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_inst_at: index Put: value).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'intArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'intArray') -> 'my_class' -> () From: ( | {
          'Comment: This slot corresponds to the \'obj_flags\' slot
 defined by the Java VM.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -1145,9 +1145,9 @@ defined by the Java VM.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
-         longArray = bootstrap define: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'longArray' -> () ToBe: bootstrap addSlotsTo: (
+         longArray = bootstrap define: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'longArray') -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals vector copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'longArray' -> () From: ( |
+             globals vector copy ) From: bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'longArray') -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pep arrayBuildMixin array_masters longArray.
 
 CopyDowns:
@@ -1158,13 +1158,13 @@ SlotsToOmit: parent.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'longArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'longArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          array_parent* = bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'traits_vectorBasedArray' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'longArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'longArray') -> 'my_class' -> () From: ( | {
          'Comment: This slot will be modified to contain a reference
 to the class that this array\'s elements are instances
 of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
@@ -1172,7 +1172,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
          elem_class = bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'longArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'longArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          java_inst_filler = ( |
@@ -1180,7 +1180,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_zero_long).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'longArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'longArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_laload: index = ( |
@@ -1188,7 +1188,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_inst_at: index).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'longArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'longArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_lastore: index With: value = ( |
@@ -1196,7 +1196,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_inst_at: index Put: value).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'longArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'longArray') -> 'my_class' -> () From: ( | {
          'Comment: This slot corresponds to the \'obj_flags\' slot
 defined by the Java VM.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -1206,9 +1206,9 @@ defined by the Java VM.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
-         objectArray = bootstrap define: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'objectArray' -> () ToBe: bootstrap addSlotsTo: (
+         objectArray = bootstrap define: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'objectArray') -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals vector copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'objectArray' -> () From: ( |
+             globals vector copy ) From: bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'objectArray') -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pep arrayBuildMixin array_masters objectArray.
 
 CopyDowns:
@@ -1219,29 +1219,29 @@ SlotsToOmit: parent.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'objectArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'objectArray') -> 'my_class' -> () From: ( | {
          'Comment: This slot will be modified to contain a reference to
 the class that this array\'s elements are instances of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          elem_class = bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'objectArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'objectArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
-         objectArray_parent* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'objectArray' -> 'my_class' -> 'objectArray_parent' -> () From: ( |
+         objectArray_parent* = bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'objectArray') -> 'my_class' -> 'objectArray_parent' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pep arrayBuildMixin array_masters objectArray my_class objectArray_parent.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'objectArray' -> 'my_class' -> 'objectArray_parent' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'objectArray') -> 'my_class' -> 'objectArray_parent' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          array_parent* = bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'traits_vectorBasedArray' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'objectArray' -> 'my_class' -> 'objectArray_parent' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'objectArray') -> 'my_class' -> 'objectArray_parent' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_aaload: index = ( |
@@ -1249,7 +1249,7 @@ the class that this array\'s elements are instances of.\x7fModuleInfo: Module: p
             java_inst_at: index).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'objectArray' -> 'my_class' -> 'objectArray_parent' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'objectArray') -> 'my_class' -> 'objectArray_parent' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_aastore: index With: value = ( |
@@ -1257,7 +1257,7 @@ the class that this array\'s elements are instances of.\x7fModuleInfo: Module: p
             java_inst_at: index Put: value).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'objectArray' -> 'my_class' -> 'objectArray_parent' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'objectArray') -> 'my_class' -> 'objectArray_parent' -> () From: ( | {
          'Comment: This method implements part of the native array copy method.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_arraycopyPos: dstPos SrcArray: srcArray Pos: srcPos Len: length = ( |
@@ -1289,7 +1289,7 @@ the class that this array\'s elements are instances of.\x7fModuleInfo: Module: p
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'objectArray' -> 'my_class' -> 'objectArray_parent' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'objectArray') -> 'my_class' -> 'objectArray_parent' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          java_inst_filler = ( |
@@ -1297,14 +1297,14 @@ the class that this array\'s elements are instances of.\x7fModuleInfo: Module: p
             java_null).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'objectArray' -> 'my_class' -> 'objectArray_parent' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'objectArray') -> 'my_class' -> 'objectArray_parent' -> () From: ( | {
          'Comment: This slot corresponds to the \'obj_flags\' slot
 defined by the Java VM.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          obj_flags = 'T_CLASS'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'objectArray' -> 'my_class' -> 'objectArray_parent' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'objectArray') -> 'my_class' -> 'objectArray_parent' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          ok_to_use_rangeCopy = ( |
@@ -1316,9 +1316,9 @@ defined by the Java VM.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
-         shortArray = bootstrap define: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'shortArray' -> () ToBe: bootstrap addSlotsTo: (
+         shortArray = bootstrap define: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'shortArray') -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals vector copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'shortArray' -> () From: ( |
+             globals vector copy ) From: bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'shortArray') -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pep arrayBuildMixin array_masters shortArray.
 
 CopyDowns:
@@ -1329,13 +1329,13 @@ SlotsToOmit: parent.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'shortArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'shortArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          array_parent* = bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'traits_vectorBasedArray' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'shortArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'shortArray') -> 'my_class' -> () From: ( | {
          'Comment: This slot will be modified to contain a reference
 to the class that this array\'s elements are instances
 of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
@@ -1343,7 +1343,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
          elem_class = bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'shortArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'shortArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          java_inst_filler = ( |
@@ -1351,7 +1351,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_zero_short).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'shortArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'shortArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_saload: index = ( |
@@ -1359,7 +1359,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_inst_at: index).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'shortArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'shortArray') -> 'my_class' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          java_inst_sastore: index With: value = ( |
@@ -1367,7 +1367,7 @@ of.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public
             java_inst_at: index Put: value java_inst_i2s).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'shortArray' -> 'my_class' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'shortArray') -> 'my_class' -> () From: ( | {
          'Comment: This slot corresponds to the \'obj_flags\' slot
 defined by the Java VM.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -2037,7 +2037,7 @@ we were struggling with for a while.
          'Category: var and arg slots\x7fComment: Local variable names used when compiling dup/swap instructions.
 Public for read access only.\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         tmpNames <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         tmpNames <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'binCodeGenerator' -> () From: ( | {
@@ -2077,7 +2077,7 @@ See also comment in corresonding method in
          'Category: expStack\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          whileRetaining: n Do: blk = ( |
-             retained <- bootstrap stub -> 'globals' -> 'vector' -> ().
+             retained <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
             | 
             0 = n ifTrue: [^ blk value].
             retained: (vector copySize: n).
@@ -3553,7 +3553,7 @@ code generation. Public for read access only.\x7fModuleInfo: Module: pep Initial
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> () From: ( | {
          'Category: Java VM defined\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         attributes <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         attributes <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> () From: ( | {
@@ -5045,7 +5045,7 @@ arguments up front).\x7fModuleInfo: Module: pep InitialContents: InitializeToExp
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> () From: ( | {
          'Category: basic\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         attributes <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         attributes <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> () From: ( | {
@@ -6471,7 +6471,7 @@ this slot contains \'loopNoSuccessorMark\'.\x7fModuleInfo: Module: pep InitialCo
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> 'basicBlockProto' -> 'bbInstanceProto' -> () From: ( | {
          'Category: state\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         nestedInstances <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         nestedInstances <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> 'basicBlockProto' -> 'bbInstanceProto' -> () From: ( | {
@@ -7109,7 +7109,7 @@ header, blk will be evaluated on it first.\x7fModuleInfo: Module: pep InitialCon
 this basic block.
 \x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         exitValues <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         exitValues <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> 'basicBlockProto' -> () From: ( | {
@@ -7176,7 +7176,7 @@ isTryBB = true.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibi
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> 'basicBlockProto' -> () From: ( | {
          'Category: exceptions\x7fComment: The exceptions guarding this basic block.\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         guardingExceptions <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         guardingExceptions <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> 'basicBlockProto' -> () From: ( | {
@@ -7549,7 +7549,7 @@ from this basic block.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> 'basicBlockProto' -> () From: ( | {
          'Category: controlFlow\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         predecessors <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         predecessors <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> 'basicBlockProto' -> () From: ( | {
@@ -7719,7 +7719,7 @@ select which basic block follows the loop.\x7fModuleInfo: Module: pep InitialCon
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> 'basicBlockProto' -> () From: ( | {
          'Category: controlFlow\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         successors <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         successors <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> 'basicBlockProto' -> () From: ( | {
@@ -7780,7 +7780,7 @@ order. Note: the receiver node is considered a descendant.\x7fModuleInfo: Module
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> () From: ( | {
          'Category: state\x7fComment: sorted by (start) pc\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         basicBlocks <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         basicBlocks <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> () From: ( | {
@@ -7955,7 +7955,7 @@ order. Note: the receiver node is considered a descendant.\x7fModuleInfo: Module
          'Category: state\x7fComment: The basic blocks stored in depth-first order (for efficiency
 of some algorithms).\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         dfBasicBlocks <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         dfBasicBlocks <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> () From: ( | {
@@ -8133,7 +8133,7 @@ in the building phase.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> () From: ( | {
          'Category: state\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         gotoOnlyBasicBlocks <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         gotoOnlyBasicBlocks <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> () From: ( | {
@@ -8586,7 +8586,7 @@ down the line.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibil
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> 'stackProto' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         elms <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         elms <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'blockSetProto' -> 'stackProto' -> () From: ( | {
@@ -10956,13 +10956,13 @@ instructions.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibili
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         buf <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         buf <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         dup <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         dup <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup' -> () From: ( | {
@@ -11066,13 +11066,13 @@ instructions.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibili
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup2' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         buf <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         buf <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup2' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         dup <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         dup <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup2' -> () From: ( | {
@@ -11144,13 +11144,13 @@ instructions.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibili
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup2_x1' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         buf <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         buf <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup2_x1' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         dup <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         dup <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup2_x1' -> () From: ( | {
@@ -11224,13 +11224,13 @@ instructions.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibili
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup2_x2' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         buf <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         buf <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup2_x2' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         dup <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         dup <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup2_x2' -> () From: ( | {
@@ -11366,13 +11366,13 @@ instructions.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibili
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup_x1' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         buf <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         buf <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup_x1' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         dup <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         dup <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup_x1' -> () From: ( | {
@@ -11438,13 +11438,13 @@ instructions.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibili
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup_x2' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         buf <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         buf <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup_x2' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         dup <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         dup <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'dup_x2' -> () From: ( | {
@@ -11544,7 +11544,7 @@ instructions.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibili
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          generateUsing: gen = ( |
-             names <- bootstrap stub -> 'globals' -> 'vector' -> ().
+             names <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
              total <- 0.
             | 
             "Batch-transfer to a single vector to get nicer 
@@ -11654,7 +11654,7 @@ Return a vector of all groups from this exception table.\x7fModuleInfo: Module: 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> () From: ( | {
          'Category: exceptions\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         exceptions <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         exceptions <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> () From: ( | {
@@ -16851,7 +16851,7 @@ primary representation.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'invokeinterface' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         actualArgs <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         actualArgs <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'invokeinterface' -> () From: ( | {
@@ -17061,7 +17061,7 @@ instructions.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibili
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'invokespecial' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         actualArgs <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         actualArgs <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'invokespecial' -> () From: ( | {
@@ -17138,7 +17138,7 @@ instructions.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibili
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'invokestatic' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         actualArgs <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         actualArgs <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'invokestatic' -> () From: ( | {
@@ -17231,7 +17231,7 @@ is no objectRef to set.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'invokevirtual' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         actualArgs <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         actualArgs <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'invokevirtual' -> () From: ( | {
@@ -18346,7 +18346,7 @@ a JSR.\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (nil)
          'Category: translating\x7fCategory: translating with branches\x7fComment: Used when generating code for a \'ret\' (to get back
 to the calling jsr).\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         jsrReturnVectorOfLabels <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         jsrReturnVectorOfLabels <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> () From: ( | {
@@ -20337,7 +20337,7 @@ instructions.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibili
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'lookupswitch' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         matchTargetPairs <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         matchTargetPairs <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'lookupswitch' -> () From: ( | {
@@ -20430,7 +20430,7 @@ instructions.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibili
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'lookupswitch' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         uniqueTargets <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         uniqueTargets <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> () From: ( | {
@@ -21491,7 +21491,7 @@ See also the comment in \'buildInstructions\'.\x7fModuleInfo: Module: pep Initia
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'multianewarray' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         counts <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         counts <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'multianewarray' -> () From: ( | {
@@ -22149,7 +22149,7 @@ Index by PC to get instruction.\x7fModuleInfo: Module: pep InitialContents: Init
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'pop' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         poppedExps <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         poppedExps <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'pop' -> () From: ( | {
@@ -22236,7 +22236,7 @@ Index by PC to get instruction.\x7fModuleInfo: Module: pep InitialContents: Init
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'pop2' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         poppedExps <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         poppedExps <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'pop2' -> () From: ( | {
@@ -23296,7 +23296,7 @@ connectivity of basic blocks of method.\x7fModuleInfo: Module: pep InitialConten
          'ModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          generateUsing: gen = ( |
-             names <- bootstrap stub -> 'globals' -> 'vector' -> ().
+             names <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
             | 
             names: (gen useTmpNamesUpTo: 2).
 
@@ -23683,7 +23683,7 @@ connectivity of basic blocks of method.\x7fModuleInfo: Module: pep InitialConten
         
          makeVectorOfTargetsUsing: gen = ( |
              i <- 0.
-             v <- bootstrap stub -> 'globals' -> 'vector' -> ().
+             v <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
             | 
             "Should be rewritten to avoid quadratic algorithm."
             v: (vector copySize: noOfNonUniqueTargets FillingWith: 0).
@@ -23923,7 +23923,7 @@ that contains the statements for that case.\x7fModuleInfo: Module: pep InitialCo
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'tableswitch' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         jumpTargets <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         jumpTargets <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'tableswitch' -> () From: ( | {
@@ -24005,7 +24005,7 @@ that contains the statements for that case.\x7fModuleInfo: Module: pep InitialCo
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> 'tableswitch' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         uniqueTargets <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         uniqueTargets <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'code_attribute' -> () From: ( | {
@@ -25773,7 +25773,7 @@ vector.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: pu
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'constant_NameAndType_info' -> () From: ( | {
          'Category: caching\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         splitSignature0 <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         splitSignature0 <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'constant_NameAndType_info' -> () From: ( | {
@@ -26347,7 +26347,7 @@ and so need no tracing. (Strings do, however).\x7fModuleInfo: Module: pep Initia
          'Category: Java VM defined\x7fCategory: constant pool\x7fComment: Note: we do not store \'constant_pool_count\'. Take size of 
 \'constant_pool\' instead, or (better) use an iterator.\"\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         constant_pool <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         constant_pool <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> () From: ( | {
@@ -26637,7 +26637,7 @@ code use a \'tryAndCatch\' fake bytecode.\x7fModuleInfo: Module: pep InitialCont
                 myClassFile abortParse: 'exception has start_pc > end_pc: ', printString.
             ].
             (guards: handler_pc) ifTrue: [
-                myClassFile: abortParse: 'exception guards its own handler: ', printString.
+                "myClassFile abortParse: 'exception guards its own handler: ', printString."
             ].
             self).
         } | ) 
@@ -26726,7 +26726,7 @@ code use a \'tryAndCatch\' fake bytecode.\x7fModuleInfo: Module: pep InitialCont
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'exceptions_attribute' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         exception_index_table <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         exception_index_table <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'exceptions_attribute' -> () From: ( | {
@@ -26817,7 +26817,7 @@ code use a \'tryAndCatch\' fake bytecode.\x7fModuleInfo: Module: pep InitialCont
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'field_info' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         attributes <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         attributes <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'field_info' -> () From: ( | {
@@ -27048,7 +27048,7 @@ require 1 word.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibi
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> () From: ( | {
          'Category: Java VM defined\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         fields <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         fields <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> () From: ( | {
@@ -27320,7 +27320,7 @@ the constant once it has been built.\x7fModuleInfo: Module: pep InitialContents:
          'Category: Java VM defined\x7fComment: As for \'constant_pool\' we do not store the count of how many
 interfaces there are.\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector.)\x7fVisibility: public'
         
-         interfaces <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         interfaces <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> () From: ( | {
@@ -27489,7 +27489,7 @@ interfaces there are.\x7fModuleInfo: Module: pep InitialContents: InitializeToEx
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'lineNumberTable_attribute' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         line_number_table <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         line_number_table <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'lineNumberTable_attribute' -> () From: ( | {
@@ -27637,7 +27637,7 @@ interfaces there are.\x7fModuleInfo: Module: pep InitialContents: InitializeToEx
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'localVariableTable_attribute' -> () From: ( | {
          'ModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         local_variable_table <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         local_variable_table <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'localVariableTable_attribute' -> () From: ( | {
@@ -27714,7 +27714,7 @@ interfaces there are.\x7fModuleInfo: Module: pep InitialContents: InitializeToEx
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'method_info' -> () From: ( | {
          'Category: attributes\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         attributes <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         attributes <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'method_info' -> () From: ( | {
@@ -28259,7 +28259,7 @@ arguments are accessed as local variables, the
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> () From: ( | {
          'Category: Java VM defined\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         methods <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         methods <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> () From: ( | {
@@ -28768,7 +28768,7 @@ javac it takes some 20 seconds of Ultra CPU time to install constants.\x7fModule
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> () From: ( | {
          'Category: structDefs\x7fCategory: constantStructs\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         tag2const <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         tag2const <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> () From: ( | {
@@ -29251,7 +29251,7 @@ and to references to methods and fields.\x7fModuleInfo: Module: pep InitialConte
          'Category: helpers\x7fComment: The names of the interfaces that this class implements.
 These names are Self strings.\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         interface_names = bootstrap stub -> 'globals' -> 'vector' -> ().
+         interface_names = ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> 'universalClassSlots' -> () From: ( | {
@@ -29295,7 +29295,7 @@ able to efficiently copy them down (for array
 classes, where the type testers do not follow 
 the subclass links; sigh).\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: public'
         
-         type_test_class_names <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         type_test_class_names <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'classFile' -> () From: ( | {
@@ -31991,6 +31991,7 @@ and file threadruntime.c (methods InitializeClassThread(), InitializeMainThread(
                                            Ljava_lang_Runnable: java_null
                                              Ljava_lang_String: (o_selfStrToJavaStr: 'main').
                 ].
+                java_classes class_java_lang_System initializeSystemClass.
             ].
             self).
         } | ) 
@@ -32843,7 +32844,6 @@ after all the mangling has taken place.\x7fModuleInfo: Module: pep InitialConten
             loadInProgress add: className.
             cf translateIfFail: [|:e| abortLoadOf: className. ^ errBlk value: e].
             loadInProgress remove: className.
-
             "Now that the class has been installed, it is safe to initialize it."
             [cf initializeClass] java_inst_tryCatch: true With: [|:exception|
                 abortLoadOf: className.
@@ -32863,10 +32863,11 @@ after all the mangling has taken place.\x7fModuleInfo: Module: pep InitialConten
              file.
              fullName <- ''.
             | 
-            fullName: (os_File locate: className, classFileExtension
+            ('Loading Java Class: ',className) printLine.
+            fullName: (os_file locate: className, classFileExtension
                                 InPath: classPath 
                                 IfFail: [|:e| ^ errBlk value: e]).
-            file: (os_File openForReading: fullName IfFail: [|:e| ^ errBlk value: e]).
+            file: (os_file openForReading: fullName IfFail: [|:e| ^ errBlk value: e]).
             b: file contentsAsByteVector.
             fnBlk value: fullName.
             file close.
@@ -33205,7 +33206,7 @@ frame.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: pub
          'Category: arrays\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          makeFakeClasses = ( |
-             cats <- bootstrap stub -> 'globals' -> 'vector' -> ().
+             cats <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
             | 
             cats: (vector copySize: 1 FillingWith: 'Fake classes').
             fakeClassNamesDo: [|:typeLetter. longName. fakeClass. |
@@ -34309,7 +34310,7 @@ collected.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility:
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> () From: ( | {
-         'Category: misc\x7fCategory: initialization\x7fModuleInfo: Module: pep_extensions InitialContents: FollowSlot\x7fVisibility: private'
+         'Category: misc\x7fCategory: initialization\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          setVMParams = ( |
             | 
@@ -35833,7 +35834,7 @@ is returned, no cleanup is necessary.\x7fModuleInfo: Module: pep InitialContents
          'Category: generateSend\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          getArgs: nArgs = ( |
-             args <- bootstrap stub -> 'globals' -> 'vector' -> ().
+             args <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
             | 
             args: (vector copySize: nArgs).
             nArgs reverseDo: [|:i| args at: i Put: popExp].
@@ -36365,7 +36366,7 @@ during code gen.\x7fModuleInfo: Module: pep InitialContents: InitializeToExpress
          'Category: expStack\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: private'
         
          popCount: n TransferToLocals: localNames FoldingWith: foldBlk = ( |
-             popped <- bootstrap stub -> 'globals' -> 'vector' -> ().
+             popped <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
             | 
             popped: (vector copySize: n).
             n reverseDo: [|:i| popped at: i Put: popExp].
@@ -36847,7 +36848,7 @@ was being translated. So the values got mixed up.\x7fModuleInfo: Module: pep Ini
 and the push the (retained) expressions back on the stack.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
          whileRetaining: n Do: blk = ( |
-             retained <- bootstrap stub -> 'globals' -> 'vector' -> ().
+             retained <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
             | 
             0 = n ifTrue: [^ blk value].   "Just an optim."
             retained: (vector copySize: n).
@@ -36981,7 +36982,7 @@ by convention. This slot implements the convention.\x7fModuleInfo: Module: pep I
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'superclassOfFakeClass' -> () From: ( | {
          'Category: mutator tracing\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
-         type_test_class_names = bootstrap stub -> 'globals' -> 'vector' -> ().
+         type_test_class_names = ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> () From: ( | {
@@ -37482,7 +37483,7 @@ stacks.\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (0)\
         
          javaByteAt: idx IfFail: errBlk = ( |
             | 
-            cIntSize: javaByteSize Signed: true At: idx IfFail: errBlk).
+            bigEndianIntSize: javaByteSize Signed: true At: idx IfFail: errBlk).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
@@ -37537,9 +37538,9 @@ stacks.\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (0)\
         
          javaIntAt: idx IfFail: errBlk = ( |
             | 
-            cIntSize: javaIntSize Signed: true At: idx IfFail: [|:e|
+            bigEndianIntSize: javaIntSize Signed: true At: idx IfFail: [|:e|
                 ('overflowError' isPrefixOf: e) ifFalse: [^ errBlk value: e].
-                int32 copyTakeBytesFrom: self Index: idx IfFail: errBlk.
+                int32 copyTakeBigEndianBytesFrom: self Index: idx IfFail: errBlk.
             ]).
         } | ) 
 
@@ -37561,9 +37562,9 @@ stacks.\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (0)\
         
          javaLongAt: idx IfFail: errBlk = ( |
             | 
-            cIntSize: javaLongSize Signed: true At: idx IfFail: [|:e|
+            bigEndianIntSize: javaLongSize Signed: true At: idx IfFail: [|:e|
                 ('overflowError' isPrefixOf: e) ifFalse: [^ errBlk value: e].
-                int64 copyTakeBytesFrom: self Index: idx IfFail: errBlk.
+                int64 copyTakeBigEndianBytesFrom: self Index: idx IfFail: errBlk.
             ]).
         } | ) 
 
@@ -37585,7 +37586,7 @@ stacks.\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (0)\
         
          javaShortAt: idx IfFail: errBlk = ( |
             | 
-            cIntSize: javaShortSize Signed: true At: idx IfFail: errBlk).
+            bigEndianIntSize: javaShortSize Signed: true At: idx IfFail: errBlk).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
@@ -37621,7 +37622,7 @@ stacks.\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (0)\
         
          javaUnsignedIntAt: idx IfFail: errBlk = ( |
             | 
-            cIntSize: javaIntSize Signed: false At: idx IfFail: [|:e|
+            bigEndianIntSize: javaIntSize Signed: false At: idx IfFail: [|:e|
                 ('overflowError' isPrefixOf: e) ifFalse: [^ errBlk value: e].
                 javaUnsignedIntegralAt: idx BitSize: javaIntSize IfFail: errBlk.
             ]).
@@ -37634,7 +37635,7 @@ stacks.\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (0)\
              res <- 0.
             | 
             idx upTo: idx + (n / typeSizes bitsPerByte) Do: [|:i|
-                res: (256 * res) + (byteAt: i IfAbsent: [|:e| ^ errBlk value: e]).
+                res: res + ((byteAt: i IfAbsent: [|:e| ^ errBlk value: e]) * (2 power: i*8)).
             ].
             res).
         } | ) 
@@ -37651,7 +37652,7 @@ stacks.\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (0)\
         
          javaUnsignedShortAt: idx IfFail: errBlk = ( |
             | 
-            cIntSize: javaShortSize Signed: false At: idx IfFail: errBlk).
+            bigEndianIntSize: javaShortSize Signed: false At: idx IfFail: errBlk).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
@@ -37741,7 +37742,7 @@ of prototype.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibili
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'process' -> 'handlersProto' -> () From: ( | {
          'Category: state\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         handlers <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         handlers <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'process' -> 'handlersProto' -> () From: ( | {
@@ -37777,7 +37778,7 @@ of prototype.\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibili
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'process' -> 'handlersProto' -> () From: ( | {
          'Category: state\x7fModuleInfo: Module: pep InitialContents: InitializeToExpression: (vector)\x7fVisibility: private'
         
-         tests <- bootstrap stub -> 'globals' -> 'vector' -> ().
+         tests <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'process' -> 'handlersProto' -> () From: ( | {
@@ -38239,7 +38240,7 @@ if it hasn\'t been done previously.\x7fModuleInfo: Module: pep InitialContents: 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallInt' -> () From: ( | {
          'Category: Java runtime\x7fCategory: control flow\x7fModuleInfo: Module: pep InitialContents: FollowSlot\x7fVisibility: public'
         
-         java_inst_vectorProto = bootstrap stub -> 'globals' -> 'vector' -> ().
+         java_inst_vectorProto = ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'events' -> 'xButtonPressedEvent' -> () From: ( | {
@@ -38750,7 +38751,7 @@ java events concurrently. (Is this likely to happen?)\x7fModuleInfo: Module: pep
 
  '-- Sub parts'
 
- bootstrap read: 'pep_runtime'    From: 'applications/pep'
+ bootstrap read: 'pep_runtime' From: 'applications/pep'
  bootstrap read: 'pep_extensions' From: 'applications/pep'
 
 
