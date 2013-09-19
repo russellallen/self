@@ -1,7 +1,7 @@
  '$Revision: 30.30 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -2119,7 +2119,7 @@ on the default display.\x7fModuleInfo: Module: worldMorph InitialContents: Follo
                 oldBounds: (3@24 max: wc position) ## wc size.
                 oldOffset: wc offset.
                 releaseParts.
-                addWindowOnDisplay: (platformSpecificNameFor: wc displayName) Bounds: oldBounds.
+                addWindowOnDisplay: (platformSpecificNameFor: wc originalDisplayName) Bounds: oldBounds.
                 winCanvases first offset: oldOffset.  "set scroll offset of new canvas"
 
                 morphsDo: [| :m |
