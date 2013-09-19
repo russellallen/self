@@ -1,7 +1,7 @@
  '$Revision: 30.17 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -2395,6 +2395,7 @@ the pixmapCache some day.
             platformWindow: xlib window createOnDisplay: display At: pt Size: w@h.
             platformWindow name: wld name.
             platformWindow catchWMDelete.
+            platformWindow initFullscreenAtoms.
             platformWindow eventMask: eventsToCatch.
             platformWindow selectInput.
             platformWindow map.
@@ -2479,6 +2480,36 @@ the pixmapCache some day.
         
          scalableFont = ( |
             | x11Globals scalableFont).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindowCanvas' -> () From: ( | {
+         'Category: events\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sendEvent: event Propogate: propogate Mask: mask = ( |
+             root.
+            | 
+            root: display screen rootWindowOfScreen.
+            display xSendEventToWindow: root Propogate: propogate EventMask: mask Event: event).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindowCanvas' -> () From: ( | {
+         'Category: basics\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         toggleFullscreen = ( |
+             event.
+            | 
+            event: xlib events xClientMessageEvent new.
+            event type: 33.
+            event serial: 0.
+            event sendEvent: false.
+            event display: display.
+            event window: window.
+            event message_type: xlib wmState.
+            event format: 32.
+            event at: 0 Long: 2.
+            event at: 1 Atom: xlib wmStateFullscreen.
+            event at: 2 Long: 0.
+            sendEvent: event Propogate: false Mask: 1572864).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindowCanvas' -> () From: ( | {

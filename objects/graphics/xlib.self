@@ -1,7 +1,7 @@
  '$Revision: 30.16 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -2722,6 +2722,18 @@ window.\x7fModuleInfo: Module: xlib InitialContents: InitializeToExpression: (tr
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'xlib' -> () From: ( | {
+         'ModuleInfo: Module: xlib InitialContents: InitializeToExpression: (xlib atom)\x7fVisibility: public'
+        
+         wmState <- bootstrap stub -> 'globals' -> 'xlib' -> 'atom' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'xlib' -> () From: ( | {
+         'ModuleInfo: Module: xlib InitialContents: InitializeToExpression: (xlib atom)\x7fVisibility: public'
+        
+         wmStateFullscreen <- bootstrap stub -> 'globals' -> 'xlib' -> 'atom' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'xlib' -> () From: ( | {
          'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          xCharStruct = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'xlib' -> 'xCharStruct' -> () From: ( |
@@ -5409,6 +5421,15 @@ an object with these slots:
             simpleInitDisplay: disp Depth: d.
             selfConfigurationRequest.
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'Category: creating\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         initFullscreenAtoms = ( |
+            | 
+            xlib wmState: display internAtom: '_NET_WM_STATE'.
+            xlib wmStateFullscreen: display internAtom: '_NET_WM_STATE_FULLSCREEN').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
