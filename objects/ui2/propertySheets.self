@@ -1,7 +1,7 @@
  '$Revision: 30.11 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -116,7 +116,7 @@ SlotsToOmit: parent prototype.
             | 
             defaultButtonHolder: ui2Menu initializeDefaultButtonHolder: defaultButtonHolder.
             f: enumeratedTypeLabelMorph copyItemNames: labels Values: values DefaultButtonHolder: defaultButtonHolder.
-            f setSelectedIndex: (values asVector keyAt: v).
+            f setSelectedIndex: (values asVector keyAt: v IfAbsent: [ values asVector keyAt: 'defaultFont']).
             f fontSpec: globals fontSpec copyName: 'verdana' Size: outlinerPreferences mediumFontSize Style: 'bold'.
             buildFieldLabel: n ContentMorph: f).
         } | ) 
@@ -690,7 +690,7 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'borderPropsMorph' -> () From: ( | {
          'Category: property specifics\x7fModuleInfo: Module: propertySheets InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
-         defaultButtonHolder.
+         defaultButtonHolder <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'borderPropsMorph' -> () From: ( | {
@@ -886,7 +886,7 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'labelPropsMorph' -> () From: ( | {
          'Category: property specifics\x7fModuleInfo: Module: propertySheets InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
-         defaultButtonHolder.
+         defaultButtonHolder <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'labelPropsMorph' -> () From: ( | {
@@ -1119,7 +1119,7 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'resizingPropsMorph' -> () From: ( | {
          'Category: property specifics\x7fModuleInfo: Module: propertySheets InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
-         defaultButtonHolder.
+         defaultButtonHolder <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'resizingPropsMorph' -> () From: ( | {
