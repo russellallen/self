@@ -2186,6 +2186,13 @@ the pixmapCache some day.
          pixmap <- bootstrap stub -> 'globals' -> 'quartzGlobals' -> 'bufferCanvas' -> ().
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'quartzWindowCanvas' -> () From: ( | {
+         'Category: portable accessing\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         scalableFont = ( |
+            | x11Globals scalableFont).
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xPixmapCanvas' -> () From: ( | {
          'Category: converting ui2Image\'s\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         

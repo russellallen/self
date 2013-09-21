@@ -1,7 +1,7 @@
  'Sun-$Revision: 30.10 $'
  '
-Copyright 1992-2011 AUTHORS.
-See the legal/LICENSE file for license information and legal/AUTHORS for authors.
+Copyright 1992-2012 AUTHORS.
+See the LICENSE file for license information.
 '
 
 
@@ -592,6 +592,12 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
          'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
         
          urwAvantGardeItalic = '-*-itc avant garde-medium-o-normal-sans-'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
+         'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+        
+         verdana = '-*-verdana-medium-r-normal-sans-'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
