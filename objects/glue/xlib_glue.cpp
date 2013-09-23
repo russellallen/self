@@ -16,6 +16,7 @@
 # include <X11/Xutil.h>
 # include <X11/Xutil.h>
 # include <X11/extensions/shape.h>
+# include <X11/Xft/Xft.h>
 # include "xlib.primMaker.hh"
 
 // Display_seal is declared here
@@ -51,6 +52,11 @@ VERIFYCHECKSUM
     template(XWindowAttributes)						      \
     template(XWMHints)							      \
     template(XSetWindowAttributesWrap)					      \
+    template(XGlyphInfo)                                                      \
+    template(XRenderColor)                                                    \
+    template(XftColor)                                                        \
+    template(XftDraw)                                                         \
+    template(XftFont)                                                         \
     template(Region)
 
 # define defineXTypeSeals(stem)						      \
@@ -413,6 +419,22 @@ void XDrawString16_wrap(Display *display, Drawable drawable,
     XDrawString16(display, drawable, gc, x, y, xstr, str->length());
 }
 
+void XftTextExtents8_wrap(Display *display, XftFont *font,
+                          char *string, int len,
+                          XGlyphInfo *extents) {
+  FcChar8 *xstr = (FcChar8 *)string;
+  XftTextExtents8(display, font, (FcChar8*)string, len, extents);
+}
+
+void XftDrawString8_wrap(XftDraw  *draw,
+        		 XftColor *color,
+		         XftFont  *pub,
+		         int       x,
+		         int       y,
+		         char	   *string,
+		         int       len) {
+  XftDrawString8(draw, color, pub, x, y, (FcChar8*)string, len);
+}
 
 XFontStruct* XLoadQueryFont_wrap(Display* display, const char* name, void* FH) {
   XFontStruct* font_struct = XLoadQueryFont(display, name);
