@@ -19,7 +19,7 @@ import java.applet.Applet;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-import SelfViewer;
+//import SelfViewer;
 
 public class SelfDisconnectButton extends Applet
 {
