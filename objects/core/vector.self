@@ -569,6 +569,14 @@ if space overflows. -- dmu 5/04\x7fModuleInfo: Module: vector InitialContents: F
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: printing\x7fModuleInfo: Module: vector InitialContents: FollowSlot'
+        
+         storeStringIfFail: fb = ( |
+            | 
+            (asString storeStringIfFail: fb), ' asByteVector').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
          'Category: unit tests\x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: private'
         
          unitTests = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'byteVector' -> 'unitTests' -> () From: ( |
