@@ -1,7 +1,7 @@
  'Sun-$Revision: 30.12 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -2942,6 +2942,18 @@ coerced.\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibilit
          'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'proxy' -> () From: ( | {
+         'Comment: For use in native framework.
+Very dangerous - use with care.\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+        
+         pointer = ( |
+             bv.
+            | 
+            bv: byteVector copySize: 4.
+            _PointerInByteVector: bv.
+            bv).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'proxy' -> () From: ( | {

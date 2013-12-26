@@ -1,7 +1,7 @@
  '$Revision: 30.11 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -506,9 +506,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             type: tm type.
 
             case
-              if: [ type = 'slots'  ]  Then: [ ^ createSlotsObject:        c ]
-              If: [ type = 'method' ]  Then: [ ^ createOuterMethodObject:  c ]
-              If: [ type = 'vector' ]  Then: [ ^ createObjectVectorObject: c ].
+              if: [ type = 'slots'  ]      Then: [ ^ createSlotsObject:        c ]
+              If: [ type = 'method' ]      Then: [ ^ createOuterMethodObject:  c ]
+              If: [ type = 'vector' ]      Then: [ ^ createObjectVectorObject: c ].
 
             error: 'Object at end of path: ', c printString,
                    ' has no storeString but is neither a slots object nor an outer method. ',
