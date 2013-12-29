@@ -7,5 +7,6 @@
 *.file_status
 *.xcuserdatad
 *.xcworkspace
+*.xcuserstate
 build/
 objects/glue/test*
