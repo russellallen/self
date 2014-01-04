@@ -573,7 +573,7 @@ if space overflows. -- dmu 5/04\x7fModuleInfo: Module: vector InitialContents: F
         
          storeStringIfFail: fb = ( |
             | 
-            (asString storeStringIfFail: fb), ' asByteVector').
+            (asString canonicalize storeStringIfFail: fb), ' asByteVector').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
