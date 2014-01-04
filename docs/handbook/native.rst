@@ -1,6 +1,8 @@
 Native
 ======
 
+    Last updated 4 January 2014
+
 Introduced in Self 4.5, the ``native`` module allows you to generate and run native machine code for your platform from within a Self World. It is inspired by the work of Igor Stasenko on NativeBoost for Pharo.
 
 Underlying Primitive
@@ -29,7 +31,7 @@ Pharo's NativeBoost implements a x86 and x64 assembler in Smalltalk. As yet Self
 Native Modules
 --------------
 
-The customary way to package native code is to create a object which delegates to ``native support nativeModuleParent``, and which has at least a single parent slot ``currentPlatform``, and a single slot ``adjustToPlatform``, which the VM will call at starup, and has the responsibility of ensuring that currentPlatform delegates to an appropriate platform specific object. See ``native example``.
+The customary way to package native code is to create a object which delegates to ``native support nativeModuleParent``, and which has at least a single assignable slot ``currentPlatform``, and a single method ``adjustToPlatform``, which the VM will call at startup, and has the responsibility of ensuring that currentPlatform points to an appropriate platform specific object. It is also customary to put a wrapper object around this ensemble, with publicly accessible methods. See ``native example``.
 
 FFI
 ---
@@ -40,3 +42,8 @@ Limitations
 -----------
 
 Callbacks aren't (yet) supported. Unlike NativeBoost, the machine code has no access to the virtual machine or to Self objects.
+
+Hints
+-----
+
+If you wish to file out generated machine code stored in byteVectors, you will need to view the annotation of the byteVector and set the ``isComplete`` flag to ``Yes``, otherwise the ``transporter`` will complain.

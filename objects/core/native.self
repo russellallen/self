@@ -72,8 +72,8 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          native = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> () From: ( |
              {} = 'Comment: I contain native code!
 Run with care, here be
-dragons.
-Try: 
+dragons. 
+Try:
 native example hello.
 native stdio writeStdout: \'Urg!\\n\'.\x7fModuleInfo: Creator: globals native.
 '.
@@ -205,7 +205,7 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'example' -> 'support' -> 'x86osx' -> () From: ( | {
          'Category: support\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
-         hello_bv <- bootstrap setObjectAnnotationOf: ( 'U\x89\xe5\x8bE\b\xc6\x00H\xc6@\x01E\xc6@\x02L\xc6@\x03L\xc6@\x04O\x89\xec]\xc3' copyMutable asByteVector) From: ( |
+         hello_bv <- bootstrap setObjectAnnotationOf: ( 'U\x89\xe5\x8bE\b\xc6\x00H\xc6@\x01E\xc6@\x02L\xc6@\x03L\xc6@\x04O\x89\xec]\xc3' asByteVector) From: ( |
              {} = 'ModuleInfo: Creator: globals native example support x86osx hello_bv.
 \x7fIsComplete: '.
             | ) .
@@ -263,7 +263,7 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'exampleBinding' -> 'support' -> () From: ( | {
-         'ModuleInfo: Module: native InitialContents: InitializeToExpression: (1 _AsObject)'
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
         
          currentPlatform <- bootstrap stub -> 'globals' -> 'native' -> 'exampleBinding' -> 'support' -> 'x86osx' -> ().
         } | ) 
@@ -277,7 +277,7 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'exampleBinding' -> 'support' -> 'x86osx' -> () From: ( | {
          'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (nil)'
         
-         abs_bv <- bootstrap stub -> 'globals' -> 'nil' -> ().
+         abs_bv.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'exampleBinding' -> 'support' -> 'x86osx' -> () From: ( | {
@@ -749,7 +749,7 @@ SlotsToOmit: parent.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'stdio' -> 'support' -> 'x86osx' -> () From: ( | {
          'Category: machine code\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
-         mcWriteStderr <- bootstrap setObjectAnnotationOf: ( 'U\x89\xe5S\x8bE\f\xff0\xffu\bj\x02\xb8\x04\x00\x00\x00\x83\xec\x04\xcd\x80[\x89\xec]\xc3' copyMutable asByteVector) From: ( |
+         mcWriteStderr <- bootstrap setObjectAnnotationOf: ( 'U\x89\xe5S\x8bE\f\xff0\xffu\bj\x02\xb8\x04\x00\x00\x00\x83\xec\x04\xcd\x80[\x89\xec]\xc3' asByteVector) From: ( |
              {} = 'ModuleInfo: Creator: globals native stdio support x86osx mcWriteStderr.
 \x7fIsComplete: '.
             | ) .
@@ -758,7 +758,7 @@ SlotsToOmit: parent.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'stdio' -> 'support' -> 'x86osx' -> () From: ( | {
          'Category: machine code\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
-         mcWriteStdout <- bootstrap setObjectAnnotationOf: ( 'U\x89\xe5S\x8bE\f\xff0\xffu\bj\x01\xb8\x04\x00\x00\x00\x83\xec\x04\xcd\x80[\x89\xec]\xc3' copyMutable asByteVector) From: ( |
+         mcWriteStdout <- bootstrap setObjectAnnotationOf: ( 'U\x89\xe5S\x8bE\f\xff0\xffu\bj\x01\xb8\x04\x00\x00\x00\x83\xec\x04\xcd\x80[\x89\xec]\xc3' asByteVector) From: ( |
              {} = 'ModuleInfo: Creator: globals native stdio support x86osx mcWriteStdout.
 \x7fIsComplete: '.
             | ) .
@@ -1010,7 +1010,7 @@ SlotsToOmit: parent.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'x86MacModuleParent' -> () From: ( | {
          'Category: machine code\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
-         machinecodeSafeReturn <- bootstrap setObjectAnnotationOf: ( mutableString copySize: 1 FillingWith: '\xc3' asByteVector) From: ( |
+         machinecodeSafeReturn <- bootstrap setObjectAnnotationOf: ( '\xc3' asByteVector) From: ( |
              {} = 'ModuleInfo: Creator: globals native support x86MacModuleParent machinecodeSafeReturn.
 \x7fIsComplete: '.
             | ) .
