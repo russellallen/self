@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>How to Program in Self &mdash; Self Handbook for Self 4.5 (r 1) documentation</title>
+    <title>How to Program in Self &mdash; Self Handbook for Self 4.5.0 documentation</title>
     
     <link rel="stylesheet" href="_static/haiku.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,8 +14,8 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     'for Self 4.5 (r 1)',
+        URL_ROOT:    './',
+        VERSION:     'for Self 4.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,13 +25,13 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/theme_extras.js"></script>
-    <link rel="top" title="Self Handbook for Self 4.5 (r 1) documentation" href="index.html" />
+    <link rel="top" title="Self Handbook for Self 4.5.0 documentation" href="index.html" />
     <link rel="next" title="Morphic: The Self User Interface Framework" href="morphic.html" />
     <link rel="prev" title="A Guide to Programming Style" href="progguid.html" /> 
   </head>
   <body>
       <div class="header"><h1 class="heading"><a href="index.html">
-          <span>Self Handbook for Self 4.5 (r 1) documentation</span></a></h1>
+          <span>Self Handbook for Self 4.5.0 documentation</span></a></h1>
         <h2 class="heading"><span>How to Program in Self</span></h2>
       </div>
       <div class="topnav">
@@ -338,7 +336,7 @@ of the evnironment... message. Click on the box to the left of the word <tt clas
 apostrophe in the top-left-hand corner indicates that this object has a comment. Push the button to
 show (or hide) the comment:</p>
 <div class="figure align-left">
-<img alt="_images/Pgm_Env_Image22.png" src="_images/Pgm_Env_Image22.png" style="width: 545px; height: 178px;" />
+<a class="reference internal image-reference" href="_images/Pgm_Env_Image22.png"><img alt="_images/Pgm_Env_Image22.png" src="_images/Pgm_Env_Image22.png" style="width: 545px; height: 178px;" /></a>
 </div>
 <p>(To automatically resize the outliner to show all the text, press control-L.) To see one of Self’s
 scroll bars, grab the comment’s resize triangle (with the left-button) and move it up a bit:</p>
@@ -384,7 +382,7 @@ slot pointing to that same method is made to feel the change—the method is cha
 the figure below). This feature lets you change a method in a clone and simultaneously affect the</p>
 <blockquote>
 <div><div class="figure align-left">
-<img alt="_images/Pgm_Env_Image28.png" src="_images/Pgm_Env_Image28.png" style="width: 680px; height: 455px;" />
+<a class="reference internal image-reference" href="_images/Pgm_Env_Image28.png"><img alt="_images/Pgm_Env_Image28.png" src="_images/Pgm_Env_Image28.png" style="width: 680px; height: 455px;" /></a>
 </div>
 </div></blockquote>
 <p>prototype, if you are putting your methods in prototypes instead of traits. Changing a method in an
@@ -392,13 +390,13 @@ ordinary outliner would just affect that one object, even if other objects had b
 This rule avoids unintentional changes. The more global kind of change performed by the debugger
 takes a little longer. When it is accomplished, the red and green buttons will disappear:</p>
 <div class="figure align-left">
-<img alt="_images/Pgm_Env_Image29.png" src="_images/Pgm_Env_Image29.png" style="width: 536px; height: 289px;" />
+<a class="reference internal image-reference" href="_images/Pgm_Env_Image29.png"><img alt="_images/Pgm_Env_Image29.png" src="_images/Pgm_Env_Image29.png" style="width: 536px; height: 289px;" /></a>
 </div>
 <p>Now os is highlighted to show that the process is about to send “os” to implicit-self. Try the <tt class="docutils literal"><span class="pre">Step</span></tt>
 button, which performs a single message send. After hitting the <tt class="docutils literal"><span class="pre">Step</span></tt> button twice (and a control-
 L to widen the debugger), the process will have entered the <tt class="docutils literal"><span class="pre">environmentVariable:IfFail:</span></tt> method:</p>
 <div class="figure align-left">
-<img alt="_images/Pgm_Env_Image30.png" src="_images/Pgm_Env_Image30.png" style="width: 558px; height: 380px;" />
+<a class="reference internal image-reference" href="_images/Pgm_Env_Image30.png"><img alt="_images/Pgm_Env_Image30.png" src="_images/Pgm_Env_Image30.png" style="width: 558px; height: 380px;" /></a>
 </div>
 <p>This method is not too interesting (especially on the Macintosh), so leave the debugger by hitting
 <tt class="docutils literal"><span class="pre">Continue</span></tt> and letting the process finish.</p>
@@ -822,7 +820,7 @@ they know which objects to include?” After all, when the transporter saves a s
 it put for the contents of the slot? Here is where the transporter runs smack into the problem of not
 enough information, and a variety of means have to be used. As shown in the flowchart below:</p>
 <div class="figure align-left">
-<img alt="_images/Pgm_Env_Image31.png" src="_images/Pgm_Env_Image31.png" style="width: 631px; height: 680px;" />
+<a class="reference internal image-reference" href="_images/Pgm_Env_Image31.png"><img alt="_images/Pgm_Env_Image31.png" src="_images/Pgm_Env_Image31.png" style="width: 631px; height: 680px;" /></a>
 </div>
 <ul class="simple">
 <li>Sometimes the programmer does not want to store the actual contents of a slot, but instead
@@ -873,7 +871,7 @@ and (except for the slots-to-omit), the slots in the result are added to the obj
 slots are shown in pink in the outliner. For example, here are the prototypical morph and the prototypical
 circleMorph:</p>
 <div class="figure align-left">
-<img alt="_images/Pgm_Env_Image32.png" src="_images/Pgm_Env_Image32.png" style="width: 556px; height: 483px;" />
+<a class="reference internal image-reference" href="_images/Pgm_Env_Image32.png"><img alt="_images/Pgm_Env_Image32.png" src="_images/Pgm_Env_Image32.png" style="width: 556px; height: 483px;" /></a>
 </div>
 <p>The <tt class="docutils literal"><span class="pre">Basic</span> <span class="pre">Morph</span> <span class="pre">State</span></tt> category of slots has been copied from those in morph by first copying
 the morph and removing all its submorphs (i.e. by sending it copyRemoveAllMorphs) and then
@@ -967,9 +965,9 @@ which may take a while to learn. We hope that you find the investment worth the 
       </div>
 
     <div class="footer">
-        &copy; Copyright 2011, Russell Allen (Ed.).
-      Last updated on Nov 03, 2011.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+        &copy; Copyright 2014, Russell Allen (Ed.).
+      Last updated on Jan 05, 2014.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.
     </div>
   </body>
 </html>

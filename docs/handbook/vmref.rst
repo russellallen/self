@@ -2,6 +2,10 @@
 Virtual Machine Reference
 *************************
 
+.. toctree::
+
+   buildvm
+
 Startup options
 ===============
 
