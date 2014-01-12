@@ -61,14 +61,14 @@ root: carpetMorph copyRemoveAllMorphs.
 ] value.
 
 [
-" State for: a labelMorph(type: labelMorph [4.4]): "
+" State for: a labelMorph(type: labelMorph [4.5.0]): "
 
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) hResizing: 0.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 39.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((169)@(96)) # ((234)@(148)).
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 13.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'verdana' Size: 52 Style: 'bold' copyMutable.
-( (root rawMorphs at: 0) rawMorphs at: 0 ) myLabel: '4.4' copyMutable.
+( (root rawMorphs at: 0) rawMorphs at: 0 ) myLabel: '4.5.0' copyMutable.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (169)@(135).
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myWidth: 65.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) rawColor: paint named: 'black'.
