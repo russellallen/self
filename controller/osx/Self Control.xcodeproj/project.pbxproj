@@ -14,7 +14,6 @@
 		BA4DD89E14B800E700F269FD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BA4DD89C14B800E700F269FD /* Credits.rtf */; };
 		BA4DD8A114B800E700F269FD /* SelfAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4DD8A014B800E700F269FD /* SelfAppDelegate.m */; };
 		BA4DD8A414B800E800F269FD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4DD8A214B800E800F269FD /* MainMenu.xib */; };
-		BA4DD8AF14B8249800F269FD /* Self ControlIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BA4DD8AE14B8249700F269FD /* Self ControlIcon.icns */; };
 		BA573C7D14F4ACE7000FD409 /* SelfWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = BA573C7C14F4ACE7000FD409 /* SelfWorld.m */; };
 		BA573C8214F4DE81000FD409 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA573C8114F4DE81000FD409 /* Security.framework */; };
 		BA7638FC187E598000841F48 /* Self.app in Resources */ = {isa = PBXBuildFile; fileRef = BA7638FB187E598000841F48 /* Self.app */; };
@@ -36,7 +35,6 @@
 		BA4DD89F14B800E700F269FD /* SelfAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelfAppDelegate.h; sourceTree = "<group>"; };
 		BA4DD8A014B800E700F269FD /* SelfAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelfAppDelegate.m; sourceTree = "<group>"; };
 		BA4DD8A314B800E800F269FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		BA4DD8AE14B8249700F269FD /* Self ControlIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Self ControlIcon.icns"; sourceTree = "<group>"; };
 		BA573C7C14F4ACE7000FD409 /* SelfWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfWorld.m; sourceTree = "<group>"; };
 		BA573C7F14F4ACFF000FD409 /* SelfWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfWorld.h; sourceTree = "<group>"; };
 		BA573C8014F4CB48000FD409 /* Self.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Self.entitlements; sourceTree = "<group>"; };
@@ -64,7 +62,6 @@
 			children = (
 				BA24211C1880BAA2008B5638 /* blueSelf.icns */,
 				BA4DD8B414B8254600F269FD /* VM */,
-				BA4DD8AE14B8249700F269FD /* Self ControlIcon.icns */,
 				BA4DD89314B800E700F269FD /* Self */,
 				BA4DD88C14B800E700F269FD /* Frameworks */,
 				BA4DD88A14B800E700F269FD /* Products */,
@@ -193,7 +190,6 @@
 				BA4DD89814B800E700F269FD /* InfoPlist.strings in Resources */,
 				BA4DD89E14B800E700F269FD /* Credits.rtf in Resources */,
 				BA4DD8A414B800E800F269FD /* MainMenu.xib in Resources */,
-				BA4DD8AF14B8249800F269FD /* Self ControlIcon.icns in Resources */,
 				BA7638FC187E598000841F48 /* Self.app in Resources */,
 				BA24211D1880BAA2008B5638 /* blueSelf.icns in Resources */,
 			);
