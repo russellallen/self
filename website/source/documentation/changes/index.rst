@@ -6,8 +6,28 @@ Changes
    
    detailed/index
 
-What’s Changed Since Self 4.2.1
--------------------------------
+What's Changed in Self Mallard (4.5.0)
+--------------------------------------
+
+* Build system redone by Tobias Pape. Now based on cmake, with a single modern build process for both Linux and OS X. The VM can be built on both GCC and Clang on the latest vesions of both operating systems. 
+
+* New Self Control.app on OS X to manage your running worlds as a more robust and featured replacement for the older 'Self Droplet'. Use of this app is optional and you can still access the Self VM through the command line.
+
+* New look for standard world, with better fonts, colours and greater use of space.
+
+* Various fixes to the standard world, including a new build script 'worldBuilder.self' replacing several ad hoc build scripts.
+
+* Updated Self Handbook at docs.selflanguage.org
+
+What’s Changed in Self 4.4
+--------------------------
+
+* Self now builds and runs on standard x86 Linux
+* Rebuilt OS X VM 
+* Rewritten Self droplet for OS X VM
+
+What’s Changed in Self 4.3
+--------------------------
 
 Following is a list of the major changes since the previous release of Self. This release also includes numerous small bug fixes and enhancement.
 

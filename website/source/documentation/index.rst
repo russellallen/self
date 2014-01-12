@@ -27,8 +27,6 @@ There are a large number of published papers on Self.  Note that these cover pre
 Changes and Release Notes
 -------------------------
 
-* `Self 4.3 Release Notes <release/Self-4.3-Release-Notes.pdf>`_
-
 .. toctree::
    
    changes/index
