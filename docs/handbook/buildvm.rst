@@ -32,7 +32,7 @@ On 64bit Linux, you may want to explicitely use 32bit compilation::
 
 The same holds for Clang.
 
-You may whish to use ``ccmake`` or the CMake GUI (``cmake-gui`` or the CMake.app on OS X) to configure available features like Release/Debug/Profiled builds or to enable experimental features.
+You may wish to use ``ccmake`` or the CMake GUI (``cmake-gui`` or the CMake.app on OS X) to configure available features like Release/Debug/Profiled builds or to enable experimental features.
 
 .. _GitHub repository: https://github.com/russellallen/self
 .. _CMake: http://www.cmake.org/
