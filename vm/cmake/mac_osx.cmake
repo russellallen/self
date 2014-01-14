@@ -46,19 +46,20 @@ if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
   # see if we can get a matching SDK
   foreach(sdk "macosx10.8" "macosx10.7" "macosx10.6")
     execute_process(
-    COMMAND xcodebuild -version -sdk "${sdk}"
+    COMMAND xcodebuild -version -sdk "${sdk}" Path
     OUTPUT_VARIABLE _sdkpath
     OUTPUT_STRIP_TRAILING_WHITESPACE
     ERROR_VARIABLE _stderr
     RESULT_VARIABLE _failed)
     if(NOT _failed)
-      set(CMAKE_OSX_SYSROOT "${sdk}" CACHE STRING
+      set(CMAKE_OSX_SYSROOT "${_sdkpath}" CACHE STRING
         "The product will be built against the headers and libraries located inside the indicated SDK."
         FORCE
       )
       break()
     endif()
   endforeach()
+  message(STATUS "Using SDK: ${_sdkpath}")
 endif()
 
 year(YEAR)
