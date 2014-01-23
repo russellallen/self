@@ -16,5 +16,5 @@ human intervention and fully preserves the behavior of the application.
 
 *Proceedings of the ACM OOPSLA'94 Conference, Portland, OR, October 1994.*
 
-`PDF <../../_static/published/gold.pdf>`_
+ `PDF <_static/gold.pdf>`_
 

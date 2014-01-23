@@ -39,5 +39,5 @@ October, 1989.*
 Also published in Lisp and Symbolic Computation 4(3), Kluwer Academic
 Publishers, June, 1991.*
 
-`PDF <../../_static/published/implementation.pdf>`_
+ `PDF <_static/implementation.pdf>`_
 

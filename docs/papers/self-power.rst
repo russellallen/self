@@ -23,4 +23,4 @@ Published as SIGPLAN Notices 22(12), December, 1987.
 Also published in Lisp and Symbolic Computation 4(3), Kluwer Academic
 Publishers, June, 1991.
 
-`PDF <../../_static/published/self-power.pdf>`_
+ `PDF <_static/self-power.pdf>`_
