@@ -52,7 +52,7 @@ if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
     ERROR_VARIABLE _stderr
     RESULT_VARIABLE _failed)
     if(NOT _failed)
-      set(CMAKE_OSX_SYSROOT "${_sdkpath}" CACHE STRING
+      set(CMAKE_OSX_SYSROOT "${_sdkpath}" CACHE FILEPATH
         "The product will be built against the headers and libraries located inside the indicated SDK."
         FORCE
       )
