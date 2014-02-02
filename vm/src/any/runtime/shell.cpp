@@ -82,12 +82,20 @@ static void processArguments(int argc, const char *argv[]) {
 # else
   Interpret = true; // no compiler!
 # endif
+  
 
+  // Some implementations of getopt (I'm looking at you, GNU) rearrange argv for their own purposes.
+  // So we give getopt a copy of argv so we can later expose the real original argv to 
+  // Self via _CommandLine
+  // rca 2 Feb 2014
+  char **copy_of_argv = (char **) malloc( sizeof(char *) * argc );
+  memcpy(copy_of_argv, argv, sizeof(char *) * argc);
+  
   char c;
   fint opt_i;
   OS::opterr= 0; // disable printed warning about unrecognized options
   while(opt_i= OS::optind,
-        (c = OS::getopt(argc, (char* const*)argv, "Ff:hl:prtcs:woa")) != (char)-1) {
+        (c = OS::getopt(argc, (char* const*)copy_of_argv, "Ff:hl:prtcs:woa")) != (char)-1) {
     if (strlen(argv[opt_i]) != 2) continue; // ignore multi-character options
     switch(c) {
     case 'F':
@@ -163,6 +171,9 @@ static void processArguments(int argc, const char *argv[]) {
   // save remaining args for Self-level access
   prog_argc= argc;
   prog_argv= argv;
+  
+  // clean up argv copy
+  free(copy_of_argv);
 }
 
 void abortSelf() {
