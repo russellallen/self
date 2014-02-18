@@ -60,8 +60,11 @@ extern "C" {
 
 const char *UnixFile_seal = "UnixFile";
 
+#ifdef USE_EPOLL
+int epollFD; // epoll file descriptor
+#else
 fd_set activeFDs;                      // active file descriptors
-
+#endif
 
 static struct termios normalSettings;
 
@@ -80,7 +83,27 @@ class IOCleanup {
 # else
   # error what?
 # endif
+#ifdef USE_EPOLL
+    epollFD = epoll_create(256);
+    if (epollFD < 0) {
+      printf("epoll_create failed: %s\n", strerror(errno));
+    }
+    else {
+      struct epoll_event event;
+      event.events = EPOLLIN | EPOLLOUT;
+      event.data.fd = 0;
+      if (epoll_ctl(epollFD, EPOLL_CTL_ADD, 0, &event) < 0)
+        printf("epoll_ctl for fd 0 failed: %s\n", strerror(errno));
+      event.data.fd = 1;
+      if (epoll_ctl(epollFD, EPOLL_CTL_ADD, 1, &event) < 0)
+        printf("epoll_ctl for fd 1 failed: %s\n", strerror(errno));
+      event.data.fd = 2;
+      if (epoll_ctl(epollFD, EPOLL_CTL_ADD, 2, &event) < 0)
+        printf("epoll_ctl for fd 2 failed: %s\n", strerror(errno));
+    }
+#else
     FD_SET(0, &activeFDs); FD_SET(1, &activeFDs); FD_SET(2, &activeFDs); 
+#endif
   }
   ~IOCleanup() { resetTerminal(); }
 };
@@ -390,7 +413,15 @@ void register_file_descriptor(int fd) {
     // (/dev/rsr0 does under SVR4) -- dmu
 
   if (fd < 0) return;
-
+#ifdef USE_EPOLL
+  struct epoll_event event;
+  event.data.fd = fd;
+  event.events = EPOLLIN | EPOLLOUT;
+  if (epoll_ctl(epollFD, EPOLL_CTL_ADD, fd, &event) < 0) {
+    // What to do for error?
+    printf("epoll_ctl failed: %s\n", strerror(errno));
+  }
+#else
   timeval nowait;
   nowait.tv_sec = 0;
   nowait.tv_usec = 0;
@@ -406,6 +437,7 @@ void register_file_descriptor(int fd) {
   // end of check
   
   FD_SET(fd, &activeFDs);
+#endif
   
 }
 
@@ -420,8 +452,17 @@ int open_wrap(char *path, int flags, int mode) {
 
 int close_wrap(int fd) {
   int result = close(fd);
+#ifdef USE_EPOLL
+  if (result != -1) {
+    struct epoll_event event;
+    if (epoll_ctl(epollFD, EPOLL_CTL_DEL, fd, &event) < 0) {
+      printf("epoll_ctl delete failed: %s\n", strerror(errno));
+    }
+  }
+#else
   if (result != -1)
     FD_CLR(fd, &activeFDs);
+#endif
   return result;
 }
 
@@ -431,8 +472,25 @@ int select_wrap(objVectorOop vec, int howMany, void *FH) {
     prim_failure(FH, BADSIZEERROR);
     return 0;
   }
+#ifdef USE_EPOLL
+  struct epoll_event* events = (struct epoll_event*)malloc(sizeof(epoll_event) * howMany);
+  int ret = epoll_wait(epollFD, events, howMany, 0);
+  if (ret < 0) {
+    unix_failure(FH);
+    return 0;
+  }
+
+  for(int i = 0; i < ret; ++i) {
+    struct epoll_event* event = &events[i];
+    vec->obj_at_put(i, as_smiOop(event->data.fd), false);
+  }
+  
+  free(events);  
+  return ret;
+#else
   if (howMany > FD_SETSIZE) 
     howMany = FD_SETSIZE;
+
   fd_set r = activeFDs, w = activeFDs;
   timeval nowait;
   nowait.tv_sec  = 0; 
@@ -448,6 +506,7 @@ int select_wrap(objVectorOop vec, int howMany, void *FH) {
       vec->obj_at_put(index++, as_smiOop(fd), false);
   }
   return index;
+#endif
 }
 
 int select_read_wrap(objVectorOop vec, int howMany, void *FH) {
@@ -455,6 +514,25 @@ int select_read_wrap(objVectorOop vec, int howMany, void *FH) {
     prim_failure(FH, BADSIZEERROR);
     return 0;
   }
+#ifdef USE_EPOLL
+  struct epoll_event* events = (struct epoll_event*)malloc(sizeof(epoll_event) * howMany);
+  int ret = epoll_wait(epollFD, events, howMany, 0);
+  if (ret < 0) {
+    unix_failure(FH);
+      return 0;
+  }
+
+  int index = 0;
+  for(int i = 0; i < ret; ++i) {
+    struct epoll_event* event = &events[i];
+    if ((event->events & EPOLLIN) == EPOLLIN) {
+      vec->obj_at_put(index++, as_smiOop(event->data.fd), false);
+    }
+  }
+  
+  free(events);  
+  return index;
+#else
   if (howMany > FD_SETSIZE) 
     howMany = FD_SETSIZE;
   fd_set r = activeFDs;
@@ -472,6 +550,7 @@ int select_read_wrap(objVectorOop vec, int howMany, void *FH) {
       vec->obj_at_put(index++, as_smiOop(fd), false);
   }
   return index;
+#endif
 }
 
 

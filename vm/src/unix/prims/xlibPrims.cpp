@@ -25,14 +25,25 @@
     XSetIOErrorHandler(XErrorHandlers::handle_X_IO_error);
 
     // add this file descriptor to list of all open files
+#ifdef USE_EPOLL
+    register_file_descriptor(ConnectionNumber(result));
+#else
     FD_SET(ConnectionNumber(result), &activeFDs);
+#endif
     return result;
   }
 
   void XCloseDisplay_wrap(Display* display) {
     int fd = ConnectionNumber(display);
-    XCloseDisplay(display);
+#ifdef USE_EPOLL
+    struct epoll_event event;
+    if (epoll_ctl(epollFD, EPOLL_CTL_DEL, fd, &event) < 0) {
+      printf("epoll_ctl delete for X11 descriptor failed: %s\n", strerror(errno));
+    }
+#else
     FD_CLR(fd, &activeFDs);
+#endif
+    XCloseDisplay(display);
   }
 
 # define WHAT_GLUE FUNCTIONS
