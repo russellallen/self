@@ -19,9 +19,9 @@ extern const char *UnixFile_seal;
 
 #ifdef USE_EPOLL
 extern int epollFD;                      // epoll file descriptor
-#else
-extern fd_set activeFDs;                      // active file descriptors
 #endif
+
+extern fd_set activeFDs;                      // active file descriptors
 
 // so glued in  routines can call me
 extern "C" void register_file_descriptor(int fd);
