@@ -5,10 +5,13 @@
    See the LICENSE file for license information. */
 
   
-# pragma implementation "cacheStub_ppc.hh"
-# pragma implementation "cacheStub_inline_ppc.hh"
-# include "_cacheStub_ppc.cpp.incl"
-  
+# include "asm_inline.hh"
+# include "cacheStub_inline.hh"
+# include "label_inline.hh"
+# include "nmethod_inline.hh"
+# include "sendDesc.hh"
+
+ 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
 

@@ -3,9 +3,17 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "countStub_abstract.hh"
-# pragma implementation "countStub.hh"
-# include "_countStub.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "asm_inline.hh"
+# include "cacheStub_inline.hh"
+# include "countPattern.hh"
+# include "countStub.hh"
+# include "fields.hh"
+# include "nmethod_inline.hh"
+# include "recompile.hh"
+# include "regs.hh"
+# include "sendDesc.hh"
+# include "zone.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

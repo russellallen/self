@@ -3,8 +3,16 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "fctProxyOop.hh"
-#include "_fctProxyOop.cpp.incl"
+# include "allocation.hh"
+# include "byteVectorOop.hh"
+# include "errorCodes.hh"
+# include "fctProxyOop.hh"
+# include "generation_inline.hh"
+# include "glueSupport.hh"
+# include "space_inline.hh"
+# include "stringMap.hh"
+# include "stringOop.hh"
+# include "vmStrings.hh"
 
 
 

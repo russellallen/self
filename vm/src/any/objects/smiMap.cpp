@@ -3,8 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "smiMap.hh"
-# include "_smiMap.cpp.incl"
+# include "enumeration.hh"
+# include "generation_inline.hh"
+# include "smiMap.hh"
+# include "space_inline.hh"
+# include "vmStrings.hh"
 
 Map* smiMap::create_smiMap(oop parent) {
   slotList *s= new slotList(VMString[PARENT], 

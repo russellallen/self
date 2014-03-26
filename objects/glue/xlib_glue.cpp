@@ -8,7 +8,7 @@
   typedef SelfX11Cursor Cursor;
 # endif
 
-# include "_glueDefs.cpp.incl"
+# include "glueDefs.hh"
 
 # define Status int // cause I had to undef it earlier
 

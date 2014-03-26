@@ -25,7 +25,21 @@
   #  undef XLIB
 # endif
 
-# include "_os_unix.cpp.incl"
+# include "unixPrims.hh"
+# include "frame.hh"
+# include "glueSupport.hh"
+# include "init.hh"
+# include "interruptedCtx.hh"
+# include "itimer.hh"
+# include "label_inline.hh"
+# include "monitor.hh"
+# include "monitorHooks.hh"
+# include "objVectorOop.hh"
+# include "os.hh"
+# include "os_includes.hh"
+# include "platformWindow.hh"
+# include "quartzWindow.hh"
+# include "shell.hh"
 
 
 # if TARGET_OS_VERSION != MACOSX_VERSION 

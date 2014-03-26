@@ -1,15 +1,22 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "bits.hh"
+# include "top.hh"
+# include "types.hh"
 
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
+
+
+# if defined(__ppc__)
+# include "regs_ppc.hh"
+# elif defined(__i386__)
+# include "regs_i386.hh"
+# else
+# include "regs_sparc.hh"
 # endif
-
-
-# include "_regs_pd.hh.incl"
 
 
 extern "C" {                            // extern "C" for easier debugging

@@ -1,11 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1998-2006 Sun Microsystems, Inc.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "os.hh"
+# include "top.hh"
+# include "x_includes.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // An OS-specific basic window, specialized for the spy.

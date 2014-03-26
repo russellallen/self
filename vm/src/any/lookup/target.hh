@@ -1,11 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "debug.hh"
+# include "simpleLookup.hh"
+# include "types.hh"
+# include "vframe.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // A lookup target represents an object visited during a lookup.

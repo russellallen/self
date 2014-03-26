@@ -3,8 +3,15 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "mapMap.hh"
-# include "_mapMap.cpp.incl"
+# include "blockMap.hh"
+# include "enumeration.hh"
+# include "generation_inline.hh"
+# include "mapMap.hh"
+# include "mapTable.hh"
+# include "mapVtbls.hh"
+# include "oop_inline.hh"
+# include "slotsMapDeps.hh"
+# include "space_inline.hh"
 
 Map* mapMap::create_mapMap() {
   oop ignored;

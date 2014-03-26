@@ -3,8 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "itimer_unix.hh"
-# include "_itimer_unix.cpp.incl"
+# include "generation_inline.hh"
+# include "interruptedCtx.hh"
+# include "itimer.hh"
+# include "process.hh"
+# include "space_inline.hh"
 
 
 extern "C" { void IntervalTimerTick(int sig, self_code_info_t *info, self_sig_context_t *scp); }

@@ -3,8 +3,17 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "objVectorOop.hh"
-# include "_objVectorOop.cpp.incl"
+# include "enumeration.hh"
+# include "glueSupport.hh"
+# include "label_inline.hh"
+# include "mirrorOop.hh"
+# include "objVectorMap.hh"
+# include "objVectorOop.hh"
+# include "proxyOop.hh"
+# include "slotDesc.hh"
+# include "vframe.hh"
+# include "vframeOop.hh"
+# include "vmStrings.hh"
 
 objVectorOop objVectorOopClass::grow(fint delta, bool mustAllocate) {
   objVectorOop v= (objVectorOop) slotsOopClass::grow(size(), delta,

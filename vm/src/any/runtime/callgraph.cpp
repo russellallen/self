@@ -3,8 +3,17 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "callgraph.hh"
-# include "_callgraph.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "blockOop_inline.hh"
+# include "callgraph.hh"
+# include "codeSlotsMap.hh"
+# include "generation_inline.hh"
+# include "label_inline.hh"
+# include "objVectorOop.hh"
+# include "oop_inline.hh"
+# include "print.hh"
+# include "scopeDesc.hh"
+# include "space_inline.hh"
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

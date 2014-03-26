@@ -6,9 +6,29 @@
 // Implementation of general (abstract) spy.
 
 
-# pragma implementation "monitor.hh"
 
-# include "_monitor.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "allocation.hh"
+# include "cacheStub_inline.hh"
+# include "countStub.hh"
+# include "debug.hh"
+# include "frame.hh"
+# include "generation.hh"
+# include "interruptedCtx.hh"
+# include "itimer.hh"
+# include "monitor.hh"
+# include "monitorHooks.hh"
+# include "monitorPieces.hh"
+# include "nmethod_inline.hh"
+# include "nprofiler.hh"
+# include "os_includes.hh"
+# include "process.hh"
+# include "recompile.hh"
+# include "sig.hh"
+# include "signalBlocker.hh"
+# include "space_inline.hh"
+# include "universe_inline.hh"
+# include "zone.hh"
 
 // Variables:
 

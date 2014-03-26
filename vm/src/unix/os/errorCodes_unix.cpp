@@ -3,9 +3,8 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "errorCodes_unix.hh"
 
-# include "_errorCodes_unix.cpp.incl"
+# include "errorCodes.hh"
 
   static const char* unixError[] = {
   

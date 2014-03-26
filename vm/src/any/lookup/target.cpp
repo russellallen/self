@@ -3,8 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "target.hh"
-# include "_target.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "sicExpr.hh"
+# include "sicScope.hh"
+# include "slotRef.hh"
+# include "target.hh"
 
 lookupTarget* objectLookupTarget::get_target_for_slot(slotDesc* s,
                                                       simpleLookup* L) {

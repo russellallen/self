@@ -1,11 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "config.hh"
+# include "error.hh"
+# include "macros.hh"
+# include "types.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 void assert(bool b, const char* fmt);

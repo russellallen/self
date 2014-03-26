@@ -1,3 +1,4 @@
+#pragma once
 /* Sun-$Revision: 30.12 $ */
 
 /* Copyright 1992-2012 AUTHORS.

@@ -1,11 +1,11 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "target.hh"
+# include "top.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // helper functions for SIC code generation
@@ -62,7 +62,13 @@
                 realSlotRef* path,
                 Location receiver);
 
-# include "_genHelper_pd.hh.incl"
+# if defined(__ppc__)
+# include "genHelper_ppc.hh"
+# elif defined(__i386__)
+# include "genHelper_i386.hh"
+# else
+# include "genHelper_sparc.hh"
+# endif
   };
 
   extern SICGenHelper* genHelper;

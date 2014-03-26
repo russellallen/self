@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "conversion_sparc.hh"
-# include "_conversion_sparc.cpp.incl"
+# include "conversion.hh"
+# include "label_inline.hh"
+# include "registerLocator.hh"
+# include "vframe.hh"
 
 
   

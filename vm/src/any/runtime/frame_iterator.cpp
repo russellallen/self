@@ -3,9 +3,12 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "frame_iterator.hh"
 
-# include "_frame_iterator.cpp.incl"
+# include "frame_iterator.hh"
+# include "interpreter.hh"
+# include "label_inline.hh"
+# include "oopClosures.hh"
+# include "space_inline.hh"
 
 
 FrameIterator::FrameIterator( frame* _f, RegisterLocator* _rl, bool z, RegisterString m, bool r, OopClosure* c ) {

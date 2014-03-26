@@ -3,8 +3,15 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "stringMap.hh"
-# include "_stringMap.cpp.incl"
+# include "enumeration.hh"
+# include "generation.hh"
+# include "generation_inline.hh"
+# include "objVectorOop.hh"
+# include "space_inline.hh"
+# include "stringMap.hh"
+# include "stringTable.hh"
+# include "universe.hh"
+# include "vmStrings.hh"
 
 void stringMap::create_initial_strings(oop parent) {
   // create string map

@@ -3,9 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation  "nmethod_sparc.hh"
 
-# include "_nmethod_sparc.cpp.incl"
+# include "aCompiler.hh"
+# include "label_inline.hh"
+# include "nmethod.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

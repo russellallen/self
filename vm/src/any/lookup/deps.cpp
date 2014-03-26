@@ -3,8 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "deps.hh"
-# include "_deps.cpp.incl"
+# include "deps.hh"
+# include "generation_inline.hh"
+# include "space_inline.hh"
 
 nmln* dependencyList::dependentsArrayS;
 

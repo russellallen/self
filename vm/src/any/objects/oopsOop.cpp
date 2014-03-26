@@ -3,10 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation  "oopsOop.hh"
-# pragma implementation  "oopsOop_inline.hh"
 
-# include "_oopsOop.cpp.incl"
+# include "ageTable.hh"
+# include "generation_inline.hh"
+# include "oopsOop_inline.hh"
+# include "space_inline.hh"
 
 oopsOop oopsOopClass::scavenge(fint size) {
   assert(Memory->should_scavenge(this) && !is_forwarded(), 

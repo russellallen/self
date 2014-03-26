@@ -1,11 +1,11 @@
+#pragma once
 /* Sun-$Revision: 30.12 $ */
 
 /* Copyright 1992-2012 AUTHORS.
   See the LICENSE file for license information. */
+# include "config.hh"
+# include "os_includes.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // This file contains some global types, plus many partial definitions

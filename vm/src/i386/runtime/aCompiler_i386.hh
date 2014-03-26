@@ -1,3 +1,4 @@
+#pragma once
 # ifdef __i386__
 /* Sun-$Revision: 1.4 $ */
 
@@ -5,9 +6,6 @@
    See the LICENSE file for license information. */
 
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 public:

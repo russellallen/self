@@ -3,8 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "list.hh"
-# include "_list.cpp.incl"
+# include "generation_inline.hh"
+# include "list.hh"
+# include "space_inline.hh"
 
 
 List* List::Append(ParseNode* e) {

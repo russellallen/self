@@ -3,10 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation  "rSet.hh"
-# pragma implementation  "rSet_inline.hh"
 
-# include "_rSet.cpp.incl"
+# include "generation_inline.hh"
+# include "oopsOop_inline.hh"
+# include "os.hh"
+# include "rSet_inline.hh"
+# include "runtime.hh"
+# include "space_inline.hh"
 
 rSet::rSet() {
    low_boundary = Memory->new_gen->low_boundary;

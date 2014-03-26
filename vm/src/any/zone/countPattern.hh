@@ -1,11 +1,11 @@
+#pragma once
 /* Sun-$Revision: 30.6 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "kinds.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
@@ -22,7 +22,13 @@
     void initCounting();
     void initComparing();
 
-# include "_countPattern_pd.hh.incl"
+# if defined(__ppc__)
+# include "countPattern_ppc.hh"
+# elif defined(__i386__)
+# include "countPattern_i386.hh"
+# else
+# include "countPattern_sparc.hh"
+# endif
   };
 
 

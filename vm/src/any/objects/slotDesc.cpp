@@ -3,8 +3,12 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "slotDesc.hh"
-# include "_slotDesc.cpp.incl"
+# include "generation_inline.hh"
+# include "oop_inline.hh"
+# include "slotDesc.hh"
+# include "slotsMap.hh"
+# include "space_inline.hh"
+# include "stringOop.hh"
 
 stringOop slotDesc::assignment_slot_name() {
   ResourceMark rm;

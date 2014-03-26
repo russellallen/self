@@ -1,13 +1,15 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "nmethod.hh"
+# include "simpleLookup.hh"
+# include "types.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // AbstractCompiler is the abstract base class for all Self compilers
@@ -64,7 +66,13 @@ class AbstractCompiler : public ResourceObj {
   virtual fint  incoming_arg_count() = 0;
 
   
-# include "_aCompiler_pd.hh.incl"
+# if defined(__ppc__)
+# include "aCompiler_ppc.hh"
+# elif defined(__i386__)
+# include "aCompiler_i386.hh"
+# else
+# include "aCompiler_sparc.hh"
+# endif
 
 };
 

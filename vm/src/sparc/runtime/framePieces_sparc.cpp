@@ -3,9 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "framePieces_sparc.hh"
 
-# include "_framePieces_sparc.cpp.incl"
+# include "framePieces_inline.hh"
+# include "label_inline.hh"
 
 
 

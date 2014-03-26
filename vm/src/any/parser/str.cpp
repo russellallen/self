@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "str.hh"
-# include "_str.cpp.incl"
+# include "expr.hh"
+# include "generation_inline.hh"
+# include "space_inline.hh"
+# include "str.hh"
 
 void String::Print() {
   smi   n = 0, i;

@@ -1,13 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "aCompiler.hh"
+# include "simpleLookup_inline.hh"
 
 # ifdef FAST_COMPILER
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // The FCompiler structure holds global state associated with the current
@@ -61,7 +61,13 @@ class FCompiler:  public AbstractCompiler {
   void print();
   void print_short();
 
-# include "_fcompiler_pd.hh.incl"
+# if defined(__ppc__)
+# include "fcompiler_ppc.hh"
+# elif defined(__i386__)
+# include "fcompiler_i386.hh"
+# else
+# include "fcompiler_sparc.hh"
+# endif
 
 };
 

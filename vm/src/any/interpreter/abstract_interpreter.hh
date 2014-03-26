@@ -1,11 +1,12 @@
+#pragma once
 /* Sun-$Revision: 30.13 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "byteCodes.hh"
+# include "mapOop.hh"
+# include "oop.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 class abstract_interpreter;

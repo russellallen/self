@@ -3,8 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "smiOop.hh"
-# include "_smiOop.cpp.incl"
+# include "debug.hh"
+# include "errorCodes.hh"
+# include "generation_inline.hh"
+# include "objVectorOop.hh"
+# include "oop_inline.hh"
+# include "space_inline.hh"
+# include "vmStrings.hh"
 
 oop smiOopClass::as_object_prim() {
   int32 id = value();

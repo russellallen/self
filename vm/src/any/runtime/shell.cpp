@@ -3,8 +3,31 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "shell.hh"
-# include "_shell.cpp.incl"
+# include "unixPrims.hh"
+# include "allocation.hh"
+# include "codeSlotsMap.hh"
+# include "dynLink.hh"
+# include "expr.hh"
+# include "files.hh"
+# include "fprofiler.hh"
+# include "hprofiler.hh"
+# include "init.hh"
+# include "interpreter.hh"
+# include "interruptedCtx.hh"
+# include "itimer.hh"
+# include "mapTable.hh"
+# include "monitor.hh"
+# include "monitorHooks.hh"
+# include "nlrSupport.hh"
+# include "os_includes.hh"
+# include "parser.hh"
+# include "process.hh"
+# include "recompile.hh"
+# include "scanner.hh"
+# include "shell.hh"
+# include "sig.hh"
+# include "simpleLookup_inline.hh"
+# include "vmStrings.hh"
 
 oop evalExpressions(Scanner* scanner) {
   // evaluate expressions until scanner is at EOF or an error occurs

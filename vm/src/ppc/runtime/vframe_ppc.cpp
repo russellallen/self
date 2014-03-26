@@ -4,8 +4,21 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-// # pragma implementation "vframe_ppc.hh"
-# include "_vframe_ppc.cpp.incl"
+# include "allocation.hh"
+# include "byteCodes.hh"
+# include "codeSlotsMap.hh"
+# include "debug.hh"
+# include "enumeration.hh"
+# include "fields.hh"
+# include "interpreter.hh"
+# include "recompile.hh"
+# include "registerLocator.hh"
+# include "search.hh"
+# include "sendDesc.hh"
+# include "table.hh"
+# include "vframe.hh"
+# include "vframeOop.hh"
+# include "vmStrings.hh"
 
     
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)

@@ -3,8 +3,17 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "rscope.hh"
-# include "_rscope.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "addrDesc.hh"
+# include "codeSlotsMap.hh"
+# include "countStub.hh"
+# include "fields.hh"
+# include "recompile.hh"
+# include "rscope.hh"
+# include "sicExpr.hh"
+# include "sicScope.hh"
+# include "simpleLookup_inline.hh"
+# include "uncommonBranch.hh"
 
 # ifdef SIC_COMPILER
 

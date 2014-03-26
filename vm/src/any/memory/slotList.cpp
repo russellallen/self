@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "slotList.hh"
-# include "_slotList.cpp.incl"
+# include "generation_inline.hh"
+# include "slotList.hh"
+# include "space_inline.hh"
+# include "stringOop.hh"
 
 slotList* slotList::add(stringOop name, slotType type, oop contents, oop anno)
 {

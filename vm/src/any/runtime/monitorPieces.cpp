@@ -3,9 +3,14 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "monitorPieces.hh"
 
-# include "_monitorPieces.cpp.incl"
+# include "label_inline.hh"
+# include "monitor.hh"
+# include "monitorPieces.hh"
+# include "os.hh"
+# include "os_includes.hh"
+# include "selfMonitor.hh"
+# include "space_inline.hh"
 
 
 

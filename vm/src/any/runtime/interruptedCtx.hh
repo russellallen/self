@@ -1,11 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "markOop.hh"
+# include "sig.hh"
+# include "signalBlocker.hh"
+# include "top.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 #include <pthread.h>
 
@@ -76,7 +78,13 @@ class InterruptedContext {
   static void print_registers();
   static void return_to_prompt(SignalBlocker*);
   
-# include "_interruptedCtx_pd.hh.incl"
+# if defined(__ppc__)
+# include "interruptedCtx_ppc.hh"
+# elif defined(__i386__)
+# include "interruptedCtx_i386.hh"
+# else
+# include "interruptedCtx_sparc.hh"
+# endif
 };
 
 extern InterruptedContext  AbortContext;

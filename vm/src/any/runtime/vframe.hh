@@ -1,12 +1,15 @@
+#pragma once
 /* Sun-$Revision: 30.12 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
-
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
-
+# include "blockOop_inline.hh"
+# include "frame.hh"
+# include "nameDesc.hh"
+# include "nmethod_inline.hh"
+# include "pcDesc.hh"
+# include "scopeDesc.hh"
+# include "types.hh"
 
 // vframes are "virtual" frames (as opposed to physical stack frames)
 

@@ -5,8 +5,14 @@
 
 # ifdef SIC_COMPILER
 
-# pragma implementation "tracing.hh"
-# include "_tracing.cpp.incl"
+# include "byteVectorOop.hh"
+# include "cacheStub_inline.hh"
+# include "errorCodes.hh"
+# include "label_inline.hh"
+# include "slotsOop.hh"
+# include "tracing.hh"
+# include "universe_inline.hh"
+# include "zone.hh"
 
   TraceControl trc;
 

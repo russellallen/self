@@ -4,8 +4,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "countStub_i386.hh"
-# include "_countStub_i386.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "countStub.hh"
+# include "nmethod.hh"
+# include "recompile.hh"
+# include "zone.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

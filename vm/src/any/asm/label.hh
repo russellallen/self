@@ -1,13 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "blist.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // Labels are used by the assembler to represent the targets of branches,

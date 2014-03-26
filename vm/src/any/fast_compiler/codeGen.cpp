@@ -4,9 +4,15 @@
    See the LICENSE file for license information. */
 
 
-
-# pragma implementation "codeGen.hh"
-# include "_codeGen.cpp.incl"
+# if defined(__ppc__)
+# include "codeGen_inline_ppc.hh"
+# elif defined(__i386__)
+# include "codeGen_inline_i386.hh"
+# else
+# include "codeGen_inline_sparc.hh"
+# endif 
+# include "label_inline.hh"
+# include "scopeDescRecorder.hh"
 
 # ifdef FAST_COMPILER
 

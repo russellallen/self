@@ -5,8 +5,12 @@
    See the LICENSE file for license information. */
 
 
-# pragma implementation "countPattern_ppc.hh"
-# include "_countPattern_ppc.cpp.incl"
+# include "asm_inline.hh"
+# include "countPattern.hh"
+# include "fields.hh"
+# include "label_inline.hh"
+# include "regs.hh"
+# include "zone.hh"
 
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)

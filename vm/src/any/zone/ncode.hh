@@ -1,13 +1,14 @@
+#pragma once
 /* Sun-$Revision: 30.12 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "generation_inline.hh"
+# include "nmln.hh"
+# include "universe.hh"
    
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 // NCodeBase is the superclass of all things containing native code.
 

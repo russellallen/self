@@ -1,3 +1,4 @@
+#pragma once
 /* Sun-$Revision: 30.11 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -6,12 +7,12 @@
 // ScopeDescRecorder provides the interface to generate scopeDescs for
 // compiled methods (nmethods).
 // To retrieve the generated information, use nmethodScopes
+# include "blockOop_inline.hh"
+# include "key.hh"
+# include "scopeDesc.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 class  Vector;

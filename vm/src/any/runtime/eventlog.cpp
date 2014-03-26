@@ -3,8 +3,14 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "eventlog.hh"
-# include "_eventlog.cpp.incl"
+# include "allocation.hh"
+# include "debug.hh"
+# include "eventlog.hh"
+# include "generation_inline.hh"
+# include "smiOop.hh"
+# include "space_inline.hh"
+# include "stringOop.hh"
+# include "vmStrings.hh"
 
 EventLog* eventLog;
 

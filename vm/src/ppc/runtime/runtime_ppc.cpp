@@ -4,9 +4,15 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation  "runtime_ppc.hh"
 
-# include "_runtime_ppc.cpp.incl"
+# include "debug.hh"
+# include "frame.hh"
+# include "frame_format.hh"
+# include "label_inline.hh"
+# include "objVectorOop.hh"
+# include "process.hh"
+# include "regs.hh"
+# include "runtime.hh"
 
 
 bool check_saved_byte_map_base() {

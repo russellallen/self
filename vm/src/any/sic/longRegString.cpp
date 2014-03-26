@@ -3,9 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "longRegString.hh"
 
-# include "_longRegString.cpp.incl"
+# include "bitVector.hh"
+# include "longRegString.hh"
 
 
 # ifdef SIC_COMPILER

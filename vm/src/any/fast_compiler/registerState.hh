@@ -1,13 +1,14 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "blist.hh"
+# include "registerString.hh"
+# include "top.hh"
 
 # ifdef FAST_COMPILER
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // Keeps track of the current allocations state for the NIC
@@ -49,7 +50,13 @@ class RegisterState: public ResourceObj {
  private:
   void initialize_for_platform(fint maxTemps);
 
-# include "_registerState_pd.hh.incl"
+# if defined(__ppc__)
+# include "registerState_ppc.hh"
+# elif defined(__i386__)
+# include "registerState_i386.hh"
+# else
+# include "registerState_sparc.hh"
+# endif
 };
 
 

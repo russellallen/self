@@ -3,9 +3,18 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "complexLookup.hh"
-# include "_complexLookup.cpp.incl"
-
+# include "abstract_interpreter_inline.hh"
+# include "codeTable.hh"
+# include "complexLookup.hh"
+# include "diDesc.hh"
+# include "fcompiler.hh"
+# include "inlining.hh"
+# include "nprofiler.hh"
+# include "print.hh"
+# include "recompile.hh"
+# include "sicExpr.hh"
+# include "sicScope.hh"
+# include "vframe.hh"
 
 vframeLookup::vframeLookup( LookupType l,
                             oop rcvr,

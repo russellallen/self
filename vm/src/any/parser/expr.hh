@@ -1,11 +1,14 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "floatMap.hh"
+# include "floatOop.hh"
+# include "positionTable.hh"
+# include "str.hh"
+# include "stringMap.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // Exprs represent parsed Self objects that haven't been turned into real

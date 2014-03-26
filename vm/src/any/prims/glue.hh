@@ -1,11 +1,11 @@
+#pragma once
 /* Sun-$Revision: 30.11 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "dynLink.hh"
+# include "glueDefs.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 /* NOTE: use a wide (160 chars/line) window when editing this file. */

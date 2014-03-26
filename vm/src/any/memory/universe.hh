@@ -1,11 +1,18 @@
+#pragma once
 /* Sun-$Revision: 30.19 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "generation.hh"
+# include "nmln.hh"
+# include "os.hh"
+# include "process.hh"
+# include "rSet.hh"
+# include "space.hh"
+# include "spaceSize.hh"
+# include "stack.hh"
+# include "top.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 extern bool NeedScavenge;       // set when eden overflows

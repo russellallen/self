@@ -3,9 +3,17 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "sig_unix.hh"
 
-# include "_sig_unix.cpp.incl"
+# include "unixPrims.hh"
+# include "interruptedCtx.hh"
+# include "itimer.hh"
+# include "label_inline.hh"
+# include "os_includes.hh"
+# include "os_includes.hh"
+# include "quartzWindow.hh"
+# include "shell.hh"
+# include "sig.hh"
+# include "uncommonBranch.hh"
 
 int SignalInterface::currentNonTimerSignal = 0;
 int SignalInterface::currentTimerSignal = 0;

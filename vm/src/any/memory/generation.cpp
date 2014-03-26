@@ -3,10 +3,16 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "generation.hh"
-# pragma implementation "generation_inline.hh"
 
-# include "_generation.cpp.incl"
+# include "generation.hh"
+# include "generation_inline.hh"
+# include "glueSupport.hh"
+# include "interruptedCtx.hh"
+# include "monitorHooks.hh"
+# include "oop.hh"
+# include "slotsMapDeps.hh"
+# include "space_inline.hh"
+# include "universe.hh"
 
 
 void generation::print()

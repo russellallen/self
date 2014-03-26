@@ -1,11 +1,10 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "top.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // Handle "self-modifying" code on processors with separate I-caches.
@@ -26,7 +25,9 @@ class MachineCache {
   static void flush_instruction_cache_for_debugging();
   static void flush_instruction_cache_word(void* addr);             // flush one 32-bit word (instruction)
   static void flush_instruction_cache_range(void* start, void* end);// flush range [start, end)
-  
-# include "_machineCache_pd.hh.incl"  
+
+//# if TARGET_OS_FAMLIY == UNIX_FAMILY
+# include "machineCache_unix.hh"
+//# endif
 
 };

@@ -1,11 +1,21 @@
+#pragma once
 /* Sun-$Revision: 30.11 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "branchSet.hh"
+# include "byteVectorMap.hh"
+# include "byteVectorOop.hh"
+# include "debug.hh"
+# include "kinds.hh"
+# include "labelSet.hh"
+# include "objVectorMap.hh"
+# include "objVectorOop.hh"
+# include "oop_inline.hh"
+# include "preserve.hh"
+# include "stringMap.hh"
+# include "stringOop.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # define OPWIDTH        4

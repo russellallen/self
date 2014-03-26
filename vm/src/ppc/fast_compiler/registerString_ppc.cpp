@@ -4,9 +4,9 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "registerString_ppc.hh"
 
-# include "_registerString_ppc.cpp.incl"
+# include "bitVector.hh"
+# include "registerString.hh"
 
 # ifdef FAST_COMPILER
 

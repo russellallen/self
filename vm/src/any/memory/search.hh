@@ -1,11 +1,9 @@
+#pragma once
 /* Sun-$Revision: 30.8 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
-
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
+# include "types.hh"
 
 
 typedef bool (*match_func)( int32* matching_cell, int32 hit_num);
@@ -36,4 +34,11 @@ extern "C" {
   extern int32 Vectorfind_max_chunk_size;
 }
 
-# include "_search_pd.hh.incl"  
+# if defined(__ppc__)
+# include "search_ppc.hh"
+# elif defined(__i386__)
+# include "search_i386.hh"
+# else
+# include "search_sparc.hh"
+# endif
+

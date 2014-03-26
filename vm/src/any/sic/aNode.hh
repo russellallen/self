@@ -1,16 +1,16 @@
+#pragma once
 /* Sun-$Revision: 30.8 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "blist.hh"
+# include "slist.hh"
 
 // AbstractNodes are nodes in a (flow-)graph.  Used by the SIC.
 // This should really be an abstract base class that could be mixed
 // in, but our beloved C++ makes this very hard to do (e.g.
 // can't cast a virtual base ptr to the concrete class).
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # ifdef SIC_COMPILER

@@ -1,14 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "types.hh"
 
 /* control stuff for instruction tracing with shade */
 /* C not C++ for compatibility with shade */
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # define NTRBUF 50          /* size of trace buffer */

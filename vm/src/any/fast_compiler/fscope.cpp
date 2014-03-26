@@ -3,8 +3,21 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "fscope.hh"
-# include "_fscope.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "allocation.hh"
+# include "byteCodes.hh"
+# include "byteVectorOop.hh"
+# include "codeGen.hh"
+# include "codeGen_inline_i386.hh"
+# include "codeSlotsMap.hh"
+# include "fcompiler.hh"
+# include "fscope.hh"
+# include "label_inline.hh"
+# include "prim.hh"
+# include "registerState.hh"
+# include "registerString.hh"
+# include "scopeDescRecorder.hh"
+# include "vframe.hh"
 
 # ifdef FAST_COMPILER
 

@@ -3,9 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "asyncMalloc.hh"
-# include "_asyncMalloc.cpp.incl"
-  
+# include "asyncMalloc.hh"
+# include "debug.hh"
+ 
 AsyncAllocator::AsyncAllocator(int32 elemSize, int32 bufSize) {
   size = elemSize; capacity = n = bufSize;
   // the buffer has size 2*bufSize, but we try to keep it half-full

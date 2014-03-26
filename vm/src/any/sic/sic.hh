@@ -1,11 +1,12 @@
+#pragma once
 /* Sun-$Revision: 30.11 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "aCompiler.hh"
+# include "simpleLookup_inline.hh"
+# include "slist.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // The SIC is yet another Self compiler ("simple inlining compiler" or 
@@ -112,7 +113,13 @@
     void print_code(bool suppressTrivial);
     void print_vcg_code(bool suppressTrivial);
 
-# include "_sic_pd.hh.incl"
+# if defined(__ppc__)
+# include "sic_ppc.hh"
+# elif defined(__i386__)
+# include "sic_i386.hh"
+# else
+# include "sic_sparc.hh"
+# endif
 
   };
 

@@ -5,9 +5,24 @@
 
 # ifdef SIC_COMPILER
   
-# pragma implementation "preg.hh"
-# include "_preg.cpp.incl"
-  
+# include "abstract_interpreter_inline.hh"
+# include "asm.hh"
+# include "basicBlock_inline.hh"
+# include "blockOop_inline.hh"
+# include "defUse_inline.hh"
+# include "nameDesc.hh"
+# include "node.hh"
+# include "nodeGen.hh"
+# include "objVectorOop.hh"
+# include "preg.hh"
+# include "process.hh"
+# include "regAlloc.hh"
+# include "regs.hh"
+# include "scopeDescRecorder.hh"
+# include "sicExpr.hh"
+# include "sicScope.hh"
+# include "sicSplit.hh"
+ 
   int32 PReg::currentNo = 0;
   int32 BlockPReg::numBlocks = 0;
   static ConstPRegBList* constants = 0;

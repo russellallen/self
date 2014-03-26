@@ -3,13 +3,18 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "os_mac.hh"
-# pragma implementation "os_unix.hh"
-# pragma implementation "os.hh"
-# pragma implementation "os_includes.hh"
 
 
-# include "_os.cpp.incl"
+# include "frame.hh"
+# include "glueSupport.hh"
+# include "interruptedCtx.hh"
+# include "itimer.hh"
+# include "label_inline.hh"
+# include "objVectorOop.hh"
+# include "os.hh"
+# include "os_includes.hh"
+# include "selfMonitor.hh"
+# include "universe.hh"
 
 extern "C" {
   int uname(struct utsname *name);

@@ -5,8 +5,7 @@
 
 # ifdef SIC_COMPILER
 
-# pragma implementation "bitVector.hh"
-# include "_bitVector.cpp.incl"
+# include "bitVector.hh"
 
   bool BitVector::unionWith(BitVector* other) {
     if (length < other->length) {

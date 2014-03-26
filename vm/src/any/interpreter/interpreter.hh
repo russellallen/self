@@ -1,11 +1,14 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "abstract_interpreter_inline.hh"
+# include "objVectorOop.hh"
+# include "oopClosures.hh"
+# include "oop_inline.hh"
+# include "vframe.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 extern oop sneaky_method_argument_to_interpret;

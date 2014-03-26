@@ -5,9 +5,19 @@
 
 // Part of the nprofiler creating the self level call graph 
 
-# pragma implementation "nprofiler.copygraph.hh"
 
-# include "_nprofiler.copygraph.cpp.incl"
+# include "blockOop_inline.hh"
+# include "callgraph.hh"
+# include "enumeration.hh"
+# include "label_inline.hh"
+# include "nprofiler.hh"
+# include "objVectorOop.hh"
+# include "oopsOop.hh"
+# include "preserve.hh"
+# include "slotDesc.hh"
+# include "space_inline.hh"
+# include "stringOop.hh"
+# include "stringTable.hh"
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

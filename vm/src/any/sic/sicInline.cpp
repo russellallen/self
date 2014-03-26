@@ -5,9 +5,28 @@
 
 # ifdef SIC_COMPILER
 
-# pragma implementation "sicInline.hh"
 
-# include "_sicInline.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "asm.hh"
+# include "blockMap.hh"
+# include "codeSlotsMap.hh"
+# include "complexLookup.hh"
+# include "inlining.hh"
+# include "node.hh"
+# include "nodeGen.hh"
+# include "oop_inline.hh"
+# include "preg.hh"
+# include "prim.hh"
+# include "print.hh"
+# include "recompile.hh"
+# include "registerString.hh"
+# include "rscope.hh"
+# include "sic.hh"
+# include "sicExpr.hh"
+# include "sicScope_inline.hh"
+# include "slotRef.hh"
+# include "spaceSize.hh"
+# include "stringOop.hh"
 
   static fint msgCost = 0;      // estimated cost of last inlining candidate
   

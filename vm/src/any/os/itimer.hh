@@ -1,11 +1,12 @@
+#pragma once
 /* Sun-$Revision: 30.13 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "debug.hh"
+# include "sig.hh"
+# include "top.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // IntervalTimers manage all periodical "tasks".  (The VM can register
@@ -114,8 +115,10 @@ class IntervalTimer {
   void move_entry(TimerEntry* from, TimerEntry* to);
   
   smi setTimer_prim(smi ms, doFn tick_fn);
-  
-# include "_itimer_pd.hh.incl"
+ 
+//# if TARGET_OS_FAMLIY == UNIX_FAMILY 
+# include "itimer_unix.hh"
+//# endif
 
 };
 

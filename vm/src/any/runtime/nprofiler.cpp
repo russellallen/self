@@ -3,8 +3,28 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "nprofiler.hh"
-# include "_nprofiler.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "allocation.hh"
+# include "byteCodes.hh"
+# include "cacheStub_inline.hh"
+# include "callgraph.hh"
+# include "codeSlotsMap.hh"
+# include "fcompiler.hh"
+# include "frame.hh"
+# include "interruptedCtx.hh"
+# include "itimer.hh"
+# include "label_inline.hh"
+# include "nmethod_inline.hh"
+# include "nprofiler.hh"
+# include "print.hh"
+# include "processOop.hh"
+# include "scopeDesc.hh"
+# include "selfMonitor.hh"
+# include "sic.hh"
+# include "space_inline.hh"
+# include "stringTable.hh"
+# include "universe.hh"
+# include "zone.hh"
 
 
 bool profilerSemaphore = false;

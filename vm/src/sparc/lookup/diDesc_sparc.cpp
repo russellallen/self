@@ -3,8 +3,8 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "diDesc_sparc.hh"
-# include "_diDesc_sparc.cpp.incl"
+# include "diDesc.hh"
+# include "fields.hh"
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

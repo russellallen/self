@@ -3,8 +3,23 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "hprofiler.hh"
-# include "_hprofiler.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "allocation.hh"
+# include "asyncMalloc.hh"
+# include "fcompiler.hh"
+# include "frame.hh"
+# include "hprofiler.hh"
+# include "interruptedCtx.hh"
+# include "itimer.hh"
+# include "label_inline.hh"
+# include "nmethod_inline.hh"
+# include "print.hh"
+# include "processOop.hh"
+# include "selfMonitor.hh"
+# include "sic.hh"
+# include "space_inline.hh"
+# include "universe.hh"
+# include "zone.hh"
 
 HProfiler* hprofiler;
 

@@ -1,11 +1,14 @@
+#pragma once
 /* Sun-$Revision: 30.11 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "countStub.hh"
+# include "nmln.hh"
+# include "timer.hh"
+# include "trapdoors.hh"
+# include "zoneHeap.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 

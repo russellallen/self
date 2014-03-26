@@ -1,11 +1,10 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "frame.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 
@@ -28,5 +27,11 @@ class FrameIterator: public StackObj {
   void do_compiled();
   void do_patched_frame_saved_outgoing_args();
 
-  # include "_frame_iterator_pd.hh.incl"
+# if defined(__ppc__)
+# include "frame_iterator_ppc.hh"
+# elif defined(__i386__)
+# include "frame_iterator_i386.hh"
+# else
+# include "frame_iterator_sparc.hh"
+# endif
 };

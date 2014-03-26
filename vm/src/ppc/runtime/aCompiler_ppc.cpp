@@ -4,8 +4,8 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "aCompiler_ppc.hh"
-# include "_aCompiler_ppc.cpp.incl"
+# include "aCompiler.hh"
+# include "label_inline.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

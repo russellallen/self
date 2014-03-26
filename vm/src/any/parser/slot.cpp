@@ -3,8 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "slot.hh"
-# include "_slot.cpp.incl"
+# include "allocation.hh"
+# include "generation_inline.hh"
+# include "parser.hh"
+# include "scanner.hh"
+# include "slot.hh"
+# include "slotList.hh"
+# include "space_inline.hh"
 
 # define CHECK(e)                                                             \
     if ((e) == 0) return 0

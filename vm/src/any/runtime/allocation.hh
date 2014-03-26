@@ -1,11 +1,12 @@
+#pragma once
 /* Sun-$Revision: 30.14 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "debugPrintable.hh"
+# include "os_includes.hh"
+# include "top.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 

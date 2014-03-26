@@ -5,8 +5,13 @@
 
 # ifdef SIC_COMPILER
 
-# pragma implementation "sicSplit.hh"
-# include "_sicSplit.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "node.hh"
+# include "nodeGen.hh"
+# include "sic.hh"
+# include "sicExpr.hh"
+# include "sicScope.hh"
+# include "sicSplit.hh"
 
   const uint32 SplitSig::LevelMask = 0xf;
 

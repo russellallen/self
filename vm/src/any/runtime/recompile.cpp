@@ -3,8 +3,32 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "recompile.hh"
-# include "_recompile.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "allocation.hh"
+# include "cacheStub_inline.hh"
+# include "codeSlotsMap.hh"
+# include "complexLookup.hh"
+# include "countStub.hh"
+# include "fields.hh"
+# include "frame.hh"
+# include "glueSupport.hh"
+# include "inlining.hh"
+# include "itimer.hh"
+# include "nmethod_inline.hh"
+# include "node.hh"
+# include "nprofiler.hh"
+# include "objVectorOop.hh"
+# include "os_includes.hh"
+# include "prim.hh"
+# include "recompile.hh"
+# include "registerLocator.hh"
+# include "rscope.hh"
+# include "selfMonitor.hh"
+# include "sicScope.hh"
+# include "spaceSize.hh"
+# include "space_inline.hh"
+# include "uncommonBranch.hh"
+# include "vframeOop.hh"
 
 nmethod* recompilee = NULL;
 

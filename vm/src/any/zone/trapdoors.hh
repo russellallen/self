@@ -1,12 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.8 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "regs.hh"
+# include "runtime.hh"
+# include "top.hh"
 
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // Some machines (e.g. PPC) place a limit on fast branch spans
@@ -32,5 +33,11 @@ class Trapdoors: public CHeapObj {
   
   pc_t  follow_trapdoors(pc_t); // if arg is trapdoor, return its destination
   
-  # include "_trapdoors_pd.hh.incl"
+# if defined(__ppc__)
+# include "trapdoors_ppc.hh"
+# elif defined(__i386__)
+# include "trapdoors_i386.hh"
+# else
+# include "trapdoors_sparc.hh"
+# endif
 };

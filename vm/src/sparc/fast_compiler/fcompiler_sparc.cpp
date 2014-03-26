@@ -4,8 +4,8 @@
    See the LICENSE file for license information. */
 
 
-# pragma implementation "fcompiler_sparc.hh"
-# include "_fcompiler_sparc.cpp.incl"
+# include "codeGen.hh"
+# include "fcompiler.hh"
 
 # ifdef FAST_COMPILER
 

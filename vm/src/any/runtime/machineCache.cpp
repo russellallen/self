@@ -3,8 +3,12 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "machineCache.hh"
-# include "_machineCache.cpp.incl"
+# include "label_inline.hh"
+# include "machineCache.hh"
+# include "runtime.hh"
+# include "space_inline.hh"
+# include "universe.hh"
+# include "zone.hh"
 
 // define FLUSH_ALL (for debugging) to flush the complete I cache of nmethods
 // and PICs very regularly

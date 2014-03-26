@@ -3,8 +3,19 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "debug.hh"
-# include "_debug.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "debug.hh"
+# include "fprofiler.hh"
+# include "hprofiler.hh"
+# include "interruptedCtx.hh"
+# include "itimer.hh"
+# include "label_inline.hh"
+# include "map.hh"
+# include "monitor.hh"
+# include "sic.hh"
+# include "sig.hh"
+# include "signalBlocker.hh"
+# include "space_inline.hh"
 
 # define DefineFlags(                                                         \
     flagName, flagType, flagTypeName, primReturnType,                         \

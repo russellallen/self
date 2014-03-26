@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "objVectorMap.hh"
-# include "_objVectorMap.cpp.incl"
+# include "enumeration.hh"
+# include "generation_inline.hh"
+# include "objVectorMap.hh"
+# include "space_inline.hh"
 
 oop objVectorMap::clone(oop obj, bool mustAllocate, oop genObj) {
   assert_objVector(obj, "not an obj vector");

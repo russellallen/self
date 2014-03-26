@@ -1,11 +1,10 @@
+#pragma once
 /* Sun-$Revision: 30.8 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "sig.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 
@@ -20,7 +19,9 @@ class SignalBlocker {
  public:
    SignalBlocker(SignalBlockerType sbt = block_all);
   ~SignalBlocker();
-  
-# include "_signalBlocker_pd.hh.incl"  
+ 
+//# if TARGET_OS_FAMLIY == UNIX_FAMILY 
+# include "signalBlocker_unix.hh"
+//# endif
 };
 

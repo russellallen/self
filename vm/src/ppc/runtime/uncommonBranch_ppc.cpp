@@ -4,9 +4,12 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "uncommonBranch_ppc.hh"
 
-# include "_uncommonBranch_ppc.cpp.incl" 
+# include "allocation.hh"
+# include "fields.hh"
+# include "label_inline.hh"
+# include "nmethod.hh"
+# include "uncommonBranch.hh"
 
 
 # if defined(SIC_COMPILER)

@@ -4,9 +4,22 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "disasm_ppc.hh"
 
-# include "_disasm_ppc.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "blockOop_inline.hh"
+# include "cacheStub_inline.hh"
+# include "codeSlotsMap.hh"
+# include "countStub.hh"
+# include "disasm.hh"
+# include "fields.hh"
+# include "frame_format.hh"
+# include "label_inline.hh"
+# include "nmethod_inline.hh"
+# include "oop_inline.hh"
+# include "pcDesc.hh"
+# include "prim.hh"
+# include "scopeDesc.hh"
+# include "sendDesc.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

@@ -1,11 +1,10 @@
+#pragma once
 /* Sun-$Revision: 30.11 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "oopsOop.hh"
 
-# ifdef INTERFACE_PRAGMAS
-#  pragma interface
-# endif
 
 
 static const fint enclosed_map_offset = sizeof(oopsOopClass) / oopSize; // words from start of object to embedded map

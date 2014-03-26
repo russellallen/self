@@ -3,8 +3,17 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "allocation.hh"
-# include "_allocation.cpp.incl"
+# include "allocation.hh"
+# include "debug.hh"
+# include "generation_inline.hh"
+# include "hprofiler.hh"
+# include "interruptedCtx.hh"
+# include "monitorHooks.hh"
+# include "nprofiler.hh"
+# include "os.hh"
+# include "process.hh"
+# include "sig.hh"
+# include "space_inline.hh"
 
 
 bool isNull(VMObj* p) {

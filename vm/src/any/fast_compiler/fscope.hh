@@ -1,13 +1,17 @@
+#pragma once
 /* Sun-$Revision: 30.12 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "abstract_interpreter_inline.hh"
+# include "blist.hh"
+# include "clist.hh"
+# include "label_inline.hh"
+# include "types.hh"
+# include "vframe.hh"
 
 # ifdef FAST_COMPILER
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // A FScope represents the current state of a Self scope during inlining

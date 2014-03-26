@@ -1,11 +1,21 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "abstract_interpreter.hh"
+# include "byteCodes.hh"
+# include "byteVectorOop.hh"
+# include "clist.hh"
+# include "errorCodes.hh"
+# include "kinds.hh"
+# include "label.hh"
+# include "mirrorOop.hh"
+# include "objVectorOop.hh"
+# include "scanner.hh"
+# include "slotsMap.hh"
+# include "slotsOop.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 class codeSlotsMap: public slotsMap {

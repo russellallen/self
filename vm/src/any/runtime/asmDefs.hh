@@ -1,7 +1,9 @@
+#pragma once
 /* Sun-$Revision: 30.8 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "macros.hh"
 
 /* asm definitions for cpp */
 
@@ -24,4 +26,11 @@
 # define badOop 7
 # endif
 
-# include "_asmDefs_pd.hh.incl"
+# if defined(__ppc__)
+# include "asmDefs_gcc_ppc.hh"
+# elif defined(__i386__)
+# include "asmDefs_gcc_i386.hh"
+# else
+# include "asmDefs_gcc_sparc.hh"
+# endif
+

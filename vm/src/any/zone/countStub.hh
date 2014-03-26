@@ -1,14 +1,17 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "blist.hh"
+# include "cacheStub.hh"
+# include "countPattern.hh"
+# include "kinds.hh"
+# include "ncode.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // A CountStub can be inserted between caller and callee nmethods to keep
@@ -177,7 +180,13 @@ CountStub* findCountStub(void* addr);   // addr must point into a count stub
 void shiftCounts(int32 delta);
 
 
-# include "_countStub_pd.hh.incl"
+# if defined(__ppc__)
+# include "countStub_ppc.hh"
+# elif defined(__i386__)
+# include "countStub_i386.hh"
+# else
+# include "countStub_sparc.hh"
+# endif
 
 
 # endif  // defined(FAST_COMPILER) || defined(SIC_COMPILER)

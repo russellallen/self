@@ -1,3 +1,4 @@
+#pragma once
 # ifdef __i386__
 /* Sun-$Revision: 1.6 $ */
 
@@ -11,9 +12,6 @@
 // WARNING: Therefore conditional jumps, etc. behave the opposite of what you might expect:
 // ja jumps if the SECOND operand is above the first.
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)

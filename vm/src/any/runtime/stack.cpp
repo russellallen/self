@@ -3,8 +3,21 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "stack.hh"
-# include "_stack.cpp.incl"
+# include "allocation.hh"
+# include "enumeration.hh"
+# include "frame.hh"
+# include "interpreter.hh"
+# include "interruptedCtx.hh"
+# include "label_inline.hh"
+# include "prim.hh"
+# include "process.hh"
+# include "registerLocator.hh"
+# include "sendDesc.hh"
+# include "shell.hh"
+# include "stack.hh"
+# include "stringMap.hh"
+# include "vframe.hh"
+# include "vframeOop.hh"
 
 
 # define MAGIC  123456789

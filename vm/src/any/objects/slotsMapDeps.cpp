@@ -3,8 +3,19 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "slotsMapDeps.hh"
-# include "_slotsMapDeps.cpp.incl"
+# include "assignmentOop.hh"
+# include "byteVectorOop.hh"
+# include "debug.hh"
+# include "label_inline.hh"
+# include "mapOop.hh"
+# include "mapTable.hh"
+# include "mirrorOop.hh"
+# include "slotsMap.hh"
+# include "space_inline.hh"
+# include "stringMap.hh"
+# include "stringOop.hh"
+# include "vmStrings.hh"
+# include "zone.hh"
 
 
 # define FOR_EACH_SLOT_DEP(d)                                           \

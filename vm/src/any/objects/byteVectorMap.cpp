@@ -3,8 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "byteVectorMap.hh"
-# include "_byteVectorMap.cpp.incl"
+# include "byteVectorMap.hh"
+# include "enumeration.hh"
+# include "generation_inline.hh"
+# include "smiOop.hh"
+# include "space_inline.hh"
 
 oop byteVectorMap::clone(oop obj, bool mustAllocate, oop genObj) {
   assert_byteVector(obj, "not a byte vector");

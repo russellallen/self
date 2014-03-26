@@ -3,8 +3,16 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "errorCodes.hh"
-# include "_errorCodes.cpp.incl"
+# include "allocation.hh"
+# include "asmErrorCodes.hh"
+# include "errorCodes.hh"
+# include "generation_inline.hh"
+# include "macros.hh"
+# include "markOop.hh"
+# include "space_inline.hh"
+# include "stringMap.hh"
+# include "types.hh"
+# include "vmStrings.hh"
 
 
 void ErrorCodes::init() {

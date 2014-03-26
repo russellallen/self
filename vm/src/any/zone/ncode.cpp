@@ -3,8 +3,15 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "ncode.hh"
-# include "_ncode.cpp.incl"
+# include "addrDesc.hh"
+# include "allocation.hh"
+# include "cacheStub_inline.hh"
+# include "fields.hh"
+# include "label_inline.hh"
+# include "ncode.hh"
+# include "nmethod_inline.hh"
+# include "universe_inline.hh"
+# include "zone.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

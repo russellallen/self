@@ -3,8 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "scanner.hh"
-# include "_scanner.cpp.incl"
+# include "files.hh"
+# include "generation_inline.hh"
+# include "interruptedCtx.hh"
+# include "os.hh"
+# include "scanner.hh"
+# include "space_inline.hh"
+
 
 unsigned char c_type[] = {
   /* EOF  */  _O | _O | _O | _O | _O | _O | _O,

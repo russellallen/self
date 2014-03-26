@@ -3,9 +3,21 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "simpleLookup.hh"
-# pragma implementation "simpleLookup_inline.hh"
-# include "_simpleLookup.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "allocation.hh"
+# include "byteCodes.hh"
+# include "cacheStub_inline.hh"
+# include "codeSlotsMap.hh"
+# include "debug.hh"
+# include "label_inline.hh"
+# include "print.hh"
+# include "process.hh"
+# include "selfMonitor.hh"
+# include "simpleLookup_inline.hh"
+# include "slotRef.hh"
+# include "stringMap.hh"
+# include "stringOop.hh"
+# include "target.hh"
 
 
 void simpleLookup::assert_static_selector() {

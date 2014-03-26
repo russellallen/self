@@ -1,11 +1,12 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "machineCache.hh"
+# include "machineCache.hh"
+# include "top.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
@@ -104,7 +105,13 @@ class addrDesc {
   
   void  print(nmethod* c);
   
-  # include "_addrDesc_pd.hh.incl"
+# if defined(__ppc__)
+# include "addrDesc_ppc.hh"
+# elif defined(__i386__)
+# include "addrDesc_i386.hh"
+# else
+# include "addrDesc_sparc.hh"
+# endif
 };
 
 # endif // FAST_COMPILER or SIC_COMPILER

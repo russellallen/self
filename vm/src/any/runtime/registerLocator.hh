@@ -1,11 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "regs.hh"
+# include "regs.hh"
+# include "top.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // On machines that use callee-save registers such as the PPC,
@@ -43,5 +45,11 @@ class RegisterLocator: public ResourceObj {
   bool are_all_defined();
   RegisterLocator* for_copied_frame(frame* f);
   
-# include "_registerLocator_pd.hh.incl"
+# if defined(__ppc__)
+# include "registerLocator_ppc.hh"
+# elif defined(__i386__)
+# include "registerLocator_i386.hh"
+# else
+# include "registerLocator_sparc.hh"
+# endif
 };

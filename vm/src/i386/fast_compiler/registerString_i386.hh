@@ -1,3 +1,4 @@
+#pragma once
 # ifdef __i386__
 /* Sun-$Revision: 1.4 $ */
 
@@ -6,9 +7,6 @@
 
 # ifdef FAST_COMPILER
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 

@@ -1,11 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.12 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
-
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
+# include "addrDesc.hh"
+# include "asm.hh"
+# include "ncode.hh"
+# include "nmln.hh"
+# include "zoneHeap.hh"
 
 
 
@@ -151,7 +153,13 @@ class CacheStub : public OopNCode {
   friend CacheStub* StubFromNmln(nmln* l);
 #endif
 
-# include "_cacheStub_pd.hh.incl"
+# if defined(__ppc__)
+# include "cacheStub_ppc.hh"
+# elif defined(__i386__)
+# include "cacheStub_i386.hh"
+# else
+# include "cacheStub_sparc.hh"
+# endif
 };
 
 NCodeBase* findStub(void* addr);

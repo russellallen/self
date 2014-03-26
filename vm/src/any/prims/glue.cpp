@@ -2,9 +2,21 @@
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "unixPrims.hh"
+# include "abstract_interpreter_inline.hh"
+# include "byteCodes.hh"
+# include "fctProxyOop.hh"
+# include "fprofiler.hh"
+# include "glue.hh"
+# include "hprofiler.hh"
+# include "itimer.hh"
+# include "mirrorOop.hh"
+# include "miscPrims.hh"
+# include "processOop.hh"
+# include "profilerOop.hh"
+# include "recompile.hh"
+# include "sic.hh"
 
-# pragma implementation "glue.hh"
-# include "_glue.cpp.incl"
 extern "C" {
   double ceil(double x);
   double floor(double x);

@@ -4,9 +4,15 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "genHelper_ppc.hh"
 
-# include "_genHelper_ppc.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "asm_inline.hh"
+# include "genHelper.hh"
+# include "preg.hh"
+# include "recompile.hh"
+# include "sic.hh"
+# include "slotRef.hh"
+# include "target.hh"
 
 # if defined(SIC_COMPILER)
 

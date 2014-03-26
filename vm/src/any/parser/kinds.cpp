@@ -3,8 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "kinds.hh"
-# include "_kinds.cpp.incl"
+# include "allocation.hh"
+# include "kinds.hh"
+# include "process.hh"
 
 void printLookupType(LookupType l) {
   lprintf(lookupTypeName(l));

@@ -1,11 +1,15 @@
+#pragma once
 /* Sun-$Revision: 30.12 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "blist.hh"
+# include "regs.hh"
+# include "stack.hh"
+# include "top.hh"
+# include "types.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // A Process is the VM-level process descriptor of a Self process;

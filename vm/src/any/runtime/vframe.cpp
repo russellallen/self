@@ -3,8 +3,23 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "vframe.hh"
-# include "_vframe.cpp.incl"
+# include "allocation.hh"
+# include "byteCodes.hh"
+# include "codeSlotsMap.hh"
+# include "debug.hh"
+# include "enumeration.hh"
+# include "fields.hh"
+# include "generation_inline.hh"
+# include "interpreter.hh"
+# include "recompile.hh"
+# include "registerLocator.hh"
+# include "search.hh"
+# include "sendDesc.hh"
+# include "space_inline.hh"
+# include "table.hh"
+# include "vframe.hh"
+# include "vframeOop.hh"
+# include "vmStrings.hh"
 
 # define CHECK                                                                \
   if (e->is_target(obj)) {                                                    \

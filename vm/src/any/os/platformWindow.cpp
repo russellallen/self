@@ -3,11 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "platformWindow_unix.hh"
-# pragma implementation "platformWindow.hh"
 
 
-# include "_platformWindow.cpp.incl"
+# include "platformWindow.hh"
+# include "allocation.hh"
+# include "os.hh"
+# include "top.hh"
+# include "x_includes.hh"
 
 // Platform-independant functions:
 

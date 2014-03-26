@@ -5,8 +5,18 @@
 
 # ifdef SIC_COMPILER
 
-# pragma implementation "nodeGen.hh"
-# include "_nodeGen.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "asm.hh"
+# include "basicBlock_inline.hh"
+# include "fields.hh"
+# include "nodeGen.hh"
+# include "node_inline.hh"
+# include "preg.hh"
+# include "prim.hh"
+# include "sic.hh"
+# include "sicExpr.hh"
+# include "sicScope.hh"
+# include "slotRef.hh"
 
 # define APPEND(node)      current = current->append (node)
 # define APPEND1(node)     current = current->append1(node)

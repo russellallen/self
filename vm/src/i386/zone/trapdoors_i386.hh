@@ -1,3 +1,4 @@
+#pragma once
 # ifdef __i386__
 /* Sun-$Revision: 1.4 $ */
 

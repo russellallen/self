@@ -3,8 +3,19 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "miscPrims.hh"
-# include "_miscPrims.cpp.incl"
+# include "allocation.hh"
+# include "byteVectorOop.hh"
+# include "errorCodes.hh"
+# include "glueSupport.hh"
+# include "label_inline.hh"
+# include "miscPrims.hh"
+# include "objVectorOop.hh"
+# include "os.hh"
+# include "prim.hh"
+# include "shell.hh"
+# include "space_inline.hh"
+# include "stringMap.hh"
+# include "vmStrings.hh"
 
 # ifndef  NO_LONG_LONG
   typedef          long long int64;

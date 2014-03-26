@@ -1,12 +1,18 @@
+#pragma once
 /* Sun-$Revision: 30.13 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "codeTable.hh"
+# include "frame.hh"
+# include "key.hh"
+# include "ncode.hh"
+# include "nmethodScopes.hh"
+# include "nmln.hh"
+# include "sendDesc.hh"
+# include "zone.hh"
 
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
@@ -248,7 +254,13 @@ class nmethod : public OopNCode {
     nmethod* nm = (nmethod*) insts - 1;
     if (isNMethod(nm)) return nm; else return findNMethod(nm);
   }
-# include "_nmethod_pd.hh.incl"
+# if defined(__ppc__)
+# include "nmethod_ppc.hh"
+# elif defined(__i386__)
+# include "nmethod_i386.hh"
+# else
+# include "nmethod_sparc.hh"
+# endif
 
 };
 

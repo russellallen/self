@@ -3,10 +3,16 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "blockOop.hh"
-# pragma implementation "blockOop_inline.hh"
 
-# include "_blockOop.cpp.incl"
+# include "blockOop_inline.hh"
+# include "frame.hh"
+# include "interpreter.hh"
+# include "interruptedCtx.hh"
+# include "label_inline.hh"
+# include "nlrSupport.hh"
+# include "stack.hh"
+# include "vframe.hh"
+
 
 frame* blockOopClass::scope(bool orNone) {
   UsedOnlyInAssert(orNone);

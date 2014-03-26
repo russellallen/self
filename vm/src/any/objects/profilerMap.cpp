@@ -3,8 +3,15 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "profilerMap.hh"
-# include "_profilerMap.cpp.incl"
+# include "byteVectorOop.hh"
+# include "debug.hh"
+# include "enumeration.hh"
+# include "label_inline.hh"
+# include "mapOop.hh"
+# include "mirrorOop.hh"
+# include "profilerMap.hh"
+# include "vmStrings.hh"
+# include "zone.hh"
 
 profilerOop profilerMap::create_profiler() {
   slotList* slots = new slotList(VMString[PARENT], 

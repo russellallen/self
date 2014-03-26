@@ -3,14 +3,33 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "oop.hh"
-# pragma implementation "oop_inline.hh"
-# pragma implementation "assignmentOop.hh"
-# pragma implementation "bits.hh"
-# pragma implementation "config.hh"
-# pragma implementation "macros.hh"
 
-# include "_oop.cpp.incl"
+# include "allocation.hh"
+# include "complexLookup.hh"
+# include "countStub.hh"
+# include "debug.hh"
+# include "enumeration.hh"
+# include "files.hh"
+# include "fprofiler.hh"
+# include "glueSupport.hh"
+# include "hprofiler.hh"
+# include "interpreter.hh"
+# include "label_inline.hh"
+# include "mapTable.hh"
+# include "mirrorOop.hh"
+# include "nlrSupport.hh"
+# include "nprofiler.hh"
+# include "os_includes.hh"
+# include "process.hh"
+# include "scanner.hh"
+# include "selfMonitor.hh"
+# include "shell.hh"
+# include "sic.hh"
+# include "slotsOop.hh"
+# include "stringMap.hh"
+# include "universe_inline.hh"
+# include "vmStrings.hh"
+# include "zone.hh"
 
 oop* oopClass::get_slot_data_address_if_present(const char* name, bool &inObj) {
   return get_slot_data_address_if_present(new_string(name), inObj); }

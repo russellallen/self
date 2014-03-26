@@ -5,8 +5,23 @@
 
 
 
-# pragma implementation "processOop.hh"
-# include "_processOop.cpp.incl"
+# include "allocation.hh"
+# include "asserts.hh"
+# include "blist.hh"
+# include "glueSupport.hh"
+# include "interruptedCtx.hh"
+# include "label_inline.hh"
+# include "mirrorOop.hh"
+# include "nlrSupport.hh"
+# include "nprofiler.hh"
+# include "objVectorOop.hh"
+# include "os_includes.hh"
+# include "process.hh"
+# include "processOop.hh"
+# include "sig.hh"
+# include "stringOop.hh"
+# include "types.hh"
+# include "vframe.hh"
 
 oop processOopClass::NewProcess_prim(smi stackSize, oop rcvr, stringOop sel, 
                                      objVectorOop args, void *FH) {

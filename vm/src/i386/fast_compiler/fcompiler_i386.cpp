@@ -5,8 +5,8 @@
    See the LICENSE file for license information. */
 
 
-# pragma implementation "fcompiler_i386.hh"
-# include "_fcompiler_i386.cpp.incl"
+# include "codeGen.hh"
+# include "fcompiler.hh"
 
 # ifdef FAST_COMPILER
  

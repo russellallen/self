@@ -3,8 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "vframeOop.hh"
-# include "_vframeOop.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "allocation.hh"
+# include "codeSlotsMap.hh"
+# include "kinds.hh"
+# include "label_inline.hh"
+# include "vframe.hh"
+# include "vframeOop.hh"
 
 // vframeOops (vfos for short) contain a pointer to the corresponding stack
 // frame.  Unfortunately, we can't just store the frame* pointer bacause

@@ -3,9 +3,15 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "genHelper.hh"
 
-# include "_genHelper.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "allocation.hh"
+# include "basicBlock_inline.hh"
+# include "frame_format.hh"
+# include "genHelper.hh"
+# include "label_inline.hh"
+# include "preg.hh"
+# include "regs.hh"
 
 
 # if defined(SIC_COMPILER)

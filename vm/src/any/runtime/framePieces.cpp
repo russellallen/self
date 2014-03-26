@@ -4,7 +4,7 @@
    See the LICENSE file for license information. */
 
 
-# pragma implementation "framePieces.hh"
 
-# include "_framePieces.cpp.incl"
+# include "framePieces_inline.hh"
+# include "label_inline.hh"
 

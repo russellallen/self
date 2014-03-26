@@ -5,8 +5,10 @@
    See the LICENSE file for license information. */
 
 
-# pragma implementation "sic_ppc.hh"
-# include "_sic_ppc.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "regAlloc.hh"
+# include "sic.hh"
+# include "sicScope.hh"
 
 # ifdef SIC_COMPILER
 

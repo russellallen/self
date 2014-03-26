@@ -4,9 +4,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "frame_format_i386.hh"
 
-# include "_frame_format_i386.cpp.incl"
+# include "frame_format.hh"
+# include "label_inline.hh"
+# include "nmethod.hh"
 
 
 

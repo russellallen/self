@@ -1,11 +1,12 @@
+#pragma once
 /* Sun-$Revision: 30.8 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "spaceSizeMacros.hh"
+# include "types.hh"
+# include "util.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // if you change this you must also change the checks in 

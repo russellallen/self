@@ -3,9 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "util.hh"
 
-# include "_util.cpp.incl"
+# include "debug.hh"
+# include "eventlog.hh"
+# include "process.hh"
+# include "top.hh"
 
 fint Indent = 0;
 

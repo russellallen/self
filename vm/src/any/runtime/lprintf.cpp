@@ -3,8 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "lprintf.hh"
-# include "_lprintf.cpp.incl"
+# include "lprintf.hh"
+# include "os.hh"
+# include "sig.hh"
+# include "signalBlocker.hh"
+# include "top_includes.hh"
+# include "types.hh"
+# include "util.hh"
 
 # include <stdarg.h>
 

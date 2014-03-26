@@ -3,9 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "unixPrims.glue.hh"
 
-#include "_unixPrims.glue.cpp.incl"
+# include "unixPrims.hh"
+# include "generation_inline.hh"
+# include "quartzWindow.hh"
+# include "os.hh"
+# include "platformWindow.hh"
+# include "space_inline.hh"
 
 # if  TARGET_OS_VERSION == SOLARIS_VERSION
 extern "C" {

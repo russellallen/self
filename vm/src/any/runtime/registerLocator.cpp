@@ -2,9 +2,12 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "registerLocator.hh"
 
-# include "_registerLocator.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "frame.hh"
+# include "nprofiler.hh"
+# include "recompile.hh"
+# include "registerLocator.hh"
 
 
 

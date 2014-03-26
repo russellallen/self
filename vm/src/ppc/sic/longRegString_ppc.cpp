@@ -4,9 +4,12 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "longRegString_ppc.hh"
 
-# include "_longRegString_ppc.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "bitVector.hh"
+# include "label_inline.hh"
+# include "longRegString.hh"
+# include "sic.hh"
 
 
 # ifdef SIC_COMPILER

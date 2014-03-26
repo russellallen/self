@@ -4,7 +4,9 @@
    See the LICENSE file for license information. */
 
 
-# include "_monitorHooks_unix.cpp.incl"
+# include "frame.hh"
+# include "label_inline.hh"
+# include "monitorHooks.hh"
 
 
 void TrackCHeapInMonitor::reset() { 

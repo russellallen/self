@@ -4,8 +4,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "trapdoors_i386.hh"
-# include "_trapdoors_i386.cpp.incl"
+# include "asm_inline.hh"
+# include "label_inline.hh"
+# include "trapdoors.hh"
 
 Trapdoors::Trapdoors(pc_t, int32) {}
 

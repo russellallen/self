@@ -3,10 +3,29 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "sicScope.hh"
-# pragma implementation "sicScope_inline.hh"
 
-# include "_sicScope.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "asm.hh"
+# include "basicBlock_inline.hh"
+# include "blockMap.hh"
+# include "codeSlotsMap.hh"
+# include "complexLookup.hh"
+# include "nodeGen.hh"
+# include "node_inline.hh"
+# include "oop_inline.hh"
+# include "preg.hh"
+# include "prim.hh"
+# include "print.hh"
+# include "recompile.hh"
+# include "regAlloc.hh"
+# include "registerString.hh"
+# include "rscope.hh"
+# include "scopeDescRecorder.hh"
+# include "sic.hh"
+# include "sicExpr.hh"
+# include "sicScope_inline.hh"
+# include "slotRef.hh"
+# include "stringOop.hh"
 
 # ifdef SIC_COMPILER
 

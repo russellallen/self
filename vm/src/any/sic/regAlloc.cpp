@@ -5,8 +5,16 @@
 
 # ifdef SIC_COMPILER
 
-# pragma implementation "regAlloc.hh"
-# include "_regAlloc.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "basicBlock_inline.hh"
+# include "debug.hh"
+# include "node.hh"
+# include "preg.hh"
+# include "regAlloc.hh"
+# include "registerString.hh"
+# include "regs.hh"
+# include "sic.hh"
+# include "sicScope.hh"
 
 
 

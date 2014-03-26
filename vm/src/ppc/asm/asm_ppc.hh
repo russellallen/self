@@ -1,3 +1,4 @@
+#pragma once
 # ifdef __ppc__
 /* Sun-$Revision: 30.13 $ */
 
@@ -5,9 +6,6 @@
    See the LICENSE file for license information. */
    
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)

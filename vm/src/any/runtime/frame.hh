@@ -1,11 +1,19 @@
+#pragma once
 /* Sun-$Revision: 30.15 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "debug.hh"
+# include "framePieces.hh"
+# include "frame_format.hh"
+# include "process.hh"
+# include "regs.hh"
+# include "runtime.hh"
+# include "stack.hh"
+# include "types.hh"
+# include "universe_inline.hh"
+# include "zone.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 /* Portability strategy:
@@ -248,7 +256,13 @@ private:
   void save_outgoing_arguments();
   fint outgoing_arg_count(frame* sendee);
   
-# include "_frame_pd.hh.incl"
+# if defined(__ppc__)
+# include "frame_ppc.hh"
+# elif defined(__i386__)
+# include "frame_i386.hh"
+# else
+# include "frame_sparc.hh"
+# endif
 };
 
 

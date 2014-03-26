@@ -3,9 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "frame_sparc.hh"
 
-# include "_frame_sparc.cpp.incl" 
+# include "frame_inline.hh"
+# include "oopClosures.hh"
+# include "registerLocator.hh"
 
 
 // things in the various pieces:

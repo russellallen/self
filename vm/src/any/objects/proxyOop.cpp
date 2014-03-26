@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "proxyOop.hh"
-#include "_proxyOop.cpp.incl"
+# include "generation_inline.hh"
+# include "proxyMap.hh"
+# include "proxyOop.hh"
+# include "space_inline.hh"
 
 // Magic number, stored in proxyOop's cObject field, when it is killed.
 // safer to make it smiOop -- dmu

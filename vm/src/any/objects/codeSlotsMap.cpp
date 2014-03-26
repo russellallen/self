@@ -3,8 +3,20 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "codeSlotsMap.hh"
-# include "_codeSlotsMap.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "blockMap.hh"
+# include "blockOop.hh"
+# include "blockOop_inline.hh"
+# include "byteCodes.hh"
+# include "codeSlotsMap.hh"
+# include "enumeration.hh"
+# include "generation_inline.hh"
+# include "label_inline.hh"
+# include "os_includes.hh"
+# include "scanner.hh"
+# include "space_inline.hh"
+# include "stacking_interpreter.hh"
+# include "vmStrings.hh"
 
 
 slotsOop methodMap::basic_create_method(slotList* slots,

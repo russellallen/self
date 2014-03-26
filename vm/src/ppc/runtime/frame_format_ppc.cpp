@@ -4,9 +4,10 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "frame_format_ppc.hh"
 
-# include "_frame_format_ppc.cpp.incl"
+# include "frame_format.hh"
+# include "label_inline.hh"
+# include "nmethod.hh"
 
 
 // return offset (in bytes) off of sp

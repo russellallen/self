@@ -4,7 +4,11 @@
    See the LICENSE file for license information. */
 
 
-# include "_monitorPieces_unix.cpp.incl"
+# include "frame.hh"
+# include "generation_inline.hh"
+# include "interruptedCtx.hh"
+# include "label_inline.hh"
+# include "monitorPieces.hh"
 
  
 const int one_billion = 1000 * 1000 * 1000;

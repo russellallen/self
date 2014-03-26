@@ -3,8 +3,17 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "byteCodes.hh"
-# include "_byteCodes.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "blockOop_inline.hh"
+# include "byteCodes.hh"
+# include "byteCodes.hh"
+# include "codeSlotsMap.hh"
+# include "generation_inline.hh"
+# include "label_inline.hh"
+# include "oop_inline.hh"
+# include "slotsOop.hh"
+# include "space_inline.hh"
+# include "stringMap.hh"
 
 // generation routines
 

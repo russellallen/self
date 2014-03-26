@@ -4,9 +4,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "registerString_i386.hh"
 
-# include "_registerString_i386.cpp.incl"
+# include "bitVector.hh"
+# include "registerString.hh"
 
 # ifdef FAST_COMPILER
 

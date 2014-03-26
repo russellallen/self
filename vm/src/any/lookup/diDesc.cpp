@@ -3,8 +3,18 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "diDesc.hh"
-# include "_diDesc.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "complexLookup.hh"
+# include "diDesc.hh"
+# include "fields.hh"
+# include "label_inline.hh"
+# include "nmethod.hh"
+# include "nmln.hh"
+# include "process.hh"
+# include "selfMonitor.hh"
+# include "sendDesc.hh"
+# include "trapdoors.hh"
+# include "vframe.hh"
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "markMap.hh"
-# include "_markMap.cpp.incl"
+# include "enumeration.hh"
+# include "generation_inline.hh"
+# include "markMap.hh"
+# include "space_inline.hh"
 
 Map* markMap::create_markMap() {
   markMap m1;

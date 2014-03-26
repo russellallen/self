@@ -3,8 +3,21 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "stringOop.hh"
-# include "_stringOop.cpp.incl"
+# include "debug.hh"
+# include "files.hh"
+# include "generation.hh"
+# include "generation_inline.hh"
+# include "interruptedCtx.hh"
+# include "process.hh"
+# include "runtime.hh"
+# include "scanner.hh"
+# include "shell.hh"
+# include "space_inline.hh"
+# include "stringMap.hh"
+# include "stringOop.hh"
+# include "stringTable.hh"
+# include "universe.hh"
+# include "vmStrings.hh"
 
 
 stringOop new_string(const char* bytes, int32 len, bool mustAllocate) {

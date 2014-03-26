@@ -3,10 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation  "oTable.hh"
-# pragma implementation  "oTable_inline.hh"
 
-# include "_oTable.cpp.incl"
+# include "eventlog.hh"
+# include "generation_inline.hh"
+# include "map.hh"
+# include "oTable_inline.hh"
+# include "oop_inline.hh"
+# include "space_inline.hh"
 
 void* oTableObj::operator new(size_t size){ 
   assert(Memory->object_table, "object_table must exist");

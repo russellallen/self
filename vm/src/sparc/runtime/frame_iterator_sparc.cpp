@@ -3,9 +3,12 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "frame_iterator_sparc.hh"
 
-# include "_frame_iterator_sparc.cpp.incl" 
+# include "frame_iterator.hh"
+# include "label_inline.hh"
+# include "nmethod.hh"
+# include "oopClosures.hh"
+# include "registerLocator.hh"
 
 void FrameIterator::do_vm_frame() { 
   if (!SaveOutgoingArgumentsOfPatchedFrames)

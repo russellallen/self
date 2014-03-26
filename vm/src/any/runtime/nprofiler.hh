@@ -1,12 +1,14 @@
+#pragma once
 /* Sun-$Revision: 30.17 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "blist.hh"
+# include "config.hh"
+# include "monitorPieces.hh"
+# include "timer.hh"
 
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # if TARGET_OS_VERSION == MACOSX_VERSION \

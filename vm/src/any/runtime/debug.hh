@@ -1,11 +1,10 @@
+#pragma once
 /* Sun-$Revision: 30.22 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
-
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
+# include "eventlog.hh"
+# include "top.hh"
 
 
 // hint: if you change this file, do a "touch *.o; rm {oop,prim,debug}.o"

@@ -3,10 +3,17 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "itimer.hh"
-# pragma implementation "itimer_abstract.hh"
-# pragma implementation "itimer_inline.hh"
-# include "_itimer.cpp.incl"
+# include "unixPrims.hh"
+# include "interruptedCtx.hh"
+# include "itimer.hh"
+# include "label_inline.hh"
+# include "os_includes.hh"
+# include "process.hh"
+# include "selfMonitor.hh"
+# include "sig.hh"
+# include "smiOop.hh"
+# include "space_inline.hh"
+# include "vmStrings.hh"
 
 // entries
 

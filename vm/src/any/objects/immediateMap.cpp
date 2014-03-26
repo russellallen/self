@@ -3,8 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "immediateMap.hh"
-# include "_immediateMap.cpp.incl"
+# include "enumeration.hh"
+# include "generation_inline.hh"
+# include "immediateMap.hh"
+# include "space_inline.hh"
+# include "vmStrings.hh"
 
 oop immediateMap::fill_in_slots(slotList *slist, fint slotCount) {
   UsedOnlyInAssert(slotCount);

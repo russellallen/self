@@ -3,8 +3,31 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "process.hh"
-# include "_process.cpp.incl"
+# include "allocation.hh"
+# include "byteCodes.hh"
+# include "cacheStub_inline.hh"
+# include "codeSlotsMap.hh"
+# include "fields.hh"
+# include "glueSupport.hh"
+# include "interpreter.hh"
+# include "interruptedCtx.hh"
+# include "itimer.hh"
+# include "monitorHooks.hh"
+# include "nlrSupport.hh"
+# include "nmethod_inline.hh"
+# include "nprofiler.hh"
+# include "os_includes.hh"
+# include "prim.hh"
+# include "process.hh"
+# include "processOop.hh"
+# include "recompile.hh"
+# include "regs.hh"
+# include "shell.hh"
+# include "sig.hh"
+# include "signalBlocker.hh"
+# include "simpleLookup_inline.hh"
+# include "stack.hh"
+# include "vmStrings.hh"
 
 // valid state transitions for processes:
 //

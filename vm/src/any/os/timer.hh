@@ -1,11 +1,11 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "os_includes.hh"
+# include "top.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // Timers for simple measurements
@@ -54,8 +54,10 @@ class ElapsedTimer {            // measures elapsed time in us
 
   void init(bool start_timer);
   void reset_platform();
-  
-# include "_timer_pd.hh.incl"  
+ 
+//# if TARGET_OS_FAMLIY == UNIX_FAMILY 
+# include "timer_unix.hh"
+//# endif
 
 };
 

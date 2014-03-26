@@ -3,8 +3,15 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "aCompiler.hh"
-# include "_aCompiler.cpp.incl"
+# include "aCompiler.hh"
+# include "abstract_interpreter_inline.hh"
+# include "complexLookup.hh"
+# include "nmethod_inline.hh"
+# include "objVectorOop.hh"
+# include "process.hh"
+# include "recompile.hh"
+# include "slotRef.hh"
+# include "vframe.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

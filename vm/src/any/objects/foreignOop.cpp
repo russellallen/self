@@ -3,8 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "foreignOop.hh"
-# include "_foreignOop.cpp.incl"
+# include "foreignOop.hh"
+# include "generation_inline.hh"
+# include "space_inline.hh"
 
 
 const smi  C_pointer::shifts   = sizeof(void *) * BitsPerByte / 2;

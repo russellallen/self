@@ -3,8 +3,7 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "runtime.hh"
-# include "_runtime.cpp.incl"
+# include "runtime.hh"
 
 // This file holds C-level things that some platforms put in
 //  their runtime_foo.s 's.

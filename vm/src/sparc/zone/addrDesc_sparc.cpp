@@ -4,9 +4,12 @@
    See the LICENSE file for license information. */
 
 
-# pragma implementation "addrDesc_sparc.hh"
 
-# include "_addrDesc_sparc.cpp.incl"
+# include "addrDesc.hh"
+# include "diDesc.hh"
+# include "fields.hh"
+# include "label_inline.hh"
+# include "nmethod.hh"
 
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
