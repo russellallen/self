@@ -14,6 +14,7 @@ Thanks to Ganesh R for his transcription services.
    :maxdepth: 2
 
    intro
+   gettingstarted
    langref
    selfwrld
    progguid
@@ -22,4 +23,5 @@ Thanks to Ganesh R for his transcription services.
    vmref
    ref
    appendices
+   extras
    

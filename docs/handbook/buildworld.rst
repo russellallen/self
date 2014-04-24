@@ -1,3 +1,5 @@
+.. _building-a-world:
+
 How to build the world
 ======================
 
