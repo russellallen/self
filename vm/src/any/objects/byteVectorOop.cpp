@@ -473,14 +473,19 @@ oop byteVectorOopClass::run_native_passing_prim(
     const int pagesize = 0x1000;
     char* code;
     char *p0, *p1, *p2, *p3, *p4, *p5, *p6, *p7;
-    __cdecl void (*fct)(char *, char *, char *, char *, char *, char *, char *, char *);
+    // GCC doesn't like __cdecl but does it anyway
+    #ifdef __GNUC__
+        void (*fct)(char *, char *, char *, char *, char *, char *, char *, char *);
+    #else
+        __cdecl void (*fct)(char *, char *, char *, char *, char *, char *, char *, char *);
+    #endif
     // Setup function
     code = this->bytes();
     fct = (void (*)(char *, char *, char *, char *, char *, char *, char *, char *)) code;
     mprotect((void *)((int)code & ~(pagesize - 1)), pagesize,
                  PROT_READ|PROT_WRITE|PROT_EXEC);
     // Get parameters
-    p0 = arg0->bytes();
+    p0 = arg0->bytes(); 
     p1 = arg1->bytes();
     p2 = arg2->bytes();
     p3 = arg3->bytes();
