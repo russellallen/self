@@ -25,5 +25,5 @@ world" of more than 40,000 lines of code.
 
 *ECOOP '93 Conference Proceedings, Kaiserslautern, Germany, July, 1993.*
 
-`PDF <../../_static/published/type-inference.pdf>`_
+ `PDF <_static/type-inference.pdf>`_
 

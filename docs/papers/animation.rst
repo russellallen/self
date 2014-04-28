@@ -32,5 +32,5 @@ benefits.
 *User Interface Software and Technology '93 Conference Proceedings,
 Atlanta, November, 1993, pp. 43-55.*
 
-`PDF <../../_static/published/animation.pdf>`_
+ `PDF <_static/animation.pdf>`_
 

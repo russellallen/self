@@ -7,20 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA24211D1880BAA2008B5638 /* blueSelf.icns in Resources */ = {isa = PBXBuildFile; fileRef = BA24211C1880BAA2008B5638 /* blueSelf.icns */; };
 		BA4DD88E14B800E700F269FD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA4DD88D14B800E700F269FD /* Cocoa.framework */; };
 		BA4DD89814B800E700F269FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA4DD89614B800E700F269FD /* InfoPlist.strings */; };
 		BA4DD89A14B800E700F269FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4DD89914B800E700F269FD /* main.m */; };
 		BA4DD89E14B800E700F269FD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BA4DD89C14B800E700F269FD /* Credits.rtf */; };
 		BA4DD8A114B800E700F269FD /* SelfAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4DD8A014B800E700F269FD /* SelfAppDelegate.m */; };
 		BA4DD8A414B800E800F269FD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4DD8A214B800E800F269FD /* MainMenu.xib */; };
-		BA4DD8AF14B8249800F269FD /* Self ControlIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BA4DD8AE14B8249700F269FD /* Self ControlIcon.icns */; };
 		BA573C7D14F4ACE7000FD409 /* SelfWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = BA573C7C14F4ACE7000FD409 /* SelfWorld.m */; };
 		BA573C8214F4DE81000FD409 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA573C8114F4DE81000FD409 /* Security.framework */; };
+		BA7638FC187E598000841F48 /* Self.app in Resources */ = {isa = PBXBuildFile; fileRef = BA7638FB187E598000841F48 /* Self.app */; };
 		BA93FF0814BFC593005327EE /* RunningSelfVMManagerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA93FF0714BFC593005327EE /* RunningSelfVMManagerModel.m */; };
-		BAD753FB14BEE40D0044B9BF /* Self.app in Resources */ = {isa = PBXBuildFile; fileRef = BAD753FA14BEE40D0044B9BF /* Self.app */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA24211C1880BAA2008B5638 /* blueSelf.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = blueSelf.icns; sourceTree = "<group>"; };
 		BA4DD88914B800E700F269FD /* Self Control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Self Control.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA4DD88D14B800E700F269FD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BA4DD89014B800E700F269FD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -34,14 +35,13 @@
 		BA4DD89F14B800E700F269FD /* SelfAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelfAppDelegate.h; sourceTree = "<group>"; };
 		BA4DD8A014B800E700F269FD /* SelfAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelfAppDelegate.m; sourceTree = "<group>"; };
 		BA4DD8A314B800E800F269FD /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		BA4DD8AE14B8249700F269FD /* Self ControlIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "Self ControlIcon.icns"; sourceTree = "<group>"; };
 		BA573C7C14F4ACE7000FD409 /* SelfWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfWorld.m; sourceTree = "<group>"; };
 		BA573C7F14F4ACFF000FD409 /* SelfWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfWorld.h; sourceTree = "<group>"; };
 		BA573C8014F4CB48000FD409 /* Self.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Self.entitlements; sourceTree = "<group>"; };
 		BA573C8114F4DE81000FD409 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		BA7638FB187E598000841F48 /* Self.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = Self.app; sourceTree = "<group>"; };
 		BA93FF0614BFC593005327EE /* RunningSelfVMManagerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunningSelfVMManagerModel.h; sourceTree = "<group>"; };
 		BA93FF0714BFC593005327EE /* RunningSelfVMManagerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunningSelfVMManagerModel.m; sourceTree = "<group>"; };
-		BAD753FA14BEE40D0044B9BF /* Self.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = Self.app; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +60,8 @@
 		BA4DD87E14B800E700F269FD = {
 			isa = PBXGroup;
 			children = (
+				BA24211C1880BAA2008B5638 /* blueSelf.icns */,
 				BA4DD8B414B8254600F269FD /* VM */,
-				BA4DD8AE14B8249700F269FD /* Self ControlIcon.icns */,
 				BA4DD89314B800E700F269FD /* Self */,
 				BA4DD88C14B800E700F269FD /* Frameworks */,
 				BA4DD88A14B800E700F269FD /* Products */,
@@ -127,7 +127,7 @@
 		BA4DD8B414B8254600F269FD /* VM */ = {
 			isa = PBXGroup;
 			children = (
-				BAD753FA14BEE40D0044B9BF /* Self.app */,
+				BA7638FB187E598000841F48 /* Self.app */,
 			);
 			name = VM;
 			sourceTree = "<group>";
@@ -159,6 +159,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0460;
+				TargetAttributes = {
+					BA4DD88814B800E700F269FD = {
+						DevelopmentTeam = 8C9659DBT4;
+					};
+				};
 			};
 			buildConfigurationList = BA4DD88314B800E700F269FD /* Build configuration list for PBXProject "Self Control" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -185,8 +190,8 @@
 				BA4DD89814B800E700F269FD /* InfoPlist.strings in Resources */,
 				BA4DD89E14B800E700F269FD /* Credits.rtf in Resources */,
 				BA4DD8A414B800E800F269FD /* MainMenu.xib in Resources */,
-				BA4DD8AF14B8249800F269FD /* Self ControlIcon.icns in Resources */,
-				BAD753FB14BEE40D0044B9BF /* Self.app in Resources */,
+				BA7638FC187E598000841F48 /* Self.app in Resources */,
+				BA24211D1880BAA2008B5638 /* blueSelf.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,13 +297,15 @@
 		BA4DD8A814B800E800F269FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Self/Self Control-Prefix.pch";
 				INFOPLIST_FILE = "Self/Self Control-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "Self Control";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
@@ -307,13 +314,15 @@
 		BA4DD8A914B800E800F269FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Self/Self Control-Prefix.pch";
 				INFOPLIST_FILE = "Self/Self Control-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "Self Control";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};

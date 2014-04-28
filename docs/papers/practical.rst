@@ -21,5 +21,5 @@ pure object-oriented languages practical.
 
 *Published as SIGPLAN Notices 26(11), November, 1991.*
 
-`PDF <../../_static/published/practical.pdf>`_
+ `PDF <_static/practical.pdf>`_
 

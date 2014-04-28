@@ -2,9 +2,11 @@
 *.o
 *~
 *.snap
+*.snap.backup
 *.old
 *.file_status
 *.xcuserdatad
 *.xcworkspace
+*.xcuserstate
 build/
 objects/glue/test*

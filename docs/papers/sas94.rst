@@ -28,4 +28,4 @@ we study fall in this class.
 *First International Static Analysis Symposium, SAS'94, Namur, Belgium, 
 September 1994.*
 
-`PDF <../../_static/published/sas94.pdf>`_
+ `PDF <_static/sas94.pdf>`_

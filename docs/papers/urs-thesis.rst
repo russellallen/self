@@ -58,6 +58,6 @@ and high performance.
 and as a Sun Microsystems Laboratories technical report.*
 
 
-`PDF <../../_static/published/urs-thesis.pdf>`_
+ `PDF <_static/urs-thesis.pdf>`_
 
 

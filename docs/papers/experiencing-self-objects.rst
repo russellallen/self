@@ -18,5 +18,5 @@ invisible, and thus make Self objects and the Self world real.
 
 *The Self Papers, Computer Systems Laboratory, Stanford University, 1990.*
 
-`PDF <../../_static/published/experiencing-self-objects.pdf>`_
+ `PDF <_static/experiencing-self-objects.pdf>`_
 

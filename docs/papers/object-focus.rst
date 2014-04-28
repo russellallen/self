@@ -38,5 +38,5 @@ rather than manipulating the environment.
 *In Visual Object-Oriented Programming, Margaret Burnett,
 Adele Goldberg, and Ted Lewis, eds., Prentice-Hall, 1995, pp. 185-198.*
 
-`PDF <../../_static/published/object-focus.pdf>`_
+ `PDF <_static/object-focus.pdf>`_
 

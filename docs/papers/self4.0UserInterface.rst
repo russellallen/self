@@ -19,5 +19,5 @@ those mechanisms within the context of an extended programming task.
 *In OOPSLA '95 Conference Proceedings,
 Austin, Texas, October, 1995. pp 47-60.*
 
-`PDF <../../_static/published/self4.0UserInterface.pdf>`_
+ `PDF <_static/self4.0UserInterface.pdf>`_
 

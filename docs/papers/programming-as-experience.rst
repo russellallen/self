@@ -21,4 +21,4 @@ and malleable world of objects.
 
 *ECOOP '95  Conference Proceedings, Aarhus, Denmark, August, 1995.*
 
-`PDF <../../_static/published/programming-as-experience.pdf>`_
+ `PDF <_static/programming-as-experience.pdf>`_

@@ -21,4 +21,4 @@ repertory of organizing principles to cover a wider range of programs.
 *Lisp and Symbolic Computation 4(3), Kluwer Academic
 Publishers, June, 1991.*
 
-`PDF <../../_static/published/organizing-programs.pdf>`_
+ `PDF <_static/organizing-programs.pdf>`_

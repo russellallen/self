@@ -2,6 +2,10 @@
 Virtual Machine Reference
 *************************
 
+.. toctree::
+
+   buildvm
+
 Startup options
 ===============
 
@@ -152,8 +156,7 @@ message lookup is done is described in the Language Reference Manual.
 		|  		``The matching slots are: oddballs <6> and prototypes <7>.``
 
 				The lookup found two matching ``system`` slots which means the message is ambiguous. The 
-				error message also says where the matching slots were found.	Ambiguities can often be 
-				resolved by changing parent priorities.
+				error message also says where the matching slots were found.
 
 		``No ’fish’ delegatee slot was found in <a child of lobby> <12>.``
 				The lookup found no parent slot ``fish``, which was explicitly specified as the delegatee
