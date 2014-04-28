@@ -5,8 +5,8 @@ Native
 
 Introduced in Self 4.5, the ``native`` module allows you to generate and run native machine code for your platform from within a Self World. It is inspired by the work of Igor Stasenko on NativeBoost for Pharo.
 
-Underlying Primitive
---------------------
+Underlying Primitives
+---------------------
 
 The core functionality of the ``native`` system is the primitive ``_RunNativePassing:With:With:With:With:With:With:With:``, which when run on a byteVector containing the machine code for a standard C function using the "cdecl" calling convention, and passing eight other byteVectors (from the machine code side seen as "char*") will run the machine code in byteVector.
 
