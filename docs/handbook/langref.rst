@@ -1,3 +1,8 @@
+.. sectnum::
+   :depth: 3
+   :start: 1
+   :prefix: 2.
+
 ﻿******************
 Language Reference
 ******************
