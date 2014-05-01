@@ -368,6 +368,14 @@ gets stuck.
 
             m addButton:
                 ( ( ui2Button copy
+                   scriptBlock: [event sourceHand attach:
+                                   selfObjectModel newOutlinerFor: (reflect: ())
+                                                          InWorld: event sourceHand world] )
+                   label: 'New Object' )
+            ToGroup: 'top'.
+
+            m addButton:
+                ( ( ui2Button copy
                    scriptBlock: [shell save] )
                    label: 'Save snapshot')
             ToGroup: 'memory'.

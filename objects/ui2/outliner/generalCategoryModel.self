@@ -1,7 +1,7 @@
  '$Revision: 30.15 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -715,6 +715,16 @@ I am also immutable.\x7fModuleInfo: Creator: globals generalCategoryModel parent
             isForEditingNew && [newName isEmpty] ifTrue: [
              ^ myOutliner cancelChangingNameEditor: rr editor Event: rr event
             ].
+
+            categoryList isEmpty ifTrue: [
+              referrent: categoryReferrentProto
+                    copyForMirror: mirror
+                     CategoryList: vector copy.
+              resend.unprotectedFinishChangingName: rr.
+              safelyDo: [ myOutliner beFlexibleHorizontally update ].
+              ^ self
+            ].
+
             i: categoryList size pred.
             ocat: categoryList last.
 
