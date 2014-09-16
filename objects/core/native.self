@@ -92,7 +92,7 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
-         'Category: modules\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+         'Category: example modules\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
          cExample = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'cExample' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals native cExample.
@@ -162,7 +162,7 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
             c: native support wrappers byte copy.
             d: native support wrappers byte copyOn: a.
             e: native support wrappers byte copyOn: b.
-            bv: native support c compile: 
+            bv: native support x86c compile: 
               'char add(char, char);
 
               void fct(char *a, char *b, char *c, void *d, 
@@ -190,7 +190,7 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
             | 
             lib: foreignCodeDB at: '/usr/lib/libbz2.dylib' IfFail: [|:e| error: e].
             fct: lib lookupFunction: 'BZ2_bzlibVersion' IfFail: [|:e| error: e].
-            bv: native support c compile: '
+            bv: native support x86c compile: '
               void fct(char*(**a)(), char *b, int *c, void *d, 
                         void *e, void *f, void *g, void *h){
                 char* v;
@@ -205,6 +205,7 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
             bufSize: native support wrappers int copyOn: 20.
             fctAddr: native support wrappers pointer copyOn: fct.
             bv runNativePassing: fctAddr With: buf With: bufSize.
+            lib unloadIfFail: false.
             buf asString copyFrom: 0 UpTo: (buf keyOf: 0)).
         } | ) 
 
@@ -226,7 +227,7 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
             | 
             lib: foreignCodeDB at: '/usr/lib/libsqlite3.dylib' IfFail: [|:e| error: e].
             fct: lib lookupFunction: 'sqlite3_libversion_number'.
-            bv: native support c compile: '
+            bv: native support x86c compile: '
               void fct(int(**a)(), int *b, void *c, void *d, 
                         void *e, void *f, void *g, void *h){
                 *b = (**a)();
@@ -234,7 +235,15 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
             res: native support wrappers int copy.
             fctAddr: native support wrappers pointer copyOn: fct.
             bv runNativePassing: fctAddr With: res.
+            lib unloadIfFail: false.
             res asSelf).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'cExample' -> 'x86osx' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         test = ( |
+            | testAdd testSqliteVersion testbzip2Version. self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'cExample' -> 'x86osx' -> () From: ( | {
@@ -259,7 +268,7 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
-         'Category: modules\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+         'Category: example modules\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
          example = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'example' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals native example.
@@ -339,7 +348,7 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
-         'Category: modules\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+         'Category: example modules\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
          exampleBinding <- bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'exampleBinding' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals native exampleBinding.
@@ -470,6 +479,7 @@ they can make sure they are correctly setup\x7fModuleInfo: Module: native Initia
             RET             ; return
             '].
             abs_bv runNativePassing: addressOfFct With: res.
+            lib unloadIfFail: false.
             res cIntSize: 32 Signed: false At: 0 IfFail: [error: 'Bad Int']).
         } | ) 
 
@@ -735,65 +745,6 @@ SlotsToOmit: parent.
         
          adjustToPlatform = ( |
             | self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> () From: ( | {
-         'ModuleInfo: Module: native InitialContents: FollowSlot'
-        
-         asm = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'asm' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals native support asm.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> () From: ( | {
-         'ModuleInfo: Module: native InitialContents: FollowSlot'
-        
-         c = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'c' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals native support c.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'c' -> () From: ( | {
-         'ModuleInfo: Module: native InitialContents: FollowSlot'
-        
-         checkForCompilerIfFail: fb = ( |
-            | 
-            os command: 'cc' IfFail: [^ fb]. true).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'c' -> () From: ( | {
-         'ModuleInfo: Module: native InitialContents: FollowSlot'
-        
-         compile: s = ( |
-             bv.
-             f.
-             fn.
-            | 
-            checkForCompilerIfFail: [^ error: 'Compiler not found'].
-
-            fn: os_file temporaryFileName.
-            os command: 'rm ', fn, '.c'.
-            os command: 'rm ', fn, '.o'.
-
-            f: os_file openForWriting: fn, '.c'.
-            f write: s.
-            f close.
-
-            os command: 'cc -O2 -ffreestanding -m32 -c -o ', fn, '.o ', fn, '.c'  IfFail: [|:e| error: e].
-
-            f: os_file openForReading: fn, '.o'.
-            bv: f read asByteVector.
-            f close.
-
-            bv copyFrom: 16r100 UpTo: bv size. "Ignore header").
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'c' -> () From: ( | {
-         'ModuleInfo: Module: native InitialContents: FollowSlot'
-        
-         p* = bootstrap stub -> 'traits' -> 'clonable' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> () From: ( | {
@@ -1137,6 +1088,56 @@ SlotsToOmit: parent.
          'ModuleInfo: Module: native InitialContents: FollowSlot'
         
          shared* = bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'wrappers' -> 'abstract' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> () From: ( | {
+         'Comment: Calls out to existing cc \x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         x86c = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'x86c' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals native support x86c.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'x86c' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         checkForCompilerIfFail: fb = ( |
+            | 
+            os command: 'cc -v' IfFail: [^ fb]. true).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'x86c' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         compile: s = ( |
+             bv.
+             f.
+             fn.
+            | 
+            checkForCompilerIfFail: [^ error: 'Compiler not found'].
+
+            fn: os_file temporaryFileName.
+            os command: 'rm -f ', fn, '.c'.
+            os command: 'rm -f ', fn, '.o'.
+
+            f: os_file openForWriting: fn, '.c'.
+            f write: s.
+            f close.
+
+            os command: 'cc -O2 -ffreestanding -m32 -c -o ', fn, '.o ', fn, '.c'  IfFail: [|:e| error: e].
+
+            f: os_file openForReading: fn, '.o'.
+            bv: f read asByteVector.
+            f close.
+
+            bv copyFrom: 16r100 UpTo: bv size. "Ignore header").
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'x86c' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         p* = bootstrap stub -> 'traits' -> 'clonable' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
