@@ -19,8 +19,8 @@
 
    							Ole Agesen, Feb. 1992."
 
-traits     applications _AddSlotsIfAbsent: ( | serverDemo* = () | )
-globals    applications _AddSlotsIfAbsent: ( | serverDemo* = () | )
+traits     _AddSlotsIfAbsent: ( | serverDemo* = () | )
+globals    _AddSlotsIfAbsent: ( | serverDemo* = () | )
 
 " This is how to get static initializer routines (no args, no return value)
   called whenever a file is loaded. Note: initializer names are dependant 
@@ -49,7 +49,7 @@ traits socket _Define: ( |
     copyPort: portNumber = ( "Create socket, do bind, then listen."
         | sbl = foreignFct copyName: 'socket_bind_listen_glue' ArgCoercions: 'i '
 ResultType: 'unknown'
-                   Path: 'socks.so'
+                   Path: 'applications/serverDemo/socks.so'
 . |
         sbl call: portNumber With: deadCopy IfFail: raiseError.
       ).
@@ -57,10 +57,10 @@ ResultType: 'unknown'
     acceptIfFail: errBlk = ( "Return new unixFile object."
         | acc = foreignFct copyName: 'simple_accept_glue' ArgCoercions: '  '
 ResultType: 'unknown'
-                   Path: 'socks.so'
+                   Path: 'applications/serverDemo/socks.so'
 . |
         acc call: self 
-             With: (unixFile copyName: 'a socket') deadCopy
+             With: (os_file copyName: 'a socket') deadCopy
            IfFail: errBlk.
       ).
 
@@ -92,7 +92,7 @@ server _Define: ( |
          of this object, with the stdio slot properly initialized."
         mother* = traits clonable.
         father*  = lobby.
-        stdio   <- unixFile copy.  
+        stdio   <- os_file copy.
       | ).
         
   
@@ -116,7 +116,7 @@ server _Define: ( |
         continue: true.
         serverSocket: (socket copyPort: 1275).      "HARDWIRED!"
         'Server started.' printLine.
-        [continue] whileTrue: [| io <- unixFile. |
+        [continue] whileTrue: [| io <- os_file. |
             io: serverSocket acceptIfFail: [|:e| 
                 ('EINTR' isPrefixOf: e) || ('NOERR' isPrefixOf: e)
 		  ifFalse: [^ error: e].
@@ -151,7 +151,7 @@ traits unixFile _AddSlotsIfAbsent: ( |
          how: 0 = shut down receives, 1 = sends, 2 = both."
         | shut = foreignFct copyName: 'shutdown_glue' ArgCoercions: ' i'
 ResultType: 'unknown'
-                   Path: 'socks.so'
+                   Path: 'applications/serverDemo/socks.so'
 . | 
         shut call: self With: how IfFail: raiseError.
       ).
