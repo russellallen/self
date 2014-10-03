@@ -809,7 +809,7 @@ SlotsToOmit: parent prototype.
               if:   [ sourceURL suffix uncapitalizeAll = 'gif' ]
               Then: [ buildGIFImage ]
               If:   [ sourceURL suffix uncapitalizeAll = 'jpg' ]
-              Then: [ buildJPGImageSource: (stripMimeHeader: sourceURL getContentsString) ]
+              Then: [ buildJPEGImageSource: (stripMimeHeader: sourceURL getContentsString) ]
               If:   [ sourceURL suffix uncapitalizeAll = 'png' ]
               Then: [ buildPNGImageSource: (stripMimeHeader: sourceURL getContentsString) ]
               If:   [ sourceURL suffix = 'xbm' ]
