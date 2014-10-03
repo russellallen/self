@@ -1,7 +1,7 @@
  '$Revision: 30.8 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -3739,8 +3739,12 @@ SlotsToOmit: parent prototype.
          translateCode: code IfFound: foundBlock IfAbsent: absentBlock = ( |
             | 
             code first  =  '#'
-              ifTrue: [ foundBlock value: code copyWithoutFirst asInteger asCharacter ]
-               False: [
+              ifTrue: [ |v|
+                 v: (code at: 1) = 'x' ifTrue: [ (code copyFrom: 2) hexAsInteger ]
+                                       False: [ code copyWithoutFirst asInteger ].
+                 foundBlock value: v asCharacterIfFail: [ 254 asCharacter ]
+              ]
+              False: [
                    codes if: code
                          IsPresentDo: foundBlock
                          IfAbsentDo: absentBlock
@@ -7735,7 +7739,7 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'webPage' -> 'parent' -> () From: ( | {
          'Category: web page behavior\x7fModuleInfo: Module: webBrowser InitialContents: InitializeToExpression: (nil)'
         
-         defaultButtonHolder <- bootstrap stub -> 'globals' -> 'nil' -> ().
+         defaultButtonHolder.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'webPage' -> 'parent' -> () From: ( | {
