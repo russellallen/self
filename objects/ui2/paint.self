@@ -171,7 +171,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
 
             "some UI colors"
             paintNames at:   'outlinerGray' Put: (paint copyRed: 0.839687 Green: 0.839687  Blue: 0.839687).
-            
+
             "a non-color"
             paintNames at:   'transparent' Put: (paint copyRed: 0 Green: 0  Blue: 0 Alpha: 0)).
         } | ) 
@@ -839,9 +839,11 @@ lots of images. It quantizes in RGB space.\x7fModuleInfo: Module: paint InitialC
              nearest <- ''.
              threshold = 0.07.
             | 
+
             paintNames isEmpty ifTrue: [ ^'an unknown color' ].
             paintNames do: [| :paint. :name. thisD |
                 thisD:
+                    (paint alpha - alpha) square +
                     (paint red   -   red) square +
                     (paint green - green) square +
                     (paint blue  -  blue) square.

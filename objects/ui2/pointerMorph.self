@@ -418,14 +418,13 @@ SlotsToOmit: parent prototype.
              button.
              new.
             | 
-
             button: copy.
             button removeAllMorphs.
             button baseMinWidth:  3.
             button baseMinHeight: 3.
             button beShrinkWrap.
-            button addMorph: (imageMorph copyImage: lo buttonIcon).
-            button color: lo color.
+            button addMorph: (imageMorph copyImage: lo buttonIcon copy).
+            button color: paint named: 'transparent'.
             button).
         } | ) 
 
@@ -536,8 +535,8 @@ on a new object to serve as replacement slot contents. -- Randy, 5/2/95\x7fModul
             new headMorph addMorph: button.
             button target: new headMorph.
             button script: headButtonScript.
-            new           color: lo color.
-            new headMorph color: lo color.
+            new           color: paint named: 'transparent'.
+            new headMorph color: paint named: 'transparent'.
             new).
         } | ) 
 

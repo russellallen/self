@@ -482,7 +482,7 @@ SlotsToOmit: parent.
             b isAsynchronous: isA.
             n: preferredFontSpec size - 2.
             b label: l  FontSpec:      (preferredFontSpec copySize: n)
-                        FontColor:      preferredFontColor.
+                        FontColor:      preferredTitleColor.
             b beFlexibleHorizontally.
             b).
         } | ) 

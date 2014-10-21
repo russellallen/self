@@ -73,6 +73,8 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          pluggableOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'body' From:
+             bootstrap remove: 'items' From:
              bootstrap remove: 'parent' From:
              bootstrap remove: 'prototype' From:
              globals outliner copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> () From: ( |
@@ -80,7 +82,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
 
 CopyDowns:
 globals outliner. copy 
-SlotsToOmit: parent prototype.
+SlotsToOmit: body items parent prototype.
 
 \x7fIsComplete: '.
             | ) .
@@ -90,6 +92,12 @@ SlotsToOmit: parent prototype.
          'Category: Pluggable Outliner State\x7fCategory: other pieces\x7fModuleInfo: Module: pluggableOutliner InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
          annotationInfo.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> () From: ( | {
+         'Category: Outliner Morph State\x7fModuleInfo: Module: pluggableOutliner InitialContents: InitializeToExpression: (rowMorph copy)\x7fVisibility: private'
+        
+         body <- rowMorph copy.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> () From: ( | {
@@ -132,6 +140,12 @@ SlotsToOmit: parent prototype.
          'Category: Pluggable Outliner State\x7fCategory: modes\x7fModuleInfo: Module: pluggableOutliner InitialContents: InitializeToExpression: (false)\x7fVisibility: public'
         
          isPlaceHolder <- bootstrap stub -> 'globals' -> 'false' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> () From: ( | {
+         'Category: Outliner Morph State\x7fModuleInfo: Module: pluggableOutliner InitialContents: InitializeToExpression: (columnMorph copy)\x7fVisibility: private'
+        
+         items <- columnMorph copy.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> () From: ( | {
@@ -403,7 +417,7 @@ boxedItems.\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot
         
          buildBody = ( |
             | 
-            body: rowMorph copy color: (paint named: 'transparent').
+            body: rowMorph copy.
             body  borderWidth: 0.
             body  baseMinHeight: 0.
             body  beFlexible.
@@ -414,6 +428,7 @@ boxedItems.\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot
               body addMorphLast: rigidSpacer copy color: (paint named: 'transparent')
             ].
             body addMorphLast: items.
+            recolor.
             body).
         } | ) 
 
@@ -445,7 +460,6 @@ boxedItems.\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot
          buildHeader = ( |
             | 
             header: rowMorph copy removeAllMorphs beFlexible borderWidth: 0.
-            "header color: preferredHeaderColor." "see recolor"
             header borderWidth: 4.
             fillInHeader.
             header).
@@ -895,6 +909,7 @@ Same for collapse:, expandAll: collapseAll: -- dmu 4/1\x7fModuleInfo: Module: pl
             | 
             resend.expand: evt.
             safelyDo: [updateDo: [|:m| m update]]. "outliners build things by updating"
+            recolor.
             self).
         } | ) 
 
@@ -934,7 +949,8 @@ Same for collapse:, expandAll: collapseAll: -- dmu 4/1\x7fModuleInfo: Module: pl
          'Category: plug-in operations\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot'
         
          fontColor = ( |
-            | model preferredFontColor).
+            | 
+            model preferredTitleColor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {
@@ -999,6 +1015,7 @@ Same for collapse:, expandAll: collapseAll: -- dmu 4/1\x7fModuleInfo: Module: pl
             initialize.
             beShrinkWrap.
             model setAppearanceOfOutliner.
+            recolor.
             layoutChanged.
             self).
         } | ) 
@@ -1083,6 +1100,13 @@ Same for collapse:, expandAll: collapseAll: -- dmu 4/1\x7fModuleInfo: Module: pl
             | 
             model justDroppedInto: w Event: evt.
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {
+         'Category: layout\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot'
+        
+         layoutChanged = ( |
+            | recolor. resend.layoutChanged).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {
@@ -1195,14 +1219,30 @@ Same for collapse:, expandAll: collapseAll: -- dmu 4/1\x7fModuleInfo: Module: pl
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {
-         'Category: color\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot'
+         'Category: basics\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot'
         
          recolor = ( |
             | 
-            (owner isNil || [owner isWorldMorph])
-              ifTrue: [header color: preferredHeaderColor]
-               False: [header color: preferredColor].
-            resend.recolor).
+            header color: model preferredHeaderColor.
+            header morphsDo: [|:m|
+              m isButton ifTrue: [
+              m color: model preferredHeaderColor.
+              m findMorphWithLabel ifNil: false IfNotNil: [|:l|
+                 l color: model preferredTitleColor ]]].
+            commentButton 
+               colorButtonBackground: model preferredHeaderColor
+                          Foreground: model preferredTitleColor.
+            titleEditor ifNotNil: [ titleEditor labelColor: model preferredTitleColor].
+            color: model preferredBorderColor.
+            body ifNotNil: [body color: model preferredBodyColor].
+            model recolorModuleSummary.
+            items ifNotNil: [items recolor].
+            "Tags only at top level"
+            isRoot
+               ifTrue: [tag color: model preferredTagColor]
+                False: [tag color: model preferredBodyColor].
+            expander color: model preferredTitleColor.
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {
@@ -1507,6 +1547,16 @@ return the slot outliner\x7fModuleInfo: Module: pluggableOutliner InitialContent
         
          updateItemsDo: blk = ( |
             | model updateItemsDo: blk. self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {
+         'Category: updating\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot'
+        
+         updateTheme = ( |
+            | 
+            recolor.
+            layoutChanged.
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {

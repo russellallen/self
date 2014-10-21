@@ -152,7 +152,7 @@ SlotsToOmit: parent prototype.
             header addMorphLast: tle.
             addCommentButtonToHeader.
             header addMorphLast: flexibleSpacer copy color: (paint named: 'transparent').
-            contentsLabel: optionalMorph copy color: color.
+            contentsLabel: optionalMorph copy color: (paint named: 'transparent').
             header addMorphLast: contentsLabel.
             header addMorphLast: rigidSpacer copyH: 4 Color: (paint named: 'transparent').
             header addMorphLast: buildExpander.
@@ -170,10 +170,11 @@ SlotsToOmit: parent prototype.
          initializeForModel: m = ( |
             | 
             resend.initializeForModel: m.
-            color: m preferredColor.
+            color: m preferredBorderColor.
             borderWidth: 1.
             beFlexible.
             frameStyle: insetBezelStyle.
+            recolor.
             layoutChanged).
         } | ) 
 
@@ -210,6 +211,19 @@ SlotsToOmit: parent prototype.
          'ModuleInfo: Module: pluggableLeafOutliner InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableLeafOutliner' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: pluggableLeafOutliner InitialContents: FollowSlot'
+        
+         recolor = ( |
+            | 
+            resend.recolor.
+            contentsLabel inner ifNotNil: [
+               contentsLabel inner color: model preferredTitleColor].
+            expander color: model preferredBodyColor.
+            updateButtonIcon.
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableLeafOutliner' -> 'parent' -> () From: ( | {
@@ -282,8 +296,10 @@ SlotsToOmit: parent prototype.
              e.
              i.
             | 
-            i: buttonIcon.
+            i: buttonIcon copy.
+            i colors at: 0 Put: model preferredTitleColor.
             e: expander.
+            e morphs size < 1 ifTrue: [^ self].
             i = e firstMorph image ifFalse: [
               e removeAllMorphs.
               e addMorphLast: (imageMorph copyImage: i).
@@ -301,8 +317,7 @@ SlotsToOmit: parent prototype.
               contentsLabel inner ifNil: [
                 contentsLabel inner: 
                     ((labelMorph copy label: oneLinerContentsString)
-                                   fontSpec: contentsLabelFontSpec)
-                                   colorAll: color.
+                                   fontSpec: contentsLabelFontSpec).
                 contentsLabel open.
               ] IfNotNil: [| c <- ''|
                 c: oneLinerContentsString.
@@ -310,7 +325,6 @@ SlotsToOmit: parent prototype.
                   safelyDo: [ contentsLabel inner label: c ].
                 ].
               ].
-              contentsLabel color = color ifFalse: [contentsLabel colorAll: color].
             ] False: [
               contentsLabel inner ifNotNil: [
                 contentsLabel inner delete.
@@ -328,7 +342,7 @@ SlotsToOmit: parent prototype.
             resend.updateDo: blk.
             isPlaceHolder ifTrue: [^ self].
             updateContentsLabelString.
-            updateButtonIcon.
+            "updateButtonIcon."
             updateArrow).
         } | ) 
 

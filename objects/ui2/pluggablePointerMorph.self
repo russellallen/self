@@ -1,7 +1,7 @@
  '$Revision: 30.6 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -124,12 +124,13 @@ SlotsToOmit: parent prototype.
          pluggableOutlinerLeafPointerTailMorph = bootstrap define: bootstrap stub -> 'globals' -> 'pluggableOutlinerLeafPointerTailMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
              bootstrap remove: 'prototype' From:
+             bootstrap remove: 'rawColor' From:
              globals outlinerLeafPointerTailMorph copyRemoveAllMorphs ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pluggableOutlinerLeafPointerTailMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pluggableOutlinerLeafPointerTailMorph.
 
 CopyDowns:
 globals outlinerLeafPointerTailMorph. copyRemoveAllMorphs 
-SlotsToOmit: parent prototype.
+SlotsToOmit: parent prototype rawColor.
 
 \x7fIsComplete: '.
             | ) .
@@ -188,6 +189,12 @@ SlotsToOmit: droppedOn:Event:.
          prototype = ( |
             | 
             pluggableOutlinerLeafPointerTailMorph).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutlinerLeafPointerTailMorph' -> () From: ( | {
+         'Category: circleMorph State\x7fModuleInfo: Module: pluggablePointerMorph InitialContents: InitializeToExpression: (paint named: \'transparent\')\x7fVisibility: private'
+        
+         rawColor <- paint named: 'transparent'.
         } | ) 
 
 

@@ -190,7 +190,7 @@ SlotsToOmit: parent prototype rawBox rawColor.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'lineMorph' -> () From: ( | {
          'ModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: private'
         
-         rawColor <- paint named: 'black'.
+         rawColor <- paint named: 'transparent'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'lineMorph' -> () From: ( | {
@@ -435,7 +435,7 @@ SlotsToOmit: parent prototype rawBox rawColor.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selectionInListMorph' -> () From: ( | {
          'ModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
         
-         textColor <- paint named: 'black'.
+         textColor <- paint named: 'transparent'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selectionInListMorph' -> () From: ( | {
@@ -529,7 +529,7 @@ SlotsToOmit: parent prototype rawBox rawColor.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sliderMorph' -> () From: ( | {
          'ModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
         
-         sliderColor <- paint named: 'black'.
+         sliderColor <- paint named: 'transparent'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sliderMorph' -> () From: ( | {
@@ -550,12 +550,13 @@ SlotsToOmit: parent prototype rawBox rawColor.
          spacerMorph = bootstrap define: bootstrap stub -> 'globals' -> 'spacerMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
              bootstrap remove: 'prototype' From:
+             bootstrap remove: 'rawColor' From:
              globals morph copyRemoveAllMorphs ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'spacerMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals spacerMorph.
 
 CopyDowns:
 globals morph. copyRemoveAllMorphs 
-SlotsToOmit: parent prototype.
+SlotsToOmit: parent prototype rawColor.
 
 \x7fIsComplete: '.
             | ) .
@@ -587,6 +588,12 @@ SlotsToOmit: parent prototype.
          'ModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
         
          parent* = bootstrap stub -> 'traits' -> 'spacerMorph' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'spacerMorph' -> () From: ( | {
+         'Category: Basic Morph State\x7fModuleInfo: Module: morphLib InitialContents: InitializeToExpression: (paint named: \'transparent\')\x7fVisibility: private'
+        
+         rawColor <- paint named: 'transparent'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'labelMorph' -> () From: ( | {

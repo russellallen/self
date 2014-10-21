@@ -67,6 +67,12 @@ SlotsToOmit: borderWidth parent prototype.
          itemsCached <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outliner' -> () From: ( | {
+         'Category: Outliner Morph State\x7fModuleInfo: Module: outliner InitialContents: InitializeToExpression: (labelMorph copy)'
+        
+         moduleLabel <- labelMorph copy.
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
          'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (deprecated)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -81,6 +87,12 @@ Items are typically those shown when I am expanded.\x7fModuleInfo: Creator: trai
          'ModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'outliner' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outliner' -> () From: ( | {
+         'Category: Outliner Morph State\x7fModuleInfo: Module: outliner InitialContents: InitializeToExpression: (morph copy)'
+        
+         tag <- morph copy.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'outliner' -> () From: ( | {
@@ -271,9 +283,7 @@ such as annotations, comments, etc.\x7fModuleInfo: Module: outliner InitialConte
         
          colorForTag = ( |
             | 
-            "Go via lobby to make sure we don't interfere with
-            old preferences code"
-            lobby preferences outliner currentColorScheme tagColorFor: self).
+            paint named: 'outlinerGray').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'outliner' -> () From: ( | {
@@ -407,17 +417,20 @@ Hack for asynchronous buttons: start script with an \"A\"\x7fModuleInfo: Module:
             color: preferredColor. 
             removeAllMorphs.
             rm: rowMorph copy beFlexible borderWidth: 0.
-
-            rm addMorphFirst: 
-              (spacerMorph copyH: 3 Color: colorForTag).
+            rm color: (paint named: 'transparent').
+            tag: spacerMorph copyH: 3 Color: colorForTag.
+            rm addMorphFirst: tag.
 
             cm: columnMorph copy beFlexible borderWidth: 0.
+            cm color: (paint named: 'transparent').
             columnUnderHeader: newColumnUnderHeader.
             cm addMorphLast: columnUnderHeader.
             cm addMorphFirst: buildHeader.
             rm addMorphLast: cm.
 
             addMorphLast: rm.
+
+            recolor.
             self).
         } | ) 
 
@@ -480,14 +493,6 @@ outliner has non-items that might be counterfactual.\x7fModuleInfo: Module: outl
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'outliner' -> () From: ( | {
-         'Category: color\x7fModuleInfo: Module: outliner InitialContents: FollowSlot'
-        
-         layoutChanged = ( |
-            | 
-            recolor. resend.layoutChanged).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'outliner' -> () From: ( | {
          'Category: copying (part of morph copying frameword)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
         
          mapReferencesUsing: dict = ( |
@@ -530,7 +535,7 @@ outliner has non-items that might be counterfactual.\x7fModuleInfo: Module: outl
             c leftJustify.
             c borderWidth: 0.
             c baseMinHeight: 0.
-            c color: preferredColor.
+            c color: (paint named: 'transparent').
             c).
         } | ) 
 
@@ -550,16 +555,6 @@ outliner has non-items that might be counterfactual.\x7fModuleInfo: Module: outl
          'Category: building\x7fCategory: should be overridden\x7fModuleInfo: Module: outliner InitialContents: FollowSlot'
         
          preferredTitleColor = paint named: 'transparent'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'outliner' -> () From: ( | {
-         'Category: color\x7fModuleInfo: Module: outliner InitialContents: FollowSlot'
-        
-         recolor = ( |
-            | 
-            color: paint named: 'blue'. 
-            morphsDo: [|:m| m recolor].
-            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'outliner' -> () From: ( | {

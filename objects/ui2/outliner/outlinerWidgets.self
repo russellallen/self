@@ -2747,9 +2747,9 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotNameEditorMorph' -> () From: ( | {
          'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
-         copySlot: slt Target: tar Accept: accept Style: sty = ( |
+         copySlot: slt Target: tar Accept: accept Style: sty LabelColor: lc = ( |
             | 
-            ((((copy target: tar) slot: slt) accept: accept) style: sty)
+            (((((copy target: tar) slot: slt) accept: accept) style: sty) savedLabelColor: lc)
               initialize).
         } | ) 
 

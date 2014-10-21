@@ -139,12 +139,12 @@ SlotsToOmit: parent.
               myOutliner addItemFirst: (
                   (morph copy 
                     setHeight: 4)
-                    colorAll: myOutliner color).
+                    colorAll: paint named: 'transparent').
               myOutliner addItemFirst: moduleSummary.
               myOutliner addItemFirst: (
                   (morph copy 
                     setHeight: 4)
-                    colorAll: myOutliner color)].
+                    colorAll: paint named: 'transparent')].
             self).
         } | ) 
 

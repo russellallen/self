@@ -1,7 +1,7 @@
  '$Revision: 30.22 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -48,7 +48,8 @@ SlotsToOmit: parent.
               slotNameEditorMorph copySlot: slot
                                     Target: self
                                     Accept: acceptNameChange
-                                     Style: titleStyle.
+                                     Style: titleStyle
+                                LabelColor: preferredSlotTitleColor.
             titleEditor isAsynchronous: true.
             myOutliner titleEditor: titleEditor.
             titleEditor).
@@ -301,8 +302,8 @@ globals generalModel parent buttonDescriptions. _Clone
     '  000  ' &
     '   0   ' ) asVector
  Colors: (
-    (paint named: 'black') &
-    (paint named: 'black')) asVector] value) From: ( |
+    (paint named: 'transparent') &
+    (paint named: 'transparent')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: globals generalSlotModel parent colonIcon.
 \x7fIsComplete: '.
             | ) .
@@ -359,8 +360,8 @@ leaves the wholeThingEditor open if the method was changed.\x7fModuleInfo: Modul
     '       ' &
     '       ' ) asVector
  Colors: (
-    (paint named: 'black') &
-    (paint named: 'black')) asVector] value) From: ( |
+    (paint named: 'blue') &
+    (paint named: 'green')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: globals generalSlotModel parent equalsIcon.
 \x7fIsComplete: '.
             | ) .
@@ -420,8 +421,8 @@ leaves the wholeThingEditor open if the method was changed.\x7fModuleInfo: Modul
     '  0    ' &
     '   0   ' ) asVector
  Colors: (
-    (paint named: 'black') &
-    (paint named: 'black')) asVector] value) From: ( |
+    (paint named: 'transparent') &
+    (paint named: 'transparent')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: globals generalSlotModel parent leftArrowIcon.
 \x7fIsComplete: '.
             | ) .
@@ -439,8 +440,8 @@ leaves the wholeThingEditor open if the method was changed.\x7fModuleInfo: Modul
     '0     0' &
     '0000000' ) asVector
  Colors: (
-    (paint named: 'black') &
-    (paint named: 'black')) asVector] value) From: ( |
+    (paint named: 'transparent') &
+    (paint named: 'transparent')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: globals generalSlotModel parent methodIcon.
 \x7fIsComplete: '.
             | ) .
