@@ -14,6 +14,7 @@ See the LICENSE file for license information.
              bootstrap remove: 'comment' From:
              bootstrap remove: 'directory' From:
              bootstrap remove: 'fileInTimeString' From:
+             bootstrap remove: 'myComment' From:
              bootstrap remove: 'postFileIn' From:
              bootstrap remove: 'revision' From:
              bootstrap remove: 'subpartNames' From:
@@ -29,12 +30,6 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pep_extensions' -> () From: ( | {
-         'ModuleInfo: Module: pep_extensions InitialContents: FollowSlot\x7fVisibility: private'
-        
-         myComment <- ''.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pep_extensions' -> () From: ( | {
          'ModuleInfo: Module: pep_extensions InitialContents: FollowSlot\x7fVisibility: public'
         
          directory <- 'applications/pep'.
@@ -44,6 +39,12 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          'ModuleInfo: Module: pep_extensions InitialContents: InitializeToExpression: (_CurrentTimeString)\x7fVisibility: public'
         
          fileInTimeString <- _CurrentTimeString.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pep_extensions' -> () From: ( | {
+         'ModuleInfo: Module: pep_extensions InitialContents: FollowSlot\x7fVisibility: private'
+        
+         myComment <- ''.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pep_extensions' -> () From: ( | {
@@ -230,6 +231,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'nativeMethods' -> () From: ( | {
+         'Category: java\x7fCategory: lang\x7fCategory: Object\x7fModuleInfo: Module: pep_extensions InitialContents: FollowSlot'
+        
+         java_lang_Object_registerNatives = ( |
+            | self).
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> () From: ( | {
          'Category: extensions\x7fModuleInfo: Module: pep_extensions InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -366,6 +374,22 @@ of Ole\'s pep loader test. -- dmu\x7fModuleInfo: Module: pep_extensions InitialC
          testRichards = ( |
             | 
             testClassNamed: 'richards.all').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'tests' -> () From: ( | {
+         'Category: individual tests\x7fModuleInfo: Module: pep_extensions InitialContents: FollowSlot'
+        
+         testSimpleTest1 = ( |
+            | 
+            testClassNamed: 'SimpleTest1').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'tests' -> () From: ( | {
+         'Category: individual tests\x7fModuleInfo: Module: pep_extensions InitialContents: FollowSlot'
+        
+         testSimpleTest2 = ( |
+            | 
+            testClassNamed: 'SimpleTest2' With: '42 84').
         } | ) 
 
 
