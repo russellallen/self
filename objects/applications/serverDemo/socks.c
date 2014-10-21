@@ -9,7 +9,7 @@
 # include <netdb.h>
 # include <stdio.h>
 
-# include "incls/_glueDefs.c.incl"
+# include "_glueDefs.cpp.incl"
 
 
 /* Why isn't this in a standard Unix header file? */
@@ -45,7 +45,7 @@ int socket_bind_listen(short port_no) {
 
 int simple_accept(int sock) {
   struct sockaddr from;
-  int len = sizeof(from);
+  socklen_t len = sizeof(from);
   return accept(sock, &from, &len);
 }
 

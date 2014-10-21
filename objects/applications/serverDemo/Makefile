@@ -6,27 +6,49 @@
 # Make file for the foreign function (server) demo.
 # An example application using dynamic linking.
 
-ROOT         = ../../..
-FILES        = Makefile
-SELF_MODULES = server
-C_MODULES    = socks toself
-include        ${ROOT}/vm/templates/svr4.make
-include        ${ROOT}/vm/templates/optimized.make
-include        ${ROOT}/templates/sources.make
+all: toself socks.so
 
-OBJECT_FILES = socks.so toself
+ROOT = ../../..
+CFLAGS=-DDEBUG -DGLUE_CHECKSUM=0 -DXLIB -DFAST_COMPILER -DSIC_COMPILER -DNATIVE_ARCH=i386 -DDYNLINK_SUPPORTED -DCOMPILER=GCC_COMPILER -DTARGET_OS_VERSION=LINUX_VERSION -DTARGET_OS_FAMILY=UNIX_FAMILY -DTARGET_ARCH=I386_ARCH -DHOST_ARCH=I386_ARCH -DGENERATE_DEBUGGING_AIDS=0 -DSPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=0 -DTARGET_IS_OPTIMIZED=1 -DTARGET_IS_PROFILED=0 -DTARGET_IS_FOR_DEBUGGING=0 -m32 -fno-threadsafe-statics -fvisibility=default -fkeep-inline-functions -fno-exceptions -fno-stack-protector -Wabi -Wreorder -Wreturn-type -Wswitch -Wcomment -Wformat -Wpointer-arith -Woverloaded-virtual -Wno-write-strings -Wparentheses
 
-NAME       = socks
-INCLUDES  += -I${ROOT}/glueDefs
+LINKFLAGS=-m32 -fno-threadsafe-statics -fvisibility=default -fkeep-inline-functions -fno-exceptions -fno-stack-protector -Wabi -Wreorder -Wreturn-type -Wswitch -Wcomment -Wformat -Wpointer-arith -Woverloaded-virtual -Wno-write-strings -Wparentheses
 
-# Builds the dynamic library socks.so from socks.o using the default linker ld.
-# Static constructors in the dynamic library is NOT working
+
+INCLUDES  += -I$(ROOT)/incls \
+             -I$(ROOT)/vm/src/any/asm \
+             -I$(ROOT)/vm/src/any/fast_compiler \
+             -I$(ROOT)/vm/src/any/interpreter \
+             -I$(ROOT)/vm/src/any/lookup \
+             -I$(ROOT)/vm/src/any/memory \
+             -I$(ROOT)/vm/src/any/objects \
+             -I$(ROOT)/vm/src/any/os \
+             -I$(ROOT)/vm/src/any/parser \
+             -I$(ROOT)/vm/src/any/prims \
+             -I$(ROOT)/vm/src/any/runtime \
+             -I$(ROOT)/vm/src/any/sic \
+             -I$(ROOT)/vm/src/any/zone \
+             -I$(ROOT)/vm/src/i386/asm \
+             -I$(ROOT)/vm/src/unix/os \
+             -I$(ROOT)/vm/src/unix/prims \
+             -I$(ROOT)/vm/src/unix/runtime \
+             -I$(ROOT)/objects/glue \
+             -include $(ROOT)/incls/_precompiled.hh -Winvalid-pch
+
+toself.o: toself.c
+	@echo Compiling toself
+	@g++ -o toself.o -c toself.c
 
 toself: toself.o
 	@echo Linking toself
-	@gcc -o toself toself.o $(EXTRA_LIBS)
+	@g++ -o toself toself.o
 
-ifeq (${OS_VARIANT},SOLARIS)
-  EXTRA_LIBS = -lsocket -lnsl
-endif
+socks.o: socks.c
+	@echo Compiling socks.so
+	g++ $(CFLAGS) $(INCLUDES) -o socks.o -c  socks.c
 
+socks.so: socks.o
+	@echo Linking socks.so
+	g++ $(LINKFLAGS) -shared -o socks.so socks.o
+
+clean:
+	-@rm toself.o toself socks.so socks.o

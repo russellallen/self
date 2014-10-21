@@ -32,7 +32,7 @@ void usage() {
 }
 
 
-inline void safeDo(int dofail, char *s) {
+inline void safeDo(int dofail, const char *s) {
   if (dofail) {
     fprintf(stderr, "toself: %s\n", s);
     exit(-1);
@@ -40,7 +40,7 @@ inline void safeDo(int dofail, char *s) {
 }
 
 
-inline void trace(char *s) {
+inline void trace(const char *s) {
   if (debug)
     fprintf(stderr, "%s\n", s);
 }
