@@ -44,7 +44,7 @@ On Mac OS X with Xcode, you can use the Xcode generator of CMake like this::
 
     cmake -GXcode $DIRECTORY_OF_SELF_CHECKOUT
 
-On 64bit Linux, you may want to explicitely use 32bit compilation::
+On 64bit Linux, you may want to explicitly use 32bit compilation::
 
     CC="gcc -m32" CXX="g++ -m32" cmake $DIRECTORY_OF_SELF_CHECKOUT
 
