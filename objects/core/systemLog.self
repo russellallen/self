@@ -439,9 +439,9 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'levels' -> 'warn' -> () From: ( | {
-         'ModuleInfo: Module: systemLog InitialContents: InitializeToExpression: (nil)'
+         'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
         
-         p* = bootstrap stub -> 'globals' -> 'nil' -> ().
+         p* = bootstrap stub -> 'globals' -> 'log' -> 'levels' -> 'baseLevel' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> () From: ( | {
