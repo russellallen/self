@@ -1,8 +1,9 @@
  '$Revision: 30.11 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+
 
 
  '-- Module body'
@@ -540,6 +541,8 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             outFile cr.
             outFile writeString: module copyright.
             outFile cr.
+            outFile writeSource: preFileInSource.
+            outFile cr.
             self).
         } | ) 
 
@@ -894,6 +897,14 @@ elseBlk invoked with a reason, and also c.
          'ModuleInfo: Module: fileOut InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'transporter' -> 'fileOut' -> () From: ( | {
+         'Category: parts of a module\x7fModuleInfo: Module: fileOut InitialContents: FollowSlot'
+        
+         preFileInSource = ( |
+            | 
+            ((reflect: module) at: 'preFileIn' IfAbsent: [^ '']) value source).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'transporter' -> 'fileOut' -> () From: ( | {

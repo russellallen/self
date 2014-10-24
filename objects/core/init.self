@@ -528,6 +528,14 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
 	 removedSlotPaths <- vector.
 	 addedOrChangedSlots <- vector.
     }
+    {  'ModuleInfo: Module: init InitialContents: InitializeToExpression: (\'\')'
+        
+         tree <- ''.
+    }
+    {  'ModuleInfo: Module: init InitialContents: FollowSlot'
+        
+         preFileIn = ("preFileIn" self).
+    }
      {  'ModuleInfo: Module: init InitialContents: FollowSlot\x7fVisibility: private'
       parent* = ( | 
         {} = 'ModuleInfo: Creator: globals modules init parent.'.

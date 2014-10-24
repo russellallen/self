@@ -1,8 +1,9 @@
- '$Revision:$'
+ '0.1.0'
  '
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+
 
 
  '-- Module body'
@@ -667,7 +668,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'systemLog' -> () From: ( | {
          'ModuleInfo: Module: systemLog InitialContents: FollowSlot\x7fVisibility: public'
         
-         revision <- '$Revision:$'.
+         revision <- '0.1.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'systemLog' -> () From: ( | {
