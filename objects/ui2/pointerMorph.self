@@ -1,6 +1,6 @@
  '$Revision: 30.15 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -423,8 +423,8 @@ SlotsToOmit: parent prototype.
             button baseMinWidth:  3.
             button baseMinHeight: 3.
             button beShrinkWrap.
-            button addMorph: (imageMorph copyImage: lo buttonIcon copy).
             button color: paint named: 'transparent'.
+            button addMorph: (imageMorph copyImage: lo buttonIcon copy).
             button).
         } | ) 
 

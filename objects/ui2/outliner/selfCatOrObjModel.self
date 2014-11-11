@@ -1,6 +1,6 @@
  '$Revision: 30.11 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -134,7 +134,6 @@ SlotsToOmit: parent.
                   labelMorph copyLabel: moduleSummaryString
                               FontSpec: moduleSummaryFontSpec
                                  Color: moduleSummaryFontColor.
-            moduleSummary colorAll: myOutliner color.
             safelyDo: [
               myOutliner addItemFirst: (
                   (morph copy 
@@ -626,7 +625,6 @@ SlotsToOmit: parent.
             moduleSummary label = s
              ifFalse: [
               moduleSummary label: s.
-              moduleSummary colorAll: myOutliner color.
             ].
             self).
         } | ) 

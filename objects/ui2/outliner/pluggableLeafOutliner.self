@@ -1,6 +1,6 @@
  '$Revision: 30.9 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -214,7 +214,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableLeafOutliner' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: pluggableLeafOutliner InitialContents: FollowSlot'
+         'Category: updating\x7fModuleInfo: Module: pluggableLeafOutliner InitialContents: FollowSlot'
         
          recolor = ( |
             | 
@@ -297,14 +297,13 @@ SlotsToOmit: parent prototype.
              i.
             | 
             i: buttonIcon copy.
-            i colors at: 0 Put: model preferredTitleColor.
+            i colors size > 0 
+              ifTrue: [i colors at: 0 
+                               Put: model preferredTitleColor].
             e: expander.
             e morphs size < 1 ifTrue: [^ self].
             i = e firstMorph image ifFalse: [
-              e removeAllMorphs.
-              e addMorphLast: (imageMorph copyImage: i).
-              e changed.
-            ].
+              e firstMorph setImage: i].
             self).
         } | ) 
 

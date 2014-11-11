@@ -1,6 +1,6 @@
  '$Revision: 30.22 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -217,14 +217,16 @@ globals generalModel parent buttonDescriptions. _Clone
         
          buttonIcon = ( |
             | 
-              "must test for assignable before assignment,
+            "slot could, unfortunately, be nil"
+            slot isNil ifTrue: [^ ui2Image copy]. 
+             "must test for assignable before assignment,
                otherwise fake slots break"
             case
              if: [ slot isMethod ]         Then: [ methodIcon ]
              If: [ slot isAssignable not ] Then: [ equalsIcon ]
              If: [ slot isAssignment ]     Then: [ leftArrowIcon ]
              If: [ slot isAssignable ]     Then: [ colonIcon ]
-             Else: [ morph ]).
+             Else: [ ui2Image copy ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalSlotModel' -> 'parent' -> () From: ( | {

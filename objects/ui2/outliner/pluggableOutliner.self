@@ -1,6 +1,6 @@
  '$Revision: 30.18 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -97,7 +97,7 @@ SlotsToOmit: body items parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> () From: ( | {
          'Category: Outliner Morph State\x7fModuleInfo: Module: pluggableOutliner InitialContents: InitializeToExpression: (rowMorph copy)\x7fVisibility: private'
         
-         body <- rowMorph copy.
+         body.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> () From: ( | {
@@ -145,7 +145,7 @@ SlotsToOmit: body items parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> () From: ( | {
          'Category: Outliner Morph State\x7fModuleInfo: Module: pluggableOutliner InitialContents: InitializeToExpression: (columnMorph copy)\x7fVisibility: private'
         
-         items <- columnMorph copy.
+         items.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> () From: ( | {
@@ -1230,13 +1230,13 @@ Same for collapse:, expandAll: collapseAll: -- dmu 4/1\x7fModuleInfo: Module: pl
               m findMorphWithLabel ifNil: false IfNotNil: [|:l|
                  l color: model preferredTitleColor ]]].
             commentButton 
-               colorButtonBackground: model preferredHeaderColor
+               colorButtonBackground: model preferredBodyColor
                           Foreground: model preferredTitleColor.
             titleEditor ifNotNil: [ titleEditor labelColor: model preferredTitleColor].
             color: model preferredBorderColor.
             body ifNotNil: [body color: model preferredBodyColor].
-            model recolorModuleSummary.
             items ifNotNil: [items recolor].
+            model recolorModuleSummary.
             "Tags only at top level"
             isRoot
                ifTrue: [tag color: model preferredTagColor]

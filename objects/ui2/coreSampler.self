@@ -1,7 +1,7 @@
  '$Revision: 30.10 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -667,7 +667,7 @@ SlotsToOmit: parent prototype.
     '                     ' &
     '                     ' ) asVector
  Colors: (
-    (paint named: 'black') &
+    (paint named: 'transparent') &
     (paint named: 'yellow')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph eyesImage.
 \x7fIsComplete: '.
@@ -686,7 +686,7 @@ SlotsToOmit: parent prototype.
     '               ' &
     '               ' ) asVector
  Colors: (
-    (paint named: 'black') &
+    (paint named: 'transparent') &
     (paint named: 'yellow')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph flexibleHImage.
 \x7fIsComplete: '.
@@ -713,7 +713,7 @@ SlotsToOmit: parent prototype.
     '   0   ' &
     '       ' ) asVector
  Colors: (
-    (paint named: 'black') &
+    (paint named: 'transparent') &
     (paint named: 'yellow')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph flexibleVImage.
 \x7fIsComplete: '.
@@ -963,7 +963,7 @@ SlotsToOmit: parent prototype.
     '               ' &
     '               ' ) asVector
  Colors: (
-    (paint named: 'black') &
+    (paint named: 'transparent') &
     (paint named: 'yellow')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph rigidHImage.
 \x7fIsComplete: '.
@@ -990,7 +990,7 @@ SlotsToOmit: parent prototype.
     '  0 0  ' &
     '  000  ' ) asVector
  Colors: (
-    (paint named: 'black') &
+    (paint named: 'transparent') &
     (paint named: 'yellow')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph rigidVImage.
 \x7fIsComplete: '.
@@ -1009,7 +1009,7 @@ SlotsToOmit: parent prototype.
     '0   0     0   0' &
     '0             0' ) asVector
  Colors: (
-    (paint named: 'black') &
+    (paint named: 'transparent') &
     (paint named: 'yellow')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph shrinkWrapHImage.
 \x7fIsComplete: '.
@@ -1036,7 +1036,7 @@ SlotsToOmit: parent prototype.
     '   0   ' &
     '0000000' ) asVector
  Colors: (
-    (paint named: 'black') &
+    (paint named: 'transparent') &
     (paint named: 'yellow')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph shrinkWrapVImage.
 \x7fIsComplete: '.

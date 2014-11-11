@@ -1,6 +1,6 @@
  '$Revision: 30.18 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -188,9 +188,9 @@ SlotsToOmit: parent prototype rawBox rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'lineMorph' -> () From: ( | {
-         'ModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: private'
+         'ModuleInfo: Module: morphLib InitialContents: InitializeToExpression: (paint named: \'black\')\x7fVisibility: private'
         
-         rawColor <- paint named: 'transparent'.
+         rawColor <- paint named: 'black'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'lineMorph' -> () From: ( | {

@@ -1,6 +1,6 @@
  '$Revision: 30.12 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -520,7 +520,7 @@ SlotsToOmit: parent.
         
          preferredColor = ( |
             | 
-            preferences outliner currentColorScheme selfObjectModel).
+            preferences outliner colorScheme selfObjectModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> () From: ( | {

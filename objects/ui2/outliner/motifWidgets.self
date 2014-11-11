@@ -1,7 +1,7 @@
  'Sun-$Revision: 30.10 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -142,12 +142,13 @@ SlotsToOmit: parent prototype.
          commentButtonMorph = bootstrap define: bootstrap stub -> 'globals' -> 'commentButtonMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
              bootstrap remove: 'prototype' From:
+             bootstrap remove: 'rawColor' From:
              globals optionalMorph copyRemoveAllMorphs ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'commentButtonMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals commentButtonMorph.
 
 CopyDowns:
 globals optionalMorph. copyRemoveAllMorphs 
-SlotsToOmit: parent prototype.
+SlotsToOmit: parent prototype rawColor.
 
 \x7fIsComplete: '.
             | ) .
@@ -172,6 +173,12 @@ SlotsToOmit: parent prototype.
          'ModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'commentButtonMorph' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'commentButtonMorph' -> () From: ( | {
+         'Category: Basic Morph State\x7fModuleInfo: Module: motifWidgets InitialContents: InitializeToExpression: (paint named: \'transparent\')\x7fVisibility: private'
+        
+         rawColor <- paint named: 'transparent'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'commentButtonMorph' -> () From: ( | {
@@ -748,16 +755,29 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'commentButtonMorph' -> () From: ( | {
+         'ModuleInfo: Module: motifWidgets InitialContents: FollowSlot'
+        
+         colorButtonBackground: bg Foreground: fg = ( |
+            | 
+            "Inner is pushButtonMorph"
+            inner color: bg.
+            "First submorph is a labelMorph"
+            inner morphs first color: fg.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'commentButtonMorph' -> () From: ( | {
          'ModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: private'
         
          copyTarget: tar Action: act Style: sty = ( |
             | 
-            (((copy
+            "rca 2014/11/11 Ignore style color.
+            Color handled by recolor"
+            ((copy
                beShrinkWrap
                target: tar)
                action: act)
-               style: sty)
-               color: sty color).
+               style: sty).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'commentButtonMorph' -> () From: ( | {
@@ -767,13 +787,6 @@ SlotsToOmit: parent prototype.
             | 
             beFlexibleVertically.
             beShrinkWrapHorizontally.
-            quoteIcon: ui2Image copyPixelLines: (
-                    ' 00' &
-                    ' 0 ' &
-                    '0  ' ) asVector
-                Colors: (
-                    (paint named: 'black') &
-                    (paint named: 'black') ) asVector.
             self).
         } | ) 
 
@@ -796,12 +809,6 @@ SlotsToOmit: parent prototype.
          'ModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'optionalMorph' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'commentButtonMorph' -> () From: ( | {
-         'ModuleInfo: Module: motifWidgets InitialContents: InitializeToExpression: (ui2Image)'
-        
-         quoteIcon <- bootstrap stub -> 'globals' -> 'ui2Image' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'expanderPushButton' -> () From: ( | {

@@ -1,6 +1,6 @@
  '$Revision: 30.15 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -520,6 +520,16 @@ SlotsToOmit: parent.
             myOutliner outlinersFilteredBy: [|:o| 
                 o model isCategoryModel
             && [o model isPseudoCategoryModel not]]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalCategoryModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: generalCategoryModel InitialContents: FollowSlot'
+        
+         recolorModuleSummary = ( |
+            | 
+            moduleSummary isNil ifFalse: [
+              moduleSummary color: preferredTitleColor].
+             self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalCategoryModel' -> 'parent' -> () From: ( | {

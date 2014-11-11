@@ -1,6 +1,6 @@
  '$Revision: 30.22 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -976,7 +976,7 @@ SlotsToOmit: parent prototype rawColor.
         
          initializePrototype = ( |
             | 
-            color: paint named: 'lightGray'.
+            color: paint named: 'transparent'.
             rawEditMode: false.
             borderWidth: 1.
             beShrinkWrap).
