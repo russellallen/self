@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.20 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -572,8 +572,11 @@ if space overflows. -- dmu 5/04\x7fModuleInfo: Module: vector InitialContents: F
          'Category: printing\x7fModuleInfo: Module: vector InitialContents: FollowSlot'
         
          storeStringIfFail: fb = ( |
+             s.
             | 
-            (asString canonicalize storeStringIfFail: fb), ' asByteVector').
+            s: '\''.
+            bytesDo: [|:b| s: s, '\\x', ('00' copySize: 2 - b hexPrintString size), b hexPrintString].
+            s, '\' asByteVector').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
