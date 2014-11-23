@@ -589,6 +589,7 @@ Very dangerous - use with care.\x7fModuleInfo: Module: native InitialContents: F
 
  bootstrap read: 'nativeExamples' From: 'core'
  bootstrap read: 'nativeSodium' From: 'core'
+ bootstrap read: 'nativeX86Asm' From: 'core'
 
 
 
