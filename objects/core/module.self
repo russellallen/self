@@ -1,4 +1,4 @@
- 'Sun-$Revision: 30.19 $'
+ '30.20.0-prerelease1'
  '
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
@@ -7,60 +7,6 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
 
 
  '-- Module body'
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'bootstrap' -> () From: ( | {
-         'Category: bootstrap reading\x7fModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: public'
-        
-         read: name From: dir InTree: t = ( |
-            | 
-            read: name From: dir InTree: t IfFail: [ | :e. :prim |
-              'failed to read: ' _StringPrint. 
-              name         _StringPrint.
-              ' from: '    _StringPrint.
-              dir          _StringPrint.
-              ' in tree: ' _StringPrint.
-              t            _StringPrint.
-              '.  Error: ' _StringPrint.
-              e            _StringPrint. 
-              '\n'         _StringPrint. 
-              _ThisProcess _AbortProcess.
-            ]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'bootstrap' -> () From: ( | {
-         'Category: bootstrap reading\x7fModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: public'
-        
-         read: name From: dir InTree: t IfFail: fb = ( |
-             l = bootstrap stub -> 'lobby' -> ().
-             n.
-            | 
-            n: ''.
-            t = '' ifFalse: [
-              n: concat: (l modules init treeDictionary at: t 
-                                                  IfAbsent: [^ l error: 'Cannot find tree:', t]) 
-                   With: '/'].
-            n: concat: n                     With: dir.
-            n: concat: n                     With: '/'.
-            n: concat: n                     With: name.
-            (concat: n With: '.self') _RunScriptIfFail: [|:e. :prim | ^ fb value: e With: prim]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'bootstrap' -> () From: ( | {
-         'Category: bootstrap reading\x7fModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: public'
-        
-         read: name InTree: t = ( |
-            | 
-            read: name From: '' InTree: t IfFail: [ | :e. :prim |
-              'failed to read: ' _StringPrint. 
-              name         _StringPrint.
-              ' in tree: ' _StringPrint.
-              t            _StringPrint.
-              '.  Error: ' _StringPrint.
-              e            _StringPrint. 
-              '\n'         _StringPrint. 
-              _ThisProcess _AbortProcess.
-            ]).
-        } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {
          'Category: comparing\x7fModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: public'
@@ -1304,9 +1250,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'module' -> () From: ( | {
-         'ModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: module InitialContents: InitializeToExpression: (\'30.20.0-prerelease1\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.19 $'.
+         revision <- '30.20.0-prerelease1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'module' -> () From: ( | {
