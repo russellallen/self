@@ -3,7 +3,7 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
-"preFileIn" self
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -906,7 +906,9 @@ elseBlk invoked with a reason, and also c.
         
          preFileInSource = ( |
             | 
-            ((reflect: module) at: 'preFileIn' IfAbsent: [^ '']) value source).
+            '[' , 
+               ((reflect: module) at: 'preFileIn' IfAbsent: [^ ' self  ']) value source,
+            '] value').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'transporter' -> 'fileOut' -> () From: ( | {

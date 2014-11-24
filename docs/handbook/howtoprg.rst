@@ -851,7 +851,7 @@ Versioning
 
 Each transporter module has a slot named ``revision`` containing a string version number. It is recommended that you use Semantic Versioning [#f10]_ so that the version of a module can be tested as follows::
 
-  modules string version >= (modules init moduleVersion copyOn: '1.0.0')
+  modules string version >= (modules init moduleVersion copyOn: '1.0.0') 
     ifFalse: [log warning: 'Old string version']
 
 This test could be placed in the ``preFileIn`` slot of your module to ensure a sane file in environment before the rest of the file is read.
