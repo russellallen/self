@@ -31,13 +31,35 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
          'Category: bootstrap reading\x7fModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: public'
         
          read: name From: dir InTree: t IfFail: fb = ( |
+             l = bootstrap stub -> 'lobby' -> ().
              n.
             | 
-            n: concat: (modules init treeDictionary at: tree IfAbsent: [^ error: 'Cannot find tree']) With: '/'.
+            n: ''.
+            t = '' ifFalse: [
+              n: concat: (l modules init treeDictionary at: t 
+                                                  IfAbsent: [^ l error: 'Cannot find tree:', t]) 
+                   With: '/'].
             n: concat: n                     With: dir.
             n: concat: n                     With: '/'.
             n: concat: n                     With: name.
-            (concat: n With: '.self') _RunScriptIfFail: fb).
+            (concat: n With: '.self') _RunScriptIfFail: [|:e. :prim | ^ fb value: e With: prim]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'bootstrap' -> () From: ( | {
+         'Category: bootstrap reading\x7fModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: public'
+        
+         read: name InTree: t = ( |
+            | 
+            read: name From: '' InTree: t IfFail: [ | :e. :prim |
+              'failed to read: ' _StringPrint. 
+              name         _StringPrint.
+              ' in tree: ' _StringPrint.
+              t            _StringPrint.
+              '.  Error: ' _StringPrint.
+              e            _StringPrint. 
+              '\n'         _StringPrint. 
+              _ThisProcess _AbortProcess.
+            ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {
@@ -481,8 +503,10 @@ It becomes the last submodule. \x7fModuleInfo: Module: module InitialContents: F
             myComment: ''.
             directory: ''.
             revision: ''.
+            tree: ''.
             subparts: vector.
             asMirror addSlots: reflect: postFileInProto.
+            asMirror addSlots: reflect: preFileInProto.
             self).
         } | ) 
 
@@ -572,13 +596,13 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> () From: ( | {
          'ModuleInfo: Module: module InitialContents: FollowSlot'
         
-         p* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals modules init parent moduleVersion p.
+         parent* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals modules init parent moduleVersion parent.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'Category: comparing\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          < mv = ( |
@@ -589,7 +613,7 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
             (rawPrereleaseLabel != '') && (mv rawPrereleaseLabel = '')).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'Category: comparing\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          = mv = ( |
@@ -600,7 +624,7 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
             (rawPrereleaseLabel = mv rawPrereleaseLabel)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          copyOn: s = ( |
@@ -614,7 +638,7 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
             copyOnNewStyle: s).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          copyOnModule: module = ( |
@@ -622,7 +646,7 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
             (copyOn: module revision) referrentModule: module).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          copyOnNewStyle: s = ( |
@@ -642,7 +666,7 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
             m).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          copyOnOldStyle: s = ( |
@@ -656,7 +680,7 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
               rawMinor: (t at: 1) asInteger )).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          copyOnSunStyle: s = ( |
@@ -669,7 +693,7 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
               rawMinor: (t at: 1) asInteger )).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'Category: comparing\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          hash = ( |
@@ -677,47 +701,47 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
             rawMajor hash ^^ rawMinor hash ^^ rawPatch hash ^^ rawPrereleaseLabel hash).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'Category: accessing\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          major = ( |
             | rawMajor).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'Category: accessing\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          minor = ( |
             | rawMinor).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'Category: comparing\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          mixinsOrdered* = bootstrap stub -> 'mixins' -> 'ordered' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'ModuleInfo: Module: module InitialContents: FollowSlot'
         
          p* = bootstrap stub -> 'traits' -> 'clonable' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'Category: accessing\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          patch = ( |
             | rawPatch).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'Category: accessing\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          prereleaseLabel = ( |
             | rawPrereleaseLabel).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'p' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'moduleVersion' -> 'parent' -> () From: ( | {
          'Category: printing\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          printString = ( |
@@ -930,6 +954,29 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
             "walk subparts in post-order"
             subparts do: [|:m| m postorderDo: blk].
             blk value: self With: self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {
+         'Category: resent to\x7fModuleInfo: Module: module InitialContents: FollowSlot'
+        
+         preFileIn = ( |
+            | self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: public'
+        
+         preFileInProto = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'preFileInProto' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals modules init parent preFileInProto.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> 'preFileInProto' -> () From: ( | {
+         'ModuleInfo: Module: module InitialContents: FollowSlot'
+        
+         preFileIn = ( |
+            | resend.preFileIn).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {

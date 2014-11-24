@@ -838,17 +838,21 @@ Howevever Self modules have a slot 'tree' which can take a name of a tree. If th
 
 This allows the developer to maintain several separate trees. For example::
 
-  modules init registerTree: 'webserver' At: '/Users/username/webserver'.
-  bootstrap read: 'webserver' From: 'applications' InTree: 'webserver'.
+  modules init 
+      registerTree: 'org_selflanguage_webserver' 
+                At: '/Users/username/org_selflanuage_webserver'.
+  bootstrap read: 'webserver' InTree: 'org_selflanguage_webserver'.
   modules webserver fileOut.
+  
+Important considerations: module names are globally unique (that is, two modules called 'webserver' in different trees are considered the same module and will overwrite each other). The tree name itself should also be globally unique - that is it is not possible to have two trees with the same name in a single Self world.
 
 Versioning
 ==========
 
 Each transporter module has a slot named ``revision`` containing a string version number. It is recommended that you use Semantic Versioning [#f10]_ so that the version of a module can be tested as follows::
 
-  modules string version < (modules init moduleVersion copyOn: '1.0.0')
-    ifTrue: [log warning: 'Old string version']
+  modules string version >= (modules init moduleVersion copyOn: '1.0.0')
+    ifFalse: [log warning: 'Old string version']
 
 This test could be placed in the ``preFileIn`` slot of your module to ensure a sane file in environment before the rest of the file is read.
 

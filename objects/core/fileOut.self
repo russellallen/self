@@ -3,7 +3,7 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
-
+"preFileIn" self
 
 
  '-- Module body'
@@ -741,6 +741,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                       outFile token: 'From:'.
                       outFile writeString: sm directory.
                     ].
+                    outFile token: 'InTree: globals modules ', module name, ' tree'.
                     outFile cr.
                 ].
             ].
