@@ -1,7 +1,7 @@
  'Sun-$Revision: 30.11 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -216,7 +216,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          reportError: proc ForceStackTrace: sft = ( |
             | 
-            proc stderr write: errorString, '\n'.
+            log error: errorString.
             process != proc ifFalse: [
                 ^ self  "can't print nice stack trace if running raw VM prompt"].  
             (sft || [preferences printStackOnError])

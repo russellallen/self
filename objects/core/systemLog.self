@@ -1,4 +1,4 @@
- '$Revision:$'
+ '0.1.0'
  '
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
@@ -120,7 +120,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'dispatcher' -> () From: ( | {
          'Category: support\x7fModuleInfo: Module: systemLog InitialContents: FollowSlot'
         
-         p* = bootstrap stub -> 'traits' -> 'oddball' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'oddball' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'dispatcher' -> () From: ( | {
@@ -137,6 +137,13 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
             handlers findFirst: [|:h| h name = handler name]
                      IfPresent: [|:h| handlers remove: h].
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'dispatcher' -> () From: ( | {
+         'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
+        
+         removeAll = ( |
+            | handlers removeAll. self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'dispatcher' -> () From: ( | {
@@ -180,10 +187,31 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'entry' -> () From: ( | {
          'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
         
-         p* = bootstrap stub -> 'traits' -> 'clonable' -> ().
+         parent* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'log' -> 'entry' -> 'parent' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals log entry parent.
+'.
+            | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'entry' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'entry' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
+        
+         ansiString = ( |
+            | 
+            '[', timestamp compactPrintString, '] ', 
+            severity asColorAnsiString, ' -- ', 
+            (logger asString != '' ifTrue: [logger asString, ': '] 
+                                    False: ''), 
+            message asString).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'entry' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'entry' -> 'parent' -> () From: ( | {
          'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
         
          printString = ( |
@@ -297,6 +325,13 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'levels' -> 'baseLevel' -> () From: ( | {
          'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
         
+         asColorAnsiString = ( |
+            | asString).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'levels' -> 'baseLevel' -> () From: ( | {
+         'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
+        
          hash = ( |
             | intValue).
         } | ) 
@@ -353,6 +388,14 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'levels' -> 'error' -> () From: ( | {
          'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
         
+         asColorAnsiString = ( |
+            | 
+            '\x1b[31m', asString, '\x1b[0m').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'levels' -> 'error' -> () From: ( | {
+         'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
+        
          asString = ( |
             | 'error').
         } | ) 
@@ -376,6 +419,14 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
              {} = 'ModuleInfo: Creator: globals log levels fatal.
 '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'levels' -> 'fatal' -> () From: ( | {
+         'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
+        
+         asColorAnsiString = ( |
+            | 
+            '\x1b[37;41m', asString, '\x1b[0m').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'levels' -> 'fatal' -> () From: ( | {
@@ -428,6 +479,13 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'levels' -> 'warn' -> () From: ( | {
          'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
         
+         asColorAnsiString = ( |
+            | '\x1b[33m', asString, '\x1b[0m').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'levels' -> 'warn' -> () From: ( | {
+         'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
+        
          asString = ( |
             | 'warn').
         } | ) 
@@ -467,7 +525,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> () From: ( | {
          'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
         
-         p* = bootstrap stub -> 'traits' -> 'oddball' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'oddball' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> () From: ( | {
@@ -570,34 +628,88 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> () From: ( | {
          'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
         
-         systemErrorsToSTDERR = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> 'systemErrorsToSTDERR' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals log prototypeHandlers systemErrorsToSTDERR.
+         simplePrinting = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> 'simplePrinting' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals log prototypeHandlers simplePrinting.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> 'systemErrorsToSTDERR' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> 'simplePrinting' -> () From: ( | {
          'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
         
          handle: e = ( |
             | 
-            (e severity >= log levels error) &&
-            [e logger = ''] && 
-            [stderr isOpen]
-              ifTrue: [stderr write: e asString, '\n'].
+            stderr isOpen
+              ifTrue: [stderr write: e message, 
+                        (e message last = '\n' ifTrue: '' False: '\n')].
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> 'systemErrorsToSTDERR' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> 'simplePrinting' -> () From: ( | {
          'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
         
-         name = 'systemErrorsToSTDERR'.
+         name = 'simplePrinting'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> 'systemErrorsToSTDERR' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> 'simplePrinting' -> () From: ( | {
          'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
         
          p* = bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> 'baseHandler' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> () From: ( | {
+         'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
+        
+         systemInfoToSTDERR = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> 'systemInfoToSTDERR' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals log prototypeHandlers systemInfoToSTDERR.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> 'systemInfoToSTDERR' -> () From: ( | {
+         'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
+        
+         handle: e = ( |
+            | 
+            (e severity >= log levels info) &&
+            [e logger = ''] && 
+            [stderr isOpen]
+              ifTrue: [stderr write: (e copy ansiString replace: '\n' With: ' '), '\n'].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> 'systemInfoToSTDERR' -> () From: ( | {
+         'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
+        
+         name = 'systemInfoToSTDERR'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> 'systemInfoToSTDERR' -> () From: ( | {
+         'ModuleInfo: Module: systemLog InitialContents: FollowSlot'
+        
+         p* = bootstrap stub -> 'globals' -> 'log' -> 'prototypeHandlers' -> 'baseHandler' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> () From: ( | {
+         'Category: helpful methods\x7fModuleInfo: Module: systemLog InitialContents: FollowSlot'
+        
+         resetToDefault = ( |
+            | 
+            dispatcher removeAll. dispatcher add: prototypeHandlers systemInfoToSTDERR. self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> () From: ( | {
+         'Category: helpful methods\x7fModuleInfo: Module: systemLog InitialContents: FollowSlot'
+        
+         resetToSilence = ( |
+            | dispatcher removeAll. self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> () From: ( | {
+         'Category: helpful methods\x7fModuleInfo: Module: systemLog InitialContents: FollowSlot'
+        
+         resetToSimplePrinting = ( |
+            | dispatcher removeAll. dispatcher add: prototypeHandlers simplePrinting. self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> () From: ( | {
@@ -660,14 +772,14 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         
          postFileIn = ( |
             | 
-            log dispatcher add: log prototypeHandlers systemErrorsToSTDERR.
+            log resetToDefault.
             resend.postFileIn).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'systemLog' -> () From: ( | {
-         'ModuleInfo: Module: systemLog InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: systemLog InitialContents: InitializeToExpression: (\'0.1.0\')\x7fVisibility: public'
         
-         revision <- '$Revision:$'.
+         revision <- '0.1.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'systemLog' -> () From: ( | {
