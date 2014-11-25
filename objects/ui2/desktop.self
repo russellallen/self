@@ -1,7 +1,7 @@
  'Sun-$Revision: 30.10 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -45,13 +45,12 @@ See the LICENSE file for license information.
 
             ( _MaxPICSizeIfFail: [^ self] ) >= betterMaxPICSize ifTrue: [^self].
 
-            'Adjusting VM for better UI2 performance:' printLine.
-
-            ('  _MaxPICSize: ', betterMaxPICSize printString) printLine.
+            log info: 
+               'Adjusting VM for better UI2 performance:', 
+               '  _MaxPICSize: ', betterMaxPICSize printString.
             _MaxPICSize: betterMaxPICSize.
 
             "The code cache has to be flushed after changing the max PIC size."
-            '  _Flush' printLine.
             _Flush.
             self).
         } | ) 

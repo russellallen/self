@@ -507,7 +507,12 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         
          log: entry = ( |
             | 
-            dispatcher dispatch: entry. self).
+            "If schedule is not running, fall
+            back on simple printing to stdout"
+            scheduler isRunning
+             ifTrue: [dispatcher dispatch: entry]
+              False: [('*unlogged* ', entry printString) printLine].
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> () From: ( | {
