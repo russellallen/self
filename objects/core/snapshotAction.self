@@ -1,7 +1,7 @@
- 'Sun-$Revision: 30.12 $'
+ '30.13.0'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -78,6 +78,11 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                              receiver: snapshotAction
                              Selector: 'processCommandLine'
                              Arguments: vector).
+            snapshotAction addPostReadMessage: 
+                          (message copy 
+                             receiver: snapshotAction 
+                             Selector: 'setStartupTime' 
+                             Arguments: vector).
 
             ('-' & '--') asVector do: [|:a|
               snapshotAction
@@ -107,7 +112,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                                      desktop suppressRestart.
                                      i succ).
                                  |).
-                                 
+
             'Fhprtw' do: [|:opt|
               snapshotAction
                 forCommandLineArg: '-', opt
@@ -122,9 +127,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'snapshotAction' -> () From: ( | {
-         'ModuleInfo: Module: snapshotAction InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: snapshotAction InitialContents: InitializeToExpression: (\'30.13.0\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.12 $'.
+         revision <- '30.13.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'snapshotAction' -> () From: ( | {
@@ -337,6 +342,20 @@ standard mechanism.\x7fModuleInfo: Module: snapshotAction InitialContents: Follo
         
          sendMessages: msgs = ( |
             | msgs do: [|:msg| msg send ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'snapshotAction' -> () From: ( | {
+         'ModuleInfo: Module: snapshotAction InitialContents: FollowSlot'
+        
+         setStartupTime = ( |
+            | 
+            globals vmStartupTime: time current).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+         'Category: system\x7fCategory: OS and filesystem interface\x7fModuleInfo: Module: snapshotAction InitialContents: InitializeToExpression: (time)\x7fVisibility: public'
+        
+         vmStartupTime <- bootstrap stub -> 'globals' -> 'time' -> ().
         } | ) 
 
 

@@ -78,23 +78,11 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'Comment: Add two chars together and return result\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot\x7fVisibility: public'
         
          add: a And: b = ( |
-            | 
-            host osName  = 'macOSX' 
-              ifTrue: [osxAdd: a And: b]
-               False: [unknownPlatform]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
-        
-         osxAdd: a And: b = ( |
              result.
             | 
-            (osxNativeMethod isForSource: osxSource)
-              ifFalse: [recompile].
-
+            isSafeIfFalse: [|:e| ^ error: 'Cannot safely run method: ', e asString].
             result: byteVector copySize: 1.
-            osxNativeMethod
+            platformNativeMethod
                 valueWith: result 
                      With: ((byteVector copySize: 1) writeByte: a) 
                      With: ((byteVector copySize: 1) writeByte: b).
@@ -102,6 +90,26 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
+        
+         isSafeIfFalse: blk = ( |
+            | 
+            lastStartupTime == vmStartupTime 
+               ifFalse: [
+                   host osName  = 'macOSX' 
+                     ifTrue: [platformNativeMethod: osxNativeMethod]
+                      False: [^ blk value: 'Unknown platform'].
+                   lastStartupTime: vmStartupTime].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: InitializeToExpression: (time)'
+        
+         lastStartupTime <- bootstrap stub -> 'globals' -> 'time' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
          'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: InitializeToExpression: (native support nativeMethod 
     copyForBytes: \'\\x55\\x89\\xe5\\x8b\\x45\\x08\\x8b\\x4d\\x0c\\x8b\\x55\\x10\\x8a\\x12\\x02\\x11\\x88\\x10\\x5d\\xc3\\x66\\x66\\x66\\x2e\\x0f\\x1f\\x84\\x00\\x00\\x00\\x00\\x00\\x55\\x89\\xe5\\x8a\\x45\\x0c\\x02\\x45\\x08\\x0f\\xbe\\xc0\\x5d\\xc3\\x00\\x00\\x06\\x00\\x00\\x00\\x0f\\x01\\x00\\x00\\x20\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x0f\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x5f\\x66\\x63\\x74\\x00\\x5f\\x61\\x64\\x64\\x00\\x00\' asByteVector
            Arity: 3
@@ -160,6 +168,12 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: InitializeToExpression: (native support nativeMethod)'
+        
+         platformNativeMethod <- bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeMethod' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
          'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
         
          recompile = ( |
@@ -176,133 +190,6 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
-        
-         testAdd = ( |
-            | 
-            [(add: 3 And: 4) = 7] assert. self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
-        
-         unknownPlatform = ( |
-            | error: 'Native code unavailable for: ', host os).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
-         'Category: examples\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
-        
-         fastUnsafeAddChars = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'fastUnsafeAddChars' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals native fastUnsafeAddChars.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'fastUnsafeAddChars' -> () From: ( | {
-         'ModuleInfo: Module: nativeExamples InitialContents: FollowSlot\x7fVisibility: public'
-        
-         add: a And: b = ( |
-             c.
-             d.
-             result.
-            | 
-            result: bvTemplate _Clone.
-            c: bvTemplate _Clone _CUnsignedIntSize: 8 At: 0 Put: a IfFail: [error: 'Bad Byte'].
-            d: bvTemplate _Clone _CUnsignedIntSize: 8 At: 0 Put: b IfFail: [error: 'Bad Byte'].
-            osxNativeMethod
-              unsafeValueWith: result 
-                         With: ((byteVector copySize: 1) writeByte: a) 
-                         With: ((byteVector copySize: 1) writeByte: b)
-                         With: bvTemplate
-                         With: bvTemplate
-                         With: bvTemplate
-                         With: bvTemplate
-                         With: bvTemplate.
-            result _CUnsignedIntSize: 8 At: 0 IfFail: [error: 'Bad Byte']).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'fastUnsafeAddChars' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: InitializeToExpression: (byteVector copySize: 1)'
-        
-         bvTemplate = byteVector copySize: 1.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'fastUnsafeAddChars' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: InitializeToExpression: (native support nativeMethod 
-    copyForBytes: \'\\x55\\x89\\xe5\\x8b\\x45\\x08\\x8b\\x4d\\x0c\\x8b\\x55\\x10\\x8a\\x12\\x02\\x11\\x88\\x10\\x5d\\xc3\\x66\\x66\\x66\\x2e\\x0f\\x1f\\x84\\x00\\x00\\x00\\x00\\x00\\x55\\x89\\xe5\\x8a\\x45\\x0c\\x02\\x45\\x08\\x0f\\xbe\\xc0\\x5d\\xc3\\x00\\x00\\x06\\x00\\x00\\x00\\x0f\\x01\\x00\\x00\\x20\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x0f\\x01\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x5f\\x66\\x63\\x74\\x00\\x5f\\x61\\x64\\x64\\x00\\x00\' asByteVector
-           Arity: 3
-        SafeCPUs: (collector copyFirst: (\'x86\')) asSet
-         SafeOSs: (collector copyFirst: (\'macOSX\')) asSet
-          Source: \'
-  char add(char, char);
-
-  void fct(char *a, char *b, char *c, ... ){
-    *a = add(*b, *c);
-  }
-
-  char add(char a, char b) {
-    return a + b;
-  }
-\')'
-        
-         osxNativeMethod <- native support nativeMethod 
-    copyForBytes: '\x55\x89\xe5\x8b\x45\x08\x8b\x4d\x0c\x8b\x55\x10\x8a\x12\x02\x11\x88\x10\x5d\xc3\x66\x66\x66\x2e\x0f\x1f\x84\x00\x00\x00\x00\x00\x55\x89\xe5\x8a\x45\x0c\x02\x45\x08\x0f\xbe\xc0\x5d\xc3\x00\x00\x06\x00\x00\x00\x0f\x01\x00\x00\x20\x00\x00\x00\x01\x00\x00\x00\x0f\x01\x00\x00\x00\x00\x00\x00\x00\x5f\x66\x63\x74\x00\x5f\x61\x64\x64\x00\x00' asByteVector
-           Arity: 3
-        SafeCPUs: (collector copyFirst: ('x86')) asSet
-         SafeOSs: (collector copyFirst: ('macOSX')) asSet
-          Source: '
-  char add(char, char);
-
-  void fct(char *a, char *b, char *c, ... ){
-    *a = add(*b, *c);
-  }
-
-  char add(char a, char b) {
-    return a + b;
-  }
-'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'fastUnsafeAddChars' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
-        
-         osxSource = '
-  char add(char, char);
-
-  void fct(char *a, char *b, char *c, ... ){
-    *a = add(*b, *c);
-  }
-
-  char add(char a, char b) {
-    return a + b;
-  }
-'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'fastUnsafeAddChars' -> () From: ( | {
-         'ModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'oddball' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'fastUnsafeAddChars' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
-        
-         recompile = ( |
-            | 
-            osxNativeMethod: (native support nativeMethod
-            copyForC: osxSource Arity: 3). self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'fastUnsafeAddChars' -> () From: ( | {
-         'ModuleInfo: Module: nativeExamples InitialContents: FollowSlot\x7fVisibility: public'
-        
-         test = ( |
-            | testAdd. self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'fastUnsafeAddChars' -> () From: ( | {
          'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
         
          testAdd = ( |
@@ -317,6 +204,26 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
              {} = 'ModuleInfo: Creator: globals native helloWorld.
 '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorld' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
+        
+         isSafeIfFalse: blk = ( |
+            | 
+            lastStartupTime == vmStartupTime 
+               ifFalse: [
+                   host osName  = 'macOSX' 
+                     ifTrue: [platformNativeMethod: osxNativeMethod]
+                      False: [^ blk value: 'Unknown platform'].
+                   lastStartupTime: vmStartupTime].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorld' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: InitializeToExpression: (time)'
+        
+         lastStartupTime <- bootstrap stub -> 'globals' -> 'time' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorld' -> () From: ( | {
@@ -393,22 +300,15 @@ RET             ; return
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorld' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
-        
-         osxValue = ( |
-             x.
-            | 
-            x: byteVector copySize: 13.
-            (osxNativeMethod isForSource: osxSource)
-              ifFalse: [recompile].
-            osxNativeMethod valueWith: x.
-            x asString).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorld' -> () From: ( | {
          'ModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
         
          parent* = bootstrap stub -> 'traits' -> 'oddball' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorld' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: InitializeToExpression: (native support nativeMethod)'
+        
+         platformNativeMethod <- bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeMethod' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorld' -> () From: ( | {
@@ -428,20 +328,15 @@ RET             ; return
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorld' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
-        
-         unknownValue = ( |
-            | error: 'Native code unavailable for: ', host os).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorld' -> () From: ( | {
          'ModuleInfo: Module: nativeExamples InitialContents: FollowSlot\x7fVisibility: public'
         
          value = ( |
+             x.
             | 
-            host osName  = 'macOSX' 
-              ifTrue: [osxValue]
-               False: [unknownValue]).
+            isSafeIfFalse: [|:e| ^ error: 'Cannot safely run method: ', e asString].
+            x: byteVector copySize: 13.
+            platformNativeMethod valueWith: x.
+            x asString).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
@@ -451,6 +346,26 @@ RET             ; return
              {} = 'ModuleInfo: Creator: globals native helloWorldC.
 '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorldC' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
+        
+         isSafeIfFalse: blk = ( |
+            | 
+            lastStartupTime == vmStartupTime 
+               ifFalse: [
+                   host osName  = 'macOSX' 
+                     ifTrue: [platformNativeMethod: osxNativeMethod]
+                      False: [^ blk value: 'Unknown platform'].
+                   lastStartupTime: vmStartupTime].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorldC' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: InitializeToExpression: (time)'
+        
+         lastStartupTime <- bootstrap stub -> 'globals' -> 'time' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorldC' -> () From: ( | {
@@ -487,22 +402,15 @@ RET             ; return
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorldC' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
-        
-         osxValue = ( |
-             x.
-            | 
-            x: byteVector copySize: 13.
-            (osxNativeMethod isForSource: osxSource)
-              ifFalse: [recompile].
-            osxNativeMethod valueWith: x.
-            x asString).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorldC' -> () From: ( | {
          'ModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
         
          parent* = bootstrap stub -> 'traits' -> 'oddball' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorldC' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: InitializeToExpression: (native support nativeMethod)'
+        
+         platformNativeMethod <- bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeMethod' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorldC' -> () From: ( | {
@@ -522,20 +430,15 @@ RET             ; return
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorldC' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
-        
-         unknownValue = ( |
-            | error: 'Native code unavailable for: ', host os).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorldC' -> () From: ( | {
          'ModuleInfo: Module: nativeExamples InitialContents: FollowSlot\x7fVisibility: public'
         
          value = ( |
+             x.
             | 
-            host osName  = 'macOSX' 
-              ifTrue: [osxValue]
-               False: [unknownValue]).
+            isSafeIfFalse: [|:e| ^ error: 'Cannot safely run method: ', e asString].
+            x: byteVector copySize: 13.
+            platformNativeMethod valueWith: x.
+            x asString).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {

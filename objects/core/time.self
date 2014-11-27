@@ -1,7 +1,7 @@
  'Sun-$Revision: 30.10 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -70,7 +70,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'time' -> () From: ( | {
          'Comment: Non-nil when valid.\x7fModuleInfo: Module: time InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
-         dateTime0.
+         dateTime0 <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'time' -> () From: ( | {

@@ -102,6 +102,12 @@ May blow up the VM.\x7fModuleInfo: Creator: globals native support nativeMethod.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeMethod' -> () From: ( | {
+         'Category: private\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (time)'
+        
+         lastStartupTime <- bootstrap stub -> 'globals' -> 'time' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeMethod' -> () From: ( | {
          'ModuleInfo: Module: native InitialContents: FollowSlot'
         
          parent* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeMethod' -> 'parent' -> () From: ( |
@@ -259,9 +265,15 @@ May blow up the VM.\x7fModuleInfo: Creator: globals native support nativeMethod.
         
          sanityCheck: a = ( |
             | 
-            rawArity = a ifFalse: [error: 'Cannot run without ', a printString, ' arguments'].
-            (rawSafeOSs includes: host osName) ifFalse: [error: 'Not compiled for this OS'].
-            (rawSafeCPUs includes: 'x86')      ifFalse: [error: 'Not compiled for this CPU']).
+            "We assume that if this isn't the first time
+            we've been called this session that all is OK,
+            otherwise we will already have core dumped"
+            lastStartupTime == vmStartupTime ifFalse: [
+              (rawSafeOSs includes: host osName) ifFalse: [^ error: 'Not compiled for this OS'].
+              (rawSafeCPUs includes: 'x86')      ifFalse: [^ error: 'Not compiled for this CPU'].
+              rawByteVector _MarkExecutable. 
+              lastStartupTime: vmStartupTime.
+            ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'nativeMethod' -> 'parent' -> () From: ( | {
@@ -588,8 +600,6 @@ Very dangerous - use with care.\x7fModuleInfo: Module: native InitialContents: F
  '-- Sub parts'
 
  bootstrap read: 'nativeExamples' From: 'core'
- bootstrap read: 'nativeSodium' From: 'core'
- bootstrap read: 'nativeX86Asm' From: 'core'
 
 
 

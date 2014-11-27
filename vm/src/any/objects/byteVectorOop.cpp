@@ -470,7 +470,6 @@ oop byteVectorOopClass::run_native_passing_prim(
             byteVectorOop arg6,
             byteVectorOop arg7 ) {
     // Variables
-    const int pagesize = 0x1000;
     char* code;
     char *p0, *p1, *p2, *p3, *p4, *p5, *p6, *p7;
     // GCC doesn't like __cdecl but does it anyway
@@ -479,11 +478,18 @@ oop byteVectorOopClass::run_native_passing_prim(
     #else
         __cdecl void (*fct)(char *, char *, char *, char *, char *, char *, char *, char *);
     #endif
+    
     // Setup function
     code = this->bytes();
     fct = (void (*)(char *, char *, char *, char *, char *, char *, char *, char *)) code;
+
+    // It would be really nice not to do this each time,
+    // but our byteVector keeps moving
+    // rca - 27 Nov 2014
+    const int pagesize = 0x1000;
     mprotect((void *)((int)code & ~(pagesize - 1)), pagesize,
                  PROT_READ|PROT_WRITE|PROT_EXEC);
+    
     // Get parameters
     p0 = arg0->bytes(); 
     p1 = arg1->bytes();
@@ -493,6 +499,7 @@ oop byteVectorOopClass::run_native_passing_prim(
     p5 = arg5->bytes();
     p6 = arg6->bytes();
     p7 = arg7->bytes();
+   
     // Run Native Code
     fct(p0,p1,p2,p3,p4,p5,p6,p7);
     // Return self
