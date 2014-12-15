@@ -387,8 +387,8 @@ globals bootstrap _AddSlotsIfAbsent: ( |
            t = '' ifFalse: [| l |
              "This will break if modules module not loaded!"
              l: (| lobby = lobby |) lobby.
-             n: concat: (l modules init treeDictionary at: t 
-                                                 IfAbsent: [^ l error: 'Cannot find tree:', t]) 
+             n: concat: (l modules init treeRootFor: t 
+                                           IfAbsent: [^ l error: 'Cannot find tree:', t]) 
                   With: '/'].
            n: concat: n                     With: dir.
            n: concat: n                     With: '/'.

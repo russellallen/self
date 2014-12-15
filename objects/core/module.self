@@ -3,7 +3,7 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
-"preFileIn" self
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -1174,7 +1174,7 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
             | 
             tree = '' 
               ifTrue: [bootstrap selfObjectsWorkingDir] 
-               False: [treeDictionary at: tree IfAbsent: [^ error: 'Cannot find tree']]).
+               False: [treeRootFor: tree IfAbsent: [|:m| ^ error: m]]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {

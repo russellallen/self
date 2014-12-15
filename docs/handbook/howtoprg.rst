@@ -839,12 +839,17 @@ Howevever Self modules have a slot 'tree' which can take a name of a tree. If th
 This allows the developer to maintain several separate trees. For example::
 
   modules init 
-      registerTree: 'org_selflanguage_webserver' 
-                At: '/Users/username/org_selflanuage_webserver'.
-  bootstrap read: 'webserver' InTree: 'org_selflanguage_webserver'.
-  modules webserver fileOut.
-  
+    registerTree: 'org_selflanguage_webserver'
+              At: 'path/to/parent-folder'.
+    
+  bootstrap read: 'webserver'
+          InTree: 'org_selflanguage_webserver'.
+
 Important considerations: module names are globally unique (that is, two modules called 'webserver' in different trees are considered the same module and will overwrite each other). The tree name itself should also be globally unique - that is it is not possible to have two trees with the same name in a single Self world.
+
+The advantages of this over a simple symbolic link to a separate filesystem tree is we can do overlays - if you want special string behaviour, then put it in your tree in my_tree/core/string.self and it will override as expected.
+
+Modules that import subparts will import them from the same tree by default.
 
 Versioning
 ==========
