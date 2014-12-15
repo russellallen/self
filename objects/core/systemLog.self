@@ -5,6 +5,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
 '
 
 
+
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {

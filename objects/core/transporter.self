@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.7 $'
+ '30.8.0-prerelease1'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+"preFileIn" self
 
 
  '-- Module body'
@@ -47,9 +48,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'transporter' -> () From: ( | {
-         'ModuleInfo: Module: transporter InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: transporter InitialContents: InitializeToExpression: (\'30.8.0-prerelease1\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.7 $'.
+         revision <- '30.8.0-prerelease1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'transporter' -> () From: ( | {
@@ -112,16 +113,16 @@ accessed quickly
 
  '-- Sub parts'
 
- bootstrap read: 'objectScanner' From: 'core'
- bootstrap read: 'transporterFiles' From: 'core'
- bootstrap read: 'beamOut' From: 'core'
- bootstrap read: 'beamIn' From: 'core'
- bootstrap read: 'fastTransporter' From: 'core'
- bootstrap read: 'chain' From: 'core'
- bootstrap read: 'fileOut' From: 'core'
- bootstrap read: 'module' From: 'core'
- bootstrap read: 'annotator' From: 'core'
- bootstrap read: 'incrementalSaving' From: 'core'
+ bootstrap read: 'objectScanner' From: 'core' InTree: globals modules transporter tree
+ bootstrap read: 'transporterFiles' From: 'core' InTree: globals modules transporter tree
+ bootstrap read: 'beamOut' From: 'core' InTree: globals modules transporter tree
+ bootstrap read: 'beamIn' From: 'core' InTree: globals modules transporter tree
+ bootstrap read: 'fastTransporter' From: 'core' InTree: globals modules transporter tree
+ bootstrap read: 'chain' From: 'core' InTree: globals modules transporter tree
+ bootstrap read: 'fileOut' From: 'core' InTree: globals modules transporter tree
+ bootstrap read: 'module' From: 'core' InTree: globals modules transporter tree
+ bootstrap read: 'annotator' From: 'core' InTree: globals modules transporter tree
+ bootstrap read: 'incrementalSaving' From: 'core' InTree: globals modules transporter tree
 
 
 

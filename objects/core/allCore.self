@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.7 $'
+ '30.8.0-prerelease1'
  '
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+"preFileIn" self
 
 
  '-- Module body'
@@ -47,9 +48,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allCore' -> () From: ( | {
-         'ModuleInfo: Module: allCore InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: allCore InitialContents: InitializeToExpression: (\'30.8.0-prerelease1\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.7 $'.
+         revision <- '30.8.0-prerelease1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allCore' -> () From: ( | {

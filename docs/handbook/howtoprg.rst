@@ -17,13 +17,10 @@ development. It attempts to pull off a novel feat—programming live objects ins
 partially succeeds. Its novelty lies in its view of programs as collections of slots, not objects or
 classes, and its extraction of the programmer's intentions from a web of live objects.
 
-Since Self 4.0, the environment has evolved a little—mostly in the form of new affordances. On
-the Macintosh, Self 4.1 uses option-click for a middle-mouse click, and uses command- (the apple
+On the Macintosh, Self uses option-click for a middle-mouse click, and uses command- (the apple
 key) click for the right button click. So wherever the text says “left-button-click” just click with the
 mouse, where it says “middle-button click” hold down the option key and click with the mouse,
-and where it says “right button click” hold down the command key and click with the mouse. I use
-a Kensington Turbo Mouse with the buttons mapped appropriately. These mappings are defined in
-Self, so you can change them by editing the ``whichButton:`` method in the ``initialization``
+and where it says “right button click” hold down the command key and click with the mouse. These mappings are defined in Self, so you can change them by editing the ``whichButton:`` method in the ``initialization``
 category in traits ``ui2MacEvent``.
 
 *****************
@@ -33,7 +30,7 @@ Browsing Concepts
 Introducing the Outliner
 ========================
 
-Objects in the Self 4.1 environment are represented as *outliners*, which can expand to show increasing
+Objects in the Self environment are represented as *outliners*, which can expand to show increasing
 levels of detail. One of these objects has been designed to provide a convenient context
 for typed-in commands, and so it is called the shell. If the shell is not already present on your
 screen, you can summon it by pressing the middle mouse button on the background and selecting
@@ -45,7 +42,7 @@ screen, you can summon it by pressing the middle mouse button on the background 
     :scale: 100
     :align: left
 
-In Self 4.1, outliners now sport three small buttons in the top-right-hand corner labeled “/\\”, “E”,
+Outliners sport three small buttons in the top-right-hand corner labeled “/\\”, “E”,
 and “X”. These buttons summon the object’s parents, add an evaluator text region to the bottom of
 the outliner, and dismiss the outliner. Press the “E” button to get an evaluator.Type ``anExampleObject`` into 
 the evaluator (it will already be selected) and hit the ``Get it`` button (or type metareturn 
@@ -568,7 +565,7 @@ Hacking Objects
 *Hacking---the discipline of making fine furniture from trees using an axe.*
 
 In going through this document, you have already added a slot and edited methods in both object
-outliners and debuggers. In addition Self 4.1 has many other ways to change an object:
+outliners and debuggers. In addition Self has many other ways to change an object:
 
 	**Table 5 Ways to change an object**
 	
@@ -662,8 +659,8 @@ outliners and debuggers. In addition Self 4.1 has many other ways to change an o
 The Transporter
 ***************
 
-The transporter has been built in order to move programs from one world of objects to another. so,
-you can ignore it as long as you work with just one snapshot. However, if you want to give your
+The transporter has been built in order to move programs from one world of objects to another. You can 
+ignore it as long as you work with just one snapshot. However, if you want to give your
 program to someone else, or save it as source, or read it in to a newer snapshot, you will need to
 learn about the transporter.
 
@@ -803,7 +800,7 @@ to ensure that their presence is propagated down to more specialized morphs like
 In a class-based language, this need is met by a rule ensuring that subclasses include any instance
 variables defined in their superclasses. In Self, this inheritance of structure is separated from the
 inheritance of information performed by the normal hierarchy of parent slots. Instead of including
-a facility for inheriting structure in the language, Self 4.1 implements a facility in the environment,
+a facility for inheriting structure in the language, Self implements a facility in the environment,
 called “copy-down.” An object’s annotation can contain a copy-down parent, copy-down selector,
 and set of slots to omit. The copy-down parent is sent the message given by the copy-down selector,
 and (except for the slots-to-omit), the slots in the result are added to the object. Copied-down
@@ -819,11 +816,11 @@ The ``Basic Morph State`` category of slots has been copied from those in morph 
 the morph and removing all its submorphs (i.e. by sending it copyRemoveAllMorphs) and then
 copying the resultant slots, omitting ``parent``, ``prototype``, ``rawBox`` and ``rawColor``. The first
 three of these slots were omitted because their contents had to be different; copied-down slots are
-copied, they cannot be specially initialized in Self 4.1. The omitted slot ``rawBox`` is more interesting;
+copied, they cannot be specially initialized in Self. The omitted slot ``rawBox`` is more interesting;
 circle morphs do not need this slot at all and so omit it. Most other object-oriented programming
 systems would not allow a subclass to avoid inheriting an instance variable.
 
-The Self 4.1 programming environment uses the copy-down information to allow the programmer
+The Self programming environment uses the copy-down information to allow the programmer
 to use a class-based style when appropriate. For example, if the programmer adds a slot to morph
 the environment will offer to add it to ``circleMorph``, too. If the programmer should use a text editor
 to edit the definition of morph, the circleMorph object will be changed after rereading both object’s
@@ -832,13 +829,45 @@ of creating a subclass, the programmer has to create two objects: a new traits o
 and then set the object annotation of the new prototype. Perhaps someday there will be a
 button to do this, or perhaps other styles of programming will emerge.
 
-This concludes a brief tour of the Self 4.1 programming environment. Although we strove for simplicity
+Trees
+=====
+
+By default, the tranporter writes out Self modules out to a tree rooted in the current working directory, or the 'objects' subdirectory of the directory given to the VM in the shell environment variable SELFWORKING_DIR.
+
+Howevever Self modules have a slot 'tree' which can take a name of a tree. If the name of the tree is not an empty string, then the module writer will look up a directory in the dictionary found at ``modules init treeDictionary``.
+
+This allows the developer to maintain several separate trees. For example::
+
+  modules init 
+    registerTree: 'org_selflanguage_webserver'
+              At: 'path/to/parent-folder'.
+    
+  bootstrap read: 'webserver'
+          InTree: 'org_selflanguage_webserver'.
+
+Important considerations: module names are globally unique (that is, two modules called 'webserver' in different trees are considered the same module and will overwrite each other). The tree name itself should also be globally unique - that is it is not possible to have two trees with the same name in a single Self world.
+
+The advantages of this over a simple symbolic link to a separate filesystem tree is we can do overlays - if you want special string behaviour, then put it in your tree in my_tree/core/string.self and it will override as expected.
+
+Modules that import subparts will import them from the same tree by default.
+
+Versioning
+==========
+
+Each transporter module has a slot named ``revision`` containing a string version number. It is recommended that you use Semantic Versioning [#f10]_ so that the version of a module can be tested as follows::
+
+  modules string version >= (modules init moduleVersion copyOn: '1.0.0') 
+    ifFalse: [log warning: 'Old string version']
+
+This test could be placed in the ``preFileIn`` slot of your module to ensure a sane file in environment before the rest of the file is read.
+
+This concludes a brief tour of the Self programming environment. Although we strove for simplicity
 in the design of Self, its programming environment includes a fair amount of functionality
 which may take a while to learn. We hope that you find the investment worth the reward.
 
 .. 	rubric::	 Footnotes:
 
-.. [#f1] Double-clicking on the triangle will expand (or contract) all levels instead of just a single level. (This feature was added in Self 4.1.2.)
+.. [#f1] Double-clicking on the triangle will expand (or contract) all levels instead of just a single level.
 
 .. [#f2] However, in a stack frame in the debugger (described below), the receiver of a message is the same as the receiver for the stack frame.
 
@@ -856,3 +885,4 @@ which may take a while to learn. We hope that you find the investment worth the 
 
 .. [#f9] isComplete is used by the environment to decide when it is safe to send messages like printString.
 
+.. [#f9] See www.semanticversioning.org for a specification. In essence, versions are of the form "3.2.1-alpha6"

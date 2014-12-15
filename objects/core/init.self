@@ -1,4 +1,4 @@
-'Sun-$Revision: 30.10 $'
+'30.11.0-prerelease1'
 
 '
 Copyright 1992-2011 AUTHORS.
@@ -366,6 +366,48 @@ globals bootstrap _AddSlotsIfAbsent: ( |
         n: concat: n                     With: '/'.
         n: concat: n                     With: name.
         (concat: n With: '.self') _RunScriptIfFail: fb).
+        
+        read: name From: dir InTree: t = ( |
+           | 
+           read: name From: dir InTree: t IfFail: [ | :e. :prim |
+             'failed to read: ' _StringPrint. 
+             name         _StringPrint.
+             ' from: '    _StringPrint.
+             dir          _StringPrint.
+             ' in tree: ' _StringPrint.
+             t            _StringPrint.
+             '.  Error: ' _StringPrint.
+             e            _StringPrint. 
+             '\n'         _StringPrint. 
+             _ThisProcess _AbortProcess.
+           ]).
+
+        read: name From: dir InTree: t IfFail: fb = ( | n | 
+           n: ''.
+           t = '' ifFalse: [| l |
+             "This will break if modules module not loaded!"
+             l: (| lobby = lobby |) lobby.
+             n: concat: (l modules init treeRootFor: t 
+                                           IfAbsent: [^ l error: 'Cannot find tree:', t]) 
+                  With: '/'].
+           n: concat: n                     With: dir.
+           n: concat: n                     With: '/'.
+           n: concat: n                     With: name.
+           (concat: n With: '.self') _RunScriptIfFail: [|:e. :prim | ^ fb value: e With: prim]).
+
+        read: name InTree: t = ( |
+           | 
+           read: name From: '' InTree: t IfFail: [ | :e. :prim |
+             'failed to read: ' _StringPrint. 
+             name         _StringPrint.
+             ' in tree: ' _StringPrint.
+             t            _StringPrint.
+             '.  Error: ' _StringPrint.
+             e            _StringPrint. 
+             '\n'         _StringPrint. 
+             _ThisProcess _AbortProcess.
+           ]).
+    
   }
   { 'Category: creating name spaces\x7fVisibility: public'
     stub = ( |
@@ -527,6 +569,14 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
     {  'Category: state\x7fModuleInfo: Module: init InitialContents: InitializeToExpression: (vector)\x7fVisibility: publicReadPrivateWrite'
 	 removedSlotPaths <- vector.
 	 addedOrChangedSlots <- vector.
+    }
+    {  'ModuleInfo: Module: init InitialContents: InitializeToExpression: (\'\')'
+        
+         tree <- ''.
+    }
+    {  'ModuleInfo: Module: init InitialContents: FollowSlot'
+        
+         preFileIn = ("preFileIn" self).
     }
      {  'ModuleInfo: Module: init InitialContents: FollowSlot\x7fVisibility: private'
       parent* = ( | 
