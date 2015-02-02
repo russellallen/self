@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: sets\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: sets\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          set = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'set' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals set.
@@ -56,7 +56,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: hash table based\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: hash table based\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          set = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'set' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits set.
@@ -115,7 +115,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: abstract\x7fComment: representation-indep
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: abstract\x7fComment: representation-indep
 set\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractSet = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractSet' -> () From: ( |
@@ -200,7 +200,7 @@ If v is absent, add v to the set, and invoke absentActionBlock with v.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: abstract\x7fComment: implementation-independant
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: abstract\x7fComment: implementation-independant
 set or dictionary behavior -- dmu 2/97\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractSetOrDictionary = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractSetOrDictionary' -> () From: ( |
@@ -600,7 +600,7 @@ If k is absent, add result of evaluating newValueBlock at key k
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: hash table based\x7fComment: representation-indep
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: hash table based\x7fComment: representation-indep
 set\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          hashTableSet = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'hashTableSet' -> () From: ( |
@@ -663,7 +663,7 @@ set\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisib
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: hash table based\x7fComment: set or dictionary behavior
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: hash table based\x7fComment: set or dictionary behavior
 implemented by a hash table
 -- dmu 2/97\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -1096,7 +1096,7 @@ to wrap around -- Ole Agesen, 3/93.\x7fModuleInfo: Module: setAndDictionary Init
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: dictionaries\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: dictionaries\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          dictionary = bootstrap define: bootstrap stub -> 'globals' -> 'dictionary' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1113,7 +1113,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: hash table based\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: hash table based\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          dictionary = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'dictionary' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits dictionary.
@@ -1211,7 +1211,7 @@ customizableSetAndDictionary
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: hash table based\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: hash table based\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          sharedDictionary = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'sharedDictionary' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits sharedDictionary.
@@ -1226,7 +1226,7 @@ customizableSetAndDictionary
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: hash table based\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: hash table based\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          sharedSet = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'sharedSet' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits sharedSet.
@@ -1241,7 +1241,7 @@ customizableSetAndDictionary
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: abstract\x7fComment: representation-indep
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: abstract\x7fComment: representation-indep
 dictionary\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractDictionary = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractDictionary' -> () From: ( |
@@ -1363,7 +1363,7 @@ dictionary\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: hash table based\x7fComment: representation-indep
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: hash table based\x7fComment: representation-indep
 dictionary\x7fModuleInfo: Module: setAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          hashTableDictionary = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'hashTableDictionary' -> () From: ( |

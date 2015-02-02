@@ -60,7 +60,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: movingShape InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: movingShape InitialContents: FollowSlot\x7fVisibility: public'
         
          movingShape = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'movingShape' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals movingShape.
@@ -93,7 +93,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: movingShape InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: movingShape InitialContents: FollowSlot\x7fVisibility: public'
         
          movingShape = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'movingShape' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits movingShape.

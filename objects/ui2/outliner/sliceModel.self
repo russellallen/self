@@ -14,7 +14,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceModel InitialContents: FollowSlot\x7fVisibility: public'
         
          generalSliceModel = bootstrap define: bootstrap stub -> 'globals' -> 'generalSliceModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

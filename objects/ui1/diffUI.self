@@ -43,7 +43,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
         
          diffTextField = bootstrap define: bootstrap stub -> 'globals' -> 'diffTextField' -> () ToBe: bootstrap addSlotsTo: (
              globals textField copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'diffTextField' -> () From: ( |
@@ -73,7 +73,7 @@ globals textField. copy
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
         
          diffViewer = bootstrap define: bootstrap stub -> 'globals' -> 'diffViewer' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'methodView' From:
@@ -115,7 +115,7 @@ SlotsToOmit: methodView name parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
         
          diffViewer = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'diffViewer' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits diffViewer.

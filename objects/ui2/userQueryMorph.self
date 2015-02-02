@@ -73,7 +73,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: userQueryMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: userQueryMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          userQueryMorph = bootstrap define: bootstrap stub -> 'globals' -> 'userQueryMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -115,7 +115,7 @@ SlotsToOmit: parent prototype rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: userQueryMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: userQueryMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          userQueryMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'userQueryMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits userQueryMorph.

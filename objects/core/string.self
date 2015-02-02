@@ -8,13 +8,13 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: characters\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: characters\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
         
          highestPrintableChar = '~'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: characters\x7fComment: random needs these:\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: characters\x7fComment: random needs these:\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
         
          lowestPrintableChar = ' '.
         } | ) 
@@ -88,7 +88,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: vectors\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: vectors\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
         
          mutableString = bootstrap define: bootstrap stub -> 'globals' -> 'mutableString' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -104,7 +104,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: vectors\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: vectors\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
         
          mutableString = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'mutableString' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits mutableString.
@@ -127,7 +127,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: vectors\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: vectors\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
         
          canonicalString = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'canonicalString' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits canonicalString.
@@ -177,7 +177,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: vectors\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: vectors\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
         
          immutableString = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'immutableString' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits immutableString.
@@ -230,7 +230,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: vectors\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: vectors\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
         
          string = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'string' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits string.

@@ -8,7 +8,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (obsolete)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (obsolete)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
         
          outliner = bootstrap define: bootstrap stub -> 'globals' -> 'outliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'borderWidth' From:
@@ -74,7 +74,7 @@ SlotsToOmit: borderWidth parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (deprecated)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (deprecated)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
         
          outliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'outliner' -> () From: ( |
              {} = 'Comment: This object represents a general outliner.
@@ -723,7 +723,7 @@ Only used by certain children.\x7fModuleInfo: Module: outliner InitialContents: 
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (obsolete)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (obsolete)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
         
          nonpluggableOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'nonpluggableOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -752,7 +752,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (deprecated)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (deprecated)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
         
          nonpluggableOutliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'nonpluggableOutliner' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits nonpluggableOutliner.
@@ -1156,7 +1156,7 @@ Would not override.\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (obsolete)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (obsolete)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
         
          indexOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'indexOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1191,7 +1191,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (deprecated)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (deprecated)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
         
          indexOutliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'indexOutliner' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits indexOutliner.
@@ -1277,7 +1277,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (obsolete)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (obsolete)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
         
          outlinerHeader = bootstrap define: bootstrap stub -> 'globals' -> 'outlinerHeader' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1300,7 +1300,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (deprecated)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Outliner Framework (deprecated)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
         
          outlinerHeader = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'outlinerHeader' -> () From: ( |
              {} = 'Comment: Header morph for the outliner. Catches the middleMouseEven

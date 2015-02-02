@@ -15,7 +15,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Paint\x7fComment: Psuedo paintManager for true color systems.\x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Paint\x7fComment: Psuedo paintManager for true color systems.\x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractUnmappedPaintManager = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'abstractUnmappedPaintManager' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals abstractUnmappedPaintManager.
@@ -190,7 +190,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
         
          paint = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'paint' -> () From: ( |
              {} = 'Comment: About the representation of colors:
@@ -235,7 +235,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: FollowSlot'
         
          paint = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'paint' -> () From: ( |
              {} = 'Comment: A paint object is a display-depth independent color specification.
@@ -287,7 +287,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Paint\x7fComment: Handles color allocation
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Paint\x7fComment: Handles color allocation
 for mapped color systems.
 \x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -357,7 +357,7 @@ for mapped color systems.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: FollowSlot'
         
          paintManager = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'paintManager' -> () From: ( |
              {} = 'Comment: A paintManager manages the allocation of color indices on a
@@ -394,7 +394,7 @@ for mapped color systems.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: InitializeToExpression: (dictionary copyRemoveAll)\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: InitializeToExpression: (dictionary copyRemoveAll)\x7fVisibility: public'
         
          paintNames = dictionary copyRemoveAll.
         } | ) 

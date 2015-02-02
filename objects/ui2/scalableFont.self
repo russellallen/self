@@ -67,7 +67,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Fonts\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Fonts\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot\x7fVisibility: public'
         
          fontDictionary = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontDictionary' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals x11Globals fontDictionary.
@@ -94,7 +94,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Fonts\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Fonts\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot'
         
          xFontDictionary = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'xFontDictionary' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits xFontDictionary.
@@ -109,7 +109,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Fonts\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Fonts\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot\x7fVisibility: public'
         
          fontFamily = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals x11Globals fontFamily.
@@ -642,7 +642,7 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Fonts\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Fonts\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot\x7fVisibility: public'
         
          scalableFont = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'x11Globals' -> 'scalableFont' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals x11Globals scalableFont.
@@ -671,7 +671,7 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Fonts\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Fonts\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot'
         
          abstractFontDictionary = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractFontDictionary' -> () From: ( |
              {} = 'Comment: A fontDictionary keeps track of X font ID\'s and font stuctures
@@ -753,7 +753,7 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Fonts\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Fonts\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot'
         
          macFontDictionary = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'macFontDictionary' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits macFontDictionary.

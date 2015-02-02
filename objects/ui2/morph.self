@@ -78,7 +78,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
         
          morph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'morph' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals morph.
@@ -125,7 +125,7 @@ This saves recomputing the bounds for most morphs.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
         
          morph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'morph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits morph.

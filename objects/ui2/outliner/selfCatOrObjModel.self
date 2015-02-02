@@ -101,7 +101,7 @@ mode and will show all parent slots.\x7fModuleInfo: Module: selfCatOrObjModel In
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Object Outliner\x7fModuleInfo: Module: selfCatOrObjModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Object Outliner\x7fModuleInfo: Module: selfCatOrObjModel InitialContents: FollowSlot\x7fVisibility: public'
         
          selfCatOrObjModel = bootstrap define: bootstrap stub -> 'globals' -> 'selfCatOrObjModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

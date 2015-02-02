@@ -60,7 +60,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: cryptography\x7fModuleInfo: Module: crypto InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: applications\x7fCategory: cryptography\x7fModuleInfo: Module: crypto InitialContents: FollowSlot\x7fVisibility: public'
         
          rsa = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'rsa' -> () From: ( |
              {} = 'Comment: This is the substance in an RSA object.\x7fModuleInfo: Creator: globals rsa.
@@ -87,7 +87,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fModuleInfo: Module: crypto InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: applications\x7fModuleInfo: Module: crypto InitialContents: FollowSlot\x7fVisibility: public'
         
          rsa = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'rsa' -> () From: ( |
              {} = 'Comment: This is a concrete subtype of traits cryptomachine. It implements the
@@ -130,7 +130,7 @@ bigger than modulus.\x7fModuleInfo: Module: crypto InitialContents: InitializeTo
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fModuleInfo: Module: crypto InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: applications\x7fModuleInfo: Module: crypto InitialContents: FollowSlot\x7fVisibility: public'
         
          cryptomachine = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'cryptomachine' -> () From: ( |
              {} = 'Comment: An abstract encryption/decryption machine.

@@ -69,7 +69,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: sorted\x7fModuleInfo: Module: sortedSequence InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: sorted\x7fModuleInfo: Module: sortedSequence InitialContents: FollowSlot\x7fVisibility: public'
         
          sortedSequence = bootstrap define: bootstrap stub -> 'globals' -> 'sortedSequence' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -113,7 +113,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: sorted\x7fModuleInfo: Module: sortedSequence InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: sorted\x7fModuleInfo: Module: sortedSequence InitialContents: FollowSlot\x7fVisibility: public'
         
          sortedSequence = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'sortedSequence' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits sortedSequence.

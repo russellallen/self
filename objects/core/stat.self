@@ -78,7 +78,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: OS and filesystem interface\x7fModuleInfo: Module: stat InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: host and filesystem\x7fModuleInfo: Module: stat InitialContents: FollowSlot\x7fVisibility: public'
         
          unixStatStructure = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixStatStructure' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits unixStatStructure.
@@ -93,7 +93,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: OS and filesystem interface\x7fModuleInfo: Module: stat InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: host and filesystem\x7fModuleInfo: Module: stat InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractStatStructure = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractStatStructure' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits abstractStatStructure.

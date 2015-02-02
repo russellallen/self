@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: sets\x7fModuleInfo: Module: universalSetAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: sets\x7fModuleInfo: Module: universalSetAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          universalSet = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'universalSet' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals universalSet.
@@ -93,7 +93,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: can hold markers\x7fModuleInfo: Module: universalSetAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: can hold markers\x7fModuleInfo: Module: universalSetAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          universalSet = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'universalSet' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits universalSet.
@@ -128,7 +128,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: can hold markers\x7fModuleInfo: Module: universalSetAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: can hold markers\x7fModuleInfo: Module: universalSetAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          universalSetOrDictionary = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'universalSetOrDictionary' -> () From: ( |
              {} = 'Comment: Ordinary hash-table-based sets and dictionaries use an
@@ -547,7 +547,7 @@ Return the removed element (not the key).\x7fModuleInfo: Module: universalSetAnd
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: dictionaries\x7fModuleInfo: Module: universalSetAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: dictionaries\x7fModuleInfo: Module: universalSetAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          universalDictionary = bootstrap define: bootstrap stub -> 'globals' -> 'universalDictionary' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -570,7 +570,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: can hold markers\x7fModuleInfo: Module: universalSetAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: can hold markers\x7fModuleInfo: Module: universalSetAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          universalDictionary = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'universalDictionary' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits universalDictionary.

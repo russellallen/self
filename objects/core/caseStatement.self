@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fModuleInfo: Module: caseStatement InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fModuleInfo: Module: caseStatement InitialContents: FollowSlot\x7fVisibility: public'
         
          case = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'case' -> () From: ( |
              {} = 'Comment: This object is used to implement multi-way

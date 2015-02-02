@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          argRowMorph = bootstrap define: bootstrap stub -> 'globals' -> 'argRowMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -31,7 +31,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          argRowMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'argRowMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits argRowMorph.
@@ -82,7 +82,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          hueRangeMorph = bootstrap define: bootstrap stub -> 'globals' -> 'hueRangeMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -105,7 +105,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          hueRangeMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'hueRangeMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits hueRangeMorph.
@@ -200,7 +200,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          brightnessRangeMorph = bootstrap define: bootstrap stub -> 'globals' -> 'brightnessRangeMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -217,7 +217,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          brightnessRangeMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'brightnessRangeMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits brightnessRangeMorph.
@@ -238,7 +238,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          colorPatchMorph = bootstrap define: bootstrap stub -> 'globals' -> 'colorPatchMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -261,7 +261,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          colorPatchMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'colorPatchMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits colorPatchMorph.
@@ -276,7 +276,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          colorPickerMorph = bootstrap define: bootstrap stub -> 'globals' -> 'colorPickerMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -305,7 +305,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          colorPickerMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'colorPickerMorph' -> () From: ( |
              {} = 'Comment: A widget for changing morph colors.\x7fModuleInfo: Creator: traits colorPickerMorph.
@@ -320,7 +320,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          constantLuminanceMorph = bootstrap define: bootstrap stub -> 'globals' -> 'constantLuminanceMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -337,7 +337,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          constantLuminanceMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'constantLuminanceMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits constantLuminanceMorph.
@@ -358,7 +358,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          fixedBrightnessInterpolatorMorph = bootstrap define: bootstrap stub -> 'globals' -> 'fixedBrightnessInterpolatorMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'argCount' From:
@@ -382,7 +382,7 @@ SlotsToOmit: argCount parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          fixedBrightnessInterpolatorMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'fixedBrightnessInterpolatorMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits fixedBrightnessInterpolatorMorph.
@@ -403,7 +403,7 @@ SlotsToOmit: argCount parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          fixedSaturationInterpolatorMorph = bootstrap define: bootstrap stub -> 'globals' -> 'fixedSaturationInterpolatorMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'argCount' From:
@@ -427,7 +427,7 @@ SlotsToOmit: argCount parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          fixedSaturationInterpolatorMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'fixedSaturationInterpolatorMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits fixedSaturationInterpolatorMorph.
@@ -516,7 +516,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          paletteMorph = bootstrap define: bootstrap stub -> 'globals' -> 'paletteMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -539,7 +539,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          paletteMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'paletteMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits paletteMorph.
@@ -560,7 +560,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          rgbInterpolatorMorph = bootstrap define: bootstrap stub -> 'globals' -> 'rgbInterpolatorMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'argCount' From:
@@ -584,7 +584,7 @@ SlotsToOmit: argCount parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          rgbInterpolatorMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'rgbInterpolatorMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits rgbInterpolatorMorph.
@@ -605,7 +605,7 @@ SlotsToOmit: argCount parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          saturationRangeMorph = bootstrap define: bootstrap stub -> 'globals' -> 'saturationRangeMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -622,7 +622,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: ColorChanger\x7fModuleInfo: Module: colorWorld InitialContents: FollowSlot\x7fVisibility: public'
         
          saturationRangeMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'saturationRangeMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits saturationRangeMorph.

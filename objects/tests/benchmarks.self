@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: bench\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          benchmarks = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'benchmarks' -> () From: ( |
              {} = 'Comment: object holding all benchmarks, capable of running a suite of benchmarks\x7fModuleInfo: Creator: globals benchmarks.
@@ -8851,14 +8851,14 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'nil' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot\x7fVisibility: public'
         
          shorterp: y = ( |
             | != y).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'nil' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot\x7fVisibility: public'
         
          taklY: y Z: z = ( |
             | z).
@@ -8958,7 +8958,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'bench' -> 'cons' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot\x7fVisibility: public'
         
          shorterp: y = ( |
             | 
@@ -8966,7 +8966,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'bench' -> 'cons' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot\x7fVisibility: public'
         
          taklY: y Z: z = ( |
             | 
@@ -9180,7 +9180,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'integer' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          nestedLoopTest = ( | {
                  'ModuleInfo: Module: benchmarks InitialContents: FollowSlot'
@@ -9193,14 +9193,14 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          atAllPut: value = ( |
             | 0 upTo: size By: 1 Do: [| :i | at: i Put: value]. self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          bubbleSort = ( |
             | 
@@ -9217,7 +9217,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          bubbleSort_r = ( |
             | 
@@ -9234,7 +9234,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          commentedOut = '
     init: benchmark = (
@@ -9247,7 +9247,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          incrementAll = ( | {
                  'ModuleInfo: Module: benchmarks InitialContents: FollowSlot'
@@ -9260,7 +9260,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          init = ( |
             | 
@@ -9284,7 +9284,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          initarr: benchmark = ( | {
                  'ModuleInfo: Module: benchmarks InitialContents: FollowSlot'
@@ -9307,7 +9307,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          innerProductWith: m Col: c = ( | {
                  'ModuleInfo: Module: benchmarks InitialContents: FollowSlot'
@@ -9339,7 +9339,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          mul: m Into: r = ( |
             | "| r |"
@@ -9353,7 +9353,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          new = ( |
             | "| r |"
@@ -9377,7 +9377,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          permInitialize = ( |
             | 
@@ -9386,7 +9386,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          permSwap: a With: b = ( | {
                  'ModuleInfo: Module: benchmarks InitialContents: FollowSlot'
@@ -9401,7 +9401,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          permute: n = ( |
             | 
@@ -9418,14 +9418,14 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          quickSort = ( |
             | quickSortFrom: 0 To: size predecessor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          quickSortFrom: l To: r = ( | {
                  'ModuleInfo: Module: benchmarks InitialContents: FollowSlot'
@@ -9462,7 +9462,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          rowsize = 40.
         } | ) 
@@ -9474,7 +9474,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: benchmarks InitialContents: FollowSlot'
         
          sumAll = ( | {
                  'ModuleInfo: Module: benchmarks InitialContents: FollowSlot'

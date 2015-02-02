@@ -66,7 +66,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: benchmarking\x7fModuleInfo: Module: allTests InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: allTests InitialContents: FollowSlot'
         
          bench = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'bench' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits bench.

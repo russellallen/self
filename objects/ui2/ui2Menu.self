@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: ui2Menu InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: ui2Menu InitialContents: FollowSlot\x7fVisibility: public'
         
          ui2Menu = bootstrap define: bootstrap stub -> 'globals' -> 'ui2Menu' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -65,7 +65,7 @@ SlotsToOmit: parent prototype rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: ui2Menu InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: ui2Menu InitialContents: FollowSlot\x7fVisibility: public'
         
          ui2Menu = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui2Menu' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits ui2Menu.
@@ -932,7 +932,7 @@ was copied from.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fComment: A UI2 menu with support
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fComment: A UI2 menu with support
 for distributed creattion by group.
 -- Ungar, 6/11/95\x7fModuleInfo: Module: ui2Menu InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -959,7 +959,7 @@ group IDs.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: ui2Menu InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: ui2Menu InitialContents: FollowSlot\x7fVisibility: public'
         
          groupedUI2Menu = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'groupedUI2Menu' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits groupedUI2Menu.

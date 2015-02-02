@@ -8,13 +8,13 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fComment: e -- natural logarithm base\x7fModuleInfo: Module: float InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fComment: e -- natural logarithm base\x7fModuleInfo: Module: float InitialContents: FollowSlot\x7fVisibility: public'
         
          e = 2.71828175.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fComment: IEEE infinity--larger than any other float\x7fModuleInfo: Module: float InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fComment: IEEE infinity--larger than any other float\x7fModuleInfo: Module: float InitialContents: FollowSlot\x7fVisibility: public'
         
          infinity =  1e100 "infinity".
         } | ) 
@@ -71,13 +71,13 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fComment: pi -- a nice mnuemonic to have\x7fModuleInfo: Module: float InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fComment: pi -- a nice mnuemonic to have\x7fModuleInfo: Module: float InitialContents: FollowSlot\x7fVisibility: public'
         
          pi = 3.14159.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fModuleInfo: Module: float InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fModuleInfo: Module: float InitialContents: FollowSlot\x7fVisibility: public'
         
          float = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'float' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits float.

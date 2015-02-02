@@ -67,7 +67,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: ordered\x7fModuleInfo: Module: orderedDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: ordered\x7fModuleInfo: Module: orderedDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          orderedDictionary = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'orderedDictionary' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals orderedDictionary.
@@ -107,7 +107,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: ordered\x7fModuleInfo: Module: orderedDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: ordered\x7fModuleInfo: Module: orderedDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          orderedDictionary = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'orderedDictionary' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits orderedDictionary.

@@ -60,7 +60,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: sunRasterFile InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: sunRasterFile InitialContents: FollowSlot'
         
          sunRasterFile = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'sunRasterFile' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals sunRasterFile.
@@ -111,7 +111,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: sunRasterFile InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: sunRasterFile InitialContents: FollowSlot'
         
          sunRasterFile = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'sunRasterFile' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits sunRasterFile.

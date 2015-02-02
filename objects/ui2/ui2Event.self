@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Events\x7fModuleInfo: Module: ui2Event InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Events\x7fModuleInfo: Module: ui2Event InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractUI2Event = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'abstractUI2Event' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals abstractUI2Event.
@@ -47,7 +47,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Events\x7fModuleInfo: Module: ui2Event InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Events\x7fModuleInfo: Module: ui2Event InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractUI2Event = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractUI2Event' -> () From: ( |
              {} = 'Comment: A ui2Event is a general input event. Variations include mouse button

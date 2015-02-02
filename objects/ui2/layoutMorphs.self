@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Layout\x7fModuleInfo: Module: layoutMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Layout\x7fModuleInfo: Module: layoutMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          rowMorph = bootstrap define: bootstrap stub -> 'globals' -> 'rowMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -55,7 +55,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Layout\x7fModuleInfo: Module: layoutMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Layout\x7fModuleInfo: Module: layoutMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          rowMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'rowMorph' -> () From: ( |
              {} = 'Comment: A rowMorph divides its space among a horizontal row of submorphs.
@@ -488,7 +488,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Layout\x7fModuleInfo: Module: layoutMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Layout\x7fModuleInfo: Module: layoutMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          columnMorph = bootstrap define: bootstrap stub -> 'globals' -> 'columnMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -505,7 +505,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Layout\x7fModuleInfo: Module: layoutMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Layout\x7fModuleInfo: Module: layoutMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          columnMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'columnMorph' -> () From: ( |
              {} = 'Comment: A columnMorph is like a rowMorph except that it divides
@@ -582,7 +582,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Layout\x7fModuleInfo: Module: layoutMorphs InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Layout\x7fModuleInfo: Module: layoutMorphs InitialContents: FollowSlot'
         
          spaceAllocator = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'spaceAllocator' -> () From: ( |
              {} = 'Comment: This object holds the behavior and bookkeeping information used to

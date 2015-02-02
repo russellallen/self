@@ -8,7 +8,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
         
          coreSamplerMorph = bootstrap define: bootstrap stub -> 'globals' -> 'coreSamplerMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -31,7 +31,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
         
          coreSamplerMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'coreSamplerMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits coreSamplerMorph.
@@ -107,7 +107,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
         
          proxyMorph = bootstrap define: bootstrap stub -> 'globals' -> 'proxyMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -142,7 +142,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
         
          proxyMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'proxyMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph.

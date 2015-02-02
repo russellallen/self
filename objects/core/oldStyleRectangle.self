@@ -62,7 +62,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: oldStyleRectangle InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: oldStyleRectangle InitialContents: FollowSlot\x7fVisibility: public'
         
          oldStyleRectangle = bootstrap define: bootstrap stub -> 'globals' -> 'oldStyleRectangle' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -79,7 +79,7 @@ SlotsToOmit: parent storeStringNeeds.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: oldStyleRectangle InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: oldStyleRectangle InitialContents: FollowSlot\x7fVisibility: public'
         
          oldStyleRectangle = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'oldStyleRectangle' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits oldStyleRectangle.

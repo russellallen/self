@@ -74,7 +74,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceGroupOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceGroupOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          sliceGroupOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'sliceGroupOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'model' From:

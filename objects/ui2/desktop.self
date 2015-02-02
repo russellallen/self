@@ -8,7 +8,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Desktop\x7fModuleInfo: Module: desktop InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Desktop\x7fModuleInfo: Module: desktop InitialContents: FollowSlot\x7fVisibility: public'
         
          desktop = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals desktop.
@@ -426,7 +426,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
-         'Category: ui2\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
         
          desktop = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals preferences desktop.

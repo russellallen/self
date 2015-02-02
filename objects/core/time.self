@@ -59,7 +59,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: time\x7fModuleInfo: Module: time InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: time\x7fModuleInfo: Module: time InitialContents: FollowSlot\x7fVisibility: public'
         
          time = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'time' -> () From: ( |
              {} = 'Comment: days and msecs since 1/1/70 0:00:00 GMT\x7fModuleInfo: Creator: globals time.
@@ -101,7 +101,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: time\x7fModuleInfo: Module: time InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: time\x7fModuleInfo: Module: time InitialContents: FollowSlot\x7fVisibility: public'
         
          times = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'times' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals times.

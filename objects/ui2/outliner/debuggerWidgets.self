@@ -69,7 +69,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Debugging\x7fModuleInfo: Module: debuggerWidgets InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Debugging\x7fModuleInfo: Module: debuggerWidgets InitialContents: FollowSlot'
         
          objectPushButton = bootstrap define: bootstrap stub -> 'globals' -> 'objectPushButton' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -93,7 +93,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Debugging\x7fModuleInfo: Module: debuggerWidgets InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Debugging\x7fModuleInfo: Module: debuggerWidgets InitialContents: FollowSlot'
         
          objectPushButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'objectPushButton' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits objectPushButton.

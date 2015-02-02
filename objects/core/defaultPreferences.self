@@ -109,7 +109,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
-         'Category: ui2\x7fModuleInfo: Module: defaultPreferences InitialContents: InitializeToExpression: (true)\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fModuleInfo: Module: defaultPreferences InitialContents: InitializeToExpression: (true)\x7fVisibility: public'
         
          openCommentWhenMakePublic <- bootstrap stub -> 'globals' -> 'true' -> ().
         } | ) 

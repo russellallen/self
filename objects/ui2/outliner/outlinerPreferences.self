@@ -8,7 +8,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          browseOutlinerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'browseOutlinerPreferences' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals browseOutlinerPreferences.
@@ -23,7 +23,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          outlinerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> () From: ( |
              {} = 'Comment: Most of these only apply to non-pluggable outliners,
@@ -40,7 +40,7 @@ to how the desktop looks. - rca Aug13\x7fModuleInfo: Creator: globals outlinerPr
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          categoryOutlinerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'categoryOutlinerPreferences' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals categoryOutlinerPreferences.
@@ -62,7 +62,7 @@ to how the desktop looks. - rca Aug13\x7fModuleInfo: Creator: globals outlinerPr
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          copyDownSlotOutlinerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'copyDownSlotOutlinerPreferences' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals copyDownSlotOutlinerPreferences.
@@ -157,7 +157,7 @@ to how the desktop looks. - rca Aug13\x7fModuleInfo: Creator: globals outlinerPr
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          debuggerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'debuggerPreferences' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals debuggerPreferences.
@@ -207,7 +207,7 @@ to how the desktop looks. - rca Aug13\x7fModuleInfo: Creator: globals outlinerPr
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          moduleOutlinerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'moduleOutlinerPreferences' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals moduleOutlinerPreferences.
@@ -280,7 +280,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          objectOutlinerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'objectOutlinerPreferences' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals objectOutlinerPreferences.
@@ -618,7 +618,7 @@ good for introducing language semantics, say.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
-         'Category: ui2\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          outliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals preferences outliner.
@@ -1246,7 +1246,7 @@ good for introducing language semantics, say.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          slotOutlinerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'slotOutlinerPreferences' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals slotOutlinerPreferences.

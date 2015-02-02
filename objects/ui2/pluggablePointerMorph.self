@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: pointers\x7fModuleInfo: Module: pluggablePointerMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: pointers\x7fModuleInfo: Module: pluggablePointerMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          pluggableLeafPointerButton = bootstrap define: bootstrap stub -> 'globals' -> 'pluggableLeafPointerButton' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -119,7 +119,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: pointers\x7fModuleInfo: Module: pluggablePointerMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: pointers\x7fModuleInfo: Module: pluggablePointerMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          pluggableOutlinerLeafPointerTailMorph = bootstrap define: bootstrap stub -> 'globals' -> 'pluggableOutlinerLeafPointerTailMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

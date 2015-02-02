@@ -70,7 +70,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          pluggableOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'body' From:

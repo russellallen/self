@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: Virtual Machine interface\x7fCategory: bytecode interpreters\x7fModuleInfo: Module: stackSizeInterp InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: virtual machine interface\x7fCategory: bytecode interpreters\x7fModuleInfo: Module: stackSizeInterp InitialContents: FollowSlot\x7fVisibility: public'
         
          stackSizeInterpreter = bootstrap define: bootstrap stub -> 'globals' -> 'stackSizeInterpreter' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

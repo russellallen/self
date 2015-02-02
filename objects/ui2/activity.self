@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          activity = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'activity' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals activity.
@@ -35,7 +35,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          activity = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'activity' -> () From: ( |
              {} = 'Comment: An animator controls some time-dependent aspect of its target morph.
@@ -295,7 +295,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          interpolatingAnimator = bootstrap define: bootstrap stub -> 'globals' -> 'interpolatingAnimator' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -323,7 +323,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          interpolatingAnimator = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'interpolatingAnimator' -> () From: ( |
              {} = 'Comment: An interpolating animator interpolates between two states of its
@@ -456,7 +456,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          boundsAnimator = bootstrap define: bootstrap stub -> 'globals' -> 'boundsAnimator' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -478,7 +478,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          boundsAnimator = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'boundsAnimator' -> () From: ( |
              {} = 'Comment: A boundsAnimator interpolates between two bounding rectangles
@@ -500,7 +500,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          colorAnimator = bootstrap define: bootstrap stub -> 'globals' -> 'colorAnimator' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -522,7 +522,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          colorAnimator = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'colorAnimator' -> () From: ( |
              {} = 'Comment: A colorAnimator interpolates between two colors for
@@ -544,7 +544,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          concurrentActivity = bootstrap define: bootstrap stub -> 'globals' -> 'concurrentActivity' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -572,7 +572,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          concurrentActivity = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'concurrentActivity' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits concurrentActivity.
@@ -587,7 +587,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          messageActivity = bootstrap define: bootstrap stub -> 'globals' -> 'messageActivity' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -609,7 +609,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          messageActivity = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'messageActivity' -> () From: ( |
              {} = 'Comment: A messageActivity has one step that just sends a message.\x7fModuleInfo: Creator: traits messageActivity.
@@ -676,7 +676,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          morphStepActivity = bootstrap define: bootstrap stub -> 'globals' -> 'morphStepActivity' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -692,7 +692,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          morphStepActivity = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'morphStepActivity' -> () From: ( |
              {} = 'Comment: A morphStepActivity simply passes on step messages to its target morph.\x7fModuleInfo: Creator: traits morphStepActivity.
@@ -755,7 +755,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          periodicMorphStepActivity = bootstrap define: bootstrap stub -> 'globals' -> 'periodicMorphStepActivity' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -777,7 +777,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          periodicMorphStepActivity = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'periodicMorphStepActivity' -> () From: ( |
              {} = 'Comment: A periodicMorphStepActivity sends step messages to
@@ -799,7 +799,7 @@ its target morph at periodic intervals.\x7fModuleInfo: Creator: traits periodicM
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          positionAnimator = bootstrap define: bootstrap stub -> 'globals' -> 'positionAnimator' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -821,7 +821,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          positionAnimator = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'positionAnimator' -> () From: ( |
              {} = 'Comment: An positionAnimator interpolates between two positions for
@@ -843,7 +843,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          sequentialActivity = bootstrap define: bootstrap stub -> 'globals' -> 'sequentialActivity' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -871,7 +871,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          sequentialActivity = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'sequentialActivity' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits sequentialActivity.
@@ -886,7 +886,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          sizeAnimator = bootstrap define: bootstrap stub -> 'globals' -> 'sizeAnimator' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -908,7 +908,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          sizeAnimator = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'sizeAnimator' -> () From: ( |
              {} = 'Comment: An sizeAnimator interpolates between two sizes
@@ -950,7 +950,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          toObjectAnimator = bootstrap define: bootstrap stub -> 'globals' -> 'toObjectAnimator' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -979,7 +979,7 @@ SlotsToOmit: parent to.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          toObjectAnimator = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'toObjectAnimator' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits toObjectAnimator.
@@ -994,7 +994,7 @@ SlotsToOmit: parent to.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          valueAnimator = bootstrap define: bootstrap stub -> 'globals' -> 'valueAnimator' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1016,7 +1016,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Activities\x7fModuleInfo: Module: activity InitialContents: FollowSlot\x7fVisibility: public'
         
          valueAnimator = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'valueAnimator' -> () From: ( |
              {} = 'Comment: An valueAnimator interpolates between two values and

@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          windowContext = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'windowContext' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals windowContext.
@@ -41,7 +41,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          windowContext = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'windowContext' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits windowContext.
@@ -146,7 +146,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          button = bootstrap define: bootstrap stub -> 'globals' -> 'button' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'name' From:
@@ -192,7 +192,7 @@ SlotsToOmit: name parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          button = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'button' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits button.
@@ -207,7 +207,7 @@ SlotsToOmit: name parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          caret = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'caret' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals caret.
@@ -228,7 +228,7 @@ SlotsToOmit: name parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          caret = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'caret' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits caret.
@@ -255,7 +255,7 @@ SlotsToOmit: name parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          myWindow = bootstrap define: bootstrap stub -> 'globals' -> 'myWindow' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -277,7 +277,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          myWindow = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'myWindow' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits myWindow.
@@ -327,7 +327,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          textEditor = bootstrap define: bootstrap stub -> 'globals' -> 'textEditor' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -386,7 +386,7 @@ SlotsToOmit: parent size.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          textField = bootstrap define: bootstrap stub -> 'globals' -> 'textField' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'name' From:
@@ -415,7 +415,7 @@ SlotsToOmit: name parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          textEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'textEditor' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits textEditor.
@@ -514,7 +514,7 @@ SlotsToOmit: name parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          textField = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'textField' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits textField.
@@ -535,7 +535,7 @@ SlotsToOmit: name parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          textApplication = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits textApplication.
@@ -2363,7 +2363,7 @@ SlotsToOmit: name parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          demoEditor = bootstrap define: bootstrap stub -> 'globals' -> 'demoEditor' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -2385,7 +2385,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          demoEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'demoEditor' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits demoEditor.
@@ -2400,7 +2400,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          evalEditor = bootstrap define: bootstrap stub -> 'globals' -> 'evalEditor' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'applyButtonName' From:
@@ -2424,7 +2424,7 @@ SlotsToOmit: applyButtonName parent size.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          evalEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'evalEditor' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits evalEditor.
@@ -2451,7 +2451,7 @@ SlotsToOmit: applyButtonName parent size.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          fileEditor = bootstrap define: bootstrap stub -> 'globals' -> 'fileEditor' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'applyButtonName' From:
@@ -2487,7 +2487,7 @@ SlotsToOmit: applyButtonName name parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          fileEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'fileEditor' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits fileEditor.
@@ -2553,7 +2553,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          resizeButton = bootstrap define: bootstrap stub -> 'globals' -> 'resizeButton' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'name' From:
@@ -2594,7 +2594,7 @@ SlotsToOmit: name parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          resizeButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'resizeButton' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits resizeButton.
@@ -2615,7 +2615,7 @@ SlotsToOmit: name parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          slider = bootstrap define: bootstrap stub -> 'globals' -> 'slider' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'name' From:
@@ -2667,7 +2667,7 @@ SlotsToOmit: name parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          slider = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'slider' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits slider.
@@ -2694,7 +2694,7 @@ SlotsToOmit: name parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          slotEditor = bootstrap define: bootstrap stub -> 'globals' -> 'slotEditor' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -2717,7 +2717,7 @@ SlotsToOmit: parent size.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          slotEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'slotEditor' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits slotEditor.
@@ -2750,7 +2750,7 @@ SlotsToOmit: parent size.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          textBuffer = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'textBuffer' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals textBuffer.
@@ -3016,7 +3016,7 @@ SlotsToOmit: parent size.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          editorWithReceiver = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'editorWithReceiver' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits editorWithReceiver.

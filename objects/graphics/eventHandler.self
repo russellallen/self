@@ -59,7 +59,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: eventHandler InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: eventHandler InitialContents: FollowSlot\x7fVisibility: public'
         
          queueingEventHandler = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'queueingEventHandler' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals queueingEventHandler.
@@ -74,7 +74,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: eventHandler InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: eventHandler InitialContents: FollowSlot\x7fVisibility: public'
         
          queueingEventHandler = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'queueingEventHandler' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits queueingEventHandler.

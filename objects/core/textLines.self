@@ -69,7 +69,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: characters\x7fModuleInfo: Module: textLines InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: characters\x7fModuleInfo: Module: textLines InitialContents: FollowSlot\x7fVisibility: public'
         
          textLines = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'textLines' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals textLines.

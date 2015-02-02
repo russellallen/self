@@ -60,7 +60,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: slab InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: slab InitialContents: FollowSlot\x7fVisibility: public'
         
          slab = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'slab' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals slab.
@@ -81,7 +81,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: slab InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: slab InitialContents: FollowSlot\x7fVisibility: public'
         
          slab = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'slab' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits slab.

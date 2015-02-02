@@ -68,7 +68,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
         
          collection = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'collection' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits collection.

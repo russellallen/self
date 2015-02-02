@@ -8,7 +8,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: generalLeafModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: generalLeafModel InitialContents: FollowSlot\x7fVisibility: public'
         
          generalLeafModel = bootstrap define: bootstrap stub -> 'globals' -> 'generalLeafModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

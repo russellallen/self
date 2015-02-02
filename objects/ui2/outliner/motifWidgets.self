@@ -8,7 +8,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          optionalMorph = bootstrap define: bootstrap stub -> 'globals' -> 'optionalMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -31,7 +31,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          optionalMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'optionalMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits optionalMorph.
@@ -137,7 +137,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          commentButtonMorph = bootstrap define: bootstrap stub -> 'globals' -> 'commentButtonMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -161,7 +161,7 @@ SlotsToOmit: parent prototype rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          commentButtonMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'commentButtonMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits commentButtonMorph.
@@ -194,7 +194,7 @@ SlotsToOmit: parent prototype rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          pushButton = bootstrap define: bootstrap stub -> 'globals' -> 'pushButton' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -224,7 +224,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          pushButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'pushButton' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits pushButton.
@@ -544,7 +544,7 @@ is supposed to simulate actually pressing the button.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          expanderPushButton = bootstrap define: bootstrap stub -> 'globals' -> 'expanderPushButton' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -574,7 +574,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          expanderPushButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'expanderPushButton' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits expanderPushButton.
@@ -654,7 +654,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          radioButton = bootstrap define: bootstrap stub -> 'globals' -> 'radioButton' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -695,7 +695,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: motifWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          radioButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'radioButton' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits radioButton.

@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: ordered\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: private'
+         'Category: core\x7fCategory: collections\x7fCategory: ordered\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: private'
         
          link = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'link' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals link.
@@ -23,7 +23,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: ordered\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: ordered\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
         
          link = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'link' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits link.
@@ -50,7 +50,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: ordered\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: ordered\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
         
          list = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'list' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals list.
@@ -59,7 +59,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: ordered\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: ordered\x7fModuleInfo: Module: list InitialContents: FollowSlot\x7fVisibility: public'
         
          list = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'list' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits list.

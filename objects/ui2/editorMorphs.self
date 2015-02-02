@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractEditorMorph = bootstrap define: bootstrap stub -> 'globals' -> 'abstractEditorMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -31,7 +31,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractEditorMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractEditorMorph' -> () From: ( |
              {} = 'Comment: I hold behavior that any kind of 
@@ -47,7 +47,7 @@ text pane might want to share.\x7fModuleInfo: Creator: traits abstractEditorMorp
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          caretMorph = bootstrap define: bootstrap stub -> 'globals' -> 'caretMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -78,7 +78,7 @@ SlotsToOmit: parent prototype rawBox rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          caretMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'caretMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits caretMorph.
@@ -580,7 +580,7 @@ is selected-- Randy, 1/13/95\x7fModuleInfo: Module: editorMorphs InitialContents
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          editorMorph = bootstrap define: bootstrap stub -> 'globals' -> 'editorMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -601,7 +601,7 @@ SlotsToOmit: parent prototype rawBox rawBox: rawColor rawColor:.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          editorMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'editorMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits editorMorph.
@@ -641,7 +641,7 @@ commands-- Randy, 1/6/95\x7fModuleInfo: Module: editorMorphs InitialContents: In
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          editorRowMorph = bootstrap define: bootstrap stub -> 'globals' -> 'editorRowMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -678,7 +678,7 @@ SlotsToOmit: parent prototype rawBox rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          editorRowMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'editorRowMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits editorRowMorph.

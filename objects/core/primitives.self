@@ -60,7 +60,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: Virtual Machine interface\x7fModuleInfo: Module: primitives InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: virtual machine interface\x7fModuleInfo: Module: primitives InitialContents: FollowSlot\x7fVisibility: public'
         
          primitives = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'primitives' -> () From: ( |
              {} = 'Comment: Helps retrieve primitive documentation.\x7fModuleInfo: Creator: globals primitives.

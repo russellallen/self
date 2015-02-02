@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          buttonMorph = bootstrap define: bootstrap stub -> 'globals' -> 'buttonMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -56,7 +56,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          buttonMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'buttonMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits buttonMorph.
@@ -450,7 +450,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          messageButtonMorph = bootstrap define: bootstrap stub -> 'globals' -> 'messageButtonMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'expression' From:
@@ -468,7 +468,7 @@ SlotsToOmit: expression parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          messageButtonMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'messageButtonMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits messageButtonMorph.
@@ -552,7 +552,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          reifyResultActivity = bootstrap define: bootstrap stub -> 'globals' -> 'reifyResultActivity' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -574,7 +574,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          reifyResultActivity = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'reifyResultActivity' -> () From: ( |
              {} = 'Comment: This activity is used by asynchronous buttons to notice when
@@ -591,7 +591,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          repMorph = bootstrap define: bootstrap stub -> 'globals' -> 'repMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -626,7 +626,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: buttonMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          repMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'repMorph' -> () From: ( |
              {} = 'Comment: A repMorph is a morph that represents an arbitrary Self object.

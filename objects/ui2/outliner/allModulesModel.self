@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Module Outliner\x7fModuleInfo: Module: allModulesModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Module Outliner\x7fModuleInfo: Module: allModulesModel InitialContents: FollowSlot\x7fVisibility: public'
         
          allModulesModel = bootstrap define: bootstrap stub -> 'globals' -> 'allModulesModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

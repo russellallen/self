@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Debugger\x7fModuleInfo: Module: selfDebugger InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Debugger\x7fModuleInfo: Module: selfDebugger InitialContents: FollowSlot\x7fVisibility: public'
         
          selfActivationModel = bootstrap define: bootstrap stub -> 'globals' -> 'selfActivationModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'cachedIsMethod' From:
@@ -541,7 +541,7 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Debugger\x7fModuleInfo: Module: selfDebugger InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Debugger\x7fModuleInfo: Module: selfDebugger InitialContents: FollowSlot\x7fVisibility: public'
         
          selfProcessModel = bootstrap define: bootstrap stub -> 'globals' -> 'selfProcessModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -588,7 +588,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Debugger\x7fModuleInfo: Module: selfDebugger InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Debugger\x7fModuleInfo: Module: selfDebugger InitialContents: FollowSlot\x7fVisibility: public'
         
          selfProcessStackModel = bootstrap define: bootstrap stub -> 'globals' -> 'selfProcessStackModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

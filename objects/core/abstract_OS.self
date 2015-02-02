@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: OS and filesystem interface\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: host and filesystem\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
         
          abstract_OS = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'abstract_OS' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals abstract_OS.
@@ -151,7 +151,7 @@ block is done executing. -- Adam & Alex, March 04\x7fModuleInfo: Module: abstrac
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: OS and filesystem interface\x7fModuleInfo: Module: abstract_OS InitialContents: InitializeToExpression: (vector copySize: 256)\x7fVisibility: public'
+         'Category: platform\x7fCategory: host and filesystem\x7fModuleInfo: Module: abstract_OS InitialContents: InitializeToExpression: (vector copySize: 256)\x7fVisibility: public'
         
          fileTable = vector copySize: 256.
         } | ) 
@@ -216,7 +216,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: OS and filesystem interface\x7fComment: OS-independant files\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: host and filesystem\x7fComment: OS-independant files\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractFile = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractFile' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits abstractFile.

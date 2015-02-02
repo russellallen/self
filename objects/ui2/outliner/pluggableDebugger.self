@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Debugger\x7fModuleInfo: Module: pluggableDebugger InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Debugger\x7fModuleInfo: Module: pluggableDebugger InitialContents: FollowSlot'
         
          generalActivationModel = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'generalActivationModel' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals generalActivationModel.
@@ -305,7 +305,7 @@ to point to other methods\x7fModuleInfo: Module: pluggableDebugger InitialConten
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Debugger\x7fModuleInfo: Module: pluggableDebugger InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Debugger\x7fModuleInfo: Module: pluggableDebugger InitialContents: FollowSlot\x7fVisibility: public'
         
          generalProcessModel = bootstrap define: bootstrap stub -> 'globals' -> 'generalProcessModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -965,7 +965,7 @@ the processMorph is updated.\x7fModuleInfo: Module: pluggableDebugger InitialCon
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Debugger\x7fModuleInfo: Module: pluggableDebugger InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Debugger\x7fModuleInfo: Module: pluggableDebugger InitialContents: FollowSlot\x7fVisibility: public'
         
          generalProcessStackModel = bootstrap define: bootstrap stub -> 'globals' -> 'generalProcessStackModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

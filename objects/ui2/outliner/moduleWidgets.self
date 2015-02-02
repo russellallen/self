@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractAnnotationMorph = bootstrap define: bootstrap stub -> 'globals' -> 'abstractAnnotationMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -37,7 +37,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractAnnotationMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractAnnotationMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits abstractAnnotationMorph.
@@ -58,7 +58,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          moduleField = bootstrap define: bootstrap stub -> 'globals' -> 'moduleField' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -87,7 +87,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          moduleField = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'moduleField' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits moduleField.
@@ -353,7 +353,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          objectAnnotationMorph = bootstrap define: bootstrap stub -> 'globals' -> 'objectAnnotationMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -394,7 +394,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          objectAnnotationMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'objectAnnotationMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits objectAnnotationMorph.
@@ -427,7 +427,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          slotModuleMorph = bootstrap define: bootstrap stub -> 'globals' -> 'slotModuleMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -480,7 +480,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: moduleWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          slotModuleMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'slotModuleMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits slotModuleMorph.

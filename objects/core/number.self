@@ -60,7 +60,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fModuleInfo: Module: number InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fModuleInfo: Module: number InitialContents: FollowSlot\x7fVisibility: public'
         
          number = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'number' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits number.

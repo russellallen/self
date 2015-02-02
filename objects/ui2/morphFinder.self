@@ -80,7 +80,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: morphFinder InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: morphFinder InitialContents: FollowSlot\x7fVisibility: public'
         
          morphFinder = bootstrap define: bootstrap stub -> 'globals' -> 'morphFinder' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -103,7 +103,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: morphFinder InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: morphFinder InitialContents: FollowSlot\x7fVisibility: public'
         
          morphFinder = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'morphFinder' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits morphFinder.
@@ -124,7 +124,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: morphFinder InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: morphFinder InitialContents: FollowSlot\x7fVisibility: public'
         
          morphFinderMenu = bootstrap define: bootstrap stub -> 'globals' -> 'morphFinderMenu' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -148,7 +148,7 @@ xxxXXX\x7fModuleInfo: Module: morphFinder InitialContents: InitializeToExpressio
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: morphFinder InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: morphFinder InitialContents: FollowSlot\x7fVisibility: public'
         
          morphFinderMenu = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'morphFinderMenu' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits morphFinderMenu.

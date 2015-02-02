@@ -15,7 +15,7 @@ This is not a module and not managed by Transporter.
 
   bootstrap read: 'allCore' From: 'core'.
   bootstrap read: 'primitiveMaker' From: 'glue'.
-  bootstrap read: 'crypto' From: 'misc'.
+  bootstrap read: 'crypto' From: 'applications'.
   bootstrap read: 'allTests' From: 'tests'.
 
   "Load optional components after asking user" 

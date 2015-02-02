@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: bitmapShape InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: bitmapShape InitialContents: FollowSlot\x7fVisibility: public'
         
          bitmapShape = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'bitmapShape' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals bitmapShape.
@@ -29,7 +29,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: bitmapShape InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: bitmapShape InitialContents: FollowSlot\x7fVisibility: public'
         
          bitmapShape = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'bitmapShape' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits bitmapShape.

@@ -60,7 +60,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
         
          drawing = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'drawing' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits drawing.

@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Keyboard\x7fModuleInfo: Module: keyCaps InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Keyboard\x7fModuleInfo: Module: keyCaps InitialContents: FollowSlot\x7fVisibility: public'
         
          keyCaps = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'keyCaps' -> () From: ( |
              {} = 'Comment: Namespace of objects that represent particular keys on a keyboard.

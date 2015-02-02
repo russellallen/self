@@ -59,7 +59,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fModuleInfo: Module: random InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fModuleInfo: Module: random InitialContents: FollowSlot\x7fVisibility: public'
         
          randomLC = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'randomLC' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals randomLC.
@@ -86,7 +86,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fModuleInfo: Module: random InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fModuleInfo: Module: random InitialContents: FollowSlot\x7fVisibility: public'
         
          randomLC = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'randomLC' -> () From: ( |
              {} = 'Comment: This is a traits for a concrete random number generator that generates
@@ -115,7 +115,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fModuleInfo: Module: random InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fModuleInfo: Module: random InitialContents: FollowSlot\x7fVisibility: public'
         
          random = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'random' -> () From: ( |
              {} = 'Comment: An abstract supertype for random generators. Ole Agesen, October 1991.\x7fModuleInfo: Creator: traits random.
@@ -450,7 +450,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fModuleInfo: Module: random InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fModuleInfo: Module: random InitialContents: FollowSlot\x7fVisibility: public'
         
          random = bootstrap define: bootstrap stub -> 'globals' -> 'random' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'storeStringNeeds' From:

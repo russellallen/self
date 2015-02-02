@@ -520,7 +520,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Saving morphs to a file\x7fModuleInfo: Module: morphSaving InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Saving morphs to a file\x7fModuleInfo: Module: morphSaving InitialContents: FollowSlot'
         
          morphStoreStringBuilder = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'morphStoreStringBuilder' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals morphStoreStringBuilder.

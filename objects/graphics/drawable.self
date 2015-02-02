@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: drawable InitialContents: FollowSlot\x7fVisibility: private'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: drawable InitialContents: FollowSlot\x7fVisibility: private'
         
          abstractDrawable = bootstrap define: bootstrap stub -> 'globals' -> 'abstractDrawable' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -24,7 +24,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: drawable InitialContents: FollowSlot\x7fVisibility: private'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: drawable InitialContents: FollowSlot\x7fVisibility: private'
         
          abstractDrawable = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractDrawable' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits abstractDrawable.

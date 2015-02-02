@@ -71,7 +71,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: applications\x7fModuleInfo: Module: transporter InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: modules\x7fModuleInfo: Module: transporter InitialContents: FollowSlot\x7fVisibility: public'
         
          transporter = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'transporter' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals transporter.
@@ -92,7 +92,7 @@ accessed quickly
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> () From: ( | {
-         'Category: applications\x7fModuleInfo: Module: transporter InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: modules\x7fModuleInfo: Module: transporter InitialContents: FollowSlot\x7fVisibility: public'
         
          transporter = bootstrap setObjectAnnotationOf: bootstrap stub -> 'mixins' -> 'transporter' -> () From: ( |
              {} = 'ModuleInfo: Creator: mixins transporter.
@@ -101,7 +101,7 @@ accessed quickly
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: applications\x7fModuleInfo: Module: transporter InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: modules\x7fModuleInfo: Module: transporter InitialContents: FollowSlot\x7fVisibility: public'
         
          transporter = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'transporter' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits transporter.

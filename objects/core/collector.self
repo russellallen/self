@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fModuleInfo: Module: collector InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fModuleInfo: Module: collector InitialContents: FollowSlot\x7fVisibility: public'
         
          collector = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'collector' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals collector.
@@ -35,7 +35,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fModuleInfo: Module: collector InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fModuleInfo: Module: collector InitialContents: FollowSlot\x7fVisibility: public'
         
          collector = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'collector' -> () From: ( |
              {} = 'Comment: A collector accumulates a collection of collections to be

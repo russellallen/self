@@ -60,7 +60,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: larsText InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: larsText InitialContents: FollowSlot\x7fVisibility: public'
         
          ui2_textBuffer = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui2_textBuffer' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals ui2_textBuffer.
@@ -134,7 +134,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: larsText InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: larsText InitialContents: FollowSlot\x7fVisibility: public'
         
          ui2_textField = bootstrap define: bootstrap stub -> 'globals' -> 'ui2_textField' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -241,7 +241,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: larsText InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: larsText InitialContents: FollowSlot\x7fVisibility: public'
         
          ui2_textField = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui2_textField' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits ui2_textField.

@@ -59,7 +59,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Debugging\x7fModuleInfo: Module: ui2ResultReporter InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Debugging\x7fModuleInfo: Module: ui2ResultReporter InitialContents: FollowSlot'
         
          ui2ResultReporter = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui2ResultReporter' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals ui2ResultReporter.

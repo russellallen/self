@@ -59,7 +59,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: vectors\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: vectors\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
         
          indexable = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( |
              {} = 'Comment: vector-like, but not necessarily writable\x7fModuleInfo: Creator: traits indexable.
@@ -569,7 +569,7 @@ and insert the specified new stuff in its place.\x7fModuleInfo: Module: indexabl
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: vectors\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: vectors\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
         
          mutableIndexable = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( |
              {} = 'Comment: writable and indexable\x7fModuleInfo: Creator: traits mutableIndexable.

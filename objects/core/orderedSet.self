@@ -68,7 +68,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: ordered\x7fComment: A set that remembers the order in which things were added -- Mario, 4/10/95\x7fModuleInfo: Module: orderedSet InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: ordered\x7fComment: A set that remembers the order in which things were added -- Mario, 4/10/95\x7fModuleInfo: Module: orderedSet InitialContents: FollowSlot\x7fVisibility: public'
         
          orderedSet = bootstrap define: bootstrap stub -> 'globals' -> 'orderedSet' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -87,7 +87,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: ordered\x7fModuleInfo: Module: orderedSet InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: ordered\x7fModuleInfo: Module: orderedSet InitialContents: FollowSlot\x7fVisibility: public'
         
          orderedSet = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'orderedSet' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits orderedSet.

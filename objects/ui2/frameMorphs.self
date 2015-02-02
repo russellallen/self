@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Layout\x7fModuleInfo: Module: frameMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Layout\x7fModuleInfo: Module: frameMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          frameMorph = bootstrap define: bootstrap stub -> 'globals' -> 'frameMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'borderWidth' From:
@@ -45,7 +45,7 @@ SlotsToOmit: borderWidth parent prototype rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Layout\x7fModuleInfo: Module: frameMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Layout\x7fModuleInfo: Module: frameMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          frameMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'frameMorph' -> () From: ( |
              {} = 'Comment: A frameMorph is a column that supplies a rectangular border

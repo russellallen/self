@@ -60,7 +60,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: movingBitmap InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: movingBitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          movingBitmap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'movingBitmap' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals movingBitmap.
@@ -87,7 +87,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: movingBitmap InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: movingBitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          movingBitmap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'movingBitmap' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits movingBitmap.

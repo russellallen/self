@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: colormap InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: colormap InitialContents: FollowSlot\x7fVisibility: public'
         
          cachedColormap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'cachedColormap' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals cachedColormap.
@@ -39,7 +39,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: colormap InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: colormap InitialContents: FollowSlot\x7fVisibility: public'
         
          cachedColormap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'cachedColormap' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits cachedColormap.
@@ -60,7 +60,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: colormap InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: colormap InitialContents: FollowSlot\x7fVisibility: public'
         
          colormap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'colormap' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals colormap.
@@ -69,7 +69,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: colormap InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: colormap InitialContents: FollowSlot\x7fVisibility: public'
         
          colormap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'colormap' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits colormap.

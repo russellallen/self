@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: pattern InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: pattern InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractPattern = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'abstractPattern' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals abstractPattern.
@@ -23,7 +23,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: pattern InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: pattern InitialContents: FollowSlot\x7fVisibility: public'
         
          pattern = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'pattern' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits pattern.
