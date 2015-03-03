@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: platform\x7fCategory: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: graphical interface\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          graphicsDependentGlobals* = bootstrap stub -> 'globals' -> 'quartzGlobals' -> ().
         } | ) 
@@ -1281,7 +1281,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: platform\x7fCategory: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: graphical interface\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          x11Globals = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals x11Globals.

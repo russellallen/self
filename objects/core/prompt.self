@@ -99,7 +99,7 @@ is a sane default for perProcessGlobals prompt inputLoopProcess\x7fModuleInfo: C
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: user interface\x7fModuleInfo: Module: prompt InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: prompt\x7fModuleInfo: Module: prompt InitialContents: FollowSlot\x7fVisibility: public'
         
          prompt = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'prompt' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits prompt.

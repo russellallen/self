@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: platform\x7fCategory: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: quartzHosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: graphical interface\x7fModuleInfo: Module: quartzHosts InitialContents: FollowSlot\x7fVisibility: public'
         
          quartzGlobals = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'quartzGlobals' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals quartzGlobals.

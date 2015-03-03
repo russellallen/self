@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: platform\x7fCategory: host and filesystem\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: os\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
         
          abstract_OS = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'abstract_OS' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals abstract_OS.

@@ -44,7 +44,9 @@ screen, you can summon it by pressing the middle mouse button on the background 
 
 Outliners sport three small buttons in the top-right-hand corner labeled “/\\”, “E”,
 and “X”. These buttons summon the object’s parents, add an evaluator text region to the bottom of
-the outliner, and dismiss the outliner. Press the “E” button to get an evaluator.Type ``anExampleObject`` into 
+the outliner, and dismiss the outliner. Press the “E” button to get an evaluator.
+
+Type ``anExampleObject`` into 
 the evaluator (it will already be selected) and hit the ``Get it`` button (or type metareturn 
 on UNIX, or command-return on MacOS X):
 
@@ -55,7 +57,15 @@ on UNIX, or command-return on MacOS X):
     :align: left
     
 The result object appears in your “hand” raised above the screen as if you were dragging it with the
-left button. Just click the button to set it down.
+left button. 
+
+.. note::
+
+   If this returns an error, it may be that you don't have ``anExampleObject`` in your Self world. You can always load it from the file ``objects/misc/programmingExamples.self`` as follows::
+   
+   'path/to/objects/misc/programmingExamples.self' runScript
+    
+Click the button to set it down.
 
 ..  figure:: images/Pgm_Env_Image3.*
     :height: 70 px
@@ -885,4 +895,4 @@ which may take a while to learn. We hope that you find the investment worth the 
 
 .. [#f9] isComplete is used by the environment to decide when it is safe to send messages like printString.
 
-.. [#f9] See www.semanticversioning.org for a specification. In essence, versions are of the form "3.2.1-alpha6"
+.. [#f10] See www.semanticversioning.org for a specification. In essence, versions are of the form "3.2.1-alpha6"

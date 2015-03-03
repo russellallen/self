@@ -3,7 +3,7 @@ SELF WORLD BUILDER
 Copyright 1992-2014 AUTHORS.
 See the LICENSE file for license information.
 
-Version: 0.1.0
+Version: 0.2.0
 
 This is not a module and not managed by Transporter.
 '
@@ -17,6 +17,7 @@ This is not a module and not managed by Transporter.
   bootstrap read: 'primitiveMaker' From: 'glue'.
   bootstrap read: 'crypto' From: 'applications'.
   bootstrap read: 'allTests' From: 'tests'.
+  bootstrap read: 'programmingExamples' From: 'misc'.
 
   "Load optional components after asking user" 
 
