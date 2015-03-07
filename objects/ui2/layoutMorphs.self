@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.10 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -153,6 +154,9 @@ SlotsToOmit: parent prototype.
         
          baseDrawOn: aCanvas = ( |
             | 
+            "Optimization: don't draw if transparent"
+            rawColor isTransparent ifTrue: [^ self].
+
             "Optimization: suppress drawing if this morph's color matches
              that of its owner."
 

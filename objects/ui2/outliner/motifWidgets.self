@@ -3,6 +3,7 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -50,6 +51,9 @@ SlotsToOmit: parent prototype.
         
          baseDrawOn: aCanvas = ( |
             | 
+            "Optimisation: suppress drawing if transparent"
+            rawColor isTransparent ifTrue: [^ self].
+
             "Optimization: suppress drawing if this morph's color matches
              that of its owner."
 

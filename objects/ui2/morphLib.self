@@ -3,6 +3,7 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -2133,11 +2134,21 @@ horizontal sliderMorph\x7fModuleInfo: Module: morphLib InitialContents: FollowSl
         
          baseDrawOn: c = ( |
             | 
+            "Optimization: don't draw if transparent"
+            rawColor isTransparent ifTrue: [^ self].
+
             "Optimization: suppress drawing if this morph's color matches
              that of its owner."
 
             (owner submorphVisible: self) ifTrue: [ resend.baseDrawOn: c ].
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
+         'Category: creating\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyH: hspace = ( |
+            | copyH: hspace Color: paint named: 'transparent').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
@@ -2151,6 +2162,13 @@ horizontal sliderMorph\x7fModuleInfo: Module: morphLib InitialContents: FollowSl
             new beFlexibleVertically.
             new setWidth: hSpace.
             new).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
+         'Category: creating\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyV: vspace = ( |
+            | copyV: vspace Color: paint named: 'transparent').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
