@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.15 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -829,6 +830,13 @@ lots of images. It quantizes in RGB space.\x7fModuleInfo: Module: paint InitialC
          'Category: namingAndPrinting\x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
         
          isImmutableForFilingOut = bootstrap stub -> 'globals' -> 'true' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'paint' -> () From: ( | {
+         'Category: accessing alpha (for Quartz)\x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
+        
+         isTransparent = ( |
+            | alpha = 0).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'paint' -> () From: ( | {

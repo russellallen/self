@@ -3,6 +3,7 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -135,15 +136,9 @@ SlotsToOmit: parent.
                               FontSpec: moduleSummaryFontSpec
                                  Color: moduleSummaryFontColor.
             safelyDo: [
-              myOutliner addItemFirst: (
-                  (morph copy 
-                    setHeight: 4)
-                    colorAll: paint named: 'transparent').
+              myOutliner addItemFirst: spacerMorph copyV: 4.
               myOutliner addItemFirst: moduleSummary.
-              myOutliner addItemFirst: (
-                  (morph copy 
-                    setHeight: 4)
-                    colorAll: paint named: 'transparent')].
+              myOutliner addItemFirst: spacerMorph copyV: 4].
             self).
         } | ) 
 
