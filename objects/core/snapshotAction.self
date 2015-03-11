@@ -3,6 +3,7 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -97,15 +98,6 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                                      memory snapshotOptions fileName:
                                       (snapshotAction commandLine at: i succ).
                                      i + 2)
-                                 |).
-
-            snapshotAction
-              forCommandLineArg: '-headless'
-                       DoAction: (| parent* = lobby.
-                                    value: i With: arg = (
-                                     "Don't start up desktop this time"
-                                     desktop suppressRestart.
-                                     i succ).
                                  |).
 
             'Fhprtw' do: [|:opt|

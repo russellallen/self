@@ -1,9 +1,9 @@
- '30.8.0-prerelease1'
+ '30.8.0-prerelease2'
  '
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
-"preFileIn" self
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -48,9 +48,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'programmingSupport' -> () From: ( | {
-         'ModuleInfo: Module: programmingSupport InitialContents: InitializeToExpression: (\'30.8.0-prerelease1\')\x7fVisibility: public'
+         'ModuleInfo: Module: programmingSupport InitialContents: InitializeToExpression: (\'30.8.0-prerelease2\')\x7fVisibility: public'
         
-         revision <- '30.8.0-prerelease1'.
+         revision <- '30.8.0-prerelease2'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'programmingSupport' -> () From: ( | {
@@ -73,16 +73,16 @@ transcendental_wrappers
 
  '-- Sub parts'
 
- bootstrap read: 'inspect' From: 'core' InTree: globals modules programmingSupport tree
- bootstrap read: 'enumerating' From: 'core' InTree: globals modules programmingSupport tree
- bootstrap read: 'browsing' From: 'core' InTree: globals modules programmingSupport tree
- bootstrap read: 'history' From: 'core' InTree: globals modules programmingSupport tree
- bootstrap read: 'transporter' From: 'core' InTree: globals modules programmingSupport tree
- bootstrap read: 'programmingLog' From: 'core' InTree: globals modules programmingSupport tree
- bootstrap read: 'diff' From: 'core' InTree: globals modules programmingSupport tree
- bootstrap read: 'primitives' From: 'core' InTree: globals modules programmingSupport tree
- bootstrap read: 'shortcuts' From: 'core' InTree: globals modules programmingSupport tree
- bootstrap read: 'transcendental_wrappers' From: 'glue' InTree: globals modules programmingSupport tree
+ bootstrap read: 'inspect' From: 'core'
+ bootstrap read: 'enumerating' From: 'core'
+ bootstrap read: 'browsing' From: 'core'
+ bootstrap read: 'history' From: 'core'
+ bootstrap read: 'transporter' From: 'core'
+ bootstrap read: 'programmingLog' From: 'core'
+ bootstrap read: 'diff' From: 'core'
+ bootstrap read: 'primitives' From: 'core'
+ bootstrap read: 'shortcuts' From: 'core'
+ bootstrap read: 'transcendental_wrappers' From: 'glue'
 
 
 

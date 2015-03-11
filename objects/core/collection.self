@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.27 $'
+ '30.27.1'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -56,9 +57,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'collection' -> () From: ( | {
-         'ModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: collection InitialContents: InitializeToExpression: (\'30.27.1\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.27 $'.
+         revision <- '30.27.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'collection' -> () From: ( | {
@@ -1081,12 +1082,11 @@ Otherwise, raise an error.\x7fModuleInfo: Module: collection InitialContents: Fo
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'collection' -> () From: ( | {
          'Category: sorting\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
         
-         sortedBy: cmp Do: b = ( | {
-                 'ModuleInfo: Module: collection InitialContents: FollowSlot'
-                
-                 queue.
-                } 
+         sortedBy: cmp Do: b = ( |
+             queue.
             | 
+            "If empty, just return"
+            isEmpty ifTrue: [^ self].
             queue: priorityQueue copyRemoveAll.
             queue sorter: cmp.
             do: [| :el | queue add: el].

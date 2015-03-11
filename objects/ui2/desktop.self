@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.10 $'
+ '30.11.0'
  '
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -406,6 +407,16 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             | 
             resend.postFileIn.
             [returnFromSnapshot. releaseUnusedRefiedObjects]. "browsing"
+
+            snapshotAction
+              forCommandLineArg: '-headless'
+                       DoAction: (| parent* = lobby.
+                                    value: i With: arg = (
+                                     "Don't start up desktop this time"
+                                     desktop suppressRestart.
+                                     i succ).
+                                 |).
+
             snapshotAction addSchedulerInitialMessage:
               message copy receiver: desktop Selector: 'returnFromSnapshot'.
             memory addThoroughCleanupMessage:
@@ -414,9 +425,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'desktop' -> () From: ( | {
-         'ModuleInfo: Module: desktop InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: desktop InitialContents: InitializeToExpression: (\'30.11.0\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.10 $'.
+         revision <- '30.11.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'desktop' -> () From: ( | {

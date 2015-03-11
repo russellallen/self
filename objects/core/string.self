@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.23 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -509,17 +510,34 @@ for which aBlock returns true.
 See tokenizingUnitTests for examples.\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
         
          asTokensSeparatedByCharactersSatisfying: aBlock = ( |
-             result <- bootstrap stub -> 'globals' -> 'list' -> ().
-             token <- ''.
             | 
-            result: list copyRemoveAll.
-            do: [|:c|
-              (aBlock value: c) ifTrue: [
-                 token isEmpty ifFalse: [result add: token. token: '']
-              ] False: [token: token, c ]
-            ].
-            token isEmpty ifFalse: [result add: token].
-            result).
+            asTokensSeparatedByItemsSatisfying: aBlock).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'string' -> () From: ( | {
+         'Category: transforming\x7fCategory: tokenizing\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
+        
+         asTokensSeparatedBySubstring: s = ( |
+             i.
+             l.
+             p.
+            | 
+            l: sequence copyRemoveAll.
+            l add: 0.
+            i: 0.
+            [i < size] whileTrue: [
+              findSubstring: s
+                 StartingAt: i
+                  IfPresent: [|:in| l add: in. i: in + 1]
+                   IfAbsent: [i: size]].
+            l add: size. 
+            p: sequence copyRemoveAll.
+            p add: (copyFrom: 0 UpTo: (l at: 1)).
+            i: 1.
+            [i < (l size - 1)] whileTrue: [
+              p add: (copyFrom: (l at: i) + s size UpTo: (l at: i + 1)).
+              i: i + 1].
+            p).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'string' -> () From: ( | {
@@ -599,6 +617,18 @@ aResultReporter gets sent
          at: index Put: value IfAbsent: b = ( |
             | 
             at: index PutByte: value asByte IfAbsent: b).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'string' -> () From: ( | {
+         'Category: transforming\x7fCategory: tokenizing\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
+        
+         breakOnFirstSubstring: s = ( |
+            | 
+            findSubstring: s
+               StartingAt: 0
+                IfPresent: [|:in| (list copyRemoveAll add: (copyFrom: 0 UpTo: in))
+                                               add: (copyFrom: in + 1 UpTo: size)]
+                 IfAbsent: [self]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'string' -> () From: ( | {
@@ -1872,11 +1902,9 @@ so fork can set it.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'string' -> () From: ( | {
-         'Category: padding\x7fModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: private'
+         'Category: padding\x7fModuleInfo: Module: string InitialContents: InitializeToExpression: (\'\\t\\n\\r \')\x7fVisibility: private'
         
-         whiteSpace = ' 	
-
-'.
+         whiteSpace = '\t\n\r '.
         } | ) 
 
 
