@@ -11,6 +11,13 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  bootstrap addSlotsTo: bootstrap stub -> 'defaultBehavior' -> () From: ( | {
          'Category: split and join\x7fModuleInfo: Module: indexable InitialContents: FollowSlot'
         
+         join: anIndexableCollection = ( |
+            | (sequence copyRemoveAll add: self) join: anIndexableCollection).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'defaultBehavior' -> () From: ( | {
+         'Category: split and join\x7fModuleInfo: Module: indexable InitialContents: FollowSlot'
+        
          split: anIndexableCollection = ( |
             | anIndexableCollection asTokensSeparatedByItemsSatisfying: [|:i| = i]).
         } | ) 
@@ -348,10 +355,8 @@ just return a copy of this object. -- Adam & Alex, 4/04\x7fModuleInfo: Module: i
              nc.
             | 
             nc: copyRemoveAll.
-            c do: [|:e. :i| 
-              nc: nc, e.
-              i = (c size - 1) ifFalse: [nc: nc, self]].
-            nc).
+            c do: [|:e| nc: nc, e, self].
+            nc copyWithoutLast).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
