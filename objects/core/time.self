@@ -783,7 +783,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
      'Tue')
 
  ((bootstrap stub -> 'traits' -> 'time') \/-> 'shortWeekdayNames') -> () _At: 3 Put: (
-     'Wen')
+     'Wed')
 
  ((bootstrap stub -> 'traits' -> 'time') \/-> 'shortWeekdayNames') -> () _At: 4 Put: (
      'Thu')
