@@ -8,20 +8,6 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
 
  '-- Module body'
 
- bootstrap addSlotsTo: bootstrap stub -> 'defaultBehavior' -> () From: ( | {
-         'Category: split and join\x7fModuleInfo: Module: indexable InitialContents: FollowSlot'
-        
-         join: anIndexableCollection = ( |
-            | (sequence copyRemoveAll add: self) join: anIndexableCollection).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'defaultBehavior' -> () From: ( | {
-         'Category: split and join\x7fModuleInfo: Module: indexable InitialContents: FollowSlot'
-        
-         split: anIndexableCollection = ( |
-            | anIndexableCollection asTokensSeparatedByItemsSatisfying: [|:i| = i]).
-        } | ) 
-
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: indexable InitialContents: FollowSlot'
         
@@ -351,11 +337,11 @@ just return a copy of this object. -- Adam & Alex, 4/04\x7fModuleInfo: Module: i
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
          'Category: split and join\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
         
-         join: c = ( |
+         joinUsing: c = ( |
              nc.
             | 
             nc: copyRemoveAll.
-            c do: [|:e| nc: nc, e, self].
+            do: [|:e| nc: nc, e, c].
             nc copyWithoutLast).
         } | ) 
 
@@ -507,6 +493,13 @@ and insert the specified new stuff in its place.\x7fModuleInfo: Module: indexabl
             stop:  (aPair y < 0 ifTrue: [size + aPair y] False: [aPair y]).
             aPair y = infinity ifTrue: [stop: size].
             copyFrom: start UpTo: stop).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
+         'Category: split and join\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
+        
+         splitOn: o = ( |
+            | asTokensSeparatedByItemsSatisfying: [|:i| o = i]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
