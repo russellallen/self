@@ -184,6 +184,15 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
          'Category: copying\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
         
+         copyReversed = ( |
+            | 
+            [ copy ] onReturn: [|:r|
+              reverseDo: [|:e. :i| r at: size - i - 1 Put: e]]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
+         'Category: copying\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
+        
          copySize: n = ( |
             | copySize: n FillingWith: filler).
         } | ) 
@@ -340,9 +349,11 @@ just return a copy of this object. -- Adam & Alex, 4/04\x7fModuleInfo: Module: i
          joinUsing: c = ( |
              nc.
             | 
-            nc: copyRemoveAll.
+            nc: first copyRemoveAll.
             do: [|:e| nc: nc, e, c].
-            nc copyWithoutLast).
+            nc isEmpty
+             ifTrue: [ nc copy ]
+              False: [ nc copyWithoutLast ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
