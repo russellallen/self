@@ -1,8 +1,9 @@
  '$Revision: 30.14 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -356,7 +357,7 @@ for user reponses are added via buttonLabel:Result:.
              new.
             | 
             new: copyRemoveAllMorphs beShrinkWrap.
-            new colorAll: paint copyRed: 0 Green: 0 Blue: 0 Alpha: 0.7.
+            "new colorAll: paint copyRed: 0 Green: 0 Blue: 0 Alpha: 0.7."
             new doneSema: (doneSema copyCount: 0 Capacity: 1).
             mphs: list copyRemoveAll.
             (queryText asTextLines) do: [| :line |
