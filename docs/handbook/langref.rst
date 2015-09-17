@@ -175,7 +175,7 @@ For instance, in the expression:
 
 		::
 
-					1 to: 5 \* i By: 2 \* j Do: [\|:k \| k print ]
+					1 to: 5 * i By: 2 * j Do: [| :k | k print ]
 
 1 is evaluated first, then 5 \* i, then 2 \* j, and then [\|:k \| k print]. Finally, the to:By:Do:
 message is sent. The associativity and precedence of messages is discussed in section 4.
@@ -388,7 +388,7 @@ For example, an initialized mutable point might be defined as:
 						y <- 5.
 					| )
 
-producing an object with two data slots (xand y) and two assignment slots (x:and y:) containing the assignment primitive (depicted with ←): [#f4]_
+producing an object with two data slots (x and y) and two assignment slots (x: and y:) containing the assignment primitive (depicted with ←): [#f4]_
 
 ..  figure:: images/Chapter_2_Image_5.*
     :height: 294 px
