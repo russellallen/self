@@ -548,7 +548,7 @@ In addition to the ``Find Slot`` enumerator, Self has other ways to find things:
 +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   Added or Changed Slots in Module                 |        On the module menu (see below); shows all slots added or changed in the module since it was filed out.                                                                                                                                                                          |  
 +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Removed Slots in Module                          |        On the module menu (see below); shows the names of the slots removed from the module since it was last filed out.                                                                                                                                                              |  
+|   Removed Slots in Module                          |        On the module menu (see below); shows the names of the slots removed from the module since it was last filed out.                                                                                                                                                               |  
 +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   Expatriate Slots                                 |        On the changed module menu (see below); shows all slots in filed-out objects that do not themselves specify a module. These slots will not be filed out.                                                                                                                        |  
 +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -875,7 +875,10 @@ This concludes a brief tour of the Self programming environment. Although we str
 in the design of Self, its programming environment includes a fair amount of functionality
 which may take a while to learn. We hope that you find the investment worth the reward.
 
-.. 	rubric::	 Footnotes:
+.. only:: not latex
+
+  .. rubric::
+      Footnotes:
 
 .. [#f1] Double-clicking on the triangle will expand (or contract) all levels instead of just a single level.
 
