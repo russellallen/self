@@ -328,7 +328,7 @@ seconds the slot appears: [#f5]_
 Debugger
 ========
 
-Explore the Self debugger. Start by scrambling the send to ``environmentVariable:IfFail`` as
+Explore the Self debugger. Start by scrambling the send to ``environmentVariable:IfFail:`` as
 if you had misspelled it.
 
 ..  figure:: images/Pgm_Env_Image18.*
