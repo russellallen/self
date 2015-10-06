@@ -130,8 +130,8 @@ slot named ``aCategorizedVariable``: containing the assignment primitive.)
 
 To look at the object contained in a data (constant or assignable) slot, just click on its icon. But if
 the slot is a method, clicking its icon opens up a text editor on its source. For example, clicking on
-the icon at the right of the whoAmI box opens a text editor displaying its source (and typing control-
-L widens the object to show all the text in the selected window):
+the icon at the right of the whoAmI box opens a text editor displaying its source (and typing control-L
+widens the object to show all the text in the selected window):
 
 ..  figure:: images/Pgm_Env_Image7.*
     :height: 496 px
@@ -355,7 +355,7 @@ some buttons for controlling the process, and a collapsed outliner for the stack
     :scale: 100
     :align: left
 
-The stack filters out uninteresting frames by default. [#f6]_ The debugger assumes that the first method
+The stack filters out uninteresting frames by default [#f6]_. The debugger assumes that the first method
 you want to see is the one based on the text in the evaluator, and since the stack grows upwards this
 oldest frame appears at the bottom. It has no method name, and contains the code ``whoAmI``. That
 method called ``whoAmI``, whose code is too long to show next to the slot button, and that method
@@ -405,7 +405,7 @@ on the outliner’s title (``macOSGlobals os``) to get the object menu and selec
     :scale: 100
     :align: left
 
-Double-click on the word “foo” to select that field for editing. (The same trick works on slot
+Double-click on the word “foo\*” to select that field for editing. (The same trick works on slot
 names)
 
 ..  figure:: images/Pgm_Env_Image25.*
@@ -415,7 +415,7 @@ names)
     :align: left
 
 Since we are searching for a method with “Variable” in its name, backspace (the delete key on the
-Mac) three times [#f7]_ to erase the “foo” type in \*``Variable``\*, hit the green button, and then hit the
+Mac) three times [#f7]_ to erase the “foo” type in “\*Variable\*“, hit the green button, and then hit the
 triangle to start the search (if you make a typing mistake, you can double click the text to make it
 editable again). The triangle will blink a bit while it is searching (one could do other things in the
 meantime during a long search), then the enumerator will show the match(es):
