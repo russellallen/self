@@ -895,4 +895,4 @@ which may take a while to learn. We hope that you find the investment worth the 
 
 .. [#f9] isComplete is used by the environment to decide when it is safe to send messages like printString.
 
-.. [#f10] See www.semanticversioning.org for a specification. In essence, versions are of the form "3.2.1-alpha6"
+.. [#f10] See http://semver.org for a specification. In essence, versions are of the form "3.2.1-alpha6"
