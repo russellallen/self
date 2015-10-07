@@ -48,7 +48,7 @@ The structure of a composite morph forms a tree. When morph B is a submorph of m
 
     Figure 2: A composite morph consisting of a row with two buttons. Each button has submorph to indicate its function; one is a piece of text, the other is an icon consisting of two concentric circles. The diagram on the right shows its submorph structure.
 
-A morph can be made a submorph of some other morph using the **addMorph:** operation. This operation updates both the owner slot of the submorph and the submorphs list of the owner to reflect the desired configuration. For example, adding morph B to morph A adds B to A submorph list, removes B from its old owner (if any), and sets B's owner to A. The **addMorph:** operation also updates the layout of both B's old and new owners. The global position of a morph is held invariant by **addMorph:** (although some morphs may perform an automatic layout as a side-effect of **addMorph:**, immediately changing the position of the newly-added morph.).
+A morph can be made a submorph of some other morph using the **addMorph:** operation. This operation updates both the owner slot of the submorph and the submorphs list of the owner to reflect the desired configuration. For example, adding morph B to morph A adds B to A submorph list, removes B from its old owner (if any), and sets B's owner to A. The **addMorph:** operation also updates the layout of both B's old and new owners. The global position of a morph is held invariant by **addMorph:** (although some morphs may perform an automatic layout as a side-effect of **addMorph:**, immediately changing the position of the newly-added morph).
 
 ..  figure:: images/Figure3.*
     :height: 171 px
