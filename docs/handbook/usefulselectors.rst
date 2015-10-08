@@ -3,9 +3,11 @@ Useful Selectors
 
 This is a list of selectors which Selfers should find useful as a starting point.
 
-**Copying**
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+Copying
+-------
+
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +--------+--------------------------------------------------------------------+
 | clone  | shallow copy (for use within an object; clients should use copy)   |
@@ -13,9 +15,11 @@ This is a list of selectors which Selfers should find useful as a starting point
 |  copy  | copy the receiver, possibly with embedded copies or initialization |
 +--------+--------------------------------------------------------------------+
 
-**Comparing**
+Comparing
+---------
 
-*Equality*
+Equality
+++++++++
 
 .. tabularcolumns:: p{5cm} p{10cm} 
 
@@ -31,7 +35,8 @@ This is a list of selectors which Selfers should find useful as a starting point
 | !==             |      not identical                                                         | 
 +-----------------+----------------------------------------------------------------------------+
 
-*Ordered*
+Ordered
++++++++
 
 .. tabularcolumns:: p{5cm} p{10cm} 
 
@@ -49,96 +54,98 @@ This is a list of selectors which Selfers should find useful as a starting point
 | compare: IfLess: Equal: Greater: Incomparable:  |     three way comparison with failure    |
 +-------------------------------------------------+------------------------------------------+
 
-**Numeric operations**
+Numeric operations
+------------------
 
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +-----------------+-----------------------------------------------------------------+
-| \+              |    add                                                          |    
+| \+              |    add                                                          |
 +-----------------+-----------------------------------------------------------------+
-| \-              |    subtract                                                     |    
+| \-              |    subtract                                                     |
 +-----------------+-----------------------------------------------------------------+
-| \*              |    multiply                                                     |    
+| \*              |    multiply                                                     |
 +-----------------+-----------------------------------------------------------------+
-| /               |    divide                                                       |    
+| /               |    divide                                                       |
 +-----------------+-----------------------------------------------------------------+
-| /=              |    divide exactly (returns float)                               |    
+| /=              |    divide exactly (returns float)                               |
 +-----------------+-----------------------------------------------------------------+
-| /~              |    divide and round to integer (tends to round up)              |    
+| /~              |    divide and round to integer (tends to round up)              |
 +-----------------+-----------------------------------------------------------------+
-| /+              |    divide and round up to integer                               |    
+| /+              |    divide and round up to integer                               |
 +-----------------+-----------------------------------------------------------------+
-| /-%             |    divide and round down to integer modulus                     |    
+| /-%             |    divide and round down to integer modulus                     |
 +-----------------+-----------------------------------------------------------------+
-| absoluteValue   |    absolute value                                               |    
+| absoluteValue   |    absolute value                                               |
 +-----------------+-----------------------------------------------------------------+
-| inverse         |    multiplicative inverse                                       |    
+| inverse         |    multiplicative inverse                                       |
 +-----------------+-----------------------------------------------------------------+
-| negate          |    additive inverse                                             |    
+| negate          |    additive inverse                                             |
 +-----------------+-----------------------------------------------------------------+
-| ceil            |    round towards positive infinity                              |    
+| ceil            |    round towards positive infinity                              |
 +-----------------+-----------------------------------------------------------------+
-| floor           |    round towards negative infinity                              |    
+| floor           |    round towards negative infinity                              |
 +-----------------+-----------------------------------------------------------------+
-| truncate        |    truncate towards zero                                        |    
+| truncate        |    truncate towards zero                                        |
 +-----------------+-----------------------------------------------------------------+
-| round           |    round                                                        |    
+| round           |    round                                                        |
 +-----------------+-----------------------------------------------------------------+
-| asFloat         |    coerce to float                                              |    
+| asFloat         |    coerce to float                                              |
 +-----------------+-----------------------------------------------------------------+
-| asInteger       |    coerce to integer                                            |    
+| asInteger       |    coerce to integer                                            |
 +-----------------+-----------------------------------------------------------------+
-| double          |    multiply by two                                              |    
+| double          |    multiply by two                                              |
 +-----------------+-----------------------------------------------------------------+
-| quadruple       |    multiply by four                                             |    
+| quadruple       |    multiply by four                                             |
 +-----------------+-----------------------------------------------------------------+
-| half            |    divide by two                                                |    
+| half            |    divide by two                                                |
 +-----------------+-----------------------------------------------------------------+
-| quarter         |    divide by four                                               |    
+| quarter         |    divide by four                                               |
 +-----------------+-----------------------------------------------------------------+
-| min:            |    minimum of receiver and argument                             |    
+| min:            |    minimum of receiver and argument                             |
 +-----------------+-----------------------------------------------------------------+
-| max:            |    maximum of receiver and argument                             |    
+| max:            |    maximum of receiver and argument                             |
 +-----------------+-----------------------------------------------------------------+
-| mean:           |    mean of receiver and argument                                |    
+| mean:           |    mean of receiver and argument                                |
 +-----------------+-----------------------------------------------------------------+
-| pred            |    predecessor                                                  |    
+| pred            |    predecessor                                                  |
 +-----------------+-----------------------------------------------------------------+
-| predecessor     |    predecessor                                                  |    
+| predecessor     |    predecessor                                                  |
 +-----------------+-----------------------------------------------------------------+
-| succ            |    successor                                                    |    
+| succ            |    successor                                                    |
 +-----------------+-----------------------------------------------------------------+
-| successor       |    successor                                                    |    
+| successor       |    successor                                                    |
 +-----------------+-----------------------------------------------------------------+
-| power:          |    raise receiver to integer power                              |    
+| power:          |    raise receiver to integer power                              |
 +-----------------+-----------------------------------------------------------------+
-| log:            |    logarithm of argument base receiver, rounded down to integer |    
+| log:            |    logarithm of argument base receiver, rounded down to integer |
 +-----------------+-----------------------------------------------------------------+
-| square          |    square                                                       |    
+| square          |    square                                                       |
 +-----------------+-----------------------------------------------------------------+
-| squareRoot      |    square root                                                  |    
+| squareRoot      |    square root                                                  |
 +-----------------+-----------------------------------------------------------------+
-| factorial       |    factorial                                                    |    
+| factorial       |    factorial                                                    |
 +-----------------+-----------------------------------------------------------------+
-| fibonacci       |    fibonacci                                                    |    
+| fibonacci       |    fibonacci                                                    |
 +-----------------+-----------------------------------------------------------------+
-| sign            |    signum (-1, 0, 1)                                            |    
+| sign            |    signum (-1, 0, 1)                                            |
 +-----------------+-----------------------------------------------------------------+
-| even            |    true if receiver is even                                     |    
+| even            |    true if receiver is even                                     |
 +-----------------+-----------------------------------------------------------------+
-| odd             |    true if receiver is odd                                      |    
+| odd             |    true if receiver is odd                                      |
 +-----------------+-----------------------------------------------------------------+
 
-**Bitwise operations (integers)**	
+Bitwise operations (integers)
+-----------------------------
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +-----------+---------------------------+
-| &&  	    |     and                   |
+| &&        |    and                    |
 +-----------+---------------------------+
 | \|\|      |    or                     |
 +-----------+---------------------------+
-| ^^  	    |    xor                    |
+| ^^        |    xor                    |
 +-----------+---------------------------+
 | complement|    bitwise complement     |
 +-----------+---------------------------+
@@ -146,12 +153,13 @@ This is a list of selectors which Selfers should find useful as a starting point
 +-----------+---------------------------+
 | >>        |    logical right shift    |
 +-----------+---------------------------+
-| <+  	    |    arithmetic left shift  |
+| <+        |    arithmetic left shift  |
 +-----------+---------------------------+
-| +>  	    |    arithmetic right shift |
+| +>        |    arithmetic right shift |
 +-----------+---------------------------+
 
-**Logical operations (booleans)**
+Logical operations (booleans)
+-----------------------------
 
 .. tabularcolumns:: p{5cm} p{10cm} 
 
@@ -165,7 +173,8 @@ This is a list of selectors which Selfers should find useful as a starting point
 | not                      |    logical complement                                                 |  
 +--------------------------+-----------------------------------------------------------------------+
 
-**Constructing**
+Constructing
+------------
 
 .. tabularcolumns:: p{5cm} p{10cm} 
 
@@ -181,7 +190,8 @@ This is a list of selectors which Selfers should find useful as a starting point
 | ,               |    concatenation                                                       |  
 +-----------------+------------------------------------------------------------------------+
 
-**Printing**
+Printing
+--------
 
 .. tabularcolumns:: p{5cm} p{10cm} 
 
@@ -196,12 +206,14 @@ This is a list of selectors which Selfers should find useful as a starting point
 +------------------------+--------------------------------------------------------------------------+
 | printStringSize:       |       return a string label with number of characters limitation request |
 +------------------------+--------------------------------------------------------------------------+
-| printStringSize: Depth:|     return a string label with depth and size limitation request         |   
+| printStringSize: Depth:|       return a string label with depth and size limitation request       |
 +------------------------+--------------------------------------------------------------------------+
 
-**Control**
+Control
+-------
 
-*Block evaluation*
+Block evaluation
+++++++++++++++++
 
 .. tabularcolumns:: p{5cm} p{10cm} 
 
@@ -209,8 +221,9 @@ This is a list of selectors which Selfers should find useful as a starting point
 | value[: {With: }]  |      evaluate a block, passing arguments                                              |     
 +--------------------+---------------------------------------------------------------------------------------+
 
-*Selection*
-                                                                                                        
+Selection
++++++++++
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +--------------------+---------------------------------------------------------------------------------------+
@@ -223,8 +236,9 @@ This is a list of selectors which Selfers should find useful as a starting point
 | ifFalse: True:     |      evaluate first arg if false, second arg if true                                  |      
 +--------------------+---------------------------------------------------------------------------------------+
 
-*Local exiting*
-                                                                                                        
+Local exiting
++++++++++++++
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +--------------------+---------------------------------------------------------------------------------------+
@@ -233,8 +247,9 @@ This is a list of selectors which Selfers should find useful as a starting point
 | exitValue          |      exit block and return a value if block’s argument is evaluated                   |      
 +--------------------+---------------------------------------------------------------------------------------+
 
-*Basic looping*
-                                                                                                        
+Basic looping
++++++++++++++
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +--------------------+---------------------------------------------------------------------------------------+
@@ -245,8 +260,9 @@ This is a list of selectors which Selfers should find useful as a starting point
 | loopExitValue      |      repeat the block until argument is evaluated; then exit and return a value       |      
 +--------------------+---------------------------------------------------------------------------------------+
 
-*Pre-test looping*
-                                                                                                        
+Pre-test looping
+++++++++++++++++
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +--------------------+---------------------------------------------------------------------------------------+
@@ -259,7 +275,8 @@ This is a list of selectors which Selfers should find useful as a starting point
 | whileFalse:        |      repeat the receiver and argument until receiver evaluates to false               |      
 +--------------------+---------------------------------------------------------------------------------------+
 
-*Post-test looping*
+Post-test looping
++++++++++++++++++
 
 .. tabularcolumns:: p{5cm} p{10cm} 
                                                                                                         
@@ -269,8 +286,9 @@ This is a list of selectors which Selfers should find useful as a starting point
 | untilFalse:        |      repeat the receiver and argument until argument evaluates to false               |      
 +--------------------+---------------------------------------------------------------------------------------+
 
-*Iterators*
-                                                                                                        
+Iterators
++++++++++
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +--------------------+---------------------------------------------------------------------------------------+
@@ -289,20 +307,23 @@ This is a list of selectors which Selfers should find useful as a starting point
 | downTo: Do:        |      reverse iterate                                                                  |      
 +--------------------+---------------------------------------------------------------------------------------+
 
-**Collections**
+Collections
+-----------
 
-*Sizing*
+Sizing
+++++++
 
 .. tabularcolumns:: p{5cm} p{10cm} 
 
-+---------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| isEmpty test                                      |          if collection is empty                                                                                  | 
-+---------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
-| size                                              |         return number of elements in collection                                                                  |  
-+---------------------------------------------------+------------------------------------------------------------------------------------------------------------------+
++---------------------------------------------------+------------------------------------------------------------------------------------------------+
+| isEmpty test                                      |          if collection is empty                                                                |
++---------------------------------------------------+------------------------------------------------------------------------------------------------+
+| size                                              |         return number of elements in collection                                                |
++---------------------------------------------------+------------------------------------------------------------------------------------------------+
 
-*Adding*                                                                                                                                           
-                                                                                                                                              
+Adding
+++++++
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
@@ -323,9 +344,9 @@ This is a list of selectors which Selfers should find useful as a starting point
 | copyContaining:                 |         return a copy containing only the elements of the argument                                               |  
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
-                                                                                                                                              
-*Removing*                                                                                                                                         
-                                                                                                                                              
+Removing
+++++++++
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
@@ -348,8 +369,9 @@ This is a list of selectors which Selfers should find useful as a starting point
 | copyRemoveAll                   |         return an empty copy                                                                                     |   
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
-*Accessing*
-                                                                                                                                              
+Accessing
++++++++++
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
@@ -363,15 +385,16 @@ This is a list of selectors which Selfers should find useful as a starting point
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 | findFirst: IfPresent: IfAbsent: |        evaluate present block on first element found satisfying criteria, absent block if no such element        | 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| at:                             |         return element at the given key                                                                          |  
+| at:                             |        return element at the given key                                                                           |  
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| at: IfAbsent:                   |         return element at the given key, evaluating block if absent                                              |  
+| at: IfAbsent:                   |        return element at the given key, evaluating block if absent                                               |  
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| includesKey:                    |         test if collection contains a given key                                                                  |   
+| includesKey:                    |        test if collection contains a given key                                                                   |   
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
-*Iterating*                                                                                                                                        
-                                                                                                                                              
+Iterating
++++++++++
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
@@ -390,8 +413,9 @@ This is a list of selectors which Selfers should find useful as a starting point
 | with: Do:                       |         co-iterate, passing corresponding elements to block                                                      |   
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
-*Reducing*                                                                                                                                         
-                                                                                                                                              
+Reducing
+++++++++
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
@@ -410,8 +434,9 @@ This is a list of selectors which Selfers should find useful as a starting point
 | reduceWith: IfEmpty:            |         evaluate reduction block with elements, evaluating block if empty                                        |  
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
-*Transforming*                                                                                                                                     
-                                                                                                                                              
+Transforming
+++++++++++++
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
@@ -430,8 +455,9 @@ This is a list of selectors which Selfers should find useful as a starting point
 | mapBy: Into:                    |         add result of evaluating map block with each element to a collection                                     |  
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
-*Sorting*                                                                                                                                          
-                                                                                                                                              
+Sorting
++++++++
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
@@ -450,8 +476,9 @@ This is a list of selectors which Selfers should find useful as a starting point
 | sortedBy: Do:                   |         iterate in order of custom sort criteria                                                                 |  
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
-*Indexable-specific*                                                                                                                               
-                                                                                                                                              
+Indexable-specific
+++++++++++++++++++
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
@@ -476,96 +503,106 @@ This is a list of selectors which Selfers should find useful as a starting point
 | copySize: FillingWith:          |         copy with size n, filling in any extra elements with second arg                                          |  
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
-**Timing**
+Timing
+------
 
 .. tabularcolumns:: p{5cm} p{10cm} 
 
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| realTime                                                  |    elapsed real time to execute a block                                                                                                            | 
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| cpuTime                                                   |    CPU time to execute a block                                                                                                                     |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| userTime                                                  |    CPU time in user process to execute a block                                                                                                     |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| systemTime                                                |    CPU time in system kernel to execute a block                                                                                                    |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| totalTime                                                 |    system + user time to execute a block                                                                                                           |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| realTime                                                  |    elapsed real time to execute a block                                                |
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| cpuTime                                                   |    CPU time to execute a block                                                         |
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| userTime                                                  |    CPU time in user process to execute a block                                         |
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| systemTime                                                |    CPU time in system kernel to execute a block                                        |
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| totalTime                                                 |    system + user time to execute a block                                               |
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
 
-**Message Sending**
-                                                                                                                                                                                                         
-*Sending* (like Smalltalk ``perform``; receiver is a string)                                                                                                                                               
-                                                                                                                                                                                                         
+Message Sending
+---------------
+
+Sending
++++++++
+
+Like Smalltalk ``perform``; receiver is a string.
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| sendTo: {With: }                                          |    send receiver string as a message                                                                                                               |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| sendTo: WithArguments:                                    |    indirect send with arguments in a vector                                                                                                        |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| sendTo: DelegatingTo: {With: }                            |    indirect delegated send                                                                                                                         |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| sendTo: DelegatingTo: WithArguments:                      |    indirect delegated send with arg vector                                                                                                         |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| resendTo: {With: }                                        |    indirect resend                                                                                                                                 |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| resendTo: WithArguments:                                  |    indirect resend with arguments in a vector                                                                                                      |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| sendTo: {With: }                                          |    send receiver string as a message                                                   |
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| sendTo: WithArguments:                                    |    indirect send with arguments in a vector                                            |
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| sendTo: DelegatingTo: {With: }                            |    indirect delegated send                                                             |
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| sendTo: DelegatingTo: WithArguments:                      |    indirect delegated send with arg vector                                             |
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| resendTo: {With: }                                        |    indirect resend                                                                     |
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| resendTo: WithArguments:                                  |    indirect resend with arguments in a vector                                          |
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
 
-*Message object protocol*
-                                                                                                                                                                                                         
+Message object protocol
++++++++++++++++++++++++
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
-+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| send                                                           |    perform the send described by a message object                                                                                                  |   
-+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| fork                                                           |    start a new process; the new process performs the message                                                                                       |   
-+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| receiver:                                                      |    set receiver                                                                                                                                    |   
-+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| selector:                                                      |    set selector                                                                                                                                    |   
-+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| methodHolder:                                                  |    set method holder                                                                                                                               |   
-+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| delegatee:                                                     |    set delegatee of the message object                                                                                                             |   
-+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| arguments:                                                     |    set arguments (packaged in a vector)                                                                                                            |   
-+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| receiver: Selector:                                            |    set receiver and selector                                                                                                                       |   
-+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| receiver: Selector: Arguments:                                 |    set receiver, selector, and arguments                                                                                                           |   
-+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| receiver: Selector: Type: Delegatee: MethodHolder: Arguments:  |    set all components                                                                                                                              |   
-+----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| send                                                           |    perform the send described by a message object                                 |
++----------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| fork                                                           |    start a new process; the new process performs the message                      |
++----------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| receiver:                                                      |    set receiver                                                                   |
++----------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| selector:                                                      |    set selector                                                                   |
++----------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| methodHolder:                                                  |    set method holder                                                              |
++----------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| delegatee:                                                     |    set delegatee of the message object                                            |
++----------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| arguments:                                                     |    set arguments (packaged in a vector)                                           |
++----------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| receiver: Selector:                                            |    set receiver and selector                                                      |
++----------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| receiver: Selector: Arguments:                                 |    set receiver, selector, and arguments                                          |
++----------------------------------------------------------------+-----------------------------------------------------------------------------------+
+| receiver: Selector: Type: Delegatee: MethodHolder: Arguments:  |    set all components                                                             |
++----------------------------------------------------------------+-----------------------------------------------------------------------------------+
 
-**Reflection (mirrors)**
-                                                                                                                                                                                                         
+Reflection (mirrors)
+--------------------
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| reflect:                                                  |    returns a mirror on the argument                                                                                                                |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| reflectee                                                 |    returns the object the mirror receiver reflects                                                                                                 |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| contentsAt:                                               |    returns a mirror on the contents of slot n                                                                                                      |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| isAssignableAt:                                           |    tests if slot n is an assignable slot                                                                                                           |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| isParentAt:                                               |    tests if slot n is a parent slot                                                                                                                |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| isArgumentAt:                                             |    tests if slot n is an argument slot                                                                                                             |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| parentPriorityAt:                                         |    returns the parent priority of slot n                                                                                                           |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| slotAt:                                                   |    returns a slot object representing slot n                                                                                                       |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| contentsAt:                                               |    returns the contents of the slot named n                                                                                                        |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| visibilityAt:                                             |    returns a visibility object representing visibility of slot n                                                                                   |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| reflect:                                                  |    returns a mirror on the argument                                                    |   
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| reflectee                                                 |    returns the object the mirror receiver reflects                                     |   
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| contentsAt:                                               |    returns a mirror on the contents of slot n                                          |   
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| isAssignableAt:                                           |    tests if slot n is an assignable slot                                               |   
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| isParentAt:                                               |    tests if slot n is a parent slot                                                    |   
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| isArgumentAt:                                             |    tests if slot n is an argument slot                                                 |   
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| parentPriorityAt:                                         |    returns the parent priority of slot n                                               |   
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| slotAt:                                                   |    returns a slot object representing slot n                                           |   
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| contentsAt:                                               |    returns the contents of the slot named n                                            |   
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| visibilityAt:                                             |    returns a visibility object representing visibility of slot n                       |   
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
 
-**System-wide Enumerations (messages sent to the oddball object browse)**
-                                                                                                                                                                                                         
+System-wide Enumerations
+------------------------
+
+Messages sent to the oddball object browse.
+
 .. tabularcolumns:: p{5cm} p{10cm} 
 
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -582,23 +619,26 @@ This is a list of selectors which Selfers should find useful as a starting point
 | sendersOf: [Limit: ]                                      |    returns a vector of mirrors on methods whose selectors match the given selector (up to the limit)                                               |   
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
 
-**Debugging**
+Debugging
+---------
 
 .. tabularcolumns:: p{5cm} p{10cm} 
 
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| halt                                                      |    halt the current process                                                                                                                        |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| halt:                                                     |    halt and print a message string                                                                                                                 |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| error:                                                    |    halt, print an error message, and display the stack                                                                                             |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| warning:                                                  |    beep, print a warning message, and continue                                                                                                     |   
-+-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| halt                                                      |    halt the current process                                                            |   
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| halt:                                                     |    halt and print a message string                                                     |   
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| error:                                                    |    halt, print an error message, and display the stack                                 |   
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
+| warning:                                                  |    beep, print a warning message, and continue                                         |   
++-----------------------------------------------------------+----------------------------------------------------------------------------------------+
 
-**Virtual Machine-Generated**                                                                                                                                                                                   
+Virtual Machine-Generated
+-------------------------
 
-*Errors*
+Errors
+++++++
 
 .. tabularcolumns:: p{5cm} p{10cm} 
 
@@ -616,7 +656,8 @@ This is a list of selectors which Selfers should find useful as a starting point
 | primitiveFailedError: Name:                                               |       the named primitive failed with given error string                    |
 +---------------------------------------------------------------------------+-----------------------------------------------------------------------------+
 
-*Other system-triggered messages*
+Other system-triggered messages
++++++++++++++++++++++++++++++++
 
 .. tabularcolumns:: p{5cm} p{10cm} 
 
