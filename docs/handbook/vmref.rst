@@ -45,7 +45,7 @@ Certain events cause the system to automatically send a message to the lobby. Af
 the expression ``snapshotAction postRead`` is evaluated. This allows the Self world to
 reinitialize itself—for example, to reopen windows.
 
-There are other situations in which the system sends messages; see section 5.3.
+There are other situations in which the system sends messages; see `Run-time message lookup errors`_.
 
 .. index::
    single:  _Perform
@@ -97,7 +97,7 @@ any.
 
 These error messages are just like any other message. Therefore, it is possible that the object P
 causing the error (which is being sent the appropriate error message) does not understand the error
-message *M* either. If this happens, the system sends the first message (``undefinedSelector.``.) to
+message *M* either. If this happens, the system sends the first message (``undefinedSelector:``) to
 the current process, with the error message M as argument. If this is not understood, then the system
 suspends the process. If the scheduler is running, it is notified of the failure.
 
@@ -325,24 +325,18 @@ The diagram on the following pages shows all objects in the “bare” Self worl
 like integers, floats, and strings are conceptually part of the initial Self world; block and object
 literals are created by the programmer as needed. All the objects in the system are created by adding
 slots to these objects or by cloning them. :numref:`tableObjInWorld` lists all the initial objects and provides a short
-description for each. Reading in the world rearranges the structure of the “bare” Self world (see
-The Self World)
+description for each. Reading in the world rearranges the structure of the “bare” Self world (see :doc:`selfwrld`).
 
-..  figure:: images/Chapter_5_Figure_3.*
-    :height: 882 px
-    :width: 680 px
+.. _initialSelfWorld:
+.. figure:: images/Chapter_5_Figure_3.*
+
+    The initial Self world (part 1)
+
+.. figure:: images/Chapter_5_Figure_4.*
     :scale: 100
     :align: left
 
-    Figure 3: The initial Self world (part 1)
-
-..  figure:: images/Chapter_5_Figure_4.*
-    :height: 451 px
-    :width: 695 px
-    :scale: 100
-    :align: left
-
-    Figure 4: The initial Self world (part 2)
+    The initial Self world (part 2)
 
 .. index::
    single:  lobby
@@ -363,7 +357,7 @@ The Self World)
   +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
   | shell              |        After reading in the world, shell is the context in which expressions typed in at the prompt are evaluated.                                |
   +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
-  | snapshotAction     |        An object with slot for the startup action (see section 5.2), postRead. This slot initially contains nil.                                  |
+  | snapshotAction     |        An object with slot for the startup action (see `System-triggered messages`_), postRead. This slot initially contains nil.                 |
   +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
   | systemObjects      |        This object contains slots containing the general system objects, including nil, true, false, and the prototypical vectors and mirrors.    |
   +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -482,7 +476,7 @@ The Self World)
     +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------------+
 
 All of the prototypical mirrors consist of one slot, a parent slot named parent. Each of
-these parent slots points to an empty object (denoted in Figure 5 by “( )”).
+these parent slots points to an empty object (denoted in :numref:`initialSelfWorld` by “( )”).
 
 .. index::
    single:  _PrintOptionPrimitives
@@ -668,7 +662,7 @@ context. It defines the glue language and also contains some comments explaining
 
 Since different foreign languages have different type systems and calling conventions the glue language
 is actually not a single language, but one for each supported foreign language. Presently C
-and C++ are supported. Section 5.13.5 describes C glue and section 5.13.9 describes C++ glue.
+and C++ are supported. See sections `C glue`_ and `C++ glue`_ for details.
 
 .. index::
    single:  Static linking
@@ -688,13 +682,13 @@ this is done may depend on the computer system and the available C++ compiler. T
 description applies to Sun SPARCstations using the GNU g++ compiler.
 
 A specific example of how to compile glue code can be found in the directory containing the *toself*
-demo (see section 5.13.16 for further details). The makefile in that directory describes how to
+demo (see `A complete application using foreign functions`_ for further details). The makefile in that directory describes how to
 translate a ``.c`` file containing glue into something that can be invoked from Self. This is a two
 stage process: first the ``.c`` file is compiled into a ``.o`` file which is then linked (perhaps with other
-``.o`` files and libraries that the glue code depends on)† into a ``.so`` file (a so-called dynamic library).
+``.o`` files and libraries that the glue code depends on) into a ``.so`` file (a so-called dynamic library).
 While the compilation is straightforward, several issues concerning the linking must be explained.
 
-**Linking.**
+**Linking**
 		Before a foreign routine can be called it must be linked to the Self virtual machine. The
 		linking can be done either statically, i.e. before Self is started, or dynamically, i.e. while Self is
 		running. The Self system employs both dynamic and static linking, but users should only use dynamic
@@ -728,7 +722,7 @@ A simple glue example: calling a C function
 Suppose we have a C function that encrypts text strings in some fancy way. It takes two arguments,
 a string to encrypt and a key, and returns a string which is the result of the encryption. To use this
 function from Self, we write a line of C glue. Here is the entire file, “encrypt.c”, containing both
-the encryption function and the glue:†
+the encryption function and the glue:
 
 		::
 
@@ -805,7 +799,7 @@ C glue supports accessing C functions and data from Self. There are three main p
 		* Reading/assigning global variables.
 		* Reading/assigning a component in a struct that is represented by a proxy object in Self.
 
-In addition, C++ glue for creating objects can be used to create C structs (see section 5.13.9). The
+In addition, C++ glue for creating objects can be used to create C structs (see section `C++ glue`_). The
 following sections describe each of these parts of C glue.
 
 .. index::
@@ -830,7 +824,7 @@ general syntax for ``C_func_N``:
 
 					C_func_N(res_cnv,res_aux, fexp, gfname, fail_opt, c0,a0, ... cN,aN)
 
-Compare this with the glue that was used in the encrypt example in section 5.13.4:
+Compare this with the glue that was used in the encrypt example in section `A simple glue example: calling a C function`_:
 
 		::
 
@@ -842,7 +836,7 @@ The meaning of each argument to ``C_func_N`` is as follows:
 		* ``fexp`` is a C expression which evaluates to the function that is being glued in. In the simplest case, such as in the ``encrypt`` example, the expression is the name of a function, but in general it may be any C expression, involving function pointers etc., which in a global context evaluates to a function.
 		* ``gfname``: the name of the function which the ``C_func_N`` macro expands into. In the ``encrypt`` example, the convention of appending ``_glue`` to the C function’s name was used. When accessing a glued-in function from Self, the value of ``gfname`` is the name that must be used.
 		* ``fail_opt``: there are two possible values for this argument. It can be empty (as in the example) or it can be ``fail``. In the latter case, the C function being called is passed an additional argument that will be the last argument and have type ``“void *”``. Using this argument, the C function may abort its execution and raise an exception. The result is that the “IfFail block” in Self will be invoked.
-		* ``ci,ai``: each of these pairs describes how to convert a Self level argument to one or more C level arguments.† For example, in the glue for ``encrypt``, ``c0``,``a0`` specifies that the first argument to ``encrypt`` is a string. Likewise ``c1``,``a1`` specifies that the second argument is an integer. Note that in both these cases, the a-part of the conversion is empty. :numref:`tableArgumentConversions` lists all the possible values for the ``ci``,``ai`` pair.
+		* ``ci,ai``: each of these pairs describes how to convert a Self level argument to one or more C level arguments. For example, in the glue for ``encrypt``, ``c0``,``a0`` specifies that the first argument to ``encrypt`` is a string. Likewise ``c1``,``a1`` specifies that the second argument is an integer. Note that in both these cases, the a-part of the conversion is empty. :numref:`tableArgumentConversions` lists all the possible values for the ``ci``,``ai`` pair.
 
 *Handling failures*. Here is a slight modification of the encryption example to illustrate how the C function can raise an exception that causes the “IfFail block” to be invoked at the Self level:
 
@@ -1018,13 +1012,13 @@ Constructing objects
 In C++, objects are constructed using the new operator. Constructors may take arguments. The
 macros ``CC_new_N`` where N is a small integer, support calling constructors with or without arguments.
 Calling a constructor is similar to calling a function, so for additional explanation, please
-refer to section 5.13.6. Here is the general syntax for constructing objects using C++ glue:
+refer to section `Calling C functions`_. Here is the general syntax for constructing objects using C++ glue:
 
 		::
 
 				CC_new_N(cnvt_res,aux_res, class, gfname, c0,a0, c1,a1, ... cN,aN)
 
-For example, to construct a sockaddr_in† object, the following glue statement could be used:
+For example, to construct a ``sockaddr_in`` object, the following glue statement could be used:
 
 		::
 
@@ -1081,7 +1075,7 @@ lists the kind of errors that can occur during the conversion. Finally, the sixt
 references to numbered notes. The notes are found in the paragraphs following the table.
 
 Calling member functions is similar to calling “plain” functions, so please also refer to section
-5.13.6. The difference is that an additional object must be specified: the object upon which the
+`Calling C functions`_. The difference is that an additional object must be specified: the object upon which the
 member function is invoked (the receiver in Self terms). Calling a member function is accomplished
 using one of the macros
 
@@ -1091,7 +1085,7 @@ using one of the macros
 								fail_opt, c0,a0, c1,a1, ..., cN,aN)
 
 For example here is how to call the member function zock on a ``sockaddr_in`` object given by a
-proxy:†
+proxy:
 
 		::
 
@@ -1112,7 +1106,7 @@ The arguments to ``CC_mber_N`` are:
 * ``gfname`` is the name of the C++ function that the ``CC_mber_N`` macro expands into.
 
 * ``fail_opt``: whether or not to pass a failure handle to the member function (refer to section
-  5.13.6 for details).
+  `Calling C functions`_ for details).
 
 * ``ci``, ``ai``: these are argument conversion pairs specifying how to obtain the arguments for the
   member function. Any conversion pair found in :numref:`tableArgumentConversions` may be used.
@@ -1142,7 +1136,7 @@ Argument conversions – from Self to C/C++
 An argument conversion is given a Self object and performs these actions to produce a corresponding
 C or C++ value:
 
-* check that the Self object† it has been given is among the allowed types. If not, report
+* check that the Self object it has been given is among the allowed types. If not, report
   ``badTypeError`` (invoke the failure block (if present) with the argument ``’badTypeError’``).
 
 * check that the object can be converted to a C/C++ value without overflow or any other error.
@@ -1411,37 +1405,32 @@ Likewise, the command
 
 may invoke some fancy mail reader written in Self rather than the standard UNIX mail reader.
 
-To see how the above can be accomplished, please refer to Figure 5 below. The left side of the figure
+To see how the above can be accomplished, please refer to :numref:`figSingleUnixProc` below. The left side of the figure
 shows the external view of a typical UNIX process. It has two files: stdin and stdout (for simplicity
 we ignore stderr). Stdin is often connected to the keyboard so that characters typed here can
 be read from the file stdin. Likewise, stdout is typically connected to the console so that the process
 can display output by writing it to the file stdout. Stdin and stdout can also be connected to “regular”
-files, if the process was started with redirection. The right side of Figure 5 shows a two stage
+files, if the process was started with redirection. The right side of :numref:`figSingleUnixProc` shows a two stage
 pipe line. Here stdout of the first process is connected to stdin of the second process.
 
+.. _figSingleUnixProc:
 ..  figure:: images/Chapter_5_Figure_5.*
-    :height: 86 px
-    :width: 680 px
-    :scale: 100
+    :scale: 70
     :align: left
 
-    Figure 5: A single UNIX process and an pipe line.
+    A single UNIX process and an pipe line.
 
-Figure 5 illustrates a simple trick that in many situations allows Self processes to behave as if they
+:numref:`figSingleUnixProc` illustrates a simple trick that in many situations allows Self processes to behave as if they
 are full-fledged UNIX processes. A Self process is represented by a “real” UNIX process which
 transparently communicates with the Self process over a pair of connected sockets. The communication
 is bidirectional: input to the UNIX process is relayed to the Self process over the socket
 connection, and output produced by the Self process is sent over the same socket connection to
-the UNIX process which relays it to stdout. The right part of Figure 5 shows how the UNIX/Self
+the UNIX process which relays it to stdout. The right part of :numref:`figSingleUnixProc` shows how the UNIX/Self
 process pair can fit seamlessly into a pipe line.
 
 ..  figure:: images/Chapter_5_Figure_6.*
-    :height: 208 px
-    :width: 680 px
-    :scale: 100
-    :align: left
 
-    Figure 6: A Self process and how it fits into a pipe line.
+    A Self process and how it fits into a pipe line.
 
 Source code that facilitates setting up such UNIX/Self process pairs is included in the Self distribution.
 The source consists of two parts: one being a Self program (called *server*), the other being
@@ -1542,7 +1531,7 @@ This method copies a ``socket`` object and returns the copy. The local slot ``sb
 ``foreignFct`` object. The body of the method simply sends ``value:With:`` to the ``foreignFct``
 object. The first argument is the port number to request for the socket, the second argument is a
 ``deadCopy`` of self (socket objects are proxies and ``socket_bind_listen`` returns a proxy, so it
-must be passed a dead proxy to revive and store the result in; see section 5.13.1).
+must be passed a dead proxy to revive and store the result in; see section `Proxy and fctProxy objects`_).
 
 There are only three uses of ``foreignFct`` objects in the server and in all three cases, the ``foreignFct``
 object is encapsulated in a method as illustrated above.

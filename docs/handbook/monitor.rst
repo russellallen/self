@@ -7,11 +7,6 @@ is are shortcuts in the shell, ``spyOn`` and ``spyOff``). When it is active, the
 a portion of your screen with a window that looks like this:
 
 ..  figure:: images/Chapter_5_Figure_7.*
-    :height: 138 px
-    :width: 680 px
-    :scale: 100
-    :align: left
-
 
 The indicators in the left part of the display correspond to various internal activities and events. On
 the very left are the CPU bars which show how much CPU is used in various parts of the system.
@@ -93,7 +88,7 @@ monitor’s display.
   ===============  =============================================================================================================
   object memory    The four (or more) bars represent (from top to bottom) eden, the two survivor spaces, and subsequent
                    bars are segments of old space. The left and right parts of each bar represent the space used
-                   by “plain” objects and byte vectors, respectively.† The above picture shows a situation in which
+                   by “plain” objects and byte vectors, respectively. The above picture shows a situation in which
                    about half of old space is filled with plain objects and about 25% is filled with byte vectors. A fraction
                    of old space’s used portions is currently paged out (gray areas).
                    Below the old space is a ruler, marked in 1Mb intervals, showing the total allocated in old space
@@ -119,6 +114,6 @@ monitor’s display.
   Color  Meaning
   =====  ==========================================
   black  Allocated, residing in real memory.
-  gray   Allocated, paged out.†
+  gray   Allocated, paged out.
   white  Unallocated memory.
   =====  ==========================================

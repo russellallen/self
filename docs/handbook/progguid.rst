@@ -115,7 +115,7 @@ to select the behavior for the next state transition:
 In this case, the inline object is playing the role of a case statement.
 
 Another use of inline objects is to return multiple values from a method, as discussed in section
-4.4. Yet another use of inline objects is to parameterize the behavior of some other object. For example,
+`How to Return Multiple Values`_. Yet another use of inline objects is to parameterize the behavior of some other object. For example,
 the predicate used to order objects in a *priorityQueue* can be specified using an inline
 object:
 
@@ -137,7 +137,7 @@ respond to the ``printString`` message with a textual description of themselves.
 is called the object’s *printString*. An object’s printString can be quite detailed; standard protocol
 allows the desired amount of detail to be specified by the requestor. For example, the printString
 for a collection might include the printStrings of all elements or just the first few. Not all objects
-have printStrings, only those that satisfy the criteria discussed in section 4.3.2 below.
+have printStrings, only those that satisfy the criteria discussed in section `How to make an object print`_ below.
 
 The second way to describe an object is to give its *path name*. A path name is a sequence of unary
 selectors that describes a path from the lobby to the object. For example, the full path name of the

@@ -38,24 +38,18 @@ screen, you can summon it by pressing the middle mouse button on the background 
 ``shell``.
 
 ..  figure:: images/Pgm_Env_Image1.*
-    :height: 76 px
-    :width: 218 px
-    :scale: 100
-    :align: left
+    :scale: 80
+
 
 Outliners sport three small buttons in the top-right-hand corner labeled “/\\”, “E”,
 and “X”. These buttons summon the object’s parents, add an evaluator text region to the bottom of
 the outliner, and dismiss the outliner. Press the “E” button to get an evaluator.
 
-Type ``anExampleObject`` into
-the evaluator (it will already be selected) and hit the ``Get it`` button (or type metareturn
-on UNIX, or command-return on MacOS X):
+Type ``anExampleObject`` into the evaluator (it will already be selected) and hit the ``Get it`` button
+(or type metareturn on UNIX, or command-return on MacOS X):
 
 ..  figure:: images/Pgm_Env_Image2.*
-    :height: 205 px
-    :width: 342 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 The result object appears in your “hand” raised above the screen as if you were dragging it with the
 left button.
@@ -69,10 +63,7 @@ left button.
 Click the button to set it down.
 
 ..  figure:: images/Pgm_Env_Image3.*
-    :height: 70 px
-    :width: 350 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 As with most other things on the Self screen, the left button picks it up and moves it. (For buttons
 and other things that use left-button for other purposes, you can grab them with marquee selection
@@ -84,10 +75,7 @@ Expand and Collapse
 Left-click on the triangle [#f1]_ to expand the object and see more information:
 
 ..  figure:: images/Pgm_Env_Image4.*
-    :height: 242 px
-    :width: 656 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 Now it shows a summary of modules containing the slots in this object (just ``programmingExamples``
 here), four slots, and a category containing more slots, although those slots are not shown
@@ -100,18 +88,12 @@ Clicking the top triangle now would collapse this object outliner, but instead l
 by clicking its triangle:
 
 ..  figure:: images/Pgm_Env_Image5.*
-    :height: 358 px
-    :width: 651 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 And, one more click expands the subcategory:
 
 ..  figure:: images/Pgm_Env_Image6.*
-    :height: 394 px
-    :width: 660 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 Slots
 -----
@@ -135,10 +117,11 @@ the icon at the right of the whoAmI box opens a text editor displaying its sourc
 widens the object to show all the text in the selected window):
 
 ..  figure:: images/Pgm_Env_Image7.*
-    :height: 496 px
-    :width: 706 px
-    :scale: 100
-    :align: left
+    :scale: 70
+
+.. raw:: latex
+
+  \newpage
 
 Text Editors
 ------------
@@ -149,10 +132,7 @@ A left-click on another editor will select that one as the typing focus, and to 
 no longer the focus, this editor’s background will change to match the outliner:
 
 ..  figure:: images/Pgm_Env_Image8.*
-    :height: 417 px
-    :width: 680 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 The white triangle in the lower-right corner of the editor (which can barely be seen in the printout
 of this document) can be dragged to resize the editor.
@@ -161,20 +141,14 @@ Someone has done a poor job of indenting this method, so fix it by clicking to t
 I and deleting two spaces:
 
 ..  figure:: images/Pgm_Env_Image9.*
-    :height: 180 px
-    :width: 680 px
-    :scale: 100
-    :align: left
+    :scale: 65
 
 The red and green buttons that just appeared indicate the text has been changed; it no longer reflects
 the source code of the real method. Hitting the red button will cancel the changes, while hitting
 the green button will accept them and change the method:
 
 ..  figure:: images/Pgm_Env_Image10.*
-    :height: 214 px
-    :width: 680 px
-    :scale: 100
-    :align: left
+    :scale: 60
 
 Self text editors will honor the cursor arrow keys, the copy, paste, and cut Sun keys, and
 many emacs-style control characters:
@@ -256,13 +230,13 @@ the outliner to be affected. For example anExampleObject has many regions and he
 of them:
 
 ..  figure:: images/Pgm_Env_Image11.*
-    :height: 440 px
-    :width: 680 px
-    :scale: 100
-    :align: left
 
 Click on the desired part of the object, be it object, category, slot, text editor, or annotation (annotations
 will be explained later).
+
+.. raw:: latex
+
+  \newpage
 
 The Evaluator
 -------------
@@ -270,10 +244,7 @@ The Evaluator
 Try out the ``whoAmI`` method. Push the “E” button in the top-right of the outliner:
 
 ..  figure:: images/Pgm_Env_Image12.*
-    :height: 589 px
-    :width: 680 px
-    :scale: 100
-    :align: left
+    :scale: 55
 
 The receiver of any messages sent from an evaluator, or indeed any text editor (via ``Do It`` and ``Get It``
 in the editor’s middle-button menu) in an object outliner is the object itself. [#f2]_ Type ``whoAmI`` into
@@ -281,12 +252,13 @@ the evaluator and hit the Get it button (or select the Get It from the text edit
 the message and get back the result:
 
 ..  figure:: images/Pgm_Env_Image13.*
-    :height: 615 px
-    :width: 680 px
-    :scale: 100
-    :align: left
+    :scale: 55
 
 Move the result [#f3]_ out of the way and left-click to set it down.
+
+.. raw:: latex
+
+  \newpage
 
 Adding a slot
 -------------
@@ -295,36 +267,25 @@ Try one more change: adding a slot to the category “``a category of slots``.�
 over the words a ``category of slots`` and select ``Add Slot`` from the middle-button menu.
 
 ..  figure:: images/Pgm_Env_Image14.*
-    :height: 562 px
-    :width: 680 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 After selecting Add Slot a space for a new slot will appear in the object:
 
 ..  figure:: images/Pgm_Env_Image15.*
-    :height: 635 px
-    :width: 584 px
-    :scale: 100
-    :align: left
 
 Each line shows the syntax for a different kind of slot. Create a simple variable by typing
 ``me<-’Gumby’`` [#f4]_ and hitting the green button to accept the change:
 
 ..  figure:: images/Pgm_Env_Image16.*
-    :height: 633 px
-    :width: 583 px
-    :scale: 100
-    :align: left
 
 After releasing the green button, it stays down to let you know that it is still working. After a few
 seconds the slot appears: [#f5]_
 
 ..  figure:: images/Pgm_Env_Image17.*
-    :height: 529 px
-    :width: 575 px
-    :scale: 100
-    :align: left
+
+.. raw:: latex
+
+  \newpage
 
 Debugger
 ========
@@ -333,28 +294,21 @@ Explore the Self debugger. Start by scrambling the send to ``environmentVariable
 if you had misspelled it.
 
 ..  figure:: images/Pgm_Env_Image18.*
-    :height: 240 px
-    :width: 575 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 Press the green button to accept the change, then hit the ``Get it`` button. This should break something!
 In fact, instead of the result of the message, a Self debugger will materialize:
 
 ..  figure:: images/Pgm_Env_Image19.*
-    :height: 285 px
-    :width: 603 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 The debugger has a label to indicate which process ran aground, a status indication shown in blue,
 some buttons for controlling the process, and a collapsed outliner for the stack. Expand the stack:
 
 ..  figure:: images/Pgm_Env_Image20.*
-    :height: 253 px
-    :width: 539 px
-    :scale: 100
-    :align: left
+    :scale: 80
+
+    Expanded stack.
 
 The stack filters out uninteresting frames by default [#f6]_. The debugger assumes that the first method
 you want to see is the one based on the text in the evaluator, and since the stack grows upwards this
@@ -368,28 +322,38 @@ of the evnironment... message. Click on the box to the left of the word ``evniro
 (the one labelled “``...bal os``” if you are running on the Macintosh):
 
 ..  figure:: images/Pgm_Env_Image21.*
-    :height: 53 px
-    :width: 292 px
-    :scale: 100
-    :align: left
+    :scale: 80
+
+    Outliner with interface to the Macintosh.
 
 This object represents the interface to the Macintosh operating system. The little button with the
 apostrophe in the top-left-hand corner indicates that this object has a comment. Push the button to
 show (or hide) the comment:
 
-..  figure:: images/Pgm_Env_Image22.*
-    :height: 178 px
-    :width: 545 px
-    :align: left
+.. only:: not latex
+
+  ..  figure:: images/Pgm_Env_Image22.*
+
+.. only:: latex
+
+  ..  figure:: images/Pgm_Env_Image22.*
+      :scale: 70
 
 (To automatically resize the outliner to show all the text, press control-L.) To see one of Self’s
 scroll bars, grab the comment’s resize triangle (with the left-button) and move it up a bit:
 
-..  figure:: images/Pgm_Env_Image23.*
-    :height: 154 px
-    :width: 602 px
-    :scale: 100
-    :align: left
+.. only:: not latex
+
+  ..  figure:: images/Pgm_Env_Image23.*
+
+.. only:: latex
+
+  ..  figure:: images/Pgm_Env_Image23.*
+      :scale: 80
+
+.. raw:: latex
+
+  \newpage
 
 The affordance that appears on the right of the text is the scroll bar, and you can either drag on the
 little black line or just click in the bar to scroll the text up or down.
@@ -400,20 +364,20 @@ is that it has the word “Variable” in it somewhere. So, use a facility calle
 a pattern and an object, and finds any matching slots in that object or its parents. Use the middlebutton
 on the outliner’s title (``macOSGlobals os``) to get the object menu and select ``Find slot``...
 
-..  figure:: images/Pgm_Env_Image24.*
-    :height: 127 px
-    :width: 245 px
-    :scale: 100
-    :align: left
+.. only:: not latex
+
+  ..  figure:: images/Pgm_Env_Image24.*
+
+.. only:: latex
+
+  ..  figure:: images/Pgm_Env_Image24.*
+      :scale: 80
 
 Double-click on the word “foo\*” to select that field for editing. (The same trick works on slot
 names)
 
 ..  figure:: images/Pgm_Env_Image25.*
-    :height: 138 px
-    :width: 339 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 Since we are searching for a method with “Variable” in its name, backspace (the delete key on the
 Mac) three times [#f7]_ to erase the “foo” type in “\*Variable\*“, hit the green button, and then hit the
@@ -422,20 +386,18 @@ editable again). The triangle will blink a bit while it is searching (one could 
 meantime during a long search), then the enumerator will show the match(es):
 
 ..  figure:: images/Pgm_Env_Image26.*
-    :height: 148 px
-    :width: 326 px
-    :scale: 100
-    :align: left
+      :scale: 80
+
+.. raw:: latex
+
+  \newpage
 
 Clicking on the little square button(s) would show the exact method(s). But, for our purposes, just
 knowing the name is enough and now you have to fix it. So back to the debugger and click on the
 method button on the right in the ``whoAmI`` slot to expand the stack frame for the ``whoAmI`` method:
 
 ..  figure:: images/Pgm_Env_Image27.*
-    :height: 344 px
-    :width: 552 px
-    :scale: 100
-    :align: left
+      :scale: 80
 
 Now the debugger shows the source of the method, with the actual message being sent highlighted.
 (In this case it is just the whole thing.) One of the conveniences in the Self programming environment
@@ -446,30 +408,30 @@ green button will stay in a bit longer because when a method is changed from the
 slot pointing to that same method is made to feel the change—the method is changed in place (see
 the figure below). This feature lets you change a method in a clone and simultaneously affect the
 
- ..  figure:: images/Pgm_Env_Image28.*
-    :height: 455 px
-    :width: 680 px
-    :align: left
+.. _figPrototype:
+..  figure:: images/Pgm_Env_Image28.*
+      :scale: 80
 
-prototype, if you are putting your methods in prototypes instead of traits. Changing a method in an
+      Situation after change.
+
+prototype (see :numref:`figPrototype`, if you are putting your methods in prototypes instead of traits. Changing a method in an
 ordinary outliner would just affect that one object, even if other objects had been cloned from it.
 This rule avoids unintentional changes. The more global kind of change performed by the debugger
 takes a little longer. When it is accomplished, the red and green buttons will disappear:
 
-
 ..  figure:: images/Pgm_Env_Image29.*
-    :height: 289 px
-    :width: 536 px
-    :align: left
+    :scale: 80
+
+.. raw:: latex
+
+  \newpage
 
 Now os is highlighted to show that the process is about to send “os” to implicit-self. Try the ``Step``
 button, which performs a single message send. After hitting the ``Step`` button twice (and a control-
 L to widen the debugger), the process will have entered the ``environmentVariable:IfFail:`` method:
 
 ..  figure:: images/Pgm_Env_Image30.*
-    :height: 380 px
-    :width: 558 px
-    :align: left
+    :scale: 80
 
 This method is not too interesting (especially on the Macintosh), so leave the debugger by hitting
 ``Continue`` and letting the process finish.
@@ -758,9 +720,7 @@ it put for the contents of the slot? Here is where the transporter runs smack in
 enough information, and a variety of means have to be used. As shown in the flowchart below:
 
 ..  figure:: images/Pgm_Env_Image31.*
-    :height: 680 px
-    :width: 631 px
-    :align: left
+  :scale: 90
 
 * Sometimes the programmer does not want to store the actual contents of a slot, but instead
   wants to store an initialization expression. This intention is captured with another annotation
@@ -815,9 +775,6 @@ slots are shown in pink in the outliner. For example, here are the prototypical 
 circleMorph:
 
 ..  figure:: images/Pgm_Env_Image32.*
-    :height: 483 px
-    :width: 556 px
-    :align: left
 
 The ``Basic Morph State`` category of slots has been copied from those in morph by first copying
 the morph and removing all its submorphs (i.e. by sending it copyRemoveAllMorphs) and then

@@ -94,10 +94,7 @@ object () has no slots (i.e., it’s empty) while the object ( | x = 17. y = 18 
 x and y.
 
 ..  figure:: images/Chapter_2_Image_1.*
-    :height: 109 px
-    :width: 482 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 A data object returns itself when evaluated.
 
@@ -200,10 +197,7 @@ of a message send:
 For example, consider the method ( | :arg | arg * arg ):
 
 ..  figure:: images/Chapter_2_Image_2.*
-    :height: 173 px
-    :width: 491 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 This method has an argument slot arg and returns the square of its argument.
 
@@ -228,6 +222,7 @@ This method has an argument slot arg and returns the square of its argument.
 .. index::
    single:  evaluation; of blocks
 
+.. _langref-blocks:
 
 Blocks
 ------
@@ -245,10 +240,7 @@ is invisible at the Self level and cannot be accessed explicitly.
 For example, the block [ 3 + 4 ] looks like: [#f3]_
 
 ..  figure:: images/Chapter_2_Image_3.*
-    :height: 320 px
-    :width: 704 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 The block method’s selector is based on the number of arguments. If the block takes no arguments,
 the selector is ``value``. If it takes one argument, the selector is ``value:``. If it takes two arguments,
@@ -350,10 +342,7 @@ For example, a constant point might be defined as:
 The resulting point contains three initialized read-only slots:
 
 ..  figure:: images/Chapter_2_Image_4.*
-    :height: 217 px
-    :width: 401 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 .. index::
    single:  self slot; self slot
@@ -386,10 +375,7 @@ For example, an initialized mutable point might be defined as:
 producing an object with two data slots (x and y) and two assignment slots (x: and y:) containing the assignment primitive (depicted with ←): [#f4]_
 
 ..  figure:: images/Chapter_2_Image_5.*
-    :height: 294 px
-    :width: 428 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 An identifier by itself specifies an assignable data slot initialized to *nil* . [#f5]_ Thus, the slot declaration x is a shorthand notation for x <- nil.
 
@@ -402,10 +388,7 @@ For example, a simple mutable point might be defined as:
 producing:
 
 ..  figure:: images/Chapter_2_Image_6.*
-    :height: 198 px
-    :width: 499 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 .. index::
    single:  slot; argument slot
@@ -427,10 +410,7 @@ If the initializing expression is an object literal with code, that object is st
 producing:
 
 ..  figure:: images/Chapter_2_Image_7.*
-    :height: 193 px
-    :width: 653 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 A slot name beginning with a colon indicates an *argument* slot. The prefixed colon is not part of the slot name and is ignored when matching the name against a message. Argument slots are always read-only, and no initializer may be specified for them. As a syntactic convenience, the argument name may also be written immediately after the slot name (without the prefixed colon), thereby implicitly declaring the argument slot. Thus, the following yields exactly the same object as above:
 

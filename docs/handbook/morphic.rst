@@ -12,12 +12,8 @@ Morphic is a user interface framework that supports composable graphical objects
 A Morphic window shows just one portion of a large, two-dimensional world. The window can be panned around in this world, allowing different areas to be used for different activities. Multiple users can be active in this world simultaneously, working either in the same area (for collaborative work) or in disjoint areas (for independent work). Every user can see the screen boundaries, cursors, and actions of the other users. The sharing is implemented via the X protocol, so the other users can be physically remote as long as there is sufficient network bandwidth to support the X traffic. (Preliminary tests suggest that 30-50 KBytes/sec is required between the host machine and each remote user. The system has been tested with up to five users active simultaneously.) A given user can have several Morphic windows open, either on the same world or on different worlds, and can drag objects among these windows (assuming they all belong to the same Self Unix process).
 
 ..  figure:: images/Figure1.*
-    :height: 288 px
-    :width: 760 px
-    :scale: 100
-    :align: left
 
-    Figure 1: Three users working in the same space. Two of the other users are collaborating, so they have made their windows overlap (right). The third user is working independently in a separate area (left). The radarView in the third user's area shows the surrounding vicinity in miniature, allowing offscreen objects and the screen boundaries of other users to be seen. The radarView is updated open enough to see where activity is occurring.
+    Three users working in the same space. Two of the other users are collaborating, so they have made their windows overlap (right). The third user is working independently in a separate area (left). The radarView in the third user's area shows the surrounding vicinity in miniature, allowing offscreen objects and the screen boundaries of other users to be seen. The radarView is updated open enough to see where activity is occurring.
 
 The central abstraction of morphic is the graphical object or *morph* (from the Greek for "shape" or "form"). A morph has a visual representation that can be picked up and moved. In addition, a morph may:
 
@@ -41,21 +37,15 @@ A *composite* morph is a morph that contains other morphs known as *submorphs*. 
 The structure of a composite morph forms a tree. When morph B is a submorph of morph A, B's *owner* is A and B appears in A's *submorphs* list. A morph can only be a submorph of at most one morph at a time, so its owner is a single value, not a collection. A window containing a collection of morphs is itself just a morph known as a *worldMorph*. Each user's cursor is represented by a *handMorph*. Grabbing a morph with the mouse is implemented by removing the target morph from the worldMorph and adding it to the handMorph. Dropping a morph when the mouse is released is implemented by reversing this process. A handMorph is itself a submorph of its world. The message *root* can be sent to a morph to get the top-most owner of a composite morph (stopping just short of the worldMorph or handMorph that contains it). If a morph is not a submorph of any morph, its owner is *nil*.
 
 ..  figure:: images/Figure2.*
-    :height: 227 px
-    :width: 510 px
     :scale: 80
-    :align: left
 
-    Figure 2: A composite morph consisting of a row with two buttons. Each button has submorph to indicate its function; one is a piece of text, the other is an icon consisting of two concentric circles. The diagram on the right shows its submorph structure.
+    A composite morph consisting of a row with two buttons. Each button has submorph to indicate its function; one is a piece of text, the other is an icon consisting of two concentric circles. The diagram on the right shows its submorph structure.
 
 A morph can be made a submorph of some other morph using the **addMorph:** operation. This operation updates both the owner slot of the submorph and the submorphs list of the owner to reflect the desired configuration. For example, adding morph B to morph A adds B to A submorph list, removes B from its old owner (if any), and sets B's owner to A. The **addMorph:** operation also updates the layout of both B's old and new owners. The global position of a morph is held invariant by **addMorph:** (although some morphs may perform an automatic layout as a side-effect of **addMorph:**, immediately changing the position of the newly-added morph).
 
 ..  figure:: images/Figure3.*
-    :height: 171 px
-    :width: 258 px
-    :align: left
 
-    Figure 3: Using the core sampler to probe the submorphs at the point below its cross-hairs.
+    Using the core sampler to probe the submorphs at the point below its cross-hairs.
 
 The programming environment includes a tool called the *core sampler* (available via the right-button menu of any morph) that can be used to explore the submorph structure of a composite morph. The core sampler shows the set of submorphs below a given point, the way a core sample of rock allows geologists to study the strata of rock at a given point. The core sampler allows one to use the middle button menu to operate on morphs below the surface and can be used to insert or remove morphs from a composite morph. Holding the left mouse button over the squares along the left side of the core sampler highlights the associated morph. As a shortcut, holding down the shift key while pressing the left mouse button over one of these squares will extract the associated submorph (and all its submorphs) from the composite morph. Holding the shift key while dropping a morph onto one of these squares will insert the morph as a submorph of the associated morph. The iconic buttons on the right show the current resizing attributes of the associated morph, and allow them to be changed. (Resizing attributes are discussed in section 7.)
 
@@ -112,11 +102,8 @@ Morphic optimizes shadow drawing for rectangular morphs such as prototypical mor
 				isRectangular = false
 
 ..  figure:: images/Figure4.*
-    :height: 364 px
-    :width: 459 px
-    :align: left
 
-    Figure 4: A new kind of morph has been created by modifying a copy of the standard morph. The slots baseDrawOn:, isRectangular, middleMouseDown:, and otherColor have been added to the morph to obtain the new behavior. The morph itself appears on the left; an outliner showing its slots appears on the right.
+    A new kind of morph has been created by modifying a copy of the standard morph. The slots baseDrawOn:, isRectangular, middleMouseDown:, and otherColor have been added to the morph to obtain the new behavior. The morph itself appears on the left; an outliner showing its slots appears on the right.
 
 The new morph's input behavior can be customized by adding the method:
 
@@ -138,11 +125,8 @@ To allow the behavior of all copies to be changed at once, one can move shared b
 This creates a new object whose parent is traits morph. To make the new morph inherit through the new traits object, invoke the "Grab pointer" command by pressing the middle-button menu on the button on the right side of the parent slot of the morph. Drop the end of the pointer onto the new traits object to make the parent slot of the morph point to the new morph. This technique is called "arrow-dragging".
 
 ..  figure:: images/Figure5.*
-    :height: 508 px
-    :width: 545 px
-    :align: left
 
-    Figure 5: A new traits object has been created to hold behavior to be shared by all instances of the morph. Arrow dragging is being used to make the parent slot of the new morph point to the new traits object.
+    A new traits object has been created to hold behavior to be shared by all instances of the morph. Arrow dragging is being used to make the parent slot of the new morph point to the new traits object.
 
 Now, the behavior to be shared can be moved from the prototype into the new traits object. Invoke the "Move" command on the middle-button menu for the **isRectangular** slot. This causes the slot to be plucked out of the object. Drop the slot onto the shared traits object. This causes it to be added to the that object. Repeat this process for the **baseDrawOn:** and **middleMouseDown:** slots.
 
@@ -151,11 +135,8 @@ The Self language uses slot inheritance to share both data (**isRectangular**) a
 Note that when moving a slot between an object and its parent there is an interval during which the slot is not in either object. If a message matching the slot name is sent to the object during this interval, the object's response is be determined by a slot inherited from a parent higher in the inheritance chain, if any. If it is important to avoid this transient state, one can move the each slot by first copying it from the prototype into the parent and then remove it from the prototype. A slot is removed simply by moving it and dropping it onto the trash can morph (or by dropping it on the background and then dismissing it).
 
 ..  figure:: images/Figure6.*
-    :height: 198 px
-    :width: 421 px
-    :align: left
 
-    Figure 6: Using slot-dragging to move a slot into the new traits object. Using direct manipulation to move and copy slots makes programming feel like manipulating concrete objects. This narrows the gap between composition of graphical objects (building and modifying composite morphs) and programming.
+    Using slot-dragging to move a slot into the new traits object. Using direct manipulation to move and copy slots makes programming feel like manipulating concrete objects. This narrows the gap between composition of graphical objects (building and modifying composite morphs) and programming.
 
 Now, changing the traits object changes the behavior of all instances. For example, the draw method in the traits can be changed to draw an unfilled oval. To demonstrate the power of shared behavior, first make several copies of the protypical oval using the "Duplicate" command on its right-mouse menu. Then modify the baseDrawOn: method in the shared traits as follows (note the change from "fillArcWithin:" to just "arcWithin:"):
 
@@ -172,11 +153,8 @@ Now, changing the traits object changes the behavior of all instances. For examp
 The oval is drawn with a pen three-pixels wide. To accommodate the extra width, the rectangle passed to the canvas is indented by three pixels. Note: A morph should never draw outside its baseBounds. When this method is accepted, all copies of the prototype reflect the change. However, Morphic doesn't automatically redraw instances when the draw method is changed. To see the change, drag some large object over the ovals to make them redraw.
 
 ..  figure:: images/Figure7.*
-    :height: 267 px
-    :width: 549 px
-    :align: left
 
-    Figure 7: Changing the shared traits object changes the behavior of copies of the prototype (instances). In this case, the draw method has been changed to draw unfilled ovals.
+    Changing the shared traits object changes the behavior of copies of the prototype (instances). In this case, the draw method has been changed to draw unfilled ovals.
 
 At this point, the prototype for a new kind of morph has been created and the behavior common to all its instances has been factored into a separate traits object to facilitate later changes. The next step is to install the prototype and its traits in the global and traits namespace objects. Doing this allows the morph prototype and its traits to be referred to by name.
 
@@ -189,11 +167,8 @@ First, summon outliners for the globals and traits namespace objects by evaluati
 Next, invoke the "Grab pointer" command by pressing the middle-button menu on the button on the right side of the new ovalMorph slot. Drop the end of the pointer over the new morph prototype and release the mouse. This makes the new slot point to the new morph prototype. Repeat the procedure just described to create an "ovalMorph" slot in the traits namespace and point it to the traits object for the new morph.
 
 ..  figure:: images/Figure8.*
-    :height: 300 px
-    :width: 473 px
-    :align: left
 
-    Figure 8: Installing the new morph prototype and traits object in the globals and traits namespace objects. In each case, a new constant slot is created in the appropriate category, then arrow-dragging is used to make the new slot point to the desired object.
+    Installing the new morph prototype and traits object in the globals and traits namespace objects. In each case, a new constant slot is created in the appropriate category, then arrow-dragging is used to make the new slot point to the desired object.
 
 Finally, invoke the "Make creator" middle-button menu command on each new "ovalMorph" slot to designate it as that morph's creator. This informs the system that the given slot is the given object's home in the global namespace. (An object may be reachable via several global slots; setting its creator path distinguishes one of these slots as the object's official "home address." This information is used to determine the object's name, as well as which the module in which to record information about the object as a whole, such as the object comment.) In a few seconds (if outliner updating is on), the outliner titles of the ovalMorph prototype and its traits object will be updated to show the new names for these objects.
 
@@ -204,42 +179,32 @@ To allow a composite morph containing ovalMorphs to be saved in a file, the prot
 				ovalMorph
 
 ..  figure:: images/Figure9.*
-    :height: 321 px
-    :width: 476 px
-    :align: left
 
-    Figure 9: Setting the creator slot of the new traits object. The system uses this information to name objects, among other things. Note that the title of the prototype (on the left) has already been updated to reflect its new name.
+    Setting the creator slot of the new traits object. The system uses this information to name objects, among other things. Note that the title of the prototype (on the left) has already been updated to reflect its new name.
 
 Many Smalltalk programming environments allow an instance variable to be added to a class at runtime. The new instance variable is propagated down to all subclasses and added to all existing instances of the class and its subclasses with an initial value of nil. The Morphic programming environment can provide a similar service for the copied-down slots of prototypes, with two significant differences: (1) changes to the values of a copied down slots are propagated, as well as slot additions and removals and (2) changes are propagated only to objects registered in the global namespace (other prototypes), not to clones of those objects (instances).
 
-The system can be told to maintain the copied-down slots of the ovalMorph prototype automatically by setting its copy-down parent (Figure 10). Select the "Show Annotation" command in the middle-button menu on the title of the ovalMorph's outliner. Set the copy-down parent field to "morph", the copy-down selector to "copyRemoveAllMorphs", and press the green (top) button to accept this change. (The copy-down selector is sent to the copy-down parent to create a fresh copy from which to copy slots.) The system will ask if the slots "parent" and "prototype" should be omitted from the copy-down operation, since their contents differ from that of that of the copy-down parent. They should be.
+The system can be told to maintain the copied-down slots of the ovalMorph prototype automatically by setting its copy-down parent (:numref:`figSettingCopydown`). Select the "Show Annotation" command in the middle-button menu on the title of the ovalMorph's outliner. Set the copy-down parent field to "morph", the copy-down selector to "copyRemoveAllMorphs", and press the green (top) button to accept this change. (The copy-down selector is sent to the copy-down parent to create a fresh copy from which to copy slots.) The system will ask if the slots "parent" and "prototype" should be omitted from the copy-down operation, since their contents differ from that of that of the copy-down parent. They should be.
 
 Finally, it would be nice to be able to save the prototype and traits for the new ovalMorph in a file so that it can be archived or read into another Self world. Several steps are required. First, the module itself must be created. The system will create a new module (after getting confirmation from the user) the first time its name is used. Then, the slots in the globals and traits namespace object must be assigned to the new module. Finally, the non-copied-down slots in the prototype and traits objects are assigned to the module. This may sound tedious, but the system provide several shortcuts to accelerate the process.
 
-To set the module for the new morphs home slot, invoke "Show annotation" on the ovalMorph slot in the globals object, type "ovalMorph" in the module field, and accept the change (Figure 11). Since this is a new module, the system will ask whether a new module should be created (yes), whether it should be a submodule of an existing module (no), and what subdirectory it should be stored into ("applications"). Set the module of the ovalMorph slot in the traits object the same way.
+To set the module for the new morphs home slot, invoke "Show annotation" on the ovalMorph slot in the globals object, type "ovalMorph" in the module field, and accept the change (:numref:`figSettingModules`). Since this is a new module, the system will ask whether a new module should be created (yes), whether it should be a submodule of an existing module (no), and what subdirectory it should be stored into ("applications"). Set the module of the ovalMorph slot in the traits object the same way.
 
+.. _figSettingCopydown:
 ..  figure:: images/Figure10.*
-    :height: 368 px
-    :width: 434 px
-    :align: left
 
-    Figure 10: Setting the copydown parent for the new prototype.
+    Setting the copydown parent for the new prototype.
 
+.. _figSettingModules:
 ..  figure:: images/Figure11.*
-    :height: 223 px
-    :width: 610 px
-    :align: left
 
-    Figure 11: Setting the modules for the namespace slots. The module will be created if it doesn't already exist; the system asks the user several questions about where the new module should live and whether it is a submodule of some existing module.
+    Setting the modules for the namespace slots. The module will be created if it doesn't already exist; the system asks the user several questions about where the new module should live and whether it is a submodule of some existing module.
 
 All the slots in an object (or within one category of that object) can be assigned to a module in a single operation. To assign the slots of the new traits object to the new module, invoke the "Set module..." command on the header of its outliner. The system will ask which slots should be assigned to the module (all) and which module to put them into (ovalModule). After a few seconds, the module summary at the top of the outliner should update to indicate that all slots of the traits object are in ovalModule. Repeat this procedure to assign all the slots of the ovalMorph prototype to ovalModule.
 
 ..  figure:: images/Figure12.*
-    :height: 572 px
-    :width: 432 px
-    :align: left
 
-    Figure 12: Assigning all the slots of the new traits object to the new module.
+    Assigning all the slots of the new traits object to the new module.
 
 Now that all the slots of the new morph and its prototype have been assigned to the new module, the module can be filed out. Invoke the "Changed modules..." command on the background menu to get the changed modules morph. Then press the little button marked "w" to the right of "ovalModule". The system will save the code for the module in a file named "ovalModule" in the "applications" subdirectory of the current working directory. (If this directory doesn't exist, the system will complain. Create the directory and try the fileout operation again.) The oval morphs module can later be loaded into a snapshot by evaluating the expression:
 
@@ -248,11 +213,8 @@ Now that all the slots of the new morph and its prototype have been assigned to 
 				bootstrap read: 'ovalModule' From: 'applications'
 
 ..  figure:: images/Figure13.*
-    :height: 458 px
-    :width: 430 px
-    :align: left
 
-    Figure 13: Saving the code for the new morph in a module file.
+    Saving the code for the new morph in a module file.
 
 Morph Creation: The Top-down Approach
 -------------------------------------
@@ -394,11 +356,8 @@ Space-filling morphs can be used to control the placement of submorphs within th
 When the row is stretched, the extra space is divided evenly between the two spacers, button2 stays in the center, and button3 stays at the far right. By making the color of the spacers match that of the underlying row, they become effectively invisible. This is a common technique.
 
 ..  figure:: images/Figure14.*
-    :height: 95 px
-    :width: 219 px
-    :align: left
 
-    Figure 14: Using flexible spacer morphs to space buttons evenly within a row. Normally these spacers would be made the same color as the row, making them effectively invisible
+    Using flexible spacer morphs to space buttons evenly within a row. Normally these spacers would be made the same color as the row, making them effectively invisible
 
 Shrink-Wrapping
 ---------------
@@ -433,11 +392,8 @@ Animation
 Animation can be used to make an interactive application seem more alive and can convey valuable information. However, animation can become annoying if the user has to wait until the animation completes before doing anything else. In Morphic, animation and user actions are concurrent, and multiple animations can be active while multiple users interact with the system.
 
 ..  figure:: images/Figure15.*
-    :height: 155 px
-    :width: 408 px
-    :align: left
 
-    Figure 15: Three simultaneously active morphs: an ideal gas simulation, a digital clock, and an outliner on the Self object underlying one of the atoms in the simulation. The clock updates every second, the simulation runs continuously, and the outliner periodically updates its center and velocity slot values as the underlying atom moves. A morph continues to operate while it is being moved (the clock is being moved here) or while an external animation is applied to it. Note that multiple users can be active simultaneously; this example shows the cursors of two users.
+    Three simultaneously active morphs: an ideal gas simulation, a digital clock, and an outliner on the Self object underlying one of the atoms in the simulation. The clock updates every second, the simulation runs continuously, and the outliner periodically updates its center and velocity slot values as the underlying atom moves. A morph continues to operate while it is being moved (the clock is being moved here) or while an external animation is applied to it. Note that multiple users can be active simultaneously; this example shows the cursors of two users.
 
 There are two ways to achieve animation. First, a morph can have lightweight autonomous behavior which typically, although not necessarily, appears as animation. For example, a clock might advance the time or a discrete simulation might compute simulation steps. Second, Morphic includes a kit of external animation behaviors that can be applied to any morph, including motion, scaling, and color change animations.
 
@@ -518,16 +474,14 @@ If a morph is not in a worldMorph, however, all layout is deferred. This is done
 Morph Copying
 -------------
 
-When a composite morph is copied, its entire submorph tree is traversed and copied to produce a duplicate with the same structure. However, simply copying the structure is not quite enough because some of the morphs within a composite morph may refer to other morphs within the composite. For example, the buttons of a radarView refer to the radarDisplay morph. When a radarView morph is copied, the buttons of the copy must be updated to point to the radarDisplay morph in the copy, not that in the original radarView. A simplified diagram of this process is shown in Figure 16.
+When a composite morph is copied, its entire submorph tree is traversed and copied to produce a duplicate with the same structure. However, simply copying the structure is not quite enough because some of the morphs within a composite morph may refer to other morphs within the composite. For example, the buttons of a radarView refer to the radarDisplay morph. When a radarView morph is copied, the buttons of the copy must be updated to point to the radarDisplay morph in the copy, not that in the original radarView. A simplified diagram of this process is shown in :numref:`figCopyingComposite16`.
 
 Sometimes a morph may need to do something special when it is copied. In this case, the message **baseCopy** should be overridden rather than **copy**. See **traits ui2Button** for an example of how this is done.
 
+.. _figCopyingComposite16:
 ..  figure:: images/Figure16.*
-    :height: 625 px
-    :width: 735 px
-    :align: left
 
-    Figure 16: Copying a composite morph. First, the submorph structure of the original morph is copied (a). Then, references among the submorphs of the composite updated to mirror those of the original (b).
+    Copying a composite morph. First, the submorph structure of the original morph is copied (a). Then, references among the submorphs of the composite updated to mirror those of the original (b).
 
 Morph Responsibilities
 ======================
