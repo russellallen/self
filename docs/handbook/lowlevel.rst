@@ -1,4 +1,3 @@
-
 How to use the low-level interrupt facilities
 =============================================
 
@@ -9,7 +8,7 @@ you will be returned directly to the ``VM#`` prompt. If the scheduler is running
 with a list of Self processes (the process menu):
 
 		::
-		
+
 			Self 9> 100000 * 100000 do: []
 			^C
 				----------------Interrupt-----------------
@@ -26,13 +25,13 @@ with a list of Self processes (the process menu):
 				Process 25 killed.
 				------------------------------------------
 			Self 10>
-		
+
 In this example, the loop was interrupted by typing Control-C, and the process menu was used to
 abort the process. If the user had typed “q” to quit the scheduler, all current processes would have
 been aborted along with the scheduler itself:
 
 		::
-	
+
 				...
 				------------------------------------------
 				Select a process (or q to quit scheduler): q
@@ -48,7 +47,7 @@ start restarts the scheduler:
 
 			VM# prompt start
 			Self 11>
-			
+
 Although the VM# prompt can be used to evaluate expressions directly, the scheduler supports
 much nicer error messages and debugging, so it is usually best to run the scheduler. (The scheduler
 is started automatically when the default world is created.)

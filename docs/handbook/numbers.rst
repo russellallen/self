@@ -7,14 +7,14 @@ omitted since these hierarchy descriptions always describe the interrelationship
 In most cases, leaf traits are concrete and have an associated prototype with the same name.)
 
 	::
-	
+
 		orderedOddball
 			number
 				float
 				integer
 					smallInt
 					bigInt
-					
+
 ``traits number`` defines behavior common to all numbers, such as ``successor``, ``succ``, ``predecessor``,
 ``pred``, ``absoluteValue``, ``negate``, ``double``, ``half``, ``max:``, and ``min:``. ``traits number``
 inherits from ``traits orderedOddball``, so sending ``copy`` or ``clone`` to a number returns the
@@ -34,9 +34,9 @@ including::
 Relevant oddballs:
 
 	* infinity IEEE floating-point infinity
-	
+
 	* minSmallInt smallest smallInt in this implementation
-	
+
 	* maxSmallInt biggest smallInt in this implementation
 
 Modules: number, float, integer, smallInt, bigInt
@@ -45,7 +45,7 @@ Random Numbers
 --------------
 
 		::
-		
+
 			clonable
 			random
 			randomLC

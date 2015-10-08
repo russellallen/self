@@ -29,13 +29,13 @@ rooted at the lobby:
 
 	traits
 		objects that encapsulate shared behavior. Typically, each prototype object has an associated traits object of the same name that describes the shared part of its behavior.
-		
+
 	globals
 		prototypical objects and one-of-a-kind objects (“oddballs”)
-		
+
 	mixins
 		small, parentless bundles of behavior designed to be “mixed into” some other object
-		
+
 Each of these namespace objects is categorized to aid navigation.
 
 For example, to find the parent of the prototype list object, one could start with the ``globals`` slot

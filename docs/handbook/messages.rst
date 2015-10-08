@@ -15,11 +15,11 @@ has. For example, one would used ``sendTo:With:With:`` to send a message with ``
 selector and two arguments::
 
 	'at:Put:' sendTo: aDict With: k With: v
-	
+
 .. note::
 
 	Primitives such as _Print cannot be sent in the current system.
-	
+
 A selector, receiver, delegatee, methodHolder, and arguments can be bundled together in a ``message``
 object. The message gets ``sent`` when the message object receives the send message. Message
 objects are used to describe delayed actions, such as the actions that should occur just before or after

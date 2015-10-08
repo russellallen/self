@@ -2,7 +2,7 @@ Mirrors
 =======
 
 	::
-	
+
 		collection
 			mirror
 				mirrors smallInt

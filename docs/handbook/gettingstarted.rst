@@ -28,7 +28,7 @@ Untar the downloaded .tar.gz file::
 This should give you at least two files, a binary 'Self' which is the VM, and the file 'Clean.snap' which is a snapshot of the default Self world. Make sure the VM is executable::
 
   chmod u+x Self
-  
+
 and run the VM, passing the snapshot as an argument::
 
   Self -s Clean.self

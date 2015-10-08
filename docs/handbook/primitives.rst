@@ -2,15 +2,15 @@ Primitives
 ==========
 
 Primitives are Self methods implemented by the virtual machine. The first character of a primitive’s
-selector is an underscore (‘_’). You cannot define primitives yourself (unless you modify the       
-Virtual Machine), nor can you define slots beginning with an underscore.                            
+selector is an underscore (‘_’). You cannot define primitives yourself (unless you modify the
+Virtual Machine), nor can you define slots beginning with an underscore.
 
 Primitive failures
 ------------------
 
 Every primitive call can take an optional argument defining how errors should be handled for this
-call. To do this, the primitive is extended with an ``IfFail``: argument. For example, ``_AsObject``     
-becomes ``_AsObjectIfFail``:, and ``_IntAdd``: becomes ``_IntAdd:IfFail:``.                                  
+call. To do this, the primitive is extended with an ``IfFail``: argument. For example, ``_AsObject``
+becomes ``_AsObjectIfFail``:, and ``_IntAdd``: becomes ``_IntAdd:IfFail:``.
 
 		::
 
@@ -127,7 +127,7 @@ the error.
 
 
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 .. table:: Primitive failures
 
   +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -203,7 +203,7 @@ the error.
    single:  _ErrorMessage
 
 The ``_ErrorMessage`` primitive, sent to an error string returned by any primitive, returns a more
-descriptive version of the error message; this is especially useful for UNIX errors.          
+descriptive version of the error message; this is especially useful for UNIX errors.
 
 Available primitives
 --------------------
@@ -226,14 +226,14 @@ Some points to note when browsing primitives:
 	* Since strings are special kinds of byte vectors, primitives taking byte vectors as arguments
 	  can usually take strings. The exception is that canonical strings cannot be passed to primitives
 	  that modify the object.
-	
+
 	* Integer arithmetic primitives take integer receivers and arguments; floating-point arithmetic
 	  primitives take floating-point receivers and arguments.
-	
+
 	* All comparison primitives return either true or false. Integer comparison primitives take integer
 	  receivers and arguments; floating-point comparison primitives take floating-point receivers
 	  and arguments.
-	
+
 	* The receiver of a mirror primitive must be a mirror (unless otherwise noted)
 
 

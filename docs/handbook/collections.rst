@@ -83,7 +83,7 @@ canonical string.
 
 Character objects behave like immutable strings of length one. There are 256 well-known character
 objects in the Self universe. They are stored in a 256-element vector named ``ascii``, with each
-character stored at the location corresponding to its ASCII value. Characters respond to the message 
+character stored at the location corresponding to its ASCII value. Characters respond to the message
 ``asByte`` by returning their ASCII value (that is, their index in ``ascii``). The inverse of ``asByte``,
 ``asCharacter``, can be sent to an integer between 0 and 255 to obtain the corresponding
 character object.
@@ -137,7 +137,7 @@ Tree-Based Sets and Dictionaries
 
 ``treeSet`` and ``treeBag`` implement sorted collections using binary trees. The set variant ignores
 duplicates, while the bag variant does not. Tree sets and bags allow both explicit and implicit keys
-(that is, adding elements can be done with either ``at:Put:`` or ``add:``), where a tree set that uses 
+(that is, adding elements can be done with either ``at:Put:`` or ``add:``), where a tree set that uses
 explicit keys behaves like a dictionary. Sorting is done on explicit keys if present, values otherwise,
 and the objects sorted must be mutually comparable. Comparisons between keys are made using
 ``compare:IfLess:Equal:Greater:``.

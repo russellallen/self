@@ -17,7 +17,7 @@ The indicators in the left part of the display correspond to various internal ac
 the very left are the CPU bars which show how much CPU is used in various parts of the system.
 The following table lists the individual indicators:
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 .. table:: The system monitor display: indicators
 
   ===============   ====================================================================================================
@@ -25,20 +25,20 @@ The following table lists the individual indicators:
   ===============   ====================================================================================================
   VM                CPU time spent executing in the VM, i.e. for primitives, garbage collection etc.
   Lkup              CPU time used by compile-time and run-time lookups.
-  Comp              CPU time spent by the Self compilers. The black part stands for time consumed by the non-inling 
+  Comp              CPU time spent by the Self compilers. The black part stands for time consumed by the non-inling
                     compiler (NIC), the gray part for the simple inlining compiler (SIC).
-  Self              CPU time spent executing compiled Self code. The black part stands for time consumed by 
+  Self              CPU time spent executing compiled Self code. The black part stands for time consumed by
                     unoptimized (NIC) code, the gray part for optimized (SIC) code.
-  CPU               This bar displays the percentage of the CPU that the Self process is getting (a completely filled 
+  CPU               This bar displays the percentage of the CPU that the Self process is getting (a completely filled
                     bar equals 100% CPU utilization by Self). Black stands for user time, gray for system time.
-  Dot               Below the CPU bar is a small dot which moves whenever a process switch takes place.   
+  Dot               Below the CPU bar is a small dot which moves whenever a process switch takes place.
   ===============   ====================================================================================================
 
-\ 
+\
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 .. table::
-  
+
   ===============  ===================================================================================================
   Indicator        What It Means
   ===============  ===================================================================================================
@@ -67,15 +67,15 @@ The middle part of the display contains some information on VM memory usage disp
 form, as described below:
 
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 .. table:: VM memory status information
 
   ===============  ===================================================================================================
   Name             Description
   ===============  ===================================================================================================
-  RSRC             Size and utilization of the resource area (an area of memory used for temporary storage by the 
+  RSRC             Size and utilization of the resource area (an area of memory used for temporary storage by the
                    compiler and by primitives).
-  C-Heap           Number of bytes allocated on the C heap by Self (excluding the memory and code spaces and the 
+  C-Heap           Number of bytes allocated on the C heap by Self (excluding the memory and code spaces and the
                    resource area).
   ===============  ===================================================================================================
 
@@ -85,7 +85,7 @@ to the actual sizes of the memory spaces. The next table explains the details of
 monitor’s display.
 
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 .. table:: The system monitor display: memory status
 
   ===============  =============================================================================================================
@@ -108,11 +108,11 @@ monitor’s display.
                    dependency information for the compiled methods, and the cache represented by the bar labelled
                    ‘debug’ contains the debugging information. The three-way split reduces the working set size of the
                    code cache. The cache represented by the bar labelled ‘PICs’ contains polymorphic inline caches.
-  ===============  =============================================================================================================       
+  ===============  =============================================================================================================
 
-\ 
+\
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 .. table::
 
   =====  ==========================================

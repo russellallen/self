@@ -20,7 +20,7 @@ On Linux you will generally need the appropriate libraries for Git, CMake, a GCC
 .. _Clang: http://clang.llvm.org/
 .. _Brew: http://brew.sh
 
-Self builds with `GCC`_ ≥ 4.2 or `Clang`_ ≥ 2.0. 
+Self builds with `GCC`_ ≥ 4.2 or `Clang`_ ≥ 2.0.
 
 Building
 --------
@@ -28,7 +28,7 @@ Building
 You can do an in-tree build with::
 
     cmake .
-    cmake --build . 
+    cmake --build .
 
 or an out-of-tree build with::
 

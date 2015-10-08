@@ -21,24 +21,24 @@ Comparing
 Equality
 ++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +-----------------+----------------------------------------------------------------------------+
 | =               |      equal                                                                 |
 +-----------------+----------------------------------------------------------------------------+
-| !=              |      not equal                                                             | 
+| !=              |      not equal                                                             |
 +-----------------+----------------------------------------------------------------------------+
-| hash            |      hash value                                                            | 
+| hash            |      hash value                                                            |
 +-----------------+----------------------------------------------------------------------------+
 | ==              |      identical (the same object; this is reflective and should be avoided) |
 +-----------------+----------------------------------------------------------------------------+
-| !==             |      not identical                                                         | 
+| !==             |      not identical                                                         |
 +-----------------+----------------------------------------------------------------------------+
 
 Ordered
 +++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +-------------------------------------------------+------------------------------------------+
 | <                                               |     less than                            |
@@ -57,7 +57,7 @@ Ordered
 Numeric operations
 ------------------
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +-----------------+-----------------------------------------------------------------+
 | \+              |    add                                                          |
@@ -161,48 +161,48 @@ Bitwise operations (integers)
 Logical operations (booleans)
 -----------------------------
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +--------------------------+-----------------------------------------------------------------------+
-| &&                       |    and                                                                |  
+| &&                       |    and                                                                |
 +--------------------------+-----------------------------------------------------------------------+
-| \|\|                     |    or                                                                 |  
+| \|\|                     |    or                                                                 |
 +--------------------------+-----------------------------------------------------------------------+
-| ^^                       |    xor                                                                |  
+| ^^                       |    xor                                                                |
 +--------------------------+-----------------------------------------------------------------------+
-| not                      |    logical complement                                                 |  
+| not                      |    logical complement                                                 |
 +--------------------------+-----------------------------------------------------------------------+
 
 Constructing
 ------------
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +-----------------+------------------------------------------------------------------------+
-| \@              |    point construction (receiver and argument are integers)             |  
+| \@              |    point construction (receiver and argument are integers)             |
 +-----------------+------------------------------------------------------------------------+
-| \#              |    rectangle construction (receiver and argument are points)           |  
+| \#              |    rectangle construction (receiver and argument are points)           |
 +-----------------+------------------------------------------------------------------------+
 | \#\#            |    rectangle construction (receiver is a point, argument is an extent) |
 +-----------------+------------------------------------------------------------------------+
-| &               |    collection construction (result can be converted into collection)   |  
+| &               |    collection construction (result can be converted into collection)   |
 +-----------------+------------------------------------------------------------------------+
-| ,               |    concatenation                                                       |  
+| ,               |    concatenation                                                       |
 +-----------------+------------------------------------------------------------------------+
 
 Printing
 --------
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +------------------------+--------------------------------------------------------------------------+
-| print                  |       print object on stdout                                             |      
+| print                  |       print object on stdout                                             |
 +------------------------+--------------------------------------------------------------------------+
-| printLine              |       print object on stdout with trailing newline                       |    
+| printLine              |       print object on stdout with trailing newline                       |
 +------------------------+--------------------------------------------------------------------------+
-| printString            |       return a string label                                              |    
+| printString            |       return a string label                                              |
 +------------------------+--------------------------------------------------------------------------+
-| printStringDepth:      |       return a string label with depth limitation request                |    
+| printStringDepth:      |       return a string label with depth limitation request                |
 +------------------------+--------------------------------------------------------------------------+
 | printStringSize:       |       return a string label with number of characters limitation request |
 +------------------------+--------------------------------------------------------------------------+
@@ -215,96 +215,96 @@ Control
 Block evaluation
 ++++++++++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +--------------------+---------------------------------------------------------------------------------------+
-| value[: {With: }]  |      evaluate a block, passing arguments                                              |     
+| value[: {With: }]  |      evaluate a block, passing arguments                                              |
 +--------------------+---------------------------------------------------------------------------------------+
 
 Selection
 +++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +--------------------+---------------------------------------------------------------------------------------+
-| ifTrue:            |      evaluate argument if receiver is true                                            |      
+| ifTrue:            |      evaluate argument if receiver is true                                            |
 +--------------------+---------------------------------------------------------------------------------------+
-| ifFalse:           |      evaluate argument if receiver is false                                           |      
+| ifFalse:           |      evaluate argument if receiver is false                                           |
 +--------------------+---------------------------------------------------------------------------------------+
-| ifTrue: False:     |      evaluate first arg if true, second arg if false                                  |      
+| ifTrue: False:     |      evaluate first arg if true, second arg if false                                  |
 +--------------------+---------------------------------------------------------------------------------------+
-| ifFalse: True:     |      evaluate first arg if false, second arg if true                                  |      
+| ifFalse: True:     |      evaluate first arg if false, second arg if true                                  |
 +--------------------+---------------------------------------------------------------------------------------+
 
 Local exiting
 +++++++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +--------------------+---------------------------------------------------------------------------------------+
-| exit               |      exit block and return nil if block’s argument is evaluated                       |      
+| exit               |      exit block and return nil if block’s argument is evaluated                       |
 +--------------------+---------------------------------------------------------------------------------------+
-| exitValue          |      exit block and return a value if block’s argument is evaluated                   |      
+| exitValue          |      exit block and return a value if block’s argument is evaluated                   |
 +--------------------+---------------------------------------------------------------------------------------+
 
 Basic looping
 +++++++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +--------------------+---------------------------------------------------------------------------------------+
-| loop               |      repeat the block forever                                                         |      
+| loop               |      repeat the block forever                                                         |
 +--------------------+---------------------------------------------------------------------------------------+
-| loopExit           |      repeat the block until argument is evaluated; then exit and return nil           |      
+| loopExit           |      repeat the block until argument is evaluated; then exit and return nil           |
 +--------------------+---------------------------------------------------------------------------------------+
-| loopExitValue      |      repeat the block until argument is evaluated; then exit and return a value       |      
+| loopExitValue      |      repeat the block until argument is evaluated; then exit and return a value       |
 +--------------------+---------------------------------------------------------------------------------------+
 
 Pre-test looping
 ++++++++++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +--------------------+---------------------------------------------------------------------------------------+
-| whileTrue          |      repeat the receiver until it evaluates to true                                   |      
+| whileTrue          |      repeat the receiver until it evaluates to true                                   |
 +--------------------+---------------------------------------------------------------------------------------+
-| whileFalse         |      repeat the receiver until it evaluates to false                                  |      
+| whileFalse         |      repeat the receiver until it evaluates to false                                  |
 +--------------------+---------------------------------------------------------------------------------------+
-| whileTrue:         |      repeat the receiver and argument until receiver evaluates to true                |      
+| whileTrue:         |      repeat the receiver and argument until receiver evaluates to true                |
 +--------------------+---------------------------------------------------------------------------------------+
-| whileFalse:        |      repeat the receiver and argument until receiver evaluates to false               |      
+| whileFalse:        |      repeat the receiver and argument until receiver evaluates to false               |
 +--------------------+---------------------------------------------------------------------------------------+
 
 Post-test looping
 +++++++++++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
-                                                                                                        
+.. tabularcolumns:: p{5cm} p{10cm}
+
 +--------------------+---------------------------------------------------------------------------------------+
-| untilTrue:         |      repeat the receiver and argument until argument evaluates to true                |      
+| untilTrue:         |      repeat the receiver and argument until argument evaluates to true                |
 +--------------------+---------------------------------------------------------------------------------------+
-| untilFalse:        |      repeat the receiver and argument until argument evaluates to false               |      
+| untilFalse:        |      repeat the receiver and argument until argument evaluates to false               |
 +--------------------+---------------------------------------------------------------------------------------+
 
 Iterators
 +++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +--------------------+---------------------------------------------------------------------------------------+
-| do:                |      iterate, passing each element to the argument block                              |      
+| do:                |      iterate, passing each element to the argument block                              |
 +--------------------+---------------------------------------------------------------------------------------+
-| to: By: Do:        |      iterate, with stepping                                                           |      
+| to: By: Do:        |      iterate, with stepping                                                           |
 +--------------------+---------------------------------------------------------------------------------------+
-| to: Do:            |      iterate forward                                                                  |      
+| to: Do:            |      iterate forward                                                                  |
 +--------------------+---------------------------------------------------------------------------------------+
-| upTo: By: Do:      |      iterate forward, without last element, with stepping                             |      
+| upTo: By: Do:      |      iterate forward, without last element, with stepping                             |
 +--------------------+---------------------------------------------------------------------------------------+
-| upTo: Do:          |      iterate forward, without last element                                            |      
+| upTo: Do:          |      iterate forward, without last element                                            |
 +--------------------+---------------------------------------------------------------------------------------+
-| downTo: By: Do:    |      reverse iterate, with stepping                                                   |      
+| downTo: By: Do:    |      reverse iterate, with stepping                                                   |
 +--------------------+---------------------------------------------------------------------------------------+
-| downTo: Do:        |      reverse iterate                                                                  |      
+| downTo: Do:        |      reverse iterate                                                                  |
 +--------------------+---------------------------------------------------------------------------------------+
 
 Collections
@@ -313,7 +313,7 @@ Collections
 Sizing
 ++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +---------------------------------------------------+------------------------------------------------------------------------------------------------+
 | isEmpty test                                      |          if collection is empty                                                                |
@@ -324,189 +324,189 @@ Sizing
 Adding
 ++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| add:                            |         add argument element to collection receiver                                                              |  
+| add:                            |         add argument element to collection receiver                                                              |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| addAll:                         |         add all elements of argument to receiver                                                                 |  
+| addAll:                         |         add all elements of argument to receiver                                                                 |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| at: Put:                        |         add key-value pair                                                                                       |  
+| at: Put:                        |         add key-value pair                                                                                       |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| at: Put: IfAbsent:              |         add key-value pair, evaluating block if key is absent                                                    |  
+| at: Put: IfAbsent:              |         add key-value pair, evaluating block if key is absent                                                    |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| addFirst:                       |         add element to head of list                                                                              | 
+| addFirst:                       |         add element to head of list                                                                              |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| addLast:                        |         add element to tail of list                                                                              | 
+| addLast:                        |         add element to tail of list                                                                              |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| copyAddAll:                     |         return a copy containing the elements of both receiver and argument                                      |  
+| copyAddAll:                     |         return a copy containing the elements of both receiver and argument                                      |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| copyContaining:                 |         return a copy containing only the elements of the argument                                               |  
+| copyContaining:                 |         return a copy containing only the elements of the argument                                               |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
 Removing
 ++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| remove:                         |         remove the given element                                                                                 |  
+| remove:                         |         remove the given element                                                                                 |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| remove: IfAbsent:               |         remove the given element, evaluating block if absent                                                     |  
+| remove: IfAbsent:               |         remove the given element, evaluating block if absent                                                     |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| removeAll                       |         remove all elements                                                                                      |  
+| removeAll                       |         remove all elements                                                                                      |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| removeFirst                     |         remove first element from list                                                                           |  
+| removeFirst                     |         remove first element from list                                                                           |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| removeLast                      |         remove last element from list                                                                            |  
+| removeLast                      |         remove last element from list                                                                            |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| removeAllOccurences:            |        remove all occurrences of this element from list                                                          | 
+| removeAllOccurences:            |        remove all occurrences of this element from list                                                          |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| removeKey:                      |        remove element at the given key                                                                           | 
+| removeKey:                      |        remove element at the given key                                                                           |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| removeKey: IfAbsent:            |        remove element at the given key, evaluating block if absent                                               | 
+| removeKey: IfAbsent:            |        remove element at the given key, evaluating block if absent                                               |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| copyRemoveAll                   |         return an empty copy                                                                                     |   
+| copyRemoveAll                   |         return an empty copy                                                                                     |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
 Accessing
 +++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| first                           |        return the first element                                                                                  | 
+| first                           |        return the first element                                                                                  |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| last                            |        return the last element                                                                                   | 
+| last                            |        return the last element                                                                                   |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| includes:                       |        test if element is member of the collection                                                               | 
+| includes:                       |        test if element is member of the collection                                                               |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| occurrencesOf:                  |        return number of occurences of element in collection                                                      | 
+| occurrencesOf:                  |        return number of occurences of element in collection                                                      |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| findFirst: IfPresent: IfAbsent: |        evaluate present block on first element found satisfying criteria, absent block if no such element        | 
+| findFirst: IfPresent: IfAbsent: |        evaluate present block on first element found satisfying criteria, absent block if no such element        |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| at:                             |        return element at the given key                                                                           |  
+| at:                             |        return element at the given key                                                                           |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| at: IfAbsent:                   |        return element at the given key, evaluating block if absent                                               |  
+| at: IfAbsent:                   |        return element at the given key, evaluating block if absent                                               |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| includesKey:                    |        test if collection contains a given key                                                                   |   
+| includesKey:                    |        test if collection contains a given key                                                                   |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
 Iterating
 +++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| do:                             |         iterate, passing each element to argument block                                                          |   
+| do:                             |         iterate, passing each element to argument block                                                          |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| doFirst: Middle: Last: IfEmpty: |         iterate, with special behavior for first and last                                                        |   
+| doFirst: Middle: Last: IfEmpty: |         iterate, with special behavior for first and last                                                        |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| doFirst: MiddleLast: IfEmpty:   |         iterate, with special behavior for first                                                                 | 
+| doFirst: MiddleLast: IfEmpty:   |         iterate, with special behavior for first                                                                 |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| doFirstLast: Middle: IfEmpty:   |         iterate, with special behavior for ends                                                                  |   
+| doFirstLast: Middle: IfEmpty:   |         iterate, with special behavior for ends                                                                  |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| doFirstMiddle: Last: IfEmpty:   |         iterate, with special behavior for last                                                                  |   
+| doFirstMiddle: Last: IfEmpty:   |         iterate, with special behavior for last                                                                  |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| reverseDo:                      |         iterate backwards through list                                                                           | 
+| reverseDo:                      |         iterate backwards through list                                                                           |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| with: Do:                       |         co-iterate, passing corresponding elements to block                                                      |   
+| with: Do:                       |         co-iterate, passing corresponding elements to block                                                      |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
 Reducing
 ++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| max                             |         return maximum element                                                                                   |  
+| max                             |         return maximum element                                                                                   |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| mean                            |         return mean of elements                                                                                  |  
+| mean                            |         return mean of elements                                                                                  |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| min                             |         return minimum element                                                                                   |  
+| min                             |         return minimum element                                                                                   |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| sum                             |         return sum of elements                                                                                   |  
+| sum                             |         return sum of elements                                                                                   |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| product                         |         return product of elements                                                                               |  
+| product                         |         return product of elements                                                                               |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| reduceWith:                     |         evaluate reduction block with elements                                                                   |  
+| reduceWith:                     |         evaluate reduction block with elements                                                                   |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| reduceWith: IfEmpty:            |         evaluate reduction block with elements, evaluating block if empty                                        |  
+| reduceWith: IfEmpty:            |         evaluate reduction block with elements, evaluating block if empty                                        |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
 Transforming
 ++++++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| asByteVector                    |         return a byte vector with same elements                                                                  |  
+| asByteVector                    |         return a byte vector with same elements                                                                  |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| asString                        |         return a string with same elements                                                                       |  
+| asString                        |         return a string with same elements                                                                       |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| asVector                        |         return a vector with same elements                                                                       |  
+| asVector                        |         return a vector with same elements                                                                       |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| asList                          |         return a list with the same elements                                                                     |  
+| asList                          |         return a list with the same elements                                                                     |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| filterBy: Into:                 |         add elements that satisfy filter block to a collection                                                   |  
+| filterBy: Into:                 |         add elements that satisfy filter block to a collection                                                   |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| mapBy:                          |         add result of evaluating map block with each element to this collection                                  |  
+| mapBy:                          |         add result of evaluating map block with each element to this collection                                  |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| mapBy: Into:                    |         add result of evaluating map block with each element to a collection                                     |  
+| mapBy: Into:                    |         add result of evaluating map block with each element to a collection                                     |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
 Sorting
 +++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| sort                            |         sort receiver in place                                                                                   |  
+| sort                            |         sort receiver in place                                                                                   |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| copySorted                      |         copy sorted in ascending order                                                                           |  
+| copySorted                      |         copy sorted in ascending order                                                                           |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| copyReverseSorted               |         copy sorted in descending order                                                                          |  
+| copyReverseSorted               |         copy sorted in descending order                                                                          |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| copySortedBy:                   |         copy sorted by custom sort criteria                                                                      |  
+| copySortedBy:                   |         copy sorted by custom sort criteria                                                                      |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| sortedDo:                       |         iterate in ascending order                                                                               |  
+| sortedDo:                       |         iterate in ascending order                                                                               |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| reverseSortedDo:                |         iterate in descending order                                                                              |  
+| reverseSortedDo:                |         iterate in descending order                                                                              |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| sortedBy: Do:                   |         iterate in order of custom sort criteria                                                                 |  
+| sortedBy: Do:                   |         iterate in order of custom sort criteria                                                                 |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
 Indexable-specific
 ++++++++++++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| firstKey                        |         return the first key                                                                                     |  
+| firstKey                        |         return the first key                                                                                     |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| lastKey                         |         return the last key                                                                                      |  
+| lastKey                         |         return the last key                                                                                      |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| loopFrom: Do:                   |         circularly iterate, starting from element n                                                              |  
+| loopFrom: Do:                   |         circularly iterate, starting from element n                                                              |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| copyAddFirst:                   |         return a copy of this collection with element added to beginning                                         |  
+| copyAddFirst:                   |         return a copy of this collection with element added to beginning                                         |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| copyAddLast:                    |         return a copy of this collection with element added to end                                               |  
+| copyAddLast:                    |         return a copy of this collection with element added to end                                               |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| copyFrom:                       |         return a copy of this collection from element n                                                          |  
+| copyFrom:                       |         return a copy of this collection from element n                                                          |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| copyFrom: UpTo:                 |         return a copy of this collection from element n up to element m                                          |  
+| copyFrom: UpTo:                 |         return a copy of this collection from element n up to element m                                          |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| copyWithoutLast                 |         return a copy of this collection without the last element                                                |  
+| copyWithoutLast                 |         return a copy of this collection without the last element                                                |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| copySize:                       |         copy with size n                                                                                         |  
+| copySize:                       |         copy with size n                                                                                         |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
-| copySize: FillingWith:          |         copy with size n, filling in any extra elements with second arg                                          |  
+| copySize: FillingWith:          |         copy with size n, filling in any extra elements with second arg                                          |
 +---------------------------------+------------------------------------------------------------------------------------------------------------------+
 
 Timing
 ------
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
 | realTime                                                  |    elapsed real time to execute a block                                                |
@@ -528,7 +528,7 @@ Sending
 
 Like Smalltalk ``perform``; receiver is a string.
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
 | sendTo: {With: }                                          |    send receiver string as a message                                                   |
@@ -547,7 +547,7 @@ Like Smalltalk ``perform``; receiver is a string.
 Message object protocol
 +++++++++++++++++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +----------------------------------------------------------------+-----------------------------------------------------------------------------------+
 | send                                                           |    perform the send described by a message object                                 |
@@ -574,28 +574,28 @@ Message object protocol
 Reflection (mirrors)
 --------------------
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
-| reflect:                                                  |    returns a mirror on the argument                                                    |   
+| reflect:                                                  |    returns a mirror on the argument                                                    |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
-| reflectee                                                 |    returns the object the mirror receiver reflects                                     |   
+| reflectee                                                 |    returns the object the mirror receiver reflects                                     |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
-| contentsAt:                                               |    returns a mirror on the contents of slot n                                          |   
+| contentsAt:                                               |    returns a mirror on the contents of slot n                                          |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
-| isAssignableAt:                                           |    tests if slot n is an assignable slot                                               |   
+| isAssignableAt:                                           |    tests if slot n is an assignable slot                                               |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
-| isParentAt:                                               |    tests if slot n is a parent slot                                                    |   
+| isParentAt:                                               |    tests if slot n is a parent slot                                                    |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
-| isArgumentAt:                                             |    tests if slot n is an argument slot                                                 |   
+| isArgumentAt:                                             |    tests if slot n is an argument slot                                                 |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
-| parentPriorityAt:                                         |    returns the parent priority of slot n                                               |   
+| parentPriorityAt:                                         |    returns the parent priority of slot n                                               |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
-| slotAt:                                                   |    returns a slot object representing slot n                                           |   
+| slotAt:                                                   |    returns a slot object representing slot n                                           |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
-| contentsAt:                                               |    returns the contents of the slot named n                                            |   
+| contentsAt:                                               |    returns the contents of the slot named n                                            |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
-| visibilityAt:                                             |    returns a visibility object representing visibility of slot n                       |   
+| visibilityAt:                                             |    returns a visibility object representing visibility of slot n                       |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
 
 System-wide Enumerations
@@ -603,35 +603,35 @@ System-wide Enumerations
 
 Messages sent to the oddball object browse.
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| all[Limit: ]                                              |    returns a vector of mirrors on all objects in the system (up to the limit)                                                                      |   
+| all[Limit: ]                                              |    returns a vector of mirrors on all objects in the system (up to the limit)                                                                      |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| referencesOf: [Limit: ]                                   |    returns a vector of mirrors on all objects referring to arg (up to the limit)                                                                   |   
+| referencesOf: [Limit: ]                                   |    returns a vector of mirrors on all objects referring to arg (up to the limit)                                                                   |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| referencesOfReflectee: [Limit: ]                          |    returns a vector of mirrors on all objects referring to argument’s reflectee (up to the limit); allows one to find references to a method       |   
+| referencesOfReflectee: [Limit: ]                          |    returns a vector of mirrors on all objects referring to argument’s reflectee (up to the limit); allows one to find references to a method       |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| childrenOf: [Limit: ]                                     |    returns a vector of mirrors on all objects with a parent slot referring to the given object (up to the limit)                                   |   
+| childrenOf: [Limit: ]                                     |    returns a vector of mirrors on all objects with a parent slot referring to the given object (up to the limit)                                   |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| implementorsOf: [Limit: ]                                 |    returns a vector of mirrors on objects with slots whose names match the given selector (up to the limit)                                        |   
+| implementorsOf: [Limit: ]                                 |    returns a vector of mirrors on objects with slots whose names match the given selector (up to the limit)                                        |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-| sendersOf: [Limit: ]                                      |    returns a vector of mirrors on methods whose selectors match the given selector (up to the limit)                                               |   
+| sendersOf: [Limit: ]                                      |    returns a vector of mirrors on methods whose selectors match the given selector (up to the limit)                                               |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Debugging
 ---------
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
-| halt                                                      |    halt the current process                                                            |   
+| halt                                                      |    halt the current process                                                            |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
-| halt:                                                     |    halt and print a message string                                                     |   
+| halt:                                                     |    halt and print a message string                                                     |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
-| error:                                                    |    halt, print an error message, and display the stack                                 |   
+| error:                                                    |    halt, print an error message, and display the stack                                 |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
-| warning:                                                  |    beep, print a warning message, and continue                                         |   
+| warning:                                                  |    beep, print a warning message, and continue                                         |
 +-----------------------------------------------------------+----------------------------------------------------------------------------------------+
 
 Virtual Machine-Generated
@@ -640,7 +640,7 @@ Virtual Machine-Generated
 Errors
 ++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +---------------------------------------------------------------------------+-----------------------------------------------------------------------------+
 | undefinedSelector: Type: Delegatee: MethodHolder: Arguments:              |       lookup found no matching slot                                         |
@@ -659,7 +659,7 @@ Errors
 Other system-triggered messages
 +++++++++++++++++++++++++++++++
 
-.. tabularcolumns:: p{5cm} p{10cm} 
+.. tabularcolumns:: p{5cm} p{10cm}
 
 +-------------------------------------------------+----------------------------------------------+
 | postRead                                        |    slot to evaluate after reading a snapshot |

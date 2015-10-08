@@ -4,23 +4,23 @@ A Guide to Programming Style
 
 This section discusses some programming idioms and stylistic conventions that have evolved in the
 Self group. Rather than simply presenting a set of rules, an attempt has been made to explain the
-reasons for each stylistic convention. While these conventions have proven useful to the Self    
-group, they should be taken as guidelines, not commandments. Self is still a young language, and 
+reasons for each stylistic convention. While these conventions have proven useful to the Self
+group, they should be taken as guidelines, not commandments. Self is still a young language, and
 it is likely that its users will continue to discover new and better ways to use it effectively.
 
 Behaviorism versus Reflection
 =============================
 
-One of the central principles of Self is that an object is completely defined by its behavior: that       
-is, how it responds to messages. This idea, which is sometimes called *behaviorism*, allows one object      
-to be substituted for another without ill effect—provided, of course, that the new object’s behavior      
-is similar enough to the old object’s behavior. For example, a program that plots points in a             
-plane should not care whether the points being plotted are represented internally in cartesian or polar   
-coordinates as long as their external behavior is the same. Another example arises in program             
-animation. One way to animate a sorting algorithm is to replace the collection being sorted with an       
+One of the central principles of Self is that an object is completely defined by its behavior: that
+is, how it responds to messages. This idea, which is sometimes called *behaviorism*, allows one object
+to be substituted for another without ill effect—provided, of course, that the new object’s behavior
+is similar enough to the old object’s behavior. For example, a program that plots points in a
+plane should not care whether the points being plotted are represented internally in cartesian or polar
+coordinates as long as their external behavior is the same. Another example arises in program
+animation. One way to animate a sorting algorithm is to replace the collection being sorted with an
 object that behaves like the original collection but, as a side effect, updates a picture of itself on the
-screen each time two elements are swapped. behaviorism makes it easier to extend and reuse programs,      
-perhaps even in ways that were not anticipated by the program’s author.                                   
+screen each time two elements are swapped. behaviorism makes it easier to extend and reuse programs,
+perhaps even in ways that were not anticipated by the program’s author.
 
 It is possible, however, to write non-behavioral programs in Self. For example, a program that examines
 and manipulates the slots of an object *directly*, rather than via messages, is not behavioral
@@ -104,14 +104,14 @@ the state of the machine might be encoded in a selector that would be sent to an
 to select the behavior for the next state transition:
 
 		::
-			
+
 				state sendTo: (|
 						inComment: c = ( c = '"' ifTrue: [state: 'inCode']. self ).
 						inCode: c = ( c = '"' ifTrue: [state: 'inComment']
 								False: ... )
 					|)
 					With: nextChar
-					
+
 In this case, the inline object is playing the role of a case statement.
 
 Another use of inline objects is to return multiple values from a method, as discussed in section
@@ -120,7 +120,7 @@ the predicate used to order objects in a *priorityQueue* can be specified using 
 object:
 
 		::
-		
+
 			queue: priorityQueue copyRemoveAll.
 			queue sorter: (| element: e1 Precedes: e2 = ( e1 > e2 ) |).
 
@@ -155,7 +155,7 @@ mirror is used because naming is reflective.) The object’s creator path annota
 about the path from the lobby to either the object itself or its prototype. If the object is a clone “a”
 or “an” is prepended to its prototype’s creator path. In addition to its path, the mirror also tries to
 compute a ``printString`` for the object if it is annotated as ``isComplete``. Then, the two pieces of
-information are merged. For example, the name of the prototype list is “list” but the name of ``list copy add: 17`` 
+information are merged. For example, the name of the prototype list is “list” but the name of ``list copy add: 17``
 is “a list(17).” See the naming category in mirror traits for the details of this process.
 
 How to make an object print
@@ -173,9 +173,9 @@ The most prominent manifestation of this problem crops up in object printing. Su
 to provide the following printString method for all point objects:
 
 		::
-			
+
 			printString = ( x printString, ’@’, y printString )
-			
+
 Like other behavior that applies to all points, the method should be put in point traits. But what
 happens if ``printString`` is sent to the object ``traits point``? The ``printString`` method is
 found but it fails when it attempts to send x and y to itself because these slots are only defined in
@@ -185,7 +185,7 @@ object. The reason printing is a bigger problem is that it is useful to have a g
 facility to be used during debugging and system exploration. To be as robust as possible, this printing
 facility should not send ``printString`` when it will fail. Unfortunately, it is difficult to tell
 when ``printString`` is likely to fail. Using reflection, the facility can avoid sending
-``printString`` to objects that do not define ``printString``. But that is not the case with ``traits point``. 
+``printString`` to objects that do not define ``printString``. But that is not the case with ``traits point``.
 The solution taken in this version of the system is to mark printable objects with a special
 annotation. The printing facility sends ``printString`` to the object only if the object contains an
 annotation ``isComplete``.
@@ -202,13 +202,13 @@ allows a method to return a single object. There are two ways to simulate method
 multiple values. The first way is to use an inlined object. For example, the object:
 
 		::
-		
+
 			(| p* = lobby. lines. words. characters |)
 
 could be used to package the results of a text processing method into a single result object:
 
 		::
-		
+
 			count = (
 				| r = (| p* = lobby. lines. words. characters |) ... |
 				...
@@ -217,7 +217,7 @@ could be used to package the results of a text processing method into a single r
 				r )
 
 		.. note::
-		
+
 			that the inline object prototype inherits copy from the lobby. If one omitted its parent slot p, one would have to
 			send it the _Clone primitive to copy it. It is considered bad style, however, to send a primitive directly, rather than calling
 			the primitive’s wrapper method.
@@ -227,7 +227,7 @@ The sender can extract the various return values from the result object by name.
 The second way is to pass in one block for each value to be returned. For example:
 
 		::
-		
+
 				countLines:[| :n | lines: n ]
 					Words:[| :n | words: n ]
 					Characters:[| :n | characters: n ]
@@ -282,7 +282,7 @@ second block argument will simply be ignored. That is, you can write:
 instead of:
 
 		::
-		
+
 				myCollection do: [| :el. :key | el printLine]
 
 ``nil`` Considered Naughty

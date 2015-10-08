@@ -20,7 +20,8 @@ classes, and its extraction of the programmer's intentions from a web of live ob
 On the Macintosh, Self uses option-click for a middle-mouse click, and uses command- (the apple
 key) click for the right button click. So wherever the text says “left-button-click” just click with the
 mouse, where it says “middle-button click” hold down the option key and click with the mouse,
-and where it says “right button click” hold down the command key and click with the mouse. These mappings are defined in Self, so you can change them by editing the ``whichButton:`` method in the ``initialization``
+and where it says “right button click” hold down the command key and click with the mouse.
+These mappings are defined in Self, so you can change them by editing the ``whichButton:`` method in the ``initialization``
 category in traits ``ui2MacEvent``.
 
 *****************
@@ -46,8 +47,8 @@ Outliners sport three small buttons in the top-right-hand corner labeled “/\\�
 and “X”. These buttons summon the object’s parents, add an evaluator text region to the bottom of
 the outliner, and dismiss the outliner. Press the “E” button to get an evaluator.
 
-Type ``anExampleObject`` into 
-the evaluator (it will already be selected) and hit the ``Get it`` button (or type metareturn 
+Type ``anExampleObject`` into
+the evaluator (it will already be selected) and hit the ``Get it`` button (or type metareturn
 on UNIX, or command-return on MacOS X):
 
 ..  figure:: images/Pgm_Env_Image2.*
@@ -55,23 +56,23 @@ on UNIX, or command-return on MacOS X):
     :width: 342 px
     :scale: 100
     :align: left
-    
+
 The result object appears in your “hand” raised above the screen as if you were dragging it with the
-left button. 
+left button.
 
 .. note::
 
-   If this returns an error, it may be that you don't have ``anExampleObject`` in your Self world. You can always load it from the file ``objects/misc/programmingExamples.self`` as follows::
-   
-   'path/to/objects/misc/programmingExamples.self' runScript
-    
+  If this returns an error, it may be that you don't have ``anExampleObject`` in your Self world. You can always load it from the file ``objects/misc/programmingExamples.self`` as follows::
+
+    'path/to/objects/misc/programmingExamples.self' runScript
+
 Click the button to set it down.
 
 ..  figure:: images/Pgm_Env_Image3.*
     :height: 70 px
     :width: 350 px
     :scale: 100
-    :align: left 
+    :align: left
 
 As with most other things on the Self screen, the left button picks it up and moves it. (For buttons
 and other things that use left-button for other purposes, you can grab them with marquee selection
@@ -86,7 +87,7 @@ Left-click on the triangle [#f1]_ to expand the object and see more information:
     :height: 242 px
     :width: 656 px
     :scale: 100
-    :align: left 
+    :align: left
 
 Now it shows a summary of modules containing the slots in this object (just ``programmingExamples``
 here), four slots, and a category containing more slots, although those slots are not shown
@@ -102,7 +103,7 @@ by clicking its triangle:
     :height: 358 px
     :width: 651 px
     :scale: 100
-    :align: left 
+    :align: left
 
 And, one more click expands the subcategory:
 
@@ -111,14 +112,14 @@ And, one more click expands the subcategory:
     :width: 660 px
     :scale: 100
     :align: left
-    
+
 Slots
 -----
 
 .. |methodslot| image:: images/methodslot.*
 
 .. |constantslot| image:: images/constantslot.*
-                
+
 .. |assignableslot| image:: images/assignableslot.*
 
 The little icons on the right edges of the slots reveal the type of slot: |methodslot| for a method slot (a slot
@@ -307,7 +308,7 @@ After selecting Add Slot a space for a new slot will appear in the object:
     :scale: 100
     :align: left
 
-Each line shows the syntax for a different kind of slot. Create a simple variable by typing 
+Each line shows the syntax for a different kind of slot. Create a simple variable by typing
 ``me<-’Gumby’`` [#f4]_ and hitting the green button to accept the change:
 
 ..  figure:: images/Pgm_Env_Image16.*
@@ -380,7 +381,7 @@ show (or hide) the comment:
     :height: 178 px
     :width: 545 px
     :align: left
-    
+
 (To automatically resize the outliner to show all the text, press control-L.) To see one of Self’s
 scroll bars, grab the comment’s resize triangle (with the left-button) and move it up a bit:
 
@@ -425,7 +426,7 @@ meantime during a long search), then the enumerator will show the match(es):
     :width: 326 px
     :scale: 100
     :align: left
-    
+
 Clicking on the little square button(s) would show the exact method(s). But, for our purposes, just
 knowing the name is enough and now you have to fix it. So back to the debugger and click on the
 method button on the right in the ``whoAmI`` slot to expand the stack frame for the ``whoAmI`` method:
@@ -435,7 +436,7 @@ method button on the right in the ``whoAmI`` slot to expand the stack frame for 
     :width: 552 px
     :scale: 100
     :align: left
-    
+
 Now the debugger shows the source of the method, with the actual message being sent highlighted.
 (In this case it is just the whole thing.) One of the conveniences in the Self programming environment
 is that you do not have to go back to the original method to fix it, but can just fix it here (following
@@ -448,19 +449,19 @@ the figure below). This feature lets you change a method in a clone and simultan
  ..  figure:: images/Pgm_Env_Image28.*
     :height: 455 px
     :width: 680 px
-    :align: left   
-    
+    :align: left
+
 prototype, if you are putting your methods in prototypes instead of traits. Changing a method in an
 ordinary outliner would just affect that one object, even if other objects had been cloned from it.
 This rule avoids unintentional changes. The more global kind of change performed by the debugger
 takes a little longer. When it is accomplished, the red and green buttons will disappear:
-    
-    
+
+
 ..  figure:: images/Pgm_Env_Image29.*
     :height: 289 px
     :width: 536 px
-    :align: left    
-    
+    :align: left
+
 Now os is highlighted to show that the process is about to send “os” to implicit-self. Try the ``Step``
 button, which performs a single message send. After hitting the ``Step`` button twice (and a control-
 L to widen the debugger), the process will have entered the ``environmentVariable:IfFail:`` method:
@@ -468,8 +469,8 @@ L to widen the debugger), the process will have entered the ``environmentVariabl
 ..  figure:: images/Pgm_Env_Image30.*
     :height: 380 px
     :width: 558 px
-    :align: left  
-    
+    :align: left
+
 This method is not too interesting (especially on the Macintosh), so leave the debugger by hitting
 ``Continue`` and letting the process finish.
 
@@ -496,7 +497,7 @@ Here is more information on the debugger for future reference:
   +-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
   |  Abort            |       Kills off the process and dismisses the debugger.                                                                                              |
   +-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-  
+
 In addition to the buttons, each frame in the debugger has some items to control the process in its
 middle-button menu:
 
@@ -524,33 +525,33 @@ In addition to the ``Find Slot`` enumerator, Self has other ways to find things:
 .. table:: Enumerators
 
   +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  |   Name                                             |        Function                                                                                                                                                                                                                                                                        |  
+  |   Name                                             |        Function                                                                                                                                                                                                                                                                        |
   +====================================================+========================================================================================================================================================================================================================================================================================+
-  |   Implementors                                     |        Finds all the slots with a given name.                                                                                                                                                                                                                                          |  
+  |   Implementors                                     |        Finds all the slots with a given name.                                                                                                                                                                                                                                          |
   +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  |   Implementors of :                                |        Finds all the slots with the given name that take an argument (for read/write slots only).                                                                                                                                                                                      |  
+  |   Implementors of :                                |        Finds all the slots with the given name that take an argument (for read/write slots only).                                                                                                                                                                                      |
   +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  |   Senders                                          |        Finds all the methods that send a message with a given name.                                                                                                                                                                                                                    |  
+  |   Senders                                          |        Finds all the methods that send a message with a given name.                                                                                                                                                                                                                    |
   +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  |   Senders of :                                     |        Finds all the methods that send the corresponding assignment message (read/write slots only).                                                                                                                                                                                   |  
+  |   Senders of :                                     |        Finds all the methods that send the corresponding assignment message (read/write slots only).                                                                                                                                                                                   |
   +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  |   Senders in family (Senders of : in family)       |        Finds all the methods in this object, its ancestors, and descendants that send a message with a given name (or the corresponding assignment message).                                                                                                                           |  
+  |   Senders in family (Senders of : in family)       |        Finds all the methods in this object, its ancestors, and descendants that send a message with a given name (or the corresponding assignment message).                                                                                                                           |
   +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  |   Find Slot                                        |        Starting from a designated object, finds all slots in that object and its ancestors whose name matches a given pattern. Case is ignored, “?” matches any character, “*” matches any series of zero or more characters. Also comes in “of :” and “in family” flavors.            |  
+  |   Find Slot                                        |        Starting from a designated object, finds all slots in that object and its ancestors whose name matches a given pattern. Case is ignored, “?” matches any character, “*” matches any series of zero or more characters. Also comes in “of :” and “in family” flavors.            |
   +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  |   Methods Containing                               |        Finds methods containing the specified string. Similar to grep without wildcards.                                                                                                                                                                                               |  
+  |   Methods Containing                               |        Finds methods containing the specified string. Similar to grep without wildcards.                                                                                                                                                                                               |
   +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  |   Copied-down Children                             |        Finds objects copied-down (see below) from this one.                                                                                                                                                                                                                            |  
+  |   Copied-down Children                             |        Finds objects copied-down (see below) from this one.                                                                                                                                                                                                                            |
   +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  |   References                                       |        Finds slots that contain references to the selected object.                                                                                                                                                                                                                     |  
+  |   References                                       |        Finds slots that contain references to the selected object.                                                                                                                                                                                                                     |
   +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  |   Slots in Module                                  |        On the module menu (see below); shows all slots in a given module.                                                                                                                                                                                                              |  
+  |   Slots in Module                                  |        On the module menu (see below); shows all slots in a given module.                                                                                                                                                                                                              |
   +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  |   Added or Changed Slots in Module                 |        On the module menu (see below); shows all slots added or changed in the module since it was filed out.                                                                                                                                                                          |  
+  |   Added or Changed Slots in Module                 |        On the module menu (see below); shows all slots added or changed in the module since it was filed out.                                                                                                                                                                          |
   +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  |   Removed Slots in Module                          |        On the module menu (see below); shows the names of the slots removed from the module since it was last filed out.                                                                                                                                                               |  
+  |   Removed Slots in Module                          |        On the module menu (see below); shows the names of the slots removed from the module since it was last filed out.                                                                                                                                                               |
   +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  |   Expatriate Slots                                 |        On the changed module menu (see below); shows all slots in filed-out objects that do not themselves specify a module. These slots will not be filed out.                                                                                                                        |  
+  |   Expatriate Slots                                 |        On the changed module menu (see below); shows all slots in filed-out objects that do not themselves specify a module. These slots will not be filed out.                                                                                                                        |
   +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 The ``copy-down`` and ``module`` enumerators will be covered later.
@@ -596,7 +597,7 @@ outliners and debuggers. In addition Self has many other ways to change an objec
   |   Copying a category.                                  |    “Copy” in category or category middle menu, then drag the category to another object.                                                                                                                                                        |    Copying a category.                                                                                                                                                                                                          |
   +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-.. tabularcolumns:: p{5cm} p{5cm} p{5cm} 
+.. tabularcolumns:: p{5cm} p{5cm} p{5cm}
 
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                                                        |    **Removing, Adding, Moving, Copying Slots**                                                                                                                                                                                                  |                                                                                                                                                                                                                                 |
@@ -610,7 +611,7 @@ outliners and debuggers. In addition Self has many other ways to change an objec
 |   Copying a slot.                                      |    “Copy” in slot or category middle menu, then drag the slot to another object.                                                                                                                                                                |    Copying a slot.                                                                                                                                                                                                              |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-.. tabularcolumns:: p{5cm} p{5cm} p{5cm} 
+.. tabularcolumns:: p{5cm} p{5cm} p{5cm}
 
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                                                        |    **Adding a Comment**                                                                                                                                                                                                                         |                                                                                                                                                                                                                                 |
@@ -633,7 +634,7 @@ outliners and debuggers. In addition Self has many other ways to change an objec
 |   Change the visibility of a slot.                     |    On the slot’s middle menu choose “Make Public,” “Make Private,” or “Make Undeclared.”                                                                                                                                                        |    The Self interface uses bold, normal, and sans-serif fonts to indicate public, private, and unspecified slots.This distinction carries no semantics, but serves to record the programmer’s intentions.                       |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-.. tabularcolumns:: p{5cm} p{5cm} p{5cm} 
+.. tabularcolumns:: p{5cm} p{5cm} p{5cm}
 
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                                                        |    **Annotating an Object**                                                                                                                                                                                                                     |                                                                                                                                                                                                                                 |
@@ -647,7 +648,7 @@ outliners and debuggers. In addition Self has many other ways to change an objec
 |   Change the object’s “isComplete” flag.               |    “Show Annotation” in object middle menu to expose object annotation information, then push one of the isComplete radio buttons, then hit green button to accept the annotation change.                                                       |    After building a new prototype, set isComplete to get the environment to show its printString, and to get the transporter to use its storeString.                                                                            |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-.. tabularcolumns:: p{5cm} p{5cm} p{5cm} 
+.. tabularcolumns:: p{5cm} p{5cm} p{5cm}
 
 
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -665,7 +666,7 @@ outliners and debuggers. In addition Self has many other ways to change an objec
 The Transporter
 ***************
 
-The transporter has been built in order to move programs from one world of objects to another. You can 
+The transporter has been built in order to move programs from one world of objects to another. You can
 ignore it as long as you work with just one snapshot. However, if you want to give your
 program to someone else, or save it as source, or read it in to a newer snapshot, you will need to
 learn about the transporter.
@@ -680,7 +681,7 @@ that can then operate on data. In the conventional view:
 .. table:: The Schism between Program and Data
 
 	+----------------------+---------------------------+----------------------------+
-	|                      |    Program                |    Data                    | 
+	|                      |    Program                |    Data                    |
 	+======================+===========================+============================+
 	| Who can change it    |    The programmer         |    The user                |
 	+----------------------+---------------------------+----------------------------+
@@ -737,7 +738,7 @@ the order that the files are read in as independent as possible. Since each obje
 in different modules, the outliner shows a summary of the modules of an object, sorted by frequency.
 
 Turned around, a module can be viewed as a collection of slots, plus some other information: each
-module also includes a directory, a list of submodules to be read in whenever it is read, and 
+module also includes a directory, a list of submodules to be read in whenever it is read, and
 ``post-FileIn`` method to be run whenever the module is read. These data allow modules to be organized
 hierarchically by subsystem, for example the allUI2 module includes all the modules in the ui2
 system.
@@ -759,7 +760,7 @@ enough information, and a variety of means have to be used. As shown in the flow
 ..  figure:: images/Pgm_Env_Image31.*
     :height: 680 px
     :width: 631 px
-    :align: left 
+    :align: left
 
 * Sometimes the programmer does not want to store the actual contents of a slot, but instead
   wants to store an initialization expression. This intention is captured with another annotation
@@ -767,16 +768,16 @@ enough information, and a variety of means have to be used. As shown in the flow
   In the latter case, an initializer is also supplied.
 
 * Even though the transporter is supposed to follow the slot, it may contain an object that is created
-  by another slot. For example, the ``parent`` slot in a point should just refer to ``traits point`` 
+  by another slot. For example, the ``parent`` slot in a point should just refer to ``traits point``
   rather than recreating the traits object. This information is captured by a ``Creator`` annotation
   on each object that gives the path from the ``lobby`` to the slot intended to create the object.
   In this case, the transporter just files out a reference to the object’s creator, cleverly
   enough so that the actual creator slot does not need to have been already filed in. On the other
-  hand, if an object is immutable, its identity is not important. If an object is annotated as 
+  hand, if an object is immutable, its identity is not important. If an object is annotated as
   ``is-Complete`` [#f9]_ the transporter sends it ``isImmutableForFilingOut`` and if that message returns
   ``true``, the transporter never files out a reference. For example, integers would answer
   ``true`` to this message.
-  
+
 * If the contents of the slot is a simple (usually immutable) object like ``17``, ``3@4``, or ‘``foo``’ (the
   string) the transporter should just ask the object for a string to store. It does this by checking to
   see if the object is annotated as ``isComplete`` to see if it is safe to send the object messages,
@@ -816,7 +817,7 @@ circleMorph:
 ..  figure:: images/Pgm_Env_Image32.*
     :height: 483 px
     :width: 556 px
-    :align: left 
+    :align: left
 
 The ``Basic Morph State`` category of slots has been copied from those in morph by first copying
 the morph and removing all its submorphs (i.e. by sending it copyRemoveAllMorphs) and then
@@ -844,10 +845,10 @@ Howevever Self modules have a slot 'tree' which can take a name of a tree. If th
 
 This allows the developer to maintain several separate trees. For example::
 
-  modules init 
+  modules init
     registerTree: 'org_selflanguage_webserver'
               At: 'path/to/parent-folder'.
-    
+
   bootstrap read: 'webserver'
           InTree: 'org_selflanguage_webserver'.
 
@@ -862,7 +863,7 @@ Versioning
 
 Each transporter module has a slot named ``revision`` containing a string version number. It is recommended that you use Semantic Versioning [#f10]_ so that the version of a module can be tested as follows::
 
-  modules string version >= (modules init moduleVersion copyOn: '1.0.0') 
+  modules string version >= (modules init moduleVersion copyOn: '1.0.0')
     ifFalse: [log warning: 'Old string version']
 
 This test could be placed in the ``preFileIn`` slot of your module to ensure a sane file in environment before the rest of the file is read.

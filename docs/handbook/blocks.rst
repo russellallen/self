@@ -32,11 +32,11 @@ by two unique boolean objects, ``true`` and ``false``. Boolean objects respond t
 block. For example, ``true`` implements ``ifTrue:False:`` as::
 
 	ifTrue: b1 False: b2 = ( b1 value )
-	
+
 That is, when ``true`` is sent ``ifTrue:False:``, it evaluates the first block and ignores the second.
 For example, the following expression evaluates to the absolute value of x::
 
-	x < 0 ifTrue: [ x negate ] False: [ x ]	
+	x < 0 ifTrue: [ x negate ] False: [ x ]
 
 The booleans also define behavior for the logical operations ``AND (&&), OR (||), EXCLUSIVE-OR
 (^^)``, and ``NOT (not)``. Because the binary boolean operators all send value to their argument when
@@ -105,9 +105,9 @@ Other Block Behavior
 Blocks have some other useful behavior:
 
 	* One can determine the time in milliseconds required to execute a block using various ways of measuring time using the messages ``userTime``, ``systemTime``, ``cpuTime``, and ``real-Time``.
-	
+
 	* One can profile the execution of a block using the messages ``profile`` and ``flatProfile``. ``profile`` prints out the source level call graph annotated with call site and timing information	whereas ``flatProfile`` prints out a flat profile sorted by module.
-	
+
 	* The message ``countSends`` will collect lookup statistics during a block execution.
 
 Any object that inherits from the lobby can be passed to a method that expects a block; behavior in``defaultBehavior`` makes the object behave like a block that evaluates to that object.
