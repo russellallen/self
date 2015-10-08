@@ -188,7 +188,7 @@ when ``printString`` is likely to fail. Using reflection, the facility can avoid
 ``printString`` to objects that do not define ``printString``. But that is not the case with ``traits point``. 
 The solution taken in this version of the system is to mark printable objects with a special
 annotation. The printing facility sends ``printString`` to the object only if the object contains an
-annotation ``IsComplete``.
+annotation ``isComplete``.
 
 The existence of an ``isComplete`` annotation in an object means that the object is prepared to print
 itself. The object agrees to provide behavior for a variety of messages; see the programming environment
