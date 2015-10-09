@@ -365,7 +365,7 @@ producing an object with two data slots (x and y) and two assignment slots (x: a
 ..  figure:: images/Chapter_2_Image_5.*
     :scale: 80
 
-An identifier by itself specifies an assignable data slot initialized to *nil* . [#f5]_ Thus, the slot declaration x is a shorthand notation for x <- nil.
+An identifier by itself specifies an assignable data slot initialized to *nil* [#f5]_. Thus, the slot declaration x is a shorthand notation for x <- nil.
 
 For example, a simple mutable point might be defined as::
 
