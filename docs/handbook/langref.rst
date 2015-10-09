@@ -762,24 +762,24 @@ The lookup algorithm recursively traverses the inheritance graph, which can be a
 
 The function *lookup(obj, sel, V)* is defined as follows:
 
-  **Input**:
-    | obj, the object being searched for matching slots
-    | sel, the message selector
-    | V, the set of objects already visited along this path
+**Input**:
+  | obj, the object being searched for matching slots
+  | sel, the message selector
+  | V, the set of objects already visited along this path
 
-  **Output**:
-    | M, the set of matching slots
+**Output**:
+  | M, the set of matching slots
 
-  **Algorithm**:
+**Algorithm**:
 
-  ::
+::
 
-    if obj ε V
-    then M ← Ø                                                  “cycle detection”
-    else M ← {s ε obj | s.name = sel}                           “try local slots”
-        if M = Ø then M ← parent_lookup(obj, sel, V) end        “try parent slots”
-    end
-    return M
+  if obj ε V
+  then M ← Ø                                                  “cycle detection”
+  else M ← {s ε obj | s.name = sel}                           “try local slots”
+      if M = Ø then M ← parent_lookup(obj, sel, V) end        “try parent slots”
+  end
+  return M
 
 Where *parent_lookup(obj, sel, V)* is defined as follows:
 
@@ -797,25 +797,25 @@ An undirected resend ignores the sending method holder (the object containing th
 
 The function *undirected_resend(rec, smh, sel, args)* is defined as follows:
 
-  **Input**:
-    | rec, the receiver of the message
-    | smh, the sending method holder
-    | sel, the message selector args, the actual arguments
+**Input**:
+  | rec, the receiver of the message
+  | smh, the sending method holder
+  | sel, the message selector args, the actual arguments
 
-  **Output**:
-    | res, the result object
+**Output**:
+  | res, the result object
 
-  **Algorithm**:
+**Algorithm**:
 
-  ::
+::
 
-      M ← parent_lookup(smh, sel, Ø)                    “do the lookup”
-      case
-          | M | = 0: error: message not understood
-          | M | = 1: res ← eval(rec, M, args)           “see §2.1”
-          | M | > 1: error: ambiguous message send
-      end
-      return res
+    M ← parent_lookup(smh, sel, Ø)                    “do the lookup”
+    case
+        | M | = 0: error: message not understood
+        | M | = 1: res ← eval(rec, M, args)           “see §2.1”
+        | M | > 1: error: ambiguous message send
+    end
+    return res
 
 Directed Resend
 ---------------
@@ -824,29 +824,29 @@ A directed resend looks only in one slot in the sending method holder.
 
 The function *directed_resend(rec, smh, del, sel, args)* is defined as follows:
 
-  **Input**:
-    | rec, the receiver of the message
-    | smh, the sending method holder
-    | del, the name of the delegatee
-    | sel, the message selector
-    | args, the actual arguments
+**Input**:
+  | rec, the receiver of the message
+  | smh, the sending method holder
+  | del, the name of the delegatee
+  | sel, the message selector
+  | args, the actual arguments
 
-  **Output**:
-    | res, the result object
+**Output**:
+  | res, the result object
 
-  **Algorithm**:
+**Algorithm**:
 
-  ::
+::
 
-      D ← {s ε smh | s.name = del}                     “find delegatee”
-      if | D | = 0 then error: missing delegatee       “one or none”
-      M ← lookup(smh.del, sel, Ø)                      “do the lookup”
-      case
-          | M | = 0: error: message not understood
-          | M | = 1: res ← eval(rec, M, args)          “see §2.1”
-          | M | > 1: error: ambiguous message send
-      end
-      return res
+    D ← {s ε smh | s.name = del}                     “find delegatee”
+    if | D | = 0 then error: missing delegatee       “one or none”
+    M ← lookup(smh.del, sel, Ø)                      “do the lookup”
+    case
+        | M | = 0: error: message not understood
+        | M | = 1: res ← eval(rec, M, args)          “see §2.1”
+        | M | > 1: error: ambiguous message send
+    end
+    return res
 
 Lexical elements
 ================
