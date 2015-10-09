@@ -12,13 +12,13 @@ Every primitive call can take an optional argument defining how errors should be
 call. To do this, the primitive is extended with an ``IfFail``: argument. For example, ``_AsObject``
 becomes ``_AsObjectIfFail``:, and ``_IntAdd``: becomes ``_IntAdd:IfFail:``.
 
-		::
+::
 
-				> *3 _IntAdd: ’a’ IfFail: [ | :error. :name |
-				(name, ’ failed with ’, error, ’.’) printLine. 0 ]*
-				_IntAdd: failed with badTypeError.
-				0 		The primitive returns the result of evaluating the failure block.
-				>
+  > *3 _IntAdd: ’a’ IfFail: [ | :error. :name |
+  (name, ’ failed with ’, error, ’.’) printLine. 0 ]*
+  _IntAdd: failed with badTypeError.
+  0        The primitive returns the result of evaluating the failure block.
+  >
 
 When a primitive fails, if the primitive call has an ``IfFail``: part, the message ``value:With:`` is
 sent to the ``IfFail:`` argument, passing two strings: the name of the primitive and an error string
@@ -209,31 +209,27 @@ Available primitives
 --------------------
 
 A complete list of primitives can be obtained by sending ``primitiveList`` to ``primitives``. Documentation
-for a primitive (such as ``_Clone``), can be obtained using at:, thus:
+for a primitive (such as ``_Clone``), can be obtained using at:, thus::
 
-		::
+    primitives at: ’_Clone’
 
-				primitives at: ’_Clone’
+A list of primitive names matching a pattern can be obtained thus::
 
-A list of primitive names matching a pattern can be obtained thus:
-
-		::
-
-				primitives match: ’_Memory*’
+    primitives match: ’_Memory*’
 
 Some points to note when browsing primitives:
 
-	* Since strings are special kinds of byte vectors, primitives taking byte vectors as arguments
-	  can usually take strings. The exception is that canonical strings cannot be passed to primitives
-	  that modify the object.
+  * Since strings are special kinds of byte vectors, primitives taking byte vectors as arguments
+    can usually take strings. The exception is that canonical strings cannot be passed to primitives
+    that modify the object.
 
-	* Integer arithmetic primitives take integer receivers and arguments; floating-point arithmetic
-	  primitives take floating-point receivers and arguments.
+  * Integer arithmetic primitives take integer receivers and arguments; floating-point arithmetic
+    primitives take floating-point receivers and arguments.
 
-	* All comparison primitives return either true or false. Integer comparison primitives take integer
-	  receivers and arguments; floating-point comparison primitives take floating-point receivers
-	  and arguments.
+  * All comparison primitives return either true or false. Integer comparison primitives take integer
+    receivers and arguments; floating-point comparison primitives take floating-point receivers
+    and arguments.
 
-	* The receiver of a mirror primitive must be a mirror (unless otherwise noted)
+  * The receiver of a mirror primitive must be a mirror (unless otherwise noted)
 
 

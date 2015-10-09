@@ -12,15 +12,13 @@ how to create a default object world by reading in the Self source code distribu
 
 To create the default object world, change your current working directory to the ``objects`` subdirectory of the Self source release and follow these steps:
 
-1. Start the Self VM:
+1. Start the Self VM::
 
-    ::
+    % Self
+    Self Virtual Machine Version 4.1.13, Sat 04 Jan 14 12:17:37 Mac OS X i386 (4.4-268-g58a0717)
+    Copyright 1989-2003: The Self Group (type _Credits for credits)
 
-        % Self
-        Self Virtual Machine Version 4.1.13, Sat 04 Jan 14 12:17:37 Mac OS X i386 (4.4-268-g58a0717)
-        Copyright 1989-2003: The Self Group (type _Credits for credits)
-
-        VM#
+    VM#
 
 2. (Optional, but recommended.) Start the spy so you can watch the world fill up with objects:
 
@@ -30,7 +28,7 @@ To create the default object world, change your current working directory to the
 
     .. note::
 
-        you must use the primitive to do this because the world is empty
+        You must use the primitive to do this because the world is empty.
 
 3. Read in the default world. To do this, ask Self to read expressions from a file:
 
@@ -79,4 +77,3 @@ To create the default object world, change your current working directory to the
 
         desktop
         "Self 1"
-

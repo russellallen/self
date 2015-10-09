@@ -1,28 +1,28 @@
 I/O and Unix
 ============
 
-		::
+::
 
-				oddball
-					unix
-				clonable
-					proxy
-						unixFile (mixes in traits unixFile currentOsVariant)
+  oddball
+      unix
+  clonable
+      proxy
+          unixFile (mixes in traits unixFile currentOsVariant)
 
 
 .. warning::
-   This page is out of date for Self 4.5.
+    This page is out of date for Self 4.5.
 
-   Start looking at the object ``os`` instead of ``unix``.
+    Start looking at the object ``os`` instead of ``unix``.
 
 .. note::
-   If reading from ``stdin``, the ``prompt`` object may interfere with your
-   code by stealing input from you.  To avoid this, wrap calls in
-   ``prompt suspendWhile: [ ]``, for example:
+    If reading from ``stdin``, the ``prompt`` object may interfere with your
+    code by stealing input from you.  To avoid this, wrap calls in
+    ``prompt suspendWhile: [ ]``, for example::
 
-   ``prompt suspendWhile: [ stdin readLine printLine ]``
+      prompt suspendWhile: [ stdin readLine printLine ]
 
-   which will read a line from the stdin and echo it to stdout.
+    which will read a line from the stdin and echo it to stdout.
 
 
 The oddball object ``unix`` provides access to selected Unix system calls. The most common calls

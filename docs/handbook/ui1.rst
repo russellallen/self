@@ -36,7 +36,7 @@ and when it asks you::
   Load UI1 (X11 only)? (y/N)
   >
 
-answer `y`. When the World has built, save it at the prompt by doing:
+answer `y`. When the World has built, save it at the prompt by doing::
 
   save
   quitNoSave

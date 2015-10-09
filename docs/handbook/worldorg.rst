@@ -10,7 +10,7 @@ in the context of the lobby. That is, the lobby is the receiver of all messages 
 expressions in the script. To refer to some existing object in a script, the object must be accessible
 by sending a message to the lobby. For example, the expression::
 
-					_AddSlots: ( | newObject = ( | entries <- list copy ... | ) | )
+  _AddSlots: ( | newObject = ( | entries <- list copy ... | ) | )
 
 requires that the message ``list`` be understood by the lobby (the implicit receiver of the message)
 so that the ``entries`` slot of the new object can be initialized. The lobby slots ``traits``, ``globals``,
@@ -27,14 +27,14 @@ Names and Paths
 For convenience, the lobby’s namespace is broken into three pieces, implemented as separate objects
 rooted at the lobby:
 
-	traits
-		objects that encapsulate shared behavior. Typically, each prototype object has an associated traits object of the same name that describes the shared part of its behavior.
+  traits
+    objects that encapsulate shared behavior. Typically, each prototype object has an associated traits object of the same name that describes the shared part of its behavior.
 
-	globals
-		prototypical objects and one-of-a-kind objects (“oddballs”)
+  globals
+    prototypical objects and one-of-a-kind objects (“oddballs”)
 
-	mixins
-		small, parentless bundles of behavior designed to be “mixed into” some other object
+  mixins
+    small, parentless bundles of behavior designed to be “mixed into” some other object
 
 Each of these namespace objects is categorized to aid navigation.
 

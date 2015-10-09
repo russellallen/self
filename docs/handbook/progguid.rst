@@ -56,9 +56,9 @@ and only if their reflectees are identical.
 
 In short, to maximize the opportunities for code reuse, the programmer should:
 
-	* avoid reflection when possible,
-	* avoid depending on object identity except as a hint, and
-	* use mirrors to make reflection explicit when it is necessary.
+    * avoid reflection when possible,
+    * avoid depending on object identity except as a hint, and
+    * use mirrors to make reflection explicit when it is necessary.
 
 Objects Have Many Roles
 =======================
@@ -101,28 +101,24 @@ Inline Objects
 An inline object is an object that is nested in the code of a method object. The inline object is usually
 intended for localized use within a program. For example, in a finite state machine implementation,
 the state of the machine might be encoded in a selector that would be sent to an inline object
-to select the behavior for the next state transition:
+to select the behavior for the next state transition::
 
-		::
-
-				state sendTo: (|
-						inComment: c = ( c = '"' ifTrue: [state: 'inCode']. self ).
-						inCode: c = ( c = '"' ifTrue: [state: 'inComment']
-								False: ... )
-					|)
-					With: nextChar
+    state sendTo: (|
+            inComment: c = ( c = '"' ifTrue: [state: 'inCode']. self ).
+            inCode: c = ( c = '"' ifTrue: [state: 'inComment']
+                    False: ... )
+        |)
+        With: nextChar
 
 In this case, the inline object is playing the role of a case statement.
 
 Another use of inline objects is to return multiple values from a method, as discussed in section
 `How to Return Multiple Values`_. Yet another use of inline objects is to parameterize the behavior of some other object. For example,
 the predicate used to order objects in a *priorityQueue* can be specified using an inline
-object:
+object::
 
-		::
-
-			queue: priorityQueue copyRemoveAll.
-			queue sorter: (| element: e1 Precedes: e2 = ( e1 > e2 ) |).
+    queue: priorityQueue copyRemoveAll.
+    queue sorter: (| element: e1 Precedes: e2 = ( e1 > e2 ) |).
 
 (A block cannot be used here because the current implementation of Self does not support non-
 LIFO blocks, and the sorter object may outlive the method that creates it). There are undoubtedly
@@ -170,11 +166,9 @@ descendant objects. Put another way: Self cannot distinguish those objects playi
 classes from those playing the role of instances.
 
 The most prominent manifestation of this problem crops up in object printing. Suppose one wishes
-to provide the following printString method for all point objects:
+to provide the following printString method for all point objects::
 
-		::
-
-			printString = ( x printString, ’@’, y printString )
+    printString = ( x printString, ’@’, y printString )
 
 Like other behavior that applies to all points, the method should be put in point traits. But what
 happens if ``printString`` is sent to the object ``traits point``? The ``printString`` method is
@@ -199,91 +193,75 @@ How to Return Multiple Values
 
 Sometimes it is natural to think of a method as returning several values, even though Self only
 allows a method to return a single object. There are two ways to simulate methods that return
-multiple values. The first way is to use an inlined object. For example, the object:
+multiple values. The first way is to use an inlined object. For example, the object::
 
-		::
+    (| p* = lobby. lines. words. characters |)
 
-			(| p* = lobby. lines. words. characters |)
+could be used to package the results of a text processing method into a single result object::
 
-could be used to package the results of a text processing method into a single result object:
+    count = (
+        | r = (| p* = lobby. lines. words. characters |) ... |
+        ...
+        r: r copy.
+        r lines: lCount. r words: wCount. r characters: cCount.
+        r )
 
-		::
+.. note::
 
-			count = (
-				| r = (| p* = lobby. lines. words. characters |) ... |
-				...
-				r: r copy.
-				r lines: lCount. r words: wCount. r characters: cCount.
-				r )
-
-		.. note::
-
-			that the inline object prototype inherits copy from the lobby. If one omitted its parent slot p, one would have to
-			send it the _Clone primitive to copy it. It is considered bad style, however, to send a primitive directly, rather than calling
-			the primitive’s wrapper method.
+    that the inline object prototype inherits copy from the lobby. If one omitted its parent slot p, one would have to
+    send it the _Clone primitive to copy it. It is considered bad style, however, to send a primitive directly, rather than calling
+    the primitive’s wrapper method.
 
 The sender can extract the various return values from the result object by name.
 
-The second way is to pass in one block for each value to be returned. For example:
+The second way is to pass in one block for each value to be returned. For example::
 
-		::
-
-				countLines:[| :n | lines: n ]
-					Words:[| :n | words: n ]
-					Characters:[| :n | characters: n ]
+    countLines:[| :n | lines: n ]
+        Words:[| :n | words: n ]
+        Characters:[| :n | characters: n ]
 
 Each block simply stores its argument into the a local variable for later use. The
 ``countLines:Words:Characters:`` method would evaluate each block with the appropriate
-value to be returned:
+value to be returned::
 
-		::
-
-				countLines: lb Words: wb Characters: cb = (
-					...
-					lb value: lineCount.
-					wb value: wordCount.
-					cb value: charCount.
-					...
+    countLines: lb Words: wb Characters: cb = (
+        ...
+        lb value: lineCount.
+        wb value: wordCount.
+        cb value: charCount.
+        ...
 
 Substituting Values for Blocks
 ==============================
 
 The lobby includes behavior for the block evaluation messages. Thus, any object that inherits from
 the lobby can be passed as a parameter to a method that expects a block—the object behaves like
-a block that evaluates that object. For example, one may write:
+a block that evaluates that object. For example, one may write::
 
-		::
+    x >= 0 ifTrue: x False: x negate
 
-				x >= 0 ifTrue: x False: x negate
+rather than::
 
-rather than:
+    x >= 0 ifTrue: [ x ] False: [ x negate ]
 
-		::
+.. note::
 
-				x >= 0 ifTrue: [ x ] False: [ x negate ]
-
-		.. note::
-
-				however, that Self evaluates all arguments before sending a message. Thus, in the first case
-				“x negate” will be evaluated regardless of the value of x, even though that argument will not be
-				used if x is nonnegative. In this case, it doesn’t matter, but if “x negate” had side effects, or if it
-				were very expensive, it would be better to use the second form.
+        however, that Self evaluates all arguments before sending a message. Thus, in the first case
+        “x negate” will be evaluated regardless of the value of x, even though that argument will not be
+        used if x is nonnegative. In this case, it doesn’t matter, but if “x negate” had side effects, or if it
+        were very expensive, it would be better to use the second form.
 
 In a similar vein, blocks inherit default behavior that allows one to provide a block taking fewer
 arguments than expected. For example, the collection iteration message ``do:`` expects a block taking
 two arguments: a collection element and the key at which that element is stored. If one is only
 interested in the elements, not the keys, one can provide a block taking only one argument and the
-second block argument will simply be ignored. That is, you can write:
+second block argument will simply be ignored. That is, you can write::
 
-		::
+    myCollection do: [| :el | el printLine]
 
-				myCollection do: [| :el | el printLine]
+instead of::
 
-instead of:
-
-		::
-
-				myCollection do: [| :el. :key | el printLine]
+    myCollection do: [| :el. :key | el printLine]
 
 ``nil`` Considered Naughty
 ==========================
@@ -293,15 +271,13 @@ initializes any uninitialized slots to this value. In Lisp, many programs test f
 of a list, or an empty slot in a hash table, or any other undefined value. There is a better way in
 Self. Instead of testing an object’s identity against ``nil``, define a new object with the appropriate
 behavior and simply send messages to this object; Self’s dynamic binding will do the rest. For example,
-in a graphical user interface, the following object might be used instead of nil:
+in a graphical user interface, the following object might be used instead of nil::
 
-		::
-
-				nullGlyph = (|
-						display = ( self ).
-						boundingBox = (0@0) # (0@0).
-						mouseSensitive = false.
-				|)
+    nullGlyph = (|
+            display = ( self ).
+            boundingBox = (0@0) # (0@0).
+            mouseSensitive = false.
+    |)
 
 To make it easier to avoid nil, the methods that create new vectors allow you to supply an alternative
 to ``nil`` as the initial value for the new vector’s elements (e.g., ``copySize:FillingWith:``).

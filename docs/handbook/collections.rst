@@ -1,11 +1,11 @@
 Collections
 ===========
 
-	::
+::
 
-		clonable
-			collection
-				... collection hierarchy ...
+    clonable
+        collection
+            ... collection hierarchy ...
 
 Collections are containers that hold zero or more other objects. In Self, collections behave as if
 they have a key associated with each value in the collection. Collections without an obvious key,
@@ -33,16 +33,16 @@ Modules: collection (abstract collection behavior)
 Indexable Collections
 ---------------------
 
-	::
+::
 
-		collection
-			indexable
-				mutableIndexable
-					byteVector
-						...the string hierarchy
-					sequence
-						sortedSequence
-					vector
+    collection
+        indexable
+            mutableIndexable
+                byteVector
+                    ...the string hierarchy
+                sequence
+                    sortedSequence
+                vector
 
 Indexable collections allow random access to their elements via keys that are integers. All sequences
 and vectors are indexable. The message ``at:`` is used to retrieve an element of an indexable collection
@@ -54,15 +54,15 @@ Modules: indexable, abstractString, vector, sequence, sortedSequence
 Strings, Characters, and Paragraphs
 -----------------------------------
 
-	::
+::
 
-		collection
-			...
-			byteVector
-				string
-					mutableString
-					immutableString
-						canonicalString
+    collection
+        ...
+        byteVector
+            string
+                mutableString
+                immutableString
+                    canonicalString
 
 A string is a vector whose elements are character objects. There are three kinds of concrete string:
 immutable strings, mutable strings and canonical strings. ``traits string`` defines the behavior
@@ -93,14 +93,14 @@ Module: string
 Unordered Sets and Dictionaries
 -------------------------------
 
-	::
+::
 
-		collection
-			setOrDictionary
-				set
-					sharedSet
-				dictionary
-					sharedDictionary
+    collection
+        setOrDictionary
+            set
+                sharedSet
+            dictionary
+                sharedDictionary
 
 There are two implementations of sets and dictionaries in the system. The one described in this
 section is based on hash tables. The one discussed in the following section is based on sorted binary
@@ -124,16 +124,16 @@ Modules: setAndDictionary, sharedSetAndDictionary
 Tree-Based Sets and Dictionaries
 --------------------------------
 
-	::
+::
 
-		collection
-			tree
-				treeNodes abstract
-					treeNodes bag
-					treeNodes set
-				emptyTrees abstract
-					emptyTrees bag
-					emptyTrees set
+    collection
+        tree
+            treeNodes abstract
+                treeNodes bag
+                treeNodes set
+            emptyTrees abstract
+                emptyTrees bag
+                emptyTrees set
 
 ``treeSet`` and ``treeBag`` implement sorted collections using binary trees. The set variant ignores
 duplicates, while the bag variant does not. Tree sets and bags allow both explicit and implicit keys
@@ -159,11 +159,11 @@ Modules: tree
 Lists and PriorityQueues
 ------------------------
 
-	::
+::
 
-		collection
-			list
-			priorityQueue
+    collection
+        list
+        priorityQueue
 
 A list is an unkeyed, circular, doubly-linked list of objects. Additions and removals at either end
 are efficient, but removing an object in the middle is less so, as a linear search is involved.
@@ -177,16 +177,16 @@ Modules: list. priorityQueue
 Constructing and Concatenating Collections
 ------------------------------------------
 
-	::
+::
 
-		clonable
-			collector
+    clonable
+        collector
 
 Two kinds of objects play supporting roles for collections. A ``collector`` object is created using
 the & operator (inherited from ``defaultBehavior``), and represents a collection under construction.
 The & operator provides a concise syntax for constructing small collections. For example::
 
-		(1 & ’abc’ & x) asList
+    (1 & ’abc’ & x) asList
 
 constructs a list containing an integer, a string, and the object x. A ``collector`` object is not itself
 a collection; it is converted into one using a conversion message such as ``asList``, ``asVector``, or

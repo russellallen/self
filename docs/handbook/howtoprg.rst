@@ -722,6 +722,8 @@ enough information, and a variety of means have to be used. As shown in the flow
 ..  figure:: images/Pgm_Env_Image31.*
   :scale: 90
 
+|
+
 * Sometimes the programmer does not want to store the actual contents of a slot, but instead
   wants to store an initialization expression. This intention is captured with another annotation
   on a slot: each slot can either be annotated ``Follow Slot`` or ``Initialize To Expression``

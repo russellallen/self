@@ -1,29 +1,29 @@
 Mirrors
 =======
 
-	::
+::
 
-		collection
-			mirror
-				mirrors smallInt
-				mirrors float
-				mirrors vectorish
-					mirrors vector
-					mirrors byteVector
-						mirrors canonicalString
-						mirrors mirror
-				mirrors block
-				mirrors method
-				mirrors blockMethod
-					mirrors activation liveOnes
-						mirrors activation
-							mirrors deadActivation
-							mirrors methodActivation
-							mirrors blockMethodActivation
-				mirrors process
-				mirrors assignment
-				mirrors slots
-				mirrors profiler
+    collection
+        mirror
+            mirrors smallInt
+            mirrors float
+            mirrors vectorish
+                mirrors vector
+                mirrors byteVector
+                    mirrors canonicalString
+                    mirrors mirror
+            mirrors block
+            mirrors method
+            mirrors blockMethod
+                mirrors activation liveOnes
+                    mirrors activation
+                        mirrors deadActivation
+                        mirrors methodActivation
+                        mirrors blockMethodActivation
+            mirrors process
+            mirrors assignment
+            mirrors slots
+            mirrors profiler
 
 Mirrors allow programs to examine and manipulate objects. (Mirrors get their name from the fact
 that a program can use a mirror to examine—that is, reflect upon—itself.) A mirror on an object x

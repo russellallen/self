@@ -1,13 +1,13 @@
 Foreign Objects
 ===============
 
-	::
+::
 
-			clonable
-				proxy
-					fctProxy
-						foreignFct
-				foreignCode
+    clonable
+        proxy
+            fctProxy
+                foreignFct
+        foreignCode
 
 The low level aspects of interfacing with code written in other languages (via C or C++ glue code)
 are described in the VM Reference Manual. A number of objects in the Self world are used to interface

@@ -80,20 +80,20 @@ or ’``delegated``’), the directed resend parent name or the delegatee (0 if 
 applicable), the sending method holder, and a vector containing the arguments to the message, if
 any.
 
-		``undefinedSelector:Type:Delegatee:MethodHolder:Arguments``:
-				The receiver does not understand the message: no slot matching the selector can be found in the receiver or its ancestors.
+  ``undefinedSelector:Type:Delegatee:MethodHolder:Arguments``:
+    The receiver does not understand the message: no slot matching the selector can be found in the receiver or its ancestors.
 
-		``ambiguousSelector:Type:Delegatee:MethodHolder:Arguments``:
-				There is more than one slot matching the selector.
+  ``ambiguousSelector:Type:Delegatee:MethodHolder:Arguments``:
+    There is more than one slot matching the selector.
 
-		``missingParentSelector:Type:Delegatee:MethodHolder:Arguments``:
-				The parent slot through which the resend should have been directed was not found in the sending method holder.
+  ``missingParentSelector:Type:Delegatee:MethodHolder:Arguments``:
+    The parent slot through which the resend should have been directed was not found in the sending method holder.
 
-		``mismatchedArgumentCountSelector:Type:Delegatee:MethodHolder:Arguments``:
-				The number of arguments supplied to the _Perform primitive does not match the number of arguments required by the selector.
+  ``mismatchedArgumentCountSelector:Type:Delegatee:MethodHolder:Arguments``:
+    The number of arguments supplied to the _Perform primitive does not match the number of arguments required by the selector.
 
-		``performTypeErrorSelector:Type:Delegatee:MethodHolder:Arguments``:
-				The first argument to the _Perform primitive (the selector) wasn’t a canonical string.
+  ``performTypeErrorSelector:Type:Delegatee:MethodHolder:Arguments``:
+    The first argument to the _Perform primitive (the selector) wasn’t a canonical string.
 
 These error messages are just like any other message. Therefore, it is possible that the object P
 causing the error (which is being sent the appropriate error message) does not understand the error
@@ -131,12 +131,12 @@ An example
 
 Here is an expression that produces an error in the current system:
 
-		::
+::
 
-			“Self 7” 100000 factorial
-			The stack has grown too big.
-			(Self limits stack sizes, and cannot resume processes with stack overflows.)
-			To debug type “attach” or to show stack type “zombies first printError”.
+  “Self 7” 100000 factorial
+  The stack has grown too big.
+  (Self limits stack sizes, and cannot resume processes with stack overflows.)
+  To debug type “attach” or to show stack type “zombies first printError”.
 
 The error arose because the recursive method factorial exceeded the size allocated for the process
 stack which resulted in a stack overflow.
@@ -149,18 +149,18 @@ Lookup errors
 Lookup errors occur when an object does not understand a message that is sent to it. How the actual
 message lookup is done is described in the Language Reference Manual.
 
-		``No ’foo’ slot found in shell <0>.``
-				The lookup found no slot matching the selector ``foo``.
+  ``No ’foo’ slot found in shell <0>.``
+    The lookup found no slot matching the selector ``foo``.
 
-		|			``More than one ’system’ slot was found in shell <0>.``
-		|  		``The matching slots are: oddballs <6> and prototypes <7>.``
+  |  ``More than one ’system’ slot was found in shell <0>.``
+  |  ``The matching slots are: oddballs <6> and prototypes <7>.``
 
-				The lookup found two matching ``system`` slots which means the message is ambiguous. The
-				error message also says where the matching slots were found.
+    The lookup found two matching ``system`` slots which means the message is ambiguous. The
+    error message also says where the matching slots were found.
 
-		``No ’fish’ delegatee slot was found in <a child of lobby> <12>.``
-				The lookup found no parent slot ``fish``, which was explicitly specified as the delegatee
-				of the message.
+  ``No ’fish’ delegatee slot was found in <a child of lobby> <12>.``
+    The lookup found no parent slot ``fish``, which was explicitly specified as the delegatee
+    of the message.
 
 Programmer defined errors
 =========================
@@ -168,8 +168,8 @@ Programmer defined errors
 These are explicitly raised in the Self program to report errors, e.g. sending the message ``first``
 to an empty list will cause such an error.
 
-		|		``Error: first is absent.``
-		|		``Receiver is: list <7>.``
+  |  ``Error: first is absent.``
+  |  ``Receiver is: list <7>.``
 
 Use the selectors ``error:`` and ``error:Arguments:`` to raise a programmer defined error.
 
@@ -179,16 +179,16 @@ Primitive errors
 Primitive failures occur when a primitive cannot perform the requested operation, for example, because
 of a missing or invalid argument.
 
-		|		``badTypeError: the ’_IntAdd:’ primitive failed.``
-		|		``Its receiver was shell <6>.``
+  |  ``badTypeError: the ’_IntAdd:’ primitive failed.``
+  |  ``Its receiver was shell <6>.``
 
 The primitive failed with ``badTypeError`` because the shell in not an integer.
 
-		``The selector 12 could not be sent to shell because it is not a string.``
-				The primitive ``_Perform`` expects a string as its first argument.
+  ``The selector 12 could not be sent to shell because it is not a string.``
+    The primitive ``_Perform`` expects a string as its first argument.
 
-		``The selector ’add:’ could not be sent to shell <0> because it does not take 2 arguments.``
-				The primitive ``_Perform`` received the wrong number of arguments.
+  ``The selector ’add:’ could not be sent to shell <0> because it does not take 2 arguments.``
+    The primitive ``_Perform`` received the wrong number of arguments.
 
 There are many other kinds of possible primitive errors.
 
@@ -197,19 +197,19 @@ Nonrecoverable process errors
 
 Errors that stop a process from continuing execution are referred to as nonrecoverable errors.
 
-		|		The stack has grown too big.
-		|		(Self 4.0 limits stack sizes, and cannot resume processes with stack
-		|		overflows.)
+  |  The stack has grown too big.
+  |  (Self 4.0 limits stack sizes, and cannot resume processes with stack
+  |  overflows.)
 
-				A stack overflow error occurs because the current version of Self allocates a
-				fixed size stack for each process, and the stack cannot be expanded.
+    A stack overflow error occurs because the current version of Self allocates a
+    fixed size stack for each process, and the stack cannot be expanded.
 
-		|		Self 4.0 cannot run a block after its enclosing method has returned.
-		|		(Self cannot resume this process, either.)
+  |  Self 4.0 cannot run a block after its enclosing method has returned.
+  |  (Self cannot resume this process, either.)
 
-				This error occurs if a block is executed after its lexically enclosing method has returned.
-				This is called a “non-LIFO” block. Non-LIFO blocks are not supported by
-				the current version of Self.
+    This error occurs if a block is executed after its lexically enclosing method has returned.
+    This is called a “non-LIFO” block. Non-LIFO blocks are not supported by
+    the current version of Self.
 
 .. index::
    single:  fatal errors
@@ -220,16 +220,16 @@ Fatal errors
 In rare cases, the virtual machine may encounter a fatal error (e.g., a resource limit is exceeded or
 an internal error is discovered). When this happens, a short menu is displayed:
 
-		::
+::
 
-					VM Version: 4.0.5, Tue 27 Jun 95 13:35:49 Solaris 2.x (svr4)
-					Internal error: signal 11 code 3 addr 4 pc 0x1ac768.
-					Do you want to:
-					1) Quit Self (optionally attempting to write a snapshot)
-					2) Try to print the Self stack
-					3) Try to return to the Self prompt
-					4) Force a core dump
-					Your choice:
+    VM Version: 4.0.5, Tue 27 Jun 95 13:35:49 Solaris 2.x (svr4)
+    Internal error: signal 11 code 3 addr 4 pc 0x1ac768.
+    Do you want to:
+    1) Quit Self (optionally attempting to write a snapshot)
+    2) Try to print the Self stack
+    3) Try to return to the Self prompt
+    4) Force a core dump
+    Your choice:
 
 The first two lines help the Self implementors locate the problem. Printing the Self stack may
 provide more information about the problem but does not always work. Returning to the Self
@@ -334,7 +334,6 @@ description for each. Reading in the world rearranges the structure of the “ba
 
 .. figure:: images/Chapter_5_Figure_4.*
     :scale: 100
-    :align: left
 
     The initial Self world (part 2)
 
@@ -573,9 +572,9 @@ than Self. We will refer to such entities as *foreign objects* and *foreign rout
 would be to make a function found in a C library accessible in Self. Three steps are necessary to
 accomplish this:
 
-		* Write and compile a piece of “glue” code that specifies argument and result types for the foreign routine and how to convert between these types and Self objects.
-		* Link the resulting object code to the Self virtual machine.
-		* Create a function proxy object (actually a foreignFct object) that represents the routine in the Self world.
+	* Write and compile a piece of “glue” code that specifies argument and result types for the foreign routine and how to convert between these types and Self objects.
+	* Link the resulting object code to the Self virtual machine.
+	* Create a function proxy object (actually a foreignFct object) that represents the routine in the Self world.
 
 Each of these steps is described in detail in the following sections.
 
@@ -639,10 +638,10 @@ foreign routines. There is one wrapper per foreign routine. A wrapper takes a nu
 of type ``oop``, and returns an ``oop`` (``oop`` is the C++ type for “reference to Self object”). When a
 wrapper is executed, it performs the following steps:
 
-		1. Check that the arguments supplied have the correct types.
-		2. Convert the arguments from Self representation to the representation that the foreign routine needs.
-		3. Invoke the foreign routine on the converted arguments.
-		4. Convert the return value of the foreign routine to a Self object and return this as the Self level result.
+	1. Check that the arguments supplied have the correct types.
+	2. Convert the arguments from Self representation to the representation that the foreign routine needs.
+	3. Invoke the foreign routine on the converted arguments.
+	4. Convert the return value of the foreign routine to a Self object and return this as the Self level result.
 
 To make it easier to write glue code, a special purpose language has been designed for this. The
 result is that glue for a foreign routine will often consist of only a single line. The glue language is
@@ -650,11 +649,9 @@ implemented as a set of C++ preprocessor macros. Therefore, glue code is just a 
 kind of C++. Glue code can be in a file of its own, or – if it is glue for calling C++ routines – it can
 be in the same file as the foreign routines, and compiled with them.
 
-To make the definition of the glue language available, the file containing glue code must contain:
+To make the definition of the glue language available, the file containing glue code must contain::
 
-		::
-
-				# include "_glueDefs.c.incl"
+    # include "_glueDefs.c.incl"
 
 The file “_glueDefs.c.incl” includes a bunch of C++ header files that contain all the definitions
 necessary for the glue. Of the included files, “glueDefs.h” is probably the most interesting in this
@@ -689,28 +686,28 @@ stage process: first the ``.c`` file is compiled into a ``.o`` file which is the
 While the compilation is straightforward, several issues concerning the linking must be explained.
 
 **Linking**
-		Before a foreign routine can be called it must be linked to the Self virtual machine. The
-		linking can be done either statically, i.e. before Self is started, or dynamically, i.e. while Self is
-		running. The Self system employs both dynamic and static linking, but users should only use dynamic
-		linking, as static linking requires more understanding of the structure of the Virtual Machine.
-		The choice between dynamic and static linking involves a trade-off between safety and
-		flexibility as outlined in the following.
+    Before a foreign routine can be called it must be linked to the Self virtual machine. The
+    linking can be done either statically, i.e. before Self is started, or dynamically, i.e. while Self is
+    running. The Self system employs both dynamic and static linking, but users should only use dynamic
+    linking, as static linking requires more understanding of the structure of the Virtual Machine.
+    The choice between dynamic and static linking involves a trade-off between safety and
+    flexibility as outlined in the following.
 
 **Dynamic linking**
-		Dynamic linking has the advantage that it is done on demand, so only foreign routines that are actually
-		used in a particular session will be loaded and take up space. Debugging foreign routines is
-		also easier, especially if the dynamic linker supports unlinking. The main disadvantages with dynamic
-		linking is that more things can go wrong at run time. For example, if an object file containing
-		a foreign routine can not be found, a run time error occurs. The Sun OS dynamic linker, ld.so,
-		only handles dynamic libraries which explains why the second stage of glue translation is necessary.
+    Dynamic linking has the advantage that it is done on demand, so only foreign routines that are actually
+    used in a particular session will be loaded and take up space. Debugging foreign routines is
+    also easier, especially if the dynamic linker supports unlinking. The main disadvantages with dynamic
+    linking is that more things can go wrong at run time. For example, if an object file containing
+    a foreign routine can not be found, a run time error occurs. The Sun OS dynamic linker, ld.so,
+    only handles dynamic libraries which explains why the second stage of glue translation is necessary.
 
 **Static linking**
-		Static linking, the alternative that was not chosen for Self, has the advantage that it needs to be
-		done only once. The statically linked-in files will then be available for ever after. The main disadvantages
-		are that the linked-in files will always take up space whether used or not in a given Self
-		session, that the VM must be completely relinked every time new code is added, and that debugging
-		is harder because there is no way to unlink code with bugs in. For these reasons the following
-		examples all use dynamic linking.
+    Static linking, the alternative that was not chosen for Self, has the advantage that it needs to be
+    done only once. The statically linked-in files will then be available for ever after. The main disadvantages
+    are that the linked-in files will always take up space whether used or not in a given Self
+    session, that the VM must be completely relinked every time new code is added, and that debugging
+    is harder because there is no way to unlink code with bugs in. For these reasons the following
+    examples all use dynamic linking.
 
 .. index::
    single:  WHAT_GLUE
@@ -722,26 +719,24 @@ A simple glue example: calling a C function
 Suppose we have a C function that encrypts text strings in some fancy way. It takes two arguments,
 a string to encrypt and a key, and returns a string which is the result of the encryption. To use this
 function from Self, we write a line of C glue. Here is the entire file, “encrypt.c”, containing both
-the encryption function and the glue:
+the encryption function and the glue::
 
-		::
+    /* Make glue available by including it. */
+    # include "incls/_glueDefs.c.incl"
+    /* Naive encryption function. */
+    char *encrypt(char *str, int key) {
+        static char res[1000];
+        int i;
+        for (i = 0; str[i]; ++i)
+            res[i] = str[i] + key;
+        res[i] = ’\0’;
+        return res;
+    }
 
-				/* Make glue available by including it. */
-				# include "incls/_glueDefs.c.incl"
-				/* Naive encryption function. */
-				char *encrypt(char *str, int key) {
-					static char res[1000];
-					int i;
-					for (i = 0; str[i]; ++i)
-						res[i] = str[i] + key;
-					res[i] = ’\0’;
-					return res;
-				}
-
-				/* Make glue expand to full functions, not just prototypes. */
-				# define WHAT_GLUE FUNCTIONS
-					C_func_2(string,, encrypt, encrypt_glue,, string,, int,)
-				# undef WHAT_GLUE
+    /* Make glue expand to full functions, not just prototypes. */
+    # define WHAT_GLUE FUNCTIONS
+        C_func_2(string,, encrypt, encrypt_glue,, string,, int,)
+    # undef WHAT_GLUE
 
 A few words of explanation: the last three lines of this file contain the glue code. First defining
 ``WHAT_GLUE`` to be ``FUNCTIONS``, makes the following line expand into a full wrapper function (defining
@@ -750,34 +745,32 @@ prototype only). The line containing the macro ``C_func_2`` is the actual wrappe
 The “2” designates that ``encrypt`` takes 2 arguments. The meaning of the arguments, from left to
 right are:
 
-		* “string,”: specifies that encrypt returns a string argument.
-		* “encrypt”: name of function we are constructing wrapper for.
-		* “encrypt_glue”: name that we want the wrapper function to have.
-		* An empty argument signifying that encrypt is not to be passed a failure handle (explained later).
-		* “string,”: specifies that the first argument to encrypt is a string.
-		* “int,”: specifies that the second argument to encrypt is an int.
+    * “string,”: specifies that encrypt returns a string argument.
+    * “encrypt”: name of function we are constructing wrapper for.
+    * “encrypt_glue”: name that we want the wrapper function to have.
+    * An empty argument signifying that encrypt is not to be passed a failure handle (explained later).
+    * “string,”: specifies that the first argument to encrypt is a string.
+    * “int,”: specifies that the second argument to encrypt is an int.
 
 Having written this file, we now prepare a makefile to compile and link it. To do this, we can extend
 the makefile in ``objects/glue/{sun4,svr4}`` (depending on OS in use) and then run make.
 This results in the shared library file ``encrypt.so``. Finally, to try it out, we can type these commands
-(at the Self prompt or in the UI):
+(at the Self prompt or in the UI)::
 
-		::
+    > _AddSlotsIfAbsent: ( | encrypt | )
+    lobby
 
-					> _AddSlotsIfAbsent: ( | encrypt | )
-					lobby
+    > encrypt: ( foreignFct copyName: ’encrypt_glue’ Path: ’encrypt.so’ )
+    lobby
 
-					> encrypt: ( foreignFct copyName: ’encrypt_glue’ Path: ’encrypt.so’ )
-					lobby
+    > encrypt
+    <C++ function(encrypt_glue)>
 
-					> encrypt
-					<C++ function(encrypt_glue)>
+    > encrypt value: ’Hello Self’ With: 3
+    ’Khoor#Vhoi’
 
-					> encrypt value: ’Hello Self’ With: 3
-					’Khoor#Vhoi’
-
-					> encrypt value: ’Khoor#Vhoi’ With: -3
-					’Hello Self’
+    > encrypt value: ’Khoor#Vhoi’ With: -3
+    ’Hello Self’
 
 Comparing the signature for the function encrypt with the arguments to the ``C_func_2`` macro it
 is clear that there is a straightforward mapping between the two. One day we hope to find the time
@@ -795,9 +788,9 @@ C glue
 
 C glue supports accessing C functions and data from Self. There are three main parts of C glue:
 
-		* Calling functions.
-		* Reading/assigning global variables.
-		* Reading/assigning a component in a struct that is represented by a proxy object in Self.
+    * Calling functions.
+    * Reading/assigning global variables.
+    * Reading/assigning a component in a struct that is represented by a proxy object in Self.
 
 In addition, C++ glue for creating objects can be used to create C structs (see section `C++ glue`_). The
 following sections describe each of these parts of C glue.
@@ -818,57 +811,49 @@ The macro ``C_func_N`` where N is 0, 1, 2, ... is used to “glue in” a C func
 the number of arguments that should be given *at the Self level*, when calling the function. This
 number may be different from the number of arguments that the C function takes since, e.g., some
 argument conversions (see below) produce two C arguments from one Self object. Here is the
-general syntax for ``C_func_N``:
+general syntax for ``C_func_N``::
 
-		::
+    C_func_N(res_cnv,res_aux, fexp, gfname, fail_opt, c0,a0, ... cN,aN)
 
-					C_func_N(res_cnv,res_aux, fexp, gfname, fail_opt, c0,a0, ... cN,aN)
+Compare this with the glue that was used in the encrypt example in section `A simple glue example: calling a C function`_::
 
-Compare this with the glue that was used in the encrypt example in section `A simple glue example: calling a C function`_:
-
-		::
-
-					C_func_2(string,, encrypt, encrypt_glue,, string,, int,)
+    C_func_2(string,, encrypt, encrypt_glue,, string,, int,)
 
 The meaning of each argument to ``C_func_N`` is as follows:
 
-		* ``res_cnv,res_aux``: these two arguments form a “conversion pair” that specifies how the result that the function returns is converted to a Self object. In the ``encrypt`` example, where the function returns a null terminated string, ``res_cnv`` has the value ``string``, and ``res_aux`` is empty. :numref:`tableArgumentConversions` lists all the possible values for the ``res_cnv,res_aux pair``.
-		* ``fexp`` is a C expression which evaluates to the function that is being glued in. In the simplest case, such as in the ``encrypt`` example, the expression is the name of a function, but in general it may be any C expression, involving function pointers etc., which in a global context evaluates to a function.
-		* ``gfname``: the name of the function which the ``C_func_N`` macro expands into. In the ``encrypt`` example, the convention of appending ``_glue`` to the C function’s name was used. When accessing a glued-in function from Self, the value of ``gfname`` is the name that must be used.
-		* ``fail_opt``: there are two possible values for this argument. It can be empty (as in the example) or it can be ``fail``. In the latter case, the C function being called is passed an additional argument that will be the last argument and have type ``“void *”``. Using this argument, the C function may abort its execution and raise an exception. The result is that the “IfFail block” in Self will be invoked.
-		* ``ci,ai``: each of these pairs describes how to convert a Self level argument to one or more C level arguments. For example, in the glue for ``encrypt``, ``c0``,``a0`` specifies that the first argument to ``encrypt`` is a string. Likewise ``c1``,``a1`` specifies that the second argument is an integer. Note that in both these cases, the a-part of the conversion is empty. :numref:`tableArgumentConversions` lists all the possible values for the ``ci``,``ai`` pair.
+    * ``res_cnv,res_aux``: these two arguments form a “conversion pair” that specifies how the result that the function returns is converted to a Self object. In the ``encrypt`` example, where the function returns a null terminated string, ``res_cnv`` has the value ``string``, and ``res_aux`` is empty. :numref:`tableArgumentConversions` lists all the possible values for the ``res_cnv,res_aux pair``.
+    * ``fexp`` is a C expression which evaluates to the function that is being glued in. In the simplest case, such as in the ``encrypt`` example, the expression is the name of a function, but in general it may be any C expression, involving function pointers etc., which in a global context evaluates to a function.
+    * ``gfname``: the name of the function which the ``C_func_N`` macro expands into. In the ``encrypt`` example, the convention of appending ``_glue`` to the C function’s name was used. When accessing a glued-in function from Self, the value of ``gfname`` is the name that must be used.
+    * ``fail_opt``: there are two possible values for this argument. It can be empty (as in the example) or it can be ``fail``. In the latter case, the C function being called is passed an additional argument that will be the last argument and have type ``“void *”``. Using this argument, the C function may abort its execution and raise an exception. The result is that the “IfFail block” in Self will be invoked.
+    * ``ci,ai``: each of these pairs describes how to convert a Self level argument to one or more C level arguments. For example, in the glue for ``encrypt``, ``c0``,``a0`` specifies that the first argument to ``encrypt`` is a string. Likewise ``c1``,``a1`` specifies that the second argument is an integer. Note that in both these cases, the a-part of the conversion is empty. :numref:`tableArgumentConversions` lists all the possible values for the ``ci``,``ai`` pair.
 
-*Handling failures*. Here is a slight modification of the encryption example to illustrate how the C function can raise an exception that causes the “IfFail block” to be invoked at the Self level:
+*Handling failures*. Here is a slight modification of the encryption example to illustrate how the C function can raise an exception that causes the “IfFail block” to be invoked at the Self level::
 
-		::
-
-				/* Make glue available by including it. */
-				# include "incls/_glueDefs.c.incl"
-				/* Naive encryption function. */
-				char *encrypt(char *str, int key, void *FH) {
-					static char res[1000];
-					int i;
-					if (key == 0) {
-						failure(FH, "key == 0 is identity map");
-						return NULL;
-					}
-					for (i = 0; str[i]; i++)
-						res[i] = str[i] + key;
-					res[i] = ’\0’;
-					return res;
-				}
-				/* Make glue expand to full functions, not just prototypes. */
-				# define WHAT_GLUE FUNCTIONS
-					C_func_2(string,, encrypt, encrypt_glue, fail, string,, int,)
-				# undef WHAT_GLUE
+    /* Make glue available by including it. */
+    # include "incls/_glueDefs.c.incl"
+    /* Naive encryption function. */
+    char *encrypt(char *str, int key, void *FH) {
+    	static char res[1000];
+    	int i;
+    	if (key == 0) {
+    		failure(FH, "key == 0 is identity map");
+    		return NULL;
+    	}
+    	for (i = 0; str[i]; i++)
+    		res[i] = str[i] + key;
+    	res[i] = ’\0’;
+    	return res;
+    }
+    /* Make glue expand to full functions, not just prototypes. */
+    # define WHAT_GLUE FUNCTIONS
+    	C_func_2(string,, encrypt, encrypt_glue, fail, string,, int,)
+    # undef WHAT_GLUE
 
 Observe that the ``fail_opt`` argument now has the value ``fail`` and that the ``encrypt`` function
-raises an exception, using ``failure``, if the key is 0. There are two ways to raise exceptions:
+raises an exception, using ``failure``, if the key is 0. There are two ways to raise exceptions::
 
-		::
-
-				extern "C" void failure(void *FH, char *msg);
-				extern "C" void unix_failure(void *FH, int err = -1);
+    extern "C" void failure(void *FH, char *msg);
+    extern "C" void unix_failure(void *FH, int err = -1);
 
 In both cases, the ``FH`` argument is the “failure handle” that was passed by the ``C_func_N`` macro.
 The second argument to ``failure`` is a string. It will be passed to the “IfFail block” in Self.
@@ -877,8 +862,8 @@ or is missing, the value of ``errno`` is used instead. The integer is interprete
 from which a corresponding string is constructed. The string is then, as for ``failure``, passed
 to the “IfFail block” at the call site in Self.
 
-		.. warning::
-				After calling ``failure`` or ``unix_failure`` a normal ``return`` must be done. The value returned (in the example ``NULL``) is ignored.
+.. warning::
+    After calling ``failure`` or ``unix_failure`` a normal ``return`` must be done. The value returned (in the example ``NULL``) is ignored.
 
 .. index::
    single:  C_set_var
@@ -891,26 +876,22 @@ Reading and assigning global variables
 
 Reading the value of a global variable is done using the ``C_get_var`` macro. Assigning a value to
 a global variable is done using ``C_set_var``. Both macros expand into a C++ function that converts
-between Self and C representation, and reads or assigns the variable. Here is the general syntax:
+between Self and C representation, and reads or assigns the variable. Here is the general syntax::
 
-		::
+    C_get_var(cnvt_res,aux_res, expr, gfname)
+    C_set_var(var, expr_c0,expr_a0, gfname)
 
-				C_get_var(cnvt_res,aux_res, expr, gfname)
-				C_set_var(var, expr_c0,expr_a0, gfname)
+A concrete example is reading the value of the variable ``errno``, which can be done using::
 
-A concrete example is reading the value of the variable ``errno``, which can be done using:
-
-		::
-
-				C_get_var(int,, errno, get_errno_glue)
+    C_get_var(int,, errno, get_errno_glue)
 
 The meaning of the each argument is:
 
-		* ``cnvt_res``,``aux_res``: how to convert the value of the global variable that is being read to a Self object. In the ``errno`` example, ``cnvt_res`` is ``int`` and ``aux_res`` is empty, since the type of ``errno`` is ``int``. The ``cnvt_res``,``aux_res`` can be any one of the result conversions found in :numref:`tableArgumentConversions`.
-		* ``expr`` is the variable whose value is being read. In the ``errno`` example, it is simply ``errno``, but in general, it may actually be any expression that is valid in a global context, even an expression involving function calls.
-		* ``gfname``: the name of the C++ function that ``C_get_var`` or ``C_set_var`` expands into.
-		* ``var`` is the name of a global variable that a value is assigned to. In general, ``var``, may be any expression that in a global context evaluates to an l-value.
-		* ``expr_c0``,``expr_a0``: when assigning to a variable, the value it is assigned is obtained by converting a Self object to a C value. The ``expr_c0``,``expr_a0`` pair, which can be any one of the argument conversions listed in :numref:`tableArgumentConversions`, specifies how to do this conversion.
+    * ``cnvt_res``,``aux_res``: how to convert the value of the global variable that is being read to a Self object. In the ``errno`` example, ``cnvt_res`` is ``int`` and ``aux_res`` is empty, since the type of ``errno`` is ``int``. The ``cnvt_res``,``aux_res`` can be any one of the result conversions found in :numref:`tableArgumentConversions`.
+    * ``expr`` is the variable whose value is being read. In the ``errno`` example, it is simply ``errno``, but in general, it may actually be any expression that is valid in a global context, even an expression involving function calls.
+    * ``gfname``: the name of the C++ function that ``C_get_var`` or ``C_set_var`` expands into.
+    * ``var`` is the name of a global variable that a value is assigned to. In general, ``var``, may be any expression that in a global context evaluates to an l-value.
+    * ``expr_c0``,``expr_a0``: when assigning to a variable, the value it is assigned is obtained by converting a Self object to a C value. The ``expr_c0``,``expr_a0`` pair, which can be any one of the argument conversions listed in :numref:`tableArgumentConversions`, specifies how to do this conversion.
 
 .. index::
    single:  C_get_comp
@@ -926,62 +907,54 @@ Reading and assigning struct components
 
 Reading the value of a struct component or assigning a value to it is similar to doing the same operations
 on a global variable. The difference is that the struct must somehow be specified. This is
-taken care of by the macros ``C_get_comp`` and ``C_set_comp``. The general syntax is:
+taken care of by the macros ``C_get_comp`` and ``C_set_comp``. The general syntax is::
 
-		::
-
-				C_get_comp(cnvt_res,aux_res, cnvt_strc,aux_strc, comp, gfname)
-				C_set_comp(cnvt_strc,aux_strc, comp, expr_c0,expr_a0, gfname)
+    C_get_comp(cnvt_res,aux_res, cnvt_strc,aux_strc, comp, gfname)
+    C_set_comp(cnvt_strc,aux_strc, comp, expr_c0,expr_a0, gfname)
 
 Here is an example, assigning to the sin_port field of a struct sockaddr_in (this struct is defined
-in /usr/include/netinet/in.h):
+in /usr/include/netinet/in.h)::
 
-		::
+    struct sockaddr_in {
+        short           sin_family;
+        u_short         sin_port;
+        struct in_addr  sin_addr;
+        char            sin_zero[8];
+    };
 
-				struct sockaddr_in {
-					short 			sin_family;
-					u_short 		sin_port;
-					struct in_addr 		sin_addr;
-					char 			sin_zero[8];
-				};
+The struct is represented by a proxy object::
 
-The struct is represented by a proxy object:
-
-		::
-
-				char *socks = "type seal for sockaddr_in proxies";
-				C_set_comp(proxy,(sockaddr_in *,socks), .sin_port, short,,set_sin_port_glue)
+    char *socks = "type seal for sockaddr_in proxies";
+    C_set_comp(proxy,(sockaddr_in *,socks), .sin_port, short,,set_sin_port_glue)
 
 The ``sockaddr_in`` example defines a function, ``set_sin_port_glue``, which can be called from
 Self. The function takes two arguments, the first being a proxy representing a ``sockaddr_in``
 struct, the second being a short integer. After converting types, ``set_sin_port_glue`` performs
-the assignment
+the assignment::
 
-		::
-
-				(*first_converted_arg).sin_port = second_converted_arg.
+    (*first_converted_arg).sin_port = second_converted_arg.
 
 In general the meaning of the ``C_get_comp`` and ``C_set_comp`` arguments is:
 
-	* ``cnvt_res``, ``aux_res``: how to convert the value of the component that is being read to a
-	  Self object. Any of the result conversions found in :numref:`tableArgumentConversions` may be applied.
+    * ``cnvt_res``, ``aux_res``: how to convert the value of the component that is being read to a
+      Self object. Any of the result conversions found in :numref:`tableArgumentConversions` may be applied.
 
-	* ``cnvt_strc``, ``aux_strc``: the conversion that is applied to produce a struct upon which the
-	  operation is performed. In the ``sin_port`` example, this conversion is a proxy conversion,
-	  implying that in Self, the struct whose ``sin_port`` component is assigned is represented by
-	  a proxy object. In general, any of the argument conversions from :numref:`tableArgumentConversions` that results in a
-	  pointer, may be used.
+    * ``cnvt_strc``, ``aux_strc``: the conversion that is applied to produce a struct upon which the
+      operation is performed. In the ``sin_port`` example, this conversion is a proxy conversion,
+      implying that in Self, the struct whose ``sin_port`` component is assigned is represented by
+      a proxy object. In general, any of the argument conversions from :numref:`tableArgumentConversions` that results in a
+      pointer, may be used.
 
-	* ``comp`` is the name of the component to be read or assigned. In the sin_port example, this
-	  name is ``“.sin_port”``. Note that it includes a “.”. This, e.g., allows handling pointers to
-	  int’s by pretending that it is a pointer to a struct and operating on a component with an
-	  empty name.
+    * ``comp`` is the name of the component to be read or assigned. In the sin_port example, this
+      name is ``“.sin_port”``. Note that it includes a “.”. This, e.g., allows handling pointers to
+      int’s by pretending that it is a pointer to a struct and operating on a component with an
+      empty name.
 
-	* ``gfname``: the name of the C++ function that ``C_get_comp`` or ``C_set_comp`` expands into.
+    * ``gfname``: the name of the C++ function that ``C_get_comp`` or ``C_set_comp`` expands into.
 
-	* ``expr_co``, ``expr_a0``: when assigning to a component, the value it is assigned is obtained by
-	  converting a Self object to a C value. The ``expr_co``, ``expr_a0`` pair, which can be any one
-	  of the argument conversions listed in :numref:`tableArgumentConversions`, specifies how to do this conversion.
+    * ``expr_co``, ``expr_a0``: when assigning to a component, the value it is assigned is obtained by
+      converting a Self object to a C value. The ``expr_co``, ``expr_a0`` pair, which can be any one
+      of the argument conversions listed in :numref:`tableArgumentConversions`, specifies how to do this conversion.
 
 .. index::
    single:  C++ glue
@@ -992,11 +965,11 @@ C++ glue
 Since C++ is a superset of C, all of C glue can be used with C++. In addition, C++ glue provides
 support for:
 
-	* Constructing objects using the new operator.
+    * Constructing objects using the new operator.
 
-	* Deleting objects using the delete operator.
+    * Deleting objects using the delete operator.
 
-	* Calling member functions on objects.
+    * Calling member functions on objects.
 
 Each of these parts will be explained in the following sections.
 
@@ -1012,58 +985,50 @@ Constructing objects
 In C++, objects are constructed using the new operator. Constructors may take arguments. The
 macros ``CC_new_N`` where N is a small integer, support calling constructors with or without arguments.
 Calling a constructor is similar to calling a function, so for additional explanation, please
-refer to section `Calling C functions`_. Here is the general syntax for constructing objects using C++ glue:
+refer to section `Calling C functions`_. Here is the general syntax for constructing objects using C++ glue::
 
-		::
+    CC_new_N(cnvt_res,aux_res, class, gfname, c0,a0, c1,a1, ... cN,aN)
 
-				CC_new_N(cnvt_res,aux_res, class, gfname, c0,a0, c1,a1, ... cN,aN)
+For example, to construct a ``sockaddr_in`` object, the following glue statement could be used::
 
-For example, to construct a ``sockaddr_in`` object, the following glue statement could be used:
-
-		::
-
-				CC_new_0(proxy,(sockaddr_in *,socks), sockaddr_in, new_sockaddr_in)
+    CC_new_0(proxy,(sockaddr_in *,socks), sockaddr_in, new_sockaddr_in)
 
 The meanings of the ``CC_new_N`` arguments are as follows:
 
-	* ``cnvt_res``, ``aux_res:`` the result of calling the constructor is an object pointer. The result
-	  conversion pair ``cnvt_res``, ``aux_res`` (see :numref:`tableArgumentConversions`), specifies how this pointer is converted
-	  to a Self object before being returned. In the ``sockaddr`` example, the proxy result conversion
-	  is used.
+    * ``cnvt_res``, ``aux_res:`` the result of calling the constructor is an object pointer. The result
+      conversion pair ``cnvt_res``, ``aux_res`` (see :numref:`tableArgumentConversions`), specifies how this pointer is converted
+      to a Self object before being returned. In the ``sockaddr`` example, the proxy result conversion
+      is used.
 
-	* ``class`` is the name of the class (or struct) that is being instantiated.
+    * ``class`` is the name of the class (or struct) that is being instantiated.
 
-	* ``gfname``: the name of the C++ function that the ``CC_new_N`` macro expands into.
+    * ``gfname``: the name of the C++ function that the ``CC_new_N`` macro expands into.
 
-	* ``ci``, ``ai``: if the constructor takes arguments, these arguments must be converted from Self
-	  representation to C++ representation. The arguments conversion pairs ``ci``, ``ai`` specify how
-	  each argument is converted. See :numref:`tableArgumentConversions` for a description of all argument conversions. In
-	  the sockaddr example, there are no arguments.
+    * ``ci``, ``ai``: if the constructor takes arguments, these arguments must be converted from Self
+      representation to C++ representation. The arguments conversion pairs ``ci``, ``ai`` specify how
+      each argument is converted. See :numref:`tableArgumentConversions` for a description of all argument conversions. In
+      the sockaddr example, there are no arguments.
 
 Deleting objects
 ----------------
 
 C++ objects can have destructors that are executed when the objects are deleted. To ensure that the
 destructor is called properly, the ``delete`` operator must know the type of the object being deleted.
-This is ensured by using the ``CC_delete`` macro, which has the following form:
+This is ensured by using the ``CC_delete`` macro, which has the following form::
 
-		::
-
-				CC_delete(cnvt_obj,aux_obj, gfname)
+    CC_delete(cnvt_obj,aux_obj, gfname)
 
 For example, to delete ``sockaddr_in`` objects (constructed as in the previous section), the
-``CC_delete`` macro should be used in this manner:
+``CC_delete`` macro should be used in this manner::
 
-		::
-
-				CC_delete(proxy,(sockaddr_in *,socks), delete_sockaddr_in)
+    CC_delete(proxy,(sockaddr_in *,socks), delete_sockaddr_in)
 
 In general, the meaning of the arguments given to ``CC_delete`` is:
 
-	* cnvt_obj,aux_obj: this pair can be any of the argument conversions found in :numref:`tableArgumentConversions`
-	  that produces a pointer to the object that will be deleted.
+    * cnvt_obj,aux_obj: this pair can be any of the argument conversions found in :numref:`tableArgumentConversions`
+      that produces a pointer to the object that will be deleted.
 
-	* gfname: the name of the C++ function that this invocation of ``CC_delete`` expands into.
+    * gfname: the name of the C++ function that this invocation of ``CC_delete`` expands into.
 
 Calling member functions
 ------------------------
@@ -1077,39 +1042,35 @@ references to numbered notes. The notes are found in the paragraphs following th
 Calling member functions is similar to calling “plain” functions, so please also refer to section
 `Calling C functions`_. The difference is that an additional object must be specified: the object upon which the
 member function is invoked (the receiver in Self terms). Calling a member function is accomplished
-using one of the macros
+using one of the macros::
 
-		::
-
-				CC_mber_N(cnvt_res,aux_res, cnvt_rec,aux_rec, mname, gfname,
-								fail_opt, c0,a0, c1,a1, ..., cN,aN)
+    CC_mber_N(cnvt_res,aux_res, cnvt_rec,aux_rec, mname, gfname,
+              fail_opt, c0,a0, c1,a1, ..., cN,aN)
 
 For example here is how to call the member function zock on a ``sockaddr_in`` object given by a
-proxy:
+proxy::
 
-		::
-
-				CC_mber_0(bool,, proxy,(sockaddr_in *,socks), zock, zock_glue,)
+    CC_mber_0(bool,, proxy,(sockaddr_in *,socks), zock, zock_glue,)
 
 The arguments to ``CC_mber_N`` are:
 
-* ``cnvt_res``, ``aux_res``: this pair, which can be any of the result conversions from :numref:`tableArgumentConversions`,
-  specifies how to convert the result of the member function before returning it to Self. For
-  example, the zock member function returns a boolean.
+    * ``cnvt_res``, ``aux_res``: this pair, which can be any of the result conversions from :numref:`tableArgumentConversions`,
+      specifies how to convert the result of the member function before returning it to Self. For
+      example, the zock member function returns a boolean.
 
-* ``cnvt_rec``, ``aux_rec``: the object on which the member function is invoked. Often this will
-  be a proxy conversion as in the ``zock`` example.
+    * ``cnvt_rec``, ``aux_rec``: the object on which the member function is invoked. Often this will
+      be a proxy conversion as in the ``zock`` example.
 
-* ``mname`` is the name of the member function. In general, it may be any expression, such that
-  ``receiver->mname`` evaluates to a function.
+    * ``mname`` is the name of the member function. In general, it may be any expression, such that
+      ``receiver->mname`` evaluates to a function.
 
-* ``gfname`` is the name of the C++ function that the ``CC_mber_N`` macro expands into.
+    * ``gfname`` is the name of the C++ function that the ``CC_mber_N`` macro expands into.
 
-* ``fail_opt``: whether or not to pass a failure handle to the member function (refer to section
-  `Calling C functions`_ for details).
+    * ``fail_opt``: whether or not to pass a failure handle to the member function (refer to section
+      `Calling C functions`_ for details).
 
-* ``ci``, ``ai``: these are argument conversion pairs specifying how to obtain the arguments for the
-  member function. Any conversion pair found in :numref:`tableArgumentConversions` may be used.
+    * ``ci``, ``ai``: these are argument conversion pairs specifying how to obtain the arguments for the
+      member function. Any conversion pair found in :numref:`tableArgumentConversions` may be used.
 
 .. index::
    single:  conversion pair
@@ -1136,13 +1097,13 @@ Argument conversions – from Self to C/C++
 An argument conversion is given a Self object and performs these actions to produce a corresponding
 C or C++ value:
 
-* check that the Self object it has been given is among the allowed types. If not, report
-  ``badTypeError`` (invoke the failure block (if present) with the argument ``’badTypeError’``).
+    * check that the Self object it has been given is among the allowed types. If not, report
+      ``badTypeError`` (invoke the failure block (if present) with the argument ``’badTypeError’``).
 
-* check that the object can be converted to a C/C++ value without overflow or any other error.
-  If not, report the relevant error.
+    * check that the object can be converted to a C/C++ value without overflow or any other error.
+      If not, report the relevant error.
 
-* do the conversion, i.e., construct the C/C++ value corresponding to the given Self object.
+    * do the conversion, i.e., construct the C/C++ value corresponding to the given Self object.
 
 .. index::
    single:  badIndexError
@@ -1271,10 +1232,10 @@ Result conversions - from C/C++ to Self
 A result conversion is given a C or C++ value of a certain type and performs these actions to produce
 a corresponding Self object:
 
-	* check that the C/C++ value can be converted to a Self object with no overflow or other error
-	  occurring. If not, report the error.
+    * check that the C/C++ value can be converted to a Self object with no overflow or other error
+      occurring. If not, report the error.
 
-	* do the conversion, i.e., construct the Self object corresponding to the given C/C++ value.
+    * do the conversion, i.e., construct the Self object corresponding to the given C/C++ value.
 
 :numref:`tableResultConversions` lists all the available result conversions. Each row represents one conversion, with the first
 two columns designating the conversion pair. The third column lists the type of C or C++ value that
@@ -1392,16 +1353,16 @@ Self processes. Having this, it then becomes possible to start Self processes fr
 prompt (shell) or to specify pipe lines in which some of the processes are Self processes. For example
 in
 
-		::
+::
 
-				proto% cat someFile | tokenize | sort -r | capitalize | tee lst
+    proto% cat someFile | tokenize | sort -r | capitalize | tee lst
 
 it may be the case that the filters tokenize and capitalize perform most of their work in Self.
 Likewise, the command
 
-		::
+::
 
-				proto% mail
+    proto% mail
 
 may invoke some fancy mail reader written in Self rather than the standard UNIX mail reader.
 
@@ -1444,24 +1405,22 @@ is shut down. The ``toself`` UNIX process then terminates.
 
 The Self expression that forms the Self process is specified on the command line when ``toself``
 is started. For example, if the server has been started, the following can be typed at the UNIX
-prompt:
+prompt::
 
-		::
+    proto% toself stdio writeLine: 5 factorial printString
+    120
 
-				proto% toself stdio writeLine: 5 factorial printString
-				120
+    proto% echo something | toself capitalize: stdio
+    SOMETHING
 
-				proto% echo something | toself capitalize: stdio
-				SOMETHING
+    proto% toself capitalize: stdio
+    Write some text that goes to stdin of the toself program
+    WRITE SOME TEXT THAT GOES TO STDIN OF THE TOSelf PROGRAM
+    More text
+    MORE TEXT
+    ^D
 
-				proto% toself capitalize: stdio
-				Write some text that goes to stdin of the toself program
-				WRITE SOME TEXT THAT GOES TO STDIN OF THE TOSelf PROGRAM
-				More text
-				MORE TEXT
-				^D
-
-				proto%
+    proto%
 
 If you want to try out these examples, locate the files ``server.self``, ``socks.so`` and ``toself``. The
 path name of the file ``socks.so`` is hardwired in the file ``server.self`` so please make sure that it
@@ -1491,12 +1450,12 @@ Outline of server
 The server is a Self program. It is found in the file ``server.self``. When the server is started, the
 following happens:
 
-   1. 	Create a socket, bind a name to it and start listening.
-   2. 	Loop\: accept a connection and fork a new process (both step 1 and 2 are performed by the method ``server start``). The forked process executes the method ``server handleRequest`` which:
-	      a.   Reads a line from the connection.
-	      b.   Sets up a context with a slot ``stdio`` referring to the connection.
-	      c.   Evaluates the line read in step (a) in this context.
-	      d.   Closes the connection.
+   1. Create a socket, bind a name to it and start listening.
+   2. Loop\: accept a connection and fork a new process (both step 1 and 2 are performed by the method ``server start``). The forked process executes the method ``server handleRequest`` which:
+          a.   Reads a line from the connection.
+          b.   Sets up a context with a slot ``stdio`` referring to the connection.
+          c.   Evaluates the line read in step (a) in this context.
+          d.   Closes the connection.
 
 Foreign functions and glue needed to implement server
 -----------------------------------------------------
@@ -1518,14 +1477,12 @@ The server program is implemented using ``foreignFct`` objects. There is only a 
 directly involved in setting this up. First the ``foreignFct`` prototype is cloned to obtain a “local
 prototype”, called ``socksFct``, which contains the path for the ``socks.so`` file. ``socksFct`` is then
 cloned each time a ``foreignFct`` object for a function defined in ``socks.so`` is needed. For example,
-in ``traits socket``, the following method is found:
+in ``traits socket``, the following method is found::
 
-		::
-
-				copyPort: portNumber = ( "Create a socket, do bind, then listen."
-						| sbl = socksFct copyName: ’socket_bind_listen_glue’. |
-						sbl value: portNumber With: deadCopy.
-					).
+    copyPort: portNumber = ( "Create a socket, do bind, then listen."
+            | sbl = socksFct copyName: ’socket_bind_listen_glue’. |
+            sbl value: portNumber With: deadCopy.
+        ).
 
 This method copies a ``socket`` object and returns the copy. The local slot ``sbl`` is initialized to a
 ``foreignFct`` object. The body of the method simply sends ``value:With:`` to the ``foreignFct``

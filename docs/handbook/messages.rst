@@ -14,11 +14,11 @@ Each of these messages has a number of variations based on the number of argumen
 has. For example, one would used ``sendTo:With:With:`` to send a message with ``at:Put:`` as the
 selector and two arguments::
 
-	'at:Put:' sendTo: aDict With: k With: v
+    'at:Put:' sendTo: aDict With: k With: v
 
 .. note::
 
-	Primitives such as _Print cannot be sent in the current system.
+    Primitives such as _Print cannot be sent in the current system.
 
 A selector, receiver, delegatee, methodHolder, and arguments can be bundled together in a ``message``
 object. The message gets ``sent`` when the message object receives the send message. Message
