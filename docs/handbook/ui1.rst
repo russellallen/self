@@ -10,7 +10,7 @@ Before Self used the current `morphic` user interface (also known as `UI2`) it u
 X11 with 256 Colors
 -------------------
 
-UI1 only runs on 8 bit X11 systems. There are a number of suggested ways to get a 8 bit X11 window on modern systems detailed at `WineHQ`_. 
+UI1 only runs on 8 bit X11 systems. There are a number of suggested ways to get a 8 bit X11 window on modern systems detailed at `WineHQ`_.
 
 On OS X systems, you will need to install XQuartz if you are running Mountain Lion (10.8) or later.  You will need to set the color depth to 256 colors in the Preferences, then restart XQuartz.
 
@@ -30,17 +30,17 @@ Preparing a snapshot
 The first step in using UI1 is to build a new World including it. Assuming you are in the `objects` directory in the Self source tree, and that the Self vm is in your path, do::
 
   Self -f worldBuilder.self
-  
+
 and when it asks you::
 
   Load UI1 (X11 only)? (y/N)
   >
-  
-answer `y`. When the World has built, save it at the prompt by doing:
+
+answer `y`. When the World has built, save it at the prompt by doing::
 
   save
   quitNoSave
-  
+
 This will save a snapshot of the world in the file 'Snapshot'.
 
 ---------------

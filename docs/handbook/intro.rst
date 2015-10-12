@@ -37,22 +37,16 @@ This section contains an overview of the system and its implementation; it can b
 Although Self runs as a single UNIX [#f1]_ process, or a single Macintosh application, it really has two parts: the *virtual machine* (VM) and the *Self world*, the collection of Self objects that are the Self prototypes and programs:
 
 ..  figure:: images/Chapter_1_Figure_1.*
-    :height: 177 px
-    :width: 593 px
-    :scale: 50
-    :align: left
+    :scale: 80
 
-    Figure 1: The Self system
+    The Self system
 
 The VM executes Self programs specified by objects in the Self world and provides a set of *primitives* (which are methods written in C++) that can be invoked by Self methods to carry out basic operations like integer arithmetic, object copying, and I/O. The Self world distributed with the VM is a collection of Self objects implementing various *traits* and *prototypes* like cloning traits and dictionaries. These objects can be used (or changed) to implement your own programs.
 
+.. _figHowSelfProgCompiled:
 ..  figure:: images/Chapter_1_Figure_2.*
-    :height: 261 px
-    :width: 680 px
-    :scale: 100
-    :align: left
 
-    Figure 2: How Self programs are compiled.
+    How Self programs are compiled.
 
 .. index::
    single:  bytecodes
@@ -63,7 +57,7 @@ The VM executes Self programs specified by objects in the Self world and provide
 .. index::
    single:  customization
 
-Self programs are translated to machine code in a two-stage process (see Figure 2). Code typed in at the prompt, through the user interface, or read in from a file is parsed into Self objects. Some of these objects are data objects; others are methods. Methods have their own behavior which they represent with *bytecodes*. The bytecodes are the instructions for a very simple virtual processor that understands instructions like “push receiver” or “send the ‘x’ message.” In fact, Self bytecodes correspond much more closely to source code than, say, Smalltalk-80 bytecodes. (See :ref:`[CUL89] <citations>` for a list of the Self byte codes.) The *raison d’être* of the virtual machine is to pretend that these bytecodes are directly executed by the computer; the programmer can explore the Self world down to the bytecode level, but no further. This pretense ensures that the behavior of a Self program can be understood by looking only at the Self source code.
+Self programs are translated to machine code in a two-stage process (see :numref:`figHowSelfProgCompiled`). Code typed in at the prompt, through the user interface, or read in from a file is parsed into Self objects. Some of these objects are data objects; others are methods. Methods have their own behavior which they represent with *bytecodes*. The bytecodes are the instructions for a very simple virtual processor that understands instructions like “push receiver” or “send the ‘x’ message.” In fact, Self bytecodes correspond much more closely to source code than, say, Smalltalk-80 bytecodes. (See :ref:`[CUL89] <citations>` for a list of the Self byte codes.) The *raison d’être* of the virtual machine is to pretend that these bytecodes are directly executed by the computer; the programmer can explore the Self world down to the bytecode level, but no further. This pretense ensures that the behavior of a Self program can be understood by looking only at the Self source code.
 
 The second stage of translation is the actual *compilation* of the bytecodes to machine code. This is how the “execution” of bytecodes is implemented—it is totally invisible on the Self level except for side effects like execution speed and memory usage. The compilation takes place the first time a message is actually sent; thus, the first execution of a program will be slower than subsequent executions.
 

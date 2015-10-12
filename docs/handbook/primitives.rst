@@ -2,23 +2,23 @@ Primitives
 ==========
 
 Primitives are Self methods implemented by the virtual machine. The first character of a primitive’s
-selector is an underscore (‘_’). You cannot define primitives yourself (unless you modify the       
-Virtual Machine), nor can you define slots beginning with an underscore.                            
+selector is an underscore (‘_’). You cannot define primitives yourself (unless you modify the
+Virtual Machine), nor can you define slots beginning with an underscore.
 
 Primitive failures
 ------------------
 
 Every primitive call can take an optional argument defining how errors should be handled for this
-call. To do this, the primitive is extended with an ``IfFail``: argument. For example, ``_AsObject``     
-becomes ``_AsObjectIfFail``:, and ``_IntAdd``: becomes ``_IntAdd:IfFail:``.                                  
+call. To do this, the primitive is extended with an ``IfFail``: argument. For example, ``_AsObject``
+becomes ``_AsObjectIfFail``:, and ``_IntAdd``: becomes ``_IntAdd:IfFail:``.
 
-		::
+::
 
-				> *3 _IntAdd: ’a’ IfFail: [ | :error. :name |
-				(name, ’ failed with ’, error, ’.’) printLine. 0 ]*
-				_IntAdd: failed with badTypeError.
-				0 		The primitive returns the result of evaluating the failure block.
-				>
+  > *3 _IntAdd: ’a’ IfFail: [ | :error. :name |
+  (name, ’ failed with ’, error, ’.’) printLine. 0 ]*
+  _IntAdd: failed with badTypeError.
+  0        The primitive returns the result of evaluating the failure block.
+  >
 
 When a primitive fails, if the primitive call has an ``IfFail``: part, the message ``value:With:`` is
 sent to the ``IfFail:`` argument, passing two strings: the name of the primitive and an error string
@@ -127,114 +127,109 @@ the error.
 
 
 
-**Table 8 Primitive failures**
+.. tabularcolumns:: p{5cm} p{10cm}
+.. table:: Primitive failures
 
-.. tabularcolumns:: p{5cm} p{10cm} 
-
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|Prefix                       |    Description                                                                                                                                              |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|primitiveNotDefinedError     |    Primitive not defined.                                                                                                                                   |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|primitiveFailedError         |    General primitive failure (for example, an argument has an invalid value).                                                                               |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|badTypeError                 |    The receiver or an argument has the wrong type.                                                                                                          |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|badTypeSealError             |    Proxy’s type seal did not match expected type seal.                                                                                                      |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|divisionByZeroError          |    Division by zero.                                                                                                                                        |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|overflowError                |    Integer overflow. This can occur in integer arithmetic primitives or in UNIX (when the result is too large to be represented as an integer).             |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|badSignError                 |    Integer receiver or argument has wrong sign.                                                                                                             |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|alignmentError               |    Bad word alignment in memory.                                                                                                                            |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|badIndexError                |    The vector index (e.g. in _At:) is out of bounds (too large or negative).                                                                                |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|badSizeError                 |    An invalid size of a vector was specified, e.g. attempting to clone a vector with a negative size (see _Clone:Filler:and _CloneBytes:Filler: below).     |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|reflectTypeError             |    A mirror primitive was applied to the wrong kind of slot, e.g. _MirrorParentGroupAt: to a slot that isn’t a parent slot.                                 |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|outOfMemoryError             |    A primitive could not complete because its results would not fit in the existing                                                                         |
-|                             |    space                                                                                                                                                    |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|stackOverflowError           |    The stack overflowed during execution of the primitive or program.                                                                                       |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|slotNameError                |    Illegal slot name.                                                                                                                                       |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|argumentCountError           |    Wrong number of arguments.                                                                                                                               |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|unassignableSlotError        |    This slot is not assignable.                                                                                                                             |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|lonelyAssignmentSlotError    |    Assignment slot must have a corresponding data slot.                                                                                                     |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|parallelTWAINSError          |    Can not invoke TWAINS primitive (another process is already using it).                                                                                   |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|noProcessError               |    This process does not exist.                                                                                                                             |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|noActivationError            |    This method activation does not exist.                                                                                                                   |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|noReceiverError              |    This activation has no receiver.                                                                                                                         |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|noParentSlot                 |    This activation has no lexical parent.                                                                                                                   |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|noSenderSlot                 |    This activation has no sender slot.                                                                                                                      |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|deadProxyError               |    This proxy is dead and can not be used.                                                                                                                  |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|liveProxyError               |    This proxy is live and can not be used to hold a proxy result.                                                                                           |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|wrongNoOfArgsError           |    Wrong number of arguments was supplied with call of foreign function.                                                                                    |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|nullPointerError             |    Foreign function returned null pointer.                                                                                                                  |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|nullCharError                |    Can not pass byte vector containing null char to foreign function expecting a string.                                                                    |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|prematureEndOfInputError     |    Premature end of input during parsing.                                                                                                                   |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|noDynamicLinkerError         |    Primitive depends on dynamic linker which is not available in this system.                                                                               |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|EPERM, ENOENT, ...           |    These errors are returned by a UNIX primitive if a UNIX system call executed by the                                                                      |
-|                             |    primitive fails. The UNIX error codes are defined in /usr/include/sys/ errno.h;                                                                          |
-|                             |    see this file for details on the roughly 90 different UNIX error codes.                                                                                  |
-+-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |Prefix                       |    Description                                                                                                                                              |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |primitiveNotDefinedError     |    Primitive not defined.                                                                                                                                   |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |primitiveFailedError         |    General primitive failure (for example, an argument has an invalid value).                                                                               |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |badTypeError                 |    The receiver or an argument has the wrong type.                                                                                                          |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |badTypeSealError             |    Proxy’s type seal did not match expected type seal.                                                                                                      |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |divisionByZeroError          |    Division by zero.                                                                                                                                        |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |overflowError                |    Integer overflow. This can occur in integer arithmetic primitives or in UNIX (when the result is too large to be represented as an integer).             |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |badSignError                 |    Integer receiver or argument has wrong sign.                                                                                                             |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |alignmentError               |    Bad word alignment in memory.                                                                                                                            |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |badIndexError                |    The vector index (e.g. in _At:) is out of bounds (too large or negative).                                                                                |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |badSizeError                 |    An invalid size of a vector was specified, e.g. attempting to clone a vector with a negative size (see _Clone:Filler:and _CloneBytes:Filler: below).     |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |reflectTypeError             |    A mirror primitive was applied to the wrong kind of slot, e.g. _MirrorParentGroupAt: to a slot that isn’t a parent slot.                                 |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |outOfMemoryError             |    A primitive could not complete because its results would not fit in the existing                                                                         |
+  |                             |    space                                                                                                                                                    |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |stackOverflowError           |    The stack overflowed during execution of the primitive or program.                                                                                       |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |slotNameError                |    Illegal slot name.                                                                                                                                       |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |argumentCountError           |    Wrong number of arguments.                                                                                                                               |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |unassignableSlotError        |    This slot is not assignable.                                                                                                                             |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |lonelyAssignmentSlotError    |    Assignment slot must have a corresponding data slot.                                                                                                     |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |parallelTWAINSError          |    Can not invoke TWAINS primitive (another process is already using it).                                                                                   |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |noProcessError               |    This process does not exist.                                                                                                                             |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |noActivationError            |    This method activation does not exist.                                                                                                                   |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |noReceiverError              |    This activation has no receiver.                                                                                                                         |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |noParentSlot                 |    This activation has no lexical parent.                                                                                                                   |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |noSenderSlot                 |    This activation has no sender slot.                                                                                                                      |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |deadProxyError               |    This proxy is dead and can not be used.                                                                                                                  |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |liveProxyError               |    This proxy is live and can not be used to hold a proxy result.                                                                                           |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |wrongNoOfArgsError           |    Wrong number of arguments was supplied with call of foreign function.                                                                                    |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |nullPointerError             |    Foreign function returned null pointer.                                                                                                                  |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |nullCharError                |    Can not pass byte vector containing null char to foreign function expecting a string.                                                                    |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |prematureEndOfInputError     |    Premature end of input during parsing.                                                                                                                   |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |noDynamicLinkerError         |    Primitive depends on dynamic linker which is not available in this system.                                                                               |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |EPERM, ENOENT, ...           |    These errors are returned by a UNIX primitive if a UNIX system call executed by the                                                                      |
+  |                             |    primitive fails. The UNIX error codes are defined in /usr/include/sys/ errno.h;                                                                          |
+  |                             |    see this file for details on the roughly 90 different UNIX error codes.                                                                                  |
+  +-----------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 .. index::
    single:  _ErrorMessage
 
 The ``_ErrorMessage`` primitive, sent to an error string returned by any primitive, returns a more
-descriptive version of the error message; this is especially useful for UNIX errors.          
+descriptive version of the error message; this is especially useful for UNIX errors.
 
 Available primitives
 --------------------
 
 A complete list of primitives can be obtained by sending ``primitiveList`` to ``primitives``. Documentation
-for a primitive (such as ``_Clone``), can be obtained using at:, thus:
+for a primitive (such as ``_Clone``), can be obtained using at:, thus::
 
-		::
+    primitives at: ’_Clone’
 
-				primitives at: ’_Clone’
+A list of primitive names matching a pattern can be obtained thus::
 
-A list of primitive names matching a pattern can be obtained thus:
-
-		::
-
-				primitives match: ’_Memory*’
+    primitives match: ’_Memory*’
 
 Some points to note when browsing primitives:
 
-	* Since strings are special kinds of byte vectors, primitives taking byte vectors as arguments
-	  can usually take strings. The exception is that canonical strings cannot be passed to primitives
-	  that modify the object.
-	
-	* Integer arithmetic primitives take integer receivers and arguments; floating-point arithmetic
-	  primitives take floating-point receivers and arguments.
-	
-	* All comparison primitives return either true or false. Integer comparison primitives take integer
-	  receivers and arguments; floating-point comparison primitives take floating-point receivers
-	  and arguments.
-	
-	* The receiver of a mirror primitive must be a mirror (unless otherwise noted)
+  * Since strings are special kinds of byte vectors, primitives taking byte vectors as arguments
+    can usually take strings. The exception is that canonical strings cannot be passed to primitives
+    that modify the object.
+
+  * Integer arithmetic primitives take integer receivers and arguments; floating-point arithmetic
+    primitives take floating-point receivers and arguments.
+
+  * All comparison primitives return either true or false. Integer comparison primitives take integer
+    receivers and arguments; floating-point comparison primitives take floating-point receivers
+    and arguments.
+
+  * The receiver of a mirror primitive must be a mirror (unless otherwise noted)
 
 
