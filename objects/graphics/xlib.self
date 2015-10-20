@@ -90,7 +90,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          xlib = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'xlib' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals xlib.
@@ -3047,7 +3047,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          xlib = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'xlib' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits xlib.

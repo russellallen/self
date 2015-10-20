@@ -1,14 +1,14 @@
  '$Revision: 30.15 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: generalCategoryModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: generalCategoryModel InitialContents: FollowSlot\x7fVisibility: public'
         
          categoryReferrent = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'categoryReferrent' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals categoryReferrent.
@@ -82,7 +82,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: generalCategoryModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: generalCategoryModel InitialContents: FollowSlot\x7fVisibility: public'
         
          generalCategoryModel = bootstrap define: bootstrap stub -> 'globals' -> 'generalCategoryModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -523,6 +523,16 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalCategoryModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: generalCategoryModel InitialContents: FollowSlot'
+        
+         recolorModuleSummary = ( |
+            | 
+            moduleSummary isNil ifFalse: [
+              moduleSummary color: preferredTitleColor].
+             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalCategoryModel' -> 'parent' -> () From: ( | {
          'Category: dropping\x7fModuleInfo: Module: generalCategoryModel InitialContents: FollowSlot\x7fVisibility: private'
         
          shouldWrapMeWhenGrowingSkin = ( |
@@ -715,6 +725,16 @@ I am also immutable.\x7fModuleInfo: Creator: globals generalCategoryModel parent
             isForEditingNew && [newName isEmpty] ifTrue: [
              ^ myOutliner cancelChangingNameEditor: rr editor Event: rr event
             ].
+
+            categoryList isEmpty ifTrue: [
+              referrent: categoryReferrentProto
+                    copyForMirror: mirror
+                     CategoryList: vector copy.
+              resend.unprotectedFinishChangingName: rr.
+              safelyDo: [ myOutliner beFlexibleHorizontally update ].
+              ^ self
+            ].
+
             i: categoryList size pred.
             ocat: categoryList last.
 

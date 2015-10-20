@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: Virtual Machine interface\x7fCategory: bytecode interpreters\x7fModuleInfo: Module: leafMethodTester InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: virtual machine interface\x7fCategory: bytecode interpreters\x7fModuleInfo: Module: leafMethodTester InitialContents: FollowSlot\x7fVisibility: public'
         
          leafMethodTester = bootstrap define: bootstrap stub -> 'globals' -> 'leafMethodTester' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

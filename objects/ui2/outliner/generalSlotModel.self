@@ -1,14 +1,14 @@
  '$Revision: 30.22 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: generalSlotModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: generalSlotModel InitialContents: FollowSlot\x7fVisibility: public'
         
          generalSlotModel = bootstrap define: bootstrap stub -> 'globals' -> 'generalSlotModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -48,7 +48,8 @@ SlotsToOmit: parent.
               slotNameEditorMorph copySlot: slot
                                     Target: self
                                     Accept: acceptNameChange
-                                     Style: titleStyle.
+                                     Style: titleStyle
+                                LabelColor: preferredSlotTitleColor.
             titleEditor isAsynchronous: true.
             myOutliner titleEditor: titleEditor.
             titleEditor).
@@ -216,14 +217,16 @@ globals generalModel parent buttonDescriptions. _Clone
         
          buttonIcon = ( |
             | 
-              "must test for assignable before assignment,
+            "slot could, unfortunately, be nil"
+            slot isNil ifTrue: [^ ui2Image copy]. 
+             "must test for assignable before assignment,
                otherwise fake slots break"
             case
              if: [ slot isMethod ]         Then: [ methodIcon ]
              If: [ slot isAssignable not ] Then: [ equalsIcon ]
              If: [ slot isAssignment ]     Then: [ leftArrowIcon ]
              If: [ slot isAssignable ]     Then: [ colonIcon ]
-             Else: [ morph ]).
+             Else: [ ui2Image copy ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalSlotModel' -> 'parent' -> () From: ( | {
@@ -301,8 +304,8 @@ globals generalModel parent buttonDescriptions. _Clone
     '  000  ' &
     '   0   ' ) asVector
  Colors: (
-    (paint named: 'black') &
-    (paint named: 'black')) asVector] value) From: ( |
+    (paint named: 'transparent') &
+    (paint named: 'transparent')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: globals generalSlotModel parent colonIcon.
 \x7fIsComplete: '.
             | ) .
@@ -359,8 +362,8 @@ leaves the wholeThingEditor open if the method was changed.\x7fModuleInfo: Modul
     '       ' &
     '       ' ) asVector
  Colors: (
-    (paint named: 'black') &
-    (paint named: 'black')) asVector] value) From: ( |
+    (paint named: 'blue') &
+    (paint named: 'green')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: globals generalSlotModel parent equalsIcon.
 \x7fIsComplete: '.
             | ) .
@@ -420,8 +423,8 @@ leaves the wholeThingEditor open if the method was changed.\x7fModuleInfo: Modul
     '  0    ' &
     '   0   ' ) asVector
  Colors: (
-    (paint named: 'black') &
-    (paint named: 'black')) asVector] value) From: ( |
+    (paint named: 'transparent') &
+    (paint named: 'transparent')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: globals generalSlotModel parent leftArrowIcon.
 \x7fIsComplete: '.
             | ) .
@@ -439,8 +442,8 @@ leaves the wholeThingEditor open if the method was changed.\x7fModuleInfo: Modul
     '0     0' &
     '0000000' ) asVector
  Colors: (
-    (paint named: 'black') &
-    (paint named: 'black')) asVector] value) From: ( |
+    (paint named: 'transparent') &
+    (paint named: 'transparent')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: globals generalSlotModel parent methodIcon.
 \x7fIsComplete: '.
             | ) .

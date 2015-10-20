@@ -92,8 +92,8 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: concurrency\x7fComment: Holds the real prototype for objects
-like stdout which are lookuped up in corrent
+         'Category: system\x7fCategory: prompt\x7fCategory: concurrency\x7fComment: Holds the real prototype for objects
+like stdout which are lookuped up in current
 process by methods in defaultBehavior.\x7fModuleInfo: Module: stdin InitialContents: FollowSlot\x7fVisibility: public'
         
          perProcessGlobals = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'perProcessGlobals' -> () From: ( |
@@ -136,7 +136,7 @@ process by methods in defaultBehavior.\x7fModuleInfo: Module: stdin InitialConte
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fModuleInfo: Module: stdin InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: prompt\x7fModuleInfo: Module: stdin InitialContents: FollowSlot\x7fVisibility: public'
         
          userQuery = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'userQuery' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals userQuery.

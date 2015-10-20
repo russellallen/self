@@ -1,7 +1,7 @@
  'Sun-$Revision: 30.17 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -78,7 +78,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
         
          morph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'morph' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals morph.
@@ -125,7 +125,7 @@ This saves recomputing the bounds for most morphs.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
         
          morph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'morph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits morph.
@@ -1448,7 +1448,6 @@ by the change.\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisib
              anyway. The layout of such a morph will be computed if
              and when it is first added to the world or to some morph
              that is already in the world."
-
             flushLayoutCaches.
 
             "base case: not in the world; just flush layout caches"
@@ -1907,6 +1906,13 @@ old owner.\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibilit
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
+         'Category: basics\x7fComment: Like colorAll: but allows morphs to choose their own suitable colors\x7fModuleInfo: Module: morph InitialContents: FollowSlot'
+        
+         recolor = ( |
+            | morphsDo: [|:m| m recolor]. self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
          'Category: structure\x7fComment: Remove all morphs from this morph.\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
         
          removeAllMorphs = ( |
@@ -2191,7 +2197,7 @@ and rawOwner.\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibi
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
         
-         shadowColor <- paint named: 'black'.
+         shadowColor <- paint named: 'transparent'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {

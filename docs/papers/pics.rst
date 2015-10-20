@@ -31,5 +31,5 @@ distracting compilation pauses.
 
 *Published as Springer Verlag LNCS 512, 1991.*
 
-`PDF <../../_static/published/pics.pdf>`_
+ `PDF <_static/pics.pdf>`_
 

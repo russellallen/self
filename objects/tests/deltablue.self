@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: bench\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
         
          abstractConstraint = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'abstractConstraint' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals abstractConstraint.
@@ -56,7 +56,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: bench\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
         
          constraintVariable = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'constraintVariable' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals constraintVariable.
@@ -116,7 +116,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: bench\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
         
          deltablue = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'deltablue' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals deltablue.
@@ -938,7 +938,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: bench\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
         
          editConstraint = bootstrap define: bootstrap stub -> 'globals' -> 'editConstraint' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -969,7 +969,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: bench\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
         
          equalsConstraint = bootstrap define: bootstrap stub -> 'globals' -> 'equalsConstraint' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1062,7 +1062,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: bench\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
         
          multConstraint = bootstrap define: bootstrap stub -> 'globals' -> 'multConstraint' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1093,7 +1093,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: bench\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
         
          plusConstraint = bootstrap define: bootstrap stub -> 'globals' -> 'plusConstraint' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1124,7 +1124,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: bench\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: deltablue InitialContents: FollowSlot'
         
          stayConstraint = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'stayConstraint' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals stayConstraint.

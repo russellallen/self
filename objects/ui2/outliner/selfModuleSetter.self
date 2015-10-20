@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Object Outliner\x7fModuleInfo: Module: selfModuleSetter InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Object Outliner\x7fModuleInfo: Module: selfModuleSetter InitialContents: FollowSlot\x7fVisibility: public'
         
          selfModuleSetter = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'selfModuleSetter' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals selfModuleSetter.

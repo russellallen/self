@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: cursor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: cursor InitialContents: FollowSlot\x7fVisibility: public'
         
          cursor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'cursor' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals cursor.
@@ -23,7 +23,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: cursor InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: cursor InitialContents: FollowSlot\x7fVisibility: public'
         
          cursor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'cursor' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits cursor.

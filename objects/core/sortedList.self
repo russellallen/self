@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: sorted\x7fModuleInfo: Module: sortedList InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: sorted\x7fModuleInfo: Module: sortedList InitialContents: FollowSlot\x7fVisibility: public'
         
          sortedList = bootstrap define: bootstrap stub -> 'globals' -> 'sortedList' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -264,7 +264,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: sorted\x7fModuleInfo: Module: sortedList InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: sorted\x7fModuleInfo: Module: sortedList InitialContents: FollowSlot\x7fVisibility: public'
         
          sortedListSet = bootstrap define: bootstrap stub -> 'globals' -> 'sortedListSet' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

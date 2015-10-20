@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.15 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -15,7 +16,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Paint\x7fComment: Psuedo paintManager for true color systems.\x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Paint\x7fComment: Psuedo paintManager for true color systems.\x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractUnmappedPaintManager = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'abstractUnmappedPaintManager' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals abstractUnmappedPaintManager.
@@ -168,9 +169,12 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             paintNames at:   'azure'        Put: (paint copyRed: 0.3 Green: 0.6 Blue: 0.8).
             paintNames at:   'royal'        Put: (paint copyRed: 0.5 Green: 0.3 Blue: 0.8).
             paintNames at:   'purple'       Put: (paint copyRed: 0.7 Green: 0.3 Blue: 0.8).
-            
+
             "some UI colors"
-            paintNames at:   'outlinerGray' Put: (paint copyRed: 0.839687 Green: 0.839687  Blue: 0.839687)).
+            paintNames at:   'outlinerGray' Put: (paint copyRed: 0.839687 Green: 0.839687  Blue: 0.839687).
+
+            "a non-color"
+            paintNames at:   'transparent' Put: (paint copyRed: 0 Green: 0  Blue: 0 Alpha: 0)).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'paint' -> () From: ( | {
@@ -187,7 +191,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
         
          paint = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'paint' -> () From: ( |
              {} = 'Comment: About the representation of colors:
@@ -232,7 +236,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: FollowSlot'
         
          paint = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'paint' -> () From: ( |
              {} = 'Comment: A paint object is a display-depth independent color specification.
@@ -284,7 +288,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Paint\x7fComment: Handles color allocation
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Paint\x7fComment: Handles color allocation
 for mapped color systems.
 \x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -354,7 +358,7 @@ for mapped color systems.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: FollowSlot'
         
          paintManager = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'paintManager' -> () From: ( |
              {} = 'Comment: A paintManager manages the allocation of color indices on a
@@ -391,7 +395,7 @@ for mapped color systems.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: InitializeToExpression: (dictionary copyRemoveAll)\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: paint InitialContents: InitializeToExpression: (dictionary copyRemoveAll)\x7fVisibility: public'
         
          paintNames = dictionary copyRemoveAll.
         } | ) 
@@ -829,6 +833,13 @@ lots of images. It quantizes in RGB space.\x7fModuleInfo: Module: paint InitialC
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'paint' -> () From: ( | {
+         'Category: accessing alpha (for Quartz)\x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
+        
+         isTransparent = ( |
+            | alpha = 0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'paint' -> () From: ( | {
          'Category: namingAndPrinting\x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
         
          name = ( |
@@ -836,9 +847,11 @@ lots of images. It quantizes in RGB space.\x7fModuleInfo: Module: paint InitialC
              nearest <- ''.
              threshold = 0.07.
             | 
+
             paintNames isEmpty ifTrue: [ ^'an unknown color' ].
             paintNames do: [| :paint. :name. thisD |
                 thisD:
+                    (paint alpha - alpha) square +
                     (paint red   -   red) square +
                     (paint green - green) square +
                     (paint blue  -  blue) square.

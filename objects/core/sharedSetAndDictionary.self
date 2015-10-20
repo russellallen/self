@@ -59,7 +59,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: dictionaries\x7fModuleInfo: Module: sharedSetAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: dictionaries\x7fModuleInfo: Module: sharedSetAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          sharedDictionary = bootstrap define: bootstrap stub -> 'globals' -> 'sharedDictionary' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -96,7 +96,7 @@ SlotsToOmit: parent prototype safety.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: unordered\x7fCategory: sets\x7fModuleInfo: Module: sharedSetAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: unordered\x7fCategory: sets\x7fModuleInfo: Module: sharedSetAndDictionary InitialContents: FollowSlot\x7fVisibility: public'
         
          sharedSet = bootstrap define: bootstrap stub -> 'globals' -> 'sharedSet' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

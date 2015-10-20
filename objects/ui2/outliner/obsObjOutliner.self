@@ -38,7 +38,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fComment: I represent anything that is a leaf
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fComment: I represent anything that is a leaf
 in an outliner, such as a slot,
 or a dictionary entry. -- dmu 2/97\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -69,7 +69,7 @@ or a dictionary entry. -- dmu 2/97\x7fModuleInfo: Module: obsObjOutliner Initial
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          slotsOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'slotsOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -86,7 +86,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          slotsOutliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'slotsOutliner' -> () From: ( |
              {} = 'Comment: I hold shared behavior for
@@ -1206,7 +1206,7 @@ where objects are shown in objects.\x7fModuleInfo: Module: obsObjOutliner Initia
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractObjectOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'abstractObjectOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1235,7 +1235,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractObjectOutliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractObjectOutliner' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits abstractObjectOutliner.
@@ -1264,7 +1264,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractSlotOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'abstractSlotOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1305,7 +1305,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractSlotOutliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractSlotOutliner' -> () From: ( |
              {} = 'Comment: I model behavior of slot-like things,
@@ -1345,7 +1345,7 @@ instead of an uglyEditor\x7fModuleInfo: Module: obsObjOutliner InitialContents: 
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          categoryOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'categoryOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1398,7 +1398,7 @@ When true, it keeps update from deleting me.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          categoryOutliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'categoryOutliner' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits categoryOutliner.
@@ -1647,7 +1647,7 @@ copyMirror: World: w is better
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          objectOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'objectOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1694,7 +1694,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          objectOutliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'objectOutliner' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits objectOutliner.
@@ -2055,7 +2055,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          pseudoCategoryOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'pseudoCategoryOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'isPlaceHolder' From:
@@ -2074,7 +2074,7 @@ SlotsToOmit: isPlaceHolder isPlaceHolder: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          pseudoCategoryOutliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'pseudoCategoryOutliner' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits pseudoCategoryOutliner.
@@ -3670,7 +3670,7 @@ Perhaps more modifications will have to be made.\x7fModuleInfo: Module: obsObjOu
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          slotOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'slotOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -3699,7 +3699,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          slotOutliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'slotOutliner' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits slotOutliner.
@@ -4404,7 +4404,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          pseudoSlotOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'pseudoSlotOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'moduleInfo' From:
@@ -4423,7 +4423,7 @@ SlotsToOmit: moduleInfo moduleInfo: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Obsolete Object Outliners\x7fModuleInfo: Module: obsObjOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          pseudoSlotOutliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'pseudoSlotOutliner' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits pseudoSlotOutliner.

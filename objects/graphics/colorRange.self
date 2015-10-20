@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: colorRange InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: colorRange InitialContents: FollowSlot\x7fVisibility: public'
         
          hsbRange = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'hsbRange' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals hsbRange.

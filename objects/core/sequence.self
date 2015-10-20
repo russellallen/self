@@ -71,7 +71,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: collections\x7fCategory: ordered\x7fModuleInfo: Module: sequence InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: ordered\x7fModuleInfo: Module: sequence InitialContents: FollowSlot\x7fVisibility: public'
         
          sequence = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'sequence' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals sequence.
@@ -86,7 +86,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: ordered\x7fModuleInfo: Module: sequence InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: ordered\x7fModuleInfo: Module: sequence InitialContents: FollowSlot\x7fVisibility: public'
         
          sequence = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'sequence' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits sequence.

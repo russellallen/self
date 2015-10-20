@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fComment: 32 bit integer. Operations are
+         'Category: core\x7fCategory: numbers\x7fComment: 32 bit integer. Operations are
 modulo 2^32.\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
         
          int32 = bootstrap define: bootstrap stub -> 'globals' -> 'int32' -> () ToBe: bootstrap addSlotsTo: (
@@ -37,7 +37,7 @@ SlotsToOmit: parent.
      0)
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
         
          int32 = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'int32' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits int32.
@@ -59,7 +59,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fComment: 64 bit integer. Operations are
+         'Category: core\x7fCategory: numbers\x7fComment: 64 bit integer. Operations are
 modulo 2^64.\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
         
          int64 = bootstrap define: bootstrap stub -> 'globals' -> 'int64' -> () ToBe: bootstrap addSlotsTo: (
@@ -100,7 +100,7 @@ SlotsToOmit: parent.
      0)
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
         
          int64 = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'int64' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits int64.
@@ -573,7 +573,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fComment: Common parent for int32 and int64\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fComment: Common parent for int32 and int64\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
         
          int32or64 = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'int32or64' -> () From: ( |
              {} = 'Comment: This code was originially written

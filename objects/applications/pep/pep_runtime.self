@@ -14,6 +14,7 @@ See the LICENSE file for license information.
              bootstrap remove: 'comment' From:
              bootstrap remove: 'directory' From:
              bootstrap remove: 'fileInTimeString' From:
+             bootstrap remove: 'myComment' From:
              bootstrap remove: 'postFileIn' From:
              bootstrap remove: 'revision' From:
              bootstrap remove: 'subpartNames' From:
@@ -29,12 +30,6 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pep_runtime' -> () From: ( | {
-         'ModuleInfo: Module: pep_runtime InitialContents: FollowSlot\x7fVisibility: private'
-        
-         myComment <- ''.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pep_runtime' -> () From: ( | {
          'ModuleInfo: Module: pep_runtime InitialContents: FollowSlot\x7fVisibility: public'
         
          directory <- 'applications/pep'.
@@ -44,6 +39,12 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          'ModuleInfo: Module: pep_runtime InitialContents: InitializeToExpression: (_CurrentTimeString)\x7fVisibility: public'
         
          fileInTimeString <- _CurrentTimeString.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pep_runtime' -> () From: ( | {
+         'ModuleInfo: Module: pep_runtime InitialContents: FollowSlot\x7fVisibility: private'
+        
+         myComment <- ''.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pep_runtime' -> () From: ( | {
@@ -88,55 +89,55 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'charArray' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'charArray') -> () From: ( | {
          'ModuleInfo: Module: pep_runtime InitialContents: FollowSlot\x7fVisibility: private'
         
-         my_class* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'charArray' -> 'my_class' -> () From: ( |
+         my_class* = bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'charArray') -> 'my_class' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pep arrayBuildMixin array_masters charArray my_class.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'doubleArray' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'doubleArray') -> () From: ( | {
          'ModuleInfo: Module: pep_runtime InitialContents: FollowSlot\x7fVisibility: private'
         
-         my_class* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'doubleArray' -> 'my_class' -> () From: ( |
+         my_class* = bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'doubleArray') -> 'my_class' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pep arrayBuildMixin array_masters doubleArray my_class.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'floatArray' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'floatArray') -> () From: ( | {
          'ModuleInfo: Module: pep_runtime InitialContents: FollowSlot\x7fVisibility: private'
         
-         my_class* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'floatArray' -> 'my_class' -> () From: ( |
+         my_class* = bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'floatArray') -> 'my_class' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pep arrayBuildMixin array_masters floatArray my_class.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'intArray' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'intArray') -> () From: ( | {
          'ModuleInfo: Module: pep_runtime InitialContents: FollowSlot\x7fVisibility: private'
         
-         my_class* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'intArray' -> 'my_class' -> () From: ( |
+         my_class* = bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'intArray') -> 'my_class' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pep arrayBuildMixin array_masters intArray my_class.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'longArray' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'longArray') -> () From: ( | {
          'ModuleInfo: Module: pep_runtime InitialContents: FollowSlot\x7fVisibility: private'
         
-         my_class* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'longArray' -> 'my_class' -> () From: ( |
+         my_class* = bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'longArray') -> 'my_class' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pep arrayBuildMixin array_masters longArray my_class.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'objectArray' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'objectArray') -> () From: ( | {
          'ModuleInfo: Module: pep_runtime InitialContents: FollowSlot\x7fVisibility: private'
         
-         my_class* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'objectArray' -> 'my_class' -> () From: ( |
+         my_class* = bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'objectArray') -> 'my_class' -> () From: ( |
              {} = 'Comment: For the arrays of the built-in types (int, short, byte, etc.) it is alright to
 have methods in the parent of the array objects. For arrays of \"class instances\"
 it is best not to add too much state to this array parent, since it will be cloned
@@ -146,10 +147,10 @@ Instead, we have added an extra parent-indirection and placed the methods up the
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'shortArray' -> () From: ( | {
+ bootstrap addSlotsTo: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'shortArray') -> () From: ( | {
          'ModuleInfo: Module: pep_runtime InitialContents: FollowSlot\x7fVisibility: private'
         
-         my_class* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters' -> 'shortArray' -> 'my_class' -> () From: ( |
+         my_class* = bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'globals' -> 'pep' -> 'arrayBuildMixin' -> 'array_masters') \/-> 'shortArray') -> 'my_class' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals pep arrayBuildMixin array_masters shortArray my_class.
 '.
             | ) .
@@ -680,23 +681,6 @@ They seem to do the same!\x7fModuleInfo: Module: pep_runtime InitialContents: Fo
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'nativeMethods' -> () From: ( | {
-         'Category: java\x7fCategory: lang\x7fCategory: Class\x7fComment: Corresponding native method defined in .../class.c.
-How is this method different from the method
-java_lang_ClassLoader_findSystemClass_Ljava_lang_String:?
-They seem to do the same!\x7fModuleInfo: Module: pep_runtime InitialContents: FollowSlot'
-        
-         java_lang_Class_forName_Ljava_lang_String: className = ( |
-             cl.
-             name <- ''.
-            | 
-            name: className o_javaStrToSelfStr.
-            cl: (0 pep loader getClassNamed: name IfFail: [
-                java_inst_athrow: java_classes class_java_lang_ClassNotFoundException Message: name.
-            ]).
-            cl proto_instance java_lang_Object_getClass).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'nativeMethods' -> () From: ( | {
          'Category: java\x7fCategory: lang\x7fCategory: Class\x7fModuleInfo: Module: pep_runtime InitialContents: FollowSlot'
         
          java_lang_Class_getInterfaces = ( |
@@ -720,6 +704,22 @@ They seem to do the same!\x7fModuleInfo: Module: pep_runtime InitialContents: Fo
          java_lang_Class_getName = ( |
             | 
             o_selfStrToJavaStr: the_class class_name).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'nativeMethods' -> () From: ( | {
+         'Category: java\x7fCategory: lang\x7fCategory: Class\x7fModuleInfo: Module: pep_runtime InitialContents: FollowSlot'
+        
+         java_lang_Class_getPrimitiveClass_Ljava_lang_String: className = ( |
+             cl.
+             fakeName <- ''.
+             name <- ''.
+            | 
+            name: className o_javaStrToSelfStr.
+            fakeName: 0 pep fakeClassNameFor: name.
+            cl: (0 pep loader getClassNamed: fakeName IfFail: [
+                java_inst_athrow: java_classes class_java_lang_ClassNotFoundException Message: fakeName.
+            ]).
+            cl).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'nativeMethods' -> () From: ( | {
@@ -754,9 +754,27 @@ They seem to do the same!\x7fModuleInfo: Module: pep_runtime InitialContents: Fo
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'nativeMethods' -> () From: ( | {
+         'Category: java\x7fCategory: lang\x7fCategory: Class\x7fModuleInfo: Module: pep_runtime InitialContents: FollowSlot'
+        
+         java_lang_Class_registerNatives = ( |
+            | self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'nativeMethods' -> () From: ( | {
          'Category: java\x7fCategory: lang\x7fCategory: Double\x7fModuleInfo: Module: pep_runtime InitialContents: FollowSlot'
         
          java_lang_Double_doubleToLongBits_D: val = ( |
+             bv.
+            | 
+            bv: (0 byteVector copySize: 8).
+            bv javaAt: 0 PutDouble: val.
+            bv javaLongAt: 0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'nativeMethods' -> () From: ( | {
+         'Category: java\x7fCategory: lang\x7fCategory: Double\x7fModuleInfo: Module: pep_runtime InitialContents: FollowSlot'
+        
+         java_lang_Double_doubleToRawLongBits_D: val = ( |
              bv.
             | 
             bv: (0 byteVector copySize: 8).
@@ -799,6 +817,17 @@ They seem to do the same!\x7fModuleInfo: Module: pep_runtime InitialContents: Fo
          'Category: java\x7fCategory: lang\x7fCategory: Float\x7fModuleInfo: Module: pep_runtime InitialContents: FollowSlot'
         
          java_lang_Float_floatToIntBits_F: val = ( |
+             bv.
+            | 
+            bv: (0 byteVector copySize: 4).
+            bv javaAt: 0 PutFloat: val.
+            bv javaIntAt: 0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'nativeMethods' -> () From: ( | {
+         'Category: java\x7fCategory: lang\x7fCategory: Float\x7fModuleInfo: Module: pep_runtime InitialContents: FollowSlot'
+        
+         java_lang_Float_floatToRawIntBits_F: val = ( |
              bv.
             | 
             bv: (0 byteVector copySize: 4).
@@ -1142,6 +1171,13 @@ They seem to do the same!\x7fModuleInfo: Module: pep_runtime InitialContents: Fo
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'nativeMethods' -> () From: ( | {
+         'Category: java\x7fCategory: lang\x7fCategory: System\x7fModuleInfo: Module: pep_runtime InitialContents: FollowSlot'
+        
+         java_lang_System_registerNatives = ( |
+            | self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'nativeMethods' -> () From: ( | {
          'Category: java\x7fCategory: lang\x7fCategory: Thread\x7fModuleInfo: Module: pep_runtime InitialContents: FollowSlot'
         
          java_lang_Thread_currentThread = ( |
@@ -1181,6 +1217,13 @@ defined in thread.c.\x7fModuleInfo: Module: pep_runtime InitialContents: FollowS
          java_lang_Thread_isInterrupted = ( |
             | 
             (thread_getSelfProcessIfNone: [^ false]) java_interrupted).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'nativeMethods' -> () From: ( | {
+         'Category: java\x7fCategory: lang\x7fCategory: Thread\x7fModuleInfo: Module: pep_runtime InitialContents: FollowSlot'
+        
+         java_lang_Thread_registerNatives = ( |
+            | self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pep' -> 'nativeMethods' -> () From: ( | {

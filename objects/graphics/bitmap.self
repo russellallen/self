@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          bitmap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'bitmap' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals bitmap.
@@ -17,7 +17,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          nullImage = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'nullImage' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals nullImage.
@@ -32,7 +32,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          bitmap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'bitmap' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits bitmap.
@@ -119,7 +119,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          windowBitmap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'windowBitmap' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals windowBitmap.
@@ -128,7 +128,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          windowBitmap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'windowBitmap' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits windowBitmap.

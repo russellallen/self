@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceControlPanel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceControlPanel InitialContents: FollowSlot\x7fVisibility: public'
         
          inheritanceForestSlicer = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'inheritanceForestSlicer' -> () From: ( |
              {} = 'Comment: Given a mirror, learn about all its
@@ -382,7 +382,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceControlPanel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceControlPanel InitialContents: FollowSlot\x7fVisibility: public'
         
          sliceControlPanel = bootstrap define: bootstrap stub -> 'globals' -> 'sliceControlPanel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

@@ -32,5 +32,5 @@ Design and Implementation, pp. 32-43, San Francisco, June, 1992.*
 
 *Published as SIGPLAN Notices 27(7), July, 1992.*
 
-`PDF <../../_static/published/dynamic-deoptimization.pdf>`_
+ `PDF <_static/dynamic-deoptimization.pdf>`_
 

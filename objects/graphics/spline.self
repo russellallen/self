@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: spline InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: spline InitialContents: FollowSlot'
         
          bSpline = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'bSpline' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals bSpline.
@@ -40,7 +40,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: spline InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: spline InitialContents: FollowSlot'
         
          spline = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'spline' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits spline.
@@ -55,7 +55,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: spline InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: spline InitialContents: FollowSlot'
         
          bezier = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'bezier' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals bezier.
@@ -429,7 +429,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: spline InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: spline InitialContents: FollowSlot'
         
          catmullRomSpline = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'catmullRomSpline' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals catmullRomSpline.

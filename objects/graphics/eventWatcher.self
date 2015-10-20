@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: eventWatcher InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: eventWatcher InitialContents: FollowSlot\x7fVisibility: public'
         
          eventWatcher = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'eventWatcher' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals eventWatcher.
@@ -29,7 +29,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: eventWatcher InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: eventWatcher InitialContents: FollowSlot\x7fVisibility: public'
         
          eventWatcher = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'eventWatcher' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits eventWatcher.

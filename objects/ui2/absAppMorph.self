@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fModuleInfo: Module: absAppMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fModuleInfo: Module: absAppMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractSimpleApplicationMorph = bootstrap define: bootstrap stub -> 'globals' -> 'abstractSimpleApplicationMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.23 $'
+ '30.24.0'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -47,9 +48,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'indexable' -> () From: ( | {
-         'ModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: indexable InitialContents: InitializeToExpression: (\'30.24.0\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.23 $'.
+         revision <- '30.24.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'indexable' -> () From: ( | {
@@ -59,12 +60,30 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: vectors\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: vectors\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
         
          indexable = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( |
              {} = 'Comment: vector-like, but not necessarily writable\x7fModuleInfo: Creator: traits indexable.
 '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
+         'Category: tokenizing\x7fModuleInfo: Module: indexable InitialContents: FollowSlot'
+        
+         asTokensSeparatedByItemsSatisfying: aBlock = ( |
+             result.
+             token.
+            | 
+            result: list copyRemoveAll.
+            token: copyRemoveAll.
+            do: [|:c|
+              (aBlock value: c) ifTrue: [
+                 token isEmpty ifFalse: [result add: token. token: copyRemoveAll]
+              ] False: [token: token, c ]
+            ].
+            token isEmpty ifFalse: [result add: token].
+            result).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
@@ -160,6 +179,15 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         
          copyRemoveAll = ( |
             | copySize: 0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
+         'Category: copying\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyReversed = ( |
+            | 
+            [ copy ] onReturn: [|:r|
+              reverseDo: [|:e. :i| r at: size - i - 1 Put: e]]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
@@ -316,6 +344,19 @@ just return a copy of this object. -- Adam & Alex, 4/04\x7fModuleInfo: Module: i
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
+         'Category: split and join\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
+        
+         joinUsing: c = ( |
+             nc.
+            | 
+            nc: first copyRemoveAll.
+            do: [|:e| nc: nc, e, c].
+            nc isEmpty
+             ifTrue: [ nc copy ]
+              False: [ nc copyWithoutLast ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
          'Category: iterating\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
         
          keyAt: v = ( |
@@ -448,6 +489,31 @@ and insert the specified new stuff in its place.\x7fModuleInfo: Module: indexabl
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
+         'Category: copying\x7fComment: Similar to python. Useful wrapper to copyFrom:UpTo:
+
+\'hello\' slice: 0 @ infinity ==> \'hello\'
+\'hello\' slice: 1 @ 3 ==> \'el\'
+\'hello\' slice: -2 @ -1 ==> \'l\'
+\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
+        
+         slice: aPair = ( |
+             start.
+             stop.
+            | 
+            start: (aPair x < 0 ifTrue: [size + aPair x] False: [aPair x]).
+            stop:  (aPair y < 0 ifTrue: [size + aPair y] False: [aPair y]).
+            aPair y = infinity ifTrue: [stop: size].
+            copyFrom: start UpTo: stop).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
+         'Category: split and join\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
+        
+         splitOn: o = ( |
+            | asTokensSeparatedByItemsSatisfying: [|:i| o = i]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
          'Category: unit tests\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: private'
         
          unitTests = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'indexable' -> 'unitTests' -> () From: ( |
@@ -569,7 +635,7 @@ and insert the specified new stuff in its place.\x7fModuleInfo: Module: indexabl
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: vectors\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: vectors\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
         
          mutableIndexable = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( |
              {} = 'Comment: writable and indexable\x7fModuleInfo: Creator: traits mutableIndexable.
@@ -819,7 +885,10 @@ and insert the specified new stuff in its place.\x7fModuleInfo: Module: indexabl
          'Category: sorting\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
         
          sortBy: cmp = ( |
-            | mergeSortFirst: 0 Count: size By: cmp).
+            | 
+            "If empty, just return"
+            isEmpty ifTrue: [^ self]. 
+            mergeSortFirst: 0 Count: size By: cmp).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mutableIndexable' -> () From: ( | {

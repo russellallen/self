@@ -1,6 +1,6 @@
  '$Revision: 30.19 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -8,7 +8,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot\x7fVisibility: public'
         
          generalModel = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'generalModel' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals generalModel.
@@ -573,6 +573,8 @@ Index outliner should probably use something else.\x7fModuleInfo: Module: genera
             | 
             myOutliner expander:
               expanderMorph copyTarget: self Action: expanderAction.
+            myOutliner expander color:
+              preferredTitleColor.
             myOutliner expander).
         } | ) 
 
@@ -589,7 +591,8 @@ update the object\'s title\x7fModuleInfo: Module: generalModel InitialContents: 
                     Target: myOutliner
                     Accept: acceptNameChange
                     Cancel: cancelNameChange
-                     Style: titleStyle.
+                     Style: titleStyle
+                LabelColor: preferredTitleColor.
             titleEditor isAsynchronous: true.
             myOutliner titleEditor: titleEditor.
             titleEditor).
@@ -868,7 +871,7 @@ I am also immutable.\x7fModuleInfo: Creator: globals generalModel parent comment
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
          'Category: comment\x7fCategory: override me\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
         
-         commentButtonText = '``...\'\''.
+         commentButtonText = '`...\''.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
@@ -1379,7 +1382,7 @@ and calling \"expand:\"\x7fModuleInfo: Module: generalModel InitialContents: Fol
         
          menuColor = ( |
             | 
-            preferences outliner currentColorScheme generalModelMenuColor).
+            preferences outliner colorScheme generalModelMenuColor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
@@ -1576,15 +1579,28 @@ May cause me to expand if doExpand is true. -- dmu 10/04\x7fModuleInfo: Module: 
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
-         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
         
-         preferredColor = paint named: 'gray'.
+         preferredBodyColor = ( |
+            | 
+            preferences outliner colorScheme generalModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
-         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: InitializeToExpression: (paint named: \'black\')\x7fVisibility: public'
+         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
         
-         preferredFontColor <- paint named: 'black'.
+         preferredBorderColor = ( |
+            | 
+            preferences outliner colorScheme generalModelBorder).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot\x7fVisibility: public'
+        
+         preferredColor = ( |
+            | 
+            "For non-pluggable outliner compatiblity"
+            preferredBorderColor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
@@ -1597,20 +1613,32 @@ May cause me to expand if doExpand is true. -- dmu 10/04\x7fModuleInfo: Module: 
          'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
         
          preferredHeaderColor = ( |
-             s.
             | 
-            s: preferences outliner currentColorScheme.
-            ((reflect: referrent) includesKey: 'mirror') ifTrue: [| m | 
-                m: referrent mirror.
-                m isReflecteeFloat   ifTrue: [^ s float].
-                m isReflecteeInteger ifTrue: [^ s integer].
-                m isReflecteeString  ifTrue: [^ s string].   
-                m creatorPathIfPresent: [|:p| 
-                    p first = 'traits' ifTrue: [^ s traits].
-                    p first = 'mixins' ifTrue: [^ s mixins]]
-                  IfAbsent: [ ^ s unnamed ].
-                ^ s named]
-               False: [ ^ s unusual ]).
+            preferences outliner colorScheme headerColorFor: referrent).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
+        
+         preferredSlotTitleColor = ( |
+            | 
+            preferences outliner colorScheme slotTitle).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
+        
+         preferredTagColor = ( |
+            | 
+            preferences outliner colorScheme tagColorFor: referrent).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
+        
+         preferredTitleColor = ( |
+            | 
+            preferences outliner colorScheme titleColorFor: referrent).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
@@ -1637,6 +1665,13 @@ May cause me to expand if doExpand is true. -- dmu 10/04\x7fModuleInfo: Module: 
          receiveDroppingPointerToModel: m IfAccepted: aBlk = ( |
             | 
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
+        
+         recolorModuleSummary = ( |
+            | "See children" self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {

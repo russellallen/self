@@ -1,14 +1,14 @@
  '$Revision: 30.10 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
         
          coreSamplerMorph = bootstrap define: bootstrap stub -> 'globals' -> 'coreSamplerMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -31,7 +31,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
         
          coreSamplerMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'coreSamplerMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits coreSamplerMorph.
@@ -107,7 +107,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
         
          proxyMorph = bootstrap define: bootstrap stub -> 'globals' -> 'proxyMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -142,7 +142,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fCategory: Core sampler\x7fModuleInfo: Module: coreSampler InitialContents: FollowSlot'
         
          proxyMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'proxyMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph.
@@ -667,7 +667,7 @@ SlotsToOmit: parent prototype.
     '                     ' &
     '                     ' ) asVector
  Colors: (
-    (paint named: 'black') &
+    (paint named: 'transparent') &
     (paint named: 'yellow')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph eyesImage.
 \x7fIsComplete: '.
@@ -686,7 +686,7 @@ SlotsToOmit: parent prototype.
     '               ' &
     '               ' ) asVector
  Colors: (
-    (paint named: 'black') &
+    (paint named: 'transparent') &
     (paint named: 'yellow')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph flexibleHImage.
 \x7fIsComplete: '.
@@ -713,7 +713,7 @@ SlotsToOmit: parent prototype.
     '   0   ' &
     '       ' ) asVector
  Colors: (
-    (paint named: 'black') &
+    (paint named: 'transparent') &
     (paint named: 'yellow')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph flexibleVImage.
 \x7fIsComplete: '.
@@ -963,7 +963,7 @@ SlotsToOmit: parent prototype.
     '               ' &
     '               ' ) asVector
  Colors: (
-    (paint named: 'black') &
+    (paint named: 'transparent') &
     (paint named: 'yellow')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph rigidHImage.
 \x7fIsComplete: '.
@@ -990,7 +990,7 @@ SlotsToOmit: parent prototype.
     '  0 0  ' &
     '  000  ' ) asVector
  Colors: (
-    (paint named: 'black') &
+    (paint named: 'transparent') &
     (paint named: 'yellow')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph rigidVImage.
 \x7fIsComplete: '.
@@ -1009,7 +1009,7 @@ SlotsToOmit: parent prototype.
     '0   0     0   0' &
     '0             0' ) asVector
  Colors: (
-    (paint named: 'black') &
+    (paint named: 'transparent') &
     (paint named: 'yellow')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph shrinkWrapHImage.
 \x7fIsComplete: '.
@@ -1036,7 +1036,7 @@ SlotsToOmit: parent prototype.
     '   0   ' &
     '0000000' ) asVector
  Colors: (
-    (paint named: 'black') &
+    (paint named: 'transparent') &
     (paint named: 'yellow')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits proxyMorph shrinkWrapVImage.
 \x7fIsComplete: '.

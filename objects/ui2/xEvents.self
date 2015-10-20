@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Events\x7fComment: Supports platform independent usage of events
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Events\x7fComment: Supports platform independent usage of events
 combined with platform specific initialization:
 
 Native X events are used for initialization,
@@ -87,7 +87,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Events\x7fModuleInfo: Module: xEvents InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Events\x7fModuleInfo: Module: xEvents InitialContents: FollowSlot\x7fVisibility: public'
         
          ui2XEvent = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( |
              {} = 'Comment: A ui2XEvent is a general input event. Variations include mouse button

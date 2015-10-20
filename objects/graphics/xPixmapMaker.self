@@ -60,7 +60,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: xPixmapMaker InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: xPixmapMaker InitialContents: FollowSlot'
         
          xPixmapMaker = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'xPixmapMaker' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals xPixmapMaker.
@@ -105,7 +105,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: xPixmapMaker InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: xPixmapMaker InitialContents: FollowSlot'
         
          xPixmapMaker = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'xPixmapMaker' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits xPixmapMaker.

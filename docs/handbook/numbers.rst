@@ -6,15 +6,15 @@ indentation indicates that one traits object is a child of another. The prefix â
 omitted since these hierarchy descriptions always describe the interrelationship between traits objects.
 In most cases, leaf traits are concrete and have an associated prototype with the same name.)
 
-	::
-	
-		orderedOddball
-			number
-				float
-				integer
-					smallInt
-					bigInt
-					
+::
+
+    orderedOddball
+        number
+            float
+            integer
+                smallInt
+                bigInt
+
 ``traits number`` defines behavior common to all numbers, such as ``successor``, ``succ``, ``predecessor``,
 ``pred``, ``absoluteValue``, ``negate``, ``double``, ``half``, ``max:``, and ``min:``. ``traits number``
 inherits from ``traits orderedOddball``, so sending ``copy`` or ``clone`` to a number returns the
@@ -23,33 +23,33 @@ number itself. ``traits integer`` defines behavior common to all integers such a
 how the result is truncated or rounded. Integers also include behavior for iterating through a subrange,
 including::
 
-	to:Do:
-	to:By:Do:
-	to:ByNegative:Do:
-	upTo:Do:
-	upTo:By:Do:
-	downTo:Do:
-	downTo:By:Do:
+    to:Do:
+    to:By:Do:
+    to:ByNegative:Do:
+    upTo:Do:
+    upTo:By:Do:
+    downTo:Do:
+    downTo:By:Do:
 
 Relevant oddballs:
 
-	* infinity IEEE floating-point infinity
-	
-	* minSmallInt smallest smallInt in this implementation
-	
-	* maxSmallInt biggest smallInt in this implementation
+    * infinity IEEE floating-point infinity
+
+    * minSmallInt smallest smallInt in this implementation
+
+    * maxSmallInt biggest smallInt in this implementation
 
 Modules: number, float, integer, smallInt, bigInt
 
 Random Numbers
 --------------
 
-		::
-		
-			clonable
-			random
-			randomLC
-			prototypes random
+::
+
+    clonable
+    random
+    randomLC
+    prototypes random
 
 ``Traits random`` defines the abstract behavior of random number generators. A random number
 generator can be used to generate random booleans, integers, floats, characters or strings. ``traits
@@ -61,10 +61,10 @@ Modules: random
 Time
 ----
 
-	::
+::
 
-		clonable
-		time
+    clonable
+    time
 
 A time object represents a date and time (to the nearest millisecond) since midnight GMT on January
 1, 1970. The message ``current`` returns a new time object containing the current time. Two

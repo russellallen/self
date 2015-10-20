@@ -201,7 +201,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
       object ( )
     object (
       slotList |
-        annotatedSlotGroup { 'Category: system\x7fCategory: numbers\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
+        annotatedSlotGroup { 'Category: core\x7fCategory: numbers\x7fModuleInfo: Module: integer InitialContents: FollowSlot\x7fVisibility: public'
           slot
             unarySlotName integer =
             keywordSend: setObjectAnnotationOf:From:

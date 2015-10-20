@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: streams\x7fModuleInfo: Module: streams InitialContents: FollowSlot\x7fVisibility: private'
+         'Category: core\x7fCategory: streams\x7fModuleInfo: Module: streams InitialContents: FollowSlot\x7fVisibility: private'
         
          positionableStream = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'positionableStream' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals positionableStream.
@@ -454,7 +454,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: streams\x7fModuleInfo: Module: streams InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: streams\x7fModuleInfo: Module: streams InitialContents: FollowSlot\x7fVisibility: public'
         
          readStream = bootstrap define: bootstrap stub -> 'globals' -> 'readStream' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -551,7 +551,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: streams\x7fModuleInfo: Module: streams InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: streams\x7fModuleInfo: Module: streams InitialContents: FollowSlot\x7fVisibility: public'
         
          writeStream = bootstrap define: bootstrap stub -> 'globals' -> 'writeStream' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

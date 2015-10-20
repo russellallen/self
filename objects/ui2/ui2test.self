@@ -60,7 +60,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Tests\x7fModuleInfo: Module: ui2test InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Tests\x7fModuleInfo: Module: ui2test InitialContents: FollowSlot'
         
          ui2test = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui2test' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals ui2test.
@@ -81,7 +81,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Tests\x7fModuleInfo: Module: ui2test InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Tests\x7fModuleInfo: Module: ui2test InitialContents: FollowSlot\x7fVisibility: public'
         
          ui2test = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui2test' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits ui2test.

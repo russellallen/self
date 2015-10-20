@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: demoUtilities InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: demoUtilities InitialContents: FollowSlot\x7fVisibility: public'
         
          clockMorph = bootstrap define: bootstrap stub -> 'globals' -> 'clockMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -31,7 +31,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Applications\x7fModuleInfo: Module: demoUtilities InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Applications\x7fModuleInfo: Module: demoUtilities InitialContents: FollowSlot'
         
          demoUtilities = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'demoUtilities' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals demoUtilities.

@@ -60,7 +60,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: vectors\x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: vectors\x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: public'
         
          byteVector = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits byteVector.
@@ -634,7 +634,7 @@ if space overflows. -- dmu 5/04\x7fModuleInfo: Module: vector InitialContents: F
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: collections\x7fCategory: vectors\x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: vectors\x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: public'
         
          vector = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'vector' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits vector.

@@ -1,14 +1,15 @@
  '$Revision: 30.9 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+"preFileIn" self
 
 
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Module Outliner\x7fModuleInfo: Module: moduleModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Module Outliner\x7fModuleInfo: Module: moduleModel InitialContents: FollowSlot\x7fVisibility: public'
         
          moduleModel = bootstrap define: bootstrap stub -> 'globals' -> 'moduleModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -297,7 +298,8 @@ SlotsToOmit: parent.
         
          titleString = ( |
             | 
-            module nameOrNone).
+            module nameOrNone,
+            ((module tree = '') ifTrue: '' False: [' (in ', module tree, ' tree)'])).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'moduleModel' -> 'parent' -> () From: ( | {

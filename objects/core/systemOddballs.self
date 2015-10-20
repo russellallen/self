@@ -485,10 +485,12 @@ Probably not worth making smaller than the size of eden.\x7fModuleInfo: Module: 
             | 
             releaseObjectIDs.
             history   freeResults.
-            ((reflect: self) lookupKey: 'desktop') isEmpty 
-              ifFalse: [desktop releaseObjects].
-            ((reflect: self) lookupKey: 'ui') isEmpty 
-              ifFalse: [ui releaseObjects].
+            ((reflect: self) lookupKey: 'desktop') isEmpty ifFalse: [
+              ((reflect: desktop) lookupKey: 'releaseObjects') isEmpty ifFalse: [
+                desktop releaseObjects]].
+            ((reflect: self) lookupKey: 'ui') isEmpty ifFalse: [
+              ((reflect: ui) lookupKey: 'releaseObjects') isEmpty ifFalse: [
+                ui releaseObjects]].
             traits cachedSlotAnnotation releaseObjects.
             scheduler releaseObjects.
             self).
@@ -1003,7 +1005,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: Virtual Machine interface\x7fModuleInfo: Module: systemOddballs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: virtual machine interface\x7fModuleInfo: Module: systemOddballs InitialContents: FollowSlot\x7fVisibility: public'
         
          typeSizes = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'typeSizes' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals typeSizes.
@@ -1038,7 +1040,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: Virtual Machine interface\x7fModuleInfo: Module: systemOddballs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: virtual machine interface\x7fModuleInfo: Module: systemOddballs InitialContents: FollowSlot\x7fVisibility: public'
         
          vmSpy = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'vmSpy' -> () From: ( |
              {} = 'Comment: This object gathers together operations to control

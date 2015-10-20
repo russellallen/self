@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Examples\x7fModuleInfo: Module: testMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Examples\x7fModuleInfo: Module: testMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          arcTestMorph = bootstrap define: bootstrap stub -> 'globals' -> 'arcTestMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

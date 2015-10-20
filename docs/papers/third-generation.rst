@@ -36,5 +36,5 @@ make an order-of-magnitude difference in the pause time distribution.
 
 *Proceedings of the ACM OOPSLA `94 Conference, Portland, OR, October 1994.*
 
-`PDF <../../_static/published/third-generation.pdf>`_
+ `PDF <_static/third-generation.pdf>`_
 

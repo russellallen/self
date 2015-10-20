@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: xIconMaker InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: xIconMaker InitialContents: FollowSlot'
         
          xIconMaker = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'xIconMaker' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals xIconMaker.
@@ -111,7 +111,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: xIconMaker InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: xIconMaker InitialContents: FollowSlot'
         
          xIconMaker = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'xIconMaker' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits xIconMaker.

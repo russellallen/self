@@ -32,5 +32,6 @@ discussed in :ref:`[UCC91] <citations>`.
    buildworld.rst
    lowlevel.rst
    textdebug.rst
+   logging.rst
 
 

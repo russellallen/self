@@ -226,7 +226,7 @@ SlotsToOmit: comment directory fileInTimeString postFileIn revision subpartNames
       object ( )
     object (
       slotList |
-        annotatedSlotGroup { 'Category: collections\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
+        annotatedSlotGroup { 'Category: core\x7fCategory: collections\x7fModuleInfo: Module: collection InitialContents: FollowSlot\x7fVisibility: public'
           slot
             unarySlotName collection =
             keywordSend: setObjectAnnotationOf:From:

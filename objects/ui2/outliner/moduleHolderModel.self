@@ -1,6 +1,6 @@
  '$Revision: 30.8 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -8,7 +8,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Module Outliner\x7fModuleInfo: Module: moduleHolderModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Module Outliner\x7fModuleInfo: Module: moduleHolderModel InitialContents: FollowSlot\x7fVisibility: public'
         
          moduleHolderModel = bootstrap define: bootstrap stub -> 'globals' -> 'moduleHolderModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -88,7 +88,8 @@ globals generalModel parent buttonDescriptions. _Clone
          'Category: appearance\x7fModuleInfo: Module: moduleHolderModel InitialContents: FollowSlot\x7fVisibility: private'
         
          menuColor = ( |
-            | preferences outliner currentColorScheme moduleHolderModelMenuColor).
+            | 
+            preferences outliner colorScheme moduleHolderModelMenuColor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'moduleHolderModel' -> 'parent' -> () From: ( | {
@@ -102,7 +103,7 @@ globals generalModel parent buttonDescriptions. _Clone
         
          preferredColor = ( |
             | 
-            preferences outliner currentColorScheme moduleHolderModel).
+            preferences outliner colorScheme moduleHolderModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'moduleHolderModel' -> 'parent' -> () From: ( | {

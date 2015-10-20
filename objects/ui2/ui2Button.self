@@ -70,7 +70,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: ui2Button InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: ui2Button InitialContents: FollowSlot\x7fVisibility: public'
         
          ui2Button = bootstrap define: bootstrap stub -> 'globals' -> 'ui2Button' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'baseMinHeight' From:
@@ -128,7 +128,7 @@ SlotsToOmit: baseMinHeight baseMinWidth parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: ui2Button InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: ui2Button InitialContents: FollowSlot\x7fVisibility: public'
         
          ui2Button = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui2Button' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits ui2Button.

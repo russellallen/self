@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: examples\x7fModuleInfo: Module: programmingExamples InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: applications\x7fCategory: examples\x7fModuleInfo: Module: programmingExamples InitialContents: FollowSlot\x7fVisibility: public'
         
          anExampleObject = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'anExampleObject' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals anExampleObject.

@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
         
          simpleEventHandler = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'simpleEventHandler' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals simpleEventHandler.
@@ -236,7 +236,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
         
          window = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'x11Globals' -> 'window' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals x11Globals window.
@@ -305,7 +305,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
         
          xWindow = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'xWindow' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits xWindow.
@@ -350,7 +350,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fComment: platform-independent code
+         'Category: graphical interface\x7fCategory: windowing\x7fComment: platform-independent code
 for UI2 windows\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractWindow = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractWindow' -> () From: ( |

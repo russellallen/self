@@ -1,7 +1,7 @@
-'Sun-$Revision: 30.10 $'
+'30.11.0-prerelease1'
 
 '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2015 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -120,6 +120,20 @@ mixins _AddSlotsIfAbsent: ( |
 | )
 
 globals _AddSlotsIfAbsent: ( |
+
+{ 'Category: core\x7fModuleInfo: Module: init InitialContents: FollowSlot\x7fVisibility: public'
+  nil        = nil _AddSlots: ( | 
+{} = 'ModuleInfo: Creator: globals nil.\x7fIsComplete: '. 
+| ).
+  { 'Category: booleans'
+false      = false _AddSlots: ( | 
+  {} = 'ModuleInfo: Creator: globals false.\x7fIsComplete: '. 
+  | ).
+true       = true _AddSlots: ( | 
+  {} = 'ModuleInfo: Creator: globals true.\x7fIsComplete: '. 
+  | ).
+  }
+
  { 'Category: collections\x7fCategory: vectors\x7fModuleInfo: Module: init InitialContents: FollowSlot\x7fVisibility: public'
     byteVector	= byteVector _AddSlots: ( |
       {} = 'ModuleInfo: Creator: globals byteVector.'.
@@ -137,10 +151,25 @@ globals _AddSlotsIfAbsent: ( |
     "needed for file names below, replaced in string.self"
     mutableString     = byteVector _Clone.
  }
+}
+
+ { 'Category: platform\x7fCategory: external libraries\x7fModuleInfo: Module: init InitialContents: FollowSlot\x7fVisibility: public'
+	proxy    = proxy _AddSlots: ( |
+	  {} = 'ModuleInfo: Creator: globals proxy.'
+	  | ).
+	fctProxy = fctProxy _AddSlots: ( |
+	  {} = 'ModuleInfo: Creator: globals fctProxy.'
+	  | ).
+ }
+
+
  { 'Category: system\x7fModuleInfo: Module: init InitialContents: FollowSlot\x7fVisibility: public'
-    bootstrap = ( |
-      {} = 'Comment: routines used to read in self source files into an empty VM.\x7fModuleInfo: Creator: globals bootstrap.'.
-    | ).
+ 
+    { 'Category: modules'
+        bootstrap = ( |
+          {} = 'Comment: routines used to read in self source files into an empty VM.\x7fModuleInfo: Creator: globals bootstrap.'.
+        | ).
+    }
 
     mirrors = ( |
       {} = 'ModuleInfo: Creator: globals mirrors.'.
@@ -199,28 +228,15 @@ globals _AddSlotsIfAbsent: ( |
       }
     | ).
 
-    modules = ( |
-      {} = 'ModuleInfo: Creator: globals modules.'.
-    | ).
 
-    { 'Category: OS and filesystem interface\x7fModuleInfo: Module: init InitialContents: FollowSlot'
-      snapshotAction = snapshotAction _AddSlots: ( |
-        {} = 'ModuleInfo: Creator: globals snapshotAction.\x7fIsComplete: '.
-      | ).
+    { 'Category: modules\x7fModuleInfo: Module: init InitialContents: FollowSlot'
+        modules = ( |
+          {} = 'ModuleInfo: Creator: globals modules.'.
+        | ).
+        snapshotAction = snapshotAction _AddSlots: ( |
+          {} = 'ModuleInfo: Creator: globals snapshotAction.\x7fIsComplete: '.
+        | ).
     }
-
-    { 'ModuleInfo: Module: init InitialContents: FollowSlot\x7fVisibility: public'
-      nil        = nil _AddSlots: ( | 
-	{} = 'ModuleInfo: Creator: globals nil.\x7fIsComplete: '. 
-	| ).
-      { 'Category: booleans'
-	false      = false _AddSlots: ( | 
-	  {} = 'ModuleInfo: Creator: globals false.\x7fIsComplete: '. 
-	  | ).
-	true       = true _AddSlots: ( | 
-	  {} = 'ModuleInfo: Creator: globals true.\x7fIsComplete: '. 
-	  | ).
-      }
 
       { 'Category: concurrency'
 	process    = _ThisProcess _AddSlots: ( |
@@ -238,14 +254,6 @@ globals _AddSlotsIfAbsent: ( |
 	  } 
 	  | ).
       }
-      { 'Category: external libraries'
-	proxy    = proxy _AddSlots: ( |
-	  {} = 'ModuleInfo: Creator: globals proxy.'
-	  | ).
-	fctProxy = fctProxy _AddSlots: ( |
-	  {} = 'ModuleInfo: Creator: globals fctProxy.'
-	  | ).
-      }
       { 'Category: annotations'
 	objectAnnotation = objectAnnotation _AddSlots: ( |
 	  {} = 'ModuleInfo: Creator: globals objectAnnotation.'
@@ -255,7 +263,7 @@ globals _AddSlotsIfAbsent: ( |
 	  | ).
       }
     }
-  }
+ 
 | )
 
 
@@ -366,6 +374,48 @@ globals bootstrap _AddSlotsIfAbsent: ( |
         n: concat: n                     With: '/'.
         n: concat: n                     With: name.
         (concat: n With: '.self') _RunScriptIfFail: fb).
+        
+        read: name From: dir InTree: t = ( |
+           | 
+           read: name From: dir InTree: t IfFail: [ | :e. :prim |
+             'failed to read: ' _StringPrint. 
+             name         _StringPrint.
+             ' from: '    _StringPrint.
+             dir          _StringPrint.
+             ' in tree: ' _StringPrint.
+             t            _StringPrint.
+             '.  Error: ' _StringPrint.
+             e            _StringPrint. 
+             '\n'         _StringPrint. 
+             _ThisProcess _AbortProcess.
+           ]).
+
+        read: name From: dir InTree: t IfFail: fb = ( | n | 
+           n: ''.
+           t = '' ifFalse: [| l |
+             "This will break if modules module not loaded!"
+             l: (| lobby = lobby |) lobby.
+             n: concat: (l modules init treeRootFor: t 
+                                           IfAbsent: [^ l error: 'Cannot find tree:', t]) 
+                  With: '/'].
+           n: concat: n                     With: dir.
+           n: concat: n                     With: '/'.
+           n: concat: n                     With: name.
+           (concat: n With: '.self') _RunScriptIfFail: [|:e. :prim | ^ fb value: e With: prim]).
+
+        read: name InTree: t = ( |
+           | 
+           read: name From: '' InTree: t IfFail: [ | :e. :prim |
+             'failed to read: ' _StringPrint. 
+             name         _StringPrint.
+             ' in tree: ' _StringPrint.
+             t            _StringPrint.
+             '.  Error: ' _StringPrint.
+             e            _StringPrint. 
+             '\n'         _StringPrint. 
+             _ThisProcess _AbortProcess.
+           ]).
+    
   }
   { 'Category: creating name spaces\x7fVisibility: public'
     stub = ( |
@@ -527,6 +577,14 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
     {  'Category: state\x7fModuleInfo: Module: init InitialContents: InitializeToExpression: (vector)\x7fVisibility: publicReadPrivateWrite'
 	 removedSlotPaths <- vector.
 	 addedOrChangedSlots <- vector.
+    }
+    {  'ModuleInfo: Module: init InitialContents: InitializeToExpression: (\'\')'
+        
+         tree <- ''.
+    }
+    {  'ModuleInfo: Module: init InitialContents: FollowSlot'
+        
+         preFileIn = ("preFileIn" self).
     }
      {  'ModuleInfo: Module: init InitialContents: FollowSlot\x7fVisibility: private'
       parent* = ( | 

@@ -16,7 +16,7 @@ in the message is at least the same as the number of arguments the block takes (
 arguments are ignored, but it is an error to provide too few). For example, the following block takes
 two arguments::
 
-	[| :arg1. :arg2 | arg1 + arg2 ]
+    [| :arg1. :arg2 | arg1 + arg2 ]
 
 and can be evaluated by sending it the message ``value:With:`` to produce the sum of its arguments.
 Blocks are used to implement all control structures in Self and allow the programmer to
@@ -31,12 +31,12 @@ by two unique boolean objects, ``true`` and ``false``. Boolean objects respond t
 ``ifTrue:``, ``ifFalse:``, ``ifTrue:False:``, and ``ifFalse:True:`` by evaluating the appropriate argument
 block. For example, ``true`` implements ``ifTrue:False:`` as::
 
-	ifTrue: b1 False: b2 = ( b1 value )
-	
+    ifTrue: b1 False: b2 = ( b1 value )
+
 That is, when ``true`` is sent ``ifTrue:False:``, it evaluates the first block and ignores the second.
 For example, the following expression evaluates to the absolute value of x::
 
-	x < 0 ifTrue: [ x negate ] False: [ x ]	
+    x < 0 ifTrue: [ x negate ] False: [ x ]
 
 The booleans also define behavior for the logical operations ``AND (&&), OR (||), EXCLUSIVE-OR
 (^^)``, and ``NOT (not)``. Because the binary boolean operators all send value to their argument when
@@ -52,12 +52,12 @@ Loops
 The various idioms for constructing loops in Self are best illustrated by example.
 Here is an endless loop::
 
-		[ ... ] loop
+    [ ... ] loop
 
 Here are two loops that test for their termination condition at the beginning of the loop::
 
-		[ proceed ] whileTrue: [ ... ]
-		[ quit ] whileFalse: [ ... ]
+    [ proceed ] whileTrue: [ ... ]
+    [ quit ] whileFalse: [ ... ]
 
 In each case, the block that receives the message repeatedly evaluates itself and, if the termination
 condition is not yet met, evaluates the argument block. The value returned by both loop expressions
@@ -66,12 +66,12 @@ is ``nil``.
 It is also possible to put the termination test at the end of the loop, ensuring that the loop body is
 executed at least once::
 
-		[ ... ] untilTrue: [ quit ]
-		[ ... ] untilFalse: [ proceed ]
+    [ ... ] untilTrue: [ quit ]
+    [ ... ] untilFalse: [ proceed ]
 
 Here is a loop that exits from the middle when quit becomes true::
 
-		[| :exit | ... quit ifTrue: exit ... ] loopExit
+    [| :exit | ... quit ifTrue: exit ... ] loopExit
 
 For the incurably curious: the parameter to the user’s block, supplied by the ``loopExit`` method, is simply a block that
 does a return from the ``loopExit`` method. Thus, the loop terminates when ``exit value`` is evaluated. The constructs
@@ -80,7 +80,7 @@ does a return from the ``loopExit`` method. Thus, the loop terminates when ``exi
 The value returned by the overall “[...] loopExit” expression is nil. Here is a loop expression
 that exits and evaluates to a value determined by the programmer when quit becomes true::
 
-		[| :exit | ... quit ifTrue: [ exit value: expr ] ] loopExitValue
+    [| :exit | ... quit ifTrue: [ exit value: expr ] ] loopExitValue
 
 Module: block
 
@@ -90,8 +90,8 @@ Block Exits
 It is sometimes convenient to exit a block early, without executing its remaining statements. The
 following constructs support this behavior::
 
-	[| :exit | ... quit ifTrue: exit ... ] exit
-	[| :exit | ... quit ifTrue: [ exit value: expr ] ... ] exitValue
+    [| :exit | ... quit ifTrue: exit ... ] exit
+    [| :exit | ... quit ifTrue: [ exit value: expr ] ... ] exitValue
 
 The first expression evaluates to nil if the block exits early; the second allows the programmer to
 define the expression’s value when the block exits early. Note: These constructs should not be confused
@@ -104,11 +104,11 @@ Other Block Behavior
 
 Blocks have some other useful behavior:
 
-	* One can determine the time in milliseconds required to execute a block using various ways of measuring time using the messages ``userTime``, ``systemTime``, ``cpuTime``, and ``real-Time``.
-	
-	* One can profile the execution of a block using the messages ``profile`` and ``flatProfile``. ``profile`` prints out the source level call graph annotated with call site and timing information	whereas ``flatProfile`` prints out a flat profile sorted by module.
-	
-	* The message ``countSends`` will collect lookup statistics during a block execution.
+    * One can determine the time in milliseconds required to execute a block using various ways of measuring time using the messages ``userTime``, ``systemTime``, ``cpuTime``, and ``real-Time``.
+
+    * One can profile the execution of a block using the messages ``profile`` and ``flatProfile``. ``profile`` prints out the source level call graph annotated with call site and timing information	whereas ``flatProfile`` prints out a flat profile sorted by module.
+
+    * The message ``countSends`` will collect lookup statistics during a block execution.
 
 Any object that inherits from the lobby can be passed to a method that expects a block; behavior in``defaultBehavior`` makes the object behave like a block that evaluates to that object.
 

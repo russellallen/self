@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: User-defined (batch) operations\x7fModuleInfo: Module: powerOperations InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: User-defined (batch) operations\x7fModuleInfo: Module: powerOperations InitialContents: FollowSlot\x7fVisibility: public'
         
          userDefinedOperation = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'userDefinedOperation' -> () From: ( |
              {} = 'Comment: A global point of access for user-defined operations.

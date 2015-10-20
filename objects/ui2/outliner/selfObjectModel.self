@@ -1,6 +1,6 @@
  '$Revision: 30.12 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -74,7 +74,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Object Outliner\x7fModuleInfo: Module: selfObjectModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Object Outliner\x7fModuleInfo: Module: selfObjectModel InitialContents: FollowSlot\x7fVisibility: public'
         
          selfObjectModel = bootstrap define: bootstrap stub -> 'globals' -> 'selfObjectModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -482,7 +482,7 @@ SlotsToOmit: parent.
             b isAsynchronous: isA.
             n: preferredFontSpec size - 2.
             b label: l  FontSpec:      (preferredFontSpec copySize: n)
-                        FontColor:      preferredFontColor.
+                        FontColor:      preferredTitleColor.
             b beFlexibleHorizontally.
             b).
         } | ) 
@@ -520,7 +520,7 @@ SlotsToOmit: parent.
         
          preferredColor = ( |
             | 
-            preferences outliner currentColorScheme selfObjectModel).
+            preferences outliner colorScheme selfObjectModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> () From: ( | {

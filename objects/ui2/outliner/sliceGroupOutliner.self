@@ -1,7 +1,7 @@
  '$Revision: 30.14 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -74,7 +74,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceGroupOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceGroupOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          sliceGroupOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'sliceGroupOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'model' From:
@@ -134,7 +134,6 @@ Profile slices do not. -- 11/04 dmu\x7fModuleInfo: Module: sliceGroupOutliner In
             header addMorphLast: alignmentSpacer.
             addContentsOutlinersToHeader.
             header addAllMorphs: buildHeaderButtons.
-            header colorAll: color.
             updateExpander. "rm if need be"
 
             self).
@@ -316,8 +315,6 @@ Return true if I do.\x7fModuleInfo: Module: sliceGroupOutliner InitialContents: 
             | 
             resend.initialize.
             beFlexibleHorizontally.
-            "removeMorph: lastMorph."
-            lastMorph colorAll: paint copyRandom.
             isLazy ifFalse: [
               "Hack: I need to prebuild the morphs for
               my (expanded) body so that subobjects can be added to me"

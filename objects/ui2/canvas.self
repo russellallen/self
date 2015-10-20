@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          canvas = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'canvas' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals canvas.
@@ -35,7 +35,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          canvas = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'canvas' -> () From: ( |
              {} = 'Comment: A canvas is a two-dimensional medium on which morphs are drawn
@@ -794,7 +794,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractPixmapCanvas = bootstrap define: bootstrap stub -> 'globals' -> 'abstractPixmapCanvas' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -810,7 +810,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractPixmapCanvas = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractPixmapCanvas' -> () From: ( |
              {} = 'Comment: A canvas that draws to an offscreen pixmap.\x7fModuleInfo: Creator: traits abstractPixmapCanvas.
@@ -825,7 +825,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractWindowCanvas = bootstrap define: bootstrap stub -> 'globals' -> 'abstractWindowCanvas' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -847,7 +847,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          abstractWindowCanvas = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractWindowCanvas' -> () From: ( |
              {} = 'Comment: A canvas that draws directly to an X window.\x7fModuleInfo: Creator: traits abstractWindowCanvas.
@@ -868,7 +868,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          colorRecordingCanvas = bootstrap define: bootstrap stub -> 'globals' -> 'colorRecordingCanvas' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -890,7 +890,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          colorRecordingCanvas = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'colorRecordingCanvas' -> () From: ( |
              {} = 'Comment: A canvas that does nothing, used for performance measurements.
@@ -966,7 +966,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          nullCanvas = bootstrap define: bootstrap stub -> 'globals' -> 'nullCanvas' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -982,7 +982,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          nullCanvas = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'nullCanvas' -> () From: ( |
              {} = 'Comment: A canvas that does nothing, used for performance measurements.
@@ -1128,7 +1128,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          pixmapCanvas = bootstrap define: bootstrap stub -> 'globals' -> 'x11Globals' -> 'pixmapCanvas' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1150,7 +1150,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fComment: for xlib\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fComment: for xlib\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          xPixmapCanvas = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'xPixmapCanvas' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits xPixmapCanvas.
@@ -1426,7 +1426,7 @@ as if mouse moved.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fComment: This one is for X windows.\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fComment: This one is for X windows.\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          windowCanvas = bootstrap define: bootstrap stub -> 'globals' -> 'x11Globals' -> 'windowCanvas' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1479,7 +1479,7 @@ SlotsToOmit: parent platformWindow.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fComment: for the X window system\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fComment: for the X window system\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          xWindowCanvas = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'xWindowCanvas' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits xWindowCanvas.

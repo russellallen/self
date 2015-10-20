@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'quartzGlobals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: quartzCanvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: quartzCanvas InitialContents: FollowSlot\x7fVisibility: public'
         
          bufferCanvas = bootstrap define: bootstrap stub -> 'globals' -> 'quartzGlobals' -> 'bufferCanvas' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'clip' From:
@@ -116,7 +116,7 @@ SlotsToOmit: clip parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'quartzGlobals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: quartzCanvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: quartzCanvas InitialContents: FollowSlot\x7fVisibility: public'
         
          windowCanvas = bootstrap define: bootstrap stub -> 'globals' -> 'quartzGlobals' -> 'windowCanvas' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'clip' From:
@@ -158,7 +158,7 @@ SlotsToOmit: clip parent platformWindow.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: quartzCanvas InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: quartzCanvas InitialContents: FollowSlot\x7fVisibility: public'
         
          quartzWindowCanvas = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'quartzWindowCanvas' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits quartzWindowCanvas.

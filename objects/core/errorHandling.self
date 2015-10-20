@@ -1,7 +1,7 @@
- 'Sun-$Revision: 30.15 $'
+ '30.16.0-prerelease1'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -73,11 +73,13 @@ method performs a sanity check on an error message argument.\x7fModuleInfo: Modu
              env = bootstrap stub -> 'lobby' -> ().
             | 
             env process this isDebugged ifFalse: [
-                'Halt: ' print.
-                env process this print. env process this objectID printLine.
+                env log fatal:
+                     'Halt: ', 
+                     env process this asString,
+                     env process this objectID asString.
                 env process this birthEvent ifNil: [
-                  ( 'To debug this process, type "attach: ', 
-                    env process this objectIDNumber printString, '"') printLine
+                  env log info: 'To debug this process, type "attach: ', 
+                    env process this objectIDNumber printString, '"'.
                 ] IfNotNil: [|:birthEvent|
                   birthEvent sourceHand safelyDo: [
                     env selfProcessModel debugProcess: env process this.
@@ -92,7 +94,8 @@ method performs a sanity check on an error message argument.\x7fModuleInfo: Modu
          'Category: error handling\x7fModuleInfo: Module: errorHandling InitialContents: FollowSlot\x7fVisibility: public'
         
          halt: msg = ( |
-            | msg printLine. halt).
+            | 
+            log fatal: msg. halt).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'defaultBehavior' -> () From: ( | {
@@ -116,9 +119,7 @@ method performs a sanity check on an error message argument.\x7fModuleInfo: Modu
         
          warning: string = ( |
             | 
-            globals preferences noisy ifTrue: [ '\a' print. "beep"].
-            'Warning: ' print. string print. '.' printLine. 
-            self).
+            log warn: string. self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
@@ -162,9 +163,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'errorHandling' -> () From: ( | {
-         'ModuleInfo: Module: errorHandling InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: errorHandling InitialContents: InitializeToExpression: (\'30.16.0-prerelease1\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.15 $'.
+         revision <- '30.16.0-prerelease1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'errorHandling' -> () From: ( | {

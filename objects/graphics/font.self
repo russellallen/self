@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: font InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: font InitialContents: FollowSlot\x7fVisibility: public'
         
          font = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'font' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals font.
@@ -29,7 +29,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: font InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: font InitialContents: FollowSlot\x7fVisibility: public'
         
          font = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'font' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits font.

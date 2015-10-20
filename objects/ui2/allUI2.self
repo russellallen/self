@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.13 $'
+ '30.14.0'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -49,9 +50,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allUI2' -> () From: ( | {
-         'ModuleInfo: Module: allUI2 InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: allUI2 InitialContents: InitializeToExpression: (\'30.14.0\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.13 $'.
+         revision <- '30.14.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allUI2' -> () From: ( | {

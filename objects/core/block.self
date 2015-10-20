@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.16 $'
+ '30.17.0'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -48,9 +49,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'block' -> () From: ( | {
-         'ModuleInfo: Module: block InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: block InitialContents: InitializeToExpression: (\'30.17.0\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.16 $'.
+         revision <- '30.17.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'block' -> () From: ( | {
@@ -355,8 +356,9 @@ for the sake of compatibility. -- Ausch\x7fModuleInfo: Module: block InitialCont
          onReturn: cleanUpBlock IfFail: fb = ( |
              r.
             | 
-            r: onNonLocalReturn: [ | :v | cleanUpBlock value. v ] IfFail: [|:e| ^ fb value: e].
-            cleanUpBlock value.
+            r: onNonLocalReturn: [|:v| cleanUpBlock value: v. v] 
+                         IfFail: [|:e| ^ fb value: e].
+            cleanUpBlock value: r.
             r).
         } | ) 
 

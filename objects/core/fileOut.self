@@ -1,8 +1,9 @@
- '$Revision: 30.11 $'
+ '30.12.0-prerelease1'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -88,9 +89,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'fileOut' -> () From: ( | {
-         'ModuleInfo: Module: fileOut InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: fileOut InitialContents: InitializeToExpression: (\'30.12.0-prerelease1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.11 $'.
+         revision <- '30.12.0-prerelease1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'fileOut' -> () From: ( | {
@@ -540,6 +541,8 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             outFile cr.
             outFile writeString: module copyright.
             outFile cr.
+            outFile writeSource: preFileInSource.
+            outFile cr.
             self).
         } | ) 
 
@@ -738,6 +741,8 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                       outFile token: 'From:'.
                       outFile writeString: sm directory.
                     ].
+                    module tree = '' ifFalse: [
+                      outFile token: 'InTree: globals modules ', module name, ' tree'].
                     outFile cr.
                 ].
             ].
@@ -894,6 +899,16 @@ elseBlk invoked with a reason, and also c.
          'ModuleInfo: Module: fileOut InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'transporter' -> 'fileOut' -> () From: ( | {
+         'Category: parts of a module\x7fModuleInfo: Module: fileOut InitialContents: FollowSlot'
+        
+         preFileInSource = ( |
+            | 
+            '[' , 
+               ((reflect: module) at: 'preFileIn' IfAbsent: [^ ' self  ']) value source,
+            '] value').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'transporter' -> 'fileOut' -> () From: ( | {

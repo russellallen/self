@@ -1,13 +1,13 @@
 Foreign Objects
 ===============
 
-	::
+::
 
-			clonable
-				proxy
-					fctProxy
-						foreignFct
-				foreignCode
+    clonable
+        proxy
+            fctProxy
+                foreignFct
+        foreignCode
 
 The low level aspects of interfacing with code written in other languages (via C or C++ glue code)
 are described in the VM Reference Manual. A number of objects in the Self world are used to interface
@@ -33,7 +33,7 @@ appropriate for the current platform.
 
 The ``linker``, ``proxy`` and ``fctProxy`` objects are rather low level and have only limited functionality.
 For example, a fctProxy does not know which code file it is dependent on. The objects
-``foreignFct`` and ``foreignCode`` establish a higher level and easier to use interface. ``A foreign-Code`` 
+``foreignFct`` and ``foreignCode`` establish a higher level and easier to use interface. ``A foreign-Code``
 object represents an “object file” (a file with executable code). It defines methods for loading
 and unloading the object file it represents. A ``foreignFct`` object represents a foreign routine. It
 understands messages for calling the foreign routine and has associated with it a ``foreignCode``

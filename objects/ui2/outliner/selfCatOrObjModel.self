@@ -1,8 +1,9 @@
  '$Revision: 30.11 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -101,7 +102,7 @@ mode and will show all parent slots.\x7fModuleInfo: Module: selfCatOrObjModel In
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Object Outliner\x7fModuleInfo: Module: selfCatOrObjModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Object Outliner\x7fModuleInfo: Module: selfCatOrObjModel InitialContents: FollowSlot\x7fVisibility: public'
         
          selfCatOrObjModel = bootstrap define: bootstrap stub -> 'globals' -> 'selfCatOrObjModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -134,17 +135,10 @@ SlotsToOmit: parent.
                   labelMorph copyLabel: moduleSummaryString
                               FontSpec: moduleSummaryFontSpec
                                  Color: moduleSummaryFontColor.
-            moduleSummary colorAll: myOutliner color.
             safelyDo: [
-              myOutliner addItemFirst: (
-                  (morph copy 
-                    setHeight: 4)
-                    colorAll: myOutliner color).
+              myOutliner addItemFirst: spacerMorph copyV: 4.
               myOutliner addItemFirst: moduleSummary.
-              myOutliner addItemFirst: (
-                  (morph copy 
-                    setHeight: 4)
-                    colorAll: myOutliner color)].
+              myOutliner addItemFirst: spacerMorph copyV: 4].
             self).
         } | ) 
 
@@ -626,7 +620,6 @@ SlotsToOmit: parent.
             moduleSummary label = s
              ifFalse: [
               moduleSummary label: s.
-              moduleSummary colorAll: myOutliner color.
             ].
             self).
         } | ) 

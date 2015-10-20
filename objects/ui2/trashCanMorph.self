@@ -59,7 +59,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Trashcan\x7fModuleInfo: Module: trashCanMorph InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Trashcan\x7fModuleInfo: Module: trashCanMorph InitialContents: FollowSlot'
         
          trashCanExpandedMorph = bootstrap define: bootstrap stub -> 'globals' -> 'trashCanExpandedMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -88,7 +88,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Trashcan\x7fModuleInfo: Module: trashCanMorph InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Trashcan\x7fModuleInfo: Module: trashCanMorph InitialContents: FollowSlot'
         
          trashCanExpandedMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'trashCanExpandedMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits trashCanExpandedMorph.
@@ -103,7 +103,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Trashcan\x7fModuleInfo: Module: trashCanMorph InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Trashcan\x7fModuleInfo: Module: trashCanMorph InitialContents: FollowSlot'
         
          trashCanIconMorph = bootstrap define: bootstrap stub -> 'globals' -> 'trashCanIconMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -126,7 +126,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Trashcan\x7fModuleInfo: Module: trashCanMorph InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Trashcan\x7fModuleInfo: Module: trashCanMorph InitialContents: FollowSlot'
         
          trashCanIconMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'trashCanIconMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits trashCanIconMorph.
@@ -141,7 +141,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Trashcan\x7fModuleInfo: Module: trashCanMorph InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Trashcan\x7fModuleInfo: Module: trashCanMorph InitialContents: FollowSlot'
         
          trashCanMorph = bootstrap define: bootstrap stub -> 'globals' -> 'trashCanMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -158,7 +158,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Trashcan\x7fModuleInfo: Module: trashCanMorph InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Trashcan\x7fModuleInfo: Module: trashCanMorph InitialContents: FollowSlot'
         
          trashCanMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'trashCanMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits trashCanMorph.

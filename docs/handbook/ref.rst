@@ -9,7 +9,7 @@ References
 
 [Age94a]
  Ole Agesen. Mango: A Parser Generator for SELF. Sun Microsystems Labs TR SMLI TR-94-27, 1994.
- 
+
 [Age94b]
  Ole Agesen. Constraint Based Type Inference and Parametric Polymorphism. In Proc. International Static Analysis Symposium, Sep 28-30, 1994.
 
@@ -17,32 +17,32 @@ References
  Craig Chambers and David Ungar. Customization: Optimizing Compiler Technology for SELF, a Dynamically-Typed Object-Oriented Programming Language. In Proceedings of the SIGPLAN ’89 Conference on Programming Language Design and Implementation, Portland, OR, June, 1989. Published as SIGPLAN Notices 24(7), July, 1989.
 
 [CU90]
- Craig Chambers and David Ungar. Iterative Type Analysis and Extended Message Splitting: Optimizing Dynamically-Typed Object-Oriented Programs. In Proceedings of the SIGPLAN ’90 Conference on Programming Language Design and Implementation, White Plains, NY, June, 1990. Published as SIGPLAN Notices 25(6), June, 1990. Also published in Lisp and Symbolic Computation 4(3), June, 1991. 
+ Craig Chambers and David Ungar. Iterative Type Analysis and Extended Message Splitting: Optimizing Dynamically-Typed Object-Oriented Programs. In Proceedings of the SIGPLAN ’90 Conference on Programming Language Design and Implementation, White Plains, NY, June, 1990. Published as SIGPLAN Notices 25(6), June, 1990. Also published in Lisp and Symbolic Computation 4(3), June, 1991.
 
 [CU91]
- Craig Chambers and David Ungar. Making Pure Object-Oriented Languages Practical. In OOPSLA ’91 Conference Proceedings, Phoenix, AZ, October, 1991. Published as SIGPLAN Notices 26(11), November, 1991. 
- 
+ Craig Chambers and David Ungar. Making Pure Object-Oriented Languages Practical. In OOPSLA ’91 Conference Proceedings, Phoenix, AZ, October, 1991. Published as SIGPLAN Notices 26(11), November, 1991.
+
 [CUC91]
- Craig Chambers, David Ungar, Bay-Wei Chang, and Urs Hölzle. Parents are Shared Parts of Objects: Inheritance and Encapsulation in SELF. In Lisp and Symbolic Computation 4(3), June, 1991. 
+ Craig Chambers, David Ungar, Bay-Wei Chang, and Urs Hölzle. Parents are Shared Parts of Objects: Inheritance and Encapsulation in SELF. In Lisp and Symbolic Computation 4(3), June, 1991.
 
 [CUL89]
  Craig Chambers, David Ungar, and Elgin Lee. An Efficient Implementation of SELF, a Dynamically-Typed Object-Oriented Language Based on Prototypes. In OOPSLA ’89 Conference Proceedings, New Orleans, LA, October, 1989. Published as SIGPLAN Notices 24(10), October, 1989. Also published in Lisp and Symbolic Computation 4(3), June, 1991.
 
 [Cha92]
  Craig Chambers. The Design and Implementation of the SELF Compiler, an Optimizing Compiler for Object-Oriented Programming Languages. Ph. D. dissertation, Computer Science Department, Stanford University, March 1992.
- 
+
 [CU93]
  Bay-Wei Chang and David Ungar. Animation: From Cartoons to the User Interface. In UIST ‘93 Conference Proceedings, 1993.
- 
+
 [DS84]
  L Peter Deutsch and Allan M. Schiffman. Efficient Implementation of the Smalltalk-80 System. In Proceedings of the 11th Annual ACM Symposium on the Principles of Programming Languages, Salt Lake City, UT, 1984.
 
 [GR83]
  Adele Goldberg and David Robson. Smalltalk-80: The Language and Its Implementation. Addison-Wesley, Reading, MA, 1983.
- 
+
 [HCU91]
  Urs Hölzle, Craig Chambers, and David Ungar. Optimizing Dynamically-Typed Object-Oriented Programming Languages with Polymorphic Inline Caches. In ECOOP ’91 Conference Proceedings, Geneva, Switzerland, July, 1991. Published as Springer-Verlag LNCS 512, 1991.
- 
+
 [HCU92]
  Urs Hölzle, Craig Chambers, and David Ungar. Debugging Optimized Code with Dynamic Deoptimization. In Proceedings of the ACM SIGPLAN ‘92 Conference on Programming Language Design and Implementation, San Francisco, June 1992. Published as SIGPLAN Notices 27(7), July, 1992.
 
@@ -65,5 +65,5 @@ References
  David Ungar, Craig Chambers, Bay-Wei Chang, and Urs Hölzle. Organizing Programs without Classes. In Lisp and Symbolic Computation 4(3), June, 1991.
 
 [US87]
- David Ungar and Randall B. Smith. SELF: The Power of Simplicity. In OOPSLA ’87 Conference Proceedings, Orlando, FL, 1987. Published as SIGPLAN Notices 22(12), December, 1987. Also published in Lisp and Symbolic Computation 4(3), June, 1991, and as Sun Microsystems Labs TR SMLI 94-0320. 
+ David Ungar and Randall B. Smith. SELF: The Power of Simplicity. In OOPSLA ’87 Conference Proceedings, Orlando, FL, 1987. Published as SIGPLAN Notices 22(12), December, 1987. Also published in Lisp and Symbolic Computation 4(3), June, 1991, and as Sun Microsystems Labs TR SMLI 94-0320.
 

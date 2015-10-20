@@ -78,7 +78,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: quartz InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: quartz InitialContents: FollowSlot\x7fVisibility: public'
         
          quartz = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'quartz' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals quartz.
@@ -4197,7 +4197,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: quartz InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: quartz InitialContents: FollowSlot\x7fVisibility: public'
         
          quartz = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'quartz' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits quartz.
@@ -6444,7 +6444,7 @@ Ideal for laid-out text or scaling on the screen.\x7fModuleInfo: Module: quartz 
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: quartz InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Canvas\x7fModuleInfo: Module: quartz InitialContents: FollowSlot\x7fVisibility: public'
         
          quartzBufferCanvas = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'quartzBufferCanvas' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits quartzBufferCanvas.
@@ -6681,7 +6681,7 @@ Ideal for laid-out text or scaling on the screen.\x7fModuleInfo: Module: quartz 
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Fonts\x7fModuleInfo: Module: quartz InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Fonts\x7fModuleInfo: Module: quartz InitialContents: FollowSlot'
         
          quartzFontDictionary = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'quartzFontDictionary' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits quartzFontDictionary.

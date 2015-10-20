@@ -4,37 +4,37 @@ Other Objects
 Here are some interesting oddball objects not discussed elsewhere:
 
 	+-----------------------------+-----------------------------------------------------------------------+
-	| comparator                  | an object that can compute “diffs” between sequences                  |
+	| comparator                  | An object that can compute “diffs” between sequences.                 |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| compilerProfiling           | compiler profiling                                                    |
+	| compilerProfiling           | Compiler profiling.                                                   |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| desktop                     | The controlling object for the graphical user interface               |
+	| desktop                     | The controlling object for the graphical user interface.              |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| history                     | A history of commands typed at the prompt, and their results          |
+	| history                     | A history of commands typed at the prompt, and their results.         |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| memory                      | memory system interface (GC, snapshot, low space, etc.)               |
+	| memory                      | Memory system interface (GC, snapshot, low space, etc.).              |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| monitor                     | system monitor (spy) control                                          |
+	| monitor                     | System monitor (spy) control.                                         |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| nil                         | indicates an uninitialized value                                      |
+	| nil                         | Indicates an uninitialized value.                                     |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| platforms                   | possible hardware platforms                                           |
+	| platforms                   | Possible hardware platforms.                                          |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| preferences                 | user configuration preferences                                        |
+	| preferences                 | User configuration preferences.                                       |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| profiling, flatProfiling    | controls Self code profiling                                          |
+	| profiling, flatProfiling    | Controls Self code profiling.                                         |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| prompt                      | interactive read-eval-print loop                                      |
+	| prompt                      | Interactive read-eval-print loop.                                     |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| scheduler                   | Self process scheduler                                                |
+	| scheduler                   | Self process scheduler.                                               |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| snapshotAction              | actions to do before/after a snapshot                                 |
+	| snapshotAction              | Actions to do before/after a snapshot.                                |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| thisHost                    | describes the current host platform                                   |
+	| thisHost                    | Describes the current host platform.                                  |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| times                       | reports user, system, cpu, or real time                               |
+	| times                       | Reports user, system, cpu, or real time.                              |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| typeSizes                   | bit/byte sizes for primitive types                                    |
+	| typeSizes                   | Bit/byte sizes for primitive types.                                   |
 	+-----------------------------+-----------------------------------------------------------------------+
-	| vmProfiling                 | virtual machine profiling                                             |
+	| vmProfiling                 | Virtual machine profiling.                                            |
 	+-----------------------------+-----------------------------------------------------------------------+

@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: reflection\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
         
          mirrors = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'mirrors' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals mirrors.
@@ -529,7 +529,7 @@ mirrorProgramming
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: reflection\x7fModuleInfo: Module: mirror InitialContents: FollowSlot\x7fVisibility: public'
         
          reflectionPrimitives = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'reflectionPrimitives' -> () From: ( |
              {} = 'Comment: This object encapsulates all the low-level reflection

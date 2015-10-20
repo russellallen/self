@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.12 $'
+ '30.12.1-prerelease1'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -99,15 +100,6 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                                      i + 2)
                                  |).
 
-            snapshotAction
-              forCommandLineArg: '-headless'
-                       DoAction: (| parent* = lobby.
-                                    value: i With: arg = (
-                                     "Don't start up desktop this time"
-                                     desktop suppressRestart.
-                                     i succ).
-                                 |).
-                                 
             'Fhprtw' do: [|:opt|
               snapshotAction
                 forCommandLineArg: '-', opt
@@ -122,9 +114,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'snapshotAction' -> () From: ( | {
-         'ModuleInfo: Module: snapshotAction InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: snapshotAction InitialContents: InitializeToExpression: (\'30.12.1-prerelease1\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.12 $'.
+         revision <- '30.12.1-prerelease1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'snapshotAction' -> () From: ( | {
@@ -322,6 +314,7 @@ standard mechanism.\x7fModuleInfo: Module: snapshotAction InitialContents: Follo
         
          schedulerInitial = ( |
             | 
+            log info: 'Scheduler started (according to snapshotAction schedulerInitial)'.
             schedulerInitialMessages do: [|:msg| msg fork resume].
             self).
         } | ) 

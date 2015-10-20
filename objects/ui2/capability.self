@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: capability InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: capability InitialContents: FollowSlot\x7fVisibility: public'
         
          capabilities = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'capabilities' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals capabilities.

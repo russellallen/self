@@ -1,14 +1,14 @@
  '$Revision: 30.22 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          acceptCancelPanel = bootstrap define: bootstrap stub -> 'globals' -> 'acceptCancelPanel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -43,7 +43,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          acceptCancelPanel = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'acceptCancelPanel' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits acceptCancelPanel.
@@ -64,7 +64,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          antMorph = bootstrap define: bootstrap stub -> 'globals' -> 'antMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -87,7 +87,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          antMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'antMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits antMorph.
@@ -108,7 +108,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          buttonEditorMorph = bootstrap define: bootstrap stub -> 'globals' -> 'buttonEditorMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -143,7 +143,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          buttonEditorMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'buttonEditorMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits buttonEditorMorph.
@@ -164,7 +164,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          commentMorph = bootstrap define: bootstrap stub -> 'globals' -> 'commentMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -187,7 +187,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          commentMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'commentMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits commentMorph.
@@ -208,7 +208,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          dialogBoxMorph = bootstrap define: bootstrap stub -> 'globals' -> 'dialogBoxMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -243,7 +243,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          dialogBoxMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'dialogBoxMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits dialogBoxMorph.
@@ -264,7 +264,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          dotMorph = bootstrap define: bootstrap stub -> 'globals' -> 'dotMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -281,7 +281,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          dotMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'dotMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits dotMorph.
@@ -296,7 +296,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          expanderMorph = bootstrap define: bootstrap stub -> 'globals' -> 'expanderMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -325,7 +325,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          expanderMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'expanderMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits expanderMorph.
@@ -340,13 +340,19 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'expanderMorph' -> () From: ( | {
+         'ModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (paint named: \'black\')'
+        
+         savedColor <- paint named: 'black'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'expanderMorph' -> () From: ( | {
          'ModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
          target.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          methodExpanderMorph = bootstrap define: bootstrap stub -> 'globals' -> 'methodExpanderMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -369,7 +375,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          methodExpanderMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'methodExpanderMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits methodExpanderMorph.
@@ -548,7 +554,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          notifyingCommentMorph = bootstrap define: bootstrap stub -> 'globals' -> 'notifyingCommentMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -565,7 +571,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          notifyingCommentMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'notifyingCommentMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits notifyingCommentMorph.
@@ -580,7 +586,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          penMorph = bootstrap define: bootstrap stub -> 'globals' -> 'penMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -597,7 +603,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          penMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'penMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits penMorph.
@@ -612,17 +618,18 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          smallEditorMorph = bootstrap define: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
              bootstrap remove: 'prototype' From:
+             bootstrap remove: 'rawColor' From:
              globals rowMorph copyRemoveAllMorphs ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals smallEditorMorph.
 
 CopyDowns:
 globals rowMorph. copyRemoveAllMorphs 
-SlotsToOmit: parent prototype.
+SlotsToOmit: parent prototype rawColor.
 
 \x7fIsComplete: '.
             | ) .
@@ -644,6 +651,12 @@ SlotsToOmit: parent prototype.
          'ModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
          cachedFontSpec.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (nil)'
+        
+         cachedLabelMorph.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
@@ -690,7 +703,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          smallEditorMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits smallEditorMorph.
@@ -705,15 +718,34 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'Category: filing out\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+        
+         prototype = ( |
+            | smallEditorMorph).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'Category: Basic Morph State\x7fModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (paint named: \'transparent\')\x7fVisibility: private'
+        
+         rawColor <- paint named: 'transparent'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
          'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          rawEditMode <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
-         'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (paint named: \'transparent\')\x7fVisibility: public'
         
-         savedColor <- paint named: 'lightGray'.
+         savedColor <- paint named: 'transparent'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (paint named: \'black\')\x7fVisibility: public'
+        
+         savedLabelColor <- paint named: 'black'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
@@ -777,15 +809,17 @@ SlotsToOmit: parent prototype.
             panel: nil.
             lines: textLines copyLines: string.
             lines size <= 1 ifTrue: [
-              addMorphLast: labelMorph copyLabel: string
+              cachedLabelMorph: labelMorph copyLabel: string
                                         FontSpec: style fontSpec
-                                           Color: color textColorForBackground
+                                           Color: savedLabelColor.
+              addMorphLast: cachedLabelMorph
             ] False: [| col |
               col: (columnMorph copy leftJustify beShrinkWrap borderWidth: 0) color: color.
               lines do: [| :l |
-                col addMorphLast: labelMorph copyLabel: l
+                cachedLabelMorph: labelMorph copyLabel: l
                                               FontSpec: style fontSpec
-                                                 Color: color textColorForBackground
+                                                 Color: savedLabelColor.
+                col addMorphLast: cachedLabelMorph
               ].
               addMorphLast: col
             ].
@@ -864,6 +898,16 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
          'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
+         copyString: str Target: tar Accept: accept Cancel: cancel Style: sty LabelColor: c = ( |
+            | 
+            ((((((copy target: tar) string: str) accept: accept) style: sty) savedLabelColor: c)
+              cancelAction: cancel)
+              initialize).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+        
          copyString: str Target: tar Accept: accept Style: sty = ( |
             | 
             ((((copy target: tar) string: str) accept: accept) style: sty)
@@ -924,7 +968,6 @@ SlotsToOmit: parent prototype.
         
          initialize = ( |
             | 
-            color: style color.
             addLabels).
         } | ) 
 
@@ -933,7 +976,7 @@ SlotsToOmit: parent prototype.
         
          initializePrototype = ( |
             | 
-            color: paint named: 'lightGray'.
+            color: paint named: 'transparent'.
             rawEditMode: false.
             borderWidth: 1.
             beShrinkWrap).
@@ -951,6 +994,17 @@ SlotsToOmit: parent prototype.
          'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          isSmallEditorMorph = bootstrap stub -> 'globals' -> 'true' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+        
+         labelColor: c = ( |
+            | 
+            savedLabelColor: c.
+            cachedLabelMorph isNil ifFalse: [
+              cachedLabelMorph color: c].
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
@@ -1042,7 +1096,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fComment: Special smallEditorMorph for
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fComment: Special smallEditorMorph for
 showing and editing slot names in the outliner.
 -- Ungar, 6/20/95\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -1062,7 +1116,7 @@ SlotsToOmit: parent prototype string.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fComment: Special smallEditorMorph for
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fComment: Special smallEditorMorph for
 showing and editing slot names in the outliner.
 -- Ungar, 6/20/95\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -1085,7 +1139,7 @@ showing and editing slot names in the outliner.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          textViewerMorph = bootstrap define: bootstrap stub -> 'globals' -> 'textViewerMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1114,7 +1168,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot'
         
          textViewerMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'textViewerMorph' -> () From: ( |
              {} = 'Comment: A textViewerMorph is a stand-alone text editor containing
@@ -1144,7 +1198,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          uglyTextEditorMorph = bootstrap define: bootstrap stub -> 'globals' -> 'uglyTextEditorMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1173,7 +1227,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          uglyTextEditorMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'uglyTextEditorMorph' -> () From: ( |
              {} = 'Comment: An optimized editor for text only\x7fModuleInfo: Creator: traits uglyTextEditorMorph.
@@ -1655,7 +1709,7 @@ not relative to the editor\'s origin).\x7fModuleInfo: Module: outlinerWidgets In
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          uglyMethodEditorMorph = bootstrap define: bootstrap stub -> 'globals' -> 'uglyMethodEditorMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1672,7 +1726,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          uglyMethodEditorMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'uglyMethodEditorMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits uglyMethodEditorMorph.
@@ -1744,7 +1798,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          uglyActivationEditorMorph = bootstrap define: bootstrap stub -> 'globals' -> 'uglyActivationEditorMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -1761,7 +1815,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          uglyActivationEditorMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'uglyActivationEditorMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits uglyActivationEditorMorph.
@@ -2073,7 +2127,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          clockMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'clockMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits clockMorph.
@@ -2277,9 +2331,6 @@ SlotsToOmit: parent prototype.
         
          colorAll: newC = ( |
             | 
-            "See comment in traits morph for general idea.
-             Here, for legibility do not change color."
-
             morphsDo: [| :m | m colorAll: newC ].
             color: normalColorFor: newC.
             self).
@@ -2322,6 +2373,7 @@ SlotsToOmit: parent prototype.
          initializePrototype = ( |
             | 
             color: paint named: 'black'.
+            savedColor: color.
             collapse: ui2Event.
             self).
         } | ) 
@@ -2350,6 +2402,7 @@ SlotsToOmit: parent prototype.
         
          leftMouseDown: evt = ( |
             | 
+            savedColor: color.
             color: pressedColor.
             evt sourceHand subscribeUntilAllUp: self.
             self).
@@ -2405,8 +2458,7 @@ SlotsToOmit: parent prototype.
         
          normalColor = ( |
             | 
-            owner ifNil: [^ paint named: 'black'].
-            normalColorFor: owner color).
+            savedColor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'expanderMorph' -> () From: ( | {
@@ -2427,8 +2479,6 @@ SlotsToOmit: parent prototype.
         
          pressedColor = ( |
             | 
-            "normalColor outlineColorForBackground"
-            "above didn't show up enough"
             paint named: 'red').
         } | ) 
 
@@ -2665,6 +2715,7 @@ SlotsToOmit: parent prototype.
             panel: nil.
 
             kwCol: columnMorph copy beShrinkWrap rightJustify borderWidth: 0.
+            kwCol color: paint named: 'transparent'.
             formalCol: kwCol copy leftJustify.
 
             sel keywords
@@ -2672,16 +2723,15 @@ SlotsToOmit: parent prototype.
                 Do: [| :kw. :arg |
                   kwCol addMorphLast: labelMorph copyLabel: kw, ' '
                             FontSpec: style fontSpec
-                               Color: paint named: 'black'.
+                               Color: savedLabelColor.
 
                   formalCol addMorphLast: labelMorph copyLabel: arg
                                 FontSpec: style fontSpec
-                                   Color: paint named: 'black'.
+                                   Color: savedLabelColor.
             ].
 
             addMorphLast: kwCol.
             addMorphLast: formalCol.
-            colorAll: color.
             self).
         } | ) 
 
@@ -2697,9 +2747,9 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotNameEditorMorph' -> () From: ( | {
          'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
-         copySlot: slt Target: tar Accept: accept Style: sty = ( |
+         copySlot: slt Target: tar Accept: accept Style: sty LabelColor: lc = ( |
             | 
-            ((((copy target: tar) slot: slt) accept: accept) style: sty)
+            (((((copy target: tar) slot: slt) accept: accept) style: sty) savedLabelColor: lc)
               initialize).
         } | ) 
 

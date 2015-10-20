@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Arrows\x7fModuleInfo: Module: arrowMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Arrows\x7fModuleInfo: Module: arrowMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          arrowBodyMorph = bootstrap define: bootstrap stub -> 'globals' -> 'arrowBodyMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -56,7 +56,7 @@ SlotsToOmit: parent prototype rawBox.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Arrows\x7fModuleInfo: Module: arrowMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Arrows\x7fModuleInfo: Module: arrowMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          arrowBodyMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'arrowBodyMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits arrowBodyMorph.
@@ -77,7 +77,7 @@ SlotsToOmit: parent prototype rawBox.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Arrows\x7fModuleInfo: Module: arrowMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Arrows\x7fModuleInfo: Module: arrowMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          arrowEndMorph = bootstrap define: bootstrap stub -> 'globals' -> 'arrowEndMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -106,7 +106,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Arrows\x7fModuleInfo: Module: arrowMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Arrows\x7fModuleInfo: Module: arrowMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          arrowEndMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'arrowEndMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits arrowEndMorph.

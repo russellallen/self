@@ -70,7 +70,7 @@ languageTests
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: bench\x7fModuleInfo: Module: tests InitialContents: FollowSlot'
+         'Category: applications\x7fCategory: benchmarking\x7fModuleInfo: Module: tests InitialContents: FollowSlot'
         
          tests = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'tests' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals tests.
@@ -744,7 +744,7 @@ a better way to ensure that? -- Adam, 6/05\x7fModuleInfo: Module: tests InitialC
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
-         'Category: collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
         
          listTest = ( | {
                  'ModuleInfo: Module: tests InitialContents: FollowSlot'
@@ -1815,7 +1815,7 @@ One possible fault is that the whole stack unwinds! -- Mario, 2/8/95\x7fModuleIn
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
-         'Category: collections\x7fComment: a simle test -- dmu 2/97\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fComment: a simle test -- dmu 2/97\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
         
          orderedDictionaryTests = ( |
              ks.
@@ -2173,7 +2173,7 @@ frame conversion of all frames.\x7fModuleInfo: Module: tests InitialContents: Fo
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
-         'Category: collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
         
          sequenceTest = ( | {
                  'ModuleInfo: Module: tests InitialContents: FollowSlot'
@@ -2226,7 +2226,7 @@ frame conversion of all frames.\x7fModuleInfo: Module: tests InitialContents: Fo
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
-         'Category: collections\x7fCategory: multi-threaded collections\x7fCategory: keyed collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: multi-threaded collections\x7fCategory: keyed collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
         
          sharedDictionaryTests: useMT = ( |
              b1.
@@ -2257,7 +2257,7 @@ frame conversion of all frames.\x7fModuleInfo: Module: tests InitialContents: Fo
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
-         'Category: collections\x7fCategory: multi-threaded collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: multi-threaded collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
         
          sharedQueueTests = ( |
             | 
@@ -2267,7 +2267,7 @@ frame conversion of all frames.\x7fModuleInfo: Module: tests InitialContents: Fo
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
-         'Category: collections\x7fCategory: multi-threaded collections\x7fComment: For this and other MT tests, first try serially,
+         'Category: core\x7fCategory: collections\x7fCategory: multi-threaded collections\x7fComment: For this and other MT tests, first try serially,
 then with MT. That will help isolate the bug. -- dmu\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
         
          sharedQueueTests: useMT = ( |
@@ -2296,7 +2296,7 @@ then with MT. That will help isolate the bug. -- dmu\x7fModuleInfo: Module: test
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
-         'Category: collections\x7fCategory: multi-threaded collections\x7fCategory: keyed collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: multi-threaded collections\x7fCategory: keyed collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
         
          sharedSetAndDictionaryTests = ( |
             | 
@@ -2307,7 +2307,7 @@ then with MT. That will help isolate the bug. -- dmu\x7fModuleInfo: Module: test
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
-         'Category: collections\x7fCategory: multi-threaded collections\x7fCategory: keyed collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fCategory: multi-threaded collections\x7fCategory: keyed collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
         
          sharedSetTests: useMT = ( |
              b.
@@ -2425,7 +2425,7 @@ then with MT. That will help isolate the bug. -- dmu\x7fModuleInfo: Module: test
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
-         'Category: collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
         
          stringTest = ( |
             | 
@@ -2476,7 +2476,7 @@ Return the result\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVi
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
-         'Category: collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
         
          textLinesTest = ( |
             | 
@@ -2500,7 +2500,7 @@ Return the result\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVi
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
-         'Category: collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
         
          treeTest = ( |
             | 
@@ -2631,7 +2631,7 @@ Return the result\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVi
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
-         'Category: collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVisibility: public'
         
          vectorTest = ( | {
                  'ModuleInfo: Module: tests InitialContents: FollowSlot'
@@ -2668,7 +2668,7 @@ Return the result\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVi
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
-         'Category: collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot'
+         'Category: core\x7fCategory: collections\x7fModuleInfo: Module: tests InitialContents: FollowSlot'
         
          whiteSpaceTestString <- '	
 

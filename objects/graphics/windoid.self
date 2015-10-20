@@ -60,7 +60,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: windoid InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: windoid InitialContents: FollowSlot'
         
          windoid = bootstrap define: bootstrap stub -> 'globals' -> 'windoid' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'handler' From:
@@ -98,7 +98,7 @@ SlotsToOmit: handler iconName name parent size.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: windoid InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: windoid InitialContents: FollowSlot'
         
          windoidEventHandler = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'windoidEventHandler' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals windoidEventHandler.
@@ -137,7 +137,7 @@ SlotsToOmit: handler iconName name parent size.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: windoid InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: windoid InitialContents: FollowSlot'
         
          windoid = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'windoid' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits windoid.

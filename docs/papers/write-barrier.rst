@@ -29,5 +29,5 @@ store.
 *OOPSLA'93 Workshop on Garbage Collection, Washington, D.C., October 1993*
 
 
-`PDF <../../_static/published/write-barrier.pdf>`_
+ `PDF <_static/write-barrier.pdf>`_
 

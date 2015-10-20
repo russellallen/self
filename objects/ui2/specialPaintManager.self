@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'quartzGlobals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: specialPaintManager InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: specialPaintManager InitialContents: FollowSlot\x7fVisibility: public'
         
          unmappedPaintManager = bootstrap define: bootstrap stub -> 'globals' -> 'quartzGlobals' -> 'unmappedPaintManager' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -97,7 +97,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: specialPaintManager InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Paint\x7fModuleInfo: Module: specialPaintManager InitialContents: FollowSlot\x7fVisibility: public'
         
          unmappedPaintManager = bootstrap define: bootstrap stub -> 'globals' -> 'x11Globals' -> 'unmappedPaintManager' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

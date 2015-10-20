@@ -3187,7 +3187,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: OS and filesystem interface\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: host and filesystem\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
         
          unixFile = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits unixFile.

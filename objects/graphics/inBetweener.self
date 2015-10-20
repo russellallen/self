@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          inBetweenerTemplate = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'inBetweenerTemplate' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals inBetweenerTemplate.
@@ -41,7 +41,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          inBetweener = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'inBetweener' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits inBetweener.
@@ -343,7 +343,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          acceleratingInBetweener = bootstrap define: bootstrap stub -> 'globals' -> 'acceleratingInBetweener' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -359,7 +359,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          acceleratingInBetweener = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'acceleratingInBetweener' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits acceleratingInBetweener.
@@ -374,7 +374,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          deceleratingInBetweener = bootstrap define: bootstrap stub -> 'globals' -> 'deceleratingInBetweener' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -391,7 +391,7 @@ SlotsToOmit: parent stepping.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          deceleratingInBetweener = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'deceleratingInBetweener' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits deceleratingInBetweener.
@@ -412,7 +412,7 @@ SlotsToOmit: parent stepping.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          dummyInBetweener = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'dummyInBetweener' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals dummyInBetweener.
@@ -448,7 +448,7 @@ SlotsToOmit: parent stepping.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          jointInBetweener = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'jointInBetweener' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals jointInBetweener.
@@ -457,7 +457,7 @@ SlotsToOmit: parent stepping.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          jointInBetweener = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'jointInBetweener' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits jointInBetweener.
@@ -484,7 +484,7 @@ SlotsToOmit: parent stepping.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          linearInBetweener = bootstrap define: bootstrap stub -> 'globals' -> 'linearInBetweener' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -507,7 +507,7 @@ SlotsToOmit: parent velocity.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          linearInBetweener = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'linearInBetweener' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits linearInBetweener.
@@ -574,7 +574,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          oneWayInBetweener = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'oneWayInBetweener' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits oneWayInBetweener.
@@ -644,7 +644,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          movingLinearInBetweener = bootstrap define: bootstrap stub -> 'globals' -> 'movingLinearInBetweener' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -661,7 +661,7 @@ SlotsToOmit: parent stepping.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          movingLinearInBetweener = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'movingLinearInBetweener' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits movingLinearInBetweener.
@@ -676,7 +676,7 @@ SlotsToOmit: parent stepping.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          peakingInBetweener = bootstrap define: bootstrap stub -> 'globals' -> 'peakingInBetweener' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -707,7 +707,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: graphics\x7fCategory: animation\x7fModuleInfo: Module: inBetweener InitialContents: FollowSlot\x7fVisibility: public'
         
          peakingInBetweener = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'peakingInBetweener' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits peakingInBetweener.

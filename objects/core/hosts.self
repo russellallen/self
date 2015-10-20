@@ -8,13 +8,13 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: platform dependencies\x7fCategory: graphics\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: graphical interface\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          graphicsDependentGlobals* = bootstrap stub -> 'globals' -> 'quartzGlobals' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: OS and filesystem interface\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: host and filesystem\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          host = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'host' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals host.
@@ -62,7 +62,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: OS and filesystem interface\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: host and filesystem\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          host = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'host' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits host.
@@ -146,7 +146,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: platform dependencies\x7fCategory: os\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: os\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          unixGlobals = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'unixGlobals' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals unixGlobals.
@@ -155,13 +155,13 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: platform dependencies\x7fCategory: os\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: os\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          osDependentGlobals* = bootstrap stub -> 'globals' -> 'unixGlobals' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: OS and filesystem interface\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: host and filesystem\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          platforms = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'platforms' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals platforms.
@@ -1274,14 +1274,14 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: OS and filesystem interface\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: host and filesystem\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          thisHost = ( |
             | host copyForThisHost).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: platform dependencies\x7fCategory: graphics\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: graphical interface\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          x11Globals = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals x11Globals.
@@ -1462,7 +1462,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: OS and filesystem interface\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'Category: platform\x7fCategory: host and filesystem\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          platforms = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'platforms' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits platforms.

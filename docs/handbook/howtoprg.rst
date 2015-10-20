@@ -2,6 +2,7 @@
 How to Program in Self
 ######################
 
+
 ************
 Introduction
 ************
@@ -16,13 +17,11 @@ development. It attempts to pull off a novel feat—programming live objects ins
 partially succeeds. Its novelty lies in its view of programs as collections of slots, not objects or
 classes, and its extraction of the programmer's intentions from a web of live objects.
 
-Since Self 4.0, the environment has evolved a little—mostly in the form of new affordances. On
-the Macintosh, Self 4.1 uses option-click for a middle-mouse click, and uses command- (the apple
+On the Macintosh, Self uses option-click for a middle-mouse click, and uses command- (the apple
 key) click for the right button click. So wherever the text says “left-button-click” just click with the
 mouse, where it says “middle-button click” hold down the option key and click with the mouse,
-and where it says “right button click” hold down the command key and click with the mouse. I use
-a Kensington Turbo Mouse with the buttons mapped appropriately. These mappings are defined in
-Self, so you can change them by editing the ``whichButton:`` method in the ``initialization``
+and where it says “right button click” hold down the command key and click with the mouse.
+These mappings are defined in Self, so you can change them by editing the ``whichButton:`` method in the ``initialization``
 category in traits ``ui2MacEvent``.
 
 *****************
@@ -32,38 +31,39 @@ Browsing Concepts
 Introducing the Outliner
 ========================
 
-Objects in the Self 4.1 environment are represented as *outliners*, which can expand to show increasing
+Objects in the Self environment are represented as *outliners*, which can expand to show increasing
 levels of detail. One of these objects has been designed to provide a convenient context
 for typed-in commands, and so it is called the shell. If the shell is not already present on your
 screen, you can summon it by pressing the middle mouse button on the background and selecting
 ``shell``.
 
 ..  figure:: images/Pgm_Env_Image1.*
-    :height: 76 px
-    :width: 218 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
-In Self 4.1, outliners now sport three small buttons in the top-right-hand corner labeled “/\\”, “E”,
+
+Outliners sport three small buttons in the top-right-hand corner labeled “/\\”, “E”,
 and “X”. These buttons summon the object’s parents, add an evaluator text region to the bottom of
-the outliner, and dismiss the outliner. Press the “E” button to get an evaluator.Type ``anExampleObject`` into 
-the evaluator (it will already be selected) and hit the ``Get it`` button (or type metareturn 
-on UNIX, or command-return on MacOS X):
+the outliner, and dismiss the outliner. Press the “E” button to get an evaluator.
+
+Type ``anExampleObject`` into the evaluator (it will already be selected) and hit the ``Get it`` button
+(or type metareturn on UNIX, or command-return on MacOS X):
 
 ..  figure:: images/Pgm_Env_Image2.*
-    :height: 205 px
-    :width: 342 px
-    :scale: 100
-    :align: left
-    
+    :scale: 80
+
 The result object appears in your “hand” raised above the screen as if you were dragging it with the
-left button. Just click the button to set it down.
+left button.
+
+.. note::
+
+  If this returns an error, it may be that you don't have ``anExampleObject`` in your Self world. You can always load it from the file ``objects/misc/programmingExamples.self`` as follows::
+
+    'path/to/objects/misc/programmingExamples.self' runScript
+
+Click the button to set it down.
 
 ..  figure:: images/Pgm_Env_Image3.*
-    :height: 70 px
-    :width: 350 px
-    :scale: 100
-    :align: left 
+    :scale: 80
 
 As with most other things on the Self screen, the left button picks it up and moves it. (For buttons
 and other things that use left-button for other purposes, you can grab them with marquee selection
@@ -75,10 +75,7 @@ Expand and Collapse
 Left-click on the triangle [#f1]_ to expand the object and see more information:
 
 ..  figure:: images/Pgm_Env_Image4.*
-    :height: 242 px
-    :width: 656 px
-    :scale: 100
-    :align: left 
+    :scale: 80
 
 Now it shows a summary of modules containing the slots in this object (just ``programmingExamples``
 here), four slots, and a category containing more slots, although those slots are not shown
@@ -91,26 +88,20 @@ Clicking the top triangle now would collapse this object outliner, but instead l
 by clicking its triangle:
 
 ..  figure:: images/Pgm_Env_Image5.*
-    :height: 358 px
-    :width: 651 px
-    :scale: 100
-    :align: left 
+    :scale: 80
 
 And, one more click expands the subcategory:
 
 ..  figure:: images/Pgm_Env_Image6.*
-    :height: 394 px
-    :width: 660 px
-    :scale: 100
-    :align: left
-    
+    :scale: 80
+
 Slots
 -----
 
 .. |methodslot| image:: images/methodslot.*
 
 .. |constantslot| image:: images/constantslot.*
-                
+
 .. |assignableslot| image:: images/assignableslot.*
 
 The little icons on the right edges of the slots reveal the type of slot: |methodslot| for a method slot (a slot
@@ -122,14 +113,15 @@ slot named ``aCategorizedVariable``: containing the assignment primitive.)
 
 To look at the object contained in a data (constant or assignable) slot, just click on its icon. But if
 the slot is a method, clicking its icon opens up a text editor on its source. For example, clicking on
-the icon at the right of the whoAmI box opens a text editor displaying its source (and typing control-
-L widens the object to show all the text in the selected window):
+the icon at the right of the whoAmI box opens a text editor displaying its source (and typing control-L
+widens the object to show all the text in the selected window):
 
 ..  figure:: images/Pgm_Env_Image7.*
-    :height: 496 px
-    :width: 706 px
-    :scale: 100
-    :align: left
+    :scale: 70
+
+.. raw:: latex
+
+  \newpage
 
 Text Editors
 ------------
@@ -140,10 +132,7 @@ A left-click on another editor will select that one as the typing focus, and to 
 no longer the focus, this editor’s background will change to match the outliner:
 
 ..  figure:: images/Pgm_Env_Image8.*
-    :height: 417 px
-    :width: 680 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 The white triangle in the lower-right corner of the editor (which can barely be seen in the printout
 of this document) can be dragged to resize the editor.
@@ -152,70 +141,64 @@ Someone has done a poor job of indenting this method, so fix it by clicking to t
 I and deleting two spaces:
 
 ..  figure:: images/Pgm_Env_Image9.*
-    :height: 180 px
-    :width: 680 px
-    :scale: 100
-    :align: left
+    :scale: 65
 
 The red and green buttons that just appeared indicate the text has been changed; it no longer reflects
 the source code of the real method. Hitting the red button will cancel the changes, while hitting
 the green button will accept them and change the method:
 
 ..  figure:: images/Pgm_Env_Image10.*
-    :height: 214 px
-    :width: 680 px
-    :scale: 100
-    :align: left
+    :scale: 60
 
 Self text editors will honor the cursor arrow keys, the copy, paste, and cut Sun keys, and
 many emacs-style control characters:
 
-**Table 1 Partial list of control characters in Self text editors**
+.. table:: Partial list of control characters in Self text editors
 
   +-----------------------------------------+-----------------------------------------------------+
   |  Character                              |   Effect                                            |
   +=========================================+=====================================================+
-  |  control-a                              |   move to start of line                             |
+  |  control-a                              |   Move to start of line.                            |
   +-----------------------------------------+-----------------------------------------------------+
-  |  control-b                              |   back one character                                |
+  |  control-b                              |   Back one character.                               |
   +-----------------------------------------+-----------------------------------------------------+
-  |  control-d                              |   delete next character                             |
+  |  control-d                              |   Delete next character.                            |
   +-----------------------------------------+-----------------------------------------------------+
-  |  control-e                              |   go to end of line                                 |
+  |  control-e                              |   Go to end of line.                                |
   +-----------------------------------------+-----------------------------------------------------+
-  |  control-f                              |   forward one character                             |
+  |  control-f                              |   Forward one character.                            |
   +-----------------------------------------+-----------------------------------------------------+
-  |  control-k                              |   kill to end of line                               |
+  |  control-k                              |   Kill to end of line.                              |
   +-----------------------------------------+-----------------------------------------------------+
-  |  control-l                              |   expand the text editor to show the whole text     |
+  |  control-l                              |   Expand the text editor to show the whole text.    |
   +-----------------------------------------+-----------------------------------------------------+
-  |  control-n                              |   go to next line                                   |
+  |  control-n                              |   Go to next line.                                  |
   +-----------------------------------------+-----------------------------------------------------+
-  |  control-o                              |   open a new line after the cursor                  |
+  |  control-o                              |   Open a new line after the cursor.                 |
   +-----------------------------------------+-----------------------------------------------------+
-  |  control-p                              |   go to previous line                               |
+  |  control-p                              |   Go to previous line.                              |
   +-----------------------------------------+-----------------------------------------------------+
-  |  control-t                              |   transpose characters                              |
+  |  control-t                              |   Transpose characters.                             |
   +-----------------------------------------+-----------------------------------------------------+
-  |  control-w                              |   erase previous word                               |
+  |  control-w                              |   Erase previous word.                              |
   +-----------------------------------------+-----------------------------------------------------+
-  |  control-y                              |   yank text from past-buffer to editor              |
+  |  control-y                              |   Yank text from past-buffer to editor.             |
   +-----------------------------------------+-----------------------------------------------------+
-  |  delete, backspace, or control-h        |   erase-last-character                              |
+  |  delete, backspace, or control-h        |   Erase last character.                             |
   +-----------------------------------------+-----------------------------------------------------+
-  |  meta-return (command-return on Mac)    |   accept                                            |
+  |  meta-return (command-return on Mac)    |   Accept.                                           |
   +-----------------------------------------+-----------------------------------------------------+
-  |  escape (also command-period on Mac)    |   cancel                                            |
+  |  escape (also command-period on Mac)    |   Cancel.                                           |
   +-----------------------------------------+-----------------------------------------------------+
-  |  meta-s (command-s on Mac)              |   save a snapshot                                   |
+  |  meta-s (command-s on Mac)              |   Save a snapshot.                                  |
   +-----------------------------------------+-----------------------------------------------------+
-  |  meta-x (command-x on Mac)              |   cut                                               |
+  |  meta-x (command-x on Mac)              |   Cut.                                              |
   +-----------------------------------------+-----------------------------------------------------+
-  |  meta-c (command-c on Mac)              |   copy                                              |
+  |  meta-c (command-c on Mac)              |   Copy.                                             |
   +-----------------------------------------+-----------------------------------------------------+
-  |  meta-v (command-v on Mac)              |   paste                                             |
+  |  meta-v (command-v on Mac)              |   Paste.                                            |
   +-----------------------------------------+-----------------------------------------------------+
-  |  meta-d (command-d on Mac)              |   dismiss morph containing typing focus             |
+  |  meta-d (command-d on Mac)              |   Dismiss morph containing typing focus.            |
   +-----------------------------------------+-----------------------------------------------------+
 
 Dismissing Objects
@@ -247,13 +230,13 @@ the outliner to be affected. For example anExampleObject has many regions and he
 of them:
 
 ..  figure:: images/Pgm_Env_Image11.*
-    :height: 440 px
-    :width: 680 px
-    :scale: 100
-    :align: left
 
 Click on the desired part of the object, be it object, category, slot, text editor, or annotation (annotations
 will be explained later).
+
+.. raw:: latex
+
+  \newpage
 
 The Evaluator
 -------------
@@ -261,10 +244,7 @@ The Evaluator
 Try out the ``whoAmI`` method. Push the “E” button in the top-right of the outliner:
 
 ..  figure:: images/Pgm_Env_Image12.*
-    :height: 589 px
-    :width: 680 px
-    :scale: 100
-    :align: left
+    :scale: 55
 
 The receiver of any messages sent from an evaluator, or indeed any text editor (via ``Do It`` and ``Get It``
 in the editor’s middle-button menu) in an object outliner is the object itself. [#f2]_ Type ``whoAmI`` into
@@ -272,12 +252,13 @@ the evaluator and hit the Get it button (or select the Get It from the text edit
 the message and get back the result:
 
 ..  figure:: images/Pgm_Env_Image13.*
-    :height: 615 px
-    :width: 680 px
-    :scale: 100
-    :align: left
+    :scale: 55
 
 Move the result [#f3]_ out of the way and left-click to set it down.
+
+.. raw:: latex
+
+  \newpage
 
 Adding a slot
 -------------
@@ -286,68 +267,50 @@ Try one more change: adding a slot to the category “``a category of slots``.�
 over the words a ``category of slots`` and select ``Add Slot`` from the middle-button menu.
 
 ..  figure:: images/Pgm_Env_Image14.*
-    :height: 562 px
-    :width: 680 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 After selecting Add Slot a space for a new slot will appear in the object:
 
 ..  figure:: images/Pgm_Env_Image15.*
-    :height: 635 px
-    :width: 584 px
-    :scale: 100
-    :align: left
 
-Each line shows the syntax for a different kind of slot. Create a simple variable by typing 
+Each line shows the syntax for a different kind of slot. Create a simple variable by typing
 ``me<-’Gumby’`` [#f4]_ and hitting the green button to accept the change:
 
 ..  figure:: images/Pgm_Env_Image16.*
-    :height: 633 px
-    :width: 583 px
-    :scale: 100
-    :align: left
 
 After releasing the green button, it stays down to let you know that it is still working. After a few
 seconds the slot appears: [#f5]_
 
 ..  figure:: images/Pgm_Env_Image17.*
-    :height: 529 px
-    :width: 575 px
-    :scale: 100
-    :align: left
+
+.. raw:: latex
+
+  \newpage
 
 Debugger
 ========
 
-Explore the Self debugger. Start by scrambling the send to ``environmentVariable:IfFail`` as
+Explore the Self debugger. Start by scrambling the send to ``environmentVariable:IfFail:`` as
 if you had misspelled it.
 
 ..  figure:: images/Pgm_Env_Image18.*
-    :height: 240 px
-    :width: 575 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 Press the green button to accept the change, then hit the ``Get it`` button. This should break something!
 In fact, instead of the result of the message, a Self debugger will materialize:
 
 ..  figure:: images/Pgm_Env_Image19.*
-    :height: 285 px
-    :width: 603 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 The debugger has a label to indicate which process ran aground, a status indication shown in blue,
 some buttons for controlling the process, and a collapsed outliner for the stack. Expand the stack:
 
 ..  figure:: images/Pgm_Env_Image20.*
-    :height: 253 px
-    :width: 539 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
-The stack filters out uninteresting frames by default. [#f6]_ The debugger assumes that the first method
+    Expanded stack.
+
+The stack filters out uninteresting frames by default [#f6]_. The debugger assumes that the first method
 you want to see is the one based on the text in the evaluator, and since the stack grows upwards this
 oldest frame appears at the bottom. It has no method name, and contains the code ``whoAmI``. That
 method called ``whoAmI``, whose code is too long to show next to the slot button, and that method
@@ -359,28 +322,38 @@ of the evnironment... message. Click on the box to the left of the word ``evniro
 (the one labelled “``...bal os``” if you are running on the Macintosh):
 
 ..  figure:: images/Pgm_Env_Image21.*
-    :height: 53 px
-    :width: 292 px
-    :scale: 100
-    :align: left
+    :scale: 80
+
+    Outliner with interface to the Macintosh.
 
 This object represents the interface to the Macintosh operating system. The little button with the
 apostrophe in the top-left-hand corner indicates that this object has a comment. Push the button to
 show (or hide) the comment:
 
-..  figure:: images/Pgm_Env_Image22.*
-    :height: 178 px
-    :width: 545 px
-    :align: left
-    
+.. only:: not latex
+
+  ..  figure:: images/Pgm_Env_Image22.*
+
+.. only:: latex
+
+  ..  figure:: images/Pgm_Env_Image22.*
+      :scale: 70
+
 (To automatically resize the outliner to show all the text, press control-L.) To see one of Self’s
 scroll bars, grab the comment’s resize triangle (with the left-button) and move it up a bit:
 
-..  figure:: images/Pgm_Env_Image23.*
-    :height: 154 px
-    :width: 602 px
-    :scale: 100
-    :align: left
+.. only:: not latex
+
+  ..  figure:: images/Pgm_Env_Image23.*
+
+.. only:: latex
+
+  ..  figure:: images/Pgm_Env_Image23.*
+      :scale: 80
+
+.. raw:: latex
+
+  \newpage
 
 The affordance that appears on the right of the text is the scroll bar, and you can either drag on the
 little black line or just click in the bar to scroll the text up or down.
@@ -391,43 +364,41 @@ is that it has the word “Variable” in it somewhere. So, use a facility calle
 a pattern and an object, and finds any matching slots in that object or its parents. Use the middlebutton
 on the outliner’s title (``macOSGlobals os``) to get the object menu and select ``Find slot``...
 
-..  figure:: images/Pgm_Env_Image24.*
-    :height: 127 px
-    :width: 245 px
-    :scale: 100
-    :align: left
+.. only:: not latex
 
-Double-click on the word “foo” to select that field for editing. (The same trick works on slot
+  ..  figure:: images/Pgm_Env_Image24.*
+
+.. only:: latex
+
+  ..  figure:: images/Pgm_Env_Image24.*
+      :scale: 80
+
+Double-click on the word “foo\*” to select that field for editing. (The same trick works on slot
 names)
 
 ..  figure:: images/Pgm_Env_Image25.*
-    :height: 138 px
-    :width: 339 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 Since we are searching for a method with “Variable” in its name, backspace (the delete key on the
-Mac) three times [#f7]_ to erase the “foo” type in \*``Variable``\*, hit the green button, and then hit the
+Mac) three times [#f7]_ to erase the “foo” type in “\*Variable\*“, hit the green button, and then hit the
 triangle to start the search (if you make a typing mistake, you can double click the text to make it
 editable again). The triangle will blink a bit while it is searching (one could do other things in the
 meantime during a long search), then the enumerator will show the match(es):
 
 ..  figure:: images/Pgm_Env_Image26.*
-    :height: 148 px
-    :width: 326 px
-    :scale: 100
-    :align: left
-    
+      :scale: 80
+
+.. raw:: latex
+
+  \newpage
+
 Clicking on the little square button(s) would show the exact method(s). But, for our purposes, just
 knowing the name is enough and now you have to fix it. So back to the debugger and click on the
 method button on the right in the ``whoAmI`` slot to expand the stack frame for the ``whoAmI`` method:
 
 ..  figure:: images/Pgm_Env_Image27.*
-    :height: 344 px
-    :width: 552 px
-    :scale: 100
-    :align: left
-    
+      :scale: 80
+
 Now the debugger shows the source of the method, with the actual message being sent highlighted.
 (In this case it is just the whole thing.) One of the conveniences in the Self programming environment
 is that you do not have to go back to the original method to fix it, but can just fix it here (following
@@ -437,31 +408,31 @@ green button will stay in a bit longer because when a method is changed from the
 slot pointing to that same method is made to feel the change—the method is changed in place (see
 the figure below). This feature lets you change a method in a clone and simultaneously affect the
 
- ..  figure:: images/Pgm_Env_Image28.*
-    :height: 455 px
-    :width: 680 px
-    :align: left   
-    
-prototype, if you are putting your methods in prototypes instead of traits. Changing a method in an
+.. _figPrototype:
+..  figure:: images/Pgm_Env_Image28.*
+      :scale: 80
+
+      Situation after change.
+
+prototype (see :numref:`figPrototype`, if you are putting your methods in prototypes instead of traits. Changing a method in an
 ordinary outliner would just affect that one object, even if other objects had been cloned from it.
 This rule avoids unintentional changes. The more global kind of change performed by the debugger
 takes a little longer. When it is accomplished, the red and green buttons will disappear:
-    
-    
+
 ..  figure:: images/Pgm_Env_Image29.*
-    :height: 289 px
-    :width: 536 px
-    :align: left    
-    
+    :scale: 80
+
+.. raw:: latex
+
+  \newpage
+
 Now os is highlighted to show that the process is about to send “os” to implicit-self. Try the ``Step``
 button, which performs a single message send. After hitting the ``Step`` button twice (and a control-
 L to widen the debugger), the process will have entered the ``environmentVariable:IfFail:`` method:
 
 ..  figure:: images/Pgm_Env_Image30.*
-    :height: 380 px
-    :width: 558 px
-    :align: left  
-    
+    :scale: 80
+
 This method is not too interesting (especially on the Macintosh), so leave the debugger by hitting
 ``Continue`` and letting the process finish.
 
@@ -471,8 +442,8 @@ Self.
 
 Here is more information on the debugger for future reference:
 
-	**Table 2 The Debugger Buttons**
-    
+.. table:: The Debugger Buttons
+
   +-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
   |  What it says     |       What it does                                                                                                                                   |
   +===================+======================================================================================================================================================+
@@ -488,11 +459,11 @@ Here is more information on the debugger for future reference:
   +-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
   |  Abort            |       Kills off the process and dismisses the debugger.                                                                                              |
   +-------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-  
+
 In addition to the buttons, each frame in the debugger has some items to control the process in its
 middle-button menu:
 
-	**Table 3 Process control items in the activation middle-button menu**
+.. table:: Process control items in the activation middle-button menu
 
   +-------------------+----------------------------------------------------------------------------------+
   |   What it says    |    What it does                                                                  |
@@ -513,37 +484,37 @@ Enumerators
 
 In addition to the ``Find Slot`` enumerator, Self has other ways to find things:
 
-	**Table 4 Enumerators**
+.. table:: Enumerators
 
-+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Name                                             |        Function                                                                                                                                                                                                                                                                        |  
-+====================================================+========================================================================================================================================================================================================================================================================================+
-|   Implementors                                     |        Finds all the slots with a given name.                                                                                                                                                                                                                                          |  
-+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Implementors of :                                |        Finds all the slots with the given name that take an argument (for read/write slots only).                                                                                                                                                                                      |  
-+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Senders                                          |        Finds all the methods that send a message with a given name.                                                                                                                                                                                                                    |  
-+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Senders of :                                     |        Finds all the methods that send the corresponding assignment message (read/write slots only).                                                                                                                                                                                   |  
-+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Senders in family (Senders of : in family)       |        Finds all the methods in this object, its ancestors, and descendants that send a message with a given name (or the corresponding assignment message).                                                                                                                           |  
-+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Find Slot                                        |        Starting from a designated object, finds all slots in that object and its ancestors whose name matches a given pattern. Case is ignored, “?” matches any character, “*” matches any series of zero or more characters. Also comes in “of :” and “in family” flavors.            |  
-+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Methods Containing                               |        Finds methods containing the specified string. Similar to grep without wildcards.                                                                                                                                                                                               |  
-+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Copied-down Children                             |        Finds objects copied-down (see below) from this one.                                                                                                                                                                                                                            |  
-+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   References                                       |        Finds slots that contain references to the selected object.                                                                                                                                                                                                                     |  
-+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Slots in Module                                  |        On the module menu (see below); shows all slots in a given module.                                                                                                                                                                                                              |  
-+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Added or Changed Slots in Module                 |        On the module menu (see below); shows all slots added or changed in the module since it was filed out.                                                                                                                                                                          |  
-+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Removed Slots in Module                          |        On the module menu (see below); shows the names of the slots removed from the mod-ule since it was last filed out.                                                                                                                                                              |  
-+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Expatriate Slots                                 |        On the changed module menu (see below); shows all slots in filed-out objects that do not themselves specify a module. These slots will not be filed out.                                                                                                                        |  
-+----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Name                                             |        Function                                                                                                                                                                                                                                                                        |
+  +====================================================+========================================================================================================================================================================================================================================================================================+
+  |   Implementors                                     |        Finds all the slots with a given name.                                                                                                                                                                                                                                          |
+  +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Implementors of :                                |        Finds all the slots with the given name that take an argument (for read/write slots only).                                                                                                                                                                                      |
+  +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Senders                                          |        Finds all the methods that send a message with a given name.                                                                                                                                                                                                                    |
+  +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Senders of :                                     |        Finds all the methods that send the corresponding assignment message (read/write slots only).                                                                                                                                                                                   |
+  +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Senders in family (Senders of : in family)       |        Finds all the methods in this object, its ancestors, and descendants that send a message with a given name (or the corresponding assignment message).                                                                                                                           |
+  +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Find Slot                                        |        Starting from a designated object, finds all slots in that object and its ancestors whose name matches a given pattern. Case is ignored, “?” matches any character, “*” matches any series of zero or more characters. Also comes in “of :” and “in family” flavors.            |
+  +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Methods Containing                               |        Finds methods containing the specified string. Similar to grep without wildcards.                                                                                                                                                                                               |
+  +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Copied-down Children                             |        Finds objects copied-down (see below) from this one.                                                                                                                                                                                                                            |
+  +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   References                                       |        Finds slots that contain references to the selected object.                                                                                                                                                                                                                     |
+  +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Slots in Module                                  |        On the module menu (see below); shows all slots in a given module.                                                                                                                                                                                                              |
+  +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Added or Changed Slots in Module                 |        On the module menu (see below); shows all slots added or changed in the module since it was filed out.                                                                                                                                                                          |
+  +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Removed Slots in Module                          |        On the module menu (see below); shows the names of the slots removed from the module since it was last filed out.                                                                                                                                                               |
+  +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Expatriate Slots                                 |        On the changed module menu (see below); shows all slots in filed-out objects that do not themselves specify a module. These slots will not be filed out.                                                                                                                        |
+  +----------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 The ``copy-down`` and ``module`` enumerators will be covered later.
 
@@ -567,102 +538,98 @@ Hacking Objects
 *Hacking---the discipline of making fine furniture from trees using an axe.*
 
 In going through this document, you have already added a slot and edited methods in both object
-outliners and debuggers. In addition Self 4.1 has many other ways to change an object:
-
-	**Table 5 Ways to change an object**
-	
-**Removing, Moving, Copying Categories**   
-
-.. tabularcolumns:: p{5cm} p{5cm} p{5cm} 
+outliners and debuggers. In addition Self has many other ways to change an object:
 
 
-+--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Ways to change an object                             |    How                                                                                                                                                                                                                                          |    Why                                                                                                                                                                                                                          |
-+========================================================+=================================================================================================================================================================================================================================================+=================================================================================================================================================================================================================================+
-|                                                        |    **Removing, Moving, Copying Categories**                                                                                                                                                                                                     |                                                                                                                                                                                                                                 |
-+--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Removing a category.                                 |    “Move” in category middle menu, then drag the category to the background or the trash can.                                                                                                                                                   |    Removing a category                                                                                                                                                                                                          |
-+--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Add slot or category to object or category.          |    “Add Category” in object or category middle menu, then type in the new category name, then hit green button to accept.                                                                                                                       |    Adding a new category.                                                                                                                                                                                                       |
-+--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Moving a category.                                   |    “Move” in category middle menu, then drag to another object.                                                                                                                                                                                 |    Copying a category.                                                                                                                                                                                                          |
-+--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Copying a category.                                  |    “Copy” in category or category middle menu, then drag the category to another object.                                                                                                                                                        |    Copying a category.                                                                                                                                                                                                          |
-+--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+.. tabularcolumns:: p{5cm} p{5cm} p{5cm}
 
-.. tabularcolumns:: p{5cm} p{5cm} p{5cm} 
+.. table:: Ways to change an object
+
+  +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Ways to change an object                             |    How                                                                                                                                                                                                                                          |    Why                                                                                                                                                                                                                          |
+  +========================================================+=================================================================================================================================================================================================================================================+=================================================================================================================================================================================================================================+
+  |                                                        |    **Removing, Moving, Copying Categories**                                                                                                                                                                                                     |                                                                                                                                                                                                                                 |
+  +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Removing a category.                                 |    “Move” in category middle menu, then drag the category to the background or the trash can.                                                                                                                                                   |    Removing a category.                                                                                                                                                                                                         |
+  +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Add slot or category to object or category.          |    “Add Category” in object or category middle menu, then type in the new category name, then hit green button to accept.                                                                                                                       |    Adding a new category.                                                                                                                                                                                                       |
+  +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Moving a category.                                   |    “Move” in category middle menu, then drag to another object.                                                                                                                                                                                 |    Copying a category.                                                                                                                                                                                                          |
+  +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  |   Copying a category.                                  |    “Copy” in category or category middle menu, then drag the category to another object.                                                                                                                                                        |    Copying a category.                                                                                                                                                                                                          |
+  +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. tabularcolumns:: p{5cm} p{5cm} p{5cm}
 
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                                                        |    **Removing, Adding, Moving, Copying Slots**                                                                                                                                                                                                  |                                                                                                                                                                                                                                 |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Removing a slot.                                     |    “Move” in slot middle menu, then drag the slot to the background or the trash can.                                                                                                                                                           |    Removing a slot                                                                                                                                                                                                              |
+|   Removing a slot.                                     |    “Move” in slot middle menu, then drag the slot to the background or the trash can.                                                                                                                                                           |    Removing a slot.                                                                                                                                                                                                             |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Add slot to object or category                       |    “Add Slot” in object or category middle menu, then type in the new slot name, “=” or “<-”, and contents of slot (or just name alone for variable slot containing nil), then hit green button to accept.                                      |    Adding adding a new                                                                                                                                                                                                          |
+|   Add slot to object or category.                      |    “Add Slot” in object or category middle menu, then type in the new slot name, “=” or “<-”, and contents of slot (or just name alone for variable slot containing nil), then hit green button to accept.                                      |    Adding adding a new.                                                                                                                                                                                                         |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   Moving a slot.                                       |    “Move” in slot middle menu, then drag to another object.                                                                                                                                                                                     |    Moving a slot.                                                                                                                                                                                                               |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Copying a slot.                                      |    “Copy” in slot or category middle menu, then drag the slot to another object                                                                                                                                                                 |    Copying a slot.                                                                                                                                                                                                              |
+|   Copying a slot.                                      |    “Copy” in slot or category middle menu, then drag the slot to another object.                                                                                                                                                                |    Copying a slot.                                                                                                                                                                                                              |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-.. tabularcolumns:: p{5cm} p{5cm} p{5cm} 
-
-+--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                                                        |    **Changing a slot**                                                                                                                                                                                                                          |                                                                                                                                                                                                                                 |
-+--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Edit a slot                                          |    “Edit” on a slot middle-button menu, then make any changes in the text editor, then hit green button to accept changes.                                                                                                                      |    To change the contents of a constant data slot, or to change contents and set initial value at same time, or to change a slot from data to method or from constant to variable.                                              |
-+--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Edit slot name or its argument names                 |    Double-click on the name of the slot, wait for red and green buttons to appear on the right of the name, edit the name, then hit the green button.                                                                                           |    To change a slot’s name or the names of its arguments.                                                                                                                                                                       |
-+--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Change a method in a slot.                           |    Click on the method icon button on the right of the slot to open a text editor on the method. Make the changes, then click on the green button to accept them.                                                                               |    To fix a bug in a method.                                                                                                                                                                                                    |
-+--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Change the visibility of a slot                      |    On the slot’s middle menu choose “Make Public,” “Make Private,” or “Make Undeclared.”                                                                                                                                                        |    The Self interface uses bold, normal, and sans-serif fonts to indicate public, private, and unspecified slots.This distinction carries no semantics, but serves to record the programmer’s intentions.                       |
-+--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-.. tabularcolumns:: p{5cm} p{5cm} p{5cm} 
-
+.. tabularcolumns:: p{5cm} p{5cm} p{5cm}
 
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                                                        |    **Adding a Comment**                                                                                                                                                                                                                         |                                                                                                                                                                                                                                 |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Add a comment to an object or slot                   |    “Show Comment” in the object or slot middle menu to open up a comment text editor, then typing in the comment, then hit the green button to accept it. If an object or slot already has a comment, it can be shown/hidden by hitting the     |    To amuse and intrigue those who follow                                                                                                                                                                                       |
+|   Add a comment to an object or slot.                  |    “Show Comment” in the object or slot middle menu to open up a comment text editor, then typing in the comment, then hit the green button to accept it. If an object or slot already has a comment, it can be shown/hidden by hitting the     |    To amuse and intrigue those who follow.                                                                                                                                                                                      |
 |                                                        |    small button labeled with a single quote.                                                                                                                                                                                                    |                                                                                                                                                                                                                                 |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-.. tabularcolumns:: p{5cm} p{5cm} p{5cm} 
+.. tabularcolumns:: p{5cm} p{5cm} p{5cm}
 
++--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                                        |    **Changing a slot**                                                                                                                                                                                                                          |                                                                                                                                                                                                                                 |
++--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|   Edit a slot.                                         |    “Edit” on a slot middle-button menu, then make any changes in the text editor, then hit green button to accept changes.                                                                                                                      |    To change the contents of a constant data slot, or to change contents and set initial value at same time, or to change a slot from data to method or from constant to variable.                                              |
++--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|   Edit slot name or its argument names.                |    Double-click on the name of the slot, wait for red and green buttons to appear on the right of the name, edit the name, then hit the green button.                                                                                           |    To change a slot’s name or the names of its arguments.                                                                                                                                                                       |
++--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|   Change a method in a slot.                           |    Click on the method icon button on the right of the slot to open a text editor on the method. Make the changes, then click on the green button to accept them.                                                                               |    To fix a bug in a method.                                                                                                                                                                                                    |
++--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|   Change the visibility of a slot.                     |    On the slot’s middle menu choose “Make Public,” “Make Private,” or “Make Undeclared.”                                                                                                                                                        |    The Self interface uses bold, normal, and sans-serif fonts to indicate public, private, and unspecified slots.This distinction carries no semantics, but serves to record the programmer’s intentions.                       |
++--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. tabularcolumns:: p{5cm} p{5cm} p{5cm}
 
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                                                        |    **Annotating an Object**                                                                                                                                                                                                                     |                                                                                                                                                                                                                                 |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Change creator annotation of an object               |    “Show Annotation” in object middle menu to expose object annotation information, then click on creator path field and typing in desired creator path., then hit green button to accept annotation.                                           |    Setting creator path tells transporter which slot “owns” this object, and tells environment what to name the object.                                                                                                         |
+|   Change creator annotation of an object.              |    “Show Annotation” in object middle menu to expose object annotation information, then click on creator path field and typing in desired creator path, then hit green button to accept annotation.                                            |    Setting creator path tells transporter which slot “owns” this object, and tells environment what to name the object.                                                                                                         |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Set creator of contents of a slot to that slot       |    “Set Creator” in slot middle menu.                                                                                                                                                                                                           |    See above.                                                                                                                                                                                                                   |
+|   Set creator of contents of a slot to that slot.      |    “Set Creator” in slot middle menu.                                                                                                                                                                                                           |    See above.                                                                                                                                                                                                                   |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Change copy-down information                         |    “Show Annotation” in object middle menu to expose object annotation information, then click on copy-down-parent field and type in desired copy-down-path., copy-down selector and slots to omit) then hit green button to accept annotation. |    Simulates subclassing by allowing an object to contain copies of the slots in another object. When copy-down-parent has slots added/ changed/removed, the change propagates to the copied-down children.                     |
+|   Change copy-down information.                        |    “Show Annotation” in object middle menu to expose object annotation information, then click on copy-down-parent field and type in desired copy-down-path, copy-down selector and slots to omit) then hit green button to accept annotation.  |    Simulates subclassing by allowing an object to contain copies of the slots in another object. When copy-down-parent has slots added/ changed/removed, the change propagates to the copied-down children.                     |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Change the object’s “isComplete” flag                |    “Show Annotation” in object middle menu to expose object annotation information, then push one of the isComplete radio buttons, then hit green button to accept the annotation change.                                                       |    After building a new prototype, set isComplete to get the environment to show its printString, and to get the transporter to use its storeString.                                                                            |
+|   Change the object’s “isComplete” flag.               |    “Show Annotation” in object middle menu to expose object annotation information, then push one of the isComplete radio buttons, then hit green button to accept the annotation change.                                                       |    After building a new prototype, set isComplete to get the environment to show its printString, and to get the transporter to use its storeString.                                                                            |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-.. tabularcolumns:: p{5cm} p{5cm} p{5cm} 
+.. tabularcolumns:: p{5cm} p{5cm} p{5cm}
 
 
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                                                        |    **Annotate a slot**                                                                                                                                                                                                                          |                                                                                                                                                                                                                                 |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Set the module memmbership of a slot, the slots in a |    Select “Set Module” from the middle menu of a slot, category, or object, then (for object or category) indicate which slots you want to change by choosing which module they currently belong to, finally select a                           |    To ensure that slots are filled out in the correct source file                                                                                                                                                               |
-|   category, or the slots in an object.                 |    new module to put the slots in                                                                                                                                                                                                               |                                                                                                                                                                                                                                 |
+|   Set the module memmbership of a slot, the slots in a |    Select “Set Module” from the middle menu of a slot, category, or object, then (for object or category) indicate which slots you want to change by choosing which module they currently belong to, finally select a                           |    To ensure that slots are filled out in the correct source file.                                                                                                                                                              |
+|   category, or the slots in an object.                 |    new module to put the slots in.                                                                                                                                                                                                              |                                                                                                                                                                                                                                 |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Type in or examine the module for a single slot      |    “Show Annotation” on the slot middle menu to expose the annotation, then click on the module editor, type in the module name, then click the green accept button.                                                                            |    Save as above.                                                                                                                                                                                                               |
+|   Type in or examine the module for a single slot.     |    “Show Annotation” on the slot middle menu to expose the annotation, then click on the module editor, type in the module name, then click the green accept button.                                                                            |    Save as above.                                                                                                                                                                                                               |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Change slot initial contents                         |    “Show Annotation” on the slot middle menu to expose the annotation, then click on the “Follow Slot” button, or type the desired initial value expression into the ‘Initial Con-tents” editor, then hit the green accept button.              |    To have the transporter record the current contents of a slot, choose “Follow Slot.” To have it ignore the current value and just record a given expression for the slot’s initial value use the “Initial Contents” option.  |
+|   Change slot initial contents.                        |    “Show Annotation” on the slot middle menu to expose the annotation, then click on the “Follow Slot” button, or type the desired initial value expression into the ”Initial Contents” editor, then hit the green accept button.               |    To have the transporter record the current contents of a slot, choose “Follow Slot.” To have it ignore the current value and just record a given expression for the slot’s initial value use the “Initial Contents” option.  |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 ***************
 The Transporter
 ***************
 
-The transporter has been built in order to move programs from one world of objects to another. so,
-you can ignore it as long as you work with just one snapshot. However, if you want to give your
+The transporter has been built in order to move programs from one world of objects to another. You can
+ignore it as long as you work with just one snapshot. However, if you want to give your
 program to someone else, or save it as source, or read it in to a newer snapshot, you will need to
 learn about the transporter.
 
@@ -673,10 +640,10 @@ What is a program? In most systems it is a piece of text, although in more advan
 it may have structure. It is a description that can be used to create an activity, a running program,
 that can then operate on data. In the conventional view:
 
-	**Table 6 The Schism between Program and Data**
+.. table:: The Schism between Program and Data
 
 	+----------------------+---------------------------+----------------------------+
-	|                      |    Program                |    Data                    | 
+	|                      |    Program                |    Data                    |
 	+======================+===========================+============================+
 	| Who can change it    |    The programmer         |    The user                |
 	+----------------------+---------------------------+----------------------------+
@@ -733,7 +700,7 @@ the order that the files are read in as independent as possible. Since each obje
 in different modules, the outliner shows a summary of the modules of an object, sorted by frequency.
 
 Turned around, a module can be viewed as a collection of slots, plus some other information: each
-module also includes a directory, a list of submodules to be read in whenever it is read, and 
+module also includes a directory, a list of submodules to be read in whenever it is read, and
 ``post-FileIn`` method to be run whenever the module is read. These data allow modules to be organized
 hierarchically by subsystem, for example the allUI2 module includes all the modules in the ui2
 system.
@@ -753,9 +720,9 @@ it put for the contents of the slot? Here is where the transporter runs smack in
 enough information, and a variety of means have to be used. As shown in the flowchart below:
 
 ..  figure:: images/Pgm_Env_Image31.*
-    :height: 680 px
-    :width: 631 px
-    :align: left 
+  :scale: 90
+
+|
 
 * Sometimes the programmer does not want to store the actual contents of a slot, but instead
   wants to store an initialization expression. This intention is captured with another annotation
@@ -763,16 +730,16 @@ enough information, and a variety of means have to be used. As shown in the flow
   In the latter case, an initializer is also supplied.
 
 * Even though the transporter is supposed to follow the slot, it may contain an object that is created
-  by another slot. For example, the ``parent`` slot in a point should just refer to ``traits point`` 
+  by another slot. For example, the ``parent`` slot in a point should just refer to ``traits point``
   rather than recreating the traits object. This information is captured by a ``Creator`` annotation
   on each object that gives the path from the ``lobby`` to the slot intended to create the object.
   In this case, the transporter just files out a reference to the object’s creator, cleverly
   enough so that the actual creator slot does not need to have been already filed in. On the other
-  hand, if an object is immutable, its identity is not important. If an object is annotated as 
+  hand, if an object is immutable, its identity is not important. If an object is annotated as
   ``is-Complete`` [#f9]_ the transporter sends it ``isImmutableForFilingOut`` and if that message returns
   ``true``, the transporter never files out a reference. For example, integers would answer
   ``true`` to this message.
-  
+
 * If the contents of the slot is a simple (usually immutable) object like ``17``, ``3@4``, or ‘``foo``’ (the
   string) the transporter should just ask the object for a string to store. It does this by checking to
   see if the object is annotated as ``isComplete`` to see if it is safe to send the object messages,
@@ -802,7 +769,7 @@ to ensure that their presence is propagated down to more specialized morphs like
 In a class-based language, this need is met by a rule ensuring that subclasses include any instance
 variables defined in their superclasses. In Self, this inheritance of structure is separated from the
 inheritance of information performed by the normal hierarchy of parent slots. Instead of including
-a facility for inheriting structure in the language, Self 4.1 implements a facility in the environment,
+a facility for inheriting structure in the language, Self implements a facility in the environment,
 called “copy-down.” An object’s annotation can contain a copy-down parent, copy-down selector,
 and set of slots to omit. The copy-down parent is sent the message given by the copy-down selector,
 and (except for the slots-to-omit), the slots in the result are added to the object. Copied-down
@@ -810,19 +777,16 @@ slots are shown in pink in the outliner. For example, here are the prototypical 
 circleMorph:
 
 ..  figure:: images/Pgm_Env_Image32.*
-    :height: 483 px
-    :width: 556 px
-    :align: left 
 
 The ``Basic Morph State`` category of slots has been copied from those in morph by first copying
 the morph and removing all its submorphs (i.e. by sending it copyRemoveAllMorphs) and then
 copying the resultant slots, omitting ``parent``, ``prototype``, ``rawBox`` and ``rawColor``. The first
 three of these slots were omitted because their contents had to be different; copied-down slots are
-copied, they cannot be specially initialized in Self 4.1. The omitted slot ``rawBox`` is more interesting;
+copied, they cannot be specially initialized in Self. The omitted slot ``rawBox`` is more interesting;
 circle morphs do not need this slot at all and so omit it. Most other object-oriented programming
 systems would not allow a subclass to avoid inheriting an instance variable.
 
-The Self 4.1 programming environment uses the copy-down information to allow the programmer
+The Self programming environment uses the copy-down information to allow the programmer
 to use a class-based style when appropriate. For example, if the programmer adds a slot to morph
 the environment will offer to add it to ``circleMorph``, too. If the programmer should use a text editor
 to edit the definition of morph, the circleMorph object will be changed after rereading both object’s
@@ -831,13 +795,45 @@ of creating a subclass, the programmer has to create two objects: a new traits o
 and then set the object annotation of the new prototype. Perhaps someday there will be a
 button to do this, or perhaps other styles of programming will emerge.
 
-This concludes a brief tour of the Self 4.1 programming environment. Although we strove for simplicity
+Trees
+=====
+
+By default, the tranporter writes out Self modules out to a tree rooted in the current working directory, or the 'objects' subdirectory of the directory given to the VM in the shell environment variable SELFWORKING_DIR.
+
+Howevever Self modules have a slot 'tree' which can take a name of a tree. If the name of the tree is not an empty string, then the module writer will look up a directory in the dictionary found at ``modules init treeDictionary``.
+
+This allows the developer to maintain several separate trees. For example::
+
+  modules init
+    registerTree: 'org_selflanguage_webserver'
+              At: 'path/to/parent-folder'.
+
+  bootstrap read: 'webserver'
+          InTree: 'org_selflanguage_webserver'.
+
+Important considerations: module names are globally unique (that is, two modules called 'webserver' in different trees are considered the same module and will overwrite each other). The tree name itself should also be globally unique - that is it is not possible to have two trees with the same name in a single Self world.
+
+The advantages of this over a simple symbolic link to a separate filesystem tree is we can do overlays - if you want special string behaviour, then put it in your tree in my_tree/core/string.self and it will override as expected.
+
+Modules that import subparts will import them from the same tree by default.
+
+Versioning
+==========
+
+Each transporter module has a slot named ``revision`` containing a string version number. It is recommended that you use Semantic Versioning [#f10]_ so that the version of a module can be tested as follows::
+
+  modules string version >= (modules init moduleVersion copyOn: '1.0.0')
+    ifFalse: [log warning: 'Old string version']
+
+This test could be placed in the ``preFileIn`` slot of your module to ensure a sane file in environment before the rest of the file is read.
+
+This concludes a brief tour of the Self programming environment. Although we strove for simplicity
 in the design of Self, its programming environment includes a fair amount of functionality
 which may take a while to learn. We hope that you find the investment worth the reward.
 
-.. 	rubric::	 Footnotes:
+.. rubric:: Footnotes
 
-.. [#f1] Double-clicking on the triangle will expand (or contract) all levels instead of just a single level. (This feature was added in Self 4.1.2.)
+.. [#f1] Double-clicking on the triangle will expand (or contract) all levels instead of just a single level.
 
 .. [#f2] However, in a stack frame in the debugger (described below), the receiver of a message is the same as the receiver for the stack frame.
 
@@ -855,3 +851,4 @@ which may take a while to learn. We hope that you find the investment worth the 
 
 .. [#f9] isComplete is used by the environment to decide when it is safe to send messages like printString.
 
+.. [#f10] See http://semver.org for a specification. In essence, versions are of the form "3.2.1-alpha6".

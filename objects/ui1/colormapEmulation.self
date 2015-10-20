@@ -63,7 +63,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'macToolboxGlobals' -> () From: ( | {
-         'Category: windowing\x7fModuleInfo: Module: colormapEmulation InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: colormapEmulation InitialContents: FollowSlot\x7fVisibility: public'
         
          virtual8BitWindow = bootstrap define: bootstrap stub -> 'globals' -> 'macToolboxGlobals' -> 'virtual8BitWindow' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

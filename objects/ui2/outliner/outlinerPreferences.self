@@ -1,6 +1,6 @@
  '$Revision: 30.7 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -8,7 +8,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          browseOutlinerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'browseOutlinerPreferences' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals browseOutlinerPreferences.
@@ -23,10 +23,12 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          outlinerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals outlinerPreferences.
+             {} = 'Comment: Most of these only apply to non-pluggable outliners,
+so don\'t be suprised if changing them makes to difference
+to how the desktop looks. - rca Aug13\x7fModuleInfo: Creator: globals outlinerPreferences.
 '.
             | ) .
         } | ) 
@@ -38,7 +40,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          categoryOutlinerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'categoryOutlinerPreferences' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals categoryOutlinerPreferences.
@@ -60,7 +62,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          copyDownSlotOutlinerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'copyDownSlotOutlinerPreferences' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals copyDownSlotOutlinerPreferences.
@@ -155,7 +157,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          debuggerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'debuggerPreferences' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals debuggerPreferences.
@@ -205,7 +207,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          moduleOutlinerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'moduleOutlinerPreferences' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals moduleOutlinerPreferences.
@@ -278,7 +280,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          objectOutlinerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'objectOutlinerPreferences' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals objectOutlinerPreferences.
@@ -366,7 +368,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> () From: ( | {
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         color <- paint named: 'lightGray'.
+         color <- paint named: 'blue'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> () From: ( | {
@@ -503,7 +505,7 @@ I am also immutable.\x7fModuleInfo: Creator: globals outlinerPreferences headerB
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> () From: ( | {
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         mergeAssignmentSlots <- bootstrap stub -> 'globals' -> 'true' -> ().
+         mergeAssignmentSlots <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> () From: ( | {
@@ -616,12 +618,30 @@ good for introducing language semantics, say.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
-         'Category: ui2\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          outliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals preferences outliner.
 '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         colorScheme = ( |
+            | rawCurrentColorScheme).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         colorScheme: cs = ( |
+            | 
+            rawCurrentColorScheme: cs. 
+            desktop worlds do: [|:w| w morphsDo: [|:m| 
+              m isPluggableOutliner ifTrue: [m updateTheme]]].
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> () From: ( | {
@@ -643,15 +663,64 @@ good for introducing language semantics, say.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         bodyColor = ( |
+            | paint named: 'outlinerGray').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         borderColor = ( |
+            | paint named: 'outlinerGray').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
          'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          float = paint named: 'outlinerGray'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         floatTag = paint named: 'outlinerGray'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: titles\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         floatTitle = ( |
+            | paint named: 'black').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
          'Category: body\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         generalModel = paint named: 'gray'.
+         generalLeafModel = ( |
+            | bodyColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: border\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         generalLeafModelBorder = ( |
+            | borderColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: body\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         generalModel = ( |
+            | bodyColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: border\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         generalModelBorder = ( |
+            | borderColor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
@@ -663,7 +732,33 @@ good for introducing language semantics, say.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
          'Category: body\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         generalSliceModel = paint copyRed: 0.806452 Green: 0.839687  Blue: 0.863148.
+         generalSliceModel = ( |
+            | bodyColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: border\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         generalSliceModelBorder = ( |
+            | borderColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         headerColorFor: obj = ( |
+            | 
+            ((reflect: obj) includesKey: 'mirror') ifTrue: [| m | 
+                m: obj mirror.
+                m isReflecteeFloat   ifTrue: [^ float].
+                m isReflecteeInteger ifTrue: [^ integer].
+                m isReflecteeString  ifTrue: [^ string].   
+                m creatorPathIfPresent: [|:p| 
+                    p first = 'traits' ifTrue: [^ traits].
+                    p first = 'mixins' ifTrue: [^ mixins]]
+                  IfAbsent: [ ^ unnamed ].
+                ^ named]
+               False: [ ^ unusual ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
@@ -673,15 +768,49 @@ good for introducing language semantics, say.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         integerTag = paint named: 'outlinerGray'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: titles\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         integerTitle = ( |
+            | paint named: 'black').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
          'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          mixins = paint named: 'outlinerGray'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         mixinsTag = paint named: 'outlinerGray'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: titles\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         mixinsTitle = ( |
+            | paint named: 'black').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
          'Category: body\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         moduleHolderModel = paint copyRed: 0.86999 Green: 0.820137  Blue: 0.820137.
+         moduleHolderModel = ( |
+            | bodyColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: border\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         moduleHolderModelBorder = ( |
+            | borderColor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
@@ -697,15 +826,85 @@ good for introducing language semantics, say.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
-         'Category: body\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         selfObjectModel = paint named: 'outlinerGray'.
+         namedTag = paint named: 'outlinerGray'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: titles\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         namedTitle = ( |
+            | paint named: 'black').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'oddball' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
          'Category: body\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         selfProcessModel = paint copyRed: 0.820137 Green: 0.86999  Blue: 0.820137.
+         selfCategoryModel = ( |
+            | bodyColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: border\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         selfCategoryModelBorder = ( |
+            | borderColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: body\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         selfObjectModel = ( |
+            | bodyColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: border\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         selfObjectModelBorder = ( |
+            | borderColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: body\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         selfProcessModel = ( |
+            | bodyColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: border\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         selfProcessModelBorder = ( |
+            | borderColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: body\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         selfSlotModel = ( |
+            | bodyColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: border\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         selfSlotModelBorder = ( |
+            | borderColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: titles\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         slotTitle = ( |
+            | paint named: 'black').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
@@ -715,15 +914,90 @@ good for introducing language semantics, say.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         stringTag = paint named: 'outlinerGray'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: titles\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         stringTitle = ( |
+            | paint named: 'black').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         tagColorFor: obj = ( |
+            | 
+            ((reflect: obj) includesKey: 'mirror') ifTrue: [| m |
+                m: obj mirror.
+                m isReflecteeFloat   ifTrue: [^ floatTag].
+                m isReflecteeInteger ifTrue: [^ integerTag].
+                m isReflecteeString  ifTrue: [^ stringTag].
+                m creatorPathIfPresent: [|:p|
+                    p first = 'traits' ifTrue: [^ traitsTag].
+                    p first = 'mixins' ifTrue: [^ mixinsTag]]
+                  IfAbsent: [ ^ unnamedTag ].
+                ^ namedTag ]
+               False: [ ^ unusualTag ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         titleColorFor: obj = ( |
+            | 
+            ((reflect: obj) includesKey: 'mirror') ifTrue: [| m | 
+                m: obj mirror.
+                m isReflecteeFloat   ifTrue: [^ floatTitle].
+                m isReflecteeInteger ifTrue: [^ integerTitle].
+                m isReflecteeString  ifTrue: [^ stringTitle].   
+                m creatorPathIfPresent: [|:p| 
+                    p first = 'traits' ifTrue: [^ traitsTitle].
+                    p first = 'mixins' ifTrue: [^ mixinsTitle]]
+                  IfAbsent: [ ^ unnamedTitle ].
+                ^ namedTitle ]
+               False: [ ^ unusualTitle ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
          'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          traits = paint named: 'outlinerGray'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         traitsTag = paint named: 'outlinerGray'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: titles\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         traitsTitle = ( |
+            | paint named: 'black').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
          'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          unnamed = paint named: 'outlinerGray'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         unnamedTag = paint named: 'outlinerGray'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: titles\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         unnamedTitle = ( |
+            | paint named: 'black').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
@@ -732,130 +1006,72 @@ good for introducing language semantics, say.
          unusual = paint named: 'outlinerGray'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> () From: ( | {
-         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         default45 = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default45' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals preferences outliner colorSchemes default45.
-'.
-            | ) .
+         unusualTag = paint named: 'outlinerGray'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default45' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> () From: ( | {
+         'Category: titles\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         float = paint named: 'forest'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default45' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
-        
-         integer = paint named: 'azure'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default45' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
-        
-         mixins = paint named: 'leaf'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default45' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
-        
-         named = paint named: 'teal'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default45' -> () From: ( | {
-         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
-        
-         p* = bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default45' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
-        
-         string = paint named: 'purple'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default45' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
-        
-         traits = paint named: 'royal'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default45' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
-        
-         unnamed = paint named: 'outlinerGray'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default45' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
-        
-         unusual = paint named: 'darkGray'.
+         unusualTitle = ( |
+            | paint named: 'black').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> () From: ( | {
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         forest = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'forest' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals preferences outliner colorSchemes forest.
+         default46 = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default46' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals preferences outliner colorSchemes default46.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'forest' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default46' -> () From: ( | {
+         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         float = paint named: 'forest'.
+         integerTag = paint named: 'azure'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'forest' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default46' -> () From: ( | {
+         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         integer = paint named: 'azure'.
+         mixinsTag = paint named: 'leaf'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'forest' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default46' -> () From: ( | {
+         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         mixins = paint named: 'leaf'.
+         namedTag = ( |
+            | paint copyRed: 0.8 Green: 0.8 Blue: 1).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'forest' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
-        
-         named = paint named: 'teal'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'forest' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default46' -> () From: ( | {
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          p* = bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'forest' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default46' -> () From: ( | {
+         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         string = paint named: 'purple'.
+         traitsTag = paint named: 'royal'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'forest' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default46' -> () From: ( | {
          'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         traits = paint named: 'royal'.
+         unusual = ( |
+            | 
+            paint copyRed: 0.6 Green: 0.8 Blue: 0.6).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'forest' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default46' -> () From: ( | {
+         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         unnamed = paint named: 'outlinerGray'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'forest' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
-        
-         unusual = paint named: 'darkGray'.
+         unusualTag = ( |
+            | unusual).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> () From: ( | {
@@ -873,14 +1089,164 @@ good for introducing language semantics, say.
          p* = bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> () From: ( | {
-         'ModuleInfo: Module: outlinerPreferences InitialContents: InitializeToExpression: (preferences outliner colorSchemes default45)'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         currentColorScheme <- bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default45' -> ().
+         night = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals preferences outliner colorSchemes night.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         bodyColor = ( |
+            | dark).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'Category: colors\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         bold = ( |
+            | paint copyRed: 0 Green: 1 Blue: 0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         borderColor = ( |
+            | dull).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'Category: colors\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         dark = ( |
+            | 
+            paint copyRed: 0 Green: 0 Blue: 0.01).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'Category: colors\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         dull = ( |
+            | 
+            paint copyRed: 0 Green: 0.7 Blue: 0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         float = ( |
+            | dark).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'Category: menus\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         generalModelMenuColor = paint copyRed: 0.942326 Green: 0.904203  Blue: 0.815249.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         integer = ( |
+            | dark).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'Category: colors\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         lit = ( |
+            | 
+            paint copyRed: 0 Green: 0.9 Blue: 0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         mixins = ( |
+            | dark).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'Category: menus\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         moduleHolderModelMenuColor = paint copyRed: 0.942326 Green: 0.904203  Blue: 0.815249.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         named = ( |
+            | dark).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         p* = bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'baseScheme' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         string = ( |
+            | dark).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         tagColorFor: obj = ( |
+            | 
+            dark).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         titleColorFor: obj = ( |
+            | 
+            lit).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         traits = ( |
+            | dark).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         unnamed = ( |
+            | dark).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'night' -> () From: ( | {
+         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         unusual = ( |
+            | dark).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> () From: ( | {
+         'Category: private\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         p* = bootstrap stub -> 'traits' -> 'oddball' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> () From: ( | {
+         'Category: private\x7fModuleInfo: Module: outlinerPreferences InitialContents: InitializeToExpression: (preferences outliner colorSchemes gray)'
+        
+         rawCurrentColorScheme <- bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'gray' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Preferences (obsolete)\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          slotOutlinerPreferences = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'slotOutlinerPreferences' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals slotOutlinerPreferences.

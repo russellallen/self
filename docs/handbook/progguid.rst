@@ -4,23 +4,23 @@ A Guide to Programming Style
 
 This section discusses some programming idioms and stylistic conventions that have evolved in the
 Self group. Rather than simply presenting a set of rules, an attempt has been made to explain the
-reasons for each stylistic convention. While these conventions have proven useful to the Self    
-group, they should be taken as guidelines, not commandments. Self is still a young language, and 
+reasons for each stylistic convention. While these conventions have proven useful to the Self
+group, they should be taken as guidelines, not commandments. Self is still a young language, and
 it is likely that its users will continue to discover new and better ways to use it effectively.
 
 Behaviorism versus Reflection
 =============================
 
-One of the central principles of Self is that an object is completely defined by its behavior: that       
-is, how it responds to messages. This idea, which is sometimes called *behaviorism*, allows one object      
-to be substituted for another without ill effect—provided, of course, that the new object’s behavior      
-is similar enough to the old object’s behavior. For example, a program that plots points in a             
-plane should not care whether the points being plotted are represented internally in cartesian or polar   
-coordinates as long as their external behavior is the same. Another example arises in program             
-animation. One way to animate a sorting algorithm is to replace the collection being sorted with an       
+One of the central principles of Self is that an object is completely defined by its behavior: that
+is, how it responds to messages. This idea, which is sometimes called *behaviorism*, allows one object
+to be substituted for another without ill effect—provided, of course, that the new object’s behavior
+is similar enough to the old object’s behavior. For example, a program that plots points in a
+plane should not care whether the points being plotted are represented internally in cartesian or polar
+coordinates as long as their external behavior is the same. Another example arises in program
+animation. One way to animate a sorting algorithm is to replace the collection being sorted with an
 object that behaves like the original collection but, as a side effect, updates a picture of itself on the
-screen each time two elements are swapped. behaviorism makes it easier to extend and reuse programs,      
-perhaps even in ways that were not anticipated by the program’s author.                                   
+screen each time two elements are swapped. behaviorism makes it easier to extend and reuse programs,
+perhaps even in ways that were not anticipated by the program’s author.
 
 It is possible, however, to write non-behavioral programs in Self. For example, a program that examines
 and manipulates the slots of an object *directly*, rather than via messages, is not behavioral
@@ -56,9 +56,9 @@ and only if their reflectees are identical.
 
 In short, to maximize the opportunities for code reuse, the programmer should:
 
-	* avoid reflection when possible,
-	* avoid depending on object identity except as a hint, and
-	* use mirrors to make reflection explicit when it is necessary.
+    * avoid reflection when possible,
+    * avoid depending on object identity except as a hint, and
+    * use mirrors to make reflection explicit when it is necessary.
 
 Objects Have Many Roles
 =======================
@@ -101,28 +101,24 @@ Inline Objects
 An inline object is an object that is nested in the code of a method object. The inline object is usually
 intended for localized use within a program. For example, in a finite state machine implementation,
 the state of the machine might be encoded in a selector that would be sent to an inline object
-to select the behavior for the next state transition:
+to select the behavior for the next state transition::
 
-		::
-			
-				state sendTo: (|
-						inComment: c = ( c = '"' ifTrue: [state: 'inCode']. self ).
-						inCode: c = ( c = '"' ifTrue: [state: 'inComment']
-								False: ... )
-					|)
-					With: nextChar
-					
+    state sendTo: (|
+            inComment: c = ( c = '"' ifTrue: [state: 'inCode']. self ).
+            inCode: c = ( c = '"' ifTrue: [state: 'inComment']
+                    False: ... )
+        |)
+        With: nextChar
+
 In this case, the inline object is playing the role of a case statement.
 
 Another use of inline objects is to return multiple values from a method, as discussed in section
-4.4. Yet another use of inline objects is to parameterize the behavior of some other object. For example,
+`How to Return Multiple Values`_. Yet another use of inline objects is to parameterize the behavior of some other object. For example,
 the predicate used to order objects in a *priorityQueue* can be specified using an inline
-object:
+object::
 
-		::
-		
-			queue: priorityQueue copyRemoveAll.
-			queue sorter: (| element: e1 Precedes: e2 = ( e1 > e2 ) |).
+    queue: priorityQueue copyRemoveAll.
+    queue sorter: (| element: e1 Precedes: e2 = ( e1 > e2 ) |).
 
 (A block cannot be used here because the current implementation of Self does not support non-
 LIFO blocks, and the sorter object may outlive the method that creates it). There are undoubtedly
@@ -137,7 +133,7 @@ respond to the ``printString`` message with a textual description of themselves.
 is called the object’s *printString*. An object’s printString can be quite detailed; standard protocol
 allows the desired amount of detail to be specified by the requestor. For example, the printString
 for a collection might include the printStrings of all elements or just the first few. Not all objects
-have printStrings, only those that satisfy the criteria discussed in section 4.3.2 below.
+have printStrings, only those that satisfy the criteria discussed in section `How to make an object print`_ below.
 
 The second way to describe an object is to give its *path name*. A path name is a sequence of unary
 selectors that describes a path from the lobby to the object. For example, the full path name of the
@@ -155,7 +151,7 @@ mirror is used because naming is reflective.) The object’s creator path annota
 about the path from the lobby to either the object itself or its prototype. If the object is a clone “a”
 or “an” is prepended to its prototype’s creator path. In addition to its path, the mirror also tries to
 compute a ``printString`` for the object if it is annotated as ``isComplete``. Then, the two pieces of
-information are merged. For example, the name of the prototype list is “list” but the name of ``list copy add: 17`` 
+information are merged. For example, the name of the prototype list is “list” but the name of ``list copy add: 17``
 is “a list(17).” See the naming category in mirror traits for the details of this process.
 
 How to make an object print
@@ -170,12 +166,10 @@ descendant objects. Put another way: Self cannot distinguish those objects playi
 classes from those playing the role of instances.
 
 The most prominent manifestation of this problem crops up in object printing. Suppose one wishes
-to provide the following printString method for all point objects:
+to provide the following printString method for all point objects::
 
-		::
-			
-			printString = ( x printString, ’@’, y printString )
-			
+    printString = ( x printString, ’@’, y printString )
+
 Like other behavior that applies to all points, the method should be put in point traits. But what
 happens if ``printString`` is sent to the object ``traits point``? The ``printString`` method is
 found but it fails when it attempts to send x and y to itself because these slots are only defined in
@@ -185,10 +179,10 @@ object. The reason printing is a bigger problem is that it is useful to have a g
 facility to be used during debugging and system exploration. To be as robust as possible, this printing
 facility should not send ``printString`` when it will fail. Unfortunately, it is difficult to tell
 when ``printString`` is likely to fail. Using reflection, the facility can avoid sending
-``printString`` to objects that do not define ``printString``. But that is not the case with ``traits point``. 
+``printString`` to objects that do not define ``printString``. But that is not the case with ``traits point``.
 The solution taken in this version of the system is to mark printable objects with a special
 annotation. The printing facility sends ``printString`` to the object only if the object contains an
-annotation ``IsComplete``.
+annotation ``isComplete``.
 
 The existence of an ``isComplete`` annotation in an object means that the object is prepared to print
 itself. The object agrees to provide behavior for a variety of messages; see the programming environment
@@ -199,91 +193,75 @@ How to Return Multiple Values
 
 Sometimes it is natural to think of a method as returning several values, even though Self only
 allows a method to return a single object. There are two ways to simulate methods that return
-multiple values. The first way is to use an inlined object. For example, the object:
+multiple values. The first way is to use an inlined object. For example, the object::
 
-		::
-		
-			(| p* = lobby. lines. words. characters |)
+    (| p* = lobby. lines. words. characters |)
 
-could be used to package the results of a text processing method into a single result object:
+could be used to package the results of a text processing method into a single result object::
 
-		::
-		
-			count = (
-				| r = (| p* = lobby. lines. words. characters |) ... |
-				...
-				r: r copy.
-				r lines: lCount. r words: wCount. r characters: cCount.
-				r )
+    count = (
+        | r = (| p* = lobby. lines. words. characters |) ... |
+        ...
+        r: r copy.
+        r lines: lCount. r words: wCount. r characters: cCount.
+        r )
 
-		.. note::
-		
-			that the inline object prototype inherits copy from the lobby. If one omitted its parent slot p, one would have to
-			send it the _Clone primitive to copy it. It is considered bad style, however, to send a primitive directly, rather than calling
-			the primitive’s wrapper method.
+.. note::
+
+    that the inline object prototype inherits copy from the lobby. If one omitted its parent slot p, one would have to
+    send it the _Clone primitive to copy it. It is considered bad style, however, to send a primitive directly, rather than calling
+    the primitive’s wrapper method.
 
 The sender can extract the various return values from the result object by name.
 
-The second way is to pass in one block for each value to be returned. For example:
+The second way is to pass in one block for each value to be returned. For example::
 
-		::
-		
-				countLines:[| :n | lines: n ]
-					Words:[| :n | words: n ]
-					Characters:[| :n | characters: n ]
+    countLines:[| :n | lines: n ]
+        Words:[| :n | words: n ]
+        Characters:[| :n | characters: n ]
 
 Each block simply stores its argument into the a local variable for later use. The
 ``countLines:Words:Characters:`` method would evaluate each block with the appropriate
-value to be returned:
+value to be returned::
 
-		::
-
-				countLines: lb Words: wb Characters: cb = (
-					...
-					lb value: lineCount.
-					wb value: wordCount.
-					cb value: charCount.
-					...
+    countLines: lb Words: wb Characters: cb = (
+        ...
+        lb value: lineCount.
+        wb value: wordCount.
+        cb value: charCount.
+        ...
 
 Substituting Values for Blocks
 ==============================
 
 The lobby includes behavior for the block evaluation messages. Thus, any object that inherits from
 the lobby can be passed as a parameter to a method that expects a block—the object behaves like
-a block that evaluates that object. For example, one may write:
+a block that evaluates that object. For example, one may write::
 
-		::
+    x >= 0 ifTrue: x False: x negate
 
-				x >= 0 ifTrue: x False: x negate
+rather than::
 
-rather than:
+    x >= 0 ifTrue: [ x ] False: [ x negate ]
 
-		::
+.. note::
 
-				x >= 0 ifTrue: [ x ] False: [ x negate ]
-
-		.. note::
-
-				however, that Self evaluates all arguments before sending a message. Thus, in the first case
-				“x negate” will be evaluated regardless of the value of x, even though that argument will not be
-				used if x is nonnegative. In this case, it doesn’t matter, but if “x negate” had side effects, or if it
-				were very expensive, it would be better to use the second form.
+        however, that Self evaluates all arguments before sending a message. Thus, in the first case
+        “x negate” will be evaluated regardless of the value of x, even though that argument will not be
+        used if x is nonnegative. In this case, it doesn’t matter, but if “x negate” had side effects, or if it
+        were very expensive, it would be better to use the second form.
 
 In a similar vein, blocks inherit default behavior that allows one to provide a block taking fewer
 arguments than expected. For example, the collection iteration message ``do:`` expects a block taking
 two arguments: a collection element and the key at which that element is stored. If one is only
 interested in the elements, not the keys, one can provide a block taking only one argument and the
-second block argument will simply be ignored. That is, you can write:
+second block argument will simply be ignored. That is, you can write::
 
-		::
+    myCollection do: [| :el | el printLine]
 
-				myCollection do: [| :el | el printLine]
+instead of::
 
-instead of:
-
-		::
-		
-				myCollection do: [| :el. :key | el printLine]
+    myCollection do: [| :el. :key | el printLine]
 
 ``nil`` Considered Naughty
 ==========================
@@ -293,15 +271,13 @@ initializes any uninitialized slots to this value. In Lisp, many programs test f
 of a list, or an empty slot in a hash table, or any other undefined value. There is a better way in
 Self. Instead of testing an object’s identity against ``nil``, define a new object with the appropriate
 behavior and simply send messages to this object; Self’s dynamic binding will do the rest. For example,
-in a graphical user interface, the following object might be used instead of nil:
+in a graphical user interface, the following object might be used instead of nil::
 
-		::
-
-				nullGlyph = (|
-						display = ( self ).
-						boundingBox = (0@0) # (0@0).
-						mouseSensitive = false.
-				|)
+    nullGlyph = (|
+            display = ( self ).
+            boundingBox = (0@0) # (0@0).
+            mouseSensitive = false.
+    |)
 
 To make it easier to avoid nil, the methods that create new vectors allow you to supply an alternative
 to ``nil`` as the initial value for the new vector’s elements (e.g., ``copySize:FillingWith:``).

@@ -1,7 +1,7 @@
  '$Revision: 30.9 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -520,7 +520,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Saving morphs to a file\x7fModuleInfo: Module: morphSaving InitialContents: FollowSlot'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Saving morphs to a file\x7fModuleInfo: Module: morphSaving InitialContents: FollowSlot'
         
          morphStoreStringBuilder = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'morphStoreStringBuilder' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals morphStoreStringBuilder.
@@ -1281,13 +1281,6 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          prototype = ( |
             | 
             slotsInModuleMorph).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
-         'Category: filing out\x7fModuleInfo: Module: morphSaving InitialContents: FollowSlot\x7fVisibility: public'
-        
-         prototype = ( |
-            | smallEditorMorph).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'spacerMorph' -> () From: ( | {

@@ -1,4 +1,4 @@
-﻿******************
+******************
 Language Reference
 ******************
 
@@ -31,10 +31,10 @@ A glossary of terms used in this document can be found in Appendix A.
 
 .. index::
    single:  object
-   
+
 .. index::
    single:  slot
-   
+
 Objects
 =======
 
@@ -58,20 +58,16 @@ Syntax
 
 *Object literals* are delimited by parentheses. Within the parentheses, an object description consists
 of a list of slots delimited by vertical bars (‘|’), followed by the code to be executed when the object
-is evaluated. For example:
+is evaluated. For example::
 
-		::
-
-					( | slot1. slot2 | ’here is some code’ printLine )
+    ( | slot1. slot2 | ’here is some code’ printLine )
 
 Both the slot list and code are optional: ‘( | | )’ and ‘()’ each denote an empty object. [#f1]_
 
 *Block objects* are written like other objects, except that square brackets (‘[’ and ‘]’) are used in
-place of parentheses:
+place of parentheses::
 
-		::
-
-					[ | slot1. slot2 | ’here is some code in a block’ printLine ]
+    [ | slot1. slot2 | ’here is some code in a block’ printLine ]
 
 A *slot list* consists of a (possibly empty) sequence of *slot descriptors* (§2.2) separated by periods.
 A period at the end of the slot list is optional. [#f2]_
@@ -94,10 +90,7 @@ object () has no slots (i.e., it’s empty) while the object ( | x = 17. y = 18 
 x and y.
 
 ..  figure:: images/Chapter_2_Image_1.*
-    :height: 109 px
-    :width: 482 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 A data object returns itself when evaluated.
 
@@ -134,7 +127,7 @@ C, and many other languages. This is a potential source of confusion for new Sel
    single:  argument slot
 
 .. index::
-   single:  self 
+   single:  self
 
 .. index::
    single:  object; method object
@@ -166,11 +159,9 @@ values are discarded except for that of the final expression, whose value determ
 of evaluating the code.
 
 The actual arguments in a message send are evaluated from left to right before the message is sent.
-For instance, in the expression:
+For instance, in the expression::
 
-		::
-
-					1 to: 5 \* i By: 2 \* j Do: [\|:k \| k print ]
+    1 to: 5 * i By: 2 * j Do: [| :k | k print ]
 
 1 is evaluated first, then 5 \* i, then 2 \* j, and then [\|:k \| k print]. Finally, the to:By:Do:
 message is sent. The associativity and precedence of messages is discussed in section 4.
@@ -189,21 +180,18 @@ Smalltalk’s methods.
 If a slot contains a method, the following steps are performed when the slot is evaluated as the result
 of a message send:
 
-			* The method object is *cloned*, creating a new *method activation object* containing slots for the method’s arguments and locals.
-			
-			* The clone’s self parent slot is initialized to the receiver of the message.
-			
-			* The clone’s argument slots, if any, are initialized to the values of the corresponding actual arguments.
-			
-			* The code of the method is executed in the context of this new activation object.
+    * The method object is *cloned*, creating a new *method activation object* containing slots for the method’s arguments and locals.
+
+    * The clone’s self parent slot is initialized to the receiver of the message.
+
+    * The clone’s argument slots, if any, are initialized to the values of the corresponding actual arguments.
+
+    * The code of the method is executed in the context of this new activation object.
 
 For example, consider the method ( | :arg | arg * arg ):
 
 ..  figure:: images/Chapter_2_Image_2.*
-    :height: 173 px
-    :width: 491 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 This method has an argument slot arg and returns the square of its argument.
 
@@ -228,6 +216,7 @@ This method has an argument slot arg and returns the square of its argument.
 .. index::
    single:  evaluation; of blocks
 
+.. _langref-blocks:
 
 Blocks
 ------
@@ -245,10 +234,7 @@ is invisible at the Self level and cannot be accessed explicitly.
 For example, the block [ 3 + 4 ] looks like: [#f3]_
 
 ..  figure:: images/Chapter_2_Image_3.*
-    :height: 320 px
-    :width: 704 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 The block method’s selector is based on the number of arguments. If the block takes no arguments,
 the selector is ``value``. If it takes one argument, the selector is ``value:``. If it takes two arguments,
@@ -279,13 +265,11 @@ Returns
 
 A *return* is denoted by preceding an expression by the ‘^’ operator. A return causes the value of the given expression to be returned as the result of evaluating the method or block. Only the last ex­pression in an object may be a return.
 
-The presence or absence of the ‘^’ operator does not effect the behavior of ordinary methods, since an ordinary method always returns the value of its final expression anyway. In a block, however, a return causes control to be returned from the ordinary method containing that block, immediately terminating that method’s activation, the block’s activation, and all activations in between. Such a return is called a *non-local return*, since it may “return through” a number of activations. The result of the ordinary method’s evaluation is the value returned by the *non-local return*. For example, in the following method:
+The presence or absence of the ‘^’ operator does not effect the behavior of ordinary methods, since an ordinary method always returns the value of its final expression anyway. In a block, however, a return causes control to be returned from the ordinary method containing that block, immediately terminating that method’s activation, the block’s activation, and all activations in between. Such a return is called a *non-local return*, since it may “return through” a number of activations. The result of the ordinary method’s evaluation is the value returned by the *non-local return*. For example, in the following method::
 
-		::
-
-					assertPositive: x = ( 
-							x > 0 ifTrue: [ ^ ’ok’ ]. 
-							error: ’non-positive x’ ) 
+    assertPositive: x = (
+                    x > 0 ifTrue: [ ^ ’ok’ ].
+                    error: ’non-positive x’ )
 
 the ``error:`` message will not be sent if x is positive because the non-local return of ‘ok’ causes the ``assertPositive:`` method to return immediately.
 
@@ -295,20 +279,20 @@ the ``error:`` message will not be sent if x is positive because the non-local r
 Construction of object literals
 -------------------------------
 
-Object literals are constructed during parsing—the parser converts objects in textual form into real Self objects. 
+Object literals are constructed during parsing—the parser converts objects in textual form into real Self objects.
 An object literal is constructed as follows:
 
-		* First, the slot initializers of every slot are evaluated from left to right. If a slot initializer contains 
-		  another object literal, this literal is constructed before the initializer containing it is evaluated. 
+		* First, the slot initializers of every slot are evaluated from left to right. If a slot initializer contains
+		  another object literal, this literal is constructed before the initializer containing it is evaluated.
 		  If the initializer is an expression, it is evaluated in the context of the lobby.
-		
-		* Second, the object is created, and its slots are initialized with the results of the evaluations performed 
+
+		* Second, the object is created, and its slots are initialized with the results of the evaluations performed
 		  in the first step.
 
-Slot initializers are *not* evaluated in the lexical context, since none exists at parse time; they are evaluated 
-in the context of an object known as the ``lobby``. That is, the initializers are evaluated as if they were the code 
-of a method in a slot of the ``lobby``. This two-phase object construction pro­cess implies that slot initializers may 
-not refer to any other slots within the constructed object (as with Scheme’s ``let*`` and ``letrec`` forms) and, more generally, 
+Slot initializers are *not* evaluated in the lexical context, since none exists at parse time; they are evaluated
+in the context of an object known as the ``lobby``. That is, the initializers are evaluated as if they were the code
+of a method in a slot of the ``lobby``. This two-phase object construction pro­cess implies that slot initializers may
+not refer to any other slots within the constructed object (as with Scheme’s ``let*`` and ``letrec`` forms) and, more generally,
 that a slot initializer may not refer to any textually enclosing object literal.
 
 .. index::
@@ -338,22 +322,17 @@ Read-only slots
 
 A slot name followed by an equals sign (‘=’) and an expression represents a *read-only slot* initialized to the result of evaluating the expression in the root context.
 
-For example, a constant point might be defined as:
+For example, a constant point might be defined as::
 
-		::
-
-					( | 	parent* = traits point.
-						x = 3 + 4.
-						y = 5.
-					| )
+    ( |   parent* = traits point.
+          x = 3 + 4.
+          y = 5.
+    | )
 
 The resulting point contains three initialized read-only slots:
 
 ..  figure:: images/Chapter_2_Image_4.*
-    :height: 217 px
-    :width: 401 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 .. index::
    single:  self slot; self slot
@@ -374,38 +353,28 @@ There is no separate assignment operation in Self. Instead, assignments to data 
 
 An identifier followed by a left arrow (the characters ‘<’ and ‘-’ concatenated to form ‘<-’) and an expression represents an initialized *read/write variable* (assignable data slot). The object will contain both a data slot of that name and a corresponding assignment slot whose name is obtained by appending a colon to the data slot name. The initializing expression is evaluated in the root context and the result stored into the data slot at parse time.
 
-For example, an initialized mutable point might be defined as:
+For example, an initialized mutable point might be defined as::
 
-		::
+    ( |   parent* = traits point.
+          x <- 3 + 4.
+          y <- 5.
+    | )
 
-					( | 	parent* = traits point.
-						x <- 3 + 4.
-						y <- 5.
-					| )
-
-producing an object with two data slots (xand y) and two assignment slots (x:and y:) containing the assignment primitive (depicted with ←): [#f4]_
+producing an object with two data slots (x and y) and two assignment slots (x: and y:) containing the assignment primitive (depicted with ←): [#f4]_
 
 ..  figure:: images/Chapter_2_Image_5.*
-    :height: 294 px
-    :width: 428 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
-An identifier by itself specifies an assignable data slot initialized to *nil* . [#f5]_ Thus, the slot declaration x is a shorthand notation for x <- nil.
+An identifier by itself specifies an assignable data slot initialized to *nil* [#f5]_. Thus, the slot declaration x is a shorthand notation for x <- nil.
 
-For example, a simple mutable point might be defined as:
+For example, a simple mutable point might be defined as::
 
-		::
-		
-					( | x. y. | )
+    ( | x. y. | )
 
 producing:
 
 ..  figure:: images/Chapter_2_Image_6.*
-    :height: 198 px
-    :width: 499 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
 .. index::
    single:  slot; argument slot
@@ -416,52 +385,42 @@ producing:
 Slots containing methods
 ------------------------
 
-If the initializing expression is an object literal with code, that object is stored into the slot *without evaluating the code*. This allows a slot to be initialized to a method by storing the method itself, rather than its result, in the slot. [#f6]_ Methods may only be stored in read-only slots. A method automatically receives a parent argument slot named self. For example, a point addition method can be written as:
+If the initializing expression is an object literal with code, that object is stored into the slot *without evaluating the code*. This allows a slot to be initialized to a method by storing the method itself, rather than its result, in the slot. [#f6]_ Methods may only be stored in read-only slots. A method automatically receives a parent argument slot named self. For example, a point addition method can be written as::
 
-		::
-
-					( |
-							+ = ( | :arg | (clone x: x + arg x) y: y + arg y ).
-					| )
+    ( |
+          + = ( | :arg | (clone x: x + arg x) y: y + arg y ).
+    | )
 
 producing:
 
 ..  figure:: images/Chapter_2_Image_7.*
-    :height: 193 px
-    :width: 653 px
-    :scale: 100
-    :align: left
+    :scale: 80
 
-A slot name beginning with a colon indicates an *argument* slot. The prefixed colon is not part of the slot name and is ignored when matching the name against a message. Argument slots are always read-only, and no initializer may be specified for them. As a syntactic convenience, the argument name may also be written immediately after the slot name (without the prefixed colon), thereby implicitly declaring the argument slot. Thus, the following yields exactly the same object as above:
+A slot name beginning with a colon indicates an *argument* slot. The prefixed colon is not part of the slot name and is ignored when matching the name against a message. Argument slots are always read-only, and no initializer may be specified for them. As a syntactic convenience, the argument name may also be written immediately after the slot name (without the prefixed colon), thereby implicitly declaring the argument slot. Thus, the following yields exactly the same object as above::
 
-		::
-
-					( |
-						+ arg = ( (clone x: x + arg x) y: y + arg y ).
-					| )
-
+    ( |
+          + arg = ( (clone x: x + arg x) y: y + arg y ).
+    | )
 
 The + slot above is a *binary slot* (§2.3.2), taking one argument and having a name that consists of operator symbols. Slots like x or y in a point object are *unary slots* (§2.3.1), which take no arguments and have simple identifiers for names. In addition, there are *keyword slots* (§2.3.3), which handle messages that require one or more arguments. A keyword slot name is a sequence of identifiers, each followed by a colon.
 
 The arguments in keyword methods are handled analogously to those in binary methods: each colon-terminated identifier in a keyword slot name requires a corresponding argument slot in the keyword method object, and the argument slots may be specified either all in the method or all interspersed with the selector parts.
 
-For example:
+For example::
 
-		::
-
-					( |
-						ifTrue: False: = ( | :trueBlock. :falseBlock |
-							trueBlock value ).
-					| )
+    ( |
+          ifTrue: False: = ( | :trueBlock. :falseBlock |
+                  trueBlock value ).
+    | )
 
 and
 
-		::
+::
 
-					( |
-						ifTrue: trueBlock False: falseBlock =
-							( trueBlock value ).
-					| )
+    ( |
+          ifTrue: trueBlock False: falseBlock =
+                  ( trueBlock value ).
+    | )
 
 produce identical objects.
 
@@ -483,23 +442,19 @@ A unary slot name followed by an asterisk denotes a *parent slot*. The trailing 
 Annotations
 -----------
 
-In order to provide extra information for the programming environment, Self supports annotations on either whole objects or individual slots. Although any object can be an annotation, the Self syntax only supports the textual definition of string annotations. In order to annotate an object, use this syntax:
+In order to provide extra information for the programming environment, Self supports annotations on either whole objects or individual slots. Although any object can be an annotation, the Self syntax only supports the textual definition of string annotations. In order to annotate an object, use this syntax::
 
-		::
+    ( | {} = ’this object has one slot’ snort = 17. | ) }
 
-					( | {} = ’this object has one slot’ snort = 17. | ) }
-										
-In order to annotate a group of slots, surround them with braces and insert the annotation after the opening brace:
+In order to annotate a group of slots, surround them with braces and insert the annotation after the opening brace::
 
-		::
-
-				( |
-					{ ’Category: accessing’
-						getOne = (...).
-						getAnother = (...).
-					}
-					anUnannotatedSlot.
-				| )
+    ( |
+          { ’Category: accessing’
+                getOne = (...).
+                getAnother = (...).
+          }
+          anUnannotatedSlot.
+    | )
 
 Annotations may nest; if so the Virtual Machine concatenates the annotations strings and inserts a separator character (16r7f). [#f7]_
 
@@ -528,11 +483,11 @@ The table below summarizes Self’s message syntax rules:
 +---------+-----------+------------+------------------------+----------------------------------------------------------------+
 | MESSAGE | ARGUMENTS | PRECEDENCE | ASSOCIATIVITY          | SYNTAX                                                         |
 +---------+-----------+------------+------------------------+----------------------------------------------------------------+
-| Unary   |    0      | highest    | none                   | [receiver] identifier                                          |     
+| Unary   |    0      | highest    | none                   | [receiver] identifier                                          |
 +---------+-----------+------------+------------------------+----------------------------------------------------------------+
-| binary  |    1      | medium     | none or left-to-right* | [receiver] operator expression                                 |              
+| binary  |    1      | medium     | none or left-to-right* | [receiver] operator expression                                 |
 +---------+-----------+------------+------------------------+----------------------------------------------------------------+
-| keyword |   ≥ 1     | lowest     | right-to-left          | [receiver] small-keyword expression { cap-keyword expression } |                                              
+| keyword |   ≥ 1     | lowest     | right-to-left          | [receiver] small-keyword expression { cap-keyword expression } |
 +---------+-----------+------------+------------------------+----------------------------------------------------------------+
 
 \* Heterogeneous binary messages have no associativity; homogeneous binary messages associate left-to-right.
@@ -550,24 +505,18 @@ Unary messages
 
 A *unary message* does not specify any arguments. It is written as an identifier following the receiver.
 
-Examples of unary messages sent to explicit receivers:
+Examples of unary messages sent to explicit receivers::
 
-		::
+    17 print
+    5 factorial
 
-					17 print
-					5 factorial
+*Associativity*. Unary messages compose from left to right. An expression to print 5 factorial, for example, is written::
 
-*Associativity*. Unary messages compose from left to right. An expression to print 5 factorial, for example, is written:
+    5 factorial print
 
-		::
+and interpreted as::
 
-					5 factorial print
-
-and interpreted as:
-
-		::
-
-					(5 factorial) print
+    (5 factorial) print
 
 *Precedence*. Unary messages have higher precedence than binary messages and keyword messages.
 
@@ -583,55 +532,53 @@ and interpreted as:
 Binary messages
 ---------------
 
-A *binary message* has a receiver and a single argument, separated by a binary operator. Examples of binary messages:
+A *binary message* has a receiver and a single argument, separated by a binary operator. Examples of binary messages::
 
-		::
-
-					3 + 4
-					7 <-> 8
+    3 + 4
+    7 <-> 8
 
 *Associativity*. Binary messages have no associativity, except between identical operators (which associate from left to right). For example,
 
-		::
+::
 
-					3 + 4 + 7
+    3 + 4 + 7
 
 is interpreted as
 
-		::
+::
 
-					(3 + 4) + 7
+    (3 + 4) + 7
 
 But
 
-		::
-		
-					3 + 4 * 7
+::
+
+    3 + 4 * 7
 
 is illegal: the associativity must be made explicit by writing either
 
-		::
+::
 
-					(3 + 4) * 7 or 3 + (4 * 7).
+    (3 + 4) * 7 or 3 + (4 * 7).
 
 *Precedence*. The precedence of binary messages is lower than unary messages but higher than keyword messages. All binary messages have the same precedence. For example,
 
-		::
+::
 
-					3 factorial + pi sine
+    3 factorial + pi sine
 
 is interpreted as
 
-		::
+::
 
-					(3 factorial) + (pi sine)
+    (3 factorial) + (pi sine)
 
 .. index::
    single:  associativity; of keyword messages
 
 .. index::
    single:  keyword message
-   
+
 .. index::
    single:  primitive send
 
@@ -642,47 +589,47 @@ A *keyword message* has a receiver and one or more arguments. It is written as a
 
 Example:
 
-		::
+::
 
-					5 min: 4 Max: 7 
+    5 min: 4 Max: 7
 
 is the single message min:Max: sent to 5 with arguments 4 and 7, whereas
 
-		::
+::
 
-					5 min: 4 max: 7 
+    5 min: 4 max: 7
 
 involves two messages: first the message max:sent to 4 and taking 7 as its argument, and then the message min: sent to 5, taking the result of (4 max: 7) as its argument.
 
 *Associativity*. Keyword messages associate from right to left, so
 
-		::
-		
-					5 min: 6 min: 7 Max: 8 Max: 9 min: 10 Max: 11
-					
+::
+
+    5 min: 6 min: 7 Max: 8 Max: 9 min: 10 Max: 11
+
 is interpreted as
 
-		::
-		
-					5 min: (6 min: 7 Max: 8 Max: (9 min: 10 Max: 11))
-				
+::
+
+    5 min: (6 min: 7 Max: 8 Max: (9 min: 10 Max: 11))
+
 The association order and capitalization requirements are intended to reduce the number of parentheses necessary in Self code. For example, taking the minimum of two slots mand nand storing the result into a data slot i may be written as
 
-		::
+::
 
-					i: m min: n
+    i: m min: n
 
 Precedence. Keyword messages have the lowest precedence. For example,
-		
-		::
-		
-					i: 5 factorial + pi sine
+
+::
+
+    i: 5 factorial + pi sine
 
 is interpreted as
 
-		::
+::
 
-					i: ((5 factorial) + (pi sine))
+    i: ((5 factorial) + (pi sine))
 
 
 .. index::
@@ -695,12 +642,12 @@ Unary, binary, and keyword messages are frequently written without an explicit r
 
 Examples:
 
-		::
+::
 
-					factorial		(implicit-receiver unary message)
-					+ 3 			(implicit-receiver binary message)
-					max: 5			(implicit-receiver keyword message)
-					1 + power: 3		(parsed as 1 + (power: 3))
+    factorial        (implicit-receiver unary message)
+    + 3              (implicit-receiver binary message)
+    max: 5           (implicit-receiver keyword message)
+    1 + power: 3     (parsed as 1 + (power: 3))
 
 Accesses to slots of the receiver (local or inherited) are also achieved by implicit message sends to ``self``. For an assignable data slot named ``t``, the message ``t`` returns the contents, and ``t``: 17 puts 17 into the slot.
 
@@ -722,20 +669,20 @@ A resend is written as an implicit-receiver message with the reserved word ``res
 
 Examples:
 
-		::
-		
-					resend.display
-					resend.+ 5
-					resend.min: 17 Max: 23		
+::
+
+    resend.display
+    resend.+ 5
+    resend.min: 17 Max: 23
 
 A *directed resend* constrains the resend through a specified parent. It is written similar to a normal resend, but replaces ``resend`` with the name of the parent slot through which the resend is directed.
 
 Examples:
 
-		::
+::
 
-					listParent.height
-					intParent.min: 17 Max: 23
+    listParent.height
+    intParent.min: 17 Max: 23
 
 Only implicit-receiver messages may be delegated via a resend or a directed resend. [#f9]_
 
@@ -782,28 +729,28 @@ If the lookup fails, the lookup error is handled in an implementation-defined ma
 
 The function *send(rec, sel, args)* is defined as follows:
 
-		**Input**:	
-			  | rec, the receiver of the message 
-			  | sel, the message selector 
-			  | args, the actual arguments
-				
-		**Output**: 	
-			  | res, the result object
-		
-		**Algorithm**
-		
-			::
+**Input**:
+  | rec, the receiver of the message
+  | sel, the message selector
+  | args, the actual arguments
 
-					if begins_with_underscore(sel)
-					then invoke_primitive(rec, sel, args) 			“primitive call”
-					else M ← lookup(rec, sel, Ø) 				“do the lookup”
-						case
-							| M | = 0: error: message not understood 
-							| M | = 1: res ← eval(rec, M, args) 	“see §2.1” 
-							| M | > 1: error: ambiguous message send
-						end
-					end
-					return res
+**Output**:
+  | res, the result object
+
+**Algorithm**
+
+::
+
+  if begins_with_underscore(sel)
+  then invoke_primitive(rec, sel, args)               “primitive call”
+  else M ← lookup(rec, sel, Ø)                        “do the lookup”
+      case
+          | M | = 0: error: message not understood
+          | M | = 1: res ← eval(rec, M, args)         “see §2.1”
+          | M | > 1: error: ambiguous message send
+      end
+  end
+  return res
 
 .. index::
    single:  lookup algorithm
@@ -815,33 +762,33 @@ The lookup algorithm recursively traverses the inheritance graph, which can be a
 
 The function *lookup(obj, sel, V)* is defined as follows:
 
-		**Input**:
-				| obj, the object being searched for matching slots 
-				| sel, the message selector 
-				| V, the set of objects already visited along this path
-	
-		**Output**:
-				| M, the set of matching slots
-	
-		**Algorithm**:
-	
-			::
-				
-					if obj ε V
-					then M ← Ø							“cycle detection”
-					else M ← {s ε obj | s.name = sel}				“try local slots”
-						if M = Ø then M ← parent_lookup(obj, sel, V) end 	“try 	parent slots” 
-					end 
-					return M
+**Input**:
+  | obj, the object being searched for matching slots
+  | sel, the message selector
+  | V, the set of objects already visited along this path
+
+**Output**:
+  | M, the set of matching slots
+
+**Algorithm**:
+
+::
+
+  if obj ε V
+  then M ← Ø                                                  “cycle detection”
+  else M ← {s ε obj | s.name = sel}                           “try local slots”
+      if M = Ø then M ← parent_lookup(obj, sel, V) end        “try parent slots”
+  end
+  return M
 
 Where *parent_lookup(obj, sel, V)* is defined as follows:
 
-				::
-	
-									P ← {s ε obj | s.isParent} 					“all parents”
-									M ← υ lookup(s.contents, sel, V υ {obj}) 			“recursively search parents”
-									   sεP
-									return M
+::
+
+    P ← {s ε obj | s.isParent}                  “all parents”
+    M ← υ lookup(s.contents, sel, V υ {obj})    “recursively search parents”
+       sεP
+    return M
 
 Undirected Resend
 -----------------
@@ -850,25 +797,25 @@ An undirected resend ignores the sending method holder (the object containing th
 
 The function *undirected_resend(rec, smh, sel, args)* is defined as follows:
 
-		**Input**:
-				| rec, the receiver of the message 
-				| smh, the sending method holder 
-				| sel, the message selector args, the actual arguments
-	
-		**Output**:
-				| res, the result object
-	
-		**Algorithm**:
-	
-			::
-				
-					M ← parent_lookup(smh, sel, Ø) 					“do the lookup”
-					case
-						| M | = 0: error: message not understood
-						| M | = 1: res ← eval(rec, M, args) 			“see §2.1”
-						| M | > 1: error: ambiguous message send
-					end 
-					return res
+**Input**:
+  | rec, the receiver of the message
+  | smh, the sending method holder
+  | sel, the message selector args, the actual arguments
+
+**Output**:
+  | res, the result object
+
+**Algorithm**:
+
+::
+
+    M ← parent_lookup(smh, sel, Ø)                    “do the lookup”
+    case
+        | M | = 0: error: message not understood
+        | M | = 1: res ← eval(rec, M, args)           “see §2.1”
+        | M | > 1: error: ambiguous message send
+    end
+    return res
 
 Directed Resend
 ---------------
@@ -877,29 +824,29 @@ A directed resend looks only in one slot in the sending method holder.
 
 The function *directed_resend(rec, smh, del, sel, args)* is defined as follows:
 
-		**Input**:
-				| rec, the receiver of the message 
-				| smh, the sending method holder 
-				| del, the name of the delegatee 
-				| sel, the message selector 
-				| args, the actual arguments
-	
-		**Output**:
-				| res, the result object
-	
-		**Algorithm**:
-	
-			::
-				
-					D ← {s ε smh | s.name = del} 				“find delegatee”
-					if | D | = 0 then error: missing delegatee 		“one or none”
-					M ← lookup(smh.del, sel, Ø) 				“do the lookup”
-					case
-						| M | = 0: error: message not understood 
-						| M | = 1: res ← eval(rec, M, args) 		“see §2.1” 
-						| M | > 1: error: ambiguous message send
-					end 
-					return res
+**Input**:
+  | rec, the receiver of the message
+  | smh, the sending method holder
+  | del, the name of the delegatee
+  | sel, the message selector
+  | args, the actual arguments
+
+**Output**:
+  | res, the result object
+
+**Algorithm**:
+
+::
+
+    D ← {s ε smh | s.name = del}                     “find delegatee”
+    if | D | = 0 then error: missing delegatee       “one or none”
+    M ← lookup(smh.del, sel, Ø)                      “do the lookup”
+    case
+        | M | = 0: error: message not understood
+        | M | = 1: res ← eval(rec, M, args)          “see §2.1”
+        | M | > 1: error: ambiguous message send
+    end
+    return res
 
 Lexical elements
 ================
@@ -959,7 +906,7 @@ Keywords
 --------
 
 Keywords are used as slot names and as message names. They consist of an identifier or a capitalized identifier followed by a colon (‘:’).
-                                                                                
+
 Productions:
 
 	+-----------------+-----+-------------------------------------------+
@@ -967,7 +914,7 @@ Productions:
 	+-----------------+-----+-------------------------------------------+
 	| cap-keyword     |  →  | cap-letter {letter \| digit \| ‘_’} ‘:’   |
 	+-----------------+-----+-------------------------------------------+
-	
+
 Examples: ``at:`` ``Put:`` ``_IntAdd:``
 
 .. index::
@@ -983,7 +930,7 @@ Productions:
 	+----------+---+----------------+
 	| arg-name | → | ‘:’ identifier |
 	+----------+---+----------------+
-	
+
 Example: ``:name``
 
 .. index::
@@ -1007,7 +954,7 @@ Productions:
 	+-----------+-----+------------------------------------------------------------------------------------------------------------------------------------------------+
 	| operator  |  →  | op-char {op-char}                                                                                                                              |
 	+-----------+-----+------------------------------------------------------------------------------------------------------------------------------------------------+
-	
+
 Examples: + - && \|\| <-> % # @ ^
 
 .. index::
@@ -1141,11 +1088,15 @@ Productions:
   | comment-char |  →  |  any character except ‘"’  |
   +--------------+-----+----------------------------+
 
-Example: "this is a comment"
+Example:
+
+::
+
+    "this is a comment"
 
 .. index::
    single:  block
-   
+
 .. index::
    single:  block; block method
 

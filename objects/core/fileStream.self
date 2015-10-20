@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: OS and filesystem interface\x7fModuleInfo: Module: fileStream InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: host and filesystem\x7fModuleInfo: Module: fileStream InitialContents: FollowSlot\x7fVisibility: public'
         
          fileStream = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'fileStream' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals fileStream.

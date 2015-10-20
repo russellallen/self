@@ -1,8 +1,9 @@
  '$Revision: 30.14 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -73,7 +74,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: userQueryMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: userQueryMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          userQueryMorph = bootstrap define: bootstrap stub -> 'globals' -> 'userQueryMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -115,7 +116,7 @@ SlotsToOmit: parent prototype rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: userQueryMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: userQueryMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          userQueryMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'userQueryMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits userQueryMorph.
@@ -356,7 +357,7 @@ for user reponses are added via buttonLabel:Result:.
              new.
             | 
             new: copyRemoveAllMorphs beShrinkWrap.
-            new colorAll: paint copyRed: 0 Green: 0 Blue: 0 Alpha: 0.7.
+            "new colorAll: paint copyRed: 0 Green: 0 Blue: 0 Alpha: 0.7."
             new doneSema: (doneSema copyCount: 0 Capacity: 1).
             mphs: list copyRemoveAll.
             (queryText asTextLines) do: [| :line |

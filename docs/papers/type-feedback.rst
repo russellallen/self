@@ -24,5 +24,5 @@ SIGPLAN `94 Conference on Programming Language Design and
 Implementation.*
 
 
-`PDF <../../_static/published/type-feedback.pdf>`_
+ `PDF <_static/type-feedback.pdf>`_
 

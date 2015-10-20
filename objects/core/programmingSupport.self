@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.7 $'
+ '30.8.0-prerelease2'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -47,9 +48,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'programmingSupport' -> () From: ( | {
-         'ModuleInfo: Module: programmingSupport InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: programmingSupport InitialContents: InitializeToExpression: (\'30.8.0-prerelease2\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.7 $'.
+         revision <- '30.8.0-prerelease2'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'programmingSupport' -> () From: ( | {

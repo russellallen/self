@@ -1125,8 +1125,9 @@ class PepTest {
     System.out.print("Timing java.util.Date::toString: ");
     long t1 = System.currentTimeMillis();
     java.util.Date now = new java.util.Date();
-    for (int i = 0; i < 50; i++) 
+    for (int i = 0; i < 50; i++) {
       String s = now.toString();
+    }
     long t2 = System.currentTimeMillis();
     System.out.println("" + (t2 - t1) + " ms");
   }

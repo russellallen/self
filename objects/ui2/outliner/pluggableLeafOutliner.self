@@ -1,7 +1,7 @@
  '$Revision: 30.9 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -68,7 +68,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: pluggableLeafOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fModuleInfo: Module: pluggableLeafOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          pluggableLeafOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'pluggableLeafOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -151,10 +151,10 @@ SlotsToOmit: parent prototype.
             tle: buildTitle.
             header addMorphLast: tle.
             addCommentButtonToHeader.
-            header addMorphLast: flexibleSpacer copy color: color.
-            contentsLabel: optionalMorph copy color: color.
+            header addMorphLast: flexibleSpacer copy color: (paint named: 'transparent').
+            contentsLabel: optionalMorph copy color: (paint named: 'transparent').
             header addMorphLast: contentsLabel.
-            header addMorphLast: rigidSpacer copyH: 4 Color: color.
+            header addMorphLast: rigidSpacer copyH: 4 Color: (paint named: 'transparent').
             header addMorphLast: buildExpander.
 
             " put contents string and sprout box at bottom of tall title "
@@ -170,9 +170,11 @@ SlotsToOmit: parent prototype.
          initializeForModel: m = ( |
             | 
             resend.initializeForModel: m.
+            color: m preferredBorderColor.
             borderWidth: 1.
             beFlexible.
             frameStyle: insetBezelStyle.
+            recolor.
             layoutChanged).
         } | ) 
 
@@ -209,6 +211,19 @@ SlotsToOmit: parent prototype.
          'ModuleInfo: Module: pluggableLeafOutliner InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableLeafOutliner' -> 'parent' -> () From: ( | {
+         'Category: updating\x7fModuleInfo: Module: pluggableLeafOutliner InitialContents: FollowSlot'
+        
+         recolor = ( |
+            | 
+            resend.recolor.
+            contentsLabel inner ifNotNil: [
+               contentsLabel inner color: model preferredTitleColor].
+            expander color: model preferredBodyColor.
+            updateButtonIcon.
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableLeafOutliner' -> 'parent' -> () From: ( | {
@@ -281,13 +296,14 @@ SlotsToOmit: parent prototype.
              e.
              i.
             | 
-            i: buttonIcon.
+            i: buttonIcon copy.
+            i colors size > 0 
+              ifTrue: [i colors at: 0 
+                               Put: model preferredTitleColor].
             e: expander.
+            e morphs size < 1 ifTrue: [^ self].
             i = e firstMorph image ifFalse: [
-              e removeAllMorphs.
-              e addMorphLast: (imageMorph copyImage: i).
-              e changed.
-            ].
+              e firstMorph setImage: i].
             self).
         } | ) 
 
@@ -300,8 +316,7 @@ SlotsToOmit: parent prototype.
               contentsLabel inner ifNil: [
                 contentsLabel inner: 
                     ((labelMorph copy label: oneLinerContentsString)
-                                   fontSpec: contentsLabelFontSpec)
-                                   colorAll: color.
+                                   fontSpec: contentsLabelFontSpec).
                 contentsLabel open.
               ] IfNotNil: [| c <- ''|
                 c: oneLinerContentsString.
@@ -309,7 +324,6 @@ SlotsToOmit: parent prototype.
                   safelyDo: [ contentsLabel inner label: c ].
                 ].
               ].
-              contentsLabel color = color ifFalse: [contentsLabel colorAll: color].
             ] False: [
               contentsLabel inner ifNotNil: [
                 contentsLabel inner delete.
@@ -327,7 +341,7 @@ SlotsToOmit: parent prototype.
             resend.updateDo: blk.
             isPlaceHolder ifTrue: [^ self].
             updateContentsLabelString.
-            updateButtonIcon.
+            "updateButtonIcon."
             updateArrow).
         } | ) 
 

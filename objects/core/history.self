@@ -15,7 +15,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fModuleInfo: Module: history InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: prompt\x7fModuleInfo: Module: history InitialContents: FollowSlot\x7fVisibility: public'
         
          historyListEntry = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'historyListEntry' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals historyListEntry.
@@ -36,7 +36,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: user interface\x7fModuleInfo: Module: history InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: prompt\x7fModuleInfo: Module: history InitialContents: FollowSlot\x7fVisibility: public'
         
          historyListEntry = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'historyListEntry' -> () From: ( |
              {} = 'Comment: A historyListEntry is a triple: <id><command string><result object>.\x7fModuleInfo: Creator: traits historyListEntry.
@@ -191,7 +191,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: user interface\x7fModuleInfo: Module: history InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: system\x7fCategory: prompt\x7fModuleInfo: Module: history InitialContents: FollowSlot\x7fVisibility: public'
         
          historyList = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'historyList' -> () From: ( |
              {} = 'Comment: The history list records commands typed by the user, allowing a command

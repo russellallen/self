@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Object Outliner\x7fModuleInfo: Module: selfPCatModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Self Object Outliner\x7fModuleInfo: Module: selfPCatModel InitialContents: FollowSlot\x7fVisibility: public'
         
          selfPseudoCatModel = bootstrap define: bootstrap stub -> 'globals' -> 'selfPseudoCatModel' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:

@@ -44,5 +44,5 @@ come within a factor of two or three of optimized C.
 *Computer, 25(10), October, 1992, pp. 53-64.*
 
 
-`PDF <../../_static/published/object-msg-perf.pdf>`_
+ `PDF <_static/object-msg-perf.pdf>`_
 

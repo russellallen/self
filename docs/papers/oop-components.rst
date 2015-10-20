@@ -22,5 +22,5 @@ code and without needing to re-typecheck it.
 *ECOOP '93 Conference Proceedings, Kaiserslautern, Germany, July, 1993.*
 
 
-`PDF <../../_static/published/oop-components.pdf>`_
+ `PDF <_static/oop-components.pdf>`_
 

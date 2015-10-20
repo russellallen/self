@@ -31,5 +31,5 @@ Editor, Technical Reports, 2550 Garcia Ave, M/S UMTV29-01,
 Mountain View, CA 94043-1100, U.S.A.*
 
 
-`PDF <../../_static/published/mango.pdf>`_
+ `PDF <_static/mango.pdf>`_
 

@@ -71,3 +71,9 @@ Other
 
     oop-components
     mango         
+
+Indices and tables
+==================
+
+* :ref:`search`
+

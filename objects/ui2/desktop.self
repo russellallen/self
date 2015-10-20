@@ -1,14 +1,15 @@
- 'Sun-$Revision: 30.10 $'
+ '30.11.0'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Desktop\x7fModuleInfo: Module: desktop InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Desktop\x7fModuleInfo: Module: desktop InitialContents: FollowSlot\x7fVisibility: public'
         
          desktop = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals desktop.
@@ -45,13 +46,12 @@ See the LICENSE file for license information.
 
             ( _MaxPICSizeIfFail: [^ self] ) >= betterMaxPICSize ifTrue: [^self].
 
-            'Adjusting VM for better UI2 performance:' printLine.
-
-            ('  _MaxPICSize: ', betterMaxPICSize printString) printLine.
+            log info: 
+               'Adjusting VM for better UI2 performance:', 
+               '  _MaxPICSize: ', betterMaxPICSize printString.
             _MaxPICSize: betterMaxPICSize.
 
             "The code cache has to be flushed after changing the max PIC size."
-            '  _Flush' printLine.
             _Flush.
             self).
         } | ) 
@@ -407,6 +407,16 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             | 
             resend.postFileIn.
             [returnFromSnapshot. releaseUnusedRefiedObjects]. "browsing"
+
+            snapshotAction
+              forCommandLineArg: '-headless'
+                       DoAction: (| parent* = lobby.
+                                    value: i With: arg = (
+                                     "Don't start up desktop this time"
+                                     desktop suppressRestart.
+                                     i succ).
+                                 |).
+
             snapshotAction addSchedulerInitialMessage:
               message copy receiver: desktop Selector: 'returnFromSnapshot'.
             memory addThoroughCleanupMessage:
@@ -415,15 +425,77 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'desktop' -> () From: ( | {
-         'ModuleInfo: Module: desktop InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: desktop InitialContents: InitializeToExpression: (\'30.11.0\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.10 $'.
+         revision <- '30.11.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'desktop' -> () From: ( | {
          'ModuleInfo: Module: desktop InitialContents: FollowSlot\x7fVisibility: private'
         
          subpartNames <- ''.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
+         'Category: graphical interface\x7fCategory: ui2\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         desktop = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals preferences desktop.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'Comment: At the moment, all worlds are the same color.\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         backgroundColor = ( |
+            | backgroundColor: raw. raw).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'ModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         backgroundColor: aPaint = ( |
+            | desktop worldsDo: [|:w| w color: aPaint]. raw: aPaint).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'Category: example colors\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         gray44 = ( |
+            | (paint named: 'gray') copyBrightness: 0.93).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'Category: example colors\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         offWhite = ( |
+            | 
+            paint copyRed: 16rF6 / 16rFF asFloat 
+                    Green: 16rF6 / 16rFF asFloat 
+                     Blue: 16rF6 / 16rFF asFloat).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'Category: private\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         p* = bootstrap stub -> 'traits' -> 'oddball' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'Category: private\x7fModuleInfo: Module: desktop InitialContents: InitializeToExpression: (paint named: \'white\')'
+        
+         raw <- paint named: 'white'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'Category: example colors\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+        
+         warmWhite = ( |
+            | 
+            paint copyRed: 16rFD asFloat / 16rFF asFloat 
+                    Green: 16rFD asFloat / 16rFF asFloat 
+                     Blue: 16rF0 asFloat / 16rFF asFloat).
         } | ) 
 
 

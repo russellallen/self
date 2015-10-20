@@ -68,7 +68,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: operandSelectors InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: operandSelectors InitialContents: FollowSlot\x7fVisibility: public'
         
          operandSelectorsMorph = bootstrap define: bootstrap stub -> 'globals' -> 'operandSelectorsMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -97,7 +97,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: operandSelectors InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: operandSelectors InitialContents: FollowSlot\x7fVisibility: public'
         
          operandSelectorsMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'operandSelectorsMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits operandSelectorsMorph.

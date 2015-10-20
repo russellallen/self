@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Carpet\x7fModuleInfo: Module: carpetMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Carpet\x7fModuleInfo: Module: carpetMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          carpetMorph = bootstrap define: bootstrap stub -> 'globals' -> 'carpetMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -57,7 +57,7 @@ world.\x7fModuleInfo: Module: carpetMorph InitialContents: InitializeToExpressio
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Carpet\x7fModuleInfo: Module: carpetMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Carpet\x7fModuleInfo: Module: carpetMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          carpetMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'carpetMorph' -> () From: ( |
              {} = 'Comment: The carpet morph makes it possible to group morphs.\x7fModuleInfo: Creator: traits carpetMorph.

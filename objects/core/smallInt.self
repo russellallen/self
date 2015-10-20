@@ -8,13 +8,13 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fComment: largest small integer\x7fModuleInfo: Module: smallInt InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fComment: largest small integer\x7fModuleInfo: Module: smallInt InitialContents: FollowSlot\x7fVisibility: public'
         
          maxSmallInt = 536870911.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fComment: smallest small integer\x7fModuleInfo: Module: smallInt InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fComment: smallest small integer\x7fModuleInfo: Module: smallInt InitialContents: FollowSlot\x7fVisibility: public'
         
          minSmallInt = -536870912.
         } | ) 
@@ -73,7 +73,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: numbers\x7fModuleInfo: Module: smallInt InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: core\x7fCategory: numbers\x7fModuleInfo: Module: smallInt InitialContents: FollowSlot\x7fVisibility: public'
         
          smallInt = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'smallInt' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits smallInt.

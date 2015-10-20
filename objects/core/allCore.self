@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.7 $'
+ '30.8.0-prerelease2'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -47,25 +48,25 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allCore' -> () From: ( | {
-         'ModuleInfo: Module: allCore InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: allCore InitialContents: InitializeToExpression: (\'30.8.0-prerelease2\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.7 $'.
+         revision <- '30.8.0-prerelease2'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allCore' -> () From: ( | {
          'ModuleInfo: Module: allCore InitialContents: FollowSlot\x7fVisibility: private'
         
-         subpartNames <- '
-	     systemStructure
-	     coreObjects
-	     processesAndIO
-	     programmingSupport
-	     ttySupport
-	     defaultPreferences
-	     debugger
-             prompt
-	     
-int32and64'.
+         subpartNames <- 'systemStructure
+coreObjects
+processesAndIO
+programmingSupport
+ttySupport
+defaultPreferences
+debugger
+prompt
+int32and64
+systemLog
+'.
         } | ) 
 
 
@@ -81,6 +82,7 @@ int32and64'.
  bootstrap read: 'debugger' From: 'core'
  bootstrap read: 'prompt' From: 'core'
  bootstrap read: 'int32and64' From: 'core'
+ bootstrap read: 'systemLog' From: 'core'
 
 
 

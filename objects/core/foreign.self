@@ -25,7 +25,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
         
          foreignCode = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'foreignCode' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals foreignCode.
@@ -107,7 +107,7 @@ Only the linker should clone foreignCode objects.\x7fModuleInfo: Creator: traits
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
         
          foreignCodeDB = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'foreignCodeDB' -> () From: ( |
              {} = 'Comment: foreignCode objects must be globally unique given the path name.
@@ -336,7 +336,7 @@ file, return nil.\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7f
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
         
          foreignFct = bootstrap define: bootstrap stub -> 'globals' -> 'foreignFct' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -406,7 +406,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
         
          sunLinker = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'sunLinker' -> () From: ( |
              {} = 'Comment: An implementation of a linker object based on the Sun OS linker ld.so:
@@ -418,7 +418,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: external libraries\x7fComment: THE linker\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: external libraries\x7fComment: THE linker\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
         
          linker = bootstrap stub -> 'globals' -> 'sunLinker' -> ().
         } | ) 

@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          endoObjectOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'endoObjectOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -46,7 +46,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: SliceOutliner & helpers\x7fModuleInfo: Module: sliceOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: SliceOutliner & helpers\x7fModuleInfo: Module: sliceOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          endoObjectOutliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'endoObjectOutliner' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits endoObjectOutliner.
@@ -193,7 +193,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          exoSlotOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'exoSlotOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -210,7 +210,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: SliceOutliner & helpers\x7fModuleInfo: Module: sliceOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: SliceOutliner & helpers\x7fModuleInfo: Module: sliceOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          exoSlotOutliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'exoSlotOutliner' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits exoSlotOutliner.
@@ -293,7 +293,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Pluggable Outliner Framework\x7fCategory: Slice Outliner & helpers\x7fModuleInfo: Module: sliceOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          sliceOutliner = bootstrap define: bootstrap stub -> 'globals' -> 'sliceOutliner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -328,7 +328,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: SliceOutliner & helpers\x7fModuleInfo: Module: sliceOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: SliceOutliner & helpers\x7fModuleInfo: Module: sliceOutliner InitialContents: FollowSlot\x7fVisibility: public'
         
          sliceOutliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'sliceOutliner' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits sliceOutliner.

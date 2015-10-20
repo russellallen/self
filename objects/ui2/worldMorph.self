@@ -1,7 +1,7 @@
  '$Revision: 30.30 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -84,7 +84,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          screenEdge = bootstrap define: bootstrap stub -> 'globals' -> 'screenEdge' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -107,7 +107,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Basic\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Basic\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          screenEdge = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'screenEdge' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits screenEdge.
@@ -134,7 +134,7 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          worldMorph = bootstrap define: bootstrap stub -> 'globals' -> 'worldMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -237,7 +237,7 @@ When I run again, the step cycle adds me in to the world.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          worldMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits worldMorph.
@@ -364,6 +364,14 @@ gets stuck.
                                    selfObjectModel newOutlinerFor: (reflect: shell copy)
                                                           InWorld: event sourceHand world] )
                    label: 'New shell' )
+            ToGroup: 'top'.
+
+            m addButton:
+                ( ( ui2Button copy
+                   scriptBlock: [event sourceHand attach:
+                                   selfObjectModel newOutlinerFor: (reflect: ())
+                                                          InWorld: event sourceHand world] )
+                   label: 'New Object' )
             ToGroup: 'top'.
 
             m addButton:
@@ -1435,6 +1443,7 @@ puts the morphs to be drawn into the morphsToDraw list and the pruningBoxes into
             joinedMorphs:       joinedMorphs copyRemoveAll.
             outlinerActivities: outlinerActivities copyRemoveAll.
 
+            color: preferences desktop backgroundColor.
             backgroundMenu: nil.
             desktop setNameOfNewWorld: self.
             addWindowOnDisplay: dispName Bounds: b.

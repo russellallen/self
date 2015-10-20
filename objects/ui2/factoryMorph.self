@@ -8,7 +8,7 @@ See the LICENSE file for license information.
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: factoryMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: factoryMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          factoryMorph = bootstrap define: bootstrap stub -> 'globals' -> 'factoryMorph' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'looksHollow' From:
@@ -35,7 +35,7 @@ SlotsToOmit: looksHollow parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: factoryMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: factoryMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          factoryMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'factoryMorph' -> () From: ( |
              {} = 'ModuleInfo: Creator: traits factoryMorph.
