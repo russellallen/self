@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.12 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -25,7 +26,7 @@ See the LICENSE file for license information.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: platform\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: native code\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
         
          foreignCode = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'foreignCode' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals foreignCode.
@@ -107,7 +108,7 @@ Only the linker should clone foreignCode objects.\x7fModuleInfo: Creator: traits
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: platform\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: native code\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
         
          foreignCodeDB = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'foreignCodeDB' -> () From: ( |
              {} = 'Comment: foreignCode objects must be globally unique given the path name.
@@ -336,7 +337,7 @@ file, return nil.\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7f
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: platform\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: native code\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
         
          foreignFct = bootstrap define: bootstrap stub -> 'globals' -> 'foreignFct' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -406,21 +407,21 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: platform\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: native code\x7fCategory: external libraries\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
         
-         sunLinker = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'sunLinker' -> () From: ( |
+         posixLinker = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'posixLinker' -> () From: ( |
              {} = 'Comment: An implementation of a linker object based on the Sun OS linker ld.so:
      All the methods in this object are pseudo-private. They should not be
      accessed directly, since this would break the higher level protocols 
-     defined in foreignCode, foreignFct and foreignCodeDB.\x7fModuleInfo: Creator: globals sunLinker.
+     defined in foreignCode, foreignFct and foreignCodeDB.\x7fModuleInfo: Creator: globals posixLinker.
 '.
             | ) .
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: platform\x7fCategory: external libraries\x7fComment: THE linker\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: native code\x7fCategory: external libraries\x7fComment: THE linker\x7fModuleInfo: Module: foreign InitialContents: InitializeToExpression: (posixLinker)\x7fVisibility: public'
         
-         linker = bootstrap stub -> 'globals' -> 'sunLinker' -> ().
+         linker = bootstrap stub -> 'globals' -> 'posixLinker' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
@@ -585,24 +586,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: system\x7fCategory: foreign\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
-        
-         proxy = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'proxy' -> () From: ( |
-             {} = 'Comment: A proxy object is a Self object that holds an encapsulated 
-     machine pointer. Proxy objects may die (when the pointer becomes 
-     invalid), e.g. after reading a Snapshot.\x7fModuleInfo: Creator: traits proxy.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'proxy' -> () From: ( | {
-         'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: private'
-        
-         parent* = bootstrap stub -> 'traits' -> 'proxy' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sunLinker' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'posixLinker' -> () From: ( | {
          'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: private'
         
          canUnload = ( |
@@ -613,13 +597,13 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             os release >= '4.1.2').
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sunLinker' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'posixLinker' -> () From: ( | {
          'Comment: Set true to generate test output.\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: private'
         
          debug = bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sunLinker' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'posixLinker' -> () From: ( | {
          'Comment: _\x7fModuleInfo: Module: foreign InitialContents: FollowSlot'
         
          initialize = ( |
@@ -627,7 +611,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             debug ifTrue: [ 'sunLinker initialize' printLine. ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sunLinker' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'posixLinker' -> () From: ( | {
          'Comment: _\x7fModuleInfo: Module: foreign InitialContents: FollowSlot'
         
          loadPath: fpath IfFail: errBlk = ( |
@@ -649,7 +633,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             handle).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sunLinker' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'posixLinker' -> () From: ( | {
          'Comment: _\x7fModuleInfo: Module: foreign InitialContents: FollowSlot'
         
          lookupFunction: entry Path: fpath Handle: handle ResultProxy: rp IfFail: errBlk = ( |
@@ -658,7 +642,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             handle _FctLookup: entry asVMByteVector ResultProxy: rp IfFail: errBlk).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sunLinker' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'posixLinker' -> () From: ( | {
          'Comment: _\x7fModuleInfo: Module: foreign InitialContents: FollowSlot'
         
          lookupSymbol: symbol Path: fpath Handle: handle ResultProxy: rp IfFail: errBlk = ( |
@@ -667,7 +651,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             handle _Dlsym: symbol asVMByteVector ResultProxy: rp IfFail: errBlk).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sunLinker' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'posixLinker' -> () From: ( | {
          'Comment: _\x7fModuleInfo: Module: foreign InitialContents: FollowSlot'
         
          noOfArgsFunction: entry Path: fpath Handle: handle IfFail: errBlk = ( |
@@ -675,13 +659,13 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             handle _NoOfArgsFct: entry asVMByteVector IfFail: errBlk).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sunLinker' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'posixLinker' -> () From: ( | {
          'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'oddball' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sunLinker' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'posixLinker' -> () From: ( | {
          'Comment: _\x7fModuleInfo: Module: foreign InitialContents: FollowSlot'
         
          shutdown = ( |
@@ -689,7 +673,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             debug ifTrue: [ 'sunLinker shutdown' printLine. ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sunLinker' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'posixLinker' -> () From: ( | {
          'Comment: _\x7fModuleInfo: Module: foreign InitialContents: FollowSlot'
         
          unloadPath: fpath Handle: handle IfFail: errBlk = ( |
@@ -704,6 +688,23 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                                 'can not unload libraries --\n',
                                 'not unloading ', fpath, '.'.
             ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+         'Category: system\x7fCategory: foreign\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+        
+         proxy = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'proxy' -> () From: ( |
+             {} = 'Comment: A proxy object is a Self object that holds an encapsulated 
+     machine pointer. Proxy objects may die (when the pointer becomes 
+     invalid), e.g. after reading a Snapshot.\x7fModuleInfo: Creator: traits proxy.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'proxy' -> () From: ( | {
+         'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'proxy' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'fctProxy' -> () From: ( | {

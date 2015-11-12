@@ -45,12 +45,23 @@ class C_pointer {
     hi = as_smiOop(long(ptr) >> shifts);
     lo = as_smiOop(long(ptr) & low_mask);
   }
-
+  
   void *get() {
     return (void *)( (long(hi->value()) << shifts) | long(lo->value()) );
   }
 
   bool verify();
+
+  // Where we are using the typeseal to store size of block pointed to
+  void set_lower(smi i){
+      lo = as_smiOop(i);
+  }
+
+  smi get_lower(){
+      return lo->value();
+  }
+  
+
 };
     
 
@@ -59,7 +70,7 @@ class foreignOopClass: public slotsOopClass {  // Abstract class.
 
  private:
 
-  C_pointer cObject;     // object in C heap pointed to by me.
+  C_pointer cObject;              // object in C heap pointed to by me.
 
  protected:
 
@@ -78,7 +89,7 @@ class foreignOopClass: public slotsOopClass {  // Abstract class.
 
 
  public:
-
+     
   void *get_pointer() { 
     return addr()->cObject.get(); 
   }

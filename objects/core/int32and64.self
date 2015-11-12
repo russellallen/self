@@ -1,8 +1,9 @@
  '$Revision: 30.40 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -25,16 +26,16 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap stub -> 'globals' -> 'int32' -> () _ByteAt: 0 Put: (
-     0)
+     89)
 
  bootstrap stub -> 'globals' -> 'int32' -> () _ByteAt: 1 Put: (
-     0)
+     152)
 
  bootstrap stub -> 'globals' -> 'int32' -> () _ByteAt: 2 Put: (
-     0)
+     71)
 
  bootstrap stub -> 'globals' -> 'int32' -> () _ByteAt: 3 Put: (
-     0)
+     164)
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
          'Category: core\x7fCategory: numbers\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
@@ -1006,7 +1007,7 @@ bv starting at index idx.\x7fModuleInfo: Module: int32and64 InitialContents: Fol
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'int32or64' -> () From: ( | {
-         'Category: creating from bytes\x7fCategory: in littne-endian (LSB first) order\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: creating from bytes\x7fCategory: in little-endian (LSB first) order\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
         
          copyTakeLittleEndianBytesFrom: bytes = ( |
             | 
@@ -1014,7 +1015,7 @@ bv starting at index idx.\x7fModuleInfo: Module: int32and64 InitialContents: Fol
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'int32or64' -> () From: ( | {
-         'Category: creating from bytes\x7fCategory: in littne-endian (LSB first) order\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: creating from bytes\x7fCategory: in little-endian (LSB first) order\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
         
          copyTakeLittleEndianBytesFrom: bytes Index: i = ( |
             | 
@@ -1022,7 +1023,7 @@ bv starting at index idx.\x7fModuleInfo: Module: int32and64 InitialContents: Fol
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'int32or64' -> () From: ( | {
-         'Category: creating from bytes\x7fCategory: in littne-endian (LSB first) order\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: creating from bytes\x7fCategory: in little-endian (LSB first) order\x7fModuleInfo: Module: int32and64 InitialContents: FollowSlot\x7fVisibility: public'
         
          copyTakeLittleEndianBytesFrom: bytes Index: i IfFail: errBlk = ( |
             | 
