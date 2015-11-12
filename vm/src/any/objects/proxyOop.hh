@@ -8,7 +8,6 @@
 # endif
 
 
-// "Foreign" oops (below) are killable objects containing an arbitrary 
 // A proxyOop is a foreignOop that associate a type with the pointer
 // to a C structure (in foreignOopClass). Note that a dead proxyOop is
 // designated by a special value in the type_seal field, so if the user for
@@ -19,7 +18,7 @@
 
 extern const void *deadProxyObject; // Do not use directly. Placed here only to
                                     // enable inlining of member fct's.
-                                    // This const is stored in the type_seal 
+                                    // This const is stored in the type_seal
                                     // field to indicate when a proxy is dead.
 
 
@@ -28,12 +27,12 @@ class proxyOopClass: public foreignOopClass {
 
   private:
 
-    C_pointer  type_seal; // type of object in C heap pointed to by my parent
+    C_pointer  type_seal;                   // type of object in C heap pointed to by my parent
 
   protected:
 
-    proxyOopClass* addr() { 
-      return (proxyOopClass*)foreignOopClass::addr(); 
+    proxyOopClass* addr() {
+      return (proxyOopClass*)foreignOopClass::addr();
     }
 
     void kill_proxy() {
@@ -49,7 +48,23 @@ class proxyOopClass: public foreignOopClass {
     }
 
   public:
-    void* get_type_seal() { 
+
+      smi get_size_of_allocated_memory() {
+        return addr()->type_seal.get_lower();  
+      }
+
+      void set_size_of_allocated_memory(smi szam) {
+        addr()->type_seal.set_lower(szam);
+      }
+
+    oop allocate_bytes_prim(smi l, void *FH);
+    oop free_bytes_prim(void *FH);
+    oop load_bytevector_at_offset_prim(byteVectorOop bv, smi offset, void *FH);
+    oop read_bytevector_at_offset_prim(byteVectorOop bv, smi offset, void *FH);
+    smi get_size_of_allocated_memory_prim(void *FH);
+    char* bytes(fint which = 0) { return (char*) get_pointer() + which; } // For polymorphism with byteVector
+
+    void* get_type_seal() {
       return addr()->type_seal.get();
     }
 
@@ -57,8 +72,8 @@ class proxyOopClass: public foreignOopClass {
       addr()->type_seal.set(ptr);
     }
 
-    proxyOop clone(bool mustAllocate= true) { 
-      return (proxyOop) foreignOopClass::clone(mustAllocate); 
+    proxyOop clone(bool mustAllocate= true) {
+      return (proxyOop) foreignOopClass::clone(mustAllocate);
     }
 
     bool verify();

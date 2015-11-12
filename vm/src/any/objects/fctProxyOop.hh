@@ -46,6 +46,12 @@ class fctProxyOopClass: public proxyOopClass {
     }
 
   public:
+      
+    // Native infrastructure
+    oop run0_prim(void *FH);
+    oop run1_prim(oop arg1, smi argType1, void *FH);
+    oop run2_prim(oop arg1, smi argType1, oop arg2, smi argType2, void *FH);
+    oop run3_prim(oop arg1, smi argType1, oop arg2, smi argType2, oop arg3, smi argType3, void *FH);
 
     fctType get_pointer() {
       return fctType(proxyOopClass::get_pointer());
@@ -56,7 +62,7 @@ class fctProxyOopClass: public proxyOopClass {
     }
 
     smi get_noOfArgs() {
-      return addr()->noOfArgs->value();
+        return addr()->noOfArgs->value();
     }
 
     void set_noOfArgs(smi nargs) {

@@ -85,8 +85,11 @@ about
  bootstrap read: 'prompt' From: 'core'
  bootstrap read: 'int32and64' From: 'core'
  bootstrap read: 'systemLog' From: 'core'
+<<<<<<< HEAD
  bootstrap read: 'about' From: 'core'
+=======
  bootstrap read: 'native' From: 'core'
+>>>>>>> 1a11925... Basic prims now working together with skeleton framework on Self side
 
 
 

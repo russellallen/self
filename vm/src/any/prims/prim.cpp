@@ -30,7 +30,7 @@
   # endif
 # undef WHAT_GLUE
 
-  
+
 
 inline void PrimDesc::verify() {
   // static consistency checks for PrimDescs
@@ -182,9 +182,9 @@ static PrimDesc fntable1[] = {
    SAFE_NONIDEMPOTENT,
   "Internal primitive for debugging"
 },
-  
+
   // called from Self code
-{  
+{
 "AbortProcess", fntype(&AbortProcess_prim_glue),
  ExternalPrimitive, ReceiverPrimType,
  SIDEEFFECTS_CANABORT,
@@ -231,6 +231,13 @@ static PrimDesc fntable1[] = {
  "Returns the receiver (an integer denoting an address) converted into "
  "an object.  This primitive is used for low-level debugging (addresses "
  "of objects change upon scavenges and garbage collections)."
+},
+{
+"AllocateBytes:",fntype(&allocate_bytes_glue),
+ ExternalPrimitive, UnknownPrimType,
+ SIDEEFFECTS,
+ "Returns the receiver (a proxy or fctProxy) with a pointer to a "
+ "memory block of the requested size. "
 },
 {
 "AnnotateSpyLog", fntype(&SelfMonitor::annotateLog_prim),
@@ -355,7 +362,7 @@ static PrimDesc fntable1[] = {
 },
 {
 "CFloatDouble:At:Put:", fntype(&CFloatDouble_At_Put_prim_glue),
- ExternalPrimitive, IntegerPrimType,  /* Always returns 0. */ 
+ ExternalPrimitive, IntegerPrimType,  /* Always returns 0. */
  SIDEEFFECTS,
  "Analogous to _CFloatDouble:At: but stores a floating point "
  "value at a given index in the byte vector.  The last argument is the "
@@ -398,7 +405,7 @@ static PrimDesc fntable1[] = {
    "value at a given index in the byte vector.  The last argument is the "
    "value to be stored.  Returns zero."
   },
-  
+
   {
   "BigEndianSignedIntSize:At:", fntype(&BigEndianSignedIntSize_At_prim_glue),
    ExternalPrimitive, IntegerPrimType,
@@ -435,8 +442,8 @@ static PrimDesc fntable1[] = {
    "value at a given index in the byte vector.  The last argument is the "
    "value to be stored.  Returns zero."
   },
-  
-  
+
+
   {
   "LittleEndianSignedIntSize:At:", fntype(&LittleEndianSignedIntSize_At_prim_glue),
    ExternalPrimitive, IntegerPrimType,
@@ -473,7 +480,7 @@ static PrimDesc fntable1[] = {
    "value at a given index in the byte vector.  The last argument is the "
    "value to be stored.  Returns zero."
   },
-  
+
 # endif // NO_LONG_LONG
 {
 "Call",   fntype(&call0_prim),
@@ -531,7 +538,7 @@ static PrimDesc fntable1[] = {
  "return value converted to a Self object."
 },
 {
-"Call:With:With:With:With:With:With:",  
+"Call:With:With:With:With:With:With:",
  fntype(&call7_prim),
  ExternalPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
@@ -540,7 +547,7 @@ static PrimDesc fntable1[] = {
  "return value converted to a Self object."
 },
 {
-"Call:With:With:With:With:With:With:With:",  
+"Call:With:With:With:With:With:With:With:",
  fntype(&call8_prim),
  ExternalPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
@@ -549,7 +556,7 @@ static PrimDesc fntable1[] = {
  "return value converted to a Self object."
 },
 {
-"Call:With:With:With:With:With:With:With:With:",  
+"Call:With:With:With:With:With:With:With:With:",
  fntype(&call9_prim),
  ExternalPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
@@ -558,7 +565,7 @@ static PrimDesc fntable1[] = {
  "return value converted to a Self object."
 },
 {
-"Call:With:With:With:With:With:With:With:With:With:",  
+"Call:With:With:With:With:With:With:With:With:With:",
  fntype(&call10_prim),
  ExternalPrimitive, UnknownPrimType,
  SIDEEFFECTS_CANABORT,
@@ -590,7 +597,7 @@ static PrimDesc fntable1[] = {
  "Self level arguments using the `any' conversion."
 },
 {
-"CallAndConvertWith:And:With:And:With:And:",  
+"CallAndConvertWith:And:With:And:With:And:",
  fntype(&call_and_convert3_glue),
  ExternalPrimitive, ByteVectorPrimType,
  SIDEEFFECTS_CANABORT,
@@ -599,7 +606,7 @@ static PrimDesc fntable1[] = {
  "Self level arguments using the `any' conversion."
 },
 {
-"CallAndConvertWith:And:With:And:With:And:With:And:",  
+"CallAndConvertWith:And:With:And:With:And:With:And:",
  fntype(&call_and_convert4_glue),
  ExternalPrimitive, ByteVectorPrimType,
  SIDEEFFECTS_CANABORT,
@@ -608,7 +615,7 @@ static PrimDesc fntable1[] = {
  "Self level arguments using the `any' conversion."
 },
 {
-"CallAndConvertWith:And:With:And:With:And:With:And:With:And:",   
+"CallAndConvertWith:And:With:And:With:And:With:And:With:And:",
 fntype(&call_and_convert5_glue),
  ExternalPrimitive, ByteVectorPrimType,
  SIDEEFFECTS_CANABORT,
@@ -617,7 +624,7 @@ fntype(&call_and_convert5_glue),
  "Self level arguments using the `any' conversion."
 },
 {
-"CallAndConvertWith:And:With:And:With:And:With:And:With:And:With:And:",  
+"CallAndConvertWith:And:With:And:With:And:With:And:With:And:With:And:",
  fntype(&call_and_convert6_glue),
  ExternalPrimitive, ByteVectorPrimType,
  SIDEEFFECTS_CANABORT,
@@ -626,7 +633,7 @@ fntype(&call_and_convert5_glue),
  "Self level arguments using the `any' conversion."
 },
 {
-"CallAndConvertWith:And:With:And:With:And:With:And:With:And:With:And:With:And",  
+"CallAndConvertWith:And:With:And:With:And:With:And:With:And:With:And:With:And",
  fntype(&call_and_convert7_glue),
  ExternalPrimitive, ByteVectorPrimType,
  SIDEEFFECTS_CANABORT,
@@ -635,7 +642,7 @@ fntype(&call_and_convert5_glue),
  "Self level arguments using the `any' conversion."
 },
 {
-"CallAndConvertWith:And:With:And:With:And:With:And:With:And:With:And:With:And:With:And",  
+"CallAndConvertWith:And:With:And:With:And:With:And:With:And:With:And:With:And:With:And",
  fntype(&call_and_convert8_glue),
  ExternalPrimitive, ByteVectorPrimType,
  SIDEEFFECTS_CANABORT,
@@ -644,7 +651,7 @@ fntype(&call_and_convert5_glue),
  "Self level arguments using the `any' conversion."
 },
 {
-"CallAndConvertWith:And:With:And:With:And:With:And:With:And:With:And:With:And:With:And:With:And",  
+"CallAndConvertWith:And:With:And:With:And:With:And:With:And:With:And:With:And:With:And:With:And",
  fntype(&call_and_convert9_glue),
  ExternalPrimitive, ByteVectorPrimType,
  SIDEEFFECTS_CANABORT,
@@ -653,7 +660,7 @@ fntype(&call_and_convert5_glue),
  "Self level arguments using the `any' conversion."
 },
 {
-"CallAndConvertWith:And:With:And:With:And:With:And:With:And:With:And:With:And:With:And:With:And:With:And",  
+"CallAndConvertWith:And:With:And:With:And:With:And:With:And:With:And:With:And:With:And:With:And:With:And",
  fntype(&call_and_convert10_glue),
  ExternalPrimitive, ByteVectorPrimType,
  SIDEEFFECTS_CANABORT,
@@ -664,7 +671,7 @@ fntype(&call_and_convert5_glue),
 {
 "Clone", fntype(&clone_prim_glue),
  ClonePrimitive, ReceiverMapPrimType,
- true, true, false, false, false, false, 
+ true, true, false, false, false, false,
  "Return a clone (a shallow copy) of the receiver.  Cloning is the only "
  "way to create new objects in Self.  Returns its receiver (not a copy) "
  "when sent to integers, floats, and canonical strings.  May fail due to "
@@ -673,7 +680,7 @@ fntype(&call_and_convert5_glue),
 {
 "Clone:Filler:", fntype(&ov_clone_prim_glue),
   CloneVectorPrimitive, ReceiverMapPrimType,
- true, true, false, false, false, false, 
+ true, true, false, false, false, false,
  "Return a clone (shallow copy) of the receiver object vector, "
  "possibly resized.  The receiver must be an object vector.  The first "
  "argument (an integer) specifies the length of the new vector, and "
@@ -688,7 +695,7 @@ fntype(&call_and_convert5_glue),
 {
 "CloneBytes:Filler:", fntype(&bv_clone_prim_glue),
   CloneVectorPrimitive, ReceiverMapPrimType,
- true, true, false, false, false, false, 
+ true, true, false, false, false, false,
  "Analogous to _Clone:Filler, but for byte vectors.  The receiver must "
  "be a byte vector, and the second argument must be an integer in the "
  "range [0..255].  The integer is used to initialize new "
@@ -732,7 +739,7 @@ fntype(&call_and_convert5_glue),
  "For internal consumption only."
 },
 {
-"CreateBlockMethodBytecodes:Literals:File:Line:Source:",  
+"CreateBlockMethodBytecodes:Literals:File:Line:Source:",
  fntype(&create_block_method_prim_glue),
  ExternalPrimitive, UnknownPrimType,
  SIDEEFFECTS,
@@ -771,7 +778,7 @@ fntype(&call_and_convert5_glue),
 {
 "CurrentTimeString", fntype(&current_time_string_prim_glue),
   ExternalPrimitive, StringPrimType,
-  SIDEEFFECTS, 
+  SIDEEFFECTS,
  "Returns a human readable string containing the current time.  "
  "Receiver is ignored."
 },
@@ -1001,6 +1008,13 @@ fntype(&call_and_convert5_glue),
  "Flush unused methods from the compiled code cache."
 },
 {
+"GetSizeOfAllocatedMemory", fntype(&get_size_of_allocated_memory_glue),
+ ExternalPrimitive, ReceiverPrimType,
+ SIDEEFFECTS,
+ "Receiver is a proxy or fctProxy pointing to a region of memory on the "
+ "c heap. Returns the size of the memory region. "
+},
+{
 "MarkCodeUnused", fntype(&markAllUnused_prim_glue),
  ExternalPrimitive, ReceiverPrimType,
  SAFE_SIDEEFFECTS,
@@ -1036,6 +1050,13 @@ fntype(&call_and_convert5_glue),
  "object.  Returns 0."
 },
 {
+"FreeBytes",fntype(&free_bytes_glue),
+ ExternalPrimitive, UnknownPrimType,
+ SIDEEFFECTS,
+ "Given a live proxy or fctProxy pointing to a foreign unmanaged memory"
+ "block, frees the block and kills the proxy."
+},
+{
 "GarbageCollect", fntype(&garbage_collect_prim_glue),
  ExternalPrimitive, ReceiverPrimType,
  false, true, false, true, false, false,
@@ -1052,7 +1073,7 @@ fntype(&call_and_convert5_glue),
 {
 "IdentityHash", fntype(&identity_hash_prim_glue),
   ExternalPrimitive, IntegerPrimType,
-  false, false, true, false, false, false, 
+  false, false, true, false, false, false,
  "Return an integer hash value for the receiver.  The hash for a "
  "particular object is constant, but it is not unique (several objects "
  "might have the same hash value)."
@@ -1199,6 +1220,14 @@ fntype(&call_and_convert5_glue),
  true, true, false, true,  false, false, // SIDEEFFECTS & CAN_CAUSE_SCAVENGE
  "Receiver is a process (not the current process or the scheduler); "
  "argument is the number of activations to kill."
+},
+{
+"LoadByteVector:AtOffset:", fntype(&load_bytevector_at_offset_glue),
+ ExternalPrimitive, UnknownPrimType,
+ SIDEEFFECTS,
+ "Receiver is a proxy or fctProxy pointing to an allocated "
+ "memory region on the c heap. Loads the given bytevector at "
+ "the requested offset."
 },
 {
 "Manufacturer", fntype(&manufacturer_prim_glue),
@@ -1552,10 +1581,10 @@ fntype(&call_and_convert5_glue),
  "object.  See _Eq:."
 },
 {
-"MirrorReflecteeIdentityHash",  
+"MirrorReflecteeIdentityHash",
   fntype(&reflectee_id_hash_prim),
   ExternalPrimitive, IntegerPrimType,
-  NOSIDEEFFECTS,  
+  NOSIDEEFFECTS,
  "Return the identity hash of the reflectee of the receiver.  See "
  "_IdentityHash."
 },
@@ -1638,9 +1667,7 @@ fntype(&call_and_convert5_glue),
  "called.  The value -1 will allow it to be called with any number of "
  "arguments.  Warning: this call is potentially dangerous, since no "
  "attempt is done at checking that the given value is "
- "reasonable.  Returns receiver.  Calls the foreign routine it "
- "represents, and return its return value converted to a Self "
- "object."
+ "reasonable.  Returns receiver."
 },
 {
 "ObjectID", fntype(&objectID_prim_glue),
@@ -2030,6 +2057,14 @@ fntype(&call_and_convert5_glue),
  "VM prompt).  The state of the world is not saved."
 },
 {
+"ReadByteVector:AtOffset:", fntype(&read_bytevector_at_offset_glue),
+ ExternalPrimitive, UnknownPrimType,
+ SIDEEFFECTS,
+ "Receiver is a proxy or fctProxy pointing to an allocated "
+ "memory region on the c heap. Reads from the region at the "
+ "the requested offset into the given bytevector."
+},
+{
 "RecompileLimits", fntype(&get_recompile_limits_prim_glue),
  ExternalPrimitive, ObjVectorPrimType,
  NOSIDEEFFECTS,
@@ -2075,6 +2110,33 @@ fntype(&call_and_convert5_glue),
  false, true, false, true, true, true,
  "Restart the current method, i.e., jump to the beginning of the "
  "method.  Used to implement looping in blocks."
+},
+{
+"RunNative", fntype(&run0_glue),
+ ExternalPrimitive, UnknownPrimType,
+ SIDEEFFECTS,
+ "Runs the code linked from the fctProxy and returns self. "
+},
+{
+"RunNativeWith:Type:", fntype(&run1_glue),
+ ExternalPrimitive, UnknownPrimType,
+ SIDEEFFECTS,
+ "Runs the code linked from the fctProxy with either a byteVector "
+ "(type 0) or a proxy (type 1) as an argument. Returns self. "
+},
+{
+"RunNativeWith:Type:With:Type:", fntype(&run2_glue),
+ ExternalPrimitive, UnknownPrimType,
+ SIDEEFFECTS,
+ "Runs the code linked from the fctProxy with either a byteVector "
+ "(type 0) or a proxy (type 1) as arguments. Returns self. "
+},
+{
+"RunNativeWith:Type:With:Type:With:Type", fntype(&run3_glue),
+ ExternalPrimitive, UnknownPrimType,
+ SIDEEFFECTS,
+ "Runs the code linked from the fctProxy with either a byteVector "
+ "(type 0) or a proxy (type 1) as arguments. Returns self. "
 },
 {
 "RunScript", fntype(&run_script_prim_glue),
@@ -2152,7 +2214,7 @@ fntype(&call_and_convert5_glue),
  "_TWAINS:ResultVector:."
 },
 {
-  "TestA1:A2:A3:A4:A5:A6:A7:A8:A9:A10:A11:A12:A13:A14:A15:A16:", 
+  "TestA1:A2:A3:A4:A5:A6:A7:A8:A9:A10:A11:A12:A13:A14:A15:A16:",
   fntype(&test_args_prim),
   ExternalPrimitive, UnknownPrimType,
   SIDEEFFECTS_WALKSTACK,
@@ -2228,7 +2290,7 @@ fntype(&call_and_convert5_glue),
 {
 "ConvertToDayMs", fntype(&convert_to_day_ms_prim_glue),
   ExternalPrimitive, ObjVectorPrimType,
-  SIDEEFFECTS, 
+  SIDEEFFECTS,
  "Receiver is a vector with 8 integers describing a time: "
  "year, month, date, weekday, hour, minute, second, daylight savings (-1, 0, +1). "
  "Returns a vector with two equivalent integers: days and milliseconds since "
@@ -2459,7 +2521,7 @@ static PrimDesc fntable2[] = {
     "Simple "  flagTypeName  " primitive: "  explanation },                   \
     {XSTR(flagName:), fntype(&CONC3(set_,flagName,_prim)),                    \
     ExternalPrimitive, primReturnType, SIDEEFFECTS,                           \
-    "Simple "  flagTypeName  " primitive: "  explanation},                    
+    "Simple "  flagTypeName  " primitive: "  explanation},
 # else
   // define debug prims last 'cause they mess up indentation
   # define DefineDebugPrim(                                                     \
@@ -2478,14 +2540,14 @@ static PrimDesc fntable2[] = {
 
     FOR_ALL_DEBUG_PRIMS(DefineDebugPrim)
 # undef DefineDebugPrim
-          
+
   // must be last entry in each prim table
 {
   NULL, fntype(&bad_prim),
   ExternalPrimitive, UnknownPrimType,
   SIDEEFFECTS,
   ""
-}   
+}
   };
 
 static PrimDesc* fntable[] = { &fntable1[0], &fntable2[0], NULL };
@@ -2566,17 +2628,17 @@ const char* getPrimName(char* fn_start) {
 int32 getPrimCallEndOffset(char* fn_start) {
   // offset of first instruction after prim call, measured from sendDesc ptr
   // (in bytes)
-  
+
   // This is easy on some platforms:
   if ( sendDesc::abortable_prim_continue_offset == sendDesc::nonabortable_prim_continue_offset )
     return sendDesc::abortable_prim_continue_offset;
-    
+
   PrimDesc* e;
   for (PrimDesc** ft = &fntable[0]; *ft; ft++) {
     for (e = *ft; true; e++) {
       if (e->fn() != NULL  &&  first_inst_addr((void*)e->fn()) == fn_start) {
         int32 off =
-          e->canAbortProcess() ? sendDesc::abortable_prim_continue_offset 
+          e->canAbortProcess() ? sendDesc::abortable_prim_continue_offset
                                : sendDesc::nonabortable_prim_continue_offset;
         return off;
       }
@@ -2601,11 +2663,10 @@ int32 getPrimCallEndOffset(char* fn_start) {
   // hack below, we could change all entries to omit the & (but then, gcc
   // complains about fntype(someClass::somefunc) so we'd have to get rid
   // of member functions).
-  
+
   extern "C" void initializePrimDesc();
-  
+
   void prim_init() { initializePrimDesc(); }
 # else // compiler not gcc_pre_2_4_5
   void prim_init() { }
 # endif
-

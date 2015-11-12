@@ -229,7 +229,7 @@ oop oopClass::credits_prim() {
   lprintf("Aarhus University, Apple, Cray, the Danish Research Academy, DEC, IBM,\n");
   lprintf("the National Science Foundation, NCR, the Swiss Nationalfonds, Tandem,\n");
   lprintf("Texas Instruments, and Xerox.\n\n");
-  lprintf("Copyright 1992-2012 AUTHORS.\n");
+  lprintf("Copyright 1992-2015 AUTHORS.\n");
   lprintf("See the LICENSE file for license information.\n\n");
   return new_string("Thanks!");
 }

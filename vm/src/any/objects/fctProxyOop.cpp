@@ -5,8 +5,84 @@
 
 # pragma implementation "fctProxyOop.hh"
 #include "_fctProxyOop.cpp.incl"
+#include <typeinfo>
+
+// Native
+
+#
+#define COMMA ,
+
+#define GUARD(ar)                                       \
+    if (!is_live()) {                                   \
+      prim_failure(FH, DEADPROXYERROR);                 \
+      return NULL;                                      \
+    }                                                   \
+    if (get_noOfArgs() != ar){                          \
+        prim_failure(FH, WRONGNOOFARGSERROR);           \
+        return NULL;                                    \
+    }    
+    
+    // Variables
+    // GCC doesn't like __cdecl but does it anyway
+#ifdef __GNUC__
+#define SETUP(vars)                                           \
+    void (*fct)(vars);                                        \
+    fct = (void (*)(vars)) foreignOopClass::get_pointer();
+#else
+#define SETUP(vars)                                           \
+    __cdecl void (*fct)(vars);                                \
+    fct = (void (*)(vars)) foreignOopClass::get_pointer();
+#endif
+    
+    // Setup args. 
+    // There must be a better way. Does C++ have union types?
+    // Can't use dynamic_cast because oop is not polymorphic
+    // typeid solution seems rediculous
+#define SETUPARG(num)                                  \
+    char* p##num;                                      \
+    if ( argType##num == 0 ) {                         \
+        p##num = ((byteVectorOop) arg##num)->bytes();  \
+    } else if (  argType##num == 1 ) {                 \
+        p##num = ((proxyOop) arg##num)->bytes();       \
+    } else {                                           \
+        prim_failure(FH, BADTYPEERROR);                \
+        return NULL;                                   \
+    }
+
+#define RUN(args)                                 \
+    fct(args);                                    \
+    return this;
+    
+oop fctProxyOopClass::run0_prim(void *FH) {
+    GUARD(0)
+    SETUP()
+    RUN()
+}
 
 
+oop fctProxyOopClass::run1_prim(oop arg1, smi argType1, void *FH) {
+    GUARD(1)
+    SETUP(char*)
+    SETUPARG(1)            
+    RUN(p1)
+}
+
+oop fctProxyOopClass::run2_prim(oop arg1, smi argType1, oop arg2, smi argType2, void *FH) {
+    GUARD(2)
+    SETUP(char* COMMA char*)
+    SETUPARG(1)
+    SETUPARG(2)
+    RUN(p1 COMMA p2)
+}
+
+oop fctProxyOopClass::run3_prim(oop arg1, smi argType1, oop arg2, smi argType2, oop arg3, smi argType3, void *FH) {
+    GUARD(3)
+    SETUP(char* COMMA char* COMMA char*)
+    SETUPARG(1)
+    SETUPARG(2)
+    SETUPARG(3)
+    RUN(p1 COMMA p2 COMMA p3)
+}
 
 smi fctProxyOopClass::get_noOfArgs_prim(void *FH) {
   if (!is_live()) {
@@ -42,11 +118,11 @@ bool fctProxyOopClass::verify() {
 #define CALL_TEMPLATE(name, comma, declList, argList, nargs)                  \
   inline oop fctProxyOopClass::name(declList) {                               \
     if (!is_fctProxy())                                                       \
-      return ErrorCodes::vmString_prim_error(BADTYPEERROR);                                        \
+      return ErrorCodes::vmString_prim_error(BADTYPEERROR);                   \
     if (!is_live())                                                           \
-      return ErrorCodes::vmString_prim_error(DEADPROXYERROR);                                      \
+      return ErrorCodes::vmString_prim_error(DEADPROXYERROR);                 \
     if (get_noOfArgs() != nargs && get_noOfArgs() != unknownNoOfArgs)         \
-      return ErrorCodes::vmString_prim_error(WRONGNOOFARGSERROR);                                  \
+      return ErrorCodes::vmString_prim_error(WRONGNOOFARGSERROR);             \
     oop res = (*get_pointer()) (argList);                                     \
     assert(res->verify_oop_mark_ok(),"should be an oop");                     \
     return res;                                                               \

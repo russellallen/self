@@ -1,5 +1,11 @@
+***************
 Foreign Objects
-===============
+***************
+
+    Last updated 23 May 2016 for Self 4.6.0
+
+Overview
+========
 
 ::
 
@@ -59,9 +65,1021 @@ Relevant oddballs:
   +----------------+----------------------------------------------------+
   | linker         | Dynamic linker for current platform.               |
   +----------------+----------------------------------------------------+
-  | sunLinker      | Dynamic linker implementation for SunOS/Solaris.   |
-  +----------------+----------------------------------------------------+
-  | foreignCodeDB  | Registry for foreignCode objects.                  |
+  | foreignCodeDB  | registry for foreignCode objects                   |
   +----------------+----------------------------------------------------+
 
 Modules: foreign
+
+.. index::
+   single:  type seal
+
+.. index::
+   single:  snapshot
+
+.. index::
+   single:  proxy
+
+.. index::
+   single:  Link
+
+.. index::
+   single:  glue
+
+.. index::
+   single:  function proxy object
+
+.. index::
+   single:  foreign routines
+
+.. index::
+   single:  fctProxy
+
+.. index::
+   single:  deadProxyError
+
+Interfacing with external systems using Native
+==============================================
+
+The ``native`` module is new to Self 4.6.0. It allows manipulating foreign memory from within the Self world, including constructing and running foreign code. Compared to the older approach detailed in the section below, it involves much more Self code and is more dynamic as foreign code is constructed at runtime.
+
+Primitives
+----------
+
+.. index::
+   single:  _AllocateBytes:
+
+.. index::
+   single:  _FreeBytes
+
+.. index::
+   single:  _GetSizeOfAllocatedMemory:
+
+.. index::
+   single:  _LoadByteVector:AtOffset:
+
+.. index::
+   single:  _ReadByteVector:AtOffset:
+
+.. index::
+   single:  _RunNative
+
+The ``native`` system leverages the existing ``proxy`` and ``fctProxy`` types. It is at heart a small system with only a few key added primitives.
+
+The key primitives for the ``native`` system are:
+
+  * Given a new copy of ``proxy``: ``_AllocateBytes:IfFail:``, ``_FreeBytes``, ``_GetSizeOfAllocatedMemory``,  ``_LoadByteVector:AtOffset:IfFail:``, ``_ReadByteVector:AtOffset:IfFail:``.
+  * Given an external function held in a ``fctProxy``: ``_NoOfArgs:``, ``_NoOfArgs``, ``_RunNative{With:Type:}IfFail:``.
+
+The *type* mentioned above is a smallInt, being 0 if the argument is a ``byteVector`` and 1 if the argument is a ``proxy``. You can only pass byteVectors or proxies. These appear on the C side as being ``void *``. Your external function must be of the C-type ``void fct(void *, void*...)`` with between 0 and 3 arguments.
+
+There is very little checking involved with these primitives - get your bytes wrong and you will be running random machine code with all the usual results.
+
+The memory allocated by these primitives is not handled by the garbage collector! You must manually free it if you are worried about memory leaks. In particular a proxy or fctProxy which is garbage collected will *not* automatically free the memory it points to.
+
+
+
+Interfacing with external systems using custom primitives
+=========================================================
+
+This section describes how to access objects and call routines that are written in other languages
+than Self by building custom primitives.  This was the standard way to approach this area before the
+``native`` module was added to Self. It involves much more handling on the C side and less in the Self language compared to the ``native`` approach.
+
+In this section, we will refer to such entities as *foreign objects* and *foreign routines*. A typical use
+would be to make a function found in a C library accessible in Self. Three steps are necessary to
+accomplish this:
+
+	* Write and compile a piece of “glue” code that specifies argument and result types for the foreign routine and how to convert between these types and Self objects.
+	* Link the resulting object code to the Self virtual machine.
+	* Create a function proxy object (actually a foreignFct object) that represents the routine in the Self world.
+
+Each of these steps is described in detail in the following sections.
+
+.. index::
+		single: _call
+
+.. index::
+   single:  _CallAndConvert
+
+.. index::
+   single:  _Kill
+
+Proxy and fctProxy objects
+--------------------------
+
+A foreign object is represented by a proxy object in the Self world. A *proxy* object is an object
+that encapsulates a pointer to the foreign object it represents. In addition to the pointer to the foreign
+object, the proxy object contains a type seal. A type seal is an immutable value that is assigned
+to the proxy object, when it is created. The *type seal* is intended to capture type information about
+the pointer encapsulated in the proxy. For example, proxies representing window objects should
+have a different type seal than proxies representing event objects. By checking the type seal against
+an expected value whenever a proxy is “opened”, many type errors can be caught. The last property
+of proxy objects is that they can be *dead* or *live*. If an attempt is made to use the pointer in a dead
+proxy object, an error results (``deadProxyError``). Proxy objects may be explicitly killed, by
+sending the primitive message ``_Kill`` to them. Furthermore, they are automatically killed after
+reading in a snapshot. This way problems with dangling references to foreign objects that were not
+included in the snapshot are avoided.
+
+*FctProxy* objects are similar to proxy objects: they have a type seal and are either live or dead.
+However, they represent a foreign routine, rather than a foreign object. A foreign routine can be invoked
+by sending the primitive messages ``_Call``, ``_Call:{With:}``,
+``_CallAndConvert{With:And:}`` to the ``fctProxy`` representing it. Note that ``fctProxy`` objects
+are low-level. Most, if not all, uses of foreign routines should use the interface provided by ``foreignFct``
+objects.
+
+Proxies (and ``fctProxies``) can be freely cloned. However a cloned proxy will be dead. A dead
+proxy is revived when it is used by a foreign function to, e.g., return a pointer. The return value of
+the foreign function together with a type seal is stored into the dead proxy, which is then revived
+and returned as the result of the foreign routine call. The motivation for this somewhat complicated
+approach is that there will be several different kinds of proxies in a typical Self system. Different
+kinds of proxies may have different slots added, so rather than having the foreign routine figure out
+which kind of proxy to clone for the result, the Self code calling the foreign routine must construct
+and pass down an “empty” (dead) proxy to hold the result. This proxy is called a *result proxy*
+and it is the last argument supplied to the foreign function.
+
+.. index::
+   single:  wrapper
+
+.. index::
+   single:  glue code
+
+.. index::
+   single:  glueDefs.c.incl
+
+
+Glue code
+---------
+
+Glue code is responsible for the transition from Self to foreign routines. It forms wrappers around
+foreign routines. There is one wrapper per foreign routine. A wrapper takes a number of arguments
+of type ``oop``, and returns an ``oop`` (``oop`` is the C++ type for “reference to Self object”). When a
+wrapper is executed, it performs the following steps:
+
+	1. Check that the arguments supplied have the correct types.
+	2. Convert the arguments from Self representation to the representation that the foreign routine needs.
+	3. Invoke the foreign routine on the converted arguments.
+	4. Convert the return value of the foreign routine to a Self object and return this as the Self level result.
+
+To make it easier to write glue code, a special purpose language has been designed for this. The
+result is that glue for a foreign routine will often consist of only a single line. The glue language is
+implemented as a set of C++ preprocessor macros. Therefore, glue code is just a (rather peculiar)
+kind of C++. Glue code can be in a file of its own, or – if it is glue for calling C++ routines – it can
+be in the same file as the foreign routines, and compiled with them.
+
+To make the definition of the glue language available, the file containing glue code must contain::
+
+    # include "_glueDefs.c.incl"
+
+The file “_glueDefs.c.incl” includes a bunch of C++ header files that contain all the definitions
+necessary for the glue. Of the included files, “glueDefs.h” is probably the most interesting in this
+context. It defines the glue language and also contains some comments explaining it.
+
+Since different foreign languages have different type systems and calling conventions the glue language
+is actually not a single language, but one for each supported foreign language. Presently C
+and C++ are supported. See sections `C glue`_ and `C++ glue`_ for details.
+
+.. index::
+   single:  Static linking
+
+.. index::
+   single:  ld.so
+
+.. index::
+   single:  encrypt.c
+
+
+Compiling and linking glue code
+-------------------------------
+
+Since glue code is a special form of C++ code, a C++ compiler is needed to translate it. The way
+this is done may depend on the computer system and the available C++ compiler. The following
+description applies to Sun SPARCstations using the GNU g++ compiler.
+
+A specific example of how to compile glue code can be found in the directory containing the *toself*
+demo (see `A complete application using foreign functions`_ for further details). The makefile in that directory describes how to
+translate a ``.c`` file containing glue into something that can be invoked from Self. This is a two
+stage process: first the ``.c`` file is compiled into a ``.o`` file which is then linked (perhaps with other
+``.o`` files and libraries that the glue code depends on) into a ``.so`` file (a so-called dynamic library).
+While the compilation is straightforward, several issues concerning the linking must be explained.
+
+**Linking**
+    Before a foreign routine can be called it must be linked to the Self virtual machine. The
+    linking can be done either statically, i.e. before Self is started, or dynamically, i.e. while Self is
+    running. The Self system employs both dynamic and static linking, but users should only use dynamic
+    linking, as static linking requires more understanding of the structure of the Virtual Machine.
+    The choice between dynamic and static linking involves a trade-off between safety and
+    flexibility as outlined in the following.
+
+**Dynamic linking**
+    Dynamic linking has the advantage that it is done on demand, so only foreign routines that are actually
+    used in a particular session will be loaded and take up space. Debugging foreign routines is
+    also easier, especially if the dynamic linker supports unlinking. The main disadvantages with dynamic
+    linking is that more things can go wrong at run time. For example, if an object file containing
+    a foreign routine can not be found, a run time error occurs. The Sun OS dynamic linker, ld.so,
+    only handles dynamic libraries which explains why the second stage of glue translation is necessary.
+
+**Static linking**
+    Static linking, the alternative that was not chosen for Self, has the advantage that it needs to be
+    done only once. The statically linked-in files will then be available for ever after. The main disadvantages
+    are that the linked-in files will always take up space whether used or not in a given Self
+    session, that the VM must be completely relinked every time new code is added, and that debugging
+    is harder because there is no way to unlink code with bugs in. For these reasons the following
+    examples all use dynamic linking.
+
+.. index::
+   single:  WHAT_GLUE
+
+
+A simple glue example: calling a C function
+-------------------------------------------
+
+Suppose we have a C function that encrypts text strings in some fancy way. It takes two arguments,
+a string to encrypt and a key, and returns a string which is the result of the encryption. To use this
+function from Self, we write a line of C glue. Here is the entire file, “encrypt.c”, containing both
+the encryption function and the glue::
+
+    /* Make glue available by including it. */
+    # include "incls/_glueDefs.c.incl"
+    /* Naive encryption function. */
+    char *encrypt(char *str, int key) {
+        static char res[1000];
+        int i;
+        for (i = 0; str[i]; ++i)
+            res[i] = str[i] + key;
+        res[i] = ’\0’;
+        return res;
+    }
+
+    /* Make glue expand to full functions, not just prototypes. */
+    # define WHAT_GLUE FUNCTIONS
+        C_func_2(string,, encrypt, encrypt_glue,, string,, int,)
+    # undef WHAT_GLUE
+
+A few words of explanation: the last three lines of this file contain the glue code. First defining
+``WHAT_GLUE`` to be ``FUNCTIONS``, makes the following line expand into a full wrapper function (defining
+``WHAT_GLUE`` to be ``PROTOTYPES`` instead, will cause the ``C_func_2`` line to produce a function
+prototype only). The line containing the macro ``C_func_2`` is the actual wrapper for ``encrypt``.
+The “2” designates that ``encrypt`` takes 2 arguments. The meaning of the arguments, from left to
+right are:
+
+    * “string,”: specifies that encrypt returns a string argument.
+    * “encrypt”: name of function we are constructing wrapper for.
+    * “encrypt_glue”: name that we want the wrapper function to have.
+    * An empty argument signifying that encrypt is not to be passed a failure handle (explained later).
+    * “string,”: specifies that the first argument to encrypt is a string.
+    * “int,”: specifies that the second argument to encrypt is an int.
+
+Having written this file, we now prepare a makefile to compile and link it. To do this, we can extend
+the makefile in ``objects/glue/{sun4,svr4}`` (depending on OS in use) and then run make.
+This results in the shared library file ``encrypt.so``. Finally, to try it out, we can type these commands
+(at the Self prompt or in the UI)::
+
+    > _AddSlotsIfAbsent: ( | encrypt | )
+    lobby
+
+    > encrypt: ( foreignFct copyName: ’encrypt_glue’ Path: ’encrypt.so’ )
+    lobby
+
+    > encrypt
+    <C++ function(encrypt_glue)>
+
+    > encrypt value: ’Hello Self’ With: 3
+    ’Khoor#Vhoi’
+
+    > encrypt value: ’Khoor#Vhoi’ With: -3
+    ’Hello Self’
+
+Comparing the signature for the function encrypt with the arguments to the ``C_func_2`` macro it
+is clear that there is a straightforward mapping between the two. One day we hope to find the time
+to write a Self program that can parse a C or C++ header file and generate glue code corresponding
+to the definitions in it. In the meantime, glue code must be handwritten.
+
+.. index::
+   single:  C glue
+
+.. index::
+   single:  C_func_N
+
+C glue
+------
+
+C glue supports accessing C functions and data from Self. There are three main parts of C glue:
+
+    * Calling functions.
+    * Reading/assigning global variables.
+    * Reading/assigning a component in a struct that is represented by a proxy object in Self.
+
+In addition, C++ glue for creating objects can be used to create C structs (see section `C++ glue`_). The
+following sections describe each of these parts of C glue.
+
+.. index::
+   single:  unix_failure (glue)
+
+.. index::
+   single:  failure (glue)
+
+.. index::
+   single:  errno
+
+Calling C functions
+-------------------
+
+The macro ``C_func_N`` where N is 0, 1, 2, ... is used to “glue in” a C function. The number N denotes
+the number of arguments that should be given *at the Self level*, when calling the function. This
+number may be different from the number of arguments that the C function takes since, e.g., some
+argument conversions (see below) produce two C arguments from one Self object. Here is the
+general syntax for ``C_func_N``::
+
+    C_func_N(res_cnv,res_aux, fexp, gfname, fail_opt, c0,a0, ... cN,aN)
+
+Compare this with the glue that was used in the encrypt example in section `A simple glue example: calling a C function`_::
+
+    C_func_2(string,, encrypt, encrypt_glue,, string,, int,)
+
+The meaning of each argument to ``C_func_N`` is as follows:
+
+    * ``res_cnv,res_aux``: these two arguments form a “conversion pair” that specifies how the result that the function returns is converted to a Self object. In the ``encrypt`` example, where the function returns a null terminated string, ``res_cnv`` has the value ``string``, and ``res_aux`` is empty. :numref:`tableArgumentConversions` lists all the possible values for the ``res_cnv,res_aux pair``.
+    * ``fexp`` is a C expression which evaluates to the function that is being glued in. In the simplest case, such as in the ``encrypt`` example, the expression is the name of a function, but in general it may be any C expression, involving function pointers etc., which in a global context evaluates to a function.
+    * ``gfname``: the name of the function which the ``C_func_N`` macro expands into. In the ``encrypt`` example, the convention of appending ``_glue`` to the C function’s name was used. When accessing a glued-in function from Self, the value of ``gfname`` is the name that must be used.
+    * ``fail_opt``: there are two possible values for this argument. It can be empty (as in the example) or it can be ``fail``. In the latter case, the C function being called is passed an additional argument that will be the last argument and have type ``“void *”``. Using this argument, the C function may abort its execution and raise an exception. The result is that the “IfFail block” in Self will be invoked.
+    * ``ci,ai``: each of these pairs describes how to convert a Self level argument to one or more C level arguments. For example, in the glue for ``encrypt``, ``c0``,``a0`` specifies that the first argument to ``encrypt`` is a string. Likewise ``c1``,``a1`` specifies that the second argument is an integer. Note that in both these cases, the a-part of the conversion is empty. :numref:`tableArgumentConversions` lists all the possible values for the ``ci``,``ai`` pair.
+
+*Handling failures*. Here is a slight modification of the encryption example to illustrate how the C function can raise an exception that causes the “IfFail block” to be invoked at the Self level::
+
+    /* Make glue available by including it. */
+    # include "incls/_glueDefs.c.incl"
+    /* Naive encryption function. */
+    char *encrypt(char *str, int key, void *FH) {
+    	static char res[1000];
+    	int i;
+    	if (key == 0) {
+    		failure(FH, "key == 0 is identity map");
+    		return NULL;
+    	}
+    	for (i = 0; str[i]; i++)
+    		res[i] = str[i] + key;
+    	res[i] = ’\0’;
+    	return res;
+    }
+    /* Make glue expand to full functions, not just prototypes. */
+    # define WHAT_GLUE FUNCTIONS
+    	C_func_2(string,, encrypt, encrypt_glue, fail, string,, int,)
+    # undef WHAT_GLUE
+
+Observe that the ``fail_opt`` argument now has the value ``fail`` and that the ``encrypt`` function
+raises an exception, using ``failure``, if the key is 0. There are two ways to raise exceptions::
+
+    extern "C" void failure(void *FH, char *msg);
+    extern "C" void unix_failure(void *FH, int err = -1);
+
+In both cases, the ``FH`` argument is the “failure handle” that was passed by the ``C_func_N`` macro.
+The second argument to ``failure`` is a string. It will be passed to the “IfFail block” in Self.
+``unix_failure`` takes an optional integer as its second argument. If this integer has the value -1,
+or is missing, the value of ``errno`` is used instead. The integer is interpreted as a UNIX error number,
+from which a corresponding string is constructed. The string is then, as for ``failure``, passed
+to the “IfFail block” at the call site in Self.
+
+.. warning::
+    After calling ``failure`` or ``unix_failure`` a normal ``return`` must be done. The value returned (in the example ``NULL``) is ignored.
+
+.. index::
+   single:  C_set_var
+
+.. index::
+   single:  C_get_var
+
+Reading and assigning global variables
+--------------------------------------
+
+Reading the value of a global variable is done using the ``C_get_var`` macro. Assigning a value to
+a global variable is done using ``C_set_var``. Both macros expand into a C++ function that converts
+between Self and C representation, and reads or assigns the variable. Here is the general syntax::
+
+    C_get_var(cnvt_res,aux_res, expr, gfname)
+    C_set_var(var, expr_c0,expr_a0, gfname)
+
+A concrete example is reading the value of the variable ``errno``, which can be done using::
+
+    C_get_var(int,, errno, get_errno_glue)
+
+The meaning of the each argument is:
+
+    * ``cnvt_res``,``aux_res``: how to convert the value of the global variable that is being read to a Self object. In the ``errno`` example, ``cnvt_res`` is ``int`` and ``aux_res`` is empty, since the type of ``errno`` is ``int``. The ``cnvt_res``,``aux_res`` can be any one of the result conversions found in :numref:`tableArgumentConversions`.
+    * ``expr`` is the variable whose value is being read. In the ``errno`` example, it is simply ``errno``, but in general, it may actually be any expression that is valid in a global context, even an expression involving function calls.
+    * ``gfname``: the name of the C++ function that ``C_get_var`` or ``C_set_var`` expands into.
+    * ``var`` is the name of a global variable that a value is assigned to. In general, ``var``, may be any expression that in a global context evaluates to an l-value.
+    * ``expr_c0``,``expr_a0``: when assigning to a variable, the value it is assigned is obtained by converting a Self object to a C value. The ``expr_c0``,``expr_a0`` pair, which can be any one of the argument conversions listed in :numref:`tableArgumentConversions`, specifies how to do this conversion.
+
+.. index::
+   single:  C_get_comp
+
+.. index::
+   single:  C_set_comp
+
+.. index::
+   single:  struct
+
+Reading and assigning struct components
+---------------------------------------
+
+Reading the value of a struct component or assigning a value to it is similar to doing the same operations
+on a global variable. The difference is that the struct must somehow be specified. This is
+taken care of by the macros ``C_get_comp`` and ``C_set_comp``. The general syntax is::
+
+    C_get_comp(cnvt_res,aux_res, cnvt_strc,aux_strc, comp, gfname)
+    C_set_comp(cnvt_strc,aux_strc, comp, expr_c0,expr_a0, gfname)
+
+Here is an example, assigning to the sin_port field of a struct sockaddr_in (this struct is defined
+in /usr/include/netinet/in.h)::
+
+    struct sockaddr_in {
+        short           sin_family;
+        u_short         sin_port;
+        struct in_addr  sin_addr;
+        char            sin_zero[8];
+    };
+
+The struct is represented by a proxy object::
+
+    char *socks = "type seal for sockaddr_in proxies";
+    C_set_comp(proxy,(sockaddr_in *,socks), .sin_port, short,,set_sin_port_glue)
+
+The ``sockaddr_in`` example defines a function, ``set_sin_port_glue``, which can be called from
+Self. The function takes two arguments, the first being a proxy representing a ``sockaddr_in``
+struct, the second being a short integer. After converting types, ``set_sin_port_glue`` performs
+the assignment::
+
+    (*first_converted_arg).sin_port = second_converted_arg.
+
+In general the meaning of the ``C_get_comp`` and ``C_set_comp`` arguments is:
+
+    * ``cnvt_res``, ``aux_res``: how to convert the value of the component that is being read to a
+      Self object. Any of the result conversions found in :numref:`tableArgumentConversions` may be applied.
+
+    * ``cnvt_strc``, ``aux_strc``: the conversion that is applied to produce a struct upon which the
+      operation is performed. In the ``sin_port`` example, this conversion is a proxy conversion,
+      implying that in Self, the struct whose ``sin_port`` component is assigned is represented by
+      a proxy object. In general, any of the argument conversions from :numref:`tableArgumentConversions` that results in a
+      pointer, may be used.
+
+    * ``comp`` is the name of the component to be read or assigned. In the sin_port example, this
+      name is ``“.sin_port”``. Note that it includes a “.”. This, e.g., allows handling pointers to
+      int’s by pretending that it is a pointer to a struct and operating on a component with an
+      empty name.
+
+    * ``gfname``: the name of the C++ function that ``C_get_comp`` or ``C_set_comp`` expands into.
+
+    * ``expr_co``, ``expr_a0``: when assigning to a component, the value it is assigned is obtained by
+      converting a Self object to a C value. The ``expr_co``, ``expr_a0`` pair, which can be any one
+      of the argument conversions listed in :numref:`tableArgumentConversions`, specifies how to do this conversion.
+
+.. index::
+   single:  C++ glue
+
+C++ glue
+--------
+
+Since C++ is a superset of C, all of C glue can be used with C++. In addition, C++ glue provides
+support for:
+
+    * Constructing objects using the new operator.
+
+    * Deleting objects using the delete operator.
+
+    * Calling member functions on objects.
+
+Each of these parts will be explained in the following sections.
+
+.. index::
+   single:  CC_delete
+
+.. index::
+   single:  CC_new_N
+
+Constructing objects
+--------------------
+
+In C++, objects are constructed using the new operator. Constructors may take arguments. The
+macros ``CC_new_N`` where N is a small integer, support calling constructors with or without arguments.
+Calling a constructor is similar to calling a function, so for additional explanation, please
+refer to section `Calling C functions`_. Here is the general syntax for constructing objects using C++ glue::
+
+    CC_new_N(cnvt_res,aux_res, class, gfname, c0,a0, c1,a1, ... cN,aN)
+
+For example, to construct a ``sockaddr_in`` object, the following glue statement could be used::
+
+    CC_new_0(proxy,(sockaddr_in *,socks), sockaddr_in, new_sockaddr_in)
+
+The meanings of the ``CC_new_N`` arguments are as follows:
+
+    * ``cnvt_res``, ``aux_res:`` the result of calling the constructor is an object pointer. The result
+      conversion pair ``cnvt_res``, ``aux_res`` (see :numref:`tableArgumentConversions`), specifies how this pointer is converted
+      to a Self object before being returned. In the ``sockaddr`` example, the proxy result conversion
+      is used.
+
+    * ``class`` is the name of the class (or struct) that is being instantiated.
+
+    * ``gfname``: the name of the C++ function that the ``CC_new_N`` macro expands into.
+
+    * ``ci``, ``ai``: if the constructor takes arguments, these arguments must be converted from Self
+      representation to C++ representation. The arguments conversion pairs ``ci``, ``ai`` specify how
+      each argument is converted. See :numref:`tableArgumentConversions` for a description of all argument conversions. In
+      the sockaddr example, there are no arguments.
+
+Deleting objects
+----------------
+
+C++ objects can have destructors that are executed when the objects are deleted. To ensure that the
+destructor is called properly, the ``delete`` operator must know the type of the object being deleted.
+This is ensured by using the ``CC_delete`` macro, which has the following form::
+
+    CC_delete(cnvt_obj,aux_obj, gfname)
+
+For example, to delete ``sockaddr_in`` objects (constructed as in the previous section), the
+``CC_delete`` macro should be used in this manner::
+
+    CC_delete(proxy,(sockaddr_in *,socks), delete_sockaddr_in)
+
+In general, the meaning of the arguments given to ``CC_delete`` is:
+
+    * cnvt_obj,aux_obj: this pair can be any of the argument conversions found in :numref:`tableArgumentConversions`
+      that produces a pointer to the object that will be deleted.
+
+    * gfname: the name of the C++ function that this invocation of ``CC_delete`` expands into.
+
+Calling member functions
+------------------------
+
+:numref:`tableArgumentConversions` lists all the available argument conversions. Each row represents one conversion, with the
+first two columns designating the conversion pair. The third column lists the types of Self objects
+that the conversion pair accepts. The fourth column lists the C types that it produces. The fifth column
+lists the kind of errors that can occur during the conversion. Finally, the sixth column contains
+references to numbered notes. The notes are found in the paragraphs following the table.
+
+Calling member functions is similar to calling “plain” functions, so please also refer to section
+`Calling C functions`_. The difference is that an additional object must be specified: the object upon which the
+member function is invoked (the receiver in Self terms). Calling a member function is accomplished
+using one of the macros::
+
+    CC_mber_N(cnvt_res,aux_res, cnvt_rec,aux_rec, mname, gfname,
+              fail_opt, c0,a0, c1,a1, ..., cN,aN)
+
+For example here is how to call the member function zock on a ``sockaddr_in`` object given by a
+proxy::
+
+    CC_mber_0(bool,, proxy,(sockaddr_in *,socks), zock, zock_glue,)
+
+The arguments to ``CC_mber_N`` are:
+
+    * ``cnvt_res``, ``aux_res``: this pair, which can be any of the result conversions from :numref:`tableArgumentConversions`,
+      specifies how to convert the result of the member function before returning it to Self. For
+      example, the zock member function returns a boolean.
+
+    * ``cnvt_rec``, ``aux_rec``: the object on which the member function is invoked. Often this will
+      be a proxy conversion as in the ``zock`` example.
+
+    * ``mname`` is the name of the member function. In general, it may be any expression, such that
+      ``receiver->mname`` evaluates to a function.
+
+    * ``gfname`` is the name of the C++ function that the ``CC_mber_N`` macro expands into.
+
+    * ``fail_opt``: whether or not to pass a failure handle to the member function (refer to section
+      `Calling C functions`_ for details).
+
+    * ``ci``, ``ai``: these are argument conversion pairs specifying how to obtain the arguments for the
+      member function. Any conversion pair found in :numref:`tableArgumentConversions` may be used.
+
+.. index::
+   single:  conversion pair
+
+Conversion pairs
+----------------
+
+A major function of glue code is to convert between Self objects and C/C++ values. This conversion
+is guarded by so-called conversion pairs. A *conversion pair* is a pair of arguments given to a
+glue macro. It handles converting one or at most a few types of objects/values. There are different
+conversion pairs for converting from Self objects to C/C++ values (called argument conversion
+pairs) and for converting from C/C++ values to Self objects (called result conversion pairs).
+
+.. index::
+   single:  argument conversion
+
+.. index::
+   single:  argument conversion2
+
+
+Argument conversions – from Self to C/C++
+-----------------------------------------
+
+An argument conversion is given a Self object and performs these actions to produce a corresponding
+C or C++ value:
+
+    * check that the Self object it has been given is among the allowed types. If not, report
+      ``badTypeError`` (invoke the failure block (if present) with the argument ``’badTypeError’``).
+
+    * check that the object can be converted to a C/C++ value without overflow or any other error.
+      If not, report the relevant error.
+
+    * do the conversion, i.e., construct the C/C++ value corresponding to the given Self object.
+
+.. index::
+   single:  badIndexError
+
+.. index::
+   single:  badSignError
+
+.. index::
+   single:  badSizeError
+
+.. index::
+   single:  badTypeError
+
+.. index::
+   single:  badTypeSealError
+
+
+.. tabularcolumns:: p{2cm} p{2cm} p{2cm} p{2cm} p{3cm} p{2cm}
+.. _tableArgumentConversions:
+.. table:: Argument conversions - from Self to C/C++
+
+  ================= ====================== ================================= ================= ============================================================== =========
+  Conversion        Second part            Self type                         C/C++ type        Errors                                                         Notes
+  ================= ====================== ================================= ================= ============================================================== =========
+  bool                                     boolean                           int (0 or 1)      badTypeError
+  char                                     smallInt                          char              badTypeError overflowError                                     1
+  signed_char                              smallInt                          signed char       badTypeError overflowError
+  unsigned_char                            smallInt                          unsigned char     badSignError badTypeError overflowError
+  short                                    smallInt                          short             badTypeError overflowError
+  signed_short                             smallInt                          signed short      badTypeError overflowError
+  unsigned_short                           smallInt                          unsigned short    badSignError badTypeError overflowError
+  int                                      smallInt                          int               badTypeError
+  signed_int                               smallInt                          signed int        badTypeError
+  unsigned_int                             smallInt                          unsigned int      badSignError badTypeError
+  long                                     smallInt                          long              badTypeError
+  signed_long                              smallInt                          signed long       badTypeError
+  unsigned_long                            smallInt                          unsigned long     badSignError
+  smi                                      smallInt                          smi               badTypeError                                                   2
+  unsigned_smi                             smallInt                          smi               badSignError badTypeError                                      2
+  ================= ====================== ================================= ================= ============================================================== =========
+
+.. tabularcolumns:: p{2cm} p{2cm} p{2cm} p{2cm} p{3cm} p{2cm}
+
+================= ====================== ================================= ================= ============================================================== =========
+Conversion        Second part            Self type                         C/C++ type        Errors                                                         Notes
+================= ====================== ================================= ================= ============================================================== =========
+float                                    float                             float             badTypeError                                                   3
+double                                   float                             double            badTypeError                                                   3
+long_double                              float                             long double       badTypeError                                                   3
+bv                ptr_type               byte vector                       ptr_type          badTypeError                                                   4
+bv_len            ptr_type               byte vector                       ptr_type, int     badSizeError badTypeError                                      4, 5
+bv_null           ptr_type               byte vector/0                     ptr_type          badTypeError                                                   4, 6
+bv_len_null       ptr_type               byte vector/0                     ptr_type, int     badSizeError badTypeError                                      4, 5, 6
+cbv               ptr_type               byte vector                       ptr_type          badTypeError                                                   7
+cbv_len           ptr_type               byte vector                       ptr_type, int     badSizeError badTypeError                                      7
+cbv_null          ptr_type               byte vector/0                     ptr_type          badTypeError                                                   7
+cbv_len_null      ptr_type               byte vector/0                     ptr_type, int     badSizeError badTypeError                                      7
+string                                   byte vector                       char \*           badTypeError nullCharError                                     8
+string_len                               byte vector                       char \*, int      badTypeError nullCharError                                     5, 8
+string_null                              byte vector/0                     char \*           badTypeError nullCharError                                     6, 8
+string_len_null                          byte vector/0                     char \*, int      badTypeError nullCharError                                     5, 6, 8
+proxy             (ptr_type, type_seal)  proxy                             ptr_type, != NULL badTypeError badTypeSealError, deadProxyError,nullPointerError 9
+proxy_null        (ptr_type, type_seal)  proxy                             ptr_type          badTypeError badTypeSealError deadProxyError                   9
+any_oop                                  any object                        oop                                                                              10
+oop               oop subtype            corresponding object              oop (subtype)     badTypeError                                                   11
+any               C/C++ type             int/float/proxy/byte-vector, int  int/float/ptr/ptr badIndexError badTypeError deadProxyError                      12
+================= ====================== ================================= ================= ============================================================== =========
+
+Notes
++++++
+
+  1. The C type ``char`` has a system dependent range. Either 0..255 or -128..127.
+
+  2. The type ``smi`` is used internally in the virtual machine (a 30 bit integer).
+
+  3. Precision may be lost in the conversion.
+
+  4. The second part of the conversion is a C pointer type. The address of the first byte in the byte
+     vector, cast to this pointer type, is passed to the foreign routine. It is the responsibility of
+     the foreign routine not to go past the end of the byte vector. The foreign routine should not retain
+     pointers into the byte vector after the call has terminated. Note: canonical strings can not be passed
+     through a bv conversion (``badTypeError`` will result). This is to ensure that they are not accidentally
+     modified by a foreign function.
+
+  5. This conversion passes two values to the foreign routine: a pointer to the first byte in the byte
+     vector, and an integer which is the length of the byte vector divided by ``sizeof(*ptr_type)``. If
+     the size of the byte vector is not a multiple of ``sizeof(*ptr_type)``, ``badSizeError`` results.
+
+  6. In addition to accepting a byte vector, this conversion accepts the integer 0, in which case a ``NULL``
+     pointer is passed to the foreign routine.
+
+  7. The ``cbv`` conversions are like the bv conversions except that canonical strings are allowed as actual
+     arguments. A ``cbv`` conversion should only be used if it is guaranteed that the foreign routine
+     does not modify the bytes it gets a pointer to.
+
+  8. All the string conversions take an incoming byte vector, copy the bytes part, add a trailing null
+     char, and pass a pointer to this copy to the foreign routine. After the call has terminated, the copy
+     is discarded. If the byte vector contains a null char, ``nullCharError`` results.
+
+  9. The ``type_seal`` is an ``int`` or ``char`` * expression that is tested against the type seal value in the
+     proxy. If the two are different, ``badTypeSealError`` results. The special value ``ANY_SEAL`` will
+     match the type seal in any proxy. Note that the ``proxy`` conversion will fail with ``nullPointerError``
+     if the proxy object it is given encapsulates a NULL pointer.
+
+  10. The ``any_oop`` conversion is an escape: it passes the Self object unchanged to the foreign routine.
+
+  11. The ``oop`` conversion is mainly intended for internal use. The second argument is the name of
+      an oop subtype. After checking that the incoming argument points to an instance of the subtype,
+      the pointer is cast to the subtype.
+
+  12. The ``any`` conversion is different from all other conversions in that it expects two incoming
+      Self objects. The actions of the conversion depends on the type of the first object in the following
+      way. If the first object is an integer, the second argument must also be an integer; the two integers
+      are converted to C ``int``’s, the second is shifted 16 bits to the left and they are or’ed together to produce
+      the result. If the first object is a float, it is converted to a C ``float`` and the second object is
+      ignored. If the first object is a proxy, the result is the pointer represented by the proxy, and the second
+      argument is ignored. If the first object is a byte vector, the second object must be an integer
+      which is interpreted as an index into the byte vector; the result is a pointer to the indexed byte.
+
+.. index::
+   single:  result conversion
+
+Result conversions - from C/C++ to Self
+---------------------------------------
+
+A result conversion is given a C or C++ value of a certain type and performs these actions to produce
+a corresponding Self object:
+
+    * check that the C/C++ value can be converted to a Self object with no overflow or other error
+      occurring. If not, report the error.
+
+    * do the conversion, i.e., construct the Self object corresponding to the given C/C++ value.
+
+:numref:`tableResultConversions` lists all the available result conversions. Each row represents one conversion, with the first
+two columns designating the conversion pair. The third column lists the type of C or C++ value that
+the conversion pair accepts. The fourth column lists the type of Self object the conversion produces.
+The fifth column lists the kind of errors that can occur during the conversion. Finally, the sixth
+column contains references to numbered notes. The notes are found in the paragraphs following
+the table.
+
+.. tabularcolumns:: p{2cm} p{2cm} p{2cm} p{2cm} p{2cm} p{2cm}
+.. _tableResultConversions:
+.. table:: Result conversions - from C/C++ to Self
+
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  Conversion            | Second part                       |  C/C++ type     |  Self type      |  Errors            |  Notes    |
+  +========================+===================================+=================+=================+====================+===========+
+  |  void                  |                                   |  void           |  smallInt (0)   |                    |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  bool                  |                                   |  int            |  boolean        |                    |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  char                  |                                   |  char           |  smallInt       |                    |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  signed_char           |                                   |  signed char    |  smallInt       |                    |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  unsigned_char         |                                   |  unsigned char  |  smallInt       |                    |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  short                 |                                   |  short          |  smallInt       |                    |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  signed_short          |                                   |  signed short   |  smallInt       |                    |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  unsigned_short        |                                   |  unsigned short |  smallInt       |                    |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  int                   |                                   |  int            |  smallInt       |  overflowError     |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  signed_int            |                                   |  signed int     |  smallInt       |  overflowError     |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  unsigned_int          |                                   |  unsigned int   |  smallInt       |  overflowError     |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  long                  |                                   |  long           |  smallInt       |  overflowError     |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  signed_long           |                                   |  signed long    |  smallInt       |  overflowError     |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  unsigned_long         |                                   |  unsigned long  |  smallInt       |  overflowError     |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  smi                   |                                   |  smi            |  smallInt       |  overflowError     |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  int_or_errno          | n                                 |  int            |  int            |  a UNIX error      |  1        |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  float                 |                                   |  float          |  float          |                    |  2        |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  double                |                                   |  double         |  float          |                    |  2        |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  long_double           |                                   |  long double    |  float          |                    |  2        |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  string                |                                   |  char *         |  byte vector    |  nullPointerError  |  3        |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  proxy                 | (ptr_type, type_seal)             |  ptr_type       |  proxy          |  nullPointerError  |  3, 4, 8  |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  proxy_null            | (ptr_type, type_seal)             |  ptr_type       |  proxy          |                    |  4, 8     |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  proxy_or_errno        | (ptr_type, type_seal, n)          |  ptr_type       |  proxy          |  a UNIX error      |  4, 5, 8  |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  fct_proxy             | (ptr_type, type_seal, arg_count)  |  ptr_type       |  fctProxy       |  nullPointerError  |  3, 6, 8  |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  fct_proxy_null        | (ptr_type, type_seal, arg_count)  |  ptr_type       |  fctProxy       |                    |  6, 8     |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+  |  oop                   |                                   |  oop            |  corresponding  |                    |  7, 8     |
+  |                        |                                   |                 |  object         |                    |           |
+  +------------------------+-----------------------------------+-----------------+-----------------+--------------------+-----------+
+
+Notes
++++++
+  1.  This conversion returns an integer value, unless the integer has the value n (the second part of
+      the conversion; often -1). If the integer is n, the conversion interprets the return value as a UNIX
+      error indicator. It then constructs a string describing the error (by looking at ``errno``) and invokes
+      the “IfFail block” with this string.
+
+  2.  Precision may be lost.
+
+  3.  This conversion fails with ``nullPointerError`` if attempting to convert a NULL pointer.
+
+  4.  The ``ptr_type`` is the C/C++ type of the pointer. The ``type_seal`` is an expression of type int
+      or ``char *``.The conversion constructs a new proxy object, stores the C/C++ pointer in it and sets
+      its type seal to be the value of ``type_seal``.
+
+  5.  If the pointer is ``n`` (often ``n`` is ``NULL``), the conversion fails with a UNIX error, similar to the way
+      ``int_or_errno`` may fail.
+
+  6.  The ``fct_proxy``, ``fct_proxy_null`` and ``fct_proxy_or_errno`` conversions are similar to
+      the corresponding proxy conversions. The difference is that they produce a ``fctProxy`` object rather
+      than a proxy object. Also, their second part is a triple rather than a pair. The extra component
+      specifies how many arguments the function takes, if called. The special keyword ``unknownNoOfArgs``
+      or any nonnegative integer expression can be used here.
+
+  7.  This conversion is an escape: it passes the C value unchanged to Self. It is an error to use it if
+      the C value is not an ``oop``.
+
+  8.  The ``proxy`` (``fctProxy``) object that is returned by these conversions is *not* being created by the
+      glue code. Rather a ``proxy`` (``fctProxy``) must be passed down from the Self level. This ``proxy``
+      (``fctProxy``), a *result proxy*, will then be side effected by the glue: the value that the foreign function
+      returns will be stored in the result proxy together with the requested type seal. It is required
+      that the result proxy is dead when passed down (else a ``liveProxyError`` results). After being
+      side-effected and returned, the result proxy is live. The result proxy is the last argument of the
+      function that the glue macro expands to.
+
+A complete application using foreign functions
+----------------------------------------------
+
+This section gives a description of a complete application which uses foreign functions. The aim is
+to present a realistic and complete example of how foreign functions may be used. The complete
+source for the example is found in the directory ``objects/applications/serverDemo`` in the
+Self distribution.
+
+The example used is an application that allows Self expressions to be easily evaluated by non-
+Self processes. Having this, it then becomes possible to start Self processes from a UNIX
+prompt (shell) or to specify pipe lines in which some of the processes are Self processes. For example
+in
+
+::
+
+    proto% cat someFile | tokenize | sort -r | capitalize | tee lst
+
+it may be the case that the filters tokenize and capitalize perform most of their work in Self.
+Likewise, the command
+
+::
+
+    proto% mail
+
+may invoke some fancy mail reader written in Self rather than the standard UNIX mail reader.
+
+To see how the above can be accomplished, please refer to :numref:`figSingleUnixProc` below. The left side of the figure
+shows the external view of a typical UNIX process. It has two files: stdin and stdout (for simplicity
+we ignore stderr). Stdin is often connected to the keyboard so that characters typed here can
+be read from the file stdin. Likewise, stdout is typically connected to the console so that the process
+can display output by writing it to the file stdout. Stdin and stdout can also be connected to “regular”
+files, if the process was started with redirection. The right side of :numref:`figSingleUnixProc` shows a two stage
+pipe line. Here stdout of the first process is connected to stdin of the second process.
+
+.. _figSingleUnixProc:
+..  figure:: images/Chapter_5_Figure_5.*
+    :scale: 70
+    :align: left
+
+    A single UNIX process and an pipe line.
+
+:numref:`figSingleUnixProc` illustrates a simple trick that in many situations allows Self processes to behave as if they
+are full-fledged UNIX processes. A Self process is represented by a “real” UNIX process which
+transparently communicates with the Self process over a pair of connected sockets. The communication
+is bidirectional: input to the UNIX process is relayed to the Self process over the socket
+connection, and output produced by the Self process is sent over the same socket connection to
+the UNIX process which relays it to stdout. The right part of :numref:`figSingleUnixProc` shows how the UNIX/Self
+process pair can fit seamlessly into a pipe line.
+
+..  figure:: images/Chapter_5_Figure_6.*
+
+    A Self process and how it fits into a pipe line.
+
+Source code that facilitates setting up such UNIX/Self process pairs is included in the Self distribution.
+The source consists of two parts: one being a Self program (called *server*), the other being
+a C++ program (called *toself*). When the server is started, it creates a socket, binds a name to it
+and then listens for connections on it. ``toself`` establishes connections to the server program. The
+first line that is transmitted when a connection has been set up goes from ``toself`` to the server. The
+line contains a Self expression. Upon receiving it, the server forks a new process to evaluate the
+expression in the context of the lobby augmented with a slot, stdio, that contains a ``unixFile``-like
+object that represents the socket connection. When the forked process terminates, the socket connection
+is shut down. The ``toself`` UNIX process then terminates.
+
+The Self expression that forms the Self process is specified on the command line when ``toself``
+is started. For example, if the server has been started, the following can be typed at the UNIX
+prompt::
+
+    proto% toself stdio writeLine: 5 factorial printString
+    120
+
+    proto% echo something | toself capitalize: stdio
+    SOMETHING
+
+    proto% toself capitalize: stdio
+    Write some text that goes to stdin of the toself program
+    WRITE SOME TEXT THAT GOES TO STDIN OF THE TOSelf PROGRAM
+    More text
+    MORE TEXT
+    ^D
+
+    proto%
+
+If you want to try out these examples, locate the files ``server.self``, ``socks.so`` and ``toself``. The
+path name of the file ``socks.so`` is hardwired in the file ``server.self`` so please make sure that it
+has been set correctly for your system. Then file in the world and type [``server start``] ``fork`` at
+the Self prompt. Now you can go back to the UNIX prompt and try out the examples shown
+above.
+
+Outline of ``toself``
+---------------------
+
+``toself`` is a small C++ program found in the file ``toself.c``. It operates in the three phases outlined
+above:
+
+  1.  Try to connect to a well-known port number on a given machine (the function ``establishConnection``
+      does this).
+
+  2.  Send the command line arguments over the connection established in 1 (the ``safeWrite``
+      call in ``main`` does this).
+
+  3.  While there is more input and the Self process has not shut down the socket connection,
+      relay from stdin to the socket connection and from the socket connection to stdout (the function
+      ``relay`` does this).
+
+Outline of server
+-----------------
+
+The server is a Self program. It is found in the file ``server.self``. When the server is started, the
+following happens:
+
+   1. Create a socket, bind a name to it and start listening.
+   2. Loop\: accept a connection and fork a new process (both step 1 and 2 are performed by the method ``server start``). The forked process executes the method ``server handleRequest`` which:
+          a.   Reads a line from the connection.
+          b.   Sets up a context with a slot ``stdio`` referring to the connection.
+          c.   Evaluates the line read in step (a) in this context.
+          d.   Closes the connection.
+
+Foreign functions and glue needed to implement server
+-----------------------------------------------------
+
+The server program needs to do a number of UNIX calls to create sockets and bind names to them
+etc. The calls needed are ``socket``, ``bind``, ``listen``, ``accept`` and ``shutdown``. The first three of these
+are only called in a fixed sequence, so to make things easier, a small C++ function
+``socket_bind_listen``, that bundles them up in the right sequence, has been written. The ``accept``
+function is more general than what is needed for this application, so a wrapper function,
+``simple_accept``, has been written. The result is that the server needs to call only three foreign
+functions: ``socket_bind_listen``, ``simple_accept`` and ``shutdown``. Glue for these three functions
+and the source for the first two is found in the file ``socks.c``. This file is compiled and linked
+using the ``Makefile``. The result is a shared object file, ``socks.so``.
+
+Use of foreign functions in server.self
+---------------------------------------
+
+The server program is implemented using ``foreignFct`` objects. There is only a few lines of code
+directly involved in setting this up. First the ``foreignFct`` prototype is cloned to obtain a “local
+prototype”, called ``socksFct``, which contains the path for the ``socks.so`` file. ``socksFct`` is then
+cloned each time a ``foreignFct`` object for a function defined in ``socks.so`` is needed. For example,
+in ``traits socket``, the following method is found::
+
+    copyPort: portNumber = ( "Create a socket, do bind, then listen."
+            | sbl = socksFct copyName: ’socket_bind_listen_glue’. |
+            sbl value: portNumber With: deadCopy.
+        ).
+
+This method copies a ``socket`` object and returns the copy. The local slot ``sbl`` is initialized to a
+``foreignFct`` object. The body of the method simply sends ``value:With:`` to the ``foreignFct``
+object. The first argument is the port number to request for the socket, the second argument is a
+``deadCopy`` of self (socket objects are proxies and ``socket_bind_listen`` returns a proxy, so it
+must be passed a dead proxy to revive and store the result in; see section `Proxy and fctProxy objects`_).
+
+There are only three uses of ``foreignFct`` objects in the server and in all three cases, the ``foreignFct``
+object is encapsulated in a method as illustrated above.
+
+In general the design of ``foreignFct`` objects has been aimed at making the use of them light
+weight. When cloning them, it is only necessary to specify the minimal information: the name of
+the foreign function. They can be encapsulated in a method thus localizing the impact of redesigns.
+The complications of dynamic loading and linking are handled automatically, as is the recovery of
+dead ``fctProxies``.
+
+.. index::
+   single:  system monitor (spy)
+
+
+.. 	rubric::	 Footnotes
+
+.. [#f1] The bracketed colon indicates that the argument is optional (i.e., there are two versions of the primitive, one taking an argument and one not taking an argument). The bracket is not part of the primitive name. See text for details.

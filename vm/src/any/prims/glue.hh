@@ -140,7 +140,7 @@ extern const char *TS_func;    /* Type seal for functions (from dynLink).       
 # define misc_glue \
   misc_glue_1 \
   misc_glue_2 \
-  
+
 
 # ifdef SIC_COMPILER
 # define sic_glue                                                                                                                                      \
@@ -161,13 +161,23 @@ extern const char *TS_func;    /* Type seal for functions (from dynLink).       
 
 // broken up for MetroWorks -- dmu, see glue.c
 
-# define fctProxy_glue_1                                                                                                                                         \
-   CC_mber_0(smi,,  oop,fctProxy, get_noOfArgs_prim, get_noOfArgs_prim_glue,  fail                                                                     ) \
-   CC_mber_1(oop,,  oop,fctProxy, set_noOfArgs_prim, set_noOfArgs_prim_glue,  fail, smi,                                                               ) \
-   CC_mber_0(oop,,  oop,fctProxy, call_and_convert0, call_and_convert0_glue,                                                                           ) \
-   CC_mber_1(oop,,  oop,fctProxy, call_and_convert1, call_and_convert1_glue,, any,void*                                                                ) \
-   CC_mber_2(oop,,  oop,fctProxy, call_and_convert2, call_and_convert2_glue,, any,void*, any,void*                                                     ) \
-   CC_mber_3(oop,,  oop,fctProxy, call_and_convert3, call_and_convert3_glue,, any,void*, any,void*, any,void*                                          ) \
+# define fctProxy_glue_1                                                                                                                                    \
+   CC_mber_0(smi,,  oop,fctProxy, get_noOfArgs_prim,     get_noOfArgs_prim_glue,  fail                                                                    ) \
+   CC_mber_1(oop,,  oop,fctProxy, set_noOfArgs_prim,     set_noOfArgs_prim_glue,  fail, smi,                                                              ) \
+   CC_mber_0(oop,,  oop,fctProxy, call_and_convert0,     call_and_convert0_glue,                                                                          ) \
+   CC_mber_1(oop,,  oop,fctProxy, call_and_convert1,     call_and_convert1_glue,, any,void*                                                               ) \
+   CC_mber_2(oop,,  oop,fctProxy, call_and_convert2,     call_and_convert2_glue,, any,void*, any,void*                                                    ) \
+   CC_mber_3(oop,,  oop,fctProxy, call_and_convert3,     call_and_convert3_glue,, any,void*, any,void*, any,void*                                         ) \
+   CC_mber_1(oop,,  oop,proxy,    allocate_bytes_prim,   allocate_bytes_glue,fail,    smi,                                                                ) \
+   CC_mber_0(oop,,  oop,proxy,    free_bytes_prim,       free_bytes_glue,fail                                                                             ) \
+   CC_mber_2(oop,,  oop,proxy,    load_bytevector_at_offset_prim, load_bytevector_at_offset_glue,fail, oop,byteVector, smi,                               ) \
+   CC_mber_2(oop,,  oop,proxy,    read_bytevector_at_offset_prim, read_bytevector_at_offset_glue,fail, oop,byteVector, smi,                               ) \
+   CC_mber_0(smi,,  oop,proxy,    get_size_of_allocated_memory_prim, get_size_of_allocated_memory_glue,fail                                               ) \
+   CC_mber_0(oop,,  oop,fctProxy, run0_prim,             run0_glue,fail                                                                                   ) \
+   CC_mber_2(oop,,  oop,fctProxy, run1_prim,             run1_glue,fail, any_oop,, smi,                                                                   ) \
+   CC_mber_4(oop,,  oop,fctProxy, run2_prim,             run2_glue,fail, any_oop,, smi,, any_oop,, smi,                                                   ) \
+   CC_mber_6(oop,,  oop,fctProxy, run3_prim,             run3_glue,fail, any_oop,, smi,, any_oop,, smi,, any_oop,, smi,                                   ) \
+
 
 
 # define fctProxy_glue_2 \
@@ -182,7 +192,7 @@ extern const char *TS_func;    /* Type seal for functions (from dynLink).       
                                                                               any,void* )
 # define fctProxy_glue_5 \
    CC_mber_8(oop,,  oop,fctProxy, call_and_convert8, call_and_convert8_glue,, any,void*, any,void*, any,void*, any,void*, any,void*, any,void*, any,void*, any,void*) \
-   
+
 # define fctProxy_glue_6 \
    CC_mber_9(oop,,  oop,fctProxy, call_and_convert9, call_and_convert9_glue,, any,void*, any,void*, any,void*, any,void*, any,void*, any,void*, any,void*, any,void*, any,void*) \
 
@@ -320,4 +330,3 @@ extern const char *TS_func;    /* Type seal for functions (from dynLink).       
     sic_glue
 # endif
 # undef  WHAT_GLUE
-
