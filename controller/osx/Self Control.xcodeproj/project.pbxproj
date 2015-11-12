@@ -16,8 +16,8 @@
 		BA4DD8A414B800E800F269FD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA4DD8A214B800E800F269FD /* MainMenu.xib */; };
 		BA573C7D14F4ACE7000FD409 /* SelfWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = BA573C7C14F4ACE7000FD409 /* SelfWorld.m */; };
 		BA573C8214F4DE81000FD409 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA573C8114F4DE81000FD409 /* Security.framework */; };
-		BA7638FC187E598000841F48 /* Self.app in Resources */ = {isa = PBXBuildFile; fileRef = BA7638FB187E598000841F48 /* Self.app */; };
 		BA93FF0814BFC593005327EE /* RunningSelfVMManagerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA93FF0714BFC593005327EE /* RunningSelfVMManagerModel.m */; };
+		BAD6601F1BF42F5A00249BD1 /* Self.app in Resources */ = {isa = PBXBuildFile; fileRef = BAD6601E1BF42F5A00249BD1 /* Self.app */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,9 +39,9 @@
 		BA573C7F14F4ACFF000FD409 /* SelfWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfWorld.h; sourceTree = "<group>"; };
 		BA573C8014F4CB48000FD409 /* Self.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Self.entitlements; sourceTree = "<group>"; };
 		BA573C8114F4DE81000FD409 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		BA7638FB187E598000841F48 /* Self.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = Self.app; sourceTree = "<group>"; };
 		BA93FF0614BFC593005327EE /* RunningSelfVMManagerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunningSelfVMManagerModel.h; sourceTree = "<group>"; };
 		BA93FF0714BFC593005327EE /* RunningSelfVMManagerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunningSelfVMManagerModel.m; sourceTree = "<group>"; };
+		BAD6601E1BF42F5A00249BD1 /* Self.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = Self.app; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +127,7 @@
 		BA4DD8B414B8254600F269FD /* VM */ = {
 			isa = PBXGroup;
 			children = (
-				BA7638FB187E598000841F48 /* Self.app */,
+				BAD6601E1BF42F5A00249BD1 /* Self.app */,
 			);
 			name = VM;
 			sourceTree = "<group>";
@@ -158,10 +158,10 @@
 		BA4DD88014B800E700F269FD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0700;
 				TargetAttributes = {
 					BA4DD88814B800E700F269FD = {
-						DevelopmentTeam = 8C9659DBT4;
+						DevelopmentTeam = 3DKPWH6954;
 					};
 				};
 			};
@@ -190,7 +190,7 @@
 				BA4DD89814B800E700F269FD /* InfoPlist.strings in Resources */,
 				BA4DD89E14B800E700F269FD /* Credits.rtf in Resources */,
 				BA4DD8A414B800E800F269FD /* MainMenu.xib in Resources */,
-				BA7638FC187E598000841F48 /* Self.app in Resources */,
+				BAD6601F1BF42F5A00249BD1 /* Self.app in Resources */,
 				BA24211D1880BAA2008B5638 /* blueSelf.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,15 +243,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -262,10 +267,12 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx10.6;
 			};
 			name = Debug;
@@ -274,20 +281,26 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx10.6;
@@ -297,13 +310,14 @@
 		BA4DD8A814B800E800F269FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Self/Self Control-Prefix.pch";
 				INFOPLIST_FILE = "Self/Self Control-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.selflanguage.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "Self Control";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -314,13 +328,14 @@
 		BA4DD8A914B800E800F269FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Self/Self Control-Prefix.pch";
 				INFOPLIST_FILE = "Self/Self Control-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.selflanguage.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "Self Control";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;

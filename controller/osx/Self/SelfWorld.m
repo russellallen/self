@@ -45,7 +45,30 @@
     
     NSLog(@"%@", command);
     
-    NSString *tmp = [NSString stringWithUTF8String: tmpnam(nil)];
+    // Create temporary filename
+    
+    NSString *tempFileTemplate = [NSTemporaryDirectory() stringByAppendingPathComponent:@"selfsnapshot.XXXXXX"];
+    const char *tempFileTemplateCString = [tempFileTemplate fileSystemRepresentation];
+    char *tempFileNameCString = (char *)malloc(strlen(tempFileTemplateCString) + 1);
+    strcpy(tempFileNameCString, tempFileTemplateCString);
+    int fileDescriptor = mkstemp(tempFileNameCString);
+    
+    if (fileDescriptor == -1)
+    {
+        // handle file creation failure
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Couldn't allocate tempfile."];
+        [alert setInformativeText:@"Cannot run the snapshot because could not allocate a tempfile."];
+        [alert addButtonWithTitle:@"Ok"];
+        [alert runModal];
+        return self;
+    }
+    
+    // This is the file name
+    NSString *tmp = [[NSFileManager defaultManager] stringWithFileSystemRepresentation:tempFileNameCString length:strlen(tempFileNameCString)];
+    free(tempFileNameCString);
+    NSLog(@"%@", tmp);
+    
     [command writeToFile: tmp atomically: YES encoding:NSASCIIStringEncoding error:NULL];
     
     NSDictionary *defaultEnvironment = [[NSProcessInfo processInfo] environment];

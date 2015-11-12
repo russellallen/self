@@ -38,9 +38,9 @@
 	<key>CFBundleExecutable</key>
 	<string>Self</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Self 4.1.6 carbon project builder</string>
+	<string>Self 4.1.13, © 2015 Self Authors.</string>
 	<key>CFBundleIconFile</key>
-	<string>SelfIcon</string>
+	<string>SelfIcon.icns</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -50,8 +50,20 @@
 	<key>CFBundleSignature</key>
 	<string>SApp</string>
 	<key>CFBundleVersion</key>
-	<string>4.1.6</string>
+	<string>4.5.0-87-ge9b01e7-dirty</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
+	<key>CFBundleIdentifier</key>
+	<string>org.selflanguage.Self</string>
+	<key>CFBundleLongVersionString</key>
+	<string>Self 4.1.13 (4.5.0-87-ge9b01e7-dirty)</string>
+	<key>CFBundleShortVersionString</key>
+	<string>4.1.13</string>
+	<key>LSRequiresCarbon</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>© 2015 Self Authors.</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 </dict>
 </plist>

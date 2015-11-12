@@ -61,7 +61,7 @@
     
     // Create installation script
 
-    str = @"#!/bin/sh\ncp /tmp/Self /usr/bin/Self\nchmod 755 /usr/bin/Self";
+    str = @"#!/bin/sh\ncp /tmp/Self /usr/local/bin/Self\nchmod 755 /usr/local/bin/Self";
     attributes = [[NSMutableDictionary alloc] init]; 
     [attributes setObject:[NSNumber numberWithInt:493] forKey:NSFilePosixPermissions]; 
     /*493 is Decimal for the 755 octal*/ 
