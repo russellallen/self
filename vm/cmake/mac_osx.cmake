@@ -57,6 +57,8 @@ if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
         FORCE
       )
       break()
+    else(_failed)
+        message(FATAL_ERROR "Could not find compatible OS X SDK")
     endif()
   endforeach()
   message(STATUS "Using SDK: ${_sdkpath}")
