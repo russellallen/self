@@ -237,6 +237,8 @@ class oopClass {
   
   oop quit_prim();
   
+  char* bytes(fint which = 0) { return NULL; }
+  
 };
 
 oop bad_prim(oop rcvr);

@@ -153,7 +153,7 @@ true       = true _AddSlots: ( |
  }
 }
 
- { 'Category: platform\x7fCategory: external libraries\x7fModuleInfo: Module: init InitialContents: FollowSlot\x7fVisibility: public'
+ { 'Category: platform\x7fCategory: native code\x7fCategory: primitives\x7fModuleInfo: Module: init InitialContents: FollowSlot\x7fVisibility: public'
 	proxy    = proxy _AddSlots: ( |
 	  {} = 'ModuleInfo: Creator: globals proxy.'
 	  | ).

@@ -1,4 +1,4 @@
-﻿.. _pp-vmref:
+.. _pp-vmref:
 
 *************************
 Virtual Machine Reference

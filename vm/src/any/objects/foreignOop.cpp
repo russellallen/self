@@ -22,3 +22,5 @@ bool C_pointer::verify() {
 bool foreignOopClass::verify() {
     return slotsOopClass::verify() && addr()->cObject.verify();
 }
+
+

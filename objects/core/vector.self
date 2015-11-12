@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.20 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -433,6 +434,13 @@ if space overflows. -- dmu 5/04\x7fModuleInfo: Module: vector InitialContents: F
         
          copySize: n FillingWith: x = ( |
             | cloneSize: n FillingWith: x).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
+         'Category: copy-down support \x7fModuleInfo: Module: vector InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copySize_1 = ( |
+            | copySize: 1).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVector' -> () From: ( | {
