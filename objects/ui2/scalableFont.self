@@ -237,6 +237,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
+         'Category: font substituion\x7fComment: Return font to be used for fonts that can\'t be found.\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot\x7fVisibility: public'
+        
+         defaultFont = ( |
+            | times).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
          'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
         
          gill = '-*-gill sans-medium-r-normal-sans-'.
@@ -560,7 +567,7 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
               lastKvetchTime: now.
               ('unknown font: ', sel) printLine.
             ].
-            times).
+            defaultFont).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
@@ -585,6 +592,12 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
          'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
         
          urwAvantGardeItalic = '-*-itc avant garde-medium-o-normal-sans-'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
+         'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+        
+         verdana = '-*-verdana-medium-r-normal-sans-'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
@@ -661,6 +674,9 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
             (reflect: x11Globals fontFamily) do: [| :slot. :name | names add: name ].
             names remove: 'parent'.
             names remove: 'aNoteAboutMacXFonts'.
+            names remove: 'undefinedSelector:Type:Delegatee:MethodHolder:Arguments:'.
+            names remove: 'lastKvetchTime'.
+            names remove: 'lastKvetchTime:'.
             names asVector sort).
         } | ) 
 
