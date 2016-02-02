@@ -316,37 +316,11 @@ globals bootstrap _AddSlotsIfAbsent: ( |
 	   Else: [ object _RemoveSlot: slotName IfFail: [|:a. :b | object] ]).
   }
   { 'Category: bootstrap reading'
-
-    defaultSelfWorkingDir = (
-      ( | sun = '..'. apple = '..'. | ) _Perform: _Manufacturer ).
-      
-    defaultSelfObjectsWorkingDir = (
-      ( | sun = '.'. apple = '.'. | ) _Perform: _Manufacturer ).
-
-    getSelfWorkingDirEVIfFail: fb = (
-         'SELF_WORKING_DIR' _getenvenvironmentAtIfFail: [
-	   |:e. :n| 
-	   fb value ] ).
-
-    selfWorkingDir = (
-         |
-         {} = 'ModuleInfo: Creator: globals bootstrap selfWorkingDir.'.
-         |
-         getSelfWorkingDirEVIfFail: [defaultSelfWorkingDir]).
-
-    selfObjectsWorkingDir = (
-         |
-         {} = 'ModuleInfo: Creator: globals bootstrap selfWorkingDir.'.
-         |
-         concat: (
-           getSelfWorkingDirEVIfFail: [^ defaultSelfObjectsWorkingDir]
-         ) With: '/objects').
-
-    concat: n With: p = (| 
-	lobby = lobby.
-        {} = 'ModuleInfo: Creator: globals bootstrap concat:With:.'.
-        |
+  
+    concat: n With: p = ( | lobby = lobby |
         n _ByteVectorConcatenate: p  Prototype: lobby mutableString).
+
+    selfObjectsWorkingDir <- ''.
 
     read: name From: dir = (
         |

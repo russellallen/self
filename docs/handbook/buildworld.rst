@@ -3,12 +3,15 @@
 How to build the world
 ======================
 
-    Last updated 5 January 2014 for Self 4.5.0
+    Last updated 2 February 2016 for Self 4.6.0
 
 Should you need to reconstruct a world from the source files, here’s how to do it. This section describes
 how to create a default object world by reading in the Self source code distributed through the `GitHub repository`_. You can also do this after writing the world out using the transporter (``transporter fileOut fileOutAll``).
 
 .. _GitHub repository: https://github.com/russellallen/self
+
+From within the main Self tree
+------------------------------
 
 To create the default object world, change your current working directory to the ``objects`` subdirectory of the Self source release and follow these steps:
 
@@ -36,7 +39,22 @@ To create the default object world, change your current working directory to the
 
         VM# 'worldBuilder.self' _RunScript
 
-    Unless you have asked Self not to print script names, you should see something like:
+
+From outside the main tree
+--------------------------
+
+When developing applications which aren't part of the main Self distribution, it is often convenient to build a Self world from a directory other than the default directory. You can specify on the command line where the main Self distribution is.
+
+    ::
+
+        % Self -f /path/to/Self/objects/worldBuilder.self -b /path/to/Self/objects
+
+Choosing features
+-----------------
+
+Once you have started the ``worldBuilder.self`` script, you will be given options as to which features you would like in your new world.
+
+1.    Unless you have asked Self not to print script names, you should see something like:
 
     ::
 
@@ -46,14 +64,15 @@ To create the default object world, change your current working directory to the
         reading ./core/systemStructure.self...
         . . .
 
-4. At various places, you will be asked if you wish to add optional additions to the base system, such as the morphic user interface (UI2) or the earlier UI1 (which requires X11 to run):
+
+2. At various places, you will be asked if you wish to add optional additions to the base system, such as the morphic user interface (UI2) or the earlier UI1 (which requires X11 to run):
 
     ::
 
         Load UI2 (Morphic)? (y/N)
         > y
 
-5. After all the files have been read in, Self will start the process scheduler, initialize its module cache, and print:
+3. After all the files have been read in, Self will start the process scheduler, initialize its module cache, and print:
 
     ::
 
@@ -61,7 +80,7 @@ To create the default object world, change your current working directory to the
 
     That last line is the Self prompt indicating that the system is ready to read and evaluate expressions.
 
-6. If you have loaded Morphic, you may wish to open up a window:
+4. If you have loaded Morphic, you may wish to open up a window:
 
     ::
 
