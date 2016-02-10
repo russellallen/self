@@ -3,100 +3,141 @@ SELF WORLD BUILDER
 Copyright 1992-2016 AUTHORS.
 See the LICENSE file for license information.
 
-Version: 0.3.0
+Version: 0.4.0
 
 This is not a module and not managed by Transporter.
 '
-[| var = 'SELF_WORKING_DIR'. dir. initFile. i. graphicsLoadedFlag <- false |
-
-  "
-    Self working dir from command line.
-    For some reason this must go first otherwise very strange errors ensue.
-    These definitions will be overriden later.
-  "
-  true  _AddSlots: (| parent* = ()  |).
-  true  parent _AddSlots: (| ifTrue: a  = ( a value ) |).
-  false  _AddSlots: (| parent* = () |).
-  false parent _AddSlots: (| ifTrue: a  = ( self    ) |).
-
-  "
-    Self Working Dir from Environment Variable.
-    This is legacy, please use the -b flag instead.
-    Note that the SELF_WORKING_DIR environment variable points to the 
-    top of a tree with an objects subdirectory, while the -b flag
-    points to the object subdirectory itself
-  "
-  dir:  var _getenvenvironmentAtIfFail: [|:e. :n| nil].
-  dir:  dir _ByteVectorConcatenate: '/objects'        Prototype: byteVector IfFail: [|:e. :n| '.'].
+(| 
+  env*.
   
-  "
-    -b must be within the first four flags, eg
-    Self -f ../mydir/worldbuilder.self -b ../mydir
-  "
-  ((_CommandLine _At: 7 IfFail: [|:e. :m| '' ]) _Eq: '-b') ifTrue: [ dir: _CommandLine _At: 8 IfFail: [|:e. :m| dir ]].
-  ((_CommandLine _At: 6 IfFail: [|:e. :m| '' ]) _Eq: '-b') ifTrue: [ dir: _CommandLine _At: 7 IfFail: [|:e. :m| dir ]].
-  ((_CommandLine _At: 5 IfFail: [|:e. :m| '' ]) _Eq: '-b') ifTrue: [ dir: _CommandLine _At: 6 IfFail: [|:e. :m| dir ]].
-  ((_CommandLine _At: 4 IfFail: [|:e. :m| '' ]) _Eq: '-b') ifTrue: [ dir: _CommandLine _At: 5 IfFail: [|:e. :m| dir ]].
-  ((_CommandLine _At: 3 IfFail: [|:e. :m| '' ]) _Eq: '-b') ifTrue: [ dir: _CommandLine _At: 4 IfFail: [|:e. :m| dir ]].
-  ((_CommandLine _At: 2 IfFail: [|:e. :m| '' ]) _Eq: '-b') ifTrue: [ dir: _CommandLine _At: 3 IfFail: [|:e. :m| dir ]].
-  ((_CommandLine _At: 1 IfFail: [|:e. :m| '' ]) _Eq: '-b') ifTrue: [ dir: _CommandLine _At: 2 IfFail: [|:e. :m| dir ]].
+  dir.      " Directory of object tree "
+  initFile. " Path to init.self "
   
-  (('\nBuilding from base: ' _ByteVectorConcatenate: dir Prototype: byteVector) 
-     _ByteVectorConcatenate: '\n' Prototype: byteVector) _StringPrint.
-
-  initFile:  dir _ByteVectorConcatenate: '/core/init.self' Prototype: byteVector.  
-
-  (('         init file: ' _ByteVectorConcatenate: initFile Prototype: byteVector) 
-     _ByteVectorConcatenate: '\n' Prototype: byteVector) _StringPrint.
-
-  initFile _RunScript.
+  setupMinimalEnvironment = (
+    true  _AddSlots: (| parent* = ()  |).
+    true  parent _AddSlots: (| ifTrue: a False: b = ( a value ) |).
+    false  _AddSlots: (| parent* = () |).
+    false parent _AddSlots: (| ifTrue: a False: b = ( b value ) |).
+    '' parent _AddSlots: (| 
+      , b = (| e = systemObjects | (_ByteVectorConcatenate: b Prototype: e byteVector IfFail: [|:e. :m| 'CONCAT FAIL\n' _StringPrint. _Quit ]) _StringCanonicalize ) |).
+    0 parent _AddSlots: (|
+      + n = (_IntAdd: n IfFail: [|:e. :m| 'INTEGER ADD ERROR\n' _StringPrint. _Quit ]). 
+      countdown: blk = (blk value: self. (_Eq: 0) ifTrue: [self] False: [(+ -1) countdown: blk])
+    |). 
+  ).
   
-  "
-    Previously bootstrap ignored the values set before and just looked for itself
-    in the SELF_WORKING_DIR environment value. However now we need to tell it
-    where the base directory is.
-  "
-  bootstrap selfObjectsWorkingDir: dir.
+  cleanupMinimalEnvironment = (| fb |
+    fb: [|:e. :m| '\nREMOVE SLOT ERROR\n' _StringPrint. _Quit ].
+    true      _RemoveSlot: 'parent'     IfFail: fb.
+    false     _RemoveSlot: 'parent'     IfFail: fb.
+    '' parent _RemoveSlot: ','          IfFail: fb.
+    0 parent  _RemoveSlot: '+'          IfFail: fb.
+    0 parent  _RemoveSlot: 'countdown:' IfFail: fb.
+  ).
   
-  "
-    Now start bootstrapping all proper like.
-  "
-  bootstrap read: 'allCore' From: 'core'.
-  bootstrap read: 'primitiveMaker' From: 'glue'.
-  bootstrap read: 'crypto' From: 'applications'.
-  bootstrap read: 'allTests' From: 'tests'.
-  bootstrap read: 'programmingExamples' From: 'misc'.
+  inMinimalEnvironment: blk = (setupMinimalEnvironment. blk value. cleanupMinimalEnvironment).
+    
+  valueForCommandLineFlag: f IfAbsent: a = (| v |
+    v: a.
+    _CommandLine _Size countdown: [|:p| v: valueForCommandLineFlag: f AtPosition: p IfAbsent: v ].
+    v
+  ).
+  
+  valueForCommandLineFlag: f AtPosition: p IfAbsent: a = (
+    '' _StringPrint. " RCA 16-02-10. Just for fun, try commenting this out and watch everything break... "
+    ( (_CommandLine _At: p IfFail: [|:e. :m| a]) _Eq: f) 
+        ifTrue: [ _CommandLine _At: p + 1 IfFail: [|:e. :m| a] ] 
+         False: [ a ] ).
+         
+  selfWorkingDirFromEnvironmentIfAbsent: a = (('SELF_WORKING_DIR' _getenvenvironmentAtIfFail: [|:e. :m| ^ a ]), '/objects' ).
+  
+  setupPaths = (
+    " Self Working Dir from Environment Variable.
+      This is legacy, please use the -b flag instead.
+      Note that the SELF_WORKING_DIR environment variable points to the 
+      top of a tree with an objects subdirectory (for legacy compatability 
+      reasons) while the -b flag points to the object subdirectory itself.
+    "
+    dir: selfWorkingDirFromEnvironmentIfAbsent: '.'.
+  
+    " Self Working Dir from -b Flag
+      -b must be within the first four flags, eg
+      Self -f ../mydir/worldbuilder.self -b ../mydir
+    "
+    dir: valueForCommandLineFlag: '-b' IfAbsent: dir.
+    ('\nBuilding from base: ', dir) _StringPrint.
+          
+    initFile:  dir, '/core/init.self'. 
+    ('\n         init file: ', initFile, '\n') _StringPrint.
 
-  "
-    Load optional components after asking user.
-    At this point we should have a core working system, 
-    albeit without a GUI.
-  " 
+   ).
+   
+  loadBasicWorld = (
+    'About to load basic world\n' _StringPrint.
+    initFile _RunScript.
+    bootstrap selfObjectsWorkingDir: dir.
+    bootstrap read: 'allCore' From: 'core'.
+    bootstrap read: 'primitiveMaker' From: 'glue'.
+    bootstrap read: 'crypto' From: 'applications'.
+    bootstrap read: 'allTests' From: 'tests'.
+    bootstrap read: 'programmingExamples' From: 'misc'.
+  ).
+  
+  graphicsLoadedFlag <- false.
+  
+  loadGraphics = (
+    graphicsLoadedFlag ifFalse: [
+      graphicsLoadedFlag: true.
+      bootstrap read: 'allGraphics' From: 'graphics'.
+    ]
+  ).
 
-  'Load UI2 (Morphic)? (y/N)\n> ' print.
-  i: stdin readLine.
-  i = 'y' 
-     ifTrue: [ bootstrap read: 'allGraphics' From: 'graphics'.
-               graphicsLoadedFlag: true.
-               bootstrap read: 'allUI2' From: 'ui2'.
-               bootstrap read: 'allOutliner' From: 'ui2/outliner']
-      False: [ ('You chose: ', i, '.') printLine ].
+  optionalLoad: blk IfFlag: f OrQuery: q = (| i. c. flg = '-o' |
+    c: _CommandLine.
+    (c includes: flg)
+      ifTrue: [
+        (((c at: (c keyAt: flg) succ IfAbsent: '') splitOn: ',') includes: f)
+          ifTrue: [ ('Reading ', q) printLine. blk value ]
+           False: [ (q, ' not chosen on command line') printLine. ]]
+       False: [       
+        ('Load ', q, '? (y/N)\n> ') print. 
+        i: stdin readLine.
+        i = 'y' 
+           ifTrue: blk
+            False: [ ('You chose: ', i, '.') printLine ]].
+  ).
+  
+  optionalLoadMorphic = (
+    optionalLoad: [ loadGraphics.
+                    bootstrap read: 'allUI2' From: 'ui2'.
+                    bootstrap read: 'allOutliner' From: 'ui2/outliner']
+          IfFlag: 'morphic'
+         OrQuery: 'UI2 (Morphic)'
+  ).
+  
+  optionalLoadUI1 = (
+     optionalLoad: [ loadGraphics. bootstrap read: 'allUI' From: 'ui1']
+           IfFlag: 'ui1'
+          OrQuery: 'UI1 (X11 Only)'
+  ).
 
-  'Load UI1 (X11 only)? (y/N)\n> ' print.
-  i: stdin readLine.
-  i = 'y' 
-      ifTrue: [  graphicsLoadedFlag ifFalse: [
-                     bootstrap read: 'allGraphics' From: 'graphics'.
-                     graphicsLoadedFlag: true].
-                 bootstrap read: 'allUI' From: 'ui1']
-      False: [ ('You chose: ', i, '.') printLine ].
-
-  _Verify.
-  "throw away code strings for the little dinky doIts"
-  memory quickCleanup.
-  transporter moduleDictionary refill.
-  "start the scheduler"
-  scheduler start.
-  _Verify
-
-] value
+  startup = (
+    _Verify.
+    "throw away code strings for any little dinky doIts"
+    memory quickCleanup.
+    transporter moduleDictionary refill.
+    "start the scheduler"
+    scheduler start.
+    _Verify
+  ).
+  
+  boot: lobby = (
+    env: lobby.
+    inMinimalEnvironment: [setupPaths].
+    loadBasicWorld.
+    optionalLoadMorphic.
+    optionalLoadUI1.
+    startup.
+  )
+  
+|) boot: self.

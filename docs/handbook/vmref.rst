@@ -38,6 +38,8 @@ These options are provided for use by Self VM implementors:
 Other command-line options are ignored by the Virtual Machine but are available at Self level via
 the primitive ``_CommandLine``.
 
+The standard set of Self objects (built by the ``worldBuilder.self`` script) also defines ``-b`` (where the ``objects`` director is) and ``-o`` (for specifying build options)
+
 System-triggered messages
 =========================
 

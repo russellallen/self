@@ -43,14 +43,17 @@ To create the default object world, change your current working directory to the
 From outside the main tree
 --------------------------
 
-When developing applications which aren't part of the main Self distribution, it is often convenient to build a Self world from a directory other than the default directory. You can specify on the command line where the main Self distribution is.
+When developing applications which aren't part of the main Self distribution, it is often convenient to build a Self world from a directory other than the default directory. You can specify on the command line where the main Self distribution is and the options. For example the below builds the world with morphic and also ui1. Use ``-o none`` to build without any graphics.
 
     ::
 
-        % Self -f /path/to/Self/objects/worldBuilder.self -b /path/to/Self/objects
+        % Self -f /path/to/Self/objects/worldBuilder.self   \
+               -b /path/to/Self/objects                     \
+               -o morphic,ui1
+               
 
-Choosing features
------------------
+Finishing the build
+-------------------
 
 Once you have started the ``worldBuilder.self`` script, you will be given options as to which features you would like in your new world.
 
@@ -65,7 +68,7 @@ Once you have started the ``worldBuilder.self`` script, you will be given option
         . . .
 
 
-2. At various places, you will be asked if you wish to add optional additions to the base system, such as the morphic user interface (UI2) or the earlier UI1 (which requires X11 to run):
+2. Unless you have specified the options on the command line, then at various places, you will be asked if you wish to add optional additions to the base system, such as the morphic user interface (UI2) or the earlier UI1 (which requires X11 to run):
 
     ::
 
