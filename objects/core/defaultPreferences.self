@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.9 $'
+ '30.10.0-prerelease1'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -56,9 +57,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'defaultPreferences' -> () From: ( | {
-         'ModuleInfo: Module: defaultPreferences InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: defaultPreferences InitialContents: InitializeToExpression: (\'30.10.0-prerelease1\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.9 $'.
+         revision <- '30.10.0-prerelease1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'defaultPreferences' -> () From: ( | {
@@ -116,6 +117,15 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
          'ModuleInfo: Module: defaultPreferences InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'parent' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals preferences parent.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: defaultPreferences InitialContents: FollowSlot'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
         } | ) 

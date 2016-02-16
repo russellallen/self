@@ -3,6 +3,7 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -1044,7 +1045,7 @@ good for introducing language semantics, say.
          'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          namedTag = ( |
-            | paint copyRed: 0.8 Green: 0.8 Blue: 1).
+            | paint copyRed: 0.7 Green: 0.7 Blue: 1).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default46' -> () From: ( | {
