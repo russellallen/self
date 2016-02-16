@@ -131,12 +131,21 @@ This is not a module and not managed by Transporter.
     _Verify
   ).
   
+  optionalRunSecondarySetupScript = (| flg = '-f2'. c |
+    c: _CommandLine.
+    (c includes: flg)
+      ifTrue: [| f2 |
+        f2: (c at: (c keyAt: flg) succ IfAbsent: [^ 'Could not find argument to flag -f2' printLine]).
+        f2 runScript ]
+  ).
+
   boot: lobby = (
     env: lobby.
     inMinimalEnvironment: [setupPaths].
     loadBasicWorld.
     optionalLoadMorphic.
     optionalLoadUI1.
+    optionalRunSecondarySetupScript.
     startup.
   )
   
