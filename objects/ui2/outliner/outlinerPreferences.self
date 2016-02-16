@@ -619,7 +619,7 @@ good for introducing language semantics, say.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: ui2\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          outliner = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals preferences outliner.

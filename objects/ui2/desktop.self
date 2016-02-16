@@ -437,7 +437,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: ui2\x7fModuleInfo: Module: desktop InitialContents: FollowSlot'
+         'ModuleInfo: Module: desktop InitialContents: FollowSlot'
         
          desktop = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals preferences desktop.
