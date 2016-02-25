@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.12 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -532,6 +533,13 @@ they contain this button -- Randy, 1/10/95\x7fModuleInfo: Module: ui2Button Init
                  m color:    fColor.
              ].
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Button' -> () From: ( | {
+         'Category: basics\x7fModuleInfo: Module: ui2Button InitialContents: FollowSlot'
+        
+         labelColor: c = ( |
+            | findMorphWithLabel color: c. self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Button' -> () From: ( | {

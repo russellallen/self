@@ -3,9 +3,25 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'evaluatorMorph' -> 'parent' -> 'evaluatorStyleProto' -> () From: ( | {
+         'ModuleInfo: Module: selfObjectModel InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'evaluatorMorph' -> 'parent' -> 'evaluatorStyleProto' -> 'parent' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals evaluatorMorph parent evaluatorStyleProto parent.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'evaluatorMorph' -> 'parent' -> 'evaluatorStyleProto' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: selfObjectModel InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> 'styleProto' -> 'parent' -> ().
+        } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
          'Category: just for mirror models\x7fModuleInfo: Module: selfObjectModel InitialContents: FollowSlot'
@@ -99,55 +115,13 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> () From: ( | {
-         'Category: evaluators\x7fModuleInfo: Module: selfObjectModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: evaluators\x7fModuleInfo: Module: selfObjectModel InitialContents: FollowSlot'
         
          addEvaluator: evt = ( |
-             b1.
-             b2.
-             b3.
-             ed.
-             f.
-             r.
-             result.
             | 
-
-            b1: newEvaluatorButtonLabel: 'Get it'
-                                 Script: 'target get_it_cmd: event'
-                         IsAsynchronous: true.
-            b2: newEvaluatorButtonLabel: 'Do it'
-                                 Script: 'target  do_it_cmd: event'
-                         IsAsynchronous: true.
-            b3: newEvaluatorButtonLabel: 'Close'
-                                 Script: 'target delete'
-                         IsAsynchronous: false.
-
-            r: newEvaluatorButtonRow: (b1 & b2 & b3 ) asVector.
-
-            ed: uglyTextEditorMorph copyString: '' Style: evaluatorStyle.
-            ed receiver: receiver.
-            "ed beFlexibleHorizontally. won't resize"
-            ed beTypingFocusFor: evt sourceHand.
-
-            ed frameStyle: ed flatStyle.
-            b1 target: ed text.
-            b2 target: ed text.
-            ed borderWidth: 0.
-
-            f: frameMorph copy.
-            f addMorphFirst: ed.
-            f addMorphLast:  r.
-            f frameStyle: f insetBezelStyle.
-            f borderWidth: 2.
-            f beFlexibleHorizontally.
-            f leftJustify.
-
-            result: f.
-
-            result colorAll: myOutliner color.
-            myOutliner addMorphToBottom: result.
-            b3 target: result.
-
-            ed).
+            myOutliner addMorphToBottom: 
+              (evaluatorMorph copyOnEvt: evt OutlinerModel: self).
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> () From: ( | {
@@ -364,45 +338,6 @@ Set the creator of my parent slot.\x7fModuleInfo: Module: selfObjectModel Initia
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> () From: ( | {
-         'Category: evaluators\x7fModuleInfo: Module: selfObjectModel InitialContents: FollowSlot'
-        
-         evaluatorStyle = ( |
-            | 
-            evaluatorStyleProto copyModel: self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> () From: ( | {
-         'Category: evaluators\x7fModuleInfo: Module: selfObjectModel InitialContents: FollowSlot'
-        
-         evaluatorStyleProto = bootstrap define: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> 'evaluatorStyleProto' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals generalModel parent styleProto copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> 'evaluatorStyleProto' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals selfObjectModel parent evaluatorStyleProto.
-
-CopyDowns:
-globals generalModel parent styleProto. copy 
-SlotsToOmit: parent.
-
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> 'evaluatorStyleProto' -> () From: ( | {
-         'ModuleInfo: Module: selfObjectModel InitialContents: FollowSlot\x7fVisibility: private'
-        
-         parent* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> 'evaluatorStyleProto' -> 'parent' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals selfObjectModel parent evaluatorStyleProto parent.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> 'evaluatorStyleProto' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: selfObjectModel InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> 'styleProto' -> 'parent' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> () From: ( | {
          'Category: menu operations\x7fModuleInfo: Module: selfObjectModel InitialContents: FollowSlot\x7fVisibility: public'
         
          findSlot: evt = ( |
@@ -468,37 +403,6 @@ SlotsToOmit: parent.
             pluggableObjectAnnotationMorph
                copyObjectOutliner: myOutliner
                            Style: annotationInfoStyle).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> () From: ( | {
-         'Category: evaluators\x7fModuleInfo: Module: selfObjectModel InitialContents: FollowSlot\x7fVisibility: private'
-        
-         newEvaluatorButtonLabel: l Script: s IsAsynchronous: isA = ( |
-             b.
-             n.
-            | 
-            b: ui2Button copy.
-            b script: s.
-            b isAsynchronous: isA.
-            n: preferredFontSpec size - 2.
-            b label: l  FontSpec:      (preferredFontSpec copySize: n)
-                        FontColor:      preferredTitleColor.
-            b beFlexibleHorizontally.
-            b).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> () From: ( | {
-         'Category: evaluators\x7fModuleInfo: Module: selfObjectModel InitialContents: FollowSlot\x7fVisibility: private'
-        
-         newEvaluatorButtonRow: buts = ( |
-             r.
-            | 
-            r: rowMorph    copy.
-            r borderWidth: 0.
-            buts reverseDo: [|:b| r addMorph: b].
-            r moveToFront: buts first.
-            r beShrinkWrapVertically.
-            r).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> () From: ( | {

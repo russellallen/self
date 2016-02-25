@@ -3,6 +3,7 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -1315,6 +1316,18 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uglyTextEditorMorph' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot'
+        
+         color: c = ( |
+            | 
+            resend.color: c. 
+            firstMorph color: c. 
+            firstMorph morphsDo: [|:m| m color: c].
+            changed.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uglyTextEditorMorph' -> () From: ( | {
          'Category: text manipulation\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
         
          contentsString = ( |
@@ -1480,6 +1493,13 @@ As used to make evaluators. -- Randy, 2/2/95\x7fModuleInfo: Module: outlinerWidg
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uglyTextEditorMorph' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot'
+        
+         fontColor: c = ( |
+            | text fontColor: c. self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uglyTextEditorMorph' -> () From: ( | {
          'Category: resizing\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: private'
         
          inResizeArea: pt = ( |
@@ -1531,20 +1551,20 @@ As used to make evaluators. -- Randy, 2/2/95\x7fModuleInfo: Module: outlinerWidg
          initializeString: string Panel: panel Style: style = ( |
              row.
             | 
-            color: style color.
             borderWidth: 2.
             frameStyle: insetBezelStyle.
             beRigid.
 
-            text: ui2_textField copy colorAll: color.
+            text: ui2_textField copy.
             text  beFlexible.
             text  setText: string.
-            row: rowMorph copy color: color.
+            row: rowMorph copy.
             row  borderWidth: 0.
             panel ifNotNil: [row  addMorphLast: panel].
             row  addMorphLast: text.
             addMorphLast: row.
             resizeToText. 
+            color: style color.
             self).
         } | ) 
 
