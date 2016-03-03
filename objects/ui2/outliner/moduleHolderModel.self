@@ -3,6 +3,7 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -96,6 +97,13 @@ globals generalModel parent buttonDescriptions. _Clone
          'ModuleInfo: Module: moduleHolderModel InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'moduleHolderModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: moduleHolderModel InitialContents: FollowSlot'
+        
+         preferredBodyColor = ( |
+            | preferences outliner colorScheme moduleHolderModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'moduleHolderModel' -> 'parent' -> () From: ( | {

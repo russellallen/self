@@ -3,6 +3,7 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -439,11 +440,18 @@ to put in me.\x7fModuleInfo: Module: sliceModel InitialContents: FollowSlot\x7fV
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalSliceModel' -> 'parent' -> () From: ( | {
-         'Category: appearance\x7fModuleInfo: Module: sliceModel InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: appearance\x7fModuleInfo: Module: sliceModel InitialContents: FollowSlot'
         
-         preferredColor = ( |
+         preferredBodyColor = ( |
             | 
             preferences outliner colorScheme generalSliceModel).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalSliceModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: sliceModel InitialContents: FollowSlot\x7fVisibility: public'
+        
+         preferredHeaderColor = ( |
+            | preferences outliner colorScheme generalSliceModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalSliceModel' -> 'parent' -> () From: ( | {

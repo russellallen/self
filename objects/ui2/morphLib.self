@@ -597,6 +597,105 @@ SlotsToOmit: parent prototype rawColor.
          rawColor <- paint named: 'transparent'.
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
+         'Category: drawing\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         baseDrawOn: c = ( |
+            | 
+            "Optimization: don't draw if transparent"
+            rawColor isTransparent ifTrue: [^ self].
+
+            "Optimization: suppress drawing if this morph's color matches
+             that of its owner."
+
+            (owner submorphVisible: self) ifTrue: [ resend.baseDrawOn: c ].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
+         'Category: creating\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyH: hspace = ( |
+            | copyH: hspace Color: paint named: 'transparent').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
+         'Category: creating\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyH: hSpace Color: c = ( |
+             new.
+            | 
+            new: copyRemoveAllMorphs color: c.
+            new beRigidHorizontally.
+            new beFlexibleVertically.
+            new setWidth: hSpace.
+            new).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
+         'Category: creating\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyV: vspace = ( |
+            | copyV: vspace Color: paint named: 'transparent').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
+         'Category: creating\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyV: vSpace Color: c = ( |
+             new.
+            | 
+            new: copyRemoveAllMorphs color: c.
+            new beFlexibleHorizontally.
+            new beRigidVertically.
+            new setHeight: vSpace.
+            new).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
+         'Category: basics\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         morphTypeName = 'spacerMorph'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
+         'ModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         parent* = bootstrap stub -> 'traits' -> 'morph' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         transparentSpacerMorph = bootstrap define: bootstrap stub -> 'globals' -> 'transparentSpacerMorph' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             bootstrap remove: 'prototype' From:
+             globals spacerMorph copyRemoveAllMorphs ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'transparentSpacerMorph' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals transparentSpacerMorph.
+
+CopyDowns:
+globals spacerMorph. copyRemoveAllMorphs 
+SlotsToOmit: parent prototype.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Basic\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         transparentSpacerMorph = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'transparentSpacerMorph' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits transparentSpacerMorph.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'transparentSpacerMorph' -> () From: ( | {
+         'ModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         parent* = bootstrap stub -> 'traits' -> 'transparentSpacerMorph' -> ().
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'labelMorph' -> () From: ( | {
          'Category: accessing\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -2129,71 +2228,57 @@ horizontal sliderMorph\x7fModuleInfo: Module: morphLib InitialContents: FollowSl
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transparentSpacerMorph' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
         
          baseDrawOn: c = ( |
             | 
-            "Optimization: don't draw if transparent"
-            rawColor isTransparent ifTrue: [^ self].
-
-            "Optimization: suppress drawing if this morph's color matches
-             that of its owner."
-
-            (owner submorphVisible: self) ifTrue: [ resend.baseDrawOn: c ].
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
-         'Category: creating\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transparentSpacerMorph' -> () From: ( | {
+         'Category: basics\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot'
         
-         copyH: hspace = ( |
-            | copyH: hspace Color: paint named: 'transparent').
+         color: c = ( |
+            | self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transparentSpacerMorph' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
         
          copyH: hSpace Color: c = ( |
              new.
             | 
-            new: copyRemoveAllMorphs color: c.
+            new: copyRemoveAllMorphs color: paint named: 'transparent'.
             new beRigidHorizontally.
             new beFlexibleVertically.
             new setWidth: hSpace.
             new).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
-         'Category: creating\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copyV: vspace = ( |
-            | copyV: vspace Color: paint named: 'transparent').
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transparentSpacerMorph' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
         
          copyV: vSpace Color: c = ( |
              new.
             | 
-            new: copyRemoveAllMorphs color: c.
+            new: copyRemoveAllMorphs color: paint named: 'transparent'.
             new beFlexibleHorizontally.
             new beRigidVertically.
             new setHeight: vSpace.
             new).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transparentSpacerMorph' -> () From: ( | {
          'Category: basics\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
         
-         morphTypeName = 'spacerMorph'.
+         morphTypeName = 'transparentSpacerMorph'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'spacerMorph' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transparentSpacerMorph' -> () From: ( | {
          'ModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
         
-         parent* = bootstrap stub -> 'traits' -> 'morph' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'spacerMorph' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'updatingLabelMorph' -> () From: ( | {

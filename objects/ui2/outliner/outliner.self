@@ -1,8 +1,9 @@
  '$Revision: 30.15 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -353,9 +354,11 @@ that should not expand.\x7fModuleInfo: Module: outliner InitialContents: FollowS
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'outliner' -> () From: ( | {
-         'Category: building\x7fCategory: building blocks (never overridden)\x7fModuleInfo: Module: outliner InitialContents: InitializeToExpression: (spacerMorph copy beFlexible baseMinWidth: 5)\x7fVisibility: private'
+         'Category: building\x7fCategory: building blocks (never overridden)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: private'
         
-         flexibleSpacer = spacerMorph copy beFlexible baseMinWidth: 5.
+         flexibleSpacer = ( |
+            | 
+            transparentSpacerMorph beFlexibleHorizontally beFlexibleVertically).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'outliner' -> () From: ( | {
@@ -417,12 +420,12 @@ Hack for asynchronous buttons: start script with an \"A\"\x7fModuleInfo: Module:
             color: preferredColor. 
             removeAllMorphs.
             rm: rowMorph copy beFlexible borderWidth: 0.
-            rm color: (paint named: 'transparent').
+            rm color: paint named: 'transparent'.
             tag: spacerMorph copyH: 3 Color: colorForTag.
             rm addMorphFirst: tag.
 
             cm: columnMorph copy beFlexible borderWidth: 0.
-            cm color: (paint named: 'transparent').
+            cm color: paint named: 'transparent'.
             columnUnderHeader: newColumnUnderHeader.
             cm addMorphLast: columnUnderHeader.
             cm addMorphFirst: buildHeader.
@@ -535,7 +538,7 @@ outliner has non-items that might be counterfactual.\x7fModuleInfo: Module: outl
             c leftJustify.
             c borderWidth: 0.
             c baseMinHeight: 0.
-            c color: (paint named: 'transparent').
+            c color: paint named: 'transparent'.
             c).
         } | ) 
 
@@ -583,9 +586,11 @@ outliner has non-items that might be counterfactual.\x7fModuleInfo: Module: outl
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'outliner' -> () From: ( | {
-         'Category: building\x7fCategory: building blocks (never overridden)\x7fModuleInfo: Module: outliner InitialContents: InitializeToExpression: (spacerMorph copyH: 11 Color: paint named: \'black\')\x7fVisibility: private'
+         'Category: building\x7fCategory: building blocks (never overridden)\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: private'
         
-         rigidSpacer = spacerMorph copyH: 11 Color: paint named: 'black'.
+         rigidSpacer = ( |
+            | 
+            transparentSpacerMorph beRigidHorizontally beFlexibleVertically setWidth: 4).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'outliner' -> () From: ( | {
@@ -832,7 +837,7 @@ boxedItems.\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisib
         
          buildBody = ( |
             | 
-            body: rowMorph copy color: color.
+            body: rowMorph copy color: paint named: 'transparent'.
             body  borderWidth: 0.
             body  beFlexible.
 
@@ -850,7 +855,7 @@ boxedItems.\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisib
             boxedFrame  addMorphLast: boxedItems.
 
             indentSubParts ifTrue: [
-              body addMorphLast: rigidSpacer copy color: color
+              body addMorphLast: rigidSpacer copy
             ].
             body addMorphLast: items.
             body).
@@ -1737,7 +1742,7 @@ if none exists.
                      source editMode: source false)
                 | ).
               |
-              header addMorphLast: flexibleSpacer copy color: color.
+              header addMorphLast: flexibleSpacer copy.
               header addMorphLast: 
                  smallEditorMorph copyString: ref name
                                       Target: self

@@ -3,6 +3,7 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -151,10 +152,10 @@ SlotsToOmit: parent prototype.
             tle: buildTitle.
             header addMorphLast: tle.
             addCommentButtonToHeader.
-            header addMorphLast: flexibleSpacer copy color: (paint named: 'transparent').
+            header addMorphLast: flexibleSpacer copy.
             contentsLabel: optionalMorph copy color: (paint named: 'transparent').
             header addMorphLast: contentsLabel.
-            header addMorphLast: rigidSpacer copyH: 4 Color: (paint named: 'transparent').
+            header addMorphLast: rigidSpacer copyH: 4.
             header addMorphLast: buildExpander.
 
             " put contents string and sprout box at bottom of tall title "
@@ -170,7 +171,6 @@ SlotsToOmit: parent prototype.
          initializeForModel: m = ( |
             | 
             resend.initializeForModel: m.
-            color: m preferredBorderColor.
             borderWidth: 1.
             beFlexible.
             frameStyle: insetBezelStyle.

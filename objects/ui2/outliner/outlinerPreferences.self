@@ -1030,6 +1030,14 @@ good for introducing language semantics, say.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default46' -> () From: ( | {
+         'Category: body\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         generalSliceModel = ( |
+            | 
+            unusual).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default46' -> () From: ( | {
          'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          integerTag = paint named: 'azure'.
@@ -1039,6 +1047,13 @@ good for introducing language semantics, say.
          'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          mixinsTag = paint named: 'leaf'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default46' -> () From: ( | {
+         'Category: body\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         moduleHolderModel = ( |
+            | unusual).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'colorSchemes' -> 'default46' -> () From: ( | {

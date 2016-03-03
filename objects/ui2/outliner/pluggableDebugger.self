@@ -1,8 +1,9 @@
  '$Revision: 30.38 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -391,7 +392,7 @@ e.g. Self or Klein. -- dmu 1/02\x7fModuleInfo: Creator: globals generalProcessMo
         
          anotherCommandButtonSpacer = ( |
             | 
-            spacerMorph copyH: 5 Color: myOutliner color).
+            transparentSpacerMorph copyH: 5).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalProcessModel' -> 'parent' -> () From: ( | {
@@ -422,7 +423,7 @@ e.g. Self or Klein. -- dmu 1/02\x7fModuleInfo: Creator: globals generalProcessMo
               r addMorphLast: buildCommandButton: ls.
               i  =  cbc size pred  ifFalse: [ r addMorphLast: anotherCommandButtonSpacer ].
             ].
-            r addMorphLast: spacerMorph copy beFlexible color: myOutliner color.
+            r addMorphLast: transparentSpacerMorph copy beFlexible.
             r).
         } | ) 
 

@@ -3,6 +3,7 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -300,12 +301,11 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
 
             r: rowMorph copy.
             r beShrinkWrap.
-            r color: myOutliner color.
+            r color: paint named: 'transparent'.
             r borderWidth: 0.
 
             r addMorphLast: buildTitleFor: activation.
             t: labelMorph copy.
-            "t color: color."
             t label: ' in: '.
             t fontSpec: globals fontSpec copyName: 'verdana' Size: fontSpec size Style: 'italic'.
             r addMorphLast: t.
@@ -335,14 +335,14 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
             "build big old title:"
             " a row: rcvrCol sp selCol sp argCol sp argObjCol"
 
-            outerRow: rowMorph copy topJustify beShrinkWrap borderWidth: 0.
+            outerRow: (rowMorph copy topJustify beShrinkWrap borderWidth: 0) color: paint named: 'transparent'.
 
-            selCol: columnMorph copy beShrinkWrap rightJustify borderWidth: 0.
+            selCol: (columnMorph copy beShrinkWrap rightJustify borderWidth: 0) color: paint named: 'transparent'.
             argCol: selCol copy leftJustify.
 
             outerRow addMorph: objectPushButton copyMirror: (act receiverIfFail: [|:e| reflect: 'no receiver: ', e])
                                                      Color: myOutliner color.
-            sp: spacerMorph copyH: 4 Color: myOutliner color.
+            sp: transparentSpacerMorph copyH: 4.
 
             (selector copyStr: act selector) keywords
               with: (act asList  copyFilteredBy: [|:s| s isArgument] )
@@ -361,8 +361,6 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
             " outerRow addMorphLast: sp copy. "
             outerRow addMorphLast: argCol.
 
-            outerRow colorAll: myOutliner color.
-
             outerRow).
         } | ) 
 
@@ -376,7 +374,7 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
             | 
             r: rowMorph copy.
             r beShrinkWrap.
-            r color: myOutliner color.
+            r color: paint named: 'transparent'.
             r borderWidth: 0.
 
             r addMorphLast: 
@@ -399,7 +397,7 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
                 sel keywords with: args Do: [ | :kw. :arg. |
                   r addMorphLast: labelMorphForTitle: '  ', kw, ' '.
                   r addMorphLast: labelMorphForTitle: arg name.
-                  r addMorphLast: spacerMorph copyH: 2 Color: myOutliner color.
+                  r addMorphLast: transparentSpacerMorph copyH: 2.
                   r addMorphLast: objectPushButton copyMirror: arg value Color: myOutliner color.
               ].
             ].

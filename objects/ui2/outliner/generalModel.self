@@ -3,6 +3,7 @@
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -492,7 +493,7 @@ I use:
             | 
             needSpacerToKeepButtonOnRight ifFalse: [^ self].
             myOutliner header addMorphLast:
-              spacerMorph copy beFlexible color: myOutliner color.
+              transparentSpacerMorph copy beFlexible.
             self).
         } | ) 
 

@@ -1,8 +1,9 @@
  '$Revision: 1.3 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -382,7 +383,7 @@ SlotsToOmit: parent prototype.
         
          buildSpacer = ( |
             | 
-            spacer: spacerMorph copyH: 0 Color: color).
+            spacer: transparentSpacerMorph copyH: 0).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'operandSelectorsMorph' -> 'operandSelector' -> 'parent' -> () From: ( | {

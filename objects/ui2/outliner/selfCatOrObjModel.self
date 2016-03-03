@@ -136,9 +136,9 @@ SlotsToOmit: parent.
                               FontSpec: moduleSummaryFontSpec
                                  Color: moduleSummaryFontColor.
             safelyDo: [
-              myOutliner addItemFirst: spacerMorph copyV: 4.
+              myOutliner addItemFirst: transparentSpacerMorph copyV: 4.
               myOutliner addItemFirst: moduleSummary.
-              myOutliner addItemFirst: spacerMorph copyV: 4].
+              myOutliner addItemFirst: transparentSpacerMorph copyV: 4].
             self).
         } | ) 
 

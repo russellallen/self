@@ -346,14 +346,14 @@ just return a copy of this object. -- Adam & Alex, 4/04\x7fModuleInfo: Module: i
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
          'Category: split and join\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
         
-         joinUsing: c = ( |
+         joinUsing: seq = ( |
              nc.
             | 
             nc: first copyRemoveAll.
-            do: [|:e| nc: nc, e, c].
+            do: [|:e| nc: nc, e, seq].
             nc isEmpty
-             ifTrue: [ nc copy ]
-              False: [ nc copyWithoutLast ]).
+             ifTrue: [ nc ]
+              False: [ nc copyFrom: 0 UpTo: nc size - seq size ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
@@ -509,8 +509,27 @@ and insert the specified new stuff in its place.\x7fModuleInfo: Module: indexabl
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
          'Category: split and join\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
         
-         splitOn: o = ( |
-            | asTokensSeparatedByItemsSatisfying: [|:i| o = i]).
+         splitOn: seq = ( |
+             i.
+             l.
+             p.
+            | 
+            l: list copyRemoveAll.
+            l add: 0.
+            i: 0.
+            [i < size] whileTrue: [
+              findSubstring: seq
+                 StartingAt: i
+                  IfPresent: [|:in| l add: in. i: in + 1]
+                   IfAbsent: [i: size]].
+            l add: size. 
+            p: sequence copyRemoveAll.
+            p add: (copyFrom: 0 UpTo: (l at: 1)).
+            i: 1.
+            [i < (l size - 1)] whileTrue: [
+              p add: (copyFrom: (l at: i) + seq size UpTo: (l at: i + 1)).
+              i: i + 1].
+            p).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {

@@ -1,8 +1,9 @@
  '$Revision: 30.11 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -79,31 +80,31 @@ SlotsToOmit: parent prototype.
             line beFlexibleHorizontally.
             line beRigidVertically.
 
-            titleR: rowMorph copy color: color.
+            titleR: rowMorph copy color: paint named: 'transparent'.
             titleR borderWidth: 0.
             titleR beFlexible.
             titleR addAllMorphs: (
                 (line copy beRigid setWidth: 15)          &
-                (spacerMorph copyH: 5 Color: color)       &
+                (transparentSpacerMorph copyH: 5)       &
                 (labelMorph copyLabel: title
                     FontSpec: (outlinerPreferences mediumFontSpec copyName: 'verdana' Style: 'italic')
                     Color:    paint named: 'black')       &
-                (spacerMorph copyH: 5 Color: color)       &
+                (transparentSpacerMorph copyH: 5)       &
                 line copy) asVector.
 
-            entriesC: columnMorph copy beFlexible color: color.
+            entriesC: columnMorph copy beFlexible color: paint named: 'transparent'.
             entriesC borderWidth: 0.
             entriesC addAllMorphs: buildPropertyEntries.
 
-            entriesR: rowMorph copy beFlexible color: color.
+            entriesR: rowMorph copy beFlexible color: paint named: 'transparent'.
             entriesR borderWidth: 0.
             entriesR addAllMorphs:
                 ((spacerMorph copyH: 6 Color: color) & entriesC) asVector.
 
             addAllMorphs: (
-                (spacerMorph copyV: 5 Color: color) &
+                (transparentSpacerMorph copyV: 5) &
                 titleR                              &
-                (spacerMorph copyV: 3 Color: color) &
+                (transparentSpacerMorph copyV: 3) &
                 entriesR) asVector.
             self).
         } | ) 
@@ -131,13 +132,13 @@ SlotsToOmit: parent prototype.
             labelM: labelMorph copyLabel: s
                 FontSpec: ( outlinerPreferences mediumFontSpec copyName: 'verdana' )
                 Color:    (paint named: 'black').
-            r: rowMorph copy color: color.
+            r: rowMorph copy color: paint named: 'transparent'.
             r borderWidth: 0.
             r beFlexible.
             r baseMinHeight: (outlinerPreferences mediumFontSize + 6).
             r addAllMorphs: (
                 labelM &
-                ((spacerMorph copy beFlexible color: color) baseMinWidth: 5) &
+                ((transparentSpacerMorph copy beFlexible) baseMinWidth: 5) &
                 contentM) asVector.
             r).
         } | ) 

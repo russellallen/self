@@ -1,8 +1,9 @@
  '$Revision: 30.10 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -146,6 +147,14 @@ SlotsToOmit: parent.
          'ModuleInfo: Module: sliceGroupModel InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalSliceGroupModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: sliceGroupModel InitialContents: FollowSlot'
+        
+         preferredBodyColor = ( |
+            | 
+            preferences outliner colorScheme generalSliceModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalSliceGroupModel' -> 'parent' -> () From: ( | {

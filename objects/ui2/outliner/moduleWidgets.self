@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.10 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -208,19 +209,19 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             r borderWidth: 0.
 
             r addMorphLast: buildLabel: lst removeFirst Style: style.
-            r addMorphLast: spacerMorph copyH: 13 Color: color.
+            r addMorphLast: transparentSpacerMorph copyH: 13.
 
             [lst isEmpty] whileFalse: [|b|
               lst first isEmpty ifTrue: [ lst removeFirst ]
               False: [
                 r addMorphLast: buildLabel: lst removeFirst Style: style.
-                r addMorphLast: spacerMorph copyH: 2 Color: color.
+                r addMorphLast: transparentSpacerMorph copyH: 2.
               ].
               b: radioButton copyTarget: self Action: lst removeFirst Style: style.
               r addMorphLast: b.
               lst removeFirst, ':' sendTo: self With: b.
               lst isEmpty ifFalse: [
-                r addMorphLast: spacerMorph copyH: 10 Color: color.
+                r addMorphLast: transparentSpacerMorph copyH: 10.
               ].
             ].
 
@@ -558,7 +559,7 @@ SlotsToOmit: parent prototype.
             addMorphLast: 
               (labelMorph copyLabel: lab)
                            fontSpec: style fontSpec.
-            addMorphLast: spacerMorph copyH: 5 Color: style color.
+            addMorphLast: transparentSpacerMorph copyH: 5.
             f: frameMorph copy beShrinkWrap color: style color.
             f borderWidth: 2.
             f frameStyle: f insetBezelStyle.
@@ -830,7 +831,7 @@ SlotsToOmit: parent prototype.
 
             buildCompleteButtons.
 
-            contentsColumn addMorphLast: spacerMorph copyV: 5 Color: color.
+            contentsColumn addMorphLast: transparentSpacerMorph copyV: 5.
             buildCopyDownInfo.
             colorAll: myObjectOutliner color.
 
@@ -1118,11 +1119,11 @@ SlotsToOmit: parent prototype.
             ].
             r addMorphLast: followField.
 
-            r addMorphLast: spacerMorph copyH: 5 Color: color.
+            r addMorphLast: transparentSpacerMorph copyH: 5.
             r addMorphLast: buildLabel: 'Follow' Style: style.
             array addMorphLast: r.
 
-            array addMorphLast: spacerMorph copyH: 5 Color: color.
+            array addMorphLast: transparentSpacerMorph copyH: 5.
 
             "InitializeToExpression"
             r: (rowMorph copy beShrinkWrap color: color) borderWidth: 0.
@@ -1137,7 +1138,7 @@ SlotsToOmit: parent prototype.
             ] False: [ str: '' ].
             r addMorphLast: initializeField.
 
-            r addMorphLast: spacerMorph copyH: 5 Color: color.
+            r addMorphLast: transparentSpacerMorph copyH: 5.
             initializeEditor: moduleField copyLabel: 'Initialize to'
                                              String: str
                                               Style: style

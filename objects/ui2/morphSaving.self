@@ -1320,6 +1320,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             | textViewerMorph).
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'transparentSpacerMorph' -> () From: ( | {
+         'Category: filing out\x7fModuleInfo: Module: morphSaving InitialContents: FollowSlot\x7fVisibility: public'
+        
+         prototype = ( |
+            | 
+            transparentSpacerMorph).
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'trashCanExpandedMorph' -> () From: ( | {
          'Category: filing out\x7fModuleInfo: Module: morphSaving InitialContents: FollowSlot\x7fVisibility: public'
         

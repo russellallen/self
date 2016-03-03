@@ -579,7 +579,6 @@ use hold  for mac menu
             | 
             model expand: evt.
             i: model newOutlinerForAddingSlot.
-            i colorAll: color.
             model addNewSlotOutliner: i.
             i editWholeThing: evt.
             items layoutChanged.
@@ -637,11 +636,12 @@ boxedItems.\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot
             body  borderWidth: 0.
             body  baseMinHeight: 0.
             body  beFlexible.
+            body  color: paint named: 'transparent'.
 
             buildItemsHolder.
 
             indentSubParts ifTrue: [
-              body addMorphLast: rigidSpacer copy color: (paint named: 'transparent')
+              body addMorphLast: rigidSpacer copy
             ].
             body addMorphLast: items.
             recolor.
@@ -676,6 +676,7 @@ boxedItems.\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot
          buildHeader = ( |
             | 
             header: rowMorph copy removeAllMorphs beFlexible borderWidth: 0.
+            header color: paint named: 'transparent'.
             header borderWidth: 4.
             fillInHeader.
             header).
@@ -686,7 +687,7 @@ boxedItems.\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot
         
          buildSpacer = ( |
             | 
-            spacerMorph copyH: 2).
+            transparentSpacerMorph copyH: 2).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'pluggableOutliner' -> 'parent' -> () From: ( | {
@@ -1359,7 +1360,7 @@ Same for collapse:, expandAll: collapseAll: -- dmu 4/1\x7fModuleInfo: Module: pl
          newColumn = ( |
             | 
             ((columnMorph copy leftJustify
-            color: color)
+            color: paint named: 'transparent')
             borderWidth: 0)
             baseMinHeight: 0).
         } | ) 
@@ -1443,17 +1444,20 @@ Same for collapse:, expandAll: collapseAll: -- dmu 4/1\x7fModuleInfo: Module: pl
               m findMorphWithLabel ifNil: false IfNotNil: [|:l|
                  l color: model preferredTitleColor ]]].
             commentButton 
-               colorButtonBackground: model preferredBodyColor
+               colorButtonBackground: model preferredHeaderColor
                           Foreground: model preferredTitleColor.
             titleEditor ifNotNil: [ titleEditor labelColor: model preferredTitleColor].
-            color: model preferredBorderColor.
             body ifNotNil: [body color: model preferredBodyColor].
             items ifNotNil: [items recolor].
             model recolorModuleSummary.
             "Tags only at top level"
             isRoot
-               ifTrue: [tag color: model preferredTagColor]
-                False: [tag color: model preferredBodyColor].
+               ifTrue: [
+                  color: model preferredBorderColor.
+                  tag color: model preferredTagColor]
+                False: [
+                  tag color: model preferredBodyColor.
+                  color: model preferredBodyColor].
             expander color: model preferredTitleColor.
             bottomMorphs ifNotNil: [bottomMorphs morphsDo: [|:m| m recolor]].
             self).
