@@ -253,12 +253,6 @@ SlotsToOmit: setModule.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfSlotModel' -> 'parent' -> () From: ( | {
-         'Category: copy-down slots\x7fModuleInfo: Module: selfSlotModel InitialContents: FollowSlot'
-        
-         copyDownColor = paint copyRed: 0.86999 Green: 0.820137  Blue: 0.820137.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfSlotModel' -> 'parent' -> () From: ( | {
          'Category: editing whole thing\x7fModuleInfo: Module: selfSlotModel InitialContents: FollowSlot\x7fVisibility: private'
         
          copySlotsWithCategoriesSetForAdding: mirr = ( |
@@ -360,18 +354,6 @@ SlotsToOmit: setModule.
             slot isNotNil && [slot isCopiedDown]
               ifTrue: [ preferences outliner colorScheme copiedDownSlotBody ]
                False: [ preferences outliner colorScheme normalSlotBody ]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfSlotModel' -> 'parent' -> () From: ( | {
-         'Category: copy-down slots\x7fModuleInfo: Module: selfSlotModel InitialContents: FollowSlot\x7fVisibility: public'
-        
-         preferredColor = ( |
-             c.
-            | 
-            c: resend.preferredColor.
-            slot isNotNil && [slot isCopiedDown]
-              ifTrue: [copyDownColor]
-               False: [c]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfSlotModel' -> 'parent' -> () From: ( | {
