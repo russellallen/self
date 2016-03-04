@@ -1,8 +1,9 @@
  '$Revision: 30.12 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -352,6 +353,16 @@ SlotsToOmit: setModule.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfSlotModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: selfSlotModel InitialContents: FollowSlot'
+        
+         preferredBodyColor = ( |
+            | 
+            slot isNotNil && [slot isCopiedDown]
+              ifTrue: [ preferences outliner colorScheme copiedDownSlotBody ]
+               False: [ preferences outliner colorScheme normalSlotBody ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfSlotModel' -> 'parent' -> () From: ( | {
          'Category: copy-down slots\x7fModuleInfo: Module: selfSlotModel InitialContents: FollowSlot\x7fVisibility: public'
         
          preferredColor = ( |
@@ -361,6 +372,16 @@ SlotsToOmit: setModule.
             slot isNotNil && [slot isCopiedDown]
               ifTrue: [copyDownColor]
                False: [c]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfSlotModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: selfSlotModel InitialContents: FollowSlot'
+        
+         preferredHeaderColor = ( |
+            | 
+            slot isNotNil && [slot isCopiedDown]
+              ifTrue: [ preferences outliner colorScheme copiedDownSlotBody ]
+               False: [ preferences outliner colorScheme normalSlotBody ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfSlotModel' -> 'parent' -> () From: ( | {
