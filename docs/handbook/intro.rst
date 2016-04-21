@@ -37,7 +37,7 @@ This section contains an overview of the system and its implementation; it can b
 Although Self runs as a single UNIX [#f1]_ process, or a single Macintosh application, it really has two parts: the *virtual machine* (VM) and the *Self world*, the collection of Self objects that are the Self prototypes and programs:
 
 ..  figure:: images/Chapter_1_Figure_1.*
-    :scale: 80
+    :scale: 60
 
     The Self system
 

@@ -1,3 +1,6 @@
+
+.. _pp-primitives:
+
 Primitives
 ==========
 
