@@ -61,12 +61,12 @@ def doctree_resolved(app, doctree, docname):
                 if refnode.astext() == text:
                     anchorname = refnode['anchorname']
 
+            if anchorname is None:
+                continue
+
             # hack to allow § in the link description
             refid = child.parent.parent.attributes.get("refid", "")
             prefix = u"§" if refid.startswith("pp-") else ""
-
-            if anchorname is None:
-                continue
 
             linktext = '.'.join(map(str, secnum[anchorname]))
             child.parent.replace(child, nodes.Text(prefix + linktext))
