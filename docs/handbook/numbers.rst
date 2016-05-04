@@ -33,11 +33,11 @@ including::
 
 Relevant oddballs:
 
-    * infinity IEEE floating-point infinity
+    * ``infinity`` IEEE floating-point infinity
 
-    * minSmallInt smallest smallInt in this implementation
+    * ``minSmallInt`` smallest ``smallInt`` in this implementation
 
-    * maxSmallInt biggest smallInt in this implementation
+    * ``maxSmallInt`` biggest ``smallInt`` in this implementation
 
 Modules: number, float, integer, smallInt, bigInt
 

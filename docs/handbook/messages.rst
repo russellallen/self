@@ -18,7 +18,7 @@ selector and two arguments::
 
 .. note::
 
-    Primitives such as _Print cannot be sent in the current system.
+    Primitives such as ``_Print`` cannot be sent in the current system.
 
 A selector, receiver, delegatee, methodHolder, and arguments can be bundled together in a ``message``
 object. The message gets ``sent`` when the message object receives the send message. Message

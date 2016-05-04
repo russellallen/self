@@ -37,7 +37,7 @@ for typed-in commands, and so it is called the shell. If the shell is not alread
 screen, you can summon it by pressing the middle mouse button on the background and selecting
 ``shell``.
 
-..  figure:: images/Pgm_Env_Image1.*
+.. figure:: images/Pgm_Env_Image1.*
     :scale: 80
 
 
@@ -45,11 +45,19 @@ Outliners sport three small buttons in the top-right-hand corner labeled “/\\�
 and “X”. These buttons summon the object’s parents, add an evaluator text region to the bottom of
 the outliner, and dismiss the outliner. Press the “E” button to get an evaluator.
 
-Type ``anExampleObject`` into the evaluator (it will already be selected) and hit the ``Get it`` button
+Type ``anExampleObject`` into the evaluator (it will already be selected) and hit the *Get it* button
 (or type metareturn on UNIX, or command-return on MacOS X):
 
-..  figure:: images/Pgm_Env_Image2.*
-    :scale: 80
+
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image2.*
+      :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image2.*
+      :scale: 50
 
 The result object appears in your “hand” raised above the screen as if you were dragging it with the
 left button.
@@ -62,8 +70,15 @@ left button.
 
 Click the button to set it down.
 
-..  figure:: images/Pgm_Env_Image3.*
-    :scale: 80
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image3.*
+      :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image3.*
+      :scale: 50
 
 As with most other things on the Self screen, the left button picks it up and moves it. (For buttons
 and other things that use left-button for other purposes, you can grab them with marquee selection
@@ -74,12 +89,23 @@ Expand and Collapse
 
 Left-click on the triangle [#f1]_ to expand the object and see more information:
 
-..  figure:: images/Pgm_Env_Image4.*
-    :scale: 80
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image4.*
+      :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image4.*
+      :scale: 50
 
 Now it shows a summary of modules containing the slots in this object (just ``programmingExamples``
 here), four slots, and a category containing more slots, although those slots are not shown
 yet.
+
+.. raw:: latex
+
+  \newpage
 
 Categories
 ----------
@@ -87,13 +113,27 @@ Categories
 Clicking the top triangle now would collapse this object outliner, but instead look inside the category
 by clicking its triangle:
 
-..  figure:: images/Pgm_Env_Image5.*
-    :scale: 80
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image5.*
+      :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image5.*
+      :scale: 50
 
 And, one more click expands the subcategory:
 
-..  figure:: images/Pgm_Env_Image6.*
-    :scale: 80
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image6.*
+      :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image6.*
+      :scale: 50
 
 Slots
 -----
@@ -113,11 +153,18 @@ slot named ``aCategorizedVariable``: containing the assignment primitive.)
 
 To look at the object contained in a data (constant or assignable) slot, just click on its icon. But if
 the slot is a method, clicking its icon opens up a text editor on its source. For example, clicking on
-the icon at the right of the whoAmI box opens a text editor displaying its source (and typing control-L
+the icon at the right of the ``whoAmI`` box opens a text editor displaying its source (and typing control-L
 widens the object to show all the text in the selected window):
 
-..  figure:: images/Pgm_Env_Image7.*
-    :scale: 70
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image7.*
+      :scale: 70
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image7.*
+      :scale: 50
 
 .. raw:: latex
 
@@ -131,8 +178,15 @@ that this editor is the current typing focus: no matter where the mouse is you c
 A left-click on another editor will select that one as the typing focus, and to indicate that it is
 no longer the focus, this editor’s background will change to match the outliner:
 
-..  figure:: images/Pgm_Env_Image8.*
-    :scale: 80
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image8.*
+      :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image8.*
+      :scale: 50
 
 The white triangle in the lower-right corner of the editor (which can barely be seen in the printout
 of this document) can be dragged to resize the editor.
@@ -140,15 +194,29 @@ of this document) can be dragged to resize the editor.
 Someone has done a poor job of indenting this method, so fix it by clicking to the left of the capital–
 I and deleting two spaces:
 
-..  figure:: images/Pgm_Env_Image9.*
-    :scale: 65
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image9.*
+      :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image9.*
+      :scale: 50
 
 The red and green buttons that just appeared indicate the text has been changed; it no longer reflects
 the source code of the real method. Hitting the red button will cancel the changes, while hitting
 the green button will accept them and change the method:
 
-..  figure:: images/Pgm_Env_Image10.*
-    :scale: 60
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image10.*
+      :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image10.*
+      :scale: 50
 
 Self text editors will honor the cursor arrow keys, the copy, paste, and cut Sun keys, and
 many emacs-style control characters:
@@ -214,9 +282,9 @@ desktop:
 
 * Drag it to the trash: left-drag on the outliner till the mouse is over the trash can, |trashcan| then release the mouse-button.
 
-* Dismiss it via the right-button menu: hold down the right button over the outliner, move to the Dismiss button, then release.
+* Dismiss it via the right-button menu: hold down the right button over the outliner, move to the *Dismiss* button, then release.
 
-* The Carpet Morph: start above (or below) and to the left (or to the right) of the outliner, over the background. Hold down the left button and sweep out an area that completely contains the outliner, then release the left button. The outliner should now be surrounded by a rectangle. Use the middle mouse button inside the rectangle to select ``Dismiss``.
+* The Carpet Morph: start above (or below) and to the left (or to the right) of the outliner, over the background. Hold down the left button and sweep out an area that completely contains the outliner, then release the left button. The outliner should now be surrounded by a rectangle. Use the middle mouse button inside the rectangle to select *Dismiss*.
 
 The last two methods, dismissing from the right-button menu, and marquee selection with the carpet
 morph, come in especially handy with things like buttons and menus because such morphs cannot
@@ -229,7 +297,7 @@ Many other operations are available on the outliner by using the middle-button m
 the outliner to be affected. For example anExampleObject has many regions and here are some
 of them:
 
-..  figure:: images/Pgm_Env_Image11.*
+.. figure:: images/Pgm_Env_Image11.*
 
 Click on the desired part of the object, be it object, category, slot, text editor, or annotation (annotations
 will be explained later).
@@ -243,15 +311,15 @@ The Evaluator
 
 Try out the ``whoAmI`` method. Push the “E” button in the top-right of the outliner:
 
-..  figure:: images/Pgm_Env_Image12.*
+.. figure:: images/Pgm_Env_Image12.*
     :scale: 55
 
-The receiver of any messages sent from an evaluator, or indeed any text editor (via ``Do It`` and ``Get It``
+The receiver of any messages sent from an evaluator, or indeed any text editor (via *Do It* and *Get It*
 in the editor’s middle-button menu) in an object outliner is the object itself. [#f2]_ Type ``whoAmI`` into
-the evaluator and hit the Get it button (or select the Get It from the text editor menu), to send
+the evaluator and hit the Get it button (or select the *Get It* from the text editor menu), to send
 the message and get back the result:
 
-..  figure:: images/Pgm_Env_Image13.*
+.. figure:: images/Pgm_Env_Image13.*
     :scale: 55
 
 Move the result [#f3]_ out of the way and left-click to set it down.
@@ -266,22 +334,58 @@ Adding a slot
 Try one more change: adding a slot to the category “``a category of slots``.” Hold the cursor
 over the words a ``category of slots`` and select ``Add Slot`` from the middle-button menu.
 
-..  figure:: images/Pgm_Env_Image14.*
-    :scale: 80
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image14.*
+      :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image14.*
+      :scale: 50
 
 After selecting Add Slot a space for a new slot will appear in the object:
 
-..  figure:: images/Pgm_Env_Image15.*
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image15.*
+        :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image15.*
+        :scale: 50
+
+.. raw:: latex
+
+  \newpage
 
 Each line shows the syntax for a different kind of slot. Create a simple variable by typing
 ``me<-’Gumby’`` [#f4]_ and hitting the green button to accept the change:
 
-..  figure:: images/Pgm_Env_Image16.*
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image16.*
+          :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image16.*
+          :scale: 50
 
 After releasing the green button, it stays down to let you know that it is still working. After a few
 seconds the slot appears: [#f5]_
 
-..  figure:: images/Pgm_Env_Image17.*
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image17.*
+      :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image17.*
+      :scale: 50
+
 
 .. raw:: latex
 
@@ -293,22 +397,45 @@ Debugger
 Explore the Self debugger. Start by scrambling the send to ``environmentVariable:IfFail:`` as
 if you had misspelled it.
 
-..  figure:: images/Pgm_Env_Image18.*
-    :scale: 80
+.. only:: html
 
-Press the green button to accept the change, then hit the ``Get it`` button. This should break something!
+  .. figure:: images/Pgm_Env_Image18.*
+      :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image18.*
+      :scale: 50
+
+Press the green button to accept the change, then hit the *Get it* button. This should break something!
 In fact, instead of the result of the message, a Self debugger will materialize:
 
-..  figure:: images/Pgm_Env_Image19.*
-    :scale: 80
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image19.*
+      :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image19.*
+      :scale: 50
 
 The debugger has a label to indicate which process ran aground, a status indication shown in blue,
 some buttons for controlling the process, and a collapsed outliner for the stack. Expand the stack:
 
-..  figure:: images/Pgm_Env_Image20.*
-    :scale: 80
+.. only:: html
 
-    Expanded stack.
+  .. figure:: images/Pgm_Env_Image20.*
+      :scale: 80
+
+      Expanded stack.
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image20.*
+      :scale: 50
+
+      Expanded stack.
 
 The stack filters out uninteresting frames by default [#f6]_. The debugger assumes that the first method
 you want to see is the one based on the text in the evaluator, and since the stack grows upwards this
@@ -321,7 +448,7 @@ The little boxes represent the receiver and arguments of the methods on the stac
 of the evnironment... message. Click on the box to the left of the word ``evnironmentVariable:``
 (the one labelled “``...bal os``” if you are running on the Macintosh):
 
-..  figure:: images/Pgm_Env_Image21.*
+.. figure:: images/Pgm_Env_Image21.*
     :scale: 80
 
     Outliner with interface to the Macintosh.
@@ -330,54 +457,58 @@ This object represents the interface to the Macintosh operating system. The litt
 apostrophe in the top-left-hand corner indicates that this object has a comment. Push the button to
 show (or hide) the comment:
 
-.. only:: not latex
+.. only:: html
 
-  ..  figure:: images/Pgm_Env_Image22.*
+    .. figure:: images/Pgm_Env_Image22.*
 
-.. only:: latex
+.. only:: not html
 
-  ..  figure:: images/Pgm_Env_Image22.*
-      :scale: 70
+    .. figure:: images/Pgm_Env_Image22.*
+        :scale: 50
 
 (To automatically resize the outliner to show all the text, press control-L.) To see one of Self’s
 scroll bars, grab the comment’s resize triangle (with the left-button) and move it up a bit:
 
-.. only:: not latex
+.. only:: html
 
-  ..  figure:: images/Pgm_Env_Image23.*
+  .. figure:: images/Pgm_Env_Image23.*
 
-.. only:: latex
+.. only:: not html
 
-  ..  figure:: images/Pgm_Env_Image23.*
-      :scale: 80
-
-.. raw:: latex
-
-  \newpage
+  .. figure:: images/Pgm_Env_Image23.*
+      :scale: 60
 
 The affordance that appears on the right of the text is the scroll bar, and you can either drag on the
 little black line or just click in the bar to scroll the text up or down.
 
 Push the little apostrophe button again to hide the comment. Now, you could expand this object to
-find the correct spelling of the evnironment... message. But instead, pretend that all you remember
-is that it has the word “Variable” in it somewhere. So, use a facility called ``Find Slot`` that takes
+find the correct spelling of the “*evnironment...*” message. But instead, pretend that all you remember
+is that it has the word “Variable” in it somewhere. So, use a facility called *Find Slot* that takes
 a pattern and an object, and finds any matching slots in that object or its parents. Use the middlebutton
-on the outliner’s title (``macOSGlobals os``) to get the object menu and select ``Find slot``...
+on the outliner’s title (``macOSGlobals os``) to get the object menu and select *Find slot*:
 
-.. only:: not latex
+.. only:: html
 
-  ..  figure:: images/Pgm_Env_Image24.*
+  .. figure:: images/Pgm_Env_Image24.*
 
-.. only:: latex
+.. only:: not html
 
-  ..  figure:: images/Pgm_Env_Image24.*
-      :scale: 80
+  .. image:: images/Pgm_Env_Image24.*
+        :align: center
+        :scale: 60
 
 Double-click on the word “foo\*” to select that field for editing. (The same trick works on slot
 names)
 
-..  figure:: images/Pgm_Env_Image25.*
-    :scale: 80
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image25.*
+
+.. only:: not html
+
+  .. image:: images/Pgm_Env_Image25.*
+        :scale: 60
+        :align: center
 
 Since we are searching for a method with “Variable” in its name, backspace (the delete key on the
 Mac) three times [#f7]_ to erase the “foo” type in “\*Variable\*“, hit the green button, and then hit the
@@ -385,19 +516,29 @@ triangle to start the search (if you make a typing mistake, you can double click
 editable again). The triangle will blink a bit while it is searching (one could do other things in the
 meantime during a long search), then the enumerator will show the match(es):
 
-..  figure:: images/Pgm_Env_Image26.*
-      :scale: 80
+.. only:: html
 
-.. raw:: latex
+  .. figure:: images/Pgm_Env_Image26.*
 
-  \newpage
+.. only:: not html
+
+  .. image:: images/Pgm_Env_Image26.*
+        :scale: 60
+        :align: center
 
 Clicking on the little square button(s) would show the exact method(s). But, for our purposes, just
 knowing the name is enough and now you have to fix it. So back to the debugger and click on the
 method button on the right in the ``whoAmI`` slot to expand the stack frame for the ``whoAmI`` method:
 
-..  figure:: images/Pgm_Env_Image27.*
-      :scale: 80
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image27.*
+        :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image27.*
+        :scale: 50
 
 Now the debugger shows the source of the method, with the actual message being sent highlighted.
 (In this case it is just the whole thing.) One of the conveniences in the Self programming environment
@@ -409,29 +550,40 @@ slot pointing to that same method is made to feel the change—the method is cha
 the figure below). This feature lets you change a method in a clone and simultaneously affect the
 
 .. _figPrototype:
-..  figure:: images/Pgm_Env_Image28.*
-      :scale: 80
+.. image:: images/Pgm_Env_Image28.*
+    :align: center
 
-      Situation after change.
-
-prototype (see :numref:`figPrototype`, if you are putting your methods in prototypes instead of traits. Changing a method in an
+prototype, if you are putting your methods in prototypes instead of traits. Changing a method in an
 ordinary outliner would just affect that one object, even if other objects had been cloned from it.
 This rule avoids unintentional changes. The more global kind of change performed by the debugger
 takes a little longer. When it is accomplished, the red and green buttons will disappear:
 
-..  figure:: images/Pgm_Env_Image29.*
-    :scale: 80
+.. only:: html
 
-.. raw:: latex
+  .. figure:: images/Pgm_Env_Image29.*
+      :scale: 80
 
-  \newpage
+.. only:: not html
 
-Now os is highlighted to show that the process is about to send “os” to implicit-self. Try the ``Step``
+  .. image:: images/Pgm_Env_Image29.*
+      :scale: 50
+      :align: center
+
+
+Now ``os`` is highlighted to show that the process is about to send “os” to implicit-self. Try the ``Step``
 button, which performs a single message send. After hitting the ``Step`` button twice (and a control-
 L to widen the debugger), the process will have entered the ``environmentVariable:IfFail:`` method:
 
-..  figure:: images/Pgm_Env_Image30.*
-    :scale: 80
+.. only:: html
+
+  .. figure:: images/Pgm_Env_Image30.*
+      :scale: 80
+
+.. only:: not html
+
+  .. image:: images/Pgm_Env_Image30.*
+      :scale: 50
+      :align: center
 
 This method is not too interesting (especially on the Macintosh), so leave the debugger by hitting
 ``Continue`` and letting the process finish.
@@ -479,10 +631,14 @@ middle-button menu:
   |   Finish          |    Finish this frame.                                                            |
   +-------------------+----------------------------------------------------------------------------------+
 
+.. raw:: latex
+
+  \newpage
+
 Enumerators
 ===========
 
-In addition to the ``Find Slot`` enumerator, Self has other ways to find things:
+In addition to the *Find Slot* enumerator, Self has other ways to find things:
 
 .. table:: Enumerators
 
@@ -527,8 +683,8 @@ get an Implementors enumerator ready to search for ``findFirst:IfPresent:IfAbsen
 course, you can always change the search target by double-clicking and editing the text. The text
 editors also implement a host of handy double-clicking shortcuts.
 
-Finally there is one last detail about enumerations: many contain a check-box to choose ``Wellknown
-only``. This is always checked by default to speed things up. When checked, only wellknown
+Finally there is one last detail about enumerations: many contain a check-box to choose *Wellknown
+only*. This is always checked by default to speed things up. When checked, only wellknown
 (i.e. filed-out, see below) objects are searched, which is much faster.
 
 ***************
@@ -616,7 +772,7 @@ outliners and debuggers. In addition Self has many other ways to change an objec
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                                                        |    **Annotate a slot**                                                                                                                                                                                                                          |                                                                                                                                                                                                                                 |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|   Set the module memmbership of a slot, the slots in a |    Select “Set Module” from the middle menu of a slot, category, or object, then (for object or category) indicate which slots you want to change by choosing which module they currently belong to, finally select a                           |    To ensure that slots are filled out in the correct source file.                                                                                                                                                              |
+|   Set the module membership of a slot, the slots in a  |    Select “Set Module” from the middle menu of a slot, category, or object, then (for object or category) indicate which slots you want to change by choosing which module they currently belong to, finally select a                           |    To ensure that slots are filled out in the correct source file.                                                                                                                                                              |
 |   category, or the slots in an object.                 |    new module to put the slots in.                                                                                                                                                                                                              |                                                                                                                                                                                                                                 |
 +--------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |   Type in or examine the module for a single slot.     |    “Show Annotation” on the slot middle menu to expose the annotation, then click on the module editor, type in the module name, then click the green accept button.                                                                            |    Save as above.                                                                                                                                                                                                               |
@@ -701,32 +857,37 @@ in different modules, the outliner shows a summary of the modules of an object, 
 
 Turned around, a module can be viewed as a collection of slots, plus some other information: each
 module also includes a directory, a list of submodules to be read in whenever it is read, and
-``post-FileIn`` method to be run whenever the module is read. These data allow modules to be organized
-hierarchically by subsystem, for example the allUI2 module includes all the modules in the ui2
+*post-FileIn* method to be run whenever the module is read. These data allow modules to be organized
+hierarchically by subsystem, for example the ``allUI2`` module includes all the modules in the ``ui2``
 system.
 
 Now here comes the nice part: the Self environment incrementally maintains a mapping from modules
 to slots, and a list of changed modules, which can be obtained from the background menu.
 When you make a change the appropriate module will be added to the list, and can be written as a
-source file by clicking its w button. The middle-button menu on the changed modules and individual
+source file by clicking its '*W*‘ button. The middle-button menu on the changed modules and individual
 modules contains a host of useful entries for understanding what has been changed.
 
 What to Save for the Contents of a Slot
 =======================================
 
-At this point, the reader may be thinking “So modules know which slots they include, but how do
-they know which objects to include?” After all, when the transporter saves a slot in a file what can
+At this point, the reader may be thinking *“So modules know which slots they include, but how do
+they know which objects to include?”* After all, when the transporter saves a slot in a file what can
 it put for the contents of the slot? Here is where the transporter runs smack into the problem of not
 enough information, and a variety of means have to be used. As shown in the flowchart below:
 
-..  figure:: images/Pgm_Env_Image31.*
-  :scale: 90
+.. only:: html
 
-|
+  .. figure:: images/Pgm_Env_Image31.*
+
+.. only:: not html
+
+  .. image:: images/Pgm_Env_Image31.*
+      :scale: 68
+      :align: center
 
 * Sometimes the programmer does not want to store the actual contents of a slot, but instead
   wants to store an initialization expression. This intention is captured with another annotation
-  on a slot: each slot can either be annotated ``Follow Slot`` or ``Initialize To Expression``
+  on a slot: each slot can either be annotated *Follow Slot* or *Initialize To Expression*
   In the latter case, an initializer is also supplied.
 
 * Even though the transporter is supposed to follow the slot, it may contain an object that is created
@@ -744,7 +905,7 @@ enough information, and a variety of means have to be used. As shown in the flow
   string) the transporter should just ask the object for a string to store. It does this by checking to
   see if the object is annotated as ``isComplete`` to see if it is safe to send the object messages,
   checks to see if this object is itself needed for the string (it would be a mistake to file out the
-  prototypical point as ``0@0``, because the x slot would never be defined), then asks the object for a
+  prototypical point as ``0@0``, because the ``x`` slot would never be defined), then asks the object for a
   store string.To see if the object must itself be filed out, it sends ``storeStringNeeds`` and if
   this message does not return the object itself it sends ``storeStringIfFail``:. If this succeeds,
   the transporter can save a data-type specific string for the object. This fairly elaborate mechanism
@@ -765,7 +926,7 @@ Copy Down
 Because Self eschews classes and because the current compiler cannot optimize dynamic inheritance,
 it is necessary to copy-down slots when refining an object. For example, the prototypical
 morph object contains many slots that every morph should have, and some mechanism is needed
-to ensure that their presence is propagated down to more specialized morphs like the circleMorph.
+to ensure that their presence is propagated down to more specialized morphs like the ``circleMorph``.
 In a class-based language, this need is met by a rule ensuring that subclasses include any instance
 variables defined in their superclasses. In Self, this inheritance of structure is separated from the
 inheritance of information performed by the normal hierarchy of parent slots. Instead of including
@@ -774,12 +935,20 @@ called “copy-down.” An object’s annotation can contain a copy-down parent,
 and set of slots to omit. The copy-down parent is sent the message given by the copy-down selector,
 and (except for the slots-to-omit), the slots in the result are added to the object. Copied-down
 slots are shown in pink in the outliner. For example, here are the prototypical morph and the prototypical
-circleMorph:
+``circleMorph``:
 
-..  figure:: images/Pgm_Env_Image32.*
+.. only:: html
 
-The ``Basic Morph State`` category of slots has been copied from those in morph by first copying
-the morph and removing all its submorphs (i.e. by sending it copyRemoveAllMorphs) and then
+  .. figure:: images/Pgm_Env_Image32.*
+      :scale: 80
+
+.. only:: not html
+
+  .. figure:: images/Pgm_Env_Image32.*
+      :scale: 50
+
+The *Basic Morph State* category of slots has been copied from those in morph by first copying
+the morph and removing all its submorphs (i.e. by sending it ``copyRemoveAllMorphs``) and then
 copying the resultant slots, omitting ``parent``, ``prototype``, ``rawBox`` and ``rawColor``. The first
 three of these slots were omitted because their contents had to be different; copied-down slots are
 copied, they cannot be specially initialized in Self. The omitted slot ``rawBox`` is more interesting;
@@ -789,7 +958,7 @@ systems would not allow a subclass to avoid inheriting an instance variable.
 The Self programming environment uses the copy-down information to allow the programmer
 to use a class-based style when appropriate. For example, if the programmer adds a slot to morph
 the environment will offer to add it to ``circleMorph``, too. If the programmer should use a text editor
-to edit the definition of morph, the circleMorph object will be changed after rereading both object’s
+to edit the definition of morph, the ``circleMorph`` object will be changed after rereading both object’s
 text files. The least convenient aspect of using copy-downs is that to do the moral equivalent
 of creating a subclass, the programmer has to create two objects: a new traits object, and a new prototype,
 and then set the object annotation of the new prototype. Perhaps someday there will be a
@@ -798,7 +967,7 @@ button to do this, or perhaps other styles of programming will emerge.
 Trees
 =====
 
-By default, the tranporter writes out Self modules out to a tree rooted in the current working directory, or the 'objects' subdirectory of the directory given to the VM in the shell environment variable SELFWORKING_DIR.
+By default, the tranporter writes out Self modules out to a tree rooted in the current working directory, or the 'objects' subdirectory of the directory given to the VM in the shell environment variable ``SELFWORKING_DIR``.
 
 Howevever Self modules have a slot 'tree' which can take a name of a tree. If the name of the tree is not an empty string, then the module writer will look up a directory in the dictionary found at ``modules init treeDictionary``.
 
@@ -813,7 +982,7 @@ This allows the developer to maintain several separate trees. For example::
 
 Important considerations: module names are globally unique (that is, two modules called 'webserver' in different trees are considered the same module and will overwrite each other). The tree name itself should also be globally unique - that is it is not possible to have two trees with the same name in a single Self world.
 
-The advantages of this over a simple symbolic link to a separate filesystem tree is we can do overlays - if you want special string behaviour, then put it in your tree in my_tree/core/string.self and it will override as expected.
+The advantages of this over a simple symbolic link to a separate filesystem tree is we can do overlays - if you want special string behaviour, then put it in your tree in ``my_tree/core/string.self`` and it will override as expected.
 
 Modules that import subparts will import them from the same tree by default.
 
@@ -849,6 +1018,6 @@ which may take a while to learn. We hope that you find the investment worth the 
 
 .. [#f8] The Self Virtual Machine provides for annotations on slots or whole objects. While the annotations do not influence program execution, they can be accessed and modified by Self’s reflective facility, mirrors. Annotations are used to hold many things, including comments on objects and slots.
 
-.. [#f9] isComplete is used by the environment to decide when it is safe to send messages like printString.
+.. [#f9] ``isComplete`` is used by the environment to decide when it is safe to send messages like ``printString``.
 
 .. [#f10] See http://semver.org for a specification. In essence, versions are of the form "3.2.1-alpha6".

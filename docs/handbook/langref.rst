@@ -1,3 +1,5 @@
+.. _pp-langref:
+.. _langref:
 ******************
 Language Reference
 ******************
@@ -481,6 +483,10 @@ In order to annotate a group of slots, surround them with braces and insert the 
 
 Annotations may nest; if so the Virtual Machine concatenates the annotations strings and inserts a separator character (16r7f) [#f7]_.
 
+.. raw:: latex
+
+  \newpage
+
 .. _langref-expressions:
 
 .. _pp-langref-expressions:
@@ -654,10 +660,6 @@ The association order and capitalization requirements are intended to reduce the
 ::
 
     i: 5 factorial + pi sine
-
-.. raw:: latex
-
-  \newpage
 
 is interpreted as
 
@@ -894,6 +896,10 @@ The function *directed_resend(rec, smh, del, sel, args)* is defined as follows:
     end
     return res
 
+.. raw:: latex
+
+  \newpage
+
 Lexical elements
 ================
 
@@ -907,10 +913,19 @@ Character set
 
 Self programs are written using the following characters:
 
-* *Letters*. The fifty-two upper and lower case letters: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-* *Digits*. The ten numeric digits: 0123456789
+* *Letters*. The fifty-two upper and lower case letters:
+
+    ``ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz``
+
+* *Digits*. The ten numeric digits:
+
+    ``0123456789``
+
 * *Whitespace*. The formatting characters: space, horizontal tab (ASCII HT), newline (NL), carriage return (CR), vertical tab (VT), backspace (BS), and form feed (FF). (Comments are also treated as whitespace.)
-* *Graphic characters*. The 32 non-alphanumeric characters: !@#$%^&*()_-+=|\\~\‘{}[]:;\"\’<>,.?/
+
+* *Graphic characters*. The 32 non-alphanumeric characters:
+
+    ``!@#$%^&*()_-+=|\~‘{}[]:;"’<>,.?/``
 
 .. index::
    single:  self
@@ -1040,6 +1055,10 @@ A number with a digit that is not appropriate for the base will cause a lexical 
 constant that is too large to be represented. If the absolute value of a real constant is too large
 or too small to be represented, the value of the constant will be ± infinity or zero, respectively.
 
+.. raw:: latex
+
+  \newpage
+
 Productions:
 
   +------------------+--------+-------------------------------------------------------------------+
@@ -1078,7 +1097,7 @@ Strings
 
 String constants are enclosed in single quotes (‘’’). With the exception of single quotes and escape
 sequences introduced by a backslash (‘\\’), all characters (including formatting characters like
-newline and carriage return) lying between the delimiting single quotes are included in the string. [#f12]_
+newline and carriage return) lying between the delimiting single quotes are included in the string [#f12]_.
 
 To allow single quotes to appear in a string and to allow non-printing control characters in a string
 to be indicated more visibly, Self provides C-like escape sequences:
@@ -1267,7 +1286,7 @@ Example:
 
 .. [#f4] In the user interface a read/write slot is depicted as a single slot with a colon labelling the button used to access the value of the slot; the assignment slot is not shown, to save screen space. In contrast, a read-only slot has an equals sign on the button.
 
-.. [#f5] Nil is a predefined object provided by the implementation. It is intended to indicate “not a useful object.”
+.. [#f5] ``nil`` is a predefined object provided by the implementation. It is intended to indicate “not a useful object.”
 
 .. [#f6] Although a block may be assigned to a slot at any time, it is often not useful to do so: evaluating the slot may result in an error because the activation record for the block’s lexically enclosing scope will have returned; see :ref:`pp-langref-blocks`.
 

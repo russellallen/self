@@ -1,3 +1,6 @@
+
+.. _pp-the-system-monitor:
+
 The system monitor
 ==================
 

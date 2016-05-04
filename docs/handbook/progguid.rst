@@ -113,9 +113,9 @@ to select the behavior for the next state transition::
 In this case, the inline object is playing the role of a case statement.
 
 Another use of inline objects is to return multiple values from a method, as discussed in section
-`How to Return Multiple Values`_. Yet another use of inline objects is to parameterize the behavior of some other object. For example,
-the predicate used to order objects in a *priorityQueue* can be specified using an inline
-object::
+:ref:`how-to-return-multiple-values` `How to Return Multiple Values`_. Yet another use of inline objects
+is to parameterize the behavior of some other object. For example, the predicate used to order objects
+in a *priorityQueue* can be specified using an inline object::
 
     queue: priorityQueue copyRemoveAll.
     queue sorter: (| element: e1 Precedes: e2 = ( e1 > e2 ) |).
@@ -133,7 +133,8 @@ respond to the ``printString`` message with a textual description of themselves.
 is called the object’s *printString*. An object’s printString can be quite detailed; standard protocol
 allows the desired amount of detail to be specified by the requestor. For example, the printString
 for a collection might include the printStrings of all elements or just the first few. Not all objects
-have printStrings, only those that satisfy the criteria discussed in section `How to make an object print`_ below.
+have printStrings, only those that satisfy the criteria discussed in section :ref:`how-to-make-an-object-print`
+`How to make an object print`_ below.
 
 The second way to describe an object is to give its *path name*. A path name is a sequence of unary
 selectors that describes a path from the lobby to the object. For example, the full path name of the
@@ -153,6 +154,8 @@ or “an” is prepended to its prototype’s creator path. In addition to its p
 compute a ``printString`` for the object if it is annotated as ``isComplete``. Then, the two pieces of
 information are merged. For example, the name of the prototype list is “list” but the name of ``list copy add: 17``
 is “a list(17).” See the naming category in mirror traits for the details of this process.
+
+.. _how-to-make-an-object-print:
 
 How to make an object print
 ---------------------------
@@ -188,6 +191,8 @@ The existence of an ``isComplete`` annotation in an object means that the object
 itself. The object agrees to provide behavior for a variety of messages; see the programming environment
 manual for more details.
 
+.. _how-to-return-multiple-values:
+
 How to Return Multiple Values
 =============================
 
@@ -208,9 +213,9 @@ could be used to package the results of a text processing method into a single r
 
 .. note::
 
-    that the inline object prototype inherits copy from the lobby. If one omitted its parent slot p, one would have to
-    send it the _Clone primitive to copy it. It is considered bad style, however, to send a primitive directly, rather than calling
-    the primitive’s wrapper method.
+    that the inline object prototype inherits copy from the lobby. If one omitted its parent slot ``p``, one would have to
+    send it the ``_Clone`` primitive to copy it. It is considered bad style, however, to send a primitive directly,
+    rather than calling the primitive’s wrapper method.
 
 The sender can extract the various return values from the result object by name.
 
@@ -235,7 +240,7 @@ Substituting Values for Blocks
 ==============================
 
 The lobby includes behavior for the block evaluation messages. Thus, any object that inherits from
-the lobby can be passed as a parameter to a method that expects a block—the object behaves like
+the lobby can be passed as a parameter to a method that expects a block — the object behaves like
 a block that evaluates that object. For example, one may write::
 
     x >= 0 ifTrue: x False: x negate
@@ -247,9 +252,9 @@ rather than::
 .. note::
 
         however, that Self evaluates all arguments before sending a message. Thus, in the first case
-        “x negate” will be evaluated regardless of the value of x, even though that argument will not be
-        used if x is nonnegative. In this case, it doesn’t matter, but if “x negate” had side effects, or if it
-        were very expensive, it would be better to use the second form.
+        ``x negate`` will be evaluated regardless of the value of ``x``, even though that argument will not be
+        used if ``x`` is nonnegative. In this case, it doesn’t matter, but if ``x negate`` had side effects,
+        or if it were very expensive, it would be better to use the second form.
 
 In a similar vein, blocks inherit default behavior that allows one to provide a block taking fewer
 arguments than expected. For example, the collection iteration message ``do:`` expects a block taking
@@ -266,12 +271,12 @@ instead of::
 ``nil`` Considered Naughty
 ==========================
 
-As in Lisp, Self has an object called nil, which denotes an undefined value. The virtual machine
-initializes any uninitialized slots to this value. In Lisp, many programs test for nil to find the end
+As in Lisp, Self has an object called ``nil``, which denotes an undefined value. The virtual machine
+initializes any uninitialized slots to this value. In Lisp, many programs test for ``nil`` to find the end
 of a list, or an empty slot in a hash table, or any other undefined value. There is a better way in
 Self. Instead of testing an object’s identity against ``nil``, define a new object with the appropriate
 behavior and simply send messages to this object; Self’s dynamic binding will do the rest. For example,
-in a graphical user interface, the following object might be used instead of nil::
+in a graphical user interface, the following object might be used instead of ``nil``::
 
     nullGlyph = (|
             display = ( self ).
@@ -279,7 +284,7 @@ in a graphical user interface, the following object might be used instead of nil
             mouseSensitive = false.
     |)
 
-To make it easier to avoid nil, the methods that create new vectors allow you to supply an alternative
+To make it easier to avoid ``nil``, the methods that create new vectors allow you to supply an alternative
 to ``nil`` as the initial value for the new vector’s elements (e.g., ``copySize:FillingWith:``).
 
 Hash and \=
@@ -303,11 +308,11 @@ range of small integers.
 Equality, Identity, and Indistinguishability
 ============================================
 
-Equality, identity, and indistinguishability are three related concepts that are often confused. Two
-objects are ``equal`` if they “mean the same thing”. For example, 3 = 3.0 even though they are different
-objects and have different representations. Two objects are ``identical`` if and only if they are
+*Equality*, *identity*, and *indistinguishability* are three related concepts that are often confused. Two
+objects are *equal* if they “mean the same thing”. For example, ``3 = 3.0`` even though they are different
+objects and have different representations. Two objects are *identical* if and only if they are
 the same object. (Or, more precisely, two references are identical if they refer to the same object.)
-The primitive _Eq: tests if two objects are identical. Finally, two objects are ``indistinguishable`` if
+The primitive ``_Eq:`` tests if two objects are identical. Finally, two objects are *indistinguishable* if
 they have exactly the same behavior for every possible sequence of non-reflective messages. The
 binary operator “==” tests for indistinguishability. Identity implies indistinguishability which implies
 equality.
@@ -315,6 +320,6 @@ equality.
 It is actually not possible to guarantee that two different objects are indistinguishable, since reflection
 could be used to modify one of the objects to behave differently after the indistinguisability
 test was made. Thus, == is defined to mean identity by default. Mirrors, however, override this default
-behavior; (``m1 == m2``) if (``m1 reflectee`` _Eq: ``m2 reflectee``). This makes it appear
+behavior; (``m1 == m2``) if (``m1 reflectee _Eq: m2 reflectee``). This makes it appear
 that there is at most one mirror object for each object in the system. This illusion would break
 down, however, if one added mutable state to mirror objects.

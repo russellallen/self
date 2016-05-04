@@ -31,7 +31,7 @@ Glossary
 
 * A *primitive send* is a message handled by invoking a *primitive*, a predefined function provided by the Self implementation.
 
-* Messages that do not have an explicit receiver are known as *implicit-receiver messages*. The receiver is bound to self.
+* Messages that do not have an explicit receiver are known as *implicit-receiver messages*. The receiver is bound to ``self``.
 
 * A *unary message* is a message consisting of a single identifier sent to a receiver. A *binary message* is a message consisting of an operator and a single argument sent to a receiver. A *keyword message* is a message consisting of one or more identifiers with trailing colons, each followed by an argument, sent to a receiver.
 
@@ -55,4 +55,4 @@ Glossary
 
 * The *root context* is the object that provides the context (i.e., set of bindings) in which slot initializers are evaluated. This object is known as the *lobby*. During slot initialization, self is bound to the lobby. The lobby is also the sending method holder for any sends in the initializing expression.
 
-* *Nil* is the object used to initialize slots without explicit initializers. It is intended to indicate “not a useful object.” This object is provided by the Self implementation.
+* *nil* is the object used to initialize slots without explicit initializers. It is intended to indicate “not a useful object.” This object is provided by the Self implementation.
