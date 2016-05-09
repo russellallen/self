@@ -139,6 +139,14 @@ This is not a module and not managed by Transporter.
         f2 runScript ]
   ).
 
+  optionalRunTertiarySetupScript = (| flg = '-f3'. c |
+    c: _CommandLine.
+    (c includes: flg)
+      ifTrue: [| f3 |
+        f3: (c at: (c keyAt: flg) succ IfAbsent: [^ 'Could not find argument to flag -f3' printLine]).
+        f3 runScript ]
+  ).
+
   boot: lobby = (
     env: lobby.
     inMinimalEnvironment: [setupPaths].
@@ -146,6 +154,7 @@ This is not a module and not managed by Transporter.
     optionalLoadMorphic.
     optionalLoadUI1.
     optionalRunSecondarySetupScript.
+    optionalRunTertiarySetupScript.
     startup.
   )
   
