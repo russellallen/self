@@ -444,14 +444,15 @@ to put in me.\x7fModuleInfo: Module: sliceModel InitialContents: FollowSlot\x7fV
         
          preferredBodyColor = ( |
             | 
-            preferences outliner colorScheme generalSliceModel).
+            preferences outliner theme generalSliceModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalSliceModel' -> 'parent' -> () From: ( | {
          'Category: appearance\x7fModuleInfo: Module: sliceModel InitialContents: FollowSlot\x7fVisibility: public'
         
          preferredHeaderColor = ( |
-            | preferences outliner colorScheme generalSliceModel).
+            | 
+            preferences outliner theme generalSliceModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalSliceModel' -> 'parent' -> () From: ( | {

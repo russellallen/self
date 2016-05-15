@@ -424,7 +424,7 @@ Set the creator of my parent slot.\x7fModuleInfo: Module: selfObjectModel Initia
         
          preferredColor = ( |
             | 
-            preferences outliner colorScheme selfObjectModel).
+            preferences outliner theme selfObjectModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfObjectModel' -> 'parent' -> () From: ( | {

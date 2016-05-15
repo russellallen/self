@@ -229,10 +229,11 @@ SlotsToOmit: baseMinHeight baseMinWidth parent prototype.
             m: morphs.
             removeAllMorphs.
             addMorph:
-              (rowMorph copy 
+              ((rowMorph copy 
                 beFlexibleVertically
                 beShrinkWrapHorizontally
                 borderWidth: 0)
+                color: paint named: 'transparent')
                 addAllMorphs: m).
         } | ) 
 

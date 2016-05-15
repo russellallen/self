@@ -90,7 +90,7 @@ globals generalModel parent buttonDescriptions. _Clone
         
          menuColor = ( |
             | 
-            preferences outliner colorScheme moduleHolderModelMenuColor).
+            preferences outliner theme moduleHolderModelMenuColor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'moduleHolderModel' -> 'parent' -> () From: ( | {
@@ -103,7 +103,8 @@ globals generalModel parent buttonDescriptions. _Clone
          'Category: appearance\x7fModuleInfo: Module: moduleHolderModel InitialContents: FollowSlot'
         
          preferredBodyColor = ( |
-            | preferences outliner colorScheme moduleHolderModel).
+            | 
+            preferences outliner theme moduleHolderModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'moduleHolderModel' -> 'parent' -> () From: ( | {
@@ -111,7 +112,7 @@ globals generalModel parent buttonDescriptions. _Clone
         
          preferredColor = ( |
             | 
-            preferences outliner colorScheme moduleHolderModel).
+            preferences outliner theme moduleHolderModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'moduleHolderModel' -> 'parent' -> () From: ( | {

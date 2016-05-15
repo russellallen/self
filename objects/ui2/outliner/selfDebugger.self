@@ -575,7 +575,7 @@ SlotsToOmit: parent.
         
          preferredColor = ( |
             | 
-            preferences outliner colorScheme selfProcessModel).
+            preferences outliner theme selfProcessModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfProcessModel' -> 'parent' -> () From: ( | {

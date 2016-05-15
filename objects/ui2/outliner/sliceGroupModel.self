@@ -154,7 +154,7 @@ SlotsToOmit: parent.
         
          preferredBodyColor = ( |
             | 
-            preferences outliner colorScheme generalSliceModel).
+            preferences outliner theme generalSliceModel).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalSliceGroupModel' -> 'parent' -> () From: ( | {

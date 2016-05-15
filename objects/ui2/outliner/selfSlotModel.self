@@ -352,8 +352,8 @@ SlotsToOmit: setModule.
          preferredBodyColor = ( |
             | 
             slot isNotNil && [slot isCopiedDown]
-              ifTrue: [ preferences outliner colorScheme copiedDownSlotBody ]
-               False: [ preferences outliner colorScheme normalSlotBody ]).
+              ifTrue: [ preferences outliner theme copiedDownSlotBody ]
+               False: [ preferences outliner theme normalSlotBody ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfSlotModel' -> 'parent' -> () From: ( | {
@@ -362,8 +362,8 @@ SlotsToOmit: setModule.
          preferredHeaderColor = ( |
             | 
             slot isNotNil && [slot isCopiedDown]
-              ifTrue: [ preferences outliner colorScheme copiedDownSlotBody ]
-               False: [ preferences outliner colorScheme normalSlotBody ]).
+              ifTrue: [ preferences outliner theme copiedDownSlotBody ]
+               False: [ preferences outliner theme normalSlotBody ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfSlotModel' -> 'parent' -> () From: ( | {
