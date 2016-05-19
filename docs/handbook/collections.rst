@@ -15,7 +15,7 @@ extra arguments, this allows applications that don’t care about keys to simply
 that takes only one argument.
 
 Collections have a rich protocol. Additions are made with ``at:Put:``, or with ``add:`` or ``addAll:`` for
-implicitly keyed collections. Iteration can be done with do: or with variations that allow the programmer
+implicitly keyed collections. Iteration can be done with ``do:`` or with variations that allow the programmer
 to specify special handling of the first and/or last element. ``with:Do:`` allows pairwise iteration
 through two collections. The ``includes:``, ``occurrencesOf:``, and ``findFirst:``
 ``IfPresent:IfAbsent:`` messages test for the presence of particular values in the collection.
@@ -23,7 +23,7 @@ through two collections. The ``includes:``, ``occurrencesOf:``, and ``findFirst:
 block, while ``mapBy:Into:`` creates a new collection whose elements are the result of applying the
 argument block to each element of the original collection.
 
-Abstract collection behavior is defined in traits collection. Only a small handful of operations need
+Abstract collection behavior is defined in ``traits collection``. Only a small handful of operations need
 be implemented to create a new type of collection; the rest can be inherited from ``traits collection``.
 (See the ``descendantResponsibility`` slot of ``traits collection``.) The following
 sections discuss various kinds of collection in more detail.

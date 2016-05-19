@@ -10,9 +10,9 @@ Foreign Objects
         foreignCode
 
 The low level aspects of interfacing with code written in other languages (via C or C++ glue code)
-are described in the VM Reference Manual. A number of objects in the Self world are used to interface
-to foreign data objects and functions. These objects are found in the name spaces ``traits``
-``foreign``, and ``globals foreign``.
+are described in :doc:`vmref` (:doc:`chapter <vmref>` :ref:`pp-vmref`). A number of objects in the Self
+world are used to interface to foreign data objects and functions. These objects are found in the name spaces
+``traits`` ``foreign``, and ``globals foreign``.
 
 One difficulty in interfacing between Self and external data and functions is that references to foreign
 data and functions from within Self can become obsolete when the Self world is saved as
@@ -57,11 +57,11 @@ invariants that ``foreignFct`` objects rely on.
 Relevant oddballs:
 
   +----------------+----------------------------------------------------+
-  | linker         | dynamic linker for current platform                |
+  | linker         | Dynamic linker for current platform.               |
   +----------------+----------------------------------------------------+
-  | sunLinker      | dynamic linker implementation for SunOS/Solaris    |
+  | sunLinker      | Dynamic linker implementation for SunOS/Solaris.   |
   +----------------+----------------------------------------------------+
-  | foreignCodeDB  | registry for foreignCode objects                   |
+  | foreignCodeDB  | Registry for foreignCode objects.                  |
   +----------------+----------------------------------------------------+
 
 Modules: foreign

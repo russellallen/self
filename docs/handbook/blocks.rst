@@ -7,8 +7,9 @@ activation of the method in which the block is declared. This allows the stateme
 to access variables local to the block’s enclosing method and any enclosing blocks in that method.
 (This set of variables comprises the lexical scope of the block.) It also means that within the block,
 ``self`` refers to the receiver of the message that activated the method, not to the block object itself.
-A return statement in a block causes a return from the block’s enclosing method. (See the Self
-Language Reference for a more thorough discussion of block semantics.)
+A return statement in a block causes a return from the block’s enclosing method. (See chapter :ref:`pp-langref`
+- :doc:`Language Reference <langref>` for a more thorough discussion of block semantics.)
+
 A block can take an arbitrary number of arguments and can have its own local variables, as well as
 having access to the local variables of its enclosing method. The statements in the block are executed
 when the block is sent a message of the form ``“value[:{With:}]”``, where the number of colons
@@ -42,7 +43,7 @@ The booleans also define behavior for the logical operations ``AND (&&), OR (||)
 (^^)``, and ``NOT (not)``. Because the binary boolean operators all send value to their argument when
 necessary, they can also be used for “short-circuit” evaluation by supplying a block, e.g.::
 
-(0 <= i) && [i < maxByte pred] ifTrue: [...
+    (0 <= i) && [i < maxByte pred] ifTrue: [...
 
 Module: boolean
 
@@ -77,7 +78,7 @@ For the incurably curious: the parameter to the user’s block, supplied by the 
 does a return from the ``loopExit`` method. Thus, the loop terminates when ``exit value`` is evaluated. The constructs
 ``loopExitValue``, ``exit``, and ``exitValue`` are implemented in a similar manner.
 
-The value returned by the overall “[...] loopExit” expression is nil. Here is a loop expression
+The value returned by the overall ``[...] loopExit`` expression is ``nil``. Here is a loop expression
 that exits and evaluates to a value determined by the programmer when quit becomes true::
 
     [| :exit | ... quit ifTrue: [ exit value: expr ] ] loopExitValue
@@ -110,6 +111,11 @@ Blocks have some other useful behavior:
 
     * The message ``countSends`` will collect lookup statistics during a block execution.
 
-Any object that inherits from the lobby can be passed to a method that expects a block; behavior in``defaultBehavior`` makes the object behave like a block that evaluates to that object.
+Any object that inherits from the lobby can be passed to a method that expects a block; behavior in ``defaultBehavior`` makes the object behave like a block that evaluates to that object.
 
 Module: block
+
+
+..  rubric:: Footnotes
+
+.. [#f1]

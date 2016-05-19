@@ -41,7 +41,7 @@ answer `y`. When the World has built, save it at the prompt by doing::
   save
   quitNoSave
 
-This will save a snapshot of the world in the file 'Snapshot'.
+This will save a snapshot of the world in the file '``Snapshot.snap``'.
 
 ---------------
 Starting the UI
@@ -51,5 +51,3 @@ Once you have a 256 colour X11 desktop running, you can start your Self world an
 
   preferences xDisplay: ':1'  "Only if necessary"
   ui demo
-
-

@@ -9,14 +9,14 @@ defined in the ``defaultBehavior`` slot of the lobby and includes:
 
     * identity comparisons (== and !==)
     * inequality (!=)
-    * default behavior for printing (reimplement printString in descendants)
-    * mirror creation (reflect:)
+    * default behavior for printing (reimplement ``printString`` in descendants)
+    * mirror creation (``reflect:``)
     * support for point, and list construction (@ and &)
     * behavior that allows blocks to ignore extra arguments
     * behavior that allows an object to behave like a block that evaluates to that object (this permits a non-block object to be passed to a method that expects a block)
     * behavior that allows an object to be its own key in a collection (key)
     * default behavior for doubly-dispatched messages
-    * behavior for printing error messages and stack dumps (error: and halt)
+    * behavior for printing error messages and stack dumps (``error:`` and ``halt``)
 
 It is important to note that not all objects in the system inherit this default behavior. It is entirely
 permissible to construct objects that do not inherit from the lobby, and the Self world contains

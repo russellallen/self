@@ -12,6 +12,7 @@ Thanks to Ganesh R for his transcription services.
 
 .. toctree::
    :maxdepth: 2
+   :numbered:
 
    intro
    gettingstarted

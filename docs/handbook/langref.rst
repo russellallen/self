@@ -1,30 +1,32 @@
+.. _pp-langref:
+.. _langref:
 ******************
 Language Reference
 ******************
 
 This chapter specifies Self’s syntax and semantics. An early version of the syntax was presented
-in the original Self paper by Ungar and Smith :ref:`[US87] <citations>` ; this chapter incorporates subsequent
+in the original Self paper by Ungar and Smith :ref:`[US87] <citations>` ; this chapter incorporates subsequent
 changes to the language. The presentation assumes a basic understanding of object-oriented concepts.
 
 The syntax is described using Extended Backus-Naur Form (EBNF). Terminal symbols appear in
 Courier and are enclosed in single quotes; they should appear in code as written (not including
 the single quotes). Non-terminal symbols are italicized. The following table describes the metasymbols:
 
-+-------------+-------------+-----------------------------------------------------------------+
-| META-SYMBOL | FUNCTION    | DESCRIPTION                                                     |
-+-------------+-------------+-----------------------------------------------------------------+
-| ( and )     | grouping    | used to group syntactic constructions                           |
-+-------------+-------------+-----------------------------------------------------------------+
-| [ and ]     | option      | encloses an optional construction                               |
-+-------------+-------------+-----------------------------------------------------------------+
-| { and }     | repetition  | encloses a construction that may be repeated zero or more times |
-+-------------+-------------+-----------------------------------------------------------------+
-| \|          | alternative | separates alternative constructions                             |
-+-------------+-------------+-----------------------------------------------------------------+
-| →           | production  | separates the left and right hand sides of a production         |
-+-------------+-------------+-----------------------------------------------------------------+
+  +-----------------+-------------+-----------------------------------------------------------------+
+  |   META-SYMBOL   |   FUNCTION  |                           DESCRIPTION                           |
+  +-----------------+-------------+-----------------------------------------------------------------+
+  | ``(`` and ``)`` | grouping    | used to group syntactic constructions                           |
+  +-----------------+-------------+-----------------------------------------------------------------+
+  | ``[`` and ``]`` | option      | encloses an optional construction                               |
+  +-----------------+-------------+-----------------------------------------------------------------+
+  | ``{`` and ``}`` | repetition  | encloses a construction that may be repeated zero or more times |
+  +-----------------+-------------+-----------------------------------------------------------------+
+  | ``\``           | alternative | separates alternative constructions                             |
+  +-----------------+-------------+-----------------------------------------------------------------+
+  | ``→``           | production  | separates the left and right hand sides of a production         |
+  +-----------------+-------------+-----------------------------------------------------------------+
 
-A glossary of terms used in this document can be found in Appendix A.
+A glossary of terms used in this document can be found in :doc:`Appendix A <glossary>`.
 
 .. index::
    single:  block
@@ -39,10 +41,10 @@ Objects
 =======
 
 *Objects* are the fundamental entities in Self; every entity in a Self program is represented by one
-or more objects. Even control is handled by objects: *blocks* (§2.1.7) are Self closures used to implement
+or more objects. Even control is handled by objects: *blocks* (:ref:`pp-langref-blocks`) are Self closures used to implement
 user-defined control structures. An object is composed of a (possibly empty) set of *slots*
-and, optionally, *code* (§2.1.5). A slot is a name-value pair; slots contain references to other objects.
-When a slot is found during a *message lookup* (§2.3.6) the object in the slot is evaluated.
+and, optionally, *code* (:ref:`pp-langref-code`). A slot is a name-value pair; slots contain references to other objects.
+When a slot is found during a *message lookup* (:ref:`pp-langref-message-lookup`) the object in the slot is evaluated.
 
 Although everything is an object in Self, not all objects serve the same purpose; certain kinds of
 objects occur frequently enough in specialized roles to merit distinct terminology and syntax. This
@@ -57,24 +59,24 @@ Syntax
 ------
 
 *Object literals* are delimited by parentheses. Within the parentheses, an object description consists
-of a list of slots delimited by vertical bars (‘|’), followed by the code to be executed when the object
+of a list of slots delimited by vertical bars (‘``|``’), followed by the code to be executed when the object
 is evaluated. For example::
 
     ( | slot1. slot2 | ’here is some code’ printLine )
 
-Both the slot list and code are optional: ‘( | | )’ and ‘()’ each denote an empty object. [#f1]_
+Both the slot list and code are optional: ‘``(| |)``’ and ‘``()``’ each denote an empty object [#f1]_.
 
-*Block objects* are written like other objects, except that square brackets (‘[’ and ‘]’) are used in
+*Block objects* are written like other objects, except that square brackets (‘``[``’ and ‘``]``’) are used in
 place of parentheses::
 
     [ | slot1. slot2 | ’here is some code in a block’ printLine ]
 
-A *slot list* consists of a (possibly empty) sequence of *slot descriptors* (§2.2) separated by periods.
-A period at the end of the slot list is optional. [#f2]_
+A *slot list* consists of a (possibly empty) sequence of *slot descriptors* (:ref:`pp-langref-slot-descriptors`) separated by periods.
+A period at the end of the slot list is optional [#f2]_.
 
-The code for an object is a sequence of *expressions* (§2.3) separated by periods. A trailing period
+The code for an object is a sequence of *expressions* (:ref:`pp-langref-expressions`) separated by periods. A trailing period
 is optional. Each expression consists of a series of *message sends* and *literals*. The last expression
-in the code for an object may be preceded by the ‘^’ operator (§2.1.8).
+in the code for an object may be preceded by the ‘``^``’ operator (:ref:`pp-langref-returns`).
 
 .. index::
    single:  object; data object
@@ -86,8 +88,8 @@ Data objects
 ------------
 
 *Data objects* are objects without code. Data objects can have any number of slots. For example, the
-object () has no slots (i.e., it’s empty) while the object ( | x = 17. y = 18 | ) has two slots,
-x and y.
+object ``()`` has no slots (i.e., it’s empty) while the object ``( | x = 17. y = 18 | )`` has two slots,
+``x`` and ``y``.
 
 ..  figure:: images/Chapter_2_Image_1.*
     :scale: 80
@@ -113,10 +115,10 @@ A data object returns itself when evaluated.
 The assignment primitive
 ------------------------
 
-A slot containing the assignment primitive is called an *assignment slot* (§2.2.2). When an assignment
-slot is evaluated, the argument to the message is stored in the corresponding *data slot* (§2.2)
+A slot containing the assignment primitive is called an *assignment slot* (:ref:`pp-read-write-slots`). When an assignment
+slot is evaluated, the argument to the message is stored in the corresponding *data slot* (:ref:`pp-langref-slot-descriptors`)
 in the same object (the slot whose name is the assignment slot’s name minus the trailing colon),
-and the *receiver* (§2.3) is returned as the result. (Note: this means that the value of an assignment
+and the *receiver* (:ref:`pp-implicit-receiver`) is returned as the result. (Note: this means that the value of an assignment
 statement is the left-hand side of the assignment statement, not the right-hand side as it is in Smalltalk,
 C, and many other languages. This is a potential source of confusion for new Self programmers.)
 
@@ -151,30 +153,38 @@ The feature that distinguishes a *method object* from a data object is that it h
 object does not. Evaluating a method object does not simply return the object itself, as with simple
 data objects; rather, its code is executed and the resulting value is returned.
 
+.. _pp-langref-code:
+
 Code
 ----
 
-*Code* is a sequence of *expressions* (§2.3). These expressions are evaluated in order, and the resulting
+*Code* is a sequence of *expressions* (:ref:`pp-langref-expressions`). These expressions are evaluated in order, and the resulting
 values are discarded except for that of the final expression, whose value determines the result
 of evaluating the code.
+
+.. raw:: latex
+
+  \newpage
 
 The actual arguments in a message send are evaluated from left to right before the message is sent.
 For instance, in the expression::
 
     1 to: 5 * i By: 2 * j Do: [| :k | k print ]
 
-1 is evaluated first, then 5 \* i, then 2 \* j, and then [\|:k \| k print]. Finally, the to:By:Do:
-message is sent. The associativity and precedence of messages is discussed in section 4.
+``1`` is evaluated first, then ``5 * i``, then ``2 * j``, and then ``[| :k | k print]``. Finally, the ``to:By:Do:``
+message is sent. The associativity and precedence of messages is discussed in section :ref:`langref-expressions`.
 
 .. index::
    single:  activation object
+
+.. _pp-methods:
 
 Methods
 -------
 
 *Ordinary methods* (or simply “methods”) are methods that are not embedded in other code. A
-method can have *argument slots* (§2.2.3) and/or local slots. An ordinary method always has an implicit
-*parent* (§2.2.4) argument slot named self. Ordinary methods are Self’s equivalent of
+method can have *argument slots* (:ref:`pp-argument-slots`) and/or local slots. An ordinary method always has an implicit
+*parent* (:ref:`pp-parent-slots`) argument slot named ``self``. Ordinary methods are Self’s equivalent of
 Smalltalk’s methods.
 
 If a slot contains a method, the following steps are performed when the slot is evaluated as the result
@@ -188,12 +198,12 @@ of a message send:
 
     * The code of the method is executed in the context of this new activation object.
 
-For example, consider the method ( | :arg | arg * arg ):
+For example, consider the method ``(| :arg | arg * arg )``:
 
 ..  figure:: images/Chapter_2_Image_2.*
     :scale: 80
 
-This method has an argument slot arg and returns the square of its argument.
+This method has an argument slot ``arg`` and returns the square of its argument.
 
 .. index::
    single:  slot; anonymous parent slot
@@ -216,7 +226,7 @@ This method has an argument slot arg and returns the square of its argument.
 .. index::
    single:  evaluation; of blocks
 
-.. _langref-blocks:
+.. _pp-langref-blocks:
 
 Blocks
 ------
@@ -227,11 +237,15 @@ block’s code, and an enclosing *block data object*. The block data object cont
 (pointing to the object containing the shared behavior for block objects) and a slot containing the
 block method object. Unlike an ordinary method object, the block method object does not contain
 a self slot. Instead, it has an anonymous parent slot that is initialized to point to the activation object
-for the lexically enclosing block or method. As a result, *implicit-receiver messages* (§2.3.4)
+for the lexically enclosing block or method. As a result, *implicit-receiver messages* (:ref:`pp-implicit-receiver`)
 sent within a block method are lexically scoped. The block method object’s anonymous parent slot
 is invisible at the Self level and cannot be accessed explicitly.
 
-For example, the block [ 3 + 4 ] looks like: [#f3]_
+.. raw:: latex
+
+  \newpage
+
+For example, the block ``[ 3 + 4 ]`` looks like [#f3]_:
 
 ..  figure:: images/Chapter_2_Image_3.*
     :scale: 80
@@ -260,18 +274,20 @@ enclosing scopes.
 .. index::
    single:  non-local return
 
+.. _pp-langref-returns:
+
 Returns
 -------
 
-A *return* is denoted by preceding an expression by the ‘^’ operator. A return causes the value of the given expression to be returned as the result of evaluating the method or block. Only the last ex­pression in an object may be a return.
+A *return* is denoted by preceding an expression by the ‘``^``’ operator. A return causes the value of the given expression to be returned as the result of evaluating the method or block. Only the last ex­pression in an object may be a return.
 
-The presence or absence of the ‘^’ operator does not effect the behavior of ordinary methods, since an ordinary method always returns the value of its final expression anyway. In a block, however, a return causes control to be returned from the ordinary method containing that block, immediately terminating that method’s activation, the block’s activation, and all activations in between. Such a return is called a *non-local return*, since it may “return through” a number of activations. The result of the ordinary method’s evaluation is the value returned by the *non-local return*. For example, in the following method::
+The presence or absence of the ‘``^``’ operator does not effect the behavior of ordinary methods, since an ordinary method always returns the value of its final expression anyway. In a block, however, a return causes control to be returned from the ordinary method containing that block, immediately terminating that method’s activation, the block’s activation, and all activations in between. Such a return is called a *non-local return*, since it may “return through” a number of activations. The result of the ordinary method’s evaluation is the value returned by the *non-local return*. For example, in the following method::
 
     assertPositive: x = (
                     x > 0 ifTrue: [ ^ ’ok’ ].
                     error: ’non-positive x’ )
 
-the ``error:`` message will not be sent if x is positive because the non-local return of ‘ok’ causes the ``assertPositive:`` method to return immediately.
+the ``error:`` message will not be sent if ``x`` is positive because the non-local return of ``’ok’`` causes the ``assertPositive:`` method to return immediately.
 
 .. index::
    single:  object literals; construction of
@@ -279,7 +295,7 @@ the ``error:`` message will not be sent if x is positive because the non-local r
 Construction of object literals
 -------------------------------
 
-Object literals are constructed during parsing—the parser converts objects in textual form into real Self objects.
+Object literals are constructed during parsing — the parser converts objects in textual form into real Self objects.
 An object literal is constructed as follows:
 
 		* First, the slot initializers of every slot are evaluated from left to right. If a slot initializer contains
@@ -310,17 +326,19 @@ that a slot initializer may not refer to any textually enclosing object literal.
 .. index::
    single:  slot; read-only slot
 
+.. _pp-langref-slot-descriptors:
+
 Slot descriptors
 ================
 
-An object can have any number of slots. Slots can contain data (*data slots*) or methods. Some slots have special roles: *argument slots* are filled in with the actual arguments during a message send (§2.3.3), and *parent slots* specify inheritance relationships (§2.3.8).
+An object can have any number of slots. Slots can contain data (*data slots*) or methods. Some slots have special roles: *argument slots* are filled in with the actual arguments during a message (:ref:`pp-mesage-send`), and *parent slots* specify inheritance relationships (:ref:`pp-lookup-algorithm`).
 
 A *slot descriptor* consists of an optional privacy specification, followed by the slot name and an optional initializer.
 
 Read-only slots
 ---------------
 
-A slot name followed by an equals sign (‘=’) and an expression represents a *read-only slot* initialized to the result of evaluating the expression in the root context.
+A slot name followed by an equals sign (‘``=``’) and an expression represents a *read-only slot* initialized to the result of evaluating the expression in the root context.
 
 For example, a constant point might be defined as::
 
@@ -346,12 +364,14 @@ The resulting point contains three initialized read-only slots:
 .. index::
    single:  read/write variable
 
+.. _pp-read-write-slots:
+
 Read/write slots
 ----------------
 
-There is no separate assignment operation in Self. Instead, assignments to data slots are message sends that invoke the assignment primitive. For example, a data slot x is assignable if and only if there is a slot in the same object with the same name appended with a colon (in this case, x:), containing the assignment primitive. Therefore, assigning 17 to slot x consists of sending the message x: 17. Since this is indistinguishable from a message send that invokes a method, clients do not need to know if x and x: comprise data slot accesses or method invocations.
+There is no separate assignment operation in Self. Instead, assignments to data slots are message sends that invoke the assignment primitive. For example, a data slot ``x`` is assignable if and only if there is a slot in the same object with the same name appended with a colon (in this case, ``x:``), containing the assignment primitive. Therefore, assigning ``17`` to slot ``x`` consists of sending the message ``x: 17``. Since this is indistinguishable from a message send that invokes a method, clients do not need to know if ``x`` and ``x:`` comprise data slot accesses or method invocations.
 
-An identifier followed by a left arrow (the characters ‘<’ and ‘-’ concatenated to form ‘<-’) and an expression represents an initialized *read/write variable* (assignable data slot). The object will contain both a data slot of that name and a corresponding assignment slot whose name is obtained by appending a colon to the data slot name. The initializing expression is evaluated in the root context and the result stored into the data slot at parse time.
+An identifier followed by a left arrow (the characters ‘``<``’ and ‘``-``’ concatenated to form ‘``<-``’) and an expression represents an initialized *read/write variable* (assignable data slot). The object will contain both a data slot of that name and a corresponding assignment slot whose name is obtained by appending a colon to the data slot name. The initializing expression is evaluated in the root context and the result stored into the data slot at parse time.
 
 For example, an initialized mutable point might be defined as::
 
@@ -360,12 +380,12 @@ For example, an initialized mutable point might be defined as::
           y <- 5.
     | )
 
-producing an object with two data slots (x and y) and two assignment slots (x: and y:) containing the assignment primitive (depicted with ←): [#f4]_
+producing an object with two data slots (``x`` and ``y``) and two assignment slots (``x:`` and ``y:``) containing the assignment primitive (depicted with ``←``) [#f4]_:
 
 ..  figure:: images/Chapter_2_Image_5.*
     :scale: 80
 
-An identifier by itself specifies an assignable data slot initialized to *nil* [#f5]_. Thus, the slot declaration x is a shorthand notation for x <- nil.
+An identifier by itself specifies an assignable data slot initialized to *nil* [#f5]_. Thus, the slot declaration ``x`` is a shorthand notation for ``x <- nil``.
 
 For example, a simple mutable point might be defined as::
 
@@ -374,7 +394,7 @@ For example, a simple mutable point might be defined as::
 producing:
 
 ..  figure:: images/Chapter_2_Image_6.*
-    :scale: 80
+     :scale: 80
 
 .. index::
    single:  slot; argument slot
@@ -382,10 +402,12 @@ producing:
 .. index::
    single:  message; keyword message
 
+.. _pp-argument-slots:
+
 Slots containing methods
 ------------------------
 
-If the initializing expression is an object literal with code, that object is stored into the slot *without evaluating the code*. This allows a slot to be initialized to a method by storing the method itself, rather than its result, in the slot. [#f6]_ Methods may only be stored in read-only slots. A method automatically receives a parent argument slot named self. For example, a point addition method can be written as::
+If the initializing expression is an object literal with code, that object is stored into the slot *without evaluating the code*. This allows a slot to be initialized to a method by storing the method itself, rather than its result, in the slot [#f6]_. Methods may only be stored in read-only slots. A method automatically receives a parent argument slot named ``self``. For example, a point addition method can be written as::
 
     ( |
           + = ( | :arg | (clone x: x + arg x) y: y + arg y ).
@@ -402,7 +424,7 @@ A slot name beginning with a colon indicates an *argument* slot. The prefixed co
           + arg = ( (clone x: x + arg x) y: y + arg y ).
     | )
 
-The + slot above is a *binary slot* (§2.3.2), taking one argument and having a name that consists of operator symbols. Slots like x or y in a point object are *unary slots* (§2.3.1), which take no arguments and have simple identifiers for names. In addition, there are *keyword slots* (§2.3.3), which handle messages that require one or more arguments. A keyword slot name is a sequence of identifiers, each followed by a colon.
+The + slot above is a *binary slot* (:ref:`pp-binary-messages`), taking one argument and having a name that consists of operator symbols. Slots like x or y in a point object are *unary slots* (:ref:`pp-unary-messages`), which take no arguments and have simple identifiers for names. In addition, there are *keyword slots* (:ref:`pp-keyword-messages`), which handle messages that require one or more arguments. A keyword slot name is a sequence of identifiers, each followed by a colon.
 
 The arguments in keyword methods are handled analogously to those in binary methods: each colon-terminated identifier in a keyword slot name requires a corresponding argument slot in the keyword method object, and the argument slots may be specified either all in the method or all interspersed with the selector parts.
 
@@ -424,13 +446,16 @@ and
 
 produce identical objects.
 
+
 .. index::
    single:  slot; parent slot
+
+.. _pp-parent-slots:
 
 Parent slots
 ------------
 
-A unary slot name followed by an asterisk denotes a *parent slot*. The trailing asterisk is not part of the slot name and is ignored when matching the name against a message. Except for their special meaning during the message lookup process (§2.3.8), parent slots are exactly like normal unary slots; in particular, they may be assignable, allowing *dynamic inheritance*. Argument slots cannot be parent slots.
+A unary slot name followed by an asterisk denotes a *parent slot*. The trailing asterisk is not part of the slot name and is ignored when matching the name against a message. Except for their special meaning during the message lookup process (:ref:`pp-lookup-algorithm`), parent slots are exactly like normal unary slots; in particular, they may be assignable, allowing *dynamic inheritance*. Argument slots cannot be parent slots.
 
 .. index::
    single:  annotation separator
@@ -456,14 +481,22 @@ In order to annotate a group of slots, surround them with braces and insert the 
           anUnannotatedSlot.
     | )
 
-Annotations may nest; if so the Virtual Machine concatenates the annotations strings and inserts a separator character (16r7f). [#f7]_
+Annotations may nest; if so the Virtual Machine concatenates the annotations strings and inserts a separator character (16r7f) [#f7]_.
+
+.. raw:: latex
+
+  \newpage
+
+.. _langref-expressions:
+
+.. _pp-langref-expressions:
 
 Expressions
 ===========
 
 *Expressions* in Self are *messages* sent to some object, the *receiver*. Self message syntax is similar to Smalltalk’s. Self provides three basic kinds of messages: unary messages, binary messages, and keyword messages. Each has its own syntax, associativity, and precedence. Each type of message can be sent either to an explicit or implicit receiver.
 
-Productions: [#f8]_
+Productions [#f8]_:
 
 =============== = =====================================================================================
 expression      → constant \| unary-message \| binary-message \| keyword-message \| ‘(’ expression ‘)’
@@ -480,17 +513,18 @@ resend          → resend | identifier
 
 The table below summarizes Self’s message syntax rules:
 
-+---------+-----------+------------+------------------------+----------------------------------------------------------------+
-| MESSAGE | ARGUMENTS | PRECEDENCE | ASSOCIATIVITY          | SYNTAX                                                         |
-+---------+-----------+------------+------------------------+----------------------------------------------------------------+
-| Unary   |    0      | highest    | none                   | [receiver] identifier                                          |
-+---------+-----------+------------+------------------------+----------------------------------------------------------------+
-| binary  |    1      | medium     | none or left-to-right* | [receiver] operator expression                                 |
-+---------+-----------+------------+------------------------+----------------------------------------------------------------+
-| keyword |   ≥ 1     | lowest     | right-to-left          | [receiver] small-keyword expression { cap-keyword expression } |
-+---------+-----------+------------+------------------------+----------------------------------------------------------------+
+.. tabularcolumns:: |l|l|l|l|p{4.8cm}|
+.. table::
 
-\* Heterogeneous binary messages have no associativity; homogeneous binary messages associate left-to-right.
+  +---------+-----------+------------+-------------------------------+----------------------------------------------------------------+
+  | MESSAGE | ARGUMENTS | PRECEDENCE | ASSOCIATIVITY                 | SYNTAX                                                         |
+  +=========+===========+============+===============================+================================================================+
+  | Unary   | 0         | highest    | none                          | [receiver] identifier                                          |
+  +---------+-----------+------------+-------------------------------+----------------------------------------------------------------+
+  | Binary  | 1         | medium     | none or left-to-right [#f14]_ | [receiver] operator expression                                 |
+  +---------+-----------+------------+-------------------------------+----------------------------------------------------------------+
+  | Keyword | >= 1      | lowest     | right-to-left                 | [receiver] small-keyword expression { cap-keyword expression } |
+  +---------+-----------+------------+-------------------------------+----------------------------------------------------------------+
 
 Parentheses can be used to explicitly specify order of evaluation.
 
@@ -500,6 +534,8 @@ Parentheses can be used to explicitly specify order of evaluation.
 .. index::
    single:  message; unary message
 
+.. _pp-unary-messages:
+
 Unary messages
 --------------
 
@@ -507,16 +543,16 @@ A *unary message* does not specify any arguments. It is written as an identifier
 
 Examples of unary messages sent to explicit receivers::
 
-    17 print
-    5 factorial
+  17 print
+  5 factorial
 
 *Associativity*. Unary messages compose from left to right. An expression to print 5 factorial, for example, is written::
 
-    5 factorial print
+  5 factorial print
 
 and interpreted as::
 
-    (5 factorial) print
+  (5 factorial) print
 
 *Precedence*. Unary messages have higher precedence than binary messages and keyword messages.
 
@@ -528,6 +564,8 @@ and interpreted as::
 
 .. index::
    single:  precedence of message sends
+
+.. _pp-binary-messages:
 
 Binary messages
 ---------------
@@ -582,24 +620,24 @@ is interpreted as
 .. index::
    single:  primitive send
 
+.. _pp-keyword-messages:
+
 Keyword messages
 ----------------
 
-A *keyword message* has a receiver and one or more arguments. It is written as a receiver followed by a sequence of one or more keyword-argument pairs. The first keyword must begin with a lower case letter or underscore (‘_’); subsequent keywords must be capitalized. An initial underscore denotes that the operation is a *primitive*. A keyword message consists of the longest possible sequence of such keyword-argument pairs; the message selector is the concatenation of the keywords forming the message. Message selectors beginning with an underscore are reserved for *primitives* (§2.3.7).
+A *keyword message* has a receiver and one or more arguments. It is written as a receiver followed by a sequence of one or more keyword-argument pairs. The first keyword must begin with a lower case letter or underscore (‘``_``’); subsequent keywords must be capitalized. An initial underscore denotes that the operation is a *primitive*. A keyword message consists of the longest possible sequence of such keyword-argument pairs; the message selector is the concatenation of the keywords forming the message. Message selectors beginning with an underscore are reserved for *primitives* (:ref:`pp-primitives`).
 
-Example:
-
-::
+Example::
 
     5 min: 4 Max: 7
 
-is the single message min:Max: sent to 5 with arguments 4 and 7, whereas
+is the single message ``min:Max:`` sent to ``5`` with arguments ``4`` and ``7``, whereas
 
 ::
 
     5 min: 4 max: 7
 
-involves two messages: first the message max:sent to 4 and taking 7 as its argument, and then the message min: sent to 5, taking the result of (4 max: 7) as its argument.
+involves two messages: first the message ``max:`` sent to ``4`` and taking ``7`` as its argument, and then the message ``min:`` sent to ``5``, taking the result of (``4 max: 7``) as its argument.
 
 *Associativity*. Keyword messages associate from right to left, so
 
@@ -613,13 +651,11 @@ is interpreted as
 
     5 min: (6 min: 7 Max: 8 Max: (9 min: 10 Max: 11))
 
-The association order and capitalization requirements are intended to reduce the number of parentheses necessary in Self code. For example, taking the minimum of two slots mand nand storing the result into a data slot i may be written as
-
-::
+The association order and capitalization requirements are intended to reduce the number of parentheses necessary in Self code. For example, taking the minimum of two slots mand nand storing the result into a data slot i may be written as::
 
     i: m min: n
 
-Precedence. Keyword messages have the lowest precedence. For example,
+*Precedence*. Keyword messages have the lowest precedence. For example,
 
 ::
 
@@ -635,10 +671,12 @@ is interpreted as
 .. index::
    single:  message; implicit-receiver message
 
+.. _pp-implicit-receiver:
+
 Implicit-receiver messages
 --------------------------
 
-Unary, binary, and keyword messages are frequently written without an explicit receiver. Such messages use the current receiver (``self``) as the implied receiver. The method lookup, however, begins at the current activation object rather than the current receiver (see §2.1.4 for details on activation objects). Thus, a message sent explicitly to ``self`` is *not* equivalent to an implicit-receiver send because the former won’t search local slots before searching the receiver. Explicitly sending messages to ``self`` is considered bad style.
+Unary, binary, and keyword messages are frequently written without an explicit receiver. Such messages use the current receiver (``self``) as the implied receiver. The method lookup, however, begins at the current activation object rather than the current receiver (see :ref:`pp-methods` for details on activation objects). Thus, a message sent explicitly to ``self`` is *not* equivalent to an implicit-receiver send because the former won’t search local slots before searching the receiver. Explicitly sending messages to ``self`` is considered bad style.
 
 Examples:
 
@@ -649,7 +687,7 @@ Examples:
     max: 5           (implicit-receiver keyword message)
     1 + power: 3     (parsed as 1 + (power: 3))
 
-Accesses to slots of the receiver (local or inherited) are also achieved by implicit message sends to ``self``. For an assignable data slot named ``t``, the message ``t`` returns the contents, and ``t``: 17 puts 17 into the slot.
+Accesses to slots of the receiver (local or inherited) are also achieved by implicit message sends to ``self``. For an assignable data slot named ``t``, the message ``t`` returns the contents, and ``t: 17`` puts ``17`` into the slot.
 
 .. index::
    single:  resend
@@ -684,10 +722,12 @@ Examples:
     listParent.height
     intParent.min: 17 Max: 23
 
-Only implicit-receiver messages may be delegated via a resend or a directed resend. [#f9]_
+Only implicit-receiver messages may be delegated via a resend or a directed resend [#f9]_.
 
 .. index::
    single:  message semantics
+
+.. _pp-langref-message-lookup:
 
 Message lookup semantics
 ------------------------
@@ -708,34 +748,36 @@ This section describes the semantics of message lookups in Self. In addition to 
 
 The message sending semantics are decomposed into the following functions:
 
-	+-----------------------------+-----------------------------------------------------------------------+
-	| send(rec, sel, args)        | The message send function (§2.3.7).                                   |
-	+-----------------------------+-----------------------------------------------------------------------+
-	| lookup(obj, rec, sel, V)    | The lookup algorithm (§2.3.8).                                        |
-	+-----------------------------+-----------------------------------------------------------------------+
-	| undirected_resend(...)      | The undirected message resend function (§2.3.9).                      |
-	+-----------------------------+-----------------------------------------------------------------------+
-	| directed_resend(...)        | The directed message resend function (§2.3.9).                        |
-	+-----------------------------+-----------------------------------------------------------------------+
-	| *eval(rec, M, args)*        | The slot evaluation function as described informally throughout §2.1. |
-	+-----------------------------+-----------------------------------------------------------------------+
+	+--------------------------+-----------------------------------------------------------------------------------------+
+	| send(rec, sel, args)     | The message send function (:ref:`pp-mesage-send`).                                      |
+	+--------------------------+-----------------------------------------------------------------------------------------+
+	| lookup(obj, rec, sel, V) | The lookup algorithm (:ref:`pp-lookup-algorithm`).                                      |
+	+--------------------------+-----------------------------------------------------------------------------------------+
+	| undirected_resend(...)   | The undirected message resend function (:ref:`pp-undirected-resend`).                   |
+	+--------------------------+-----------------------------------------------------------------------------------------+
+	| directed_resend(...)     | The directed message resend function (:ref:`pp-directed-resend`).                       |
+	+--------------------------+-----------------------------------------------------------------------------------------+
+	| eval(rec, M, args)       | The slot evaluation function as described informally throughout :ref:`pp-langref-code`. |
+	+--------------------------+-----------------------------------------------------------------------------------------+
+
+.. _pp-mesage-send:
 
 Message send
 ------------
 
-There are two kinds of message sends: a *primitive send* has a selector beginning with an underscore (‘_’) and calls the corresponding primitive operation. Primitives are predefined functions provided by the implementation. A *normal send* does a lookup to obtain the target slot; if the lookup was successful, the slot is subsequently evaluated. If the slot contains a data object, then the data object is simply returned. If the slot contains the assignment primitive, the argument of the message is stored in the corresponding data slot. Finally, if the slot contains a method, an activation is created and run as described in §2.1.6.
+There are two kinds of message sends: a *primitive send* has a selector beginning with an underscore (‘``_``’) and calls the corresponding primitive operation. Primitives are predefined functions provided by the implementation. A *normal send* does a lookup to obtain the target slot; if the lookup was successful, the slot is subsequently evaluated. If the slot contains a data object, then the data object is simply returned. If the slot contains the assignment primitive, the argument of the message is stored in the corresponding data slot. Finally, if the slot contains a method, an activation is created and run as described in :ref:`pp-methods`.
 
 If the lookup fails, the lookup error is handled in an implementation-defined manner; typically, a message indicating the type of error is sent to the object which could not handle the message.
 
 The function *send(rec, sel, args)* is defined as follows:
 
 **Input**:
-  | rec, the receiver of the message
-  | sel, the message selector
-  | args, the actual arguments
+  | ``rec``, the receiver of the message
+  | ``sel``, the message selector
+  | ``args``, the actual arguments
 
 **Output**:
-  | res, the result object
+  | ``res``, the result object
 
 **Algorithm**
 
@@ -755,6 +797,8 @@ The function *send(rec, sel, args)* is defined as follows:
 .. index::
    single:  lookup algorithm
 
+.. _pp-lookup-algorithm:
+
 The lookup algorithm
 --------------------
 
@@ -763,12 +807,12 @@ The lookup algorithm recursively traverses the inheritance graph, which can be a
 The function *lookup(obj, sel, V)* is defined as follows:
 
 **Input**:
-  | obj, the object being searched for matching slots
-  | sel, the message selector
-  | V, the set of objects already visited along this path
+  | ``obj``, the object being searched for matching slots
+  | ``sel``, the message selector
+  | ``V``, the set of objects already visited along this path
 
 **Output**:
-  | M, the set of matching slots
+  | ``M``, the set of matching slots
 
 **Algorithm**:
 
@@ -790,6 +834,8 @@ Where *parent_lookup(obj, sel, V)* is defined as follows:
        sεP
     return M
 
+.. _pp-undirected-resend:
+
 Undirected Resend
 -----------------
 
@@ -798,12 +844,12 @@ An undirected resend ignores the sending method holder (the object containing th
 The function *undirected_resend(rec, smh, sel, args)* is defined as follows:
 
 **Input**:
-  | rec, the receiver of the message
-  | smh, the sending method holder
-  | sel, the message selector args, the actual arguments
+  | ``rec``, the receiver of the message
+  | ``smh``, the sending method holder
+  | ``sel``, the message selector args, the actual arguments
 
 **Output**:
-  | res, the result object
+  | ``res``, the result object
 
 **Algorithm**:
 
@@ -817,6 +863,8 @@ The function *undirected_resend(rec, smh, sel, args)* is defined as follows:
     end
     return res
 
+.. _pp-directed-resend:
+
 Directed Resend
 ---------------
 
@@ -825,14 +873,14 @@ A directed resend looks only in one slot in the sending method holder.
 The function *directed_resend(rec, smh, del, sel, args)* is defined as follows:
 
 **Input**:
-  | rec, the receiver of the message
-  | smh, the sending method holder
-  | del, the name of the delegatee
-  | sel, the message selector
-  | args, the actual arguments
+  | ``rec``, the receiver of the message
+  | ``smh``, the sending method holder
+  | ``del``, the name of the delegatee
+  | ``sel``, the message selector
+  | ``args``, the actual arguments
 
 **Output**:
-  | res, the result object
+  | ``res``, the result object
 
 **Algorithm**:
 
@@ -848,10 +896,14 @@ The function *directed_resend(rec, smh, del, sel, args)* is defined as follows:
     end
     return res
 
+.. raw:: latex
+
+  \newpage
+
 Lexical elements
 ================
 
-This chapter describes the lexical structure of Self programs—how sequences of characters in Self source code are grouped into lexical tokens. In contrast to syntactic elements described by productions in the rest of this document, the elements of lexical EBNF productions may not be separated by whitespace, i.e. there may not be whitespace within a lexical token. Tokens are formed from the longest sequence of characters possible. Whitespace may separate any two tokens and must separate tokens that would be treated as one token otherwise.
+This chapter describes the lexical structure of Self programs — how sequences of characters in Self source code are grouped into lexical tokens. In contrast to syntactic elements described by productions in the rest of this document, the elements of lexical EBNF productions may not be separated by whitespace, i.e. there may not be whitespace within a lexical token. Tokens are formed from the longest sequence of characters possible. Whitespace may separate any two tokens and must separate tokens that would be treated as one token otherwise.
 
 .. index::
    single:  character set
@@ -861,10 +913,19 @@ Character set
 
 Self programs are written using the following characters:
 
-* *Letters*. The fifty-two upper and lower case letters: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-* *Digits*. The ten numeric digits: 0123456789
+* *Letters*. The fifty-two upper and lower case letters:
+
+    ``ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz``
+
+* *Digits*. The ten numeric digits:
+
+    ``0123456789``
+
 * *Whitespace*. The formatting characters: space, horizontal tab (ASCII HT), newline (NL), carriage return (CR), vertical tab (VT), backspace (BS), and form feed (FF). (Comments are also treated as whitespace.)
-* *Graphic characters*. The 32 non-alphanumeric characters: !@#$%^&*()_-+=|\\~\‘{}[]:;\"\’<>,.?/
+
+* *Graphic characters*. The 32 non-alphanumeric characters:
+
+    ``!@#$%^&*()_-+=|\~‘{}[]:;"’<>,.?/``
 
 .. index::
    single:  self
@@ -895,12 +956,16 @@ Productions:
 	| identifier      |  →  | (small-letter \| ‘_’) {letter \| digit \| ‘_’}     |
 	+-----------------+-----+----------------------------------------------------+
 
-Examples: ``i _IntAdd cloud9 m a_point``
+Examples:
+
+  ``i _IntAdd cloud9 m a_point``
 
 The two identifiers ``self`` and ``resend`` are reserved. Identifiers beginning with underscores are reserved for primitives.
 
 .. index::
    single:  Keywords
+
+.. _pp-keywords:
 
 Keywords
 --------
@@ -909,13 +974,15 @@ Keywords are used as slot names and as message names. They consist of an identif
 
 Productions:
 
-	+-----------------+-----+-------------------------------------------+
-	| small-keyword   |  →  | identifier ‘:’                            |
-	+-----------------+-----+-------------------------------------------+
-	| cap-keyword     |  →  | cap-letter {letter \| digit \| ‘_’} ‘:’   |
-	+-----------------+-----+-------------------------------------------+
+  +-----------------+-----+-------------------------------------------+
+  | small-keyword   |  →  | identifier ‘:’                            |
+  +-----------------+-----+-------------------------------------------+
+  | cap-keyword     |  →  | cap-letter {letter \| digit \| ‘_’} ‘:’   |
+  +-----------------+-----+-------------------------------------------+
 
-Examples: ``at:`` ``Put:`` ``_IntAdd:``
+Examples:
+
+  ``at: Put: _IntAdd:``
 
 .. index::
    single:  argument slot
@@ -931,7 +998,9 @@ Productions:
 	| arg-name | → | ‘:’ identifier |
 	+----------+---+----------------+
 
-Example: ``:name``
+Example:
+
+  | ``:name``
 
 .. index::
    single:  operator
@@ -941,11 +1010,11 @@ Operators
 
 An *operator* consists of a sequence of one or more of the following characters:
 
-! @ # $ % ^ & * - + = ~ / ? < > , ; \| \‘ \\
+  | ``! @ # $ % ^ & * - + = ~ / ? < > , ; | ‘ \``
 
 Two sequences are reserved and are not operators:
 
-\| \^
+  | ``| ^``
 
 Productions:
 
@@ -955,7 +1024,9 @@ Productions:
 	| operator  |  →  | op-char {op-char}                                                                                                                              |
 	+-----------+-----+------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Examples: + - && \|\| <-> % # @ ^
+Examples:
+
+  | ``+ - && \|\| <-> % # @ ^``
 
 .. index::
    single:  Numbers
@@ -967,7 +1038,7 @@ Numbers
 -------
 
 Integer literals are written as a sequence of digits, optionally prefixed with a minus sign and/or a
-base. [#f10]_ No whitespace is allowed between a minus sign and the digit sequence. [#f11]_ Real constants may
+base [#f10]_. No whitespace is allowed between a minus sign and the digit sequence [#f11]_. Real constants may
 be either written in fixed-point or exponential form.
 
 Integers may be written using bases from 2 to 36. For bases greater than ten, the characters ‘*a*’
@@ -978,11 +1049,15 @@ non-decimal number is prefixed by its base value, specified as a decimal number 
 Real numbers may be written in decimal only. The exponent of a floating-point format number indicates
 multiplication of the mantissa by 10 raised to the exponent power; i.e.,
 
-nnnnEddd = nnnn × 10 :sup:`ddd`
+  nnnnEddd = nnnn × 10 :sup:`ddd`
 
 A number with a digit that is not appropriate for the base will cause a lexical error, as will an integer
 constant that is too large to be represented. If the absolute value of a real constant is too large
 or too small to be represented, the value of the constant will be ± infinity or zero, respectively.
+
+.. raw:: latex
+
+  \newpage
 
 Productions:
 
@@ -1004,7 +1079,9 @@ Productions:
   |base              |   →    |   decimal (‘r’ \| ‘R’)                                            |
   +------------------+--------+-------------------------------------------------------------------+
 
-Examples: 123 16r27fe 1272.34e+15 1e10
+Examples:
+
+  ``123 16r27fe 1272.34e+15 1e10``
 
 .. index::
    single:  character escapes
@@ -1020,7 +1097,7 @@ Strings
 
 String constants are enclosed in single quotes (‘’’). With the exception of single quotes and escape
 sequences introduced by a backslash (‘\\’), all characters (including formatting characters like
-newline and carriage return) lying between the delimiting single quotes are included in the string. [#f12]_
+newline and carriage return) lying between the delimiting single quotes are included in the string [#f12]_.
 
 To allow single quotes to appear in a string and to allow non-printing control characters in a string
 to be indicated more visibly, Self provides C-like escape sequences:
@@ -1090,9 +1167,7 @@ Productions:
 
 Example:
 
-::
-
-    "this is a comment"
+  ``"this is a comment"``
 
 .. index::
    single:  block
@@ -1211,11 +1286,11 @@ Example:
 
 .. [#f4] In the user interface a read/write slot is depicted as a single slot with a colon labelling the button used to access the value of the slot; the assignment slot is not shown, to save screen space. In contrast, a read-only slot has an equals sign on the button.
 
-.. [#f5] Nil is a predefined object provided by the implementation. It is intended to indicate “not a useful object.”
+.. [#f5] ``nil`` is a predefined object provided by the implementation. It is intended to indicate “not a useful object.”
 
-.. [#f6] Although a block may be assigned to a slot at any time, it is often not useful to do so: evaluating the slot may result in an error because the activation record for the block’s lexically enclosing scope will have returned; see §2.1.7.
+.. [#f6] Although a block may be assigned to a slot at any time, it is often not useful to do so: evaluating the slot may result in an error because the activation record for the block’s lexically enclosing scope will have returned; see :ref:`pp-langref-blocks`.
 
-.. [#f7] The current programming environment expects a slot annotation to start with one of a number of keywords, including "Category: ", "Comment: ", and "ModuleInfo:". See the programming environment manual for more details.
+.. [#f7] The current programming environment expects a slot annotation to start with one of a number of keywords, including ``Category:``, ``Comment:``, and ``ModuleInfo:``. See the programming environment manual for more details.
 
 .. [#f8] In order to simplify the presentation, this grammar is ambiguous; precedence and associativity rules are used to resolve the ambiguities.
 
@@ -1228,3 +1303,5 @@ Example:
 .. [#f12] When typing strings in, the graphical user interface accepts multi-line strings, but the character-based read-evalprint loop does not.
 
 .. [#f13] In order to simplify the presentation, this grammar is ambiguous; precedence and associativity rules are used to resolve the ambiguities.
+
+.. [#f14] Heterogeneous binary messages have no associativity; homogeneous binary messages associate left-to-right.
