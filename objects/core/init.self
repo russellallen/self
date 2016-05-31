@@ -349,20 +349,31 @@ globals bootstrap _AddSlotsIfAbsent: ( |
         n: concat: n                     With: name.
         (concat: n With: '.self') _RunScriptIfFail: fb).
         
-        read: name From: dir InTree: t = ( |
+        read: name InTree: t RootedAt: r = ( |
            | 
-           read: name From: dir InTree: t IfFail: [ | :e. :prim |
+           read: name From: '' InTree: t RootedAt: r IfFail: [ | :e. :prim |
              'failed to read: ' _StringPrint. 
-             name         _StringPrint.
-             ' from: '    _StringPrint.
-             dir          _StringPrint.
-             ' in tree: ' _StringPrint.
-             t            _StringPrint.
-             '.  Error: ' _StringPrint.
-             e            _StringPrint. 
-             '\n'         _StringPrint. 
+             name           _StringPrint.
+             ' in tree: '   _StringPrint.
+             t              _StringPrint.
+             ' rooted at: ' _StringPrint.
+             r              _StringPrint.
+             '.  Error: '   _StringPrint.
+             e              _StringPrint. 
+             '\n'           _StringPrint. 
              _ThisProcess _AbortProcess.
            ]).
+
+        read: name From: dir InTree: t RootedAt: r IfFail: fb = (
+            registerTree: t RootedAt: r IfConflict: [|:v | ^ fb value: v].
+            read: name From: dir InTree: t IfFail: fb).
+
+        registerTree: t RootedAt: r IfConflict: fb = ( | l |
+            l: (| lobby = lobby |) lobby.
+            (l modules init treeRootFor: t 
+                               IfAbsent: [l modules init registerTree: t At: r. r]
+               ) = r ifFalse: [ ^ fb value: (concat: 'Tree ' With: t With: 'exists with different root.')].
+            self).
 
         read: name From: dir InTree: t IfFail: fb = ( | n | 
            n: ''.
