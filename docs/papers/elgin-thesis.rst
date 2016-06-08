@@ -8,5 +8,4 @@ Elgin Lee
 *Engineer's thesis, Electrical Engineering Department, Stanford
 University, 1988.*
 
-(Not available online)
-
+`PDF <elgin-thesis.pdf>`_

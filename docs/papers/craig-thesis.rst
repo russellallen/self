@@ -72,5 +72,4 @@ Prolog and futures in Multilisp.
 *Ph. D. dissertation, Computer Science Department, Stanford
 University, March 1992.*
 
-(Not available online)
-
+`PDF <craig-thesis.pdf>`_
