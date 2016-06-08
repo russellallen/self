@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.17 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -3148,7 +3149,6 @@ convertSysCallresultToInt:.\x7fModuleInfo: Module: unix InitialContents: FollowS
             | 
             [
                 [ | :exit_inner_and_retry |
-                    process this sleep: 1.
                     ^ callBlock value: [ | :error |
                          error = 'EINTR' ifTrue: exit_inner_and_retry.
                          errBlk value: error.
@@ -4958,6 +4958,31 @@ in the OS specific objects.\x7fModuleInfo: Creator: traits unixFile bsdAndSolari
          'ModuleInfo: Module: unix InitialContents: FollowSlot'
         
          parent* = bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'bsd' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'macOS_X' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         suspendIfAsync = ( |
+            | 
+            " On OSX, calling setOwnerIfFail: on the 
+              standard streams (stdin etc) will fail
+              with ENOTTY. However the streams still 
+              cause SIGIO to be sent so work as async
+              from Self's point of view. This isn't 
+              documented anywhere I can see. So we 
+              don't continually poll and peg a core, 
+              we ignore this failure.
+
+              Note that suspendIfAsync on OS X DOES
+              NOT WORK for named pipes. This appears
+              to be a OS X restriction not a Self one.
+              - rca 2016-05-08"
+
+            setOwnerIfFail: [|:e|
+              'ENOTTY' = e 
+                ifFalse: [process this yield. ^ self]].
+            suspendForIO).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> () From: ( | {
