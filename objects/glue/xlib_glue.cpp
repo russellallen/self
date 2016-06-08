@@ -243,9 +243,6 @@ XWindowAttributes *XGetWindowAttributes_wrap(Display *display,
   return attrs;
 }
 
-
-
-
 void XMoveWindowBy_wrap(Display* display, Window win,
                             int x, int y) {
   int old_x, old_y;
@@ -440,6 +437,29 @@ Atom XClientMessageEvent_atomAt_wrap(XClientMessageEvent* rcvr,
   }
   return rcvr->data.l[index];
 }
+
+void XClientMessageEvent_at_Atom_wrap(XClientMessageEvent* rcvr,
+                                      unsigned int index,
+				      Atom atom, void* FH) {
+  if (    sizeof(rcvr->data.l[0]) * index
+      >=  sizeof(rcvr->data.l)) {
+    prim_failure(FH, BADINDEXERROR);
+    return;
+  }
+  rcvr->data.l[index] = atom;
+}
+
+void XClientMessageEvent_at_Long_wrap(XClientMessageEvent* rcvr,
+                                      unsigned int index,
+                                      long l, void* FH) {
+  if (    sizeof(rcvr->data.l[0]) * index
+      >=  sizeof(rcvr->data.l)) {
+    prim_failure(FH, BADINDEXERROR);
+    return;
+  }
+  rcvr->data.l[index] = l;
+}
+
 
 int XStringToTextProperty_wrap(XTextProperty* textProperty, char* string) {
   return XStringListToTextProperty(&string, 1, textProperty);

@@ -196,6 +196,12 @@ traits: traits xlib display
             = XWindowAttributes {xlib xWindowAttributes deadCopy} \
               call XGetWindowAttributes_wrap passFailHandle canAWS
 
+  Display xSendEventToWindow: proxy Window Window_seal \
+                         Propogate: bool \
+                         EventMask: unsigned_long \
+                         Event: XEvent \
+            = int call XSendEvent canAWS
+
   Display xSetWMProtocolOfWindow: proxy Window Window_seal \
 		          Protocol: proxy Atom Atom_seal \
 	 = int call XSetWMProtocol_wrap canAWS
@@ -786,7 +792,6 @@ traits: traits xlib events xEvent
  visibility: publicSlot
   XEvent type = int getMember type
 
-
 traits: traits xlib events xButtonEvent
  visibility: publicSlot
   XButtonEvent rawTime = oop call xButtonEvent_time
@@ -803,15 +808,32 @@ traits: traits xlib events xButtonEvent
 
 traits: traits xlib events xClientMessageEvent
  visibility: publicSlot
+  void new = XClientMessageEvent {xlib events xClientMessageEvent deadCopy} new
+  XClientMessageEvent type: int = void setMember type
+  XClientMessageEvent serial = unsigned_int getMember serial
+  XClientMessageEvent serial: unsigned_int = void setMember serial
+  XClientMessageEvent sendEvent = bool getMember send_event
+  XClientMessageEvent sendEvent: bool = void setMember send_event
+  XClientMessageEvent display = Display {xlib display deadCopy} getMember display
+  XClientMessageEvent display: Display = void setMember display
+  XClientMessageEvent window \
+	= proxy Window Window_seal {xlib window deadCopy} getMember window
+  XClientMessageEvent window: proxy Window Window_seal = void setMember window
   XClientMessageEvent message_type \
         = proxy Atom Atom_seal {xlib atom deadCopy} getMember message_type
+  XClientMessageEvent message_type: proxy Atom Atom_seal \
+        = void setMember message_type
   XClientMessageEvent format = int getMember format
+  XClientMessageEvent format: int = void setMember format
   XClientMessageEvent atomAt: unsigned_int \
         = proxy Atom Atom_seal {xlib atom deadCopy} \
 	  call XClientMessageEvent_atomAt_wrap passFailHandle
-  XClientMessageEvent window \
-	= proxy Window Window_seal {xlib window deadCopy} getMember window
-
+  XClientMessageEvent at: unsigned_int Atom: proxy Atom Atom_seal \
+        = void call XClientMessageEvent_at_Atom_wrap passFailHandle
+  XClientMessageEvent at: unsigned_int Long: long \
+        = void call XClientMessageEvent_at_Long_wrap passFailHandle
+ visibility: privateSlot
+  XClientMessageEvent basicDelete = void delete
 
 
 traits: traits xlib events xColormapEvent

@@ -1,7 +1,7 @@
  'Sun-$Revision: 30.14 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2011 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
 
@@ -593,6 +593,7 @@ for UI2 windows\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVis
             icon: createIcon: iconFilename.
             xwin iconified: false Icon: icon Input: true.
             xwin catchWMDelete.
+            xwin initFullscreenAtoms.
             xwin eventMask: handler eventsToCatch.
 
             display gc graphics_exposures: false.
@@ -626,6 +627,7 @@ for UI2 windows\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVis
             icon: createIcon: iconFilename.
             xwin iconified: false Icon: icon Input: true.
             xwin catchWMDelete.
+            xwin initFullscreenAtoms.
             xwin eventMask: handler eventsToCatch.
 
             display gc graphics_exposures: false.
