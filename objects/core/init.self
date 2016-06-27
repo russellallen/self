@@ -1,7 +1,7 @@
-'30.11.0-prerelease1'
+'30.12.0'
 
 '
-Copyright 1992-2015 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -550,7 +550,7 @@ globals modules _AddSlots: ( |
     }
     {  'Category: state\x7fModuleInfo: Module: init InitialContents: FollowSlot\x7fVisibility: public'
       copyright <- '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -625,7 +625,7 @@ This module is used to avoid filing out spurious objects in other modules
 	 lobby _RemoveSlot: 'help' IfFail: [|:err. :name| nil].
 	 resend.postFileIn).
 
-      revision <- 'Sun-$Revision: 30.10 $'.
+      revision <- '30.12.0'.
 
       subpartNames <- ''.
 

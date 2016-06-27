@@ -1,6 +1,6 @@
- '30.12.0-prerelease1'
+ '30.13.0'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -89,9 +89,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'fileOut' -> () From: ( | {
-         'ModuleInfo: Module: fileOut InitialContents: InitializeToExpression: (\'30.12.0-prerelease1\')\x7fVisibility: public'
+         'ModuleInfo: Module: fileOut InitialContents: InitializeToExpression: (\'30.13.0\')\x7fVisibility: public'
         
-         revision <- '30.12.0-prerelease1'.
+         revision <- '30.13.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'fileOut' -> () From: ( | {

@@ -1,4 +1,4 @@
- '30.12.1-prerelease1'
+ '30.12.2'
  '
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
@@ -114,9 +114,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'snapshotAction' -> () From: ( | {
-         'ModuleInfo: Module: snapshotAction InitialContents: InitializeToExpression: (\'30.12.1-prerelease1\')\x7fVisibility: public'
+         'ModuleInfo: Module: snapshotAction InitialContents: InitializeToExpression: (\'30.12.2\')\x7fVisibility: public'
         
-         revision <- '30.12.1-prerelease1'.
+         revision <- '30.12.2'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'snapshotAction' -> () From: ( | {
@@ -248,14 +248,10 @@ option is used.\x7fModuleInfo: Module: snapshotAction InitialContents: FollowSlo
          printBanner = ( |
              v.
             | 
-            v: _VMversion.
-            '\n\tWelcome to the Self system!  (Version 4.5.0)\n' printLine.
+            v: about core.
+            ('\n\tWelcome to the Self system!  (', about core asString, ')\n') printLine.
             modules init copyright printLine.
             'Type _Credits for full credits.\n' printLine.
-            ('VM version: ',
-              (v at: 0) printString, '.',
-              (v at: 1) printString, '.',
-              (v at: 2) printString, '\n') printLine.
             isVMADebugBuild ifTrue: [
               printDebugVMWarning
             ]).

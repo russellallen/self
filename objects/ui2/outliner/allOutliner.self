@@ -1,11 +1,18 @@
  'Sun-$Revision: 30.8 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2014 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
+         'Category: versions\x7fModuleInfo: Module: allOutliner InitialContents: FollowSlot'
+        
+         outliner = about systemVersion copyOn: 'Development/1 (after 2014.0)'.
+        } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: allOutliner InitialContents: FollowSlot'

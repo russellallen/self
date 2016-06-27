@@ -106,6 +106,7 @@ testMorphs
 qUI2Events
 tempPaints
 preferencesMenu
+ui2Version
 '.
         } | ) 
 
@@ -170,6 +171,7 @@ preferencesMenu
  bootstrap read: 'qUI2Events' From: 'ui2'
  bootstrap read: 'tempPaints' From: 'ui2'
  bootstrap read: 'preferencesMenu' From: 'ui2'
+ bootstrap read: 'ui2Version' From: 'ui2'
 
 
 

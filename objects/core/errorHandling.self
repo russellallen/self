@@ -1,6 +1,6 @@
- '30.16.0-prerelease1'
+ '30.17.0'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 
@@ -163,9 +163,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'errorHandling' -> () From: ( | {
-         'ModuleInfo: Module: errorHandling InitialContents: InitializeToExpression: (\'30.16.0-prerelease1\')\x7fVisibility: public'
+         'ModuleInfo: Module: errorHandling InitialContents: InitializeToExpression: (\'30.17.0\')\x7fVisibility: public'
         
-         revision <- '30.16.0-prerelease1'.
+         revision <- '30.17.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'errorHandling' -> () From: ( | {

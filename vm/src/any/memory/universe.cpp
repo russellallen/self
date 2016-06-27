@@ -11,8 +11,8 @@
 
 // increment VM_snapshot_version whenever old snapshots will break; reset
 // it to zero when changing the minor or major version
-smi VM_major_version    = 4;
-smi VM_minor_version    = 1;
+smi VM_major_version    = 2016;
+smi VM_minor_version    = 0;
 smi VM_snapshot_version = 13;
 
 
@@ -308,7 +308,7 @@ void universe::genesis()
 
   lprintf("Self Virtual Machine Version %d.%d.%d, %s\n", 
          major_version, minor_version, snapshot_version, vmDate);
-  lprintf("Copyright 1989-2003: The Self Group (type _Credits for credits)\n\n");
+  lprintf("Copyright 1989-2016 AUTHORS (type _Credits for credits)\n\n");
 }
 
 
