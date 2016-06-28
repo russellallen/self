@@ -17,7 +17,6 @@
 		BA573C7D14F4ACE7000FD409 /* SelfWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = BA573C7C14F4ACE7000FD409 /* SelfWorld.m */; };
 		BA573C8214F4DE81000FD409 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA573C8114F4DE81000FD409 /* Security.framework */; };
 		BA93FF0814BFC593005327EE /* RunningSelfVMManagerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA93FF0714BFC593005327EE /* RunningSelfVMManagerModel.m */; };
-		BAD6601F1BF42F5A00249BD1 /* Self.app in Resources */ = {isa = PBXBuildFile; fileRef = BAD6601E1BF42F5A00249BD1 /* Self.app */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +40,6 @@
 		BA573C8114F4DE81000FD409 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		BA93FF0614BFC593005327EE /* RunningSelfVMManagerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunningSelfVMManagerModel.h; sourceTree = "<group>"; };
 		BA93FF0714BFC593005327EE /* RunningSelfVMManagerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunningSelfVMManagerModel.m; sourceTree = "<group>"; };
-		BAD6601E1BF42F5A00249BD1 /* Self.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = Self.app; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +125,6 @@
 		BA4DD8B414B8254600F269FD /* VM */ = {
 			isa = PBXGroup;
 			children = (
-				BAD6601E1BF42F5A00249BD1 /* Self.app */,
 			);
 			name = VM;
 			sourceTree = "<group>";
@@ -190,7 +187,6 @@
 				BA4DD89814B800E700F269FD /* InfoPlist.strings in Resources */,
 				BA4DD89E14B800E700F269FD /* Credits.rtf in Resources */,
 				BA4DD8A414B800E800F269FD /* MainMenu.xib in Resources */,
-				BAD6601F1BF42F5A00249BD1 /* Self.app in Resources */,
 				BA24211D1880BAA2008B5638 /* blueSelf.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

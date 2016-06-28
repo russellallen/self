@@ -3,7 +3,8 @@
 //  Self
 //
 //  Created by Russell Allen on 13/01/12.
-//  Copyright 2012 AUTHORS. All rights reserved.
+//  Last change by Russell Allen on 28 June 2016 to add iTerm2 support
+//  Copyright 2012-2016 AUTHORS. All rights reserved.
 //
 
 #import "RunningSelfVMManagerModel.h"
@@ -106,16 +107,27 @@
 
 - (void)openTerminal:(NSNotification *)aNotification
 {
-    NSString *s = [NSString stringWithFormat:
-                   @"tell application \"Terminal\" to do script \"screen -t Self -D -r %@\"", [self screenIDOfSelectedWorld]];
-    NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
-    [as executeAndReturnError:nil];
-    
-    s = @"tell application \"Terminal\" to activate";
-    as = [[NSAppleScript alloc] initWithSource: s];
-    [as executeAndReturnError:nil];
-
-    
+    NSAppleScript *chk = [[NSAppleScript alloc] initWithSource: @"exists application \"iTerm2\""];
+    Boolean b = [[chk executeAndReturnError:nil] booleanValue];
+    if (b) {
+        NSString *s = [NSString stringWithFormat: @"tell application \"iTerm2\"\n"
+                       "activate\n"
+                       "tell current window\n"
+                       "set newTab to (create tab with default profile command \"screen -t Self -D -r %@\")\n"
+                       "end tell\n"
+                       "end tell", [self screenIDOfSelectedWorld]];
+        NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
+        [as executeAndReturnError:nil];
+     } else {
+        NSString *s = [NSString stringWithFormat:
+                       @"tell application \"Terminal\" to do script \"screen -t Self -D -r %@\"", [self screenIDOfSelectedWorld]];
+        NSAppleScript *as = [[NSAppleScript alloc] initWithSource: s];
+        [as executeAndReturnError:nil];
+        
+        s = @"tell application \"Terminal\" to activate";
+        as = [[NSAppleScript alloc] initWithSource: s];
+        [as executeAndReturnError:nil];
+    }
 }
 
 - (void)forceQuit:(NSNotification *)aNotification
