@@ -12,7 +12,7 @@ if [[ `uname` == 'Linux' ]]; then
     echo
     echo UPDATE AND INSTALL
     apt-get update -y -qq
-    apt-get install -y git cmake build-essential libc6-dev g++ xorg-dev libncurses5-dev -qq
+    apt-get install -y git cmake libc6-dev g++ xorg-dev libncurses5-dev -qq
 
     echo 
     echo SUCCESS?

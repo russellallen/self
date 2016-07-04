@@ -1,8 +1,9 @@
  '$Revision: 30.1 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -297,6 +298,7 @@ SlotsToOmit: clip parent platformWindow.
              disp.
              insetDispBounds.
             | 
+            wld doubleBuffering: false.
             bb: pt ## (w@h).
             disp: quartz directDisplay bestDisplayForBounds: bb.
             insetDispBounds: disp bounds indent: 30. "menu bar hack"

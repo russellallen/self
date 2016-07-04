@@ -1,4 +1,4 @@
- 'Sun-$Revision: 30.15 $'
+ '30.16.0'
  '
 Copyright 1992-2014 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
@@ -180,7 +180,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'paint' -> () From: ( | {
          'ModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.15 $'.
+         revision <- '30.16.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'paint' -> () From: ( | {

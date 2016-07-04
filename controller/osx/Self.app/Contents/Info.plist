@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>self</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>source file</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>TEXT</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>None</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>snap</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Snapshot</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>Snap</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>None</string>
+		</dict>
+	</array>
+	<key>CFBundleExecutable</key>
+	<string>Self</string>
+	<key>CFBundleGetInfoString</key>
+	<string>Self 2016.0.13, © 2016 Self Authors.</string>
+	<key>CFBundleIconFile</key>
+	<string>SelfIcon.icns</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Self</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleSignature</key>
+	<string>SApp</string>
+	<key>CFBundleVersion</key>
+	<string>4.5.0-123-ge30d9a1-dirty</string>
+	<key>CSResourcesFileMapped</key>
+	<true/>
+	<key>CFBundleIdentifier</key>
+	<string>org.selflanguage.Self</string>
+	<key>CFBundleLongVersionString</key>
+	<string>Self 2016.0.13 (4.5.0-123-ge30d9a1-dirty)</string>
+	<key>CFBundleShortVersionString</key>
+	<string>2016.0.13</string>
+	<key>LSRequiresCarbon</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>© 2016 Self Authors.</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+</dict>
+</plist>

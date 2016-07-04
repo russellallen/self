@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BA24211D1880BAA2008B5638 /* blueSelf.icns in Resources */ = {isa = PBXBuildFile; fileRef = BA24211C1880BAA2008B5638 /* blueSelf.icns */; };
+		BA39E6891D41903D0059A212 /* Self.app in Resources */ = {isa = PBXBuildFile; fileRef = BA39E6881D41903D0059A212 /* Self.app */; };
 		BA4DD88E14B800E700F269FD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA4DD88D14B800E700F269FD /* Cocoa.framework */; };
 		BA4DD89814B800E700F269FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BA4DD89614B800E700F269FD /* InfoPlist.strings */; };
 		BA4DD89A14B800E700F269FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA4DD89914B800E700F269FD /* main.m */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		BA24211C1880BAA2008B5638 /* blueSelf.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = blueSelf.icns; sourceTree = "<group>"; };
+		BA39E6881D41903D0059A212 /* Self.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = Self.app; sourceTree = "<group>"; };
 		BA4DD88914B800E700F269FD /* Self Control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Self Control.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA4DD88D14B800E700F269FD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BA4DD89014B800E700F269FD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -125,8 +127,9 @@
 		BA4DD8B414B8254600F269FD /* VM */ = {
 			isa = PBXGroup;
 			children = (
+				BA39E6881D41903D0059A212 /* Self.app */,
 			);
-			name = VM;
+			path = VM;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +190,7 @@
 				BA4DD89814B800E700F269FD /* InfoPlist.strings in Resources */,
 				BA4DD89E14B800E700F269FD /* Credits.rtf in Resources */,
 				BA4DD8A414B800E800F269FD /* MainMenu.xib in Resources */,
+				BA39E6891D41903D0059A212 /* Self.app in Resources */,
 				BA24211D1880BAA2008B5638 /* blueSelf.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

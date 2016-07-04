@@ -306,7 +306,7 @@ void universe::genesis()
   
   postReadSnapshot= false;
 
-  lprintf("Self Virtual Machine Version %d.%d.%d, %s\n", 
+  lprintf("Self Virtual Machine Version %d.%d/%d, %s\n", 
          major_version, minor_version, snapshot_version, vmDate);
   lprintf("Copyright 1989-2016 AUTHORS (type _Credits for credits)\n\n");
 }
