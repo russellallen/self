@@ -44,7 +44,7 @@ if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
     "Minimum OS X version to target for deployment (at runtime); newer APIs weak linked. Set to empty string for default value."
     FORCE)
   # see if we can get a matching SDK
-  foreach(sdk "macosx10.8" "macosx10.7" "macosx10.6")
+  foreach(sdk "macosx10.9" "macosx10.8" "macosx10.7" "macosx10.6")
     execute_process(
     COMMAND xcodebuild -version -sdk "${sdk}" Path
     OUTPUT_VARIABLE _sdkpath
@@ -58,10 +58,14 @@ if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
       )
       break()
     else(_failed)
-        message(FATAL_ERROR "Could not find compatible OS X SDK")
+        break()
     endif()
   endforeach()
-  message(STATUS "Using SDK: ${_sdkpath}")
+  if(CMAKE_OSX_SYSROOT)
+      message(STATUS "Using SDK: ${_sdkpath}")
+  else()
+      message(FATAL_ERROR "Could not find compatible OS X SDK")
+  endif()
 endif()
 
 year(YEAR)
