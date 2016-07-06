@@ -1,3 +1,7 @@
+| System  | Build Status |
+| ------------- | ------------- |
+| VM (for Linux and macOS on master) | [![Build Status](https://travis-ci.org/russellallen/self.svg?branch=master)](https://travis-ci.org/russellallen/self) |
+
 Self
 ====
 
