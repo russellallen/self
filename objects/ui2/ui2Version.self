@@ -3,8 +3,7 @@
 Copyright 2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
-[ 
-"prefileIn" self] value
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -12,7 +11,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
          'Category: versions\x7fModuleInfo: Module: ui2Version InitialContents: FollowSlot'
         
-         morphic = about systemVersion copyOn: 'Development/1 (after 2014.0)'.
+         morphic = about systemVersion copyOn: 'Development/2 (after 2014.0)'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> 'parent' -> () From: ( | {
@@ -22,7 +21,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
             | 
             m addButton: ( (ui2Button copy scriptBlock: [event sourceHand attach: about asOutliner]) 
                                                  label: 'About' )
-                ToGroup: 'builtInMorphs').
+                ToGroup: 'about').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {

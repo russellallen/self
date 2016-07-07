@@ -1,6 +1,6 @@
  '$Revision: 30.19 $'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -244,6 +244,27 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfActivationModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: selfDebugger InitialContents: FollowSlot'
+        
+         preferredBodyColor = ( |
+            | preferences outliner theme debugger).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfActivationModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: selfDebugger InitialContents: FollowSlot'
+        
+         preferredHeaderColor = ( |
+            | preferences outliner theme processDebugger).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfActivationModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: selfDebugger InitialContents: FollowSlot'
+        
+         preferredTagColor = ( |
+            | preferences outliner theme debuggerTag).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfActivationModel' -> 'parent' -> () From: ( | {
          'Category: editing\x7fCategory: method\x7fModuleInfo: Module: selfDebugger InitialContents: FollowSlot\x7fVisibility: private'
         
          referencesToContents = ( |
@@ -331,6 +352,7 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
              sel.
              selCol.
              sp.
+             v.
             | 
             "build big old title:"
             " a row: rcvrCol sp selCol sp argCol sp argObjCol"
@@ -340,8 +362,9 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
             selCol: (columnMorph copy beShrinkWrap rightJustify borderWidth: 0) color: paint named: 'transparent'.
             argCol: selCol copy leftJustify.
 
-            outerRow addMorph: objectPushButton copyMirror: (act receiverIfFail: [|:e| reflect: 'no receiver: ', e])
-                                                     Color: myOutliner color.
+            v: act receiverIfFail: [|:e| reflect: 'no rcvr: ', e].
+            outerRow addMorph: objectPushButton copyMirror: v
+                                                     Color: (preferences outliner theme headerColorFor: v reflectee).
             sp: transparentSpacerMorph copyH: 4.
 
             (selector copyStr: act selector) keywords
@@ -351,7 +374,7 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
                   r: outerRow copyRemoveAllMorphs bottomJustify.
                   r addMorphLast: labelMorphForTitle: arg name.
                   r addMorphLast: sp copy.
-                  r addMorphLast: objectPushButton copyMirror: arg value Color: myOutliner color.
+                  r addMorphLast: objectPushButton copyMirror: arg value Color: (preferences outliner theme headerColorFor: arg value reflectee).
                   argCol addMorphLast: r.
             ].
 
@@ -371,15 +394,17 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
              r.
              s.
              sel.
+             v.
             | 
             r: rowMorph copy.
             r beShrinkWrap.
             r color: paint named: 'transparent'.
             r borderWidth: 0.
 
+            v: act receiverIfFail: [|:e| reflect: 'no rcvr: ', e].
             r addMorphLast: 
-              objectPushButton copyMirror: (act receiverIfFail: [|:e| reflect: 'no rcvr: ', e])
-                                    Color: myOutliner color.
+              objectPushButton copyMirror: v
+                                    Color: (preferences outliner theme headerColorFor: v reflectee).
 
             s: act selectorIfFail: 'noSelector'.
             sel: selector copyStr: s.
@@ -387,7 +412,7 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
             case
               if:   [(reflect: s) isReflecteeString not] 
               Then: [
-                r addMorphLast: objectPushButton copyMirror: (reflect: s) Color: myOutliner color
+                r addMorphLast: objectPushButton copyMirror: (reflect: s) Color: (preferences outliner theme headerColorFor: s)
               ]
               If:   [sel isUnary]
               Then: [r addMorphLast: labelMorphForTitle: '  ', s]
@@ -398,7 +423,7 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
                   r addMorphLast: labelMorphForTitle: '  ', kw, ' '.
                   r addMorphLast: labelMorphForTitle: arg name.
                   r addMorphLast: transparentSpacerMorph copyH: 2.
-                  r addMorphLast: objectPushButton copyMirror: arg value Color: myOutliner color.
+                  r addMorphLast: objectPushButton copyMirror: arg value Color: (preferences outliner theme headerColorFor: arg value reflectee).
               ].
             ].
             r centerJustify.
@@ -571,11 +596,40 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfProcessModel' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: selfDebugger InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: selfDebugger InitialContents: FollowSlot'
+        
+         preferredBodyColor = ( |
+            | preferences outliner theme debugger).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfProcessModel' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: selfDebugger InitialContents: FollowSlot'
         
          preferredColor = ( |
             | 
             preferences outliner theme selfProcessModel).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfProcessModel' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: selfDebugger InitialContents: FollowSlot'
+        
+         preferredHeaderColor = ( |
+            | preferences outliner theme processDebugger).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfProcessModel' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: selfDebugger InitialContents: FollowSlot'
+        
+         preferredTagColor = ( |
+            | preferences outliner theme debuggerTag).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfProcessModel' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: selfDebugger InitialContents: FollowSlot'
+        
+         preferredTitleColor = ( |
+            | 
+            preferences outliner theme processTitle).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfProcessModel' -> 'parent' -> () From: ( | {

@@ -682,6 +682,16 @@ lots of images. It quantizes in RGB space.\x7fModuleInfo: Module: paint InitialC
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'paint' -> () From: ( | {
+         'Category: creation\x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyHexRGB: s = ( |
+            | 
+            copyRed: (s slice: 0 @ 2) hexAsInteger / 255.0
+              Green: (s slice: 2 @ 4) hexAsInteger / 255.0
+               Blue: (s slice: 4 @ 6) hexAsInteger / 255.0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'paint' -> () From: ( | {
          'Category: accessing HSV\x7fModuleInfo: Module: paint InitialContents: FollowSlot\x7fVisibility: public'
         
          copySaturation: s = ( |

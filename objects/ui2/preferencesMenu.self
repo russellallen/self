@@ -1,9 +1,9 @@
  '0.1.0'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
-[ "preFileIn" self ] value
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -76,7 +76,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             | 
             m addButton: ( (ui2Button copy scriptBlock: [event sourceHand attach: preferences asOutliner]) 
                                                  label: 'Preferences' )
-                ToGroup: 'builtInMorphs').
+                ToGroup: 'about').
         } | ) 
 
 

@@ -1,6 +1,6 @@
  '$Revision: 30.38 $'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -406,7 +406,6 @@ e.g. Self or Klein. -- dmu 1/02\x7fModuleInfo: Creator: globals generalProcessMo
               FontSpec: commandButtonStyle fontSpec
              FontColor: commandButtonStyle fontColor.
             ((b script: lblScript y) target: self) isAsynchronous: true.
-            b colorAll: myOutliner color.
             b).
         } | ) 
 
@@ -417,7 +416,7 @@ e.g. Self or Klein. -- dmu 1/02\x7fModuleInfo: Creator: globals generalProcessMo
              cbc.
              r.
             | 
-            r: rowMorph copy borderWidth: 2.
+            r: (rowMorph copy borderWidth: 2) color: paint named: 'transparent'.
             cbc: commandButtonContents.
             cbc do: [|:ls. :i. |
               r addMorphLast: buildCommandButton: ls.
@@ -582,24 +581,24 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalProcessModel' -> 'parent' -> () From: ( | {
-         'Category: building\x7fModuleInfo: Module: pluggableDebugger InitialContents: FollowSlot\x7fVisibility: private'
+         'Category: building\x7fModuleInfo: Module: pluggableDebugger InitialContents: FollowSlot'
         
          constructItems = ( |
              l.
             | 
             l: list copyRemoveAll.
-
             updateStatus.
             l add: status.
-            "l add: mirrorModel newOutlinerFor: process asMirror."
-            myProcess isAlive ifTrue: [ 
+            myProcess isActive ifTrue: [
               commands: buildCommandButtons.
               l add: commands.
               stack: processStackModel newOutlinerFor: myProcess.
-              stack colorAll: myOutliner color.
-              l add: stack. 
+              l add: stack.
             ].
-            myOutliner addItems: l).
+            myOutliner addItems: l.
+            myOutliner recolor.
+            commands isNil ifFalse: [
+              commands morphsDo: [|:m| m color: myOutliner color]]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalProcessModel' -> 'parent' -> () From: ( | {
@@ -1136,7 +1135,7 @@ globals generalModel parent buttonDescriptions. _Clone
                  resend.expand: evt.
                  myOutliner =  buttons owner ifFalse: [
                    buttons delete.
-                   myOutliner addMorphLast:  buttons colorAll: myOutliner color].
+                   myOutliner addMorphLast:  buttons].
               ]. 
             self).
         } | ) 
@@ -1175,19 +1174,34 @@ globals generalModel parent buttonDescriptions. _Clone
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalProcessStackModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: pluggableDebugger InitialContents: FollowSlot'
+        
+         preferredBodyColor = ( |
+            | preferences outliner theme debugger).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalProcessStackModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: pluggableDebugger InitialContents: FollowSlot'
+        
+         preferredHeaderColor = ( |
+            | preferences outliner theme processDebugger).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalProcessStackModel' -> 'parent' -> () From: ( | {
          'Category: building\x7fModuleInfo: Module: pluggableDebugger InitialContents: FollowSlot\x7fVisibility: private'
         
          setAppearanceOfOutliner = ( |
              lessStackButton.
             | 
             moreStackButton: buildStackButton: 'More stack' @ 'target showMoreStack'.
+            moreStackButton color: preferredBodyColor.
             moreStackButton target: self.
 
             lessStackButton: buildStackButton: 'Less stack' @ 'target showLessStack'.
+            lessStackButton color: preferredBodyColor.
             lessStackButton target: self.
 
-            buttons: rowMorph copy.
-            buttons colorAll: myOutliner color.
+            buttons: rowMorph copy color: paint named: 'transparent'.
             buttons beShrinkWrap.
             buttons borderWidth: 3.
 
@@ -1319,7 +1333,6 @@ be the focus
             safelyDo: [
               as do: [|:a. am| 
                am: activationModelProto newOutlinerFor: a.
-               am colorAll: myOutliner color.
                myOutliner addItemFirst: am.
               ]
             ].
@@ -1378,8 +1391,7 @@ be the focus
               ifTrue: [ moreStackButton safelyDo: [ moreStackButton delete ] ].
 
             moreStack && [ ( buttons morphs includes: moreStackButton ) not ]
-              ifTrue: [ buttons safelyDo: [ buttons addMorphLast: moreStackButton.
-                                            buttons colorAll: myOutliner color ] ].
+              ifTrue: [ buttons safelyDo: [ buttons addMorphLast: moreStackButton ] ].
 
             self).
         } | ) 

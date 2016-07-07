@@ -1,8 +1,9 @@
  '$Revision: 30.30 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -766,6 +767,8 @@ whenever the background menu is rebuilt\x7fModuleInfo: Module: worldMorph Initia
             m groups: ( 
               'top' 
             & 'builtInMorphs' 
+            & 'about' 
+            & 'usefulMorphs' 
             & 'worldManagement' 
             & 'applications' 
             & 'memory' 
@@ -947,6 +950,9 @@ the UI process if the last window is closed.\x7fModuleInfo: Module: worldMorph I
         
          contributeToBackgroundMenu: m = ( |
             | 
+            m addButton: ( (ui2Button copy scriptBlock: [event sourceHand attach: selfObjectModel newOutlinerFor: reflect: globals]) 
+                                                 label: 'Globals' )
+                ToGroup: 'usefulMorphs'.
             m addButton: ( (ui2Button copy scriptBlock: [target toggleSpy]) 
                                                  label: 'Toggle Spy' )
                 ToGroup: 'builtInMorphs'.

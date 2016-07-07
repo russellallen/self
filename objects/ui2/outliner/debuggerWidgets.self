@@ -1,8 +1,9 @@
  '$Revision: 30.6 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -118,14 +119,6 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'objectPushButton' -> () From: ( | {
          'ModuleInfo: Module: debuggerWidgets InitialContents: FollowSlot'
         
-         copyMirror: mirr Style: sty = ( |
-            | 
-            ((copy mirror: mirr) color: sty color) initializeStyle).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'objectPushButton' -> () From: ( | {
-         'ModuleInfo: Module: debuggerWidgets InitialContents: FollowSlot'
-        
          initializePrototype = ( |
             | 
             removeAllMorphs.
@@ -142,7 +135,7 @@ SlotsToOmit: parent prototype.
             addMorph:  
               ((rowMorph copy beShrinkWrap color: color) borderWidth: 0) addMorphFirst:
                  (labelMorph copyLabel: name)
-                              fontSpec: outlinerPreferences tinyFontSpec copyName: 'palatino'.
+                              fontSpec: outlinerPreferences tinyFontSpec copyName: 'verdana'.
             recolor.
             self).
         } | ) 
