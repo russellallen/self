@@ -2120,7 +2120,7 @@ on the default display.\x7fModuleInfo: Module: worldMorph InitialContents: Follo
                 oldBounds: (3@24 max: wc position) ## wc size.
                 oldOffset: wc offset.
                 releaseParts.
-                addWindowOnDisplay: (platformSpecificNameFor: wc displayName) Bounds: oldBounds.
+                addWindowOnDisplay: (platformSpecificNameFor: wc originalDisplayName) Bounds: oldBounds.
                 winCanvases first offset: oldOffset.  "set scroll offset of new canvas"
 
                 morphsDo: [| :m |
