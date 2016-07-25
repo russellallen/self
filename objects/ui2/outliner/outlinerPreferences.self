@@ -931,7 +931,8 @@ good for introducing language semantics, say.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'themes' -> 'base' -> () From: ( | {
          'Category: colors\x7fCategory: titles\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         processTitle = paint named: 'transparent'.
+         processTitle = ( |
+            | paint named: 'black').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'themes' -> 'base' -> () From: ( | {

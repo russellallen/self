@@ -11,7 +11,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
          'Category: versions\x7fModuleInfo: Module: allOutliner InitialContents: FollowSlot'
         
-         outliner = about systemVersion copyOn: 'Development/2 (after 2014.0)'.
+         outliner = about systemVersion copyOn: 'Development/3 (after 2014.0)'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {

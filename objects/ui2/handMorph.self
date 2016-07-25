@@ -1,8 +1,9 @@
  '$Revision: 30.16 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -734,6 +735,7 @@ will also change the screen edges, but not the held objects.\x7fModuleInfo: Modu
         
          handleKeyDown: e = ( |
             | 
+            jumpScrollEvent: e.
             testMetaEscape: e.  
             self).
         } | ) 
@@ -978,6 +980,38 @@ will also change the screen edges, but not the held objects.\x7fModuleInfo: Modu
             wc isNotNil && [aCanvas isSameDisplayAs: wc]
                 ifTrue: [ userInfo preferences showNameToSelf   ]
                  False: [ userInfo preferences showNameToOthers ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'handMorph' -> () From: ( | {
+         'Category: event handling\x7fModuleInfo: Module: handMorph InitialContents: FollowSlot'
+        
+         jumpScrollEvent: e = ( |
+             a.
+             b.
+             cs.
+             i <- 3.
+             pt <- (0)@(0).
+            | 
+            " Quick Exit "
+            (e commandIsDown || e controlIsDown) ifFalse: [^ self].
+
+            " Are we shift jumping? "
+            e shiftIsDown ifTrue: [i: 1].
+
+            " Setup "
+            cs: winCanvasForHand size.
+            b: e keyCapsPressed first. " Hmm. Assuming arrow press is first. RCA 2016-07-25 "
+            a: e keyCaps arrows.
+
+            " Set jump direction and distance "
+            b = a left  ifTrue: [pt: (cs x / i) negate @ 0                 ].
+            b = a right ifTrue: [pt: (cs x / i)        @ 0                 ].
+            b = a up    ifTrue: [pt: 0                 @ (cs y / i) negate ].
+            b = a down  ifTrue: [pt: 0                 @ (cs y / i)        ].
+
+            " Jump if we need to "
+            pt != (0@0) ifTrue: [world moveHand: self InWorldBy: pt].
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'handMorph' -> () From: ( | {

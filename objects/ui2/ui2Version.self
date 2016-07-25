@@ -11,7 +11,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
          'Category: versions\x7fModuleInfo: Module: ui2Version InitialContents: FollowSlot'
         
-         morphic = about systemVersion copyOn: 'Development/2 (after 2014.0)'.
+         morphic = about systemVersion copyOn: 'Development/4 (after 2014.0)'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> 'parent' -> () From: ( | {
