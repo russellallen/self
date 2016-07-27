@@ -1,8 +1,9 @@
- '$Revision: 30.7 $'
+ '30.7.1'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -98,6 +99,11 @@ globals moduleHolderModel parent buttonDescriptions. _Clone
         
          contributeToBackgroundMenu: m = ( |
             | 
+            m addButton:
+                ( ( ui2Button copy
+                   scriptBlock: [event sourceHand attach: allModulesModel newOutliner] )
+                         label: 'All Modules' )
+            ToGroup: 'builtInMorphs'.
             m addButton:
                 ( ( ui2Button copy
                    scriptBlock: [event sourceHand attach: changedModulesModel newOutliner] )
@@ -209,9 +215,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'changedModulesModel' -> () From: ( | {
-         'ModuleInfo: Module: changedModulesModel InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: changedModulesModel InitialContents: InitializeToExpression: (\'30.7.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.7 $'.
+         revision <- '30.7.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'changedModulesModel' -> () From: ( | {

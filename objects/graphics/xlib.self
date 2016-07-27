@@ -1,8 +1,9 @@
- '$Revision: 30.16 $'
+ '30.17.0'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -68,9 +69,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'xlib' -> () From: ( | {
-         'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: xlib InitialContents: InitializeToExpression: (\'30.17.0\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.16 $'.
+         revision <- '30.17.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'xlib' -> () From: ( | {
@@ -90,7 +91,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: graphics\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: platform\x7fCategory: graphical interface\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          xlib = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'xlib' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals xlib.

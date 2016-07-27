@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.7 $'
+ '30.8.0'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -47,13 +48,32 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'processesAndIO' -> () From: ( | {
-         'ModuleInfo: Module: processesAndIO InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: processesAndIO InitialContents: InitializeToExpression: (\'30.8.0\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.7 $'.
+         revision <- '30.8.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'processesAndIO' -> () From: ( | {
-         'ModuleInfo: Module: processesAndIO InitialContents: FollowSlot\x7fVisibility: private'
+         'ModuleInfo: Module: processesAndIO InitialContents: InitializeToExpression: (\'ping
+interceptor
+serializer
+processStack
+processStatus
+processErrors
+process
+semaphore
+barrier
+scheduler
+sharedSetAndDictionary
+foreign
+all_OS
+fileStream
+stdin
+stat
+sharedQueue
+monitor
+lock
+\')\x7fVisibility: private'
         
          subpartNames <- 'ping
 interceptor
@@ -72,7 +92,6 @@ fileStream
 stdin
 stat
 sharedQueue
-socketServer
 monitor
 lock
 '.
@@ -99,7 +118,6 @@ lock
  bootstrap read: 'stdin' From: 'core'
  bootstrap read: 'stat' From: 'core'
  bootstrap read: 'sharedQueue' From: 'core'
- bootstrap read: 'socketServer' From: 'core'
  bootstrap read: 'monitor' From: 'core'
  bootstrap read: 'lock' From: 'core'
 

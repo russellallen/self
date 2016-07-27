@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.12 $'
+ '30.13.0'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -47,9 +48,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'numberTests' -> () From: ( | {
-         'ModuleInfo: Module: numberTests InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: numberTests InitialContents: InitializeToExpression: (\'30.13.0\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.12 $'.
+         revision <- '30.13.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'numberTests' -> () From: ( | {
@@ -235,7 +236,9 @@ already has a 0-ed out tag.\x7fModuleInfo: Module: numberTests InitialContents: 
             check: [ test_probPrime ] Against: 'ok' 
                                         Named: 'prob isPrime/nextPrime'.
             check: [ test_log       ] Against: 'ok' Named: 'log'.
-            check: [ test_rsa       ] Against: 'ok' Named: 'rsa').
+            " Remove hard dependency on rsa module. We should
+              replace this with something more flexible - rca 2016/7/27"
+            "check: [ test_rsa       ] Against: 'ok' Named: 'rsa'").
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> 'number' -> () From: ( | {
@@ -528,84 +531,6 @@ already has a 0-ed out tag.\x7fModuleInfo: Module: numberTests InitialContents: 
               ].
             ].
 
-            ^ 'ok').
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> 'number' -> () From: ( | {
-         'ModuleInfo: Module: numberTests InitialContents: FollowSlot\x7fVisibility: public'
-        
-         test_rsa = ( | {
-                 'ModuleInfo: Module: numberTests InitialContents: FollowSlot'
-                
-                 a <- ''.
-                }  {
-                 'ModuleInfo: Module: numberTests InitialContents: FollowSlot'
-                
-                 b <- ''.
-                }  {
-                 'ModuleInfo: Module: numberTests InitialContents: FollowSlot'
-                
-                 c <- ''.
-                }  {
-                 'ModuleInfo: Module: numberTests InitialContents: InitializeToExpression: (rsa copy)'
-                
-                 cryp <- rsa copy.
-                }  {
-                 'ModuleInfo: Module: numberTests InitialContents: FollowSlot'
-                
-                 k <- 47.
-                }  {
-                 'ModuleInfo: Module: numberTests InitialContents: FollowSlot'
-                
-                 modulusSize = 20.
-                }  {
-                 'ModuleInfo: Module: numberTests InitialContents: FollowSlot'
-                
-                 testStringLen = 10.
-                } 
-            | 
-            "Set seed so that all is determined by the one seed originally chosen."
-            cryp randomGenerator seed: (rand integer: maxSmallInt).
-            'RSA: choosing  modulus etc...' printLine.
-            cryp chooseModulus: 10 Bits: modulusSize.
-            cryp modulus < cryp phi ifTrue: [ ^ 'Wrong!' ].
-            noisy ifTrue: [
-                '   Primes:       ' print. cryp primes     printLine.
-                '   Modulus:      ' print. cryp modulus    printLine.
-                '   Phi(Modulus): ' print. cryp phi        printLine.
-                '   Private key:  ' print. cryp privateKey printLine.
-                '   Public  key:  ' print. cryp publicKey  printLine.
-            ].
-            ' Encrypting/decrypting: ' print.
-
-            '1' print.
-            a: rand string: testStringLen.      "Encrypt/decrypt random string"
-            b: cryp encrypt: a.        "and see if original string comes back."
-            c: cryp decrypt: b.
-            a != c ifTrue: [^ 'rsa encryption failed.'].
-
-            [k: (rand integer: cryp phi - 1) + 1. (k gcd: cryp phi) > 1] whileTrue.
-
-            '2' print.
-            cryp publicKey: k.                "Try this number as public key."
-            a: rand string: testStringLen.    "Encrypt/decrypt random string"
-            b: cryp encrypt: a.      "and see if original string comes back."
-            c: cryp decrypt: b.
-            a != c ifTrue: [^ 'rsa encryption failed.'].
-
-            '3' print.
-            cryp privateKey: k.               "And now as private."
-            a: rand string: testStringLen.    "Encrypt/decrypt random string"
-            b: cryp encrypt: a.      "and see if original string comes back."
-            c: cryp decrypt: b.
-            a != c ifTrue: [^ 'rsa encryption failed.'].
-
-            "Make sure we try all methods."
-            a: cryp randomGenerator.      
-            cryp randomGenerator: a copy.
-            cryp chooseKeys.
-
-            '' printLine.
             ^ 'ok').
         } | ) 
 

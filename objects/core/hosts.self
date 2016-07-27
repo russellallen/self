@@ -1280,21 +1280,6 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             | host copyForThisHost).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: platform\x7fCategory: graphical interface\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
-        
-         x11Globals = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals x11Globals.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( | {
-         'Category: graphics (ui1)\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
-        
-         xlib = bootstrap stub -> 'globals' -> 'xlib' -> ().
-        } | ) 
-
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'host' -> () From: ( | {
          'ModuleInfo: Module: hosts InitialContents: InitializeToExpression: (dictionary copyRemoveAll)\x7fVisibility: public'
         

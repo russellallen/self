@@ -1,8 +1,9 @@
  '$Revision: 30.7 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -72,7 +73,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: applications\x7fModuleInfo: Module: socketServer InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: applications\x7fModuleInfo: Module: socketServer InitialContents: FollowSlot'
         
          socketServer = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'socketServer' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals socketServer.

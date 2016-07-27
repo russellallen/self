@@ -1,8 +1,9 @@
- '$Revision: 30.18 $'
+ '30.18.1'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -54,9 +55,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'xEvents' -> () From: ( | {
-         'ModuleInfo: Module: xEvents InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: xEvents InitialContents: InitializeToExpression: (\'30.18.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.18 $'.
+         revision <- '30.18.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'xEvents' -> () From: ( | {

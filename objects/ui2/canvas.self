@@ -1,8 +1,9 @@
- '$Revision: 30.17 $'
+ '30.17.1'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -953,9 +954,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'canvas' -> () From: ( | {
-         'ModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: canvas InitialContents: InitializeToExpression: (\'30.17.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.17 $'.
+         revision <- '30.17.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'canvas' -> () From: ( | {
