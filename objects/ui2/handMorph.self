@@ -993,7 +993,7 @@ will also change the screen edges, but not the held objects.\x7fModuleInfo: Modu
              pt <- (0)@(0).
             | 
             " Quick Exit "
-            (e commandIsDown || e controlIsDown) ifFalse: [^ self].
+            (e commandIsDown || e metaIsDown) ifFalse: [^ self].
 
             " Are we shift jumping? "
             e shiftIsDown ifTrue: [i: 1].
