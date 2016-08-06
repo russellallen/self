@@ -91,7 +91,7 @@ Inc. has been advised of the possibility of such damage.'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: about InitialContents: FollowSlot'
+         'Category: (private)\x7fModuleInfo: Module: about InitialContents: FollowSlot'
         
          parent* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'about' -> 'parent' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals about parent.
@@ -106,7 +106,7 @@ Inc. has been advised of the possibility of such damage.'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
-         'Category: support\x7fModuleInfo: Module: about InitialContents: FollowSlot'
+         'Category: (private)\x7fModuleInfo: Module: about InitialContents: FollowSlot'
         
          systemVersion = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'about' -> 'systemVersion' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals about systemVersion.

@@ -1112,15 +1112,15 @@ good for introducing language semantics, say.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'themes' -> 'default' -> () From: ( | {
-         'Category: body\x7fModuleInfo: Module: outlinerPreferences InitialContents: InitializeToExpression: (paint copyHexRGB: \'FFEFD5\')'
+         'Category: body\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         debugger = paint copyHexRGB: 'FFEFD5'.
+         debugger = paint copyRed: 0.932551 Green: 0.875855  Blue: 0.826979.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'themes' -> 'default' -> () From: ( | {
-         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: InitializeToExpression: (paint copyHexRGB: \'FFEFD5\')'
+         'Category: tags\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         debuggerTag = paint copyHexRGB: 'FFEFD5'.
+         debuggerTag = paint copyRed: 0.932551 Green: 0.875855  Blue: 0.826979.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'themes' -> 'default' -> () From: ( | {
@@ -1182,15 +1182,15 @@ good for introducing language semantics, say.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'themes' -> 'default' -> () From: ( | {
-         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: InitializeToExpression: (paint copyHexRGB: \'FFEFD5\')'
+         'Category: header\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         processDebugger = paint copyHexRGB: 'FFEFD5'.
+         processDebugger = paint copyRed: 0.932551 Green: 0.875855  Blue: 0.826979.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'themes' -> 'default' -> () From: ( | {
          'Category: body\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
-         selfProcessModel = paint copyRed: 0.900293 Green: 0.500489  Blue: 0.500489.
+         selfProcessModel = paint copyRed: 0.932551 Green: 0.875855  Blue: 0.826979.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'themes' -> 'default' -> () From: ( | {
