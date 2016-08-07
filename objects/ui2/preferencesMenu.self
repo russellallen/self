@@ -74,9 +74,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         
          contributeToBackgroundMenu: m = ( |
             | 
-            m addButton: ( (ui2Button copy scriptBlock: [event sourceHand attach: preferences asOutliner]) 
+            m addButton: ( (ui2Button copy scriptBlock: [event sourceHand attach: event sourceHand world outlinerForMirror: reflect: preferences]) 
                                                  label: 'Preferences' )
-                ToGroup: 'about').
+                ToGroup: 'usefulObjects').
         } | ) 
 
 

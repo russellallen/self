@@ -19,9 +19,9 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         
          contributeToBackgroundMenu: m = ( |
             | 
-            m addButton: ( (ui2Button copy scriptBlock: [event sourceHand attach: about asOutliner]) 
+            m addButton: ( (ui2Button copy scriptBlock: [event sourceHand attach: event sourceHand world outlinerForMirror: reflect: about]) 
                                                  label: 'About' )
-                ToGroup: 'about').
+                ToGroup: 'usefulObjects').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {

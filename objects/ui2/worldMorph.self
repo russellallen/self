@@ -767,8 +767,7 @@ whenever the background menu is rebuilt\x7fModuleInfo: Module: worldMorph Initia
             m groups: ( 
               'top' 
             & 'builtInMorphs' 
-            & 'about' 
-            & 'usefulMorphs' 
+            & 'usefulObjects' 
             & 'worldManagement' 
             & 'applications' 
             & 'memory' 
@@ -950,9 +949,9 @@ the UI process if the last window is closed.\x7fModuleInfo: Module: worldMorph I
         
          contributeToBackgroundMenu: m = ( |
             | 
-            m addButton: ( (ui2Button copy scriptBlock: [event sourceHand attach: selfObjectModel newOutlinerFor: reflect: globals]) 
+            m addButton: ( (ui2Button copy scriptBlock: [event sourceHand attach: event sourceHand world outlinerForMirror: reflect: globals]) 
                                                  label: 'Globals' )
-                ToGroup: 'usefulMorphs'.
+                ToGroup: 'usefulObjects'.
             m addButton: ( (ui2Button copy scriptBlock: [target toggleSpy]) 
                                                  label: 'Toggle Spy' )
                 ToGroup: 'builtInMorphs'.
@@ -1169,7 +1168,7 @@ read and process input events, and update the display.\x7fModuleInfo: Module: wo
          'Category: running\x7fCategory: options\x7fComment: Quartz works either way, but X needs this to be true.
   -- dmu 1/08\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
         
-         doubleBuffering <- bootstrap stub -> 'globals' -> 'true' -> ().
+         doubleBuffering <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
