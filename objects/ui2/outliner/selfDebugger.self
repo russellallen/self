@@ -364,7 +364,7 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
 
             v: act receiverIfFail: [|:e| reflect: 'no rcvr: ', e].
             outerRow addMorph: objectPushButton copyMirror: v
-                                                     Color: (preferences outliner theme headerColorFor: v reflectee).
+                                                     Color: (preferences outliner theme processDebugger "headerColorFor: v reflectee").
             sp: transparentSpacerMorph copyH: 4.
 
             (selector copyStr: act selector) keywords
@@ -374,7 +374,7 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
                   r: outerRow copyRemoveAllMorphs bottomJustify.
                   r addMorphLast: labelMorphForTitle: arg name.
                   r addMorphLast: sp copy.
-                  r addMorphLast: objectPushButton copyMirror: arg value Color: (preferences outliner theme headerColorFor: arg value reflectee).
+                  r addMorphLast: objectPushButton copyMirror: arg value Color: (preferences outliner theme processDebugger "headerColorFor: arg value reflectee").
                   argCol addMorphLast: r.
             ].
 
@@ -404,7 +404,7 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
             v: act receiverIfFail: [|:e| reflect: 'no rcvr: ', e].
             r addMorphLast: 
               objectPushButton copyMirror: v
-                                    Color: (preferences outliner theme headerColorFor: v reflectee).
+                                    Color: (preferences outliner theme processDebugger "headerColorFor: v reflectee").
 
             s: act selectorIfFail: 'noSelector'.
             sel: selector copyStr: s.
@@ -412,7 +412,7 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
             case
               if:   [(reflect: s) isReflecteeString not] 
               Then: [
-                r addMorphLast: objectPushButton copyMirror: (reflect: s) Color: (preferences outliner theme headerColorFor: s)
+                r addMorphLast: objectPushButton copyMirror: (reflect: s) Color: (preferences outliner theme processDebugger "headerColorFor: s")
               ]
               If:   [sel isUnary]
               Then: [r addMorphLast: labelMorphForTitle: '  ', s]
@@ -423,7 +423,7 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
                   r addMorphLast: labelMorphForTitle: '  ', kw, ' '.
                   r addMorphLast: labelMorphForTitle: arg name.
                   r addMorphLast: transparentSpacerMorph copyH: 2.
-                  r addMorphLast: objectPushButton copyMirror: arg value Color: (preferences outliner theme headerColorFor: arg value reflectee).
+                  r addMorphLast: objectPushButton copyMirror: arg value Color: (preferences outliner theme processDebugger "headerColorFor: arg value reflectee").
               ].
             ].
             r centerJustify.
