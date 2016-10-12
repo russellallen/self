@@ -591,6 +591,27 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
          'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
         
+         verdana = ( |
+            | helvetica).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
+         'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+        
+         verdanaBold = ( |
+            | helveticaBold).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
+         'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+        
+         verdanaItalic = ( |
+            | helveticaItalic).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
+         'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+        
          zapfChancery = '-*-zapfchancery-medium-i-normal--'.
         } | ) 
 
