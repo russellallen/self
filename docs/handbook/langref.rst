@@ -701,7 +701,7 @@ Resending messages
 
 A *resend* allows an overridding method to invoke the overridden method. Directed resends allow ambiguities among overridden methods to be resolved by constraining the lookup to search a single parent slot. Both resends and directed resends may change the name of the message being sent from the name of the current method, and may pass different arguments than the arguments passed to the current method. The receiver of a resend or a directed resend must be the implicit receiver.
 
-Intuitively, resend is similar to Smalltalk’s ``supersend`` and CLOS’ ``call-next-method``.
+Intuitively, resend is similar to Smalltalk’s ``super`` send and CLOS’ ``call-next-method``.
 
 A resend is written as an implicit-receiver message with the reserved word ``resend``, a period, and the message name. No whitespace may separate ``resend``, the period, and the message name.
 
