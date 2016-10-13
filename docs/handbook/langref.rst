@@ -651,7 +651,7 @@ is interpreted as
 
     5 min: (6 min: 7 Max: 8 Max: (9 min: 10 Max: 11))
 
-The association order and capitalization requirements are intended to reduce the number of parentheses necessary in Self code. For example, taking the minimum of two slots mand nand storing the result into a data slot i may be written as::
+The association order and capitalization requirements are intended to reduce the number of parentheses necessary in Self code. For example, taking the minimum of two slots ``m`` and ``n`` and storing the result into a data slot i may be written as::
 
     i: m min: n
 
