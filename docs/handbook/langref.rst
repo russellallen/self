@@ -846,7 +846,8 @@ The function *undirected_resend(rec, smh, sel, args)* is defined as follows:
 **Input**:
   | ``rec``, the receiver of the message
   | ``smh``, the sending method holder
-  | ``sel``, the message selector args, the actual arguments
+  | ``sel``, the message selector
+  | ``args``, the actual arguments
 
 **Output**:
   | ``res``, the result object
