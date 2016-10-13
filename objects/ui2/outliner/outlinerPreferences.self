@@ -532,7 +532,7 @@ I am also immutable.\x7fModuleInfo: Creator: globals outlinerPreferences headerB
             tinyFontSize:   14.
 
             "Some big fixed fonts: 8x13, 8x13bold, 8x16, 9x15 9x15bold, 10x20, 12x24"
-            ui2_textFiled fontSpec: globals fontSpec copyName: '10x20' Size: 20.
+            ui2_textField fontSpec: globals fontSpec copyName: '10x20' Size: 20.
 
             flushMenuCaches.
             self).
