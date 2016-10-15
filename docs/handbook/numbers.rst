@@ -47,11 +47,11 @@ Random Numbers
 ::
 
     clonable
-    random
-    randomLC
-    prototypes random
+        random
+            randomLC
+                prototypes random
 
-``Traits random`` defines the abstract behavior of random number generators. A random number
+``traits random`` defines the abstract behavior of random number generators. A random number
 generator can be used to generate random booleans, integers, floats, characters or strings. ``traits
 randomLC`` defines a concrete specialization based on a simple linear congruence algorithm. For
 convenience, the prototype for ``randomLC`` is “``random``,” not “``randomLC``”.
@@ -64,7 +64,7 @@ Time
 ::
 
     clonable
-    time
+        time
 
 A time object represents a date and time (to the nearest millisecond) since midnight GMT on January
 1, 1970. The message ``current`` returns a new time object containing the current time. Two
