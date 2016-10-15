@@ -1,6 +1,6 @@
- '30.11.0'
+ '30.11.1'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -170,7 +170,7 @@ performance tuning to the system.\x7fModuleInfo: Module: desktop InitialContents
 
             w: worldMorph
                 copyOpenOnDisplay: dName
-                           Bounds: (100@100) ## (707@450).
+                           Bounds: preferences desktop initialBounds.
             w addInitialMorphs.
             w go.
             '
@@ -425,9 +425,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'desktop' -> () From: ( | {
-         'ModuleInfo: Module: desktop InitialContents: InitializeToExpression: (\'30.11.0\')\x7fVisibility: public'
+         'ModuleInfo: Module: desktop InitialContents: InitializeToExpression: (\'30.11.1\')\x7fVisibility: public'
         
-         revision <- '30.11.0'.
+         revision <- '30.11.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'desktop' -> () From: ( | {
@@ -464,6 +464,18 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          gray44 = ( |
             | (paint named: 'gray') copyBrightness: 0.93).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'Comment: This is the initial size and position
+of the main window of a Self desktop
+when initially opened - ie what 
+happens when you do \'desktop open\'
+
+Once opened, Self windows should remember 
+their size and position by themselves.\x7fModuleInfo: Module: desktop InitialContents: InitializeToExpression: ((100@100) ## (707@450))'
+        
+         initialBounds <- (100@100) ## (707@450).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
