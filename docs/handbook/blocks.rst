@@ -105,7 +105,7 @@ Other Block Behavior
 
 Blocks have some other useful behavior:
 
-    * One can determine the time in milliseconds required to execute a block using various ways of measuring time using the messages ``userTime``, ``systemTime``, ``cpuTime``, and ``real-Time``.
+    * One can determine the time in milliseconds required to execute a block using various ways of measuring time using the messages ``userTime``, ``systemTime``, ``cpuTime``, and ``realTime``.
 
     * One can profile the execution of a block using the messages ``profile`` and ``flatProfile``. ``profile`` prints out the source level call graph annotated with call site and timing information	whereas ``flatProfile`` prints out a flat profile sorted by module.
 
