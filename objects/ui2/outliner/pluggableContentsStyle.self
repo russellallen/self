@@ -1,8 +1,9 @@
  '$Revision: 30.6 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -14,6 +15,13 @@ See the LICENSE file for license information.
              {} = 'ModuleInfo: Creator: globals generalModel parent contentsEditorStyleProto parent.
 '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> 'contentsEditorStyleProto' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: pluggableContentsStyle InitialContents: FollowSlot'
+        
+         color = ( |
+            | myModel preferredEditorColor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> 'contentsEditorStyleProto' -> 'parent' -> () From: ( | {
