@@ -1,6 +1,6 @@
  '30.11.0'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -170,7 +170,7 @@ performance tuning to the system.\x7fModuleInfo: Module: desktop InitialContents
 
             w: worldMorph
                 copyOpenOnDisplay: dName
-                           Bounds: (100@100) ## (707@450).
+                           Bounds: preferences desktop initialBounds.
             w addInitialMorphs.
             w go.
             '
@@ -464,6 +464,12 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          gray44 = ( |
             | (paint named: 'gray') copyBrightness: 0.93).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
+         'ModuleInfo: Module: desktop InitialContents: InitializeToExpression: ((100@100) ## (707@450))'
+        
+         initialBounds <- (100@100) ## (707@450).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
