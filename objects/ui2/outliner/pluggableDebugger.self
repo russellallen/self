@@ -1,4 +1,4 @@
- '$Revision: 30.38 $'
+ '30.38.1'
  '
 Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
@@ -589,7 +589,7 @@ SlotsToOmit: parent.
             l: list copyRemoveAll.
             updateStatus.
             l add: status.
-            myProcess isActive ifTrue: [
+            myProcess isAlive ifTrue: [
               commands: buildCommandButtons.
               l add: commands.
               stack: processStackModel newOutlinerFor: myProcess.
@@ -1449,9 +1449,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pluggableDebugger' -> () From: ( | {
-         'ModuleInfo: Module: pluggableDebugger InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: pluggableDebugger InitialContents: InitializeToExpression: (\'30.38.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.38 $'.
+         revision <- '30.38.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pluggableDebugger' -> () From: ( | {
