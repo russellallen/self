@@ -1,4 +1,4 @@
- '$Revision: 30.6 $'
+ '30.6.1'
  '
 Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
@@ -58,9 +58,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'debuggerWidgets' -> () From: ( | {
-         'ModuleInfo: Module: debuggerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: debuggerWidgets InitialContents: InitializeToExpression: (\'30.6.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.6 $'.
+         revision <- '30.6.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'debuggerWidgets' -> () From: ( | {
@@ -135,7 +135,7 @@ SlotsToOmit: parent prototype.
             addMorph:  
               ((rowMorph copy beShrinkWrap color: color) borderWidth: 0) addMorphFirst:
                  (labelMorph copyLabel: name)
-                              fontSpec: outlinerPreferences tinyFontSpec copyName: 'verdana'.
+                              fontSpec: outlinerPreferences tinyFontSpec.
             recolor.
             self).
         } | ) 
