@@ -9,13 +9,13 @@ if(SELF_X11)
 endif()
 
 list(APPEND _defines
-  -DFAST_COMPILER 
+  -DFAST_COMPILER
   -DSIC_COMPILER
   -DNATIVE_ARCH=${platform_processor}
   ${DYNAMIC}
 )
 
-add_definitions_if_cmakevar( 
+add_definitions_if_cmakevar(
   COMPILER
   TARGET_OS_VERSION
   TARGET_OS_FAMILY
@@ -30,10 +30,14 @@ add_definitions_if_cmakevar(
 list(APPEND _flags
   -fno-threadsafe-statics
   -fvisibility=default
-  -fkeep-inline-functions
   -fno-exceptions
   -fno-stack-protector
 )
+
+if(gcc)
+  # Flag only supported on GCC
+  list(APPEND _flags -fkeep-inline-functions)
+endif()
 
 if(SELF_COVERAGE)
   list(APPEND _flags --coverage)
@@ -47,15 +51,14 @@ endif()
 # setup all warning flags
 #
 list(APPEND _flags
-  -Wabi 
-  -Wreorder 
-  -Wreturn-type 
-  -Wswitch 
-  -Wcomment 
-  -Wformat 
-  -Wpointer-arith 
-  -Woverloaded-virtual 
+  -Wabi
+  -Wreorder
+  -Wreturn-type
+  -Wswitch
+  -Wcomment
+  -Wformat
+  -Wpointer-arith
+  -Woverloaded-virtual
   -Wno-write-strings
   -Wparentheses
 )
-

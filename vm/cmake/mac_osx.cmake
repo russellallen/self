@@ -4,7 +4,7 @@ if(NOT APPLE)
 endif()
 
 if((CMAKE_GENERATOR MATCHES Xcode) AND ((XCODE_VERSION VERSION_LESS "4") AND (clang)))
-    message("WARNING:  Self on Xcode 3 does not work with Clang. 
+    message("WARNING:  Self on Xcode 3 does not work with Clang.
          It simply lacks C++ support.")
 endif()
 
@@ -33,17 +33,19 @@ set(GUI_TYPE MACOSX_BUNDLE)
 # Things we only check once.
 #
 if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
-  # no x86_64 atm, 
-  # so forcibilly overwrite
+  # no x86_64 atm,
+  # so forcibly overwrite
   set(CMAKE_OSX_ARCHITECTURES i386 CACHE STRING
      "Build architectures for OSX"
     FORCE)
   # we need to be 10.6 compliant.
-  # so forcibilly overwrite
+  # so forcibly overwrite
   set(CMAKE_OSX_DEPLOYMENT_TARGET "10.6" CACHE STRING
     "Minimum OS X version to target for deployment (at runtime); newer APIs weak linked. Set to empty string for default value."
     FORCE)
   # see if we can get a matching SDK
+  # first, unset this because it is probably set to the latest SDK
+  unset(CMAKE_OSX_SYSROOT CACHE)
   foreach(sdk "macosx10.9" "macosx10.8" "macosx10.7" "macosx10.6")
     execute_process(
     COMMAND xcodebuild -version -sdk "${sdk}" Path
@@ -62,7 +64,7 @@ if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
     endif()
   endforeach()
   if(CMAKE_OSX_SYSROOT)
-      message(STATUS "Using SDK: ${_sdkpath}")
+      message(STATUS "Using SDK: ${CMAKE_OSX_SYSROOT}")
   else()
       message(FATAL_ERROR "Could not find compatible OS X SDK")
   endif()
@@ -72,24 +74,24 @@ year(YEAR)
 
 set(MACOSX_BUNDLE_GUI_IDENTIFIER
   "org.selflanguage.${PROJECT_NAME}")
-set(MACOSX_BUNDLE_BUNDLE_NAME 
+set(MACOSX_BUNDLE_BUNDLE_NAME
   "${PROJECT_NAME}")
-set(MACOSX_BUNDLE_SHORT_VERSION_STRING 
+set(MACOSX_BUNDLE_SHORT_VERSION_STRING
   "${SELF_VERSION_MAJOR}.${SELF_VERSION_MINOR}.${SELF_VERSION_SNAPSHOT}")
-set(MACOSX_BUNDLE_BUNDLE_VERSION 
+set(MACOSX_BUNDLE_BUNDLE_VERSION
   "${SELF_BUILD}")
-set(MACOSX_BUNDLE_LONG_VERSION_STRING 
+set(MACOSX_BUNDLE_LONG_VERSION_STRING
   "${PROJECT_NAME} ${SELF_VERSION_MAJOR}.${SELF_VERSION_MINOR}.${SELF_VERSION_SNAPSHOT} (${SELF_BUILD})")
 set(MACOSX_BUNDLE_COPYRIGHT
   "© ${YEAR} Self Authors.")
 set(MACOSX_BUNDLE_INFO_STRING
   "${PROJECT_NAME} ${SELF_VERSION_MAJOR}.${SELF_VERSION_MINOR}.${SELF_VERSION_SNAPSHOT}, ${MACOSX_BUNDLE_COPYRIGHT}")
-set(MACOSX_BUNDLE_ICON_FILE 
+set(MACOSX_BUNDLE_ICON_FILE
   SelfIcon.icns)
 set(MACOSX_DEPLOYMENT_TARGET # to be configured by Xcode
   "\${MACOSX_DEPLOYMENT_TARGET}")
 
-set(OSX_ICON_FILES ${SELF_BUILD_SUPPORT_DIR}/${platform}/${MACOSX_BUNDLE_ICON_FILE}) 
+set(OSX_ICON_FILES ${SELF_BUILD_SUPPORT_DIR}/${platform}/${MACOSX_BUNDLE_ICON_FILE})
 # set where in the bundle to put the icns files
 set_source_files_properties(${OSX_ICON_FILES} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
 # include the icns files in the target
@@ -118,10 +120,10 @@ list(APPEND EXTRA_LIBRARIES ${frameworks})
 
 
 #
-# Mac compile definitons, independent of  generator
+# Mac compile definitions, independent of  generator
 #
 list(APPEND _defines
-#  -DGCC3=1 #lets see if we can live withiout it
+#  -DGCC3=1 #lets see if we can live without it
   -DGLUE_CHECKSUM=0
 )
 
@@ -146,26 +148,25 @@ else()
       foreach(_content ${_nib_contents})
         set(_nib_content_relpath ${_nib_name}/${_content})
         set(_nib_content_fullpath ${_nib_path}/${_nib_content_relpath})
-        get_filename_component(_nib_content_path ${_nib_content_relpath} PATH)        
+        get_filename_component(_nib_content_path ${_nib_content_relpath} PATH)
         list(APPEND SRC ${_nib_content_fullpath})
         set_source_files_properties(${_nib_content_fullpath}
-          PROPERTIES MACOSX_PACKAGE_LOCATION 
+          PROPERTIES MACOSX_PACKAGE_LOCATION
           Resources/${_nib_content_path})
       endforeach()
     else()
       set_source_files_properties(${_nib} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
     endif()
   endforeach()
-  
-  
+
+
   # Flags. Xcode does it already
-  
   list(APPEND _flags
     --sysroot ${CMAKE_OSX_SYSROOT}
     -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}
   )
-  
-  foreach(_link_flags 
+
+  foreach(_link_flags
     CMAKE_EXE_LINKER_FLAGS
     CMAKE_EXE_LINKER_FLAGS_DEBUG
     CMAKE_EXE_LINKER_FLAGS_RELEASE
@@ -184,7 +185,7 @@ endif()
 macro(setup_target target)
   # "super"
   setup_target_common(${target})
-  
+
   if(CMAKE_GENERATOR MATCHES Xcode)
     # Select Xcode compiler based on user choice
     if(clang)
@@ -200,7 +201,7 @@ macro(setup_target target)
         message(STATUS "Using LLVM-gcc for Xcode")
       endif()
     endif()
-        
+
     # These are the XCode-equivalendts for the flags/warnings in setup.
     # we hence remove the respective flag, it gets added anyways at compile time
     set(CMAKE_XCODE_ATTRIBUTE_GCC_WARN_CHECK_SWITCH_STATEMENTS "YES")
@@ -211,40 +212,40 @@ macro(setup_target target)
     remove_definitions(-Wparentheses)
     set(CMAKE_XCODE_ATTRIBUTE_GCC_WARN_TYPECHECK_CALLS_TO_PRINTF "YES")
     remove_definitions(-Wformat)
-    
+
     set(CMAKE_XCODE_ATTRIBUTE_GCC_THREADSAFE_STATICS "NO")
     remove_definitions(-fno-threadsafe-statics)
     set(CMAKE_XCODE_ATTRIBUTE_GCC_SYMBOLS_PRIVATE_EXTERN "NO")
     remove_definitions(-fvisibility=default)
     set(CMAKE_XCODE_ATTRIBUTE_GCC_INLINES_ARE_PRIVATE_EXTERN "NO")
-    remove_definitions(-fno-visibility-inlines-hidden)  
+    remove_definitions(-fno-visibility-inlines-hidden)
     set(CMAKE_XCODE_ATTRIBUTE_GCC_ENABLE_CPP_EXCEPTIONS "NO")
     remove_definitions(-fno-exceptions)
     # set(CMAKE_XCODE_ATTRIBUTE_GCC_ENABLE_CPP_RTTI "NO")
     # remove_definitions(-fno-rtti)
-    
+
     if(SELF_PROFILE)
       set(CMAKE_XCODE_ATTRIBUTE_GENERATE_PROFILING_CODE "YES")
       remove_definitions(-pg)
     endif()
-    
+
     if(SELF_COVERAGE)
       set(CMAKE_XCODE_ATTRIBUTE_GCC_GENERATE_TEST_COVERAGE_FILES "YES")
       remove_definitions(-ftest-coverage)
       set(CMAKE_XCODE_ATTRIBUTE_GCC_INSTRUMENT_PROGRAM_FLOW_ARCS "YES")
       remove_definitions(-fprofile-arcs)
     endif()
-  
+
     set(CMAKE_XCODE_ATTRIBUTE_COPY_PHASE_STRIP "NO")
     set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT "dwarf-with-dsym")
-    
+
     # cmake adds warnings hardcoded which we dont want.
     # mess with the warnings
     set_target_properties(${target} PROPERTIES XCODE_ATTRIBUTE_WARNING_CFLAGS "")
   endif()
-  
+
   # configure CMake to use a custom Info.plist
-  set_target_properties(${target} PROPERTIES 
+  set_target_properties(${target} PROPERTIES
     MACOSX_BUNDLE_INFO_PLIST ${SELF_BUILD_SUPPORT_DIR}/${platform}/${SELF_OSX_INFO_PLIST}.plist)
 endmacro()
 
