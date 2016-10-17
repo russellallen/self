@@ -21,10 +21,10 @@ becomes ``_AsObjectIfFail``:, and ``_IntAdd``: becomes ``_IntAdd:IfFail:``.
 
 ::
 
-  > *3 _IntAdd: ’a’ IfFail: [ | :error. :name |
-  (name, ’ failed with ’, error, ’.’) printLine. 0 ]*
+  > 3 _IntAdd: ’a’ IfFail: [ | :error. :name |
+  (name, ’ failed with ’, error, ’.’) printLine. 0 ]
   _IntAdd: failed with badTypeError.
-  0        The primitive returns the result of evaluating the failure block.
+  0        "The primitive returns the result of evaluating the failure block."
   >
 
 When a primitive fails, if the primitive call has an ``IfFail``: part, the message ``value:With:`` is
