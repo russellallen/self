@@ -446,7 +446,7 @@ but Self creates one dynamically to handle the error.
 
 The little boxes represent the receiver and arguments of the methods on the stack. Get the receiver
 of the evnironment... message. Click on the box to the left of the word ``evnironmentVariable:``
-(the one labelled “``...bal os``” if you are running on the Macintosh):
+(the one labelled “``...bals os``” if you are running on the Macintosh):
 
 .. figure:: images/Pgm_Env_Image21.*
     :scale: 80
