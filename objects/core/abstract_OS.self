@@ -1,6 +1,6 @@
  '$Revision: 30.16 $'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -789,7 +789,7 @@ Return the expanded file name.\x7fModuleInfo: Module: abstract_OS InitialContent
              line <- ''.
             | 
             "Read up to and including first \n - skip this \n."
-            [ buf: readCount: 1 IfFail: fb. (buf != '\n') && [atEOF not] ] whileTrue: [ 
+            [ buf: readCount: 1 IfFail: [|:e| ^ fb value: e With: line]. buf != '\n' ] whileTrue: [ 
                 line: line, buf.
             ].
             line).
