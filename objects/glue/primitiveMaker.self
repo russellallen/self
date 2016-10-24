@@ -1,8 +1,9 @@
  '$Revision: 30.11 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -4000,13 +4001,10 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'ModuleInfo: Module: primitiveMaker InitialContents: FollowSlot\x7fVisibility: private'
         
          setupFileHeaders = ( |
-             pragma = '# ifdef INTERFACE_PRAGMAS
-# pragma interface
-# endif
-'.
+             pragma = '# pragma once'.
             | 
             comment: warningMessage.
-            appendToMacros: pragma.
+            appendToMacros: pragma, '\n'.
             flag = '' ifFalse: [
                 appendToMacros: '# undef PRIMITIVE_GLUE_FLAG_CODE', '\n'.
                 appendToMacros:
