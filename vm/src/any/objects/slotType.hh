@@ -73,15 +73,15 @@ class slotTypeClass {
 
 // other macros
 
-# define MAP_SLOT(stype)  (slotType( int32(stype) & ~slot_type_mask \
+# define MAP_SLOT(stype)  (slotType( (int32(stype) & ~slot_type_mask) \
                                    | map_slot_type))
 
-# define ARG_SLOT(stype)  (slotType( int32(stype) & ~slot_type_mask \
+# define ARG_SLOT(stype)  (slotType( (int32(stype) & ~slot_type_mask) \
                                    | arg_slot_type))
 
-# define OBJ_SLOT(stype)  (slotType( int32(stype) & ~slot_type_mask \
+# define OBJ_SLOT(stype)  (slotType( (int32(stype) & ~slot_type_mask) \
                                    | obj_slot_type))
 
 # define SET_BASIC_SLOT_TYPE(stype, t)  \
-     (slotType( int32(stype) & ~slot_type_mask \
-              | int32(t    ) &  slot_type_mask ))
+     (slotType( (int32(stype) & ~slot_type_mask) \
+              | (int32(t    ) &  slot_type_mask) ))
