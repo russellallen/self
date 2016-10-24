@@ -700,7 +700,7 @@ smi set_memory_low_space_threshold_prim(oop rcvrIgnored, smi newLST, void *FH)
   Unused(rcvrIgnored);
   if (newLST < Memory->old_gen->get_VM_reserved_mem()) {
     failure(FH, "Threshold set below VM reserve");
-    return NULL;
+    return (smi)NULL;
   }
   smi oldLST= Memory->old_gen->getLowSpaceThreshold();
   Memory->old_gen->setLowSpaceThreshold(newLST);

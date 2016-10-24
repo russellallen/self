@@ -79,7 +79,7 @@ class Pc {
   stringOop current_selector();
   bool     in_block_clone();
   bool     is_calling_prim();
-  void     set_value(char* v, int w = NULL) {
+  void     set_value(char* v, int w = 0) {
              value = v;  
              # if GENERATE_DEBUGGING_AIDS
                if (SpendTimeForDebugging)
