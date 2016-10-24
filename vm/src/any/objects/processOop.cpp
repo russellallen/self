@@ -315,7 +315,7 @@ smi processOopClass::StackDepth_prim(void *FH) {
   Process* p = checkProcess(this);
   if (!p) {
     prim_failure(FH, NOPROCESSERROR);
-    return NULL;
+    return smi(NULL);
   }
   int32 vdepth = p->stack()->vdepth();
   if (p != vmProcess && vdepth > 0) vdepth--;   // hide dummy doIt vframe

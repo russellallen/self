@@ -27,7 +27,7 @@ bool InterruptedContext::in_system_trap() {
 
 
 int InterruptedContext::system_trap() {
-  return NULL; // unimp for now
+  return int(NULL); // unimp for now
 }
 
 
