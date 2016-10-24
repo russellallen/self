@@ -5,10 +5,19 @@
 #
 # in:
 #   $SELF_BUILD_SUPPORT_DIR
+#   $SELF_GENERATED_INCLUDE_FILES_DIR
 #   $LOCAL_CMAKE_DIR
 #   ($CMAKE_BINARY_DIR)
 
-set(SRC_VMDATE ${SELF_GENERATED_INLCUDE_FILES_DIR}/vmDate.cpp)
+set(_incl_parent_dir ${CMAKE_BINARY_DIR})
+set(_incl_dest_dir ${_incl_parent_dir}/incls)
+set(
+  SELF_GENERATED_INCLUDE_FILES_DIR 
+  "${_incl_dest_dir}"
+  CACHE PATH
+  "Path to the generated include files"
+)
+set(SRC_VMDATE ${SELF_GENERATED_INCLUDE_FILES_DIR}/vmDate.cpp)
 set(SRC_VMDATE_IN ${SELF_BUILD_SUPPORT_DIR}/vmDate.cpp.in)
 configure_file(
   "${LOCAL_CMAKE_DIR}/configureVmDate.cmake.in"
@@ -16,6 +25,7 @@ configure_file(
 ) 
 
 add_custom_target(create_vmDate
+    COMMAND mkdir -p ${_incl_dest_dir}
     COMMAND "${CMAKE_COMMAND}" -P "${CMAKE_BINARY_DIR}/configureVmDate.cmake" 
     DEPENDS ${SRC}
     COMMENT "Creating ${SRC_VMDATE}"

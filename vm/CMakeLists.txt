@@ -70,23 +70,10 @@ include(configurations)
 # sets ${3RD_PARTY_LIBS}
 include(dependencies)
 
-# 
-# generate dependent include files.
-# sets ${SELF_PREFIX_HEADER}
-#
-get_directory_property(le_dirs INCLUDE_DIRECTORIES)
-
-include(makeDeps)
-
 # we need a vmDate thing.
 # sets $SRC_VMDATE
 include(setupVmDate)
 list(APPEND SRC ${SRC_VMDATE})
-
-# pre-compiled headers. (not for Xcode, has its own way)
-if(NOT CMAKE_GENERATOR MATCHES Xcode)
-  add_pch_rule(${SELF_PREFIX_HEADER} SRC)
-endif()
 
 ## setup the acutal executable.
 #
@@ -94,10 +81,6 @@ add_executable(${PROJECT_NAME} ${GUI_TYPE} ${SRC})
 add_dependencies(${PROJECT_NAME} create_vmDate)
 
 
-
-# setup prefix-header for target
-
-include_prefix_header(${PROJECT_NAME} ${SELF_PREFIX_HEADER})
 
 # setup linked libraries for target
 target_link_libraries(${PROJECT_NAME} ${EXTRA_LIBRARIES} ${3RD_PARTY_LIBS})

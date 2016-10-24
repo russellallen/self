@@ -49,10 +49,3 @@ macro(setup_target target)
 endmacro()
 
 
-#
-# "API". Setup prefix headers
-#
-macro(include_prefix_header target file)
-  # "super"
-  include_prefix_header_common(${target} ${file})
-endmacro()
