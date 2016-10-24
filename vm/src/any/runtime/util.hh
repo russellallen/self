@@ -48,7 +48,7 @@ inline void copy_bytes_overlapping(char* from, char* to, fint count) {
   else if (from > to) copy_bytes_up(from, to, count);
 }
 
-void set_bytes(char* to, fint count, char value = NULL);
+void set_bytes(char* to, fint count, char value = '\0');
 
 // like strcmp, but with slightly different order for slot
 // ordering (sorts foo: before foo0 so that it immediately follows foo)
