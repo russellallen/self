@@ -46,10 +46,6 @@ class WindowSet  /* AllStatic */ {
 
 // remove Carbon macros to avoid name collisions
 #  undef assert
-#  undef assert_type
-#  undef assert_smi
-#  undef assert_byteVector
-#  undef assert_objVector
 
 #  include "asserts.hh"
 #  undef verify
