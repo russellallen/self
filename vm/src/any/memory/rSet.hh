@@ -27,7 +27,7 @@ class rSet: public CHeapObj {
   char* byte_for(void *p) {
     return &byte_map[int32((char*)p - low_boundary) >> card_shift]; }
   oop*  oop_for(char* p) {
-    return (oop*)(low_boundary  +  (p - byte_map  <<  card_shift)); }
+    return (oop*)(low_boundary  +  ((p - byte_map)  <<  card_shift)); }
 
   static oop*  card_for(oop* p) { return (oop*)(int32(p) & ~(card_size - 1)); }
   
