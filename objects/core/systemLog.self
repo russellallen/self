@@ -1,9 +1,9 @@
- '0.1.0'
+ '0.2.0'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
-
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -203,7 +203,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
             severity asColorAnsiString, ' -- ', 
             (logger asString != '' ifTrue: [logger asString, ': '] 
                                     False: ''), 
-            message asString).
+            (ensureString: message)).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'entry' -> 'parent' -> () From: ( | {
@@ -221,7 +221,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
             severity asString, ' -- ', 
             (logger asString != '' ifTrue: [logger asString, ': '] 
                                     False: ''), 
-            message asString).
+            (ensureString: message)).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'log' -> 'levels' -> () From: ( | {
@@ -783,9 +783,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'systemLog' -> () From: ( | {
-         'ModuleInfo: Module: systemLog InitialContents: InitializeToExpression: (\'0.1.0\')\x7fVisibility: public'
+         'ModuleInfo: Module: systemLog InitialContents: InitializeToExpression: (\'0.2.0\')\x7fVisibility: public'
         
-         revision <- '0.1.0'.
+         revision <- '0.2.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'systemLog' -> () From: ( | {
