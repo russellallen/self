@@ -1,6 +1,6 @@
- '30.24.0'
+ '30.25.0'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -48,9 +48,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'indexable' -> () From: ( | {
-         'ModuleInfo: Module: indexable InitialContents: InitializeToExpression: (\'30.24.0\')\x7fVisibility: public'
+         'ModuleInfo: Module: indexable InitialContents: InitializeToExpression: (\'30.25.0\')\x7fVisibility: public'
         
-         revision <- '30.24.0'.
+         revision <- '30.25.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'indexable' -> () From: ( | {
@@ -344,12 +344,13 @@ just return a copy of this object. -- Adam & Alex, 4/04\x7fModuleInfo: Module: i
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
-         'Category: split and join\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: split and join\x7fComment: Joins a collection of items with seq. Returns a
+a collection with the same type as seq.\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
         
          joinUsing: seq = ( |
              nc.
             | 
-            nc: first copyRemoveAll.
+            nc: seq copyRemoveAll.
             do: [|:e| nc: nc, e, seq].
             nc isEmpty
              ifTrue: [ nc ]
@@ -507,7 +508,8 @@ and insert the specified new stuff in its place.\x7fModuleInfo: Module: indexabl
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'indexable' -> () From: ( | {
-         'Category: split and join\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: split and join\x7fComment: Splits a sequence of items with seq into a list.
+eg \'hello\' splitOn: \'ll\' ---> (\'he\' & \'o\') asList\x7fModuleInfo: Module: indexable InitialContents: FollowSlot\x7fVisibility: public'
         
          splitOn: seq = ( |
              i.
