@@ -1,4 +1,4 @@
- 'Sun-$Revision: 30.8 $'
+ '30.9.0'
  '
 Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
@@ -9,9 +9,9 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
-         'Category: versions\x7fModuleInfo: Module: allOutliner InitialContents: FollowSlot'
+         'Category: versions\x7fModuleInfo: Module: allOutliner InitialContents: InitializeToExpression: (nil)'
         
-         outliner = about systemVersion copyOn: 'Development/4 (after 2014.0)'.
+         outliner.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
@@ -55,9 +55,19 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allOutliner' -> () From: ( | {
-         'ModuleInfo: Module: allOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: allOutliner InitialContents: FollowSlot'
         
-         revision <- 'Sun-$Revision: 30.8 $'.
+         postFileIn = ( |
+            | 
+            resend.postFileIn.
+            about outliner: about systemVersion readFrom: 'outliner.version'.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allOutliner' -> () From: ( | {
+         'ModuleInfo: Module: allOutliner InitialContents: InitializeToExpression: (\'30.9.0\')\x7fVisibility: public'
+        
+         revision <- '30.9.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allOutliner' -> () From: ( | {

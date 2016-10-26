@@ -9,9 +9,9 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
-         'Category: versions\x7fModuleInfo: Module: coreVersion InitialContents: FollowSlot'
+         'Category: versions\x7fModuleInfo: Module: coreVersion InitialContents: InitializeToExpression: (nil)'
         
-         core = about systemVersion copyOn: 'Development/1 (after 2014.0)'.
+         core.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
@@ -70,7 +70,10 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
          'ModuleInfo: Module: coreVersion InitialContents: FollowSlot'
         
          postFileIn = ( |
-            | resend.postFileIn).
+            | 
+            resend.postFileIn.
+            about core: about systemVersion readFrom: 'core.version'.
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'coreVersion' -> () From: ( | {
