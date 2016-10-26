@@ -212,6 +212,19 @@ Inc. has been advised of the possibility of such damage.'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> 'systemVersion' -> 'parent' -> () From: ( | {
+         'Comment: reads a version from a file
+relative to the Self working dir\x7fModuleInfo: Module: about InitialContents: FollowSlot'
+        
+         readFrom: fn = ( |
+             f.
+            | 
+            [
+            f: os_file openForReading: bootstrap selfObjectsWorkingDir, '/', fn.
+            copyOn: f readLine.
+            ] onReturn: [f close]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> 'systemVersion' -> 'parent' -> () From: ( | {
          'ModuleInfo: Module: about InitialContents: FollowSlot\x7fVisibility: public'
         
          storeStringIfFail: fb = ( |

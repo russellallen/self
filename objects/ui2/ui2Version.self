@@ -1,4 +1,4 @@
- '0.0.1'
+ '0.1.0'
  '
 Copyright 2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
@@ -9,9 +9,9 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
-         'Category: versions\x7fModuleInfo: Module: ui2Version InitialContents: FollowSlot'
+         'Category: versions\x7fModuleInfo: Module: ui2Version InitialContents: InitializeToExpression: (nil)'
         
-         morphic = about systemVersion copyOn: 'Development/4 (after 2014.0)'.
+         morphic.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> 'parent' -> () From: ( | {
@@ -82,14 +82,15 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
          postFileIn = ( |
             | 
              resend.postFileIn.
+            about morphic: about systemVersion readFrom: 'morphic.version'.
             worldMorph addBackgroundMenuContributor: about.
             self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'ui2Version' -> () From: ( | {
-         'ModuleInfo: Module: ui2Version InitialContents: InitializeToExpression: (\'0.0.1\')\x7fVisibility: public'
+         'ModuleInfo: Module: ui2Version InitialContents: InitializeToExpression: (\'0.1.0\')\x7fVisibility: public'
         
-         revision <- '0.0.1'.
+         revision <- '0.1.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'ui2Version' -> () From: ( | {
