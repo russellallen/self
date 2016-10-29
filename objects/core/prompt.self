@@ -295,21 +295,22 @@ is a sane default for perProcessGlobals prompt inputLoopProcess\x7fModuleInfo: C
             continuing:      false.
             stdin reset.
             stdout reset.
-            [stopping] whileFalse: [ | newInput <- ''. |
-                waitingForInput: true.
-                printPrompt.
-                newInput: stdin readLineIfFail: [|:e. :line| log error: e. line].
-                waitingForInput: false.
-                input: input, newInput.
-                stdin atEOF ifTrue: [
-                    stdin resetEOF.
-                    input isEmpty ifTrue: ['\n' print. ^ self].
-                    '\n' print. 
-                    input: ''.
-                    continuing: false.
-                ] False: [
-                    input: (processInput: input).
-                ].
+            [stopping] whileFalse: [ | newInput <- ''. stillReading <- true|
+               waitingForInput: true.
+               printPrompt.
+               [stillReading] whileTrue: [
+                 stillReading: false.
+                 newInput: newInput, (stdin readLineIfFail: [|:e. :line| log error: e. line]).
+                 stdin atEOF ifTrue: [
+                     " We were interrupted - maybe ^D "
+                     " ^D on an empty line quits "
+                     (input, newInput) isEmpty ifTrue: ['\n' print. _Quit].
+                     " Otherwise keep going "
+                     stillReading: true.
+                     stdin resetEOF].
+               ].
+               waitingForInput: false.
+               input: (processInput: input, newInput).
             ].
             'stopping' printLine.
             scheduler stop.
