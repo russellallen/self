@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.8 $'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -297,7 +298,7 @@ is a sane default for perProcessGlobals prompt inputLoopProcess\x7fModuleInfo: C
             [stopping] whileFalse: [ | newInput <- ''. |
                 waitingForInput: true.
                 printPrompt.
-                newInput: stdin readLine.
+                newInput: stdin readLineIfFail: [|:e. :line| log error: e. line].
                 waitingForInput: false.
                 input: input, newInput.
                 stdin atEOF ifTrue: [
