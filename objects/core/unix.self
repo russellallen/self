@@ -3596,6 +3596,7 @@ in the OS specific objects.\x7fModuleInfo: Creator: traits unixFile bsdAndSolari
                 -1 != res ifTrue: [
                     0 = res ifTrue: [
                       (transferred < min) ifTrue: [ 
+                          atEOF: true.
                           ^ fb value: 'EOF reached before min transfer limit'
                       ].
                       atEOF: true. 
