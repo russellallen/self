@@ -1,3 +1,45 @@
+Changes (after 4.5.0)
+--------------------------------------------
+
+New features:
+
+  * Changed to new versioning system for key subsystems (vm, core, morphic, outliners)
+    and for release as a whole.
+  * New `about` object accessible from main menu with system info.
+  * New `preferences` object allows easy access to system preferences.
+  * New themeing system for outliners and a new look.
+  * Extensive reorganisation of object categories in `globals` to make global
+    objects more easily discoverable and understandable.
+  * New option on `worldbuilder.self` script to allow for fully automated building
+    of Self worlds by setting subsystem options on command line.
+  * New string helper methods: `splitOn:`, `joinUsing:` and `slice:`.
+  * The `transporter` is now aware of code being in multiple independent trees, not
+    only one single Self tree, allowing for separate projects to be kept in separate
+    version control repositories.
+  * A system-wide logger has been included to standardise logging practices within
+    Self.
+
+Updates:
+
+  * Self Control.app on macOS updated to work with El Capitan.
+
+Fixes:
+
+  * Fix on macOS to reduce CPU usage when idle.
+  * VM build will now explicitly show which macOS SDK it is using.
+  * ^D (EOF) handled correctly at prompt
+  * Many other misc fixes.
+
+Documentation:
+
+  * General improvements to Self handbook.
+  * Self website moved out of main repository.
+
+Other:
+
+  * Webserver moved to separate repository: github.com/russellallen/self-webserver
+
+
 Changes in Self 4.5.0
 ---------------------
 
@@ -347,4 +389,3 @@ Changes in Self 4.1.2
 
 * Self now runs on OS X.
 * A bug in the SPARC spy has been fixed.
-
