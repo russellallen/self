@@ -28,7 +28,7 @@ smi set_memory_tenuring_threshold_prim(oop rcvrIgnored, smi newThresh, void *FH)
   Unused(rcvrIgnored);
   if (newThresh < 0 || newThresh > Memory->current_sizes.surv_size) {
     failure(FH, "Threshold out of range");
-    return NULL;
+    return (smi)NULL;
   }
   smi oldThresh= Memory->Desired_Surv_Size;
   Memory->Desired_Surv_Size= newThresh;

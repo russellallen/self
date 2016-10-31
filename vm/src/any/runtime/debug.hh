@@ -155,9 +155,9 @@ class FlagSettingInt {
     SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT,                                      \
     (SpendTimeForDebugging ? Memory->trueObj : Memory->falseObj),             \
     ( flag == Memory->falseObj  ||                                            \
-      flag == Memory->trueObj && (GENERATE_DEBUGGING_AIDS                     \
+      (flag == Memory->trueObj && (GENERATE_DEBUGGING_AIDS                    \
       || (warning("cannot SpendTimeForDebugging unless "                      \
-             "VM is compiled with -DGENERATE_DEBUGGING_AIDS=1"), false))),\
+             "VM is compiled with -DGENERATE_DEBUGGING_AIDS=1"), false)))),\
     SpendTimeForDebugging =  (flag == Memory->trueObj ? true : false),        \
     "Slow down Self in order to ease VM debugging", true)                    \
                                                                               \
@@ -165,9 +165,9 @@ class FlagSettingInt {
     SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT,                                      \
     (CheckAssertions ? Memory->trueObj : Memory->falseObj),                   \
     ( flag == Memory->falseObj  ||                                            \
-      flag == Memory->trueObj && (GENERATE_DEBUGGING_AIDS                     \
+      (flag == Memory->trueObj && (GENERATE_DEBUGGING_AIDS                    \
       || (warning("cannot CheckAssertions unless "                            \
-             "VM is compiled with -DGENERATE_DEBUGGING_AIDS=1"), false))),\
+             "VM is compiled with -DGENERATE_DEBUGGING_AIDS=1"), false)))),\
     CheckAssertions =  (flag == Memory->trueObj ? true : false),              \
     "turn on assertion checking in VM", true)                                 \
                                                                               \
@@ -175,9 +175,9 @@ class FlagSettingInt {
     SPEND_TIME_FOR_DEBUGGING_BY_DEFAULT,                                      \
     (ZapResourceArea ? Memory->trueObj : Memory->falseObj),                   \
     ( flag == Memory->falseObj  ||                                            \
-      flag == Memory->trueObj && (GENERATE_DEBUGGING_AIDS                     \
+      (flag == Memory->trueObj && (GENERATE_DEBUGGING_AIDS                    \
       || (warning("cannot ZapResourceArea unless "                            \
-             "VM is compiled with -DGENERATE_DEBUGGING_AIDS=1"), false))),\
+             "VM is compiled with -DGENERATE_DEBUGGING_AIDS=1"), false)))),\
     ZapResourceArea =  (flag == Memory->trueObj ? true : false),              \
     "zap the resource area when deallocated", true)                    
 
