@@ -1,6 +1,7 @@
 | System  | Build Status |
 | ------------- | ------------- |
 | VM (for Linux and macOS on master) | [![Build Status](https://travis-ci.org/russellallen/self.svg?branch=master)](https://travis-ci.org/russellallen/self) |
+| VM (for Linux and macOS on dev)    | [![Build Status](https://travis-ci.org/russellallen/self.svg?branch=dev)](https://travis-ci.org/russellallen/self) |
 
 Self
 ====
@@ -21,5 +22,3 @@ For information on:
 [1]: http://handbook.selflanguage.org/4.5/
 [2]: http://handbook.selflanguage.org/4.5/buildvm.html
 [3]: http://handbook.selflanguage.org/4.5/buildworld.html
-
-

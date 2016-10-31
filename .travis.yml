@@ -26,6 +26,7 @@ matrix:
 branches:
   only:
     - master
+    - dev
     
 script:
   - "if [[ \"$TRAVIS_OS_NAME\" == \"linux\" ]]; then docker run -i -v \"${PWD}:/opt/self\" 32bit/ubuntu:16.04 /bin/bash -c \"linux32 --32bit i386 /opt/self/vm/travis-ci-buildAndTest.sh\" ; fi"
@@ -33,4 +34,3 @@ script:
 
 after_script:
   - build/vm/Self -f objects/worldBuilder.self -o morphic -f2 objects/ci.self
-
