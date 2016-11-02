@@ -770,7 +770,7 @@
         sel == VMString[LESS_THAN] ||
         sel == VMString[LESS_EQUAL] || 
         sel == VMString[GREATER_EQUAL] ||
-        sel == VMString[GREATER_THAN] |
+        sel == VMString[GREATER_THAN] ||
         // integer looping messages
         sel == VMString[TO_DO_] ||
         sel == VMString[UP_TO_DO_] ||
