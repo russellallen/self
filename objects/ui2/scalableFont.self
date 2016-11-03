@@ -1,4 +1,4 @@
- '30.10.1'
+ '30.10.2'
  '
 Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
@@ -56,9 +56,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'scalableFont' -> () From: ( | {
-         'ModuleInfo: Module: scalableFont InitialContents: InitializeToExpression: (\'30.10.1\')\x7fVisibility: public'
+         'ModuleInfo: Module: scalableFont InitialContents: InitializeToExpression: (\'30.10.2\')\x7fVisibility: public'
         
-         revision <- '30.10.1'.
+         revision <- '30.10.2'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'scalableFont' -> () From: ( | {
@@ -235,6 +235,24 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
         
          courierItalic = '-*-courier-medium-o-normal--'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
+         'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+        
+         fixed = '-*-fixed-medium-r-normal--'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
+         'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+        
+         fixedBold = '-*-fixed-bold-r-normal--'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
+         'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+        
+         fixedItalic = '-*-fixed-medium-o-normal--'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
