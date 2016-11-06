@@ -857,7 +857,7 @@ in different modules, the outliner shows a summary of the modules of an object, 
 
 Turned around, a module can be viewed as a collection of slots, plus some other information: each
 module also includes a directory, a list of submodules to be read in whenever it is read, and
-*post-FileIn* method to be run whenever the module is read. These data allow modules to be organized
+*postFileIn* method to be run whenever the module is read. These data allow modules to be organized
 hierarchically by subsystem, for example the ``allUI2`` module includes all the modules in the ``ui2``
 system.
 
@@ -897,7 +897,7 @@ enough information, and a variety of means have to be used. As shown in the flow
   In this case, the transporter just files out a reference to the object’s creator, cleverly
   enough so that the actual creator slot does not need to have been already filed in. On the other
   hand, if an object is immutable, its identity is not important. If an object is annotated as
-  ``is-Complete`` [#f9]_ the transporter sends it ``isImmutableForFilingOut`` and if that message returns
+  ``isComplete`` [#f9]_ the transporter sends it ``isImmutableForFilingOut`` and if that message returns
   ``true``, the transporter never files out a reference. For example, integers would answer
   ``true`` to this message.
 
