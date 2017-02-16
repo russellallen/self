@@ -158,11 +158,12 @@ bool XPlatformWindow::setup_gcs() {
   // 16x16 grey stipple pixmap (16x16 is preferred stipple size)
   const int grey_width = 16;
   const int grey_height = 16;
-  static char grey_bits[] = {
+  static unsigned char grey_bits[] = {
     0x55, 0x55, 0xaa, 0xaa, 0x55, 0x55, 0xaa, 0xaa, 0x55, 0x55, 0xaa, 0xaa,
     0x55, 0x55, 0xaa, 0xaa, 0x55, 0x55, 0xaa, 0xaa, 0x55, 0x55, 0xaa, 0xaa,
     0x55, 0x55, 0xaa, 0xaa, 0x55, 0x55, 0xaa, 0xaa};
-  Pixmap stipple = XCreateBitmapFromData(_display, _xwindow, grey_bits,
+  Pixmap stipple = XCreateBitmapFromData(_display, _xwindow,
+                                         (const char *)grey_bits,
                                          grey_width, grey_height);
   XSetStipple(_display, _gc, stipple);
   
