@@ -1,5 +1,12 @@
 #!/bin/sh
 
+# Settings
+FULLNAME=`cat release.version`
+SHORTNAME=${FULLNAME//\//-}
+SHORTNAME=${SHORTNAME// /-}
+SHORTNAME=${SHORTNAME//(/}
+SHORTNAME=${SHORTNAME//)/}
+
 # Setup
 rm -r artifacts
 mkdir -p artifacts
@@ -15,6 +22,5 @@ mkdir -p artifacts
 ./buildKitchenSinkSnapshot.sh
 
 # Build Distributions
-./buildDMG.sh "Self 2016.1" self-2016.1
-./buildZIP.sh self-2016.1
-
+./buildDMG.sh "$FULLNAME" "$SHORTNAME"
+./buildZIP.sh "$SHORTNAME"
