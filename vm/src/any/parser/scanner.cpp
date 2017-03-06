@@ -295,7 +295,7 @@ inline fint asnum(fint c) {
 SourceBuffer::SourceBuffer(FILE* source_file) {
   if (!source_file) return;
   // Find the size of the file
-  if (fseek(source_file, 0, 2) < 0) {
+  if (fseek(source_file, 0, SEEK_END) < 0) {
     perror("seek failed");
     fatal("cannot seek in file");
   }
