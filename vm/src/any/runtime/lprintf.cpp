@@ -127,6 +127,12 @@ extern "C" void mysprintf(char*& buf, lprint_format_t fmt, ...) {
 
 
 volatile void fatal_handler() {
+  static bool in_fatal = false;
+  if (!in_fatal) {
+    in_fatal = true;
+  }
+  else
+    return;
   error_breakpoint();
   SignalInterface::simulate_fatal_signal();
   OS::terminate(-1);
