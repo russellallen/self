@@ -29,7 +29,7 @@ branches:
     - dev
     
 script:
-  - "if [[ \"$TRAVIS_OS_NAME\" == \"linux\" ]]; then docker run -i -v \"${PWD}:/opt/self\" 32bit/ubuntu:16.04 /bin/bash -c \"linux32 --32bit i386 /opt/self/vm/travis-ci-buildAndTest.sh\" ; fi"
+  - "if [[ \"$TRAVIS_OS_NAME\" == \"linux\" ]]; then docker run -i -v \"${PWD}:/opt/self\" ioft/i386-ubuntu:16.04 /bin/bash -c \"linux32 --32bit i386 /opt/self/vm/travis-ci-buildAndTest.sh\" ; fi"
   - "if [[ \"$TRAVIS_OS_NAME\" == \"osx\" ]]; then vm/travis-ci-buildAndTest.sh ; fi"
 
 after_script:
