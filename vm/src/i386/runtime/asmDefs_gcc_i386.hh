@@ -195,8 +195,9 @@ ENDMACRO
       ENDMACRO
 
       MACRO(jmp_label, label)
-        .globl \label // force 32-bits for the label
+	// make sure jmp occumpies 5 bytes
         jmp \label
+	nop; nop; nop
       ENDMACRO
     # else
       # error what?
