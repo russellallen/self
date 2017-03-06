@@ -193,7 +193,7 @@ class ByteCode: public AbstractByteCode {
     sourceLen=    smiOop_zero;
     
     if (GenArgCountBytecode) {
-      // Use new Iset from now now -- dmu 10/01
+      // Use new Iset from now on -- dmu 10/01
       GenInstructionSetSelectionByteCode(0, 0, TWENTIETH_CENTURY_PLUS_ARGUMENT_COUNT_INSTRUCTION_SET);
     }
   }

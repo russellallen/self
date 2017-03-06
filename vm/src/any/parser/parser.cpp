@@ -452,7 +452,7 @@ Object* Parser::parseObject(char match, Token* t, fint nargs,
         return NULL;
   }
 
-  // If this object has code code make sure its slots are non methods
+  // If this object has code make sure its slots are non methods
 
   // - 1 to omit closing paren
   source_body_length = scanner->sourceAddr() - source_body_start - 1;

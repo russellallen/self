@@ -10,7 +10,7 @@
 
 
 // Superclass for all (or most) VM objects.
-// Used for debugging purposes: objects can can be printed with pp()
+// Used for debugging purposes: objects can be printed with pp()
 // (and with C-c C-p in emacs/gdb).  -Urs
 
 class VMObj {
