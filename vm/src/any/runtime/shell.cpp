@@ -121,7 +121,7 @@ static void processArguments(int argc, const char *argv[]) {
       lprintf("  -t\t\tDisable all timers\n");
       lprintf("  -c\t\tUse real timer instead of CPU timer (for OS X)\n");
       lprintf("  -o\t\tOversample the timers (Run them 10x faster to flush out bugs)\n");
-      lprintf("  -a\t\tTest the Assembler (added for Intel)n");
+      lprintf("  -a\t\tTest the Assembler (added for Intel)\n");
       lprintf("Other command line switches may be interpreted by the Self world\n");
       ::exit(0);
       break;
