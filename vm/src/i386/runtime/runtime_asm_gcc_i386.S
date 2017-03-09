@@ -203,7 +203,7 @@ firstTimeThisProcess:
 
         
 // =============================================
-// SwitchStack0 switches back toVm stack with 0 arguments
+// SwitchStack0 switches back to VM stack with 0 arguments
 //; Actually it passes 4 args, so it can be reused to implement the others
         
         

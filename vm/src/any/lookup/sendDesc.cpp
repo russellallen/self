@@ -459,7 +459,7 @@ void sendDesc::init() {
   //  fatal("first_sendDesc() does not have a call");
   
   if (f->raw_lookupType() != StaticNormalLookupType)
-    fatal5("first_sendDesc() has wrong lookup type is: 0x%x, should be: 0x%x\n"
+    fatal5("first_sendDesc() has wrong lookup type: 0x%x, should be: 0x%x\n"
             "  firstSelfFrame_returnPC: 0x%x,  first_inst_addr:  0x%x, first_sendDesc 0x%x",
             f->raw_lookupType(), StaticNormalLookupType,
             firstSelfFrame_returnPC, 
