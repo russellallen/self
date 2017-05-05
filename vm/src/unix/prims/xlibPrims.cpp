@@ -7,6 +7,7 @@
  
 # pragma implementation "xlibPrims.hh"
 # include "_xlibPrims.cpp.incl"
+#include <X11/Xlocale.h>
 
   const char* Display_seal = "Display";
 
@@ -14,7 +15,11 @@
     // XOpenDisplay fails if a signal is received during the call.
     // All signals except user interrupts are therefore blocked. 
     SignalBlocker sb(SignalBlocker::allow_user_int);
-    
+
+    // support for unicode input
+    setlocale(LC_ALL, "");
+    XSetLocaleModifiers("@im=none");
+
     Display* result = XOpenDisplay(name);
     if (result == 0)  {
       prim_failure(FH, PRIMITIVEFAILEDERROR);
