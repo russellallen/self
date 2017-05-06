@@ -12,6 +12,7 @@
 
 # define Status int // cause I had to undef it earlier
 
+# include <map>
 # include <X11/Xlib.h>
 # include <X11/Xutil.h>
 # include <X11/Xutil.h>
@@ -187,6 +188,14 @@ oop XNextEvent_wrap(Display *display, bool peek,
     XPeekEvent(display, evt);
   else
     XNextEvent(display, evt);
+
+  // handle combining / dead keys
+  if (! peek){
+    while (XFilterEvent(evt, None)){
+      XNextEvent(display, evt);
+    }
+  }
+
   int type = evt->type;
   if (type < 0 || type >= eventProtos->length()) {
     char err[50];
@@ -259,7 +268,68 @@ void XMoveWindowBy_wrap(Display* display, Window win,
 }
 
 
+/* 
+  Used for mapping XIC / XIM objects to X Windows for UTF-8 input and Xevent
+  handling.
+*/
+class XICCache {
+  std::map<Window, XIM> xim_map;
+  std::map<Window, XIC> xic_map;
+
+  XIC last_xic;
+  Window last_window;
+
+  XIM resolveOrCreateXIM(Window window, Display *display){
+    std::map<Window, XIM>::iterator xim_key = xim_map.find(window);
+    if (xim_key != xim_map.end())
+      return xim_key->second;
+
+    XIM xim = XOpenIM(display, NULL, NULL, NULL);
+    xim_map[window] = xim;
+
+    return xim;
+  }
+
+  XIC resolveOrCreateXIC(Window window, XIM xim){
+    std::map<Window, XIC>::iterator xic_key = xic_map.find(window);
+    if (xic_key != xic_map.end())
+      return xic_key->second;
+
+    XIC xic = XCreateIC(xim, XNInputStyle, XIMPreeditNothing | XIMStatusNothing,
+                        XNClientWindow, window, NULL);
+    xic_map[window] = xic;
+
+    return xic;
+  }
+
+  public:
+  XICCache() {
+    last_xic = 0;
+    last_window = 0;
+  }
+
+  XIC getXIC(Display *display, Window window) {
+    if (last_window == window)
+      return last_xic;
+
+    last_xic = resolveOrCreateXIC(window, resolveOrCreateXIM(window, display));
+    XSetICFocus(last_xic);
+
+    last_window = window;
+
+    return last_xic;
+  }
+
+  XIC getXIC(XKeyEvent* event) {
+    return this->getXIC(event->display, event->window);
+  }
+};
+
+XICCache xic_cache = XICCache();
+
+
 int XSetWMProtocol_wrap(Display* display,  Window window,  Atom protocol) {
+  xic_cache.getXIC(display, window);  // init UTF-8 input
   Atom ps[1];
   ps[0] = protocol;
   return XSetWMProtocols(display, window, ps, 1);
@@ -448,8 +518,12 @@ int XStringToTextProperty_wrap(XTextProperty* textProperty, char* string) {
 int XLookupString_wrap(XKeyEvent* event, char* string, int len,
                        objVectorOop keySym) {
   KeySym ks;
-  int n = XLookupString(event, string, len, &ks, NULL);
-  if (keySym->length() >= 1) keySym->obj_at_put(0, as_smiOop(ks), false);
+  Status status = 0;
+  int n = Xutf8LookupString(xic_cache.getXIC(event), event, string, len, &ks, &status);
+
+  if (keySym->length() >= 1)
+    keySym->obj_at_put(0, as_smiOop(ks), false);
+
   return n;
 }
 
