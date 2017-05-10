@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>10.1. Glossary &#8212; Self Handbook for Self 2017.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'for Self 2017.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="10.2. Lexical overview" href="lexicaloverview.html" />
+    <link rel="prev" title="10. Appendices" href="appendices.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="glossary">
+<span id="id1"></span><h1>10.1. Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>A <em>slot</em> is a name-value pair. The value of a slot is often called its <em>contents</em>.</li>
+<li>An <em>object</em> is composed of a (possibly empty) set of slots and, optionally, a series of expressions called <em>code</em>. The Self implementation provides objects with indexable slots (vectors) via a set of primitives.</li>
+<li>A <em>data object</em> is an object without code.</li>
+<li>A <em>data slot</em> is a slot holding a data object. An <em>assignment slot</em> is a slot containing the <em>assignment primitive</em>. An <em>assignable data slot</em> is a data slot for which there is a corresponding assignment slot whose name consists of the data slot’s name followed by a colon. When an assignment slot is evaluated its argument is stored in the corresponding data slot.</li>
+<li>An <em>ordinary method</em> (or simply <em>method</em>) is an object with code and is stored as the contents of a slot. The method’s name (also called its <em>selector</em>) is the name of the slot in which it is stored.</li>
+<li>A <em>block</em> is an object representing a lexically-scoped closure (similar to a Smalltalk block).</li>
+<li>A <em>block method</em> is the method that is executed when a block is evaluated by sending it <code class="docutils literal"><span class="pre">value</span></code>, <code class="docutils literal"><span class="pre">value:</span></code>, <code class="docutils literal"><span class="pre">value:With:</span></code>, etc. A block method is a special kind of method that is evaluated within the scope of its method and any lexically enclosing blocks.</li>
+<li>An <code class="docutils literal"><span class="pre">activation</span> <span class="pre">object</span></code> records the state of an executing method or block method. It is a clone of the method prototype used to store the method’s arguments and local slots during execution. There are two kinds of activation objects: <code class="docutils literal"><span class="pre">ordinary</span> <span class="pre">method</span> <span class="pre">activation</span></code> objects (or simply <code class="docutils literal"><span class="pre">method</span> <span class="pre">activation</span></code> objects) and <code class="docutils literal"><span class="pre">block</span> <span class="pre">method</span> <span class="pre">activation</span></code> objects.</li>
+<li>A <code class="docutils literal"><span class="pre">non-lifo</span> <span class="pre">block</span></code> is a block that is evaluated after the activation of its lexically enclosing block or method has returned. This results in an error in the current implementation.</li>
+<li>A <code class="docutils literal"><span class="pre">non-local</span> <span class="pre">return</span></code> is a return from a method activation resulting from performing a return (i.e., evaluating an expression preceded by the ‘^’ operator) from within a lexically enclosed block. A non-local return forces returns from all activations between the method activation and the activation of the block performing the return.</li>
+<li>The <code class="docutils literal"><span class="pre">method</span> <span class="pre">holder</span></code> of a method is the object containing the slot holding that method.</li>
+<li>The <code class="docutils literal"><span class="pre">sending</span> <span class="pre">method</span> <span class="pre">holder</span></code> of a message is the method holder of the method that sent it.</li>
+<li>A <code class="docutils literal"><span class="pre">message</span></code> is a request to an object to perform some operation. The object to which the request is sent is called the <code class="docutils literal"><span class="pre">receiver</span></code>. A <code class="docutils literal"><span class="pre">message</span> <span class="pre">send</span></code> is the action of sending a message to a receiver.</li>
+<li>A <em>primitive send</em> is a message handled by invoking a <em>primitive</em>, a predefined function provided by the Self implementation.</li>
+<li>Messages that do not have an explicit receiver are known as <em>implicit-receiver messages</em>. The receiver is bound to <code class="docutils literal"><span class="pre">self</span></code>.</li>
+<li>A <em>unary message</em> is a message consisting of a single identifier sent to a receiver. A <em>binary message</em> is a message consisting of an operator and a single argument sent to a receiver. A <em>keyword message</em> is a message consisting of one or more identifiers with trailing colons, each followed by an argument, sent to a receiver.</li>
+<li><em>Unary</em>, <em>binary</em>, and <em>keyword slots</em> are slots with selectors that match unary, binary, and keyword messages, respectively.</li>
+<li>An <em>argument slot</em> is a slot in a method filled in with a value when the method is invoked.</li>
+<li><em>Message lookup</em> is the process by which objects determine how to respond to a message (which slot to evaluate), by searching objects for slots matching the message.</li>
+<li><em>Inheritance</em> is the mechanism by which message lookup searches objects for slots when the receiver’s slots are exhausted. An object’s <em>parent slots</em> contain objects that it inherits from.</li>
+<li><em>Dynamic inheritance</em> is the modification of object behavior by setting an assignable parent slot.</li>
+<li>A <em>resend</em> allows a method to invoke the method that the first method (the one that invokes the resend) is overriding. A <em>directed resend</em> constrains the lookup to search a single parent slot.</li>
+<li><em>Cloning</em> is the primitive operation returning an exact shallow copy (a <em>clone</em>) of an object, i.e. a new object containing exactly the same slots and code as the original object.</li>
+<li>A <em>prototype</em> is an object that is used as a template from which new objects are cloned.</li>
+<li>A <em>traits object</em> is a parent object containing shared behavior, playing a role somewhat similar to a class in a class-based system. Any Self implementation is required to provide traits objects for integers, floats, strings, and blocks (i.e. one object which is the parent of all integers, another object for floats, etc.).</li>
+<li>The <em>root context</em> is the object that provides the context (i.e., set of bindings) in which slot initializers are evaluated. This object is known as the <em>lobby</em>. During slot initialization, self is bound to the lobby. The lobby is also the sending method holder for any sends in the initializing expression.</li>
+<li><em>nil</em> is the object used to initialize slots without explicit initializers. It is intended to indicate “not a useful object.” This object is provided by the Self implementation.</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="appendices.html">10. Appendices</a><ul>
+      <li>Previous: <a href="appendices.html" title="previous chapter">10. Appendices</a></li>
+      <li>Next: <a href="lexicaloverview.html" title="next chapter">10.2. Lexical overview</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/glossary.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Russell Allen (Ed.).
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/glossary.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

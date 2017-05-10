@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.8. Messages &#8212; Self Handbook for Self 2017.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'for Self 2017.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4.9. Processes and the Prompt" href="processes.html" />
+    <link rel="prev" title="4.7. Mirrors" href="mirrors.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="messages">
+<h1>4.8. Messages<a class="headerlink" href="#messages" title="Permalink to this headline">¶</a></h1>
+<p>Self allows messages to be manipulated as objects when convenient. For example, if an object
+fails to understand a message, the object is notified of the problem via a message whose arguments
+include the selector of the message that was not understood. While most objects inherit default
+behavior for handling this situation (by halting with an error), it is sometimes convenient for an object
+to handle the situation itself, perhaps by resending the message to some other object. Objects
+that do this are called transparent forwarders. An example is given in <code class="docutils literal"><span class="pre">interceptor</span></code>.</p>
+<p>A string has the basic ability to use itself as a message selector using the messages <code class="docutils literal"><span class="pre">sendTo</span></code>: (normal
+message sends), <code class="docutils literal"><span class="pre">resendTo</span></code>: (resends), or <code class="docutils literal"><span class="pre">sendTo:DelegatingTo:</span></code> (delegated sends).
+Each of these messages has a number of variations based on the number of arguments the message
+has. For example, one would used <code class="docutils literal"><span class="pre">sendTo:With:With:</span></code> to send a message with <code class="docutils literal"><span class="pre">at:Put:</span></code> as the
+selector and two arguments:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s1">&#39;at:Put:&#39;</span> <span class="n">sendTo</span><span class="p">:</span> <span class="n">aDict</span> <span class="n">With</span><span class="p">:</span> <span class="n">k</span> <span class="n">With</span><span class="p">:</span> <span class="n">v</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Primitives such as <code class="docutils literal"><span class="pre">_Print</span></code> cannot be sent in the current system.</p>
+</div>
+<p>A selector, receiver, delegatee, methodHolder, and arguments can be bundled together in a <code class="docutils literal"><span class="pre">message</span></code>
+object. The message gets <code class="docutils literal"><span class="pre">sent</span></code> when the message object receives the send message. Message
+objects are used to describe delayed actions, such as the actions that should occur just before or after
+a snapshot is read. They are also used as an argument to new process creation (you can create a
+new process to execute the message by sending it <code class="docutils literal"><span class="pre">fork</span></code>).</p>
+<p>Modules: sending, message, selector, interceptor</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="selfwrld.html">4. The Self World</a><ul>
+      <li>Previous: <a href="mirrors.html" title="previous chapter">4.7. Mirrors</a></li>
+      <li>Next: <a href="processes.html" title="next chapter">4.9. Processes and the Prompt</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/messages.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Russell Allen (Ed.).
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/messages.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.16. Logging &#8212; Self Handbook for Self 2017.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'for Self 2017.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5. A Guide to Programming Style" href="progguid.html" />
+    <link rel="prev" title="4.15. Using the textual debugger" href="textdebug.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="logging">
+<h1>4.16. Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal"><span class="pre">log</span></code> is a useful system-wide logging mechanism. You can find it in the <code class="docutils literal"><span class="pre">system</span></code> category of <code class="docutils literal"><span class="pre">globals</span></code>.</p>
+<div class="section" id="how-to-log">
+<h2>4.16.1. How to log<a class="headerlink" href="#how-to-log" title="Permalink to this headline">¶</a></h2>
+<p>There are a number of useful messages in the <code class="docutils literal"><span class="pre">logging</span></code> category of <code class="docutils literal"><span class="pre">log</span></code> which allow you to simply and cleanly log messages. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">log</span> <span class="n">warn</span><span class="p">:</span> <span class="s1">&#39;This is a warning.&#39;</span>
+</pre></div>
+</div>
+<p>You can log with one of five levels found at <code class="docutils literal"><span class="pre">log</span> <span class="pre">levels</span></code>. These are, in order of severity, <code class="docutils literal"><span class="pre">debug</span></code>, <code class="docutils literal"><span class="pre">info</span></code>, <code class="docutils literal"><span class="pre">warn</span></code>, <code class="docutils literal"><span class="pre">error</span></code>, <code class="docutils literal"><span class="pre">fatal</span></code>.</p>
+<p>You can also tag log entries, for example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">log</span> <span class="n">fatal</span><span class="p">:</span> <span class="s1">&#39;The server has caught fire&#39;</span> <span class="n">For</span><span class="p">:</span> <span class="s1">&#39;webserver&#39;</span>
+</pre></div>
+</div>
+<p>By default, entries of either error or fatal severity which aren&#8217;t tagged are logged to stderr in the form:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>[Thu Oct 23 16:25:07 2014] error -- Something went wrong!
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-logging-works">
+<h2>4.16.2. How logging works<a class="headerlink" href="#how-logging-works" title="Permalink to this headline">¶</a></h2>
+<p>The helper methods shown above constuct a <code class="docutils literal"><span class="pre">log</span> <span class="pre">entry</span></code> and hand it to the <code class="docutils literal"><span class="pre">log</span> <span class="pre">dispatcher</span></code>. The dispatcher has a number of handlers, each is given a chance to handle the log entry. The handlers can choose which entries to act on. Example handlers are in <code class="docutils literal"><span class="pre">log</span> <span class="pre">prototypeHandlers</span></code>.</p>
+<p>When making a handler, please keep in mind that the log entry&#8217;s <code class="docutils literal"><span class="pre">message</span></code> is expected to be something which understands <code class="docutils literal"><span class="pre">value</span></code>, returning an object (or itself) which understands <code class="docutils literal"><span class="pre">asString</span></code>. If you do not need to resolve the message by sending it <code class="docutils literal"><span class="pre">value</span></code> please don&#8217;t; that way logs can be sent blocks which are only resolved if necessary; eg:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">log</span> <span class="n">debug</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;We have reached: &#39;</span><span class="p">,</span> <span class="n">somethingComplicatedToCalculate</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>will not slow down your code if no log handler is interested in handling debuggers.</p>
+<p>If your handler breaks the logging process you can restart it by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">log</span> <span class="n">dispatcher</span> <span class="n">hup</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">4.16. Logging</a><ul>
+<li><a class="reference internal" href="#how-to-log">4.16.1. How to log</a></li>
+<li><a class="reference internal" href="#how-logging-works">4.16.2. How logging works</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="selfwrld.html">4. The Self World</a><ul>
+      <li>Previous: <a href="textdebug.html" title="previous chapter">4.15. Using the textual debugger</a></li>
+      <li>Next: <a href="progguid.html" title="next chapter">5. A Guide to Programming Style</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/logging.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Russell Allen (Ed.).
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/logging.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

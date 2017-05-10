@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.14. How to use the low-level interrupt facilities &#8212; Self Handbook for Self 2017.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'for Self 2017.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4.15. Using the textual debugger" href="textdebug.html" />
+    <link rel="prev" title="4.13. How to build the world" href="buildworld.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="how-to-use-the-low-level-interrupt-facilities">
+<h1>4.14. How to use the low-level interrupt facilities<a class="headerlink" href="#how-to-use-the-low-level-interrupt-facilities" title="Permalink to this headline">¶</a></h1>
+<p>There are two low-level ways to interrupt a running Self program <a class="footnote-reference" href="#f1" id="id1"><sup>1</sup></a> , Control-C and Control-\. The
+second way works even if the Self process scheduler is not running.
+In response to the interrupt, you will see one of two things. If the Self scheduler is not running,
+you will be returned directly to the <code class="docutils literal"><span class="pre">VM#</span></code> prompt. If the scheduler is running, you will be presented
+with a list of Self processes (the process menu):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Self</span> <span class="mi">9</span><span class="o">&gt;</span> <span class="mi">100000</span> <span class="o">*</span> <span class="mi">100000</span> <span class="n">do</span><span class="p">:</span> <span class="p">[]</span>
+<span class="o">^</span><span class="n">C</span>
+    <span class="o">----------------</span><span class="n">Interrupt</span><span class="o">-----------------</span>
+    <span class="n">Ready</span><span class="p">:</span>
+        <span class="o">&lt;</span><span class="mi">25</span><span class="o">&gt;</span> <span class="n">scheduling</span> <span class="n">process</span> <span class="mi">100000</span> <span class="o">*</span> <span class="mi">100000</span> <span class="n">do</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="o">------------------------------------------</span>
+    <span class="n">Select</span> <span class="n">a</span> <span class="n">process</span> <span class="p">(</span><span class="ow">or</span> <span class="n">q</span> <span class="n">to</span> <span class="n">quit</span> <span class="n">scheduler</span><span class="p">):</span> <span class="mi">25</span>
+    <span class="n">Select</span> <span class="o">&lt;</span><span class="k">return</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">no</span> <span class="n">action</span>
+        <span class="n">p</span> <span class="n">to</span> <span class="nb">print</span> <span class="n">the</span> <span class="n">stack</span>
+        <span class="n">k</span> <span class="n">to</span> <span class="n">kill</span> <span class="n">the</span> <span class="n">process</span>
+        <span class="n">b</span> <span class="n">to</span> <span class="n">resume</span> <span class="n">execution</span> <span class="n">of</span> <span class="n">the</span> <span class="n">process</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">background</span>
+        <span class="n">s</span> <span class="n">to</span> <span class="n">suspend</span> <span class="n">execution</span> <span class="n">of</span> <span class="n">the</span> <span class="n">process</span>
+    <span class="k">for</span> <span class="n">process</span> <span class="mi">25</span><span class="p">:</span> <span class="n">k</span>
+    <span class="n">Process</span> <span class="mi">25</span> <span class="n">killed</span><span class="o">.</span>
+    <span class="o">------------------------------------------</span>
+<span class="n">Self</span> <span class="mi">10</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>In this example, the loop was interrupted by typing Control-C, and the process menu was used to
+abort the process. If the user had typed “q” to quit the scheduler, all current processes would have
+been aborted along with the scheduler itself:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>    <span class="o">...</span>
+    <span class="o">------------------------------------------</span>
+    <span class="n">Select</span> <span class="n">a</span> <span class="n">process</span> <span class="p">(</span><span class="ow">or</span> <span class="n">q</span> <span class="n">to</span> <span class="n">quit</span> <span class="n">scheduler</span><span class="p">):</span> <span class="n">q</span>
+    <span class="n">Scheduler</span> <span class="n">shut</span> <span class="n">down</span><span class="o">.</span>
+    <span class="o">------------------------------------------</span>
+<span class="n">prompt</span>
+<span class="n">VM</span><span class="c1">#</span>
+</pre></div>
+</div>
+<p>The scheduler has been stopped, returning the user to the VM# prompt. The command prompt
+start restarts the scheduler:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">VM</span><span class="c1"># prompt start</span>
+<span class="n">Self</span> <span class="mi">11</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Although the VM# prompt can be used to evaluate expressions directly, the scheduler supports
+much nicer error messages and debugging, so it is usually best to run the scheduler. (The scheduler
+is started automatically when the default world is created.)</p>
+<p>Certain virtual machine operations like garbage collection, reading a snapshot, and compilation
+cannot be interrupted; interrupts during these operations will be deferred until the operation is
+complete. As a last resort (e.g., if the system appears to be “hung”), you can force an abort by
+pressing Control-\ five times in a row.</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Normally, you would use debugging facilities provided in the programming environment.</td></tr>
+</tbody>
+</table>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="selfwrld.html">4. The Self World</a><ul>
+      <li>Previous: <a href="buildworld.html" title="previous chapter">4.13. How to build the world</a></li>
+      <li>Next: <a href="textdebug.html" title="next chapter">4.15. Using the textual debugger</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/lowlevel.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Russell Allen (Ed.).
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/lowlevel.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
