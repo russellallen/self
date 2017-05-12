@@ -12,7 +12,11 @@ Requirements
 
 On Mac OS X you will need XCode, version 4 or higher, with the command line tools installed and `CMake`_ in at least version 2.8. `CMake`_ can be easily installed using the `Brew`_ package manager.
 
-On Linux you will generally need the appropriate libraries for Git, CMake, a GCC or Clang toolchain, X and Ncurses. For example, on Fedora 19 you will need: git cmake gcc gcc-c++ glibc-devel.i686 libstdc++-devel libstdc++-devel.i686 libX11-devel.i686 libXt-devel.i686 libXext-devel.i686 libXrender-devel.i686 libXau-devel.i686 libxcb-devel.i686 ncurses-devel.i686 ncurses-libs.i686
+On Linux you will generally need the appropriate libraries for Git, CMake, a GCC or Clang toolchain, X and Ncurses. Self is a 32bit program at the moment, so you will need all libraries in 32bit versions.
+
+On Fedora 19 you will need: git cmake gcc gcc-c++ glibc-devel.i686 libstdc++-devel libstdc++-devel.i686 libX11-devel.i686 libXt-devel.i686 libXext-devel.i686 libXrender-devel.i686 libXau-devel.i686 libxcb-devel.i686 ncurses-devel.i686 ncurses-libs.i686
+
+On Ubuntu 16.04 you will need: git cmake g++ gcc-multilib g++-multilib libx11-dev:i386 libxext-dev:i386 libncurses-dev:i386 libtinfo-dev:i386
 
 .. _GitHub repository: https://github.com/russellallen/self
 .. _CMake: http://www.cmake.org/
