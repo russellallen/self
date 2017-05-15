@@ -547,10 +547,12 @@ Feel free to inherit me and override the ones you can implement.
          'Category: modifier-specific dispatching\x7fModuleInfo: Module: ui2Event InitialContents: FollowSlot\x7fVisibility: public'
         
          handlePressWithNoModifiers: combo IfCannot: b = ( |
+             longest_utf8_seq = 6.
             | 
+
             combo nonmodifierKeyCap isArrow ifTrue: [^ handleSmallArrowPress: combo IfCannot: b].
 
-            combo nonmodifierKeyCap printString size <= 6 ifTrue: [^combo nonmodifierKeyCap printString do: [|:c| insert_char: c]].
+            combo nonmodifierKeyCap printString size <= longest_utf8_seq ifTrue: [^combo nonmodifierKeyCap printString do: [|:c| insert_char: c]].
 
             combo nonmodifierKeyCap = keyCaps oddballs enter     ifTrue: [^ split_line].
             combo nonmodifierKeyCap = keyCaps oddballs backspace ifTrue: [^ backspace].
