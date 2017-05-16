@@ -1,0 +1,250 @@
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}History}{3}{section.1.1}
+\contentsline {section}{\numberline {1.2}System Overview}{3}{section.1.2}
+\contentsline {chapter}{\numberline {2}Getting Started}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Downloading Prebuilt VM and snapshot}{5}{section.2.1}
+\contentsline {section}{\numberline {2.2}Running on OS X}{5}{section.2.2}
+\contentsline {section}{\numberline {2.3}Running on Linux}{5}{section.2.3}
+\contentsline {section}{\numberline {2.4}Building your own system}{5}{section.2.4}
+\contentsline {chapter}{\numberline {3}Language Reference}{7}{chapter.3}
+\contentsline {section}{\numberline {3.1}Objects}{7}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Syntax}{7}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Data objects}{8}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}The assignment primitive}{8}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Objects with code}{8}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}Code}{8}{subsection.3.1.5}
+\contentsline {subsection}{\numberline {3.1.6}Methods}{9}{subsection.3.1.6}
+\contentsline {subsection}{\numberline {3.1.7}Blocks}{9}{subsection.3.1.7}
+\contentsline {subsection}{\numberline {3.1.8}Returns}{10}{subsection.3.1.8}
+\contentsline {subsection}{\numberline {3.1.9}Construction of object literals}{11}{subsection.3.1.9}
+\contentsline {section}{\numberline {3.2}Slot descriptors}{11}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Read-only slots}{11}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Read/write slots}{11}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Slots containing methods}{12}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Parent slots}{15}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Annotations}{15}{subsection.3.2.5}
+\contentsline {section}{\numberline {3.3}Expressions}{16}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Unary messages}{16}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Binary messages}{16}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Keyword messages}{17}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Implicit-receiver messages}{18}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Resending messages}{18}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.6}Message lookup semantics}{19}{subsection.3.3.6}
+\contentsline {subsection}{\numberline {3.3.7}Message send}{19}{subsection.3.3.7}
+\contentsline {subsection}{\numberline {3.3.8}The lookup algorithm}{20}{subsection.3.3.8}
+\contentsline {subsection}{\numberline {3.3.9}Undirected Resend}{20}{subsection.3.3.9}
+\contentsline {subsection}{\numberline {3.3.10}Directed Resend}{21}{subsection.3.3.10}
+\contentsline {section}{\numberline {3.4}Lexical elements}{22}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Character set}{22}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Identifiers}{22}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Keywords}{22}{subsection.3.4.3}
+\contentsline {subsection}{\numberline {3.4.4}Arguments}{23}{subsection.3.4.4}
+\contentsline {subsection}{\numberline {3.4.5}Operators}{23}{subsection.3.4.5}
+\contentsline {subsection}{\numberline {3.4.6}Numbers}{23}{subsection.3.4.6}
+\contentsline {subsection}{\numberline {3.4.7}Strings}{24}{subsection.3.4.7}
+\contentsline {subsection}{\numberline {3.4.8}Comments}{25}{subsection.3.4.8}
+\contentsline {chapter}{\numberline {4}The Self World}{27}{chapter.4}
+\contentsline {section}{\numberline {4.1}World Organization}{27}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}The Lobby}{27}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Names and Paths}{27}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}The Roots of Behavior}{28}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Default Behavior}{28}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}The Root Traits: Traits Clonable and Traits Oddball}{29}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Mixins}{29}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}The Identity Mixin}{29}{subsection.4.2.4}
+\contentsline {section}{\numberline {4.3}Blocks, Booleans, and Control Structures}{29}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Booleans and Conditionals}{30}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Loops}{30}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Block Exits}{31}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}Other Block Behavior}{31}{subsection.4.3.4}
+\contentsline {section}{\numberline {4.4}Numbers and Time}{31}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Random Numbers}{32}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Time}{32}{subsection.4.4.2}
+\contentsline {section}{\numberline {4.5}Collections}{32}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Indexable Collections}{33}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}Strings, Characters, and Paragraphs}{33}{subsection.4.5.2}
+\contentsline {subsection}{\numberline {4.5.3}Unordered Sets and Dictionaries}{34}{subsection.4.5.3}
+\contentsline {subsection}{\numberline {4.5.4}Tree-Based Sets and Dictionaries}{34}{subsection.4.5.4}
+\contentsline {subsection}{\numberline {4.5.5}Lists and PriorityQueues}{35}{subsection.4.5.5}
+\contentsline {subsection}{\numberline {4.5.6}Constructing and Concatenating Collections}{35}{subsection.4.5.6}
+\contentsline {section}{\numberline {4.6}Pairs}{35}{section.4.6}
+\contentsline {section}{\numberline {4.7}Mirrors}{36}{section.4.7}
+\contentsline {section}{\numberline {4.8}Messages}{36}{section.4.8}
+\contentsline {section}{\numberline {4.9}Processes and the Prompt}{37}{section.4.9}
+\contentsline {section}{\numberline {4.10}Foreign Objects}{37}{section.4.10}
+\contentsline {section}{\numberline {4.11}I/O and Unix}{38}{section.4.11}
+\contentsline {section}{\numberline {4.12}Other Objects}{39}{section.4.12}
+\contentsline {section}{\numberline {4.13}How to build the world}{39}{section.4.13}
+\contentsline {subsection}{\numberline {4.13.1}From within the main Self tree}{39}{subsection.4.13.1}
+\contentsline {subsection}{\numberline {4.13.2}From outside the main tree}{40}{subsection.4.13.2}
+\contentsline {subsection}{\numberline {4.13.3}Finishing the build}{40}{subsection.4.13.3}
+\contentsline {section}{\numberline {4.14}How to use the low-level interrupt facilities}{41}{section.4.14}
+\contentsline {section}{\numberline {4.15}Using the textual debugger}{42}{section.4.15}
+\contentsline {section}{\numberline {4.16}Logging}{42}{section.4.16}
+\contentsline {subsection}{\numberline {4.16.1}How to log}{42}{subsection.4.16.1}
+\contentsline {subsection}{\numberline {4.16.2}How logging works}{43}{subsection.4.16.2}
+\contentsline {chapter}{\numberline {5}A Guide to Programming Style}{45}{chapter.5}
+\contentsline {section}{\numberline {5.1}Behaviorism versus Reflection}{45}{section.5.1}
+\contentsline {section}{\numberline {5.2}Objects Have Many Roles}{46}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Shared Behavior}{46}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}One-of-a-kind Objects (Oddballs)}{46}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Inline Objects}{46}{subsection.5.2.3}
+\contentsline {section}{\numberline {5.3}Naming and Printing}{47}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}How objects are printed}{47}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}How to make an object print}{47}{subsection.5.3.2}
+\contentsline {section}{\numberline {5.4}How to Return Multiple Values}{48}{section.5.4}
+\contentsline {section}{\numberline {5.5}Substituting Values for Blocks}{49}{section.5.5}
+\contentsline {section}{\numberline {5.6}\sphinxstyleliteralintitle {nil} Considered Naughty}{49}{section.5.6}
+\contentsline {section}{\numberline {5.7}Hash and =}{49}{section.5.7}
+\contentsline {section}{\numberline {5.8}Equality, Identity, and Indistinguishability}{50}{section.5.8}
+\contentsline {chapter}{\numberline {6}How to Program in Self}{51}{chapter.6}
+\contentsline {section}{\numberline {6.1}Introduction}{51}{section.6.1}
+\contentsline {section}{\numberline {6.2}Browsing Concepts}{51}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Introducing the Outliner}{51}{subsection.6.2.1}
+\contentsline {subsubsection}{Expand and Collapse}{52}{subsubsection*.6}
+\contentsline {subsubsection}{Categories}{53}{subsubsection*.7}
+\contentsline {subsubsection}{Slots}{53}{subsubsection*.8}
+\contentsline {subsubsection}{Text Editors}{55}{subsubsection*.9}
+\contentsline {subsubsection}{Dismissing Objects}{56}{subsubsection*.10}
+\contentsline {subsection}{\numberline {6.2.2}Menus in the Outliner}{57}{subsection.6.2.2}
+\contentsline {subsubsection}{The Evaluator}{58}{subsubsection*.11}
+\contentsline {subsubsection}{Adding a slot}{60}{subsubsection*.12}
+\contentsline {subsection}{\numberline {6.2.3}Debugger}{63}{subsection.6.2.3}
+\contentsline {subsection}{\numberline {6.2.4}Enumerators}{68}{subsection.6.2.4}
+\contentsline {section}{\numberline {6.3}Hacking Objects}{68}{section.6.3}
+\contentsline {section}{\numberline {6.4}The Transporter}{71}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}The Traditional Schism between Program and Data}{71}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}Data = Program}{71}{subsection.6.4.2}
+\contentsline {subsection}{\numberline {6.4.3}Changes vs. Pieces}{72}{subsection.6.4.3}
+\contentsline {subsection}{\numberline {6.4.4}Objects vs. Slots}{72}{subsection.6.4.4}
+\contentsline {subsection}{\numberline {6.4.5}What to Save for the Contents of a Slot}{72}{subsection.6.4.5}
+\contentsline {subsection}{\numberline {6.4.6}Copy Down}{74}{subsection.6.4.6}
+\contentsline {subsection}{\numberline {6.4.7}Trees}{75}{subsection.6.4.7}
+\contentsline {subsection}{\numberline {6.4.8}Versioning}{75}{subsection.6.4.8}
+\contentsline {chapter}{\numberline {7}Morphic: The Self User Interface Framework}{77}{chapter.7}
+\contentsline {section}{\numberline {7.1}Overview}{77}{section.7.1}
+\contentsline {section}{\numberline {7.2}Composite Morphs}{78}{section.7.2}
+\contentsline {section}{\numberline {7.3}Morph Traits and Prototypes}{79}{section.7.3}
+\contentsline {subsection}{\numberline {7.3.1}Implementing a New Kind of Morph}{80}{subsection.7.3.1}
+\contentsline {subsection}{\numberline {7.3.2}Morph Creation: The Bottom-up Approach}{80}{subsection.7.3.2}
+\contentsline {subsection}{\numberline {7.3.3}Morph Creation: The Top-down Approach}{87}{subsection.7.3.3}
+\contentsline {section}{\numberline {7.4}Saving a Composite Morph}{90}{section.7.4}
+\contentsline {section}{\numberline {7.5}Handling User Input}{90}{section.7.5}
+\contentsline {subsection}{\numberline {7.5.1}Handling Events}{90}{subsection.7.5.1}
+\contentsline {subsection}{\numberline {7.5.2}Mapping special characters to actions}{91}{subsection.7.5.2}
+\contentsline {section}{\numberline {7.6}Drag and Drop}{92}{section.7.6}
+\contentsline {section}{\numberline {7.7}Automatic Layout}{92}{section.7.7}
+\contentsline {subsection}{\numberline {7.7.1}Packing}{92}{subsection.7.7.1}
+\contentsline {subsection}{\numberline {7.7.2}Space-filling}{93}{subsection.7.7.2}
+\contentsline {subsection}{\numberline {7.7.3}Shrink-Wrapping}{93}{subsection.7.7.3}
+\contentsline {subsection}{\numberline {7.7.4}Minimum Sizes}{93}{subsection.7.7.4}
+\contentsline {subsection}{\numberline {7.7.5}Resize Attribute Summary}{94}{subsection.7.7.5}
+\contentsline {section}{\numberline {7.8}Animation}{94}{section.7.8}
+\contentsline {subsection}{\numberline {7.8.1}Stepping}{95}{subsection.7.8.1}
+\contentsline {subsection}{\numberline {7.8.2}External Animation}{95}{subsection.7.8.2}
+\contentsline {section}{\numberline {7.9}Other Issues}{96}{section.7.9}
+\contentsline {subsection}{\numberline {7.9.1}Local versus Global Coordinates}{96}{subsection.7.9.1}
+\contentsline {subsection}{\numberline {7.9.2}Synchronization}{96}{subsection.7.9.2}
+\contentsline {subsection}{\numberline {7.9.3}Display Updating}{96}{subsection.7.9.3}
+\contentsline {subsection}{\numberline {7.9.4}Layout Updating}{97}{subsection.7.9.4}
+\contentsline {subsection}{\numberline {7.9.5}Morph Copying}{97}{subsection.7.9.5}
+\contentsline {section}{\numberline {7.10}Morph Responsibilities}{99}{section.7.10}
+\contentsline {section}{\numberline {7.11}Some Useful Morphs}{99}{section.7.11}
+\contentsline {section}{\numberline {7.12}The Graphical Environment}{100}{section.7.12}
+\contentsline {subsection}{\numberline {7.12.1}Specifying Colors}{101}{subsection.7.12.1}
+\contentsline {subsection}{\numberline {7.12.2}Specifying Fonts}{102}{subsection.7.12.2}
+\contentsline {chapter}{\numberline {8}Virtual Machine Reference}{103}{chapter.8}
+\contentsline {section}{\numberline {8.1}Building a VM}{103}{section.8.1}
+\contentsline {subsection}{\numberline {8.1.1}Requirements}{103}{subsection.8.1.1}
+\contentsline {subsection}{\numberline {8.1.2}Building}{103}{subsection.8.1.2}
+\contentsline {section}{\numberline {8.2}Startup options}{104}{section.8.2}
+\contentsline {section}{\numberline {8.3}System-triggered messages}{104}{section.8.3}
+\contentsline {section}{\numberline {8.4}Run-time message lookup errors}{104}{section.8.4}
+\contentsline {section}{\numberline {8.5}Low-level error messages}{106}{section.8.5}
+\contentsline {section}{\numberline {8.6}An example}{106}{section.8.6}
+\contentsline {section}{\numberline {8.7}Lookup errors}{107}{section.8.7}
+\contentsline {section}{\numberline {8.8}Programmer defined errors}{107}{section.8.8}
+\contentsline {section}{\numberline {8.9}Primitive errors}{107}{section.8.9}
+\contentsline {section}{\numberline {8.10}Nonrecoverable process errors}{108}{section.8.10}
+\contentsline {section}{\numberline {8.11}Fatal errors}{108}{section.8.11}
+\contentsline {section}{\numberline {8.12}The initial Self world}{109}{section.8.12}
+\contentsline {section}{\numberline {8.13}Option Primitives}{113}{section.8.13}
+\contentsline {section}{\numberline {8.14}Interfacing with other languages}{114}{section.8.14}
+\contentsline {subsection}{\numberline {8.14.1}\sphinxstyleliteralintitle {proxy} and \sphinxstyleliteralintitle {fctProxy} objects}{114}{subsection.8.14.1}
+\contentsline {subsection}{\numberline {8.14.2}Glue code}{114}{subsection.8.14.2}
+\contentsline {subsection}{\numberline {8.14.3}Compiling and linking glue code}{115}{subsection.8.14.3}
+\contentsline {subsection}{\numberline {8.14.4}A simple glue example: calling a C function}{115}{subsection.8.14.4}
+\contentsline {subsection}{\numberline {8.14.5}C glue}{117}{subsection.8.14.5}
+\contentsline {subsection}{\numberline {8.14.6}Calling C functions}{117}{subsection.8.14.6}
+\contentsline {subsection}{\numberline {8.14.7}Reading and assigning global variables}{118}{subsection.8.14.7}
+\contentsline {subsection}{\numberline {8.14.8}Reading and assigning struct components}{119}{subsection.8.14.8}
+\contentsline {subsection}{\numberline {8.14.9}C++ glue}{120}{subsection.8.14.9}
+\contentsline {subsection}{\numberline {8.14.10}Constructing objects}{120}{subsection.8.14.10}
+\contentsline {subsection}{\numberline {8.14.11}Deleting objects}{120}{subsection.8.14.11}
+\contentsline {subsection}{\numberline {8.14.12}Calling member functions}{121}{subsection.8.14.12}
+\contentsline {subsection}{\numberline {8.14.13}Conversion pairs}{121}{subsection.8.14.13}
+\contentsline {subsection}{\numberline {8.14.14}Argument conversions \textendash {} from Self to C/C++}{121}{subsection.8.14.14}
+\contentsline {subsubsection}{Notes}{123}{subsubsection*.14}
+\contentsline {subsection}{\numberline {8.14.15}Result conversions - from C/C++ to Self}{124}{subsection.8.14.15}
+\contentsline {subsubsection}{Notes}{125}{subsubsection*.15}
+\contentsline {subsection}{\numberline {8.14.16}A complete application using foreign functions}{126}{subsection.8.14.16}
+\contentsline {subsection}{\numberline {8.14.17}Outline of \sphinxstyleliteralintitle {toself}}{127}{subsection.8.14.17}
+\contentsline {subsection}{\numberline {8.14.18}Outline of server}{128}{subsection.8.14.18}
+\contentsline {subsection}{\numberline {8.14.19}Foreign functions and glue needed to implement server}{128}{subsection.8.14.19}
+\contentsline {subsection}{\numberline {8.14.20}Use of foreign functions in server.self}{128}{subsection.8.14.20}
+\contentsline {chapter}{\numberline {9}References}{131}{chapter.9}
+\contentsline {chapter}{\numberline {10}Appendices}{133}{chapter.10}
+\contentsline {section}{\numberline {10.1}Glossary}{133}{section.10.1}
+\contentsline {section}{\numberline {10.2}Lexical overview}{135}{section.10.2}
+\contentsline {section}{\numberline {10.3}Syntax overview}{136}{section.10.3}
+\contentsline {section}{\numberline {10.4}Built-in types}{136}{section.10.4}
+\contentsline {section}{\numberline {10.5}Useful Selectors}{136}{section.10.5}
+\contentsline {subsection}{\numberline {10.5.1}Copying}{137}{subsection.10.5.1}
+\contentsline {subsection}{\numberline {10.5.2}Comparing}{137}{subsection.10.5.2}
+\contentsline {subsubsection}{Equality}{137}{subsubsection*.16}
+\contentsline {subsubsection}{Ordered}{137}{subsubsection*.17}
+\contentsline {subsection}{\numberline {10.5.3}Numeric operations}{137}{subsection.10.5.3}
+\contentsline {subsection}{\numberline {10.5.4}Bitwise operations (integers)}{138}{subsection.10.5.4}
+\contentsline {subsection}{\numberline {10.5.5}Logical operations (booleans)}{138}{subsection.10.5.5}
+\contentsline {subsection}{\numberline {10.5.6}Constructing}{138}{subsection.10.5.6}
+\contentsline {subsection}{\numberline {10.5.7}Printing}{139}{subsection.10.5.7}
+\contentsline {subsection}{\numberline {10.5.8}Control}{139}{subsection.10.5.8}
+\contentsline {subsubsection}{Block evaluation}{139}{subsubsection*.18}
+\contentsline {subsubsection}{Selection}{139}{subsubsection*.19}
+\contentsline {subsubsection}{Local exiting}{139}{subsubsection*.20}
+\contentsline {subsubsection}{Basic looping}{139}{subsubsection*.21}
+\contentsline {subsubsection}{Pre-test looping}{139}{subsubsection*.22}
+\contentsline {subsubsection}{Post-test looping}{139}{subsubsection*.23}
+\contentsline {subsubsection}{Iterators}{140}{subsubsection*.24}
+\contentsline {subsection}{\numberline {10.5.9}Collections}{140}{subsection.10.5.9}
+\contentsline {subsubsection}{Sizing}{140}{subsubsection*.25}
+\contentsline {subsubsection}{Adding}{140}{subsubsection*.26}
+\contentsline {subsubsection}{Removing}{140}{subsubsection*.27}
+\contentsline {subsubsection}{Accessing}{141}{subsubsection*.28}
+\contentsline {subsubsection}{Iterating}{141}{subsubsection*.29}
+\contentsline {subsubsection}{Reducing}{141}{subsubsection*.30}
+\contentsline {subsubsection}{Transforming}{141}{subsubsection*.31}
+\contentsline {subsubsection}{Sorting}{142}{subsubsection*.32}
+\contentsline {subsubsection}{Indexable-specific}{142}{subsubsection*.33}
+\contentsline {subsection}{\numberline {10.5.10}Timing}{142}{subsection.10.5.10}
+\contentsline {subsection}{\numberline {10.5.11}Message Sending}{142}{subsection.10.5.11}
+\contentsline {subsubsection}{Sending}{142}{subsubsection*.34}
+\contentsline {subsubsection}{Message object protocol}{143}{subsubsection*.35}
+\contentsline {subsection}{\numberline {10.5.12}Reflection (mirrors)}{143}{subsection.10.5.12}
+\contentsline {subsection}{\numberline {10.5.13}System-wide Enumerations}{143}{subsection.10.5.13}
+\contentsline {subsection}{\numberline {10.5.14}Debugging}{143}{subsection.10.5.14}
+\contentsline {subsection}{\numberline {10.5.15}Virtual Machine-Generated}{144}{subsection.10.5.15}
+\contentsline {subsubsection}{Errors}{144}{subsubsection*.36}
+\contentsline {subsubsection}{Other system-triggered messages}{144}{subsubsection*.37}
+\contentsline {section}{\numberline {10.6}Every Menu Item in the Programming Environment}{144}{section.10.6}
+\contentsline {section}{\numberline {10.7}The system monitor}{146}{section.10.7}
+\contentsline {section}{\numberline {10.8}Primitives}{149}{section.10.8}
+\contentsline {subsection}{\numberline {10.8.1}Primitive failures}{149}{subsection.10.8.1}
+\contentsline {subsection}{\numberline {10.8.2}Available primitives}{150}{subsection.10.8.2}
+\contentsline {chapter}{\numberline {11}Extras}{151}{chapter.11}
+\contentsline {section}{\numberline {11.1}The Original Self UI}{151}{section.11.1}
+\contentsline {subsection}{\numberline {11.1.1}X11 with 256 Colors}{151}{subsection.11.1.1}
+\contentsline {subsection}{\numberline {11.1.2}VM with X11 support}{151}{subsection.11.1.2}
+\contentsline {subsection}{\numberline {11.1.3}Preparing a snapshot}{152}{subsection.11.1.3}
+\contentsline {subsection}{\numberline {11.1.4}Starting the UI}{152}{subsection.11.1.4}

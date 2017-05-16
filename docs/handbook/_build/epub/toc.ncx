@@ -1,0 +1,1544 @@
+<?xml version="1.0"?>
+<ncx version="2005-1" xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta name="dtb:uid" content="unknown"/>
+    <meta name="dtb:depth" content="3"/>
+    <meta name="dtb:totalPageCount" content="0"/>
+    <meta name="dtb:maxPageNumber" content="0"/>
+  </head>
+  <docTitle>
+    <text>Self Handbook</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="navPoint220" playOrder="1">
+      <navLabel>
+        <text>The Self Handbook</text>
+      </navLabel>
+      <content src="index.xhtml" />
+    </navPoint>
+    <navPoint id="navPoint221" playOrder="2">
+      <navLabel>
+        <text>Introduction</text>
+      </navLabel>
+      <content src="intro.xhtml" />
+      <navPoint id="navPoint222" playOrder="2">
+        <navLabel>
+          <text>Introduction</text>
+        </navLabel>
+        <content src="intro.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint223" playOrder="3">
+        <navLabel>
+          <text>History</text>
+        </navLabel>
+        <content src="intro.xhtml#history" />
+      </navPoint>
+      <navPoint id="navPoint224" playOrder="4">
+        <navLabel>
+          <text>System Overview</text>
+        </navLabel>
+        <content src="intro.xhtml#system-overview" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint225" playOrder="5">
+      <navLabel>
+        <text>Getting Started</text>
+      </navLabel>
+      <content src="gettingstarted.xhtml" />
+      <navPoint id="navPoint226" playOrder="5">
+        <navLabel>
+          <text>Getting Started</text>
+        </navLabel>
+        <content src="gettingstarted.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint227" playOrder="6">
+        <navLabel>
+          <text>Downloading Prebuilt VM and snapshot</text>
+        </navLabel>
+        <content src="gettingstarted.xhtml#downloading-prebuilt-vm-and-snapshot" />
+      </navPoint>
+      <navPoint id="navPoint228" playOrder="7">
+        <navLabel>
+          <text>Running on OS X</text>
+        </navLabel>
+        <content src="gettingstarted.xhtml#running-on-os-x" />
+      </navPoint>
+      <navPoint id="navPoint229" playOrder="8">
+        <navLabel>
+          <text>Running on Linux</text>
+        </navLabel>
+        <content src="gettingstarted.xhtml#running-on-linux" />
+      </navPoint>
+      <navPoint id="navPoint230" playOrder="9">
+        <navLabel>
+          <text>Building your own system</text>
+        </navLabel>
+        <content src="gettingstarted.xhtml#building-your-own-system" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint231" playOrder="10">
+      <navLabel>
+        <text>Language Reference</text>
+      </navLabel>
+      <content src="langref.xhtml" />
+      <navPoint id="navPoint232" playOrder="10">
+        <navLabel>
+          <text>Language Reference</text>
+        </navLabel>
+        <content src="langref.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint233" playOrder="11">
+        <navLabel>
+          <text>Objects</text>
+        </navLabel>
+        <content src="langref.xhtml#objects" />
+        <navPoint id="navPoint234" playOrder="11">
+          <navLabel>
+            <text>Objects</text>
+          </navLabel>
+          <content src="langref.xhtml#objects" />
+        </navPoint>
+        <navPoint id="navPoint235" playOrder="12">
+          <navLabel>
+            <text>Syntax</text>
+          </navLabel>
+          <content src="langref.xhtml#syntax" />
+        </navPoint>
+        <navPoint id="navPoint236" playOrder="13">
+          <navLabel>
+            <text>Data objects</text>
+          </navLabel>
+          <content src="langref.xhtml#data-objects" />
+        </navPoint>
+        <navPoint id="navPoint237" playOrder="14">
+          <navLabel>
+            <text>The assignment primitive</text>
+          </navLabel>
+          <content src="langref.xhtml#the-assignment-primitive" />
+        </navPoint>
+        <navPoint id="navPoint238" playOrder="15">
+          <navLabel>
+            <text>Objects with code</text>
+          </navLabel>
+          <content src="langref.xhtml#objects-with-code" />
+        </navPoint>
+        <navPoint id="navPoint239" playOrder="16">
+          <navLabel>
+            <text>Code</text>
+          </navLabel>
+          <content src="langref.xhtml#code" />
+        </navPoint>
+        <navPoint id="navPoint240" playOrder="17">
+          <navLabel>
+            <text>Methods</text>
+          </navLabel>
+          <content src="langref.xhtml#methods" />
+        </navPoint>
+        <navPoint id="navPoint241" playOrder="18">
+          <navLabel>
+            <text>Blocks</text>
+          </navLabel>
+          <content src="langref.xhtml#blocks" />
+        </navPoint>
+        <navPoint id="navPoint242" playOrder="19">
+          <navLabel>
+            <text>Returns</text>
+          </navLabel>
+          <content src="langref.xhtml#returns" />
+        </navPoint>
+        <navPoint id="navPoint243" playOrder="20">
+          <navLabel>
+            <text>Construction of object literals</text>
+          </navLabel>
+          <content src="langref.xhtml#construction-of-object-literals" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint244" playOrder="21">
+        <navLabel>
+          <text>Slot descriptors</text>
+        </navLabel>
+        <content src="langref.xhtml#slot-descriptors" />
+        <navPoint id="navPoint245" playOrder="21">
+          <navLabel>
+            <text>Slot descriptors</text>
+          </navLabel>
+          <content src="langref.xhtml#slot-descriptors" />
+        </navPoint>
+        <navPoint id="navPoint246" playOrder="22">
+          <navLabel>
+            <text>Read-only slots</text>
+          </navLabel>
+          <content src="langref.xhtml#read-only-slots" />
+        </navPoint>
+        <navPoint id="navPoint247" playOrder="23">
+          <navLabel>
+            <text>Read/write slots</text>
+          </navLabel>
+          <content src="langref.xhtml#read-write-slots" />
+        </navPoint>
+        <navPoint id="navPoint248" playOrder="24">
+          <navLabel>
+            <text>Slots containing methods</text>
+          </navLabel>
+          <content src="langref.xhtml#slots-containing-methods" />
+        </navPoint>
+        <navPoint id="navPoint249" playOrder="25">
+          <navLabel>
+            <text>Parent slots</text>
+          </navLabel>
+          <content src="langref.xhtml#parent-slots" />
+        </navPoint>
+        <navPoint id="navPoint250" playOrder="26">
+          <navLabel>
+            <text>Annotations</text>
+          </navLabel>
+          <content src="langref.xhtml#annotations" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint251" playOrder="27">
+        <navLabel>
+          <text>Expressions</text>
+        </navLabel>
+        <content src="langref.xhtml#expressions" />
+        <navPoint id="navPoint252" playOrder="27">
+          <navLabel>
+            <text>Expressions</text>
+          </navLabel>
+          <content src="langref.xhtml#expressions" />
+        </navPoint>
+        <navPoint id="navPoint253" playOrder="28">
+          <navLabel>
+            <text>Unary messages</text>
+          </navLabel>
+          <content src="langref.xhtml#unary-messages" />
+        </navPoint>
+        <navPoint id="navPoint254" playOrder="29">
+          <navLabel>
+            <text>Binary messages</text>
+          </navLabel>
+          <content src="langref.xhtml#binary-messages" />
+        </navPoint>
+        <navPoint id="navPoint255" playOrder="30">
+          <navLabel>
+            <text>Keyword messages</text>
+          </navLabel>
+          <content src="langref.xhtml#keyword-messages" />
+        </navPoint>
+        <navPoint id="navPoint256" playOrder="31">
+          <navLabel>
+            <text>Implicit-receiver messages</text>
+          </navLabel>
+          <content src="langref.xhtml#implicit-receiver-messages" />
+        </navPoint>
+        <navPoint id="navPoint257" playOrder="32">
+          <navLabel>
+            <text>Resending messages</text>
+          </navLabel>
+          <content src="langref.xhtml#resending-messages" />
+        </navPoint>
+        <navPoint id="navPoint258" playOrder="33">
+          <navLabel>
+            <text>Message lookup semantics</text>
+          </navLabel>
+          <content src="langref.xhtml#message-lookup-semantics" />
+        </navPoint>
+        <navPoint id="navPoint259" playOrder="34">
+          <navLabel>
+            <text>Message send</text>
+          </navLabel>
+          <content src="langref.xhtml#message-send" />
+        </navPoint>
+        <navPoint id="navPoint260" playOrder="35">
+          <navLabel>
+            <text>The lookup algorithm</text>
+          </navLabel>
+          <content src="langref.xhtml#the-lookup-algorithm" />
+        </navPoint>
+        <navPoint id="navPoint261" playOrder="36">
+          <navLabel>
+            <text>Undirected Resend</text>
+          </navLabel>
+          <content src="langref.xhtml#undirected-resend" />
+        </navPoint>
+        <navPoint id="navPoint262" playOrder="37">
+          <navLabel>
+            <text>Directed Resend</text>
+          </navLabel>
+          <content src="langref.xhtml#directed-resend" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint263" playOrder="38">
+        <navLabel>
+          <text>Lexical elements</text>
+        </navLabel>
+        <content src="langref.xhtml#lexical-elements" />
+        <navPoint id="navPoint264" playOrder="38">
+          <navLabel>
+            <text>Lexical elements</text>
+          </navLabel>
+          <content src="langref.xhtml#lexical-elements" />
+        </navPoint>
+        <navPoint id="navPoint265" playOrder="39">
+          <navLabel>
+            <text>Character set</text>
+          </navLabel>
+          <content src="langref.xhtml#character-set" />
+        </navPoint>
+        <navPoint id="navPoint266" playOrder="40">
+          <navLabel>
+            <text>Identifiers</text>
+          </navLabel>
+          <content src="langref.xhtml#index-60" />
+        </navPoint>
+        <navPoint id="navPoint267" playOrder="41">
+          <navLabel>
+            <text>Keywords</text>
+          </navLabel>
+          <content src="langref.xhtml#keywords" />
+        </navPoint>
+        <navPoint id="navPoint268" playOrder="42">
+          <navLabel>
+            <text>Arguments</text>
+          </navLabel>
+          <content src="langref.xhtml#arguments" />
+        </navPoint>
+        <navPoint id="navPoint269" playOrder="43">
+          <navLabel>
+            <text>Operators</text>
+          </navLabel>
+          <content src="langref.xhtml#operators" />
+        </navPoint>
+        <navPoint id="navPoint270" playOrder="44">
+          <navLabel>
+            <text>Numbers</text>
+          </navLabel>
+          <content src="langref.xhtml#numbers" />
+        </navPoint>
+        <navPoint id="navPoint271" playOrder="45">
+          <navLabel>
+            <text>Strings</text>
+          </navLabel>
+          <content src="langref.xhtml#strings" />
+        </navPoint>
+        <navPoint id="navPoint272" playOrder="46">
+          <navLabel>
+            <text>Comments</text>
+          </navLabel>
+          <content src="langref.xhtml#comments" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint273" playOrder="47">
+      <navLabel>
+        <text>The Self World</text>
+      </navLabel>
+      <content src="selfwrld.xhtml" />
+      <navPoint id="navPoint274" playOrder="47">
+        <navLabel>
+          <text>The Self World</text>
+        </navLabel>
+        <content src="selfwrld.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint275" playOrder="48">
+        <navLabel>
+          <text>World Organization</text>
+        </navLabel>
+        <content src="worldorg.xhtml" />
+        <navPoint id="navPoint276" playOrder="48">
+          <navLabel>
+            <text>World Organization</text>
+          </navLabel>
+          <content src="worldorg.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint277" playOrder="49">
+          <navLabel>
+            <text>The Lobby</text>
+          </navLabel>
+          <content src="worldorg.xhtml#the-lobby" />
+        </navPoint>
+        <navPoint id="navPoint278" playOrder="50">
+          <navLabel>
+            <text>Names and Paths</text>
+          </navLabel>
+          <content src="worldorg.xhtml#names-and-paths" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint279" playOrder="51">
+        <navLabel>
+          <text>The Roots of Behavior</text>
+        </navLabel>
+        <content src="roots.xhtml" />
+        <navPoint id="navPoint280" playOrder="51">
+          <navLabel>
+            <text>The Roots of Behavior</text>
+          </navLabel>
+          <content src="roots.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint281" playOrder="52">
+          <navLabel>
+            <text>Default Behavior</text>
+          </navLabel>
+          <content src="roots.xhtml#default-behavior" />
+        </navPoint>
+        <navPoint id="navPoint282" playOrder="53">
+          <navLabel>
+            <text>The Root Traits: Traits Clonable and Traits Oddball</text>
+          </navLabel>
+          <content src="roots.xhtml#the-root-traits-traits-clonable-and-traits-oddball" />
+        </navPoint>
+        <navPoint id="navPoint283" playOrder="54">
+          <navLabel>
+            <text>Mixins</text>
+          </navLabel>
+          <content src="roots.xhtml#mixins" />
+        </navPoint>
+        <navPoint id="navPoint284" playOrder="55">
+          <navLabel>
+            <text>The Identity Mixin</text>
+          </navLabel>
+          <content src="roots.xhtml#the-identity-mixin" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint285" playOrder="56">
+        <navLabel>
+          <text>Blocks, Booleans, and Control Structures</text>
+        </navLabel>
+        <content src="blocks.xhtml" />
+        <navPoint id="navPoint286" playOrder="56">
+          <navLabel>
+            <text>Blocks, Booleans, and Control Structures</text>
+          </navLabel>
+          <content src="blocks.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint287" playOrder="57">
+          <navLabel>
+            <text>Booleans and Conditionals</text>
+          </navLabel>
+          <content src="blocks.xhtml#booleans-and-conditionals" />
+        </navPoint>
+        <navPoint id="navPoint288" playOrder="58">
+          <navLabel>
+            <text>Loops</text>
+          </navLabel>
+          <content src="blocks.xhtml#loops" />
+        </navPoint>
+        <navPoint id="navPoint289" playOrder="59">
+          <navLabel>
+            <text>Block Exits</text>
+          </navLabel>
+          <content src="blocks.xhtml#block-exits" />
+        </navPoint>
+        <navPoint id="navPoint290" playOrder="60">
+          <navLabel>
+            <text>Other Block Behavior</text>
+          </navLabel>
+          <content src="blocks.xhtml#other-block-behavior" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint291" playOrder="61">
+        <navLabel>
+          <text>Numbers and Time</text>
+        </navLabel>
+        <content src="numbers.xhtml" />
+        <navPoint id="navPoint292" playOrder="61">
+          <navLabel>
+            <text>Numbers and Time</text>
+          </navLabel>
+          <content src="numbers.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint293" playOrder="62">
+          <navLabel>
+            <text>Random Numbers</text>
+          </navLabel>
+          <content src="numbers.xhtml#random-numbers" />
+        </navPoint>
+        <navPoint id="navPoint294" playOrder="63">
+          <navLabel>
+            <text>Time</text>
+          </navLabel>
+          <content src="numbers.xhtml#time" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint295" playOrder="64">
+        <navLabel>
+          <text>Collections</text>
+        </navLabel>
+        <content src="collections.xhtml" />
+        <navPoint id="navPoint296" playOrder="64">
+          <navLabel>
+            <text>Collections</text>
+          </navLabel>
+          <content src="collections.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint297" playOrder="65">
+          <navLabel>
+            <text>Indexable Collections</text>
+          </navLabel>
+          <content src="collections.xhtml#indexable-collections" />
+        </navPoint>
+        <navPoint id="navPoint298" playOrder="66">
+          <navLabel>
+            <text>Strings, Characters, and Paragraphs</text>
+          </navLabel>
+          <content src="collections.xhtml#strings-characters-and-paragraphs" />
+        </navPoint>
+        <navPoint id="navPoint299" playOrder="67">
+          <navLabel>
+            <text>Unordered Sets and Dictionaries</text>
+          </navLabel>
+          <content src="collections.xhtml#unordered-sets-and-dictionaries" />
+        </navPoint>
+        <navPoint id="navPoint300" playOrder="68">
+          <navLabel>
+            <text>Tree-Based Sets and Dictionaries</text>
+          </navLabel>
+          <content src="collections.xhtml#tree-based-sets-and-dictionaries" />
+        </navPoint>
+        <navPoint id="navPoint301" playOrder="69">
+          <navLabel>
+            <text>Lists and PriorityQueues</text>
+          </navLabel>
+          <content src="collections.xhtml#lists-and-priorityqueues" />
+        </navPoint>
+        <navPoint id="navPoint302" playOrder="70">
+          <navLabel>
+            <text>Constructing and Concatenating Collections</text>
+          </navLabel>
+          <content src="collections.xhtml#constructing-and-concatenating-collections" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint303" playOrder="71">
+        <navLabel>
+          <text>Pairs</text>
+        </navLabel>
+        <content src="pairs.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint304" playOrder="72">
+        <navLabel>
+          <text>Mirrors</text>
+        </navLabel>
+        <content src="mirrors.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint305" playOrder="73">
+        <navLabel>
+          <text>Messages</text>
+        </navLabel>
+        <content src="messages.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint306" playOrder="74">
+        <navLabel>
+          <text>Processes and the Prompt</text>
+        </navLabel>
+        <content src="processes.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint307" playOrder="75">
+        <navLabel>
+          <text>Foreign Objects</text>
+        </navLabel>
+        <content src="foreign.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint308" playOrder="76">
+        <navLabel>
+          <text>I/O and Unix</text>
+        </navLabel>
+        <content src="unix.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint309" playOrder="77">
+        <navLabel>
+          <text>Other Objects</text>
+        </navLabel>
+        <content src="oddball.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint310" playOrder="78">
+        <navLabel>
+          <text>How to build the world</text>
+        </navLabel>
+        <content src="buildworld.xhtml" />
+        <navPoint id="navPoint311" playOrder="78">
+          <navLabel>
+            <text>How to build the world</text>
+          </navLabel>
+          <content src="buildworld.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint312" playOrder="79">
+          <navLabel>
+            <text>From within the main Self tree</text>
+          </navLabel>
+          <content src="buildworld.xhtml#from-within-the-main-self-tree" />
+        </navPoint>
+        <navPoint id="navPoint313" playOrder="80">
+          <navLabel>
+            <text>From outside the main tree</text>
+          </navLabel>
+          <content src="buildworld.xhtml#from-outside-the-main-tree" />
+        </navPoint>
+        <navPoint id="navPoint314" playOrder="81">
+          <navLabel>
+            <text>Finishing the build</text>
+          </navLabel>
+          <content src="buildworld.xhtml#finishing-the-build" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint315" playOrder="82">
+        <navLabel>
+          <text>How to use the low-level interrupt facilities</text>
+        </navLabel>
+        <content src="lowlevel.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint316" playOrder="83">
+        <navLabel>
+          <text>Using the textual debugger</text>
+        </navLabel>
+        <content src="textdebug.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint317" playOrder="84">
+        <navLabel>
+          <text>Logging</text>
+        </navLabel>
+        <content src="logging.xhtml" />
+        <navPoint id="navPoint318" playOrder="84">
+          <navLabel>
+            <text>Logging</text>
+          </navLabel>
+          <content src="logging.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint319" playOrder="85">
+          <navLabel>
+            <text>How to log</text>
+          </navLabel>
+          <content src="logging.xhtml#how-to-log" />
+        </navPoint>
+        <navPoint id="navPoint320" playOrder="86">
+          <navLabel>
+            <text>How logging works</text>
+          </navLabel>
+          <content src="logging.xhtml#how-logging-works" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint321" playOrder="87">
+      <navLabel>
+        <text>A Guide to Programming Style</text>
+      </navLabel>
+      <content src="progguid.xhtml" />
+      <navPoint id="navPoint322" playOrder="87">
+        <navLabel>
+          <text>A Guide to Programming Style</text>
+        </navLabel>
+        <content src="progguid.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint323" playOrder="88">
+        <navLabel>
+          <text>Behaviorism versus Reflection</text>
+        </navLabel>
+        <content src="progguid.xhtml#behaviorism-versus-reflection" />
+      </navPoint>
+      <navPoint id="navPoint324" playOrder="89">
+        <navLabel>
+          <text>Objects Have Many Roles</text>
+        </navLabel>
+        <content src="progguid.xhtml#objects-have-many-roles" />
+        <navPoint id="navPoint325" playOrder="89">
+          <navLabel>
+            <text>Objects Have Many Roles</text>
+          </navLabel>
+          <content src="progguid.xhtml#objects-have-many-roles" />
+        </navPoint>
+        <navPoint id="navPoint326" playOrder="90">
+          <navLabel>
+            <text>Shared Behavior</text>
+          </navLabel>
+          <content src="progguid.xhtml#shared-behavior" />
+        </navPoint>
+        <navPoint id="navPoint327" playOrder="91">
+          <navLabel>
+            <text>One-of-a-kind Objects (Oddballs)</text>
+          </navLabel>
+          <content src="progguid.xhtml#one-of-a-kind-objects-oddballs" />
+        </navPoint>
+        <navPoint id="navPoint328" playOrder="92">
+          <navLabel>
+            <text>Inline Objects</text>
+          </navLabel>
+          <content src="progguid.xhtml#inline-objects" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint329" playOrder="93">
+        <navLabel>
+          <text>Naming and Printing</text>
+        </navLabel>
+        <content src="progguid.xhtml#naming-and-printing" />
+        <navPoint id="navPoint330" playOrder="93">
+          <navLabel>
+            <text>Naming and Printing</text>
+          </navLabel>
+          <content src="progguid.xhtml#naming-and-printing" />
+        </navPoint>
+        <navPoint id="navPoint331" playOrder="94">
+          <navLabel>
+            <text>How objects are printed</text>
+          </navLabel>
+          <content src="progguid.xhtml#how-objects-are-printed" />
+        </navPoint>
+        <navPoint id="navPoint332" playOrder="95">
+          <navLabel>
+            <text>How to make an object print</text>
+          </navLabel>
+          <content src="progguid.xhtml#how-to-make-an-object-print" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint333" playOrder="96">
+        <navLabel>
+          <text>How to Return Multiple Values</text>
+        </navLabel>
+        <content src="progguid.xhtml#how-to-return-multiple-values" />
+      </navPoint>
+      <navPoint id="navPoint334" playOrder="97">
+        <navLabel>
+          <text>Substituting Values for Blocks</text>
+        </navLabel>
+        <content src="progguid.xhtml#substituting-values-for-blocks" />
+      </navPoint>
+      <navPoint id="navPoint335" playOrder="98">
+        <navLabel>
+          <text>nil Considered Naughty</text>
+        </navLabel>
+        <content src="progguid.xhtml#nil-considered-naughty" />
+      </navPoint>
+      <navPoint id="navPoint336" playOrder="99">
+        <navLabel>
+          <text>Hash and =</text>
+        </navLabel>
+        <content src="progguid.xhtml#hash-and" />
+      </navPoint>
+      <navPoint id="navPoint337" playOrder="100">
+        <navLabel>
+          <text>Equality, Identity, and Indistinguishability</text>
+        </navLabel>
+        <content src="progguid.xhtml#equality-identity-and-indistinguishability" />
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint338" playOrder="101">
+      <navLabel>
+        <text>How to Program in Self</text>
+      </navLabel>
+      <content src="howtoprg.xhtml" />
+      <navPoint id="navPoint339" playOrder="101">
+        <navLabel>
+          <text>How to Program in Self</text>
+        </navLabel>
+        <content src="howtoprg.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint340" playOrder="102">
+        <navLabel>
+          <text>Introduction</text>
+        </navLabel>
+        <content src="howtoprg.xhtml#introduction" />
+      </navPoint>
+      <navPoint id="navPoint341" playOrder="103">
+        <navLabel>
+          <text>Browsing Concepts</text>
+        </navLabel>
+        <content src="howtoprg.xhtml#browsing-concepts" />
+        <navPoint id="navPoint342" playOrder="103">
+          <navLabel>
+            <text>Browsing Concepts</text>
+          </navLabel>
+          <content src="howtoprg.xhtml#browsing-concepts" />
+        </navPoint>
+        <navPoint id="navPoint343" playOrder="104">
+          <navLabel>
+            <text>Introducing the Outliner</text>
+          </navLabel>
+          <content src="howtoprg.xhtml#introducing-the-outliner" />
+        </navPoint>
+        <navPoint id="navPoint344" playOrder="105">
+          <navLabel>
+            <text>Menus in the Outliner</text>
+          </navLabel>
+          <content src="howtoprg.xhtml#menus-in-the-outliner" />
+        </navPoint>
+        <navPoint id="navPoint345" playOrder="106">
+          <navLabel>
+            <text>Debugger</text>
+          </navLabel>
+          <content src="howtoprg.xhtml#debugger" />
+        </navPoint>
+        <navPoint id="navPoint346" playOrder="107">
+          <navLabel>
+            <text>Enumerators</text>
+          </navLabel>
+          <content src="howtoprg.xhtml#enumerators" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint347" playOrder="108">
+        <navLabel>
+          <text>Hacking Objects</text>
+        </navLabel>
+        <content src="howtoprg.xhtml#hacking-objects" />
+      </navPoint>
+      <navPoint id="navPoint348" playOrder="109">
+        <navLabel>
+          <text>The Transporter</text>
+        </navLabel>
+        <content src="howtoprg.xhtml#the-transporter" />
+        <navPoint id="navPoint349" playOrder="109">
+          <navLabel>
+            <text>The Transporter</text>
+          </navLabel>
+          <content src="howtoprg.xhtml#the-transporter" />
+        </navPoint>
+        <navPoint id="navPoint350" playOrder="110">
+          <navLabel>
+            <text>The Traditional Schism between Program and Data</text>
+          </navLabel>
+          <content src="howtoprg.xhtml#the-traditional-schism-between-program-and-data" />
+        </navPoint>
+        <navPoint id="navPoint351" playOrder="111">
+          <navLabel>
+            <text>Data = Program</text>
+          </navLabel>
+          <content src="howtoprg.xhtml#data-program" />
+        </navPoint>
+        <navPoint id="navPoint352" playOrder="112">
+          <navLabel>
+            <text>Changes vs. Pieces</text>
+          </navLabel>
+          <content src="howtoprg.xhtml#changes-vs-pieces" />
+        </navPoint>
+        <navPoint id="navPoint353" playOrder="113">
+          <navLabel>
+            <text>Objects vs. Slots</text>
+          </navLabel>
+          <content src="howtoprg.xhtml#objects-vs-slots" />
+        </navPoint>
+        <navPoint id="navPoint354" playOrder="114">
+          <navLabel>
+            <text>What to Save for the Contents of a Slot</text>
+          </navLabel>
+          <content src="howtoprg.xhtml#what-to-save-for-the-contents-of-a-slot" />
+        </navPoint>
+        <navPoint id="navPoint355" playOrder="115">
+          <navLabel>
+            <text>Copy Down</text>
+          </navLabel>
+          <content src="howtoprg.xhtml#copy-down" />
+        </navPoint>
+        <navPoint id="navPoint356" playOrder="116">
+          <navLabel>
+            <text>Trees</text>
+          </navLabel>
+          <content src="howtoprg.xhtml#trees" />
+        </navPoint>
+        <navPoint id="navPoint357" playOrder="117">
+          <navLabel>
+            <text>Versioning</text>
+          </navLabel>
+          <content src="howtoprg.xhtml#versioning" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint358" playOrder="118">
+      <navLabel>
+        <text>Morphic: The Self User Interface Framework</text>
+      </navLabel>
+      <content src="morphic.xhtml" />
+      <navPoint id="navPoint359" playOrder="118">
+        <navLabel>
+          <text>Morphic: The Self User Interface Framework</text>
+        </navLabel>
+        <content src="morphic.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint360" playOrder="119">
+        <navLabel>
+          <text>Overview</text>
+        </navLabel>
+        <content src="morphic.xhtml#overview" />
+      </navPoint>
+      <navPoint id="navPoint361" playOrder="120">
+        <navLabel>
+          <text>Composite Morphs</text>
+        </navLabel>
+        <content src="morphic.xhtml#composite-morphs" />
+      </navPoint>
+      <navPoint id="navPoint362" playOrder="121">
+        <navLabel>
+          <text>Morph Traits and Prototypes</text>
+        </navLabel>
+        <content src="morphic.xhtml#morph-traits-and-prototypes" />
+        <navPoint id="navPoint363" playOrder="121">
+          <navLabel>
+            <text>Morph Traits and Prototypes</text>
+          </navLabel>
+          <content src="morphic.xhtml#morph-traits-and-prototypes" />
+        </navPoint>
+        <navPoint id="navPoint364" playOrder="122">
+          <navLabel>
+            <text>Implementing a New Kind of Morph</text>
+          </navLabel>
+          <content src="morphic.xhtml#implementing-a-new-kind-of-morph" />
+        </navPoint>
+        <navPoint id="navPoint365" playOrder="123">
+          <navLabel>
+            <text>Morph Creation: The Bottom-up Approach</text>
+          </navLabel>
+          <content src="morphic.xhtml#morph-creation-the-bottom-up-approach" />
+        </navPoint>
+        <navPoint id="navPoint366" playOrder="124">
+          <navLabel>
+            <text>Morph Creation: The Top-down Approach</text>
+          </navLabel>
+          <content src="morphic.xhtml#morph-creation-the-top-down-approach" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint367" playOrder="125">
+        <navLabel>
+          <text>Saving a Composite Morph</text>
+        </navLabel>
+        <content src="morphic.xhtml#saving-a-composite-morph" />
+      </navPoint>
+      <navPoint id="navPoint368" playOrder="126">
+        <navLabel>
+          <text>Handling User Input</text>
+        </navLabel>
+        <content src="morphic.xhtml#handling-user-input" />
+        <navPoint id="navPoint369" playOrder="126">
+          <navLabel>
+            <text>Handling User Input</text>
+          </navLabel>
+          <content src="morphic.xhtml#handling-user-input" />
+        </navPoint>
+        <navPoint id="navPoint370" playOrder="127">
+          <navLabel>
+            <text>Handling Events</text>
+          </navLabel>
+          <content src="morphic.xhtml#handling-events" />
+        </navPoint>
+        <navPoint id="navPoint371" playOrder="128">
+          <navLabel>
+            <text>Mapping special characters to actions</text>
+          </navLabel>
+          <content src="morphic.xhtml#mapping-special-characters-to-actions" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint372" playOrder="129">
+        <navLabel>
+          <text>Drag and Drop</text>
+        </navLabel>
+        <content src="morphic.xhtml#drag-and-drop" />
+      </navPoint>
+      <navPoint id="navPoint373" playOrder="130">
+        <navLabel>
+          <text>Automatic Layout</text>
+        </navLabel>
+        <content src="morphic.xhtml#automatic-layout" />
+        <navPoint id="navPoint374" playOrder="130">
+          <navLabel>
+            <text>Automatic Layout</text>
+          </navLabel>
+          <content src="morphic.xhtml#automatic-layout" />
+        </navPoint>
+        <navPoint id="navPoint375" playOrder="131">
+          <navLabel>
+            <text>Packing</text>
+          </navLabel>
+          <content src="morphic.xhtml#packing" />
+        </navPoint>
+        <navPoint id="navPoint376" playOrder="132">
+          <navLabel>
+            <text>Space-filling</text>
+          </navLabel>
+          <content src="morphic.xhtml#space-filling" />
+        </navPoint>
+        <navPoint id="navPoint377" playOrder="133">
+          <navLabel>
+            <text>Shrink-Wrapping</text>
+          </navLabel>
+          <content src="morphic.xhtml#shrink-wrapping" />
+        </navPoint>
+        <navPoint id="navPoint378" playOrder="134">
+          <navLabel>
+            <text>Minimum Sizes</text>
+          </navLabel>
+          <content src="morphic.xhtml#minimum-sizes" />
+        </navPoint>
+        <navPoint id="navPoint379" playOrder="135">
+          <navLabel>
+            <text>Resize Attribute Summary</text>
+          </navLabel>
+          <content src="morphic.xhtml#resize-attribute-summary" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint380" playOrder="136">
+        <navLabel>
+          <text>Animation</text>
+        </navLabel>
+        <content src="morphic.xhtml#animation" />
+        <navPoint id="navPoint381" playOrder="136">
+          <navLabel>
+            <text>Animation</text>
+          </navLabel>
+          <content src="morphic.xhtml#animation" />
+        </navPoint>
+        <navPoint id="navPoint382" playOrder="137">
+          <navLabel>
+            <text>Stepping</text>
+          </navLabel>
+          <content src="morphic.xhtml#stepping" />
+        </navPoint>
+        <navPoint id="navPoint383" playOrder="138">
+          <navLabel>
+            <text>External Animation</text>
+          </navLabel>
+          <content src="morphic.xhtml#external-animation" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint384" playOrder="139">
+        <navLabel>
+          <text>Other Issues</text>
+        </navLabel>
+        <content src="morphic.xhtml#other-issues" />
+        <navPoint id="navPoint385" playOrder="139">
+          <navLabel>
+            <text>Other Issues</text>
+          </navLabel>
+          <content src="morphic.xhtml#other-issues" />
+        </navPoint>
+        <navPoint id="navPoint386" playOrder="140">
+          <navLabel>
+            <text>Local versus Global Coordinates</text>
+          </navLabel>
+          <content src="morphic.xhtml#local-versus-global-coordinates" />
+        </navPoint>
+        <navPoint id="navPoint387" playOrder="141">
+          <navLabel>
+            <text>Synchronization</text>
+          </navLabel>
+          <content src="morphic.xhtml#synchronization" />
+        </navPoint>
+        <navPoint id="navPoint388" playOrder="142">
+          <navLabel>
+            <text>Display Updating</text>
+          </navLabel>
+          <content src="morphic.xhtml#display-updating" />
+        </navPoint>
+        <navPoint id="navPoint389" playOrder="143">
+          <navLabel>
+            <text>Layout Updating</text>
+          </navLabel>
+          <content src="morphic.xhtml#layout-updating" />
+        </navPoint>
+        <navPoint id="navPoint390" playOrder="144">
+          <navLabel>
+            <text>Morph Copying</text>
+          </navLabel>
+          <content src="morphic.xhtml#morph-copying" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint391" playOrder="145">
+        <navLabel>
+          <text>Morph Responsibilities</text>
+        </navLabel>
+        <content src="morphic.xhtml#morph-responsibilities" />
+      </navPoint>
+      <navPoint id="navPoint392" playOrder="146">
+        <navLabel>
+          <text>Some Useful Morphs</text>
+        </navLabel>
+        <content src="morphic.xhtml#some-useful-morphs" />
+      </navPoint>
+      <navPoint id="navPoint393" playOrder="147">
+        <navLabel>
+          <text>The Graphical Environment</text>
+        </navLabel>
+        <content src="morphic.xhtml#the-graphical-environment" />
+        <navPoint id="navPoint394" playOrder="147">
+          <navLabel>
+            <text>The Graphical Environment</text>
+          </navLabel>
+          <content src="morphic.xhtml#the-graphical-environment" />
+        </navPoint>
+        <navPoint id="navPoint395" playOrder="148">
+          <navLabel>
+            <text>Specifying Colors</text>
+          </navLabel>
+          <content src="morphic.xhtml#specifying-colors" />
+        </navPoint>
+        <navPoint id="navPoint396" playOrder="149">
+          <navLabel>
+            <text>Specifying Fonts</text>
+          </navLabel>
+          <content src="morphic.xhtml#specifying-fonts" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint397" playOrder="150">
+      <navLabel>
+        <text>Virtual Machine Reference</text>
+      </navLabel>
+      <content src="vmref.xhtml" />
+      <navPoint id="navPoint398" playOrder="150">
+        <navLabel>
+          <text>Virtual Machine Reference</text>
+        </navLabel>
+        <content src="vmref.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint399" playOrder="151">
+        <navLabel>
+          <text>Building a VM</text>
+        </navLabel>
+        <content src="buildvm.xhtml" />
+        <navPoint id="navPoint400" playOrder="151">
+          <navLabel>
+            <text>Building a VM</text>
+          </navLabel>
+          <content src="buildvm.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint401" playOrder="152">
+          <navLabel>
+            <text>Requirements</text>
+          </navLabel>
+          <content src="buildvm.xhtml#requirements" />
+        </navPoint>
+        <navPoint id="navPoint402" playOrder="153">
+          <navLabel>
+            <text>Building</text>
+          </navLabel>
+          <content src="buildvm.xhtml#building" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint403" playOrder="154">
+        <navLabel>
+          <text>Startup options</text>
+        </navLabel>
+        <content src="vmref.xhtml#startup-options" />
+      </navPoint>
+      <navPoint id="navPoint404" playOrder="155">
+        <navLabel>
+          <text>System-triggered messages</text>
+        </navLabel>
+        <content src="vmref.xhtml#system-triggered-messages" />
+      </navPoint>
+      <navPoint id="navPoint405" playOrder="156">
+        <navLabel>
+          <text>Run-time message lookup errors</text>
+        </navLabel>
+        <content src="vmref.xhtml#run-time-message-lookup-errors" />
+      </navPoint>
+      <navPoint id="navPoint406" playOrder="157">
+        <navLabel>
+          <text>Low-level error messages</text>
+        </navLabel>
+        <content src="vmref.xhtml#low-level-error-messages" />
+      </navPoint>
+      <navPoint id="navPoint407" playOrder="158">
+        <navLabel>
+          <text>An example</text>
+        </navLabel>
+        <content src="vmref.xhtml#an-example" />
+      </navPoint>
+      <navPoint id="navPoint408" playOrder="159">
+        <navLabel>
+          <text>Lookup errors</text>
+        </navLabel>
+        <content src="vmref.xhtml#lookup-errors" />
+      </navPoint>
+      <navPoint id="navPoint409" playOrder="160">
+        <navLabel>
+          <text>Programmer defined errors</text>
+        </navLabel>
+        <content src="vmref.xhtml#programmer-defined-errors" />
+      </navPoint>
+      <navPoint id="navPoint410" playOrder="161">
+        <navLabel>
+          <text>Primitive errors</text>
+        </navLabel>
+        <content src="vmref.xhtml#primitive-errors" />
+      </navPoint>
+      <navPoint id="navPoint411" playOrder="162">
+        <navLabel>
+          <text>Nonrecoverable process errors</text>
+        </navLabel>
+        <content src="vmref.xhtml#nonrecoverable-process-errors" />
+      </navPoint>
+      <navPoint id="navPoint412" playOrder="163">
+        <navLabel>
+          <text>Fatal errors</text>
+        </navLabel>
+        <content src="vmref.xhtml#fatal-errors" />
+      </navPoint>
+      <navPoint id="navPoint413" playOrder="164">
+        <navLabel>
+          <text>The initial Self world</text>
+        </navLabel>
+        <content src="vmref.xhtml#the-initial-self-world" />
+      </navPoint>
+      <navPoint id="navPoint414" playOrder="165">
+        <navLabel>
+          <text>Option Primitives</text>
+        </navLabel>
+        <content src="vmref.xhtml#option-primitives" />
+      </navPoint>
+      <navPoint id="navPoint415" playOrder="166">
+        <navLabel>
+          <text>Interfacing with other languages</text>
+        </navLabel>
+        <content src="vmref.xhtml#interfacing-with-other-languages" />
+        <navPoint id="navPoint416" playOrder="166">
+          <navLabel>
+            <text>Interfacing with other languages</text>
+          </navLabel>
+          <content src="vmref.xhtml#interfacing-with-other-languages" />
+        </navPoint>
+        <navPoint id="navPoint417" playOrder="167">
+          <navLabel>
+            <text>proxy and fctProxy objects</text>
+          </navLabel>
+          <content src="vmref.xhtml#proxy-and-fctproxy-objects" />
+        </navPoint>
+        <navPoint id="navPoint418" playOrder="168">
+          <navLabel>
+            <text>Glue code</text>
+          </navLabel>
+          <content src="vmref.xhtml#glue-code" />
+        </navPoint>
+        <navPoint id="navPoint419" playOrder="169">
+          <navLabel>
+            <text>Compiling and linking glue code</text>
+          </navLabel>
+          <content src="vmref.xhtml#compiling-and-linking-glue-code" />
+        </navPoint>
+        <navPoint id="navPoint420" playOrder="170">
+          <navLabel>
+            <text>A simple glue example: calling a C function</text>
+          </navLabel>
+          <content src="vmref.xhtml#a-simple-glue-example-calling-a-c-function" />
+        </navPoint>
+        <navPoint id="navPoint421" playOrder="171">
+          <navLabel>
+            <text>C glue</text>
+          </navLabel>
+          <content src="vmref.xhtml#c-glue" />
+        </navPoint>
+        <navPoint id="navPoint422" playOrder="172">
+          <navLabel>
+            <text>Calling C functions</text>
+          </navLabel>
+          <content src="vmref.xhtml#calling-c-functions" />
+        </navPoint>
+        <navPoint id="navPoint423" playOrder="173">
+          <navLabel>
+            <text>Reading and assigning global variables</text>
+          </navLabel>
+          <content src="vmref.xhtml#reading-and-assigning-global-variables" />
+        </navPoint>
+        <navPoint id="navPoint424" playOrder="174">
+          <navLabel>
+            <text>Reading and assigning struct components</text>
+          </navLabel>
+          <content src="vmref.xhtml#reading-and-assigning-struct-components" />
+        </navPoint>
+        <navPoint id="navPoint425" playOrder="175">
+          <navLabel>
+            <text>C++ glue</text>
+          </navLabel>
+          <content src="vmref.xhtml#id2" />
+        </navPoint>
+        <navPoint id="navPoint426" playOrder="176">
+          <navLabel>
+            <text>Constructing objects</text>
+          </navLabel>
+          <content src="vmref.xhtml#constructing-objects" />
+        </navPoint>
+        <navPoint id="navPoint427" playOrder="177">
+          <navLabel>
+            <text>Deleting objects</text>
+          </navLabel>
+          <content src="vmref.xhtml#deleting-objects" />
+        </navPoint>
+        <navPoint id="navPoint428" playOrder="178">
+          <navLabel>
+            <text>Calling member functions</text>
+          </navLabel>
+          <content src="vmref.xhtml#calling-member-functions" />
+        </navPoint>
+        <navPoint id="navPoint429" playOrder="179">
+          <navLabel>
+            <text>Conversion pairs</text>
+          </navLabel>
+          <content src="vmref.xhtml#conversion-pairs" />
+        </navPoint>
+        <navPoint id="navPoint430" playOrder="180">
+          <navLabel>
+            <text>Argument conversions – from Self to C/C++</text>
+          </navLabel>
+          <content src="vmref.xhtml#argument-conversions-from-self-to-c-c" />
+        </navPoint>
+        <navPoint id="navPoint431" playOrder="181">
+          <navLabel>
+            <text>Result conversions - from C/C++ to Self</text>
+          </navLabel>
+          <content src="vmref.xhtml#result-conversions-from-c-c-to-self" />
+        </navPoint>
+        <navPoint id="navPoint432" playOrder="182">
+          <navLabel>
+            <text>A complete application using foreign functions</text>
+          </navLabel>
+          <content src="vmref.xhtml#a-complete-application-using-foreign-functions" />
+        </navPoint>
+        <navPoint id="navPoint433" playOrder="183">
+          <navLabel>
+            <text>Outline of toself</text>
+          </navLabel>
+          <content src="vmref.xhtml#outline-of-toself" />
+        </navPoint>
+        <navPoint id="navPoint434" playOrder="184">
+          <navLabel>
+            <text>Outline of server</text>
+          </navLabel>
+          <content src="vmref.xhtml#outline-of-server" />
+        </navPoint>
+        <navPoint id="navPoint435" playOrder="185">
+          <navLabel>
+            <text>Foreign functions and glue needed to implement server</text>
+          </navLabel>
+          <content src="vmref.xhtml#foreign-functions-and-glue-needed-to-implement-server" />
+        </navPoint>
+        <navPoint id="navPoint436" playOrder="186">
+          <navLabel>
+            <text>Use of foreign functions in server.self</text>
+          </navLabel>
+          <content src="vmref.xhtml#use-of-foreign-functions-in-server-self" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint437" playOrder="187">
+      <navLabel>
+        <text>References</text>
+      </navLabel>
+      <content src="ref.xhtml" />
+    </navPoint>
+    <navPoint id="navPoint438" playOrder="188">
+      <navLabel>
+        <text>Appendices</text>
+      </navLabel>
+      <content src="appendices.xhtml" />
+      <navPoint id="navPoint439" playOrder="188">
+        <navLabel>
+          <text>Appendices</text>
+        </navLabel>
+        <content src="appendices.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint440" playOrder="189">
+        <navLabel>
+          <text>Glossary</text>
+        </navLabel>
+        <content src="glossary.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint441" playOrder="190">
+        <navLabel>
+          <text>Lexical overview</text>
+        </navLabel>
+        <content src="lexicaloverview.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint442" playOrder="191">
+        <navLabel>
+          <text>Syntax overview</text>
+        </navLabel>
+        <content src="syntaxoverview.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint443" playOrder="192">
+        <navLabel>
+          <text>Built-in types</text>
+        </navLabel>
+        <content src="builtintypes.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint444" playOrder="193">
+        <navLabel>
+          <text>Useful Selectors</text>
+        </navLabel>
+        <content src="usefulselectors.xhtml" />
+        <navPoint id="navPoint445" playOrder="193">
+          <navLabel>
+            <text>Useful Selectors</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint446" playOrder="194">
+          <navLabel>
+            <text>Copying</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#copying" />
+        </navPoint>
+        <navPoint id="navPoint447" playOrder="195">
+          <navLabel>
+            <text>Comparing</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#comparing" />
+        </navPoint>
+        <navPoint id="navPoint448" playOrder="196">
+          <navLabel>
+            <text>Numeric operations</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#numeric-operations" />
+        </navPoint>
+        <navPoint id="navPoint449" playOrder="197">
+          <navLabel>
+            <text>Bitwise operations (integers)</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#bitwise-operations-integers" />
+        </navPoint>
+        <navPoint id="navPoint450" playOrder="198">
+          <navLabel>
+            <text>Logical operations (booleans)</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#logical-operations-booleans" />
+        </navPoint>
+        <navPoint id="navPoint451" playOrder="199">
+          <navLabel>
+            <text>Constructing</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#constructing" />
+        </navPoint>
+        <navPoint id="navPoint452" playOrder="200">
+          <navLabel>
+            <text>Printing</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#printing" />
+        </navPoint>
+        <navPoint id="navPoint453" playOrder="201">
+          <navLabel>
+            <text>Control</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#control" />
+        </navPoint>
+        <navPoint id="navPoint454" playOrder="202">
+          <navLabel>
+            <text>Collections</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#collections" />
+        </navPoint>
+        <navPoint id="navPoint455" playOrder="203">
+          <navLabel>
+            <text>Timing</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#timing" />
+        </navPoint>
+        <navPoint id="navPoint456" playOrder="204">
+          <navLabel>
+            <text>Message Sending</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#message-sending" />
+        </navPoint>
+        <navPoint id="navPoint457" playOrder="205">
+          <navLabel>
+            <text>Reflection (mirrors)</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#reflection-mirrors" />
+        </navPoint>
+        <navPoint id="navPoint458" playOrder="206">
+          <navLabel>
+            <text>System-wide Enumerations</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#system-wide-enumerations" />
+        </navPoint>
+        <navPoint id="navPoint459" playOrder="207">
+          <navLabel>
+            <text>Debugging</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#debugging" />
+        </navPoint>
+        <navPoint id="navPoint460" playOrder="208">
+          <navLabel>
+            <text>Virtual Machine-Generated</text>
+          </navLabel>
+          <content src="usefulselectors.xhtml#virtual-machine-generated" />
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint461" playOrder="209">
+        <navLabel>
+          <text>Every Menu Item in the Programming Environment</text>
+        </navLabel>
+        <content src="menus.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint462" playOrder="210">
+        <navLabel>
+          <text>The system monitor</text>
+        </navLabel>
+        <content src="monitor.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint463" playOrder="211">
+        <navLabel>
+          <text>Primitives</text>
+        </navLabel>
+        <content src="primitives.xhtml" />
+        <navPoint id="navPoint464" playOrder="211">
+          <navLabel>
+            <text>Primitives</text>
+          </navLabel>
+          <content src="primitives.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint465" playOrder="212">
+          <navLabel>
+            <text>Primitive failures</text>
+          </navLabel>
+          <content src="primitives.xhtml#primitive-failures" />
+        </navPoint>
+        <navPoint id="navPoint466" playOrder="213">
+          <navLabel>
+            <text>Available primitives</text>
+          </navLabel>
+          <content src="primitives.xhtml#available-primitives" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint467" playOrder="214">
+      <navLabel>
+        <text>Extras</text>
+      </navLabel>
+      <content src="extras.xhtml" />
+      <navPoint id="navPoint468" playOrder="214">
+        <navLabel>
+          <text>Extras</text>
+        </navLabel>
+        <content src="extras.xhtml" />
+      </navPoint>
+      <navPoint id="navPoint469" playOrder="215">
+        <navLabel>
+          <text>The Original Self UI</text>
+        </navLabel>
+        <content src="ui1.xhtml" />
+        <navPoint id="navPoint470" playOrder="215">
+          <navLabel>
+            <text>The Original Self UI</text>
+          </navLabel>
+          <content src="ui1.xhtml" />
+        </navPoint>
+        <navPoint id="navPoint471" playOrder="216">
+          <navLabel>
+            <text>X11 with 256 Colors</text>
+          </navLabel>
+          <content src="ui1.xhtml#x11-with-256-colors" />
+        </navPoint>
+        <navPoint id="navPoint472" playOrder="217">
+          <navLabel>
+            <text>VM with X11 support</text>
+          </navLabel>
+          <content src="ui1.xhtml#vm-with-x11-support" />
+        </navPoint>
+        <navPoint id="navPoint473" playOrder="218">
+          <navLabel>
+            <text>Preparing a snapshot</text>
+          </navLabel>
+          <content src="ui1.xhtml#preparing-a-snapshot" />
+        </navPoint>
+        <navPoint id="navPoint474" playOrder="219">
+          <navLabel>
+            <text>Starting the UI</text>
+          </navLabel>
+          <content src="ui1.xhtml#starting-the-ui" />
+        </navPoint>
+      </navPoint>
+    </navPoint>
+  </navMap>
+</ncx>

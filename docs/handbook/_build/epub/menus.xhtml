@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>10.6. Every Menu Item in the Programming Environment</title>
+    
+    <link rel="stylesheet" href="_static/epub.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> 
+  </head>
+  <body role="document">
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="every-menu-item-in-the-programming-environment">
+<h1>10.6. Every Menu Item in the Programming Environment</h1>
+<p>This table only covers the middle-button menus, the right-button (morph) menu is described elsewhere.
+It merges items from several menus: the background menu, the outliner whole-object
+menu, the outliner category menu, the outliner slot menu, the text editor menu, the debugger stack
+menu, the iterator object menus, and the changed module morph menu.</p>
+<table border="1" class="docutils" id="id1">
+<caption><span class="caption-number">Table 10.1 </span><span class="caption-text">Menu Items</span></caption>
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Label</th>
+<th class="head">Function</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Add Category</td>
+<td>Adds a category to an object or category.</td>
+</tr>
+<tr class="row-odd"><td>Add Slot</td>
+<td>Adds a slot to an object or category.</td>
+</tr>
+<tr class="row-even"><td>Added or Changed Slots</td>
+<td>On a module morph, enumerates slots added/changed since last save.</td>
+</tr>
+<tr class="row-odd"><td>All Modules</td>
+<td>Summons a hierarchical list of all modules from the changed modules morph.</td>
+</tr>
+<tr class="row-even"><td>All Slots</td>
+<td>On a module morph, enumerates its slots.</td>
+</tr>
+<tr class="row-odd"><td>Changed Modules</td>
+<td>Summons a list of changed modules.</td>
+</tr>
+<tr class="row-even"><td>Children</td>
+<td>Enumerate an object’s children.</td>
+</tr>
+<tr class="row-odd"><td>Clean Up</td>
+<td>Clean up the screen: collapse outliners and stack them on the left of the window.</td>
+</tr>
+<tr class="row-even"><td>Clean Up Memory</td>
+<td>Manually initiate a garbage collection. Can help when you know you have just freed up a bunch of space. Self also does this automatically.</td>
+</tr>
+<tr class="row-odd"><td>Collapse All</td>
+<td>Collapses all outliners, or all categories within an outliner or category.</td>
+</tr>
+<tr class="row-even"><td>Copy Down Children</td>
+<td>Enumerate an object’s copy-down children.</td>
+</tr>
+<tr class="row-odd"><td>Copy Down Parent</td>
+<td>Show an object’s copy-down parent.</td>
+</tr>
+<tr class="row-even"><td>Copy</td>
+<td>Copies slots, categories or text.</td>
+</tr>
+<tr class="row-odd"><td>Core Sampler</td>
+<td>Summons an object for manipulating morphs.</td>
+</tr>
+<tr class="row-even"><td>Create Button</td>
+<td>For a slot, create a button to send the message to the object. The receiver may be set by carrying the button on top of the receiver and using the middle-button on the button. (The button is grabbed with either the car-pet-morph or with the grab right-menu item. Bug: buttons do not mani-fest their results.)</td>
+</tr>
+<tr class="row-odd"><td>Cut</td>
+<td>Copies text to the text buffer.</td>
+</tr>
+<tr class="row-even"><td>Do Selection</td>
+<td>Evaluate the selected text, do not show the result.</td>
+</tr>
+<tr class="row-odd"><td>Do it</td>
+<td>Evaluate the text in the editor, do not show the result.</td>
+</tr>
+<tr class="row-even"><td>Edit</td>
+<td>On a slot, open an editor to change its name, slot type, or contents.</td>
+</tr>
+<tr class="row-odd"><td>Evaluator</td>
+<td>Adds an evaluator window to an object outliner.</td>
+</tr>
+<tr class="row-even"><td>Expand All</td>
+<td>Expand all subcategories.</td>
+</tr>
+<tr class="row-odd"><td>Expatriate Slots</td>
+<td>On the changed module morph; shows a list of slots not included in any module.</td>
+</tr>
+<tr class="row-even"><td>(Don’t) Filter Frames</td>
+<td>On a debugger stack, enable (or disable) filtering.</td>
+</tr>
+<tr class="row-odd"><td>Find Slot</td>
+<td>Searches an object and its ancestors for slot names matching a pattern.</td>
+</tr>
+<tr class="row-even"><td>Find Slot of :</td>
+<td>For an assignable slot x, show all slots named x: in the object and its ancestors.</td>
+</tr>
+<tr class="row-odd"><td>Flush</td>
+<td>Discards cached state, e.g. the result of an enumeration.</td>
+</tr>
+<tr class="row-even"><td>Forget I was changed</td>
+<td>On a module morph, removes it from the list of changed modules and clears out its record of added, changed &amp; removed slots.</td>
+</tr>
+<tr class="row-odd"><td>Get Module Object</td>
+<td>On a module morph summons the object outliner for the module. Useful for editing its postFileIn method, or its revision.</td>
+</tr>
+<tr class="row-even"><td>Get Selection</td>
+<td>Evaluate the selected text &amp; show the result.</td>
+</tr>
+<tr class="row-odd"><td>Get it</td>
+<td>Evaluate the text in the editor, show the result.</td>
+</tr>
+<tr class="row-even"><td>Hide Annotation</td>
+<td>Hides the object or slot annotation.</td>
+</tr>
+<tr class="row-odd"><td>Hide Comment</td>
+<td>Hides the object or slot comment.</td>
+</tr>
+<tr class="row-even"><td>Implementors</td>
+<td>Searches for slots of a given name.</td>
+</tr>
+<tr class="row-odd"><td>Implementors of :</td>
+<td>For an assignable slot x, show all implementors of x:.</td>
+</tr>
+<tr class="row-even"><td>Load Morph From File</td>
+<td>Reads in a file created with the right-menu item “Save Morph to File”</td>
+</tr>
+<tr class="row-odd"><td>Make Creator</td>
+<td>On a slot, set the creator annotation of its contents to be the slot.</td>
+</tr>
+<tr class="row-even"><td>Make Private</td>
+<td>Change the style of the slot to show that it is intended to be private (not enforced).</td>
+</tr>
+<tr class="row-odd"><td>Make Public</td>
+<td>Change the style of the slot to show that it is intended to be public (not enforced). Adds a comment for posterity.</td>
+</tr>
+<tr class="row-even"><td>Make Undeclared</td>
+<td>Change the style of the slot to show that no clear intention exists as to its visibility. (A Self exclusive!)</td>
+</tr>
+<tr class="row-odd"><td>Methods Containing</td>
+<td>Searches for all methods containing a string.</td>
+</tr>
+<tr class="row-even"><td>Move</td>
+<td>Moves slots or categories.</td>
+</tr>
+<tr class="row-odd"><td>New Shell</td>
+<td>Summon a new shell object.</td>
+</tr>
+<tr class="row-even"><td>Open Factory Win-dow</td>
+<td>Open a new window containing handy morphs (such as a radar-view) you can tear-off and drag to other Self windows.</td>
+</tr>
+<tr class="row-odd"><td>Palette</td>
+<td>Summons an object for obtaining morphs for building.</td>
+</tr>
+<tr class="row-even"><td>Paste</td>
+<td>Pastes text from the buffer.</td>
+</tr>
+<tr class="row-odd"><td>Quit</td>
+<td>Leave job and ride boxcars.</td>
+</tr>
+<tr class="row-even"><td>Radar View</td>
+<td>Summons an object for moving the current viewport around in space.</td>
+</tr>
+<tr class="row-odd"><td>Read Module</td>
+<td>On a module morph, rereads the source file.</td>
+</tr>
+<tr class="row-even"><td>References</td>
+<td>Enumerate references to an object.</td>
+</tr>
+<tr class="row-odd"><td>Removed Slots</td>
+<td>On a module morph, lists removed slot paths.</td>
+</tr>
+<tr class="row-even"><td>Restore Window State</td>
+<td>Restores the saved state of the screen.</td>
+</tr>
+<tr class="row-odd"><td>Save snapshot</td>
+<td>Saves an image of all objects in a snapshot file. Overwrites the snapshot file that was opened originally. Saves the previous version with a &#8221;.old&#8221; suffix.</td>
+</tr>
+<tr class="row-even"><td>Save snapshot as ...</td>
+<td>Lets you set the file name and other parameters of the saved snapshot. For example, if you have a lot of memory, you can increase the code cache size.</td>
+</tr>
+<tr class="row-odd"><td>Save Window State</td>
+<td>Saves the state of the screen.</td>
+</tr>
+<tr class="row-even"><td>Send</td>
+<td>For a method in a concrete object, send the message to the object.</td>
+</tr>
+<tr class="row-odd"><td>Senders</td>
+<td>Searches for methods sending a given message.</td>
+</tr>
+<tr class="row-even"><td>Senders of :</td>
+<td>For an assignable slot x, show all senders of x:, i.e. methods that might assign to x.</td>
+</tr>
+<tr class="row-odd"><td>Senders in family</td>
+<td>Searches for methods sending a given message in the selected object, its ancestors, and it descendants.</td>
+</tr>
+<tr class="row-even"><td>Senders of : in family</td>
+<td>For an assignable slot x, show all senders of x:, i.e. methods that might assign to x in the selected object, its ancestors, and it descendants.</td>
+</tr>
+<tr class="row-odd"><td>Set Module</td>
+<td>Sets the module of a slot or group of slots.</td>
+</tr>
+<tr class="row-even"><td>Shell</td>
+<td>Summons an outliner on the shell. Used for evaluating expressions.</td>
+</tr>
+<tr class="row-odd"><td>Show All Frame</td>
+<td>On a debugger stack, disable filtering.</td>
+</tr>
+<tr class="row-even"><td>Show Annotation</td>
+<td>Shows the object or slot annotation.</td>
+</tr>
+<tr class="row-odd"><td>Show Comment</td>
+<td>Shows the object or slot comment.</td>
+</tr>
+<tr class="row-even"><td>Show Morph</td>
+<td>For morph object outliners, summons the morph that the object imple-ments.</td>
+</tr>
+<tr class="row-odd"><td>“Subclass” Me</td>
+<td>Appears on the object menu. Automates several steps equivalent to sub-classing in Smalltalk: Creates a copy-down child of the selected object and makes a new parent object for the new child that inherits from the selected object’s parents. It also sets some of the annotations for transport.</td>
+</tr>
+<tr class="row-even"><td>The box at the top.</td>
+<td>Pins up the menu.</td>
+</tr>
+<tr class="row-odd"><td>Toggle Spy</td>
+<td>Toggles an X Window spying on the Virtual Machine. A nice source of reassurance.</td>
+</tr>
+<tr class="row-even"><td>Traits Family</td>
+<td>Show an inheritance hierarchy textually. Only works on certain objects on alternate Thursdays.</td>
+</tr>
+<tr class="row-odd"><td>Write Snapshot</td>
+<td>Saves all the objects in the Self world to a (fairly large) file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

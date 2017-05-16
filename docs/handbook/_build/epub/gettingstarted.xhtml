@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2. Getting Started</title>
+    
+    <link rel="stylesheet" href="_static/epub.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> 
+  </head>
+  <body role="document">
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started">
+<h1>2. Getting Started</h1>
+<blockquote>
+<div>Last updated 5 January 2014 for Self 4.5.0</div></blockquote>
+<div class="section" id="downloading-prebuilt-vm-and-snapshot">
+<h2>2.1. Downloading Prebuilt VM and snapshot</h2>
+<p>The easiest way to get started with Self is to download a prebuild VM and a snapshot of the default Self world from the <span class="target" id="self-website">Self website</span>.</p>
+<p>For OS X, this means a DMG file which will mount when double clicked. On Linux this means a <code class="docutils literal"><span class="pre">.tar.gz</span></code> file.</p>
+</div>
+<div class="section" id="running-on-os-x">
+<h2>2.2. Running on OS X</h2>
+<p>Once the DMG has been mounted, find it in Finder and drag the &#8216;<code class="docutils literal"><span class="pre">Self</span> <span class="pre">Control.app</span></code>&#8216; to your Applications folder, and the &#8216;<code class="docutils literal"><span class="pre">Clean.snap</span></code>&#8216; file somewhere convenient. This file is a snapshot of the default Self world.</p>
+</div>
+<div class="section" id="running-on-linux">
+<h2>2.3. Running on Linux</h2>
+<p>Untar the downloaded <code class="docutils literal"><span class="pre">.tar.gz</span></code> file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tar</span> <span class="n">zxvf</span> <span class="n">Self</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+<p>This should give you at least two files, a binary &#8216;<code class="docutils literal"><span class="pre">Self</span></code>&#8216; which is the VM, and the file &#8216;<code class="docutils literal"><span class="pre">Clean.snap</span></code>&#8216; which is a snapshot of the default Self world. Make sure the VM is executable:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">chmod</span> <span class="n">u</span><span class="o">+</span><span class="n">x</span> <span class="n">Self</span>
+</pre></div>
+</div>
+<p>and run the VM, passing the snapshot as an argument:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Self</span> <span class="o">-</span><span class="n">s</span> <span class="n">Clean</span><span class="o">.</span><span class="n">self</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-your-own-system">
+<h2>2.4. Building your own system</h2>
+<p>It is relatively easy to biuld the two key components of Self, the Self World and the Self Virtual Machine. They both start from downloading the Self sources from the GitHub repository by the following git command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">russellallen</span><span class="o">/</span><span class="bp">self</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>and then follow chapters <a class="reference internal" href="buildvm.xhtml#building-a-vm"><span class="std std-ref">8.1</span></a> <a class="reference internal" href="buildvm.xhtml"><span class="doc">Instructions on how to build the VM</span></a> and <a class="reference internal" href="buildworld.xhtml#building-a-world"><span class="std std-ref">4.13</span></a> <a class="reference internal" href="buildworld.xhtml"><span class="doc">Instructions on how to build a Self World</span></a>.</p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

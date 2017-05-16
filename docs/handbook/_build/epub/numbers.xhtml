@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.4. Numbers and Time</title>
+    
+    <link rel="stylesheet" href="_static/epub.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> 
+  </head>
+  <body role="document">
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="numbers-and-time">
+<h1>4.4. Numbers and Time</h1>
+<p>The SELF number traits form the hierarchy shown below. (In this and subsequent hierarchy descriptions,
+indentation indicates that one traits object is a child of another. The prefix “traits” is
+omitted since these hierarchy descriptions always describe the interrelationship between traits objects.
+In most cases, leaf traits are concrete and have an associated prototype with the same name.)</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">orderedOddball</span>
+    <span class="n">number</span>
+        <span class="nb">float</span>
+        <span class="n">integer</span>
+            <span class="n">smallInt</span>
+            <span class="n">bigInt</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">traits</span> <span class="pre">number</span></code> defines behavior common to all numbers, such as <code class="docutils literal"><span class="pre">successor</span></code>, <code class="docutils literal"><span class="pre">succ</span></code>, <code class="docutils literal"><span class="pre">predecessor</span></code>,
+<code class="docutils literal"><span class="pre">pred</span></code>, <code class="docutils literal"><span class="pre">absoluteValue</span></code>, <code class="docutils literal"><span class="pre">negate</span></code>, <code class="docutils literal"><span class="pre">double</span></code>, <code class="docutils literal"><span class="pre">half</span></code>, <code class="docutils literal"><span class="pre">max:</span></code>, and <code class="docutils literal"><span class="pre">min:</span></code>. <code class="docutils literal"><span class="pre">traits</span> <span class="pre">number</span></code>
+inherits from <code class="docutils literal"><span class="pre">traits</span> <span class="pre">orderedOddball</span></code>, so sending <code class="docutils literal"><span class="pre">copy</span></code> or <code class="docutils literal"><span class="pre">clone</span></code> to a number returns the
+number itself. <code class="docutils literal"><span class="pre">traits</span> <span class="pre">integer</span></code> defines behavior common to all integers such as <code class="docutils literal"><span class="pre">even</span></code>, <code class="docutils literal"><span class="pre">odd</span></code>, and
+<code class="docutils literal"><span class="pre">factorial</span></code>. There are four division operators for integers that allow the programmer to control
+how the result is truncated or rounded. Integers also include behavior for iterating through a subrange,
+including:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">to</span><span class="p">:</span><span class="n">Do</span><span class="p">:</span>
+<span class="n">to</span><span class="p">:</span><span class="n">By</span><span class="p">:</span><span class="n">Do</span><span class="p">:</span>
+<span class="n">to</span><span class="p">:</span><span class="n">ByNegative</span><span class="p">:</span><span class="n">Do</span><span class="p">:</span>
+<span class="n">upTo</span><span class="p">:</span><span class="n">Do</span><span class="p">:</span>
+<span class="n">upTo</span><span class="p">:</span><span class="n">By</span><span class="p">:</span><span class="n">Do</span><span class="p">:</span>
+<span class="n">downTo</span><span class="p">:</span><span class="n">Do</span><span class="p">:</span>
+<span class="n">downTo</span><span class="p">:</span><span class="n">By</span><span class="p">:</span><span class="n">Do</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>Relevant oddballs:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">infinity</span></code> IEEE floating-point infinity</li>
+<li><code class="docutils literal"><span class="pre">minSmallInt</span></code> smallest <code class="docutils literal"><span class="pre">smallInt</span></code> in this implementation</li>
+<li><code class="docutils literal"><span class="pre">maxSmallInt</span></code> biggest <code class="docutils literal"><span class="pre">smallInt</span></code> in this implementation</li>
+</ul>
+</div></blockquote>
+<p>Modules: number, float, integer, smallInt, bigInt</p>
+<div class="section" id="random-numbers">
+<h2>4.4.1. Random Numbers</h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">clonable</span>
+    <span class="n">random</span>
+        <span class="n">randomLC</span>
+            <span class="n">prototypes</span> <span class="n">random</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">traits</span> <span class="pre">random</span></code> defines the abstract behavior of random number generators. A random number
+generator can be used to generate random booleans, integers, floats, characters or strings. <code class="docutils literal"><span class="pre">traits</span>
+<span class="pre">randomLC</span></code> defines a concrete specialization based on a simple linear congruence algorithm. For
+convenience, the prototype for <code class="docutils literal"><span class="pre">randomLC</span></code> is “<code class="docutils literal"><span class="pre">random</span></code>,” not “<code class="docutils literal"><span class="pre">randomLC</span></code>”.</p>
+<p>Modules: random</p>
+</div>
+<div class="section" id="time">
+<h2>4.4.2. Time</h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">clonable</span>
+    <span class="n">time</span>
+</pre></div>
+</div>
+<p>A time object represents a date and time (to the nearest millisecond) since midnight GMT on January
+1, 1970. The message <code class="docutils literal"><span class="pre">current</span></code> returns a new time object containing the current time. Two
+times can be compared using the standard comparison operators. One time can be subtracted from
+another to produce a value in milliseconds. An offset in milliseconds can be added or subtracted
+from a time object to produce a new time object. However, it is an error to add two time objects
+together.</p>
+<p>Modules: time</p>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

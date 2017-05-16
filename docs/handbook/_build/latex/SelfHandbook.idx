@@ -1,0 +1,237 @@
+\indexentry{VM|hyperpage}{3}
+\indexentry{traits|hyperpage}{3}
+\indexentry{prototypes|hyperpage}{3}
+\indexentry{Self world|hyperpage}{3}
+\indexentry{bytecodes|hyperpage}{4}
+\indexentry{compilation|hyperpage}{4}
+\indexentry{customization|hyperpage}{4}
+\indexentry{block|hyperpage}{7}
+\indexentry{object|hyperpage}{7}
+\indexentry{slot|hyperpage}{7}
+\indexentry{object literals|hyperpage}{7}
+\indexentry{object!data object|hyperpage}{8}
+\indexentry{empty object|hyperpage}{8}
+\indexentry{assignment primitive|hyperpage}{8}
+\indexentry{code|hyperpage}{8}
+\indexentry{non-local return operator|hyperpage}{8}
+\indexentry{assignment slot|hyperpage}{8}
+\indexentry{slot list|hyperpage}{8}
+\indexentry{self slot|hyperpage}{8}
+\indexentry{argument slot|hyperpage}{8}
+\indexentry{self|hyperpage}{8}
+\indexentry{object!method object|hyperpage}{8}
+\indexentry{method activation object|hyperpage}{8}
+\indexentry{method|hyperpage}{8}
+\indexentry{evaluation!of arguments|hyperpage}{8}
+\indexentry{evaluation!of message sends|hyperpage}{8}
+\indexentry{activation object|hyperpage}{9}
+\indexentry{slot!anonymous parent slot|hyperpage}{9}
+\indexentry{block|hyperpage}{9}
+\indexentry{block!block data object|hyperpage}{9}
+\indexentry{traits object|hyperpage}{9}
+\indexentry{anonymous parent|hyperpage}{9}
+\indexentry{non-lifo block|hyperpage}{9}
+\indexentry{evaluation!of blocks|hyperpage}{9}
+\indexentry{non-local return|hyperpage}{10}
+\indexentry{object literals!construction of|hyperpage}{11}
+\indexentry{root context|hyperpage}{11}
+\indexentry{assignment slot|hyperpage}{11}
+\indexentry{data slot|hyperpage}{11}
+\indexentry{slot!read/write slot|hyperpage}{11}
+\indexentry{slot!read-only slot|hyperpage}{11}
+\indexentry{self slot!self slot|hyperpage}{11}
+\indexentry{slot!assignable data slot|hyperpage}{11}
+\indexentry{self|hyperpage}{11}
+\indexentry{read/write variable|hyperpage}{11}
+\indexentry{slot!argument slot|hyperpage}{12}
+\indexentry{message!keyword message|hyperpage}{12}
+\indexentry{slot!parent slot|hyperpage}{14}
+\indexentry{annotation separator|hyperpage}{15}
+\indexentry{Annotations|hyperpage}{15}
+\indexentry{associativity!of unary messages|hyperpage}{16}
+\indexentry{message!unary message|hyperpage}{16}
+\indexentry{associativity!of binary messages|hyperpage}{16}
+\indexentry{message!binary message|hyperpage}{16}
+\indexentry{precedence of message sends|hyperpage}{16}
+\indexentry{associativity!of keyword messages|hyperpage}{17}
+\indexentry{keyword message|hyperpage}{17}
+\indexentry{primitive send|hyperpage}{17}
+\indexentry{message!implicit-receiver message|hyperpage}{18}
+\indexentry{resend|hyperpage}{18}
+\indexentry{directed resend|hyperpage}{18}
+\indexentry{message semantics|hyperpage}{19}
+\indexentry{lookup algorithm|hyperpage}{20}
+\indexentry{character set|hyperpage}{22}
+\indexentry{self|hyperpage}{22}
+\indexentry{resend|hyperpage}{22}
+\indexentry{identifier|hyperpage}{22}
+\indexentry{primitive|hyperpage}{22}
+\indexentry{Keywords|hyperpage}{22}
+\indexentry{argument slot|hyperpage}{22}
+\indexentry{operator|hyperpage}{23}
+\indexentry{Numbers|hyperpage}{23}
+\indexentry{non-decimal number|hyperpage}{23}
+\indexentry{character escapes|hyperpage}{24}
+\indexentry{String constants|hyperpage}{24}
+\indexentry{string escape sequences|hyperpage}{24}
+\indexentry{block|hyperpage}{25}
+\indexentry{block!block method|hyperpage}{25}
+\indexentry{block!non-lifo block|hyperpage}{25}
+\indexentry{block!non-local return|hyperpage}{25}
+\indexentry{cloning|hyperpage}{25}
+\indexentry{closure|hyperpage}{25}
+\indexentry{message|hyperpage}{25}
+\indexentry{binary message|hyperpage}{25}
+\indexentry{implicit-receiver message|hyperpage}{25}
+\indexentry{keyword message|hyperpage}{25}
+\indexentry{unary message|hyperpage}{25}
+\indexentry{method!outer method|hyperpage}{25}
+\indexentry{method holder|hyperpage}{25}
+\indexentry{method holder!sending method holder|hyperpage}{25}
+\indexentry{non-local return|hyperpage}{25}
+\indexentry{object|hyperpage}{25}
+\indexentry{data object|hyperpage}{25}
+\indexentry{primitive send|hyperpage}{25}
+\indexentry{selector|hyperpage}{25}
+\indexentry{sending method holder|hyperpage}{25}
+\indexentry{slot|hyperpage}{25}
+\indexentry{data slot|hyperpage}{25}
+\indexentry{comments|hyperpage}{25}
+\indexentry{traits object|hyperpage}{25}
+\indexentry{parent slot|hyperpage}{25}
+\indexentry{argument slot|hyperpage}{25}
+\indexentry{root context|hyperpage}{25}
+\indexentry{resend|hyperpage}{25}
+\indexentry{prototype|hyperpage}{25}
+\indexentry{parent slot|hyperpage}{25}
+\indexentry{nil|hyperpage}{25}
+\indexentry{message!message lookup|hyperpage}{25}
+\indexentry{lookup|hyperpage}{25}
+\indexentry{inheritance|hyperpage}{25}
+\indexentry{inheritance!dynamic inheritance|hyperpage}{25}
+\indexentry{proxy|hyperpage}{37}
+\indexentry{fctProxy|hyperpage}{37}
+\indexentry{foreignCode|hyperpage}{37}
+\indexentry{foreignFct|hyperpage}{37}
+\indexentry{foreignCodeDB|hyperpage}{37}
+\indexentry{\_Perform|hyperpage}{104}
+\indexentry{ambiguousSelector:Type:Delegatee:MethodHolder:Arguments:|hyperpage}{104}
+\indexentry{mismatchedArgumentCountSelector:Type:Delegatee:MethodHolder:Arguments:|hyperpage}{104}
+\indexentry{missingDelegateeSelector:Type:Delegatee:MethodHolder:Arguments:|hyperpage}{104}
+\indexentry{performTypeErrorSelector:Type:Delegatee:MethodHolder:Arguments:|hyperpage}{104}
+\indexentry{errors!runtime errors|hyperpage}{104}
+\indexentry{undefinedSelector:Type:Delegatee:MethodHolder:Arguments|hyperpage}{104}
+\indexentry{fatal errors|hyperpage}{108}
+\indexentry{canonicalStringMirror|hyperpage}{108}
+\indexentry{outerActivationMirror|hyperpage}{108}
+\indexentry{outerMethodMirror|hyperpage}{108}
+\indexentry{processMirror|hyperpage}{108}
+\indexentry{objVectorMirror|hyperpage}{108}
+\indexentry{floatMirror|hyperpage}{108}
+\indexentry{integer|hyperpage}{108}
+\indexentry{mirrorMirror|hyperpage}{108}
+\indexentry{floating-point numbers!parent of|hyperpage}{108}
+\indexentry{floating-point numbers|hyperpage}{108}
+\indexentry{slotsMirror|hyperpage}{108}
+\indexentry{smiMirror|hyperpage}{108}
+\indexentry{strings|hyperpage}{108}
+\indexentry{strings!canonical strings|hyperpage}{108}
+\indexentry{mirrors|hyperpage}{108}
+\indexentry{snapshotAction|hyperpage}{108}
+\indexentry{systemObjects|hyperpage}{108}
+\indexentry{true|hyperpage}{108}
+\indexentry{shell|hyperpage}{108}
+\indexentry{proxy|hyperpage}{108}
+\indexentry{objVector|hyperpage}{108}
+\indexentry{nil|hyperpage}{108}
+\indexentry{lobby|hyperpage}{108}
+\indexentry{fctProxy|hyperpage}{108}
+\indexentry{false|hyperpage}{108}
+\indexentry{lobby|hyperpage}{109}
+\indexentry{block|hyperpage}{109}
+\indexentry{assignmentMirror|hyperpage}{112}
+\indexentry{blockActivationMirror|hyperpage}{112}
+\indexentry{blockMethodMirror|hyperpage}{112}
+\indexentry{blockMirror|hyperpage}{112}
+\indexentry{byteVector|hyperpage}{112}
+\indexentry{byteVectorMirror|hyperpage}{112}
+\indexentry{\_PrintOptionPrimitives|hyperpage}{112}
+\indexentry{\_PrintPeriod|hyperpage}{112}
+\indexentry{\_PrintScriptName|hyperpage}{112}
+\indexentry{\_DirPath|hyperpage}{113}
+\indexentry{\_Spy|hyperpage}{113}
+\indexentry{\_Spy:|hyperpage}{113}
+\indexentry{\_StackPrintLimit|hyperpage}{113}
+\indexentry{type seal|hyperpage}{113}
+\indexentry{snapshot|hyperpage}{113}
+\indexentry{proxy|hyperpage}{113}
+\indexentry{Link|hyperpage}{113}
+\indexentry{glue|hyperpage}{113}
+\indexentry{function proxy object|hyperpage}{113}
+\indexentry{foreign routines|hyperpage}{113}
+\indexentry{fctProxy|hyperpage}{113}
+\indexentry{deadProxyError|hyperpage}{113}
+\indexentry{\_call|hyperpage}{114}
+\indexentry{\_CallAndConvert|hyperpage}{114}
+\indexentry{\_Kill|hyperpage}{114}
+\indexentry{wrapper|hyperpage}{114}
+\indexentry{glue code|hyperpage}{114}
+\indexentry{glueDefs.c.incl|hyperpage}{114}
+\indexentry{Static linking|hyperpage}{115}
+\indexentry{ld.so|hyperpage}{115}
+\indexentry{encrypt.c|hyperpage}{115}
+\indexentry{WHAT\_GLUE|hyperpage}{115}
+\indexentry{C glue|hyperpage}{116}
+\indexentry{C\_func\_N|hyperpage}{116}
+\indexentry{unix\_failure (glue)|hyperpage}{117}
+\indexentry{failure (glue)|hyperpage}{117}
+\indexentry{errno|hyperpage}{117}
+\indexentry{C\_set\_var|hyperpage}{118}
+\indexentry{C\_get\_var|hyperpage}{118}
+\indexentry{C\_get\_comp|hyperpage}{119}
+\indexentry{C\_set\_comp|hyperpage}{119}
+\indexentry{struct|hyperpage}{119}
+\indexentry{C++ glue|hyperpage}{119}
+\indexentry{CC\_delete|hyperpage}{120}
+\indexentry{CC\_new\_N|hyperpage}{120}
+\indexentry{conversion pair|hyperpage}{121}
+\indexentry{argument conversion|hyperpage}{121}
+\indexentry{argument conversion2|hyperpage}{121}
+\indexentry{badIndexError|hyperpage}{122}
+\indexentry{badSignError|hyperpage}{122}
+\indexentry{badSizeError|hyperpage}{122}
+\indexentry{badTypeError|hyperpage}{122}
+\indexentry{badTypeSealError|hyperpage}{122}
+\indexentry{result conversion|hyperpage}{124}
+\indexentry{system monitor (spy)|hyperpage}{129}
+\indexentry{alignmentError|hyperpage}{149}
+\indexentry{argumentCountError|hyperpage}{149}
+\indexentry{primitive failure codes|hyperpage}{149}
+\indexentry{unassignableSlotError|hyperpage}{149}
+\indexentry{wrongNoOfArgsError|hyperpage}{149}
+\indexentry{Unix error codes|hyperpage}{149}
+\indexentry{stackOverflowError|hyperpage}{149}
+\indexentry{slotNameError|hyperpage}{149}
+\indexentry{reflectTypeError|hyperpage}{149}
+\indexentry{lonelyAssignmentSlotError|hyperpage}{149}
+\indexentry{liveProxyError|hyperpage}{149}
+\indexentry{deadProxyError|hyperpage}{149}
+\indexentry{noActivationError|hyperpage}{149}
+\indexentry{noDynamicLinkerError|hyperpage}{149}
+\indexentry{noParentSlot|hyperpage}{149}
+\indexentry{noProcessError|hyperpage}{149}
+\indexentry{noReceiverError|hyperpage}{149}
+\indexentry{noSenderSlot|hyperpage}{149}
+\indexentry{nullCharError|hyperpage}{149}
+\indexentry{nullPointerError|hyperpage}{149}
+\indexentry{overflowError|hyperpage}{149}
+\indexentry{outOfMemoryError|hyperpage}{149}
+\indexentry{parallelTWAINSError|hyperpage}{149}
+\indexentry{prematureEndOfInputError|hyperpage}{149}
+\indexentry{primitive failures|hyperpage}{149}
+\indexentry{primitive:FailedWith:|hyperpage}{149}
+\indexentry{primitiveFailedError|hyperpage}{149}
+\indexentry{primitiveNotDefinedError|hyperpage}{149}
+\indexentry{primitives|hyperpage}{149}
+\indexentry{divisionByZeroError|hyperpage}{149}
+\indexentry{\_ErrorMessage|hyperpage}{150}

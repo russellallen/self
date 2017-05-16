@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.3. Blocks, Booleans, and Control Structures</title>
+    
+    <link rel="stylesheet" href="_static/epub.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> 
+  </head>
+  <body role="document">
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="blocks-booleans-and-control-structures">
+<h1>4.3. Blocks, Booleans, and Control Structures</h1>
+<p>A <em>block</em> is a special kind of object containing a sequence of statements. When a block is evaluated
+by being sent an acceptable <code class="docutils literal"><span class="pre">value</span></code> message, its statements are executed in the context of the current
+activation of the method in which the block is declared. This allows the statements in the block
+to access variables local to the block’s enclosing method and any enclosing blocks in that method.
+(This set of variables comprises the lexical scope of the block.) It also means that within the block,
+<code class="docutils literal"><span class="pre">self</span></code> refers to the receiver of the message that activated the method, not to the block object itself.
+A return statement in a block causes a return from the block’s enclosing method. (See chapter <span class="xref std std-ref">pp-langref</span>
+- <a class="reference internal" href="langref.xhtml"><span class="doc">Language Reference</span></a> for a more thorough discussion of block semantics.)</p>
+<p>A block can take an arbitrary number of arguments and can have its own local variables, as well as
+having access to the local variables of its enclosing method. The statements in the block are executed
+when the block is sent a message of the form <code class="docutils literal"><span class="pre">“value[:{With:}]”</span></code>, where the number of colons
+in the message is at least the same as the number of arguments the block takes (extra
+arguments are ignored, but it is an error to provide too few). For example, the following block takes
+two arguments:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">|</span> <span class="p">:</span><span class="n">arg1</span><span class="o">.</span> <span class="p">:</span><span class="n">arg2</span> <span class="o">|</span> <span class="n">arg1</span> <span class="o">+</span> <span class="n">arg2</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>and can be evaluated by sending it the message <code class="docutils literal"><span class="pre">value:With:</span></code> to produce the sum of its arguments.
+Blocks are used to implement all control structures in Self and allow the programmer to
+easily extend the system with customized control structures. In fact, all control stuctures in Self
+except message sends, returns, and VM error handling are implemented using blocks.</p>
+<div class="section" id="booleans-and-conditionals">
+<h2>4.3.1. Booleans and Conditionals</h2>
+<p>The fundamental control structure is the conditional. In Self, the behavior of conditionals is defined
+by two unique boolean objects, <code class="docutils literal"><span class="pre">true</span></code> and <code class="docutils literal"><span class="pre">false</span></code>. Boolean objects respond to the messages
+<code class="docutils literal"><span class="pre">ifTrue:</span></code>, <code class="docutils literal"><span class="pre">ifFalse:</span></code>, <code class="docutils literal"><span class="pre">ifTrue:False:</span></code>, and <code class="docutils literal"><span class="pre">ifFalse:True:</span></code> by evaluating the appropriate argument
+block. For example, <code class="docutils literal"><span class="pre">true</span></code> implements <code class="docutils literal"><span class="pre">ifTrue:False:</span></code> as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ifTrue</span><span class="p">:</span> <span class="n">b1</span> <span class="kc">False</span><span class="p">:</span> <span class="n">b2</span> <span class="o">=</span> <span class="p">(</span> <span class="n">b1</span> <span class="n">value</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>That is, when <code class="docutils literal"><span class="pre">true</span></code> is sent <code class="docutils literal"><span class="pre">ifTrue:False:</span></code>, it evaluates the first block and ignores the second.
+For example, the following expression evaluates to the absolute value of x:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="n">ifTrue</span><span class="p">:</span> <span class="p">[</span> <span class="n">x</span> <span class="n">negate</span> <span class="p">]</span> <span class="kc">False</span><span class="p">:</span> <span class="p">[</span> <span class="n">x</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>The booleans also define behavior for the logical operations <code class="docutils literal"><span class="pre">AND</span> <span class="pre">(&amp;&amp;),</span> <span class="pre">OR</span> <span class="pre">(||),</span> <span class="pre">EXCLUSIVE-OR</span>
+<span class="pre">(^^)</span></code>, and <code class="docutils literal"><span class="pre">NOT</span> <span class="pre">(not)</span></code>. Because the binary boolean operators all send value to their argument when
+necessary, they can also be used for “short-circuit” evaluation by supplying a block, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">[</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">maxByte</span> <span class="n">pred</span><span class="p">]</span> <span class="n">ifTrue</span><span class="p">:</span> <span class="p">[</span><span class="o">...</span>
+</pre></div>
+</div>
+<p>Module: boolean</p>
+</div>
+<div class="section" id="loops">
+<h2>4.3.2. Loops</h2>
+<p>The various idioms for constructing loops in Self are best illustrated by example.
+Here is an endless loop:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="o">...</span> <span class="p">]</span> <span class="n">loop</span>
+</pre></div>
+</div>
+<p>Here are two loops that test for their termination condition at the beginning of the loop:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">proceed</span> <span class="p">]</span> <span class="n">whileTrue</span><span class="p">:</span> <span class="p">[</span> <span class="o">...</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">quit</span> <span class="p">]</span> <span class="n">whileFalse</span><span class="p">:</span> <span class="p">[</span> <span class="o">...</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>In each case, the block that receives the message repeatedly evaluates itself and, if the termination
+condition is not yet met, evaluates the argument block. The value returned by both loop expressions
+is <code class="docutils literal"><span class="pre">nil</span></code>.</p>
+<p>It is also possible to put the termination test at the end of the loop, ensuring that the loop body is
+executed at least once:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="o">...</span> <span class="p">]</span> <span class="n">untilTrue</span><span class="p">:</span> <span class="p">[</span> <span class="n">quit</span> <span class="p">]</span>
+<span class="p">[</span> <span class="o">...</span> <span class="p">]</span> <span class="n">untilFalse</span><span class="p">:</span> <span class="p">[</span> <span class="n">proceed</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>Here is a loop that exits from the middle when quit becomes true:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">|</span> <span class="p">:</span><span class="n">exit</span> <span class="o">|</span> <span class="o">...</span> <span class="n">quit</span> <span class="n">ifTrue</span><span class="p">:</span> <span class="n">exit</span> <span class="o">...</span> <span class="p">]</span> <span class="n">loopExit</span>
+</pre></div>
+</div>
+<p>For the incurably curious: the parameter to the user’s block, supplied by the <code class="docutils literal"><span class="pre">loopExit</span></code> method, is simply a block that
+does a return from the <code class="docutils literal"><span class="pre">loopExit</span></code> method. Thus, the loop terminates when <code class="docutils literal"><span class="pre">exit</span> <span class="pre">value</span></code> is evaluated. The constructs
+<code class="docutils literal"><span class="pre">loopExitValue</span></code>, <code class="docutils literal"><span class="pre">exit</span></code>, and <code class="docutils literal"><span class="pre">exitValue</span></code> are implemented in a similar manner.</p>
+<p>The value returned by the overall <code class="docutils literal"><span class="pre">[...]</span> <span class="pre">loopExit</span></code> expression is <code class="docutils literal"><span class="pre">nil</span></code>. Here is a loop expression
+that exits and evaluates to a value determined by the programmer when quit becomes true:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">|</span> <span class="p">:</span><span class="n">exit</span> <span class="o">|</span> <span class="o">...</span> <span class="n">quit</span> <span class="n">ifTrue</span><span class="p">:</span> <span class="p">[</span> <span class="n">exit</span> <span class="n">value</span><span class="p">:</span> <span class="n">expr</span> <span class="p">]</span> <span class="p">]</span> <span class="n">loopExitValue</span>
+</pre></div>
+</div>
+<p>Module: block</p>
+</div>
+<div class="section" id="block-exits">
+<h2>4.3.3. Block Exits</h2>
+<p>It is sometimes convenient to exit a block early, without executing its remaining statements. The
+following constructs support this behavior:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">|</span> <span class="p">:</span><span class="n">exit</span> <span class="o">|</span> <span class="o">...</span> <span class="n">quit</span> <span class="n">ifTrue</span><span class="p">:</span> <span class="n">exit</span> <span class="o">...</span> <span class="p">]</span> <span class="n">exit</span>
+<span class="p">[</span><span class="o">|</span> <span class="p">:</span><span class="n">exit</span> <span class="o">|</span> <span class="o">...</span> <span class="n">quit</span> <span class="n">ifTrue</span><span class="p">:</span> <span class="p">[</span> <span class="n">exit</span> <span class="n">value</span><span class="p">:</span> <span class="n">expr</span> <span class="p">]</span> <span class="o">...</span> <span class="p">]</span> <span class="n">exitValue</span>
+</pre></div>
+</div>
+<p>The first expression evaluates to nil if the block exits early; the second allows the programmer to
+define the expression’s value when the block exits early. Note: These constructs should not be confused
+with their looping counterparts <code class="docutils literal"><span class="pre">loopExit</span></code> and <code class="docutils literal"><span class="pre">loopExitValue</span></code>.</p>
+<p>Module: block</p>
+</div>
+<div class="section" id="other-block-behavior">
+<h2>4.3.4. Other Block Behavior</h2>
+<p>Blocks have some other useful behavior:</p>
+<blockquote>
+<div><ul class="simple">
+<li>One can determine the time in milliseconds required to execute a block using various ways of measuring time using the messages <code class="docutils literal"><span class="pre">userTime</span></code>, <code class="docutils literal"><span class="pre">systemTime</span></code>, <code class="docutils literal"><span class="pre">cpuTime</span></code>, and <code class="docutils literal"><span class="pre">realTime</span></code>.</li>
+<li>One can profile the execution of a block using the messages <code class="docutils literal"><span class="pre">profile</span></code> and <code class="docutils literal"><span class="pre">flatProfile</span></code>. <code class="docutils literal"><span class="pre">profile</span></code> prints out the source level call graph annotated with call site and timing information   whereas <code class="docutils literal"><span class="pre">flatProfile</span></code> prints out a flat profile sorted by module.</li>
+<li>The message <code class="docutils literal"><span class="pre">countSends</span></code> will collect lookup statistics during a block execution.</li>
+</ul>
+</div></blockquote>
+<p>Any object that inherits from the lobby can be passed to a method that expects a block; behavior in <code class="docutils literal"><span class="pre">defaultBehavior</span></code> makes the object behave like a block that evaluates to that object.</p>
+<p>Module: block</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>
