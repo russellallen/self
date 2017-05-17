@@ -19,6 +19,6 @@ For information on:
   * Building a Self VM, read the Handbook's [VM building instructions][2]
   * Building a Self World, read the [world building instructions][3]
   
-[1]: http://handbook.selflanguage.org/4.5/
-[2]: http://handbook.selflanguage.org/4.5/buildvm.html
-[3]: http://handbook.selflanguage.org/4.5/buildworld.html
+[1]: http://handbook.selflanguage.org/2017.1/
+[2]: http://handbook.selflanguage.org/2017.1/buildvm.html
+[3]: http://handbook.selflanguage.org/2017.1/buildworld.html

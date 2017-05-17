@@ -6,6 +6,9 @@
 rm -r ../build
 mkdir -p ../build
 
+cp artifacts/*.pdf ../build
+cp -r artifacts/handbook ../build/handbook
+
 cp artifacts/*.snap ../build
 cp -r artifacts/Self\ Control.app ../build
 

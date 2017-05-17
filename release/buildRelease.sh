@@ -21,6 +21,9 @@ mkdir -p artifacts
 ./buildMorphicSnapshot.sh
 ./buildKitchenSinkSnapshot.sh
 
+# Build handbook
+./buildHandbook.sh
+
 # Build Distributions
 ./buildDMG.sh "$FULLNAME" "$SHORTNAME"
 ./buildZIP.sh "$SHORTNAME"

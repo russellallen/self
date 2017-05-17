@@ -6,6 +6,9 @@
 rm -r ../build
 mkdir -p ../build/$1
 
+cp artifacts/*.pdf ../build/$1
+cp -r artifacts/handbook ../build/$1/handbook
+
 cp artifacts/*.snap ../build/$1
 cp -r artifacts/Self ../build/$1
 chmod a+x ../build/$1/Self

@@ -1,5 +1,5 @@
-Changes (after 4.5.0)
---------------------------------------------
+Changes in Self 2017.1
+----------------------
 
 New features:
 
@@ -28,6 +28,7 @@ Fixes:
   * Fix on macOS to reduce CPU usage when idle.
   * VM build will now explicitly show which macOS SDK it is using.
   * ^D (EOF) handled correctly at prompt
+  * Fix to bug preventing compilation on recent GCC
   * Many other misc fixes.
 
 Documentation:
@@ -38,6 +39,7 @@ Documentation:
 Other:
 
   * Webserver moved to separate repository: github.com/russellallen/self-webserver
+  * travis-ci.org integration for VM building
 
 
 Changes in Self 4.5.0

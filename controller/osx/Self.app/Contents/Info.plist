@@ -38,7 +38,7 @@
 	<key>CFBundleExecutable</key>
 	<string>Self</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Self 2016.0.13, © 2016 Self Authors.</string>
+	<string>Self 2017.1.13, © 2017 Self Authors.</string>
 	<key>CFBundleIconFile</key>
 	<string>SelfIcon.icns</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -56,13 +56,13 @@
 	<key>CFBundleIdentifier</key>
 	<string>org.selflanguage.Self</string>
 	<key>CFBundleLongVersionString</key>
-	<string>Self 2016.0.13 (4.5.0-123-ge30d9a1-dirty)</string>
+	<string>Self 2017.1.13 (4.5.0-123-ge30d9a1-dirty)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2016.0.13</string>
+	<string>2017.1.13</string>
 	<key>LSRequiresCarbon</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2016 Self Authors.</string>
+	<string>© 2017 Self Authors.</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 </dict>
