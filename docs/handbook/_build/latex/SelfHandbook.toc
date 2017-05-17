@@ -160,7 +160,7 @@
 \contentsline {subsection}{\numberline {8.1.2}Building}{103}{subsection.8.1.2}
 \contentsline {section}{\numberline {8.2}Startup options}{104}{section.8.2}
 \contentsline {section}{\numberline {8.3}System-triggered messages}{104}{section.8.3}
-\contentsline {section}{\numberline {8.4}Run-time message lookup errors}{104}{section.8.4}
+\contentsline {section}{\numberline {8.4}Run-time message lookup errors}{105}{section.8.4}
 \contentsline {section}{\numberline {8.5}Low-level error messages}{106}{section.8.5}
 \contentsline {section}{\numberline {8.6}An example}{106}{section.8.6}
 \contentsline {section}{\numberline {8.7}Lookup errors}{107}{section.8.7}

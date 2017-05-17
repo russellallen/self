@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.5)  5 MAY 2017 17:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.5.5)  16 MAY 2017 10:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2034,7 +2034,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.5317 ...sphinxhref{http://gcc.gnu.org/}{GCC} ≥
+l.5321 ...sphinxhref{http://gcc.gnu.org/}{GCC} ≥
                                                    4.2 or \sphinxhref{http:/...
 
 ? 
@@ -2046,7 +2046,7 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.5317 ...xhref{http://clang.llvm.org/}{Clang} ≥
+l.5321 ...xhref{http://clang.llvm.org/}{Clang} ≥
                                                    2.0.
 ? 
 [103
@@ -2059,32 +2059,32 @@ LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
 File: Chapter_5_Figure_3.png Graphic file (type png)
 
 <use Chapter_5_Figure_3.png>
-Package pdftex.def Info: Chapter_5_Figure_3.png used on input line 5706.
+Package pdftex.def Info: Chapter_5_Figure_3.png used on input line 5710.
 (pdftex.def)             Requested size: 469.75502pt x 609.30933pt.
 
 <Chapter_5_Figure_4.png, id=1309, 697.60625pt x 452.69125pt>
 File: Chapter_5_Figure_4.png Graphic file (type png)
 
 <use Chapter_5_Figure_4.png>
-Package pdftex.def Info: Chapter_5_Figure_4.png used on input line 5712.
+Package pdftex.def Info: Chapter_5_Figure_4.png used on input line 5716.
 (pdftex.def)             Requested size: 697.60454pt x 452.69014pt.
  [109] [110 <./Chapter_5_Figure_3.png>] [111 <./Chapter_5_Figure_4.png>]
-Overfull \hbox (19.73622pt too wide) in paragraph at lines 1--6003
+Overfull \hbox (19.73622pt too wide) in paragraph at lines 1--6007
 []|\T1/pcr/m/n/10 blockMethodActivationMirror| 
  []
 
 
-Overfull \hbox (19.73622pt too wide) in paragraph at lines 1--6003
+Overfull \hbox (19.73622pt too wide) in paragraph at lines 1--6007
 []|\T1/pcr/m/n/10 blockMethodActivationMirror| 
  []
 
 [112]
-Underfull \hbox (badness 10000) in paragraph at lines 6064--6064
+Underfull \hbox (badness 10000) in paragraph at lines 6068--6068
 []|\T1/ptm/m/n/10 Controls the num-ber of stack frames printed by
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6064--6064
+Underfull \hbox (badness 10000) in paragraph at lines 6068--6068
 []|\T1/ptm/m/n/10 Controls the num-ber of stack frames printed by
  []
 
@@ -2092,482 +2092,482 @@ Underfull \hbox (badness 10000) in paragraph at lines 6064--6064
 LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <12> not available
 (Font)              Font shape `T1/pcr/b/n' tried instead on input line 1.
  [114] [115] [116] [117] [118] [119] [120]
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badTypeError over-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badTypeError over-
  []
 
 
-Overfull \hbox (1.41406pt too wide) in paragraph at lines 6873--6873
+Overfull \hbox (1.41406pt too wide) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 unsigned_char| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badSignError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badTypeError over-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badTypeError over-
  []
 
 
-Overfull \hbox (4.20396pt too wide) in paragraph at lines 6873--6873
+Overfull \hbox (4.20396pt too wide) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 unsigned_short| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 unsigned
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badSignError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badSignError bad-
  []
 
 
-Overfull \hbox (1.98412pt too wide) in paragraph at lines 6873--6873
+Overfull \hbox (1.98412pt too wide) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 unsigned_long| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badSignError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badTypeError over-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badTypeError over-
  []
 
 
-Overfull \hbox (1.41406pt too wide) in paragraph at lines 6873--6873
+Overfull \hbox (1.41406pt too wide) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 unsigned_char| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badSignError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badTypeError over-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badTypeError over-
  []
 
 
-Overfull \hbox (4.20396pt too wide) in paragraph at lines 6873--6873
+Overfull \hbox (4.20396pt too wide) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 unsigned_short| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 unsigned
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badSignError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badSignError bad-
  []
 
 
-Overfull \hbox (1.98412pt too wide) in paragraph at lines 6873--6873
+Overfull \hbox (1.98412pt too wide) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 unsigned_long| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 6873--6873
+Underfull \hbox (badness 10000) in paragraph at lines 6877--6877
 []|\T1/ptm/m/n/10 badSignError bad-
  []
 
 [121]
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badSizeError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badSizeError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badSizeError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badSizeError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badTypeError
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badTypeError
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badTypeError
  []
 
 
-Overfull \hbox (3.65375pt too wide) in paragraph at lines 7135--7135
+Overfull \hbox (3.65375pt too wide) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 string_len_null| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badTypeError
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 (ptr_type,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 ptr_type, !=
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badTypeError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 \T1/ptm/m/n/10 Type-Seal-Er-ror,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 \T1/ptm/m/n/10 dead-Prox-y-Er-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 (ptr_type,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badTypeError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 \T1/ptm/m/n/10 Type-Seal-Er-ror
  []
 
 
-Overfull \hbox (23.65347pt too wide) in paragraph at lines 7135--7135
+Overfull \hbox (23.65347pt too wide) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 int/float/proxy/byte-
  []
 
 
-Overfull \hbox (1.99342pt too wide) in paragraph at lines 7135--7135
+Overfull \hbox (1.99342pt too wide) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 int/float/ptr/ptr| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badIndexError
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badSizeError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badSizeError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badSizeError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badSizeError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badTypeError
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badTypeError
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badTypeError
  []
 
 
-Overfull \hbox (3.65375pt too wide) in paragraph at lines 7135--7135
+Overfull \hbox (3.65375pt too wide) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 string_len_null| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badTypeError
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 (ptr_type,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 ptr_type, !=
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badTypeError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 \T1/ptm/m/n/10 Type-Seal-Er-ror,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 \T1/ptm/m/n/10 dead-Prox-y-Er-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 (ptr_type,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badTypeError bad-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 \T1/ptm/m/n/10 Type-Seal-Er-ror
  []
 
 
-Overfull \hbox (23.65347pt too wide) in paragraph at lines 7135--7135
+Overfull \hbox (23.65347pt too wide) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 int/float/proxy/byte-
  []
 
 
-Overfull \hbox (1.99342pt too wide) in paragraph at lines 7135--7135
+Overfull \hbox (1.99342pt too wide) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 int/float/ptr/ptr| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7135--7135
+Underfull \hbox (badness 10000) in paragraph at lines 7139--7139
 []|\T1/ptm/m/n/10 badIndexError
  []
 
 [122] [123]
-Overfull \hbox (1.41406pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (1.41406pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 unsigned_char| 
  []
 
 
-Overfull \hbox (4.20396pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (4.20396pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 unsigned_short| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 unsigned
  []
 
 
-Overfull \hbox (1.98412pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (1.98412pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 unsigned_long| 
  []
 
 
-Overfull \hbox (8.64375pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (8.64375pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 nullPointerError| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 (ptr_type,
  []
 
 
-Overfull \hbox (8.64375pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (8.64375pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 nullPointerError| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 (ptr_type,
  []
 
 
-Overfull \hbox (5.85426pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (5.85426pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 proxy_or_errno| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 (ptr_type,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 (ptr_type,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 \T1/ptm/m/n/10 type_seal,
  []
 
 
-Overfull \hbox (8.64375pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (8.64375pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 nullPointerError| 
  []
 
 
-Overfull \hbox (2.53403pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (2.53403pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 fct_proxy_null| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 (ptr_type,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 \T1/ptm/m/n/10 type_seal,
  []
 
 
-Overfull \hbox (1.41406pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (1.41406pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 unsigned_char| 
  []
 
 
-Overfull \hbox (4.20396pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (4.20396pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 unsigned_short| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 unsigned
  []
 
 
-Overfull \hbox (1.98412pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (1.98412pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 unsigned_long| 
  []
 
 
-Overfull \hbox (8.64375pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (8.64375pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 nullPointerError| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 (ptr_type,
  []
 
 
-Overfull \hbox (8.64375pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (8.64375pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 nullPointerError| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 (ptr_type,
  []
 
 
-Overfull \hbox (5.85426pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (5.85426pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 proxy_or_errno| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 (ptr_type,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 (ptr_type,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 \T1/ptm/m/n/10 type_seal,
  []
 
 
-Overfull \hbox (8.64375pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (8.64375pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 nullPointerError| 
  []
 
 
-Overfull \hbox (2.53403pt too wide) in paragraph at lines 7485--7485
+Overfull \hbox (2.53403pt too wide) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 fct_proxy_null| 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 []|\T1/ptm/m/n/10 (ptr_type,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
+Underfull \hbox (badness 10000) in paragraph at lines 7489--7489
 \T1/ptm/m/n/10 type_seal,
  []
 
@@ -2575,10 +2575,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 7485--7485
 File: Chapter_5_Figure_5.png Graphic file (type png)
 
 <use Chapter_5_Figure_5.png>
-Package pdftex.def Info: Chapter_5_Figure_5.png used on input line 7571.
+Package pdftex.def Info: Chapter_5_Figure_5.png used on input line 7575.
 (pdftex.def)             Requested size: 720.88835pt x 91.3406pt.
 
-Overfull \hbox (10.00598pt too wide) in paragraph at lines 7572--7573
+Overfull \hbox (10.00598pt too wide) in paragraph at lines 7576--7577
 [] 
  []
 
@@ -2586,60 +2586,60 @@ Overfull \hbox (10.00598pt too wide) in paragraph at lines 7572--7573
 File: Chapter_5_Figure_6.png Graphic file (type png)
 
 <use Chapter_5_Figure_6.png>
-Package pdftex.def Info: Chapter_5_Figure_6.png used on input line 7585.
+Package pdftex.def Info: Chapter_5_Figure_6.png used on input line 7589.
 (pdftex.def)             Requested size: 469.75502pt x 143.69197pt.
 
-Overfull \hbox (25.84581pt too wide) in paragraph at lines 7574--7587
+Overfull \hbox (25.84581pt too wide) in paragraph at lines 7578--7591
 [][][]\T1/ptm/m/n/10 Fig.
  []
 
 
-Overfull \hbox (22.50598pt too wide) in paragraph at lines 7574--7587
+Overfull \hbox (22.50598pt too wide) in paragraph at lines 7578--7591
 [][]\T1/ptm/m/n/10 8.3[][][][]
  []
 
 
-Overfull \hbox (18.89572pt too wide) in paragraph at lines 7574--7587
+Overfull \hbox (18.89572pt too wide) in paragraph at lines 7578--7591
 \T1/ptm/m/n/10 il-
  []
 
 
-Overfull \hbox (25.00572pt too wide) in paragraph at lines 7574--7587
+Overfull \hbox (25.00572pt too wide) in paragraph at lines 7578--7591
 \T1/ptm/m/n/10 lus-
  []
 
 
-Overfull \hbox (31.6655pt too wide) in paragraph at lines 7574--7587
+Overfull \hbox (31.6655pt too wide) in paragraph at lines 7578--7591
 \T1/ptm/m/n/10 trates
  []
 
 
-Overfull \hbox (14.44592pt too wide) in paragraph at lines 7574--7587
+Overfull \hbox (14.44592pt too wide) in paragraph at lines 7578--7591
 \T1/ptm/m/n/10 a
  []
 
 
-Overfull \hbox (27.78561pt too wide) in paragraph at lines 7574--7587
+Overfull \hbox (27.78561pt too wide) in paragraph at lines 7578--7591
 \T1/ptm/m/n/10 sim-
  []
 
 
-Overfull \hbox (22.22581pt too wide) in paragraph at lines 7574--7587
+Overfull \hbox (22.22581pt too wide) in paragraph at lines 7578--7591
 \T1/ptm/m/n/10 ple
  []
 
 
-Overfull \hbox (28.33566pt too wide) in paragraph at lines 7574--7587
+Overfull \hbox (28.33566pt too wide) in paragraph at lines 7578--7591
 \T1/ptm/m/n/10 trick
  []
 
 [126 <./Chapter_5_Figure_5.png>] [127 <./Chapter_5_Figure_6.png>]
-Overfull \hbox (385.87936pt too wide) in paragraph at lines 7656--7656
+Overfull \hbox (385.87936pt too wide) in paragraph at lines 7660--7660
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 7656--7656
+Underfull \hbox (badness 10000) in paragraph at lines 7660--7660
 
  []
 
@@ -2652,22 +2652,22 @@ Chapter 10.
 [133
 
 ] [134] [135] [136] [137] [138] [139] [140] [141] [142] [143]
-Underfull \hbox (badness 5316) in paragraph at lines 9566--9566
+Underfull \hbox (badness 5316) in paragraph at lines 9570--9570
 \T1/ptm/m/n/10 e-ga-tee: Method-Holder: Ar-gu-
  []
 
 
-Overfull \hbox (6.43443pt too wide) in paragraph at lines 9566--9566
+Overfull \hbox (6.43443pt too wide) in paragraph at lines 9570--9570
 []|\T1/ptm/m/n/10 mismatchedArgumentCountSelector:
  []
 
 
-Underfull \hbox (badness 5316) in paragraph at lines 9566--9566
+Underfull \hbox (badness 5316) in paragraph at lines 9570--9570
 \T1/ptm/m/n/10 e-ga-tee: Method-Holder: Ar-gu-
  []
 
 
-Overfull \hbox (6.43443pt too wide) in paragraph at lines 9566--9566
+Overfull \hbox (6.43443pt too wide) in paragraph at lines 9570--9570
 []|\T1/ptm/m/n/10 mismatchedArgumentCountSelector:
  []
 
@@ -2675,35 +2675,35 @@ Overfull \hbox (6.43443pt too wide) in paragraph at lines 9566--9566
 File: Chapter_5_Figure_7.png Graphic file (type png)
 
 <use Chapter_5_Figure_7.png>
-Package pdftex.def Info: Chapter_5_Figure_7.png used on input line 9978.
+Package pdftex.def Info: Chapter_5_Figure_7.png used on input line 9982.
 (pdftex.def)             Requested size: 469.75502pt x 95.3341pt.
  [146] [147 <./Chapter_5_Figure_7.png>] [148]
-Overfull \hbox (37.94182pt too wide) in alignment at lines 10293--10301
+Overfull \hbox (37.94182pt too wide) in alignment at lines 10297--10305
  [] [] 
  []
 
 
-Overfull \hbox (37.94182pt too wide) in alignment at lines 10301--10311
+Overfull \hbox (37.94182pt too wide) in alignment at lines 10305--10315
  [] [] 
  []
 
 
-Overfull \hbox (37.94182pt too wide) in alignment at lines 10311--10314
+Overfull \hbox (37.94182pt too wide) in alignment at lines 10315--10318
  [] [] 
  []
 
 
-Overfull \hbox (37.94182pt too wide) in alignment at lines 10314--10316
+Overfull \hbox (37.94182pt too wide) in alignment at lines 10318--10320
  [] [] 
  []
 
 
-Overfull \hbox (37.94182pt too wide) in alignment at lines 10316--10418
+Overfull \hbox (37.94182pt too wide) in alignment at lines 10320--10422
  [] [] 
  []
 
 
-Overfull \hbox (37.94182pt too wide) in alignment at lines 10418--10473
+Overfull \hbox (37.94182pt too wide) in alignment at lines 10422--10477
  [] [] 
  []
 
@@ -2713,13 +2713,13 @@ Chapter 11.
 
 ]
 No file SelfHandbook.ind.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 10600.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 10604.
 [152]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 10600.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 10604.
  (./SelfHandbook.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 10600.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 10604.
 
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 10600
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 10604
 .
 Package rerunfilecheck Info: File `SelfHandbook.out' has not changed.
 (rerunfilecheck)             Checksum: 79B227BC8A44D674B004C89D48EA1639;12835.
@@ -2727,7 +2727,7 @@ Package rerunfilecheck Info: File `SelfHandbook.out' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 10600.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 10604.
  ) 
 Here is how much of TeX's memory you used:
  15205 strings out of 494447
@@ -2755,7 +2755,7 @@ ist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2016basic/texmf-dis
 t/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2016basic/texmf-dist/fon
 ts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2016basic/texmf-dist/fonts/ty
 pe1/urw/times/utmri8a.pfb>
-Output written on SelfHandbook.pdf (156 pages, 1622859 bytes).
+Output written on SelfHandbook.pdf (156 pages, 1623024 bytes).
 PDF statistics:
  1863 PDF objects out of 2073 (max. 8388607)
  1542 compressed objects within 16 object streams

@@ -3,7 +3,7 @@
 Building a VM
 =============
 
-    Last updated 3 February 2014 for Self 4.5.0
+    Last updated 318 May 2017 for Self 2017.1
 
 The sources for the Self VM are on the `GitHub repository`_.
 
