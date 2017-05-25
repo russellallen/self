@@ -302,7 +302,7 @@ mirrorOop oopClass::as_mirror(bool mustAllocate) {
     oop CONC3(set_,flagName,_prim)(oop rcvr, oop flag) {                      \
       breakpoint();                                                           \
       Unused(rcvr); Unused(flag);                                             \
-      if (! (checkNewValue)) {                                                \
+      if (! (checkNewValue))                                                  \
         return ErrorCodes::vmString_prim_error(BADTYPEERROR);                 \
       }                                                                       \
       oop oldValue = getCurrentValue;                                         \
