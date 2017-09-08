@@ -58,9 +58,9 @@ if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
         "The product will be built against the headers and libraries located inside the indicated SDK."
         FORCE
       )
-      break()
-    else(_failed)
-        break()
+#      break()
+#    else(_failed)
+#        break()
     endif()
   endforeach()
   if(CMAKE_OSX_SYSROOT)

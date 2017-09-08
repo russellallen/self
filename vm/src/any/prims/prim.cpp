@@ -2115,28 +2115,25 @@ fntype(&call_and_convert5_glue),
 "RunNative", fntype(&run0_glue),
  ExternalPrimitive, UnknownPrimType,
  SIDEEFFECTS,
- "Runs the code linked from the fctProxy and returns self. "
+ "Runs the code linked from the fctProxy."
 },
 {
-"RunNativeWith:Type:", fntype(&run1_glue),
+"RunNativeWith:", fntype(&run1_glue),
  ExternalPrimitive, UnknownPrimType,
  SIDEEFFECTS,
- "Runs the code linked from the fctProxy with either a byteVector "
- "(type 0) or a proxy (type 1) as an argument. Returns self. "
+ "Runs the code linked from the fctProxy."
 },
 {
-"RunNativeWith:Type:With:Type:", fntype(&run2_glue),
+"RunNativeWith:With:", fntype(&run2_glue),
  ExternalPrimitive, UnknownPrimType,
  SIDEEFFECTS,
- "Runs the code linked from the fctProxy with either a byteVector "
- "(type 0) or a proxy (type 1) as arguments. Returns self. "
+ "Runs the code linked from the fctProxy."
 },
 {
-"RunNativeWith:Type:With:Type:With:Type", fntype(&run3_glue),
+"RunNativeWith:With:With:", fntype(&run3_glue),
  ExternalPrimitive, UnknownPrimType,
  SIDEEFFECTS,
- "Runs the code linked from the fctProxy with either a byteVector "
- "(type 0) or a proxy (type 1) as arguments. Returns self. "
+ "Runs the code linked from the fctProxy."
 },
 {
 "RunScript", fntype(&run_script_prim_glue),

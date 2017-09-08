@@ -69,72 +69,53 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
          'Category: examples\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
         
-         addChars = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals native addChars.
+         addSmallInts <- bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'addSmallInts' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals native addSmallInts.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addSmallInts' -> () From: ( | {
          'Comment: Add two chars together and return result\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot\x7fVisibility: public'
         
          add: a And: b IfFail: fb = ( |
-             blk.
-             left.
-             right.
-            | 
-            blk: [|:e| ^ fb value: e].
-            left:  buffer char copy write: a IfFail: blk.
-            right: buffer char copy write: b IfFail: blk.
-            runNativeWith: left With: right IfFail: blk.
-            left read).
+            | runNativeWith: a With: b IfFail: fb).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
-         'Category: state\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
-        
-         arity = 2.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
-         'Category: caches\x7fModuleInfo: Module: nativeExamples InitialContents: InitializeToExpression: (byteVector copy)'
-        
-         compiled <- byteVector copy.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
-         'Category: caches\x7fModuleInfo: Module: nativeExamples InitialContents: InitializeToExpression: (fctProxy copy)'
-        
-         nativeCode <- fctProxy copy.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
-         'ModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'cNativeParent' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addSmallInts' -> () From: ( | {
          'Category: state\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
         
          source = '
-  char add(char, char);
+   oop fct(oop this, oop l, oop r, void *useful[], void *FH ){
+     //if (!IS_SMI(l)){ FAILURE(FH, BADTYPEERROR);  return NULL; };
+     //if (!IS_SMI(r)){ FAILURE(FH, BADTYPEERROR);  return NULL; };
 
-  void fct(char *a, char *b){
-    *a = add(*a, *b);
-  }
-
-  char add(char a, char b) {
-    return a + b;
-  }
+     // https://www.securecoding.cert.org/confluence/display/c/INT32-C.+Ensure+that+operations+on+signed+integers+do+not+result+in+overflow
+     int32_t a = (int32_t) l;
+     int32_t b = (int32_t) r;
+     if (((b > 0) && (a > (SMI_MAX - b))) ||
+         ((b < 0) && (a < (SMI_MIN - b)))) {
+            FAILURE(FH, OVERFLOWERROR);  return NULL;
+     } else {
+       return (oop) (a + b);
+     }
+   }
 '.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addChars' -> () From: ( | {
-         'ModuleInfo: Module: nativeExamples InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addSmallInts' -> () From: ( | {
+         'Comment: We\'re running about 20x - 120x slower than handcrafted.\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot\x7fVisibility: public'
         
-         test = ( |
-            | [(add: 3 And: 4 IfFail: -1) = 7] assert. self).
+         testSlowdown = ( |
+             a.
+             b.
+             c = 1000000.
+             d <- 3.
+             e <- 4.
+            | 
+            a: [c do: [add: d And: e IfFail: [|:e| e]]] time.
+            b: [c do: [d + e]] time.
+            a / b).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
@@ -299,24 +280,23 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'ModuleInfo: Module: nativeExamples InitialContents: FollowSlot\x7fVisibility: public'
         
          returnHelloWorldIfFail: fb = ( |
-             b.
             | 
-            b: byteVector copySize: 13.
-            runNativeWith: b IfFail: [|:e| ^ fb value: e].
-            b asString).
+            runNativeWith: '             ' copyMutable 
+                   IfFail: [|:e| ^ fb value: e]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'helloWorld' -> () From: ( | {
          'Category: state\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
         
          source = '
-  void fct(char*a, ... ){
-    char* hw = \"Hello, World!\";
-    int i;
-    for(i = 0; i < 13; i++){
-      a[i] = hw[i];
-    } 
-  }  
+  oop fct(oop this, oop byteV, void *useful[],void *FB){
+    char *hw = BV_CHAR(byteV);
+    char *h  = \"Hello, world!\";
+    for(int i = 0; i < 13; i++){
+      hw[i] = h[i];
+    }
+    return byteV;
+  }
 '.
         } | ) 
 
@@ -325,7 +305,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         
          test = ( |
             | 
-            [(returnHelloWorldIfFail: '') = 'Hello, World!'] assert. self).
+            [(returnHelloWorldIfFail: '') = 'Hello, world!'] assert. self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
@@ -366,14 +346,14 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         
          safelyDoNothingIfFail: fb = ( |
             | 
-            runNativeIfFail: fb. self).
+            runNativeIfFail: fb).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'nothing' -> () From: ( | {
          'Category: state\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
         
          source = '
-  void fct(){2 + 2;}  
+  oop fct(oop this, void *useful[], void* FB){return this;}  
 '.
         } | ) 
 
@@ -382,7 +362,18 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         
          test = ( |
             | 
-            [(safelyDoNothingIfFail: '') = self] assert. self).
+            [(safelyDoNothingIfFail: '') = nativeCode] assert. self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
+         'Category: examples\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
+        
+         testExamples = ( |
+            | 
+            addSmallInts test.
+            helloWorld test.
+            nothing test.
+            self).
         } | ) 
 
 
