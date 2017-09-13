@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.34 $'
+ '30.35.0'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -48,9 +49,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'larsText' -> () From: ( | {
-         'ModuleInfo: Module: larsText InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: larsText InitialContents: InitializeToExpression: (\'30.35.0\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.34 $'.
+         revision <- '30.35.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'larsText' -> () From: ( | {
@@ -428,6 +429,7 @@ SlotsToOmit: parent prototype.
                         ifTrue: [ off asFloat / (contents size - linesInView) ]
                          False: [ 0.0 ]) min: 1.0.
                 slider myValue: 1.0 - v.
+                slider sliderProportionalLength: linesInView asFloat / contents size.
                 slider changed.
             ].
             self).

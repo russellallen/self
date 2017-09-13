@@ -1,6 +1,6 @@
- '$Revision: 30.11 $'
+ '30.11.1'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -80,7 +80,7 @@ SlotsToOmit: parent prototype.
             line beFlexibleHorizontally.
             line beRigidVertically.
 
-            titleR: rowMorph copy color: paint named: 'transparent'.
+            titleR: rowMorph copyTransparent.
             titleR borderWidth: 0.
             titleR beFlexible.
             titleR addAllMorphs: (
@@ -92,11 +92,11 @@ SlotsToOmit: parent prototype.
                 (transparentSpacerMorph copyH: 5)       &
                 line copy) asVector.
 
-            entriesC: columnMorph copy beFlexible color: paint named: 'transparent'.
+            entriesC: columnMorph copyTransparent beFlexible.
             entriesC borderWidth: 0.
             entriesC addAllMorphs: buildPropertyEntries.
 
-            entriesR: rowMorph copy beFlexible color: paint named: 'transparent'.
+            entriesR: rowMorph copyTransparent beFlexible.
             entriesR borderWidth: 0.
             entriesR addAllMorphs:
                 ((spacerMorph copyH: 6 Color: color) & entriesC) asVector.
@@ -132,7 +132,7 @@ SlotsToOmit: parent prototype.
             labelM: labelMorph copyLabel: s
                 FontSpec: ( outlinerPreferences mediumFontSpec copyName: 'verdana' )
                 Color:    (paint named: 'black').
-            r: rowMorph copy color: paint named: 'transparent'.
+            r: rowMorph copyTransparent.
             r borderWidth: 0.
             r beFlexible.
             r baseMinHeight: (outlinerPreferences mediumFontSize + 6).
@@ -471,9 +471,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision revision: 
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'propertySheets' -> () From: ( | {
-         'ModuleInfo: Module: propertySheets InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: propertySheets InitialContents: InitializeToExpression: (\'30.11.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.11 $'.
+         revision <- '30.11.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'propertySheets' -> () From: ( | {
