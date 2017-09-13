@@ -59,8 +59,6 @@ if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
         FORCE
       )
       break()
-    else(_failed)
-        break()
     endif()
   endforeach()
   if(CMAKE_OSX_SYSROOT)
