@@ -31,10 +31,6 @@ class proxyOopClass: public foreignOopClass {
 
   protected:
 
-    proxyOopClass* addr() {
-      return (proxyOopClass*)foreignOopClass::addr();
-    }
-
     void kill_proxy() {
       // Don't call this function. Call kill() instead.
       set_pointer(NULL);    /* Just a precaution. */
@@ -49,8 +45,12 @@ class proxyOopClass: public foreignOopClass {
 
   public:
 
+     proxyOopClass* addr() {
+        return (proxyOopClass*)foreignOopClass::addr();
+     }
+
       smi get_size_of_allocated_memory() {
-        return addr()->type_seal.get_lower();  
+        return addr()->type_seal.get_lower();
       }
 
       void set_size_of_allocated_memory(smi szam) {
@@ -60,7 +60,7 @@ class proxyOopClass: public foreignOopClass {
     oop allocate_bytes_prim(smi l, void *FH);
     oop free_bytes_prim(void *FH);
     oop load_bytevector_at_offset_prim(byteVectorOop bv, smi offset, void *FH);
-    oop read_bytevector_at_offset_prim(byteVectorOop bv, smi offset, void *FH);
+    oop read_bytevector_at_offset_prim(byteVectorOop bv, smi offset, void *FH);    
     smi get_size_of_allocated_memory_prim(void *FH);
     char* bytes(fint which = 0) { return (char*) get_pointer() + which; } // For polymorphism with byteVector
 

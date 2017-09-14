@@ -69,6 +69,79 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
          'Category: examples\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
         
+         addFloats = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'addFloats' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals native addFloats.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addFloats' -> () From: ( | {
+         'Comment: Add two chars together and return result\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot\x7fVisibility: public'
+        
+         add: a And: b IfFail: fb = ( |
+            | runNativeWith: a With: b IfFail: fb).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addFloats' -> () From: ( | {
+         'Category: state\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
+        
+         arity = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addFloats' -> () From: ( | {
+         'Category: caches\x7fModuleInfo: Module: nativeExamples InitialContents: InitializeToExpression: (byteVector copy)'
+        
+         compiled <- byteVector copy.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addFloats' -> () From: ( | {
+         'Category: caches\x7fModuleInfo: Module: nativeExamples InitialContents: InitializeToExpression: (fctProxy copy)'
+        
+         nativeCode <- fctProxy copy.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addFloats' -> () From: ( | {
+         'ModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'cNativeParent' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addFloats' -> () From: ( | {
+         'Category: state\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
+        
+         source = '
+   oop fct(oop this, oop l, oop r, void *useful[], void *FH ){
+     return FLOAT_TO_OOP(OOP_TO_FLOAT(l) + OOP_TO_FLOAT(r));
+   }
+'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addFloats' -> () From: ( | {
+         'ModuleInfo: Module: nativeExamples InitialContents: FollowSlot\x7fVisibility: public'
+        
+         test = ( |
+            | 
+            [(add: 3.0 And: 4.0 IfFail: -1) = 7.0] assert. self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addFloats' -> () From: ( | {
+         'Comment: We\'re running about 20x - 120x slower than handcrafted.\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot\x7fVisibility: public'
+        
+         testSlowdown = ( |
+             a.
+             b.
+             c = 1000000.
+             d <- 3.0.
+             e <- 4.0.
+            | 
+            a: [c do: [add: d And: e IfFail: [|:e| e]]] time.
+            b: [c do: [d + e]] time.
+            a / b).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> () From: ( | {
+         'Category: examples\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
+        
          addSmallInts <- bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'addSmallInts' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals native addSmallInts.
 '.
