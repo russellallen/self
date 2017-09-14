@@ -174,9 +174,9 @@ extern const char *TS_func;    /* Type seal for functions (from dynLink).       
    CC_mber_2(oop,,  oop,proxy,    read_bytevector_at_offset_prim, read_bytevector_at_offset_glue,fail, oop,byteVector, smi,                               ) \
    CC_mber_0(smi,,  oop,proxy,    get_size_of_allocated_memory_prim, get_size_of_allocated_memory_glue,fail                                               ) \
    CC_mber_0(oop,,  oop,fctProxy, run0_prim,             run0_glue,fail                                                                                   ) \
-   CC_mber_2(oop,,  oop,fctProxy, run1_prim,             run1_glue,fail, any_oop,, smi,                                                                   ) \
-   CC_mber_4(oop,,  oop,fctProxy, run2_prim,             run2_glue,fail, any_oop,, smi,, any_oop,, smi,                                                   ) \
-   CC_mber_6(oop,,  oop,fctProxy, run3_prim,             run3_glue,fail, any_oop,, smi,, any_oop,, smi,, any_oop,, smi,                                   ) \
+   CC_mber_1(oop,,  oop,fctProxy, run1_prim,             run1_glue,fail, any_oop,                                                                  ) \
+   CC_mber_2(oop,,  oop,fctProxy, run2_prim,             run2_glue,fail, any_oop,, any_oop,                                                    ) \
+   CC_mber_3(oop,,  oop,fctProxy, run3_prim,             run3_glue,fail, any_oop,, any_oop,, any_oop,                                  ) \
 
 
 

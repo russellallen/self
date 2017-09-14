@@ -12,10 +12,10 @@
 // entry point (just an address), and understands a number of primitive
 // messages that calls the function at this address. A fctProxy also contains
 // a smiOop: noOfArgs. It says how many arguments this fctProxy expects.
-// Like any foreignOop, a fctProxy can be dead or live. It can only be called 
-// if it is live. 
+// Like any foreignOop, a fctProxy can be dead or live. It can only be called
+// if it is live.
 
-// fctProxies are (typically) produced by calling fctLookup (in dynLink.[ch]). 
+// fctProxies are (typically) produced by calling fctLookup (in dynLink.[ch]).
 
 
 typedef oop (*fctType)(...);
@@ -34,8 +34,8 @@ class fctProxyOopClass: public proxyOopClass {
 
   protected:
 
-    fctProxyOopClass* addr() { 
-       return (fctProxyOopClass*)proxyOopClass::addr(); 
+    fctProxyOopClass* addr() {
+       return (fctProxyOopClass*)proxyOopClass::addr();
     }
 
     void kill_fctProxy() {
@@ -46,17 +46,17 @@ class fctProxyOopClass: public proxyOopClass {
     }
 
   public:
-      
+
     // Native infrastructure
     oop run0_prim(void *FH);
-    oop run1_prim(oop arg1, smi argType1, void *FH);
-    oop run2_prim(oop arg1, smi argType1, oop arg2, smi argType2, void *FH);
-    oop run3_prim(oop arg1, smi argType1, oop arg2, smi argType2, oop arg3, smi argType3, void *FH);
+    oop run1_prim(oop arg1, void *FH);
+    oop run2_prim(oop arg1, oop arg2, void *FH);
+    oop run3_prim(oop arg1, oop arg2,  oop arg3, void *FH);
 
     fctType get_pointer() {
       return fctType(proxyOopClass::get_pointer());
     }
- 
+
     void set_pointer(fctType entryPt) {
       proxyOopClass::set_pointer((void *)entryPt);
     }
@@ -81,11 +81,11 @@ class fctProxyOopClass: public proxyOopClass {
     oop call5_prim (oop a1, oop a2, oop a3, oop a4, oop a5);
     oop call6_prim (oop a1, oop a2, oop a3, oop a4, oop a5, oop a6);
     oop call7_prim (oop a1, oop a2, oop a3, oop a4, oop a5, oop a6, oop a7);
-    oop call8_prim (oop a1, oop a2, oop a3, oop a4, oop a5, 
+    oop call8_prim (oop a1, oop a2, oop a3, oop a4, oop a5,
                     oop a6, oop a7, oop a8);
-    oop call9_prim (oop a1, oop a2, oop a3, oop a4, oop a5, 
+    oop call9_prim (oop a1, oop a2, oop a3, oop a4, oop a5,
                     oop a6, oop a7, oop a8, oop a9);
-    oop call10_prim(oop a1, oop a2, oop a3, oop a4, oop a5, 
+    oop call10_prim(oop a1, oop a2, oop a3, oop a4, oop a5,
                     oop a6, oop a7, oop a8, oop a9, oop a10);
 
     oop call_and_convert0 ();
@@ -94,9 +94,9 @@ class fctProxyOopClass: public proxyOopClass {
     oop call_and_convert3 (void *a1, void *a2, void *a3);
     oop call_and_convert4 (void *a1, void *a2, void *a3, void *a4);
     oop call_and_convert5 (void *a1, void *a2, void *a3, void *a4, void *a5);
-    oop call_and_convert6 (void *a1, void *a2, void *a3, void *a4, void *a5, 
+    oop call_and_convert6 (void *a1, void *a2, void *a3, void *a4, void *a5,
                            void *a6);
-    oop call_and_convert7 (void *a1, void *a2, void *a3, void *a4, void *a5, 
+    oop call_and_convert7 (void *a1, void *a2, void *a3, void *a4, void *a5,
                            void *a6, void *a7);
     oop call_and_convert8 (void *a1, void *a2, void *a3, void *a4, void *a5,
                            void *a6, void *a7, void *a8);
@@ -106,8 +106,8 @@ class fctProxyOopClass: public proxyOopClass {
                            void *a6, void *a7, void *a8, void *a9, void *a10);
 
 #   ifdef UNUSED
-    fctProxyOop clone(bool mustAllocate= true) { 
-      return (fctProxyOop) proxyOopClass::clone(mustAllocate); 
+    fctProxyOop clone(bool mustAllocate= true) {
+      return (fctProxyOop) proxyOopClass::clone(mustAllocate);
     }
 #   endif
 
@@ -129,8 +129,7 @@ oop call7_prim (oop rcvr, oop a1, oop a2, oop a3, oop a4, oop a5,
                 oop a6, oop a7);
 oop call8_prim (oop rcvr, oop a1, oop a2, oop a3, oop a4, oop a5,
                 oop a6, oop a7, oop a8);
-oop call9_prim (oop rcvr, oop a1, oop a2, oop a3, oop a4, oop a5, 
+oop call9_prim (oop rcvr, oop a1, oop a2, oop a3, oop a4, oop a5,
                 oop a6, oop a7, oop a8, oop a9);
-oop call10_prim(oop rcvr, oop a1, oop a2, oop a3, oop a4, oop a5, 
+oop call10_prim(oop rcvr, oop a1, oop a2, oop a3, oop a4, oop a5,
                 oop a6, oop a7, oop a8, oop a9, oop a10);
-

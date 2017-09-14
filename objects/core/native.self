@@ -235,6 +235,44 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'cNativeParent' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         basicInclude = '
+// We are in freestanding mode
+// Only these std header files
+// are available
+// C99 standard 4.6
+#include <float.h>
+#include <iso646.h>
+#include <limits.h>
+#include <stdarg.h>
+#include <stdbool.h>
+#include <stddef.h> 
+#include <stdint.h>
+
+typedef void *oop;
+typedef int32_t smi;
+
+typedef uint8_t *bv_char(oop);
+typedef void    *proxy_ptr(oop);
+typedef bool     is_smi(oop);
+typedef void     failure(void *FB, uint32_t err);
+
+#define BADTYPEERROR   2
+#define OVERFLOWERROR  5
+
+#define SMI_MAX  536870911
+#define SMI_MIN -536870912
+
+#define BV_CHAR ((bv_char*)      useful[0])
+#define PROXY_PTR ((proxy_ptr*)  useful[1])
+#define IS_SMI  ((is_smi*)       useful[2])
+#define FAILURE ((failure*)      useful[3])
+
+'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'cNativeParent' -> () From: ( | {
          'Category: support\x7fComment: for easier access\x7fModuleInfo: Module: native InitialContents: FollowSlot'
         
          buffer = bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'buffer' -> ().
@@ -243,12 +281,16 @@ SlotsToOmit: parent.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'cNativeParent' -> () From: ( | {
          'ModuleInfo: Module: native InitialContents: FollowSlot'
         
-         cCompile: c IfFail: fb = ( |
+         cCompile: source IfFail: fb = ( |
+             c.
+             err.
              f.
              fn.
              rawByteVector.
             | 
             os command: 'cc' IfFail: [^ fb value: 'C Compiler Not Found'].
+
+            c: basicInclude, source. 
 
             fn: os_file temporaryFileName.
             os command: 'rm ', fn, '.c'.
@@ -258,7 +300,21 @@ SlotsToOmit: parent.
             f write: c.
             f close.
 
-            os command: 'cc -O2 -ffreestanding -m32 -c -o ', fn, '.o ', fn, '.c'  IfFail: [|:e| error: e].
+            [
+            os command: 'cc -O2 -ffreestanding -m32 -c -o ', fn, '.o ', fn, '.c &>', fn, '.err'  IfFail: [|:e| error: e].
+            ] value.
+            [
+            os command: 'ccomp -c -o ', fn, '.o ', fn, '.c &>', fn, '.err'  IfFail: [|:e| error: e].
+            ].
+            [
+            os command: 'tcc -c -o ', fn, '.o ', fn, '.c &>', fn, '.err'  IfFail: [|:e| error: e].
+            ].
+
+            f: os_file openForReading: fn, '.err'.
+            err: f readIfFail: ''.
+            f close.
+            err size > 0 ifTrue: [^ fb value: err].
+
 
             f: os_file openForReading: fn, '.o'.
             rawByteVector: f read asByteVector.
@@ -325,22 +381,7 @@ SlotsToOmit: parent.
             | 
             nativeCode _RunNativeIfFail: [
               reloadIfFail: [|:e| ^ fb value: e].
-              nativeCode _RunNativeIfFail: [|:e | ^ fb value: e]].
-            self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'cNativeParent' -> () From: ( | {
-         'ModuleInfo: Module: native InitialContents: FollowSlot'
-        
-         runNativeReturning: b IfFail: fb = ( |
-            | runNativeWith: b IfFail: fb. b).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'cNativeParent' -> () From: ( | {
-         'ModuleInfo: Module: native InitialContents: FollowSlot'
-        
-         runNativeReturning: a With: b IfFail: fb = ( |
-            | runNativeWith: a With: b IfFail: fb. a).
+              nativeCode _RunNativeIfFail: [|:e | ^ fb value: e]]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'cNativeParent' -> () From: ( | {
@@ -348,10 +389,9 @@ SlotsToOmit: parent.
         
          runNativeWith: a IfFail: fb = ( |
             | 
-            nativeCode _RunNativeWith: a Type: a nativeTypeDescriptor IfFail: [
+            nativeCode _RunNativeWith: a IfFail: [
               reloadIfFail: [|:e| ^ fb value: e].
-              nativeCode _RunNativeWith: a Type: a nativeTypeDescriptor IfFail: [|:e | ^ fb value: e]].
-            self).
+              nativeCode _RunNativeWith: a IfFail: [|:e | ^ fb value: e]]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'cNativeParent' -> () From: ( | {
@@ -359,14 +399,13 @@ SlotsToOmit: parent.
         
          runNativeWith: a With: b IfFail: fb = ( |
             | 
-            nativeCode _RunNativeWith: a  Type: a nativeTypeDescriptor 
-                                 With: b Type: b nativeTypeDescriptor
+            nativeCode _RunNativeWith: a 
+                                 With: b 
                                IfFail: [
                       reloadIfFail: [|:e| ^ fb value: e].
-                       nativeCode _RunNativeWith: a  Type: a nativeTypeDescriptor 
-                                            With: b Type: b nativeTypeDescriptor
-                                          IfFail: [|:e | ^ fb value: e]].
-            self).
+                       nativeCode _RunNativeWith: a 
+                                            With: b
+                                          IfFail: [|:e | ^ fb value: e]]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'cNativeParent' -> () From: ( | {
@@ -374,16 +413,15 @@ SlotsToOmit: parent.
         
          runNativeWith: a With: b With: c IfFail: fb = ( |
             | 
-            nativeCode _RunNativeWith: a  Type: a nativeTypeDescriptor 
-                                 With: b Type: b nativeTypeDescriptor
-                                 With: c Type: c nativeTypeDescriptor
+            nativeCode _RunNativeWith: a  
+                                 With: b
+                                 With: c
                                IfFail: [
                       reloadIfFail: [|:e| ^ fb value: e].
-                       nativeCode _RunNativeWith: a Type: a nativeTypeDescriptor 
-                                            With: b Type: b nativeTypeDescriptor
-                                            With: c Type: c nativeTypeDescriptor
-                                          IfFail: [|:e | ^ fb value: e]].
-            self).
+                       nativeCode _RunNativeWith: a
+                                            With: b
+                                            With: c
+                                          IfFail: [|:e | ^ fb value: e]]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> () From: ( | {
@@ -452,6 +490,121 @@ SlotsToOmit: parent.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> () From: ( | {
          'ModuleInfo: Module: native InitialContents: FollowSlot'
         
+         sm3 = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'sm3' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals native support sm3.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'sm3' -> () From: ( | {
+         'Category: core-data\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         add_uint32 = ( |
+            | 
+            "  Add two uint32 on stack.
+               pop ecx
+               add Ê Êeax,ecx
+            "
+            addCode: '\x5B\x01\xD8' asByteVector).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'sm3' -> () From: ( | {
+         'Category: state\x7fModuleInfo: Module: native InitialContents: InitializeToExpression: (\'\')'
+        
+         code <- ''.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'sm3' -> () From: ( | {
+         'Category: compiler\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         compile: s = ( |
+            | 
+            (parse: s) do: [|:t|
+              (t includes: ',')
+                ifTrue: [" Literal " 
+                    addCode: push: (t splitOn: ',') first asInteger]
+                 False: [t sendTo: self]].
+            code).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'sm3' -> () From: ( | {
+         'Category: compiler\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         copyCompile: s = ( |
+            | 
+            copy compile: s).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'sm3' -> () From: ( | {
+         'Category: core-data\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         mul_uint32 = ( |
+            | 
+            "  Mul two uint32 on stack.
+               pop ecx
+               mul ecx
+            "
+            addCode: '\x59\xF7\xE1' asByteVector).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'sm3' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'sm3' -> () From: ( | {
+         'Category: compiler\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         parse: s = ( |
+            | 
+            s asTokensSeparatedByItemsSatisfying: [|:c| (c = ' ') || (c = '\n')]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'sm3' -> () From: ( | {
+         'Category: literals\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         push: uint32 = ( |
+            | 
+            '\x50' asByteVector,                              "push eax"
+            '\xB8' asByteVector, ((byteVector copySize: 4)    "mov eax, lit"
+                       cIntSize: 32                            
+                         Signed: false 
+                             At: 0 
+                            Put: uint32 
+                         IfFail: [error: 'Bad Int'])).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'sm3' -> () From: ( | {
+         'Category: core-data\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         sub_uint32 = ( |
+            | 
+            "  Sub two uint32 on stack.
+               pop ecx
+               sub eax,ecx
+            "
+            addCode: '\x59\x29\xC8' asByteVector).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'sm3' -> () From: ( | {
+         'Category: tests\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         testAll = ( |
+            | testParser).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'sm3' -> () From: ( | {
+         'Category: tests\x7fModuleInfo: Module: native InitialContents: FollowSlot'
+        
+         testParser = ( |
+            | 
+            [ (parse: '2 3 add\nadd') = ('2' & '3' & 'add' & 'add') asSequence ] assert. self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> () From: ( | {
+         'ModuleInfo: Module: native InitialContents: FollowSlot'
+        
          stackMachine = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'stackMachine' -> () From: ( |
              {} = 'Comment: This implements a tagetable compiler
 for a very simple stack language.\x7fModuleInfo: Creator: globals native support stackMachine.
@@ -495,7 +648,7 @@ for a very simple stack language.\x7fModuleInfo: Creator: globals native support
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'stackMachine' -> 'generic' -> 'chunk' -> () From: ( | {
          'ModuleInfo: Module: native InitialContents: InitializeToExpression: (nil)'
         
-         heldValue <- bootstrap stub -> 'globals' -> 'nil' -> ().
+         heldValue.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'support' -> 'stackMachine' -> 'generic' -> 'chunk' -> () From: ( | {
