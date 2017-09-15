@@ -12,9 +12,13 @@
 // Support C functions
 // Type erasure FTW.
 
-char *byteVectorOop_to_char_ptr(oop bvOop) {
+char *byteVector_char_ptr(oop bvOop) {
   return ((byteVectorOop) bvOop)->bytes();
 }
+uint32_t byteVector_length(oop bvOop) {
+  return (uint32)((byteVectorOop) bvOop)->length();
+}
+
 
 void *proxyOop_to_void_ptr(oop pOop) {
   return (void*)((proxyOop) pOop)->addr();
@@ -26,11 +30,16 @@ bool  oop_is_float(oop obj)  { return obj->is_float();                 }
 float oop_to_float(oop obj)  { return ((floatOop) obj)->value();       }
 oop   float_to_oop(float f)  { return floatOopClass::as_floatOop(f);   }
 
+
+
+
+
 void fail_blk(void* FH, int err) {// this is in glueSupport.hh
    prim_failure(FH, static_cast<VMStringsIndex>(err)); }
 
 void *useful_array_of_functions[] = {
-  (void*)byteVectorOop_to_char_ptr,
+  (void*)byteVector_char_ptr,
+  (void*)byteVector_length,
   (void*)proxyOop_to_void_ptr,
   (void*)is_smi,
   (void*)oop_is_float,

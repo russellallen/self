@@ -253,27 +253,30 @@ SlotsToOmit: parent.
 typedef void *oop;
 typedef int32_t smi;
 
-typedef uint8_t *bv_char(oop);
-typedef void    *proxy_ptr(oop);
-typedef bool     is_smi(oop);
-typedef bool     oop_is_float(oop);
-typedef float    oop_to_float(oop);
-typedef oop      float_to_oop(float);
-typedef void     failure(void *FB, uint32_t err);
+typedef uint8_t   *bv_char(oop);
+typedef uint32_t   bv_length(oop);
+typedef void      *proxy_ptr(oop);
+typedef bool       is_smi(oop);
+typedef bool       oop_is_float(oop);
+typedef float      oop_to_float(oop);
+typedef oop        float_to_oop(float);
+typedef void       failure(void *FB, uint32_t err);
 
 #define BADTYPEERROR   2
 #define OVERFLOWERROR  5
+#define BADSIZEERROR   9
 
 #define SMI_MAX  536870911
 #define SMI_MIN -536870912
 
-#define BV_CHAR ((bv_char*)      useful[0])
-#define PROXY_PTR ((proxy_ptr*)  useful[1])
-#define IS_SMI  ((is_smi*)       useful[2])
-#define OOP_IS_FLOAT   ((oop_is_float*)   useful[3])
-#define OOP_TO_FLOAT   ((oop_to_float*)   useful[4])
-#define FLOAT_TO_OOP   ((float_to_oop*)   useful[5])
-#define FAILURE ((failure*)      useful[6])
+#define BV_CHAR   ((bv_char*)             useful[0])
+#define BV_LENGTH ((bv_length*)           useful[1])
+#define PROXY_PTR ((proxy_ptr*)           useful[2])
+#define IS_SMI  ((is_smi*)                useful[3])
+#define OOP_IS_FLOAT   ((oop_is_float*)   useful[4])
+#define OOP_TO_FLOAT   ((oop_to_float*)   useful[5])
+#define FLOAT_TO_OOP   ((float_to_oop*)   useful[6])
+#define FAILURE ((failure*)               useful[7])
 
 '.
         } | ) 

@@ -125,7 +125,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'native' -> 'addFloats' -> () From: ( | {
-         'Comment: We\'re running about 20x - 120x slower than handcrafted.\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot\x7fVisibility: public'
+         'Comment: We\'re running about 20x slower than handcrafted.\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot\x7fVisibility: public'
         
          testSlowdown = ( |
              a.
@@ -362,8 +362,10 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'Category: state\x7fModuleInfo: Module: nativeExamples InitialContents: FollowSlot'
         
          source = '
-  oop fct(oop this, oop byteV, void *useful[],void *FB){
-    char *hw = BV_CHAR(byteV);
+  oop fct(oop this, oop byteV, void *useful[],void *FH){
+    if (BV_LENGTH(byteV) < 13) {
+       FAILURE(FH, BADSIZEERROR);  return NULL; }
+    uint8_t *hw = BV_CHAR(byteV);
     char *h  = \"Hello, world!\";
     for(int i = 0; i < 13; i++){
       hw[i] = h[i];
