@@ -6,9 +6,21 @@
 // primitive inlining in the SIC
 
 
-# pragma implementation "sicPrimline.hh"
 
-# include "_sicPrimline.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "byteCodes.hh"
+# include "byteVectorOop.hh"
+# include "nodeGen.hh"
+# include "node_inline.hh"
+# include "objVectorOop.hh"
+# include "oop_inline.hh"
+# include "preg.hh"
+# include "prim.hh"
+# include "rscope.hh"
+# include "sic.hh"
+# include "sicExpr.hh"
+# include "sicScope.hh"
+# include "slotsOop.hh"
 
 # ifdef SIC_COMPILER
 

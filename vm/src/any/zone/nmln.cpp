@@ -3,8 +3,18 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "nmln.hh"
-# include "_nmln.cpp.incl"
+# include "allocation.hh"
+# include "cacheStub_inline.hh"
+# include "codeTable.hh"
+# include "countStub.hh"
+# include "diDesc.hh"
+# include "label_inline.hh"
+# include "mapTable.hh"
+# include "nmethod_inline.hh"
+# include "nmln.hh"
+# include "os_includes.hh"
+# include "sendDesc.hh"
+# include "zone.hh"
 
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)

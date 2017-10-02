@@ -1,11 +1,11 @@
+#pragma once
 /* Sun-$Revision: 30.11 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "types.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 
@@ -116,6 +116,12 @@ public:
 # endif
 
   void fixConversionStack(char* pc, char* sp);
-# include "_conversion_pd.hh.incl"
+# if defined(__ppc__)
+# include "conversion_ppc.hh"
+# elif defined(__i386__)
+# include "conversion_i386.hh"
+# else
+# include "conversion_sparc.hh"
+# endif
 };
 

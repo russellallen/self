@@ -1,3 +1,4 @@
+#pragma once
 /* Sun-$Revision: 30.2 $ */
 
 /* Copyright 2007 David Ungar
@@ -5,10 +6,8 @@
 
 // Contains platform-specific declarations for quartzWindow.
 // This file is included into middle of class declaration.
+# include "platformWindow.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # if !defined(QUARTZ_LIB)
@@ -47,10 +46,6 @@ class WindowSet  /* AllStatic */ {
 
 // remove Carbon macros to avoid name collisions
 #  undef assert
-#  undef assert_type
-#  undef assert_smi
-#  undef assert_byteVector
-#  undef assert_objVector
 
 #  include "asserts.hh"
 #  undef verify

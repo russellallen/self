@@ -4,9 +4,8 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
   
-# pragma implementation "regs_ppc.hh"
   
-# include "_regs_ppc.cpp.incl"
+# include "regs.hh"
 
 
 // change Location enum in regs_ppc.h if you change this!

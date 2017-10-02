@@ -3,8 +3,15 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "parser.hh"
-# include "_parser.cpp.incl"
+# include "generation_inline.hh"
+# include "parser.hh"
+# include "process.hh"
+# include "scanner.hh"
+# include "send.hh"
+# include "slot.hh"
+# include "slotType.hh"
+# include "space_inline.hh"
+# include "stringTable.hh"
 
 DO_NOT_CROSS_COMPILE 
   

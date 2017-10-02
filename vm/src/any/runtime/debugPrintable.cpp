@@ -3,9 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "debugPrintable.hh"
 
-# include "_debugPrintable.cpp.incl"
+# include "debugPrintable.hh"
+# include "generation_inline.hh"
+# include "oop_inline.hh"
+# include "print.hh"
+# include "regs.hh"
+# include "space_inline.hh"
 
 # if  GENERATE_DEBUGGING_AIDS
 void pp(void* p) {

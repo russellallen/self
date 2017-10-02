@@ -1,3 +1,4 @@
+#pragma once
 # ifdef __i386__
 /* Sun-$Revision: 1.4 $ */
 
@@ -7,9 +8,6 @@
 // This file is INCLUDED into the middle of the frame class.
 
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
  private:

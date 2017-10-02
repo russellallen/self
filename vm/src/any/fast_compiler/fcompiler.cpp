@@ -4,8 +4,25 @@
    See the LICENSE file for license information. */
 
 
-# pragma implementation "fcompiler.hh"
-# include "_fcompiler.cpp.incl"
+# include "codeGen.hh"
+# if defined(__ppc__)
+# include "codeGen_inline_ppc.hh"
+# elif defined(__i386__)
+# include "codeGen_inline_i386.hh"
+# else
+# include "codeGen_inline_sparc.hh"
+# endif
+# include "complexLookup.hh"
+# include "fcompiler.hh"
+# include "fscope.hh"
+# include "itimer.hh"
+# include "print.hh"
+# include "registerState.hh"
+# include "regs.hh"
+# include "scopeDescRecorder.hh"
+# include "selfMonitor.hh"
+# include "slotRef.hh"
+# include "timer.hh"
 
 # ifdef FAST_COMPILER
 

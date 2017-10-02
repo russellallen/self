@@ -1,3 +1,4 @@
+#pragma once
 # ifdef __ppc__
 /* Sun-$Revision: 30.10 $ */
 
@@ -6,9 +7,6 @@
 
 # ifdef FAST_COMPILER
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // returns register string with appropriate bit set if l is a location

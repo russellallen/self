@@ -13,8 +13,17 @@
   
 # define STDIN     0
   
-# pragma implementation "unixPrims.hh"
-# include "_unixPrims.cpp.incl"
+# include "unixPrims.hh"
+# include "allocation.hh"
+# include "asserts.hh"
+# include "fctProxyOop.hh"
+# include "generation_inline.hh"
+# include "glueSupport.hh"
+# include "itimer.hh"
+# include "quartzWindow.hh"
+# include "space_inline.hh"
+# include "stringMap.hh"
+# include "vmStrings.hh"
 
   
 

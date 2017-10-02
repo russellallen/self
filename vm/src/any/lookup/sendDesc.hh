@@ -1,11 +1,19 @@
+#pragma once
 /* Sun-$Revision: 30.11 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "blist.hh"
+# include "config.hh"
+# include "fields.hh"
+# include "kinds.hh"
+# include "machineCache.hh"
+# include "registerString.hh"
+# include "runtime.hh"
+# include "stringOop.hh"
+# include "trapdoors.hh"
+# include "zone.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
@@ -21,7 +29,13 @@
 
 
 class sendDesc {
- # include "_sendDesc_pd.hh.incl"
+# if defined(__ppc__)
+# include "sendDesc_ppc.hh"
+# elif defined(__i386__)
+# include "sendDesc_i386.hh"
+# else
+# include "sendDesc_sparc.hh"
+# endif
  
  enum { addr_desc_offset = jump_address_offset };
 

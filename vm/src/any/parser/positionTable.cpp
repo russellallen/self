@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "positionTable.hh"
-# include "_positionTable.cpp.incl"
+# include "generation_inline.hh"
+# include "positionTable.hh"
+# include "space_inline.hh"
+# include "stringMap.hh"
 
 void ByteCodePositionTable::GenCode(fint offset, fint length, fint c) {
   Unused(c);

@@ -3,10 +3,32 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "codeGen_sparc.hh"
-# pragma implementation "codeGen_inline_sparc.hh"
 
-# include "_codeGen_sparc.cpp.incl"
+# include "asm_inline.hh"
+# include "blockOop_inline.hh"
+# include "byteVectorOop.hh"
+# include "codeGen_inline_sparc.hh"
+# include "complexLookup.hh"
+# include "error.hh"
+# include "fcompiler.hh"
+# include "fields.hh"
+# include "frame_format.hh"
+# include "interruptedCtx.hh"
+# include "label_inline.hh"
+# include "nlrSupport.hh"
+# include "nmethod_inline.hh"
+# include "objVectorMap.hh"
+# include "os_includes.hh"
+# include "prim.hh"
+# include "process.hh"
+# include "recompile.hh"
+# include "registerState.hh"
+# include "runtime.hh"
+# include "slotRef.hh"
+# include "stack.hh"
+# include "universe.hh"
+# include "vframe.hh"
+# include "vmStrings.hh"
 
 # ifdef FAST_COMPILER
 

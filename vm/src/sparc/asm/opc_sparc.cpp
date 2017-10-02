@@ -28,8 +28,8 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.   */
    slower, but would mess up some macros a bit.  xoxorich. */
 
 
-# pragma implementation "sparc.hh"
-#include "_opc_sparc.cpp.incl"
+# include "sparc.hh"
+# include "top.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

@@ -4,7 +4,24 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# include "_interruptedCtx_ppc.cpp.incl"
+# include "unixPrims.hh"
+# include "fields.hh"
+# include "files.hh"
+# include "frame.hh"
+# include "interruptedCtx.hh"
+# include "label_inline.hh"
+# include "monitorHooks.hh"
+# include "nmethod_inline.hh"
+# include "os_includes.hh"
+# include "process.hh"
+# include "scanner.hh"
+# include "sig.hh"
+# include "signalBlocker.hh"
+# include "stack.hh"
+# include "uncommonBranch.hh"
+# include "universe.hh"
+# include "vframe.hh"
+# include "zone.hh"
 
 char* InterruptedContext::next_pc(){ return NULL; }
 void InterruptedContext::set_next_pc(void *) {}

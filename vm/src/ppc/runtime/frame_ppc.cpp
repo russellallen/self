@@ -4,9 +4,10 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "frame_ppc.hh"
 
-# include "_frame_ppc.cpp.incl"
+# include "frame_inline.hh"
+# include "oopClosures.hh"
+# include "registerLocator.hh"
 
 
 frame* frame::sender() { return my_sp()->link()->as_frame(); }

@@ -1,7 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "key.hh"
+# include "ncode.hh"
+# include "nmln.hh"
+# include "scopeDesc.hh"
+# include "zone.hh"
 
 /* 
   I almost added some code to search all scopes to see if an nmethod
@@ -12,9 +18,6 @@
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # define FOR_EACH_SCOPE(SCOPES, VAR)\

@@ -3,9 +3,12 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "uncommonBranch_sparc.hh"
 
-# include "_uncommonBranch_sparc.cpp.incl" 
+# include "allocation.hh"
+# include "fields.hh"
+# include "label_inline.hh"
+# include "nmethod.hh"
+# include "uncommonBranch.hh"
 
 
 # if defined(SIC_COMPILER)

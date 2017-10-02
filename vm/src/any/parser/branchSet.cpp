@@ -3,9 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "branchSet.hh"
-# pragma implementation "branchSet_inline.hh"
-# include "_branchSet.cpp.incl"
+# include "branchSet_inline.hh"
+# include "generation_inline.hh"
+# include "labelSet_inline.hh"
+# include "objVectorOop.hh"
+# include "space_inline.hh"
 
 
 bool BranchInfo::ResolveBranch( AbstractByteCode* b, 

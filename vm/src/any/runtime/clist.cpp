@@ -3,8 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "clist.hh"
-# include "_clist.cpp.incl"
+# include "clist.hh"
+# include "generation_inline.hh"
+# include "space_inline.hh"
 
 CList* CList::prependList(CList* l) {
   assert(this != l || this == EMPTY, "prepending list to itself");

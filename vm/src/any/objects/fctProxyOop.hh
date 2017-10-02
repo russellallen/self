@@ -1,11 +1,11 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "proxyOop.hh"
+# include "stringMap.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // A fctProxy represents a foreign function in the Self world. It contains an

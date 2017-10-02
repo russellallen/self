@@ -3,9 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "fields_sparc.hh"  
 
-# include "_fields_sparc.cpp.incl"
+# include "fields.hh"
+# include "label_inline.hh"
+# include "space_inline.hh"
+# include "zone.hh"
 
 
 

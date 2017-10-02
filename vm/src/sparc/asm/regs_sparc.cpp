@@ -3,10 +3,8 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
   
-# pragma implementation "regs_sparc.hh"
 
-# include "_regs_sparc.cpp.incl"
-
+# include "regs.hh"
 
 Location IArgRegisters[] = {
   IArg1, IArg2, IArg3, IArg4, IArg5,

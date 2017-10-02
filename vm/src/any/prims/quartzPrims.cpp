@@ -3,7 +3,6 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "quartzPrims.hh"
 
 # if defined(QUARTZ_LIB)
 
@@ -33,7 +32,12 @@
 # endif
 
 
-# include "_quartzPrims.cpp.incl"
+# include "generation_inline.hh"
+# include "quartzPrims.hh"
+# include "os.hh"
+# include "platformWindow.hh"
+# include "quartzWindow.hh"
+# include "space_inline.hh"
 
 # ifndef DYNAMIC
   // Removed to avoid warnings in Tiger -- dmu 5/05

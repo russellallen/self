@@ -3,10 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "asm_sparc.hh"
-# pragma implementation "asm_inline_sparc.hh"  
   
-# include "_asm_sparc.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "asm_inline.hh"
+# include "fcompiler.hh"
+# include "label_inline.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

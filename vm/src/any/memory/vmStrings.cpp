@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "vmStrings.hh"
-# include "_vmStrings.cpp.incl"
+# include "generation_inline.hh"
+# include "space_inline.hh"
+# include "stringMap.hh"
+# include "vmStrings.hh"
 
 stringOop VMString[LAST_VM_STRING];
 

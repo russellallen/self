@@ -1,11 +1,16 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "debug.hh"
+# include "floatOop.hh"
+# include "map.hh"
+# include "memOop_inline.hh"
+# include "oop.hh"
+# include "smiOop.hh"
+# include "universe.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 inline Map* oopClass::map() {

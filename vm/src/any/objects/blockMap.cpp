@@ -3,8 +3,17 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "blockMap.hh"
-# include "_blockMap.cpp.incl"
+# include "allocation.hh"
+# include "blockMap.hh"
+# include "blockOop_inline.hh"
+# include "enumeration.hh"
+# include "frame.hh"
+# include "label_inline.hh"
+# include "mirrorOop.hh"
+# include "slotsOop.hh"
+# include "stringMap.hh"
+# include "vframe.hh"
+# include "vframeOop.hh"
 
 void blockMap::init(stringOop name, slotsOop method) {
   Memory->store((oop*)&valueMethodName, oop(name));

@@ -1,11 +1,11 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "asm_inline.hh"
+# include "label.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)

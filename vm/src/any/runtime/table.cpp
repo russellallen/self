@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "table.hh"
-# include "_table.cpp.incl"
+# include "generation_inline.hh"
+# include "objVectorOop.hh"
+# include "space_inline.hh"
+# include "table.hh"
 
 TableElem* Table::find(CListEntry* k) {
   assert(k, "shouldn't be comparing zeros");

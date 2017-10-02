@@ -5,9 +5,8 @@
 
 #ifdef SIC_COMPILER
 
-# pragma implementation "slist.hh"
-# include "_slist.cpp.incl"
-  
+# include "slist.hh"
+ 
   SListElem* SList::findL(void* p) {
     for (SListElem* e = headL(); e; e = e->nextL()) {
       if (e->dataL() == p) return e;

@@ -1,11 +1,12 @@
+#pragma once
 /* Sun-$Revision: 30.6 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "registerString.hh"
+# include "regs.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # ifdef SIC_COMPILER
@@ -34,7 +35,13 @@ private:
   void grow(fint desiredIndex);
   friend fint findFirstUnused(LongRegisterString** strings, fint len, fint start);
 
-# include "_longRegString_pd.hh.incl"
+# if defined(__ppc__)
+# include "longRegString_ppc.hh"
+# elif defined(__i386__)
+# include "longRegString_i386.hh"
+# else
+# include "longRegString_sparc.hh"
+# endif
 
 };
 

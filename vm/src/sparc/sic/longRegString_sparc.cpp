@@ -3,9 +3,12 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "longRegString_sparc.hh"
 
-# include "_longRegString_sparc.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "bitVector.hh"
+# include "label_inline.hh"
+# include "longRegString.hh"
+# include "sic.hh"
 
 # ifdef SIC_COMPILER
 

@@ -3,8 +3,30 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "zone.hh"
-# include "_zone.cpp.incl"
+# include "allocation.hh"
+# include "cacheStub_inline.hh"
+# include "codeTable.hh"
+# include "countStub.hh"
+# include "debug.hh"
+# include "errorCodes.hh"
+# include "fprofiler.hh"
+# include "frame.hh"
+# include "interruptedCtx.hh"
+# include "itimer.hh"
+# include "label_inline.hh"
+# include "machineCache.hh"
+# include "mirrorOop.hh"
+# include "nmethod_inline.hh"
+# include "nprofiler.hh"
+# include "os_includes.hh"
+# include "print.hh"
+# include "selfMonitor.hh"
+# include "spaceSize.hh"
+# include "timer.hh"
+# include "trapdoors.hh"
+# include "util.hh"
+# include "zone.hh"
+# include "zoneHeap.hh"
 
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)

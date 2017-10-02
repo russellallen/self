@@ -4,9 +4,9 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "framePieces_ppc.hh"
 
-# include "_framePieces_ppc.cpp.incl"
+# include "framePieces_inline.hh"
+# include "label_inline.hh"
 
 
 oop* ppc_sp::locals() {

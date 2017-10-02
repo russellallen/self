@@ -6,7 +6,6 @@
    
 // Mac Quartz implementation:
 
-# pragma implementation
 
 # if defined(QUARTZ_LIB) 
 
@@ -36,7 +35,13 @@
 # endif
 
 
-# include "_quartzWindow.cpp.incl"
+# include "itimer.hh"
+# include "label_inline.hh"
+# include "quartzWindow.hh"
+# include "monitor.hh"
+# include "signalBlocker.hh"
+# include "space_inline.hh"
+# include "xlibPrims.hh"
 
 
 

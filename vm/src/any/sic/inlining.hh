@@ -1,15 +1,14 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "types.hh"
 
 // helper functions to support various inlining strategies, cost estimates etc.
 
 # ifdef SIC_COMPILER
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
   typedef bool (*checkLocalSendFn)(stringOop sel);

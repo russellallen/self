@@ -1,11 +1,12 @@
+#pragma once
 /* Sun-$Revision: 30.11 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "mapOop.hh"
+# include "memOop_inline.hh"
+# include "universe.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 inline space* universe::survivor_space(memOop p,

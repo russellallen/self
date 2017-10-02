@@ -1,11 +1,11 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "debug.hh"
+# include "top.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // slotType describes each slot's properties (in the map) 

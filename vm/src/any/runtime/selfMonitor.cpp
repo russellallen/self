@@ -3,9 +3,17 @@
 /* Copyright 1998-2006 Sun Microsystems, Inc.
    See the LICENSE file for license information. */
 
-# pragma implementation "selfMonitor.hh"
 
-# include "_selfMonitor.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "frame.hh"
+# include "interruptedCtx.hh"
+# include "itimer.hh"
+# include "monitorHooks.hh"
+# include "nmethod.hh"
+# include "nprofiler.hh"
+# include "recompile.hh"
+# include "selfMonitor.hh"
+# include "signalBlocker.hh"
 
 
 // control structures (hah, hah!)

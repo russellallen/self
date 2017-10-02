@@ -5,9 +5,13 @@
    See the LICENSE file for license information. */
 
 
-# pragma implementation "countPattern_i386.hh"
-# include "_countPattern_i386.cpp.incl"
 
+# include "asm_inline.hh"
+# include "countPattern.hh"
+# include "fields.hh"
+# include "label_inline.hh"
+# include "regs.hh"
+# include "zone.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
  

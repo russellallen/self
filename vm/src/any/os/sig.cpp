@@ -3,11 +3,17 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "sig.hh"
-# pragma implementation "sig_abstract.hh"
-# pragma implementation "sig_inline.hh"
 
-# include "_sig.cpp.incl"
+# include "unixPrims.hh"
+# include "interruptedCtx.hh"
+# include "itimer.hh"
+# include "label_inline.hh"
+# include "nlrSupport.hh"
+# include "os_includes.hh"
+# include "shell.hh"
+# include "sig.hh"
+# include "signalBlocker.hh"
+# include "uncommonBranch.hh"
 
 
 VMStringsIndex PendingSelfSignals::_name [n_real_SelfSignals];

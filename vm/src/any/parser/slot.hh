@@ -1,11 +1,10 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "expr.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // Slots are used by the parser to represent the slots of objects being

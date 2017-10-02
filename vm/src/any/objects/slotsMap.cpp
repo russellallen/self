@@ -3,8 +3,21 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "slotsMap.hh"
-# include "_slotsMap.cpp.incl"
+# include "assignmentOop.hh"
+# include "byteVectorOop.hh"
+# include "debug.hh"
+# include "enumeration.hh"
+# include "errorCodes.hh"
+# include "label_inline.hh"
+# include "mapOop.hh"
+# include "mapTable.hh"
+# include "mirrorOop.hh"
+# include "slotsMap.hh"
+# include "space_inline.hh"
+# include "stringMap.hh"
+# include "stringOop.hh"
+# include "vmStrings.hh"
+# include "zone.hh"
 
 // Add a slot to a copy, respecting all invariants.
 // Return mark on error, failedAllocationOop if ran out of space and 

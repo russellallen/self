@@ -3,8 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "ageTable.hh"
-# include "_ageTable.cpp.incl"
+# include "ageTable.hh"
+# include "generation_inline.hh"
+# include "space_inline.hh"
 
 ageTable::ageTable() { clear(); }
 

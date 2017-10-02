@@ -3,8 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "glueSupport.hh"
-# include "_glueSupport.cpp.incl"
+# include "errorCodes.hh"
+# include "generation_inline.hh"
+# include "glueDefs.hh"
+# include "glueSupport.hh"
+# include "space_inline.hh"
 
 oop check_glue_return(oop value) {
   // Called by debug version of glue functions. Simply verifies that

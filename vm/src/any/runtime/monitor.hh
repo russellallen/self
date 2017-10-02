@@ -1,11 +1,18 @@
+#pragma once
 /* Sun-$Revision: 30.8 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "asserts.hh"
+# include "monitorHooks.hh"
+# include "monitorPieces.hh"
+# include "monitorWindow.hh"
+# include "os.hh"
+# include "stringUtil.hh"
+# include "top.hh"
+# include "types.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // monitor monitors system activity ("Self spy")

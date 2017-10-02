@@ -4,6 +4,4 @@
    See the LICENSE file for license information. */
 
   
-# pragma implementation "fields.hh"
-# include "_fields.cpp.incl"
-
+# include "fields.hh"

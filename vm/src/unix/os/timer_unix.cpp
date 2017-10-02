@@ -3,9 +3,8 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "timer_unix.hh"
 
-# include "_timer_unix.cpp.incl"
+# include "timer.hh"
 
 // gdb 4.7 has this nasty bug causing lots of sig 8s after evaluating stuff
 // from the command line.  Set workAroundSignal8Bug to true to get rid of

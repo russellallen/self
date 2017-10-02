@@ -1,3 +1,4 @@
+#pragma once
 # ifdef __ppc__
 /* Sun-$Revision: 30.10 $ */
 
@@ -7,9 +8,6 @@
 
 # if   !GENERATE_DEBUGGING_AIDS
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 # endif
 

@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "files.hh"
-# include "_files.cpp.incl"
+# include "debug.hh"
+# include "files.hh"
+# include "os_includes.hh"
+# include "stringUtil.hh"
 
 FileTable* Files;
 

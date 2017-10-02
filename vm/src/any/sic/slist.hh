@@ -1,15 +1,15 @@
+#pragma once
 /* Sun-$Revision: 30.8 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "types.hh"
 
 // Yet another version of lists, this one for the SIC.
 // The "L" business is needed to get C++ to type-check correctly
 // (otherwise myList->append(anyPointer) happily matches SList::append)
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # ifdef SIC_COMPILER

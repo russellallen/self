@@ -1,3 +1,4 @@
+#pragma once
 # ifdef __ppc__
 /* Sun-$Revision: 30.12 $ */
 
@@ -7,9 +8,6 @@
 // This file is INCLUDED into the middle of the frame class.
 
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // See frame_format_ppc.h

@@ -5,8 +5,19 @@
 
 # ifdef XLIB
  
-# pragma implementation "xlibPrims.hh"
-# include "_xlibPrims.cpp.incl"
+# include "debug.hh"
+# include "glueSupport.hh"
+# include "interruptedCtx.hh"
+# include "label_inline.hh"
+# include "monitor.hh"
+# include "os_includes.hh"
+# include "process.hh"
+# include "sig.hh"
+# include "signalBlocker.hh"
+# include "space_inline.hh"
+# include "stack.hh"
+# include "unixPrims.hh"
+# include "xlibPrims.hh"
 
   const char* Display_seal = "Display";
 

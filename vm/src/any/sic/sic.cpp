@@ -3,8 +3,30 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "sic.hh"
-# include "_sic.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "asm.hh"
+# include "basicBlock_inline.hh"
+# include "complexLookup.hh"
+# include "genHelper.hh"
+# include "glueSupport.hh"
+# include "inlining.hh"
+# include "itimer.hh"
+# include "nlrSupport.hh"
+# include "node.hh"
+# include "nodeGen.hh"
+# include "preg.hh"
+# include "print.hh"
+# include "recompile.hh"
+# include "regAlloc.hh"
+# include "registerString.hh"
+# include "rscope.hh"
+# include "scopeDescRecorder.hh"
+# include "selfMonitor.hh"
+# include "sic.hh"
+# include "sicScope.hh"
+# include "slotRef.hh"
+# include "spaceSize.hh"
+# include "timer.hh"
 
 # ifdef SIC_COMPILER
 

@@ -1,14 +1,16 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "asm_inline.hh"
+# include "fscope.hh"
+# include "simpleLookup_inline.hh"
+# include "types.hh"
 
 # ifdef FAST_COMPILER
 
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // code generation interface for the NIC
@@ -118,7 +120,13 @@ class CodeGen: public ResourceObj {
   static PrimDesc *intrCheck(), *blockClone();
 
 
-# include "_codeGen_pd.hh.incl"
+# if defined(__ppc__)
+# include "codeGen_ppc.hh"
+# elif defined(__i386__)
+# include "codeGen_i386.hh"
+# else
+# include "codeGen_sparc.hh"
+# endif
 };
 
 # endif // FAST_COMPILER

@@ -3,8 +3,12 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "nameDesc.hh"
-# include "_nameDesc.cpp.incl"
+# include "asm_inline.hh"
+# include "blockOop_inline.hh"
+# include "label_inline.hh"
+# include "nameDesc.hh"
+# include "print.hh"
+# include "regs.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

@@ -1,11 +1,16 @@
+#pragma once
 /* Sun-$Revision: 30.11 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "blist.hh"
+# include "defUse_inline.hh"
+# include "regs.hh"
+# include "scopeDesc.hh"
+# include "slist.hh"
+# include "types.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # ifdef SIC_COMPILER

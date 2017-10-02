@@ -1,11 +1,12 @@
+#pragma once
 /* Sun-$Revision: 30.15 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "rSet.hh"
+# include "top.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 class space: public CHeapObj {

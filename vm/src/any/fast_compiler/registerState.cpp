@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "registerState.hh"
-# include "_registerState.cpp.incl"
+# include "asm_inline.hh"
+# include "codeGen.hh"
+# include "fcompiler.hh"
+# include "registerState.hh"
 
 # ifdef FAST_COMPILER
 

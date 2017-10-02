@@ -3,8 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "zoneHeap.hh"
-# include "_zoneHeap.cpp.incl"
+# include "allocation.hh"
+# include "label_inline.hh"
+# include "nmethod.hh"
+# include "os.hh"
+# include "zoneHeap.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

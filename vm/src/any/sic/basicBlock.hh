@@ -1,11 +1,15 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "aNode.hh"
+# include "blist.hh"
+# include "debug.hh"
+# include "defUse.hh"
+# include "sic.hh"
+# include "slist.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // BBs (Basic Blocks) are used by the SIC to perform local optimizations and

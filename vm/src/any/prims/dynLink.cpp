@@ -3,9 +3,16 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "dynLink.hh"
-# include "_dynLink.cpp.incl"
-  
+# include "allocation.hh"
+# include "dynLink.hh"
+# include "fctProxyOop.hh"
+# include "generation_inline.hh"
+# include "glueSupport.hh"
+# include "macros.hh"
+# include "os_includes.hh"
+# include "space_inline.hh"
+# include "vmStrings.hh"
+ 
 # ifdef DYNLINK_SUPPORTED
 
   void initDynLinker(int argc, const char *argv[]) {

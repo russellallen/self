@@ -3,8 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "sendDesc_sparc.hh"
-# include "_sendDesc_sparc.cpp.incl"
+# include "label_inline.hh"
+# include "sendDesc.hh"
+# include "space_inline.hh"
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

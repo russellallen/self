@@ -3,8 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "print.hh"
-# include "_print.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "debugPrintable.hh"
+# include "label_inline.hh"
+# include "prim.hh"
+# include "print.hh"
+# include "slotRef.hh"
+# include "space_inline.hh"
 
 void printName(methodMap* mm, oop selector) {
   lprintf(sprintName(mm, selector));

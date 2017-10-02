@@ -3,10 +3,26 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "space.hh"
-# pragma implementation "space_inline.hh"
 
-# include "_space.cpp.incl"
+# include "blockOop_inline.hh"
+# include "byteVectorOop.hh"
+# include "enumeration.hh"
+# include "label_inline.hh"
+# include "mapOop.hh"
+# include "mapTable.hh"
+# include "mapVtbls.hh"
+# include "objVectorOop.hh"
+# include "os.hh"
+# include "os_includes.hh"
+# include "processOop.hh"
+# include "rSet.hh"
+# include "rSet_inline.hh"
+# include "search.hh"
+# include "space_inline.hh"
+# include "universe_inline.hh"
+# include "vframe.hh"
+# include "vframeOop.hh"
+# include "vmStrings.hh"
 
 void space::init_space(const char *n, int32 &size, char *bottom) {
   size = roundTo(size, idealized_page_size);

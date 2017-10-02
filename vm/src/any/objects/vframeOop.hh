@@ -1,11 +1,12 @@
+#pragma once
 /* Sun-$Revision: 30.8 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "slotsOop.hh"
+# include "vframe.hh"
+# include "vframeMap.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // A vframeOop represents a live activation object.  It contains enough

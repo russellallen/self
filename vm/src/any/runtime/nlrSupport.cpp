@@ -3,9 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "nlrSupport.hh"
 
-# include "_nlrSupport.cpp.incl"
+# include "frame.hh"
+# include "label_inline.hh"
+# include "monitorHooks.hh"
+# include "nlrSupport.hh"
+# include "nmethod.hh"
+# include "space_inline.hh"
 
 
 // helpers for assembly routines

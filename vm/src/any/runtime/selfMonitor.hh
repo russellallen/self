@@ -1,3 +1,4 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1998-2006 Sun Microsystems, Inc.
@@ -5,11 +6,8 @@
    
 // This file contains declarations for a Self-specific spy.
 // Monitor monitors system activity ("Self spy")
-   
-
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
+# include "monitor.hh"
+  
 
 
 

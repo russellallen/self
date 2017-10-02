@@ -3,8 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "markOop.hh"
-# include "_markOop.cpp.incl"
+# include "generation_inline.hh"
+# include "markOop.hh"
+# include "space_inline.hh"
 
 void markOopClass::print() {
   lprintf("Mark#0x%lx: hash: %ld; age: %ld",

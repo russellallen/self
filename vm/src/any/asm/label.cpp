@@ -3,9 +3,7 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "label.hh"
-# pragma implementation "label_inline.hh"
-# include "_label.cpp.incl"
+# include "label_inline.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

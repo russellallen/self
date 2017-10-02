@@ -3,8 +3,18 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "uncommonBranch.hh"
-# include "_uncommonBranch.cpp.incl"
+# include "aCompiler.hh"
+# include "abstract_interpreter_inline.hh"
+# include "allocation.hh"
+# include "countStub.hh"
+# include "fields.hh"
+# include "nprofiler.hh"
+# include "os_includes.hh"
+# include "recompile.hh"
+# include "runtime.hh"
+# include "sendDesc.hh"
+# include "uncommonBranch.hh"
+# include "vframe.hh"
 
 
 # if !defined(SIC_COMPILER)

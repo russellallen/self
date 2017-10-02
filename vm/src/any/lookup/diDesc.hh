@@ -1,14 +1,14 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
+# include "machineCache.hh"
+# include "runtime.hh"
 
 
 
@@ -16,8 +16,13 @@
 class DIDesc {
  public:
 
-  # include "_diDesc_pd.hh.incl"
-  
+# if defined(__ppc__)  
+# include "diDesc_ppc.hh"
+# elif defined(__i386__)
+# include "diDesc_i386.hh"
+# else
+# include "diDesc_sparc.hh"
+# endif
   static DIDesc* DIDesc_from_addrDesc_addr(pc_t* a) { 
     return (DIDesc*) ((char*)a - di_addr_desc_offset);
   }

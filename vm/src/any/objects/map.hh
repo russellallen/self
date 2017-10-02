@@ -1,11 +1,18 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "floatOop.hh"
+# include "mapOop.hh"
+# include "mapVtbls.hh"
+# include "oopsOop.hh"
+# include "slotIterator.hh"
+# include "slotList.hh"
+# include "smiOop.hh"
+# include "universe_inline.hh"
+# include "vmStrings.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // Map*'s are UNTAGGED! but mapOop's are tagged.

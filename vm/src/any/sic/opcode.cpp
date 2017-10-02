@@ -3,8 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "opcode.hh"
-# include "_opcode.cpp.incl"
+# include "generation_inline.hh"
+# include "opcode.hh"
+# include "space_inline.hh"
+# include "stringOop.hh"
+# include "vmStrings.hh"
 
 const char* BranchOpName[] = {
   "Bra",

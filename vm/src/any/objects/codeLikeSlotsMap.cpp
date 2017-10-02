@@ -3,8 +3,17 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "codeLikeSlotsMap.hh"
-# include "_codeLikeSlotsMap.cpp.incl"
+# include "blockMap.hh"
+# include "blockOop.hh"
+# include "blockOop_inline.hh"
+# include "byteCodes.hh"
+# include "codeLikeSlotsMap.hh"
+# include "enumeration.hh"
+# include "generation_inline.hh"
+# include "os_includes.hh"
+# include "scanner.hh"
+# include "space_inline.hh"
+# include "vmStrings.hh"
 
 fint codeLikeSlotsMap::arg_count() {
   fint argc = 0;

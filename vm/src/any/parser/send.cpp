@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "send.hh"
-# include "_send.cpp.incl"
+# include "generation_inline.hh"
+# include "scanner.hh"
+# include "send.hh"
+# include "space_inline.hh"
 
 # define check(e)                                                             \
     if ((e) == false) return false

@@ -3,9 +3,27 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "map.hh"
 
-# include "_map.cpp.incl" 
+# include "abstract_interpreter_inline.hh"
+# include "assignmentMap.hh"
+# include "assignmentOop.hh"
+# include "blockOop_inline.hh"
+# include "codeSlotsMap.hh"
+# include "debug.hh"
+# include "enumeration.hh"
+# include "glueSupport.hh"
+# include "label_inline.hh"
+# include "map.hh"
+# include "mapTable.hh"
+# include "mapVtbls.hh"
+# include "mirrorOop.hh"
+# include "monitorPieces.hh"
+# include "nprofiler.hh"
+# include "objVectorOop.hh"
+# include "slotDesc.hh"
+# include "space_inline.hh"
+# include "stringOop.hh"
+# include "zone.hh"
 
 Map* Map::create_map(fint size, slotList *slots, Map* mm, oop *obj) {
   fint slotCount= slots ? slots->length() : 0;

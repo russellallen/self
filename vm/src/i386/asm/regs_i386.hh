@@ -1,12 +1,10 @@
+#pragma once
 # ifdef __i386__
 /* Sun-$Revision: 1.6 $ */
 
 /* Copyright 1992-2012 AUTHORS.x
    See the LICENSE file for license information. */
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // CAVEAT: the info here is redundantly contained in other files, including

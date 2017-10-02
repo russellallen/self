@@ -1,11 +1,14 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "blist.hh"
+# include "pcDesc.hh"
+# include "scopeDesc.hh"
+# include "vframe.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // RScopes represent the inlined scopes of a nmethod during recompilation.

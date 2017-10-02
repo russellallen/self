@@ -3,8 +3,19 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "mirrorMap.hh"
-# include "_mirrorMap.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "blockOop_inline.hh"
+# include "codeSlotsMap.hh"
+# include "generation_inline.hh"
+# include "label_inline.hh"
+# include "mirrorMap.hh"
+# include "mirrorOop.hh"
+# include "oop_inline.hh"
+# include "slotsOop.hh"
+# include "space_inline.hh"
+# include "stringOop.hh"
+# include "stringTable.hh"
+# include "vmStrings.hh"
 
 mirrorOop mirrorMap::create_mirror(oop reflectee) {
   slotList* slots = new slotList(VMString[PARENT], 

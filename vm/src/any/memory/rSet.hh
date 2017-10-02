@@ -1,11 +1,11 @@
+#pragma once
 /* Sun-$Revision: 30.8 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "top.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 const int32 card_shift = 7; // wired in to scavenge_contents

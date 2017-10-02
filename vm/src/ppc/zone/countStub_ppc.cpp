@@ -4,8 +4,11 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "countStub_ppc.hh"
-# include "_countStub_ppc.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "countStub.hh"
+# include "nmethod.hh"
+# include "recompile.hh"
+# include "zone.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

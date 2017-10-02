@@ -4,9 +4,15 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation  "runtime_i386.hh"
 
-# include "_runtime_i386.cpp.incl"
+# include "debug.hh"
+# include "frame.hh"
+# include "frame_format.hh"
+# include "label_inline.hh"
+# include "objVectorOop.hh"
+# include "process.hh"
+# include "regs.hh"
+# include "runtime.hh"
 
 // Follows is a list of potential improvements to my I386 port of Self as of 5/16/06:
 // - Could use the SIMD instructions to speed searches for senders, implementors, etc. (search_i386.cpp).

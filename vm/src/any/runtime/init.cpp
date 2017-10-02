@@ -3,8 +3,14 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "init.hh"
-# include "_init.cpp.incl"
+# include "errorCodes.hh"
+# include "init.hh"
+# include "itimer.hh"
+# include "label_inline.hh"
+# include "os.hh"
+# include "sendDesc.hh"
+# include "slotIterator.hh"
+# include "space_inline.hh"
 
 // Add new initialization/finalization methods to the macro below; your
 // functions must be parameterless and must be named after the .c file

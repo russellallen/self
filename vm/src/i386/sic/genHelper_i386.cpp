@@ -4,9 +4,15 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "genHelper_i386.hh"
 
-# include "_genHelper_i386.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "asm_inline.hh"
+# include "genHelper.hh"
+# include "preg.hh"
+# include "recompile.hh"
+# include "sic.hh"
+# include "slotRef.hh"
+# include "target.hh"
 
 # if defined(SIC_COMPILER)
 

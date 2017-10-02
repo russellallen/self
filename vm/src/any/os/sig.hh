@@ -1,11 +1,11 @@
+#pragma once
 /* Sun-$Revision: 30.8 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "top.hh"
+# include "vmStrings.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // a portable interface to OS signals
@@ -137,7 +137,9 @@ class SignalInterface /* AllStatic */ {
   // Handle an OS signal for SIC not passed on to Self code, return true if handled
   static bool handle_SIC_OS_signal(int32 ossig, char* addr, int32 code);
  
-  
-  # include "_sig_pd.hh.incl"  
+ 
+//# if TARGET_OS_FAMLIY == UNIX_FAMILY 
+# include "sig_unix.hh"
+//# endif
 
 };

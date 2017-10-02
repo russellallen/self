@@ -3,9 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "labelSet.hh"
-# pragma implementation "labelSet_inline.hh"
-# include "_labelSet.cpp.incl"
+# include "byteCodes.hh"
+# include "generation_inline.hh"
+# include "labelSet_inline.hh"
+# include "space_inline.hh"
 
 
 LabelSet::LabelSet() {

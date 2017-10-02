@@ -1,13 +1,37 @@
+#pragma once
 /* Sun-$Revision: 30.19 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "aNode.hh"
+# include "basicBlock_inline.hh"
+# include "blist.hh"
+# include "debug.hh"
+# include "defUse_inline.hh"
+# include "kinds.hh"
+# include "label_inline.hh"
+# include "nameDesc.hh"
+# include "opcode.hh"
+# include "preg.hh"
+# include "sendDesc.hh"
+# include "sic.hh"
+# include "slist.hh"
+# include "aNode.hh"
+# include "basicBlock_inline.hh"
+# include "blist.hh"
+# include "debug.hh"
+# include "defUse_inline.hh"
+# include "kinds.hh"
+# include "label_inline.hh"
+# include "nameDesc.hh"
+# include "opcode.hh"
+# include "preg.hh"
+# include "sendDesc.hh"
+# include "sic.hh"
+# include "slist.hh"
 
 // This file defines the intermediate language used by the SIC
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 class Node;
@@ -239,7 +263,13 @@ class    CommentNode;           // for debugging
     virtual void print_succs(Node* n = NULL); // for debugging
     virtual void print_preds(Node* n = NULL); // for debugging
 
-# include "_basicNode_pd.hh.incl"
+# if defined(__ppc__)
+# include "basicNode_ppc.hh"
+# elif defined(__i386__)
+# include "basicNode_i386.hh"
+# else
+# include "basicNode_sparc.hh"
+# endif
   };
 
   // the NODE_COST junk is brought to you by the C++ ARM - no virtuals
@@ -300,7 +330,13 @@ class    CommentNode;           // for debugging
     void resetUnusedBit();
     void verifyAssignableParents();
 
-# include "_prologueNode_pd.hh.incl"
+# if defined(__ppc__)
+# include "prologueNode_ppc.hh"
+# elif defined(__i386__)
+# include "prologueNode_i386.hh"
+# else
+# include "prologueNode_sparc.hh"
+# endif
 
   };
 
@@ -1229,7 +1265,13 @@ class    CommentNode;           // for debugging
 // However, we can't do that on PPC - we use a primitive call instead.  As a result,
 // there's two different definitions of DeadEndNode. -mabdelmalek 1/03
 
-# include "_deadBlockNode_pd.hh.incl"
+# if defined(__ppc__)
+# include "deadBlockNode_ppc.hh"
+# elif defined(__i386__)
+# include "deadBlockNode_i386.hh"
+# else
+# include "deadBlockNode_sparc.hh"
+# endif
 
 
   class DeadEndNode : public PNode {

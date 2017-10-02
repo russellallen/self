@@ -1,13 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "regs.hh"
 
 # ifdef FAST_COMPILER
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 inline RegisterString& allocate(RegisterString& s1, RegisterString s2) {
@@ -45,7 +45,13 @@ void printRegister(Location r);
 void printAllocated(RegisterString r);
     
 
-# include "_registerString_pd.hh.incl"
+# if defined(__ppc__)
+# include "registerString_ppc.hh"
+# elif defined(__i386__)
+# include "registerString_i386.hh"
+# else
+# include "registerString_sparc.hh"
+# endif
 
 
 # endif // FAST_COMPILER

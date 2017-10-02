@@ -1,11 +1,12 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "process.hh"
+# include "top.hh"
+# include "universe.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // preserved objects are used to protect oops (or objects containing oops)

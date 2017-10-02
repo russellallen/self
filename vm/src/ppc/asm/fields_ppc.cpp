@@ -6,9 +6,11 @@
 
   
 
-# pragma implementation "fields_ppc.hh"
 
-# include "_fields_ppc.cpp.incl"
+# include "fields.hh"
+# include "label_inline.hh"
+# include "space_inline.hh"
+# include "zone.hh"
 
 
   

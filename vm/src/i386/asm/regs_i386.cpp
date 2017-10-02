@@ -4,9 +4,8 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
   
-# pragma implementation "regs_i386.hh"
   
-# include "_regs_i386.cpp.incl"
+# include "regs.hh"
 
 const char** RegisterNamesBySize[] = {ByteRegisterNames, ShortRegisterNames, RegisterNames};
 

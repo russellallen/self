@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "mapTable.hh"
-# include "_mapTable.cpp.incl"
+# include "generation_inline.hh"
+# include "mapTable.hh"
+# include "slotsMapDeps.hh"
+# include "space_inline.hh"
 
 /*
   Invariants:

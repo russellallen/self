@@ -3,8 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "search.hh"
-# include "_search.cpp.incl"
+# include "asserts.hh"
+# include "oop.hh"
+# include "search.hh"
 
 # undef  MIN
 # define MIN(a,b) ((a) < (b) ? (a) : (b) )

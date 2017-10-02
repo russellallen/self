@@ -3,10 +3,15 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "memOop.hh"
-# pragma implementation "memOop_inline.hh"
 
-# include "_memOop.cpp.incl"
+# include "generation_inline.hh"
+# include "map.hh"
+# include "mapTable.hh"
+# include "memOop_inline.hh"
+# include "oop_inline.hh"
+# include "slotsMapDeps.hh"
+# include "space_inline.hh"
+# include "vmStrings.hh"
 
 
 Map* memOopClass::map() { return addr()->_map->map_addr(); }

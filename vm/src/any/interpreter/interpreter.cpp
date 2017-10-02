@@ -3,8 +3,21 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "interpreter.hh"
-# include "_interpreter.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "byteCodes.hh"
+# include "codeSlotsMap.hh"
+# include "complexLookup.hh"
+# include "interpreter.hh"
+# include "interruptedCtx.hh"
+# include "kinds.hh"
+# include "label_inline.hh"
+# include "nlrSupport.hh"
+# include "prim.hh"
+# include "regs.hh"
+# include "runtime.hh"
+# include "sendDesc.hh"
+# include "shell.hh"
+# include "sig.hh"
 
 
 oop sneaky_method_argument_to_interpret;

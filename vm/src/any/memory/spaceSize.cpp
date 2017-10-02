@@ -3,9 +3,14 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation  "spaceSize.hh"
 
-# include "_spaceSize.cpp.incl"
+# include "generation_inline.hh"
+# include "glueSupport.hh"
+# include "slotList.hh"
+# include "spaceSize.hh"
+# include "space_inline.hh"
+# include "stringMap.hh"
+# include "universe.hh"
 
 unsigned long MaxHeapSize=        NMethodStart     - HeapStart;
 unsigned long MaxNMethodSize=     StubsStart       - NMethodStart;

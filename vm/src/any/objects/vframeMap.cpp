@@ -3,8 +3,19 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "vframeMap.hh"
-# include "_vframeMap.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "allocation.hh"
+# include "assignmentOop.hh"
+# include "codeLikeSlotsMap.hh"
+# include "codeSlotsMap.hh"
+# include "enumeration.hh"
+# include "label_inline.hh"
+# include "mirrorOop.hh"
+# include "objVectorOop.hh"
+# include "stringMap.hh"
+# include "vframe.hh"
+# include "vframeMap.hh"
+# include "vframeOop.hh"
 
 // all routines that call this macro that are called by primitives must
 // have the canWalkStack flag set in the primitive table so the

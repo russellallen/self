@@ -3,8 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "fctProxyMap.hh"
-# include "_fctProxyMap.cpp.incl"
+# include "byteVectorOop.hh"
+# include "fctProxyMap.hh"
+# include "fctProxyOop.hh"
+# include "generation_inline.hh"
+# include "space_inline.hh"
 
 
 fctProxyOop fctProxyMap::create_fctProxy() {

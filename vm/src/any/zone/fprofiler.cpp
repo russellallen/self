@@ -3,8 +3,18 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "fprofiler.hh"
-# include "_fprofiler.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "allocation.hh"
+# include "blockOop_inline.hh"
+# include "cacheStub_inline.hh"
+# include "codeSlotsMap.hh"
+# include "fprofiler.hh"
+# include "label_inline.hh"
+# include "oop_inline.hh"
+# include "os_includes.hh"
+# include "universe.hh"
+# include "vmStrings.hh"
+# include "zone.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

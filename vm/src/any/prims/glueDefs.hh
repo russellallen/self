@@ -1,11 +1,23 @@
+#pragma once
  /* Sun-$Revision: 30.15 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "byteVectorOop.hh"
+# include "errorCodes.hh"
+# include "floatOop.hh"
+# include "glueSupport.hh"
+# include "interruptedCtx.hh"
+# include "macros.hh"
+# include "objVectorOop.hh"
+# include "os_includes.hh"
+# include "proxyOop.hh"
+# include "signalBlocker.hh"
+# include "smiOop.hh"
+# include "stringMap.hh"
+# include "universe.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 /* This file contains the bulk of C and C++ glue. The top part of this file

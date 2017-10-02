@@ -3,9 +3,28 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "nmethodScopes.hh"
 
-# include "_nmethodScopes.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "allocation.hh"
+# include "asm_inline.hh"
+# include "byteCodes.hh"
+# include "cacheStub_inline.hh"
+# include "codeSlotsMap.hh"
+# include "codeTable.hh"
+# include "debug.hh"
+# include "fcompiler.hh"
+# include "fprofiler.hh"
+# include "frame.hh"
+# include "machineCache.hh"
+# include "nmethodScopes.hh"
+# include "nmethod_inline.hh"
+# include "print.hh"
+# include "recompile.hh"
+# include "scopeDesc.hh"
+# include "scopeDescRecorder.hh"
+# include "sendDesc.hh"
+# include "simpleLookup_inline.hh"
+# include "zone.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

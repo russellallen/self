@@ -1,15 +1,16 @@
+#pragma once
 /* Sun-$Revision: 30.12 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "addrDesc.hh"
+# include "fields.hh"
+# include "label.hh"
 
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // base class for assembler (see BaseAssembler::doAddOffset)

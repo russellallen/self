@@ -4,10 +4,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "framePieces_i386.hh"
 
-# include "_framePieces_i386.cpp.incl"
-
+# include "framePieces_inline.hh"
+# include "label_inline.hh"
 
 i386_sp* i386_sp::push_new_sp( char* pc,
                              fint size_in_oops,

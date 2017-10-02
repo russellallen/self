@@ -3,8 +3,29 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "conversion.hh"
-# include "_conversion.cpp.incl"
+# include "allocation.hh"
+# include "blockOop_inline.hh"
+# include "codeSlotsMap.hh"
+# include "codeTable.hh"
+# include "complexLookup.hh"
+# include "conversion.hh"
+# include "debug.hh"
+# include "fcompiler.hh"
+# include "frame.hh"
+# include "interpreter.hh"
+# include "label_inline.hh"
+# include "nlrSupport.hh"
+# include "nmethod_inline.hh"
+# include "prim.hh"
+# include "process.hh"
+# include "registerLocator.hh"
+# include "slotRef.hh"
+# include "space_inline.hh"
+# include "stack.hh"
+# include "table.hh"
+# include "uncommonBranch.hh"
+# include "vframe.hh"
+# include "vframeOop.hh"
 
 
 void Conversion::doit() {

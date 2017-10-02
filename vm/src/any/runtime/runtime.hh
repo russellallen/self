@@ -1,11 +1,11 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "regs.hh"
+# include "top.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // interface between C and assembly routines 
@@ -116,5 +116,11 @@ void fillRegisterValue(Location loc, oop b);
 
 void set_flags_for_platform();
 
-# include "_runtime_pd.hh.incl"
+# if defined(__ppc__)
+# include "runtime_ppc.hh"
+# elif defined(__i386__)
+# include "runtime_i386.hh"
+# else
+# include "runtime_sparc.hh"
+# endif
 

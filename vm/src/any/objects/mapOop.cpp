@@ -3,8 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "mapOop.hh"
-# include "_mapOop.cpp.incl" 
+# include "blockMap.hh"
+# include "generation_inline.hh"
+# include "map.hh"
+# include "mapOop.hh"
+# include "space_inline.hh"
 
 bool mapOopClass::equal(mapOop other) {
   if (this == other) return true;

@@ -4,10 +4,12 @@
    See the LICENSE file for license information. */
 
   
-# pragma implementation "cacheStub_sparc.hh"
-# pragma implementation "cacheStub_inline_sparc.hh"
-# include "_cacheStub_sparc.cpp.incl"
-  
+# include "asm_inline.hh"
+# include "cacheStub_inline.hh"
+# include "label_inline.hh"
+# include "nmethod_inline.hh"
+# include "sendDesc.hh"
+ 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
 

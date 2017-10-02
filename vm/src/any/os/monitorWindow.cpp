@@ -3,11 +3,16 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "monitorWindow_unix.hh"
-# pragma implementation "monitorWindow.hh"
 
 
-# include "_monitorWindow.cpp.incl"
+# include "debug.hh"
+# include "label_inline.hh"
+# include "monitor.hh"
+# include "monitorWindow.hh"
+# include "quartzWindow.hh"
+# include "signalBlocker.hh"
+# include "space_inline.hh"
+# include "xlibWindow.hh"
 
 MonitorWindow::MonitorWindow() {
   _m = NULL;

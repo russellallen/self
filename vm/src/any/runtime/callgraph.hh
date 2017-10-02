@@ -1,11 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.14 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "nprofiler.hh"
+# include "oop_inline.hh"
+# include "timer.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)

@@ -4,8 +4,7 @@
    See the LICENSE file for license information. */
 
 
-# pragma implementation "disasm.hh"
-# include "_disasm.cpp.incl"
+# include "disasm.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

@@ -5,9 +5,12 @@
 
 # ifdef SIC_COMPILER
 
-# pragma implementation "defUse.hh"
-# pragma implementation "defUse_inline.hh"
-# include "_defUse.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "debug.hh"
+# include "defUse_inline.hh"
+# include "markOop.hh"
+# include "node.hh"
+# include "sicScope.hh"
 
 
 

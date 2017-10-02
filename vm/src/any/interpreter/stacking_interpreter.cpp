@@ -3,8 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "stacking_interpreter.hh"
-# include "_stacking_interpreter.cpp.incl"
+# include "blockOop_inline.hh"
+# include "generation_inline.hh"
+# include "label_inline.hh"
+# include "oop_inline.hh"
+# include "space_inline.hh"
+# include "stacking_interpreter.hh"
+# include "stringOop.hh"
 
 
 void stacking_interpreter::do_send_code( bool isSelfImplicit, 

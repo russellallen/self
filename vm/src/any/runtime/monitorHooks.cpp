@@ -3,9 +3,18 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "monitorHooks.hh"
 
-# include "_monitorHooks.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "frame.hh"
+# include "interruptedCtx.hh"
+# include "key.hh"
+# include "monitor.hh"
+# include "monitorHooks.hh"
+# include "nmethod.hh"
+# include "os_includes.hh"
+# include "recompile.hh"
+# include "selfMonitor.hh"
+# include "space_inline.hh"
 
 fint  ShowLookupInMonitor::lookup_nesting = 0;
 const char* ShowVMActivityInMonitor::current_activity = NULL;

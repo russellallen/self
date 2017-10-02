@@ -3,8 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "slotIterator.hh"
-# include "_slotIterator.cpp.incl"
+# include "blockMap.hh"
+# include "generation_inline.hh"
+# include "slotIterator.hh"
+# include "space_inline.hh"
+# include "vmStrings.hh"
 
 #if GENERATE_DEBUGGING_AIDS
 SlotIterator *SlotIterator::blockIterator= NULL;

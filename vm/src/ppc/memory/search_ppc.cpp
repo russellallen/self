@@ -4,8 +4,10 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "search_ppc.hh"
-# include "_search_ppc.cpp.incl"
+# include "asserts.hh"
+# include "oop.hh"
+# include "runtime.hh"
+# include "search.hh"
 
 
 

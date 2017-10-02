@@ -4,8 +4,12 @@
    See the LICENSE file for license information. */
 
 
-# pragma implementation "inlining.hh"
-# include "_inlining.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "blist.hh"
+# include "blockOop_inline.hh"
+# include "codeSlotsMap.hh"
+# include "inlining.hh"
+# include "sicScope.hh"
 
 # ifdef SIC_COMPILER
 

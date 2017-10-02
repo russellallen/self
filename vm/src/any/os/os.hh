@@ -1,11 +1,15 @@
+#pragma once
 /* Sun-$Revision: 30.14 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "error.hh"
+# include "os_includes.hh"
+# include "spaceSizeMacros.hh"
+# include "types.hh"
+# include "types.hh"
+# include "util.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # if TARGET_IS_PROFILED
@@ -190,8 +194,9 @@ class OS {
   // For platforms that must poll for events:
   static void check_events();
 
-  
-# include "_os_pd.hh.incl"  
+//# if TARGET_OS_FAMLIY == UNIX_FAMILY  
+# include "os_unix.hh"
+//# endif
 };
 
 static inline char* ExpandDir_prim(const char* in, void* FH) {

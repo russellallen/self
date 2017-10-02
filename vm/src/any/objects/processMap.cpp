@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "processMap.hh"
-# include "_processMap.cpp.incl"
+# include "label_inline.hh"
+# include "processMap.hh"
+# include "processOop.hh"
+# include "vmStrings.hh"
 
 processOop processMap::create_process(Process* process) {
   slotList* slots = new slotList(VMString[PARENT],

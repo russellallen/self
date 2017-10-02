@@ -4,9 +4,12 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "registerLocator_ppc.hh"
 
-# include "_registerLocator_ppc.cpp.incl"
+# include "frame.hh"
+# include "interruptedCtx.hh"
+# include "label_inline.hh"
+# include "nmethod.hh"
+# include "registerLocator.hh"
 
 
 void RegisterLocator::update_addresses_from_self_frame() {

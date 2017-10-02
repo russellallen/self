@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "scopeDescRecorder.hh"
-# include "_scopeDescRecorder.cpp.incl"
+# include "label_inline.hh"
+# include "nmethodScopes.hh"
+# include "pcDesc.hh"
+# include "scopeDescRecorder.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

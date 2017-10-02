@@ -4,8 +4,10 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "registerState_ppc.hh"
-# include "_registerState_ppc.cpp.incl"
+# include "asm_inline.hh"
+# include "codeGen.hh"
+# include "fcompiler.hh"
+# include "registerState.hh"
 
 # ifdef FAST_COMPILER
 

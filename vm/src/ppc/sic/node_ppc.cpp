@@ -4,9 +4,29 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "node_ppc.hh"
 
-# include "_node_ppc.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "asm_inline.hh"
+# include "basicBlock_inline.hh"
+# include "byteVectorOop.hh"
+# include "codeSlotsMap.hh"
+# include "complexLookup.hh"
+# include "fields.hh"
+# include "genHelper.hh"
+# include "node.hh"
+# include "nodeGen.hh"
+# include "node_inline.hh"
+# include "objVectorOop.hh"
+# include "os_includes.hh"
+# include "prim.hh"
+# include "recompile.hh"
+# include "registerString.hh"
+# include "rscope.hh"
+# include "scopeDescRecorder.hh"
+# include "sic.hh"
+# include "sicExpr.hh"
+# include "sicScope.hh"
+# include "tag.hh"
 
 # if defined(SIC_COMPILER)
 

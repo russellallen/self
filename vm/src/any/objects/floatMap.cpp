@@ -3,8 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "floatMap.hh"
-# include "_floatMap.cpp.incl"
+# include "enumeration.hh"
+# include "floatMap.hh"
+# include "generation_inline.hh"
+# include "space_inline.hh"
+# include "vmStrings.hh"
 
 DO_NOT_CROSS_COMPILE 
   

@@ -3,8 +3,21 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "scopeDesc.hh"
-# include "_scopeDesc.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "asm_inline.hh"
+# include "blockOop_inline.hh"
+# include "byteCodes.hh"
+# include "codeSlotsMap.hh"
+# include "nmethod_inline.hh"
+# include "print.hh"
+# include "regs.hh"
+# include "scopeDesc.hh"
+# include "scopeDescRecorder.hh"
+# include "sicExpr.hh"
+# include "simpleLookup_inline.hh"
+# include "slotRef.hh"
+# include "stringOop.hh"
+# include "vmStrings.hh"
 
 
 fint compareBCI(fint bci1, fint bci2) {

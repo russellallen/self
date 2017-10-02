@@ -2,6 +2,6 @@
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "blist.hh"
+# include "process.hh"
 
-# pragma implementation "blist.hh"
-# include "_blist.cpp.incl"

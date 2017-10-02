@@ -4,8 +4,8 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "diDesc_ppc.hh"
-# include "_diDesc_ppc.cpp.incl"
+# include "diDesc.hh"
+# include "fields.hh"
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

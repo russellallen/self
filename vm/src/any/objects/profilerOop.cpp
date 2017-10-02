@@ -3,8 +3,22 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "profilerOop.hh"
-# include "_profilerOop.cpp.incl"
+# include "byteVectorOop.hh"
+# include "debug.hh"
+# include "files.hh"
+# include "glueSupport.hh"
+# include "interruptedCtx.hh"
+# include "label_inline.hh"
+# include "nprofiler.hh"
+# include "preserve.hh"
+# include "profilerMap.hh"
+# include "profilerOop.hh"
+# include "runtime.hh"
+# include "scanner.hh"
+# include "shell.hh"
+# include "stringMap.hh"
+# include "vmStrings.hh"
+# include "zone.hh"
 
 
 void profilerOopClass::initialize() {

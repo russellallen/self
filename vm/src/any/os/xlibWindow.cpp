@@ -3,9 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation
 
-# include "_xlibWindow.cpp.incl"
+# include "label_inline.hh"
+# include "monitor.hh"
+# include "signalBlocker.hh"
+# include "space_inline.hh"
+# include "xlibPrims.hh"
+# include "xlibWindow.hh"
 
 # ifdef XLIB
 

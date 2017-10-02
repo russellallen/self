@@ -1,3 +1,4 @@
+#pragma once
 /* Sun-$Revision: 30.2 $ */
 
 // Adapted from GNU gdb 4.7    - Urs 12/92

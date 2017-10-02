@@ -4001,10 +4001,11 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'ModuleInfo: Module: primitiveMaker InitialContents: FollowSlot\x7fVisibility: private'
         
          setupFileHeaders = ( |
-             pragma = '# pragma once'.
+             pragma = '# pragma once
+'.
             | 
             comment: warningMessage.
-            appendToMacros: pragma, '\n'.
+            appendToMacros: pragma.
             flag = '' ifFalse: [
                 appendToMacros: '# undef PRIMITIVE_GLUE_FLAG_CODE', '\n'.
                 appendToMacros:

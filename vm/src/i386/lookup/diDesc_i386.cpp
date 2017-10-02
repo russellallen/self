@@ -4,8 +4,8 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "diDesc_i386.hh"
-# include "_diDesc_i386.cpp.incl"
+# include "diDesc.hh"
+# include "fields.hh"
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

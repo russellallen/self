@@ -3,11 +3,17 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "cacheStub_abstract.hh"
-# pragma implementation "cacheStub.hh"
-# pragma implementation "cacheStub_inline_abstract.hh"
-# pragma implementation "cacheStub_inline.hh"
-# include "_cacheStub.cpp.incl"
+# include "allocation.hh"
+# include "asm_inline.hh"
+# include "blist.hh"
+# include "cacheStub_inline.hh"
+# include "countStub.hh"
+# include "label_inline.hh"
+# include "monitor.hh"
+# include "nmethod_inline.hh"
+# include "sendDesc.hh"
+# include "zone.hh"
+# include "zoneHeap.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

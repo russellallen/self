@@ -3,8 +3,19 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "mirrorOop.hh"
-# include "_mirrorOop.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "allocation.hh"
+# include "codeSlotsMap.hh"
+# include "glueSupport.hh"
+# include "interruptedCtx.hh"
+# include "label_inline.hh"
+# include "mirrorOop.hh"
+# include "shell.hh"
+# include "simpleLookup_inline.hh"
+# include "slotsOop.hh"
+# include "stringMap.hh"
+# include "stringTable.hh"
+# include "vmStrings.hh"
 
 oop mirrorOopClass::as_mirror_prim(oop obj) {
   return obj->as_mirror();

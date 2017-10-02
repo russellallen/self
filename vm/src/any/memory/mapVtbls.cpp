@@ -3,8 +3,26 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "mapVtbls.hh"
-# include "_mapVtbls.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "assignmentMap.hh"
+# include "blockMap.hh"
+# include "byteVectorMap.hh"
+# include "codeSlotsMap.hh"
+# include "fctProxyMap.hh"
+# include "floatMap.hh"
+# include "label_inline.hh"
+# include "map.hh"
+# include "mapMap.hh"
+# include "mapVtbls.hh"
+# include "markMap.hh"
+# include "mirrorMap.hh"
+# include "objVectorMap.hh"
+# include "processMap.hh"
+# include "profilerMap.hh"
+# include "proxyMap.hh"
+# include "smiMap.hh"
+# include "stringMap.hh"
+# include "vframeMap.hh"
 
 vtbls* Vtbls;
 

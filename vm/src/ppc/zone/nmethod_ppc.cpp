@@ -4,9 +4,10 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation  "nmethod_ppc.hh"
 
-# include "_nmethod_ppc.cpp.incl"
+# include "aCompiler.hh"
+# include "label_inline.hh"
+# include "nmethod.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

@@ -4,8 +4,10 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "conversion_ppc.hh"
-# include "_conversion_ppc.cpp.incl"
+# include "conversion.hh"
+# include "label_inline.hh"
+# include "registerLocator.hh"
+# include "vframe.hh"
 
 
   

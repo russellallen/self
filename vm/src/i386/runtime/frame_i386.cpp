@@ -4,10 +4,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "frame_i386.hh"
 
-# include "_frame_i386.cpp.incl"
-
+# include "frame_inline.hh"
+# include "interruptedCtx.hh"
+# include "oopClosures.hh"
+# include "registerLocator.hh"
 
 frame* frame::sender() { return my_sp()->link()->as_frame();  }
 

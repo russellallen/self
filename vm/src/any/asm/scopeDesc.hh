@@ -1,12 +1,12 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "key.hh"
+# include "nameDesc.hh"
 
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 

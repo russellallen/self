@@ -1,13 +1,15 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "allocation.hh"
+# include "oop_inline.hh"
+# include "regs.hh"
+# include "top.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // A NameDesc describes the source-level value of a name in some Self scope

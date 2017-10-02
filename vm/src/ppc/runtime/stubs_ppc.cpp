@@ -4,8 +4,9 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-# pragma implementation "stubs_ppc.hh"
-# include "_stubs_ppc.cpp.incl"
+# include "generation_inline.hh"
+# include "oop_inline.hh"
+# include "space_inline.hh"
 
 # pragma warn_unusedarg off
 

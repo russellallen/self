@@ -3,8 +3,23 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "slotsOop.hh"
-# include "_slotsOop.cpp.incl"
+# include "blockMap.hh"
+# include "byteVectorOop.hh"
+# include "debug.hh"
+# include "files.hh"
+# include "glueSupport.hh"
+# include "interruptedCtx.hh"
+# include "label_inline.hh"
+# include "preserve.hh"
+# include "runtime.hh"
+# include "scanner.hh"
+# include "shell.hh"
+# include "slotsMap.hh"
+# include "slotsOop.hh"
+# include "space_inline.hh"
+# include "stringMap.hh"
+# include "vmStrings.hh"
+# include "zone.hh"
 
 slotsOop slotsOopClass::create_slots(fint size) {
   oop *p= Memory->alloc_objs(size);

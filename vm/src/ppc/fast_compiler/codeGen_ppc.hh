@@ -1,3 +1,4 @@
+#pragma once
 # ifdef __ppc__
 /* Sun-$Revision: 30.10 $ */
 

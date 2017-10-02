@@ -3,8 +3,29 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "byteVectorOop.hh"
-# include "_byteVectorOop.cpp.incl"
+# include "ageTable.hh"
+# include "byteVectorMap.hh"
+# include "byteVectorOop.hh"
+# include "debug.hh"
+# include "expr.hh"
+# include "files.hh"
+# include "glueSupport.hh"
+# include "interruptedCtx.hh"
+# include "label_inline.hh"
+# include "mirrorOop.hh"
+# include "miscPrims.hh"
+# include "nlrSupport.hh"
+# include "os_includes.hh"
+# include "parser.hh"
+# include "positionTable.hh"
+# include "runtime.hh"
+# include "scanner.hh"
+# include "shell.hh"
+# include "space_inline.hh"
+# include "stringMap.hh"
+# include "stringOop.hh"
+# include "util.hh"
+# include "vmStrings.hh"
 
 
 byteVectorOop byteVectorOopClass::copy(fint s, bool mustAlloc,

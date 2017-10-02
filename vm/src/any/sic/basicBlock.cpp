@@ -5,9 +5,19 @@
 
 # ifdef SIC_COMPILER
 
-# pragma implementation "basicBlock.hh"
-# pragma implementation "basicBlock_inline.hh"
-# include "_basicBlock.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "basicBlock_inline.hh"
+# include "bitVector.hh"
+# include "blist.hh"
+# include "debug.hh"
+# include "node.hh"
+# include "nodeGen.hh"
+# include "process.hh"
+# include "regAlloc.hh"
+# include "registerString.hh"
+# include "regs.hh"
+# include "regs.hh"
+# include "sicScope.hh"
 
   void BasicBlockBase::init(Node* f, Node* l, fint n) {
     if (f->isMergeNode()) {

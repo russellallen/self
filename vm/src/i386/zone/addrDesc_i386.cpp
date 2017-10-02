@@ -5,9 +5,12 @@
    See the LICENSE file for license information. */
 
 
-# pragma implementation "addrDesc_i386.hh"
 
-# include "_addrDesc_i386.cpp.incl"
+# include "addrDesc.hh"
+# include "diDesc.hh"
+# include "fields.hh"
+# include "label_inline.hh"
+# include "nmethod.hh"
 
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)

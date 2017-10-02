@@ -3,10 +3,8 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "signalBlocker_unix.hh"
 
-# include "_signalBlocker_unix.cpp.incl"
-
+# include "signalBlocker.hh"
 
 SignalBlocker::SignalBlocker(SignalBlockerType sbt) {
  

@@ -3,8 +3,25 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "expr.hh"
-# include "_expr.cpp.incl"
+# include "allocation.hh"
+# include "blockMap.hh"
+# include "codeSlotsMap.hh"
+# include "debug.hh"
+# include "expr.hh"
+# include "interpreter.hh"
+# include "label_inline.hh"
+# include "nlrSupport.hh"
+# include "nmethod_inline.hh"
+# include "parser.hh"
+# include "process.hh"
+# include "runtime.hh"
+# include "scanner.hh"
+# include "send.hh"
+# include "shell.hh"
+# include "simpleLookup_inline.hh"
+# include "slot.hh"
+# include "stack.hh"
+# include "vmStrings.hh"
 
 Expr* Expr::AddArg(ArgSlot* arg, Parser* parser) {
   Unused(arg); Unused(parser);

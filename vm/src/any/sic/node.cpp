@@ -4,10 +4,36 @@
    See the LICENSE file for license information. */
 
 
-# pragma implementation "node.hh"
-# pragma implementation "node_inline.hh"
 
-# include "_node.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "asm.hh"
+# include "assignmentOop.hh"
+# include "basicBlock_inline.hh"
+# include "byteVectorOop.hh"
+# include "codeSlotsMap.hh"
+# include "complexLookup.hh"
+# include "fctProxyOop.hh"
+# include "genHelper.hh"
+# include "key.hh"
+# include "markOop.hh"
+# include "nameDesc.hh"
+# include "nodeGen.hh"
+# include "node_inline.hh"
+# include "objVectorOop.hh"
+# include "preg.hh"
+# include "prim.hh"
+# include "processOop.hh"
+# include "proxyOop.hh"
+# include "recompile.hh"
+# include "registerString.hh"
+# include "rscope.hh"
+# include "scopeDescRecorder.hh"
+# include "sic.hh"
+# include "sicExpr.hh"
+# include "sicScope.hh"
+# include "sicSplit.hh"
+# include "stringOop.hh"
+# include "vmStrings.hh"
 
 # ifdef SIC_COMPILER
 

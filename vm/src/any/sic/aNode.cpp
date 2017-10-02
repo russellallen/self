@@ -5,8 +5,7 @@
 
 # ifdef SIC_COMPILER
 
-# pragma implementation "aNode.hh"
-# include "_aNode.cpp.incl"
+# include "aNode.hh"
 
 # endif
 

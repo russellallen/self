@@ -5,8 +5,17 @@
 
 # ifdef SIC_COMPILER
 
-# pragma implementation "sicExpr.hh"
-# include "_sicExpr.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "asm.hh"
+# include "blockOop_inline.hh"
+# include "nameDesc.hh"
+# include "node.hh"
+# include "nodeGen.hh"
+# include "preg.hh"
+# include "scopeDescRecorder.hh"
+# include "sic.hh"
+# include "sicExpr.hh"
+# include "sicScope.hh"
 
   // merge expressions have the following properties:
   // - they never have more than MaxPICSize+1 elements

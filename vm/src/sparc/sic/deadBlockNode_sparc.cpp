@@ -3,9 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "deadBlockNode_sparc.hh"
 
-# include "_deadBlockNode_sparc.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "nlrSupport.hh"
+# include "node.hh"
+# include "prim.hh"
 
 # ifdef SIC_COMPILER
 

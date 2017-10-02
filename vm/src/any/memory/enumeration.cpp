@@ -3,10 +3,16 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "enumeration.hh"
-# pragma implementation "preserve.hh"
 
-# include "_enumeration.cpp.incl"
+# include "allocation.hh"
+# include "byteVectorOop.hh"
+# include "enumeration.hh"
+# include "errorCodes.hh"
+# include "label_inline.hh"
+# include "mirrorOop.hh"
+# include "objVectorOop.hh"
+# include "vframeOop.hh"
+# include "vmStrings.hh"
 
 static enumeration* package_enumeration;
 

@@ -4,8 +4,10 @@
    See the LICENSE file for license information. */
 
 
-# pragma implementation "sic_sparc.hh"
-# include "_sic_sparc.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "regAlloc.hh"
+# include "sic.hh"
+# include "sicScope.hh"
 
 
 # ifdef SIC_COMPILER

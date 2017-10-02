@@ -6,9 +6,11 @@
 
   
 
-# pragma implementation "fields_i386.hh"
 
-# include "_fields_i386.cpp.incl"
+# include "fields.hh"
+# include "label_inline.hh"
+# include "space_inline.hh"
+# include "zone.hh"
 
 
 pc_t  get_target_of_branch_instruction(inst_t* instp) {

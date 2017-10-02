@@ -3,8 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "key.hh"
-# include "_key.cpp.incl"
+# include "codeTable.hh"
+# include "key.hh"
+# include "label_inline.hh"
+# include "nmethod.hh"
+# include "sendDesc.hh"
 
 
 const char* selector_string(oop selector) {

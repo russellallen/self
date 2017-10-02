@@ -3,8 +3,21 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-// # pragma implementation "vframe.hh"
-# include "_vframe_sparc.cpp.incl"
+# include "allocation.hh"
+# include "byteCodes.hh"
+# include "codeSlotsMap.hh"
+# include "debug.hh"
+# include "enumeration.hh"
+# include "fields.hh"
+# include "interpreter.hh"
+# include "recompile.hh"
+# include "registerLocator.hh"
+# include "search.hh"
+# include "sendDesc.hh"
+# include "table.hh"
+# include "vframe.hh"
+# include "vframeOop.hh"
+# include "vmStrings.hh"
 
     
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)

@@ -1,11 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.11 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "kinds.hh"
+# include "markOop.hh"
+# include "node.hh"
+# include "sicScope.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # ifdef SIC_COMPILER

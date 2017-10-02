@@ -3,9 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "abstract_interpreter.hh"
-# pragma implementation "abstract_interpreter_inline.hh"
-# include "_abstract_interpreter.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "blockOop_inline.hh"
+# include "label_inline.hh"
+# include "oop_inline.hh"
+# include "space_inline.hh"
 
 
 void abstract_interpreter_method_info::init(byteVectorOop c, objVectorOop l) {

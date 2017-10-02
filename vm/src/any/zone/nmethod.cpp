@@ -3,10 +3,34 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation  "nmethod.hh"
-# pragma implementation  "nmethod_inline.hh"
 
-# include "_nmethod.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "addrDesc.hh"
+# include "allocation.hh"
+# include "asm_inline.hh"
+# include "byteCodes.hh"
+# include "cacheStub_inline.hh"
+# include "codeSlotsMap.hh"
+# include "complexLookup.hh"
+# include "countStub.hh"
+# include "debug.hh"
+# include "diDesc.hh"
+# include "disasm.hh"
+# include "fcompiler.hh"
+# include "fields.hh"
+# include "fprofiler.hh"
+# include "frame.hh"
+# include "inlining.hh"
+# include "machineCache.hh"
+# include "nmethod_inline.hh"
+# include "nprofiler.hh"
+# include "print.hh"
+# include "recompile.hh"
+# include "scopeDescRecorder.hh"
+# include "sendDesc.hh"
+# include "sic.hh"
+# include "slotRef.hh"
+# include "zone.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

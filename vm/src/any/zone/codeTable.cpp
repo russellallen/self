@@ -3,8 +3,13 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "codeTable.hh"
-# include "_codeTable.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "codeTable.hh"
+# include "key.hh"
+# include "label_inline.hh"
+# include "nmethod_inline.hh"
+# include "simpleLookup_inline.hh"
+# include "zone.hh"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

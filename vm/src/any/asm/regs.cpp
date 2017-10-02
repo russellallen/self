@@ -3,8 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "regs.hh"
-# include "_regs.cpp.incl"
+# include "allocation.hh"
+# include "process.hh"
+# include "regs.hh"
 
 
 void printLocation(Location l) {

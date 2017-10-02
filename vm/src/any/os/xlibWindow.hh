@@ -1,3 +1,4 @@
+#pragma once
 /* Sun-$Revision: 30.9 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -5,10 +6,7 @@
 
 // Contains platform-specific declarations for PlatformWindow.
 // This file is included into middle of class declaration.
-
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
+# include "platformWindow.hh"
 
 
 # ifdef XLIB

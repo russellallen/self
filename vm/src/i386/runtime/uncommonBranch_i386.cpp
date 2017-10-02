@@ -4,9 +4,12 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "uncommonBranch_i386.hh"
 
-# include "_uncommonBranch_i386.cpp.incl" 
+# include "allocation.hh"
+# include "fields.hh"
+# include "label_inline.hh"
+# include "nmethod.hh"
+# include "uncommonBranch.hh"
 
 
 # if defined(SIC_COMPILER)

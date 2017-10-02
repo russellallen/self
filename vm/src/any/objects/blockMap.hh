@@ -1,11 +1,13 @@
+#pragma once
 /* Sun-$Revision: 30.10 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "blockOop.hh"
+# include "os_includes.hh"
+# include "slotsMap.hh"
+# include "vmStrings.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // lexical parent (frame pointer) of prototype block

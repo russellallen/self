@@ -1,11 +1,9 @@
+#pragma once
 /* Sun-$Revision: 30.20 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 // Implementation-dependent definitions
@@ -62,8 +60,9 @@
 # define MPW_ASM 1
 # define LSC_ASM 2
 
-# include "_config_pd.hh.incl"  
-
+//# if TARGET_OS_FAMLIY == UNIX_FAMILY
+# include "config_unix.hh"
+//# endif
 // continued in os_includes.h so it can be after os_includes_<os>.h
 
 

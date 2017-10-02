@@ -3,9 +3,21 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "sendDesc_abstract.hh"
-# pragma implementation "sendDesc.hh"
-# include "_sendDesc.cpp.incl"
+# include "abstract_interpreter_inline.hh"
+# include "blist.hh"
+# include "cacheStub_inline.hh"
+# include "complexLookup.hh"
+# include "countStub.hh"
+# include "fields.hh"
+# include "prim.hh"
+# include "recompile.hh"
+# include "registerString.hh"
+# include "selfMonitor.hh"
+# include "sendDesc.hh"
+# include "stringOop.hh"
+# include "universe_inline.hh"
+# include "zone.hh"
+# include "zoneHeap.hh"
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 

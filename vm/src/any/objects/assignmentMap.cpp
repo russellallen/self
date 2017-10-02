@@ -3,8 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "assignmentMap.hh"
-# include "_assignmentMap.cpp.incl"
+# include "assignmentMap.hh"
+# include "enumeration.hh"
+# include "generation_inline.hh"
+# include "space_inline.hh"
 
 static bool createdAssignment = false;
 

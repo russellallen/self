@@ -1,11 +1,19 @@
+#pragma once
 /* Sun-$Revision: 30.16 $ */
 
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
+# include "basicBlock.hh"
+# include "blist.hh"
+# include "longRegString.hh"
+# include "node.hh"
+# include "preg.hh"
+# include "registerString.hh"
+# include "sic.hh"
+# include "slist.hh"
+# include "types.hh"
+# include "vframe.hh"
 
-# ifdef INTERFACE_PRAGMAS
-  # pragma interface
-# endif
 
 
 # ifdef SIC_COMPILER

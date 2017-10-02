@@ -3,10 +3,10 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "foreignMap.hh"
-# pragma implementation "proxyMap.hh"
 
-# include "_proxyMap.cpp.incl"
+# include "generation_inline.hh"
+# include "proxyMap.hh"
+# include "space_inline.hh"
 
 
 proxyOop proxyMap::create_proxy() {

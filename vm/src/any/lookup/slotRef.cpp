@@ -3,8 +3,11 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma implementation "slotRef.hh"
-# include "_slotRef.cpp.incl"
+# include "debug.hh"
+# include "fcompiler.hh"
+# include "interpreter.hh"
+# include "recompile.hh"
+# include "slotRef.hh"
 
 void nonexistentSlotRef::print_short() {
   lprintf("nonexistentSlotRef 0x%lx", (unsigned long) this);
