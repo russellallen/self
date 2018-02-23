@@ -1,4 +1,4 @@
- '30.38.1'
+ '30.38.2'
  '
 Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
@@ -416,7 +416,7 @@ e.g. Self or Klein. -- dmu 1/02\x7fModuleInfo: Creator: globals generalProcessMo
              cbc.
              r.
             | 
-            r: (rowMorph copy borderWidth: 2) color: paint named: 'transparent'.
+            r: rowMorph copyTransparent borderWidth: 2.
             cbc: commandButtonContents.
             cbc do: [|:ls. :i. |
               r addMorphLast: buildCommandButton: ls.
@@ -1201,7 +1201,7 @@ globals generalModel parent buttonDescriptions. _Clone
             lessStackButton color: preferredBodyColor.
             lessStackButton target: self.
 
-            buttons: rowMorph copy color: paint named: 'transparent'.
+            buttons: rowMorph copyTransparent.
             buttons beShrinkWrap.
             buttons borderWidth: 3.
 
@@ -1449,9 +1449,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pluggableDebugger' -> () From: ( | {
-         'ModuleInfo: Module: pluggableDebugger InitialContents: InitializeToExpression: (\'30.38.1\')\x7fVisibility: public'
+         'ModuleInfo: Module: pluggableDebugger InitialContents: InitializeToExpression: (\'30.38.2\')\x7fVisibility: public'
         
-         revision <- '30.38.1'.
+         revision <- '30.38.2'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pluggableDebugger' -> () From: ( | {

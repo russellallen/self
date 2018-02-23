@@ -1,4 +1,4 @@
- '$Revision: 30.30 $'
+ '30.30.1'
  '
 Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
@@ -73,9 +73,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'worldMorph' -> () From: ( | {
-         'ModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: worldMorph InitialContents: InitializeToExpression: (\'30.30.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.30 $'.
+         revision <- '30.30.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'worldMorph' -> () From: ( | {
@@ -1098,17 +1098,16 @@ morphs that have changed and should be redrawn.\x7fModuleInfo: Module: worldMorp
             tStart: times real msec.
             [desiredDelay > (times real msec - tStart)] whileTrue: [
               eventsPending ifTrue: [ ^self ].
-              "Changed the 5 below to 100 to reduce time 
-               spent idling while desktop was open"
-              times delay: 10.  "ask for a small delay; typically get a longer one"
+              times delay: 1.  "ask for a small delay; typically get a longer one"
             ].
             self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
-         'Category: running\x7fCategory: options\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: running\x7fCategory: options\x7fComment: This is our desired frame time, we can go faster then this to
+cope with user input or slower to avoid hogging CPU\x7fModuleInfo: Module: worldMorph InitialContents: InitializeToExpression: (8)\x7fVisibility: public'
         
-         desiredFrameTime <- 35.
+         desiredFrameTime <- 8.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
@@ -2275,7 +2274,7 @@ run this method.\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x
                 stepDoneSema wait.
                 computeTime: times real msec - tStart.
                 "ensure don't use more than half of CPU just to run the UI"
-                delayIfNoInputFor: 10 max: (desiredFrameTime - computeTime) max: desktop worlds size * computeTime.
+                 delayIfNoInputFor: (desiredFrameTime - computeTime) max: desktop worlds size * computeTime.
             ] loop.
             self).
         } | ) 

@@ -1,6 +1,6 @@
- '$Revision: 30.14 $'
+ '30.14.1'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -55,9 +55,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'sliceGroupOutliner' -> () From: ( | {
-         'ModuleInfo: Module: sliceGroupOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: sliceGroupOutliner InitialContents: InitializeToExpression: (\'30.14.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.14 $'.
+         revision <- '30.14.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'sliceGroupOutliner' -> () From: ( | {
@@ -152,9 +152,8 @@ Profile slices do not. -- 11/04 dmu\x7fModuleInfo: Module: sliceGroupOutliner In
                  Then: [header addMorphLast: contentsOutliners first]
 
                  Else: [|cm|
-                         cm: columnMorph copy.
+                         cm: columnMorph copyTransparent.
                          cm borderWidth: 0.
-                         cm color: paint named: 'transparent'.
                          cm addAllMorphs: contentsOutliners.
                          header addMorphLast: cm.
                  ].

@@ -154,6 +154,24 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'canvas' -> () From: ( | {
+         'Category: drawing\x7fCategory: rectangles\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         circledVerticalFillRectangle: r Color: c = ( |
+             d.
+            | 
+            d: r width / 2.
+            fillCircleCenteredAt: (r left + (r width / 2)) @ (r top + d)
+                          Diameter: d * 2
+                             Color: c.
+            fillCircleCenteredAt: (r left + (r width / 2)) @ (r bottom - d)
+                          Diameter: d * 2
+                             Color: c.
+            fillRectangle: (r left @ (r top + d)) # (r right @ (r bottom - d))
+                    Color: c.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'canvas' -> () From: ( | {
          'Category: basics\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          close = ( |

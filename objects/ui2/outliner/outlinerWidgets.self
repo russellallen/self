@@ -1,6 +1,6 @@
- '$Revision: 30.22 $'
+ '30.22.2'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -456,9 +456,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'outlinerWidgets' -> () From: ( | {
-         'ModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: outlinerWidgets InitialContents: InitializeToExpression: (\'30.22.2\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.22 $'.
+         revision <- '30.22.2'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'outlinerWidgets' -> () From: ( | {
@@ -977,7 +977,7 @@ SlotsToOmit: parent prototype rawColor.
         
          initializePrototype = ( |
             | 
-            color: paint named: 'transparent'.
+            colorTransparent.
             rawEditMode: false.
             borderWidth: 1.
             beShrinkWrap).
@@ -1261,8 +1261,7 @@ SlotsToOmit: parent prototype.
             | 
             lastMorph addMorphLast:
                buildSliderTarget: text 
-                        Selector: 'scroll:' 
-                           Color: color asEnhancedColorForBackground: color).
+                        Selector: 'scroll:').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uglyTextEditorMorph' -> () From: ( | {
@@ -1295,11 +1294,12 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uglyTextEditorMorph' -> () From: ( | {
          'Category: slider\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot'
         
-         buildSliderTarget: t Selector: sel Color: c = ( |
+         buildSliderTarget: t Selector: sel = ( |
              f.
              s.
             | 
-            s: sliderMorph copy colorAll: c.
+            s: sliderMorph copyTransparent.
+            s sliderColor: paint named: 'gray'.
             s selector: sel.
             s maxValue: 1.0.
 
@@ -1307,8 +1307,9 @@ SlotsToOmit: parent prototype.
             s target: t.
             t slider: s.
 
-            f: frameMorph copy color: c.
-            f  borderWidth: 1.
+            f: frameMorph copyTransparent.
+            f  borderWidth: 2.
+            f  frameStyle: frameMorph flatStyle.
             f  beShrinkWrapHorizontally.
             f  beFlexibleVertically.
             f  addMorphLast: s.
@@ -2734,8 +2735,7 @@ SlotsToOmit: parent prototype.
             removeAllMorphs.
             panel: nil.
 
-            kwCol: columnMorph copy beShrinkWrap rightJustify borderWidth: 0.
-            kwCol color: paint named: 'transparent'.
+            kwCol: columnMorph copyTransparent beShrinkWrap rightJustify borderWidth: 0.
             formalCol: kwCol copy leftJustify.
 
             sel keywords

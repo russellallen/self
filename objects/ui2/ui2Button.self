@@ -1,6 +1,6 @@
- 'Sun-$Revision: 30.12 $'
+ '30.12.1'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -59,9 +59,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'ui2Button' -> () From: ( | {
-         'ModuleInfo: Module: ui2Button InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: ui2Button InitialContents: InitializeToExpression: (\'30.12.1\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.12 $'.
+         revision <- '30.12.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'ui2Button' -> () From: ( | {
@@ -229,11 +229,10 @@ SlotsToOmit: baseMinHeight baseMinWidth parent prototype.
             m: morphs.
             removeAllMorphs.
             addMorph:
-              ((rowMorph copy 
+               (rowMorph copyTransparent
                 beFlexibleVertically
                 beShrinkWrapHorizontally
                 borderWidth: 0)
-                color: paint named: 'transparent')
                 addAllMorphs: m).
         } | ) 
 
@@ -348,7 +347,7 @@ SlotsToOmit: baseMinHeight baseMinWidth parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Button' -> 'defaultButtonActionObject' -> () From: ( | {
          'ModuleInfo: Module: ui2Button InitialContents: InitializeToExpression: (nil)\x7fVisibility: public'
         
-         target.
+         target <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Button' -> () From: ( | {
