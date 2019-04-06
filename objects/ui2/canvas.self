@@ -2372,10 +2372,6 @@ the pixmapCache some day.
              n.
             | 
             n: displayName.
-
-            "For Linux, default to local display"
-            host osName = 'linux' ifTrue: [n: ''].
-
             [ | err |
               err: [|:exit|
                 ^ xlib display open: n

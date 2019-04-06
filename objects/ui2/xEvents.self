@@ -251,6 +251,14 @@ SlotsToOmit: parent.
             timeStamp: xEvt time.
             state: xEvt state.
             b: xEvt button.
+
+            "Swap middle and right buttons if wanted"
+            preferences swapMouseButtons ifTrue: [
+              case
+                if: [ 2 = b ] Then: [ b: 3 ]
+                If: [ 3 = b ] Then: [ b: 2 ]
+            ].
+
             case
               if: [ 1 = b ] Then: [
                 type: 'leftMouseDown'.
@@ -284,6 +292,14 @@ SlotsToOmit: parent.
             timeStamp: xEvt time.
             state: xEvt state.
             b: xEvt button.
+
+            "Swap middle and right buttons if wanted"
+            preferences swapMouseButtons ifTrue: [
+              case
+                if: [ 2 = b ] Then: [ b: 3 ]
+                If: [ 3 = b ] Then: [ b: 2 ]
+            ].
+
             case
               if: [ 1 = b ] Then: [
                 type: 'leftMouseUp'.

@@ -138,6 +138,17 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
+         'Category: user interface preferences (mostly for ui1)\x7fComment: If true, system will swap middle and right buttons
+so that the prefered button will bring up the 
+main (non-morphic) menu.
+
+By default, we do this on Linux but not otherwise.\x7fModuleInfo: Module: defaultPreferences InitialContents: FollowSlot\x7fVisibility: public'
+        
+         swapMouseButtons = ( |
+            | host osName = 'linux').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
          'Category: user interface preferences (mostly for ui1)\x7fModuleInfo: Module: defaultPreferences InitialContents: InitializeToExpression: (false)\x7fVisibility: public'
         
          useAmpersandToBackground <- bootstrap stub -> 'globals' -> 'false' -> ().

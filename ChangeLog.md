@@ -6,12 +6,14 @@ Updates:
  * Made Morphic more responsive at cost of some CPU usage
  * More usable `sliderMorph`
  * New `copyTransparent` method on morphs allowing simplification of intialisation code
+ * New preference to swap mouse buttons on Linux
 
 Fixes:
 
  * Fix to bug in damage logging
  * Fix to bug preventing shadow being shown when morphs grabbed by hand
  * Fix capitalizeAll (Issue #124)
+ * Fix to display opening issue on X11 (doesn't try to second guess $DISPLAY)
 
 Changes in Self 2017.1
 ----------------------
