@@ -5220,6 +5220,22 @@ an object with these slots:
             ) initDisplay: display Depth: d).
         } | ) 
 
+bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'Category: creating\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+
+         createOnDisplay: disp At: pos Size: sz = ( |
+            | 
+            (disp xCreateSimpleWindowIn: disp screen rootWindow
+                                      X: pos x
+                                      Y: pos y
+                                  Width: sz x
+                                 Height: sz y
+                            BorderWidth: 0
+                                 Border: disp screen blackPixel
+                             Background: disp screen whitePixel
+            ) initDisplay: disp Depth: disp screen depth).
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
