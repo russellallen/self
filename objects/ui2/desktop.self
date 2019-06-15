@@ -125,7 +125,8 @@ tuning.
 -- Randy, 2/9/95\x7fModuleInfo: Module: desktop InitialContents: FollowSlot\x7fVisibility: public'
         
          open = ( |
-            | openOnDisplay: '').
+            | 
+            openOnDisplay: (os environmentAt: 'DISPLAY' IfFail: '')).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'desktop' -> () From: ( | {
@@ -417,6 +418,15 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                                      i succ).
                                  |).
 
+            snapshotAction
+              forCommandLineArg: '--resetXDisplays'
+                       DoAction: (| parent* = lobby.
+                                    value: i With: arg = (
+                                     "Reset X displays to local $DISPLAY"
+                                     "This is a placeholder"
+                                     "See traits worldMorph platformSpecificNameFor: displayName"
+                                     i succ).
+                                 |).
             snapshotAction addSchedulerInitialMessage:
               message copy receiver: desktop Selector: 'returnFromSnapshot'.
             memory addThoroughCleanupMessage:
