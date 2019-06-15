@@ -1167,7 +1167,7 @@ read and process input events, and update the display.\x7fModuleInfo: Module: wo
          'Category: running\x7fCategory: options\x7fComment: Quartz works either way, but X needs this to be true.
   -- dmu 1/08\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
         
-         doubleBuffering <- bootstrap stub -> 'globals' -> 'false' -> ().
+         doubleBuffering <- bootstrap stub -> 'globals' -> 'true' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
@@ -1872,6 +1872,9 @@ oldGlobalBounds. \x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
             | 
             host osName == 'macOSX' ifTrue: [^'quartz'].
             displayName == 'quartz' ifTrue: [^ ''].
+            " Reset to zero if reseting X Display"
+            (snapshotAction commandLine includes: '--resetXDisplays')
+              ifTrue: [^ ''].
             displayName).
         } | ) 
 
