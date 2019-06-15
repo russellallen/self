@@ -559,7 +559,7 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
             now: time current.
             (now - lastKvetchTime ) > (1000 * 60 * 5)  ifTrue: [
               lastKvetchTime: now.
-              ('unknown font: ', sel) printLine.
+              log warn: 'unknown font: ', sel.
             ].
             times).
         } | ) 
