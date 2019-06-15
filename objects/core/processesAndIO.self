@@ -120,6 +120,7 @@ lock
  bootstrap read: 'sharedQueue' From: 'core'
  bootstrap read: 'monitor' From: 'core'
  bootstrap read: 'lock' From: 'core'
+ bootstrap read: 'channel' From: 'channel'
 
 
 
