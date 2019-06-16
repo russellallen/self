@@ -54,26 +54,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'processesAndIO' -> () From: ( | {
-         'ModuleInfo: Module: processesAndIO InitialContents: InitializeToExpression: (\'ping
-interceptor
-serializer
-processStack
-processStatus
-processErrors
-process
-semaphore
-barrier
-scheduler
-sharedSetAndDictionary
-foreign
-all_OS
-fileStream
-stdin
-stat
-sharedQueue
-monitor
-lock
-\')\x7fVisibility: private'
+         'ModuleInfo: Module: processesAndIO InitialContents: FollowSlot\x7fVisibility: private'
         
          subpartNames <- 'ping
 interceptor
@@ -94,6 +75,7 @@ stat
 sharedQueue
 monitor
 lock
+channel
 '.
         } | ) 
 
@@ -120,7 +102,7 @@ lock
  bootstrap read: 'sharedQueue' From: 'core'
  bootstrap read: 'monitor' From: 'core'
  bootstrap read: 'lock' From: 'core'
- bootstrap read: 'channel' From: 'channel'
+ bootstrap read: 'channel' From: 'core'
 
 
 
