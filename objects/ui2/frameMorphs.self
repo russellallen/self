@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.8 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -184,7 +185,8 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          baseDrawFlatStyleOn: c = ( |
              box.
             | 
-
+            "Optimisation"
+            color isTransparent ifTrue: [^ self].
             box: baseBounds origin #
                  (baseBounds corner - borderWidth).
             c rectangle: box Width: borderWidth Color: color.
@@ -282,8 +284,12 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                 2. if the borderWidth is one and the frameStyle is not flat,
                    draw the bezel using one-pixel lines."
 
-            "Optimization: suppress filling if this morph's color matches that of its owner."
-            (filled && [owner submorphVisible: self]) ifTrue: [ c fillRectangle: baseBounds Color: color ].
+            "Optimization: 
+                 suppress filling if this morph's color matches that of its owner
+              or our colour is transparent
+            "
+            (filled && [owner submorphVisible: self] && color isTransparent not)
+              ifTrue: [ c fillRectangle: baseBounds Color: color ].
 
             0 = borderWidth              ifTrue: [ ^self ].
             frameStyle =       flatStyle ifTrue: [ ^baseDrawFlatStyleOn:       c ].
