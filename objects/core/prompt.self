@@ -424,13 +424,15 @@ is a sane default for perProcessGlobals prompt inputLoopProcess\x7fModuleInfo: C
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'prompt' -> () From: ( | {
          'Category: promptPrinting\x7fModuleInfo: Module: prompt InitialContents: FollowSlot\x7fVisibility: private'
         
-         promptPrefix = '\"Self'.
+         promptPrefix = ( |
+            | 
+            users owner name, '@', users owner hostName).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'prompt' -> () From: ( | {
          'Category: promptPrinting\x7fModuleInfo: Module: prompt InitialContents: FollowSlot\x7fVisibility: private'
         
-         promptSuffix = '\" '.
+         promptSuffix = '> '.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'prompt' -> () From: ( | {

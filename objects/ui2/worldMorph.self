@@ -573,6 +573,14 @@ the world\'s layoutChanged method does nothing.\x7fModuleInfo: Module: worldMorp
          'Category: window management\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
         
          addWindowOnDisplay: dispName Bounds: b Limited: isLimited = ( |
+            | 
+            addWindowOnDisplay: dispName Bounds: b User: users owner Limited: isLimited).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
+         'Category: window management\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
+        
+         addWindowOnDisplay: dispName Bounds: b User: aUserProfile Limited: isLimited = ( |
              bc.
              h.
              pc.
@@ -589,6 +597,7 @@ the world\'s layoutChanged method does nothing.\x7fModuleInfo: Module: worldMorp
 
             isLimited ifTrue: [wc platformWindow freezeSize: b size].
             h: handMorph copyRemoveAllSubscribers privateSetOwner: self.
+            h userInfo: aUserProfile.
             h color: randomColorForUser.
             h subscribeWindow:   self. 
 
