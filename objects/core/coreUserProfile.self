@@ -188,9 +188,24 @@ sit (i.e., the display host).\x7fModuleInfo: Module: coreUserProfile InitialCont
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
+        
+         name: n = ( |
+            | 
+            preferredName: n).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
          'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
+        
+         password: aString = ( |
+            | [notYetImplemented]. self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
@@ -272,6 +287,13 @@ sit (i.e., the display host).\x7fModuleInfo: Module: coreUserProfile InitialCont
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> () From: ( | {
          'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
         
+         addUserNamed: n Password: p = ( |
+            | team add: (userProfile copy name: n) password: p. self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> () From: ( | {
+         'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
+        
          owner = bootstrap define: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'loginName' From:
              bootstrap remove: 'parent' From:
@@ -308,6 +330,15 @@ SlotsToOmit: loginName parent.
          'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (set copyRemoveAll)'
         
          team <- set copyRemoveAll.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> () From: ( | {
+         'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
+        
+         userNamed: n IfAbsent: blk = ( |
+            | 
+            owner name = n ifTrue: [^ owner].
+            team findFirst: [|:u| u name = n] IfPresent: [|:n| n] IfAbsent: blk).
         } | ) 
 
 

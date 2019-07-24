@@ -426,7 +426,7 @@ is a sane default for perProcessGlobals prompt inputLoopProcess\x7fModuleInfo: C
         
          promptPrefix = ( |
             | 
-            users owner name, '@', users owner hostName).
+            users owner name, '@', (users owner hostName ifNil: 'unknown host')).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'prompt' -> () From: ( | {

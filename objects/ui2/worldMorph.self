@@ -777,6 +777,7 @@ whenever the background menu is rebuilt\x7fModuleInfo: Module: worldMorph Initia
               'top' 
             & 'builtInMorphs' 
             & 'usefulObjects' 
+            & 'users'
             & 'worldManagement' 
             & 'applications' 
             & 'memory' 
