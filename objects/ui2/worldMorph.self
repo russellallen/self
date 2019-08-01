@@ -1884,7 +1884,8 @@ oldGlobalBounds. \x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
             displayName == 'quartz' ifTrue: [^ ''].
             " Reset to zero if reseting X Display"
             (snapshotAction commandLine includes: '--resetXDisplays')
-              ifTrue: [^ ''].
+              ifTrue: [" Reset display to DISPLAY environment variable "
+                 ^ os environmentAt: 'DISPLAY' IfFail: ''].
             displayName).
         } | ) 
 

@@ -157,16 +157,6 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'Comment: In a shared world, the display and world may
-reside on different machines (nodes in unix terminology).
-hostName will return the name of the machine at which you
-sit (i.e., the display host).\x7fModuleInfo: Module: coreUserProfile InitialContents: FollowSlot\x7fVisibility: public'
-        
-         hostName = ( |
-            | displayHostName).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
          'Category: platform-dependent\x7fModuleInfo: Module: coreUserProfile InitialContents: FollowSlot\x7fVisibility: private'
         
          loginNameGuessHoweverLongItTakes = ( |
@@ -199,13 +189,6 @@ sit (i.e., the display host).\x7fModuleInfo: Module: coreUserProfile InitialCont
          'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
-        
-         password: aString = ( |
-            | [notYetImplemented]. self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
@@ -330,6 +313,14 @@ SlotsToOmit: loginName parent.
          'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (set copyRemoveAll)'
         
          team <- set copyRemoveAll.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> () From: ( | {
+         'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
+        
+         userNamed: n = ( |
+            | 
+            userNamed: n IfAbsent: [error: 'Cannot find registered user: ', n]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> () From: ( | {

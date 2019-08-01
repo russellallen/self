@@ -119,6 +119,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
              Choices: availableUsers
              Results:  availableHands.
             safelyDoIfWorld: [ closeFromHand: chosenHand].
+            userQuery report: 'Access for ', chosenHand userInfo name, ' removed.'.
             self).
         } | ) 
 
@@ -147,13 +148,12 @@ on that display.\x7fModuleInfo: Module: userProfile InitialContents: FollowSlot'
                   ifTrue: [^ attachOpenWindowForUserDialog: evt]
                    False: [^ self]]).
             availableDisplays: (availableDisplays shrinkwrapped splitOn: '\n') mapBy: [|:d| ':', (d slice: 1 @ infinity)].
-            usedDisplays: hands copyMappedBy: [|:h| h winCanvasForHand display name].
+            usedDisplays: hands copyMappedBy: [|:h| h winCanvasForHand display originalName].
             freeDisplays: availableDisplays difference: usedDisplays.
             freeDisplays isEmpty ifTrue: [userQuery report: 'There are no free displays.'. ^ self].
             chosenDisplay: freeDisplays first.
-            "chosenDisplay: userQuery askString: 'Which display?\n(Is probably an X display eg :1 ... :5)'."
             addWindowOnDisplay: chosenDisplay Bounds: (0@0)##(3000@3000) User: chosenUser Limited: false.
-            userQuery report: chosenUser name, ' may now connect on display ', chosenDisplay.
+            reportThatUser: chosenUser CanAccessDisplay: chosenDisplay.
             self).
         } | ) 
 

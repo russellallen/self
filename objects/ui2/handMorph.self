@@ -941,6 +941,18 @@ will also change the screen edges, but not the held objects.\x7fModuleInfo: Modu
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'handMorph' -> () From: ( | {
+         'Category: name and other userInfo issues\x7fModuleInfo: Module: handMorph InitialContents: FollowSlot'
+        
+         informSystemAboutPassword = ( |
+            | 
+            "Remove initiall ':' character"
+            ('/self/vnc/',
+               winCanvasForHand display originalName copyWithoutFirst,
+            '.vncpasswd') setFileContentsTo: userInfo hashedVNCPassword.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'handMorph' -> () From: ( | {
          'Category: basics\x7fModuleInfo: Module: handMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          initializePrototype = ( |
@@ -1195,6 +1207,7 @@ your kind of finished for the day.\x7fModuleInfo: Module: handMorph InitialConte
             | 
             userInfo setNamesByGuess.
             setCachedNameWidth.
+            informSystemAboutPassword.
             self).
         } | ) 
 
