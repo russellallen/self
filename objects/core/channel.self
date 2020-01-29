@@ -12,6 +12,27 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
          'Category: system\x7fCategory: concurrency\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
+         c2 = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'c2' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals c2.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'c2' -> () From: ( | {
+         'Category: internal state\x7fModuleInfo: Module: channel InitialContents: InitializeToExpression: (lock copy)'
+        
+         chLock <- lock copy.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'c2' -> () From: ( | {
+         'Category: user state\x7fModuleInfo: Module: channel InitialContents: InitializeToExpression: (nil)'
+        
+         endpoint.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+         'Category: system\x7fCategory: concurrency\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+        
          channel = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'channel' -> () From: ( |
              {} = 'Comment: TODO
 
@@ -29,30 +50,15 @@ Nice improcements to this would be
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> () From: ( | {
+         'Category: internal state\x7fModuleInfo: Module: channel InitialContents: InitializeToExpression: (lock copy)'
+        
+         chLock <- lock copy.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> () From: ( | {
          'Category: user state\x7fModuleInfo: Module: channel InitialContents: InitializeToExpression: (nil)'
         
          endpoint.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'Category: support\x7fCategory: handling\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         deadProcess = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'deadProcess' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals channel parent deadProcess.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> () From: ( | {
-         'Category: internal state\x7fModuleInfo: Module: channel InitialContents: InitializeToExpression: (channel parent deadProcess)'
-        
-         handlerProcess <- bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'deadProcess' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> () From: ( | {
-         'Category: internal state\x7fModuleInfo: Module: channel InitialContents: InitializeToExpression: (lock)'
-        
-         lock <- bootstrap stub -> 'globals' -> 'lock' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> () From: ( | {
@@ -65,226 +71,156 @@ Nice improcements to this would be
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'Category: handling\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         abort = ( |
-            | handlerProcess abortIfLive. running: deadProcess. self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'Category: support\x7fCategory: copying\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+         'Category: copying\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
          copy = ( |
-            | 
-            (resend.copy
-              queue: queue copy)
-              lock: lock copy).
+            | resend.copy chLock: lock copy).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: FollowSlot'
+         'Category: copying\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
          copyOn: obj = ( |
             | copy endpoint: obj).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'Category: support\x7fCategory: queueing\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+         'Category: inbox creation\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
-         createTodoAndQueueSelector: s Arguments: a = ( |
-             t.
-            | 
-            t: todo copyReceiver: endpoint Selector: s Arguments: a.
-            queue add: t.
-            start.
-            t).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'deadProcess' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         abortIfLive = ( |
-            | self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'deadProcess' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         isAlive = bootstrap stub -> 'globals' -> 'false' -> ().
+         inbox = ( |
+            | inboxPrototype _Clone channel_: self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'Category: support\x7fCategory: handling\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+         'Category: inbox prototypes\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
-         handleLoop = ( |
-            | 
-            [queue isEmpty] whileFalse: [
-              queue removeFirst send]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'Category: inspecting\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         isRunning = ( |
-            | handlerProcess isAlive).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'Category: support\x7fCategory: copying\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'Category: handling\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         restart = ( |
-            | abort start).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         sendWaitResultSelector: s Arguments: a = ( |
-            | (createTodoAndQueueSelector: s Arguments: a) waitThenReturnResult).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         sendWithoutWaitingSelector: s Arguments: a = ( |
-            | createTodoAndQueueSelector: s Arguments: a. self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         sendingInbox = ( |
-            | sendingInboxPrototype _Clone channel_: self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'Category: support\x7fCategory: inbox prototypes\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         sendingInboxPrototype = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'sendingInboxPrototype' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals channel parent sendingInboxPrototype.
+         inboxPrototype = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'inboxPrototype' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals channel parent inboxPrototype.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'sendingInboxPrototype' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'inboxPrototype' -> () From: ( | {
          'ModuleInfo: Module: channel InitialContents: InitializeToExpression: (nil)'
         
          channel_.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'sendingInboxPrototype' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'inboxPrototype' -> () From: ( | {
          'ModuleInfo: Module: channel InitialContents: FollowSlot\x7fVisibility: public'
         
          undefinedSelector: sel Type: msgType Delegatee: del MethodHolder: mh Arguments: args = ( |
+             l = bootstrap stub -> 'lobby' -> ().
+             m.
             | 
-            channel_ sendWithoutWaitingSelector: sel Arguments: args).
+            m: (l message copy receiver: l nil Selector: sel Type: msgType Delegatee: del MethodHolder: mh Arguments: args).
+            channel_ sendMessage: m).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'Category: inspecting\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+         'Category: inbox creation\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
-         size = ( |
-            | queue size).
+         inboxTimeOut: ms = ( |
+            | (inboxTimeoutPrototype _Clone channel_: self) timeOut: ms).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'Category: handling\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+         'Category: inbox prototypes\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
-         start = ( |
-            | 
-            lock protect: [
-            "Guard against two handlerProcesses running together"
-            handlerProcess isAlive ifTrue: [^ self].
-            handlerProcess: (
-              process copySend: (message copy receiver: self Selector: 'handleLoop')
-                  CauseOfBirth: 'a channel') resume]. 
-            self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'Category: support\x7fCategory: queueing\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         todo = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'todo' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals channel parent todo.
+         inboxTimeOutPrototype = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'inboxTimeOutPrototype' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals channel parent inboxTimeOutPrototype.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'todo' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'inboxTimeOutPrototype' -> () From: ( | {
+         'ModuleInfo: Module: channel InitialContents: InitializeToExpression: (nil)'
         
-         copy = ( |
-            | resend.copy sem: semaphore copyCount: 0 Capacity: 1).
+         channel_.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'todo' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'inboxTimeOutPrototype' -> () From: ( | {
+         'ModuleInfo: Module: channel InitialContents: InitializeToExpression: (nil)'
         
-         copyReceiver: r Selector: s Arguments: a = ( |
+         timeOut_.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'inboxTimeOutPrototype' -> () From: ( | {
+         'ModuleInfo: Module: channel InitialContents: FollowSlot\x7fVisibility: public'
+        
+         undefinedSelector: sel Type: msgType Delegatee: del MethodHolder: mh Arguments: args = ( |
+             l = bootstrap stub -> 'lobby' -> ().
+             m.
             | 
-            copy message: (message copy receiver: r Selector: s Arguments: a)).
+            m: (l message copy receiver: l nil Selector: sel Type: msgType Delegatee: del MethodHolder: mh Arguments: args).
+            channel_ sendMessage: m TimeOut: timeOut_).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'todo' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: InitializeToExpression: (message)'
-        
-         message <- bootstrap stub -> 'globals' -> 'message' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'todo' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
          'ModuleInfo: Module: channel InitialContents: FollowSlot'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'todo' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: InitializeToExpression: (nil)'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
+         'Category: sending\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
-         result.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'todo' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: InitializeToExpression: (semaphore)'
-        
-         sem <- bootstrap stub -> 'globals' -> 'semaphore' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'todo' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         send = ( |
-            | result: message send. sem signal. self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'todo' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         wait = ( |
-            | sem wait).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'todo' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         waitThenReturnResult = ( |
-            | wait. result).
+         sendMessage: msg = ( |
+            | 
+            ( message copy receiver: self Selector: 'sendWaitResultMessage:' With: msg) fork resume.
+            nil).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: channel InitialContents: FollowSlot'
+         'Category: sending\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+        
+         sendMessage: msg TimeOut: ms = ( |
+            | 
+            ( message copy receiver: self Selector: 'sendWaitResultMessage:TimeOut:IfTimedOut:' 
+                           With: msg With: ms With: (| value = (self) |)) fork resume.
+            nil).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
+         'Category: sending\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+        
+         sendWaitResultMessage: msg = ( |
+            | 
+            chLock protect: [unsafeSendMessage: msg]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
+         'Category: sending\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+        
+         sendWaitResultMessage: msg TimeOut: ms IfTimedOut: tblk = ( |
+            | 
+            chLock protect: [unsafeSendMessage: msg] TimeOut: ms IfTimedOut: tblk).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
+         'Category: queue management\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+        
+         size = ( |
+            | chLock lockCount + chLock sema noOfWaiters).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+        
+         unsafeSendMessage: msg = ( |
+            | 
+            msg receiver: endpoint. msg send).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
+         'Category: inbox creation\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
          waitingInbox = ( |
             | waitingInboxPrototype _Clone channel_: self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'Category: support\x7fCategory: inbox prototypes\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+         'Category: inbox prototypes\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
          waitingInboxPrototype = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingInboxPrototype' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals channel parent waitingInboxPrototype.
@@ -302,14 +238,56 @@ Nice improcements to this would be
          'ModuleInfo: Module: channel InitialContents: FollowSlot\x7fVisibility: public'
         
          undefinedSelector: sel Type: msgType Delegatee: del MethodHolder: mh Arguments: args = ( |
+             l = bootstrap stub -> 'lobby' -> ().
+             m.
             | 
-            channel_ sendWaitResultSelector: sel Arguments: args).
+            m: (l message copy receiver: l nil Selector: sel Type: msgType Delegatee: del MethodHolder: mh Arguments: args).
+            channel_ sendWaitResultMessage: m).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> () From: ( | {
-         'Category: internal state\x7fModuleInfo: Module: channel InitialContents: InitializeToExpression: (sharedQueue)'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
+         'Category: inbox creation\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
-         queue <- bootstrap stub -> 'globals' -> 'sharedQueue' -> ().
+         waitingInboxTimeOut: ms IfTimedOut: tblk = ( |
+            | ((waitingTimeOutInbox _Clone channel_: self) timeOut: ms) timeOutBlock_: tblk).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
+         'Category: inbox prototypes\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+        
+         waitingTimeoutInboxPrototype = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeoutInboxPrototype' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals channel parent waitingTimeoutInboxPrototype.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeoutInboxPrototype' -> () From: ( | {
+         'ModuleInfo: Module: channel InitialContents: InitializeToExpression: (nil)'
+        
+         channel_.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeoutInboxPrototype' -> () From: ( | {
+         'ModuleInfo: Module: channel InitialContents: InitializeToExpression: (nil)'
+        
+         timeOutBlock_.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeoutInboxPrototype' -> () From: ( | {
+         'ModuleInfo: Module: channel InitialContents: InitializeToExpression: (nil)'
+        
+         timeOut_.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeoutInboxPrototype' -> () From: ( | {
+         'ModuleInfo: Module: channel InitialContents: FollowSlot\x7fVisibility: public'
+        
+         undefinedSelector: sel Type: msgType Delegatee: del MethodHolder: mh Arguments: args = ( |
+             l = bootstrap stub -> 'lobby' -> ().
+             m.
+            | 
+            m: (l message copy receiver: l nil Selector: sel Type: msgType Delegatee: del MethodHolder: mh Arguments: args).
+            channel_ sendMessage: m TimeOut: timeOut_ IfTimedOut: timeOutBlock_).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
