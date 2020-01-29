@@ -261,8 +261,12 @@ SlotsToOmit: parent.
 
             case
               if: [ 1 = b ] Then: [
-                type: 'leftMouseDown'.
-                state: state || leftMouseMask.
+                metaIsDown || commandIsDown || altIsDown ifTrue: [
+                  type: 'rightMouseDown'.
+                  state: state || rightMouseMask]
+                False: [
+                  type: 'leftMouseDown'.
+                  state: state || leftMouseMask].
               ]
               If: [ 2 = b ] Then: [
                 type: 'middleMouseDown'.

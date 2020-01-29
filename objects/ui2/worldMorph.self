@@ -573,6 +573,14 @@ the world\'s layoutChanged method does nothing.\x7fModuleInfo: Module: worldMorp
          'Category: window management\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
         
          addWindowOnDisplay: dispName Bounds: b Limited: isLimited = ( |
+            | 
+            addWindowOnDisplay: dispName Bounds: b User: users owner Limited: isLimited).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
+         'Category: window management\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
+        
+         addWindowOnDisplay: dispName Bounds: b User: aUserProfile Limited: isLimited = ( |
              bc.
              h.
              pc.
@@ -589,6 +597,7 @@ the world\'s layoutChanged method does nothing.\x7fModuleInfo: Module: worldMorp
 
             isLimited ifTrue: [wc platformWindow freezeSize: b size].
             h: handMorph copyRemoveAllSubscribers privateSetOwner: self.
+            h userInfo: aUserProfile.
             h color: randomColorForUser.
             h subscribeWindow:   self. 
 
@@ -768,6 +777,7 @@ whenever the background menu is rebuilt\x7fModuleInfo: Module: worldMorph Initia
               'top' 
             & 'builtInMorphs' 
             & 'usefulObjects' 
+            & 'users'
             & 'worldManagement' 
             & 'applications' 
             & 'memory' 
@@ -1874,7 +1884,8 @@ oldGlobalBounds. \x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
             displayName == 'quartz' ifTrue: [^ ''].
             " Reset to zero if reseting X Display"
             (snapshotAction commandLine includes: '--resetXDisplays')
-              ifTrue: [^ ''].
+              ifTrue: [" Reset display to DISPLAY environment variable "
+                 ^ os environmentAt: 'DISPLAY' IfFail: ''].
             displayName).
         } | ) 
 

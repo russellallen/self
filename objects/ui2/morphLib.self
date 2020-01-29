@@ -2216,7 +2216,8 @@ horizontal sliderMorph\x7fModuleInfo: Module: morphLib InitialContents: FollowSl
             sliderBox: ((box left  )@(y - s2)) #
                        ((box right )@(y + s2)).
 
-            c fillRectangle: box Color: color.
+            "Fast path for transparency"
+            color isTransparent ifFalse: [c fillRectangle: box Color: color].
             "Round top and bottom, unless it would make us a circle..."
             sliderBox height <= sliderBox width
               ifTrue: [c                fillRectangle: sliderBox  Color: sliderColor]
