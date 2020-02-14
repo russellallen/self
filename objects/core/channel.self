@@ -157,6 +157,13 @@ Nice improcements to this would be
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
+         'Category: queue management\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+        
+         noOfWaiters = ( |
+            | chLock sema noOfWaiters).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
          'ModuleInfo: Module: channel InitialContents: FollowSlot'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
@@ -195,13 +202,6 @@ Nice improcements to this would be
          sendWaitResultMessage: msg TimeOut: ms IfTimedOut: tblk = ( |
             | 
             chLock protect: [unsafeSendMessage: msg] TimeOut: ms IfTimedOut: tblk).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
-         'Category: queue management\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
-        
-         size = ( |
-            | chLock lockCount + chLock sema noOfWaiters).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
