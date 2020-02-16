@@ -12,27 +12,6 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
          'Category: system\x7fCategory: concurrency\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
-         c2 = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'c2' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals c2.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'c2' -> () From: ( | {
-         'Category: internal state\x7fModuleInfo: Module: channel InitialContents: InitializeToExpression: (lock copy)'
-        
-         chLock <- lock copy.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'c2' -> () From: ( | {
-         'Category: user state\x7fModuleInfo: Module: channel InitialContents: InitializeToExpression: (nil)'
-        
-         endpoint.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fCategory: concurrency\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
-        
          channel = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'channel' -> () From: ( |
              {} = 'Comment: TODO
 
@@ -202,6 +181,14 @@ Nice improcements to this would be
          sendWaitResultMessage: msg TimeOut: ms IfTimedOut: tblk = ( |
             | 
             chLock protect: [unsafeSendMessage: msg] TimeOut: ms IfTimedOut: tblk).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
+         'Category: queue management\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
+        
+         size = ( |
+            | 
+            noOfWaiters + chLock lockCount).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
