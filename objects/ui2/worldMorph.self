@@ -68,7 +68,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             | 
             resend.postFileIn.
             worldMorph initializePrototype.
-            ( worldMorph & shell & memory ) asVector do: [| :o | worldMorph addBackgroundMenuContributor: o ].
+            ( worldMorph & shell & memory & userProfile ) asVector do: [| :o | worldMorph addBackgroundMenuContributor: o ].
             self).
         } | ) 
 
@@ -512,7 +512,7 @@ the world\'s layoutChanged method does nothing.\x7fModuleInfo: Module: worldMorp
         
          addBackgroundMenuContributor: obj = ( |
             | 
-            backgroundMenu: nil.
+            backgroundMenu: nil. 
             backgroundMenuContributors add: obj.
             self).
         } | ) 

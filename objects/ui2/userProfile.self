@@ -62,7 +62,6 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             snapshotAction addSchedulerInitialMessage:  
               message copy receiver: transporter moduleDictionary
                            Selector: 'resetFillingSemaphore'.
-            worldMorph addBackgroundMenuContributor: userProfile.
             resend.postFileIn).
         } | ) 
 

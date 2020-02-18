@@ -440,6 +440,12 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
          'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
         
+         palladio = '-*-urw palladio l-medium-r-normal--'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
+         'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+        
          parent* = bootstrap stub -> 'traits' -> 'oddball' -> ().
         } | ) 
 
@@ -559,7 +565,7 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
             now: time current.
             (now - lastKvetchTime ) > (1000 * 60 * 5)  ifTrue: [
               lastKvetchTime: now.
-              log warn: 'unknown font: ', sel.
+              log warn: 'Unknown font: ', sel, ' ... subsituting times'.
             ].
             times).
         } | ) 
@@ -930,8 +936,9 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
             fontStructs at: fSpec IfAbsent: [| fullName. fontStruct |
                 fullName: (fullNameFor: xFontName Size: fSpec size).
                 fontStruct: 
-                    wc display loadFont: fullName 
+                    wc display loadFont: fullName
                               IfFail: [| substituteName |
+                                  log warn: 'Failed to load font: ', fullName, ' ... substituting 6x13'.
                                   substituteName: (fullNameFor: '6x13' Size: 13).
                                   wc display loadFont: substituteName IfFail: [
                                     "Last ditch attempt to get any font at all..."
