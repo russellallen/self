@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.11 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -801,7 +802,7 @@ SlotsToOmit: parent prototype.
             labelRow: rowMorph copy color: color.
             labelRow beFlexible borderWidth: 2.
             labelRowLabel: labelMorph copy.
-            labelRowLabel fontSpec: labelRowLabel fontSpec copyName: 'verdana' Style: 'italic'.
+            labelRowLabel fontSpec: labelRowLabel fontSpec copyName: 'helvetica' Style: 'italic'.
             labelRow addMorph: labelRowLabel.
 
             "make the inset bezel:"

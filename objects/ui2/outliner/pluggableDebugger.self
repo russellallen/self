@@ -1036,7 +1036,7 @@ SlotsToOmit: parent.
             | 
             b: ui2Button copy.
             b label: lblScript x
-              FontSpec: (fontSpec copyName: 'verdana' Style: 'bold')
+              FontSpec: (fontSpec copyName: 'helvetica' Style: 'bold')
               FontColor: myOutliner color textColorForBackground.
             ((b script: lblScript y) target: self) isAsynchronous.
             b).

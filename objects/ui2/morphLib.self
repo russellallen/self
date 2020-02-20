@@ -98,9 +98,9 @@ SlotsToOmit: parent prototype rawBox rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'labelMorph' -> () From: ( | {
-         'Category: Label Morph State\x7fModuleInfo: Module: morphLib InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 12 Style: \'bold\')\x7fVisibility: private'
+         'Category: Label Morph State\x7fModuleInfo: Module: morphLib InitialContents: InitializeToExpression: (fontSpec copyName: \'helvetica\' Size: 12 Style: \'bold\')\x7fVisibility: private'
         
-         myFontSpec <- fontSpec copyName: 'verdana' Size: 12 Style: 'bold'.
+         myFontSpec <- fontSpec copyName: 'helvetica' Size: 12 Style: 'bold'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'labelMorph' -> () From: ( | {
@@ -247,8 +247,8 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             | 
             resend.postFileIn.
             "dropping morphs fall through labelMorphs by default"
-            labelMorph fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold'.
-            selectionInListMorph fontSpec: globals fontSpec copyName: 'verdana' Size: 12 Style: 'bold'.
+            labelMorph fontSpec: globals fontSpec copyName: 'helvetica' Style: 'bold'.
+            selectionInListMorph fontSpec: globals fontSpec copyName: 'helvetica' Size: 12 Style: 'bold'.
             sliderMorph initializePrototype.
             self).
         } | ) 
@@ -355,9 +355,9 @@ SlotsToOmit: parent prototype rawBox rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selectionInListMorph' -> () From: ( | {
-         'ModuleInfo: Module: morphLib InitialContents: InitializeToExpression: (globals fontSpec copyName: \'verdana\' Size: 12 Style: \'bold\')\x7fVisibility: public'
+         'ModuleInfo: Module: morphLib InitialContents: InitializeToExpression: (globals fontSpec copyName: \'helvetica\' Size: 12 Style: \'bold\')\x7fVisibility: public'
         
-         fontSpec <- globals fontSpec copyName: 'verdana' Size: 12 Style: 'bold'.
+         fontSpec <- globals fontSpec copyName: 'helvetica' Size: 12 Style: 'bold'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selectionInListMorph' -> () From: ( | {

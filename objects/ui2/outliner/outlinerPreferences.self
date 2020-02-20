@@ -53,7 +53,8 @@ to how the desktop looks. - rca Aug13\x7fModuleInfo: Creator: globals outlinerPr
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          fontSpec = ( |
-            | globals fontSpec copyName: 'verdana' Size: mediumFontSize Style: 'italic').
+            | 
+            globals fontSpec copyName: 'helvetica' Size: mediumFontSize Style: 'italic').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'categoryOutlinerPreferences' -> () From: ( | {
@@ -103,7 +104,8 @@ to how the desktop looks. - rca Aug13\x7fModuleInfo: Creator: globals outlinerPr
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          fontSpec = ( |
-            | resend.fontSpec copyName: 'verdana' Style: '').
+            | 
+            resend.fontSpec copyName: 'helvetica' Style: '').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'copyDownSlotOutlinerPreferences' -> 'privateSlotStyle' -> () From: ( | {
@@ -125,7 +127,8 @@ to how the desktop looks. - rca Aug13\x7fModuleInfo: Creator: globals outlinerPr
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          fontSpec = ( |
-            | resend.fontSpec copyName: 'verdana' Style: 'bold').
+            | 
+            resend.fontSpec copyName: 'helvetica' Style: 'bold').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'copyDownSlotOutlinerPreferences' -> 'publicSlotStyle' -> () From: ( | {
@@ -148,7 +151,7 @@ to how the desktop looks. - rca Aug13\x7fModuleInfo: Creator: globals outlinerPr
         
          fontSpec = ( |
             | 
-            resend.fontSpec copyName: 'verdana' Size: mediumFontSize Style: '').
+            resend.fontSpec copyName: 'helvetica' Size: mediumFontSize Style: '').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'copyDownSlotOutlinerPreferences' -> 'undeclaredSlotStyle' -> () From: ( | {
@@ -179,7 +182,8 @@ to how the desktop looks. - rca Aug13\x7fModuleInfo: Creator: globals outlinerPr
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          fontSpec = ( |
-            | resend.fontSpec copyName: 'verdana'  Style: '').
+            | 
+            resend.fontSpec copyName: 'helvetica'  Style: '').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'debuggerPreferences' -> 'buttonStyle' -> () From: ( | {
@@ -293,7 +297,8 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          fontSpec = ( |
-            | globals fontSpec copyName: 'verdana' Size: largeFontSize Style: 'bold').
+            | 
+            globals fontSpec copyName: 'helvetica' Size: largeFontSize Style: 'bold').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'objectOutlinerPreferences' -> () From: ( | {
@@ -417,7 +422,7 @@ I am also immutable.\x7fModuleInfo: Creator: globals outlinerPreferences comment
         
          fontSpec = ( |
             | 
-            globals fontSpec copyName: 'verdana' Size: smallFontSize Style: '').
+            globals fontSpec copyName: 'helvetica' Size: smallFontSize Style: '').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> 'commentStyle' -> () From: ( | {
@@ -510,9 +515,9 @@ I am also immutable.\x7fModuleInfo: Creator: globals outlinerPreferences headerB
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> () From: ( | {
-         'ModuleInfo: Module: outlinerPreferences InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 11 Style: \'\')'
+         'ModuleInfo: Module: outlinerPreferences InitialContents: InitializeToExpression: (fontSpec copyName: \'helvetica\' Size: 11 Style: \'\')'
         
-         myFontSpec <- fontSpec copyName: 'verdana' Size: 11 Style: ''.
+         myFontSpec <- fontSpec copyName: 'helvetica' Size: 11 Style: ''.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'outlinerPreferences' -> () From: ( | {
@@ -1522,7 +1527,8 @@ good for introducing language semantics, say.
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          fontSpec = ( |
-            | resend.fontSpec copyName: 'verdana' Style: '').
+            | 
+            resend.fontSpec copyName: 'helvetica' Style: '').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotOutlinerPreferences' -> 'privateSlotStyle' -> () From: ( | {
@@ -1544,7 +1550,8 @@ good for introducing language semantics, say.
          'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          fontSpec = ( |
-            | resend.fontSpec copyName: 'verdana' Style: 'bold').
+            | 
+            resend.fontSpec copyName: 'helvetica' Style: 'bold').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotOutlinerPreferences' -> 'publicSlotStyle' -> () From: ( | {
@@ -1573,7 +1580,7 @@ good for introducing language semantics, say.
         
          fontSpec = ( |
             | 
-            globals fontSpec copyName: 'verdana' Size: mediumFontSize Style: '').
+            globals fontSpec copyName: 'helvetica' Size: mediumFontSize Style: '').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotOutlinerPreferences' -> 'undeclaredSlotStyle' -> () From: ( | {

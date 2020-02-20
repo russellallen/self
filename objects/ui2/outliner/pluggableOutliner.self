@@ -202,9 +202,9 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'evaluatorMorph' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: pluggableOutliner InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 12 Style: \'bold\')'
+         'ModuleInfo: Module: pluggableOutliner InitialContents: InitializeToExpression: (fontSpec copyName: \'helvetica\' Size: 12 Style: \'bold\')'
         
-         preferredFontSpec <- fontSpec copyName: 'verdana' Size: 12 Style: 'bold'.
+         preferredFontSpec <- fontSpec copyName: 'helvetica' Size: 12 Style: 'bold'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'evaluatorMorph' -> 'parent' -> () From: ( | {

@@ -87,7 +87,7 @@ SlotsToOmit: parent prototype.
                 (line copy beRigid setWidth: 15)          &
                 (transparentSpacerMorph copyH: 5)       &
                 (labelMorph copyLabel: title
-                    FontSpec: (outlinerPreferences mediumFontSpec copyName: 'verdana' Style: 'italic')
+                    FontSpec: (outlinerPreferences mediumFontSpec copyName: 'helvetica' Style: 'italic')
                     Color:    paint named: 'black')       &
                 (transparentSpacerMorph copyH: 5)       &
                 line copy) asVector.
@@ -118,7 +118,7 @@ SlotsToOmit: parent prototype.
             defaultButtonHolder: ui2Menu initializeDefaultButtonHolder: defaultButtonHolder.
             f: enumeratedTypeLabelMorph copyItemNames: labels Values: values DefaultButtonHolder: defaultButtonHolder.
             f setSelectedIndex: (values asVector keyAt: v).
-            f fontSpec: globals fontSpec copyName: 'verdana' Size: outlinerPreferences mediumFontSize Style: 'bold'.
+            f fontSpec: globals fontSpec copyName: 'helvetica' Size: outlinerPreferences mediumFontSize Style: 'bold'.
             buildFieldLabel: n ContentMorph: f).
         } | ) 
 
@@ -130,7 +130,7 @@ SlotsToOmit: parent prototype.
              r.
             | 
             labelM: labelMorph copyLabel: s
-                FontSpec: ( outlinerPreferences mediumFontSpec copyName: 'verdana' )
+                FontSpec: ( outlinerPreferences mediumFontSpec copyName: 'helvetica' )
                 Color:    (paint named: 'black').
             r: rowMorph copyTransparent.
             r borderWidth: 0.
@@ -158,7 +158,7 @@ SlotsToOmit: parent prototype.
              f.
             | 
             e: editorMorph copy.
-            e setFontSpec: (outlinerPreferences mediumFontSpec copyName: 'verdana' Style: 'bold')
+            e setFontSpec: (outlinerPreferences mediumFontSpec copyName: 'helvetica' Style: 'bold')
                 FontColor: (paint named: 'black').
             e appendString: s.
             s isEmpty ifTrue: [ e appendString: '   ' ].
@@ -944,7 +944,7 @@ SlotsToOmit: parent prototype.
             borderWidth: 3.
 
             subsheets: target propertySheets.
-            fs: globals fontSpec copyName: 'verdana' Size: ui2Button defaultFontSpec size.
+            fs: globals fontSpec copyName: 'helvetica' Size: ui2Button defaultFontSpec size.
 
             b1: ui2Button copyColor: color Target: self.
             b1 label: ' Cancel '
@@ -984,7 +984,7 @@ SlotsToOmit: parent prototype.
                 b4) asVector.
 
             t: labelMorph copyLabel: ('Properties for ', target morphTypeName prependAOrAn)
-                FontSpec: (outlinerPreferences largeFontSpec copyName: 'verdana' Style: 'bold')
+                FontSpec: (outlinerPreferences largeFontSpec copyName: 'helvetica' Style: 'bold')
                 Color:    paint named: 'black'.
 
             c: columnMorph copy color: color.

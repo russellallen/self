@@ -347,7 +347,7 @@ SlotsToOmit: baseMinHeight baseMinWidth parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Button' -> 'defaultButtonActionObject' -> () From: ( | {
          'ModuleInfo: Module: ui2Button InitialContents: InitializeToExpression: (nil)\x7fVisibility: public'
         
-         target <- bootstrap stub -> 'globals' -> 'nil' -> ().
+         target.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Button' -> () From: ( | {
@@ -363,9 +363,9 @@ SlotsToOmit: baseMinHeight baseMinWidth parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Button' -> () From: ( | {
-         'Category: construction\x7fModuleInfo: Module: ui2Button InitialContents: InitializeToExpression: (globals fontSpec copyName: \'verdana\' Size: 12)\x7fVisibility: public'
+         'Category: construction\x7fModuleInfo: Module: ui2Button InitialContents: InitializeToExpression: (globals fontSpec copyName: \'helvetica\' Size: 12)\x7fVisibility: public'
         
-         defaultFontSpec <- globals fontSpec copyName: 'verdana' Size: 12.
+         defaultFontSpec <- globals fontSpec copyName: 'helvetica' Size: 12.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Button' -> () From: ( | {

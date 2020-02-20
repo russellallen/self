@@ -532,27 +532,27 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
-         'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+         'Category: classic\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot'
         
          symbol = '-*-symbol-medium-r-normal--'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
-         'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+         'Category: classic\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot'
         
          symbolBold = ( |
             | symbol).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
-         'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+         'Category: classic\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot'
         
          symbolBoldItalic = ( |
             | symbol).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'fontFamily' -> () From: ( | {
-         'ModuleInfo: Module: scalableFont InitialContents: FollowSlot'
+         'Category: classic\x7fModuleInfo: Module: scalableFont InitialContents: FollowSlot'
         
          symbolItalic = ( |
             | symbol).
@@ -601,7 +601,7 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
             now: time current.
             (now - lastKvetchTime ) > (1000 * 60 * 5)  ifTrue: [
               lastKvetchTime: now.
-              log warn: 'Unknown font: ', sel, ' ... subsituting terminus'.
+              log warn: 'Unknown font: ', sel, ' ... subsituting terminus in x11Globals>>fontFamily>>undefinedSelector:...'.
             ].
             terminus).
         } | ) 
@@ -976,7 +976,7 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
                 fontStruct: 
                     wc display loadFont: fullName
                               IfFail: [| substituteName |
-                                  log warn: 'Failed to load font: ', fullName, ' ... substituting 6x13'.
+                                  log warn: 'Failed to load font: ', fullName, ' ... substituting 6x13 in traits>>xFontDictionary>>structForFontSpec:WindowCanvas:'.
                                   substituteName: (fullNameFor: '6x13' Size: 13).
                                   wc display loadFont: substituteName IfFail: [
                                     "Last ditch attempt to get any font at all..."

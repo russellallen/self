@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.9 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -634,7 +635,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
     '0011100' ) asVector
  Colors: (
     (paint named: 'white') &
-    (paint named: 'black')) asVector] value) From: ( |
+    (paint named: 'transparent')) asVector] value) From: ( |
              {} = 'ModuleInfo: Creator: traits checkCircleMorph sevenPixelCircleImage.
 \x7fIsComplete: '.
             | ) .
@@ -706,7 +707,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             s beRigidHorizontally setWidth: 10.
             s color: (paint named: 'gray') copyBrightness: 0.84.
             lbl: labelMorph copy.
-            lbl fontSpec: globals fontSpec copyName: 'verdana' Size: 18.
+            lbl fontSpec: globals fontSpec copyName: 'helvetica' Size: 18.
             col: columnMorph copy beFlexible color: c.
             col baseMinHeight: 50.
             col borderWidth: 0.
