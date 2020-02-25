@@ -31,7 +31,7 @@ This should give you at least two files, a binary '``Self``' which is the VM, an
 
 and run the VM, passing the snapshot as an argument::
 
-  Self -s Clean.self
+  Self -s Clean.snap
 
 Building your own system
 ------------------------
