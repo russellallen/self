@@ -86,7 +86,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (nil)'
         
          loginName.
-        } | ) 
+        } | )  
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> () From: ( | {
          'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
@@ -303,6 +303,12 @@ SlotsToOmit: loginName parent.
          'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (\'owner\')'
         
          loginName <- 'owner'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( | {
+         'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
+        
+         hand <- nil.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( | {
