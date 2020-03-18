@@ -233,6 +233,15 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             os nodename).
         } | ) 
 
+bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
+         'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot\x7fVisibility: private'
+        
+         displayHostNameGuess = ( |
+            | 
+            "Will be overriden in userProfile.self"
+            '').
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> () From: ( | {
          'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
         
