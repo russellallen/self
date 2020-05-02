@@ -1,8 +1,9 @@
  '$Revision: 30.8 $'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -1241,6 +1242,189 @@ on the first use.\x7fModuleInfo: Creator: globals webBrowser configurationReques
                      Else: [ '%', (s asByte printStringBase: 16 PadWith: '0' ToSize: 2) capitalizeAll ] )
             ].
             r flatString).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> () From: ( | {
+         'Category: prototypes\x7fCategory: requesters\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot'
+        
+         fetchRequester = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals webBrowser fetchRequester.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: InitializeToExpression: (false)\x7fVisibility: private'
+        
+         debug <- bootstrap stub -> 'globals' -> 'false' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot'
+        
+         fetch: url = ( |
+             c.
+             e.
+            | 
+            e: 'x', (webBrowser escapeHTTPString: url), 'x'.
+            c: 'fetch -o \'/tmp/', e, '\' \'', url, '\''.
+            os command: c IfFail: ''.
+            ('/tmp/', e) asFileContents).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot'
+        
+         getContentsOf: url Limit: lim = ( |
+            | 
+            request:
+
+              requestName, 
+              ' ', 
+              ( urlContentsForRequest: url ), 
+              ( "requestName uncapitalizeAll = 'get' ifTrue: '' False:" ' HTTP/1.0' ), 
+              '\r\n',
+              'Host: ', (url host), '\r\n',
+              ( isCachingOK ifTrue: '' False: 'Pragma: no-cache\r\n' ),
+              '\r\n'
+             Limit: lim).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot\x7fVisibility: private'
+        
+         getHost: host URL: url Limit: lim = ( |
+             r.
+            | 
+            openHost: host.
+            r: getContentsOf: url Limit: lim.
+            r).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot\x7fVisibility: public'
+        
+         getRest = ( |
+            | 
+            getRestLimit: maxSmallInt).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot'
+        
+         getRestLimit: lim = ( |
+             n.
+             res.
+            | 
+            res: collector copyFirst: ''.
+            n: lim.
+            [ socket atEOF || [n <= 0] ] whileFalse: [
+              | s |
+              s: socket readMin: 0 Max: n min: 4096. 
+              res: res & s.
+              n: n - s size.
+            ].
+            socket atEOF ifTrue: [ 
+               socket closeIfFail: []. 
+               debug ifTrue: [ os_file debugFd: -1. ].
+            ].
+            res flatString).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot\x7fVisibility: public'
+        
+         getURL: url = ( |
+            | 
+            [getURL: url Limit: maxSmallInt].
+            fetch: url unparse).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot\x7fVisibility: public'
+        
+         getURL: url Limit: lim = ( |
+             u.
+            | 
+            u: url asURL.
+            userQuery show: 'Getting ', u unparse
+                      While: [ getHost: u host URL: u Limit: lim ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot\x7fVisibility: private'
+        
+         hostToOpen: host = ( |
+            | host).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: InitializeToExpression: (true)'
+        
+         isCachingOK <- bootstrap stub -> 'globals' -> 'true' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot'
+        
+         openHost: host = ( |
+            | 
+            socket: os_file openTCPHost: ( hostToOpen: host)  Port: portToOpen.
+            debug  ifTrue: [ os_file debugFd: socket fileDescriptor ].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'ModuleInfo: Module: webBrowser InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot'
+        
+         portToOpen = 80.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot'
+        
+         request: r Limit: lim = ( |
+            | 
+            showRequests ifTrue: [(r, requestData) printLine].
+            socket write: r, requestData.
+            getRestLimit: lim).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: InitializeToExpression: (\'\')'
+        
+         requestData <- ''.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: InitializeToExpression: (\'GET\')'
+        
+         requestName <- 'GET'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'ModuleInfo: Module: webBrowser InitialContents: InitializeToExpression: (false)'
+        
+         showRequests <- bootstrap stub -> 'globals' -> 'false' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: InitializeToExpression: (nil)'
+        
+         socket <- bootstrap stub -> 'globals' -> 'nil' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'fetchRequester' -> () From: ( | {
+         'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot\x7fVisibility: private'
+        
+         urlContentsForRequest: url = ( |
+            | url uri).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> () From: ( | {
@@ -7068,7 +7252,8 @@ globals webBrowser htmlParser tags abstractFormatChanger. copy
          'Category: working I/O\x7fModuleInfo: Module: webBrowser InitialContents: FollowSlot\x7fVisibility: public'
         
          getURL: url = ( |
-            | getURL: url Limit: maxSmallInt).
+            | 
+            getURL: url Limit: maxSmallInt).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'requester' -> () From: ( | {
@@ -7739,7 +7924,7 @@ SlotsToOmit: parent prototype.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'webPage' -> 'parent' -> () From: ( | {
          'Category: web page behavior\x7fModuleInfo: Module: webBrowser InitialContents: InitializeToExpression: (nil)'
         
-         defaultButtonHolder.
+         defaultButtonHolder <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'webBrowser' -> 'webPage' -> 'parent' -> () From: ( | {

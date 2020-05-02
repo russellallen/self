@@ -944,7 +944,7 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
             | 
             resend.printString, 
             (tree = '' ifTrue: '' 
-                        False: ' (in ', tree, ' tree)')).
+                        False: ' (in ', tree, ' package)')).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {
@@ -978,7 +978,7 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {
-         'Category: trees\x7fModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: packages\x7fModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: public'
         
          registerTree: t At: a = ( |
             | 
@@ -1169,7 +1169,14 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {
-         'Category: trees\x7fModuleInfo: Module: module InitialContents: FollowSlot'
+         'Category: packages\x7fComment: Will normally be overridden by children,
+this is here to avoid errors in bootstrap read.\x7fModuleInfo: Module: module InitialContents: FollowSlot'
+        
+         tree = ''.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {
+         'Category: packages\x7fModuleInfo: Module: module InitialContents: FollowSlot'
         
          treeAddress = ( |
             | 
@@ -1179,13 +1186,13 @@ Otherwise, the returned set will include nullPath.\x7fModuleInfo: Module: module
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {
-         'Category: trees\x7fModuleInfo: Module: module InitialContents: InitializeToExpression: (dictionary copyRemoveAll)'
+         'Category: packages\x7fModuleInfo: Module: module InitialContents: InitializeToExpression: (dictionary copyRemoveAll)'
         
          treeDictionary = dictionary copyRemoveAll.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'init' -> 'parent' -> () From: ( | {
-         'Category: trees\x7fModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: packages\x7fModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: public'
         
          treeRootFor: t IfAbsent: blk = ( |
             | treeDictionary at: t IfAbsent: blk).
@@ -1266,7 +1273,8 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'module' -> () From: ( | {
          'ModuleInfo: Module: module InitialContents: FollowSlot\x7fVisibility: private'
         
-         subpartNames <- ''.
+         subpartNames <- 'multiverse
+'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
@@ -2228,6 +2236,12 @@ initially and contained the other modules.
          asModule = ( |
             | transporter moduleDictionary at: self).
         } | ) 
+
+
+
+ '-- Sub parts'
+
+ bootstrap read: 'multiverse' From: 'core'
 
 
 

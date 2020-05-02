@@ -1,9 +1,9 @@
  '$Revision: 30.9 $'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
-"preFileIn" self
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -299,7 +299,7 @@ SlotsToOmit: parent.
          titleString = ( |
             | 
             module nameOrNone,
-            ((module tree = '') ifTrue: '' False: [' (in ', module tree, ' tree)'])).
+            ((module tree = '') ifTrue: '' False: [' (in package ', module tree, ')'])).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'moduleModel' -> 'parent' -> () From: ( | {

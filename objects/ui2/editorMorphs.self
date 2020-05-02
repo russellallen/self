@@ -805,6 +805,17 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caretMorph' -> () From: ( | {
+         'Category: drawing\x7fComment: Draw the base of this morph on the given canvas.\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         baseDrawOn: aCanvas = ( |
+            | 
+            aCanvas 
+              fillRectangle: (baseBounds copy stretchRight: 1)
+              Color: color.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caretMorph' -> () From: ( | {
          'Category: layoutAndGeometry\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          baseMinHeight = ( |
@@ -958,9 +969,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         
          resizeRect: r = ( |
             | 
-            "Always be one pixel wide."
+            "Always be zero pixels wide."
 
-            rawBox: r topLeft ## (1 @ r height).
+            rawBox: r topLeft ## (0 @ r height).
             self).
         } | ) 
 
