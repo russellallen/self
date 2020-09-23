@@ -104,6 +104,30 @@ after the specified delay.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstract_OS' -> () From: ( | {
+         'Category: file operations\x7fCategory: temporary files\x7fComment: Attempts to run the os command commandSource
+in a separate OS-level process. Redirects the
+text output of the command into a temporary
+file, and returns the contents of that file
+after process has finished.\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
+        
+         outputOfCommand: commandSource IfFail: fb = ( |
+             flag.
+             output.
+            | 
+              output: os_file temporaryFileName.
+              flag: output, '.flag'.
+            [
+              command: '( ', commandSource, ' > ', output, ' ; echo finished > ', flag, ' ) & ' IfFail: [ ^ fb value ].
+              [os_file exists: flag] whileFalse.
+              " Return output of command "
+              output asFileContents
+            ] onReturn: [
+              unlink: output IfFail: [].
+              unlink: flag IfFail: []
+            ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstract_OS' -> () From: ( | {
          'ModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'oddball' -> ().
