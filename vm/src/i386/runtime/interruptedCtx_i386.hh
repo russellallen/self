@@ -6,5 +6,4 @@
 
 
  public:
-  int* ebp_addr();
 # endif // __i386__

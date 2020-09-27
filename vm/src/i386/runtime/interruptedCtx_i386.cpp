@@ -71,9 +71,6 @@ void InterruptedContext::setupPreemptionFromSignal() {
   return  (char**) &scp->uc_mcontext->__ss.__eip; // see /usr/include/mach/i386/thread_status.h
   }
   int* InterruptedContext::sp_addr() {
-  return  (int*) &scp->uc_mcontext->__ss.__esp;
-  }
-  int* InterruptedContext::ebp_addr() {
   return  (int*) &scp->uc_mcontext->__ss.__ebp;
   }
 
@@ -83,9 +80,6 @@ void InterruptedContext::setupPreemptionFromSignal() {
     return  (char**) &scp->uc_mcontext.gregs[REG_EIP]; // see /usr/include/asm-i386/sigcontext.h
   }
   int* InterruptedContext::sp_addr() {
-    return  (int*) &scp->uc_mcontext.gregs[REG_ESP];
-  }
-  int* InterruptedContext::ebp_addr() {
     return  (int*) &scp->uc_mcontext.gregs[REG_EBP];
   }
 
@@ -95,9 +89,6 @@ char** InterruptedContext::pc_addr() {
   return (char**) &((ucontext_t*) scp)->uc_mcontext.gregs[REG_PC];
 }
 int* InterruptedContext::sp_addr() {
-  return (int*) &((ucontext_t*) scp)->uc_mcontext.gregs[REG_SP];
-}
-int* InterruptedContext::ebp_addr() {
   return (int*) &((ucontext_t*) scp)->uc_mcontext.gregs[REG_FP];
 }
 
