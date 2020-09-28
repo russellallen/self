@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.12 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -2744,6 +2745,21 @@ coerced.\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibilit
         
          entryPointFromName: name = ( |
             | '_', name).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> () From: ( | {
+         'ModuleInfo: Module: foreign InitialContents: FollowSlot'
+        
+         cygwin = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'cygwin' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits foreignFct osVariants cygwin.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'bsd' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> () From: ( | {
