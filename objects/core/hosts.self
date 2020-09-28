@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.15 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -10,7 +11,7 @@ See the LICENSE file for license information.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
          'Category: platform\x7fCategory: graphical interface\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
-         graphicsDependentGlobals* = bootstrap stub -> 'globals' -> 'quartzGlobals' -> ().
+         graphicsDependentGlobals* = bootstrap stub -> 'globals' -> 'x11Globals' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
@@ -1073,6 +1074,69 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> () From: ( | {
+         'ModuleInfo: Module: hosts InitialContents: FollowSlot'
+        
+         cygwin = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'cygwin' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals platforms osFamilies cygwin.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'cygwin' -> () From: ( | {
+         'ModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: private'
+        
+         globalsForThisOS = ( |
+            | 
+            unixGlobals).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'cygwin' -> () From: ( | {
+         'ModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: private'
+        
+         graphicsSystemGlobals = ( |
+            | 
+            x11Globals).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'cygwin' -> () From: ( | {
+         'ModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+        
+         hostID = ( |
+            | 
+            os gethostid).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'cygwin' -> () From: ( | {
+         'Comment: _\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
+        
+         initialize = ( |
+            | 
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'cygwin' -> () From: ( | {
+         'Comment: Sun encodes the architecture in the high four bits, and
+	   the model in the lower four bits, of the most significant
+	   byte of the hostid.\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+        
+         model = ( |
+            | 
+            platforms models macs unknown).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'cygwin' -> () From: ( | {
+         'ModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+        
+         name = 'cygwin'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'cygwin' -> () From: ( | {
+         'ModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'globals' -> 'platforms' -> 'osArchitectures' -> 'unix' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> () From: ( | {
          'ModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          linux = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'linux' -> () From: ( |
@@ -1294,7 +1358,23 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'host' -> () From: ( | {
-         'Category: testing\x7fComment: Return true if running on a Solaris platform\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'Category: testing\x7fComment: Return true if running on a Cygwin platform\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
+        
+         hasCygwin = ( |
+            | 
+            'CYGWIN' isPrefixOf: operatingSystem).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'host' -> () From: ( | {
+         'Category: testing\x7fComment: Return true if running on a Linux platform\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
+        
+         hasLinux = ( |
+            | 
+            'Linux' isPrefixOf: operatingSystem).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'host' -> () From: ( | {
+         'Category: testing\x7fComment: Return true if running on a MacOS 8 platform\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          hasMacOS_8 = ( |
             | 
@@ -1302,7 +1382,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'host' -> () From: ( | {
-         'Category: testing\x7fComment: Return true if running on a Solaris platform\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'Category: testing\x7fComment: Return true if running on a MacOS 9 platform\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          hasMacOS_9 = ( |
             | 
@@ -1310,7 +1390,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'host' -> () From: ( | {
-         'Category: testing\x7fComment: Return true if running on a Solaris platform\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'Category: testing\x7fComment: Return true if running on a MacOS platform\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          hasMacOS_carbon = ( |
             | 
@@ -1351,7 +1431,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'host' -> () From: ( | {
-         'Category: testing\x7fComment: Return true if running on a Solaris platform\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'Category: testing\x7fComment: Return a string containing details about the host operating system\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          operatingSystem = ( |
             | 
@@ -1374,13 +1454,14 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             | 
             firstToken: operatingSystem copySize: 
               operatingSystem 
-                findFirst: [|:c| c = ' ']
+                findFirst: [|:c| (c = ' ') || (c = '_')]
                 IfPresent: [|:c. :i| i]
                  IfAbsent: [operatingSystem size].
             firstToken = 'Darwin' ifTrue: [^ 'macOSX'].
             firstToken = 'SunOS'  ifTrue: [^ 'sunOS' ].
             firstToken = 'MacOS'  ifTrue: [^ 'macOS' ].
             firstToken = 'Linux'  ifTrue: [^ 'linux' ].
+            firstToken = 'CYGWIN' ifTrue: [^ 'cygwin'].
             'sunOS' "just might work").
         } | ) 
 
@@ -1399,6 +1480,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             ].
             osName = 'macOSX'  ifTrue: [ ^ 'macOS_X' ].
             osName = 'linux'   ifTrue: [ ^ 'linux' ].
+            osName = 'cygwin'   ifTrue: [ ^ 'cygwin' ].
             error: ['unknown osName: ', osName]).
         } | ) 
 
