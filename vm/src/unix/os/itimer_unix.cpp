@@ -37,7 +37,7 @@ class TimerEntry: public AbstractTimerEntry {
 };
 
 
-#if TARGET_OS_VERSION != SOLARIS_VERSION && TARGET_OS_VERSION != MACOSX_VERSION && TARGET_OS_VERSION != LINUX_VERSION
+#if TARGET_OS_VERSION != SOLARIS_VERSION && TARGET_OS_VERSION != MACOSX_VERSION && TARGET_OS_VERSION != LINUX_VERSION && TARGET_OS_VERSION != CYGWIN_VERSION
 extern "C" int setitimer(int which,
                          struct itimerval *value,
                          struct itimerval *ovalue);
@@ -93,7 +93,8 @@ void IntervalTimer::enable() {
   struct sigaction action;
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
-  ||  TARGET_OS_VERSION ==   LINUX_VERSION
+  ||  TARGET_OS_VERSION ==   LINUX_VERSION \
+  ||  TARGET_OS_VERSION ==  CYGWIN_VERSION
   action.sa_sigaction = (void (*)(int, siginfo_t*, void*)) IntervalTimerTick;
   
 # elif COMPILER != GCC_COMPILER  &&  TARGET_OS_VERSION == SUNOS_VERSION
@@ -202,7 +203,7 @@ void IntervalTimerTick(int sig, self_code_info_t *info, self_sig_context_t *scp)
                sig, 
                SignalInterface::currentNonTimerSignal,
                SignalInterface::currentTimerSignal);
-# elif TARGET_OS_VERSION == SOLARIS_VERSION
+# elif TARGET_OS_VERSION == SOLARIS_VERSION || TARGET_OS_VERSION == CYGWIN_VERSION
       warning6("IntervalTimerTick: signal_handler cannot nest (only one interrupted context).\n"
                "Received timer sig %d (%s) while in sig %d (%s) or timer sig %d (%s).\n",
                sig, strsignal(sig),

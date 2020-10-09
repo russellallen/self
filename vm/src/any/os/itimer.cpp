@@ -15,7 +15,11 @@ IntervalTimer* IntervalTimer::_CPU_timer  = NULL;
 
 bool IntervalTimer::dont_use_real_timer = false;
 bool IntervalTimer::dont_use_any_timer  = false;
+# if TARGET_OS_VERSION == CYGWIN_VERSION
+bool IntervalTimer::use_real_instead_of_cpu_timer = true;
+# else
 bool IntervalTimer::use_real_instead_of_cpu_timer = false;
+# endif
 
 // Changed by -o argument; see processArguments() in shell.cpp
 int32 IntervalTimer::oversample_rate = 1;
