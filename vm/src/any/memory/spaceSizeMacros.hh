@@ -9,8 +9,9 @@
 // This must be the size of the largest page of all platforms, to load 
 // snapshots using mmap.
 // sun4c machines use 4096, sun4 use 8192.
+// Cygwin requires 65536.
 // On PPC=, for Altivec, must be multiple of 16. -- dmu 3/04
-# define idealized_page_size 8192
+# define idealized_page_size 65536
 
 # define is_idealized_page_multiple(n)    (n % idealized_page_size == 0)
 
@@ -19,8 +20,8 @@
 // see  Desired_Surv_Size= 400 * K; in universe.cpp
 // Cut these back down for a small machine.
 
-# define        default_eden_size        (      4000 * 1024)
-# define        default_surv_size        (       800 * 1024)
+# define        default_eden_size        (      4032 * 1024)
+# define        default_surv_size        (       832 * 1024)
 # define        default_old_size         ( 20 * 1024 * 1024)
 # define space_sizes_ok(init,eden,surv) ((init) >= 2*(surv) + (eden))
 

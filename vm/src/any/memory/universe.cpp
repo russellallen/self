@@ -752,7 +752,7 @@ bool universe::write_snapshot(const char *fileName,
 # if TARGET_OS_VERSION == MACOSX_VERSION
   // Linux???
   // On OSX, when space::write_snapshot tries to write starting earlier than
-  // bytes_bottom, since OSX page = 4096 is smaller than idealized_page_size = 8096,
+  // bytes_bottom, since OSX page = 4096 is smaller than idealized_page_size = 65536,
   // it can try to write an unallocated address and the write fails. -- dmu 9/1
   page_aligned= false;
 # else
