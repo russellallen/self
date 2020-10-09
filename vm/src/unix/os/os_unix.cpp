@@ -35,10 +35,15 @@
   char* OS::allocate_heap_aligned(caddr_t desiredAddress,
                                   int32 size, int32 align, const char* name,
                                   bool mustAllocate) {
+  #  if TARGET_OS_VERSION == CYGWIN_VERSION
+      const int32 allocation_size = size;
+  #  else
+      const int32 allocation_size = size + align;
+  #  endif
       if ( desiredAddress != NULL
       &&   desiredAddress ==
                  mmap(desiredAddress, 
-                      size + align,
+                      allocation_size,
                       PROT_READ|PROT_WRITE|PROT_EXEC,
                       MAP_PRIVATE|MAP_FIXED,
                       zero_fd, 0)) 
