@@ -162,7 +162,7 @@ void resetTerminal() {
     }
   # endif  
 
-# elif  TARGET_OS_VERSION == LINUX_VERSION
+# elif  TARGET_OS_VERSION == LINUX_VERSION || TARGET_OS_VERSION == CYGWIN_VERSION
     static int c_lib_write(int fd, const char* buf, int nbytes) {
       return write(fd, buf, nbytes);
     }    
@@ -170,7 +170,7 @@ void resetTerminal() {
   # error what?
 # endif
 
- # if TARGET_OS_VERSION != MACOSX_VERSION  &&  TARGET_OS_VERSION != LINUX_VERSION
+ # if TARGET_OS_VERSION != MACOSX_VERSION  &&  TARGET_OS_VERSION != LINUX_VERSION && TARGET_OS_VERSION != CYGWIN_VERSION
 
 extern "C" int write(int fd, const void* b, nbytes_t nbytes) {
     int32 res;

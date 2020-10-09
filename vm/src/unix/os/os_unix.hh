@@ -14,6 +14,8 @@
   || TARGET_OS_VERSION == MACOSX_VERSION \
   || TARGET_OS_VERSION == LINUX_VERSION
      static const int logname_max = 8; 
+# elif TARGET_OS_VERSION == CYGWIN_VERSION 
+     static const int logname_max = LOGIN_NAME_MAX; 
 # else
      static const int logname_max = LOGNAME_MAX;
 # endif
@@ -27,7 +29,8 @@
 
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION == MACOSX_VERSION  \
-  ||  TARGET_OS_VERSION ==  LINUX_VERSION
+  ||  TARGET_OS_VERSION ==  LINUX_VERSION  \
+  ||  TARGET_OS_VERSION == CYGWIN_VERSION
     static void setPageAdvisory(char *start, char *end, int code);
 # endif
 

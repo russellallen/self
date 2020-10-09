@@ -57,7 +57,8 @@ ProcessTime ProcessInfo::system_time(){
 } 
 
 # elif  TARGET_OS_VERSION == SUNOS_VERSION  \
-  ||  TARGET_OS_VERSION ==   LINUX_VERSION
+  ||  TARGET_OS_VERSION ==   LINUX_VERSION  \
+  ||  TARGET_OS_VERSION ==  CYGWIN_VERSION
 
 static struct rusage process_info_ru;
 
