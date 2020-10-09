@@ -24,6 +24,12 @@ extern "C" int profil( char* /*buf*/,
   fatal("unimp mac");
   return 0;
 }
+# elif TARGET_OS_VERSION == CYGWIN_VERSION
+/* Cygwin has profil() but doesn't declare it in any header */
+  extern "C" void profil(unsigned short *buf,
+                         unsigned int bufsiz,
+                         unsigned int offset,
+                         unsigned int scale);
 # elif TARGET_OS_FAMILY == UNIX_FAMILY
 /* Pick this up from header file:
   extern "C" void profil(unsigned short *buf,

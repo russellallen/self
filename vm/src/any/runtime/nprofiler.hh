@@ -104,6 +104,9 @@ class StackInfo {
   float user_time() { return computed_user_time; }
 # elif  TARGET_OS_FAMILY == MACOS_FAMILY
   float user_time() { return 0.0; } // unimp mac
+# elif  TARGET_OS_VERSION == CYGWIN_VERSION
+  clock_t utime;
+  float user_time() { return ((float) utime)/CLOCKS_PER_SEC; }
 # else
   # error which?
 # endif
