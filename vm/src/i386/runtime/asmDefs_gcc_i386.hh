@@ -30,6 +30,10 @@
     # define ENDMACRO .endm
     # define C_SYM(name) name
   # endif
+# elif defined(__CYGWIN__)
+    # define MACRO(name, ...) .macro name __VA_ARGS__
+    # define ENDMACRO .endm
+  # define C_SYM(name) _##name
 # else
   # error what?
 # endif
@@ -91,7 +95,7 @@ MACRO(start_exported_function, name)
   .globl C_SYM($0)
 C_SYM($0):
 
-# elif defined(__linux__) || (defined(SOLARIS) && SOLARIS)
+# elif defined(__linux__) || (defined(SOLARIS) && SOLARIS) || defined(__CYGWIN__)
 
   .global C_SYM(\name)
 C_SYM(\name):
@@ -181,7 +185,7 @@ ENDMACRO
       ENDMACRO
 
 
-    # elif defined(__linux__) || (defined(SOLARIS) && SOLARIS)
+    # elif defined(__linux__) || (defined(SOLARIS) && SOLARIS) || defined(__CYGWIN__)
       MACRO(jmp_reg, reg)
         jmp *\reg
       ENDMACRO

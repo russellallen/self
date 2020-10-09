@@ -20,7 +20,7 @@
          || (defined(__linux__) && defined(__clang__) && !defined(NO_INTEGRATED_AS_clang))
             movl   $0(%eax), %eax
         
-        # elif defined(__linux__) || (defined(SOLARIS) && SOLARIS)
+        # elif defined(__linux__) || (defined(SOLARIS) && SOLARIS) || defined(__CYGWIN__)
             movl   \error_code(%eax), %eax
         
         # else
@@ -45,7 +45,7 @@ ret_overflow: ret_prim_error overflowOffset
              movl    4(%esp), $1
              testl   $(Tag_Mask), $1
              jne     ret_bad_type
-        # elif defined(__linux__) || (defined(SOLARIS) && SOLARIS)
+        # elif defined(__linux__) || (defined(SOLARIS) && SOLARIS) || defined(__CYGWIN__)
             start_exported_function \name
              movl    8(%esp), \argreg
              testl   $(Tag_Mask), \argreg
