@@ -43,8 +43,24 @@
                       MAP_PRIVATE|MAP_FIXED,
                       zero_fd, 0)) 
         return desiredAddress;
-        
+      
+  #  if TARGET_OS_VERSION == CYGWIN_VERSION
+      // Cygwin memalign() allocates from the top of memory down, which is pessimal
+      // for our purposes. Instead, we use the raw Windows calls to find a large
+      // enough free location
+      char* b = (char *)VirtualAlloc(NULL, allocation_size, MEM_RESERVE, PAGE_NOACCESS);
+
+      if (b) {
+        VirtualFree(b, 0, MEM_RELEASE); 
+        b = (char *)mmap(b, 
+                    allocation_size,
+                    PROT_READ|PROT_WRITE|PROT_EXEC,
+                    MAP_PRIVATE|MAP_FIXED,
+                    zero_fd, 0); 
+      }
+  #  else  
       char* b = (char*)memalign(align, size);
+  #  endif
       if (b == NULL && mustAllocate)  allocate_failed(name);
       return b;     
   }
@@ -197,6 +213,9 @@ void OS::init() {
   real_mem_size = mem_size;
 # elif TARGET_OS_VERSION == LINUX_VERSION
   real_mem_size = 0x40000000; // punt for now
+# elif TARGET_OS_VERSION == CYGWIN_VERSION
+  real_mem_size = 
+    get_page_size() * (get_phys_pages() - get_avphys_pages());
 # else
   # error which?
 # endif

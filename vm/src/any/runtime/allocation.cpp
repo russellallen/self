@@ -312,7 +312,7 @@ static int32 true_size_of_malloced_obj(int32* p) {
       -2;
 #   elif  TARGET_ARCH == I386_ARCH   &&  COMPILER == GCC_COMPILER   &&   TARGET_OS_VERSION == MACOSX_VERSION
       -2;
-#   elif  TARGET_ARCH == I386_ARCH   &&  COMPILER == GCC_COMPILER   &&    (TARGET_OS_VERSION ==  LINUX_VERSION  ||  TARGET_OS_VERSION == SOLARIS_VERSION)
+#   elif  TARGET_ARCH == I386_ARCH   &&  COMPILER == GCC_COMPILER   &&    (TARGET_OS_VERSION ==  LINUX_VERSION  ||  TARGET_OS_VERSION == SOLARIS_VERSION || TARGET_OS_VERSION == CYGWIN_VERSION)
       -1;
 #   else
 	# error What is it?
@@ -327,13 +327,15 @@ static int32 true_size_of_malloced_obj(int32* p) {
 
 
 // Linux malloc allocates addresses with bit 31 set, this conflicts with Self oop marking
-# if TARGET_OS_VERSION == LINUX_VERSION
+# if TARGET_OS_VERSION == LINUX_VERSION || TARGET_OS_VERSION == CYGWIN_VERSION
     # include <malloc.h> // for mallopt
 # endif
 
 void malloc_init() {
     # if TARGET_OS_VERSION == LINUX_VERSION
       mallopt(M_MMAP_MAX, 0); // if Linux malloc mmaps, we get bit 31 on, which conflicts with memOop marking
+    # elif TARGET_OS_VERSION == CYGWIN_VERSION
+      mallopt(M_MMAP_THRESHOLD, ~(size_t)0); // if Cygwin malloc mmaps, it starts at the top of user memory and works down, which conflicts with scavenging
     # endif
     mallocReserve= (caddr_t)malloc(mallocReserveAmount);
     if (mallocReserve == NULL)
@@ -342,7 +344,7 @@ void malloc_init() {
     std::set_new_handler(MallocFailed);
   }
   
-  
+ 
   void* selfs_malloc(size_t size) {
          if (!MallocInProgress)              ;
     else if (profilerCollectStackSemaphore)  warning("profiler is reentering malloc; hope it will work");
