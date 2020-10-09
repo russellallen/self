@@ -329,7 +329,7 @@ oop gethostbyname_wrap(char* name, void* FH) {
 char *gethostbyaddr_wrap(char *addr, int addrlen, int addrtype, void *FH) {
   struct hostent *h = gethostbyaddr(addr, addrlen, addrtype);
   if (!h) { unix_failure(FH, h_errno); return NULL; }
-  return h->h_name; 
+  return (char *)h->h_name; 
 }
 
 
