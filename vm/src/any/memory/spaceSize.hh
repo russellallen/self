@@ -32,14 +32,14 @@ oop get_current_space_sizes_prim(oop ignored, slotsOop proto, void *FH);
 oop get_default_space_sizes_prim(oop);
 
 // mustn't cross the 512Mb boundary; can't map in there on SS-1s and 2s
-const caddr_t HeapStart=        (caddr_t)(64*M);
-const caddr_t NMethodStart=     (caddr_t)(400*M);
-const caddr_t StubsStart=       (caddr_t)(458*M);
-const caddr_t DepsStart=        (caddr_t)(474*M);
-const caddr_t ScopesStart=      (caddr_t)(490*M);
-const caddr_t ZoneIDStart=      (caddr_t)(506*M);
-const caddr_t CountStubIDStart= (caddr_t)(508*M);
-const caddr_t UseCountStart=    (caddr_t)(510*M);
+const caddr_t HeapStart=        (caddr_t)(256*M);
+const caddr_t NMethodStart=     (caddr_t)(592*M);
+const caddr_t StubsStart=       (caddr_t)(650*M);
+const caddr_t DepsStart=        (caddr_t)(666*M);
+const caddr_t ScopesStart=      (caddr_t)(682*M);
+const caddr_t ZoneIDStart=      (caddr_t)(698*M);
+const caddr_t CountStubIDStart= (caddr_t)(700*M);
+const caddr_t UseCountStart=    (caddr_t)(702*M);
 
 extern unsigned long MaxHeapSize;
 extern unsigned long MaxNMethodSize;
