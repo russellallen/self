@@ -41,6 +41,7 @@
     start_exported_function set_SPLimitReg
                 hlt
 
+    .weak C_SYM(save1Arg)
     start_exported_function save1Arg
                 hlt
 
