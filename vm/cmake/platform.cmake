@@ -45,6 +45,15 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(platform "linux")
   set(TARGET_OS_VERSION "LINUX_VERSION")
   
+elseif(CMAKE_SYSTEM_NAME MATCHES "CYGWIN")
+  
+  set(platform_kind "unix")
+  set(TARGET_OS_FAMILY  "UNIX_FAMILY")
+  
+  set(platform_name "Cygwin")
+  set(platform "cygwin")
+  set(TARGET_OS_VERSION "CYGWIN_VERSION")
+  
 elseif(CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
   
   set(platform_kind "unix")
