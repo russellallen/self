@@ -15,6 +15,8 @@ enable_language(C)
 find_package(Threads REQUIRED)
 set(EXTRA_LIBRARIES ${EXTRA_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
+# include libgmon (for _profil)
+set(EXTRA_LIBRARIES ${EXTRA_LIBRARIES} -lgmon)
 
 #
 # Cygwin compile definitons
