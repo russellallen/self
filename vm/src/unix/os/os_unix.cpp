@@ -490,6 +490,9 @@ int OS::get_page_size() {
 int OS::min_core(caddr_t addr, size_t len, char *vec) {
   # if TARGET_OS_VERSION == LINUX_VERSION
     return  mincore(addr, len, (unsigned char*)vec);
+  # elif TARGET_OS_VERSION == CYGWIN_VERSION
+    memset(vec, 1, len);
+    return 0;
   # else
     return  mincore(addr, len, vec);
   # endif
