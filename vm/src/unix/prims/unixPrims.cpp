@@ -73,6 +73,9 @@ class IOCleanup {
   || TARGET_OS_VERSION ==   LINUX_VERSION
     if (isatty(STDIN))
       ioctl(STDIN, TCGETS, (caddr_t)&normalSettings);
+# elif TARGET_OS_VERSION == CYGWIN_VERSION
+    if (isatty(STDIN))
+      tcgetattr(STDIN, &normalSettings);
 # elif TARGET_OS_VERSION == MACOSX_VERSION
     // not sure what to do
     if (isatty(STDIN))
@@ -92,6 +95,9 @@ void resetTerminal() {
   ||  TARGET_OS_VERSION ==   LINUX_VERSION
     if (isatty(STDIN))
       ioctl(STDIN, TCSETS, (caddr_t)&normalSettings);
+# elif TARGET_OS_VERSION == CYGWIN_VERSION
+    if (isatty(STDIN))
+      tcgetattr(STDIN, &normalSettings);
 # elif TARGET_OS_VERSION == MACOSX_VERSION
     if (isatty(STDIN))
       ioctl(STDIN, TIOCSETA, (caddr_t)&normalSettings);
