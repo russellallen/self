@@ -21,8 +21,12 @@ void InterruptedContext::set_continuation_address(char *addr, bool mustWork, boo
 bool InterruptedContext::in_system_trap() {
   if (scp == &dummy_scp)
     return false;
+# if TARGET_OS_VERSION == CYGWIN_VERSION
+    return scp->uc_mcontext.ctxflags & 0x10000000; // 0x10000000
+#else
   // system call, sysenter instruction
   return pc()[0] == '\x0f'  &&  pc()[1] == '\x34';
+#endif
 }
 
 
@@ -81,6 +85,15 @@ void InterruptedContext::setupPreemptionFromSignal() {
   }
   int* InterruptedContext::sp_addr() {
     return  (int*) &scp->uc_mcontext.gregs[REG_EBP];
+  }
+
+# elif TARGET_OS_VERSION == CYGWIN_VERSION
+
+  char** InterruptedContext::pc_addr() {
+    return  (char**) &scp->uc_mcontext.eip; // see /usr/include/cygwin/signal.h
+  }
+  int* InterruptedContext::sp_addr() {
+    return  (int*) &scp->uc_mcontext.ebp;
   }
 
 # elif TARGET_OS_VERSION == SOLARIS_VERSION
@@ -144,9 +157,27 @@ void InterruptedContext::print_registers() {
     lprintf("es        = 0x%x\n", gregs[REG_ES]);
     lprintf("fs        = 0x%x\n", gregs[REG_FS]);
     lprintf("gs        = 0x%x\n", gregs[REG_GS]);
-    lprintf("trapno    = 0x%x\n", gregs[REG_TRAPNO]);
-    lprintf("err       = 0x%x\n", gregs[REG_ERR]);
-    lprintf("uesp      = 0x%x\n", gregs[REG_UESP]);
+  
+  # elif TARGET_OS_VERSION == CYGWIN_VERSION
+
+    mcontext_t mcontext = ic->scp->uc_mcontext;
+    lprintf("ctxflags  = 0x%x\n", mcontext.ctxflags);
+    lprintf("eax       = 0x%x\n", mcontext.eax);
+    lprintf("ebx       = 0x%x\n", mcontext.ebx);
+    lprintf("ecx       = 0x%x\n", mcontext.ecx);
+    lprintf("edx       = 0x%x\n", mcontext.edx);
+    lprintf("esi       = 0x%x\n", mcontext.esi);
+    lprintf("edi       = 0x%x\n", mcontext.edi);
+    lprintf("ebp       = 0x%x\n", mcontext.ebp);
+    lprintf("esp       = 0x%x\n", mcontext.esp);
+    lprintf("ss        = 0x%x\n", mcontext.ss);
+    lprintf("efl       = 0x%x\n", mcontext.eflags);
+    lprintf("eip       = 0x%x\n", mcontext.eip);
+    lprintf("cs        = 0x%x\n", mcontext.cs);
+    lprintf("ds        = 0x%x\n", mcontext.ds);
+    lprintf("es        = 0x%x\n", mcontext.es);
+    lprintf("fs        = 0x%x\n", mcontext.fs);
+    lprintf("gs        = 0x%x\n", mcontext.gs);
   
 # elif TARGET_OS_VERSION == SOLARIS_VERSION
   

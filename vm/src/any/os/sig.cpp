@@ -235,6 +235,11 @@ void SignalInterface::handle_OS_signal(int ossig, char* addr, int32 code) {
   lprintf("\nInternal error: signal %d code %d addr 0x%lx pc 0x%lx.\n",
          (void*)ossig, (void*)code, (void*)(long unsigned)addr,
          (void*)(long unsigned)(InterruptedContext::the_interrupted_context->pc()));
+# elif TARGET_OS_VERSION == CYGWIN_VERSION
+  lprintf("\nInternal error: signal %d (sig%s) code %d addr 0x%lx pc 0x%lx.\n",
+          (void*)ossig, (void*)strsignal(ossig),
+          (void*)code, (void*)(long unsigned)addr,
+          (void*)(long unsigned)(InterruptedContext::the_interrupted_context->pc()));
 # elif TARGET_OS_VERSION == SOLARIS_VERSION
   lprintf("\nInternal error: signal %d (sig%s) code %d addr 0x%lx pc 0x%lx.\n",
           (void*)ossig, (void*)strsignal(ossig),

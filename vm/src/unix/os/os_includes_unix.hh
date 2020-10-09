@@ -103,7 +103,8 @@ extern "C" {
   typedef sigcontext       self_sig_context_t;
   typedef struct sigstack  self_stack_t;
 # elif TARGET_OS_VERSION == MACOSX_VERSION \
-    || TARGET_OS_VERSION ==  LINUX_VERSION
+    || TARGET_OS_VERSION ==  LINUX_VERSION \
+    || TARGET_OS_VERSION == CYGWIN_VERSION
   typedef siginfo_t        self_code_info_t;
   typedef ucontext_t       self_sig_context_t;
   typedef stack_t          self_stack_t;
@@ -228,7 +229,8 @@ const int Last_OS_Signal = SIGUSR2+1+20; /* so we dont crash on unknown signals 
 
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
-  ||  TARGET_OS_VERSION ==   LINUX_VERSION
+  ||  TARGET_OS_VERSION ==   LINUX_VERSION \
+  ||  TARGET_OS_VERSION ==  CYGWIN_VERSION
 
   typedef void (*Signal_Handler_t)(int sig, self_code_info_t *info, self_sig_context_t *con);
 
