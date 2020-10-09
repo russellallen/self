@@ -6,6 +6,9 @@
 # pragma implementation "machineCache_unix.hh"
 # include "_machineCache_unix.cpp.incl"
 
+# if TARGET_OS_VERSION == CYGWIN_VERSION
+  #  include<processthreadsapi.h>
+# endif
 
 // define FLUSH_ALL (for debugging) to flush the complete I cache of nmethods
 // and PICs very regularly
@@ -82,6 +85,15 @@
   void MachineCache::flush_instruction_cache_word(void* addr) { }
 
   void MachineCache::flush_instruction_cache_range(void* s, void* e) {}
+
+# elif TARGET_OS_VERSION == CYGWIN_VERSION
+  void MachineCache::flush_instruction_cache_word(void* addr) {
+    FlushInstructionCache(GetCurrentProcess(), addr, sizeof (char *));
+  }
+
+  void MachineCache::flush_instruction_cache_range(void* s, void* e) {
+    FlushInstructionCache(GetCurrentProcess(), s, (char *)e - (char *)s + 1);
+  }
 
 # elif TARGET_OS_VERSION == SOLARIS_VERSION \
     && TARGET_ARCH       == I386_ARCH
