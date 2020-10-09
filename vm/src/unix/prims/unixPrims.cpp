@@ -56,6 +56,63 @@ extern "C" {
 extern "C" {
   int syscall(int number, /* arg */ ...);
 }
+# elif TARGET_OS_VERSION == CYGWIN_VERSION
+static int syscall(int number, ...) {
+  va_list args;
+  va_start (args, number);
+  int res;
+
+
+  // keep in sync with objects/core/unix.self
+
+  switch (number) {
+    case 1: {
+        char *path = va_arg(args, char *);
+        int amode = va_arg(args, int);
+      
+        res = access(path, amode);
+      }
+      break;
+
+    case 2: {
+        char *path = va_arg(args, char *);
+        mode_t mode = va_arg(args, mode_t);
+
+        res = mkdir(path, mode);
+      }
+      break;
+
+    case 3:
+      res = gethostid();
+      break;
+
+    case 4:
+      res = uname(va_arg(args, struct utsname *));
+      break;
+
+    case 5: {
+        char *oldnm = va_arg(args, char *);
+        char *newnm = va_arg(args, char *);
+
+        res = rename(oldnm, newnm);
+      }
+      break;
+
+    case 6:
+      res = rmdir(va_arg(args, char *));
+      break;
+
+
+    default:
+      errno = ENOSYS;
+      res = 0;
+      break;
+  }
+
+  va_end(args);
+
+  return res;
+}
 # endif
 
 const char *UnixFile_seal = "UnixFile";

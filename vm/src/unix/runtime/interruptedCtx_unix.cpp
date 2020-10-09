@@ -35,5 +35,10 @@ bool InterruptedContext::forwarded_to_self_thread(int sig) {
 }
 
 
+#if TARGET_OS_VERSION == CYGWIN_VERSION
+  #define SYS_read  -1
+  #define SYS_write -1
+#endif
+
 bool InterruptedContext::in_read_trap()  { return  in_system_trap()  &&  system_trap() == SYS_read;  }
 bool InterruptedContext::in_write_trap() { return  in_system_trap()  &&  system_trap() == SYS_write; }

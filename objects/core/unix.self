@@ -640,6 +640,42 @@ Result is a vector of byte vectors (each byte vector is an IP address).
             | ) .
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sys_access = 1.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sys_gethostid = 3.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sys_mkdir = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sys_rename = 5.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sys_rmdir = 6.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sys_uname = 4.
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'macOS_X' -> () From: ( | {
          'ModuleInfo: Module: unix InitialContents: FollowSlot'
         
