@@ -81,12 +81,14 @@ extern "C" {
 # else
 #   include <termio.h>
 # endif
-# include <sys/syscall.h>
+# if TARGET_OS_VERSION != CYGWIN_VERSION
+#   include <sys/syscall.h>
+# endif
 # include <errno.h>
 # include <sys/stat.h>
 # include <sys/resource.h>
 # include <sys/file.h>
-# if TARGET_OS_VERSION != LINUX_VERSION
+# if TARGET_OS_VERSION != LINUX_VERSION && TARGET_OS_VERSION != CYGWIN_VERSION
 #   include <sys/filio.h>
 # endif
 # include <sys/param.h>
@@ -165,7 +167,8 @@ extern "C" {
 
 
 # if TARGET_OS_VERSION != SOLARIS_VERSION  \
-  && TARGET_OS_VERSION != LINUX_VERSION
+  && TARGET_OS_VERSION !=  LINUX_VERSION \
+  && TARGET_OS_VERSION != CYGWIN_VERSION
   #  include <sys/vadvise.h>
    extern "C" {
      int vadvise(int);
@@ -205,6 +208,8 @@ extern "C" {
 # elif  TARGET_OS_VERSION == MACOSX_VERSION
 # define FORK vfork
 # elif  TARGET_OS_VERSION == LINUX_VERSION
+# define FORK vfork
+# elif  TARGET_OS_VERSION == CYGWIN_VERSION
 # define FORK vfork
 # else
    error which?
