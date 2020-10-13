@@ -27,6 +27,11 @@
 
 # include "_os_unix.cpp.incl"
 
+# if TARGET_OS_VERSION == CYGWIN_VERSION
+  #  include <sys/sysinfo.h>
+  #  undef Status
+  #  include <memoryapi.h>
+# endif 
 
 # if TARGET_OS_VERSION != MACOSX_VERSION 
 
@@ -261,6 +266,22 @@ void OS::Mmap(void *start, void *fin, FILE *file)
 {
   long int len= (char*)fin - (char*)start;
   if (len == 0) return;
+
+# if TARGET_OS_VERSION == CYGWIN_VERSION
+  // CYGWIN can't handle remapping, so help it out.
+  MEMORY_BASIC_INFORMATION info;
+
+  SIZE_T size = VirtualQuery(start, &info, sizeof(info));
+  if (size && info.State != MEM_FREE) {
+//    munmap(info.AllocationBase, info.RegionSize);
+    VirtualFree(info.AllocationBase, 0, MEM_RELEASE);
+    if (info.AllocationBase < start)
+      VirtualAlloc(info.AllocationBase, (char *)start - (char *)info.AllocationBase, info.State | MEM_RESERVE, info.Protect);
+    if ((char *)start + info.RegionSize > (char *) fin)
+      VirtualAlloc(fin, ((char *)start + info.RegionSize) - (char *)fin, info.State | MEM_RESERVE, info.Protect);
+  }
+# endif
+
   if (mmap((char*)start,
            len,
            PROT_READ|PROT_WRITE,
