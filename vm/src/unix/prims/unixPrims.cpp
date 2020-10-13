@@ -651,7 +651,8 @@ void unixPrims_init() { ioC = new IOCleanup; }
 void unixPrims_exit() { delete ioC; }
 
 # if TARGET_OS_VERSION == MACOSX_VERSION \
-  || TARGET_OS_VERSION ==  LINUX_VERSION
+  || TARGET_OS_VERSION ==  LINUX_VERSION \
+  || TARGET_OS_VERSION == CYGWIN_VERSION
   static struct utsname my_utsname;
   char*  sysname_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname. sysname; }
   char* nodename_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname.nodename; }
