@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.17 $'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -296,7 +296,8 @@ Result is a vector of byte vectors (each byte vector is an IP address).
             | 
                  ( host osName = 'sunOS'  )
             || [ ( host osName = 'macOSX' )
-            || [   host osName = 'linux' ]]
+            || [ ( host osName = 'linux'  )
+            || [   host osName = 'cygwin' ]]]
               ifTrue: [ currentOsVariant: host osVariantName sendTo: osVariants ].
             os_file initializeOsVariant.
             self).
@@ -628,6 +629,30 @@ Result is a vector of byte vectors (each byte vector is an IP address).
         
          version = ( |
             | (utsname copyFrom: 83 UpTo:  92) shrinkwrapped).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         cygwin = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'cygwin' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals unixGlobals os osVariants cygwin.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'macOS_X' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         unameInterface* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'macOS_X' -> 'unameInterface' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals unixGlobals os osVariants macOS_X unameInterface.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         unameInterface* = bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'macOS_X' -> 'unameInterface' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> () From: ( | {
@@ -2541,15 +2566,6 @@ Result is a vector of byte vectors (each byte vector is an IP address).
          sys_writev = 146.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'macOS_X' -> () From: ( | {
-         'ModuleInfo: Module: unix InitialContents: FollowSlot'
-        
-         unameInterface* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'macOS_X' -> 'unameInterface' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals unixGlobals os osVariants macOS_X unameInterface.
-'.
-            | ) .
-        } | ) 
-
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'linux' -> () From: ( | {
          'ModuleInfo: Module: unix InitialContents: FollowSlot'
         
@@ -3537,7 +3553,8 @@ in the OS specific objects.\x7fModuleInfo: Creator: traits unixFile bsdAndSolari
             | 
                  ( host osName = 'sunOS'  )
             || [ ( host osName = 'macOSX' )
-            || [   host osName = 'linux' ]]
+            || [ ( host osName = 'linux'  )
+            || [   host osName = 'cygwin' ]]]
               ifTrue: [ currentOsVariant: host osVariantName sendTo: osVariants ]).
         } | ) 
 
@@ -4130,6 +4147,359 @@ in the OS specific objects.\x7fModuleInfo: Creator: traits unixFile bsdAndSolari
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'bsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         suspendIfAsync = ( |
+            | 
+            setOwnerIfFail: [process this yield. ^ self].
+            suspendForIO).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         cygwin = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants cygwin.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         fcntls = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants cygwin fcntls.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         f_dupfd = 0.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         f_getfd = 1.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         f_getfl = 3.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         f_getlk = 7.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         f_getown = 5.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         f_rdlck = 1.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         f_setfd = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         f_setfl = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         f_setlk = 8.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         f_setlkw = 9.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         f_setown = 6.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         f_unlck = 3.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         f_wrlck = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         fasync = 64.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         fd_cloexec = 1.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         lock_ex = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         lock_nb = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         lock_sh = 1.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         lock_un = 8.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_accmode = 3.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_append = 8.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_creat = 512.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_direct = 524288.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_directory = 2097152.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_excl = 2048.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_ndelay = 16384.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_noatime = 16777216.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_noctty = 32768.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_nofollow = 1048576.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_nonblock = 16384.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_rdonly = 0.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_rdwr = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_sync = 8192.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_trunc = 1024.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'fcntls' -> () From: ( | {
+         'Category: ioctls\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         o_wronly = 1.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         flags = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'flags' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants cygwin flags.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         append = 8.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         combinations* = bootstrap stub -> 'traits' -> 'abstractFile' -> 'abstractFlags' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         create = 512.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         nonblock = 16384.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         read = 0.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         readWrite = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         truncate = 1024.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         write = 1.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         ioctls = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'ioctls' -> () From: ( |
+             {} = 'Comment: cygwin doesn\'t implement most of these constants and the ones that it does
+don\'t fit in a smallInt, so punting for now.\x7fModuleInfo: Creator: traits unixFile osVariants cygwin ioctls.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'Comment: Set asynchronous I/O and notification via SIGIO\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         setAsyncIfFail: failBlock = ( |
+            | 
+             fcntl: fcntls f_setfl  
+              With: fcntls o_nonblock
+            IfFail: [|:e| ^ failBlock value: e].
+
+            setNotifyEventsIfFail: failBlock.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         setNotifyEventsIfFail: failBlock = ( |
+            | 
+             fcntl: fcntls f_setfl  
+              With: fcntls fasync || fcntls o_nonblock
+            IfFail: [|:e| ^ failBlock value: e].
+
+            setOwnerIfFail: nil.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         setOwnerIfFail: fb = ( |
+            | 
+            fcntl: fcntls f_setown With: os getpid IfFail: fb).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         socketConstants = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'socketConstants' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants cygwin socketConstants.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> 'socketConstants' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         bsdShared* = bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'bsd' -> 'socketConstants' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'cygwin' -> () From: ( | {
          'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
         
          suspendIfAsync = ( |
