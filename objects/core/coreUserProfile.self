@@ -86,7 +86,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (nil)'
         
          loginName.
-        } | )  
+        } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> () From: ( | {
          'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
@@ -157,14 +157,6 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-          'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot\x7fVisibility: public'
-         
-          hostName = ( |
-             | '').
-         } | ) 
- 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
          'Category: platform-dependent\x7fModuleInfo: Module: coreUserProfile InitialContents: FollowSlot\x7fVisibility: private'
         
          loginNameGuessHoweverLongItTakes = ( |
@@ -233,15 +225,6 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             os nodename).
         } | ) 
 
-bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot\x7fVisibility: private'
-        
-         displayHostNameGuess = ( |
-            | 
-            "Will be overriden in userProfile.self"
-            '').
-        } | ) 
-
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> () From: ( | {
          'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
         
@@ -295,6 +278,7 @@ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -
          'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
         
          owner = bootstrap define: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'hashedVNCPassword' From:
              bootstrap remove: 'loginName' From:
              bootstrap remove: 'parent' From:
              globals userProfile copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( |
@@ -302,22 +286,24 @@ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -
 
 CopyDowns:
 globals userProfile. copy 
-SlotsToOmit: loginName parent.
+SlotsToOmit: hashedVNCPassword loginName parent.
 
 '.
             | ) .
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( | {
-         'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (\'owner\')'
+         'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (\'\\xc7\\x14m
+\\b.\\x1e\\b\' copyMutable)'
         
-         loginName <- 'owner'.
+         hashedVNCPassword <- '\xc7\x14m
+\b.\x1e\b' copyMutable.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( | {
-         'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
+         'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (\'owner\')'
         
-         hand <- nil.
+         loginName <- 'owner'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( | {
