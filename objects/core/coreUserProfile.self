@@ -278,18 +278,34 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot'
         
          owner = bootstrap define: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'displayHostName' From:
+             bootstrap remove: 'hand' From:
              bootstrap remove: 'hashedVNCPassword' From:
              bootstrap remove: 'loginName' From:
              bootstrap remove: 'parent' From:
+             bootstrap remove: 'preferences' From:
+             bootstrap remove: 'preferredName' From:
              globals userProfile copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals users owner.
 
 CopyDowns:
 globals userProfile. copy 
-SlotsToOmit: hashedVNCPassword loginName parent.
+SlotsToOmit: displayHostName hand hashedVNCPassword loginName parent preferences preferredName.
 
 '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( | {
+         'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (\'self\')'
+        
+         displayHostName <- 'self'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( | {
+         'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (handMorph)'
+        
+         hand <- bootstrap stub -> 'globals' -> 'handMorph' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( | {
@@ -310,6 +326,18 @@ SlotsToOmit: hashedVNCPassword loginName parent.
          'ModuleInfo: Module: coreUserProfile InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( | {
+         'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (userProfile preferences copy)'
+        
+         preferences <- userProfile preferences copy.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( | {
+         'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (\'owner\')'
+        
+         preferredName <- 'owner'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> () From: ( | {
