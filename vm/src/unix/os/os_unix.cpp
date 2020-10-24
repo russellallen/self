@@ -491,10 +491,15 @@ void OS::discard_pages(char *start, char *end) {
 
   char *ps= real_page_end  (start);
   char *pe= real_page_start(end  );
+
+ # if TARGET_OS_VERSION == CYGWIN_VERSION
+  madvise(ps, pe - ps, MADV_DONTNEED);
+ # else 
   if (mmap(ps, pe - ps,
            PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED,
            zero_fd, 0) != ps)
     warning("mmap of /dev/zero failed");
+ # endif
 }
 
 
