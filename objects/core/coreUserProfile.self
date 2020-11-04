@@ -1,10 +1,9 @@
- ''
+ '30.21.0'
  '
 Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
-[ 
-"prefileIn" self] value
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -299,21 +298,13 @@ SlotsToOmit: displayHostName hand hashedVNCPassword loginName parent preferences
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( | {
          'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (\'self\')'
         
-         displayHostName <- 'self'.
+         displayHostName.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( | {
          'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (handMorph)'
         
          hand <- bootstrap stub -> 'globals' -> 'handMorph' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( | {
-         'ModuleInfo: Module: coreUserProfile InitialContents: InitializeToExpression: (\'\\xc7\\x14m
-\\b.\\x1e\\b\' copyMutable)'
-        
-         hashedVNCPassword <- '\xc7\x14m
-\b.\x1e\b' copyMutable.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'users' -> 'owner' -> () From: ( | {

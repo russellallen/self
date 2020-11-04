@@ -87,7 +87,10 @@ Returns host name as a string.\x7fModuleInfo: Module: abstract_OS InitialContent
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstract_OS' -> () From: ( | {
-         'Category: file operations\x7fCategory: temporary files\x7fComment: Attempts to run the os command commandSource
+         'Category: os commands\x7fComment: Deprecated - use outputOfCommand:Timeout:IfFail: instead 
+-- Russell, Nov 20
+
+Attempts to run the os command commandSource
 in a separate OS-level process. Redirects the
 text output of the command into a temporary
 file, and returns the contents of that file
@@ -104,23 +107,40 @@ after the specified delay.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstract_OS' -> () From: ( | {
-         'Category: file operations\x7fCategory: temporary files\x7fComment: Attempts to run the os command commandSource
+         'Category: os commands\x7fComment: Attempts to run the os command commandSource
 in a separate OS-level process. Redirects the
 text output of the command into a temporary
 file, and returns the contents of that file
 after process has finished.\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
         
          outputOfCommand: commandSource IfFail: fb = ( |
+            | 
+            outputOfCommand: commandSource Timeout: infinity IfFail: fb).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'abstract_OS' -> () From: ( | {
+         'Category: os commands\x7fComment: Attempts to run the os command commandSource
+in a separate OS-level process. Redirects the
+text output of the command into a temporary
+file, and returns the contents of that file
+after process has finished.\x7fModuleInfo: Module: abstract_OS InitialContents: FollowSlot\x7fVisibility: public'
+        
+         outputOfCommand: commandSource Timeout: ms IfFail: fb = ( |
+             endTime.
              flag.
              output.
             | 
               output: os_file temporaryFileName.
               flag: output, '.flag'.
+              " We don't timeout, if timeout is infinite in length "
+              ms = infinity ifFalse: [endTime: time current addMsec: ms].
             [
               command: '( ', commandSource, ' > ', output, ' ; echo finished > ', flag, ' ) & ' IfFail: [ ^ fb value ].
-              [os_file exists: flag] whileFalse.
+              [ ((ms != infinity) && [time current > endTime]) || (os_file exists: flag) ] whileFalse.
               " Return output of command "
-              output asFileContents
+              (os_file exists: flag) ifTrue: [output asFileContents]
+                                      False: [fb value: 'Timed out'].
+
             ] onReturn: [
               unlink: output IfFail: [].
               unlink: flag IfFail: []
