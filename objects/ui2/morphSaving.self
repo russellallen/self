@@ -1,6 +1,6 @@
  '$Revision: 30.9 $'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -1396,6 +1396,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          prototype = ( |
             | userQueryMorph).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'viewScrollMorph' -> () From: ( | {
+         'Category: filing out\x7fModuleInfo: Module: morphSaving InitialContents: FollowSlot\x7fVisibility: public'
+        
+         prototype = ( |
+            | viewScrollMorph).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'worldMorph' -> () From: ( | {

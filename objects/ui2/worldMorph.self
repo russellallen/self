@@ -1542,7 +1542,9 @@ to each morph prototype after filing it in.\x7fModuleInfo: Module: worldMorph In
         
          leftMouseDown: e = ( |
             | 
-            carpetMorph copyHand: e sourceHand.
+            preferences desktop useViewScrollMorph
+             ifTrue: [viewScrollMorph copyHand: e sourceHand]
+              False: [carpetMorph copyHand: e sourceHand].
             self).
         } | ) 
 
@@ -1655,8 +1657,10 @@ Make a notifier to be spawned in a new world.\x7fModuleInfo: Module: worldMorph 
         
          middleMouseDown: e = ( |
             | 
-            "only if click on background"
-            rootMorphsAt: e cursorPoint Do: [^ self].
+            "only if click on background, or if we
+             are dealing with an even forwarded by viewScrollMorph"
+            rootMorphsAt: e cursorPoint Do: [|:m|
+                m prototype = viewScrollMorph ifFalse: [^ self]].
             backgroundMenu ifNil: [ backgroundMenu: buildBackgroundMenu ].
             ( backgroundMenu copy retargetButtonsTo: self) popUp: e.
             self).
@@ -2249,6 +2253,15 @@ on the default display.\x7fModuleInfo: Module: worldMorph InitialContents: Follo
                     ].
                 ] exit.
             ].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
+         'Category: event handling\x7fComment: If button down over the world, drag out a selection region\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
+        
+         rightMouseDown: e = ( |
+            | 
+            carpetMorph copyHand: e sourceHand.
             self).
         } | ) 
 

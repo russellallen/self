@@ -1302,7 +1302,10 @@ appearance of the cursor.
         
          topRootMorphAt: p = ( |
             | 
-            world rootMorphsAt: p Do: [| :m | ^m ].
+            " viewScrollMorphs don't count as we can't 
+              bring up a selfMenu on them"
+            world rootMorphsAt: p Do: [| :m | 
+              m prototype = viewScrollMorph ifFalse: [ ^m ]].
             world).
         } | ) 
 
