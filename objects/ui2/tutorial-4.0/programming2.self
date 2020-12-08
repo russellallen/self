@@ -106,7 +106,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( root rawMorphs at: 0 ) myAscent: 12.
 ( root rawMorphs at: 0 ) myBox: ((81)@(52)) # ((81)@(67)).
 ( root rawMorphs at: 0 ) myDescent: 3.
-( root rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( root rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( root rawMorphs at: 0 ) myLabel: mutableString.
 ( root rawMorphs at: 0 ) myPosition: (81)@(64).
 ( root rawMorphs at: 0 ) myWidth: 0.
@@ -121,7 +121,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( root rawMorphs at: 1 ) myAscent: 12.
 ( root rawMorphs at: 1 ) myBox: ((694)@(227)) # ((694)@(242)).
 ( root rawMorphs at: 1 ) myDescent: 3.
-( root rawMorphs at: 1 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( root rawMorphs at: 1 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( root rawMorphs at: 1 ) myLabel: mutableString.
 ( root rawMorphs at: 1 ) myPosition: (694)@(239).
 ( root rawMorphs at: 1 ) myWidth: 0.
@@ -136,7 +136,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( root rawMorphs at: 2 ) myAscent: 12.
 ( root rawMorphs at: 2 ) myBox: ((710)@(119)) # ((710)@(134)).
 ( root rawMorphs at: 2 ) myDescent: 3.
-( root rawMorphs at: 2 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( root rawMorphs at: 2 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( root rawMorphs at: 2 ) myLabel: mutableString.
 ( root rawMorphs at: 2 ) myPosition: (710)@(131).
 ( root rawMorphs at: 2 ) myWidth: 0.
@@ -187,7 +187,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( root rawMorphs at: 6 ) myAscent: 12.
 ( root rawMorphs at: 6 ) myBox: ((710)@(119)) # ((710)@(134)).
 ( root rawMorphs at: 6 ) myDescent: 3.
-( root rawMorphs at: 6 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( root rawMorphs at: 6 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( root rawMorphs at: 6 ) myLabel: mutableString.
 ( root rawMorphs at: 6 ) myPosition: (710)@(131).
 ( root rawMorphs at: 6 ) myWidth: 0.
@@ -226,7 +226,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((566)@(21)).
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( (root rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( (root rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myLabel: 'Also create a coolDown slot, which multiplies each velocity by 0.9 (you must write it with the
 ' copyMutable.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -242,7 +242,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( (root rawMorphs at: 1) rawMorphs at: 0 ) myAscent: 12.
 ( (root rawMorphs at: 1) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((128)@(21)).
 ( (root rawMorphs at: 1) rawMorphs at: 0 ) myDescent: 3.
-( (root rawMorphs at: 1) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( (root rawMorphs at: 1) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( (root rawMorphs at: 1) rawMorphs at: 0 ) myLabel: '(Only go two button
 ' copyMutable.
 ( (root rawMorphs at: 1) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -258,7 +258,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( (root rawMorphs at: 2) rawMorphs at: 0 ) myAscent: 12.
 ( (root rawMorphs at: 2) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((110)@(21)).
 ( (root rawMorphs at: 2) rawMorphs at: 0 ) myDescent: 3.
-( (root rawMorphs at: 2) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( (root rawMorphs at: 2) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( (root rawMorphs at: 2) rawMorphs at: 0 ) myLabel: 'Move to the right
 ' copyMutable.
 ( (root rawMorphs at: 2) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -274,7 +274,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( (root rawMorphs at: 6) rawMorphs at: 0 ) myAscent: 12.
 ( (root rawMorphs at: 6) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((110)@(21)).
 ( (root rawMorphs at: 6) rawMorphs at: 0 ) myDescent: 3.
-( (root rawMorphs at: 6) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( (root rawMorphs at: 6) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( (root rawMorphs at: 6) rawMorphs at: 0 ) myLabel: 'Move to the right
 ' copyMutable.
 ( (root rawMorphs at: 6) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -290,7 +290,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((122)@(21)).
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: 'leading zero,  `0.9\')
 ' copyMutable.
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -306,7 +306,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( ((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( ((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((141)@(21)).
 ( ((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( ((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( ((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( ((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: 'clicks, to avoid leaving
 ' copyMutable.
 ( ((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -322,7 +322,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( ((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( ((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((125)@(21)).
 ( ((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( ((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( ((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( ((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: 'to learn more about
 ' copyMutable.
 ( ((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -338,7 +338,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( ((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( ((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((125)@(21)).
 ( ((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( ((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( ((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( ((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: 'to learn more about
 ' copyMutable.
 ( ((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -354,7 +354,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((4)@(21)).
 ( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: mutableString copySize: 1 FillingWith: '
 '.
 ( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -370,7 +370,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( (((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( (((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((140)@(21)).
 ( (((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( (((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( (((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( (((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: 'your outliner behind.)' copyMutable.
 ( (((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
 ( (((root rawMorphs at: 1) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myWidth: 140.
@@ -385,7 +385,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( (((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( (((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((111)@(21)).
 ( (((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( (((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( (((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( (((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: 'the programming
 ' copyMutable.
 ( (((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -401,7 +401,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( (((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( (((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((111)@(21)).
 ( (((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( (((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( (((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( (((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: 'the programming
 ' copyMutable.
 ( (((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -417,7 +417,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( ((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( ((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((565)@(21)).
 ( ((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( ((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( ((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( ((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: '                                                           To try your new methods, send the gasTank a `heatUp\'
 ' copyMutable.
 ( ((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -433,7 +433,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( ((((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( ((((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((81)@(21)).
 ( ((((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( ((((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( ((((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( ((((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: 'environment.' copyMutable.
 ( ((((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
 ( ((((root rawMorphs at: 2) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myWidth: 81.
@@ -448,7 +448,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( ((((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( ((((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((81)@(21)).
 ( ((((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( ((((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( ((((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( ((((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: 'environment.' copyMutable.
 ( ((((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
 ( ((((root rawMorphs at: 6) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myWidth: 81.
@@ -463,7 +463,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( (((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( (((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((569)@(21)).
 ( (((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( (((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( (((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( (((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: '                                                          message using the evaluator. You can get an evaluator
 ' copyMutable.
 ( (((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -479,7 +479,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( ((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( ((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((599)@(21)).
 ( ((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( ((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( ((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( ((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: '                                                          using the MIDDLE button menu on the top of the outliner. 
 ' copyMutable.
 ( ((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -495,7 +495,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( (((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( (((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((559)@(21)).
 ( (((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( (((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( (((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( (((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: '                                                          Simply type `heatUp\' in the evaluator, and press the 
 ' copyMutable.
 ( (((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -511,7 +511,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( ((((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( ((((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((345)@(21)).
 ( ((((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( ((((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( ((((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( ((((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: '                                                         `evaluate\' button.  ' copyMutable.
 ( ((((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
 ( ((((((((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myWidth: 345.

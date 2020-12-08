@@ -24,7 +24,7 @@
 ( root rawMorphs at: 0 ) myAscent: 17.
 ( root rawMorphs at: 0 ) myBox: ((140)@(3)) # ((258)@(25)).
 ( root rawMorphs at: 0 ) myDescent: 5.
-( root rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 18.
+( root rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'bold' Size: 18.
 ( root rawMorphs at: 0 ) myLabel: 'Tutorial loader'.
 ( root rawMorphs at: 0 ) myPosition: (140)@(20).
 ( root rawMorphs at: 0 ) myWidth: 118.
@@ -345,7 +345,7 @@ f close.   ] value  '.
 ( (root rawMorphs at: 1) rawMorphs at: 0 ) myAscent: 12.
 ( (root rawMorphs at: 1) rawMorphs at: 0 ) myBox: ((2)@(2)) # ((98)@(17)).
 ( (root rawMorphs at: 1) rawMorphs at: 0 ) myDescent: 3.
-( (root rawMorphs at: 1) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( (root rawMorphs at: 1) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( (root rawMorphs at: 1) rawMorphs at: 0 ) myLabel: 'save this morph'.
 ( (root rawMorphs at: 1) rawMorphs at: 0 ) myPosition: (2)@(14).
 ( (root rawMorphs at: 1) rawMorphs at: 0 ) myWidth: 96.
@@ -360,7 +360,7 @@ f close.   ] value  '.
 ( (root rawMorphs at: 2) rawMorphs at: 0 ) myAscent: 12.
 ( (root rawMorphs at: 2) rawMorphs at: 0 ) myBox: ((2)@(2)) # ((59)@(17)).
 ( (root rawMorphs at: 2) rawMorphs at: 0 ) myDescent: 3.
-( (root rawMorphs at: 2) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( (root rawMorphs at: 2) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( (root rawMorphs at: 2) rawMorphs at: 0 ) myLabel: 'Add field'.
 ( (root rawMorphs at: 2) rawMorphs at: 0 ) myPosition: (2)@(14).
 ( (root rawMorphs at: 2) rawMorphs at: 0 ) myWidth: 57.
