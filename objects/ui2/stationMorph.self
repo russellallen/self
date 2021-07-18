@@ -1,10 +1,9 @@
- ''
+ '30.21.0'
  '
 Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
-[ 
-"prefileIn" self] value
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -52,7 +51,11 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'ModuleInfo: Module: stationMorph InitialContents: FollowSlot'
         
          postFileIn = ( |
-            | resend.postFileIn).
+            | 
+            resend.postFileIn.
+            stationMorph initializePrototype.
+            worldMorph addBackgroundMenuContributor: stationMorph.
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'stationMorph' -> () From: ( | {
@@ -230,10 +233,34 @@ SlotsToOmit: borderWidth parent prototype rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'stationMorph' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: stationMorph InitialContents: FollowSlot\x7fVisibility: public'
+        
+         contributeToBackgroundMenu: m = ( |
+            | 
+            m addButton:
+              ( ( ( ui2Button copy script: 'stationMorph getNewStation' )
+                isAsynchronous: true )
+                label: 'New station')
+            ToGroup: 'top'.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'stationMorph' -> () From: ( | {
          'ModuleInfo: Module: stationMorph InitialContents: FollowSlot'
         
          copy = ( |
             | resend.copy name: 'Unnamed Station').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'stationMorph' -> () From: ( | {
+         'Category: support\x7fModuleInfo: Module: stationMorph InitialContents: FollowSlot\x7fVisibility: public'
+        
+         getNewStation = ( |
+            | 
+            case 
+              if:   [ nil != process this hand ]
+              Then: [ process this hand safelyDo: [process this hand attach: stationMorph copy ]].
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'stationMorph' -> () From: ( | {
