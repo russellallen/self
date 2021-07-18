@@ -1,8 +1,9 @@
  '$Revision: 30.8 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -375,6 +376,47 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
              colors.
              nextColorIndex <- 0.
             | 
+            'try without quantizing 24-bit colors...' print.
+            colors: dictionary copyRemoveAll.
+            height do: [| :i. rowOffset. byteOffset |
+                rowOffset:  i * width.
+                byteOffset: headerOffset + (i * bytesPerLine).
+                width do: [| :j. rgb. colorIndex |
+                    rgb: fileContents copyFrom: byteOffset UpTo: 3 + byteOffset.
+                    rgb at: 0 PutByte: (rgb byteAt: 0).
+                    rgb at: 1 PutByte: (rgb byteAt: 1).
+                    rgb at: 2 PutByte: (rgb byteAt: 2).
+                    colorIndex: colors at: rgb IfAbsent: [
+                        colorIndex: nextColorIndex.
+                        nextColorIndex: nextColorIndex succ.
+                        colors at: rgb Put: colorIndex.
+                        colorIndex].
+                    nextColorIndex > 256 ifTrue: [
+                      "We have overflow in colors... try quantizing"
+                      ^ readImage24BitQuantizing].        
+                    imageData at: (rowOffset + j) PutByte: colorIndex.
+                    byteOffset: 3 + byteOffset.
+                ].
+            ].
+
+            colorMap: vector copySize: colors size.
+            colors do: [| :i. :rgb. r. g. b |
+                colorMap at: i Put: 
+                r: (rgb byteAt: 0) / 255.0.
+                g: (rgb byteAt: 1) / 255.0.
+                b: (rgb byteAt: 2) / 255.0.
+                colorMap at: i Put: (paint copyRed: r Green: g Blue: b).
+            ].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'sunRasterFile' -> () From: ( | {
+         'Category: reading\x7fModuleInfo: Module: sunRasterFile InitialContents: FollowSlot\x7fVisibility: private'
+        
+         readImage24BitQuantizing = ( |
+             colors.
+             nextColorIndex <- 0.
+            | 
             'crudely quantizing 24-bit colors...' print.
             colors: dictionary copyRemoveAll.
             height do: [| :i. rowOffset. byteOffset |
@@ -382,7 +424,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                 byteOffset: headerOffset + (i * bytesPerLine).
                 width do: [| :j. rgb. colorIndex |
                     rgb: fileContents copyFrom: byteOffset UpTo: 3 + byteOffset.
-                    rgb at: 0 PutByte: (2r11000000 && (rgb byteAt: 0)).
+                    rgb at: 0 PutByte: (2r11100000 && (rgb byteAt: 0)).
                     rgb at: 1 PutByte: (2r11100000 && (rgb byteAt: 1)).
                     rgb at: 2 PutByte: (2r11100000 && (rgb byteAt: 2)).
                     colorIndex: colors at: rgb IfAbsent: [
