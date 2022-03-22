@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.24 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -423,7 +424,8 @@ Feel free to inherit me and override the ones you can implement.
         
          handle: combo IfCannot: b = ( |
             | 
-            combo beHandledBy: self IfCannot: b).
+            (keyComboTranslator translatedCombo: combo)
+                beHandledBy: self IfCannot: b).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractUI2Event' -> 'editorKeyCapComboHandler' -> () From: ( | {
@@ -550,6 +552,8 @@ Feel free to inherit me and override the ones you can implement.
             | 
             combo nonmodifierKeyCap isArrow ifTrue: [^ handleSmallArrowPress: combo IfCannot: b].
 
+            combo nonmodifierKeyCap = keyCaps oddballs tab ifTrue: [^  tab].
+
             combo nonmodifierKeyCap isPrintable ifTrue: [^combo nonmodifierKeyCap printString do: [|:c| insert_char: c]].
 
             combo nonmodifierKeyCap = keyCaps oddballs enter     ifTrue: [^ split_line].
@@ -612,6 +616,24 @@ Feel free to inherit me and override the ones you can implement.
         
          insert_char: char = ( |
             | self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractUI2Event' -> 'editorKeyCapComboHandler' -> () From: ( | {
+         'Category: filter\x7fComment: I provide a pluggable mechanism to translate and handle
+incoming key events to editors. Override me with something
+useful if you want. Default is to do nothing.\x7fModuleInfo: Module: ui2Event InitialContents: FollowSlot'
+        
+         keyComboTranslator = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'abstractUI2Event' -> 'editorKeyCapComboHandler' -> 'keyComboTranslator' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits abstractUI2Event editorKeyCapComboHandler keyComboTranslator.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractUI2Event' -> 'editorKeyCapComboHandler' -> 'keyComboTranslator' -> () From: ( | {
+         'ModuleInfo: Module: ui2Event InitialContents: FollowSlot'
+        
+         translatedCombo: combo = ( |
+            | combo).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractUI2Event' -> 'editorKeyCapComboHandler' -> () From: ( | {
