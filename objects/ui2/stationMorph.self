@@ -295,7 +295,6 @@ SlotsToOmit: borderWidth parent prototype rawColor.
          initializeLabel = ( |
              text.
             | 
-
             text: smallEditorMorph 
                    copyString: 'Unnamed Station'
                        Target: self
