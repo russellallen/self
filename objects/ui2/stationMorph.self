@@ -290,7 +290,7 @@ SlotsToOmit: borderWidth parent prototype rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'stationMorph' -> () From: ( | {
-         'Category: initialize\x7fModuleInfo: Module: stationMorph InitialContents: FollowSlot'
+         'Category: basics\x7fModuleInfo: Module: stationMorph InitialContents: FollowSlot'
         
          initializeLabel = ( |
              text.
@@ -307,7 +307,7 @@ SlotsToOmit: borderWidth parent prototype rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'stationMorph' -> () From: ( | {
-         'Category: initialize\x7fModuleInfo: Module: stationMorph InitialContents: FollowSlot'
+         'Category: basics\x7fModuleInfo: Module: stationMorph InitialContents: FollowSlot'
         
          initializePrototype = ( |
              button.
@@ -346,6 +346,12 @@ SlotsToOmit: borderWidth parent prototype rawColor.
         
          label = ( |
             | allMorphsDo: [|:m| m prototype = smallEditorMorph ifTrue: [^ m]]. error: 'stationMorph broken!').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'stationMorph' -> () From: ( | {
+         'Category: basics\x7fModuleInfo: Module: stationMorph InitialContents: FollowSlot\x7fVisibility: public'
+        
+         morphTypeName = 'stationMorph'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'stationMorph' -> () From: ( | {
