@@ -1,10 +1,9 @@
- ''
+ '30.21.0'
  '
 Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
-[ 
-"prefileIn" self] value
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -100,7 +99,8 @@ Nice improcements to this would be
          'Category: inbox creation\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
          inboxTimeOut: ms = ( |
-            | (inboxTimeoutPrototype _Clone channel_: self) timeOut: ms).
+            | 
+            (inboxTimeoutPrototype _Clone channel_: self) timeOut_: ms).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
@@ -236,37 +236,38 @@ Nice improcements to this would be
          'Category: inbox creation\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
          waitingInboxTimeOut: ms IfTimedOut: tblk = ( |
-            | ((waitingTimeOutInbox _Clone channel_: self) timeOut: ms) timeOutBlock_: tblk).
+            | 
+            ((waitingTimeOutInboxPrototype _Clone channel_: self) timeOut_: ms) timeOutBlock_: tblk).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> () From: ( | {
          'Category: inbox prototypes\x7fModuleInfo: Module: channel InitialContents: FollowSlot'
         
-         waitingTimeoutInboxPrototype = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeoutInboxPrototype' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals channel parent waitingTimeoutInboxPrototype.
+         waitingTimeOutInboxPrototype = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeOutInboxPrototype' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals channel parent waitingTimeOutInboxPrototype.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeoutInboxPrototype' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeOutInboxPrototype' -> () From: ( | {
          'ModuleInfo: Module: channel InitialContents: InitializeToExpression: (nil)'
         
          channel_.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeoutInboxPrototype' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeOutInboxPrototype' -> () From: ( | {
          'ModuleInfo: Module: channel InitialContents: InitializeToExpression: (nil)'
         
          timeOutBlock_.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeoutInboxPrototype' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeOutInboxPrototype' -> () From: ( | {
          'ModuleInfo: Module: channel InitialContents: InitializeToExpression: (nil)'
         
          timeOut_.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeoutInboxPrototype' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'channel' -> 'parent' -> 'waitingTimeOutInboxPrototype' -> () From: ( | {
          'ModuleInfo: Module: channel InitialContents: FollowSlot\x7fVisibility: public'
         
          undefinedSelector: sel Type: msgType Delegatee: del MethodHolder: mh Arguments: args = ( |
@@ -274,7 +275,7 @@ Nice improcements to this would be
              m.
             | 
             m: (l message copy receiver: l nil Selector: sel Type: msgType Delegatee: del MethodHolder: mh Arguments: args).
-            channel_ sendMessage: m TimeOut: timeOut_ IfTimedOut: timeOutBlock_).
+            channel_ sendWaitResultMessage: m TimeOut: timeOut_ IfTimedOut: timeOutBlock_).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
