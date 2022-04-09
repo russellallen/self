@@ -1550,13 +1550,22 @@ As used to make evaluators. -- Randy, 2/2/95\x7fModuleInfo: Module: outlinerWidg
          'Category: copying\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: private'
         
          initializeString: string Panel: panel Style: style = ( |
+            | 
+            initializeString: string Panel: panel Style: style TextField: ui2_textField).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uglyTextEditorMorph' -> () From: ( | {
+         'Category: copying\x7fComment: If we want to use something other than
+(but compatibale with!) ui2_textField\x7fModuleInfo: Module: outlinerWidgets InitialContents: FollowSlot\x7fVisibility: private'
+        
+         initializeString: string Panel: panel Style: style TextField: textField = ( |
              row.
             | 
             borderWidth: 2.
             frameStyle: insetBezelStyle.
             beRigid.
 
-            text: ui2_textField copy.
+            text: textField copy.
             text  beFlexible.
             text  setText: string.
             row: rowMorph copy.
