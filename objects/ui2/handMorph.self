@@ -1200,6 +1200,15 @@ your kind of finished for the day.\x7fModuleInfo: Module: handMorph InitialConte
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'handMorph' -> () From: ( | {
+         'Category: name and other userInfo issues\x7fModuleInfo: Module: handMorph InitialContents: FollowSlot\x7fVisibility: public'
+        
+         informSystemAboutPassword = ( |
+            | 
+            "This is overriden for OurSelf.io - rca 2022.04.22"
+            self).
+        } | ) 
+
+bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'handMorph' -> () From: ( | {
          'Category: meta hand\x7fModuleInfo: Module: handMorph InitialContents: FollowSlot\x7fVisibility: private'
         
          shedHand = ( |
