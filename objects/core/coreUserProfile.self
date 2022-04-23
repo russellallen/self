@@ -120,6 +120,14 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
          'Category: platform-dependent\x7fModuleInfo: Module: coreUserProfile InitialContents: FollowSlot\x7fVisibility: private'
         
+         hostName = (|
+           |
+           displayHostName ifNil: '[Unknown hostName]').
+        } | ) 
+
+bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
+         'Category: platform-dependent\x7fModuleInfo: Module: coreUserProfile InitialContents: FollowSlot\x7fVisibility: private'
+        
          fingerTimeout = 5000.
         } | ) 
 
