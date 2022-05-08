@@ -224,6 +224,29 @@ given default response.\x7fModuleInfo: Module: userQueryMorph InitialContents: F
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'userQueryMorph' -> () From: ( | {
+         'Category: simple queries\x7fComment: Ask the user a question and return the user\'s reply
+(a string). The type-in field is initialized to the
+given default response.\x7fModuleInfo: Module: userQueryMorph InitialContents: FollowSlot\x7fVisibility: public'
+        
+         askString: queryText DefaultAnswer: default Event: evt IfCancel: blk = ( |
+             query.
+            | 
+            editor: uglyTextEditorMorph copyString: default Style: ( | color = paint | ).
+            editor borderWidth: 3.
+            query: copyQuestion: queryText.
+            query widgetColumn addMorph: editor.
+            query buttonInRowLabel: 'Okay' Result: 'Okay'.
+            query buttonInRowLabel: 'Cancel' Result: 'Cancel'.
+            query colorAll: query color.
+            query popUpWhereEventHappened: evt.
+            editor text selectAll beTypingFocusFor: evt sourceHand.
+            query drawAttention awaitResponse.
+            query result = 'Cancel'
+              ifTrue: [blk value]
+               False: [editor contentsString]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'userQueryMorph' -> () From: ( | {
          'Category: simple queries\x7fComment: Ask the user a yes or no question and return the boolean result.
 \x7fModuleInfo: Module: userQueryMorph InitialContents: FollowSlot\x7fVisibility: public'
         
