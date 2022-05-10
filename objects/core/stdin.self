@@ -262,16 +262,15 @@ option to cancel the operation.\x7fModuleInfo: Module: stdin InitialContents: Fo
          askString: queryText DefaultAnswer: default IfCancel: blk = ( |
             | 
             askViaTTY ifTrue: [| reply |
+                'Do you wish to proceed? (y/n) ' print.
+                stdin preemptReadLine = 'y'
+                    ifFalse: [^ blk value].
                 queryText print.
                 default isEmpty ifFalse: [
                     ('[RET => ', default, '] ') print.
                 ].
                 reply: stdin preemptReadLine.
-                reply: (reply isEmpty ifTrue: default False: reply).
-                'Cancel? (y/n) ' print.
-                stdin preemptReadLine = 'y'
-                    ifTrue: [blk value]
-                     False: reply.   
+                reply isEmpty ifTrue: default False: reply.
             ] False: [
                 userQueryMorph askString: queryText
                            DefaultAnswer: default
