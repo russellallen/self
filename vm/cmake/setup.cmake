@@ -51,7 +51,7 @@ endif()
 # setup all warning flags
 #
 list(APPEND _flags
-  -Wabi
+  -Wabi=11
   -Wreorder
   -Wreturn-type
   -Wswitch
