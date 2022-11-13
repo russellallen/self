@@ -50,8 +50,12 @@ endif()
 #
 # setup all warning flags
 #
+if (clang)
+  list(APPEND _flags -Wabi)
+elseif(gcc)
+  list(APPEND _flags -Wabi=11)
+endif()
 list(APPEND _flags
-  -Wabi
   -Wreorder
   -Wreturn-type
   -Wswitch
