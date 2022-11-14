@@ -9,9 +9,9 @@
 all: toself socks.so
 
 ROOT = ../../..
-CFLAGS=-DDEBUG -DGLUE_CHECKSUM=0 -DXLIB -DFAST_COMPILER -DSIC_COMPILER -DNATIVE_ARCH=i386 -DDYNLINK_SUPPORTED -DCOMPILER=GCC_COMPILER -DTARGET_OS_VERSION=LINUX_VERSION -DTARGET_OS_FAMILY=UNIX_FAMILY -DTARGET_ARCH=I386_ARCH -DHOST_ARCH=I386_ARCH -DGENERATE_DEBUGGING_AIDS=0 -DSPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=0 -DTARGET_IS_OPTIMIZED=1 -DTARGET_IS_PROFILED=0 -DTARGET_IS_FOR_DEBUGGING=0 -m32 -fno-threadsafe-statics -fvisibility=default -fkeep-inline-functions -fno-exceptions -fno-stack-protector -Wabi=11 -Wreorder -Wreturn-type -Wswitch -Wcomment -Wformat -Wpointer-arith -Woverloaded-virtual -Wno-write-strings -Wparentheses -Wno-register
+CFLAGS=-DDEBUG -DGLUE_CHECKSUM=0 -DXLIB -DFAST_COMPILER -DSIC_COMPILER -DNATIVE_ARCH=i386 -DDYNLINK_SUPPORTED -DCOMPILER=GCC_COMPILER -DTARGET_OS_VERSION=LINUX_VERSION -DTARGET_OS_FAMILY=UNIX_FAMILY -DTARGET_ARCH=I386_ARCH -DHOST_ARCH=I386_ARCH -DGENERATE_DEBUGGING_AIDS=0 -DSPEND_TIME_FOR_DEBUGGING_BY_DEFAULT=0 -DTARGET_IS_OPTIMIZED=1 -DTARGET_IS_PROFILED=0 -DTARGET_IS_FOR_DEBUGGING=0 -m32 -fno-delete-null-pointer-checks -fno-threadsafe-statics -fvisibility=default -fkeep-inline-functions -fno-exceptions -fno-stack-protector -Wabi=11 -Wreorder -Wreturn-type -Wswitch -Wcomment -Wformat -Wpointer-arith -Woverloaded-virtual -Wno-write-strings -Wparentheses -Wno-register
 
-LINKFLAGS=-m32 -fno-threadsafe-statics -fvisibility=default -fkeep-inline-functions -fno-exceptions -fno-stack-protector -Wabi=11 -Wreorder -Wreturn-type -Wswitch -Wcomment -Wformat -Wpointer-arith -Woverloaded-virtual -Wno-write-strings -Wparentheses -Wno-register
+LINKFLAGS=-m32 -fno-delete-null-pointer-checks -fno-threadsafe-statics -fvisibility=default -fkeep-inline-functions -fno-exceptions -fno-stack-protector -Wabi=11 -Wreorder -Wreturn-type -Wswitch -Wcomment -Wformat -Wpointer-arith -Woverloaded-virtual -Wno-write-strings -Wparentheses -Wno-register
 
 
 INCLUDES  += -I$(ROOT)/incls \
