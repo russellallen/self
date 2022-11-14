@@ -65,4 +65,5 @@ list(APPEND _flags
   -Woverloaded-virtual
   -Wno-write-strings
   -Wparentheses
+  -Wno-register
 )
