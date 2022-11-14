@@ -139,8 +139,8 @@ vframeOop vframeOopClass::create_vframeOop(oop method) {
     ShouldNotReachHere(); // should create only three vframe prototypes
   vframeMap *vf;
   switch (method->kind()) {
-   case OuterMethodType: { ovframeMap m; vf= &m; break; }
-   case BlockMethodType: { bvframeMap m; vf= &m; break; }
+   case OuterMethodType: { static ovframeMap m; vf= &m; break; }
+   case BlockMethodType: { static bvframeMap m; vf= &m; break; }
    default: ShouldNotReachHere();
   }
   assert(sizeof(vframeMap) == sizeof(bvframeMap) &&
