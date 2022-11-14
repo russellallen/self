@@ -28,6 +28,7 @@ add_definitions_if_cmakevar(
 # setup all necessary build flags
 #
 list(APPEND _flags
+  -fno-omit-frame-pointer
   -fno-delete-null-pointer-checks
   -fno-threadsafe-statics
   -fvisibility=default
