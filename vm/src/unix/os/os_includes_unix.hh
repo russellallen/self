@@ -41,7 +41,7 @@ extern "C" {
 }
 
 # include <stdlib.h>
-#if TARGET_OS_VERSION != MACOSX_VERSION
+#if TARGET_OS_VERSION != MACOSX_VERSION && TARGET_OS_VERSION != NETBSD_VERSION
 # include <alloca.h>
 #endif
 
