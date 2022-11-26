@@ -93,20 +93,13 @@ extern "C" {
 # include <signal.h>
 
 
-# if TARGET_OS_VERSION == SOLARIS_VERSION
-  typedef siginfo_t        self_code_info_t;
-  typedef ucontext_t       self_sig_context_t;
-  typedef stack_t          self_stack_t;
-# elif TARGET_OS_VERSION == SUNOS_VERSION
+# if TARGET_OS_VERSION == SUNOS_VERSION
   typedef sigcontext       self_sig_context_t;
   typedef struct sigstack  self_stack_t;
-# elif TARGET_OS_VERSION == MACOSX_VERSION \
-    || TARGET_OS_VERSION ==  LINUX_VERSION
+# else
   typedef siginfo_t        self_code_info_t;
   typedef ucontext_t       self_sig_context_t;
   typedef stack_t          self_stack_t;
-# else
-  # error what?
 # endif
 
 # if  TARGET_ARCH == SPARC_ARCH
@@ -224,20 +217,14 @@ const int Last_OS_Signal = SIGUSR2+1+20; /* so we dont crash on unknown signals 
 
 // some definitions for SignalInterface:
 
-# if  TARGET_OS_VERSION == SOLARIS_VERSION \
-  ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
-  ||  TARGET_OS_VERSION ==   LINUX_VERSION
-
-  typedef void (*Signal_Handler_t)(int sig, self_code_info_t *info, self_sig_context_t *con);
-
-# elif  TARGET_OS_VERSION == SUNOS_VERSION
+# if  TARGET_OS_VERSION == SUNOS_VERSION
 
   typedef int* CodeInfo;
   typedef void (*Signal_Handler_t)(int sig, int code, self_sig_context_t *scp, char *addr);
 
 # else
 
-  # error what version?
+  typedef void (*Signal_Handler_t)(int sig, self_code_info_t *info, self_sig_context_t *con);
 
 # endif
 
