@@ -68,17 +68,13 @@ static struct termios normalSettings;
 class IOCleanup {
  public:
   IOCleanup()  {
-# if TARGET_OS_VERSION ==  SUNOS_VERSION \
-  || TARGET_OS_VERSION == SOLARIS_VERSION  \
-  || TARGET_OS_VERSION ==   LINUX_VERSION
+# if TARGET_OS_VERSION ==  SUNOS_VERSION
     if (isatty(STDIN))
       ioctl(STDIN, TCGETS, (caddr_t)&normalSettings);
-# elif TARGET_OS_VERSION == MACOSX_VERSION
+# else
     // not sure what to do
     if (isatty(STDIN))
-      ioctl(STDIN, TIOCGETA, (caddr_t)&normalSettings);
-# else
-  # error what?
+      tcgetattr(STDIN, &normalSettings);
 # endif
     FD_SET(0, &activeFDs); FD_SET(1, &activeFDs); FD_SET(2, &activeFDs); 
   }
@@ -87,16 +83,12 @@ class IOCleanup {
 static IOCleanup* ioC;        // make sure we exit in blocking mode etc
 
 void resetTerminal() {
-# if  TARGET_OS_VERSION ==  SUNOS_VERSION \
-  ||  TARGET_OS_VERSION == SOLARIS_VERSION  \
-  ||  TARGET_OS_VERSION ==   LINUX_VERSION
+# if  TARGET_OS_VERSION ==  SUNOS_VERSION
     if (isatty(STDIN))
       ioctl(STDIN, TCSETS, (caddr_t)&normalSettings);
-# elif TARGET_OS_VERSION == MACOSX_VERSION
-    if (isatty(STDIN))
-      ioctl(STDIN, TIOCSETA, (caddr_t)&normalSettings);
 # else
-    # error what?
+    if (isatty(STDIN))
+      tcsetattr(STDIN, TCSANOW, &normalSettings);
 # endif
   fcntl(STDIN, F_SETFL, 0);
 }
