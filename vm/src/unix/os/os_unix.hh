@@ -31,6 +31,7 @@
 
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION == MACOSX_VERSION  \
+  ||  TARGET_OS_VERSION == NETBSD_VERSION  \
   ||  TARGET_OS_VERSION ==  LINUX_VERSION
     static void setPageAdvisory(char *start, char *end, int code);
 # endif

@@ -475,7 +475,8 @@ int OS::min_core(caddr_t addr, size_t len, char *vec) {
 # endif
 
 #if  TARGET_OS_VERSION == SOLARIS_VERSION \
- ||  TARGET_OS_VERSION ==  MACOSX_VERSION
+ ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
+ ||  TARGET_OS_VERSION ==  NETBSD_VERSION
   void OS::setPageAdvisory(char *start, char *end, int code) {
     if (end - start < OS::dont_bother) return;
     char *ps= real_page_start(start);
