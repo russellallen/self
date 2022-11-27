@@ -1028,7 +1028,7 @@ void Recompilation::init(char* pc) {
   if (calledFromStub) {
     CountStub *cs= (CountStub*)thing;
     assert(    cs->sd() == sd
-           ||  cs->pic() && cs->pic()->sd() == sd,
+           ||  (cs->pic() && cs->pic()->sd() == sd),
            "sds don't match");
     tripNM= cs->target();
     restartAddr= tripNM->entryPointFor(sd);
