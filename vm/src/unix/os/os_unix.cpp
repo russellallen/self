@@ -43,8 +43,13 @@
                       MAP_PRIVATE|MAP_FIXED,
                       zero_fd, 0)) 
         return desiredAddress;
-        
+
+#if TARGET_OS_VERSION == NETBSD_VERSION
+      char *b = NULL;
+      posix_memalign((void **)&b, align, size);
+#else
       char* b = (char*)memalign(align, size);
+#endif
       if (b == NULL && mustAllocate)  allocate_failed(name);
       return b;     
   }
