@@ -195,6 +195,8 @@ extern "C" {
 # define FORK vfork
 # elif  TARGET_OS_VERSION == LINUX_VERSION
 # define FORK vfork
+# elif  TARGET_OS_VERSION == NETBSD_VERSION
+# define FORK vfork
 # else
    error which?
 #endif
