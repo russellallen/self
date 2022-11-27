@@ -348,6 +348,7 @@ bool OS::setup_snapshot_to_run(const char* fileName) {
 void OS::set_log_buf(FILE* f, char* buf, int bs) {    
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
+  ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
   ||  TARGET_OS_VERSION ==   LINUX_VERSION
   setvbuf(f, buf, _IOFBF, bs);
   
