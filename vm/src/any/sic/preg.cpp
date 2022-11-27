@@ -748,7 +748,7 @@
     if (ss == scope) {
       // live range = ]startBCI, endBCI]
       assert(startBCI == bc ||
-             ss == creationScope && creationStartBCI == bc, "oops");
+             (ss == creationScope && creationStartBCI == bc), "oops");
       return bciLT(startBCI, bs) && bciLE(bs, endBCI);
     } else {
       // live range = ]bc, end of scope]
