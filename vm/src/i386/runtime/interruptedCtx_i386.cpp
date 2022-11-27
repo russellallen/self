@@ -89,6 +89,19 @@ void InterruptedContext::setupPreemptionFromSignal() {
     return  (int*) &scp->uc_mcontext.gregs[REG_EBP];
   }
 
+# elif TARGET_OS_VERSION == NETBSD_VERSION
+
+  char** InterruptedContext::pc_addr() {
+    return  (char**) _UC_MACHINE_PC(scp);
+  }
+  int* InterruptedContext::sp_addr() {
+    return  (int*) _UC_MACHINE_SP(scp);
+  }
+  int* InterruptedContext::ebp_addr() {
+    return  (int*) _UC_MACHINE_FP(scp);
+  }
+
+
 # elif TARGET_OS_VERSION == SOLARIS_VERSION
 
 char** InterruptedContext::pc_addr() {
@@ -156,7 +169,30 @@ void InterruptedContext::print_registers() {
     lprintf("trapno    = 0x%x\n", gregs[REG_TRAPNO]);
     lprintf("err       = 0x%x\n", gregs[REG_ERR]);
     lprintf("uesp      = 0x%x\n", gregs[REG_UESP]);
-  
+
+  # elif TARGET_OS_VERSION == NETBSD_VERSION
+
+    __greg_t *gregs = ic->scp->uc_mcontext.__gregs;
+    lprintf("eax       = 0x%x\n", gregs[_REG_EAX]);
+    lprintf("ebx       = 0x%x\n", gregs[_REG_EBX]);
+    lprintf("ecx       = 0x%x\n", gregs[_REG_ECX]);
+    lprintf("edx       = 0x%x\n", gregs[_REG_EDX]);
+    lprintf("esi       = 0x%x\n", gregs[_REG_ESI]);
+    lprintf("edi       = 0x%x\n", gregs[_REG_EDI]);
+    lprintf("ebp       = 0x%x\n", gregs[_REG_EBP]);
+    lprintf("esp       = 0x%x\n", gregs[_REG_ESP]);
+    lprintf("ss        = 0x%x\n", gregs[_REG_SS]);
+    lprintf("efl       = 0x%x\n", gregs[_REG_EFL]);
+    lprintf("eip       = 0x%x\n", gregs[_REG_EIP]);
+    lprintf("cs        = 0x%x\n", gregs[_REG_CS]);
+    lprintf("ds        = 0x%x\n", gregs[_REG_DS]);
+    lprintf("es        = 0x%x\n", gregs[_REG_ES]);
+    lprintf("fs        = 0x%x\n", gregs[_REG_FS]);
+    lprintf("gs        = 0x%x\n", gregs[_REG_GS]);
+    lprintf("trapno    = 0x%x\n", gregs[_REG_TRAPNO]);
+    lprintf("err       = 0x%x\n", gregs[_REG_ERR]);
+    lprintf("uesp      = 0x%x\n", gregs[_REG_UESP]);
+
 # elif TARGET_OS_VERSION == SOLARIS_VERSION
   
   greg_t *gregs = ((ucontext_t*) ic->scp)->uc_mcontext.gregs;
