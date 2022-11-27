@@ -172,6 +172,9 @@ extern "C" {
   # include <mach/machine/thread_status.h> // for interruptedCtx_*.cpp *_thread_state_t
 # endif
 
+# if TARGET_OS_VERSION == NETBSD_VERSION
+  # include <sys/sysctl.h>
+# endif
 
 # include <sys/mman.h>
 

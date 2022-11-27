@@ -185,7 +185,7 @@ void OS::init() {
     }
     signal(SIGCHLD, old_h);
   }
-# elif  TARGET_OS_VERSION ==  MACOSX_VERSION
+# elif  TARGET_OS_VERSION ==  MACOSX_VERSION || TARGET_OS_VERSION == NETBSD_VERSION
 
   int mib[2], mem_size;
   size_t len;
