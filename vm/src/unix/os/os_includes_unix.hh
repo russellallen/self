@@ -154,8 +154,7 @@ extern "C" {
 # endif
 
 
-# if TARGET_OS_VERSION != SOLARIS_VERSION  \
-  && TARGET_OS_VERSION != LINUX_VERSION
+# if TARGET_OS_VERSION == SUNOS_VERSION
   #  include <sys/vadvise.h>
    extern "C" {
      int vadvise(int);
