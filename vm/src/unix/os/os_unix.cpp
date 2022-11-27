@@ -401,6 +401,12 @@ bool OS::get_swap_space_info(int &totalK, int &freeK) {
   return true;
 }
 
+# elif  TARGET_OS_VERSION == NETBSD_VERSION
+
+bool OS::get_swap_space_info(int &totalK, int &freeK) {
+  /* XXX: uwe: TODO: use swapctl(2) */
+  return false;
+}
 
 # elif  TARGET_OS_VERSION ==  SUNOS_VERSION \
     ||  TARGET_OS_VERSION == MACOSX_VERSION \
