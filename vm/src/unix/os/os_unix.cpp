@@ -845,6 +845,7 @@ void OS::check_events() {
 
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
+  ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
   ||  TARGET_OS_VERSION ==  LINUX_VERSION
 extern "C" {
   int malloc_verify() { return 1; }
