@@ -862,8 +862,8 @@ vframeOop Process::findInsertionPoint(abstract_vframe* target) {
     verifyVFrameList();
   }
   assert(stack()->contains((char*)target->fr) ||
-         (ConversionInProgress || theRecompilation)
-          && isOnVMStack(target->fr), "not in my stack");
+         ((ConversionInProgress || theRecompilation)
+          && isOnVMStack(target->fr)), "not in my stack");
   
   vframeOop sentinel = procObj->vframeList();
 
@@ -1226,7 +1226,7 @@ void Process::killVFrameOopsAndSetWatermark(frame* current) {
   if (current == NULL && inSelf()) current = stk.last_self_frame(true); 
   assert(     !current
           ||  stack()->contains((char*)current )
-          ||  ConversionInProgress && isOnVMStack(current),
+          ||  (ConversionInProgress && isOnVMStack(current)),
          "not in my stack");
 
   abstract_vframe* currentVF = current ? new_vframe(current) : NULL;
