@@ -28,6 +28,21 @@ list(APPEND _flags -m32)
 list(APPEND CMAKE_REQUIRED_DEFINITIONS -m32)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -m32")
 
+if(TARGET_ARCH MATCHES "I386_ARCH")
+  # NetBSD doesn't enforce 16 byte stack alignment by default.
+  # Explicitly request it here and also give main() and signal
+  # handlers the "force_align_arg_pointer" attribute.
+  if (gcc)
+    list(APPEND _flags -mpreferred-stack-boundary=4)
+    list(APPEND CMAKE_REQUIRED_DEFINITIONS -mpreferred-stack-boundary=4)
+  endif()
+  # XXX: TODO: What does clang use?
+  # if (clang)
+  #   list(APPEND _flags ...)
+  #   list(APPEND CMAKE_REQUIRED_DEFINITIONS ...)
+  # endif()
+endif()
+
 # true_size_of_malloced_obj() needs to peek at malloc internals.
 # NB: only available since NetBSD 9
 list(APPEND EXTRA_LIBRARIES jemalloc)

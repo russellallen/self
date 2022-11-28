@@ -176,6 +176,9 @@ void IntervalTimer::move_entry(TimerEntry* from, TimerEntry* to) { *to = *from; 
 
 #define SIGNONE -1
 
+#if TARGET_OS_VERSION == NETBSD_VERSION && TARGET_ARCH == I386_ARCH
+__attribute__((force_align_arg_pointer))
+#endif
 void IntervalTimerTick(int sig, self_code_info_t *info, self_sig_context_t *scp) {
   // A Mac OS X application, ApplicationEnhancer, causes the VM to receive nested
   // SIGALRM/SIGVTALRM signals.
