@@ -6,6 +6,11 @@
 # pragma implementation "allocation.hh"
 # include "_allocation.cpp.incl"
 
+#if TARGET_OS_VERSION == NETBSD_VERSION
+// need jemalloc internal API for true_size_of_malloced_obj
+#include <malloc.h>
+#endif
+
 
 bool isNull(VMObj* p) {
   return (p == NULL);
@@ -302,6 +307,14 @@ bool MallocInProgress = false;
 static void MallocFailed(void) { OS::allocate_failed("VM use"); } 
 
 
+#if TARGET_OS_VERSION == NETBSD_VERSION
+
+static inline int32 true_size_of_malloced_obj(int32* p) {
+  return (int32)sallocx(p, 0);	/* ask jemalloc */
+}
+
+#else
+
 static int32 true_size_of_malloced_obj(int32* p) {
   static const int32 s_offset = 
 #   if    TARGET_ARCH == SPARC_ARCH  &&  COMPILER == GCC_COMPILER
@@ -325,6 +338,7 @@ static int32 true_size_of_malloced_obj(int32* p) {
   return p[s_offset] & ~3; // some mallocs use low-order bit as flag
 }
 
+#endif
 
 // Linux malloc allocates addresses with bit 31 set, this conflicts with Self oop marking
 # if TARGET_OS_VERSION == LINUX_VERSION

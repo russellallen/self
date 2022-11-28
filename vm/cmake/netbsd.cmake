@@ -28,6 +28,10 @@ list(APPEND _flags -m32)
 list(APPEND CMAKE_REQUIRED_DEFINITIONS -m32)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -m32")
 
+# true_size_of_malloced_obj() needs to peek at malloc internals.
+# NB: only available since NetBSD 9
+list(APPEND EXTRA_LIBRARIES jemalloc)
+
 # if(clang)
 #   #
 #   # clang 3.0 integrated assembler on linux
