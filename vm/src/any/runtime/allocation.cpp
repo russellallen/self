@@ -345,6 +345,11 @@ static int32 true_size_of_malloced_obj(int32* p) {
     # include <malloc.h> // for mallopt
 # endif
 
+# if TARGET_OS_VERSION == NETBSD_VERSION && TARGET_ARCH == I386_ARCH
+/* Ask jemalloc to use sbrk. */
+const char *__je_malloc_conf = "dss:primary";
+# endif
+
 void malloc_init() {
     # if TARGET_OS_VERSION == LINUX_VERSION
       mallopt(M_MMAP_MAX, 0); // if Linux malloc mmaps, we get bit 31 on, which conflicts with memOop marking
