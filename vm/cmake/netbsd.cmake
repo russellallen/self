@@ -63,6 +63,10 @@ list(APPEND EXTRA_LIBRARIES jemalloc)
 macro(setup_target target)
   # "super"
   setup_target_common(${target})
+
+  add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND paxctl +m "$<TARGET_FILE:${PROJECT_NAME}>"
+    VERBATIM)
 endmacro()
 
 
