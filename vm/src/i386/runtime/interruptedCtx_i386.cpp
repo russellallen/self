@@ -21,8 +21,13 @@ void InterruptedContext::set_continuation_address(char *addr, bool mustWork, boo
 bool InterruptedContext::in_system_trap() {
   if (scp == &dummy_scp)
     return false;
+#if TARGET_OS_VERSION == NETBSD_VERSION
+  // system call, int 0x80 instruction
+  return pc()[0] == '\xcd'  &&  pc()[1] == '\x80';
+#else
   // system call, sysenter instruction
   return pc()[0] == '\x0f'  &&  pc()[1] == '\x34';
+#endif
 }
 
 
