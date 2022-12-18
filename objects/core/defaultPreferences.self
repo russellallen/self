@@ -145,7 +145,9 @@ main (non-morphic) menu.
 By default, we do this on Linux but not otherwise.\x7fModuleInfo: Module: defaultPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          swapMouseButtons = ( |
-            | host osName = 'linux').
+            | 
+                 (host osName = 'linux')
+            || [ (host osName = 'netbsd') ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
