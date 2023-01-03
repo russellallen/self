@@ -8,10 +8,17 @@ set(SELF_PREFIX_PREFIX_THRESHOLD_INIT
 set(SELF_X11_INIT ON)
 
 
-# Threads
 enable_language(C)
-find_package(Threads REQUIRED)
-set(EXTRA_LIBRARIES ${EXTRA_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+
+# Threads
+# Nothing in Self VM uses pthreads, so don't drag them in as they come
+# with locking overhead and expose bugs in gdb's NetBSD support.  They
+# might be required if any of the foreign libraries use them though -
+# in that case adjust InterruptedContext::forwarded_to_self_thread in
+# vm/src/unix/runtime/interruptedCtx_unix.cpp and uncomment the lines
+# below.
+# find_package(Threads REQUIRED)
+# set(EXTRA_LIBRARIES ${EXTRA_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 
 
 #
