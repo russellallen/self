@@ -14,7 +14,7 @@ DO_NOT_CROSS_COMPILE
 # define CHECK_TOKEN(t)                                                       \
     if (t->type == Token::ERROR_TOKEN) {                                      \
       syntaxError( t->sourceStart, t);                                        \
-      return NULL; }
+      return 0; }
 
 Parser::Parser(Scanner* scanr, bool silnt) {
   scanner        = scanr;
