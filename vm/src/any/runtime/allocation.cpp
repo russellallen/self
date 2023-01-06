@@ -6,7 +6,7 @@
 # pragma implementation "allocation.hh"
 # include "_allocation.cpp.incl"
 
-#if TARGET_OS_VERSION == NETBSD_VERSION
+#if TARGET_OS_VERSION == NETBSD_VERSION || TARGET_OS_VERSION == FREEBSD_VERSION
 // need jemalloc internal API for true_size_of_malloced_obj
 #include <malloc.h>
 #endif
@@ -307,7 +307,7 @@ bool MallocInProgress = false;
 static void MallocFailed(void) { OS::allocate_failed("VM use"); } 
 
 
-#if TARGET_OS_VERSION == NETBSD_VERSION
+#if TARGET_OS_VERSION == NETBSD_VERSION || TARGET_OS_VERSION == FREEBSD_VERSION
 
 static inline int32 true_size_of_malloced_obj(int32* p) {
   return (int32)sallocx(p, 0);	/* ask jemalloc */
