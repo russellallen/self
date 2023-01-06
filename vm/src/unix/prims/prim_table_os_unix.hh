@@ -81,7 +81,8 @@
 },
 # if TARGET_OS_VERSION == MACOSX_VERSION \
   || TARGET_OS_VERSION ==  LINUX_VERSION \
-  || TARGET_OS_VERSION == NETBSD_VERSION
+  || TARGET_OS_VERSION == NETBSD_VERSION \
+  || TARGET_OS_VERSION == FREEBSD_VERSION
 {  "SysName", fntype(& sysname_glue), ExternalPrimitive, StringPrimType, SIDEEFFECTS, "See man 3 uname" },
 { "NodeName", fntype(&nodename_glue), ExternalPrimitive, StringPrimType, SIDEEFFECTS, "See man 3 uname" },
 {  "Release", fntype(& release_glue), ExternalPrimitive, StringPrimType, SIDEEFFECTS, "See man 3 uname" },

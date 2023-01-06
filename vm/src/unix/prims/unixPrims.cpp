@@ -154,7 +154,9 @@ void resetTerminal() {
     }
   # endif  
 
-# elif  TARGET_OS_VERSION == LINUX_VERSION || TARGET_OS_VERSION == NETBSD_VERSION
+# elif  TARGET_OS_VERSION ==   LINUX_VERSION \
+    ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+    ||  TARGET_OS_VERSION == FREEBSD_VERSION
     static int c_lib_write(int fd, const char* buf, int nbytes) {
       return write(fd, buf, nbytes);
     }    
@@ -163,7 +165,8 @@ void resetTerminal() {
 # endif
 
  # if TARGET_OS_VERSION != MACOSX_VERSION  &&  TARGET_OS_VERSION != LINUX_VERSION \
-     && TARGET_OS_VERSION != NETBSD_VERSION
+     && TARGET_OS_VERSION != NETBSD_VERSION && TARGET_OS_VERSION != FREEBSD_VERSION
+
 
 extern "C" int write(int fd, const void* b, nbytes_t nbytes) {
     int32 res;
@@ -582,7 +585,8 @@ void unixPrims_exit() { delete ioC; }
 
 # if TARGET_OS_VERSION == MACOSX_VERSION \
   || TARGET_OS_VERSION ==  LINUX_VERSION \
-  || TARGET_OS_VERSION == NETBSD_VERSION
+  || TARGET_OS_VERSION == NETBSD_VERSION \
+  || TARGET_OS_VERSION == FREEBSD_VERSION
   static struct utsname my_utsname;
   char*  sysname_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname. sysname; }
   char* nodename_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname.nodename; }
