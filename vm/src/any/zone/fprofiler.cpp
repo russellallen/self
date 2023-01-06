@@ -337,7 +337,9 @@ oop PrintFlatProfile_prim(oop r, smi lines) {
 // need this entry point either way
 
 void SelfFlatProfile(bool on) {
-  # if TARGET_OS_VERSION == MACOSX_VERSION || TARGET_OS_VERSION == NETBSD_VERSION
+  # if TARGET_OS_VERSION == MACOSX_VERSION \
+    || TARGET_OS_VERSION == NETBSD_VERSION \
+    || TARGET_OS_VERSION == FREEBSD_VERSION
     typedef  char *           buf_t;
   # else // ! MACOSX_VERSION
     typedef unsigned short *  buf_t;
