@@ -38,7 +38,8 @@ class TimerEntry: public AbstractTimerEntry {
 
 
 #if TARGET_OS_VERSION != SOLARIS_VERSION && TARGET_OS_VERSION != MACOSX_VERSION \
-    && TARGET_OS_VERSION != NETBSD_VERSION && TARGET_OS_VERSION != LINUX_VERSION
+    && TARGET_OS_VERSION != NETBSD_VERSION && TARGET_OS_VERSION != FREEBSD_VERSION \
+    && TARGET_OS_VERSION != LINUX_VERSION
 extern "C" int setitimer(int which,
                          struct itimerval *value,
                          struct itimerval *ovalue);
@@ -95,6 +96,7 @@ void IntervalTimer::enable() {
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
   ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+  ||  TARGET_OS_VERSION ==  FREEBSD_VERSION \
   ||  TARGET_OS_VERSION ==   LINUX_VERSION
   action.sa_sigaction = (void (*)(int, siginfo_t*, void*)) IntervalTimerTick;
   
