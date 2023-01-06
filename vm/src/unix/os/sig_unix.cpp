@@ -14,6 +14,7 @@ int SignalInterface::currentTimerSignal = 0;
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
   ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+  ||  TARGET_OS_VERSION == FREEBSD_VERSION \
   ||  TARGET_OS_VERSION ==   LINUX_VERSION
   static void signal_handler(int sig, self_code_info_t *info = NULL, self_sig_context_t *scp = NULL);
 # elif TARGET_OS_VERSION == SUNOS_VERSION
@@ -211,6 +212,7 @@ static int32 ctrl_z_handler(int sig) {
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
   ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+  ||  TARGET_OS_VERSION == FREEBSD_VERSION \
   ||  TARGET_OS_VERSION ==   LINUX_VERSION
 #if TARGET_OS_VERSION == NETBSD_VERSION && TARGET_ARCH == I386_ARCH
 __attribute__((force_align_arg_pointer))
@@ -261,6 +263,7 @@ static void signal_handler(int sig, self_code_info_t *info, self_sig_context_t *
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION == MACOSX_VERSION \
   ||  TARGET_OS_VERSION == NETBSD_VERSION \
+  ||  TARGET_OS_VERSION == FREEBSD_VERSION \
   ||  TARGET_OS_VERSION ==  LINUX_VERSION
 
 void SignalInterface::init_signal_stack() {

@@ -44,7 +44,8 @@
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION  \
   ||  TARGET_OS_VERSION ==   LINUX_VERSION
    static int install_flags() { return SA_ONSTACK | SA_SIGINFO | SA_RESTART; }
-# elif TARGET_OS_VERSION == NETBSD_VERSION
+# elif TARGET_OS_VERSION == NETBSD_VERSION  \
+  ||   TARGET_OS_VERSION == FREEBSD_VERSION
    // This needs to play along with setNotifyEvents and setAsync - and
    // with SA_RESTART it doesn't (cf. unix.self).  I'm not quite sure
    // why yet.  For now just commit what is known to work.
