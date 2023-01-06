@@ -742,7 +742,7 @@
 
   void TypeTestNode::eliminateUnnecessary(mapOop m) {
     // eliminate unnecessary type test: receiver is known to have map m
-    eliminateNodeAndUsedPRs(bb(), NULL, NULL, (void*)m);
+    eliminateNodeAndUsedPRs(bb(), NULL, false, (void*)m);
   }
 
 
