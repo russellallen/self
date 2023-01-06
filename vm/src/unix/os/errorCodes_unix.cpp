@@ -123,7 +123,8 @@
     "ENEEDAUTH", "EPWROFF", "EDEVERR", "EOVERFLOW", "EBADEXEC",
     "EBADARCH", "ESHLIBVERS", "EBADMACHO"
 
-# elif  TARGET_OS_VERSION == NETBSD_VERSION
+# elif  TARGET_OS_VERSION == NETBSD_VERSION \
+    ||  TARGET_OS_VERSION == FREEBSD_VERSION
 
     "NOERR",
     // 1 through 20
@@ -150,11 +151,23 @@
     "EREMOTE", "EBADRPC", "ERPCMISMATCH", "EPROGUNAVAIL", "EPROGMISMATCH",
     "EPROCUNAVAIL", "ENOLCK", "ENOSYS", "EFTYPE", "EAUTH",
 
+#   if TARGET_OS_VERSION == NETBSD_VERSION
+
     // 81 through 100
     "ENEEDAUTH", "EIDRM", "ENOMSG", "EOVERFLOW", "EILSEQ",
     "ENOTSUP", "ECANCELED", "EBADMSG", "ENODATA", "ENOSR",
     "ENOSTR", "ETIME", "ENOATTR", "EMULTIHOP", "ENOLINK",
     "EPROTO", "EOWNERDEAD", "ENOTRECOVERABLE"
+
+#   elif TARGET_OS_VERSION == FREEBSD_VERSION
+
+    // 81 through 100
+    "ENEEDAUTH", "EIDRM", "ENOMSG", "EOVERFLOW", "ECANCELED",
+    "EILSEQ", "ENOATTR", "EDOOFUS", "EBADMSG", "EMULTIHOP",
+    "ENOLINK", "EPROTO", "ENOTCAPABLE", "ECAPMODE", "ENOTRECOVERABLE",
+    "EOWNERDEAD", "EINTEGRITY"
+
+#   endif
 
 # elif  TARGET_OS_VERSION == LINUX_VERSION
 
@@ -211,7 +224,8 @@
 static inline int numUnixErrors() { return sizeof(unixError) / sizeof(unixError[0]); }
 
 
-#if TARGET_OS_VERSION != MACOSX_VERSION  &&  TARGET_OS_VERSION != LINUX_VERSION  && TARGET_OS_VERSION != NETBSD_VERSION
+#if TARGET_OS_VERSION != MACOSX_VERSION  &&  TARGET_OS_VERSION != LINUX_VERSION  \
+    &&  TARGET_OS_VERSION != NETBSD_VERSION  &&  TARGET_OS_VERSION != FREEBSD_VERSION
 extern char* sys_errlist[];             // error messages corr. to errno.
 extern int   sys_nerr;                  // length of above table
 #endif // !MACOSX_VERSION
@@ -227,6 +241,7 @@ const char* ErrorCodes::os_error_name(int error) {
 
 # if TARGET_OS_VERSION ==  LINUX_VERSION \
   || TARGET_OS_VERSION == NETBSD_VERSION \
+  || TARGET_OS_VERSION == FREEBSD_VERSION \
   || TARGET_OS_VERSION == MACOSX_VERSION
   # define ERROR_STRING(i) strerror(i)
 # else
