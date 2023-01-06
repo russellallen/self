@@ -44,7 +44,7 @@
                       zero_fd, 0)) 
         return desiredAddress;
 
-#if TARGET_OS_VERSION == NETBSD_VERSION
+#if TARGET_OS_VERSION == NETBSD_VERSION || TARGET_OS_VERSION == FREEBSD_VERSION
       char *b = NULL;
       posix_memalign((void **)&b, align, size);
 #else
@@ -190,7 +190,9 @@ void OS::init() {
     }
     signal(SIGCHLD, old_h);
   }
-# elif  TARGET_OS_VERSION ==  MACOSX_VERSION || TARGET_OS_VERSION == NETBSD_VERSION
+# elif  TARGET_OS_VERSION ==  MACOSX_VERSION \
+    ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+    ||  TARGET_OS_VERSION == FREEBSD_VERSION
 
   int mib[2], mem_size;
   size_t len;
@@ -354,6 +356,7 @@ void OS::set_log_buf(FILE* f, char* buf, int bs) {
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
   ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+  ||  TARGET_OS_VERSION == FREEBSD_VERSION \
   ||  TARGET_OS_VERSION ==   LINUX_VERSION
   setvbuf(f, buf, _IOFBF, bs);
   
@@ -415,6 +418,7 @@ bool OS::get_swap_space_info(int &totalK, int &freeK) {
 
 # elif  TARGET_OS_VERSION ==  SUNOS_VERSION \
     ||  TARGET_OS_VERSION == MACOSX_VERSION \
+    ||  TARGET_OS_VERSION == FREEBSD_VERSION \
     ||  TARGET_OS_VERSION ==  LINUX_VERSION
 
 bool OS::get_swap_space_info(int &, int &) {
@@ -487,7 +491,8 @@ int OS::min_core(caddr_t addr, size_t len, char *vec) {
 
 #if  TARGET_OS_VERSION == SOLARIS_VERSION \
  ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
- ||  TARGET_OS_VERSION ==  NETBSD_VERSION
+ ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+ ||  TARGET_OS_VERSION == FREEBSD_VERSION
   void OS::setPageAdvisory(char *start, char *end, int code) {
     if (end - start < OS::dont_bother) return;
     char *ps= real_page_start(start);
@@ -857,6 +862,7 @@ void OS::check_events() {
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
   ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+  ||  TARGET_OS_VERSION == FREEBSD_VERSION \
   ||  TARGET_OS_VERSION ==  LINUX_VERSION
 extern "C" {
   int malloc_verify() { return 1; }
