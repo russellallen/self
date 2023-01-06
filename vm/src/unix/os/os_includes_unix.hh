@@ -41,7 +41,9 @@ extern "C" {
 }
 
 # include <stdlib.h>
-#if TARGET_OS_VERSION != MACOSX_VERSION && TARGET_OS_VERSION != NETBSD_VERSION
+#if TARGET_OS_VERSION != MACOSX_VERSION		\
+    && TARGET_OS_VERSION != NETBSD_VERSION	\
+    && TARGET_OS_VERSION != FREEBSD_VERSION
 # include <alloca.h>
 #endif
 
@@ -172,7 +174,7 @@ extern "C" {
   # include <mach/machine/thread_status.h> // for interruptedCtx_*.cpp *_thread_state_t
 # endif
 
-# if TARGET_OS_VERSION == NETBSD_VERSION
+# if TARGET_OS_VERSION == NETBSD_VERSION || TARGET_OS_VERSION == FREEBSD_VERSION
   # include <sys/sysctl.h>
 # endif
 
@@ -199,6 +201,8 @@ extern "C" {
 # elif  TARGET_OS_VERSION == LINUX_VERSION
 # define FORK vfork
 # elif  TARGET_OS_VERSION == NETBSD_VERSION
+# define FORK vfork
+# elif  TARGET_OS_VERSION == FREEBSD_VERSION
 # define FORK vfork
 # else
    error which?
