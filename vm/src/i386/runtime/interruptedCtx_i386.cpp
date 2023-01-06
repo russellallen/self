@@ -21,7 +21,7 @@ void InterruptedContext::set_continuation_address(char *addr, bool mustWork, boo
 bool InterruptedContext::in_system_trap() {
   if (scp == &dummy_scp)
     return false;
-#if TARGET_OS_VERSION == NETBSD_VERSION
+#if TARGET_OS_VERSION == NETBSD_VERSION || TARGET_OS_VERSION == FREEBSD_VERSION
   // system call, int 0x80 instruction
   return pc()[0] == '\xcd'  &&  pc()[1] == '\x80';
 #else
@@ -104,6 +104,19 @@ void InterruptedContext::setupPreemptionFromSignal() {
   }
   int* InterruptedContext::ebp_addr() {
     return  (int*) _UC_MACHINE_FP(scp);
+  }
+
+
+# elif TARGET_OS_VERSION == FREEBSD_VERSION
+
+  char** InterruptedContext::pc_addr() {
+      return  (char**) &((ucontext_t*) scp)->uc_mcontext.mc_eip;
+  }
+  int* InterruptedContext::sp_addr() {
+    return  (int*) &((ucontext_t*) scp)->uc_mcontext.mc_esp;
+  }
+  int* InterruptedContext::ebp_addr() {
+    return  (int*) &((ucontext_t*) scp)->uc_mcontext.mc_ebp;
   }
 
 
@@ -197,6 +210,28 @@ void InterruptedContext::print_registers() {
     lprintf("trapno    = 0x%x\n", gregs[_REG_TRAPNO]);
     lprintf("err       = 0x%x\n", gregs[_REG_ERR]);
     lprintf("uesp      = 0x%x\n", gregs[_REG_UESP]);
+
+  # elif TARGET_OS_VERSION == FREEBSD_VERSION
+
+    const mcontext_t *mc = &ic->scp->uc_mcontext;
+    lprintf("eax       = 0x%x\n", mc->mc_eax);
+    lprintf("ebx       = 0x%x\n", mc->mc_ebx);
+    lprintf("ecx       = 0x%x\n", mc->mc_ecx);
+    lprintf("edx       = 0x%x\n", mc->mc_edx);
+    lprintf("esi       = 0x%x\n", mc->mc_esi);
+    lprintf("edi       = 0x%x\n", mc->mc_edi);
+    lprintf("ebp       = 0x%x\n", mc->mc_ebp);
+    lprintf("esp       = 0x%x\n", mc->mc_esp);
+    lprintf("ss        = 0x%x\n", mc->mc_ss);
+    lprintf("eflags    = 0x%x\n", mc->mc_eflags);
+    lprintf("eip       = 0x%x\n", mc->mc_eip);
+    lprintf("cs        = 0x%x\n", mc->mc_cs);
+    lprintf("ds        = 0x%x\n", mc->mc_ds);
+    lprintf("es        = 0x%x\n", mc->mc_es);
+    lprintf("fs        = 0x%x\n", mc->mc_fs);
+    lprintf("gs        = 0x%x\n", mc->mc_gs);
+    lprintf("trapno    = 0x%x\n", mc->mc_trapno);
+    lprintf("err       = 0x%x\n", mc->mc_err);
 
 # elif TARGET_OS_VERSION == SOLARIS_VERSION
   
