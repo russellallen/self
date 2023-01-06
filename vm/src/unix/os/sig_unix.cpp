@@ -241,7 +241,7 @@ static void signal_handler(int sig, self_code_info_t *info, self_sig_context_t *
     InterruptedContext::the_interrupted_context->set(scp);
     SignalInterface::handle_signal( sig, 
                                     info == NULL  ?  NULL  :  (char*)info->si_addr, 
-                                    info == NULL  ?  NULL  :         info->si_code );
+                                    info == NULL  ?     0  :         info->si_code );
     InterruptedContext::the_interrupted_context->invalidate();
 
     SignalInterface::currentNonTimerSignal = 0;
