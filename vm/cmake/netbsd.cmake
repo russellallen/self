@@ -43,11 +43,10 @@ if(TARGET_ARCH MATCHES "I386_ARCH")
     list(APPEND _flags -mpreferred-stack-boundary=4)
     list(APPEND CMAKE_REQUIRED_DEFINITIONS -mpreferred-stack-boundary=4)
   endif()
-  # XXX: TODO: What does clang use?
-  # if (clang)
-  #   list(APPEND _flags ...)
-  #   list(APPEND CMAKE_REQUIRED_DEFINITIONS ...)
-  # endif()
+  if (clang)
+    list(APPEND _flags -mstack-alignment=16)
+    list(APPEND CMAKE_REQUIRED_DEFINITIONS -mstack-alignment=16)
+  endif()
 endif()
 
 # true_size_of_malloced_obj() needs to peek at malloc internals.
