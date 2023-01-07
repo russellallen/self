@@ -97,13 +97,13 @@ void InterruptedContext::setupPreemptionFromSignal() {
 # elif TARGET_OS_VERSION == NETBSD_VERSION
 
   char** InterruptedContext::pc_addr() {
-    return  (char**) _UC_MACHINE_PC(scp);
+    return  (char**) &_UC_MACHINE_PC(scp);
   }
   int* InterruptedContext::sp_addr() {
-    return  (int*) _UC_MACHINE_SP(scp);
+    return  (int*) &_UC_MACHINE_SP(scp);
   }
   int* InterruptedContext::ebp_addr() {
-    return  (int*) _UC_MACHINE_FP(scp);
+    return  (int*) &_UC_MACHINE_FP(scp);
   }
 
 
