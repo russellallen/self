@@ -214,7 +214,9 @@ static int32 ctrl_z_handler(int sig) {
   ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
   ||  TARGET_OS_VERSION == FREEBSD_VERSION \
   ||  TARGET_OS_VERSION ==   LINUX_VERSION
-#if TARGET_OS_VERSION == NETBSD_VERSION && TARGET_ARCH == I386_ARCH
+#if TARGET_ARCH == I386_ARCH						\
+    && (TARGET_OS_VERSION == NETBSD_VERSION				\
+	|| TARGET_OS_VERSION == FREEBSD_VERSION)
 __attribute__((force_align_arg_pointer))
 #endif
 static void signal_handler(int sig, self_code_info_t *info, self_sig_context_t *scp) {
