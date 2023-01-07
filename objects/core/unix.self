@@ -5446,7 +5446,7 @@ in the OS specific objects.\x7fModuleInfo: Creator: traits unixFile bsdAndSolari
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'flags' -> () From: ( | {
          'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
         
-         create = 128.
+         create = 512.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'flags' -> () From: ( | {
