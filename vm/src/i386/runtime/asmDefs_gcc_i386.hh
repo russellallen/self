@@ -17,19 +17,9 @@
 # endif
 
 # if defined(__APPLE__)
-  # define MACRO(name, ...) .macro name // __VA_ARGS__
-  # define ENDMACRO .endmacro
   # define C_SYM(name) _##name
-# elif defined(__linux__) || defined(__NetBSD__) || (defined(SOLARIS) && SOLARIS)
-  # if defined(__clang__) && !defined(NO_INTEGRATED_AS_clang)
-    # define MACRO(name, ...) .macro name // __VA_ARGS__
-    # define ENDMACRO .endmacro
-    # define C_SYM(name) name
-  # else
-    # define MACRO(name, ...) .macro name __VA_ARGS__
-    # define ENDMACRO .endm
-    # define C_SYM(name) name
-  # endif
+# elif defined(__ELF__)
+  # define C_SYM(name) name
 # else
   # error what?
 # endif
@@ -83,25 +73,12 @@
 
 // ---------------------------------------------------------
 
-MACRO(start_exported_function, name)
+#define start_exported_function(name)		\
+	.global C_SYM(name)	;		\
+C_SYM(name):
 
-# if defined(__APPLE__) \
-  || (defined(__linux__) && defined(__clang__) && !defined(NO_INTEGRATED_AS_clang))
-
-  .globl C_SYM($0)
-C_SYM($0):
-
-# elif defined(__linux__) || defined(__NetBSD__) || (defined(SOLARIS) && SOLARIS)
-
-  .global C_SYM(\name)
-C_SYM(\name):
-
-# else
-  # error what?
-# endif
-
-ENDMACRO
-
+#define end_exported_function(name)		\
+	.size	C_SYM(name), . - C_SYM(name)
 
 
 // LinkageArea record:
@@ -130,78 +107,47 @@ ENDMACRO
 
 // =====================================================
 
-    MACRO(Untested)  // &string, &tmp
+#define Untested(string, tmp)			\
     hlt
-    ENDMACRO
 
 
-    MACRO(align_send_desc_call_rm) // call is 3 bytes, jmp is 5 bytes, jmpl is 5
+#define align_send_desc_call_rm					\
+        /* call is 3 bytes, jmp is 5 bytes, jmpl is 5 */	\
         .align 2; nop; nop; nop;
-    ENDMACRO
 
-    // Sometime in 2006, Apple changed their assembler syntax:
+// Sometime in 2006, Apple changed their assembler syntax:
+#if defined(__APPLE__) && OSX_ASM_RELEASE == PRE_2007_OSX_ASM_RELEASE
 
-    # if defined(__APPLE__) && OSX_ASM_RELEASE == PRE_2007_OSX_ASM_RELEASE
+// jump to contents of reg
+#define jmp_reg(reg) jmp reg
 
-      MACRO(jmp_reg, reg)  // jump to contents of reg
-        jmp $0
-      ENDMACRO
+// reg contains memory address of word containing jmp addr
+#define jmp_reg_indir(reg) jmp (reg)
 
-      MACRO(jmp_reg_indir, reg) // reg contains memory address of word containing jmp addr
-        jmp ($0)
-      ENDMACRO
+// reg contents + disp contains memory addr of word containing call addr
+#define call_disp_reg_indir(disp, reg) call disp(reg)
 
-      MACRO(call_disp_reg_indir, disp reg) // reg contents + disp contains memory addr of word containing call addr
-        call $0($1)
-      ENDMACRO
+// jump to label with four bytes for label
+#define jmp_label(label) jmpl label
 
-      MACRO(jmp_label, label) // jump to label with four bytes for label
-        jmpl $0
-      ENDMACRO
+#else
 
-    # elif (defined(__APPLE__) && OSX_ASM_RELEASE == POST_2007_OSX_ASM_RELEASE) \
-        || (defined(__linux__) && defined(__clang__) && !defined(NO_INTEGRATED_AS_clang))
+// jump to contents of reg
+#define jmp_reg(reg)			jmp *reg
 
-      MACRO(jmp_reg, reg)  // jump to contents of reg
-        jmp *$0
-      ENDMACRO
+// reg contains memory address of word containing jmp addr
+#define jmp_reg_indir(reg)		jmp *(reg)
 
-      MACRO(jmp_reg_indir, reg) // reg contains memory address of word containing jmp addr
-        jmp *($0)
-      ENDMACRO
+// reg contents + disp contains memory addr of word containing call addr
+#define call_disp_reg_indir(disp,reg)	call *disp(reg)
 
-      MACRO(call_disp_reg_indir, disp reg) // reg contents + disp contains memory addr of word containing call addr
-        call *$0($1)
-      ENDMACRO
+// jump to label with four bytes for label
+#define jmp_label(label)			\
+        /* make sure jmp occumpies 5 bytes */	\
+        .byte 0xe9		;		\
+        .long label - (. + 4)
 
-      MACRO(jmp_label, label) // jump to label with four bytes for label
-          // as of Mountain Lion, the old way does not work
-          .byte 0xe9
-          .long $0 - (. + 4)
-      ENDMACRO
-
-
-    # elif defined(__linux__) || defined(__NetBSD__) || (defined(SOLARIS) && SOLARIS)
-      MACRO(jmp_reg, reg)
-        jmp *\reg
-      ENDMACRO
-
-      MACRO(jmp_reg_indir, reg)
-        jmp *(\reg)
-      ENDMACRO
-
-      MACRO(call_disp_reg_indir, disp reg)
-        call *\disp(\reg)
-      ENDMACRO
-
-      MACRO(jmp_label, label)
-        // make sure jmp occumpies 5 bytes
-        .byte 0xe9
-        .long \label - (. + 4)
-      ENDMACRO
-    # else
-      # error what?
-    # endif
+#endif
 
 
 # endif // __i386__
