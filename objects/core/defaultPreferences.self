@@ -147,7 +147,8 @@ By default, we do this on Linux but not otherwise.\x7fModuleInfo: Module: defaul
          swapMouseButtons = ( |
             | 
                  (host osName = 'linux')
-            || [ (host osName = 'netbsd') ]).
+            || [ (host osName = 'freebsd')
+            || [ (host osName = 'netbsd') ]]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {
