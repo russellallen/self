@@ -1,4 +1,4 @@
-# ifdef __ppc__
+# if defined(__ppc__) || defined(__powerpc__)
 /* Sun-$Revision: 30.7 $ */
 
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
