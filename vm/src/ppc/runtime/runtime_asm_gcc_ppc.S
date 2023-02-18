@@ -11,23 +11,23 @@
 
 # include "asmDefs_gcc_ppc.hh"
         
-    start_exported_function currentFrame
+    start_exported_function(currentFrame)
     mr     r3, sp
     blr
 
-    start_exported_function currentRTOC
+    start_exported_function(currentRTOC)
     mr     r3, rtoc
     blr
 
-    start_exported_function currentReturnAddr
+    start_exported_function(currentReturnAddr)
     lwz    r3, LinkageArea_savedPC(sp)
     blr
 
-    start_exported_function set_SPLimitReg
+    start_exported_function(set_SPLimitReg)
     mr   SPLimitReg, r3 // relies on C not using this register (ugh)
     blr
 
-    start_exported_function save1Arg
+    start_exported_function(save1Arg)
     // save arg1 in stack frame
     stw    r3, LinkageArea_size(sp) // arg area is right after linkage area
     blr
@@ -115,7 +115,7 @@ saveAddr_PC = size_of_gpr
   
 // first make new stack frame & save all registers in it
 
-start_exported_function SetSPAndCall
+start_exported_function(SetSPAndCall)
         mflr    link
         stw     link, LinkageArea_savedPC(sp)
         mfcr    r0
@@ -294,7 +294,7 @@ SwSFrame_top = round(SwSFrame_argsave  +  4 * size_of_gpr, alignment_of_sp)
 SwSFrame_size = SwSFrame_top
 
 
-start_exported_function SwitchStack0 
+start_exported_function(SwitchStack0) 
 switch_stack: 
         mflr    r0
         stw     r0, LinkageArea_savedPC(sp)
@@ -317,16 +317,16 @@ switch_stack:
         blr     
 
 
-  start_exported_function SwitchStack1
+  start_exported_function(SwitchStack1)
         b switch_stack
 
-  start_exported_function SwitchStack2
+  start_exported_function(SwitchStack2)
         b switch_stack
 
-  start_exported_function SwitchStack3
+  start_exported_function(SwitchStack3)
         b switch_stack
 
-  start_exported_function SwitchStack4
+  start_exported_function(SwitchStack4)
         b switch_stack
         
         
@@ -359,7 +359,7 @@ linkage_len     = 12
 # define arg_count       r30
 # define scr_b           r29
 
-  start_exported_function CallPrimitiveFromInterpreter
+  start_exported_function(CallPrimitiveFromInterpreter)
   
         mflr    r0
         stw     r0,LinkageArea_savedPC(sp) // save link
@@ -482,7 +482,7 @@ base_fr_size =   LinkageArea_size/oopSize + NumRcvrAndArgRegisters + -SaveSelfNo
                 lmw     LowestLocalNonVolReg, ($1 -(size_of_gpr * NumLocalNonVolRegisters))($0)
                 .endmacro
                 
-                start_exported_function SaveSelfNonVolRegs        
+                start_exported_function(SaveSelfNonVolRegs)        
 SaveSelfNonVolRegs_start:
                 mflr    r0 // save link
                 stw     r0, LinkageArea_savedPC(sp)
@@ -507,7 +507,7 @@ do_call:
                 mtlr    SaveSelfNonVolRegs_entry_point_register
                 blrl
                 
-start_exported_function SaveSelfNonVolRegs_returnPC
+start_exported_function(SaveSelfNonVolRegs_returnPC)
                 b       return_normally
                 .long    0 // mask
                 b       return_nlr
@@ -573,7 +573,7 @@ do_another:     lwzu    r0, size_of_gpr(srcp)
 # define self_ic_flag    arg2 // called from Self ic?
         
 
-start_exported_function ContinueNLRFromC    // called by VM 
+start_exported_function(ContinueNLRFromC)    // called by VM 
                 // pop VM frames
                 import_function_address     Temp1,SaveSelfNonVolRegs_returnPC// get save stub return PC
                  b       skipFirstPop
@@ -636,7 +636,7 @@ cont:
 # define sp_arg          arg2
 
 
-                start_exported_function ContinueAfterReturnTrap
+                start_exported_function(ContinueAfterReturnTrap)
                 // setup NLR regs
     // pop VM frames
                 import_function_address     Temp1,ReturnTrap_returnPC// get save stub return PC
@@ -672,7 +672,7 @@ loop_entry_point1:
 # define homeFrame_arg   arg3
 # define homeFrameID_arg arg4    
 
-                start_exported_function ContinueNLRAfterReturnTrap
+                start_exported_function(ContinueNLRAfterReturnTrap)
                 
                 // setup NLR regs
                 
@@ -720,7 +720,7 @@ loop_entry_point2:
  frsize =    round(frsize, alignment_of_sp)// round up to quadword
 
 
-start_exported_function SaveNVAndCall5
+start_exported_function(SaveNVAndCall5)
         
                 mflr    r0 // save link
                 stw     r0, LinkageArea_savedPC(sp)
@@ -732,7 +732,7 @@ start_exported_function SaveNVAndCall5
                 mtlr    fn // goto fn
                 blrl
         
-start_exported_function SaveNVRet // for stack-walking
+start_exported_function(SaveNVRet) // for stack-walking
                 lwz     sp, 0(sp)
                 lmw     LowestNonVolReg, -(size_of_gpr * NumNonVolRegisters)(sp)
         
@@ -757,7 +757,7 @@ fr_size          = round(LinkageArea_size  +  (outgoing_arg_count + NumGlobalNon
                 
  
                   
-start_exported_function EnterSelf
+start_exported_function(EnterSelf)
                   
                   // save PC link
                   
@@ -782,7 +782,7 @@ start_exported_function EnterSelf
                   blrl    // go!
                   
                   // inline cache
-start_exported_function firstSelfFrame_returnPC
+start_exported_function(firstSelfFrame_returnPC)
                   b    send_desc_end               
                   .long 0                       // reg mask
                   b    contNLR
@@ -791,7 +791,7 @@ start_exported_function firstSelfFrame_returnPC
                   .long 0                       // placeholder for selector
                   .long 20                      // placeholder for StaticNormalLookupType
                                   
-start_exported_function firstSelfFrameSendDescEnd
+start_exported_function(firstSelfFrameSendDescEnd)
 send_desc_end:
                   lwz     sp,LinkageArea_savedSP(sp)
                   // restore global nonvols for C
@@ -837,7 +837,7 @@ contNLR:          import_function_address     Temp1,capture_NLR_parameters_from_
  frsize = round(frsize, alignment_of_sp)    // round up to quadword
    
                                
-                start_exported_function SendMessage_stub
+                start_exported_function(SendMessage_stub)
                  // save link
                  mflr    r0
                  stw     r0, LinkageArea_savedPC(sp)
@@ -867,7 +867,7 @@ contNLR:          import_function_address     Temp1,capture_NLR_parameters_from_
                  
                  // returns entry point, use count register so orig link can be in link reg
                  
-start_exported_function SendMessage_stub_returnPC // for stack-walking
+start_exported_function(SendMessage_stub_returnPC) // for stack-walking
                  mtctr  result
                  
                  // now restore everything:
@@ -902,7 +902,7 @@ start_exported_function SendMessage_stub_returnPC // for stack-walking
  frsize = (SendDIMessage_stub_volatile_register_sp_offset + NumRcvrAndArgRegisters + 2 + NumLocalNonVolRegisters) * oopSize // will be saving all volatile registers + 2 for perform sel & del
  frsize = round(frsize, alignment_of_sp)    // round up to quadword
    
-start_exported_function SendDIMessage_stub
+start_exported_function(SendDIMessage_stub)
                 
                  // // (Note caller's link is passed in in DILinkReg)
                  save_local_nonvol_regs
@@ -939,7 +939,7 @@ start_exported_function SendDIMessage_stub
                  
                  // returns entry point, use count register so orig link can be in link reg
                  
-start_exported_function SendDIMessage_stub_returnPC // for stack-walking
+start_exported_function(SendDIMessage_stub_returnPC) // for stack-walking
                  mtctr  result
                  
                  // now restore everything:
@@ -975,7 +975,7 @@ start_exported_function SendDIMessage_stub_returnPC // for stack-walking
 
  frsize = round(frsize, alignment_of_sp)    // round up to quadword
 
-start_exported_function MakeOld_stub
+start_exported_function(MakeOld_stub)
                  // // (Note caller's link is passed in in RecompileLinkReg)
                  save_local_nonvol_regs
                  stwu sp, -frsize(sp)  // create frame (link reg was already saved in CountCodePattern::initComparing())
@@ -1000,7 +1000,7 @@ start_exported_function MakeOld_stub
                  
                  // returns entry point, use count register so orig link can be in link reg
   
-start_exported_function MakeOld_stub_returnPC // for stack-walking
+start_exported_function(MakeOld_stub_returnPC) // for stack-walking
                  mtctr  result
   
                  // now restore everything:
@@ -1034,11 +1034,11 @@ frsize = (LinkageArea_size/oopSize + HandleReturnTrap_arg_count + NumLocalNonVol
 // DUPLICATED in frame_format_ppc.hh
 ReturnTrap_frame_size = round(frsize, alignment_of_sp)
 
-start_exported_function ReturnTrap_start
+start_exported_function(ReturnTrap_start)
 
                   .long 0                       // placeholder for call instruction
-start_exported_function ReturnTrap
-start_exported_function PrimCallReturnTrap          
+start_exported_function(ReturnTrap)
+start_exported_function(PrimCallReturnTrap)          
                   b    rt2               
                   .long 0                       // reg mask
                   b    ReturnTrap_beyond_for_NLR
@@ -1048,7 +1048,7 @@ start_exported_function PrimCallReturnTrap
                   .long 0                       // placeholder for lookup type
                   .long 0                       // placeholder for delegatee
 
-start_exported_function ReturnTrap2  
+start_exported_function(ReturnTrap2)  
 rt2:                     
                  // result already in r3
                  mr     arg1, sp
@@ -1065,8 +1065,8 @@ import_function_address    Temp1,HandleReturnTrap
                  mtlr   Temp1
                  blrl
                  
-start_exported_function ReturnTrap_returnPC
-start_exported_function ReturnTrapNLR_returnPC // SPARC needs both, same for PPC
+start_exported_function(ReturnTrap_returnPC)
+start_exported_function(ReturnTrapNLR_returnPC) // SPARC needs both, same for PPC
                  .long   0 // no return
                  
 ReturnTrap_beyond_for_NLR: 
@@ -1102,10 +1102,10 @@ frsize = (ProfilerTrap_volatile_register_sp_offset + numVolRegsToSave + HandlePr
 // DUPLICATED in frame_format_ppc.hh
 ProfilerTrap_frame_size = round(frsize, alignment_of_sp)
 
-start_exported_function ProfilerTrap_start
+start_exported_function(ProfilerTrap_start)
 
                   .long 0                       // placeholder for call instruction
-start_exported_function ProfilerTrap
+start_exported_function(ProfilerTrap)
                   b    pf2               
                   .long 0                       // reg mask
                   b    returnProfilerNLR
@@ -1153,7 +1153,7 @@ returnProfilerNLR:
 
 /* Doesn't seem to work// use Carbonosity instead
 
-start_exported_function FlushInstruction
+start_exported_function(FlushInstruction)
       icbi 0, r3
       isync
       blr
@@ -1164,7 +1164,7 @@ start_exported_function FlushInstruction
 // implement write system call lib routine
 
 /*
-start_exported_function WRITE
+start_exported_function(WRITE)
   li r0, 4
    sc
   blr
@@ -1191,7 +1191,7 @@ start_exported_function WRITE
  frsize = round(frsize, alignment_of_sp)    // round up to quadword
   
                                
-start_exported_function Recompile_stub
+start_exported_function(Recompile_stub)
                  // // (Note caller's link is passed in in RecompileLinkReg)
   
                  save_local_nonvol_regs
@@ -1220,7 +1220,7 @@ start_exported_function Recompile_stub
                  
                  // returns entry point, use count register so orig link can be in link reg
                  
-start_exported_function Recompile_stub_returnPC // for stack-walking
+start_exported_function(Recompile_stub_returnPC) // for stack-walking
                  mtctr  result
                  
                  // now restore everything:
@@ -1237,7 +1237,7 @@ start_exported_function Recompile_stub_returnPC // for stack-walking
                  
                  
                                   
-start_exported_function swap_bytes
+start_exported_function(swap_bytes)
   lwz    r4, 0(r3)
   stwbrx r4, 0, r3
   blr
