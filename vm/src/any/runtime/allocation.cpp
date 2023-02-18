@@ -345,7 +345,8 @@ static int32 true_size_of_malloced_obj(int32* p) {
     # include <malloc.h> // for mallopt
 # endif
 
-# if TARGET_OS_VERSION == NETBSD_VERSION && TARGET_ARCH == I386_ARCH
+# if TARGET_OS_VERSION == NETBSD_VERSION \
+    && (TARGET_ARCH == I386_ARCH || TARGET_ARCH == PPC_ARCH)
 /* Ask jemalloc to use sbrk. */
 const char *__je_malloc_conf = "dss:primary";
 # endif
