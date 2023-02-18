@@ -231,7 +231,7 @@ firstTimeThisProcess:
         andc    sp,sp,r0 // align by 16
         li      r0, 0
         stwu    r0, LinkageArea_savedSP - FirstFrame_size(sp)      // decr & store null sp
-        import_function_address r3,ReturnOffTopOfProcess
+        import_function_address(r3, ReturnOffTopOfProcess)
         stw     r3,LinkageArea_savedPC(sp)
         
         # if GENERATE_DEBUGGING_AIDS
@@ -465,8 +465,8 @@ base_fr_size =   LinkageArea_size/oopSize + NumRcvrAndArgRegisters + -SaveSelfNo
 
 
                 .macro load_global_nonvol_regs
-                import_data_address     ByteMapBaseReg,byte_map_base
-                import_data_address     SPLimitReg,SPLimit
+                import_data_address(ByteMapBaseReg, byte_map_base)
+                import_data_address(SPLimitReg, SPLimit)
                 lwz     ByteMapBaseReg, 0(ByteMapBaseReg)
                 lwz     SPLimitReg,     0(SPLimitReg)
                 .endmacro
@@ -575,7 +575,7 @@ do_another:     lwzu    r0, size_of_gpr(srcp)
 
 start_exported_function(ContinueNLRFromC)    // called by VM 
                 // pop VM frames
-                import_function_address     Temp1,SaveSelfNonVolRegs_returnPC// get save stub return PC
+                import_function_address(Temp1, SaveSelfNonVolRegs_returnPC) // get save stub return PC
                  b       skipFirstPop
 notFound1:      lwz     sp, LinkageArea_savedSP(sp)     // pop frame
 skipFirstPop:   lwz     r0, LinkageArea_savedPC(sp)
@@ -592,7 +592,7 @@ not_saved1:
                 cmpwi   interp_flag, 0          // interp?
                 beq     cont                   // no, goto compiled variant
 
-                import_data_address Temp1,processSemaphore// clear sema
+                import_data_address(Temp1, processSemaphore) // clear sema
                 li      r0, 0
                 stb     r0, 0(Temp1)
 
@@ -602,20 +602,20 @@ not_saved1:
 cont: 
                 // now load NLR params from globals
 
-                import_data_address     Temp1,NLRResultFromC
+                import_data_address(Temp1, NLRResultFromC)
                 lwz     NLRResultReg, 0(Temp1)
 
-                import_data_address     Temp1,NLRHomeIDFromC
+                import_data_address(Temp1, NLRHomeIDFromC)
                 lwz     NLRHomeIDReg, 0(Temp1)
 
-                import_data_address     Temp1,NLRHomeFromC// These two only needed if going back to self, just do anyway
+                import_data_address(Temp1, NLRHomeFromC) // These two only needed if going back to self, just do anyway
                 lwz     NLRHomeReg, 0(Temp1)        
 
                 lwz     Temp1, LinkageArea_savedPC(sp) // return
                 addi    r0, Temp1, non_local_return_offset
                 mtlr    r0 // return thru inline cache
 
-                import_data_address Temp1,processSemaphore// clear sema
+                import_data_address(Temp1, processSemaphore) // clear sema
                 li      r0, 0
                 stb     r0, 0(Temp1)
 
@@ -639,7 +639,7 @@ cont:
                 start_exported_function(ContinueAfterReturnTrap)
                 // setup NLR regs
     // pop VM frames
-                import_function_address     Temp1,ReturnTrap_returnPC// get save stub return PC
+                import_function_address(Temp1, ReturnTrap_returnPC) // get save stub return PC
                 b       loop_entry_point1
                 
 notFound2:      lwz     r0, LinkageArea_savedPC(sp)
@@ -653,7 +653,7 @@ loop_entry_point1:
                 cmpw    sp, sp_arg
                 bne     notFound2
 
-                import_data_address Temp1,processSemaphore// clear sema
+                import_data_address(Temp1, processSemaphore) // clear sema
                 li      r0, 0
                 stb     r0, 0(Temp1)
                 
@@ -684,7 +684,7 @@ loop_entry_point1:
                 mr      r6, Temp1
                 mr      r7, Temp2
                                         // pop VM frames
-                import_function_address     Temp1,ReturnTrap_returnPC// get save stub return PC
+                import_function_address(Temp1, ReturnTrap_returnPC) // get save stub return PC
                 b       loop_entry_point2
                 
 notFound3:      lwz     r0, LinkageArea_savedPC(sp)
@@ -699,7 +699,7 @@ loop_entry_point2:
                 bne     notFound3
                 
                                 
-                import_data_address Temp1,processSemaphore// clear sema
+                import_data_address(Temp1, processSemaphore) // clear sema
                 li      r0, 0
                 stb     r0, 0(Temp1)
                 
@@ -803,7 +803,7 @@ send_desc_end:
 
 //        continue with NLR: prepare to call capture_NLR_parameters_from_registers with NLR reg params
 
-contNLR:          import_function_address     Temp1,capture_NLR_parameters_from_registers
+contNLR:          import_function_address(Temp1, capture_NLR_parameters_from_registers)
                   mtlr    Temp1
                   
                   // don't need this because they are already in the right registers!
@@ -861,7 +861,7 @@ contNLR:          import_function_address     Temp1,capture_NLR_parameters_from_
                  la     r4, frsize(sp)//  lookup frame
                  mflr   r3// // REUSING LINK VALUE for sendDesc arg
                  
-                 import_function_address    Temp1,SendMessage
+                 import_function_address(Temp1, SendMessage)
                  mtlr   Temp1
                  blrl
                  
@@ -933,7 +933,7 @@ start_exported_function(SendDIMessage_stub)
                  
                  //  ahh... through with DI*Reg's
                
-                 import_function_address    Temp1,SendDIMessage
+                 import_function_address(Temp1, SendDIMessage)
                  mtlr   Temp1
                  blrl
                  
@@ -994,7 +994,7 @@ start_exported_function(MakeOld_stub)
                  stw    r3, LinkageArea_savedPC + frsize(sp)// and save link for stack crawling
                  
                  // will be calling MakeOld, but save non vols on the way
-                 import_function_address    Temp1,MakeOld
+                 import_function_address(Temp1, MakeOld)
                  mtlr   Temp1
                  blrl
                  
@@ -1061,7 +1061,7 @@ ReturnTrap_do_call:
                  // (link must already be saved since this is a return trap -- dmu 2/04)
                  stwu   sp, -ReturnTrap_frame_size(sp)
                  
-import_function_address    Temp1,HandleReturnTrap
+                 import_function_address(Temp1, HandleReturnTrap)
                  mtlr   Temp1
                  blrl
                  
@@ -1128,7 +1128,7 @@ pf2:
                  stswi arg0 /* also normal result reg */,Temp1,  numVolRegsToSave * oopSize
                  mr    arg0, Temp2
                  
-import_function_address    Temp1,HandleProfilerTrap
+                 import_function_address(Temp1, HandleProfilerTrap)
                  mtlr   Temp1
                  blrl
                  
@@ -1214,7 +1214,7 @@ start_exported_function(Recompile_stub)
                  stw    r3, LinkageArea_savedPC + frsize(sp)// and save link for stack crawling
                  
                  // will be calling Recompile, but save non vols on the way
-                 import_function_address    Temp1,Recompile
+                 import_function_address(Temp1, Recompile)
                  mtlr   Temp1
                  blrl
                  
