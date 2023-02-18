@@ -4,6 +4,66 @@
 // Copyright 1992-9 Sun Microsystems, Inc. and Stanford University.
 //   See the LICENSE file for license information. 
 
+#if TARGET_OS_VERSION == NETBSD_VERSION
+#define r0  0
+#define r1  1
+#define r2  2
+#define r3  3
+#define r4  4
+#define r5  5
+#define r6  6
+#define r7  7
+#define r8  8
+#define r9  9
+#define r10 10
+#define r11 11
+#define r12 12
+#define r13 13
+#define r14 14
+#define r15 15
+#define r16 16
+#define r17 17
+#define r18 18
+#define r19 19
+#define r20 20
+#define r21 21
+#define r22 22
+#define r23 23
+#define r24 24
+#define r25 25
+#define r26 26
+#define r27 27
+#define r28 28
+#define r29 29
+#define r30 30
+#define r31 31
+
+#define f14 14
+#define f15 15
+#define f16 16
+#define f17 17
+#define f18 18
+#define f19 19
+#define f20 20
+#define f21 21
+#define f22 22
+#define f23 23
+#define f24 24
+#define f25 25
+#define f26 26
+#define f27 27
+#define f28 28
+#define f29 29
+#define f30 30
+#define f31 31
+
+#define ha16(x) x@ha
+#define hi16(x) x@h
+#define lo16(x) x@l
+
+#endif
+
+
 # define round(x, y) (((x) + (y)-1) & ~((y)-1))
 
 // global defs
@@ -45,8 +105,8 @@ alignment_of_sp         = 16
 NumRcvrAndArgRegisters = 8 // r3 - r10, need to leave this much stack space for unknown C routines
 
 
-; This whole group is DUPLICATED in regs_ppc.h
-; AND Wired in! to EnterSelf
+// This whole group is DUPLICATED in regs_ppc.h
+// AND Wired in! to EnterSelf
 # define NLRHomeIDReg r5
 # define NLRHomeReg   r4
 # define NLRResultReg r3
@@ -80,37 +140,42 @@ NonVolRegisterSize = NumNonVolRegisters * size_of_gpr
 # define DITempReg  Temp2
     
     
-; DUPLICATED in frame_format_ppc.hh
+// DUPLICATED in frame_format_ppc.hh
 PerformSelectorLoc_sp_offset  =  -(NumLocalNonVolRegisters + 1) * oopSize
 PerformDelegateeLoc_sp_offset =  -(NumLocalNonVolRegisters + 2) * oopSize
 
 // WARNING THIS IS DUPLICATED IN sendDesc.h , offsets are relative to ret pc
   
-non_local_return_offset  =  8 ; offset of NLR instruction from call
+non_local_return_offset  =  8 // offset of NLR instruction from call
 
 
 // ---------------------------------------------------------
 
+# if defined(__APPLE__)
+  # define C_SYM(name) _##name
+# elif defined(__ELF__)
+  # define C_SYM(name) name
+# else
+  # error what?
+# endif
 
 
-    .macro start_exported_function // name
-    .globl _$0
-_$0:
-    .endmacro
+#define start_exported_function(name)		\
+	.globl C_SYM(name);			\
+    C_SYM(name):
 
-        .macro load_global_address // temp reg, data symbol
-        .globl _$1
-        load_addr $0, _$1
-        .endmacro
+
+#define load_global_address(tmp_reg, data_sym)	\
+	.globl C_SYM(data_sym);			\
+	load_addr(tmp_reg, C_SYM(data_sym))
        
-        .macro import_data_address // tmp reg, data sym
-        load_global_address $0,$1
-        .endmacro
+#define import_data_address(tmp_reg, data_sym)	\
+	load_global_address(tmp_reg, data_sym)
 
-        .macro import_function_address // tmpreg, fun sym
-        load_global_address $0,$1
-        //  huh? (Why was this in mpw version?) lwz    $0, 0($0)                 
-        .endmacro
+#define import_function_address(tmp_reg, fun_sym)	\
+	load_global_address(tmp_reg, fun_sym)
+	//  huh? (Why was this in mpw version?) lwz    $0, 0($0)
+
         
 // LinkageArea record:
 LinkageArea_savedSP = 0
@@ -137,30 +202,27 @@ Mark_Tag        = 3
 
 Tag_Mask        = 3
 
-; =====================================================
+// =====================================================
             
-           // call untested DOES NOT QUITE WORK
-           .macro Untested  // &string, &tmp
-            b 3f
-1:          .asciz $1
-2:          _Untested_Stub
-
-3:          mflr r0
-            import_function_address $2,Untested_stub
-            mtctr $2
-            bctrl 
-            mtlr r0
-            .endmacro
+	// call untested DOES NOT QUITE WORK
+#define Untested(string, tmp)				  \
+	b 3f						; \
+1:	.asciz string					; \
+2:	C_SYM(Untested_Stub)				; \
+							  \
+3:	mflr	r0					; \
+	import_function_address(tmp, C_SYM(Untested_stub)); \
+	mtctr	tmp					; \
+	bctrl						; \
+	mtlr	r0
             
 
-    .macro load_addr // targ, val
-    addis  $0,  0, hi16($1)
-    ori    $0, $0, lo16($1)
-    .endmacro
+#define load_addr(targ, val)		  \
+	addis	targ, 0, hi16(val)	; \
+	ori	targ, targ, lo16(val)
 
-    .macro load_val // targ, val
-    addis  $0, 0, ha16($1)
-    lwz    $0, lo16($1)
-    .endmacro
+#define load_val(targ, val)		  \
+	addis	targ, 0, ha16(val)	; \
+	lwz	targ, lo16(val)
  
 # endif // __ppc__
