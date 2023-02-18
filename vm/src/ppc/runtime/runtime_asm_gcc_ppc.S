@@ -464,23 +464,20 @@ base_fr_size =   LinkageArea_size/oopSize + NumRcvrAndArgRegisters + -SaveSelfNo
 # define  vol_reg_count  r30
 
 
-                .macro load_global_nonvol_regs
-                import_data_address(ByteMapBaseReg, byte_map_base)
-                import_data_address(SPLimitReg, SPLimit)
-                lwz     ByteMapBaseReg, 0(ByteMapBaseReg)
+#define load_global_nonvol_regs						  \
+                import_data_address(ByteMapBaseReg, byte_map_base)	; \
+                import_data_address(SPLimitReg, SPLimit)		; \
+                lwz     ByteMapBaseReg, 0(ByteMapBaseReg)		; \
                 lwz     SPLimitReg,     0(SPLimitReg)
-                .endmacro
 
                 
                 // need to reuse the save sequence, so macrofy it
-                .macro save_local_nonvol_regs
+#define save_local_nonvol_regs \
                 stmw    LowestLocalNonVolReg, -(size_of_gpr * NumLocalNonVolRegisters)(sp)
-                .endmacro
                  
                 // need to reuse the load sequence, so macrofy it
-                .macro restore_local_nonvol_regs // &base, &disp
-                lmw     LowestLocalNonVolReg, ($1 -(size_of_gpr * NumLocalNonVolRegisters))($0)
-                .endmacro
+#define restore_local_nonvol_regs(base, disp) \
+                lmw     LowestLocalNonVolReg, (disp -(size_of_gpr * NumLocalNonVolRegisters))(base)
                 
                 start_exported_function(SaveSelfNonVolRegs)        
 SaveSelfNonVolRegs_start:
@@ -519,7 +516,7 @@ start_exported_function(SaveSelfNonVolRegs_returnPC)
 return_normally:
                 lwz     sp, LinkageArea_savedSP(sp) // pop frame
                 lwz     r0, LinkageArea_savedPC(sp)
-                restore_local_nonvol_regs sp, 0
+                restore_local_nonvol_regs(sp, 0)
                 mtlr    r0
                 blr
 
@@ -527,7 +524,7 @@ return_nlr:
                 lwz     sp, LinkageArea_savedSP(sp) // pop frame
                 lwz     Temp1, LinkageArea_savedPC(sp)
                 addi    Temp1, Temp1, non_local_return_offset
-                restore_local_nonvol_regs sp, 0
+                restore_local_nonvol_regs(sp, 0)
                 mtlr    Temp1
                 blr
                 
@@ -583,7 +580,7 @@ skipFirstPop:   lwz     r0, LinkageArea_savedPC(sp)
                 bne+    not_saved1
                 // At this point sp is sp for SaveNonVol frame
                 lwz     Temp2, LinkageArea_savedSP(sp)  // get top of savenonvol frame
-                restore_local_nonvol_regs Temp2, 0
+                restore_local_nonvol_regs(Temp2, 0)
                 
 not_saved1:
                 cmpw    r0, ret_addr                    // test ret pc
@@ -646,7 +643,7 @@ notFound2:      lwz     r0, LinkageArea_savedPC(sp)
                 cmpw    r0, Temp1                         // look for savenonvol frame
                 bne+    not_saved2
                 lwz     Temp2, LinkageArea_savedSP(sp)  // get top of savenonvol frame
-                restore_local_nonvol_regs Temp2, 0
+                restore_local_nonvol_regs(Temp2, 0)
 not_saved2:
                 lwz     sp, LinkageArea_savedSP(sp)     // pop frame
 loop_entry_point1:                
@@ -691,7 +688,7 @@ notFound3:      lwz     r0, LinkageArea_savedPC(sp)
                 cmpw    r0, Temp1                         // look for savenonvol frame
                 bne+    not_saved3
                 lwz     Temp2, LinkageArea_savedSP(sp)  // get top of savenonvol frame
-                restore_local_nonvol_regs Temp2, 0
+                restore_local_nonvol_regs(Temp2, 0)
 not_saved3:
                 lwz     sp, LinkageArea_savedSP(sp)     // pop frame
 loop_entry_point2:                
@@ -876,7 +873,7 @@ start_exported_function(SendMessage_stub_returnPC) // for stack-walking
                  lswi  r3, Temp1, NumRcvrAndArgRegisters * oopSize
                  
                  la    sp, frsize(sp)//  restore sp
-                 restore_local_nonvol_regs sp, 0
+                 restore_local_nonvol_regs(sp, 0)
                  lwz  r0, LinkageArea_savedPC(sp)//  restore link
                  mtlr  r0
                  
@@ -948,7 +945,7 @@ start_exported_function(SendDIMessage_stub_returnPC) // for stack-walking
                  lswi  r3, Temp1, NumRcvrAndArgRegisters * oopSize
                  
                  la    sp, frsize(sp)//  restore sp
-                 restore_local_nonvol_regs sp, 0
+                 restore_local_nonvol_regs(sp, 0)
                  lwz   r0, LinkageArea_savedPC(sp)//  restore link
                  mtlr  r0
                  
@@ -1009,7 +1006,7 @@ start_exported_function(MakeOld_stub_returnPC) // for stack-walking
                  lswi  r3, Temp1, NumRcvrAndArgRegisters * oopSize
                  
                  la    sp, frsize(sp)//  restore sp
-                 restore_local_nonvol_regs sp, 0
+                 restore_local_nonvol_regs(sp, 0)
                  lwz   r0, LinkageArea_savedPC(sp)//  restore link
                  mtlr  r0
   
@@ -1137,7 +1134,7 @@ pf2:
                  lswi  arg0 /* also normal result reg */, Temp1, numVolRegsToSave * oopSize
                  
                  la    sp, ProfilerTrap_frame_size(sp)
-                 restore_local_nonvol_regs sp, 0
+                 restore_local_nonvol_regs(sp, 0)
                  mtlr  Temp2
                  blr
                  
@@ -1230,7 +1227,7 @@ start_exported_function(Recompile_stub_returnPC) // for stack-walking
                  
                  la    sp, frsize(sp)//  restore sp
                  lwz   r0, LinkageArea_savedPC(sp)//  restore link
-                 restore_local_nonvol_regs sp, 0
+                 restore_local_nonvol_regs(sp, 0)
                  mtlr  r0
                  
                  bctr//  branch to counter reg
