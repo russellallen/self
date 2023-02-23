@@ -57,7 +57,9 @@ ProcessTime ProcessInfo::system_time(){
 } 
 
 # elif  TARGET_OS_VERSION == SUNOS_VERSION  \
-  ||  TARGET_OS_VERSION ==   LINUX_VERSION
+  ||  TARGET_OS_VERSION ==   LINUX_VERSION  \
+  ||  TARGET_OS_VERSION ==  NETBSD_VERSION  \
+  ||  TARGET_OS_VERSION == FREEBSD_VERSION
 
 static struct rusage process_info_ru;
 

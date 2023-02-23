@@ -163,7 +163,7 @@ bool rSet::scavenge_contents(oop* start, oop* end) {
     char oc;
     do {
       p = oop_for(cp);
-      new_byte = AllBits;
+      new_byte = static_cast<char>(AllBits);
 #     define S(i)  VISIT(p + i)
         S( 0) S( 1) S( 2) S( 3) S( 4) S( 5) S( 6) S( 7) S( 8) S( 9)
         S(10) S(11) S(12) S(13) S(14) S(15) S(16) S(17) S(18) S(19)
@@ -179,7 +179,7 @@ bool rSet::scavenge_contents(oop* start, oop* end) {
   // last card, if partial
   assert(cp == byte_for(end), "just checking");
   p = card_for(end);
-  new_byte = AllBits;
+  new_byte = static_cast<char>(AllBits);
   switch (end - p) {
 #   define S(i) case i: VISIT(end - i)
    default: ShouldNotReachHere();                    S(31) S(30)
@@ -244,14 +244,14 @@ bool rSet::verify(bool postScavenge) {
       S(10) S(11) S(12) S(13) S(14) S(15) S(16) S(17) S(18) S(19)
       S(20) S(21) S(22) S(23) S(24) S(25) S(26) S(27) S(28) S(29)
       S(30) S(31)
-      should_be = AllBits;
+      should_be = static_cast<char>(AllBits);
 #     undef S
       CHECK(p)
       }
     assert(p == end_card,  "just checking");
     assert(rSet::card_for(p) == rSet::card_for(end), "just checking");
   
-    should_be = AllBits;
+    should_be = static_cast<char>(AllBits);
     switch (end - p) {
 #     define S(i) case i: \
        if (Memory->new_gen->is_new(end[-i], bound)) { should_be = 0;  break; }

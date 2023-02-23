@@ -28,6 +28,8 @@ add_definitions_if_cmakevar(
 # setup all necessary build flags
 #
 list(APPEND _flags
+  -fno-omit-frame-pointer
+  -fno-delete-null-pointer-checks
   -fno-threadsafe-statics
   -fvisibility=default
   -fno-exceptions
@@ -50,8 +52,12 @@ endif()
 #
 # setup all warning flags
 #
+if (clang)
+  list(APPEND _flags -Wabi)
+elseif(gcc)
+  list(APPEND _flags -Wabi=11)
+endif()
 list(APPEND _flags
-  -Wabi
   -Wreorder
   -Wreturn-type
   -Wswitch
@@ -61,4 +67,5 @@ list(APPEND _flags
   -Woverloaded-virtual
   -Wno-write-strings
   -Wparentheses
+  -Wno-register
 )

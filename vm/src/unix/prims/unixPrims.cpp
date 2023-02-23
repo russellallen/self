@@ -68,17 +68,13 @@ static struct termios normalSettings;
 class IOCleanup {
  public:
   IOCleanup()  {
-# if TARGET_OS_VERSION ==  SUNOS_VERSION \
-  || TARGET_OS_VERSION == SOLARIS_VERSION  \
-  || TARGET_OS_VERSION ==   LINUX_VERSION
+# if TARGET_OS_VERSION ==  SUNOS_VERSION
     if (isatty(STDIN))
       ioctl(STDIN, TCGETS, (caddr_t)&normalSettings);
-# elif TARGET_OS_VERSION == MACOSX_VERSION
+# else
     // not sure what to do
     if (isatty(STDIN))
-      ioctl(STDIN, TIOCGETA, (caddr_t)&normalSettings);
-# else
-  # error what?
+      tcgetattr(STDIN, &normalSettings);
 # endif
     FD_SET(0, &activeFDs); FD_SET(1, &activeFDs); FD_SET(2, &activeFDs); 
   }
@@ -87,16 +83,12 @@ class IOCleanup {
 static IOCleanup* ioC;        // make sure we exit in blocking mode etc
 
 void resetTerminal() {
-# if  TARGET_OS_VERSION ==  SUNOS_VERSION \
-  ||  TARGET_OS_VERSION == SOLARIS_VERSION  \
-  ||  TARGET_OS_VERSION ==   LINUX_VERSION
+# if  TARGET_OS_VERSION ==  SUNOS_VERSION
     if (isatty(STDIN))
       ioctl(STDIN, TCSETS, (caddr_t)&normalSettings);
-# elif TARGET_OS_VERSION == MACOSX_VERSION
-    if (isatty(STDIN))
-      ioctl(STDIN, TIOCSETA, (caddr_t)&normalSettings);
 # else
-    # error what?
+    if (isatty(STDIN))
+      tcsetattr(STDIN, TCSANOW, &normalSettings);
 # endif
   fcntl(STDIN, F_SETFL, 0);
 }
@@ -162,7 +154,9 @@ void resetTerminal() {
     }
   # endif  
 
-# elif  TARGET_OS_VERSION == LINUX_VERSION
+# elif  TARGET_OS_VERSION ==   LINUX_VERSION \
+    ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+    ||  TARGET_OS_VERSION == FREEBSD_VERSION
     static int c_lib_write(int fd, const char* buf, int nbytes) {
       return write(fd, buf, nbytes);
     }    
@@ -170,7 +164,9 @@ void resetTerminal() {
   # error what?
 # endif
 
- # if TARGET_OS_VERSION != MACOSX_VERSION  &&  TARGET_OS_VERSION != LINUX_VERSION
+ # if TARGET_OS_VERSION != MACOSX_VERSION  &&  TARGET_OS_VERSION != LINUX_VERSION \
+     && TARGET_OS_VERSION != NETBSD_VERSION && TARGET_OS_VERSION != FREEBSD_VERSION
+
 
 extern "C" int write(int fd, const void* b, nbytes_t nbytes) {
     int32 res;
@@ -588,7 +584,9 @@ void unixPrims_init() { ioC = new IOCleanup; }
 void unixPrims_exit() { delete ioC; }
 
 # if TARGET_OS_VERSION == MACOSX_VERSION \
-  || TARGET_OS_VERSION ==  LINUX_VERSION
+  || TARGET_OS_VERSION ==  LINUX_VERSION \
+  || TARGET_OS_VERSION == NETBSD_VERSION \
+  || TARGET_OS_VERSION == FREEBSD_VERSION
   static struct utsname my_utsname;
   char*  sysname_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname. sysname; }
   char* nodename_wrap(void* FH) { return uname(&my_utsname) ? (unix_failure(FH), (char*)NULL) : my_utsname.nodename; }

@@ -45,6 +45,24 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(platform "linux")
   set(TARGET_OS_VERSION "LINUX_VERSION")
   
+elseif(CMAKE_SYSTEM_NAME MATCHES "NetBSD")
+
+  set(platform_kind "unix")
+  set(TARGET_OS_FAMILY  "UNIX_FAMILY")
+
+  set(platform_name "NetBSD")
+  set(platform "netbsd")
+  set(TARGET_OS_VERSION "NETBSD_VERSION")
+
+elseif(CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+
+  set(platform_kind "unix")
+  set(TARGET_OS_FAMILY  "UNIX_FAMILY")
+
+  set(platform_name "FreeBSD")
+  set(platform "freebsd")
+  set(TARGET_OS_VERSION "FREEBSD_VERSION")
+
 elseif(CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
   
   set(platform_kind "unix")

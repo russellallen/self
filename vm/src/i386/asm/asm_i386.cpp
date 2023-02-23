@@ -279,7 +279,7 @@ void Assembler::reg_reg(Location reg_operand, Location rm_reg,  Location index_r
 
 
 void Assembler::word_branch_target(int32 dest, OperandType t, Label* L) {
-  assert(L == NULL  ||  dest == 0  &&  t == NumberOperand, "???");
+  assert(L == NULL  ||  (dest == 0  &&  t == NumberOperand), "???");
   if (L == NULL)
     ;
   else if (L->isDefined()) {

@@ -825,7 +825,7 @@
     }
     if (!result) {
       // scope never returns anything
-      assert(isBlockScope() && containsNLR || endsDead,
+      assert((isBlockScope() && containsNLR) || endsDead,
              "should have a result");
       result = new NoResultSExpr;
     } else if (result->hasMap() && result->map()->is_block()) {

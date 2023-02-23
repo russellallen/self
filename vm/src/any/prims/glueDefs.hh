@@ -394,7 +394,7 @@
       if (the_actual_seal != (void*)proxy_type_seal(aux))                     \
         cnvt_err(BADTYPESEALERROR, s_arg(i), aux)                             \
       C_arg(i) = (proxy_pntr_type(aux)) proxyOop(s_arg(i))->get_pointer();    \
-      if (!allow_null  &&  C_arg(i) == NULL)                                  \
+      if (!allow_null  &&  C_arg(i) == 0)                                     \
         cnvt_err(NULLPOINTERERROR, s_arg(i), aux)                             \
     } else                                                                    \
       cnvt_err(DEADPROXYERROR, s_arg(i), aux)                                 \

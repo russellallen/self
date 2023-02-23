@@ -724,7 +724,7 @@ bool universe::write_snapshot(const char *fileName,
 
   const char *fullFileName;
   snapFile= Files->openSnapshotFile(fileName, "w", &fullFileName);
-  if (snapFile == NULL) return NULL;
+  if (snapFile == NULL) return false;
 
   if (!snap_sizes) snap_sizes= &current_sizes;
 

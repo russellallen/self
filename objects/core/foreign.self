@@ -2749,17 +2749,39 @@ coerced.\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibilit
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> () From: ( | {
          'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
         
-         linux = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'linux' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits foreignFct osVariants linux.
+         elf = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'elf' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits foreignFct osVariants elf.
 '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'elf' -> () From: ( | {
+         'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+        
+         entryPointFromName: name = ( |
+            | name).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> () From: ( | {
          'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
         
-         solaris = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'solaris' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits foreignFct osVariants solaris.
+         freebsd = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'freebsd' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits foreignFct osVariants freebsd.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'elf' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> () From: ( | {
+         'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+        
+         linux = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'linux' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits foreignFct osVariants linux.
 '.
             | ) .
         } | ) 
@@ -2767,7 +2789,7 @@ coerced.\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibilit
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'linux' -> () From: ( | {
          'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'solaris' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'elf' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> () From: ( | {
@@ -2831,11 +2853,34 @@ coerced.\x7fModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibilit
          parent* = bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'macOS_9' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'solaris' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> () From: ( | {
          'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
         
-         entryPointFromName: name = ( |
-            | name).
+         netbsd = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'netbsd' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits foreignFct osVariants netbsd.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'elf' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> () From: ( | {
+         'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: public'
+        
+         solaris = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'solaris' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits foreignFct osVariants solaris.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'solaris' -> () From: ( | {
+         'ModuleInfo: Module: foreign InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'foreignFct' -> 'osVariants' -> 'elf' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'foreignFct' -> () From: ( | {

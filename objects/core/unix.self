@@ -296,7 +296,9 @@ Result is a vector of byte vectors (each byte vector is an IP address).
             | 
                  ( host osName = 'sunOS'  )
             || [ ( host osName = 'macOSX' )
-            || [   host osName = 'linux' ]]
+            || [ ( host osName = 'linux'  )
+            || [ ( host osName = 'freebsd')
+            || [ ( host osName = 'netbsd' )]]]]
               ifTrue: [ currentOsVariant: host osVariantName sendTo: osVariants ].
             os_file initializeOsVariant.
             self).
@@ -628,6 +630,79 @@ Result is a vector of byte vectors (each byte vector is an IP address).
         
          version = ( |
             | (utsname copyFrom: 83 UpTo:  92) shrinkwrapped).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         freebsd = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'freebsd' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals unixGlobals os osVariants freebsd.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'Comment: A stub for now.  gethostid(3) is not a syscall in FreeBSD.\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         gethostid = ( |
+             bv.
+            | 
+            bv: byteVector copySize: 4.
+            0 to: 3 Do: [| :i |
+                bv at: i Put: 42
+            ].
+            ^bv).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sys_access = 33.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sys_ioctl = 34.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sys_mkdir = 136.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sys_ptrace = 26.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sys_rename = 128.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sys_rmdir = 137.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'macOS_X' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         unameInterface* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'macOS_X' -> 'unameInterface' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals unixGlobals os osVariants macOS_X unameInterface.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         unameInterface* = bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'macOS_X' -> 'unameInterface' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> () From: ( | {
@@ -2541,15 +2616,6 @@ Result is a vector of byte vectors (each byte vector is an IP address).
          sys_writev = 146.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'macOS_X' -> () From: ( | {
-         'ModuleInfo: Module: unix InitialContents: FollowSlot'
-        
-         unameInterface* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'macOS_X' -> 'unameInterface' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals unixGlobals os osVariants macOS_X unameInterface.
-'.
-            | ) .
-        } | ) 
-
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'linux' -> () From: ( | {
          'ModuleInfo: Module: unix InitialContents: FollowSlot'
         
@@ -2681,6 +2747,70 @@ Result is a vector of byte vectors (each byte vector is an IP address).
          version = ( |
             | 
             _Version).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> () From: ( | {
+         'Comment: In progress...\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         netbsd = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'netbsd' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals unixGlobals os osVariants netbsd.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'Comment: A stub for now.  gethostid(3) is not a syscall in NetBSD.\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         gethostid = ( |
+             bv.
+            | 
+            bv: byteVector copySize: 4.
+            0 to: 3 Do: [| :i |
+                bv at: i Put: 42
+            ].
+            ^bv).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sys_access = 33.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sys_ioctl = 34.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sys_mkdir = 136.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sys_ptrace = 26.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sys_rename = 128.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'Category: syscall constants\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sys_rmdir = 137.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         unameInterface* = bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> 'macOS_X' -> 'unameInterface' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> 'osVariants' -> () From: ( | {
@@ -3537,7 +3667,9 @@ in the OS specific objects.\x7fModuleInfo: Creator: traits unixFile bsdAndSolari
             | 
                  ( host osName = 'sunOS'  )
             || [ ( host osName = 'macOSX' )
-            || [   host osName = 'linux' ]]
+            || [ ( host osName = 'linux'  )
+            || [ ( host osName = 'freebsd')
+            || [ ( host osName = 'netbsd' ) ]]]]
               ifTrue: [ currentOsVariant: host osVariantName sendTo: osVariants ]).
         } | ) 
 
@@ -4130,6 +4262,268 @@ in the OS specific objects.\x7fModuleInfo: Creator: traits unixFile bsdAndSolari
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'bsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         suspendIfAsync = ( |
+            | 
+            setOwnerIfFail: [process this yield. ^ self].
+            suspendForIO).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         freebsd = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants freebsd.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         fcntls = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'fcntls' -> () From: ( |
+             {} = 'Comment: These are all found in /usr/include/sys/fcntl.h\x7fModuleInfo: Creator: traits unixFile osVariants freebsd fcntls.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'fcntls' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         f_setfl = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'fcntls' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         f_setown = 6.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'fcntls' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         o_async = 64.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'fcntls' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         o_nonblock = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'Comment: What to do with the file being opened.\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         flags = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'flags' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants freebsd flags.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         append = 8.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         combinations* = bootstrap stub -> 'traits' -> 'abstractFile' -> 'abstractFlags' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         create = 512.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         nonblock = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         read = 0.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         readWrite = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         truncate = 1024.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         write = 1.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         ioctls = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'ioctls' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants freebsd ioctls.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'ioctls' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         clear = ( |
+            | 
+            byteVector copySize: (typeSizes byteSize: 'int')
+              cIntSize: (typeSizes bitSize: 'int')
+                Signed: true 
+                    At: 0 
+                   Put: 0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'ioctls' -> () From: ( | {
+         'Comment: set and clear can used when as the arg argument to ioctl\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         set = ( |
+            | 
+            byteVector copySize: (typeSizes byteSize: 'int')
+              cIntSize: (typeSizes bitSize: 'int')
+                Signed: true 
+                    At: 0 
+                   Put: 1).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'ioctls' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         siocspgrp = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'ioctls' -> 'siocspgrp' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants freebsd ioctls siocspgrp.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'ioctls' -> 'siocspgrp' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         high16Bits = 32772.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'ioctls' -> 'siocspgrp' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         low16Bits = 29448.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'ioctls' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         tiocspgrp = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'ioctls' -> 'tiocspgrp' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants freebsd ioctls tiocspgrp.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'ioctls' -> 'tiocspgrp' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         high16Bits = 32772.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'ioctls' -> 'tiocspgrp' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         low16Bits = 29814.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'Comment: Set asynchronous I/O and notification via SIGIO\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         setAsyncIfFail: failBlock = ( |
+            | 
+             fcntl: fcntls f_setfl
+              With: fcntls o_async || fcntls o_nonblock
+            IfFail: [|:e| ^ failBlock value: e].
+
+            setOwnerIfFail: nil.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         setNotifyEventsIfFail: failBlock = ( |
+            | 
+             fcntl: fcntls f_setfl
+              With: fcntls o_async
+            IfFail: [|:e| ^ failBlock value: e].
+
+            setOwnerIfFail: nil.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         setOwnerIfFail: fb = ( |
+            | 
+            fcntl: fcntls f_setown With: os getpid IfFail: fb).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         socketConstants = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'socketConstants' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants freebsd socketConstants.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'socketConstants' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         bsdAndSolarisShared* = bootstrap stub -> 'traits' -> 'unixFile' -> 'bsdAndSolarisSharedSocketConstants' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'socketConstants' -> () From: ( | {
+         'Category: socket types\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sock_dgram = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'socketConstants' -> () From: ( | {
+         'Category: socket types\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sock_raw = 3.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'socketConstants' -> () From: ( | {
+         'Category: socket types\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sock_rdm = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'socketConstants' -> () From: ( | {
+         'Category: socket types\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sock_seqpacket = 5.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> 'socketConstants' -> () From: ( | {
+         'Category: socket types\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sock_stream = 1.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'freebsd' -> () From: ( | {
          'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
         
          suspendIfAsync = ( |
@@ -4983,6 +5377,268 @@ in the OS specific objects.\x7fModuleInfo: Creator: traits unixFile bsdAndSolari
             setOwnerIfFail: [|:e|
               'ENOTTY' = e 
                 ifFalse: [process this yield. ^ self]].
+            suspendForIO).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         netbsd = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants netbsd.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         fcntls = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'fcntls' -> () From: ( |
+             {} = 'Comment: These are all found in /usr/include/sys/fcntl.h\x7fModuleInfo: Creator: traits unixFile osVariants netbsd fcntls.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'fcntls' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         f_setfl = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'fcntls' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         f_setown = 6.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'fcntls' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         o_async = 64.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'fcntls' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         o_nonblock = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'Comment: What to do with the file being opened.\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         flags = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'flags' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants netbsd flags.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         append = 8.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         combinations* = bootstrap stub -> 'traits' -> 'abstractFile' -> 'abstractFlags' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         create = 512.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         nonblock = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         read = 0.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         readWrite = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         truncate = 1024.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'flags' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         write = 1.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         ioctls = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'ioctls' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants netbsd ioctls.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'ioctls' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         clear = ( |
+            | 
+            byteVector copySize: (typeSizes byteSize: 'int')
+              cIntSize: (typeSizes bitSize: 'int')
+                Signed: true 
+                    At: 0 
+                   Put: 0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'ioctls' -> () From: ( | {
+         'Comment: set and clear can used when as the arg argument to ioctl\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         set = ( |
+            | 
+            byteVector copySize: (typeSizes byteSize: 'int')
+              cIntSize: (typeSizes bitSize: 'int')
+                Signed: true 
+                    At: 0 
+                   Put: 1).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'ioctls' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         siocspgrp = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'ioctls' -> 'siocspgrp' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants netbsd ioctls siocspgrp.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'ioctls' -> 'siocspgrp' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         high16Bits = 32772.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'ioctls' -> 'siocspgrp' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         low16Bits = 29448.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'ioctls' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         tiocspgrp = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'ioctls' -> 'tiocspgrp' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants netbsd ioctls tiocspgrp.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'ioctls' -> 'tiocspgrp' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         high16Bits = 32772.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'ioctls' -> 'tiocspgrp' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         low16Bits = 29814.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'Comment: Set asynchronous I/O and notification via SIGIO\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         setAsyncIfFail: failBlock = ( |
+            | 
+             fcntl: fcntls f_setfl
+              With: fcntls o_async || fcntls o_nonblock
+            IfFail: [|:e| ^ failBlock value: e].
+
+            setOwnerIfFail: nil.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         setNotifyEventsIfFail: failBlock = ( |
+            | 
+             fcntl: fcntls f_setfl
+              With: fcntls o_async
+            IfFail: [|:e| ^ failBlock value: e].
+
+            setOwnerIfFail: nil.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         setOwnerIfFail: fb = ( |
+            | 
+            fcntl: fcntls f_setown With: os getpid IfFail: fb).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
+        
+         socketConstants = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'socketConstants' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits unixFile osVariants netbsd socketConstants.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'socketConstants' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         bsdAndSolarisShared* = bootstrap stub -> 'traits' -> 'unixFile' -> 'bsdAndSolarisSharedSocketConstants' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'socketConstants' -> () From: ( | {
+         'Category: socket types\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sock_dgram = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'socketConstants' -> () From: ( | {
+         'Category: socket types\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sock_raw = 3.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'socketConstants' -> () From: ( | {
+         'Category: socket types\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sock_rdm = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'socketConstants' -> () From: ( | {
+         'Category: socket types\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sock_seqpacket = 5.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> 'socketConstants' -> () From: ( | {
+         'Category: socket types\x7fModuleInfo: Module: unix InitialContents: FollowSlot'
+        
+         sock_stream = 1.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'unixFile' -> 'osVariants' -> 'netbsd' -> () From: ( | {
+         'ModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: private'
+        
+         suspendIfAsync = ( |
+            | 
+            setOwnerIfFail: [process this yield. ^ self].
             suspendForIO).
         } | ) 
 
