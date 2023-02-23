@@ -1,6 +1,6 @@
- '30.12.0'
+ '30.11.0'
  '
-Copyright 1992-2023 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -12,7 +12,6 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
          'ModuleInfo: Module: defaultPreferences InitialContents: FollowSlot'
         
          defaultPreferences = bootstrap define: bootstrap stub -> 'globals' -> 'modules' -> 'defaultPreferences' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'copyright' From:
              bootstrap remove: 'directory' From:
              bootstrap remove: 'fileInTimeString' From:
              bootstrap remove: 'myComment' From:
@@ -24,22 +23,10 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
 
 CopyDowns:
 globals modules init. copy 
-SlotsToOmit: copyright directory fileInTimeString myComment postFileIn revision subpartNames.
+SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNames.
 
 \x7fIsComplete: '.
             | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'defaultPreferences' -> () From: ( | {
-         'Category: state\x7fModuleInfo: Module: defaultPreferences InitialContents: InitializeToExpression: (\'
-Copyright 1992-2023 AUTHORS.
-See the legal/LICENSE file for license information and legal/AUTHORS for authors.
-\')\x7fVisibility: public'
-        
-         copyright <- '
-Copyright 1992-2023 AUTHORS.
-See the legal/LICENSE file for license information and legal/AUTHORS for authors.
-'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'defaultPreferences' -> () From: ( | {
@@ -70,9 +57,9 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'defaultPreferences' -> () From: ( | {
-         'ModuleInfo: Module: defaultPreferences InitialContents: InitializeToExpression: (\'30.12.0\')\x7fVisibility: public'
+         'ModuleInfo: Module: defaultPreferences InitialContents: InitializeToExpression: (\'30.11.0\')\x7fVisibility: public'
         
-         revision <- '30.12.0'.
+         revision <- '30.11.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'defaultPreferences' -> () From: ( | {
@@ -155,11 +142,13 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
 so that the prefered button will bring up the 
 main (non-morphic) menu.
 
-By default, we do this.\x7fModuleInfo: Module: defaultPreferences InitialContents: FollowSlot\x7fVisibility: public'
+By default, we do this on Linux but not otherwise.\x7fModuleInfo: Module: defaultPreferences InitialContents: FollowSlot\x7fVisibility: public'
         
          swapMouseButtons = ( |
             | 
-            true).
+                 (host osName = 'linux')
+            || [ (host osName = 'freebsd')
+            || [ (host osName = 'netbsd') ]]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> () From: ( | {

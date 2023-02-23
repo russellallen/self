@@ -1,9 +1,8 @@
- '13.16.0'
+ 'Sun-$Revision: 30.15 $'
  '
-Copyright 1992-2023 AUTHORS.
-See the legal/LICENSE file for license information and legal/AUTHORS for authors.
+Copyright 1992-2012 AUTHORS.
+See the LICENSE file for license information.
 '
-["preFileIn" self] value
 
 
  '-- Module body'
@@ -81,7 +80,6 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
          'ModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          hosts = bootstrap define: bootstrap stub -> 'globals' -> 'modules' -> 'hosts' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'copyright' From:
              bootstrap remove: 'directory' From:
              bootstrap remove: 'fileInTimeString' From:
              bootstrap remove: 'myComment' From:
@@ -93,22 +91,10 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
 
 CopyDowns:
 globals modules init. copy 
-SlotsToOmit: copyright directory fileInTimeString myComment postFileIn revision subpartNames.
+SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNames.
 
 \x7fIsComplete: '.
             | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'hosts' -> () From: ( | {
-         'Category: state\x7fModuleInfo: Module: hosts InitialContents: InitializeToExpression: (\'
-Copyright 1992-2023 AUTHORS.
-See the legal/LICENSE file for license information and legal/AUTHORS for authors.
-\')\x7fVisibility: public'
-        
-         copyright <- '
-Copyright 1992-2023 AUTHORS.
-See the legal/LICENSE file for license information and legal/AUTHORS for authors.
-'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'hosts' -> () From: ( | {
@@ -147,9 +133,9 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'hosts' -> () From: ( | {
-         'ModuleInfo: Module: hosts InitialContents: InitializeToExpression: (\'13.16.0\')\x7fVisibility: public'
+         'ModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
-         revision <- '13.16.0'.
+         revision <- 'Sun-$Revision: 30.15 $'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'hosts' -> () From: ( | {
@@ -1087,7 +1073,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> () From: ( | {
-         'ModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'ModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          freebsd = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'freebsd' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals platforms osFamilies freebsd.
@@ -1120,7 +1106,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'freebsd' -> () From: ( | {
-         'ModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'Comment: _\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          initialize = ( |
             | 
@@ -1128,7 +1114,9 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'freebsd' -> () From: ( | {
-         'Comment: Placeholder\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Comment: Sun encodes the architecture in the high four bits, and
+	   the model in the lower four bits, of the most significant
+	   byte of the hostid.\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          model = ( |
             | 
@@ -1181,7 +1169,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'linux' -> () From: ( | {
-         'ModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'Comment: _\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          initialize = ( |
             | 
@@ -1189,7 +1177,9 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'linux' -> () From: ( | {
-         'Comment: Placeholder\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Comment: Sun encodes the architecture in the high four bits, and
+	   the model in the lower four bits, of the most significant
+	   byte of the hostid.\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          model = ( |
             | 
@@ -1261,7 +1251,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> () From: ( | {
-         'ModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'ModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          netbsd = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'netbsd' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals platforms osFamilies netbsd.
@@ -1294,7 +1284,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'netbsd' -> () From: ( | {
-         'ModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'Comment: _\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          initialize = ( |
             | 
@@ -1302,7 +1292,9 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'netbsd' -> () From: ( | {
-         'Comment: Placeholder\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Comment: Sun encodes the architecture in the high four bits, and
+	   the model in the lower four bits, of the most significant
+	   byte of the hostid.\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          model = ( |
             | 
@@ -1485,7 +1477,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'host' -> () From: ( | {
-         'Category: testing\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'Category: testing\x7fComment: Return true if running on a Solaris platform\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          operatingSystem = ( |
             | 
@@ -1511,12 +1503,12 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
                 findFirst: [|:c| c = ' ']
                 IfPresent: [|:c. :i| i]
                  IfAbsent: [operatingSystem size].
-            firstToken = 'Darwin'   ifTrue: [^ 'macOSX'  ].
-            firstToken = 'SunOS'    ifTrue: [^ 'sunOS'   ].
-            firstToken = 'MacOS'    ifTrue: [^ 'macOS'   ].
-            firstToken = 'Linux'    ifTrue: [^ 'linux'   ].
-            firstToken = 'FreeBSD'  ifTrue: [^ 'freebsd' ].
-            firstToken = 'NetBSD'   ifTrue: [^ 'netbsd'  ].
+            firstToken = 'Darwin'  ifTrue: [^ 'macOSX'  ].
+            firstToken = 'SunOS'   ifTrue: [^ 'sunOS'   ].
+            firstToken = 'MacOS'   ifTrue: [^ 'macOS'   ].
+            firstToken = 'Linux'   ifTrue: [^ 'linux'   ].
+            firstToken = 'FreeBSD' ifTrue: [^ 'freebsd' ].
+            firstToken = 'NetBSD'  ifTrue: [^ 'netbsd'  ].
             'sunOS' "just might work").
         } | ) 
 
@@ -1534,7 +1526,9 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
                             'macOS_9' ].
             ].
             osName = 'macOSX'  ifTrue: [ ^ 'macOS_X' ].
-            osName = 'linux'   ifTrue: [ ^ 'linux' ].
+            osName = 'linux'   ifTrue: [ ^ 'linux'   ].
+            osName = 'freebsd' ifTrue: [ ^ 'freebsd' ].
+            osName = 'netbsd'  ifTrue: [ ^ 'netbsd'  ].
             error: ['unknown osName: ', osName]).
         } | ) 
 
