@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.15 $'
+ '13.16.0'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2023 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -80,6 +81,7 @@ See the LICENSE file for license information.
          'ModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          hosts = bootstrap define: bootstrap stub -> 'globals' -> 'modules' -> 'hosts' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'copyright' From:
              bootstrap remove: 'directory' From:
              bootstrap remove: 'fileInTimeString' From:
              bootstrap remove: 'myComment' From:
@@ -91,10 +93,22 @@ See the LICENSE file for license information.
 
 CopyDowns:
 globals modules init. copy 
-SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNames.
+SlotsToOmit: copyright directory fileInTimeString myComment postFileIn revision subpartNames.
 
 \x7fIsComplete: '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'hosts' -> () From: ( | {
+         'Category: state\x7fModuleInfo: Module: hosts InitialContents: InitializeToExpression: (\'
+Copyright 1992-2023 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
+\')\x7fVisibility: public'
+        
+         copyright <- '
+Copyright 1992-2023 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
+'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'hosts' -> () From: ( | {
@@ -133,9 +147,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'hosts' -> () From: ( | {
-         'ModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: hosts InitialContents: InitializeToExpression: (\'13.16.0\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.15 $'.
+         revision <- '13.16.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'hosts' -> () From: ( | {
@@ -1073,7 +1087,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> () From: ( | {
-         'ModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          freebsd = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'freebsd' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals platforms osFamilies freebsd.
@@ -1106,7 +1120,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'freebsd' -> () From: ( | {
-         'Comment: _\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'ModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          initialize = ( |
             | 
@@ -1114,9 +1128,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'freebsd' -> () From: ( | {
-         'Comment: Sun encodes the architecture in the high four bits, and
-	   the model in the lower four bits, of the most significant
-	   byte of the hostid.\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Comment: Placeholder\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          model = ( |
             | 
@@ -1169,7 +1181,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'linux' -> () From: ( | {
-         'Comment: _\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'ModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          initialize = ( |
             | 
@@ -1177,9 +1189,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'linux' -> () From: ( | {
-         'Comment: Sun encodes the architecture in the high four bits, and
-	   the model in the lower four bits, of the most significant
-	   byte of the hostid.\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Comment: Placeholder\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          model = ( |
             | 
@@ -1251,7 +1261,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> () From: ( | {
-         'ModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          netbsd = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'netbsd' -> () From: ( |
              {} = 'ModuleInfo: Creator: globals platforms osFamilies netbsd.
@@ -1284,7 +1294,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'netbsd' -> () From: ( | {
-         'Comment: _\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'ModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          initialize = ( |
             | 
@@ -1292,9 +1302,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'platforms' -> 'osFamilies' -> 'netbsd' -> () From: ( | {
-         'Comment: Sun encodes the architecture in the high four bits, and
-	   the model in the lower four bits, of the most significant
-	   byte of the hostid.\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
+         'Comment: Placeholder\x7fModuleInfo: Module: hosts InitialContents: FollowSlot\x7fVisibility: public'
         
          model = ( |
             | 
@@ -1477,7 +1485,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'host' -> () From: ( | {
-         'Category: testing\x7fComment: Return true if running on a Solaris platform\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
+         'Category: testing\x7fModuleInfo: Module: hosts InitialContents: FollowSlot'
         
          operatingSystem = ( |
             | 
@@ -1503,12 +1511,12 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                 findFirst: [|:c| c = ' ']
                 IfPresent: [|:c. :i| i]
                  IfAbsent: [operatingSystem size].
-            firstToken = 'Darwin'  ifTrue: [^ 'macOSX'  ].
-            firstToken = 'SunOS'   ifTrue: [^ 'sunOS'   ].
-            firstToken = 'MacOS'   ifTrue: [^ 'macOS'   ].
-            firstToken = 'Linux'   ifTrue: [^ 'linux'   ].
-            firstToken = 'FreeBSD' ifTrue: [^ 'freebsd' ].
-            firstToken = 'NetBSD'  ifTrue: [^ 'netbsd'  ].
+            firstToken = 'Darwin'   ifTrue: [^ 'macOSX'  ].
+            firstToken = 'SunOS'    ifTrue: [^ 'sunOS'   ].
+            firstToken = 'MacOS'    ifTrue: [^ 'macOS'   ].
+            firstToken = 'Linux'    ifTrue: [^ 'linux'   ].
+            firstToken = 'FreeBSD'  ifTrue: [^ 'freebsd' ].
+            firstToken = 'NetBSD'   ifTrue: [^ 'netbsd'  ].
             'sunOS' "just might work").
         } | ) 
 
@@ -1526,9 +1534,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                             'macOS_9' ].
             ].
             osName = 'macOSX'  ifTrue: [ ^ 'macOS_X' ].
-            osName = 'linux'   ifTrue: [ ^ 'linux'   ].
-            osName = 'freebsd' ifTrue: [ ^ 'freebsd' ].
-            osName = 'netbsd'  ifTrue: [ ^ 'netbsd'  ].
+            osName = 'linux'   ifTrue: [ ^ 'linux' ].
             error: ['unknown osName: ', osName]).
         } | ) 
 
