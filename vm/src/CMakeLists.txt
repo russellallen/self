@@ -623,7 +623,7 @@ set(SRC_sparc
   sparc/prims/prim_table_arch_sparc.hh
   sparc/runtime/aCompiler_sparc.cpp
   sparc/runtime/aCompiler_sparc.hh
-  sparc/runtime/asmDefs_sparc.hh
+  sparc/runtime/asmDefs_gcc_sparc.hh
   sparc/runtime/conversion_sparc.cpp
   sparc/runtime/conversion_sparc.hh
   sparc/runtime/frame_format_sparc.cpp
@@ -638,7 +638,7 @@ set(SRC_sparc
   sparc/runtime/interruptedCtx_sparc.hh
   sparc/runtime/registerLocator_sparc.cpp
   sparc/runtime/registerLocator_sparc.hh
-  sparc/runtime/runtime_asm_sparc.S
+  sparc/runtime/runtime_asm_gcc_sparc.S
   sparc/runtime/runtime_sparc.cpp
   sparc/runtime/runtime_sparc.hh
   sparc/runtime/uncommonBranch_sparc.cpp
