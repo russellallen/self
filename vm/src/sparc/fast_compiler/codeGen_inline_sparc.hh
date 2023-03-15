@@ -47,7 +47,13 @@
     }
     return t;
   }
-  
+
+#if TARGET_OS_VERSION == NETBSD_VERSION
+/* XXX: where does sunos get trap.h included? */
+#include <sparc/trap.h>
+#define ST_FLUSH_WINDOWS ST_FLUSHWIN
+#endif
+
   inline void CodeGen::flushRegisterWindows() {
     // ta g0, ST_FLUSH_WINDOWS
     a.TrapI(G0, ST_FLUSH_WINDOWS);    // flush register windows
