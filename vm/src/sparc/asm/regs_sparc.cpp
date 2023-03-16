@@ -105,7 +105,7 @@ const char* ExtraArgRegisterNames[staticNames] = {
   "E8", "E9", "E10", "E11", "E12", "E13", "E14", "E15"
 };
 const char *ExtraIArgRegisterNames[staticNames] = {
-  "I0", "I1", "I2", "I3", "I4"* "I5", "I6", "I7",
+  "I0", "I1", "I2", "I3", "I4", "I5", "I6", "I7",
   "I8", "I9", "I10", "I11", "I12", "I13", "I14", "I15"
 };
 
