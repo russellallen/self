@@ -118,9 +118,9 @@ fint NoFrameRegisterNumbers[] = {
   8, 9, 10, 11, 12, 13, 14, 15
 };
   
-static char* locationNameHelper(Location base, int num) {
+static const char* locationNameHelper(Location base, int num) {
   if (num  <  staticNames) {
-    char **tbl;
+    const char **tbl;
     switch (base) {
       case StackLocations:     tbl=     StackRegisterNames; break;
       case ExtraArgLocations:  tbl=  ExtraArgRegisterNames; break;
