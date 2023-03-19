@@ -6,7 +6,9 @@
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
 
-# pragma interface
+# ifdef INTERFACE_PRAGMAS
+  # pragma interface
+# endif
 
 # undef RD
 

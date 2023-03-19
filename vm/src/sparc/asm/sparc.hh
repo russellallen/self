@@ -6,7 +6,9 @@
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
-# pragma interface
+# ifdef INTERFACE_PRAGMAS
+  # pragma interface
+# endif
 
 /* Definitions for opcode table for the sparc.
         Copyright 1989, 1991, 1992 Free Software Foundation, Inc.

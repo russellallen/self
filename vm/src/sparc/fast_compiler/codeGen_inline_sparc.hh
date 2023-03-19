@@ -5,7 +5,9 @@
 
 
 # if !GENERATE_DEBUGGING_AIDS
-# pragma interface
+# ifdef INTERFACE_PRAGMAS
+  # pragma interface
+# endif
 # endif
 
 

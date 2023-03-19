@@ -6,7 +6,9 @@
 // This file is INCLUDED into the middle of the RegisterLocator class.
 
 
-# pragma interface
+# ifdef INTERFACE_PRAGMAS
+  # pragma interface
+# endif
 
  private:
   oop** addresses() { return NULL; }

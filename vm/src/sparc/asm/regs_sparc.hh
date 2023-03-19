@@ -3,7 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma interface
+# ifdef INTERFACE_PRAGMAS
+  # pragma interface
+# endif
 
 // CAVEAT: the info here is redundantly contained in other files, including
 // sun4.format.h !!!!
