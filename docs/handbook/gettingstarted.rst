@@ -36,7 +36,7 @@ and run the VM, passing the snapshot as an argument::
 Building your own system
 ------------------------
 
-It is relatively easy to biuld the two key components of Self, the Self World and the Self Virtual Machine. They both start from downloading the Self sources from the GitHub repository by the following git command::
+It is relatively easy to build the two key components of Self, the Self World and the Self Virtual Machine. They both start from downloading the Self sources from the GitHub repository by the following git command::
 
   git clone https://github.com/russellallen/self/
 
