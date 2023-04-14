@@ -1,4 +1,4 @@
-# ifdef __ppc__
+# if defined(__ppc__) || defined(__powerpc__)
 /* Sun-$Revision: 30.13 $ */
 
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
@@ -402,7 +402,7 @@ class Assembler: public BaseAssembler {
     if (printing)  lprintf("  %s  %s%s, %s\n",  name, cbf_print_str(cf), RegisterNames[ra], RegisterNames[rb]); 
   }
 
-  void XOForm( XOpExts xop, char* n, char* fmt, void* p1, void* p2, void* p3, Location rt, Location ra, Location rb, int32 oe, int32 rc ) {
+  void XOForm( XOpExts xop, char* n, char* fmt, const void* p1, const void* p2, const void* p3, Location rt, Location ra, Location rb, int32 oe, int32 rc ) {
     assemble( OPCD(opcd_XO) | RT(rt) | RA(ra) | RB(rb) | OE(oe) | XO1(xop) | Rc(rc));
     if (printing)  { lprintf("  %s", n);  lprintf(fmt, p1, p2, p3); }
   }
@@ -415,7 +415,7 @@ class Assembler: public BaseAssembler {
    }
 
   
-  void DFormSI(char* fmt, void* p1, void* p2, void* p3, OPCD_codes op, Location rt, Location ra, int32 si, OperandType t, Kind_of_Instruction_Field f ) {
+  void DFormSI(char* fmt, const void* p1, const void* p2, const void* p3, OPCD_codes op, Location rt, Location ra, int32 si, OperandType t, Kind_of_Instruction_Field f ) {
      add_offset(t, f);
      assemble( OPCD(op) | RT(rt) | RA( ra) | SI(si)); 
      if (printing) lprintf(fmt, p1, p2, p3);
@@ -475,7 +475,7 @@ class Assembler: public BaseAssembler {
     
   
   void RotateDoublewordImmMD( Location rs, Location ra, int32 n, int32 b, int32 mdxo, int32 rc, bool assrt,
-                              char* fmt, void* p1, void* p2, void* p3, void* p4 ) {
+                              char* fmt, const void* p1, const void* p2, const void* p3, const void* p4 ) {
     assert(assrt, "oops");  UsedOnlyInAssert(assrt);
     assemble(  OPCD(opcd_DoublewordRotate) | RS(rs) | RA(ra) | DSH(n) | DMB(b) | MDXO(mdxo) | Rc(rc));
     if (printing) {
@@ -486,7 +486,7 @@ class Assembler: public BaseAssembler {
   }
   
   void RotateWordImmM( OPCD_codes op, Location rs, Location ra, int32 sh, int32 mb, int32 me, int32 rc, bool assrt,
-                        char* fmt, void* p1, void* p2, void* p3, void* p4, void* p5 ) {
+                        char* fmt, const void* p1, const void* p2, const void* p3, const void* p4, const void* p5 ) {
     assert(assrt, "oops");  UsedOnlyInAssert(assrt);
     assemble(  OPCD(op) | RS(rs) | RA(ra) | WSH(sh) | WMB(mb) | ME(me) | Rc(rc));
     if (printing) {
@@ -498,7 +498,7 @@ class Assembler: public BaseAssembler {
   
   
   void RotateDoublewordRegMDS( Location rs, Location ra, Location rb, int32 b, int32 mdxo, int32 rc, bool assrt,
-                              char* fmt, void* p1, void* p2, void* p3, void* p4 ) {
+                              char* fmt, const void* p1, const void* p2, const void* p3, const void* p4 ) {
     assert(assrt, "oops");  UsedOnlyInAssert(assrt);
     assemble(  OPCD(opcd_DoublewordRotate) | RS(rs) | RA(ra) | RB(rb) | DMB(b) | MDXO(mdxo) | Rc(rc));
     if (printing) {
@@ -509,7 +509,7 @@ class Assembler: public BaseAssembler {
   }
   
   void RotateWordRegM( Location rs, Location ra, Location rb, int32 b, int32 me, int32 rc, bool assrt,
-                         char* fmt, void* p1, void* p2, void* p3, void* p4, void* p5 ) {
+                         char* fmt, const void* p1, const void* p2, const void* p3, const void* p4, const void* p5 ) {
     assert(assrt, "oops");  UsedOnlyInAssert(assrt);
     assemble(  OPCD(opcd_RotateLeftWordThenAndMask) | RS(rs) | RA(ra) | RB(rb) | WMB(b) | ME(me) | Rc(rc));
     if (printing) {
@@ -520,7 +520,7 @@ class Assembler: public BaseAssembler {
   }    
   
   void ShiftRightAlgebraicDoublewordImm( Location rs, Location ra, int32 n, int32 rc,
-                                         char* fmt, void* p1, void* p2, void* p3) {
+                                         char* fmt, const void* p1, const void* p2, const void* p3) {
     assemble(  OPCD(opcd_XO) | RS(rs) | RA(ra) | DSH(n) | XO2(ShiftRightAlgebraicDoublewordImmediateXOp) | Rc(rc));
     if (printing) {
       lprintf("  ");
@@ -530,7 +530,7 @@ class Assembler: public BaseAssembler {
   }
   
   void ShiftRightAlgebraicWordImm( Location rs, Location ra, int32 n, int32 rc,
-                                         char* fmt, void* p1, void* p2, void* p3) {
+                                         char* fmt, const void* p1, const void* p2, const void* p3) {
     assemble(  OPCD(opcd_XO) | RS(rs) | RA(ra) | WSH(n) | XO1(ShiftRightAlgebraicWordImmediateXOp) | Rc(rc));
     if (printing) {
       lprintf("  ");
@@ -1245,83 +1245,83 @@ class Assembler: public BaseAssembler {
   
   // rotate left doubleword immedate then clear left
   void rldicl( Location ra, Location rs, int32 n, int32 b, bool assrt = true,  char* fmt = "rldicl  %s, %s, %d, %d", 
-               void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0 )  { 
+               const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0 )  { 
                  RotateDoublewordImmMD( rs, ra, n, b, 0, 0, assrt,  fmt, p1, p2, p3, p4);
   }
   void rldicl_( Location ra, Location rs, int32 n, int32 b, bool assrt = true,  char* fmt = "rldicl_  %s, %s, %d, %d", 
-                void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0 )  { 
+                const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0 )  { 
                   RotateDoublewordImmMD( rs, ra, n, b, 0, 1, assrt,  fmt, p1, p2, p3, p4);
   }
   // rotate left doubleword immedate then clear right
   void rldicr( Location ra, Location rs, int32 n, int32 b, bool assrt = true,  char* fmt = "rldicr  %s, %s, %d, %d", 
-               void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0 )  {
+               const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0 )  {
                  RotateDoublewordImmMD( rs, ra, n, b, 1, 0, assrt,  fmt, p1, p2, p3, p4);
   }
   void rldicr_( Location ra, Location rs, int32 n, int32 b, bool assrt = true,  char* fmt = "rldicr_  %s, %s, %d, %d", 
-                void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0 )  { 
+                const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0 )  { 
                   RotateDoublewordImmMD( rs, ra, n, b, 1, 1, assrt,  fmt, p1, p2, p3, p4);
   }
   // rotate left doubleword immediate then clear
   void rldic(  Location ra, Location rs, int32 n, int32 b, bool assrt = true,  char* fmt = "rldimi  %s, %s, %d, %d", 
-               void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0 )  {
+               const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0 )  {
                  RotateDoublewordImmMD( rs, ra, n, b, 2, 0, assrt,  fmt, p1, p2, p3, p4);
   }
   void rldic_(  Location ra, Location rs, int32 n, int32 b, bool assrt = true,  char* fmt = "rldimi_  %s, %s, %d, %d", 
-                void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0 )  { 
+                const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0 )  { 
                   RotateDoublewordImmMD( rs, ra, n, b, 2, 1, assrt,  fmt, p1, p2, p3, p4);
   }
   // rotate left word immediate then and with mask
   void rlwinm(  Location ra, Location rs, int32 sh, int32 mb, int32 me, bool assrt = true,  char* fmt = "rlwinm  %s, %s, %d, %d, %d",  
-                void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0, void* p5 = 0 ) {
+                const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0, const void* p5 = 0 ) {
                   RotateWordImmM( opcd_RotateLeftWordThenAndMaskImm, rs, ra, sh, mb, me, 0, assrt,  fmt, p1, p2, p3, p4, p5);
   }
   void rlwinm_( Location ra, Location rs, int32 sh, int32 mb, int32 me, bool assrt = true,  char* fmt = "rlwinm_  %s, %s, %d, %d, %d",  
-                void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0, void* p5 = 0 ) {
+                const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0, const void* p5 = 0 ) {
                   RotateWordImmM( opcd_RotateLeftWordThenAndMaskImm, rs, ra, sh, mb, me, 1, assrt,  fmt, p1, p2, p3, p4, p5);
   }
   // rotate left doubleword then clear
   void rldcl(  Location ra, Location rs, Location rb, int32 b, bool assrt = true,  char* fmt = "rldcl  %s, %s, %s, %d", 
-               void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0 )  { 
+               const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0 )  { 
                  RotateDoublewordRegMDS( rs, ra, rb, b, 8, 0, assrt,  fmt, p1, p2, p3, p4);
   }
   void rldcl_( Location ra, Location rs, Location rb, int32 b, bool assrt = true,  char* fmt = "rldcl_  %s, %s, %s, %d", 
-               void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0 )  { 
+               const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0 )  { 
                  RotateDoublewordRegMDS( rs, ra, rb, b, 8, 1, assrt,  fmt, p1, p2, p3, p4);
   }
   // rotate left doubleword then clear right
   void rldcr(  Location ra, Location rs, Location rb, int32 b, bool assrt = true,  char* fmt = "rldcr  %s, %s, %s, %d", 
-               void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0 )  { 
+               const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0 )  { 
                  RotateDoublewordRegMDS( rs, ra, rb, b, 9, 0, assrt,  fmt, p1, p2, p3, p4);
   }
   void rldcr_( Location ra, Location rs, Location rb, int32 b, bool assrt = true,  char* fmt = "rldcr_  %s, %s, %s, %d", 
-               void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0 )  { 
+               const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0 )  { 
                  RotateDoublewordRegMDS( rs, ra, rb, b, 9, 1, assrt,  fmt, p1, p2, p3, p4);
   }
   // rotate left word then and with mask
   void rlwnm(  Location ra, Location rs, Location rb, int32 mb, int32 me, bool assrt = true,  char* fmt = "rlwnm  %s, %s, %s, %d, %d",  
-                void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0, void* p5 = 0 ) {
+                const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0, const void* p5 = 0 ) {
                   RotateWordRegM( rs, ra, rb, mb, me, 0, assrt,  fmt, p1, p2, p3, p4, p5);
   }
   void rlwnm_(  Location ra, Location rs, Location rb, int32 mb, int32 me, bool assrt = true,  char* fmt = "rlwnm_  %s, %s, %s, %d, %d",  
-                void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = (void*)0, void* p5 = (void*)0 ) {
+                const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0, const void* p5 = 0 ) {
                   RotateWordRegM( rs, ra, rb, mb, me, 1, assrt,  fmt, p1, p2, p3, p4, p5);
   }
   // rotate left word immedate then and with mask
   void rldimi(  Location ra, Location rs, int32 n, int32 b, bool assrt = true,  char* fmt = "rldic  %s, %s, %d, %d", 
-                void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0 )  { 
+                const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0 )  { 
                  RotateDoublewordImmMD( rs, ra, n, b, 3, 0, assrt,  fmt, p1, p2, p3, p4);
   }
   void rldimi_(  Location ra, Location rs, int32 n, int32 b, bool assrt = true,  char* fmt = "rldic_  %s, %s, %d, %d", 
-                 void* p1 = 0, void* p2 = 0, void* p3 = 0, void* p4 = 0 )  { 
+                 const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0 )  { 
                    RotateDoublewordImmMD( rs, ra, n, b, 3, 1, assrt,  fmt, p1, p2, p3, p4);
   }
   // rotate left word immediate then mask insert
   void rlwimi(  Location ra, Location rs, int32 sh, int32 mb, int32 me, bool assrt = true,  char* fmt = "rlwimi  %s, %s, %d, %d, %d",  
-                void* p1 = 0, void* p2 = 0, void* p3 = (void*)0, void* p4 = 0, void* p5 = 0 ) {
+                const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0, const void* p5 = 0 ) {
                   RotateWordImmM( opcd_RotateLeftWordImmThenMaskInsert, rs, ra, sh, mb, me, 0, assrt,  fmt, p1, p2, p3, p4, p5);
   }
   void rlwimi_( Location ra, Location rs, int32 sh, int32 mb, int32 me, bool assrt = true,  char* fmt = "rlwimi_  %s, %s, %d, %d, %d",  
-                void* p1 = 0, void* p2 = 0, void* p3 = (void*)0, void* p4 = 0, void* p5 = 0 ) {
+                const void* p1 = 0, const void* p2 = 0, const void* p3 = 0, const void* p4 = 0, const void* p5 = 0 ) {
                   RotateWordImmM( opcd_RotateLeftWordImmThenMaskInsert, rs, ra, sh, mb, me, 1, assrt,  fmt, p1, p2, p3, p4, p5);
   }
 

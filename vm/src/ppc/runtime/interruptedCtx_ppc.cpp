@@ -28,7 +28,7 @@ bool InterruptedContext::in_system_trap() {
 
 
 int InterruptedContext::system_trap() {
-  return NULL; // unimp for now
+  return 0; // unimp for now
 }
 
 
@@ -66,15 +66,34 @@ void InterruptedContext::setupPreemptionFromSignal() {
   char** InterruptedContext::lr_addr() {
     return (char**) &scp->uc_mcontext->__ss.__lr;
   }
+
+# elif TARGET_OS_VERSION == NETBSD_VERSION
+
+  char** InterruptedContext::pc_addr() {
+    return (char**) &_UC_MACHINE_PC(scp);
+  }
+  int* InterruptedContext::sp_addr() {
+    return   (int*) &_UC_MACHINE_SP(scp);
+  }
+  char** InterruptedContext::lr_addr() {
+    return (char**) &scp->uc_mcontext.__gregs[_REG_LR];
+  }
+
 # endif
 
 char* InterruptedContext::lr() {
   return is_set() ? *lr_addr() : NULL;
 }
   
+# if TARGET_OS_VERSION == NETBSD_VERSION
+oop* InterruptedContext::R0_addr() {
+  return (oop*) &scp->uc_mcontext.__gregs[_REG_R0];
+}
+# else
 oop* InterruptedContext::R0_addr() {
   return (oop*) &scp->uc_mcontext->__ss.__r0;
 }
+# endif
 
 void InterruptedContext::print_registers() {
   InterruptedContext* ic = 
@@ -85,6 +104,12 @@ void InterruptedContext::print_registers() {
     lprintf("context is not set\n");
     return;
   }
+
+# if TARGET_OS_VERSION == NETBSD_VERSION
+  lprintf("XXX: TODO: %s\n", __PRETTY_FUNCTION__);
+  return;
+
+# else  // MacOS
   ppc_thread_state_t* ssp = &ic->scp->uc_mcontext->__ss;
   lprintf("srr0 (pc) = 0x%x\n", ssp->__srr0);
   lprintf("srr1      = 0x%x\n", ssp->__srr1);
@@ -99,6 +124,7 @@ void InterruptedContext::print_registers() {
     lprintf("r%-2d = 0x%08x  r%-2d = 0x%08x  r%-2d = 0x%08x  r%-2d = 0x%08x\n",
             i, p[i],  i+1, p[i+1],  i+2, p[i+2],  i+3,  p[i+3]);
   lprintf("\n\n");
+# endif
 }
 
 # endif // TARGET_ARCH == PPC_ARCH

@@ -1,4 +1,4 @@
-# ifdef __ppc__
+# if defined(__ppc__) || defined(__powerpc__)
 # if 0
 # skip when compiling with gcc
 ; // Sun-$Revision: 30.11 $

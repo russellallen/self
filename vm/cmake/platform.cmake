@@ -10,6 +10,14 @@ if(CMAKE_SYSTEM_PROCESSOR MATCHES "^Intel" OR
   set(TARGET_ARCH       "I386_ARCH")
   set(HOST_ARCH         "I386_ARCH")
   
+elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^powerpc" OR
+       CMAKE_SYSTEM_PROCESSOR MATCHES "^Power" OR
+       CMAKE_SYSTEM_PROCESSOR MATCHES "^ppc")
+    
+  set(platform_processor "ppc")
+  set(TARGET_ARCH       "PPC_ARCH")
+  set(HOST_ARCH         "PPC_ARCH")
+
 elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^sparc")
   
   set(platform_processor "sparc")
