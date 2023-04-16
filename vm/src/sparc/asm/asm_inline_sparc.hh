@@ -90,7 +90,7 @@
         printX(s, t);
         printf(", %s\n", RegisterNames[d]);
     }
-    if (t == OopOperand && !oop(s)->is_mem() || t == NumberOperand) {
+    if ((t == OopOperand && !oop(s)->is_mem()) || t == NumberOperand) {
       // don't need a location
     } else {
       addOffset(t, true);
@@ -104,7 +104,7 @@
       printX(s, t);
       printf(", %s\n", RegisterNames[d]);
     }
-    if (t == OopOperand && !oop(s)->is_mem() || t == NumberOperand) {
+    if ((t == OopOperand && !oop(s)->is_mem()) || t == NumberOperand) {
       // don't need a location
     } else {
       addOffset(t, true);
@@ -160,7 +160,7 @@
       printX(v, t, true);
       printf(", %s\n", RegisterNames[d]);
     }
-    if (t == OopOperand && !oop(s2)->is_mem() || t == NumberOperand ||
+    if ((t == OopOperand && !oop(s2)->is_mem()) || t == NumberOperand ||
         !noSetHi) {
       // don't need a location
     } else {
@@ -200,7 +200,7 @@
       printX(SIMM13(s2), t, true);
       printf("\n");
     }
-    if (t == OopOperand && !oop(s2)->is_mem() || t == NumberOperand ||
+    if ((t == OopOperand && !oop(s2)->is_mem()) || t == NumberOperand ||
         !noSetHi) {
       // don't need a location
     } else {

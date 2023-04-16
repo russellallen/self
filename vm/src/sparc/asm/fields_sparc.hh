@@ -102,11 +102,11 @@ inline Location getArithS1(int32* instp) {
 }
 
 inline int32 getArithImm(int32* instp) {
-  return (*instp & (1 << 12)  ?  -(1 << 13) : 0)   |  *instp & ((1 << 13) - 1);
+  return (*instp & (1 << 12)  ?  -(1 << 13) : 0)  | (*instp & ((1 << 13) - 1));
 }
 
 inline void setArithImm(int32* instp, int32 val) {
-  *instp = *instp & ~0xfff | val & 0x3ff;
+  *instp = (*instp & ~0xfff) | (val & 0x3ff);
   MachineCache::flush_instruction_cache_word(instp);
 }
 
@@ -115,7 +115,7 @@ inline int32 getSetHiImm(int32* instp) {
 }
 
 inline void setSetHiImm(int32* instp, int32 val) {
-  *instp = *instp & 0xffc00000 | uint32(val) >> 10;
+  *instp = (*instp & 0xffc00000) | (uint32(val) >> 10);
   MachineCache::flush_instruction_cache_word(instp);
 }
 
@@ -130,7 +130,7 @@ inline int32 getCallImm(int32* instp) {
 
 inline void  setCallImm(int32* instp, int32 val) {
   assert(isCall(instp), "not a call");
-  *instp = 0x40000000 | uint32(val) - uint32(instp) >> 2;
+  *instp = 0x40000000 | ((uint32(val) - uint32(instp)) >> 2);
   MachineCache::flush_instruction_cache_word(instp);
 }
 

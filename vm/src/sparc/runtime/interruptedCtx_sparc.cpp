@@ -75,10 +75,10 @@ void InterruptedContext::setupPreemptionFromSignal() {
     InterruptedContext::the_interrupted_context->must_be_in_self_thread();
   
     if (continuePC) fatal("recursive setSPLimit");
-    if ( the_interrupted_context->pc()      >= first_inst_addr( setSPLimitAndContinue )
-     &&  the_interrupted_context->pc()      <  first_inst_addr( setSPLimitAndContinueEnd )
-    ||   the_interrupted_context->next_pc() >= first_inst_addr( setSPLimitAndContinue )
-     &&  the_interrupted_context->next_pc() <  first_inst_addr( setSPLimitAndContinueEnd )) {
+    if ((the_interrupted_context->pc()      >= first_inst_addr( setSPLimitAndContinue )
+     &&  the_interrupted_context->pc()      <  first_inst_addr( setSPLimitAndContinueEnd ))
+    ||  (the_interrupted_context->next_pc() >= first_inst_addr( setSPLimitAndContinue )
+     &&  the_interrupted_context->next_pc() <  first_inst_addr( setSPLimitAndContinueEnd ))) {
       return;                   // already patched or just about to do it
     }
     newSPLimit = currentProcess->stackEnd();
