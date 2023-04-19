@@ -118,6 +118,8 @@ bool SignalInterface::is_map_load_signal(int sig) { return sig == SIGSEGV  || si
   bool SignalInterface::is_uplevel_trap(int code) { return code == ILL_TRAP_FAULT(ST_UpLevel); }
 # elif TARGET_OS_VERSION == MACOSX_VERSION
   bool SignalInterface::is_uplevel_trap(int code) { return code == ILL_ILLOPC; }
+# elif TARGET_OS_VERSION == NETBSD_VERSION && TARGET_ARCH == SPARC_ARCH
+  bool SignalInterface::is_uplevel_trap(int code) { return code == ILL_ILLTRP; }
 # else
   bool SignalInterface::is_uplevel_trap(int code) { fatal("unimp"); return false; }
 # endif
