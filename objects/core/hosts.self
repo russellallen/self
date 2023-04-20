@@ -124,11 +124,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          postFileIn = ( |
             | 
             host setOSDependentGlobals.
-            "host setGraphicsDependentGlobals won't work at fileIn"
+            "host setGraphicsDependentGlobals is set in modules allGraphcis"
             snapshotAction addPostReadMessage: (
               message copy receiver: host Selector: 'setOSDependentGlobals').
-            snapshotAction addPostReadMessage: (
-              message copy receiver: host Selector: 'setGraphicsDependentGlobals').
             resend.postFileIn).
         } | ) 
 
