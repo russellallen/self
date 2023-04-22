@@ -773,6 +773,13 @@ good for introducing language semantics, say.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'themes' -> 'base' -> () From: ( | {
+         'Category: colors\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         generalModelEditor = ( |
+            | bodyColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'themes' -> 'base' -> () From: ( | {
          'Category: colors\x7fCategory: menus\x7fModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
         
          generalModelMenuColor = paint copyRed: 0.942326 Green: 0.904203  Blue: 0.815249.
@@ -1286,6 +1293,13 @@ good for introducing language semantics, say.
         
          float = ( |
             | dark).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'themes' -> 'night' -> () From: ( | {
+         'ModuleInfo: Module: outlinerPreferences InitialContents: FollowSlot'
+        
+         generalModelEditor = ( |
+            | dull).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'outliner' -> 'themes' -> 'night' -> () From: ( | {

@@ -1,6 +1,6 @@
  '$Revision: 30.19 $'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -1602,6 +1602,13 @@ May cause me to expand if doExpand is true. -- dmu 10/04\x7fModuleInfo: Module: 
             | 
             "For non-pluggable outliner compatiblity"
             preferredBorderColor).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
+         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: FollowSlot'
+        
+         preferredEditorColor = ( |
+            | preferences outliner theme generalModelEditor).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
