@@ -88,10 +88,11 @@ void FrameIterator::do_vm_frame() {
        and let's zap 'em.
     */
     # if GENERATE_DEBUGGING_AIDS
-      if (CheckAssertions)
+      if (CheckAssertions) {
         for ( ;  r < BitsPerWord;  ++r )
           assert(!isSet(mask, r),
                 "mask says a word in callee reg args or aggr ret is live");
+      }
     # endif
     if (zap) {
       sparc_sp* sp = f->my_sp();

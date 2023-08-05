@@ -442,13 +442,14 @@ compare_opcodes (char* a, char* b)
   /* Except for aliases, two "identical" instructions had
      better have the same opcode.  This is a sanity check on the table.  */
   i = strcmp (op0->name, op1->name);
-  if (i)
+  if (i) {
       if (op0->flags & F_ALIAS) /* If they're both aliases, be arbitrary. */
           return i;
       else
           fprintf (stderr,
                    "Internal error: bad sparc-opcode.h: \"%s\" == \"%s\"\n",
                    op0->name, op1->name);
+  }
 
   /* Fewer arguments are preferred.  */
   {

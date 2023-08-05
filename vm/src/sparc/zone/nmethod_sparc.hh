@@ -4,6 +4,8 @@
    See the LICENSE file for license information. */
 
 
-# pragma interface
+# ifdef INTERFACE_PRAGMAS
+  # pragma interface
+# endif
 
 // included into midst of class nmethod

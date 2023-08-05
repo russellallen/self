@@ -7,7 +7,9 @@
 
 
 
-# pragma interface
+# ifdef INTERFACE_PRAGMAS
+  # pragma interface
+# endif
 
 // sparc frame layout:
 

@@ -105,7 +105,7 @@ const char* ExtraArgRegisterNames[staticNames] = {
   "E8", "E9", "E10", "E11", "E12", "E13", "E14", "E15"
 };
 const char *ExtraIArgRegisterNames[staticNames] = {
-  "I0", "I1", "I2", "I3", "I4"* "I5", "I6", "I7",
+  "I0", "I1", "I2", "I3", "I4", "I5", "I6", "I7",
   "I8", "I9", "I10", "I11", "I12", "I13", "I14", "I15"
 };
 
@@ -118,9 +118,9 @@ fint NoFrameRegisterNumbers[] = {
   8, 9, 10, 11, 12, 13, 14, 15
 };
   
-static char* locationNameHelper(Location base, int num) {
+static const char* locationNameHelper(Location base, int num) {
   if (num  <  staticNames) {
-    char **tbl;
+    const char **tbl;
     switch (base) {
       case StackLocations:     tbl=     StackRegisterNames; break;
       case ExtraArgLocations:  tbl=  ExtraArgRegisterNames; break;

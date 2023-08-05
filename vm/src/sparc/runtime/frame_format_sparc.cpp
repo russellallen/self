@@ -13,8 +13,8 @@
 int32 fpOffset(Location reg, fint frameSize) {
   // return offset (in bytes) off of fp
     if (isRegister(reg)) {
-      assert(reg >= I0 && reg < I0 + NumInRegisters ||
-             reg >= L0 && reg < L0 + NumLocalRegisters,
+      assert((reg >= I0 && reg < I0 + NumInRegisters) ||
+             (reg >= L0 && reg < L0 + NumLocalRegisters),
              "can't access this register");
       return ((first_register_offset - StackFromRegister[reg]) - frameSize)
              * oopSize;
@@ -26,8 +26,8 @@ int32 fpOffset(Location reg, fint frameSize) {
 
 bool isInFrame(Location l) {
   return !isRegister(l)
-       || l >= I0 && l < I0 + NumInRegisters
-       || l >= L0 && l < L0 + NumLocalRegisters;
+       || (l >= I0 && l < I0 + NumInRegisters)
+       || (l >= L0 && l < L0 + NumLocalRegisters);
 }
 
 

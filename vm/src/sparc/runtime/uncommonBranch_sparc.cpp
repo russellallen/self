@@ -90,7 +90,8 @@ void handleMapLoadTrap(InterruptedContext* c) {
         }
       }
     }
-    # if  TARGET_OS_VERSION == SOLARIS_VERSION
+    # if  TARGET_OS_VERSION == SOLARIS_VERSION \
+      ||  TARGET_OS_VERSION == NETBSD_VERSION
         // simply set the destination register and continue
         c->set_reg(dest, resultMap);
         c->set_pc(c->next_pc());
