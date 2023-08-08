@@ -11,7 +11,7 @@
 
 // increment VM_snapshot_version whenever old snapshots will break; reset
 // it to zero when changing the minor or major version
-smi VM_major_version    = 2017;
+smi VM_major_version    = 2023;
 smi VM_minor_version    = 1;
 smi VM_snapshot_version = 13;
 

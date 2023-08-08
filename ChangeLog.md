@@ -1,12 +1,23 @@
-Changes in Development
+Changes in Self 23.01
 ----------------------
 
-Updates:
+Deprecated:
+
+ * MacOS port (32 bit no longer works on MacOS since Catalina in 2019)
+ * travis-ci.org for CI
+
+VM:
+
+ * Thanks to nbuwe, we now build on NetBSD and FreeBSD (x86)
+
+Self:
 
  * Made Morphic more responsive at cost of some CPU usage
  * More usable `sliderMorph`
  * New `copyTransparent` method on morphs allowing simplification of intialisation code
  * New preference to swap mouse buttons on Linux
+ * A new `StationMorph` to help navigate around the Kansas desktop
+ * New facilty to scroll around Kansas, and to assist on platforms with only one mouse button (or pen)
 
 Fixes:
 

@@ -9,9 +9,9 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
-         'Category: versions\x7fModuleInfo: Module: coreVersion InitialContents: InitializeToExpression: (nil)'
+         'Category: versions\x7fModuleInfo: Module: coreVersion InitialContents: InitializeToExpression: (about systemVersion copyOn: \'2023.1/3\')'
         
-         core.
+         core <- about systemVersion copyOn: '2023.1/3'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
