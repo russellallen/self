@@ -18,6 +18,8 @@ Self:
  * New preference to swap mouse buttons on Linux
  * A new `StationMorph` to help navigate around the Kansas desktop
  * New facilty to scroll around Kansas, and to assist on platforms with only one mouse button (or pen)
+ * New flag: `--runAutomaticTest` to run a suite of tests when building image (then `_Quit`)
+ * New Flag: `--snapshotActionPostRead` to run `snapshotAction postRead` instead of `scheduler start` on a newly build image (to handle command lines)
 
 Fixes:
 
