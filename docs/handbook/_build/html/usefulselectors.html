@@ -1,1154 +1,1495 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!DOCTYPE html>
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" >
+
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>10.5. Useful Selectors &#8212; Self Handbook for Self 2017.1 documentation</title>
-    
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     'for Self 2017.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>10.5. Useful Selectors &#8212; Self Handbook 2023.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e46715c6"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'usefulselectors';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="10.6. Every Menu Item in the Programming Environment" href="menus.html" />
     <link rel="prev" title="10.4. Built-in types" href="builtintypes.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body role="document">
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
   
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Self Handbook 2023.1 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="intro.html">
+                        Introduction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="gettingstarted.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="langref.html">
+                        Language Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="selfwrld.html">
+                        The Self World
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="progguid.html">
+                        A Guide to Programming Style
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="howtoprg.html">
+                        How to Program in Self
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="morphic.html">
+                        Morphic: The Self User Interface Framework
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="vmref.html">
+                        Virtual Machine Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="ref.html">
+                        References
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="appendices.html">
+                        Appendices
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="extras.html">
+                        Extras
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
             
-  <div class="section" id="useful-selectors">
-<h1>10.5. Useful Selectors<a class="headerlink" href="#useful-selectors" title="Permalink to this headline">¶</a></h1>
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="intro.html">
+                        Introduction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="gettingstarted.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="langref.html">
+                        Language Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="selfwrld.html">
+                        The Self World
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="progguid.html">
+                        A Guide to Programming Style
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="howtoprg.html">
+                        How to Program in Self
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="morphic.html">
+                        Morphic: The Self User Interface Framework
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="vmref.html">
+                        Virtual Machine Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="ref.html">
+                        References
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="appendices.html">
+                        Appendices
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="extras.html">
+                        Extras
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">10.1. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lexicaloverview.html">10.2. Lexical overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="syntaxoverview.html">10.3. Syntax overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="builtintypes.html">10.4. Built-in types</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10.5. Useful Selectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="menus.html">10.6. Every Menu Item in the Programming Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitor.html">10.7. The system monitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives.html">10.8. Primitives</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="appendices.html" class="nav-link"><span class="section-number">10. </span>Appendices</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="section-number">10.5. </span>Useful Selectors</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="useful-selectors">
+<h1><span class="section-number">10.5. </span>Useful Selectors<a class="headerlink" href="#useful-selectors" title="Permalink to this heading">#</a></h1>
 <p>This is a list of selectors which Selfers should find useful as a starting point.</p>
-<div class="section" id="copying">
-<h2>10.5.1. Copying<a class="headerlink" href="#copying" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils">
-<colgroup>
-<col width="11%" />
-<col width="89%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>clone</td>
-<td>shallow copy (for use within an object; clients should use copy)</td>
+<section id="copying">
+<h2><span class="section-number">10.5.1. </span>Copying<a class="headerlink" href="#copying" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>clone</p></td>
+<td><p>shallow copy (for use within an object; clients should use copy)</p></td>
 </tr>
-<tr class="row-even"><td>copy</td>
-<td>copy the receiver, possibly with embedded copies or initialization</td>
+<tr class="row-even"><td><p>copy</p></td>
+<td><p>copy the receiver, possibly with embedded copies or initialization</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="comparing">
-<h2>10.5.2. Comparing<a class="headerlink" href="#comparing" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="equality">
-<h3>10.5.2.1. Equality<a class="headerlink" href="#equality" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="18%" />
-<col width="82%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>=</td>
-<td>equal</td>
+</section>
+<section id="comparing">
+<h2><span class="section-number">10.5.2. </span>Comparing<a class="headerlink" href="#comparing" title="Permalink to this heading">#</a></h2>
+<section id="equality">
+<h3><span class="section-number">10.5.2.1. </span>Equality<a class="headerlink" href="#equality" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>=</p></td>
+<td><p>equal</p></td>
 </tr>
-<tr class="row-even"><td>!=</td>
-<td>not equal</td>
+<tr class="row-even"><td><p>!=</p></td>
+<td><p>not equal</p></td>
 </tr>
-<tr class="row-odd"><td>hash</td>
-<td>hash value</td>
+<tr class="row-odd"><td><p>hash</p></td>
+<td><p>hash value</p></td>
 </tr>
-<tr class="row-even"><td>==</td>
-<td>identical (the same object; this is reflective and should be avoided)</td>
+<tr class="row-even"><td><p>==</p></td>
+<td><p>identical (the same object; this is reflective and should be avoided)</p></td>
 </tr>
-<tr class="row-odd"><td>!==</td>
-<td>not identical</td>
+<tr class="row-odd"><td><p>!==</p></td>
+<td><p>not identical</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="ordered">
-<h3>10.5.2.2. Ordered<a class="headerlink" href="#ordered" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="54%" />
-<col width="46%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>&lt;</td>
-<td>less than</td>
+</section>
+<section id="ordered">
+<h3><span class="section-number">10.5.2.2. </span>Ordered<a class="headerlink" href="#ordered" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>&lt;</p></td>
+<td><p>less than</p></td>
 </tr>
-<tr class="row-even"><td>&gt;</td>
-<td>greater than</td>
+<tr class="row-even"><td><p>&gt;</p></td>
+<td><p>greater than</p></td>
 </tr>
-<tr class="row-odd"><td>&lt;=</td>
-<td>less than or equal</td>
+<tr class="row-odd"><td><p>&lt;=</p></td>
+<td><p>less than or equal</p></td>
 </tr>
-<tr class="row-even"><td>&gt;=</td>
-<td>greater than or equal</td>
+<tr class="row-even"><td><p>&gt;=</p></td>
+<td><p>greater than or equal</p></td>
 </tr>
-<tr class="row-odd"><td>compare: IfLess: Equal: Greater:</td>
-<td>three way comparison</td>
+<tr class="row-odd"><td><p>compare: IfLess: Equal: Greater:</p></td>
+<td><p>three way comparison</p></td>
 </tr>
-<tr class="row-even"><td>compare: IfLess: Equal: Greater: Incomparable:</td>
-<td>three way comparison with failure</td>
+<tr class="row-even"><td><p>compare: IfLess: Equal: Greater: Incomparable:</p></td>
+<td><p>three way comparison with failure</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="numeric-operations">
-<h2>10.5.3. Numeric operations<a class="headerlink" href="#numeric-operations" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils">
-<colgroup>
-<col width="21%" />
-<col width="79%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>+</td>
-<td>add</td>
+</section>
+</section>
+<section id="numeric-operations">
+<h2><span class="section-number">10.5.3. </span>Numeric operations<a class="headerlink" href="#numeric-operations" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>+</p></td>
+<td><p>add</p></td>
 </tr>
-<tr class="row-even"><td>-</td>
-<td>subtract</td>
+<tr class="row-even"><td><p>-</p></td>
+<td><p>subtract</p></td>
 </tr>
-<tr class="row-odd"><td>*</td>
-<td>multiply</td>
+<tr class="row-odd"><td><p>*</p></td>
+<td><p>multiply</p></td>
 </tr>
-<tr class="row-even"><td>/</td>
-<td>divide</td>
+<tr class="row-even"><td><p>/</p></td>
+<td><p>divide</p></td>
 </tr>
-<tr class="row-odd"><td>/=</td>
-<td>divide exactly (returns float)</td>
+<tr class="row-odd"><td><p>/=</p></td>
+<td><p>divide exactly (returns float)</p></td>
 </tr>
-<tr class="row-even"><td>/~</td>
-<td>divide and round to integer (tends to round up)</td>
+<tr class="row-even"><td><p>/~</p></td>
+<td><p>divide and round to integer (tends to round up)</p></td>
 </tr>
-<tr class="row-odd"><td>/+</td>
-<td>divide and round up to integer</td>
+<tr class="row-odd"><td><p>/+</p></td>
+<td><p>divide and round up to integer</p></td>
 </tr>
-<tr class="row-even"><td>/-%</td>
-<td>divide and round down to integer modulus</td>
+<tr class="row-even"><td><p>/-%</p></td>
+<td><p>divide and round down to integer modulus</p></td>
 </tr>
-<tr class="row-odd"><td>absoluteValue</td>
-<td>absolute value</td>
+<tr class="row-odd"><td><p>absoluteValue</p></td>
+<td><p>absolute value</p></td>
 </tr>
-<tr class="row-even"><td>inverse</td>
-<td>multiplicative inverse</td>
+<tr class="row-even"><td><p>inverse</p></td>
+<td><p>multiplicative inverse</p></td>
 </tr>
-<tr class="row-odd"><td>negate</td>
-<td>additive inverse</td>
+<tr class="row-odd"><td><p>negate</p></td>
+<td><p>additive inverse</p></td>
 </tr>
-<tr class="row-even"><td>ceil</td>
-<td>round towards positive infinity</td>
+<tr class="row-even"><td><p>ceil</p></td>
+<td><p>round towards positive infinity</p></td>
 </tr>
-<tr class="row-odd"><td>floor</td>
-<td>round towards negative infinity</td>
+<tr class="row-odd"><td><p>floor</p></td>
+<td><p>round towards negative infinity</p></td>
 </tr>
-<tr class="row-even"><td>truncate</td>
-<td>truncate towards zero</td>
+<tr class="row-even"><td><p>truncate</p></td>
+<td><p>truncate towards zero</p></td>
 </tr>
-<tr class="row-odd"><td>round</td>
-<td>round</td>
+<tr class="row-odd"><td><p>round</p></td>
+<td><p>round</p></td>
 </tr>
-<tr class="row-even"><td>asFloat</td>
-<td>coerce to float</td>
+<tr class="row-even"><td><p>asFloat</p></td>
+<td><p>coerce to float</p></td>
 </tr>
-<tr class="row-odd"><td>asInteger</td>
-<td>coerce to integer</td>
+<tr class="row-odd"><td><p>asInteger</p></td>
+<td><p>coerce to integer</p></td>
 </tr>
-<tr class="row-even"><td>double</td>
-<td>multiply by two</td>
+<tr class="row-even"><td><p>double</p></td>
+<td><p>multiply by two</p></td>
 </tr>
-<tr class="row-odd"><td>quadruple</td>
-<td>multiply by four</td>
+<tr class="row-odd"><td><p>quadruple</p></td>
+<td><p>multiply by four</p></td>
 </tr>
-<tr class="row-even"><td>half</td>
-<td>divide by two</td>
+<tr class="row-even"><td><p>half</p></td>
+<td><p>divide by two</p></td>
 </tr>
-<tr class="row-odd"><td>quarter</td>
-<td>divide by four</td>
+<tr class="row-odd"><td><p>quarter</p></td>
+<td><p>divide by four</p></td>
 </tr>
-<tr class="row-even"><td>min:</td>
-<td>minimum of receiver and argument</td>
+<tr class="row-even"><td><p>min:</p></td>
+<td><p>minimum of receiver and argument</p></td>
 </tr>
-<tr class="row-odd"><td>max:</td>
-<td>maximum of receiver and argument</td>
+<tr class="row-odd"><td><p>max:</p></td>
+<td><p>maximum of receiver and argument</p></td>
 </tr>
-<tr class="row-even"><td>mean:</td>
-<td>mean of receiver and argument</td>
+<tr class="row-even"><td><p>mean:</p></td>
+<td><p>mean of receiver and argument</p></td>
 </tr>
-<tr class="row-odd"><td>pred</td>
-<td>predecessor</td>
+<tr class="row-odd"><td><p>pred</p></td>
+<td><p>predecessor</p></td>
 </tr>
-<tr class="row-even"><td>predecessor</td>
-<td>predecessor</td>
+<tr class="row-even"><td><p>predecessor</p></td>
+<td><p>predecessor</p></td>
 </tr>
-<tr class="row-odd"><td>succ</td>
-<td>successor</td>
+<tr class="row-odd"><td><p>succ</p></td>
+<td><p>successor</p></td>
 </tr>
-<tr class="row-even"><td>successor</td>
-<td>successor</td>
+<tr class="row-even"><td><p>successor</p></td>
+<td><p>successor</p></td>
 </tr>
-<tr class="row-odd"><td>power:</td>
-<td>raise receiver to integer power</td>
+<tr class="row-odd"><td><p>power:</p></td>
+<td><p>raise receiver to integer power</p></td>
 </tr>
-<tr class="row-even"><td>log:</td>
-<td>logarithm of argument base receiver, rounded down to integer</td>
+<tr class="row-even"><td><p>log:</p></td>
+<td><p>logarithm of argument base receiver, rounded down to integer</p></td>
 </tr>
-<tr class="row-odd"><td>square</td>
-<td>square</td>
+<tr class="row-odd"><td><p>square</p></td>
+<td><p>square</p></td>
 </tr>
-<tr class="row-even"><td>squareRoot</td>
-<td>square root</td>
+<tr class="row-even"><td><p>squareRoot</p></td>
+<td><p>square root</p></td>
 </tr>
-<tr class="row-odd"><td>factorial</td>
-<td>factorial</td>
+<tr class="row-odd"><td><p>factorial</p></td>
+<td><p>factorial</p></td>
 </tr>
-<tr class="row-even"><td>fibonacci</td>
-<td>fibonacci</td>
+<tr class="row-even"><td><p>fibonacci</p></td>
+<td><p>fibonacci</p></td>
 </tr>
-<tr class="row-odd"><td>sign</td>
-<td>signum (-1, 0, 1)</td>
+<tr class="row-odd"><td><p>sign</p></td>
+<td><p>signum (-1, 0, 1)</p></td>
 </tr>
-<tr class="row-even"><td>even</td>
-<td>true if receiver is even</td>
+<tr class="row-even"><td><p>even</p></td>
+<td><p>true if receiver is even</p></td>
 </tr>
-<tr class="row-odd"><td>odd</td>
-<td>true if receiver is odd</td>
+<tr class="row-odd"><td><p>odd</p></td>
+<td><p>true if receiver is odd</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="bitwise-operations-integers">
-<h2>10.5.4. Bitwise operations (integers)<a class="headerlink" href="#bitwise-operations-integers" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils">
-<colgroup>
-<col width="29%" />
-<col width="71%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>&amp;&amp;</td>
-<td>and</td>
+</section>
+<section id="bitwise-operations-integers">
+<h2><span class="section-number">10.5.4. </span>Bitwise operations (integers)<a class="headerlink" href="#bitwise-operations-integers" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>&amp;&amp;</p></td>
+<td><p>and</p></td>
 </tr>
-<tr class="row-even"><td>||</td>
-<td>or</td>
+<tr class="row-even"><td><p>||</p></td>
+<td><p>or</p></td>
 </tr>
-<tr class="row-odd"><td>^^</td>
-<td>xor</td>
+<tr class="row-odd"><td><p>^^</p></td>
+<td><p>xor</p></td>
 </tr>
-<tr class="row-even"><td>complement</td>
-<td>bitwise complement</td>
+<tr class="row-even"><td><p>complement</p></td>
+<td><p>bitwise complement</p></td>
 </tr>
-<tr class="row-odd"><td>&lt;&lt;</td>
-<td>logical left shift</td>
+<tr class="row-odd"><td><p>&lt;&lt;</p></td>
+<td><p>logical left shift</p></td>
 </tr>
-<tr class="row-even"><td>&gt;&gt;</td>
-<td>logical right shift</td>
+<tr class="row-even"><td><p>&gt;&gt;</p></td>
+<td><p>logical right shift</p></td>
 </tr>
-<tr class="row-odd"><td>&lt;+</td>
-<td>arithmetic left shift</td>
+<tr class="row-odd"><td><p>&lt;+</p></td>
+<td><p>arithmetic left shift</p></td>
 </tr>
-<tr class="row-even"><td>+&gt;</td>
-<td>arithmetic right shift</td>
+<tr class="row-even"><td><p>+&gt;</p></td>
+<td><p>arithmetic right shift</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="logical-operations-booleans">
-<h2>10.5.5. Logical operations (booleans)<a class="headerlink" href="#logical-operations-booleans" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils">
-<colgroup>
-<col width="27%" />
-<col width="73%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>&amp;&amp;</td>
-<td>and</td>
+</section>
+<section id="logical-operations-booleans">
+<h2><span class="section-number">10.5.5. </span>Logical operations (booleans)<a class="headerlink" href="#logical-operations-booleans" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>&amp;&amp;</p></td>
+<td><p>and</p></td>
 </tr>
-<tr class="row-even"><td>||</td>
-<td>or</td>
+<tr class="row-even"><td><p>||</p></td>
+<td><p>or</p></td>
 </tr>
-<tr class="row-odd"><td>^^</td>
-<td>xor</td>
+<tr class="row-odd"><td><p>^^</p></td>
+<td><p>xor</p></td>
 </tr>
-<tr class="row-even"><td>not</td>
-<td>logical complement</td>
+<tr class="row-even"><td><p>not</p></td>
+<td><p>logical complement</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="constructing">
-<h2>10.5.6. Constructing<a class="headerlink" href="#constructing" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils">
-<colgroup>
-<col width="19%" />
-<col width="81%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>&#64;</td>
-<td>point construction (receiver and argument are integers)</td>
+</section>
+<section id="constructing">
+<h2><span class="section-number">10.5.6. </span>Constructing<a class="headerlink" href="#constructing" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>&#64;</p></td>
+<td><p>point construction (receiver and argument are integers)</p></td>
 </tr>
-<tr class="row-even"><td>#</td>
-<td>rectangle construction (receiver and argument are points)</td>
+<tr class="row-even"><td><p>#</p></td>
+<td><p>rectangle construction (receiver and argument are points)</p></td>
 </tr>
-<tr class="row-odd"><td>##</td>
-<td>rectangle construction (receiver is a point, argument is an extent)</td>
+<tr class="row-odd"><td><p>##</p></td>
+<td><p>rectangle construction (receiver is a point, argument is an extent)</p></td>
 </tr>
-<tr class="row-even"><td>&amp;</td>
-<td>collection construction (result can be converted into collection)</td>
+<tr class="row-even"><td><p>&amp;</p></td>
+<td><p>collection construction (result can be converted into collection)</p></td>
 </tr>
-<tr class="row-odd"><td>,</td>
-<td>concatenation</td>
+<tr class="row-odd"><td><p>,</p></td>
+<td><p>concatenation</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="printing">
-<h2>10.5.7. Printing<a class="headerlink" href="#printing" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils">
-<colgroup>
-<col width="24%" />
-<col width="76%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>print</td>
-<td>print object on stdout</td>
+</section>
+<section id="printing">
+<h2><span class="section-number">10.5.7. </span>Printing<a class="headerlink" href="#printing" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>print</p></td>
+<td><p>print object on stdout</p></td>
 </tr>
-<tr class="row-even"><td>printLine</td>
-<td>print object on stdout with trailing newline</td>
+<tr class="row-even"><td><p>printLine</p></td>
+<td><p>print object on stdout with trailing newline</p></td>
 </tr>
-<tr class="row-odd"><td>printString</td>
-<td>return a string label</td>
+<tr class="row-odd"><td><p>printString</p></td>
+<td><p>return a string label</p></td>
 </tr>
-<tr class="row-even"><td>printStringDepth:</td>
-<td>return a string label with depth limitation request</td>
+<tr class="row-even"><td><p>printStringDepth:</p></td>
+<td><p>return a string label with depth limitation request</p></td>
 </tr>
-<tr class="row-odd"><td>printStringSize:</td>
-<td>return a string label with number of characters limitation request</td>
+<tr class="row-odd"><td><p>printStringSize:</p></td>
+<td><p>return a string label with number of characters limitation request</p></td>
 </tr>
-<tr class="row-even"><td>printStringSize: Depth:</td>
-<td>return a string label with depth and size limitation request</td>
+<tr class="row-even"><td><p>printStringSize: Depth:</p></td>
+<td><p>return a string label with depth and size limitation request</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="control">
-<h2>10.5.8. Control<a class="headerlink" href="#control" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="block-evaluation">
-<h3>10.5.8.1. Block evaluation<a class="headerlink" href="#block-evaluation" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="19%" />
-<col width="81%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>value[: {With: }]</td>
-<td>evaluate a block, passing arguments</td>
+</section>
+<section id="control">
+<h2><span class="section-number">10.5.8. </span>Control<a class="headerlink" href="#control" title="Permalink to this heading">#</a></h2>
+<section id="block-evaluation">
+<h3><span class="section-number">10.5.8.1. </span>Block evaluation<a class="headerlink" href="#block-evaluation" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>value[: {With: }]</p></td>
+<td><p>evaluate a block, passing arguments</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="selection">
-<h3>10.5.8.2. Selection<a class="headerlink" href="#selection" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="19%" />
-<col width="81%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>ifTrue:</td>
-<td>evaluate argument if receiver is true</td>
+</section>
+<section id="selection">
+<h3><span class="section-number">10.5.8.2. </span>Selection<a class="headerlink" href="#selection" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>ifTrue:</p></td>
+<td><p>evaluate argument if receiver is true</p></td>
 </tr>
-<tr class="row-even"><td>ifFalse:</td>
-<td>evaluate argument if receiver is false</td>
+<tr class="row-even"><td><p>ifFalse:</p></td>
+<td><p>evaluate argument if receiver is false</p></td>
 </tr>
-<tr class="row-odd"><td>ifTrue: False:</td>
-<td>evaluate first arg if true, second arg if false</td>
+<tr class="row-odd"><td><p>ifTrue: False:</p></td>
+<td><p>evaluate first arg if true, second arg if false</p></td>
 </tr>
-<tr class="row-even"><td>ifFalse: True:</td>
-<td>evaluate first arg if false, second arg if true</td>
+<tr class="row-even"><td><p>ifFalse: True:</p></td>
+<td><p>evaluate first arg if false, second arg if true</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="local-exiting">
-<h3>10.5.8.3. Local exiting<a class="headerlink" href="#local-exiting" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="19%" />
-<col width="81%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>exit</td>
-<td>exit block and return nil if block’s argument is evaluated</td>
+</section>
+<section id="local-exiting">
+<h3><span class="section-number">10.5.8.3. </span>Local exiting<a class="headerlink" href="#local-exiting" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>exit</p></td>
+<td><p>exit block and return nil if block’s argument is evaluated</p></td>
 </tr>
-<tr class="row-even"><td>exitValue</td>
-<td>exit block and return a value if block’s argument is evaluated</td>
+<tr class="row-even"><td><p>exitValue</p></td>
+<td><p>exit block and return a value if block’s argument is evaluated</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="basic-looping">
-<h3>10.5.8.4. Basic looping<a class="headerlink" href="#basic-looping" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="19%" />
-<col width="81%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>loop</td>
-<td>repeat the block forever</td>
+</section>
+<section id="basic-looping">
+<h3><span class="section-number">10.5.8.4. </span>Basic looping<a class="headerlink" href="#basic-looping" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>loop</p></td>
+<td><p>repeat the block forever</p></td>
 </tr>
-<tr class="row-even"><td>loopExit</td>
-<td>repeat the block until argument is evaluated; then exit and return nil</td>
+<tr class="row-even"><td><p>loopExit</p></td>
+<td><p>repeat the block until argument is evaluated; then exit and return nil</p></td>
 </tr>
-<tr class="row-odd"><td>loopExitValue</td>
-<td>repeat the block until argument is evaluated; then exit and return a value</td>
+<tr class="row-odd"><td><p>loopExitValue</p></td>
+<td><p>repeat the block until argument is evaluated; then exit and return a value</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="pre-test-looping">
-<h3>10.5.8.5. Pre-test looping<a class="headerlink" href="#pre-test-looping" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="19%" />
-<col width="81%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>whileTrue</td>
-<td>repeat the receiver until it evaluates to true</td>
+</section>
+<section id="pre-test-looping">
+<h3><span class="section-number">10.5.8.5. </span>Pre-test looping<a class="headerlink" href="#pre-test-looping" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>whileTrue</p></td>
+<td><p>repeat the receiver until it evaluates to true</p></td>
 </tr>
-<tr class="row-even"><td>whileFalse</td>
-<td>repeat the receiver until it evaluates to false</td>
+<tr class="row-even"><td><p>whileFalse</p></td>
+<td><p>repeat the receiver until it evaluates to false</p></td>
 </tr>
-<tr class="row-odd"><td>whileTrue:</td>
-<td>repeat the receiver and argument until receiver evaluates to true</td>
+<tr class="row-odd"><td><p>whileTrue:</p></td>
+<td><p>repeat the receiver and argument until receiver evaluates to true</p></td>
 </tr>
-<tr class="row-even"><td>whileFalse:</td>
-<td>repeat the receiver and argument until receiver evaluates to false</td>
+<tr class="row-even"><td><p>whileFalse:</p></td>
+<td><p>repeat the receiver and argument until receiver evaluates to false</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="post-test-looping">
-<h3>10.5.8.6. Post-test looping<a class="headerlink" href="#post-test-looping" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="19%" />
-<col width="81%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>untilTrue:</td>
-<td>repeat the receiver and argument until argument evaluates to true</td>
+</section>
+<section id="post-test-looping">
+<h3><span class="section-number">10.5.8.6. </span>Post-test looping<a class="headerlink" href="#post-test-looping" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>untilTrue:</p></td>
+<td><p>repeat the receiver and argument until argument evaluates to true</p></td>
 </tr>
-<tr class="row-even"><td>untilFalse:</td>
-<td>repeat the receiver and argument until argument evaluates to false</td>
+<tr class="row-even"><td><p>untilFalse:</p></td>
+<td><p>repeat the receiver and argument until argument evaluates to false</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="iterators">
-<h3>10.5.8.7. Iterators<a class="headerlink" href="#iterators" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="19%" />
-<col width="81%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>do:</td>
-<td>iterate, passing each element to the argument block</td>
+</section>
+<section id="iterators">
+<h3><span class="section-number">10.5.8.7. </span>Iterators<a class="headerlink" href="#iterators" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>do:</p></td>
+<td><p>iterate, passing each element to the argument block</p></td>
 </tr>
-<tr class="row-even"><td>to: By: Do:</td>
-<td>iterate, with stepping</td>
+<tr class="row-even"><td><p>to: By: Do:</p></td>
+<td><p>iterate, with stepping</p></td>
 </tr>
-<tr class="row-odd"><td>to: Do:</td>
-<td>iterate forward</td>
+<tr class="row-odd"><td><p>to: Do:</p></td>
+<td><p>iterate forward</p></td>
 </tr>
-<tr class="row-even"><td>upTo: By: Do:</td>
-<td>iterate forward, without last element, with stepping</td>
+<tr class="row-even"><td><p>upTo: By: Do:</p></td>
+<td><p>iterate forward, without last element, with stepping</p></td>
 </tr>
-<tr class="row-odd"><td>upTo: Do:</td>
-<td>iterate forward, without last element</td>
+<tr class="row-odd"><td><p>upTo: Do:</p></td>
+<td><p>iterate forward, without last element</p></td>
 </tr>
-<tr class="row-even"><td>downTo: By: Do:</td>
-<td>reverse iterate, with stepping</td>
+<tr class="row-even"><td><p>downTo: By: Do:</p></td>
+<td><p>reverse iterate, with stepping</p></td>
 </tr>
-<tr class="row-odd"><td>downTo: Do:</td>
-<td>reverse iterate</td>
+<tr class="row-odd"><td><p>downTo: Do:</p></td>
+<td><p>reverse iterate</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="collections">
-<h2>10.5.9. Collections<a class="headerlink" href="#collections" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="sizing">
-<h3>10.5.9.1. Sizing<a class="headerlink" href="#sizing" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="18%" />
-<col width="82%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>isEmpty</td>
-<td>test if collection is empty</td>
+</section>
+</section>
+<section id="collections">
+<h2><span class="section-number">10.5.9. </span>Collections<a class="headerlink" href="#collections" title="Permalink to this heading">#</a></h2>
+<section id="sizing">
+<h3><span class="section-number">10.5.9.1. </span>Sizing<a class="headerlink" href="#sizing" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>isEmpty</p></td>
+<td><p>test if collection is empty</p></td>
 </tr>
-<tr class="row-even"><td>size</td>
-<td>return number of elements in collection</td>
+<tr class="row-even"><td><p>size</p></td>
+<td><p>return number of elements in collection</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="adding">
-<h3>10.5.9.2. Adding<a class="headerlink" href="#adding" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="22%" />
-<col width="78%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>add:</td>
-<td>add argument element to collection receiver</td>
+</section>
+<section id="adding">
+<h3><span class="section-number">10.5.9.2. </span>Adding<a class="headerlink" href="#adding" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>add:</p></td>
+<td><p>add argument element to collection receiver</p></td>
 </tr>
-<tr class="row-even"><td>addAll:</td>
-<td>add all elements of argument to receiver</td>
+<tr class="row-even"><td><p>addAll:</p></td>
+<td><p>add all elements of argument to receiver</p></td>
 </tr>
-<tr class="row-odd"><td>at: Put:</td>
-<td>add key-value pair</td>
+<tr class="row-odd"><td><p>at: Put:</p></td>
+<td><p>add key-value pair</p></td>
 </tr>
-<tr class="row-even"><td>at: Put: IfAbsent:</td>
-<td>add key-value pair, evaluating block if key is absent</td>
+<tr class="row-even"><td><p>at: Put: IfAbsent:</p></td>
+<td><p>add key-value pair, evaluating block if key is absent</p></td>
 </tr>
-<tr class="row-odd"><td>addFirst:</td>
-<td>add element to head of list</td>
+<tr class="row-odd"><td><p>addFirst:</p></td>
+<td><p>add element to head of list</p></td>
 </tr>
-<tr class="row-even"><td>addLast:</td>
-<td>add element to tail of list</td>
+<tr class="row-even"><td><p>addLast:</p></td>
+<td><p>add element to tail of list</p></td>
 </tr>
-<tr class="row-odd"><td>copyAddAll:</td>
-<td>return a copy containing the elements of both receiver and argument</td>
+<tr class="row-odd"><td><p>copyAddAll:</p></td>
+<td><p>return a copy containing the elements of both receiver and argument</p></td>
 </tr>
-<tr class="row-even"><td>copyContaining:</td>
-<td>return a copy containing only the elements of the argument</td>
+<tr class="row-even"><td><p>copyContaining:</p></td>
+<td><p>return a copy containing only the elements of the argument</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="removing">
-<h3>10.5.9.3. Removing<a class="headerlink" href="#removing" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="22%" />
-<col width="78%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>remove:</td>
-<td>remove the given element</td>
+</section>
+<section id="removing">
+<h3><span class="section-number">10.5.9.3. </span>Removing<a class="headerlink" href="#removing" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>remove:</p></td>
+<td><p>remove the given element</p></td>
 </tr>
-<tr class="row-even"><td>remove: IfAbsent:</td>
-<td>remove the given element, evaluating block if absent</td>
+<tr class="row-even"><td><p>remove: IfAbsent:</p></td>
+<td><p>remove the given element, evaluating block if absent</p></td>
 </tr>
-<tr class="row-odd"><td>removeAll</td>
-<td>remove all elements</td>
+<tr class="row-odd"><td><p>removeAll</p></td>
+<td><p>remove all elements</p></td>
 </tr>
-<tr class="row-even"><td>removeFirst</td>
-<td>remove first element from list</td>
+<tr class="row-even"><td><p>removeFirst</p></td>
+<td><p>remove first element from list</p></td>
 </tr>
-<tr class="row-odd"><td>removeLast</td>
-<td>remove last element from list</td>
+<tr class="row-odd"><td><p>removeLast</p></td>
+<td><p>remove last element from list</p></td>
 </tr>
-<tr class="row-even"><td>removeAllOccurences:</td>
-<td>remove all occurrences of this element from list</td>
+<tr class="row-even"><td><p>removeAllOccurences:</p></td>
+<td><p>remove all occurrences of this element from list</p></td>
 </tr>
-<tr class="row-odd"><td>removeKey:</td>
-<td>remove element at the given key</td>
+<tr class="row-odd"><td><p>removeKey:</p></td>
+<td><p>remove element at the given key</p></td>
 </tr>
-<tr class="row-even"><td>removeKey: IfAbsent:</td>
-<td>remove element at the given key, evaluating block if absent</td>
+<tr class="row-even"><td><p>removeKey: IfAbsent:</p></td>
+<td><p>remove element at the given key, evaluating block if absent</p></td>
 </tr>
-<tr class="row-odd"><td>copyRemoveAll</td>
-<td>return an empty copy</td>
+<tr class="row-odd"><td><p>copyRemoveAll</p></td>
+<td><p>return an empty copy</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accessing">
-<h3>10.5.9.4. Accessing<a class="headerlink" href="#accessing" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="22%" />
-<col width="78%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>first</td>
-<td>return the first element</td>
+</section>
+<section id="accessing">
+<h3><span class="section-number">10.5.9.4. </span>Accessing<a class="headerlink" href="#accessing" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>first</p></td>
+<td><p>return the first element</p></td>
 </tr>
-<tr class="row-even"><td>last</td>
-<td>return the last element</td>
+<tr class="row-even"><td><p>last</p></td>
+<td><p>return the last element</p></td>
 </tr>
-<tr class="row-odd"><td>includes:</td>
-<td>test if element is member of the collection</td>
+<tr class="row-odd"><td><p>includes:</p></td>
+<td><p>test if element is member of the collection</p></td>
 </tr>
-<tr class="row-even"><td>occurrencesOf:</td>
-<td>return number of occurences of element in collection</td>
+<tr class="row-even"><td><p>occurrencesOf:</p></td>
+<td><p>return number of occurences of element in collection</p></td>
 </tr>
-<tr class="row-odd"><td>findFirst: IfPresent: IfAbsent:</td>
-<td>evaluate present block on first element found satisfying criteria, absent block if no such element</td>
+<tr class="row-odd"><td><p>findFirst: IfPresent: IfAbsent:</p></td>
+<td><p>evaluate present block on first element found satisfying criteria, absent block if no such element</p></td>
 </tr>
-<tr class="row-even"><td>at:</td>
-<td>return element at the given key</td>
+<tr class="row-even"><td><p>at:</p></td>
+<td><p>return element at the given key</p></td>
 </tr>
-<tr class="row-odd"><td>at: IfAbsent:</td>
-<td>return element at the given key, evaluating block if absent</td>
+<tr class="row-odd"><td><p>at: IfAbsent:</p></td>
+<td><p>return element at the given key, evaluating block if absent</p></td>
 </tr>
-<tr class="row-even"><td>includesKey:</td>
-<td>test if collection contains a given key</td>
+<tr class="row-even"><td><p>includesKey:</p></td>
+<td><p>test if collection contains a given key</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="iterating">
-<h3>10.5.9.5. Iterating<a class="headerlink" href="#iterating" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="22%" />
-<col width="78%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>do:</td>
-<td>iterate, passing each element to argument block</td>
+</section>
+<section id="iterating">
+<h3><span class="section-number">10.5.9.5. </span>Iterating<a class="headerlink" href="#iterating" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>do:</p></td>
+<td><p>iterate, passing each element to argument block</p></td>
 </tr>
-<tr class="row-even"><td>doFirst: Middle: Last: IfEmpty:</td>
-<td>iterate, with special behavior for first and last</td>
+<tr class="row-even"><td><p>doFirst: Middle: Last: IfEmpty:</p></td>
+<td><p>iterate, with special behavior for first and last</p></td>
 </tr>
-<tr class="row-odd"><td>doFirst: MiddleLast: IfEmpty:</td>
-<td>iterate, with special behavior for first</td>
+<tr class="row-odd"><td><p>doFirst: MiddleLast: IfEmpty:</p></td>
+<td><p>iterate, with special behavior for first</p></td>
 </tr>
-<tr class="row-even"><td>doFirstLast: Middle: IfEmpty:</td>
-<td>iterate, with special behavior for ends</td>
+<tr class="row-even"><td><p>doFirstLast: Middle: IfEmpty:</p></td>
+<td><p>iterate, with special behavior for ends</p></td>
 </tr>
-<tr class="row-odd"><td>doFirstMiddle: Last: IfEmpty:</td>
-<td>iterate, with special behavior for last</td>
+<tr class="row-odd"><td><p>doFirstMiddle: Last: IfEmpty:</p></td>
+<td><p>iterate, with special behavior for last</p></td>
 </tr>
-<tr class="row-even"><td>reverseDo:</td>
-<td>iterate backwards through list</td>
+<tr class="row-even"><td><p>reverseDo:</p></td>
+<td><p>iterate backwards through list</p></td>
 </tr>
-<tr class="row-odd"><td>with: Do:</td>
-<td>co-iterate, passing corresponding elements to block</td>
+<tr class="row-odd"><td><p>with: Do:</p></td>
+<td><p>co-iterate, passing corresponding elements to block</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="reducing">
-<h3>10.5.9.6. Reducing<a class="headerlink" href="#reducing" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="22%" />
-<col width="78%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>max</td>
-<td>return maximum element</td>
+</section>
+<section id="reducing">
+<h3><span class="section-number">10.5.9.6. </span>Reducing<a class="headerlink" href="#reducing" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>max</p></td>
+<td><p>return maximum element</p></td>
 </tr>
-<tr class="row-even"><td>mean</td>
-<td>return mean of elements</td>
+<tr class="row-even"><td><p>mean</p></td>
+<td><p>return mean of elements</p></td>
 </tr>
-<tr class="row-odd"><td>min</td>
-<td>return minimum element</td>
+<tr class="row-odd"><td><p>min</p></td>
+<td><p>return minimum element</p></td>
 </tr>
-<tr class="row-even"><td>sum</td>
-<td>return sum of elements</td>
+<tr class="row-even"><td><p>sum</p></td>
+<td><p>return sum of elements</p></td>
 </tr>
-<tr class="row-odd"><td>product</td>
-<td>return product of elements</td>
+<tr class="row-odd"><td><p>product</p></td>
+<td><p>return product of elements</p></td>
 </tr>
-<tr class="row-even"><td>reduceWith:</td>
-<td>evaluate reduction block with elements</td>
+<tr class="row-even"><td><p>reduceWith:</p></td>
+<td><p>evaluate reduction block with elements</p></td>
 </tr>
-<tr class="row-odd"><td>reduceWith: IfEmpty:</td>
-<td>evaluate reduction block with elements, evaluating block if empty</td>
+<tr class="row-odd"><td><p>reduceWith: IfEmpty:</p></td>
+<td><p>evaluate reduction block with elements, evaluating block if empty</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="transforming">
-<h3>10.5.9.7. Transforming<a class="headerlink" href="#transforming" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="22%" />
-<col width="78%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>asByteVector</td>
-<td>return a byte vector with same elements</td>
+</section>
+<section id="transforming">
+<h3><span class="section-number">10.5.9.7. </span>Transforming<a class="headerlink" href="#transforming" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>asByteVector</p></td>
+<td><p>return a byte vector with same elements</p></td>
 </tr>
-<tr class="row-even"><td>asString</td>
-<td>return a string with same elements</td>
+<tr class="row-even"><td><p>asString</p></td>
+<td><p>return a string with same elements</p></td>
 </tr>
-<tr class="row-odd"><td>asVector</td>
-<td>return a vector with same elements</td>
+<tr class="row-odd"><td><p>asVector</p></td>
+<td><p>return a vector with same elements</p></td>
 </tr>
-<tr class="row-even"><td>asList</td>
-<td>return a list with the same elements</td>
+<tr class="row-even"><td><p>asList</p></td>
+<td><p>return a list with the same elements</p></td>
 </tr>
-<tr class="row-odd"><td>filterBy: Into:</td>
-<td>add elements that satisfy filter block to a collection</td>
+<tr class="row-odd"><td><p>filterBy: Into:</p></td>
+<td><p>add elements that satisfy filter block to a collection</p></td>
 </tr>
-<tr class="row-even"><td>mapBy:</td>
-<td>add result of evaluating map block with each element to this collection</td>
+<tr class="row-even"><td><p>mapBy:</p></td>
+<td><p>add result of evaluating map block with each element to this collection</p></td>
 </tr>
-<tr class="row-odd"><td>mapBy: Into:</td>
-<td>add result of evaluating map block with each element to a collection</td>
+<tr class="row-odd"><td><p>mapBy: Into:</p></td>
+<td><p>add result of evaluating map block with each element to a collection</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="sorting">
-<h3>10.5.9.8. Sorting<a class="headerlink" href="#sorting" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="22%" />
-<col width="78%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>sort</td>
-<td>sort receiver in place</td>
+</section>
+<section id="sorting">
+<h3><span class="section-number">10.5.9.8. </span>Sorting<a class="headerlink" href="#sorting" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>sort</p></td>
+<td><p>sort receiver in place</p></td>
 </tr>
-<tr class="row-even"><td>copySorted</td>
-<td>copy sorted in ascending order</td>
+<tr class="row-even"><td><p>copySorted</p></td>
+<td><p>copy sorted in ascending order</p></td>
 </tr>
-<tr class="row-odd"><td>copyReverseSorted</td>
-<td>copy sorted in descending order</td>
+<tr class="row-odd"><td><p>copyReverseSorted</p></td>
+<td><p>copy sorted in descending order</p></td>
 </tr>
-<tr class="row-even"><td>copySortedBy:</td>
-<td>copy sorted by custom sort criteria</td>
+<tr class="row-even"><td><p>copySortedBy:</p></td>
+<td><p>copy sorted by custom sort criteria</p></td>
 </tr>
-<tr class="row-odd"><td>sortedDo:</td>
-<td>iterate in ascending order</td>
+<tr class="row-odd"><td><p>sortedDo:</p></td>
+<td><p>iterate in ascending order</p></td>
 </tr>
-<tr class="row-even"><td>reverseSortedDo:</td>
-<td>iterate in descending order</td>
+<tr class="row-even"><td><p>reverseSortedDo:</p></td>
+<td><p>iterate in descending order</p></td>
 </tr>
-<tr class="row-odd"><td>sortedBy: Do:</td>
-<td>iterate in order of custom sort criteria</td>
+<tr class="row-odd"><td><p>sortedBy: Do:</p></td>
+<td><p>iterate in order of custom sort criteria</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="indexable-specific">
-<h3>10.5.9.9. Indexable-specific<a class="headerlink" href="#indexable-specific" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="22%" />
-<col width="78%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>firstKey</td>
-<td>return the first key</td>
+</section>
+<section id="indexable-specific">
+<h3><span class="section-number">10.5.9.9. </span>Indexable-specific<a class="headerlink" href="#indexable-specific" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>firstKey</p></td>
+<td><p>return the first key</p></td>
 </tr>
-<tr class="row-even"><td>lastKey</td>
-<td>return the last key</td>
+<tr class="row-even"><td><p>lastKey</p></td>
+<td><p>return the last key</p></td>
 </tr>
-<tr class="row-odd"><td>loopFrom: Do:</td>
-<td>circularly iterate, starting from element n</td>
+<tr class="row-odd"><td><p>loopFrom: Do:</p></td>
+<td><p>circularly iterate, starting from element n</p></td>
 </tr>
-<tr class="row-even"><td>copyAddFirst:</td>
-<td>return a copy of this collection with element added to beginning</td>
+<tr class="row-even"><td><p>copyAddFirst:</p></td>
+<td><p>return a copy of this collection with element added to beginning</p></td>
 </tr>
-<tr class="row-odd"><td>copyAddLast:</td>
-<td>return a copy of this collection with element added to end</td>
+<tr class="row-odd"><td><p>copyAddLast:</p></td>
+<td><p>return a copy of this collection with element added to end</p></td>
 </tr>
-<tr class="row-even"><td>copyFrom:</td>
-<td>return a copy of this collection from element n</td>
+<tr class="row-even"><td><p>copyFrom:</p></td>
+<td><p>return a copy of this collection from element n</p></td>
 </tr>
-<tr class="row-odd"><td>copyFrom: UpTo:</td>
-<td>return a copy of this collection from element n up to element m</td>
+<tr class="row-odd"><td><p>copyFrom: UpTo:</p></td>
+<td><p>return a copy of this collection from element n up to element m</p></td>
 </tr>
-<tr class="row-even"><td>copyWithoutLast</td>
-<td>return a copy of this collection without the last element</td>
+<tr class="row-even"><td><p>copyWithoutLast</p></td>
+<td><p>return a copy of this collection without the last element</p></td>
 </tr>
-<tr class="row-odd"><td>copySize:</td>
-<td>copy with size n</td>
+<tr class="row-odd"><td><p>copySize:</p></td>
+<td><p>copy with size n</p></td>
 </tr>
-<tr class="row-even"><td>copySize: FillingWith:</td>
-<td>copy with size n, filling in any extra elements with second arg</td>
+<tr class="row-even"><td><p>copySize: FillingWith:</p></td>
+<td><p>copy with size n, filling in any extra elements with second arg</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="timing">
-<h2>10.5.10. Timing<a class="headerlink" href="#timing" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils">
-<colgroup>
-<col width="40%" />
-<col width="60%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>realTime</td>
-<td>elapsed real time to execute a block</td>
+</section>
+</section>
+<section id="timing">
+<h2><span class="section-number">10.5.10. </span>Timing<a class="headerlink" href="#timing" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>realTime</p></td>
+<td><p>elapsed real time to execute a block</p></td>
 </tr>
-<tr class="row-even"><td>cpuTime</td>
-<td>CPU time to execute a block</td>
+<tr class="row-even"><td><p>cpuTime</p></td>
+<td><p>CPU time to execute a block</p></td>
 </tr>
-<tr class="row-odd"><td>userTime</td>
-<td>CPU time in user process to execute a block</td>
+<tr class="row-odd"><td><p>userTime</p></td>
+<td><p>CPU time in user process to execute a block</p></td>
 </tr>
-<tr class="row-even"><td>systemTime</td>
-<td>CPU time in system kernel to execute a block</td>
+<tr class="row-even"><td><p>systemTime</p></td>
+<td><p>CPU time in system kernel to execute a block</p></td>
 </tr>
-<tr class="row-odd"><td>totalTime</td>
-<td>system + user time to execute a block</td>
+<tr class="row-odd"><td><p>totalTime</p></td>
+<td><p>system + user time to execute a block</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="message-sending">
-<h2>10.5.11. Message Sending<a class="headerlink" href="#message-sending" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="sending">
-<h3>10.5.11.1. Sending<a class="headerlink" href="#sending" title="Permalink to this headline">¶</a></h3>
-<p>Like Smalltalk <code class="docutils literal"><span class="pre">perform</span></code>; receiver is a string.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="40%" />
-<col width="60%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>sendTo: {With: }</td>
-<td>send receiver string as a message</td>
+</section>
+<section id="message-sending">
+<h2><span class="section-number">10.5.11. </span>Message Sending<a class="headerlink" href="#message-sending" title="Permalink to this heading">#</a></h2>
+<section id="sending">
+<h3><span class="section-number">10.5.11.1. </span>Sending<a class="headerlink" href="#sending" title="Permalink to this heading">#</a></h3>
+<p>Like Smalltalk <code class="docutils literal notranslate"><span class="pre">perform</span></code>; receiver is a string.</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>sendTo: {With: }</p></td>
+<td><p>send receiver string as a message</p></td>
 </tr>
-<tr class="row-even"><td>sendTo: WithArguments:</td>
-<td>indirect send with arguments in a vector</td>
+<tr class="row-even"><td><p>sendTo: WithArguments:</p></td>
+<td><p>indirect send with arguments in a vector</p></td>
 </tr>
-<tr class="row-odd"><td>sendTo: DelegatingTo: {With: }</td>
-<td>indirect delegated send</td>
+<tr class="row-odd"><td><p>sendTo: DelegatingTo: {With: }</p></td>
+<td><p>indirect delegated send</p></td>
 </tr>
-<tr class="row-even"><td>sendTo: DelegatingTo: WithArguments:</td>
-<td>indirect delegated send with arg vector</td>
+<tr class="row-even"><td><p>sendTo: DelegatingTo: WithArguments:</p></td>
+<td><p>indirect delegated send with arg vector</p></td>
 </tr>
-<tr class="row-odd"><td>resendTo: {With: }</td>
-<td>indirect resend</td>
+<tr class="row-odd"><td><p>resendTo: {With: }</p></td>
+<td><p>indirect resend</p></td>
 </tr>
-<tr class="row-even"><td>resendTo: WithArguments:</td>
-<td>indirect resend with arguments in a vector</td>
+<tr class="row-even"><td><p>resendTo: WithArguments:</p></td>
+<td><p>indirect resend with arguments in a vector</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="message-object-protocol">
-<h3>10.5.11.2. Message object protocol<a class="headerlink" href="#message-object-protocol" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="44%" />
-<col width="56%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>send</td>
-<td>perform the send described by a message object</td>
+</section>
+<section id="message-object-protocol">
+<h3><span class="section-number">10.5.11.2. </span>Message object protocol<a class="headerlink" href="#message-object-protocol" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>send</p></td>
+<td><p>perform the send described by a message object</p></td>
 </tr>
-<tr class="row-even"><td>fork</td>
-<td>start a new process; the new process performs the message</td>
+<tr class="row-even"><td><p>fork</p></td>
+<td><p>start a new process; the new process performs the message</p></td>
 </tr>
-<tr class="row-odd"><td>receiver:</td>
-<td>set receiver</td>
+<tr class="row-odd"><td><p>receiver:</p></td>
+<td><p>set receiver</p></td>
 </tr>
-<tr class="row-even"><td>selector:</td>
-<td>set selector</td>
+<tr class="row-even"><td><p>selector:</p></td>
+<td><p>set selector</p></td>
 </tr>
-<tr class="row-odd"><td>methodHolder:</td>
-<td>set method holder</td>
+<tr class="row-odd"><td><p>methodHolder:</p></td>
+<td><p>set method holder</p></td>
 </tr>
-<tr class="row-even"><td>delegatee:</td>
-<td>set delegatee of the message object</td>
+<tr class="row-even"><td><p>delegatee:</p></td>
+<td><p>set delegatee of the message object</p></td>
 </tr>
-<tr class="row-odd"><td>arguments:</td>
-<td>set arguments (packaged in a vector)</td>
+<tr class="row-odd"><td><p>arguments:</p></td>
+<td><p>set arguments (packaged in a vector)</p></td>
 </tr>
-<tr class="row-even"><td>receiver: Selector:</td>
-<td>set receiver and selector</td>
+<tr class="row-even"><td><p>receiver: Selector:</p></td>
+<td><p>set receiver and selector</p></td>
 </tr>
-<tr class="row-odd"><td>receiver: Selector: Arguments:</td>
-<td>set receiver, selector, and arguments</td>
+<tr class="row-odd"><td><p>receiver: Selector: Arguments:</p></td>
+<td><p>set receiver, selector, and arguments</p></td>
 </tr>
-<tr class="row-even"><td>receiver: Selector: Type: Delegatee: MethodHolder: Arguments:</td>
-<td>set all components</td>
+<tr class="row-even"><td><p>receiver: Selector: Type: Delegatee: MethodHolder: Arguments:</p></td>
+<td><p>set all components</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="section" id="reflection-mirrors">
-<h2>10.5.12. Reflection (mirrors)<a class="headerlink" href="#reflection-mirrors" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils">
-<colgroup>
-<col width="40%" />
-<col width="60%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>reflect:</td>
-<td>returns a mirror on the argument</td>
+</section>
+</section>
+<section id="reflection-mirrors">
+<h2><span class="section-number">10.5.12. </span>Reflection (mirrors)<a class="headerlink" href="#reflection-mirrors" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>reflect:</p></td>
+<td><p>returns a mirror on the argument</p></td>
 </tr>
-<tr class="row-even"><td>reflectee</td>
-<td>returns the object the mirror receiver reflects</td>
+<tr class="row-even"><td><p>reflectee</p></td>
+<td><p>returns the object the mirror receiver reflects</p></td>
 </tr>
-<tr class="row-odd"><td>contentsAt:</td>
-<td>returns a mirror on the contents of slot n</td>
+<tr class="row-odd"><td><p>contentsAt:</p></td>
+<td><p>returns a mirror on the contents of slot n</p></td>
 </tr>
-<tr class="row-even"><td>isAssignableAt:</td>
-<td>tests if slot n is an assignable slot</td>
+<tr class="row-even"><td><p>isAssignableAt:</p></td>
+<td><p>tests if slot n is an assignable slot</p></td>
 </tr>
-<tr class="row-odd"><td>isParentAt:</td>
-<td>tests if slot n is a parent slot</td>
+<tr class="row-odd"><td><p>isParentAt:</p></td>
+<td><p>tests if slot n is a parent slot</p></td>
 </tr>
-<tr class="row-even"><td>isArgumentAt:</td>
-<td>tests if slot n is an argument slot</td>
+<tr class="row-even"><td><p>isArgumentAt:</p></td>
+<td><p>tests if slot n is an argument slot</p></td>
 </tr>
-<tr class="row-odd"><td>parentPriorityAt:</td>
-<td>returns the parent priority of slot n</td>
+<tr class="row-odd"><td><p>parentPriorityAt:</p></td>
+<td><p>returns the parent priority of slot n</p></td>
 </tr>
-<tr class="row-even"><td>slotAt:</td>
-<td>returns a slot object representing slot n</td>
+<tr class="row-even"><td><p>slotAt:</p></td>
+<td><p>returns a slot object representing slot n</p></td>
 </tr>
-<tr class="row-odd"><td>contentsAt:</td>
-<td>returns the contents of the slot named n</td>
+<tr class="row-odd"><td><p>contentsAt:</p></td>
+<td><p>returns the contents of the slot named n</p></td>
 </tr>
-<tr class="row-even"><td>visibilityAt:</td>
-<td>returns a visibility object representing visibility of slot n</td>
+<tr class="row-even"><td><p>visibilityAt:</p></td>
+<td><p>returns a visibility object representing visibility of slot n</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="system-wide-enumerations">
-<h2>10.5.13. System-wide Enumerations<a class="headerlink" href="#system-wide-enumerations" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="system-wide-enumerations">
+<h2><span class="section-number">10.5.13. </span>System-wide Enumerations<a class="headerlink" href="#system-wide-enumerations" title="Permalink to this heading">#</a></h2>
 <p>Messages sent to the oddball object browse.</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="29%" />
-<col width="71%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>all[Limit: ]</td>
-<td>returns a vector of mirrors on all objects in the system (up to the limit)</td>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>all[Limit: ]</p></td>
+<td><p>returns a vector of mirrors on all objects in the system (up to the limit)</p></td>
 </tr>
-<tr class="row-even"><td>referencesOf: [Limit: ]</td>
-<td>returns a vector of mirrors on all objects referring to arg (up to the limit)</td>
+<tr class="row-even"><td><p>referencesOf: [Limit: ]</p></td>
+<td><p>returns a vector of mirrors on all objects referring to arg (up to the limit)</p></td>
 </tr>
-<tr class="row-odd"><td>referencesOfReflectee: [Limit: ]</td>
-<td>returns a vector of mirrors on all objects referring to argument’s reflectee (up to the limit); allows one to find references to a method</td>
+<tr class="row-odd"><td><p>referencesOfReflectee: [Limit: ]</p></td>
+<td><p>returns a vector of mirrors on all objects referring to argument’s reflectee (up to the limit); allows one to find references to a method</p></td>
 </tr>
-<tr class="row-even"><td>childrenOf: [Limit: ]</td>
-<td>returns a vector of mirrors on all objects with a parent slot referring to the given object (up to the limit)</td>
+<tr class="row-even"><td><p>childrenOf: [Limit: ]</p></td>
+<td><p>returns a vector of mirrors on all objects with a parent slot referring to the given object (up to the limit)</p></td>
 </tr>
-<tr class="row-odd"><td>implementorsOf: [Limit: ]</td>
-<td>returns a vector of mirrors on objects with slots whose names match the given selector (up to the limit)</td>
+<tr class="row-odd"><td><p>implementorsOf: [Limit: ]</p></td>
+<td><p>returns a vector of mirrors on objects with slots whose names match the given selector (up to the limit)</p></td>
 </tr>
-<tr class="row-even"><td>sendersOf: [Limit: ]</td>
-<td>returns a vector of mirrors on methods whose selectors match the given selector (up to the limit)</td>
+<tr class="row-even"><td><p>sendersOf: [Limit: ]</p></td>
+<td><p>returns a vector of mirrors on methods whose selectors match the given selector (up to the limit)</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="debugging">
-<h2>10.5.14. Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils">
-<colgroup>
-<col width="40%" />
-<col width="60%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>halt</td>
-<td>halt the current process</td>
+</section>
+<section id="debugging">
+<h2><span class="section-number">10.5.14. </span>Debugging<a class="headerlink" href="#debugging" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>halt</p></td>
+<td><p>halt the current process</p></td>
 </tr>
-<tr class="row-even"><td>halt:</td>
-<td>halt and print a message string</td>
+<tr class="row-even"><td><p>halt:</p></td>
+<td><p>halt and print a message string</p></td>
 </tr>
-<tr class="row-odd"><td>error:</td>
-<td>halt, print an error message, and display the stack</td>
+<tr class="row-odd"><td><p>error:</p></td>
+<td><p>halt, print an error message, and display the stack</p></td>
 </tr>
-<tr class="row-even"><td>warning:</td>
-<td>beep, print a warning message, and continue</td>
+<tr class="row-even"><td><p>warning:</p></td>
+<td><p>beep, print a warning message, and continue</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="virtual-machine-generated">
-<h2>10.5.15. Virtual Machine-Generated<a class="headerlink" href="#virtual-machine-generated" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="errors">
-<h3>10.5.15.1. Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="49%" />
-<col width="51%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>undefinedSelector: Type: Delegatee: MethodHolder: Arguments:</td>
-<td>lookup found no matching slot</td>
+</section>
+<section id="virtual-machine-generated">
+<h2><span class="section-number">10.5.15. </span>Virtual Machine-Generated<a class="headerlink" href="#virtual-machine-generated" title="Permalink to this heading">#</a></h2>
+<section id="errors">
+<h3><span class="section-number">10.5.15.1. </span>Errors<a class="headerlink" href="#errors" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>undefinedSelector: Type: Delegatee: MethodHolder: Arguments:</p></td>
+<td><p>lookup found no matching slot</p></td>
 </tr>
-<tr class="row-even"><td>ambiguousSelector: Type: Delegatee: MethodHolder: Arguments:</td>
-<td>lookup found more than one matching slot</td>
+<tr class="row-even"><td><p>ambiguousSelector: Type: Delegatee: MethodHolder: Arguments:</p></td>
+<td><p>lookup found more than one matching slot</p></td>
 </tr>
-<tr class="row-odd"><td>missingParentSelector: Type: Delegatee: MethodHolder: Arguments:</td>
-<td>parent slot through which resend was delegated was not found</td>
+<tr class="row-odd"><td><p>missingParentSelector: Type: Delegatee: MethodHolder: Arguments:</p></td>
+<td><p>parent slot through which resend was delegated was not found</p></td>
 </tr>
-<tr class="row-even"><td>performTypeErrorSelector: Type: Delegatee: MethodHolder: Arguments:</td>
-<td>first argument to the _Perform primitive was not a canonical string</td>
+<tr class="row-even"><td><p>performTypeErrorSelector: Type: Delegatee: MethodHolder: Arguments:</p></td>
+<td><p>first argument to the _Perform primitive was not a canonical string</p></td>
 </tr>
-<tr class="row-odd"><td>mismatchedArgumentCountSelector: Type: Delegatee: MethodHolder: Arguments:</td>
-<td>number of args supplied to _Perform primitive does not match selector</td>
+<tr class="row-odd"><td><p>mismatchedArgumentCountSelector: Type: Delegatee: MethodHolder: Arguments:</p></td>
+<td><p>number of args supplied to _Perform primitive does not match selector</p></td>
 </tr>
-<tr class="row-even"><td>primitiveFailedError: Name:</td>
-<td>the named primitive failed with given error string</td>
+<tr class="row-even"><td><p>primitiveFailedError: Name:</p></td>
+<td><p>the named primitive failed with given error string</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="other-system-triggered-messages">
-<h3>10.5.15.2. Other system-triggered messages<a class="headerlink" href="#other-system-triggered-messages" title="Permalink to this headline">¶</a></h3>
-<table border="1" class="docutils">
-<colgroup>
-<col width="52%" />
-<col width="48%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>postRead</td>
-<td>slot to evaluate after reading a snapshot</td>
+</section>
+<section id="other-system-triggered-messages">
+<h3><span class="section-number">10.5.15.2. </span>Other system-triggered messages<a class="headerlink" href="#other-system-triggered-messages" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>postRead</p></td>
+<td><p>slot to evaluate after reading a snapshot</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="builtintypes.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">10.4. </span>Built-in types</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="menus.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">10.6. </span>Every Menu Item in the Programming Environment</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#copying">10.5.1. Copying</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing">10.5.2. Comparing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equality">10.5.2.1. Equality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ordered">10.5.2.2. Ordered</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-operations">10.5.3. Numeric operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bitwise-operations-integers">10.5.4. Bitwise operations (integers)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-operations-booleans">10.5.5. Logical operations (booleans)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing">10.5.6. Constructing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#printing">10.5.7. Printing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#control">10.5.8. Control</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-evaluation">10.5.8.1. Block evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection">10.5.8.2. Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-exiting">10.5.8.3. Local exiting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-looping">10.5.8.4. Basic looping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-test-looping">10.5.8.5. Pre-test looping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-test-looping">10.5.8.6. Post-test looping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterators">10.5.8.7. Iterators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collections">10.5.9. Collections</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sizing">10.5.9.1. Sizing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding">10.5.9.2. Adding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removing">10.5.9.3. Removing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing">10.5.9.4. Accessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating">10.5.9.5. Iterating</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing">10.5.9.6. Reducing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming">10.5.9.7. Transforming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting">10.5.9.8. Sorting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexable-specific">10.5.9.9. Indexable-specific</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing">10.5.10. Timing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#message-sending">10.5.11. Message Sending</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sending">10.5.11.1. Sending</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#message-object-protocol">10.5.11.2. Message object protocol</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection-mirrors">10.5.12. Reflection (mirrors)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-wide-enumerations">10.5.13. System-wide Enumerations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging">10.5.14. Debugging</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-machine-generated">10.5.15. Virtual Machine-Generated</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errors">10.5.15.1. Errors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-system-triggered-messages">10.5.15.2. Other system-triggered messages</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/usefulselectors.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">10.5. Useful Selectors</a><ul>
-<li><a class="reference internal" href="#copying">10.5.1. Copying</a></li>
-<li><a class="reference internal" href="#comparing">10.5.2. Comparing</a><ul>
-<li><a class="reference internal" href="#equality">10.5.2.1. Equality</a></li>
-<li><a class="reference internal" href="#ordered">10.5.2.2. Ordered</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#numeric-operations">10.5.3. Numeric operations</a></li>
-<li><a class="reference internal" href="#bitwise-operations-integers">10.5.4. Bitwise operations (integers)</a></li>
-<li><a class="reference internal" href="#logical-operations-booleans">10.5.5. Logical operations (booleans)</a></li>
-<li><a class="reference internal" href="#constructing">10.5.6. Constructing</a></li>
-<li><a class="reference internal" href="#printing">10.5.7. Printing</a></li>
-<li><a class="reference internal" href="#control">10.5.8. Control</a><ul>
-<li><a class="reference internal" href="#block-evaluation">10.5.8.1. Block evaluation</a></li>
-<li><a class="reference internal" href="#selection">10.5.8.2. Selection</a></li>
-<li><a class="reference internal" href="#local-exiting">10.5.8.3. Local exiting</a></li>
-<li><a class="reference internal" href="#basic-looping">10.5.8.4. Basic looping</a></li>
-<li><a class="reference internal" href="#pre-test-looping">10.5.8.5. Pre-test looping</a></li>
-<li><a class="reference internal" href="#post-test-looping">10.5.8.6. Post-test looping</a></li>
-<li><a class="reference internal" href="#iterators">10.5.8.7. Iterators</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#collections">10.5.9. Collections</a><ul>
-<li><a class="reference internal" href="#sizing">10.5.9.1. Sizing</a></li>
-<li><a class="reference internal" href="#adding">10.5.9.2. Adding</a></li>
-<li><a class="reference internal" href="#removing">10.5.9.3. Removing</a></li>
-<li><a class="reference internal" href="#accessing">10.5.9.4. Accessing</a></li>
-<li><a class="reference internal" href="#iterating">10.5.9.5. Iterating</a></li>
-<li><a class="reference internal" href="#reducing">10.5.9.6. Reducing</a></li>
-<li><a class="reference internal" href="#transforming">10.5.9.7. Transforming</a></li>
-<li><a class="reference internal" href="#sorting">10.5.9.8. Sorting</a></li>
-<li><a class="reference internal" href="#indexable-specific">10.5.9.9. Indexable-specific</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#timing">10.5.10. Timing</a></li>
-<li><a class="reference internal" href="#message-sending">10.5.11. Message Sending</a><ul>
-<li><a class="reference internal" href="#sending">10.5.11.1. Sending</a></li>
-<li><a class="reference internal" href="#message-object-protocol">10.5.11.2. Message object protocol</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#reflection-mirrors">10.5.12. Reflection (mirrors)</a></li>
-<li><a class="reference internal" href="#system-wide-enumerations">10.5.13. System-wide Enumerations</a></li>
-<li><a class="reference internal" href="#debugging">10.5.14. Debugging</a></li>
-<li><a class="reference internal" href="#virtual-machine-generated">10.5.15. Virtual Machine-Generated</a><ul>
-<li><a class="reference internal" href="#errors">10.5.15.1. Errors</a></li>
-<li><a class="reference internal" href="#other-system-triggered-messages">10.5.15.2. Other system-triggered messages</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="appendices.html">10. Appendices</a><ul>
-      <li>Previous: <a href="builtintypes.html" title="previous chapter">10.4. Built-in types</a></li>
-      <li>Next: <a href="menus.html" title="next chapter">10.6. Every Menu Item in the Programming Environment</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/usefulselectors.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
     </div>
-    <div class="footer">
-      &copy;2017, Russell Allen (Ed.).
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
       
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.5</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Russell Allen (Ed.).
+      <br/>
+    
+  </p>
+</div>
       
-      |
-      <a href="_sources/usefulselectors.rst.txt"
-          rel="nofollow">Page source</a>
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    <br/>
+  </p>
+</div>
+      
     </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
 
-    
-
-    
+  </footer>
   </body>
 </html>

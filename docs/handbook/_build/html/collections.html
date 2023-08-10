@@ -1,51 +1,478 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!DOCTYPE html>
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" >
+
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>4.5. Collections &#8212; Self Handbook for Self 2017.1 documentation</title>
-    
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     'for Self 2017.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4.5. Collections &#8212; Self Handbook 2023.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e46715c6"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'collections';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="4.6. Pairs" href="pairs.html" />
     <link rel="prev" title="4.4. Numbers and Time" href="numbers.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body role="document">
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
   
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Self Handbook 2023.1 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="intro.html">
+                        Introduction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="gettingstarted.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="langref.html">
+                        Language Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="selfwrld.html">
+                        The Self World
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="progguid.html">
+                        A Guide to Programming Style
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="howtoprg.html">
+                        How to Program in Self
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="morphic.html">
+                        Morphic: The Self User Interface Framework
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="vmref.html">
+                        Virtual Machine Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="ref.html">
+                        References
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="appendices.html">
+                        Appendices
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="extras.html">
+                        Extras
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
             
-  <div class="section" id="collections">
-<h1>4.5. Collections<a class="headerlink" href="#collections" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">clonable</span>
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="intro.html">
+                        Introduction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="gettingstarted.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="langref.html">
+                        Language Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="selfwrld.html">
+                        The Self World
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="progguid.html">
+                        A Guide to Programming Style
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="howtoprg.html">
+                        How to Program in Self
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="morphic.html">
+                        Morphic: The Self User Interface Framework
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="vmref.html">
+                        Virtual Machine Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="ref.html">
+                        References
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="appendices.html">
+                        Appendices
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="extras.html">
+                        Extras
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="worldorg.html">4.1. World Organization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roots.html">4.2. The Roots of Behavior</a></li>
+<li class="toctree-l1"><a class="reference internal" href="blocks.html">4.3. Blocks, Booleans, and Control Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="numbers.html">4.4. Numbers and Time</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4.5. Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pairs.html">4.6. Pairs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirrors.html">4.7. Mirrors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messages.html">4.8. Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="processes.html">4.9. Processes and Concurrency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="foreign.html">4.10. Foreign Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unix.html">4.11. I/O and Unix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oddball.html">4.12. Other Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="buildworld.html">4.13. How to build the world</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lowlevel.html">4.14. How to use the low-level interrupt facilities</a></li>
+<li class="toctree-l1"><a class="reference internal" href="textdebug.html">4.15. Using the textual debugger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="logging.html">4.16. Logging</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="selfwrld.html" class="nav-link"><span class="section-number">4. </span>The Self World</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="section-number">4.5. </span>Collections</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="collections">
+<h1><span class="section-number">4.5. </span>Collections<a class="headerlink" href="#collections" title="Permalink to this heading">#</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clonable</span>
     <span class="n">collection</span>
         <span class="o">...</span> <span class="n">collection</span> <span class="n">hierarchy</span> <span class="o">...</span>
 </pre></div>
@@ -56,22 +483,22 @@ such as lists, use each element as both key and value. Iterations over collectio
 the value and the key of each element (in that order) to the iteration block. Since Self blocks ignore
 extra arguments, this allows applications that don’t care about keys to simply provide a block
 that takes only one argument.</p>
-<p>Collections have a rich protocol. Additions are made with <code class="docutils literal"><span class="pre">at:Put:</span></code>, or with <code class="docutils literal"><span class="pre">add:</span></code> or <code class="docutils literal"><span class="pre">addAll:</span></code> for
-implicitly keyed collections. Iteration can be done with <code class="docutils literal"><span class="pre">do:</span></code> or with variations that allow the programmer
-to specify special handling of the first and/or last element. <code class="docutils literal"><span class="pre">with:Do:</span></code> allows pairwise iteration
-through two collections. The <code class="docutils literal"><span class="pre">includes:</span></code>, <code class="docutils literal"><span class="pre">occurrencesOf:</span></code>, and <code class="docutils literal"><span class="pre">findFirst:</span></code>
-<code class="docutils literal"><span class="pre">IfPresent:IfAbsent:</span></code> messages test for the presence of particular values in the collection.
-<code class="docutils literal"><span class="pre">filterBy:Into:</span></code> creates a new collection including only those elements that satisfy a predicate
-block, while <code class="docutils literal"><span class="pre">mapBy:Into:</span></code> creates a new collection whose elements are the result of applying the
+<p>Collections have a rich protocol. Additions are made with <code class="docutils literal notranslate"><span class="pre">at:Put:</span></code>, or with <code class="docutils literal notranslate"><span class="pre">add:</span></code> or <code class="docutils literal notranslate"><span class="pre">addAll:</span></code> for
+implicitly keyed collections. Iteration can be done with <code class="docutils literal notranslate"><span class="pre">do:</span></code> or with variations that allow the programmer
+to specify special handling of the first and/or last element. <code class="docutils literal notranslate"><span class="pre">with:Do:</span></code> allows pairwise iteration
+through two collections. The <code class="docutils literal notranslate"><span class="pre">includes:</span></code>, <code class="docutils literal notranslate"><span class="pre">occurrencesOf:</span></code>, and <code class="docutils literal notranslate"><span class="pre">findFirst:</span></code>
+<code class="docutils literal notranslate"><span class="pre">IfPresent:IfAbsent:</span></code> messages test for the presence of particular values in the collection.
+<code class="docutils literal notranslate"><span class="pre">filterBy:Into:</span></code> creates a new collection including only those elements that satisfy a predicate
+block, while <code class="docutils literal notranslate"><span class="pre">mapBy:Into:</span></code> creates a new collection whose elements are the result of applying the
 argument block to each element of the original collection.</p>
-<p>Abstract collection behavior is defined in <code class="docutils literal"><span class="pre">traits</span> <span class="pre">collection</span></code>. Only a small handful of operations need
-be implemented to create a new type of collection; the rest can be inherited from <code class="docutils literal"><span class="pre">traits</span> <span class="pre">collection</span></code>.
-(See the <code class="docutils literal"><span class="pre">descendantResponsibility</span></code> slot of <code class="docutils literal"><span class="pre">traits</span> <span class="pre">collection</span></code>.) The following
+<p>Abstract collection behavior is defined in <code class="docutils literal notranslate"><span class="pre">traits</span> <span class="pre">collection</span></code>. Only a small handful of operations need
+be implemented to create a new type of collection; the rest can be inherited from <code class="docutils literal notranslate"><span class="pre">traits</span> <span class="pre">collection</span></code>.
+(See the <code class="docutils literal notranslate"><span class="pre">descendantResponsibility</span></code> slot of <code class="docutils literal notranslate"><span class="pre">traits</span> <span class="pre">collection</span></code>.) The following
 sections discuss various kinds of collection in more detail.</p>
 <p>Modules: collection (abstract collection behavior)</p>
-<div class="section" id="indexable-collections">
-<h2>4.5.1. Indexable Collections<a class="headerlink" href="#indexable-collections" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">collection</span>
+<section id="indexable-collections">
+<h2><span class="section-number">4.5.1. </span>Indexable Collections<a class="headerlink" href="#indexable-collections" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collection</span>
     <span class="n">indexable</span>
         <span class="n">mutableIndexable</span>
             <span class="n">byteVector</span>
@@ -82,14 +509,14 @@ sections discuss various kinds of collection in more detail.</p>
 </pre></div>
 </div>
 <p>Indexable collections allow random access to their elements via keys that are integers. All sequences
-and vectors are indexable. The message <code class="docutils literal"><span class="pre">at:</span></code> is used to retrieve an element of an indexable collection
-while <code class="docutils literal"><span class="pre">at:Put:</span></code> is used to update an element of a <code class="docutils literal"><span class="pre">mutableIndexable</span></code> collection (other
-than a <code class="docutils literal"><span class="pre">sortedSequence</span></code>).</p>
+and vectors are indexable. The message <code class="docutils literal notranslate"><span class="pre">at:</span></code> is used to retrieve an element of an indexable collection
+while <code class="docutils literal notranslate"><span class="pre">at:Put:</span></code> is used to update an element of a <code class="docutils literal notranslate"><span class="pre">mutableIndexable</span></code> collection (other
+than a <code class="docutils literal notranslate"><span class="pre">sortedSequence</span></code>).</p>
 <p>Modules: indexable, abstractString, vector, sequence, sortedSequence</p>
-</div>
-<div class="section" id="strings-characters-and-paragraphs">
-<h2>4.5.2. Strings, Characters, and Paragraphs<a class="headerlink" href="#strings-characters-and-paragraphs" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">collection</span>
+</section>
+<section id="strings-characters-and-paragraphs">
+<h2><span class="section-number">4.5.2. </span>Strings, Characters, and Paragraphs<a class="headerlink" href="#strings-characters-and-paragraphs" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collection</span>
     <span class="o">...</span>
     <span class="n">byteVector</span>
         <span class="n">string</span>
@@ -99,30 +526,30 @@ than a <code class="docutils literal"><span class="pre">sortedSequence</span></c
 </pre></div>
 </div>
 <p>A string is a vector whose elements are character objects. There are three kinds of concrete string:
-immutable strings, mutable strings and canonical strings. <code class="docutils literal"><span class="pre">traits</span> <span class="pre">string</span></code> defines the behavior
+immutable strings, mutable strings and canonical strings. <code class="docutils literal notranslate"><span class="pre">traits</span> <span class="pre">string</span></code> defines the behavior
 shared by all strings. A character is a string of length one that references itself in its sole indexable
 slot.</p>
-<p>Mutable strings can be changed using the message <code class="docutils literal"><span class="pre">at:Put:</span></code>, which takes a character argument, or
-<code class="docutils literal"><span class="pre">at:PutByte:</span></code>, which takes an integer argument. An immutable string cannot be modified, but
-sending it the <code class="docutils literal"><span class="pre">copyMutable</span></code> message returns a mutable string containing the same characters.</p>
+<p>Mutable strings can be changed using the message <code class="docutils literal notranslate"><span class="pre">at:Put:</span></code>, which takes a character argument, or
+<code class="docutils literal notranslate"><span class="pre">at:PutByte:</span></code>, which takes an integer argument. An immutable string cannot be modified, but
+sending it the <code class="docutils literal notranslate"><span class="pre">copyMutable</span></code> message returns a mutable string containing the same characters.</p>
 <p>Canonical strings are registered in an table inside the virtual machine, like Symbol objects in
 Smalltalk or atoms in LISP. The VM guarantees that there is at most one canonical string for any
 given sequence of bytes, so two canonical strings are equal (have the same contents) if and only if
 they are identical (are the same object). This allows efficient equality checks between canonical
 strings. All message selectors and string literals are canonical strings, and some primitives require
-canonical strings as arguments. Sending <code class="docutils literal"><span class="pre">canonicalize</span></code> to any string returns the corresponding
+canonical strings as arguments. Sending <code class="docutils literal notranslate"><span class="pre">canonicalize</span></code> to any string returns the corresponding
 canonical string.</p>
 <p>Character objects behave like immutable strings of length one. There are 256 well-known character
-objects in the Self universe. They are stored in a 256-element vector named <code class="docutils literal"><span class="pre">ascii</span></code>, with each
+objects in the Self universe. They are stored in a 256-element vector named <code class="docutils literal notranslate"><span class="pre">ascii</span></code>, with each
 character stored at the location corresponding to its ASCII value. Characters respond to the message
-<code class="docutils literal"><span class="pre">asByte</span></code> by returning their ASCII value (that is, their index in <code class="docutils literal"><span class="pre">ascii</span></code>). The inverse of <code class="docutils literal"><span class="pre">asByte</span></code>,
-<code class="docutils literal"><span class="pre">asCharacter</span></code>, can be sent to an integer between 0 and 255 to obtain the corresponding
+<code class="docutils literal notranslate"><span class="pre">asByte</span></code> by returning their ASCII value (that is, their index in <code class="docutils literal notranslate"><span class="pre">ascii</span></code>). The inverse of <code class="docutils literal notranslate"><span class="pre">asByte</span></code>,
+<code class="docutils literal notranslate"><span class="pre">asCharacter</span></code>, can be sent to an integer between 0 and 255 to obtain the corresponding
 character object.</p>
 <p>Module: string</p>
-</div>
-<div class="section" id="unordered-sets-and-dictionaries">
-<h2>4.5.3. Unordered Sets and Dictionaries<a class="headerlink" href="#unordered-sets-and-dictionaries" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">collection</span>
+</section>
+<section id="unordered-sets-and-dictionaries">
+<h2><span class="section-number">4.5.3. </span>Unordered Sets and Dictionaries<a class="headerlink" href="#unordered-sets-and-dictionaries" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collection</span>
     <span class="n">setOrDictionary</span>
         <span class="nb">set</span>
             <span class="n">sharedSet</span>
@@ -137,18 +564,18 @@ trees. The hash table implementation has better performance over a wide range of
 to degenerate into an ordered lists, resulting in linear access times.)</p>
 <p>A set behaves like a mathematical set. It contains elements without duplication in no particular order.
 A dictionary implements a mapping from keys to values, where both keys and values are arbitrary
-objects. Dictionaries implement the usual collection behavior plus keyed access using <code class="docutils literal"><span class="pre">at:</span></code>
-and <code class="docutils literal"><span class="pre">at:Put:</span></code> and the dictionary-specific operations <code class="docutils literal"><span class="pre">includesKey:</span></code> and <code class="docutils literal"><span class="pre">removeKey:</span></code>. In order
+objects. Dictionaries implement the usual collection behavior plus keyed access using <code class="docutils literal notranslate"><span class="pre">at:</span></code>
+and <code class="docutils literal notranslate"><span class="pre">at:Put:</span></code> and the dictionary-specific operations <code class="docutils literal notranslate"><span class="pre">includesKey:</span></code> and <code class="docutils literal notranslate"><span class="pre">removeKey:</span></code>. In order
 to store an object in a set or use it as a dictionary key, the object must understand the messages
-<code class="docutils literal"><span class="pre">hash</span></code> and <code class="docutils literal"><span class="pre">=</span></code>, the latter applying to any pair of items in the collection. This is because sets and dictionaries
+<code class="docutils literal notranslate"><span class="pre">hash</span></code> and <code class="docutils literal notranslate"><span class="pre">=</span></code>, the latter applying to any pair of items in the collection. This is because sets and dictionaries
 are implemented as hash tables.</p>
-<p>Derived from set and dictionary are <code class="docutils literal"><span class="pre">sharedSet</span></code> and <code class="docutils literal"><span class="pre">sharedDictionary</span></code>. These provide locking
+<p>Derived from set and dictionary are <code class="docutils literal notranslate"><span class="pre">sharedSet</span></code> and <code class="docutils literal notranslate"><span class="pre">sharedDictionary</span></code>. These provide locking
 to maintain internal consistency in the presence of concurrency.</p>
 <p>Modules: setAndDictionary, sharedSetAndDictionary</p>
-</div>
-<div class="section" id="tree-based-sets-and-dictionaries">
-<h2>4.5.4. Tree-Based Sets and Dictionaries<a class="headerlink" href="#tree-based-sets-and-dictionaries" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">collection</span>
+</section>
+<section id="tree-based-sets-and-dictionaries">
+<h2><span class="section-number">4.5.4. </span>Tree-Based Sets and Dictionaries<a class="headerlink" href="#tree-based-sets-and-dictionaries" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collection</span>
     <span class="n">tree</span>
         <span class="n">treeNodes</span> <span class="n">abstract</span>
             <span class="n">treeNodes</span> <span class="n">bag</span>
@@ -158,27 +585,27 @@ to maintain internal consistency in the presence of concurrency.</p>
             <span class="n">emptyTrees</span> <span class="nb">set</span>
 </pre></div>
 </div>
-<p><code class="docutils literal"><span class="pre">treeSet</span></code> and <code class="docutils literal"><span class="pre">treeBag</span></code> implement sorted collections using binary trees. The set variant ignores
+<p><code class="docutils literal notranslate"><span class="pre">treeSet</span></code> and <code class="docutils literal notranslate"><span class="pre">treeBag</span></code> implement sorted collections using binary trees. The set variant ignores
 duplicates, while the bag variant does not. Tree sets and bags allow both explicit and implicit keys
-(that is, adding elements can be done with either <code class="docutils literal"><span class="pre">at:Put:</span></code> or <code class="docutils literal"><span class="pre">add:</span></code>), where a tree set that uses
+(that is, adding elements can be done with either <code class="docutils literal notranslate"><span class="pre">at:Put:</span></code> or <code class="docutils literal notranslate"><span class="pre">add:</span></code>), where a tree set that uses
 explicit keys behaves like a dictionary. Sorting is done on explicit keys if present, values otherwise,
 and the objects sorted must be mutually comparable. Comparisons between keys are made using
-<code class="docutils literal"><span class="pre">compare:IfLess:Equal:Greater:</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">compare:IfLess:Equal:Greater:</span></code>.</p>
 <p>The implementation of trees uses dynamic inheritance to distinguish the differing behavior of empty
-and non-empty subtrees. The prototype <code class="docutils literal"><span class="pre">treeSet</span></code> represents an empty (sub)tree; when an element
-is added to it, its parent is switched from <code class="docutils literal"><span class="pre">traits</span> <span class="pre">emptyTrees</span> <span class="pre">set</span></code>, which holds behavior
-for empty (sub)trees, to a new copy of <code class="docutils literal"><span class="pre">treeSetNode</span></code>, which represents a tree node holding an element.
-Thus, the <code class="docutils literal"><span class="pre">treeSet</span></code> object now behaves as a <code class="docutils literal"><span class="pre">treeSetNode</span></code> object, with right and left subtrees
-(initially copies of the empty subtree <code class="docutils literal"><span class="pre">treeSet</span></code>). Dynamic inheritance allows one object to
+and non-empty subtrees. The prototype <code class="docutils literal notranslate"><span class="pre">treeSet</span></code> represents an empty (sub)tree; when an element
+is added to it, its parent is switched from <code class="docutils literal notranslate"><span class="pre">traits</span> <span class="pre">emptyTrees</span> <span class="pre">set</span></code>, which holds behavior
+for empty (sub)trees, to a new copy of <code class="docutils literal notranslate"><span class="pre">treeSetNode</span></code>, which represents a tree node holding an element.
+Thus, the <code class="docutils literal notranslate"><span class="pre">treeSet</span></code> object now behaves as a <code class="docutils literal notranslate"><span class="pre">treeSetNode</span></code> object, with right and left subtrees
+(initially copies of the empty subtree <code class="docutils literal notranslate"><span class="pre">treeSet</span></code>). Dynamic inheritance allows one object to
 behave modally without using clumsy if-tests throughout every method.</p>
 <p>One caveat: since these trees are not balanced, they can degenerate into lists if their elements are
 added in sorted order. However, a more complex tree data structure might obscure the main point
 of this implementation: to provide a canonical example of the use of dynamic inheritance.</p>
 <p>Modules: tree</p>
-</div>
-<div class="section" id="lists-and-priorityqueues">
-<h2>4.5.5. Lists and PriorityQueues<a class="headerlink" href="#lists-and-priorityqueues" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">collection</span>
+</section>
+<section id="lists-and-priorityqueues">
+<h2><span class="section-number">4.5.5. </span>Lists and PriorityQueues<a class="headerlink" href="#lists-and-priorityqueues" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">collection</span>
     <span class="nb">list</span>
     <span class="n">priorityQueue</span>
 </pre></div>
@@ -189,90 +616,140 @@ are efficient, but removing an object in the middle is less so, as a linear sear
 highest priority is always at the front of the queue. Priority queues are useful for sorting (heapsort)
 and scheduling. The default comparison uses &lt;, but this can be changed.</p>
 <p>Modules: list. priorityQueue</p>
-</div>
-<div class="section" id="constructing-and-concatenating-collections">
-<h2>4.5.6. Constructing and Concatenating Collections<a class="headerlink" href="#constructing-and-concatenating-collections" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">clonable</span>
+</section>
+<section id="constructing-and-concatenating-collections">
+<h2><span class="section-number">4.5.6. </span>Constructing and Concatenating Collections<a class="headerlink" href="#constructing-and-concatenating-collections" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clonable</span>
     <span class="n">collector</span>
 </pre></div>
 </div>
-<p>Two kinds of objects play supporting roles for collections. A <code class="docutils literal"><span class="pre">collector</span></code> object is created using
-the &amp; operator (inherited from <code class="docutils literal"><span class="pre">defaultBehavior</span></code>), and represents a collection under construction.
+<p>Two kinds of objects play supporting roles for collections. A <code class="docutils literal notranslate"><span class="pre">collector</span></code> object is created using
+the &amp; operator (inherited from <code class="docutils literal notranslate"><span class="pre">defaultBehavior</span></code>), and represents a collection under construction.
 The &amp; operator provides a concise syntax for constructing small collections. For example:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>(1 &amp; ’abc’ &amp; x) asList
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(1 &amp; ’abc’ &amp; x) asList
 </pre></div>
 </div>
-<p>constructs a list containing an integer, a string, and the object x. A <code class="docutils literal"><span class="pre">collector</span></code> object is not itself
-a collection; it is converted into one using a conversion message such as <code class="docutils literal"><span class="pre">asList</span></code>, <code class="docutils literal"><span class="pre">asVector</span></code>, or
-<code class="docutils literal"><span class="pre">asString</span></code>.</p>
+<p>constructs a list containing an integer, a string, and the object x. A <code class="docutils literal notranslate"><span class="pre">collector</span></code> object is not itself
+a collection; it is converted into one using a conversion message such as <code class="docutils literal notranslate"><span class="pre">asList</span></code>, <code class="docutils literal notranslate"><span class="pre">asVector</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">asString</span></code>.</p>
 <p>Modules: collector</p>
-</div>
-</div>
+</section>
+</section>
 
 
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="numbers.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4.4. </span>Numbers and Time</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pairs.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.6. </span>Pairs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexable-collections">4.5.1. Indexable Collections</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strings-characters-and-paragraphs">4.5.2. Strings, Characters, and Paragraphs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unordered-sets-and-dictionaries">4.5.3. Unordered Sets and Dictionaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-based-sets-and-dictionaries">4.5.4. Tree-Based Sets and Dictionaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-and-priorityqueues">4.5.5. Lists and PriorityQueues</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-and-concatenating-collections">4.5.6. Constructing and Concatenating Collections</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/collections.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">4.5. Collections</a><ul>
-<li><a class="reference internal" href="#indexable-collections">4.5.1. Indexable Collections</a></li>
-<li><a class="reference internal" href="#strings-characters-and-paragraphs">4.5.2. Strings, Characters, and Paragraphs</a></li>
-<li><a class="reference internal" href="#unordered-sets-and-dictionaries">4.5.3. Unordered Sets and Dictionaries</a></li>
-<li><a class="reference internal" href="#tree-based-sets-and-dictionaries">4.5.4. Tree-Based Sets and Dictionaries</a></li>
-<li><a class="reference internal" href="#lists-and-priorityqueues">4.5.5. Lists and PriorityQueues</a></li>
-<li><a class="reference internal" href="#constructing-and-concatenating-collections">4.5.6. Constructing and Concatenating Collections</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="selfwrld.html">4. The Self World</a><ul>
-      <li>Previous: <a href="numbers.html" title="previous chapter">4.4. Numbers and Time</a></li>
-      <li>Next: <a href="pairs.html" title="next chapter">4.6. Pairs</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/collections.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
     </div>
-    <div class="footer">
-      &copy;2017, Russell Allen (Ed.).
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
       
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.5</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Russell Allen (Ed.).
+      <br/>
+    
+  </p>
+</div>
       
-      |
-      <a href="_sources/collections.rst.txt"
-          rel="nofollow">Page source</a>
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    <br/>
+  </p>
+</div>
+      
     </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
 
-    
-
-    
+  </footer>
   </body>
 </html>

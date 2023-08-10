@@ -1,8 +1,14 @@
+.. Self Handbook documentation master file, created by
+   sphinx-quickstart on Thu Aug 10 11:47:32 2023.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
 The Self Handbook
 =================
 
-:Release: |release|
-:Date: |today|
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
 
 Edited by Russell Allen.
 
@@ -26,3 +32,9 @@ Thanks to Ganesh R for his transcription services.
    appendices
    extras
 
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
