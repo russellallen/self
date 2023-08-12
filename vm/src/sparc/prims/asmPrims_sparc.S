@@ -6,7 +6,7 @@
 
 ! some integer primitives
 
-#include "_asmPrims_sparc.S.incl"
+# include "_asmPrims_sparc.S.incl"
 
 .global smi_add_prim, smi_sub_prim, smi_mul_prim
 .global smi_complement_prim

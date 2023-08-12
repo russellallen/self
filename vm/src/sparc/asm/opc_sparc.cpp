@@ -29,7 +29,7 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.   */
 
 
 # pragma implementation "sparc.hh"
-#include "_opc_sparc.cpp.incl"
+# include "_opc_sparc.cpp.incl"
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
