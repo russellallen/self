@@ -3,7 +3,6 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-
 # pragma implementation "node_sparc.hh"
 
 # include "_node_sparc.cpp.incl"

@@ -3,7 +3,6 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-
 # pragma implementation "countPattern_sparc.hh"
 # include "_countPattern_sparc.cpp.incl"
 
