@@ -16,7 +16,7 @@ class InterruptedContext AbortContext;
 
 
 void InterruptedContext::fatal_menu() {
-  // this really belongs in lprintf_fatal but the declarations are a mess
+  // this really belongs in lprint_fatal but the declarations are a mess
   lprintf("\nVM Version: %d.%d.%d, %s\n", 
           Memory ? (void*)Memory->major_version     : 0, 
           Memory ? (void*)Memory->minor_version     : 0,
