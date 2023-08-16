@@ -302,8 +302,9 @@
       theAssembler->jne(&done); // optimize fast case, so predict-weird
       genCall();
       done.define();
-    } else
-      ; // block has already been created (by initial BlockClone node)
+    } else {
+      // block has already been created (by initial BlockClone node)
+    }
   }
   
   void NonLocalReturnNode::gen() {
