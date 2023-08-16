@@ -109,7 +109,7 @@ print_insn (CORE_ADDR memaddr, FILE *stream)
 {
   union sparc_insn insn;
 
-  register unsigned int i;
+  unsigned int i;
 
   if (!opcodes_sorted)
     {
@@ -150,7 +150,7 @@ print_insn (CORE_ADDR memaddr, FILE *stream)
           fputs_filtered (opcode->name, stream);
 
           {
-            register const char *s;
+            const char *s;
 
             if (opcode->args[0] != ',')
               fputs_filtered (" ", stream);
@@ -386,7 +386,7 @@ compare_opcodes (char* a, char* b)
   struct sparc_opcode *op1 = (struct sparc_opcode *) b;
   unsigned long int match0 = op0->match, match1 = op1->match;
   unsigned long int lose0 = op0->lose, lose1 = op1->lose;
-  register unsigned int i;
+  unsigned int i;
 
   /* If a bit is set in both match and lose, there is something
      wrong with the opcode table.  */
