@@ -50,11 +50,11 @@ rSet::rSet(rSet *old, char *start, char *end)
 
 void rSet::record_multistores(oop* start, oop* end) {
   assert(card_size_in_oops == 32, "wired in");
-  register char *bound= Memory->new_gen->boundary();
+  char *bound= Memory->new_gen->boundary();
   if (Memory->new_gen->is_new(as_memOop(start), bound))
     return;
   
-  register oop x;
+  oop x;
 # define VISIT(w, next_card)                                                  \
     x = *(w);                                                                 \
     if (x->is_mem()                                                           \
@@ -65,7 +65,7 @@ void rSet::record_multistores(oop* start, oop* end) {
     
   
   // p = first card boundary on or after start
-  register oop* p = (oop*)roundTo(int32(start), card_size);
+  oop* p = (oop*)roundTo(int32(start), card_size);
   
   // but dont go past end!
   if (end < p) {

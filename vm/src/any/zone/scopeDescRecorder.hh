@@ -302,7 +302,7 @@ class nameDescHeaderByte {
       assert( code <= max_code, "code too high");
       assert( i <= no_index, "index too high");
       byte = addBits(i << code_width, code);
-      if (has_id) byte = setNth(byte, hasId_bit_num);
+      if (has_id) setNth(byte, hasId_bit_num);
     }
   }
 
@@ -329,8 +329,8 @@ class scopeDescHeaderByte {
     assert( code <= max_code, "code too high");
     assert( lookupIndex <= max_lookup, "lookup index too high");
     byte = addBits(lookupIndex << code_width, code);
-    if (lite)      byte = setNth(byte, lite_bit_num);
-    if (nameDescs) byte = setNth(byte, nameDescs_bit_num);
+    if (lite)      setNth(byte, lite_bit_num);
+    if (nameDescs) setNth(byte, nameDescs_bit_num);
   }
 
   void unpack(u_char value) { byte = value; }
