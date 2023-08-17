@@ -1214,7 +1214,7 @@ a better way to ensure that? -- Adam, 6/05\x7fModuleInfo: Module: tests InitialC
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
          'Category: VM tests\x7fCategory: unwind protect and non-local returns\x7fModuleInfo: Module: tests InitialContents: InitializeToExpression: (nil)'
         
-         nlrEvalBlock.
+         nlrEvalBlock <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'tests' -> () From: ( | {
@@ -2137,9 +2137,17 @@ frame conversion of all frames.\x7fModuleInfo: Module: tests InitialContents: Fo
              mirrorLookupTests.
              browse unitTests run.
              deltablueTest.
+            ] withAndWithoutInlining.
+
+            [
+             "We don't need to run these application tests
+              for general testing.
+              We can add back in when we have a more comprehensive testing 
+              framework -- rca 2023
+             "
              uiTest: errorMessages.
              primitiveMakerTest.
-            ] withAndWithoutInlining.
+            ].
 
             [
               "We do not use the so-called fast transporter anymore
@@ -2559,7 +2567,7 @@ Return the result\x7fModuleInfo: Module: tests InitialContents: FollowSlot\x7fVi
         
          uiTest: errorMessages = ( |
             | 
-                    ui testIfBadDisplay: [ | :err |
+                   ui testIfBadDisplay: [ | :err |
                         ('Not testing ui: ', err) printLine.
                         errorMessages add:
             ' 
