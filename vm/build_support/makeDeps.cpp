@@ -337,7 +337,8 @@ class LinuxPlatform: public AbstractPlatform {
   // For Unix make, include the dependencies for precompiled header files.
   Bool includeGIDependencies() { return True; }
 
-  Bool includeGIInEachIncl() { return False; }
+  // To make #pragma implementation work with the precompiled headers
+  Bool includeGIInEachIncl() { return True; }
 
   void writeGIInclude(FILE* inclFile ) {
     fprintf(inclFile, "# include \"%s\"\n", GIFileTemplate->pre_stem_suff());
@@ -374,6 +375,13 @@ class UnixPlatform: public AbstractPlatform {
 
   // For Unix make, include the dependencies for precompiled header files.
   Bool includeGIDependencies() { return True; }
+
+  // To make #pragma implementation work with the precompiled headers
+  Bool includeGIInEachIncl() { return True; }
+
+  void writeGIInclude(FILE* inclFile ) {
+    fprintf(inclFile, "# include \"%s\"\n", GIFileTemplate->pre_stem_suff());
+  }
 
 } Plat;
 

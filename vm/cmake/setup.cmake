@@ -36,11 +36,6 @@ list(APPEND _flags
   -fno-stack-protector
 )
 
-if(gcc)
-  # Flag only supported on GCC
-  list(APPEND _flags -fkeep-inline-functions)
-endif()
-
 if(SELF_COVERAGE)
   list(APPEND _flags --coverage)
 endif()
