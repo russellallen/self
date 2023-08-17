@@ -2165,7 +2165,7 @@ frame conversion of all frames.\x7fModuleInfo: Module: tests InitialContents: Fo
          runTestsAutomaticallyOnStartup = ( |
             | 
             runTestsAutomaticallyOnStartupFlag ifTrue: [
-             prompt suspendWhile: [runVMSuite. _Quit]].
+             prompt suspendWhile: [runAllTests. _Quit]].
             self).
         } | ) 
 
