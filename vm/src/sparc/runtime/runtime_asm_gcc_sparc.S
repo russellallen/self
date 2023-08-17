@@ -3,7 +3,7 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-#include "_runtime_asm_gcc_sparc.S.incl"
+# include "_runtime_asm_gcc_sparc.S.incl"
 
 // XXX: can't include config.hh here, so FOO_VERSION are not defined
 # if defined(__NetBSD__)	// TARGET_OS_VERSION == NETBSD_VERSION

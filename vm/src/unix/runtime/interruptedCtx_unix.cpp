@@ -3,9 +3,8 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# include "_interruptedCtx_unix.cpp.incl"
-
 # pragma implementation "interruptedCtx_unix.hh"
+# include "_interruptedCtx_unix.cpp.incl"
 
 
 self_sig_context_t InterruptedContext::dummy_scp;

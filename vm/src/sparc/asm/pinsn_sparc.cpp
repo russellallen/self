@@ -26,7 +26,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 # pragma implementation "pinsn.hh"
 
-#include "_pinsn_sparc.cpp.incl"
+# include "_pinsn_sparc.cpp.incl"
 
 
 
