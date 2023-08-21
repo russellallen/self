@@ -429,7 +429,7 @@ class Assembler: public BaseAssembler {
   }
   
   void DFormCompare(const char* name, OPCD_codes op, int32 ll, Location ra, int32 i, OperandType t, CR_Field cf ) {
-   add_offset(t, opcd_CompareImmediate ? KF_si : KF_ui);
+   add_offset(t, op == opcd_CompareImmediate ? KF_si : KF_ui);
    assemble( OPCD(op) | CBF(cf) | L(ll) | RA(ra) 
                       | (op == opcd_CompareImmediate ? SI(i) : UI(i)));
    if (printing) 
