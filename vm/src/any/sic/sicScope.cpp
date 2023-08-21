@@ -1727,13 +1727,17 @@
       PReg* r = resultPR;
       switch(pd->etype()) {
        case ReceiverPrimType:
-        result = receiver->shallowCopy(r, c); break;
+        result = receiver->shallowCopy(r, c);
+        break;
        case ReceiverMapPrimType:
-        result = receiver->mapify(r, c); break;
+        result = receiver->mapify(r, c);
+        break;
        case IntegerPrimType:
-        result = new MapSExpr(Memory->smi_map->enclosing_mapOop(), r, c); break;
+        result = new MapSExpr(Memory->smi_map->enclosing_mapOop(), r, c);
+        break;
        case FloatPrimType:
-        result = new MapSExpr(Memory->float_map->enclosing_mapOop(), r, c); break;
+        result = new MapSExpr(Memory->float_map->enclosing_mapOop(), r, c);
+        break;
        case StringPrimType:
         result = new MapSExpr(Memory->stringObj->map()->enclosing_mapOop(), r, c);
         break;
@@ -1753,7 +1757,8 @@
         break;
        case UnknownPrimType:
        default:
-        result = new UnknownSExpr(r, c); break;
+        result = new UnknownSExpr(r, c);
+        break;
       }
       if (failRes) result = result->mergeWith(failRes, theNodeGen->current);
     }
