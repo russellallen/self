@@ -246,8 +246,8 @@ inline bool isAddingInst(inst_t inst) {
 inline inst_t signExtend(int32 field_bit_size, int32 i) {
   return   i
         | (i   &   1 << (field_bit_size-1)
-           ?   ~0 << field_bit_size   
-           :    0 ); 
+           ?   ~0u << field_bit_size
+           :    0u ); 
 }
 
 
