@@ -1750,6 +1750,7 @@
         break;
        case NoReturnPrimType:
         result = new NoResultSExpr;
+        break;
        case UnknownPrimType:
        default:
         result = new UnknownSExpr(r, c); break;
