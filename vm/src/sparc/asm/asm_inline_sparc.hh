@@ -133,7 +133,7 @@
     ExpandCallXTemplates(DefineCallXTemplate)
 
 
-  inline void Assembler::ArithR(char* name, fint op, fint op3,
+  inline void Assembler::ArithR(const char* name, fint op, fint op3,
                                 Location s1, Location s2, Location d) {
     assert(isRegister(s1), "operand 1 must be a register");
     assert(isRegister(s2), "operand 2 must be a register");
@@ -147,7 +147,7 @@
   }
   
 
-  inline void Assembler::ArithX(char* name, fint op, fint op3, Location s1,
+  inline void Assembler::ArithX(const char* name, fint op, fint op3, Location s1,
                                 int32 s2, OperandType t, bool noSetHi,
                                 Location d) {
     assert(isRegister(s1), "operand 1 must be a register");
