@@ -209,7 +209,7 @@ extern "C" asm void Untested_Stub() {
 # endif // MWERKS_COMPILER
 
 
-void Assembler::_Untested(char* msg, Location temp1, bool save_link) {
+void Assembler::_Untested(const char* msg, Location temp1, bool save_link) {
   // assumes we may not have a frame
   
   // too much: lprintf("generated untested code for: %s\n", msg);
