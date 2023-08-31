@@ -55,9 +55,16 @@ ok1:    beq,a   ok2
         save    %sp, (16 + 8) * -4, %sp
         ba      handleError
         mov     badTypeOffset, arg1
-ok2:    mov     ireceiver, receiver
+ok2:
+#if __sparc_v8__ || __sparc_v9__
+        sra     iarg1, Tag_Size, arg1
+        smul    ireceiver, %o1, %o0
+        rd      %y, %o1         /* like .mul */
+#else
+        mov     ireceiver, receiver
         call    .Lmul           /* NB: local copy below */
         sra     iarg1, Tag_Size, arg1
+#endif
         sethi   %hi(0x80000000), %g1
         andcc   %o0, %g1, %g0      /* test sign bit of lower part of result */
         beq,a   upper
@@ -153,7 +160,7 @@ breakpoint_prim:
         ret
         restore
 
-
+#if !__sparc_v8__ && !__sparc_v9__
 /*
  * FIXME: NetBSD v8 .mul stub in lib/libarch/sparc/v8/sparc_v8.S
  * doesn't follow .mul ABI.  .mul returns the upper half in %o1, but
@@ -269,3 +276,4 @@ breakpoint_prim:
 	or	%o5, %o0, %o0	! construct low part of result
 	retl
 	sra	%o4, 20, %o1	! ... and extract high part of result
+#endif /* !__sparc_v8__ && !__sparc_v9__ */
