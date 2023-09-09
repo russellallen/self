@@ -907,7 +907,10 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
             fontSize: (pts max: 2) min: maxFontSize.
             "Set points not pixels - rca 1/2020"
             "Also points are expressed as * 10"
-            familyName, fontSize printString, '-', fontSize printString, '0-*-*-*-*-*-*').
+            familyName,     "ends in -"
+            '*',            "NB: don't specify pixel size"
+            '-', (fontSize * 10) printString,
+            '-*-*-*-*-*-*').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xFontDictionary' -> () From: ( | {
