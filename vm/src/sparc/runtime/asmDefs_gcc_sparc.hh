@@ -5,6 +5,31 @@
 
 # ifdef sparc
 
+/*
+ * C Compiler Frame SiZe: 16 words to flush a window (ins, locals),
+ * one word hidden parameter to return aggregates, 6 words for callee
+ * to store register arguments.  Rounded up to doubleword boundary to
+ * maintain stack alignment.  (16 + 1 + 6 + 1) * 4 = 96
+ */
+#define CCFSZ 96
+
+#define ASMSYM(_Sym, _Type)			\
+		.globl _Sym;			\
+		.type _Sym, _Type;		\
+	_Sym:
+
+#define ASMFUNC(_Sym)	ASMSYM(_Sym, STT_FUNC)
+#define ASMOBJ(_Sym)	ASMSYM(_Sym, STT_OBJECT)
+#define ASMLABEL(_Sym)	ASMSYM(_Sym, STT_NOTYPE)
+
+#define LFUNC(_Sym)				\
+		.local _Sym;			\
+		.type _Sym, STT_FUNC;		\
+	_Sym:
+
+#define ASMEND(_Sym)	.size _Sym, (. - _Sym)
+
+
 # define arg0 %o0
 # define arg1 %o1
 # define arg2 %o2
