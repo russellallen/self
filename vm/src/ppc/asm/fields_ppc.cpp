@@ -17,9 +17,9 @@ bool is_immediate_pair(inst_t* instp) {
   fint reg = RT(i1);
   inst_t i2 = instp[1];
   return
-       is_ori(i2)                    &&  RA(i2) == reg  &&  RS(i2) == reg 
-  ||   is_addi(i2)                   &&  RT(i2) == reg  &&  RS(i2) == reg
-  ||   is_load_store_immediate(i2)   &&  RA(i2) == reg;
+       (is_ori(i2)                    &&  RA(i2) == reg  &&  RS(i2) == reg)
+  ||   (is_addi(i2)                   &&  RT(i2) == reg  &&  RS(i2) == reg)
+  ||   (is_load_store_immediate(i2)   &&  RA(i2) == reg);
 }
 
   
@@ -27,8 +27,8 @@ int32 immediate_pair_target(inst_t* instp) {
   // find out if instp points to lis followed by ori/addi/load/store
   inst_t i2 = instp[1];
   return   is_ori(i2)
-             ?    SI(instp[0]) << si_bits  |  UI(i2)
-             :    SI(instp[0]) << si_bits  +  SI(i2);
+             ?    (SI(instp[0]) << si_bits)  |  UI(i2)
+             :    (SI(instp[0]) << si_bits)  +  SI(i2);
 }
 
 
@@ -70,8 +70,8 @@ pc_t get_target_of_Self_call_site(inst_t* instp) {
   if ( r != NULL ) {
     --ip; // we have the answer! (in one instruction)
   }  
-  else if ( is_branch_to_ctr(ip[0])  &&  is_mtctr(ip[-1])
-       ||   is_branch_to_lr (ip[0])  &&  is_mtlr (ip[-1]) ) {
+  else if ( (is_branch_to_ctr(ip[0])  &&  is_mtctr(ip[-1]))
+       ||   (is_branch_to_lr (ip[0])  &&  is_mtlr (ip[-1])) ) {
     assert( is_immediate_pair(&ip[-3]), "");
     r = (pc_t) immediate_pair_target(&ip[-3]);
     ip -= 4; // preceding instruction is at ip - 4
@@ -109,8 +109,8 @@ void set_target_of_Self_call_site(inst_t* instp, void* target) {
     return;
   }
   // not a simple jump; look for a complex one
-  else if ( is_branch_to_ctr(ip[0])  &&  is_mtctr(ip[-1])
-       ||   is_branch_to_lr (ip[0])  &&  is_mtlr (ip[-1]) ) {
+  else if ( (is_branch_to_ctr(ip[0])  &&  is_mtctr(ip[-1]))
+       ||   (is_branch_to_lr (ip[0])  &&  is_mtlr (ip[-1])) ) {
     ip -= 3;
     assert( is_immediate_pair(ip), "");
     r = (pc_t) immediate_pair_target(ip);
@@ -136,8 +136,8 @@ void set_immediate_pair_target(inst_t *instp, int32 nv) {
   inst_t i1 = instp[1];
   if ( is_ori(i1) )   Assembler::break_up_word_for_oring (nv, lo, hi);
   else                Assembler::break_up_word_for_adding(nv, lo, hi);
-  instp[0] = i0 & ~si_mask  |  hi;
-  instp[1] = i1 & ~si_mask  |  lo;  assert(si_mask == ui_mask, "");
+  instp[0] = (i0 & ~si_mask)  |  hi;
+  instp[1] = (i1 & ~si_mask)  |  lo;  assert(si_mask == ui_mask, "");
   MachineCache::flush_instruction_cache_range(&instp[0], &instp[2]);
 }
 

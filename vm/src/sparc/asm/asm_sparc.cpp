@@ -13,7 +13,7 @@
 
   Assembler* theAssembler;      // current assembler for instructions
 
-  char* CondNames[] = {
+  const char* const CondNames[] = {
     "n", "eq", "le", "lt", "leu", "cs", "neg", "vs",
     "a", "ne", "gt", "ge", "gtu", "cc", "pos", "vc"
     };

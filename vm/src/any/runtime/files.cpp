@@ -124,14 +124,14 @@ FILE* FileTable::tryOpen(const char*   name,
 
   FILE* f= fopen(expandedName, mode);
   if (f == NULL) {
-    if (!suffix) return NULL;
-  
+    if (suffix == NULL || *suffix == '\0') return NULL;
+
     if (strlen(expandedName) + strlen(suffix)  >=  sizeof(expandedName)) {
       fatal3("file name %s%s is longer than %d",
              expandedName,  suffix,  sizeof(expandedName) - 1);
     }
-    
-    sprintf(expandedName, "%s%s", expandedName, suffix);
+
+    strcat(expandedName, suffix);
     f= fopen(expandedName, mode);
   }
   if (f) {

@@ -26,8 +26,8 @@
     return 0;
   }
   
-  char* reg_names(fint reg);
-  char* freg_names(fint reg);
+  const char* reg_names(fint reg);
+  const char* freg_names(fint reg);
   void print_address(CORE_ADDR memaddr);
   int print_insn(CORE_ADDR memaddr, FILE *stream= stdout);
   void print_stack_temp_name(fint sp_offset);
