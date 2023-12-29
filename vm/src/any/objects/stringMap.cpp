@@ -56,15 +56,10 @@ bool stringMap::verify(oop obj) {
 }
 
 void stringMap::print_string(oop obj, char* buf) {
-  /* sprintf breaks (why?)
-  sprintf(buf, "'%*s'", 
-          stringOop(obj)->length(), 
-          stringOop(obj)->bytes());
-  */
   buf[0] = '\'';
   fint n = stringOop(obj)->length();
   n = min(n, BUFSIZ - 3);
-  strncpy(buf + 1, stringOop(obj)->bytes(), n);
+  memcpy(buf + 1, stringOop(obj)->bytes(), n);
   buf[ 1 + n ] = '\'';
   buf[ 2 + n ] = '\0';
 }

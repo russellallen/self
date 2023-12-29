@@ -23,9 +23,9 @@ blockOop blockMap::create_block(slotsOop meth) {
    default:
     char* slot =  NEW_RESOURCE_ARRAY( char, arg_count * 5 + 2);
     char* s = slot;
-    strncpy(s, "value:With:With:With:With:", 26);
+    memcpy(s, "value:With:With:With:With:", 26);
     for (s += 26, arg_count -= 5; arg_count > 0; arg_count --, s += 5) {
-      strncpy(s, "With:", 5);
+      memcpy(s, "With:", 5);
     }
     *s = '\0';
     name= new_string(slot);
