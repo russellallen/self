@@ -163,7 +163,10 @@ void IntervalTimer::enroll_sync(float freq, doFn fn) {
 
 
 void IntervalTimer::enroll_async_if_safe(float freq, doFn fn) {
-  # if TARGET_OS_VERSION == LINUX_VERSION
+  # if TARGET_ARCH == I386_ARCH				\
+    && (TARGET_OS_VERSION == LINUX_VERSION		\
+	|| TARGET_OS_VERSION == NETBSD_VERSION		\
+	|| TARGET_OS_VERSION == FREEBSD_VERSION)
     enroll_sync(freq, fn); // Fix spy crash
   # else
    enroll_async(freq, fn);
