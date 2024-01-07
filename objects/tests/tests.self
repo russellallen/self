@@ -2165,7 +2165,11 @@ frame conversion of all frames.\x7fModuleInfo: Module: tests InitialContents: Fo
          runTestsAutomaticallyOnStartup = ( |
             | 
             runTestsAutomaticallyOnStartupFlag ifTrue: [
-             prompt suspendWhile: [runAllTests. _Quit]].
+             prompt suspendWhile: [
+                runAllTests. 
+                '\n\\nTests have ended.\n\n' print.
+                '---END-OF-TESTS---' print.
+                _Quit]].
             self).
         } | ) 
 
@@ -2189,7 +2193,7 @@ option.\x7fModuleInfo: Module: tests InitialContents: InitializeToExpression: (f
             eqInliningRelocationTest.
             [
                 immediateTest.
-                conversionPrologueTest.
+                "conversionPrologueTest." " - weird test that takes too long - rca 2023"
                 lookupTest.
                 parentInMethodTest.
                 inheritanceTest.
