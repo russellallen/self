@@ -10,7 +10,7 @@
         -- dmu
 */
 
-#include "_enum_sparc.S.incl"
+# include "_enum_sparc.S.incl"
 
 
 .globl find_prior_reference, find_this_object, find_next_object

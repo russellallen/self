@@ -3,7 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma interface
+# ifdef INTERFACE_PRAGMAS
+  # pragma interface
+# endif
 
 // CAVEAT: the info here is redundantly contained in other files, including
 // sun4.format.h !!!!
@@ -247,7 +249,7 @@ inline fint index_for_StackLocation(Location r) { return r - StackLocations; }
 inline Location StackLocation_for_index(fint i) { return Location(StackLocations + i); }
 
 inline bool isInitializedInFillValues(Location loc) {
-  return  O0 <= loc  &&  loc <= O7
-      ||  G0 <= loc  &&  loc <= G7;
+  return  (O0 <= loc  &&  loc <= O7)
+      ||  (G0 <= loc  &&  loc <= G7);
 }
 

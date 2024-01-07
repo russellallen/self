@@ -400,7 +400,7 @@ oop oopClass::unwind_protect_prim(oop doBlock, oop protectBlock) {
     NLRSupport::reset_have_NLR_through_C();    // forget the old NLR, for now
 
     bool original_aborting = res->is_mark();
-    assert( res == badOop  ||  res == 0  ||  OriginalNLRHomeFromC != NULL,
+    assert( res == badOop  ||  res == 0  ||  OriginalNLRHomeFromC != 0,
            "if not aborting, must have a how frame");
     
     // lookup nmethod for 2nd value: message send

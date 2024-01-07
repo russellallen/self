@@ -24,7 +24,7 @@ void abstract_interpreter_method_info::init(byteVectorOop c, objVectorOop l) {
                         ? (InstructionSetKind) getIndex(first_code)
                         : TWENTIETH_CENTURY_INSTRUCTION_SET;
     assert( instruction_set == TWENTIETH_CENTURY_INSTRUCTION_SET
-        ||  0 <= instruction_set  &&  instruction_set <= LAST_INSTRUCTION_SET,
+        ||  (0 <= instruction_set  &&  instruction_set <= LAST_INSTRUCTION_SET),
         "bad instruction set");
   }    
 }

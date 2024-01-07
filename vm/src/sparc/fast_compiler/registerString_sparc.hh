@@ -5,7 +5,9 @@
 
 # ifdef FAST_COMPILER
 
-# pragma interface
+# ifdef INTERFACE_PRAGMAS
+  # pragma interface
+# endif
 
 
 // returns register string with appropriate bit set if l is a location

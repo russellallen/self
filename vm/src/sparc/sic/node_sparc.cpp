@@ -3,7 +3,6 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-
 # pragma implementation "node_sparc.hh"
 
 # include "_node_sparc.cpp.incl"
@@ -13,6 +12,12 @@
   void BasicNode::genBranch() {
     l = l->unify(theAssembler->BraForward(true));
   }
+
+#if TARGET_OS_VERSION == NETBSD_VERSION
+/* XXX: where does sunos get trap.h included? */
+#include <sparc/trap.h>
+#define ST_FLUSH_WINDOWS ST_FLUSHWIN
+#endif
 
   void PrologueNode::flushRegisterWindows() {
     // ta g0, ST_FLUSH_WINDOWS

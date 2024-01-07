@@ -4,7 +4,7 @@
    See the LICENSE file for license information. */
 
 # pragma implementation "proxyOop.hh"
-#include "_proxyOop.cpp.incl"
+# include "_proxyOop.cpp.incl"
 
 // Magic number, stored in proxyOop's cObject field, when it is killed.
 // safer to make it smiOop -- dmu

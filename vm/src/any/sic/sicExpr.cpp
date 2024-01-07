@@ -344,8 +344,8 @@
   bool MergeSExpr::containsUnknown() {
     if (isUnknownSet()) {
       UnknownSExpr* u;
-      assert((u = findUnknown()) == NULL && !isContainingUnknown() ||
-             u != NULL && isContainingUnknown(), "isContainingUnknown wrong");
+      assert(((u = findUnknown()) == NULL && !isContainingUnknown()) ||
+             (u != NULL && isContainingUnknown()), "isContainingUnknown wrong");
       return isContainingUnknown();
     }
     setUnknownSet(true);

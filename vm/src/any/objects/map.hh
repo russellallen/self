@@ -165,7 +165,7 @@ public:
   virtual stringOop source() { 
     ShouldNotCallThis(); return stringOop(NULL); }
   virtual MethodKind kind() {
-    ShouldNotCallThis(); return MethodKind(NULL); }
+    ShouldNotCallThis(); return MethodKind(-1); }
   
   // cloning operations
   virtual oop clone(oop obj, bool mustAllocate= true, oop genObj= NULL) = 0;

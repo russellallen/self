@@ -26,7 +26,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 # pragma implementation "pinsn.hh"
 
-#include "_pinsn_sparc.cpp.incl"
+# include "_pinsn_sparc.cpp.incl"
 
 
 
@@ -109,7 +109,7 @@ print_insn (CORE_ADDR memaddr, FILE *stream)
 {
   union sparc_insn insn;
 
-  register unsigned int i;
+  unsigned int i;
 
   if (!opcodes_sorted)
     {
@@ -150,7 +150,7 @@ print_insn (CORE_ADDR memaddr, FILE *stream)
           fputs_filtered (opcode->name, stream);
 
           {
-            register const char *s;
+            const char *s;
 
             if (opcode->args[0] != ',')
               fputs_filtered (" ", stream);
@@ -386,7 +386,7 @@ compare_opcodes (char* a, char* b)
   struct sparc_opcode *op1 = (struct sparc_opcode *) b;
   unsigned long int match0 = op0->match, match1 = op1->match;
   unsigned long int lose0 = op0->lose, lose1 = op1->lose;
-  register unsigned int i;
+  unsigned int i;
 
   /* If a bit is set in both match and lose, there is something
      wrong with the opcode table.  */
@@ -442,13 +442,14 @@ compare_opcodes (char* a, char* b)
   /* Except for aliases, two "identical" instructions had
      better have the same opcode.  This is a sanity check on the table.  */
   i = strcmp (op0->name, op1->name);
-  if (i)
+  if (i) {
       if (op0->flags & F_ALIAS) /* If they're both aliases, be arbitrary. */
           return i;
       else
           fprintf (stderr,
                    "Internal error: bad sparc-opcode.h: \"%s\" == \"%s\"\n",
                    op0->name, op1->name);
+  }
 
   /* Fewer arguments are preferred.  */
   {

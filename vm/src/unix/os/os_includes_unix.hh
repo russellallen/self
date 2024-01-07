@@ -41,7 +41,9 @@ extern "C" {
 }
 
 # include <stdlib.h>
-#if TARGET_OS_VERSION != MACOSX_VERSION
+#if TARGET_OS_VERSION != MACOSX_VERSION		\
+    && TARGET_OS_VERSION != NETBSD_VERSION	\
+    && TARGET_OS_VERSION != FREEBSD_VERSION
 # include <alloca.h>
 #endif
 
@@ -75,12 +77,10 @@ extern "C" {
 # if TARGET_OS_VERSION == MACOSX_VERSION
 #   undef ASSEMBLER
 #   include <sys/ucontext.h>
-#   include <termios.h>
 #   include <sys/ioctl.h>
 #   include <pthread.h>
-# else
-#   include <termio.h>
 # endif
+# include <termios.h>
 # include <sys/syscall.h>
 # include <errno.h>
 # include <sys/stat.h>
@@ -95,20 +95,13 @@ extern "C" {
 # include <signal.h>
 
 
-# if TARGET_OS_VERSION == SOLARIS_VERSION
-  typedef siginfo_t        self_code_info_t;
-  typedef ucontext_t       self_sig_context_t;
-  typedef stack_t          self_stack_t;
-# elif TARGET_OS_VERSION == SUNOS_VERSION
+# if TARGET_OS_VERSION == SUNOS_VERSION
   typedef sigcontext       self_sig_context_t;
   typedef struct sigstack  self_stack_t;
-# elif TARGET_OS_VERSION == MACOSX_VERSION \
-    || TARGET_OS_VERSION ==  LINUX_VERSION
+# else
   typedef siginfo_t        self_code_info_t;
   typedef ucontext_t       self_sig_context_t;
   typedef stack_t          self_stack_t;
-# else
-  # error what?
 # endif
 
 # if  TARGET_ARCH == SPARC_ARCH
@@ -163,8 +156,7 @@ extern "C" {
 # endif
 
 
-# if TARGET_OS_VERSION != SOLARIS_VERSION  \
-  && TARGET_OS_VERSION != LINUX_VERSION
+# if TARGET_OS_VERSION == SUNOS_VERSION
   #  include <sys/vadvise.h>
    extern "C" {
      int vadvise(int);
@@ -182,6 +174,9 @@ extern "C" {
   # include <mach/machine/thread_status.h> // for interruptedCtx_*.cpp *_thread_state_t
 # endif
 
+# if TARGET_OS_VERSION == NETBSD_VERSION || TARGET_OS_VERSION == FREEBSD_VERSION
+  # include <sys/sysctl.h>
+# endif
 
 # include <sys/mman.h>
 
@@ -205,6 +200,10 @@ extern "C" {
 # define FORK vfork
 # elif  TARGET_OS_VERSION == LINUX_VERSION
 # define FORK vfork
+# elif  TARGET_OS_VERSION == NETBSD_VERSION
+# define FORK vfork
+# elif  TARGET_OS_VERSION == FREEBSD_VERSION
+# define FORK vfork
 # else
    error which?
 #endif
@@ -226,20 +225,14 @@ const int Last_OS_Signal = SIGUSR2+1+20; /* so we dont crash on unknown signals 
 
 // some definitions for SignalInterface:
 
-# if  TARGET_OS_VERSION == SOLARIS_VERSION \
-  ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
-  ||  TARGET_OS_VERSION ==   LINUX_VERSION
-
-  typedef void (*Signal_Handler_t)(int sig, self_code_info_t *info, self_sig_context_t *con);
-
-# elif  TARGET_OS_VERSION == SUNOS_VERSION
+# if  TARGET_OS_VERSION == SUNOS_VERSION
 
   typedef int* CodeInfo;
   typedef void (*Signal_Handler_t)(int sig, int code, self_sig_context_t *scp, char *addr);
 
 # else
 
-  # error what version?
+  typedef void (*Signal_Handler_t)(int sig, self_code_info_t *info, self_sig_context_t *con);
 
 # endif
 

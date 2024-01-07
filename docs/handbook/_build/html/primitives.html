@@ -1,275 +1,744 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!DOCTYPE html>
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" >
+
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>10.8. Primitives &#8212; Self Handbook for Self 2017.1 documentation</title>
-    
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     'for Self 2017.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>10.8. Primitives &#8212; Self Handbook 2023.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e46715c6"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'primitives';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="11. Extras" href="extras.html" />
     <link rel="prev" title="10.7. The system monitor" href="monitor.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body role="document">
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
   
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Self Handbook 2023.1 documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="intro.html">
+                        Introduction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="gettingstarted.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="langref.html">
+                        Language Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="selfwrld.html">
+                        The Self World
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="progguid.html">
+                        A Guide to Programming Style
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="howtoprg.html">
+                        How to Program in Self
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="morphic.html">
+                        Morphic: The Self User Interface Framework
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="vmref.html">
+                        Virtual Machine Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="ref.html">
+                        References
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="appendices.html">
+                        Appendices
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="extras.html">
+                        Extras
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
             
-  <div class="section" id="primitives">
-<span id="pp-primitives"></span><span id="id1"></span><h1>10.8. Primitives<a class="headerlink" href="#primitives" title="Permalink to this headline">¶</a></h1>
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="intro.html">
+                        Introduction
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="gettingstarted.html">
+                        Getting Started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="langref.html">
+                        Language Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="selfwrld.html">
+                        The Self World
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="progguid.html">
+                        A Guide to Programming Style
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="howtoprg.html">
+                        How to Program in Self
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="morphic.html">
+                        Morphic: The Self User Interface Framework
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="vmref.html">
+                        Virtual Machine Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="ref.html">
+                        References
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="appendices.html">
+                        Appendices
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="extras.html">
+                        Extras
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">10.1. Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lexicaloverview.html">10.2. Lexical overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="syntaxoverview.html">10.3. Syntax overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="builtintypes.html">10.4. Built-in types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usefulselectors.html">10.5. Useful Selectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="menus.html">10.6. Every Menu Item in the Programming Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="monitor.html">10.7. The system monitor</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10.8. Primitives</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="appendices.html" class="nav-link"><span class="section-number">10. </span>Appendices</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="section-number">10.8. </span>Primitives</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="primitives">
+<span id="pp-primitives"></span><span id="id1"></span><h1><span class="section-number">10.8. </span>Primitives<a class="headerlink" href="#primitives" title="Permalink to this heading">#</a></h1>
 <p>Primitives are Self methods implemented by the virtual machine. The first character of a primitive’s
 selector is an underscore (‘_’). You cannot define primitives yourself (unless you modify the
 Virtual Machine), nor can you define slots beginning with an underscore.</p>
-<div class="section" id="primitive-failures">
-<h2>10.8.1. Primitive failures<a class="headerlink" href="#primitive-failures" title="Permalink to this headline">¶</a></h2>
+<section id="primitive-failures">
+<h2><span class="section-number">10.8.1. </span>Primitive failures<a class="headerlink" href="#primitive-failures" title="Permalink to this heading">#</a></h2>
 <p>Every primitive call can take an optional argument defining how errors should be handled for this
-call. To do this, the primitive is extended with an <code class="docutils literal"><span class="pre">IfFail</span></code>: argument. For example, <code class="docutils literal"><span class="pre">_AsObject</span></code>
-becomes <code class="docutils literal"><span class="pre">_AsObjectIfFail</span></code>:, and <code class="docutils literal"><span class="pre">_IntAdd</span></code>: becomes <code class="docutils literal"><span class="pre">_IntAdd:IfFail:</span></code>.</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>&gt; 3 _IntAdd: ’a’ IfFail: [ | :error. :name |
+call. To do this, the primitive is extended with an <code class="docutils literal notranslate"><span class="pre">IfFail</span></code>: argument. For example, <code class="docutils literal notranslate"><span class="pre">_AsObject</span></code>
+becomes <code class="docutils literal notranslate"><span class="pre">_AsObjectIfFail</span></code>:, and <code class="docutils literal notranslate"><span class="pre">_IntAdd</span></code>: becomes <code class="docutils literal notranslate"><span class="pre">_IntAdd:IfFail:</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt; 3 _IntAdd: ’a’ IfFail: [ | :error. :name |
 (name, ’ failed with ’, error, ’.’) printLine. 0 ]
 _IntAdd: failed with badTypeError.
 0        &quot;The primitive returns the result of evaluating the failure block.&quot;
 &gt;
 </pre></div>
 </div>
-<p>When a primitive fails, if the primitive call has an <code class="docutils literal"><span class="pre">IfFail</span></code>: part, the message <code class="docutils literal"><span class="pre">value:With:</span></code> is
-sent to the <code class="docutils literal"><span class="pre">IfFail:</span></code> argument, passing two strings: the name of the primitive and an error string
-indicating the reason for failure. If the failing primitive call <em>does not</em> have an <code class="docutils literal"><span class="pre">IfFail:</span></code> part, the
-message <code class="docutils literal"><span class="pre">primitive:FailedWith:</span></code> is sent to the receiver of the primitive call with the same two
+<p>When a primitive fails, if the primitive call has an <code class="docutils literal notranslate"><span class="pre">IfFail</span></code>: part, the message <code class="docutils literal notranslate"><span class="pre">value:With:</span></code> is
+sent to the <code class="docutils literal notranslate"><span class="pre">IfFail:</span></code> argument, passing two strings: the name of the primitive and an error string
+indicating the reason for failure. If the failing primitive call <em>does not</em> have an <code class="docutils literal notranslate"><span class="pre">IfFail:</span></code> part, the
+message <code class="docutils literal notranslate"><span class="pre">primitive:FailedWith:</span></code> is sent to the receiver of the primitive call with the same two
 strings as arguments.</p>
 <p>The result returned by the error handler becomes the result of the primitive operation (0 in our example);
 execution then continues normally. If you want the program to be aborted, you have to do
-this explicitly within the error handler, for example by calling the standard <code class="docutils literal"><span class="pre">error:</span></code> method defined
+this explicitly within the error handler, for example by calling the standard <code class="docutils literal notranslate"><span class="pre">error:</span></code> method defined
 in the default world.</p>
 <p>The following table lists the error string prefixes passed by the VM to indicate the reason of the
 primitive failure. If the error string consists of more than the prefix it will reveal more details about
 the error.</p>
-<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><span class="target" id="index-4"></span><span class="target" id="index-5"></span><span class="target" id="index-6"></span><span class="target" id="index-7"></span><span class="target" id="index-8"></span><span class="target" id="index-9"></span><span class="target" id="index-10"></span><span class="target" id="index-11"></span><span class="target" id="index-12"></span><span class="target" id="index-13"></span><span class="target" id="index-14"></span><span class="target" id="index-15"></span><span class="target" id="index-16"></span><span class="target" id="index-17"></span><span class="target" id="index-18"></span><span class="target" id="index-19"></span><span class="target" id="index-20"></span><span class="target" id="index-21"></span><span class="target" id="index-22"></span><span class="target" id="index-23"></span><span class="target" id="index-24"></span><span class="target" id="index-25"></span><span class="target" id="index-26"></span><span class="target" id="index-27"></span><span class="target" id="index-28"></span><table border="1" class="colwidths-given docutils" id="id2">
-<caption><span class="caption-number">Table 10.5 </span><span class="caption-text">Primitive failures</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><span class="target" id="index-4"></span><span class="target" id="index-5"></span><span class="target" id="index-6"></span><span class="target" id="index-7"></span><span class="target" id="index-8"></span><span class="target" id="index-9"></span><span class="target" id="index-10"></span><span class="target" id="index-11"></span><span class="target" id="index-12"></span><span class="target" id="index-13"></span><span class="target" id="index-14"></span><span class="target" id="index-15"></span><span class="target" id="index-16"></span><span class="target" id="index-17"></span><span class="target" id="index-18"></span><span class="target" id="index-19"></span><span class="target" id="index-20"></span><span class="target" id="index-21"></span><span class="target" id="index-22"></span><span class="target" id="index-23"></span><span class="target" id="index-24"></span><span class="target" id="index-25"></span><span class="target" id="index-26"></span><span class="target" id="index-27"></span><span class="target" id="index-28"></span><table class="table" id="id2">
+<caption><span class="caption-number">Table 10.5 </span><span class="caption-text">Primitive failures</span><a class="headerlink" href="#id2" title="Permalink to this table">#</a></caption>
 <colgroup>
-<col width="9%" />
-<col width="91%" />
+<col style="width: 9.1%" />
+<col style="width: 90.9%" />
 </colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Prefix</th>
-<th class="head">Description</th>
+<thead>
+<tr class="row-odd"><th class="head"><p>Prefix</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
-<tbody valign="top">
-<tr class="row-even"><td>primitiveNotDefinedError</td>
-<td>Primitive not defined.</td>
+<tbody>
+<tr class="row-even"><td><p>primitiveNotDefinedError</p></td>
+<td><p>Primitive not defined.</p></td>
 </tr>
-<tr class="row-odd"><td>primitiveFailedError</td>
-<td>General primitive failure (for example, an argument has an invalid value).</td>
+<tr class="row-odd"><td><p>primitiveFailedError</p></td>
+<td><p>General primitive failure (for example, an argument has an invalid value).</p></td>
 </tr>
-<tr class="row-even"><td>badTypeError</td>
-<td>The receiver or an argument has the wrong type.</td>
+<tr class="row-even"><td><p>badTypeError</p></td>
+<td><p>The receiver or an argument has the wrong type.</p></td>
 </tr>
-<tr class="row-odd"><td>badTypeSealError</td>
-<td>Proxy’s type seal did not match expected type seal.</td>
+<tr class="row-odd"><td><p>badTypeSealError</p></td>
+<td><p>Proxy’s type seal did not match expected type seal.</p></td>
 </tr>
-<tr class="row-even"><td>divisionByZeroError</td>
-<td>Division by zero.</td>
+<tr class="row-even"><td><p>divisionByZeroError</p></td>
+<td><p>Division by zero.</p></td>
 </tr>
-<tr class="row-odd"><td>overflowError</td>
-<td>Integer overflow. This can occur in integer arithmetic primitives or in UNIX (when the result is too large to be represented as an integer).</td>
+<tr class="row-odd"><td><p>overflowError</p></td>
+<td><p>Integer overflow. This can occur in integer arithmetic primitives or in UNIX (when the result is too large to be represented as an integer).</p></td>
 </tr>
-<tr class="row-even"><td>badSignError</td>
-<td>Integer receiver or argument has wrong sign.</td>
+<tr class="row-even"><td><p>badSignError</p></td>
+<td><p>Integer receiver or argument has wrong sign.</p></td>
 </tr>
-<tr class="row-odd"><td>alignmentError</td>
-<td>Bad word alignment in memory.</td>
+<tr class="row-odd"><td><p>alignmentError</p></td>
+<td><p>Bad word alignment in memory.</p></td>
 </tr>
-<tr class="row-even"><td>badIndexError</td>
-<td>The vector index (e.g. in <code class="docutils literal"><span class="pre">_At:</span></code>) is out of bounds (too large or negative).</td>
+<tr class="row-even"><td><p>badIndexError</p></td>
+<td><p>The vector index (e.g. in <code class="docutils literal notranslate"><span class="pre">_At:</span></code>) is out of bounds (too large or negative).</p></td>
 </tr>
-<tr class="row-odd"><td>badSizeError</td>
-<td>An invalid size of a vector was specified, e.g. attempting to clone a vector with a negative size (see <code class="docutils literal"><span class="pre">_Clone:Filler:</span></code> and <code class="docutils literal"><span class="pre">_CloneBytes:Filler:</span></code> below).</td>
+<tr class="row-odd"><td><p>badSizeError</p></td>
+<td><p>An invalid size of a vector was specified, e.g. attempting to clone a vector with a negative size (see <code class="docutils literal notranslate"><span class="pre">_Clone:Filler:</span></code> and <code class="docutils literal notranslate"><span class="pre">_CloneBytes:Filler:</span></code> below).</p></td>
 </tr>
-<tr class="row-even"><td>reflectTypeError</td>
-<td>A mirror primitive was applied to the wrong kind of slot, e.g. <code class="docutils literal"><span class="pre">_MirrorParentGroupAt:</span></code> to a slot that isn’t a parent slot.</td>
+<tr class="row-even"><td><p>reflectTypeError</p></td>
+<td><p>A mirror primitive was applied to the wrong kind of slot, e.g. <code class="docutils literal notranslate"><span class="pre">_MirrorParentGroupAt:</span></code> to a slot that isn’t a parent slot.</p></td>
 </tr>
-<tr class="row-odd"><td>outOfMemoryError</td>
-<td>A primitive could not complete because its results would not fit in the existing space.</td>
+<tr class="row-odd"><td><p>outOfMemoryError</p></td>
+<td><p>A primitive could not complete because its results would not fit in the existing space.</p></td>
 </tr>
-<tr class="row-even"><td>stackOverflowError</td>
-<td>The stack overflowed during execution of the primitive or program.</td>
+<tr class="row-even"><td><p>stackOverflowError</p></td>
+<td><p>The stack overflowed during execution of the primitive or program.</p></td>
 </tr>
-<tr class="row-odd"><td>slotNameError</td>
-<td>Illegal slot name.</td>
+<tr class="row-odd"><td><p>slotNameError</p></td>
+<td><p>Illegal slot name.</p></td>
 </tr>
-<tr class="row-even"><td>argumentCountError</td>
-<td>Wrong number of arguments.</td>
+<tr class="row-even"><td><p>argumentCountError</p></td>
+<td><p>Wrong number of arguments.</p></td>
 </tr>
-<tr class="row-odd"><td>unassignableSlotError</td>
-<td>This slot is not assignable.</td>
+<tr class="row-odd"><td><p>unassignableSlotError</p></td>
+<td><p>This slot is not assignable.</p></td>
 </tr>
-<tr class="row-even"><td>lonelyAssignmentSlotError</td>
-<td>Assignment slot must have a corresponding data slot.</td>
+<tr class="row-even"><td><p>lonelyAssignmentSlotError</p></td>
+<td><p>Assignment slot must have a corresponding data slot.</p></td>
 </tr>
-<tr class="row-odd"><td>parallelTWAINSError</td>
-<td>Can not invoke TWAINS primitive (another process is already using it).</td>
+<tr class="row-odd"><td><p>parallelTWAINSError</p></td>
+<td><p>Can not invoke TWAINS primitive (another process is already using it).</p></td>
 </tr>
-<tr class="row-even"><td>noProcessError</td>
-<td>This process does not exist.</td>
+<tr class="row-even"><td><p>noProcessError</p></td>
+<td><p>This process does not exist.</p></td>
 </tr>
-<tr class="row-odd"><td>noActivationError</td>
-<td>This method activation does not exist.</td>
+<tr class="row-odd"><td><p>noActivationError</p></td>
+<td><p>This method activation does not exist.</p></td>
 </tr>
-<tr class="row-even"><td>noReceiverError</td>
-<td>This activation has no receiver.</td>
+<tr class="row-even"><td><p>noReceiverError</p></td>
+<td><p>This activation has no receiver.</p></td>
 </tr>
-<tr class="row-odd"><td>noParentSlot</td>
-<td>This activation has no lexical parent.</td>
+<tr class="row-odd"><td><p>noParentSlot</p></td>
+<td><p>This activation has no lexical parent.</p></td>
 </tr>
-<tr class="row-even"><td>noSenderSlot</td>
-<td>This activation has no sender slot.</td>
+<tr class="row-even"><td><p>noSenderSlot</p></td>
+<td><p>This activation has no sender slot.</p></td>
 </tr>
-<tr class="row-odd"><td>deadProxyError</td>
-<td>This proxy is dead and can not be used.</td>
+<tr class="row-odd"><td><p>deadProxyError</p></td>
+<td><p>This proxy is dead and can not be used.</p></td>
 </tr>
-<tr class="row-even"><td>liveProxyError</td>
-<td>This proxy is live and can not be used to hold a proxy result.</td>
+<tr class="row-even"><td><p>liveProxyError</p></td>
+<td><p>This proxy is live and can not be used to hold a proxy result.</p></td>
 </tr>
-<tr class="row-odd"><td>wrongNoOfArgsError</td>
-<td>Wrong number of arguments was supplied with call of foreign function.</td>
+<tr class="row-odd"><td><p>wrongNoOfArgsError</p></td>
+<td><p>Wrong number of arguments was supplied with call of foreign function.</p></td>
 </tr>
-<tr class="row-even"><td>nullPointerError</td>
-<td>Foreign function returned null pointer.</td>
+<tr class="row-even"><td><p>nullPointerError</p></td>
+<td><p>Foreign function returned null pointer.</p></td>
 </tr>
-<tr class="row-odd"><td>nullCharError</td>
-<td>Can not pass byte vector containing null char to foreign function expecting a string.</td>
+<tr class="row-odd"><td><p>nullCharError</p></td>
+<td><p>Can not pass byte vector containing null char to foreign function expecting a string.</p></td>
 </tr>
-<tr class="row-even"><td>prematureEndOfInputError</td>
-<td>Premature end of input during parsing.</td>
+<tr class="row-even"><td><p>prematureEndOfInputError</p></td>
+<td><p>Premature end of input during parsing.</p></td>
 </tr>
-<tr class="row-odd"><td>noDynamicLinkerError</td>
-<td>Primitive depends on dynamic linker which is not available in this system.</td>
+<tr class="row-odd"><td><p>noDynamicLinkerError</p></td>
+<td><p>Primitive depends on dynamic linker which is not available in this system.</p></td>
 </tr>
-<tr class="row-even"><td>EPERM, ENOENT, ...</td>
-<td>These errors are returned by a UNIX primitive if a UNIX system call executed by the primitive fails. The UNIX error codes are defined in <code class="docutils literal"><span class="pre">/usr/include/sys/errno.h</span></code>; see this file for details on the roughly 90 different UNIX error codes.</td>
+<tr class="row-even"><td><p>EPERM, ENOENT, …</p></td>
+<td><p>These errors are returned by a UNIX primitive if a UNIX system call executed by the primitive fails. The UNIX error codes are defined in <code class="docutils literal notranslate"><span class="pre">/usr/include/sys/errno.h</span></code>; see this file for details on the roughly 90 different UNIX error codes.</p></td>
 </tr>
 </tbody>
 </table>
-<p id="index-30">The <code class="docutils literal"><span class="pre">_ErrorMessage</span></code> primitive, sent to an error string returned by any primitive, returns a more
+<p id="index-30">The <code class="docutils literal notranslate"><span class="pre">_ErrorMessage</span></code> primitive, sent to an error string returned by any primitive, returns a more
 descriptive version of the error message; this is especially useful for UNIX errors.</p>
-</div>
-<div class="section" id="available-primitives">
-<h2>10.8.2. Available primitives<a class="headerlink" href="#available-primitives" title="Permalink to this headline">¶</a></h2>
-<p>A complete list of primitives can be obtained by sending <code class="docutils literal"><span class="pre">primitiveList</span></code> to <code class="docutils literal"><span class="pre">primitives</span></code>. Documentation
-for a primitive (such as <code class="docutils literal"><span class="pre">_Clone</span></code>), can be obtained using at:, thus:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>primitives at: ’_Clone’
+</section>
+<section id="available-primitives">
+<h2><span class="section-number">10.8.2. </span>Available primitives<a class="headerlink" href="#available-primitives" title="Permalink to this heading">#</a></h2>
+<p>A complete list of primitives can be obtained by sending <code class="docutils literal notranslate"><span class="pre">primitiveList</span></code> to <code class="docutils literal notranslate"><span class="pre">primitives</span></code>. Documentation
+for a primitive (such as <code class="docutils literal notranslate"><span class="pre">_Clone</span></code>), can be obtained using at:, thus:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>primitives at: ’_Clone’
 </pre></div>
 </div>
 <p>A list of primitive names matching a pattern can be obtained thus:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span>primitives match: ’_Memory*’
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>primitives match: ’_Memory*’
 </pre></div>
 </div>
 <p>Some points to note when browsing primitives:</p>
 <blockquote>
 <div><ul class="simple">
-<li>Since strings are special kinds of byte vectors, primitives taking byte vectors as arguments
+<li><p>Since strings are special kinds of byte vectors, primitives taking byte vectors as arguments
 can usually take strings. The exception is that canonical strings cannot be passed to primitives
-that modify the object.</li>
-<li>Integer arithmetic primitives take integer receivers and arguments; floating-point arithmetic
-primitives take floating-point receivers and arguments.</li>
-<li>All comparison primitives return either true or false. Integer comparison primitives take integer
+that modify the object.</p></li>
+<li><p>Integer arithmetic primitives take integer receivers and arguments; floating-point arithmetic
+primitives take floating-point receivers and arguments.</p></li>
+<li><p>All comparison primitives return either true or false. Integer comparison primitives take integer
 receivers and arguments; floating-point comparison primitives take floating-point receivers
-and arguments.</li>
-<li>The receiver of a mirror primitive must be a mirror (unless otherwise noted)</li>
+and arguments.</p></li>
+<li><p>The receiver of a mirror primitive must be a mirror (unless otherwise noted)</p></li>
 </ul>
 </div></blockquote>
-</div>
-</div>
+</section>
+</section>
 
 
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="monitor.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">10.7. </span>The system monitor</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="extras.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Extras</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primitive-failures">10.8.1. Primitive failures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-primitives">10.8.2. Available primitives</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/primitives.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">10.8. Primitives</a><ul>
-<li><a class="reference internal" href="#primitive-failures">10.8.1. Primitive failures</a></li>
-<li><a class="reference internal" href="#available-primitives">10.8.2. Available primitives</a></li>
-</ul>
-</li>
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="appendices.html">10. Appendices</a><ul>
-      <li>Previous: <a href="monitor.html" title="previous chapter">10.7. The system monitor</a></li>
-      <li>Next: <a href="extras.html" title="next chapter">11. Extras</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/primitives.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
     </div>
-    <div class="footer">
-      &copy;2017, Russell Allen (Ed.).
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
       
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.5</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Russell Allen (Ed.).
+      <br/>
+    
+  </p>
+</div>
       
-      |
-      <a href="_sources/primitives.rst.txt"
-          rel="nofollow">Page source</a>
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.1.2.
+    <br/>
+  </p>
+</div>
+      
     </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
 
-    
-
-    
+  </footer>
   </body>
 </html>

@@ -10,7 +10,7 @@
 
 
 // change Location enum in regs_ppc.h if you change this!
-char* RegisterNames[] = {
+const char *RegisterNames[] = {
     "r0",  "sp",  "rtoc", "r3",   "r4",  "r5",  "r6",  "r7",
     "r8",  "r9",  "r10",  "r11",  "r12", "r13", "r14", "r15",
     "r16", "r17", "r18",  "r19",  "r20", "r21", "r22", "r23",
@@ -19,17 +19,17 @@ char* RegisterNames[] = {
     "*UnAllocated*"
 };
     
-char *StackArgRegisterNames[] = {
+const char * const StackArgRegisterNames[] = {
   "A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", 
   "A8", "A9", "A10", "A11", "A12", "A13", "A14", "A15"
 };
 
-char *StackIArgRegisterNames[] = {
+const char * const StackIArgRegisterNames[] = {
   "I0", "I1", "I2", "I3", "I4", "I5", "I6", "I7", 
   "I8", "I9", "I10", "I11", "I12", "I13", "I14", "I15"
 };
     
-char *StackLocationNames[] = {
+const char * const StackLocationNames[] = {
   "S0", "S1", "S2", "S3", "S4", "S5", "S6", "S7", 
   "S8", "S9", "S10", "S11", "S12", "S13", "S14", "S15"
 };
@@ -45,9 +45,9 @@ Location IArgRegisters[] = {
 };
 
   
-static char* locationNameHelper(Location base, int num) {
+static const char* locationNameHelper(Location base, int num) {
   char c;
-  char **tbl;
+  const char * const *tbl;
   switch (base) {
     case  ArgStackLocations:     tbl=   StackArgRegisterNames;  c= 'A';  break;
     case IArgStackLocations:     tbl=  StackIArgRegisterNames;  c= 'I';  break;
@@ -62,7 +62,7 @@ static char* locationNameHelper(Location base, int num) {
   return s;
 }
 
-char *locationName(Location l) {
+const char *locationName(Location l) {
   Location base;
   int num;
   

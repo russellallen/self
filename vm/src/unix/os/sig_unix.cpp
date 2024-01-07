@@ -13,6 +13,8 @@ int SignalInterface::currentTimerSignal = 0;
 
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
+  ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+  ||  TARGET_OS_VERSION == FREEBSD_VERSION \
   ||  TARGET_OS_VERSION ==   LINUX_VERSION
   static void signal_handler(int sig, self_code_info_t *info = NULL, self_sig_context_t *scp = NULL);
 # elif TARGET_OS_VERSION == SUNOS_VERSION
@@ -116,6 +118,8 @@ bool SignalInterface::is_map_load_signal(int sig) { return sig == SIGSEGV  || si
   bool SignalInterface::is_uplevel_trap(int code) { return code == ILL_TRAP_FAULT(ST_UpLevel); }
 # elif TARGET_OS_VERSION == MACOSX_VERSION
   bool SignalInterface::is_uplevel_trap(int code) { return code == ILL_ILLOPC; }
+# elif TARGET_OS_VERSION == NETBSD_VERSION && TARGET_ARCH == SPARC_ARCH
+  bool SignalInterface::is_uplevel_trap(int code) { return code == ILL_ILLTRP; }
 # else
   bool SignalInterface::is_uplevel_trap(int code) { fatal("unimp"); return false; }
 # endif
@@ -209,7 +213,14 @@ static int32 ctrl_z_handler(int sig) {
 
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
+  ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+  ||  TARGET_OS_VERSION == FREEBSD_VERSION \
   ||  TARGET_OS_VERSION ==   LINUX_VERSION
+#if TARGET_ARCH == I386_ARCH						\
+    && (TARGET_OS_VERSION == NETBSD_VERSION				\
+	|| TARGET_OS_VERSION == FREEBSD_VERSION)
+__attribute__((force_align_arg_pointer))
+#endif
 static void signal_handler(int sig, self_code_info_t *info, self_sig_context_t *scp) {
   if (InterruptedContext::the_interrupted_context->forwarded_to_self_thread(sig))
     return;
@@ -234,7 +245,7 @@ static void signal_handler(int sig, self_code_info_t *info, self_sig_context_t *
     InterruptedContext::the_interrupted_context->set(scp);
     SignalInterface::handle_signal( sig, 
                                     info == NULL  ?  NULL  :  (char*)info->si_addr, 
-                                    info == NULL  ?  NULL  :         info->si_code );
+                                    info == NULL  ?     0  :         info->si_code );
     InterruptedContext::the_interrupted_context->invalidate();
 
     SignalInterface::currentNonTimerSignal = 0;
@@ -255,6 +266,8 @@ static void signal_handler(int sig, self_code_info_t *info, self_sig_context_t *
 
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION == MACOSX_VERSION \
+  ||  TARGET_OS_VERSION == NETBSD_VERSION \
+  ||  TARGET_OS_VERSION == FREEBSD_VERSION \
   ||  TARGET_OS_VERSION ==  LINUX_VERSION
 
 void SignalInterface::init_signal_stack() {

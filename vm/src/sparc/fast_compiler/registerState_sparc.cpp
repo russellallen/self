@@ -42,7 +42,7 @@ RegisterString RegisterState::mask() {
 #   endif
     RegisterString stackLocals =
       stackAllocs[0] << (NumInRegisters + NumLocalRegisters);
-    assert((regs & (-1 << (NumInRegisters + NumLocalRegisters))) == 0,
+    assert((regs & (~0u << (NumInRegisters + NumLocalRegisters))) == 0,
            "regs overlap stackLocals");
     return regs | stackLocals;
 }

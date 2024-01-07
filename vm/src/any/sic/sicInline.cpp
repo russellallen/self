@@ -194,8 +194,8 @@
     if (res && res->isMergeSExpr()) 
       res->setNode(merge, info->resReg);
       
-    assert( info->needRealSend &&  others->length() ||
-           !info->needRealSend && !others->length(), "inconsistent");
+    assert(( info->needRealSend &&  others->length()) ||
+           (!info->needRealSend && !others->length()), "inconsistent");
            
     // NB: *must* use uncommon branch if marked unlikely because
     // future type tests won't test for unknown

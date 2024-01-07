@@ -331,7 +331,7 @@ MonitorCPUBar::MonitorCPUBar(int32 usec)
 
 void MonitorCPUBar::init() {
   sum_usecsU = usedU = sum_usecsS = usedS = n = 0;
-  secsU = usecsU = secsS = secsS = 0;
+  secsU = usecsU = secsS = usecsS = 0;
   for(fint i=0; i < n_intervals; i++) used_usecsU[i] = used_usecsS[i] = 0;
 }
 

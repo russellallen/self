@@ -4,6 +4,7 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
+# pragma implementation "trapdoors.hh"
 # pragma implementation "trapdoors_i386.hh"
 # include "_trapdoors_i386.cpp.incl"
 

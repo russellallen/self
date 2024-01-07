@@ -3,7 +3,6 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-
 # include "_monitorPieces_unix.cpp.incl"
 
  
@@ -57,7 +56,9 @@ ProcessTime ProcessInfo::system_time(){
 } 
 
 # elif  TARGET_OS_VERSION == SUNOS_VERSION  \
-  ||  TARGET_OS_VERSION ==   LINUX_VERSION
+  ||  TARGET_OS_VERSION ==   LINUX_VERSION  \
+  ||  TARGET_OS_VERSION ==  NETBSD_VERSION  \
+  ||  TARGET_OS_VERSION == FREEBSD_VERSION
 
 static struct rusage process_info_ru;
 

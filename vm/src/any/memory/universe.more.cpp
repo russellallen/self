@@ -470,9 +470,10 @@ class InterestingMap: public ResourceObj {
 
   InterestingMap(Map* m, const char* n) {
     map = m; count = size = 0;
-    name = NEW_RESOURCE_ARRAY( char, strlen(n));
-    strncpy(name, n, strlen(n));
-    name[strlen(n)-3] = '\0';           // cheap trick to get rid of "Map"
+    const size_t nlen = strlen(n);
+    name = NEW_RESOURCE_ARRAY( char, nlen);
+    memcpy(name, n, nlen);
+    name[nlen-3] = '\0';        // cheap trick to get rid of "Map"
   }
 
   virtual bool matches(oop p, Map* m)   {

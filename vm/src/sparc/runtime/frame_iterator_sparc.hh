@@ -6,7 +6,9 @@
 // This file is INCLUDED into the middle of the frame class.
 
 
-# pragma interface
+# ifdef INTERFACE_PRAGMAS
+  # pragma interface
+# endif
 
  private:
 

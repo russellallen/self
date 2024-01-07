@@ -4,7 +4,6 @@
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
    See the LICENSE file for license information. */
 
-  
 # pragma implementation "cacheStub_ppc.hh"
 # pragma implementation "cacheStub_inline_ppc.hh"
 # include "_cacheStub_ppc.cpp.incl"

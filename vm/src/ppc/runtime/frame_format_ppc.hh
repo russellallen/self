@@ -1,4 +1,4 @@
-# ifdef __ppc__
+# if defined(__ppc__) || defined(__powerpc__)
 /* Sun-$Revision: 30.13 $ */
 
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
@@ -13,6 +13,7 @@
 /*
 
 Inside Macintosh: Introduction to PowerPC System Software, 1-44
+https://developer.apple.com/library/archive/documentation/mac/pdf/PPC_System_Software/Intro_to_PowerPC.pdf
 
 stack overview:
 

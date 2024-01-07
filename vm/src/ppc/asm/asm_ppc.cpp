@@ -104,7 +104,7 @@ void Assembler::short_branch_to(pc_t dest, OperandType t, Location /*temp*/, boo
 
 void Assembler::load_immediate( Location dest, int32 data, OperandType t ) {
   assert( isRegister(dest), "must be register");
-  bool data_could_change = t == OopOperand  &&  oop(data)->is_mem()   ||   t == CodeAddressOperand;
+  bool data_could_change = (t == OopOperand  &&  oop(data)->is_mem())   ||   t == CodeAddressOperand;
   if ( !data_could_change  &&  fits_within_si(data)) {
     // NumberOperand instead of t because we know data cannot change
     // If we used t, then add_offset would fail because
@@ -209,7 +209,7 @@ extern "C" asm void Untested_Stub() {
 # endif // MWERKS_COMPILER
 
 
-void Assembler::_Untested(char* msg, Location temp1, bool save_link) {
+void Assembler::_Untested(const char* msg, Location temp1, bool save_link) {
   // assumes we may not have a frame
   
   // too much: lprintf("generated untested code for: %s\n", msg);

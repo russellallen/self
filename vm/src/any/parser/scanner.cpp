@@ -437,7 +437,7 @@ void Scanner::initSourcePos() {
 
 void Scanner::resetTokenList() {
   assert(   tokens == NULL
-         || tokens->prev == NULL && tokens->token->type == Token::ACCEPT,
+         || (tokens->prev == NULL && tokens->token->type == Token::ACCEPT),
          "unexpected token");
   tokens= NULL;
 }

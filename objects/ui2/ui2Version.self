@@ -9,9 +9,9 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
-         'Category: versions\x7fModuleInfo: Module: ui2Version InitialContents: InitializeToExpression: (nil)'
+         'Category: versions\x7fModuleInfo: Module: ui2Version InitialContents: InitializeToExpression: (about systemVersion copyOn: \'2023.1/3\')'
         
-         morphic.
+         morphic <- about systemVersion copyOn: '2023.1/3'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> 'parent' -> () From: ( | {

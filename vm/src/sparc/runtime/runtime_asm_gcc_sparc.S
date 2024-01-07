@@ -3,12 +3,16 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-#include "_runtime_asm_gcc_sparc.S.incl"
+# include "_runtime_asm_gcc_sparc.S.incl"
 
-# if TARGET_OS_VERSION == SOLARIS_VERSION
+// XXX: can't include config.hh here, so FOO_VERSION are not defined
+# if defined(__NetBSD__)	// TARGET_OS_VERSION == NETBSD_VERSION
+#  include <sparc/trap.h>
+#  define ST_FLUSH_WINDOWS ST_FLUSHWIN
+# elif defined(__svr4__)	// TARGET_OS_VERSION == SOLARIS_VERSION
 #  undef __cplusplus
 #  include <sys/trap.h>
-# else
+# else				// TARGET_OS_VERSION == SUNOS_VERSION
 #  include <sun4/trap.h>
 # endif
 
@@ -664,7 +668,7 @@ initializePrimDesc:
         restore
 # endif
 
-#if TARGET_OS_VERSION == SUNOS_VERSION
+#if !(defined(__NetBSD__) || defined(__svr4__))	// TARGET_OS_VERSION == SUNOS_VERSION
 # error wrong.
 .global mapToLoad
 

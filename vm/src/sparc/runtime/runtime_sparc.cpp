@@ -36,4 +36,19 @@ void fillRegisterValue(Location loc, oop b) {
 }
 
 void set_flags_for_platform() {
+  LogVMMessages = TARGET_IS_FOR_DEBUGGING;
+  lprintf("for SPARC:  LogVMMessages = %s\n",
+          LogVMMessages ? "true" : "false");
+
+  PrintScriptName = true;
+  lprintf("for SPARC:  PrintScriptName  = %s\n",
+          PrintScriptName ? "true" : "false");
+
+  # ifdef SIC_COMPILER
+    // FIXME: uwe: fails in reldbg build
+    SICReplaceOnStack = !TARGET_IS_OPTIMIZED;
+    lprintf("for SPARC:  SICReplaceOnStack = %s%s\n",
+            SICReplaceOnStack ? "true" : "false",
+            SICReplaceOnStack ? "" : " (FIXME: TARGET_IS_OPTIMIZED)");
+  # endif
 }

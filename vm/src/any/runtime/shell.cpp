@@ -266,6 +266,11 @@ extern "C" void __main() {}     // so we can link with the standard linker
 #   define main old_main  // the "real" main is in main.m
 # endif
 
+#if TARGET_ARCH == I386_ARCH						\
+    && (TARGET_OS_VERSION == NETBSD_VERSION				\
+	|| TARGET_OS_VERSION == FREEBSD_VERSION)
+__attribute__((force_align_arg_pointer))
+#endif
 int main(int argc, char *argv[]) {
   // On Mac, the first printf does an InstallConsole which sets AE handlers
   // so init os first to clear SIOUXSettings.standalone to fix this

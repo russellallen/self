@@ -154,8 +154,8 @@ void sendDesc::rebind(nmethod* nm, char* addr, CountStub *cs_from_pic) {
          "got count stub from pic and count stub from sendDesc");
 
   if (cs_from_pic) {
-    assert(   nm->isYoung() && cs_from_pic->isAgingStub()
-           || isCounting()  && cs_from_pic->isCountStub(),
+    assert(   (nm->isYoung() && cs_from_pic->isAgingStub())
+           || (isCounting()  && cs_from_pic->isCountStub()),
               "count stub from pic doesn't match send desc");
     set_jump_addr(cs_from_pic->insts());
     dependency()->rebind(&cs_from_pic->sdLink);

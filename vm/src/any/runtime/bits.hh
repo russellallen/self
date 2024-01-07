@@ -8,9 +8,9 @@
 # endif
 
 
-# define AllBits        ~0
-# define NoBits         0
-# define OneBit         1
+# define AllBits        ~0u
+# define NoBits         0u
+# define OneBit         1u
 
 # define addBits(x, m)  ((x) | (m))
 # define setBits(x, m)  ((x) |= (m))

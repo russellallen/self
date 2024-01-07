@@ -110,10 +110,19 @@ void set_flags_for_platform() {
 
 
 # include <sys/sysctl.h>
+# if TARGET_OS_VERSION == NETBSD_VERSION
+#  include <machine/cpu.h>
+# endif
 
 // call haveAltiVec() instead of me
 bool slow_haveAltiVec() {
+#if TARGET_OS_VERSION == MACOSX_VERSION
   int selectors[2] = { CTL_HW, HW_VECTORUNIT };
+#elif TARGET_OS_VERSION == NETBSD_VERSION
+  int selectors[2] = { CTL_MACHDEP, CPU_ALTIVEC };
+#else
+#  error what os?
+#endif
   int hasVectorUnit = 0;
   size_t length = sizeof(hasVectorUnit);
   int error = sysctl(selectors, 2, &hasVectorUnit, &length, NULL, 0);

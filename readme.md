@@ -1,8 +1,3 @@
-| System  | Build Status |
-| ------------- | ------------- |
-| VM (for Linux and macOS on master) | [![Build Status](https://travis-ci.org/russellallen/self.svg?branch=master)](https://travis-ci.org/russellallen/self) |
-| VM (for Linux and macOS on dev)    | [![Build Status](https://travis-ci.org/russellallen/self.svg?branch=dev)](https://travis-ci.org/russellallen/self) |
-
 Self
 ====
 
@@ -10,7 +5,7 @@ This is the main repository for the Self programming language and environment.
 
 The Self homepage is at http://selflanguage.org
 
-Please go there for prebuilt binaries for Mac OS X and Linux, documentation,
+Please go there for prebuilt binaries for Linux, NetBSD and FreeBSD, documentation,
 blogs and forums.
 
 For information on:

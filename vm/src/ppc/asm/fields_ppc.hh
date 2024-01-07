@@ -1,4 +1,4 @@
-# ifdef __ppc__
+# if defined(__ppc__) || defined(__powerpc__)
 /* Sun-$Revision: 30.12 $ */
 
 /* Copyright 1992-2006 Sun Microsystems, Inc. and Stanford University.
@@ -208,7 +208,7 @@ inline fint OP(inst_t inst)   { return (unsigned int)inst >> 26; }
 inline fint XOP1(inst_t inst) { return (inst >> 1) &  ((1 << 10)-1); }
 inline fint SPR(inst_t inst)  { 
   int32 i = inst >> 11;
-  return  (i >> 5) & 31  |  ((i & 31) << 5);
+  return  ((i >> 5) & 31)  |  ((i & 31) << 5);
 }
 
 
@@ -245,9 +245,9 @@ inline bool isAddingInst(inst_t inst) {
 
 inline inst_t signExtend(int32 field_bit_size, int32 i) {
   return   i
-        | (i   &   1 << field_bit_size-1    
-           ?   ~0 << field_bit_size   
-           :    0 ); 
+        | (i   &   1 << (field_bit_size-1)
+           ?   ~0u << field_bit_size
+           :    0u ); 
 }
 
 
@@ -419,13 +419,13 @@ inline int32 conditionalImmediateBranch_target(inst_t* instp) {
 inline void set_unconditionalImmediateBranch_target(inst_t* instp, int32 nv) {
   inst_t inst = *instp;
   if (!absoluteBit(inst)) nv -= int32(instp);  
-  *instp = inst & ~li_mask  |  li_mask & nv;
+  *instp = (inst & ~li_mask)  |  (li_mask & nv);
   MachineCache::flush_instruction_cache_word(instp);
 }
 inline void   set_conditionalImmediateBranch_target(inst_t* instp, int32 nv) {
   inst_t inst = *instp;
   if (!absoluteBit(inst)) nv -= int32(instp);
-  *instp = inst & ~bd_mask  |  bd_mask & nv;
+  *instp = (inst & ~bd_mask)  |  (bd_mask & nv);
   MachineCache::flush_instruction_cache_word(instp);
 }
 
