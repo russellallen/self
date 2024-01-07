@@ -2167,7 +2167,7 @@ frame conversion of all frames.\x7fModuleInfo: Module: tests InitialContents: Fo
             runTestsAutomaticallyOnStartupFlag ifTrue: [
              prompt suspendWhile: [
                 runAllTests. 
-                '\n\\nTests have ended.\n\n' print.
+                '\n\nTests have ended.\n\n' print.
                 '---END-OF-TESTS---' print.
                 _Quit]].
             self).
