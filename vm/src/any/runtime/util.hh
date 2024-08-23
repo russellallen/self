@@ -146,8 +146,8 @@ const int32 oopSize = sizeof(oop); // Warning: Duplicated in asmDefs_ppc.h
 #if GENERATE_DEBUGGING_AIDS
 # define UsedOnlyInAssert(v)
 #else
-inline void UsedOnlyInAssert(double x)   { (void)(x), 0; }
-inline void UsedOnlyInAssert(void  *x)   { (void)(x), 0; }
+inline void UsedOnlyInAssert(double x)   { (void)(x); return; }
+inline void UsedOnlyInAssert(void  *x)   { (void)(x); return; }
 #endif
 
 extern "C" { 
