@@ -1,14 +1,10 @@
 [tool.poetry]
 name = "handbook"
-version = "0.1.0"
-description = ""
+version = "2024.1.01"
+description = "Handbook for the Self programming language"
 authors = ["Russell Allen <mail@russell-allen.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+sphinx = "^8.0.0"

@@ -1,4 +1,5 @@
 .idea
 _build
+_build/html
 _static
 _templates
