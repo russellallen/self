@@ -21,7 +21,7 @@ Thanks to Ganesh R for his transcription services.
    :numbered:
 
    intro
-   gettingstarted
+   build
    langref
    selfwrld
    progguid

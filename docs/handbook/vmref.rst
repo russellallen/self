@@ -4,10 +4,6 @@
 Virtual Machine Reference
 *************************
 
-.. toctree::
-
-   buildvm
-
 Startup options
 ===============
 
@@ -171,11 +167,11 @@ message lookup is done is described in the :doc:`langref` chapter.
 
 **No ’fish’ delegatee slot was found in <a child of lobby> <12>.**
   | The lookup found no parent slot ``fish``, which was explicitly specified as the delegatee of the message.
-| **More than one ’system’ slot was found in shell <0>.**
-| **The matching slots are: oddballs <6> and prototypes <7>.**
 
+**More than one ’system’ slot was found in shell <0>.**
+
+**The matching slots are: oddballs <6> and prototypes <7>.**
   | The lookup found two matching ``system`` slots which means the message is ambiguous. The error message also says where the matching slots were found.
-
 
 Programmer defined errors
 =========================
@@ -200,6 +196,7 @@ of a missing or invalid argument.
 
   badTypeError: the ’_IntAdd:’ primitive failed.
   Its receiver was shell <6>.
+
 ..
 
     The primitive failed with ``badTypeError`` because the shell in not an integer.
@@ -207,6 +204,7 @@ of a missing or invalid argument.
 ::
 
   The selector 12 could not be sent to shell because it is not a string.
+
 ..
 
     The primitive ``_Perform`` expects a string as its first argument.
@@ -214,6 +212,7 @@ of a missing or invalid argument.
 ::
 
   The selector ’add:’ could not be sent to shell <0> because it does not take 2 arguments.
+
 ..
 
     The primitive ``_Perform`` received the wrong number of arguments.
@@ -230,6 +229,7 @@ Errors that stop a process from continuing execution are referred to as nonrecov
   The stack has grown too big.
   (Self 4.0 limits stack sizes, and cannot resume processes with stack
   overflows.)
+
 ..
 
   A stack overflow error occurs because the current version of Self allocates a fixed size stack for each process, and the stack cannot be expanded.
@@ -238,6 +238,7 @@ Errors that stop a process from continuing execution are referred to as nonrecov
 
   Self 4.0 cannot run a block after its enclosing method has returned.
   (Self cannot resume this process, either.)
+
 ..
 
   This error occurs if a block is executed after its lexically enclosing method has returned.

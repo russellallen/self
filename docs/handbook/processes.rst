@@ -11,7 +11,7 @@ Concurrency
 
 Self includes objects covering the normal primitives for managing concurrency.  These include ``semaphore``, ``barrier`` and ``lock``, which behave mostly as you would expect from their names.
 
-One useful object which is at a slightly higher level is ``channel`, which is essentially wrapping a target object in a lock::
+One useful object which is at a slightly higher level is ``channel``, which is essentially wrapping a target object in a lock::
 
   c: channel copyOn: target.
   i: c waitingInbox.
@@ -48,7 +48,7 @@ The ``prompt`` object takes input from ``stdin`` and spawns a process to evaluat
 to the prompt is kept in a history list so that past input can be replayed, similar to the history mechanism
 in many Unix shells.
 
-Modules: process, scheduler, semaphore, prompt, histor, channel
+Modules: process, scheduler, semaphore, prompt, history, channel
 
 .. index::
    single:  proxy

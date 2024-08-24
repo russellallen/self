@@ -114,8 +114,3 @@ Blocks have some other useful behavior:
 Any object that inherits from the lobby can be passed to a method that expects a block; behavior in ``defaultBehavior`` makes the object behave like a block that evaluates to that object.
 
 Module: block
-
-
-..  rubric:: Footnotes
-
-.. [#f1]

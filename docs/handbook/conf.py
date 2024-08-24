@@ -7,9 +7,9 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Self Handbook'
-copyright = '2023, Russell Allen (Ed.)'
+copyright = '2024, Russell Allen (Ed.)'
 author = 'Russell Allen (Ed.)'
-release = '2023.1'
+release = '2024.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -24,6 +24,5 @@ numfig = True
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-#html_theme = 'alabaster'
-html_theme = "pydata_sphinx_theme"
+html_theme = 'furo'
 html_static_path = ['_static']

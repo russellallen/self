@@ -17,12 +17,8 @@ development. It attempts to pull off a novel feat—programming live objects ins
 partially succeeds. Its novelty lies in its view of programs as collections of slots, not objects or
 classes, and its extraction of the programmer's intentions from a web of live objects.
 
-On the Macintosh, Self uses option-click for a middle-mouse click, and uses command- (the apple
-key) click for the right button click. So wherever the text says “left-button-click” just click with the
-mouse, where it says “middle-button click” hold down the option key and click with the mouse,
-and where it says “right button click” hold down the command key and click with the mouse.
-These mappings are defined in Self, so you can change them by editing the ``whichButton:`` method in the ``initialization``
-category in traits ``ui2MacEvent``.
+.. note::
+   Mouse button mappings are defined in Self, so you can change them by editing the ``whichButton:`` method in the ``initialization`` category in traits ``ui2MacEvent``.
 
 *****************
 Browsing Concepts
