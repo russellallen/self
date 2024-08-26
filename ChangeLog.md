@@ -1,16 +1,17 @@
-Changes in Self 23.01
+Changes in Self 24.01
 ----------------------
 
 Deprecated:
 
- * MacOS port (32 bit no longer works on MacOS since Catalina in 2019)
+ * MacOS port and Self Control.app (32 bit no longer works on MacOS since Catalina in 2019)
  * travis-ci.org for CI
 
 VM:
 
  * Thanks to nbuwe, we now build on NetBSD and FreeBSD (x86)
+ * Fewer unecessary warnings on build (4912a2f)
 
-Self:
+Objects:
 
  * Made Morphic more responsive at cost of some CPU usage
  * More usable `sliderMorph`
@@ -20,6 +21,7 @@ Self:
  * New facilty to scroll around Kansas, and to assist on platforms with only one mouse button (or pen)
  * New flag: `--runAutomaticTest` to run a suite of tests when building image (then `_Quit`)
  * New Flag: `--snapshotActionPostRead` to run `snapshotAction postRead` instead of `scheduler start` on a newly build image (to handle command lines)
+ * Improvements to `userProfile`s and main menu options to allow and remove user access to desktop
 
 Fixes:
 
