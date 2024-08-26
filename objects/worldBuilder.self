@@ -99,7 +99,7 @@ This is not a module and not managed by Transporter.
            False: [ (q, ' not chosen on command line') printLine. ]]
        False: [       
         ('Load ', q, '? (y/N)\n> ') print. 
-        i: stdin readLine.
+        i: stdin preemptReadLine.
         i = 'y' 
            ifTrue: blk
             False: [ ('You chose: ', i, '.') printLine ]].
