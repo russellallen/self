@@ -54,7 +54,19 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allCore' -> () From: ( | {
-         'ModuleInfo: Module: allCore InitialContents: FollowSlot\x7fVisibility: private'
+         'ModuleInfo: Module: allCore InitialContents: InitializeToExpression: (\'systemStructure
+coreObjects
+processesAndIO
+programmingSupport
+ttySupport
+defaultPreferences
+debugger
+coreUserProfile
+prompt
+int32and64
+systemLog
+about
+\')\x7fVisibility: private'
         
          subpartNames <- 'systemStructure
 coreObjects
@@ -63,6 +75,7 @@ programmingSupport
 ttySupport
 defaultPreferences
 debugger
+coreUserProfile
 prompt
 int32and64
 systemLog
@@ -81,6 +94,7 @@ about
  bootstrap read: 'ttySupport' From: 'core'
  bootstrap read: 'defaultPreferences' From: 'core'
  bootstrap read: 'debugger' From: 'core'
+ bootstrap read: 'coreUserProfile' From: 'core'
  bootstrap read: 'prompt' From: 'core'
  bootstrap read: 'int32and64' From: 'core'
  bootstrap read: 'systemLog' From: 'core'

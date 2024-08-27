@@ -1,8 +1,9 @@
  '$Revision: 30.8 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -167,7 +168,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                                                foo: factoryMorph standardFactory copy.
                                                foo globalPosition: minSmallInt@minSmallInt. 
                                                target addMorph: foo.
-                                               foo popUpInWindow
+                                               event sourceHand attach: foo
             ].
             b label: 'Open factory window'.
             b isAsynchronous: true.

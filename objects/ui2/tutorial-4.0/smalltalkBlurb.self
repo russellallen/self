@@ -29,7 +29,7 @@ root: labelMorph copyRemoveAllMorphs.
 ( root ) myAscent: 11.
 ( root ) myBox: ((306)@(-172)) # ((803)@(-158)).
 ( root ) myDescent: 3.
-( root ) myFontSpec: fontSpec copyName: 'verdana' Size: 14 Style: 'bold' copyMutable.
+( root ) myFontSpec: fontSpec copyName: 'helvetica' Size: 14 Style: 'bold' copyMutable.
 ( root ) myLabel: '    This is only a partial Smalltalk implementation. Please see the documentation
 ' copyMutable.
 ( root ) myPosition: (306)@(-161).
@@ -45,7 +45,7 @@ root: labelMorph copyRemoveAllMorphs.
 ( root rawMorphs at: 0 ) myAscent: 11.
 ( root rawMorphs at: 0 ) myBox: ((0)@(7)) # ((421)@(21)).
 ( root rawMorphs at: 0 ) myDescent: 3.
-( root rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'verdana' Size: 14 Style: 'bold' copyMutable.
+( root rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'helvetica' Size: 14 Style: 'bold' copyMutable.
 ( root rawMorphs at: 0 ) myLabel: '\"Self 4.0 Smalltalk Emulator\" for a full discussion of its limitations.
 ' copyMutable.
 ( root rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -61,7 +61,7 @@ root: labelMorph copyRemoveAllMorphs.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 11.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(7)) # ((466)@(21)).
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( (root rawMorphs at: 0) rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'verdana' Size: 14 Style: 'bold' copyMutable.
+( (root rawMorphs at: 0) rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'helvetica' Size: 14 Style: 'bold' copyMutable.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myLabel: '    We hope this demonstrates that a prototype-based language like Self can
 ' copyMutable.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -77,7 +77,7 @@ root: labelMorph copyRemoveAllMorphs.
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 11.
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(7)) # ((441)@(21)).
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'verdana' Size: 14 Style: 'bold' copyMutable.
+( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'helvetica' Size: 14 Style: 'bold' copyMutable.
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: 'provide, in a fairly direct way, the functionality of a class-based system.
 ' copyMutable.
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -93,7 +93,7 @@ root: labelMorph copyRemoveAllMorphs.
 ( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 11.
 ( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(7)) # ((406)@(21)).
 ( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'verdana' Size: 14 Style: 'bold' copyMutable.
+( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myFontSpec: fontSpec copyName: 'helvetica' Size: 14 Style: 'bold' copyMutable.
 ( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: '    We encourage Smalltalk programmers to try some of their code!' copyMutable.
 ( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
 ( (((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myWidth: 406.

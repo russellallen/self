@@ -8,5 +8,7 @@
 *.xcuserdatad
 *.xcworkspace
 *.xcuserstate
+*.OLD
 build/
 objects/glue/test*
+

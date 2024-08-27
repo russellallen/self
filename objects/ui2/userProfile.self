@@ -1,25 +1,17 @@
  '$Revision: 30.14 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: system\x7fModuleInfo: Module: userProfile InitialContents: FollowSlot'
-        
-         userProfile = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'userProfile' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals userProfile.
-'.
-            | ) .
-        } | ) 
-
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'handMorph' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: InitializeToExpression: (userProfile)'
+         'ModuleInfo: Module: userProfile InitialContents: InitializeToExpression: (users owner)'
         
-         userInfo <- bootstrap stub -> 'globals' -> 'userProfile' -> ().
+         userInfo <- bootstrap stub -> 'globals' -> 'users' -> 'owner' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
@@ -86,199 +78,82 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: InitializeToExpression: (\'self\' copyMutable)'
-        
-         displayHostName <- 'self' copyMutable.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> () From: ( | {
          'ModuleInfo: Module: userProfile InitialContents: InitializeToExpression: (handMorph)'
         
          hand <- bootstrap stub -> 'globals' -> 'handMorph' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: InitializeToExpression: (nil)'
-        
-         loginName.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
          'ModuleInfo: Module: userProfile InitialContents: FollowSlot'
         
-         parent* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals userProfile parent.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: FollowSlot\x7fVisibility: public'
-        
-         copy = ( |
-            | resend.copy preferences: preferences copy).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: FollowSlot\x7fVisibility: private'
-        
-         displayHostNameGuess = ( |
+         contributeToBackgroundMenu: m = ( |
             | 
-            hand isInWorld ifTrue: [ | host. disp. |
-              disp: (hand winCanvasForHand display serverName).
-              ':' = disp first ifTrue: [worldHostName]
-                                False: [(disp asTokensSeparatedByCharactersIn: ':') first].
-            ] False: [
-              nil.
-            ]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'Category: platform-dependent\x7fModuleInfo: Module: userProfile InitialContents: FollowSlot\x7fVisibility: private'
-        
-         fingerTimeout = 5000.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'Category: platform-dependent\x7fModuleInfo: Module: userProfile InitialContents: FollowSlot\x7fVisibility: private'
-        
-         guessPreferredName = ( |
-            | 
-            loginName: nil.
-            preferredName: nil.
-            (message copy receiver: self Selector: 'guessPreferredNameHoweverLongItTakes') fork.
+            m addButton: ( ((ui2Button copy scriptBlock: [target attachOpenWindowForUserDialog: event]) 
+                                                 label: 'Give user access...' ) isAsynchronous: true)
+                ToGroup: 'users'.
+            m addButton: ( ((ui2Button copy scriptBlock: [target attachCloseWindowForUserDialog: event]) 
+                                                 label: 'Remove user access...' ) isAsynchronous: true)
+                ToGroup: 'users'.
+            m addButton: ( (ui2Button copy scriptBlock: [event sourceHand attach: event sourceHand world outlinerForMirror: reflect: users]) 
+                                                 label: 'Users' )
+                ToGroup: 'users'.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'Category: platform-dependent\x7fModuleInfo: Module: userProfile InitialContents: FollowSlot\x7fVisibility: private'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
+         'Category: menu operations\x7fModuleInfo: Module: userProfile InitialContents: FollowSlot'
         
-         guessPreferredNameHoweverLongItTakes = ( |
-             command.
-             lines.
-             n.
-             r.
-             response.
+         attachCloseWindowForUserDialog: evt = ( |
+             availableHands.
+             availableUsers.
+             chosenHand.
             | 
-            n:  loginName ifNil: [loginNameGuessHoweverLongItTakes. loginName].
-            displayHostName ifNil: [^ setPreferredName: n].
-            command: 'finger -l ', n, '@', displayHostName.
-            response: os outputOfCommand: command Delay: fingerTimeout IfFail: [^ setPreferredName: nil].
-            lines: response asTokensSeparatedByCharactersIn: '\n'.
-            (lines size <= 1) || [r: (lines at: 1) asTokensSeparatedByWhiteSpace. r size <= 6] ifTrue: [
-                ^ setPreferredName: n.
-            ].
-            setPreferredName: (r at: 6) uncapitalizeAll capitalize).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'Comment: In a shared world, the display and world may
-reside on different machines (nodes in unix terminology).
-hostName will return the name of the machine at which you
-sit (i.e., the display host).\x7fModuleInfo: Module: userProfile InitialContents: FollowSlot\x7fVisibility: public'
-        
-         hostName = ( |
-            | displayHostName).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'Category: platform-dependent\x7fModuleInfo: Module: userProfile InitialContents: FollowSlot\x7fVisibility: private'
-        
-         loginNameGuessHoweverLongItTakes = ( |
-             c.
-             command.
-            | 
-            command: 'finger -l @' , displayHostNameGuess.
-            c: os outputOfCommand: command Delay: fingerTimeout IfFail: [ ^ loginName: nil].
-            loginName: 
-              c asTokensSeparatedByWhiteSpace at: 3 IfAbsent: nil).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: FollowSlot\x7fVisibility: public'
-        
-         name = ( |
-            | 
-            preferredName ifNil: [loginName ifNil: [displayHostName ifNil: unknownName]]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: FollowSlot\x7fVisibility: private'
-        
-         parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: FollowSlot\x7fVisibility: public'
-        
-         setNamesByGuess = ( |
-            | 
-             displayHostName: displayHostNameGuess.
-            "Next line uses finger command, and we're mis-parsing the output - Adam & Alex April '04"
-            "guessPreferredName").
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'Category: platform-dependent\x7fModuleInfo: Module: userProfile InitialContents: FollowSlot\x7fVisibility: private'
-        
-         setPreferredName: n = ( |
-            | 
-            preferredName: n.
-            hand setCachedNameWidth.
+            hands size = 1 ifTrue: [
+               userQuery report: 'Only the owner is connected'.
+               ^ self].
+            availableHands: (hands asSequence copyFilteredBy: [|:h| h userInfo name != users owner name]).
+            availableUsers: availableHands copyMappedBy: [|:h| h userInfo name].
+            chosenHand: userQuery
+             askMultipleChoice: 'Which user?'
+             Choices: availableUsers
+             Results:  availableHands.
+            safelyDoIfWorld: [ closeFromHand: chosenHand].
+            userQuery report: 'Access for ', chosenHand userInfo name, ' removed.'.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: FollowSlot\x7fVisibility: private'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
+         'Category: menu operations\x7fComment: The user chooses from a list of predefined usersProfiles in the team.
+I then look for a X display on the local machine which doesn\'t already have a
+Self window in this world open on it, and open a new Self window for that userProfile
+on that display.\x7fModuleInfo: Module: userProfile InitialContents: FollowSlot'
         
-         unknownName = '??'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: FollowSlot\x7fVisibility: private'
-        
-         worldHostName = ( |
+         attachOpenWindowForUserDialog: evt = ( |
+             availableDisplays.
+             chosenDisplay.
+             chosenUser.
+             freeDisplays.
+             usedDisplays.
             | 
-            os nodename).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: FollowSlot'
-        
-         preferences <- bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'userProfile' -> 'preferences' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals userProfile preferences.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'preferences' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: InitializeToExpression: (globals fontSpec copyName: \'helvetica\' Size: 11 Style: \'bold\')'
-        
-         nameFontSpec <- globals fontSpec copyName: 'helvetica' Size: 11 Style: 'bold'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'preferences' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'preferences' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: InitializeToExpression: (true)'
-        
-         showNameToOthers <- bootstrap stub -> 'globals' -> 'true' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> 'preferences' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: InitializeToExpression: (false)'
-        
-         showNameToSelf <- bootstrap stub -> 'globals' -> 'false' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'userProfile' -> () From: ( | {
-         'ModuleInfo: Module: userProfile InitialContents: InitializeToExpression: (nil)'
-        
-         preferredName.
+            users team isEmpty ifTrue: [
+               userQuery report: 'You have not defined any users'.
+               ^ self].
+            chosenUser: userQuery
+             askMultipleChoice: 'Which user?'
+             Choices: (users team copyMappedBy: [|:u| u name]) asVector
+             Results: users team asVector.
+            availableDisplays: (os outputOfCommand: 'ls /tmp/.X11-unix/' Delay: 100 IfFail: [
+               (userQuery askYesNo: 'Could not get list of available displays. Retry?')
+                  ifTrue: [^ attachOpenWindowForUserDialog: evt]
+                   False: [^ self]]).
+            availableDisplays: (availableDisplays shrinkwrapped splitOn: '\n') mapBy: [|:d| ':', (d slice: 1 @ infinity)].
+            usedDisplays: hands copyMappedBy: [|:h| h winCanvasForHand display originalName].
+            freeDisplays: availableDisplays difference: usedDisplays.
+            freeDisplays isEmpty ifTrue: [userQuery report: 'There are no free displays.'. ^ self].
+            chosenDisplay: freeDisplays first.
+            addWindowOnDisplay: chosenDisplay Bounds: (0@0)##(3000@3000) User: chosenUser Limited: false.
+            reportThatUser: chosenUser CanAccessDisplay: chosenDisplay.
+            self).
         } | ) 
 
 

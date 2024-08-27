@@ -1,8 +1,9 @@
  '$Revision: 30.5 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -3522,11 +3523,14 @@ SlotsToOmit: parent.
              c.
             | 
             b: getUnsignedShortParam: parameters mouseButton Type: types mouseButton.
-            [ "does not work"
-              c: getUnsignedParam: parameters mouseChord Type: types uint32 IfFail: -1.
-              c printLine.
-              c = 3 ifTrue: [b: 3]. "left + mid = right"
-            ]. 
+
+            "Swap middle and right buttons if wanted"
+            preferences swapMouseButtons ifTrue: [
+              case
+                if: [ 2 = b ] Then: [ b: 3 ]
+                If: [ 3 = b ] Then: [ b: 2 ]
+            ].
+
             b = 1 ifTrue: [|m|
               "use control and option for now"
               m: getUnsignedParam: parameters keyModifiers Type: types uint32.
@@ -3536,6 +3540,7 @@ SlotsToOmit: parent.
                       If: [(m &&  modifierMasks control) != 0] Then: 2
                                                                Else: 1.
             ].
+
             buttonNames at: 0 max: buttonNames size pred min: b pred).
         } | ) 
 

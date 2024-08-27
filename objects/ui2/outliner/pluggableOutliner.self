@@ -1,6 +1,6 @@
- '$Revision: 30.18 $'
+ '30.18.1'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -202,9 +202,9 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'evaluatorMorph' -> 'parent' -> () From: ( | {
-         'ModuleInfo: Module: pluggableOutliner InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 12 Style: \'bold\')'
+         'ModuleInfo: Module: pluggableOutliner InitialContents: InitializeToExpression: (fontSpec copyName: \'helvetica\' Size: 12 Style: \'bold\')'
         
-         preferredFontSpec <- fontSpec copyName: 'verdana' Size: 12 Style: 'bold'.
+         preferredFontSpec <- fontSpec copyName: 'helvetica' Size: 12 Style: 'bold'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'evaluatorMorph' -> 'parent' -> () From: ( | {
@@ -274,9 +274,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pluggableOutliner' -> () From: ( | {
-         'ModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: pluggableOutliner InitialContents: InitializeToExpression: (\'30.18.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.18 $'.
+         revision <- '30.18.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pluggableOutliner' -> () From: ( | {
@@ -632,11 +632,10 @@ boxedItems.\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot
         
          buildBody = ( |
             | 
-            body: rowMorph copy.
+            body: rowMorph copyTransparent.
             body  borderWidth: 0.
             body  baseMinHeight: 0.
             body  beFlexible.
-            body  color: paint named: 'transparent'.
 
             buildItemsHolder.
 
@@ -675,8 +674,7 @@ boxedItems.\x7fModuleInfo: Module: pluggableOutliner InitialContents: FollowSlot
         
          buildHeader = ( |
             | 
-            header: rowMorph copy removeAllMorphs beFlexible borderWidth: 0.
-            header color: paint named: 'transparent'.
+            header: rowMorph copyTransparent removeAllMorphs beFlexible borderWidth: 0.
             header borderWidth: 4.
             fillInHeader.
             header).
@@ -1359,8 +1357,7 @@ Same for collapse:, expandAll: collapseAll: -- dmu 4/1\x7fModuleInfo: Module: pl
         
          newColumn = ( |
             | 
-            ((columnMorph copy leftJustify
-            color: paint named: 'transparent')
+            (columnMorph copyTransparent leftJustify
             borderWidth: 0)
             baseMinHeight: 0).
         } | ) 

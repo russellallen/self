@@ -1,8 +1,9 @@
- '$Revision: 30.15 $'
+ '30.15.1'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -87,9 +88,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pointerMorph' -> () From: ( | {
-         'ModuleInfo: Module: pointerMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: pointerMorph InitialContents: InitializeToExpression: (\'30.15.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.15 $'.
+         revision <- '30.15.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pointerMorph' -> () From: ( | {
@@ -418,12 +419,11 @@ SlotsToOmit: parent prototype.
              button.
              new.
             | 
-            button: copy.
+            button: copyTransparent.
             button removeAllMorphs.
             button baseMinWidth:  3.
             button baseMinHeight: 3.
             button beShrinkWrap.
-            button color: paint named: 'transparent'.
             button addMorph: (imageMorph copyImage: lo buttonIcon copy).
             button).
         } | ) 
@@ -535,8 +535,8 @@ on a new object to serve as replacement slot contents. -- Randy, 5/2/95\x7fModul
             new headMorph addMorph: button.
             button target: new headMorph.
             button script: headButtonScript.
-            new           color: paint named: 'transparent'.
-            new headMorph color: paint named: 'transparent'.
+            new           colorTransparent.
+            new headMorph colorTransparent.
             new).
         } | ) 
 

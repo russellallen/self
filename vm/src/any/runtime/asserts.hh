@@ -14,7 +14,7 @@ extern bool CheckAssertions; // defined in debug.h but need it sooner
 
 # if GENERATE_DEBUGGING_AIDS
 # define assert(b,msg)                                                        \
-    if (!CheckAssertions  ||  b) {} else fatal1("assertion failed:  %s",(msg[0] ? msg : XSTR(b)))
+    if (!CheckAssertions  ||  (b)) {} else fatal1("assertion failed:  %s",(msg[0] ? msg : XSTR(b)))
 # else
 # define assert(b,msg)
 # endif

@@ -6,7 +6,9 @@
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
 
-# pragma interface
+# ifdef INTERFACE_PRAGMAS
+  # pragma interface
+# endif
 
 # undef RD
 
@@ -88,7 +90,7 @@
         printX(s, t);
         printf(", %s\n", RegisterNames[d]);
     }
-    if (t == OopOperand && !oop(s)->is_mem() || t == NumberOperand) {
+    if ((t == OopOperand && !oop(s)->is_mem()) || t == NumberOperand) {
       // don't need a location
     } else {
       addOffset(t, true);
@@ -102,7 +104,7 @@
       printX(s, t);
       printf(", %s\n", RegisterNames[d]);
     }
-    if (t == OopOperand && !oop(s)->is_mem() || t == NumberOperand) {
+    if ((t == OopOperand && !oop(s)->is_mem()) || t == NumberOperand) {
       // don't need a location
     } else {
       addOffset(t, true);
@@ -131,7 +133,7 @@
     ExpandCallXTemplates(DefineCallXTemplate)
 
 
-  inline void Assembler::ArithR(char* name, fint op, fint op3,
+  inline void Assembler::ArithR(const char* name, fint op, fint op3,
                                 Location s1, Location s2, Location d) {
     assert(isRegister(s1), "operand 1 must be a register");
     assert(isRegister(s2), "operand 2 must be a register");
@@ -145,7 +147,7 @@
   }
   
 
-  inline void Assembler::ArithX(char* name, fint op, fint op3, Location s1,
+  inline void Assembler::ArithX(const char* name, fint op, fint op3, Location s1,
                                 int32 s2, OperandType t, bool noSetHi,
                                 Location d) {
     assert(isRegister(s1), "operand 1 must be a register");
@@ -158,7 +160,7 @@
       printX(v, t, true);
       printf(", %s\n", RegisterNames[d]);
     }
-    if (t == OopOperand && !oop(s2)->is_mem() || t == NumberOperand ||
+    if ((t == OopOperand && !oop(s2)->is_mem()) || t == NumberOperand ||
         !noSetHi) {
       // don't need a location
     } else {
@@ -198,7 +200,7 @@
       printX(SIMM13(s2), t, true);
       printf("\n");
     }
-    if (t == OopOperand && !oop(s2)->is_mem() || t == NumberOperand ||
+    if ((t == OopOperand && !oop(s2)->is_mem()) || t == NumberOperand ||
         !noSetHi) {
       // don't need a location
     } else {

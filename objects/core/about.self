@@ -1,4 +1,4 @@
- '0.0.1'
+ '0.0.2'
  '
 Copyright 2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
@@ -36,6 +36,7 @@ Randall B. Smith
 Adam Spitz
 Stanford University
 Sun Microsystems, Inc.  
+Valery Ushakov
 David Ungar'.
         } | ) 
 
@@ -360,9 +361,9 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'about' -> () From: ( | {
-         'ModuleInfo: Module: about InitialContents: InitializeToExpression: (\'0.0.1\')\x7fVisibility: public'
+         'ModuleInfo: Module: about InitialContents: InitializeToExpression: (\'0.0.2\')\x7fVisibility: public'
         
-         revision <- '0.0.1'.
+         revision <- '0.0.2'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'about' -> () From: ( | {

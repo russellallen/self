@@ -38,7 +38,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( root rawMorphs at: 0 ) myAscent: 12.
 ( root rawMorphs at: 0 ) myBox: ((72)@(28)) # ((72)@(43)).
 ( root rawMorphs at: 0 ) myDescent: 3.
-( root rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( root rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( root rawMorphs at: 0 ) myLabel: mutableString.
 ( root rawMorphs at: 0 ) myPosition: (72)@(40).
 ( root rawMorphs at: 0 ) myWidth: 0.
@@ -89,7 +89,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((140)@(21)).
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( (root rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( (root rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myLabel: 'More about automatic
 ' copyMutable.
 ( (root rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
@@ -105,7 +105,7 @@ root: carpetMorph copyRemoveAllMorphs.
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myAscent: 12.
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myBox: ((0)@(6)) # ((113)@(21)).
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myDescent: 3.
-( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold' Size: 14.
+( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) fontSpec: globals fontSpec copyName: 'helvetica' Style: 'regular' Size: 12.
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myLabel: 'resizing down here' copyMutable.
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myPosition: (0)@(18).
 ( ((root rawMorphs at: 0) rawMorphs at: 0) rawMorphs at: 0 ) myWidth: 113.

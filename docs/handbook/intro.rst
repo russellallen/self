@@ -2,23 +2,13 @@
 Introduction
 ************
 
-.. index::
-   single:  VM
-
-.. index::
-   single:  traits
-
-.. index::
-   single:  prototypes
-
-.. index::
-   single:  Self world
+   Last updated 23 September 2024 for Self 2024.1
 
 Self is a prototype-based dynamic object-oriented programming language, environment, and virtual machine centered around the principles of simplicity, uniformity, concreteness, and liveness.
 
 Self includes a programming language, a collection of objects defined in the Self language, and a programming environment built in Self for writing Self programs. The language and environment attempt to present objects to the programmer and user in as direct and physical a way as possible. The system uses the prototype-based style of object construction.
 
-Self is available for Solaris, Linux and natively on MacOS X under a BSD-like licence; we would be very interested in anyone prepared to make a Windows port.
+Self is available for Linux, FreeBSD and NetBSD on x86 under a BSD-like licence. 
 
 History
 =======
@@ -29,12 +19,14 @@ Release 4.0 contained an entirely new user interface and programming environment
 
 Release 4.4 was the first release for Linux x86.
 
+Release 2024.1 added FreeBSD and NetBSD and dropped MacOS X.
+
 System Overview
 ===============
 
 This section contains an overview of the system and its implementation; it can be skipped if you wish to get started as quickly as possible.
 
-Although Self runs as a single UNIX [#f1]_ process, or a single Macintosh application, it really has two parts: the *virtual machine* (VM) and the *Self world*, the collection of Self objects that are the Self prototypes and programs:
+Although Self runs as a single UNIX [#f1]_ process, it really has two parts: the *virtual machine* (VM) and the *Self world*, the collection of Self objects that are the Self prototypes and programs:
 
 ..  figure:: images/Chapter_1_Figure_1.*
     :scale: 60

@@ -43,8 +43,13 @@
                       MAP_PRIVATE|MAP_FIXED,
                       zero_fd, 0)) 
         return desiredAddress;
-        
+
+#if TARGET_OS_VERSION == NETBSD_VERSION || TARGET_OS_VERSION == FREEBSD_VERSION
+      char *b = NULL;
+      posix_memalign((void **)&b, align, size);
+#else
       char* b = (char*)memalign(align, size);
+#endif
       if (b == NULL && mustAllocate)  allocate_failed(name);
       return b;     
   }
@@ -185,7 +190,9 @@ void OS::init() {
     }
     signal(SIGCHLD, old_h);
   }
-# elif  TARGET_OS_VERSION ==  MACOSX_VERSION
+# elif  TARGET_OS_VERSION ==  MACOSX_VERSION \
+    ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+    ||  TARGET_OS_VERSION == FREEBSD_VERSION
 
   int mib[2], mem_size;
   size_t len;
@@ -348,6 +355,8 @@ bool OS::setup_snapshot_to_run(const char* fileName) {
 void OS::set_log_buf(FILE* f, char* buf, int bs) {    
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
+  ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+  ||  TARGET_OS_VERSION == FREEBSD_VERSION \
   ||  TARGET_OS_VERSION ==   LINUX_VERSION
   setvbuf(f, buf, _IOFBF, bs);
   
@@ -400,9 +409,16 @@ bool OS::get_swap_space_info(int &totalK, int &freeK) {
   return true;
 }
 
+# elif  TARGET_OS_VERSION == NETBSD_VERSION
+
+bool OS::get_swap_space_info(int &totalK, int &freeK) {
+  /* XXX: uwe: TODO: use swapctl(2) */
+  return false;
+}
 
 # elif  TARGET_OS_VERSION ==  SUNOS_VERSION \
     ||  TARGET_OS_VERSION == MACOSX_VERSION \
+    ||  TARGET_OS_VERSION == FREEBSD_VERSION \
     ||  TARGET_OS_VERSION ==  LINUX_VERSION
 
 bool OS::get_swap_space_info(int &, int &) {
@@ -474,7 +490,9 @@ int OS::min_core(caddr_t addr, size_t len, char *vec) {
 # endif
 
 #if  TARGET_OS_VERSION == SOLARIS_VERSION \
- ||  TARGET_OS_VERSION ==  MACOSX_VERSION
+ ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
+ ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+ ||  TARGET_OS_VERSION == FREEBSD_VERSION
   void OS::setPageAdvisory(char *start, char *end, int code) {
     if (end - start < OS::dont_bother) return;
     char *ps= real_page_start(start);
@@ -843,6 +861,8 @@ void OS::check_events() {
 
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
   ||  TARGET_OS_VERSION ==  MACOSX_VERSION \
+  ||  TARGET_OS_VERSION ==  NETBSD_VERSION \
+  ||  TARGET_OS_VERSION == FREEBSD_VERSION \
   ||  TARGET_OS_VERSION ==  LINUX_VERSION
 extern "C" {
   int malloc_verify() { return 1; }

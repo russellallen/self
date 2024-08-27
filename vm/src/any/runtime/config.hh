@@ -53,6 +53,8 @@
 # define   MACOS_CARBON_VERSION 4 // Carbon 9/10 version
 # define         MACOSX_VERSION 5 // MacOSX native version
 # define          LINUX_VERSION 6 // Ubuntu
+# define         NETBSD_VERSION 7
+# define        FREEBSD_VERSION 8
 
 # define         CC_COMPILER 1
 # define        GCC_COMPILER 2

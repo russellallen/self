@@ -1,4 +1,4 @@
- '$Revision: 30.19 $'
+ '30.19.1'
  '
 Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
@@ -55,9 +55,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'selfDebugger' -> () From: ( | {
-         'ModuleInfo: Module: selfDebugger InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: selfDebugger InitialContents: InitializeToExpression: (\'30.19.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.19 $'.
+         revision <- '30.19.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'selfDebugger' -> () From: ( | {
@@ -320,15 +320,14 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
             | 
             homet: buildTitleFor: outermostLexicalScope.
 
-            r: rowMorph copy.
+            r: rowMorph copyTransparent.
             r beShrinkWrap.
-            r color: paint named: 'transparent'.
             r borderWidth: 0.
 
             r addMorphLast: buildTitleFor: activation.
             t: labelMorph copy.
             t label: ' in: '.
-            t fontSpec: globals fontSpec copyName: 'verdana' Size: fontSpec size Style: 'italic'.
+            t fontSpec: globals fontSpec copyName: 'helvetica' Size: fontSpec size Style: 'italic'.
             r addMorphLast: t.
 
             f: frameMorph copy beShrinkWrap color: homet color.
@@ -357,9 +356,9 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
             "build big old title:"
             " a row: rcvrCol sp selCol sp argCol sp argObjCol"
 
-            outerRow: (rowMorph copy topJustify beShrinkWrap borderWidth: 0) color: paint named: 'transparent'.
+            outerRow: rowMorph copyTransparent topJustify beShrinkWrap borderWidth: 0.
 
-            selCol: (columnMorph copy beShrinkWrap rightJustify borderWidth: 0) color: paint named: 'transparent'.
+            selCol: columnMorph copyTransparent beShrinkWrap rightJustify borderWidth: 0.
             argCol: selCol copy leftJustify.
 
             v: act receiverIfFail: [|:e| reflect: 'no rcvr: ', e].
@@ -374,16 +373,15 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
                   r: outerRow copyRemoveAllMorphs bottomJustify.
                   r addMorphLast: labelMorphForTitle: arg name.
                   r addMorphLast: sp copy.
-                  r addMorphLast: objectPushButton copyMirror: arg value Color: (preferences outliner theme processDebugger "headerColorFor: arg value reflectee").
+                  r addMorphLast: objectPushButton copyMirror: arg value 
+                                                        Color: preferences outliner theme processDebugger.
                   argCol addMorphLast: r.
             ].
 
 
             outerRow addMorphLast: labelMorphForTitle: '  '.
             outerRow addMorphLast: selCol.
-            " outerRow addMorphLast: sp copy. "
             outerRow addMorphLast: argCol.
-
             outerRow).
         } | ) 
 
@@ -396,10 +394,7 @@ globals selfGeneralSlotModel parent buttonDescriptions. _Clone
              sel.
              v.
             | 
-            r: rowMorph copy.
-            r beShrinkWrap.
-            r color: paint named: 'transparent'.
-            r borderWidth: 0.
+            r: rowMorph copyTransparent beShrinkWrap borderWidth: 0.
 
             v: act receiverIfFail: [|:e| reflect: 'no rcvr: ', e].
             r addMorphLast: 

@@ -279,7 +279,7 @@ capability
             | 
             resend.baseBounds union: 
               ((position + nameOffset) ##
-                (cachedNameWidth @ userInfo preferences nameFontSpec size))).
+                (cachedNameWidth @ nameFontSpec size))).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'handMorph' -> () From: ( | {
@@ -297,7 +297,7 @@ is in the coordinates of the morph that owns this morph.\x7fModuleInfo: Module: 
          baseContainsPt: p = ( |
             | 
             (resend.baseContainsPt: p) || 
-            [((position + nameOffset) ## (cachedNameWidth @ userInfo preferences nameFontSpec size)) 
+            [((position + nameOffset) ## (cachedNameWidth @ nameFontSpec size)) 
                includes: p]).
         } | ) 
 
@@ -491,11 +491,11 @@ will also change the screen edges, but not the held objects.\x7fModuleInfo: Modu
              h.
              s.
             | 
-            h: userInfo preferences nameFontSpec size.
+            h: nameFontSpec size.
             s: name ifNil: ['!??'].
             c text: s 
                 At: position +  (nameOffset +  (0@h))
-            FontSpec: userInfo preferences nameFontSpec
+            FontSpec: nameFontSpec
              Color: color).
         } | ) 
 
@@ -1098,15 +1098,9 @@ object. This will update the hand\'s cachedNameSize slot.\x7fModuleInfo: Module:
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'handMorph' -> () From: ( | {
-         'Category: name and other userInfo issues\x7fModuleInfo: Module: handMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: name and other userInfo issues\x7fModuleInfo: Module: handMorph InitialContents: InitializeToExpression: (globals fontSpec copyName: \'helvetica\' Size: 11 Style: \'bold\')'
         
-         nameFontSpec: fs = ( |
-            | 
-            changed.
-            setCachedNameWidth.
-            userInfo preferences nameFontSpec: fs.
-            changed.
-            self).
+         nameFontSpec <- globals fontSpec copyName: 'helvetica' Size: 11 Style: 'bold'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'handMorph' -> () From: ( | {
@@ -1177,7 +1171,7 @@ your kind of finished for the day.\x7fModuleInfo: Module: handMorph InitialConte
              w.
             | 
             isInWorld ifTrue: [| xfnt |
-              xfnt: (world anyOpenWindowCanvas structForFontSpec: userInfo preferences nameFontSpec).
+              xfnt: (world anyOpenWindowCanvas structForFontSpec: nameFontSpec).
               cachedNameWidth:  (xfnt textWidth: name).
             ].
             self).
@@ -1201,10 +1195,20 @@ your kind of finished for the day.\x7fModuleInfo: Module: handMorph InitialConte
             | 
             userInfo setNamesByGuess.
             setCachedNameWidth.
+            informSystemAboutPassword.
             self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'handMorph' -> () From: ( | {
+         'Category: name and other userInfo issues\x7fModuleInfo: Module: handMorph InitialContents: FollowSlot\x7fVisibility: public'
+        
+         informSystemAboutPassword = ( |
+            | 
+            "This is overriden for OurSelf.io - rca 2022.04.22"
+            self).
+        } | ) 
+
+bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'handMorph' -> () From: ( | {
          'Category: meta hand\x7fModuleInfo: Module: handMorph InitialContents: FollowSlot\x7fVisibility: private'
         
          shedHand = ( |
@@ -1307,7 +1311,10 @@ appearance of the cursor.
         
          topRootMorphAt: p = ( |
             | 
-            world rootMorphsAt: p Do: [| :m | ^m ].
+            " viewScrollMorphs don't count as we can't 
+              bring up a selfMenu on them"
+            world rootMorphsAt: p Do: [| :m | 
+              m prototype = viewScrollMorph ifFalse: [ ^m ]].
             world).
         } | ) 
 

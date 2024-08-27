@@ -302,8 +302,9 @@
       theAssembler->jne(&done); // optimize fast case, so predict-weird
       genCall();
       done.define();
-    } else
-      ; // block has already been created (by initial BlockClone node)
+    } else {
+      // block has already been created (by initial BlockClone node)
+    }
   }
   
   void NonLocalReturnNode::gen() {
@@ -579,7 +580,7 @@
      case TMulCCArithOp:      theAssembler->sarl(Tag_Size, NumberOperand, opn);  // FALL THROUGH
      case MulArithOp:         theAssembler->imull(opn, dst);           return dst;
      
-     case DivArithOp:      assert(dst == eax, "idiÂv");
+     case DivArithOp:      assert(dst == eax, "idiv");
                            theAssembler->idivl(opn);                   return dst;
      
      case TDivCCArithOp:      theAssembler->sarl(Tag_Size, NumberOperand, opn);

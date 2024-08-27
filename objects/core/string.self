@@ -1,6 +1,6 @@
- 'Sun-$Revision: 30.23 $'
+ '30.23.1'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -76,9 +76,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'string' -> () From: ( | {
-         'ModuleInfo: Module: string InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: string InitialContents: InitializeToExpression: (\'30.23.1\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.23 $'.
+         revision <- '30.23.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'string' -> () From: ( | {
@@ -680,7 +680,7 @@ aResultReporter gets sent
         
          capitalizeAll = ( |
             | 
-            copyMutable mapBy: [|:c| c isCapitalized ifTrue: c False: [(c asByte + capitalizationDifference) asCharacter]]).
+            copyMutable mapBy: [|:c| (c isLetter not || c isCapitalized) ifTrue: c False: [(c asByte + capitalizationDifference) asCharacter]]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'string' -> () From: ( | {

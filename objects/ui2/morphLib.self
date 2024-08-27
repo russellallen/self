@@ -1,6 +1,6 @@
- '$Revision: 30.18 $'
+ '30.19.0'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -98,9 +98,9 @@ SlotsToOmit: parent prototype rawBox rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'labelMorph' -> () From: ( | {
-         'Category: Label Morph State\x7fModuleInfo: Module: morphLib InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 12 Style: \'bold\')\x7fVisibility: private'
+         'Category: Label Morph State\x7fModuleInfo: Module: morphLib InitialContents: InitializeToExpression: (fontSpec copyName: \'helvetica\' Size: 12 Style: \'bold\')\x7fVisibility: private'
         
-         myFontSpec <- fontSpec copyName: 'verdana' Size: 12 Style: 'bold'.
+         myFontSpec <- fontSpec copyName: 'helvetica' Size: 12 Style: 'bold'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'labelMorph' -> () From: ( | {
@@ -247,16 +247,16 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             | 
             resend.postFileIn.
             "dropping morphs fall through labelMorphs by default"
-            labelMorph fontSpec: globals fontSpec copyName: 'verdana' Style: 'bold'.
-            selectionInListMorph fontSpec: globals fontSpec copyName: 'verdana' Size: 12 Style: 'bold'.
+            labelMorph fontSpec: globals fontSpec copyName: 'helvetica' Style: 'bold'.
+            selectionInListMorph fontSpec: globals fontSpec copyName: 'helvetica' Size: 12 Style: 'bold'.
             sliderMorph initializePrototype.
             self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'morphLib' -> () From: ( | {
-         'ModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: morphLib InitialContents: InitializeToExpression: (\'30.19.0\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.18 $'.
+         revision <- '30.19.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'morphLib' -> () From: ( | {
@@ -355,9 +355,9 @@ SlotsToOmit: parent prototype rawBox rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selectionInListMorph' -> () From: ( | {
-         'ModuleInfo: Module: morphLib InitialContents: InitializeToExpression: (globals fontSpec copyName: \'verdana\' Size: 12 Style: \'bold\')\x7fVisibility: public'
+         'ModuleInfo: Module: morphLib InitialContents: InitializeToExpression: (globals fontSpec copyName: \'helvetica\' Size: 12 Style: \'bold\')\x7fVisibility: public'
         
-         fontSpec <- globals fontSpec copyName: 'verdana' Size: 12 Style: 'bold'.
+         fontSpec <- globals fontSpec copyName: 'helvetica' Size: 12 Style: 'bold'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selectionInListMorph' -> () From: ( | {
@@ -485,7 +485,7 @@ SlotsToOmit: parent prototype rawBox rawColor.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sliderMorph' -> () From: ( | {
          'ModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: private'
         
-         myValue <- 50.0.
+         myValue <- 61.1084.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sliderMorph' -> () From: ( | {
@@ -528,9 +528,15 @@ SlotsToOmit: parent prototype rawBox rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sliderMorph' -> () From: ( | {
-         'ModuleInfo: Module: morphLib InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: morphLib InitialContents: InitializeToExpression: (paint named: \'black\')\x7fVisibility: public'
         
-         sliderColor <- paint named: 'transparent'.
+         sliderColor <- paint named: 'black'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sliderMorph' -> () From: ( | {
+         'ModuleInfo: Module: morphLib InitialContents: InitializeToExpression: (0.1)\x7fVisibility: public'
+        
+         sliderProportionalLength <- 0.1.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'sliderMorph' -> () From: ( | {
@@ -2189,18 +2195,33 @@ horizontal sliderMorph\x7fModuleInfo: Module: morphLib InitialContents: FollowSl
          'Category: drawing\x7fModuleInfo: Module: morphLib InitialContents: FollowSlot'
         
          verticalDrawOn: c = ( |
+             b.
              box.
+             p.
+             s.
+             s2.
              sliderBox.
-             sliderOffset.
-             sliderY.
+             t.
+             y.
             | 
             box: baseBounds.
-            sliderOffset: ((value - minValue) * (height - 2)) / (maxValue - minValue).
-            sliderY: box bottom - ((sliderOffset max: 1) min: (height - 2)) asInteger.
-            sliderBox: ((box left  "+ 1")@(sliderY - 1)) #
-                       ((box right "- 1")@(sliderY + 1)).
-            c fillRectangle: box            Color: color.
-            c fillRectangle: sliderBox      Color: sliderColor.
+
+            s:  (box height * sliderProportionalLength) max: 4.  "slider length"
+            s2: s / 2.                                           "half length"
+            p: (value - minValue) / (maxValue - minValue).       "offset as proportion"
+            t: box top.
+            b: box bottom.
+            y: b - s2 - (((b - s2) - (t + s2)) * p).             "middle of slider"
+
+            sliderBox: ((box left  )@(y - s2)) #
+                       ((box right )@(y + s2)).
+
+            "Fast path for transparency"
+            color isTransparent ifFalse: [c fillRectangle: box Color: color].
+            "Round top and bottom, unless it would make us a circle..."
+            sliderBox height <= sliderBox width
+              ifTrue: [c                fillRectangle: sliderBox  Color: sliderColor]
+               False: [c circledVerticalFillRectangle: sliderBox  Color: sliderColor].
             self).
         } | ) 
 
@@ -2249,7 +2270,7 @@ horizontal sliderMorph\x7fModuleInfo: Module: morphLib InitialContents: FollowSl
          copyH: hSpace Color: c = ( |
              new.
             | 
-            new: copyRemoveAllMorphs color: paint named: 'transparent'.
+            new: copyRemoveAllMorphs colorTransparent.
             new beRigidHorizontally.
             new beFlexibleVertically.
             new setWidth: hSpace.
@@ -2262,7 +2283,7 @@ horizontal sliderMorph\x7fModuleInfo: Module: morphLib InitialContents: FollowSl
          copyV: vSpace Color: c = ( |
              new.
             | 
-            new: copyRemoveAllMorphs color: paint named: 'transparent'.
+            new: copyRemoveAllMorphs colorTransparent.
             new beFlexibleHorizontally.
             new beRigidVertically.
             new setHeight: vSpace.

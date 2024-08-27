@@ -3367,7 +3367,11 @@ to empty.
              nm.
              screen.
             | 
-            nm:        d isEmpty ifTrue: [os environmentAt: 'DISPLAY' IfFail: ''] False: d.
+            "If we use the DISPLAY variable, assume it knows what its doing - rca 7/18"
+            d isEmpty ifTrue: [|dv|
+              dv: os environmentAt: 'DISPLAY' IfFail: ''.
+              dv isEmpty ifFalse: [^ dv]].
+            nm:         d isEmpty ifTrue: [os environmentAt: 'DISPLAY' IfFail: ''] False: d.
             colon:     nm keyOf: ':' IfAbsent: [^nm]. "this isn't a valid name in any case"
             hostname:  nm copyFrom: nm firstKey UpTo: colon.
             (hostname = 'unix') || [hostname = 'local'] || [hostname = ''] ifTrue: [
@@ -3666,7 +3670,7 @@ to empty.
             c: name keyOf: ':' IfAbsent: [^ os nodename].
             name
               copyFrom: name firstKey
-                  UpTo: c + ((name copyFrom: c) keyOf: '.')).
+                  UpTo: c + ((name copyFrom: c) keyOf: '.' IfAbsent: name size)).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'display' -> () From: ( | {
@@ -5216,9 +5220,9 @@ an object with these slots:
             ) initDisplay: display Depth: d).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
-        
+
          createOnDisplay: disp At: pos Size: sz = ( |
             | 
             (disp xCreateSimpleWindowIn: disp screen rootWindow

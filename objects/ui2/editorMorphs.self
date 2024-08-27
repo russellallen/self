@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.33 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -72,9 +73,9 @@ SlotsToOmit: parent prototype rawBox rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'caretMorph' -> () From: ( | {
-         'ModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (globals fontSpec copyName: \'verdana\' Size: 12 Style: \'bold\')\x7fVisibility: public'
+         'ModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (globals fontSpec copyName: \'helvetica\' Size: 12 Style: \'bold\')\x7fVisibility: public'
         
-         fontSpec <- globals fontSpec copyName: 'verdana' Size: 12 Style: 'bold'.
+         fontSpec <- globals fontSpec copyName: 'helvetica' Size: 12 Style: 'bold'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
@@ -600,6 +601,12 @@ SlotsToOmit: parent prototype rawBox rawBox: rawColor rawColor:.
             | ) .
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'editorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (abstractUI2Event editorKeyCapComboHandler keyComboTranslator)'
+        
+         keyComboTranslator <- bootstrap stub -> 'traits' -> 'abstractUI2Event' -> 'editorKeyCapComboHandler' -> 'keyComboTranslator' -> ().
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
          'Category: graphical interface\x7fCategory: ui2\x7fCategory: System\x7fCategory: Morphs\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -666,9 +673,9 @@ SlotsToOmit: parent prototype rawBox rawColor.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'editorRowMorph' -> () From: ( | {
-         'Category: fontDefaults\x7fModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 12 Style: \'\')\x7fVisibility: public'
+         'Category: fontDefaults\x7fModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (fontSpec copyName: \'helvetica\' Size: 12 Style: \'\')\x7fVisibility: public'
         
-         defaultFontSpec <- fontSpec copyName: 'verdana' Size: 12 Style: ''.
+         defaultFontSpec <- fontSpec copyName: 'helvetica' Size: 12 Style: ''.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'editorRowMorph' -> () From: ( | {
@@ -783,6 +790,142 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         
          subpartNames <- 'autoCompletion
 '.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+         'Category: graphical interface\x7fCategory: ui2\x7fCategory: Programming Environment\x7fCategory: Widgets\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         smallEditorMorph = bootstrap define: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             bootstrap remove: 'prototype' From:
+             bootstrap remove: 'rawColor' From:
+             globals rowMorph copyRemoveAllMorphs ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals smallEditorMorph.
+
+CopyDowns:
+globals rowMorph. copyRemoveAllMorphs 
+SlotsToOmit: parent prototype rawColor.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         accept.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
+        
+         cachedFontColor.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
+        
+         cachedFontSpec.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (nil)'
+        
+         cachedLabelMorph.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (\'\')\x7fVisibility: private'
+        
+         cachedString <- ''.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: private'
+        
+         cancelAction <- bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> 'cancelAction' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals smallEditorMorph cancelAction.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         editor.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (false)\x7fVisibility: public'
+        
+         isAsynchronous <- bootstrap stub -> 'globals' -> 'false' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
+        
+         panel.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         parent* = bootstrap stub -> 'traits' -> 'smallEditorMorph' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'Category: filing out\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         prototype = ( |
+            | smallEditorMorph).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'Category: Basic Morph State\x7fModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (paint named: \'transparent\')\x7fVisibility: private'
+        
+         rawColor <- paint named: 'transparent'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         rawEditMode <- bootstrap stub -> 'globals' -> 'false' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (paint named: \'transparent\')\x7fVisibility: public'
+        
+         savedColor <- paint named: 'transparent'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (paint named: \'black\')\x7fVisibility: public'
+        
+         savedLabelColor <- paint named: 'black'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         string <- ''.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         style <- bootstrap stub -> 'globals' -> 'slotOutlinerPreferences' -> 'undeclaredSlotStyle' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         target.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: InitializeToExpression: (\'\')\x7fVisibility: private'
+        
+         updateLabelsCache <- ''.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caretMorph' -> () From: ( | {
@@ -2911,6 +3054,335 @@ selection?-- Randy, 2/6/95\x7fModuleInfo: Module: editorMorphs InitialContents: 
          'Category: classification\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
         
          isEditorMorph = bootstrap stub -> 'globals' -> 'false' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
+         'Category: testing\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         isSmallEditorMorph = bootstrap stub -> 'globals' -> 'false' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: private'
+        
+         addEditor = ( |
+            | 
+            removeAllMorphs.
+            editor: editorMorph copy color: style color.
+            typer fontSpec:  style fontSpec.
+            typer fontColor: style fontColor.
+            editor appendString: stringForEditing.
+            editor firstRow removeTyper.
+
+            "set styles so typer will be right"
+            editor firstRow defaultFontSpec:  style fontSpec.
+            editor firstRow defaultFontColor: style fontColor.
+
+            addMorphLast: editor.
+            panel: acceptCancelPanel copyTarget: target
+                                         Source: self
+                                         Accept: accept
+                                         Cancel: cancelAction
+                                         Style:  style.
+            panel acceptButton isAsynchronous: isAsynchronous.
+            addMorphLast: panel.
+            editor baseMinWidth: (150 max: editor baseBounds width)).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: private'
+        
+         addLabels = ( |
+             lines.
+            | 
+            removeAllMorphs.
+            panel: nil.
+            lines: textLines copyLines: string.
+            lines size <= 1 ifTrue: [
+              cachedLabelMorph: labelMorph copyLabel: string
+                                        FontSpec: style fontSpec
+                                           Color: savedLabelColor.
+              addMorphLast: cachedLabelMorph
+            ] False: [| col |
+              col: (columnMorph copy leftJustify beShrinkWrap borderWidth: 0) color: color.
+              lines do: [| :l |
+                cachedLabelMorph: labelMorph copyLabel: l
+                                              FontSpec: style fontSpec
+                                                 Color: savedLabelColor.
+                col addMorphLast: cachedLabelMorph
+              ].
+              addMorphLast: col
+            ].
+            cachedString: string.
+            cachedFontColor: style fontColor.
+            cachedFontSpec: style fontSpec).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         beTypingFocusFor: hand = ( |
+            | 
+            editMode: true.
+            editor beTypingFocusFor: hand.  
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'Comment: override to save my (non-edit color)\x7fModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         color: c = ( |
+            | 
+            savedColor: c.
+            resend.color: c).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         contentsString = ( |
+             s.
+            | 
+            editMode ifFalse: [^string].
+            s: ''.
+            editor firstRow allRowsDo: [| :r | s: s & r contentsString ].
+            s flatString).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         contentsString: str = ( |
+            | 
+            str = contentsString  ifTrue: [^ self].
+            editMode: true.
+            editor contentsString: str).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyString: str = ( |
+            | 
+            copyString: str Style: ( | color = paint. fontName = 'helvetica'. fontSize = 10 | )).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyString: str Style: sty = ( |
+            | 
+            (((copy string: str) target: nil) style: sty) initialize).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyString: str Target: tar Accept: accept Cancel: cancel Style: sty = ( |
+            | 
+            (((((copy target: tar) string: str) accept: accept) style: sty)
+              cancelAction: cancel)
+              initialize).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyString: str Target: tar Accept: accept Cancel: cancel Style: sty LabelColor: c = ( |
+            | 
+            ((((((copy target: tar) string: str) accept: accept) style: sty) savedLabelColor: c)
+              cancelAction: cancel)
+              initialize).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyString: str Target: tar Accept: accept Style: sty = ( |
+            | 
+            ((((copy target: tar) string: str) accept: accept) style: sty)
+              initialize).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: private'
+        
+         dropEvent: evt OnBaseAt: globalPt = ( |
+            | 
+            "Ignore all events if receiver has no target."
+            nil = target ifTrue: [ ^dropThroughMarker ].
+            resend.dropEvent: evt OnBaseAt: globalPt).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: private'
+        
+         dropEvent: e OnSubmorphsAt: globalPt IfHandled: handledBlock = ( |
+            | 
+            editMode not || [nil = target] ifTrue: [ ^dropThroughMarker ].
+            e keyDown && [ e metaIsDown ] && [ e keystrokes = '\r' ] ifTrue: [
+              accept actionFrom: self Target: target Event: e.
+              ^handledBlock value].
+            resend.dropEvent: e OnSubmorphsAt: globalPt IfHandled: handledBlock).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         editMode = ( |
+            | rawEditMode).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         editMode: value = ( |
+            | 
+            nil = target     ifTrue: [^self].
+            editMode = value ifTrue: [^self].
+            value ifTrue: [ | sc |
+              sc: color.
+              color: paint named: 'black'.
+              savedColor: sc.
+              addEditor.
+            ] False: [
+              color: savedColor.
+              addLabels
+            ].
+            rawEditMode: value.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: private'
+        
+         initialize = ( |
+            | 
+            addLabels).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         initializePrototype = ( |
+            | 
+            colorTransparent.
+            rawEditMode: false.
+            borderWidth: 1.
+            beShrinkWrap).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         isCounterfactual = ( |
+            | 
+            panel isNotNil && [panel isActive]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         isSmallEditorMorph = bootstrap stub -> 'globals' -> 'true' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         labelColor: c = ( |
+            | 
+            savedLabelColor: c.
+            cachedLabelMorph isNil ifFalse: [
+              cachedLabelMorph color: c].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         leftDoubleClick: evt = ( |
+            | editMode ifFalse: [
+                editMode: true.
+                editor leftMouseDown: evt.
+            ].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         leftMouseDown: evt = ( |
+            | 
+            editMode ifTrue: [^ editor leftMouseDown: evt].
+            resend.leftMouseDown: evt).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         mapReferencesUsing: dict = ( |
+            | 
+            dict if: target IsPresentDo: [|:n| target: n].
+            dict if: editor IsPresentDo: [|:n| editor: n].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         morphTypeName = 'smallEditorMorph'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'rowMorph' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         selectAll = ( |
+            | 
+            editMode: true.
+            editor selectAll.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         selectionStart: s End: e = ( |
+            | 
+            editor selectionStart: s End: e.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: private'
+        
+         stringForEditing = ( |
+            | string).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         typer = ( |
+            | 
+            editor typer).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'smallEditorMorph' -> () From: ( | {
+         'ModuleInfo: Module: editorMorphs InitialContents: FollowSlot\x7fVisibility: public'
+        
+         updateLabels = ( |
+            | 
+                (cachedString = string)
+            && [(cachedFontColor = style fontColor)
+            && [ cachedFontSpec = style fontSpec]]
+             ifTrue: [^ self].
+            addLabels).
         } | ) 
 
 

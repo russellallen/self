@@ -1,6 +1,6 @@
  '$Revision: 30.19 $'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -1605,9 +1605,9 @@ May cause me to expand if doExpand is true. -- dmu 10/04\x7fModuleInfo: Module: 
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {
-         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 12 Style: \'bold\')\x7fVisibility: public'
+         'Category: appearance\x7fModuleInfo: Module: generalModel InitialContents: InitializeToExpression: (fontSpec copyName: \'helvetica\' Size: 12 Style: \'bold\')\x7fVisibility: public'
         
-         preferredFontSpec <- fontSpec copyName: 'verdana' Size: 12 Style: 'bold'.
+         preferredFontSpec <- fontSpec copyName: 'helvetica' Size: 12 Style: 'bold'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'generalModel' -> 'parent' -> () From: ( | {

@@ -78,7 +78,9 @@ byteVectorOop syscall6(int n, void* a0, void* a1, void* a2, void* a3,
 
 
 # if TARGET_OS_VERSION == MACOSX_VERSION \
-  || TARGET_OS_VERSION ==  LINUX_VERSION
+  || TARGET_OS_VERSION ==  LINUX_VERSION \
+  || TARGET_OS_VERSION == NETBSD_VERSION \
+  || TARGET_OS_VERSION == FREEBSD_VERSION
   char*  sysname_wrap(void* FH);
   char* nodename_wrap(void* FH);
   char*  release_wrap(void* FH);

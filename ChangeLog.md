@@ -1,3 +1,35 @@
+Changes in Self 24.01
+----------------------
+
+Deprecated:
+
+ * MacOS port and Self Control.app (32 bit no longer works on MacOS since Catalina in 2019)
+ * travis-ci.org for CI
+
+VM:
+
+ * Thanks to nbuwe, we now build on NetBSD and FreeBSD (x86)
+ * Fewer unecessary warnings on build (4912a2f)
+
+Objects:
+
+ * Made Morphic more responsive at cost of some CPU usage
+ * More usable `sliderMorph`
+ * New `copyTransparent` method on morphs allowing simplification of intialisation code
+ * New preference to swap mouse buttons on Linux
+ * A new `StationMorph` to help navigate around the Kansas desktop
+ * New facilty to scroll around Kansas, and to assist on platforms with only one mouse button (or pen)
+ * New flag: `--runAutomaticTest` to run a suite of tests when building image (then `_Quit`)
+ * New Flag: `--snapshotActionPostRead` to run `snapshotAction postRead` instead of `scheduler start` on a newly build image (to handle command lines)
+ * Improvements to `userProfile`s and main menu options to allow and remove user access to desktop
+
+Fixes:
+
+ * Fix to bug in damage logging
+ * Fix to bug preventing shadow being shown when morphs grabbed by hand
+ * Fix capitalizeAll (Issue #124)
+ * Fix to display opening issue on X11 (doesn't try to second guess $DISPLAY)
+
 Changes in Self 2017.1
 ----------------------
 
@@ -49,42 +81,42 @@ Changes in Self 4.5.0
 
   * Support for **Mac Classic**, and **MetroWerks** compiler  **removed**
   * Build process uses **CMake** now
-  
+
   * Less files: 2022 (Makefiles/Xcode) → 1709 (CMake), that is -313 files
-  * Less code: ca. 510,000 (130,000 w/o Self source) SLOC → ca. 499,00 (123,500 w/o Self source) SLOC, 
+  * Less code: ca. 510,000 (130,000 w/o Self source) SLOC → ca. 499,00 (123,500 w/o Self source) SLOC,
     that is ca. -11,000 (6,500 w/o Self source) SLOC
-  
+
   * New supported compilers: **GCC** ≥ 4.2, **Clang**
   * Experimental Mac OS X support for Self as double-clickable Application
-  
-  * New Self Control.app on OS X to manage your running worlds as a more robust 
-    and featured replacement for the older 'Self Droplet'. Use of this app is 
+
+  * New Self Control.app on OS X to manage your running worlds as a more robust
+    and featured replacement for the older 'Self Droplet'. Use of this app is
     optional and the Self VM can still be accessed through the command line.
 
   * New look for standard world, with better fonts, colours and greater use of space.
 
-  * Various fixes to the standard world, including a new build script 'worldBuilder.self' 
+  * Various fixes to the standard world, including a new build script 'worldBuilder.self'
     replacing several ad hoc build scripts.
 
   * Updated Self Handbook at handbook.selflanguage.org
-  
+
 ## New Features ##
 
   * [CLANG] Self can now be built with the Clang C++ compiler
-  * [OSX] The experimental Cocoa launcher now supports asking for Snapshots. 
+  * [OSX] The experimental Cocoa launcher now supports asking for Snapshots.
     [0c0c5a1]
   * [OSX] Self can be compiled on Mac OS 10.6, 10.7, and 10.8 [08544b3 et al.]
   * [VM] The VM can now be built with coverage data generation [f6de5d6]
-  
+
 ## Removed Features ###
 
-  * [VM] Mac OS pre-X, and the MetroWerks Compiler are gone. 
+  * [VM] Mac OS pre-X, and the MetroWerks Compiler are gone.
     [ed4495c, 4d476d9]
   * [VM] The ASSEMBLER, MANUFACTURER preprocessor macros have been removed
     [2820d73]
-  * [Building] The `bin` directory no longer exists. See _Fate of the tools_ 
+  * [Building] The `bin` directory no longer exists. See _Fate of the tools_
     below. This also means no dependency on `lex` anymore. [24c92b7]
-  
+
 ## Build-Process ##
 
   * [VM] *The build-process is changed from hand-written Makefiles/
@@ -93,10 +125,10 @@ Changes in Self 4.5.0
     * Feature-detection can warn early if libraries are missing and provides an
       unified way of finding the right include-directory- and library-flags.
     * Easy management of en/disabled VM features and configurations.
-  * [vmDate] The Self VM identification string is now generated using a C++ 
+  * [vmDate] The Self VM identification string is now generated using a C++
     instead of an assembly file and includes git information, if applicable.
     [fb2b1ff]
-  * [Assembler] Renamed all `.s` files to `.S` files, as most of them need 
+  * [Assembler] Renamed all `.s` files to `.S` files, as most of them need
     preprocessing. GCC then does the right thing™ with them.
   * [Assembler] Unified GNU/Apple `as` handling for i386.
   * [Build] Certain tools used for building have been moved, some have been
@@ -106,22 +138,22 @@ Changes in Self 4.5.0
 
   * [C++] String literals are now all “const char*”
   * [C++] Friend injection is gone, no “-ffriend-injection” needed. See Blog:
-      * “True” friend functions, i.e., those that are accessible globally and 
-        not class-bound but have to access private members of other classes, 
-        were left as is. However, their implementation has been moved to a 
+      * “True” friend functions, i.e., those that are accessible globally and
+        not class-bound but have to access private members of other classes,
+        were left as is. However, their implementation has been moved to a
         respective implementation (i.e., .cpp) file.
-      * Friend functions, that were mere shortcuts and so could be used without 
-        full qualification have been turned into normal static functions. They 
+      * Friend functions, that were mere shortcuts and so could be used without
+        full qualification have been turned into normal static functions. They
         now have to be called with their class prefixed.
-      * Constructors (like create_objVector) and converters (like as_mapOop) are 
-        now static members of their class and also have a static inline 
+      * Constructors (like create_objVector) and converters (like as_mapOop) are
+        now static members of their class and also have a static inline
         non-member function.
     [cdeb93c]
-  * [GCC] Self can be built with GCC 4.2.1, GCC 4.5, GCC 4.6, GCC 4.7, 
+  * [GCC] Self can be built with GCC 4.2.1, GCC 4.5, GCC 4.6, GCC 4.7,
     and LLVM-GCC 4.2
   * [OSX/Carbon] Some functionality used by certain primitives was deprecated in
-    10.5 and removed in 10.7. Theses were replaced using newer functionality. 
-    This includes: 
+    10.5 and removed in 10.7. Theses were replaced using newer functionality.
+    This includes:
       * Clipboard/pasteboard handling (now done using Pasteboard-API) [4564b38]
       * Window creation/Quartz (now done using HIToolbox) [08544b3]
 
@@ -134,28 +166,28 @@ Changes in Self 4.5.0
 
   * Fate of the shellscripts:
       *  **gone**:  
-         `ConvertRevisions`, `CreateFileStatus`, `Publish`, 
-         `PublishCompare`, `changes`, `check_locks`, `createSourceLinks`, 
-         `delete_xlib_symlinks`, `fix4.1.1`, `ftpPublish`, `makeFileLists`, 
-         `makeSelfWorkingTree`, `makeVMWorkingTree`, `make_glue`, `make_incs`, 
-         `make_vmDate`, `make_xlib_symlinks`, `mf`, `mzap`, `nocompile`, 
-         `Publish`, `PublishCompar`, `pushLink`, `remove`, `testPragma`, 
+         `ConvertRevisions`, `CreateFileStatus`, `Publish`,
+         `PublishCompare`, `changes`, `check_locks`, `createSourceLinks`,
+         `delete_xlib_symlinks`, `fix4.1.1`, `ftpPublish`, `makeFileLists`,
+         `makeSelfWorkingTree`, `makeVMWorkingTree`, `make_glue`, `make_incs`,
+         `make_vmDate`, `make_xlib_symlinks`, `mf`, `mzap`, `nocompile`,
+         `Publish`, `PublishCompar`, `pushLink`, `remove`, `testPragma`,
          `undangle`, `verifyChecksum`
       * **moved** to `tools/shell`:  
-         `Browse`, `Compare`, `Script`, 
+         `Browse`, `Compare`, `Script`,
          `expandNames`, `get_arch`, `profile`, `sdiffc`
 
   * Fate of the compiled tools in `bin`:
       * **gone**:    
-        `UpdateFiles.cpp`, `cwdRootedIn.cpp`, `fixTar.cpp`, 
-        `ftpshell.cpp`, `getRevision.cpp`, `lock_run.cpp`, `rcsfile.cpp`, 
-        `rcsfile.hh`, `removeUnderscore.l`, `resetTime.c`, `skipComments.l`, 
+        `UpdateFiles.cpp`, `cwdRootedIn.cpp`, `fixTar.cpp`,
+        `ftpshell.cpp`, `getRevision.cpp`, `lock_run.cpp`, `rcsfile.cpp`,
+        `rcsfile.hh`, `removeUnderscore.l`, `resetTime.c`, `skipComments.l`,
         `table.cpp`, `table.hh`, `testSocket.cpp`
       * **moved** to `vm/build_support`:  
         `makeDeps`, `obj_patch`
       * **moved** to `tools/src`:   
-        `AddTrailingNewline.cpp`, `cmprev.c`, 
-        `dangling.c`, `isLink.cpp`, `linked.c`, `rself.cpp`, `runBinary.cpp`, 
+        `AddTrailingNewline.cpp`, `cmprev.c`,
+        `dangling.c`, `isLink.cpp`, `linked.c`, `rself.cpp`, `runBinary.cpp`,
         `zap.cpp`
 
 
@@ -164,12 +196,12 @@ Changes in Self 4.5.0
   * [OSX] Carbon Text uses a deprecated API. This should be changed. Probably,
     all Carbon stuff should be replaced using Cocoa.
   * [SUN] Testing and compiling on SunOSen, SPARC.
-  
+
 Changes in Self 4.4
 -------------------
 
 * Self now builds and runs on standard x86 Linux
-* Rebuilt OS X VM 
+* Rebuilt OS X VM
 * Rewritten Self droplet for OS X VM
 
 Changes in Self 4.3
@@ -183,7 +215,7 @@ Dave has revived the original Self user interface ("UI1"), which was built to sh
 
 *Salience-Based Highlighting*
 
-Self now implements David Ungar and Kristen McIntyre’s patented (U.S. patent #6842182) salience-based highlighting. When selecting text, the selected text will be highlighted in a brighter color if the selected region is small (to make it easier to notice), but in a dimmer color if the selected region is large (to avoid being too intense). 
+Self now implements David Ungar and Kristen McIntyre’s patented (U.S. patent #6842182) salience-based highlighting. When selecting text, the selected text will be highlighted in a brighter color if the selected region is small (to make it easier to notice), but in a dimmer color if the selected region is large (to avoid being too intense).
 
 *Graphical Profiler*
 
@@ -267,7 +299,7 @@ Changes Self 4.2
 * The “methods containing” operation now uses a new-style slice outliner by default.
 * Added support for applying a userDefinedOperation to category names as well as slots.
 * Arrows between outliners now get updates. Previously, if the value of a slot changed, the arrow coming from that slot would still point to the old value.
-* userProfile has been changed to use the display’s host name as the user’s name. (Previously, it was attempting to use the “finger” command to figure out the real name of the user, but it was not parsing the finger output correctly. The finger code is still there, but is not being called anymore.) 
+* userProfile has been changed to use the display’s host name as the user’s name. (Previously, it was attempting to use the “finger” command to figure out the real name of the user, but it was not parsing the finger output correctly. The finger code is still there, but is not being called anymore.)
 * When reopening a world, Self will attempt to use the same display that the world was saved on. (So, for example, on the Mac, if you save an image in X and then quit and restart Self, the world will reopen in X, not in Carbon.)
 * New core methods:
    * defaultBehavior - isNil, isNotNil, ifNil:, ifNotNil:, ifNil:IfNotNil:, ifNotNil:IfNil:
@@ -337,7 +369,7 @@ Changes in Self 4.1.4
 * The Self debugger has been generalized to be retargetable to debug other things (for example, machine-level debugging).
 * The transporter has been enhanced to handle object vectors that aren’t copies of the prototypical object vector.
 * We have implemented an experimental model for slots that hold methods. Under the traditional semantics, a method may only be stored in a constant slot, and the method is invoked whenever the slot is accessed. By executing _NakedMethods: true, the user can now select a relaxed model, which permits a method to be stored in an assignable slot. Accessing such a slot merely returns a reference to the method object.
-* Added an argument count bytecode. A new instruction set has been defined and there is backward compatibility with the old instruction set. 
+* Added an argument count bytecode. A new instruction set has been defined and there is backward compatibility with the old instruction set.
 * bigInt now uses a binary base rather than a decimal base, so we can do bitwise operations.
 * Support for handling 32 bit binary integers has been increased (see the int32 and int64 objects).
 * Variations for transparent forwarding (useful for debugging) have been added (see loggingSender).

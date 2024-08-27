@@ -1,6 +1,6 @@
  '30.14.0'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -107,6 +107,8 @@ qUI2Events
 tempPaints
 preferencesMenu
 ui2Version
+viewScrollMorph
+stationMorph
 '.
         } | ) 
 
@@ -172,6 +174,8 @@ ui2Version
  bootstrap read: 'tempPaints' From: 'ui2'
  bootstrap read: 'preferencesMenu' From: 'ui2'
  bootstrap read: 'ui2Version' From: 'ui2'
+ bootstrap read: 'viewScrollMorph' From: 'ui2'
+ bootstrap read: 'stationMorph' From: 'ui2'
 
 
 

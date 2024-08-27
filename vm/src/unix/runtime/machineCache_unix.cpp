@@ -89,6 +89,26 @@ void MachineCache::flush_instruction_cache_word(void* addr) { }
 
 void MachineCache::flush_instruction_cache_range(void* s, void* e) {}
 
+# elif TARGET_OS_VERSION == NETBSD_VERSION
+
+  /* some architectures don't need to do anything here */
+  # if TARGET_ARCH == I386_ARCH || TARGET_ARCH == PPC_ARCH
+  void MachineCache::flush_instruction_cache_word(void* addr) {}
+  void MachineCache::flush_instruction_cache_range(void* s, void* e) {}
+
+  # else
+   /*
+    * Some architectures can do this from userland (e.g. sparc).
+    * Some have a sysarch(2) wrapper (e.g. arm_sync_icache)
+    */
+    # error
+  # endif
+
+# elif TARGET_OS_VERSION == FREEBSD_VERSION \
+    && TARGET_ARCH       == I386_ARCH
+  void MachineCache::flush_instruction_cache_word(void* addr) {}
+  void MachineCache::flush_instruction_cache_range(void* s, void* e) {}
+
 # else
   # error for which machine?
 

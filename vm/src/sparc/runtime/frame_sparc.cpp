@@ -152,7 +152,7 @@ int32 frame::frame_size_of_uncopied_frame() {
   oop* l =  my_sp()->as_oops();
 # if GENERATE_DEBUGGING_AIDS
     if (CheckAssertions) {
-      assert(sl > l || isOnVMStack(l) && !isOnVMStack(sl),
+      assert(sl > l || (isOnVMStack(l) && !isOnVMStack(sl)),
                "frame size cannot be zero or negative!");
           // NB: C frames can have neg. size: top frame on VM stack
       if (is_compiled_self_frame()) {

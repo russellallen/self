@@ -135,9 +135,6 @@ the error.
 
 
 .. tabularcolumns:: p{5cm} p{10cm}
-.. table:: Primitive failures
-
-.. tabularcolumns:: p{4cm} p{13cm}
 .. list-table:: Primitive failures
     :widths: 10 100
     :header-rows: 1

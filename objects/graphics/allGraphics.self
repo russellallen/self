@@ -54,6 +54,18 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          revision <- '30.8.1'.
         } | ) 
 
+bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allGraphics' -> () From: ( | {
+         'ModuleInfo: Module: allGraphics InitialContents: FollowSlot'
+
+         postFileIn = ( |
+            | 
+              "The `host` object specifies the graphics for the OS, but can't
+               load it unless this module is loaded."
+              snapshotAction addPostReadMessage: (
+              message copy receiver: host Selector: 'setGraphicsDependentGlobals').
+            resend.postFileIn).
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allGraphics' -> () From: ( | {
          'ModuleInfo: Module: allGraphics InitialContents: FollowSlot\x7fVisibility: private'
         

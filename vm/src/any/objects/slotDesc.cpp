@@ -88,8 +88,8 @@ bool slotDesc::compare(slotDesc* sd) {
   //OUTPUT true if sd is equivalent to this, otherwise false
 
   assert(   name == sd->name
-         ||     name->is_unary() &&     is_assignment_slot_name(sd->name)
-         || sd->name->is_unary() && sd->is_assignment_slot_name(    name),
+         || (    name->is_unary() &&     is_assignment_slot_name(sd->name))
+         || (sd->name->is_unary() && sd->is_assignment_slot_name(    name)),
          "compared slots must have the same name");
   
   // are slot types the same?

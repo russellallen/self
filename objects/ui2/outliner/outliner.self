@@ -1,6 +1,6 @@
- '$Revision: 30.15 $'
+ '30.15.1'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -419,13 +419,11 @@ Hack for asynchronous buttons: start script with an \"A\"\x7fModuleInfo: Module:
             | 
             color: preferredColor. 
             removeAllMorphs.
-            rm: rowMorph copy beFlexible borderWidth: 0.
-            rm color: paint named: 'transparent'.
+            rm: rowMorph copyTransparent beFlexible borderWidth: 0.
             tag: spacerMorph copyH: 3 Color: colorForTag.
             rm addMorphFirst: tag.
 
-            cm: columnMorph copy beFlexible borderWidth: 0.
-            cm color: paint named: 'transparent'.
+            cm: columnMorph copyTransparent beFlexible borderWidth: 0.
             columnUnderHeader: newColumnUnderHeader.
             cm addMorphLast: columnUnderHeader.
             cm addMorphFirst: buildHeader.
@@ -533,12 +531,11 @@ outliner has non-items that might be counterfactual.\x7fModuleInfo: Module: outl
          newColumnUnderHeader = ( |
              c.
             | 
-            c: columnMorph copy.
+            c: columnMorph copyTransparent.
             c beFlexible.
             c leftJustify.
             c borderWidth: 0.
             c baseMinHeight: 0.
-            c color: paint named: 'transparent'.
             c).
         } | ) 
 
@@ -837,7 +834,7 @@ boxedItems.\x7fModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisib
         
          buildBody = ( |
             | 
-            body: rowMorph copy color: paint named: 'transparent'.
+            body: rowMorph copyTransparent.
             body  borderWidth: 0.
             body  beFlexible.
 
@@ -1270,9 +1267,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'outliner' -> () From: ( | {
-         'ModuleInfo: Module: outliner InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: outliner InitialContents: InitializeToExpression: (\'30.15.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.15 $'.
+         revision <- '30.15.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'outliner' -> () From: ( | {

@@ -11,7 +11,7 @@
 
   .text
         
-    start_exported_function currentFrame
+start_exported_function(currentFrame)
         // must be ebp cause caller may change esp
         movl %ebp, %eax
         # if GENERATE_DEBUGGING_AIDS
@@ -35,13 +35,13 @@
         # endif
         ret
         
-    start_exported_function currentReturnAddr
+start_exported_function(currentReturnAddr)
         hlt // unused?
 
-    start_exported_function set_SPLimitReg
+start_exported_function(set_SPLimitReg)
                 hlt
 
-    start_exported_function save1Arg
+start_exported_function(save1Arg)
                 hlt
 
   //-----------------------------------------------------------------
@@ -83,7 +83,7 @@
   
 // first make new stack frame & save all registers in it
 
-start_exported_function SetSPAndCall
+start_exported_function(SetSPAndCall)
 
   
   enter  $24, $0 // space for three saved regs, two already saved = 5 = 20, next mult of 16 is 24
@@ -151,7 +151,7 @@ noSave:
   // so it expects the esp to be 8 less.
   testb %cl, %cl
   jz returning_into_middle
-  jmp_reg_indir %esp
+  jmp_reg_indir(%esp)
   
 returning_into_middle:  
   # if GENERATE_DEBUGGING_AIDS
@@ -199,7 +199,7 @@ firstTimeThisProcess:
 
   .globl  C_SYM(ReturnOffTopOfProcess)
   pushl $ C_SYM(ReturnOffTopOfProcess)
-  jmp_reg %eax
+  jmp_reg(%eax)
 
         
 // =============================================
@@ -215,11 +215,11 @@ firstTimeThisProcess:
 # define a4  28        
 
 
-start_exported_function SwitchStack0 
-start_exported_function SwitchStack1
-start_exported_function SwitchStack2
-start_exported_function SwitchStack3
-start_exported_function SwitchStack4
+start_exported_function(SwitchStack0)
+start_exported_function(SwitchStack1)
+start_exported_function(SwitchStack2)
+start_exported_function(SwitchStack3)
+start_exported_function(SwitchStack4)
   
           
           enter $2*oopSize, $0   // save old bp, keep sp aligned
@@ -252,7 +252,7 @@ start_exported_function SwitchStack4
           1:
           2:
           # endif
-          call_disp_reg_indir newPC,%ebp
+          call_disp_reg_indir(newPC, %ebp)
           leave
           ret
         
@@ -266,7 +266,7 @@ start_exported_function SwitchStack4
   
 
 
-  start_exported_function CallPrimitiveFromInterpreter
+start_exported_function(CallPrimitiveFromInterpreter)
   hlt
   
  
@@ -280,7 +280,7 @@ start_exported_function SwitchStack4
 # define self_ic_flag   12 // called from Self ic?
         
 
-start_exported_function ContinueNLRFromC    //; called by VM 
+start_exported_function(ContinueNLRFromC)   //; called by VM 
                 movl ret_addr(%esp), NLRResultReg // borrow these regs
                 movl interp_flag(%esp), NLRHomeReg        // called from Self ic? (must save)
                 
@@ -312,14 +312,14 @@ start_exported_function ContinueNLRFromC    //; called by VM
 # define sp_arg          12
 
 
-                start_exported_function ContinueAfterReturnTrap
+start_exported_function(ContinueAfterReturnTrap)
                movl result_arg(%esp), ResultReg
                movl pc_arg(%esp), %edx
                movl sp_arg(%esp), %esp
                movl (%esp), %ebp // restore base pointer
                addl $8, %esp // passed in sp of patched frame AFTER pushing pc, ebp, want sp BEFORE
                movl $0, C_SYM(processSemaphore)
-               jmp_reg %edx
+               jmp_reg(%edx)
                 
 // --------------------------------------------------------------
 // ContinueNLRAfterReturnTrap
@@ -333,7 +333,7 @@ start_exported_function ContinueNLRFromC    //; called by VM
 # define homeFrame_arg   16
 # define homeFrameID_arg 20    
 
-                start_exported_function ContinueNLRAfterReturnTrap
+start_exported_function(ContinueNLRAfterReturnTrap)
                 movl result_arg(%esp), NLRResultReg
                 movl homeFrame_arg(%esp), NLRHomeReg
                 movl homeFrameID_arg(%esp), NLRHomeIDReg
@@ -342,7 +342,7 @@ start_exported_function ContinueNLRFromC    //; called by VM
                 movl (%esp), %ebp // restore base pointer
                 addl $8, %esp // passed in sp of patched frame AFTER pushing pc, ebp, want sp BEFORE
                 movb $0, C_SYM(processSemaphore)
-                jmp_reg NLRTempReg
+                jmp_reg(NLRTempReg)
                 
  // ---------------------------------------------------------
 // EnterSelf
@@ -358,7 +358,7 @@ start_exported_function ContinueNLRFromC    //; called by VM
 # define arg1_arg         16 
 
                   
-start_exported_function EnterSelf
+start_exported_function(EnterSelf)
 
                    enter $0, $0 // 6 to come, 2 done = 0
                                     
@@ -376,18 +376,18 @@ start_exported_function EnterSelf
                    pushl  rcv_arg(%ebp)
  
                    align_send_desc_call_rm
-                   call_disp_reg_indir entry_point_arg,%ebp
-start_exported_function firstSelfFrame_returnPC
-                   jmp_label send_desc_end      // XXXintel may not need this if do it like sparc, offset 2/2, len 5
+                   call_disp_reg_indir(entry_point_arg, %ebp)
+start_exported_function(firstSelfFrame_returnPC)
+                   jmp_label(send_desc_end)     // XXXintel may not need this if do it like sparc, offset 2/2, len 5
                   .long 0                       // reg mask  XXXintel not needed, offset 3/3 len 4
-                   jmp_label contNLR             // XXXintel could be short inst if fix sendDesc offsets
+                   jmp_label(contNLR)           // XXXintel could be short inst if fix sendDesc offsets
                   .globl  C_SYM(firstSelfFrame_nmlns) // for alignment checking
                   .long 0                       // placeholder for nmlns, offset 1/0 WRONG
                   .long 0                       // placeholder for nmlns
                   .long 0                       // placeholder for selector
                   .long 20                      // placeholder for StaticNormalLookupType
                                   
-start_exported_function firstSelfFrameSendDescEnd
+start_exported_function(firstSelfFrameSendDescEnd)
 send_desc_end:
                   movl  12(%esp), %ebx
                   movl  16(%esp), %esi
@@ -423,7 +423,7 @@ contNLR:          movl NLRHomeIDReg,  8(%esp)
  // I save args for the send here (DUPLICATED in runtime.h)
    
                                
-                start_exported_function SendMessage_stub
+start_exported_function(SendMessage_stub)
                 
                 enter $0, $0 // will be pushing 6, already pushed 2 pc, esp, so need zero padding
                 
@@ -439,9 +439,9 @@ contNLR:          movl NLRHomeIDReg,  8(%esp)
                  
                  // returns entry point
                  
-start_exported_function SendMessage_stub_returnPC // for stack-walking
+start_exported_function(SendMessage_stub_returnPC) // for stack-walking
                 leave
-                jmp_reg CResultReg
+                jmp_reg(CResultReg)
 
                  
 // ======================================================================================                   
@@ -452,7 +452,7 @@ start_exported_function SendMessage_stub_returnPC // for stack-walking
  // stack has link back to prologue & nmln, count, link back to caller of method with DI, incoming args
  
 
-start_exported_function SendDIMessage_stub
+start_exported_function(SendDIMessage_stub)
                  enter $0, $0 // create frame, going to push 6, already pushed two, no padding
                  
                  // setup args for SendDIMessage
@@ -469,10 +469,10 @@ start_exported_function SendDIMessage_stub
 
                  // returns entry point
                  
-start_exported_function SendDIMessage_stub_returnPC // for stack-walking
+start_exported_function(SendDIMessage_stub_returnPC) // for stack-walking
                  // unwind orig call, and enter at entry point
                  leave
-                 jmp_reg CResultReg
+                 jmp_reg(CResultReg)
                  
 // ======================================================================================                   
 
@@ -496,11 +496,11 @@ start_exported_function SendDIMessage_stub_returnPC // for stack-walking
 // frsize = round(frsize, alignment_of_C_sp)    // round up to quadword
 
 # if !defined(SIC_COMPILER)
-   start_exported_function MakeOld
+start_exported_function(MakeOld)
    hlt
 # endif
 
-start_exported_function MakeOld_stub
+start_exported_function(MakeOld_stub)
    // (Note: two PCs on stack: orig ret addr, and stub's ret addr    
    
                 popl Temp1 // keep stack aligned, save regpc here
@@ -523,13 +523,13 @@ start_exported_function MakeOld_stub
                 
                 .globl C_SYM(MakeOld)
                 call   C_SYM(MakeOld)
-start_exported_function MakeOld_stub_returnPC // for stack-walking
+start_exported_function(MakeOld_stub_returnPC) // for stack-walking
                 
                 // returns entry point
                 movl -4(%ebp), PerformSelectorLoc
                 movl -8(%ebp), PerformDelegateeLoc
                 leave
-                jmp_reg %eax
+                jmp_reg(%eax)
   
 // ======================================================================================  
 
@@ -550,13 +550,13 @@ dummy:             hlt
 
                    align_send_desc_call_rm
                    call  dummy // dummy
-start_exported_function ReturnTrap
-start_exported_function PrimCallReturnTrap          
-                   jmp_label    rt2         // XXXintel may not need this if do it like sparc
+start_exported_function(ReturnTrap)
+start_exported_function(PrimCallReturnTrap)
+                   jmp_label(rt2)               // XXXintel may not need this if do it like sparc
 
                   .long 0                       // reg mask  XXXintel not needed
 rt_NLR_pc:
-                  jmp_label ReturnTrap_beyond_for_NLR // XXXintel could be short inst if fix sendDesc offsets
+                  jmp_label(ReturnTrap_beyond_for_NLR) // XXXintel could be short inst if fix sendDesc offsets
 
                   .long 0                       // placeholder for nmlns
                   .long 0                       // placeholder for nmlns
@@ -564,7 +564,7 @@ rt_NLR_pc:
                   .long 0                       // placeholder for StaticNormalLookupType
                   .long 0                       // placeholder for delegatee 
 
-start_exported_function ReturnTrap2
+start_exported_function(ReturnTrap2)
 rt2:                     
                   pushl $ C_SYM(ReturnTrap) // put back return PC for VM
                   enter $0, $0
@@ -577,8 +577,8 @@ ReturnTrap_merge:
                   pushl %eax
                   .globl C_SYM(HandleReturnTrap)
                   call   C_SYM(HandleReturnTrap)
-start_exported_function ReturnTrap_returnPC
-start_exported_function ReturnTrapNLR_returnPC
+start_exported_function(ReturnTrap_returnPC)
+start_exported_function(ReturnTrapNLR_returnPC)
                   hlt // no return
                   
 ReturnTrap_beyond_for_NLR:
@@ -603,7 +603,7 @@ ReturnTrap_beyond_for_NLR:
 
 
 
-start_exported_function ProfilerTrap
+start_exported_function(ProfilerTrap)
 hlt
 
 
@@ -612,7 +612,7 @@ hlt
 
 // maybe do not need this
 
-start_exported_function FlushInstruction
+start_exported_function(FlushInstruction)
       movl 4(%esp), %eax
       //       clflush (%eax): as generates sfence!
       // 0f ae/7
@@ -625,7 +625,7 @@ start_exported_function FlushInstruction
 // implement write system call lib routine
 
 /*
-start_exported_function WRITE
+start_exported_function(WRITE)
   li r0, 4
    sc
   blr
@@ -645,14 +645,14 @@ start_exported_function WRITE
  // Intel: just push pc in called nmethod onto stack -- dmu 4/06
  
 # if !defined(SIC_COMPILER)
-   start_exported_function Recompile
+start_exported_function(Recompile)
    hlt
 # endif 
 
 
   
                                
-start_exported_function Recompile_stub
+start_exported_function(Recompile_stub)
 
                   popl Temp1 // ptr into callee
                   enter $4, $0 // create frame, already pushed 2 words, will be pushing 5 more total 7 need one pad
@@ -666,12 +666,12 @@ start_exported_function Recompile_stub
                  call   C_SYM(Recompile)
                  
                  // returns entry point                 
-start_exported_function Recompile_stub_returnPC // for stack-walking
+start_exported_function(Recompile_stub_returnPC) // for stack-walking
                  leave
-                 jmp_reg CResultReg
+                 jmp_reg(CResultReg)
 
                  
-start_exported_function swap_bytes
+start_exported_function(swap_bytes)
   movl 4(%esp), %ecx
   movl 0(%ecx), %eax
   bswap %eax

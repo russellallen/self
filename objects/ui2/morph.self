@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.17 $'
+ '30.17.2'
  '
-Copyright 1992-2011 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -66,9 +67,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'morph' -> () From: ( | {
-         'ModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: morph InitialContents: InitializeToExpression: (\'30.17.2\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.17 $'.
+         revision <- '30.17.2'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'morph' -> () From: ( | {
@@ -558,11 +559,13 @@ is the representee.\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7f
             isInWorld ifFalse: [ ^self ].
             bnds: bounds.
             p: position.
-            ["floors and ceils added for" quartz "dmu 4/07"].
-            damagedLeft: bnds left   floor - p x
-                  Right: bnds right  ceil  - p x
-                    Top: bnds top    floor - p y
-                 Bottom: bnds bottom ceil  - p y
+            " floors and ceils added for quartz dmu 4/07
+              added a bit more damage to clean up rca 2/18
+            "
+            damagedLeft: (bnds left   floor - p x) - 1
+                  Right: (bnds right  ceil  - p x) + 1
+                    Top: (bnds top    floor - p y) - 1
+                 Bottom: (bnds bottom ceil  - p y) + 1
                    From: self.
             self).
         } | ) 
@@ -605,6 +608,14 @@ color when the user so asks (with a colorChangerMorph for example).\x7fModuleInf
             | 
             evt sourceHand attach: (colorChangerMorph copyTarget: self).
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
+         'Category: basics\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
+        
+         colorTransparent = ( |
+            | 
+            color: paint named: 'transparent'. self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
@@ -708,6 +719,13 @@ the given mapping dictionary.\x7fModuleInfo: Module: morph InitialContents: Foll
             new rawMorphs: vector.
             new privateSetOwner: nil.
             new).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
+         'Category: copying\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyTransparent = ( |
+            | copy colorTransparent).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
@@ -2195,9 +2213,9 @@ and rawOwner.\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibi
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
-         'Category: drawing\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: drawing\x7fModuleInfo: Module: morph InitialContents: InitializeToExpression: (paint named: \'gray\')\x7fVisibility: public'
         
-         shadowColor <- paint named: 'transparent'.
+         shadowColor <- paint named: 'gray'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
@@ -2605,40 +2623,6 @@ owner is nil. This morph is typically a worldMorph.\x7fModuleInfo: Module: morph
                 ^rectangle copyX: (baseB origin min: (b origin + position))
                                Y: (baseB corner max: (b corner + position)).
             ]).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
-         'Category: damage management\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
-        
-         xxxOldChanged = ( |
-             bnds.
-             deltaP.
-             pX <- 0.
-             pY <- 0.
-             w.
-            | 
-            "Report that the area occupied by this morph should be redrawn."
-            "Details: This method is an optimized version of:
-                w: world.
-                w isWorldMorph ifTrue: [
-                    w damaged: globalBounds.
-                ].
-            This optimization traverses the chain to the world only once.
-            Does nothing if the morph is not in the world."
-
-            w: owner ifNil: [ ^self ].
-            [w isWorldMorph] whileFalse: [| wPos |
-                wPos: w position.
-                pX: pX + wPos x.
-                pY: pY + wPos y.
-                w: w owner ifNil: [ ^self ].
-            ].
-            bnds: bounds.
-            deltaP: pX @ pY.
-            w damaged:
-                (rectangle copyX: deltaP + bnds origin
-                               Y: deltaP + bnds corner + shadowOffset "xxx").
-            self).
         } | ) 
 
 

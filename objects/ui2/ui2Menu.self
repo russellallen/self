@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.15 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -443,9 +444,9 @@ morphs. -- Randy, 1/10/95\x7fModuleInfo: Module: ui2Menu InitialContents: Follow
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Menu' -> () From: ( | {
-         'Category: construction\x7fModuleInfo: Module: ui2Menu InitialContents: InitializeToExpression: (fontSpec copyName: \'verdana\' Size: 12 Style: \'\')\x7fVisibility: public'
+         'Category: construction\x7fModuleInfo: Module: ui2Menu InitialContents: InitializeToExpression: (fontSpec copyName: \'helvetica\' Size: 12 Style: \'\')\x7fVisibility: public'
         
-         defaultFontSpec <- fontSpec copyName: 'verdana' Size: 12 Style: ''.
+         defaultFontSpec <- fontSpec copyName: 'helvetica' Size: 12 Style: ''.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2Menu' -> () From: ( | {

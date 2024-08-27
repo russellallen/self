@@ -1,6 +1,6 @@
- '$Revision: 30.9 $'
+ '30.9.1'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -57,9 +57,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pluggableLeafOutliner' -> () From: ( | {
-         'ModuleInfo: Module: pluggableLeafOutliner InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: pluggableLeafOutliner InitialContents: InitializeToExpression: (\'30.9.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.9 $'.
+         revision <- '30.9.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'pluggableLeafOutliner' -> () From: ( | {
@@ -153,7 +153,7 @@ SlotsToOmit: parent prototype.
             header addMorphLast: tle.
             addCommentButtonToHeader.
             header addMorphLast: flexibleSpacer copy.
-            contentsLabel: optionalMorph copy color: (paint named: 'transparent').
+            contentsLabel: optionalMorph copyTransparent.
             header addMorphLast: contentsLabel.
             header addMorphLast: rigidSpacer copyH: 4.
             header addMorphLast: buildExpander.

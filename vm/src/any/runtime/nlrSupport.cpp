@@ -129,7 +129,7 @@ volatile void NLRSupport::continue_NLR_into_compiled_Self(bool remove_patches, f
 
 
 void NLRSupport::save_NLR_results(oop res, int32 targetFrame, int32 targetID) { 
-  assert(res == badOop  ||  res == 0  ||  targetFrame != NULL,
+  assert(res == badOop  ||  res == 0  ||  targetFrame != 0,
          "either aborting/terminating process or have a target");
   set_NLR_result_from_C(res);
   set_NLR_home_from_C(targetFrame);

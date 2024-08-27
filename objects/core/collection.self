@@ -1,6 +1,6 @@
  '30.27.1'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -433,6 +433,19 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
              This is used for filing out (via storeStringIfFail:)
              and for printing out the names of collections.
              --dmu 4/93').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'collection' -> () From: ( | {
+         'Category: setLikeOperations\x7fModuleInfo: Module: collection InitialContents: FollowSlot'
+        
+         difference: c = ( |
+             r.
+            | 
+            r: copy.
+            do: [ | :v |
+                (c includes: v) ifTrue: [ r remove: v ].
+            ].
+            r).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'collection' -> () From: ( | {
@@ -1181,6 +1194,13 @@ Otherwise, raise an error.\x7fModuleInfo: Module: collection InitialContents: Fo
          sum = ( |
             | 
             reduceWith: [|:e1. :e2| e1 + e2] IfSingleton: [|:e| e] IfEmpty: 0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'collection' -> () From: ( | {
+         'Category: setLikeOperations\x7fModuleInfo: Module: collection InitialContents: FollowSlot'
+        
+         union: c = ( |
+            | copy addAll: c).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'collection' -> () From: ( | {

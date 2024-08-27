@@ -29,7 +29,6 @@ discussed in :ref:`[UCC91] <citations>`.
    foreign.rst
    unix.rst
    oddball.rst
-   buildworld.rst
    lowlevel.rst
    textdebug.rst
    logging.rst

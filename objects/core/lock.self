@@ -1,8 +1,9 @@
  '$Revision: 30.8 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -277,6 +278,18 @@ process already holds lock).\x7fModuleInfo: Module: lock InitialContents: Follow
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'lock' -> () From: ( | {
+         'Category: locking\x7fModuleInfo: Module: lock InitialContents: FollowSlot'
+        
+         lockTimeOut: ms IfTimedOut: tblk = ( |
+            | 
+            isHeldByThisProcess ifFalse: [
+                (sema waitTimeOut: ms) ifTrue: [^ tblk value].
+                holderProcess: process this.
+            ].
+            lockCount: 1 + lockCount).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'lock' -> () From: ( | {
          'ModuleInfo: Module: lock InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
@@ -300,6 +313,20 @@ Return result of \'blk\'.\x7fModuleInfo: Module: lock InitialContents: FollowSlo
         
          protect: blk Me: me = ( |
             | protect: blk).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'lock' -> () From: ( | {
+         'Category: structured operations\x7fCategory: protect\x7fModuleInfo: Module: lock InitialContents: FollowSlot'
+        
+         protect: blk TimeOut: ms IfTimedOut: tblk = ( |
+            | 
+            "For efficiency, it is worth avoiding the 'onReturn:'
+             when possible (i.e., all but the first time the lock
+             is claimed)."
+            isHeldByThisProcess ifTrue: blk
+                                 False: [
+                    lockTimeOut: ms IfTimedOut: [^ tblk value]. 
+                    blk onReturn: [unlock]]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'lock' -> () From: ( | {

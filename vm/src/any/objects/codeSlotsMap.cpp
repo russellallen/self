@@ -1472,9 +1472,9 @@ class BranchTargetFinder: public abstract_interpreter {
       ?  new BoolBList(mi.length_codes + 1)
       :  NULL;
     for (int32 i = 0;  i < mi.length_codes + 1;  ++i) {
-      branch_targets->push(NULL);
+      branch_targets->push(false);
       if (separateDirections)
-        backwards_branch_targets->push(NULL);
+        backwards_branch_targets->push(false);
     }
     got_one= false;
   }

@@ -62,17 +62,18 @@ bool OS::expand_user_name(const char* in, const char* slash, char*& dirName) {
   // return false on error
 
   char user[logname_max+1];
-  if (slash  -  (in + 1)  >= sizeof(user)) {
+  const size_t ulen = slash - (in + 1);
+  if (ulen >= sizeof(user)) {
     static char err[max_path_length + 50];
     static char buf[max_path_length + 50];
-    lsprintf_string(buf, slash - (in + 1), in + 1);
+    lsprintf_string(buf, ulen, in + 1);
     sprintf(err, "'%s' exceeds %ld in length",
             buf,  long(sizeof(user) - 1));
     dirName = err;
     return false;
   }
-  strncpy(user, in + 1,  slash - (in + 1));
-  user[slash - (in + 1)] = '\0';
+  memcpy(user, in + 1, ulen);
+  user[ulen] = '\0';
   dirName = get_user_directory(user);
   if (dirName == NULL) {
     static char err[max_path_length + 50];

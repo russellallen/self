@@ -53,8 +53,12 @@ bool InterruptedContext::in_system_trap() {
 int InterruptedContext::g1() {
   # if  TARGET_OS_VERSION == SOLARIS_VERSION
      return ((ucontext_t*) scp)->uc_mcontext.gregs[REG_G1];
+  # elif  TARGET_OS_VERSION == NETBSD_VERSION
+     return scp->uc_mcontext.__gregs[_REG_G1];
   # elif  TARGET_OS_VERSION == SUNOS_VERSION
      return ((sigcontext *) scp)->sc_g1;
+  # else
+  #  error what?
   # endif
 }
 
@@ -71,10 +75,10 @@ void InterruptedContext::setupPreemptionFromSignal() {
     InterruptedContext::the_interrupted_context->must_be_in_self_thread();
   
     if (continuePC) fatal("recursive setSPLimit");
-    if ( the_interrupted_context->pc()      >= first_inst_addr( setSPLimitAndContinue )
-     &&  the_interrupted_context->pc()      <  first_inst_addr( setSPLimitAndContinueEnd )
-    ||   the_interrupted_context->next_pc() >= first_inst_addr( setSPLimitAndContinue )
-     &&  the_interrupted_context->next_pc() <  first_inst_addr( setSPLimitAndContinueEnd )) {
+    if ((the_interrupted_context->pc()      >= first_inst_addr( setSPLimitAndContinue )
+     &&  the_interrupted_context->pc()      <  first_inst_addr( setSPLimitAndContinueEnd ))
+    ||  (the_interrupted_context->next_pc() >= first_inst_addr( setSPLimitAndContinue )
+     &&  the_interrupted_context->next_pc() <  first_inst_addr( setSPLimitAndContinueEnd ))) {
       return;                   // already patched or just about to do it
     }
     newSPLimit = currentProcess->stackEnd();
@@ -84,11 +88,18 @@ void InterruptedContext::setupPreemptionFromSignal() {
 char** InterruptedContext::pc_addr() {
   # if  TARGET_OS_VERSION == SOLARIS_VERSION
      return (char**) &scp->uc_mcontext.gregs[REG_PC];
+  # elif  TARGET_OS_VERSION == NETBSD_VERSION
+     return (char **) &_UC_MACHINE_PC(scp);
   # elif  TARGET_OS_VERSION == SUNOS_VERSION
      return (char**) &scp->sc_pc;
+  # else
+  #  error what?
   # endif
 }
 
+
+# if  TARGET_OS_VERSION == SOLARIS_VERSION \
+  ||  TARGET_OS_VERSION == NETBSD_VERSION
 
 # if  TARGET_OS_VERSION == SOLARIS_VERSION
 
@@ -115,9 +126,41 @@ char** InterruptedContext::pc_addr() {
     }
   }
 
+# elif  TARGET_OS_VERSION == NETBSD_VERSION
+  // almost the same as the solaris version above, modulo different names
+
+  // maps locations to their offset in the gregs array
+  static fint loc_map[] = {     // indexed by location
+    -1,      _REG_G1, _REG_G2, _REG_G3, _REG_G4, _REG_G5, _REG_G6, _REG_G7,
+    _REG_O0, _REG_O1, _REG_O2, _REG_O3, _REG_O4, _REG_O5, _REG_O6, _REG_O7,
+    -1,      -1,      -1,      -1,     	-1,      -1,      -1,      -1,     
+    -1,      -1,      -1,      -1,     	-1,      -1,      -1,      -1};
+
+  inline oop* reg_addr(ucontext_t* scp, Location reg) {
+    fint off = loc_map[reg];
+    if (off >= 0) {
+      return (oop*)&scp->uc_mcontext.__gregs[off];
+    } else {
+      // register is in bottommost window
+      if (scp->uc_mcontext.__gwins) {
+	__greg_t * const win = scp->uc_mcontext.__gwins->__wbuf[0].__rw_local;
+        return (oop*)&win[reg - L0];
+      } else {
+        // was saved on stack (normal case)
+	__greg_t *frame = (__greg_t *)scp->uc_mcontext.__gregs[_REG_O6];
+        return (oop*)&frame[reg - L0];
+      }
+    }
+  }
+
+# else
+#  error what?
+# endif
+
   void  InterruptedContext::set_reg(Location reg, void* newVal) {
     *reg_addr((ucontext_t*) scp, reg) = (oop) newVal;
   }
+
 # ifdef UNUSED
   void* InterruptedContext::get_reg(Location reg) {
     return *reg_addr((ucontext_t*) scp, reg);
@@ -130,8 +173,12 @@ char** InterruptedContext::pc_addr() {
 char** InterruptedContext::next_pc_addr() {
   # if  TARGET_OS_VERSION == SOLARIS_VERSION
      return (char**) &((ucontext_t*) scp)->uc_mcontext.gregs[REG_nPC];
+  # elif  TARGET_OS_VERSION == NETBSD_VERSION
+     return (char **) &scp->uc_mcontext.__gregs[_REG_nPC];
   # elif  TARGET_OS_VERSION == SUNOS_VERSION
      return (char**) &((sigcontext *)scp)->sc_npc;
+  # else
+  #  error what?
   # endif
 }
 
@@ -139,8 +186,15 @@ char** InterruptedContext::next_pc_addr() {
 int* InterruptedContext::sp_addr() {
   # if  TARGET_OS_VERSION == SOLARIS_VERSION
      return &((ucontext_t*) scp)->uc_mcontext.gregs[REG_SP];
+  # elif  TARGET_OS_VERSION == NETBSD_VERSION
+     // _UC_MACHINE_SP(scp) is not a lvalue on sparc64 and while
+     // sparc64 is irrelevant here, it still feels kinda icky, so
+     // spell the access explicitly
+     return (int *) &scp->uc_mcontext.__gregs[_REG_O6];
   # elif  TARGET_OS_VERSION == SUNOS_VERSION
      return &((sigcontext *) scp)->sc_sp;
+  # else
+  #  error what?
   # endif
 }
 

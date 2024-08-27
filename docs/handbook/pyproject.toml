@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "handbook"
+version = "2024.1.01"
+description = "Handbook for the Self programming language"
+authors = ["Russell Allen <mail@russell-allen.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+sphinx = "^8.0.0"
+alabaster = "^1.0.0"
+insegel = "^1.3.0"
+furo = "^2024"

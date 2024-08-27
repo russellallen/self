@@ -1,4 +1,4 @@
- '$Revision: 30.30 $'
+ '30.30.1'
  '
 Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
@@ -68,14 +68,14 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             | 
             resend.postFileIn.
             worldMorph initializePrototype.
-            ( worldMorph & shell & memory ) asVector do: [| :o | worldMorph addBackgroundMenuContributor: o ].
+            ( worldMorph & shell & memory & userProfile ) asVector do: [| :o | worldMorph addBackgroundMenuContributor: o ].
             self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'worldMorph' -> () From: ( | {
-         'ModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: worldMorph InitialContents: InitializeToExpression: (\'30.30.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.30 $'.
+         revision <- '30.30.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'worldMorph' -> () From: ( | {
@@ -512,7 +512,7 @@ the world\'s layoutChanged method does nothing.\x7fModuleInfo: Module: worldMorp
         
          addBackgroundMenuContributor: obj = ( |
             | 
-            backgroundMenu: nil.
+            backgroundMenu: nil. 
             backgroundMenuContributors add: obj.
             self).
         } | ) 
@@ -573,6 +573,14 @@ the world\'s layoutChanged method does nothing.\x7fModuleInfo: Module: worldMorp
          'Category: window management\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
         
          addWindowOnDisplay: dispName Bounds: b Limited: isLimited = ( |
+            | 
+            addWindowOnDisplay: dispName Bounds: b User: users owner Limited: isLimited).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
+         'Category: window management\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
+        
+         addWindowOnDisplay: dispName Bounds: b User: aUserProfile Limited: isLimited = ( |
              bc.
              h.
              pc.
@@ -589,6 +597,7 @@ the world\'s layoutChanged method does nothing.\x7fModuleInfo: Module: worldMorp
 
             isLimited ifTrue: [wc platformWindow freezeSize: b size].
             h: handMorph copyRemoveAllSubscribers privateSetOwner: self.
+            h userInfo: aUserProfile.
             h color: randomColorForUser.
             h subscribeWindow:   self. 
 
@@ -768,6 +777,7 @@ whenever the background menu is rebuilt\x7fModuleInfo: Module: worldMorph Initia
               'top' 
             & 'builtInMorphs' 
             & 'usefulObjects' 
+            & 'users'
             & 'worldManagement' 
             & 'applications' 
             & 'memory' 
@@ -1098,17 +1108,16 @@ morphs that have changed and should be redrawn.\x7fModuleInfo: Module: worldMorp
             tStart: times real msec.
             [desiredDelay > (times real msec - tStart)] whileTrue: [
               eventsPending ifTrue: [ ^self ].
-              "Changed the 5 below to 100 to reduce time 
-               spent idling while desktop was open"
-              times delay: 10.  "ask for a small delay; typically get a longer one"
+              times delay: 1.  "ask for a small delay; typically get a longer one"
             ].
             self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
-         'Category: running\x7fCategory: options\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: running\x7fCategory: options\x7fComment: This is our desired frame time, we can go faster then this to
+cope with user input or slower to avoid hogging CPU\x7fModuleInfo: Module: worldMorph InitialContents: InitializeToExpression: (8)\x7fVisibility: public'
         
-         desiredFrameTime <- 35.
+         desiredFrameTime <- 8.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
@@ -1168,7 +1177,7 @@ read and process input events, and update the display.\x7fModuleInfo: Module: wo
          'Category: running\x7fCategory: options\x7fComment: Quartz works either way, but X needs this to be true.
   -- dmu 1/08\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
         
-         doubleBuffering <- bootstrap stub -> 'globals' -> 'false' -> ().
+         doubleBuffering <- bootstrap stub -> 'globals' -> 'true' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
@@ -1533,7 +1542,9 @@ to each morph prototype after filing it in.\x7fModuleInfo: Module: worldMorph In
         
          leftMouseDown: e = ( |
             | 
-            carpetMorph copyHand: e sourceHand.
+            preferences desktop useViewScrollMorph
+             ifTrue: [viewScrollMorph copyHand: e sourceHand]
+              False: [carpetMorph copyHand: e sourceHand].
             self).
         } | ) 
 
@@ -1646,8 +1657,10 @@ Make a notifier to be spawned in a new world.\x7fModuleInfo: Module: worldMorph 
         
          middleMouseDown: e = ( |
             | 
-            "only if click on background"
-            rootMorphsAt: e cursorPoint Do: [^ self].
+            "only if click on background, or if we
+             are dealing with an even forwarded by viewScrollMorph"
+            rootMorphsAt: e cursorPoint Do: [|:m|
+                m prototype = viewScrollMorph ifFalse: [^ self]].
             backgroundMenu ifNil: [ backgroundMenu: buildBackgroundMenu ].
             ( backgroundMenu copy retargetButtonsTo: self) popUp: e.
             self).
@@ -1873,6 +1886,10 @@ oldGlobalBounds. \x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
             | 
             host osName == 'macOSX' ifTrue: [^'quartz'].
             displayName == 'quartz' ifTrue: [^ ''].
+            " Reset to zero if reseting X Display"
+            (snapshotAction commandLine includes: '--resetXDisplays')
+              ifTrue: [" Reset display to DISPLAY environment variable "
+                 ^ os environmentAt: 'DISPLAY' IfFail: ''].
             displayName).
         } | ) 
 
@@ -2240,6 +2257,15 @@ on the default display.\x7fModuleInfo: Module: worldMorph InitialContents: Follo
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
+         'Category: event handling\x7fComment: If button down over the world, drag out a selection region\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
+        
+         rightMouseDown: e = ( |
+            | 
+            carpetMorph copyHand: e sourceHand.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
          'Category: arrows\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: private'
         
          rootMorphsAt: globalPt Do: blk = ( |
@@ -2275,7 +2301,7 @@ run this method.\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x
                 stepDoneSema wait.
                 computeTime: times real msec - tStart.
                 "ensure don't use more than half of CPU just to run the UI"
-                delayIfNoInputFor: 10 max: (desiredFrameTime - computeTime) max: desktop worlds size * computeTime.
+                 delayIfNoInputFor: (desiredFrameTime - computeTime) max: desktop worlds size * computeTime.
             ] loop.
             self).
         } | ) 

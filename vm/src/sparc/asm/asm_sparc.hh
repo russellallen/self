@@ -3,7 +3,9 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-# pragma interface
+# ifdef INTERFACE_PRAGMAS
+  # pragma interface
+# endif
 
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
@@ -23,7 +25,7 @@ enum CondType {
   LTU = CS, GEU = CC
   };
 
-extern char* CondNames[];
+extern const char* const CondNames[];
 
 struct Assembler: BaseAssembler {
   Assembler(int32 instsSize, int32 locsSize,
@@ -38,9 +40,9 @@ struct Assembler: BaseAssembler {
   inline void SetHiX(int32 s, OperandType t, Location d); // sets bits [13..31]
   inline void SetHiX2(int32 s, OperandType t, Location d); // sets bits [10..31]
   inline void CallX(int32 s, OperandType t);
-  inline void ArithR(char* name, fint op, fint op3,
+  inline void ArithR(const char* name, fint op, fint op3,
                      Location s1, Location s2, Location d);
-  inline void ArithX(char* name, fint op, fint op3, Location s1,
+  inline void ArithX(const char* name, fint op, fint op3, Location s1,
                      int32 s2, OperandType t, bool noSetHi, Location d);
   inline void TccR(CondType t, Location s1, Location s2);
   inline void TccX(CondType t, Location s1, int32 s2, OperandType ot, bool noSetHi);

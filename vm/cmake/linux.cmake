@@ -53,6 +53,17 @@ endmacro()
 # "API". Setup prefix headers
 #
 macro(include_prefix_header target file)
+  # -include on the command line creates a problem: headers from the
+  # _precompiled.hh are processed before the source file had a chance
+  # to state its #pragma implementation, hence the kludge with the
+  # INTERFACE_PRAGMAS ifdefs in the sources.  Instead makeDeps is now
+  # changed to includeGIInEachIncl so that #pragma's DTRT.  The ifdefs
+  # should probably be disposed of, but for now keep them and supply
+  # the -D instead as a quick, small, low risk change.
+
   # "super"
-  include_prefix_header_common(${target} ${file})
+  # include_prefix_header_common(${target} ${file})
 endmacro()
+
+list(APPEND _defines -DINTERFACE_PRAGMAS)
+list(APPEND _flags   -Winvalid-pch)

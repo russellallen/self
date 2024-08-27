@@ -1,6 +1,6 @@
- '$Revision: 30.11 $'
+ '30.11.1'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -80,23 +80,23 @@ SlotsToOmit: parent prototype.
             line beFlexibleHorizontally.
             line beRigidVertically.
 
-            titleR: rowMorph copy color: paint named: 'transparent'.
+            titleR: rowMorph copyTransparent.
             titleR borderWidth: 0.
             titleR beFlexible.
             titleR addAllMorphs: (
                 (line copy beRigid setWidth: 15)          &
                 (transparentSpacerMorph copyH: 5)       &
                 (labelMorph copyLabel: title
-                    FontSpec: (outlinerPreferences mediumFontSpec copyName: 'verdana' Style: 'italic')
+                    FontSpec: (outlinerPreferences mediumFontSpec copyName: 'helvetica' Style: 'italic')
                     Color:    paint named: 'black')       &
                 (transparentSpacerMorph copyH: 5)       &
                 line copy) asVector.
 
-            entriesC: columnMorph copy beFlexible color: paint named: 'transparent'.
+            entriesC: columnMorph copyTransparent beFlexible.
             entriesC borderWidth: 0.
             entriesC addAllMorphs: buildPropertyEntries.
 
-            entriesR: rowMorph copy beFlexible color: paint named: 'transparent'.
+            entriesR: rowMorph copyTransparent beFlexible.
             entriesR borderWidth: 0.
             entriesR addAllMorphs:
                 ((spacerMorph copyH: 6 Color: color) & entriesC) asVector.
@@ -118,7 +118,7 @@ SlotsToOmit: parent prototype.
             defaultButtonHolder: ui2Menu initializeDefaultButtonHolder: defaultButtonHolder.
             f: enumeratedTypeLabelMorph copyItemNames: labels Values: values DefaultButtonHolder: defaultButtonHolder.
             f setSelectedIndex: (values asVector keyAt: v).
-            f fontSpec: globals fontSpec copyName: 'verdana' Size: outlinerPreferences mediumFontSize Style: 'bold'.
+            f fontSpec: globals fontSpec copyName: 'helvetica' Size: outlinerPreferences mediumFontSize Style: 'bold'.
             buildFieldLabel: n ContentMorph: f).
         } | ) 
 
@@ -130,9 +130,9 @@ SlotsToOmit: parent prototype.
              r.
             | 
             labelM: labelMorph copyLabel: s
-                FontSpec: ( outlinerPreferences mediumFontSpec copyName: 'verdana' )
+                FontSpec: ( outlinerPreferences mediumFontSpec copyName: 'helvetica' )
                 Color:    (paint named: 'black').
-            r: rowMorph copy color: paint named: 'transparent'.
+            r: rowMorph copyTransparent.
             r borderWidth: 0.
             r beFlexible.
             r baseMinHeight: (outlinerPreferences mediumFontSize + 6).
@@ -158,7 +158,7 @@ SlotsToOmit: parent prototype.
              f.
             | 
             e: editorMorph copy.
-            e setFontSpec: (outlinerPreferences mediumFontSpec copyName: 'verdana' Style: 'bold')
+            e setFontSpec: (outlinerPreferences mediumFontSpec copyName: 'helvetica' Style: 'bold')
                 FontColor: (paint named: 'black').
             e appendString: s.
             s isEmpty ifTrue: [ e appendString: '   ' ].
@@ -471,9 +471,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision revision: 
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'propertySheets' -> () From: ( | {
-         'ModuleInfo: Module: propertySheets InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: propertySheets InitialContents: InitializeToExpression: (\'30.11.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.11 $'.
+         revision <- '30.11.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'propertySheets' -> () From: ( | {
@@ -944,7 +944,7 @@ SlotsToOmit: parent prototype.
             borderWidth: 3.
 
             subsheets: target propertySheets.
-            fs: globals fontSpec copyName: 'verdana' Size: ui2Button defaultFontSpec size.
+            fs: globals fontSpec copyName: 'helvetica' Size: ui2Button defaultFontSpec size.
 
             b1: ui2Button copyColor: color Target: self.
             b1 label: ' Cancel '
@@ -984,7 +984,7 @@ SlotsToOmit: parent prototype.
                 b4) asVector.
 
             t: labelMorph copyLabel: ('Properties for ', target morphTypeName prependAOrAn)
-                FontSpec: (outlinerPreferences largeFontSpec copyName: 'verdana' Style: 'bold')
+                FontSpec: (outlinerPreferences largeFontSpec copyName: 'helvetica' Style: 'bold')
                 Color:    paint named: 'black'.
 
             c: columnMorph copy color: color.

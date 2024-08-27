@@ -3,7 +3,6 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-
 # pragma implementation "addrDesc_sparc.hh"
 
 # include "_addrDesc_sparc.cpp.incl"
@@ -52,7 +51,7 @@
         }
       }
       if (::isCall(inst2p) ||
-          isJump(inst2p) && getSetHiD(instp) != getArithS1(inst2p)) {
+          (isJump(inst2p) && getSetHiD(instp) != getArithS1(inst2p))) {
         // skip into delay slot of call/unrelated jump instruction after set-hi
         inst2p ++;
       }
@@ -112,7 +111,7 @@
         }
       }
       if (::isCall(inst2p) ||
-          isJump(inst2p) && getSetHiD(instp) != getArithS1(inst2p)) {
+          (isJump(inst2p) && getSetHiD(instp) != getArithS1(inst2p))) {
         // skip into delay slot of call/unrelated jump instruction after set-hi
         inst2p ++;
       }

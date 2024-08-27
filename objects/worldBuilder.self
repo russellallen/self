@@ -99,7 +99,7 @@ This is not a module and not managed by Transporter.
            False: [ (q, ' not chosen on command line') printLine. ]]
        False: [       
         ('Load ', q, '? (y/N)\n> ') print. 
-        i: stdin readLine.
+        i: stdin preemptReadLine.
         i = 'y' 
            ifTrue: blk
             False: [ ('You chose: ', i, '.') printLine ]].
@@ -119,13 +119,21 @@ This is not a module and not managed by Transporter.
           OrQuery: 'UI1 (X11 Only)'
   ).
 
+
+  ifSnapshotActionPostReadFlag: blk Else: elseBlk = (
+    (_CommandLine includes: '--snapshotActionPostRead')
+      ifTrue: blk
+       False: elseBlk
+  ).
+
   startup = (
     _Verify.
     "throw away code strings for any little dinky doIts"
     memory quickCleanup.
     transporter moduleDictionary refill.
     "start the scheduler"
-    scheduler start.
+    ifSnapshotActionPostReadFlag: [snapshotAction postRead]
+                            Else: [scheduler start].
     _Verify
   ).
   

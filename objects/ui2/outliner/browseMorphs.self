@@ -1,6 +1,6 @@
- 'Sun-$Revision: 30.12 $'
+ '30.12.1'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -103,7 +103,7 @@ SlotsToOmit: parent prototype.
          buildFilteringRow = ( |
              r.
             | 
-            r: (rowMorph copy color: paint named: 'transparent') borderWidth: 0.
+            r: (rowMorph copyTransparent) borderWidth: 0.
 
             r addMorphLast:  transparentSpacerMorph copyH: 15.
             r addMorphLast:  (labelMorph copy  label: 'Well-known only') 
@@ -801,11 +801,10 @@ SlotsToOmit: parent prototype.
             t: labelMorph copy label: titlePrefix.
             t fontSpec: fontSpec.
 
-            title: (columnMorph copy beShrinkWrap leftJustify color: paint named: 'transparent')
-                     borderWidth: 0.
+            title: columnMorph copyTransparent beShrinkWrap leftJustify borderWidth: 0.
             title addMorphLast: t.
 
-            row: (rowMorph copy beShrinkWrap color: paint named: 'transparent') borderWidth: 0.
+            row: rowMorph copyTransparent beShrinkWrap borderWidth: 0.
             row addMorphLast: transparentSpacerMorph copyH: 11.        
             frame: frameMorph copy beShrinkWrap color: color.
             frame frameStyle: frame insetBezelStyle.
@@ -1371,9 +1370,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'browseMorphs' -> () From: ( | {
-         'ModuleInfo: Module: browseMorphs InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: browseMorphs InitialContents: InitializeToExpression: (\'30.12.1\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.12 $'.
+         revision <- '30.12.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'browseMorphs' -> () From: ( | {
@@ -1631,16 +1630,13 @@ SlotsToOmit: mirror parent prototype.
          buildHeader = ( |
              t.
             | 
-            header: rowMorph copy color: paint named: 'transparent'.
+            header: rowMorph copyTransparent.
             header borderWidth: 1.
             header beFlexible.
 
-            "No spacer: left justify:"
-            "header addMorphLast: flexibleSpacer copy color: color."
-
             t: labelMorph copy label:
               (outer nameAt: index) copyAtMostWithEllipsis: 80.
-            t fontSpec: globals fontSpec copyName: 'verdana' Size: fontSpec size Style: 'italic'.
+            t fontSpec: globals fontSpec copyName: 'helvetica' Size: fontSpec size Style: 'italic'.
             header addMorphLast: t.
             addButtonsToHeader.
             header).
@@ -1756,7 +1752,7 @@ SlotsToOmit: mirror parent prototype.
             | 
             resend.buildTitle.
 
-            row: (rowMorph copy beShrinkWrap color: paint named: 'transparent') borderWidth: 0.
+            row: rowMorph copyTransparent beShrinkWrap borderWidth: 0.
             row addMorphLast: transparentSpacerMorph copyH: 11.        
             t: labelMorph copy label: 'Starting lookup from:'.
             t fontSpec: fontSpec.

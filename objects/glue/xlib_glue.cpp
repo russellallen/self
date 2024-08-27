@@ -631,7 +631,7 @@ Window XTranslateCoordinates_wrap(Display *display,
   if (src_coords->length() < 3)  {   // Yes, 3. We need a place for the bool
                                      // result of XTranslateCoordinates.
     prim_failure(FH, BADSIZEERROR);
-    return NULL;
+    return 0;
   }
   oop ox, oy, ret;
   int newX, newY;
@@ -640,7 +640,7 @@ Window XTranslateCoordinates_wrap(Display *display,
   oy = src_coords->obj_at(1);
   if (!ox->is_smi() || !oy->is_smi()) {
     prim_failure(FH, BADTYPEERROR);
-    return NULL;
+    return 0;
   }
   if (XTranslateCoordinates(display, src_w, dst_w, 
                             smiOop(ox)->value(), smiOop(oy)->value(),

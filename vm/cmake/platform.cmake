@@ -10,6 +10,14 @@ if(CMAKE_SYSTEM_PROCESSOR MATCHES "^Intel" OR
   set(TARGET_ARCH       "I386_ARCH")
   set(HOST_ARCH         "I386_ARCH")
   
+elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^powerpc" OR
+       CMAKE_SYSTEM_PROCESSOR MATCHES "^Power" OR
+       CMAKE_SYSTEM_PROCESSOR MATCHES "^ppc")
+    
+  set(platform_processor "ppc")
+  set(TARGET_ARCH       "PPC_ARCH")
+  set(HOST_ARCH         "PPC_ARCH")
+
 elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^sparc")
   
   set(platform_processor "sparc")
@@ -45,6 +53,24 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
   set(platform "linux")
   set(TARGET_OS_VERSION "LINUX_VERSION")
   
+elseif(CMAKE_SYSTEM_NAME MATCHES "NetBSD")
+
+  set(platform_kind "unix")
+  set(TARGET_OS_FAMILY  "UNIX_FAMILY")
+
+  set(platform_name "NetBSD")
+  set(platform "netbsd")
+  set(TARGET_OS_VERSION "NETBSD_VERSION")
+
+elseif(CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+
+  set(platform_kind "unix")
+  set(TARGET_OS_FAMILY  "UNIX_FAMILY")
+
+  set(platform_name "FreeBSD")
+  set(platform "freebsd")
+  set(TARGET_OS_VERSION "FREEBSD_VERSION")
+
 elseif(CMAKE_SYSTEM_NAME MATCHES "(Solaris|SunOS)")
   
   set(platform_kind "unix")

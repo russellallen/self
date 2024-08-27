@@ -135,7 +135,7 @@ SlotsToOmit: parent prototype.
             addMorph:  
               ((rowMorph copy beShrinkWrap color: color) borderWidth: 0) addMorphFirst:
                  (labelMorph copyLabel: name)
-                              fontSpec: outlinerPreferences tinyFontSpec copyName: 'verdana'.
+                              fontSpec: outlinerPreferences tinyFontSpec copyName: 'helvetica'.
             recolor.
             self).
         } | ) 

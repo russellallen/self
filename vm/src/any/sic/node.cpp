@@ -3,7 +3,6 @@
 /* Copyright 1992-2012 AUTHORS.
    See the LICENSE file for license information. */
 
-
 # pragma implementation "node.hh"
 # pragma implementation "node_inline.hh"
 
@@ -742,7 +741,7 @@
 
   void TypeTestNode::eliminateUnnecessary(mapOop m) {
     // eliminate unnecessary type test: receiver is known to have map m
-    eliminateNodeAndUsedPRs(bb(), NULL, NULL, (void*)m);
+    eliminateNodeAndUsedPRs(bb(), NULL, false, (void*)m);
   }
 
 
