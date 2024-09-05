@@ -26,7 +26,6 @@
   static const int max_path_length = MAXPATHLEN;
 
  private:
-  static int zero_fd;
   static const int dont_bother = 8 * K;
 
 # if  TARGET_OS_VERSION == SOLARIS_VERSION \
