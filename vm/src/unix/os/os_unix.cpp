@@ -40,8 +40,8 @@
                  mmap(desiredAddress, 
                       size + align,
                       PROT_READ|PROT_WRITE|PROT_EXEC,
-                      MAP_PRIVATE|MAP_FIXED,
-                      zero_fd, 0)) 
+                      MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS,
+                      -1, 0)) 
         return desiredAddress;
 
 #if TARGET_OS_VERSION == NETBSD_VERSION || TARGET_OS_VERSION == FREEBSD_VERSION
@@ -154,10 +154,6 @@ time_t OS::combine_time(smi day, smi msec) {
 void OS::init() {
 
   SignalInterface::initialize(false);           // everything except ^C
-
-  zero_fd= open("/dev/zero", O_RDONLY);
-  if (zero_fd < 0) fatal("couldn't open /dev/zero");
-
 
 # if  TARGET_OS_VERSION == SOLARIS_VERSION 
 
@@ -460,9 +456,9 @@ void OS::discard_pages(char *start, char *end) {
   char *ps= real_page_end  (start);
   char *pe= real_page_start(end  );
   if (mmap(ps, pe - ps,
-           PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED,
-           zero_fd, 0) != ps)
-    warning("mmap of /dev/zero failed");
+           PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS,
+           -1, 0) != ps)
+    warning("MAP_ANON mmap failed");
 }
 
 
@@ -713,9 +709,6 @@ void OS::convert_unix_filename(const char* src, char* dst) {
     fatal("path too long");
   strcpy( dst, src);
 }
-
-
-int OS::zero_fd;
 
 
 FILE*  OS::start_compressing_snapshot(const char* compression_f, const char* fullFileName, SignalBlocker*& sb) {
