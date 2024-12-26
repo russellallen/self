@@ -1,6 +1,6 @@
  '30.17.0'
  '
-Copyright 1992-2014 AUTHORS.
+Copyright 1992-2016 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -202,6 +202,7 @@ _GenerateCountCode: true\x7fModuleInfo: Module: block InitialContents: FollowSlo
          'Category: timing\x7fModuleInfo: Module: block InitialContents: FollowSlot\x7fVisibility: public'
         
          flatProfile = ( |
+             p.
             | 
             p: getProfile.
             p printFlat.
