@@ -402,7 +402,6 @@ void XDrawLines_wrap(Display* display, Drawable d, GC gc,
   delete [] points;
 }
 
-
 // Note: str is an object vector containing 16-bit unsigned integer
 // values. Each such integer represents a 2-byte X char.
 
@@ -419,12 +418,54 @@ void XDrawString16_wrap(Display *display, Drawable drawable,
     XDrawString16(display, drawable, gc, x, y, xstr, str->length());
 }
 
+
+Bool XftColorAllocValueRGBA_wrap(Display *display,
+				 Visual *visual,
+				 Colormap cmap,
+				 unsigned short red,
+				 unsigned short green,
+				 unsigned short blue,
+				 unsigned short alpha,
+				 XftColor *result) {
+    XRenderColor rc;
+    rc.red = red;
+    rc.green = green;
+    rc.blue = blue;
+    rc.alpha = alpha;
+    Bool ok = XftColorAllocValue(display, visual, cmap, &rc, result);
+    return ok;
+}
+
+
+char *XftFontPatternFormat_wrap(XftFont *font, char *format) {
+    if (font == NULL || format == NULL)
+	return NULL;
+    // allocs result for the caller to manage
+    return (char *)FcPatternFormat(font->pattern, (FcChar8 *)format);
+}
+
+
 void XftTextExtents8_wrap(Display *display, XftFont *font,
                           char *string, int len,
                           XGlyphInfo *extents) {
   FcChar8 *xstr = (FcChar8 *)string;
   XftTextExtents8(display, font, (FcChar8*)string, len, extents);
 }
+
+
+void XftDrawSetNoClipMask_wrap(XftDraw *draw) {
+  XftDrawSetClip(draw, NULL);
+}
+
+
+void XftDrawSetClipRectangle_wrap(XftDraw *draw,
+			    int  x,    int y,
+			    int width, int height) {
+  XRectangle rect;
+  rect.x = x; rect.y = y; rect.width = width; rect.height = height;
+  XftDrawSetClipRectangles(draw, 0, 0, &rect, 1);
+}
+
 
 void XftDrawString8_wrap(XftDraw  *draw,
         		 XftColor *color,
@@ -435,6 +476,7 @@ void XftDrawString8_wrap(XftDraw  *draw,
 		         int       len) {
   XftDrawString8(draw, color, pub, x, y, (FcChar8*)string, len);
 }
+
 
 XFontStruct* XLoadQueryFont_wrap(Display* display, const char* name, void* FH) {
   XFontStruct* font_struct = XLoadQueryFont(display, name);

@@ -2868,6 +2868,56 @@ traits xlib display _AddSlots: ( |
            ]] ).
 
 
+  xftFontOpenXlfdOnScreen: t0 Name: t1  = (
+
+       xftFontOpenXlfdOnScreen: t0 Name: t1 IfFail: 
+        [|:e| ^error: 'xftFontOpenXlfdOnScreen:Name: failed: ', e] ).
+
+  xftFontOpenXlfdOnScreen: t0 Name: t1 IfFail: fb = (
+    |
+
+    |
+
+       _XftFontOpenXlfdxftFontOpenXlfdOnScreen: t0 Name: t1 
+        ResultProxy: xlib xftFont deadCopy IfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftFontOpenXlfdxftFontOpenXlfdOnScreen: t0 asSmallInteger 
+                    Name: t1 asVMByteVector ResultProxy: 
+                    xlib xftFont deadCopy IfFail: fb 
+           ]] ).
+
+
+" makes font invalid but does not kill its proxy  "
+
+" see traits>>xlib>>xftFont>>deleteOnDisplay: that does  "
+
+  xftFontClose: t0  = (
+
+       xftFontClose: t0 IfFail: 
+        [|:e| ^error: 'xftFontClose: failed: ', e] ).
+
+  xftFontClose: t0 IfFail: fb = (
+    |
+
+    |
+
+       _XftFontClosexftFontClose: t0 IfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftFontClosexftFontClose: 
+                    (t0 reviveIfFail: [|:e| ^ fb value: e]) 
+                    IfFail: fb 
+           ]] .
+    self).
+
+
   xftDrawCreate: t0 Visual: t1 Colormap: t2  = (
 
        xftDrawCreate: t0 Visual: t1 Colormap: t2 IfFail: 
@@ -2891,6 +2941,54 @@ traits xlib display _AddSlots: ( |
                     (t1 reviveIfFail: [|:e| ^ fb value: e]) 
                     Colormap: 
                     (t2 reviveIfFail: [|:e| ^ fb value: e]) 
+                    ResultProxy: xlib xftDraw deadCopy 
+                    IfFail: fb 
+           ]] ).
+
+
+  xftDrawCreateAlpha: t0 Depth: t1  = (
+
+       xftDrawCreateAlpha: t0 Depth: t1 IfFail: 
+        [|:e| ^error: 'xftDrawCreateAlpha:Depth: failed: ', e] ).
+
+  xftDrawCreateAlpha: t0 Depth: t1 IfFail: fb = (
+    |
+
+    |
+
+       _XftDrawCreateAlphaxftDrawCreateAlpha: t0 Depth: t1 
+        ResultProxy: xlib xftDraw deadCopy IfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftDrawCreateAlphaxftDrawCreateAlpha: 
+                    (t0 reviveIfFail: [|:e| ^ fb value: e]) 
+                    Depth: t1 asSmallInteger ResultProxy: 
+                    xlib xftDraw deadCopy IfFail: fb 
+           ]] ).
+
+
+  xftDrawCreateBitmap: t0  = (
+
+       xftDrawCreateBitmap: t0 IfFail: 
+        [|:e| ^error: 'xftDrawCreateBitmap: failed: ', e] ).
+
+  xftDrawCreateBitmap: t0 IfFail: fb = (
+    |
+
+    |
+
+       _XftDrawCreateBitmapxftDrawCreateBitmap: t0 ResultProxy: 
+        xlib xftDraw deadCopy IfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftDrawCreateBitmapxftDrawCreateBitmap: 
+                    (t0 reviveIfFail: [|:e| ^ fb value: e]) 
                     ResultProxy: xlib xftDraw deadCopy 
                     IfFail: fb 
            ]] ).
@@ -2920,6 +3018,44 @@ traits xlib display _AddSlots: ( |
                     IfFail: fb 
            ]] .
     self).
+
+
+" a version that takes RGBA values directly to avoid the nuisance  "
+
+" of allocating and deleting an instance of XRenderColor  "
+
+  xftColorAllocValue: t0 Colormap: t1 Red: t2 Green: t3 Blue: 
+    t4 Alpha: t5 XftColor: t6  = (
+
+       xftColorAllocValue: t0 Colormap: t1 Red: t2 Green: t3 Blue: 
+        t4 Alpha: t5 XftColor: t6 IfFail: 
+        [|:e| ^error: 'xftColorAllocValue:Colormap:Red:Green:Blue:Alpha:XftColor: failed: ', e] ).
+
+  xftColorAllocValue: t0 Colormap: t1 Red: t2 Green: t3 Blue: 
+    t4 Alpha: t5 XftColor: t6 IfFail: fb = (
+    |
+
+    |
+
+       _XftColorAllocValueRGBA_wrapxftColorAllocValue: t0 
+        Colormap: t1 Red: t2 Green: t3 Blue: t4 Alpha: t5 
+        XftColor: t6 IfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftColorAllocValueRGBA_wrapxftColorAllocValue: 
+                    (t0 reviveIfFail: [|:e| ^ fb value: e]) 
+                    Colormap: 
+                    (t1 reviveIfFail: [|:e| ^ fb value: e]) 
+                    Red: t2 asSmallInteger Green: 
+                    t3 asSmallInteger Blue: 
+                    t4 asSmallInteger Alpha: 
+                    t5 asSmallInteger XftColor: 
+                    (t6 reviveIfFail: [|:e| ^ fb value: e]) 
+                    IfFail: fb 
+           ]] ).
 
 
   xftColorAllocValue: t0 Colormap: t1 RenderColor: t2 
@@ -4080,38 +4216,6 @@ traits xlib xftFont _AddSlots: ( |
 	}
 { 'Category: generated by primitiveMaker\x7fModuleInfo: Module: xlib_wrappers InitialContents: FollowSlot\x7fVisibility: public'
 
-  new = (
-
-       newIfFail: [|:e| ^error: 'new failed: ', e] ).
-
-  newIfFail: fb = (
-    |
-
-    |
-
-      xlib xftFont deadCopy _XftFont_newnewResultProxyIfFail: fb ).
-
-
-  delete = (
-
-       deleteIfFail: [|:e| ^error: 'delete failed: ', e] ).
-
-  deleteIfFail: fb = (
-    |
-
-    |
-
-       _XftFont_deletedeleteIfFail: 
-        
-      [|:e| ('badTypeError'   isPrefixOf: e)
-        ||  ['deadProxyError' isPrefixOf: e]
-           ifFalse: [^fb value: e] 
-              True: [
-                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftFont_deletedeleteIfFail: fb 
-           ]] .
-    self).
-
-
   ascent = (
 
        ascentIfFail: [|:e| ^error: 'ascent failed: ', e] ).
@@ -4128,6 +4232,85 @@ traits xlib xftFont _AddSlots: ( |
            ifFalse: [^fb value: e] 
               True: [
                   ( reviveIfFail: [|:e| ^ fb value: e]) _XftFont_ascentascentIfFail: fb 
+           ]] ).
+
+
+  descent = (
+
+       descentIfFail: [|:e| ^error: 'descent failed: ', e] ).
+
+  descentIfFail: fb = (
+    |
+
+    |
+
+       _XftFont_descentdescentIfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftFont_descentdescentIfFail: fb 
+           ]] ).
+
+
+  height = (
+
+       heightIfFail: [|:e| ^error: 'height failed: ', e] ).
+
+  heightIfFail: fb = (
+    |
+
+    |
+
+       _XftFont_heightheightIfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftFont_heightheightIfFail: fb 
+           ]] ).
+
+
+  max_advance_width = (
+
+       max_advance_widthIfFail: 
+        [|:e| ^error: 'max_advance_width failed: ', e] ).
+
+  max_advance_widthIfFail: fb = (
+    |
+
+    |
+
+       _XftFont_max_advance_widthmax_advance_widthIfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftFont_max_advance_widthmax_advance_widthIfFail: fb 
+           ]] ).
+
+
+  patternFormat: t0  = (
+
+       patternFormat: t0 IfFail: 
+        [|:e| ^error: 'patternFormat: failed: ', e] ).
+
+  patternFormat: t0 IfFail: fb = (
+    |
+
+    |
+
+       _XftFontPatternFormat_wrappatternFormat: t0 IfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftFontPatternFormat_wrappatternFormat: t0 asVMByteVector 
+                    IfFail: fb 
            ]] ).
 
 
@@ -4527,6 +4710,101 @@ traits xlib xftColor _AddSlots: ( |
     self).
 
 
+  pixel = (
+
+       pixelIfFail: [|:e| ^error: 'pixel failed: ', e] ).
+
+  pixelIfFail: fb = (
+    |
+
+    |
+
+       _XftColor_pixelpixelIfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftColor_pixelpixelIfFail: fb 
+           ]] ).
+
+
+  red = (
+
+       redIfFail: [|:e| ^error: 'red failed: ', e] ).
+
+  redIfFail: fb = (
+    |
+
+    |
+
+       _XftColor_color_redredIfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftColor_color_redredIfFail: fb 
+           ]] ).
+
+
+  green = (
+
+       greenIfFail: [|:e| ^error: 'green failed: ', e] ).
+
+  greenIfFail: fb = (
+    |
+
+    |
+
+       _XftColor_color_greengreenIfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftColor_color_greengreenIfFail: fb 
+           ]] ).
+
+
+  blue = (
+
+       blueIfFail: [|:e| ^error: 'blue failed: ', e] ).
+
+  blueIfFail: fb = (
+    |
+
+    |
+
+       _XftColor_color_blueblueIfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftColor_color_blueblueIfFail: fb 
+           ]] ).
+
+
+  alpha = (
+
+       alphaIfFail: [|:e| ^error: 'alpha failed: ', e] ).
+
+  alphaIfFail: fb = (
+    |
+
+    |
+
+       _XftColor_color_alphaalphaIfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftColor_color_alphaalphaIfFail: fb 
+           ]] ).
+
+
 	}
 | )
 
@@ -4535,7 +4813,82 @@ traits xlib xftDraw _AddSlots: ( |
 { 'Category: generated by primitiveMaker\x7fModuleInfo: Module: xlib_wrappers InitialContents: FollowSlot'
 
 	}
+{ 'Category: generated by primitiveMaker\x7fModuleInfo: Module: xlib_wrappers InitialContents: FollowSlot\x7fVisibility: private'
+
+" cannot automatically kill proxy with custom delete  "
+
+" public delete calls this and kills  "
+
+  destroy = (
+
+       destroyIfFail: [|:e| ^error: 'destroy failed: ', e] ).
+
+  destroyIfFail: fb = (
+    |
+
+    |
+
+       _XftDrawDestroydestroyIfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftDrawDestroydestroyIfFail: fb 
+           ]] .
+    self).
+
+
+	}
 { 'Category: generated by primitiveMaker\x7fModuleInfo: Module: xlib_wrappers InitialContents: FollowSlot\x7fVisibility: public'
+
+  xftDrawSetNoClipMask = (
+
+       xftDrawSetNoClipMaskIfFail: 
+        [|:e| ^error: 'xftDrawSetNoClipMask failed: ', e] ).
+
+  xftDrawSetNoClipMaskIfFail: fb = (
+    |
+
+    |
+
+       _XftDrawSetNoClipMask_wrapxftDrawSetNoClipMaskIfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftDrawSetNoClipMask_wrapxftDrawSetNoClipMaskIfFail: fb 
+           ]] .
+    self).
+
+
+  xftDrawSetClipRectangleX: t0 Y: t1 Width: t2 Height: t3  = (
+
+       xftDrawSetClipRectangleX: t0 Y: t1 Width: t2 Height: t3 
+        IfFail: 
+        [|:e| ^error: 'xftDrawSetClipRectangleX:Y:Width:Height: failed: ', e] ).
+
+  xftDrawSetClipRectangleX: t0 Y: t1 Width: t2 Height: t3 
+    IfFail: fb = (
+    |
+
+    |
+
+       _XftDrawSetClipRectangle_wrapxftDrawSetClipRectangleX: t0 
+        Y: t1 Width: t2 Height: t3 IfFail: 
+        
+      [|:e| ('badTypeError'   isPrefixOf: e)
+        ||  ['deadProxyError' isPrefixOf: e]
+           ifFalse: [^fb value: e] 
+              True: [
+                  ( reviveIfFail: [|:e| ^ fb value: e]) _XftDrawSetClipRectangle_wrapxftDrawSetClipRectangleX: 
+                    t0 asSmallInteger Y: t1 asSmallInteger 
+                    Width: t2 asSmallInteger Height: 
+                    t3 asSmallInteger IfFail: fb 
+           ]] .
+    self).
+
 
   xftDrawString8: t0 Font: t1 X: t2 Y: t3 String: t4  = (
 

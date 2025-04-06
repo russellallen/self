@@ -507,15 +507,40 @@ traits: traits xlib display
   Display xftFontOpenNameOnScreen: int Name: string \
             = XftFont {xlib xftFont deadCopy} call XftFontOpenName canAWS
 
+  Display xftFontOpenXlfdOnScreen: int Name: string \
+            = XftFont {xlib xftFont deadCopy} call XftFontOpenXlfd canAWS
+
+  -- makes font invalid but does not kill its proxy
+  -- see traits>>xlib>>xftFont>>deleteOnDisplay: that does
+  Display xftFontClose: XftFont = void call XftFontClose canAWS
+
   Display xftDrawCreate: proxy Drawable ANY_SEAL \
                  Visual: Visual \
                  Colormap: proxy Colormap Colormap_seal \
             = XftDraw {xlib xftDraw deadCopy} call XftDrawCreate canAWS
 
+  Display xftDrawCreateAlpha: proxy Pixmap ANY_SEAL \
+                       Depth: int \
+            = XftDraw {xlib xftDraw deadCopy} call XftDrawCreateAlpha canAWS
+
+  Display xftDrawCreateBitmap: proxy Pixmap ANY_SEAL \
+            = XftDraw {xlib xftDraw deadCopy} call XftDrawCreateBitmap canAWS
+
   Display xftTextExtents8: XftFont \
                    String: string_len_null \
                   Extents: XGlyphInfo \
             = void call XftTextExtents8_wrap canAWS
+
+  -- a version that takes RGBA values directly to avoid the nuisance
+  -- of allocating and deleting an instance of XRenderColor
+  Display xftColorAllocValue: Visual \
+                    Colormap: proxy Colormap Colormap_seal \
+                         Red: unsigned_short \
+                       Green: unsigned_short \
+                        Blue: unsigned_short \
+                       Alpha: unsigned_short \
+                    XftColor: XftColor \
+            = bool call XftColorAllocValueRGBA_wrap canAWS
 
   Display xftColorAllocValue: Visual \
                     Colormap: proxy Colormap Colormap_seal \
@@ -708,9 +733,15 @@ traits: traits xlib xVisualInfo
 
 traits: traits xlib xftFont
  visibility: publicSlot
-  void new = XftFont {xlib xftFont deadCopy} new
-  XftFont delete = void delete
+  // no new and delete as XftFont is an interface with the
+  // implementation subclass private to libXft with references
+  // obtained (refcounted) via XftFontOpen* factory methods and
+  // released via XftFontClose.   See also deleteOnDisplay:
   XftFont ascent = int getMember ascent
+  XftFont descent = int getMember descent
+  XftFont height = int getMember height
+  XftFont max_advance_width = int getMember max_advance_width
+  XftFont patternFormat: string_null = string call XftFontPatternFormat_wrap canAWS
 
 traits: traits xlib xGlyphInfo
  visibility: publicSlot
@@ -740,9 +771,25 @@ traits: traits xlib xftColor
  visibility: publicSlot
   void new = XftColor {xlib xftColor deadCopy} new
   XftColor delete = void delete
+  XftColor pixel = unsigned_long getMember pixel
+  XftColor red = unsigned_short getMember color.red
+  XftColor green = unsigned_short getMember color.green
+  XftColor blue = unsigned_short getMember color.blue
+  XftColor alpha = unsigned_short getMember color.alpha
 
 traits: traits xlib xftDraw
+ visibility: privateSlot
+  -- cannot automatically kill proxy with custom delete
+  -- public delete calls this and kills
+  XftDraw destroy = void call XftDrawDestroy
+
  visibility: publicSlot
+  XftDraw xftDrawSetNoClipMask = void call XftDrawSetNoClipMask_wrap canAWS
+  XftDraw xftDrawSetClipRectangleX: int \
+			         Y: int \
+			     Width: int \
+		            Height: int \
+          = void call XftDrawSetClipRectangle_wrap canAWS
   XftDraw xftDrawString8: XftColor \
                     Font: XftFont \
                        X: int \
