@@ -5330,6 +5330,14 @@ an object with these slots:
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'Category: querying\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         attributes = ( |
+            | 
+            display xGetWindowAttributesIn: self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          catchWMDelete = ( |
