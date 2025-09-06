@@ -230,9 +230,9 @@ SlotsToOmit: parent prototype.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui2_textField' -> () From: ( | {
-         'ModuleInfo: Module: larsText InitialContents: InitializeToExpression: (fontSpec copyName: \'6x13\' Size: 13 Style: \'\')\x7fVisibility: private'
+         'ModuleInfo: Module: larsText InitialContents: InitializeToExpression: (fontSpec copyName: \'terminus\' Size: 16 Style: \'\')\x7fVisibility: private'
         
-         myFontSpec <- fontSpec copyName: '6x13' Size: 13 Style: ''.
+         myFontSpec <- fontSpec copyName: 'terminus' Size: 16 Style: ''.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui2_textField' -> () From: ( | {
