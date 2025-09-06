@@ -1,8 +1,9 @@
  '$Revision: 30.14 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -416,7 +417,7 @@ globals generalSlotModel parent buttonDescriptions. _Clone
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfGeneralSlotModel' -> 'parent' -> () From: ( | {
          'Category: title\x7fModuleInfo: Module: selfGenSlotModel InitialContents: FollowSlot\x7fVisibility: private'
         
-         privateTitleFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'verdana' copyMutable Size: 12 Style: '') From: ( |
+         privateTitleFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'helvetica' copyMutable Size: 12 Style: '') From: ( |
              {} = 'Comment: I am an abstract, portable, description of a font.
 I am also immutable.\x7fModuleInfo: Creator: globals selfGeneralSlotModel parent privateTitleFontSpec.
 \x7fIsComplete: '.
@@ -434,7 +435,7 @@ I am also immutable.\x7fModuleInfo: Creator: globals selfGeneralSlotModel parent
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfGeneralSlotModel' -> 'parent' -> () From: ( | {
          'Category: title\x7fModuleInfo: Module: selfGenSlotModel InitialContents: FollowSlot\x7fVisibility: private'
         
-         publicTitleFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'verdana' copyMutable Size: 12 Style: 'bold') From: ( |
+         publicTitleFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'helvetica' copyMutable Size: 10 Style: 'bold') From: ( |
              {} = 'Comment: I am an abstract, portable, description of a font.
 I am also immutable.\x7fModuleInfo: Creator: globals selfGeneralSlotModel parent publicTitleFontSpec.
 \x7fIsComplete: '.
@@ -576,7 +577,7 @@ I am also immutable.\x7fModuleInfo: Creator: globals selfGeneralSlotModel parent
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'selfGeneralSlotModel' -> 'parent' -> () From: ( | {
          'Category: title\x7fModuleInfo: Module: selfGenSlotModel InitialContents: FollowSlot\x7fVisibility: private'
         
-         undeclaredTitleFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'helvetica' copyMutable Size: 12 Style: '') From: ( |
+         undeclaredTitleFontSpec = bootstrap setObjectAnnotationOf: ( fontSpec copyName: 'helvetica' copyMutable Size: 10 Style: 'italic') From: ( |
              {} = 'Comment: I am an abstract, portable, description of a font.
 I am also immutable.\x7fModuleInfo: Creator: globals selfGeneralSlotModel parent undeclaredTitleFontSpec.
 \x7fIsComplete: '.
