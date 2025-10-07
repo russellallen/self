@@ -94,7 +94,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                           hold all the lines of glue or primitive entries
                           (macro-name_glue or macro-name_entries)
 
-                     glueLibaryName: <glue-library-name>
+                     glueLibraryName: <glue-library-name>
 
                           (This template applies only to dynamic linking.)
                           specifies the file name of the glue library.
@@ -225,7 +225,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                           hold all the lines of glue or primitive entries
                           (macro-name_glue or macro-name_entries)
 
-                     glueLibaryName: <glue-library-name>
+                     glueLibraryName: <glue-library-name>
 
                           (This template applies only to dynamic linking.)
                           specifies the file name of the glue library.
