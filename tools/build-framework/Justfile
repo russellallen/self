@@ -1,0 +1,335 @@
+SELFREPO := env_var_or_default('ENVIRONMENT', '../..')
+
+#
+#   Accelerator
+#
+ACCEL := if os() == 'macos' {
+    '-accel hvf'
+} else if os() == 'freebsd' {
+    '-accel kvm'
+} else {
+    ''
+}
+
+#
+#	Download Resources
+#
+DEB_x86-64          := 'debian-13-amd64'
+DEB_x86-64_QCOW     := DEB_x86-64 + '.qcow2'
+DEB_x86-64_QCOW_URL := 'https://cloud.debian.org/images/cloud/trixie/latest/debian-13-nocloud-amd64.qcow2'
+DEB_x86-64_QCOW_DLD := 'debian-13-nocloud-amd64.qcow2'
+
+FBSD-386          := 'freebsd-14.3-i386'
+FBSD-386-QCOW     := FBSD-386 + '.qcow2'
+FBSD-386-QCOW-URL := 'https://download.freebsd.org/releases/VM-IMAGES/14.3-RELEASE/i386/Latest/FreeBSD-14.3-RELEASE-i386.qcow2.xz'
+FBSD-386-QCOW-DLD := 'FreeBSD-14.3-RELEASE-i386.qcow2'
+
+[private]
+default:
+  @just --list
+
+
+[group('check environment')]
+check-env:
+  @just _action "Checking if we are OK to proceed..."
+  bash --version
+  rsync --version
+  expect -v
+  xxd -v
+  qemu-system-x86_64 --version
+  #qemu-system-i386 --version     # just use 64 bit to get hardware accelerator
+  #qemu-system-ppc --version
+  #qemu-system-sparc --version
+  timeout 1 true    # timeout doesn't have a -v flag
+  echo "Self Repository (SELFREPO)={{SELFREPO}}"
+  @just _banner "Environment is OK"
+
+[group('Full Runs')]
+fullrun-debian-x86_64:
+	just check-env
+	just ensure-setup-debian-x86_64
+	just start-debian-x86_64
+	just compile-debian-x86_64
+	just stop-debian-x86_64
+
+[group('Full Runs')]
+fullrun-freebsd-143-i386:
+	just check-env
+	just ensure-setup-freebsd-143-i386
+	just start-freebsd-143-i386
+	just compile-freebsd-143-i386
+	just stop-freebsd-143-i386
+
+[group('Full Runs')]
+reset-everything:
+  rm -rf downloads
+  rm -f *.qcow2
+  rm -f *.vm
+  rm -f *.log
+
+#
+#
+# Debian 13 amd64
+#
+#
+
+[group('Debian x86_64')]
+ensure-setup-debian-x86_64:
+	@just _action "Ensuring Debian x86_64 VM is ready to compile"
+	@echo -- Downloading if needed --
+	mkdir -p downloads && cd downloads && curl --location --parallel --remote-name --skip-existing "{{DEB_x86-64_QCOW_URL}}"
+	cp downloads/{{DEB_x86-64_QCOW_DLD}} {{DEB_x86-64_QCOW}}
+	@echo -- Checking QCOW2 image --
+	qemu-img info "{{DEB_x86-64_QCOW}}"
+	@echo -- Setting Up SSH --
+	@just expect-debian-13-amd64
+	@just start-debian-x86_64
+	@just do 'dpkg --add-architecture i386 && apt update'
+	@just do apt install -y rsync cmake git build-essential libx11-dev:i386 libxext-dev:i386 libncurses-dev:i386 libx32stdc++-12-dev libc6-dev-i386-cross xorg xorg-dev libncurses-dev gcc-multilib g++-multilib
+	@just stop-debian-x86_64
+	@just _banner "Debian x86_64 VM is ready to compile"
+
+[group('Debian x86_64')]
+compile-debian-x86_64:
+  @just _action "Compiling Debian x86_64 VM"
+  @# Full copy each time to make things more predictable
+  @just do rm -rf /root/self
+  @# ignore-times because if vm is killed, corruption of NetBSD filesystem happens,
+  @# so we want to make sure files are correct
+  @# Also don't try to rsync this directory!
+  rsync --ignore-times -raz -e 'ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR' --exclude=tools/build-framework  {{justfile_directory()}}/../.. root@localhost:/root/self
+  @just do git config --global --add safe.directory /root/self
+  # Clean log
+  @just do rm -f /root/build.log
+  # Print info about environment
+  @just do 'date && uname -a && git --version && cmake --version && gcc --version && g++ --version'
+  # Make the VM
+  @just do 'rm -rf /root/build ; mkdir -p /root/build'
+  @just do 'cd /root/build && cmake /root/self && cmake --build .'
+  # Build and test Self World
+  @just do 'cd /root/self/objects ; /root/build/vm/Self -f worldBuilder.self -o morphic -headless --runAutomaticTests --snapshotActionPostRead'
+  @just _extract-vm-and-log {{DEB_x86-64}}
+  @just _banner "Finished compiling on Debian x86_64"
+
+[group('Debian x86_64')]
+start-debian-x86_64:
+	@just _action "Starting Debian x86_64 VM"
+	qemu-system-x86_64 \
+	    {{ACCEL}} \
+		-pidfile {{DEB_x86-64}}.pid \
+		-hda {{DEB_x86-64_QCOW}} \
+		-m 2048 \
+		-netdev user,id=net0,hostfwd=tcp::2222-:22 -device e1000,netdev=net0 \
+		-display none \
+		-daemonize
+	@just _wait-for-ssh
+	@just _banner "Debian x86_64 VM is running"
+
+[group('Debian x86_64')]
+stop-debian-x86_64:
+	@just _action "Stopping Debian x86_64 VM"
+	@just do poweroff
+	@just _wait-for-pid {{DEB_x86-64}}.pid
+	@just _banner "Debian x86_64 VM is stopped"
+
+#
+#
+#  FreeBSD 14.3 i386
+#
+#
+
+[group('FreeBSD 14.3 i386')]
+ensure-setup-freebsd-143-i386:
+	@just _action "Ensuring FreeBSD 14.3 i386 VM is ready to compile"
+	@echo -- Downloading if needed --
+	mkdir -p downloads && cd downloads && curl --location --parallel --remote-name --skip-existing "{{FBSD-386-QCOW-URL}}"
+	xz --decompress --keep downloads/{{FBSD-386-QCOW-DLD}}.xz && mv downloads/{{FBSD-386-QCOW-DLD}} {{FBSD-386-QCOW}}
+	@echo Finished copying
+	@echo -- Checking QCOW2 image --
+	qemu-img info "{{FBSD-386-QCOW}}"
+	just expect-freebsd143-i386
+	just start-freebsd-143-i386
+	@just do touch /root/.profile # For Bash
+	@just do 'pkg update && pkg install -y gcc13 binutils rsync cmake libX11 libXext git'
+	# So gcc works
+	#@just do 'echo "libgcc_s.so.1  /usr/local/lib/gcc13/libgcc_s.so.1" >> /etc/libmap.conf'
+	@just stop-freebsd-143-i386
+	@just _banner "FreeBSD 14.3 i386 VM is ready to compile"
+
+[group('FreeBSD 14.3 i386')]
+start-freebsd-143-i386:
+	@just _action "Starting FreeBSD 14.3 VM"
+	qemu-system-x86_64 \
+	    {{ACCEL}} \
+		-pidfile {{FBSD-386}}.pid \
+		-hda {{FBSD-386-QCOW}} \
+		-m 2048 \
+		-netdev user,id=net0,hostfwd=tcp::2222-:22 -device e1000,netdev=net0 \
+		-display none \
+		-daemonize
+	@just _wait-for-ssh
+	@just _banner "FreeBSD 14.3 VM is running"
+
+[group('FreeBSD 14.3 i386')]
+stop-freebsd-143-i386:
+	@just _action "Stopping FreeBSD 14.3 i386 VM"
+	@just do poweroff
+	@just _wait-for-pid {{FBSD-386}}.pid
+	@just _banner "FreeBSD 14.3 i386 VM is stopped"
+
+[group('FreeBSD 14.3 i386')]
+compile-freebsd-143-i386:
+  @just _action "Compiling FreeBSD 14.3 i386"
+  @# Full copy each time to make things more predictable
+  @just do rm -rf /root/self
+  rsync --ignore-times -raz -e 'ssh -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR' --exclude=tools/build-framework  {{justfile_directory()}}/../.. root@localhost:/root/self
+  @just do git config --global --add safe.directory /root/self
+  # Clean log
+  @just do rm -f /root/build.log
+  # Print info about environment
+  @just do 'date && uname -a && git --version && cmake --version && gcc --version && g++ --version'
+  # Make the VM
+  @just do 'rm -rf /root/build ; mkdir -p /root/build'
+  @just do 'cd /root/build && CC=gcc13 CXX=g++13 cmake /root/self && cmake --build .'
+  # Build and test Self World
+  @just do 'cd /root/self/objects ; /root/build/vm/Self -f worldBuilder.self -o morphic -headless --runAutomaticTests --snapshotActionPostRead'
+  @just _extract-vm-and-log {{FBSD-386}}
+  @just _banner "Finished compiling on FreeBSD 14.3 i386"
+
+#
+#       Supporting functions
+#
+
+[group('Support')]
+do *ARGS:
+  #!/usr/bin/env bash
+  echo "> {{ARGS}}"
+  combined_args="{{ARGS}}"
+  hex_string=$(echo -n "{{ARGS}}" | xxd -p | tr -d '\n')
+  CMD="echo $hex_string | xxd -r -p > /tmp/qemu_cmd ; bash --login /tmp/qemu_cmd"
+  # ssh root@localhost -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR " (source ~/.profile > /dev/null ; $CMD) 2>&1 | tee -a /root/build.log"
+  ssh root@localhost -p 2222 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR "($CMD) 2>&1 | tee -a /root/build.log"
+
+_extract-vm-and-log target:
+  # Extract the VM
+  scp -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P 2222 root@localhost:/root/build/vm/Self {{target}}.vm
+  # Extract the Log
+  scp -o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P 2222 root@localhost:/root/build.log {{target}}.log
+
+_wait-for-pid pid:
+    @printf "Waiting for {{pid}} ... "
+    @while [ -f {{pid}} ] && ps -p $(cat {{pid}}) > /dev/null; do sleep 1; done
+    @echo done
+
+_echo_orange *ARGS:
+	@echo "$(tput setaf 208)$(tput bold){{ARGS}}$(tput sgr0)"
+
+_echo_green *ARGS:
+	@echo "$(tput setaf 2)$(tput bold){{ARGS}}$(tput sgr0)"
+
+_banner *ARGS:
+    @just _echo_green "[$(date +%H:%M:%S)] {{ARGS}}"
+
+_action *ARGS:
+    @just _echo_orange "[$(date +%H:%M:%S)] {{ARGS}}"
+
+_wait-for-ssh:
+	#!/usr/bin/env bash
+
+	MAX_ATTEMPTS=60
+	SLEEP_TIME=5
+	SSH_HOST="localhost"
+	SSH_PORT=2222
+
+	attempt=0
+	while [ $attempt -lt $MAX_ATTEMPTS ]; do
+	    ((attempt++))
+
+	    # Try to read SSH banner
+	    response=$(timeout 1 bash -c "exec 3<>/dev/tcp/${SSH_HOST}/${SSH_PORT} && read -r line <&3 && echo \"\$line\"" 2>/dev/null)
+
+	    if [[ "$response" =~ ^SSH-2\.0- ]]; then
+	        echo "SSH server ready (banner: $response)"
+	        exit 0
+	    fi
+
+	    echo "Attempt $attempt/$MAX_ATTEMPTS: SSH not ready yet, waiting ${SLEEP_TIME}s..."
+	    sleep $SLEEP_TIME
+	done
+
+	echo "ERROR: SSH server did not become ready after $((MAX_ATTEMPTS * SLEEP_TIME)) seconds"
+	exit 1
+
+expect-freebsd143-i386:
+    #!/usr/bin/expect -f
+
+    set timeout 300
+
+    # Start QEMU in the background (or connect to running VM)
+    spawn qemu-system-x86_64 -hda freebsd-14.3-i386.qcow2 -accel hvf -m 2048 -net nic -net user,hostfwd=tcp::2222-:22 -display curses
+
+    # Wait for login prompt
+    expect "login:"
+    send "root\r"
+
+    # Wait for shell prompt
+    expect "# "
+    send "pkg install -y bash xxd\r"
+
+    expect "# "
+    send "sysrc sshd_enable=YES\r"
+
+    expect "# "
+    send "sed -i '' '/^auth.*pam_unix.so/ s/$/ nullok/' /etc/pam.d/sshd\r"
+
+    expect "# "
+    send "echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config\r"
+
+    expect "# "
+    send "echo 'PermitEmptyPasswords yes' >> /etc/ssh/sshd_config\r"
+
+    expect "# "
+    send "echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config\r"
+
+    expect "# "
+    send "echo 'UsePAM yes' >> /etc/ssh/sshd_config\r"
+
+    expect "# "
+    send "poweroff\r"
+
+    # Shutdown the VM
+    expect eof
+
+expect-debian-13-amd64:
+    #!/usr/bin/expect -f
+
+    set timeout 300
+
+    # Start QEMU in the background (or connect to running VM)
+    spawn qemu-system-x86_64 -hda debian-13-amd64.qcow2 -m 2048 -net nic -net user,hostfwd=tcp::2222-:22 -nographic
+
+    # Wait for login prompt
+    expect "login:"
+    send "root\r"
+
+    # Wait for shell prompt
+    expect "# "
+    send "apt update && apt install -y openssh-server xxd\r"
+
+    expect "# "
+    send "systemctl enable ssh\r"
+
+    expect "# "
+    send "systemctl start ssh\r"
+
+    expect "# "
+    send "echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config\r"
+
+    expect "# "
+    send "echo 'PermitEmptyPasswords yes' >> /etc/ssh/sshd_config\r"
+
+    expect "# "
+    send "poweroff\r"
+
+    # Shutdown the VM
+    expect eof
