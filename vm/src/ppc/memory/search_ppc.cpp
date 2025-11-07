@@ -7,7 +7,7 @@
 # pragma implementation "search_ppc.hh"
 # include "_search_ppc.cpp.incl"
 
-#if TARGET_OS_VERSION == NETBSD_VERSION
+#if TARGET_OS_VERSION == MACOSX_VERSION || TARGET_OS_VERSION == NETBSD_VERSION
 #include <altivec.h>
 #endif
 
