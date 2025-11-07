@@ -179,6 +179,9 @@ extern "C" {
 # endif
 
 # include <sys/mman.h>
+# if !defined(MAP_ANONYMOUS)    // old macosx
+#   define MAP_ANONYMOUS MAP_ANON
+# endif
 
 # if TARGET_OS_VERSION == SUNOS_VERSION && COMPILER != GCC_COMPILER
 #   define wait(x) __nonexistent_function_name_due_to_incorrect_header___
