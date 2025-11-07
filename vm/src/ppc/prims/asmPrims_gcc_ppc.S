@@ -9,29 +9,28 @@
 // some integer primitives
 
 
-//  .include "../../src/ppc/runtime/asmDefs_gcc_ppc.hh"
-# include "asmDefs_gcc_ppc.hh"
+# include "_asmPrims_ppc.S.incl"
 
 
 
-#define ret_prim_error(error_code)		  \
-	import_data_address(r3, VMString)	; \
-	lwz	r3, error_code(r3)		; \
-	addi	r3, r3, Mark_Tag - Mem_Tag	; \
+#define ret_prim_error(error_code)		   \
+	import_data_address(r3, VMString)	__ \
+	lwz	r3, error_code(r3)		__ \
+	addi	r3, r3, Mark_Tag - Mem_Tag	__ \
 	blr
 
 
-#define arith_prim(name, opcode)	  \
-    start_exported_function(name)	; \
-	or	r0, rcv, arg		; \
-	andi.	r0, r0, Tag_Mask	; \
-	beq	name ## _OK		; \
-	ret_prim_error(badTypeOffset)	; \
-name ## _OK:				  \
-	/* clear sum ovfl bit */	  \
-	mcrxr	0			; \
-        opcode	rcv, rcv, arg	; \
-        bnslr				; \
+#define arith_prim(name, opcode)	   \
+    start_exported_function(name)	__ \
+	or	r0, rcv, arg		__ \
+	andi.	r0, r0, Tag_Mask	__ \
+	beq	name ## _OK		__ \
+	ret_prim_error(badTypeOffset)	__ \
+    name ## _OK:			   \
+	/* clear sum ovfl bit */	   \
+	mcrxr	0			__ \
+        opcode	rcv, rcv, arg		__ \
+        bnslr				__ \
         ret_prim_error(overflowOffset)
 
 arith_prim(smi_add_prim, addo. )
@@ -51,14 +50,14 @@ smi_mul_prim_OK:
         ret_prim_error(overflowOffset)
         
 
-#define log_prim(name, opcode)		  \
-    start_exported_function(name)	; \
-	or	r0, rcv, arg		; \
-	andi.	r0, r0, Tag_Mask	; \
-	beq	name ## _OK		; \
-	ret_prim_error(badTypeOffset)	; \
-name ## _OK:				  \
-	opcode	rcv, rcv, arg	; \
+#define log_prim(name, opcode)		   \
+    start_exported_function(name)	__ \
+	or	r0, rcv, arg		__ \
+	andi.	r0, r0, Tag_Mask	__ \
+	beq	name ## _OK		__ \
+	ret_prim_error(badTypeOffset)	__ \
+    name ## _OK:			   \
+	opcode	rcv, rcv, arg		__ \
 	blr
           
 log_prim(smi_and_prim, and)
@@ -90,15 +89,15 @@ smi_arithmetic_shift_left_prim_OK:
 	ret_prim_error(overflowOffset)
 
 
-#define simple_shift_prim(name, opcode)	  \
-    start_exported_function(name)	; \
-	or	r0, rcv, arg		; \
-	andi.	r0, r0, Tag_Mask	; \
-	beq	1f			; \
-	ret_prim_error(badTypeOffset)	; \
-1:					  \
-	/* shift out tag */		  \
-	srawi	arg, arg, 2		; \
+#define simple_shift_prim(name, opcode)	   \
+    start_exported_function(name)	__ \
+	or	r0, rcv, arg		__ \
+	andi.	r0, r0, Tag_Mask	__ \
+	beq	1f			__ \
+	ret_prim_error(badTypeOffset)	__ \
+    1:					   \
+	/* shift out tag */		   \
+	srawi	arg, arg, 2		__ \
 	opcode	rcv, rcv, arg
 
 simple_shift_prim(smi_logical_shift_left_prim, slw)

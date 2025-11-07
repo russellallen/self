@@ -4,7 +4,8 @@
 // Copyright 1992-9 Sun Microsystems, Inc. and Stanford University.
 //   See the LICENSE file for license information. 
 
-#if TARGET_OS_VERSION == NETBSD_VERSION
+// can't include config.hh in asm files, so FOO_VERSION are not defined
+#if !defined(__APPLE__)         // TARGET_OS_VERSION == NETBSD_VERSION
 #define r0  0
 #define r1  1
 #define r2  2
@@ -152,21 +153,23 @@ non_local_return_offset  =  8 // offset of NLR instruction from call
 // ---------------------------------------------------------
 
 # if defined(__APPLE__)
+  # define __ @
   # define C_SYM(name) _##name
 # elif defined(__ELF__)
+  # define __ ;
   # define C_SYM(name) name
 # else
   # error what?
 # endif
 
 
-#define start_exported_function(name)		\
-	.globl C_SYM(name);			\
+#define start_exported_function(name)		   \
+	.globl C_SYM(name)			__ \
     C_SYM(name):
 
 
-#define load_global_address(tmp_reg, data_sym)	\
-	.globl C_SYM(data_sym);			\
+#define load_global_address(tmp_reg, data_sym)	   \
+	.globl C_SYM(data_sym)			__ \
 	load_addr(tmp_reg, C_SYM(data_sym))
        
 #define import_data_address(tmp_reg, data_sym)	\
@@ -194,35 +197,27 @@ badTypeOffset           = 8
 divisionByZeroOffset    = 16
 overflowOffset          = 20
 
-// Warning: Duplicated in tag.hh
-Int_Tag         = 0
-Mem_Tag         = 1
-Float_Tag       = 2
-Mark_Tag        = 3
-
-Tag_Mask        = 3
-
 // =====================================================
             
 	// call untested DOES NOT QUITE WORK
-#define Untested(string, tmp)				  \
-	b 3f						; \
-1:	.asciz string					; \
-2:	C_SYM(Untested_Stub)				; \
-							  \
-3:	mflr	r0					; \
-	import_function_address(tmp, C_SYM(Untested_stub)); \
-	mtctr	tmp					; \
-	bctrl						; \
+#define Untested(string, tmp)					   \
+	b 3f							__ \
+1:	.asciz string						__ \
+2:	C_SYM(Untested_Stub)					__ \
+								   \
+3:	mflr	r0						__ \
+	import_function_address(tmp, C_SYM(Untested_stub))	__ \
+	mtctr	tmp						__ \
+	bctrl							__ \
 	mtlr	r0
             
 
-#define load_addr(targ, val)		  \
-	addis	targ, 0, hi16(val)	; \
+#define load_addr(targ, val)		   \
+	addis	targ, 0, hi16(val)	__ \
 	ori	targ, targ, lo16(val)
 
-#define load_val(targ, val)		  \
-	addis	targ, 0, ha16(val)	; \
+#define load_val(targ, val)		   \
+	addis	targ, 0, ha16(val)	__ \
 	lwz	targ, lo16(val)
  
 # endif // __ppc__

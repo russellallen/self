@@ -9,8 +9,8 @@
 /* remove me from MW project when compiling under MW */
 
 
-# include "asmDefs_gcc_ppc.hh"
-        
+# include "_runtime_asm_gcc_ppc.S.incl"
+
     start_exported_function(currentFrame)
     mr     r3, sp
     blr
@@ -464,10 +464,10 @@ base_fr_size =   LinkageArea_size/oopSize + NumRcvrAndArgRegisters + -SaveSelfNo
 # define  vol_reg_count  r30
 
 
-#define load_global_nonvol_regs						  \
-                import_data_address(ByteMapBaseReg, byte_map_base)	; \
-                import_data_address(SPLimitReg, SPLimit)		; \
-                lwz     ByteMapBaseReg, 0(ByteMapBaseReg)		; \
+#define load_global_nonvol_regs						   \
+                import_data_address(ByteMapBaseReg, byte_map_base)	__ \
+                import_data_address(SPLimitReg, SPLimit)		__ \
+                lwz     ByteMapBaseReg, 0(ByteMapBaseReg)		__ \
                 lwz     SPLimitReg,     0(SPLimitReg)
 
                 
