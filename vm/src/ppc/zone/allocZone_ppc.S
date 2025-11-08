@@ -7,7 +7,7 @@
 
 # if TARGET_IS_PROFILED
 
-# include "_allocZone_ppc.s.incl"
+# include "_allocZone_ppc.S.incl"
 # include "asmDefs_gcc_ppc.hh"
 
 
