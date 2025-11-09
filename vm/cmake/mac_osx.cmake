@@ -12,7 +12,7 @@ endif()
 set(SELF_OSX_INFO_PLIST Info)
 
 if(SELF_QUARTZ)
-    message(STATUS "Using Quartz plaform windows.")
+    message(STATUS "Using Quartz platform windows.")
     list(APPEND _defines QUARTZ_LIB)
 endif()
 
@@ -35,18 +35,28 @@ set(GUI_TYPE MACOSX_BUNDLE)
 if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
   # no x86_64 atm,
   # so forcibly overwrite
-  set(CMAKE_OSX_ARCHITECTURES i386 CACHE STRING
-     "Build architectures for OSX"
+  set(CMAKE_OSX_ARCHITECTURES ${platform_processor} CACHE STRING
+    "Build architectures for OSX"
     FORCE)
-  # we need to be 10.6 compliant.
-  # so forcibly overwrite
-  set(CMAKE_OSX_DEPLOYMENT_TARGET "10.6" CACHE STRING
-    "Minimum OS X version to target for deployment (at runtime); newer APIs weak linked. Set to empty string for default value."
-    FORCE)
+
+  if(${platform_processor} STREQUAL "i386")
+    # we need to be 10.6 compliant.
+    # so forcibly overwrite
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.6" CACHE STRING
+      "Minimum OS X version to target for deployment (at runtime); newer APIs weak linked. Set to empty string for default value."
+      FORCE)
+    set(_sdk_list "macosx10.9" "macosx10.8" "macosx10.7" "macosx10.6")
+  elseif(${platform_processor} STREQUAL "ppc")
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.5" CACHE STRING
+      "Minimum OS X version to target for deployment (at runtime); newer APIs weak linked. Set to empty string for default value."
+      FORCE)
+    set(_sdk_list "macosx10.5")
+  endif()
+
   # see if we can get a matching SDK
   # first, unset this because it is probably set to the latest SDK
   unset(CMAKE_OSX_SYSROOT CACHE)
-  foreach(sdk "macosx10.9" "macosx10.8" "macosx10.7" "macosx10.6")
+  foreach(sdk ${_sdk_list})
     execute_process(
     COMMAND xcodebuild -version -sdk "${sdk}" Path
     OUTPUT_VARIABLE _sdkpath
