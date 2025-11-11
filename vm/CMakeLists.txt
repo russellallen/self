@@ -10,7 +10,7 @@ if(APPLE)
   cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR) # it has to be 2.8.8 on OSX 
   set(CMAKE_TRY_COMPILE_OSX_ARCHITECTURES i386)
 else()
-  cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+  cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 endif()
 
 #

@@ -5,7 +5,7 @@ set(PROJECT_NAME SelfTools)
 if(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.4)
     message(FATAL_ERROR "${PROJECT_NAME} requires at least CMake v2.8")
 endif(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.4)
-cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
 project(${PROJECT_NAME} C CXX)
 
