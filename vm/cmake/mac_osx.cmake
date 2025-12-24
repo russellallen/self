@@ -45,7 +45,7 @@ if(NOT CONFIG_HAS_BEEN_RUN_BEFORE)
     set(CMAKE_OSX_DEPLOYMENT_TARGET "10.6" CACHE STRING
       "Minimum OS X version to target for deployment (at runtime); newer APIs weak linked. Set to empty string for default value."
       FORCE)
-    set(_sdk_list "macosx10.9" "macosx10.8" "macosx10.7" "macosx10.6")
+    set(_sdk_list "macosx10.10" "macosx10.9" "macosx10.8" "macosx10.7" "macosx10.6")
   elseif(${platform_processor} STREQUAL "ppc")
     set(CMAKE_OSX_DEPLOYMENT_TARGET "10.5" CACHE STRING
       "Minimum OS X version to target for deployment (at runtime); newer APIs weak linked. Set to empty string for default value."
