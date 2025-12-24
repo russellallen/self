@@ -77,8 +77,12 @@
 	.global C_SYM(name)	;		\
 C_SYM(name):
 
+#ifdef __ELF__
 #define end_exported_function(name)		\
 	.size	C_SYM(name), . - C_SYM(name)
+#else
+#define end_exported_function(name) /* no .size directive for macho */
+#endif
 
 
 // LinkageArea record:
