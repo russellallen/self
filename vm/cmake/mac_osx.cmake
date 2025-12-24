@@ -23,7 +23,7 @@ if(SELF_OSX_COCOA)
 endif()
 
 set(SELF_PREFIX_PREFIX_THRESHOLD_INIT
-  "20" # DO NOT SET ABVOE 20. Breaks X-includes!
+  "20" # DO NOT SET ABOVE 20. Breaks X-includes!
 )
 
 
@@ -210,7 +210,7 @@ macro(setup_target target)
       endif()
     endif()
 
-    # These are the XCode-equivalendts for the flags/warnings in setup.
+    # These are the XCode-equivalents for the flags/warnings in setup.
     # we hence remove the respective flag, it gets added anyways at compile time
     set(CMAKE_XCODE_ATTRIBUTE_GCC_WARN_CHECK_SWITCH_STATEMENTS "YES")
     remove_definitions(-Wswitch)
@@ -247,7 +247,7 @@ macro(setup_target target)
     set(CMAKE_XCODE_ATTRIBUTE_COPY_PHASE_STRIP "NO")
     set(CMAKE_XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT "dwarf-with-dsym")
 
-    # cmake adds warnings hardcoded which we dont want.
+    # cmake adds warnings hardcoded which we don't want.
     # mess with the warnings
     set_target_properties(${target} PROPERTIES XCODE_ATTRIBUTE_WARNING_CFLAGS "")
   endif()
