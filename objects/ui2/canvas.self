@@ -292,6 +292,17 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'canvas' -> () From: ( | {
+         'Category: drawing\x7fCategory: text\x7fModuleInfo: Module: canvas InitialContents: FollowSlot'
+        
+         drawString: s At: pt FontSpec: fSpec Color: c = ( |
+            | 
+            setColor: c.
+            gc font: (idForFontSpec:   fSpec  copySize:  scaleNum: fSpec size).
+            drawable drawString: s At: (transformPt: pt) GC: gc.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'canvas' -> () From: ( | {
          'Category: basics\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          drawable = ( |
@@ -676,10 +687,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
                Color: c
             ].
 
-            setColor: c.
-            gc font: (idForFontSpec:   fSpec  copySize:  scaleNum: fSpec size).
-            drawable drawString: s At: (transformPt: pt) GC: gc.
-            self).
+            drawString: s At: pt FontSpec: fSpec Color: c).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'canvas' -> () From: ( | {
