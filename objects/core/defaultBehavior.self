@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.10 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2026 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -330,7 +331,7 @@ and printStringSize:.
 
 Children of the lobby may implement just the message printString and
 inherit reasonable behavior for the other three messages.
-(Or may implement printStringState, or printStringName.)
+(Or may implement statePrintString, or namePrintString.)
 
 To get the UI to print an object, its prototype (not traits) should
 be annotated with isComplete = true.
