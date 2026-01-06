@@ -5205,7 +5205,7 @@ an object with these slots:
         
          createChildWindowAt: pos Size: size Depth: d Visual: vis Attributes: attrs = ( |
             | 
-            xCreateChildWindowAt: pos Size: size Depth: d 
+            createChildWindowAt: pos Size: size Depth: d 
               Visual: vis Attributes: attrs IfFail: raiseError).
         } | ) 
 
