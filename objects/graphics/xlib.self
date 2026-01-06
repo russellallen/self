@@ -5195,7 +5195,7 @@ an object with these slots:
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
-         'Category: constants\x7fCategory: window classes\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+         'Category: constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          copyFromParent = 0.
         } | ) 
@@ -5269,7 +5269,7 @@ an object with these slots:
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
-         'Category: constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: private'
+         'Category: constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          currentTime = 0.
         } | ) 
@@ -5327,13 +5327,13 @@ an object with these slots:
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
-         'Category: constants\x7fCategory: grabModes\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: private'
+         'Category: constants\x7fCategory: grabModes\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          grabModeAsync = 1.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
-         'Category: constants\x7fCategory: grabModes\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: private'
+         'Category: constants\x7fCategory: grabModes\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          grabModeSync = 0.
         } | ) 
@@ -5417,13 +5417,13 @@ an object with these slots:
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
-         'Category: constants\x7fCategory: window classes\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+         'Category: constants\x7fCategory: window classes\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          inputOnly = 2.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
-         'Category: constants\x7fCategory: window classes\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+         'Category: constants\x7fCategory: window classes\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          inputOutput = 1.
         } | ) 
