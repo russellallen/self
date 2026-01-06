@@ -979,7 +979,9 @@ I print out as asterisks.\x7fModuleInfo: Module: scalableFont InitialContents: F
                 fontStruct: 
                     wc display loadFont: fullName
                               IfFail: [| substituteName |
-                                  log warn: 'Failed to load font: ', fullName, ' ... substituting 6x13 in traits>>xFontDictionary>>structForFontSpec:WindowCanvas:'.
+                                  log warn: 'Failed to load font: ', fullName,
+                                            ' ... substituting 6x13',
+                                            ' in traits>>xFontDictionary>>structForFontSpec:WindowCanvas:'.
                                   substituteName: (fullNameFor: '6x13' Size: 13).
                                   wc display loadFont: substituteName IfFail: [
                                     "Last ditch attempt to get any font at all..."
