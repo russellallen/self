@@ -1,6 +1,6 @@
  '30.17.0'
  '
-Copyright 1992-2016 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -5220,9 +5220,9 @@ an object with these slots:
             ) initDisplay: display Depth: d).
         } | ) 
 
-bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
-
+        
          createOnDisplay: disp At: pos Size: sz = ( |
             | 
             (disp xCreateSimpleWindowIn: disp screen rootWindow
