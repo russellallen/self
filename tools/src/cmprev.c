@@ -11,9 +11,8 @@
 
 #include <stdio.h>
 #include <memory.h>
-# include <stdlib.h>
-
-typedef enum { false, true } bool;
+#include <stdlib.h>
+#include <stdbool.h>
 
 #define MaxFields 4
 
