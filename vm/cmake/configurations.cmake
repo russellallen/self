@@ -86,10 +86,9 @@ else()
   message(WARNING "Unknown build type: ${CMAKE_BUILD_TYPE}")
 endif()
 
-# Add -D prefix
-foreach(_def ${_current_defs})
-  list(APPEND _defines "-D${_def}")
-endforeach()
+# Add all defines and add -D prefix
+list(APPEND _defines "${_current_defs}")
+list(TRANSFORM _defines PREPEND "-D")
 
 message(STATUS "_flags = ${_flags}")
 message(STATUS "_defines = ${_defines}")

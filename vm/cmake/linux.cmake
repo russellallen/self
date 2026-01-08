@@ -20,8 +20,8 @@ set(EXTRA_LIBRARIES ${EXTRA_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 # Linux compile definitons
 #
 list(APPEND _defines
-  -DDEBUG
-  -DGLUE_CHECKSUM=0
+  DEBUG
+  GLUE_CHECKSUM=0
 )
 
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
@@ -65,5 +65,5 @@ macro(include_prefix_header target file)
   # include_prefix_header_common(${target} ${file})
 endmacro()
 
-list(APPEND _defines -DINTERFACE_PRAGMAS)
+list(APPEND _defines INTERFACE_PRAGMAS)
 list(APPEND _flags   -Winvalid-pch)

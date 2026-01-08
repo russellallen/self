@@ -108,7 +108,7 @@ else()
   
 endif()
 
-set(DYNAMIC           "-DDYNLINK_SUPPORTED")
+set(DYNAMIC           "DYNLINK_SUPPORTED")
 mark_as_advanced(DYNAMIC COMPILER TARGET_OS_VERSION TARGET_OS_FAMILY)
 
 

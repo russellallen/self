@@ -13,12 +13,12 @@ set(SELF_OSX_INFO_PLIST Info)
 
 if(SELF_QUARTZ)
     message(STATUS "Using Quartz plaform windows.")
-    list(APPEND _defines -DQUARTZ_LIB)
+    list(APPEND _defines QUARTZ_LIB)
 endif()
 
 option(SELF_OSX_COCOA "EXPERIMENTAL: Build with the Cocoa console" OFF)
 if(SELF_OSX_COCOA)
-  list(APPEND _defines -DCOCOA_EXP)
+  list(APPEND _defines COCOA_EXP)
   set(SELF_OSX_INFO_PLIST InfoCocoa)
 endif()
 
@@ -122,7 +122,7 @@ list(APPEND EXTRA_LIBRARIES ${frameworks})
 #
 list(APPEND _defines
 #  -DGCC3=1 #lets see if we can live without it
-  -DGLUE_CHECKSUM=0
+  GLUE_CHECKSUM=0
 )
 
 set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -arch ${platform_processor}")
