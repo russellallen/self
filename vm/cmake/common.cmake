@@ -52,7 +52,6 @@ set_property(GLOBAL PROPERTY USE_FOLDERS On)
 include(platform)
 include(policies)
 include(functions)
-include(assemblerSupport)
 
 set(EXTRA_LIBRARIES)
 

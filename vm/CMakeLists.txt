@@ -53,10 +53,6 @@ include_directories_from_src(SRC)
 # setup general definitions. 
 include(setup)
 
-## setup assemby support
-#
-setup_assembler_support(SRC)
-
 # setup configuration-specific (release/debug) stuff
 include(configurations)
 
@@ -98,8 +94,5 @@ target_link_libraries(${PROJECT_NAME} ${EXTRA_LIBRARIES} ${3RD_PARTY_LIBS})
 
 # setup target-specific definitions
 setup_target(${PROJECT_NAME})
-# we _know_ we have to deal with assembler.
-setup_target_assembler_support(${PROJECT_NAME})
-
 
 configure_end()
