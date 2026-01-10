@@ -4,7 +4,7 @@ set(PROJECT_NAME Self)
 #
 # Prologue
 #
-# We need 3.12. This may be raised to 3.16 for precompiled headeers at a later point.
+# We need 3.12. This may be raised to 3.16 for precompiled headers at a later point.
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
 #
