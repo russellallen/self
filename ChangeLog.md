@@ -1,3 +1,14 @@
+Changes in Master
+-----------------
+
+Deprecated:
+
+* travis-ci.org for CI
+
+VM:
+
+* Updated cmake build system to use minimum 3.12
+
 Changes in Self 24.01
 ----------------------
 
