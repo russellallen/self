@@ -16,8 +16,8 @@ list(APPEND EXTRA_LIBRARIES ${CMAKE_THREAD_LIBS_INIT} socket nsl)
 # Solaris compile definitons
 #
 list(APPEND _defines
-  -DDEBUG
-  -DGLUE_CHECKSUM=0
+  DEBUG
+  GLUE_CHECKSUM=0
 )
 
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)

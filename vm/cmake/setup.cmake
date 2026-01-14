@@ -5,13 +5,13 @@
 
 if(SELF_X11)
     message(STATUS "Using X11 plaform windows.")
-    list(APPEND _defines -DXLIB)
+    list(APPEND _defines XLIB)
 endif()
 
 list(APPEND _defines
-  -DFAST_COMPILER
-  -DSIC_COMPILER
-  -DNATIVE_ARCH=${platform_processor}
+  FAST_COMPILER
+  SIC_COMPILER
+  NATIVE_ARCH=${platform_processor}
   ${DYNAMIC}
 )
 

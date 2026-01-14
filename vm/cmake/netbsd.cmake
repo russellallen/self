@@ -25,8 +25,8 @@ enable_language(C)
 # NetBSD compile definitons
 #
 list(APPEND _defines
-  -DDEBUG
-  -DGLUE_CHECKSUM=0
+  DEBUG
+  GLUE_CHECKSUM=0
 )
 
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
@@ -70,9 +70,12 @@ macro(setup_target target)
   # "super"
   setup_target_common(${target})
 
-  add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND paxctl +m "$<TARGET_FILE:${PROJECT_NAME}>"
-    VERBATIM)
+  # disable mprotect(2) restrictions using paxctl(1) but only for the Self binary
+  if(${target} STREQUAL ${PROJECT_NAME})
+    add_custom_command(TARGET ${target} POST_BUILD
+      COMMAND paxctl +m "$<TARGET_FILE:${target}>"
+      VERBATIM)
+  endif()
 endmacro()
 
 
@@ -92,5 +95,5 @@ macro(include_prefix_header target file)
   # include_prefix_header_common(${target} ${file})
 endmacro()
 
-list(APPEND _defines -DINTERFACE_PRAGMAS)
+list(APPEND _defines INTERFACE_PRAGMAS)
 list(APPEND _flags   -Winvalid-pch)
