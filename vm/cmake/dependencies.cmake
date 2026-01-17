@@ -28,7 +28,7 @@ if(SELF_X11)
     Ensure the library and header files are properly installed")
       endif()
       find_package(X11 COMPONENTS Xft REQUIRED)
-      if(NOT X11_Xext_FOUND)
+      if(NOT X11_Xft_FOUND)
         message(FATAL_ERROR "Cannot find Xft component of X11. 
     Ensure the library and header files are properly installed")
       endif()
