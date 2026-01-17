@@ -4,7 +4,32 @@
    See the LICENSE file for license information. */
 
 # ifdef sparc
-  
+
+/*
+ * C Compiler Frame SiZe: 16 words to flush a window (ins, locals),
+ * one word hidden parameter to return aggregates, 6 words for callee
+ * to store register arguments.  Rounded up to doubleword boundary to
+ * maintain stack alignment.  (16 + 1 + 6 + 1) * 4 = 96
+ */
+#define CCFSZ 96
+
+#define ASMSYM(_Sym, _Type)			\
+		.globl _Sym;			\
+		.type _Sym, _Type;		\
+	_Sym:
+
+#define ASMFUNC(_Sym)	ASMSYM(_Sym, STT_FUNC)
+#define ASMOBJ(_Sym)	ASMSYM(_Sym, STT_OBJECT)
+#define ASMLABEL(_Sym)	ASMSYM(_Sym, STT_NOTYPE)
+
+#define LFUNC(_Sym)				\
+		.local _Sym;			\
+		.type _Sym, STT_FUNC;		\
+	_Sym:
+
+#define ASMEND(_Sym)	.size _Sym, (. - _Sym)
+
+
 # define arg0 %o0
 # define arg1 %o1
 # define arg2 %o2
@@ -13,7 +38,7 @@
 # define arg5 %o5
 # define receiver arg0
 # define result receiver
-  
+
 # define iarg0 %i0
 # define iarg1 %i1
 # define iarg2 %i2
@@ -22,7 +47,7 @@
 # define iarg5 %i5
 # define ireceiver iarg0
 # define iresult ireceiver
-  
+
 # define t  %g1
 # define t1 %g2
 # define t2 %g3
@@ -40,19 +65,17 @@
 # define diVerified %g2
 # define diRecompileLink %g3
 # define recompileLinkReg %g5
-  
+
 # define NLRResultReg %g1
 # define NLRHomeReg %g2
 # define NLRHomeIDReg %g3
 # define NLRTempReg %g4
-  
+
   /* WARNING THIS IS DUPLICATED IN sendDesc_sparc.h */
 # define primitive_end_offset 20
 # define non_local_return_offset 12
 
   /* WARNING THIS IS DUPLICATED IN format_sparc.h */
 # define current_pc_offset       -8
-  
+
 # endif
-
-
