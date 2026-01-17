@@ -8,6 +8,7 @@ Deprecated:
 VM:
 
 * Updated cmake build system to use minimum 3.12
+* Building the VM now works again on PPC MacOS X (Leopard) and x64 MacOS X (El Capitan)
 
 Changes in Self 24.01
 ----------------------
