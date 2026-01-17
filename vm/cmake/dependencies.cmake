@@ -16,9 +16,9 @@ find_package(PkgConfig QUIET)
 if(SELF_X11)
     if(PKG_CONFIG_FOUND)
       # do it the pkg-config way
-      pkg_check_modules(X11 QUIET x11 xext xft)
+      pkg_check_modules(X11 QUIET x11 xext xft fontconfig)
     endif()
-    
+
     if(NOT PKG_CONFIG_FOUND OR (NOT X11_FOUND))
       find_package(X11 COMPONENTS Xext REQUIRED)
       if(NOT X11_Xext_FOUND)
@@ -27,21 +27,24 @@ if(SELF_X11)
         message(FATAL_ERROR "Cannot find Xext component of X11. 
     Ensure the library and header files are properly installed")
       endif()
+
       find_package(X11 COMPONENTS Xft REQUIRED)
       if(NOT X11_Xft_FOUND)
         message(FATAL_ERROR "Cannot find Xft component of X11. 
     Ensure the library and header files are properly installed")
       endif()
-      INCLUDE(FindFreetype)
-      IF(NOT FREETYPE_FOUND)
-        message(FATAL_ERROR "Cannot find Xft component of X11. 
+
+      include(FindFontconfig)
+      if (NOT Fontconfig_FOUND)
+        message(FATAL_ERROR "Cannot find fontconfig.
     Ensure the library and header files are properly installed")
-      ENDIF(NOT FREETYPE_FOUND)
+      endif()
+
       set(X11_INCLUDE_DIRS ${X11_INCLUDE_DIR})
     endif()
     link_directories(${X11_LIBRARY_DIRS})
     include_directories(${X11_INCLUDE_DIRS})
-    list(APPEND 3RD_PARTY_LIBS ${X11_LIBRARIES})     
+    list(APPEND 3RD_PARTY_LIBS ${X11_LIBRARIES} ${Fontconfig_LIBRARIES})
 endif()
 
 if(PKG_CONFIG_FOUND)
