@@ -6,6 +6,10 @@
 if(SELF_X11)
     message(STATUS "Using X11 plaform windows.")
     list(APPEND _defines XLIB)
+    if(SELF_XFT)
+      message(STATUS "Using Xft fonts.")
+      list(APPEND _defines USE_XFT)
+    endif()
 endif()
 
 list(APPEND _defines

@@ -14,4 +14,5 @@
 # include        "termcap.primMaker.hh"
 # include "transcendental.primMaker.hh"
 # include           "xlib.primMaker.hh"
+# include            "xft.primMaker.hh"
 # include      "unixPrims.primMaker.hh"
