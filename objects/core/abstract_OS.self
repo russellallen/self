@@ -198,7 +198,7 @@ block is done executing. -- Adam & Alex, March 04\x7fModuleInfo: Module: abstrac
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
          'Category: platform\x7fCategory: host and filesystem\x7fModuleInfo: Module: abstract_OS InitialContents: InitializeToExpression: (vector copySize: 256)\x7fVisibility: public'
         
-         fileTable = vector copySize: 256.
+         fileTable = vector copySize: 1024.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
