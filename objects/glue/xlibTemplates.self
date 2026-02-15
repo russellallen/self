@@ -24,9 +24,9 @@
 
 
 traits: traits xlib display
-  -- display
-  // XOpenDisplay and XCloseDisplay are (statically) defined in the VM
+ category: display
  visibility: publicSlot
+  // XOpenDisplay and XCloseDisplay are (statically) defined in the VM
   void xDisplayName: string = string call XDisplayName canAWS
   Display defaultScreen = int call DefaultScreen
  visibility: privateSlot
@@ -34,18 +34,18 @@ traits: traits xlib display
 	    = Screen {xlib screen deadCopy} call DefaultScreenOfDisplay 
   Display connectionNumber = int call ConnectionNumber
 
-  -- vendor info
+ category: vendor info
  visibility: publicSlot
   Display xServerVendor  = string call XServerVendor
   Display xVendorRelease = int    call XVendorRelease
 
-  -- visual info 
+ category: visual info
  visibility: publicSlot
   Display xMatchVisualInfoScreen: int Depth: int Class: int \
     	    = XVisualInfo {xlib xVisualInfo deadCopy} \
 	      call XMatchVisualInfo_wrap passFailHandle canAWS
 
-  -- event handling
+ category: event handling
  visibility: publicSlot
   Display xEventsQueued: int     = int  call XEventsQueued canAWS
   Display xPending               = int  call XPending      canAWS
@@ -59,15 +59,15 @@ traits: traits xlib display
   Display xNextEventPeek: bool Protos: oop objVector \
              = oop call XNextEvent_wrap passFailHandle canAWS
 
-  -- synchronization
+ category: synchronization
   Display xFlush                  = void call XFlush       canAWS
   Display xSynchronize: bool      = void call XSynchronize canAWS
   Display xSyncDiscardingIf: bool = void call XSync	   canAWS
 
-  -- beeping
+ category: beeping
   Display xBell: int              = void call XBell
 
-  -- gc
+ category: gc
   Display xChangeGC: proxy GC GC_seal \
           ValueMask: unsigned_long \
              Values: XGCValues \
@@ -158,13 +158,13 @@ traits: traits xlib display
             = proxy_null Window Window_seal {xlib window deadCopy} \
               call XTranslateCoordinates_wrap passFailHandle canAWS
 
-  -- atom
+ category: atom
  visibility: privateSlot
   Display xInternAtom: string OnlyIfExists: bool \
             = proxy Atom Atom_seal {xlib atom deadCopy} call XInternAtom canAWS
 
 
-  -- window
+ category: window
  visibility: publicSlot
   Display xCreateIOWindowIn: proxy Window Window_seal \
                           X: int \
@@ -238,7 +238,7 @@ traits: traits xlib display
             = void call XDestroyWindow canAWS
 
 
-  -- subwindows
+ category: subwindows
   Display xCirculateSubwindows: proxy Window Window_seal Direction: int \
 	    = void call XCirculateSubwindows
   Display xCirculateSubwindowsDown: proxy Window Window_seal \
@@ -254,7 +254,7 @@ traits: traits xlib display
 	    = void call XDestroySubwindows
 
   
-  -- cursor
+ category: cursor
   Display xWarpPointerSrcWindow: proxy_null Window Window_seal \
                        DestWindow: proxy_null Window Window_seal \
                              SrcX: int \
@@ -302,7 +302,7 @@ traits: traits xlib display
               call XCreateFontCursor
 
 
-  -- colormap
+ category: colormap
   Display xCreateColormapWindow: proxy Window Window_seal \
                            Visual: Visual \
                          Allocate: bool \
@@ -342,7 +342,7 @@ traits: traits xlib display
 			       Planes: unsigned_long \
 	    = void call XFreeColorCells_wrap passFailHandle canAWS
 
-  -- pixmap
+ category: pixmap
   // the following uses ANY_SEAL because drawables can be pixmaps or windows
   // since pixmaps and windows are integers, this will not cause a crash
   Display xCreateBitmapDrawable: proxy Drawable ANY_SEAL \
@@ -363,7 +363,7 @@ traits: traits xlib display
   Display xFreePixmap: proxy Pixmap Pixmap_seal \
             = void call XFreePixmap canAWS
 
-  -- shapes
+ category: shapes
   Display xShapeQueryExtension \
             = bool call XShapeQueryExtension_wrap canAWS
 
@@ -404,7 +404,7 @@ traits: traits xlib display
 
 ','
 
-  -- drawing
+ category: drawing
   // the following uses ANY_SEAL because drawables can be pixmaps or windows
   // since pixmaps and windows are integers, this will not cause a crash
 
@@ -503,7 +503,7 @@ traits: traits xlib display
            StringVector: oop objVector \
              = void call XDrawString16_wrap passFailHandle canAWS 
 
-  -- font
+ category: font
   Display xQueryFont: proxy Font Font_seal \
     	    = XFontStruct {xlib xFontStruct deadCopy} \
 	      call XQueryFont canAWS
@@ -513,7 +513,7 @@ traits: traits xlib display
   Display xFreeFont: XFontStruct = void call XFreeFont canAWS
 
 
-  -- image
+ category: image
   Display xCreateImage: Visual \
 		   Depth: unsigned_int \
 		  Format: int \
@@ -555,7 +555,7 @@ traits: traits xlib display
 	    = XImage {xlib xImage deadCopy} call XGetSubImage canAWS
 
 
-  -- cut and paste buffers
+ category: cut and paste buffers
   Display xStoreBytes: string \
     	    = void call XStoreBytes_wrap passFailHandle canAWS
 
