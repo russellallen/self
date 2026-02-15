@@ -31,7 +31,7 @@ traits: traits xlib display
   Display defaultScreen = int call DefaultScreen
  visibility: privateSlot
   Display defaultScreenOfDisplay \
-	    = Screen {xlib screen deadCopy} call DefaultScreenOfDisplay 
+	    = Screen {xlib screen deadCopy} call DefaultScreenOfDisplay
   Display connectionNumber = int call ConnectionNumber
 
  category: vendor info
@@ -71,7 +71,7 @@ traits: traits xlib display
   Display xChangeGC: proxy GC GC_seal \
           ValueMask: unsigned_long \
              Values: XGCValues \
-            = void call XChangeGC canAWS 
+            = void call XChangeGC canAWS
 
   // the following uses ANY_SEAL because drawables can be pixmaps or windows
   // since pixmaps and windows are integers, this will not cause a crash
@@ -253,7 +253,7 @@ traits: traits xlib display
   Display xDestroySubwindows: proxy Window Window_seal \
 	    = void call XDestroySubwindows
 
-  
+
  category: cursor
   Display xWarpPointerSrcWindow: proxy_null Window Window_seal \
                        DestWindow: proxy_null Window Window_seal \
@@ -273,7 +273,7 @@ traits: traits xlib display
                      ConfineTo: proxy_null Window Window_seal \
                         Cursor: proxy_null Cursor Cursor_seal \
                           Time: unsigned_long \
-            = int call XGrabPointer  canAWS                        
+            = int call XGrabPointer  canAWS
   Display xUngrabPointerTime: unsigned_long = void call XUngrabPointer canAWS
 
   Display xUngrabButton: int \
@@ -501,7 +501,7 @@ traits: traits xlib display
                       X: int \
                       Y: int \
            StringVector: oop objVector \
-             = void call XDrawString16_wrap passFailHandle canAWS 
+             = void call XDrawString16_wrap passFailHandle canAWS
 
  category: font
   Display xQueryFont: proxy Font Font_seal \
@@ -569,7 +569,7 @@ traits: traits xlib display
 traits: traits xlib window
  visibility: publicSlot
   void nullWindow \
-    	    = proxy_null Window Window_seal {xlib window deadCopy} get NULL 
+    	    = proxy_null Window Window_seal {xlib window deadCopy} get NULL
 
 
 
@@ -582,7 +582,7 @@ traits: traits xlib window
 traits: traits xlib pixmap
  visibility: publicSlot
   void nullPixmap \
-    	    = proxy_null Pixmap Pixmap_seal {xlib pixmap deadCopy} get NULL 
+    	    = proxy_null Pixmap Pixmap_seal {xlib pixmap deadCopy} get NULL
 
 
 
@@ -592,7 +592,7 @@ traits: traits xlib pixmap
 traits: traits xlib region
  visibility: publicSlot
   void nullRegion \
-    	    = proxy_null Region Region_seal {xlib region deadCopy} get NULL 
+    	    = proxy_null Region Region_seal {xlib region deadCopy} get NULL
   void xCreateRegion = proxy Region Region_seal {xlib region deadCopy} \
 	      call XCreateRegion_wrap canAWS
   proxy Region Region_seal xDestroyRegion = void call XDestroyRegion_wrap canAWS
@@ -635,7 +635,7 @@ traits: traits xlib region
 traits: traits xlib cursor
  visibility: publicSlot
   void nullCursor \
-    	    = proxy_null Cursor Cursor_seal {xlib cursor deadCopy} get NULL 
+    	    = proxy_null Cursor Cursor_seal {xlib cursor deadCopy} get NULL
 
 
 
@@ -677,7 +677,7 @@ traits: traits xlib xVisualInfo
   XVisualInfo         depth = int getMember depth
   XVisualInfo    depth: int = void setMember depth
   // next field assumes c++ compilation, change to getMember class for c
-  XVisualInfo         class = int getMember c_class   	
+  XVisualInfo         class = int getMember c_class
   XVisualInfo      red_mask = unsigned_long getMember red_mask
   XVisualInfo    green_mask = unsigned_long getMember green_mask
   XVisualInfo     blue_mask = unsigned_long getMember blue_mask
@@ -827,7 +827,7 @@ traits: traits xlib events xConfigureEvent
  visibility: publicSlot
   XConfigureEvent x       = int getMember x
   XConfigureEvent y       = int getMember y
-  XConfigureEvent width   = int getMember width 
+  XConfigureEvent width   = int getMember width
   XConfigureEvent height  = int getMember height
   XConfigureEvent display = Display {xlib display deadCopy} getMember display
   XConfigureEvent window  = proxy Window Window_seal {xlib window deadCopy} \
@@ -849,7 +849,7 @@ traits: traits xlib events xExposeEvent
  visibility: publicSlot
   XExposeEvent x      = int getMember x
   XExposeEvent y      = int getMember y
-  XExposeEvent width  = int getMember width 
+  XExposeEvent width  = int getMember width
   XExposeEvent height = int getMember height
   XExposeEvent count  = int getMember count
   XExposeEvent window = proxy Window Window_seal {xlib window deadCopy} \
@@ -870,7 +870,7 @@ traits: traits xlib events xGraphicsExposeEvent
  visibility: publicSlot
   XGraphicsExposeEvent x      = int getMember x
   XGraphicsExposeEvent y      = int getMember y
-  XGraphicsExposeEvent width  = int getMember width 
+  XGraphicsExposeEvent width  = int getMember width
   XGraphicsExposeEvent height = int getMember height
   XGraphicsExposeEvent count  = int getMember count
   // the next can return either a pixmap or a window (ie, any drawable).
@@ -983,7 +983,7 @@ traits: traits xlib xSizeHints
 
 traits: traits xlib xWMHints
  visibility: publicSlot
-  void new = XWMHints {xlib xWMHints deadCopy} call XAllocWMHints      
+  void new = XWMHints {xlib xWMHints deadCopy} call XAllocWMHints
   XWMHints delete = void call XFree_XWMHints_wrap canAWS
 
   XWMHints flags         = long getMember flags
@@ -1013,7 +1013,7 @@ traits: traits xlib xTextProperty
  visibility: publicSlot
   void new = XTextProperty {xlib xTextProperty deadCopy} new
  visibility: privateSlot
-  void freeValue: proxy {char*} XTextProperty_value_seal = void call XFree 
+  void freeValue: proxy {char*} XTextProperty_value_seal = void call XFree
   XTextProperty basicDelete = void delete
   XTextProperty value \
     	    = proxy {unsigned char*} XTextProperty_value_seal {proxy deadCopy} \
@@ -1103,4 +1103,3 @@ traits: traits xlib xSetWindowAttributes
   XSetWindowAttributesWrap cursor: proxy Cursor Cursor_seal \
         = void callMember cursor
 ')
-
