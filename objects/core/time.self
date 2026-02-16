@@ -1,8 +1,9 @@
- 'Sun-$Revision: 30.10 $'
+ '30.11.0'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -47,9 +48,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'time' -> () From: ( | {
-         'ModuleInfo: Module: time InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: time InitialContents: InitializeToExpression: (\'30.11.0\')\x7fVisibility: public'
         
-         revision <- 'Sun-$Revision: 30.10 $'.
+         revision <- '30.11.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'time' -> () From: ( | {
@@ -70,7 +71,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'time' -> () From: ( | {
          'Comment: Non-nil when valid.\x7fModuleInfo: Module: time InitialContents: InitializeToExpression: (nil)\x7fVisibility: private'
         
-         dateTime0.
+         dateTime0 <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'time' -> () From: ( | {
@@ -661,6 +662,35 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          'ModuleInfo: Module: time InitialContents: FollowSlot\x7fVisibility: private'
         
          str <- ''.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'time' -> () From: ( | {
+         'Category: printing\x7fCategory: local time\x7fModuleInfo: Module: time InitialContents: FollowSlot\x7fVisibility: public'
+        
+         printISO8601String = ( |
+            | 
+            (year printStringPadWith0ToSize: 4), '-',
+            (month printStringPadWith0ToSize: 2), '-',
+            (date printStringPadWith0ToSize: 2),
+            'T',
+            (hour printStringPadWith0ToSize: 2), ':',
+            (minute printStringPadWith0ToSize: 2), ':',
+            (second printStringPadWith0ToSize: 2)).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'time' -> () From: ( | {
+         'Category: printing\x7fCategory: GMT\x7fModuleInfo: Module: time InitialContents: FollowSlot\x7fVisibility: public'
+        
+         printISO8601StringGMT = ( |
+            | 
+            (yearGMT printStringPadWith0ToSize: 4), '-',
+            (monthGMT printStringPadWith0ToSize: 2), '-',
+            (dateGMT printStringPadWith0ToSize: 2),
+            'T',
+            (hourGMT printStringPadWith0ToSize: 2), ':',
+            (minuteGMT printStringPadWith0ToSize: 2), ':',
+            (secondGMT printStringPadWith0ToSize: 2),
+            'Z').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'time' -> () From: ( | {
