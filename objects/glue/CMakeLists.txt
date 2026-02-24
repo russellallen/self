@@ -16,8 +16,16 @@ set(SRC_glue_x11
     xlib.primMaker.hh
 )
 
+set(SRC_glue_xft
+    xft_glue.cpp
+    xft.primMaker.hh
+)
+
 if(SELF_X11)
     list(APPEND SRC_glue ${SRC_glue_x11})
+    if(SELF_XFT)
+      list(APPEND SRC_glue ${SRC_glue_xft})
+    endif()
 endif()
 
 set(SRC_glue_quartz

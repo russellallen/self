@@ -55,7 +55,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
              reference manual.\"
 
 
-            \"IMPORTANT: more slots are added to these objects in xlib.wrappers.self'.
+            \"IMPORTANT: more slots are added to these objects in xlib_wrappers.self'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'xlib' -> () From: ( | {
@@ -77,17 +77,10 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'xlib' -> () From: ( | {
          'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
-         subpartNames <- bootstrap setObjectAnnotationOf: ( 'xDrawable
+         subpartNames <- 'xDrawable
 xlib_wrappers
-' copyMutable) From: ( |
-             {} = 'ModuleInfo: Creator: globals modules xlib subpartNames.
-
-CopyDowns:
-globals byteVector. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
+xft
+'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
@@ -6075,6 +6068,7 @@ an object with these slots:
 
  bootstrap read: 'xDrawable' From: 'graphics'
  bootstrap read: 'xlib_wrappers' From: 'glue'
+ bootstrap read: 'xft' From: 'graphics'
 
 
 

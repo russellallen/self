@@ -16,19 +16,27 @@ set(SELF_BUILD_SUPPORT_DIR
   CACHE PATH
   "Path where to find build support files, like for vmDate, Mac OSX etc."
 )
+
+include(CMakeDependentOption)
+
 option(SELF_PROFILE     "Select whether to do a profiled build"         OFF)
 option(SELF_COVERAGE    "Select whether to do a coverage build"         OFF)
 option(SELF_FAST_FLOATS "Select whether to do a build with fast floats" OFF)
 
 # do not use X11 on OSX by default.
 if(APPLE)
-  set(SELF_X11_INIT OFF)
   option(SELF_QUARTZ    "Select whether to build Self with Quartz Platform windows" ON)
+  set(SELF_X11_INIT OFF)
+  set(SELF_XFT_INIT OFF)
 else()
   set(SELF_X11_INIT ON)
+  set(SELF_XFT_INIT OFF)
 endif()
 
 option(SELF_X11 "Select whether to build Self with X11 Platform windows" ${SELF_X11_INIT})
+cmake_dependent_option(SELF_XFT
+  "Select whether to build Self with fontconfig font support"
+  ${SELF_XFT_INIT} SELF_X11 OFF)
 
 
 set(
