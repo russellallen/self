@@ -83,5 +83,9 @@ inline bool fastPreemptionCheck() {
 }
 
 
+# if TARGET_ARCH == X86_64_ARCH
+const int32 SelfStackLimit = 5 * 1024 * 1024; // x86_64 interpreter-only: frames are ~2x larger than i386 JIT
+# else
 const int32 SelfStackLimit = 250000; // a wild guess
+# endif
 # endif // defined(__i386__) || defined(__x86_64__)
