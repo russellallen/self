@@ -8,28 +8,28 @@
 
 # undef  MIN
 # define MIN(a,b) ((a) < (b) ? (a) : (b) )
-# define CHUNK_SIZE (Vectorfind_max_chunk_size/sizeof(int32))
+# define CHUNK_SIZE (Vectorfind_max_chunk_size/sizeof(smi))
 
 
 
 // searches [bottom, top), uses sentinel at *top, but that is OK
 //   given how it is called -- dmu
 
-static void search_chunk(int32 bottom[],  int32* top, 
-                         int32 targets[], int32 num_targets,
+static void search_chunk(smi bottom[],  smi* top,
+                         smi targets[], smi num_targets,
                          match_func f) {
   assert( bottom  <=  top, "size of chunk is negative");
-  
-  int32 *sentinel_cell = top;
-  int32 saved_value    = *sentinel_cell; // save to undo sentinel;
-  int32 hit_num;
-  
-  int32  start_target = 0;
+
+  smi *sentinel_cell = top;
+  smi saved_value    = *sentinel_cell; // save to undo sentinel;
+  smi hit_num;
+
+  smi  start_target = 0;
   bool   proceed      = true;
   while (start_target < num_targets) {
-    int32 used_targets = MIN(Vectorfind_max_targets, num_targets-start_target);
-    
-    for (int32* objp = bottom;
+    smi used_targets = MIN(Vectorfind_max_targets, num_targets-start_target);
+
+    for (smi* objp = bottom;
          objp < sentinel_cell && proceed;
          ++objp) {
 
@@ -47,7 +47,7 @@ static void search_chunk(int32 bottom[],  int32* top,
 
       if (objp == sentinel_cell) // just found sentinel
         break;
-      
+
       if (!f( objp, hit_num))
         return;
     }
@@ -59,17 +59,17 @@ static void search_chunk(int32 bottom[],  int32* top,
 // searches in [bottom, top)
 // uses sentinel, but only within [bottom, top)
 
-void search_area(int32* bottom,  int32* top,
-                 int32* targets,  int32 num_targets,
+void search_area(smi* bottom,  smi* top,
+                 smi* targets,  smi num_targets,
                  match_func f) {
   if (bottom >= top )
     return;
-  
+
   if (num_targets <= Vectorfind_max_targets)
     search_chunk(bottom, top-1, targets, num_targets, f);
   else {
-    int32 *chunk_bottom  = bottom;
-    int32 *chunk_top     = MIN(bottom + CHUNK_SIZE, top-1);
+    smi *chunk_bottom  = bottom;
+    smi *chunk_top     = MIN(bottom + CHUNK_SIZE, top-1);
     while ( chunk_bottom < top-1 ) {
       search_chunk(chunk_bottom, chunk_top, targets, num_targets, f);
       chunk_bottom = chunk_top;
@@ -78,7 +78,7 @@ void search_area(int32* bottom,  int32* top,
   }
   // Since the cell top-1 has been checked (sentinel) targets
   //  are checked against contents of top-1.
-  for (int32 i = 0;  i < num_targets;  ++i) {
+  for (smi i = 0;  i < num_targets;  ++i) {
     if (*(top-1) == targets[i]) {
       if (!f( top-1, i)) return;
     }
@@ -88,19 +88,19 @@ void search_area(int32* bottom,  int32* top,
 # if  ! HAVE_PLATFORM_SEARCH_FUNCTIONS
   // simple C implementation
 
-  int32 Vectorfind_max_targets = 1 << 24;       // value isn't really important
-  int32 Vectorfind_max_chunk_size = 64 * 1024;  // ditto
+  smi Vectorfind_max_targets = 1 << 24;       // value isn't really important
+  smi Vectorfind_max_chunk_size = 64 * 1024;  // ditto
 
-  int32* vectorfind_next_match(int32* start,
-                               int32* targets, int32 num_targets, 
-                               int32* hit_num) {
+  smi* vectorfind_next_match(smi* start,
+                               smi* targets, smi num_targets,
+                               smi* hit_num) {
     for ( ; ; ++start) {
-      for (int32 index = 0; index < num_targets; ++index) {
+      for (smi index = 0; index < num_targets; ++index) {
         if (*start == targets[index]) { *hit_num = index; return start; }
       }
     }
   }
-  
+
   extern "C" {
     // enumeration:   // simple C implementation
 

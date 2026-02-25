@@ -91,7 +91,7 @@ Label* CacheStub::prologue(bool immediateOnly) {
 Label* CacheStub::test(oop map, pc_t addr, Label* prev) {
   if (prev)
     prev->define();
-  a->cmpl((int32)map, OopOperand, Temp1);
+  a->cmpl((int32)(smi)map, OopOperand, Temp1);
   Label* next_test = new Label(a->printing);
   a->jne(next_test);
   jump(addr);
@@ -103,7 +103,7 @@ void CacheStub::finish(Label* miss, Label* prev) {
     prev->define();
   if (miss)
     miss->define();
-  a->jmp((int32)theSendDesc->lookupRoutine(), PVMAddressOperand);
+  a->jmp((int32)(smi)theSendDesc->lookupRoutine(), PVMAddressOperand);
 }
 
   

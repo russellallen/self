@@ -695,7 +695,7 @@ Token* Scanner::read_op(fint c) {
 
 Token* Scanner::read_number(fint c) {
   
-  const int MAXSELFINT = smiOop_max->value() + 1; // maximum Self integer + 1
+  const smi MAXSELFINT = smiOop_max->value() + 1; // maximum Self integer + 1
   fint l = line;
   fint col = column - 1;
   const char* ss = sourceAddr() - 1;
@@ -709,7 +709,7 @@ Token* Scanner::read_number(fint c) {
       return read_op('-');
     }
   }
-  int32 i = asnum(c);
+  smi i = asnum(c);
   fint base;
   double f = 0;
   
@@ -751,8 +751,8 @@ Token* Scanner::read_number(fint c) {
             return TokenizingError("need spaces between numeric literals and selectors\n\t(letter too large for given base)");
           }
         }
-        int32 newi = i * base + v;
-        int32 maxi = MAXSELFINT / base;
+        smi newi = i * base + v;
+        smi maxi = MAXSELFINT / base;
         if ((i > maxi || (i == maxi && !neg)) ||
             (newi > MAXSELFINT || (newi == MAXSELFINT && !neg))) {
           return TokenizingError("numeric constant too large");

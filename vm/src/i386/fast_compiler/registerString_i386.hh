@@ -1,4 +1,4 @@
-# ifdef __i386__
+# if defined(__i386__) || defined(__x86_64__)
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -23,4 +23,4 @@ inline Location pickRegister(RegisterString& s, RegisterString mask) { return Un
 
 
 # endif // FAST_COMPILER
-# endif // __i386__
+# endif // defined(__i386__) || defined(__x86_64__)

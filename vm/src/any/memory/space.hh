@@ -43,10 +43,18 @@ class space: public CHeapObj {
   oop* old_bytes_bottom;
   oop* old_bytes_top;
 
-  int32 old_size_bytes() { // the extra 1 is for the invariant
+  // When loading a 32-bit snapshot into a 64-bit VM, oop counts derived
+  // from old_objs_top - old_objs_bottom are wrong (because the old pointers
+  // are 32-bit addresses but oop* arithmetic divides by 8 on 64-bit).
+  // These fields store the correct counts computed at read time.
+  fint snapshot_objs_oop_count;   // number of oops in the objs area
+  fint snapshot_bytes_byte_count; // number of bytes in the bytes area
+  fint snapshot_oop_scale;        // oopSize / snapshot_oopSize (1 for same, 2 for 32→64)
+
+  smi old_size_bytes() { // the extra 1 is for the invariant
     return oopSize * (1
-                      + (old_bytes_top - old_bytes_bottom)
-                      + (old_objs_top - old_objs_bottom)); }
+                      + (snapshot_bytes_byte_count + oopSize - 1) / oopSize  // bytes area in oop units (rounded up)
+                      + snapshot_objs_oop_count); }
 
   friend bool rSet::verify(bool);
 
@@ -54,9 +62,9 @@ class space: public CHeapObj {
   const char* name;
   
   // constructors; none allocate object space
-  space(const char *nm, int32 &size) {
+  space(const char *nm, smi &size) {
     Unused(size); name= nm; } // dummy just for oldSpace
-  space(const char* nm, int32 &size, char *bottom) {
+  space(const char* nm, smi &size, char *bottom) {
     init_space(nm, size, bottom); };
   space(const char* nm, char *bottom, char *top);
   space(const char* nm, FILE *snap);
@@ -67,7 +75,7 @@ class space: public CHeapObj {
   ~space() { }
 
  protected:
-  void init_space(const char* nm, int32 &size, char *bottom);
+  void init_space(const char* nm, smi &size, char *bottom);
 
  public:
   // allocation test
@@ -111,13 +119,13 @@ class space: public CHeapObj {
   char* bytesStart() { return (char*) bytes_bottom; }
   char* spaceStart() { return (char*)  objs_bottom; }
   char* spaceEnd()   { return (char*) bytes_top; }
-  int32 capacity()   { return (char*) bytes_top    - (char*) objs_bottom - oopSize; }
-  int32 oops_used()  { return          objs_top    - objs_bottom; }
-  int32 bytes_used() { return (char*) bytes_top    - (char*) bytes_bottom; }
-  int32 oops_free()  { return         bytes_bottom - objs_top - 1; }
-  int32 used()       { return (char*)  objs_top    - (char*) objs_bottom 
-                       +      (char*) bytes_top    - (char*) bytes_bottom; }
-  int32 bytes_free() { return (char*) bytes_bottom - (char*) objs_top - oopSize; }
+  smi capacity()   { return (char*) bytes_top    - (char*) objs_bottom - oopSize; }
+  smi oops_used()  { return          objs_top    - objs_bottom; }
+  smi bytes_used() { return (char*) bytes_top    - (char*) bytes_bottom; }
+  smi oops_free()  { return         bytes_bottom - objs_top - 1; }
+  smi used()       { return (char*)  objs_top    - (char*) objs_bottom
+                     +      (char*) bytes_top    - (char*) bytes_bottom; }
+  smi bytes_free() { return (char*) bytes_bottom - (char*) objs_top - oopSize; }
   
   bool contains(void* p) {
     return (oop*) p >= objs_bottom && (oop*) p <= bytes_top; }
@@ -156,6 +164,7 @@ class space: public CHeapObj {
   void write_snapshot(FILE* file);
   void relocate();
   void relocate_bytes();
+  void repack_bytes_for_64bit();
   void fixup_maps();
   void fixup_killables();
   void canonicalize_maps(); 
@@ -166,12 +175,24 @@ class space: public CHeapObj {
       bytes_bottom != old_bytes_bottom; }
   bool need_to_relocate_objs() {
     return objs_bottom != old_objs_bottom; }
-  
+
   memOop relocate_objs(memOop p) {
     assert(old_objs_contains(p), "not correctly relocating");
-    return memOop((oop*) p + (objs_bottom - old_objs_bottom)); }
+    if (snapshot_oop_scale == 1) {
+      // Same oop size — simple delta relocation
+      return memOop((oop*) p + (objs_bottom - old_objs_bottom));
+    }
+    // Cross-size relocation: scale the byte offset by oopSize/snapshot_oopSize
+    fint tag = (smi)p & Tag_Mask;
+    char* old_addr = (char*)((smi)p & ~Tag_Mask);
+    smi old_byte_offset = old_addr - (char*)old_objs_bottom;
+    smi new_byte_offset = old_byte_offset * snapshot_oop_scale;
+    char* new_addr = (char*)objs_bottom + new_byte_offset;
+    return memOop((smi)new_addr | tag);
+  }
   char* relocate_bytes(char* p) {
     assert(old_bytes_contains(p), "not correctly relocating");
+    // Bytes area doesn't scale — just shift by delta
     return (char*) ((oop*) p + (bytes_bottom - old_bytes_bottom)); }
   
  public:
@@ -251,8 +272,8 @@ class newSpace: public space {
   bool scavenge_contents();
 
   // called by Memory
-  newSpace(const char* n, int32 &size, char* bottom) : space(n, size, bottom) {}
-  newSpace(const char* n, int32 &size, FILE* snap);
+  newSpace(const char* n, smi &size, char* bottom) : space(n, size, bottom) {}
+  newSpace(const char* n, smi &size, FILE* snap);
 };
 
 
@@ -283,7 +304,7 @@ class oldSpace: public space {
   // constructors
   // allocates object space too; sets size to amount allocated, 0 if none
   // tries to start space at desiredAddress if non-zero.
-  oldSpace(const char* nm, int32 &size, caddr_t desiredAddress);
+  oldSpace(const char* nm, smi &size, caddr_t desiredAddress);
 
   // constructors which do not allocate object space
   oldSpace(const char *nm, FILE *snap) : space(nm, snap) { next_space= NULL; }

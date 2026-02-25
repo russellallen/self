@@ -1,4 +1,4 @@
-# ifdef __i386__
+# if defined(__i386__) || defined(__x86_64__)
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -58,4 +58,4 @@ void set_target_of_Self_call_site(    inst_t* instp,  void* target);
 
 void set_space_reserved_by_enter_instruction( pc_t past_enter, int32 word_count );
 
-# endif // __i386__
+# endif // defined(__i386__) || defined(__x86_64__)

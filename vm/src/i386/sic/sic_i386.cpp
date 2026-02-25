@@ -24,12 +24,12 @@ int32 SICompiler::stackTempCount() {
 
 
 
-int32 SICompiler::max_no_of_outgoing_args_and_rcvr() {
+fint SICompiler::max_no_of_outgoing_args_and_rcvr() {
   return argCount + 1 /* for rcvr */;
 }
 
 
-int32 SICompiler::number_of_memory_locals() {
+fint SICompiler::number_of_memory_locals() {
   return stackLocCount;
 }
 

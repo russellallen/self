@@ -8,9 +8,15 @@
 # endif
 
 
-# define AllBits        ~0u
-# define NoBits         0u
-# define OneBit         1u
+# if TARGET_ARCH == X86_64_ARCH
+  # define AllBits      ~0ULL
+  # define NoBits       0ULL
+  # define OneBit       1ULL
+# else
+  # define AllBits      ~0u
+  # define NoBits       0u
+  # define OneBit       1u
+# endif
 
 # define addBits(x, m)  ((x) | (m))
 # define setBits(x, m)  ((x) |= (m))
@@ -22,7 +28,7 @@
 # define setNth(x, n)   setBits((x), nthBit(n))
 # define clearNth(x, n) clearBits((x), nthBit(n))
 # define isSet(x, n)    anySet((x), nthBit(n))
-# define nthMask(n)     (n == 32 ? AllBits : (nthBit(n) - OneBit))
+# define nthMask(n)     (n == BitsPerWord ? AllBits : (nthBit(n) - OneBit))
 # define lowerBits(x, n) maskBits((x), nthMask(n))
 
 # define roundMask(x, m) (((x) + (m)) & ~(m))

@@ -57,9 +57,9 @@ public:
   blockOop copy()  { return (blockOop) clone_block(smiOop(NULL)); }
 
   // compiler support
-  static int32 scope_offset() {
+  static smi scope_offset() {
     blockOopClass* p = NULL;
-    return (int32) (& (p->scopeHomeFr) ) - Mem_Tag; }
+    return (smi) (& (p->scopeHomeFr) ) - Mem_Tag; }
   blockOop clone_and_set_desc(smiOop);
   void remap(nmethod* nm, frame* newHome);
   void remap(Map* newMap, frame* newHome);

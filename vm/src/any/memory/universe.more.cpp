@@ -48,15 +48,15 @@ oop universe::default_low_space_handler(oop p)
 {
   if (MemoryAutomaticGC)
     p = garbage_collect(p);
-  int32 cap= old_gen->capacity();
-  int32 fre= old_gen->bytes_free();
+  smi cap= old_gen->capacity();
+  smi fre= old_gen->bytes_free();
   if (   MemoryAutomaticHeapExpansion
       && (   might_run_out_of_space_on_scavenge()
           || float(fre) / float(cap) < 0.3
           || old_gen->lowOnSpace)) {
-    int32 ngc= new_gen->capacity(); // for scavenge reserve
-    int32 desired= max(max(ngc * 2, cap / 2), old_gen->getLowSpaceThreshold());
-    int32 exp;
+    smi ngc= new_gen->capacity(); // for scavenge reserve
+    smi desired= max(max(ngc * 2, cap / 2), old_gen->getLowSpaceThreshold());
+    smi exp;
     while (exp= old_gen->expand(desired),
            exp == 0  &&  desired > ngc)
       desired /= 2;
@@ -644,7 +644,7 @@ void universe::objectSizeHistogram(fint maxSize) {
 void universe::printRegion(char *&caddr, int count)    
 {
   ResourceMark r;
-  caddr= (char*)((int)caddr & ~Tag_Mask);
+  caddr= (char*)((smi)caddr & ~Tag_Mask);
   oop *addr= (oop*)caddr;
   if (!Memory->really_contains(addr))
     fprintf(stderr, "%#lx not part of any space!\n", (long unsigned)addr);

@@ -1,4 +1,4 @@
-# ifdef __i386__
+# if defined(__i386__) || defined(__x86_64__)
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -30,7 +30,9 @@ linkage area     _________| - callee allocs half
 
 */
 
-const fint    frame_word_alignment = 4;
+// On i386: 4 words * 4 bytes = 16-byte alignment (matches ABI).
+// On x86_64: 2 words * 8 bytes = 16-byte alignment (matches ABI).
+const fint    frame_word_alignment = (oopSize == 8) ? 2 : 4;
 const fint frame_alignment_offset = 2; // rcvr is what is aligned -- push pc, bp, and THAT is frame*
 
 // stack offsets from base pointer after frame creation
@@ -95,4 +97,4 @@ void reg_disp_type_of_loc(Location* basep, int32* offsetp,  OperandType *t,  Loc
 const fint PerformSelectorLoc_sp_offset  =  5 * oopSize;
 const fint PerformDelegateeLoc_sp_offset =  6 * oopSize;
 
-# endif // __i386__
+# endif // defined(__i386__) || defined(__x86_64__)

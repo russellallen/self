@@ -30,6 +30,7 @@ class universe {
   smi snapshot_version;
   
   bool is_snapshot_other_endian;
+  smi  snapshot_oopSize;         // oopSize used in the snapshot (4 for 32-bit, 8 for 64-bit)
 
   smiOop programming_timestamp;
 
@@ -403,7 +404,7 @@ void write_delim(FILE *file, char *delim);
     { if (snapshot_version == 10  &&  (oop*)p == &CompileWithSICNames)        \
         ; /* don't read CompileWithSICNames from version 10 snapshots */      \
       else                                                                    \
-        OS::FRead_swap(p, oopSize, file);                                     \
+        OS::FRead_oop((oop*)(p), file);                                       \
     }
     
 
@@ -441,14 +442,24 @@ void write_delim(FILE *file, char *delim);
 // Starting with snapshot_version 12, maps are embedded in mapObjects,
 // and so the proper address for the map is larger -- dmu 7/03
 # define MAP_READ_SNAPSHOT_TEMPLATE(m)                                        \
-    { OS::FRead_swap(m, oopSize, file);                                            \
+    { OS::FRead_oop((oop*)(m), file);                                         \
       if (snapshot_version < 12)  *m = as_mapOop(*m)->map_addr(); }       
 
 # define MAP_WRITE_SNAPSHOT_TEMPLATE(m)                                       \
     OS::FWrite(m, oopSize, snapFile);
 
 # define MAP_RELOCATE_TEMPLATE(m)                                             \
-    *m = mapOop((*m)->enclosing_mapOop()->relocate())->map_addr();
+    { mapOop _old_mo;                                                         \
+      if (Memory->snapshot_oopSize == oopSize) {                              \
+        _old_mo = (*m)->enclosing_mapOop();                                   \
+      } else {                                                                \
+        /* 32-bit Map* was at offset enclosed_map_offset * snapshot_oopSize */\
+        char* _base = (char*)(*m)                                             \
+                      - enclosed_map_offset * Memory->snapshot_oopSize;       \
+        _old_mo = as_mapOop(_base);                                           \
+      }                                                                       \
+      *m = mapOop(_old_mo->relocate())->map_addr();                           \
+    }
 
 # define MAP_VERIFY_TEMPLATE(m)                                               \
     if (!(*m)->enclosing_mapOop()->verify_oop()) { lprintf("\tof vm map\n");  verify_result = false; }
@@ -492,6 +503,9 @@ void write_delim(FILE *file, char *delim);
 
 # define SPACE_RELOCATE_BYTES_TEMPLATE(s)                                     \
     s->relocate_bytes();
+
+# define SPACE_REPACK_BYTES_TEMPLATE(s)                                       \
+    s->repack_bytes_for_64bit();
 
 # define SPACE_NEED_TO_RELOCATE_TEMPLATE(s)                                   \
     need_to_relocate      |= s->need_to_relocate();                           \

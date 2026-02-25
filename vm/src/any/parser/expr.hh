@@ -132,9 +132,9 @@ class Constant: public Expr {
 
 class Integer: public Constant {
  public:
-  Integer(int32 v, Parser* p) : Constant(as_smiOop(v), p) {}
+  Integer(smi v, Parser* p) : Constant(as_smiOop(v), p) {}
 
-  Integer(int32 v, const char* start, const char* end, const char* file, fint line, fint col, Parser* p)
+  Integer(smi v, const char* start, const char* end, const char* file, fint line, fint col, Parser* p)
     : Constant(as_smiOop(v), start, end, file, line, col, p) {}
   
   void Print();

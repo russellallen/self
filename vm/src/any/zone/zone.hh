@@ -57,7 +57,7 @@ class zone: public CHeapObj {
   static int32 frame_chain_nesting;   // are nmethods on stacks chained? (>0 = yes)
 
   
-  zone(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize);
+  zone(smi& codeSize, smi& stubSize, smi& depSize, smi& debugSize);
   void* operator new(size_t size) {
     return AllocateHeap(size, "nmethod zone header"); }
   void clear();
@@ -169,18 +169,18 @@ class zone: public CHeapObj {
   
  // constructor helpers:
  private:
-  void round_sizes(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize);
-  
+  void round_sizes(smi& codeSize, smi& stubSize, smi& depSize, smi& debugSize);
+
   void set_sizes_for_statically_allocated_code_and_stub_area(
-         int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize,
+         smi& codeSize, smi& stubSize, smi& depSize, smi& debugSize,
          char*& stb);
   void set_sizes_and_allocate_code_and_stub_area(
-         int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize,
+         smi& codeSize, smi& stubSize, smi& depSize, smi& debugSize,
          char*& stb);
-         
-  void allocate_pieces(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize, char* stb);
+
+  void allocate_pieces(smi& codeSize, smi& stubSize, smi& depSize, smi& debugSize, char* stb);
   void check_allocations();
-  void allocate_trapdoors_at_zone_base_stealing_from_code_space(int32& codeSize);
+  void allocate_trapdoors_at_zone_base_stealing_from_code_space(smi& codeSize);
   void allocate_idManager(fint maxNMs);
   void setup_LRU();
   void allocate_useCount(fint maxNMs);
@@ -223,6 +223,8 @@ extern int32* useCount; // table with counts for unoptimized methods
 
 class zone: public CHeapObj {
  public:
+  static int32 frame_chain_nesting;
+  zone* sZone;  // stub zone (not used without JIT)
   bool contains(void *p) { Unused(p); return false;}
   int32 capacity() { return 0; }
   void compactAll() {}
@@ -234,13 +236,13 @@ class zone: public CHeapObj {
   void flushInlineCache() {}
   void print_nmethod_histogram(fint size) { Unused(size); }
   void print_stats() {}
-  zone(int32& iSize, int32& dSize, int32& sSize, int32& stSize) {
+  zone(smi& iSize, smi& dSize, smi& sSize, smi& stSize) {
     iSize = dSize = sSize = stSize = 0; }
   void switch_pointers(oop from, oop to) { Unused(from); Unused(to); }
   void  read_snapshot( FILE* f);
   void write_snapshot( FILE* f);
   void fixup() {}
-  void verify() {}
+  bool verify() { return true; }
   void clear() {}
 
   

@@ -18,7 +18,11 @@ static const fint TicksPerSec = 50;
 
 static SlidingAverage* compileAvg;
 static void compileAvgTracker() {
+# if defined(FAST_COMPILER) || defined(SIC_COMPILER)
   compileAvg->add(activeCompiler ? 100 / TicksPerSec : 0);
+# else
+  compileAvg->add(0);
+# endif
 }
 
 void recompile_init() {
@@ -35,7 +39,7 @@ void recompile_init() {
   
   compilers=       NEW_C_HEAP_ARRAY(fint, nstages);
   compileCounts=   NEW_C_HEAP_ARRAY( smi, nstages);
-  recompileLimits= NEW_C_HEAP_ARRAY(fint, max(0, nstages - 1));
+  recompileLimits= NEW_C_HEAP_ARRAY(fint, max(fint(0), nstages - 1));
   
   switch (nstages) {
    case 0:  break;
@@ -106,7 +110,7 @@ fint currentCompiler() {
   lev =  min(lev, nstages - 1);
   if (lev < 0) {
     warning1("incorrect recompilee level %ld", lev);
-    lev = min(nstages - 1, 1);  // fix this
+    lev = min(nstages - 1, fint(1));  // fix this
   }
   return compilers[lev];
 }
@@ -959,7 +963,8 @@ static char* continueRecompile2(RecompBuf* buf, frame* last) {
 #   if TARGET_ARCH == SPARC_ARCH
       ContinueAfterReturnTrap(pc, sp);
 #   elif TARGET_ARCH ==  PPC_ARCH  \
-     ||  TARGET_ARCH == I386_ARCH
+     ||  TARGET_ARCH == I386_ARCH  \
+     ||  TARGET_ARCH == X86_64_ARCH
       fatal("xxx unimp mac, unimp intel: where is result?");
       // ContinueAfterReturnTrap(result, pc, sp);
 #   else
@@ -1692,7 +1697,7 @@ bool Recompilation::checkForActivationMirrors() {
   if (vfo == NULL) return false;
 
   frame* start = stack.nth(0)->fr;
-  frame* end   = stack.nth(max(0, rdepth))->fr;
+  frame* end   = stack.nth(max(fint(0), rdepth))->fr;
 
   assert( start->vfo_locals_of_home_frame() <= end->vfo_locals_of_home_frame(),
           "oops");

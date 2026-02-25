@@ -1,4 +1,4 @@
-# if  TARGET_ARCH == I386_ARCH
+# if  TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH
 /* Sun-$Revision: 1.6 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -84,6 +84,17 @@ void InterruptedContext::setupPreemptionFromSignal() {
 
 # elif TARGET_OS_VERSION == LINUX_VERSION
 
+#   if TARGET_ARCH == X86_64_ARCH
+  char** InterruptedContext::pc_addr() {
+    return  (char**) &scp->uc_mcontext.gregs[REG_RIP];
+  }
+  int* InterruptedContext::sp_addr() {
+    return  (int*) &scp->uc_mcontext.gregs[REG_RSP];
+  }
+  int* InterruptedContext::ebp_addr() {
+    return  (int*) &scp->uc_mcontext.gregs[REG_RBP];
+  }
+#   else
   char** InterruptedContext::pc_addr() {
     return  (char**) &scp->uc_mcontext.gregs[REG_EIP]; // see /usr/include/asm-i386/sigcontext.h
   }
@@ -93,6 +104,7 @@ void InterruptedContext::setupPreemptionFromSignal() {
   int* InterruptedContext::ebp_addr() {
     return  (int*) &scp->uc_mcontext.gregs[REG_EBP];
   }
+#   endif
 
 # elif TARGET_OS_VERSION == NETBSD_VERSION
 
@@ -168,6 +180,20 @@ void InterruptedContext::print_registers() {
   # elif TARGET_OS_VERSION == LINUX_VERSION
 
     greg_t *gregs = ic->scp->uc_mcontext.gregs;
+#   if TARGET_ARCH == X86_64_ARCH
+    lprintf("rax       = 0x%lx\n", gregs[REG_RAX]);
+    lprintf("rbx       = 0x%lx\n", gregs[REG_RBX]);
+    lprintf("rcx       = 0x%lx\n", gregs[REG_RCX]);
+    lprintf("rdx       = 0x%lx\n", gregs[REG_RDX]);
+    lprintf("rsi       = 0x%lx\n", gregs[REG_RSI]);
+    lprintf("rdi       = 0x%lx\n", gregs[REG_RDI]);
+    lprintf("rbp       = 0x%lx\n", gregs[REG_RBP]);
+    lprintf("rsp       = 0x%lx\n", gregs[REG_RSP]);
+    lprintf("efl       = 0x%lx\n", gregs[REG_EFL]);
+    lprintf("rip       = 0x%lx\n", gregs[REG_RIP]);
+    lprintf("trapno    = 0x%lx\n", gregs[REG_TRAPNO]);
+    lprintf("err       = 0x%lx\n", gregs[REG_ERR]);
+#   else
     lprintf("eax       = 0x%x\n", gregs[REG_EAX]);
     lprintf("ebx       = 0x%x\n", gregs[REG_EBX]);
     lprintf("ecx       = 0x%x\n", gregs[REG_ECX]);
@@ -187,6 +213,7 @@ void InterruptedContext::print_registers() {
     lprintf("trapno    = 0x%x\n", gregs[REG_TRAPNO]);
     lprintf("err       = 0x%x\n", gregs[REG_ERR]);
     lprintf("uesp      = 0x%x\n", gregs[REG_UESP]);
+#   endif
 
   # elif TARGET_OS_VERSION == NETBSD_VERSION
 

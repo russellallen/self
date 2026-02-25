@@ -19,12 +19,17 @@ vtbls::vtbls() {
 }
 
 # define READ_SNAPSHOT_VTBLS_TEMPLATE(m)                                      \
-    OS::FRead_swap(&old_vtbl_values[MAP_TYPE_NAME(m)], sizeof(VtblPtr_t), file);   \
+    { smi snap_vtbl_size = (Memory->snapshot_oopSize == oopSize)              \
+        ? (smi)sizeof(VtblPtr_t) : Memory->snapshot_oopSize;                 \
+      old_vtbl_values[MAP_TYPE_NAME(m)] = 0; /* clear upper bytes */         \
+      OS::FRead_swap(&old_vtbl_values[MAP_TYPE_NAME(m)], snap_vtbl_size, file); \
+    }                                                                         \
     old_are_correct = old_are_correct &&                                      \
     (old_vtbl_values[MAP_TYPE_NAME(m)] == vtbl_values[MAP_TYPE_NAME(m)]);
 
 void vtbls::read_snapshot(FILE* file) {
-  old_are_correct = !Memory->is_snapshot_other_endian;
+  old_are_correct = !Memory->is_snapshot_other_endian
+                    && (Memory->snapshot_oopSize == oopSize);
   FOR_ALL_MAP_TYPES(READ_SNAPSHOT_VTBLS_TEMPLATE);
 }
 

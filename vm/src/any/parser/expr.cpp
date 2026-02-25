@@ -20,15 +20,15 @@ Expr* Expr::AddArgs(ArgSlotList* args, Parser* parser) {
 
 oop Expr::Eval(bool printing, bool inSlot, bool mustAllocate) {
   Unused(inSlot);
-  
+
   slotsOop doItMethod;
   { ResourceMark m;             // release resources after compile
-    
+
     if (PrintParsedExpressions) {
       Print();
       lprintf("\n");
     }
-    
+
     ByteCode b(mustAllocate);
     if (! GenByteCodes(&b, 0, false) || NLRSupport::have_NLR_through_C()) return badOop;
     if (!b.Finish(source_file, source_line, source_start, source_length)) {
@@ -42,7 +42,7 @@ oop Expr::Eval(bool printing, bool inSlot, bool mustAllocate) {
       lprintf("evaluating expr in context of lobby\n");
     }
   }
-  
+
   oop res = currentProcess->runDoItMethod(Memory->lobbyObj, doItMethod);
 
   if (printing && res != badOop && !postReadSnapshot) {

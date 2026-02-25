@@ -138,8 +138,8 @@ CountStub::CountStub(nmethod* target, pc_t entryPoint,
   fint id = idManager->newID();
   sendCounts[id] = 0;
   copy_bytes(patt->pattern, insts(), _instsLen);
-  set_count_addr(patt, (int32)&sendCounts[id]);
-  set_callee(patt, (int32)entryPoint);
+  set_count_addr(patt, (int32)(smi)&sendCounts[id]);
+  set_callee(patt, (int32)(smi)entryPoint);
   MachineCache::flush_instruction_cache_range(insts(), insts() + patt->instsSize);
   MachineCache::flush_instruction_cache_for_debugging();
   if (sd_nmln) initSendDesc(sd_nmln);
@@ -209,7 +209,7 @@ void CountStub::forwardLinkedSend(nmln* l, nmethod* to)  {
 void CountStub::rebind(nmethod* nm, pc_t entryPoint) {
   if (entryPoint == NULL) entryPoint= nm->entryPointFor(sender_sendDesc());
   nmLink.rebind(&nm->linkedSends);
-  set_callee((int32)entryPoint);
+  set_callee((int32)(smi)entryPoint);
 }
 
 // change entry point as caller has changed (sendDesc to pic)
@@ -217,7 +217,7 @@ void CountStub::setVerifiedEntryPoint(nmethod *nmHint) {
   assert(nmHint == NULL || nmHint == target(), "wrong hint");
   nmethod *nm= nmHint ? nmHint : target();
   char *entryPoint= nm->verifiedEntryPoint();
-  set_callee((int32)entryPoint);
+  set_callee((int32)(smi)entryPoint);
 }
 
 void CountStub::moveTo_inner(NCodeBase* p, int32 delta, int32 /* size */ ) {
@@ -234,7 +234,7 @@ void CountStub::moveTo_inner(NCodeBase* p, int32 delta, int32 /* size */ ) {
 
 void CountStub::shift_target(nmln* l, int32 delta) {
   assert(l == &nmLink, "wrong link");  UsedOnlyInAssert(l);
-  set_callee(int32(jump_addr() + delta));
+  set_callee((int32)(smi)(jump_addr() + delta));
   MachineCache::flush_instruction_cache_for_debugging();
 }
 
@@ -271,9 +271,9 @@ void CountStub::deallocate() {
   if (sd) sd->reset_jump_addr();
 }
 
-fint CountingStub::size() {
+int32 CountingStub::size() {
   return sizeof(CountStub) + CountStub::pattern[Counting]->instsSize; }
-fint ComparingStub::size() {
+int32 ComparingStub::size() {
   return sizeof(CountStub) + CountStub::pattern[Comparing]->instsSize; }
 
 void CountStub::print() {
@@ -348,7 +348,7 @@ CountStub* findCountStub(void* addr) {
 
 IDManager::IDManager(fint N, IDOverflowHandler handler, caddr_t desiredAddress) {
   n = N; growHandler = handler;
-  int size= N * sizeof(int32);
+  smi size= N * sizeof(int32);
   data= (int32*)OS::allocate_idealized_page_aligned(size, "ID manager data", desiredAddress);
   init();
 }
@@ -362,8 +362,8 @@ IDManager::IDManager(FILE* f, caddr_t desiredAddress) {
   OS::FRead_swap(this, sizeof(IDManager), f);
   growHandler= shiftCounts;
   int32 *old_data= data;
-  int orig_size= n * sizeof(int32);
-  int size= orig_size;
+  smi orig_size= n * sizeof(int32);
+  smi size= orig_size;
   if (okToUseCodeFromSnapshot) {
     data= (int32*)OS::allocate_idealized_page_aligned(size, "ID manager data", desiredAddress);
   }

@@ -1,4 +1,4 @@
-# ifdef __i386__
+# if defined(__i386__) || defined(__x86_64__)
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -22,4 +22,4 @@
   bool check_for_overwriting_patched_frame_saved_outgoing_args(oop* p, fint idx = -1);
 
 
-# endif // __i386__
+# endif // defined(__i386__) || defined(__x86_64__)

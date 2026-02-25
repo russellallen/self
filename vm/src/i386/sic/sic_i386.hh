@@ -1,4 +1,4 @@
-# ifdef __i386__
+# if defined(__i386__) || defined(__x86_64__)
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -12,12 +12,12 @@
 
 
 public:
-  int32  max_no_of_outgoing_args_and_rcvr();
-  int32  number_of_memory_locals();
+  fint   max_no_of_outgoing_args_and_rcvr();
+  fint   number_of_memory_locals();
 
 public:
   Label* nlrLabel;     // used for caching NLR return
 
 private:
 
-# endif // __i386__
+# endif // defined(__i386__) || defined(__x86_64__)

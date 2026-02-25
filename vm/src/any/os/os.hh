@@ -46,8 +46,8 @@ class OS {
   // returns true if allocate_idealized_page_aligned should get desiredAddr below
   static bool   is_directed_allocation_supported();
   
-  static char*  allocate_idealized_page_aligned(int32 &size, const char* name,
-                                                caddr_t desiredAddr= 0, 
+  static char*  allocate_idealized_page_aligned(smi &size, const char* name,
+                                                caddr_t desiredAddr= 0,
                                                 bool mustAllocate= true);
   static void   allocate_failed(const char* what);
 
@@ -71,6 +71,7 @@ class OS {
   static const char* mode_for_binary(const char*);
   static void  FRead(        void* buffer, int32 size, FILE* stream);
   static void  FRead_swap(   void* buffer, int32 size, FILE* stream);
+  static void  FRead_oop(   oop*  dest,                FILE* stream); // reads snapshot_oopSize bytes, widens to oop
   static void  FWrite( const void* buffer, int32 size, FILE* stream);
   static void  read_or_seek( void* buffer, int32 size, FILE* stream);
 

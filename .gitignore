@@ -12,3 +12,4 @@
 build/
 objects/glue/test*
 
+.aider*

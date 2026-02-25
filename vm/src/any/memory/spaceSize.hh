@@ -19,7 +19,7 @@
         template(deps_size)            \
         template(debug_size)           \
         
-#define SIZE_DECLARATION_TEMPLATE(s) int32 s;
+#define SIZE_DECLARATION_TEMPLATE(s) smi s;
 
 class spaceSizes {
 public:

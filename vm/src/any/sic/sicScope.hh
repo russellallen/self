@@ -699,8 +699,8 @@
                           MergeNode*& done, PReg* result, bool failure = true);
     ConstPReg* truePR();
     ConstPReg* falsePR();
-    void markReg(PReg*, int, int) {}
-    void allocateDown(PReg*, int, int, bool) {}
+    void markReg(PReg*, fint, fint) {}
+    void allocateDown(PReg*, fint, fint, bool) {}
    public:
     void allocateReg(PReg*, bool okToOverlap = false) {
       Unused(okToOverlap);  ShouldNotCallThis(); }

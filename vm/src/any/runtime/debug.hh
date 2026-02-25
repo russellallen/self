@@ -491,7 +491,7 @@ class FlagSettingInt {
 # define FOR_ALL_PPC_BOOLEAN_DEBUG_PRIMS(template)
 # endif
 
-# if TARGET_ARCH == I386_ARCH
+# if TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH
   static const bool UseByteMapBaseReg = false; // doesn't seem worth it for I386 -- dmu 5/06
   static const bool FastMapTest       = false; // cannot do this, no alignment error -- dmu 5/06
   

@@ -32,7 +32,7 @@ int32 hash(const char* name, int32 len) {
  
   // hashpjw from Dragon book (ASU p. 436), except increment differently
  
-  assert(BitsPerByte * BytesPerWord == 32, "assumes 32-bit words");
+  assert(BitsPerByte * BytesPerWord >= 32, "assumes at least 32-bit words");
   long unsigned h = 0;
   long unsigned g;
   const char* s = name;
@@ -198,13 +198,13 @@ void stringTable::read_snapshot(FILE* file) {
     if (len == 0) e->clear();
     else {
       stringOop s;
-      OS::FRead_swap(&s, oopSize, file);
+      OS::FRead_oop((oop*)&s, file);
       if (len == 1) e->set_string(s);
       else {
         stringTableLink* head = Memory->string_table->new_link(s);
         stringTableLink* tail = head;
         for (; len > 1; len --) {
-          OS::FRead_swap(&s, oopSize, file);
+          OS::FRead_oop((oop*)&s, file);
           tail->next = Memory->string_table->new_link(s);
           tail       = tail->next;
         }

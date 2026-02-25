@@ -46,7 +46,7 @@ class interpreter: public abstract_interpreter {
 
   oop* locals;
   int32 _length_locals;
-  int32 minOffset;
+  smi minOffset;
   bool hasParentLocalSlot;
   oop* cloned_blocks; // NULL or cloned block
   oop* stack;
@@ -69,10 +69,29 @@ class interpreter: public abstract_interpreter {
   bool               restartSend;
   
   interpreter* parentI; // interp of lexical parent or NULL
-  
+
+  // On x86_64 (interpreter-only, no JIT), frame-based interpreter
+  // lookup doesn't work (arguments are in registers, not on the stack).
+  // Maintain a linked list of active interpreters so we can find
+  // the interpreter for a given frame pointer.
+  frame*        _my_frame;      // frame ptr of our interpret() C function
+  interpreter*  _prev_interp;   // linked list of active interpreters
+  static interpreter* _active_interp_list;
+
+  static interpreter* find_interpreter_for_frame(frame* f);
+
+# if TARGET_ARCH == X86_64_ARCH
+  // On x86_64 interpreter-only builds, ContinueNLRFromC and c_entry_point()
+  // don't work.  Use setjmp/longjmp for NLR unwinding instead.
+  jmp_buf       _nlr_jmpbuf;
+
+  static interpreter* active_interp();
+  jmp_buf&      nlr_jmpbuf()          { return _nlr_jmpbuf; }
+# endif
+
  protected:
    frame* _block_scope_or_NLR_target;
-   
+
    inline frame* block_scope_or_NLR_target();
 
  public:

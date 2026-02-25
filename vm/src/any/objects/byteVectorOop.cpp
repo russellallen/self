@@ -17,7 +17,7 @@ byteVectorOop byteVectorOopClass::copy(fint s, bool mustAlloc,
   if (x == NULL)
     return byteVectorOop(failedAllocationOop);
   copy_oops(oops(), x, s);
-  copy_words((int32*) bytes(), (int32*) nb, l);
+  memcpy(nb, bytes(), length());
   byteVectorOop r = as_byteVectorOop(x);
   r->set_bytes(nb);
   if (cs) r->fix_generation(s);
@@ -27,14 +27,13 @@ byteVectorOop byteVectorOopClass::copy(fint s, bool mustAlloc,
 byteVectorOop byteVectorOopClass::grow_bytes(fint delta, bool mustAllocate) {
   fint s = size();
   fint nlen = length() + delta;
-  fint l= lengthWords();
   fint nl= ::lengthWords(nlen);
   char* nb;
   oop* x= Memory->alloc_objs_and_bytes(s, nl, nb, mustAllocate);
   if (x == NULL)
     return byteVectorOop(failedAllocationOop);
   copy_oops(oops(), x, s);
-  copy_words((int32*) bytes(), (int32*) nb, l);
+  memcpy(nb, bytes(), length());
   byteVectorOop r = as_byteVectorOop(x);
   r->set_length(nlen);
   r->set_bytes(nb);
@@ -52,7 +51,7 @@ byteVectorOop byteVectorOopClass::shrink_bytes(fint delta, bool mustAllocate) {
   if (x == NULL)
     return byteVectorOop(failedAllocationOop);
   copy_oops(oops(), x, s);
-  copy_words((int32*) bytes(), (int32*) nb, nl);
+  memcpy(nb, bytes(), nlen);
   byteVectorOop r = as_byteVectorOop(x);
   r->set_length(nlen);
   r->set_bytes(nb);
@@ -75,7 +74,7 @@ byteVectorOop byteVectorOopClass::insert(fint s, fint change_point,
   oop* p = oops();
   copy_oops(p, x, change_point);
   copy_oops(p + change_point, x + change_point + delta, s - change_point);
-  copy_words((int32*) bytes(), (int32*) nb, l);
+  memcpy(nb, bytes(), length());
   byteVectorOop r = as_byteVectorOop(x);
   r->set_bytes(nb);
   // can't do fix_generation(), since inserted space isn't initialized yet
@@ -100,7 +99,7 @@ byteVectorOop byteVectorOopClass::remove(fint s, fint change_point,
   copy_oops(p, x, change_point);
   copy_oops(p + change_point + delta, x + change_point,
             s - change_point - delta);
-  copy_words((int32*) bytes(), (int32*) nb, l);
+  memcpy(nb, bytes(), length());
   byteVectorOop r = as_byteVectorOop(x);
   r->set_bytes(nb);
   r->fix_generation(ns);
@@ -134,14 +133,14 @@ byteVectorOop byteVectorOopClass::scavenge(fint size) {
   oop *x= copySpace->alloc_objs_and_bytes_local(size, l, nb);
   if (x == NULL) fatal("out of space in scavenge");
   copy_oops(oops(), x, size);
-  copy_words((int32*) bytes(), (int32*) nb, l);
+  memcpy(nb, bytes(), length());
   byteVectorOop r = as_byteVectorOop(x);
   r->set_bytes(nb);
-  if (is_new) { 
-    r->set_mark(r->mark()->incr_age()); 
-    Memory->age_table->add(r); 
-  } 
-  forward_to(r); 
+  if (is_new) {
+    r->set_mark(r->mark()->incr_age());
+    Memory->age_table->add(r);
+  }
+  forward_to(r);
   return r;
 }
 
@@ -179,7 +178,7 @@ bool byteVectorOopClass::verifyBytesPart(char*& b) {
 }
 
 
-char* byteVectorOopClass::copy_null_terminated(int &Clength) {
+char* byteVectorOopClass::copy_null_terminated(fint &Clength) {
   // Copy the bytes() part. Always add trailing '\0'. If byte vector
   // contains '\0', these will be escaped in the copy, i.e. "....\0...".
   // Clength is set to length of the copy (may be longer due to escaping).

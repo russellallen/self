@@ -13,7 +13,7 @@
 // it to zero when changing the minor or major version
 smi VM_major_version    = 2023;
 smi VM_minor_version    = 1;
-smi VM_snapshot_version = 13;
+smi VM_snapshot_version = (oopSize == 8) ? 14 : 13;
 
 
 universe* Memory;
@@ -38,6 +38,7 @@ universe::universe() {
   minor_version= VM_minor_version;
   snapshot_version= VM_snapshot_version;
   is_snapshot_other_endian= false;
+  snapshot_oopSize= oopSize;  // default; will be overridden for 32-bit snapshots
 
   default_sizes.set_from_defaults();
   scavengeCount= 0;
@@ -57,9 +58,7 @@ universe::universe() {
   current_sizes.cleanup();
 
   map_table= new mapTable;
-  
   string_table = new stringTable;
-
   code= new zone(current_sizes.code_size,
                  current_sizes.pic_size,
                  current_sizes.deps_size,
@@ -67,7 +66,6 @@ universe::universe() {
   age_table = new ageTable;
 
   object_table = NULL;
-
   verify_opts= OS::strdup("nozprSvOmNMi");
 
   if (WorldName)
@@ -331,9 +329,11 @@ void universe::switch_pointers(oop from, oop to) {
 }
 
 
-#define SPACE_SIZE_READ_TEMPLATE(s)                             \
-        if (fscanf(file, STR(s) ": %d\n", &(current_sizes.s)) != 1)   \
-          fatal1("Snapshot format error: %s", STR(s));
+#define SPACE_SIZE_READ_TEMPLATE(s)                                              \
+        { long _tmp;                                                            \
+          if (fscanf(file, STR(s) ": %ld\n", &_tmp) != 1)                      \
+            fatal1("Snapshot format error: %s", STR(s));                        \
+          current_sizes.s = _tmp; }
 
 // leave a space for a - between the $0 and $@
 static const char SNAPSHOT_HEADER[] = "exec Self -s $0   $@\n";
@@ -380,13 +380,14 @@ void universe::read_first_line_in_snapshot_header(FILE *file)
 void universe::read_versions_in_snapshot_header(FILE *file)
 {
   // check versions
-  smi read_major_version, read_minor_version;
+  int read_major_version_i, read_minor_version_i, snapshot_version_i;
   if (fscanf(file, "Version: %d.%d.%d%*[\r\n]",
-             &read_major_version,
-             &read_minor_version,
-             &snapshot_version)    != 3 )
+             &read_major_version_i,
+             &read_minor_version_i,
+             &snapshot_version_i)    != 3 )
     fatalNoMenu("\n\tThe \"Version:\" line in the snapshot could not be parsed.\n");
-      
+  snapshot_version = snapshot_version_i;
+
   // return for snapshots whose version matches the current snapshot version
   if (snapshot_version == VM_snapshot_version)
     return;
@@ -398,37 +399,47 @@ void universe::read_versions_in_snapshot_header(FILE *file)
   bool can_read_snapshot_with_mismatched_version =
         (snapshot_version == 10  &&  VM_snapshot_version == 11)
     || ((snapshot_version == 10 || snapshot_version == 11)  &&  VM_snapshot_version == 12)
-    || ((snapshot_version == 12) && VM_snapshot_version == 13);
+    || ((snapshot_version == 12) && VM_snapshot_version == 13)
+    || ((snapshot_version == 13) && VM_snapshot_version == 14);  // 32-bit → 64-bit
+
+  // Detect 32-bit snapshots being loaded by 64-bit VM
+  if (snapshot_version <= 13 && oopSize == 8) {
+    snapshot_oopSize = 4;
+    lprintf("\n\tLoading 32-bit snapshot (version %d) into 64-bit VM.\n",
+            (int)snapshot_version);
+  }
     
   if (can_read_snapshot_with_mismatched_version)
   	warning6("\n\tThis snapshot was saved using a different version\n"
                  "\tof the Self Virtual Machine (%d.%d.%d) and may behave unexpectedly\n"
                  "\tor not work correctly with this version (%d.%d.%d).\n", 
-                 read_major_version,
-                 read_minor_version,
-                 snapshot_version,
-                 VM_major_version,
-                 VM_minor_version,
-                 VM_snapshot_version);
+                 (int)read_major_version_i,
+                 (int)read_minor_version_i,
+                 (int)snapshot_version,
+                 (int)VM_major_version,
+                 (int)VM_minor_version,
+                 (int)VM_snapshot_version);
 
   if (!can_read_snapshot_with_mismatched_version)
     fatalNoMenu6("\n\tThis snapshot was saved using a different version\n"
                  "\tof the Self Virtual Machine (%d.%d.%d) and will not\n"
-                 "\twork with this version (%d.%d.%d).\n", 
-                 read_major_version,
-                 read_minor_version,
-                 snapshot_version,
-                 VM_major_version,
-                 VM_minor_version,
-                 VM_snapshot_version);
+                 "\twork with this version (%d.%d.%d).\n",
+                 (int)read_major_version_i,
+                 (int)read_minor_version_i,
+                 (int)snapshot_version,
+                 (int)VM_major_version,
+                 (int)VM_minor_version,
+                 (int)VM_snapshot_version);
 
 }
 
 
 void universe::read_timestamp_in_snapshot_header(FILE *file)
 {
-  if (fscanf(file, "Timestamp: %d%*[\r\n]", (int*)&programming_timestamp) != 1)
+  long _tmp;
+  if (fscanf(file, "Timestamp: %ld%*[\r\n]", &_tmp) != 1)
     fatal("Error in snapshot format (timestamp)");
+  programming_timestamp = (smiOop)_tmp;
 }
 
 
@@ -447,7 +458,7 @@ void universe::read_snapshot_code_flag_in_snapshot_header(FILE *file)
   okToUseCodeFromSnapshot= okToUseCodeFromSnapshot && SnapshotCode;
 #   else
   if (SnapshotCode)
-    fatal("Sorry, but this version of Self cannot read snapshots with code");
+    warning("This version of Self has no compilers; ignoring code in snapshot.");
   okToUseCodeFromSnapshot= false;
 #   endif
 }
@@ -619,7 +630,7 @@ void universe::read_snapshot(FILE* file) {
   bool need_to_relocate= false;
   bool need_to_relocate_objs= false;
   APPLY_TO_SPACES(SPACE_NEED_TO_RELOCATE_TEMPLATE);
-  
+
   if (need_to_relocate) {
     APPLY_TO_VM_OOPS(RELOCATE_TEMPLATE);
     APPLY_TO_VM_MAPS(MAP_RELOCATE_TEMPLATE);
@@ -638,19 +649,24 @@ void universe::read_snapshot(FILE* file) {
   old_gen->record_new_pointers();
 
   check_delim(file, code_delim);
-  
+
   code->read_snapshot(file);
 
   APPLY_TO_SPACES(SPACE_FIXUP_MAPS_TEMPLATE);
+
   APPLY_TO_SPACES(SPACE_FIXUP_KILLABLES_TEMPLATE);
-  
+
   if (okToUseCodeFromSnapshot) code->fixup();
-  
+
   check_delim(file, processes_delim);
   processes->read_snapshot(file);
-  
+
   if (need_to_relocate) {
     APPLY_TO_SPACES(SPACE_RELOCATE_BYTES_TEMPLATE);
+  }
+  // After loading a 32-bit snapshot, repack bytes areas to oop alignment
+  if (snapshot_oopSize != 0 && snapshot_oopSize < oopSize) {
+    APPLY_TO_SPACES(SPACE_REPACK_BYTES_TEMPLATE);
   }
   old_gen->coalesce_spaces();
   
@@ -701,7 +717,7 @@ memOop universe::relocate(memOop p) {
 }
 
 #define WRITE_SPACE_SIZES_TEMPLATE(s) \
-        fprintf(snapFile, STR(s) ": %d\n", snap_sizes->s);
+        fprintf(snapFile, STR(s) ": %ld\n", (long)snap_sizes->s);
 
 // these are used during write_snapshot
 static FILE *snapFile;
@@ -731,9 +747,9 @@ bool universe::write_snapshot(const char *fileName,
   OS::FWrite(SNAPSHOT_HEADER, strlen(SNAPSHOT_HEADER), snapFile);
 
   fprintf(snapFile, "Version: %d.%d.%d\n",
-          VM_major_version, VM_minor_version, VM_snapshot_version);
+          (int)VM_major_version, (int)VM_minor_version, (int)VM_snapshot_version);
           
-  fprintf(snapFile, "Timestamp: %d\n", (int)programming_timestamp);
+  fprintf(snapFile, "Timestamp: %ld\n", (long)programming_timestamp);
 
   fprintf(snapFile, "Snapshot code: %c\n", SnapshotCode ? 'y' : 'n');
 

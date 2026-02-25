@@ -8,8 +8,8 @@
 # pragma implementation "preg.hh"
 # include "_preg.cpp.incl"
   
-  int32 PReg::currentNo = 0;
-  int32 BlockPReg::numBlocks = 0;
+  fint PReg::currentNo = 0;
+  fint BlockPReg::numBlocks = 0;
   static ConstPRegBList* constants = 0;
   static PReg* dummyPR;
   const fint PReg::AvgBBIndexLen = 10;
@@ -794,7 +794,7 @@
     assert(desc != BLOCK_PROTO_DESC, "should have been changed");
     SCodeScope* s = (SCodeScope*)desc;
     // s may be invalid (receiver block) - make educated guess
-    if (int(s) < 256 * K) s = NULL;     // not a valid address
+    if (smi(s) < 256 * K) s = NULL;     // not a valid address
     assert(s == NULL || s->isCodeScope(), "should be non-access");
     return s;
   }
@@ -991,11 +991,12 @@
   bool ConstPReg::verify() {
     bool ok = (PReg::verify() && constant->is_map()) || constant->verify();
 # if TARGET_ARCH == SPARC_ARCH
-    if (int32(constant) < maxImmediate && int32(constant) > -maxImmediate
+    if ((smi)(constant) < maxImmediate && (smi)(constant) > -maxImmediate
         && loc != UnAllocated) {
 # elif TARGET_ARCH == PPC_ARCH
-    if (fits_within_si(int32(constant)) && loc != UnAllocated) {
-# elif TARGET_ARCH == I386_ARCH
+    if (fits_within_si((smi)(constant)) && loc != UnAllocated) {
+# elif TARGET_ARCH == I386_ARCH \
+   ||  TARGET_ARCH == X86_64_ARCH
     if (loc != UnAllocated) {
 # endif
       error2("ConstPReg %#lx: could use load immediate to load oop %#lx",

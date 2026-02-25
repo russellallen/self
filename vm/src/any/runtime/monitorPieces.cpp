@@ -217,8 +217,8 @@ void MonitorBar::init() {
 
 
 void MonitorBar::draw(bool incremental) {
-  int32 len1 = min(w,        int32((float)used1() * w / capacity())); 
-  int32 len2 = min(w - len1, int32((float)used2() * w / capacity())); 
+  int32 len1 = min(w,        fint((float)used1() * w / capacity()));
+  int32 len2 = min(w - len1, fint((float)used2() * w / capacity())); 
   assert(len1 >= 0 && len2 >= 0 && len1  + len2 <= w, "wrong bar length");
 
   if (!incremental || len1 != old_len_1 || len2 != old_len_2) {
@@ -294,11 +294,11 @@ void MonitorBar::calculateVMRegion(int32 startAddr, int32 size,
   
   
 void MonitorBar::calculate_VM_stats() {
-  calculateVMRegion(int32(start1()), used1(), in_core_percentage_1, old_len_1);
+  calculateVMRegion((int32)(smi)(start1()), used1(), in_core_percentage_1, old_len_1);
   assert(in_core_percentage_1 >= 0 && in_core_percentage_1 <= 100,
          "wrong percentage");
   if (start2() != NULL) {
-    calculateVMRegion(int32(start2()), used2(), in_core_percentage_2, old_len_2);
+    calculateVMRegion((int32)(smi)(start2()), used2(), in_core_percentage_2, old_len_2);
     assert(in_core_percentage_2 >= 0 && in_core_percentage_2 <= 100,
            "wrong percentage");
   }

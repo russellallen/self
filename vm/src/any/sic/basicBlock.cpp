@@ -381,12 +381,12 @@
           tempRegs->append(r);
           BitVector* bv = new BitVector(nnodes);
           lives->append(bv);
-          fint firstUse = 0, lastUse = nnodes - 1;
+          int32 firstUse = 0, lastUse = nnodes - 1;
           duInfo.info->nth(i)->getLiveRange(firstUse, lastUse);
           bv->addFromTo(firstUse, lastUse);
         }
       } else if (isTempReg(r->loc)) {
-        fint firstUse = 0, lastUse = nnodes - 1;
+        int32 firstUse = 0, lastUse = nnodes - 1;
         if (!r->incorrectDU()) {
           duInfo.info->nth(i)->getLiveRange(firstUse, lastUse);
         } else {
@@ -917,7 +917,7 @@
   static Node** ott_tt;
   static fint ott_dominated;
 
-  static void optimTT(fint index) {
+  static void optimTT(int index) {
     // the type test ott_tt[iindex] dominates ott_tt[ott_dominated]; see if the
     // dominated node can be eliminated
     Node* dominator = ott_tt[index];

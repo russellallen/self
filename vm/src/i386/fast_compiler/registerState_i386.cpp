@@ -40,7 +40,7 @@ Location RegisterState::pickLocal() {
 
 void RegisterState::allocateArgs(fint nargs, bool isPrimCall) {
   Unused(isPrimCall);
-  argDepth = max(argDepth, nargs);
+  argDepth = max(argDepth, (int32)nargs);
   rcvrDepth = 1;
 }
 

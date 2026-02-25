@@ -51,7 +51,7 @@
     assert(!(p->is_mark() || p == badOop), "bad oop");
     if (printing && print) {
       lprintf("  .data ");
-      printX(int32(p), OopOperand);
+      printX(smi(p), OopOperand);
       lprintf("\n");
     }
     if (p->is_mem()) doAddOffset(OopOperand, false, false);

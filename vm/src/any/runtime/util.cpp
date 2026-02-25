@@ -17,21 +17,21 @@ void printIndent() {
 # define DO_DOWN(from) LOOP_UNROLL(count, *--to = from)
 
 void copy_oops_up(oop* from, oop* to, fint count) {
-  assert(maskBits(int32(from), Tag_Size) == 0, "not word aligned");
-  assert(maskBits(int32(to), Tag_Size) == 0, "not word aligned");
+  assert(maskBits(smi(from), Tag_Size) == 0, "not word aligned");
+  assert(maskBits(smi(to), Tag_Size) == 0, "not word aligned");
   assert(count >= 0, "negative count");
   DO_UP(*from++)
   }
 
 void copy_oops_down(oop* from, oop* to, fint count) {
-  assert(maskBits(int32(from), Tag_Size) == 0, "not word aligned");
-  assert(maskBits(int32(to), Tag_Size) == 0, "not word aligned");
+  assert(maskBits(smi(from), Tag_Size) == 0, "not word aligned");
+  assert(maskBits(smi(to), Tag_Size) == 0, "not word aligned");
   assert(count >= 0, "negative count");
   DO_DOWN(*--from)
   }
 
 void set_oops(oop* to, fint count, oop value) {
-  assert(maskBits(int32(to), Tag_Size) == 0, "not word aligned");
+  assert(maskBits(smi(to), Tag_Size) == 0, "not word aligned");
   assert(count >= 0, "negative count");
   DO_UP(value)
   }
@@ -96,7 +96,7 @@ int compare_slot_names(const char *s1, fint l1, const char *s2, fint l2) {
 //  assumes int32 is 4 bytes long
 int compare_bytes(const char* b1, int l1, const char* b2, int l2) {
   int len = min(l1, l2);
-  if (len >= 16  &&  !((int(b1) | int(b2)) & 3)) {
+  if (len >= 16  &&  !((smi(b1) | smi(b2)) & 3)) {
     int32 *i1 = (int32*)b1;
     int32 *i2 = (int32*)b2;
     int    len32 = len >> 2;

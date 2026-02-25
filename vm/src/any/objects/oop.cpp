@@ -172,12 +172,12 @@ oop oopClass::flush_inline_cache_prim() {
 }
 
 oop oopClass::print_memory_histogram_prim(smi size) {
-  Memory->objectSizeHistogram(min(10000, max(size, 0)));
+  Memory->objectSizeHistogram(min((smi)10000, max(size, (smi)0)));
   return this;
 }
 
 oop oopClass::print_nmethod_histogram_prim(smi size) {
-  Memory->code->print_nmethod_histogram(min(10000, max(size, 0)));
+  Memory->code->print_nmethod_histogram(min((smi)10000, max(size, (smi)0)));
   return this;
 }  
 
@@ -216,7 +216,7 @@ oop oopClass::credits_prim() {
   lprintf("\nThe first version of the Self language was designed in 1986 by\n");
   lprintf("David Ungar and Randall B. Smith at Xerox PARC. \n");
   lprintf("\nA series of Self implementations and a graphical programming environment\n"); 
-  lprintf("were built at Stanford University by Craig Chambers, Urs Hšlzle, \n");
+  lprintf("were built at Stanford University by Craig Chambers, Urs Hï¿½lzle, \n");
   lprintf("Ole Agesen, Elgin Lee, Bay-Wei Chang, and David Ungar. \n");
   lprintf("\nThe project continued at Sun Microsystems Laboratories, where it benefited \n");
   lprintf("from the efforts of Randall B. Smith, Mario Wolczko, John Maloney, and \n");
@@ -360,7 +360,7 @@ oop oopClass::unwind_protect_prim(oop doBlock, oop protectBlock) {
                                    NULL, false)
 #   else
 #   define makeALookup(theLookup, r, s) \
-      simpleLookup theLookup(NormalLookupType, MH_NOT_A_RESEND, r, s, NULL)
+      simpleLookup theLookup(NormalLookupType, r, s, NULL, MH_NOT_A_RESEND)
 #   endif
         
     makeALookup( L, doBlock, VMString[VALUE] );

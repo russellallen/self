@@ -23,4 +23,4 @@ const fint Num_Tags     = nthBit(Tag_Size);
 const fint Float_Tag_bit_i386 = 1; // if this is on, and not a mark, must be float, numbered for Intel
 const fint   Mem_Tag_bit_i386 = 0; // if this is on, and not a mark, must be mem
 
-# define clearTag(oop)  ((int32(oop)) & ~Tag_Mask)
+# define clearTag(oop)  ((smi(oop)) & ~Tag_Mask)

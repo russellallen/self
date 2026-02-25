@@ -2,14 +2,22 @@
 
 # CPU detection
 
-if(CMAKE_SYSTEM_PROCESSOR MATCHES "^Intel" OR
-   CMAKE_SYSTEM_PROCESSOR MATCHES "^i.86" OR
-   CMAKE_SYSTEM_PROCESSOR MATCHES "^x86_")
-  
+if(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" OR
+   CMAKE_SYSTEM_PROCESSOR STREQUAL "AMD64")
+
+  # Reuse i386 platform sources for now (no vm/src/x86_64/ yet)
+  set(platform_processor "i386")
+  set(TARGET_ARCH       "X86_64_ARCH")
+  set(HOST_ARCH         "X86_64_ARCH")
+
+elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^Intel" OR
+       CMAKE_SYSTEM_PROCESSOR MATCHES "^i.86" OR
+       CMAKE_SYSTEM_PROCESSOR MATCHES "^x86_")
+
   set(platform_processor "i386")
   set(TARGET_ARCH       "I386_ARCH")
   set(HOST_ARCH         "I386_ARCH")
-  
+
 elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^powerpc" OR
        CMAKE_SYSTEM_PROCESSOR MATCHES "^Power" OR
        CMAKE_SYSTEM_PROCESSOR MATCHES "^ppc")

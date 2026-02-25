@@ -77,14 +77,14 @@ class addrDesc {
   void  set_instr_referent(OopNCode* m, void* newVal);
   
   pc_t referent(OopNCode* m) {
-    return isEmbedded() ? instr_referent(m) : *addr(m) + (isRelative() ? int32(addr(m)) + BytesPerWord : 0); }
+    return isEmbedded() ? instr_referent(m) : *addr(m) + (isRelative() ? smi(addr(m)) + BytesPerWord : 0); }
   
   void  set_referent(OopNCode* m, void* newVal) {
     if (isEmbedded()) {
       set_instr_referent(m, newVal);
     } else {
       char **a= addr(m);
-      *a= (pc_t)newVal - (isRelative() ? int32(a + 1): 0);
+      *a= (pc_t)newVal - (isRelative() ? smi(a + 1): 0);
       MachineCache::flush_instruction_cache_word(a);
     }
   }

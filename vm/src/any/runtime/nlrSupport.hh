@@ -21,19 +21,19 @@ class NLRSupport /* AllStatic */ {
 
   // accessors for NLR vars above:
   static oop    NLR_result_from_C();
-  static int32  NLR_home_from_C();
+  static smi    NLR_home_from_C();
   static int32  NLR_home_ID_from_C();
-  
+
   static void   set_NLR_result_from_C(oop x);
-  static void   set_NLR_home_from_C(int32 x);
+  static void   set_NLR_home_from_C(smi x);
   static void   set_NLR_home_ID_from_C(int32 x);
-  
-  
+
+
   // for non-local returns coming from C
   static void volatile continue_NLR_into_Self(bool removePatches);
                                                    // to continue the NLR after C cleanup
 
-  static void save_NLR_results(oop res, int32 targetFrame = 0, int32 targetID = 0);
+  static void save_NLR_results(oop res, smi targetFrame = 0, int32 targetID = 0);
 
   static bool is_bad_home_reference(char* addr);
   

@@ -124,7 +124,9 @@ void init_globals() {
   UNIX_INIT_DO(CALL_TEMPLATE)
 # endif
 
-if (Assembler::do_the_tests) Assembler::test(); 
+# if defined(FAST_COMPILER) || defined(SIC_COMPILER)
+if (Assembler::do_the_tests) Assembler::test();
+# endif
 }
 
 void exit_globals() {

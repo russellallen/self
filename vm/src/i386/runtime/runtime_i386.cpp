@@ -1,4 +1,4 @@
-# if  TARGET_ARCH == I386_ARCH
+# if  TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -40,7 +40,7 @@ void volatile DiscardStack() {
 
 
 char* adjust_initial_SP(char* init_SP) {
-  int r = (int)init_SP - oopSize; // incase we want to push a parameter
+  smi r = (smi)init_SP - oopSize; // incase we want to push a parameter
   r -= frame_alignment_offset * BytesPerWord;
   return (char*)(r & ~(frame_word_alignment * BytesPerWord  -  1)) + frame_alignment_offset * BytesPerWord; // apple docs says 16-byte alignment
 }

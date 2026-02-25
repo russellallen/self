@@ -55,10 +55,18 @@ typedef void (*process_p)();
 class Process: public CHeapObj {
   char* suspendedSP;    // process state - saved in runtime_(sparc_mac_ppc).s
   char* suspendedPC;
-  
+
   bool pcWasSet; // Intel needs to know this
-  
+
   Process* next;
+
+# if TARGET_ARCH == X86_64_ARCH
+ public:
+  // Per-process interpreter list for x86_64 interpreter-only builds.
+  // The global _active_interp_list doesn't work correctly because
+  // process switches interleave push/pop operations from different stacks.
+  class interpreter* active_interp_list;
+# endif
   Stack stk;
   oop method;           // top-level doIt method
   PreservedList preservedList;

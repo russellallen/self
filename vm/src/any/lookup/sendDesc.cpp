@@ -159,7 +159,7 @@ void sendDesc::rebind(nmethod* nm, char* addr, CountStub *cs_from_pic) {
               "count stub from pic doesn't match send desc");
     set_jump_addr(cs_from_pic->insts());
     dependency()->rebind(&cs_from_pic->sdLink);
-    cs_from_pic->set_callee((int32)addr);
+    cs_from_pic->set_callee((smi)addr);
   } else if (UseAgingStubs && nm->isYoung()) {
     // need to insert an aging stub
     if (oldcs) {
@@ -611,6 +611,4 @@ nmethod* sendDesc::lookup_compile_and_backpatch( compilingLookup* L ) {
   return nm;
 }
 
-# else // defined(FAST_COMPILER) || defined(SIC_COMPILER)
-  void sendDesc::init() { }
 # endif // defined(FAST_COMPILER) || defined(SIC_COMPILER)

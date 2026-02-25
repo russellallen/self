@@ -204,7 +204,7 @@ bool OopNCode::code_oops_do(oopsDoFn f) {
 
 bool NCodeBase::verify2(const char* name) {
   bool r = true;
-  if ((int32)this & (oopSize - 1)) {
+  if ((smi)this & (oopSize - 1)) {
     error2("alignment error in %s at %#lx", name, this);
     r = false;
   }

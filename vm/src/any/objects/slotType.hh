@@ -42,12 +42,12 @@ class slotTypeClass {
   slotTypeClass(slotTypeClass &s) { Unused(s);  ShouldNotCallThis(); }
   
   // accessors
-  fint slot_type()    { return maskBits(int32(this), slot_type_mask); }
+  fint slot_type()    { return maskBits(smi(this), slot_type_mask); }
   bool is_obj_slot()  { return slot_type() == obj_slot_type; }
   bool is_map_slot()  { return slot_type() == map_slot_type; }
   bool is_arg_slot()  { return slot_type() == arg_slot_type; }
-  bool is_vm_slot()   { return isSet(int32(this), is_vm_slot_shift); }
-  bool is_parent()    { return isSet(int32(this), is_parent_shift); }
+  bool is_vm_slot()   { return isSet(smi(this), is_vm_slot_shift); }
+  bool is_parent()    { return isSet(smi(this), is_parent_shift); }
   
 };
 
@@ -73,15 +73,15 @@ class slotTypeClass {
 
 // other macros
 
-# define MAP_SLOT(stype)  (slotType( (int32(stype) & ~slot_type_mask) \
+# define MAP_SLOT(stype)  (slotType( (smi(stype) & ~slot_type_mask) \
                                    | map_slot_type))
 
-# define ARG_SLOT(stype)  (slotType( (int32(stype) & ~slot_type_mask) \
+# define ARG_SLOT(stype)  (slotType( (smi(stype) & ~slot_type_mask) \
                                    | arg_slot_type))
 
-# define OBJ_SLOT(stype)  (slotType( (int32(stype) & ~slot_type_mask) \
+# define OBJ_SLOT(stype)  (slotType( (smi(stype) & ~slot_type_mask) \
                                    | obj_slot_type))
 
 # define SET_BASIC_SLOT_TYPE(stype, t)  \
-     (slotType( (int32(stype) & ~slot_type_mask) \
-              | (int32(t    ) &  slot_type_mask) ))
+     (slotType( (smi(stype) & ~slot_type_mask) \
+              | (smi(t    ) &  slot_type_mask) ))

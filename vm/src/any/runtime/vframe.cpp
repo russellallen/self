@@ -795,7 +795,7 @@ bool interpreted_vframe::is_primCall() {
 }
 
 
-fint abstract_vframe::bci() {
+int32 abstract_vframe::bci() {
   methodMap* mm = (methodMap*) method()->map();
   if (real_bci() == PrologueBCI) {
     return abstract_interpreter_method_info(mm).firstBCI();
@@ -815,7 +815,11 @@ abstract_vframe* abstract_vframe::get_sender(bool skipC) {
   frame* f = skipC ? fr->selfSender() : fr->sender();
   if ( f == NULL  ||  !f->is_self_frame() )
     return NULL;
+#if defined(FAST_COMPILER) || defined(SIC_COMPILER)
   return  new_vframe(f, is_compiled() ? as_compiled()->reg_loc()->climb_to_frame(f) : NULL);
+#else
+  return  new_vframe(f, (RegisterLocator*)NULL);
+#endif
 }
 
 // factor out common case
@@ -1142,9 +1146,9 @@ void abstract_vframe::enumerate_families(enumeration* e) {
   smi  hit_num;
 
   maps[num_maps] = m; // Place sentinel
-  oop* matching_cell = (oop*) vectorfind_next_match((int32*) maps, 
-                                                    (int32*) &m, 1,
-                                                    (int32*) &hit_num);
+  oop* matching_cell = (oop*) vectorfind_next_match((smi*) maps,
+                                                    (smi*) &m, 1,
+                                                    &hit_num);
   assert( matching_cell <= &maps[num_maps], "match out of area");
   if (matching_cell != &maps[num_maps]) {
     Process* p = processes->stackFor(fr)->process;
@@ -1165,8 +1169,10 @@ abstract_vframe* new_vframe(frame* f, RegisterLocator* r) {
 
 # else
 
+  // Without compilers, all Self frames should be interpreted.
   ShouldNotReachHere();
-  return (abstract_vframe*)NULL;
+  Unused(r);
+  return NULL;
 
 # endif
 }
@@ -1178,7 +1184,7 @@ abstract_vframe* new_vframe(frame* f, smiOop offset, RegisterLocator* r) {
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
-    assert(f->is_compiled_self_frame(), 
+    assert(f->is_compiled_self_frame(),
            "must not call with in-between C frame");
     if ( r == NULL )
       r = RegisterLocator::for_frame(f);
@@ -1187,8 +1193,10 @@ abstract_vframe* new_vframe(frame* f, smiOop offset, RegisterLocator* r) {
 
 # else
 
+    // Without compilers, all Self frames should be interpreted.
     ShouldNotReachHere();
     Unused(offset);
+    Unused(r);
     return NULL;
 
 # endif

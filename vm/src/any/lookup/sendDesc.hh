@@ -64,7 +64,7 @@ class sendDesc {
   void set_jump_addr(char* t);
   
   void shift_jump_addr(int32 delta) {
-    set_jump_addr((char*) ((int32) jump_addr() + delta)); }
+    set_jump_addr((char*) ((smi) jump_addr() + delta)); }
   
   LookupType raw_lookupType() { 
     return *(LookupType*) (((char*)this) + lookupType_offset); }
@@ -208,5 +208,31 @@ extern "C" {
                     oop perform_delegatee,
                     oop arg1);
 }
+
+# else // defined(FAST_COMPILER) || defined(SIC_COMPILER)
+
+// Minimal sendDesc stub for interpreter-only builds.
+// Without a JIT, there are no inline caches, so sendDescs are never created.
+// This stub exists so that runtime code using sendDesc* can compile;
+// frame::send_desc() will always return NULL without compiled code.
+
+class sendDesc {
+ public:
+  static void init() {}
+
+  static sendDesc* first_sendDesc() { return NULL; }
+
+  static sendDesc* sendDesc_from_return_PC(void* retPC) {
+    Unused(retPC); return NULL; }
+
+  bool isPrimCall()             { ShouldNotCallThis(); return false; }
+  char* jump_addr()             { ShouldNotCallThis(); return NULL; }
+  char* call_instruction_addr() { ShouldNotCallThis(); return NULL; }
+  int32 arg_count()             { ShouldNotCallThis(); return 0; }
+  RegisterString mask()         { ShouldNotCallThis(); return 0; }
+  fint endOffset()              { ShouldNotCallThis(); return 0; }
+  bool verify()                 { return true; }
+  void print()                  {}
+};
 
 # endif // defined(FAST_COMPILER) || defined(SIC_COMPILER)

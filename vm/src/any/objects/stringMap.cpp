@@ -58,7 +58,7 @@ bool stringMap::verify(oop obj) {
 void stringMap::print_string(oop obj, char* buf) {
   buf[0] = '\'';
   fint n = stringOop(obj)->length();
-  n = min(n, BUFSIZ - 3);
+  n = min(n, (fint)(BUFSIZ - 3));
   memcpy(buf + 1, stringOop(obj)->bytes(), n);
   buf[ 1 + n ] = '\'';
   buf[ 2 + n ] = '\0';

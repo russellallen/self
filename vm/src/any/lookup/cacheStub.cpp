@@ -55,12 +55,12 @@ nmethod* CacheStub::get_method(fint which) {
   }
 }
 
-int32 CacheStub::getJumpLocsIndex(int32 which) {
+fint CacheStub::getJumpLocsIndex(fint which) {
   // Find index of addrDesc corresponding to nth jump.
   // (Very dependent on form of generated code, of course, but it happens
   // that both PPC and Sparc have the same version.  Other architectures
   // can implement this function on their own, if need be.)
-  int32 immed, index;
+  fint immed, index;
   immed = immediateCount();
   if (which < immed) {
     index = which;    // immediate cases have one addrDesc for the jump
@@ -74,7 +74,7 @@ int32 CacheStub::getJumpLocsIndex(int32 which) {
   return index;
 }
 
-int32 CacheStub::getMapLocsIndex(int32 which) {
+fint CacheStub::getMapLocsIndex(fint which) {
   // Find index of addrDesc corresponding to nth map constant.
   // (Very dependent on form of generated code, of course, but it happens
   // that both PPC and Sparc have the same version.  Other architectures

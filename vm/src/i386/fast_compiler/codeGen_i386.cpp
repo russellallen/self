@@ -17,16 +17,16 @@ CodeGen* theCodeGen;
 void CodeGen::genCountCode(int32* counter) {
   a.Comment("count # calls");
   a.Untested("genCountCode");
-  a.incl( no_reg, (int32)counter, VMAddressOperand);
+  a.incl( no_reg, (int32)(smi)counter, VMAddressOperand);
 }
 
   
 void CodeGen::testStackOverflow(RegisterState* s) {
   a.Comment("stack overflow/interrupt check");
-  a.cmpl( no_reg, int32(&SPLimit), VMAddressOperand, esp);
+  a.cmpl( no_reg, (int32)(smi)(&SPLimit), VMAddressOperand, esp);
   Label ok;
   // jump if no preempt, if esp > SPLimit, remember asm is backwards from intel, sigh
-  a.ja(&ok); 
+  a.ja(&ok);
 
   (void)cPrimCall(intrCheck(), s, true, true, 0);
 
@@ -43,7 +43,7 @@ void CodeGen::testStackOverflowForLoop( Label*& dst,  Label*& nlr, RegisterState
   // (this code lifted from what used to be restart)
   
   a.Comment("stack overflow/interrupt check for loop");
-  a.cmpl( no_reg, int32(&SPLimit), VMAddressOperand, esp);
+  a.cmpl( no_reg, (int32)(smi)(&SPLimit), VMAddressOperand, esp);
   dst = new Label(a.printing);
   a.ja(dst); // ok
   nlr = cPrimCall(intrCheck(), s, false, true, 0);
@@ -53,14 +53,14 @@ void CodeGen::testStackOverflowForLoop( Label*& dst,  Label*& nlr, RegisterState
 
 void CodeGen::smiOop_prologue() {
   a.testl( Tag_Mask, NumberOperand, LRCVR_BDT);
-  a.jne((int32)SendMessage_stub, PVMAddressOperand);
+  a.jne((int32)(smi)SendMessage_stub, PVMAddressOperand);
 }
 
 
 void CodeGen::floatOop_prologue() {
   a.btl( Float_Tag_bit_i386, LRCVR_BDT);
   // if bit set must be hit, otherwise is mark
-  a.jnc( (int32)SendMessage_stub, PVMAddressOperand);
+  a.jnc( (int32)(smi)SendMessage_stub, PVMAddressOperand);
 }
 
 
@@ -68,20 +68,20 @@ void CodeGen::memOop_prologue() {
   a.movl(LRCVR_BDT, Temp1);
   a.btl(Mem_Tag_bit_i386, Temp1);
   // if bit set must be hit, otherwise is mark
-  a.jnc( (int32)SendMessage_stub, PVMAddressOperand);
+  a.jnc( (int32)(smi)SendMessage_stub, PVMAddressOperand);
 
   // check_map:
   a.movl( Temp1, map_offset(), NumberOperand, ebx);
-  a.cmpl( (int32)L->receiverMapOop(), OopOperand, ebx);
-  a.jne((int32)SendMessage_stub, PVMAddressOperand);
+  a.cmpl( (int32)(smi)L->receiverMapOop(), OopOperand, ebx);
+  a.jne((int32)(smi)SendMessage_stub, PVMAddressOperand);
 }
 
 
 void CodeGen::checkOop(Label& general_miss, oop what, Location loc_to_check) {
   a.Comment("checkOop");
   assert(isRegister(loc_to_check), "must be reg");
-  a.cmpl( (int32)what, OopOperand, loc_to_check);
-  a.jne( (int32)SendMessage_stub, PVMAddressOperand );
+  a.cmpl( (int32)(smi)what, OopOperand, loc_to_check);
+  a.jne( (int32)(smi)SendMessage_stub, PVMAddressOperand );
 }
 
 
@@ -94,7 +94,7 @@ void CodeGen::checkRecompilation() {
   a.Comment("test for recompilation");
   int32 countID = theCompiler->countID;
   void* counter = &useCount[countID];
-  a.leal(no_reg, int32(counter), VMAddressOperand, Temp2);
+  a.leal(no_reg, (int32)(smi)(counter), VMAddressOperand, Temp2);
   a.movl(Temp2, 0, NumberOperand, Temp1);
   a.incl(Temp1);
   a.movl(Temp1, Temp2, 0, NumberOperand);
@@ -115,8 +115,8 @@ void CodeGen::checkRecompilation() {
 
   // call recompiler
   int32 fnaddr = diLink 
-               ?   (int32)DIRecompile_stub 
-               :   (int32)Recompile_stub;
+               ?   (int32)(smi)DIRecompile_stub
+               :   (int32)(smi)Recompile_stub;
   a.call(fnaddr, PVMAddressOperand);
   a.hlt();
 
@@ -253,7 +253,7 @@ void CodeGen::prologue(bool isAccessMethod, fint nargs) {
       // this code is rarely generated in practice (recomp is usually true)
       a.Comment("reset unused bit");
       void* unused_addr = &LRUflag[Memory->code->nextNMethodID()];
-      a.movl(0, NumberOperand, no_reg, int32(unused_addr), VMAddressOperand);
+      a.movl(0, NumberOperand, no_reg, (int32)(smi)(unused_addr), VMAddressOperand);
     }
   
     // don't keep uplevel-accessed names in regs
@@ -356,7 +356,7 @@ fint CodeGen::verifyParents(objectLookupTarget* target, Location t, fint count) 
       a.jnc(&miss);                          // branch if parent is not mem oop
 
       a.movl(Temp1, map_offset(), NumberOperand, Temp2);    // load receiver map
-      a.cmpl((int32)targetMap->enclosing_mapOop(), OopOperand, Temp2); // cmp to map constraint
+      a.cmpl((int32)(smi)targetMap->enclosing_mapOop(), OopOperand, Temp2); // cmp to map constraint
       a.je(&ok);               // correct
     }
     
@@ -389,7 +389,7 @@ fint CodeGen::verifyParents(objectLookupTarget* target, Location t, fint count) 
     a.popl(DIInlineCacheReg); // 1 byte, prepare to calculate IC addr below
     a.addl(bytes_from_here_to_after_jmp, NumberOperand, DIInlineCacheReg);  // 3 bytes, finish calc IC addr below
     // following must be parsable to set_target_of_Self_call_site
-    a.jmp( (int32)SendDIMessage_stub, DIVMAddressOperand);
+    a.jmp( (int32)(smi)SendDIMessage_stub, DIVMAddressOperand);
     assert( a.offset() == here + bytes_from_here_to_after_jmp, "checking");
     assert((a.offset() & (BytesPerWord-1)) == 0, "must be aligned");
     a.Data(0);                                // first  part of DI nmln
@@ -441,7 +441,7 @@ Location CodeGen::flushToStack(Location src, RegisterState* s) {
    
 void CodeGen::reload_ByteMapBaseReg(PrimDesc* p) {
   if (UseByteMapBaseReg && p->canScavenge()) {
-    a.leal(no_reg, (int32)&byte_map_base, VMAddressOperand, ByteMapBaseReg);
+    a.leal(no_reg, (int32)(smi)&byte_map_base, VMAddressOperand, ByteMapBaseReg);
   }
 }
 
@@ -456,7 +456,7 @@ Label* CodeGen::cPrimCall(PrimDesc* p, RegisterState* s,
   // and set_target_of_Self_call_site
   // Also, getPrimCallEndOffset assumes continuation is right after sequence.
 
-  a.call( (int32) first_inst_addr(p->fn()), PVMAddressOperand );
+  a.call( (int32)(smi) first_inst_addr(p->fn()), PVMAddressOperand );
   
   // inline cache:
   Label past_nlr(a.printing); 
@@ -530,7 +530,7 @@ void CodeGen::recordStore(Location dst) {
   a.Comment("recordStore");
   assert(isRegister(dst), "receiver to check_store must be in a register");
   a.shrl(card_shift, NumberOperand, dst); // shift target addr
-  a.addl(no_reg, (int32)&byte_map_base, VMAddressOperand, dst); // add start of map to dst
+  a.addl(no_reg, (int32)(smi)&byte_map_base, VMAddressOperand, dst); // add start of map to dst
   a.movb(0, dst, 0, VMAddressOperand);
 }
   
@@ -553,7 +553,7 @@ Label* CodeGen::selfCall(RegisterState* s, LookupType lookupType,
   fint x = ((fint)a.offset() - 1) & 3;
   fint num_nops = (4 - x) & 3;
   for (fint i = 0;  i < num_nops; ++i) a.nop();
-  a.call((int32)SendMessage_stub, BPVMAddressOperand);
+  a.call((int32)(smi)SendMessage_stub, BPVMAddressOperand);
   Label* l = SendDesc(s, lookupType, selector,
                       delegatee ? oop(delegatee) : oop(badOop));
   return l;
@@ -723,7 +723,7 @@ void CodeGen::testAndContinueNLR(smi homeID) {
       a.testl(frame_word_alignment*oopSize - 1, NumberOperand, NLRHomeReg);
       a.je(&ok);
       a.hlt(); // bad NLRHome
-      a.Data((int32)"bad NLRHome", true);
+      a.Data((int32)(smi)"bad NLRHome", true);
       ok.define();
       a.xorl(frame_alignment_offset * oopSize, NumberOperand, NLRHomeReg);
     }
@@ -880,7 +880,7 @@ Label* CodeGen::conditionalBranchCode( Location testMe,
    
   a.Comment("conditionalBranchCode");
   move(Temp1, testMe);
-  a.cmpl((int32)target, OopOperand, Temp1);
+  a.cmpl((int32)(smi)target, OopOperand, Temp1);
 
   if ( !allowPreemption ) {
     a.je(dst);
@@ -935,7 +935,7 @@ Label* CodeGen::indexedBranchCode( Location        testMe,
   a.testl( Tag_Mask, NumberOperand, Temp1);
   Label end;
   a.jne( &end ); // goto end if not int
-  a.cmpl((int32)as_smiOop(labels->length()), OopOperand, Temp1);   // use unsigned comp to catch negative number
+  a.cmpl((int32)(smi)as_smiOop(labels->length()), OopOperand, Temp1);   // use unsigned comp to catch negative number
   a.jnb(&end); // goto end if index is out of bounds, if Temp1 is not below Temp2
   
   Label L(a.printing);
@@ -998,7 +998,7 @@ void CodeGen::loadOop(Location dest, oop p) {
   a.Comment("loadOop2");
   Location r; int32 d; OperandType t;
   reg_disp_type_of_loc(&r, &d, &t, dest);
-  a.movl((int32)p, OopOperand, r, d, t);
+  a.movl((int32)(smi)p, OopOperand, r, d, t);
 }
 
 

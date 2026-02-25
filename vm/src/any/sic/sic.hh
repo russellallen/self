@@ -62,7 +62,7 @@
     BBIterator* bbIterator;             // my bb iterator (used to be a global)
 
     // max # outgoing args on stack
-    int32 nonRegisterArgCount() { return max(0, argCount - NumArgRegisters); }
+    int32 nonRegisterArgCount() { return max(fint(0), argCount - NumArgRegisters); }
     int32 stackTempCount();
     int32 frameSize() { return stackTempCountToFrameSize(stackTempCount()); }
     int32 _verifiedOffset;
@@ -100,7 +100,7 @@
     nm_compiler nmName() { return nm_sic; }
     fint level();
     fint estimatedSize();
-    int32  incoming_arg_count();
+    fint   incoming_arg_count();
 
     void allocateArgs(fint nargs, bool isPrimCall);
     void registerUninlinable(SendInfo* info, InlineLimitType t, fint cost);

@@ -227,7 +227,7 @@
 
   void SICompiler::allocateArgs(fint nargs, bool isPrimCall) {
     Unused(isPrimCall);
-    argCount = max(argCount, nargs);
+    argCount = max(argCount, (int32)nargs);
   }
 
   void SICompiler::registerUninlinable(SendInfo* info, InlineLimitType t,
@@ -284,7 +284,7 @@
     // don't inline into doIt
     FlagSetting fs3(Inline, Inline && L->selector() != VMString[DO_IT]);
 
-    # if TARGET_ARCH != I386_ARCH // no FastMapTest possible on I386
+    # if TARGET_ARCH != I386_ARCH && TARGET_ARCH != X86_64_ARCH // no FastMapTest possible on I386/X86_64
       // don't use fast map loads if this nmethod trapped a lot
       FlagSetting fs4(FastMapTest, FastMapTest &&
                       (recompilee == NULL ||
@@ -601,7 +601,7 @@
   }
 
   
-  int32 SICompiler::incoming_arg_count() {
+  fint SICompiler::incoming_arg_count() {
     return topScope->nargs;
   }
 

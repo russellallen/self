@@ -68,10 +68,10 @@ void Assembler::_Untested(const char* m1, const char* m2) {
   enter(0);
   andl(~15, NumberOperand, esp);
   leal(esp, -8, NumberOperand, esp);
-  pushl((int32)m2, VMAddressOperand);
-  pushl((int32)m1, VMAddressOperand);
+  pushl((int32)(smi)m2, VMAddressOperand);
+  pushl((int32)(smi)m1, VMAddressOperand);
   // use indirect call to be safe, avoid need to reloc relative dest
-  leal(no_reg, (int32)first_inst_addr(untested_helper), VMAddressOperand, eax);
+  leal(no_reg, (int32)(smi)first_inst_addr(untested_helper), VMAddressOperand, eax);
   call(eax);
   leave();
   popl(edx);
@@ -131,7 +131,7 @@ void Assembler::printDest( int32 dest, OperandType t, Label* L ) {
   if (!printing)  return;
   if (is_testing()) {
     assert(L == NULL, "cannot test labels (yet)");
-    int32 relDot = dest - int32(instsEnd);
+    int32 relDot = dest - (int32)(smi)(instsEnd);
     asm_lprintf(". %c %d", relDot < 0 ? '-' : '+', abs(relDot));
  }
  else if (L != NULL)
@@ -283,7 +283,7 @@ void Assembler::word_branch_target(int32 dest, OperandType t, Label* L) {
   if (L == NULL)
     ;
   else if (L->isDefined()) {
-    dest = (int32)L->target();
+    dest = (int32)(smi)L->target();
     t = NumberOperand;
   }
   else {
@@ -292,7 +292,7 @@ void Assembler::word_branch_target(int32 dest, OperandType t, Label* L) {
     t = NumberOperand;
   }
   addOffset(t, true, true);
-  int32 rel = dest - (int32(instsEnd) + sizeof(int32));
+  int32 rel = dest - ((int32)(smi)(instsEnd) + sizeof(int32));
   Data(rel, false);
 }
 
@@ -301,7 +301,7 @@ void Assembler::std_jmp_or_loop(const char* j_or_loop, const char* ccs, int32 op
   if (printing)  {
     asm_lprintf("%s%s ", j_or_loop, ccs);
   }
-  int32 rel8 = (L == NULL  ?  dest  :  (int32)L->target() )  -  ((int32)instsEnd + 2);
+  int32 rel8 = (L == NULL  ?  dest  :  (int32)(smi)L->target() )  -  ((int32)(smi)instsEnd + 2);
   
   if ( L == NULL  &&  is_disp8( rel8, disp_type)  &&  op8 != -1) {
     if (printing) {
@@ -739,19 +739,19 @@ void Assembler::gen_movccs_setccs_movsxs_movzxss() {
 
 
 void Assembler::gen_jmps() {
-    jecxz(int32(instsEnd),        NumberOperand);  tally(); 
-    jecxz(int32(instsEnd) + 100,  NumberOperand);  tally(); 
-    jecxz(int32(instsEnd) - 100,  NumberOperand);  tally();
+    jecxz((int32)(smi)(instsEnd),        NumberOperand);  tally();
+    jecxz((int32)(smi)(instsEnd) + 100,  NumberOperand);  tally();
+    jecxz((int32)(smi)(instsEnd) - 100,  NumberOperand);  tally();
 
-    loop(  int32(instsEnd),        NumberOperand);  tally(); 
-    loope( int32(instsEnd) + 100,  NumberOperand);  tally(); 
-    loopne(int32(instsEnd) - 100,  NumberOperand);  tally();
+    loop(  (int32)(smi)(instsEnd),        NumberOperand);  tally();
+    loope( (int32)(smi)(instsEnd) + 100,  NumberOperand);  tally();
+    loopne((int32)(smi)(instsEnd) - 100,  NumberOperand);  tally();
 
 # define T(name) \
     name(                    0,  NumberOperand);  tally(); \
-    name(int32(instsEnd),        NumberOperand);  tally(); \
-    name(int32(instsEnd) + 100,  NumberOperand);  tally(); \
-    name(int32(instsEnd) - 100,  NumberOperand);  tally();
+    name((int32)(smi)(instsEnd),        NumberOperand);  tally(); \
+    name((int32)(smi)(instsEnd) + 100,  NumberOperand);  tally(); \
+    name((int32)(smi)(instsEnd) - 100,  NumberOperand);  tally();
     
   T(ja) T(jae) T(jb) T(jbe) T(jc) T(je) T(jg) T(jge) T(jl) T(jle) T(jna) T(jnae) T(jnb) T(jnbe) T(jnc)
   T(jne) T(jng) T(jnge) T(jnl) T(jnle) T(jno) T(jnp) T(jns) T(jnz) T(jo) T(jp) T(jpe) T(jpo) T(js) T(jz)

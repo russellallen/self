@@ -94,7 +94,7 @@ void sweepTrigger() {
 # endif
 
 
-zone::zone(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize) {
+zone::zone(smi& codeSize, smi& stubSize, smi& depSize, smi& debugSize) {
   used_per_compiler[nm_nic]= 0;
   used_per_compiler[nm_sic]= 0;
   
@@ -130,7 +130,7 @@ static const uint32 maxCodeAndStubSizeForMachine =  (uint32)(1  <<  (branch_disp
 
 
 
-void zone::set_sizes_for_statically_allocated_code_and_stub_area(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize, char*& stb) {
+void zone::set_sizes_for_statically_allocated_code_and_stub_area(smi& codeSize, smi& stubSize, smi& depSize, smi& debugSize, char*& stb) {
 
   if (OS::make_memory_executable(zoneStart(), zoneEnd()-zoneStart()))
     fatal3("Couldn't make PIC area writable: zoneStart() = 0x%x, zoneEnd() = 0x%x, difference = %d",
@@ -142,7 +142,7 @@ void zone::set_sizes_for_statically_allocated_code_and_stub_area(int32& codeSize
     round_sizes(codeSize, stubSize, depSize, debugSize);   
             
     // make PICs part of the profiled memory area
-    bottom = (int32*)roundSize(int32(zoneStart()), maxBlockSize);
+    bottom = (int32*)roundSize(smi(zoneStart()), maxBlockSize);
     codeSize =  (end - (char*)bottom) - stubSize - 2*1024;
     codeSize = codeSize / maxBlockSize * maxBlockSize;
     stb = (char*)bottom + codeSize + 1024; // why 1024??? profiling? -dmu 6/9
@@ -150,7 +150,7 @@ void zone::set_sizes_for_statically_allocated_code_and_stub_area(int32& codeSize
     if (stb + stubSize <= end) 
       break;
       
-    int32 oldISize = codeSize;
+    smi oldISize = codeSize;
     codeSize = codeSize / 2;
     codeSize = codeSize / maxBlockSize * maxBlockSize;
     warning2("Cannot have such a large zone (%ld bytes)\n"
@@ -161,12 +161,12 @@ void zone::set_sizes_for_statically_allocated_code_and_stub_area(int32& codeSize
 }
 
 
-void zone::set_sizes_and_allocate_code_and_stub_area(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize, char*& stb) {
+void zone::set_sizes_and_allocate_code_and_stub_area(smi& codeSize, smi& stubSize, smi& depSize, smi& debugSize, char*& stb) {
   
     round_sizes(codeSize, stubSize, depSize, debugSize);
-    int codeSize_p = roundTo(codeSize, idealized_page_size);
-    int stubSize_p = roundTo(stubSize, idealized_page_size);
-    int codeAndStubSize_p = codeSize_p + stubSize_p; // (possibly) changed by OS::allocate_idealized_page_aligned
+    smi codeSize_p = roundTo(codeSize, idealized_page_size);
+    smi stubSize_p = roundTo(stubSize, idealized_page_size);
+    smi codeAndStubSize_p = codeSize_p + stubSize_p; // (possibly) changed by OS::allocate_idealized_page_aligned
     
     if ((uint32)codeAndStubSize_p > maxCodeAndStubSizeForMachine) {
       int32 nCodeSize_p;
@@ -201,7 +201,7 @@ void zone::set_sizes_and_allocate_code_and_stub_area(int32& codeSize, int32& stu
 
 
 
-void zone::round_sizes(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize) {
+void zone::round_sizes(smi& codeSize, smi& stubSize, smi& depSize, smi& debugSize) {
    codeSize = roundSize(  codeSize, maxBlockSize);
     depSize = roundSize(   depSize, maxBlockSize);
   debugSize = roundSize( debugSize, maxBlockSize);
@@ -209,12 +209,12 @@ void zone::round_sizes(int32& codeSize, int32& stubSize, int32& depSize, int32& 
 }
 
 
-void zone::allocate_pieces(int32& codeSize, int32& stubSize, int32& depSize, int32& debugSize, char* stb) {
-  int32 depSize_p = depSize, debugSize_p = debugSize; // alloate_idealized_page_aligned may change sizes
+void zone::allocate_pieces(smi& codeSize, smi& stubSize, smi& depSize, smi& debugSize, char* stb) {
+  smi depSize_p = depSize, debugSize_p = debugSize; // alloate_idealized_page_aligned may change sizes
   char* db = OS::allocate_idealized_page_aligned(   depSize_p, "nmethod zone (deps)"  ,   DepsStart );
   char* sb = OS::allocate_idealized_page_aligned( debugSize_p, "nmethod zone (scopes)", ScopesStart );
   
-  assert(int32(bottom) % maxBlockSize == 0, "zone misaligned");
+  assert(smi(bottom) % maxBlockSize == 0, "zone misaligned");
   char* b = (char*)bottom;
   
   table      = new codeTable(codeTableSize); 
@@ -235,7 +235,7 @@ void zone::check_allocations() {
   assert(sizeof(LRUcount) == 4, "should be one word");
 }
 
-void zone::allocate_trapdoors_at_zone_base_stealing_from_code_space(int32& codeSize) {
+void zone::allocate_trapdoors_at_zone_base_stealing_from_code_space(smi& codeSize) {
   // allocate trapdoors at base of zone, steal space from code space
   trapdoors = new Trapdoors((char*)bottom, codeSize);
   int32 trapdoor_bytes_p = roundTo(trapdoors->trapdoor_bytes(), idealized_page_size);
@@ -261,7 +261,7 @@ void zone::setup_LRU() {
 }
 
 void zone::allocate_useCount(fint maxNMs) {
-  int useCountSize= sizeof(LRUcount) * maxNMs;
+  smi useCountSize= sizeof(LRUcount) * maxNMs;
   useCount= (int32*)OS::allocate_idealized_page_aligned(useCountSize, "use counts", UseCountStart);
 }
 
@@ -693,9 +693,9 @@ void zone::flush_inline_cache() {
 inline int32 retirementAge(nmethod* n) {
   fint delta = LRU_RETIREMENT_AGE;
   if (n->instsLen() <= LRU_CUTOFF)
-    delta = max(delta, LRU_RETIREMENT_AGE * LRU_SMALL_BOOST);
-  if (n->compiler() != NIC) 
-    delta = max(delta, LRU_RETIREMENT_AGE * LRU_OPTIMIZED_BOOST);
+    delta = max(delta, fint(LRU_RETIREMENT_AGE * LRU_SMALL_BOOST));
+  if (n->compiler() != NIC)
+    delta = max(delta, fint(LRU_RETIREMENT_AGE * LRU_OPTIMIZED_BOOST));
   return n->lastUsed() + delta;
 }
 

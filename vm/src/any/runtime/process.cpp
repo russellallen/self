@@ -140,7 +140,7 @@ Process::Process(processOop p, int32 sSize, oop rcvr, stringOop sel,
   }
   
   next = NULL;
-  suspendedPC = NULL; nesting = 0; 
+  suspendedPC = NULL; nesting = 0;
   stopActivation = NULL;
   stepping = stopping = deoptimizing = restartAfterConversion = false;
   _killUpToVF = NULL;
@@ -148,6 +148,9 @@ Process::Process(processOop p, int32 sSize, oop rcvr, stringOop sel,
   aborter = NULL;
   clear_check_vfo_locals();
   zombie= false;
+# if TARGET_ARCH == X86_64_ARCH
+  active_interp_list = NULL;
+# endif
   if (rcvr) {
     initialize(rcvr, sel, args);
   } else {
@@ -162,7 +165,7 @@ void Process::init(char* pcVal) {
     printP("reinitializing", this);
     suspendedSP = stackEnd() - oopSize;
     suspendedSP = adjust_initial_SP(suspendedSP);
-    set_words((int32*)suspendedSP, (stackEnd() - suspendedSP) / oopSize);
+    memset(suspendedSP, 0, stackEnd() - suspendedSP);
     resetStackOverflow();
   }
   setPC((process_p)pcVal);
@@ -402,7 +405,7 @@ void Process::killFrames(abstract_vframe* vf) {
   // to the controlling process
   // (currentProcess = process executing the killUpTo primitive)
   
-  NLRSupport::set_NLR_home_from_C( (int32)vf->fr->block_scope_of_home_frame() );
+  NLRSupport::set_NLR_home_from_C( (int32)(smi)vf->fr->block_scope_of_home_frame() );
   NLRSupport::set_NLR_home_ID_from_C(     vf->scopeID());
   transfer();
 }
@@ -414,7 +417,7 @@ void Process::deoptimize(frame* last) {
   resetStopping();
   setDeoptimizing();
   last->patch(NULL);
-  NLRSupport::set_NLR_home_from_C( (int32)last->block_scope_of_home_frame() );
+  NLRSupport::set_NLR_home_from_C( (int32)(smi)last->block_scope_of_home_frame() );
   // Why no NLRSupport::set_NLR_home_ID_from_C??? -- dmu 1/03
   // I don't think the arguments need to be saved, since gotoByteCode caller will set them anyway
   // -- dmu 1/03

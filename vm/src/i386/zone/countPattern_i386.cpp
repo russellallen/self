@@ -58,7 +58,7 @@
     limit_offset = a->offset() - sizeof(int32);
     a->jne(0x87654321, CodeAddressOperand);
     nmAddr_offset = a->offset() - sizeof(int32);
-    a->call((int32)Recompile_stub, VMAddressOperand);
+    a->call((int32)(smi)Recompile_stub, VMAddressOperand);
     recompileStub_offset = a->offset() - sizeof(int32);
 
     instsSize = a->offset();
