@@ -2,7 +2,15 @@
 
 # CPU detection
 
-if(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" OR
+option(SELF_FORCE_I386 "Force 32-bit i386 build on an x86_64 host" OFF)
+
+if(SELF_FORCE_I386)
+
+  set(platform_processor "i386")
+  set(TARGET_ARCH       "I386_ARCH")
+  set(HOST_ARCH         "I386_ARCH")
+
+elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" OR
    CMAKE_SYSTEM_PROCESSOR STREQUAL "AMD64")
 
   # Reuse i386 platform sources for now (no vm/src/x86_64/ yet)

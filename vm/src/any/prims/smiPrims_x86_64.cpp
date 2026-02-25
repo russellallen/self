@@ -4,6 +4,7 @@
 /* C implementations of SMI arithmetic primitives for x86_64.
    Replaces i386/prims/asmPrims_i386.S */
 
+# include "config.hh"
 # if TARGET_ARCH == X86_64_ARCH
 
 # include "_smiOop.cpp.incl"

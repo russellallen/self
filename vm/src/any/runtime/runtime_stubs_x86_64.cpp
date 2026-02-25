@@ -4,6 +4,7 @@
 /* C/asm stubs for x86_64 interpreter-only builds.
    Replaces i386/runtime/runtime_asm_gcc_i386.S */
 
+# include "config.hh"
 # if TARGET_ARCH == X86_64_ARCH
 
 # include "_runtime_i386.cpp.incl"  // reuse i386 includes
