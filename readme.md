@@ -1,7 +1,24 @@
 Self
 ====
 
-This is the main repository for the Self programming language and environment.
+Experimental 64 Bit Version
+===========================
+
+This is an experimental branch of the Self VM.
+
+It is a port of the Self VM to 64 bit systems.
+
+At the moment the interpreter is working, but the JIT has not been ported.
+
+
+AI Disclosure Statement
+=======================
+
+This port is LLM asssisted, using primarily Claude Anthropic.
+
+
+About Self
+==========
 
 The Self homepage is at http://selflanguage.org
 
