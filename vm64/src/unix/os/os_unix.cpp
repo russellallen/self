@@ -56,28 +56,38 @@
 
 
 # else
-  // No point in horsing around trying to make mmap work on OS X.
-  // Works OK without it & and I have better things to do.  dmu 9/1
-  
-  bool OS::is_directed_allocation_supported() { return false; } 
+  // Modern macOS supports mmap for directed allocation.
+  // This ensures heap generations are contiguous, which the rSet requires.
 
-  char* OS::allocate_heap_aligned(caddr_t ,
+  bool OS::is_directed_allocation_supported() { return true; }
+
+  char* OS::allocate_heap_aligned(caddr_t desiredAddress,
                                   smi size, smi align, const char* name,
                                   bool mustAllocate) {
-    // fake it
-    char* b = (char*)selfs_malloc(size + align - 1);
-    if (b == NULL) {
-      if (mustAllocate)
-         allocate_failed(name);
-      return b;
+    if ( desiredAddress != NULL) {
+      // Use mmap WITHOUT MAP_FIXED to avoid silently destroying existing
+      // system mappings (e.g. libc data structures).  The hint address
+      // will be honored if the region is free.
+      // Map exactly `size` bytes (no extra align padding) since the
+      // desiredAddress is already aligned; extra padding would overlap
+      // with the next contiguous allocation.
+      char* p = (char*)mmap(desiredAddress,
+                            size,
+                            PROT_READ|PROT_WRITE,
+                            MAP_PRIVATE|MAP_ANON,
+                            -1, 0);
+      if (p == desiredAddress)
+        return desiredAddress;
+      // Kernel chose a different address — the hint region was occupied.
+      if (p != MAP_FAILED)
+        munmap(p, size);
     }
-    if ((smi)b & (align-1)) {
-      char* newB = (char*) ((smi)b & ~(align-1)) + align;
-      assert(b + size + align - 1 >=  newB + size, "rounding error");
-      return newB;
-    }
-    else
-      return b;
+
+    // Fallback: allocate at a system-chosen aligned address
+    char *b = NULL;
+    posix_memalign((void **)&b, align, size);
+    if (b == NULL && mustAllocate)  allocate_failed(name);
+    return b;
   }
 
 
@@ -240,19 +250,33 @@ void OS::Mmap(void *start, void *fin, FILE *file)
 {
   long int len= (char*)fin - (char*)start;
   if (len == 0) return;
+# if defined(__APPLE__) && defined(__aarch64__)
+  // On ARM64 macOS, the OS page size is 16KB but snapshot data may be
+  // 8KB-aligned.  mmap(MAP_FIXED) from a file requires the file offset
+  // to be a multiple of the OS page size, so just use fread instead.
+  if (fread(start, 1, len, file) != (size_t)len) {
+    perror("cannot read from file");
+    fatal("read error");
+  }
+# else
   if (mmap((char*)start,
            len,
            PROT_READ|PROT_WRITE,
            MAP_PRIVATE|MAP_FIXED,
            fileno(file),
            ftell(file)) != start) {
-    perror("cannot read from file");
-    fatal("read error");
+    // mmap with MAP_FIXED failed; fall back to fread
+    if (fread(start, 1, len, file) != (size_t)len) {
+      perror("cannot read from file");
+      fatal("read error");
+    }
+  } else {
+    if (fseek(file, len, SEEK_CUR) < 0) {
+      perror("cannot read from file");
+      fatal("seek error");
+    }
   }
-  if (fseek(file, len, SEEK_CUR) < 0) {
-    perror("cannot read from file");
-    fatal("seek error");
-  }
+# endif
 }
 
 void OS::do_not_buffer(FILE* stream) { ::setbuf(stream, NULL); }

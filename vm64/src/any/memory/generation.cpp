@@ -34,12 +34,15 @@ newGeneration::newGeneration(smi &eden_size, smi &surv_size, FILE *snap) {
   // Need to allocate an extra page because the search operations
   // in sun4.enum.s can walk back a few words before their starting point.
   // This should be fixed sometime by recoding those ops.
-  new_size += idealized_page_size;
+  // Use OS page size for the safety buffer to ensure 16KB alignment on ARM64.
+  smi guard_page = OS::get_page_size();
+  if (guard_page < idealized_page_size) guard_page = idealized_page_size;
+  new_size += guard_page;
   char *new_spaces= OS::allocate_idealized_page_aligned(
                            new_size, "new space",
-                           HeapStart - idealized_page_size);
-  new_spaces += idealized_page_size;
-  new_size -= idealized_page_size;
+                           HeapStart - guard_page);
+  new_spaces += guard_page;
+  new_size -= guard_page;
 
   // must start on a card boundary
   assert(smi(new_spaces) % card_size == 0,

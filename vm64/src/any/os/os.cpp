@@ -122,11 +122,15 @@ void OS::setDateTimeBuf(struct tm *tod, smi buf[]) {
 // knows what he wants.
 
 char* OS::allocate_idealized_page_aligned(smi &size, const char *name,
-                                          caddr_t desiredAddress, 
+                                          caddr_t desiredAddress,
                                           bool mustAllocate) {
-  size= roundTo(size, idealized_page_size);
-  assert(idealized_page_size % get_page_size() == 0, "page size mismatch");
-  char* b = allocate_heap_aligned(desiredAddress, size, idealized_page_size,
+  // Use the larger of idealized_page_size and the OS page size for alignment.
+  // On ARM64 macOS, the OS page is 16KB but idealized_page_size is 8KB
+  // (for snapshot compatibility).
+  smi align = idealized_page_size;
+  if (get_page_size() > align) align = get_page_size();
+  size= roundTo(size, align);
+  char* b = allocate_heap_aligned(desiredAddress, size, align,
                                     name, mustAllocate);
   if (b == NULL) size= 0;
   return b;

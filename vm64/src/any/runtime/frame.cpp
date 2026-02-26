@@ -156,8 +156,9 @@ interpreter* frame::get_interpreter() {
 
 
 bool frame::is_interpreted_self_frame() {
-# if TARGET_OS_VERSION == MACOSX_VERSION
-  // breaks when scanning stack for spy
+# if TARGET_OS_VERSION == MACOSX_VERSION && !TARGET_IS_64BIT
+  // breaks when scanning stack for spy (32-bit only; 64-bit has no compiler
+  // so interpreter must work)
   if (Interpret) fatal("Interpreter does not work on OSX");
   return false;
 # else

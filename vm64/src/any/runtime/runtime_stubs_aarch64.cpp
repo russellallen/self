@@ -47,9 +47,10 @@ extern "C" char* SwitchStack0(char* fn_start, char* newSP) {
     "mov   sp, %2\n\t"              // switch to new stack
     "stp   x9, xzr, [sp, #-16]!\n\t" // push old SP + padding (16-byte aligned)
     "blr   %1\n\t"                  // call fn_start()
+    "mov   %0, x0\n\t"             // capture return value from x0
     "ldp   x9, xzr, [sp], #16\n\t" // pop old SP + padding
     "mov   sp, x9\n\t"             // restore old SP
-    : "=r"(result)                   // result in x0
+    : "=r"(result)
     : "r"(fn_start), "r"(newSP)
     : "x9", "x10", "x11", "x12", "x13", "x14", "x15",
       "x0", "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8",
@@ -66,6 +67,7 @@ extern "C" char* SwitchStack1(char* fn_start, char* newSP, void* arg1) {
     "stp   x9, xzr, [sp, #-16]!\n\t"
     "mov   x0, %3\n\t"             // arg1 in x0
     "blr   %1\n\t"
+    "mov   %0, x0\n\t"             // capture return value from x0
     "ldp   x9, xzr, [sp], #16\n\t"
     "mov   sp, x9\n\t"
     : "=r"(result)
@@ -86,6 +88,7 @@ extern "C" char* SwitchStack2(char* fn_start, char* newSP, void* arg1, void* arg
     "mov   x0, %3\n\t"
     "mov   x1, %4\n\t"
     "blr   %1\n\t"
+    "mov   %0, x0\n\t"             // capture return value from x0
     "ldp   x9, xzr, [sp], #16\n\t"
     "mov   sp, x9\n\t"
     : "=r"(result)
@@ -108,6 +111,7 @@ extern "C" char* SwitchStack3(char* fn_start, char* newSP,
     "mov   x1, %4\n\t"
     "mov   x2, %5\n\t"
     "blr   %1\n\t"
+    "mov   %0, x0\n\t"             // capture return value from x0
     "ldp   x9, xzr, [sp], #16\n\t"
     "mov   sp, x9\n\t"
     : "=r"(result)
@@ -132,6 +136,7 @@ extern "C" char* SwitchStack4(char* fn_start, char* newSP,
     "mov   x2, %5\n\t"
     "mov   x3, %6\n\t"
     "blr   %1\n\t"
+    "mov   %0, x0\n\t"             // capture return value from x0
     "ldp   x9, xzr, [sp], #16\n\t"
     "mov   sp, x9\n\t"
     : "=r"(result)
@@ -170,8 +175,7 @@ extern "C" char* SwitchStack4(char* fn_start, char* newSP,
 //   [saved x25] [saved x26]
 //   [saved x27] [saved x28]
 //   [saved fp]  [saved lr]
-//   [padding=0] [mock return addr=0]
-//   [copy of fp]                     <- callerSaveAddr[0] (0 mod 16)
+//   [copy of fp] [mock return addr=0]  <- callerSaveAddr[0] (0 mod 16)
 
 extern "C" void ReturnOffTopOfProcess();
 
@@ -189,9 +193,9 @@ void SetSPAndCall(char** callerSaveAddr, char** calleeSaveAddr,
 
     // Create frame-like footer for external frame walkers
     // (so suspendedSP can be interpreted as a frame* by Stack::first_VM_frame)
-    "stp   xzr, xzr, [sp, #-16]!\n\t"   // padding=0, mock return addr=0
-    "str   x29, [sp, #-16]!\n\t"         // fp copy (sender() follows this)
-    // sp is now 0 mod 16 (started aligned, pushed even number of 8-byte words)
+    // offset 0 = saved fp (for sender()), offset 8 = 0 (marks non-Self frame)
+    "stp   x29, xzr, [sp, #-16]!\n\t"   // fp copy + mock return addr = 0
+    // sp is now 0 mod 16
 
     // Save caller state if callerSaveAddr (x0) != NULL
     "cbz   x0, 1f\n\t"
@@ -212,8 +216,7 @@ void SetSPAndCall(char** callerSaveAddr, char** calleeSaveAddr,
 
     // --- Resume existing process ---
     "mov   sp, x9\n\t"                   // switch to callee's saved stack
-    "add   sp, sp, #16\n\t"              // skip footer (fp copy)
-    "add   sp, sp, #16\n\t"              // skip footer (padding + mock ret)
+    "add   sp, sp, #16\n\t"              // skip footer (fp copy + mock ret)
     "ldp   x29, x30, [sp], #16\n\t"      // restore fp and lr
     "ldp   x27, x28, [sp], #16\n\t"
     "ldp   x25, x26, [sp], #16\n\t"
@@ -227,10 +230,9 @@ void SetSPAndCall(char** callerSaveAddr, char** calleeSaveAddr,
     "br    x10\n\t"                       // normal: jump to saved PC
 
     // pcWasSet: jumping to function START
-    // Need sp 16-byte aligned as if a call just pushed lr
+    // On ARM64 the return address is in lr, not on the stack, and sp
+    // is already 0 mod 16 (correct for function entry).
     "2:\n\t"
-    "sub   sp, sp, #16\n\t"              // make room as if call was made
-    "str   x10, [sp]\n\t"                // store entry point
     "br    x10\n\t"                       // jump to entry point
 
     // --- Initialize new process ---
@@ -239,8 +241,7 @@ void SetSPAndCall(char** callerSaveAddr, char** calleeSaveAddr,
     "mov   sp, x9\n\t"                   // new stack pointer (0 mod 16)
     "adrp  x9, _ReturnOffTopOfProcess@PAGE\n\t"
     "add   x9, x9, _ReturnOffTopOfProcess@PAGEOFF\n\t"
-    "sub   sp, sp, #16\n\t"              // allocate space for return address
-    "str   x9, [sp]\n\t"                 // return addr if process falls off top
+    "mov   x30, x9\n\t"                  // lr = ReturnOffTopOfProcess
     "br    x10\n\t"                       // jump to entry point
 
     ::: "memory"
@@ -313,22 +314,36 @@ extern "C" void firstSelfFrameSendDescEnd(...) {
 //   rcv         = receiver oop
 //   argp        = pointer to args on interpreter stack (argp[0] = first arg)
 //   nargs       = number of non-receiver arguments
+//
+// IMPORTANT: On ARM64, variadic function pointers (...) use a different
+// calling convention (args on stack) than non-variadic (args in registers).
+// We must cast to properly-typed non-variadic function pointers so the
+// compiler generates correct register-based argument passing.
 extern "C" oop CallPrimitiveFromInterpreter(void* entry_point, oop rcv,
                                              oop* argp, fint nargs) {
-  typedef oop (*prim_fn_t)(...);
-  prim_fn_t fn = (prim_fn_t)entry_point;
+  typedef oop (*fn0)(oop);
+  typedef oop (*fn1)(oop, oop);
+  typedef oop (*fn2)(oop, oop, oop);
+  typedef oop (*fn3)(oop, oop, oop, oop);
+  typedef oop (*fn4)(oop, oop, oop, oop, oop);
+  typedef oop (*fn5)(oop, oop, oop, oop, oop, oop);
+  typedef oop (*fn6)(oop, oop, oop, oop, oop, oop, oop);
+  typedef oop (*fn7)(oop, oop, oop, oop, oop, oop, oop, oop);
+  typedef oop (*fn8)(oop, oop, oop, oop, oop, oop, oop, oop, oop);
+  typedef oop (*fn9)(oop, oop, oop, oop, oop, oop, oop, oop, oop, oop);
+  typedef oop (*fn10)(oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop);
   switch (nargs) {
-    case  0: return fn(rcv);
-    case  1: return fn(rcv, argp[0]);
-    case  2: return fn(rcv, argp[0], argp[1]);
-    case  3: return fn(rcv, argp[0], argp[1], argp[2]);
-    case  4: return fn(rcv, argp[0], argp[1], argp[2], argp[3]);
-    case  5: return fn(rcv, argp[0], argp[1], argp[2], argp[3], argp[4]);
-    case  6: return fn(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5]);
-    case  7: return fn(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6]);
-    case  8: return fn(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6], argp[7]);
-    case  9: return fn(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6], argp[7], argp[8]);
-    case 10: return fn(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6], argp[7], argp[8], argp[9]);
+    case  0: return ((fn0)entry_point)(rcv);
+    case  1: return ((fn1)entry_point)(rcv, argp[0]);
+    case  2: return ((fn2)entry_point)(rcv, argp[0], argp[1]);
+    case  3: return ((fn3)entry_point)(rcv, argp[0], argp[1], argp[2]);
+    case  4: return ((fn4)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3]);
+    case  5: return ((fn5)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3], argp[4]);
+    case  6: return ((fn6)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5]);
+    case  7: return ((fn7)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6]);
+    case  8: return ((fn8)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6], argp[7]);
+    case  9: return ((fn9)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6], argp[7], argp[8]);
+    case 10: return ((fn10)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6], argp[7], argp[8], argp[9]);
     default:
       fatal("CallPrimitiveFromInterpreter: too many arguments");
       return NULL;

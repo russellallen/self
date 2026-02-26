@@ -11,7 +11,7 @@
 rSet::rSet() {
    low_boundary = Memory->new_gen->low_boundary;
   high_boundary = Memory->old_gen->high_boundary;
-  clear(); 
+  clear();
   Set_Byte_Map_Base(byte_for(NULL));
 }
 
@@ -22,12 +22,19 @@ void* rSet::operator new(size_t size) {
          "old must start at card boundary");
   assert((smi(Memory->old_gen->high_boundary) & (card_size - 1)) == 0,
          "old must end at card boundary");
-  
-  int32 bmsize =
+
+  smi bmsize =
     (Memory->old_gen->high_boundary - Memory->new_gen->low_boundary)
       / card_size;
   bmsize += byte_map_grain; // for next_zero_byte below
-  return AllocateHeap(size + bmsize, "rSet");
+  if (bmsize < byte_map_grain) bmsize = byte_map_grain; // safety for non-contiguous heaps
+  char* result = (char*)AllocateHeap(size + bmsize, "rSet");
+  // Initialize the sentinel area (last byte_map_grain bytes) to 0xFF so
+  // next_zero_byte's 8-word scan loop doesn't hit garbage bytes
+  // (which could be non-zero, non-0xFF on platforms where malloc
+  //  doesn't zero memory, e.g. macOS).
+  memset(result + size + bmsize - byte_map_grain, 0xFF, byte_map_grain);
+  return result;
 }
 
 // copy the bits from an older, smaller bitmap, add area [start,end)
