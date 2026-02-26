@@ -497,7 +497,7 @@ void oldGeneration::cleanup_after_scavenge()
 // Expand the old space by size bytes. 
 // Returns the amount actually allocated (0, maybe, if expansion isn't
 // possible; or more than asked for, due to rounding).
-int oldGeneration::expand(smi size)
+smi oldGeneration::expand(smi size)
 {
   EventMarker em("expanding heap by %d", (void*)size);
   assert(size >= 0, "negative expansion?");
@@ -613,6 +613,15 @@ oop* oldGeneration::alloc_objs_and_bytes(fint size, fint bsize, char*& bytes, bo
   else
     tenuring_space = s;
     
+  if (p == NULL) {
+    // Try expanding the heap to satisfy this allocation.
+    smi needed = (size + bsize + 1) * oopSize;
+    smi expand_size = max(needed * 2, (smi)(4 * 1024 * 1024));
+    if (expand(expand_size) > 0) {
+      p = last_space->alloc_objs_and_bytes(size, bsize, bytes, mustAllocate);
+    }
+  }
+
   if ( p == NULL ) {
     if ( mustAllocate )  HeapAllocateFailed();
     return NULL;

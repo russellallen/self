@@ -17,7 +17,7 @@ class OS {
   static const int seconds_per_day = 86400;
   
   static char*   allocate_heap_aligned(caddr_t desired_address,
-                                       int32 size, int32 align, const char* name,
+                                       smi size, smi align, const char* name,
                                        bool mustAllocate = true);
                                        
                                        

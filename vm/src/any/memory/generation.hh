@@ -212,7 +212,7 @@ class oldGeneration: public generation {
   bool needToSignalLowOnSpace;
   void check_for_end_of_low_space();
   inline void check_for_low_space();
-  int expand(smi size);
+  smi expand(smi size);
 
   void update_caches(bool postScavenge);
 
