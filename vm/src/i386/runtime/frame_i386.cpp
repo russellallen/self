@@ -1,4 +1,4 @@
-# if  TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH
+# if  TARGET_ARCH == I386_ARCH
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -38,11 +38,11 @@ char* frame::c_entry_point() {
   if ( s == NULL ) return NULL;
   
   char* r = s->real_return_addr(); // where sender will return into
-
-  if ( r == NULL || Memory->code->contains(r))
+  
+  if ( Memory->code->contains(r))   
     return NULL;
   char* callp = r - 1;
-  if (!isImmediateCall((inst_t*)callp)) return NULL;
+  if (callp == NULL  ||  !isImmediateCall((inst_t*)callp)) return NULL;
   return  get_target_of_C_call_site((inst_t*)callp);
 }
 
@@ -176,23 +176,11 @@ void frame::fix_frame(char* pc, char* sp) {
 */   
 
 frame* frame::block_scope_of_home_frame() {
-# if TARGET_ARCH == X86_64_ARCH
-  // On x86_64 interpreter-only builds, the interpret() frame IS both
-  // the home frame and the block scope — there are no separate JIT Self frames.
-  return this;
-# else
    return sender();
-# endif
 }
 
 frame* frame::home_frame_of_block_scope(frame* currentFrameHint) {
-# if TARGET_ARCH == X86_64_ARCH
-  // On x86_64 interpreter-only builds, the block scope IS the home frame.
-  Unused(currentFrameHint);
-  return this;
-# else
   return sendee(currentFrameHint);
-# endif
 }
 
 
@@ -212,8 +200,8 @@ frame* frame::make_full_frame(char* pc)            {
 }
 frame* frame::make_full_frame_after_trap(char* pc) {  
   return (frame*)
-       (smi(this)
-    -   ((smi(this) - frame_alignment_offset*oopSize) & (frame_word_alignment*oopSize - 1)));
+       (int32(this)
+    -   ((int32(this) - frame_alignment_offset*oopSize) & (frame_word_alignment*oopSize - 1)));
 }
 frame* frame::make_full_frame_on_user_stack()      {  return this; }
 

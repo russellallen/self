@@ -14,14 +14,14 @@ extern "C" {
   // we might return into C++ (via firstSelfFrame_returnPC in runtime.s).
   // Before returning to C++, asm code calls this function,
   // which also sets NLRSupport::_have_NLR_through_C flag.
-  oop  capture_NLR_parameters_from_registers(oop result, smi target_frame, int32 target_ID);
+  oop  capture_NLR_parameters_from_registers(oop result, int32 target_frame, int32 target_ID);
 
 // These are used for communication with the assembly routine because
 // there aren't enough temporary registers to hold all this stuff.
 // Don't access these this way from C++;
 
   oop   NLRResultFromC;    // params for ContinueNLRFromC
-  smi   NLRHomeFromC;
+  int32 NLRHomeFromC;
   int32 NLRHomeIDFromC;
   
   void continue_discard_stack();
@@ -29,7 +29,7 @@ extern "C" {
 
 
 // Called by assembly glue when a NLR reaches a VM frame on the stack
-oop capture_NLR_parameters_from_registers(oop result, smi targetFrame, int32 targetID) {
+oop capture_NLR_parameters_from_registers(oop result, int32 targetFrame, int32 targetID) {
   NLRSupport::save_NLR_results(result, targetFrame, targetID);
   // return to assembly glue which then returns from EnterSelf()
   return result;
@@ -57,11 +57,11 @@ bool NLRSupport::_have_NLR_through_C = false;
 // accessors for NLR vars above:
 
 oop    NLRSupport::NLR_result_from_C()  { return NLRResultFromC; }
-smi    NLRSupport::NLR_home_from_C()    { return NLRHomeFromC; }
+int32  NLRSupport::NLR_home_from_C()    { return NLRHomeFromC; }
 int32  NLRSupport::NLR_home_ID_from_C() { return NLRHomeIDFromC; }
 
 void   NLRSupport::set_NLR_result_from_C(oop x)    { NLRResultFromC = x; }
-void   NLRSupport::set_NLR_home_from_C(smi x)      { NLRHomeFromC = x; }
+void   NLRSupport::set_NLR_home_from_C(int32 x)    { NLRHomeFromC = x; }
 void   NLRSupport::set_NLR_home_ID_from_C(int32 x) { NLRHomeIDFromC = x; }
 
 
@@ -84,17 +84,10 @@ volatile void NLRSupport::continue_NLR_into_Self(bool remove_patches) {
 
 volatile void NLRSupport::continue_NLR_into_interpreted_Self() {
   set_have_NLR_through_C(); // interp needs this
-# if TARGET_ARCH == X86_64_ARCH
-  // On x86_64 interpreter-only builds, c_entry_point() and ContinueNLRFromC
-  // don't work.  Use longjmp to unwind back to the interpreter's setjmp point.
-  extern void interpreter_longjmp_for_NLR();
-  interpreter_longjmp_for_NLR();
-# else
   frame* f =
     currentProcess->stack()->interpreter_frame_for_continuing_NLR_from_primitive();
   assert(f != NULL, "could not find frame to return to");
   ContinueNLRFromC(f->real_return_addr(), true, false);
-# endif
   ShouldNotReachHere(); // should not return to here
 }
 
@@ -135,7 +128,7 @@ volatile void NLRSupport::continue_NLR_into_compiled_Self(bool remove_patches, f
 }
 
 
-void NLRSupport::save_NLR_results(oop res, smi targetFrame, int32 targetID) {
+void NLRSupport::save_NLR_results(oop res, int32 targetFrame, int32 targetID) { 
   assert(res == badOop  ||  res == 0  ||  targetFrame != 0,
          "either aborting/terminating process or have a target");
   set_NLR_result_from_C(res);
@@ -148,7 +141,7 @@ void NLRSupport::save_NLR_results(oop res, smi targetFrame, int32 targetID) {
 bool NLRSupport::is_bad_home_reference(char* addr) {
   static const int bad_home_range = 1 << 12; /* address range for refs from dead blks */
 
-  smi iaddr = (smi)addr;
+  int32 iaddr = (int32)addr;
   return (iaddr & Tag_Mask) == Int_Tag &&
          (iaddr >= 0  ?  iaddr  :  -iaddr)  <  bad_home_range;
 }

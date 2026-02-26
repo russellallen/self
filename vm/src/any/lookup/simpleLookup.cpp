@@ -181,44 +181,44 @@ bool simpleLookup::objectLookup(lookupTarget* target) {
     // we've been here before -- break out of the cycle
     return false;
   }
-
+  
   assert_string(selector(), "should be a string");
   slotDesc* desc= target->map()->find_slot(stringOop(selector()));
   target->add_dependency(desc, this);
-
+  
   if (!desc || desc->is_vm_slot()) {          // no matching slot
     target->set_cycle_mark();
     bool found = parentsLookup(target);
     target->clear_cycle_mark();
     return found;
   }
-
+  
   realSlotRef* slot = new realSlotRef(target, desc);
 
   if (result() != NULL  &&  slot->EQsr(result()->as_real())) {
     // found same slot, no change
     return true;
   }
-
+  
   switch (status) {
    case foundNone:
     status = foundOne;
     _result = slot;
     break;
-
+    
    case foundOne:
     status = foundSeveral;
     _result = NULL;
     break;
-
+    
    case foundSeveral:
     ShouldNotReachHere();
-
+    
    case foundAssignableParent:
    case resendUndecidable:
     _result = NULL;
     break;
-
+    
    case delegateeNotFound:
    case mismatchedArgCount:
    case performTypeError:

@@ -44,7 +44,7 @@
     _receiverMapOop= rcvrMap;
     callee= clle;
     nsends= cs ? cs->count() :
-        callee ? callee->invocationCount() / max(callee->ncallers(), fint(1)) : 0;
+        callee ? callee->invocationCount() / max(callee->ncallers(), 1) : 0;
     level= lev;
     trusted= tr;
     lookupType= sd->lookupType();

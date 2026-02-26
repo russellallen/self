@@ -358,7 +358,7 @@ class Profiler : public CHeapObj {
    inline void gc_mark_contents() {}
    inline void gc_unmark_contents() {}
    inline void switch_pointers(oop , oop ) {}
-   inline bool verify() { return true; }
+   inline void verify() {}
 
    inline void convert_nmethod_information() {}
 
@@ -453,6 +453,19 @@ class BlockProfilerTicks : StackObj {
 };
 
 # else
+
+class Profiler: public CHeapObj {
+ public:
+ void suspend() {};
+ void resume()  {};
+
+ // memory functions  
+ void scavenge_contents() {}
+ void gc_mark_contents() {}
+ void gc_unmark_contents() {}
+ void switch_pointers(oop from, oop to) { Unused(from); Unused(to); }
+ void verify();
+};
 
 class BlockProfilerTicks: public StackObj {
  public:

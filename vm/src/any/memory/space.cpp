@@ -8,62 +8,33 @@
 
 # include "_space.cpp.incl"
 
-void space::init_space(const char *n, smi &size, char *bottom) {
+void space::init_space(const char *n, int32 &size, char *bottom) {
   size = roundTo(size, idealized_page_size);
   name = n;
   objs_bottom = objs_top = (oop*)bottom;
   bytes_bottom = bytes_top = (oop*)(bottom + size);
-  snapshot_oop_scale = 1;
-  snapshot_objs_oop_count = 0;
-  snapshot_bytes_byte_count = 0;
 }
 
 
 space::space(const char *n, char *bottom, char *top) {
-  assert(is_idealized_page_multiple(smi(bottom)) && is_idealized_page_multiple(smi(top)),
+  assert(is_idealized_page_multiple(int(bottom)) && is_idealized_page_multiple(int(top)),
          "invalid space boundaries");
   name = n;
   objs_bottom = objs_top = (oop*)bottom;
   bytes_bottom = bytes_top = (oop*)top;
-  snapshot_oop_scale = 1;
-  snapshot_objs_oop_count = 0;
-  snapshot_bytes_byte_count = 0;
 }
 
 
 space::space(const char *n, FILE *snap) {
   name = n;
 
-  smi snap_oopSize = Memory->snapshot_oopSize;
-  snapshot_oop_scale = oopSize / snap_oopSize;
-  if (snap_oopSize == oopSize) {
-    // Same oop size — read directly
-    OS::FRead_swap(&old_objs_bottom, oopSize, snap);
-    OS::FRead_swap(&old_objs_top,    oopSize, snap);
-    OS::FRead_swap(&old_bytes_bottom, oopSize, snap);
-    OS::FRead_swap(&old_bytes_top,    oopSize, snap);
-    snapshot_objs_oop_count   = old_objs_top - old_objs_bottom;
-    snapshot_bytes_byte_count = (char*)old_bytes_top - (char*)old_bytes_bottom;
-  } else {
-    // Read 32-bit boundary pointers, widen to 64-bit
-    assert(snap_oopSize == 4, "only 32-to-64 widening supported");
-    int32 ob, ot, bb, bt;
-    OS::FRead_swap(&ob, 4, snap);
-    OS::FRead_swap(&ot, 4, snap);
-    OS::FRead_swap(&bb, 4, snap);
-    OS::FRead_swap(&bt, 4, snap);
-    // Zero-extend to 64-bit pointers (these are just reference addresses)
-    old_objs_bottom  = (oop*)(smi)(uint32)ob;
-    old_objs_top     = (oop*)(smi)(uint32)ot;
-    old_bytes_bottom = (oop*)(smi)(uint32)bb;
-    old_bytes_top    = (oop*)(smi)(uint32)bt;
-    // Compute correct counts using the 32-bit oop size
-    snapshot_objs_oop_count   = ((char*)old_objs_top - (char*)old_objs_bottom) / snap_oopSize;
-    snapshot_bytes_byte_count = (char*)old_bytes_top - (char*)old_bytes_bottom;
-  }
+  OS::FRead_swap(&old_objs_bottom, oopSize, snap);
+  OS::FRead_swap(&old_objs_top,    oopSize, snap);
   if (old_objs_top < old_objs_bottom)
-    fatal2("snapshot format error reading %s: objs_top < objs_bottom (position 0x%x)",
+    fatal2("snapshot format error reading %s: objs_top < objs_bottom (position 0x%x)", 
            name, ftell(snap));
+  OS::FRead_swap(&old_bytes_bottom, oopSize, snap);
+  OS::FRead_swap(&old_bytes_top,    oopSize, snap);
   if (old_bytes_top < old_bytes_bottom)
     fatal1("snapshot format error reading %s: bytes_top < bytes_bottom", name);
 }
@@ -74,72 +45,28 @@ static void snap_error(const char *msg) { fatal1("snapshot format error: %s", ms
 void space::read_snapshot(FILE* snap, char *bottom, char *top)
 {
    objs_bottom = (oop*)bottom;
-      objs_top = objs_bottom + snapshot_objs_oop_count;
+      objs_top = objs_bottom + (old_objs_top - old_objs_bottom);
      bytes_top = (oop*)top;
-  bytes_bottom = (oop*)((char*)bytes_top - snapshot_bytes_byte_count);
+  bytes_bottom = bytes_top - (old_bytes_top - old_bytes_bottom);
 
   if (objs_top >= bytes_bottom)
     snap_error("space too small to read in snapshot");
-
-  smi snap_oopSize = Memory->snapshot_oopSize;
-
-  if (snap_oopSize == oopSize) {
-    // Same oop size — read directly
-    if (page_aligned) {
-      char    *objs_page_end = OS::idealized_page_end(   objs_top);
-      char *bytes_page_start = OS::idealized_page_start(bytes_bottom);
-      if (fseek(snap, roundTo(ftell(snap), idealized_page_size), SEEK_SET) < 0)
-        snap_error("seek failed");
-      if (bytes_page_start <= objs_page_end)
-        OS::Mmap(objs_bottom, bytes_top, snap);
-      else {
-        OS::Mmap(objs_bottom, objs_page_end, snap);
-        OS::Mmap(bytes_page_start, bytes_top, snap);
-      }
-    } else {
-      OS::FRead_mem_swap(objs_bottom, objs_top, snap);
-      OS::FRead_mem(bytes_bottom, bytes_top, snap);
+               
+  if (page_aligned) {
+    char    *objs_page_end = OS::idealized_page_end(   objs_top);
+    char *bytes_page_start = OS::idealized_page_start(bytes_bottom);
+    if (fseek(snap, roundTo(ftell(snap), idealized_page_size), SEEK_SET) < 0)
+      snap_error("seek failed");
+    if (bytes_page_start <= objs_page_end)           
+      OS::Mmap(objs_bottom, bytes_top, snap);
+    else {
+      OS::Mmap(objs_bottom, objs_page_end, snap);
+      OS::Mmap(bytes_page_start, bytes_top, snap);
     }
   } else {
-    // 32-bit snapshot: read objs area one oop at a time, widening each
-    assert(snap_oopSize == 4, "only 32-to-64 widening supported");
-    // Cannot use mmap for cross-size snapshots
-
-    if (page_aligned) {
-      if (fseek(snap, roundTo(ftell(snap), idealized_page_size), SEEK_SET) < 0)
-        snap_error("seek failed");
-    }
-
-    oop* dest = objs_bottom;
-    for (fint i = 0; i < snapshot_objs_oop_count; i++) {
-      OS::FRead_oop(dest, snap);
-      dest++;
-    }
-    assert(dest == objs_top, "objs area size mismatch");
-
-    if (page_aligned) {
-      // Skip gap/padding between objs and bytes areas in the file.
-      // The write used page-aligned boundaries from the original 32-bit addresses.
-      char *old_objs_pe  = OS::idealized_page_end(old_objs_top);
-      char *old_bytes_ps = OS::idealized_page_start(old_bytes_bottom);
-      if (old_bytes_ps <= old_objs_pe) {
-        // Contiguous layout: file has old_objs_bottom..old_bytes_top
-        smi gap = (char*)old_bytes_bottom - (char*)old_objs_top;
-        if (gap > 0) fseek(snap, gap, SEEK_CUR);
-      } else {
-        // Separate layout: file has two chunks
-        // Skip padding from old_objs_top to old_objs_page_end
-        smi pad1 = old_objs_pe - (char*)old_objs_top;
-        if (pad1 > 0) fseek(snap, pad1, SEEK_CUR);
-        // Skip padding from old_bytes_page_start to old_bytes_bottom
-        smi pad2 = (char*)old_bytes_bottom - old_bytes_ps;
-        if (pad2 > 0) fseek(snap, pad2, SEEK_CUR);
-      }
-    }
-
-    // Bytes area: raw bytes, no widening needed
+    OS::FRead_mem_swap(objs_bottom, objs_top, snap);
     OS::FRead_mem(bytes_bottom, bytes_top, snap);
-  }
+  }    
 }
 
 oop space::get_allocation_vector() {
@@ -153,11 +80,11 @@ oop space::get_allocation_vector() {
 }
 
 
-newSpace::newSpace(const char *nm, smi &size, FILE *snap) : space(nm, snap) {
-  smi snap_size = old_size_bytes();
+newSpace::newSpace(const char *nm, int32 &size, FILE *snap) : space(nm, snap) {
+  int32 snap_size = old_size_bytes();
   if (size < snap_size) {
     warning1("Default size for %s too small for snapshot; ignoring", nm);
-    size= roundTo(snap_size, idealized_page_size);
+    size= snap_size;
   }
   assert((size & (oopSize-1)) == 0,
          "space size must be a multiple of oop size");
@@ -193,7 +120,7 @@ bool newSpace::scavenge_contents() {
 }
 
 
-oldSpace::oldSpace(const char *nm, smi &size, caddr_t desiredAddress) : space(nm, size)
+oldSpace::oldSpace(const char *nm, int32 &size, caddr_t desiredAddress) : space(nm, size)
 {
   next_space= NULL;
   size++;  // +1 for the invariant
@@ -203,13 +130,13 @@ oldSpace::oldSpace(const char *nm, smi &size, caddr_t desiredAddress) : space(nm
     size= 0;
     return;
   }
-  if (OS::is_directed_allocation_supported()
+  if (OS::is_directed_allocation_supported()  
   &&  mem != desiredAddress) { // must have fallen back on malloc()
     size= 0;
     delete [] mem;
     return;
   }
-  smi old_size = size; // init_space rounds it up!
+  int32 old_size = size; // init_space rounds it up!
   init_space(nm, size, mem);
   if (size != old_size) fatal("size changed");
 }
@@ -309,8 +236,8 @@ void space::compact(mapOop unmarked_map_map,
         oop* bp = (oop*) bv->bytes();
         assert(copySpace != this  ||  bp + bsize <= bd,
                "bytes parts aren't in order");
+        copy_words_down((int32*)bp + bsize, (int32*)bd, bsize);
         bd -= bsize;
-        memmove(bd, bp, bsize * oopSize);
         bv->set_bytes((char*) bd);
       }
       // compact oops part down
@@ -474,9 +401,8 @@ void space::write_snapshot(FILE* file) {
 }
 
 void space::relocate() {
-  for (oop* p = objs_bottom; p < objs_top; p ++) {
+  for (oop* p = objs_bottom; p < objs_top; p ++)
     RELOCATE_TEMPLATE(p);
-  }
 }
 
 void space::relocate_bytes() {
@@ -489,52 +415,6 @@ void space::relocate_bytes() {
       p += m->size();
     }
   }
-}
-
-// After loading a 32-bit snapshot into a 64-bit VM, the bytes area has
-// byte vector data packed at 4-byte (old oopSize) alignment.  The 64-bit
-// VM expects oop-aligned (8-byte) packing.  Repack the bytes area so that
-// each byte vector's data occupies lengthWords() * oopSize bytes.
-void space::repack_bytes_for_64bit() {
-  if (Memory->snapshot_oopSize == 0 || Memory->snapshot_oopSize >= oopSize)
-    return;  // only needed for 32-to-64 cross-size loading
-
-  smi bytes_size = (char*)bytes_top - (char*)bytes_bottom;
-  if (bytes_size == 0) return;
-
-  // Copy the entire bytes area to a temp buffer so we can repack in place
-  char* temp = (char*) malloc(bytes_size);
-  if (!temp) fatal("repack_bytes_for_64bit: malloc failed");
-  memcpy(temp, (char*)bytes_bottom, bytes_size);
-
-  // Repack from bytes_top downward with oop alignment
-  oop* new_bd = bytes_top;
-  for (oop* p = objs_bottom; p < objs_top; ) {
-    oopsOop m = as_oopsOop(p);
-    if (m->is_byteVector()) {
-      byteVectorOop bv = byteVectorOop(m);
-      smi len = bv->length();
-      fint new_words = ::lengthWords(len);
-
-      new_bd -= new_words;
-      char* old_ptr = bv->bytes();
-      smi offset = old_ptr - (char*)bytes_bottom;
-      char* src = temp + offset;
-      char* dst = (char*) new_bd;
-
-      memcpy(dst, src, len);
-      // Zero any padding bytes
-      smi padded = new_words * oopSize;
-      if (padded > len)
-        memset(dst + len, 0, padded - len);
-
-      bv->set_bytes(dst);
-    }
-    p += m->size();
-  }
-
-  free(temp);
-  bytes_bottom = new_bd;
 }
 
 void space::fixup_maps() {
@@ -607,8 +487,8 @@ void space::enumerate_matches(enumeration* e) {
   smi num_targets = e->get_num_targets();
   if (num_targets <= 0)  return;
   theEnumeration = e;
-  search_area((smi*) objs_bottom, (smi*) objs_top,
-              (smi*) e->get_targets(), num_targets,
+  search_area((int32*) objs_bottom, (int32*) objs_top,
+              (int32*) e->get_targets(), num_targets,
               (match_func)call_filter_match);
 }
 
@@ -654,11 +534,11 @@ void space::enumerate_families_small(enumeration* e) {
   
   if (objs_bottom <= errorObjp  &&  errorObjp < objs_top) {
     // two pieces:
-    search_area((smi*) objs_bottom,  (smi*) errorObjp, (smi*) e->get_maps(), e->get_num_maps(), (match_func)add_obj_map_match);
-    search_area((smi*) errorObj_end, (smi*)  objs_top, (smi*) e->get_maps(), e->get_num_maps(), (match_func)add_obj_map_match);
+    search_area((int32*) objs_bottom,  (int32*) errorObjp, (int32*) e->get_maps(), e->get_num_maps(), (match_func)add_obj_map_match);
+    search_area((int32*) errorObj_end, (int32*)  objs_top, (int32*) e->get_maps(), e->get_num_maps(), (match_func)add_obj_map_match);
   }
   else
-    search_area((smi*) objs_bottom,  (smi*) objs_top,  (smi*) e->get_maps(), e->get_num_maps(), (match_func)add_obj_map_match);
+    search_area((int32*) objs_bottom,  (int32*) objs_top,  (int32*) e->get_maps(), e->get_num_maps(), (match_func)add_obj_map_match);
 }
 
 
@@ -689,7 +569,7 @@ void space::enumerate_families(enumeration* e) {
     mapOop m = as_oopsOop(objp)->map()->enclosing_mapOop();
     maps[num_maps] = m; // Place sentinel
     oop* matching_cell =
-      (oop*) vectorfind_next_match((smi*) maps, (smi*) &m, 1, &hit_num);
+      (oop*) vectorfind_next_match((int32*) maps, (int32*) &m, 1, &hit_num);
     assert(matching_cell <= &maps[num_maps], "match out of area");
     if (matching_cell != &maps[num_maps]) {
       assert(!as_oopsOop(objp)->is_map(), "objp is a map");

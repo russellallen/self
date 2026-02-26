@@ -7,4 +7,5 @@ project(SelfDistribution)
 
 set(SELF_MACOSX_XCODEPROJECTNAME SelfDistribution)
 add_subdirectory(vm)
+add_subdirectory(vm64)
 add_subdirectory(tools)

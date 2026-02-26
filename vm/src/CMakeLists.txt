@@ -258,7 +258,6 @@ set(SRC_any
   any/prims/miscPrims.hh
   any/prims/prim.cpp
   any/prims/prim.hh
-  any/prims/smiPrims_x86_64.cpp
   any/prims/prim_table_arch.hh
   any/prims/prim_table_os.hh
   # -> quartz
@@ -338,7 +337,6 @@ set(SRC_any
   any/runtime/registerLocator.hh
   any/runtime/runtime.cpp
   any/runtime/runtime.hh
-  any/runtime/runtime_stubs_x86_64.cpp
   any/runtime/selfMonitor.cpp
   any/runtime/selfMonitor.hh
   any/runtime/shell.cpp
@@ -670,47 +668,7 @@ set(SRC_sparc
 )
 
 # inlcude platform files
-if(TARGET_ARCH STREQUAL "X86_64_ARCH")
-  # For x86_64 without JIT: include the full i386 file list (for headers/include paths)
-  # but exclude assembly .S files and JIT-specific .cpp files that require FAST/SIC_COMPILER.
-  set(_excluded_i386
-    # Assembly files (no x86_64 versions exist)
-    i386/prims/asmPrims_i386.S
-    i386/runtime/runtime_asm_gcc_i386.S
-    i386/zone/allocZone_i386.S
-    # Assembler/code generation (JIT only)
-    i386/asm/asm_i386.cpp
-    i386/asm/disasm_i386.cpp
-    # Fast compiler (JIT only)
-    i386/fast_compiler/codeGen_i386.cpp
-    i386/fast_compiler/fcompiler_i386.cpp
-    i386/fast_compiler/registerState_i386.cpp
-    i386/fast_compiler/registerString_i386.cpp
-    # SIC compiler (JIT only)
-    i386/sic/deadBlockNode_i386.cpp
-    i386/sic/genHelper_i386.cpp
-    i386/sic/longRegString_i386.cpp
-    i386/sic/node_i386.cpp
-    i386/sic/sic_i386.cpp
-    # Inline cache stubs (JIT only)
-    i386/lookup/cacheStub_i386.cpp
-    i386/lookup/diDesc_i386.cpp
-    i386/lookup/sendDesc_i386.cpp
-    # Zone/nmethod (JIT only)
-    i386/zone/addrDesc_i386.cpp
-    i386/zone/countPattern_i386.cpp
-    i386/zone/countStub_i386.cpp
-    i386/zone/nmethod_i386.cpp
-    i386/zone/trapdoors_i386.cpp
-    # JIT-specific runtime
-    i386/runtime/aCompiler_i386.cpp
-  )
-  set(SRC_i386_filtered ${SRC_i386})
-  list(REMOVE_ITEM SRC_i386_filtered ${_excluded_i386})
-  list(APPEND SRC_src ${SRC_i386_filtered})
-else()
-  list(APPEND SRC_src ${SRC_${platform_processor}})
-endif()
+list(APPEND SRC_src ${SRC_${platform_processor}})
 
 
 set(SRC_unix

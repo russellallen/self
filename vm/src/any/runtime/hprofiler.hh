@@ -44,9 +44,6 @@ class HProfiler: public CHeapObj {
 # endif // defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
  public:
-# if !defined(FAST_COMPILER) && !defined(SIC_COMPILER)
-  bool inactive() { return true; }
-# endif
 
   HProfiler();
  

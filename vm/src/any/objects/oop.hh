@@ -25,7 +25,7 @@ class oopClass {
   oopClass(oopClass &o) { Unused(o); ShouldNotCallThis(); }
   
   // accesses
-  fint tag() { return maskBits(smi(this), Tag_Mask); }
+  fint tag() { return maskBits(int32(this), Tag_Mask); }
   
   // tag dispatchers (inlined in oop.h)
   inline Map* map();

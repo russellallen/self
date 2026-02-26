@@ -121,7 +121,7 @@ void OS::setDateTimeBuf(struct tm *tod, smi buf[]) {
 // If desiredAddress not 0, try to get that area; assume the caller 
 // knows what he wants.
 
-char* OS::allocate_idealized_page_aligned(smi &size, const char *name,
+char* OS::allocate_idealized_page_aligned(int32 &size, const char *name,
                                           caddr_t desiredAddress, 
                                           bool mustAllocate) {
   size= roundTo(size, idealized_page_size);
@@ -143,7 +143,7 @@ void OS::allocate_failed(const char* what) {
 
 // the address of the start of the page containing p
 char* OS::page_start(void *p, unsigned int pg_sz) {
-  return (char*)(smi((char*)p) & ~(smi)(pg_sz - 1));
+  return (char*)(int((char*)p) & ~(pg_sz - 1)); 
 }
   
 // the address of the start of the next page after p-1
@@ -169,56 +169,6 @@ void OS::FRead_swap(void* buffer, int32 size, FILE* stream) {
   for (int32* p = (int32*)buffer;  p < end;  p++)
     if (Memory->is_snapshot_other_endian) 
       swap_bytes(p); 
-}
-
-
-// Read one oop from snapshot, widening from snapshot_oopSize to oopSize if needed.
-// Handles sign-extension for smis, zero-extension for pointers,
-// and bit-field reformatting for markOops (hash/age/marked fields shift).
-void OS::FRead_oop(oop* dest, FILE* stream) {
-  if (Memory->snapshot_oopSize == oopSize) {
-    // Same oop size — normal read
-    FRead_swap(dest, oopSize, stream);
-    return;
-  }
-  // Read a 32-bit oop from the snapshot and widen to 64-bit
-  assert(Memory->snapshot_oopSize == 4, "only 32-to-64 widening supported");
-  int32 val32;
-  FRead_swap(&val32, sizeof(int32), stream);
-
-  fint tag = val32 & Tag_Mask;
-  switch (tag) {
-    case Int_Tag:
-      // Sign-extend smi to preserve negative values
-      *dest = (oop)(smi)(int32)val32;
-      break;
-    case Mark_Tag: {
-      // Reformat markOop: bit layout changes between 32 and 64 bit
-      //   32-bit: marked<1> age<7> hash<22> tag<2>
-      //   64-bit: marked<1> age<7> hash<54> tag<2>
-      uint32 u = (uint32)val32;
-      fint old_hash_bits  = 22;  // 32 - 1 - 7 - 2
-      fint old_hash_shift = Tag_Size;             // 2
-      fint old_age_shift  = old_hash_bits + old_hash_shift; // 24
-      fint old_mark_shift = 7 + old_age_shift;    // 31
-
-      smi hash_val    = (u >> old_hash_shift) & nthMask(old_hash_bits);
-      smi age_val     = (u >> old_age_shift) & nthMask(age_bits);
-      smi marked_val  = (u >> old_mark_shift) & 1;
-
-      // Repack into 64-bit layout
-      smi result = Mark_Tag
-                 | (hash_val << hash_shift)
-                 | (age_val  << age_shift)
-                 | (marked_val << object_is_marked_shift);
-      *dest = (oop)result;
-      break;
-    }
-    default:
-      // Mem_Tag or Float_Tag: zero-extend (pointer address)
-      *dest = (oop)(smi)(uint32)val32;
-      break;
-  }
 }
 
 

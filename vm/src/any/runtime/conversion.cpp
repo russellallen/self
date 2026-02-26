@@ -356,21 +356,11 @@ void Conversion::returnToSelf(oop res, char* self_sparc_fp_or_ppc_sp,
   // Also, this method can be called with this == NULL (in this case, no
   // conversion was performed and we just want to return to the Self
   // program).
-# if defined(FAST_COMPILER) || defined(SIC_COMPILER)
   assert(zone::frame_chain_nesting == 0, "frames shouldn't be chained");
-# endif
-  frame* dest_self_fr;
-  if (this == NULL)
-    dest_self_fr = currentProcess->last_self_frame(true);
-  else if (isInterpretingArg)
-    dest_self_fr = convertFrame;  // for interpreter, needs to be the official interp frame
-# if defined(FAST_COMPILER) || defined(SIC_COMPILER)
-  else
-    dest_self_fr = fixConversionStack_for_returning_to_self( self_sparc_fp_or_ppc_sp, self_sd );
-# else
-  else
-    { ShouldNotReachHere(); dest_self_fr = NULL; }
-# endif
+  frame* dest_self_fr =
+                 this == NULL       ?  currentProcess->last_self_frame(true)
+              :  isInterpretingArg  ?  convertFrame  // for interpreter, needs to be the official interp frame
+                                    :  fixConversionStack_for_returning_to_self( self_sparc_fp_or_ppc_sp, self_sd );
   
   bool wasUncommon, restartSend;
   int32* uncommonPC;
@@ -444,7 +434,7 @@ void Conversion::return_to_compiled_self(
                     char* self_sparc_fp_or_ppc_sp) {
 
   # if !defined(FAST_COMPILER) && !defined(SIC_COMPILER)
-    ShouldNotReachHere(); return;
+    ShouldNotReachHere(); return 0;
   # else
 
     char* continuationPC;

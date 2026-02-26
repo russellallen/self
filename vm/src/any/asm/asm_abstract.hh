@@ -4,19 +4,6 @@
    See the LICENSE file for license information. */
 
 
-// OperandType is used by frame_format for location_addr, so it must be
-// available even without the JIT compilers.
-enum OperandType {
-  RegisterOperand,
-  NumberOperand,                // Just a number, not even tracked in locs()
-  OopOperand,
-  VMAddressOperand,             // VM address (e.g. variable), not tracked if not embedded
-  PVMAddressOperand,            // address of primitive, sets IsPrimitive() in loc
-  BPVMAddressOperand,           // backpatched VM addr, e.g. SendMessage_stub, sets isSendDesc() in loc
-  CodeAddressOperand,           // another nmethod, also sets IsSendDesc() in loc
-  DIVMAddressOperand            // for DIDescs, sets IsDIDesc() in loc
-};
-
 # if  defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
 
@@ -26,6 +13,17 @@ enum OperandType {
 
 
 // base class for assembler (see BaseAssembler::doAddOffset)
+
+enum OperandType {
+  RegisterOperand, 
+  NumberOperand,                // Just a number, not even tracked in locs()
+  OopOperand,
+  VMAddressOperand,             // VM address (e.g. variable), not tracked if not embedded
+  PVMAddressOperand,            // address of primitive, sets IsPrimitive() in loc
+  BPVMAddressOperand,           // backpatched VM addr, e.g. SendMessage_stub, sets isSendDesc() in loc
+  CodeAddressOperand,           // another nmethod, also sets IsSendDesc() in loc
+  DIVMAddressOperand            // for DIDescs, sets IsDIDesc() in loc
+};
 
 extern const char* OperandTypeNames[];
 

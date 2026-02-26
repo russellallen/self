@@ -1,4 +1,4 @@
-# if defined(__i386__) || defined(__x86_64__)
+# ifdef __i386__
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -26,4 +26,4 @@
     
     di_addr_desc_offset     = di_jump_address_offset  
   };
-# endif // defined(__i386__) || defined(__x86_64__)
+# endif // __i386__

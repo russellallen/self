@@ -28,8 +28,8 @@ void FrameIterator::do_interpreted() {
 
 
 # if !(defined(FAST_COMPILER) || defined(SIC_COMPILER))
-  void FrameIterator::do_compiled() { ShouldNotReachHere(); }
-# endif
+  void do_compiled() { ShouldNotReachHere(); }
+# endif  
 
 void FrameIterator::do_patched_frame_saved_outgoing_args() {
   if ( !SaveOutgoingArgumentsOfPatchedFrames )

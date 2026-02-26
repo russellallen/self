@@ -94,7 +94,7 @@
       // new again
       needCheckStore = needCheckStore && p->is_new(); // ints/floats aren't new
       assert(dstBase != t, "must be different");
-      theAssembler->movl((int32)(smi)p, OopOperand, dstBase, offset, NumberOperand);
+      theAssembler->movl((int32)p, OopOperand, dstBase, offset, NumberOperand);
     }
     else if (isRegister(_src->loc)) {
       theAssembler->movl(_src->loc, dstBase, offset, NumberOperand);
@@ -121,7 +121,7 @@
       theAssembler->shrl(card_shift, NumberOperand, Temp1);  // shift target addr
 
       if (!UseByteMapBaseReg) {
-        theAssembler->addl(no_reg, (int32)(smi)&byte_map_base, VMAddressOperand, Temp1);
+        theAssembler->addl(no_reg, (int32)&byte_map_base, VMAddressOperand, Temp1);
         theAssembler->movb(0, Temp1, 0, VMAddressOperand);
       }
       else 
@@ -147,7 +147,7 @@
       reg_disp_type_of_loc(&b, &d, &t, _dest->loc);
       if (b == ebp && d >= 0)
         theAssembler->Untested("genOop");
-      theAssembler->movl((int32)(smi)c, OopOperand, b, d, t);
+      theAssembler->movl((int32)c, OopOperand, b, d, t);
     }
   }
 
@@ -182,7 +182,7 @@
     fint num_nops = (4 - x) & 3;
     for (fint i = 0;  i < num_nops; ++i) theAssembler->nop();
 
-    theAssembler->call((int32)(smi)SendMessage_stub, BPVMAddressOperand);
+    theAssembler->call((int32)SendMessage_stub, BPVMAddressOperand);
     offset = theAssembler->offset();
     Label past_send_desc(theAssembler->printing);
     theAssembler->jmp(&past_send_desc);
@@ -219,7 +219,7 @@
   void reload_ByteMapBaseReg(PrimDesc* pd) {
     if (UseByteMapBaseReg && pd->canScavenge()) {
       // any prim that can scavenge, may expand heap,so need to reload this reg
-      theAssembler->movl(no_reg, (int32)(smi)&byte_map_base, VMAddressOperand, ByteMapBaseReg);
+      theAssembler->movl(no_reg, (int32)&byte_map_base, VMAddressOperand, ByteMapBaseReg);
     }
   }
 
@@ -230,7 +230,7 @@
     assert(bci() != IllegalBCI, "should have legal bci");
     if (pd->canWalkStack()) genPcDesc();
 
-    theAssembler->call((int32)(smi)first_inst_addr(pd->fn()), PVMAddressOperand); // do the call
+    theAssembler->call((int32)first_inst_addr(pd->fn()), PVMAddressOperand); // do the call
 
     // skip over inline cache:
     Label past_nlr(theAssembler->printing); 
@@ -256,7 +256,7 @@
     BasicNode::gen();
     genPcDesc();
     theAssembler->Comment("stack overflow/interrupt check");
-    theAssembler->cmpl(no_reg, (int32)(smi)(&SPLimit), VMAddressOperand, esp); // test for stack overflow
+    theAssembler->cmpl(no_reg, int32(&SPLimit), VMAddressOperand, esp); // test for stack overflow
     Label l_(theAssembler->printing);
     theAssembler->ja(&l_); // ok
     PrimNode::gen();
@@ -266,7 +266,7 @@
   void RestartNode::gen() {
     genPcDesc();
     theAssembler->Comment("stack overflow/interrupt check");
-    theAssembler->cmpl(no_reg, (int32)(smi)(&SPLimit), VMAddressOperand, esp);
+    theAssembler->cmpl(no_reg, int32(&SPLimit), VMAddressOperand, esp);
     Label* dest = new Label(theAssembler->printing);
     theAssembler->ja(dest);
     loopStart->l = loopStart->l->unify(dest);
@@ -282,7 +282,7 @@
     theAssembler->movl(Temp1, esp, rcvr_offset * oopSize, NumberOperand);
     theAssembler->movl(ebp, esp, first_arg_offset * oopSize, NumberOperand);
 
-    theAssembler->call( (int32)(smi)first_inst_addr(blockClone->fn()), PVMAddressOperand);
+    theAssembler->call( (int32)first_inst_addr(blockClone->fn()), PVMAddressOperand);
     assert(!blockClone->needsNLRCode(),  "need to rewrite this");
     genHelper->moveRegToLoc(ResultReg, dest);
   }
@@ -297,7 +297,7 @@
       // test if already created
       theAssembler->Comment("test memoized block");
       Location t = genHelper->moveToReg(block(), Temp1);
-      theAssembler->cmpl((int32)(smi)deadBlockPR->constant, OopOperand, Temp1);
+      theAssembler->cmpl((int32)deadBlockPR->constant, OopOperand, Temp1);
       Label done;
       theAssembler->jne(&done); // optimize fast case, so predict-weird
       genCall();
@@ -677,7 +677,7 @@
          failNode->l = L->unify(failNode->l);
          return NoReg;
        }
-       return arith_genHelper_do_immediate(dst, (int32)(smi)(val), op, dest->isNoPReg(), failNode);
+       return arith_genHelper_do_immediate(dst, int32(val), op, dest->isNoPReg(), failNode);
     }
        
     Location opr = arith_genHelper_move_oper_to_reg(dst, oper, op);
@@ -738,11 +738,11 @@
       theAssembler->Untested("TArithRRNode const");
       Location b;  int32 d;  OperandType t;
       reg_disp_type_of_loc(&b, &d, &t, _dest->loc);
-      theAssembler->movl((int32)(smi)constResult->constant, OopOperand, b, d, t);
+      theAssembler->movl((int32)constResult->constant, OopOperand, b, d, t); 
       return;
     }
     // assembler uses large number as shift by ecx, so check for static overflow here
-    if (oper->isConstPReg()  &&  (smi)(((ConstPReg*)oper)->constant) > 32)
+    if (oper->isConstPReg()  &&  (uint32)(((ConstPReg*)oper)->constant) > 32)
       switch (op) {
        default:  break;
       
@@ -894,7 +894,7 @@
     // we're here iff arg and rcvr are smiOop's.  do the actual comparision
     if (haveImmediate) {
       oop val = ((ConstPReg*)arg)->constant;
-      theAssembler->cmpl((int32)(smi)val, NumberOperand, rb, rd, rt);
+      theAssembler->cmpl((int32)val, NumberOperand, rb, rd, rt);
     }
     else if (isRegister(rcvrReg)) {
       theAssembler->cmpl(ab, ad, at, rcvrReg);
@@ -991,7 +991,7 @@
     // instruction might clober the receiver (if "pr" wasn't already
     // in a register).  but this is ok since we don't need the receiver
     // any more. -mabdelmalek 10/02.
-    theAssembler->cmpl((int32)(smi)pr->constant, OopOperand, RcvrMapReg);  // compare
+    theAssembler->cmpl((int32)pr->constant, OopOperand, RcvrMapReg);  // compare
     Label* match = new Label(theAssembler->printing);
     theAssembler->je(match);                 // branch if match
     define(index, match);
@@ -1001,7 +1001,7 @@
     assert(!pr->constant->is_map(), "should be oop");
     Location b; int32 d; OperandType t;
     reg_disp_type_of_loc(&b, &d, &t, r);
-    theAssembler->cmpl((int32)(smi)pr->constant, OopOperand, b, d, t);
+    theAssembler->cmpl((int32)pr->constant, OopOperand, b, d, t);
     Label* match = new Label(theAssembler->printing);
     theAssembler->je(match);                // branch if match
     define(index, match);
@@ -1105,7 +1105,7 @@
     }
 
     // check bounds
-    theAssembler->cmpl((int32)(smi)as_smiOop(nCases), OopOperand, r);
+    theAssembler->cmpl((int32)as_smiOop(nCases), OopOperand, r);
     theAssembler->jnb(&end); // goto end if index is out of bounds
   
     Label L(theAssembler->printing);
@@ -1194,7 +1194,7 @@
     if (argFail) {
       argFail->define();
       if (error) {
-        a->movl((int32)(smi)VMString[BADTYPEERROR], OopOperand, eb, ed, et);
+        a->movl((int32)VMString[BADTYPEERROR], OopOperand, eb, ed, et);
       }
       if (failMerge) { // test added by dmu 4/27/96
         Label* L = new Label(a->printing);
@@ -1204,7 +1204,7 @@
     }
     indexFail->define();
     if (error) {
-      a->movl((int32)(smi)VMString[BADINDEXERROR], OopOperand, eb, ed, et);
+      a->movl((int32)VMString[BADINDEXERROR], OopOperand, eb, ed, et);
     }
     if (failMerge) { // test added by dmu 4/27/96
       Label* L = new Label(a->printing);
@@ -1240,19 +1240,19 @@
       genHelper->moveRegToLoc(arr, _dest->loc);
     
     if (elem->isConstPReg()  &&  ((ConstPReg*)elem)->constant->is_old()) {
-      theAssembler->movl((int32)(smi)((ConstPReg*)elem)->constant, OopOperand, arr, dataOffset, NumberOperand, index, Assembler::by_one);
+      theAssembler->movl((int32)((ConstPReg*)elem)->constant, OopOperand, arr, dataOffset, NumberOperand, index, Assembler::by_one);
     }
     else {
       assert(elem->loc != Temp1, "???");
       theAssembler->leal(arr, dataOffset, NumberOperand, index, Assembler::by_one, Temp1);
       if (elem->isConstPReg())
-        theAssembler->movl((int32)(smi)((ConstPReg*)elem)->constant, OopOperand, Temp1, 0, NumberOperand);
+        theAssembler->movl((int32)((ConstPReg*)elem)->constant, OopOperand, Temp1, 0, NumberOperand);
       else
         theAssembler->movl( genHelper->moveToReg(elem, Temp2), Temp1, 0, NumberOperand);
 
       theAssembler->shrl(card_shift, NumberOperand, Temp1);
       if (!UseByteMapBaseReg) {
-        theAssembler->addl(no_reg, (int32)(smi)&byte_map_base, VMAddressOperand, Temp1);
+        theAssembler->addl(no_reg, (int32)&byte_map_base, VMAddressOperand, Temp1);
         theAssembler->movb(0, Temp1, 0, NumberOperand);
       }
       else {

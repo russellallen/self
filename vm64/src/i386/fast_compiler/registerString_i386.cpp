@@ -1,0 +1,1 @@
+../../../../vm/src/i386/fast_compiler/registerString_i386.cpp

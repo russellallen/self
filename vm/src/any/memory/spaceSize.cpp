@@ -14,7 +14,7 @@ unsigned long MaxDepsSize=        ScopesStart      - DepsStart;
 unsigned long MaxScopesSize=      ZoneIDStart      - ScopesStart;
 unsigned long MaxZoneIDSize=      CountStubIDStart - ZoneIDStart;
 unsigned long MaxCountStubIDSize= UseCountStart    - CountStubIDStart;
-unsigned long MaxUseCountSize=    AddrSpaceEnd     - UseCountStart;
+unsigned long MaxUseCountSize=    (caddr_t)(512*M) - UseCountStart;
 
 
 #define MAKE_SPACE_SLOT_TEMPLATE(s)                                         \

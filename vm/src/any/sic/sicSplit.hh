@@ -27,13 +27,13 @@
     SplitSig(SplitSig &s) { ShouldNotCallThis(); }
     friend SplitSig* new_SplitSig(SplitSig* current, fint splitID);
 
-    fint level()        { return smi(this) & LevelMask; }
+    fint level()        { return uint32(this) & LevelMask; }
     bool contains(SplitSig* other) {
       // other sig is in same branch iff the receiver is a prefix of other
       // NB: this is not symmetric, i.e. it's like <=, not ==
       fint shift = (MaxSplitDepth - level() + 1) << 2;
       if (shift == 32) return true;     // because x >> 32 is undefined
-      return ((smi(this) ^ smi(other)) >> shift) == 0;
+      return ((uint32(this) ^ uint32(other)) >> shift) == 0;
     }
     void print();
     const char* prefix(char* buf);

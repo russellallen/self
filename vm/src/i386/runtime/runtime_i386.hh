@@ -1,4 +1,4 @@
-# if defined(__i386__) || defined(__x86_64__)
+# ifdef __i386__
 /* Sun-$Revision: 1.5 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -60,9 +60,7 @@ extern "C" { void  HandleUncommonTrap(); }
 // ppc interpreter needs help finding int arg on stack
 
 extern "C" void* save1Arg(void*);
-// On SPARC, save1Arg saves the argument across register-window switches.
-// On x86/x86_64 there are no register windows, so just return the argument.
-inline void* save1Arg(void* p) { return p; }
+inline void* save1Arg(void*) {fatal("unimp intel"); return 0; }
 
 // see interpreter.c:
 
@@ -83,9 +81,5 @@ inline bool fastPreemptionCheck() {
 }
 
 
-# if TARGET_ARCH == X86_64_ARCH
-const int32 SelfStackLimit = 5 * 1024 * 1024; // x86_64 interpreter-only: frames are ~2x larger than i386 JIT
-# else
 const int32 SelfStackLimit = 250000; // a wild guess
-# endif
-# endif // defined(__i386__) || defined(__x86_64__)
+# endif // __i386__

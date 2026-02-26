@@ -228,7 +228,7 @@ void  InterruptedContext::set_pc(void *pc) { *pc_addr() = (char*)pc; }
 frame* InterruptedContext::sp() { 
   return !is_set() ? NULL : (frame*) *sp_addr(); } 
   
-void InterruptedContext::set_sp(void* sp) { *sp_addr() = (smi) sp; }
+void InterruptedContext::set_sp(void* sp) { *sp_addr() = (int) sp; }
 
 
 int InterruptedContext::code_at_pc() {

@@ -77,8 +77,7 @@
   }
 
 # elif TARGET_OS_VERSION == LINUX_VERSION \
-    && (   TARGET_ARCH   == I386_ARCH \
-        || TARGET_ARCH   == X86_64_ARCH )
+    && TARGET_ARCH       == I386_ARCH
   // Don't know if Linux does this; rely on I386 for now
   void MachineCache::flush_instruction_cache_word(void* addr) { }
 

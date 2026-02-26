@@ -14,7 +14,7 @@ void markOopClass::print() {
   lprintf("\n");
 }
 
-smi assign_hash(markOop& m) {
+int32 assign_hash(markOop& m) {
   m = m->set_hash(currentProcess->current_hash++);
   return m->hash();
 }

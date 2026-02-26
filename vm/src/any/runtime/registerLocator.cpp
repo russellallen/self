@@ -36,7 +36,7 @@ RegisterLocator* RegisterLocator::clone() {
 
 
 void RegisterLocator::set_address(Location reg, oop* a) {
-  assert( ( smi(a) & 3 ) == 0, "alignment check");
+  assert( ( int(a) & 3 ) == 0, "alignment check");
   addresses()[index_for_reg(reg)] = a;
 }
 
@@ -44,7 +44,7 @@ void RegisterLocator::set_address(Location reg, oop* a) {
 oop* RegisterLocator::address_of(Location reg) {
   assert( my_frame->is_aligned(), "frame not set");
   oop* r = addresses()[index_for_reg(reg)];
-  assert(r != NULL  &&  (smi(r) & (oopSize-1)) == 0,
+  assert(r != NULL  &&  (int(r) & (oopSize-1)) == 0,
          "If this is called from a primitive, be sure the primtive table entry sets canWalkStack");
   return r;
 }

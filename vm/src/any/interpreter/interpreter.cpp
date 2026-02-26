@@ -9,61 +9,12 @@
 
 oop sneaky_method_argument_to_interpret;
 
-interpreter* interpreter::_active_interp_list = NULL;
-
-interpreter* interpreter::find_interpreter_for_frame(frame* f) {
-# if TARGET_ARCH == X86_64_ARCH
-  // On x86_64, interpreter lists are per-process. First check the
-  // current process, then find which process owns the frame.
-  for (interpreter* i = currentProcess->active_interp_list; i != NULL; i = i->_prev_interp) {
-    if (i->_my_frame == f)
-      return i;
-  }
-  // Frame not found in current process — find its owning process
-  Stack* stk = processes->stackFor(f);
-  if (stk && stk->process != currentProcess) {
-    for (interpreter* i = stk->process->active_interp_list; i != NULL; i = i->_prev_interp) {
-      if (i->_my_frame == f)
-        return i;
-    }
-  }
-  return NULL;
-# else
-  for (interpreter* i = _active_interp_list; i != NULL; i = i->_prev_interp) {
-    if (i->_my_frame == f)
-      return i;
-  }
-  return NULL;
-# endif
-}
-
-# if TARGET_ARCH == X86_64_ARCH
-interpreter* interpreter::active_interp() {
-  return currentProcess->active_interp_list;
-}
-
-// Called by NLRSupport::continue_NLR_into_interpreted_Self() to unwind
-// back to the interpreter's setjmp point without needing c_entry_point()
-// or ContinueNLRFromC (which don't work on x86_64 interpreter-only builds).
-void interpreter_longjmp_for_NLR() {
-  interpreter* interp = interpreter::active_interp();
-  assert(interp != NULL, "no active interpreter for NLR");
-  longjmp(interp->nlr_jmpbuf(), 1);
-}
-# endif
 
 inline frame* interpreter::block_scope_or_NLR_target() {
-  if (_block_scope_or_NLR_target)
-    return _block_scope_or_NLR_target;
-# if TARGET_ARCH == X86_64_ARCH
-  // On x86_64 interpreter-only builds, frame walking can't find
-  // interpreted Self frames. Use the frame captured at interpret() entry.
-  _block_scope_or_NLR_target = _my_frame;
-# else
-  _block_scope_or_NLR_target =
-    currentProcess->last_self_frame(true)->block_scope_of_home_frame();
-# endif
-  return _block_scope_or_NLR_target;
+  return _block_scope_or_NLR_target 
+    ?  _block_scope_or_NLR_target
+    :  _block_scope_or_NLR_target
+         = currentProcess->last_self_frame(true)->block_scope_of_home_frame();
 }
 
   
@@ -106,8 +57,6 @@ inline interpreter::interpreter( oop rcv,
   selToSend= VMString[VALUE]; // just a placeholder
   return_patch_reason= not_patched;
   current_primDesc = NULL;
-  _my_frame = NULL;
-  _prev_interp = NULL;
   _block_scope_or_NLR_target = NULL;
   
   if (mi.map()->kind() == OuterMethodType) {
@@ -184,28 +133,7 @@ oop interpret( oop rcv,
   interp.set_stack (        alloca(interp.length_stack()         * sizeof(oop)));
   interp.set_locals(        alloca(interp.length_locals()        * sizeof(oop)));
 
-  // Register this interpreter so frame-based lookup can find it.
-  // On x86_64 without JIT, frame walking can't detect interpreted
-  // Self frames, so we maintain a per-process linked list to avoid
-  // corruption when process switches interleave push/pop operations.
-  interp._my_frame = currentFrame();
-# if TARGET_ARCH == X86_64_ARCH
-  interp._prev_interp = currentProcess->active_interp_list;
-  currentProcess->active_interp_list = &interp;
-# else
-  interp._prev_interp = interpreter::_active_interp_list;
-  interpreter::_active_interp_list = &interp;
-# endif
-
   ((interpreter*)save1Arg(&interp))->interpret_method();
-
-  // Deregister on exit
-# if TARGET_ARCH == X86_64_ARCH
-  currentProcess->active_interp_list = interp._prev_interp;
-# else
-  interpreter::_active_interp_list = interp._prev_interp;
-# endif
-
   return interp.top();
 }
 
@@ -244,17 +172,14 @@ void interpreter::setup_for_block() {
 
 
 void interpreter::interpret_method() {
-
+  
   do {
     sp = 0;
     pc = PrologueBCI;
-
+  
     if (fastPreemptionCheck() /* || PendingSelfSignals::are_any_pending() XXX right? */ ) {
-      // save non vol regs cause ctrl C causes abort which NLR's
+      // save non vol regs cause ctrl C causes abort which NLR's 
       //  through c frames -- dmu 1/96
-#     if TARGET_ARCH == X86_64_ARCH
-      if (setjmp(_nlr_jmpbuf) == 0)
-#     endif
       SaveNonVolRegsAndCall0(interruptCheck);
       if (NLRSupport::have_NLR_through_C()) {
         continue_NLR();
@@ -398,12 +323,13 @@ void interpreter::do_read_write_local_code(bool isWrite) {
  
 void interpreter::do_send_code(bool isSelfImplicit, stringOop selector, fint arg_count) {
   LookupType type;
-
+  
   if      ( !isSelfImplicit )          type =         NormalLookupType;
   else if ( is.is_undirected_resend)   type =         ResendLookupType;
   else if ( is.delegatee != NULL)      type = DirectedResendLookupType;
   else                                 type =   ImplicitSelfLookupType;
-
+        
+      
   if (selector == VMString[_RESTART])
     pc= restart_pc();
   else {
@@ -452,12 +378,12 @@ void interpreter::start_NLR(oop res) {
   if (CatchInterprocessReturns)
     catch_interprocess_returns(receiver);
   block_scope_and_desc_of_home( block_home_scope_frame, block_home_desc);
-  NLRSupport::save_NLR_results( res,  smi(block_home_scope_frame),  block_home_desc);
+  NLRSupport::save_NLR_results( res,  int32(block_home_scope_frame),  block_home_desc);
 }
 
 
 void interpreter::continue_NLR() {
-  if ((smi)block_scope_or_NLR_target() == NLRSupport::NLR_home_from_C()) {
+  if ((int32)block_scope_or_NLR_target() == NLRSupport::NLR_home_from_C()) {
     // this is the home frame (mixed) of the block
     NLRSupport::reset_have_NLR_through_C();  // home, that's it
   }
@@ -473,15 +399,10 @@ void interpreter::send(LookupType type, oop delOrNameToSend, fint arg_count ) {
   rcvToSend = type == NormalLookupType ? stack[sp - arg_count - 1] : self;
   
   if (mi.instruction_set != TWENTIETH_CENTURY_PLUS_ARGUMENT_COUNT_INSTRUCTION_SET)
-    arg_count = stringOop(selToSend)->arg_count(); // XXXX slow, fix w/ lookup cache
-
-  // Sync member from local (local parameter shadows the member;
-  // lookup_and_send and send_prim access the member directly)
-  this->arg_count = arg_count;
-
-
+    arg_count = stringOop(selToSend)->arg_count(); // XXXX slow, fix w/ lookup cache 
+  
   int32 resSP = sp - arg_count - (type == NormalLookupType);
-
+    
   oop res;
   for (;;) {
 
@@ -539,15 +460,12 @@ oop interpreter::send_prim() {
                                         arg_count - (hasFailBlock == true));
   */
   
-# if TARGET_ARCH == X86_64_ARCH
-  if (setjmp(_nlr_jmpbuf) == 0)
-# endif
   res = SaveNonVolRegsAndCall4 ( CallPrimitiveFromInterpreter,
                                  (void*)first_inst_addr((void*)current_primDesc->fn()),
                                  rcvToSend,
                                  &stack[sp - arg_count],
                                  arg_count - (hasFailBlock == true));
-
+  
   if (NLRSupport::have_NLR_through_C()) { // for tests unwindProtectFn2
     return NLRSupport::NLR_result_from_C(); // might be returning badOop if killing proc
   }
@@ -625,14 +543,11 @@ oop interpreter::lookup_and_send( LookupType type,
                     selToSend,
                     delOrNameToSend,
                     mh );
-
+    
     // XXXXXX check code table, use compiled method, get compiler to call me
 
-#   if TARGET_ARCH == X86_64_ARCH
-    if (setjmp(_nlr_jmpbuf) == 0)
-#   endif
     switchToVMStack_intSend( &L, arg_count, InterpreterLookup_cont);
-    if (NLRSupport::have_NLR_through_C()) { // recursive lookup error
+    if (NLRSupport::have_NLR_through_C()) { // recursive lookup error 
       return NLRSupport::NLR_result_from_C();
     }
     return  L.evaluateResult(&stack[sp - arg_count], arg_count, NULL);
@@ -655,15 +570,12 @@ oop interpreter::lookup_and_send( LookupType type,
        used to be:
        switchToVMStack_intSend( (simpleLookup*)&L, arg_count, InterpreterLookup_cont);
     */
-#   if TARGET_ARCH == X86_64_ARCH
-    if (setjmp(_nlr_jmpbuf) == 0)
-#   endif
-    SaveNonVolRegsAndCall3( switchToVMStack_intSend,
-                            (simpleLookup*)&L,
-                            arg_count,
+    SaveNonVolRegsAndCall3( switchToVMStack_intSend, 
+                            (simpleLookup*)&L, 
+                            arg_count, 
                             InterpreterLookup_cont);
-
-    if (NLRSupport::have_NLR_through_C()) { // recursive lookup error
+                            
+    if (NLRSupport::have_NLR_through_C()) { // recursive lookup error 
       return NLRSupport::NLR_result_from_C();
     }
   

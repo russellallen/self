@@ -12,14 +12,9 @@ if(SELF_X11)
     endif()
 endif()
 
-if(NOT TARGET_ARCH STREQUAL "X86_64_ARCH")
-  list(APPEND _defines
-    FAST_COMPILER
-    SIC_COMPILER
-  )
-endif()
-
 list(APPEND _defines
+  FAST_COMPILER
+  SIC_COMPILER
   NATIVE_ARCH=${platform_processor}
   ${DYNAMIC}
 )

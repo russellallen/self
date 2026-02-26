@@ -289,7 +289,7 @@
 
 # define bv_string(i, with_len, allow_null, copy, ptr_type, allow_canonical)  \
     ptr_type C_arg(i);                                                        \
-    fint     C_len(i);                                                        \
+    int      C_len(i);                                                        \
     /* The cast oop(smiOop_zero) is necessary because of a g++-1.94 bug. */   \
     if (allow_null && s_arg(i) == oop(smiOop_zero)) {                         \
       C_arg(i) = NULL;                                                        \
@@ -393,7 +393,7 @@
       void *the_actual_seal = proxyOop(s_arg(i))->get_type_seal();            \
       if (the_actual_seal != (void*)proxy_type_seal(aux))                     \
         cnvt_err(BADTYPESEALERROR, s_arg(i), aux)                             \
-      C_arg(i) = (proxy_pntr_type(aux))(smi) proxyOop(s_arg(i))->get_pointer();    \
+      C_arg(i) = (proxy_pntr_type(aux)) proxyOop(s_arg(i))->get_pointer();    \
       if (!allow_null  &&  C_arg(i) == 0)                                     \
         cnvt_err(NULLPOINTERERROR, s_arg(i), aux)                             \
     } else                                                                    \

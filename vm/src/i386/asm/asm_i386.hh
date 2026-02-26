@@ -1,4 +1,4 @@
-# if defined(__i386__) || defined(__x86_64__)
+# ifdef __i386__
 /* Sun-$Revision: 1.6 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -60,7 +60,7 @@ class Assembler: public BaseAssembler {
   void addOffset(OperandType, bool is_embedded, bool is_relative);
   
   void Backpatch(pc_t destp, pc_t target) {
-    *((int32*)destp) += (smi)target;
+    *((int32*)destp) += (int32)target;
   }
   
   void printRM(RegSize rs, Location r, int32 d, OperandType t, Location index, Scale s, const char* ps, bool is_call = false);
@@ -505,4 +505,4 @@ class Assembler: public BaseAssembler {
 
 
 # endif // defined(FAST_COMPILER) || defined(SIC_COMPILER)
-# endif // defined(__i386__) || defined(__x86_64__)
+# endif // __i386__

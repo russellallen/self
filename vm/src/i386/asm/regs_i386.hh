@@ -1,4 +1,4 @@
-# if defined(__i386__) || defined(__x86_64__)
+# ifdef __i386__
 /* Sun-$Revision: 1.6 $ */
 
 /* Copyright 1992-2012 AUTHORS.x
@@ -13,7 +13,7 @@
 // i386.format.h !!!!
 
 
-# if  TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH
+# if  TARGET_ARCH == I386_ARCH
 
   const      fint NumRegisters = 8; 
   const      fint NumArgRegisters = 0; 
@@ -169,4 +169,4 @@ const RegisterString LocalMask = 0;
 
 
 # endif
-# endif // defined(__i386__) || defined(__x86_64__)
+# endif // __i386__

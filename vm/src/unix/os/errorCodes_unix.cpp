@@ -231,7 +231,7 @@ extern int   sys_nerr;                  // length of above table
 #endif // !MACOSX_VERSION
 
 
-const char* ErrorCodes::os_error_name(fint error) {
+const char* ErrorCodes::os_error_name(int error) {
   static char buf[128];
   return 0 <= error && error < numUnixErrors()  &&  unixError[error][0]
     ? unixError[error]

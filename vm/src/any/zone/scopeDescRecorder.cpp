@@ -124,7 +124,7 @@ inline fint ScopeDescRecorder::getValueIndex(int32 v) {
 }
 
 inline fint ScopeDescRecorder::getOopIndex(oop o) {
-  return o == 0 ? 0 : oops->insertIfAbsent((int32)(smi)o) + 1;
+  return o == 0 ? 0 : oops->insertIfAbsent((int32)o) + 1;
 }
 
 void LocationName::generate(ScopeDescRecorder* rec) {

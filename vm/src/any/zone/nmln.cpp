@@ -54,7 +54,7 @@ void nmln::init_chain() {
 # define MapBits     15
 
 inline int32 nmln::hash() {
-  return (smi(this) >> IgnoreBits) & nthMask(MapBits);
+  return (int32(this) >> IgnoreBits) & nthMask(MapBits);
 }
 
 static nmln** nmlnCache = NULL;

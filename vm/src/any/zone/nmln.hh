@@ -40,7 +40,7 @@ class nmln {
   nmln* next;
   nmln* prev;
 
-  void check_alignment() { assert( (smi(this) & Tag_Mask) == Int_Tag, "nmln alignment"); }  
+  void check_alignment() { assert( (int32(this) & Tag_Mask) == Int_Tag, "nmln alignment"); }  
   
   void init() { next = this; prev = this; }
   

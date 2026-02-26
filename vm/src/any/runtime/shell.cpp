@@ -164,9 +164,7 @@ static void processArguments(int argc, const char *argv[]) {
       IntervalTimer::oversample_rate = 10;
       break;
      case 'a':
-#    if defined(FAST_COMPILER) || defined(SIC_COMPILER)
       Assembler::do_the_tests = true;
-#    endif
       break;
      }
   }

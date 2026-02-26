@@ -664,7 +664,7 @@
     assert(map->desc() == BLOCK_PROTO_DESC, "should be a prototype block");
 
     blockOop clone = literal->clone_and_set_desc(
-                                     as_byte_count_smiOop((smi)this));
+                                     as_byte_count_smiOop((int32)this));
     assert(!clone->is_mark() && clone->map() != map, "should have new map");
 
     BlockPReg* loc = new BlockPReg(this, clone, _bci, ncodes - 1);
@@ -1052,17 +1052,17 @@
     // added max for i because startBCI can be -2 and allocs starts at 0.
     // also added it two more places below.
     //   -- dmu 4/22/04
-    for (i = max(fint(0), r->startBCI + 1); i <= end; i++) {
+    for (i = max(0, r->startBCI + 1); i <= end; i++) {
       allocs[i] |= mask;
     }
     SCodeScope* s = r->creationScope->sender();
     if (r->creationScope != this) {
       // r was constant-propagated out of its scope; need to mark it live
       // in subscopes.  E.g. if r is created in C where A@0 calls B@0 calls C,
-      // and r was propagated to A, need to mark it live in B@1
+      // and r was propagated to A, need to mark it live in B@1 
       fint start = r->creationScope->senderBCI();
       while (s != this) {
-        for (i = max(fint(0), start + 1); i < s->ncodes; i++) {
+        for (i = max(0, start + 1); i < s->ncodes; i++) {
           s->allocs[i] |= mask;
         }
         start = s->senderBCI();
@@ -1070,7 +1070,7 @@
       }
       // also mark it live in creation scope ]creationStartBCI..end]
       s = r->creationScope;
-      for (i = max(fint(0), r->creationStartBCI + 1); i < s->ncodes; i++) {
+      for (i = max(0, r->creationStartBCI + 1); i < s->ncodes; i++) {
         s->allocs[i] |= mask;
       }
     }
@@ -1197,7 +1197,7 @@
     if (r->isSAPReg()) {
       // get live range of r
       SAPReg* sr = (SAPReg*)r;
-      start = max(sr->startBCI, fint(0));
+      start = max(sr->startBCI, 0);
       end = sr->endBCI < 0 ? ncodes - 1 : sr->endBCI;
     } else {
       start = 0; end = ncodes - 1;
@@ -2046,7 +2046,7 @@
         smiOop desc= map->desc();
         assert_smi(desc, "should be an integer");
         assert(desc != BLOCK_PROTO_DESC, "should have been changed");
-        if (desc == as_byte_count_smiOop((smi) this)) {
+        if (desc == as_byte_count_smiOop((int32) this)) {
 #          if GENERATE_DEBUGGING_AIDS
             if (CheckAssertions  &&  isLite()) {
               // don't actually get the offset because it's undefined

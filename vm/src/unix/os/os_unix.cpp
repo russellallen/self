@@ -33,15 +33,15 @@
   bool OS::is_directed_allocation_supported() { return true; } // should return desiredAddress
 
   char* OS::allocate_heap_aligned(caddr_t desiredAddress,
-                                  smi size, smi align, const char* name,
+                                  int32 size, int32 align, const char* name,
                                   bool mustAllocate) {
       if ( desiredAddress != NULL
       &&   desiredAddress ==
-                 mmap(desiredAddress,
+                 mmap(desiredAddress, 
                       size + align,
                       PROT_READ|PROT_WRITE|PROT_EXEC,
                       MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS,
-                      -1, 0))
+                      -1, 0)) 
         return desiredAddress;
 
 #if TARGET_OS_VERSION == NETBSD_VERSION || TARGET_OS_VERSION == FREEBSD_VERSION
@@ -51,7 +51,7 @@
       char* b = (char*)memalign(align, size);
 #endif
       if (b == NULL && mustAllocate)  allocate_failed(name);
-      return b;
+      return b;     
   }
 
 
@@ -62,7 +62,7 @@
   bool OS::is_directed_allocation_supported() { return false; } 
 
   char* OS::allocate_heap_aligned(caddr_t ,
-                                  smi size, smi align, const char* name,
+                                  int32 size, int32 align, const char* name,
                                   bool mustAllocate) {
     // fake it
     char* b = (char*)selfs_malloc(size + align - 1);
@@ -71,8 +71,8 @@
          allocate_failed(name);
       return b;
     }
-    if ((smi)b & (align-1)) {
-      char* newB = (char*) ((smi)b & ~(align-1)) + align;
+    if ((int32)b & (align-1)) {
+      char* newB = (char*) ((int32)b & ~(align-1)) + align;
       assert(b + size + align - 1 >=  newB + size, "rounding error");
       return newB;
     }

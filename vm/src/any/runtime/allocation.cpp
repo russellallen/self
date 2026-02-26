@@ -313,20 +313,10 @@ static inline int32 true_size_of_malloced_obj(int32* p) {
   return (int32)sallocx(p, 0);	/* ask jemalloc */
 }
 
-#elif TARGET_ARCH == X86_64_ARCH && TARGET_OS_VERSION == LINUX_VERSION
-
-// On 64-bit Linux, the malloc chunk header uses size_t (8 bytes) fields.
-// Reading internal malloc metadata with int32* is wrong.
-// Use the standard malloc_usable_size() API instead.
-# include <malloc.h>
-static inline int32 true_size_of_malloced_obj(int32* p) {
-  return (int32)malloc_usable_size(p);
-}
-
 #else
 
 static int32 true_size_of_malloced_obj(int32* p) {
-  static const int32 s_offset =
+  static const int32 s_offset = 
 #   if    TARGET_ARCH == SPARC_ARCH  &&  COMPILER == GCC_COMPILER
       -2;
 #   elif  TARGET_ARCH == M68K_ARCH   &&  COMPILER == GCC_COMPILER
@@ -383,6 +373,7 @@ void malloc_init() {
     MallocInProgress = true;              // for hprofiler
     size = max(1, size); // malloc does not seem to like zero, at least on PPC
     char* result = (char*)malloc(size);
+  if ((int)result & 0x80000000) fatal("xxxxxxx");
     MallocInProgress = false;
   
     if (result == NULL) {
@@ -392,6 +383,7 @@ void malloc_init() {
         free(mallocReserve);
         mallocReserve= NULL;
         result= (char*)malloc(size);
+  if ((int)result & 0x80000000) fatal("xxxxxxx");
         MallocInProgress= false;
         warning(
             "Memory for the Self VM is running low; the system may crash\n"

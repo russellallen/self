@@ -16,11 +16,11 @@ rSet::rSet() {
 }
 
 void* rSet::operator new(size_t size) {
-  assert((smi(Memory->new_gen->low_boundary) & (card_size - 1)) == 0,
+  assert((int32(Memory->new_gen->low_boundary) & (card_size - 1)) == 0,
          "new must start at card boundary");
-  assert((smi(Memory->old_gen->low_boundary) & (card_size - 1)) == 0,
+  assert((int32(Memory->old_gen->low_boundary) & (card_size - 1)) == 0,
          "old must start at card boundary");
-  assert((smi(Memory->old_gen->high_boundary) & (card_size - 1)) == 0,
+  assert((int32(Memory->old_gen->high_boundary) & (card_size - 1)) == 0,
          "old must end at card boundary");
   
   int32 bmsize =
@@ -65,7 +65,7 @@ void rSet::record_multistores(oop* start, oop* end) {
     
   
   // p = first card boundary on or after start
-  oop* p = (oop*)roundTo(smi(start), card_size);
+  oop* p = (oop*)roundTo(int32(start), card_size);
   
   // but dont go past end!
   if (end < p) {
@@ -279,24 +279,18 @@ char* rSet::next_zero_byte(char *cp, char* end) {
   char old_end = *end;
   *end = 0;
 
-  smi* wp = (smi*)roundTo(smi(cp), sizeof(smi));
+  int32* wp = (int32*)roundTo(int32(cp), sizeof(int32));
 
   char* cwp = (char*) wp;
   switch (cwp - cp) {
    default: ShouldNotReachHere();
-#  if TARGET_ARCH == X86_64_ARCH
-   case 7: if ((cwp)[-7] == 0) { *end = old_end; return cwp - 7; }
-   case 6: if ((cwp)[-6] == 0) { *end = old_end; return cwp - 6; }
-   case 5: if ((cwp)[-5] == 0) { *end = old_end; return cwp - 5; }
-   case 4: if ((cwp)[-4] == 0) { *end = old_end; return cwp - 4; }
-#  endif
    case 3: if ((cwp)[-3] == 0) { *end = old_end; return cwp - 3; }
    case 2: if ((cwp)[-2] == 0) { *end = old_end; return cwp - 2; }
    case 1: if ((cwp)[-1] == 0) { *end = old_end; return cwp - 1; }
    case 0: break;
   }
 
-  const smi ones = AllBits;
+  const int32 ones = AllBits;
   
   for (  ;
        (wp[0] & wp[1] & wp[2] & wp[3] & wp[4] & wp[5] & wp[6] & wp[7]) == ones;
@@ -317,13 +311,7 @@ char* rSet::next_zero_byte(char *cp, char* end) {
   if (cwp[1] == 0) { *end = old_end; return cwp + 1; }
   if (cwp[2] == 0) { *end = old_end; return cwp + 2; }
   if (cwp[3] == 0) { *end = old_end; return cwp + 3; }
-# if TARGET_ARCH == X86_64_ARCH
-  if (cwp[4] == 0) { *end = old_end; return cwp + 4; }
-  if (cwp[5] == 0) { *end = old_end; return cwp + 5; }
-  if (cwp[6] == 0) { *end = old_end; return cwp + 6; }
-  if (cwp[7] == 0) { *end = old_end; return cwp + 7; }
-# endif
-
+  
   ShouldNotReachHere();
   return 0;
 }

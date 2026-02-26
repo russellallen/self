@@ -70,14 +70,14 @@ class byteVectorOopClass: public slotsOopClass {
 
   // C-string operations
 
-  char *copy_null_terminated(fint &Clength);
+  char *copy_null_terminated(int &Clength);
     // Copy the bytes() part. Always add trailing '\0'. If byte vector
     // contains '\0', these will be escaped in the copy, i.e. "....\0...".
     // Clength is set to length of the copy (may be longer due to escaping).
     // Presence of null chars can be detected by comparing Clength to length().
 
   char *copy_null_terminated() {
-    fint ignore;
+    int ignore;
     return copy_null_terminated(ignore);
   }
 
@@ -126,10 +126,10 @@ class byteVectorOopClass: public slotsOopClass {
   byteVectorOop verify_opts_prim();
 
   // compiler support
-  static inline smi byteVector_len_offset() {
-    return smi(&byteVectorOop(0)->addr()->_len); }
-  static inline smi byteVector_bytes_offset() {
-    return smi(&byteVectorOop(0)->addr()->_bytes); }
+  static inline int32 byteVector_len_offset() {
+    return int32(&byteVectorOop(0)->addr()->_len); }
+  static inline int32 byteVector_bytes_offset() {
+    return int32(&byteVectorOop(0)->addr()->_bytes); }
 
 };
  

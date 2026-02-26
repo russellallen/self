@@ -1,0 +1,1 @@
+../vm/travis-ci-buildAndTest.sh

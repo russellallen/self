@@ -25,13 +25,9 @@ typedef short           int16;          // signed integer with >= 15 bits
 typedef unsigned short  uint16;         // unsigned integer with >= 16 bits
 typedef int              int32;         // signed integer with >= 31 bits
 typedef unsigned int    uint32;         // unsigned integer with >= 32 bits
-typedef long long        int64;         // signed integer with >= 63 bits
-typedef unsigned long long uint64;      // unsigned integer with >= 64 bits
 
 
-# if TARGET_ARCH == X86_64_ARCH
-  typedef int64         fint;           // fastest precision-irrelevant int
-# elif  TARGET_ARCH == SPARC_ARCH  \
+# if  TARGET_ARCH == SPARC_ARCH  \
   ||  TARGET_ARCH ==   PPC_ARCH  \
   ||  TARGET_ARCH ==  I386_ARCH
   typedef int32         fint;           // fastest precision-irrelevant int
@@ -42,11 +38,7 @@ typedef unsigned long long uint64;      // unsigned integer with >= 64 bits
 #  error Which architecture?
 # endif
 
-# if TARGET_ARCH == X86_64_ARCH
-  typedef int64 smi;
-# else
-  typedef int32 smi;
-# endif
+typedef int32 smi;
 typedef unsigned char u_char;
 typedef   signed char s_char;
 typedef u_char bool8;
@@ -59,19 +51,11 @@ typedef u_char bool8;
 # endif
 
 const fint BitsPerByte = 8;
-# if TARGET_ARCH == X86_64_ARCH
-  const fint BytesPerWord = 8;
-# else
-  const fint BytesPerWord = 4;
-# endif
+const fint BytesPerWord = 4;
 const fint BitsPerWord = BitsPerByte * BytesPerWord;
 
 const fint LogBitsPerByte = 3;
-# if TARGET_ARCH == X86_64_ARCH
-  const fint LogBytesPerWord = 3;
-# else
-  const fint LogBytesPerWord = 2;
-# endif
+const fint LogBytesPerWord = 2;
 const fint LogBitsPerWord = LogBitsPerByte + LogBytesPerWord;
 
 

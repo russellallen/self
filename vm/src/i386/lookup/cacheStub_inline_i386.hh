@@ -1,4 +1,4 @@
-# if defined(__i386__) || defined(__x86_64__)
+# ifdef __i386__
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -16,10 +16,10 @@
 inline void CacheStub::jump(char* addr) {
   // Was branch_to, but this caused problems because
   // CacheStub::moveTo_inner does not relocate these. -- dmu 12/03
-  a->jmp((smi)addr, CodeAddressOperand);
+  a->jmp((int32)addr, CodeAddressOperand);
 }
 
 
 # endif  // defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
-# endif // defined(__i386__) || defined(__x86_64__)
+# endif // __i386__

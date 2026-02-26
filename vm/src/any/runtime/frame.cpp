@@ -131,17 +131,10 @@ int32 frame::frame_size() {
 // testers
 
 interpreter* frame::get_interpreter_of_block_scope() {
-# if TARGET_ARCH == X86_64_ARCH
-  // On x86_64 interpreter-only builds, c_entry_point() and location_addr()
-  // don't work (call instruction decoding is wrong, and arguments are in
-  // registers not on the stack). Use the interpreter registry instead.
-  return interpreter::find_interpreter_for_frame(this);
-# else
   char* cep = c_entry_point();
   if (cep == NULL)  return NULL;
   Location loc = location_of_interpreter_of_block_scope( cep);
   return loc == IllegalLocation ? NULL : (interpreter*) *location_addr(loc);
-# endif
 }
 
 
@@ -343,7 +336,6 @@ fint frame::outgoing_arg_count(frame* sendee) {
   // w/o rcvr
   // May return -1 of there is not even a receiver.
   sendDesc* sd = send_desc();
-  if (sd == NULL) return -1; // no JIT, no sendDesc
   fint r;
   if (sd->isPrimCall()) {
     char* addr = sd->jump_addr();
@@ -850,7 +842,7 @@ frame* frame::copy_frames_through(frame* last_frame_to_copy) {
   oop* frame_area = NEW_RESOURCE_ARRAY( oop, size_for_aligning);
   int frame_byte_alignment = frame_word_alignment << 2;
   frame* first_copied_frame = (frame*) 
-    roundTo(smi(frame_area), frame_byte_alignment)  +  frame_alignment_offset * BytesPerWord;
+    roundTo(int(frame_area), frame_byte_alignment)  +  frame_alignment_offset * BytesPerWord;
   assert((oop*)first_copied_frame + size  <=  frame_area + size_for_aligning, 
          "make sure aligning does not cause overflow");
   copy_oops((oop*)this, (oop*)first_copied_frame, size);
@@ -887,7 +879,7 @@ RegisterString frame::mask_if_present() {
 }
 
 bool frame::is_aligned() { 
-  return ((smi(this)  +  frame_alignment_offset * BytesPerWord)    &    (frame_word_alignment * BytesPerWord  -  1))
+  return ((int32(this)  +  frame_alignment_offset * BytesPerWord)    &    (frame_word_alignment * BytesPerWord  -  1)) 
           == 0;
 }
 

@@ -46,8 +46,8 @@ static const fint expOffset = fractSize;
     int32 exp     = i >> expOffset  &  nthMask(expSize);
     int32 selfExp = exp - bias + selfBias;
     int32 fract   = i & nthMask(fractSize);
-    smi r         = (i & (nthMask(signSize) << signOffset)) | Float_Tag;
-
+    int32 r       = (i & (nthMask(signSize) << signOffset)) | Float_Tag;
+    
     if (selfExp <= 0) {
       // underflow - round towards zero
     } else if (selfExp >= nthMask(selfExpSize)) {
@@ -55,7 +55,7 @@ static const fint expOffset = fractSize;
         // warning1("converting float %g to Inf", value);
         r |= nthMask(selfExpSize) << selfExpOffset;
       } else if (fract == 0) {
-        r |= smi(infinityOop);
+        r |= int32(infinityOop);
       } else { // NaN
         r |= (nthMask(selfExpSize) << selfExpOffset) | (fract << Tag_Size);
       }
@@ -67,7 +67,7 @@ static const fint expOffset = fractSize;
   
   
   float floatOopClass::value() {
-    uint32 i = (uint32)(smi)this;
+    uint32 i = uint32(this);
     int32 selfExp = i >> selfExpOffset  &  nthMask(selfExpSize);
     int32 fract   = i >> Tag_Size  &  nthMask(fractSize);
     int32 exp     = selfExp - selfBias + bias;

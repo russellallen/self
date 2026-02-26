@@ -278,7 +278,6 @@ bool SignalInterface::handle_SIC_OS_signal(int ossig, char* addr, int32 code) {
     // was uncommon branch trap
     return true;
     
-# if defined(FAST_COMPILER) || defined(SIC_COMPILER)
   if ( (ossig == SIGNonLifo     &&  is_uplevel_trap(code))
   ||   (ossig == SIGBadHomeRef  &&  NLRSupport::is_bad_home_reference(addr)
                                 &&  Memory->code->contains(InterruptedContext::the_interrupted_context->pc()))) {
@@ -286,8 +285,7 @@ bool SignalInterface::handle_SIC_OS_signal(int ossig, char* addr, int32 code) {
     // This is much easier than doing it here because the stack is in a mess right now.
     InterruptedContext::continue_abort_at(first_inst_addr(NLRSupport::non_lifo_abort_from_continuePC), false);
     return true;
-  }
-# endif 
+  } 
 
   return false;
 }

@@ -6,7 +6,10 @@
 # pragma implementation "miscPrims.hh"
 # include "_miscPrims.cpp.incl"
 
-// int64 and uint64 are now defined globally in types.hh
+# ifndef  NO_LONG_LONG
+  typedef          long long int64;
+  typedef unsigned long long uint64;
+# endif
 
 
 smi bitSize(char *typeDesc, void *FH) {

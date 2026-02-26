@@ -1,0 +1,1 @@
+../../vm/build_support/obj_patch.cpp

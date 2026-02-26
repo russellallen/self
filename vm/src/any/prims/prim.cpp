@@ -2536,11 +2536,7 @@ PrimDesc* getPrimDescOfFunction(fntype fn, bool internal) {
 
 PrimDesc* getPrimDescOfFirstInstruction(char* fn_start_arg, bool internal) {
   // compensate for trapdoors:
-# if defined(FAST_COMPILER) || defined(SIC_COMPILER)
   pc_t fn_start = Memory->code->trapdoors->follow_trapdoors(fn_start_arg);
-# else
-  pc_t fn_start = fn_start_arg;
-# endif
 
   PrimDesc* e;
   for (PrimDesc** ft = &fntable[0]; *ft; ft++) {
@@ -2574,7 +2570,7 @@ const char* getPrimName(char* fn_start) {
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 
-fint getPrimCallEndOffset(char* fn_start) {
+int32 getPrimCallEndOffset(char* fn_start) {
   // offset of first instruction after prim call, measured from sendDesc ptr
   // (in bytes)
   

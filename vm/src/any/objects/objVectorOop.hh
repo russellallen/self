@@ -77,8 +77,8 @@ class objVectorOopClass: public slotsOopClass {
   void  *convertProxyArray(const void*);
 
   // compiler support
-  static smi objVector_len_offset() {
-    return smi(&objVectorOop(NULL)->addr()->_len); }
+  static int32 objVector_len_offset() {
+    return int32(&objVectorOop(NULL)->addr()->_len); }
   
 };
 

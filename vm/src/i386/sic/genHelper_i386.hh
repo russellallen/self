@@ -1,4 +1,4 @@
-# if defined(__i386__) || defined(__x86_64__)
+# ifdef __i386__
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -32,4 +32,4 @@ private:
   Location    leaf_rcvr_base;
   int32       leaf_rcvr_disp;
   OperandType leaf_rcvr_type;
-# endif // defined(__i386__) || defined(__x86_64__)
+# endif // __i386__

@@ -25,8 +25,8 @@ class Token: public ResourceObj {
   TokenType type;
   
   union {
-    smi integer;
-    double floating;
+    int32 integer;
+    float floating;
     String* string;
   };
   fint line;
@@ -36,9 +36,9 @@ class Token: public ResourceObj {
   Token(TokenType t, fint l, fint c, const char* ss) {
     type = t; line = l; column = c; sourceStart = ss; }
   // wierd order to avoid overloading ambiguity
-  Token(TokenType t, const char* ss, smi i, fint l, fint c) {
+  Token(TokenType t, const char* ss, int32 i, fint l, fint c) {
     type = t; integer = i; line = l; column = c; sourceStart = ss; }
-  Token(TokenType t, double f, fint l, fint c, const char* ss) {
+  Token(TokenType t, float f, fint l, fint c, const char* ss) {
     type = t; floating = f; line = l; column = c; sourceStart = ss; }
   Token(TokenType t, String* s, fint l, fint c, const char* ss) {
     type = t; string = s; line = l; column = c; sourceStart = ss; }

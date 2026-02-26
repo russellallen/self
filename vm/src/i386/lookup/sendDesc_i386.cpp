@@ -12,7 +12,7 @@
 extern "C" { char *firstSelfFrame_nmlns; }; // for assertion checking
 
 void sendDesc::init_platform() {
-  assert( (smi(firstSelfFrame_nmlns) & 0x3) == 0, "sendDesc alignment incorrect");
+  assert( (int(firstSelfFrame_nmlns) & 0x3) == 0, "sendDesc alignment incorrect");
 }
 
  

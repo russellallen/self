@@ -8,9 +8,7 @@
 # endif
 
 
-// card_size must be 32 * oopSize because record_multistores and
-// scavenge_contents have loops unrolled for 32 oops per card.
-const int32 card_shift = (oopSize == 8) ? 8 : 7;
+const int32 card_shift = 7; // wired in to scavenge_contents
 const int32 card_size  = 1 << card_shift;
 const int32 card_size_in_oops = card_size / oopSize;
 const int32 byte_map_grain = 8 * BytesPerWord; // private and wired-in
@@ -27,11 +25,11 @@ class rSet: public CHeapObj {
   
   // friend void oldSpace::switch_pointers_by_card(oop, oop);
   char* byte_for(void *p) {
-    return &byte_map[smi((char*)p - low_boundary) >> card_shift]; }
+    return &byte_map[int32((char*)p - low_boundary) >> card_shift]; }
   oop*  oop_for(char* p) {
     return (oop*)(low_boundary  +  ((p - byte_map)  <<  card_shift)); }
 
-  static oop*  card_for(oop* p) { return (oop*)(smi(p) & ~(card_size - 1)); }
+  static oop*  card_for(oop* p) { return (oop*)(int32(p) & ~(card_size - 1)); }
   
   inline char* byte_map_end();
   static char* next_zero_byte(char*, char *);

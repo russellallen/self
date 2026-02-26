@@ -30,7 +30,7 @@ static void read_one(stringOop* p, FILE* file) {
   int w = ftell(file);
 # endif
 
-  OS::FRead_oop((oop*)p, file);
+  OS::FRead_swap(p, oopSize, file);
 # ifdef had_to_debug_this_once
 
   lprintf("VString: %d 0x%x 0x%x\n", p - VMString, *p, w);

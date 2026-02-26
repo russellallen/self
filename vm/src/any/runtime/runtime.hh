@@ -32,11 +32,7 @@ extern "C" {
   void firstSelfFrame_returnPC(...);
   void firstSelfFrameSendDescEnd(...);
     
-# if TARGET_ARCH == X86_64_ARCH
-  oop CallPrimitiveFromInterpreter(void* entry_point, oop rcv, oop* argp, fint nargs);
-# else
   oop CallPrimitiveFromInterpreter(...);
-# endif
 }
 
 extern     char*          ReturnTrap_returnPC;

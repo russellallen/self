@@ -41,12 +41,12 @@ class generation: public CHeapObj {
 
  public:
   // space enquiries
-  virtual smi capacity() = 0;
-  virtual smi oops_used() = 0;
-  virtual smi bytes_used() = 0;
-  virtual smi oops_free() = 0;
-  virtual smi used() = 0;
-  virtual smi bytes_free() = 0;
+  virtual int32 capacity() = 0;
+  virtual int32 oops_used() = 0;
+  virtual int32 bytes_used() = 0;
+  virtual int32 oops_free() = 0;
+  virtual int32 used() = 0;
+  virtual int32 bytes_free() = 0;
 
   void print();
 };
@@ -99,12 +99,12 @@ class newGeneration: public generation {
 
  public:
   // space enquiries
-  smi capacity();
-  smi oops_used();
-  smi bytes_used();
-  smi oops_free();
-  smi used();
-  smi bytes_free();
+  int32 capacity();
+  int32 oops_used();
+  int32 bytes_used();
+  int32 oops_free();
+  int32 used();
+  int32 bytes_free();
 
   void print();
   bool verify();
@@ -127,7 +127,7 @@ class newGeneration: public generation {
   inline bool is_new(oop p,    char *boundary); // ditto
 
   // constructor, called by Memory
-  newGeneration(smi &eden_size, smi &surv_size, FILE *snap = NULL);
+  newGeneration(int32 &eden_size, int32 &surv_size, FILE *snap = NULL);
 
   // scavenger-related items
   // these are actually called by Memory
@@ -191,18 +191,18 @@ class oldGeneration: public generation {
   caddr_t top_of_old_space; // keep track of where old space ends so that
                 // old space addresses are all near each other
 
-  // for signalling low space
-  smi VM_reserved_mem;
+  // for signalling low space 
+  int32 VM_reserved_mem;
  public:
-  smi get_VM_reserved_mem() { return VM_reserved_mem; }
+  int32 get_VM_reserved_mem() { return VM_reserved_mem; }
 
  private:
-  smi cached_free;
+  int32 cached_free;
   void update_cached_free() { cached_free= bytes_free(); }
-  smi lowSpaceThreshold;
+  int32 lowSpaceThreshold;
  public:
-  smi getLowSpaceThreshold() { return lowSpaceThreshold; }
-  void setLowSpaceThreshold(smi newLST) {
+  int32 getLowSpaceThreshold() { return lowSpaceThreshold; }
+  void setLowSpaceThreshold(int32 newLST) {
     assert(newLST >= VM_reserved_mem, "red line too low");
     lowSpaceThreshold= newLST;
     lowOnSpace= false; // let next alloc trip if already over the line
@@ -212,7 +212,7 @@ class oldGeneration: public generation {
   bool needToSignalLowOnSpace;
   void check_for_end_of_low_space();
   inline void check_for_low_space();
-  smi expand(smi size);
+  int expand(int32 size);
 
   void update_caches(bool postScavenge);
 
@@ -225,8 +225,8 @@ class oldGeneration: public generation {
                             bool mustAllocate= true);
                             
   // constructors, called by Memory
-  oldGeneration(            smi initial_size, smi reserved_amount);
-  oldGeneration(FILE* snap, smi initial_size, smi reserved_amount);
+  oldGeneration(            int32 initial_size, int32 reserved_amount);
+  oldGeneration(FILE* snap, int32 initial_size, int32 reserved_amount);
 
   char* empty_bytes_addr() {
     assert(first_space != NULL && first_space->next_space == NULL,
@@ -238,12 +238,12 @@ class oldGeneration: public generation {
   bool objs_contains(void* p);
 
   // space enquiries
-  smi capacity();
-  smi oops_used();
-  smi bytes_used();
-  smi oops_free();
-  smi used();
-  smi bytes_free();
+  int32 capacity();
+  int32 oops_used();
+  int32 bytes_used();
+  int32 oops_free();
+  int32 used();
+  int32 bytes_free();
 
   void print();
   bool verify();

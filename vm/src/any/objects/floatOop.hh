@@ -16,7 +16,7 @@ class floatOopClass: public oopClass {
   // accessors
   float value();
   
-  smi identity_hash() { return smi(this) >> Tag_Size; }
+  smi identity_hash() { return int32(this) >> Tag_Size; }
   
   Map* map() { return Memory->float_map; }
   

@@ -14,7 +14,7 @@
 
 /* Here is the scheme:
 
-   HOST_ARCH is where the compiler is running, one of SPARC_ARCH, M68K_ARCH, PPC_ARCH, I386_ARCH, X86_64_ARCH
+   HOST_ARCH is where the compiler is running, one of SPARC_ARCH, M68K_ARCH, PPC_ARCH, I386_ARCH
    TARGET_ARCH is the platform we are compiling for
    TARGET_OS_FAMILY: UNIX_FAMILY, MACOS_FAMILY
    TARGET_OS_VERSION: SUNOS_VERSION, SOLARIS_VERSION, MACOS_SYSTEM_7_VERSION, LINUX_VERSION
@@ -43,7 +43,6 @@
 # define  M68K_ARCH 2 /* No longer supported */
 # define   PPC_ARCH 3 /* No longer supported, but may bring back sometime */
 # define  I386_ARCH 4
-# define X86_64_ARCH 5
 
 # define  UNIX_FAMILY 1
 # define MACOS_FAMILY 2 /* No longer supported */
@@ -84,21 +83,19 @@
   # endif
   # if defined(__ppc__)
     # define TARGET_ARCH PPC_ARCH
-  # elif defined(__x86_64__)
-    # define TARGET_ARCH X86_64_ARCH
   # elif defined(__i386__)
     # define TARGET_ARCH I386_ARCH
+  # elif defined(__LP64__)
+    # error 64bit not supported yet
   # else
     # error A new Mac CPU?
   # endif
   
   # if NATIVE_ARCH == ppc
   # define HOST_ARCH PPC_ARCH
-  # elif NATIVE_ARCH == x86_64
-  # define HOST_ARCH X86_64_ARCH
   # elif NATIVE_ARCH == i386
   # define HOST_ARCH I386_ARCH
-  # else
+  # else 
   # error what?
   # endif
   //or could: # define HOST_ARCH TARGET_ARCH // cross compiling is invisible on OSX

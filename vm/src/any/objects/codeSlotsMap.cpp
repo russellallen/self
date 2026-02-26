@@ -1157,7 +1157,7 @@ public:
 
  protected:
 
-  fint  get_stack_depth() { return stack->length(); }
+  int   get_stack_depth() { return stack->length(); }
   void  push() { stack= stack->push(pc); }
   void* pop(fint n = 1) { stack->pop(n); return NULL; }
   

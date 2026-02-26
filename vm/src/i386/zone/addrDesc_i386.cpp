@@ -20,14 +20,14 @@ bool addrDesc::isShiftNeededAfterMovingMe(OopNCode* m) {
 pc_t addrDesc::instr_referent(OopNCode* m) {
   pc_t* dispp = addr(m);
   assert(m->contains(dispp), "not in this nmethod");
-  return *dispp + (isRelative() ? (int32)(smi)(dispp + 1) : 0);
+  return *dispp + (isRelative() ? int32(dispp + 1) : 0);
 }
 
 
 void addrDesc::set_instr_referent(OopNCode* m, void* newVal) {
   pc_t* dispp = addr(m);
   assert(m->contains(dispp), "not in this nmethod");
-  *dispp = pc_t( (smi)(newVal) - (isRelative() ?  (smi)(dispp) + oopSize  :  0) );
+  *dispp = pc_t( int32(newVal) - (isRelative() ?  int32(dispp) + oopSize  :  0) );
 }
 
 

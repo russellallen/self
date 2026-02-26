@@ -56,36 +56,26 @@ int compare_slot_names(const char *s1, fint l1, const char *s2, fint l2);
 
 int compare_bytes(const char* b1, int l1, const char* b2, int l2);
 
-// On 64-bit, int32 (4 bytes) != oop (8 bytes), so word operations
-// cannot delegate to oop operations.  Use memcpy/memmove/loop instead.
 inline void copy_words(int32* from, int32* to, fint count) {
-  memcpy(to, from, count * sizeof(int32));
+  copy_oops((oop*) from, (oop*) to, count);
 }
 inline void copy_words_down(int32* from, int32* to, fint count) {
-  // from and to point PAST the end; copy backward (high to low addresses)
-  // Same semantics as copy_oops_down: receives end pointers, copies descending
-  for (fint i = 0; i < count; i++) { --from; --to; *to = *from; }
+  copy_oops_down((oop*) from, (oop*) to, count);
 }
 inline void copy_words_up(int32* from, int32* to, fint count) {
-  // from and to point to the start; copy forward (low to high addresses)
-  // Same semantics as copy_oops_up: receives start pointers, copies ascending
-  for (fint i = 0; i < count; i++) { *to++ = *from++; }
+  copy_oops_up((oop*) from, (oop*) to, count);
 }
 inline void copy_words_overlapping(int32* from, int32* to, fint count) {
-  memmove(to, from, count * sizeof(int32));
+  copy_oops_overlapping((oop*) from, (oop*) to, count);
 }
 inline void set_words(int32* from, fint count, int32 value = 0) {
-  for (fint i = 0; i < count; i++) from[i] = value;
+  set_oops((oop*) from, count, (oop) value);
 }
 
 inline int32  min(int32  a, int32  b) { return a > b ? b : a; }
 inline int32  max(int32  a, int32  b) { return a > b ? a : b; }
 inline int32 umin(uint32 a, uint32 b) { return a > b ? b : a; }
 inline int32 umax(uint32 a, uint32 b) { return a > b ? a : b; }
-# if TARGET_ARCH == X86_64_ARCH
-inline fint   min(fint   a, fint   b) { return a > b ? b : a; }
-inline fint   max(fint   a, fint   b) { return a > b ? a : b; }
-# endif
 inline float  min(float  a, float  b) { return a > b ? b : a; }
 inline float  max(float  a, float  b) { return a > b ? a : b; }
 

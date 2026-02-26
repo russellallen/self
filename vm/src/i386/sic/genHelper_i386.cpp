@@ -39,7 +39,7 @@
 
   void SICGenHelper::genCountCode(int32* counter) {
     a->Comment("count # calls");
-    a->incl(no_reg, (int32)(smi)counter, VMAddressOperand);
+    a->incl(no_reg, (int32)counter, VMAddressOperand);
   }
 
 
@@ -60,7 +60,7 @@
   void SICGenHelper::loadImmediateOop(oop p, Location dest, bool isInt) {
     Unused(isInt); // load_immediate does the right thing wrt integer oops
     assert(isRegister(dest), "must be a register");
-    a->movl((int32)(smi)p, OopOperand, dest);
+    a->movl((int32)p, OopOperand, dest);
   }
 
   void SICGenHelper::load(Location src, fint srcOffset, Location dest) {
@@ -80,7 +80,7 @@
 
   // must be a VMAddressOperand operand
   void SICGenHelper::setToZeroA(void* addr, Location tempReg) {
-    theAssembler->movl(0, NumberOperand, no_reg, (int32)(smi)addr, VMAddressOperand);
+    theAssembler->movl(0, NumberOperand, no_reg, (int32)addr, VMAddressOperand);
   }
 
   void SICGenHelper::setToZero(Location dest) {
@@ -102,7 +102,7 @@
     if (SICCountIntTagTests) a->markTagTest(1);
 
     a->testl( Tag_Mask, NumberOperand, esp, leaf_rcvr_offset*oopSize, NumberOperand);
-    a->jne((int32)(smi)missHandler, PVMAddressOperand);
+    a->jne((int32)missHandler, PVMAddressOperand);
 
     assert(!SICCountTypeTests, "should have called a->endTypeTest() on failure");
   }
@@ -116,7 +116,7 @@
     
     a->btl( Float_Tag_bit_i386, esp, leaf_rcvr_offset*oopSize, NumberOperand);
     // if bit set must be hit, otherwise is mark
-    a->jnc( (int32)(smi)missHandler, PVMAddressOperand);
+    a->jnc( (int32)missHandler, PVMAddressOperand);
 
     assert(!SICCountTypeTests, "should have called a->endTypeTest() on failure");
   }
@@ -128,12 +128,12 @@
     a->movl(esp, leaf_rcvr_offset*oopSize, NumberOperand, Temp1);
     a->btl(Mem_Tag_bit_i386, Temp1);
     // if bit set must be hit, otherwise is mark
-    a->jnc( (int32)(smi)missHandler, PVMAddressOperand);
+    a->jnc( (int32)missHandler, PVMAddressOperand);
 
     // check_map:
     a->movl( Temp1, map_offset(), NumberOperand, Temp2);
-    a->cmpl( (int32)(smi)receiverMapOop, OopOperand, Temp2);
-    a->jne((int32)(smi)missHandler, PVMAddressOperand);
+    a->cmpl( (int32)receiverMapOop, OopOperand, Temp2);
+    a->jne((int32)missHandler, PVMAddressOperand);
 
     assert(!SICCountTypeTests, "should have called a->endTypeTest() on failure");
   }
@@ -143,9 +143,9 @@
   void SICGenHelper::checkOop(Label& general, oop what, Location loc_to_check) {
     // test for inline cache hit (selector, delegatee)
     moveLocToReg(loc_to_check, Temp2);
-    a->cmpl((int32)(smi)what, OopOperand, Temp2);
+    a->cmpl((int32)what, OopOperand, Temp2);
     Unused(general);
-    a->jne((int32)(smi)(SendMessage_stub), PVMAddressOperand);
+    a->jne(int32(SendMessage_stub), PVMAddressOperand);
   }
   
   
@@ -212,7 +212,7 @@
     a->popl(DIInlineCacheReg); // 1 byte, prepare to calculate IC addr below
     a->addl(bytes_from_here_to_after_jmp, NumberOperand, DIInlineCacheReg);  // 3 bytes, finish calc IC addr below
     // following must be parsable to set_target_of_Self_call_site
-    a->jmp( (int32)(smi)SendDIMessage_stub, DIVMAddressOperand);
+    a->jmp( (int32)SendDIMessage_stub, DIVMAddressOperand);
     assert( a->offset() == here + bytes_from_here_to_after_jmp, "checking");
     assert((a->offset() & (BytesPerWord-1)) == 0, "must be aligned");
     a->Data(0);                                // first  part of DI nmln
@@ -229,7 +229,7 @@
                                                   Location parentOopReg, 
                                                   Label* ok) {
     // constraint for a particular oop (ambiguity resolution)
-    a->cmpl((int32)(smi)targetOop, OopOperand, parentOopReg);       // compare values
+    a->cmpl((int32)targetOop, OopOperand, parentOopReg);       // compare values
     a->je(ok);              // branch if value OK
   }
 
@@ -257,7 +257,7 @@
       a->jnc(&miss);                          // branch if parent is not mem oop
 
       a->movl(parentOopReg, map_offset(), NumberOperand, regForMap);    // load receiver map
-      a->cmpl((int32)(smi)targetMap->enclosing_mapOop(), OopOperand, regForMap); // cmp to map constraint
+      a->cmpl((int32)targetMap->enclosing_mapOop(), OopOperand, regForMap); // cmp to map constraint
       a->je(ok);               // correct
 
       miss.define();

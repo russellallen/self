@@ -1,0 +1,1 @@
+../../vm/cmake/dependencies.cmake

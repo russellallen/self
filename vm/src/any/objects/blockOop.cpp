@@ -106,10 +106,8 @@ frame* blockOopClass::parentFrame(frame* currentFrame, bool orNone) {
       ;
     else if ( pf->is_interpreted_self_frame() )
       assert( desc() == BLOCK_PROTO_DESC, "interpreted blocks have original desc" );
-#   if defined(FAST_COMPILER) || defined(SIC_COMPILER)
     else
       assert( desc() != BLOCK_PROTO_DESC, "compiled blocks do not have original desc" );
-#   endif
   # endif
 
   return pf;

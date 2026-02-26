@@ -1,4 +1,4 @@
-# if defined(__i386__) || defined(__x86_64__)
+# ifdef __i386__
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -43,4 +43,4 @@ public:
   
  private:
 
-# endif // defined(__i386__) || defined(__x86_64__)
+# endif // __i386__

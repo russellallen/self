@@ -356,7 +356,6 @@ int SelfMonitor::mbar_x()   {  return  opt_x() + (_show_sends ? opt_w() : 0);  }
 int SelfMonitor::eden_y()   {  return  vm_yb();  }
 
 // memory bar label positions
-# if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 int         SelfMonitor::pics_x()   {  return  _pic_zone->x;  }
 int         SelfMonitor::pics_y()   {  return  _pic_zone->y - mw()->font_height();  }
 const char* SelfMonitor::pics_t()   {  return  "PICs";  }
@@ -386,7 +385,6 @@ int         SelfMonitor::dbug_x()   {  return  _s_zone->x;  }
 int         SelfMonitor::dbug_y()   {  return  _s_zone->y + _s_zone->h + 2;  }
 const char* SelfMonitor::dbug_t()   {  return  "debug";  }
 int         SelfMonitor::dbug_w()   {  return  5*mw()->font_width();  }
-# endif
 
 
 

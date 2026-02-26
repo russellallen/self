@@ -51,10 +51,10 @@ class enumeration: public ResourceObj {
   
   
   enumeration_list* objs;
-  fint              obj_count;
+  int32             obj_count;
   
   enumeration_list* maps;
-  fint              map_count;
+  int32             map_count;
   
   oop*              maps_array;
   oop*              maps_p;

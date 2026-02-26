@@ -48,7 +48,7 @@ void MethodLookupKey::set_from(MethodLookupKey &k) {
 
 
 int32 MethodLookupKey::hash() {
-  smi i;
+  int32 i;
 
   // Coded for speed - called for every codeTable lookup
 
@@ -60,9 +60,9 @@ int32 MethodLookupKey::hash() {
   // key is added to the table.  If a lookup key contains oops with
   // no_hash, we'll have a bogus hash value, but we won't find anything
   // anyway.
-  i  = (smi)receiverMapOop()->mark();
+  i  = (int32)receiverMapOop()->mark();
   if (selector->is_mem())
-    i ^= (smi)memOop(selector)->mark();
+    i ^= (int32)memOop(selector)->mark();
 
   // Can't do the optimization for the methodHolder - it might be
   // e.g. a smiOop in the lookupError glue method.

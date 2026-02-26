@@ -19,7 +19,7 @@ void generation::print()
 }
 
 
-newGeneration::newGeneration(smi &eden_size, smi &surv_size, FILE *snap) {
+newGeneration::newGeneration(int32 &eden_size, int32 &surv_size, FILE *snap) {
 
   map_list= NULL;
   
@@ -28,7 +28,7 @@ newGeneration::newGeneration(smi &eden_size, smi &surv_size, FILE *snap) {
     from_space= new newSpace("from", surv_size, snap);
       to_space= new newSpace("to",   surv_size, snap);
   }
-  smi new_size= eden_size + surv_size + surv_size;
+  int32 new_size= eden_size + surv_size + surv_size;
   assert(is_idealized_page_multiple(new_size), "new size mismatch");
 
   // Need to allocate an extra page because the search operations
@@ -42,7 +42,7 @@ newGeneration::newGeneration(smi &eden_size, smi &surv_size, FILE *snap) {
   new_size -= idealized_page_size;
 
   // must start on a card boundary
-  assert(smi(new_spaces) % card_size == 0,
+  assert(int(new_spaces) % card_size == 0,
          "page size not a multiple of card size");
 
   char *be=  new_spaces;
@@ -86,9 +86,9 @@ bool newGeneration::scavenge_contents() {
 #define ACCUMULATE_TEMPLATE(s,member) { sum += s->member(); }
 
 #define ACCUMULATE_NEW(member)                          \
-smi newGeneration::member()                             \
+int32 newGeneration::member()                           \
 {                                                       \
-  smi sum= 0;                                           \
+  int32 sum= 0;                                         \
   APPLY_TO_YOUNG_SPACES2(ACCUMULATE_TEMPLATE,member);   \
   return sum;                                           \
 }
@@ -292,7 +292,7 @@ void oldGeneration::resort_spaces(int (*cmp_fn)(oldSpace**, oldSpace**))
 }
 
 
-oldGeneration::oldGeneration(smi initial_size, smi reserved_amt) {
+oldGeneration::oldGeneration(int32 initial_size, int32 reserved_amt) {
   VM_reserved_mem= reserved_amt;
   setLowSpaceThreshold(VM_reserved_mem * 2);
 
@@ -318,8 +318,8 @@ oldGeneration::oldGeneration(smi initial_size, smi reserved_amt) {
 }
 
 
-oldGeneration::oldGeneration(FILE* snap, smi initial_size,
-                             smi reserved_amt) {
+oldGeneration::oldGeneration(FILE* snap, int32 initial_size,
+                             int32 reserved_amt) {
   oldSpace *s;
 
   VM_reserved_mem= reserved_amt;
@@ -340,12 +340,6 @@ oldGeneration::oldGeneration(FILE* snap, smi initial_size,
     prev= s;
   }
   last_space= s;
-
-  // Compute total needed size from space headers (handles 32→64 widening)
-  smi needed = 0;
-  {FOR_EACH_OLD_SPACE(ss) { needed += ss->old_size_bytes(); }}
-  needed = roundTo(needed, idealized_page_size);
-  if (initial_size < needed) initial_size = needed;
 
   caddr_t old_start= Memory->new_gen->high_boundary;
   char *old_heap= OS::allocate_idealized_page_aligned(initial_size, "old0", old_start);
@@ -410,9 +404,9 @@ bool oldGeneration::contains(void* p)
 }
 
 #define ACCUMULATE_OLD(member)                          \
-smi oldGeneration::member()                             \
+int32 oldGeneration::member()                           \
 {                                                       \
-  smi sum= 0;                                           \
+  int32 sum= 0;                                         \
   {FOR_EACH_OLD_SPACE(s) { sum += s->member(); }}       \
   return sum;                                           \
 }
@@ -497,7 +491,7 @@ void oldGeneration::cleanup_after_scavenge()
 // Expand the old space by size bytes. 
 // Returns the amount actually allocated (0, maybe, if expansion isn't
 // possible; or more than asked for, due to rounding).
-smi oldGeneration::expand(smi size)
+int oldGeneration::expand(int32 size)
 {
   EventMarker em("expanding heap by %d", (void*)size);
   assert(size >= 0, "negative expansion?");
@@ -613,15 +607,6 @@ oop* oldGeneration::alloc_objs_and_bytes(fint size, fint bsize, char*& bytes, bo
   else
     tenuring_space = s;
     
-  if (p == NULL) {
-    // Try expanding the heap to satisfy this allocation.
-    smi needed = (size + bsize + 1) * oopSize;
-    smi expand_size = max(needed * 2, (smi)(4 * 1024 * 1024));
-    if (expand(expand_size) > 0) {
-      p = last_space->alloc_objs_and_bytes(size, bsize, bytes, mustAllocate);
-    }
-  }
-
   if ( p == NULL ) {
     if ( mustAllocate )  HeapAllocateFailed();
     return NULL;

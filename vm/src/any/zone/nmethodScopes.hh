@@ -91,7 +91,7 @@ private:
 
   nmethod* my_nmethod()  { return _nmethod_backPointer; }
     // don't call this nmethod - creates ambiguity w/nmethod constructor -Urs
-  ScopeDesc *root()   { return at(fint(0)); }
+  ScopeDesc *root()   { return at(0); }
 
   fint size() { return sizeof(nmethodScopes) + length(); }
 
@@ -103,7 +103,7 @@ private:
 
   // used in iterator macro FOR_EACH_SCOPE
   ScopeDesc *getNext(ScopeDesc *s) {
-    if (!s) return at(fint(0));
+    if (!s) return at(0);
     fint offset = s->next_offset();
 
     if (offset + (sizeof(int32) - (offset%sizeof(int32))) % sizeof(int32)

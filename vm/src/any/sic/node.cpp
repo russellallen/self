@@ -1007,15 +1007,15 @@
   bool  ArithRRNode::operIsConst() { return oper->isConstPReg(); }
   int32 ArithRRNode::operConst()   {
     assert(operIsConst(), "not a constant");
-    return (int32)(smi)(((ConstPReg*)oper)->constant); }
+    return int32(((ConstPReg*)oper)->constant); }
   
   bool ArithNode::copyPropagate(BB* bb, PUse* u, PReg* d, bool replace) {
     bool success = doCopyPropagate(bb, u, d, replace);
     if (_src->isConstPReg() && operIsConst()) {
       assert(success, "CP must have worked");
       // can constant-fold this operation
-      int32 c1 = (int32)(smi)((ConstPReg*)_src)->constant;
-      int32 c2 = operConst();
+      int32 c1 = (int32)((ConstPReg*)_src)->constant;
+      int32 c2 = (int32)operConst();
       int32 res;
       bool cc = false;
       switch (op) {

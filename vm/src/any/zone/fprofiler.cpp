@@ -350,7 +350,7 @@ void SelfFlatProfile(bool on) {
       // won't work in the profiled Self version
       if (on) {
         if (! flatProfiler) initFlatProfiler();
-          profil((buf_t) buf, bufSize, (smi) Memory->code->instsStart(), PROFIL_SCALE);
+          profil((buf_t) buf, bufSize, (int) Memory->code->instsStart(), PROFIL_SCALE);
         FlatProfile = true;
       }
       else {
