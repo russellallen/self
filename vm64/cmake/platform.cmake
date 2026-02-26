@@ -13,8 +13,7 @@ if(SELF_FORCE_I386)
 elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" OR
    CMAKE_SYSTEM_PROCESSOR STREQUAL "AMD64")
 
-  # Reuse i386 platform sources for now (no vm/src/x86_64/ yet)
-  set(platform_processor "i386")
+  set(platform_processor "amd64")
   set(TARGET_ARCH       "X86_64_ARCH")
   set(HOST_ARCH         "X86_64_ARCH")
 

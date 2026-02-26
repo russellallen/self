@@ -1,1 +1,0 @@
-../../../../vm/src/i386/runtime/runtime_asm_gcc_i386.S

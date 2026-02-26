@@ -7,7 +7,7 @@
 # include "config.hh"
 # if TARGET_ARCH == X86_64_ARCH
 
-# include "_runtime_i386.cpp.incl"  // reuse i386 includes
+# include "_runtime_amd64.cpp.incl"
 
 
 // =====================================================================

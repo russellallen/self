@@ -1,1 +1,0 @@
-../../../../vm/src/i386/prims/asmPrims_i386.S

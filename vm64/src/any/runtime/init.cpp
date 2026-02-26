@@ -60,7 +60,10 @@ inline void IntervalTimer_exit() { IntervalTimer::exit(); }
   
 # define I386_INIT_DO(template) \
   template(regs_i386_init)                                                     \
-  
+
+# define X86_64_INIT_DO(template) \
+  template(regs_amd64_init)                                                    \
+
 # define UNIX_INIT_DO(template) \
   template(unixPrims_init)                                                    \
   
@@ -96,6 +99,8 @@ INIT_DO(DEFINE_TEMPLATE)
   PPC_INIT_DO(DEFINE_TEMPLATE)
 # elif TARGET_ARCH == I386_ARCH
   I386_INIT_DO(DEFINE_TEMPLATE)
+# elif TARGET_ARCH == X86_64_ARCH
+  X86_64_INIT_DO(DEFINE_TEMPLATE)
 # endif
 # if TARGET_OS_FAMILY == UNIX_FAMILY
   UNIX_INIT_DO(DEFINE_TEMPLATE)
@@ -119,6 +124,8 @@ void init_globals() {
   PPC_INIT_DO(CALL_TEMPLATE)
 # elif TARGET_ARCH == I386_ARCH
   I386_INIT_DO(CALL_TEMPLATE)
+# elif TARGET_ARCH == X86_64_ARCH
+  X86_64_INIT_DO(CALL_TEMPLATE)
 # endif
 # if TARGET_OS_FAMILY == UNIX_FAMILY
   UNIX_INIT_DO(CALL_TEMPLATE)
