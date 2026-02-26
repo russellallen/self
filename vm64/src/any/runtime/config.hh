@@ -42,8 +42,11 @@
 # define SPARC_ARCH 1
 # define  M68K_ARCH 2 /* No longer supported */
 # define   PPC_ARCH 3 /* No longer supported, but may bring back sometime */
-# define  I386_ARCH 4
+# define   I386_ARCH 4
 # define X86_64_ARCH 5
+# define AARCH64_ARCH 6
+
+# define TARGET_IS_64BIT (TARGET_ARCH == X86_64_ARCH || TARGET_ARCH == AARCH64_ARCH)
 
 # define  UNIX_FAMILY 1
 # define MACOS_FAMILY 2 /* No longer supported */
@@ -86,20 +89,26 @@
     # define TARGET_ARCH PPC_ARCH
   # elif defined(__x86_64__)
     # define TARGET_ARCH X86_64_ARCH
+  # elif defined(__aarch64__)
+    # define TARGET_ARCH AARCH64_ARCH
   # elif defined(__i386__)
     # define TARGET_ARCH I386_ARCH
   # else
     # error A new Mac CPU?
   # endif
   
+  # ifndef HOST_ARCH
   # if NATIVE_ARCH == ppc
   # define HOST_ARCH PPC_ARCH
   # elif NATIVE_ARCH == x86_64
   # define HOST_ARCH X86_64_ARCH
+  # elif NATIVE_ARCH == aarch64
+  # define HOST_ARCH AARCH64_ARCH
   # elif NATIVE_ARCH == i386
   # define HOST_ARCH I386_ARCH
   # else
   # error what?
+  # endif
   # endif
   //or could: # define HOST_ARCH TARGET_ARCH // cross compiling is invisible on OSX
   

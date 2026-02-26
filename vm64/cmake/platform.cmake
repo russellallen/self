@@ -34,13 +34,19 @@ elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^powerpc" OR
   set(HOST_ARCH         "PPC_ARCH")
 
 elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^sparc")
-  
+
   set(platform_processor "sparc")
   set(TARGET_ARCH       "SPARC_ARCH")
   set(HOST_ARCH         "SPARC_ARCH")
-  
+
+elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "^(aarch64|arm64)")
+
+  set(platform_processor "aarch64")
+  set(TARGET_ARCH       "AARCH64_ARCH")
+  set(HOST_ARCH         "AARCH64_ARCH")
+
 else()
-  
+
   message(FATAL_ERROR "Processor type ${CMAKE_SYSTEM_PROCESSOR} not supported")
   
 endif()

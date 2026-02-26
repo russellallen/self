@@ -1,4 +1,4 @@
-# if defined(__i386__) || defined(__x86_64__)
+# if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__)
 /* Sun-$Revision: 1.3 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -8,4 +8,4 @@
   # pragma interface
 # endif
 
-# endif // defined(__i386__) || defined(__x86_64__)
+# endif // defined(__i386__) || defined(__x86_64__) || defined(__aarch64__)

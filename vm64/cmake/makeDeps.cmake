@@ -58,3 +58,23 @@ add_custom_command(
   COMMAND ${makeDeps} ${_incl_threshold} ${_incldb}
   WORKING_DIRECTORY ${_incl_parent_dir}
 )
+
+# For aarch64: source files are symlinked from amd64 and reference
+# _xxx_amd64.cpp.incl, but makeDeps generates _xxx_aarch64.cpp.incl.
+# Create aliases so both names resolve.
+if(TARGET_ARCH STREQUAL "AARCH64_ARCH")
+  set(_aarch64_incl_aliases
+    search conversion framePieces frame frame_format
+    frame_iterator registerLocator runtime stubs
+    uncommonBranch vframe
+  )
+  foreach(_stem ${_aarch64_incl_aliases})
+    add_custom_command(
+      OUTPUT ${SELF_PREFIX_HEADER}
+      COMMAND ${CMAKE_COMMAND} -E create_symlink
+        _${_stem}_aarch64.cpp.incl
+        ${_incl_dest_dir}/_${_stem}_amd64.cpp.incl
+      APPEND
+    )
+  endforeach()
+endif()

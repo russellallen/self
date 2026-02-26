@@ -491,13 +491,22 @@ class FlagSettingInt {
 # define FOR_ALL_PPC_BOOLEAN_DEBUG_PRIMS(template)
 # endif
 
-# if TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH
+# if TARGET_ARCH == I386_ARCH || TARGET_IS_64BIT
   static const bool UseByteMapBaseReg = false; // doesn't seem worth it for I386 -- dmu 5/06
   static const bool FastMapTest       = false; // cannot do this, no alignment error -- dmu 5/06
-  
-# define FOR_ALL_I386_BOOLEAN_DEBUG_PRIMS(template)                            
+
+# define FOR_ALL_I386_BOOLEAN_DEBUG_PRIMS(template)
 # else
 # define FOR_ALL_I386_BOOLEAN_DEBUG_PRIMS(template)
+# endif
+
+// Architecture-specific breakpoint instruction
+# if TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH
+  inline void breakpoint_instruction() { __asm__ __volatile__("int3"); }
+# elif TARGET_ARCH == AARCH64_ARCH
+  inline void breakpoint_instruction() { __asm__ __volatile__("brk #0"); }
+# else
+  inline void breakpoint_instruction() { /* no breakpoint for this arch */ }
 # endif
 
 

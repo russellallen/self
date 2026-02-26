@@ -1,4 +1,4 @@
-# if  TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH
+# if  TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH || TARGET_ARCH == AARCH64_ARCH
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -41,9 +41,13 @@ char* frame::c_entry_point() {
 
   if ( r == NULL || Memory->code->contains(r))
     return NULL;
+# if defined(__i386__) || defined(__x86_64__)
   char* callp = r - 1;
   if (!isImmediateCall((inst_t*)callp)) return NULL;
   return  get_target_of_C_call_site((inst_t*)callp);
+# else
+  return NULL; // no JIT call site detection on this architecture
+# endif
 }
 
 # pragma warn_unusedarg off
@@ -78,7 +82,12 @@ void**  frame::location_addr(Location r, RegisterLocator* rl) {
   Location base; int32 d; OperandType t;
   reg_disp_type_of_loc(&base, &d, &t, r);
   assert(t != RegisterOperand, "???");
+# if defined(__i386__) || defined(__x86_64__)
   return (base == esp ? (void**)my_sp() : (void**)my_bp())  +  d / oopSize;
+# else
+  // On non-x86, base is always bp-relative (no esp register)
+  return (void**)my_bp()  +  d / oopSize;
+# endif
 }
   
 
@@ -176,8 +185,8 @@ void frame::fix_frame(char* pc, char* sp) {
 */   
 
 frame* frame::block_scope_of_home_frame() {
-# if TARGET_ARCH == X86_64_ARCH
-  // On x86_64 interpreter-only builds, the interpret() frame IS both
+# if TARGET_IS_64BIT
+  // On interpreter-only builds, the interpret() frame IS both
   // the home frame and the block scope — there are no separate JIT Self frames.
   return this;
 # else
@@ -186,8 +195,8 @@ frame* frame::block_scope_of_home_frame() {
 }
 
 frame* frame::home_frame_of_block_scope(frame* currentFrameHint) {
-# if TARGET_ARCH == X86_64_ARCH
-  // On x86_64 interpreter-only builds, the block scope IS the home frame.
+# if TARGET_IS_64BIT
+  // On interpreter-only builds, the block scope IS the home frame.
   Unused(currentFrameHint);
   return this;
 # else
@@ -291,4 +300,4 @@ oop frame::perform_selector_of_SendMessage_stub_frame() {
   return  ((oop*)sender()->my_sp())[PerformSelectorLoc_sp_offset / oopSize];
 }  
 
-# endif // TARGET_ARCH == I386_ARCH
+# endif // TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH || TARGET_ARCH == AARCH64_ARCH

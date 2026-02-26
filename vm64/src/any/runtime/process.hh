@@ -60,7 +60,7 @@ class Process: public CHeapObj {
 
   Process* next;
 
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
  public:
   // Per-process interpreter list for x86_64 interpreter-only builds.
   // The global _active_interp_list doesn't work correctly because

@@ -284,7 +284,7 @@ char* rSet::next_zero_byte(char *cp, char* end) {
   char* cwp = (char*) wp;
   switch (cwp - cp) {
    default: ShouldNotReachHere();
-#  if TARGET_ARCH == X86_64_ARCH
+#  if TARGET_IS_64BIT
    case 7: if ((cwp)[-7] == 0) { *end = old_end; return cwp - 7; }
    case 6: if ((cwp)[-6] == 0) { *end = old_end; return cwp - 6; }
    case 5: if ((cwp)[-5] == 0) { *end = old_end; return cwp - 5; }
@@ -317,7 +317,7 @@ char* rSet::next_zero_byte(char *cp, char* end) {
   if (cwp[1] == 0) { *end = old_end; return cwp + 1; }
   if (cwp[2] == 0) { *end = old_end; return cwp + 2; }
   if (cwp[3] == 0) { *end = old_end; return cwp + 3; }
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   if (cwp[4] == 0) { *end = old_end; return cwp + 4; }
   if (cwp[5] == 0) { *end = old_end; return cwp + 5; }
   if (cwp[6] == 0) { *end = old_end; return cwp + 6; }

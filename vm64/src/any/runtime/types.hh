@@ -29,7 +29,7 @@ typedef long long        int64;         // signed integer with >= 63 bits
 typedef unsigned long long uint64;      // unsigned integer with >= 64 bits
 
 
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   typedef int64         fint;           // fastest precision-irrelevant int
 # elif  TARGET_ARCH == SPARC_ARCH  \
   ||  TARGET_ARCH ==   PPC_ARCH  \
@@ -42,7 +42,7 @@ typedef unsigned long long uint64;      // unsigned integer with >= 64 bits
 #  error Which architecture?
 # endif
 
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   typedef int64 smi;
 # else
   typedef int32 smi;
@@ -59,7 +59,7 @@ typedef u_char bool8;
 # endif
 
 const fint BitsPerByte = 8;
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   const fint BytesPerWord = 8;
 # else
   const fint BytesPerWord = 4;
@@ -67,7 +67,7 @@ const fint BitsPerByte = 8;
 const fint BitsPerWord = BitsPerByte * BytesPerWord;
 
 const fint LogBitsPerByte = 3;
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   const fint LogBytesPerWord = 3;
 # else
   const fint LogBytesPerWord = 2;

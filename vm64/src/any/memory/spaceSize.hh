@@ -31,7 +31,7 @@ public:
 oop get_current_space_sizes_prim(oop ignored, slotsOop proto, void *FH);
 oop get_default_space_sizes_prim(oop);
 
-#if TARGET_ARCH == X86_64_ARCH
+#if TARGET_IS_64BIT
 // On 64-bit, use a much larger heap address space.
 // The 512MB boundary was a SPARCstation constraint that doesn't apply here.
 const caddr_t HeapStart=        (caddr_t)(64LL * 1024 * 1024);                      //   64 MB

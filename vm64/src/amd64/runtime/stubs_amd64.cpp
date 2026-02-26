@@ -1,4 +1,4 @@
-# if  TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH
+# if  TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH || TARGET_ARCH == AARCH64_ARCH
 /* Sun-$Revision: 1.3 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -24,4 +24,4 @@ extern "C" {
 extern "C" {  oop ReturnResult_stub(...) { fatal("unimp intel");  return NULL; } }
 oop ReturnResult_stub_result;
 
-# endif // TARGET_ARCH == I386_ARCH
+# endif // TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH || TARGET_ARCH == AARCH64_ARCH

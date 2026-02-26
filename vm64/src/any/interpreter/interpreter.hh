@@ -80,7 +80,7 @@ class interpreter: public abstract_interpreter {
 
   static interpreter* find_interpreter_for_frame(frame* f);
 
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   // On x86_64 interpreter-only builds, ContinueNLRFromC and c_entry_point()
   // don't work.  Use setjmp/longjmp for NLR unwinding instead.
   jmp_buf       _nlr_jmpbuf;

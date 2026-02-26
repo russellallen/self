@@ -1,0 +1,1 @@
+../../amd64/runtime/registerLocator_amd64.cpp

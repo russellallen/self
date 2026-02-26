@@ -1,4 +1,4 @@
-# if  TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH
+# if  TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH || TARGET_ARCH == AARCH64_ARCH
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -12,17 +12,24 @@
 
 void reg_disp_type_of_loc(Location* basep, int32* offsetp, OperandType* tp, Location loc) {
   Location b = IllegalLocation;  int32 d = 0;  OperandType t = NumberOperand;
-  
+
+# if defined(__i386__) || defined(__x86_64__)
        if (isRegister(loc))  b = loc, d = 0, t = RegisterOperand;
-       
+
   else if (loc == IReceiverReg  || is_IArgLocation(loc))  b = ebp,  d =  index_for_IArgLocation(loc) + 1 +     ircvr_offset;
   else if (loc == LReceiverReg  || is_LArgLocation(loc))  b = esp,  d =  index_for_LArgLocation(loc) + 1 + leaf_rcvr_offset;
   else if (loc ==  ReceiverReg  ||  is_ArgLocation(loc))  b = esp,  d =  index_for_ArgLocation(loc)  + 1 +   rcvr_offset;
   else if (                       is_StackLocation(loc))  b = ebp,  d = -index_for_StackLocation(loc) + first_local_offset;
   else fatal1("don't know how to do %s\n", locationName(loc));
+# else
+  // aarch64: no x86 registers; use bp-relative for everything
+       if (loc == IReceiverReg  || is_IArgLocation(loc))  d =  index_for_IArgLocation(loc) + 1 +     ircvr_offset;
+  else if (                       is_StackLocation(loc))  d = -index_for_StackLocation(loc) + first_local_offset;
+  else fatal1("don't know how to do %s\n", locationName(loc));
+# endif
 
   if (basep) *basep = b;
   if (offsetp) *offsetp = d * oopSize;
   if (tp) *tp = t;
 }
-# endif // TARGET_ARCH == I386_ARCH
+# endif // TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH || TARGET_ARCH == AARCH64_ARCH

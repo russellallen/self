@@ -1,4 +1,4 @@
-# if defined(__i386__) || defined(__x86_64__)
+# if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__)
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -24,4 +24,4 @@
   oop* first_incoming_arg_addr();
   oop* first_local_addr(); // must be receiver_offset
 
-# endif // defined(__i386__) || defined(__x86_64__)
+# endif // defined(__i386__) || defined(__x86_64__) || defined(__aarch64__)

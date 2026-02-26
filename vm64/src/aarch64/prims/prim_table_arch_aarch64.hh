@@ -1,0 +1,1 @@
+../../amd64/prims/prim_table_arch_amd64.hh

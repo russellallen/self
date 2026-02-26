@@ -996,7 +996,7 @@
 # elif TARGET_ARCH == PPC_ARCH
     if (fits_within_si((smi)(constant)) && loc != UnAllocated) {
 # elif TARGET_ARCH == I386_ARCH \
-   ||  TARGET_ARCH == X86_64_ARCH
+   ||  TARGET_IS_64BIT
     if (loc != UnAllocated) {
 # endif
       error2("ConstPReg %#lx: could use load immediate to load oop %#lx",

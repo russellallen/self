@@ -335,6 +335,8 @@ static int32 true_size_of_malloced_obj(int32* p) {
       -2;
 #   elif  TARGET_ARCH == I386_ARCH   &&  COMPILER == GCC_COMPILER   &&   TARGET_OS_VERSION == MACOSX_VERSION
       -2;
+#   elif  TARGET_ARCH == AARCH64_ARCH  &&  TARGET_OS_VERSION == MACOSX_VERSION
+      -2;
 #   elif  TARGET_ARCH == I386_ARCH   &&  COMPILER == GCC_COMPILER   &&    (TARGET_OS_VERSION ==  LINUX_VERSION  ||  TARGET_OS_VERSION == SOLARIS_VERSION)
       -1;
 #   else

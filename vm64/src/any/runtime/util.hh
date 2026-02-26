@@ -82,7 +82,7 @@ inline int32  min(int32  a, int32  b) { return a > b ? b : a; }
 inline int32  max(int32  a, int32  b) { return a > b ? a : b; }
 inline int32 umin(uint32 a, uint32 b) { return a > b ? b : a; }
 inline int32 umax(uint32 a, uint32 b) { return a > b ? a : b; }
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
 inline fint   min(fint   a, fint   b) { return a > b ? b : a; }
 inline fint   max(fint   a, fint   b) { return a > b ? a : b; }
 # endif

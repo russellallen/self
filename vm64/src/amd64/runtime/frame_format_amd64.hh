@@ -1,4 +1,4 @@
-# if defined(__i386__) || defined(__x86_64__)
+# if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__)
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -97,4 +97,4 @@ void reg_disp_type_of_loc(Location* basep, int32* offsetp,  OperandType *t,  Loc
 const fint PerformSelectorLoc_sp_offset  =  5 * oopSize;
 const fint PerformDelegateeLoc_sp_offset =  6 * oopSize;
 
-# endif // defined(__i386__) || defined(__x86_64__)
+# endif // defined(__i386__) || defined(__x86_64__) || defined(__aarch64__)

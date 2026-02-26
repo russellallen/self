@@ -31,6 +31,18 @@ add_subdirectory(src)
 # for IDEs, make the source nice.
 source_groups_from_src(SRC_src "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 
+# aarch64 JIT headers are symlinked from amd64 but have no source files;
+# add their directories to the include path for the precompiled header.
+if(TARGET_ARCH STREQUAL "AARCH64_ARCH")
+  include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/aarch64/asm
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/aarch64/fast_compiler
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/aarch64/lookup
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/aarch64/sic
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/aarch64/zone
+  )
+endif()
+
 # use glue-directory, but put binaries into a local dir
 # sets SRC_glue
 add_subdirectory(${SELF_GLUE_DIRECTORY} _glue)

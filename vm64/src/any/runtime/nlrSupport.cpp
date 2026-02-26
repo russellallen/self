@@ -84,7 +84,7 @@ volatile void NLRSupport::continue_NLR_into_Self(bool remove_patches) {
 
 volatile void NLRSupport::continue_NLR_into_interpreted_Self() {
   set_have_NLR_through_C(); // interp needs this
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   // On x86_64 interpreter-only builds, c_entry_point() and ContinueNLRFromC
   // don't work.  Use longjmp to unwind back to the interpreter's setjmp point.
   extern void interpreter_longjmp_for_NLR();

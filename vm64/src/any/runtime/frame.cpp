@@ -131,7 +131,7 @@ int32 frame::frame_size() {
 // testers
 
 interpreter* frame::get_interpreter_of_block_scope() {
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   // On x86_64 interpreter-only builds, c_entry_point() and location_addr()
   // don't work (call instruction decoding is wrong, and arguments are in
   // registers not on the stack). Use the interpreter registry instead.

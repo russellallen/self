@@ -1,4 +1,4 @@
-# if defined(__i386__) || defined(__x86_64__)
+# if defined(__i386__) || defined(__x86_64__) || defined(__aarch64__)
 /* Sun-$Revision: 1.4 $ */
 
 /* Copyright 1992-2012 AUTHORS.
@@ -12,4 +12,4 @@
 # endif
 
   oop** addresses() { fatal("Unused Intel");  return 0;  }
-# endif // defined(__i386__) || defined(__x86_64__)
+# endif // defined(__i386__) || defined(__x86_64__) || defined(__aarch64__)

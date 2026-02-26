@@ -1,0 +1,1 @@
+../../amd64/fast_compiler/registerString_amd64.hh

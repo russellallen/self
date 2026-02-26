@@ -148,7 +148,7 @@ Process::Process(processOop p, int32 sSize, oop rcvr, stringOop sel,
   aborter = NULL;
   clear_check_vfo_locals();
   zombie= false;
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   active_interp_list = NULL;
 # endif
   if (rcvr) {

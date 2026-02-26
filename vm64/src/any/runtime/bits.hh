@@ -8,7 +8,7 @@
 # endif
 
 
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   # define AllBits      ~0ULL
   # define NoBits       0ULL
   # define OneBit       1ULL

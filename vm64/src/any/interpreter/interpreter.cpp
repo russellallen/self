@@ -12,7 +12,7 @@ oop sneaky_method_argument_to_interpret;
 interpreter* interpreter::_active_interp_list = NULL;
 
 interpreter* interpreter::find_interpreter_for_frame(frame* f) {
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   // On x86_64, interpreter lists are per-process. First check the
   // current process, then find which process owns the frame.
   for (interpreter* i = currentProcess->active_interp_list; i != NULL; i = i->_prev_interp) {
@@ -37,7 +37,7 @@ interpreter* interpreter::find_interpreter_for_frame(frame* f) {
 # endif
 }
 
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
 interpreter* interpreter::active_interp() {
   return currentProcess->active_interp_list;
 }
@@ -55,7 +55,7 @@ void interpreter_longjmp_for_NLR() {
 inline frame* interpreter::block_scope_or_NLR_target() {
   if (_block_scope_or_NLR_target)
     return _block_scope_or_NLR_target;
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   // On x86_64 interpreter-only builds, frame walking can't find
   // interpreted Self frames. Use the frame captured at interpret() entry.
   _block_scope_or_NLR_target = _my_frame;
@@ -189,7 +189,7 @@ oop interpret( oop rcv,
   // Self frames, so we maintain a per-process linked list to avoid
   // corruption when process switches interleave push/pop operations.
   interp._my_frame = currentFrame();
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   interp._prev_interp = currentProcess->active_interp_list;
   currentProcess->active_interp_list = &interp;
 # else
@@ -200,7 +200,7 @@ oop interpret( oop rcv,
   ((interpreter*)save1Arg(&interp))->interpret_method();
 
   // Deregister on exit
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   currentProcess->active_interp_list = interp._prev_interp;
 # else
   interpreter::_active_interp_list = interp._prev_interp;
@@ -252,7 +252,7 @@ void interpreter::interpret_method() {
     if (fastPreemptionCheck() /* || PendingSelfSignals::are_any_pending() XXX right? */ ) {
       // save non vol regs cause ctrl C causes abort which NLR's
       //  through c frames -- dmu 1/96
-#     if TARGET_ARCH == X86_64_ARCH
+#     if TARGET_IS_64BIT
       if (setjmp(_nlr_jmpbuf) == 0)
 #     endif
       SaveNonVolRegsAndCall0(interruptCheck);
@@ -539,7 +539,7 @@ oop interpreter::send_prim() {
                                         arg_count - (hasFailBlock == true));
   */
   
-# if TARGET_ARCH == X86_64_ARCH
+# if TARGET_IS_64BIT
   if (setjmp(_nlr_jmpbuf) == 0)
 # endif
   res = SaveNonVolRegsAndCall4 ( CallPrimitiveFromInterpreter,
@@ -628,7 +628,7 @@ oop interpreter::lookup_and_send( LookupType type,
 
     // XXXXXX check code table, use compiled method, get compiler to call me
 
-#   if TARGET_ARCH == X86_64_ARCH
+#   if TARGET_IS_64BIT
     if (setjmp(_nlr_jmpbuf) == 0)
 #   endif
     switchToVMStack_intSend( &L, arg_count, InterpreterLookup_cont);
@@ -655,7 +655,7 @@ oop interpreter::lookup_and_send( LookupType type,
        used to be:
        switchToVMStack_intSend( (simpleLookup*)&L, arg_count, InterpreterLookup_cont);
     */
-#   if TARGET_ARCH == X86_64_ARCH
+#   if TARGET_IS_64BIT
     if (setjmp(_nlr_jmpbuf) == 0)
 #   endif
     SaveNonVolRegsAndCall3( switchToVMStack_intSend,

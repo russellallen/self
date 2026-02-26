@@ -34,6 +34,13 @@
   }
 
 # elif TARGET_OS_VERSION == MACOSX_VERSION \
+    && TARGET_ARCH == AARCH64_ARCH
+  // ARM64 has split I/D caches; interpreter-only builds don't generate code,
+  // so these are no-ops.
+  void MachineCache::flush_instruction_cache_word(void* addr) {}
+  void MachineCache::flush_instruction_cache_range(void* s, void* e) {}
+
+# elif TARGET_OS_VERSION == MACOSX_VERSION \
     && TARGET_ARCH == I386_ARCH  &&  OVERDO_IT
   extern "C" { void MakeDataExecutable(void*, unsigned long); }
   void MachineCache::flush_instruction_cache_word(void* addr) { 

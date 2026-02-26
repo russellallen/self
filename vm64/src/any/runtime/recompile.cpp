@@ -964,7 +964,7 @@ static char* continueRecompile2(RecompBuf* buf, frame* last) {
       ContinueAfterReturnTrap(pc, sp);
 #   elif TARGET_ARCH ==  PPC_ARCH  \
      ||  TARGET_ARCH == I386_ARCH  \
-     ||  TARGET_ARCH == X86_64_ARCH
+     ||  TARGET_IS_64BIT
       fatal("xxx unimp mac, unimp intel: where is result?");
       // ContinueAfterReturnTrap(result, pc, sp);
 #   else

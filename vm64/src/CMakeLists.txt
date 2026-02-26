@@ -259,6 +259,7 @@ set(SRC_any
   any/prims/prim.cpp
   any/prims/prim.hh
   any/prims/smiPrims_x86_64.cpp
+  any/prims/smiPrims_aarch64.cpp
   any/prims/prim_table_arch.hh
   any/prims/prim_table_os.hh
   # -> quartz
@@ -339,6 +340,7 @@ set(SRC_any
   any/runtime/runtime.cpp
   any/runtime/runtime.hh
   any/runtime/runtime_stubs_x86_64.cpp
+  any/runtime/runtime_stubs_aarch64.cpp
   any/runtime/selfMonitor.cpp
   any/runtime/selfMonitor.hh
   any/runtime/shell.cpp
@@ -485,9 +487,41 @@ set(SRC_amd64
   amd64/zone/nmethod_amd64.hh
   amd64/zone/trapdoors_amd64.hh
 )
+
+set(SRC_aarch64
+  aarch64/asm/regs_aarch64.cpp
+  aarch64/asm/regs_aarch64.hh
+  aarch64/memory/search_aarch64.cpp
+  aarch64/memory/search_aarch64.hh
+  aarch64/prims/prim_table_arch_aarch64.hh
+  aarch64/runtime/aCompiler_aarch64.hh
+  aarch64/runtime/asmDefs_gcc_aarch64.hh
+  aarch64/runtime/conversion_aarch64.cpp
+  aarch64/runtime/conversion_aarch64.hh
+  aarch64/runtime/frame_aarch64.cpp
+  aarch64/runtime/frame_aarch64.hh
+  aarch64/runtime/frame_format_aarch64.cpp
+  aarch64/runtime/frame_format_aarch64.hh
+  aarch64/runtime/frame_iterator_aarch64.cpp
+  aarch64/runtime/frame_iterator_aarch64.hh
+  aarch64/runtime/framePieces_aarch64.cpp
+  aarch64/runtime/framePieces_aarch64.hh
+  aarch64/runtime/interruptedCtx_aarch64.cpp
+  aarch64/runtime/interruptedCtx_aarch64.hh
+  aarch64/runtime/registerLocator_aarch64.cpp
+  aarch64/runtime/registerLocator_aarch64.hh
+  aarch64/runtime/runtime_aarch64.cpp
+  aarch64/runtime/runtime_aarch64.hh
+  aarch64/runtime/stubs_aarch64.cpp
+  aarch64/runtime/uncommonBranch_aarch64.cpp
+  aarch64/runtime/vframe_aarch64.cpp
+)
+
 # include platform files
 if(TARGET_ARCH STREQUAL "X86_64_ARCH")
   list(APPEND SRC_src ${SRC_amd64})
+elseif(TARGET_ARCH STREQUAL "AARCH64_ARCH")
+  list(APPEND SRC_src ${SRC_aarch64})
 else()
   list(APPEND SRC_src ${SRC_${platform_processor}})
 endif()
