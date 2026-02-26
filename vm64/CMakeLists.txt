@@ -1,5 +1,5 @@
 #!/usr/bin/env cmake
-set(PROJECT_NAME Self64)
+set(PROJECT_NAME Self)
 
 #
 # Prologue

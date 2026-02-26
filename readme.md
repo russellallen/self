@@ -10,6 +10,13 @@ It is a port of the Self VM to 64 bit systems.
 
 At the moment the interpreter is working, but the JIT has not been ported.
 
+You can build the VM by:
+
+```
+cmake -S vm64 -B cmake-build-amd64-release -DCMAKE_BUILD_TYPE=Release 
+cmake --build cmake-build-amd64-release -j$(nproc)   
+```
+
 
 AI Disclosure Statement
 =======================
