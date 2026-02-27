@@ -287,6 +287,9 @@ CGImageRef CGImageCreate_wrap( float w, float h,
                                bool shouldInterpolate,
                                uint32 colorRenderingIntent,
                                void* FH) {
+  // Byte order flags (kCGBitmapByteOrder16/32) are invalid for <= 8 bpp
+  if (bitsPerPixel <= 8)
+    bitmapInfo &= ~kCGBitmapByteOrderMask;
   CGFloat* decodeArray; uint32 decodeLen;
   return
     convertFloatObjVector( decodeArrayOop, "CGImageCreate", FH, decodeArray, decodeLen)
@@ -305,6 +308,9 @@ CGImageRef CGImageCreate_wrap( float w, float h,
                                CGDataProviderRef provider,
                                bool shouldInterpolate,
                                uint32 colorRenderingIntent) {
+  // Byte order flags (kCGBitmapByteOrder16/32) are invalid for <= 8 bpp
+  if (bitsPerPixel <= 8)
+    bitmapInfo &= ~kCGBitmapByteOrderMask;
   return CGImageCreate((size_t)w, (size_t)h, bitsPerComponent, bitsPerPixel, bytesPerRow, colorSpace,
                        bitmapInfo, provider, NULL, shouldInterpolate,
                        CGColorRenderingIntent(colorRenderingIntent));
@@ -1059,6 +1065,12 @@ ATSUTextLayout ATSUCreateTextLayoutWithTextPtr_wrap(
   }
 
   layout->attrs = attrs;
+
+  // Handle ATSU sentinel values:
+  // kATSUFromTextBeginning = 0, kATSUToTextEnd = -1
+  if (textOffset < 0) textOffset = 0;
+  if (textLength < 0 || textOffset + textLength > len)
+      textLength = len - textOffset;
 
   // Create CFString from the specified range
   CFStringRef str = CFStringCreateWithCharacters(NULL, unis + textOffset, textLength);
