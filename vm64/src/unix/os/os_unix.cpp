@@ -7,7 +7,8 @@
  * However, the TARGET_OS_VERSION test only works after the header files are included,
  * but we need to have the Carbon header included before the other headers.
  * So we have to make an exception and not use the TARGET_OS_VERSION macro. -ma and dmu 4/02 */
-# ifdef __APPLE__
+# if defined(__APPLE__) && !defined(__aarch64__)
+  // ARM64 uses Cocoa compatibility types from quartzWindow.hh instead of Carbon
   #  undef ASSEMBLER
   #  undef Alloc
   #  include <Carbon/Carbon.h>
@@ -324,7 +325,14 @@ bool OS::setup_snapshot_to_run(const char* fileName) {
 
 
 
-/* The following two functions were written by Kristen McIntyre, 
+#if defined(__aarch64__)
+// Carbon File Manager (FSRef, FSCatalogInfo) is not available on ARM64.
+// Type/creator codes are obsolete on modern macOS, so this is a no-op.
+bool OS::setup_snapshot_to_run(const char* /* fileName */) {
+  return true;
+}
+#else
+/* The following two functions were written by Kristen McIntyre,
  changed by Tobias Pape because of deprecation warnings. */
 static bool path_to_fsref(const char *path, FSRef *fref)
 {
@@ -338,20 +346,20 @@ static bool set_type_creator(const char *path, const char *type, const char *cre
   FileInfo* finfo;
   FSRef fsr;
   FSCatalogInfo cinfo;
-    
+
   if (path_to_fsref(path, &fsr) == false) {
     return false;
   }
   if (FSGetCatalogInfo(&fsr, kFSCatInfoFinderInfo | kFSCatInfoFinderInfo, &cinfo, NULL, NULL, NULL) != noErr) {
     return false;
   }
-  
+
   finfo = (FileInfo*) &cinfo.finderInfo;
 
   finfo->fileType = 0;
   if (type != NULL) {
     for (int i = 0; i < 4; i++) {
-        finfo->fileType |= ((unsigned char)type[i]) << ((3 - i) * 8); 
+        finfo->fileType |= ((unsigned char)type[i]) << ((3 - i) * 8);
     }
   }
 
@@ -368,6 +376,7 @@ static bool set_type_creator(const char *path, const char *type, const char *cre
 bool OS::setup_snapshot_to_run(const char* fileName) {
   return set_type_creator(fileName, "Snap", "Self");
 }
+#endif
 
 # endif
 

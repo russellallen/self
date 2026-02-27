@@ -145,7 +145,15 @@ if(SELF_OSX_COCOA)
   add_framework_to_list(frameworks Cocoa)
 endif()
 
-add_framework_to_list(frameworks Carbon)
+if(${platform_processor} STREQUAL "aarch64")
+  # ARM64: Carbon is not available; use AppKit and CoreText for QUARTZ_LIB
+  if(SELF_QUARTZ)
+    add_framework_to_list(frameworks AppKit)
+    add_framework_to_list(frameworks CoreText)
+  endif()
+else()
+  add_framework_to_list(frameworks Carbon)
+endif()
 
 list(APPEND EXTRA_LIBRARIES ${frameworks})
 

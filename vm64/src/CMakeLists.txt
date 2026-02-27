@@ -580,9 +580,15 @@ set(SRC_quartz
   any/prims/prim_table_quartz.hh
   any/prims/quartzPrims.cpp
   any/prims/quartzPrims.hh
-  any/os/quartzWindow.cpp
   any/os/quartzWindow.hh
 )
+
+# ARM64 uses quartzWindow.mm (Objective-C++ for Cocoa), others use quartzWindow.cpp (Carbon)
+if(${platform_processor} STREQUAL "aarch64")
+  list(APPEND SRC_quartz any/os/quartzWindow.mm)
+else()
+  list(APPEND SRC_quartz any/os/quartzWindow.cpp)
+endif()
 
 if(SELF_QUARTZ)
   list(APPEND SRC_src ${SRC_quartz})
