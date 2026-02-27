@@ -285,7 +285,7 @@ void space::compact(mapOop unmarked_map_map,
       Map* nm = mapOop(obj->map()->enclosing_mapOop()->gc_unmark())->map_addr();
       fint size = nm->object_size(obj);
       byteVectorOop bv= NULL;
-      int32 bsize= 0;
+      fint bsize= 0;
       if (nm->is_byteVector()) {
         bv= byteVectorOop(obj);
         bsize= bv->lengthWords();

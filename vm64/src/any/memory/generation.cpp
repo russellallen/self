@@ -546,11 +546,11 @@ smi oldGeneration::expand(smi size)
 oldSpace* oldGeneration::biggest_free_space(oldSpace *s)
 {
   oldSpace *big= s;
-  int32 room= big->bytes_free();
+  smi room= big->bytes_free();
   for (;;) {
     s= s->next_space;
     if (s == NULL) return big;
-    int32 t= s->bytes_free();
+    smi t= s->bytes_free();
     if (t > room) {
       room= t;
       big= s;
@@ -620,7 +620,8 @@ oop* oldGeneration::alloc_objs_and_bytes(fint size, fint bsize, char*& bytes, bo
     // Try expanding the heap to satisfy this allocation.
     smi needed = (size + bsize + 1) * oopSize;
     smi expand_size = max(needed * 2, (smi)(4 * 1024 * 1024));
-    if (expand(expand_size) > 0) {
+    if (expand(expand_size) > 0
+        || (expand_size > needed && expand(needed) > 0)) {
       p = last_space->alloc_objs_and_bytes(size, bsize, bytes, mustAllocate);
     }
   }
