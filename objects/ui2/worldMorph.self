@@ -2647,11 +2647,11 @@ IfAbsent: argument if none.\x7fModuleInfo: Module: worldMorph InitialContents: F
          'Category: window management\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: private'
         
          windowCanvasPrototypeForDisplay: dispName = ( |
-            | 
+            |
             (
               case
-                if: [dispName isEmpty  &&  [host osName == 'macOSX']]  Then: [self ]
-                If: [dispName = quartzGlobals windowCanvas displayName] Then: [quartzGlobals]
+                if: [host osName == 'macOSX']                                  Then: [quartzGlobals]
+                If: [dispName = quartzGlobals windowCanvas displayName]        Then: [quartzGlobals]
                 Else: [x11Globals ]
             ) windowCanvas).
         } | ) 
