@@ -1,4 +1,4 @@
-/* Copyright 2024 AUTHORS.
+/* Copyright 2024-2026 AUTHORS.
    See the LICENSE file for license information. */
 
 /* C implementations of SMI arithmetic primitives for x86_64.

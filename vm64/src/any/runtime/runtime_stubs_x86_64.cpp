@@ -1,4 +1,4 @@
-/* Copyright 2024 AUTHORS.
+/* Copyright 2024-2026 AUTHORS.
    See the LICENSE file for license information. */
 
 /* C/asm stubs for x86_64 interpreter-only builds.
