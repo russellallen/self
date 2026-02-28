@@ -89,3 +89,10 @@
 {  "Version", fntype(& version_glue), ExternalPrimitive, StringPrimType, SIDEEFFECTS, "See man 3 uname" },
 {  "Machine", fntype(& machine_glue), ExternalPrimitive, StringPrimType, SIDEEFFECTS, "See man 3 uname" },
 # endif
+{ "Rename:",              fntype(&rename_glue),    ExternalPrimitive, IntegerPrimType, SIDEEFFECTS, "rename(2)" },
+{ "Mkdir:",               fntype(&mkdir_glue),     ExternalPrimitive, IntegerPrimType, SIDEEFFECTS, "mkdir(2)" },
+{ "Rmdir",                fntype(&rmdir_glue),     ExternalPrimitive, IntegerPrimType, SIDEEFFECTS, "rmdir(2)" },
+{ "Access:",              fntype(&access_glue),    ExternalPrimitive, IntegerPrimType, SIDEEFFECTS, "access(2)" },
+{ "Gethostid",            fntype(&gethostid_glue), ExternalPrimitive, IntegerPrimType, SIDEEFFECTS, "gethostid(3)" },
+{ "Ioctl:With:",          fntype(&ioctl_glue),     ExternalPrimitive, IntegerPrimType, SIDEEFFECTS, "ioctl(2)" },
+{ "Ptrace:Addr:Data:",    fntype(&ptrace_glue),    ExternalPrimitive, IntegerPrimType, SIDEEFFECTS, "ptrace(2)" },

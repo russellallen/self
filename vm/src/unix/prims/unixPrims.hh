@@ -54,6 +54,10 @@ char *getcwd_wrap(void *FH);
 
 int putenv_wrap(char *name, char *value);
 
+int gethostid_wrap();
+int ioctl_wrap(int fd, int request, void* arg);
+int ptrace_wrap(int request, int pid, void* addr, int data);
+
 byteVectorOop syscall0(int n, void* FH);
 byteVectorOop syscall1(int n, void* a0, void* FH);
 byteVectorOop syscall2(int n, void* a0, void* a1, void* FH);
@@ -97,10 +101,20 @@ byteVectorOop syscall6(int n, void* a0, void* a1, void* a2, void* a3,
 # endif
 
 
+# define unix_fileops_glue \
+  C_func_2(int_or_errno,-1, rename,         rename_glue,    , string,, string,)       \
+  C_func_2(int_or_errno,-1, mkdir,          mkdir_glue,     , string,, int,)           \
+  C_func_1(int_or_errno,-1, rmdir,          rmdir_glue,     , string,)                 \
+  C_func_2(int_or_errno,-1, access,         access_glue,    , string,, int,)           \
+  C_func_0(int,,             gethostid_wrap, gethostid_glue, )                         \
+  C_func_3(int_or_errno,-1, ioctl_wrap,     ioctl_glue,     , int,, int,, any,void*)   \
+  C_func_4(int_or_errno,-1, ptrace_wrap,    ptrace_glue,    , int,, int,, any,void*, int,)
+
 # define WHAT_GLUE PROTOTYPES
     unix_glue
     unix_syscall_glue
-    macosx_uname_glue    
+    macosx_uname_glue
+    unix_fileops_glue
 # undef WHAT_GLUE
 
 

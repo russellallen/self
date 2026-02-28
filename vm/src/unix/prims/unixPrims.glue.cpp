@@ -20,5 +20,6 @@ extern "C" {
     unix_glue
     unix_syscall_glue
     macosx_uname_glue
+    unix_fileops_glue
 # undef  WHAT_GLUE
 
