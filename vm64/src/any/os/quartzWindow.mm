@@ -13,6 +13,7 @@
 // quartzWindow.hh will detect already-defined system types and skip its versions.
 #import <AppKit/AppKit.h>
 #import <CoreText/CoreText.h>
+#import <QuartzCore/QuartzCore.h>
 
 // Undef Cocoa/AppKit macros that conflict with Self
 #undef assert
@@ -100,21 +101,43 @@ bool WindowSet::includes_window(WindowSet_WindowPtr w) {
     evt->eventKind = kEventMouseWheelMoved;
     evt->eventTime = [event timestamp];
 
-    // Mouse location in window coordinates
-    NSPoint loc = [event locationInWindow];
-    evt->setParam_point(kEventParamMouseLocation, loc.x, loc.y);
+    // Global screen coordinates (top-left origin)
+    NSPoint locInWindow = [event locationInWindow];
+    NSPoint locOnScreen = [[self window] convertPointToScreen:locInWindow];
+    CGFloat screenH = [[NSScreen mainScreen] frame].size.height;
+    evt->setParam_point(kEventParamMouseLocation, locOnScreen.x, screenH - locOnScreen.y);
+
+    // Window-local coordinates (structure-relative, top-left origin)
+    NSRect contentBounds = [self bounds];
+    int insetLeft = _quartzWindow->inset_left();
+    int insetTop  = _quartzWindow->inset_top();
+    evt->setParam_point(kEventParamWindowMouseLocation,
+                        insetLeft + locInWindow.x,
+                        insetTop + (contentBounds.size.height - locInWindow.y));
 
     // Wheel axis and delta
+    // Carbon convention: kEventMouseWheelAxisX = 0, kEventMouseWheelAxisY = 1
     if ([event deltaY] != 0) {
-        evt->setParam_uint32(kEventParamMouseWheelAxis, typeMouseWheelAxis, 0); // vertical
+        evt->setParam_uint32(kEventParamMouseWheelAxis, typeMouseWheelAxis, 1); // kEventMouseWheelAxisY
         evt->setParam_int32(kEventParamMouseWheelDelta, typeSInt32, (int32)[event deltaY]);
     } else if ([event deltaX] != 0) {
-        evt->setParam_uint32(kEventParamMouseWheelAxis, typeMouseWheelAxis, 1); // horizontal
+        evt->setParam_uint32(kEventParamMouseWheelAxis, typeMouseWheelAxis, 0); // kEventMouseWheelAxisX
         evt->setParam_int32(kEventParamMouseWheelDelta, typeSInt32, (int32)[event deltaX]);
     }
 
-    // Window reference
+    // Modifier keys
+    NSUInteger mods = [event modifierFlags];
+    uint32 carbonMods = 0;
+    if (mods & NSEventModifierFlagShift)    carbonMods |= (1 << 9);
+    if (mods & NSEventModifierFlagControl)  carbonMods |= (1 << 12);
+    if (mods & NSEventModifierFlagOption)   carbonMods |= (1 << 11);
+    if (mods & NSEventModifierFlagCommand)  carbonMods |= (1 << 8);
+    if (mods & NSEventModifierFlagCapsLock) carbonMods |= (1 << 10); // capsLock
+    evt->setParam_uint32(kEventParamKeyModifiers, typeUInt32, carbonMods);
+
+    // Window reference and part code
     evt->setParam_ptr(kEventParamWindowRef, typeWindowRef, _quartzWindow->my_window());
+    evt->setParam_uint32(kEventParamWindowDefPart, typeUInt32, kPartInContent);
 
     _quartzWindow->put_event(evt);
     evt->release(); // put_event retains
@@ -140,9 +163,23 @@ bool WindowSet::includes_window(WindowSet_WindowPtr w) {
     evt->eventKind = kind;
     evt->eventTime = [event timestamp];
 
-    // Mouse location in window coordinates
-    NSPoint loc = [event locationInWindow];
-    evt->setParam_point(kEventParamMouseLocation, loc.x, loc.y);
+    // Global screen coordinates (top-left origin) — kEventParamMouseLocation
+    NSPoint locInWindow = [event locationInWindow];
+    NSPoint locOnScreen = [[self window] convertPointToScreen:locInWindow];
+    CGFloat screenH = [[NSScreen mainScreen] frame].size.height;
+    double globalX = locOnScreen.x;
+    double globalY = screenH - locOnScreen.y;
+    evt->setParam_point(kEventParamMouseLocation, globalX, globalY);
+
+    // Window-local coordinates (structure-relative, top-left origin)
+    // Carbon's kEventParamWindowMouseLocation is relative to the window's
+    // structure region (including title bar), not the content area.
+    NSRect contentBounds = [self bounds];
+    int insetLeft = _quartzWindow->inset_left();
+    int insetTop  = _quartzWindow->inset_top();
+    double localX = insetLeft + locInWindow.x;
+    double localY = insetTop + (contentBounds.size.height - locInWindow.y);
+    evt->setParam_point(kEventParamWindowMouseLocation, localX, localY);
 
     // Button number: Carbon uses 1=left, 2=right, 3=middle
     uint16 button = 1;
@@ -163,17 +200,37 @@ bool WindowSet::includes_window(WindowSet_WindowPtr w) {
     }
     evt->setParam_uint32(kEventParamMouseButton, typeMouseButton, button);
 
+    // Mouse chord: bitmask of buttons currently held
+    // Carbon: bit 0 = primary, bit 1 = secondary, bit 2 = tertiary
+    NSUInteger pressed = [NSEvent pressedMouseButtons];
+    uint32 chord = 0;
+    if (pressed & (1 << 0)) chord |= 1;  // left
+    if (pressed & (1 << 1)) chord |= 2;  // right
+    if (pressed & (1 << 2)) chord |= 4;  // middle
+    evt->setParam_uint32(kEventParamMouseChord, typeUInt32, chord);
+
+    // Click count
+    NSInteger clickCount = 0;
+    if (kind == kEventMouseDown || kind == kEventMouseUp) {
+        clickCount = [event clickCount];
+    }
+    evt->setParam_uint32(kEventParamClickCount, typeUInt32, (uint32)clickCount);
+
     // Modifier keys
     NSUInteger mods = [event modifierFlags];
     uint32 carbonMods = 0;
-    if (mods & NSEventModifierFlagShift)   carbonMods |= (1 << 9);  // shiftKey
-    if (mods & NSEventModifierFlagControl) carbonMods |= (1 << 12); // controlKey
-    if (mods & NSEventModifierFlagOption)  carbonMods |= (1 << 11); // optionKey
-    if (mods & NSEventModifierFlagCommand) carbonMods |= (1 << 8);  // cmdKey
+    if (mods & NSEventModifierFlagShift)    carbonMods |= (1 << 9);  // shiftKey
+    if (mods & NSEventModifierFlagControl)  carbonMods |= (1 << 12); // controlKey
+    if (mods & NSEventModifierFlagOption)   carbonMods |= (1 << 11); // optionKey
+    if (mods & NSEventModifierFlagCommand)  carbonMods |= (1 << 8);  // cmdKey
+    if (mods & NSEventModifierFlagCapsLock) carbonMods |= (1 << 10); // capsLock
     evt->setParam_uint32(kEventParamKeyModifiers, typeUInt32, carbonMods);
 
     // Window reference
     evt->setParam_ptr(kEventParamWindowRef, typeWindowRef, _quartzWindow->my_window());
+
+    // Window part code: inContent = 3 (Carbon HIToolbox part code)
+    evt->setParam_uint32(kEventParamWindowDefPart, typeUInt32, kPartInContent);
 
     _quartzWindow->put_event(evt);
     evt->release(); // put_event retains
@@ -202,10 +259,11 @@ bool WindowSet::includes_window(WindowSet_WindowPtr w) {
     // Modifier keys
     NSUInteger mods = [event modifierFlags];
     uint32 carbonMods = 0;
-    if (mods & NSEventModifierFlagShift)   carbonMods |= (1 << 9);
-    if (mods & NSEventModifierFlagControl) carbonMods |= (1 << 12);
-    if (mods & NSEventModifierFlagOption)  carbonMods |= (1 << 11);
-    if (mods & NSEventModifierFlagCommand) carbonMods |= (1 << 8);
+    if (mods & NSEventModifierFlagShift)    carbonMods |= (1 << 9);
+    if (mods & NSEventModifierFlagControl)  carbonMods |= (1 << 12);
+    if (mods & NSEventModifierFlagOption)   carbonMods |= (1 << 11);
+    if (mods & NSEventModifierFlagCommand)  carbonMods |= (1 << 8);
+    if (mods & NSEventModifierFlagCapsLock) carbonMods |= (1 << 10); // capsLock
     evt->setParam_uint32(kEventParamKeyModifiers, typeUInt32, carbonMods);
 
     // Window reference
@@ -213,6 +271,20 @@ bool WindowSet::includes_window(WindowSet_WindowPtr w) {
 
     _quartzWindow->put_event(evt);
     evt->release(); // put_event retains
+}
+
+- (BOOL)wantsUpdateLayer {
+    return YES;
+}
+
+- (void)updateLayer {
+    if (!_quartzWindow) return;
+    CGContextRef bitmapCtx = _quartzWindow->bitmapContext();
+    if (!bitmapCtx) return;
+    CGImageRef image = CGBitmapContextCreateImage(bitmapCtx);
+    if (!image) return;
+    self.layer.contents = (__bridge id)image;
+    CGImageRelease(image);
 }
 
 @end
@@ -273,7 +345,7 @@ bool WindowSet::includes_window(WindowSet_WindowPtr w) {
     if (_quartzWindow) {
         OpaqueEventRef* evt = new OpaqueEventRef();
         evt->eventClass = kEventClassWindow;
-        evt->eventKind = kEventWindowActivated;
+        evt->eventKind = kEventWindowHandleActivate;
         evt->eventTime = [[NSProcessInfo processInfo] systemUptime];
         evt->setParam_ptr(kEventParamWindowRef, typeWindowRef, _quartzWindow->my_window());
         _quartzWindow->put_event(evt);
@@ -285,7 +357,7 @@ bool WindowSet::includes_window(WindowSet_WindowPtr w) {
     if (_quartzWindow) {
         OpaqueEventRef* evt = new OpaqueEventRef();
         evt->eventClass = kEventClassWindow;
-        evt->eventKind = kEventWindowDeactivated;
+        evt->eventKind = kEventWindowHandleDeactivate;
         evt->eventTime = [[NSProcessInfo processInfo] systemUptime];
         evt->setParam_ptr(kEventParamWindowRef, typeWindowRef, _quartzWindow->my_window());
         _quartzWindow->put_event(evt);
@@ -294,6 +366,45 @@ bool WindowSet::includes_window(WindowSet_WindowPtr w) {
 }
 
 @end
+
+
+// ======================================================================
+// Bitmap blitting helper — bypasses drawRect for immediate display
+// ======================================================================
+
+static void blitBitmapToView(SelfContentView* view, CGContextRef bitmapCtx) {
+    if (!view || !bitmapCtx) return;
+    CGImageRef image = CGBitmapContextCreateImage(bitmapCtx);
+    if (!image) return;
+    // Directly set layer contents — bypasses the drawRect/display cycle
+    // which is unreliable for imperative drawing on modern macOS.
+    CALayer* layer = [view layer];
+    if (layer) {
+        [CATransaction begin];
+        [CATransaction setDisableActions:YES]; // no implicit animation
+        layer.contents = (__bridge id)image;
+        [CATransaction commit];
+    }
+    CGImageRelease(image);
+}
+
+
+// ======================================================================
+// NSApplication initialization (must be called before any Cocoa use)
+// ======================================================================
+
+static bool cocoa_initialized = false;
+
+static void ensure_cocoa_initialized() {
+  if (cocoa_initialized) return;
+  cocoa_initialized = true;
+
+  @autoreleasepool {
+    [NSApplication sharedApplication];
+    [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
+    [NSApp finishLaunching];
+  }
+}
 
 
 // ======================================================================
@@ -308,10 +419,51 @@ QuartzWindow::QuartzWindow() : AbstractPlatformWindow(), _evtQ() {
   _was_closed = false;
   _quartz_win = NULL;
   myContext = NULL;
+  _bitmapContext = NULL;
+  _bitmapData = NULL;
+  _bitmapWidth = 0;
+  _bitmapHeight = 0;
   _default_ct_font = NULL;
   _color_space = NULL;
   memset(&_windowPtr, 0, sizeof(_windowPtr));
   memset(&_grafPtr, 0, sizeof(_grafPtr));
+}
+
+
+void QuartzWindow::destroyBitmapContext() {
+  if (_bitmapContext) {
+    CGContextRelease(_bitmapContext);
+    _bitmapContext = NULL;
+  }
+  if (_bitmapData) {
+    free(_bitmapData);
+    _bitmapData = NULL;
+  }
+  _bitmapWidth = 0;
+  _bitmapHeight = 0;
+  myContext = NULL;
+}
+
+void QuartzWindow::ensureBitmapContext() {
+  int w = width();
+  int h = height();
+  if (w <= 0) w = 1;
+  if (h <= 0) h = 1;
+  if (_bitmapContext && _bitmapWidth == w && _bitmapHeight == h)
+    return;
+  destroyBitmapContext();
+  size_t bytesPerRow = (size_t)w * 4;
+  _bitmapData = calloc((size_t)h, bytesPerRow);
+  if (!_bitmapData) fatal("could not allocate bitmap buffer");
+  _bitmapContext = CGBitmapContextCreate(
+      _bitmapData, w, h, 8, bytesPerRow,
+      _color_space, kCGImageAlphaNoneSkipLast);
+  if (!_bitmapContext) fatal("could not create bitmap context");
+  _bitmapWidth = w;
+  _bitmapHeight = h;
+  // Clear to white so uncovered areas aren't black
+  CGContextSetRGBFillColor(_bitmapContext, 1.0, 1.0, 1.0, 1.0);
+  CGContextFillRect(_bitmapContext, CGRectMake(0, 0, w, h));
 }
 
 
@@ -352,6 +504,8 @@ bool QuartzWindow::open(
                     const char* font_name,
                     int   font_size ) {
 
+  ensure_cocoa_initialized();
+
   @autoreleasepool {
     // Create NSWindow
     // Note: Carbon used (left, top, right-left, bottom-top) but passed as (left, top, right, bottom)
@@ -383,6 +537,7 @@ bool QuartzWindow::open(
     // Create content view
     SelfContentView* view = [[SelfContentView alloc] initWithFrame:[[nsWin contentView] bounds]];
     view.quartzWindow = this;
+    [view setWantsLayer:YES];
     [view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     [nsWin setContentView:view];
 
@@ -475,9 +630,11 @@ void QuartzWindow::init_font_info() {
 void QuartzWindow::activate() {
   @autoreleasepool {
     NSWindow* nsWin = (__bridge NSWindow*)_ns_window;
+    SelfContentView* view = (__bridge SelfContentView*)_ns_view;
     if (![nsWin isVisible])
       [nsWin orderFront:nil];
     [nsWin makeKeyAndOrderFront:nil];
+    [nsWin makeFirstResponder:view];
   }
 }
 
@@ -486,7 +643,7 @@ void QuartzWindow::close() {
   if (!is_open())
     return;
   @autoreleasepool {
-    myContext = NULL;
+    destroyBitmapContext();
     CGColorRelease((CGColorRef) _red);
     CGColorRelease((CGColorRef) _yellow);
     CGColorRelease((CGColorRef) _black);
@@ -617,7 +774,6 @@ int   QuartzWindow::default_fixed_font_size() { return 9; }
 
 bool QuartzWindow::change_extent(int left, int top, int w, int h) {
   @autoreleasepool {
-    myContext = NULL;
 
     NSWindow* nsWin = (__bridge NSWindow*)_ns_window;
     CGFloat screenH = [[NSScreen mainScreen] frame].size.height;
@@ -660,12 +816,10 @@ void QuartzWindow::setupCTM() {
 }
 
 void QuartzWindow::adjust_after_resize() {
-  if (myContext) {
-    CGAffineTransform x = CGContextGetCTM(myContext);
-    CGContextScaleCTM(myContext, 1.0 / x.a, 1.0 / x.d);
-    CGContextTranslateCTM(myContext, -x.tx, -x.ty);
-    setupCTM();
-  }
+  // Don't destroy bitmap here — ensureBitmapContext() will detect the size
+  // mismatch and recreate on the next actual draw call. In the meantime,
+  // drawRect: can blit the old bitmap (stretched to fit).
+  myContext = NULL;  // force CTM re-setup on next pre_draw
   if (TheSpy != NULL)
     TheSpy->adjust_after_resize();
 }
@@ -681,36 +835,21 @@ bool QuartzWindow::pre_draw(bool incremental) {
     _was_closed = false;
     return false;
   }
-  if ( myContext == NULL ) {
-    @autoreleasepool {
-      // Get CGContext from NSGraphicsContext for the view
-      SelfContentView* view = (__bridge SelfContentView*)_ns_view;
-      NSWindow* nsWin = (__bridge NSWindow*)_ns_window;
-
-      // Lock focus on the view to get a graphics context
-      if ([view lockFocusIfCanDraw]) {
-        NSGraphicsContext* nsCtx = [NSGraphicsContext currentContext];
-        if (nsCtx) {
-          myContext = [nsCtx CGContext];
-          CGContextRetain(myContext);
-        }
-        [view unlockFocus];
-      }
-
-      if (myContext) {
-        setupCTM();
-        CGContextSetTextMatrix(myContext, CGAffineTransformMake( 1, 0, 0, -1, 0, 0));
-        CGContextSelectFont(myContext,
-          default_fixed_font_name(), default_fixed_font_size(), kCGEncodingMacRoman);
-        CGContextSetShouldAntialias(myContext, false);
-      }
-    }
-  }
   if (_bounds_changed) {
     _bounds_changed = false;
     adjust_after_resize();
   }
-  if (!incremental) {
+  ensureBitmapContext();
+  bool fresh = (myContext != _bitmapContext);  // detect new or recreated context
+  myContext = _bitmapContext;
+  if (fresh && myContext) {
+    setupCTM();
+    CGContextSetTextMatrix(myContext, CGAffineTransformMake( 1, 0, 0, -1, 0, 0));
+    CGContextSelectFont(myContext,
+      default_fixed_font_name(), default_fixed_font_size(), kCGEncodingMacRoman);
+    CGContextSetShouldAntialias(myContext, false);
+  }
+  if (fresh || !incremental) {
     clear_rectangle(0, 0, width(), height());
   }
   return true;
@@ -718,8 +857,10 @@ bool QuartzWindow::pre_draw(bool incremental) {
 
 
 void QuartzWindow::post_draw(bool incremental) {
-  if (myContext)
-    CGContextFlush(myContext);
+  @autoreleasepool {
+    SelfContentView* view = (__bridge SelfContentView*)_ns_view;
+    blitBitmapToView(view, _bitmapContext);
+  }
 }
 
 
@@ -888,6 +1029,10 @@ OSStatus QuartzWindow::RemoveHandledEvent_wrap( uint32* eclass, uint ec_len, uin
 
 
 void QuartzWindow::check_carbon_events() {
+  if (!cocoa_initialized) {
+    return;  // No Cocoa yet, nothing to pump
+  }
+
   // On Cocoa, pump the event loop briefly
   @autoreleasepool {
     BlockGlueFlag f(quartz_semaphore);
@@ -896,8 +1041,20 @@ void QuartzWindow::check_carbon_events() {
                               untilDate:nil
                               inMode:NSDefaultRunLoopMode
                               dequeue:YES];
-      if (!event) return;
+      if (!event) break;
       [NSApp sendEvent:event];
+    }
+    // Refresh display for all windows from their current bitmap state.
+    // This provides progressive rendering during long QDBegin/QDEnd draws.
+    for (int i = 0; i < WindowSet::num_windows(); i++) {
+      OpaqueWindowPtr* wr = (OpaqueWindowPtr*)WindowSet::get_window(i);
+      if (wr && wr->nsView && wr->quartzWindow) {
+        QuartzWindow* qw = (QuartzWindow*)wr->quartzWindow;
+        if (qw->bitmapContext()) {
+          SelfContentView* v = (__bridge SelfContentView*)wr->nsView;
+          blitBitmapToView(v, qw->bitmapContext());
+        }
+      }
     }
   }
 }
@@ -1020,26 +1177,24 @@ WindowRef GetWindowFromPort(GrafPtr p) {
 // ======================================================================
 
 CGContextRef QDBeginCGContext_wrap(OpaqueGrafPtr* port, void* FH) {
-    @autoreleasepool {
-        SelfContentView* view = (__bridge SelfContentView*)port->nsView;
-        if ([view lockFocusIfCanDraw]) {
-            NSGraphicsContext* nsCtx = [NSGraphicsContext currentContext];
-            if (nsCtx) {
-                CGContextRef ctx = [nsCtx CGContext];
-                return ctx;
-            }
-            [view unlockFocus];
-        }
-        failure(FH, "could not get CGContext");
-        return NULL;
-    }
+    QuartzWindow* qw = (QuartzWindow*)port->quartzWindow;
+    if (!qw) { failure(FH, "no QuartzWindow"); return NULL; }
+    qw->ensureBitmapContext();
+    CGContextRef ctx = qw->bitmapContext();
+    if (!ctx) { failure(FH, "could not get bitmap context"); return NULL; }
+    CGContextSaveGState(ctx);
+    // Reset CTM to identity — Self GUI code sets its own transforms
+    CGAffineTransform ctm = CGContextGetCTM(ctx);
+    CGContextConcatCTM(ctx, CGAffineTransformInvert(ctm));
+    return ctx;
 }
 
 void QDEndCGContext_wrap(OpaqueGrafPtr* port, CGContext* carg, void* FH) {
+    if (carg) CGContextRestoreGState(carg);
+    QuartzWindow* qw = (QuartzWindow*)port->quartzWindow;
     @autoreleasepool {
         SelfContentView* view = (__bridge SelfContentView*)port->nsView;
-        if (carg) CGContextFlush(carg);
-        [view unlockFocus];
+        blitBitmapToView(view, qw ? qw->bitmapContext() : NULL);
     }
 }
 

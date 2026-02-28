@@ -1247,7 +1247,8 @@ oop GetWindowStructureWidths_wrap( WindowRef w, void *FH) {
 
 oop GetEventClass_wrap(EventRef evt) {
   byteVectorOop r = Memory->byteVectorObj->cloneSize(4);
-  *(uint32*)(r->bytes()) = EndianU32_NtoB(GetEventClass(evt));
+  uint32 cls = GetEventClass(evt);
+  *(uint32*)(r->bytes()) = EndianU32_NtoB(cls);
   return r;
 }
 
