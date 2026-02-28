@@ -11,9 +11,9 @@
 
 // increment VM_snapshot_version whenever old snapshots will break; reset
 // it to zero when changing the minor or major version
-smi VM_major_version    = 2023;
-smi VM_minor_version    = 1;
-smi VM_snapshot_version = (oopSize == 8) ? 14 : 13;
+smi VM_major_version    = 2026;
+smi VM_minor_version    = 0;
+smi VM_snapshot_version = 0;
 
 
 universe* Memory;
@@ -379,28 +379,39 @@ void universe::read_first_line_in_snapshot_header(FILE *file)
 
 void universe::read_versions_in_snapshot_header(FILE *file)
 {
-  // check versions
-  int read_major_version_i, read_minor_version_i, snapshot_version_i;
-  if (fscanf(file, "Version: %d.%d.%d%*[\r\n]",
-             &read_major_version_i,
-             &read_minor_version_i,
-             &snapshot_version_i)    != 3 )
+  int read_major_version_i, read_minor_version_i, snapshot_version_i = -1;
+  char after_minor;
+
+  // Parse "Version: major.minor" — may be followed by ".snap\n" (old) or "\n" (new)
+  if (fscanf(file, "Version: %d.%d", &read_major_version_i, &read_minor_version_i) != 2)
     fatalNoMenu("\n\tThe \"Version:\" line in the snapshot could not be parsed.\n");
+
+  // Check what follows: '.' means old three-part format, '\n'/'\r' means new two-line format
+  after_minor = fgetc(file);
+  if (after_minor == '.') {
+    // Old format: "Version: 2023.1.13\n"
+    if (fscanf(file, "%d%*[\r\n]", &snapshot_version_i) != 1)
+      fatalNoMenu("\n\tThe \"Version:\" line in the snapshot could not be parsed.\n");
+  } else {
+    // New format: "Version: 2026.0\n" followed by "Snapshot format: 0\n"
+    // Consume rest of line
+    while (after_minor != '\n' && after_minor != '\r' && after_minor != EOF)
+      after_minor = fgetc(file);
+    if (fscanf(file, "Snapshot format: %d%*[\r\n]", &snapshot_version_i) != 1)
+      fatalNoMenu("\n\tThe \"Snapshot format:\" line in the snapshot could not be parsed.\n");
+  }
   snapshot_version = snapshot_version_i;
 
   // return for snapshots whose version matches the current snapshot version
   if (snapshot_version == VM_snapshot_version)
     return;
 
-  // Between snapshot versions 10 and 11, a new primitive was added: CompileWithSICNames.
-  // To maintain compatibility, and since there's only a minor addition, we also read
-  // snapshot whose version is 10. -mabdelmalek 11/02
-
   bool can_read_snapshot_with_mismatched_version =
         (snapshot_version == 10  &&  VM_snapshot_version == 11)
     || ((snapshot_version == 10 || snapshot_version == 11)  &&  VM_snapshot_version == 12)
     || ((snapshot_version == 12) && VM_snapshot_version == 13)
-    || ((snapshot_version == 13) && VM_snapshot_version == 14);  // 32-bit → 64-bit
+    || ((snapshot_version == 13) && VM_snapshot_version == 14)
+    || ((snapshot_version == 13) && VM_snapshot_version == 0);  // 32-bit 2023.1 → 2026.0
 
   // Detect 32-bit snapshots being loaded by 64-bit VM
   if (snapshot_version <= 13 && oopSize == 8) {
@@ -408,29 +419,28 @@ void universe::read_versions_in_snapshot_header(FILE *file)
     lprintf("\n\tLoading 32-bit snapshot (version %d) into 64-bit VM.\n",
             (int)snapshot_version);
   }
-    
+
   if (can_read_snapshot_with_mismatched_version)
-  	warning6("\n\tThis snapshot was saved using a different version\n"
-                 "\tof the Self Virtual Machine (%d.%d.%d) and may behave unexpectedly\n"
-                 "\tor not work correctly with this version (%d.%d.%d).\n", 
-                 (int)read_major_version_i,
-                 (int)read_minor_version_i,
-                 (int)snapshot_version,
-                 (int)VM_major_version,
-                 (int)VM_minor_version,
-                 (int)VM_snapshot_version);
+    warning6("\n\tThis snapshot was saved using a different version\n"
+             "\tof the Self Virtual Machine (%d.%d, format %d) and may behave unexpectedly\n"
+             "\tor not work correctly with this version (%d.%d, format %d).\n",
+             (int)read_major_version_i,
+             (int)read_minor_version_i,
+             (int)snapshot_version,
+             (int)VM_major_version,
+             (int)VM_minor_version,
+             (int)VM_snapshot_version);
 
   if (!can_read_snapshot_with_mismatched_version)
     fatalNoMenu6("\n\tThis snapshot was saved using a different version\n"
-                 "\tof the Self Virtual Machine (%d.%d.%d) and will not\n"
-                 "\twork with this version (%d.%d.%d).\n",
+                 "\tof the Self Virtual Machine (%d.%d, format %d) and will not\n"
+                 "\twork with this version (%d.%d, format %d).\n",
                  (int)read_major_version_i,
                  (int)read_minor_version_i,
                  (int)snapshot_version,
                  (int)VM_major_version,
                  (int)VM_minor_version,
                  (int)VM_snapshot_version);
-
 }
 
 
@@ -746,8 +756,8 @@ bool universe::write_snapshot(const char *fileName,
 
   OS::FWrite(SNAPSHOT_HEADER, strlen(SNAPSHOT_HEADER), snapFile);
 
-  fprintf(snapFile, "Version: %d.%d.%d\n",
-          (int)VM_major_version, (int)VM_minor_version, (int)VM_snapshot_version);
+  fprintf(snapFile, "Version: %d.%d\n", (int)VM_major_version, (int)VM_minor_version);
+  fprintf(snapFile, "Snapshot format: %d\n", (int)VM_snapshot_version);
           
   fprintf(snapFile, "Timestamp: %ld\n", (long)programming_timestamp);
 
