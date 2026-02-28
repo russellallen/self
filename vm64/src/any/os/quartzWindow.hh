@@ -35,6 +35,8 @@ class WindowSet  /* AllStatic */ {
     static void            add_window(WindowSet_WindowPtr);
     static void            rm_window(WindowSet_WindowPtr);
     static bool      includes_window(WindowSet_WindowPtr);
+    static int             num_windows() { return _num_windows; }
+    static WindowSet_WindowPtr get_window(int i) { return (i < _num_windows) ? _my_windows[i] : NULL; }
 };
 
 
@@ -188,26 +190,32 @@ enum {
 };
 enum {
     kEventRawKeyDown              = 1,
-    kEventRawKeyUp                = 2,
-    kEventRawKeyRepeat            = 3,
+    kEventRawKeyRepeat            = 2,
+    kEventRawKeyUp                = 3,
     kEventRawKeyModifiersChanged  = 4,
 };
 enum {
-    kEventWindowBoundsChanged = 27,
-    kEventWindowClose         = 72,
-    kEventWindowActivated     = 5,
-    kEventWindowDeactivated   = 6,
+    kEventWindowBoundsChanged      = 27,
+    kEventWindowClose              = 72,
+    kEventWindowActivated          = 5,
+    kEventWindowDeactivated        = 6,
+    kEventWindowHandleActivate     = 91,
+    kEventWindowHandleDeactivate   = 92,
 };
 enum {
-    kEventParamMouseLocation   = 'mloc',
-    kEventParamMouseButton     = 'mbtn',
-    kEventParamMouseWheelAxis  = 'mwax',
-    kEventParamMouseWheelDelta = 'mwdl',
-    kEventParamKeyCode         = 'kcod',
-    kEventParamKeyMacCharCodes = 'kchr',
-    kEventParamKeyModifiers    = 'kmod',
-    kEventParamWindowRef       = 'wind',
-    kEventParamDirectObject    = '----',
+    kEventParamMouseLocation       = 'mloc',
+    kEventParamWindowMouseLocation = 'wmou',
+    kEventParamMouseButton         = 'mbtn',
+    kEventParamMouseChord          = 'chor',
+    kEventParamClickCount          = 'ccnt',
+    kEventParamMouseWheelAxis      = 'mwax',
+    kEventParamMouseWheelDelta     = 'mwdl',
+    kEventParamKeyCode             = 'kcod',
+    kEventParamKeyMacCharCodes     = 'kchr',
+    kEventParamKeyModifiers        = 'kmod',
+    kEventParamWindowRef           = 'wind',
+    kEventParamWindowDefPart       = 'wpar',
+    kEventParamDirectObject        = '----',
 };
 // Custom event parameter types for our Cocoa compatibility layer.
 // Some overlap with AEDataModel.h / AERegistry.h constants; guard those.
@@ -225,6 +233,18 @@ enum {
     typeEventRef       = 'evnt',
     typeEventTargetRef = 'etag',
 #endif
+};
+
+// Carbon/HIToolbox window part codes (from FindWindow / kEventParamWindowDefPart)
+enum {
+    kPartInDesk       = 0,
+    kPartInMenuBar    = 1,
+    kPartInSysWindow  = 2,
+    kPartInContent    = 3,
+    kPartInDrag       = 4,
+    kPartInGrow       = 5,
+    kPartInGoAway     = 6,
+    kPartInCollapseBox = 11,
 };
 
 // Carbon-compatible function declarations (implemented in quartzWindow.mm)
@@ -273,8 +293,8 @@ enum {
 };
 #endif
 
-// ATSFontMetrics - must have exact same field names as Carbon version
-// because the glue uses C_get_comp with .fieldName access
+// ATSFontMetrics - the glue uses C_get_comp with .fieldName access
+// to create standalone ATSFontMetrics proxy objects.
 #ifndef __ATSTYPES__
 struct ATSFontMetrics {
     uint32 version;
@@ -296,6 +316,30 @@ struct ATSFontMetrics {
     ATSFontMetrics() { memset(this, 0, sizeof(*this)); }
 };
 #endif
+
+// SelfFontMetrics - used as QuartzWindow member to avoid ODR violation.
+// The system ATSFontMetrics (116 bytes) differs from our custom version
+// (60 bytes), causing layout mismatches between .mm and .cpp files.
+// This struct is always 60 bytes regardless of __ATSTYPES__.
+struct SelfFontMetrics {
+    uint32 version;
+    float  ascent;
+    float  descent;
+    float  leading;
+    float  avgAdvanceWidth;
+    float  maxAdvanceWidth;
+    float  minLeftSideBearing;
+    float  minRightSideBearing;
+    float  stemWidth;
+    float  stemHeight;
+    float  capHeight;
+    float  xHeight;
+    float  italicAngle;
+    float  underlinePosition;
+    float  underlineThickness;
+
+    SelfFontMetrics() { memset(this, 0, sizeof(*this)); }
+};
 
 // Font iterator types (opaque structs)
 struct ATSFontIterator_ {
@@ -568,7 +612,7 @@ class QuartzWindow: public AbstractPlatformWindow {
   EventQueue _evtQ;
   bool _bounds_changed;
   bool _was_closed;
-  ATSFontMetrics _metrics;
+  SelfFontMetrics _metrics;
 #if defined(__aarch64__)
   CTFontRef      _default_ct_font;
 #else
@@ -581,6 +625,12 @@ class QuartzWindow: public AbstractPlatformWindow {
   WindowRef  _quartz_win;   // Carbon WindowRef
 #endif
   CGContextRef myContext;
+#if defined(__aarch64__)
+  CGContextRef _bitmapContext;
+  void*        _bitmapData;
+  int          _bitmapWidth;
+  int          _bitmapHeight;
+#endif
 
 
  public:
@@ -619,6 +669,9 @@ class QuartzWindow: public AbstractPlatformWindow {
   WindowRef my_window() { return _quartz_win; }
 #if defined(__aarch64__)
   GrafPtr   my_grafPtr() { return &_grafPtr; }
+  CGContextRef bitmapContext() { return _bitmapContext; }
+  void ensureBitmapContext();
+  void destroyBitmapContext();
 #endif
 
   void*  xdisplay() { return NULL; }

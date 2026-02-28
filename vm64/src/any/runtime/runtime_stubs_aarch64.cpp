@@ -332,6 +332,11 @@ extern "C" oop CallPrimitiveFromInterpreter(void* entry_point, oop rcv,
   typedef oop (*fn8)(oop, oop, oop, oop, oop, oop, oop, oop, oop);
   typedef oop (*fn9)(oop, oop, oop, oop, oop, oop, oop, oop, oop, oop);
   typedef oop (*fn10)(oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop);
+  typedef oop (*fn11)(oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop);
+  typedef oop (*fn12)(oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop);
+  typedef oop (*fn13)(oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop);
+  typedef oop (*fn14)(oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop);
+  typedef oop (*fn15)(oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop, oop);
   switch (nargs) {
     case  0: return ((fn0)entry_point)(rcv);
     case  1: return ((fn1)entry_point)(rcv, argp[0]);
@@ -344,6 +349,11 @@ extern "C" oop CallPrimitiveFromInterpreter(void* entry_point, oop rcv,
     case  8: return ((fn8)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6], argp[7]);
     case  9: return ((fn9)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6], argp[7], argp[8]);
     case 10: return ((fn10)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6], argp[7], argp[8], argp[9]);
+    case 11: return ((fn11)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6], argp[7], argp[8], argp[9], argp[10]);
+    case 12: return ((fn12)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6], argp[7], argp[8], argp[9], argp[10], argp[11]);
+    case 13: return ((fn13)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6], argp[7], argp[8], argp[9], argp[10], argp[11], argp[12]);
+    case 14: return ((fn14)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6], argp[7], argp[8], argp[9], argp[10], argp[11], argp[12], argp[13]);
+    case 15: return ((fn15)entry_point)(rcv, argp[0], argp[1], argp[2], argp[3], argp[4], argp[5], argp[6], argp[7], argp[8], argp[9], argp[10], argp[11], argp[12], argp[13], argp[14]);
     default:
       fatal("CallPrimitiveFromInterpreter: too many arguments");
       return NULL;
