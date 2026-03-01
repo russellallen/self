@@ -28,7 +28,7 @@ extern "C" {
   int fcntl(int fildes, int cmd, /* arg */ ...);
 }
 
-# elif TARGET_OS_VERSION == MACOSX_VERSION
+# elif TARGET_OS_VERSION == MACOSX_VERSION || TARGET_OS_VERSION == LINUX_VERSION
 
   # include <sys/ptrace.h>
 
@@ -592,7 +592,7 @@ int ioctl_wrap(int fd, int request, void* arg) {
 }
 
 int ptrace_wrap(int request, int pid, void* addr, int data) {
-  return (int)ptrace(request, (pid_t)pid, (caddr_t)addr, data);
+  return (int)ptrace((__ptrace_request)request, (pid_t)pid, (caddr_t)addr, data);
 }
 
 void unixPrims_init() { ioC = new IOCleanup; }

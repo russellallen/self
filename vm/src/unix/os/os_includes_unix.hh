@@ -77,9 +77,9 @@ extern "C" {
 # if TARGET_OS_VERSION == MACOSX_VERSION
 #   undef ASSEMBLER
 #   include <sys/ucontext.h>
-#   include <sys/ioctl.h>
 #   include <pthread.h>
 # endif
+# include <sys/ioctl.h>
 # include <termios.h>
 # include <sys/syscall.h>
 # include <errno.h>
