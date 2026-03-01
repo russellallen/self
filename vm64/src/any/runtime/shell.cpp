@@ -70,6 +70,7 @@ oop eval(const char* expression, const char* fn) {
 
 static char* spyLogFile= NULL;
 char* startUpSelfFile= NULL;
+static bool run_vm_tests_flag = false;
 
 const char **prog_argv;
 int    prog_argc;
@@ -84,8 +85,15 @@ static void processArguments(int argc, const char *argv[]) {
 # endif
   
 
+  // Scan for long options before getopt (which only handles single-char flags)
+  for (int i = 1; i < argc; i++) {
+    if (strcmp(argv[i], "--run-vm-tests") == 0) {
+      run_vm_tests_flag = true;
+    }
+  }
+
   // Some implementations of getopt (I'm looking at you, GNU) rearrange argv for their own purposes.
-  // So we give getopt a copy of argv so we can later expose the real original argv to 
+  // So we give getopt a copy of argv so we can later expose the real original argv to
   // Self via _CommandLine
   // rca 2 Feb 2014
   char **copy_of_argv = (char **) malloc( sizeof(char *) * argc );
@@ -122,6 +130,7 @@ static void processArguments(int argc, const char *argv[]) {
       lprintf("  -c\t\tUse real timer instead of CPU timer (for OS X)\n");
       lprintf("  -o\t\tOversample the timers (Run them 10x faster to flush out bugs)\n");
       lprintf("  -a\t\tTest the Assembler (added for Intel)\n");
+      lprintf("  --run-vm-tests\tRun C++ VM unit tests and exit\n");
       lprintf("Other command line switches may be interpreted by the Self world\n");
       ::exit(0);
       break;
@@ -297,7 +306,12 @@ int main(int argc, char *argv[]) {
   TrackCHeapInMonitor::reset();
   init_globals();
   set_flags_for_platform();
-  bootstrapping = false; 
+  bootstrapping = false;
+
+  if (run_vm_tests_flag) {
+    int result = run_vm_tests();
+    OS::terminate(result);
+  }
 
 # ifdef DYNLINK_SUPPORTED
     initDynLinker(argc, (const char **)argv);

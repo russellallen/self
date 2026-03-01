@@ -2525,6 +2525,7 @@ shell.cpp                     scanner.hh
 shell.cpp                     shell.hh
 shell.cpp                     sig.hh
 shell.cpp                     simpleLookup_inline.hh
+shell.cpp                     vm_tests.hh
 shell.cpp                     vmStrings.hh
 
 shell.hh                      top.hh
@@ -2999,6 +3000,10 @@ table.hh                      regs.hh
 tag.hh                        bits.hh
 tag.hh                        types.hh
 
+tag_tests.cpp                 vm_tests.hh
+tag_tests.cpp                 oop.hh
+tag_tests.cpp                 tag.hh
+
 target.cpp                    abstract_interpreter_inline.hh
 target.cpp                    sicExpr.hh
 target.cpp                    sicScope.hh
@@ -3271,6 +3276,9 @@ vmStrings.cpp                 vmStrings.hh
 
 vmStrings.hh                  top.hh
 
+vm_tests.cpp                  vm_tests.hh
+
+vm_tests.hh                   top.hh
 
 xlibPrims.cpp                 debug.hh
 xlibPrims.cpp                 glueSupport.hh

@@ -402,6 +402,9 @@ set(SRC_any
   any/sic/slist.hh
   any/sic/tracing.cpp
   any/sic/tracing.hh
+  any/tests/vm_tests.cpp
+  any/tests/vm_tests.hh
+  any/tests/tag_tests.cpp
   any/zone/addrDesc.cpp
   any/zone/addrDesc.hh
   any/zone/codeTable.cpp
