@@ -313,6 +313,10 @@ int main(int argc, char *argv[]) {
   set_flags_for_platform(print_vm_version);
   bootstrapping = false;
 
+  if (print_vm_version) {
+    OS::terminate(0);
+  }
+
   if (run_vm_tests_flag) {
     int result = run_vm_tests();
     OS::terminate(result);
