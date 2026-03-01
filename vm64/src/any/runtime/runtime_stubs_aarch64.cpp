@@ -54,7 +54,7 @@ extern "C" char* SwitchStack0(char* fn_start, char* newSP) {
     : "r"(fn_start), "r"(newSP)
     : "x9", "x10", "x11", "x12", "x13", "x14", "x15",
       "x0", "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8",
-      "lr", "memory", "cc"
+      "x30", "memory", "cc"
   );
   return result;
 }
@@ -74,7 +74,7 @@ extern "C" char* SwitchStack1(char* fn_start, char* newSP, void* arg1) {
     : "r"(fn_start), "r"(newSP), "r"(arg1)
     : "x9", "x10", "x11", "x12", "x13", "x14", "x15",
       "x0", "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8",
-      "lr", "memory", "cc"
+      "x30", "memory", "cc"
   );
   return result;
 }
@@ -95,7 +95,7 @@ extern "C" char* SwitchStack2(char* fn_start, char* newSP, void* arg1, void* arg
     : "r"(fn_start), "r"(newSP), "r"(arg1), "r"(arg2)
     : "x9", "x10", "x11", "x12", "x13", "x14", "x15",
       "x0", "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8",
-      "lr", "memory", "cc"
+      "x30", "memory", "cc"
   );
   return result;
 }
@@ -118,7 +118,7 @@ extern "C" char* SwitchStack3(char* fn_start, char* newSP,
     : "r"(fn_start), "r"(newSP), "r"(arg1), "r"(arg2), "r"(arg3)
     : "x9", "x10", "x11", "x12", "x13", "x14", "x15",
       "x0", "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8",
-      "lr", "memory", "cc"
+      "x30", "memory", "cc"
   );
   return result;
 }
@@ -144,7 +144,7 @@ extern "C" char* SwitchStack4(char* fn_start, char* newSP,
       "r"(arg3), "r"(arg4)
     : "x9", "x10", "x11", "x12", "x13", "x14", "x15",
       "x0", "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8",
-      "lr", "memory", "cc"
+      "x30", "memory", "cc"
   );
   return result;
 }
@@ -239,8 +239,13 @@ void SetSPAndCall(char** callerSaveAddr, char** calleeSaveAddr,
     "3:\n\t"
     "mov   x29, #0\n\t"                  // null frame link (stop frame tracing)
     "mov   sp, x9\n\t"                   // new stack pointer (0 mod 16)
+#ifdef __APPLE__
     "adrp  x9, _ReturnOffTopOfProcess@PAGE\n\t"
     "add   x9, x9, _ReturnOffTopOfProcess@PAGEOFF\n\t"
+#else
+    "adrp  x9, ReturnOffTopOfProcess\n\t"
+    "add   x9, x9, :lo12:ReturnOffTopOfProcess\n\t"
+#endif
     "mov   x30, x9\n\t"                  // lr = ReturnOffTopOfProcess
     "br    x10\n\t"                       // jump to entry point
 
