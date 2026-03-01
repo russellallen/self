@@ -176,7 +176,7 @@ template<class data_type> void BoundedListTemplate<data_type>::apply(void f(data
 
 template<class data_type> void BoundedListTemplate<data_type>::print() {
   print_short();
-  lprintf(": length %ld (max %ld) { ", (void*)len, (void*)max);
+  lprintf(": length %d (max %d) { ", len, max);
   for (fint i = 0; i < length(); i++) lprintf("%#lx ", (void*)nth(i));
   lprintf("}\n");
 }
