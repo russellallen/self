@@ -592,7 +592,11 @@ int ioctl_wrap(int fd, int request, void* arg) {
 }
 
 int ptrace_wrap(int request, int pid, void* addr, int data) {
+#ifdef __linux__
   return (int)ptrace((__ptrace_request)request, (pid_t)pid, (caddr_t)addr, data);
+#else
+  return (int)ptrace(request, (pid_t)pid, (caddr_t)addr, data);
+#endif
 }
 
 void unixPrims_init() { ioC = new IOCleanup; }
