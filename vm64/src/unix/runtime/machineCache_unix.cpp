@@ -33,7 +33,7 @@
     MakeDataExecutable(s, (char*)e - (char*)s);
   }
 
-# elif TARGET_OS_VERSION == MACOSX_VERSION \
+# elif (TARGET_OS_VERSION == MACOSX_VERSION || TARGET_OS_VERSION == LINUX_VERSION) \
     && TARGET_ARCH == AARCH64_ARCH
   // ARM64 has split I/D caches; interpreter-only builds don't generate code,
   // so these are no-ops.

@@ -251,10 +251,11 @@ void OS::Mmap(void *start, void *fin, FILE *file)
 {
   long int len= (char*)fin - (char*)start;
   if (len == 0) return;
-# if defined(__APPLE__) && defined(__aarch64__)
-  // On ARM64 macOS, the OS page size is 16KB but snapshot data may be
-  // 8KB-aligned.  mmap(MAP_FIXED) from a file requires the file offset
-  // to be a multiple of the OS page size, so just use fread instead.
+# if defined(__aarch64__)
+  // On ARM64, the OS page size may be 16KB (macOS) or 4K/16K/64K (Linux)
+  // but snapshot data may be 8KB-aligned.  mmap(MAP_FIXED) from a file
+  // requires the file offset to be a multiple of the OS page size, so
+  // just use fread instead.
   if (fread(start, 1, len, file) != (size_t)len) {
     perror("cannot read from file");
     fatal("read error");
@@ -479,7 +480,7 @@ void OS::enable_core_dumps() {
 
 void OS::discard_pages(char *start, char *end) {
   # if TARGET_OS_VERSION == MACOSX_VERSION \
-    || TARGET_OS_VERSION == MACOSX_VERSION
+    || TARGET_OS_VERSION == LINUX_VERSION
     return; // mmap of /dev/zero just fails on OSX -- dmu 6/04
         // and just punt for now in Linux - dmu 12/07
   # endif

@@ -49,8 +49,20 @@ void InterruptedContext::setupPreemptionFromSignal() {
     return  (int*) &scp->uc_mcontext->__ss.__fp;
   }
 
+# elif TARGET_OS_VERSION == LINUX_VERSION
+
+  char** InterruptedContext::pc_addr() {
+    return  (char**) &scp->uc_mcontext.pc;
+  }
+  int* InterruptedContext::sp_addr() {
+    return  (int*) &scp->uc_mcontext.sp;
+  }
+  int* InterruptedContext::fp_addr() {
+    return  (int*) &scp->uc_mcontext.regs[29];
+  }
+
 # else
-  # error Only macOS is currently supported for aarch64
+  # error Unsupported OS for aarch64
 # endif
 
 void InterruptedContext::print_registers() {
@@ -80,8 +92,26 @@ void InterruptedContext::print_registers() {
   lprintf("pc        = 0x%llx\n", ssp->__pc);
   lprintf("cpsr      = 0x%x\n",   ssp->__cpsr);
 
+  # elif TARGET_OS_VERSION == LINUX_VERSION
+
+  const mcontext_t *mc = &ic->scp->uc_mcontext;
+  lprintf("x0        = 0x%lx\n", mc->regs[0]);
+  lprintf("x1        = 0x%lx\n", mc->regs[1]);
+  lprintf("x2        = 0x%lx\n", mc->regs[2]);
+  lprintf("x3        = 0x%lx\n", mc->regs[3]);
+  lprintf("x4        = 0x%lx\n", mc->regs[4]);
+  lprintf("x5        = 0x%lx\n", mc->regs[5]);
+  lprintf("x6        = 0x%lx\n", mc->regs[6]);
+  lprintf("x7        = 0x%lx\n", mc->regs[7]);
+  lprintf("x8        = 0x%lx\n", mc->regs[8]);
+  lprintf("x29 (fp)  = 0x%lx\n", mc->regs[29]);
+  lprintf("x30 (lr)  = 0x%lx\n", mc->regs[30]);
+  lprintf("sp        = 0x%lx\n", mc->sp);
+  lprintf("pc        = 0x%lx\n", mc->pc);
+  lprintf("pstate    = 0x%lx\n", mc->pstate);
+
   # else
-    # error Only macOS is currently supported for aarch64
+    # error Unsupported OS for aarch64
   # endif
   lprintf("\n");
 }

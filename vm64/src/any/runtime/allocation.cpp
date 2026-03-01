@@ -313,7 +313,7 @@ static inline int32 true_size_of_malloced_obj(int32* p) {
   return (int32)sallocx(p, 0);	/* ask jemalloc */
 }
 
-#elif TARGET_ARCH == X86_64_ARCH && TARGET_OS_VERSION == LINUX_VERSION
+#elif (TARGET_ARCH == X86_64_ARCH || TARGET_ARCH == AARCH64_ARCH) && TARGET_OS_VERSION == LINUX_VERSION
 
 // On 64-bit Linux, the malloc chunk header uses size_t (8 bytes) fields.
 // Reading internal malloc metadata with int32* is wrong.
