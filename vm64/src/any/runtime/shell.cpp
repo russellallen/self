@@ -71,6 +71,7 @@ oop eval(const char* expression, const char* fn) {
 static char* spyLogFile= NULL;
 char* startUpSelfFile= NULL;
 static bool run_vm_tests_flag = false;
+bool print_vm_version = false;
 
 const char **prog_argv;
 int    prog_argc;
@@ -87,8 +88,11 @@ static void processArguments(int argc, const char *argv[]) {
 
   // Scan for long options before getopt (which only handles single-char flags)
   for (int i = 1; i < argc; i++) {
-    if (strcmp(argv[i], "--run-vm-tests") == 0) {
+    if (strcmp(argv[i], "--vm-run-tests") == 0) {
       run_vm_tests_flag = true;
+    }
+    if (strcmp(argv[i], "--vm-version") == 0) {
+      print_vm_version = true;
     }
   }
 
@@ -130,7 +134,8 @@ static void processArguments(int argc, const char *argv[]) {
       lprintf("  -c\t\tUse real timer instead of CPU timer (for OS X)\n");
       lprintf("  -o\t\tOversample the timers (Run them 10x faster to flush out bugs)\n");
       lprintf("  -a\t\tTest the Assembler (added for Intel)\n");
-      lprintf("  --run-vm-tests\tRun C++ VM unit tests and exit\n");
+      lprintf("  --vm-run-tests\tRun C++ VM unit tests and exit\n");
+      lprintf("  --vm-version\tPrint VM version and platform info at startup\n");
       lprintf("Other command line switches may be interpreted by the Self world\n");
       ::exit(0);
       break;
@@ -305,7 +310,7 @@ int main(int argc, char *argv[]) {
   
   TrackCHeapInMonitor::reset();
   init_globals();
-  set_flags_for_platform();
+  set_flags_for_platform(print_vm_version);
   bootstrapping = false;
 
   if (run_vm_tests_flag) {

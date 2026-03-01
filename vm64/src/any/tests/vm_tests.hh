@@ -3,7 +3,7 @@
 
 /* Lightweight built-in test framework for VM unit tests.
    Tests are registered via __attribute__((constructor)) and run
-   with --run-vm-tests after init_globals(). */
+   with --vm-run-tests after init_globals(). */
 
 # ifdef INTERFACE_PRAGMAS
   # pragma interface
