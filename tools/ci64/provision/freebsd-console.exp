@@ -1,0 +1,119 @@
+#!/usr/bin/expect -f
+# freebsd-console.exp — Automated FreeBSD VM provisioning via serial console
+#
+# Spawns QEMU in -nographic mode (changes persist to disk), logs in as root,
+# creates the ci user, installs packages, configures SSH and sudo, then
+# powers off cleanly.
+#
+# Usage:
+#   expect freebsd-console.exp <path-to-qcow2>
+#
+# Requires: expect 5.45+, qemu-system-aarch64
+
+if {$argc != 1} {
+    puts stderr "Usage: freebsd-console.exp <path-to-qcow2>"
+    exit 1
+}
+
+set disk [lindex $argv 0]
+set timeout 90
+
+log_user 1
+
+puts "--- Spawning QEMU for FreeBSD provisioning ---"
+
+spawn qemu-system-aarch64 \
+    -machine virt -accel hvf -cpu host \
+    -m 4G -smp 4 \
+    -drive file=$disk,if=virtio \
+    -bios /opt/homebrew/share/qemu/edk2-aarch64-code.fd \
+    -nic user \
+    -nographic
+
+# Wait for the login prompt (FreeBSD boot can take a while)
+puts "\n--- Waiting for FreeBSD to boot (up to 90s) ---"
+expect {
+    "login:" {}
+    timeout {
+        puts stderr "\nERROR: Timed out waiting for login prompt"
+        exit 1
+    }
+}
+
+# Log in as root (no password on fresh VM images)
+puts "\n--- Logging in as root ---"
+send "root\r"
+expect {
+    "# " {}
+    "Password:" {
+        # If somehow a password is set, try empty
+        send "\r"
+        expect "# "
+    }
+    timeout {
+        puts stderr "\nERROR: Timed out waiting for root shell"
+        exit 1
+    }
+}
+
+# Create ci user with password "ci"
+puts "\n--- Creating ci user ---"
+send "pw useradd ci -m -s /bin/sh -G wheel\r"
+expect "# "
+send "echo 'ci' | pw usermod ci -h 0\r"
+expect "# "
+
+# Configure SSH for password authentication
+puts "\n--- Configuring SSH ---"
+send "sed -i '' 's/^#PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config\r"
+expect "# "
+send "sed -i '' 's/^#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config\r"
+expect "# "
+# Ensure sshd is enabled
+send "sysrc sshd_enable=YES\r"
+expect "# "
+
+# Install packages (pkg bootstrap + install can take a while)
+puts "\n--- Installing packages (up to 180s) ---"
+set timeout 180
+send "env ASSUME_ALWAYS_YES=yes pkg install -y cmake gcc libX11 libXext ncurses rsync sudo\r"
+expect {
+    "# " {}
+    timeout {
+        puts stderr "\nERROR: Timed out waiting for pkg install to finish"
+        exit 1
+    }
+}
+
+# Configure passwordless sudo for ci user
+puts "\n--- Configuring sudo ---"
+set timeout 30
+send "echo 'ci ALL=(ALL) NOPASSWD: ALL' >> /usr/local/etc/sudoers\r"
+expect "# "
+
+# Enable and restart sshd
+puts "\n--- Starting sshd ---"
+send "service sshd enable\r"
+expect "# "
+send "service sshd restart\r"
+expect "# "
+
+# Power off cleanly
+puts "\n--- Powering off ---"
+set timeout 60
+send "poweroff\r"
+expect {
+    eof {}
+    "The operating system has halted." {
+        # Wait for QEMU to exit
+        expect eof
+    }
+    timeout {
+        puts stderr "\nWARNING: Timed out waiting for shutdown, killing QEMU"
+        close
+        wait
+    }
+}
+
+puts "\n--- FreeBSD provisioning complete ---"
+exit 0
