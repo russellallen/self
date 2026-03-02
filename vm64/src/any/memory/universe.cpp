@@ -11,7 +11,7 @@
 
 // increment VM_snapshot_version whenever old snapshots will break; reset
 // it to zero when changing the minor or major version
-smi VM_major_version    = 2026;
+smi VM_major_version    = 64;
 smi VM_minor_version    = 0;
 smi VM_snapshot_version = 0;
 
@@ -395,7 +395,7 @@ void universe::read_versions_in_snapshot_header(FILE *file)
     if (fscanf(file, "%d%*[\r\n]", &snapshot_version_i) != 1)
       fatalNoMenu("\n\tThe \"Version:\" line in the snapshot could not be parsed.\n");
   } else {
-    // New format: "Version: 2026.0\n" followed by "Snapshot format: 0\n"
+    // New format: "Version: 64.0\n" followed by "Snapshot format: 0\n"
     // Consume rest of line
     while (after_minor != '\n' && after_minor != '\r' && after_minor != EOF)
       after_minor = fgetc(file);
@@ -404,25 +404,39 @@ void universe::read_versions_in_snapshot_header(FILE *file)
   }
   snapshot_version = snapshot_version_i;
 
-  // return for snapshots whose version matches the current snapshot version
-  if (snapshot_version == VM_snapshot_version)
-    return;
+  // First: is this a 64-bit snapshot? (major version == 64)
+  bool is_64bit_snapshot = (read_major_version_i == 64);
 
-  bool can_read_snapshot_with_mismatched_version =
-        (snapshot_version == 10  &&  VM_snapshot_version == 11)
-    || ((snapshot_version == 10 || snapshot_version == 11)  &&  VM_snapshot_version == 12)
-    || ((snapshot_version == 12) && VM_snapshot_version == 13)
-    || ((snapshot_version == 13) && VM_snapshot_version == 14)
-    || ((snapshot_version == 13) && VM_snapshot_version == 0);  // 32-bit 2023.1 → 2026.0
+  if (is_64bit_snapshot) {
+    // 64-bit snapshot: check snapshot_version for format compatibility
+    if (snapshot_version == VM_snapshot_version)
+      return;
+    // Future: add compatibility entries here as 64-bit formats evolve
+    fatalNoMenu6("\n\tThis 64-bit snapshot has an incompatible format.\n"
+                 "\tSnapshot version: %d.%d, format %d.\n"
+                 "\tVM version: %d.%d, format %d.\n",
+                 (int)read_major_version_i,
+                 (int)read_minor_version_i,
+                 (int)snapshot_version,
+                 (int)VM_major_version,
+                 (int)VM_minor_version,
+                 (int)VM_snapshot_version);
+  }
 
-  // Detect 32-bit snapshots being loaded by 64-bit VM
-  if (snapshot_version <= 13 && oopSize == 8) {
+  // Not a 64-bit snapshot — treat as 32-bit
+  if (oopSize == 8) {
     snapshot_oopSize = 4;
-    lprintf("\n\tLoading 32-bit snapshot (version %d) into 64-bit VM.\n",
+    lprintf("\n\tLoading 32-bit snapshot (format %d) into 64-bit VM.\n",
             (int)snapshot_version);
   }
 
-  if (can_read_snapshot_with_mismatched_version)
+  bool can_read_32bit_snapshot =
+        (snapshot_version == 10)
+    ||  (snapshot_version == 11)
+    ||  (snapshot_version == 12)
+    ||  (snapshot_version == 13);
+
+  if (can_read_32bit_snapshot)
     warning6("\n\tThis snapshot was saved using a different version\n"
              "\tof the Self Virtual Machine (%d.%d, format %d) and may behave unexpectedly\n"
              "\tor not work correctly with this version (%d.%d, format %d).\n",
@@ -433,7 +447,7 @@ void universe::read_versions_in_snapshot_header(FILE *file)
              (int)VM_minor_version,
              (int)VM_snapshot_version);
 
-  if (!can_read_snapshot_with_mismatched_version)
+  if (!can_read_32bit_snapshot)
     fatalNoMenu6("\n\tThis snapshot was saved using a different version\n"
                  "\tof the Self Virtual Machine (%d.%d, format %d) and will not\n"
                  "\twork with this version (%d.%d, format %d).\n",

@@ -441,9 +441,13 @@ void write_delim(FILE *file, char *delim);
 
 // Starting with snapshot_version 12, maps are embedded in mapObjects,
 // and so the proper address for the map is larger -- dmu 7/03
+// The 64-bit VM (major version 64) never needs this conversion.
+// Only old 32-bit snapshots with versions 10-11 need it.
 # define MAP_READ_SNAPSHOT_TEMPLATE(m)                                        \
     { OS::FRead_oop((oop*)(m), file);                                         \
-      if (snapshot_version < 12)  *m = as_mapOop(*m)->map_addr(); }       
+      if (VM_major_version < 64                                               \
+          && snapshot_version >= 10 && snapshot_version < 12)                 \
+        *m = as_mapOop(*m)->map_addr(); }
 
 # define MAP_WRITE_SNAPSHOT_TEMPLATE(m)                                       \
     OS::FWrite(m, oopSize, snapFile);
