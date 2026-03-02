@@ -246,9 +246,6 @@ bits.hh                       asserts.hh
 blist.cpp                     blist.hh
 blist.cpp                     process.hh
 
-bits_tests.cpp                vm_tests.hh
-bits_tests.cpp                bits.hh
-
 blist.hh                      allocation.hh
 blist.hh                      regs.hh
 blist.hh                      top.hh
@@ -828,9 +825,6 @@ files.cpp                     stringUtil.hh
 
 files.hh                      debug.hh
 files.hh                      top.hh
-
-float_tests.cpp               vm_tests.hh
-float_tests.cpp               oop.hh
 
 floatMap.cpp                  enumeration.hh
 floatMap.cpp                  floatMap.hh
@@ -1448,10 +1442,6 @@ markOop.cpp                   generation_inline.hh
 markOop.cpp                   markOop.hh
 markOop.cpp                   space_inline.hh
 
-mark_tests.cpp                vm_tests.hh
-mark_tests.cpp                oop.hh
-mark_tests.cpp                markOop.hh
-
 markOop.hh                    smiOop.hh
 
 memOop.cpp                    generation_inline.hh
@@ -1917,10 +1907,6 @@ oop.cpp                       zone.hh
 oop.hh                        debug.hh
 oop.hh                        kinds.hh
 oop.hh                        top.hh
-
-oop_tests.cpp                 vm_tests.hh
-oop_tests.cpp                 oop.hh
-oop_tests.cpp                 tag.hh
 
 oopClosures.cpp               blockOop.hh
 oopClosures.cpp               generation_inline.hh
@@ -2853,10 +2839,6 @@ slotsOop.cpp                  zone.hh
 
 slotsOop.hh                   oopsOop_inline.hh
 
-smi_tests.cpp                 vm_tests.hh
-smi_tests.cpp                 oop.hh
-smi_tests.cpp                 tag.hh
-
 smiMap.cpp                    enumeration.hh
 smiMap.cpp                    generation_inline.hh
 smiMap.cpp                    smiMap.hh
@@ -3286,9 +3268,6 @@ vframe_${platform_processor}.cpp             vmStrings.hh
 vmObj.hh                      process.hh
 vmObj.hh                      top.hh
 vmObj.hh                      universe.hh
-
-util_tests.cpp                vm_tests.hh
-util_tests.cpp                util.hh
 
 vmStrings.cpp                 generation_inline.hh
 vmStrings.cpp                 space_inline.hh

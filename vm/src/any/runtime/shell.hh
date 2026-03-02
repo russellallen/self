@@ -20,4 +20,3 @@ extern int          prog_argc;
 void  run_the_VM();
 
 extern char* startUpSelfFile;
-extern bool  print_vm_version;
