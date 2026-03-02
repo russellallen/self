@@ -17,6 +17,6 @@ rm -f "$BUILD_DIR/incls/_precompiled.hh.gch"
 cmake --build "$BUILD_DIR" -j"$NCPU"
 
 echo "--- Running VM tests ---"
-"$BUILD_DIR/Self" --vm-run-tests
+"$BUILD_DIR/Self.app/Contents/MacOS/Self" --vm-run-tests
 
 echo "--- macOS native build: SUCCESS ---"
