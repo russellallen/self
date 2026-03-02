@@ -17,6 +17,18 @@ rm -f "$BUILD_DIR/incls/_precompiled.hh.gch"
 cmake --build "$BUILD_DIR" -j"$NCPU"
 
 echo "--- Running VM tests ---"
-"$BUILD_DIR/Self.app/Contents/MacOS/Self" --vm-run-tests
+SELFVM="$BUILD_DIR/Self.app/Contents/MacOS/Self"
+$SELFVM --vm-run-tests
+
+echo "--- Testing Building an Snapshot ---"
+cd objects
+echo "saveAs: auto.snap64. _Quit" | $SELFVM -f worldbuilder.self -o morphic
+cd ..
+
+echo "--- Testing Loading a Snapshot ---"
+echo "_Quit" | $SELFVM -s objects/auto.snap64
+
+echo "--- Running Self tests ---"
+$SELFVM -s objects/auto.snap64 --runAutomaticTests
 
 echo "--- macOS native build: SUCCESS ---"
