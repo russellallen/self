@@ -56,6 +56,7 @@ add_custom_command(
   OUTPUT ${SELF_PREFIX_HEADER}
   COMMAND mkdir -p ${_incl_dest_dir}
   COMMAND ${makeDeps} ${_incl_threshold} ${_incldb}
+  DEPENDS ${_incldb}
   WORKING_DIRECTORY ${_incl_parent_dir}
 )
 
