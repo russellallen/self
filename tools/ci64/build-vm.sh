@@ -36,6 +36,9 @@ if [ ! -f "$DISK_IMAGE_PATH" ]; then
     exit 1
 fi
 
+# Prevent macOS DISPLAY from triggering ssh-askpass in guest VMs
+unset DISPLAY SSH_ASKPASS
+
 # SSH options common to all connections
 SSH_OPTS="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=5 -o LogLevel=ERROR"
 SSH_CMD="sshpass -p $SSH_PASS ssh $SSH_OPTS -p $SSH_PORT ${SSH_USER}@localhost"
@@ -124,7 +127,7 @@ fi
 if [ $BUILD_RESULT -eq 0 ]; then
     echo "--- Testing Building a Snapshot ---"
     $SSH_CMD "cd /tmp/self-build/objects && \
-        echo 'saveAs: auto.snap64. _Quit' | ../build/Self -f worldbuilder.self -o morphic" || BUILD_RESULT=$?
+        echo \"saveAs: 'auto.snap64'. _Quit\" | ../build/Self -f worldBuilder.self -o morphic" || BUILD_RESULT=$?
 fi
 
 if [ $BUILD_RESULT -eq 0 ]; then
