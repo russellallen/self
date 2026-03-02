@@ -27,7 +27,7 @@ bool InterruptedContext::in_system_trap() {
 
 
 int InterruptedContext::system_trap() {
-  return int(NULL); // unimp for now
+  return 0; // unimp for now
 }
 
 
@@ -59,6 +59,18 @@ void InterruptedContext::setupPreemptionFromSignal() {
   }
   int* InterruptedContext::fp_addr() {
     return  (int*) &scp->uc_mcontext.regs[29];
+  }
+
+# elif TARGET_OS_VERSION == FREEBSD_VERSION
+
+  char** InterruptedContext::pc_addr() {
+    return  (char**) &scp->uc_mcontext.mc_gpregs.gp_elr;
+  }
+  int* InterruptedContext::sp_addr() {
+    return  (int*) &scp->uc_mcontext.mc_gpregs.gp_sp;
+  }
+  int* InterruptedContext::fp_addr() {
+    return  (int*) &scp->uc_mcontext.mc_gpregs.gp_x[29];
   }
 
 # else
@@ -109,6 +121,24 @@ void InterruptedContext::print_registers() {
   lprintf("sp        = 0x%lx\n", mc->sp);
   lprintf("pc        = 0x%lx\n", mc->pc);
   lprintf("pstate    = 0x%lx\n", mc->pstate);
+
+  # elif TARGET_OS_VERSION == FREEBSD_VERSION
+
+    const mcontext_t *mc = &ic->scp->uc_mcontext;
+    lprintf("x0        = 0x%lx\n", mc->mc_gpregs.gp_x[0]);
+    lprintf("x1        = 0x%lx\n", mc->mc_gpregs.gp_x[1]);
+    lprintf("x2        = 0x%lx\n", mc->mc_gpregs.gp_x[2]);
+    lprintf("x3        = 0x%lx\n", mc->mc_gpregs.gp_x[3]);
+    lprintf("x4        = 0x%lx\n", mc->mc_gpregs.gp_x[4]);
+    lprintf("x5        = 0x%lx\n", mc->mc_gpregs.gp_x[5]);
+    lprintf("x6        = 0x%lx\n", mc->mc_gpregs.gp_x[6]);
+    lprintf("x7        = 0x%lx\n", mc->mc_gpregs.gp_x[7]);
+    lprintf("x8        = 0x%lx\n", mc->mc_gpregs.gp_x[8]);
+    lprintf("x29 (fp)  = 0x%lx\n", mc->mc_gpregs.gp_x[29]);
+    lprintf("x30 (lr)  = 0x%lx\n", mc->mc_gpregs.gp_lr);
+    lprintf("sp        = 0x%lx\n", mc->mc_gpregs.gp_sp);
+    lprintf("pc        = 0x%lx\n", mc->mc_gpregs.gp_elr);
+    lprintf("spsr      = 0x%x\n",  mc->mc_gpregs.gp_spsr);
 
   # else
     # error Unsupported OS for aarch64
