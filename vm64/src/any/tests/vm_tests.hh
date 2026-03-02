@@ -47,3 +47,11 @@ int run_vm_tests();
     vm_test_failures++; \
   } \
 } while(0)
+
+# define VM_CHECK_NE(a, b) do { \
+  auto _a = (a); auto _b = (b); \
+  if (_a == _b) { \
+    fprintf(stderr, "  FAIL: %s:%d: %s == %s\n", __FILE__, __LINE__, #a, #b); \
+    vm_test_failures++; \
+  } \
+} while(0)
