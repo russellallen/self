@@ -103,6 +103,7 @@ rsync -azL --delete \
     --exclude='tools/ci64/logs/' \
     --exclude='*.o' \
     --exclude='*.snap' \
+    --exclude='*.snap64' \
     "$PROJECT_ROOT/" \
     "${SSH_USER}@localhost:/tmp/self-build/"
 
@@ -118,6 +119,24 @@ $SSH_CMD "cd /tmp/self-build && \
 if [ $BUILD_RESULT -eq 0 ]; then
     echo "--- Running VM tests ---"
     $SSH_CMD "cd /tmp/self-build && build/Self --vm-run-tests" || BUILD_RESULT=$?
+fi
+
+if [ $BUILD_RESULT -eq 0 ]; then
+    echo "--- Testing Building a Snapshot ---"
+    $SSH_CMD "cd /tmp/self-build/objects && \
+        echo 'saveAs: auto.snap64. _Quit' | ../build/Self -f worldbuilder.self -o morphic" || BUILD_RESULT=$?
+fi
+
+if [ $BUILD_RESULT -eq 0 ]; then
+    echo "--- Testing Loading a Snapshot ---"
+    $SSH_CMD "cd /tmp/self-build && \
+        echo '_Quit' | build/Self -s objects/auto.snap64" || BUILD_RESULT=$?
+fi
+
+if [ $BUILD_RESULT -eq 0 ]; then
+    echo "--- Running Self tests ---"
+    $SSH_CMD "cd /tmp/self-build && \
+        build/Self -s objects/auto.snap64 --runAutomaticTests" || BUILD_RESULT=$?
 fi
 
 if [ $BUILD_RESULT -eq 0 ]; then
