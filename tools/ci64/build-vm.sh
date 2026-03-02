@@ -116,6 +116,11 @@ $SSH_CMD "cd /tmp/self-build && \
     cmake --build build -j\$($NPROC_CMD)" || BUILD_RESULT=$?
 
 if [ $BUILD_RESULT -eq 0 ]; then
+    echo "--- Running VM tests ---"
+    $SSH_CMD "cd /tmp/self-build && build/Self --vm-run-tests" || BUILD_RESULT=$?
+fi
+
+if [ $BUILD_RESULT -eq 0 ]; then
     echo "=== $PLATFORM: BUILD SUCCEEDED ==="
 else
     echo "=== $PLATFORM: BUILD FAILED (exit code $BUILD_RESULT) ==="
