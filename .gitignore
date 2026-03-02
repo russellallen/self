@@ -13,3 +13,8 @@ build/
 objects/glue/test*
 
 .aider*
+
+# CI
+tools/ci64/images/
+tools/ci64/logs/
+build-ci-macos/

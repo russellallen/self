@@ -22,13 +22,13 @@ $SELFVM --vm-run-tests
 
 echo "--- Testing Building an Snapshot ---"
 cd objects
-echo "saveAs: auto.snap64. _Quit" | $SELFVM -f worldbuilder.self -o morphic
+echo "saveAs: 'auto.snap64'. _Quit" | $SELFVM -f worldbuilder.self -o morphic
 cd ..
 
 echo "--- Testing Loading a Snapshot ---"
 echo "_Quit" | $SELFVM -s objects/auto.snap64
 
 echo "--- Running Self tests ---"
-$SELFVM -s objects/auto.snap64 --runAutomaticTests
+echo "tests runSelfSuite. _Quit" | $SELFVM -s objects/auto.snap64
 
 echo "--- macOS native build: SUCCESS ---"

@@ -139,8 +139,7 @@ fi
 if [ $BUILD_RESULT -eq 0 ]; then
     echo "--- Running Self tests ---"
     $SSH_CMD "cd /tmp/self-build && \
-        build/Self -s objects/auto.snap64 --runAutomaticTests" || BUILD_RESULT=$?
-fi
+    echo 'tests runSelfSuite. _Quit' | build/Self -s objects/auto.snap64" || BUILD_RESULT=$?
 
 if [ $BUILD_RESULT -eq 0 ]; then
     echo "=== $PLATFORM: BUILD SUCCEEDED ==="
