@@ -118,7 +118,7 @@ oop failure_oop_for_restarting_uncommon_prim();
 
 void fillRegisterValue(Location loc, oop b);
 
-void set_flags_for_platform();
+void set_flags_for_platform(bool verbose = false);
 
 # include "_runtime_pd.hh.incl"
 

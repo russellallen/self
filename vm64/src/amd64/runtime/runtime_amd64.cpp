@@ -99,15 +99,16 @@ void fillRegisterValue(Location loc, oop b) {
 
 
 
-void set_flags_for_platform() {
-  LogVMMessages                        = true;   lprintf("for I386:  LogVMMessages = true\n");
-  PrintScriptName                      = true;   lprintf("for I386:  PrintScriptName  = true\n");
-  Inline                               = true;   lprintf("for I386:  Inline = true\n");
-  # ifdef SIC_COMPILER
-    SICDeferUncommonBranches             = false;  lprintf("for I386:  SICDeferUncommonBranches = false (not implemented)\n"); 
-    SICReplaceOnStack                    = false;  lprintf("for I386:  SICReplaceOnStack = false (not implemented)\n");
-  # endif
-  SaveOutgoingArgumentsOfPatchedFrames = true;   lprintf("for I386:  SaveOutgoingArgumentsOfPatchedFrames = true\n");
+void set_flags_for_platform(bool verbose) {
+  if (verbose) lprintf("Platform flags:\n");
+  LogVMMessages                        = true;   if (verbose) lprintf("LogVMMessages = true\n");
+  PrintScriptName                      = true;   if (verbose) lprintf("PrintScriptName = true\n");
+  Inline                               = false;  if (verbose) lprintf("Inline = false\n");
+# ifdef SIC_COMPILER
+    SICDeferUncommonBranches             = false;  if (verbose) lprintf("SICDeferUncommonBranches = false (not implemented)\n");
+    SICReplaceOnStack                    = false;  if (verbose) lprintf("SICReplaceOnStack = false (not implemented)\n");
+# endif
+  SaveOutgoingArgumentsOfPatchedFrames = false;   if (verbose) lprintf("SaveOutgoingArgumentsOfPatchedFrames = false\n");
 }
 
 # endif // TARGET_ARCH == I386_ARCH || TARGET_ARCH == X86_64_ARCH || TARGET_ARCH == AARCH64_ARCH
