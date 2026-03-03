@@ -1,0 +1,929 @@
+# Unified CI Justfile for Self VM — builds and tests both vm64 and vm (32-bit)
+#
+# Usage:
+#   just                        Show all recipes
+#   just fullrun-all            Run all platforms for both vm64 and vm
+#   just vm64-macos-native      Build and test vm64 natively on macOS
+#   just vm-freebsd-i386        Build and test vm (32-bit) on FreeBSD i386
+#   just setup-all              Download and provision all VM images
+#
+# Requirements: qemu, sshpass, rsync, cmake, expect (for FreeBSD provisioning)
+
+SELFREPO := justfile_directory() + '/../..'
+NCPU := `sysctl -n hw.ncpu 2>/dev/null || echo 4`
+
+# ─── Images ─────────────────────────────────────────────
+
+# vm64 platforms
+UBUNTU_ARM64_QCOW  := 'images/ubuntu-arm64.qcow2'
+UBUNTU_AMD64_QCOW  := 'images/ubuntu-amd64.qcow2'
+FREEBSD_ARM64_QCOW := 'images/freebsd-arm64.qcow2'
+NETBSD_ARM64_IMG   := 'images/netbsd-arm64.img'
+
+# vm platforms (32-bit multilib on AMD64)
+UBUNTU_MULTILIB_QCOW := 'images/ubuntu-amd64-multilib.qcow2'
+FREEBSD_I386_QCOW  := 'images/freebsd-i386.qcow2'
+NETBSD_I386_IMG    := 'images/netbsd-i386.img'
+
+# ─── Download URLs ────────────────────────────────────────
+
+UBUNTU_ARM64_URL   := 'https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-arm64.img'
+UBUNTU_AMD64_URL   := 'https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img'
+FREEBSD_ARM64_URL  := 'https://download.freebsd.org/releases/VM-IMAGES/14.3-RELEASE/aarch64/Latest/FreeBSD-14.3-RELEASE-arm64-aarch64.qcow2.xz'
+FREEBSD_I386_URL   := 'https://download.freebsd.org/releases/VM-IMAGES/14.3-RELEASE/i386/Latest/FreeBSD-14.3-RELEASE-i386.qcow2.xz'
+NETBSD_ARM64_URL   := 'https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.1/evbarm-aarch64/binary/gzimg/arm64.img.gz'
+NETBSD_I386_URL    := 'https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.1/images/NetBSD-10.1-i386-install.img.gz'
+
+# ─── Default ──────────────────────────────────────────────
+
+[private]
+default:
+    @just --list
+
+# ═══════════════════════════════════════════════════════════
+#  Full Runs
+# ═══════════════════════════════════════════════════════════
+
+# Run all active platforms for both vm64 and vm
+[group('Full Runs')]
+fullrun-all:
+    #!/usr/bin/env bash
+    RESULTS=()
+    FAILS=0
+    START=$SECONDS
+
+    just fullrun-vm64 && RESULTS+=("fullrun-vm64: PASS") || { RESULTS+=("fullrun-vm64: FAIL"); FAILS=$((FAILS + 1)); }
+    just fullrun-vm && RESULTS+=("fullrun-vm: PASS") || { RESULTS+=("fullrun-vm: FAIL"); FAILS=$((FAILS + 1)); }
+
+    ELAPSED=$((SECONDS - START))
+    echo ""
+    echo "============================="
+    printf '=== Results (%dm %ds) ===\n' $((ELAPSED / 60)) $((ELAPSED % 60))
+    echo "============================="
+    for r in "${RESULTS[@]}"; do
+        if [[ "$r" == *PASS ]]; then
+            echo "$(tput setaf 2)  $r$(tput sgr0)"
+        else
+            echo "$(tput setaf 1)  $r$(tput sgr0)"
+        fi
+    done
+    echo ""
+    if [ $FAILS -gt 0 ]; then
+        just _fail "$FAILS suite(s) failed"
+        exit 1
+    else
+        just _pass "All suites passed"
+    fi
+
+# Run all vm64 platforms
+[group('Full Runs')]
+fullrun-vm64:
+    #!/usr/bin/env bash
+    RESULTS=()
+    FAILS=0
+    START=$SECONDS
+
+    just vm64-macos-native && RESULTS+=("vm64-macos-native: PASS") || { RESULTS+=("vm64-macos-native: FAIL"); FAILS=$((FAILS + 1)); }
+    just vm64-ubuntu-arm64 && RESULTS+=("vm64-ubuntu-arm64: PASS") || { RESULTS+=("vm64-ubuntu-arm64: FAIL"); FAILS=$((FAILS + 1)); }
+    just vm64-ubuntu-amd64 && RESULTS+=("vm64-ubuntu-amd64: PASS") || { RESULTS+=("vm64-ubuntu-amd64: FAIL"); FAILS=$((FAILS + 1)); }
+
+    ELAPSED=$((SECONDS - START))
+    echo ""
+    echo "============================="
+    printf '=== Results (%dm %ds) ===\n' $((ELAPSED / 60)) $((ELAPSED % 60))
+    echo "============================="
+    for r in "${RESULTS[@]}"; do
+        if [[ "$r" == *PASS ]]; then
+            echo "$(tput setaf 2)  $r$(tput sgr0)"
+        else
+            echo "$(tput setaf 1)  $r$(tput sgr0)"
+        fi
+    done
+    echo ""
+    if [ $FAILS -gt 0 ]; then
+        just _fail "$FAILS platform(s) failed"
+        exit 1
+    else
+        just _pass "All platforms passed"
+    fi
+
+# Run all vm platforms
+[group('Full Runs')]
+fullrun-vm:
+    #!/usr/bin/env bash
+    RESULTS=()
+    FAILS=0
+    START=$SECONDS
+
+    just vm-ubuntu-amd64 && RESULTS+=("vm-ubuntu-amd64: PASS") || { RESULTS+=("vm-ubuntu-amd64: FAIL"); FAILS=$((FAILS + 1)); }
+    just vm-freebsd-i386 && RESULTS+=("vm-freebsd-i386: PASS") || { RESULTS+=("vm-freebsd-i386: FAIL"); FAILS=$((FAILS + 1)); }
+
+    ELAPSED=$((SECONDS - START))
+    echo ""
+    echo "============================="
+    printf '=== Results (%dm %ds) ===\n' $((ELAPSED / 60)) $((ELAPSED % 60))
+    echo "============================="
+    for r in "${RESULTS[@]}"; do
+        if [[ "$r" == *PASS ]]; then
+            echo "$(tput setaf 2)  $r$(tput sgr0)"
+        else
+            echo "$(tput setaf 1)  $r$(tput sgr0)"
+        fi
+    done
+    echo ""
+    if [ $FAILS -gt 0 ]; then
+        just _fail "$FAILS platform(s) failed"
+        exit 1
+    else
+        just _pass "All platforms passed"
+    fi
+
+# ═══════════════════════════════════════════════════════════
+#  vm64 Build + Test
+# ═══════════════════════════════════════════════════════════
+
+# Build and test vm64 natively on macOS
+[group('vm64')]
+vm64-macos-native:
+    #!/usr/bin/env bash
+    set -uo pipefail
+    result=0
+    (
+        set -e
+        just _action "Building vm64 natively on macOS"
+        BUILD_DIR="{{SELFREPO}}/build-ci-macos"
+        cmake -S "{{SELFREPO}}/vm64" -B "$BUILD_DIR" -DCMAKE_BUILD_TYPE=Release
+        rm -f "$BUILD_DIR/incls/_precompiled.hh.gch"
+        cmake --build "$BUILD_DIR" -j{{NCPU}}
+        SELFVM="$BUILD_DIR/Self.app/Contents/MacOS/Self"
+        $SELFVM --vm-run-tests
+        (cd "{{SELFREPO}}/objects" && echo "saveAs: 'auto.snap64'. _Quit" | $SELFVM -f worldbuilder.self -o morphic)
+        echo "_Quit" | $SELFVM -s "{{SELFREPO}}/objects/auto.snap64"
+        echo "tests runSelfSuite. _Quit" | $SELFVM -s "{{SELFREPO}}/objects/auto.snap64"
+    ) || result=$?
+    if [ $result -eq 0 ]; then
+        just _pass "vm64-macos-native"
+    else
+        just _fail "vm64-macos-native"
+    fi
+    exit $result
+
+# Build and test vm64 on Ubuntu ARM64
+[group('vm64')]
+vm64-ubuntu-arm64:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just start-ubuntu-arm64
+    PORT=$(cat ubuntu-arm64.port)
+    result=0
+    just _vm64-compile-ubuntu-arm64 "$PORT" || result=$?
+    just stop-ubuntu-arm64
+    if [ $result -eq 0 ]; then
+        just _pass "vm64-ubuntu-arm64"
+    else
+        just _fail "vm64-ubuntu-arm64"
+    fi
+    exit $result
+
+# Build and test vm64 on Ubuntu AMD64
+[group('vm64')]
+vm64-ubuntu-amd64:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just start-ubuntu-amd64
+    PORT=$(cat ubuntu-amd64.port)
+    result=0
+    just _vm64-compile-ubuntu-amd64 "$PORT" || result=$?
+    just stop-ubuntu-amd64
+    if [ $result -eq 0 ]; then
+        just _pass "vm64-ubuntu-amd64"
+    else
+        just _fail "vm64-ubuntu-amd64"
+    fi
+    exit $result
+
+# ═══════════════════════════════════════════════════════════
+#  vm (32-bit) Build + Test
+# ═══════════════════════════════════════════════════════════
+
+# Build and test vm (32-bit) on Ubuntu AMD64
+[group('vm')]
+vm-ubuntu-amd64:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just start-ubuntu-amd64-multilib
+    PORT=$(cat ubuntu-amd64-multilib.port)
+    result=0
+    just _vm-compile-ubuntu-amd64 "$PORT" || result=$?
+    just stop-ubuntu-amd64-multilib
+    if [ $result -eq 0 ]; then
+        just _pass "vm-ubuntu-amd64"
+    else
+        just _fail "vm-ubuntu-amd64"
+    fi
+    exit $result
+
+# Build and test vm (32-bit) on FreeBSD i386
+[group('vm')]
+vm-freebsd-i386:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just start-freebsd-i386
+    PORT=$(cat freebsd-i386.port)
+    result=0
+    just _vm-compile-freebsd-i386 "$PORT" || result=$?
+    just stop-freebsd-i386
+    if [ $result -eq 0 ]; then
+        just _pass "vm-freebsd-i386"
+    else
+        just _fail "vm-freebsd-i386"
+    fi
+    exit $result
+
+# Build and test vm (32-bit) on NetBSD i386
+[group('vm')]
+vm-netbsd-i386:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just start-netbsd-i386
+    PORT=$(cat netbsd-i386.port)
+    result=0
+    just _vm-compile-netbsd-i386 "$PORT" || result=$?
+    just stop-netbsd-i386
+    if [ $result -eq 0 ]; then
+        just _pass "vm-netbsd-i386"
+    else
+        just _fail "vm-netbsd-i386"
+    fi
+    exit $result
+
+# ═══════════════════════════════════════════════════════════
+#  vm64 Compile (internal)
+# ═══════════════════════════════════════════════════════════
+
+_vm64-compile-ubuntu-arm64 port:
+    @just _action "Compiling vm64 on Ubuntu ARM64"
+    @just _rsync {{port}}
+    @just do {{port}} 'cd /tmp/self-build && cmake -S vm64 -B build -DCMAKE_BUILD_TYPE=Release -DSELF_QUARTZ=OFF && rm -f build/incls/_precompiled.hh.gch && cmake --build build -j$(nproc)'
+    @just do {{port}} 'cd /tmp/self-build && build/Self --vm-run-tests'
+    @just do {{port}} 'cd /tmp/self-build/objects && echo "saveAs: '"'"'auto.snap64'"'"'. _Quit" | ../build/Self -f worldBuilder.self -o morphic'
+    @just do {{port}} 'cd /tmp/self-build && echo "_Quit" | build/Self -s objects/auto.snap64'
+    @just do {{port}} 'cd /tmp/self-build && echo "tests runSelfSuite. _Quit" | build/Self -s objects/auto.snap64'
+    @just _banner "Finished vm64 on Ubuntu ARM64"
+
+_vm64-compile-ubuntu-amd64 port:
+    @just _action "Compiling vm64 on Ubuntu AMD64"
+    @just _rsync {{port}}
+    @just do {{port}} 'cd /tmp/self-build && cmake -S vm64 -B build -DCMAKE_BUILD_TYPE=Release -DSELF_QUARTZ=OFF && rm -f build/incls/_precompiled.hh.gch && cmake --build build -j$(nproc)'
+    @just do {{port}} 'cd /tmp/self-build && build/Self --vm-run-tests'
+    @just do {{port}} 'cd /tmp/self-build/objects && echo "saveAs: '"'"'auto.snap64'"'"'. _Quit" | ../build/Self -f worldBuilder.self -o morphic'
+    @just do {{port}} 'cd /tmp/self-build && echo "_Quit" | build/Self -s objects/auto.snap64'
+    @just do {{port}} 'cd /tmp/self-build && echo "tests runSelfSuite. _Quit" | build/Self -s objects/auto.snap64'
+    @just _banner "Finished vm64 on Ubuntu AMD64"
+
+# ═══════════════════════════════════════════════════════════
+#  vm (32-bit) Compile (internal)
+# ═══════════════════════════════════════════════════════════
+
+_vm-compile-ubuntu-amd64 port:
+    @just _action "Compiling vm (32-bit) on Ubuntu AMD64"
+    @just _rsync {{port}}
+    @just do {{port}} 'cd /tmp/self-build && cmake -S vm -B build -DCMAKE_BUILD_TYPE=Release -DSELF_QUARTZ=OFF && cmake --build build -j$(nproc)'
+    @just do {{port}} 'cd /tmp/self-build/objects && ../build/Self -f worldBuilder.self -o morphic -headless --runAutomaticTests --snapshotActionPostRead'
+    @just _banner "Finished vm (32-bit) on Ubuntu AMD64"
+
+_vm-compile-freebsd-i386 port:
+    @just _action "Compiling vm (32-bit) on FreeBSD i386"
+    @just _rsync {{port}}
+    @just do {{port}} 'cd /tmp/self-build && CC=gcc13 CXX=g++13 cmake -S vm -B build -DCMAKE_BUILD_TYPE=Release -DSELF_QUARTZ=OFF && cmake --build build -j$(sysctl -n hw.ncpu)'
+    @just do {{port}} 'cd /tmp/self-build/objects && ../build/Self -f worldBuilder.self -o morphic -headless --runAutomaticTests --snapshotActionPostRead'
+    @just _banner "Finished vm (32-bit) on FreeBSD i386"
+
+_vm-compile-netbsd-i386 port:
+    @just _action "Compiling vm (32-bit) on NetBSD i386"
+    @just _rsync {{port}}
+    @just do {{port}} 'cd /tmp/self-build && cmake -S vm -B build -DCMAKE_BUILD_TYPE=Release -DSELF_QUARTZ=OFF && cmake --build build -j$(sysctl -n hw.ncpu)'
+    @just do {{port}} 'cd /tmp/self-build/objects && ../build/Self -f worldBuilder.self -o morphic -headless --runAutomaticTests --snapshotActionPostRead'
+    @just _banner "Finished vm (32-bit) on NetBSD i386"
+
+# ═══════════════════════════════════════════════════════════
+#  Setup — Download and provision VM images
+# ═══════════════════════════════════════════════════════════
+
+# Download and provision all VM images
+[group('Setup')]
+setup-all: setup-ubuntu-arm64 setup-ubuntu-amd64 setup-ubuntu-amd64-multilib setup-freebsd-arm64 setup-freebsd-i386 setup-netbsd-arm64
+    @just _banner "All images ready"
+
+# Download and provision Ubuntu ARM64
+[group('Setup')]
+setup-ubuntu-arm64:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    mkdir -p images
+    if [ ! -f "{{UBUNTU_ARM64_QCOW}}" ]; then
+        just _action "Downloading Ubuntu ARM64 cloud image"
+        curl -L -o "{{UBUNTU_ARM64_QCOW}}" "{{UBUNTU_ARM64_URL}}"
+        qemu-img resize "{{UBUNTU_ARM64_QCOW}}" 20G
+    else
+        echo "Image already exists: {{UBUNTU_ARM64_QCOW}}"
+    fi
+    just _create-cloud-init-arm64
+    just _action "Provisioning Ubuntu ARM64 via cloud-init (will shut down automatically when done)"
+    PORT=$(just _free-port)
+    qemu-system-aarch64 \
+        -machine virt -accel hvf -cpu host \
+        -m 4G -smp 4 \
+        -drive file={{UBUNTU_ARM64_QCOW}},if=virtio \
+        -drive file=images/cloud-init-arm64.iso,if=virtio,media=cdrom \
+        -bios /opt/homebrew/share/qemu/edk2-aarch64-code.fd \
+        -nic user,hostfwd=tcp::${PORT}-:22 \
+        -nographic
+    just _banner "Ubuntu ARM64 image ready"
+
+# Download and provision Ubuntu AMD64 (vm64 only)
+[group('Setup')]
+setup-ubuntu-amd64:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    mkdir -p images
+    if [ ! -f "{{UBUNTU_AMD64_QCOW}}" ]; then
+        just _action "Downloading Ubuntu AMD64 cloud image"
+        curl -L -o "{{UBUNTU_AMD64_QCOW}}" "{{UBUNTU_AMD64_URL}}"
+        qemu-img resize "{{UBUNTU_AMD64_QCOW}}" 20G
+    else
+        echo "Image already exists: {{UBUNTU_AMD64_QCOW}}"
+    fi
+    just _create-cloud-init-amd64
+    just _action "Provisioning Ubuntu AMD64 via cloud-init (will shut down automatically when done)"
+    PORT=$(just _free-port)
+    qemu-system-x86_64 \
+        -machine q35 -cpu qemu64 \
+        -m 4G -smp 2 \
+        -drive file={{UBUNTU_AMD64_QCOW}},if=virtio \
+        -drive file=images/cloud-init-amd64.iso,if=virtio,media=cdrom \
+        -nic user,hostfwd=tcp::${PORT}-:22 \
+        -nographic
+    just _banner "Ubuntu AMD64 image ready"
+
+# Download and provision Ubuntu AMD64 multilib (vm 32-bit builds)
+[group('Setup')]
+setup-ubuntu-amd64-multilib:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    mkdir -p images
+    if [ ! -f "{{UBUNTU_MULTILIB_QCOW}}" ]; then
+        just _action "Downloading Ubuntu AMD64 cloud image (for multilib)"
+        curl -L -o "{{UBUNTU_MULTILIB_QCOW}}" "{{UBUNTU_AMD64_URL}}"
+        qemu-img resize "{{UBUNTU_MULTILIB_QCOW}}" 20G
+    else
+        echo "Image already exists: {{UBUNTU_MULTILIB_QCOW}}"
+    fi
+    just _create-cloud-init-amd64-multilib
+    just _action "Provisioning Ubuntu AMD64 multilib via cloud-init (will shut down automatically when done)"
+    PORT=$(just _free-port)
+    qemu-system-x86_64 \
+        -machine q35 -cpu qemu64 \
+        -m 4G -smp 2 \
+        -drive file={{UBUNTU_MULTILIB_QCOW}},if=virtio \
+        -drive file=images/cloud-init-amd64-multilib.iso,if=virtio,media=cdrom \
+        -nic user,hostfwd=tcp::${PORT}-:22 \
+        -nographic
+    just _banner "Ubuntu AMD64 multilib image ready"
+
+# Download and provision FreeBSD ARM64
+[group('Setup')]
+setup-freebsd-arm64:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    mkdir -p images
+    if [ ! -f "{{FREEBSD_ARM64_QCOW}}" ]; then
+        just _action "Downloading FreeBSD ARM64 image"
+        xz_file="images/FreeBSD-14.3-RELEASE-arm64-aarch64.qcow2.xz"
+        curl -L -o "$xz_file" "{{FREEBSD_ARM64_URL}}"
+        xz -d "$xz_file"
+        mv "images/FreeBSD-14.3-RELEASE-arm64-aarch64.qcow2" "{{FREEBSD_ARM64_QCOW}}"
+        qemu-img resize "{{FREEBSD_ARM64_QCOW}}" 20G
+    else
+        echo "Image already exists: {{FREEBSD_ARM64_QCOW}}"
+    fi
+    just _action "Provisioning FreeBSD ARM64 via expect script"
+    expect provision/freebsd-console.exp "{{FREEBSD_ARM64_QCOW}}"
+    just _banner "FreeBSD ARM64 image ready"
+
+# Download and provision FreeBSD i386
+[group('Setup')]
+setup-freebsd-i386:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    mkdir -p images
+    if [ ! -f "{{FREEBSD_I386_QCOW}}" ]; then
+        just _action "Downloading FreeBSD i386 image"
+        xz_file="images/FreeBSD-14.3-RELEASE-i386.qcow2.xz"
+        curl -L -o "$xz_file" "{{FREEBSD_I386_URL}}"
+        xz -d "$xz_file"
+        mv "images/FreeBSD-14.3-RELEASE-i386.qcow2" "{{FREEBSD_I386_QCOW}}"
+        qemu-img resize "{{FREEBSD_I386_QCOW}}" 20G
+    else
+        echo "Image already exists: {{FREEBSD_I386_QCOW}}"
+    fi
+    just _action "Provisioning FreeBSD i386 via expect script"
+    expect provision/freebsd-i386-console.exp "{{FREEBSD_I386_QCOW}}"
+    just _banner "FreeBSD i386 image ready"
+
+# Download and provision NetBSD ARM64
+[group('Setup')]
+setup-netbsd-arm64:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    mkdir -p images
+    if [ ! -f "{{NETBSD_ARM64_IMG}}" ]; then
+        just _action "Downloading NetBSD ARM64 image"
+        gz_file="images/netbsd-arm64.img.gz"
+        curl -L -o "$gz_file" "{{NETBSD_ARM64_URL}}"
+        gunzip "$gz_file"
+        qemu-img resize "{{NETBSD_ARM64_IMG}}" 8G
+    else
+        echo "Image already exists: {{NETBSD_ARM64_IMG}}"
+    fi
+    just _action "NetBSD ARM64 requires manual provisioning"
+    echo "Log in as root (no password), then run:"
+    echo "  useradd -m -G wheel ci"
+    echo "  echo 'ci' | passwd ci"
+    echo "  See provision/netbsd.sh for package install steps"
+    PORT=$(just _free-port)
+    qemu-system-aarch64 \
+        -machine virt -accel hvf -cpu host \
+        -m 2G -smp 2 \
+        -drive file={{NETBSD_ARM64_IMG}},if=virtio \
+        -bios /opt/homebrew/share/qemu/edk2-aarch64-code.fd \
+        -nic user,hostfwd=tcp::${PORT}-:22 \
+        -nographic
+    just _banner "NetBSD ARM64 image ready"
+
+# Download NetBSD i386 installer (manual provisioning required)
+[group('Setup')]
+setup-netbsd-i386:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    mkdir -p images
+    if [ ! -f "{{NETBSD_I386_IMG}}" ]; then
+        just _action "Downloading NetBSD i386 installer"
+        gz_file="images/NetBSD-10.1-i386-install.img.gz"
+        curl -L -o "$gz_file" "{{NETBSD_I386_URL}}"
+        gunzip "$gz_file"
+        mv "images/NetBSD-10.1-i386-install.img" "{{NETBSD_I386_IMG}}"
+    else
+        echo "Image already exists: {{NETBSD_I386_IMG}}"
+    fi
+    just _action "NetBSD i386 requires manual installation and provisioning"
+    echo "See provision/netbsd-i386.sh for package install steps (includes jemalloc)"
+    PORT=$(just _free-port)
+    qemu-system-x86_64 \
+        -machine q35 -cpu qemu64 \
+        -m 2G -smp 2 \
+        -drive file={{NETBSD_I386_IMG}},if=virtio \
+        -nic user,hostfwd=tcp::${PORT}-:22 \
+        -nographic
+    just _banner "NetBSD i386 image ready"
+
+# ═══════════════════════════════════════════════════════════
+#  Environment
+# ═══════════════════════════════════════════════════════════
+
+# Verify required tools are installed
+[group('Environment')]
+check-env:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just _action "Checking required tools"
+    ok=true
+
+    hint() {
+        case "$1" in
+            cmake)                echo "brew install cmake" ;;
+            curl)                 echo "brew install curl" ;;
+            expect)               echo "brew install expect" ;;
+            gunzip)               echo "included with gzip — brew install gzip" ;;
+            python3)              echo "brew install python3" ;;
+            qemu-img)             echo "brew install qemu" ;;
+            qemu-system-aarch64)  echo "brew install qemu" ;;
+            qemu-system-x86_64)   echo "brew install qemu" ;;
+            rsync)                echo "brew install rsync" ;;
+            ssh)                  echo "should be pre-installed on macOS" ;;
+            sshpass)              echo "brew install esolitos/ipa/sshpass" ;;
+            xxd)                  echo "included with vim — brew install vim" ;;
+            xz)                   echo "brew install xz" ;;
+        esac
+    }
+
+    for cmd in cmake curl expect gunzip python3 qemu-img qemu-system-aarch64 qemu-system-x86_64 rsync ssh sshpass xxd xz; do
+        if command -v "$cmd" &>/dev/null; then
+            printf "  %-30s %s\n" "$cmd" "$(command -v "$cmd")"
+        else
+            printf "  %-30s MISSING  (%s)\n" "$cmd" "$(hint "$cmd")"
+            ok=false
+        fi
+    done
+
+    echo ""
+    echo "Checking firmware files:"
+    EFI="/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
+    if [ -f "$EFI" ]; then
+        printf "  %-30s OK\n" "edk2-aarch64-code.fd"
+    else
+        printf "  %-30s MISSING  (brew install qemu)\n" "edk2-aarch64-code.fd"
+        ok=false
+    fi
+
+    echo ""
+    echo "Self repository: {{SELFREPO}}"
+    echo "Host CPUs: {{NCPU}}"
+    if $ok; then
+        just _pass "Environment OK"
+    else
+        just _fail "Some required tools are missing"
+        exit 1
+    fi
+
+# ═══════════════════════════════════════════════════════════
+#  Advanced — Start/Stop individual VMs
+# ═══════════════════════════════════════════════════════════
+
+# Boot Ubuntu ARM64 VM (snapshot mode)
+[group('Advanced')]
+start-ubuntu-arm64:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just _action "Starting Ubuntu ARM64 VM"
+    PORT=$(just _free-port)
+    echo "$PORT" > ubuntu-arm64.port
+    qemu-system-aarch64 \
+        -machine virt -accel hvf -cpu host \
+        -m 4G -smp 4 \
+        -drive file={{UBUNTU_ARM64_QCOW}},if=virtio,snapshot=on \
+        -bios /opt/homebrew/share/qemu/edk2-aarch64-code.fd \
+        -nic user,hostfwd=tcp::${PORT}-:22 \
+        -pidfile ubuntu-arm64.pid \
+        -display none -daemonize
+    just _wait-for-ssh "$PORT"
+    just _banner "Ubuntu ARM64 VM running on port $PORT"
+
+# Shut down Ubuntu ARM64 VM
+[group('Advanced')]
+stop-ubuntu-arm64:
+    #!/usr/bin/env bash
+    port=$(cat ubuntu-arm64.port 2>/dev/null || echo "0")
+    just _stop-vm ubuntu-arm64.pid "$port"
+    rm -f ubuntu-arm64.port
+
+# Boot Ubuntu AMD64 VM (snapshot mode)
+[group('Advanced')]
+start-ubuntu-amd64:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just _action "Starting Ubuntu AMD64 VM"
+    PORT=$(just _free-port)
+    echo "$PORT" > ubuntu-amd64.port
+    qemu-system-x86_64 \
+        -machine q35 -cpu qemu64 \
+        -m 4G -smp 2 \
+        -drive file={{UBUNTU_AMD64_QCOW}},if=virtio,snapshot=on \
+        -nic user,hostfwd=tcp::${PORT}-:22 \
+        -pidfile ubuntu-amd64.pid \
+        -display none -daemonize
+    just _wait-for-ssh "$PORT"
+    just _banner "Ubuntu AMD64 VM running on port $PORT"
+
+# Shut down Ubuntu AMD64 VM
+[group('Advanced')]
+stop-ubuntu-amd64:
+    #!/usr/bin/env bash
+    port=$(cat ubuntu-amd64.port 2>/dev/null || echo "0")
+    just _stop-vm ubuntu-amd64.pid "$port"
+    rm -f ubuntu-amd64.port
+
+# Boot Ubuntu AMD64 multilib VM (snapshot mode, for 32-bit vm builds)
+[group('Advanced')]
+start-ubuntu-amd64-multilib:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just _action "Starting Ubuntu AMD64 multilib VM"
+    PORT=$(just _free-port)
+    echo "$PORT" > ubuntu-amd64-multilib.port
+    qemu-system-x86_64 \
+        -machine q35 -cpu qemu64 \
+        -m 4G -smp 2 \
+        -drive file={{UBUNTU_MULTILIB_QCOW}},if=virtio,snapshot=on \
+        -nic user,hostfwd=tcp::${PORT}-:22 \
+        -pidfile ubuntu-amd64-multilib.pid \
+        -display none -daemonize
+    just _wait-for-ssh "$PORT"
+    just _banner "Ubuntu AMD64 multilib VM running on port $PORT"
+
+# Shut down Ubuntu AMD64 multilib VM
+[group('Advanced')]
+stop-ubuntu-amd64-multilib:
+    #!/usr/bin/env bash
+    port=$(cat ubuntu-amd64-multilib.port 2>/dev/null || echo "0")
+    just _stop-vm ubuntu-amd64-multilib.pid "$port"
+    rm -f ubuntu-amd64-multilib.port
+
+# Boot FreeBSD ARM64 VM (snapshot mode)
+[group('Advanced')]
+start-freebsd-arm64:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just _action "Starting FreeBSD ARM64 VM"
+    PORT=$(just _free-port)
+    echo "$PORT" > freebsd-arm64.port
+    qemu-system-aarch64 \
+        -machine virt -accel hvf -cpu host \
+        -m 4G -smp 4 \
+        -drive file={{FREEBSD_ARM64_QCOW}},if=virtio,snapshot=on \
+        -bios /opt/homebrew/share/qemu/edk2-aarch64-code.fd \
+        -nic user,hostfwd=tcp::${PORT}-:22 \
+        -pidfile freebsd-arm64.pid \
+        -display none -daemonize
+    just _wait-for-ssh "$PORT"
+    just _banner "FreeBSD ARM64 VM running on port $PORT"
+
+# Shut down FreeBSD ARM64 VM
+[group('Advanced')]
+stop-freebsd-arm64:
+    #!/usr/bin/env bash
+    port=$(cat freebsd-arm64.port 2>/dev/null || echo "0")
+    just _stop-vm freebsd-arm64.pid "$port"
+    rm -f freebsd-arm64.port
+
+# Boot NetBSD ARM64 VM (snapshot mode)
+[group('Advanced')]
+start-netbsd-arm64:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just _action "Starting NetBSD ARM64 VM"
+    PORT=$(just _free-port)
+    echo "$PORT" > netbsd-arm64.port
+    qemu-system-aarch64 \
+        -machine virt -accel hvf -cpu host \
+        -m 2G -smp 2 \
+        -drive file={{NETBSD_ARM64_IMG}},if=virtio,snapshot=on \
+        -bios /opt/homebrew/share/qemu/edk2-aarch64-code.fd \
+        -nic user,hostfwd=tcp::${PORT}-:22 \
+        -pidfile netbsd-arm64.pid \
+        -display none -daemonize
+    just _wait-for-ssh "$PORT"
+    just _banner "NetBSD ARM64 VM running on port $PORT"
+
+# Shut down NetBSD ARM64 VM
+[group('Advanced')]
+stop-netbsd-arm64:
+    #!/usr/bin/env bash
+    port=$(cat netbsd-arm64.port 2>/dev/null || echo "0")
+    just _stop-vm netbsd-arm64.pid "$port"
+    rm -f netbsd-arm64.port
+
+# Boot FreeBSD i386 VM (snapshot mode)
+[group('Advanced')]
+start-freebsd-i386:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just _action "Starting FreeBSD i386 VM"
+    PORT=$(just _free-port)
+    echo "$PORT" > freebsd-i386.port
+    qemu-system-x86_64 \
+        -machine q35 -cpu qemu64 \
+        -m 2G -smp 2 \
+        -drive file={{FREEBSD_I386_QCOW}},if=virtio,snapshot=on \
+        -nic user,hostfwd=tcp::${PORT}-:22 \
+        -pidfile freebsd-i386.pid \
+        -display none -daemonize
+    just _wait-for-ssh "$PORT"
+    just _banner "FreeBSD i386 VM running on port $PORT"
+
+# Shut down FreeBSD i386 VM
+[group('Advanced')]
+stop-freebsd-i386:
+    #!/usr/bin/env bash
+    port=$(cat freebsd-i386.port 2>/dev/null || echo "0")
+    just _stop-vm freebsd-i386.pid "$port"
+    rm -f freebsd-i386.port
+
+# Boot NetBSD i386 VM (snapshot mode)
+[group('Advanced')]
+start-netbsd-i386:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    just _action "Starting NetBSD i386 VM"
+    PORT=$(just _free-port)
+    echo "$PORT" > netbsd-i386.port
+    qemu-system-x86_64 \
+        -machine q35 -cpu qemu64 \
+        -m 2G -smp 2 \
+        -drive file={{NETBSD_I386_IMG}},if=virtio,snapshot=on \
+        -nic user,hostfwd=tcp::${PORT}-:22 \
+        -pidfile netbsd-i386.pid \
+        -display none -daemonize
+    just _wait-for-ssh "$PORT"
+    just _banner "NetBSD i386 VM running on port $PORT"
+
+# Shut down NetBSD i386 VM
+[group('Advanced')]
+stop-netbsd-i386:
+    #!/usr/bin/env bash
+    port=$(cat netbsd-i386.port 2>/dev/null || echo "0")
+    just _stop-vm netbsd-i386.pid "$port"
+    rm -f netbsd-i386.port
+
+# Execute command on a running VM via SSH
+[group('Advanced')]
+do port *ARGS:
+    #!/usr/bin/env bash
+    cat <<'JUSTEOF'
+    > {{ARGS}}
+    JUSTEOF
+    hex_string=$(xxd -p <<'JUSTEOF' | tr -d '\n'
+    {{ARGS}}
+    JUSTEOF
+    )
+    CMD="echo $hex_string | xxd -r -p > /tmp/qemu_cmd ; bash --login /tmp/qemu_cmd"
+    sshpass -p ci ssh ci@localhost -p {{port}} \
+        -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+        -o LogLevel=ERROR "($CMD) 2>&1"
+
+# Delete all images and logs
+[group('Advanced')]
+reset-everything:
+    rm -rf images/ logs/
+    rm -f *.pid *.port
+    @just _banner "All images and logs deleted"
+
+# ═══════════════════════════════════════════════════════════
+#  Support recipes (internal)
+# ═══════════════════════════════════════════════════════════
+
+_free-port:
+    @python3 -c 'import socket; s=socket.socket(); s.bind(("",0)); print(s.getsockname()[1]); s.close()'
+
+_rsync port:
+    #!/usr/bin/env bash
+    unset DISPLAY SSH_ASKPASS
+    rsync -azL --delete \
+        -e "sshpass -p ci ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p {{port}}" \
+        --exclude='build-*/' --exclude='build/' \
+        --exclude='.git/worktrees/' \
+        --exclude='tools/ci/images/' --exclude='tools/ci/logs/' \
+        --exclude='tools/build-framework/*.qcow2' \
+        --exclude='tools/build-framework/downloads/' \
+        --exclude='*.o' --exclude='*.snap' --exclude='*.snap64' \
+        "{{SELFREPO}}/" ci@localhost:/tmp/self-build/
+
+_wait-for-ssh port:
+    #!/usr/bin/env bash
+    for i in $(seq 1 60); do
+        if sshpass -p ci ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            -o ConnectTimeout=5 -o LogLevel=ERROR -p {{port}} ci@localhost "echo ready" 2>/dev/null; then
+            exit 0
+        fi
+        sleep 2
+    done
+    echo "ERROR: SSH not available on port {{port}} after 120 seconds"
+    exit 1
+
+_stop-vm pidfile port:
+    #!/usr/bin/env bash
+    sshpass -p ci ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+        -o LogLevel=ERROR -p {{port}} ci@localhost "sudo poweroff" 2>/dev/null || true
+    if [ -f {{pidfile}} ]; then
+        pid=$(cat {{pidfile}})
+        for i in $(seq 1 30); do
+            ps -p "$pid" > /dev/null 2>&1 || break
+            sleep 1
+        done
+        kill "$pid" 2>/dev/null || true
+        rm -f {{pidfile}}
+    fi
+
+_create-cloud-init-arm64:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    iso="images/cloud-init-arm64.iso"
+    [ -f "$iso" ] && exit 0
+    mkdir -p images
+    tmpdir=$(mktemp -d)
+    trap 'rm -rf "$tmpdir"' EXIT
+    cat > "$tmpdir/meta-data" <<'EOF'
+    instance-id: ci-vm-arm64
+    local-hostname: ci-vm-arm64
+    EOF
+    cat > "$tmpdir/user-data" <<'EOF'
+    #cloud-config
+    users:
+      - name: ci
+        plain_text_passwd: ci
+        lock_passwd: false
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+        ssh_authorized_keys: []
+
+    ssh_pwauth: true
+
+    package_update: true
+    packages:
+      - cmake
+      - g++
+      - libx11-dev
+      - libxext-dev
+      - libncurses-dev
+      - rsync
+
+    runcmd:
+      - systemctl enable ssh
+      - systemctl start ssh
+
+    power_state:
+      mode: poweroff
+      message: "Provisioning complete, shutting down"
+      condition: true
+    EOF
+    if command -v mkisofs &>/dev/null; then
+        mkisofs -output "$iso" -volid cidata -joliet -rock "$tmpdir/user-data" "$tmpdir/meta-data"
+    elif command -v hdiutil &>/dev/null; then
+        mkdir -p "$tmpdir/iso_root"
+        cp "$tmpdir/user-data" "$tmpdir/meta-data" "$tmpdir/iso_root/"
+        hdiutil makehybrid -iso -joliet -iso-volume-name cidata -o "$iso" "$tmpdir/iso_root/"
+        [ -f "${iso}.iso" ] && mv "${iso}.iso" "$iso"
+    else
+        echo "ERROR: Cannot create cloud-init ISO (no mkisofs or hdiutil)"
+        echo "Install cdrtools: brew install cdrtools"
+        exit 1
+    fi
+    echo "Created cloud-init ISO: $iso"
+
+_create-cloud-init-amd64:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    iso="images/cloud-init-amd64.iso"
+    [ -f "$iso" ] && exit 0
+    mkdir -p images
+    tmpdir=$(mktemp -d)
+    trap 'rm -rf "$tmpdir"' EXIT
+    cat > "$tmpdir/meta-data" <<'EOF'
+    instance-id: ci-vm-amd64
+    local-hostname: ci-vm-amd64
+    EOF
+    cat > "$tmpdir/user-data" <<'EOF'
+    #cloud-config
+    users:
+      - name: ci
+        plain_text_passwd: ci
+        lock_passwd: false
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+        ssh_authorized_keys: []
+
+    ssh_pwauth: true
+
+    package_update: true
+    packages:
+      - cmake
+      - g++
+      - libx11-dev
+      - libxext-dev
+      - libncurses-dev
+      - rsync
+
+    runcmd:
+      - systemctl enable ssh
+      - systemctl start ssh
+
+    power_state:
+      mode: poweroff
+      message: "Provisioning complete, shutting down"
+      condition: true
+    EOF
+    if command -v mkisofs &>/dev/null; then
+        mkisofs -output "$iso" -volid cidata -joliet -rock "$tmpdir/user-data" "$tmpdir/meta-data"
+    elif command -v hdiutil &>/dev/null; then
+        mkdir -p "$tmpdir/iso_root"
+        cp "$tmpdir/user-data" "$tmpdir/meta-data" "$tmpdir/iso_root/"
+        hdiutil makehybrid -iso -joliet -iso-volume-name cidata -o "$iso" "$tmpdir/iso_root/"
+        [ -f "${iso}.iso" ] && mv "${iso}.iso" "$iso"
+    else
+        echo "ERROR: Cannot create cloud-init ISO (no mkisofs or hdiutil)"
+        echo "Install cdrtools: brew install cdrtools"
+        exit 1
+    fi
+    echo "Created cloud-init ISO: $iso"
+
+_pass *ARGS:
+    @echo "$(tput setaf 2)$(tput bold)[$(date +%H:%M:%S)] PASS: {{ARGS}}$(tput sgr0)"
+
+_fail *ARGS:
+    @echo "$(tput setaf 1)$(tput bold)[$(date +%H:%M:%S)] FAIL: {{ARGS}}$(tput sgr0)"
+
+_banner *ARGS:
+    @echo "$(tput setaf 2)$(tput bold)[$(date +%H:%M:%S)] {{ARGS}}$(tput sgr0)"
+
+_action *ARGS:
+    @echo "$(tput setaf 208)$(tput bold)[$(date +%H:%M:%S)] {{ARGS}}$(tput sgr0)"
