@@ -288,7 +288,7 @@ _vm64-compile-ubuntu-amd64 port:
 _vm-compile-ubuntu-amd64 port:
     @just _action "Compiling vm (32-bit) on Ubuntu AMD64"
     @just _rsync {{port}}
-    @just do {{port}} 'cd /tmp/self-build && cmake -S vm -B build -DCMAKE_BUILD_TYPE=Release -DSELF_QUARTZ=OFF && cmake --build build -j$(nproc)'
+    @just do {{port}} 'cd /tmp/self-build && PKG_CONFIG_LIBDIR=/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig cmake -S vm -B build -DCMAKE_BUILD_TYPE=Release -DSELF_QUARTZ=OFF && cmake --build build -j$(nproc)'
     @just do {{port}} 'cd /tmp/self-build/objects && ../build/Self -f worldBuilder.self -o morphic -headless --runAutomaticTests --snapshotActionPostRead'
     @just _banner "Finished vm (32-bit) on Ubuntu AMD64"
 
@@ -758,6 +758,134 @@ reset-everything:
     rm -f *.pid *.port
     @just _banner "All images and logs deleted"
 
+# Diagnose provisioning hang — runs multilib provision with full console output
+[group('Advanced')]
+diagnose-provision-multilib:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    echo "=== Diagnostic provisioning of Ubuntu AMD64 multilib ==="
+    echo "All cloud-init output will be visible on the serial console."
+    echo ""
+
+    # Always start from a fresh image (cloud-init skips modules if it sees the same instance-id)
+    mkdir -p images
+    rm -f "{{UBUNTU_MULTILIB_QCOW}}"
+    just _action "Downloading fresh Ubuntu AMD64 cloud image"
+    curl -L -o "{{UBUNTU_MULTILIB_QCOW}}" "{{UBUNTU_AMD64_URL}}"
+    qemu-img resize "{{UBUNTU_MULTILIB_QCOW}}" 20G
+
+    # Create diagnostic cloud-init ISO with output redirected to serial console
+    just _action "Creating diagnostic cloud-init ISO"
+    tmpdir=$(mktemp -d)
+    trap 'rm -rf "$tmpdir"' EXIT
+    cat > "$tmpdir/meta-data" <<'EOF'
+    instance-id: ci-vm-amd64-multilib
+    local-hostname: ci-vm-amd64-multilib
+    EOF
+    cat > "$tmpdir/user-data" <<'EOF'
+    #cloud-config
+    output:
+      all: "| tee -a /dev/ttyS0"
+
+    users:
+      - name: ci
+        plain_text_passwd: ci
+        lock_passwd: false
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+
+    ssh_pwauth: true
+
+    bootcmd:
+      - dpkg --add-architecture i386
+
+    package_update: true
+    packages:
+      - cmake
+      - g++
+      - pkg-config
+      - rsync
+      - gcc-multilib
+      - g++-multilib
+
+    runcmd:
+      - echo "=== RUNCMD STARTING ==="
+      - apt-get install -y libx11-dev:i386 libxext-dev:i386 libncurses-dev:i386
+      - cloud-init schema --system || true
+      - systemctl enable ssh
+      - systemctl start ssh
+      - echo "=== RUNCMD COMPLETE ==="
+
+    power_state:
+      mode: poweroff
+      message: "Provisioning complete, shutting down"
+      condition: true
+    EOF
+    iso="images/cloud-init-amd64-multilib-diag.iso"
+    rm -f "$iso"
+    if command -v mkisofs &>/dev/null; then
+        mkisofs -output "$iso" -volid cidata -joliet -rock "$tmpdir/user-data" "$tmpdir/meta-data"
+    elif command -v hdiutil &>/dev/null; then
+        mkdir -p "$tmpdir/iso_root"
+        cp "$tmpdir/user-data" "$tmpdir/meta-data" "$tmpdir/iso_root/"
+        hdiutil makehybrid -iso -joliet -iso-volume-name cidata -o "$iso" "$tmpdir/iso_root/"
+        [ -f "${iso}.iso" ] && mv "${iso}.iso" "$iso"
+    else
+        echo "ERROR: Cannot create cloud-init ISO (no mkisofs or hdiutil)"
+        exit 1
+    fi
+
+    # Clear previous console log
+    rm -f /tmp/diag-qemu-console.log
+    touch /tmp/diag-qemu-console.log
+
+    # Launch QEMU in background
+    PORT=$(just _free-port)
+    just _action "Starting QEMU (port $PORT, console log: /tmp/diag-qemu-console.log)"
+    qemu-system-x86_64 \
+        -machine q35 -cpu qemu64 \
+        -m 4G -smp 2 \
+        -drive file={{UBUNTU_MULTILIB_QCOW}},if=virtio \
+        -drive file="$iso",if=virtio,media=cdrom \
+        -nic user,hostfwd=tcp::${PORT}-:22 \
+        -display none \
+        -monitor none \
+        -serial file:/tmp/diag-qemu-console.log &
+    QEMU_PID=$!
+    echo "QEMU PID: $QEMU_PID"
+    echo ""
+
+    # Tail the console log so the user sees everything in real time
+    tail -f /tmp/diag-qemu-console.log &
+    TAIL_PID=$!
+
+    # Wait up to 10 minutes for QEMU to exit
+    just _action "Waiting for QEMU to exit (10 min timeout)"
+    EXITED=0
+    for i in $(seq 1 60); do
+        if ! ps -p "$QEMU_PID" > /dev/null 2>&1; then
+            EXITED=1
+            break
+        fi
+        sleep 10
+    done
+
+    kill "$TAIL_PID" 2>/dev/null || true
+    echo ""
+
+    if [ "$EXITED" -eq 1 ]; then
+        just _banner "QEMU exited — provisioning completed"
+    else
+        echo "=== TIMEOUT: QEMU did not exit after 10 minutes ==="
+        echo "Killing QEMU"
+        kill "$QEMU_PID" 2>/dev/null || true
+        wait "$QEMU_PID" 2>/dev/null || true
+        exit 1
+    fi
+
+    # Clean up diagnostic ISO
+    rm -f "$iso"
+
 # ═══════════════════════════════════════════════════════════
 #  Support recipes (internal)
 # ═══════════════════════════════════════════════════════════
@@ -894,6 +1022,66 @@ _create-cloud-init-amd64:
       - rsync
 
     runcmd:
+      - systemctl enable ssh
+      - systemctl start ssh
+
+    power_state:
+      mode: poweroff
+      message: "Provisioning complete, shutting down"
+      condition: true
+    EOF
+    if command -v mkisofs &>/dev/null; then
+        mkisofs -output "$iso" -volid cidata -joliet -rock "$tmpdir/user-data" "$tmpdir/meta-data"
+    elif command -v hdiutil &>/dev/null; then
+        mkdir -p "$tmpdir/iso_root"
+        cp "$tmpdir/user-data" "$tmpdir/meta-data" "$tmpdir/iso_root/"
+        hdiutil makehybrid -iso -joliet -iso-volume-name cidata -o "$iso" "$tmpdir/iso_root/"
+        [ -f "${iso}.iso" ] && mv "${iso}.iso" "$iso"
+    else
+        echo "ERROR: Cannot create cloud-init ISO (no mkisofs or hdiutil)"
+        echo "Install cdrtools: brew install cdrtools"
+        exit 1
+    fi
+    echo "Created cloud-init ISO: $iso"
+
+_create-cloud-init-amd64-multilib:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    iso="images/cloud-init-amd64-multilib.iso"
+    [ -f "$iso" ] && exit 0
+    mkdir -p images
+    tmpdir=$(mktemp -d)
+    trap 'rm -rf "$tmpdir"' EXIT
+    cat > "$tmpdir/meta-data" <<'EOF'
+    instance-id: ci-vm-amd64-multilib
+    local-hostname: ci-vm-amd64-multilib
+    EOF
+    cat > "$tmpdir/user-data" <<'EOF'
+    #cloud-config
+    users:
+      - name: ci
+        plain_text_passwd: ci
+        lock_passwd: false
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+        ssh_authorized_keys: []
+
+    ssh_pwauth: true
+
+    bootcmd:
+      - dpkg --add-architecture i386
+
+    package_update: true
+    packages:
+      - cmake
+      - g++
+      - pkg-config
+      - rsync
+      - gcc-multilib
+      - g++-multilib
+
+    runcmd:
+      - apt-get install -y libx11-dev:i386 libxext-dev:i386 libncurses-dev:i386
       - systemctl enable ssh
       - systemctl start ssh
 
