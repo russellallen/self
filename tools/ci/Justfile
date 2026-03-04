@@ -160,6 +160,8 @@ vm64-macos-native:
         (cd "{{SELFREPO}}/objects" && echo "saveAs: 'auto.snap64'. _Quit" | $SELFVM -f worldbuilder.self -o morphic)
         echo "_Quit" | $SELFVM -s "{{SELFREPO}}/objects/auto.snap64"
         echo "tests runSelfSuite. _Quit" | $SELFVM -s "{{SELFREPO}}/objects/auto.snap64"
+        mkdir -p "{{justfile_directory()}}/artifacts"
+        cp -R "$BUILD_DIR/Self.app" "{{justfile_directory()}}/artifacts/Self-vm64-macos-arm64.app"
     ) || result=$?
     if [ $result -eq 0 ]; then
         just _pass "vm64-macos-native"
@@ -177,6 +179,12 @@ vm64-ubuntu-arm64:
     PORT=$(cat ubuntu-arm64.port)
     result=0
     just _vm64-compile-ubuntu-arm64 "$PORT" || result=$?
+    if [ $result -eq 0 ]; then
+        mkdir -p artifacts
+        sshpass -p ci scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            -o LogLevel=ERROR -P "$PORT" \
+            ci@localhost:/tmp/self-build/build/Self "artifacts/Self-vm64-ubuntu-arm64"
+    fi
     just stop-ubuntu-arm64
     if [ $result -eq 0 ]; then
         just _pass "vm64-ubuntu-arm64"
@@ -194,6 +202,12 @@ vm64-ubuntu-amd64:
     PORT=$(cat ubuntu-amd64.port)
     result=0
     just _vm64-compile-ubuntu-amd64 "$PORT" || result=$?
+    if [ $result -eq 0 ]; then
+        mkdir -p artifacts
+        sshpass -p ci scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            -o LogLevel=ERROR -P "$PORT" \
+            ci@localhost:/tmp/self-build/build/Self "artifacts/Self-vm64-ubuntu-amd64"
+    fi
     just stop-ubuntu-amd64
     if [ $result -eq 0 ]; then
         just _pass "vm64-ubuntu-amd64"
@@ -215,6 +229,12 @@ vm32-ubuntu-amd64:
     PORT=$(cat ubuntu-amd64-multilib.port)
     result=0
     just _vm32-compile-ubuntu-amd64 "$PORT" || result=$?
+    if [ $result -eq 0 ]; then
+        mkdir -p artifacts
+        sshpass -p ci scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            -o LogLevel=ERROR -P "$PORT" \
+            ci@localhost:/tmp/self-build/build/Self "artifacts/Self-vm32-ubuntu-amd64"
+    fi
     just stop-ubuntu-amd64-multilib
     if [ $result -eq 0 ]; then
         just _pass "vm32-ubuntu-amd64"
@@ -232,6 +252,12 @@ vm32-freebsd-i386:
     PORT=$(cat freebsd-i386.port)
     result=0
     just _vm32-compile-freebsd-i386 "$PORT" || result=$?
+    if [ $result -eq 0 ]; then
+        mkdir -p artifacts
+        sshpass -p ci scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            -o LogLevel=ERROR -P "$PORT" \
+            ci@localhost:/tmp/self-build/build/Self "artifacts/Self-vm32-freebsd-i386"
+    fi
     just stop-freebsd-i386
     if [ $result -eq 0 ]; then
         just _pass "vm32-freebsd-i386"
@@ -249,6 +275,12 @@ vm32-netbsd-i386:
     PORT=$(cat netbsd-i386.port)
     result=0
     just _vm32-compile-netbsd-i386 "$PORT" || result=$?
+    if [ $result -eq 0 ]; then
+        mkdir -p artifacts
+        sshpass -p ci scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            -o LogLevel=ERROR -P "$PORT" \
+            ci@localhost:/tmp/self-build/build/Self "artifacts/Self-vm32-netbsd-i386"
+    fi
     just stop-netbsd-i386
     if [ $result -eq 0 ]; then
         just _pass "vm32-netbsd-i386"
@@ -900,7 +932,7 @@ _rsync port:
         -e "sshpass -p ci ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p {{port}}" \
         --exclude='build-*/' --exclude='build/' \
         --exclude='.git/worktrees/' \
-        --exclude='tools/ci/images/' --exclude='tools/ci/logs/' \
+        --exclude='tools/ci/images/' --exclude='tools/ci/logs/' --exclude='tools/ci/artifacts/' \
         --exclude='tools/build-framework/*.qcow2' \
         --exclude='tools/build-framework/downloads/' \
         --exclude='*.o' --exclude='*.snap' --exclude='*.snap64' \
