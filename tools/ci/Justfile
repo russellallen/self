@@ -1,11 +1,11 @@
-# Unified CI Justfile for Self VM — builds and tests both vm64 and vm (32-bit)
+# Unified CI Justfile for Self VM — builds and tests both vm64 and vm32
 #
 # Usage:
 #   just                        Show all recipes
-#   just fullrun-all            Run all platforms for both vm64 and vm
+#   just fullrun-all            Run all platforms for both vm64 and vm32
 #   just vm64-macos-native      Build and test vm64 natively on macOS
-#   just vm-freebsd-i386        Build and test vm (32-bit) on FreeBSD i386
-#   just setup-all              Download and provision all VM images
+#   just vm32-freebsd-i386        Build and test vm32 on FreeBSD i386
+#   just provision-all              Download and provision all VM images
 #
 # Requirements: qemu, sshpass, rsync, cmake, expect (for FreeBSD provisioning)
 
@@ -44,7 +44,7 @@ default:
 #  Full Runs
 # ═══════════════════════════════════════════════════════════
 
-# Run all active platforms for both vm64 and vm
+# Run all active platforms for both vm64 and vm32
 [group('Full Runs')]
 fullrun-all:
     #!/usr/bin/env bash
@@ -53,7 +53,7 @@ fullrun-all:
     START=$SECONDS
 
     just fullrun-vm64 && RESULTS+=("fullrun-vm64: PASS") || { RESULTS+=("fullrun-vm64: FAIL"); FAILS=$((FAILS + 1)); }
-    just fullrun-vm && RESULTS+=("fullrun-vm: PASS") || { RESULTS+=("fullrun-vm: FAIL"); FAILS=$((FAILS + 1)); }
+    just fullrun-vm32 && RESULTS+=("fullrun-vm32: PASS") || { RESULTS+=("fullrun-vm32: FAIL"); FAILS=$((FAILS + 1)); }
 
     ELAPSED=$((SECONDS - START))
     echo ""
@@ -107,16 +107,16 @@ fullrun-vm64:
         just _pass "All platforms passed"
     fi
 
-# Run all vm platforms
+# Run all vm32 platforms
 [group('Full Runs')]
-fullrun-vm:
+fullrun-vm32:
     #!/usr/bin/env bash
     RESULTS=()
     FAILS=0
     START=$SECONDS
 
-    just vm-ubuntu-amd64 && RESULTS+=("vm-ubuntu-amd64: PASS") || { RESULTS+=("vm-ubuntu-amd64: FAIL"); FAILS=$((FAILS + 1)); }
-    just vm-freebsd-i386 && RESULTS+=("vm-freebsd-i386: PASS") || { RESULTS+=("vm-freebsd-i386: FAIL"); FAILS=$((FAILS + 1)); }
+    just vm32-ubuntu-amd64 && RESULTS+=("vm32-ubuntu-amd64: PASS") || { RESULTS+=("vm32-ubuntu-amd64: FAIL"); FAILS=$((FAILS + 1)); }
+    just vm32-freebsd-i386 && RESULTS+=("vm32-freebsd-i386: PASS") || { RESULTS+=("vm32-freebsd-i386: FAIL"); FAILS=$((FAILS + 1)); }
 
     ELAPSED=$((SECONDS - START))
     echo ""
@@ -203,57 +203,57 @@ vm64-ubuntu-amd64:
     exit $result
 
 # ═══════════════════════════════════════════════════════════
-#  vm (32-bit) Build + Test
+#  vm32 Build + Test
 # ═══════════════════════════════════════════════════════════
 
-# Build and test vm (32-bit) on Ubuntu AMD64
-[group('vm')]
-vm-ubuntu-amd64:
+# Build and test vm32 on Ubuntu AMD64
+[group('vm32')]
+vm32-ubuntu-amd64:
     #!/usr/bin/env bash
     set -euo pipefail
     just start-ubuntu-amd64-multilib
     PORT=$(cat ubuntu-amd64-multilib.port)
     result=0
-    just _vm-compile-ubuntu-amd64 "$PORT" || result=$?
+    just _vm32-compile-ubuntu-amd64 "$PORT" || result=$?
     just stop-ubuntu-amd64-multilib
     if [ $result -eq 0 ]; then
-        just _pass "vm-ubuntu-amd64"
+        just _pass "vm32-ubuntu-amd64"
     else
-        just _fail "vm-ubuntu-amd64"
+        just _fail "vm32-ubuntu-amd64"
     fi
     exit $result
 
-# Build and test vm (32-bit) on FreeBSD i386
-[group('vm')]
-vm-freebsd-i386:
+# Build and test vm32 on FreeBSD i386
+[group('vm32')]
+vm32-freebsd-i386:
     #!/usr/bin/env bash
     set -euo pipefail
     just start-freebsd-i386
     PORT=$(cat freebsd-i386.port)
     result=0
-    just _vm-compile-freebsd-i386 "$PORT" || result=$?
+    just _vm32-compile-freebsd-i386 "$PORT" || result=$?
     just stop-freebsd-i386
     if [ $result -eq 0 ]; then
-        just _pass "vm-freebsd-i386"
+        just _pass "vm32-freebsd-i386"
     else
-        just _fail "vm-freebsd-i386"
+        just _fail "vm32-freebsd-i386"
     fi
     exit $result
 
-# Build and test vm (32-bit) on NetBSD i386
-[group('vm')]
-vm-netbsd-i386:
+# Build and test vm32 on NetBSD i386
+[group('vm32')]
+vm32-netbsd-i386:
     #!/usr/bin/env bash
     set -euo pipefail
     just start-netbsd-i386
     PORT=$(cat netbsd-i386.port)
     result=0
-    just _vm-compile-netbsd-i386 "$PORT" || result=$?
+    just _vm32-compile-netbsd-i386 "$PORT" || result=$?
     just stop-netbsd-i386
     if [ $result -eq 0 ]; then
-        just _pass "vm-netbsd-i386"
+        just _pass "vm32-netbsd-i386"
     else
-        just _fail "vm-netbsd-i386"
+        just _fail "vm32-netbsd-i386"
     fi
     exit $result
 
@@ -282,42 +282,42 @@ _vm64-compile-ubuntu-amd64 port:
     @just _banner "Finished vm64 on Ubuntu AMD64"
 
 # ═══════════════════════════════════════════════════════════
-#  vm (32-bit) Compile (internal)
+#  vm32 Compile (internal)
 # ═══════════════════════════════════════════════════════════
 
-_vm-compile-ubuntu-amd64 port:
-    @just _action "Compiling vm (32-bit) on Ubuntu AMD64"
+_vm32-compile-ubuntu-amd64 port:
+    @just _action "Compiling vm32 on Ubuntu AMD64"
     @just _rsync {{port}}
     @just do {{port}} 'cd /tmp/self-build && PKG_CONFIG_LIBDIR=/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig cmake -S vm -B build -DCMAKE_BUILD_TYPE=Release -DSELF_QUARTZ=OFF && cmake --build build -j$(nproc)'
     @just do {{port}} 'cd /tmp/self-build/objects && ../build/Self -f worldBuilder.self -o morphic -headless --runAutomaticTests --snapshotActionPostRead'
-    @just _banner "Finished vm (32-bit) on Ubuntu AMD64"
+    @just _banner "Finished vm32 on Ubuntu AMD64"
 
-_vm-compile-freebsd-i386 port:
-    @just _action "Compiling vm (32-bit) on FreeBSD i386"
+_vm32-compile-freebsd-i386 port:
+    @just _action "Compiling vm32 on FreeBSD i386"
     @just _rsync {{port}}
     @just do {{port}} 'cd /tmp/self-build && CC=gcc13 CXX=g++13 cmake -S vm -B build -DCMAKE_BUILD_TYPE=Release -DSELF_QUARTZ=OFF && cmake --build build -j$(sysctl -n hw.ncpu)'
     @just do {{port}} 'cd /tmp/self-build/objects && ../build/Self -f worldBuilder.self -o morphic -headless --runAutomaticTests --snapshotActionPostRead'
-    @just _banner "Finished vm (32-bit) on FreeBSD i386"
+    @just _banner "Finished vm32 on FreeBSD i386"
 
-_vm-compile-netbsd-i386 port:
-    @just _action "Compiling vm (32-bit) on NetBSD i386"
+_vm32-compile-netbsd-i386 port:
+    @just _action "Compiling vm32 on NetBSD i386"
     @just _rsync {{port}}
     @just do {{port}} 'cd /tmp/self-build && cmake -S vm -B build -DCMAKE_BUILD_TYPE=Release -DSELF_QUARTZ=OFF && cmake --build build -j$(sysctl -n hw.ncpu)'
     @just do {{port}} 'cd /tmp/self-build/objects && ../build/Self -f worldBuilder.self -o morphic -headless --runAutomaticTests --snapshotActionPostRead'
-    @just _banner "Finished vm (32-bit) on NetBSD i386"
+    @just _banner "Finished vm32 on NetBSD i386"
 
 # ═══════════════════════════════════════════════════════════
-#  Setup — Download and provision VM images
+#  Provision — Download and provision VM images
 # ═══════════════════════════════════════════════════════════
 
 # Download and provision all VM images
-[group('Setup')]
-setup-all: setup-ubuntu-arm64 setup-ubuntu-amd64 setup-ubuntu-amd64-multilib setup-freebsd-arm64 setup-freebsd-i386 setup-netbsd-arm64
+[group('Provision')]
+provision-all: provision-ubuntu-arm64 provision-ubuntu-amd64 provision-ubuntu-amd64-multilib provision-freebsd-arm64 provision-freebsd-i386 provision-netbsd-arm64
     @just _banner "All images ready"
 
 # Download and provision Ubuntu ARM64
-[group('Setup')]
-setup-ubuntu-arm64:
+[group('Provision')]
+provision-ubuntu-arm64:
     #!/usr/bin/env bash
     set -euo pipefail
     mkdir -p images
@@ -342,8 +342,8 @@ setup-ubuntu-arm64:
     just _banner "Ubuntu ARM64 image ready"
 
 # Download and provision Ubuntu AMD64 (vm64 only)
-[group('Setup')]
-setup-ubuntu-amd64:
+[group('Provision')]
+provision-ubuntu-amd64:
     #!/usr/bin/env bash
     set -euo pipefail
     mkdir -p images
@@ -367,8 +367,8 @@ setup-ubuntu-amd64:
     just _banner "Ubuntu AMD64 image ready"
 
 # Download and provision Ubuntu AMD64 multilib (vm 32-bit builds)
-[group('Setup')]
-setup-ubuntu-amd64-multilib:
+[group('Provision')]
+provision-ubuntu-amd64-multilib:
     #!/usr/bin/env bash
     set -euo pipefail
     mkdir -p images
@@ -392,8 +392,8 @@ setup-ubuntu-amd64-multilib:
     just _banner "Ubuntu AMD64 multilib image ready"
 
 # Download and provision FreeBSD ARM64
-[group('Setup')]
-setup-freebsd-arm64:
+[group('Provision')]
+provision-freebsd-arm64:
     #!/usr/bin/env bash
     set -euo pipefail
     mkdir -p images
@@ -412,8 +412,8 @@ setup-freebsd-arm64:
     just _banner "FreeBSD ARM64 image ready"
 
 # Download and provision FreeBSD i386
-[group('Setup')]
-setup-freebsd-i386:
+[group('Provision')]
+provision-freebsd-i386:
     #!/usr/bin/env bash
     set -euo pipefail
     mkdir -p images
@@ -432,8 +432,8 @@ setup-freebsd-i386:
     just _banner "FreeBSD i386 image ready"
 
 # Download and provision NetBSD ARM64
-[group('Setup')]
-setup-netbsd-arm64:
+[group('Provision')]
+provision-netbsd-arm64:
     #!/usr/bin/env bash
     set -euo pipefail
     mkdir -p images
@@ -462,8 +462,8 @@ setup-netbsd-arm64:
     just _banner "NetBSD ARM64 image ready"
 
 # Download NetBSD i386 installer (manual provisioning required)
-[group('Setup')]
-setup-netbsd-i386:
+[group('Provision')]
+provision-netbsd-i386:
     #!/usr/bin/env bash
     set -euo pipefail
     mkdir -p images
