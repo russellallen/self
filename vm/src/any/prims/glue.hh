@@ -261,6 +261,7 @@ extern const char *TS_func;    /* Type seal for functions (from dynLink).       
    CC_mber_0(oop,,  any_oop,,     print_option_primitives_prim,print_option_primitives_prim_glue,                                                      ) \
    CC_mber_0(oop,,  any_oop,,     print_changed_option_primitives_prim,print_changed_option_primitives_prim_glue,                                                      ) \
    CC_mber_0(oop,,  any_oop,,     quit_prim,              quit_prim_glue,                                                                              ) \
+   CC_mber_1(oop,,  any_oop,,     quit_with_exit_code_prim, quit_with_exit_code_prim_glue,,  smi,                                                     ) \
    CC_mber_0(oop,,  any_oop,,     tenure_prim,            tenure_prim_glue,                                                                            ) \
    CC_mber_0(oop,,  any_oop,,     verify_prim,            verify_prim_glue,                                                                            ) \
     C_func_5(oop,,  full_write_snapshot_prim, full_write_snapshot_prim_glue, fail,     any_oop,,   oop,byteVector,  oop,slots,  oop,slots, bool,      ) \

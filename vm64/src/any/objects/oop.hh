@@ -236,7 +236,8 @@ class oopClass {
   oop print_changed_option_primitives_prim();
   
   oop quit_prim();
-  
+  oop quit_with_exit_code_prim(smi code);
+
 };
 
 oop bad_prim(oop rcvr);

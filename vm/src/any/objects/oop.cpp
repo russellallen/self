@@ -216,7 +216,7 @@ oop oopClass::credits_prim() {
   lprintf("\nThe first version of the Self language was designed in 1986 by\n");
   lprintf("David Ungar and Randall B. Smith at Xerox PARC. \n");
   lprintf("\nA series of Self implementations and a graphical programming environment\n"); 
-  lprintf("were built at Stanford University by Craig Chambers, Urs Hšlzle, \n");
+  lprintf("were built at Stanford University by Craig Chambers, Urs Hï¿½lzle, \n");
   lprintf("Ole Agesen, Elgin Lee, Bay-Wei Chang, and David Ungar. \n");
   lprintf("\nThe project continued at Sun Microsystems Laboratories, where it benefited \n");
   lprintf("from the efforts of Randall B. Smith, Mario Wolczko, John Maloney, and \n");
@@ -275,6 +275,11 @@ oop oopClass::quit_prim() {
     lprintf("Writing profile statistics...\n");
 # endif
   OS::terminate(0);
+  return NULL;
+}
+
+oop oopClass::quit_with_exit_code_prim(smi code) {
+  OS::terminate(code);
   return NULL;
 }
 

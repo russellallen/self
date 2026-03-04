@@ -278,6 +278,11 @@ oop oopClass::quit_prim() {
   return NULL;
 }
 
+oop oopClass::quit_with_exit_code_prim(smi code) {
+  OS::terminate(code);
+  return NULL;
+}
+
 oop bad_prim(oop rcvr) {
   Unused(rcvr);
   return ErrorCodes::vmString_prim_error(PRIMITIVENOTDEFINEDERROR);

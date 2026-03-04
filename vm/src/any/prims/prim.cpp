@@ -2033,6 +2033,12 @@ fntype(&call_and_convert5_glue),
  "VM prompt).  The state of the world is not saved."
 },
 {
+"QuitWithExitCode:", fntype(&quit_with_exit_code_prim_glue),
+ ExternalPrimitive, NoReturnPrimType,
+ SAFE_SIDEEFFECTS,
+ "Quit the system with the given exit code."
+},
+{
 "RecompileLimits", fntype(&get_recompile_limits_prim_glue),
  ExternalPrimitive, ObjVectorPrimType,
  NOSIDEEFFECTS,
