@@ -52,6 +52,7 @@ class WindowSet  /* AllStatic */ {
 #include <CoreGraphics/CoreGraphics.h>
 #include <CoreText/CoreText.h>
 #include <ImageIO/ImageIO.h>
+#include <IOSurface/IOSurface.h>
 
 // These system headers bring in <assert.h> which overrides Self's 2-arg assert macro.
 // Undo that, same as the x86_64/Carbon path does.
@@ -626,10 +627,10 @@ class QuartzWindow: public AbstractPlatformWindow {
 #endif
   CGContextRef myContext;
 #if defined(__aarch64__)
-  CGContextRef _bitmapContext;
-  void*        _bitmapData;
-  int          _bitmapWidth;
-  int          _bitmapHeight;
+  CGContextRef   _bitmapContext;
+  IOSurfaceRef   _ioSurface;
+  int            _bitmapWidth;
+  int            _bitmapHeight;
 #endif
 
 
@@ -670,6 +671,7 @@ class QuartzWindow: public AbstractPlatformWindow {
 #if defined(__aarch64__)
   GrafPtr   my_grafPtr() { return &_grafPtr; }
   CGContextRef bitmapContext() { return _bitmapContext; }
+  IOSurfaceRef ioSurface() { return _ioSurface; }
   void ensureBitmapContext();
   void destroyBitmapContext();
 #endif

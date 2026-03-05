@@ -14,6 +14,7 @@
 #import <AppKit/AppKit.h>
 #import <CoreText/CoreText.h>
 #import <QuartzCore/QuartzCore.h>
+#import <IOSurface/IOSurface.h>
 
 // Undef Cocoa/AppKit macros that conflict with Self
 #undef assert
@@ -308,12 +309,10 @@ static uint32 cocoaCharToMacCharCode(unichar ch) {
 
 - (void)updateLayer {
     if (!_quartzWindow) return;
-    CGContextRef bitmapCtx = _quartzWindow->bitmapContext();
-    if (!bitmapCtx) return;
-    CGImageRef image = CGBitmapContextCreateImage(bitmapCtx);
-    if (!image) return;
-    self.layer.contents = (__bridge id)image;
-    CGImageRelease(image);
+    IOSurfaceRef surface = _quartzWindow->ioSurface();
+    if (!surface) return;
+    self.layer.contents = (__bridge id)surface;
+    [self.layer setContentsChanged];
 }
 
 @end
@@ -401,20 +400,16 @@ static uint32 cocoaCharToMacCharCode(unichar ch) {
 // Bitmap blitting helper — bypasses drawRect for immediate display
 // ======================================================================
 
-static void blitBitmapToView(SelfContentView* view, CGContextRef bitmapCtx) {
-    if (!view || !bitmapCtx) return;
-    CGImageRef image = CGBitmapContextCreateImage(bitmapCtx);
-    if (!image) return;
-    // Directly set layer contents — bypasses the drawRect/display cycle
-    // which is unreliable for imperative drawing on modern macOS.
+static void blitIOSurfaceToView(SelfContentView* view, IOSurfaceRef surface) {
+    if (!view || !surface) return;
     CALayer* layer = [view layer];
     if (layer) {
         [CATransaction begin];
         [CATransaction setDisableActions:YES]; // no implicit animation
-        layer.contents = (__bridge id)image;
+        layer.contents = (__bridge id)surface;
+        [layer setContentsChanged];
         [CATransaction commit];
     }
-    CGImageRelease(image);
 }
 
 
@@ -427,6 +422,10 @@ static bool cocoa_initialized = false;
 static void ensure_cocoa_initialized() {
   if (cocoa_initialized) return;
   cocoa_initialized = true;
+
+# if COCOA_EXP
+  return;  // NSApplicationMain has already initialized Cocoa
+# endif
 
   @autoreleasepool {
     [NSApplication sharedApplication];
@@ -449,7 +448,7 @@ QuartzWindow::QuartzWindow() : AbstractPlatformWindow(), _evtQ() {
   _quartz_win = NULL;
   myContext = NULL;
   _bitmapContext = NULL;
-  _bitmapData = NULL;
+  _ioSurface = NULL;
   _bitmapWidth = 0;
   _bitmapHeight = 0;
   _default_ct_font = NULL;
@@ -464,9 +463,9 @@ void QuartzWindow::destroyBitmapContext() {
     CGContextRelease(_bitmapContext);
     _bitmapContext = NULL;
   }
-  if (_bitmapData) {
-    free(_bitmapData);
-    _bitmapData = NULL;
+  if (_ioSurface) {
+    CFRelease(_ioSurface);
+    _ioSurface = NULL;
   }
   _bitmapWidth = 0;
   _bitmapHeight = 0;
@@ -481,13 +480,27 @@ void QuartzWindow::ensureBitmapContext() {
   if (_bitmapContext && _bitmapWidth == w && _bitmapHeight == h)
     return;
   destroyBitmapContext();
-  size_t bytesPerRow = (size_t)w * 4;
-  _bitmapData = calloc((size_t)h, bytesPerRow);
-  if (!_bitmapData) fatal("could not allocate bitmap buffer");
+  size_t bytesPerRow = ((size_t)w * 4 + 15) & ~(size_t)15;  // align to 16 bytes
+
+  NSDictionary* props = @{
+    (id)kIOSurfaceWidth:            @(w),
+    (id)kIOSurfaceHeight:           @(h),
+    (id)kIOSurfaceBytesPerElement:  @4,
+    (id)kIOSurfaceBytesPerRow:      @(bytesPerRow),
+    (id)kIOSurfacePixelFormat:      @((uint32_t)'BGRA'),
+  };
+  _ioSurface = IOSurfaceCreate((__bridge CFDictionaryRef)props);
+  if (!_ioSurface) fatal("could not create IOSurface");
+
+  IOSurfaceLock(_ioSurface, 0, NULL);
+  void* baseAddr = IOSurfaceGetBaseAddress(_ioSurface);
+  memset(baseAddr, 0, bytesPerRow * (size_t)h);
   _bitmapContext = CGBitmapContextCreate(
-      _bitmapData, w, h, 8, bytesPerRow,
-      _color_space, kCGImageAlphaNoneSkipLast);
+      baseAddr, w, h, 8, bytesPerRow,
+      _color_space, kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipFirst);
   if (!_bitmapContext) fatal("could not create bitmap context");
+  IOSurfaceUnlock(_ioSurface, 0, NULL);
+
   _bitmapWidth = w;
   _bitmapHeight = h;
   // Clear to white so uncovered areas aren't black
@@ -888,7 +901,7 @@ bool QuartzWindow::pre_draw(bool incremental) {
 void QuartzWindow::post_draw(bool incremental) {
   @autoreleasepool {
     SelfContentView* view = (__bridge SelfContentView*)_ns_view;
-    blitBitmapToView(view, _bitmapContext);
+    blitIOSurfaceToView(view, _ioSurface);
   }
 }
 
@@ -1081,7 +1094,7 @@ void QuartzWindow::check_carbon_events() {
         QuartzWindow* qw = (QuartzWindow*)wr->quartzWindow;
         if (qw->bitmapContext()) {
           SelfContentView* v = (__bridge SelfContentView*)wr->nsView;
-          blitBitmapToView(v, qw->bitmapContext());
+          blitIOSurfaceToView(v, qw->ioSurface());
         }
       }
     }
@@ -1223,7 +1236,7 @@ void QDEndCGContext_wrap(OpaqueGrafPtr* port, CGContext* carg, void* FH) {
     QuartzWindow* qw = (QuartzWindow*)port->quartzWindow;
     @autoreleasepool {
         SelfContentView* view = (__bridge SelfContentView*)port->nsView;
-        blitBitmapToView(view, qw ? qw->bitmapContext() : NULL);
+        blitIOSurfaceToView(view, qw ? qw->ioSurface() : NULL);
     }
 }
 
