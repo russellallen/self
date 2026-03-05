@@ -40,6 +40,8 @@ set(SRC_any
   any/interpreter/abstract_interpreter_inline.hh
   any/interpreter/interpreter.cpp
   any/interpreter/interpreter.hh
+  any/interpreter/interpreterPICTable.cpp
+  any/interpreter/interpreterPICTable.hh
   any/interpreter/stacking_interpreter.cpp
   any/interpreter/stacking_interpreter.hh
   any/lookup/cacheStub.cpp

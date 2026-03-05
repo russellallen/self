@@ -6,6 +6,10 @@
 # pragma implementation "slotRef.hh"
 # include "_slotRef.cpp.incl"
 
+# if TARGET_IS_64BIT
+extern void invalidate_all_interpreter_pics();
+# endif
+
 void nonexistentSlotRef::print_short() {
   lprintf("nonexistentSlotRef 0x%lx", (unsigned long) this);
 }
@@ -49,6 +53,9 @@ oop realSlotRef::contents() {
 
 void realSlotRef::set_contents(oop x) {
   assert(desc->is_obj_slot(), "must be object slot to assign");
+# if TARGET_IS_64BIT
+  if (desc->is_parent()) invalidate_all_interpreter_pics();
+# endif
   holder->set_slot(desc, x);
 }
 

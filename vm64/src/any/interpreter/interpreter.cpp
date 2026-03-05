@@ -52,6 +52,14 @@ void interpreter_longjmp_for_NLR() {
 }
 # endif
 
+void invalidate_all_interpreter_pics() {
+# if TARGET_IS_64BIT
+  // Persistent PICs live in the heap table — invalidate them there.
+  if (interpreter_pic_table)
+    interpreter_pic_table->invalidate_all();
+# endif
+}
+
 inline frame* interpreter::block_scope_or_NLR_target() {
   if (_block_scope_or_NLR_target)
     return _block_scope_or_NLR_target;
@@ -138,6 +146,25 @@ inline interpreter::interpreter( oop rcv,
     minOffset = 0; // so range checks can fail properly
 
   _length_locals= mi.map()->length_obj_slots();
+
+  // Initialize PIC fields (attached to heap-allocated table in attach_pics())
+  _pics = NULL;
+  _num_pics = 0;
+  _pc_to_pic = NULL;
+}
+
+
+void interpreter::attach_pics() {
+# if TARGET_IS_64BIT
+  if (!interpreter_pic_table) return;
+  InterpreterPICData* pd = interpreter_pic_table->lookup_or_create(
+      method_object, mi.length_codes, mi.codes);
+  if (pd) {
+    _pics       = pd->pics;
+    _num_pics   = pd->num_pics;
+    _pc_to_pic  = pd->pc_to_pic;
+  }
+# endif
 }
 
 
@@ -183,6 +210,11 @@ oop interpret( oop rcv,
   interp.set_cloned_blocks( alloca(interp.length_cloned_blocks() * sizeof(oop)));
   interp.set_stack (        alloca(interp.length_stack()         * sizeof(oop)));
   interp.set_locals(        alloca(interp.length_locals()        * sizeof(oop)));
+
+  // Attach persistent heap-allocated PICs from the global table.
+  // PICs survive across invocations, so even non-looping methods benefit
+  // from warm caches on repeated calls.
+  interp.attach_pics();
 
   // Register this interpreter so frame-based lookup can find it.
   // On x86_64 without JIT, frame walking can't detect interpreted
@@ -469,9 +501,9 @@ void interpreter::send(LookupType type, oop delOrNameToSend, fint arg_count ) {
   assert_string(selToSend, "better be string");
 
   // NormalLookupType means rcvr is on stack
-  
+
   rcvToSend = type == NormalLookupType ? stack[sp - arg_count - 1] : self;
-  
+
   if (mi.instruction_set != TWENTIETH_CENTURY_PLUS_ARGUMENT_COUNT_INSTRUCTION_SET)
     arg_count = stringOop(selToSend)->arg_count(); // XXXX slow, fix w/ lookup cache
 
@@ -482,6 +514,32 @@ void interpreter::send(LookupType type, oop delOrNameToSend, fint arg_count ) {
 
   int32 resSP = sp - arg_count - (type == NormalLookupType);
 
+  // --- PIC check (normal non-primitive sends only) ---
+  if ( baseLookupType(type) == NormalBaseLookupType
+       && _pics
+       && !stringOop(selToSend)->is_prim_name() ) {
+    int pic_idx = _pc_to_pic[pc];
+    if (pic_idx >= 0) {
+      InterpreterPIC& pic = _pics[pic_idx];
+      mapOop rMap = rcvToSend->map()->enclosing_mapOop();
+      for (int i = 0; i < pic.count; i++) {
+        if (pic.entries[i].cachedMap == rMap) {
+          // PIC hit — bypass lookup, invoke cached method directly
+          oop res = ::interpret( rcvToSend,
+                                 selToSend,
+                                 delOrNameToSend,
+                                 pic.entries[i].cachedMethod,
+                                 pic.entries[i].cachedHolder,
+                                 &stack[sp - arg_count],
+                                 arg_count );
+          stack[resSP] = res;
+          sp = resSP + 1;
+          return;
+        }
+      }
+    }
+  }
+
   oop res;
   for (;;) {
 
@@ -489,7 +547,7 @@ void interpreter::send(LookupType type, oop delOrNameToSend, fint arg_count ) {
         stringOop(selToSend)->is_prim_name()
         ? send_prim()
         : lookup_and_send( type, methodHolder(), delOrNameToSend);
-    
+
 
     if (!is_return_patched())
       break;
@@ -635,6 +693,26 @@ oop interpreter::lookup_and_send( LookupType type,
     if (NLRSupport::have_NLR_through_C()) { // recursive lookup error
       return NLRSupport::NLR_result_from_C();
     }
+
+    // Fill PIC for normal sends that found a method.
+    // Exclude performs — their selector varies at runtime, so caching
+    // the result at this bytecode PC would be incorrect.
+    if ( baseLookupType(type) == NormalBaseLookupType
+         && !isPerformLookupType(type)
+         && _pics
+         && L.result() != NULL
+         && L.resultType() == methodResult ) {
+      int pic_idx = _pc_to_pic[pc];
+      if (pic_idx >= 0) {
+        InterpreterPIC& pic = _pics[pic_idx];
+        int slot = (pic.count < PIC_SIZE) ? pic.count++ : pic.next;
+        pic.entries[slot].cachedMap    = L.receiverMapOop();
+        pic.entries[slot].cachedMethod = L.result()->contents();
+        pic.entries[slot].cachedHolder = L.result()->methodHolder_or_map(rcvToSend);
+        pic.next = (slot + 1) % PIC_SIZE;
+      }
+    }
+
     return  L.evaluateResult(&stack[sp - arg_count], arg_count, NULL);
   }
   else {

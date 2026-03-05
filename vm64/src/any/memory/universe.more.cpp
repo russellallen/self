@@ -7,6 +7,10 @@
 
 # include "_universe.more.cpp.incl"
 
+# if TARGET_IS_64BIT
+  extern InterpreterPICTable* interpreter_pic_table;
+# endif
+
 bool GCInProgress = false;
 bool ScavengeInProgress = false;
 
@@ -119,6 +123,9 @@ oop universe::scavenge(oop p) {
     profilers->scavenge_contents();
     code->scavenge_contents();
     slotIterator_scavenge_contents();
+#   if TARGET_IS_64BIT
+    interpreter_pic_table->scavenge_contents();
+#   endif
     {FOR_EACH_OLD_SPACE(s) s->scavenge_recorded_stores();}
     while (old_gen->scavenge_promotions() || new_gen->scavenge_contents())
       ;
@@ -211,6 +218,9 @@ oop universe::garbage_collect(oop p) {
   processes->gc_mark_contents();
   VMStrings_gc_mark_contents();
   slotIterator_gc_mark_contents();
+# if TARGET_IS_64BIT
+  interpreter_pic_table->gc_mark_contents();
+# endif
 
   // mark reachable objects
   object_table->gc_mark_contents();
@@ -272,6 +282,9 @@ oop universe::garbage_collect(oop p) {
   processes->gc_unmark_contents();
   VMStrings_gc_unmark_contents();
   slotIterator_gc_unmark_contents();
+# if TARGET_IS_64BIT
+  interpreter_pic_table->gc_unmark_contents();
+# endif
   
   string_table->gc_unmark_contents();
 

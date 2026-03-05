@@ -8,6 +8,11 @@
 
 # include "_universe.cpp.incl"
 
+extern void invalidate_all_interpreter_pics();
+
+# if TARGET_IS_64BIT
+  extern InterpreterPICTable* interpreter_pic_table;
+# endif
 
 // increment VM_snapshot_version whenever old snapshots will break; reset
 // it to zero when changing the minor or major version
@@ -59,6 +64,9 @@ universe::universe() {
 
   map_table= new mapTable;
   string_table = new stringTable;
+# if TARGET_IS_64BIT
+  interpreter_pic_table = new InterpreterPICTable;
+# endif
   code= new zone(current_sizes.code_size,
                  current_sizes.pic_size,
                  current_sizes.deps_size,
@@ -327,6 +335,9 @@ void universe::switch_pointers(oop from, oop to) {
   string_table->switch_pointers(from, to);
   VMStrings_switch_pointers(from, to);
   slotIterator_switch_pointers(from, to);
+# if TARGET_IS_64BIT
+  interpreter_pic_table->switch_pointers(from, to);
+# endif
   APPLY_TO_VM_MAPS(MAP_SWITCH_POINTERS_TEMPLATE);
 }
 
@@ -1066,6 +1077,7 @@ void universe::increment_programming_timestamp() {
     programming_timestamp == smiOop_max
     ? smiOop_zero
     : programming_timestamp->increment();
+  invalidate_all_interpreter_pics();
 }
 
 

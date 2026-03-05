@@ -25,6 +25,24 @@ extern "C" {
 
 enum ReturnPatchReason { not_patched, patched_for_profiling, patched };
 
+
+static const int PIC_SIZE = 4;
+
+struct PICEntry {
+  mapOop  cachedMap;
+  oop     cachedMethod;
+  oop     cachedHolder;
+};
+
+struct InterpreterPIC {
+  PICEntry entries[PIC_SIZE];
+  int8_t   count;
+  int8_t   next;
+};
+
+extern void invalidate_all_interpreter_pics();
+
+
 class interpreter: public abstract_interpreter {
   friend class interpreted_vframe; // needs mi.literals, etc
   friend class InterpreterIterator;
@@ -80,6 +98,10 @@ class interpreter: public abstract_interpreter {
 
   static interpreter* find_interpreter_for_frame(frame* f);
 
+  InterpreterPIC* _pics;       // points into InterpreterPICTable (heap) or NULL
+  int32           _num_pics;
+  int8_t*         _pc_to_pic;  // points into InterpreterPICTable (heap) or NULL
+
 # if TARGET_IS_64BIT
   // On x86_64 interpreter-only builds, ContinueNLRFromC and c_entry_point()
   // don't work.  Use setjmp/longjmp for NLR unwinding instead.
@@ -120,7 +142,10 @@ class interpreter: public abstract_interpreter {
   PrimDesc* getPrimDesc() { return current_primDesc; } 
 
   void set_restartSend(bool b) {restartSend = b;}
-  
+
+  int32 num_pics() { return _num_pics; }
+  void  attach_pics();  // look up or create PICs in the persistent table
+
   void interpret_method();
   
   oop methodHolder() {
@@ -232,7 +257,7 @@ extern void InterpreterLookup_cont( simpleLookup *L, int32 arg_count);
     } \
     p =       &(interp)->rcvToSend;  template; \
     p = (oop*)&(interp)->selToSend;  template; \
-  } 
+  }
   
   
 // new style:

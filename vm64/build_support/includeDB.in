@@ -1169,6 +1169,7 @@ interpreter.cpp               byteCodes.hh
 interpreter.cpp               codeSlotsMap.hh
 interpreter.cpp               complexLookup.hh
 interpreter.cpp               interpreter.hh
+interpreter.cpp               interpreterPICTable.hh
 interpreter.cpp               interruptedCtx.hh
 interpreter.cpp               kinds.hh
 interpreter.cpp               label_inline.hh
@@ -1185,6 +1186,12 @@ interpreter.hh                objVectorOop.hh
 interpreter.hh                oopClosures.hh
 interpreter.hh                oop_inline.hh
 interpreter.hh                vframe.hh
+
+interpreterPICTable.cpp       interpreter.hh
+interpreterPICTable.cpp       interpreterPICTable.hh
+interpreterPICTable.cpp       byteCodes.hh
+
+interpreterPICTable.hh        interpreter.hh
 
 interruptedCtx.cpp            ${platform_kind}Prims.hh
 interruptedCtx.cpp            fields.hh
@@ -3118,6 +3125,7 @@ universe.cpp                  floatOop.hh
 universe.cpp                  generation.hh
 universe.cpp                  glueSupport.hh
 universe.cpp                  hprofiler.hh
+universe.cpp                  interpreterPICTable.hh
 universe.cpp                  interruptedCtx.hh
 universe.cpp                  label_inline.hh
 universe.cpp                  mapMap.hh
@@ -3176,6 +3184,7 @@ universe.more.cpp             floatMap.hh
 universe.more.cpp             generation_inline.hh
 universe.more.cpp             glueSupport.hh
 universe.more.cpp             hprofiler.hh
+universe.more.cpp             interpreterPICTable.hh
 universe.more.cpp             interruptedCtx.hh
 universe.more.cpp             label_inline.hh
 universe.more.cpp             mapMap.hh
