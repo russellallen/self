@@ -236,6 +236,35 @@ bool WindowSet::includes_window(WindowSet_WindowPtr w) {
     evt->release(); // put_event retains
 }
 
+// Map Cocoa Unicode character codes to classic Mac/Carbon character codes.
+// The Self world expects Carbon-style kEventParamKeyMacCharCodes values,
+// but [NSEvent characters] returns different Unicode values for special keys.
+static uint32 cocoaCharToMacCharCode(unichar ch) {
+    switch (ch) {
+        case NSBackspaceCharacter:                   return 0x08;
+        case NSDeleteCharacter:                      return 0x08;
+        case NSDeleteFunctionKey:                    return 0x7F;
+        case NSUpArrowFunctionKey:                   return 0x1E;
+        case NSDownArrowFunctionKey:                 return 0x1F;
+        case NSLeftArrowFunctionKey:                 return 0x1C;
+        case NSRightArrowFunctionKey:                return 0x1D;
+        case NSHomeFunctionKey:                      return 0x01;
+        case NSEndFunctionKey:                       return 0x04;
+        case NSPageUpFunctionKey:                    return 0x0B;
+        case NSPageDownFunctionKey:                  return 0x0C;
+        case NSClearLineFunctionKey:                 return 0x0C;
+        case NSF1FunctionKey:  case NSF2FunctionKey:
+        case NSF3FunctionKey:  case NSF4FunctionKey:
+        case NSF5FunctionKey:  case NSF6FunctionKey:
+        case NSF7FunctionKey:  case NSF8FunctionKey:
+        case NSF9FunctionKey:  case NSF10FunctionKey:
+        case NSF11FunctionKey: case NSF12FunctionKey:
+            return 0x10;
+        default:
+            return (uint32)ch;
+    }
+}
+
 - (void)handleKeyEvent:(NSEvent *)event kind:(uint32)kind {
     if (!_quartzWindow) return;
 
@@ -251,8 +280,8 @@ bool WindowSet::includes_window(WindowSet_WindowPtr w) {
     if (kind != kEventRawKeyModifiersChanged) {
         NSString* chars = [event characters];
         if ([chars length] > 0) {
-            evt->setParam_uint32(kEventParamKeyMacCharCodes, typeUInt32,
-                                 (uint32)[chars characterAtIndex:0]);
+            uint32 charCode = cocoaCharToMacCharCode([chars characterAtIndex:0]);
+            evt->setParam_uint32(kEventParamKeyMacCharCodes, typeUInt32, charCode);
         }
     }
 
