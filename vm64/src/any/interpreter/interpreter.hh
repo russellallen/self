@@ -38,6 +38,12 @@ struct InterpreterPIC {
   PICEntry entries[PIC_SIZE];
   int8_t   count;
   int8_t   next;
+  // Data send caching: per-entry result type and slot offset.
+  // Enables short-circuiting data/constant sends at PIC hit time
+  // without full lookup or interpret() call.
+  // Values: 0=methodResult, 1=constantResult, 2=dataResult, 3=assignmentResult
+  int8_t   resultType[PIC_SIZE];
+  int32    slotOffset[PIC_SIZE]; // obj_slot offset for data/assignment results
 };
 
 extern void invalidate_all_interpreter_pics();

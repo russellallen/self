@@ -151,10 +151,12 @@ void InterpreterPICTable::scavenge_contents() {
         for (int32 k = 0; k < pic.count; k++) {
           *(oop*)&pic.entries[k].cachedMap =
               oop(pic.entries[k].cachedMap)->scavenge();
-          pic.entries[k].cachedMethod =
-              pic.entries[k].cachedMethod->scavenge();
-          pic.entries[k].cachedHolder =
-              pic.entries[k].cachedHolder->scavenge();
+          if (pic.entries[k].cachedMethod)
+            pic.entries[k].cachedMethod =
+                pic.entries[k].cachedMethod->scavenge();
+          if (pic.entries[k].cachedHolder)
+            pic.entries[k].cachedHolder =
+                pic.entries[k].cachedHolder->scavenge();
         }
       }
     }
@@ -179,10 +181,12 @@ void InterpreterPICTable::gc_mark_contents() {
         for (int32 k = 0; k < pic.count; k++) {
           *(oop*)&pic.entries[k].cachedMap =
               oop(pic.entries[k].cachedMap)->gc_mark();
-          pic.entries[k].cachedMethod =
-              pic.entries[k].cachedMethod->gc_mark();
-          pic.entries[k].cachedHolder =
-              pic.entries[k].cachedHolder->gc_mark();
+          if (pic.entries[k].cachedMethod)
+            pic.entries[k].cachedMethod =
+                pic.entries[k].cachedMethod->gc_mark();
+          if (pic.entries[k].cachedHolder)
+            pic.entries[k].cachedHolder =
+                pic.entries[k].cachedHolder->gc_mark();
         }
       }
     }
@@ -207,10 +211,12 @@ void InterpreterPICTable::gc_unmark_contents() {
         for (int32 k = 0; k < pic.count; k++) {
           *(oop*)&pic.entries[k].cachedMap =
               oop(pic.entries[k].cachedMap)->gc_unmark();
-          pic.entries[k].cachedMethod =
-              pic.entries[k].cachedMethod->gc_unmark();
-          pic.entries[k].cachedHolder =
-              pic.entries[k].cachedHolder->gc_unmark();
+          if (pic.entries[k].cachedMethod)
+            pic.entries[k].cachedMethod =
+                pic.entries[k].cachedMethod->gc_unmark();
+          if (pic.entries[k].cachedHolder)
+            pic.entries[k].cachedHolder =
+                pic.entries[k].cachedHolder->gc_unmark();
         }
       }
     }
@@ -234,9 +240,9 @@ void InterpreterPICTable::switch_pointers(oop from, oop to) {
         for (int32 k = 0; k < pic.count; k++) {
           if (oop(pic.entries[k].cachedMap) == from)
             *(oop*)&pic.entries[k].cachedMap = to;
-          if (pic.entries[k].cachedMethod == from)
+          if (pic.entries[k].cachedMethod && pic.entries[k].cachedMethod == from)
             pic.entries[k].cachedMethod = to;
-          if (pic.entries[k].cachedHolder == from)
+          if (pic.entries[k].cachedHolder && pic.entries[k].cachedHolder == from)
             pic.entries[k].cachedHolder = to;
         }
       }

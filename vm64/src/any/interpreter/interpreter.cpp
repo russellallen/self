@@ -524,14 +524,38 @@ void interpreter::send(LookupType type, oop delOrNameToSend, fint arg_count ) {
       mapOop rMap = rcvToSend->map()->enclosing_mapOop();
       for (int i = 0; i < pic.count; i++) {
         if (pic.entries[i].cachedMap == rMap) {
-          // PIC hit — bypass lookup, invoke cached method directly
-          oop res = ::interpret( rcvToSend,
+          oop res;
+          switch (pic.resultType[i]) {
+            case constantResult:
+              // Constant (map slot without code): value cached in cachedMethod
+              res = pic.entries[i].cachedMethod;
+              break;
+            case dataResult: {
+              // Data slot read: read from holder at cached offset
+              oop holder = pic.entries[i].cachedHolder;
+              if (holder == NULL) holder = rcvToSend;
+              res = *oopsOop(holder)->oops(pic.slotOffset[i]);
+              break;
+            }
+            case assignmentResult: {
+              // Assignment: write arg to holder at cached offset, return receiver
+              oop holder = pic.entries[i].cachedHolder;
+              if (holder == NULL) holder = rcvToSend;
+              Memory->store(oopsOop(holder)->oops(pic.slotOffset[i]),
+                            stack[sp - arg_count]);
+              res = rcvToSend;
+              break;
+            }
+            default: // methodResult
+              res = ::interpret( rcvToSend,
                                  selToSend,
                                  delOrNameToSend,
                                  pic.entries[i].cachedMethod,
                                  pic.entries[i].cachedHolder,
                                  &stack[sp - arg_count],
                                  arg_count );
+              break;
+          }
           stack[resSP] = res;
           sp = resSP + 1;
           return;
@@ -694,21 +718,46 @@ oop interpreter::lookup_and_send( LookupType type,
       return NLRSupport::NLR_result_from_C();
     }
 
-    // Fill PIC for normal sends that found a method.
+    // Fill PIC for normal sends that found a result.
     // Exclude performs — their selector varies at runtime, so caching
     // the result at this bytecode PC would be incorrect.
     if ( baseLookupType(type) == NormalBaseLookupType
          && !isPerformLookupType(type)
          && _pics
-         && L.result() != NULL
-         && L.resultType() == methodResult ) {
+         && L.result() != NULL ) {
+      ResultType rt = L.resultType();
+      // Don't cache parent-slot assignments — they require PIC invalidation
+      // that only happens in realSlotRef::set_contents().
+      if (rt == assignmentResult && L.result()->is_real()
+          && L.result()->as_real()->desc->is_parent())
+        rt = (ResultType)-1; // sentinel: don't cache
       int pic_idx = _pc_to_pic[pc];
-      if (pic_idx >= 0) {
+      if (pic_idx >= 0 && rt >= 0) {
         InterpreterPIC& pic = _pics[pic_idx];
         int slot = (pic.count < PIC_SIZE) ? pic.count++ : pic.next;
-        pic.entries[slot].cachedMap    = L.receiverMapOop();
-        pic.entries[slot].cachedMethod = L.result()->contents();
-        pic.entries[slot].cachedHolder = L.result()->methodHolder_or_map(rcvToSend);
+        pic.entries[slot].cachedMap = L.receiverMapOop();
+        pic.resultType[slot] = (int8_t)rt;
+        switch (rt) {
+          case methodResult:
+            pic.entries[slot].cachedMethod = L.result()->contents();
+            pic.entries[slot].cachedHolder = L.result()->methodHolder_or_map(rcvToSend);
+            break;
+          case constantResult:
+            pic.entries[slot].cachedMethod = L.result()->contents();
+            pic.entries[slot].cachedHolder = NULL;
+            break;
+          case dataResult:
+          case assignmentResult: {
+            realSlotRef* rsr = L.result()->as_real();
+            lookupTarget* h = rsr->holder;
+            pic.entries[slot].cachedMethod = NULL;
+            pic.entries[slot].cachedHolder = h->is_receiver() ? NULL
+                : ((objectLookupTarget*)h)->obj;
+            pic.slotOffset[slot] = smiOop(rsr->desc->data)->value();
+            break;
+          }
+          default: break;
+        }
         pic.next = (slot + 1) % PIC_SIZE;
       }
     }
