@@ -97,6 +97,11 @@ bool WindowSet::includes_window(WindowSet_WindowPtr w) {
 - (void)scrollWheel:(NSEvent *)event {
     if (!_quartzWindow) return;
 
+    // Discard scroll events with no actual delta — these are gesture-phase
+    // bookkeeping events (began/ended/cancelled) that macOS sends during
+    // two-finger trackpad clicks, causing spurious redraws.
+    if ([event deltaX] == 0 && [event deltaY] == 0) return;
+
     OpaqueEventRef* evt = new OpaqueEventRef();
     evt->eventClass = kEventClassMouse;
     evt->eventKind = kEventMouseWheelMoved;
