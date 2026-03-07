@@ -72,6 +72,7 @@ oop objVectorOopClass::ov_at_put_prim(oop rcvr, oop indexOop, oop contents) {
 }
 
 oop objVectorOopClass::ov_clone_prim(smi size, oop filler, void *FH) {
+  if (size < 0) return ErrorCodes::vmString_prim_error(BADSIZEERROR);
   oop c= cloneSize(size, CANFAIL, filler);
   if (c == failedAllocationOop) {
     out_of_memory_failure(FH, map()->empty_object_size() + size);

@@ -2071,8 +2071,9 @@ oop get_compile_counts_prim(oop) {
 
 
 oop get_recompile_limits_prim(oop) {
-  objVectorOop res = Memory->objVectorObj->cloneSize(nstages - 1);
-  for (fint i = 0; i < nstages - 1; i++) {
+  fint nlimits = max(fint(0), nstages - 1);
+  objVectorOop res = Memory->objVectorObj->cloneSize(nlimits);
+  for (fint i = 0; i < nlimits; i++) {
     res->obj_at_put(i, as_smiOop(recompileLimits[i]), false);
   }
   return res;
