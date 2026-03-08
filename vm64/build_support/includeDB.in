@@ -500,6 +500,17 @@ codeTable.hh                  allocation.hh
 codeTable.hh                  key.hh
 codeTable.hh                  nmln.hh
 
+crashDiagnostics.cpp          crashDiagnostics.hh
+crashDiagnostics.cpp          glueDefs.hh
+crashDiagnostics.cpp          interruptedCtx.hh
+crashDiagnostics.cpp          os.hh
+crashDiagnostics.cpp          os_includes.hh
+crashDiagnostics.cpp          quartzWindow.hh
+crashDiagnostics.cpp          universe.hh
+crashDiagnostics.cpp          zone.hh
+
+crashDiagnostics.hh           types.hh
+
 complexLookup.cpp             abstract_interpreter_inline.hh
 complexLookup.cpp             codeTable.hh
 complexLookup.cpp             complexLookup.hh
@@ -2688,6 +2699,7 @@ sic_${platform_processor}.cpp                sic.hh
 sic_${platform_processor}.cpp                sicScope.hh
 
 sig.cpp                       ${platform_kind}Prims.hh
+sig.cpp                       crashDiagnostics.hh
 sig.cpp                       interruptedCtx.hh
 sig.cpp                       itimer.hh
 sig.cpp                       label_inline.hh

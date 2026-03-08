@@ -195,6 +195,8 @@ set(SRC_any
   any/objects/vframeMap.hh
   any/objects/vframeOop.cpp
   any/objects/vframeOop.hh
+  any/os/crashDiagnostics.cpp
+  any/os/crashDiagnostics.hh
   any/os/errorCodes.cpp
   any/os/errorCodes.hh
   any/os/itimer.cpp

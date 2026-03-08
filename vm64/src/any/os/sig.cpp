@@ -246,6 +246,7 @@ void SignalInterface::handle_OS_signal(int ossig, char* addr, int32 code) {
          (void*)code, (void*)(long unsigned)addr,
          (void*)(long unsigned)(InterruptedContext::the_interrupted_context->pc()));
 # endif
+  print_crash_diagnostics(ossig, addr, code);
   error_breakpoint();
   if (WizardAbortMode) {
     // for better VM debugging - see regs and stack undisturbed, but
