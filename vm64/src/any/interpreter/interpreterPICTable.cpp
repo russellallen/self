@@ -3,6 +3,7 @@
 
 # pragma implementation "interpreterPICTable.hh"
 # include "_interpreterPICTable.cpp.incl"
+# include <cstdint>
 
 
 # if TARGET_IS_64BIT
