@@ -6,6 +6,11 @@
 project(SelfDistribution)
 
 set(SELF_MACOSX_XCODEPROJECTNAME SelfDistribution)
-add_subdirectory(vm)
-add_subdirectory(vm64)
+option(BUILD_64BIT "Build 64-bit VM (vm64) instead of 32-bit VM (vm)" OFF)
+
+if(BUILD_64BIT)
+  add_subdirectory(vm64)
+else()
+  add_subdirectory(vm)
+endif()
 add_subdirectory(tools)
