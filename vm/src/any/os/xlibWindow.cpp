@@ -281,7 +281,7 @@ void XPlatformWindow::fill_rectangle(int x, int y, int w, int h) {
     XFillRectangle(_display, _xwindow, _gc, x, y, w, h);
 }
 
-void XPlatformWindow::set_color(int c)     { XSetForeground    (_display, _gc, c); }
+void XPlatformWindow::set_color(long int c) { XSetForeground    (_display, _gc, c); }
 void XPlatformWindow::set_thickness(int t) { XSetLineAttributes(_display, _gc, t, LineSolid, CapButt, JoinMiter); }
 void XPlatformWindow::set_xor()            { XSetFunction      (_display, _gc, GXxor);  }
 void XPlatformWindow::set_copy()           { XSetFunction      (_display, _gc, GXcopy); }

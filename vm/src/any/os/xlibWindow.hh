@@ -71,7 +71,7 @@ class XPlatformWindow: public AbstractPlatformWindow {
   void  fill_rectangle(int x, int y, int w, int h);
   void  clear_rectangle(int x, int y, int w, int h);
   
-  void  set_color(int c); // param is result of red()... below
+  void  set_color(long int c); // param is result of red()... below
   void  set_thickness(int t);
   void  set_xor();
   void  set_copy();
