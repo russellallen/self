@@ -106,7 +106,7 @@ class interpreter: public abstract_interpreter {
 
   InterpreterPIC* _pics;       // points into InterpreterPICTable (heap) or NULL
   int32           _num_pics;
-  int8_t*         _pc_to_pic;  // points into InterpreterPICTable (heap) or NULL
+  int16_t*        _pc_to_pic;  // points into InterpreterPICTable (heap) or NULL
 
 # if TARGET_IS_64BIT
   // On x86_64 interpreter-only builds, ContinueNLRFromC and c_entry_point()

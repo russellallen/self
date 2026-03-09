@@ -63,8 +63,12 @@ InterpreterPICData* InterpreterPICTable::lookup_or_create(
   d->num_pics = num_sends;
   d->map_len  = num_codes;
 
-  d->pc_to_pic = (int8_t*)malloc(num_codes);
-  memset(d->pc_to_pic, -1, num_codes);
+  d->pc_to_pic = (int16_t*)malloc(num_codes * sizeof(int16_t));
+  for (int32 i = 0; i < num_codes; i++)
+    d->pc_to_pic[i] = -1;
+
+  if (num_sends > INT16_MAX)
+    num_sends = INT16_MAX;  // cap to avoid int16_t overflow; excess sends won't be cached
 
   d->pics = (InterpreterPIC*)malloc(num_sends * sizeof(InterpreterPIC));
   memset(d->pics, 0, num_sends * sizeof(InterpreterPIC));
@@ -73,8 +77,11 @@ InterpreterPICData* InterpreterPICTable::lookup_or_create(
   int32 pic_idx = 0;
   for (int32 i = 0; i < num_codes; i++) {
     int op = getOp(codes[i]);
-    if (op == SEND_CODE || op == IMPLICIT_SEND_CODE)
-      d->pc_to_pic[i] = pic_idx++;
+    if (op == SEND_CODE || op == IMPLICIT_SEND_CODE) {
+      if (pic_idx < num_sends)
+        d->pc_to_pic[i] = (int16_t)pic_idx;
+      pic_idx++;
+    }
   }
 
   // Insert at head of bucket

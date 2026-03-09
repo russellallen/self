@@ -18,7 +18,7 @@ struct InterpreterPICData {
   int32             num_pics;   // number of send sites in method
   int32             map_len;    // length of pc_to_pic array
   InterpreterPIC*   pics;       // malloc'd array of PICs
-  int8_t*           pc_to_pic;  // malloc'd PC→PIC index map
+  int16_t*          pc_to_pic;  // malloc'd PC→PIC index map
   InterpreterPICData* next;     // chain link for hash collision
 };
 
