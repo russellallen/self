@@ -4,11 +4,11 @@
    See the LICENSE file for license information. */
 
 
-# if defined(MACOSX_VERSION) && (TARGET_OS_VERSION == MACOSX_VERSION)
-  typedef SelfX11Cursor Cursor;
-# endif
-
 # include "_glueDefs.cpp.incl"
+
+# ifdef XLIB
+  typedef SelfX11Cursor Cursor;  // x_includes.hh #undefs X11's Cursor to avoid Carbon clash
+# endif
 
 # define Status int // cause I had to undef it earlier
 
