@@ -243,7 +243,7 @@ class QuartzWindow: public AbstractPlatformWindow {
   void  fill_rectangle(int x, int y, int w, int h);
   void  clear_rectangle(int x, int y, int w, int h);
 
-  virtual void  set_color(int c); // param is result of red()... below
+  virtual void  set_color(long int c); // param is result of red()... below
   virtual void  set_thickness(int t);
   virtual void  set_xor();
   virtual void  set_copy();

@@ -70,7 +70,7 @@ class AbstractPlatformWindow: public CHeapObj {
   void  clear_square(int x, int y, int s) { clear_rectangle      (x, y, s, s); }
   void   draw_square(int x, int y, int s) {  draw_rectangle_black(x, y, s, s); }
 
-  virtual void  set_color(int c) = 0; // param is result of red()... below
+  virtual void  set_color(long int c) = 0; // param is result of red()... below
   virtual void  set_thickness(int t) = 0;
   virtual void  set_xor() = 0;
   virtual void  set_copy() = 0;

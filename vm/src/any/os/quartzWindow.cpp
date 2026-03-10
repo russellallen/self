@@ -490,7 +490,7 @@ void QuartzWindow::fill_rectangle(int x, int y, int w, int h) {
   CGContextFillRect(myContext, CGRectMake(x, y-1, w, h+1));
 }
 
-void QuartzWindow::set_color(int c) { 
+void QuartzWindow::set_color(long int c) {
   CGContextSetFillColorWithColor(   myContext, (CGColorRef)c );
   CGContextSetStrokeColorWithColor( myContext, (CGColorRef)c );
 }
