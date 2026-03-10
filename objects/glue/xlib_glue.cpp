@@ -7,6 +7,7 @@
 # include "_glueDefs.cpp.incl"
 
 # ifdef XLIB
+# include "x_includes.hh"
   typedef SelfX11Cursor Cursor;  // x_includes.hh #undefs X11's Cursor to avoid Carbon clash
 # endif
 
