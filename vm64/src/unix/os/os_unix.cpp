@@ -66,25 +66,26 @@
                                   smi size, smi align, const char* name,
                                   bool mustAllocate) {
     if ( desiredAddress != NULL) {
-      // Use mmap WITHOUT MAP_FIXED to avoid silently destroying existing
-      // system mappings (e.g. libc data structures).  The hint address
-      // will be honored if the region is free.
-      // Map exactly `size` bytes (no extra align padding) since the
-      // desiredAddress is already aligned; extra padding would overlap
-      // with the next contiguous allocation.
+      // Use MAP_FIXED to guarantee allocation at the desired address.
+      // On ARM64 macOS the kernel ignores mmap hints at high addresses
+      // (32+ GB), making hint-based allocation unreliable for heap
+      // expansion.  MAP_FIXED is safe here because the VM's address
+      // layout places heap at 32 GB and code zones at 64 GB, well
+      // above system libraries.  The Linux path already uses MAP_FIXED.
       char* p = (char*)mmap(desiredAddress,
                             size,
                             PROT_READ|PROT_WRITE,
-                            MAP_PRIVATE|MAP_ANON,
+                            MAP_PRIVATE|MAP_ANON|MAP_FIXED,
                             -1, 0);
       if (p == desiredAddress)
         return desiredAddress;
-      // Kernel chose a different address — the hint region was occupied.
-      if (p != MAP_FAILED)
-        munmap(p, size);
+      // MAP_FIXED failed — non-contiguous addresses will be rejected
+      // by the caller anyway, so don't fall through to posix_memalign.
+      if (mustAllocate) allocate_failed(name);
+      return NULL;
     }
 
-    // Fallback: allocate at a system-chosen aligned address
+    // No desired address — system-chosen aligned allocation
     char *b = NULL;
     posix_memalign((void **)&b, align, size);
     if (b == NULL && mustAllocate)  allocate_failed(name);
