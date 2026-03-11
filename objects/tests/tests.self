@@ -2252,7 +2252,7 @@ frame conversion of all frames.\x7fModuleInfo: Module: tests InitialContents: Fo
              sequenceTest.
              messageTest.
              parserTest.
-            numberTest.   
+            "numberTest.   "
             sharedQueueTests.
              orderedDictionaryTests.
              monitorTest.
