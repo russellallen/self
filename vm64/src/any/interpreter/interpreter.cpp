@@ -156,6 +156,7 @@ inline interpreter::interpreter( oop rcv,
 
 void interpreter::attach_pics() {
 # if TARGET_IS_64BIT
+  if (!PIC) return;
   if (!interpreter_pic_table) return;
   InterpreterPICData* pd = interpreter_pic_table->lookup_or_create(
       method_object, mi.length_codes, mi.codes);
@@ -546,15 +547,18 @@ void interpreter::send(LookupType type, oop delOrNameToSend, fint arg_count ) {
               res = rcvToSend;
               break;
             }
-            default: // methodResult
+            default: { // methodResult
+              oop holder = pic.entries[i].cachedHolder;
+              if (holder == NULL) holder = rcvToSend;
               res = ::interpret( rcvToSend,
                                  selToSend,
                                  delOrNameToSend,
                                  pic.entries[i].cachedMethod,
-                                 pic.entries[i].cachedHolder,
+                                 holder,
                                  &stack[sp - arg_count],
                                  arg_count );
               break;
+            }
           }
           stack[resSP] = res;
           sp = resSP + 1;
@@ -702,11 +706,16 @@ oop interpreter::lookup_and_send( LookupType type,
   // since we come here from perform, selToSend may not be a string!
    
   if (UseLocalAccessBytecodes && !hasParentLocalSlot) {
+    bool canCache = _pics && baseLookupType(type) == NormalBaseLookupType
+                    && !isPerformLookupType(type);
+    assignableDependencyList adepsList;
     simpleLookup L( type,
                     rcvToSend,
                     selToSend,
                     delOrNameToSend,
-                    mh );
+                    mh,
+                    NULL,                        // deps (not needed for interpreter)
+                    canCache ? &adepsList : NULL ); // track assignable parent dependencies only when cacheable
 
     // XXXXXX check code table, use compiled method, get compiler to call me
 
@@ -721,11 +730,13 @@ oop interpreter::lookup_and_send( LookupType type,
     // Fill PIC for normal sends that found a result.
     // Exclude performs — their selector varies at runtime, so caching
     // the result at this bytecode PC would be incorrect.
-    if ( baseLookupType(type) == NormalBaseLookupType
-         && !isPerformLookupType(type)
-         && _pics
-         && L.result() != NULL ) {
+    if ( canCache && L.result() != NULL ) {
       ResultType rt = L.resultType();
+      // Don't cache when lookup traversed assignable parent slots —
+      // different receivers with the same map may have different parents,
+      // making map-keyed caching incorrect.
+      if (adepsList.nonEmpty())
+        rt = (ResultType)-1;
       // Don't cache parent-slot assignments — they require PIC invalidation
       // that only happens in realSlotRef::set_contents().
       if (rt == assignmentResult && L.result()->is_real()
@@ -738,22 +749,24 @@ oop interpreter::lookup_and_send( LookupType type,
         pic.entries[slot].cachedMap = L.receiverMapOop();
         pic.resultType[slot] = (int8_t)rt;
         switch (rt) {
-          case methodResult:
+          case methodResult: {
+            oop resultMH = L.result()->methodHolder_or_map(rcvToSend);
             pic.entries[slot].cachedMethod = L.result()->contents();
-            pic.entries[slot].cachedHolder = L.result()->methodHolder_or_map(rcvToSend);
+            // NULL holder signals "use rcvToSend" on PIC hit
+            pic.entries[slot].cachedHolder = (resultMH == rcvToSend) ? NULL : resultMH;
             break;
+          }
           case constantResult:
             pic.entries[slot].cachedMethod = L.result()->contents();
             pic.entries[slot].cachedHolder = NULL;
             break;
           case dataResult:
           case assignmentResult: {
-            realSlotRef* rsr = L.result()->as_real();
-            lookupTarget* h = rsr->holder;
+            oop resultMH = L.result()->methodHolder_or_map(rcvToSend);
             pic.entries[slot].cachedMethod = NULL;
-            pic.entries[slot].cachedHolder = h->is_receiver() ? NULL
-                : ((objectLookupTarget*)h)->obj;
-            pic.slotOffset[slot] = smiOop(rsr->desc->data)->value();
+            // NULL holder signals "use rcvToSend" on PIC hit
+            pic.entries[slot].cachedHolder = (resultMH == rcvToSend) ? NULL : resultMH;
+            pic.slotOffset[slot] = smiOop(L.result()->as_real()->desc->data)->value();
             break;
           }
           default: break;

@@ -31,7 +31,7 @@ static const int PIC_SIZE = 4;
 struct PICEntry {
   mapOop  cachedMap;
   oop     cachedMethod;
-  oop     cachedHolder;
+  oop     cachedHolder;   // NULL means "use current receiver" on PIC hit
 };
 
 struct InterpreterPIC {
