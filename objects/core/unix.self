@@ -98,9 +98,8 @@ The mode should be one of the constants in accessModes.
 \x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
 
          access: fileName Mode: mode = ( |
-            fileNameStr |
-            fileNameStr: fileName copyNullTerminated.
-            fileNameStr _Access: mode IfFail: [|:e| ^e].
+            |
+            fileName _Access: mode IfFail: [|:e| ^e].
             '').
         } | )
 
@@ -336,9 +335,8 @@ Result is a vector of byte vectors (each byte vector is an IP address).
          'Category: file operations\x7fCategory: directories\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
 
          mkdir: path Mode: mode IfFail: errBlk = ( |
-            pathStr |
-            pathStr: path copyNullTerminated.
-            pathStr _Mkdir: mode IfFail: errBlk).
+            |
+            path _Mkdir: mode IfFail: errBlk).
         } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> () From: ( | {
@@ -3101,19 +3099,16 @@ Result is a vector of byte vectors (each byte vector is an IP address).
          'Category: file operations\x7fCategory: file naming\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
 
          rename: path1 To: path2 IfFail: failBlk = ( |
-            path1Str. path2Str |
-            path1Str: path1 copyNullTerminated.
-            path2Str: path2 copyNullTerminated.
-            path1Str _Rename: path2Str IfFail: failBlk).
+            |
+            path1 _Rename: path2 IfFail: failBlk).
         } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> () From: ( | {
          'Category: file operations\x7fCategory: directories\x7fModuleInfo: Module: unix InitialContents: FollowSlot\x7fVisibility: public'
 
          rmdir: path IfFail: errBlk = ( |
-            pathStr |
-            pathStr: path copyNullTerminated.
-            pathStr _RmdirIfFail: errBlk).
+            |
+            path _RmdirIfFail: errBlk).
         } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'unixGlobals' -> 'os' -> () From: ( | {
