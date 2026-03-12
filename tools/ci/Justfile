@@ -4,8 +4,8 @@
 #   just                        Show all recipes
 #   just fullrun-all            Run all platforms for both vm64 and vm32
 #   just vm64-macos-native      Build and test vm64 natively on macOS
-#   just vm32-freebsd-i386        Build and test vm32 on FreeBSD i386
-#   just provision-all              Download and provision all VM images
+#   just vm32-ubuntu-amd64      Build and test vm32 on Ubuntu amd64
+#   just provision-all          Download and provision all VM images
 #
 # Requirements: qemu, sshpass, rsync, cmake, expect (for FreeBSD provisioning)
 
@@ -17,22 +17,14 @@ NCPU := `sysctl -n hw.ncpu 2>/dev/null || echo 4`
 # vm64 platforms
 UBUNTU_ARM64_QCOW  := 'images/ubuntu-arm64.qcow2'
 UBUNTU_AMD64_QCOW  := 'images/ubuntu-amd64.qcow2'
-FREEBSD_ARM64_QCOW := 'images/freebsd-arm64.qcow2'
-NETBSD_ARM64_IMG   := 'images/netbsd-arm64.img'
 
 # vm platforms (32-bit multilib on AMD64)
 UBUNTU_MULTILIB_QCOW := 'images/ubuntu-amd64-multilib.qcow2'
-FREEBSD_I386_QCOW  := 'images/freebsd-i386.qcow2'
-NETBSD_I386_IMG    := 'images/netbsd-i386.img'
 
 # ─── Download URLs ────────────────────────────────────────
 
 UBUNTU_ARM64_URL   := 'https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-arm64.img'
 UBUNTU_AMD64_URL   := 'https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img'
-FREEBSD_ARM64_URL  := 'https://download.freebsd.org/releases/VM-IMAGES/14.3-RELEASE/aarch64/Latest/FreeBSD-14.3-RELEASE-arm64-aarch64.qcow2.xz'
-FREEBSD_I386_URL   := 'https://download.freebsd.org/releases/VM-IMAGES/14.3-RELEASE/i386/Latest/FreeBSD-14.3-RELEASE-i386.qcow2.xz'
-NETBSD_ARM64_URL   := 'https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.1/evbarm-aarch64/binary/gzimg/arm64.img.gz'
-NETBSD_I386_URL    := 'https://cdn.netbsd.org/pub/NetBSD/NetBSD-10.1/images/NetBSD-10.1-i386-install.img.gz'
 
 # ─── Default ──────────────────────────────────────────────
 
@@ -116,7 +108,6 @@ fullrun-vm32:
     START=$SECONDS
 
     just vm32-ubuntu-amd64 && RESULTS+=("vm32-ubuntu-amd64: PASS") || { RESULTS+=("vm32-ubuntu-amd64: FAIL"); FAILS=$((FAILS + 1)); }
-    just vm32-freebsd-i386 && RESULTS+=("vm32-freebsd-i386: PASS") || { RESULTS+=("vm32-freebsd-i386: FAIL"); FAILS=$((FAILS + 1)); }
 
     ELAPSED=$((SECONDS - START))
     echo ""
@@ -232,52 +223,6 @@ vm32-ubuntu-amd64:
     fi
     exit $result
 
-# Build and test vm32 on FreeBSD i386
-[group('vm32')]
-vm32-freebsd-i386:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    just start-freebsd-i386
-    PORT=$(cat freebsd-i386.port)
-    result=0
-    just _vm32-compile-freebsd-i386 "$PORT" || result=$?
-    if [ $result -eq 0 ]; then
-        mkdir -p artifacts
-        sshpass -p ci scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-            -o LogLevel=ERROR -P "$PORT" \
-            ci@localhost:/tmp/self-build/build/Self "artifacts/Self-vm32-freebsd-i386"
-    fi
-    just stop-freebsd-i386
-    if [ $result -eq 0 ]; then
-        just _pass "vm32-freebsd-i386"
-    else
-        just _fail "vm32-freebsd-i386"
-    fi
-    exit $result
-
-# Build and test vm32 on NetBSD i386
-[group('vm32')]
-vm32-netbsd-i386:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    just start-netbsd-i386
-    PORT=$(cat netbsd-i386.port)
-    result=0
-    just _vm32-compile-netbsd-i386 "$PORT" || result=$?
-    if [ $result -eq 0 ]; then
-        mkdir -p artifacts
-        sshpass -p ci scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-            -o LogLevel=ERROR -P "$PORT" \
-            ci@localhost:/tmp/self-build/build/Self "artifacts/Self-vm32-netbsd-i386"
-    fi
-    just stop-netbsd-i386
-    if [ $result -eq 0 ]; then
-        just _pass "vm32-netbsd-i386"
-    else
-        just _fail "vm32-netbsd-i386"
-    fi
-    exit $result
-
 # ═══════════════════════════════════════════════════════════
 #  vm64 Compile (internal)
 # ═══════════════════════════════════════════════════════════
@@ -328,27 +273,13 @@ _vm32-compile-ubuntu-amd64 port:
     @just do {{port}} 'cd /tmp/self-build && build/Self -s objects/auto.snap --runAutomaticTests --headless'
     @just _banner "Finished vm32 on Ubuntu AMD64"
 
-_vm32-compile-freebsd-i386 port:
-    @just _action "Compiling vm32 on FreeBSD i386"
-    @just _rsync {{port}}
-    @just do {{port}} 'cd /tmp/self-build && CC=gcc13 CXX=g++13 cmake -S vm -B build -DCMAKE_BUILD_TYPE=Release -DSELF_QUARTZ=OFF && cmake --build build -j$(sysctl -n hw.ncpu)'
-    @just do {{port}} 'cd /tmp/self-build/objects && ../build/Self -f worldBuilder.self -o morphic -headless --runAutomaticTests --snapshotActionPostRead'
-    @just _banner "Finished vm32 on FreeBSD i386"
-
-_vm32-compile-netbsd-i386 port:
-    @just _action "Compiling vm32 on NetBSD i386"
-    @just _rsync {{port}}
-    @just do {{port}} 'cd /tmp/self-build && cmake -S vm -B build -DCMAKE_BUILD_TYPE=Release -DSELF_QUARTZ=OFF && cmake --build build -j$(sysctl -n hw.ncpu)'
-    @just do {{port}} 'cd /tmp/self-build/objects && ../build/Self -f worldBuilder.self -o morphic -headless --runAutomaticTests --snapshotActionPostRead'
-    @just _banner "Finished vm32 on NetBSD i386"
-
 # ═══════════════════════════════════════════════════════════
 #  Provision — Download and provision VM images
 # ═══════════════════════════════════════════════════════════
 
 # Download and provision all VM images
 [group('Provision')]
-provision-all: provision-ubuntu-arm64 provision-ubuntu-amd64 provision-ubuntu-amd64-multilib provision-freebsd-arm64 provision-freebsd-i386 provision-netbsd-arm64
+provision-all: provision-ubuntu-arm64 provision-ubuntu-amd64 provision-ubuntu-amd64-multilib
     @just _banner "All images ready"
 
 # Download and provision Ubuntu ARM64
@@ -426,102 +357,6 @@ provision-ubuntu-amd64-multilib:
         -nic user,hostfwd=tcp::${PORT}-:22 \
         -nographic
     just _banner "Ubuntu AMD64 multilib image ready"
-
-# Download and provision FreeBSD ARM64
-[group('Provision')]
-provision-freebsd-arm64:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    mkdir -p images
-    if [ ! -f "{{FREEBSD_ARM64_QCOW}}" ]; then
-        just _action "Downloading FreeBSD ARM64 image"
-        xz_file="images/FreeBSD-14.3-RELEASE-arm64-aarch64.qcow2.xz"
-        curl -L -o "$xz_file" "{{FREEBSD_ARM64_URL}}"
-        xz -d "$xz_file"
-        mv "images/FreeBSD-14.3-RELEASE-arm64-aarch64.qcow2" "{{FREEBSD_ARM64_QCOW}}"
-        qemu-img resize "{{FREEBSD_ARM64_QCOW}}" 20G
-    else
-        echo "Image already exists: {{FREEBSD_ARM64_QCOW}}"
-    fi
-    just _action "Provisioning FreeBSD ARM64 via expect script"
-    expect provision/freebsd-console.exp "{{FREEBSD_ARM64_QCOW}}"
-    just _banner "FreeBSD ARM64 image ready"
-
-# Download and provision FreeBSD i386
-[group('Provision')]
-provision-freebsd-i386:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    mkdir -p images
-    if [ ! -f "{{FREEBSD_I386_QCOW}}" ]; then
-        just _action "Downloading FreeBSD i386 image"
-        xz_file="images/FreeBSD-14.3-RELEASE-i386.qcow2.xz"
-        curl -L -o "$xz_file" "{{FREEBSD_I386_URL}}"
-        xz -d "$xz_file"
-        mv "images/FreeBSD-14.3-RELEASE-i386.qcow2" "{{FREEBSD_I386_QCOW}}"
-        qemu-img resize "{{FREEBSD_I386_QCOW}}" 20G
-    else
-        echo "Image already exists: {{FREEBSD_I386_QCOW}}"
-    fi
-    just _action "Provisioning FreeBSD i386 via expect script"
-    expect provision/freebsd-i386-console.exp "{{FREEBSD_I386_QCOW}}"
-    just _banner "FreeBSD i386 image ready"
-
-# Download and provision NetBSD ARM64
-[group('Provision')]
-provision-netbsd-arm64:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    mkdir -p images
-    if [ ! -f "{{NETBSD_ARM64_IMG}}" ]; then
-        just _action "Downloading NetBSD ARM64 image"
-        gz_file="images/netbsd-arm64.img.gz"
-        curl -L -o "$gz_file" "{{NETBSD_ARM64_URL}}"
-        gunzip "$gz_file"
-        qemu-img resize "{{NETBSD_ARM64_IMG}}" 8G
-    else
-        echo "Image already exists: {{NETBSD_ARM64_IMG}}"
-    fi
-    just _action "NetBSD ARM64 requires manual provisioning"
-    echo "Log in as root (no password), then run:"
-    echo "  useradd -m -G wheel ci"
-    echo "  echo 'ci' | passwd ci"
-    echo "  See provision/netbsd.sh for package install steps"
-    PORT=$(just _free-port)
-    qemu-system-aarch64 \
-        -machine virt -accel hvf -cpu host \
-        -m 2G -smp 2 \
-        -drive file={{NETBSD_ARM64_IMG}},if=virtio \
-        -bios /opt/homebrew/share/qemu/edk2-aarch64-code.fd \
-        -nic user,hostfwd=tcp::${PORT}-:22 \
-        -nographic
-    just _banner "NetBSD ARM64 image ready"
-
-# Download NetBSD i386 installer (manual provisioning required)
-[group('Provision')]
-provision-netbsd-i386:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    mkdir -p images
-    if [ ! -f "{{NETBSD_I386_IMG}}" ]; then
-        just _action "Downloading NetBSD i386 installer"
-        gz_file="images/NetBSD-10.1-i386-install.img.gz"
-        curl -L -o "$gz_file" "{{NETBSD_I386_URL}}"
-        gunzip "$gz_file"
-        mv "images/NetBSD-10.1-i386-install.img" "{{NETBSD_I386_IMG}}"
-    else
-        echo "Image already exists: {{NETBSD_I386_IMG}}"
-    fi
-    just _action "NetBSD i386 requires manual installation and provisioning"
-    echo "See provision/netbsd-i386.sh for package install steps (includes jemalloc)"
-    PORT=$(just _free-port)
-    qemu-system-x86_64 \
-        -machine q35 -cpu qemu64 \
-        -m 2G -smp 2 \
-        -drive file={{NETBSD_I386_IMG}},if=virtio \
-        -nic user,hostfwd=tcp::${PORT}-:22 \
-        -nographic
-    just _banner "NetBSD i386 image ready"
 
 # ═══════════════════════════════════════════════════════════
 #  Environment
@@ -665,112 +500,6 @@ stop-ubuntu-amd64-multilib:
     just _stop-vm ubuntu-amd64-multilib.pid "$port"
     rm -f ubuntu-amd64-multilib.port
 
-# Boot FreeBSD ARM64 VM (snapshot mode)
-[group('Advanced')]
-start-freebsd-arm64:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    just _action "Starting FreeBSD ARM64 VM"
-    PORT=$(just _free-port)
-    echo "$PORT" > freebsd-arm64.port
-    qemu-system-aarch64 \
-        -machine virt -accel hvf -cpu host \
-        -m 4G -smp 4 \
-        -drive file={{FREEBSD_ARM64_QCOW}},if=virtio,snapshot=on \
-        -bios /opt/homebrew/share/qemu/edk2-aarch64-code.fd \
-        -nic user,hostfwd=tcp::${PORT}-:22 \
-        -pidfile freebsd-arm64.pid \
-        -display none -daemonize
-    just _wait-for-ssh "$PORT"
-    just _banner "FreeBSD ARM64 VM running on port $PORT"
-
-# Shut down FreeBSD ARM64 VM
-[group('Advanced')]
-stop-freebsd-arm64:
-    #!/usr/bin/env bash
-    port=$(cat freebsd-arm64.port 2>/dev/null || echo "0")
-    just _stop-vm freebsd-arm64.pid "$port"
-    rm -f freebsd-arm64.port
-
-# Boot NetBSD ARM64 VM (snapshot mode)
-[group('Advanced')]
-start-netbsd-arm64:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    just _action "Starting NetBSD ARM64 VM"
-    PORT=$(just _free-port)
-    echo "$PORT" > netbsd-arm64.port
-    qemu-system-aarch64 \
-        -machine virt -accel hvf -cpu host \
-        -m 2G -smp 2 \
-        -drive file={{NETBSD_ARM64_IMG}},if=virtio,snapshot=on \
-        -bios /opt/homebrew/share/qemu/edk2-aarch64-code.fd \
-        -nic user,hostfwd=tcp::${PORT}-:22 \
-        -pidfile netbsd-arm64.pid \
-        -display none -daemonize
-    just _wait-for-ssh "$PORT"
-    just _banner "NetBSD ARM64 VM running on port $PORT"
-
-# Shut down NetBSD ARM64 VM
-[group('Advanced')]
-stop-netbsd-arm64:
-    #!/usr/bin/env bash
-    port=$(cat netbsd-arm64.port 2>/dev/null || echo "0")
-    just _stop-vm netbsd-arm64.pid "$port"
-    rm -f netbsd-arm64.port
-
-# Boot FreeBSD i386 VM (snapshot mode)
-[group('Advanced')]
-start-freebsd-i386:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    just _action "Starting FreeBSD i386 VM"
-    PORT=$(just _free-port)
-    echo "$PORT" > freebsd-i386.port
-    qemu-system-x86_64 \
-        -machine q35 -cpu qemu64 \
-        -m 2G -smp 2 \
-        -drive file={{FREEBSD_I386_QCOW}},if=virtio,snapshot=on \
-        -nic user,hostfwd=tcp::${PORT}-:22 \
-        -pidfile freebsd-i386.pid \
-        -display none -daemonize
-    just _wait-for-ssh "$PORT"
-    just _banner "FreeBSD i386 VM running on port $PORT"
-
-# Shut down FreeBSD i386 VM
-[group('Advanced')]
-stop-freebsd-i386:
-    #!/usr/bin/env bash
-    port=$(cat freebsd-i386.port 2>/dev/null || echo "0")
-    just _stop-vm freebsd-i386.pid "$port"
-    rm -f freebsd-i386.port
-
-# Boot NetBSD i386 VM (snapshot mode)
-[group('Advanced')]
-start-netbsd-i386:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    just _action "Starting NetBSD i386 VM"
-    PORT=$(just _free-port)
-    echo "$PORT" > netbsd-i386.port
-    qemu-system-x86_64 \
-        -machine q35 -cpu qemu64 \
-        -m 2G -smp 2 \
-        -drive file={{NETBSD_I386_IMG}},if=virtio,snapshot=on \
-        -nic user,hostfwd=tcp::${PORT}-:22 \
-        -pidfile netbsd-i386.pid \
-        -display none -daemonize
-    just _wait-for-ssh "$PORT"
-    just _banner "NetBSD i386 VM running on port $PORT"
-
-# Shut down NetBSD i386 VM
-[group('Advanced')]
-stop-netbsd-i386:
-    #!/usr/bin/env bash
-    port=$(cat netbsd-i386.port 2>/dev/null || echo "0")
-    just _stop-vm netbsd-i386.pid "$port"
-    rm -f netbsd-i386.port
-
 # Execute command on a running VM via SSH
 [group('Advanced')]
 do port *ARGS:
@@ -793,134 +522,6 @@ reset-everything:
     rm -rf images/ logs/
     rm -f *.pid *.port
     @just _banner "All images and logs deleted"
-
-# Diagnose provisioning hang — runs multilib provision with full console output
-[group('Advanced')]
-diagnose-provision-multilib:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    echo "=== Diagnostic provisioning of Ubuntu AMD64 multilib ==="
-    echo "All cloud-init output will be visible on the serial console."
-    echo ""
-
-    # Always start from a fresh image (cloud-init skips modules if it sees the same instance-id)
-    mkdir -p images
-    rm -f "{{UBUNTU_MULTILIB_QCOW}}"
-    just _action "Downloading fresh Ubuntu AMD64 cloud image"
-    curl -L -o "{{UBUNTU_MULTILIB_QCOW}}" "{{UBUNTU_AMD64_URL}}"
-    qemu-img resize "{{UBUNTU_MULTILIB_QCOW}}" 20G
-
-    # Create diagnostic cloud-init ISO with output redirected to serial console
-    just _action "Creating diagnostic cloud-init ISO"
-    tmpdir=$(mktemp -d)
-    trap 'rm -rf "$tmpdir"' EXIT
-    cat > "$tmpdir/meta-data" <<'EOF'
-    instance-id: ci-vm-amd64-multilib
-    local-hostname: ci-vm-amd64-multilib
-    EOF
-    cat > "$tmpdir/user-data" <<'EOF'
-    #cloud-config
-    output:
-      all: "| tee -a /dev/ttyS0"
-
-    users:
-      - name: ci
-        plain_text_passwd: ci
-        lock_passwd: false
-        sudo: ALL=(ALL) NOPASSWD:ALL
-        shell: /bin/bash
-
-    ssh_pwauth: true
-
-    bootcmd:
-      - dpkg --add-architecture i386
-
-    package_update: true
-    packages:
-      - cmake
-      - g++
-      - pkg-config
-      - rsync
-      - gcc-multilib
-      - g++-multilib
-
-    runcmd:
-      - echo "=== RUNCMD STARTING ==="
-      - apt-get install -y libx11-dev:i386 libxext-dev:i386 libncurses-dev:i386
-      - cloud-init schema --system || true
-      - systemctl enable ssh
-      - systemctl start ssh
-      - echo "=== RUNCMD COMPLETE ==="
-
-    power_state:
-      mode: poweroff
-      message: "Provisioning complete, shutting down"
-      condition: true
-    EOF
-    iso="images/cloud-init-amd64-multilib-diag.iso"
-    rm -f "$iso"
-    if command -v mkisofs &>/dev/null; then
-        mkisofs -output "$iso" -volid cidata -joliet -rock "$tmpdir/user-data" "$tmpdir/meta-data"
-    elif command -v hdiutil &>/dev/null; then
-        mkdir -p "$tmpdir/iso_root"
-        cp "$tmpdir/user-data" "$tmpdir/meta-data" "$tmpdir/iso_root/"
-        hdiutil makehybrid -iso -joliet -iso-volume-name cidata -o "$iso" "$tmpdir/iso_root/"
-        [ -f "${iso}.iso" ] && mv "${iso}.iso" "$iso"
-    else
-        echo "ERROR: Cannot create cloud-init ISO (no mkisofs or hdiutil)"
-        exit 1
-    fi
-
-    # Clear previous console log
-    rm -f /tmp/diag-qemu-console.log
-    touch /tmp/diag-qemu-console.log
-
-    # Launch QEMU in background
-    PORT=$(just _free-port)
-    just _action "Starting QEMU (port $PORT, console log: /tmp/diag-qemu-console.log)"
-    qemu-system-x86_64 \
-        -machine q35 -cpu qemu64 \
-        -m 4G -smp 2 \
-        -drive file={{UBUNTU_MULTILIB_QCOW}},if=virtio \
-        -drive file="$iso",if=virtio,media=cdrom \
-        -nic user,hostfwd=tcp::${PORT}-:22 \
-        -display none \
-        -monitor none \
-        -serial file:/tmp/diag-qemu-console.log &
-    QEMU_PID=$!
-    echo "QEMU PID: $QEMU_PID"
-    echo ""
-
-    # Tail the console log so the user sees everything in real time
-    tail -f /tmp/diag-qemu-console.log &
-    TAIL_PID=$!
-
-    # Wait up to 10 minutes for QEMU to exit
-    just _action "Waiting for QEMU to exit (10 min timeout)"
-    EXITED=0
-    for i in $(seq 1 60); do
-        if ! ps -p "$QEMU_PID" > /dev/null 2>&1; then
-            EXITED=1
-            break
-        fi
-        sleep 10
-    done
-
-    kill "$TAIL_PID" 2>/dev/null || true
-    echo ""
-
-    if [ "$EXITED" -eq 1 ]; then
-        just _banner "QEMU exited — provisioning completed"
-    else
-        echo "=== TIMEOUT: QEMU did not exit after 10 minutes ==="
-        echo "Killing QEMU"
-        kill "$QEMU_PID" 2>/dev/null || true
-        wait "$QEMU_PID" 2>/dev/null || true
-        exit 1
-    fi
-
-    # Clean up diagnostic ISO
-    rm -f "$iso"
 
 # ═══════════════════════════════════════════════════════════
 #  Support recipes (internal)
