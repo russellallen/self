@@ -45,8 +45,18 @@ char* frame::c_entry_point() {
   char* callp = r - 1;
   if (!isImmediateCall((inst_t*)callp)) return NULL;
   return  get_target_of_C_call_site((inst_t*)callp);
+# elif defined(__aarch64__)
+  // ARM64 BL instruction: 100101 | imm26, target = PC + sign_extend(imm26 << 2)
+  uint32* blp = (uint32*)r - 1;  // instruction before return address
+  uint32 insn = *blp;
+  if ((insn >> 26) != 0x25)  return NULL;  // not a BL instruction
+  // shift as unsigned first to avoid UB, then sign-extend
+  uint32 imm26 = insn & 0x03FFFFFF;
+  int64 offset = (int64)(imm26 << 2);
+  if (imm26 & 0x02000000) offset |= (int64)0xFFFFFFFF00000000LL;  // sign-extend bit 27
+  return (char*)blp + offset;
 # else
-  return NULL; // no JIT call site detection on this architecture
+  return NULL;
 # endif
 }
 
