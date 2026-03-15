@@ -324,6 +324,34 @@ static uint32 cocoaCharToMacCharCode(unichar ch) {
 
 
 // ======================================================================
+// SelfSleepObserver - guard event loop during system sleep to avoid crashes
+// ======================================================================
+
+static _Atomic(bool) system_is_sleeping = false;
+static _Atomic(uint32_t) sleep_generation = 0;
+
+@interface SelfSleepObserver : NSObject
+@end
+
+@implementation SelfSleepObserver
+
+- (void)systemWillSleep:(NSNotification *)notification {
+    uint32_t gen = ++sleep_generation;
+    system_is_sleeping = true;
+    // Mach time doesn't advance during sleep, so this fires ~2s after wake,
+    // giving the display subsystem time to reinitialize.
+    // Generation check ensures a newer sleep doesn't get cleared by a stale block.
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)),
+        dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
+            if (sleep_generation == gen)
+                system_is_sleeping = false;
+        });
+}
+
+@end
+
+
+// ======================================================================
 // SelfWindowDelegate - handles window lifecycle events
 // ======================================================================
 
@@ -436,6 +464,17 @@ static void ensure_cocoa_initialized() {
     [NSApplication sharedApplication];
     [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
     [NSApp finishLaunching];
+
+    // Register for sleep notification to guard the Cocoa event loop.
+    // On sleep, we set a flag so check_carbon_events() skips pumping
+    // the event loop (which would hit invalidated display state and crash).
+    // The flag auto-clears ~2s after wake via dispatch_after.
+    static SelfSleepObserver* sleepObserver = [[SelfSleepObserver alloc] init];
+    [[[NSWorkspace sharedWorkspace] notificationCenter]
+        addObserver:sleepObserver
+           selector:@selector(systemWillSleep:)
+               name:NSWorkspaceWillSleepNotification
+             object:nil];
   }
 }
 
@@ -1079,11 +1118,15 @@ void QuartzWindow::check_carbon_events() {
   if (!cocoa_initialized) {
     return;  // No Cocoa yet, nothing to pump
   }
+  if (system_is_sleeping) {
+    return;  // Don't pump events during sleep/wake — display state is invalid
+  }
 
   // On Cocoa, pump the event loop briefly
   @autoreleasepool {
     BlockGlueFlag f(quartz_semaphore);
     for (;;) {
+      if (system_is_sleeping) break;
       NSEvent* event = [NSApp nextEventMatchingMask:NSEventMaskAny
                               untilDate:nil
                               inMode:NSDefaultRunLoopMode
