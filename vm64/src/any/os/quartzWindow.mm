@@ -61,6 +61,11 @@ bool WindowSet::includes_window(WindowSet_WindowPtr w) {
 }
 
 
+// Sleep/wake guard — declared early so all ObjC classes can see it.
+static _Atomic(bool) system_is_sleeping = false;
+static _Atomic(uint32_t) sleep_generation = 0;
+
+
 // ======================================================================
 // SelfContentView - NSView subclass that provides CGContext
 // ======================================================================
@@ -313,6 +318,7 @@ static uint32 cocoaCharToMacCharCode(unichar ch) {
 }
 
 - (void)updateLayer {
+    if (system_is_sleeping) return;
     if (!_quartzWindow) return;
     IOSurfaceRef surface = _quartzWindow->ioSurface();
     if (!surface) return;
@@ -327,9 +333,6 @@ static uint32 cocoaCharToMacCharCode(unichar ch) {
 // SelfSleepObserver - guard event loop during system sleep to avoid crashes
 // ======================================================================
 
-static _Atomic(bool) system_is_sleeping = false;
-static _Atomic(uint32_t) sleep_generation = 0;
-
 @interface SelfSleepObserver : NSObject
 @end
 
@@ -338,13 +341,16 @@ static _Atomic(uint32_t) sleep_generation = 0;
 - (void)systemWillSleep:(NSNotification *)notification {
     uint32_t gen = ++sleep_generation;
     system_is_sleeping = true;
+    IntervalTimer::disable_all(true);
     // Mach time doesn't advance during sleep, so this fires ~2s after wake,
     // giving the display subsystem time to reinitialize.
     // Generation check ensures a newer sleep doesn't get cleared by a stale block.
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)),
         dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
-            if (sleep_generation == gen)
+            if (sleep_generation == gen) {
                 system_is_sleeping = false;
+                IntervalTimer::enable_all();
+            }
         });
 }
 
@@ -434,6 +440,7 @@ static _Atomic(uint32_t) sleep_generation = 0;
 // ======================================================================
 
 static void blitIOSurfaceToView(SelfContentView* view, IOSurfaceRef surface) {
+    if (system_is_sleeping) return;
     if (!view || !surface) return;
     CALayer* layer = [view layer];
     if (layer) {
