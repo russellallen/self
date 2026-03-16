@@ -399,7 +399,7 @@ oop oopClass::unwind_protect_prim(oop doBlock, oop protectBlock) {
     // had a NLR; need to invoke protect block with result as arg
 
     // first, save target of original NLR
-    int32 OriginalNLRHomeFromC   = NLRSupport::NLR_home_from_C();
+    smi   OriginalNLRHomeFromC   = NLRSupport::NLR_home_from_C();
     int32 OriginalNLRHomeIDFromC = NLRSupport::NLR_home_ID_from_C();
 
     NLRSupport::reset_have_NLR_through_C();    // forget the old NLR, for now
