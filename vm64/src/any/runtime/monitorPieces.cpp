@@ -256,11 +256,11 @@ void MonitorBar::draw(bool incremental) {
 }      
 
 
-void MonitorBar::calculateVMRegion(int32 startAddr, int32 size, 
+void MonitorBar::calculateVMRegion(smi startAddr, int32 size,
                        fint& in_core_percentage, fint& oldlen) {
   int32 pagesize = OS::get_page_size();
-  int32 start    = startAddr & ~(pagesize - 1);
-  int32 end      = roundTo(startAddr + size, pagesize);
+  smi   start    = startAddr & ~(smi(pagesize) - 1);
+  smi   end      = roundTo(startAddr + size, pagesize);
   int32 npages   = (end - start) / pagesize;
 # define PSIZE 4096
   static char m[PSIZE]; // shouldn't use (m)alloc - in int handler!
@@ -294,11 +294,11 @@ void MonitorBar::calculateVMRegion(int32 startAddr, int32 size,
   
   
 void MonitorBar::calculate_VM_stats() {
-  calculateVMRegion((int32)(smi)(start1()), used1(), in_core_percentage_1, old_len_1);
+  calculateVMRegion((smi)(start1()), used1(), in_core_percentage_1, old_len_1);
   assert(in_core_percentage_1 >= 0 && in_core_percentage_1 <= 100,
          "wrong percentage");
   if (start2() != NULL) {
-    calculateVMRegion((int32)(smi)(start2()), used2(), in_core_percentage_2, old_len_2);
+    calculateVMRegion((smi)(start2()), used2(), in_core_percentage_2, old_len_2);
     assert(in_core_percentage_2 >= 0 && in_core_percentage_2 <= 100,
            "wrong percentage");
   }

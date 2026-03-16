@@ -405,7 +405,7 @@ void Process::killFrames(abstract_vframe* vf) {
   // to the controlling process
   // (currentProcess = process executing the killUpTo primitive)
   
-  NLRSupport::set_NLR_home_from_C( (int32)(smi)vf->fr->block_scope_of_home_frame() );
+  NLRSupport::set_NLR_home_from_C( (smi)vf->fr->block_scope_of_home_frame() );
   NLRSupport::set_NLR_home_ID_from_C(     vf->scopeID());
   transfer();
 }
@@ -417,7 +417,7 @@ void Process::deoptimize(frame* last) {
   resetStopping();
   setDeoptimizing();
   last->patch(NULL);
-  NLRSupport::set_NLR_home_from_C( (int32)(smi)last->block_scope_of_home_frame() );
+  NLRSupport::set_NLR_home_from_C( (smi)last->block_scope_of_home_frame() );
   // Why no NLRSupport::set_NLR_home_ID_from_C??? -- dmu 1/03
   // I don't think the arguments need to be saved, since gotoByteCode caller will set them anyway
   // -- dmu 1/03
