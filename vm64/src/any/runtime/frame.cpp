@@ -218,8 +218,19 @@ void frame::nmethod_moved_by(int32 delta, nmethod* where_nm_is_now) {
 void frame::patch(frame* prev, bool forceSelfFrame ) {
   if (is_interpreted_self_frame())
     patch_interpreted_self_frame(false);
-  else
+  else {
+#   if defined(FAST_COMPILER) || defined(SIC_COMPILER)
     patch_compiled_self_frame( return_addr_for_patching(forceSelfFrame, prev) );
+#   else
+    // On interpreter-only builds, C return-address patching cannot work
+    // because the trap handlers (ReturnTrap, PrimCallReturnTrap) require
+    // JIT assembly glue. The interpreter's own return_patch_reason mechanism
+    // and preemption checks handle control interception at bytecode boundaries.
+    if (WizardMode)
+      warning1("frame::patch: skipping non-interpreted frame %#lx on interpreter-only build",
+               (long unsigned)this);
+#   endif
+  }
 }
 
 
