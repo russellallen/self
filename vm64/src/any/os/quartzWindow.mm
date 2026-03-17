@@ -1128,6 +1128,9 @@ void QuartzWindow::check_carbon_events() {
   if (system_is_sleeping) {
     return;  // Don't pump events during sleep/wake — display state is invalid
   }
+  if (isStackOverflow((char*)currentFrame())) {
+    return;  // Not enough stack for QuartzCore transaction commit
+  }
 
   // On Cocoa, pump the event loop briefly
   @autoreleasepool {
