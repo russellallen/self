@@ -3050,9 +3050,433 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'atom' -> () From: ( | {
+         'Category: predefined atoms\x7fComment: A few atoms are predefined and a client can use them without
+asking the server to intern them thus saving a few roundtrips.
+
+See <X11/Xatom.h>.\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyPredefined: name = ( |
+             new.
+             value.
+            | 
+            value: predefinedValues at: name.
+            new: xlib atom deadCopy.
+            new atomValue: value. "makes live"
+            new).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'atom' -> () From: ( | {
+         'Comment: `_ForeignHash` drops the lsb bits that are all zeroes
+for C pointers b/c of alignment; but atoms are CARD32,
+so all bits matter.\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         hash = ( |
+            | 
+            isLive ifTrue: [ atomValue ] False: [ 0 ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'atom' -> () From: ( | {
          'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'proxy' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'atom' -> () From: ( | {
+         'Category: predefined atoms\x7fComment: map values to names for printing\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: private'
+        
+         predefinedNames = [ | x =  ( bootstrap setObjectAnnotationOf: ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () From: ( |
+                     {} = 'ModuleInfo: Creator: traits xlib atom predefinedNames.
+'.
+                    | ) ) _Clone: 69 Filler: 0| 
+             x _At: 0  Put: ().
+             x _At: 1  Put: ().
+             x _At: 2  Put: ().
+             x _At: 3  Put: ().
+             x _At: 4  Put: ().
+             x _At: 5  Put: ().
+             x _At: 6  Put: ().
+             x _At: 7  Put: ().
+             x _At: 8  Put: ().
+             x _At: 9  Put: ().
+             x _At: 10  Put: ().
+             x _At: 11  Put: ().
+             x _At: 12  Put: ().
+             x _At: 13  Put: ().
+             x _At: 14  Put: ().
+             x _At: 15  Put: ().
+             x _At: 16  Put: ().
+             x _At: 17  Put: ().
+             x _At: 18  Put: ().
+             x _At: 19  Put: ().
+             x _At: 20  Put: ().
+             x _At: 21  Put: ().
+             x _At: 22  Put: ().
+             x _At: 23  Put: ().
+             x _At: 24  Put: ().
+             x _At: 25  Put: ().
+             x _At: 26  Put: ().
+             x _At: 27  Put: ().
+             x _At: 28  Put: ().
+             x _At: 29  Put: ().
+             x _At: 30  Put: ().
+             x _At: 31  Put: ().
+             x _At: 32  Put: ().
+             x _At: 33  Put: ().
+             x _At: 34  Put: ().
+             x _At: 35  Put: ().
+             x _At: 36  Put: ().
+             x _At: 37  Put: ().
+             x _At: 38  Put: ().
+             x _At: 39  Put: ().
+             x _At: 40  Put: ().
+             x _At: 41  Put: ().
+             x _At: 42  Put: ().
+             x _At: 43  Put: ().
+             x _At: 44  Put: ().
+             x _At: 45  Put: ().
+             x _At: 46  Put: ().
+             x _At: 47  Put: ().
+             x _At: 48  Put: ().
+             x _At: 49  Put: ().
+             x _At: 50  Put: ().
+             x _At: 51  Put: ().
+             x _At: 52  Put: ().
+             x _At: 53  Put: ().
+             x _At: 54  Put: ().
+             x _At: 55  Put: ().
+             x _At: 56  Put: ().
+             x _At: 57  Put: ().
+             x _At: 58  Put: ().
+             x _At: 59  Put: ().
+             x _At: 60  Put: ().
+             x _At: 61  Put: ().
+             x _At: 62  Put: ().
+             x _At: 63  Put: ().
+             x _At: 64  Put: ().
+             x _At: 65  Put: ().
+             x _At: 66  Put: ().
+             x _At: 67  Put: ().
+             x _At: 68  Put: ().
+             x] value.
+        } | ) 
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 0 Put: (
+     '')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 1 Put: (
+     'PRIMARY')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 10 Put: (
+     'CUT_BUFFER1')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 11 Put: (
+     'CUT_BUFFER2')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 12 Put: (
+     'CUT_BUFFER3')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 13 Put: (
+     'CUT_BUFFER4')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 14 Put: (
+     'CUT_BUFFER5')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 15 Put: (
+     'CUT_BUFFER6')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 16 Put: (
+     'CUT_BUFFER7')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 17 Put: (
+     'DRAWABLE')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 18 Put: (
+     'FONT')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 19 Put: (
+     'INTEGER')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 2 Put: (
+     'SECONDARY')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 20 Put: (
+     'PIXMAP')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 21 Put: (
+     'POINT')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 22 Put: (
+     'RECTANGLE')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 23 Put: (
+     'RESOURCE_MANAGER')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 24 Put: (
+     'RGB_COLOR_MAP')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 25 Put: (
+     'RGB_BEST_MAP')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 26 Put: (
+     'RGB_BLUE_MAP')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 27 Put: (
+     'RGB_DEFAULT_MAP')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 28 Put: (
+     'RGB_GRAY_MAP')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 29 Put: (
+     'RGB_GREEN_MAP')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 3 Put: (
+     'ARC')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 30 Put: (
+     'RGB_RED_MAP')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 31 Put: (
+     'STRING')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 32 Put: (
+     'VISUALID')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 33 Put: (
+     'WINDOW')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 34 Put: (
+     'WM_COMMAND')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 35 Put: (
+     'WM_HINTS')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 36 Put: (
+     'WM_CLIENT_MACHINE')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 37 Put: (
+     'WM_ICON_NAME')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 38 Put: (
+     'WM_ICON_SIZE')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 39 Put: (
+     'WM_NAME')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 4 Put: (
+     'ATOM')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 40 Put: (
+     'WM_NORMAL_HINTS')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 41 Put: (
+     'WM_SIZE_HINTS')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 42 Put: (
+     'WM_ZOOM_HINTS')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 43 Put: (
+     'MIN_SPACE')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 44 Put: (
+     'NORM_SPACE')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 45 Put: (
+     'MAX_SPACE')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 46 Put: (
+     'END_SPACE')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 47 Put: (
+     'SUPERSCRIPT_X')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 48 Put: (
+     'SUPERSCRIPT_Y')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 49 Put: (
+     'SUBSCRIPT_X')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 5 Put: (
+     'BITMAP')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 50 Put: (
+     'SUBSCRIPT_Y')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 51 Put: (
+     'UNDERLINE_POSITION')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 52 Put: (
+     'UNDERLINE_THICKNESS')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 53 Put: (
+     'STRIKEOUT_ASCENT')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 54 Put: (
+     'STRIKEOUT_DESCENT')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 55 Put: (
+     'ITALIC_ANGLE')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 56 Put: (
+     'X_HEIGHT')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 57 Put: (
+     'QUAD_WIDTH')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 58 Put: (
+     'WEIGHT')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 59 Put: (
+     'POINT_SIZE')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 6 Put: (
+     'CARDINAL')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 60 Put: (
+     'RESOLUTION')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 61 Put: (
+     'COPYRIGHT')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 62 Put: (
+     'NOTICE')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 63 Put: (
+     'FONT_NAME')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 64 Put: (
+     'FAMILY_NAME')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 65 Put: (
+     'FULL_NAME')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 66 Put: (
+     'CAP_HEIGHT')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 67 Put: (
+     'WM_CLASS')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 68 Put: (
+     'WM_TRANSIENT_FOR')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 7 Put: (
+     'COLORMAP')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 8 Put: (
+     'CURSOR')
+
+ ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () _At: 9 Put: (
+     'CUT_BUFFER0')
+
+ bootstrap addSlotsTo: ((bootstrap stub -> 'traits' -> 'xlib' -> 'atom') \/-> 'predefinedNames') -> () From: ( | {
+         'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'vector' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'atom' -> () From: ( | {
+         'Category: predefined atoms\x7fComment: map names to values for creation\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: private'
+        
+         predefinedValues = bootstrap setObjectAnnotationOf: ( [|d|
+	d: dictionary copyRemoveAll.
+	d at: ('ARC') Put: (3).
+	d at: ('ATOM') Put: (4).
+	d at: ('BITMAP') Put: (5).
+	d at: ('CAP_HEIGHT') Put: (66).
+	d at: ('CARDINAL') Put: (6).
+	d at: ('COLORMAP') Put: (7).
+	d at: ('COPYRIGHT') Put: (61).
+	d at: ('CURSOR') Put: (8).
+	d at: ('CUT_BUFFER0') Put: (9).
+	d at: ('CUT_BUFFER1') Put: (10).
+	d at: ('CUT_BUFFER2') Put: (11).
+	d at: ('CUT_BUFFER3') Put: (12).
+	d at: ('CUT_BUFFER4') Put: (13).
+	d at: ('CUT_BUFFER5') Put: (14).
+	d at: ('CUT_BUFFER6') Put: (15).
+	d at: ('CUT_BUFFER7') Put: (16).
+	d at: ('DRAWABLE') Put: (17).
+	d at: ('END_SPACE') Put: (46).
+	d at: ('FAMILY_NAME') Put: (64).
+	d at: ('FONT') Put: (18).
+	d at: ('FONT_NAME') Put: (63).
+	d at: ('FULL_NAME') Put: (65).
+	d at: ('INTEGER') Put: (19).
+	d at: ('ITALIC_ANGLE') Put: (55).
+	d at: ('MAX_SPACE') Put: (45).
+	d at: ('MIN_SPACE') Put: (43).
+	d at: ('NORM_SPACE') Put: (44).
+	d at: ('NOTICE') Put: (62).
+	d at: ('PIXMAP') Put: (20).
+	d at: ('POINT') Put: (21).
+	d at: ('POINT_SIZE') Put: (59).
+	d at: ('PRIMARY') Put: (1).
+	d at: ('QUAD_WIDTH') Put: (57).
+	d at: ('RECTANGLE') Put: (22).
+	d at: ('RESOLUTION') Put: (60).
+	d at: ('RESOURCE_MANAGER') Put: (23).
+	d at: ('RGB_BEST_MAP') Put: (25).
+	d at: ('RGB_BLUE_MAP') Put: (26).
+	d at: ('RGB_COLOR_MAP') Put: (24).
+	d at: ('RGB_DEFAULT_MAP') Put: (27).
+	d at: ('RGB_GRAY_MAP') Put: (28).
+	d at: ('RGB_GREEN_MAP') Put: (29).
+	d at: ('RGB_RED_MAP') Put: (30).
+	d at: ('SECONDARY') Put: (2).
+	d at: ('STRIKEOUT_ASCENT') Put: (53).
+	d at: ('STRIKEOUT_DESCENT') Put: (54).
+	d at: ('STRING') Put: (31).
+	d at: ('SUBSCRIPT_X') Put: (49).
+	d at: ('SUBSCRIPT_Y') Put: (50).
+	d at: ('SUPERSCRIPT_X') Put: (47).
+	d at: ('SUPERSCRIPT_Y') Put: (48).
+	d at: ('UNDERLINE_POSITION') Put: (51).
+	d at: ('UNDERLINE_THICKNESS') Put: (52).
+	d at: ('VISUALID') Put: (32).
+	d at: ('WEIGHT') Put: (58).
+	d at: ('WINDOW') Put: (33).
+	d at: ('WM_CLASS') Put: (67).
+	d at: ('WM_CLIENT_MACHINE') Put: (36).
+	d at: ('WM_COMMAND') Put: (34).
+	d at: ('WM_HINTS') Put: (35).
+	d at: ('WM_ICON_NAME') Put: (37).
+	d at: ('WM_ICON_SIZE') Put: (38).
+	d at: ('WM_NAME') Put: (39).
+	d at: ('WM_NORMAL_HINTS') Put: (40).
+	d at: ('WM_SIZE_HINTS') Put: (41).
+	d at: ('WM_TRANSIENT_FOR') Put: (68).
+	d at: ('WM_ZOOM_HINTS') Put: (42).
+	d at: ('X_HEIGHT') Put: (56).
+] value) From: ( |
+             {} = 'ModuleInfo: Creator: traits xlib atom predefinedValues.
+
+CopyDowns:
+globals set. copy 
+SlotsToOmit: parent prototype.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'atom' -> () From: ( | {
+         'Comment: Report atom\'s value best we can.\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         statePrintString = ( |
+             name.
+             value.
+            | 
+
+            isLive ifFalse: [ ^ 'dead' ].
+            value: atomValueIfFail: [ ^ 'failed' ].
+
+            value = 0 ifTrue: [ ^ 'None' ].
+
+            name: predefinedNames at: value IfAbsent: [
+              "use numeric value by default"
+              ^ '#', (value printString)
+            ].
+
+            "use the name for a predefined atom"
+            '\'', name, '\'').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'atom' -> () From: ( | {

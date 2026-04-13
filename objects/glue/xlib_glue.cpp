@@ -13,6 +13,7 @@
 # define Status int // cause I had to undef it earlier
 
 # include <X11/Xlib.h>
+# include <X11/Xatom.h>
 # include <X11/Xutil.h>
 # include <X11/extensions/shape.h>
 # include "xlib.primMaker.hh"
