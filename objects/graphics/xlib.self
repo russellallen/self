@@ -5778,6 +5778,16 @@ an object with these slots:
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'Comment: `_ForeignHash` drops the lsb bits that are all zeroes
+for C pointers b/c of alignment; but windows are CARD32,
+so all bits matter.\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         hash = ( |
+            | 
+            isLive ifTrue: [ windowDescriptor ] False: [ 0 ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          iconName: name = ( | {
@@ -5995,6 +6005,18 @@ an object with these slots:
             display:   disp.
             depth:     d.
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         statePrintString = ( |
+             xid.
+            | 
+            isLive ifFalse: [ ^ 'dead' ].
+            xid: windowDescriptorIfFail: [ ^ 'failed' ].
+            xid = 0 ifTrue: [ ^ 'None' ].
+            '0x', xid hexPrintString).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
