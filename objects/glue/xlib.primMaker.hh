@@ -4560,7 +4560,7 @@ Please do not change it manually. -- dmu 12/91  */\
  C_func_2( void,, XStoreBytes_wrap, XStoreBytes_wrap_XStoreBytes__glue, fail, proxy,(Display*,Display_seal), string,) \
  C_func_1( string,, XFetchBytes_wrap, XFetchBytes_wrap_XFetchBytes_glue, fail, proxy,(Display*,Display_seal)) \
  C_get_var( proxy_null,(Window,Window_seal), None, None_NullWindow_glue) \
- C_func_1( int,, MYSELF, MYSELF_WindowDescriptor_glue, , proxy_null,(int,Window_seal)) \
+ C_func_1( unsigned_int,, MYSELF, MYSELF_WindowDescriptor_glue, , proxy_null,(Window,Window_seal)) \
  C_get_var( proxy_null,(Pixmap,Pixmap_seal), None, None_NullPixmap_glue) \
 /* get atom CARD32 value  */\
 \

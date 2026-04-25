@@ -577,7 +577,7 @@ traits: traits xlib window
 
 traits: traits xlib window
  visibility: publicSlot
-  proxy_null int Window_seal windowDescriptor = int call MYSELF
+  proxy_null Window Window_seal windowDescriptor = unsigned_int call MYSELF
 
 
 
