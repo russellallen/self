@@ -5618,6 +5618,19 @@ an object with these slots:
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         copyId: id = ( |
+             new.
+            | 
+            display isLive not
+              && [ id != 0 ] ifTrue: [ error: 'display is dead' ].
+            new: deadCopy windowDescriptor: id.
+            new display: display.
+            new).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          createChildWindowAt: pos Size: size Depth: d Visual: vis Attributes: attrs = ( |

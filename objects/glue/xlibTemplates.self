@@ -579,6 +579,11 @@ traits: traits xlib window
  visibility: publicSlot
   proxy_null Window Window_seal windowDescriptor = unsigned_int call MYSELF
 
+ visibility: privateSlot
+  -- create (revive) a proxy with a specific window id
+  void windowDescriptor: unsigned_int \
+         = proxy_null Window Window_seal {self} call MYSELF
+
 
 
 traits: traits xlib pixmap
