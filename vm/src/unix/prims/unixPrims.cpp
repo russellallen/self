@@ -62,8 +62,20 @@ extern "C" {
 
 const char *UnixFile_seal = "UnixFile";
 
-fd_set activeFDs;                      // active file descriptors
+#ifdef USE_EPOLL
+int epollFD; // epoll file descriptor
 
+// epoll doesn't work on regular files. The epoll_ctl function
+// returns EPERM for any attempt to add such a file descriptor.
+// The workaround is to consider any regular files as always
+// ready to read/write or to use AIO functions for regular
+// file i/o. The latter is quite intrusive so for now we
+// use the former method. This is done by making any
+// failed call to epoll_ctl due to EPERM resulting in a
+// fallback to assuming that read/write is ready.
+#endif
+
+fd_set activeFDs;                      // active file descriptors
 
 static struct termios normalSettings;
 
@@ -78,7 +90,30 @@ class IOCleanup {
     if (isatty(STDIN))
       tcgetattr(STDIN, &normalSettings);
 # endif
+#ifdef USE_EPOLL
+    epollFD = epoll_create(256);
+    if (epollFD < 0) {
+    }
+    else {
+      // TODO:
+      // These file descriptors work with epoll unless they're
+      // redirected to/from a standard file. We should check
+      // if that's the case and fallback to select for those.
+      struct epoll_event event;
+      event.events = EPOLLIN | EPOLLOUT;
+      event.data.fd = 0;
+      if (epoll_ctl(epollFD, EPOLL_CTL_ADD, 0, &event) < 0)
+        printf("epoll_ctl for fd 0 failed: %s\n", strerror(errno));
+      event.data.fd = 1;
+      if (epoll_ctl(epollFD, EPOLL_CTL_ADD, 1, &event) < 0)
+        printf("epoll_ctl for fd 1 failed: %s\n", strerror(errno));
+      event.data.fd = 2;
+      if (epoll_ctl(epollFD, EPOLL_CTL_ADD, 2, &event) < 0)
+        printf("epoll_ctl for fd 2 failed: %s\n", strerror(errno));
+    }
+#else
     FD_SET(0, &activeFDs); FD_SET(1, &activeFDs); FD_SET(2, &activeFDs); 
+#endif
   }
   ~IOCleanup() { resetTerminal(); }
 };
@@ -390,7 +425,19 @@ void register_file_descriptor(int fd) {
     // (/dev/rsr0 does under SVR4) -- dmu
 
   if (fd < 0) return;
-
+#ifdef USE_EPOLL
+  struct epoll_event event;
+  event.data.fd = fd;
+  event.events = EPOLLIN | EPOLLOUT;
+  int res = epoll_ctl(epollFD, EPOLL_CTL_ADD, fd, &event);
+  if (res < 0 && errno == EPERM) {
+    FD_SET(fd, &activeFDs);
+  }
+  else if (res < 0) {
+    // What to do for error?
+    printf("epoll_ctl failed on fd %d: %s\n", fd, strerror(errno));
+  }
+#else
   timeval nowait;
   nowait.tv_sec = 0;
   nowait.tv_usec = 0;
@@ -406,6 +453,7 @@ void register_file_descriptor(int fd) {
   // end of check
   
   FD_SET(fd, &activeFDs);
+#endif
   
 }
 
@@ -419,9 +467,24 @@ int open_wrap(char *path, int flags, int mode) {
 
 
 int close_wrap(int fd) {
+#ifdef USE_EPOLL
+  // Check if it's a regular file descriptor and don't perform the epoll
+  // call if it is.
+  if (FD_ISSET(fd, &activeFDs)) {
+    FD_CLR(fd, &activeFDs);
+  }
+  else {
+    struct epoll_event event;
+    if (epoll_ctl(epollFD, EPOLL_CTL_DEL, fd, &event) < 0) {
+      printf("epoll_ctl delete failed on fd %d: %s\n", fd, strerror(errno));
+    }
+  }
+  int result = close(fd);
+#else
   int result = close(fd);
   if (result != -1)
     FD_CLR(fd, &activeFDs);
+#endif
   return result;
 }
 
@@ -431,8 +494,34 @@ int select_wrap(objVectorOop vec, int howMany, void *FH) {
     prim_failure(FH, BADSIZEERROR);
     return 0;
   }
+#ifdef USE_EPOLL
+  struct epoll_event* events = (struct epoll_event*)malloc(sizeof(epoll_event) * howMany);
+  int ret = epoll_wait(epollFD, events, howMany, 0);
+  if (ret < 0) {
+    unix_failure(FH);
+    return 0;
+  }
+
+  for(int i = 0; i < ret; ++i) {
+    struct epoll_event* event = &events[i];
+    vec->obj_at_put(i, as_smiOop(event->data.fd), false);
+  }
+  
+  free(events);
+
+  // Add any regular files
+  howMany -= ret;
+  int index= ret;
+  for (int fd = 0; fd < FD_SETSIZE && index < howMany; fd++) {
+    if (FD_ISSET(fd, &activeFDs)) {
+      vec->obj_at_put(index++, as_smiOop(fd), false);
+    }
+  }
+  return index;
+#else
   if (howMany > FD_SETSIZE) 
     howMany = FD_SETSIZE;
+
   fd_set r = activeFDs, w = activeFDs;
   timeval nowait;
   nowait.tv_sec  = 0; 
@@ -448,6 +537,7 @@ int select_wrap(objVectorOop vec, int howMany, void *FH) {
       vec->obj_at_put(index++, as_smiOop(fd), false);
   }
   return index;
+#endif
 }
 
 int select_read_wrap(objVectorOop vec, int howMany, void *FH) {
@@ -455,6 +545,33 @@ int select_read_wrap(objVectorOop vec, int howMany, void *FH) {
     prim_failure(FH, BADSIZEERROR);
     return 0;
   }
+#ifdef USE_EPOLL
+  struct epoll_event* events = (struct epoll_event*)malloc(sizeof(epoll_event) * howMany);
+  int ret = epoll_wait(epollFD, events, howMany, 0);
+  if (ret < 0) {
+    unix_failure(FH);
+      return 0;
+  }
+
+  int index = 0;
+  for(int i = 0; i < ret; ++i) {
+    struct epoll_event* event = &events[i];
+    if ((event->events & EPOLLIN) == EPOLLIN) {
+      vec->obj_at_put(index++, as_smiOop(event->data.fd), false);
+    }
+  }
+  
+  free(events);  
+
+  // Add any regular files
+  howMany -= index;
+  for (int fd = 0; fd < FD_SETSIZE && index < howMany; fd++) {
+    if (FD_ISSET(fd, &activeFDs)) {
+      vec->obj_at_put(index++, as_smiOop(fd), false);
+    }
+  }
+  return index;
+#else
   if (howMany > FD_SETSIZE) 
     howMany = FD_SETSIZE;
   fd_set r = activeFDs;
@@ -472,6 +589,7 @@ int select_read_wrap(objVectorOop vec, int howMany, void *FH) {
       vec->obj_at_put(index++, as_smiOop(fd), false);
   }
   return index;
+#endif
 }
 
 
