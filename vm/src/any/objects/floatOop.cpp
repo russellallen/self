@@ -67,7 +67,7 @@ static const fint expOffset = fractSize;
   
   
   float floatOopClass::value() {
-    uint32 i = uint32(this);
+    uint32 i = (uint32)tagBits(this);
     int32 selfExp = i >> selfExpOffset  &  nthMask(selfExpSize);
     int32 fract   = i >> Tag_Size  &  nthMask(fractSize);
     int32 exp     = selfExp - selfBias + bias;

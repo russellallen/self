@@ -42,12 +42,12 @@ class slotTypeClass {
   slotTypeClass(slotTypeClass &s) { Unused(s);  ShouldNotCallThis(); }
   
   // accessors
-  fint slot_type()    { return maskBits(int32(this), slot_type_mask); }
+  fint slot_type()    { return maskBits(tagBits(this), slot_type_mask); }
   bool is_obj_slot()  { return slot_type() == obj_slot_type; }
   bool is_map_slot()  { return slot_type() == map_slot_type; }
   bool is_arg_slot()  { return slot_type() == arg_slot_type; }
-  bool is_vm_slot()   { return isSet(int32(this), is_vm_slot_shift); }
-  bool is_parent()    { return isSet(int32(this), is_parent_shift); }
+  bool is_vm_slot()   { return isSet(tagBits(this), is_vm_slot_shift); }
+  bool is_parent()    { return isSet(tagBits(this), is_parent_shift); }
   
 };
 

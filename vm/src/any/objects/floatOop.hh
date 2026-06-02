@@ -16,7 +16,7 @@ class floatOopClass: public oopClass {
   // accessors
   float value();
   
-  smi identity_hash() { return int32(this) >> Tag_Size; }
+  smi identity_hash() { return tagBits(this) >> Tag_Size; }
   
   Map* map() { return Memory->float_map; }
   
@@ -71,7 +71,7 @@ oop float_ge_prim(floatOop x, floatOop y);
   
   inline float floatOopClass::value() {
     floatHolder x;
-    x.i = uint32(this) - Float_Tag;
+    x.i = (uint32)tagBits(this) - Float_Tag;
     return x.f;
   }
 # else
