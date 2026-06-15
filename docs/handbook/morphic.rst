@@ -2,7 +2,7 @@
 Morphic: The Self User Interface Framework
 ******************************************
 
-.. header:: 9/17/02
+.. header:: 2026-06-15
 
 Overview
 ========
@@ -449,6 +449,30 @@ Sometimes a morph may need to do something special when it is copied. In this ca
 ..  figure:: images/Figure16.*
 
     Copying a composite morph. First, the submorph structure of the original morph is copied (a). Then, references among the submorphs of the composite updated to mirror those of the original (b).
+
+
+Morph Roles
+-----------
+
+When constructing a composite morph, it is often convenient or necessary for a higher level morph and a lower level morph to communicate. An example would be a drawing morph with a menu bar and a image area. The user interacting with the menubar needs to have the results of those interactions feed from the menubar morph into the image area for handling.
+
+The two most common ways to handle this in the current Self sources are to either have the morphs refer to each other by position (so the top level morph sends a message to `morphs first morphs at: 2` for example) or by caching a reference to a nested submorph at the top level (so, in our example, the top level morph has a `imageEditingMorph` slot pointing to the relevant morph).
+
+Both of these solutions have their limitations. Refering to morphs by their position in the submorph graph is brittle and easily breaks if the morphs are moved around. For example an extra layout morph being added could require substantial reworking of code, without much help as to what needs changing.  Caching references to submorphs at a higher level as the opposite problem: changing morph layout or even pulling a morph out of the submorph graph entirely doesn't break the connection. Keeping the hard coded references needs manual oversight and updating. Both of these solutions therefore can go against the general intent of the morphic framwork.
+
+A alternative solution is to use the `roles` framework. Every morph can have one or more `roles`. A role is simply an object that can be put in a `set`. Morphs can send messages in a fire and forget fashion to all submorphs (no matter how deeply nested) with a role using::
+
+    morphsWithRole: r
+                Do: blk
+          IfAbsent: failBlk
+
+or to a morph in its owners chain::
+
+    ownersWithRole: r
+                Do: blk
+          IfAbsent: failBlk
+
+This provides a mechanism which is less fragile than position placed referencing, and less rigid than holding a specific reference.
 
 .. raw:: latex
 
