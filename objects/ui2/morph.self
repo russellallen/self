@@ -1,6 +1,6 @@
  '30.17.2'
  '
-Copyright 1992-2016 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -169,6 +169,12 @@ representation slots such as \"center\" and \"radius\".
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'morph' -> () From: ( | {
+         'Category: Basic Morph State\x7fModuleInfo: Module: morph InitialContents: InitializeToExpression: (set copyRemoveAll)'
+        
+         rawRoles <- set copyRemoveAll.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'morph' -> () From: ( | {
          'Category: Basic Morph State\x7fComment: The vResizing slot indicates the vertical resizing style of
 this morph, one of {rigid(0), flexible(1), shrinkWrap(2)}.
 \x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
@@ -290,6 +296,13 @@ this ordering can be changed using moveToBack: and moveToFront:\"\x7fModuleInfo:
             | 
             addMorph: m.
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
+         'Category: roles\x7fModuleInfo: Module: morph InitialContents: FollowSlot'
+        
+         addRole: r = ( |
+            | rawRoles: rawRoles copy add: r).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
@@ -1187,6 +1200,13 @@ coordinates.\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibil
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
+         'Category: roles\x7fModuleInfo: Module: morph InitialContents: FollowSlot'
+        
+         hasRole: r = ( |
+            | rawRoles includes: r).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
          'Category: portability\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
         
          initializeForPlatform = ( |
@@ -1725,6 +1745,19 @@ front-to-back order.\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
+         'Category: roles\x7fModuleInfo: Module: morph InitialContents: FollowSlot'
+        
+         morphsWithRole: r Do: blk IfAbsent: absentBlk = ( |
+             found <- bootstrap stub -> 'globals' -> 'false' -> ().
+            | 
+            allMorphsDo: [|:m|
+              (m hasRole: r) ifTrue: [found: true. blk value: m]].
+            found
+              ifTrue: [self]
+               False: [absentBlk value]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
          'Category: events\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
         
          mouseMove: evt = ( |
@@ -1793,6 +1826,25 @@ front-to-back order.\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7
             | 
             error: 'You cannot change the owner of a morph directly; use add/removeMorph: instead.'.
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
+         'Category: roles\x7fModuleInfo: Module: morph InitialContents: FollowSlot'
+        
+         ownersWithRole: r Do: blk IfAbsent: absentBlk = ( |
+             found <- bootstrap stub -> 'globals' -> 'false' -> ().
+             m.
+             stop <- bootstrap stub -> 'globals' -> 'false' -> ().
+            | 
+            "This is all rather low level isn't it?"
+            m: owner.
+            [ stop ] whileFalse: [
+               (m hasRole: r) ifTrue: [found: true. blk value: m].
+               m isRoot ifTrue: [stop: true].
+               m: m owner].
+            found 
+              ifTrue: [self]
+               False: [absentBlk value]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
@@ -1944,6 +1996,13 @@ old owner.\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibilit
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
+         'Category: roles\x7fModuleInfo: Module: morph InitialContents: FollowSlot'
+        
+         removeAllRoles = ( |
+            | rawRoles: rawRoles copyRemoveAll).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
          'Category: structure\x7fComment: Removes m from the receiver and makes its owner nil.\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
         
          removeMorph: m = ( |
@@ -1951,6 +2010,13 @@ old owner.\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibilit
             m changed.
             privateRemoveMorph: m IfPresentDo: [ layoutChanged ].
             self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
+         'Category: roles\x7fModuleInfo: Module: morph InitialContents: FollowSlot'
+        
+         removeRole: r = ( |
+            | rawRoles: rawRoles copy remove: r).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
