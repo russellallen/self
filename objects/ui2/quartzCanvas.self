@@ -298,7 +298,7 @@ SlotsToOmit: clip parent platformWindow.
              disp.
              insetDispBounds.
             | 
-            wld doubleBuffering: false.
+            wld doubleBuffering: true.
             bb: pt ## (w@h).
             disp: quartz directDisplay bestDisplayForBounds: bb.
             insetDispBounds: disp bounds indent: 30. "menu bar hack"

@@ -1,6 +1,6 @@
  '30.14.0'
  '
-Copyright 1992-2016 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -109,6 +109,8 @@ preferencesMenu
 ui2Version
 viewScrollMorph
 stationMorph
+expanderMorph
+windowMorph
 '.
         } | ) 
 
@@ -176,6 +178,8 @@ stationMorph
  bootstrap read: 'ui2Version' From: 'ui2'
  bootstrap read: 'viewScrollMorph' From: 'ui2'
  bootstrap read: 'stationMorph' From: 'ui2'
+ bootstrap read: 'expanderMorph' From: 'ui2'
+ bootstrap read: 'windowMorph' From: 'ui2'
 
 
 
