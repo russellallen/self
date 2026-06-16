@@ -3658,14 +3658,21 @@ and the X font struct object (used to measure text).\x7fModuleInfo: Module: quar
              gc.
              qDstX.
              qDstY.
+             z.
             | 
             gc: aPlatformWindowOrDrawable gc.
 
-            "Quartz always copies ENTIRE layer, so adjust point in dst"
+            "Quartz always copies ENTIRE layer, so adjust point in dst.
+             gc getCTM_A is the view zoom while drawing image content into a
+             zoomed buffer, and 1.0 for the buffer->window blit and at 100%;
+             scaling dst by it makes cached pixmaps/images zoom along with the
+             vector geometry that the CTM already scales."
 
-            dstLeft: pt x - rect left.
-            dstTop:  pt y - rect top.
-            dstBottom: dstTop + height.
+            z: gc getCTM_A.
+
+            dstLeft:   (pt x - rect left) * z.
+            dstTop:    (pt y - rect top)  * z.
+            dstBottom: dstTop + (height * z).
 
             "Further, dstX and Y will be used with identity CTM so we have
              to translate to Quartz coordinates."
@@ -3675,7 +3682,9 @@ and the X font struct object (used to measure text).\x7fModuleInfo: Module: quar
             gc withClip: pt ## rect size "this rect is in ui2 coordinates"
                      Do: [
               gc setIdentityCTM.
-              gc drawLayer: self  X: qDstX  Y: qDstY
+              1.0 = z
+                ifTrue:  [gc drawLayer: self X: qDstX Y: qDstY]
+                 False: [gc drawLayer: self X: qDstX Y: qDstY Width: (width * z) Height: (height * z)]
             ].
             self).
         } | ) 

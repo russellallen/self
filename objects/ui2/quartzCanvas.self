@@ -185,6 +185,12 @@ SlotsToOmit: clip parent platformWindow.
          redrawWindow <- bootstrap stub -> 'globals' -> 'true' -> ().
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'quartzGlobals' -> 'windowCanvas' -> () From: ( | {
+         'Comment: view magnification factor for the Kansas desktop view (cmd-+/-/0); applied via the Core Graphics CTM while drawing morphs. 1 = 100%.\x7fModuleInfo: Module: quartzCanvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         zoom <- 1.
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'quartzWindowCanvas' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: quartzCanvas InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -243,6 +249,13 @@ SlotsToOmit: clip parent platformWindow.
         
          grafPort = ( |
             | platformWindow grafPort).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'quartzWindowCanvas' -> () From: ( | {
+         'Category: zooming\x7fComment: Quartz renders zoom via the Core Graphics CTM.\x7fModuleInfo: Module: quartzCanvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         zoomable = ( |
+            | true).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'quartzWindowCanvas' -> () From: ( | {

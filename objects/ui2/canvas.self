@@ -1202,7 +1202,28 @@ in the world.
         
          boundingBoxInWorld = ( |
             | 
-            offset negate ## size).
+            offset negate ## (size / zoom)).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractWindowCanvas' -> () From: ( | {
+         'Category: zooming\x7fComment: View magnification for the desktop view. 1 = 100%. Overridden on backends that can render scaled (Quartz, via the CTM); fixed at 1 elsewhere.\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         zoom = ( |
+            | 1).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractWindowCanvas' -> () From: ( | {
+         'Category: zooming\x7fComment: No-op where zoom is unsupported; overridden where it is.\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         zoom: z = ( |
+            | self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractWindowCanvas' -> () From: ( | {
+         'Category: zooming\x7fComment: Can this window render at a zoom other than 1?\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         zoomable = ( |
+            | false).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractWindowCanvas' -> () From: ( | {

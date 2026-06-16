@@ -117,6 +117,7 @@ SlotsToOmit: parent.
             aWindowCanvas isOpen ifFalse: [^ self].
 
             cursorPoint: aWindowCanvas platformWindow globalToLocal: cursorPoint. 
+            cursorPoint: (cursorPoint / aWindowCanvas zoom) asInteger.
             resend.adjustForCanvas: aWindowCanvas.
 
             type: case if: [windowExpose not] Then: [type]
