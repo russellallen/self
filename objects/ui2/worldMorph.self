@@ -1957,11 +1957,13 @@ if a window\'s event queue is empty (that is, do not block).\x7fModuleInfo: Modu
         
          processInputs = ( |
             | 
-             winCanvases with: hands Do: [| :wc. :h |
-                0 = wc eventsPending ifFalse: [
-                    h dispatchFrom: wc.
-                ].
-            ].
+             winCanvases with: hands Do: [| :wc. :h. n |
+                   n: wc eventsPending.
+                   [(n > 0) && [0 < wc eventsPending]] whileTrue: [
+                       h dispatchFrom: wc.
+                       n: n - 1.
+                   ].
+               ].
             self).
         } | ) 
 
