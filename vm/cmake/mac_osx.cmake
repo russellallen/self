@@ -170,7 +170,7 @@ else()
 
   # Flags. Xcode does it already
   list(APPEND _flags
-    --sysroot ${CMAKE_OSX_SYSROOT}
+    -isysroot ${CMAKE_OSX_SYSROOT}
     -mmacosx-version-min=${CMAKE_OSX_DEPLOYMENT_TARGET}
   )
 
