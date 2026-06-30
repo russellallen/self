@@ -1,6 +1,6 @@
  '30.21.0'
  '
-Copyright 1992-2016 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
 ["preFileIn" self] value
@@ -72,9 +72,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
          'Comment: When left clicking on desktop,
 do we get a viewScrollMorph or a 
-carpetMorph?\x7fModuleInfo: Module: viewScrollMorph InitialContents: InitializeToExpression: (true)'
+carpetMorph?\x7fModuleInfo: Module: viewScrollMorph InitialContents: InitializeToExpression: (false)'
         
-         useViewScrollMorph <- bootstrap stub -> 'globals' -> 'true' -> ().
+         useViewScrollMorph <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
