@@ -236,26 +236,27 @@ static void set_sockaddr_in(struct sockaddr_in &a,
     failure(FH, buf);
     return;
   }
-  if (address_length < sizeof(long)) {
+  const size_t addr_size = sizeof(a.sin_addr.s_addr);
+  if ((size_t)address_length < addr_size) {
     char buf[128];
-    sprintf(buf, "address is too short; (%d), must be >= sizeof(long)",
-            address_length);
+    sprintf(buf, "address is too short; (%d), must be >= %d",
+            address_length, (int)addr_size);
     if (strlen(buf) >= sizeof(buf))
       fatal("buf too small");
     failure(FH, buf);
     return;
   }
 
-  long aLong;
+  in_addr_t addr;
 #   if  TARGET_OS_VERSION == SOLARIS_VERSION  \
     ||  TARGET_OS_VERSION == MACOSX_VERSION   \
     ||  TARGET_OS_VERSION == LINUX_VERSION \
     ||  TARGET_OS_VERSION == FREEBSD_VERSION \
     ||  TARGET_OS_VERSION == NETBSD_VERSION 
-    memcpy((char*) &aLong, address, sizeof(long));
+    memcpy((char*) &addr, address, addr_size);
     memset(a.sin_zero, 0, sizeof(a.sin_zero));
 # elif  TARGET_OS_VERSION == SUNOS_VERSION
-    bcopy(address, (char*) &aLong, sizeof(long));
+    bcopy(address, (char*) &addr, addr_size);
     bzero(a.sin_zero, sizeof(a.sin_zero));
 #   endif
 
