@@ -262,7 +262,7 @@ static void set_sockaddr_in(struct sockaddr_in &a,
 
      a.sin_family        = family;
      a.sin_port          = htons(port);
-     a.sin_addr.s_addr   = aLong;
+     a.sin_addr.s_addr   = addr;
 }
 
   
