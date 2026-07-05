@@ -46,14 +46,14 @@ class smiOopClass: public oopClass {
   }
   
   // accessors
-  smi value() { return (smi(this) - Int_Tag) >> Tag_Size; }
-  smi byte_count() { return smi(this) - Int_Tag; }
+  smi value() { return (tagBits(this) - Int_Tag) >> Tag_Size; }
+  smi byte_count() { return tagBits(this) - Int_Tag; }
   
   smi identity_hash() { return value(); }
   
   // arithmetic
-  smiOop increment() { return smiOop(smi(this) + smi(smiOop_one)); }
-  smiOop decrement() { return smiOop(smi(this) - smi(smiOop_one)); }
+  smiOop increment() { return smiOop(tagBits(this) + smi(smiOop_one)); }
+  smiOop decrement() { return smiOop(tagBits(this) - smi(smiOop_one)); }
   
   // all oop functions
   Map* map() { return Memory->smi_map; }

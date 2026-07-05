@@ -36,7 +36,7 @@ class memOopClass: public oopClass {
   static memOop as_memOop(void* p) { return memOop(int32(p) + Mem_Tag); }
   
   // "destructor"
-  memOopClass* addr() { return (memOopClass*) (int32(this) - Mem_Tag); }
+  memOopClass* addr() { return (memOopClass*) (tagBits(this) - Mem_Tag); }
   
   // space operations, is_old/new work since oop > pointer!
   bool is_old() { return (char*)this >= Memory->old_gen->low_boundary;  }
