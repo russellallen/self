@@ -1,1 +1,0 @@
-These are small tools used in the Self build process.

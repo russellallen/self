@@ -4,6 +4,7 @@ Changes in Master
 Deprecated:
 
 * travis-ci.org for CI
+* Sun-era build/development tools (moved from tools/ to historical/tools/ and no longer built)
 
 VM:
 
