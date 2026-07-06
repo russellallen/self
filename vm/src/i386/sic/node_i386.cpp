@@ -46,7 +46,11 @@
   void PrologueNode::clearStackLocations() {
     theAssembler->Comment("clear stack locations");
     // do not have to clear outgoing args
-    for ( fint i = sizeof(RegisterString) * BitsPerByte;  i < theSIC->number_of_memory_locals();  ++i) {
+	// for ( fint i = sizeof(RegisterString) * BitsPerByte;  i < theSIC->number_of_memory_locals();  ++i) {
+	// Turns out we do need to clear *all* locals, otherwise we
+	// get a bad GC interaction and a crash. Only occurs at
+	// very slow machines, such as x86 emulated on arm64 - rca 2026
+    for ( fint i = 0;  i < theSIC->number_of_memory_locals();  ++i) {
       Location r;  int32 d;  OperandType t;
       reg_disp_type_of_loc(&r, &d, &t, StackLocation_for_index(i));
       theAssembler->movl(0, NumberOperand, r, d, t);
