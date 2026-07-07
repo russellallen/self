@@ -65,5 +65,8 @@ macro(include_prefix_header target file)
   # include_prefix_header_common(${target} ${file})
 endmacro()
 
-list(APPEND _defines INTERFACE_PRAGMAS)
+if(gcc)
+  # '#pragma interface/implementation' is a gcc extension
+  list(APPEND _defines INTERFACE_PRAGMAS)
+endif()
 list(APPEND _flags   -Winvalid-pch)

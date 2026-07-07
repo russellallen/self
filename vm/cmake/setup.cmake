@@ -84,39 +84,48 @@ list(APPEND _flags
   -Wno-unused-variable
 )
 
-# NB: XXX: For now this only handles gcc.  Recent clang cannot be used
-# to compile Self b/c they insist on this != null.  Older clang
-# versions should probably be fine, but I currently don't have
-# bandwidth spelunking throgh clang docs/rtfs in search of the right
-# versions.
-macro(VersionedFlag FirstVersion)
-  if (gcc)
-    if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL ${FirstVersion})
-      list(APPEND _flags ${ARGN})
+# Version-gated warning suppressions for gcc and clang.
+#
+#   VersionedFlag(GCC <min-ver> CLANG <min-ver> <flag...>)
+#
+macro(VersionedFlag)
+  cmake_parse_arguments(VF "" "GCC;CLANG" "" ${ARGN})
+  # NB: nested ifs — in a single condition an absent ${VF_GCC}/${VF_CLANG}
+  # would expand to nothing and leave VERSION_GREATER_EQUAL malformed
+  if (gcc AND VF_GCC)
+    if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL ${VF_GCC})
+      list(APPEND _flags ${VF_UNPARSED_ARGUMENTS})
+    endif()
+  elseif (clang AND VF_CLANG)
+    if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL ${VF_CLANG})
+      list(APPEND _flags ${VF_UNPARSED_ARGUMENTS})
     endif()
   endif()
 endmacro()
 
-# probably ok, but needs auditing
-VersionedFlag(4.7 -Wno-delete-non-virtual-dtor)
+VersionedFlag(GCC 4.7 CLANG 3.5 -Wno-delete-non-virtual-dtor)
 
 # old use of "volatile" in lieu of attribute((noreturn))
-VersionedFlag(4.3 -Wno-ignored-qualifiers)
+VersionedFlag(GCC 4.3 CLANG 3.5 -Wno-ignored-qualifiers)
 
 # TODO: just add FALLTHROUGH annotation comments
-VersionedFlag(7.0 -Wno-implicit-fallthrough)
+# (clang does not put -Wimplicit-fallthrough in -Wall, so gcc-only)
+VersionedFlag(GCC 7.0 -Wno-implicit-fallthrough)
 
-# these are often hit or miss...
-VersionedFlag(4.7 -Wno-maybe-uninitialized)
+# these are often hit or miss...  (gcc-only diagnostic)
+VersionedFlag(GCC 4.7 -Wno-maybe-uninitialized)
 
 # complains about a few cases of existing idiomatic layout
-VersionedFlag(6.0 -Wno-misleading-indentation)
+VersionedFlag(GCC 6.0 CLANG 10 -Wno-misleading-indentation)
 
 # cf. -fno-delete-null-pointer-checks above
 # (it was supported in earlier gcc versions, but not for C++)
-VersionedFlag(5.0 -Wno-nonnull)
+VersionedFlag(GCC 5.0 -Wno-nonnull)
 
 # there are few, marked "for debugging", and they probably need to be
 # marked volatile so that those assignments are not elided and the
 # values are actually available to be inspected from the debugger
-VersionedFlag(4.6 -Wno-unused-but-set-variable)
+VersionedFlag(GCC 4.6 CLANG 13 -Wno-unused-but-set-variable)
+
+VersionedFlag(CLANG 7.0 -Wno-undefined-bool-conversion)
+VersionedFlag(CLANG 7.0 -Wno-tautological-undefined-compare)
