@@ -3585,9 +3585,13 @@ in the OS specific objects.\x7fModuleInfo: Creator: traits unixFile bsdAndSolari
                 res: (os basicWriteFile: self Into: buf
                       Offset: start + transferred
                        Count: count - transferred IfFail: [|:e|
-                          ('EAGAIN' != e) && ['EWOULDBLOCK' != e] ifTrue: [
+                          ('EINTR'  != e) &&
+                          ['EAGAIN' != e] && ['EWOULDBLOCK' != e] ifTrue: [
                               ^ fb value: e.   "Real error."
                           ].
+                          "EINTR: a signal (e.g. the preemption timer, which
+                           is installed without SA_RESTART on NetBSD/FreeBSD)
+                           interrupted the write; retry like the read path."
                           suspendIfAsync.   "Not real error. Just retry."
                           0.               "Pretend nothing was written."
                 ]).
