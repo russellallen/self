@@ -2396,6 +2396,30 @@ fntype(&call_and_convert5_glue),
       "function takes.  Note: the call will always return -1 for "
       "functions not defined using glue code."
 },
+{
+      "InitSelfLibrary", fntype(&init_self_library_glue),
+      ExternalPrimitive, IntegerPrimType,
+      SIDEEFFECTS,
+      "The receiver is a proxy representing a shared object (from "
+      "_Dlopen:ResultProxy:).  Looks up the library's self_lib_init "
+      "function and passes it the VM's SelfHelpers accessor table "
+      "(see selfLib.h), so the library's functions (called with raw "
+      "oops via _Call:With:...) can inspect and build Self objects "
+      "and fail by returning error markers.  Returns the library's "
+      "declared ABI minor version.  Fails if the symbol is missing or "
+      "the library refuses the handshake."
+},
+{
+      "MailFlagCheckAndClear", fntype(&mail_flag_check_and_clear_prim),
+      ExternalPrimitive, IntegerPrimType,
+      SIDEEFFECTS,
+      "Drains the library mail doorbell and returns the number of bytes "
+      "drained (0 means the wake-up was not mail); the receiver is "
+      "ignored.  Library worker threads ring the doorbell with the "
+      "self_raise_flag helper; each ring SIGIO-wakes an idle VM, so check "
+      "this on wake-up.  Drain BEFORE collecting: a raise landing after "
+      "the drain leaves a fresh byte, so no wake-up can be lost."
+},
 # endif
 
 # define  IN_PRIM_TABLE // makeDeps will include these files up top, too

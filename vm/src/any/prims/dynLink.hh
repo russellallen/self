@@ -27,4 +27,31 @@
   // For a function with given name, guess how many args it takes.
   // May return unknowNoOfArgs.
 
+  void add_dlopen_trust_dir(const char* dir);
+  // -T trusted dir (repeatable). No -T = ungated; any -T = only trusted paths load.
+
+  smi init_self_library(void *dlHandle, void *FH);
+  // oop-libraries handshake: dlsym+call self_lib_init. Returns ABI minor.
+
 # endif
+
+// Native-code accessor layer interface (impl folded into dynLink.cpp).
+// SelfHelpers is defined in selfHelpers.h.
+struct SelfHelpers;
+const SelfHelpers* plugin_helpers();
+extern bool        plugin_in_invocation;
+extern const char* plugin_current_module;
+void plugin_remember_vm_thread();
+void plugin_doorbell_create();
+oop  mail_flag_check_and_clear_prim(oop rcvr);
+
+inline void plugin_enter(const char* who) {
+  plugin_remember_vm_thread();
+  plugin_current_module = who;
+  plugin_in_invocation  = true;
+}
+
+inline void plugin_leave() {
+  plugin_in_invocation  = false;
+  plugin_current_module = "?";
+}
