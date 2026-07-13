@@ -73,6 +73,7 @@ extern const char *TS_func;    /* Type seal for functions (from dynLink).       
    C_func_1(void,,                             dlclose_wrap,           dlclose_wrap_glue, fail, proxy,(void*,TS_SO)                                    ) \
    C_func_2(fct_proxy,(void*,TS_func,unknownNoOfArgs), fctLookup,      fctLookup_glue,    fail, proxy,(void*,TS_SO),    string,                        ) \
    C_func_2(smi,,                              noOfArgsFct,            noOfArgsFct_glue,      , proxy,(void*,TS_SO),    string,                        ) \
+   C_func_1(smi,,                              init_self_library,      init_self_library_glue, fail, proxy,(void*,TS_SO)                              ) \
 
 
 

@@ -95,8 +95,9 @@ static void processArguments(int argc, const char *argv[]) {
   fint opt_i;
   OS::opterr= 0; // disable printed warning about unrecognized options
   while(opt_i= OS::optind,
-        (c = OS::getopt(argc, (char* const*)copy_of_argv, "Ff:hl:prtcs:woa")) != (char)-1) {
-    if (strlen(argv[opt_i]) != 2) continue; // ignore multi-character options
+        (c = OS::getopt(argc, (char* const*)copy_of_argv, "Ff:hl:prtcs:woaT:")) != (char)-1) {
+    // Skip multi-char option tokens -- except -T which gives error
+    if (strlen(argv[opt_i]) != 2 && c != 'T') continue;
     switch(c) {
     case 'F':
       okToUseCodeFromSnapshot= false;
@@ -113,6 +114,8 @@ static void processArguments(int argc, const char *argv[]) {
       lprintf("  -h\t\tPrints this message\n");
       lprintf("  -p\t\tDon't do `snapshotAction postRead' after reading snapshot\n");
       lprintf("  -s snapshot\tReads initial world from snapshot\n");
+      lprintf("  -T dir\tTrust dir for _Dlopen: loads (repeatable; needs a space: -T dir).\n");
+      lprintf("        \tWith no -T at all, _Dlopen: is ungated for compatibility with previous VM versions\n");
       lprintf("  -w\tSuppress warnings about optimized code being discarded\n");
       lprintf("For debugging use only:\n");
       lprintf("  -F\t\tDiscards saved code from snapshot\n");
@@ -152,6 +155,23 @@ static void processArguments(int argc, const char *argv[]) {
      case 's':
       // default world
       WorldName= OS::optarg;
+      break;
+     case 'T':
+      // Trust a dir for _Dlopen (can use more than one)
+      if (OS::optarg == NULL || OS::optarg[0] == '-') {
+        lprintf("Self VM error: -T needs a directory argument (e.g. -T dir)\n");
+        ::exit(1);
+      }
+# ifdef DYNLINK_SUPPORTED
+      add_dlopen_trust_dir(OS::optarg);
+# endif
+      break;
+     case '?':
+      // Bare trailing -T (no dir) lands here; don't let the security gate fail silently.
+      if (OS::optopt == 'T') {
+        lprintf("Self VM error: -T needs a directory argument (e.g. -T dir)\n");
+        ::exit(1);
+      }
       break;
      case 'p':
       // turn off post-read snapshot evaluation

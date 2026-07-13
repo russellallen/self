@@ -39,6 +39,8 @@ bool fctProxyOopClass::verify() {
 # endif
 
 
+// Fixed per-arity prototype, not variadic fctType (Apple arm64 passes varargs on the stack).
+
 #define CALL_TEMPLATE(name, comma, declList, argList, nargs)                  \
   inline oop fctProxyOopClass::name(declList) {                               \
     if (!is_fctProxy())                                                       \
@@ -47,7 +49,9 @@ bool fctProxyOopClass::verify() {
       return ErrorCodes::vmString_prim_error(DEADPROXYERROR);                                      \
     if (get_noOfArgs() != nargs && get_noOfArgs() != unknownNoOfArgs)         \
       return ErrorCodes::vmString_prim_error(WRONGNOOFARGSERROR);                                  \
-    oop res = (*get_pointer()) (argList);                                     \
+    plugin_enter("an oop-library (via _Call)");                               \
+    oop res = ((oop (*)(declList)) get_pointer()) (argList);                  \
+    plugin_leave();                                                           \
     assert(res->verify_oop_mark_ok(),"should be an oop");                     \
     return res;                                                               \
   }                                                                           \
@@ -112,39 +116,46 @@ CALL_TEMPLATE(call10_prim, C,
               10)
 
 
-# define C_C_TEMPLATE(declList, argList)                                      \
+// Fixed per-arity cast like CALL_TEMPLATE; ptypes = (void*,...). Classic glue path, unguarded.
+# define C_C_TEMPLATE(declList, argList, ptypes)                              \
   oop fctProxyOopClass::declList {                                            \
     if (!is_live())                                                           \
       return ErrorCodes::vmString_prim_error(DEADPROXYERROR);                                      \
     byteVectorOop res= Memory->byteVectorObj->cloneSize(sizeof(void*));       \
-    *(void**) res->bytes() =  (*get_pointer()) argList;                       \
+    *(void**) res->bytes() = ((void* (*) ptypes) get_pointer()) argList;      \
     return res;                                                               \
   }
 
-C_C_TEMPLATE(call_and_convert0(), ())
-C_C_TEMPLATE(call_and_convert1(void* a1), (a1))
-C_C_TEMPLATE(call_and_convert2(void* a1, void* a2), (a1, a2))
-C_C_TEMPLATE(call_and_convert3(void* a1, void* a2, void* a3), 
-             (a1, a2, a3))
+C_C_TEMPLATE(call_and_convert0(), (), (void))
+C_C_TEMPLATE(call_and_convert1(void* a1), (a1), (void*))
+C_C_TEMPLATE(call_and_convert2(void* a1, void* a2), (a1, a2), (void*, void*))
+C_C_TEMPLATE(call_and_convert3(void* a1, void* a2, void* a3),
+             (a1, a2, a3), (void*, void*, void*))
 C_C_TEMPLATE(call_and_convert4(void* a1, void* a2, void* a3, void* a4),
-             (a1, a2, a3, a4))
-C_C_TEMPLATE(call_and_convert5(void* a1, void* a2, void* a3, void* a4, 
+             (a1, a2, a3, a4), (void*, void*, void*, void*))
+C_C_TEMPLATE(call_and_convert5(void* a1, void* a2, void* a3, void* a4,
                                void* a5),
-             (a1, a2, a3, a4, a5))
-C_C_TEMPLATE(call_and_convert6(void* a1, void* a2, void* a3, void* a4, 
-                               void* a5, void* a6), 
-             (a1, a2, a3, a4, a5, a6))
-C_C_TEMPLATE(call_and_convert7(void* a1, void* a2, void* a3, void* a4, 
-                               void* a5, void* a6, void* a7), 
-             (a1, a2, a3, a4, a5, a6, a7))
-C_C_TEMPLATE(call_and_convert8(void* a1, void* a2, void* a3, void* a4, 
-                               void* a5, void* a6, void* a7, void* a8), 
-             (a1, a2, a3, a4, a5, a6, a7, a8))
-C_C_TEMPLATE(call_and_convert9(void* a1, void* a2, void* a3, void* a4, 
+             (a1, a2, a3, a4, a5), (void*, void*, void*, void*, void*))
+C_C_TEMPLATE(call_and_convert6(void* a1, void* a2, void* a3, void* a4,
+                               void* a5, void* a6),
+             (a1, a2, a3, a4, a5, a6),
+             (void*, void*, void*, void*, void*, void*))
+C_C_TEMPLATE(call_and_convert7(void* a1, void* a2, void* a3, void* a4,
+                               void* a5, void* a6, void* a7),
+             (a1, a2, a3, a4, a5, a6, a7),
+             (void*, void*, void*, void*, void*, void*, void*))
+C_C_TEMPLATE(call_and_convert8(void* a1, void* a2, void* a3, void* a4,
+                               void* a5, void* a6, void* a7, void* a8),
+             (a1, a2, a3, a4, a5, a6, a7, a8),
+             (void*, void*, void*, void*, void*, void*, void*, void*))
+C_C_TEMPLATE(call_and_convert9(void* a1, void* a2, void* a3, void* a4,
                                void* a5, void* a6, void* a7, void* a8,
-                               void* a9), 
-             (a1, a2, a3, a4, a5, a6, a7, a8, a9))
-C_C_TEMPLATE(call_and_convert10(void* a1, void* a2, void* a3, void* a4, 
+                               void* a9),
+             (a1, a2, a3, a4, a5, a6, a7, a8, a9),
+             (void*, void*, void*, void*, void*, void*, void*, void*, void*))
+C_C_TEMPLATE(call_and_convert10(void* a1, void* a2, void* a3, void* a4,
                                 void* a5, void* a6, void* a7, void* a8,
-                                void* a9, void* a10), 
-             (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10))
+                                void* a9, void* a10),
+             (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10),
+             (void*, void*, void*, void*, void*, void*, void*, void*, void*,
+              void*))

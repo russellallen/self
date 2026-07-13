@@ -41,7 +41,6 @@
 // For Linux, the precompiled headers must be included before the first C token,
 // so I added the includes to the source files themselves. -- dmu 12/07
 
-
 ${platform_kind}Prims.cpp                 ${platform_kind}Prims.hh
 ${platform_kind}Prims.cpp                 allocation.hh
 ${platform_kind}Prims.cpp                 asserts.hh
@@ -634,6 +633,7 @@ deps.hh                       slotsMapDeps.hh
 diDesc.cpp                    abstract_interpreter_inline.hh
 diDesc.cpp                    complexLookup.hh
 diDesc.cpp                    diDesc.hh
+diDesc.cpp                    preserve.hh
 diDesc.cpp                    fields.hh
 diDesc.cpp                    label_inline.hh
 diDesc.cpp                    nmethod.hh
@@ -679,6 +679,16 @@ dynLink.cpp                   macros.hh
 dynLink.cpp                   os_includes.hh
 dynLink.cpp                   space_inline.hh
 dynLink.cpp                   vmStrings.hh
+dynLink.cpp                   byteVectorOop.hh
+dynLink.cpp                   error.hh
+dynLink.cpp                   errorCodes.hh
+dynLink.cpp                   floatOop.hh
+dynLink.cpp                   interruptedCtx.hh
+dynLink.cpp                   lprintf.hh
+dynLink.cpp                   oop_inline.hh
+dynLink.cpp                   sig.hh
+dynLink.cpp                   smiOop.hh
+dynLink.cpp                   universe.hh
 
 dynLink.hh                    oop_inline.hh
 dynLink.hh                    top.hh
@@ -794,6 +804,7 @@ fctProxyMap.hh                fctProxyOop.hh
 fctProxyMap.hh                proxyMap.hh
 
 fctProxyOop.cpp               allocation.hh
+fctProxyOop.cpp               dynLink.hh
 fctProxyOop.cpp               byteVectorOop.hh
 fctProxyOop.cpp               errorCodes.hh
 fctProxyOop.cpp               fctProxyOop.hh
@@ -1331,7 +1342,6 @@ lprintf.cpp                   types.hh
 lprintf.cpp                   util.hh
 
 lprintf.hh                    os_includes.hh
-
 
 machineCache.cpp              label_inline.hh
 machineCache.cpp              machineCache.hh
@@ -2008,7 +2018,6 @@ platformWindow.cpp            platformWindow.hh
 // keep x_includes out of precompiled headers
 // platformWindow.cpp            no_precompiled_headers
 
-
 platformWindow.hh             allocation.hh
 platformWindow.hh             os.hh
 platformWindow.hh             top.hh
@@ -2065,6 +2074,7 @@ prim.cpp                      byteVectorOop.hh
 prim.cpp                      cacheStub_inline.hh
 prim.cpp                      debug.hh
 prim.cpp                      fctProxyOop.hh
+prim.cpp                      dynLink.hh
 prim.cpp                      floatOop.hh
 prim.cpp                      fprofiler.hh
 prim.cpp                      glue.hh
@@ -2235,7 +2245,6 @@ quartzPrims.hh                os_includes.hh
 quartzPrims.hh                quartzWindow.hh
 quartzPrims.hh                stringOop.hh
 
-
 quartzWindow.cpp              itimer.hh
 quartzWindow.cpp              label_inline.hh
 quartzWindow.cpp              quartzWindow.hh
@@ -2246,7 +2255,6 @@ quartzWindow.cpp              space_inline.hh
 quartzWindow.cpp              xlibPrims.hh
 
 quartzWindow.hh               platformWindow.hh
-
 
 rSet.cpp                      generation_inline.hh
 rSet.cpp                      oopsOop_inline.hh
@@ -3018,8 +3026,6 @@ timer.hh                      top.hh
 // timer_${platform_kind}.cpp                no_precompiled_headers
 timer_${platform_kind}.cpp                timer.hh
 
-
-
 top.hh                        asserts.hh
 top.hh                        config.hh
 top.hh                        error.hh
@@ -3270,7 +3276,6 @@ vmStrings.cpp                 stringMap.hh
 vmStrings.cpp                 vmStrings.hh
 
 vmStrings.hh                  top.hh
-
 
 xlibPrims.cpp                 debug.hh
 xlibPrims.cpp                 glueSupport.hh
