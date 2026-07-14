@@ -592,7 +592,7 @@ traits: traits xlib pixmap
 traits: traits xlib region
  visibility: publicSlot
   void nullRegion \
-    	    = proxy_null Region Region_seal {xlib region deadCopy} get None
+    	    = proxy_null Region Region_seal {xlib region deadCopy} get NULL
   void xCreateRegion = proxy Region Region_seal {xlib region deadCopy} \
 	      call XCreateRegion_wrap canAWS
   proxy Region Region_seal xDestroyRegion = void call XDestroyRegion_wrap canAWS

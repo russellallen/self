@@ -3246,7 +3246,7 @@ traits xlib region _AddSlots: ( |
 
     |
 
-      xlib region deadCopy _NonenullRegionResultProxyIfFail: fb ).
+      xlib region deadCopy _NULLnullRegionResultProxyIfFail: fb ).
 
 
   xCreateRegion = (
