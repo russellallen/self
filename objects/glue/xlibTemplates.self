@@ -163,6 +163,8 @@ traits: traits xlib display
   Display xInternAtom: string OnlyIfExists: bool \
             = proxy Atom Atom_seal {xlib atom deadCopy} call XInternAtom canAWS
 
+  Display xGetAtomName: proxy Atom Atom_seal \
+            = string call XGetAtomName canAWS
 
  category: window
  visibility: publicSlot
@@ -575,7 +577,12 @@ traits: traits xlib window
 
 traits: traits xlib window
  visibility: publicSlot
-  proxy_null int Window_seal windowDescriptor = int call MYSELF
+  proxy_null Window Window_seal windowDescriptor = unsigned_int call MYSELF
+
+ visibility: privateSlot
+  -- create (revive) a proxy with a specific window id
+  void windowDescriptor: unsigned_int \
+         = proxy_null Window Window_seal {self} call MYSELF
 
 
 
@@ -584,7 +591,18 @@ traits: traits xlib pixmap
   void nullPixmap \
     	    = proxy_null Pixmap Pixmap_seal {xlib pixmap deadCopy} get None
 
+','
 
+
+traits: traits xlib atom
+ visibility: publicSlot
+  -- get atom CARD32 value
+  proxy_null Atom Atom_seal atomValue = unsigned_int call MYSELF
+
+ visibility: privateSlot
+  -- revive a predefined atom
+  void atomValue: unsigned_int \
+         = proxy_null Atom Atom_seal {self} call MYSELF
 
 ','
 
@@ -592,7 +610,7 @@ traits: traits xlib pixmap
 traits: traits xlib region
  visibility: publicSlot
   void nullRegion \
-    	    = proxy_null Region Region_seal {xlib region deadCopy} get None
+    	    = proxy_null Region Region_seal {xlib region deadCopy} get NULL
   void xCreateRegion = proxy Region Region_seal {xlib region deadCopy} \
 	      call XCreateRegion_wrap canAWS
   proxy Region Region_seal xDestroyRegion = void call XDestroyRegion_wrap canAWS

@@ -1,8 +1,9 @@
  'Sun-$Revision: 30.9 $'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2026 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -282,7 +283,7 @@ See the LICENSE file for license information.
         
          dragTo: p = ( |
             | 
-            movingPoint: p.
+            (movingPoint x: p x) y: (p y).
             redraw.
             self).
         } | ) 
