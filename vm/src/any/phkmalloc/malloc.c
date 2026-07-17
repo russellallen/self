@@ -40,7 +40,7 @@
  *
  */
 
-#include "namespace.h"
+// #include "namespace.h"		// XXX: uwe: NetBSD libc internals
 #if defined(__FreeBSD__)
 #   if defined(__i386__)
 #       define malloc_minsize		16U
@@ -92,11 +92,11 @@ void utrace(struct ut *, int);
 int utrace(const char *, void *, size_t);
 # endif
 # include <sys/cdefs.h>
-# include "extern.h"
+// # include "extern.h"		// XXX: uwe
 # if defined(LIBC_SCCS) && !defined(lint)
 __RCSID("$NetBSD: malloc.c,v 1.61 2026/04/28 13:24:49 riastradh Exp $");
 # endif /* LIBC_SCCS and not lint */
-# include <reentrant.h>
+// # include <reentrant.h>	// XXX: uwe: NetBSD libc internals
 # ifdef _REENTRANT
 extern int __isthreaded;
 static mutex_t thread_lock = MUTEX_INITIALIZER;
@@ -132,16 +132,30 @@ static mutex_t thread_lock = MUTEX_INITIALIZER;
 /*
  * No user serviceable parts behind this point.
  */
+#include <sys/param.h>		// XXX: uwe
 #include <sys/types.h>
 #include <sys/mman.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <paths.h>
 #include <stddef.h>
+#include <stdint.h>		// XXX: uwe
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+/*
+ * XXX: uwe: stub out a few things malloc expects from its libc
+ * environment (that we torn it out of).
+ *
+ * PS: When in doubt, use brute force.
+ *                     -- Ken Thompson
+ */
+#define getprogname() ("Self")
+#ifdef __GLIBC__
+#define issetugid() (0)	// I trust you don't run Self setuid or setgid
+#endif
 
 /*
  * This structure describes a page worth of chunks.
