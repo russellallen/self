@@ -1324,3 +1324,60 @@ _malloc_postfork_child(void)
 
 	_MALLOC_REINIT();
 }
+
+
+/*
+ * XXX: uwe: provide sallocx(3), named after its jemalloc counterpart:
+ *
+ *   The sallocx() function returns the real size of the allocation at ptr.
+ *
+ * This code is just the initial part of irealloc() that finds out
+ * `osize` (and then here we just return it).
+ */
+size_t sallocx(const void *ptr, int flags);
+
+size_t
+sallocx(const void *ptr, int flags)
+{
+    size_t osize = 0;
+    (void) flags;
+
+    size_t idx = ptr2idx(ptr);
+    if (idx < malloc_pageshift)
+	return 0;
+    if (idx > last_idx)
+	return 0;
+
+    struct pginfo **mp = &page_dir[idx];
+
+    if (*mp == MALLOC_FIRST) {	/* Page allocation */
+
+	/* Check the pointer */
+	if ((size_t)(uintptr_t)ptr & malloc_pagemask)
+	    return 0;
+
+	/* Find the size in bytes */
+	for (osize = malloc_pagesize; *++mp == MALLOC_FOLLOW;)
+	    osize += malloc_pagesize;
+
+	return osize;
+    }
+    else if (*mp >= MALLOC_MAGIC) { /* Chunk allocation */
+	osize = (*mp)->size;
+
+	/* Check the pointer for sane values */
+	if (((size_t)(uintptr_t)ptr & (osize-1)))
+	    return 0;
+
+	/* Find the chunk index in the page */
+	size_t i = ((size_t)(uintptr_t)ptr & malloc_pagemask) >> (*mp)->shift;
+
+	/* Verify that it isn't a free chunk already */
+        if ((*mp)->bits[i/MALLOC_BITS] & (1UL << (i % MALLOC_BITS)))
+	    return 0;
+
+	return osize;
+    }
+
+    return 0;
+}
