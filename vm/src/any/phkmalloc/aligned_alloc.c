@@ -32,8 +32,8 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
-__RCSID("$NetBSD: aligned_alloc.c,v 1.3 2024/08/18 18:47:20 riastradh Exp $");
+// #include <sys/cdefs.h>
+// __RCSID("$NetBSD: aligned_alloc.c,v 1.3 2024/08/18 18:47:20 riastradh Exp $");
 
 #include <errno.h>
 #include <stdlib.h>
