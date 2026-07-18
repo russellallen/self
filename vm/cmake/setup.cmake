@@ -3,6 +3,11 @@
 # setup all necessary build definition variables
 #
 
+if(SELF_PHKMALLOC)
+  message(STATUS "Using bundled PHK malloc.")
+  list(APPEND _defines USE_BUNDLED_PHKMALLOC)
+endif()
+
 if(SELF_X11)
     message(STATUS "Using X11 plaform windows.")
     list(APPEND _defines XLIB)

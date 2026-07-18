@@ -708,6 +708,24 @@ if(UNIX)
 endif(UNIX)
 
 
+set(SRC_phkmalloc
+  any/phkmalloc/malloc.c
+  any/phkmalloc/aligned_alloc.c
+  any/phkmalloc/memalign.c
+  any/phkmalloc/valloc.c
+)
+
+if(CMAKE_SYSTEM_NAME MATCHES "Linux")
+  list(APPEND SRC_phkmalloc
+    any/phkmalloc/sbrk.c
+  )
+endif()
+
+if(SELF_PHKMALLOC)
+  list(APPEND SRC_src ${SRC_phkmalloc})
+endif()
+
+
 set(SRC_x11
   any/os/xlibWindow.cpp
   any/os/xlibWindow.hh
