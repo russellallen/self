@@ -49,9 +49,11 @@ if(TARGET_ARCH MATCHES "I386_ARCH")
   endif()
 endif()
 
-# true_size_of_malloced_obj() needs to peek at malloc internals.
-# NB: only available since NetBSD 9
-list(APPEND EXTRA_LIBRARIES jemalloc)
+if(NOT SELF_PHKMALLOC)
+  # true_size_of_malloced_obj() needs to peek at malloc internals.
+  # NB: only available since NetBSD 9
+  list(APPEND EXTRA_LIBRARIES jemalloc)
+endif()
 
 # if(clang)
 #   #

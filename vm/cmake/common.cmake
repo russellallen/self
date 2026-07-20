@@ -23,6 +23,8 @@ option(SELF_PROFILE     "Select whether to do a profiled build"         OFF)
 option(SELF_COVERAGE    "Select whether to do a coverage build"         OFF)
 option(SELF_FAST_FLOATS "Select whether to do a build with fast floats" OFF)
 
+option(SELF_PHKMALLOC   "Select whether to build Self with PHK malloc"  OFF)
+
 # do not use X11 on OSX by default.
 if(APPLE)
   option(SELF_QUARTZ    "Select whether to build Self with Quartz Platform windows" ON)
