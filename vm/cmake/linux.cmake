@@ -24,6 +24,18 @@ list(APPEND _defines
   GLUE_CHECKSUM=0
 )
 
+
+#
+# musl libc does not provide profil() (the syscall is only defined on
+# a few legacy architectures)
+#
+include(CheckSymbolExists)
+check_symbol_exists(profil "unistd.h" HAVE_PROFIL)
+if(NOT HAVE_PROFIL)
+  list(APPEND _defines DISABLE_FLAT_PROFILE)
+endif()
+
+
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -m32")
 list(APPEND _flags -m32)
