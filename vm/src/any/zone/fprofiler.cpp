@@ -341,12 +341,14 @@ void SelfFlatProfile(bool on) {
     || TARGET_OS_VERSION == NETBSD_VERSION \
     || TARGET_OS_VERSION == FREEBSD_VERSION
     typedef  char *           buf_t;
-  # else // ! MACOSX_VERSION
+  # else // not BSD
     typedef unsigned short *  buf_t;
-    // Linux???
   # endif
 
-  # if !TARGET_IS_PROFILED && ( defined(FAST_COMPILER) || defined(SIC_COMPILER) )
+  # if defined(DISABLE_FLAT_PROFILE)
+      Unused(on);
+      warning("_FlatProfile: profil(2) not available");
+  # elif !TARGET_IS_PROFILED && ( defined(FAST_COMPILER) || defined(SIC_COMPILER) )
       // won't work in the profiled Self version
       if (on) {
         if (! flatProfiler) initFlatProfiler();
