@@ -46,6 +46,16 @@ list(APPEND _flags
   -fno-threadsafe-statics
 )
 
+if("${platform_processor}" STREQUAL "sparc")
+  # XXX: VM stack walker(s) seems to get confused.  I haven't properly
+  # investigated this, but reverting to what compilers did in the 90s
+  # seems to make the VM happy again (cf. -fno-omit-frame-pointer &c).
+  list(APPEND _flags
+    -fno-optimize-sibling-calls
+  )
+endif()
+
+
 if(SELF_COVERAGE)
   list(APPEND _flags --coverage)
 endif()
