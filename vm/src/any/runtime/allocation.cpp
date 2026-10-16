@@ -6,9 +6,14 @@
 # pragma implementation "allocation.hh"
 # include "_allocation.cpp.incl"
 
+#if defined(USE_BUNDLED_PHKMALLOC)
+// added to the bundled version, name borrowed from the jemalloc API
+extern "C" size_t sallocx(const void *ptr, int flags);
+#else
 #if TARGET_OS_VERSION == NETBSD_VERSION || TARGET_OS_VERSION == FREEBSD_VERSION
 // need jemalloc internal API for true_size_of_malloced_obj
 #include <malloc.h>
+#endif
 #endif
 
 
@@ -307,7 +312,7 @@ bool MallocInProgress = false;
 static void MallocFailed(void) { OS::allocate_failed("VM use"); } 
 
 
-#if TARGET_OS_VERSION == NETBSD_VERSION || TARGET_OS_VERSION == FREEBSD_VERSION
+#if TARGET_OS_VERSION == NETBSD_VERSION || TARGET_OS_VERSION == FREEBSD_VERSION || defined(USE_BUNDLED_PHKMALLOC)
 
 static inline int32 true_size_of_malloced_obj(int32* p) {
   return (int32)sallocx(p, 0);	/* ask jemalloc */
@@ -352,7 +357,7 @@ const char *__je_malloc_conf = "dss:primary";
 # endif
 
 void malloc_init() {
-    # if TARGET_OS_VERSION == LINUX_VERSION
+    # if TARGET_OS_VERSION == LINUX_VERSION  && !defined(USE_BUNDLED_PHKMALLOC)
       mallopt(M_MMAP_MAX, 0); // if Linux malloc mmaps, we get bit 31 on, which conflicts with memOop marking
     # endif
     mallocReserve= (caddr_t)malloc(mallocReserveAmount);
@@ -438,7 +443,7 @@ void malloc_init() {
   
   // Linux: sbrk returns ponters with the high-order bit and Self objects
 
-  # if TARGET_OS_VERSION == LINUX_VERSION
+  # if TARGET_OS_VERSION == LINUX_VERSION && !defined(USE_BUNDLED_PHKMALLOC)
   
     static void *self_morecore(ptrdiff_t n) {
       // try first way, if it doesn't work, try second way
