@@ -388,6 +388,21 @@ globals bootstrap _AddSlotsIfAbsent: ( |
            n: concat: n                     With: name.
            (concat: n With: '.self') _RunScriptIfFail: [|:e. :prim | ^ fb value: e With: prim]).
 
+        read: name From: dir InTree: t = ( |
+           |
+           read: name From: dir InTree: t IfFail: [ | :e. :prim |
+             'failed to read: ' _StringPrint.
+             name         _StringPrint.
+             ' from: '    _StringPrint.
+             dir          _StringPrint.
+             ' in tree: ' _StringPrint.
+             t            _StringPrint.
+             '.  Error: ' _StringPrint.
+             e            _StringPrint.
+             '\n'         _StringPrint.
+             _ThisProcess _AbortProcess.
+           ]).
+
         read: name InTree: t = ( |
            | 
            read: name From: '' InTree: t IfFail: [ | :e. :prim |
