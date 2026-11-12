@@ -361,9 +361,11 @@ gets stuck.
             | 
             m addButton:
                 ( ( ui2Button copy
-                   scriptBlock: [event sourceHand attach:
-                                   selfObjectModel newOutlinerFor: (reflect: shell copy)
-                                                          InWorld: event sourceHand world] )
+                   scriptBlock: [| o |
+                                 o: selfObjectModel newOutlinerFor: (reflect: shell copy)
+                                                           InWorld: event sourceHand world.
+                                 o model addEvaluator: event.
+                                 event sourceHand attach: o] )
                    label: 'New shell' )
             ToGroup: 'top'.
 
