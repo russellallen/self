@@ -3744,8 +3744,8 @@ and the X font struct object (used to measure text).\x7fModuleInfo: Module: quar
             gc beginPath.
             ptlist    doFirst: [|:p| gc moveTo: p]
                    MiddleLast: [|:p| gc addLineTo: p].
-            closePath.
-            strokePath.
+            gc closePath.
+            gc strokePath.
             self).
         } | ) 
 
