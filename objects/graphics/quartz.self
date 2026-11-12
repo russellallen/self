@@ -3752,6 +3752,15 @@ and the X font struct object (used to measure text).\x7fModuleInfo: Module: quar
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'quartz' -> 'drawable' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: quartz InitialContents: FollowSlot\x7fVisibility: public'
         
+         drawPoint: pt GC: gc = ( |
+            | 
+            gc fillRectX: pt x Y: pt y Width: 1 Height: 1.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'quartz' -> 'drawable' -> () From: ( | {
+         'Category: drawing\x7fModuleInfo: Module: quartz InitialContents: FollowSlot\x7fVisibility: public'
+
          drawPolygonIntegerXs: xs Ys: ys GC: gc = ( |
             | 
             gc drawPolygonIntegerXs: xs Ys: ys.
