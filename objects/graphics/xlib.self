@@ -3803,8 +3803,18 @@ to empty.
          'Category: connections\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          close = ( |
-            | basicClose. kill).
-        } | ) 
+            |
+            closeIfFail: [|:e| error: e]).
+        } | )
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'display' -> () From: ( | {
+         'Category: connections\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+
+         closeIfFail: fb = ( |
+            |
+            basicCloseIfFail: [|:e| ^ fb value: e].
+            kill).
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'display' -> () From: ( | {
          'Category: connections\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: private'
@@ -5724,11 +5734,19 @@ an object with these slots:
          'Category: creating\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          delete = ( |
-            | 
-            unmap.
+            |
+            deleteIfFail: [|:e| error: e]).
+        } | )
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'Category: creating\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+
+         deleteIfFail: fb = ( |
+            |
+            unmapIfFail: [|:e| ^ fb value: e].
             display xDestroyWindow: self.
             kill).
-        } | ) 
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
          'Category: portable accessing\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
@@ -6058,10 +6076,18 @@ so all bits matter.\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fV
          'Category: manipulating\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
         
          unmap = ( |
-            | 
-            display xUnmapWindow: self.
+            |
+            unmapIfFail: [|:e| error: 'unmap failed: ', e]).
+        } | )
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'Category: manipulating\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+
+         unmapIfFail: fb = ( |
+            |
+            display xUnmapWindow: self IfFail: [|:e| ^ fb value: e].
             doAutoFlush).
-        } | ) 
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
          'Category: portable accessing\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
