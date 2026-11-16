@@ -1,0 +1,320 @@
+name: Build VMs
+
+# Builds the 64-bit VM (vm64/) and the 32-bit VM (vm/) on every platform that
+# GitHub-hosted runners can reach: natively on the macOS and Ubuntu runners,
+# in Alpine containers (musl libc), and in FreeBSD and NetBSD guests started
+# by cross-platform-actions.  Each job then builds a world and runs the Self
+# automatic tests, as the self-ci recipes do.  See .github/scripts/ci.sh.
+#
+# Not covered, because no hosted runner or guest image exists for them:
+# vm32 on NetBSD i386 and NetBSD macppc.  vm32 on NetBSD sparc64 could run in
+# a cross-platform-actions guest but takes hours under emulation.
+
+on:
+  push:
+    branches: [master]
+    # Version tags (2024.1, 4.5.0, 4.4.rc1) also publish a GitHub release;
+    # see the release job.  Tags that start with a letter are ignored.
+    tags: ['[0-9]*']
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # ---------------------------------------------------------------- runners
+  native:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: vm64-macos-arm64
+            os: macos-15
+            kind: vm64
+          - name: vm64-ubuntu-amd64
+            os: ubuntu-24.04
+            kind: vm64
+          - name: vm64-ubuntu-arm64
+            os: ubuntu-24.04-arm
+            kind: vm64
+          - name: vm32-ubuntu-amd64
+            os: ubuntu-24.04
+            kind: vm32
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0      # cmake names the build with git describe --tags
+
+      - name: Install dependencies (Ubuntu, 64-bit)
+        if: runner.os == 'Linux' && matrix.kind == 'vm64'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake g++ pkg-config libx11-dev libxext-dev libncurses-dev
+
+      - name: Install dependencies (Ubuntu, 32-bit multilib)
+        if: runner.os == 'Linux' && matrix.kind == 'vm32'
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update
+          sudo apt-get install -y cmake g++ pkg-config gcc-multilib g++-multilib \
+            libx11-dev:i386 libxext-dev:i386 libncurses-dev:i386
+          echo "PKG_CONFIG_LIBDIR=/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig" >> "$GITHUB_ENV"
+
+      - name: Build
+        run: .github/scripts/ci.sh build ${{ matrix.kind }}
+
+      - name: Package
+        run: |
+          if [ -d build/Self.app ]; then
+            tar -C build -czf Self-${{ matrix.name }}.tar.gz Self.app
+          else
+            tar -C build -czf Self-${{ matrix.name }}.tar.gz Self
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Self-${{ matrix.name }}
+          path: Self-${{ matrix.name }}.tar.gz
+
+      - name: Test
+        run: .github/scripts/ci.sh test ${{ matrix.kind }}
+
+  # ----------------------------------------------------------------- Alpine
+  alpine:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: vm64-alpine-amd64
+            os: ubuntu-24.04
+            platform: linux/amd64
+            kind: vm64
+            cmake_args: ''
+          - name: vm64-alpine-arm64
+            os: ubuntu-24.04-arm
+            platform: linux/arm64
+            kind: vm64
+            cmake_args: ''
+          # 32-bit userland on the 64-bit runner kernel.  phkmalloc keeps C
+          # heap pointers below the oop tag bit under musl; -no-pie because
+          # the i386 runtime assembly needs text relocations, which musl's
+          # loader rejects.
+          - name: vm32-alpine-x86
+            os: ubuntu-24.04
+            platform: linux/386
+            kind: vm32
+            cmake_args: -DSELF_PHKMALLOC=ON -DCMAKE_EXE_LINKER_FLAGS=-no-pie
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0      # cmake names the build with git describe --tags
+
+      - name: Build and test in Alpine
+        run: |
+          docker run --rm --platform ${{ matrix.platform }} \
+            -v "$PWD":/src -w /src alpine:3.24 sh -ec '
+              apk add --no-cache build-base cmake libx11-dev libxext-dev ncurses-dev pkgconf linux-headers
+              .github/scripts/ci.sh build ${{ matrix.kind }} ${{ matrix.cmake_args }}
+              tar -C build -czf Self-${{ matrix.name }}.tar.gz Self
+              .github/scripts/ci.sh test ${{ matrix.kind }}
+            '
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Self-${{ matrix.name }}
+          path: Self-${{ matrix.name }}.tar.gz
+          if-no-files-found: warn
+
+  # ------------------------------------------------------------ BSD guests
+  bsd:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # gcc14: stock clang on FreeBSD amd64 builds an interpreter whose
+          # recursion overflows the Self process stack during world boot.
+          - name: vm64-freebsd-amd64
+            operating_system: freebsd
+            version: '15.0'
+            architecture: x86-64
+            cmake_args: >-
+              -DCMAKE_C_COMPILER=/usr/local/bin/gcc14
+              -DCMAKE_CXX_COMPILER=/usr/local/bin/g++14
+              -DCMAKE_EXE_LINKER_FLAGS=-Wl,-rpath=/usr/local/lib/gcc14
+          - name: vm64-freebsd-arm64
+            operating_system: freebsd
+            version: '15.0'
+            architecture: arm64
+            cmake_args: ''
+          - name: vm64-netbsd-amd64
+            operating_system: netbsd
+            version: '10.1'
+            architecture: x86-64
+            cmake_args: ''
+          - name: vm64-netbsd-arm64
+            operating_system: netbsd
+            version: '10.1'
+            architecture: arm64
+            cmake_args: ''
+    defaults:
+      run:
+        shell: cpa.sh {0}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0      # cmake names the build with git describe --tags
+
+      - name: Start guest
+        uses: cross-platform-actions/action@v1.7.0
+        with:
+          operating_system: ${{ matrix.operating_system }}
+          version: ${{ matrix.version }}
+          architecture: ${{ matrix.architecture }}
+          cpu_count: 4
+          memory: 8G
+
+      - name: Install dependencies (FreeBSD)
+        if: matrix.operating_system == 'freebsd'
+        run: |
+          sudo env ASSUME_ALWAYS_YES=yes pkg install -y cmake pkgconf gcc14 libX11 libXext ncurses
+
+      - name: Install dependencies (NetBSD)
+        if: matrix.operating_system == 'netbsd'
+        run: |
+          sudo pkgin -y update
+          sudo pkgin -y install cmake pkgconf
+          # The VM links against the X11 that ships in the base system's X
+          # sets; fetch them if this image was installed without.
+          if [ ! -f /usr/X11R7/include/X11/Xlib.h ]; then
+            case "$(uname -m)" in
+              amd64) port=amd64 ;;
+              *)     port=evbarm-aarch64 ;;
+            esac
+            base=https://cdn.NetBSD.org/pub/NetBSD/NetBSD-${{ matrix.version }}/$port/binary/sets
+            for set in xbase xcomp; do
+              ftp -o /tmp/$set.tar.xz $base/$set.tar.xz || ftp -o /tmp/$set.tar.xz $base/$set.tgz
+              sudo tar -xpf /tmp/$set.tar.xz -C /
+            done
+          fi
+
+      - name: Build
+        run: .github/scripts/ci.sh build vm64 ${{ matrix.cmake_args }}
+
+      - name: Package
+        run: tar -C build -czf Self-${{ matrix.name }}.tar.gz Self
+
+      - name: Test
+        run: .github/scripts/ci.sh test vm64
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Self-${{ matrix.name }}
+          path: Self-${{ matrix.name }}.tar.gz
+          if-no-files-found: warn
+
+  # -------------------------------------------- vm32 in a FreeBSD i386 chroot
+  freebsd-lib32:
+    name: vm32-freebsd-amd64-lib32
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    defaults:
+      run:
+        shell: cpa.sh {0}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0      # cmake names the build with git describe --tags
+
+      - name: Start guest
+        uses: cross-platform-actions/action@v1.7.0
+        with:
+          operating_system: freebsd
+          version: '15.0'
+          architecture: x86-64
+          cpu_count: 4
+          memory: 8G
+
+      # FreeBSD 15 has no i386 release, so the 32-bit userland is 14.4's,
+      # unpacked into a chroot and run by the amd64 kernel.
+      - name: Create the i386 chroot
+        run: |
+          fetch -o /tmp/base.txz https://download.freebsd.org/releases/i386/14.4-RELEASE/base.txz
+          sudo mkdir -p /compat/i386
+          sudo tar -xf /tmp/base.txz -C /compat/i386
+          rm /tmp/base.txz
+          sudo cp /etc/resolv.conf /compat/i386/etc/resolv.conf
+          sudo mount -t devfs devfs /compat/i386/dev
+          sudo mkdir -p /compat/i386/work
+          sudo env IGNORE_OSVERSION=yes chroot /compat/i386 /bin/sh -c \
+            'env ASSUME_ALWAYS_YES=yes IGNORE_OSVERSION=yes pkg bootstrap -y'
+          sudo env IGNORE_OSVERSION=yes chroot /compat/i386 /bin/sh -c \
+            'env ASSUME_ALWAYS_YES=yes IGNORE_OSVERSION=yes pkg install -y cmake pkgconf libX11 libXext xorgproto'
+
+      - name: Build
+        run: |
+          sudo mount -t nullfs "$PWD" /compat/i386/work
+          sudo chroot /compat/i386 /bin/sh -c 'cd /work && .github/scripts/ci.sh build vm32'
+
+      - name: Package
+        run: tar -C build -czf Self-vm32-freebsd-amd64-lib32.tar.gz Self
+
+      - name: Test
+        run: sudo chroot /compat/i386 /bin/sh -c 'cd /work && .github/scripts/ci.sh test vm32'
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Self-vm32-freebsd-amd64-lib32
+          path: Self-vm32-freebsd-amd64-lib32.tar.gz
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------- release
+  # On a version tag, attach every binary that was built to a GitHub release
+  # named after the tag.  Releases are kept until deleted, unlike the run's
+  # artifacts.  If any build or test job failed the release is left as a
+  # draft, to be checked and published (or deleted) by hand.
+  release:
+    name: release
+    needs: [native, alpine, bsd, freebsd-lib32]
+    if: ${{ !cancelled() && startsWith(github.ref, 'refs/tags/') }}
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          pattern: Self-*
+          merge-multiple: true
+
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+          FAILED: ${{ contains(needs.*.result, 'failure') }}
+        run: |
+          ls -l dist
+          flags=""
+          if [ "$FAILED" = "true" ]; then flags="$flags --draft"; fi
+          case "$TAG" in
+            *alpha*|*beta*|*rc*) flags="$flags --prerelease" ;;
+          esac
+          gh release create "$TAG" dist/*.tar.gz --verify-tag \
+            --title "Self $TAG" --generate-notes $flags
