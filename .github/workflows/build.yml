@@ -341,9 +341,14 @@ jobs:
           # paxctl +a: gcc's precompiled-header writer on 32-bit NetBSD maps a
           # fixed address that ASLR may already have used, which kills cc1plus
           # about one time in four.
+          # certctl rehash: a freshly unpacked base has no trusted CA
+          # certificates until this runs (normally done at first boot), and
+          # the package server is https only.
           sudo chroot /i386 /bin/sh -c "
+            set -e
             export PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/pkg/sbin:/usr/pkg/bin
-            export PKG_PATH=http://cdn.NetBSD.org/pub/pkgsrc/packages/NetBSD/i386/10.2/All
+            export PKG_PATH=https://cdn.NetBSD.org/pub/pkgsrc/packages/NetBSD/i386/10.2/All
+            certctl rehash
             pkg_add cmake pkgconf
             paxctl +a /usr/libexec/cc1plus
             uname -a; uname -m; uname -p
