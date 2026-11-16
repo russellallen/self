@@ -6,9 +6,9 @@ name: Build VMs
 # by cross-platform-actions.  Each job then builds a world and runs the Self
 # automatic tests, as the self-ci recipes do.  See .github/scripts/ci.sh.
 #
-# Not covered, because no hosted runner or guest image exists for them:
-# vm32 on NetBSD i386 and NetBSD macppc.  vm32 on NetBSD sparc64 could run in
-# a cross-platform-actions guest but takes hours under emulation.
+# Not covered, because no hosted runner or guest image exists for it:
+# vm32 on NetBSD macppc.  vm32 on NetBSD sparc64 is left out because it
+# takes hours under emulation.
 
 on:
   push:
@@ -161,14 +161,22 @@ jobs:
             version: '15.0'
             architecture: arm64
             cmake_args: ''
+          - name: vm64-freebsd-arm64-gcc
+            operating_system: freebsd
+            version: '15.0'
+            architecture: arm64
+            cmake_args: >-
+              -DCMAKE_C_COMPILER=/usr/local/bin/gcc14
+              -DCMAKE_CXX_COMPILER=/usr/local/bin/g++14
+              -DCMAKE_EXE_LINKER_FLAGS=-Wl,-rpath=/usr/local/lib/gcc14
           - name: vm64-netbsd-amd64
             operating_system: netbsd
-            version: '10.1'
+            version: '10.2'
             architecture: x86-64
             cmake_args: ''
           - name: vm64-netbsd-arm64
             operating_system: netbsd
-            version: '10.1'
+            version: '10.2'
             architecture: arm64
             cmake_args: ''
     defaults:
@@ -230,9 +238,19 @@ jobs:
 
   # -------------------------------------------- vm32 in a FreeBSD i386 chroot
   freebsd-lib32:
-    name: vm32-freebsd-amd64-lib32
+    name: ${{ matrix.name }}
     runs-on: ubuntu-latest
     timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: vm32-freebsd-amd64-lib32      # the chroot's system clang
+            packages: ''
+            cmake_args: ''
+          - name: vm32-freebsd-amd64-lib32-gcc
+            packages: gcc
+            cmake_args: -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
     defaults:
       run:
         shell: cpa.sh {0}
@@ -264,15 +282,15 @@ jobs:
           sudo env IGNORE_OSVERSION=yes chroot /compat/i386 /bin/sh -c \
             'env ASSUME_ALWAYS_YES=yes IGNORE_OSVERSION=yes pkg bootstrap -y'
           sudo env IGNORE_OSVERSION=yes chroot /compat/i386 /bin/sh -c \
-            'env ASSUME_ALWAYS_YES=yes IGNORE_OSVERSION=yes pkg install -y cmake pkgconf libX11 libXext xorgproto'
+            'env ASSUME_ALWAYS_YES=yes IGNORE_OSVERSION=yes pkg install -y cmake pkgconf libX11 libXext xorgproto ${{ matrix.packages }}'
 
       - name: Build
         run: |
           sudo mount -t nullfs "$PWD" /compat/i386/work
-          sudo chroot /compat/i386 /bin/sh -c 'cd /work && .github/scripts/ci.sh build vm32'
+          sudo chroot /compat/i386 /bin/sh -c 'cd /work && .github/scripts/ci.sh build vm32 ${{ matrix.cmake_args }}'
 
       - name: Package
-        run: tar -C build -czf Self-vm32-freebsd-amd64-lib32.tar.gz Self
+        run: tar -C build -czf Self-${{ matrix.name }}.tar.gz Self
 
       - name: Test
         run: sudo chroot /compat/i386 /bin/sh -c 'cd /work && .github/scripts/ci.sh test vm32'
@@ -280,8 +298,78 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: Self-vm32-freebsd-amd64-lib32
-          path: Self-vm32-freebsd-amd64-lib32.tar.gz
+          name: Self-${{ matrix.name }}
+          path: Self-${{ matrix.name }}.tar.gz
+          if-no-files-found: warn
+
+  # ---------------------------------------------- vm32 in a NetBSD i386 chroot
+  # No i386 guest image exists, so the i386 release sets are unpacked into a
+  # chroot on the amd64 guest and run by its kernel (COMPAT_NETBSD32).
+  netbsd-i386:
+    name: vm32-netbsd-i386
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    defaults:
+      run:
+        shell: cpa.sh {0}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0      # cmake names the build with git describe --tags
+
+      - name: Start guest
+        uses: cross-platform-actions/action@v1.7.0
+        with:
+          operating_system: netbsd
+          version: '10.2'
+          architecture: x86-64
+          cpu_count: 4
+          memory: 8G
+
+      - name: Create the i386 chroot
+        run: |
+          sets=https://cdn.NetBSD.org/pub/NetBSD/NetBSD-10.2/i386/binary/sets
+          sudo mkdir -p /i386
+          for set in base comp etc xbase xcomp; do
+            ftp -o /tmp/$set.tgz $sets/$set.tgz
+            sudo tar -xpzf /tmp/$set.tgz -C /i386
+            rm /tmp/$set.tgz
+          done
+          sudo cp /etc/resolv.conf /i386/etc/resolv.conf
+          sudo sh -c 'cd /i386/dev && sh MAKEDEV all'
+          sudo mkdir -p /i386/work
+          # paxctl +a: gcc's precompiled-header writer on 32-bit NetBSD maps a
+          # fixed address that ASLR may already have used, which kills cc1plus
+          # about one time in four.
+          sudo chroot /i386 /bin/sh -c "
+            export PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/pkg/sbin:/usr/pkg/bin
+            export PKG_PATH=http://cdn.NetBSD.org/pub/pkgsrc/packages/NetBSD/i386/10.2/All
+            pkg_add cmake pkgconf
+            paxctl +a /usr/libexec/cc1plus
+            uname -a; uname -m; uname -p
+          "
+
+      - name: Build
+        run: |
+          sudo mount -t null "$PWD" /i386/work
+          sudo chroot /i386 /bin/sh -c '
+            export PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/pkg/sbin:/usr/pkg/bin
+            cd /work && .github/scripts/ci.sh build vm32'
+
+      - name: Package
+        run: tar -C build -czf Self-vm32-netbsd-i386.tar.gz Self
+
+      - name: Test
+        run: |
+          sudo chroot /i386 /bin/sh -c '
+            export PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/pkg/sbin:/usr/pkg/bin
+            cd /work && .github/scripts/ci.sh test vm32'
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Self-vm32-netbsd-i386
+          path: Self-vm32-netbsd-i386.tar.gz
           if-no-files-found: warn
 
   # ---------------------------------------------------------------- release
@@ -291,7 +379,7 @@ jobs:
   # draft, to be checked and published (or deleted) by hand.
   release:
     name: release
-    needs: [native, alpine, bsd, freebsd-lib32]
+    needs: [native, alpine, bsd, freebsd-lib32, netbsd-i386]
     if: ${{ !cancelled() && startsWith(github.ref, 'refs/tags/') }}
     runs-on: ubuntu-24.04
     permissions:

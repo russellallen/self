@@ -10,6 +10,11 @@
 # and run the Self automatic test suite.
 set -eu
 
+# NetBSD's build runs paxctl, which lives in /usr/sbin and is not on a
+# non-login shell's PATH.
+PATH=$PATH:/usr/sbin:/sbin
+export PATH
+
 mode=$1
 kind=$2
 shift 2
