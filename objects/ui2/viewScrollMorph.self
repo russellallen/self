@@ -72,9 +72,9 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'preferences' -> 'desktop' -> () From: ( | {
          'Comment: When left clicking on desktop,
 do we get a viewScrollMorph or a 
-carpetMorph?\x7fModuleInfo: Module: viewScrollMorph InitialContents: InitializeToExpression: (false)'
+carpetMorph?\x7fModuleInfo: Module: viewScrollMorph InitialContents: InitializeToExpression: (true)'
         
-         useViewScrollMorph <- bootstrap stub -> 'globals' -> 'false' -> ().
+         useViewScrollMorph <- bootstrap stub -> 'globals' -> 'true' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
