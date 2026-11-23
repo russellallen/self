@@ -106,7 +106,8 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          'Category: ui1BackwardsCompatibility\x7fModuleInfo: Module: point InitialContents: FollowSlot\x7fVisibility: public'
         
          #! pt = ( |
-            | oldStyleRectangle from: self To: pt).
+            | 
+            # (pt + (1@1))).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'point' -> () From: ( | {
@@ -120,7 +121,8 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          'Category: ui1BackwardsCompatibility\x7fModuleInfo: Module: point InitialContents: FollowSlot\x7fVisibility: public'
         
          ##! sz = ( |
-            | oldStyleRectangle from: self To: + sz maxPoint).
+            | 
+            ## sz).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'point' -> () From: ( | {

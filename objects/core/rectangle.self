@@ -205,24 +205,21 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
 	  the returned rectangles do not overlap rect. These methods may
 	  go better somewhere else, but I don\'t know where yet--dmu 2/91\x7fModuleInfo: Module: rectangle InitialContents: FollowSlot\x7fVisibility: public'
         
-         deltaList: rect = ( | {
-                 'ModuleInfo: Module: rectangle InitialContents: FollowSlot'
-                
-                 c.
-                } 
+         deltaList: rect = ( |
+             c.
             | 
             c: list copyRemoveAll.
             (intersects: rect) ifFalse: [ ^ c add: self ].
             top < rect top ifTrue: [
-                c add: topLeft # (right @ rect top predecessor) ].
+                c add: topLeft # (right @ rect top) ].
             left < rect left ifTrue: [ 
                 c add: bottomLeft
-                     # (rect left predecessor @ (top max: rect top)) ].
+                     # (rect left @ (top max: rect top)) ].
             right > rect right ifTrue: [ 
-                c add: (rect right successor @ (top max: rect top))
+                c add: (rect right @ (top max: rect top))
                       # bottomRight ].
             bottom > rect bottom ifTrue: [ 
-                c add: ((left max: rect left) @ rect bottom successor)
+                c add: ((left max: rect left) @ rect bottom)
                         # ((right min: rect right) @ bottom) ].
             c).
         } | ) 
