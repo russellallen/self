@@ -73,7 +73,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          arcWithin: rect From: startAngle Spanning: spanAngle Color: cme = ( |
             | 
-            image gc foreground8Bit: cme.
+            image gc foregroundColor: cme.
             image drawArcWithin: rect
                            From: startAngle
                        Spanning: spanAngle
@@ -153,7 +153,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          fillArcWithin: rect From: startAngle Spanning: spanAngle Color: cme = ( |
             | 
-            image gc foreground8Bit: cme.
+            image gc foregroundColor: cme.
             image fillArcWithin: rect
                            From: startAngle
                        Spanning: spanAngle
@@ -162,18 +162,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'drawing' -> () From: ( | {
-         'ModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
+         'Comment: Stipple or Direct alpha via withStipple:Do:. -- grok 08/26/26\x7fModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
         
          fillArcWithin: rect From: startAngle Spanning: spanAngle Pattern: pattern Color: cme = ( |
             | 
-            pattern isNull ifTrue: [
-                ^ fillArcWithin: rect From: startAnmgle
-                  Spanning: spanAngle Color: cme ].
-            image gc fillStippled.
-            image gc stipple: pattern image.
-            fillArcWithin: rect From: startAngle Spanning: spanAngle Color: cme.
-            image gc fillSolid.
-            self).
+            withStipple: pattern Do: [
+                fillArcWithin: rect From: startAngle Spanning: spanAngle Color: cme
+            ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'drawing' -> () From: ( | {
@@ -186,7 +181,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                   Spanning: spanAngle Color: cme ].
             image gc fillOpaqueStippled.
             image gc stipple: pattern image.
-            image gc background8Bit: bgcme.
+            image gc backgroundColor: bgcme.
             fillArcWithin: rect From: startAngle Spanning: spanAngle Color: cme.
             image gc fillSolid.
             self).
@@ -214,17 +209,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'drawing' -> () From: ( | {
-         'ModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
+         'Comment: Stipple or Direct alpha via withStipple:Do:. -- grok 08/26/26\x7fModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
         
          fillCircleCenteredAt: ctr Diameter: d Pattern: pattern Color: cme = ( |
             | 
-            pattern isNull ifTrue: [
-                ^ fillCircle centeredAt: ctr Diameter: d Color: cme ].
-            image gc fillStippled.
-            image gc stipple: pattern image.
-            fillCircleCenteredAt: ctr Diameter: d Color: cme.
-            image gc fillSolid.
-            self).
+            withStipple: pattern Do: [
+                fillCircleCenteredAt: ctr Diameter: d Color: cme
+            ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'drawing' -> () From: ( | {
@@ -236,7 +227,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                 ^ fillCircle centeredAt: ctr Diameter: d Color: cme ].
             image gc fillOpaqueStippled.
             image gc stipple: pattern image.
-            image gc background8Bit: bgcme.
+            image gc backgroundColor: bgcme.
             fillCircleCenteredAt: ctr Diameter: d Color: cme.
             image gc fillSolid.
             self).
@@ -257,23 +248,32 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          fillPolygon: pointList Color: cme = ( |
             | 
-            image gc foreground8Bit: cme.
+            image gc foregroundColor: cme.
             image fillPolygon: pointList GC: image gc.
             self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'drawing' -> () From: ( | {
-         'ModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
+         'Comment: Stipple or Direct alpha via withStipple:Do:. Motion blur uses this. -- grok 08/26/26\x7fModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
         
          fillPolygon: pointList Pattern: pattern Color: cme = ( |
             | 
-            pattern isNull ifTrue: [ ^ fillPolygon: pointList Color: cme ].
+            withStipple: pattern Do: [ fillPolygon: pointList Color: cme ]).
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'drawing' -> () From: ( | {
+         'Comment: X11: 1-bit stipple. Direct 32-bit: CG alpha from pattern stippleAlpha. Null pattern skips to a solid fill in the caller. -- grok 08/26/26\x7fModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: private'
+        
+         withStipple: pattern Do: blk = ( |
+            | 
+            pattern isNull ifTrue: [ ^ blk value ].
             image gc fillStippled.
             image gc stipple: pattern image.
-            fillPolygon: pointList Color: cme.
+            image gc stippleAlphaFrom: pattern.
+            blk value.
             image gc fillSolid.
             self).
-        } | ) 
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'drawing' -> () From: ( | {
          'ModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
@@ -283,7 +283,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             pattern isNull ifTrue: [ ^ fillPolygon: pointList Color: cme ].
             image gc fillOpaqueStippled.
             image gc stipple: pattern image.
-            image gc background8Bit: bgcme.
+            image gc backgroundColor: bgcme.
             fillPolygon: pointList Color: cme.
             image gc fillSolid.
             self).
@@ -294,22 +294,18 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          fillRectangle: rect Color: cme = ( |
             | 
-            image gc foreground8Bit: cme.
+            [xxxxx].
+            image gc foregroundColor: cme.
             image fillRectangle: rect GC: image gc.
             self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'drawing' -> () From: ( | {
-         'ModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
+         'Comment: Stipple or Direct alpha via withStipple:Do:. -- grok 08/26/26\x7fModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
         
          fillRectangle: rect Pattern: pattern Color: cme = ( |
             | 
-            pattern isNull ifTrue: [ ^ fillRectangle: rect Color: cme ].
-            image gc fillStippled.
-            image gc stipple: pattern image.
-            fillRectangle: rect Color: cme.
-            image gc fillSolid.
-            self).
+            withStipple: pattern Do: [ fillRectangle: rect Color: cme ]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'drawing' -> () From: ( | {
@@ -320,7 +316,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             pattern isNull ifTrue: [ ^ fillRectangle: rect Color: cme ].
             image gc fillOpaqueStippled.
             image gc stipple: pattern image.
-            image gc background8Bit: bgcme.
+            image gc backgroundColor: bgcme.
             fillRectangle: rect Color: cme.
             image gc fillSolid.
             self).
@@ -331,7 +327,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          line: pt1 To: pt2 Color: cme = ( |
             | 
-            image gc foreground8Bit: cme.
+            image gc foregroundColor: cme.
             image drawLine: pt1 To: pt2 GC: image gc.
             self).
         } | ) 
@@ -352,7 +348,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          lines: pointList Width: width Color: cme = ( |
             | 
-            image gc foreground8Bit: cme.
+            image gc foregroundColor: cme.
             image gc lineWidth: width.
             image drawLines: pointList GC: image gc.
             image gc lineWidth: 0.
@@ -364,7 +360,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          point: pt Color: cme = ( |
             | 
-            image gc foreground8Bit: cme.
+            image gc foregroundColor: cme.
             image drawPoint: pt GC: image gc.
             self).
         } | ) 
@@ -392,7 +388,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          rectangle: rect Color: cme = ( |
             | 
-            image gc foreground8Bit: cme.
+            image gc foregroundColor: cme.
             image drawRectangle: rect GC: image gc.
             self).
         } | ) 
@@ -409,30 +405,32 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'drawing' -> () From: ( | {
-         'ModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
+         'Comment: ui1 text is bilevel (AA off), matching indexed/X11. Direct offscreens keep AA on for 3-D corners; only glyphs go aliased. -- grok 08/26/26\x7fModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
         
          text: string At: pt Font: font Color: cme = ( |
              y.
             | 
             y: pt y + (font height - font descender).
-            image gc foreground8Bit: cme.
+            image gc foregroundColor: cme.
             image gc font: font xfont.
-            image drawString: string At: pt x @ y GC: image gc.
+            image withAntialiasing: false Do: [
+                image drawString: string At: pt x @ y GC: image gc ].
             self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'drawing' -> () From: ( | {
-         'ModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
+         'Comment: Same aliased glyphs as text:At:Font:Color:. -- grok 08/26/26\x7fModuleInfo: Module: drawing InitialContents: FollowSlot\x7fVisibility: public'
         
          textLines: txt At: pt Font: font Color: cme = ( |
              y.
             | 
             y: pt y + (font height - font descender).
-            image gc foreground8Bit: cme.
+            image gc foregroundColor: cme.
             image gc font: font xfont.
-            txt lines do: [ | :aLine |
-                image drawString: aLine At: pt x @ y GC: image gc.
-                y: y + font height ].
+            image withAntialiasing: false Do: [
+                txt lines do: [ | :aLine |
+                    image drawString: aLine At: pt x @ y GC: image gc.
+                    y: y + font height ]].
             self).
         } | ) 
 

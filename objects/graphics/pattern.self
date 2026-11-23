@@ -152,7 +152,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         
          point: pt Color: c GC: gc = ( |
             | 
-            gc foreground8Bit: c.
+            gc foregroundColor: c.
             image drawPoint: pt GC: gc.
             self).
         } | ) 

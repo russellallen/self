@@ -183,10 +183,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'bitmap' -> () From: ( | {
-         'Category: copyingAreas\x7fModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: copyingAreas\x7fComment: 8-bit is AND then OR (index 0 corners). Direct BGRA bodies already have alpha 0 there, so source-over is the stencil; AND/OR would stamp opaque black.\x7fModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          copy: rect Mask: mask To: dest At: destPt = ( |
             | 
+            image depth > 8 ifTrue: [
+                ^ copy: rect To: dest At: destPt
+            ].
             image gc function: image gc gxAnd.
             mask copy: rect To: dest At: destPt.
             image gc function: image gc gxOr.
@@ -280,10 +283,10 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          initializeForPixmap: pix Size: size Depth: depth = ( |
             | 
-            image: ui1GraphicsGlobals
-                   platformPixmap createForSameScreenAs: pix
-                                                   Size: size
-                                                  Depth: depth).
+            image: (pix platformPixmapForDepth: depth) 
+                createForSameScreenAs: pix
+                Size: size
+                Depth: depth).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'bitmap' -> () From: ( | {
@@ -392,11 +395,11 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'windowBitmap' -> () From: ( | {
-         'ModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
+         'Comment: the platform drawable this windowBitmap draws into. X and 8-bit Quartz: the native window (depth 8). Direct Quartz: the 32-bit RGBA shadow pixmap.\x7fModuleInfo: Module: bitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          image = ( |
             | 
-            window platformWindow).
+            window platformWindow bitmapImage).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'windowBitmap' -> () From: ( | {

@@ -4039,7 +4039,17 @@ to empty.
         
          open = ( |
             | open: '').
-        } | ) 
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'display' -> () From: ( | {
+         'Category: connections\x7fComment: On macOS, X11 is weakly linked; calling open: with no dylib crashes. True on Linux/BSD (X is a hard dep). -- grok 08/29/26\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         libraryPresent = ( |
+            | 
+            host osName == 'macOSX' ifFalse: [^ true].
+            (os_file exists: '/opt/X11/lib/libX11.6.dylib')
+              || [os_file exists: '/opt/X11/lib/libX11.dylib']).
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'display' -> () From: ( | {
          'Category: connections\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
@@ -4769,7 +4779,16 @@ an object with these slots:
         
          background = ( |
             | getValues: gcBackground. xgcv background).
-        } | ) 
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'graphicsContext' -> () From: ( | {
+         'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         backgroundColor: cme = ( |
+            | 
+            [todo ui1 dmu experimental].
+            background: cme index).
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'graphicsContext' -> () From: ( | {
          'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
@@ -4897,7 +4916,14 @@ an object with these slots:
         
          fillStippled = ( |
             | fillStyle: fillStyles fillStippled).
-        } | ) 
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'graphicsContext' -> () From: ( | {
+         'Comment: Direct maps stipple density to CG alpha. X11 already installed the pixmap via stipple:. -- grok 08/26/26\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         stippleAlphaFrom: pattern = ( |
+            | self).
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'graphicsContext' -> () From: ( | {
          'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
@@ -4979,7 +5005,16 @@ an object with these slots:
         
          foreground = ( |
             | getValues: gcForeground. xgcv foreground).
-        } | ) 
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'graphicsContext' -> () From: ( | {
+         'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         foregroundColor: cme = ( |
+            | 
+            [todo ui1 dmu experimental].
+            foreground: cme index).
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'graphicsContext' -> () From: ( | {
          'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
@@ -5596,7 +5631,18 @@ an object with these slots:
          'ModuleInfo: Module: xlib InitialContents: FollowSlot'
         
          whichProxy = 'xlib-visual'.
-        } | ) 
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'Category: creating\x7fComment: shared tail of configureAsTopLevel...: set the event mask, start listening, and map the window. -- claude & dmu 6/2026\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: private'
+        
+         beginEventsWithMask: em = ( |
+            | 
+            eventMask: em.
+            selectInput.
+            map.
+            self).
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
          'Category: querying\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
@@ -5627,7 +5673,28 @@ an object with these slots:
              when the 'xClearArea...' was added.   Ole Agesen, July 1996."
             display xClearAreaIn: self X: 0 Y: 0 Width: 0 Height: 0 Exposures: false.
             doAutoFlush).
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'Category: creating\x7fComment: Full bring-up of a freshly-created managed top-level window: name it, register with the WM (focusable + delete protocol), then begin listening with the given event mask and map it. -- claude & dmu 6/2026\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         configureAsTopLevelNamed: nm EventMask: em = ( |
+            | 
+            name: nm.
+            registerAsWMTopLevel.
+            beginEventsWithMask: em).
         } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'Category: creating\x7fComment: see configureAsTopLevelNamed:EventMask: -- this variant also sets the icon name and pixmap -- claude & dmu 6/2026\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         configureAsTopLevelNamed: nm IconName: inm Icon: icon EventMask: em = ( |
+            | 
+            name: nm.
+            iconName: inm.
+            registerAsWMTopLevelIcon: icon.
+            beginEventsWithMask: em).
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
          'Category: constants\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
@@ -5763,7 +5830,17 @@ an object with these slots:
             | 
             autoFlush ifTrue: [display flush].
             self).
-        } | ) 
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'Category: manipulating\x7fComment: On MacOS27, aka GoldenGate, an XQuartz ui2 window does not receive keystrokes when you click on it
+unless the OS is told to frontmost the XQuartz app. -- dmu 6/26\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         ensureFrontmost = ( |
+            | 
+            os command: 'open -a XQuartz &' IfFail: [|:e| 'ensureFrontmost, open failed' printLine. ^ self].
+            self).
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
@@ -5965,7 +6042,21 @@ so all bits matter.\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fV
          'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'xlib' -> 'drawable' -> ().
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'Comment: windowBitmap image: on X the window is the drawable.\x7fModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         bitmapImage = ( |
+            | self).
         } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'ModuleInfo: Module: xlib InitialContents: FollowSlot'
+        
+         platformPixmapForDepth: d = ( |
+            | xlib pixmap).
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
          'Category: manipulating\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
@@ -5974,7 +6065,27 @@ so all bits matter.\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fV
             | 
             display xRaiseWindow: self.
             doAutoFlush).
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'Category: creating\x7fComment: Register as a normal, focusable WM top-level: WM_HINTS state+input (input:true => a click activates the app and assigns keyboard focus, like xterm; XQuartz/quartz-wm will NOT focus a window that omits this), plus the WM_DELETE_WINDOW protocol so the close box routes back to us. -- claude & dmu 6/2026\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         registerAsWMTopLevel = ( |
+            | 
+            iconified: false Input: true.
+            catchWMDelete.
+            self).
         } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
+         'Category: creating\x7fComment: see registerAsWMTopLevel -- this variant also sets the icon pixmap -- claude & dmu 6/2026\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         registerAsWMTopLevelIcon: icon = ( |
+            | 
+            iconified: false Icon: icon Input: true.
+            catchWMDelete.
+            self).
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'window' -> () From: ( | {
          'Category: constants\x7fCategory: InputFocus\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
@@ -6303,7 +6414,25 @@ so all bits matter.\x7fModuleInfo: Module: xlib InitialContents: FollowSlot\x7fV
          'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: private'
         
          whichProxy = 'xlib-xFontStruct'.
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'xGCValues' -> () From: ( | {
+         'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         backgroundColor: cme = ( |
+            | 
+            [todo ui1 dmu experimental].
+            background: cme index).
         } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'xGCValues' -> () From: ( | {
+         'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'
+        
+         foregroundColor: cme = ( |
+            | 
+            [todo ui1 dmu experimental].
+            foreground: cme index).
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'xGCValues' -> () From: ( | {
          'ModuleInfo: Module: xlib InitialContents: FollowSlot\x7fVisibility: public'

@@ -65,7 +65,25 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          subpartNames <- 'quartzFont
 quartzFontFamily
 '.
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'quartz' -> () From: ( | {
+         'Category: quartz font objects\x7fComment: Substitute for X11 lucidasans (ui1 boxFont). Indexed and direct both use Verdana (screen face). Direct draws ui1 text with AA off so Bold is not heavy. Helvetica Neue Light+AA was fuzzy vs old ui1. -- grok 08/26/26\x7fModuleInfo: Module: quartzForFF InitialContents: InitializeToExpression: (\'Verdana\')\x7fVisibility: public'
+        
+         lucidaSansFamily <- 'Verdana'.
         } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'quartz' -> () From: ( | {
+         'Category: quartz font objects\x7fComment: Appended to lucidaSansFamily for empty/roman style (undeclared slots). Empty means use the family name alone (Verdana). -- grok 08/26/26\x7fModuleInfo: Module: quartzForFF InitialContents: InitializeToExpression: (\'\')\x7fVisibility: public'
+        
+         lucidaSansRomanSuffix <- ''.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'quartz' -> () From: ( | {
+         'Category: quartz font objects\x7fComment: Appended to lucidaSansFamily for style bold (public slots). Verdana Bold, same as indexed. -- grok 08/26/26\x7fModuleInfo: Module: quartzForFF InitialContents: InitializeToExpression: (\'Bold\')\x7fVisibility: public'
+        
+         lucidaSansBoldSuffix <- 'Bold'.
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'quartz' -> () From: ( | {
          'Category: quartz font objects\x7fModuleInfo: Module: quartzForFF InitialContents: FollowSlot\x7fVisibility: private'
@@ -166,10 +184,26 @@ quartzFontFamily
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'quartz' -> 'atsFontOrFontFamily' -> 'parent' -> () From: ( | {
          'ModuleInfo: Module: quartzForFF InitialContents: FollowSlot\x7fVisibility: private'
         
-         quartzNameForFontSpec: fs = ( |
-            | 
-            (fs name first isDigit "e.g. 6x13" 
-                    ifTrue: 'Courier' False: [fs name capitalize]),
+         quartzNameForFontSpec: fs = ( | nm |
+            nm: fs name.
+            "X11 monospace font names dont exist on macOS; CTFontCreateWithName would silently substitute a PROPORTIONAL font, and the fixed-width text editor (caret/layout assume one cell width per char) then drifts -- e.g. the caret lands a half-char behind. Map the known X monospace families to a real macOS monospace so every glyph has the same advance. -- claude & dmu 5/26"
+            ((nm = 'lucidasanstypewriter') || [nm = 'lucidatypewriter']
+                                           || [nm = 'fixed'] || [nm = 'screen'] || [nm = 'monospace'])
+              ifTrue: [^ 'Menlo', (fs style isEmpty ifTrue: '' False: [' ', fs style capitalize])].
+            ((nm = 'lucidasans') || [nm = 'lucida'] || [nm = 'lucidabright'])
+              ifTrue: [
+                fs style isEmpty ifTrue: [
+                  quartz lucidaSansRomanSuffix isEmpty
+                    ifTrue: [^ quartz lucidaSansFamily]
+                     False: [^ quartz lucidaSansFamily, ' ', quartz lucidaSansRomanSuffix]
+                ].
+                (fs style = 'bold') ifTrue: [
+                    ^ quartz lucidaSansFamily, ' ', quartz lucidaSansBoldSuffix
+                ].
+                ^ quartz lucidaSansFamily, ' ', fs style capitalize
+              ].
+            (nm first isDigit "e.g. 6x13"
+                    ifTrue: 'Courier' False: [nm capitalize]),
             (fs style isEmpty ifTrue: '' False: [' ', fs style capitalize])).
         } | ) 
 
