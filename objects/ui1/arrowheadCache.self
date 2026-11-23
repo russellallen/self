@@ -1,65 +1,11 @@
  'Sun-$Revision: 30.9 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
 
  '-- Module body'
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: public'
-        
-         arrowheadCache = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'arrowheadCache' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals arrowheadCache.
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: public'
-        
-         arrowheadCache = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits arrowheadCache.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'arrowheadCache' -> () From: ( | {
-         'ModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
-        
-         parent* = bootstrap stub -> 'traits' -> 'arrowheadCache' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'arrowheadCache' -> () From: ( | {
-         'ModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
-        
-         prototypeName = 'arrowheadCache'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'arrowheadCache' -> () From: ( | {
-         'ModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
-        
-         repNegNeg <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'arrowheadCache' -> () From: ( | {
-         'ModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
-        
-         repNegPos <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'arrowheadCache' -> () From: ( | {
-         'ModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
-        
-         repPosNeg <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'arrowheadCache' -> () From: ( | {
-         'ModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
-        
-         repPosPos <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
-        } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: arrowheadCache InitialContents: FollowSlot'
@@ -114,14 +60,68 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: public'
+        
+         arrowheadCache = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'arrowheadCache' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 arrowheadCache.
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: public'
+        
+         arrowheadCache = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 arrowheadCache.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
+         'ModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
+         'ModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
+        
+         prototypeName = 'arrowheadCache'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
+         'ModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
+        
+         repNegNeg <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
+         'ModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
+        
+         repNegPos <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
+         'ModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
+        
+         repPosNeg <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
+         'ModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
+        
+         repPosPos <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
         
          cacheSize: length = ( |
             | 10 * length).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: filing out\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: public'
         
          copyRemoveAll = ( |
@@ -129,7 +129,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             clone repCopy: 0).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
         
          fillInHoles = ( |
@@ -140,7 +140,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             fillInHoles: repNegNeg).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: creating\x7fComment: assumes that first and last elements of rep are filled\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
         
          fillInHoles: rep = ( |
@@ -162,7 +162,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
         
          fillLength: l Width: w = ( | {
@@ -182,7 +182,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: accessing\x7fComment: dx and dy should be positive\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
         
          indexForDx: dx Dy: dy = ( |
@@ -191,7 +191,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             ((dy /= dx) * 10) asInteger min: repPosPos lastKey).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
         
          insertAt: index TriangleVector: vec = ( | {
@@ -223,7 +223,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
         
          insertIn: rep At: index P0: p0 P1: p1 P2: p2 = ( | {
@@ -240,7 +240,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: public'
         
          makeLength: length Width: width = ( |
@@ -249,7 +249,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             fillLength: length Width: width).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
         
          nextCondition: block Of: rep StartingAt: index = ( | {
@@ -265,7 +265,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             i).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
         
          nextFilled: rep StartingAt: index = ( | {
@@ -277,7 +277,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             nextCondition: [ | :e | nil != e ] Of: rep StartingAt: index).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
         
          nextHole: rep StartingAt: index = ( |
@@ -285,13 +285,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             nextCondition: [ | :e | e isNil ] Of: rep StartingAt: index).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'ModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
         
          repCopy: length = ( | {
@@ -308,7 +308,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: accessing\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: public'
         
          retrieveDx: dx Dy: dy = ( | {
@@ -330,31 +330,31 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                     repPosPos at: indexForDx: dx Dy: dy ] ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: filing out\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: public'
         
          size = ( |
             | repPosPos size).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: filing out\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: public'
         
          storeStringIfFail: fb = ( |
             | "another file out hack"
             size = 0 
                 ifFalse: [ fb value: 'not empty']
-                   True: [ prototypeName, ' copyRemoveAll']).
+                   True: [ 'ui1 ', prototypeName, ' copyRemoveAll']).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: filing out\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
         
          storeStringNeeds = ( |
-            | prototypeName sendTo: lobby).
+            | ui1 arrowheadCache).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'arrowheadCache' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'arrowheadCache' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: arrowheadCache InitialContents: FollowSlot\x7fVisibility: private'
         
          vectorForDx: dx Dy: dy Length: length Width: width = ( | {

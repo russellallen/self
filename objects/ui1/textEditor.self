@@ -1,90 +1,141 @@
  'Sun-$Revision: 30.10 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
 
  '-- Module body'
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
+         'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
-         windowContext = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'windowContext' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals windowContext.
+         textEditor = bootstrap define: bootstrap stub -> 'globals' -> 'modules' -> 'textEditor' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'directory' From:
+             bootstrap remove: 'fileInTimeString' From:
+             bootstrap remove: 'myComment' From:
+             bootstrap remove: 'postFileIn' From:
+             bootstrap remove: 'revision' From:
+             bootstrap remove: 'subpartNames' From:
+             globals modules init copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'modules' -> 'textEditor' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals modules textEditor.
+
+CopyDowns:
+globals modules init. copy 
+SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNames.
+
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         container <- bootstrap stub -> 'globals' -> 'uiNester' -> ().
+         directory <- 'ui1'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'textEditor' -> () From: ( | {
+         'ModuleInfo: Module: textEditor InitialContents: InitializeToExpression: (_CurrentTimeString)\x7fVisibility: public'
+        
+         fileInTimeString <- _CurrentTimeString.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'textEditor' -> () From: ( | {
+         'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
+        
+         myComment <- 'Lars\' text editor'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'textEditor' -> () From: ( | {
+         'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+        
+         revision <- 'Sun-$Revision: 30.10 $'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'textEditor' -> () From: ( | {
+         'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+        
+         subpartNames <- ''.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+        
+         windowContext = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'windowContext' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 windowContext.
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'windowContext' -> () From: ( | {
+         'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+        
+         container <- bootstrap stub -> 'globals' -> 'ui1' -> 'uiNester' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'Comment: width and height of the context.\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          extent <- (100)@(100).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          name <- 'First Context'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'Comment: offset from parent window.\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          offset <- (0)@(0).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         windowContext = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'windowContext' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits windowContext.
+         windowContext = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 windowContext.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'windowContext' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          componentsDo: block = ( |
             | self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          copySize: size = ( |
             | clone extent: size).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          draw = ( |
             | drawFrame).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          drawFrame = ( |
             | 
-            drawBodySunkenRectangle: bound topLeft #! (bound bottomRight + (1@1))).
+            drawBodySunkenRectangle: bound topLeft # (bound bottomRight + (1@1))).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          drawLine: p1 To: p2 = ( |
@@ -92,7 +143,7 @@ See the LICENSE file for license information.
             graphic line: p1 To: p2 Color: uiColors text).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          drawText: string At: pt = ( |
@@ -103,41 +154,41 @@ See the LICENSE file for license information.
                  Color: uiColors text).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          flush = ( |
             | world flushGraphics. self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          graphic = ( |
             | container graphic).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          location = ( |
             | offset).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'uiNester' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'uiNester' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          size = ( |
             | extent).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'windowContext' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          statePrintString = ( |
@@ -145,153 +196,153 @@ See the LICENSE file for license information.
             name, '(', bound printString, ') ').
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         button = bootstrap define: bootstrap stub -> 'globals' -> 'button' -> () ToBe: bootstrap addSlotsTo: (
+         button = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'button' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'name' From:
              bootstrap remove: 'parent' From:
-             globals windowContext copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'button' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals button.
+             globals ui1 windowContext copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'button' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 button.
 
 CopyDowns:
-globals windowContext. copy 
+globals ui1 windowContext. copy 
 SlotsToOmit: name parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'button' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         command <- bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'button' -> 'command' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals button command.
+         command <- bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'button' -> 'command' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 button command.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'button' -> 'command' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'button' -> 'command' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          doIt: context = ( |
             | ('do: ', context printString) printLine).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'button' -> 'command' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'button' -> 'command' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          doIt: context Shift: shift = ( |
             | doIt: context).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'button' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          name <- 'button'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         button = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'button' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits button.
+         button = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 button.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'button' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'button' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         caret = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'caret' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals caret.
+         caret = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'caret' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 caret.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          context.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          extent <- (0)@(0).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         caret = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'caret' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits caret.
+         caret = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'caret' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 caret.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'caret' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'caret' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          position <- (0)@(0).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          visible <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         myWindow = bootstrap define: bootstrap stub -> 'globals' -> 'myWindow' -> () ToBe: bootstrap addSlotsTo: (
+         myWindow = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'myWindow' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals boxBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'myWindow' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals myWindow.
+             globals ui1 boxBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'myWindow' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 myWindow.
 
 CopyDowns:
-globals boxBody. copy 
+globals ui1 boxBody. copy 
 SlotsToOmit: parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'myWindow' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'myWindow' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          name <- 'Text Editor'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         myWindow = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'myWindow' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits myWindow.
+         myWindow = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'myWindow' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 myWindow.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'myWindow' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'myWindow' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'myWindow' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'myWindow' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'myWindow' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'myWindow' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          addContext: comp At: pt = ( |
@@ -301,7 +352,7 @@ SlotsToOmit: parent.
             components add: comp).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'myWindow' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'myWindow' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          contextChange: con = ( |
@@ -310,7 +361,7 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'myWindow' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'myWindow' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          draw = ( |
@@ -320,237 +371,374 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'myWindow' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'myWindow' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'boxBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'boxBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         textEditor = bootstrap define: bootstrap stub -> 'globals' -> 'textEditor' -> () ToBe: bootstrap addSlotsTo: (
+         textEditor = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
              bootstrap remove: 'size' From:
-             globals myWindow copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'textEditor' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals textEditor.
+             globals ui1 myWindow copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 textEditor.
 
 CopyDowns:
-globals myWindow. copy 
+globals ui1 myWindow. copy 
 SlotsToOmit: parent size.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          applyButton.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          applyButtonName <- 'Apply'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          applyMessage.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          cancelButton.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          dismissButtonName <- 'Dismiss'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          interactive <- bootstrap stub -> 'globals' -> 'true' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          methodSlider.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         textField = bootstrap define: bootstrap stub -> 'globals' -> 'textField' -> () ToBe: bootstrap addSlotsTo: (
+         textField = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'name' From:
              bootstrap remove: 'parent' From:
-             globals windowContext copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'textField' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals textField.
+             globals ui1 windowContext copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 textField.
 
 CopyDowns:
-globals windowContext. copy 
+globals ui1 windowContext. copy 
 SlotsToOmit: name parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         methodView <- bootstrap stub -> 'globals' -> 'textField' -> ().
+         methodView <- bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'Comment: hacked for dynamic resizing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          offsetFromBody <- (0)@(0).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         textEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'textEditor' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits textEditor.
+         textEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'textEditor' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 textEditor.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'textEditor' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'textEditor' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          resizeHandle.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          size <- (200)@(80).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          stayup <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          c.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          contents <- ((bootstrap stub -> 'globals') \/-> 'vector') -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          current <- 0.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          hasSelection <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          in_ctrl_k <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          insertionPoint <- (0)@(0).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          isearchDirection <- 'forward'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          isearchMode <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          isearchString <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          name <- 'text field'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          off <- 0.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         textField = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'textField' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits textField.
+         textField = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 textField.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'textField' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          selectionEnd <- (0)@(0).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         textApplication = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits textApplication.
+         textApplication = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 textApplication.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
-         'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Size of the Apply/Eval button from its label and footerButtonTextInset. Used both to create the button and to compute min width, because copyOn:Size: calls computeSize: before init. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
-         computeSize: s = ( |
-            | (s x max: 200)@(s y max: 70)).
+         applyButtonSize = ( |
+            | footerButtonSizeFor: applyButtonName).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Min width fits the footer from widget sizes: title at footerTitleLeft, then Dismiss, Eval, and the resize handle packed by resize:. Use ui (world myUI), not boxSizing: copyOn:Size: runs before container is set, so boxSizing -> container myUI misses the loaded fonts. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
+        
+         computeSize: s = ( |
+             minW.
+             tw <- 0.
+            | 
+            ui boxSizing textEditorFont ifNotNil: [| :f |
+                tw: f widthOfString: printString.
+            ].
+            minW: footerTitleLeft + tw + footerWidgetGap +
+                  dismissButtonSize x + footerWidgetGap +
+                  applyButtonSize x + footerWidgetGap +
+                  footerHandleLeftFromRight.
+            (s x max: minW) @ (s y max: footerMinHeight)).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Bottom gap under Dismiss/Eval; sideMargin succ keeps the 16px button clear of the 3-D bottom. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
+        
+         footerButtonBottomMargin = ( |
+            | sideMargin succ).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Width @ height for a footer button: twice the text inset plus the label, and inset y plus the button font height. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
+        
+         footerButtonSizeFor: label = ( |
+             f.
+             h.
+             w.
+            | 
+            f: ui boxSizing fixedEditorFont.
+            f ifNil: [ ^ (50) @ 16 ].
+            w: (footerButtonTextInset x * 2) + (f widthOfString: label).
+            h: footerButtonTextInset y + f height.
+            w @ h).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Inset of the label inside a footer button; same point as traits ui1 button textInset. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
+        
+         footerButtonTextInset = ( |
+            | ui1 button textInset).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Top of the Dismiss/Eval row. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
+        
+         footerButtonTop = ( |
+            | 
+            (size y - footerButtonBottomMargin) - applyButtonSize y).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Gap under the resize handle; same as the body sideMargin. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
+        
+         footerHandleBottomMargin = ( |
+            | sideMargin).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Distance from the editor right edge to the handle left: handle width plus the 3-D side face. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
+        
+         footerHandleLeftFromRight = ( |
+            | 
+            footerResizeHandleExtent x + footerHandleRightMargin).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Sit the handle just past the 3-D side face. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
+        
+         footerHandleRightMargin = ( |
+            | boxSizing baseSideFaceWidth succ).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Height reserved under the text field for the footer row and the 3-D bottom. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
+        
+         footerReservedHeight = ( |
+            | 
+            (applyButtonSize y + footerButtonBottomMargin)
+                + boxSizing baseBottomMargin).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Default editor height before the user stretches it. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
+        
+         footerMinHeight = 70.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Size of the resize handle; init copySize: uses this so computeSize: can match before the handle exists. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
+        
+         footerResizeHandleExtent = (10) @ (10).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Left edge of the footer title, twice the object-body left margin. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
+        
+         footerTitleLeft = ( |
+            | boxSizing baseLeftMargin * 2).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Gap between footer title, Dismiss, Eval, and the handle. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
+        
+         footerWidgetGap = 10.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Size of the Dismiss button from its label. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
+        
+         dismissButtonSize = ( |
+            | footerButtonSizeFor: dismissButtonName).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Shorten the footer title until it fits to the left of Dismiss, so glyphs cannot leak into the button (the black speck). -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
+        
+         footerTitleFitting: s Font: f = ( |
+             maxW.
+             t.
+            | 
+            t: s.
+            maxW: size x - footerHandleLeftFromRight.
+            cancelButton ifNotNil: [
+                maxW: cancelButton offset x - footerWidgetGap.
+            ].
+            maxW: maxW - footerTitleLeft.
+            [ (f widthOfString: t) <= maxW ] whileFalse: [
+                t isEmpty ifTrue: [ ^ t ].
+                t: t copySize: t size pred.
+            ].
+            t).
+        } | )   
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          copyOn: wrld = ( | {
@@ -564,14 +752,14 @@ SlotsToOmit: name parent.
             w).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          copyOn: wrld Size: s = ( |
             | copyOn: wrld Size: s Do: []).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          copyOn: wrld Size: s Do: blk = ( | {
@@ -588,14 +776,14 @@ SlotsToOmit: name parent.
             w).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          currentGraphic = ( |
             | interactive ifTrue: [ window bitmap ] False: [ graphic ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          currentGraphicOffset: cpt = ( |
@@ -604,7 +792,7 @@ SlotsToOmit: name parent.
                          False: [ cpt location + body offsetFromBody "resizehack" ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          draw = ( |
@@ -615,22 +803,39 @@ SlotsToOmit: name parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
-         'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'Comment: Footer title on the Dismiss/Eval row. drawing.self adds height-descender per font; Menlo vs Helvetica Neue differ, so match the button baseline (footerButtonTop + text inset). Truncate so the title cannot paint into Dismiss. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          drawTitle = ( | {
                  'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
                 
+                 bf.
+                }  {
+                 'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
+                
                  disableTitle = bootstrap stub -> 'globals' -> 'false' -> ().
+                }  {
+                 'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
+                
+                 tf.
+                }  {
+                 'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
+                
+                 y.
                 } 
             | 
             disableTitle ifTrue: [ ^ self "temporarily disable this feature" ].
-            drawBodyText: printString
-                      At: (10@(size y - 20))
-                    Font: boxSizing textEditorFont).
+            tf: boxSizing textEditorFont.
+            bf: boxSizing fixedEditorFont.
+            y: footerButtonTop + footerButtonTextInset y.
+            y: y + (bf height - bf descender).
+            y: y - (tf height - tf descender).
+            drawBodyText: (footerTitleFitting: printString Font: tf)
+                      At: footerTitleLeft @ y
+                    Font: tf).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          dynamicExpandSize: delta = ( |
@@ -638,14 +843,14 @@ SlotsToOmit: name parent.
             resize: (computeSize: size + delta) Reallocate: false).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          expandSize: delta = ( |
             | expandSize: delta Reallocate: true).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          expandSize: delta Reallocate: reallocate = ( | {
@@ -672,7 +877,7 @@ SlotsToOmit: name parent.
             world display).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          initGraphic = ( |
@@ -683,51 +888,51 @@ SlotsToOmit: name parent.
             resizeGraphic).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'myWindow' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'myWindow' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          resize: ext = ( |
             | resize: ext Reallocate: true).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          resproutCopyOn: wrld = ( |
             | copyOn: wrld Size: size).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          sideMargin = 3.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          statePrintString = ( |
             | name).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textApplication' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          topMargin = 2.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          addApply = ( |
             | 
-            applyButton: (button copySize: 50@16) name: applyButtonName.
+            applyButton: (ui1 button copySize: applyButtonSize) name: applyButtonName.
             applyButton  command: (|
                 p* = traits clonable.
                 textEditor.
@@ -750,7 +955,7 @@ SlotsToOmit: name parent.
             addContext: applyButton At: (30@140) + boxFaceOffset).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          contextChange: con = ( |
@@ -758,7 +963,7 @@ SlotsToOmit: name parent.
             con = methodSlider ifTrue: [ methodView scroll: con get_value ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          init = ( |
@@ -767,7 +972,7 @@ SlotsToOmit: name parent.
 
             addApply.
 
-            cancelButton: (button copySize: 64@16) name: dismissButtonName.
+            cancelButton: (ui1 button copySize: dismissButtonSize) name: dismissButtonName.
             cancelButton  command: (| 
                 p* = traits clonable.
                 textEditor.
@@ -781,17 +986,17 @@ SlotsToOmit: name parent.
                                        (topMargin @ sideMargin).
             methodView init.
 
-            methodSlider: (slider copySize: 13@100) name: 'slider'.
+            methodSlider: (ui1 slider copySize: 13@100) name: 'slider'.
             addContext: methodSlider At: (2@2) + boxFaceOffset + 
                                        (topMargin @ sideMargin).
             methodSlider value: 0.
 
-            resizeHandle: resizeButton copySize: 10@10.
-            addContext: resizeHandle At: 10@10.
-            resize: size).
+            resizeHandle: ui1 resizeButton copySize: footerResizeHandleExtent.
+            addContext: resizeHandle At: footerResizeHandleExtent.
+            resize: computeSize: size).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          leavingTopNotify = ( |
@@ -800,13 +1005,13 @@ SlotsToOmit: name parent.
             display).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'textApplication' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          resize: ext Reallocate: reallocate = ( | {
@@ -816,35 +1021,35 @@ SlotsToOmit: name parent.
                 }  {
                  'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
                 
-                 w = 10.
-                }  {
-                 'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
-                
                  y.
                 } 
             | 
             resend.resize: ext Reallocate: reallocate.
 
-            methodView resize: (faceSize x - (2 * sideMargin) - 18)@
-                               (faceSize y - topMargin - 26).
+            methodView resize:
+                ((faceSize x - (2 * sideMargin))
+                    - (methodSlider size x + boxSizing baseSideFaceWidth))
+                @ (faceSize y - (topMargin + footerReservedHeight)).
 
-            methodSlider resize: 13@(faceSize y - topMargin - 26) succ.
+            methodSlider resize: methodSlider size x @
+                ((faceSize y - (topMargin + footerReservedHeight)) succ).
 
-            line: size y - 20.
-            y: size x - 16.
-            resizeHandle offset: y@(size y - 13).
+            line: footerButtonTop.
+            y: (size x - footerHandleRightMargin) - resizeHandle size x.
+            resizeHandle offset:
+                y @ ((size y - footerHandleBottomMargin) - resizeHandle size y).
 
-            y: y - applyButton extent x - w.
-            applyButton offset: y@line.
+            y: (y - applyButton size x) - footerWidgetGap.
+            applyButton offset: y @ line.
 
-            y: y - cancelButton extent x - w.
-            cancelButton offset: y@line.
+            y: (y - cancelButton size x) - footerWidgetGap.
+            cancelButton offset: y @ line.
 
             draw.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          resproutOn: wrld = ( | {
@@ -862,7 +1067,7 @@ SlotsToOmit: name parent.
             e).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          addLinedTextToEnd: vec = ( |
@@ -872,7 +1077,7 @@ SlotsToOmit: name parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          addTextToEnd: str = ( | {
@@ -902,7 +1107,7 @@ SlotsToOmit: name parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          apply = ( |
@@ -911,28 +1116,28 @@ SlotsToOmit: name parent.
             body applyButton command doIt: body applyButton).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: cursor navigation\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          backward_char = ( |
             | goto: prevCharPosition).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          basicDraw = ( |
             | drawFrame. drawContents).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: cursor navigation\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          beginning_of_line = ( |
             | goto: 0@insertionPoint y).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: selection\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          changeSelection = ( | {
@@ -989,7 +1194,7 @@ SlotsToOmit: name parent.
             flush).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          changeSliderValue: redraw = ( | {
@@ -1004,7 +1209,7 @@ SlotsToOmit: name parent.
             container methodSlider changeValue: v Redraw: redraw).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: selection\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          clearSelection = ( |
@@ -1019,14 +1224,14 @@ SlotsToOmit: name parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          clearText = ( |
             | setText: ''. gotoStart).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          clippedDo: blk = ( |
@@ -1037,7 +1242,7 @@ SlotsToOmit: name parent.
             currentGraphic setNoClipMask).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          clippedWithCursorDo: blk = ( |
@@ -1050,7 +1255,7 @@ SlotsToOmit: name parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: selection\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          completeSelection = ( |
@@ -1059,7 +1264,7 @@ SlotsToOmit: name parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          contentsString = ( |
@@ -1069,7 +1274,7 @@ SlotsToOmit: name parent.
                 IfEmpty: '').
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          coordinatesOfNext: str IfAbsent: block = ( | {
@@ -1099,7 +1304,7 @@ SlotsToOmit: name parent.
             block value).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          coordinatesOfPrevious: str IfAbsent: block = ( | {
@@ -1129,7 +1334,7 @@ SlotsToOmit: name parent.
             block value).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          copySize: extent = ( | {
@@ -1145,44 +1350,44 @@ SlotsToOmit: name parent.
             s).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: selection commands\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          copy_cmd = ( |
             | 
-            hasSelection ifTrue: [textBuffer contents: textInSelection ].
+            hasSelection ifTrue: [ui1 textBuffer contents: textInSelection ].
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          corner_offset = ( |
             | 1@1).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          currentGraphic = ( |
             | body currentGraphic).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          currentGraphicOffset: cpt = ( |
             | body currentGraphicOffset: cpt).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: selection commands\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          cut_cmd = ( |
             | copy_cmd. cut_cmd: false).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: selection commands\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          cut_cmd: silent = ( |
@@ -1217,7 +1422,7 @@ SlotsToOmit: name parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          delete_char = ( | {
@@ -1251,7 +1456,7 @@ SlotsToOmit: name parent.
             flush).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          delete_line = ( | {
@@ -1280,14 +1485,14 @@ SlotsToOmit: name parent.
               drawContents.
             ].
 
-            in_ctrl_k ifFalse: [ textBuffer contents: '' ].
-            textBuffer contents:  textBuffer contents, line.
+            in_ctrl_k ifFalse: [ ui1 textBuffer contents: '' ].
+            ui1 textBuffer contents:  ui1 textBuffer contents, line.
             in_ctrl_k: true.
 
             flush).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          delete_next_char = ( |
@@ -1296,7 +1501,7 @@ SlotsToOmit: name parent.
             delete_char).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          delete_word_backwards = ( | {
@@ -1335,7 +1540,7 @@ SlotsToOmit: name parent.
             flush).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          draw = ( | {
@@ -1350,7 +1555,7 @@ SlotsToOmit: name parent.
             interactive: int).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          drawContents = ( |
@@ -1360,7 +1565,7 @@ SlotsToOmit: name parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          drawLine1: line_no = ( | {
@@ -1394,14 +1599,14 @@ SlotsToOmit: name parent.
             ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          drawLine: no = ( |
             | clippedWithCursorDo: [drawLine1: no]. self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          drawLinesFrom: from To: to = ( |
@@ -1410,13 +1615,13 @@ SlotsToOmit: name parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          drawOffset = (2)@(2).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          drawText: string At: pt Color: c = ( |
@@ -1427,14 +1632,14 @@ SlotsToOmit: name parent.
                           Color: c).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: cursor navigation\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          end_of_line = ( |
             | goto: maxSmallInt@insertionPoint y).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          fill_rectangle: rect Inv: inv = ( |
@@ -1447,28 +1652,29 @@ SlotsToOmit: name parent.
             ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          fontHeight = ( |
             | boxSizing textEditorFont height).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          fontWidth = ( |
-            | boxSizing textEditorFont width).
+            | 
+            boxSizing textEditorFont width).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: cursor navigation\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          forward_char = ( |
             | goto: nextCharPosition).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          goto: pt = ( |
@@ -1480,36 +1686,37 @@ SlotsToOmit: name parent.
             flush).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          gotoEnd = ( |
             | goto: contents last size @ contents size).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          gotoStart = ( |
             | goto: 0@0).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          gridToPt: p = ( |
-            | ((p x * fontWidth)@
+            | 
+             ((p x * fontWidth)@
             ((p y - off)* fontHeight succ succ)) + 2).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          hit: pt = ( |
             | interactive: true. goto: ptToGrid: pt).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: selection\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          inSelection: blk = ( |
@@ -1523,14 +1730,14 @@ SlotsToOmit: name parent.
               blk value: insertionPoint With: selectionEnd ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          inView = ( |
             | inView: insertionPoint).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          inView: pt = ( | {
@@ -1543,21 +1750,21 @@ SlotsToOmit: name parent.
             (offset >= 0) && [ offset < linesInView ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          init = ( |
-            | c: caret copyFor: self Size: 6@13).
+            | c: ui1 caret copyFor: self Size: 6@13).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          initText = ( |
             | setText: '').
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          insertCode: keycode String: str = ( | {
@@ -1601,7 +1808,7 @@ SlotsToOmit: name parent.
             ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          insert_char: char = ( | {
@@ -1629,21 +1836,21 @@ SlotsToOmit: name parent.
             flush).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          interactive = ( |
             | body interactive).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          interactive: bool = ( |
             | body interactive: bool).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          interpretCode: code = ( |
@@ -1667,7 +1874,7 @@ SlotsToOmit: name parent.
             code = 104 ifTrue: [ ^cut_cmd       ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          isearchAgain = ( | {
@@ -1682,10 +1889,10 @@ SlotsToOmit: name parent.
             search: isearchString IfFail: [
                 select: currentPoint To: selectionEnd.
                 '\a' print. "bell"
-                transcript printLine: 'Failing I-search: ', isearchString. ]).
+                ui1 transcript printLine: 'Failing I-search: ', isearchString. ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          isearchBackwardAgain = ( | {
@@ -1700,18 +1907,18 @@ SlotsToOmit: name parent.
             searchBackward: isearchString IfFail: [
                 select: currentPoint To: selectionEnd.
                 '\a' print. "bell"
-                transcript printLine: 'Failing I-search backward: ',
+                ui1 transcript printLine: 'Failing I-search backward: ',
                                       isearchString. ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          isearchBackwardStart = ( |
             | isearchStart: 'backward').
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          isearchDelete = ( |
@@ -1721,7 +1928,7 @@ SlotsToOmit: name parent.
             search: isearchString).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          isearchKey: keycode String: str = ( | {
@@ -1746,14 +1953,14 @@ SlotsToOmit: name parent.
             error: 'unknown isearch direction').
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          isearchStart = ( |
             | isearchStart: 'forward').
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          isearchStart: dir = ( |
@@ -1765,14 +1972,14 @@ SlotsToOmit: name parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          isearchStop = ( |
             | isearchMode: false).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          isearchStop: keycode String: str = ( |
@@ -1782,7 +1989,7 @@ SlotsToOmit: name parent.
             keyPress: keycode String: str).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          join_with_prev_line = ( | {
@@ -1824,7 +2031,7 @@ SlotsToOmit: name parent.
             ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          keyPress: keycode String: str = ( |
@@ -1836,45 +2043,46 @@ SlotsToOmit: name parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: cursor navigation\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          lastPositionOfLine: n = ( |
             | (contents at: n) size).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButton* = bootstrap stub -> 'mixins' -> 'userInterface' -> 'leftButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonAccept = ( |
             | completeSelection).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonDown = ( |
             | 
+            world ensureFrontmost.
             isearchStop.
             container onTop ifFalse: [ container raise. world display. ].
             hit: loc.
             leftButton.leftButtonDown).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonPendingAccept: change = ( |
             | changeSelection).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonPendingReject: change = ( |
@@ -1883,14 +2091,14 @@ SlotsToOmit: name parent.
                [ container window eventsPending > 0 ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonReject = ( |
             | completeSelection).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          lineSelection: lineno = ( |
@@ -1906,21 +2114,21 @@ SlotsToOmit: name parent.
             0@0).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          line_height = ( |
             | fontHeight succ succ).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          linesInView = ( |
             | extent y /- line_height).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          linesToDraw = ( |
@@ -1929,14 +2137,14 @@ SlotsToOmit: name parent.
             ( extent y /~ line_height) asInteger).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          loc = ( |
             | cursor location - absoluteLocation).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          match: str At: pt = ( | {
@@ -1951,7 +2159,7 @@ SlotsToOmit: name parent.
             true).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          matchChar: c At: pt = ( |
@@ -1961,7 +2169,7 @@ SlotsToOmit: name parent.
                                   at: pt x IfAbsent: [ ^ false ])).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          matchChar: c1 To: c2 = ( |
@@ -1971,7 +2179,7 @@ SlotsToOmit: name parent.
                  False: [ c1 = c2 ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: cursor navigation\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          nextCharPosition = ( |
@@ -1983,14 +2191,14 @@ SlotsToOmit: name parent.
             ] False: [ insertionPoint x succ @ insertionPoint y ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: cursor navigation\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          next_line = ( |
             | goto: insertionPoint x@insertionPoint y succ).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          open_line = ( | {
@@ -2004,25 +2212,25 @@ SlotsToOmit: name parent.
             goto: curr).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'windowContext' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: selection commands\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          paste_cmd = ( |
             | 
             hasSelection ifTrue: [ cut_cmd: true ].
-            textBuffer contents asString do: [|:c|
+            ui1 textBuffer contents asString do: [|:c|
               c = '\n' ifTrue: [ split_line ] False: [ insert_char: c ]
             ].
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: cursor navigation\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          prevCharPosition = ( |
@@ -2035,14 +2243,14 @@ SlotsToOmit: name parent.
             ] False: [ insertionPoint x pred @ insertionPoint y ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: cursor navigation\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          previous_line = ( |
             | goto: insertionPoint x@insertionPoint y pred).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          ptToGrid: p = ( |
@@ -2050,7 +2258,7 @@ SlotsToOmit: name parent.
             (((p x - 2) / fontWidth)@(((p y - 2)/ line_height) + off)) floor asInteger).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          resize: ext = ( |
@@ -2063,7 +2271,7 @@ SlotsToOmit: name parent.
             changeSliderValue: false).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          scroll: value = ( | {
@@ -2080,14 +2288,14 @@ SlotsToOmit: name parent.
               off = new_off ifFalse: [ off: new_off. drawContents ] ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          scrollIntoView = ( |
             | scrollIntoView: insertionPoint).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          scrollIntoView: pt = ( | {
@@ -2107,17 +2315,17 @@ SlotsToOmit: name parent.
             changeSliderValue: true).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          search: str = ( |
             | 
             search: str IfFail: [
                 '\a' print. "bell"
-                ^ transcript printLine: 'Failing I-search: ', str ]).
+                ^ ui1 transcript printLine: 'Failing I-search: ', str ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          search: str IfFail: block = ( | {
@@ -2130,17 +2338,17 @@ SlotsToOmit: name parent.
             select: p To: p addX: str size).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          searchBackward: str = ( |
             | 
             searchBackward: str IfFail: [
                 '\a' print. "bell"
-                ^ transcript printLine: 'Failing I-search backward: ', str ]).
+                ^ ui1 transcript printLine: 'Failing I-search backward: ', str ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: searching\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          searchBackward: str IfFail: block = ( | {
@@ -2153,7 +2361,7 @@ SlotsToOmit: name parent.
             select: p To: p addX: str size).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: selection\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          select: pt1 To: pt2 = ( |
@@ -2167,14 +2375,14 @@ SlotsToOmit: name parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: selection\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          selectionLines = ( |
             | inSelection: [|:a. :b| a y@b y]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: selection\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          selectionStart: start End: end = ( | {
@@ -2200,14 +2408,14 @@ SlotsToOmit: name parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          setText: text = ( |
             | contents: (textLines copyLines: text) lines asVector).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          split_and_indent_line = ( | {
@@ -2241,7 +2449,7 @@ SlotsToOmit: name parent.
             goto: spcs @ insertionPoint y).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          split_line = ( | {
@@ -2283,7 +2491,7 @@ SlotsToOmit: name parent.
             flush).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          textGrid: pt = ( | {
@@ -2308,7 +2516,7 @@ SlotsToOmit: name parent.
             col@lineno).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: selection\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          textInSelection = ( | {
@@ -2331,7 +2539,7 @@ SlotsToOmit: name parent.
             '').
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          transpose_chars = ( | {
@@ -2355,422 +2563,386 @@ SlotsToOmit: name parent.
                        flush]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'textField' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'textField' -> () From: ( | {
          'Category: selection commands\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          undo_cmd = ( |
             | 'Undo not implemented yet' printLine. self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         demoEditor = bootstrap define: bootstrap stub -> 'globals' -> 'demoEditor' -> () ToBe: bootstrap addSlotsTo: (
+         demoEditor = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'demoEditor' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals textEditor copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'demoEditor' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals demoEditor.
+             globals ui1 textEditor copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'demoEditor' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 demoEditor.
 
 CopyDowns:
-globals textEditor. copy 
+globals ui1 textEditor. copy 
 SlotsToOmit: parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'demoEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'demoEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          index <- 1.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         demoEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'demoEditor' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits demoEditor.
+         demoEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'demoEditor' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 demoEditor.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'demoEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'demoEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'demoEditor' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'demoEditor' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         evalEditor = bootstrap define: bootstrap stub -> 'globals' -> 'evalEditor' -> () ToBe: bootstrap addSlotsTo: (
+         evalEditor = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'evalEditor' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'applyButtonName' From:
              bootstrap remove: 'parent' From:
              bootstrap remove: 'size' From:
-             globals textEditor copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'evalEditor' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals evalEditor.
+             globals ui1 textEditor copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'evalEditor' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 evalEditor.
 
 CopyDowns:
-globals textEditor. copy 
+globals ui1 textEditor. copy 
 SlotsToOmit: applyButtonName parent size.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'evalEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'evalEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          applyButtonName <- 'Eval'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         evalEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'evalEditor' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits evalEditor.
+         evalEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'evalEditor' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 evalEditor.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'evalEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'evalEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'evalEditor' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'evalEditor' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'evalEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'evalEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: InitializeToExpression: (reflect: lobby)'
         
          receiver <- reflect: lobby.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'evalEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'evalEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          size <- (170)@(80).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         fileEditor = bootstrap define: bootstrap stub -> 'globals' -> 'fileEditor' -> () ToBe: bootstrap addSlotsTo: (
+         fileEditor = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'fileEditor' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'applyButtonName' From:
              bootstrap remove: 'name' From:
              bootstrap remove: 'parent' From:
-             globals textEditor copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'fileEditor' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals fileEditor.
+             globals ui1 textEditor copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'fileEditor' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 fileEditor.
 
 CopyDowns:
-globals textEditor. copy 
+globals ui1 textEditor. copy 
 SlotsToOmit: applyButtonName name parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'fileEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'fileEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          applyButtonName <- 'Save'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'fileEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'fileEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          fileName <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'fileEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'fileEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          name <- 'Self editor'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         fileEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'fileEditor' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits fileEditor.
+         fileEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'fileEditor' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 fileEditor.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'fileEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'fileEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'fileEditor' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'fileEditor' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
-         'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         textEditor = bootstrap define: bootstrap stub -> 'globals' -> 'modules' -> 'textEditor' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'directory' From:
-             bootstrap remove: 'fileInTimeString' From:
-             bootstrap remove: 'myComment' From:
-             bootstrap remove: 'postFileIn' From:
-             bootstrap remove: 'revision' From:
-             bootstrap remove: 'subpartNames' From:
-             globals modules init copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'modules' -> 'textEditor' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals modules textEditor.
-
-CopyDowns:
-globals modules init. copy 
-SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNames.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'textEditor' -> () From: ( | {
-         'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
-        
-         directory <- 'ui1'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'textEditor' -> () From: ( | {
-         'ModuleInfo: Module: textEditor InitialContents: InitializeToExpression: (_CurrentTimeString)\x7fVisibility: public'
-        
-         fileInTimeString <- _CurrentTimeString.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'textEditor' -> () From: ( | {
-         'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
-        
-         myComment <- 'Lars\' text editor'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'textEditor' -> () From: ( | {
-         'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
-        
-         revision <- 'Sun-$Revision: 30.10 $'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'textEditor' -> () From: ( | {
-         'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
-        
-         subpartNames <- ''.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
-        
-         resizeButton = bootstrap define: bootstrap stub -> 'globals' -> 'resizeButton' -> () ToBe: bootstrap addSlotsTo: (
+         resizeButton = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'resizeButton' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'name' From:
              bootstrap remove: 'parent' From:
-             globals windowContext copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'resizeButton' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals resizeButton.
+             globals ui1 windowContext copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'resizeButton' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 resizeButton.
 
 CopyDowns:
-globals windowContext. copy 
+globals ui1 windowContext. copy 
 SlotsToOmit: name parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          cursorOffset <- (0)@(0).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          name <- 'resize button'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          newValue <- (0)@(0).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          oldValue <- (0)@(0).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         resizeButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'resizeButton' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits resizeButton.
+         resizeButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'resizeButton' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 resizeButton.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'resizeButton' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'resizeButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          savedBitmapImage.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         slider = bootstrap define: bootstrap stub -> 'globals' -> 'slider' -> () ToBe: bootstrap addSlotsTo: (
+         slider = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'slider' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'name' From:
              bootstrap remove: 'parent' From:
-             globals windowContext copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'slider' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals slider.
+             globals ui1 windowContext copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'slider' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 slider.
 
 CopyDowns:
-globals windowContext. copy 
+globals ui1 windowContext. copy 
 SlotsToOmit: name parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slider' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         command <- bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'slider' -> 'command' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals slider command.
+         command <- bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'slider' -> 'command' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 slider command.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slider' -> 'command' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slider' -> 'command' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          doIt: context = ( |
             | ('do: ', context printString) printLine).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slider' -> 'command' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slider' -> 'command' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          doIt: context Shift: shift = ( |
             | doIt: context).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slider' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          inner_box <- bootstrap stub -> 'globals' -> 'rectangle' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slider' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          name <- 'slider'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         slider = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'slider' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits slider.
+         slider = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 slider.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slider' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'slider' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slider' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          value <- 0.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slider' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          value_box <- bootstrap stub -> 'globals' -> 'rectangle' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         slotEditor = bootstrap define: bootstrap stub -> 'globals' -> 'slotEditor' -> () ToBe: bootstrap addSlotsTo: (
+         slotEditor = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'slotEditor' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
              bootstrap remove: 'size' From:
-             globals textEditor copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'slotEditor' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals slotEditor.
+             globals ui1 textEditor copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'slotEditor' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 slotEditor.
 
 CopyDowns:
-globals textEditor. copy 
+globals ui1 textEditor. copy 
 SlotsToOmit: parent size.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          failMessage.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         slotEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'slotEditor' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits slotEditor.
+         slotEditor = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'slotEditor' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 slotEditor.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'slotEditor' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'slotEditor' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: InitializeToExpression: (reflect: lobby)'
         
          receiver <- reflect: lobby.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          size <- (170)@(80).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          successMessage.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         textBuffer = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'textBuffer' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals textBuffer.
+         textApplication = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'textApplication' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 textApplication.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textApplication' -> () From: ( | {
+         'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
+        
+         textBuffer = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'textBuffer' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 textBuffer.
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textBuffer' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textBuffer' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: InitializeToExpression: (\'\')\x7fVisibility: public'
         
          contents <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'textBuffer' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'textBuffer' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          animatedDrawPressed = ( |
@@ -2793,7 +2965,7 @@ SlotsToOmit: parent size.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          animatedDrawUnpressed = ( |
@@ -2816,7 +2988,7 @@ SlotsToOmit: parent size.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          draw = ( |
@@ -2827,7 +2999,7 @@ SlotsToOmit: parent size.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          drawText = ( |
@@ -2837,13 +3009,13 @@ SlotsToOmit: parent size.
                     Font: boxSizing fixedEditorFont).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButton* = bootstrap stub -> 'mixins' -> 'userInterface' -> 'leftButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonAccept = ( |
@@ -2852,7 +3024,7 @@ SlotsToOmit: parent size.
             repair).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          leftButtonDown = ( |
@@ -2863,7 +3035,7 @@ SlotsToOmit: parent size.
             leftButton.leftButtonDown).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonPendingAccept: change = ( |
@@ -2871,7 +3043,7 @@ SlotsToOmit: parent size.
             change ifTrue: [ animatedDrawPressed ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonPendingReject: change = ( |
@@ -2879,48 +3051,54 @@ SlotsToOmit: parent size.
             change ifTrue: [ animatedDrawUnpressed ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonReject = ( |
             | world display).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'windowContext' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'button' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> () From: ( | {
          'Category: positioning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         textOffset = ( |
-            | bound topLeft + (8 @ 1)).
+         textInset = (8) @ (1).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'button' -> () From: ( | {
+         'Category: positioning\x7fComment: Label origin inside the button; matches footerButtonTextInset. -- claude & dmu 8/26\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
+        
+         textOffset = ( |
+            | bound topLeft + textInset).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          adjust = ( |
             | visible ifTrue: [ off. move_caret. on ] False: [ move_caret ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          color = ( |
             | container uiColors text).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          container = ( |
             | context container).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          copyFor: con Size: ext = ( | {
@@ -2935,7 +3113,7 @@ SlotsToOmit: parent size.
             c).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          drawColor: color = ( | {
@@ -2965,14 +3143,14 @@ SlotsToOmit: parent size.
             bm line: i pred@off y       To: i succ@off y       Color: color).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          map = ( |
             | drawColor: container uiColors text).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          move_caret = ( |
@@ -2981,68 +3159,68 @@ SlotsToOmit: parent size.
             position: position - (3@0)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          off = ( |
             | visible ifTrue:  [ unmap. visible: false ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          on = ( |
             | visible ifFalse: [ move_caret. map. visible: true  ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          rect = ( |
             | (0@0) ##! extent).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'caret' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'caret' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          unmap = ( |
             | drawColor: container uiColors body).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
-         editorWithReceiver = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'editorWithReceiver' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits editorWithReceiver.
+         editorWithReceiver = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'editorWithReceiver' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 editorWithReceiver.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'demoEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'demoEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'editorWithReceiver' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'editorWithReceiver' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'demoEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'demoEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          resproutCopyOn: wrld = ( |
-            | uiDemo makeAndSproutIndex: index).
+            | ui1 uiDemo makeAndSproutIndex: index).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'editorWithReceiver' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'editorWithReceiver' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          addApply = ( |
             | 
-            applyButton: (button copySize: 50@16) name: applyButtonName.
+            applyButton: (ui1 button copySize: applyButtonSize) name: applyButtonName.
             applyButton  command: (|
                 p* = traits clonable.
                 editor.
@@ -3055,7 +3233,7 @@ SlotsToOmit: parent size.
             addContext: applyButton At: (30@140) + boxFaceOffset).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'editorWithReceiver' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'editorWithReceiver' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          copyOn: world Size: size Receiver: rec = ( |
@@ -3063,7 +3241,7 @@ SlotsToOmit: parent size.
             copyOn: world Size: size Do: [|:e| e receiver: rec ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'editorWithReceiver' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'editorWithReceiver' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          copyOnUI = ( | {
@@ -3072,7 +3250,7 @@ SlotsToOmit: parent size.
                  te.
                 } 
             | 
-            te: evalEditor copyOn: ui world.
+            te: ui1 evalEditor copyOn: ui1 ui world.
             te world addBodyOnTop: te.
             te location: te cursor location.
             te constrainFullBodyToWorld.
@@ -3080,7 +3258,7 @@ SlotsToOmit: parent size.
             te).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'editorWithReceiver' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'editorWithReceiver' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          forkAndEvaluate = ( |
@@ -3092,7 +3270,7 @@ SlotsToOmit: parent size.
             s isEmpty ifTrue: [^ self].
             mirr: s parseObjectBodyIfFail: [| :err. |
               methodView selectionStart: errorStart End: errorEnd.
-              uiNotifier copySyncOn: world
+              ui1 uiNotifier copySyncOn: world
                             Message: 'Syntax error:\n', err printString
                                  At: (body absoluteLocation addX: body size x)
                                Time: 7.
@@ -3111,45 +3289,45 @@ SlotsToOmit: parent size.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'editorWithReceiver' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'editorWithReceiver' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'textEditor' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'textEditor' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'editorWithReceiver' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'editorWithReceiver' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          resproutCopyOn: wrld = ( |
             | copyOn: wrld Size: size Receiver: receiver).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'evalEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'evalEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          apply = ( |
             | forkAndEvaluate).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'evalEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'evalEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'editorWithReceiver' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'editorWithReceiver' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'evalEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'evalEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          statePrintString = ( |
             | receiver safeName copyAtMost: 25).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'fileEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'fileEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          addApply = ( |
             | 
-            applyButton: (button copySize: 50@16) name: applyButtonName.
+            applyButton: (ui1 button copySize: applyButtonSize) name: applyButtonName.
             applyButton  command: (|
                 p* = traits clonable.
                 editor.
@@ -3159,14 +3337,14 @@ SlotsToOmit: parent size.
             addContext: applyButton At: (30@140) + boxFaceOffset).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'fileEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'fileEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          findTest = ( |
             | methodView find: 'at').
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'fileEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'fileEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          openOnFile: name = ( | {
@@ -3175,7 +3353,7 @@ SlotsToOmit: parent size.
                  te.
                 } 
             | 
-            te: copyOn: ui world Size: (500@300) Do: [|:e | e fileName: name ].
+            te: copyOn: ui1 ui world Size: (500@300) Do: [|:e | e fileName: name ].
             te readFile.
             te world addBodyOnTop: te.
             te location: (100@100).
@@ -3184,13 +3362,13 @@ SlotsToOmit: parent size.
             te).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'fileEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'fileEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'textEditor' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'textEditor' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'fileEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'fileEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          readFile = ( |
@@ -3207,7 +3385,7 @@ SlotsToOmit: parent size.
             methodView contents: lines).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'fileEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'fileEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          saveFile = ( |
@@ -3219,7 +3397,7 @@ SlotsToOmit: parent size.
             file close).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'fileEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'fileEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          statePrintString = ( |
@@ -3227,7 +3405,7 @@ SlotsToOmit: parent size.
             'editing: ', fileName printString).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          changeValue = ( | {
@@ -3251,7 +3429,7 @@ SlotsToOmit: parent size.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          cleanupBody = ( |
@@ -3263,7 +3441,7 @@ SlotsToOmit: parent size.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          doResize = ( |
@@ -3271,27 +3449,27 @@ SlotsToOmit: parent size.
             container expandSize: (newValue - oldValue) + cursorOffset).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          draw = ( |
             | drawBodySunkenRectangle: bound. self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButton* = bootstrap stub -> 'mixins' -> 'userInterface' -> 'leftButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonAccept = ( |
             | cleanupBody. doResize. self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          leftButtonDown = ( |
@@ -3314,34 +3492,34 @@ SlotsToOmit: parent size.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonPendingAccept: change = ( |
             | changeValue. self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonPendingReject: change = ( |
             | changeValue. self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonReject = ( |
             | cleanupBody. doResize. self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'resizeButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'resizeButton' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'windowContext' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          changeValue = ( | {
@@ -3361,7 +3539,7 @@ SlotsToOmit: parent size.
             ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          changeValue: v Redraw: re = ( |
@@ -3374,7 +3552,7 @@ SlotsToOmit: parent size.
             ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          clearBox: box = ( |
@@ -3382,7 +3560,7 @@ SlotsToOmit: parent size.
             drawBox: box LTColor: uiColors body RBColor: uiColors body).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          clearSelection = ( |
@@ -3391,7 +3569,7 @@ SlotsToOmit: parent size.
             world syncGraphics).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          clear_bound = ( |
@@ -3399,7 +3577,7 @@ SlotsToOmit: parent size.
             clear_boundOn: body graphic Offset: location).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          clear_boundOn: gr Offset: off = ( |
@@ -3408,7 +3586,7 @@ SlotsToOmit: parent size.
                        Color: uiColors body).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          clear_bound_absolute = ( |
@@ -3416,7 +3594,7 @@ SlotsToOmit: parent size.
             clear_boundOn: world windowBitmap Offset: absoluteLocation).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: copying\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          copySize: extent = ( | {
@@ -3434,21 +3612,21 @@ SlotsToOmit: parent size.
             s).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          currentGraphic = ( |
             | body currentGraphic).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          currentGraphicOffset: cpt = ( |
             | body currentGraphicOffset: cpt).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: sizing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          current_value = ( | {
@@ -3461,7 +3639,7 @@ SlotsToOmit: parent size.
             (0 max: v) min: max_value).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          draw = ( |
@@ -3472,7 +3650,7 @@ SlotsToOmit: parent size.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          drawBox: box LTColor: ltc RBColor: rbc = ( | {
@@ -3493,7 +3671,7 @@ SlotsToOmit: parent size.
             bm line: b bottomLeft To: b bottomRight Color: rbc).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          drawRaisedBox: box = ( |
@@ -3501,7 +3679,7 @@ SlotsToOmit: parent size.
             drawBox: box LTColor: uiColors bodyLight RBColor: uiColors bodyDark).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          drawSunkenBox: box = ( |
@@ -3509,34 +3687,34 @@ SlotsToOmit: parent size.
             drawBox: box LTColor: uiColors bodyDark RBColor: uiColors bodyLight).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: sizing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          get_value = ( |
             | value asFloat/ max_value).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: sizing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          inner_box_rect = ( |
             | inner_box translateBy: (0@value)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButton* = bootstrap stub -> 'mixins' -> 'userInterface' -> 'leftButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonAccept = ( |
             | clearSelection. self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          leftButtonDown = ( |
@@ -3547,35 +3725,35 @@ SlotsToOmit: parent size.
             leftButton.leftButtonDown. self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonPendingAccept: change = ( |
             | changeValue. self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonPendingReject: change = ( |
             | changeValue. self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          leftButtonReject = ( |
             | clearSelection. self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: sizing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          max_value = ( |
             | (bound bottom - value_box width) pred).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          onAcetateDo: blk = ( |
@@ -3586,13 +3764,13 @@ SlotsToOmit: parent size.
                         world syncGraphics).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'windowContext' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'windowContext' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: sizing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          resize: ext = ( |
@@ -3603,21 +3781,21 @@ SlotsToOmit: parent size.
             inner_box: value_box indent: 3).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slider' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slider' -> () From: ( | {
          'Category: sizing\x7fModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: private'
         
          value_box_rect = ( |
             | value_box translateBy: (0@value)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          apply = ( |
             | forkAndParse).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
          forkAndParse = ( |
@@ -3629,7 +3807,7 @@ SlotsToOmit: parent size.
 
             mirr: s asSlotIfFail: [| :err. |
               methodView selectionStart: err start End: err end.
-              uiNotifier copySyncOn: world
+              ui1 uiNotifier copySyncOn: world
                             Message: 'Syntax error:\n', err printString
                                  At: (body absoluteLocation addX: body size x)
                                Time: 7.
@@ -3641,13 +3819,13 @@ SlotsToOmit: parent size.
               successMessage arguments copyAddLast: mirr) send).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'editorWithReceiver' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'editorWithReceiver' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotEditor' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotEditor' -> () From: ( | {
          'ModuleInfo: Module: textEditor InitialContents: FollowSlot\x7fVisibility: public'
         
          statePrintString = ( |

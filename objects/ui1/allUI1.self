@@ -1,16 +1,16 @@
  'Sun-$Revision: 30.8 $'
  '
-Copyright 1992-2011 AUTHORS.
-See the legal/LICENSE file for license information and legal/AUTHORS for authors.
+Copyright 1992-2026 AUTHORS.
+See the LICENSE file for license information.
 '
 
 
  '-- Module body'
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
-         'ModuleInfo: Module: allUI InitialContents: FollowSlot'
+         'ModuleInfo: Module: allUI1 InitialContents: FollowSlot'
         
-         allUI = bootstrap define: bootstrap stub -> 'globals' -> 'modules' -> 'allUI' -> () ToBe: bootstrap addSlotsTo: (
+         allUI1 = bootstrap define: bootstrap stub -> 'globals' -> 'modules' -> 'allUI1' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'comment' From:
              bootstrap remove: 'directory' From:
              bootstrap remove: 'fileInTimeString' From:
@@ -18,8 +18,8 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
              bootstrap remove: 'postFileIn' From:
              bootstrap remove: 'revision' From:
              bootstrap remove: 'subpartNames' From:
-             globals modules init copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'modules' -> 'allUI' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals modules allUI.
+             globals modules init copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'modules' -> 'allUI1' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals modules allUI1.
 
 CopyDowns:
 globals modules init. copy 
@@ -29,34 +29,35 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allUI' -> () From: ( | {
-         'ModuleInfo: Module: allUI InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allUI1' -> () From: ( | {
+         'ModuleInfo: Module: allUI1 InitialContents: FollowSlot\x7fVisibility: public'
         
          directory <- 'ui1'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allUI' -> () From: ( | {
-         'ModuleInfo: Module: allUI InitialContents: InitializeToExpression: (_CurrentTimeString)\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allUI1' -> () From: ( | {
+         'ModuleInfo: Module: allUI1 InitialContents: InitializeToExpression: (_CurrentTimeString)\x7fVisibility: public'
         
          fileInTimeString <- _CurrentTimeString.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allUI' -> () From: ( | {
-         'ModuleInfo: Module: allUI InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allUI1' -> () From: ( | {
+         'ModuleInfo: Module: allUI1 InitialContents: FollowSlot'
         
          myComment <- 'Read in all objects in the ui.'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allUI' -> () From: ( | {
-         'ModuleInfo: Module: allUI InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allUI1' -> () From: ( | {
+         'ModuleInfo: Module: allUI1 InitialContents: FollowSlot\x7fVisibility: public'
         
          revision <- 'Sun-$Revision: 30.8 $'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allUI' -> () From: ( | {
-         'ModuleInfo: Module: allUI InitialContents: FollowSlot\x7fVisibility: private'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allUI1' -> () From: ( | {
+         'ModuleInfo: Module: allUI1 InitialContents: FollowSlot\x7fVisibility: private'
         
-         subpartNames <- 'enumResult
+         subpartNames <- 'allUI1Seams ui1Event
+enumResult
 slab
 uiColormap
 uiColorPalette
@@ -83,7 +84,7 @@ slotButton
 sendButton
 objBodyTypes
 animator
-ui
+ui1
 arrowheadCache
 uiArrow
 textEditor
@@ -93,18 +94,20 @@ toggleBody
 togglers
 diffUI
 uiDemo
-ui1Preferences
+ui1OnX11
+ui1OnQuartz
 '.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: allUI InitialContents: InitializeToExpression: (x11Globals)\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> () From: ( | {
+         'Category: system\x7fComment: for compatability with pre-encapsulated ui1\x7fModuleInfo: Module: allUI1 InitialContents: FollowSlot\x7fVisibility: public'
         
-         ui1GraphicsGlobals <- bootstrap stub -> 'globals' -> 'x11Globals' -> ().
+         ui = ( |
+            | ui1 ui).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> () From: ( | {
-         'ModuleInfo: Module: allUI InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: allUI1 InitialContents: FollowSlot\x7fVisibility: public'
         
          userInterface = bootstrap setObjectAnnotationOf: bootstrap stub -> 'mixins' -> 'userInterface' -> () From: ( |
              {} = 'ModuleInfo: Creator: mixins userInterface.
@@ -116,6 +119,8 @@ ui1Preferences
 
  '-- Sub parts'
 
+ bootstrap read: 'allUI1Seams' From: 'ui1/seams'
+ bootstrap read: 'ui1Event' From: 'ui1'
  bootstrap read: 'enumResult' From: 'ui1'
  bootstrap read: 'slab' From: 'ui1'
  bootstrap read: 'uiColormap' From: 'ui1'
@@ -143,7 +148,7 @@ ui1Preferences
  bootstrap read: 'sendButton' From: 'ui1'
  bootstrap read: 'objBodyTypes' From: 'ui1'
  bootstrap read: 'animator' From: 'ui1'
- bootstrap read: 'ui' From: 'ui1'
+ bootstrap read: 'ui1' From: 'ui1'
  bootstrap read: 'arrowheadCache' From: 'ui1'
  bootstrap read: 'uiArrow' From: 'ui1'
  bootstrap read: 'textEditor' From: 'ui1'
@@ -153,10 +158,8 @@ ui1Preferences
  bootstrap read: 'togglers' From: 'ui1'
  bootstrap read: 'diffUI' From: 'ui1'
  bootstrap read: 'uiDemo' From: 'ui1'
- bootstrap read: 'ui1Preferences' From: 'ui1'
-
-
-
+ bootstrap read: 'ui1OnX11' From: 'ui1'
+ bootstrap read: 'ui1OnQuartz' From: 'ui1'
  '-- Side effects'
 
- globals modules allUI postFileIn
+ globals modules allUI1 postFileIn

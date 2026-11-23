@@ -1,95 +1,11 @@
  'Sun-$Revision: 30.7 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
 
  '-- Module body'
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: public'
-        
-         boxBitmap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'boxBitmap' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals boxBitmap.
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxBitmap' -> () From: ( | {
-         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
-        
-         backBound <- ((0)@(0)) # ((1)@(1)).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxBitmap' -> () From: ( | {
-         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
-        
-         background <- bootstrap stub -> 'globals' -> 'bitmap' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxBitmap' -> () From: ( | {
-         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
-        
-         desiredSize <- (1)@(1).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxBitmap' -> () From: ( | {
-         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
-        
-         drawOffset <- (0)@(0).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxBitmap' -> () From: ( | {
-         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
-        
-         frontBound <- ((0)@(0)) # ((1)@(1)).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxBitmap' -> () From: ( | {
-         'Comment: _ hack for resize feedback\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: public'
-        
-         image <- bootstrap stub -> 'globals' -> 'nullImage' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxBitmap' -> () From: ( | {
-         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
-        
-         location <- (0)@(0).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxBitmap' -> () From: ( | {
-         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: private'
-        
-         mask <- bootstrap stub -> 'globals' -> 'bitmap' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: public'
-        
-         boxBitmap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'boxBitmap' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits boxBitmap.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxBitmap' -> () From: ( | {
-         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: private'
-        
-         parent* = bootstrap stub -> 'traits' -> 'boxBitmap' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxBitmap' -> () From: ( | {
-         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: private'
-        
-         saveUnder <- bootstrap stub -> 'globals' -> 'bitmap' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxBitmap' -> () From: ( | {
-         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
-        
-         uiColors <- bootstrap stub -> 'globals' -> 'uiColorPalette' -> ().
-        } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
@@ -143,38 +59,114 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxBitmap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: public'
+        
+         boxBitmap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'boxBitmap' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 boxBitmap.
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
+         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
+        
+         backBound <- ((0)@(0)) # ((1)@(1)).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
+         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
+        
+         background <- bootstrap stub -> 'globals' -> 'bitmap' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
+         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
+        
+         desiredSize <- (1)@(1).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
+         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
+        
+         drawOffset <- (0)@(0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
+         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
+        
+         frontBound <- ((0)@(0)) # ((1)@(1)).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
+         'Comment: _ hack for resize feedback\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: public'
+        
+         image <- bootstrap stub -> 'globals' -> 'nullImage' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
+         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
+        
+         location <- (0)@(0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
+         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: private'
+        
+         mask <- bootstrap stub -> 'globals' -> 'bitmap' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: public'
+        
+         boxBitmap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 boxBitmap.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
+         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
+         'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: private'
+        
+         saveUnder <- bootstrap stub -> 'globals' -> 'bitmap' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
+         'ModuleInfo: Module: boxBitmap InitialContents: InitializeToExpression: (nil)'
+        
+         uiColors.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
          'Category: sizing\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          asSlab = ( |
             | 
-            slab copyFront: (frontBound translateBy: location)
+            ui1 slab copyFront: (frontBound translateBy: location)
                       Back: backBound translateBy: location).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxBitmap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: private'
         
-         bounds: size Depth: depth Skew: skew = ( | {
-                 'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
-                
-                 corner.
-                }  {
-                 'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
-                
-                 depthPt.
-                } 
+         bounds: size Depth: depth Skew: skew = ( |
+             corner.
+             depthPt.
             | 
             corner: size maxPoint.
             depthPt: depth maxPoint.
-            frontBound:  (0 @ depthPt y)
-                         #! ((corner x - depthPt x) @ corner y).
-            backBound:   ((depthPt x + skew) @ 0)
-                         #! (corner x @ (corner y - depthPt y - skew)).
+            frontBound:   (0                 @ depthPt y)  # (((corner x - depthPt x) @ corner y                     ) + (1@1)).
+             backBound:  ((depthPt x + skew) @ 0        )  # ( (corner x              @ (corner y - depthPt y - skew)) + (1@1)).
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxBitmap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          createDepth: depth Skew: skew UIColors: uic = ( |
@@ -182,7 +174,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             createSize: size Depth: depth Skew: skew Offset: 0@0 UIColors: uic).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxBitmap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          createDepth: depth UIColors: uic = ( |
@@ -190,7 +182,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             createDepth: depth Skew: 0 UIColors: uic).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxBitmap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          createSize: size Depth: depth Skew: skew Offset: offset UIColors: uic = ( |
@@ -202,12 +194,12 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxBitmap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          draw = ( |
             | 
-            drawFront.
+            drawFront. [xxxxx].
             drawTop.
             drawSide.
             drawHighlights.
@@ -215,8 +207,8 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxBitmap' -> () From: ( | {
-         'Category: drawing\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: private'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
+         'Category: drawing\x7fComment: Mask triangles are for hit-testing. 8-bit also paints index-0 onto the image for AND/OR. Direct BGRA leaves those pixels undrawn (alpha 0) so source-over is the cut; filling transparent would be a no-op (alpha 0, normal blend) or opaque black.\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: private'
         
          drawCornersAndMask = ( | {
                  'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot'
@@ -229,20 +221,23 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             corner at: 0 Put: frontBound topLeft + drawOffset.
             corner at: 1 Put: backBound  topLeft + drawOffset.
             corner at: 2 Put: drawOffset.
-            fillPolygon: corner Color: uiColors transparent.
+            depth <= 8 ifTrue: [
+                fillPolygon: corner Color: uiColors transparent.
+            ].
             mask fillPolygon: corner Color: uiColors ones.
             corner at: 0 Put: frontBound bottomRight + drawOffset.
             corner at: 1 Put: backBound  bottomRight + drawOffset.
             corner at: 2 Put: desiredSize maxPoint + drawOffset.
-            fillPolygon: corner Color: uiColors transparent.
             mask fillPolygon: corner Color: uiColors ones.
-            "to make up for fillPolygon doing polygon tiling"
-            polygon: corner Color: uiColors transparent.
-            mask polygon: corner Color: uiColors ones.
+            depth <= 8 ifTrue: [
+                fillPolygon: corner Color: uiColors transparent.
+                polygon: corner Color: uiColors transparent.
+                mask polygon: corner Color: uiColors ones.
+            ].
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxBitmap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: private'
         
          drawFront = ( |
@@ -251,7 +246,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                     Color: uiColors body).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxBitmap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: private'
         
          drawHighlights = ( |
@@ -272,7 +267,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             Color: uiColors bodyDark).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxBitmap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: private'
         
          drawSide = ( | {
@@ -289,7 +284,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             fillFullPolygon: side Color: uiColors bodyDark).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxBitmap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: private'
         
          drawTop = ( | {
@@ -306,7 +301,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             fillPolygon: top Color: uiColors bodyLight).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxBitmap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
          'Category: creating\x7fComment: space optimization: don\'t allocate another bitmap for saveunder\x7fModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: public'
         
          noSaveUnder = ( |
@@ -314,7 +309,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             saveUnder: ( | copyFor: w Size: d = (self). release = (self). | )).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxBitmap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxBitmap' -> () From: ( | {
          'ModuleInfo: Module: boxBitmap InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'movingShape' -> ().

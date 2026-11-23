@@ -1,54 +1,11 @@
  'Sun-$Revision: 30.7 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
 
  '-- Module body'
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: public'
-        
-         hierarchicalMenu = bootstrap define: bootstrap stub -> 'globals' -> 'hierarchicalMenu' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals menu copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'hierarchicalMenu' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals hierarchicalMenu.
-
-CopyDowns:
-globals menu. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'hierarchicalMenu' -> () From: ( | {
-         'ModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: public'
-        
-         autosort <- bootstrap stub -> 'globals' -> 'false' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: public'
-        
-         hierarchicalMenu = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits hierarchicalMenu.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'hierarchicalMenu' -> () From: ( | {
-         'ModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
-        
-         parent* = bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'hierarchicalMenu' -> () From: ( | {
-         'ModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
-        
-         saveunder <- bootstrap stub -> 'globals' -> 'bitmap' -> ().
-        } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot'
@@ -102,7 +59,50 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: public'
+        
+         hierarchicalMenu = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'hierarchicalMenu' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 menu copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 hierarchicalMenu.
+
+CopyDowns:
+globals ui1 menu. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
+         'ModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: public'
+        
+         autosort <- bootstrap stub -> 'globals' -> 'false' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: public'
+        
+         hierarchicalMenu = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 hierarchicalMenu.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
+         'ModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
+         'ModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
+        
+         saveunder <- bootstrap stub -> 'globals' -> 'bitmap' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: geometry\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          addSubmenuSize: itsz = ( | {
@@ -115,7 +115,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             s x @ (s y max: submenuIndicatorSize y)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: animating\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          demote = ( |
@@ -131,7 +131,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          drawDarkLine: a To: b = ( |
@@ -139,14 +139,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             drawLine: a To: b Color: uiColors bodyDark).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          drawDarkPartOfEtchedLine: a To: b = ( |
             | drawDarkLine: a To: b).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          drawEtchedTriangle: a To: b To: c = ( |
@@ -160,7 +160,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          drawFeaturesOfItem: i Color: c = ( |
@@ -170,7 +170,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          drawLightLine: a To: b = ( |
@@ -178,7 +178,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             drawLine: a To: b Color: uiColors bodyLight).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          drawLightPartOfEtchedLine: a To: b = ( |
@@ -186,14 +186,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             drawLightLine: a + (1@1) To: b + (1@1)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          drawLine: a To: b Color: c = ( |
             | windowBitmap line: a To: b Color: c).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          drawPressedSubmenuIndicator: i = ( | {
@@ -233,7 +233,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          drawSubmenuIndicator: i = ( | {
@@ -262,14 +262,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: items\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          itemName: it = ( |
             | it name).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: geometry\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          itemSize: it = ( | {
@@ -283,7 +283,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             itsz).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: items\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: public'
         
          items: aCol = ( |
@@ -298,20 +298,20 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: testing\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          outsideSubmenu: p = ( |
             | false).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'ModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'menu' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'menu' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: animating\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          promote = ( |
@@ -323,7 +323,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: selecting\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          selectAfterSetup: selBlock IfNone: noneBlock = ( | {
@@ -351,14 +351,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             cursor while: [ cursor anyButtonDown ] Do: [
                 p: cursor location.
                 (currentMenu outsideSubmenu: p) ifTrue: [
-                    "exit submenu"
+                    "exit ui1 submenu"
                     currentMenu takedown.
                     currentMenu: menus removeFirst. "pop"
                     results removeLast.
                     currentMenu promote. ].
                 currentMenu feedbackAt: p.
                 (currentMenu triggerSubmenu: p) ifTrue: [
-                    "enter submenu"
+                    "enter ui1 submenu"
                     results addLast: currentMenu currentSelection.
                     currentMenu demote.
                     menus addFirst: currentMenu. "push:"
@@ -379,22 +379,22 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                   IfNone: noneBlock).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: printing\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: public'
         
          storeStringIfFail: fb = ( |
             | 
-            'hierarchicalMenu copy autosort: ', autosort storeString).
+            'ui1 hierarchicalMenu copy autosort: ', autosort storeString).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: printing\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: public'
         
          storeStringNeeds = ( |
-            | hierarchicalMenu).
+            | ui1 hierarchicalMenu).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: selecting\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          submenuAt: p = ( | {
@@ -406,12 +406,12 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             its: autosort ifTrue: [ currentSelection submenuItems
                                     asVector sort ]
                            False: [ currentSelection submenuItems ].
-            submenu copy createFromBound: submenuIndicatorBound
+            ui1 submenu copy createFromBound: submenuIndicatorBound
                                    Items: its
                                    World: world).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: bounding\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          submenuIndicatorActiveBound = ( |
@@ -419,14 +419,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             submenuIndicatorBound stretchLeft: submenuIndicatorGap).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: bounding\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          submenuIndicatorBound = ( |
             | submenuIndicatorBound: currentItemNumber).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: bounding\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          submenuIndicatorBound: i = ( |
@@ -434,13 +434,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             (submenuIndicatorLocation: i) ##! submenuIndicatorSize).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: bounding\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          submenuIndicatorGap = 6.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: bounding\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          submenuIndicatorLocation: i = ( | {
@@ -469,13 +469,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             x @ y).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: bounding\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          submenuIndicatorSize = (8)@(10).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> () From: ( | {
          'Category: testing\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          triggerSubmenu: p = ( |
@@ -486,51 +486,51 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                  False: [ false ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: public'
         
-         submenu = bootstrap define: bootstrap stub -> 'globals' -> 'submenu' -> () ToBe: bootstrap addSlotsTo: (
+         submenu = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'submenu' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals hierarchicalMenu copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'submenu' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals submenu.
+             globals ui1 hierarchicalMenu copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'submenu' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 submenu.
 
 CopyDowns:
-globals hierarchicalMenu. copy 
+globals ui1 hierarchicalMenu. copy 
 SlotsToOmit: parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: public'
         
-         submenu = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'submenu' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits submenu.
+         submenu = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'submenu' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 submenu.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'submenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'submenu' -> () From: ( | {
          'ModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'submenu' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'submenu' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'submenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'submenu' -> () From: ( | {
          'ModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          outsideSubmenu: p = ( |
             | p x < bound left).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'submenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'submenu' -> () From: ( | {
          'ModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'hierarchicalMenu' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'hierarchicalMenu' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'submenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'submenu' -> () From: ( | {
          'ModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: private'
         
          placeBodyInDesiredLocation = ( | {
@@ -548,11 +548,11 @@ SlotsToOmit: parent.
             body: body translateBy: (x @ y) - body front center).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'submenu' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'submenu' -> () From: ( | {
          'ModuleInfo: Module: hierarchicalMenu InitialContents: FollowSlot\x7fVisibility: public'
         
          storeStringNeeds = ( |
-            | submenu).
+            | ui1 submenu).
         } | ) 
 
 

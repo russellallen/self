@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.7 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
@@ -116,11 +116,11 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             | self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: uiButton InitialContents: FollowSlot\x7fVisibility: public'
         
-         uiButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'uiButton' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits uiButton.
+         uiButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'uiButton' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 uiButton.
 '.
             | ) .
         } | ) 
@@ -128,7 +128,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> 'userInterface' -> 'leftButton' -> () From: ( | {
          'ModuleInfo: Module: uiButton InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'uiButton' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'uiButton' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> 'userInterface' -> () From: ( | {
@@ -180,11 +180,11 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             | self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: uiButton InitialContents: FollowSlot\x7fVisibility: public'
         
-         uiButtonCluster = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'uiButtonCluster' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits uiButtonCluster.
+         uiButtonCluster = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'uiButtonCluster' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 uiButtonCluster.
 '.
             | ) .
         } | ) 
@@ -192,7 +192,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> 'userInterface' -> 'leftButtonCluster' -> () From: ( | {
          'ModuleInfo: Module: uiButton InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'uiButtonCluster' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'uiButtonCluster' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> 'userInterface' -> () From: ( | {
@@ -247,7 +247,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> 'userInterface' -> 'middleButton' -> () From: ( | {
          'ModuleInfo: Module: uiButton InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'uiButton' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'uiButton' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> 'userInterface' -> () From: ( | {
@@ -302,7 +302,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> 'userInterface' -> 'middleButtonCluster' -> () From: ( | {
          'ModuleInfo: Module: uiButton InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'uiButtonCluster' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'uiButtonCluster' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> 'userInterface' -> () From: ( | {
@@ -317,7 +317,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> 'userInterface' -> 'rightButton' -> () From: ( | {
          'ModuleInfo: Module: uiButton InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'uiButton' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'uiButton' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> 'userInterface' -> 'rightButton' -> () From: ( | {
@@ -372,7 +372,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> 'userInterface' -> 'rightButtonCluster' -> () From: ( | {
          'ModuleInfo: Module: uiButton InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'uiButtonCluster' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'uiButtonCluster' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'mixins' -> 'userInterface' -> 'rightButtonCluster' -> () From: ( | {
@@ -415,7 +415,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             | self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiButton' -> () From: ( | {
          'ModuleInfo: Module: uiButton InitialContents: FollowSlot\x7fVisibility: private'
         
          trackUntil: untilCondition PendingAccept: pendingAccept PendingReject: pendingReject Accept: accept Reject: reject = ( | {
@@ -432,7 +432,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiButtonCluster' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiButtonCluster' -> () From: ( | {
          'ModuleInfo: Module: uiButton InitialContents: FollowSlot'
         
          memberContaining: loc IfFound: found IfNone: none = ( |
@@ -442,7 +442,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             none value).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiButtonCluster' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiButtonCluster' -> () From: ( | {
          'ModuleInfo: Module: uiButton InitialContents: FollowSlot\x7fVisibility: private'
         
          trackClusterUntil: untilCondition PendingAccept: pendingAccept PendingReject: pendingReject Accept: accept Reject: reject = ( | {

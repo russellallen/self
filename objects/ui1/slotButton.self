@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.9 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
@@ -59,77 +59,77 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: public'
         
-         slotButton = bootstrap define: bootstrap stub -> 'globals' -> 'slotButton' -> () ToBe: bootstrap addSlotsTo: (
+         slotButton = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'slotButton' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals menuButton copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'slotButton' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals slotButton.
+             globals ui1 menuButton copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'slotButton' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 slotButton.
 
 CopyDowns:
-globals menuButton. copy 
+globals ui1 menuButton. copy 
 SlotsToOmit: parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'ModuleInfo: Module: slotButton InitialContents: InitializeToExpression: (list copyRemoveAll)\x7fVisibility: private'
         
          cluster <- list copyRemoveAll.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'ModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          oldSlot <- bootstrap stub -> 'globals' -> 'slots' -> 'plain' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: public'
         
-         slotButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits slotButton.
+         slotButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 slotButton.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'ModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'slotButton' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'ModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          annotating* = bootstrap stub -> 'mixins' -> 'userInterface' -> 'annotationButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          annotationHolder = ( |
             | slotInfo).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'ModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: public'
         
          assignmentSlotInfo = ( |
             | container assignmentSlotInfo).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'ModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: public'
         
          basicName = ( |
             | slot basicName).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          createMethodFor: sel = ( |
@@ -153,7 +153,7 @@ SlotsToOmit: parent.
             method).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: public'
         
          createOn: sn = ( |
@@ -163,7 +163,7 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: editing\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          edit = ( | {
@@ -174,7 +174,7 @@ SlotsToOmit: parent.
             | 
             "Popup a slot editor"
             oldSlot: slotInfo.
-            se: slotEditor copyOn: world
+            se: ui1 slotEditor copyOn: world
                             Size: (body size x@ 80)
                               Do: [ | :e | e name: 'Add slot'.
                                            e receiver: body objMirror ].
@@ -190,13 +190,13 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuStrings\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          editString = 'edit...'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: editing\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          evaluate: string = ( | {
@@ -222,39 +222,39 @@ SlotsToOmit: parent.
             p returnValue).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: editing\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          failedSlotEdit = ( |
             | self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          findAssnImplementors = ( |
             | findImplementorsOf: slot assignmentName).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          findAssnSenders = ( |
             | findSendersOf: slot assignmentName).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          findImplementors = ( |
             | findImplementorsOf: slot basicName).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          findImplementorsOf: name = ( |
-             blueprint = boxBlueprint copy showWellKnownIndexableSlots.
+             blueprint = ui1 boxBlueprint copy showWellKnownIndexableSlots.
              enum.
              limit = 100.
              type = 'implementors'.
@@ -267,13 +267,13 @@ SlotsToOmit: parent.
                            FromCpt: self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          findMessages = ( | {
-                 'ModuleInfo: Module: slotButton InitialContents: InitializeToExpression: (boxBlueprint copy showOtherSlots)'
+                 'ModuleInfo: Module: slotButton InitialContents: InitializeToExpression: (ui1 boxBlueprint copy showOtherSlots)'
                 
-                 blueprint = boxBlueprint copy showOtherSlots.
+                 blueprint = ui1 boxBlueprint copy showOtherSlots.
                 }  {
                  'ModuleInfo: Module: slotButton InitialContents: FollowSlot'
                 
@@ -288,18 +288,18 @@ SlotsToOmit: parent.
             body sprout: enum Blueprint: blueprint FromCpt: self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          findSenders = ( |
             | findSendersOf: slot basicName).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          findSendersOf: name = ( |
-             blueprint = boxBlueprint copy showSendersSlots.
+             blueprint = ui1 boxBlueprint copy showSendersSlots.
              enum.
              limit = 100.
              type = 'senders'.
@@ -312,54 +312,54 @@ SlotsToOmit: parent.
                            FromCpt: self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          hideSlot = ( |
             | container hide).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuStrings\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          hideString = 'hide'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuStrings\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          implementorsAssnString = ( |
             | 'implementors of ', slot assignmentName).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuStrings\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          implementorsSimpleString = 'implementors'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuStrings\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          implementorsString = ( |
             | 'implementors of ', slot basicName).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: editing\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          isMethod = ( |
             | slotInfo isMethod).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: editing\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          isStringAMethod: s = ( |
             | s first = '(').
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: public'
         
          joinCluster: clust = ( |
@@ -369,7 +369,7 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          makeConstant = ( |
@@ -388,7 +388,7 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          makeItems: slot = ( | {
@@ -450,7 +450,7 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          makeVariable = ( |
@@ -467,22 +467,22 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
-         messageObj = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'slotButton' -> 'messageObj' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits slotButton messageObj.
+         messageObj = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> 'messageObj' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 slotButton messageObj.
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> 'messageObj' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> 'messageObj' -> () From: ( | {
          'ModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fComment: return mirror of object containing 1 slot for
 	   each message sent from method reflected by mirr\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
@@ -502,33 +502,33 @@ SlotsToOmit: parent.
             obj reflectee).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuStrings\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          messagesString = 'messages sent'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: sizing\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: public'
         
          minSize = ( |
             | boxSizing minSlotButtonSize).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'ModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'menuButton' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'menuButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: public'
         
          recreate = ( |
             | makeItems: slotInfo).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          removeAssignmentSlot = ( |
@@ -537,20 +537,20 @@ SlotsToOmit: parent.
             container removeAssignmentSlot).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuStrings\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          removeAssnString = ( |
             | 'remove ', slot assignmentName).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuStrings\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          removeSimpleString = 'remove'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          removeSlot = ( |
@@ -559,14 +559,14 @@ SlotsToOmit: parent.
             container removeSlot).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuStrings\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          removeString = ( |
             | 'remove ', slot basicName).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          renameSlotTo: s = ( | {
@@ -617,13 +617,13 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          rightButton* = bootstrap stub -> 'mixins' -> 'userInterface' -> 'rightButtonCluster' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          rightButtonAccept = ( |
@@ -632,7 +632,7 @@ SlotsToOmit: parent.
             hideSlot).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: public'
         
          rightButtonDown = ( |
@@ -645,7 +645,7 @@ SlotsToOmit: parent.
             ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          rightButtonPendingAccept: change = ( |
@@ -653,7 +653,7 @@ SlotsToOmit: parent.
             change ifTrue: [ animatedDrawPressed ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          rightButtonPendingReject: change = ( |
@@ -661,14 +661,14 @@ SlotsToOmit: parent.
             change ifTrue: [ animatedDrawUnpressed ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          rightButtonReject = ( |
             | drawUnpressed. world display).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuing\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          select: sel FixGraphics: fixGraphics = ( |
@@ -695,27 +695,27 @@ SlotsToOmit: parent.
             fixGraphics value).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuStrings\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          sendersAssnString = ( |
             | 'senders of ', slot assignmentName).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuStrings\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          sendersSimpleString = 'senders'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuStrings\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          sendersString = ( |
             | 'senders of ', slot basicName).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          showImplementor = ( | {
@@ -736,7 +736,7 @@ SlotsToOmit: parent.
                  n.
                 } 
             | 
-            bp: boxBlueprint copy.
+            bp: ui1 boxBlueprint copy.
             bp hideOtherSlots.
             bod: body sprout: slotInfo contents Blueprint: bp FromCpt: slot.
             n: body name copyFrom: hackPrefix size.
@@ -744,7 +744,7 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuStrings\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          showImplementorString = ( |
@@ -754,7 +754,7 @@ SlotsToOmit: parent.
                  ifTrue: 'show implementor' False: '').
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          showSender = ( | {
@@ -775,7 +775,7 @@ SlotsToOmit: parent.
                  sendingSlot.
                 } 
             | 
-            bp: boxBlueprint copy.
+            bp: ui1 boxBlueprint copy.
             bp hideOtherSlots.
             sendingSlot: slotInfo contents reflectee.
             bod: body sprout: sendingSlot holder Blueprint: bp FromCpt: slot.
@@ -784,7 +784,7 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: menuStrings\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          showSenderString = ( |
@@ -794,21 +794,21 @@ SlotsToOmit: parent.
                  ifTrue: 'show sender' False: '').
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'ModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: public'
         
          slot = ( |
             | container slot).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'ModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: public'
         
          slotInfo = ( |
             | container slotInfo).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'ModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          slotString = ( |
@@ -820,7 +820,7 @@ SlotsToOmit: parent.
             ]) shrinkwrapped).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: editing\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot'
         
          successfulSlotEdit: objMirr = ( | {
@@ -829,7 +829,7 @@ SlotsToOmit: parent.
                  newObjMirr.
                 } 
             | 
-            "Called from the textEditor"
+            "Called from the ui1 textEditor"
             "Remove the old slot"
             newObjMirr: slotInfo copyHolderForRemove.
 
@@ -850,14 +850,14 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: editing\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          textEditorLocation = ( |
             | slot contents absoluteLocation).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotButton' -> () From: ( | {
          'Category: actions\x7fModuleInfo: Module: slotButton InitialContents: FollowSlot\x7fVisibility: private'
         
          visibility: v = ( |

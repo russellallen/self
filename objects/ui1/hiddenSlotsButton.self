@@ -1,65 +1,11 @@
  'Sun-$Revision: 30.7 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
 
  '-- Module body'
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
-        
-         hiddenSlotsButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'hiddenSlotsButton' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals hiddenSlotsButton.
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'hiddenSlotsButton' -> () From: ( | {
-         'ModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
-        
-         body <- bootstrap stub -> 'globals' -> 'objectBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'hiddenSlotsButton' -> () From: ( | {
-         'ModuleInfo: Module: hiddenSlotsButton InitialContents: InitializeToExpression: (list copyRemoveAll)\x7fVisibility: public'
-        
-         groupItems <- list copyRemoveAll.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'hiddenSlotsButton' -> () From: ( | {
-         'ModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
-        
-         label <- ''.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'hiddenSlotsButton' -> () From: ( | {
-         'ModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
-        
-         location <- bootstrap stub -> 'globals' -> 'point' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
-        
-         hiddenSlotsButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits hiddenSlotsButton.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'hiddenSlotsButton' -> () From: ( | {
-         'ModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
-        
-         parent* = bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'hiddenSlotsButton' -> () From: ( | {
-         'ModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
-        
-         size <- (1)@(1).
-        } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot'
@@ -113,14 +59,68 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
+        
+         hiddenSlotsButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 hiddenSlotsButton.
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
+         'ModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
+        
+         body <- bootstrap stub -> 'globals' -> 'ui1' -> 'objectBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
+         'ModuleInfo: Module: hiddenSlotsButton InitialContents: InitializeToExpression: (list copyRemoveAll)\x7fVisibility: public'
+        
+         groupItems <- list copyRemoveAll.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
+         'ModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
+        
+         label <- ''.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
+         'ModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
+        
+         location <- bootstrap stub -> 'globals' -> 'point' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
+        
+         hiddenSlotsButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 hiddenSlotsButton.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
+         'ModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
+         'ModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
+        
+         size <- (1)@(1).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: containing\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
         
          container = ( |
             | body).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
          createLabel = ( | {
@@ -142,7 +142,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
         
          createOn: bod = ( |
@@ -152,7 +152,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
         
          draw = ( |
@@ -162,7 +162,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'ModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
          hideAllSlots = ( |
@@ -172,14 +172,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
          labelFont = ( |
             | boxSizing buttonFont).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: positioning\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
          labelLocation = ( |
@@ -187,14 +187,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             ((width - labelSize x) / 2) @ boxSizing hsButtonTopMargin).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: sizing\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
          labelSize = ( |
             | labelFont sizeOfString: label).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: menuing\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
          menuItems = ( | {
@@ -215,45 +215,45 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             groupItems, its).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
-         'Category: drawing\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: InitializeToExpression: (hierarchicalMenu copy autosort: true)\x7fVisibility: private'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
+         'Category: drawing\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: InitializeToExpression: (ui1 hierarchicalMenu copy autosort: true)\x7fVisibility: private'
         
-         menuPrototype = hierarchicalMenu copy autosort: true.
+         menuPrototype = ui1 hierarchicalMenu copy autosort: true.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: sizing\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
         
          minSize = ( |
             | boxSizing minHSButtonSize: labelSize).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
          noHiddenSlotsLabel = '       '.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'ModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'menuButton' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'menuButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: printing\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
          printStringID = ( |
             | label).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
          rightButton* = bootstrap stub -> 'mixins' -> 'userInterface' -> 'rightButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
          rightButtonAccept = ( |
@@ -261,7 +261,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             False:  [drawUnpressed]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: public'
         
          rightButtonDown = ( |
@@ -271,7 +271,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             rightButton.rightButtonDown).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
          rightButtonPendingAccept: change = ( |
@@ -279,7 +279,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             change ifTrue: [ animatedDrawPressed ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
          rightButtonPendingReject: change = ( |
@@ -287,14 +287,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             change ifTrue: [ animatedDrawUnpressed ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: buttoning\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
          rightButtonReject = ( |
             | drawUnpressed. world display).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'hiddenSlotsButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'hiddenSlotsButton' -> () From: ( | {
          'Category: menuing\x7fModuleInfo: Module: hiddenSlotsButton InitialContents: FollowSlot\x7fVisibility: private'
         
          select: sel FixGraphics: fixGraphics = ( | {

@@ -1,75 +1,11 @@
  'Sun-$Revision: 30.7 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
 
  '-- Module body'
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: uiNotifier InitialContents: FollowSlot\x7fVisibility: public'
-        
-         messageCpt = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'messageCpt' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals messageCpt.
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: uiNotifier InitialContents: FollowSlot\x7fVisibility: public'
-        
-         uiNotifier = bootstrap define: bootstrap stub -> 'globals' -> 'uiNotifier' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals boxBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'uiNotifier' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals uiNotifier.
-
-CopyDowns:
-globals boxBody. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'messageCpt' -> () From: ( | {
-         'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
-        
-         container <- bootstrap stub -> 'globals' -> 'uiNotifier' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'messageCpt' -> () From: ( | {
-         'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
-        
-         location <- (0)@(0).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'messageCpt' -> () From: ( | {
-         'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
-        
-         message <- 'Greetings'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: uiNotifier InitialContents: FollowSlot\x7fVisibility: public'
-        
-         messageCpt = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits messageCpt.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'messageCpt' -> () From: ( | {
-         'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'messageCpt' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'messageCpt' -> () From: ( | {
-         'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
-        
-         size <- (1)@(1).
-        } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
@@ -116,7 +52,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          postFileIn = ( |
             | 
-            uiNotifier msg: messageCpt.
+            ui1 uiNotifier msg: ui1 messageCpt.
             resend.postFileIn).
         } | ) 
 
@@ -132,92 +68,156 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiNotifier' -> () From: ( | {
-         'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: uiNotifier InitialContents: FollowSlot\x7fVisibility: public'
         
-         alarm <- bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'uiNotifier' -> 'alarm' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals uiNotifier alarm.
+         messageCpt = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'messageCpt' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 messageCpt.
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiNotifier' -> 'alarm' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: uiNotifier InitialContents: FollowSlot\x7fVisibility: public'
+        
+         uiNotifier = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'uiNotifier' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 boxBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'uiNotifier' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 uiNotifier.
+
+CopyDowns:
+globals ui1 boxBody. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'messageCpt' -> () From: ( | {
+         'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
+        
+         container <- bootstrap stub -> 'globals' -> 'ui1' -> 'uiNotifier' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'messageCpt' -> () From: ( | {
+         'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
+        
+         location <- (0)@(0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'messageCpt' -> () From: ( | {
+         'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
+        
+         message <- 'Greetings'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: uiNotifier InitialContents: FollowSlot\x7fVisibility: public'
+        
+         messageCpt = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 messageCpt.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'messageCpt' -> () From: ( | {
+         'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'messageCpt' -> () From: ( | {
+         'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
+        
+         size <- (1)@(1).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
+         'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
+        
+         alarm <- bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'uiNotifier' -> 'alarm' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 uiNotifier alarm.
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiNotifier' -> 'alarm' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          interval <- 0.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiNotifier' -> 'alarm' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiNotifier' -> 'alarm' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          mesg <- bootstrap stub -> 'globals' -> 'message' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiNotifier' -> 'alarm' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiNotifier' -> 'alarm' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'ping' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiNotifier' -> 'alarm' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiNotifier' -> 'alarm' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          pingProcess <- bootstrap stub -> 'globals' -> 'process' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiNotifier' -> 'alarm' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiNotifier' -> 'alarm' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          stopping <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
-         dismissButton <- bootstrap stub -> 'globals' -> 'button' -> ().
+         dismissButton <- bootstrap stub -> 'globals' -> 'ui1' -> 'button' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          dismissPresent <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: InitializeToExpression: (nil)'
         
          msg <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: uiNotifier InitialContents: FollowSlot\x7fVisibility: public'
         
-         uiNotifier = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits uiNotifier.
+         uiNotifier = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 uiNotifier.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'uiNotifier' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          bottomMargin = 5.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          componentsDo: block = ( |
             | self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          draw = ( |
@@ -227,7 +227,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          drawAlert = ( |
@@ -238,7 +238,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          drawText = ( |
@@ -247,26 +247,26 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          leftMargin = 5.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          marginSize = ( |
             | (leftMargin + rightMargin) @ (topMargin + bottomMargin)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'uiNester' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'uiNester' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          resizeMinWidth: mw = ( | {
@@ -279,45 +279,45 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             size: (s x max: mw) @ s y).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          rightMargin = 5.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          textFont = ( |
             | boxSizing boxFont).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          textLocation = ( |
             | leftMargin @ topMargin).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          textSize = ( |
             | textFont sizeOfString: message).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'messageCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'messageCpt' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          topMargin = 5.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          addDismiss = ( |
             | 
-            dismissButton: (button copySize: dismissSize) name: 'Dismiss'.
+            dismissButton: (ui1 button copySize: dismissSize) name: 'Dismiss'.
             dismissButton command: ( |
                p* = traits clonable.
                note.
@@ -331,20 +331,20 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          bottomMargin = 6.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          byebye = ( |
             | banish).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          componentsDo: block = ( |
@@ -353,7 +353,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             dismissPresent ifTrue: [ block value: dismissButton ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          copyOn: wrld Message: msg At: pt Time: t = ( |
@@ -361,7 +361,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             (copyOn: wrld) createMessage: msg At: pt Time: t).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          copyPersistOn: wrld Message: msg At: pt = ( |
@@ -369,7 +369,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             ((copyOn: wrld) createPersistMessage: msg At: pt) makePersistent).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          copySyncOn: wrld Message: msg At: pt = ( |
@@ -378,18 +378,18 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
               Time: preferences notifierWaitTime).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          copySyncOn: wrld Message: msg At: pt Time: t = ( |
             | 
-            "sychronously add uiNotifier"
+            "sychronously add ui1 uiNotifier"
             wrld myUI send: 'copyOn:Message:At:Time:'
                         To: self
                       Args: (wrld & msg & pt & t) asVector).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          createMessage: m At: pt Time: t = ( |
@@ -399,12 +399,12 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          createPersistMessage: m At: pt = ( |
             | 
-            msg: (messageCpt copy container: self ) message: m.
+            msg: (ui1 messageCpt copy container: self ) message: m.
             msg resizeMinWidth: dismissSize x.
             msg location: messageLocation.
 
@@ -420,7 +420,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          dismissLocationWithMessageSize: msz = ( |
@@ -428,13 +428,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             leftMargin @ (size y - bottomMargin - dismissSize y)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          dismissSize = (65)@(16).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          leftButtonDown = ( |
@@ -443,13 +443,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             resend.leftButtonDown).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          leftMargin = 5.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          makePersistent = ( |
@@ -460,7 +460,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          marginSize = ( |
@@ -469,20 +469,20 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             (topMargin + messageDismissGap + bottomMargin)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          messageDismissGap = 4.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          messageLocation = ( |
             | boxFaceOffset + (leftMargin @ topMargin)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          middleButtonDown = ( |
@@ -491,7 +491,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             resend.middleButtonDown).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          minWidth = ( |
@@ -499,13 +499,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             leftMargin + dismissSize x + rightMargin + boxSizing baseSideFaceWidth).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'boxBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'boxBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          persist = ( |
@@ -516,7 +516,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          resproutOn: wrld = ( |
@@ -524,7 +524,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             copyPersistOn: wrld Message: msg message At: location).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          rightButtonDown = ( |
@@ -533,13 +533,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             resend.rightButtonDown).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          rightMargin = 4.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          setAlarm: secs = ( |
@@ -548,7 +548,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                      SingleInterval: secs * 1000).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          setFinalAlarm = ( | {
@@ -561,7 +561,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                      SingleInterval: msecs).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          sizeWithMessageSize: msz = ( | {
@@ -574,20 +574,20 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             (s x max: minWidth) @ (s y + dismissSize y)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          stopAlarm = ( |
             | alarm stop).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          topMargin = 5.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiNotifier' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiNotifier' -> () From: ( | {
          'ModuleInfo: Module: uiNotifier InitialContents: FollowSlot'
         
          wakeup = ( |

@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.8 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
@@ -61,7 +61,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
              Also, this tries to cooperate with the spy under X, which uses XWhitePixel
                (usually 0) and XBlackPixel (usually 1).  It assumes that text color (or
                whatever is put in 8r001) will contrast with TextContrast (which is
-               put in 8r000).  In the ui, this is the box front.'.
+               put in 8r000).  In the ui1 ui, this is the box front.'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'uiColormap' -> () From: ( | {
@@ -76,44 +76,44 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: public'
         
-         uiColormap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'uiColormap' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals uiColormap.
+         uiColormap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'uiColormap' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 uiColormap.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'ModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: private'
         
          cm* <- bootstrap stub -> 'globals' -> 'colormap' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'ModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: public'
         
          copy = ( |
             | parent.copy).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: public'
         
-         uiColormap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits uiColormap.
+         uiColormap = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 uiColormap.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'ModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'uiColormap' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: private'
         
          arrowColor: cme ForMap: arrowPlane = ( | {
@@ -133,7 +133,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                 at: 8r300 + i Put: cme color. ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: public'
         
          arrowPlane0MakeText: textCME TextBackground: textBackCME Background: backCME Arrow: arrowCME ColorA: aCME ColorB: bCME ColorC: cCME Transparent: transCME ArrowPlusTopPlanes: arrTopCME = ( |
@@ -149,7 +149,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             ArrowPlusTopPlanes: arrTopCME).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: public'
         
          arrowPlane1MakeText: textCME TextBackground: textBackCME Background: backCME Arrow: arrowCME ColorA: aCME ColorB: bCME ColorC: cCME Transparent: transCME ArrowPlusTopPlanes: arrTopCME = ( |
@@ -165,7 +165,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             ArrowPlusTopPlanes: arrTopCME).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: private'
         
          backgroundColor: cme ForMap: arrowPlane = ( |
@@ -177,7 +177,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             at: (top2BitsForMap: arrowPlane) + colIndex Put: cme color).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: public'
         
          bothArrowPlanesMakeText: textCME TextBackground: textBackCME Background: backCME Arrow: arrowCME ColorA: aCME ColorB: bCME ColorC: cCME Transparent: transCME ArrowPlusTopPlanes: arrTopCME = ( |
@@ -193,21 +193,21 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             ArrowPlusTopPlanes: arrTopCME).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: public'
         
          copy = ( |
             | clone cm: cm copy).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: public'
         
          copyWithRep: c = ( |
             | clone cm: c).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: animation\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: public'
         
          interpolate: p From: cm = ( | {
@@ -223,7 +223,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             r).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: private'
         
          layer1Color: cme Number: n ForMap: arrowPlane = ( |
@@ -235,7 +235,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             at: (top2BitsForMap: arrowPlane) + colIndex Put: cme color).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: private'
         
          layer2Color: cme Number: n ForMap: arrowPlane = ( | {
@@ -255,7 +255,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                 at: highBits + layer2 + i Put: cme color. ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: private'
         
          make: whichArrowPlane Text: textCME TextBackground: textBackCME Background: backCME Arrow: arrowCME ColorA: aCME ColorB: bCME ColorC: cCME Transparent: transCME ArrowPlusTopPlanes: arrTopCME = ( | {
@@ -288,7 +288,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: public'
         
          makeNoAcetateFrom: cm Transparent: trans = ( |
@@ -298,41 +298,41 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'ModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: public'
         
          size = 256.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: private'
         
          spyBackgroundColor: cme = ( |
             | at: 8r000 Put: cme color).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: printing\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot'
         
          storeStringIfFail: fb = ( |
             | 
-            'uiColormap copy "Warning: state not preserved across fileOut"').
+            'ui1 uiColormap copy "Warning: state not preserved across fileOut"').
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: printing\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: public'
         
          storeStringNeeds = ( |
-            | uiColormap).
+            | ui1 uiColormap).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: private'
         
          top2BitsForMap: arrowPlane = ( |
@@ -342,7 +342,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             8r000).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'uiColormap' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'uiColormap' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: uiColormap InitialContents: FollowSlot\x7fVisibility: private'
         
          transparentIndex = 0.

@@ -114,7 +114,7 @@ This is not a module and not managed by Transporter.
   ).
   
   optionalLoadUI1 = (
-     optionalLoad: [ loadGraphics. bootstrap read: 'allUI' From: 'ui1']
+     optionalLoad: [ loadGraphics. bootstrap read: 'allUI1' From: 'ui1']
            IfFlag: 'ui1'
           OrQuery: 'UI1 (X11 Only)'
   ).

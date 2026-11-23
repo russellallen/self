@@ -1,6 +1,6 @@
  '$Revision: 30.7 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
@@ -10,21 +10,12 @@ See the LICENSE file for license information.
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'comparator' -> () From: ( | {
          'Category: ui1 interface\x7fModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: private'
         
-         openView = ( | {
-                 'ModuleInfo: Module: diffUI InitialContents: FollowSlot'
-                
-                 str1.
-                }  {
-                 'ModuleInfo: Module: diffUI InitialContents: FollowSlot'
-                
-                 str2.
-                }  {
-                 'ModuleInfo: Module: diffUI InitialContents: FollowSlot'
-                
-                 te.
-                } 
+         openViewIn: uiWorld = ( |
+             str1.
+             str2.
+             te.
             | 
-            te: diffViewer copyOn: ui world
+            te: ui1 diffViewer copyOn: uiWorld
                              Size: (700@150)
                                Do: [|:e| e name: 'Diff'].
             coll1 doFirst: [| :fs | str1: fs string             ]
@@ -35,98 +26,11 @@ See the LICENSE file for license information.
                MiddleLast: [| :ss | str2: str2 & '\n' & ss string].
             te methodView2 setText: str2 flatString.
             te methodView2 hiliteLines: inverseNoMatches.
-            ui world addBodyOnTop: te.
+            ui1 ui world addBodyOnTop: te.
             te location: 100@100.
             te constrainFullBodyToWorld.
             te swoopDown.       
             lobby).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
-        
-         diffTextField = bootstrap define: bootstrap stub -> 'globals' -> 'diffTextField' -> () ToBe: bootstrap addSlotsTo: (
-             globals textField copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'diffTextField' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals diffTextField.
-
-CopyDowns:
-globals textField. copy
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'diffTextField' -> () From: ( | {
-         'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: private'
-        
-         hiliteLines <- bootstrap stub -> 'globals' -> 'set' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'diffTextField' -> () From: ( | {
-         'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
-        
-         lineSelection: lineno = ( |
-            | 
-            (hiliteLines includes: lineno)
-              ifTrue: 0@maxSmallInt
-               False: 0@0).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
-        
-         diffViewer = bootstrap define: bootstrap stub -> 'globals' -> 'diffViewer' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'methodView' From:
-             bootstrap remove: 'name' From:
-             bootstrap remove: 'parent' From:
-             globals textEditor copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'diffViewer' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals diffViewer.
-
-CopyDowns:
-globals textEditor. copy 
-SlotsToOmit: methodView name parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'diffViewer' -> () From: ( | {
-         'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: private'
-        
-         methodSlider2.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'diffViewer' -> () From: ( | {
-         'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
-        
-         methodView <- bootstrap stub -> 'globals' -> 'diffTextField' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'diffViewer' -> () From: ( | {
-         'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
-        
-         methodView2 <- bootstrap stub -> 'globals' -> 'diffTextField' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'diffViewer' -> () From: ( | {
-         'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
-        
-         name <- 'Diff Viewer'.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
-        
-         diffViewer = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'diffViewer' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits diffViewer.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'diffViewer' -> () From: ( | {
-         'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: private'
-        
-         parent* = bootstrap stub -> 'traits' -> 'diffViewer' -> ().
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
@@ -181,7 +85,94 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'diffViewer' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
+        
+         diffTextField = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'diffTextField' -> () ToBe: bootstrap addSlotsTo: (
+             globals ui1 textField copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'diffTextField' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 diffTextField.
+
+CopyDowns:
+globals ui1 textField. copy
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'diffTextField' -> () From: ( | {
+         'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: private'
+        
+         hiliteLines <- bootstrap stub -> 'globals' -> 'set' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'diffTextField' -> () From: ( | {
+         'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
+        
+         lineSelection: lineno = ( |
+            | 
+            (hiliteLines includes: lineno)
+              ifTrue: 0@maxSmallInt
+               False: 0@0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
+        
+         diffViewer = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'diffViewer' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'methodView' From:
+             bootstrap remove: 'name' From:
+             bootstrap remove: 'parent' From:
+             globals ui1 textEditor copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'diffViewer' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 diffViewer.
+
+CopyDowns:
+globals ui1 textEditor. copy 
+SlotsToOmit: methodView name parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'diffViewer' -> () From: ( | {
+         'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: private'
+        
+         methodSlider2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'diffViewer' -> () From: ( | {
+         'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
+        
+         methodView <- bootstrap stub -> 'globals' -> 'ui1' -> 'diffTextField' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'diffViewer' -> () From: ( | {
+         'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
+        
+         methodView2 <- bootstrap stub -> 'globals' -> 'ui1' -> 'diffTextField' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'diffViewer' -> () From: ( | {
+         'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
+        
+         name <- 'Diff Viewer'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
+        
+         diffViewer = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'diffViewer' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 diffViewer.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'diffViewer' -> () From: ( | {
+         'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'diffViewer' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'diffViewer' -> () From: ( | {
          'ModuleInfo: Module: diffUI InitialContents: FollowSlot'
         
          contextChange: con = ( |
@@ -190,7 +181,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             con = methodSlider2 ifTrue: [ methodView2 scroll: con get_value ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'diffViewer' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'diffViewer' -> () From: ( | {
          'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: public'
         
          init = ( | {
@@ -209,7 +200,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             | 
             offsetFromBody: 0@0.
 
-            cancelButton: (button copySize: 58@16) name: 'Dismiss'.
+            cancelButton: (ui1 button copySize: 58@16) name: 'Dismiss'.
             cancelButton  command: (| 
                 p* = traits clonable.
                 textEditor.
@@ -218,7 +209,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             |) copy textEditor: self.
             addContext: cancelButton At: (140@140) + boxFaceOffset.
 
-            methodSlider: (slider copySize: slW @ h) name: 'slider1'.
+            methodSlider: (ui1 slider copySize: slW @ h) name: 'slider1'.
             addContext: methodSlider At: (2@2) + boxFaceOffset + 
                                        (topMargin @ sideMargin).
             methodSlider value: 0.
@@ -235,18 +226,18 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                                         + (topMargin @ sideMargin).
             methodView2 init.
 
-            methodSlider2: (slider copySize: slW @ h) name: 'slider2'.
+            methodSlider2: (ui1 slider copySize: slW @ h) name: 'slider2'.
             addContext: methodSlider2 At: (2@2) + boxFaceOffset
                                           + ((slW + 2 + tW + tW)@0)
                                           + (topMargin @ sideMargin).
             methodSlider2 value: 0.
 
-            resizeHandle: resizeButton copySize: 10@10.
+            resizeHandle: ui1 resizeButton copySize: 10@10.
             addContext: resizeHandle At: 10@10.
             resize: size).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'diffViewer' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'diffViewer' -> () From: ( | {
          'ModuleInfo: Module: diffUI InitialContents: FollowSlot'
         
          leavingTopNotify = ( |
@@ -256,13 +247,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             display).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'diffViewer' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'diffViewer' -> () From: ( | {
          'ModuleInfo: Module: diffUI InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'textApplication' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'textApplication' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'diffViewer' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'diffViewer' -> () From: ( | {
          'ModuleInfo: Module: diffUI InitialContents: FollowSlot'
         
          resize: ext Reallocate: reallocate = ( | {
@@ -306,7 +297,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'diffViewer' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'diffViewer' -> () From: ( | {
          'ModuleInfo: Module: diffUI InitialContents: FollowSlot'
         
          resproutOn: wrld = ( | {
