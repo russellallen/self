@@ -31,7 +31,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'xPreferencesAdjuster' -> () From: ( | {
          'ModuleInfo: Module: xPreferencesAdjuster InitialContents: FollowSlot\x7fVisibility: public'
         
-         directory <- 'ui1/seams'.
+         directory <- 'ui1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'xPreferencesAdjuster' -> () From: ( | {
@@ -66,7 +66,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: graphics\x7fModuleInfo: Module: xPreferencesAdjuster InitialContents: FollowSlot'
+         'Category: platform\x7fCategory: graphical interface\x7fModuleInfo: Module: xPreferencesAdjuster InitialContents: FollowSlot'
         
          xPreferencesAdjuster = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'xPreferencesAdjuster' -> () From: ( |
              {} = 'Comment: To delete all prefs for testing: defaults delete org.xquartz.X11\x7fModuleInfo: Creator: globals xPreferencesAdjuster.

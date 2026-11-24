@@ -100,6 +100,26 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             | ) .
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiPatternPalette' -> 'blurArrow' -> () From: ( | {
+         'ModuleInfo: Module: uiColorPalette InitialContents: InitializeToExpression: (nullImage)\x7fVisibility: private'
+        
+         image <- bootstrap stub -> 'globals' -> 'nullImage' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiPatternPalette' -> 'blurArrow' -> () From: ( | {
+         'ModuleInfo: Module: uiColorPalette InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'globals' -> 'x11Globals' -> 'pattern' -> 'parent' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiPatternPalette' -> 'blurArrow' -> () From: ( | {
+         'Comment: Arrow blur. Was 25% (too faint on sage). 75% on X11 stipple and Direct alpha. -- grok 08/26/26\x7fModuleInfo: Module: uiColorPalette InitialContents: InitializeToExpression: ( \'XX
+Xo\' asTextLines )\x7fVisibility: private'
+        
+         template <-  'XX
+Xo' asTextLines .
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiPatternPalette' -> () From: ( | {
          'ModuleInfo: Module: uiColorPalette InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -107,6 +127,26 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
              {} = 'ModuleInfo: Creator: globals ui1 uiPatternPalette blurBody.
 \x7fIsComplete: '.
             | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiPatternPalette' -> 'blurBody' -> () From: ( | {
+         'ModuleInfo: Module: uiColorPalette InitialContents: InitializeToExpression: (nullImage)\x7fVisibility: private'
+        
+         image <- bootstrap stub -> 'globals' -> 'nullImage' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiPatternPalette' -> 'blurBody' -> () From: ( | {
+         'ModuleInfo: Module: uiColorPalette InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'globals' -> 'x11Globals' -> 'pattern' -> 'parent' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiPatternPalette' -> 'blurBody' -> () From: ( | {
+         'ModuleInfo: Module: uiColorPalette InitialContents: InitializeToExpression: ( \'Xo
+oX\' asTextLines )\x7fVisibility: private'
+        
+         template <-  'Xo
+oX' asTextLines .
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {

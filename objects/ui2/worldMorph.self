@@ -796,6 +796,18 @@ whenever the background menu is rebuilt\x7fModuleInfo: Module: worldMorph Initia
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
+         'Category: window management\x7fComment: True if an X11 display connection can be opened. Checks the dylib first on macOS so a weak NULL XOpenDisplay is never called. Non-interactive, unlike openDisplayNamed:. -- claude & grok & dmu 5/26, 8/26\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: private'
+        
+         canOpenXDisplay: dispName = ( |
+             d.
+            | 
+            xlib display libraryPresent ifFalse: [^ false].
+            d: xlib display open: dispName IfFail: [| :e | ^ false].
+            d close.
+            true).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
          'Category: damage management\x7fComment: Force the entire world to be redrawn on the next update cycle.\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
         
          changed = ( |
@@ -1211,6 +1223,18 @@ rectangle onto the given canvas.\x7fModuleInfo: Module: worldMorph InitialConten
                aCanvas redrawBox:  rBox.
                 m drawOn: aCanvas.
             ].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
+         'Category: window management\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: public'
+        
+         ensureFrontmostForHand: sourceHand = ( |
+             wc.
+            | 
+            (snapshotAction commandLine includes: '-headless') ifTrue: [^ self].
+            wc: winCanvasForHand: sourceHand IfAbsent: [^ self].
+            wc ensureFrontmost.
             self).
         } | ) 
 
@@ -1818,6 +1842,20 @@ oldGlobalBounds. \x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot'
                       newY ifNil: [ newY: ((offset y * (joinee globalBaseBounds height asFloat / oldGlobalBounds height asFloat)) asInteger)].
                       ^ newX @ newY
                   ]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
+         'Category: window management\x7fComment: The first time per session that an X open fails and we drop to Quartz, point
+the user at the readme. -- claude & dmu 5/2026\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: private'
+        
+         noteXFallbackToReadmeOnce = ( |
+            | 
+            desktop xFallbackNoticeShown ifTrue: [^ self].
+            desktop xFallbackNoticeShown: true.
+            ('Could not open X11; using Quartz. To run the UI under X11 see ',
+             '"Running the UI under X11 (XQuartz) on macOS" in readme.md. ',
+             '-- claude & dmu 5/2026') printLine.
+            self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
@@ -2474,6 +2512,22 @@ the arrow that is furthest back.\x7fModuleInfo: Module: worldMorph InitialConten
                 exit value
               ]
             ] loopExit).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {
+         'Category: window management\x7fComment: macOS backup for launchd on-demand start: print a short notice, launch XQuartz, then retry opening dispName for a few seconds. Skipped when headless.
+Returns whether X became openable. -- claude & dmu 5/2026\x7fModuleInfo: Module: worldMorph InitialContents: FollowSlot\x7fVisibility: private'
+        
+         startXQuartzAndCanOpen: dispName = ( |
+            | 
+            (snapshotAction commandLine includes: '-headless') ifTrue: [^ false].
+            'Starting X11 (XQuartz)...' printLine.
+            os command: 'open -a XQuartz' IfFail: [|:e| ^ false].
+            6 do: [
+              process this sleep: 700.
+              (canOpenXDisplay: dispName) ifTrue: [^ true].
+            ].
+            false).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'worldMorph' -> () From: ( | {

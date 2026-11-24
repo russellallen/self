@@ -697,6 +697,13 @@ If hopeless, center me.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'rectangle' -> () From: ( | {
+         'Category: stretching\x7fModuleInfo: Module: rectangle InitialContents: FollowSlot\x7fVisibility: public'
+        
+         squinch = ( |
+            | (shrinkRight: 1) shrinkBottom: 1).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'rectangle' -> () From: ( | {
          'Category: filing out\x7fModuleInfo: Module: rectangle InitialContents: FollowSlot\x7fVisibility: private'
         
          storeStringWorks = bootstrap stub -> 'globals' -> 'true' -> ().

@@ -442,6 +442,70 @@ SlotsToOmit: parent.
             | xlib events xInputEvent shiftMask).
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( | {
+         'Category: keyboard Event Handling\x7fModuleInfo: Module: xEvents InitialContents: FollowSlot\x7fVisibility: private'
+        
+         x11KeyCapPressedIfNone: nb = ( |
+            | 
+            host hasSolaris ifTrue: [
+              "Arrow keys"
+              keycode =  88  ifTrue: [ ^ keyCaps arrows  down ].
+              keycode =  87  ifTrue: [ ^ keyCaps arrows  left ].
+              keycode =  89  ifTrue: [ ^ keyCaps arrows  up   ].
+              keycode =  86  ifTrue: [ ^ keyCaps arrows  right].
+
+              "Arrow keys on numerical pad"
+              keycode =  97  ifTrue: [ ^ keyCaps arrows  down ].
+              keycode =  99  ifTrue: [ ^ keyCaps arrows  left ].
+              keycode = 103  ifTrue: [ ^ keyCaps arrows  up   ].
+              keycode = 101  ifTrue: [ ^ keyCaps arrows  right].
+
+              "The combination arrow keys on the numerical pad"
+              keycode = 102 ifTrue: [ ^ keyCaps arrows  upLeft    ].
+              keycode = 104 ifTrue: [ ^ keyCaps arrows  upRight   ].
+              keycode =  96 ifTrue: [ ^ keyCaps arrows  downLeft  ].
+              keycode =  98 ifTrue: [ ^ keyCaps arrows  downRight ].
+
+              keycode =  80 ifTrue: [ ^ keyCaps oddballs insert   ].
+              keycode =  82 ifTrue: [ ^ keyCaps oddballs pageUp   ].
+              keycode =  85 ifTrue: [ ^ keyCaps oddballs pageDown ].
+              keycode =  81 ifTrue: [ ^ keyCaps oddballs home     ].
+              keycode =  84 ifTrue: [ ^ keyCaps oddballs end      ].
+
+              "Undo Cut Copy and Paste keys"
+
+              "Note- Undo isn't implemented yet.  Calling it will cause"
+              "the system to printLine a message saying so"
+              keycode = 129 ifTrue: [ ^ keyCaps oddballs  undo_cmd     ].
+              keycode = 131 ifTrue: [ ^ keyCaps oddballs  copy_cmd     ].
+              keycode = 132 ifTrue: [ ^ keyCaps oddballs  paste_cmd    ].
+              keycode = 130 ifTrue: [ ^ keyCaps oddballs  cut_cmd      ].
+
+            ] False: [
+
+              keycode = 122 ifTrue: [ ^ keyCaps oddballs insert   ].
+              keycode = 124 ifTrue: [ ^ keyCaps oddballs pageUp   ].
+              keycode = 129 ifTrue: [ ^ keyCaps oddballs pageDown ].
+              keycode = 123 ifTrue: [ ^ keyCaps oddballs home     ].
+              keycode = 127 ifTrue: [ ^ keyCaps oddballs end      ].
+
+              keycode = 133 ifTrue: [ ^ keyCaps arrows  down  ].
+              keycode = 134 ifTrue: [ ^ keyCaps arrows  up    ].
+              keycode = 131 ifTrue: [ ^ keyCaps arrows  left  ].
+              keycode = 132 ifTrue: [ ^ keyCaps arrows  right ].
+
+            ].
+
+            nb value).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui2XEvent' -> () From: ( | {
+         'Category: keyboard Event Handling\x7fModuleInfo: Module: xEvents InitialContents: FollowSlot\x7fVisibility: private'
+        
+         x11KeyCapsPressed = ( |
+            | vector copyAddFirst: x11KeyCapPressedIfNone: [^ vector]).
+        } | ) 
+
 
 
  '-- Side effects'

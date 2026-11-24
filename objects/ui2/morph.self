@@ -2691,6 +2691,40 @@ owner is nil. This morph is typically a worldMorph.\x7fModuleInfo: Module: morph
             ]).
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'morph' -> () From: ( | {
+         'Category: damage management\x7fModuleInfo: Module: morph InitialContents: FollowSlot\x7fVisibility: public'
+        
+         xxxOldChanged = ( |
+             bnds.
+             deltaP.
+             pX <- 0.
+             pY <- 0.
+             w.
+            | 
+            "Report that the area occupied by this morph should be redrawn."
+            "Details: This method is an optimized version of:
+                w: world.
+                w isWorldMorph ifTrue: [
+                    w damaged: globalBounds.
+                ].
+            This optimization traverses the chain to the world only once.
+            Does nothing if the morph is not in the world."
+
+            w: owner ifNil: [ ^self ].
+            [w isWorldMorph] whileFalse: [| wPos |
+                wPos: w position.
+                pX: pX + wPos x.
+                pY: pY + wPos y.
+                w: w owner ifNil: [ ^self ].
+            ].
+            bnds: bounds.
+            deltaP: pX @ pY.
+            w damaged:
+                (rectangle copyX: deltaP + bnds origin
+                               Y: deltaP + bnds corner + shadowOffset "xxx").
+            self).
+        } | ) 
+
 
 
  '-- Side effects'

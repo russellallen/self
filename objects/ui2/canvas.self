@@ -1263,6 +1263,13 @@ in the world.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractWindowCanvas' -> () From: ( | {
+         'Category: portable accessing\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         ensureFrontmost = ( |
+            | self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractWindowCanvas' -> () From: ( | {
          'Category: colors and fonts\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          idForFontSpec: fSpec = ( |
@@ -2349,6 +2356,15 @@ the pixmapCache some day.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindowCanvas' -> () From: ( | {
+         'Category: portable access\x7fComment: On MacOS27, aka GoldenGate, an XQuartz ui2 window does not receive keystrokes when you click on it
+unless the OS is told to frontmost the XQuartz app. -- dmu 6/26\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         ensureFrontmost = ( |
+            | 
+            platformWindow ensureFrontmost).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindowCanvas' -> () From: ( | {
          'Category: events\x7fComment: X displays deal with events\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
         
          eventsPending = ( |
@@ -2508,6 +2524,16 @@ the pixmapCache some day.
          pixmapCanvasPrototypeForMyScreen = ( |
             | 
             x11Globals pixmapCanvas).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindowCanvas' -> () From: ( | {
+         'Category: portable access\x7fComment: Backend-stable name for reopening after a snapshot: the X display
+ name persists in a slot, so an X window reincarnates as X.
+ -- claude & dmu 5/2026\x7fModuleInfo: Module: canvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         reincarnationDisplayName = ( |
+            | 
+            display originalName).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindowCanvas' -> () From: ( | {

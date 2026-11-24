@@ -56,7 +56,8 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'allUI1' -> () From: ( | {
          'ModuleInfo: Module: allUI1 InitialContents: FollowSlot\x7fVisibility: private'
         
-         subpartNames <- 'allUI1Seams ui1Event
+         subpartNames <- 'ui1MacToolbox
+ui1Event
 enumResult
 slab
 uiColormap
@@ -119,7 +120,7 @@ ui1OnQuartz
 
  '-- Sub parts'
 
- bootstrap read: 'allUI1Seams' From: 'ui1/seams'
+ bootstrap read: 'ui1MacToolbox' From: 'ui1'
  bootstrap read: 'ui1Event' From: 'ui1'
  bootstrap read: 'enumResult' From: 'ui1'
  bootstrap read: 'slab' From: 'ui1'

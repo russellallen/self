@@ -76,6 +76,12 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             | ) .
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( | {
+         'Category: graphics (ui1)\x7fModuleInfo: Module: x11Globals InitialContents: FollowSlot\x7fVisibility: public'
+        
+         xlib = bootstrap stub -> 'globals' -> 'xlib' -> ().
+        } | ) 
+
 
 
  '-- Side effects'

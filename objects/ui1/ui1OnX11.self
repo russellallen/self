@@ -62,7 +62,58 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'ui1OnX11' -> () From: ( | {
          'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: private'
         
-         subpartNames <- ''.
+         subpartNames <- 'xPreferencesAdjuster'.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'xlib' -> () From: ( | {
+         'Category: ui1 input\x7fModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         ui1EventSource = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'xlib' -> 'ui1EventSource' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals xlib ui1EventSource.
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'xlib' -> 'ui1EventSource' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot'
+        
+         injectedEvents <- bootstrap stub -> 'globals' -> 'sharedQueue' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'xlib' -> 'ui1EventSource' -> () From: ( | {
+         'Comment: last cursor position seen on a mouse event; stamped onto key events
+(point-to-type) by copyFrom:LastCursor:. -- claude & dmu 5/2026\x7fModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         lastCursor <- (0)@(0).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot'
+        
+         ui1EventSource = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'xlib' -> 'ui1EventSource' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits xlib ui1EventSource.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'xlib' -> 'ui1EventSource' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'xlib' -> 'ui1EventSource' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'xlib' -> 'ui1EventSource' -> () From: ( | {
+         'Comment: ms to sleep between polls when the queue is empty (matches ui2/Quartz). -- claude & dmu 5/2026\x7fModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         pollDelayMS <- 10.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'xlib' -> 'ui1EventSource' -> () From: ( | {
+         'Comment: the open xlib display whose event queue this source polls. The window
+keeps the same display as window.display for colour/gc/font/setup queries; only
+the watcher pulls events through this source. -- claude & dmu 5/2026\x7fModuleInfo: Module: ui1OnX11 InitialContents: InitializeToExpression: (nil)\x7fVisibility: public'
+        
+         xdisplay.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> () From: ( | {
@@ -890,6 +941,107 @@ SlotsToOmit: parent.
             | ) .
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         black = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> 'black' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 graphics x11Traits patterns black.
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> 'black' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: private'
+        
+         image <- bootstrap stub -> 'globals' -> 'nullImage' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> 'black' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'globals' -> 'x11Globals' -> 'pattern' -> 'parent' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> 'black' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: InitializeToExpression: (\'X\' asTextLines)\x7fVisibility: private'
+        
+         template <- 'X' asTextLines.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         gray = bootstrap stub -> 'globals' -> 'ui1' -> 'uiPatternPalette' -> 'blurBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         lightGray = bootstrap stub -> 'globals' -> 'ui1' -> 'uiPatternPalette' -> 'blurArrow' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         null = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> 'null' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 graphics x11Traits patterns null.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> 'null' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         createFor: win Foreground: fg Background: bg = ( |
+            | self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> 'null' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         isNull = bootstrap stub -> 'globals' -> 'true' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> 'null' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'globals' -> 'x11Globals' -> 'pattern' -> 'parent' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> 'null' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         release = ( |
+            | self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         white = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> 'white' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 graphics x11Traits patterns white.
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> 'white' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: private'
+        
+         image <- bootstrap stub -> 'globals' -> 'nullImage' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> 'white' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'globals' -> 'x11Globals' -> 'pattern' -> 'parent' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'patterns' -> 'white' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: InitializeToExpression: (\'o\' asTextLines)\x7fVisibility: private'
+        
+         template <- 'o' asTextLines.
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> () From: ( | {
          'Category: prototypes\x7fModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
         
@@ -1062,6 +1214,61 @@ SlotsToOmit: parent.
             zoomLayer: menu From: s To: e FromScreen: fromScreen Animator: anim).
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'ui1EventSource' -> () From: ( | {
+         'Comment: ui1 eventSource hook: convert one native X event into the shared uiEvent
+family (x11Globals ui2Event) by REUSING ui2s proven X converter
+(copyFrom:LastCursor: -> the native events setUI2Event: -> setFromButtonPress:
+etc.). ui1 reads it through the ui1-view aliases (typeName/x/y/newState/...).
+copyFrom:LastCursor: stamps key events (no native location) with the last
+cursor, so ui1s point-to-type works; we track that from mouse events. Frees the
+native event. -- claude & dmu 5/2026\x7fModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         convert: raw = ( |
+             e.
+            | 
+            e: x11Globals ui2Event copyFrom: raw LastCursor: lastCursor.
+            raw delete.
+            (e mouseDown || [e mouseUp] || [e mouseMotion]) ifTrue: [ lastCursor: e cursorPoint ].
+            e).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'ui1EventSource' -> () From: ( | {
+         'Comment: build the source wrapping an open xlib display. -- claude & dmu 5/2026\x7fModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         forDisplay: d = ( |
+             c.
+            | 
+            c: copy.
+            c xdisplay: d.
+            c injectedEvents: sharedQueue copy.
+            c).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'ui1EventSource' -> () From: ( | {
+         'ModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'eventSource' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'ui1EventSource' -> () From: ( | {
+         'Comment: ui1 eventSource hook: how many native X events are queued. XPending also
+pumps the fd, so the shared nextEvent sleep-polling this sees newly-arrived
+events (Option A: X no longer fd-blocks, so injected synthetic events are
+noticed too). -- claude & dmu 5/2026\x7fModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         rawEventsPending = ( |
+            | xdisplay eventsPending).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xlib' -> 'ui1EventSource' -> () From: ( | {
+         'Comment: ui1 eventSource hook: fetch the next native X event. Only called once the
+shared nextEvent has confirmed one is pending, so it returns without
+fd-blocking. -- claude & dmu 5/2026\x7fModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot\x7fVisibility: public'
+        
+         rawNextEvent = ( |
+            | xdisplay nextEvent).
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> () From: ( | {
          'Category: starting and stopping\x7fModuleInfo: Module: ui1OnX11 InitialContents: FollowSlot'
         
@@ -1129,6 +1336,12 @@ SlotsToOmit: parent.
             | 
             ui1 uiWorld).
         } | ) 
+
+
+
+ '-- Sub parts'
+
+ bootstrap read: 'xPreferencesAdjuster' From: 'ui1'
 
 
 
