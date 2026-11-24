@@ -377,10 +377,17 @@ void frame::save_outgoing_arguments() {
       // an objs area and its mark slot holds a markOop; an unscavenged
       // new-space clone can still be map-less, so accept only a set map.
       // -- rca 6/26, 7/26
-      if (e->is_mem()
-          && (!Memory->is_obj_heap((oop*)memOop(e)->addr())
-              || memOop(e)->addr()->_map == NULL
-              || !oop(memOop(e)->addr()->_mark)->is_mark()))
+      // A mark-tagged word must not be stored either.  The receiver slot of
+      // a zero-argument send has been seen holding badOop (7), which is a
+      // mark.  Only object headers may carry the mark tag (space.cpp finds
+      // object starts by scanning for marks), and a vector holding one
+      // corrupted the heap within a few scavenges: worldBuilder -o ui1
+      // crashed in mapTable::canonical_map every time until this was added.
+      if (e->is_mark()
+          || (e->is_mem()
+              && (!Memory->is_obj_heap((oop*)memOop(e)->addr())
+                  || memOop(e)->addr()->_map == NULL
+                  || !oop(memOop(e)->addr()->_mark)->is_mark())))
         e = Memory->nilObj;
       v->obj_at_put(i, e);
     }
