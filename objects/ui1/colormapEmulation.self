@@ -63,7 +63,7 @@ SlotsToOmit: parent.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'macToolboxGlobals' -> () From: ( | {
-         'Category: graphical interface\x7fCategory: windowing\x7fModuleInfo: Module: colormapEmulation InitialContents: FollowSlot\x7fVisibility: public'
+         'Category: windowing\x7fModuleInfo: Module: colormapEmulation InitialContents: FollowSlot\x7fVisibility: public'
         
          virtual8BitWindow = bootstrap define: bootstrap stub -> 'globals' -> 'macToolboxGlobals' -> 'virtual8BitWindow' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
@@ -193,50 +193,50 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: colormapEmulation InitialContents: FollowSlot\x7fVisibility: public'
         
-         uiWorld32 = bootstrap define: bootstrap stub -> 'globals' -> 'uiWorld32' -> () ToBe: bootstrap addSlotsTo: (
+         uiWorld32 = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'uiWorld32' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals uiWorld copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'uiWorld32' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals uiWorld32.
+             globals ui1 uiWorld copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'uiWorld32' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 uiWorld32.
 
 CopyDowns:
-globals uiWorld. copy 
+globals ui1 uiWorld. copy 
 SlotsToOmit: parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiWorld32' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiWorld32' -> () From: ( | {
          'ModuleInfo: Module: colormapEmulation InitialContents: InitializeToExpression: (nil)'
         
          graphic32.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiWorld32' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiWorld32' -> () From: ( | {
          'ModuleInfo: Module: colormapEmulation InitialContents: InitializeToExpression: (nil)'
         
          offScreen32.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiWorld32' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiWorld32' -> () From: ( | {
          'ModuleInfo: Module: colormapEmulation InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'uiWorld32' -> 'parent' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals uiWorld32 parent.
+         parent* = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'uiWorld32' -> 'parent' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 uiWorld32 parent.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiWorld32' -> 'parent' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiWorld32' -> 'parent' -> () From: ( | {
          'ModuleInfo: Module: colormapEmulation InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'uiWorld' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'uiWorld' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiWorld32' -> 'parent' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiWorld32' -> 'parent' -> () From: ( | {
          'ModuleInfo: Module: colormapEmulation InitialContents: FollowSlot\x7fVisibility: private'
         
          setGraphicAndOffScreen = ( |
@@ -247,7 +247,7 @@ SlotsToOmit: parent.
             offScreen: bitmap copyFor: window Size: window size Depth: 8).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'uiWorld32' -> 'parent' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'uiWorld32' -> 'parent' -> () From: ( | {
          'ModuleInfo: Module: colormapEmulation InitialContents: FollowSlot'
         
          update = ( |

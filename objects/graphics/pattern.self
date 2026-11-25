@@ -152,7 +152,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         
          point: pt Color: c GC: gc = ( |
             | 
-            gc foreground8Bit: c.
+            gc foregroundColor: c.
             image drawPoint: pt GC: gc.
             self).
         } | ) 
@@ -178,10 +178,54 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'pattern' -> () From: ( | {
+         'Category: creating\x7fComment: 4x4 Bayer dither for density p in 0-1. X11 createFor builds a 1-bit pixmap from the template; Direct counts X pixels as CG alpha. -- grok 08/26/26\x7fModuleInfo: Module: pattern InitialContents: FollowSlot\x7fVisibility: public'
+        
+         setDensity: p = ( |
+             bayer.
+             lines <- ''.
+             thresh.
+            | 
+            bayer: (0 & 8 & 2 & 10 & 12 & 4 & 14 & 6
+                  & 3 & 11 & 1 & 9 & 15 & 7 & 13 & 5) asVector.
+            thresh: (((p asFloat max: 0.0) min: 1.0) * 16.0).
+            0 to: 3 Do: [ | :y. row <- ''. |
+                0 to: 3 Do: [ | :x |
+                    ((bayer at: ((y * 4) + x)) asFloat < thresh)
+                      ifTrue: [ row: row, 'X' ]
+                       False: [ row: row, 'o' ].
+                ].
+                y = 0 ifTrue: [ lines: row ]
+                       False: [ lines: lines, '
+', row ].
+            ].
+            template: lines asTextLines.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'pattern' -> () From: ( | {
          'Category: printing\x7fModuleInfo: Module: pattern InitialContents: FollowSlot\x7fVisibility: public'
         
          statePrintString = ( |
             | template asString).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'pattern' -> () From: ( | {
+         'Category: creating\x7fComment: Fraction of set pixels in the stipple template. Direct maps this through 1-(1-p)^2 to CG alpha. -- grok 08/26/26\x7fModuleInfo: Module: pattern InitialContents: FollowSlot\x7fVisibility: public'
+        
+         stippleAlpha = ( |
+             n <- 0.
+             on <- 0.
+            | 
+            template do: [ | :line |
+                line do: [ | :c |
+                    (setChar = c) || [clrChar = c] ifTrue: [
+                        n: n + 1.
+                        setChar = c ifTrue: [ on: on + 1 ].
+                    ].
+                ].
+            ].
+            n = 0 ifTrue: [ ^ 0.5 ].
+            on asFloat / n asFloat).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( | {

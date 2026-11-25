@@ -311,7 +311,6 @@ SlotsToOmit: clip parent platformWindow.
              disp.
              insetDispBounds.
             | 
-            wld doubleBuffering: true.
             bb: pt ## (w@h).
             disp: quartz directDisplay bestDisplayForBounds: bb.
             insetDispBounds: disp bounds indent: 30. "menu bar hack"
@@ -390,6 +389,18 @@ SlotsToOmit: clip parent platformWindow.
         
          quartzWindow = ( |
             | platformWindow quartzWindow).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'quartzWindowCanvas' -> () From: ( | {
+         'Category: accessing quartz objects\x7fComment: Backend-stable name for reopening after a snapshot: a Quartz window
+ always reincarnates as Quartz, regardless of which screen it was on
+ or whether its window proxy survived the snapshot.  (displayName
+ returns the window proxy\'s title, so it can\'t be used here.)
+ -- claude & dmu 5/2026\x7fModuleInfo: Module: quartzCanvas InitialContents: FollowSlot\x7fVisibility: public'
+        
+         reincarnationDisplayName = ( |
+            | 
+            'quartz').
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'quartzWindowCanvas' -> () From: ( | {

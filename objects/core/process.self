@@ -592,8 +592,8 @@ doubled again for profiling Klein -- ads 6/04\x7fModuleInfo: Module: process Ini
                 i: i succ.
                 i > threshold ifTrue: [
                     a hasSender && [i > threshold succ]
-                        ifTrue: [ ui addMirror: a Sprout: '<sender>' ]
-                         False: [ ui add: a ].
+                        ifTrue: [ ui1 ui addMirror: a Sprout: '<sender>' ]
+                         False: [ ui1 ui add: a ].
                 ].
             ].
             self).
@@ -620,7 +620,7 @@ doubled again for profiling Klein -- ads 6/04\x7fModuleInfo: Module: process Ini
             [ | :exit |
                 stackShot isEmpty || [stackShot first isLive]
                   ifTrue: [ exit value ].
-                ui remove: stackShot removeFirst.
+                ui1 ui remove: stackShot removeFirst.
             ] loopExit.
 
             act: currentActivation.
@@ -636,17 +636,17 @@ doubled again for profiling Klein -- ads 6/04\x7fModuleInfo: Module: process Ini
                 act: act sender.
             ] loopExit.
 
-            "add the new activations to the stack and the ui"
+            "add the new activations to the stack and the ui1 ui"
             new do: [ | :a |
                 stackShot addFirst: a.
-                a hasSender && [ui exists: a sender]
-                    ifTrue: [ ui addMirror: a Sprout: '<sender>' ]
-                     False: [ ui addMirror: a ].
+                a hasSender && [ui1 ui exists: a sender]
+                    ifTrue: [ ui1 ui addMirror: a Sprout: '<sender>' ]
+                     False: [ ui1 ui addMirror: a ].
             ].
 
             "update current activation"
-            ui update: currentActivation.
-            ui update. "interruptably update them all"
+            ui1 ui update: currentActivation.
+            ui1 ui update. "interruptably update them all"
             self).
         } | ) 
 
@@ -654,7 +654,7 @@ doubled again for profiling Klein -- ads 6/04\x7fModuleInfo: Module: process Ini
          'Category: user interface\x7fModuleInfo: Module: process InitialContents: FollowSlot\x7fVisibility: public'
         
          displayTopOfStack = ( |
-            | ui add: currentActivation).
+            | ui1 ui add: currentActivation).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'process' -> () From: ( | {
@@ -702,8 +702,8 @@ doubled again for profiling Klein -- ads 6/04\x7fModuleInfo: Module: process Ini
                  act.
                 } 
             | 
-            "may want to put this in uiWorld"
-            ui findFirst: [ | :b | b objMirror isReflecteeActivation ]
+            "may want to put this in ui1 uiWorld"
+            ui1 ui findFirst: [ | :b | b objMirror isReflecteeActivation ]
                IfPresent: [ | :b | act: b objMirror ]
                 IfAbsent: [ act: currentActivation ].
             finish: act.

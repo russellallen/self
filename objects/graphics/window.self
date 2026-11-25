@@ -24,7 +24,16 @@ So annotate this one slot as module window.
 -- dmu 2/95\x7fModuleInfo: Module: window InitialContents: FollowSlot'
         
          parent* = bootstrap stub -> 'globals' -> 'simpleEventHandler' -> ().
-        } | ) 
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+         'Category: windowing\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
+        
+         macWindow = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits macWindow.
+'.
+            | ) .
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: window InitialContents: FollowSlot'
@@ -404,7 +413,20 @@ for UI2 windows\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVis
         
          createCursor = ( |
             | cursor: globals cursor copy window: self).
-        } | ) 
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractWindow' -> () From: ( | {
+         'Category: creating\x7fComment: Shared ui1 finish after the platform window exists. Subclasses do platform-specific setup then resend. spawnEventWatcherProcess is on macWindow and xWindow. -- claude & dmu 8/23\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: private'
+        
+         finishOpening = ( |
+            | 
+            createBitmap.
+            createCursor.
+            init.
+            spawnEventWatcherProcess.
+            synchronous ifTrue: [ display synchronize: true ].
+            self).
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'abstractWindow' -> () From: ( | {
          'Category: forwardToDisplay\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
@@ -525,7 +547,124 @@ for UI2 windows\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVis
          useQueueingHandlerFor: target = ( |
             | 
             handler: queueingEventHandler copyOn: self For: target).
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( | {
+         'Category: destroying\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: private'
+        
+         closeDisplay = ( |
+            | 
+            platformWindow close.
+            self).
         } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( | {
+         'Category: portable accessing\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
+        
+         flush = ( |
+            | platformWindow flush. self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( | {
+         'Category: accessing\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
+        
+         gc = ( |
+            | platformWindow gc).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( | {
+         'Category: accessing\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
+        
+         iconFilename: x = ( |
+            | self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( | {
+         'Category: accessing\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
+        
+         iconName: x = ( |
+            | self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( | {
+         'Category: screenType\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
+        
+         isColor8 = ( |
+            | platformWindow depth = 8).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( | {
+         'Category: screenType\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
+        
+         isGrey4 = ( |
+            | 
+            false "for now").
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( | {
+         'Category: screenType\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
+        
+         isMono = ( |
+            | platformWindow depth = 1).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( | {
+         'Category: creating\x7fComment: Quartz-only: display defaults to the X connection, so install ui1EventSource before the shared finish (bitmap, cursor, watcher). Direct opens a windowCanvas instead of openIfFail:, so it must call this after the canvas is up. -- claude & dmu 8/23\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: private'
+        
+         finishOpening = ( |
+            | 
+            display: quartz ui1EventSource forPlatformWindow: platformWindow.
+            resend.finishOpening).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( | {
+         'Category: creating\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
+        
+         openIfFail: fblock = ( |
+            | 
+            platformWindow: macToolbox platformWindow new.
+            platformWindow
+               openDisplay: displayName
+               BoundingBox: position ## size
+                WindowName: name.
+            platformWindow makeRGBAShadow.
+            finishOpening.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( | {
+         'ModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'abstractWindow' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( | {
+         'Category: forwardToDisplay\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
+        
+         putBackEvent: e = ( |
+            | 
+            display xPutBackEvent: e.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( | {
+         'Category: creating\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: private'
+        
+         spawnEventWatcherProcess = ( |
+            | 
+            watcher: eventWatcher copyForDisplay: display Handler: handler.
+            watcherProcess: process copySend: message copy receiver: watcher
+                                                           Selector: 'watch'.
+            watcherProcess resume. "ui1-on-Quartz: events now flow via quartz ui1EventSource -- claude & dmu 5/26"
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'macWindow' -> () From: ( | {
+         'Category: portable accessing\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sync = ( |
+            | platformWindow sync. self).
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindow' -> () From: ( | {
          'Category: destroying\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: private'
@@ -533,8 +672,8 @@ for UI2 windows\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVis
          closeDisplay = ( |
             | 
             icon isLive ifTrue: [ icon delete ].
-            platformWindow delete.
-            display close.
+            platformWindow deleteIfFail: [].
+            display closeIfFail: [].
             self).
         } | ) 
 
@@ -547,7 +686,19 @@ for UI2 windows\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVis
               ifTrue: [ (xBitmapMaker copy parseBitmapFile: filename)
                          createBitmapForSameScreenAs: platformWindow ]
                False: [ xlib pixmap deadCopy ]).
-        } | ) 
+        } | )  
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindow' -> () From: ( | {
+         'Category: creating\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: private'
+        
+         finishOpening = ( |
+            | 
+             [todo ui1 dmu experimental].
+            icon: createIcon: iconFilename.
+            xwin configureAsTopLevelNamed: name IconName: iconName Icon: icon EventMask: handler eventsToCatch.
+            display gc graphics_exposures: false.
+            resend.finishOpening).
+        } | )
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindow' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: public'
@@ -622,25 +773,7 @@ for UI2 windows\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVis
                                           interpretedDisplayName,
                                           '\'.' ].
             xwin: xlib window createOnDisplay: display At: position Size: size.
-            xwin name: name.
-            xwin iconName: iconName.
-            icon: createIcon: iconFilename.
-            xwin iconified: false Icon: icon Input: true.
-            xwin catchWMDelete.
-            xwin eventMask: handler eventsToCatch.
-
-            display gc graphics_exposures: false.
-            xwin selectInput.
-            xwin map.
-
-            createBitmap.
-            createCursor.
-
-            init.
-            spawnEventWatcherProcess.
-
-            synchronous ifTrue: [ display synchronize: true ].
-
+            finishOpening.
             self).
         } | ) 
 
@@ -674,11 +807,16 @@ for UI2 windows\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVis
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'xWindow' -> () From: ( | {
-         'Category: creating\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: private'
+         'Category: creating\x7fComment: ui1-on-X (Option A): the watcher pulls events through an xlib ui1EventSource
+that sleep-polls and converts each native X event into one ui1Event (matching
+Quartz, and so synthetic events can be injected for the test harness). display
+stays the raw xlib connection for colour/gc/font/setup queries. -- claude & dmu 5/2026\x7fModuleInfo: Module: window InitialContents: FollowSlot\x7fVisibility: private'
         
          spawnEventWatcherProcess = ( |
+             source.
             | 
-            watcher: eventWatcher copyForDisplay: display Handler: handler.
+            source: xlib ui1EventSource forDisplay: display.
+            watcher: eventWatcher copyForDisplay: source Handler: handler.
             watcherProcess: process copySend: message copy receiver: watcher
                                                            Selector: 'watch'.
             watcherProcess resume).

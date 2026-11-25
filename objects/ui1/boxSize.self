@@ -1,323 +1,11 @@
  'Sun-$Revision: 30.10 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
 
  '-- Module body'
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         boxSize = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals boxSize.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         assignableIndent = 7.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         baseBottomMargin = 6.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'Comment: slotNameLeftMargin + baseLeftMargin\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         baseButtonLeftMargin = 8.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         baseButtonNameGap = 6.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         baseDepthSkew = 3.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         baseLeftMargin = 5.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         baseNameGap = 2.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         baseRightMargin = 4.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         baseSideFaceWidth = 5.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         baseTopFaceHeight = 5.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         baseTopMargin = 2.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         belowSlotGap = 6.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         boxCodeFont.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         boxFont.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         boxObjectNameFont.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         boxParentFont.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         boxPrivateFont.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         boxPrivateParentFont.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         boxPublicFont.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         boxPublicParentFont.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         buttonFont.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         contentsButtonSize = (11)@(11).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         dataArrowWidth = 2.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         fixedEditorFont.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         hiddenSendButtonGap = 4.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         hsButtonBottomMargin = 0.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         hsButtonLeftMargin = 4.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         hsButtonRightMargin = 4.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         hsButtonTopMargin = 2.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         menuFont.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         objectButtonHeight = 12.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         objectButtonWidth = 24.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         boxSize = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits boxSize.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: private'
-        
-         parent* = bootstrap stub -> 'traits' -> 'boxSize' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         parentArrowWidth = 3.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         sendButtonBottomMargin = 0.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         sendButtonLeftMargin = 4.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         sendButtonRightMargin = 4.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         sendButtonTopMargin = 2.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         slotBottomMargin = 2.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         slotButtonHeight = 12.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         slotButtonWidth = 12.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         slotContentsButtonGap = 6.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         slotContentsLeftMargin = 8.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         slotContentsRightMargin = 1.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         slotNameButtonGap = 6.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         slotNameLeftMargin = 3.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         slotNameRightMargin = 9.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         slotTopMargin = 4.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
-        
-         textEditorFont.
-        } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: boxSize InitialContents: FollowSlot'
@@ -371,38 +59,325 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> () From: ( | {
-         'Category: userInterface\x7fCategory: userInterface\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
-         boxSizePlatformMixin = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'x11Globals' -> 'boxSizePlatformMixin' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals x11Globals boxSizePlatformMixin.
+         boxSize = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 boxSize.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'boxSizePlatformMixin' -> () From: ( | {
-         'Category: initializing\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: private'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
-         loadFont: name For: win IfFail: fb = ( |
-            | 
-            font copyName: name On: win IfFail: fb).
+         assignableIndent = 7.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'x11Globals' -> 'boxSizePlatformMixin' -> () From: ( | {
-         'Category: initializing\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: private'
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
-         loadFont: name Style: style Size: size For: win IfFail: fb = ( |
-             middle.
-            | 
-            middle: style isEmpty 
-                ifTrue: '-' 
-                False: ['-', style uncapitalize, '-'].
-            loadFont: name, middle, size printString
-                 For: win
-              IfFail: fb).
+         baseBottomMargin = 6.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'Comment: slotNameLeftMargin + baseLeftMargin\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         baseButtonLeftMargin = 8.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         baseButtonNameGap = 6.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         baseDepthSkew = 3.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         baseLeftMargin = 5.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         baseNameGap = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         baseRightMargin = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         baseSideFaceWidth = 5.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         baseTopFaceHeight = 5.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         baseTopMargin = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         belowSlotGap = 6.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         boxCodeFont.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         boxFont.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         boxObjectNameFont.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         boxParentFont.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         boxPrivateFont.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         boxPrivateParentFont.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         boxPublicFont.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         boxPublicParentFont.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         buttonFont.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         contentsButtonSize = (11)@(11).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         dataArrowWidth = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         fixedEditorFont.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         hiddenSendButtonGap = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         hsButtonBottomMargin = 0.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         hsButtonLeftMargin = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         hsButtonRightMargin = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         hsButtonTopMargin = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         menuFont.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         objectButtonHeight = 12.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         objectButtonWidth = 24.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         boxSize = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 boxSize.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         parentArrowWidth = 3.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: InitializeToExpression: (())\x7fVisibility: private'
+        
+         platformSpecificMixin* <- ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sendButtonBottomMargin = 0.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sendButtonLeftMargin = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sendButtonRightMargin = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         sendButtonTopMargin = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         slotBottomMargin = 2.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         slotButtonHeight = 12.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         slotButtonWidth = 12.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         slotContentsButtonGap = 6.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         slotContentsLeftMargin = 8.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         slotContentsRightMargin = 1.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         slotNameButtonGap = 6.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         slotNameLeftMargin = 3.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         slotNameRightMargin = 9.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         slotTopMargin = 4.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         textEditorFont.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          assignableWidth: asgn = ( |
@@ -410,7 +385,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             asgn ifTrue: [ assignableIndent ] False: 0).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          contentsButtonCenterForCBoxSize: sz = ( | {
@@ -430,14 +405,10 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             x @ y).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
-         'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'Category: sizes\x7fComment: Center the radio in the actual contents row (contentsSize y), not (slotTopMargin + font height + slotBottomMargin). Quartz font.height is a float CT line box; that formula was tuned for X11 height=11 (which equals slotTopMargin). The +1 is the original visual tweak; same Y as slotButtonLocationNameSize:ButtonSize:. -- claude & dmu 8/26\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          contentsButtonLocationContentsSize: contentsSize ButtonSize: buttonSize TextFont: textFont = ( | {
-                 'ModuleInfo: Module: boxSize InitialContents: FollowSlot'
-                
-                 centerHeight <- 0.
-                }  {
                  'ModuleInfo: Module: boxSize InitialContents: FollowSlot'
                 
                  x <- 0.
@@ -448,29 +419,27 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                 } 
             | 
             x: contentsSize x - slotContentsRightMargin - buttonSize x.
-            centerHeight: (slotTopMargin + textFont height + slotBottomMargin)
-                          / 2.
-            y: (centerHeight - (buttonSize y / 2)) + 1.
+            y: ((contentsSize y - buttonSize y) / 2) + 1.
             x @ y).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          contentsTextPosition = ( |
             | slotContentsLeftMargin @ slotTopMargin).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: initializing\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
-         copyFor: win = ( |
+         copyFor: win BoxSizeMixin: bsm = ( |
             | 
-            platformSpecificMixin: ui1GraphicsGlobals boxSizePlatformMixin. "have to do this somewhere"
-            copy initFontsFor: win).
+            (copy platformSpecificMixin: bsm) "have to do this somewhere"
+            initFontsFor: win).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: initializing\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          deleteFonts = ( |
@@ -490,7 +459,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          firstSlotPositionWithName: name IsMethod: isMethod = ( |
@@ -500,7 +469,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
                 ((titleFont: isMethod) heightOfString: name) + baseNameGap)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          hiddenSlotButtonWidthForSlotWidth: slotWidth SendButtonWidth: sendButtonWidth = ( |
@@ -512,7 +481,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
               False: [ (slotWidth - (2 * slotNameLeftMargin)) + 1 ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          hsButtonLocationBodyHeight: bodyHeight HSButtonHeight: ssHeight = ( |
@@ -521,7 +490,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             (bodyHeight - baseBottomMargin - ssHeight)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: initializing\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: private'
         
          initFontsFor: win = ( |
@@ -556,7 +525,6 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
               loadRomanFont ].
             ].
             loadBoldFont: [ loadFont: bf Style: 'bold' Size: bfs For: win IfFail: loadRomanFont ].
-
             boxFont:              loadRomanFont value.
             boxPublicFont:        loadBoldFont value.
             boxPrivateFont:       loadItalicFont value.
@@ -586,7 +554,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          minHSButtonSize: labelSize = ( | {
@@ -604,14 +572,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             width @ height).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          minObjectButtonSize = ( |
             | objectButtonWidth @ objectButtonHeight).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          minSendButtonSizeLabelSize: labelSize = ( | {
@@ -629,14 +597,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             width @ height).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          minSlotButtonSize = ( |
             | slotButtonWidth @ slotButtonHeight).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          minSlotContentsSize: textSize ButtonSize: buttonSize = ( | {
@@ -657,7 +625,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             width @ height).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          minSlotNameSize: nameSize ButtonSize: buttonSize Assignable: asgn = ( | {
@@ -677,7 +645,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             width @ height).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          objectBodyNamePosition: name FaceWidth: fw ButtonWidth: bw IsMethod: isMethod = ( | {
@@ -697,7 +665,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             (x1 max: x2) @ (baseTopFaceHeight + baseTopMargin)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          objectBodySizeWithNameSize: ns MaxSlotWidth: sw SlotsHeight: sh ObjButtonSize: obSize HSButtonSize: ssSize SendButtonSize: sbSize = ( | {
@@ -735,14 +703,14 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             width @ height).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          objectBodyTopMiddleHeight = ( |
             | baseTopFaceHeight + baseTopMargin).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          objectButtonLocation = ( |
@@ -750,19 +718,13 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             baseButtonLeftMargin @ (baseTopFaceHeight + baseTopMargin)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'ModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: private'
         
          parent* = bootstrap stub -> 'traits' -> 'clonable' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
-         'ModuleInfo: Module: boxSize InitialContents: InitializeToExpression: (())\x7fVisibility: private'
-        
-         platformSpecificMixin* <- ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          sendButtonLocationBodySize: bodySize SendButtonSize: sbSize = ( |
@@ -772,14 +734,22 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             (bodySize y - baseBottomMargin - sbSize y)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          slotButtonLocation = ( |
             | slotNameLeftMargin @ slotTopMargin).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
+         'Category: sizes\x7fComment: Same Y as the contents radio: center in the name row plus the original +1 tweak. Used to be a fixed slotTopMargin, which left the checkbox high once slot rows grew to the CT line height. -- claude & dmu 8/26\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
+        
+         slotButtonLocationNameSize: nameSize ButtonSize: buttonSize = ( |
+            | 
+            slotNameLeftMargin @ (((nameSize y - buttonSize y) / 2) + 1)).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          slotNameLocationWithButtonSize: buttonSize = ( |
@@ -788,7 +758,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             @ slotTopMargin).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          slotTab: tab NameWidth: nameWidth SlotWidth: slotWidth = ( | {
@@ -802,12 +772,45 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
             tab + f).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'boxSize' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'boxSize' -> () From: ( | {
          'Category: sizes\x7fComment: this ain\'t pretty--Bay will be back to clean up\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: public'
         
          titleFont: isMethod = ( |
             | 
             isMethod ifTrue: boxCodeFont False: boxObjectNameFont).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'quartzTraits' -> 'boxSizePlatformMixin' -> () From: ( | {
+         'Category: initializing\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: private'
+        
+         loadFont: name Style: style Size: size For: win IfFail: fb = ( |
+             fs.
+            | 
+            fs: fontSpec copyName: name Style: style Size: size.
+            macToolbox fontIDAndStruct 
+                copyForFontSpec: fs  Port: win gc).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'boxSizePlatformMixin' -> () From: ( | {
+         'Category: initializing\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: private'
+        
+         loadFont: name For: win IfFail: fb = ( |
+            | 
+            font copyName: name On: win IfFail: fb).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'graphics' -> 'x11Traits' -> 'boxSizePlatformMixin' -> () From: ( | {
+         'Category: initializing\x7fModuleInfo: Module: boxSize InitialContents: FollowSlot\x7fVisibility: private'
+        
+         loadFont: name Style: style Size: size For: win IfFail: fb = ( |
+             middle.
+            | 
+            middle: style isEmpty 
+                ifTrue: '-' 
+                False: ['-', style uncapitalize, '-'].
+            loadFont: name, middle, size printString
+                 For: win
+              IfFail: fb).
         } | ) 
 
 

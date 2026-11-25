@@ -1,493 +1,11 @@
  'Sun-$Revision: 30.7 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
 
  '-- Module body'
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         methodBody = bootstrap define: bootstrap stub -> 'globals' -> 'methodBody' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'methodBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals methodBody.
-
-CopyDowns:
-globals objectBody. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         methodBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'methodBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits methodBody.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'methodBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'methodBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'methodBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot\x7fVisibility: public'
-        
-         fakeSlotsDo: block = ( |
-            | 
-            block value:  fakeSlot codes         copyMirror: objMirror.
-            block value:  fakeSlot literals      copyMirror: objMirror.
-            block value:  fakeSlot sourceString  copyMirror: objMirror.
-            block value:  fakeSlot file          copyMirror: objMirror.
-            block value:  fakeSlot line          copyMirror: objMirror.
-            self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'methodBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot\x7fVisibility: public'
-        
-         numberOfFakeSlots = 5.
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'methodBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot\x7fVisibility: private'
-        
-         parent* = bootstrap stub -> 'traits' -> 'objectBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         activationBody = bootstrap define: bootstrap stub -> 'globals' -> 'activationBody' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals methodBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'activationBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals activationBody.
-
-CopyDowns:
-globals methodBody. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         activationBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'activationBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits activationBody.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'activationBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'activationBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         assignmentBody = bootstrap define: bootstrap stub -> 'globals' -> 'assignmentBody' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'assignmentBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals assignmentBody.
-
-CopyDowns:
-globals objectBody. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         assignmentBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'assignmentBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits assignmentBody.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'assignmentBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'assignmentBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         blockBody = bootstrap define: bootstrap stub -> 'globals' -> 'blockBody' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'blockBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals blockBody.
-
-CopyDowns:
-globals objectBody. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         blockBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'blockBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits blockBody.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'blockBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'blockBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'activationBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         fakeSlotsDo: block = ( |
-            | 
-            objMirror isLive ifFalse: [ ^ self ].
-            block value: fakeSlot receiver        copyMirror: objMirror.
-            block value: fakeSlot expressionStack copyMirror: objMirror.
-            block value: fakeSlot position        copyMirror: objMirror.
-            resend.fakeSlotsDo: block).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'activationBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         numberOfFakeSlots = ( |
-            | 
-            objMirror isLive ifFalse: [ ^ 0 ].
-            3 + resend.numberOfFakeSlots).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'activationBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'methodBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         methodActivationBody = bootstrap define: bootstrap stub -> 'globals' -> 'methodActivationBody' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals activationBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'methodActivationBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals methodActivationBody.
-
-CopyDowns:
-globals activationBody. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         methodActivationBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'methodActivationBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits methodActivationBody.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'methodActivationBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'methodActivationBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'methodActivationBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         fakeSlotsDo: block = ( |
-            | 
-            resend.fakeSlotsDo: block.
-            block value: fakeSlot selector     copyMirror: objMirror.
-            block value: fakeSlot methodHolder copyMirror: objMirror.
-            objMirror hasSender ifTrue: [
-                block value: fakeSlot sender copyMirror: objMirror ].
-            self).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'methodActivationBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         numberOfFakeSlots = ( |
-            | 
-            resend.numberOfFakeSlots + 2 + (hasSender ifTrue: 1 False: 0)).
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'methodActivationBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'activationBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         blockMethodActivationBody = bootstrap define: bootstrap stub -> 'globals' -> 'blockMethodActivationBody' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals methodActivationBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'blockMethodActivationBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals blockMethodActivationBody.
-
-CopyDowns:
-globals methodActivationBody. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         blockMethodActivationBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'blockMethodActivationBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits blockMethodActivationBody.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'blockMethodActivationBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'blockMethodActivationBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         blockMethodBody = bootstrap define: bootstrap stub -> 'globals' -> 'blockMethodBody' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'blockMethodBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals blockMethodBody.
-
-CopyDowns:
-globals objectBody. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         blockMethodBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'blockMethodBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits blockMethodBody.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'blockMethodBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'blockMethodBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         byteVectorBody = bootstrap define: bootstrap stub -> 'globals' -> 'byteVectorBody' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'byteVectorBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals byteVectorBody.
-
-CopyDowns:
-globals objectBody. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         byteVectorBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'byteVectorBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits byteVectorBody.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'byteVectorBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'byteVectorBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         canonicalStringBody = bootstrap define: bootstrap stub -> 'globals' -> 'canonicalStringBody' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'canonicalStringBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals canonicalStringBody.
-
-CopyDowns:
-globals objectBody. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         canonicalStringBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'canonicalStringBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits canonicalStringBody.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'canonicalStringBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'canonicalStringBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         fctProxyBody = bootstrap define: bootstrap stub -> 'globals' -> 'fctProxyBody' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'fctProxyBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals fctProxyBody.
-
-CopyDowns:
-globals objectBody. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         fctProxyBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'fctProxyBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits fctProxyBody.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'fctProxyBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'fctProxyBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         floatBody = bootstrap define: bootstrap stub -> 'globals' -> 'floatBody' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'floatBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals floatBody.
-
-CopyDowns:
-globals objectBody. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         floatBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'floatBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits floatBody.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'floatBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'floatBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         integerBody = bootstrap define: bootstrap stub -> 'globals' -> 'integerBody' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'integerBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals integerBody.
-
-CopyDowns:
-globals objectBody. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         integerBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'integerBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits integerBody.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'integerBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'integerBody' -> ().
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         mirrorBody = bootstrap define: bootstrap stub -> 'globals' -> 'mirrorBody' -> () ToBe: bootstrap addSlotsTo: (
-             bootstrap remove: 'parent' From:
-             globals objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'mirrorBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals mirrorBody.
-
-CopyDowns:
-globals objectBody. copy 
-SlotsToOmit: parent.
-
-\x7fIsComplete: '.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
-         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         mirrorBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'mirrorBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits mirrorBody.
-'.
-            | ) .
-        } | ) 
-
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'mirrorBody' -> () From: ( | {
-         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
-        
-         parent* = bootstrap stub -> 'traits' -> 'mirrorBody' -> ().
-        } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
@@ -540,137 +58,626 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         processBody = bootstrap define: bootstrap stub -> 'globals' -> 'processBody' -> () ToBe: bootstrap addSlotsTo: (
+         methodBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'methodBody' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'processBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals processBody.
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'methodBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 methodBody.
 
 CopyDowns:
-globals objectBody. copy 
+globals ui1 objectBody. copy 
 SlotsToOmit: parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         processBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'processBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits processBody.
+         methodBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'methodBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 methodBody.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'processBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'methodBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'processBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'methodBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'methodBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot\x7fVisibility: public'
+        
+         fakeSlotsDo: block = ( |
+            | 
+            block value:  fakeSlot codes         copyMirror: objMirror.
+            block value:  fakeSlot literals      copyMirror: objMirror.
+            block value:  fakeSlot sourceString  copyMirror: objMirror.
+            block value:  fakeSlot file          copyMirror: objMirror.
+            block value:  fakeSlot line          copyMirror: objMirror.
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'methodBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot\x7fVisibility: public'
+        
+         numberOfFakeSlots = 5.
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'methodBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot\x7fVisibility: private'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'objectBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         proxyBody = bootstrap define: bootstrap stub -> 'globals' -> 'proxyBody' -> () ToBe: bootstrap addSlotsTo: (
+         activationBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'activationBody' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'proxyBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals proxyBody.
+             globals ui1 methodBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'activationBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 activationBody.
 
 CopyDowns:
-globals objectBody. copy 
+globals ui1 methodBody. copy 
 SlotsToOmit: parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         proxyBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'proxyBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits proxyBody.
+         activationBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'activationBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 activationBody.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'proxyBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'activationBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'proxyBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'activationBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         slotsBody = bootstrap define: bootstrap stub -> 'globals' -> 'slotsBody' -> () ToBe: bootstrap addSlotsTo: (
+         assignmentBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'assignmentBody' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'slotsBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals slotsBody.
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'assignmentBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 assignmentBody.
 
 CopyDowns:
-globals objectBody. copy 
+globals ui1 objectBody. copy 
 SlotsToOmit: parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         slotsBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'slotsBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits slotsBody.
+         assignmentBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'assignmentBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 assignmentBody.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotsBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'assignmentBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'slotsBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'assignmentBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         vectorBody = bootstrap define: bootstrap stub -> 'globals' -> 'vectorBody' -> () ToBe: bootstrap addSlotsTo: (
+         blockBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'blockBody' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'vectorBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals vectorBody.
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'blockBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 blockBody.
 
 CopyDowns:
-globals objectBody. copy 
+globals ui1 objectBody. copy 
 SlotsToOmit: parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         vectorBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'vectorBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits vectorBody.
+         blockBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'blockBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 blockBody.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'vectorBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'blockBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'vectorBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'blockBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'assignmentBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'activationBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'objectBody' -> ().
+         fakeSlotsDo: block = ( |
+            | 
+            objMirror isLive ifFalse: [ ^ self ].
+            block value: fakeSlot receiver        copyMirror: objMirror.
+            block value: fakeSlot expressionStack copyMirror: objMirror.
+            block value: fakeSlot position        copyMirror: objMirror.
+            resend.fakeSlotsDo: block).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'blockBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'activationBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         numberOfFakeSlots = ( |
+            | 
+            objMirror isLive ifFalse: [ ^ 0 ].
+            3 + resend.numberOfFakeSlots).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'activationBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'methodBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         methodActivationBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'methodActivationBody' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 activationBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'methodActivationBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 methodActivationBody.
+
+CopyDowns:
+globals ui1 activationBody. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         methodActivationBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'methodActivationBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 methodActivationBody.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'methodActivationBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'methodActivationBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'methodActivationBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         fakeSlotsDo: block = ( |
+            | 
+            resend.fakeSlotsDo: block.
+            block value: fakeSlot selector     copyMirror: objMirror.
+            block value: fakeSlot methodHolder copyMirror: objMirror.
+            objMirror hasSender ifTrue: [
+                block value: fakeSlot sender copyMirror: objMirror ].
+            self).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'methodActivationBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         numberOfFakeSlots = ( |
+            | 
+            resend.numberOfFakeSlots + 2 + (hasSender ifTrue: 1 False: 0)).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'methodActivationBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'activationBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         blockMethodActivationBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'blockMethodActivationBody' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 methodActivationBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'blockMethodActivationBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 blockMethodActivationBody.
+
+CopyDowns:
+globals ui1 methodActivationBody. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         blockMethodActivationBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'blockMethodActivationBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 blockMethodActivationBody.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'blockMethodActivationBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'blockMethodActivationBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         blockMethodBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'blockMethodBody' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'blockMethodBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 blockMethodBody.
+
+CopyDowns:
+globals ui1 objectBody. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         blockMethodBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'blockMethodBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 blockMethodBody.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'blockMethodBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'blockMethodBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         byteVectorBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'byteVectorBody' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'byteVectorBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 byteVectorBody.
+
+CopyDowns:
+globals ui1 objectBody. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         byteVectorBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'byteVectorBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 byteVectorBody.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'byteVectorBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'byteVectorBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         canonicalStringBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'canonicalStringBody' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'canonicalStringBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 canonicalStringBody.
+
+CopyDowns:
+globals ui1 objectBody. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         canonicalStringBody = bootstrap define: bootstrap stub -> 'traits' -> 'ui1' -> 'canonicalStringBody' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'canonicalStringBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 canonicalStringBody.
+
+CopyDowns:
+globals ui1 objectBody. copy 
+SlotsToOmit: parent.
+
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'canonicalStringBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'canonicalStringBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         fctProxyBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'fctProxyBody' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'fctProxyBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 fctProxyBody.
+
+CopyDowns:
+globals ui1 objectBody. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         fctProxyBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'fctProxyBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 fctProxyBody.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'fctProxyBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'fctProxyBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         floatBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'floatBody' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'floatBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 floatBody.
+
+CopyDowns:
+globals ui1 objectBody. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         floatBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'floatBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 floatBody.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'floatBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'floatBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         integerBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'integerBody' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'integerBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 integerBody.
+
+CopyDowns:
+globals ui1 objectBody. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         integerBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'integerBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 integerBody.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'integerBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'integerBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         mirrorBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'mirrorBody' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'mirrorBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 mirrorBody.
+
+CopyDowns:
+globals ui1 objectBody. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         mirrorBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'mirrorBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 mirrorBody.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'mirrorBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'mirrorBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         processBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'processBody' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'processBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 processBody.
+
+CopyDowns:
+globals ui1 objectBody. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         processBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'processBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 processBody.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'processBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'processBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         proxyBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'proxyBody' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'proxyBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 proxyBody.
+
+CopyDowns:
+globals ui1 objectBody. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         proxyBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'proxyBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 proxyBody.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'proxyBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'proxyBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         slotsBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'slotsBody' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'slotsBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 slotsBody.
+
+CopyDowns:
+globals ui1 objectBody. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         slotsBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'slotsBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 slotsBody.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotsBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'slotsBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         vectorBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'vectorBody' -> () ToBe: bootstrap addSlotsTo: (
+             bootstrap remove: 'parent' From:
+             globals ui1 objectBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'vectorBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 vectorBody.
+
+CopyDowns:
+globals ui1 objectBody. copy 
+SlotsToOmit: parent.
+
+\x7fIsComplete: '.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
+         'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         vectorBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'vectorBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 vectorBody.
+'.
+            | ) .
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'vectorBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'vectorBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'assignmentBody' -> () From: ( | {
+         'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
+        
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'objectBody' -> ().
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'blockBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
          fakeSlotsDo: block = ( |
@@ -678,19 +685,19 @@ SlotsToOmit: parent.
             block value: fakeSlot lexicalParent copyMirror: objMirror).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'blockBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'blockBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
          numberOfFakeSlots = 1.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'blockBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'blockBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'objectBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'objectBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'blockMethodActivationBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'blockMethodActivationBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
          fakeSlotsDo: block = ( |
@@ -702,20 +709,20 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'blockMethodActivationBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'blockMethodActivationBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot\x7fVisibility: public'
         
          numberOfFakeSlots = ( |
             | resend.numberOfFakeSlots + 3).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'blockMethodActivationBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'blockMethodActivationBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'methodActivationBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'methodActivationBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'blockMethodBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'blockMethodBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot\x7fVisibility: public'
         
          fakeSlotsDo: block = ( |
@@ -726,59 +733,59 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'blockMethodBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'blockMethodBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot\x7fVisibility: public'
         
          numberOfFakeSlots = ( |
             | resend.numberOfFakeSlots + 2).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'blockMethodBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'blockMethodBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'methodBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'methodBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         vectorishBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'vectorishBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits vectorishBody.
+         vectorishBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'vectorishBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 vectorishBody.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'byteVectorBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'byteVectorBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'vectorishBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'vectorishBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'canonicalStringBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'canonicalStringBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'objectBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'objectBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'fctProxyBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'fctProxyBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'objectBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'objectBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'floatBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'floatBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'objectBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'objectBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'integerBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'integerBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'objectBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'objectBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrorBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'mirrorBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
          fakeSlotsDo: block = ( |
@@ -786,56 +793,56 @@ SlotsToOmit: parent.
             block value: fakeSlot reflectee copyMirror: objMirror).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrorBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'mirrorBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
          numberOfFakeSlots = 1.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'mirrorBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'mirrorBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'objectBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'objectBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'processBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'processBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
          fakeSlotsDo: block = ( |
             | block value: fakeSlot stack copyMirror: objMirror).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'processBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'processBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
          numberOfFakeSlots = 1.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'processBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'processBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'objectBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'objectBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'proxyBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'proxyBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'objectBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'objectBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotsBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotsBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'objectBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'objectBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'vectorBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'vectorBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'vectorishBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'vectorishBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'vectorishBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'vectorishBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
          fakeSlotsDo: block = ( |
@@ -846,17 +853,17 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'vectorishBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'vectorishBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
          numberOfFakeSlots = ( |
             | objMirror reflecteeSize).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'vectorishBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'vectorishBody' -> () From: ( | {
          'ModuleInfo: Module: objBodyTypes InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'objectBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'objectBody' -> ().
         } | ) 
 
 

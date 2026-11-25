@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.7 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
@@ -52,7 +52,7 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         
          postFileIn = ( |
             | 
-            transcript size: transcript defaultSize.
+            ui1 transcript size: ui1 transcript defaultSize.
             resend.postFileIn).
         } | ) 
 
@@ -68,70 +68,70 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: transcript InitialContents: FollowSlot\x7fVisibility: public'
         
-         transcript = bootstrap define: bootstrap stub -> 'globals' -> 'transcript' -> () ToBe: bootstrap addSlotsTo: (
+         transcript = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'transcript' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'name' From:
              bootstrap remove: 'parent' From:
              bootstrap remove: 'size' From:
              bootstrap remove: 'stayup' From:
-             globals textEditor copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'transcript' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals transcript.
+             globals ui1 textEditor copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'transcript' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 transcript.
 
 CopyDowns:
-globals textEditor. copy 
+globals ui1 textEditor. copy 
 SlotsToOmit: name parent size stayup.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'transcript' -> () From: ( | {
          'ModuleInfo: Module: transcript InitialContents: FollowSlot'
         
          initialText <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'transcript' -> () From: ( | {
          'ModuleInfo: Module: transcript InitialContents: FollowSlot'
         
          name <- 'transcript'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: transcript InitialContents: FollowSlot\x7fVisibility: public'
         
-         transcript = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'transcript' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits transcript.
+         transcript = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'transcript' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 transcript.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'transcript' -> () From: ( | {
          'ModuleInfo: Module: transcript InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'transcript' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'transcript' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'transcript' -> () From: ( | {
          'ModuleInfo: Module: transcript InitialContents: InitializeToExpression: (nil)'
         
          size <- bootstrap stub -> 'globals' -> 'nil' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'transcript' -> () From: ( | {
          'ModuleInfo: Module: transcript InitialContents: FollowSlot'
         
          stayup <- bootstrap stub -> 'globals' -> 'true' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'transcript' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: transcript InitialContents: FollowSlot'
         
          addApply = ( |
             | 
-            applyButton: (button copySize: 50@16) name: 'Clear'.
+            applyButton: (ui1 button copySize: 50@16) name: 'Clear'.
             applyButton  command: (|
                 p* = traits clonable.
                 editor.
@@ -141,12 +141,12 @@ SlotsToOmit: name parent size stayup.
             addContext: applyButton At: (30@140) + boxFaceOffset).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'transcript' -> () From: ( | {
          'ModuleInfo: Module: transcript InitialContents: FollowSlot'
         
          addToWorld = ( |
             | 
-            copyOn: ui world Size: size.
+            copyOn: ui1 ui world Size: size.
             world addBodyOnTop: self.
             location: 5@5.
             methodView setText: initialText.
@@ -159,40 +159,40 @@ SlotsToOmit: name parent size stayup.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'transcript' -> () From: ( | {
          'Category: text\x7fModuleInfo: Module: transcript InitialContents: FollowSlot'
         
          clear = ( |
             | methodView clearText. queueShow).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'transcript' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: transcript InitialContents: FollowSlot'
         
          copy = ( |
             | clean).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'transcript' -> () From: ( | {
          'ModuleInfo: Module: transcript InitialContents: FollowSlot\x7fVisibility: private'
         
          defaultSize = (200)@(80).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'transcript' -> () From: ( | {
          'Category: showing\x7fModuleInfo: Module: transcript InitialContents: FollowSlot'
         
          isOnScreen = ( |
-            | ui world bodies includes: self).
+            | ui1 ui world bodies includes: self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'transcript' -> () From: ( | {
          'ModuleInfo: Module: transcript InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'textEditor' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'textEditor' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'transcript' -> () From: ( | {
          'Category: text\x7fModuleInfo: Module: transcript InitialContents: FollowSlot'
         
          print: s = ( |
@@ -202,21 +202,21 @@ SlotsToOmit: name parent size stayup.
             queueShow).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'transcript' -> () From: ( | {
          'Category: text\x7fModuleInfo: Module: transcript InitialContents: FollowSlot'
         
          printLine: s = ( |
             | print: s, '\n').
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'transcript' -> () From: ( | {
          'Category: showing\x7fModuleInfo: Module: transcript InitialContents: FollowSlot'
         
          queueShow = ( |
-            | ui send: 'show' To: self).
+            | ui1 ui send: 'show' To: self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'transcript' -> () From: ( | {
          'Category: showing\x7fModuleInfo: Module: transcript InitialContents: FollowSlot'
         
          raiseRefresh = ( |
@@ -229,7 +229,7 @@ SlotsToOmit: name parent size stayup.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'transcript' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'transcript' -> () From: ( | {
          'Category: showing\x7fModuleInfo: Module: transcript InitialContents: FollowSlot'
         
          show = ( |

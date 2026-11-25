@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.8 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
@@ -58,74 +58,74 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
-         slotContentsCpt = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'slotContentsCpt' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals slotContentsCpt.
+         slotContentsCpt = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'slotContentsCpt' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 slotContentsCpt.
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'ModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
-         button <- bootstrap stub -> 'globals' -> 'contentsButton' -> ().
+         button <- bootstrap stub -> 'globals' -> 'ui1' -> 'contentsButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'ModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot'
         
          contentsMirror <- bootstrap stub -> 'globals' -> 'mirrors' -> 'slots' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'ModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          location <- bootstrap stub -> 'globals' -> 'point' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
-         slotContentsCpt = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits slotContentsCpt.
+         slotContentsCpt = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 slotContentsCpt.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'ModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'slotContentsCpt' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'ModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          size <- (1)@(1).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'ModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: private'
         
-         slot <- bootstrap stub -> 'globals' -> 'slotCpt' -> ().
+         slot <- bootstrap stub -> 'globals' -> 'ui1' -> 'slotCpt' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'ModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: private'
         
          text <- bootstrap stub -> 'globals' -> 'textLines' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: testing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          = sc = ( |
             | contentsMirror = sc contentsMirror).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: miscellaneous\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot'
         
          changeContentsTo: c IfFail: fb = ( |
@@ -133,28 +133,29 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             slot changeContentsTo: c IfFail: fb).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: containing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          componentsDo: block = ( |
-            | block value: button).
+            | 
+            block value: button).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: containing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          container = ( |
             | slot).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: testing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          containsSelf = ( |
             | contentsMirror = body objMirror).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'ModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          contentsIsElided = ( | {
@@ -171,7 +172,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             || ['...' isSuffixOf: s]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          create: cm On: slt = ( |
@@ -182,76 +183,79 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             makeButton).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'ModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot'
         
          desprout = ( |
-            | button desprout).
+            | 
+            button desprout).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          draw = ( |
-            | drawText. button draw).
+            | 
+            drawText. button draw).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: private'
         
          drawText = ( |
             | drawBodyText: text At: textLocation Font: textFont).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: testing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          isAssignable = ( |
             | slot isAssignable).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: testing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          isParent = ( |
             | slot isParent).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: testing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          isPrivate = ( |
             | slot isPrivate).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: testing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          isPublic = ( |
             | slot isPublic).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: testing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          isSprouted = ( |
-            | button isSprouted).
+            | 
+            button isSprouted).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: private'
         
          largeMethodString = '<a large method>'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: private'
         
          makeButton = ( |
-            | button: contentsButton copy createOn: self).
+            | button: ui1 contentsButton copy createOn: self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: sizing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          minSize = ( |
@@ -260,7 +264,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
                                ButtonSize: button minSize).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: updating\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          mustRecreateForSlot: actualSlot = ( |
@@ -270,13 +274,13 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             false).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'ModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: private'
         
-         parent* = bootstrap stub -> 'traits' -> 'uiNester' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'uiNester' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: positioning\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          placeAt: pt = ( |
@@ -289,21 +293,22 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: printing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: private'
         
          printStringID = ( |
             | text asString).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          redrawArrow = ( |
-            | button redrawArrow).
+            | 
+            button redrawArrow).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: sizing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          resize: sz = ( |
@@ -313,28 +318,30 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: public'
         
          setContentsButtonCluster: cluster = ( |
-            | button joinCluster: cluster).
+            | 
+            button joinCluster: cluster).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'ModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot'
         
          showContents = ( |
             | contentsIsElided ifTrue: [sprout]. self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'ModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot'
         
          sprout = ( |
-            | button sprout).
+            | 
+            button sprout).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: private'
         
          textFont = ( |
@@ -354,7 +361,7 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
             boxSizing boxFont).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: creating\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: private'
         
          textFor: conMir = ( |
@@ -374,25 +381,26 @@ SlotsToOmit: directory fileInTimeString myComment postFileIn revision subpartNam
              txt).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: positioning\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: private'
         
          textLocation = ( |
             | boxSizing contentsTextPosition).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'Category: sizing\x7fModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot\x7fVisibility: private'
         
          textSize = ( |
             | textFont sizeOfString: text asString).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'slotContentsCpt' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'slotContentsCpt' -> () From: ( | {
          'ModuleInfo: Module: slotContentsCpt InitialContents: FollowSlot'
         
          unsprout = ( |
-            | button unsprout).
+            | 
+            button unsprout).
         } | ) 
 
 

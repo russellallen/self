@@ -1,6 +1,6 @@
  'Sun-$Revision: 30.7 $'
  '
-Copyright 1992-2012 AUTHORS.
+Copyright 1992-2026 AUTHORS.
 See the LICENSE file for license information.
 '
 
@@ -59,130 +59,130 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
          subpartNames <- ''.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
-         toggleBody = bootstrap define: bootstrap stub -> 'globals' -> 'toggleBody' -> () ToBe: bootstrap addSlotsTo: (
+         toggleBody = bootstrap define: bootstrap stub -> 'globals' -> 'ui1' -> 'toggleBody' -> () ToBe: bootstrap addSlotsTo: (
              bootstrap remove: 'parent' From:
-             globals boxBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'toggleBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals toggleBody.
+             globals ui1 boxBody copy ) From: bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'toggleBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 toggleBody.
 
 CopyDowns:
-globals boxBody. copy 
+globals ui1 boxBody. copy 
 SlotsToOmit: parent.
 
 \x7fIsComplete: '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
-         toggleBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'toggleBody' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits toggleBody.
+         toggleBody = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleBody' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 toggleBody.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'toggleBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'toggleBody' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'toggleBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'toggleBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
-         toggleButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'toggleButton' -> () From: ( |
-             {} = 'ModuleInfo: Creator: globals toggleButton.
+         toggleButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'globals' -> 'ui1' -> 'toggleButton' -> () From: ( |
+             {} = 'ModuleInfo: Creator: globals ui1 toggleButton.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'toggleBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'toggleBody' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
-         tog <- bootstrap stub -> 'globals' -> 'toggleButton' -> ().
+         tog <- bootstrap stub -> 'globals' -> 'ui1' -> 'toggleButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
-         container <- bootstrap stub -> 'globals' -> 'uiNester' -> ().
+         container <- bootstrap stub -> 'globals' -> 'ui1' -> 'uiNester' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          isOn <- bootstrap stub -> 'globals' -> 'false' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          location <- (0)@(0).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          offMessage.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          offString <- 'off'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          onMessage.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          onString <- 'on'.
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> () From: ( | {
          'Category: userInterface\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
-         toggleButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( |
-             {} = 'ModuleInfo: Creator: traits toggleButton.
+         toggleButton = bootstrap setObjectAnnotationOf: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( |
+             {} = 'ModuleInfo: Creator: traits ui1 toggleButton.
 '.
             | ) .
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'toggleButton' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          size <- (1)@(1).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleBody' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          clean = ( |
             | resend.clean tog: tog copy).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleBody' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          componentsDo: block = ( |
             | block value: tog).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleBody' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          createOn: wrld OnString: onstr OffString: offstr OnMessage: onmsg OffMessage: offmsg InitiallyOn: initialOn = ( | {
@@ -192,7 +192,7 @@ SlotsToOmit: parent.
                 } 
             | 
             t: copyOn: wrld.
-            t tog: toggleButton copy createOn: t OnString: onstr OffString: offstr
+            t tog: ui1 toggleButton copy createOn: t OnString: onstr OffString: offstr
                                         OnMessage: onmsg OffMessage: offmsg
                                         InitiallyOn: initialOn.
             t resize.
@@ -202,13 +202,13 @@ SlotsToOmit: parent.
             t).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleBody' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'boxBody' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'boxBody' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleBody' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleBody' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          resize = ( | {
@@ -228,7 +228,7 @@ SlotsToOmit: parent.
             resize: sz).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot\x7fVisibility: public'
         
          animatedDrawPressed = ( |
@@ -259,7 +259,7 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot\x7fVisibility: public'
         
          animatedDrawUnpressed = ( |
@@ -284,7 +284,7 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          animatedErase = ( |
@@ -293,14 +293,14 @@ SlotsToOmit: parent.
                                        Color: uiColors body).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          componentsDo: block = ( |
             | self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          createOn: bod OnString: onstr OffString: offstr OnMessage: onmsg OffMessage: offmsg InitiallyOn: initialOn = ( |
@@ -314,21 +314,21 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          currentString = ( |
             | isOn ifTrue: [ onString ] False: [ offString ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          currentStringPosition = ( |
             | stringPosition: currentString).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot\x7fVisibility: public'
         
          draw = ( |
@@ -338,7 +338,7 @@ SlotsToOmit: parent.
             drawCurrentStringCentered).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          drawCurrentStringCentered = ( |
@@ -348,34 +348,34 @@ SlotsToOmit: parent.
                     Font: faceFont).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          erase = ( |
             | drawBodyFilledRectangle: bound Color: uiColors body).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          faceFont = ( |
             | boxSizing menuFont).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: mousing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          leftButton* = bootstrap stub -> 'mixins' -> 'userInterface' -> 'leftButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: mousing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          leftButtonAccept = ( |
             | toggle).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: mousing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          leftButtonDown = ( |
@@ -385,7 +385,7 @@ SlotsToOmit: parent.
             leftButton.leftButtonDown).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: mousing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          leftButtonPendingAccept: change = ( |
@@ -393,7 +393,7 @@ SlotsToOmit: parent.
             change ifTrue: [ animatedDrawPressed ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: mousing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          leftButtonPendingReject: change = ( |
@@ -401,14 +401,14 @@ SlotsToOmit: parent.
             change ifTrue: [ animatedDrawUnpressed ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: mousing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          leftButtonReject = ( |
             | draw. world display).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          minSize = ( | {
@@ -435,26 +435,26 @@ SlotsToOmit: parent.
             strSz + (margin @ margin) + (margin @ margin)).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
-         parent* = bootstrap stub -> 'traits' -> 'uiNester' -> ().
+         parent* = bootstrap stub -> 'traits' -> 'ui1' -> 'uiNester' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: mousing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          rightButton* = bootstrap stub -> 'mixins' -> 'userInterface' -> 'rightButton' -> ().
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: mousing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          rightButtonAccept = ( |
             | body banish).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: mousing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          rightButtonDown = ( |
@@ -464,7 +464,7 @@ SlotsToOmit: parent.
             rightButton.rightButtonDown).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: mousing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          rightButtonPendingAccept: change = ( |
@@ -472,7 +472,7 @@ SlotsToOmit: parent.
             change ifTrue: [ animatedDrawPressed ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: mousing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          rightButtonPendingReject: change = ( |
@@ -480,14 +480,14 @@ SlotsToOmit: parent.
             change ifTrue: [ animatedDrawUnpressed ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: mousing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          rightButtonReject = ( |
             | draw. world display).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          stringPosition: str = ( | {
@@ -500,7 +500,7 @@ SlotsToOmit: parent.
             (size - sz) / 2).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'ModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          toggle = ( |
@@ -513,14 +513,14 @@ SlotsToOmit: parent.
             self).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          toggleString = ( |
             | isOn ifTrue: [ offString ] False: [ onString ]).
         } | ) 
 
- bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'toggleButton' -> () From: ( | {
+ bootstrap addSlotsTo: bootstrap stub -> 'traits' -> 'ui1' -> 'toggleButton' -> () From: ( | {
          'Category: drawing\x7fModuleInfo: Module: toggleBody InitialContents: FollowSlot'
         
          toggleStringPosition = ( |
