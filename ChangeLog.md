@@ -10,6 +10,75 @@ VM:
 
 * Updated cmake build system to use minimum 3.12
 * Building the VM now works again on PPC MacOS X (Leopard) and x64 MacOS X (El Capitan)
+* New 64-bit VM in `vm64/`, alongside the 32-bit VM in `vm/`, for x86_64 and aarch64 (ARM64).
+  Builds on macOS (Apple Silicon), Linux (glibc and musl), NetBSD and FreeBSD.
+  The cmake option `BUILD_64BIT` selects which VM is built
+* The 64-bit VM runs a bytecode interpreter with persistent inline caches as its first tier,
+  and tiers hot methods up to the SIC optimising compiler, using the interpreter's type feedback.
+  New SIC backends for aarch64 and x86_64; the SIC is on by default on aarch64 and on non-Apple
+  x86_64. Build options `SELF_INTERP_ONLY` and `SELF_FORCE_SIC`, and the
+  `SELF_TIER_UP_THRESHOLD` environment variable, control this
+* MacOS is supported again, on Apple Silicon with the 64-bit VM: the Quartz graphics layer has been
+  ported to Cocoa and CoreText, and there is a double-clickable `Self.app` with a world chooser
+  and its own console window
+* Both VMs now take their version number, 2026.1, from a top-level `VERSION` file. The file
+  holds `2026.1-dev` while working towards a release and plain `2026.1` in the commit that is
+  released. A development VM says so in `--vm-version`, in the snapshots it saves and in a
+  new fourth element of `_VMversion`, which `about vmIsDevelopment` answers
+* New snapshot header for both VMs, which gives the word size and the snapshot format on their
+  own lines. Existing 32-bit snapshots (formats 12 and 13) can still be read, but older 32-bit
+  VMs cannot read snapshots saved by this one, and worlds saved by development versions of the
+  64-bit VM must be rebuilt. Each VM now says why when given a snapshot it cannot read
+* `_VMversion`, and so `about vm`, now always answers the VM's own version and snapshot format,
+  not the format of the snapshot that was loaded
+* Neither VM prints a version banner on startup any more. `--vm-version` prints the version
+  and build and exits, without starting the VM. On the 64-bit VM `--vm-flags` prints the
+  platform flag settings
+* The VM's build is now identified by its git revision, platform and build configuration
+  rather than by the time it was built, so rebuilding unchanged sources gives the same VM and
+  no longer relinks. Building from a source tree without git, or without tags, works
+* The 64-bit VM has a built-in test framework, run with `--vm-run-tests`
+* The 64-bit VM has a default code cache of 32MB (16MB on the 32-bit VM)
+* The 64-bit VM prints a backtrace and register dump on fatal signals
+* New primitive `_QuitWithExitCode:`
+* New primitive `_VMBuildID`, answering the string which identifies the VM's build, including
+  the git revision it was built from. `about vmBuildID` answers it
+* New Unix primitives for rename, mkdir, rmdir, access, gethostid and ioctl
+* Thanks to nbuwe, the 32-bit VM can be built with a bundled phkmalloc (`-DSELF_PHKMALLOC=ON`),
+  and builds again on SPARC
+* New GitHub Actions workflow builds both VMs, runs the automatic tests and publishes releases
+
+Objects:
+
+* Thanks to David Ungar, the original Self user interface, ui1, has been reworked to run on Quartz
+  as well as X11. It now lives in its own `ui1` namespace and is loaded by `allUI1` (replacing
+  `allUI`), with separate Quartz and X11 backends and a synthetic-input test driver. Open it with
+  `ui1 ui open`. On Quartz this needs the 64-bit VM
+* Graphics layer extended for ui1: `quartz` gains an X11-style graphics context protocol,
+  8-bit indexed pixmaps and stipples. `quartz withAntialiasing:Do:` now switches font smoothing
+  as well as antialiasing, which also affects Morphic
+* `point` `#!` and `##!` now answer half-open rectangles rather than closed `oldStyleRectangle`s
+* `maxSmallInt` and `minSmallInt` work on both 32 and 64 bit VMs
+* `about systemVersion` now writes a development version as `2026.1-dev/3`, meaning working
+  towards 2026.1, as the VM does. The older `Development/3 (after 2024.1)` form is still read.
+  `about vm` shows whether the VM is a development version
+* `about systemVersion` comparison now takes the year and point into account, where it only
+  compared the release number, and puts a development version before its release
+* `paint` equality, hash and store string now include alpha
+* New shells have the evaluator open by default
+* `preferences desktop useViewScrollMorph` defaults to true again
+* New `tests frameworks ci` for running the Self level tests from CI
+* Thanks to nbuwe, assorted improvements to the `xlib` objects
+
+Fixes:
+
+* Fix Morphic desktop failing to open on MacOS when an XQuartz `DISPLAY` is set
+* Fix to line and point drawing in Morphic on Quartz
+* Thanks to nbuwe, fix moving points in the bezier demo
+* Writes interrupted by a signal are now retried, which makes writing on NetBSD and FreeBSD
+  more robust
+* Fix to a GC crash in the i386 SIC: the method prologue now clears all memory locals
+* Fix for recent clang optimising away tag bit checks on oops
 
 Changes in Self 24.01
 ----------------------
