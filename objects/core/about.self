@@ -301,6 +301,16 @@ Finally, thanks go to Sun Microsystems Laboratories, Stanford University, and al
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
+         'Category: versions\x7fComment: Identifies the build of the VM: the git revision it was
+built from, the platform and the build configuration.
+VMs before 2026.1 do not say.\x7fModuleInfo: Module: about InitialContents: FollowSlot'
+        
+         vmBuildID = ( |
+            | 
+            _VMBuildIDIfFail: 'unknown').
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
          'Category: versions\x7fComment: True if the VM is a development version: one working
 towards the release whose number it gives, rather than
 that release itself. VMs before 2026.1 do not say.\x7fModuleInfo: Module: about InitialContents: FollowSlot'

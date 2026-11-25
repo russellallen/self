@@ -1200,3 +1200,9 @@ oop VMversion_prim(oop rcvrIgnored) {
   v->obj_at_put(3, VM_is_development_version ? Memory->trueObj : Memory->falseObj);
   return v;
 }
+
+
+oop VMBuildID_prim(oop rcvrIgnored) {
+  Unused(rcvrIgnored);
+  return new_string(vmBuildID);
+}

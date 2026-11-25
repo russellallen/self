@@ -2294,6 +2294,13 @@ fntype(&call_and_convert5_glue),
  "one working towards the release of that number."
 },
 {
+"VMBuildID", fntype(&VMBuildID_prim),
+ ExternalPrimitive, StringPrimType,
+ SIDEEFFECTS,
+ "Returns a string identifying the build of the VM: the git revision it "
+ "was built from, the platform and the build configuration."
+},
+{
 "WriteSnapshot", fntype(&write_snapshot_prim_glue),
  ExternalPrimitive, ReceiverPrimType,
  SIDEEFFECTS,

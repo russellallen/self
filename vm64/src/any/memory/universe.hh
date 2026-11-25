@@ -277,6 +277,7 @@ oop full_write_snapshot_prim(oop rcvrIgnored, byteVectorOop name,
                              slotsOop compression_obj, slotsOop sizeObj,
                              bool snapCode, void *FH);
 oop VMversion_prim(oop rcvrIgnored);
+oop VMBuildID_prim(oop rcvrIgnored);
 
 void noCodeWarning(const char *msg);
 void check_delim(FILE *file, char *expected);
