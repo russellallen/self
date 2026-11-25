@@ -153,8 +153,12 @@ Inc. has been advised of the possibility of such damage.'.
              e.
              n.
             | 
+            "A release is '2026.1/3'. A development version working
+             towards that release is '2026.1-dev/3'. The form
+             'Development/3 (after 2024.1)', which named the release
+             before, is still read."
             n: copy.
-            e: s asTokensSeparatedByCharactersIn: ' /.()'.
+            e: s asTokensSeparatedByCharactersIn: ' /.()-'.
             e first = 'Development' 
              ifTrue: [
                 n development: true.
@@ -162,10 +166,13 @@ Inc. has been advised of the possibility of such damage.'.
                 n point: (e at: 4) asInteger.
                 n release: (e at: 1) asInteger]
               False: [
-                n development: false.
                 n year: (e at: 0) asInteger.
                 n point: (e at: 1) asInteger.
-                n release: (e at: 2) asInteger].
+                (e at: 2) = 'dev'
+                  ifTrue: [n development: true.
+                           n release: (e at: 3) asInteger]
+                   False: [n development: false.
+                           n release: (e at: 2) asInteger]].
             n).
         } | ) 
 
@@ -200,9 +207,9 @@ Inc. has been advised of the possibility of such damage.'.
         
          printString = ( |
             | 
-            (development ifTrue: ['Development/', release asString, ' (after '] False: ''),
             year asString, '.', point asString,
-            (development ifTrue: ')' False: ['/', release asString])).
+            (development ifTrue: '-dev' False: ''),
+            '/', release asString).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> 'systemVersion' -> 'parent' -> () From: ( | {
@@ -247,8 +254,12 @@ relative to the Self working dir\x7fModuleInfo: Module: about InitialContents: F
         
          test = ( |
             | 
-            [((copyOn: 'Development/0 (after 2000.0)') printString = 'Development/0 (after 2000.0)') &&
-            ((copyOn: '2016.1/34') printString = '2016.1/34')] assert. self).
+            [((copyOn: '2026.1-dev/3') printString = '2026.1-dev/3') &&
+            [(copyOn: '2026.1-dev/3') development] &&
+            [((copyOn: '2016.1/34') printString = '2016.1/34')] &&
+            [(copyOn: '2016.1/34') development not] &&
+            [((copyOn: '2024.1.0') printString = '2024.1/0')] &&
+            [((copyOn: 'Development/0 (after 2000.0)') printString = '2000.0-dev/0')]] assert. self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> 'systemVersion' -> () From: ( | {
@@ -291,13 +302,16 @@ Finally, thanks go to Sun Microsystems Laboratories, Stanford University, and al
          'Category: versions\x7fModuleInfo: Module: about InitialContents: FollowSlot'
         
          vm = ( |
+             sv.
              v.
             | 
             v: _VMversion.
-            systemVersion copyOn: 
+            sv: systemVersion copyOn: 
             (v at: 0) printString, '.',
             (v at: 1) printString, '/',
-            (v at: 2) printString).
+            (v at: 2) printString.
+            sv development: vmIsDevelopment.
+            sv).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
