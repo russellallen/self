@@ -40,6 +40,7 @@ universe::universe() {
   minor_version= VM_minor_version;
   snapshot_version= VM_snapshot_version;
   loaded_snapshot.major_version= loaded_snapshot.minor_version= 0;
+  loaded_snapshot.development= false;
   loaded_snapshot.word_size= 0;   // no snapshot read
   loaded_snapshot.format= -1;
   is_snapshot_other_endian= false;
@@ -389,16 +390,19 @@ void universe::read_versions_in_snapshot_header(FILE *file)
     char snap[96];
     snap[0] = '\0';
     if (loaded_snapshot.word_size != 0  &&  loaded_snapshot.format >= 0)
-      snprintf(snap, sizeof(snap), "\tSnapshot: version %d.%d, %d-bit, format %d.\n",
+      snprintf(snap, sizeof(snap), "\tSnapshot: version %d.%d%s, %d-bit, format %d.\n",
                loaded_snapshot.major_version, loaded_snapshot.minor_version,
+               loaded_snapshot.development ? "-dev" : "",
                loaded_snapshot.word_size,     loaded_snapshot.format);
     else if (loaded_snapshot.major_version != 0)
-      snprintf(snap, sizeof(snap), "\tSnapshot: version %d.%d.\n",
-               loaded_snapshot.major_version, loaded_snapshot.minor_version);
-    fatalNoMenu6("\n\t%s\n%s"
-                 "\tThis VM:  version %d.%d, %d-bit, snapshot format %d.\n",
+      snprintf(snap, sizeof(snap), "\tSnapshot: version %d.%d%s.\n",
+               loaded_snapshot.major_version, loaded_snapshot.minor_version,
+               loaded_snapshot.development ? "-dev" : "");
+    fatalNoMenu7("\n\t%s\n%s"
+                 "\tThis VM:  version %d.%d%s, %d-bit, snapshot format %d.\n",
                  why, snap,
                  VM_major_version, VM_minor_version,
+                 VM_is_development_version ? "-dev" : "",
                  int(oopSize) * 8, int(VM_snapshot_version));
   }
 
@@ -720,7 +724,8 @@ bool universe::write_snapshot(const char *fileName,
 
   OS::FWrite(SNAPSHOT_HEADER, strlen(SNAPSHOT_HEADER), snapFile);
 
-  fprintf(snapFile, "Version: %d.%d\n", VM_major_version, VM_minor_version);
+  fprintf(snapFile, "Version: %d.%d%s\n", VM_major_version, VM_minor_version,
+          VM_is_development_version ? "-dev" : "");
   fprintf(snapFile, "Word size: %d\n", int(oopSize) * 8);
   fprintf(snapFile, "Snapshot format: %d\n", (int)VM_snapshot_version);
           
@@ -1150,9 +1155,12 @@ oop expand_heap_prim(oop rcvrIgnored, smi grow_size)
 
 oop VMversion_prim(oop rcvrIgnored) {
   Unused(rcvrIgnored);
-  objVectorOop v= Memory->objVectorObj->cloneSize(3);
+  // major, minor, snapshot format, and whether this is a development
+  // version, one working towards the release of that number
+  objVectorOop v= Memory->objVectorObj->cloneSize(4);
   v->obj_at_put(0, as_smiOop(Memory->major_version));
   v->obj_at_put(1, as_smiOop(Memory->minor_version));
   v->obj_at_put(2, as_smiOop(Memory->snapshot_version));
+  v->obj_at_put(3, VM_is_development_version ? Memory->trueObj : Memory->falseObj);
   return v;
 }

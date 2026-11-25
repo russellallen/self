@@ -114,8 +114,9 @@ int    prog_argc;
 
 // --vm-version: say which VM this is and stop, before anything is set up.
 static void print_vm_version_and_exit() {
-  lprintf("Self VM %d.%d, %d-bit, snapshot format %d\n",
+  lprintf("Self VM %d.%d%s, %d-bit, snapshot format %d\n",
           VM_major_version, VM_minor_version,
+          VM_is_development_version ? " (development)" : "",
           int(sizeof(void*)) * 8, int(VM_snapshot_version));
   lprintf("%s, built %s\n", vmBuildID, vmBuildDate);
   ::exit(0);

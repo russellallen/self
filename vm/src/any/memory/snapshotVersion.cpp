@@ -12,7 +12,7 @@
 //     Version: 2023.1.13
 // where the third number is the format.  Later ones, and all 64-bit
 // snapshots, start with
-//     Version: 2026.1
+//     Version: 2026.1                (or 2026.1-dev)
 //     Word size: 64
 //     Snapshot format: 1
 static const int current_32bit_snapshot_format          = 14;
@@ -46,6 +46,7 @@ SnapshotVersionVerdict read_snapshot_version(FILE*                file,
   int  vm_word_size = int(oopSize) * 8;
 
   info->major_version = info->minor_version = 0;
+  info->development   = false;
   info->word_size     = 0;
   info->format        = -1;
   *why = "";
@@ -65,6 +66,8 @@ SnapshotVersionVerdict read_snapshot_version(FILE*                file,
     }
   }
   else if (n == 2) {
+    // "Version: 2026.1-dev" is a development version of 2026.1
+    info->development = strstr(line, "-dev") != NULL;
     if (!read_snapshot_header_line(file, line, sizeof(line))
     ||  sscanf(line, "Word size: %d", &info->word_size) != 1) {
       // 64-bit VMs before 2026.1 wrote "Version: 64.0" and no word size

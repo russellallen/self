@@ -113,8 +113,10 @@ static void print_platform_info() {
 
 
 static void print_vm_info() {
-  lprintf("VM: version %d.%d, snapshot format %d, %s, built %s, ",
-          VM_major_version, VM_minor_version, int(VM_snapshot_version),
+  lprintf("VM: version %d.%d%s, snapshot format %d, %s, built %s, ",
+          VM_major_version, VM_minor_version,
+          VM_is_development_version ? " (development)" : "",
+          int(VM_snapshot_version),
           vmBuildID, vmBuildDate);
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)

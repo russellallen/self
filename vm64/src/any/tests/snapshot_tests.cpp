@@ -78,6 +78,20 @@ VM_TEST(snapshot, new_header_64_bit_loads) {
   VM_CHECK_EQ(r.next, 7L);
 }
 
+VM_TEST(snapshot, development_version) {
+  char text[128];
+  snprintf(text, sizeof(text),
+           "Version: 2026.2-dev\nWord size: 64\nSnapshot format: %d\nTimestamp: 7\n",
+           int(VM_snapshot_version));
+  SnapshotHeaderResult r = read_header(text);
+  VM_CHECK_EQ(r.verdict, snapshotLoads);
+  VM_CHECK_EQ(r.info.major_version, 2026);
+  VM_CHECK_EQ(r.info.minor_version, 2);
+  VM_CHECK(r.info.development);
+  VM_CHECK_EQ(r.next, 7L);
+  VM_CHECK(!read_header(new_header(64, int(VM_snapshot_version))).info.development);
+}
+
 VM_TEST(snapshot, new_header_carriage_returns) {
   SnapshotHeaderResult r = read_header(new_header(64, int(VM_snapshot_version), "\r"));
   VM_CHECK_EQ(r.verdict, snapshotLoads);

@@ -391,7 +391,9 @@ jobs:
       contents: write
     steps:
       # The VMs take their version number from the VERSION file, so a
-      # release tag has to agree with it: 2026.1, or 2026.1.rc1 and the like.
+      # release tag has to agree with it.  VERSION is 2026.1-dev while working
+      # towards 2026.1: pre-releases such as 2026.1.rc1 are tagged from that,
+      # and the release itself from a commit where VERSION is plain 2026.1.
       - uses: actions/checkout@v6
         with:
           path: src
@@ -404,9 +406,24 @@ jobs:
         run: |
           version=$(cat src/VERSION)
           case "$TAG" in
-            "$version"|"$version".*|"$version"-*) ;;
-            *) echo "::error::Tag $TAG does not match VERSION ($version)"
-               exit 1 ;;
+            *alpha*|*beta*|*rc*)
+              # a pre-release is cut from a development version
+              case "$version" in
+                *-dev) ;;
+                *) echo "::error::Tag $TAG is a pre-release but VERSION ($version) is not a -dev version"
+                   exit 1 ;;
+              esac
+              base=${version%-dev}
+              case "$TAG" in
+                "$base".*|"$base"-*) ;;
+                *) echo "::error::Tag $TAG does not match VERSION ($version)"
+                   exit 1 ;;
+              esac ;;
+            *)
+              if [ "$TAG" != "$version" ]; then
+                echo "::error::Tag $TAG does not match VERSION ($version). A release is tagged on a commit whose VERSION is the release number, without -dev."
+                exit 1
+              fi ;;
           esac
 
       - uses: actions/download-artifact@v4

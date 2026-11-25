@@ -18,6 +18,11 @@ set(IN_FILE "@SRC_VMDATE_IN@")
 set(OUT_FILE "@SRC_VMDATE@")
 set(VERSION_MAJOR "@SELF_VERSION_MAJOR@")
 set(VERSION_MINOR "@SELF_VERSION_MINOR@")
+if("@SELF_VERSION_IS_DEVELOPMENT@")
+  set(VERSION_IS_DEVELOPMENT true)
+else()
+  set(VERSION_IS_DEVELOPMENT false)
+endif()
 set(BUILD_CONFIG "@SELF_BUILD_CONFIG_ID@")
 
 # the parts of the tree that go into a VM
@@ -80,7 +85,8 @@ if(EXISTS "${OUT_FILE}")
   string(FIND "${existing}" "vmBuildID   = \"${BUILD_ID}\";" id_at)
   string(FIND "${existing}" "VM_major_version = ${VERSION_MAJOR};" major_at)
   string(FIND "${existing}" "VM_minor_version = ${VERSION_MINOR};" minor_at)
-  if(NOT id_at EQUAL -1 AND NOT major_at EQUAL -1 AND NOT minor_at EQUAL -1)
+  string(FIND "${existing}" "VM_is_development_version = ${VERSION_IS_DEVELOPMENT};" dev_at)
+  if(NOT id_at EQUAL -1 AND NOT major_at EQUAL -1 AND NOT minor_at EQUAL -1 AND NOT dev_at EQUAL -1)
     set(up_to_date TRUE)
   endif()
 endif()
@@ -88,6 +94,7 @@ endif()
 #set is:
 # VERSION_MAJOR
 # VERSION_MINOR
+# VERSION_IS_DEVELOPMENT
 # BUILD_ID
 # BUILD_DATE
 

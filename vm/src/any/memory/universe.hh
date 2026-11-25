@@ -26,6 +26,7 @@ extern bool noCodeWarnings;     // Suppress VM startup warnings about code
 // snapshots; the build date is for display only.
 extern const int   VM_major_version;
 extern const int   VM_minor_version;
+extern const bool  VM_is_development_version;   // working towards that release
 extern const char* const vmBuildID;
 extern const char* const vmBuildDate;
 

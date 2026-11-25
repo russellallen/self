@@ -1,20 +1,28 @@
 #!/usr/bin/env cmake
 
 #
-# Read the release version from the top-level VERSION file, a single line
-# of the form MAJOR.MINOR.  Both VMs take their version number from it.
+# Read the release version from the top-level VERSION file.  Both VMs take
+# their version number from it.  It holds a single line:
+#   2026.1-dev   while working towards release 2026.1
+#   2026.1       in the commit that is tagged and released as 2026.1
+# developmentVar is set to 1 for the first form and 0 for the second.
 #
-function(read_version_file fileName majorVar minorVar)
+function(read_version_file fileName majorVar minorVar developmentVar)
   if(NOT EXISTS "${fileName}")
     message(FATAL_ERROR "Version file ${fileName} not found.")
   endif()
   file(STRINGS "${fileName}" _lines LIMIT_COUNT 1)
   string(STRIP "${_lines}" _line)
-  if(NOT _line MATCHES "^([0-9]+)\\.([0-9]+)$")
-    message(FATAL_ERROR "${fileName} must hold MAJOR.MINOR, e.g. 2026.1, but holds: ${_line}")
+  if(NOT _line MATCHES "^([0-9]+)\\.([0-9]+)(-dev)?$")
+    message(FATAL_ERROR "${fileName} must hold MAJOR.MINOR or MAJOR.MINOR-dev, e.g. 2026.1-dev, but holds: ${_line}")
   endif()
   set(${majorVar} ${CMAKE_MATCH_1} PARENT_SCOPE)
   set(${minorVar} ${CMAKE_MATCH_2} PARENT_SCOPE)
+  if(CMAKE_MATCH_3)
+    set(${developmentVar} 1 PARENT_SCOPE)
+  else()
+    set(${developmentVar} 0 PARENT_SCOPE)
+  endif()
   # reconfigure when the version changes
   set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${fileName}")
 endfunction()

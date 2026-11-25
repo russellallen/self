@@ -300,6 +300,18 @@ Finally, thanks go to Sun Microsystems Laboratories, Stanford University, and al
             (v at: 2) printString).
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
+         'Category: versions\x7fComment: True if the VM is a development version: one working
+towards the release whose number it gives, rather than
+that release itself. VMs before 2026.1 do not say.\x7fModuleInfo: Module: about InitialContents: FollowSlot'
+        
+         vmIsDevelopment = ( |
+             v.
+            | 
+            v: _VMversion.
+            (v size > 3) && [v at: 3]).
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: about InitialContents: FollowSlot'
         

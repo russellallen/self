@@ -13,6 +13,7 @@
 struct SnapshotVersionInfo {
   int major_version;
   int minor_version;
+  bool development;     // saved by a development version of that release
   int word_size;        // 32 or 64; 0 if no snapshot was read
   int format;
 };

@@ -2289,8 +2289,9 @@ fntype(&call_and_convert5_glue),
 "VMversion", fntype(&VMversion_prim),
  ExternalPrimitive, UnknownPrimType,
  SIDEEFFECTS,
- "Returns a three-element vector containing the VM (major,minor,snapshot) "
- "version numbers."
+ "Returns a four-element vector containing the VM (major,minor,snapshot) "
+ "version numbers and a boolean that is true for a development version, "
+ "one working towards the release of that number."
 },
 {
 "WriteSnapshot", fntype(&write_snapshot_prim_glue),

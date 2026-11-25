@@ -1,15 +1,18 @@
 /* Generated at build time by cmake/configureVmDate.cmake.in.  Do not edit.
 
-   VM_major_version and VM_minor_version come from the top-level VERSION
-   file.  vmBuildID identifies this VM binary and is written into snapshots;
+   VM_major_version, VM_minor_version and VM_is_development_version come
+   from the top-level VERSION file.  A development version is one working
+   towards the release of that number.  vmBuildID identifies this VM binary and is written into snapshots;
    vmBuildDate is for display only. */
 
 extern const int   VM_major_version;
 extern const int   VM_minor_version;
+extern const bool  VM_is_development_version;
 extern const char* const vmBuildID;
 extern const char* const vmBuildDate;
 
 const int   VM_major_version = @VERSION_MAJOR@;
 const int   VM_minor_version = @VERSION_MINOR@;
+const bool  VM_is_development_version = @VERSION_IS_DEVELOPMENT@;
 const char* const vmBuildID   = "@BUILD_ID@";
 const char* const vmBuildDate = "@BUILD_DATE@";
