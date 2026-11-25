@@ -96,6 +96,8 @@ set(SRC_any
   any/memory/spaceSizeMacros.hh
   any/memory/stringTable.cpp
   any/memory/stringTable.hh
+  any/memory/snapshotVersion.cpp
+  any/memory/snapshotVersion.hh
   any/memory/universe.cpp
   any/memory/universe.hh
   any/memory/universe.more.cpp

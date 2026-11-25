@@ -32,26 +32,6 @@ extern const char* const vmBuildDate;
 // the format of the snapshots this VM writes
 extern const smi   VM_snapshot_version;
 
-// What the first lines of a snapshot say about the VM that saved it.
-struct SnapshotVersionInfo {
-  int major_version;
-  int minor_version;
-  int word_size;        // 32 or 64; 0 if no snapshot was read
-  int format;
-};
-
-enum SnapshotVersionVerdict {
-  snapshotLoads,
-  snapshotLoadsWithWarning,   // an older format this VM still reads
-  snapshotRefused
-};
-
-// Reads the version lines of a snapshot header and decides whether this VM
-// can load the snapshot.  If not, *why says why not.
-SnapshotVersionVerdict read_snapshot_version(FILE*                file,
-                                             SnapshotVersionInfo* info,
-                                             const char**         why);
-
 class universe {
  public:
   // this VM's own version and snapshot format

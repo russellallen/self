@@ -2859,6 +2859,11 @@ smiOop.cpp                    vmStrings.hh
 smiOop.hh                     oop.hh
 smiOop.hh                     universe.hh
 
+snapshotVersion.cpp           snapshotVersion.hh
+snapshotVersion.cpp           universe.hh
+
+snapshotVersion.hh            top.hh
+
 space.cpp                     blockOop_inline.hh
 space.cpp                     byteVectorOop.hh
 space.cpp                     enumeration.hh
@@ -3135,6 +3140,7 @@ universe.hh                   nmln.hh
 universe.hh                   os.hh
 universe.hh                   process.hh
 universe.hh                   rSet.hh
+universe.hh                   snapshotVersion.hh
 universe.hh                   space.hh
 universe.hh                   spaceSize.hh
 universe.hh                   stack.hh
