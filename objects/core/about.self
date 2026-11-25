@@ -135,6 +135,12 @@ Inc. has been advised of the possibility of such damage.'.
         
          < v = ( |
             | 
+            "By year, then point. A development version comes
+             before the release it is working towards. Then by
+             release number."
+            year  != v year  ifTrue: [^ year  < v year ].
+            point != v point ifTrue: [^ point < v point].
+            development != v development ifTrue: [^ development].
             release < v release).
         } | ) 
 
@@ -143,7 +149,8 @@ Inc. has been advised of the possibility of such damage.'.
         
          = x = ( |
             | 
-            release = x release).
+            (year = x year) && [point = x point] &&
+            [development = x development] && [release = x release]).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> 'systemVersion' -> 'parent' -> () From: ( | {
@@ -181,7 +188,8 @@ Inc. has been advised of the possibility of such damage.'.
         
          hash = ( |
             | 
-            release hash).
+            year hash + point hash + release hash +
+            (development ifTrue: 1 False: 0)).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> 'systemVersion' -> 'parent' -> () From: ( | {
@@ -259,7 +267,20 @@ relative to the Self working dir\x7fModuleInfo: Module: about InitialContents: F
             [((copyOn: '2016.1/34') printString = '2016.1/34')] &&
             [(copyOn: '2016.1/34') development not] &&
             [((copyOn: '2024.1.0') printString = '2024.1/0')] &&
-            [((copyOn: 'Development/0 (after 2000.0)') printString = '2000.0-dev/0')]] assert. self).
+            [((copyOn: 'Development/0 (after 2000.0)') printString = '2000.0-dev/0')] &&
+            [(copyOn: '2024.1/0') = (copyOn: '2024.1.0')] &&
+            [(copyOn: '2024.1/0') hash = (copyOn: '2024.1.0') hash] &&
+            [(copyOn: '2017.1/0') != (copyOn: '2024.1/0')] &&
+            [(copyOn: '2026.1-dev/1') != (copyOn: '2026.1/1')] &&
+            [(copyOn: '2017.1/9') < (copyOn: '2024.1/5')] &&
+            [((copyOn: '2024.1/5') < (copyOn: '2017.1/9')) not] &&
+            [(copyOn: '2024.1/9') < (copyOn: '2024.2/0')] &&
+            [(copyOn: '2024.1/3') < (copyOn: '2024.1/4')] &&
+            [(copyOn: '2026.1-dev/9') < (copyOn: '2026.1/0')] &&
+            [((copyOn: '2026.1/0') < (copyOn: '2026.1-dev/9')) not] &&
+            [(copyOn: '2025.4/9') < (copyOn: '2026.1-dev/0')] &&
+            [(copyOn: '2026.1/0') > (copyOn: '2026.1-dev/9')] &&
+            [(copyOn: '2026.1/0') >= (copyOn: '2026.1/0')]] assert. self).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> 'systemVersion' -> () From: ( | {
