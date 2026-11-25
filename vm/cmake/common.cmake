@@ -93,10 +93,9 @@ macro(include_prefix_header_common target file)
 endmacro()
 
 # read the version info
-parse_version_information(${CMAKE_CURRENT_SOURCE_DIR}/src/any/memory/universe.cpp SELF_VERSION_MAJOR SELF_VERSION_MINOR SELF_VERSION_SNAPSHOT)
+read_version_file(${CMAKE_CURRENT_SOURCE_DIR}/../VERSION SELF_VERSION_MAJOR SELF_VERSION_MINOR)
 determine_build_information(SELF_BUILD)
 set(SELF_VERSION_MAJOR    ${SELF_VERSION_MAJOR}    CACHE STRING "Self VM major version"    FORCE)
 set(SELF_VERSION_MINOR    ${SELF_VERSION_MINOR}    CACHE STRING "Self VM minor version"    FORCE)
-set(SELF_VERSION_SNAPSHOT ${SELF_VERSION_SNAPSHOT} CACHE STRING "Self VM snapshot version" FORCE)
-set(SELF_BUILD            ${SELF_BUILD}            CACHE STRING "Self VM build number"     FORCE)
-message(STATUS "Preparing Self VM ${SELF_VERSION_MAJOR}.${SELF_VERSION_MINOR}.${SELF_VERSION_SNAPSHOT} (build ${SELF_BUILD})")
+set(SELF_BUILD            ${SELF_BUILD}            CACHE STRING "Self VM build name"       FORCE)
+message(STATUS "Preparing Self VM ${SELF_VERSION_MAJOR}.${SELF_VERSION_MINOR} (build ${SELF_BUILD})")

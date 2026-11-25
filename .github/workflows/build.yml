@@ -390,6 +390,25 @@ jobs:
     permissions:
       contents: write
     steps:
+      # The VMs take their version number from the VERSION file, so a
+      # release tag has to agree with it: 2026.1, or 2026.1.rc1 and the like.
+      - uses: actions/checkout@v6
+        with:
+          path: src
+          sparse-checkout: VERSION
+          sparse-checkout-cone-mode: false
+
+      - name: Check the tag against VERSION
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          version=$(cat src/VERSION)
+          case "$TAG" in
+            "$version"|"$version".*|"$version"-*) ;;
+            *) echo "::error::Tag $TAG does not match VERSION ($version)"
+               exit 1 ;;
+          esac
+
       - uses: actions/download-artifact@v4
         with:
           path: dist

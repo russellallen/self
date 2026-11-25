@@ -113,11 +113,9 @@ static void print_platform_info() {
 
 
 static void print_vm_info() {
-  lprintf("VM: version %ld.%ld.%ld, built %s, ",
-          Memory ? (long)Memory->major_version     : 0,
-          Memory ? (long)Memory->minor_version     : 0,
-          Memory ? (long)Memory->snapshot_version   : 0,
-          vmDate);
+  lprintf("VM: version %d.%d, snapshot format %d, %s, built %s, ",
+          VM_major_version, VM_minor_version, int(VM_snapshot_version),
+          vmBuildID, vmBuildDate);
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
   lprintf("JIT compiled");

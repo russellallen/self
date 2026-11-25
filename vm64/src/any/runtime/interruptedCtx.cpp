@@ -17,11 +17,9 @@ class InterruptedContext AbortContext;
 
 void InterruptedContext::fatal_menu() {
   // this really belongs in lprint_fatal but the declarations are a mess
-  lprintf("\nVM Version: %d.%d.%d, %s\n", 
-          Memory ? (void*)Memory->major_version     : 0, 
-          Memory ? (void*)Memory->minor_version     : 0,
-          Memory ? (void*)Memory->snapshot_version  : 0,
-          vmDate);
+  lprintf("\nVM Version: %d.%d, snapshot format %d, %s\n",
+          VM_major_version, VM_minor_version, int(VM_snapshot_version),
+          vmBuildID);
   // block all interrupts (e.g. timers)
   continuePC = NULL;
   SignalBlocker* sb = new SignalBlocker(SignalBlocker::block_signals_self_uses);

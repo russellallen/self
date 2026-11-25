@@ -106,11 +106,21 @@ void vm_console_block_until_input() {
   }
 }
 static bool run_vm_tests_flag = false;
-bool print_vm_version = false;
+static bool print_vm_flags = false;
 bool ForceFrequentScavengesViaSmallNewSpace = false;
 
 const char **prog_argv;
 int    prog_argc;
+
+// --vm-version: say which VM this is and stop, before anything is set up.
+static void print_vm_version_and_exit() {
+  lprintf("Self VM %d.%d, %d-bit, snapshot format %d\n",
+          VM_major_version, VM_minor_version,
+          int(sizeof(void*)) * 8, int(VM_snapshot_version));
+  lprintf("%s, built %s\n", vmBuildID, vmBuildDate);
+  ::exit(0);
+}
+
 
 
 
@@ -137,7 +147,10 @@ static void processArguments(int argc, const char *argv[]) {
       run_vm_tests_flag = true;
     }
     if (strcmp(argv[i], "--vm-version") == 0) {
-      print_vm_version = true;
+      print_vm_version_and_exit();
+    }
+    if (strcmp(argv[i], "--vm-flags") == 0) {
+      print_vm_flags = true;
     }
   }
 
@@ -180,7 +193,8 @@ static void processArguments(int argc, const char *argv[]) {
       lprintf("  -o\t\tOversample the timers (Run them 10x faster to flush out bugs)\n");
       lprintf("  -a\t\tTest the Assembler (added for Intel)\n");
       lprintf("  --vm-run-tests\tRun C++ VM unit tests and exit\n");
-      lprintf("  --vm-version\tPrint VM version and platform info at startup\n");
+      lprintf("  --vm-version\tPrint the VM version and build, and exit\n");
+      lprintf("  --vm-flags\tPrint the platform flag settings and exit\n");
       lprintf("Other command line switches may be interpreted by the Self world\n");
       ::exit(0);
       break;
@@ -379,10 +393,10 @@ int main(int argc, char *argv[]) {
 
   TrackCHeapInMonitor::reset();
   init_globals();
-  set_flags_for_platform(print_vm_version);
+  set_flags_for_platform(print_vm_flags);
   bootstrapping = false;
 
-  if (print_vm_version) {
+  if (print_vm_flags) {
     OS::terminate(0);
   }
 

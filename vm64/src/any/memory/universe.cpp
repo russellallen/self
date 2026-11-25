@@ -14,11 +14,13 @@ extern void invalidate_all_interpreter_pics();
   extern InterpreterPICTable* interpreter_pic_table;
 # endif
 
-// increment VM_snapshot_version whenever old snapshots will break; reset
-// it to zero when changing the minor or major version
-smi VM_major_version    = 64;
-smi VM_minor_version    = 0;
-smi VM_snapshot_version = 0;
+// VM_major_version and VM_minor_version are the release version, from the
+// top-level VERSION file by way of a generated source file.
+//
+// VM_snapshot_version is the format of the snapshots this VM writes.
+// Increment it whenever old snapshots will break.  It is not reset when the
+// release version changes.
+const smi VM_snapshot_version = 1;
 
 
 universe* Memory;
@@ -42,6 +44,9 @@ universe::universe() {
   major_version= VM_major_version;
   minor_version= VM_minor_version;
   snapshot_version= VM_snapshot_version;
+  loaded_snapshot.major_version= loaded_snapshot.minor_version= 0;
+  loaded_snapshot.word_size= 0;   // no snapshot read
+  loaded_snapshot.format= -1;
   is_snapshot_other_endian= false;
   snapshot_oopSize= oopSize;  // default; will be overridden for 32-bit snapshots
 
@@ -312,11 +317,6 @@ void universe::genesis()
   
   postReadSnapshot= false;
 
-  if (print_vm_version) {
-    lprintf("Self Virtual Machine Version %d.%d/%d, %s\n",
-           major_version, minor_version, snapshot_version, vmDate);
-    lprintf("Copyright 1989-2026 AUTHORS (type _Credits for credits)\n\n");
-  }
 }
 
 
@@ -391,84 +391,165 @@ void universe::read_first_line_in_snapshot_header(FILE *file)
 }
 
 
+// Snapshot formats.  A snapshot's format number says how its contents are
+// laid out; it is counted separately for 32-bit and 64-bit snapshots.
+//
+// 32-bit snapshots up to format 13 start with the old one-line header,
+//     Version: 2023.1.13
+// where the third number is the format.  Later ones, and all 64-bit
+// snapshots, start with
+//     Version: 2026.1
+//     Word size: 64
+//     Snapshot format: 1
+static const int current_32bit_snapshot_format          = 14;
+static const int last_old_header_32bit_snapshot_format  = 13;
+static const int oldest_loadable_32bit_snapshot_format  = 12;
+
+
+// Read one line of the header, without its line ending.  Blank lines after
+// it are skipped.  Answers false at end of file.
+static bool read_snapshot_header_line(FILE* file, char* buf, int len)
+{
+  int i = 0, c;
+  while ((c = fgetc(file)) != EOF  &&  c != '\n'  &&  c != '\r')
+    if (i < len - 1)  buf[i++] = char(c);
+  buf[i] = '\0';
+  if (c == EOF  &&  i == 0)
+    return false;
+  while ((c = fgetc(file)) == '\n'  ||  c == '\r')
+    ;
+  if (c != EOF)
+    ungetc(c, file);
+  return true;
+}
+
+
+SnapshotVersionVerdict read_snapshot_version(FILE*                file,
+                                             SnapshotVersionInfo* info,
+                                             const char**         why)
+{
+  char line[128];
+  int  vm_word_size = int(oopSize) * 8;
+
+  info->major_version = info->minor_version = 0;
+  info->word_size     = 0;
+  info->format        = -1;
+  *why = "";
+
+  if (!read_snapshot_header_line(file, line, sizeof(line))) {
+    *why = "The \"Version:\" line in the snapshot is missing.";
+    return snapshotRefused;
+  }
+  int n = sscanf(line, "Version: %d.%d.%d",
+                 &info->major_version, &info->minor_version, &info->format);
+  if (n == 3) {
+    // old one-line header: a 32-bit snapshot
+    info->word_size = 32;
+    if (info->format > last_old_header_32bit_snapshot_format) {
+      *why = "The \"Version:\" line in the snapshot is not one this VM understands.";
+      return snapshotRefused;
+    }
+  }
+  else if (n == 2) {
+    if (!read_snapshot_header_line(file, line, sizeof(line))
+    ||  sscanf(line, "Word size: %d", &info->word_size) != 1) {
+      // 64-bit VMs before 2026.1 wrote "Version: 64.0" and no word size
+      *why = strncmp(line, "Snapshot format:", 16) == 0
+        ? "This snapshot was saved by a development version of the 64-bit VM\n"
+          "\tand cannot be read by this one.  Please rebuild the world from source."
+        : "The \"Word size:\" line in the snapshot could not be parsed.";
+      return snapshotRefused;
+    }
+    if (!read_snapshot_header_line(file, line, sizeof(line))
+    ||  sscanf(line, "Snapshot format: %d", &info->format) != 1) {
+      *why = "The \"Snapshot format:\" line in the snapshot could not be parsed.";
+      return snapshotRefused;
+    }
+  }
+  else {
+    *why = "The \"Version:\" line in the snapshot could not be parsed.";
+    return snapshotRefused;
+  }
+
+  if (info->word_size != 32  &&  info->word_size != 64) {
+    *why = "The snapshot's word size is neither 32 nor 64.";
+    return snapshotRefused;
+  }
+  if (info->word_size > vm_word_size) {
+    *why = "This is a 64-bit snapshot, and this is the 32-bit VM.\n"
+           "\tPlease use the 64-bit VM.";
+    return snapshotRefused;
+  }
+
+  if (info->word_size == 64) {
+    if (info->format == VM_snapshot_version)
+      return snapshotLoads;
+    *why = "The format of this 64-bit snapshot is not the one this VM reads.";
+    return snapshotRefused;
+  }
+
+  // a 32-bit snapshot
+  if (n == 2  &&  info->format <= last_old_header_32bit_snapshot_format) {
+    *why = "The snapshot's header does not match its format.";
+    return snapshotRefused;
+  }
+  if (info->format < oldest_loadable_32bit_snapshot_format) {
+    *why = "This snapshot was saved by a version of the VM that is too old.";
+    return snapshotRefused;
+  }
+  if (info->format > current_32bit_snapshot_format) {
+    *why = "This snapshot was saved by a newer version of the VM.";
+    return snapshotRefused;
+  }
+  // Format 12 differs from 13 in what the world may expect of the VM;
+  // 13 and 14 differ only in the header.
+  return info->format == oldest_loadable_32bit_snapshot_format
+           ? snapshotLoadsWithWarning
+           : snapshotLoads;
+}
+
+
 void universe::read_versions_in_snapshot_header(FILE *file)
 {
-  int read_major_version_i, read_minor_version_i, snapshot_version_i = -1;
-  char after_minor;
+  const char* why;
+  SnapshotVersionVerdict v = read_snapshot_version(file, &loaded_snapshot, &why);
 
-  // Parse "Version: major.minor" — may be followed by ".snap\n" (old) or "\n" (new)
-  if (fscanf(file, "Version: %d.%d", &read_major_version_i, &read_minor_version_i) != 2)
-    fatalNoMenu("\n\tThe \"Version:\" line in the snapshot could not be parsed.\n");
-
-  // Check what follows: '.' means old three-part format, '\n'/'\r' means new two-line format
-  after_minor = fgetc(file);
-  if (after_minor == '.') {
-    // Old format: "Version: 2023.1.13\n"
-    if (fscanf(file, "%d%*[\r\n]", &snapshot_version_i) != 1)
-      fatalNoMenu("\n\tThe \"Version:\" line in the snapshot could not be parsed.\n");
-  } else {
-    // New format: "Version: 64.0\n" followed by "Snapshot format: 0\n"
-    // Consume rest of line
-    while (after_minor != '\n' && after_minor != '\r' && after_minor != EOF)
-      after_minor = fgetc(file);
-    if (fscanf(file, "Snapshot format: %d%*[\r\n]", &snapshot_version_i) != 1)
-      fatalNoMenu("\n\tThe \"Snapshot format:\" line in the snapshot could not be parsed.\n");
-  }
-  snapshot_version = snapshot_version_i;
-
-  // First: is this a 64-bit snapshot? (major version == 64)
-  bool is_64bit_snapshot = (read_major_version_i == 64);
-
-  if (is_64bit_snapshot) {
-    // 64-bit snapshot: check snapshot_version for format compatibility
-    if (snapshot_version == VM_snapshot_version)
-      return;
-    // Future: add compatibility entries here as 64-bit formats evolve
-    fatalNoMenu6("\n\tThis 64-bit snapshot has an incompatible format.\n"
-                 "\tSnapshot version: %d.%d, format %d.\n"
-                 "\tVM version: %d.%d, format %d.\n",
-                 (int)read_major_version_i,
-                 (int)read_minor_version_i,
-                 (int)snapshot_version,
-                 (int)VM_major_version,
-                 (int)VM_minor_version,
-                 (int)VM_snapshot_version);
+  if (v == snapshotRefused) {
+    // say as much about the snapshot as was read
+    char snap[96];
+    snap[0] = '\0';
+    if (loaded_snapshot.word_size != 0  &&  loaded_snapshot.format >= 0)
+      snprintf(snap, sizeof(snap), "\tSnapshot: version %d.%d, %d-bit, format %d.\n",
+               loaded_snapshot.major_version, loaded_snapshot.minor_version,
+               loaded_snapshot.word_size,     loaded_snapshot.format);
+    else if (loaded_snapshot.major_version != 0)
+      snprintf(snap, sizeof(snap), "\tSnapshot: version %d.%d.\n",
+               loaded_snapshot.major_version, loaded_snapshot.minor_version);
+    fatalNoMenu6("\n\t%s\n%s"
+                 "\tThis VM:  version %d.%d, %d-bit, snapshot format %d.\n",
+                 why, snap,
+                 VM_major_version, VM_minor_version,
+                 int(oopSize) * 8, int(VM_snapshot_version));
   }
 
-  // Not a 64-bit snapshot — treat as 32-bit
-  if (oopSize == 8) {
+  if (loaded_snapshot.word_size == 32) {
+    // read_snapshot widens the oops as it reads them
     snapshot_oopSize = 4;
-    lprintf("\n\tLoading 32-bit snapshot (format %d) into 64-bit VM.\n",
-            (int)snapshot_version);
+    lprintf("\n\tLoading 32-bit snapshot (version %d.%d, format %d) into 64-bit VM.\n",
+            loaded_snapshot.major_version,
+            loaded_snapshot.minor_version,
+            loaded_snapshot.format);
   }
 
-  bool can_read_32bit_snapshot =
-        (snapshot_version == 10)
-    ||  (snapshot_version == 11)
-    ||  (snapshot_version == 12)
-    ||  (snapshot_version == 13);
-
-  if (can_read_32bit_snapshot)
-    warning6("\n\tThis snapshot was saved using a different version\n"
-             "\tof the Self Virtual Machine (%d.%d, format %d) and may behave unexpectedly\n"
-             "\tor not work correctly with this version (%d.%d, format %d).\n",
-             (int)read_major_version_i,
-             (int)read_minor_version_i,
-             (int)snapshot_version,
-             (int)VM_major_version,
-             (int)VM_minor_version,
-             (int)VM_snapshot_version);
-
-  if (!can_read_32bit_snapshot)
-    fatalNoMenu6("\n\tThis snapshot was saved using a different version\n"
-                 "\tof the Self Virtual Machine (%d.%d, format %d) and will not\n"
-                 "\twork with this version (%d.%d, format %d).\n",
-                 (int)read_major_version_i,
-                 (int)read_minor_version_i,
-                 (int)snapshot_version,
-                 (int)VM_major_version,
-                 (int)VM_minor_version,
-                 (int)VM_snapshot_version);
+  if (v == snapshotLoadsWithWarning)
+    warning5("\n\tThis snapshot was saved using a different version\n"
+             "\tof the Self Virtual Machine (%d.%d, format %d) and may behave\n"
+             "\tunexpectedly or not work correctly with this version (%d.%d).\n",
+             loaded_snapshot.major_version,
+             loaded_snapshot.minor_version,
+             loaded_snapshot.format,
+             VM_major_version,
+             VM_minor_version);
 }
 
 
@@ -505,16 +586,17 @@ void universe::read_snapshot_code_flag_in_snapshot_header(FILE *file)
 void universe::read_vm_date_in_snapshot_header(FILE *file)
 {
   // check for newer VM than that used with snapshot
+  // The line is still called "VM date" but holds the saving VM's build ID.
   char vm_date[128];
-  if (fscanf(file, "VM date: %128[^\n\r] ", vm_date) != 1)
+  if (fscanf(file, "VM date: %127[^\n\r] ", vm_date) != 1)
     fatal("could not find the VM date in snapshot file--\n"
           "invalid snapshot file format");
 
-  if (okToUseCodeFromSnapshot && strcmp(vm_date, vmDate) != 0) {
+  if (okToUseCodeFromSnapshot && strcmp(vm_date, vmBuildID) != 0) {
     noCodeWarning("because the VM used to write the snapshot is not the same as this one");
     if (!noCodeWarnings)
       warning2("\n\tThis VM:\t\t\t%s,\n\tVM used to make snapshot:\t%s",
-               vmDate, vm_date);
+               vmBuildID, vm_date);
   }
 }
 
@@ -784,14 +866,15 @@ bool universe::write_snapshot(const char *fileName,
 
   OS::FWrite(SNAPSHOT_HEADER, strlen(SNAPSHOT_HEADER), snapFile);
 
-  fprintf(snapFile, "Version: %d.%d\n", (int)VM_major_version, (int)VM_minor_version);
+  fprintf(snapFile, "Version: %d.%d\n", VM_major_version, VM_minor_version);
+  fprintf(snapFile, "Word size: %d\n", int(oopSize) * 8);
   fprintf(snapFile, "Snapshot format: %d\n", (int)VM_snapshot_version);
           
   fprintf(snapFile, "Timestamp: %ld\n", (long)programming_timestamp);
 
   fprintf(snapFile, "Snapshot code: %c\n", SnapshotCode ? 'y' : 'n');
 
-  fprintf(snapFile, "VM date: %s\n", vmDate);
+  fprintf(snapFile, "VM date: %s\n", vmBuildID);
 
   old_gen->set_write_only_old0();
 

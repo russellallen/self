@@ -1,42 +1,40 @@
 #!/usr/bin/env cmake
 
 #
-# Parse Version-information from the universe source
+# Read the release version from the top-level VERSION file, a single line
+# of the form MAJOR.MINOR.  Both VMs take their version number from it.
 #
-function(parse_version_information fileName majorVar minorVar snapshotVar)
-  set(_fileContent)
-  file(STRINGS ${fileName} _fileContent LIMIT_COUNT 64 REGEX "smi VM_.+_version")
-  foreach(l ${_fileContent})
-    string(REGEX REPLACE "^.+VM_(.+)_version.+=.+$" "\\1" varName ${l})
-    string(REGEX REPLACE "^.+VM_(.+)_version.+=[^0-9]*([0-9]+).*$" "\\2" varValue ${l})
-    set(${${varName}Var} ${varValue} PARENT_SCOPE)
-  endforeach()
+function(read_version_file fileName majorVar minorVar)
+  if(NOT EXISTS "${fileName}")
+    message(FATAL_ERROR "Version file ${fileName} not found.")
+  endif()
+  file(STRINGS "${fileName}" _lines LIMIT_COUNT 1)
+  string(STRIP "${_lines}" _line)
+  if(NOT _line MATCHES "^([0-9]+)\\.([0-9]+)$")
+    message(FATAL_ERROR "${fileName} must hold MAJOR.MINOR, e.g. 2026.1, but holds: ${_line}")
+  endif()
+  set(${majorVar} ${CMAKE_MATCH_1} PARENT_SCOPE)
+  set(${minorVar} ${CMAKE_MATCH_2} PARENT_SCOPE)
+  # reconfigure when the version changes
+  set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${fileName}")
 endfunction()
 
 #
-# Get the build number from git
+# Get the build name from git.  Answers "unknown" when git is missing or
+# the source is not a git checkout (a source tarball, say).
 #
 function(determine_build_information buildVar)
-  # determine git revision 
-  execute_process(COMMAND git --version 
-    RESULT_VARIABLE _git_not_there
-    OUTPUT_VARIABLE _
-    ERROR_VARIABLE _) 
-  if(_git_not_there)
-    set(${buildVar} PARENT_SCOPE)
-  else()
-    execute_process(COMMAND git describe --tags --dirty
-      WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/.."
-      RESULT_VARIABLE git_result
-      OUTPUT_VARIABLE _revision 
-      ERROR_VARIABLE _error 
-      OUTPUT_STRIP_TRAILING_WHITESPACE) 
-    set(${buildVar} "${_revision}" PARENT_SCOPE)
-    if(git_result) 
-      message(FATAL_ERROR "Failed to determine git revision:\n${_error}") 
-      set(${buildVar} PARENT_SCOPE)
-    endif() 
+  set(_revision)
+  execute_process(COMMAND git describe --always --tags --dirty
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/.."
+    RESULT_VARIABLE _git_result
+    OUTPUT_VARIABLE _revision
+    ERROR_VARIABLE _error
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+  if(_git_result OR NOT _revision)
+    set(_revision "unknown")
   endif()
+  set(${buildVar} "${_revision}" PARENT_SCOPE)
 endfunction()
 
 

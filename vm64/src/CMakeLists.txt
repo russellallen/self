@@ -417,6 +417,7 @@ set(SRC_any
   any/tests/mark_tests.cpp
   any/tests/bits_tests.cpp
   any/tests/util_tests.cpp
+  any/tests/snapshot_tests.cpp
   any/zone/addrDesc.cpp
   any/zone/addrDesc.hh
   any/zone/codeTable.cpp

@@ -2526,6 +2526,7 @@ shell.cpp                     scanner.hh
 shell.cpp                     shell.hh
 shell.cpp                     sig.hh
 shell.cpp                     simpleLookup_inline.hh
+shell.cpp                     universe.hh
 shell.cpp                     vmStrings.hh
 
 shell.hh                      top.hh

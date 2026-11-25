@@ -22,13 +22,46 @@ extern bool okToUseCodeFromSnapshot;
 extern bool noCodeWarnings;     // Suppress VM startup warnings about code
 extern bool ForceFrequentScavengesViaSmallNewSpace; // clamp eden/surv to 1/10 of defaults; cap Self-set sizes
 
-extern const char* vmDate;
+// The release version, the build ID and the build date are in a generated
+// source file.  The build ID identifies this VM binary and is written into
+// snapshots; the build date is for display only.
+extern const int   VM_major_version;
+extern const int   VM_minor_version;
+extern const char* const vmBuildID;
+extern const char* const vmBuildDate;
+
+// the format of the snapshots this VM writes
+extern const smi   VM_snapshot_version;
+
+// What the first lines of a snapshot say about the VM that saved it.
+struct SnapshotVersionInfo {
+  int major_version;
+  int minor_version;
+  int word_size;        // 32 or 64; 0 if no snapshot was read
+  int format;
+};
+
+enum SnapshotVersionVerdict {
+  snapshotLoads,
+  snapshotLoadsWithWarning,   // an older format this VM still reads
+  snapshotRefused
+};
+
+// Reads the version lines of a snapshot header and decides whether this VM
+// can load the snapshot.  If not, *why says why not.
+SnapshotVersionVerdict read_snapshot_version(FILE*                file,
+                                             SnapshotVersionInfo* info,
+                                             const char**         why);
 
 class universe {
  public:
+  // this VM's own version and snapshot format
   smi major_version;
   smi minor_version;
   smi snapshot_version;
+
+  // the version lines of the snapshot that was read, if any
+  SnapshotVersionInfo loaded_snapshot;
   
   bool is_snapshot_other_endian;
   smi  snapshot_oopSize;         // oopSize used in the snapshot (4 for 32-bit, 8 for 64-bit)
@@ -415,22 +448,10 @@ extern "C" { extern oop NLRResultFromC; }
 
 
 # define READ_SNAPSHOT_TEMPLATE(p)                                            \
-    { if (snapshot_version == 10  &&  (oop*)p == &CompileWithSICNames)        \
-        ; /* don't read CompileWithSICNames from version 10 snapshots */      \
-      else                                                                    \
-        OS::FRead_oop((oop*)(p), file);                                       \
-    }
-    
-
-// I have disabled the snapshot_version test below, because Universe::write_snapshot
-// always uses VM_snapshot_version. -- dmu 3/04
+    OS::FRead_oop((oop*)(p), file);
 
 # define WRITE_SNAPSHOT_TEMPLATE(p)                                           \
-    { if ( false && snapshot_version == 10  &&  (oop*)p == &CompileWithSICNames) \
-        ; /* don't write CompileWithSICNames in version 10 snapshots */       \
-      else                                                                    \
-        OS::FWrite(p, oopSize, snapFile);                                     \
-    }
+    OS::FWrite(p, oopSize, snapFile);
 
 # define RELOCATE_TEMPLATE(p)                                                 \
     *((oop*) p) = oop(*p)->relocate();
@@ -453,15 +474,8 @@ extern "C" { extern oop NLRResultFromC; }
 # define MAP_SWITCH_POINTERS_TEMPLATE(m)                                      \
     if (from == (*m)->enclosing_mapOop()) *m = mapOop(to)->map_addr();
 
-// Starting with snapshot_version 12, maps are embedded in mapObjects,
-// and so the proper address for the map is larger -- dmu 7/03
-// The 64-bit VM (major version 64) never needs this conversion.
-// Only old 32-bit snapshots with versions 10-11 need it.
 # define MAP_READ_SNAPSHOT_TEMPLATE(m)                                        \
-    { OS::FRead_oop((oop*)(m), file);                                         \
-      if (VM_major_version < 64                                               \
-          && snapshot_version >= 10 && snapshot_version < 12)                 \
-        *m = as_mapOop(*m)->map_addr(); }
+    OS::FRead_oop((oop*)(m), file);
 
 # define MAP_WRITE_SNAPSHOT_TEMPLATE(m)                                       \
     OS::FWrite(m, oopSize, snapFile);

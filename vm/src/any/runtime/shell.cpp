@@ -76,7 +76,23 @@ int    prog_argc;
 
 
 
+// --vm-version: say which VM this is and stop, before anything is set up.
+static void print_vm_version_and_exit() {
+  lprintf("Self VM %d.%d, %d-bit, snapshot format %d\n",
+          VM_major_version, VM_minor_version,
+          int(sizeof(void*)) * 8, int(VM_snapshot_version));
+  lprintf("%s, built %s\n", vmBuildID, vmBuildDate);
+  ::exit(0);
+}
+
 static void processArguments(int argc, const char *argv[]) {
+
+  // Long options, which getopt does not handle
+  for (int i = 1; i < argc; i++) {
+    if (strcmp(argv[i], "--vm-version") == 0) {
+      print_vm_version_and_exit();
+    }
+  }
 
 # if defined(FAST_COMPILER) || defined(SIC_COMPILER)
 # else
@@ -122,6 +138,7 @@ static void processArguments(int argc, const char *argv[]) {
       lprintf("  -c\t\tUse real timer instead of CPU timer (for OS X)\n");
       lprintf("  -o\t\tOversample the timers (Run them 10x faster to flush out bugs)\n");
       lprintf("  -a\t\tTest the Assembler (added for Intel)\n");
+      lprintf("  --vm-version\tPrint the VM version and build, and exit\n");
       lprintf("Other command line switches may be interpreted by the Self world\n");
       ::exit(0);
       break;

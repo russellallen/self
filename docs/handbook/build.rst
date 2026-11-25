@@ -82,10 +82,13 @@ To create the default object world, change your current working directory to the
 1. Start the Self VM::
 
     % Self
-    Self Virtual Machine Version 4.1.13, Sat 04 Jan 14 12:17:37 Mac OS X i386 (4.4-268-g58a0717)
-    Copyright 1989-2003: The Self Group (type _Credits for credits)
-
     VM#
+
+   The VM starts quietly. To see which VM you have, run ``Self --vm-version``::
+
+    % Self --vm-version
+    Self VM 2026.1, 64-bit, snapshot format 1
+    2026.1 Mac OS X aarch64 Release.02fc0ad3, built 2026-11-25T02:14:04Z
 
 2. (Optional, but recommended.) Start the spy so you can watch the world fill up with objects:
 

@@ -2574,6 +2574,7 @@ shell.cpp                     scanner.hh
 shell.cpp                     shell.hh
 shell.cpp                     sig.hh
 shell.cpp                     simpleLookup_inline.hh
+shell.cpp                     universe.hh
 shell.cpp                     vm_tests.hh
 shell.cpp                     vmStrings.hh
 
@@ -2897,6 +2898,9 @@ slotsOop.cpp                  vmStrings.hh
 slotsOop.cpp                  zone.hh
 
 slotsOop.hh                   oopsOop_inline.hh
+
+snapshot_tests.cpp            vm_tests.hh
+snapshot_tests.cpp            universe.hh
 
 smi_tests.cpp                 vm_tests.hh
 smi_tests.cpp                 oop.hh
