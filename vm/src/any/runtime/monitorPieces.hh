@@ -216,8 +216,8 @@ protected:
   virtual char* start1() = 0;
   virtual char* start2() { return NULL; }
   
-  void  calculateVMRegion( int32 startAddr,
-                           int32 size, 
+  void  calculateVMRegion( smi startAddr,
+                           int32 size,
                            fint& in_core_percentage,
                            fint& oldlen);
 };

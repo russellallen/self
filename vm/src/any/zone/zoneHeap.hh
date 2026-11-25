@@ -106,7 +106,7 @@ class Heap: public CHeapObj {
   ChunkMap* mapAddr(void* p) {
     char* pp = (char*)p;
     assert(pp >= base && pp < base + size, "not in this heap");
-    assert(int32(pp) % blockSize == 0, "must be block-aligned");
+    assert(smi(pp) % blockSize == 0, "must be block-aligned");
     u_char* fm = (u_char*)heapMap;
     return (ChunkMap*)(fm + ((pp - base) >> log2BS));
   }

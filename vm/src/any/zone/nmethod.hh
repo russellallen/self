@@ -89,7 +89,7 @@ class nmethod : public OopNCode {
   nmln*   deps()        { return depsAddr;}
   nmln*   depsEnd()     { return (nmln*) ((char*) deps() + depsLen);}
 
-  fint    size()        { return (char*)locsEnd() - (char*)this; }
+  int32   size()        { return (char*)locsEnd() - (char*)this; }
 
   fint incoming_arg_count()  { return _incoming_arg_count; }
 

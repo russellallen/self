@@ -85,7 +85,7 @@ class CountingStub: public CountStub {
   CountingStub(nmethod* t, pc_t entryPoint, nmln* sd_nmln);
   void* operator new(size_t size);
   CountType countType()         { return Counting; }
-  fint size();                  // size in bytes
+  int32 size();                 // size in bytes
   const char* name()                  { return "CountingStub"; }
   //friend bool isCountStub(void* p);
   friend class CountStub;
@@ -97,7 +97,7 @@ class ComparingStub: public CountStub {
   ComparingStub(nmethod* t, pc_t entryPoint, nmln* sd_nmln);
   void* operator new(size_t size);
   CountType countType()         { return Comparing; }
-  fint size();                  // size in bytes
+  int32 size();                 // size in bytes
   void init(nmethod* nm);
   const char* name()                  { return "ComparingStub"; }
   //friend bool isCountStub(void* p);

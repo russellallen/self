@@ -35,13 +35,13 @@ class slotsMapDeps: public slotsMap {
 
  protected:
   // chain functions
-  static int32 map_chain_offset() {
-    return (int32) (((slotsMapDeps*) NULL)->map_chain());
+  static smi map_chain_offset() {
+    return (smi) (((slotsMapDeps*) NULL)->map_chain());
   }
 
   friend slotsMapDeps* map_from_map_chain(nmln* p);
   static slotsMapDeps* map_from_map_chain(nmln* p) {
-    return (slotsMapDeps*) (int32(p) - map_chain_offset());
+    return (slotsMapDeps*) (smi(p) - map_chain_offset());
   }
   
  public:

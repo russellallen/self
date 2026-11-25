@@ -12,7 +12,7 @@ void pp(void* p) {
   FlagSetting fl(PrintVMMessages, true);
   if (p == NULL) {
     lprintf("0x0");
-  } else if (int32(p) < 10000 && int32(p) > -10000) {
+  } else if (smi(p) < 10000 && smi(p) > -10000) {
     // guess that it's a location
     printLocation(*(Location*) &p); // use addr to silence warning
   } else if (oop(p)->is_mem() || oop(p)->is_mark()) {
@@ -41,7 +41,7 @@ void pp_short(void* p) {
   FlagSetting fl(PrintVMMessages, true);
   if (p == NULL) {
     lprintf("0x0");
-  } else if (int32(p) < 10000 && int32(p) > -10000) {
+  } else if (smi(p) < 10000 && smi(p) > -10000) {
     // guess that it's a location
     printLocation(*(Location*) &p); // extra indirection to silence warning
   } else if (oop(p)->is_mem()) {

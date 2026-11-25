@@ -380,7 +380,7 @@ void block_node::oops_do(oopsDoFn f) {
 
 // ---- call_graph_edge
 
-call_graph_edge::call_graph_edge(int bci_arg, call_graph_node* callee_arg) {
+call_graph_edge::call_graph_edge(fint bci_arg, call_graph_node* callee_arg) {
   bci    = bci_arg;
   callee = callee_arg;
   next   = NULL;
