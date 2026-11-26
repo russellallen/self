@@ -1,0 +1,118 @@
+name: Build SPARC VM
+
+# Builds the 32-bit VM (vm/) for SPARC in a NetBSD sparc64 guest started by
+# cross-platform-actions, as the self-ci vm32-netbsd-sparc64 recipe does.  The
+# guest is fully emulated on a single CPU and takes hours, so this only runs
+# when started by hand: Actions > Build SPARC VM > Run workflow.
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_tests:
+        description: Build a world and run the Self tests after compiling (adds hours)
+        type: boolean
+        default: true
+
+concurrency:
+  group: sparc-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # The system gcc builds 32-bit SPARC binaries with -m32, and the sparc64
+  # kernel runs them through COMPAT_NETBSD32.
+  netbsd-sparc64:
+    name: vm32-netbsd-sparc64
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    defaults:
+      run:
+        shell: cpa.sh {0}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0      # cmake names the build with git describe --tags
+
+      # sun4u is limited to one CPU and 3 GB of memory.
+      - name: Start guest
+        uses: cross-platform-actions/action@v1.8.0
+        with:
+          operating_system: netbsd
+          version: '10.2'
+          architecture: sparc64
+          memory: 3G
+
+      - name: Install dependencies
+        run: |
+          set -e
+          sudo pkgin -y update
+          sudo pkgin -y install cmake pkgconf
+          # Headers come from the sparc64 X sets; fetch them if this image was
+          # installed without.
+          if [ ! -f /usr/X11R7/include/X11/Xlib.h ]; then
+            base=https://cdn.NetBSD.org/pub/NetBSD/NetBSD-10.2/sparc64/binary/sets
+            for set in xbase xcomp; do
+              ftp -o /tmp/$set.tar.xz $base/$set.tar.xz
+              sudo tar -xpf /tmp/$set.tar.xz -C /
+              rm /tmp/$set.tar.xz
+            done
+          fi
+
+      # sparc64 ships only 64-bit X11, so the 32-bit libraries come from the
+      # NetBSD/sparc sets.  Their .so files are stripped too far for ld to
+      # link against, so each one is replaced by a linker script that pulls
+      # in the static archives instead; X11 ends up statically linked.
+      - name: Install 32-bit X11 libraries
+        run: |
+          set -e
+          sets=https://cdn.NetBSD.org/pub/NetBSD/NetBSD-10.2/sparc/binary/sets
+          dir=/usr/X11R7/lib/sparc
+          sudo mkdir -p $dir /tmp/sparc-xbase /tmp/sparc-xcomp
+          for set in xbase xcomp; do
+            ftp -o /tmp/$set-sparc.tgz $sets/$set.tgz
+            sudo tar -xzf /tmp/$set-sparc.tgz -C /tmp/sparc-$set
+            rm /tmp/$set-sparc.tgz
+          done
+          sudo sh -c "cd /tmp/sparc-xbase/usr/X11R7/lib && cp -P lib*.so* $dir/"
+          sudo sh -c "cd /tmp/sparc-xcomp/usr/X11R7/lib && cp lib*.a $dir/"
+          sudo rm -rf /tmp/sparc-xbase /tmp/sparc-xcomp
+          libs="X11 Xext Xft Xrender fontconfig freetype ICE SM Xt Xmu Xcursor Xfixes Xi Xrandr Xinerama Xpm Xtst"
+          archives=
+          for lib in $libs; do
+            [ -f $dir/lib$lib.a ] && archives="$archives $dir/lib$lib.a"
+          done
+          for lib in $libs; do
+            if [ -f $dir/lib$lib.a ]; then
+              sudo rm -f $dir/lib$lib.so
+              echo "GROUP ( $archives $dir/libxcb.a $dir/libXau.a $dir/libXdmcp.a -lexpat -lz )" |
+                sudo tee $dir/lib$lib.so > /dev/null
+            fi
+          done
+
+      # phkmalloc: the SPARC JIT clobbers %g7, the TLS register, which libc's
+      # jemalloc reads.
+      - name: Build
+        run: |
+          .github/scripts/ci.sh build vm32 \
+            -DSELF_PHKMALLOC=ON \
+            -DCMAKE_C_FLAGS=-m32 \
+            -DCMAKE_CXX_FLAGS=-m32 \
+            "-DCMAKE_EXE_LINKER_FLAGS=-m32 -Wl,-rpath,/usr/X11R7/lib/sparc:/usr/lib/sparc" \
+            "-DCMAKE_LIBRARY_PATH=/usr/lib/sparc;/usr/X11R7/lib/sparc" \
+            -DCMAKE_INCLUDE_PATH=/usr/X11R7/include
+
+      - name: Package
+        run: tar -C build -czf Self-vm32-netbsd-sparc64.tar.gz Self
+
+      - name: Test
+        if: ${{ inputs.run_tests }}
+        run: .github/scripts/ci.sh test vm32
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Self-vm32-netbsd-sparc64
+          path: Self-vm32-netbsd-sparc64.tar.gz
+          if-no-files-found: warn
