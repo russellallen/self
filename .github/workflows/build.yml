@@ -12,7 +12,7 @@ name: Build VMs
 
 on:
   push:
-    branches: [master]
+    branches: [master, develop]
     # Version tags (2024.1, 4.5.0, 4.4.rc1) also publish a GitHub release;
     # see the release job.  Tags that start with a letter are ignored.
     tags: ['[0-9]*']
