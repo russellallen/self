@@ -14,6 +14,35 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
          core <- about systemVersion copyOn: '2023.1/3'.
         } | ) 
 
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
+         'Category: versions\x7fComment: Asks git for the revision of the objects directory as
+it is now: the nearest tag and commit, with -dirty added
+if tracked files under the objects directory have
+uncommitted changes. Answers \'unknown\' when git is
+missing or the objects are not in a git checkout.\x7fModuleInfo: Module: coreVersion InitialContents: FollowSlot'
+        
+         currentObjectsRevision = ( |
+             cmd.
+             r.
+            | 
+            cmd: '( cd "', bootstrap selfObjectsWorkingDir, '" 2>/dev/null && ',
+                 'r=$(git describe --always --tags 2>/dev/null) && ',
+                 '{ git diff --quiet HEAD -- . 2>/dev/null || r="$r-dirty"; ',
+                 'echo "$r"; } || echo unknown )'.
+            r: os withTempFileDo: [|:tmpName|
+              os command: cmd, ' > ', tmpName IfFail: [^ 'unknown'].
+              tmpName asFileContents].
+            r isEmpty ifTrue: 'unknown' False: [r shrinkwrapped]).
+        } | ) 
+
+ bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'about' -> () From: ( | {
+         'Category: versions\x7fComment: The git revision of the objects directory when the core
+was filed in, as answered by currentObjectsRevision.
+The objects\' counterpart to vmBuildID.\x7fModuleInfo: Module: coreVersion InitialContents: InitializeToExpression: (\'unknown\')'
+        
+         objectsRevision <- 'unknown'.
+        } | ) 
+
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> () From: ( | {
          'ModuleInfo: Module: coreVersion InitialContents: FollowSlot'
         
@@ -73,6 +102,7 @@ See the legal/LICENSE file for license information and legal/AUTHORS for authors
             | 
             resend.postFileIn.
             about core: about systemVersion readFrom: 'core.version'.
+            about objectsRevision: about currentObjectsRevision.
             self).
         } | ) 
 
