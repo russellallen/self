@@ -1,8 +1,9 @@
- '$Revision: 30.9 $'
+ '30.10.0'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -48,9 +49,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'shortcuts' -> () From: ( | {
-         'ModuleInfo: Module: shortcuts InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: shortcuts InitialContents: InitializeToExpression: (\'30.10.0\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.9 $'.
+         revision <- '30.10.0'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'shortcuts' -> () From: ( | {
@@ -99,7 +100,8 @@ because \'cc .selfrc\' does not parse as a Self expression.)\x7fModuleInfo: Modu
          'ModuleInfo: Module: shortcuts InitialContents: FollowSlot'
         
          rc = ( |
-            | '~/.selfrc'  _RunScript. self).
+            | 
+            '~/.selfrc' _RunScript).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'shell' -> 'shortcuts' -> 'cc' -> () From: ( | {
@@ -110,8 +112,7 @@ because \'cc .selfrc\' does not parse as a Self expression.)\x7fModuleInfo: Modu
             | 
             ((reflect: modules) names includes: s)
               ifTrue: [^(s sendTo: modules) fileIn].
-            (s, '.self') _RunScriptIfFail: [^'Couldn\'t read ', s, '.'].
-            self).
+            (s, '.self') _RunScriptIfFail: [^'Couldn\'t read ', s, '.']).
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'shell' -> 'shortcuts' -> () From: ( | {
