@@ -47,8 +47,9 @@ jobs:
       - name: Install dependencies
         run: |
           set -e
+          # No pkgconf: its X11 answer would be the 64-bit libraries.
           sudo pkgin -y update
-          sudo pkgin -y install cmake pkgconf
+          sudo pkgin -y install cmake
           # Headers come from the sparc64 X sets; fetch them if this image was
           # installed without.
           if [ ! -f /usr/X11R7/include/X11/Xlib.h ]; then
@@ -92,11 +93,13 @@ jobs:
           done
 
       # phkmalloc: the SPARC JIT clobbers %g7, the TLS register, which libc's
-      # jemalloc reads.
+      # jemalloc reads.  pkg-config is disabled so that cmake finds X11 through
+      # CMAKE_LIBRARY_PATH; pkg-config only knows the 64-bit libraries.
       - name: Build
         run: |
           .github/scripts/ci.sh build vm32 \
             -DSELF_PHKMALLOC=ON \
+            -DCMAKE_DISABLE_FIND_PACKAGE_PkgConfig=ON \
             -DCMAKE_C_FLAGS=-m32 \
             -DCMAKE_CXX_FLAGS=-m32 \
             "-DCMAKE_EXE_LINKER_FLAGS=-m32 -Wl,-rpath,/usr/X11R7/lib/sparc:/usr/lib/sparc" \
