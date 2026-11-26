@@ -7,8 +7,19 @@
   # pragma interface
 # endif
 
+#if TARGET_OS_VERSION ==  LINUX_VERSION
+#define USE_EPOLL
+#endif
+
+#ifdef USE_EPOLL
+#include <sys/epoll.h>
+#endif
 
 extern const char *UnixFile_seal;
+
+#ifdef USE_EPOLL
+extern int epollFD;                      // epoll file descriptor
+#endif
 
 extern fd_set activeFDs;                      // active file descriptors
 
