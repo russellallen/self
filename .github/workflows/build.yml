@@ -199,7 +199,7 @@ jobs:
       - name: Install dependencies (FreeBSD)
         if: matrix.operating_system == 'freebsd'
         run: |
-          sudo env ASSUME_ALWAYS_YES=yes pkg install -y cmake pkgconf gcc14 libX11 libXext ncurses
+          sudo env ASSUME_ALWAYS_YES=yes pkg install -y cmake-core pkgconf gcc14 libX11 libXext ncurses
 
       - name: Install dependencies (NetBSD)
         if: matrix.operating_system == 'netbsd'
@@ -282,7 +282,7 @@ jobs:
           sudo env IGNORE_OSVERSION=yes chroot /compat/i386 /bin/sh -c \
             'env ASSUME_ALWAYS_YES=yes IGNORE_OSVERSION=yes pkg bootstrap -y'
           sudo env IGNORE_OSVERSION=yes chroot /compat/i386 /bin/sh -c \
-            'env ASSUME_ALWAYS_YES=yes IGNORE_OSVERSION=yes pkg install -y cmake pkgconf libX11 libXext xorgproto ${{ matrix.packages }}'
+            'env ASSUME_ALWAYS_YES=yes IGNORE_OSVERSION=yes pkg install -y cmake-core pkgconf libX11 libXext xorgproto ${{ matrix.packages }}'
 
       - name: Build
         run: |
