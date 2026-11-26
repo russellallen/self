@@ -1,8 +1,9 @@
- '$Revision: 30.9 $'
+ '30.9.1'
  '
-Copyright 1992-2012 AUTHORS.
-See the LICENSE file for license information.
+Copyright 1992-2016 AUTHORS.
+See the legal/LICENSE file for license information and legal/AUTHORS for authors.
 '
+["preFileIn" self] value
 
 
  '-- Module body'
@@ -48,9 +49,9 @@ SlotsToOmit: comment directory fileInTimeString myComment postFileIn revision su
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'shortcuts' -> () From: ( | {
-         'ModuleInfo: Module: shortcuts InitialContents: FollowSlot\x7fVisibility: public'
+         'ModuleInfo: Module: shortcuts InitialContents: InitializeToExpression: (\'30.9.1\')\x7fVisibility: public'
         
-         revision <- '$Revision: 30.9 $'.
+         revision <- '30.9.1'.
         } | ) 
 
  bootstrap addSlotsTo: bootstrap stub -> 'globals' -> 'modules' -> 'shortcuts' -> () From: ( | {
@@ -166,8 +167,8 @@ wants to write a snapshot first.  Valid responses:
              'Response: ' print.
             line:  stdin readLine uncapitalize.
             line = '' ifTrue: [ 'quit cancelled' printLine.  ^ self ].
-            line first = 'y' ifTrue: [^saveThenQuit].
-            line first = 'n' ifTrue: [^quitNoSave].
+            line = 'y' ifTrue: [^saveThenQuit].
+            line = 'n' ifTrue: [^quitNoSave].
             'Invalid input -- quit cancelled' printLine).
         } | ) 
 
