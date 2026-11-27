@@ -39,6 +39,14 @@ jobs:
           - name: vm64-macos-arm64
             os: macos-15
             kind: vm64
+          # Tier 0 alone, with no SIC compiled in: keeps the interpreter-only
+          # configuration building and passing the tests.  Not packaged, so
+          # it stays out of the releases.
+          - name: vm64-macos-arm64-interp
+            os: macos-15
+            kind: vm64
+            cmake_args: -DSELF_INTERP_ONLY=ON
+            test_only: true
           - name: vm64-ubuntu-amd64
             os: ubuntu-24.04
             kind: vm64
@@ -69,9 +77,10 @@ jobs:
           echo "PKG_CONFIG_LIBDIR=/usr/lib/i386-linux-gnu/pkgconfig:/usr/share/pkgconfig" >> "$GITHUB_ENV"
 
       - name: Build
-        run: .github/scripts/ci.sh build ${{ matrix.kind }}
+        run: .github/scripts/ci.sh build ${{ matrix.kind }} ${{ matrix.cmake_args }}
 
       - name: Package
+        if: ${{ !matrix.test_only }}
         run: |
           if [ -d build/Self.app ]; then
             tar -C build -czf Self-${{ matrix.name }}.tar.gz Self.app
@@ -80,6 +89,7 @@ jobs:
           fi
 
       - uses: actions/upload-artifact@v4
+        if: ${{ !matrix.test_only }}
         with:
           name: Self-${{ matrix.name }}
           path: Self-${{ matrix.name }}.tar.gz
