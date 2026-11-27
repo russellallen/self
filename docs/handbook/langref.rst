@@ -752,7 +752,7 @@ The message sending semantics are decomposed into the following functions:
 	+--------------------------+-----------------------------------------------------------------------------------------+
 	| send(rec, sel, args)     | The message send function (:ref:`pp-mesage-send`).                                      |
 	+--------------------------+-----------------------------------------------------------------------------------------+
-	| lookup(obj, rec, sel, V) | The lookup algorithm (:ref:`pp-lookup-algorithm`).                                      |
+	| lookup(obj, sel, V) | The lookup algorithm (:ref:`pp-lookup-algorithm`).                                      |
 	+--------------------------+-----------------------------------------------------------------------------------------+
 	| undirected_resend(...)   | The undirected message resend function (:ref:`pp-undirected-resend`).                   |
 	+--------------------------+-----------------------------------------------------------------------------------------+
